@@ -1,0 +1,140 @@
+# -*- coding: utf-8 -*-
+
+# Mathmaker creates automatically maths exercises sheets
+# with their answers
+# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+
+# This file is part of Mathmaker.
+
+# Mathmaker is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# any later version.
+
+# Mathmaker is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Mathmaker; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+import machine
+import exercise
+
+from S_Structure import S_Structure
+
+FONT_SIZE_OFFSET = -2
+SHEET_LAYOUT_TYPE = 'short_test'
+SHEET_LAYOUT_UNIT = "cm"
+# -----------------------  lines_nb    col_widths   exercises
+SHEET_LAYOUT = { 'exc' : [ None,                    'all'
+                         ],
+                 'ans' : [ None,                    2,
+                           'jump',                  'next_page',
+                           None,                    1
+                         ]
+               }
+
+# -----------------------------------------------------------------------------
+# --------------------------------------- CLASS: sheet.EquationsTest ----------
+# -----------------------------------------------------------------------------
+##
+# @class EquationsTest
+# @brief A short test on first degree equations
+class EquationsTest(S_Structure):
+
+
+
+
+
+    # -------------------------------------------------- CONSTRUCTOR ----------
+    ##
+    #   @brief Constructor
+    #   @param embedded_machine The machine to be used
+    #   @param **options Any options
+    #   @return One instance of sheet.EquationsTest
+    def __init__(self, embedded_machine, **options):
+        self.derived = True
+        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+                             SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
+                             SHEET_LAYOUT_TYPE)
+
+        # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
+        self.header = _("Name : .......................................")
+        self.title = _("Short Test : Equations")
+        self.subtitle = ""
+        self.text = _("Solve the following equations.")
+        self.answers_title = _("Examples of answers")
+
+        # Exercises :
+        for i in xrange(2):
+            ex1 = exercise.X_Equation(self.machine,
+                                      x_kind='short_test',
+                                      x_subkind='basic')
+
+            ex2 = exercise.X_Equation(self.machine,
+                                      x_kind='short_test',
+                                      x_subkind='classic_harder')
+
+            ex3 = exercise.X_Equation(self.machine,
+                                      x_kind='short_test',
+                                      x_subkind='harder_harder')
+
+            self.exercises_list.append(ex1)
+            self.exercises_list.append(ex2)
+            self.exercises_list.append(ex3)
+
+
+
+
+    # -------------------------------------- OUTPUT WRITING : answers ---------
+    ##
+    #   @brief Writes to the output all exercises' answers
+    #def write_answers(self, first_and_last):
+    #    first = first_and_last[0]
+    #    last = first_and_last[1]
+    #    self.machine.reset_exercises_counter()
+    #    self.machine.write_set_font_size_to('large')
+    #    for i in xrange(last - first + 1):
+
+    #        if self.tabular_format_answers[2*i] != 0:
+    #            if self.tabular_format_answers[2*i] == 'end':
+    #                self.machine.write_tabular_ends()
+    #            elif self.tabular_format_answers[2*i] == '&':
+    #                self.machine.write_separator_tabular_columns()
+    #            elif type(self.tabular_format_answers[2*i]) == str:
+    #                self.machine.write_tabular_begins(\
+    #                                          self.tabular_format_answers[2*i])
+
+    #        self.machine.write_exercise_number()
+
+    #        self.exercises_list[i + first].write_answer()
+
+
+    #        if self.tabular_format_answers[2*i+1] != 0:
+    #            if self.tabular_format_answers[2*i+1] == 'end':
+    #                self.machine.write_tabular_ends()
+    #            elif self.tabular_format_answers[2*i+1] == '&':
+    #                self.machine.write_separator_tabular_columns()
+    #            elif type(self.tabular_format_answers[2*i+1]) == str:
+    #                self.machine.write_tabular_begins(\
+    #                                        self.tabular_format_answers[2*i+1])
+
+    #        if i == 0:
+    #            self.machine.write_new_line()
+
+    #        if i == 1:
+    #            self.machine.write_jump_to_next_page()
+
+
+
+
+
+
+
+
+
+
+    # END ---------------------------------------------------------------------

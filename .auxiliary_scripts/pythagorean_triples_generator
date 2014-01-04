@@ -1,0 +1,91 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Mathmaker creates automatically maths exercises sheets
+# with their answers
+# Copyright 2006-2012 Nicolas Hainaux <nico_h@users.sourceforge.net>
+
+# This file is part of Mathmaker.
+
+# Mathmaker is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# any later version.
+
+# Mathmaker is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Mathmaker; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+import sys
+from optparse import OptionParser
+import math
+import decimal
+
+def main():
+    parser = OptionParser(usage="usage: %prog n1 n2",
+                          version="pythagoricians 1.0")
+    (options, args) = parser.parse_args()
+
+    if not len(args) == 2:
+        sys.stderr.write("Error : pythagoricians requires exactly " \
+                         + "two arguments.\n")
+        sys.exit(2)
+
+    try:
+        a = int(args[0])
+        b = int(args[1])
+    except ValueError:
+        sys.stderr.write("Error : both pythagoricians's arguments " \
+                         + "must be integers.\n")
+        sys.exit(2)
+
+    sys.stdout.write(triplets(a, b))
+
+
+def triplets(a, b):
+    if a > b:
+        c = b
+        b = a
+        a = c
+
+    triplets_list = []
+
+    for i in xrange(b - a + 1):
+        rank = a + i
+        # this to avoid doublons
+        collected = []
+        #print "rank : " + str(rank)
+        for j in xrange(rank):
+            if j == 0:
+                j += 1
+            aux = math.sqrt(math.pow(rank, 2) - math.pow(j, 2))
+            #print " aux : " + str(aux)
+            if aux - int(aux) == 0 \
+               and not (j, int(aux)) in collected \
+               and not (int(aux), j) in collected:# \
+               #and not (rank%10 == 0 and j%10 == 0 and int(aux)%10 == 0):
+            #___
+                triplets_list.append((str(rank), str(j), str(int(aux))))
+                collected.append((j, int(aux)))
+
+
+    result = "TRIPLETS = [ \\\n"
+
+    for t in xrange(len(triplets_list)):
+        result += "[" + triplets_list[t][1] + ", " \
+                      + triplets_list[t][2] + ", " \
+                      + triplets_list[t][0] + "]"
+        if t == len(triplets_list) - 1:
+            result += "\n]"
+        else:
+            result += ",\n"
+    return result
+
+
+if __name__ == '__main__':
+    main()
