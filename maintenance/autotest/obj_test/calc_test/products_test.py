@@ -66,11 +66,20 @@ def action():
                                                        Item(1),
                                                        Item(1)])
 
-    product_a_times_minus_b = Item('a').times(Item('-b'))
-    product_a_times_ebd_minus_b = Item('a').times(Item(('+', "-b", 1)))
+    product_a_times_minus_b = Product([Item('a'), (Item('-b'))])
+    product_a_times_minus_b.set_compact_display(False)
 
-    product_2_times_1 = Item(2).times(Item(1))
-    product_1_times_7x = Item(1).times(Monomial((7, 1)))
+    product_a_times_ebd_minus_b = Product([Item('a'),
+                                           Item(('+', "-b", 1))
+                                          ])
+
+    product_a_times_ebd_minus_b.set_compact_display(False)
+
+    product_2_times_1 = Product([Item(2), (Item(1))])
+    product_2_times_1.set_compact_display(False)
+
+    product_1_times_7x = Product([Item(1), (Monomial((7, 1)))])
+    product_1_times_7x.set_compact_display(False)
 
     product_minus_1_squared = Product(Item(-1))
     product_minus_1_squared.set_exponent(2)
@@ -92,7 +101,9 @@ def action():
                                                       ])
 
     product_4_times_product_minus_2_times_7_BIS = Product([Item(4),
-                                                           Item(-2) * Item(7)
+                                                           Product([Item(-2),
+                                                                    Item(7)
+                                                                    ])
                                                           ])
 
     squared_product_minus_2_times_7 = Product([Item(-2), Item(7)])
@@ -114,7 +125,9 @@ def action():
     product_rubbish = Product([Item(('+', 1, 1)),
                                     Item(('+', "x", 1))])
 
-    product_monom0_times_monom0 = Monomial((7,0)).times(Monomial((8,0)))
+    product_monom0_times_monom0 = Product([Monomial((7,0)),
+                                           (Monomial((8,0))) ])
+    product_monom0_times_monom0.set_compact_display(False)
 
     product_sum_3_plus_4_times_monom_minus8x = Product([Sum([Item(3),
                                                              Item(4)]),
@@ -164,23 +177,31 @@ def action():
     product_1square = Product(Item(1))
     product_1square.set_exponent(2)
 
-    product_monom_minus1_times_minus7x = Item(-1) * \
-                                         Product([
-                                                  Monomial(('-', 7, 1))
-                                                 ])
+    product_monom_minus1_times_minus7x = Product([Item(-1),
+                                                  Product([
+                                                           Monomial(('-', 7, 1))
+                                                          ])
+                                                ])
+    product_monom_minus1_times_minus7x.set_compact_display(False)
 
+    temp = Product([Item(('-', "a")),
+                    Item(('+', "b"))
+                  ])
     product_7_times_product_minusa_minusb = Product([Item(7),
-                                                     Product([Item(('-', "a")),
-                                                              Item(('+', "b"))
-                                                             ])
+                                                     temp
                                                     ])
 
+    temp.set_compact_display(False)
     product_7_times_product_minusa_minusb_BIS \
                                           = Product([Item(7),
-                                                     Item(('-', "a")) *
-                                                              Item(('+', "b"))
+                                                     temp
                                                     ])
 
+    temp = Product([Item(-2),
+                    Item(7),
+                    Item('a'),
+                    Item('b')
+                  ])
     product_9_times_minus2_times_7ab = Product([ Item(9),
                                                  Product([Item(-2),
                                                           Item(7),
@@ -189,23 +210,24 @@ def action():
                                                           ])
                                                 ])
 
+    temp.set_compact_display(False)
     product_9_times_minus2_times_7ab_BIS = Product([ Item(9),
-                                                       Item(-2) * Item(7)
-                                                       * Item('a') * Item('b')
+                                                     temp
                                                     ])
 
-    product_9_times_minus2a_times_4b = Product([ Item(9),
-                                                 Product([Item(-2),
-                                                          Item('a'),
-                                                          Item(4),
-                                                          Item('b')
-                                                          ])
 
+    temp = Product([Item(-2),
+                    Item('a'),
+                    Item(4),
+                    Item('b')
+                  ])
+    product_9_times_minus2a_times_4b = Product([ Item(9),
+                                                 temp
                                                 ])
 
+    temp.set_compact_display(False)
     product_9_times_minus2a_times_4b_BIS = Product([ Item(9),
-                                                     Item(-2) * Item('a')
-                                                     * Item(4) * Item('b')
+                                                     temp
                                                     ])
 
     product_sum_minus1_plus_4_times_x = Product([
@@ -229,9 +251,10 @@ def action():
                                                ])
                                           ])
 
-    product_15_times_Monomial_3x_BIS = Item(15) * Sum([Item(0),
+    product_15_times_Monomial_3x_BIS = Product([Item(15), Sum([Item(0),
                                                        Monomial(('+', 3, 1))
                                                      ])
+                                              ])
 
     product_15_times_Monomial_3x_TER = Product([Product([Item(15)]),
                                                 Sum([Item(0),
@@ -255,7 +278,7 @@ def action():
 
 
 
-
+    #1
     check(product_minus_a,
          ["-a"])
 
@@ -268,6 +291,7 @@ def action():
     check(product_1_times_1,
          ["1"])
 
+    #5
     check(product_1_times_1.is_reducible(),
          ["False"])
 
@@ -285,6 +309,7 @@ def action():
     check(product_2_times_minus_2,
          ["2\\times (-2)"])
 
+    #10
     check(product_minus_2_times_2,
          ["-2\\times 2"])
 
@@ -301,6 +326,8 @@ def action():
          ["-1"])
 
     product_1_times_minus_1.set_compact_display(False)
+
+    #15
     check(product_1_times_minus_1,
          ["1\\times (-1)"])
 
@@ -317,6 +344,7 @@ def action():
     check(product_minus_1_times_minus_4,
          ["-(-4)"])
 
+    #20
     check(product_minus_1_times_4,
          ["-4"])
 
@@ -332,6 +360,7 @@ def action():
     check(product_minus_1_times_1_times_1_times_1.is_reducible(),
          ["False"])
 
+    #25
     check(product_a_times_minus_b,
          ["a\\times (-b)"])
 
@@ -347,6 +376,7 @@ def action():
     check(product_2_times_1.is_reducible(),
          ["True"])
 
+    #30
     check(product_1_times_7x.is_reducible(),
          ["True"])
 
@@ -363,6 +393,7 @@ def action():
     check(product_minus_1_squared.is_reducible(),
          ["True"])
 
+    #35
     check(product_minus_3_times_minus_5_exponent_squared_minus_1,
          ["(-3\\times (-5))^{(-1)^{2}}"])
 
@@ -378,6 +409,7 @@ def action():
     check(product_4_times_product_minus_2_times_7.evaluate(),
          ["-56"])
 
+    #40
     check(product_4_times_squared_product_minus_2_times_7,
          ["4\\times (-2\\times 7)^{2}"])
 
@@ -394,6 +426,7 @@ def action():
     check(product_7_times_sum_4_plus_2,
          ["7\\times (4+2)"])
 
+    #45
     check(product_7_times_sum_4_plus_2.evaluate(),
          ["42"])
 
@@ -409,6 +442,7 @@ def action():
     check(product_1_by_sum_3_plus_4,
          ["3+4"])
 
+    #50
     check(product_sum_3_plus_4_by_1,
          ["3+4"])
 
@@ -424,6 +458,7 @@ def action():
     check(product_monom0_times_monom0,
          ["7\\times 8"])
 
+    #55
     check(product_sum_3_plus_4_times_monom_minus8x,
          ["(3+4)\\times (-8x)"])
 
@@ -439,6 +474,7 @@ def action():
     check(square_product_square_item_6,
          ["(6^{2})^{2}"])
 
+    #60
     check(square_product_monom_x,
          ["x^{2}"])
 
@@ -456,6 +492,7 @@ def action():
                                                     .calculate_next_step(),
          ["-\\frac{3\\times 1}{2\\times 5}"])
 
+    #65
     check(product_3timesminusx,
          ["3\\times (-x)"])
 
@@ -470,6 +507,8 @@ def action():
 
     check(product_1square.is_displ_as_a_single_1(),
          ["False"])
+
+    #70
     check(product_1square.is_reducible(),
          ["True"])
 
@@ -486,6 +525,7 @@ def action():
     check(product_9_times_minus2_times_7ab,
          ["9\\times (-2)\\times 7ab"])
 
+    #75
     check(product_9_times_minus2_times_7ab_BIS,
          ["9\\times (-2)\\times 7\\times a\\times b"])
 
@@ -501,6 +541,7 @@ def action():
     check(product_9_times_Monomial_minusx,
          ["9\\times (-x)"])
 
+    #80
     check(product_10_times_minusminus4,
          ["10\\times (-(-4))"])
 

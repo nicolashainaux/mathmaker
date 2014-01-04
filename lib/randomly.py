@@ -22,6 +22,7 @@
 
 import math
 import random
+import lib.maths_lib
 from lib import error
 from lib.maths_lib import *
 
@@ -156,7 +157,7 @@ def coprime_to(n, range):
     collected_numbers = []
 
     for number in range:
-        if gcd(n, number) == 1:
+        if lib.maths_lib.gcd(n, number) == 1:
             collected_numbers.append(number)
 
     if len(collected_numbers) == 0:
@@ -184,11 +185,11 @@ def coprime_to_the_first(n, p, range):
     collected_numbers = []
 
     for number in range:
-        if gcd(n, number) == 1:
+        if lib.maths_lib.gcd(n, number) == 1:
             collected_numbers_coprime_to_n.append(number)
 
     for number in range:
-        if gcd(p, number) > 1:
+        if lib.maths_lib.gcd(p, number) > 1:
             collected_numbers_not_coprime_to_p.append(number)
 
     for number in collected_numbers_coprime_to_n:
@@ -228,7 +229,7 @@ def not_coprime_to(n, range, **options):
         avoid = options['excepted']
 
     for number in range:
-        if gcd(n, number) != 1:
+        if lib.maths_lib.gcd(n, number) != 1:
             if not (check and number == avoid):
                 collected_numbers.append(number)
 

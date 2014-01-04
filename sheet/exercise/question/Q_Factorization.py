@@ -1053,7 +1053,7 @@ def level_02(q_subkind, **options):
         else:
             CF2 = Product([Item(-1), CF2])
 
-    expression = CF1 + CF2
+    expression = Sum([CF1, CF2])
 
     # Now let's build the factorization steps !
     steps = []
@@ -1062,21 +1062,23 @@ def level_02(q_subkind, **options):
     F1F2_sum = None
 
     if minus_sign == None:
-        F1F2_sum = F1 + F2
+        F1F2_sum = Sum([F1, F2])
 
     elif minus_sign == "F1":
         if len(F1) >= 2:
-            F1F2_sum = Expandable((Item(-1), F1))  + F2
+            F1F2_sum = Sum([Expandable((Item(-1), F1)), F2])
         else:
-            F1F2_sum = Product([Item(-1), F1]) + F2
+            F1F2_sum = Sum([Product([Item(-1), F1]), F2])
 
     elif minus_sign == "F2":
         if len(F2) >= 2:
-            F1F2_sum = F1 + Expandable((Item(-1), F2))
+            F1F2_sum = Sum([F1, Expandable((Item(-1), F2))])
         else:
-            F1F2_sum = F1 + Product([Item(-1), F2])
+            F1F2_sum = Sum([F1, Product([Item(-1), F2])])
 
-    steps.append(C * F1F2_sum)
+    temp = Product([C, F1F2_sum])
+    temp.set_compact_display(False)
+    steps.append(temp)
 
     F1F2_sum = F1F2_sum.expand_and_reduce_next_step()
 

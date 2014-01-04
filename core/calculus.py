@@ -1285,7 +1285,7 @@ class Equation(ComposedCalculable):
                 new_eq.left_hand_side.remove(term)
                 term.set_sign(sign_of_product(['-', term.sign]))
                 new_eq.set_hand_side("right",
-                                     new_eq.right_hand_side.plus(term)
+                                     Sum([new_eq.right_hand_side, term])
                                      )
                 #DEBUG
                 debug.write("\nNow, right_hand_side looks like : " \
@@ -1302,8 +1302,10 @@ class Equation(ComposedCalculable):
                 #                       case=debug.solve_next_step)
                 new_eq.right_hand_side.remove(term)
                 #term.set_sign(sign_of_product(['-', term.sign]))
-                term = term.times(Item(-1)).reduce_()
-                new_eq.set_hand_side("left", new_eq.left_hand_side.plus(term))
+                term = Product([term, Item(-1)]).reduce_()
+                new_eq.set_hand_side("left", Sum([new_eq.left_hand_side,
+                                                  term])
+                                    )
 
             new_eq.left_hand_side.reduce_()
             new_eq.right_hand_side.reduce_()
