@@ -80,7 +80,7 @@ AVAILABLE_UNITS = [ ("items",
                     ("table_UP",
                      obj_test.table_uncomplete_proportional_test) # ,
                    # ("functional_items",
-                   #  obj_test.calc_test.functional_items_test)                   
+                   #  obj_test.calc_test.functional_items_test)
                   ]
 
 AVAILABLE_UNIT_NAMES = [AVAILABLE_UNITS[i][0] \
@@ -115,18 +115,18 @@ def fraction_simplification_coverage(n):
                     if not g.is_reducible():
                         os.write(common.output, ".")
                         go_on = False
-                    elif g.numerator.factor[0].value == \
-                                              f.numerator.factor[0].value \
-                         and g.denominator.factor[0].value == \
-                                             f.denominator.factor[0].value:
+                    elif g.numerator.factor[0].raw_value == \
+                                              f.numerator.factor[0].raw_value \
+                         and g.denominator.factor[0].raw_value == \
+                                             f.denominator.factor[0].raw_value:
                     #___
                         os.write(common.err_output,
                                  "\nFAILED : " \
                                  + str(i+1) + "/" + str(j+1) \
                                  + " -------- Step " \
-                                 + str(g.numerator.factor[0].value) \
+                                 + str(g.numerator.factor[0].raw_value) \
                                  + "/" \
-                                 + str(g.denominator.factor[0].value) \
+                                 + str(g.denominator.factor[0].raw_value) \
                                  + "\n")
                         go_on = False
                         number_of_failed += 1

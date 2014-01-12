@@ -263,10 +263,10 @@ def is_even(objct):
             return False
 
     elif isinstance(objct, core.base_calculus.Item) and objct.is_numeric():
-        return is_even(objct.value)
+        return is_even(objct.raw_value)
 
     elif isinstance(objct, core.base_calculus.Value) and objct.is_numeric():
-        return is_even(objct.value)
+        return is_even(objct.raw_value)
 
     else:
         return False
@@ -288,10 +288,10 @@ def is_uneven(objct):
             return True
 
     elif isinstance(objct, core.base_calculus.Item) and objct.is_numeric():
-        return is_uneven(objct.value)
+        return is_uneven(objct.raw_value)
 
     elif isinstance(objct, core.base_calculus.Value) and objct.is_numeric():
-        return is_uneven(objct.value)
+        return is_uneven(objct.raw_value)
 
     else:
         return False

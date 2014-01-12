@@ -271,7 +271,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                     # a row because it belongs to the exercise and there
                     # are many cases when
                     # the same letter is in the list in 3 over 4 elements.
-                    #if j >= 1 and next_item_kind == items_list[j - 1].value:
+                    #if j >= 1 and next_item_kind == items_list[j - 1].raw_value:
                     #    pre_items_list.append(next_item_kind)
                     #    next_item_kind = randomly.pop(pre_items_list)
 
@@ -304,8 +304,8 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                        or                                                     \
                        (self.objct.factor[i].is_literal()                     \
                         and self.objct.factor[i+1].is_literal()               \
-                        and self.objct.factor[i].value                        \
-                                              != self.objct.factor[i+1].value \
+                        and self.objct.factor[i].raw_value                        \
+                                              != self.objct.factor[i+1].raw_value \
                         and randomly.decimal_0_1() > 0.5                      \
                         ):
                     #___

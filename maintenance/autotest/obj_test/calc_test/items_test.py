@@ -154,7 +154,7 @@ def action():
     check(item_minus_1_inside_expon_item_2.is_numeric(),
          ["True"])
 
-    check(item_minus_1_inside_expon_item_2.value < 0,
+    check(item_minus_1_inside_expon_item_2.raw_value < 0,
          ["True"])
 
     check(item_minus_1_inside_expon_item_2.requires_inner_brackets(),

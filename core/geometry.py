@@ -883,15 +883,15 @@ class RightTriangle(Triangle):
         unknown_side = ""
         if self.leg0.label.is_numeric():
             n_numeric_data += 1
-        elif self.leg0.label.value == "":
+        elif self.leg0.label.raw_value == "":
             unknown_side = 'leg0'
         if self.leg1.label.is_numeric():
             n_numeric_data += 1
-        elif self.leg1.label.value == "":
+        elif self.leg1.label.raw_value == "":
             unknown_side = 'leg1'
         if self.hypotenuse.label.is_numeric():
             n_numeric_data += 1
-        elif self.hypotenuse.label.value == "":
+        elif self.hypotenuse.label.raw_value == "":
             unknown_side = 'hypotenuse'
 
         if n_numeric_data != 2:

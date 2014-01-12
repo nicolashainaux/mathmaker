@@ -490,7 +490,7 @@ class Equation(ComposedCalculable):
                                           "a literal Value")
 
             self.__init__((arg[0], arg[1]),
-                           variable_letter_name=literals_list[0].get_letter(),
+                           variable_letter_name=literals_list[0].get_first_letter(),
                            **options
                          )
 
@@ -1326,8 +1326,8 @@ class Equation(ComposedCalculable):
             #DEBUG
             debug.write("\n[solve_next_step] 3rd CASE\n",
                                    case=debug.solve_next_step)
-            if new_eq.left_hand_side.term[0].value == \
-                new_eq.right_hand_side.term[0].value \
+            if new_eq.left_hand_side.term[0].raw_value == \
+                new_eq.right_hand_side.term[0].raw_value \
                and new_eq.left_hand_side.get_sign() == \
                     new_eq.right_hand_side.get_sign():
             #___

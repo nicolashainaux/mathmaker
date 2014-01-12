@@ -43,23 +43,23 @@ def reduce_literal_items_product(provided_list):
     for i in xrange(len(provided_list)):
         if isinstance(provided_list[i], core.base_calculus.Item):
             if provided_list[i].is_literal():
-                if not provided_list[i].value in aux_dict:
-                    aux_dict[provided_list[i].value] =                        \
-                                                provided_list[i].exponent.value
+                if not provided_list[i].raw_value in aux_dict:
+                    aux_dict[provided_list[i].raw_value] =                        \
+                                                provided_list[i].exponent.raw_value
                 else:
-                    aux_dict[provided_list[i].value] +=                       \
-                                                provided_list[i].exponent.value
+                    aux_dict[provided_list[i].raw_value] +=                       \
+                                                provided_list[i].exponent.raw_value
         elif isinstance(provided_list[i], core.base_calculus.Product):
             if len(provided_list[i].factor) == 1:
                 if isinstance(provided_list[i].factor[0],
                               core.base_calculus.Item):
                     if provided_list[i].factor[0].is_literal():
-                        if not provided_list[i].factor[0].value in aux_dict:
-                            aux_dict[provided_list[i].factor[0].value] =      \
+                        if not provided_list[i].factor[0].raw_value in aux_dict:
+                            aux_dict[provided_list[i].factor[0].raw_value] =      \
                                           provided_list[i].exponent           \
                                           * provided_list[i].factor[0].exponent
                         else:
-                            aux_dict[provided_list[i].factor[0].value] +=     \
+                            aux_dict[provided_list[i].factor[0].raw_value] +=     \
                                            provided_list[i].exponent          \
                                           * provided_list[i].factor[0].exponent
                     else:

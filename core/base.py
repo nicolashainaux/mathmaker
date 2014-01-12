@@ -83,7 +83,7 @@ class Printable(Copiable):
 # @class Drawable
 # @brief All Drawable objects (which are also Printable ones !)
 # Any Drawable must reimplement the into_str() and into_euk() method
-class Drawable(Printable):
+class Drawable(Copiable):
 
 
 

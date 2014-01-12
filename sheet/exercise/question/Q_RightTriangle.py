@@ -294,7 +294,7 @@ class Q_RightTriangle(Q_Structure):
                                                     )
 
             for side in self.right_triangle.sides:
-                if side.label.value == "":
+                if side.label.raw_value == "":
                     self.unknown_side = side.deep_copy()
                 else:
                     self.known_sides += [side.deep_copy()]
@@ -534,7 +534,7 @@ class Q_RightTriangle(Q_Structure):
                                           2)),
                                      Item(('+',
                                           self.right_triangle.\
-                                               hypotenuse.label.value,
+                                               hypotenuse.label.raw_value,
                                           2))
                                     ])
             hyp_equality_step2 = Equality([Item(('+',
@@ -543,7 +543,7 @@ class Q_RightTriangle(Q_Structure):
                                           2)),
                                      Item(Item(('+',
                                           self.right_triangle.\
-                                               hypotenuse.label.value,
+                                               hypotenuse.label.raw_value,
                                           2)).evaluate()
                                           )
                                     ])
@@ -556,10 +556,10 @@ class Q_RightTriangle(Q_Structure):
                                            2))
                                          ]),
                                       Sum([Item(('+',
-                                           self.right_triangle.leg0.label.value,
+                                           self.right_triangle.leg0.label.raw_value,
                                            2)),
                                            Item(('+',
-                                           self.right_triangle.leg1.label.value,
+                                           self.right_triangle.leg1.label.raw_value,
                                            2))
                                          ])
                                      ])
@@ -572,10 +572,10 @@ class Q_RightTriangle(Q_Structure):
                                        2))
                                       ]),
                                   Item(Sum([Item(('+',
-                                       self.right_triangle.leg0.label.value,
+                                       self.right_triangle.leg0.label.raw_value,
                                        2)),
                                        Item(('+',
-                                       self.right_triangle.leg1.label.value,
+                                       self.right_triangle.leg1.label.raw_value,
                                        2))
                                           ]).evaluate()
                                        )
