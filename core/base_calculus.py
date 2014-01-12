@@ -107,9 +107,9 @@ class Item(Exponented):
     #   @return One instance of Item
     def __init__(self, arg):
         Exponented.__init__(self)
-        self.is_out_striked = False
-        self.force_display_sign_once = False
-        self.unit = None
+        self._is_out_striked = False
+        self._force_display_sign_once = False
+        self._unit = None
 
         # 1st CASE : number
         # Item's sign will be number's sign
@@ -117,10 +117,10 @@ class Item(Exponented):
         # Item's exponent will be 1
         if is_.a_number(arg):
             if arg > 0:
-                self.value_inside = Value(arg)
+                self._value_inside = Value(arg)
             else:
                 self._sign = '-'
-                self.value_inside = Value(-arg)
+                self._value_inside = Value(-arg)
 
         # 2d CASE : string
         # Item's sign will be either '-' if given, or '+'
@@ -129,18 +129,18 @@ class Item(Exponented):
         elif is_.a_string(arg) and len(arg) >= 1:
             if is_.a_sign(arg[0]) and len(arg) >= 2:
                 self._sign = arg[0]
-                self.value_inside = Value(arg[1:len(arg)])
+                self._value_inside = Value(arg[1:len(arg)])
             else:
                 self._sign = '+'
-                self.value_inside = Value(arg)
+                self._value_inside = Value(arg)
 
         # 3d CASE : Item
         elif type(arg) == Item:
             self._sign = arg.sign
-            self.value_inside = arg.value_inside.deep_copy()
+            self._value_inside = arg.value_inside.deep_copy()
             self._exponent = arg.exponent.deep_copy()
-            self.is_out_striked = arg.is_out_striked
-            self.force_display_sign_once = arg.force_display_sign_once
+            self._is_out_striked = arg.is_out_striked
+            self._force_display_sign_once = arg.force_display_sign_once
 
         # 4th CASE : (sign, number|letter, <exponent as number|Exponented>)
         elif type(arg) == tuple and len(arg) == 3 and is_.a_sign(arg[0])      \
@@ -149,7 +149,7 @@ class Item(Exponented):
                   or isinstance(arg[2], Value)):
         #___
             self._sign = arg[0]
-            self.value_inside = Value(arg[1])
+            self._value_inside = Value(arg[1])
             if isinstance(arg[2], Exponented):
                 self._exponent = arg[2].deep_copy()
             else:
@@ -160,33 +160,33 @@ class Item(Exponented):
              and (is_.a_number(arg[1]) or is_.a_string(arg[1])):
         #___
             self._sign = arg[0]
-            self.value_inside = Value(arg[1])
+            self._value_inside = Value(arg[1])
 
         # 6th CASE : None
         elif arg == None:
-            self.value_inside = Value(1)
+            self._value_inside = Value(1)
 
         # 7th CASE : A zero-degree Monomial having an Item as coefficient
         elif isinstance(arg, Monomial) and arg.is_numeric()\
              and isinstance(arg.factor[0], Item):
         #___
             self._sign = arg.get_sign()
-            self.value_inside = Value(arg.factor[0].raw_value)
+            self._value_inside = Value(arg.factor[0].raw_value)
 
         # 8th CASE : A Value (the exponent will be one)
         elif isinstance(arg, Value):
             if arg.is_numeric():
                 if arg.raw_value < 0:
                     self._sign = '-'
-                    self.value_inside = Value(-arg.raw_value)
+                    self._value_inside = Value(-arg.raw_value)
                 else:
                     self._sign = '+'
-                    self.value_inside = Value(arg.raw_value)
+                    self._value_inside = Value(arg.raw_value)
             else:
                 self._sign = '+'
-                self.value_inside = Value(arg.raw_value)
+                self._value_inside = Value(arg.raw_value)
 
-            self.value_inside.set_has_been_rounded(arg.has_been_rounded)
+            self._value_inside.set_has_been_rounded(arg.has_been_rounded)
 
 
 
@@ -196,6 +196,416 @@ class Item(Exponented):
                                          "Number|String|Item|" \
                                          + "(sign, Number|String, exponent)|" \
                                          + "(sign, Number|String)")
+
+
+    # ---------------------------------------------------- GET VALUE ----------
+    ##
+    #   @brief Gets the raw value of the Item
+    #   @return value_inside.raw_value
+    def get_is_out_striked(self):
+        return self._is_out_striked
+
+
+
+
+
+    # ---------------------------------------------------- GET VALUE ----------
+    ##
+    #   @brief Gets force_display_sign_once field
+    #   @return Item's force_display_sign_once field
+    def get_force_display_sign_once(self):
+        return self._force_display_sign_once
+
+
+
+
+
+    # ---------------------------------------------------- GET VALUE ----------
+    ##
+    #   @brief Gets the raw value of the Item
+    #   @return value_inside.raw_value
+    def get_raw_value(self):
+        return self.value_inside.raw_value
+
+
+
+
+
+    # ---------------------------------------------------- GET VALUE ----------
+    ##
+    #   @brief Gets the Value of the Item
+    #   @return value_inside
+    def get_value_inside(self):
+        return self._value_inside
+
+
+
+
+
+    # -------------------------------------------------------------------------
+    ##
+    #   @brief Returns the unit of the Item
+    def get_unit(self):
+        return self._unit
+
+
+
+
+
+    # --------------------------------------- GET MINUS SIGNS NUMBER ----------
+    ##
+    #   @brief Gets the number of '-' signs of the Item
+    #   @return The number of '-' signs of the Item (either 0, 1 or 2)
+    def get_minus_signs_nb(self):
+        nb = 0
+
+        if self.is_negative() and not self.is_null():
+            nb += 1
+
+        if self.raw_value < 0 and is_uneven(self.exponent):
+            nb += 1
+
+        return nb
+
+
+
+
+
+    # ------------------------------------------------ GET ITER LIST ----------
+    ##
+    #   @brief Returns the list of elements to iter over
+    def get_iteration_list(self):
+        return [self.value_inside, self.exponent]
+
+
+
+
+
+
+    # --------------------------------------------------- GET LETTER ----------
+    ##
+    #   @brief Returns the letter of the Item, in case it's a literal
+    def get_first_letter(self):
+        if self.is_literal():
+            return self.raw_value
+
+        else:
+            raise error.UncompatibleType(self, "Litteral Item")
+
+
+
+
+
+
+
+
+
+
+
+
+    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    is_out_striked = property(get_is_out_striked,
+                              doc = "Item's is_out_striked field")
+    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    force_display_sign_once = property(get_force_display_sign_once,
+                              doc = "Item's force_display_sign_once field")
+    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    raw_value = property(get_raw_value, doc = "Item's raw value")
+    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    value_inside = property(get_value_inside, doc = "Item's Value")
+    unit = property(get_unit, doc = "Unit of the Item")
+
+    # ------------------------------------------------------ SET SIGN ----------
+    ##
+    #   @brief Set the unit of the Item
+    #   @param  arg String
+    def set_unit(self, arg):
+        if not type(arg) == str:
+            raise error.WrongArgument(str(type(arg)), "a str")
+        else:
+            self._unit = arg
+
+
+
+
+    # ------------------------------------------- SET IS OUT STRIKED ----------
+    ##
+    #   @brief Sets a value to the "is_out_striked" field
+    # If is_out_striked is set to True, the Item will be displayed out striked
+    def set_is_out_striked(self, arg):
+        if arg in [True, False]:
+            self._is_out_striked = arg
+        else:
+            raise error.WrongArgument(str(arg), "True|False")
+
+
+
+
+
+    # ------------------------------------------- SET IS OUT STRIKED ----------
+    ##
+    #   @brief Sets a True|False value to the "force_display_sign_once" field
+    def set_force_display_sign_once(self, arg):
+        if arg in [True, False]:
+            self._force_display_sign_once = arg
+        else:
+            raise error.WrongArgument(str(arg), "True|False")
+
+
+
+
+
+    # ------------------------------------------------------ SET UNIT ----------
+    ##
+    #   @brief Sets the Value inside
+    def set_value_inside(self, arg):
+        if isinstance(arg, Value):
+            self._value_inside = arg.deep_copy()
+        else:
+            raise error.WrongArgument(str(type(arg)), "a Value")
+
+
+
+
+
+
+
+    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    ##
+    #   @brief Creates a string of the given object in the given ML
+    #   @param options Any options
+    #   @return The formated string
+    def into_str(self, **options):
+        global expression_begins
+        # Displaying the + sign depends on the expression_begins flag of the
+        # machine :
+        #  - either it's True : + won't be displayed
+        #  - or it's False : + will be displayed
+        # "Normal" state of this flag is False.
+        # It is set to True outside of this section of into_str, every time
+        # it's necessary (for example, as soon as a bracket has been
+        # displayed the next object should be displayed like at the beginning
+        # of an expression).
+        # Everytime an Item is written, expression_begins is set to False again
+
+        if 'force_expression_begins' in options \
+           and options['force_expression_begins'] == True:
+        #___
+            expression_begins = options['force_expression_begins']
+            options['force_expression_begins'] = False
+
+        #DEBUG
+        debug.write("\n" + "[Item] Entering into_str " \
+                         + "with force_display_sign_once == " \
+                         + str(self.force_display_sign_once),
+                         case=debug.into_str_in_item)
+
+        resulting_string = ""
+
+        sign = ''
+
+        inner_bracket_1 = ''
+        inner_bracket_2 = ''
+
+        if self.requires_inner_brackets():
+            inner_bracket_1 = MARKUP['opening_bracket']
+            inner_bracket_2 = MARKUP['closing_bracket']
+
+        if not expression_begins                                              \
+           or ('force_display_sign' in options and self.is_numeric()) \
+           or self.force_display_sign_once:
+        #___
+            if self.sign == '+' or self.is_null():
+                sign = MARKUP['plus']
+            else:
+                sign = MARKUP['minus']
+            if self.force_display_sign_once:
+                self.set_force_display_sign_once(False)
+        else:
+            if self.sign == '-' and not self.is_null():
+                sign = MARKUP['minus']
+
+        if self.exponent.is_displ_as_a_single_0():
+        #___
+            if 'force_display_exponent_0' in options                          \
+               or 'force_display_exponents' in options:
+            #___
+                resulting_string += inner_bracket_1                           \
+                                 + self.value_inside.into_str()      \
+                                 + inner_bracket_2                            \
+                                 + MARKUP['opening_exponent']                 \
+                                 + MARKUP['zero']                             \
+                                 + MARKUP['closing_exponent']
+            else:
+                resulting_string += MARKUP['one']
+
+        elif self.exponent_must_be_displayed():
+            if isinstance(self.exponent, Exponented):
+                expression_begins = True
+
+            resulting_string += inner_bracket_1                               \
+                             + self.value_inside.into_str()          \
+                             + inner_bracket_2                                \
+                             + MARKUP['opening_exponent']                     \
+                             + self.exponent.into_str(**options)           \
+                             + MARKUP['closing_exponent']
+
+        else: # that should only concern cases where the exponent
+              # is equivalent to 1
+            if 'force_display_exponent_1' in options                          \
+               or 'force_display_exponents' in options:
+            #___
+                resulting_string += inner_bracket_1                           \
+                                 + self.value_inside.into_str()      \
+                                 + inner_bracket_2                            \
+                                 + MARKUP['opening_exponent']                 \
+                                 + MARKUP['one']                              \
+                                 + MARKUP['closing_exponent']
+            else:
+                resulting_string += inner_bracket_1                           \
+                                 + self.value_inside.into_str()      \
+                                 + inner_bracket_2
+                                 #+ MARKUP['space']
+
+        if self.is_out_striked:
+            resulting_string = MARKUP['opening_out_striked']                  \
+                               + resulting_string                             \
+                               + MARKUP['closing_out_striked']
+
+        if self.unit != None and 'display_unit' in options \
+            and (options['display_unit'] == True \
+                 or options['display_unit'] == 'yes'):
+        #___
+            resulting_string += " " + str(self.unit)
+
+        expression_begins = False
+
+
+        return sign + resulting_string
+
+
+
+
+
+    # ----------------------------------------------------- EVALUATE ----------
+    ##
+    #   @brief Returns the value of a numerically evaluable Item
+    #   @warning Relays an exception if the exponent is not Exponented|Value
+    def evaluate(self):
+        expon = self.exponent.evaluate()
+
+        if self.is_numeric():
+            if self.is_positive():
+                return (self.raw_value)**expon
+            else:
+                return -(self.raw_value)**expon
+
+        else:
+            raise error.IncompatibleType(self, "Number|numeric Exponented")
+
+
+
+
+
+    # ------------------------------------------- CALCULATE ONE STEP ----------
+    ##
+    #   @brief Returns None|an Item
+    #   @todo Manage the case when the exponent is a calculable that should
+    #   be calculated itself.
+    #   @warning Relays an exception if the exponent is not Exponented|Value
+    # If the Item has an exponent equivalent to a single 1, then nothing
+    # can be calculated, so this method returns None
+    # In another case, it returns the evaluated Item
+    def calculate_next_step(self, **options):
+        if not self.is_numeric():
+            raise error.UncompatibleType(self, "Number|numeric Exponented")
+
+        #DEBUG
+        debug.write("\n[calculate_next_step_item] Entered\n"\
+                  + "[calculate_next_step_item] current Item is : " \
+                    + self.dbg_str() + "\n",
+                    case=debug.calculate_next_step_item)
+
+        # First, either get the exponent as a Number or calculate it further
+        expon_test = self.exponent.calculate_next_step(**options)
+
+        #DEBUG
+        debug.write("[calculate_next_step_item] expon_test = "\
+                    + str(expon_test) + "\n",
+                    case=debug.calculate_next_step_item)
+
+        if expon_test != None:
+            return Item((self.sign,
+                             self.raw_value,
+                             expon_test
+                            ))
+
+        expon = self.exponent.evaluate()
+
+        #DEBUG
+        debug.write("[calculate_next_step_item] expon = "\
+                    + str(expon) + "\n",
+                    case=debug.calculate_next_step_item)
+
+        # Now the exponent is a number (saved in "expon")
+
+        # If it is different from 1, then the next step is to calculate
+        # a new Item using this exponent (for example,
+        # the Item 4² would return the Item 16)
+        if expon != 1:
+            #DEBUG
+            debug.write("[calculate_next_step_item] expon is != 1\n",
+                        case=debug.calculate_next_step_item)
+            # Intricated case where the inner sign is negative
+            # (like in ±(-5)³)
+            if self.raw_value < 0:
+                #DEBUG
+                debug.write("[calculate_next_step_item] self.raw_value < 0\n",
+                            case=debug.calculate_next_step_item)
+
+                aux_inner_sign = Item(('+', -1, expon))
+                return Item((sign_of_product([self.sign,
+                                                  aux_inner_sign]),
+                             (- self.raw_value)**expon,
+                             1))
+            # Simple case like -3² or 5³
+            else:
+                #DEBUG
+                debug.write("[calculate_next_step_item] self.raw_value >= 0\n",
+                            case=debug.calculate_next_step_item)
+                return Item((self.sign,
+                             self.raw_value ** expon,
+                             1))
+
+        # Now the exponent is 1
+        else:
+            #DEBUG
+            debug.write("[calculate_next_step_item] expon is == 1\n",
+                        case=debug.calculate_next_step_item)
+            # Case of -(-something)
+            if self.raw_value < 0 and self.sign == '-':
+                return Item(('+',
+                             - self.raw_value,
+                             expon))
+
+            # Other cases like ±number where ± is either external or
+            # inner sign
+            else:
+                return None
+
+
+
+
+
+    # -------------------------------- EXPAND AND REDUCE : NEXT STEP ----------
+    ##
+    #   @brief Returns None (an Item can't get expanded nor reduced !)
+    #   @return Exponented
+    def expand_and_reduce_next_step(self, **options):
+        if self.is_numeric():
+            return self.calculate_next_step(**options)
+        else:
+            return None
 
 
 
@@ -249,158 +659,6 @@ class Item(Exponented):
     #   @return 1
     def __len__(self):
         return 1
-
-
-
-
-    # ------------------------------------------------- IS NUMERIC ? ----------
-    ##
-    #   @brief True if it's a numeric Item
-    def is_numeric(self):
-        if self.value_inside.is_numeric() and self.exponent.is_numeric():
-            return True
-        else:
-            return False
-
-
-
-
-
-    # ------------------------------------------------ IS LITERAL ? ----------
-    ##
-    #   @brief True if it's a literal Item
-    def is_literal(self):
-        if self.value_inside.is_literal() or self.exponent.is_literal(): \
-            return True
-        else:
-            return False
-
-
-
-
-
-    # ---------------------------------------------------- IS NULL ? ----------
-    ##
-    #   @brief True if it's the null Item
-    def is_null(self):
-        if self.exponent.evaluate() == ZERO_POLYNOMIAL_DEGREE \
-           or (self.value_inside.is_null()):
-        #___
-            return True
-        else:
-            return False
-
-
-
-
-
-
-    # ------------------------------------------- TURN INTO FRACTION ----------
-    ##
-    #   @brief Turns the Item into the fraction item itself over item 1
-    def turn_into_fraction(self):
-        return Fraction(('+', self, Item(1)))
-
-
-
-
-
-
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 1 ? ----------
-    ##
-    #   @brief True if it's positive w/ (exponent 0 or numeric w/ value 1)
-    def is_displ_as_a_single_1(self):
-        if self.sign == '+':
-            if (self.exponent.is_null()) \
-               or (self.value_inside.is_displ_as_a_single_1()):
-            #___
-                return True
-
-        return False
-
-
-
-
-
-    # ------------------------------- IS EQUIVALENT TO A SINGLE -1 ? ----------
-    ##
-    #   @brief True if it's negative w/ (exponent 0 or numeric w/ value 1)
-    def is_displ_as_a_single_minus_1(self):
-        if self.sign == '-':
-            if self.exponent.is_null() \
-               or (self.value_inside.is_displ_as_a_single_1()):
-            #___
-                return True
-
-        if self.sign == '+':
-            if self.value_inside.is_displ_as_a_single_minus_1()   \
-               and is_uneven(self.exponent):
-            #___
-                return True
-
-        return False
-
-
-
-
-
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 0 ? ----------
-    ##
-    #   @brief True if self.is_null()
-    def is_displ_as_a_single_0(self):
-        return self.is_null()
-
-
-
-
-
-
-    # --------------------- IS EQUIVALENT TO A SINGLE NUMERIC ITEM ? ----------
-    ##
-    #   @brief True if the Item is numeric
-    def is_displ_as_a_single_numeric_Item(self):
-        return self.is_numeric()
-
-
-
-
-
-    # ---------------------------- IS EQUIVALENT TO A SINGLE INT ? ----------
-    ##
-    #   @brief True if the object can be displayed as a single int
-    def is_displ_as_a_single_int(self):
-        return self.value_inside.is_displ_as_a_single_int() and \
-                self.exponent.is_displ_as_a_single_1()
-
-
-
-
-    # -------------------------- IS EQUIVALENT TO A SINGLE NEUTRAL ? ----------
-    ##
-    #   @brief True if the object can be considered as a neutral element
-    def is_displ_as_a_single_neutral(self, elt):
-        if elt == Item(0):
-            return self.is_displ_as_a_single_0()
-        elif elt == Item(1):
-            return self.is_displ_as_a_single_1()
-        else:
-            print elt.dbg_str()
-            print Item(0).dbg_str()
-            raise error.UncompatibleType(elt, "neutral element for addition" \
-                                              + " or multiplication, e.g." \
-                                              + " Item(1) | Item(0).")
-
-
-
-
-
-    # -------------------------------------------- IS EXPANDABLE ? ------------
-    ##
-    #   @brief False
-    #   @return False
-    def is_expandable(self):
-        return False
-
 
 
 
@@ -595,199 +853,6 @@ class Item(Exponented):
 
 
 
-    # ---------------------------------------------------- GET VALUE ----------
-    ##
-    #   @brief Gets the raw value of the Item
-    #   @return value_inside.raw_value
-    def get_raw_value(self):
-        return self.value_inside.raw_value
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
-    raw_value = property(get_raw_value, doc = "Item's raw value")
-
-
-
-
-
-    # --------------------------------------- GET MINUS SIGNS NUMBER ----------
-    ##
-    #   @brief Gets the number of '-' signs of the Item
-    #   @return The number of '-' signs of the Item (either 0, 1 or 2)
-    def get_minus_signs_nb(self):
-        nb = 0
-
-        if self.is_negative() and not self.is_null():
-            nb += 1
-
-        if self.raw_value < 0 and is_uneven(self.exponent):
-            nb += 1
-
-        return nb
-
-
-
-
-
-    # ------------------------------------------------ GET ITER LIST ----------
-    ##
-    #   @brief Returns the list of elements to iter over
-    def get_iteration_list(self):
-        return [self.value_inside, self.exponent]
-
-
-
-
-
-
-    # --------------------------------------------------- GET LETTER ----------
-    ##
-    #   @brief Returns the letter of the Item, in case it's a literal
-    def get_first_letter(self):
-        if self.is_literal():
-            return self.raw_value
-
-        else:
-            raise error.UncompatibleType(self, "Litteral Item")
-
-
-
-
-
-
-    # ------------------------------------------- SET IS OUT STRIKED ----------
-    ##
-    #   @brief Sets a value to the "is_out_striked" field
-    # If is_out_striked is set to True, the Item will be displayed out striked
-    def set_is_out_striked(self, arg):
-        if arg:
-            self.is_out_striked = True
-        else:
-            self.is_out_striked = False
-
-
-
-
-
-    # ------------------------------------------------------ SET UNIT ----------
-    ##
-    #   @brief Sets a value to the "unit" field
-    def set_unit(self, arg):
-        self.unit = str(arg)
-
-
-
-
-
-
-    # ----------------------------------------------------- EVALUATE ----------
-    ##
-    #   @brief Returns the value of a numerically evaluable Item
-    #   @warning Relays an exception if the exponent is not Exponented|Value
-    def evaluate(self):
-        expon = self.exponent.evaluate()
-
-        if self.is_numeric():
-            if self.is_positive():
-                return (self.raw_value)**expon
-            else:
-                return -(self.raw_value)**expon
-
-        else:
-            raise error.IncompatibleType(self, "Number|numeric Exponented")
-
-
-
-
-
-    # ------------------------------------------- CALCULATE ONE STEP ----------
-    ##
-    #   @brief Returns None|an Item
-    #   @todo Manage the case when the exponent is a calculable that should
-    #   be calculated itself.
-    #   @warning Relays an exception if the exponent is not Exponented|Value
-    # If the Item has an exponent equivalent to a single 1, then nothing
-    # can be calculated, so this method returns None
-    # In another case, it returns the evaluated Item
-    def calculate_next_step(self, **options):
-        if not self.is_numeric():
-            raise error.UncompatibleType(self, "Number|numeric Exponented")
-
-        #DEBUG
-        debug.write("\n[calculate_next_step_item] Entered\n"\
-                  + "[calculate_next_step_item] current Item is : " \
-                    + self.dbg_str() + "\n",
-                    case=debug.calculate_next_step_item)
-
-        # First, either get the exponent as a Number or calculate it further
-        expon_test = self.exponent.calculate_next_step(**options)
-
-        #DEBUG
-        debug.write("[calculate_next_step_item] expon_test = "\
-                    + str(expon_test) + "\n",
-                    case=debug.calculate_next_step_item)
-
-        if expon_test != None:
-            return Item((self.sign,
-                             self.raw_value,
-                             expon_test
-                            ))
-
-        expon = self.exponent.evaluate()
-
-        #DEBUG
-        debug.write("[calculate_next_step_item] expon = "\
-                    + str(expon) + "\n",
-                    case=debug.calculate_next_step_item)
-
-        # Now the exponent is a number (saved in "expon")
-
-        # If it is different from 1, then the next step is to calculate
-        # a new Item using this exponent (for example,
-        # the Item 4² would return the Item 16)
-        if expon != 1:
-            #DEBUG
-            debug.write("[calculate_next_step_item] expon is != 1\n",
-                        case=debug.calculate_next_step_item)
-            # Intricated case where the inner sign is negative
-            # (like in ±(-5)³)
-            if self.raw_value < 0:
-                #DEBUG
-                debug.write("[calculate_next_step_item] self.raw_value < 0\n",
-                            case=debug.calculate_next_step_item)
-
-                aux_inner_sign = Item(('+', -1, expon))
-                return Item((sign_of_product([self.sign,
-                                                  aux_inner_sign]),
-                             (- self.raw_value)**expon,
-                             1))
-            # Simple case like -3² or 5³
-            else:
-                #DEBUG
-                debug.write("[calculate_next_step_item] self.raw_value >= 0\n",
-                            case=debug.calculate_next_step_item)
-                return Item((self.sign,
-                             self.raw_value ** expon,
-                             1))
-
-        # Now the exponent is 1
-        else:
-            #DEBUG
-            debug.write("[calculate_next_step_item] expon is == 1\n",
-                        case=debug.calculate_next_step_item)
-            # Case of -(-something)
-            if self.raw_value < 0 and self.sign == '-':
-                return Item(('+',
-                             - self.raw_value,
-                             expon))
-
-            # Other cases like ±number where ± is either external or
-            # inner sign
-            else:
-                return None
-
-
-
-
-
     # --------------------------------------------------------- ROUND ----------
     ##
     #   @brief Returns the (numeric) Item once rounded to the given precision
@@ -833,132 +898,155 @@ class Item(Exponented):
 
 
 
-    # -------------------------------- EXPAND AND REDUCE : NEXT STEP ----------
+
+
+    # ------------------------------------------- TURN INTO FRACTION ----------
     ##
-    #   @brief Returns None (an Item can't get expanded nor reduced !)
-    #   @return Exponented
-    def expand_and_reduce_next_step(self, **options):
-        if self.is_numeric():
-            return self.calculate_next_step(**options)
-        else:
-            return None
+    #   @brief Turns the Item into the fraction item itself over item 1
+    def turn_into_fraction(self):
+        return Fraction(('+', self, Item(1)))
 
 
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+
+    # ------------------------------------------------- IS NUMERIC ? ----------
     ##
-    #   @brief Creates a string of the given object in the given ML
-    #   @param options Any options
-    #   @return The formated string
-    def into_str(self, **options):
-        global expression_begins
-        # Displaying the + sign depends on the expression_begins flag of the
-        # machine :
-        #  - either it's True : + won't be displayed
-        #  - or it's False : + will be displayed
-        # "Normal" state of this flag is False.
-        # It is set to True outside of this section of into_str, every time
-        # it's necessary (for example, as soon as a bracket has been
-        # displayed the next object should be displayed like at the beginning
-        # of an expression).
-        # Everytime an Item is written, expression_begins is set to False again
-
-        if 'force_expression_begins' in options \
-           and options['force_expression_begins'] == True:
-        #___
-            expression_begins = options['force_expression_begins']
-            options['force_expression_begins'] = False
-
-        #DEBUG
-        debug.write("\n" + "[Item] Entering into_str " \
-                         + "with force_display_sign_once == " \
-                         + str(self.force_display_sign_once),
-                         case=debug.into_str_in_item)
-
-        resulting_string = ""
-
-        sign = ''
-
-        inner_bracket_1 = ''
-        inner_bracket_2 = ''
-
-        if self.requires_inner_brackets():
-            inner_bracket_1 = MARKUP['opening_bracket']
-            inner_bracket_2 = MARKUP['closing_bracket']
-
-        if not expression_begins                                              \
-           or ('force_display_sign' in options and self.is_numeric()) \
-           or self.force_display_sign_once:
-        #___
-            if self.sign == '+' or self.is_null():
-                sign = MARKUP['plus']
-            else:
-                sign = MARKUP['minus']
-            if self.force_display_sign_once:
-                self.force_display_sign_once = False
+    #   @brief True if it's a numeric Item
+    def is_numeric(self):
+        if self.value_inside.is_numeric() and self.exponent.is_numeric():
+            return True
         else:
-            if self.sign == '-' and not self.is_null():
-                sign = MARKUP['minus']
+            return False
 
-        if self.exponent.is_displ_as_a_single_0():
+
+
+
+
+    # ------------------------------------------------ IS LITERAL ? ----------
+    ##
+    #   @brief True if it's a literal Item
+    def is_literal(self):
+        if self.value_inside.is_literal() or self.exponent.is_literal(): \
+            return True
+        else:
+            return False
+
+
+
+
+
+    # ---------------------------------------------------- IS NULL ? ----------
+    ##
+    #   @brief True if it's the null Item
+    def is_null(self):
+        if self.exponent.evaluate() == ZERO_POLYNOMIAL_DEGREE \
+           or (self.value_inside.is_null()):
         #___
-            if 'force_display_exponent_0' in options                          \
-               or 'force_display_exponents' in options:
+            return True
+        else:
+            return False
+
+
+
+
+
+
+    # -------------------------------- IS EQUIVALENT TO A SINGLE 1 ? ----------
+    ##
+    #   @brief True if it's positive w/ (exponent 0 or numeric w/ value 1)
+    def is_displ_as_a_single_1(self):
+        if self.sign == '+':
+            if (self.exponent.is_null()) \
+               or (self.value_inside.is_displ_as_a_single_1()):
             #___
-                resulting_string += inner_bracket_1                           \
-                                 + self.value_inside.into_str()      \
-                                 + inner_bracket_2                            \
-                                 + MARKUP['opening_exponent']                 \
-                                 + MARKUP['zero']                             \
-                                 + MARKUP['closing_exponent']
-            else:
-                resulting_string += MARKUP['one']
+                return True
 
-        elif self.exponent_must_be_displayed():
-            if isinstance(self.exponent, Exponented):
-                expression_begins = True
+        return False
 
-            resulting_string += inner_bracket_1                               \
-                             + self.value_inside.into_str()          \
-                             + inner_bracket_2                                \
-                             + MARKUP['opening_exponent']                     \
-                             + self.exponent.into_str(**options)           \
-                             + MARKUP['closing_exponent']
 
-        else: # that should only concern cases where the exponent
-              # is equivalent to 1
-            if 'force_display_exponent_1' in options                          \
-               or 'force_display_exponents' in options:
+
+
+
+    # ------------------------------- IS EQUIVALENT TO A SINGLE -1 ? ----------
+    ##
+    #   @brief True if it's negative w/ (exponent 0 or numeric w/ value 1)
+    def is_displ_as_a_single_minus_1(self):
+        if self.sign == '-':
+            if self.exponent.is_null() \
+               or (self.value_inside.is_displ_as_a_single_1()):
             #___
-                resulting_string += inner_bracket_1                           \
-                                 + self.value_inside.into_str()      \
-                                 + inner_bracket_2                            \
-                                 + MARKUP['opening_exponent']                 \
-                                 + MARKUP['one']                              \
-                                 + MARKUP['closing_exponent']
-            else:
-                resulting_string += inner_bracket_1                           \
-                                 + self.value_inside.into_str()      \
-                                 + inner_bracket_2
-                                 #+ MARKUP['space']
+                return True
 
-        if self.is_out_striked:
-            resulting_string = MARKUP['opening_out_striked']                  \
-                               + resulting_string                             \
-                               + MARKUP['closing_out_striked']
+        if self.sign == '+':
+            if self.value_inside.is_displ_as_a_single_minus_1()   \
+               and is_uneven(self.exponent):
+            #___
+                return True
 
-        if self.unit != None and 'display_unit' in options \
-            and (options['display_unit'] == True \
-                 or options['display_unit'] == 'yes'):
-        #___
-            resulting_string += " " + str(self.unit)
-
-        expression_begins = False
+        return False
 
 
-        return sign + resulting_string
+
+
+
+    # -------------------------------- IS EQUIVALENT TO A SINGLE 0 ? ----------
+    ##
+    #   @brief True if self.is_null()
+    def is_displ_as_a_single_0(self):
+        return self.is_null()
+
+
+
+
+
+
+    # --------------------- IS EQUIVALENT TO A SINGLE NUMERIC ITEM ? ----------
+    ##
+    #   @brief True if the Item is numeric
+    def is_displ_as_a_single_numeric_Item(self):
+        return self.is_numeric()
+
+
+
+
+
+    # ---------------------------- IS EQUIVALENT TO A SINGLE INT ? ----------
+    ##
+    #   @brief True if the object can be displayed as a single int
+    def is_displ_as_a_single_int(self):
+        return self.value_inside.is_displ_as_a_single_int() and \
+                self.exponent.is_displ_as_a_single_1()
+
+
+
+
+    # -------------------------- IS EQUIVALENT TO A SINGLE NEUTRAL ? ----------
+    ##
+    #   @brief True if the object can be considered as a neutral element
+    def is_displ_as_a_single_neutral(self, elt):
+        if elt == Item(0):
+            return self.is_displ_as_a_single_0()
+        elif elt == Item(1):
+            return self.is_displ_as_a_single_1()
+        else:
+            print elt.dbg_str()
+            print Item(0).dbg_str()
+            raise error.UncompatibleType(elt, "neutral element for addition" \
+                                              + " or multiplication, e.g." \
+                                              + " Item(1) | Item(0).")
+
+
+
+
+
+    # -------------------------------------------- IS EXPANDABLE ? ------------
+    ##
+    #   @brief False
+    #   @return False
+    def is_expandable(self):
+        return False
 
 
 
@@ -1033,11 +1121,11 @@ class FunctionalItem(Item):
 
         self._exponent = Value(1)
 
-        self.value_inside = Value('x')
+        self._value_inside = Value('x')
 
-        self.is_out_striked = False
-        self.force_display_sign_once = False
-        self.unit = None
+        self._is_out_striked = False
+        self._force_display_sign_once = False
+        self._unit = None
 
 
 
@@ -1250,7 +1338,7 @@ class SquareRoot(Exponented):
     #   @return One instance of SquareRoot
     def __init__(self, arg, **options):
         Exponented.__init__(self)
-        self.force_display_sign_once = False
+        self._force_display_sign_once = False
         self.radicand = Item(1)
 
         # 1st CASE : a SquareRoot
@@ -1260,7 +1348,7 @@ class SquareRoot(Exponented):
             #___
                 self.radicand = arg.deep_copy()
             else:
-                self.force_display_sign_once = arg.force_display_sign_once
+                self._force_display_sign_once = arg.force_display_sign_once
                 self._sign = arg.sign
                 self.radicand = arg.radicand.deep_copy()
 
@@ -1350,6 +1438,19 @@ class SquareRoot(Exponented):
     def is_null(self):
         return self.radicand.is_null()
 
+
+
+
+
+
+    # ------------------------------------------- SET IS OUT STRIKED ----------
+    ##
+    #   @brief Sets a True|False value to the "force_display_sign_once" field
+    def set_force_display_sign_once(self, arg):
+        if arg in [True, False]:
+            self._force_display_sign_once = arg
+        else:
+            raise error.WrongArgument(str(arg), "True|False")
 
 
 
@@ -1558,6 +1659,20 @@ class SquareRoot(Exponented):
 
 
 
+    # ---------------------------------------------------- GET VALUE ----------
+    ##
+    #   @brief Gets force_display_sign_once field
+    #   @return Item's force_display_sign_once field
+    def get_force_display_sign_once(self):
+        return self._force_display_sign_once
+    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    force_display_sign_once = property(get_force_display_sign_once,
+                              doc = "Item's force_display_sign_once field")
+
+
+
+
+
     # ------------------------------------------- CALCULATE ONE STEP ----------
     ##
     #   @brief Returns None|an SquareRoot
@@ -1566,7 +1681,9 @@ class SquareRoot(Exponented):
     #   @warning Relays an exception if the content is negative
     def calculate_next_step(self, **options):
         if not self.is_numeric():
-            return self.radicand.expand_and_reduce_next_step()
+            return SquareRoot((self.sign,
+                               self.radicand.expand_and_reduce_next_step()
+                             ))
 
         # First, let's handle the case when a Decimal Result is awaited
         # rather than a SquareRoot's simplification
@@ -1612,12 +1729,15 @@ class SquareRoot(Exponented):
 
     # -------------------------------- EXPAND AND REDUCE : NEXT STEP ----------
     ##
-    #   @brief Returns self.object.expand_and_reduce_next_step()
+    #   @brief Returns SquareRoot(self.object.expand_and_reduce_next_step())
     def expand_and_reduce_next_step(self, **options):
         if self.is_numeric():
             return self.calculate_next_step(**options)
         else:
-            return radicand.expand_and_reduce_next_step(**options)
+            return SquareRoot((self.sign,
+                               self.radicand.\
+                                        expand_and_reduce_next_step(**options)
+                              ))
 
 
 
@@ -1661,7 +1781,7 @@ class SquareRoot(Exponented):
             else:
                 sign = MARKUP['minus']
             if self.force_display_sign_once:
-                self.force_display_sign_once = False
+                self.set_force_display_sign_once(False)
         else:
             if self.sign == '-' and not self.is_null():
                 sign = MARKUP['minus']
@@ -1971,6 +2091,21 @@ class Operation(Exponented):
     #   @brief Returns the sign of the first element of the Operation
     def get_sign(self):
         return self.element[0].sign
+
+
+
+
+
+    # ---------------------------------------------------- GET VALUE ----------
+    ##
+    #   @brief Gets the Value of the Monomial, just to mimic the case when
+    #          it is of degree 0
+    #   @return value_inside
+    def get_value_inside(self):
+        return self._value_inside
+    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    value_inside = property(get_value_inside,
+                            doc = "0-degree Monomial's Value inside")
 
 
 
@@ -6300,7 +6435,7 @@ class Monomial(Product):
             # This is just to mimic the Item it could be, when the exponent
             # of x is zero :
             # Monomial 3×x^0 is like Item 3.
-            self.value_inside = Value(self.factor[0].raw_value)
+            self._value_inside = Value(self.factor[0].raw_value)
 
 
 
@@ -6454,7 +6589,7 @@ class Monomial(Product):
     ##
     #   @brief Sets the letter of the Monomial
     def set_letter(self, letter):
-        self.element[1].value_inside = Value(letter)
+        self.element[1].set_value_inside(Value(letter))
 
 
 
@@ -7418,7 +7553,7 @@ class Fraction(Quotient):
                             elif position_of_the_last_minus_sign[0] == 'f':
                                 self.set_sign('+')
                                 I[i].set_sign('+')
-                                I[i].force_display_sign_once = True
+                                I[i].set_force_display_sign_once(True)
                                 position_of_the_last_minus_sign = None
                                 debug.write("\n[Simplification line : minus " \
                                             + "signs simplification]" \
@@ -7430,9 +7565,9 @@ class Fraction(Quotient):
                                     set_sign('+')
                                 final_numerator[ \
                                     position_of_the_last_minus_sign[1]].\
-                                    force_display_sign_once = True
+                                    set_force_display_sign_once(True)
                                 I[i].set_sign('+')
-                                I[i].force_display_sign_once = True
+                                I[i].set_force_display_sign_once(True)
                                 position_of_the_last_minus_sign = None
                                 debug.write("\n[Simplification line : minus " \
                                             + "signs simplification]" \
@@ -7444,9 +7579,9 @@ class Fraction(Quotient):
                                     set_sign('+')
                                 final_denominator[ \
                                     position_of_the_last_minus_sign[1]].\
-                                    force_display_sign_once = True
+                                    set_force_display_sign_once(True)
                                 I[i].set_sign('+')
-                                I[i].force_display_sign_once = True
+                                I[i].set_force_display_sign_once(True)
                                 position_of_the_last_minus_sign = None
                                 debug.write("\n[Simplification line : minus " \
                                             + "signs simplification]" \
@@ -7497,14 +7632,14 @@ class Fraction(Quotient):
         # ... numerator :
         for i in xrange(len(result.numerator)):
             if result.numerator.factor[i].is_out_striked:
-                result.numerator.factor[i].value_inside = Value(1)
-                result.numerator.factor[i].is_out_striked = False
+                result.numerator.factor[i].set_value_inside(Value(1))
+                result.numerator.factor[i].set_is_out_striked(False)
 
         # ... denominator
         for j in xrange(len(result.denominator)):
             if result.denominator.factor[j].is_out_striked:
-                result.denominator.factor[j].value_inside = Value(1)
-                result.denominator.factor[j].is_out_striked = False
+                result.denominator.factor[j].set_value_inside(Value(1))
+                result.denominator.factor[j].set_is_out_striked(False)
 
         return result
 
@@ -7879,9 +8014,9 @@ class Expandable(Product):
                     sum1 = Sum(Monomial((RANDOMLY, max_coeff, 0)))
 
                     if sum1.element[0].factor[0].raw_value == 1:
-                        sum1.element[0].factor[0].value_inside = Value(\
+                        sum1.element[0].factor[0].set_value_inside(Value(\
                                                    randomly.integer(2,
-                                                                    max_coeff))
+                                                                    max_coeff)))
 
                     sum2 = Polynomial((RANDOMLY, max_coeff, 1, 2))
 

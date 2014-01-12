@@ -574,7 +574,7 @@ class Value(Signed):
     #   @brief Returns the sign of the Value
     def get_sign(self):
         return self._sign
-# -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     ##
     #   @brief Returns the unit of the Value
     def get_unit(self):
