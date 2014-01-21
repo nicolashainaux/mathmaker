@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -49,7 +49,7 @@ class Structure(object):
     # ---------------------------------------------------- DEEP COPY ----------
     ##
     #   @brief Returns a deep copy of the object
-    def deep_copy(self, language):
+    def clone(self, language):
         result = object.__new__(type(self))
         result.__init__(language)
         return result

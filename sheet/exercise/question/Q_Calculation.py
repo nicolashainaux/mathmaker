@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -237,9 +237,9 @@ class Q_Calculation(Q_Structure):
                               ))
 
                 if randomly.heads_or_tails():
-                    f3 = f1.deep_copy()
-                    f1 = f2.deep_copy()
-                    f2 = f3.deep_copy()
+                    f3 = f1.clone()
+                    f1 = f2.clone()
+                    f2 = f3.clone()
 
                 if q_kind == 'fractions_quotient':
                     f2 = f2.invert()

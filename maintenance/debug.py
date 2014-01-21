@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -57,7 +57,7 @@ simplified = False
 monomial_plus = False
 throw_away_the_neutrals = False
 product_is_reducible = True
-get_factors_list_product = False
+get_factors_list_product = True
 reduce__product = False
 evaluate_in_operation = False
 

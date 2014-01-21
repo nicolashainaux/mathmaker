@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -47,7 +47,7 @@ def action():
     # Don't forget to uncomment the convenient lines above if a test
     # requires to use the locale module.
 
-    f1 = FunctionalItem(("f", Item("x"), None, None))
+    f1 = Function(("f", Item("x"), None, None))
 
     check(f1.into_str(),
          ["f(x)"])
@@ -66,7 +66,7 @@ def action():
                    Point(["B", (1, 0)]),
                    Point(["C", (0, 1)])))
 
-    f2 = FunctionalItem(("\cos", theta, math.cos, math.acos))
+    f2 = Function(("\cos", theta, math.cos, math.acos))
 
     check(f2.into_str(),
          ["\cos(\widehat{ABC})"])
@@ -98,7 +98,7 @@ def action():
     check(f2.into_str(),
          ["0.5"])
 
-    f3 = FunctionalItem(("\sin", theta, math.sin, math.asin))
+    f3 = Function(("\sin", theta, math.sin, math.asin))
 
     check(f3.into_str(),
          ["\sin(\widehat{ABC})"])

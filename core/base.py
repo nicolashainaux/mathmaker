@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -26,13 +26,13 @@ from lib.common import software
 from lib.common import cfg
 
 # -----------------------------------------------------------------------------
-# -------------------------------------------------- CLASS: Copiable ----------
+# -------------------------------------------------- CLASS: Clonable ----------
 # -----------------------------------------------------------------------------
 ##
-# @class Copiable
+# @class Clonable
 # @brief All objects that are used must be able to be copied deeply
-# Any Copiable are provided the deep_copy() method, no need to reimplement it
-class Copiable(object):
+# Any Clonable are provided the clone() method, no need to reimplement it
+class Clonable(object):
 
 
 
@@ -41,7 +41,7 @@ class Copiable(object):
     # ---------------------------------------------------- DEEP COPY ----------
     ##
     #   @brief Returns a deep copy of the object
-    def deep_copy(self):
+    def clone(self):
         result = object.__new__(type(self))
         result.__init__(self)
         return result
@@ -58,7 +58,7 @@ class Copiable(object):
 # @class Printable
 # @brief All Printable objects : Exponenteds & others (Equations...)
 # Any Printable must reimplement the into_str() method
-class Printable(Copiable):
+class Printable(Clonable):
 
 
 
@@ -83,7 +83,7 @@ class Printable(Copiable):
 # @class Drawable
 # @brief All Drawable objects (which are also Printable ones !)
 # Any Drawable must reimplement the into_str() and into_euk() method
-class Drawable(Copiable):
+class Drawable(Clonable):
 
 
 

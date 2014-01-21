@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -309,7 +309,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                         and randomly.decimal_0_1() > 0.5                      \
                         ):
                     #___
-                        self.objct.display_multiply_symbol[i] = False
+                        self.objct.info[i] = False
 
         # 2d CASE :
         # SUM OF PRODUCTS REDUCTION
@@ -378,11 +378,11 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                                               1,
                                               2)))
 
-                self.objct.element = list()
+                self.objct.reset_element()
 
                 for i in xrange(length):
                     self.objct.term.append(randomly.pop(temp_sum))
-                    self.objct.display_complete_writing.append(False)
+                    self.objct.info.append(False)
 
             else:
                 self.objct = Polynomial((RANDOMLY,
@@ -564,7 +564,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
         elif (self.kind_of_answer == 'sum' \
               or self.kind_of_answer == 'sum_not_reducible')\
              and self.expression.\
-                         right_hand_side.expand_and_reduce_next_step() == None:
+                         right_hand_side.expand_and_reduce_next_step() is None:
         #___
             result += M.write_math_style2(M.type_string(self.expression))
             result += M.write_new_line()

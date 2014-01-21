@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -295,9 +295,9 @@ class Q_RightTriangle(Q_Structure):
 
             for side in self.right_triangle.sides:
                 if side.label.raw_value == "":
-                    self.unknown_side = side.deep_copy()
+                    self.unknown_side = side.clone()
                 else:
-                    self.known_sides += [side.deep_copy()]
+                    self.known_sides += [side.clone()]
 
 
 
@@ -428,9 +428,9 @@ class Q_RightTriangle(Q_Structure):
                 result += M.insert_picture(self.right_triangle)
 
             else:
-                sides_copy = [self.right_triangle.sides[0].deep_copy(),
-                              self.right_triangle.sides[1].deep_copy(),
-                              self.right_triangle.sides[2].deep_copy()
+                sides_copy = [self.right_triangle.sides[0].clone(),
+                              self.right_triangle.sides[1].clone(),
+                              self.right_triangle.sides[2].clone()
                              ]
                 side0 = randomly.pop(sides_copy)
                 side1 = randomly.pop(sides_copy)

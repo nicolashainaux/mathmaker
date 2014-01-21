@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Mathmaker creates automatically maths exercises sheets with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -203,9 +203,9 @@ class Triangle(Drawable):
                                   )
 
             else:
-                self._vertices = (start_vertex[0].deep_copy(),
-                                  start_vertex[1].deep_copy(),
-                                  start_vertex[2].deep_copy()
+                self._vertices = (start_vertex[0].clone(),
+                                  start_vertex[1].clone(),
+                                  start_vertex[2].clone()
                                  )
 
             self._sides = (Segment((self._vertices[0],
@@ -235,18 +235,18 @@ class Triangle(Drawable):
 
         else:
             # copy of a given Triangle
-            self._vertices = [arg.vertex0.deep_copy(),
-                              arg.vertex1.deep_copy(),
-                              arg.vertex2.deep_copy()
+            self._vertices = [arg.vertex0.clone(),
+                              arg.vertex1.clone(),
+                              arg.vertex2.clone()
                              ]
             self._rotation_angle = arg.rotation_angle
-            self._sides = [arg.side0.deep_copy(),
-                           arg.side1.deep_copy(),
-                           arg.side2.deep_copy()
+            self._sides = [arg.side0.clone(),
+                           arg.side1.clone(),
+                           arg.side2.clone()
                           ]
-            self._angles = [arg.angle0.deep_copy(),
-                            arg.angle1.deep_copy(),
-                            arg.angle2.deep_copy()
+            self._angles = [arg.angle0.clone(),
+                            arg.angle1.clone(),
+                            arg.angle2.clone()
                            ]
 
         self._name = self.vertex0.name + self.vertex1.name + self.vertex2.name
@@ -758,18 +758,18 @@ class RightTriangle(Triangle):
 
         else:
             # copy of a given RightTriangle
-            self._vertices = [arg.vertex0.deep_copy(),
-                              arg.vertex1.deep_copy(),
-                              arg.vertex2.deep_copy()
+            self._vertices = [arg.vertex0.clone(),
+                              arg.vertex1.clone(),
+                              arg.vertex2.clone()
                              ]
             self._rotation_angle = arg.rotation_angle
-            self._sides = [arg.side0.deep_copy(),
-                           arg.side1.deep_copy(),
-                           arg.side2.deep_copy()
+            self._sides = [arg.side0.clone(),
+                           arg.side1.clone(),
+                           arg.side2.clone()
                           ]
-            self._angles = [arg.angle0.deep_copy(),
-                            arg.angle1.deep_copy(),
-                            arg.angle2.deep_copy()
+            self._angles = [arg.angle0.clone(),
+                            arg.angle1.clone(),
+                            arg.angle2.clone()
                            ]
             # the other fields are re-created hereafter
 

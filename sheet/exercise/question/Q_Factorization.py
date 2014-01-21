@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -644,7 +644,7 @@ def level_01(q_subkind, **options):
         # now create the expanded step and the reduced step (which will
         # be given as a question)
         temp_steps = []
-        current_step = solution.deep_copy()
+        current_step = solution.clone()
 
         while current_step != None:
             temp_steps.append(current_step)
@@ -952,7 +952,7 @@ def level_02(q_subkind, **options):
     # The special case type_4_A0 : (ax+b)² + (ax+b)×deg1'
     #                       aka    C² + C×F1
     elif q_subkind == 'type_4_A0':
-        F1 = C.deep_copy()
+        F1 = C.clone()
         F2 = deg1[0]
 
     # Let's put a "1" somewhere in the type_*_*1
@@ -1061,7 +1061,7 @@ def level_02(q_subkind, **options):
 
     F1F2_sum = None
 
-    if minus_sign == None:
+    if minus_sign is None:
         F1F2_sum = Sum([F1, F2])
 
     elif minus_sign == "F1":
@@ -1246,9 +1246,9 @@ def level_03(q_subkind, **options):
                                                             sq_second_term])
 
 
-        positive_sq_first = sq_first_term.deep_copy()
+        positive_sq_first = sq_first_term.clone()
         positive_sq_first.set_sign('+')
-        positive_sq_second = sq_second_term.deep_copy()
+        positive_sq_second = sq_second_term.clone()
         positive_sq_second.set_sign('+')
 
 
@@ -1258,16 +1258,16 @@ def level_03(q_subkind, **options):
         second_inter = None
 
         if sq_second_term.is_negative():
-            first_inter = positive_sq_first.deep_copy()
+            first_inter = positive_sq_first.clone()
             first_inter.set_exponent(2)
-            temp_second_inter = positive_sq_second.deep_copy()
+            temp_second_inter = positive_sq_second.clone()
             temp_second_inter.set_exponent(2)
             second_inter = Product([-1, temp_second_inter])
         else:
-            temp_first_inter = positive_sq_first.deep_copy()
+            temp_first_inter = positive_sq_first.clone()
             temp_first_inter.set_exponent(2)
             first_inter = Product([-1, temp_first_inter])
-            second_inter = positive_sq_second.deep_copy()
+            second_inter = positive_sq_second.clone()
             second_inter.set_exponent(2)
 
 
@@ -1325,7 +1325,7 @@ def level_03(q_subkind, **options):
 
         b_ = Monomial(('+', b, 0))
 
-        ax_2 = ax.deep_copy()
+        ax_2 = ax.clone()
         ax_2.set_exponent(2)
 
         a2x2 = Monomial(('+', a*a, 2))
@@ -1358,22 +1358,22 @@ def level_03(q_subkind, **options):
         mixed_expression = None
 
         if q_subkind == 'fake_03' or q_subkind == 'fake_03_mixed':
-            first_term = a2x2.deep_copy()
-            second_term = b2.deep_copy()
+            first_term = a2x2.clone()
+            second_term = b2.clone()
             ordered_expression = Polynomial([first_term, second_term])
             mixed_expression = Polynomial([second_term, first_term])
 
         else:
-            first_term = a2x2.deep_copy()
-            third_term = b2.deep_copy()
+            first_term = a2x2.clone()
+            third_term = b2.clone()
 
             if q_subkind == 'fake_01' or q_subkind == 'fake_01_mixed'\
                 or q_subkind == 'fake_02' or q_subkind == 'fake_02_mixed':
             #___
-                second_term = fake_twoabx.deep_copy()
+                second_term = fake_twoabx.clone()
 
             else:
-                second_term = twoabx.deep_copy()
+                second_term = twoabx.clone()
 
             if q_subkind == 'fake_02' or q_subkind == 'fake_02_mixed':
                 second_term.set_sign('-')

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Mathmaker creates automatically maths exercises sheets with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -291,7 +291,7 @@ class Segment(Drawable):
             #___
                 raise error.WrongArgument(' (Point, Point) ', str(arg))
 
-            self._points = (arg[0].deep_copy(), arg[1].deep_copy())
+            self._points = (arg[0].clone(), arg[1].clone())
 
             self._label  = None
 
@@ -299,8 +299,8 @@ class Segment(Drawable):
                 self._label = options['label']
 
         else:
-            self._points = (arg.points[0].deep_copy(),
-                            arg.points[1].deep_copy()
+            self._points = (arg.points[0].clone(),
+                            arg.points[1].clone()
                            )
             self._label = arg.label
 
@@ -333,7 +333,7 @@ class Segment(Drawable):
             raise error.WrongArgument(' a Point ', str(arg))
 
 
-        self._points[nb] = arg.deep_copy()
+        self._points[nb] = arg.clone()
 
 
 
@@ -465,8 +465,8 @@ class Ray(Drawable):
             and isinstance(arg[0], Point) \
             and isinstance(arg[1], Point):
         #___
-            self._point0 = arg[0].deep_copy()
-            self._point1 = arg[1].deep_copy()
+            self._point0 = arg[0].clone()
+            self._point1 = arg[1].clone()
             self._name = MARKUP['opening_square_bracket']
             self._name += arg[0].name + arg[1].name
             self._name += MARKUP['closing_bracket']
@@ -510,9 +510,9 @@ class Angle(Drawable):
         #___
             self._ray0 = Ray((arg[1], arg[0]))
             self._ray1 = Ray((arg[1], arg[2]))
-            self._points = [arg[0].deep_copy(),
-                            arg[1].deep_copy(),
-                            arg[2].deep_copy()]
+            self._points = [arg[0].clone(),
+                            arg[1].clone(),
+                            arg[2].clone()]
 
             # Let's determine the measure of the angle :
             aux_side0 = Segment((self._points[0], self._points[1]))

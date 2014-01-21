@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -144,11 +144,11 @@ class NamedExpression(ComposedCalculable):
             raise error.UncompatibleType(integer_or_letter,                   \
                                          "integer_or_letter")
 
-        if not (isinstance(objct, Exponented) or objct == None):
+        if not (isinstance(objct, Exponented) or objct is None):
             raise error.UncompatibleType(objct, "Exponented")
 
         self.name = integer_or_letter
-        self.right_hand_side = objct.deep_copy()
+        self.right_hand_side = objct.clone()
 
 
 
@@ -282,7 +282,7 @@ class Equality(ComposedCalculable):
         self.equal_signs = []
 
         for i in xrange(len(objcts)):
-            self.elements.append(objcts[i].deep_copy())
+            self.elements.append(objcts[i].clone())
 
             if 'equal_signs' in options:
 
@@ -353,7 +353,7 @@ class Equality(ComposedCalculable):
         if not isinstance(data, Exponented):
             raise error.UncompatibleType(data, "should be a Exponented")
 
-        self.elements[i] = data.deep_copy()
+        self.elements[i] = data.clone()
 
 
 
@@ -961,8 +961,8 @@ class Equation(ComposedCalculable):
         elif isinstance(arg, Equation):
             self.name = arg.name
             self.number = arg.number
-            self.left_hand_side = arg.left_hand_side.deep_copy()
-            self.right_hand_side = arg.right_hand_side.deep_copy()
+            self.left_hand_side = arg.left_hand_side.clone()
+            self.right_hand_side = arg.right_hand_side.clone()
             self.variable_letter = arg.variable_letter
 
         else:
@@ -1110,7 +1110,7 @@ class Equation(ComposedCalculable):
         if ('skip_fraction_simplification' in options \
             and not 'decimal_result' in options)\
             and len(new_eq.left_hand_side)  == 1 \
-            and next_left_X == None \
+            and next_left_X is None \
             and not new_eq.left_hand_side.term[0].is_numeric() \
             and len(new_eq.right_hand_side) == 1 \
             and isinstance(new_eq.right_hand_side.term[0], Fraction) \
@@ -1123,7 +1123,7 @@ class Equation(ComposedCalculable):
         elif ('skip_fraction_simplification' in options \
             and 'decimal_result' in options)\
             and len(new_eq.left_hand_side)  == 1 \
-            and next_left_X == None \
+            and next_left_X is None \
             and not new_eq.left_hand_side.term[0].is_numeric() \
             and len(new_eq.right_hand_side) == 1 \
             and isinstance(new_eq.right_hand_side.term[0], Fraction) \
@@ -1136,7 +1136,7 @@ class Equation(ComposedCalculable):
 
         elif 'decimal_result' in options\
             and len(new_eq.left_hand_side)  == 1 \
-            and next_left_X == None \
+            and next_left_X is None \
             and not new_eq.left_hand_side.term[0].is_numeric() \
             and len(new_eq.right_hand_side) == 1 \
             and (isinstance(new_eq.right_hand_side.term[0], Quotient) \
@@ -1595,7 +1595,7 @@ class Equation(ComposedCalculable):
 
                 next_eq_aux = eq_aux.solve_next_step(**options)
 
-                if next_eq_aux == None and 'unit' in options:
+                if next_eq_aux is None and 'unit' in options:
 
                     result += MARKUP['opening_math_style1'] \
                            + uline1 \
@@ -1610,7 +1610,7 @@ class Equation(ComposedCalculable):
                            + eq_aux.into_str() \
                            + MARKUP['closing_math_style1']
 
-                if next_eq_aux == None or type(next_eq_aux) == str \
+                if next_eq_aux is None or type(next_eq_aux) == str \
                     or isinstance(next_eq_aux, tuple):
                 #___
                     eq_aux = next_eq_aux
@@ -1621,7 +1621,7 @@ class Equation(ComposedCalculable):
                     (eq_aux1, eq_aux2) = eq_aux
                     equation_did_split_in_two = True
 
-                elif isinstance(eq_aux, str) or eq_aux == None:
+                elif isinstance(eq_aux, str) or eq_aux is None:
                     go_on = False
 
             else:
@@ -1636,17 +1636,17 @@ class Equation(ComposedCalculable):
 
 
                 if isinstance(eq_aux1, Equation):
-                    if next_eq_aux1 == None:
+                    if next_eq_aux1 is None:
                         result += uline1
 
                     result += eq_aux1.into_str()
 
-                    if next_eq_aux1 == None and 'unit' in options:
+                    if next_eq_aux1 is None and 'unit' in options:
                         result += MARKUP['open_text_in_maths'] \
                                + " " + str(options['unit']) \
                                + MARKUP['close_text_in_maths']
 
-                    if next_eq_aux1 == None:
+                    if next_eq_aux1 is None:
                         result += uline2
 
 
@@ -1658,17 +1658,17 @@ class Equation(ComposedCalculable):
 
                 if isinstance(eq_aux2, Equation):
 
-                    if next_eq_aux2 == None:
+                    if next_eq_aux2 is None:
                         result += uline1
 
                     result += eq_aux2.into_str()
 
-                    if next_eq_aux2 == None and 'unit' in options:
+                    if next_eq_aux2 is None and 'unit' in options:
                         result += MARKUP['open_text_in_maths'] \
                                + " " + str(options['unit']) \
                                + MARKUP['close_text_in_maths']
 
-                    if next_eq_aux2 == None:
+                    if next_eq_aux2 is None:
                         result += uline2
 
                 elif eq_aux2 != None:
@@ -1692,15 +1692,15 @@ class Equation(ComposedCalculable):
 
 
         if (not equation_did_split_in_two):
-            if eq_aux == None:
+            if eq_aux is None:
                 pass
             else:
                 result += eq_aux + MARKUP['newline']
         else:
-            if eq_aux1 == None and eq_aux2 == None:
+            if eq_aux1 is None and eq_aux2 is None:
                 pass
             else:
-                if eq_aux1 == None:
+                if eq_aux1 is None:
                     result += eq_aux2 + MARKUP['newline']
                 else:
                     result += eq_aux1 + MARKUP['newline']
@@ -1745,11 +1745,11 @@ class CrossProductEquation(Equation):
         if isinstance(arg, CrossProductEquation):
             self.name = arg.name
             self.number = arg.number
-            self.left_hand_side = arg.left_hand_side.deep_copy()
-            self.right_hand_side = arg.right_hand_side.deep_copy()
+            self.left_hand_side = arg.left_hand_side.clone()
+            self.right_hand_side = arg.right_hand_side.clone()
             self.variable_letter = arg.variable_letter
             self.variable_position = arg.variable_position
-            self.variable_obj = arg.variable_obj.deep_copy()
+            self.variable_obj = arg.variable_obj.clone()
 
         else:
             self.name = default.EQUATION_NAME
@@ -1764,8 +1764,8 @@ class CrossProductEquation(Equation):
                                               "a tuple of two Quotients")
                                              )
                 else:
-                    self.left_hand_side = arg[0].deep_copy()
-                    self.right_hand_side = arg[1].deep_copy()
+                    self.left_hand_side = arg[0].clone()
+                    self.right_hand_side = arg[1].clone()
 
             elif len(arg) == 4:
                 if not(isinstance(arg[0], Calculable) \
@@ -1800,7 +1800,7 @@ class CrossProductEquation(Equation):
                 if elt.is_literal():
                     literals += 1
                     variable_letter += elt.into_str()
-                    variable_obj = elt.deep_copy()
+                    variable_obj = elt.clone()
                     stop = 1
                 if not stop:
                     literal_position += 1
@@ -2126,7 +2126,7 @@ class Table_UP(Table):
         col_nb = 0
 
         for i in xrange(len(first_line)):
-            if first_line[i] == None and (info[i] == None \
+            if first_line[i] is None and (info[i] is None \
                                           or info[i] == (None, None)):
             #___
                 raise error.WrongArgument("first_line[i] and info[i] are" \
@@ -2135,11 +2135,11 @@ class Table_UP(Table):
                                           + " in the same time")
             elt = info[i]
 
-            if not (elt == None or type(elt) == tuple):
+            if not (elt is None or type(elt) == tuple):
                 raise error.WrongArgument(str(type(elt)),
                                           " either None or a tuple ")
 
-            if elt == None or elt == (None, None):
+            if elt is None or elt == (None, None):
                 complete_cols += [col_nb]
 
             if type(elt) == tuple:
@@ -2151,7 +2151,7 @@ class Table_UP(Table):
                 if not ((isinstance(elt[0], Calculable) \
                          and elt[0].is_literal()
                         ) \
-                        or elt[0] == None):
+                        or elt[0] is None):
                 #___
                     raise error.WrongArgument(str(elt[0]),
                                               "None|literalCalculable")
@@ -2159,7 +2159,7 @@ class Table_UP(Table):
                 if not ((isinstance(elt[1], Calculable) \
                          and elt[1].is_literal()
                         ) \
-                        or elt[1] == None):
+                        or elt[1] is None):
                 #___
                     raise error.WrongArgument(str(type(elt[1])),
                                               "None|literalCalculable")
@@ -2198,7 +2198,7 @@ class Table_UP(Table):
         second_line = []
 
         for i in xrange(len(first_line)):
-            if first_line[i] == None:
+            if first_line[i] is None:
                 second_line += [None]
             else:
                 second_line += [Item(Product([coeff,
@@ -2207,35 +2207,35 @@ class Table_UP(Table):
         data = [[], []]
 
         for i in xrange(len(first_line)):
-            if info[i] == None:
+            if info[i] is None:
                 data[0] += [first_line[i]]
                 data[1] += [second_line[i]]
 
-            elif first_line[i] == None:
+            elif first_line[i] is None:
                 data[0] += [info[i][0]]
                 data[1] += [info[i][1]]
 
             else:
-                if info[i][0] == None:
+                if info[i][0] is None:
                     data[0] += [first_line[i]]
-                    if info[i][1] == None:
+                    if info[i][1] is None:
                         data[1] += [second_line[i]]
                     else:
                         data[1] += [info[i][1]]
                 else:
                     data[0] += [info[i][0]]
-                    if info[i][1] == None:
+                    if info[i][1] is None:
                         data[1] += [second_line[i]]
                     else:
                         data[1] += [info[i][1]]
 
         #for i in xrange(len(data[0])):
-        #    if data[0][i] == None:
+        #    if data[0][i] is None:
         #        d0 = "None"
         #    else:
         #        d0 =  data[0][i].dbg_str()
 
-        #    if data[1][i] == None:
+        #    if data[1][i] is None:
         #        d1 = "None"
         #    else:
         #        d1 =  data[1][i].dbg_str()

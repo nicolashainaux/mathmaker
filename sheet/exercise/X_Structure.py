@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -53,7 +53,7 @@ class X_Structure(object):
         except AttributeError:
             raise error.NotInstanciableObject(self)
 
-        self.machine = embedded_machine.deep_copy(embedded_machine.language_code)
+        self.machine = embedded_machine.clone(embedded_machine.language_code)
         self.machine.set_redirect_output_to_str(True)
 
         self.questions_list = list()
@@ -143,7 +143,7 @@ class X_Structure(object):
         q_n = 0
 
         for k in xrange(len(layout)/2):
-            if layout[2*k] == None:
+            if layout[2*k] is None:
                 how_many = layout[2*k+1]
                 if layout[2*k+1] == 'all_left' or layout[2*k+1] == 'all':
                     how_many = len(self.questions_list) - q_n

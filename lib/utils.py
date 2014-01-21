@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -215,7 +215,7 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
     literals_list = purge_from_duplicates(literals_list)
     #literals_list_bis = []
     #for elt in literals_list:
-    #    literals_list_bis += [elt.deep_copy()]
+    #    literals_list_bis += [elt.clone()]
 
     #debug_str = ""
     #for l in literals_list:
@@ -224,7 +224,7 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
 
     subst_dict_copy = {}
     for key in subst_dict:
-        subst_dict_copy[key] = subst_dict[key].deep_copy()
+        subst_dict_copy[key] = subst_dict[key].clone()
 
     #for k in subst_dict_copy:
     #    print "debug : subst_dict_copy[" + k.dbg_str() + "] = " + subst_dict_copy[k].dbg_str() + "\n"

@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -260,21 +260,21 @@ def mix(objects_list):
         if i != j and order_changed == False:
             order_changed = True
 
-        next_to_add = objects_list[j].deep_copy()
+        next_to_add = objects_list[j].clone()
         trash = objects_list.pop(j)
 
         result.append(next_to_add)
 
     if order_changed:
-        next_to_add = pop(objects_list).deep_copy()
+        next_to_add = pop(objects_list).clone()
         result.append(next_to_add)
-        next_to_add = pop(objects_list).deep_copy()
+        next_to_add = pop(objects_list).clone()
         result.append(next_to_add)
 
     else:
-        next_to_add = objects_list[1].deep_copy()
+        next_to_add = objects_list[1].clone()
         result.append(next_to_add)
-        next_to_add = objects_list[0].deep_copy()
+        next_to_add = objects_list[0].clone()
         result.append(next_to_add)
 
 

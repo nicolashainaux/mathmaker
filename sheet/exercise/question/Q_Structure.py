@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -47,7 +47,7 @@ class Q_Structure(object):
         except AttributeError:
             raise error.NotInstanciableObject(self)
 
-        self.machine = embedded_machine.deep_copy(embedded_machine.language_code)
+        self.machine = embedded_machine.clone(embedded_machine.language_code)
         self.machine.set_redirect_output_to_str(True)
 
         # OPTIONS -------------------------------------------------------------

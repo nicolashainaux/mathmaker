@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Mathmaker creates automatically maths exercises sheets with their answers
-# Copyright 2006-2013 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -362,7 +362,7 @@ class Calculable(Evaluable):
 # -----------------------------------------------------------------------------
 ##
 # @class Signed
-# @brief Signed objects: Operations (Sums&Products), Items, Quotients...
+# @brief Signed objects: CommutativeOperations (Sums&Products), Items, Quotients...
 # Any Signed must have a sign field
 class Signed(Calculable):
 
@@ -1115,7 +1115,7 @@ class Value(Signed):
 # -----------------------------------------------------------------------------
 ##
 # @class Exponented
-# @brief Exponented objects: Operations (Sums&Products), Items, Quotients...
+# @brief Exponented objects: CommutativeOperations (Sums&Products), Items, Quotients...
 # Any Exponented must have a exponent field and should reimplement the
 # methods that are not already defined hereafter
 class Exponented(Signed):
@@ -1138,12 +1138,12 @@ class Exponented(Signed):
 
     # ------------------------------------------------- GET EXPONENT ----------
     ##
-    #   @brief Gets the exponent of the FunctionalItem
+    #   @brief Gets the exponent of the Function
     #   @brief this should be already done by Item.get_exponent()...
     def get_exponent(self):
         return self._exponent
     # ---------------------------------------- ASSOCIATED PROPERTIES ----------
-    exponent = property(get_exponent, doc = "Exponent of the FunctionalItem")
+    exponent = property(get_exponent, doc = "Exponent of the Function")
 
 
 
@@ -1156,7 +1156,7 @@ class Exponented(Signed):
     #   @warning Relays an exception if arg is not of the types described
     def set_exponent(self, arg):
         if isinstance(arg, Calculable):
-            self._exponent = arg.deep_copy()
+            self._exponent = arg.clone()
         else:
             self._exponent = Value(arg)
 
