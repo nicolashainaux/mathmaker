@@ -31,7 +31,7 @@ AVAILABLE_Q_KIND_VALUES = {'10m_2-9': ['default'],
                            '5m_3rm_2d_2-9': ['default']
                           }
 
-# -------------------------------------------- AUXILIARY FUNCTION ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Produces a randomly list of ten products and results
 #   @param embedded_machine The machine to be used
@@ -66,16 +66,16 @@ def ten_products(pairs):
 
 
 
-# -----------------------------------------------------------------------------
-# --------------------------------------- CLASS: Q_MentalCalculation ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Q_MentalCalculation
 # @brief Creates one whole tabular full of questions + answers
 class Q_MentalCalculation(Q_Structure):
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
     #   @param embedded_machine The machine to be used
@@ -203,7 +203,7 @@ class Q_MentalCalculation(Q_Structure):
 
 
 
-    # --------------------------------- TEXT OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
@@ -236,7 +236,7 @@ class Q_MentalCalculation(Q_Structure):
 
 
 
-    # ------------------------------- ANSWER OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):

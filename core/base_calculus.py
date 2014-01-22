@@ -19,9 +19,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# -----------------------------------------------------------------------------
-# ---------------------------------- PACKAGE:  core.base_calculus -------------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @package core.base_calculus
 # @brief Mathematical elementary arithmetic and algebraic objects.
@@ -71,9 +71,9 @@ expression_begins = True
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------------------ CLASS: Item ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 #   @class Item
 #   @brief It's the smallest displayable element (sign, value, exponent)
@@ -84,7 +84,7 @@ class Item(Exponented):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
@@ -198,7 +198,7 @@ class Item(Exponented):
                                          + "(sign, Number|String)")
 
 
-    # ---------------------------------------------------- GET VALUE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the raw value of the Item
     #   @return value_inside.raw_value
@@ -209,7 +209,7 @@ class Item(Exponented):
 
 
 
-    # ---------------------------------------------------- GET VALUE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets force_display_sign_once field
     #   @return Item's force_display_sign_once field
@@ -220,7 +220,7 @@ class Item(Exponented):
 
 
 
-    # ---------------------------------------------------- GET VALUE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the raw value of the Item
     #   @return value_inside.raw_value
@@ -231,7 +231,7 @@ class Item(Exponented):
 
 
 
-    # ---------------------------------------------------- GET VALUE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the Value of the Item
     #   @return value_inside
@@ -242,7 +242,7 @@ class Item(Exponented):
 
 
 
-    # -------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the unit of the Item
     def get_unit(self):
@@ -252,7 +252,7 @@ class Item(Exponented):
 
 
 
-    # --------------------------------------- GET MINUS SIGNS NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the number of '-' signs of the Item
     #   @return The number of '-' signs of the Item (either 0, 1 or 2)
@@ -271,7 +271,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------------ GET ITER LIST ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the list of elements to iter over
     def get_iteration_list(self):
@@ -282,7 +282,7 @@ class Item(Exponented):
 
 
 
-    # --------------------------------------------------- GET LETTER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the letter of the Item, in case it's a literal
     def get_first_letter(self):
@@ -303,19 +303,22 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
     is_out_striked = property(get_is_out_striked,
                               doc = "Item's is_out_striked field")
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+
     force_display_sign_once = property(get_force_display_sign_once,
                               doc = "Item's force_display_sign_once field")
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+
     raw_value = property(get_raw_value, doc = "Item's raw value")
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+
     value_inside = property(get_value_inside, doc = "Item's Value")
+
     unit = property(get_unit, doc = "Unit of the Item")
 
-    # ------------------------------------------------------ SET SIGN ----------
+
+
+
+    # --------------------------------------------------------------------------
     ##
     #   @brief Set the unit of the Item
     #   @param  arg String
@@ -328,7 +331,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------- SET IS OUT STRIKED ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets a value to the "is_out_striked" field
     # If is_out_striked is set to True, the Item will be displayed out striked
@@ -342,7 +345,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------- SET IS OUT STRIKED ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets a True|False value to the "force_display_sign_once" field
     def set_force_display_sign_once(self, arg):
@@ -355,7 +358,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------------------ SET UNIT ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the Value inside
     def set_value_inside(self, arg):
@@ -370,7 +373,7 @@ class Item(Exponented):
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
@@ -487,7 +490,7 @@ class Item(Exponented):
 
 
 
-    # ----------------------------------------------------- EVALUATE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the value of a numerically evaluable Item
     #   @warning Relays an exception if the exponent is not Exponented|Value
@@ -507,7 +510,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------- CALCULATE ONE STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns None|an Item
     #   @todo Manage the case when the exponent is a calculable that should
@@ -597,7 +600,7 @@ class Item(Exponented):
 
 
 
-    # -------------------------------- EXPAND AND REDUCE : NEXT STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns None (an Item can't get expanded nor reduced !)
     #   @return Exponented
@@ -611,7 +614,7 @@ class Item(Exponented):
 
 
 
-    # -------------------------------------------------- RAW DISPLAY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Raw display of the Item (debugging method)
     #   @param options No option available so far
@@ -633,7 +636,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------- OBJECTS COMPARISON ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Compares two Items
     #   @return 0 (i.e. they're equal) if sign, value & exponent are equal
@@ -653,7 +656,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------------ ITEM'S LENGTH ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Item's length
     #   @return 1
@@ -663,7 +666,7 @@ class Item(Exponented):
 
 
 
-    # ------- CHECK IF A × IS REQUIRED BETWEEN SELF & ANOTHER FACTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the usual writing rules require a × between two factors
     #   @param objct The other one
@@ -735,7 +738,7 @@ class Item(Exponented):
 
 
 
-    # ----------------------- CHECK IF A FACTOR REQUIRES PARENTHESIS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the argument requires brackets in a product
     #   For instance, a Sum with several terms or a negative Item
@@ -762,7 +765,7 @@ class Item(Exponented):
 
 
 
-    # --------------------------------- REQUIRES INNER PARENTHESIS ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object requires inner brackets
     #   The reason for requiring them is having a negative *value* and
@@ -828,7 +831,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------- CONTAINS EXACTLY ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Always False for an Item
     #   @param objct The object to search for
@@ -841,7 +844,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------- CONTAINS A ROUNDED NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief To check if this contains a rounded number...
     #   @return True or False depending on the Value inside
@@ -853,7 +856,7 @@ class Item(Exponented):
 
 
 
-    # --------------------------------------------------------- ROUND ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the (numeric) Item once rounded to the given precision
     def round(self, precision):
@@ -867,7 +870,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------------- DIGITS NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of digits of a numerical Item
     def digits_number(self):
@@ -881,7 +884,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------ NEEDS TO GET ROUNDED ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns True/False depending on the need of the value to get
     #          rounded (for instance 2.68 doesn't need to get rounded if
@@ -900,7 +903,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------- TURN INTO FRACTION ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Turns the Item into the fraction item itself over item 1
     def turn_into_fraction(self):
@@ -911,7 +914,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------------- IS NUMERIC ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if it's a numeric Item
     def is_numeric(self):
@@ -924,7 +927,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------------------------ IS LITERAL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if it's a literal Item
     def is_literal(self):
@@ -937,7 +940,7 @@ class Item(Exponented):
 
 
 
-    # ---------------------------------------------------- IS NULL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if it's the null Item
     def is_null(self):
@@ -953,7 +956,7 @@ class Item(Exponented):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if it's positive w/ (exponent 0 or numeric w/ value 1)
     def is_displ_as_a_single_1(self):
@@ -969,7 +972,7 @@ class Item(Exponented):
 
 
 
-    # ------------------------------- IS EQUIVALENT TO A SINGLE -1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if it's negative w/ (exponent 0 or numeric w/ value 1)
     def is_displ_as_a_single_minus_1(self):
@@ -991,7 +994,7 @@ class Item(Exponented):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 0 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if self.is_null()
     def is_displ_as_a_single_0(self):
@@ -1002,7 +1005,7 @@ class Item(Exponented):
 
 
 
-    # --------------------- IS EQUIVALENT TO A SINGLE NUMERIC ITEM ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Item is numeric
     def is_displ_as_a_single_numeric_Item(self):
@@ -1012,7 +1015,7 @@ class Item(Exponented):
 
 
 
-    # ---------------------------- IS EQUIVALENT TO A SINGLE INT ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single int
     def is_displ_as_a_single_int(self):
@@ -1022,7 +1025,7 @@ class Item(Exponented):
 
 
 
-    # -------------------------- IS EQUIVALENT TO A SINGLE NEUTRAL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be considered as a neutral element
     def is_displ_as_a_single_neutral(self, elt):
@@ -1041,7 +1044,7 @@ class Item(Exponented):
 
 
 
-    # -------------------------------------------- IS EXPANDABLE ? ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief False
     #   @return False
@@ -1052,9 +1055,9 @@ class Item(Exponented):
 
 
 
-# -----------------------------------------------------------------------------
-# -------------------------------------------- CLASS: Function ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 #   @class Function
 #   @brief It's all the f(x), cos(x) etc. with only one variable at the moment
@@ -1064,7 +1067,7 @@ class Function(Item):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
@@ -1133,7 +1136,7 @@ class Function(Item):
 
 
 
-    # ----------------------------------------------------- GET NAME ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the name of the Function (e.g. "f" or "cos"...)
     def get_name(self):
@@ -1144,7 +1147,7 @@ class Function(Item):
 
 
 
-    # ------------------------------------------------- GET VARIABLE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the variable as a String
     def get_variable(self):
@@ -1154,7 +1157,7 @@ class Function(Item):
 
 
 
-    # -------------------------------------------- GET NUMERIC VALUE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the numeric Value to replace the variable with
     def get_numeric_value(self):
@@ -1163,7 +1166,7 @@ class Function(Item):
 
 
 
-    # ------------------------------------------ GET DISPLAYED VALUE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns either the variable or the numeric value to display
     def get_displayed_value(self):
@@ -1173,7 +1176,7 @@ class Function(Item):
 
 
 
-    # -------------------------------------- GET INTERNAL EXPRESSION ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the expression used to evaluate the Function
     def get_internal_expression(self):
@@ -1183,21 +1186,20 @@ class Function(Item):
 
 
 
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
     numeric_value = property(get_numeric_value,
                              doc = "Value to use to replace the variable"\
                                    " (e.g. '9' or '60\textdegree'...)")
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+
     name = property(get_name,
                     doc = "Name of the Function (e.g. 'f' or 'cos'...)")
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+
     variable = property(get_variable,
                         doc = "Variable of the Function"\
                               " (e.g. 'x' or '\widehat{ABC}'...)")
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+
     displayed_value = property(get_displayed_value,
                                doc = "Value to display (variable or numeric)")
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+
     internal_expression = property(get_internal_expression,
                                    doc = "Used to evaluate the Function")
 
@@ -1205,7 +1207,7 @@ class Function(Item):
 
 
 
-    # -------------------------------------------- SET NUMERIC VALUE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the numeric Value to replace the variable with
     def set_numeric_value(self, arg):
@@ -1221,7 +1223,7 @@ class Function(Item):
 
 
 
-    # ------------------------------- SWAP FROM NUMERIC TO LITERAL ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the displayed value to the literal one
     #   @return Nothing
@@ -1232,7 +1234,7 @@ class Function(Item):
 
 
 
-    # ------------------------------- SWAP FROM LITERAL TO NUMERIC ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the displayed value to the numeric one
     #   @return Nothing
@@ -1243,7 +1245,7 @@ class Function(Item):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Always False
     def is_displ_as_a_single_1(self):
@@ -1253,7 +1255,7 @@ class Function(Item):
 
 
 
-    # ---------------------------- IS EQUIVALENT TO A SINGLE INT ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single int
     def is_displ_as_a_single_int(self):
@@ -1262,7 +1264,7 @@ class Function(Item):
 
 
 
-    # ------------------------------- IS EQUIVALENT TO A SINGLE -1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Always False
     def is_displ_as_a_single_minus_1(self):
@@ -1272,7 +1274,7 @@ class Function(Item):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 0 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Always False
     def is_displ_as_a_single_0(self):
@@ -1283,7 +1285,7 @@ class Function(Item):
 
 
 
-    # --------------------- IS EQUIVALENT TO A SINGLE NUMERIC ITEM ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Always False
     def is_displ_as_a_single_numeric_Item(self):
@@ -1293,7 +1295,7 @@ class Function(Item):
 
 
 
-    # -------------------------------------------- IS EXPANDABLE ? ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief False
     #   @return False
@@ -1305,9 +1307,9 @@ class Function(Item):
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------------ CLASS: SquareRoot ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 #   @class SquareRoot
 #   @brief It's a Exponented under a square root
@@ -1318,7 +1320,7 @@ class SquareRoot(Function):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
@@ -1366,7 +1368,7 @@ class SquareRoot(Function):
 
 
 
-    # ------------------------------------------------ GET ITER LIST ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the list of elements to iter over
     def get_iteration_list(self):
@@ -1377,7 +1379,7 @@ class SquareRoot(Function):
 
 
 
-    # --------------------------------------- GET MINUS SIGNS NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the number of '-' signs of the SquareRoot
     #   @return The number of '-' signs of the SquareRoot (either 0 or 1)
@@ -1391,13 +1393,17 @@ class SquareRoot(Function):
 
 
 
-    # ---------------------------------------------------- GET VALUE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets force_display_sign_once field
     #   @return Item's force_display_sign_once field
     def get_force_display_sign_once(self):
         return self._force_display_sign_once
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+
+
+
+
+
     force_display_sign_once = property(get_force_display_sign_once,
                               doc = "Item's force_display_sign_once field")
 
@@ -1405,7 +1411,7 @@ class SquareRoot(Function):
 
 
 
-    # ------------------------------------------- SET IS OUT STRIKED ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets a True|False value to the "force_display_sign_once" field
     def set_force_display_sign_once(self, arg):
@@ -1418,7 +1424,7 @@ class SquareRoot(Function):
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
@@ -1474,7 +1480,7 @@ class SquareRoot(Function):
 
 
 
-    # ------------------------------------------- CALCULATE ONE STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns None|an SquareRoot
     #   @todo Manage the case when the exponent is a calculable that should
@@ -1528,7 +1534,7 @@ class SquareRoot(Function):
 
 
 
-    # -------------------------------- EXPAND AND REDUCE : NEXT STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns SquareRoot(self.object.expand_and_reduce_next_step())
     def expand_and_reduce_next_step(self, **options):
@@ -1544,7 +1550,7 @@ class SquareRoot(Function):
 
 
 
-    # -------------------------------------------------- RAW DISPLAY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Raw display of the SquareRoot (debugging method)
     #   @param options No option available so far
@@ -1559,7 +1565,7 @@ class SquareRoot(Function):
 
 
 
-    # ------------------------------------------- OBJECTS COMPARISON ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Compares two SquareRoots
     #   @return 0 (i.e. they're equal) if sign, value & exponent are equal
@@ -1572,7 +1578,7 @@ class SquareRoot(Function):
 
 
 
-    # ------------------------------------------- SQUAREROOT'S LENGTH ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the SquareRoot's length
     #   @return 1
@@ -1582,7 +1588,7 @@ class SquareRoot(Function):
 
 
 
-    # ------------------------------------------- TURN INTO FRACTION ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Turns the SquareRoot into the fraction item itself over item 1
     def turn_into_fraction(self):
@@ -1593,7 +1599,7 @@ class SquareRoot(Function):
 
 
 
-    # ------- CHECK IF A × IS REQUIRED BETWEEN SELF & ANOTHER FACTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the usual writing rules require a × between two factors
     #   @param objct The other one
@@ -1615,7 +1621,7 @@ class SquareRoot(Function):
 
 
 
-    # ----------------------- CHECK IF A FACTOR REQUIRES PARENTHESIS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the argument requires brackets in a product
     #   For instance, a Sum with several terms or a negative Item
@@ -1639,7 +1645,7 @@ class SquareRoot(Function):
 
 
 
-    # --------------------------------- REQUIRES INNER PARENTHESIS ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Always false for SquareRoots !
     def requires_inner_brackets(self):
@@ -1649,7 +1655,7 @@ class SquareRoot(Function):
 
 
 
-    # ------------------------------------------- CONTAINS EXACTLY ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Always False for a SquareRoot ?
     #   @param objct The object to search for
@@ -1662,7 +1668,7 @@ class SquareRoot(Function):
 
 
 
-    # ------------------------------------- CONTAINS A ROUNDED NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief To check if this contains a rounded number...
     #   @return True or False depending on the Value inside
@@ -1674,7 +1680,7 @@ class SquareRoot(Function):
 
 
 
-    # ------------------------------------------------- IS NUMERIC ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if it's a numeric SquareRoot
     def is_numeric(self):
@@ -1684,7 +1690,7 @@ class SquareRoot(Function):
 
 
 
-    # ------------------------------------------------ IS LITERAL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if it's a literal SquareRoot
     def is_literal(self):
@@ -1694,7 +1700,7 @@ class SquareRoot(Function):
 
 
 
-    # ---------------------------------------------------- IS NULL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if it's the null SquareRoot
     def is_null(self):
@@ -1705,7 +1711,7 @@ class SquareRoot(Function):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if it's positive w/ radicand itself eq. to a single 1
     def is_displ_as_a_single_1(self):
@@ -1718,7 +1724,7 @@ class SquareRoot(Function):
 
 
 
-    # ------------------------------- IS EQUIVALENT TO A SINGLE -1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if it's negative w/ radicand itself eq. to a single 1
     def is_displ_as_a_single_minus_1(self):
@@ -1731,7 +1737,7 @@ class SquareRoot(Function):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 0 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if self.is_null()
     def is_displ_as_a_single_0(self):
@@ -1742,7 +1748,7 @@ class SquareRoot(Function):
 
 
 
-    # --------------------- IS EQUIVALENT TO A SINGLE NUMERIC ITEM ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Should never be True (if it is, then self is not a SquareRoot...)
     def is_displ_as_a_single_numeric_Item(self):
@@ -1752,7 +1758,7 @@ class SquareRoot(Function):
 
 
 
-    # ---------------------------- IS EQUIVALENT TO A SINGLE INT ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single int
     def is_displ_as_a_single_int(self):
@@ -1761,7 +1767,7 @@ class SquareRoot(Function):
 
 
 
-    # -------------------------- IS EQUIVALENT TO A SINGLE NEUTRAL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be considered as a neutral element
     def is_displ_as_a_single_neutral(self, elt):
@@ -1780,7 +1786,7 @@ class SquareRoot(Function):
 
 
 
-    # -------------------------------------------- IS EXPANDABLE ? ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Depends on the radicand
     #   @return True/False
@@ -1791,9 +1797,9 @@ class SquareRoot(Function):
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------------- CLASS: Operation ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Operation
 # @brief Abstract mother class of Quotient and of CommutativeOperation
@@ -1803,7 +1809,7 @@ class Operation(Exponented):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Operation objects are not really usable
@@ -1830,7 +1836,7 @@ class Operation(Exponented):
 
 
 
-    # ------------------------------------------------ GET ITER LIST ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the list of elements
     def get_element(self):
@@ -1841,7 +1847,7 @@ class Operation(Exponented):
 
 
 
-    # ------------------------------------------------ GET ITER LIST ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the list of elements to iter over
     def get_neutral(self):
@@ -1852,7 +1858,7 @@ class Operation(Exponented):
 
 
 
-    # ------------------------------------------------ GET ITER LIST ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the symbol field of the Operation
     def get_symbol(self):
@@ -1863,7 +1869,7 @@ class Operation(Exponented):
 
 
 
-    # ------------------------------------------------ GET ITER LIST ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the list of elements to iter over
     def get_iteration_list(self):
@@ -1875,8 +1881,10 @@ class Operation(Exponented):
 
     element = property(get_element,
                        doc = "element field of Operation")
+
     neutral = property(get_neutral,
                        doc = "neutral field of Operation")
+
     symbol = property(get_symbol,
                       doc = "symbol field of Operation")
 
@@ -1884,7 +1892,7 @@ class Operation(Exponented):
 
 
 
-    # ------------------------------------------- SET THE N-TH FACTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief
     #   @param n : number of the element to set
@@ -1898,7 +1906,7 @@ class Operation(Exponented):
 
 
 
-    # ------------------------------------------------ GET ITER LIST ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Resets the element field
     def set_symbol(self, arg):
@@ -1912,7 +1920,7 @@ class Operation(Exponented):
 
 
 
-    # ------------------------------------------------ GET ITER LIST ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Resets the element field
     def reset_element(self):
@@ -1923,7 +1931,7 @@ class Operation(Exponented):
 
 
 
-    # --------------------------------------------------- INDEXATION ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief It is possible to index an CommutativeOperation
     def __getitem__(self, i):
@@ -1937,7 +1945,7 @@ class Operation(Exponented):
 
 
 
-    # ----------------------------------------------------- EVALUATE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Defines the performed CommutativeOperation
     def operator(self, arg1, arg2):
@@ -1947,7 +1955,7 @@ class Operation(Exponented):
 
 
 
-    # -------------------------------------------- IS EXPANDABLE ? ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Operation contains any Expandable
     #   @return True|False
@@ -1962,7 +1970,7 @@ class Operation(Exponented):
 
 
 
-    # ------------------------------------------------- IS NUMERIC ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Operation contains only numeric elements
     def is_numeric(self):
@@ -1976,7 +1984,7 @@ class Operation(Exponented):
 
 
 
-    # ------------------------------------------------ IS LITERAL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Operation contains only literal terms
     def is_literal(self):
@@ -1989,9 +1997,9 @@ class Operation(Exponented):
 
 
 
-# -----------------------------------------------------------------------------
-# -------------------------------------------------- CLASS: Quotient ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Quotient
 # @brief Sign, Exponented numerator, Exponented denominator, exponent
@@ -2002,7 +2010,7 @@ class Quotient (Operation):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
@@ -2076,7 +2084,7 @@ class Quotient (Operation):
 
 
 
-    # ------------------------------------------------------ GET SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the sign of the object
     def get_sign(self):
@@ -2086,7 +2094,7 @@ class Quotient (Operation):
 
 
 
-    # ------------------------------------------------------ GET SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the numerator of the object
     def get_numerator(self):
@@ -2096,7 +2104,7 @@ class Quotient (Operation):
 
 
 
-    # ------------------------------------------------------ GET SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the denominator of the object
     def get_denominator(self):
@@ -2106,7 +2114,7 @@ class Quotient (Operation):
 
 
 
-    # ------------------------------------------------ GET ITER LIST ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the list of elements to iter over
     def get_iteration_list(self):
@@ -2117,7 +2125,7 @@ class Quotient (Operation):
 
 
 
-    # --------------------------------------- GET MINUS SIGNS NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the number of '-' signs of the Quotient
     #   @return The number of '-' signs of the Quotient
@@ -2134,12 +2142,13 @@ class Quotient (Operation):
 
     numerator = property(get_numerator,
                          doc = "numerator field of Quotient")
+
     denominator = property(get_denominator,
                            doc = "denominator field of Quotient")
 
 
 
-    # ------------------------------------------------------ GET SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the numerator of the object
     def set_numerator(self, arg):
@@ -2153,7 +2162,7 @@ class Quotient (Operation):
 
 
 
-    # ------------------------------------------------------ GET SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the denominator of the object
     def set_denominator(self, arg):
@@ -2167,7 +2176,7 @@ class Quotient (Operation):
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
@@ -2282,7 +2291,7 @@ class Quotient (Operation):
 
 
 
-    # ----------------------------------------------------- EVALUATE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the value of a numerically evaluable object
     def evaluate(self, **options):
@@ -2307,7 +2316,7 @@ class Quotient (Operation):
 
 
 
-    # ------------------------------------------- CALCULATE ONE STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Quotient in the next step of simplification
     #   @todo The case where exponent has to be calculated as well.
@@ -2374,7 +2383,7 @@ class Quotient (Operation):
 
 
 
-    # -------------------------------------------------- RAW DISPLAY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Raw display of the Quotient (debugging method)
     #   @param options No option available so far
@@ -2394,7 +2403,7 @@ class Quotient (Operation):
 
 
 
-    # -------------------------------------------- QUOTIENT'S LENGTH ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Quotient's length
     #   It is used in Product.into_str(), changing it will have consequences
@@ -2406,7 +2415,7 @@ class Quotient (Operation):
 
 
 
-    # ----------------------------------------------------- OPERATOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Defines the performed Operation as a Quotient
     def operator(self, arg1, arg2):
@@ -2416,7 +2425,7 @@ class Quotient (Operation):
 
 
 
-    # ------- CHECK IF A × IS REQUIRED BETWEEN SELF & ANOTHER FACTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the usual writing rules require a × between two factors
     #   @param objct The other one
@@ -2437,7 +2446,7 @@ class Quotient (Operation):
 
 
 
-    # ----------------------- CHECK IF A FACTOR REQUIRES PARENTHESIS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the argument requires brackets in a product
     #   For instance, a Sum with several terms or a negative Item
@@ -2453,7 +2462,7 @@ class Quotient (Operation):
 
 
 
-    # --------------------------------- REQUIRES INNER PARENTHESIS ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the argument requires inner brackets
     #   The reason for requiring them is having an exponent different from 1
@@ -2465,7 +2474,7 @@ class Quotient (Operation):
 
 
 
-    # ------------------------------------------- CONTAINS EXACTLY ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Quotient contains exactly the given objct
     #   It can be used to detect objects embedded in this Quotient (with
@@ -2490,7 +2499,7 @@ class Quotient (Operation):
 
 
 
-    # ------------------------------------- CONTAINS A ROUNDED NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief To check if this contains a rounded number...
     #   @return True or False
@@ -2506,7 +2515,7 @@ class Quotient (Operation):
 
 
 
-    # ------------------------------------------------------- INVERT ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the inverted Quotient
     def invert(self):
@@ -2522,7 +2531,7 @@ class Quotient (Operation):
 
 
 
-    # ---------------------------------------------------- IS NULL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the numerator is null
     def is_null(self):
@@ -2532,7 +2541,7 @@ class Quotient (Operation):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Quotient contains only single 1-equivalent Calcs.
     # So, if the Quotient has a positive sign and if its numerator and
@@ -2550,7 +2559,7 @@ class Quotient (Operation):
 
 
 
-    # ------------------------------- IS EQUIVALENT TO A SINGLE -1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Quotient can be displayed as a single -1
     # If the Quotient is negative and its numerator and
@@ -2570,7 +2579,7 @@ class Quotient (Operation):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 0 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Quotient can be displayed as a single 0
     # If the numerator is equivalent to a single 0
@@ -2581,7 +2590,7 @@ class Quotient (Operation):
 
 
 
-    # --------------------- IS EQUIVALENT TO A SINGLE NUMERIC ITEM ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object is or only contains one numeric Item
     def is_displ_as_a_single_numeric_Item(self):
@@ -2595,7 +2604,7 @@ class Quotient (Operation):
 
 
 
-    # ---------------------------- IS EQUIVALENT TO A SINGLE INT ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single int
     def is_displ_as_a_single_int(self):
@@ -2605,7 +2614,7 @@ class Quotient (Operation):
 
 
 
-    # -------------------------- IS EQUIVALENT TO A SINGLE NEUTRAL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be considered as a neutral element
     def is_displ_as_a_single_neutral(self, elt):
@@ -2624,9 +2633,9 @@ class Quotient (Operation):
 
 
 
-# -----------------------------------------------------------------------------
-# -------------------------------------------------- CLASS: Fraction ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Fraction
 # @brief Quotient of two numeric Sums and/or Products
@@ -2637,7 +2646,7 @@ class Fraction(Quotient):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Can raise UncompatibleType.
@@ -2830,7 +2839,7 @@ class Fraction(Quotient):
 
 
 
-    # --------------------------------------------------- GET STATUS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Fraction's status
     #   @return the Fraction's status
@@ -2841,7 +2850,7 @@ class Fraction(Quotient):
 
 
 
-    # --------------------------------------------------- GET STATUS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Fraction's status
     #   @return the Fraction's status
@@ -2852,7 +2861,7 @@ class Fraction(Quotient):
 
 
 
-    # --------------------------------------------------- GET STATUS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns True if Fraction's status is simplification_in_progress
     #   @return True if Fraction's status is simplification_in_progress
@@ -2870,11 +2879,16 @@ class Fraction(Quotient):
         return False
 
 
+
+
+
     status = property(get_status,
                       doc = "Fraction's status")
+
     simplification_in_progress = property(get_simplification_in_progress,
                                           doc = "Fraction's simplification_" \
                                           + "in_progress status")
+
     same_deno_reduction_in_progress = property(
                       get_same_deno_reduction_in_progress,
                       doc = "Fraction's same_deno_reduction_in_progress field")
@@ -2882,7 +2896,8 @@ class Fraction(Quotient):
 
 
 
-    # ------------------------------------------------------ GET SIGN ----------
+
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the numerator of the object
 #    def set_numerator(self, arg):
@@ -2899,7 +2914,7 @@ class Fraction(Quotient):
 
 
 
-    # ------------------------------------------------------ GET SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the denominator of the object
 #    def set_denominator(self, arg):
@@ -2916,7 +2931,7 @@ class Fraction(Quotient):
 
 
 
-    # --------------------------------------------------- SET STATUS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the Fraction's status
     def set_status(self, arg):
@@ -2930,7 +2945,7 @@ class Fraction(Quotient):
 
 
 
-    # --------------------------------------------------- SET STATUS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the Fraction's status
     def set_same_deno_reduction_in_progress(self, arg):
@@ -2944,7 +2959,7 @@ class Fraction(Quotient):
 
 
 
-    # ------------------------ IF POSSIBLE, SET NUMERATOR'S SIGN DOWN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the sign of the fraction and of numerator in the case
     #   @brief of this example : +{-2}/{5} (nothing to compute just the minus
@@ -2968,7 +2983,7 @@ class Fraction(Quotient):
 
 
 
-    # ----------------------------------------------------- EVALUATE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the value of a numerically evaluable object
     def evaluate(self, **options):
@@ -2982,7 +2997,7 @@ class Fraction(Quotient):
 
 
 
-    # ------------------------------------------ CALCULATE NEXT STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns None|The Fraction in the next step of simplification
     #   @todo Fix the 4th case. Should be less cases... check source
@@ -3144,7 +3159,7 @@ class Fraction(Quotient):
 
 
 
-    # -------------------------------- EXPAND AND REDUCE : NEXT STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Same as calculate_next_step in the case of Fractions
     def expand_and_reduce_next_step(self, **options):
@@ -3154,7 +3169,7 @@ class Fraction(Quotient):
 
 
 
-    # -------------------------------------------------- RAW DISPLAY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Raw display of the Fraction (debugging method)
     #   @param options No option available so far
@@ -3174,7 +3189,7 @@ class Fraction(Quotient):
 
 
 
-    # ------------------------------------------- OBJECTS COMPARISON ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Compares two Fractions
     #   @return 0 (i.e. they're equal) if sign, nume, deno & exponent are equal
@@ -3198,7 +3213,7 @@ class Fraction(Quotient):
 
 
 
-    # ------------------------------------------ SIMPLIFICATION LINE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Simplification line of a fraction
     # i.e. Factorization of numerator and denominator in the right smaller
@@ -3542,7 +3557,7 @@ class Fraction(Quotient):
 
 
 
-    # ---------------------- REPLACE THE STRIKED OUT ONES BY ITEM(1) ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Replace the striked out Items by Item(1)
     def replace_striked_out(self):
@@ -3574,7 +3589,7 @@ class Fraction(Quotient):
 
 
 
-    # ------------------------------------------ SIMPLIFIED FRACTION ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the fraction after a simplification step
     def simplified(self):
@@ -3622,7 +3637,7 @@ class Fraction(Quotient):
 
 
 
-    # ----------------------------------------- IRREDUCIBLE FRACTION ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the fraction after all simplification steps
     def completely_reduced(self):
@@ -3640,7 +3655,7 @@ class Fraction(Quotient):
 
 
 
-    # ----------------------------------------------- IS REDUCIBLE ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the fraction is reducible
     # So if numerator and denominator *are numeric Products* with both
@@ -3691,7 +3706,7 @@ class Fraction(Quotient):
 
 
 
-    # ---------------------------------------- IS A DECIMAL NUMBER ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Fraction is a decimal number
     def is_a_decimal_number(self):
@@ -3715,9 +3730,9 @@ class Fraction(Quotient):
 
 
 
-# -----------------------------------------------------------------------------
-# --------------------------------------- CLASS:CommutativeOperation ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class CommutativeOperation
 # @brief Abstract mother class of Product and Sum. Gathers common methods.
@@ -3727,7 +3742,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning CommutativeOperation objects are not really usable
@@ -3751,7 +3766,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # ----------------------------------------------------- GET INFO ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the compact_display field of a CommutativeOperation
     def get_compact_display(self):
@@ -3761,7 +3776,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # ----------------------------------------------------- GET INFO ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Allow the subclasses to access this field
     def get_info(self):
@@ -3771,7 +3786,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # --------------------------------------------------- GET LETTER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief If the Product is literal, returns the first factor's letter
     def get_first_letter(self):
@@ -3785,7 +3800,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # ----------------------------------------------------- GET SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the sign of the first element of the CommutativeOperation
     def get_sign(self):
@@ -3795,12 +3810,13 @@ class CommutativeOperation(Operation):
 
 
     info = property(get_info, doc="info field of a CommutativeOperation")
+
     compact_display = property(get_compact_display,
                         doc="compact_display field of a CommutativeOperation")
 
 
 
-    # ----------------------------------------------- SET FIRST SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the info field of the CommutativeOperation
     def set_info(self, arg):
@@ -3821,7 +3837,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # ----------------------------------------------- SET FIRST SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the sign of the first element of the CommutativeOperation
     def set_sign(self, arg):
@@ -3831,7 +3847,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # ------------------------------------------ SET COMPACT DISPLAY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets a value to the compact_display field
     #   @param arg Must be True or False
@@ -3846,7 +3862,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # ----------------------------------------------------- EVALUATE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the value (number) of an numerically evaluable CommutativeOperation
     #   @return The result as a number
@@ -3917,7 +3933,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # -------------------------------------------------- RAW DISPLAY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Raw display of the CommutativeOperation (debugging method)
     #   @param options : info='OK' let dbg_str display more info
@@ -3953,7 +3969,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # ------------------------------------------- OPERATION'S LENGTH ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of elements of the CommutativeOperation
     def __len__(self):
@@ -3963,7 +3979,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # ------------------------------------------- CONTAINS EXACTLY ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the CommutativeOperation contains exactly the given objct
     #   It can be used to detect objects embedded in this CommutativeOperation
@@ -3980,7 +3996,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # ------------------------------------- CONTAINS A ROUNDED NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief To check if this contains a rounded number...
     #   @return True or False
@@ -3995,7 +4011,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # ------------------------------------------ APPEND AN ELEMENT ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Appends a given element to the current CommutativeOperation
     #   @param elt  The element to append (assumed to be a Exponented)
@@ -4007,7 +4023,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # --------------------------------------------- REMOVE A  TERM ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Removes a given element from the current CommutativeOperation
     #   @param elt  The element to remove (assumed to be a Exponented)
@@ -4035,7 +4051,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # -------------------------------------- THROW AWAY THE NEUTRALS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns self without the equivalent-to-a-single-neutral elements
     def throw_away_the_neutrals(self):
@@ -4080,7 +4096,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # -------------------------- IS EQUIVALENT TO A SINGLE NEUTRAL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single neutral element
     def is_displ_as_a_single_neutral(self, neutral_elt):
@@ -4094,7 +4110,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # --------------------- IS EQUIVALENT TO A SINGLE NUMERIC ITEM ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the CommutativeOperation contains only one numeric Item
     def is_displ_as_a_single_numeric_Item(self):
@@ -4107,7 +4123,7 @@ class CommutativeOperation(Operation):
 
 
 
-    # ---------------------------- IS EQUIVALENT TO A SINGLE INT ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single int
     def is_displ_as_a_single_int(self):
@@ -4119,9 +4135,9 @@ class CommutativeOperation(Operation):
 
 
 
-# -----------------------------------------------------------------------------
-# --------------------------------------------------- CLASS: Product ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Product
 # @brief Has Exponented factors & an exponent. Iterable. Two display modes.
@@ -4131,7 +4147,7 @@ class Product (CommutativeOperation):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
@@ -4229,7 +4245,7 @@ class Product (CommutativeOperation):
 
 
 
-    # ------------------------------------------- GET FACTORS EXCEPT ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the factors' list of the Product except the given one
     def get_factors_list_except(self, objct):
@@ -4257,7 +4273,7 @@ class Product (CommutativeOperation):
 
 
 
-    # --------------------------------------------- GET FIRST FACTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the first Sum/Item factor of the Product
     #   @warning Maybe not functionnal because of the 1's...
@@ -4293,7 +4309,7 @@ class Product (CommutativeOperation):
 
 
 
-    # --------------------------------------- GET MINUS SIGNS NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of - signs (negative factors) in the Product
     def get_minus_signs_nb(self):
@@ -4307,7 +4323,7 @@ class Product (CommutativeOperation):
 
 
 
-    # ------------------------ GET THE FACTORS' LIST OF A GIVEN KIND ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the factors' list of a given kind (numeric, literal...)
     #   For instance, for the product :
@@ -4485,12 +4501,15 @@ class Product (CommutativeOperation):
 
 
 
-    # --------------------------------------------------- PROPERTIES ----------
+
     factor = property(CommutativeOperation.get_element,
                       doc = "To access the factors of the Product.")
 
 
-    # ------------------------------------------- SET THE N-TH FACTOR ----------
+
+
+
+    # --------------------------------------------------------------------------
     ##
     #   @brief
     #   @param n : number of the factor to set
@@ -4501,7 +4520,7 @@ class Product (CommutativeOperation):
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
@@ -5096,7 +5115,7 @@ class Product (CommutativeOperation):
 
 
 
-    # ------------------------------------------ CALCULATE NEXT STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the next calculated step of a numeric Product
     #   @todo This method is only very partially implemented (see source code)
@@ -5347,7 +5366,7 @@ class Product (CommutativeOperation):
 
 
 
-    # -------------------------------- EXPAND AND REDUCE : NEXT STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the next step of reduction of the Product
     #   It won't check if it is expandable. Either it IS and the object is not
@@ -5452,7 +5471,7 @@ class Product (CommutativeOperation):
 
 
 
-    # ------------------------------------------- OBJECTS COMPARISON ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Compares two Products
     #   Returns 0 if all factors are the same in the same order and if the
@@ -5480,7 +5499,7 @@ class Product (CommutativeOperation):
 
 
 
-    # ----------------------------------------------------- OPERATOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Defines the performed CommutativeOperation as a Product
     def operator(self, arg1, arg2):
@@ -5490,7 +5509,7 @@ class Product (CommutativeOperation):
 
 
 
-    # ------- CHECK IF A × IS REQUIRED BETWEEN SELF & ANOTHER FACTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the usual writing rules require a × between two factors
     #   @param objct The other one
@@ -5528,7 +5547,7 @@ class Product (CommutativeOperation):
 
 
 
-    # -------------------------- CHECK IF A FACTOR REQUIRES BRACKETS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if (one)self requires brackets inside of a Product.
     #   For instance, a Sum with several terms or a negative Item would.
@@ -5567,7 +5586,7 @@ class Product (CommutativeOperation):
 
 
 
-    # ------------------------------------ REQUIRES INNER BRACKETS ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the argument requires inner brackets
     #   The reason for requiring them is having an exponent different
@@ -5617,7 +5636,7 @@ class Product (CommutativeOperation):
 
 
 
-    # -------------------------------------------------------- ORDER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Product once put in order
     def order(self):
@@ -5634,7 +5653,7 @@ class Product (CommutativeOperation):
 
 
 
-    # ------------------------------------------------------ REDUCE_ ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Return a reduced Product (if possible)
     #   For instance, giving this Product :
@@ -5685,7 +5704,7 @@ class Product (CommutativeOperation):
 
 
 
-    # ---------------------------------------------------- IS NULL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if any of the factors is null
     def is_null(self):
@@ -5699,7 +5718,7 @@ class Product (CommutativeOperation):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Product contains only single 1s. For instance, 1×1×1
     def is_displ_as_a_single_1(self):
@@ -5717,7 +5736,7 @@ class Product (CommutativeOperation):
 
 
 
-    # ------------------------------- IS EQUIVALENT TO A SINGLE -1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Product can be displayed as a single -1
     # For instance, the Product 1×1×(-1)×1
@@ -5745,7 +5764,7 @@ class Product (CommutativeOperation):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 0 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be DISPLAYED as a single 0
     # For instance, the Product 0×0×0×0 (but NOT 0×1)
@@ -5762,7 +5781,7 @@ class Product (CommutativeOperation):
 
 
 
-    # --------------------------------------------- IS REDUCIBLE ? ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Product is reducible
     #   This is based on the result of the get_factors_list method
@@ -5957,9 +5976,9 @@ class Product (CommutativeOperation):
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------------------- CLASS: Sum ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Sum
 # @brief Has Exponented terms & an exponent. Iterable. Two display modes.
@@ -5969,7 +5988,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
@@ -6062,7 +6081,7 @@ class Sum (CommutativeOperation):
                                          + "[Numbers|Strings|Exponenteds]")
 
 
-    # --------------------------------------- GET MINUS SIGNS NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of negative factors of the Sum (i.e. 0)
     def get_minus_signs_nb(self):
@@ -6072,7 +6091,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # --------------------------------------------- GET NUMERIC TERMS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns a raw list of the numeric terms of the Sum
     def get_numeric_terms(self):
@@ -6092,7 +6111,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # --------------------------------------------- GET LITERAL TERMS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns a raw list of the literal terms of the Sum
     def get_literal_terms(self):
@@ -6112,7 +6131,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ------------------------------- GET TERMS DICTIONNARY OF A SUM ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a dict. of couples (literal object):(numeric coeffs sum)
     #   Two objects are in fact created : a dictionary + an index which is a
@@ -6285,7 +6304,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ----------------------------- GET FORCE INNER BRACKETS DISPLAY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the value of the force_inner_brackets_display field
     def get_force_inner_brackets_display(self):
@@ -6295,9 +6314,9 @@ class Sum (CommutativeOperation):
 
 
 
-    # --------------------------------------------------- PROPERTIES ----------
     term = property(CommutativeOperation.get_element,
                     doc = "To access the terms of the Sum.")
+
     force_inner_brackets_display = property(get_force_inner_brackets_display,
                     doc = "force_inner_brackets_display field of a Sum")
 
@@ -6305,7 +6324,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ------------------------------------------------------ SET TERM ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the n-th term to the given arg
     def set_term(self, n, arg):
@@ -6314,7 +6333,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ----------------------------- SET FORCE INNER BRACKETS DISPLAY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets a value to the force_inner_brackets_display field
     #   @param arg Assumed to be True or False (not tested)
@@ -6325,7 +6344,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
@@ -6527,7 +6546,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ------------------------------------------ CALCULATE NEXT STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the next calculated step of a *numeric* Sum
     #   @todo This method may be only partially implemented (see source)
@@ -6871,7 +6890,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # -------------------------------- EXPAND AND REDUCE : NEXT STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the next step of expansion/reduction of the Sum
     #   So, either the Sum of its expanded/reduced terms,
@@ -7062,7 +7081,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ------------------------------------------- OBJECTS COMPARISON ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Compares two Sums
     #   Returns 0 if all terms are the same in the same order and if the
@@ -7090,7 +7109,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ----------------------------------------------------- OPERATOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Defines the performed CommutativeOperation as a Sum
     def operator(self, arg1, arg2):
@@ -7100,7 +7119,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ----------------------------- GET NEXT DISPLAYABLE TERM RANK ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the rank of next non-equivalent to 0 term...
     #   @param position The point where to start from to search
@@ -7115,7 +7134,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ------- CHECK IF A × IS REQUIRED BETWEEN SELF & ANOTHER FACTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the usual writing rules require a × between two factors
     #   @param objct The other one
@@ -7162,7 +7181,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ----------------------- CHECK IF A FACTOR REQUIRES PARENTHESIS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the argument requires brackets in a product
     #   For instance, a Sum with several terms or a negative Item
@@ -7203,7 +7222,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # --------------------------------- REQUIRES INNER PARENTHESIS ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the argument requires inner brackets
     #   The reason for requiring them is having an exponent different
@@ -7227,7 +7246,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ------------- CHECK IF THE NUMERIC TERMS REQUIRE TO BE REDUCED ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if a gathering of numeric terms must be reduced
     #   It is True if at least two consecutive numeric Items are in the list
@@ -7264,7 +7283,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # -------------------------------- INTERMEDIATE REDUCTION LINE ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates the intermediate reduction line.
     #   For instance, giving the Sum 5x + 7x³ - 3x + 1,
@@ -7328,7 +7347,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # -------------------------------------------------- REDUCTION ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the reduced Sum
     #   For instance, giving the Sum 5x + 7x³ - 3x + 1,
@@ -7404,7 +7423,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ---------------------------------------------------- IS NULL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the result of the Sum is null
     def is_null(self):
@@ -7417,7 +7436,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Sum contains only 0s and one 1. For instance, 1+0+0
     def is_displ_as_a_single_1(self):
@@ -7445,7 +7464,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ------------------------------- IS EQUIVALENT TO A SINGLE -1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Sum can be displayed as a single -1
     # So, if it only contains 0s and a single -1. For instance, 0+0+(-1)+0
@@ -7470,7 +7489,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 0 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single 0
     #   For instance, 0 + 0 + 0 but NOT - 1 + 0 + 1 (it's a matter of display)
@@ -7481,7 +7500,7 @@ class Sum (CommutativeOperation):
 
 
 
-    # ---------------------------------------------- IS REDUCIBLE ? ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the Sum is reducible
     #   This is based on the result of the get_term_lexicon method
@@ -7507,9 +7526,9 @@ class Sum (CommutativeOperation):
 
 
 
-# -----------------------------------------------------------------------------
-# -------------------------------------------------- CLASS: Monomial ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Monomial
 # @brief A Monomial is a Product of a numeric Exponented and a literal Item
@@ -7519,7 +7538,7 @@ class Monomial(Product):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
@@ -7636,7 +7655,7 @@ class Monomial(Product):
 
 
 
-    # ------------------------------- GET SIGN & ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the sign of the Monomial
     #   @return The sign of the Monomial
@@ -7652,7 +7671,7 @@ class Monomial(Product):
 
 
 
-    # ------------------------------ GET COEFF & ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the numeric coefficient of the Monomial
     #   @return The numeric coefficient of the Monomial
@@ -7663,7 +7682,7 @@ class Monomial(Product):
 
 
 
-    # ---------------------------------------------------- GET VALUE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the value of a Monomial of degree 0
     #   @warning Raises an error if asked on non-degree-0 Monomial
@@ -7675,7 +7694,7 @@ class Monomial(Product):
 
 
 
-    # ----------------------------- GET LETTER & ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the letter of the Monomial
     #   @return The letter of the Monomial
@@ -7686,7 +7705,7 @@ class Monomial(Product):
 
 
 
-    # ----------------------------- GET DEGREE & ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the degree of the Monomial (i.e. exponent of factor[1])
     #   @return The degree of the Monomial
@@ -7697,7 +7716,7 @@ class Monomial(Product):
 
 
 
-    # ---------------------------------------------------- GET VALUE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the Value of the Monomial, just to mimic the case when
     #          it is of degree 0
@@ -7726,7 +7745,7 @@ class Monomial(Product):
 
 
 
-    # --------------------------------------------------- SET LETTER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the letter of the Monomial
     def set_letter(self, letter):
@@ -7737,7 +7756,7 @@ class Monomial(Product):
 
 
 
-    # --------------------------------------------------- SET DEGREE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Set the degree of the Monomial
     def set_degree(self, arg):
@@ -7749,7 +7768,7 @@ class Monomial(Product):
 
 
 
-    # --------------------------------------------------- SET COEFF ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Set the degree of the Monomial
     def set_coeff(self, arg):
@@ -7758,7 +7777,7 @@ class Monomial(Product):
 
 
 
-    # -------------------------------------------------- RAW DISPLAY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Raw display of the Monomial (debugging method)
     #   @param options No option available so far
@@ -7777,7 +7796,7 @@ class Monomial(Product):
 
 
 
-    # ---------------------------------------------------- IS NULL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if it's the null Monomial
     def is_null(self):
@@ -7791,7 +7810,7 @@ class Monomial(Product):
 
 
 
-    # ------------------------------------------------- IS NUMERIC ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if Monomial's degree is 0 or ZERO_POLYNOMIAL_DEGREE
     def is_numeric(self):
@@ -7807,7 +7826,7 @@ class Monomial(Product):
 
 
 
-    # ------------------------------------------------ IS POSITIVE ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if Monomial's coefficient's *sign* is '+'
     #   @todo How to answer to the question if this Monomial is null ?
@@ -7819,7 +7838,7 @@ class Monomial(Product):
 
 
 
-    # ------------------------------------------------ IS POSITIVE ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if Monomial's coefficient's *sign* is '-'
     #   @todo How to answer to the question if this Monomial is null ?
@@ -7830,9 +7849,9 @@ class Monomial(Product):
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------------ CLASS: Polynomial ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Polynomial
 # @brief A Polynomial is a Sum of Monomials, not necessarily reduced or ordered
@@ -7842,7 +7861,7 @@ class Polynomial(Sum):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
@@ -8003,7 +8022,7 @@ class Polynomial(Sum):
 
 
 
-    # ----------------------------------------------- GET MAX DEGREE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the maximal degree value that can be found in thePolynomial
     #   @return The maximal degree value that can be found in the Polynomial
@@ -8020,7 +8039,7 @@ class Polynomial(Sum):
 
 
 
-    # --------------------------------------------------- GET DEGREE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the real Polynomial's degree
     #   @return The real Polynomial's degree
@@ -8057,7 +8076,7 @@ class Polynomial(Sum):
 
 
 
-    # -------------------------------------------------- RAW DISPLAY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Raw display of the Polynomial (debugging method)
     #   @param options No option available so far
@@ -8077,9 +8096,9 @@ class Polynomial(Sum):
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------------ CLASS: Expandable ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Expandable
 # @brief Mother class of all expandable objects
@@ -8089,7 +8108,7 @@ class Expandable(Product):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
     #   @param arg (Exponented, Exponented)|(RANDOMLY, <type>)
@@ -8228,7 +8247,7 @@ class Expandable(Product):
 
 
 
-    # ------------------------------------------------------- EXPAND ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief The expanded object, like 2×(x+3) would return 2×x + 2×3
     def expand(self):
@@ -8271,7 +8290,7 @@ class Expandable(Product):
 
 
 
-    # -------------------------------------------- EXPAND AND REDUCE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief The expanded & reduced object, like 2×(x+3) would return 2x + 6
     #   Take care that the resulting Sum might not be reduced itself.
@@ -8293,7 +8312,7 @@ class Expandable(Product):
 
 
 
-    # -------------------------------- EXPAND AND REDUCE : NEXT STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the expanded object as a Sum
     def expand_and_reduce_next_step(self, **options):
@@ -8331,7 +8350,7 @@ class Expandable(Product):
 
 
 
-    # -------------------------------------------- IS EXPANDABLE ? ------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True
     #   @return True
@@ -8342,9 +8361,9 @@ class Expandable(Product):
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------ CLASS: BinomialIdentity ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class BinomialIdentity
 # @brief These objects are expanded using : (a+b)² = a² + 2ab + b², (a-b)² =
@@ -8363,7 +8382,7 @@ class BinomialIdentity(Expandable):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
     #   @param arg (Exponented, Exponented)|(RANDOMLY, <type>)
@@ -8558,7 +8577,7 @@ class BinomialIdentity(Expandable):
 
 
 
-    # --------------------------------------------------- GET DEGREE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the 'a' term of the BinomialIdentity
     #   @return the content of the 'a' term
@@ -8569,7 +8588,7 @@ class BinomialIdentity(Expandable):
 
 
 
-    # --------------------------------------------------- GET DEGREE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the 'b' term of the BinomialIdentity
     #   @return the content of the 'b' term
@@ -8580,7 +8599,7 @@ class BinomialIdentity(Expandable):
 
 
 
-    # --------------------------------------------------- GET DEGREE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the kind of BinomialIdentity it is
     #   @return 'sum_square'|'difference_square'|'squares_difference'
@@ -8605,7 +8624,7 @@ class BinomialIdentity(Expandable):
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
@@ -8631,7 +8650,7 @@ class BinomialIdentity(Expandable):
 
 
 
-    # ------------------------------------------------------- EXPAND ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief The expanded object, like (2x+3)² would return (2x)²+2×2x×3+3²
     def expand(self):
@@ -8679,7 +8698,7 @@ class BinomialIdentity(Expandable):
 
 
 
-    # -------------------------------- EXPAND AND REDUCE : NEXT STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the next step of reduction of the BinomialIdentity
     #   @return Exponented

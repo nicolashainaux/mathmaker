@@ -26,14 +26,14 @@ import lib.maths_lib
 from lib import error
 from lib.maths_lib import *
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------------- MODULE: randomly ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 #   @brief Collection of functions that return randomly results
 
 
-# ---------------------------------------------------------- INTEGER ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Return a random integer
 #   @param min_value The lowest possible value of the result
@@ -78,7 +78,7 @@ def integer(min_value, max_value, **options):
 
 
 
-# ------------------------------------------------------ + & - SIGNS ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns a '+' or a '-'
 #   @param options plus_signs_ratio=0.3 sets the + signs ratio (default 0.5)
@@ -101,7 +101,7 @@ def sign(**options):
 
 
 
-# -------------------------------------------------- POP FROM A LIST ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Pops an element from the provided list
 #   @param provided_list The list where to pop an element from
@@ -122,7 +122,7 @@ def pop(provided_list, **options):
 
 
 
-# ------------------------------------------------------ DECIMAL_0_1 ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns a randomly decimal number between 0 and 1
 #   @return A randomly decimal number between 0 and 1
@@ -133,7 +133,7 @@ def decimal_0_1():
 
 
 
-# --------------------------------------------------- HEADS OR TAILS ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns True|False with probability distribution 0,5 - 0,5
 #   @return True|False with probability distribution 0,5 - 0,5
@@ -147,7 +147,7 @@ def heads_or_tails():
 
 
 
-# ------------------------------------------------------- COPRIME_TO ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns a randomly integer which is coprime to the given argument
 #   @param n The given number
@@ -170,7 +170,7 @@ def coprime_to(n, range):
 
 
 
-# --------------------------------------------- COPRIME_TO_THE_FIRST ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns a randomly integer which is coprime to the given argument
 #          but possibly not to the second.
@@ -210,7 +210,7 @@ def coprime_to_the_first(n, p, range):
 
 
 
-# --------------------------------------------------- NOT_COPRIME_TO ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns a randomly integer which is not coprime to the given arg.
 #   @warning    If the given argument is a prime number, it'll be difficult
@@ -243,7 +243,7 @@ def not_coprime_to(n, range, **options):
 
 
 
-# ---------------------------------------- MIXING OBJECTS SUBFUNCTION ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief When given a list of objects, returns a randomly mixed list of the
 #   @brief same objects. Must not return in the same order than given one.

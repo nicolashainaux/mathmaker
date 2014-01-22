@@ -56,9 +56,9 @@ AVAILABLE_Q_KIND_VALUES = {'pythagorean_theorem' : ['calculate_hypotenuse',
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------- CLASS: Q_RightTriangle ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Q_RightTriangle
 # @brief All questions about the right triangle
@@ -68,7 +68,7 @@ class Q_RightTriangle(Q_Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
     #   @param embedded_machine The machine to be used
@@ -382,7 +382,7 @@ class Q_RightTriangle(Q_Structure):
 
 
 
-    # --------------------------------- TEXT OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
@@ -470,7 +470,7 @@ class Q_RightTriangle(Q_Structure):
 
 
 
-    # ------------------------------- ANSWER OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):

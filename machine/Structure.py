@@ -21,9 +21,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import error
-# -----------------------------------------------------------------------------
-# ----------------------------------------- CLASS: machine.Structure ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Structure
 # @brief Not instanciable mother class of all machine objects.
@@ -33,7 +33,7 @@ class Structure(object):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined. Constructor.
     #   @warning Will raise an exception if not redefined
@@ -46,7 +46,7 @@ class Structure(object):
 
 
 
-    # ---------------------------------------------------- DEEP COPY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns a deep copy of the object
     def clone(self, language):
@@ -57,7 +57,7 @@ class Structure(object):
 
 
 
-    # ------------------------------- OUTPUT WRITING : sheet's header ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
     #   Write the complete header of the sheet to the output.
@@ -69,7 +69,7 @@ class Structure(object):
 
 
 
-    # ----------------------------- OUTPUT WRITING : several commands ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
     #   Writes to the output the command to begin the document
@@ -99,19 +99,19 @@ class Structure(object):
     def reset_exercises_counter(self):
         raise error.MethodShouldBeRedefined(self, 'reset_exercises_counter')
 
-    # ---------------------------- SETTING THE REF. SIZE OF THE TEXTES ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the font_size_offset field
     def set_font_size_offset(self, arg):
         raise error.MethodShouldBeRedefined(self, 'set_font_size_offset')
 
-    # ------------------------------- SETTING THE OUTPUT TO STR/NORMAL ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the redirect_output_to_str field to True or False
     def set_redirect_output_to_str(self, arg):
         raise error.MethodShouldBeRedefined(self, 'set_redirect_output_to_str')
 
-    # --------------------------------------------- GETTING THE OUTPUT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the value of redirect_output_to_str field
     def redirect_output_to_str(self):
@@ -195,7 +195,7 @@ class Structure(object):
     def write_layout(self, size, col_widths, content, **options):
         raise error.MethodShouldBeRedefined(self, 'write_layout')
 
-    # ----- FUNCTION CREATING THE STRING ASSOCIATED TO A MATH. OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
     #   Returns a string containing the object to be displayed, according to
@@ -205,7 +205,7 @@ class Structure(object):
         raise error.MethodShouldBeRedefined(self, 'type_string')
 
 
-    # --------------- FUNCTION INSERTING THE PICTURE OF THE GIVEN ARG ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
     #   Returns a string containing the object to be displayed, according to
@@ -216,7 +216,7 @@ class Structure(object):
 
 
 
-    # ------------------------ FUNCTION INSERTING A DASHED-STYLE LINE ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
     #   Returns a string containing the object to be displayed, according to
@@ -228,7 +228,7 @@ class Structure(object):
 
 
 
-    # --------------------------- FUNCTION INSERTING A VERTICAL SPACE ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
     #   Returns a string containing the object to be displayed, according to

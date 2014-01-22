@@ -23,9 +23,9 @@
 from lib import *
 from lib.common import default
 import question
-# -----------------------------------------------------------------------------
-# -------------------------------------- CLASS: exercise.X_Structure ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class X_Structure
 # @brief Mother class of all exercises objects. Not instanciable.
@@ -39,7 +39,7 @@ class X_Structure(object):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined. Constructor.
     #   @warning Exception NotInstanciableObject.
@@ -128,7 +128,7 @@ class X_Structure(object):
 
 
 
-    # ------------------------------------------- TEXT|ANSWER --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes the text of the exercise|answer to the output.
     def to_str(self, ex_or_answers):

@@ -64,7 +64,7 @@ evaluate_in_operation = False
 
 
 
-# -------------------------------------- WRITE ON THE STD ERR OUTPUT ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Writes the given String on the std err if debug mode is activated
 #   Activating & de-activating the DEBUG mode is made setting the

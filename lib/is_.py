@@ -25,7 +25,7 @@ import common.cfg
 import math
 import decimal
 
-# ---------------------------------------------------- IS A STRING ? ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief True if argument is a string
 #   @param objct The object to test
@@ -40,7 +40,7 @@ def a_string(objct):
 
 
 
-# ------------------------------------------- IS A NUMERICAL STRING ? ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief True if argument is a string containing only numbers 0-9, -, + or .
 #   @param objct The object to test
@@ -73,7 +73,7 @@ def a_numerical_string(objct):
 
 
 
-# ----------------------------------------------- IS A STRING LIST ? ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief True if argument is a list containing only strings
 #   @param objct The object to test
@@ -92,7 +92,7 @@ def a_string_list(objct):
 
 
 
-# -------------------------- IS AN ORDERED CALCULABLE OBJECTS LIST ? ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief True if argument is an ordered Exponented objects list
 #   @param provided_list The list to check
@@ -111,7 +111,7 @@ def an_ordered_calculable_objects_list(provided_list):
 
 
 
-# ------------------------------------------------------ IS A SIGN ? ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief True if argument is a sign ('+' or '-')
 #   @param objct The object to test
@@ -126,7 +126,7 @@ def a_sign(objct):
 
 
 
-# ---------------------------------------------------- IS A NUMBER ? ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief True if the argument is a number
 #   @param objct The object to test
@@ -145,7 +145,7 @@ def a_number(objct):
 
 
 
-# -------------------------------------------------- IS AN INTEGER ? ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief True if argument is an int or a decimal.Decimal containing an int
 #   @param objct The object to test
@@ -162,7 +162,7 @@ def an_integer(objct):
 
 
 
-# ------------------------------------------------------ IS AN INT ? ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief True if argument is an int
 #   @param objct The object to test
@@ -177,7 +177,7 @@ def an_int(objct):
 
 
 
-# ----------------------------------------------- IS A NATURAL INT ? ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief True if the argument is a natural int (e.g. positive)
 #   @param objct The object to test

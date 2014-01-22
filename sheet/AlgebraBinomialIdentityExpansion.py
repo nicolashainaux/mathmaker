@@ -38,9 +38,9 @@ SHEET_LAYOUT = { 'exc' : [ [2,         9, 9],       (1, 1,
                          ]
                }
 
-# -----------------------------------------------------------------------------
-# -------------------- CLASS: sheet.AlgebraBinomialIdentityExpansion ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class AlgebraBinomialIdentityExpansion
 # @brief Expand (a+b)², (a-b)², (a+b)(a-b)...
@@ -50,7 +50,7 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @param embedded_machine The machine to be used
@@ -110,7 +110,7 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
 
 
 
-    # -------------------------------------- OUTPUT WRITING : answers ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output all exercises' answers
     def write_answers(self):

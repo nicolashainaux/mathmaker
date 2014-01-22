@@ -46,9 +46,9 @@ X_LAYOUTS = {'default' :
 
             }
 
-# -----------------------------------------------------------------------------
-# ------------------------------------ CLASS: exercise.X_Calculation ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class X_Calculation
 # @brief Calculation questions (calculate : 2-(3+5)×4, simplify a fraction...)
@@ -58,7 +58,7 @@ class X_Calculation(X_Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
     #   @param embedded_machine The machine that will be used to write output.
@@ -135,7 +135,7 @@ class X_Calculation(X_Structure):
 
 
 
-    # ------------------------------- WRITING OF THE TEXT --> OUTPUT ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes the text of the exercise to the output.
     #def write_text(self):
@@ -156,7 +156,7 @@ class X_Calculation(X_Structure):
 
 
 
-    # ---------------------------- WRITING OF THE ANSWERS --> OUTPUT ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes the answers of the questions to the output.
     #def write_answer(self):

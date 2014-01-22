@@ -37,9 +37,9 @@ SHEET_LAYOUT = { 'exc' : [ None,                    'all'
                          ]
                }
 
-# -----------------------------------------------------------------------------
-# ------------------------- CLASS: sheet.FractionsProductAndQuotient ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class FractionsProductAndQuotient
 # @brief Products & Quotients of Fractions
@@ -49,7 +49,7 @@ class FractionsProductAndQuotient(S_Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @param embedded_machine The machine to be used
@@ -85,7 +85,7 @@ class FractionsProductAndQuotient(S_Structure):
 
 
 
-    # ---------------------------------------- OUTPUT WRITING : texts ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output all exercises' texts
     #def write_texts(self):
@@ -98,7 +98,7 @@ class FractionsProductAndQuotient(S_Structure):
 
 
 
-    # -------------------------------------- OUTPUT WRITING : answers ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output all exercises' answers
     #def write_answers(self):

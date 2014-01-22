@@ -35,9 +35,9 @@ SHEET_LAYOUT = { 'exc' : [ None,                    'all'
                          ]
                }
 
-# -----------------------------------------------------------------------------
-# ---------------------------------------- CLASS: sheet.FractionsSum ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class FractionsSums
 # @brief Exercises about calculating the sum of two or more fractions.
@@ -47,7 +47,7 @@ class FractionsSum(S_Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @param embedded_machine The machine to be used
@@ -77,7 +77,7 @@ class FractionsSum(S_Structure):
 
 
 
-    # ---------------------------------------- OUTPUT WRITING : texts ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output all exercises' texts
     #def write_texts(self):
@@ -90,7 +90,7 @@ class FractionsSum(S_Structure):
 
 
 
-    # -------------------------------------- OUTPUT WRITING : answers ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output all exercises' answers
     #def write_answers(self):

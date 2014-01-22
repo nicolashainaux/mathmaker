@@ -72,9 +72,9 @@ PR_MAX_LITERAL_ITEMS_NB = 2
 PR_SAME_LETTER_MAX_OCCURENCES_NB = 2
 PR_NUMERIC_ITEMS_MAX_NB = 2
 
-# -----------------------------------------------------------------------------
-# ------------------------------ CLASS: Q_AlgebraExpressionReduction ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Q_AlgebraExpressionReduction
 # @brief All algebraic expression reduction questions
@@ -84,7 +84,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
     #   @param embedded_machine The machine to be used
@@ -519,7 +519,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
 
 
-    # --------------------------------- TEXT OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
@@ -534,7 +534,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
 
 
-    # ------------------------------- ANSWER OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):

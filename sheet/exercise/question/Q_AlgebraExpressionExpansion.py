@@ -64,9 +64,9 @@ INIT_CALLER = \
      'any_binomial' : BinomialIdentity
     }
 
-# -----------------------------------------------------------------------------
-# ------------------------------ CLASS: Q_AlgebraExpressionExpansion ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Q_AlgebraExpressionExpansion
 # @brief An object to expand (like 2(x-3), 4x(2-9x), (3+x)(x-1) or (x+1)² etc.)
@@ -76,7 +76,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @param embedded_machine The machine to be used
@@ -336,7 +336,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
 
 
-    # --------------------------------- TEXT OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
@@ -363,7 +363,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
 
 
-    # ------------------------------- ANSWER OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):

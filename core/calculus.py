@@ -78,9 +78,9 @@ FRACTIONS_SUMS_SCALE_TABLE = [0.02,  #(1, 2)
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------- PACKAGE: core.calculus ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @package core.calculus
 
@@ -94,9 +94,9 @@ FRACTIONS_SUMS_SCALE_TABLE = [0.02,  #(1, 2)
 
 
 
-# -----------------------------------------------------------------------------
-# ---------------------------------------- CLASS: ComposedCalculable ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class ComposedCalculable
 # @brief Abstract mother class of objects composed of Calculable=Calculable=...
@@ -106,7 +106,7 @@ class ComposedCalculable(Printable):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Must be redefined
@@ -117,9 +117,9 @@ class ComposedCalculable(Printable):
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------- CLASS: NamedExpression ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class NamedExpression
 # @brief These are object of the kind : Name = Exponented
@@ -129,7 +129,7 @@ class NamedExpression(ComposedCalculable):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
@@ -154,7 +154,7 @@ class NamedExpression(ComposedCalculable):
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
@@ -192,7 +192,7 @@ class NamedExpression(ComposedCalculable):
 
 
 
-    # --------- CREATE THE ML STRING OF ITS OWN EXPANSION & REDUCTION ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Create a string of the expression's exp. & red. in the given ML
     #   @param options Any options
@@ -225,9 +225,9 @@ class NamedExpression(ComposedCalculable):
 
 
 
-# -----------------------------------------------------------------------------
-# -------------------------------------------------- CLASS: Equality ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Equality
 # @brief These are object of the kind : Exponented = Exponented [= ...]
@@ -237,7 +237,7 @@ class Equality(ComposedCalculable):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
@@ -303,7 +303,7 @@ class Equality(ComposedCalculable):
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
@@ -342,7 +342,7 @@ class Equality(ComposedCalculable):
 
 
 
-    # --------------------------------------------------- INDEXATION ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief It is possible to index an Equality
     def __getitem__(self, i):
@@ -359,7 +359,7 @@ class Equality(ComposedCalculable):
 
 
 
-    # --------------------------------------------- EQUALITY'S LENGTH ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of elements of the Equality
     def __len__(self):
@@ -369,9 +369,9 @@ class Equality(ComposedCalculable):
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------- CLASS: SubstitutableEquality ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class SubstitutableEquality
 # @brief Like an Equality with literals and the numeric values to replace them
@@ -381,7 +381,7 @@ class SubstitutableEquality(Equality):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
@@ -415,7 +415,7 @@ class SubstitutableEquality(Equality):
 
 
 
-    # --------------------------------------------------- SUBSTITUTE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Executes the substitution of the literal Values by the numeric
     def substitute(self):
@@ -427,9 +427,9 @@ class SubstitutableEquality(Equality):
 
 
 
-# -----------------------------------------------------------------------------
-# -------------------------------------------------- CLASS: Equation ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Equation
 # @brief One degree one variable. Sum=Sum. Name, number, left/right hand side.
@@ -439,7 +439,7 @@ class Equation(ComposedCalculable):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
@@ -971,7 +971,7 @@ class Equation(ComposedCalculable):
 
 
 
-    # ------------------------------------------------------- SETTER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Setter for hand sides
     #   @warning Might raise an UncompatibleType exception.
@@ -1006,7 +1006,7 @@ class Equation(ComposedCalculable):
 
 
 
-    # -------------------------------------------------- RAW DISPLAY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Raw display of the Equation (debugging method)
     #   @return A string containing "type : sign coeff × X ^ degree"
@@ -1021,7 +1021,7 @@ class Equation(ComposedCalculable):
 
 
 
-    # ---------------------------- ONE STEP RESOLUTION OF AN EQUATION ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates the next Equation object in the resolution
     #   @todo Expandables (which have to get checked first, btw) !
@@ -1488,7 +1488,7 @@ class Equation(ComposedCalculable):
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
@@ -1535,7 +1535,7 @@ class Equation(ComposedCalculable):
 
 
 
-    # --------- FUNCTION CREATING THE ML STRING OF ITS OWN RESOLUTION ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the equation's resolution in the given ML
     #   @param options Any options
@@ -1716,9 +1716,9 @@ class Equation(ComposedCalculable):
 
 
 
-# -----------------------------------------------------------------------------
-# -------------------------------------- CLASS: CrossProductEquation ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class CrossProductEquation
 # @brief All objects that are displayable as Cross Product Equations
@@ -1728,7 +1728,7 @@ class CrossProductEquation(Equation):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @param arg    CrossProductEquation|(Quotient, Quotient)|
@@ -1821,7 +1821,7 @@ class CrossProductEquation(Equation):
 
 
 
-    # ---------------------------- ONE STEP RESOLUTION OF AN EQUATION ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates the next Equation object in the resolution
     #   @return An Equation
@@ -1848,9 +1848,9 @@ class CrossProductEquation(Equation):
 
 
 
-# -----------------------------------------------------------------------------
-# ----------------------------------------------------- CLASS: Table ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Table
 # @brief All objects that are displayable as Tables
@@ -1860,7 +1860,7 @@ class Table(Printable):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @param arg [[Calculable], [Calculable]]   (the Calculables' lists must
@@ -1905,7 +1905,7 @@ class Table(Printable):
 
 
 
-    # ------------------------------------------------------- LENGTH ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of columns of the Table
     def __len__(self):
@@ -1915,13 +1915,13 @@ class Table(Printable):
 
 
 
-    # ----------------------------------------------------- GET CELL ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Table's content as a list of two lists so it
     #           can be addressed
     def get_cell(self):
         return self._data
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     cell = property(get_cell,
                     doc = "t.cell is the complete Table t.cell[i][j] is a cell")
 
@@ -1929,7 +1929,7 @@ class Table(Printable):
 
 
 
-    # ------------------------------------------------- IS NUMERIC ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns True if the Table is entirely numeric
     def is_numeric(self):
@@ -1944,7 +1944,7 @@ class Table(Printable):
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
@@ -1987,7 +1987,7 @@ class Table(Printable):
 
 
 
-    # ------------------------------------------------ CROSS PRODUCTS ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Produces the cross product of a cell among 4 given
     #   @param cols : (nb of col 1, nb of col 2)
@@ -2071,9 +2071,9 @@ class Table(Printable):
 
 
 
-# -----------------------------------------------------------------------------
-# -------------------------------------------------- CLASS: Table_UP ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Table_UP
 # @brief All objects that are displayable as proportional Tables but uncomplete
@@ -2083,7 +2083,7 @@ class Table_UP(Table):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @param coeff        nb|numericCalculable
@@ -2262,12 +2262,12 @@ class Table_UP(Table):
 
 
 
-    # ---------------------------------------------------- GET COEFF ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Table's coefficient
     def get_coeff(self):
         return self._coeff
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     coeff = property(get_coeff,
                      doc = "the coefficient of the Table_UP")
 
@@ -2275,12 +2275,12 @@ class Table_UP(Table):
 
 
 
-    # --------------------------------------- GET CROSSPRODUCTS INFO ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the info about Cross Products
     def get_crossproducts_info(self):
         return self._crossproducts_info
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     crossproducts_info = property(get_crossproducts_info,
                                   doc = "infos about the cross products")
     # for instance, {'EF' : (2,0), "GH" : (3,0)} means Item 'EF' can
@@ -2290,7 +2290,7 @@ class Table_UP(Table):
 
 
 
-    # ---------------------------------- INTO CROSSPRODUCT EQUATION ----------
+    # --------------------------------------------------------------------------
     ##
     #   @argument   arg is expected to be an object that exists in the cp info
     #   @brief Returns the CrossProductEquation matching the given arg

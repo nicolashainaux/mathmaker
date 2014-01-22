@@ -21,9 +21,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import error
-# -----------------------------------------------------------------------------
-# ----------------------------------------------- CLASS: Q_Structure ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Q_Structure
 # @brief Contains the method to be reimplemented by any question.*
@@ -33,7 +33,7 @@ class Q_Structure(object):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined. Constructor.
     #   @warning Exception NotInstanciableObject.
@@ -98,7 +98,7 @@ class Q_Structure(object):
 
 
 
-    # ------------------------------------------ TEXT|ANSWER --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   Redirects to text_to_str() or answer_to_str()
     def to_str(self, ex_or_answers):
@@ -116,7 +116,7 @@ class Q_Structure(object):
 
 
 
-    # --------------------------------- TEXT OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
     #   Returns a str
@@ -129,7 +129,7 @@ class Q_Structure(object):
 
 
 
-    # ------------------------------- ANSWER OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
     #   Writes the answers of the questions to the output.

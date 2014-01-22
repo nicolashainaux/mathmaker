@@ -28,7 +28,7 @@ from decimal import Decimal
 
 
 
-# --------------------- REDUCE A LITERALS PRODUCT (GIVEN AS A LIST) ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns the reduced Product made from the given literals list
 #   For example, [x, x², x**6] would return [x**9].
@@ -91,7 +91,7 @@ def reduce_literal_items_product(provided_list):
 
 
 
-# ---------------------------------------- PUT A TERM IN THE LEXICON ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief A substitute for append() in a special case, for dictionaries
 #   This method checks if a "provided_key" is already in the lexicon.
@@ -124,7 +124,7 @@ def put_term_in_lexicon(provided_key, associated_coeff, lexi):
 
 
 
-# -------------------------------------------- GATHER LITERAL VALUES ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Gather all literal Values of an expression
 #   @param xpr The (Calculable) expression to iter over
@@ -148,7 +148,7 @@ def gather_literals(xpr):
 
 
 
-# --------------------------------------- PURGE LIST FROM DUPLICATES ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Purges the given list from duplicates elements
 #   @param l The list
@@ -165,7 +165,7 @@ def purge_from_duplicates(l):
 
 
 
-# --------------------------------- CHECK A LEXICON FOR SUBSTITUTION ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Checks if the literals of a *Equality|*Expression can be replaced
 #   @param objcts The list of literal expressions
@@ -277,7 +277,7 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
 
 
 
-# ----------------------- TAKE ELTS OF A LIST AWAY FROM ANOTHER LIST ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Takes all elements of a list1 away if they're in list2
 def take_away(list1, list2):
@@ -296,7 +296,7 @@ def take_away(list1, list2):
 
 
 
-# ---------------- CORRECTS THE E+n RESULTS FROM decimal.normalize() ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Transforms the xE+n results in decimal form (ex. 1E+1 -> 10)
 def correct_normalize_results(d):

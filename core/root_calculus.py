@@ -19,9 +19,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# -----------------------------------------------------------------------------
-# ---------------------------------- PACKAGE:  core.root_calculus -------------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @package core.root_calculus
 # @brief Mostly abstract classes for mathematical calculus objects.
@@ -47,9 +47,9 @@ except:
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------------- CLASS: Evaluable ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Evaluable
 # @brief Abstract mother class of all (evaluable) mathematical objects
@@ -60,7 +60,7 @@ class Evaluable(Printable):
 
 
 
-    # ----------------------------------------------------- EVALUATE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the numeric value of the object
     def evaluate(self):
@@ -70,7 +70,7 @@ class Evaluable(Printable):
 
 
 
-    # ------------------------------------------------- IS NUMERIC ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains numeric objects
     def is_numeric(self):
@@ -80,7 +80,7 @@ class Evaluable(Printable):
 
 
 
-    # ------------------------------------------------- IS LITERAL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains literal objects
     def is_literal(self):
@@ -90,7 +90,7 @@ class Evaluable(Printable):
 
 
 
-    # ---------------------------------------------------- IS NULL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the evaluated value of an object is null
     def is_null(self):
@@ -100,7 +100,7 @@ class Evaluable(Printable):
 
 
 
-    # ------------------------------------- CONTAINS A ROUNDED NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief To check if this contains a rounded number...
     #   @return True or False
@@ -111,7 +111,7 @@ class Evaluable(Printable):
 
 
 
-    # ------------------------------------------- CONTAINS EXACTLY ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object contains exactly the given objct
     #   It can be used to detect objects embedded in a Sum or a Product that
@@ -125,7 +125,7 @@ class Evaluable(Printable):
 
 
 
-    # -------------------------------- ALPHABETICAL ORDER COMPARISON ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sort order : numerics < sorted literals
     #   @return -1, 0 or +1
@@ -156,7 +156,7 @@ class Evaluable(Printable):
 
 
 
-    # --------------------------------------------- GET FIRST LETTER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief If the object is literal, returns the first letter
     # The first term of a Sum, the first factor of a Product etc.
@@ -167,9 +167,9 @@ class Evaluable(Printable):
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------------ CLASS: Calculable ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Calculable
 # @brief Abstract mother class of all (calculable) mathematical objects
@@ -179,7 +179,7 @@ class Calculable(Evaluable):
 
 
 
-    # ---------------------------------------------------- ITERATION ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief This will iter over the content of the Calculable
     def __iter__(self):
@@ -192,7 +192,7 @@ class Calculable(Evaluable):
 
 
 
-    # ------------------------------------------------ GET ITER LIST ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the list of elements to iter over
     def get_iteration_list(self):
@@ -201,7 +201,7 @@ class Calculable(Evaluable):
 
 
 
-    # ------------------------------------------- CALCULATE ONE STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the next Calculable object during a numeric calculation
     def calculate_next_step(self, **options):
@@ -211,7 +211,7 @@ class Calculable(Evaluable):
 
 
 
-    # -------------------------------- EXPAND AND REDUCE : NEXT STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the next step of expansion/reduction of the Sum
     #   So, either the Sum of its expanded/reduced terms,
@@ -225,7 +225,7 @@ class Calculable(Evaluable):
 
 
 
-    # ------------------------------------------ EXPONENTED'S LENGTH ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of elements of the Exponented
     def __len__(self):
@@ -235,7 +235,7 @@ class Calculable(Evaluable):
 
 
 
-    # --------------------------------------------------- SUBSTITUTE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Uses the given lexicon to substitute literal Values in self
     def substitute(self, subst_dict):
@@ -245,7 +245,7 @@ class Calculable(Evaluable):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single 1
     # For instance, the Product 1×1×1×1 or the Sum 0 + 0 + 1 + 0
@@ -257,7 +257,7 @@ class Calculable(Evaluable):
 
 
 
-    # ---------------------------- IS EQUIVALENT TO A SINGLE INT ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single int
     def is_displ_as_a_single_int(self):
@@ -268,7 +268,7 @@ class Calculable(Evaluable):
 
 
 
-    # ------------------------------- IS EQUIVALENT TO A SINGLE -1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single -1
     # For instance, the Product 1×1×(-1)×1 or the Sum 0 + 0 - 1 + 0
@@ -280,7 +280,7 @@ class Calculable(Evaluable):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 0 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single 0
     # For instance, the Product 0×0×0×0 (but not 0×1)
@@ -293,7 +293,7 @@ class Calculable(Evaluable):
 
 
 
-    # --------------------- IS EQUIVALENT TO A SINGLE NUMERIC ITEM ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object is or only contains one numeric Item
     def is_displ_as_a_single_numeric_Item(self):
@@ -304,7 +304,7 @@ class Calculable(Evaluable):
 
 
 
-    # -------------------------- IS EQUIVALENT TO A SINGLE NEUTRAL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be considered as a neutral element
     def is_displ_as_a_single_neutral(self, elt):
@@ -315,7 +315,7 @@ class Calculable(Evaluable):
 
 
 
-    # ------- CHECK IF A × IS REQUIRED BETWEEN SELF & ANOTHER FACTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the usual writing rules require a × between two factors
     #   @param objct The other one
@@ -329,7 +329,7 @@ class Calculable(Evaluable):
 
 
 
-    # ----------------------- CHECK IF A FACTOR REQUIRES PARENTHESIS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the argument requires brackets in a product
     #   For instance, a Sum with several terms or a negative Item
@@ -342,7 +342,7 @@ class Calculable(Evaluable):
 
 
 
-    # --------------------------------- REQUIRES INNER PARENTHESIS ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the argument requires inner brackets
     #   The reason for requiring them is having an exponent different
@@ -357,9 +357,9 @@ class Calculable(Evaluable):
 
 
 
-# -----------------------------------------------------------------------------
-# ---------------------------------------------------- CLASS: Signed ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Signed
 # @brief Signed objects: CommutativeOperations (Sums&Products), Items, Quotients...
@@ -368,7 +368,7 @@ class Signed(Calculable):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @return A Signed, though it can't really be used as is
@@ -379,7 +379,7 @@ class Signed(Calculable):
 
 
 
-    # --------------------------------------- GET MINUS SIGNS NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of minus signs in the object
     def get_minus_signs_nb(self):
@@ -389,12 +389,12 @@ class Signed(Calculable):
 
 
 
-    # ------------------------------------------------------ GET SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the sign of the object
     def get_sign(self):
         return self._sign
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     sign = property(get_sign,
                     doc = "Sign of the object")
 
@@ -402,7 +402,7 @@ class Signed(Calculable):
 
 
 
-    # ------------------------------------------------------ SET SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Set the sign of the object
     #   @param  arg String being '+' or '-' or number being +1 or -1
@@ -426,7 +426,7 @@ class Signed(Calculable):
 
 
 
-    # --------------------------------------------- SET OPPOSITE SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Changes the sign of the object
     def set_opposite_sign(self):
@@ -446,7 +446,7 @@ class Signed(Calculable):
 
 
 
-    # ------------------------------------------------ IS NEGATIVE ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if object's *sign* is '-' (ie -(-1) would be "negative")
     def is_negative(self):
@@ -457,7 +457,7 @@ class Signed(Calculable):
 
 
 
-    # ------------------------------------------------ IS POSITIVE ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if object's *sign* is '+'
     def is_positive(self):
@@ -468,9 +468,9 @@ class Signed(Calculable):
 
 
 
-# -----------------------------------------------------------------------------
-# ----------------------------------------------------- CLASS: Value ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Value
 # @brief This class embedds Numbers & Strings into a basic object. It doesn't
@@ -489,7 +489,7 @@ class Value(Signed):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception
@@ -541,7 +541,7 @@ class Value(Signed):
 
 
 
-    # -------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief If the object is literal, returns the value
     def get_first_letter(self):
@@ -549,32 +549,32 @@ class Value(Signed):
             return self.raw_value
         else:
             raise error.UncompatibleType(self, "str, i.e. literal Value")
-    # -------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the "has been rounded" state of the Value
     def get_has_been_rounded(self):
         return self._has_been_rounded
-    # -------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the list of elements to iter over
     def get_iteration_list(self):
         return [self.raw_value]
-    # -------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of minus signs in the object
     def get_minus_signs_nb(self):
         raise error.MethodShouldBeRedefined(self, 'get_minus_signs_nb')
-    # -------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the raw value contained in the Value
     def get_raw_value(self):
         return self._raw_value
-    # -------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the sign of the Value
     def get_sign(self):
         return self._sign
-    # -------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the unit of the Value
     def get_unit(self):
@@ -609,7 +609,7 @@ class Value(Signed):
 
 
 
-    # ----------------------------------------- GET HAS BEEN ROUNDED ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the "has been rounded" state of the Value
     def set_has_been_rounded(self, arg):
@@ -626,7 +626,7 @@ class Value(Signed):
 
 
 
-    # ------------------------------------------------------ SET SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Set the sign of the object
     #   @param  arg String being '+' or '-' or number being +1 or -1
@@ -650,7 +650,7 @@ class Value(Signed):
 
 
 
-    # ------------------------------------------------------ SET SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Set the unit of the Value
     #   @param  arg String
@@ -663,7 +663,7 @@ class Value(Signed):
 
 
 
-    # --------------------------------------------- SET OPPOSITE SIGN ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Changes the sign of the object
     def set_opposite_sign(self):
@@ -683,7 +683,7 @@ class Value(Signed):
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
@@ -725,7 +725,7 @@ class Value(Signed):
 
 
 
-    # ----------------------------------------------------- EVALUATE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the value of a numeric Value
     #   @warning Raise an exception if not numeric
@@ -740,7 +740,7 @@ class Value(Signed):
 
 
 
-    # ------------------------------------------- CALCULATE ONE STEP ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns None
     def calculate_next_step(self, **options):
@@ -750,7 +750,7 @@ class Value(Signed):
 
 
 
-    # -------------------------------------------------- RAW DISPLAY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Debugging method to print the Value
     def dbg_str(self, **options):
@@ -760,7 +760,7 @@ class Value(Signed):
 
 
 
-    # ------------------------------------------- OBJECTS COMPARISON ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Compares two Values
     #   @todo check if __cmp__ shouldn't return +1 if value of self > objct
@@ -779,7 +779,7 @@ class Value(Signed):
 
 
 
-    # ----------------------------------------------- VALUE'S LENGTH ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Value's length
     #   @return 1
@@ -789,7 +789,7 @@ class Value(Signed):
 
 
 
-    # ----------------------------------------------- MULTIPLICATION ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Executes the multiplication with another object
     #   @warning Will raise an error if you try to multiply a literal
@@ -804,7 +804,7 @@ class Value(Signed):
 
 
 
-    # ----------------------------------------------------- ADDITION ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Executes the addition with another object
     #   @warning Will raise an error if you try to add a literal with a number
@@ -818,7 +818,7 @@ class Value(Signed):
 
 
 
-    # --------------------------------------------------- SUBSTITUTE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Uses the given lexicon to substitute literal Values in self
     def substitute(self, subst_dict):
@@ -840,7 +840,7 @@ class Value(Signed):
 
 
 
-    # --------------------------------------------------- SQUARE ROOT ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns a Value containing the square root of self
     def sqrt(self):
@@ -851,7 +851,7 @@ class Value(Signed):
 
 
 
-    # --------------------------------------------------------- ROUND ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the value once rounded to the given precision
     def round(self, precision):
@@ -894,7 +894,7 @@ class Value(Signed):
 
 
 
-    # ------------------------------------------------- DIGITS NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of digits of a numerical value
     def digits_number(self):
@@ -919,7 +919,7 @@ class Value(Signed):
 
 
 
-    # ------------------------------------------ NEEDS TO GET ROUNDED ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns True/False depending on the need of the value to get
     #          rounded (for instance 2.68 doesn't need to get rounded if
@@ -952,7 +952,7 @@ class Value(Signed):
 
 
 
-    # ------------------------------------- CONTAINS A ROUNDED NUMBER ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief To check if this contains a rounded number...
     #   @return True or False depending on the Value inside
@@ -964,7 +964,7 @@ class Value(Signed):
 
 
 
-    # ------------------------------------------- CONTAINS EXACTLY ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Always False for a Value
     #   @param objct The object to search for
@@ -977,7 +977,7 @@ class Value(Signed):
 
 
 
-    # ---------------------------------------- IS A PERFECT SQUARE ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object contains a perfect square (integer or decimal)
     def is_a_perfect_square(self):
@@ -992,7 +992,7 @@ class Value(Signed):
 
 
 
-    # --------------------------------------------- IS AN INTEGER ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object contains an integer (numeric)
     def is_an_integer(self):
@@ -1008,7 +1008,7 @@ class Value(Signed):
 
 
 
-    # ------------------------------------------------- IS NUMERIC ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains numeric objects
     def is_numeric(self):
@@ -1025,7 +1025,7 @@ class Value(Signed):
 
 
 
-    # ------------------------------------------------- IS LITERAL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains literal objects
     def is_literal(self):
@@ -1039,7 +1039,7 @@ class Value(Signed):
 
 
 
-    # ---------------------------------------------------- IS NULL ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the evaluated value of an object is null
     def is_null(self):
@@ -1052,7 +1052,7 @@ class Value(Signed):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single 1
     def is_displ_as_a_single_1(self):
@@ -1065,7 +1065,7 @@ class Value(Signed):
 
 
 
-    # ------------------------------- IS EQUIVALENT TO A SINGLE -1 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single -1
     def is_displ_as_a_single_minus_1(self):
@@ -1078,7 +1078,7 @@ class Value(Signed):
 
 
 
-    # -------------------------------- IS EQUIVALENT TO A SINGLE 0 ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single 0
     def is_displ_as_a_single_0(self):
@@ -1091,7 +1091,7 @@ class Value(Signed):
 
 
 
-    # --------------------- IS EQUIVALENT TO A SINGLE NUMERIC ITEM ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object is or only contains one numeric Item
     def is_displ_as_a_single_numeric_Item(self):
@@ -1101,7 +1101,7 @@ class Value(Signed):
 
 
 
-    # ---------------------------- IS EQUIVALENT TO A SINGLE INT ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single int
     def is_displ_as_a_single_int(self):
@@ -1110,9 +1110,9 @@ class Value(Signed):
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------------ CLASS: Exponented ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Exponented
 # @brief Exponented objects: CommutativeOperations (Sums&Products), Items, Quotients...
@@ -1124,7 +1124,7 @@ class Exponented(Signed):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @return An Exponented, though it can't really be used as is
@@ -1136,20 +1136,20 @@ class Exponented(Signed):
 
 
 
-    # ------------------------------------------------- GET EXPONENT ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Gets the exponent of the Function
     #   @brief this should be already done by Item.get_exponent()...
     def get_exponent(self):
         return self._exponent
-    # ---------------------------------------- ASSOCIATED PROPERTIES ----------
+    # --------------------------------------------------------------------------
     exponent = property(get_exponent, doc = "Exponent of the Function")
 
 
 
 
 
-    # ------------------------------------------------- SET EXPONENT ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Set the value of the exponent
     #   @param  arg Calculable|Number|String
@@ -1164,7 +1164,7 @@ class Exponented(Signed):
 
 
 
-    # ----------------------------- MUST THE EXPONENT BE DISPLAYED ? ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief True if the exponent isn't equivalent to a single 1
     #   @return True if the exponent is not equivalent to a single 1

@@ -77,7 +77,7 @@ def abs(nb):
 
 
 
-# ------------------------------------------------ SIGN OF A PRODUCT ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns the sign of the product of relatives numbers
 #   @param signed_objctlist A list of any objects having a sign
@@ -116,7 +116,7 @@ def sign_of_product(signed_objctlist):
 
 
 
-# ------------------------------------------------ TWO INTEGER'S GCD ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns the GCD of two integers
 def gcd(a, b):
@@ -138,7 +138,7 @@ def gcd(a, b):
 
 
 
-# ---------------------------------------- GCD OF A LIST OF INTEGERS ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns the GCD of a list of integers
 def gcd_of_the_list(l):
@@ -151,7 +151,7 @@ def gcd_of_the_list(l):
 
 
 
-# ------------------------------------------------------ PUPIL'S GCD ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns the GCD that a pupil would think of
 #   If the numbers are too high, the real gcd will be returned to avoid having
@@ -204,7 +204,7 @@ def pupil_gcd(a, b):
 
 
 
-# ------------------------------------------------------ PUPIL'S GCD ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns the GCD among powers of 10
 #   For instance, ten_power_gcd(20, 300) returns 10,
@@ -227,7 +227,7 @@ def ten_power_gcd(a, b):
 
 
 
-# ------------------------------------------------ TWO INTEGER'S LCM ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns the lcm of two integers
 def lcm(a, b):
@@ -237,7 +237,7 @@ def lcm(a, b):
 
 
 
-# ---------------------------------------- LCM OF A LIST OF INTEGERS ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Returns the LCM of a list of integers
 def lcm_of_the_list(l):
@@ -250,7 +250,7 @@ def lcm_of_the_list(l):
 
 
 
-# -------------------------------------------------------- IS EVEN ? ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief True if objct is an even number|numeric Item. Otherwise, False
 #   @param objct The object to test
@@ -275,7 +275,7 @@ def is_even(objct):
 
 
 
-# ------------------------------------------------------ IS UNEVEN ? ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief True if objct is an uneven number|numeric Item. Otherwise, False
 #   @param objct The object to test
@@ -300,7 +300,7 @@ def is_uneven(objct):
 
 
 
-# ------------------------------- ANGLES' UNITS CONVERSION FUNCTIONS ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Conversions between degrees and radians
 def deg_to_rad(arg):
@@ -313,7 +313,7 @@ def deg_to_rad(arg):
 
 
 
-# ------------------------------- ANGLES' UNITS CONVERSION FUNCTIONS ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Conversions between degrees and radians
 def rad_to_deg(arg):
@@ -326,7 +326,7 @@ def rad_to_deg(arg):
 
 
 
-# ---------------------------------------- MEAN OF A LIST OF NUMBERS ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Mean of a list of numbers
 def mean(numberList):
@@ -348,7 +348,7 @@ def mean(numberList):
 
 
 
-# ------------------------------------------- BARYCENTER OF n POINTS ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Barycenter of a list of Points
 def barycenter(points_list, barycenter_name):
@@ -377,7 +377,7 @@ def barycenter(points_list, barycenter_name):
 
 
 
-# ----------------------------------------------- ROUNDING A DECIMAL ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Rounds correctly a Decimal
 #   @options They are the same as the decimal's module quantize() method

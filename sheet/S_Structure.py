@@ -23,9 +23,9 @@
 from lib import error
 from lib.common.cst import *
 
-# -----------------------------------------------------------------------------
-# ----------------------------------------- CLASS: sheet.S_Structure ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class S_Structure
 # @brief Abstract mother class of all sheets !
@@ -36,7 +36,7 @@ class S_Structure(object):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined. Constructor.
     #   @warning Exception NotInstanciableObject.
@@ -161,7 +161,7 @@ class S_Structure(object):
 
 
 
-    # ----------------------------- OUTPUT WRITING : the whole sheet ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes the whole sheet's content to the output.
     def __str__(self):
@@ -294,7 +294,7 @@ class S_Structure(object):
 
 
 
-    # ------------------------------ EXERCISES'|ANSWERS' TEXTS --> STR ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Return as str exercises' or answers'texts
     def texts_to_str(self, ex_or_answers, n_of_first_ex):
@@ -366,7 +366,7 @@ class S_Structure(object):
 
 
 
-    # ------------------------------- OUTPUT WRITING : sheet's header ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output the header of the sheet to be generated
     #   This header is written in a large size. A new line follow it.
@@ -383,7 +383,7 @@ class S_Structure(object):
 
 
 
-    # -------------------------------- OUTPUT WRITING : sheet's title ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output the title of the sheet to be generated
     def sheet_title_to_str(self):
@@ -401,7 +401,7 @@ class S_Structure(object):
 
 
 
-    # ----------------------------------- OUTPUT WRITING : sheet text ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output the sheet's text
     def sheet_text_to_str(self):
@@ -417,7 +417,7 @@ class S_Structure(object):
 
 
 
-    # ------------------------------- OUTPUT WRITING : answers' title ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output title of the answers' sheet to be generated
     def answers_title_to_str(self):
@@ -433,7 +433,7 @@ class S_Structure(object):
 
 
 
-    # ---------------------------------------- OUTPUT WRITING : texts ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output all exercises' texts
     #def write_texts(self):
@@ -448,7 +448,7 @@ class S_Structure(object):
 
 
 
-    # -------------------------------------- OUTPUT WRITING : answers ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output all exercises' answers
     #def write_answers(self):

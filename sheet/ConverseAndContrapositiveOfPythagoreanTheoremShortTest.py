@@ -38,9 +38,9 @@ SHEET_LAYOUT = { 'exc' : [ None,                    'all'
                }
 
 
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # CLASS: sheet.ConverseAndContrapositiveOfPythagoreanTheoremShortTest ---------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class ConverseAndContrapositiveOfPythagoreanTheoremShortTest
 # @brief The short test about the converse and contrapositive of the
@@ -51,7 +51,7 @@ class ConverseAndContrapositiveOfPythagoreanTheoremShortTest(S_Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @param embedded_machine The machine to be used

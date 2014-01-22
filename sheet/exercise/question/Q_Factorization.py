@@ -169,9 +169,9 @@ AVAILABLE_Q_KIND_VALUES = {'level_01':['default',
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------- CLASS: Q_Factorization ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Q_Factorization
 # @brief Question related to the factorization of a literal expression
@@ -181,7 +181,7 @@ class Q_Factorization(Q_Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
     #   @param embedded_machine The machine to be used
@@ -482,7 +482,7 @@ class Q_Factorization(Q_Structure):
 
 
 
-    # --------------------------------- TEXT OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
@@ -498,7 +498,7 @@ class Q_Factorization(Q_Structure):
 
 
 
-    # ------------------------------- ANSWER OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
@@ -519,7 +519,7 @@ class Q_Factorization(Q_Structure):
 
 
 
-# --------------------------------------------- LEVEL_01 SUBFUNCTION ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Creates & returns the solution and the answer's steps.
 #   @return steps (list containing the steps)
@@ -698,7 +698,7 @@ def level_01(q_subkind, **options):
 
 
 
-# --------------------------------------------- LEVEL_02 SUBFUNCTION ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Creates & returns the solution and the answer's steps.
 #   @return steps (list containing the steps)
@@ -1095,7 +1095,7 @@ def level_02(q_subkind, **options):
 
 
 
-# --------------------------------------------- LEVEL_03 SUBFUNCTION ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Creates & returns the solution and the answer's steps.
 #   @return steps (list containing the steps)

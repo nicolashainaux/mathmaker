@@ -25,9 +25,9 @@ from lib import error
 from lib.common import software
 from lib.common import cfg
 
-# -----------------------------------------------------------------------------
-# -------------------------------------------------- CLASS: Clonable ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Clonable
 # @brief All objects that are used must be able to be copied deeply
@@ -38,7 +38,7 @@ class Clonable(object):
 
 
 
-    # ---------------------------------------------------- DEEP COPY ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns a deep copy of the object
     def clone(self):
@@ -51,9 +51,9 @@ class Clonable(object):
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------------- CLASS: Printable ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Printable
 # @brief All Printable objects : Exponenteds & others (Equations...)
@@ -64,7 +64,7 @@ class Printable(Clonable):
 
 
 
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
@@ -76,9 +76,9 @@ class Printable(Clonable):
 
 
 
-# -----------------------------------------------------------------------------
-# -------------------------------------------------- CLASS: Drawable ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Drawable
 # @brief All Drawable objects (which are also Printable ones !)
@@ -89,7 +89,7 @@ class Drawable(Clonable):
 
 
 
-    # ---------- FUNCTION CREATING THE EUKLEIDES STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates the euk string to put in the file
     #   @param options Any options
@@ -100,12 +100,12 @@ class Drawable(Clonable):
 
 
 
-    # --------------------------------------------- GET EUK FILENAME ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the eukleides filename associated to the triangle
     def get_euk_filename(self):
         return self._filename + ".euk"
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     euk_filename = property(get_euk_filename,
                             doc = "Eukleides filename associated to " \
                                   + "the right triangle")
@@ -113,12 +113,12 @@ class Drawable(Clonable):
 
 
 
-    # --------------------------------------------- GET EPS FILENAME ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the eps filename associated to the triangle
     def get_eps_filename(self):
         return self._filename + ".eps"
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     eps_filename = property(get_eps_filename,
                             doc = "eps filename associated to " \
                                   + "the right triangle")
@@ -127,7 +127,7 @@ class Drawable(Clonable):
 
 
 
-    # ------------------- FUNCTION CREATING THE PICTURE OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates the picture of the drawable object
     #   @return Nothing, just creates the picture file

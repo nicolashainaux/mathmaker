@@ -33,7 +33,7 @@ if markup_choice == 'latex':
 
 
 
-# ----------------------------------------------------- WRITE A TABLE ---------
+# --------------------------------------------------------------------------
 ##
 #   @brief Writes a table filled with the given [strings]
 #   @param size : (nb of lines, nb of columns)

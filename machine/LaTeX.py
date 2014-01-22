@@ -35,9 +35,9 @@ import core.base_calculus
 import Structure
 
 
-# -----------------------------------------------------------------------------
-# --------------------------------------------- CLASS: machine.LaTeX ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class LaTeX
 # @brief This machine knows how to write LaTeX commands & math expressions
@@ -48,7 +48,7 @@ class LaTeX(Structure.Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   The created machine is set to the beginning of an expression,
@@ -121,7 +121,7 @@ the language entry from the configuration file is neither implemented in \
 
 
 
-    # ------------------------------- OUTPUT WRITING : sheet's header ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Write the complete LaTeX header of the sheet to the output.
     def write_document_header(self):
@@ -227,7 +227,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
 
 
-    # ----------------------------- OUTPUT WRITING : several commands ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output the command to begin the document
     def write_document_begins(self):
@@ -474,7 +474,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
 
 
-    # ----- FUNCTION CREATING THE STRING ASSOCIATED TO A MATH. OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates a LaTeX string of the given object
     def type_string(self, objct, **options):
@@ -490,7 +490,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
 
 
-    # ------------------------ FUNCTION INSERTING A DASHED-STYLE LINE ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Draws a horizontal dashed line
     def insert_dashed_hline(self, **options):
@@ -502,7 +502,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
 
 
-    # --------------------------- FUNCTION INSERTING A VERTICAL SPACE ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Puts a vertical space (default 1 cm)
     def insert_vspace(self, **options):
@@ -512,7 +512,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
 
 
-    # --------------- FUNCTION INSERTING THE PICTURE OF THE GIVEN ARG ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Draws and inserts the picture of the drawable_arg
     def insert_picture(self, drawable_arg, **options):
@@ -532,7 +532,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
 
 
-    # ---------------------------- SETTING THE REF. SIZE OF THE TEXTES ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the font_size_offset field
     def set_font_size_offset(self, arg):
@@ -543,7 +543,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
             self.font_size_offset = arg
 
 
-    # ----------------------------------- SETTING THE OUTPUT TO NORMAL ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Sets the redirect_output_to_str field to True or False
     def set_redirect_output_to_str(self, arg):

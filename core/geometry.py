@@ -19,9 +19,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# -----------------------------------------------------------------------------
-# --------------------------------------- PACKAGE:  core.geometry -------------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @package core.geometry
 # @brief Mathematical geometrical objects.
@@ -59,9 +59,9 @@ except:
 
 
 
-# -----------------------------------------------------------------------------
-# -------------------------------------------------- CLASS: Triangle ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Triangle
 # @brief
@@ -71,7 +71,7 @@ class Triangle(Drawable):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
     #   @param arg : Triangle |
@@ -264,12 +264,12 @@ class Triangle(Drawable):
 
 
 
-    # -------------------------------------------------- GET VERTEX0 ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns vertex0 (as a Point)
     def get_vertex0(self):
         return self._vertices[0]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     vertex0 = property(get_vertex0,
                        doc = "First vertex of the Triangle")
 
@@ -277,12 +277,12 @@ class Triangle(Drawable):
 
 
 
-    # -------------------------------------------------- GET VERTEX1 ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns vertex1 (as a Point)
     def get_vertex1(self):
         return self._vertices[1]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     vertex1 = property(get_vertex1,
                        doc = "Second vertex of the Triangle")
 
@@ -290,12 +290,12 @@ class Triangle(Drawable):
 
 
 
-    # -------------------------------------------------- GET VERTEX2 ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns vertex2 (as a Point)
     def get_vertex2(self):
         return self._vertices[2]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     vertex2 = property(get_vertex2,
                        doc = "Third vertex of the Triangle")
 
@@ -303,12 +303,12 @@ class Triangle(Drawable):
 
 
 
-    # ------------------------------------------------- GET VERTICES ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the three vertices (as a list of Points)
     def get_vertices(self):
         return self._vertices
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     vertices = property(get_vertices,
                         doc = "The three vertices (in a list)")
 
@@ -316,12 +316,12 @@ class Triangle(Drawable):
 
 
 
-    # ------------------------------------------- GET ROTATION ANGLE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the angle of rotation around the isobarycenter
     def get_rotation_angle(self):
         return self._rotation_angle
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     rotation_angle = property(get_rotation_angle,
                               doc = "Angle of rotation around the isobarycenter")
 
@@ -329,12 +329,12 @@ class Triangle(Drawable):
 
 
 
-    # --------------------------------------------------- GET ANGLE0 ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns angle0 (as an Angle)
     def get_angle0(self):
         return self._angles[0]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     angle0 = property(get_angle0,
                       doc = "First angle of the Triangle")
 
@@ -342,12 +342,12 @@ class Triangle(Drawable):
 
 
 
-    # --------------------------------------------------- GET ANGLE1 ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns angle1 (as an Angle)
     def get_angle1(self):
         return self._angles[1]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     angle1 = property(get_angle1,
                       doc = "Second angle of the Triangle")
 
@@ -355,12 +355,12 @@ class Triangle(Drawable):
 
 
 
-    # --------------------------------------------------- GET ANGLE2 ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns angle2 (as an Angle)
     def get_angle2(self):
         return self._angles[2]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     angle2 = property(get_angle2,
                       doc = "Third angle of the Triangle")
 
@@ -368,12 +368,12 @@ class Triangle(Drawable):
 
 
 
-    # --------------------------------------------------- GET ANGLES ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns [angles]   (as a list of Angles)
     def get_angles(self):
         return self._angles
-    # ---------------------------------------- ASSOCIATED PROPERTIES ----------
+    # --------------------------------------------------------------------------
     angles = property(get_angles,
                       doc = "The angles' list of the Triangle")
 
@@ -381,12 +381,12 @@ class Triangle(Drawable):
 
 
 
-    # ---------------------------------------------------- GET SIDE0 ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns side0 (as a Segment)
     def get_side0(self):
         return self._sides[0]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     side0 = property(get_side0,
                      doc = "First side of the Triangle")
 
@@ -394,12 +394,12 @@ class Triangle(Drawable):
 
 
 
-    # ---------------------------------------------------- GET SIDE1 ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns side1 (as a Segment)
     def get_side1(self):
         return self._sides[1]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     side1 = property(get_side1,
                      doc = "Second side of the Triangle")
 
@@ -407,12 +407,12 @@ class Triangle(Drawable):
 
 
 
-    # ---------------------------------------------------- GET SIDE2 ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns side2 (as a Segment)
     def get_side2(self):
         return self._sides[2]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     side2 = property(get_side2,
                      doc = "Third side of the Triangle")
 
@@ -420,12 +420,12 @@ class Triangle(Drawable):
 
 
 
-    # ---------------------------------------------------- GET SIDES ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns [sides]   (as a list of Segments)
     def get_sides(self):
         return self._sides
-    # ---------------------------------------- ASSOCIATED PROPERTIES ----------
+    # --------------------------------------------------------------------------
     sides = property(get_sides,
                      doc = "The sides' list of the Triangle")
 
@@ -433,12 +433,12 @@ class Triangle(Drawable):
 
 
 
-    # ----------------------------------------------------- GET NAME ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the name of the triangle
     def get_name(self):
         return self._name
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     name = property(get_name,
                     doc = "Name of the right triangle")
 
@@ -446,7 +446,7 @@ class Triangle(Drawable):
 
 
 
-    # ---------- FUNCTION CREATING THE EUKLEIDES STRING OF THE OBJECT ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates the euk string to put in the file
     #   @param options Any options
@@ -624,7 +624,7 @@ class Triangle(Drawable):
 
 
 
-    # --------------------------- WORKS OUT THE DIMENSIONS OF THE BOX ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Works out the dimensions of the box
     #   @param options Any options
@@ -647,9 +647,9 @@ class Triangle(Drawable):
 
 
 
-# -----------------------------------------------------------------------------
-# --------------------------------------------- CLASS: RightTriangle ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class RightTriangle
 # @brief
@@ -659,7 +659,7 @@ class RightTriangle(Triangle):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
     #   @param arg : RightTriangle |
@@ -790,12 +790,12 @@ class RightTriangle(Triangle):
 
 
 
-    # ----------------------------------------------------- GET LEG0 ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns leg0 (as a Segment)
     def get_leg0(self):
         return self._sides[0]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     leg0 = property(get_leg0,
                     doc = "First leg of the Triangle")
 
@@ -803,12 +803,12 @@ class RightTriangle(Triangle):
 
 
 
-    # ----------------------------------------------------- GET LEG1 ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns leg1 (as a Segment)
     def get_leg1(self):
         return self._sides[1]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     leg1 = property(get_leg1,
                     doc = "Second leg of the Triangle")
 
@@ -816,12 +816,12 @@ class RightTriangle(Triangle):
 
 
 
-    # ----------------------------------------------------- GET LEGS ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns legs (as a Segment)
     def get_legs(self):
         return [self.leg0, self.leg1]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     legs = property(get_legs,
                     doc = "The two legs of the Right Triangle (in a list)")
 
@@ -829,12 +829,12 @@ class RightTriangle(Triangle):
 
 
 
-    # ----------------------------------------------- GET HYPOTENUSE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns hypotenuse (as a Segment)
     def get_hypotenuse(self):
         return self._sides[2]
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     hypotenuse = property(get_hypotenuse,
                           doc = "Hypotenuse of the Right Triangle")
 
@@ -842,12 +842,12 @@ class RightTriangle(Triangle):
 
 
 
-    # ---------------------------------------------- GET RIGHT ANGLE ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns Tthe right angle (as an Angle)
     def get_right_angle(self):
         return self.angle1
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
+    # --------------------------------------------------------------------------
     right_angle = property(get_right_angle,
                            doc = "Right Angle of the Right Triangle")
 
@@ -855,7 +855,7 @@ class RightTriangle(Triangle):
 
 
 
-    # ------------------------------------ PYTHAGOREAN (RAW) EQUALITY ---------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Creates the correct pythagorean equality hyp²=leg0²+leg1²
     #   @return an Equality but not usable to calculate (see substequality)
@@ -871,7 +871,7 @@ class RightTriangle(Triangle):
 
 
 
-# ---------------------------- PYTHAGOREAN SUBSTITUTABLE EQUALITY ---------
+# --------------------------------------------------------------------------
     ##
     #   @brief Creates the correct (substitutable) pythagorean equality
     #   @brief Uses the labels to determine the result...

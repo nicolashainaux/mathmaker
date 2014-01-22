@@ -56,9 +56,9 @@ X_LAYOUTS = {'default' :
               }
             }
 
-# -----------------------------------------------------------------------------
-# --------------------- CLASS: exercise.X_AlgebraExpressionExpansion ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class X_AlgebraExpressionExpansion
 # @brief Expressions to expand (like 2(x-3) or 4x(2-9x) or (3+x)(x-1))
@@ -68,7 +68,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
     #   @param embedded_machine The machine that will be used to write output.
@@ -369,7 +369,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
 
 
 
-    # ---------------------------- WRITING OF THE ANSWERS --> OUTPUT ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Writes the answers of the questions to the output.
     #def write_answer(self):

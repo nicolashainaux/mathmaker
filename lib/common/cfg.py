@@ -31,7 +31,7 @@ COMMENT_TOKEN = '#'
 CATEGORY_TOKEN = '['
 
 
-# ----------------------- GET THE VALUE OF AN OPTION OF THE CFG FILE ----------
+# --------------------------------------------------------------------------
 ##
 #   @brief Gets the value of the given option.
 #   For instance, cfg.get_value_from_file(latex.FORMAT, "ENCODING") gets the

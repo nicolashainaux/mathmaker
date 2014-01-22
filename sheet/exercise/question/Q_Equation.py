@@ -46,9 +46,9 @@ AVAILABLE_Q_KIND_VALUES = {'any_basic': ['default'],
 
 
 
-# -----------------------------------------------------------------------------
-# ------------------------------------------------ CLASS: Q_Equation ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class Q_Equation
 # @brief All questions about Equations (first degree, one unknown variable)
@@ -58,7 +58,7 @@ class Q_Equation(Q_Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
     #   @param embedded_machine The machine to be used
@@ -96,7 +96,7 @@ class Q_Equation(Q_Structure):
 
 
 
-    # --------------------------------- TEXT OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
@@ -113,7 +113,7 @@ class Q_Equation(Q_Structure):
 
 
 
-    # ------------------------------- ANSWER OF THE QUESTION --> STR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):

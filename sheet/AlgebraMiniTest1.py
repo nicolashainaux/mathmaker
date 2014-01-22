@@ -57,9 +57,9 @@ SHEET_LAYOUT = { 'exc' : [ [1,         9, 9],       (1, 1)
 # 'all' and 'all_left' are synonym
 # 'jump' and 'next_page' will include a jump to next page before the next ones
 
-# -----------------------------------------------------------------------------
-# ------------------------------------ CLASS: sheet.AlgebraMiniTest1 ----------
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 ##
 # @class AlgebraMiniTest1
 # @brief One expansion (randomly but sum of 2 expandables) + 2 factorizations
@@ -69,7 +69,7 @@ class AlgebraMiniTest1(S_Structure):
 
 
 
-    # -------------------------------------------------- CONSTRUCTOR ----------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @param embedded_machine The machine to be used
