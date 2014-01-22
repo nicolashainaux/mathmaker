@@ -7636,6 +7636,128 @@ class Monomial(Product):
 
 
 
+    # ------------------------------- GET SIGN & ASSOCIATED PROPERTY ----------
+    ##
+    #   @brief Gets the sign of the Monomial
+    #   @return The sign of the Monomial
+    #   This can't be done by CommutativeOperation.get_sign() apparently. Maybe check
+    #   exactly why, some day
+    def get_sign(self):
+        if self.is_null():
+            return '+'
+        else:
+            return self.factor[0].get_sign()
+
+
+
+
+
+    # ------------------------------ GET COEFF & ASSOCIATED PROPERTY ----------
+    ##
+    #   @brief Returns the numeric coefficient of the Monomial
+    #   @return The numeric coefficient of the Monomial
+    def get_coeff(self):
+        return self.factor[0]
+
+
+
+
+
+    # ---------------------------------------------------- GET VALUE ----------
+    ##
+    #   @brief Gets the value of a Monomial of degree 0
+    #   @warning Raises an error if asked on non-degree-0 Monomial
+    #   @return value_inside.raw_value
+    def get_raw_value(self):
+        return self.value_inside.raw_value
+
+
+
+
+
+    # ----------------------------- GET LETTER & ASSOCIATED PROPERTY ----------
+    ##
+    #   @brief Returns the letter of the Monomial
+    #   @return The letter of the Monomial
+    def get_first_letter(self):
+        return self.factor[1].raw_value
+
+
+
+
+
+    # ----------------------------- GET DEGREE & ASSOCIATED PROPERTY ----------
+    ##
+    #   @brief Returns the degree of the Monomial (i.e. exponent of factor[1])
+    #   @return The degree of the Monomial
+    def get_degree(self):
+        return self.factor[1].exponent.evaluate()
+
+
+
+
+
+    # ---------------------------------------------------- GET VALUE ----------
+    ##
+    #   @brief Gets the Value of the Monomial, just to mimic the case when
+    #          it is of degree 0
+    #   @return value_inside
+    def get_value_inside(self):
+        return self._value_inside
+
+
+
+
+
+    sign = property(get_sign, doc = "Monomial's sign")
+
+    coeff = property(get_coeff, doc = "Monomial's coefficient")
+
+    raw_value = property(get_raw_value, doc = "0-degree-Monomial's value")
+
+    degree = property(get_degree, doc = "Monomial's degree")
+
+    letter = property(get_first_letter, doc = "Monomial's letter")
+
+    value_inside = property(get_value_inside,
+                            doc = "0-degree Monomial's Value inside")
+
+
+
+
+
+    # --------------------------------------------------- SET LETTER ----------
+    ##
+    #   @brief Sets the letter of the Monomial
+    def set_letter(self, letter):
+        self.element[1].set_value_inside(Value(letter))
+
+
+
+
+
+
+    # --------------------------------------------------- SET DEGREE ----------
+    ##
+    #   @brief Set the degree of the Monomial
+    def set_degree(self, arg):
+        if is_.a_natural_int(arg):
+            self.factor[1].set_exponent(arg)
+        else:
+            raise error.UncompatibleType(arg, "natural integer")
+
+
+
+
+    # --------------------------------------------------- SET COEFF ----------
+    ##
+    #   @brief Set the degree of the Monomial
+    def set_coeff(self, arg):
+        self._element[0] = Item(arg)
+
+
+
+
     # -------------------------------------------------- RAW DISPLAY ----------
     ##
     #   @brief Raw display of the Monomial (debugging method)
@@ -7708,157 +7830,6 @@ class Monomial(Product):
 
 
 
-    # ------------------------------- GET SIGN & ASSOCIATED PROPERTY ----------
-    ##
-    #   @brief Gets the sign of the Monomial
-    #   @return The sign of the Monomial
-    #   This can't be done by CommutativeOperation.get_sign() apparently. Maybe check
-    #   exactly why, some day
-    def get_sign(self):
-        if self.is_null():
-            return '+'
-        else:
-            return self.factor[0].get_sign()
-
-    sign = property(get_sign, doc = "Monomial's sign")
-
-
-
-
-
-    # ------------------------------ GET COEFF & ASSOCIATED PROPERTY ----------
-    ##
-    #   @brief Returns the numeric coefficient of the Monomial
-    #   @return The numeric coefficient of the Monomial
-    def get_coeff(self):
-        return self.factor[0]
-
-    coeff = property(get_coeff, doc = "Monomial's coefficient")
-
-
-
-
-
-    # ---------------------------------------------------- GET VALUE ----------
-    ##
-    #   @brief Gets the value of a Monomial of degree 0
-    #   @warning Raises an error if asked on non-degree-0 Monomial
-    #   @return value_inside.raw_value
-    def get_raw_value(self):
-        return self.value_inside.raw_value
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
-    raw_value = property(get_raw_value, doc = "0-degree-Monomial's value")
-
-
-
-
-
-    # ----------------------------- GET DEGREE & ASSOCIATED PROPERTY ----------
-    ##
-    #   @brief Returns the degree of the Monomial (i.e. exponent of factor[1])
-    #   @return The degree of the Monomial
-    def get_degree(self):
-        return self.factor[1].exponent.evaluate()
-
-    degree = property(get_degree, doc = "Monomial's degree")
-
-
-
-
-
-
-    # ----------------------------- GET LETTER & ASSOCIATED PROPERTY ----------
-    ##
-    #   @brief Returns the letter of the Monomial
-    #   @return The letter of the Monomial
-    def get_first_letter(self):
-        return self.factor[1].raw_value
-
-    letter = property(get_first_letter, doc = "Monomial's letter")
-
-
-
-
-
-    # ---------------------------------------------------- GET VALUE ----------
-    ##
-    #   @brief Gets the Value of the Monomial, just to mimic the case when
-    #          it is of degree 0
-    #   @return value_inside
-    def get_value_inside(self):
-        return self._value_inside
-    # ------------------------------------------ ASSOCIATED PROPERTY ----------
-    value_inside = property(get_value_inside,
-                            doc = "0-degree Monomial's Value inside")
-
-
-
-
-
-    # --------------------------------------------------- SET LETTER ----------
-    ##
-    #   @brief Sets the letter of the Monomial
-    def set_letter(self, letter):
-        self.element[1].set_value_inside(Value(letter))
-
-
-
-
-
-
-    # --------------------------------------------------- SET DEGREE ----------
-    ##
-    #   @brief Set the degree of the Monomial
-    def set_degree(self, arg):
-        if is_.a_natural_int(arg):
-            self.factor[1].set_exponent(arg)
-        else:
-            raise error.UncompatibleType(arg, "natural integer")
-
-
-
-
-    # --------------------------------------------------- SET COEFF ----------
-    ##
-    #   @brief Set the degree of the Monomial
-    def set_coeff(self, arg):
-        self._element[0] = Item(arg)
-
-
-
-
-    # -------------------------------------------------------- TIMES ----------
-    #
-    #   times doesn't need to be redefined (the default Exponented.times()
-    #   will be used)
-
-
-
-
-
-
-    # --------------------------------- PLUS (Sum w/ another object) ----------
-    ##
-    #   @brief The Sum Monomial + object (returned as a Polynomial if possible)
-    #   @param objct The second object to be added with
-    def plus(self, objct):
-        if isinstance(objct, Monomial) or isinstance(objct, Polynomial):
-            #DEBUG
-            debug.write("\nMonomial adding to a " \
-                                   + "Monomial|Polynomial",
-                                   case=debug.monomial_plus)
-            result = Polynomial([self, objct])
-            #DEBUG
-            debug.write("\nresult : " + result.dbg_str(),
-                                   case=debug.monomial_plus)
-            return result
-        else:
-            return Sum([self, objct])
-
-
-
-
-
 # -----------------------------------------------------------------------------
 # ------------------------------------------------ CLASS: Polynomial ----------
 # -----------------------------------------------------------------------------
@@ -7916,7 +7887,7 @@ class Polynomial(Sum):
         # 1st CASE : DEFAULT
         if arg == DEFAULT:
             self._element.append(Monomial(DEFAULT))
-            self.info.append(False)
+            self._info.append(False)
 
         # 2d CASE : [Monomial|Polynomial] or Sum(Monomial|Polynomial)
         elif ((type(arg) == list) and len(arg) >= 1) or isinstance(arg, Sum):
@@ -7926,11 +7897,11 @@ class Polynomial(Sum):
                                        case=debug.init_in_polynomial)
                 if isinstance(arg[i], Monomial):
                     self._element.append(arg[i].clone())
-                    self.info.append(False)
+                    self._info.append(False)
                 elif isinstance(arg[i], Polynomial):
                     for j in xrange(len(arg[i])):
                         self._element.append(arg[i].term[j].clone())
-                        self.info.append(arg[i].info[j])
+                        self._info.append(arg[i].info[j])
                 else:
                     raise error.UncompatibleType(arg[i],
                                                  " but in this list or Sum are" \
@@ -8032,26 +8003,6 @@ class Polynomial(Sum):
 
 
 
-    # -------------------------------------------------- RAW DISPLAY ----------
-    ##
-    #   @brief Raw display of the Polynomial (debugging method)
-    #   @param options No option available so far
-    #   @return " [[ term0, ..., termn ]]"
-    def dbg_str(self, **options):
-        resulting_string = " [["
-        for i in xrange(len(self)):
-            resulting_string += self.term[i].dbg_str()
-            if i < len(self) - 1:
-                resulting_string += ", "
-
-
-        resulting_string += "]] "
-        return resulting_string
-
-
-
-
-
     # ----------------------------------------------- GET MAX DEGREE ----------
     ##
     #   @brief Gets the maximal degree value that can be found in thePolynomial
@@ -8074,7 +8025,7 @@ class Polynomial(Sum):
     #   @brief Gets the real Polynomial's degree
     #   @return The real Polynomial's degree
     def get_degree(self):
-       # Let's glance at the degrees in reverse order
+        # Let's glance at the degrees in reverse order
         for i in xrange(self.get_max_degree(), -1, -1):
             coefficients_sum = 0
             # Let's calculate the sum of coefficients for a given degree
@@ -8096,31 +8047,31 @@ class Polynomial(Sum):
 
         return ZERO_POLYNOMIAL_DEGREE
 
+
+
+
+
     degree = property(get_degree, doc = 'Real degree of the Polynomial')
 
 
 
 
 
-    # -------------------------------------------------------- TIMES ----------
-    #
-    #   times doesn't need to be redefined (the default Exponented.times()
-    #   will be used)
-
-
-
-
-
-
-    # --------------------------------- PLUS (Sum w/ another object) ----------
+    # -------------------------------------------------- RAW DISPLAY ----------
     ##
-    #   @brief The Sum Polynomial + objct(returned as a Polynomial if possible)
-    #   @param objct The second object to be added with
-    def plus(self, objct):
-        if isinstance(objct, Monomial) or isinstance(objct, Polynomial):
-            return Polynomial([self, objct])
-        else:
-            return Sum([self, objct])
+    #   @brief Raw display of the Polynomial (debugging method)
+    #   @param options No option available so far
+    #   @return " [[ term0, ..., termn ]]"
+    def dbg_str(self, **options):
+        resulting_string = " [["
+        for i in xrange(len(self)):
+            resulting_string += self.term[i].dbg_str()
+            if i < len(self) - 1:
+                resulting_string += ", "
+
+
+        resulting_string += "]] "
+        return resulting_string
 
 
 
@@ -8277,17 +8228,6 @@ class Expandable(Product):
 
 
 
-    # -------------------------------------------- IS EXPANDABLE ? ------------
-    ##
-    #   @brief True
-    #   @return True
-    def is_expandable(self):
-        return True
-
-
-
-
-
     # ------------------------------------------------------- EXPAND ----------
     ##
     #   @brief The expanded object, like 2×(x+3) would return 2×x + 2×3
@@ -8391,6 +8331,17 @@ class Expandable(Product):
 
 
 
+    # -------------------------------------------- IS EXPANDABLE ? ------------
+    ##
+    #   @brief True
+    #   @return True
+    def is_expandable(self):
+        return True
+
+
+
+
+
 # -----------------------------------------------------------------------------
 # ------------------------------------------ CLASS: BinomialIdentity ----------
 # -----------------------------------------------------------------------------
@@ -8452,7 +8403,7 @@ class BinomialIdentity(Expandable):
         # It has to be either 'positive' which refers to (a+b)² objects,
         # or 'negative', which refers to (a-b)² objects,
         # or 'squares_difference' which refers to (a+b)(a-b) objects
-        self.kind = ""
+        self._kind = ""
 
         # 1st CASE
         # Another BinomialIdentity to copy
@@ -8463,9 +8414,9 @@ class BinomialIdentity(Expandable):
             for i in xrange(len(arg.info)):
                 self._info.append(arg.info[i])
             self._exponent = arg.exponent.clone()
-            self.kind = arg.kind
-            self.a = arg.a.clone()
-            self.b = arg.b.clone()
+            self._kind = arg.kind
+            self._a = arg.a.clone()
+            self._b = arg.b.clone()
 
         # 2d CASE
         # given Exponented
@@ -8473,21 +8424,21 @@ class BinomialIdentity(Expandable):
             a = arg[0].clone()
             b = arg[1].clone()
 
-            self.a = a
-            self.b = b
+            self._a = a
+            self._b = b
 
             self._element.append(Sum([a, b]))
 
             if b.get_sign() == '+':
-                self.kind = 'sum_square'
+                self._kind = 'sum_square'
             else:
-                self.kind = 'difference_square'
+                self._kind = 'difference_square'
 
             if 'squares_difference' in options:
                 # fix it : b will be reduced every time ! it is not
                 # the desired effect !!
                 b = Product([Item(-1), b]).reduce_()
-                self.kind = 'squares_difference'
+                self._kind = 'squares_difference'
 
             self._element.append(Sum([a, b]))
 
@@ -8531,14 +8482,14 @@ class BinomialIdentity(Expandable):
                               randomly.pop(coeff_list),
                               randomly.pop(degrees_list)))
 
-            self.a = a
-            self.b = b
+            self._a = a
+            self._b = b
 
 
             if arg[1] == 'sum_square' or arg[1] == 'numeric_sum_square':
                 self._element.append(Sum([a, b]))
                 self._element.append(Sum([a, b]))
-                self.kind = 'sum_square'
+                self._kind = 'sum_square'
 
             elif arg[1] == 'difference_square' \
                 or arg[1] == 'numeric_difference_square':
@@ -8546,7 +8497,7 @@ class BinomialIdentity(Expandable):
                 b.set_sign('-')
                 self._element.append(Sum([a, b]))
                 self._element.append(Sum([a, b]))
-                self.kind = 'difference_square'
+                self._kind = 'difference_square'
 
             elif arg[1] == 'squares_difference' \
                 or arg[1] == 'numeric_squares_difference':
@@ -8558,7 +8509,7 @@ class BinomialIdentity(Expandable):
                 sums_list.append(Sum([a, minus_b]))
                 self._element.append(randomly.pop(sums_list))
                 self._element.append(randomly.pop(sums_list))
-                self.kind = 'squares_difference'
+                self._kind = 'squares_difference'
 
 
             elif arg[1] == 'any':
@@ -8567,27 +8518,27 @@ class BinomialIdentity(Expandable):
                     # it's uselessly complicated for the pupils
                     a.set_sign('+')
                     b.set_sign(randomly.sign())
-                    self.a = a
-                    self.b = b
+                    self._a = a
+                    self._b = b
                     self._element.append(Sum([a, b]))
                     self._element.append(Sum([a, b]))
                     if b.get_sign() == '+':
-                        self.kind = 'sum_square'
+                        self._kind = 'sum_square'
                     else:
-                        self.kind = 'difference_square'
+                        self._kind = 'difference_square'
 
                 else:
                     # doesn't make sense to have (-3 - 4x)² as a BI,
                     # it's uselessly complicated for the pupils
                     a.set_sign('+')
                     b.set_sign(randomly.sign())
-                    self.a = a
-                    self.b = b
+                    self._a = a
+                    self._b = b
                     self._element.append(Sum([a, b]))
                     minus_b = Monomial(b)
                     minus_b.set_sign(sign_of_product(['-', b.sign]))
                     self._element.append(Sum([a, minus_b]))
-                    self.kind = 'squares_difference'
+                    self._kind = 'squares_difference'
 
             else:
                 raise error.UncompatibleType(arg[1],
@@ -8602,6 +8553,79 @@ class BinomialIdentity(Expandable):
                                          "(Exponented, Exponented)|" \
                                          + "(RANDOMLY, <type>)")
 
+
+
+
+
+
+    # --------------------------------------------------- GET DEGREE ----------
+    ##
+    #   @brief Gets the 'a' term of the BinomialIdentity
+    #   @return the content of the 'a' term
+    def get_a(self):
+        return self._a
+
+
+
+
+
+    # --------------------------------------------------- GET DEGREE ----------
+    ##
+    #   @brief Gets the 'b' term of the BinomialIdentity
+    #   @return the content of the 'b' term
+    def get_b(self):
+        return self._b
+
+
+
+
+
+    # --------------------------------------------------- GET DEGREE ----------
+    ##
+    #   @brief Gets the kind of BinomialIdentity it is
+    #   @return 'sum_square'|'difference_square'|'squares_difference'
+    def get_kind(self):
+        return self._kind
+
+
+
+
+    a = property(get_a,
+                 doc="Gets the 'a' term of the BinomialIdentity")
+
+    b = property(get_b,
+                 doc="Gets the 'b' term of the BinomialIdentity")
+
+    kind = property(get_kind,
+                    doc="kind of BinomialIdentity it, " \
+                + "e.g. 'sum_square'|'difference_square'|'squares_difference'"
+                   )
+
+
+
+
+
+    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
+    ##
+    #   @brief Creates a string of the given object in the given ML
+    #   @param options Any options
+    #   @return The formated string
+    def into_str(self, **options):
+        global expression_begins
+
+        #if 'force_expression_begins' in options \
+        #   and options['force_expression_begins'] == True:
+        #___
+        #    expression_begins = options['force_expression_begins']
+        #    options['force_expression_begins'] = False
+
+        if self.kind == 'squares_difference':
+            return Product(self.factor).into_str(**options)
+
+        else:
+            squared_sum = Sum([self.a, self.b])
+            squared_sum.set_exponent(2)
+            return squared_sum.into_str(**options)
 
 
 
@@ -8661,32 +8685,6 @@ class BinomialIdentity(Expandable):
     #   @return Exponented
     def expand_and_reduce_next_step(self, **options):
         return self.expand()
-
-
-
-
-
-    # ----------------- FUNCTION CREATING THE ML STRING OF THE OBJECT ---------
-    ##
-    #   @brief Creates a string of the given object in the given ML
-    #   @param options Any options
-    #   @return The formated string
-    def into_str(self, **options):
-        global expression_begins
-
-        #if 'force_expression_begins' in options \
-        #   and options['force_expression_begins'] == True:
-        #___
-        #    expression_begins = options['force_expression_begins']
-        #    options['force_expression_begins'] = False
-
-        if self.kind == 'squares_difference':
-            return Product(self.factor).into_str(**options)
-
-        else:
-            squared_sum = Sum([self.a, self.b])
-            squared_sum.set_exponent(2)
-            return squared_sum.into_str(**options)
 
 
 
