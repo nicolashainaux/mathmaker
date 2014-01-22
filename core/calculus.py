@@ -309,11 +309,11 @@ class Equality(ComposedCalculable):
                                                     " should be '=' or 'neq'")
 
 
-        self.elements = []
-        self.equal_signs = []
+        self._elements = []
+        self._equal_signs = []
 
         for i in xrange(len(objcts)):
-            self.elements.append(objcts[i].clone())
+            self._elements.append(objcts[i].clone())
 
             if 'equal_signs' in options:
 
@@ -325,10 +325,38 @@ class Equality(ComposedCalculable):
                     else:
                         sign_to_add = 'not_equal'
 
-                    self.equal_signs.append(sign_to_add)
+                    self._equal_signs.append(sign_to_add)
 
             else:
-                self.equal_signs.append('equal')
+                self._equal_signs.append('equal')
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the elements of the Equality
+    def get_elements(self):
+        return self._elements
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the equal signs series of the Equality
+    def get_equal_signs(self):
+        return self._equal_signs
+
+
+
+
+
+    elements = property(get_elements, doc = "Elements of the object")
+
+    equal_signs = property(get_equal_signs, doc = "Equal signs of the object")
 
 
 
@@ -377,14 +405,14 @@ class Equality(ComposedCalculable):
     ##
     #   @brief It is possible to index an Equality
     def __getitem__(self, i):
-        return self.elements[i]
+        return self._elements[i]
 
 
     def __setitem__(self, i, data):
         if not isinstance(data, Exponented):
             raise error.UncompatibleType(data, "should be a Exponented")
 
-        self.elements[i] = data.clone()
+        self._elements[i] = data.clone()
 
 
 
@@ -394,7 +422,7 @@ class Equality(ComposedCalculable):
     ##
     #   @brief Returns the number of elements of the Equality
     def __len__(self):
-        return len(self.elements)
+        return len(self._elements)
 
 
 
@@ -421,23 +449,23 @@ class Equation(ComposedCalculable):
     #   @return One instance of Equation
     def __init__(self, arg, **options):
         self._name = default.EQUATION_NAME
-        self.number = ''
-        self.left_hand_side = None
-        self.right_hand_side = None
-        self.variable_letter = default.MONOMIAL_LETTER
+        self._number = ''
+        self._left_hand_side = None
+        self._right_hand_side = None
+        self._variable_letter = default.MONOMIAL_LETTER
 
         # First determine name and number of the equation
         if 'name' in options and is_.a_string(options['name']):
             self._name = options['name']
 
         if 'number' in options and is_.an_integer(options['number']):
-            self.number = options['number']
+            self._number = options['number']
 
         # Then the letter
         if 'variable_letter_name' in options \
            and is_.a_string(options['variable_letter_name']):
         #___
-            self.variable_letter = options['variable_letter_name'][0]
+            self._variable_letter = options['variable_letter_name'][0]
 
         # Then determine its left & right hand sides
 
@@ -480,24 +508,24 @@ class Equation(ComposedCalculable):
                     # this could be secured by checking the given Sum
                     # is not containing only one term which would be also
                     # a Sum
-                    self.left_hand_side = arg[0]
+                    self._left_hand_side = arg[0]
                 else:
-                    self.left_hand_side = Sum(arg[0])
+                    self._left_hand_side = Sum(arg[0])
 
                 if isinstance(arg[1], Sum):
                     # TO FIX ?
                     # this could be secured by checking the given Sum
                     # is not containing only one term which would be also
                     # a Sum
-                    self.right_hand_side = arg[1]
+                    self._right_hand_side = arg[1]
                 else:
-                    self.right_hand_side = Sum(arg[1])
+                    self._right_hand_side = Sum(arg[1])
 
             # 2d CASE
             # RANDOMLY !
             elif arg[0] == RANDOMLY:
                 if arg[1] == 'basic_addition':
-                    self.left_hand_side = Polynomial([
+                    self._left_hand_side = Polynomial([
                                           Monomial(('+',
                                                          1,
                                                          1)),
@@ -507,19 +535,19 @@ class Equation(ComposedCalculable):
                                                          0))
                                                           ])
 
-                    self.right_hand_side = Sum(Item((randomly.sign(),
+                    self._right_hand_side = Sum(Item((randomly.sign(),
                                                       randomly.integer(1,
                                                                     MAX_VALUE)
                                                      ))
                                                    )
 
 
-                    self.left_hand_side.term[0].set_letter(
+                    self._left_hand_side.term[0].set_letter(
                                                           self.variable_letter)
 
 
                 elif arg[1] == 'basic_addition_r':
-                    self.right_hand_side = Polynomial([
+                    self._right_hand_side = Polynomial([
                                           Monomial(('+',
                                                          1,
                                                          1)),
@@ -529,14 +557,14 @@ class Equation(ComposedCalculable):
                                                          0))
                                                           ])
 
-                    self.left_hand_side = Sum(Item((randomly.sign(),
+                    self._left_hand_side = Sum(Item((randomly.sign(),
                                                       randomly.integer(1,
                                                                     MAX_VALUE)
                                                      ))
                                                   )
 
 
-                    self.right_hand_side.term[0].set_letter(
+                    self._right_hand_side.term[0].set_letter(
                                                           self.variable_letter)
                 elif arg[1] == 'any_basic_addition':
                     cst_list = list()
@@ -569,11 +597,11 @@ class Equation(ComposedCalculable):
                     sides.append(polyn)
                     sides.append(Sum(randomly.pop(cst_list)))
 
-                    self.left_hand_side = randomly.pop(sides)
-                    self.right_hand_side = randomly.pop(sides)
+                    self._left_hand_side = randomly.pop(sides)
+                    self._right_hand_side = randomly.pop(sides)
 
                 elif arg[1] == 'basic_multiplication':
-                    self.left_hand_side = Sum(
+                    self._left_hand_side = Sum(
                                           Monomial(( \
                                           randomly.sign(plus_signs_ratio=0.75),
                                           randomly.integer(2, MAX_VALUE),
@@ -581,7 +609,7 @@ class Equation(ComposedCalculable):
                                                   )
 
 
-                    self.right_hand_side = Sum(
+                    self._right_hand_side = Sum(
                                           Item(( \
                                           randomly.sign(plus_signs_ratio=0.75),
                                           randomly.integer(1, MAX_VALUE),
@@ -589,11 +617,11 @@ class Equation(ComposedCalculable):
                                                    )
 
 
-                    self.left_hand_side.term[0].\
+                    self._left_hand_side.term[0].\
                                         set_letter(self.variable_letter)
 
                 elif arg[1] == 'basic_multiplication_r':
-                    self.right_hand_side = Sum(
+                    self._right_hand_side = Sum(
                                           Monomial(( \
                                           randomly.sign(plus_signs_ratio=0.75),
                                           randomly.integer(2, MAX_VALUE),
@@ -601,7 +629,7 @@ class Equation(ComposedCalculable):
                                                    )
 
 
-                    self.left_hand_side = Sum(
+                    self._left_hand_side = Sum(
                                           Item(( \
                                           randomly.sign(plus_signs_ratio=0.75),
                                           randomly.integer(1, MAX_VALUE),
@@ -609,7 +637,7 @@ class Equation(ComposedCalculable):
                                                   )
 
 
-                    self.right_hand_side.term[0].\
+                    self._right_hand_side.term[0].\
                                         set_letter(self.variable_letter)
 
                 elif arg[1] == 'any_basic_multiplication':
@@ -626,8 +654,8 @@ class Equation(ComposedCalculable):
                     items_list.append(Sum(m1))
                     items_list.append(Sum(m2))
 
-                    self.left_hand_side = randomly.pop(items_list)
-                    self.right_hand_side = randomly.pop(items_list)
+                    self._left_hand_side = randomly.pop(items_list)
+                    self._right_hand_side = randomly.pop(items_list)
 
                 elif arg[1] == 'any_basic': # code duplication... done quickly
                     if randomly.heads_or_tails():
@@ -645,8 +673,8 @@ class Equation(ComposedCalculable):
                         items_list.append(Sum(m1))
                         items_list.append(Sum(m2))
 
-                        self.left_hand_side = randomly.pop(items_list)
-                        self.right_hand_side = randomly.pop(items_list)
+                        self._left_hand_side = randomly.pop(items_list)
+                        self._right_hand_side = randomly.pop(items_list)
                     else:
                         cst_list = list()
                         m1 = Monomial((randomly.sign(plus_signs_ratio= \
@@ -677,8 +705,8 @@ class Equation(ComposedCalculable):
                         sides.append(polyn)
                         sides.append(Sum(randomly.pop(cst_list)))
 
-                        self.left_hand_side = randomly.pop(sides)
-                        self.right_hand_side = randomly.pop(sides)
+                        self._left_hand_side = randomly.pop(sides)
+                        self._right_hand_side = randomly.pop(sides)
 
                 elif arg[1] == 'classic' \
                      or arg[1] == 'classic_r' \
@@ -741,18 +769,18 @@ class Equation(ComposedCalculable):
                             polyn2 = Polynomial([cx])
 
                     if arg[1] == 'classic':
-                        self.left_hand_side = polyn1
-                        self.right_hand_side = polyn2
+                        self._left_hand_side = polyn1
+                        self._right_hand_side = polyn2
                     elif arg[1] == 'classic_r':
-                        self.left_hand_side = polyn2
-                        self.right_hand_side = polyn1
+                        self._left_hand_side = polyn2
+                        self._right_hand_side = polyn1
                     elif arg[1] == 'classic_x_twice' \
                          or arg[1] == 'any_classic':
                         box = list()
                         box.append(polyn1)
                         box.append(polyn2)
-                        self.left_hand_side = randomly.pop(box)
-                        self.right_hand_side = randomly.pop(box)
+                        self._left_hand_side = randomly.pop(box)
+                        self._right_hand_side = randomly.pop(box)
 
                 elif arg[1] == 'classic_with_fractions':
                     # the following code is copied from Calculation.py
@@ -819,10 +847,10 @@ class Equation(ComposedCalculable):
                     box.append(ax)
                     box.append(b)
 
-                    self.left_hand_side = Polynomial([randomly.pop(box),
+                    self._left_hand_side = Polynomial([randomly.pop(box),
                                                            randomly.pop(box)])
 
-                    self.right_hand_side = Sum([d])
+                    self._right_hand_side = Sum([d])
 
 
                 elif arg[1] == 'any_simple_expandable' \
@@ -919,8 +947,8 @@ class Equation(ComposedCalculable):
                     for i in xrange(len(box_right)):
                         right_list.append(randomly.pop(box_right))
 
-                    self.left_hand_side = Sum(left_list)
-                    self.right_hand_side = Sum(right_list)
+                    self._left_hand_side = Sum(left_list)
+                    self._right_hand_side = Sum(right_list)
 
 
 
@@ -933,13 +961,79 @@ class Equation(ComposedCalculable):
         # Another Equation to copy
         elif isinstance(arg, Equation):
             self._name = arg.name
-            self.number = arg.number
-            self.left_hand_side = arg.left_hand_side.clone()
-            self.right_hand_side = arg.right_hand_side.clone()
-            self.variable_letter = arg.variable_letter
+            self._number = arg.number
+            self._left_hand_side = arg.left_hand_side.clone()
+            self._right_hand_side = arg.right_hand_side.clone()
+            self._variable_letter = arg.variable_letter
 
         else:
             raise error.UncompatibleType(arg, "Equation|tuple")
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the number of the Equality
+    def get_number(self):
+        return self._number
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Getter for left hand side
+    def get_left_hand_side(self):
+        return self._left_hand_side
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Getter for right hand side
+    def get_right_hand_side(self):
+        return self._right_hand_side
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Getter for the variable letter
+    def get_variable_letter(self):
+        return self._variable_letter
+
+
+
+
+
+    number = property(get_number, doc = "Number of the Equation")
+
+    left_hand_side = property(get_left_hand_side,
+                              doc = "Left hand side of the Equation")
+
+    right_hand_side = property(get_right_hand_side,
+                               doc = "Right hand side of the Equation")
+
+    variable_letter = property(get_variable_letter,
+                               doc = "Variable letter of the Equation")
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Sets the number of the Equation
+    def set_number(self, arg):
+        if not type(arg) == int:
+            raise error.WrongArgument(str(type(arg)), "int")
+
+        self._number = str(arg)
+
 
 
 
@@ -963,17 +1057,64 @@ class Equation(ComposedCalculable):
                 # is not containing only one term which would be also
                 # a Sum
                 if left_or_right == "left":
-                    self.left_hand_side = arg
+                    self._left_hand_side = arg
                 else:
-                    self.right_hand_side = arg
+                    self._right_hand_side = arg
             else:
                 if left_or_right == "left":
-                    self.left_hand_side = Sum(arg)
+                    self._left_hand_side = Sum(arg)
                 else:
-                    self.right_hand_side = Sum(arg)
+                    self._right_hand_side = Sum(arg)
 
         else:
             raise error.UncompatibleType(arg, "Equation|tuple")
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Creates a string of the given object in the given ML
+    #   @param options Any options
+    #   @return The formated string
+    def into_str(self, **options):
+        global expression_begins
+        # Equation objects displaying
+        beginning = ''
+
+        if 'display_name' in options:
+            if self.number == '':
+                beginning = MARKUP['opening_bracket'] \
+                           + self.name \
+                           + MARKUP['closing_bracket'] \
+                           + MARKUP['colon'] \
+                           + MARKUP['space']
+            else:
+                beginning = MARKUP['opening_bracket'] \
+                           + self.name \
+                           + MARKUP['opening_subscript'] \
+                           + str(self.number) \
+                           + MARKUP['closing_subscript'] \
+                           + MARKUP['closing_bracket'] \
+                           + MARKUP['colon'] \
+                           + MARKUP['space']
+
+        left = self.left_hand_side.into_str(force_expression_begins=True)
+
+        right = self.right_hand_side.into_str(force_expression_begins=True)
+
+        egal_sign = MARKUP['equal']
+
+        if self.left_hand_side.contains_a_rounded_number() \
+           or self.right_hand_side.contains_a_rounded_number():
+        #___
+            egal_sign = MARKUP['simeq']
+
+        return beginning \
+               + left \
+               + egal_sign \
+               + right
 
 
 
@@ -989,6 +1130,187 @@ class Equation(ComposedCalculable):
                + "\n Left hand side : " + self.left_hand_side.dbg_str() \
                + "\n Right hand side : " + self.right_hand_side.dbg_str() \
                + "\n Variable : " + str(self.variable_letter)
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Creates a string of the equation's resolution in the given ML
+    #   @param options Any options
+    #   @return The formated string of the equation's resolution
+    def auto_resolution(self, **options):
+        global expression_begins
+
+        # Complete resolution of the equation :o)
+        result = ""
+
+        if not 'dont_display_equations_name' in options:
+            if self.number == '':
+                result = MARKUP['opening_math_style2'] \
+                         + MARKUP['opening_bracket'] \
+                         + self.name \
+                         + MARKUP['closing_bracket'] \
+                         + MARKUP['colon'] \
+                         + MARKUP['space'] \
+                         + MARKUP['closing_math_style2']
+            else:
+                result = MARKUP['opening_math_style2'] \
+                         + MARKUP['opening_bracket'] \
+                         + self.name \
+                         + MARKUP['opening_subscript'] \
+                         + str(self.number) \
+                         + MARKUP['closing_subscript'] \
+                         + MARKUP['closing_bracket'] \
+                         + MARKUP['colon'] \
+                         + MARKUP['space'] \
+                         + MARKUP['closing_math_style2']
+
+        #result += MARKUP['newline']
+
+        uline1 = ""
+        uline2 = ""
+        if 'underline_result' in options \
+            and options['underline_result'] in YES:
+        #___
+            uline1 = MARKUP['open_underline']
+            uline2 = MARKUP['close_underline']
+
+        eq_aux = None
+        if isinstance(self, Equation) \
+            and not isinstance(self, CrossProductEquation):
+        #___
+            eq_aux = Equation(self)
+        elif isinstance(self, CrossProductEquation):
+            eq_aux = CrossProductEquation(self)
+
+        eq_aux1 = None
+        eq_aux2 = None
+        equation_did_split_in_two = False
+        go_on = True
+
+        while go_on:
+            if not equation_did_split_in_two:
+
+                next_eq_aux = eq_aux.solve_next_step(**options)
+
+                if next_eq_aux is None and 'unit' in options:
+
+                    result += MARKUP['opening_math_style1'] \
+                           + uline1 \
+                           + eq_aux.into_str() \
+                           + MARKUP['open_text_in_maths'] \
+                           + " " + str(options['unit']) \
+                           + MARKUP['close_text_in_maths'] \
+                           + uline2 \
+                           + MARKUP['closing_math_style1']
+                else:
+                    result += MARKUP['opening_math_style1'] \
+                           + eq_aux.into_str() \
+                           + MARKUP['closing_math_style1']
+
+                if next_eq_aux is None or type(next_eq_aux) == str \
+                    or isinstance(next_eq_aux, tuple):
+                #___
+                    eq_aux = next_eq_aux
+                else:
+                    eq_aux = Equation(next_eq_aux)
+
+                if isinstance(eq_aux, tuple):
+                    (eq_aux1, eq_aux2) = eq_aux
+                    equation_did_split_in_two = True
+
+                elif isinstance(eq_aux, str) or eq_aux is None:
+                    go_on = False
+
+            else:
+                if isinstance(eq_aux1, Equation):
+                    next_eq_aux1 = eq_aux1.solve_next_step(**options)
+
+                if isinstance(eq_aux2, Equation):
+                    next_eq_aux2 = eq_aux2.solve_next_step(**options)
+
+                if eq_aux1 != None or eq_aux2 != None:
+                    result += MARKUP['opening_math_style1']
+
+
+                if isinstance(eq_aux1, Equation):
+                    if next_eq_aux1 is None:
+                        result += uline1
+
+                    result += eq_aux1.into_str()
+
+                    if next_eq_aux1 is None and 'unit' in options:
+                        result += MARKUP['open_text_in_maths'] \
+                               + " " + str(options['unit']) \
+                               + MARKUP['close_text_in_maths']
+
+                    if next_eq_aux1 is None:
+                        result += uline2
+
+
+                    if isinstance(eq_aux2, Equation):
+                        result += " " + _("or") + " "
+
+                elif eq_aux1 != None:
+                    result += eq_aux1
+
+                if isinstance(eq_aux2, Equation):
+
+                    if next_eq_aux2 is None:
+                        result += uline1
+
+                    result += eq_aux2.into_str()
+
+                    if next_eq_aux2 is None and 'unit' in options:
+                        result += MARKUP['open_text_in_maths'] \
+                               + " " + str(options['unit']) \
+                               + MARKUP['close_text_in_maths']
+
+                    if next_eq_aux2 is None:
+                        result += uline2
+
+                elif eq_aux2 != None:
+                    result += eq_aux2
+                    eq_aux2 = None
+
+                if not isinstance(eq_aux1, Equation) \
+                   and not isinstance(eq_aux2, Equation):
+                #___
+                    go_on = False
+
+                if eq_aux1 != None or eq_aux2 != None:
+                    result += MARKUP['closing_math_style1']
+
+                if isinstance(eq_aux1, Equation):
+                    eq_aux1 = eq_aux1.solve_next_step(**options)
+
+                if isinstance(eq_aux2, Equation):
+                    eq_aux2 = eq_aux2.solve_next_step(**options)
+
+
+
+        if (not equation_did_split_in_two):
+            if eq_aux is None:
+                pass
+            else:
+                result += eq_aux + MARKUP['newline']
+        else:
+            if eq_aux1 is None and eq_aux2 is None:
+                pass
+            else:
+                if eq_aux1 is None:
+                    result += eq_aux2 + MARKUP['newline']
+                else:
+                    result += eq_aux1 + MARKUP['newline']
+
+
+        #if 'get_solution' in options and options['get_solution'] in YES:
+
+
+
+        return result
 
 
 
@@ -1016,7 +1338,7 @@ class Equation(ComposedCalculable):
             #DEBUG
             debug.write("\n[solve_next_step] CASE-0s-left\n",
                         case=debug.solve_next_step)
-            new_eq.left_hand_side = new_eq.left_hand_side.term[0]
+            new_eq.set_hand_side("left", new_eq.left_hand_side.term[0])
             return new_eq.solve_next_step(**options)
 
         elif isinstance(new_eq.right_hand_side.term[0], Sum) \
@@ -1025,7 +1347,7 @@ class Equation(ComposedCalculable):
             #DEBUG
             debug.write("\n[solve_next_step] CASE-0s-right\n",
                         case=debug.solve_next_step)
-            new_eq.right_hand_side = new_eq.right_hand_side.term[0]
+            new_eq.set_hand_side("right", new_eq.right_hand_side.term[0])
             return new_eq.solve_next_step(**options)
 
         if isinstance(new_eq.left_hand_side.term[0], Product) \
@@ -1035,8 +1357,8 @@ class Equation(ComposedCalculable):
             #DEBUG
             debug.write("\n[solve_next_step] CASE-0p-left\n",
                         case=debug.solve_next_step)
-            new_eq.left_hand_side = \
-                            Sum(new_eq.left_hand_side.term[0].factor[0])
+            new_eq.set_hand_side("left",
+                            Sum(new_eq.left_hand_side.term[0].factor[0]))
             return new_eq.solve_next_step(**options)
 
         elif isinstance(new_eq.right_hand_side.term[0], Product) \
@@ -1046,8 +1368,8 @@ class Equation(ComposedCalculable):
             #DEBUG
             debug.write("\n[solve_next_step] CASE-0p-right\n",
                         case=debug.solve_next_step)
-            new_eq.right_hand_side = \
-                            Sum(new_eq.right_hand_side.term[0].factor[0])
+            new_eq.set_hand_side("right",
+                            Sum(new_eq.right_hand_side.term[0].factor[0]))
             return new_eq.solve_next_step(**options)
 
         next_left_X = new_eq.left_hand_side.expand_and_reduce_next_step()
@@ -1362,10 +1684,10 @@ class Equation(ComposedCalculable):
                 new_eq.left_hand_side.term[0].set_factor(0, Item(1))
                 new_eq.set_hand_side("right",
                                 Fraction(('+',
-                                              new_eq.right_hand_side.term[0],
-                                              Item(coefficient)
-                                              ))
-                                                )
+                                          new_eq.right_hand_side.term[0],
+                                          Item(coefficient)
+                                         ))
+                                    )
                 new_eq.right_hand_side.term[0].set_down_numerator_s_minus_sign()
 
             else:
@@ -1461,234 +1783,6 @@ class Equation(ComposedCalculable):
 
 
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Creates a string of the given object in the given ML
-    #   @param options Any options
-    #   @return The formated string
-    def into_str(self, **options):
-        global expression_begins
-        # Equation objects displaying
-        beginning = ''
-
-        if 'display_name' in options:
-            if self.number == '':
-                beginning = MARKUP['opening_bracket'] \
-                           + self.name \
-                           + MARKUP['closing_bracket'] \
-                           + MARKUP['colon'] \
-                           + MARKUP['space']
-            else:
-                beginning = MARKUP['opening_bracket'] \
-                           + self.name \
-                           + MARKUP['opening_subscript'] \
-                           + str(self.number) \
-                           + MARKUP['closing_subscript'] \
-                           + MARKUP['closing_bracket'] \
-                           + MARKUP['colon'] \
-                           + MARKUP['space']
-
-        left = self.left_hand_side.into_str(force_expression_begins=True)
-
-        right = self.right_hand_side.into_str(force_expression_begins=True)
-
-        egal_sign = MARKUP['equal']
-
-        if self.left_hand_side.contains_a_rounded_number() \
-           or self.right_hand_side.contains_a_rounded_number():
-        #___
-            egal_sign = MARKUP['simeq']
-
-        return beginning \
-               + left \
-               + egal_sign \
-               + right
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Creates a string of the equation's resolution in the given ML
-    #   @param options Any options
-    #   @return The formated string of the equation's resolution
-    def auto_resolution(self, **options):
-        global expression_begins
-
-        # Complete resolution of the equation :o)
-        result = ""
-
-        if not 'dont_display_equations_name' in options:
-            if self.number == '':
-                result = MARKUP['opening_math_style2'] \
-                         + MARKUP['opening_bracket'] \
-                         + self.name \
-                         + MARKUP['closing_bracket'] \
-                         + MARKUP['colon'] \
-                         + MARKUP['space'] \
-                         + MARKUP['closing_math_style2']
-            else:
-                result = MARKUP['opening_math_style2'] \
-                         + MARKUP['opening_bracket'] \
-                         + self.name \
-                         + MARKUP['opening_subscript'] \
-                         + str(self.number) \
-                         + MARKUP['closing_subscript'] \
-                         + MARKUP['closing_bracket'] \
-                         + MARKUP['colon'] \
-                         + MARKUP['space'] \
-                         + MARKUP['closing_math_style2']
-
-        #result += MARKUP['newline']
-
-        uline1 = ""
-        uline2 = ""
-        if 'underline_result' in options \
-            and options['underline_result'] in YES:
-        #___
-            uline1 = MARKUP['open_underline']
-            uline2 = MARKUP['close_underline']
-
-        eq_aux = None
-        if isinstance(self, Equation) \
-            and not isinstance(self, CrossProductEquation):
-        #___
-            eq_aux = Equation(self)
-        elif isinstance(self, CrossProductEquation):
-            eq_aux = CrossProductEquation(self)
-
-        eq_aux1 = None
-        eq_aux2 = None
-        equation_did_split_in_two = False
-        go_on = True
-
-        while go_on:
-            if not equation_did_split_in_two:
-
-                next_eq_aux = eq_aux.solve_next_step(**options)
-
-                if next_eq_aux is None and 'unit' in options:
-
-                    result += MARKUP['opening_math_style1'] \
-                           + uline1 \
-                           + eq_aux.into_str() \
-                           + MARKUP['open_text_in_maths'] \
-                           + " " + str(options['unit']) \
-                           + MARKUP['close_text_in_maths'] \
-                           + uline2 \
-                           + MARKUP['closing_math_style1']
-                else:
-                    result += MARKUP['opening_math_style1'] \
-                           + eq_aux.into_str() \
-                           + MARKUP['closing_math_style1']
-
-                if next_eq_aux is None or type(next_eq_aux) == str \
-                    or isinstance(next_eq_aux, tuple):
-                #___
-                    eq_aux = next_eq_aux
-                else:
-                    eq_aux = Equation(next_eq_aux)
-
-                if isinstance(eq_aux, tuple):
-                    (eq_aux1, eq_aux2) = eq_aux
-                    equation_did_split_in_two = True
-
-                elif isinstance(eq_aux, str) or eq_aux is None:
-                    go_on = False
-
-            else:
-                if isinstance(eq_aux1, Equation):
-                    next_eq_aux1 = eq_aux1.solve_next_step(**options)
-
-                if isinstance(eq_aux2, Equation):
-                    next_eq_aux2 = eq_aux2.solve_next_step(**options)
-
-                if eq_aux1 != None or eq_aux2 != None:
-                    result += MARKUP['opening_math_style1']
-
-
-                if isinstance(eq_aux1, Equation):
-                    if next_eq_aux1 is None:
-                        result += uline1
-
-                    result += eq_aux1.into_str()
-
-                    if next_eq_aux1 is None and 'unit' in options:
-                        result += MARKUP['open_text_in_maths'] \
-                               + " " + str(options['unit']) \
-                               + MARKUP['close_text_in_maths']
-
-                    if next_eq_aux1 is None:
-                        result += uline2
-
-
-                    if isinstance(eq_aux2, Equation):
-                        result += " " + _("or") + " "
-
-                elif eq_aux1 != None:
-                    result += eq_aux1
-
-                if isinstance(eq_aux2, Equation):
-
-                    if next_eq_aux2 is None:
-                        result += uline1
-
-                    result += eq_aux2.into_str()
-
-                    if next_eq_aux2 is None and 'unit' in options:
-                        result += MARKUP['open_text_in_maths'] \
-                               + " " + str(options['unit']) \
-                               + MARKUP['close_text_in_maths']
-
-                    if next_eq_aux2 is None:
-                        result += uline2
-
-                elif eq_aux2 != None:
-                    result += eq_aux2
-                    eq_aux2 = None
-
-                if not isinstance(eq_aux1, Equation) \
-                   and not isinstance(eq_aux2, Equation):
-                #___
-                    go_on = False
-
-                if eq_aux1 != None or eq_aux2 != None:
-                    result += MARKUP['closing_math_style1']
-
-                if isinstance(eq_aux1, Equation):
-                    eq_aux1 = eq_aux1.solve_next_step(**options)
-
-                if isinstance(eq_aux2, Equation):
-                    eq_aux2 = eq_aux2.solve_next_step(**options)
-
-
-
-        if (not equation_did_split_in_two):
-            if eq_aux is None:
-                pass
-            else:
-                result += eq_aux + MARKUP['newline']
-        else:
-            if eq_aux1 is None and eq_aux2 is None:
-                pass
-            else:
-                if eq_aux1 is None:
-                    result += eq_aux2 + MARKUP['newline']
-                else:
-                    result += eq_aux1 + MARKUP['newline']
-
-
-        #if 'get_solution' in options and options['get_solution'] in YES:
-
-
-
-        return result
-
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -1729,7 +1823,24 @@ class SubstitutableEquality(Equality):
                                       + "of the objects list"
                                       )
 
-        self.subst_dict = subst_dict
+        self._subst_dict = subst_dict
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Getter for the substitution dictionnary
+    def get_subst_dict(self):
+        return self._subst_dict
+
+
+
+
+
+    subst_dict = property(get_subst_dict,
+                doc = "Substitution dictionnary of the SubstitutableEquality")
 
 
 
@@ -1739,10 +1850,11 @@ class SubstitutableEquality(Equality):
     ##
     #   @brief Executes the substitution of the literal Values by the numeric
     def substitute(self):
-        for elt in self.elements:
+        for elt in self._elements:
             elt.substitute(self.subst_dict)
 
         return self
+
 
 
 
@@ -1775,16 +1887,16 @@ class CrossProductEquation(Equation):
 
         if isinstance(arg, CrossProductEquation):
             self._name = arg.name
-            self.number = arg.number
-            self.left_hand_side = arg.left_hand_side.clone()
-            self.right_hand_side = arg.right_hand_side.clone()
-            self.variable_letter = arg.variable_letter
-            self.variable_position = arg.variable_position
-            self.variable_obj = arg.variable_obj.clone()
+            self._number = arg.number
+            self._left_hand_side = arg.left_hand_side.clone()
+            self._right_hand_side = arg.right_hand_side.clone()
+            self._variable_letter = arg.variable_letter
+            self._variable_position = arg.variable_position
+            self._variable_obj = arg.variable_obj.clone()
 
         else:
             self._name = default.EQUATION_NAME
-            self.number = ''
+            self._number = ''
 
             if len(arg) == 2:
                 if not(isinstance(arg[0], Quotient) \
@@ -1795,8 +1907,8 @@ class CrossProductEquation(Equation):
                                               "a tuple of two Quotients")
                                              )
                 else:
-                    self.left_hand_side = arg[0].clone()
-                    self.right_hand_side = arg[1].clone()
+                    self._left_hand_side = arg[0].clone()
+                    self._right_hand_side = arg[1].clone()
 
             elif len(arg) == 4:
                 if not(isinstance(arg[0], Calculable) \
@@ -1810,8 +1922,8 @@ class CrossProductEquation(Equation):
                                               + "and " + str(type(arg[3])),
                                               "a tuple of four Calculables")
                 else:
-                    self.left_hand_side = Quotient(('+', arg[0], arg[2]))
-                    self.right_hand_side = Quotient(('+', arg[01], arg[3]))
+                    self._left_hand_side = Quotient(('+', arg[0], arg[2]))
+                    self._right_hand_side = Quotient(('+', arg[01], arg[3]))
 
 
             # Let's find the variable
@@ -1842,11 +1954,40 @@ class CrossProductEquation(Equation):
                                           "exactly one literal object "\
                                           + "among 4")
 
-            self.variable_letter = variable_letter
+            self._variable_letter = variable_letter
 
-            self.variable_position = literal_position
+            self._variable_position = literal_position
 
-            self.variable_obj = variable_obj
+            self._variable_obj = variable_obj
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Getter for the variable obj
+    def get_variable_obj(self):
+        return self._variable_obj
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Getter for the variable position
+    def get_variable_position(self):
+        return self._variable_position
+
+
+
+
+
+    variable_obj = property(get_variable_obj,
+                               doc = "Variable object of the Equation")
+    variable_position = property(get_variable_position,
+                               doc = "Variable position in the Equation")
 
 
 

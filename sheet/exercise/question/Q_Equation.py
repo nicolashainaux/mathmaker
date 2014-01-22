@@ -86,10 +86,8 @@ class Q_Equation(Q_Structure):
 
         self.equation = Equation((RANDOMLY, q_kind))
 
-        if 'expression_number' in options \
-           and is_.an_integer(options['expression_number']):
-        #___
-            self.equation.number = str(options['expression_number'])
+        if 'expression_number' in options:
+            self.equation.set_number(options['expression_number'])
 
 
 
