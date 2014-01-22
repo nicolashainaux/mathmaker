@@ -62,39 +62,20 @@ class Evaluable(Printable):
 
     # --------------------------------------------------------------------------
     ##
+    #   @brief If the object is literal, returns the first letter
+    # The first term of a Sum, the first factor of a Product etc.
+    def get_first_letter(self):
+        raise error.MethodShouldBeRedefined(self, 'get_first_letter')
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
     #   @brief Returns the numeric value of the object
     def evaluate(self):
         raise error.MethodShouldBeRedefined(self, 'evaluate')
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief True if the object only contains numeric objects
-    def is_numeric(self):
-        raise error.MethodShouldBeRedefined(self, 'is_numeric')
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief True if the object only contains literal objects
-    def is_literal(self):
-        raise error.MethodShouldBeRedefined(self, 'is_literal')
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief True if the evaluated value of an object is null
-    def is_null(self):
-        raise error.MethodShouldBeRedefined(self, 'is_null')
 
 
 
@@ -158,10 +139,29 @@ class Evaluable(Printable):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief If the object is literal, returns the first letter
-    # The first term of a Sum, the first factor of a Product etc.
-    def get_first_letter(self):
-        raise error.MethodShouldBeRedefined(self, 'get_first_letter')
+    #   @brief True if the object only contains numeric objects
+    def is_numeric(self):
+        raise error.MethodShouldBeRedefined(self, 'is_numeric')
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief True if the object only contains literal objects
+    def is_literal(self):
+        raise error.MethodShouldBeRedefined(self, 'is_literal')
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief True if the evaluated value of an object is null
+    def is_null(self):
+        raise error.MethodShouldBeRedefined(self, 'is_null')
 
 
 
@@ -175,19 +175,6 @@ class Evaluable(Printable):
 # @brief Abstract mother class of all (calculable) mathematical objects
 # It is not possible to implement any Calculable object
 class Calculable(Evaluable):
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief This will iter over the content of the Calculable
-    def __iter__(self):
-        return iter(self.get_iteration_list())
-
-    def next(self):
-        return self.get_iteration_list().next()
-
 
 
 
@@ -230,6 +217,61 @@ class Calculable(Evaluable):
     #   @brief Returns the number of elements of the Exponented
     def __len__(self):
         raise error.MethodShouldBeRedefined(self, "__len__()")
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief This will iter over the content of the Calculable
+    def __iter__(self):
+        return iter(self.get_iteration_list())
+
+    def next(self):
+        return self.get_iteration_list().next()
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief True if the usual writing rules require a × between two factors
+    #   @param objct The other one
+    #   @param position The position (integer) of self in the Product
+    #   @return True if the writing rules require × between self & obj
+    def multiply_symbol_is_required(self, objct, position):
+        raise error.MethodShouldBeRedefined(self,
+                                            'multiply_symbol_is_required')
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief True if the argument requires brackets in a product
+    #   For instance, a Sum with several terms or a negative Item
+    #   @param position The position of the object in the Product
+    #   @return True if the object requires brackets in a Product
+    def requires_brackets(self, position):
+        raise error.MethodShouldBeRedefined(self, 'requires_brackets')
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief True if the argument requires inner brackets
+    #   The reason for requiring them is having an exponent different
+    #   from 1 and several terms or factors (in the case of Products & Sums)
+    #   @return True if the object requires inner brackets
+    def requires_inner_brackets(self):
+        raise error.MethodShouldBeRedefined(self,
+                                            'requires_innner_brackets')
+
 
 
 
@@ -310,48 +352,6 @@ class Calculable(Evaluable):
     def is_displ_as_a_single_neutral(self, elt):
         raise error.MethodShouldBeRedefined(self,
                                       'is_displ_as_a_single_neutral')
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief True if the usual writing rules require a × between two factors
-    #   @param objct The other one
-    #   @param position The position (integer) of self in the Product
-    #   @return True if the writing rules require × between self & obj
-    def multiply_symbol_is_required(self, objct, position):
-        raise error.MethodShouldBeRedefined(self,
-                                            'multiply_symbol_is_required')
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief True if the argument requires brackets in a product
-    #   For instance, a Sum with several terms or a negative Item
-    #   @param position The position of the object in the Product
-    #   @return True if the object requires brackets in a Product
-    def requires_brackets(self, position):
-        raise error.MethodShouldBeRedefined(self, 'requires_brackets')
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief True if the argument requires inner brackets
-    #   The reason for requiring them is having an exponent different
-    #   from 1 and several terms or factors (in the case of Products & Sums)
-    #   @return True if the object requires inner brackets
-    def requires_inner_brackets(self):
-        raise error.MethodShouldBeRedefined(self,
-                                            'requires_innner_brackets')
-
 
 
 
