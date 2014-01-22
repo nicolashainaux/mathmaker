@@ -196,19 +196,6 @@ class Point(Drawable):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Returns the name of the Point
-    def get_name(self):
-        return self._name
-    # --------------------------------------------------------------------------
-    name = property(get_name,
-                    doc = "Name of the Point")
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
     #   @brief Sets the name of the Point
     def set_name(self, arg):
         if not is_.a_string(arg):
@@ -306,6 +293,7 @@ class Segment(Drawable):
 
         self._mark = None
 
+        self._name = "[" + self.points[0].name + self.points[1].name + "]"
 
 
 
@@ -334,19 +322,6 @@ class Segment(Drawable):
 
 
         self._points[nb] = arg.clone()
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the name of the Segment
-    def get_name(self):
-        return "[" + self.points[0].name + self.points[1].name + "]"
-    # --------------------------------------------------------------------------
-    name = property(get_name,
-                    doc = "Name of the Segment")
-
 
 
 
@@ -542,19 +517,6 @@ class Angle(Drawable):
                                           Decimal('0.1'),
                                           rounding=ROUND_HALF_UP
                                          ) / 2
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the name of the angle
-    def get_name(self):
-        return self._name
-    # --------------------------------------------------------------------------
-    name = property(get_name,
-                    doc = "Name of the angle")
 
 
 
