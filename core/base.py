@@ -55,10 +55,62 @@ class Clonable(object):
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
+# @class NamedObject
+# @brief Abstract mother class of objects having a name
+class NamedObject(Clonable):
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Constructor
+    #   @warning Must be redefined
+    def __init__(self):
+        raise error.MethodShouldBeRedefined(self, "__init__")
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the name of the object
+    def get_name(self):
+        return self._name
+
+
+
+
+
+    name = property(get_name, doc = "Name of the object")
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Sets the name of the object
+    def set_name(self, arg):
+        if not (type(arg) == str or type(arg) == int):
+            raise error.WrongArgument(str(type(arg)), "str|int")
+
+        self._name = str(arg)
+
+
+
+
+
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+##
 # @class Printable
 # @brief All Printable objects : Exponenteds & others (Equations...)
 # Any Printable must reimplement the into_str() method
-class Printable(Clonable):
+class Printable(NamedObject):
 
 
 
@@ -81,9 +133,51 @@ class Printable(Clonable):
 # ------------------------------------------------------------------------------
 ##
 # @class Drawable
-# @brief All Drawable objects (which are also Printable ones !)
-# Any Drawable must reimplement the into_str() and into_euk() method
-class Drawable(Clonable):
+# @brief All Drawable objects. Any Drawable must reimplement into_euk()
+# Drawable are not renamable, except for the Points
+class Drawable(NamedObject):
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the eukleides filename associated to the triangle
+    def get_euk_filename(self):
+        return self._filename + ".euk"
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the eps filename associated to the triangle
+    def get_eps_filename(self):
+        return self._filename + ".eps"
+
+
+
+
+
+    euk_filename = property(get_euk_filename,
+                            doc = "Eukleides filename associated to " \
+                                  + "the right triangle")
+
+    eps_filename = property(get_eps_filename,
+                            doc = "eps filename associated to " \
+                                  + "the right triangle")
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Sets the name of the object
+    def set_name(self, arg):
+        raise error.ImpossibleAction("rename this object")
 
 
 
@@ -96,33 +190,6 @@ class Drawable(Clonable):
     #   @return The string to put in the picture file
     def into_euk(self, **options):
         raise error.MethodShouldBeRedefined(self, 'into_euk')
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the eukleides filename associated to the triangle
-    def get_euk_filename(self):
-        return self._filename + ".euk"
-    # --------------------------------------------------------------------------
-    euk_filename = property(get_euk_filename,
-                            doc = "Eukleides filename associated to " \
-                                  + "the right triangle")
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the eps filename associated to the triangle
-    def get_eps_filename(self):
-        return self._filename + ".eps"
-    # --------------------------------------------------------------------------
-    eps_filename = property(get_eps_filename,
-                            doc = "eps filename associated to " \
-                                  + "the right triangle")
-
 
 
 

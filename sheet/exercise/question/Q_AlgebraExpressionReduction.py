@@ -513,7 +513,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
         #___
             number = options['expression_number']
 
-        self.expression = NamedExpression(number, self.objct)
+        self.expression = Expression(number, self.objct)
 
 
 
@@ -549,13 +549,13 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             if not is_.an_ordered_calculable_objects_list(self.objct.factor):
                 ordered_product = self.objct.order()
                 ordered_product.set_compact_display(False)
-                ordered_expression = NamedExpression(self.expression.name,
+                ordered_expression = Expression(self.expression.name,
                                                      ordered_product)
                 result += M.write_math_style2(M.type_string(ordered_expression))
                 result += M.write_new_line()
 
             final_product = self.objct.reduce_()
-            final_expression = NamedExpression(self.expression.name,
+            final_expression = Expression(self.expression.name,
                                                final_product)
 
             result += M.write_math_style2(M.type_string(final_expression))

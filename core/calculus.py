@@ -121,9 +121,9 @@ class ComposedCalculable(Printable):
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
-# @class NamedExpression
+# @class Expression
 # @brief These are object of the kind : Name = Exponented
-class NamedExpression(ComposedCalculable):
+class Expression(ComposedCalculable):
 
 
 
@@ -135,7 +135,7 @@ class NamedExpression(ComposedCalculable):
     #   @warning Might raise an UncompatibleType exception.
     #   @param integer_or_letter A string or an integer
     #   @param objct The Exponented that will be at the right hand side
-    #   @return One instance of NamedExpression
+    #   @return One instance of Expression
     def __init__(self, integer_or_letter, objct):
         # just check if the given arguments are right
         if not (is_.a_string(integer_or_letter)                               \
@@ -145,10 +145,41 @@ class NamedExpression(ComposedCalculable):
                                          "integer_or_letter")
 
         if not (isinstance(objct, Exponented) or objct is None):
+            raise error.UncompatibleType(objct, "Exponented|None")
+
+        self._name = integer_or_letter
+        self._right_hand_side = objct.clone()
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the right hand side of the Expression e.g. the Expression
+    #          in itself
+    def get_right_hand_side(self):
+        return self._right_hand_side
+
+
+
+
+
+    right_hand_side = property(get_right_hand_side,
+                               doc = "Right hand side of the object")
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Sets the right hand side of the Expression
+    def set_right_hand_side(self, arg):
+        if not (isinstance(objct, Exponented)):
             raise error.UncompatibleType(objct, "Exponented")
 
-        self.name = integer_or_letter
-        self.right_hand_side = objct.clone()
+        self._right_hand_side = arg.clone()
 
 
 
@@ -161,7 +192,7 @@ class NamedExpression(ComposedCalculable):
     #   @return The formated string
     def into_str(self, **options):
         global expression_begins
-        # NamedExpression objects displaying
+        # Expression objects displaying
         if is_.an_integer(self.name):
             i = self.name
             if i < len(alphabet.UPPERCASE):
@@ -209,7 +240,7 @@ class NamedExpression(ComposedCalculable):
         # Complete expansion & reduction of any expression :o)
         while aux_expr != None:
             result += MARKUP['opening_math_style2'] \
-                      + NamedExpression(self.name,
+                      + Expression(self.name,
                                         aux_expr).into_str() \
                       + MARKUP['closing_math_style2'] \
                       + MARKUP['newline'] \
@@ -373,64 +404,6 @@ class Equality(ComposedCalculable):
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
-# @class SubstitutableEquality
-# @brief Like an Equality with literals and the numeric values to replace them
-class SubstitutableEquality(Equality):
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
-    #   @param objcts is a [Exponented] of 2 elements at least
-    #   @param subst_dict is a {literal Value: numeric Value}
-    #   @option equal_signs Contains a list of equal/not equal signs. Must be as
-    #   @option             long as len(objcts) - 1. The signs are "=" or "neq"
-    #   @return One instance of SubstitutableEquality
-    def __init__(self, objcts, subst_dict, **options):
-        # This will check the objcts argument and take the possibly options
-        # into account
-        Equality.__init__(self, objcts, **options)
-
-        # Now, let's make the checks specific to SubstitutableEquality
-        if not (isinstance(subst_dict, dict)):
-            raise error.UncompatibleType(subst_dict,                   \
-                                         "should be a dictionnary")
-
-        if not check_lexicon_for_substitution(objcts,
-                                              subst_dict,
-                                              'at_least_one'):
-        #___
-            raise error.WrongArgument(subst_dict,
-                                      " a lexicon that matches the literals "\
-                                      + "of the objects list"
-                                      )
-
-        self.subst_dict = subst_dict
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Executes the substitution of the literal Values by the numeric
-    def substitute(self):
-        for elt in self.elements:
-            elt.substitute(self.subst_dict)
-
-        return self
-
-
-
-
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
 # @class Equation
 # @brief One degree one variable. Sum=Sum. Name, number, left/right hand side.
 class Equation(ComposedCalculable):
@@ -447,7 +420,7 @@ class Equation(ComposedCalculable):
     #              |SubstitutableEquality
     #   @return One instance of Equation
     def __init__(self, arg, **options):
-        self.name = default.EQUATION_NAME
+        self._name = default.EQUATION_NAME
         self.number = ''
         self.left_hand_side = None
         self.right_hand_side = None
@@ -455,7 +428,7 @@ class Equation(ComposedCalculable):
 
         # First determine name and number of the equation
         if 'name' in options and is_.a_string(options['name']):
-            self.name = options['name']
+            self._name = options['name']
 
         if 'number' in options and is_.an_integer(options['number']):
             self.number = options['number']
@@ -959,7 +932,7 @@ class Equation(ComposedCalculable):
 
         # Another Equation to copy
         elif isinstance(arg, Equation):
-            self.name = arg.name
+            self._name = arg.name
             self.number = arg.number
             self.left_hand_side = arg.left_hand_side.clone()
             self.right_hand_side = arg.right_hand_side.clone()
@@ -1720,6 +1693,64 @@ class Equation(ComposedCalculable):
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
+# @class SubstitutableEquality
+# @brief Like an Equality with literals and the numeric values to replace them
+class SubstitutableEquality(Equality):
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Constructor
+    #   @warning Might raise an UncompatibleType exception.
+    #   @param objcts is a [Exponented] of 2 elements at least
+    #   @param subst_dict is a {literal Value: numeric Value}
+    #   @option equal_signs Contains a list of equal/not equal signs. Must be as
+    #   @option             long as len(objcts) - 1. The signs are "=" or "neq"
+    #   @return One instance of SubstitutableEquality
+    def __init__(self, objcts, subst_dict, **options):
+        # This will check the objcts argument and take the possibly options
+        # into account
+        Equality.__init__(self, objcts, **options)
+
+        # Now, let's make the checks specific to SubstitutableEquality
+        if not (isinstance(subst_dict, dict)):
+            raise error.UncompatibleType(subst_dict,                   \
+                                         "should be a dictionnary")
+
+        if not check_lexicon_for_substitution(objcts,
+                                              subst_dict,
+                                              'at_least_one'):
+        #___
+            raise error.WrongArgument(subst_dict,
+                                      " a lexicon that matches the literals "\
+                                      + "of the objects list"
+                                      )
+
+        self.subst_dict = subst_dict
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Executes the substitution of the literal Values by the numeric
+    def substitute(self):
+        for elt in self.elements:
+            elt.substitute(self.subst_dict)
+
+        return self
+
+
+
+
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+##
 # @class CrossProductEquation
 # @brief All objects that are displayable as Cross Product Equations
 class CrossProductEquation(Equation):
@@ -1743,7 +1774,7 @@ class CrossProductEquation(Equation):
                                       "a tuple of length 2 or 4")
 
         if isinstance(arg, CrossProductEquation):
-            self.name = arg.name
+            self._name = arg.name
             self.number = arg.number
             self.left_hand_side = arg.left_hand_side.clone()
             self.right_hand_side = arg.right_hand_side.clone()
@@ -1752,7 +1783,7 @@ class CrossProductEquation(Equation):
             self.variable_obj = arg.variable_obj.clone()
 
         else:
-            self.name = default.EQUATION_NAME
+            self._name = default.EQUATION_NAME
             self.number = ''
 
             if len(arg) == 2:
@@ -1907,16 +1938,6 @@ class Table(Printable):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Returns the number of columns of the Table
-    def __len__(self):
-        return self._nb_of_cols
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
     #   @brief Returns the Table's content as a list of two lists so it
     #           can be addressed
     def get_cell(self):
@@ -1924,21 +1945,6 @@ class Table(Printable):
     # --------------------------------------------------------------------------
     cell = property(get_cell,
                     doc = "t.cell is the complete Table t.cell[i][j] is a cell")
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns True if the Table is entirely numeric
-    def is_numeric(self):
-        for i in xrange(2):
-            for j in xrange(len(self)):
-                if not self.cell[i][j].is_numeric():
-                    return False
-
-        return True
 
 
 
@@ -1983,6 +1989,16 @@ class Table(Printable):
 
 
         return result
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the number of columns of the Table
+    def __len__(self):
+        return self._nb_of_cols
+
 
 
 
@@ -2066,6 +2082,21 @@ class Table(Printable):
                 return Fraction((num, deno))
             else:
                 return Quotient(('+', num, deno))
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns True if the Table is entirely numeric
+    def is_numeric(self):
+        for i in xrange(2):
+            for j in xrange(len(self)):
+                if not self.cell[i][j].is_numeric():
+                    return False
+
+        return True
 
 
 
@@ -2267,9 +2298,6 @@ class Table_UP(Table):
     #   @brief Returns the Table's coefficient
     def get_coeff(self):
         return self._coeff
-    # --------------------------------------------------------------------------
-    coeff = property(get_coeff,
-                     doc = "the coefficient of the Table_UP")
 
 
 
@@ -2280,7 +2308,14 @@ class Table_UP(Table):
     #   @brief Returns the info about Cross Products
     def get_crossproducts_info(self):
         return self._crossproducts_info
-    # --------------------------------------------------------------------------
+
+
+
+
+
+    coeff = property(get_coeff,
+                     doc = "the coefficient of the Table_UP")
+
     crossproducts_info = property(get_crossproducts_info,
                                   doc = "infos about the cross products")
     # for instance, {'EF' : (2,0), "GH" : (3,0)} means Item 'EF' can

@@ -448,13 +448,13 @@ class Q_Factorization(Q_Structure):
            and is_.a_natural_int(options['expression_number']):
         #___
             number = options['expression_number']
-        self.expression = NamedExpression(number, steps[0])
+        self.expression = Expression(number, steps[0])
 
         # Putting the steps and the solution together :
         self.steps = []
 
         #for i in xrange(len(steps) - 1):
-        #    self.steps.append(NamedExpression(number,
+        #    self.steps.append(Expression(number,
         #                                          steps[i]
         #                                          )
         #                     )
@@ -462,7 +462,7 @@ class Q_Factorization(Q_Structure):
         #solution = steps[len(steps) - 1]
         #
         #if isinstance(solution, Exponented):
-        #    self.steps.append(NamedExpression(number,
+        #    self.steps.append(Expression(number,
         #                                          solution
         #                                          )
         #                     )
@@ -471,7 +471,7 @@ class Q_Factorization(Q_Structure):
 
         for i in xrange(len(steps)):
             if isinstance(steps[i], Exponented):
-                self.steps.append(NamedExpression(number,
+                self.steps.append(Expression(number,
                                                       steps[i]
                                                       )
                                  )

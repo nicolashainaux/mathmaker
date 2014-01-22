@@ -478,11 +478,11 @@ exercises counter (which is useful when begining to write the answers sheet)")\
     ##
     #   @brief Creates a LaTeX string of the given object
     def type_string(self, objct, **options):
-        if is_.a_number(objct) or is_.a_string(objct):
-            return str(objct)
-        elif isinstance(objct, Printable):
+        if isinstance(objct, Printable):
             core.base_calculus.expression_begins = True
             return objct.into_str(**options)
+        elif is_.a_number(objct) or is_.a_string(objct):
+            return str(objct)
         else:
             raise error.UncompatibleType(objct, "String|Number|Printable")
 

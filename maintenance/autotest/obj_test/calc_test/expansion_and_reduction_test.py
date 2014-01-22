@@ -166,18 +166,18 @@ def action():
 
 
 
-    expr_1 = NamedExpression("A", expd_2_times_sum_of_1_and_5x)
+    expr_1 = Expression("A", expd_2_times_sum_of_1_and_5x)
     check(expr_1.auto_expansion_and_reduction(),
          [  "$A=2(1+5x)$\\newline $A=2\\times 1+2\\times 5x$\\newline " \
           + "$A=2+10x$\\newline "])
 
-    expr_2 = NamedExpression("B", expd_1_minus_11x_times_11_plus_7x)
+    expr_2 = Expression("B", expd_1_minus_11x_times_11_plus_7x)
     check(expr_2.auto_expansion_and_reduction(),
          [ "$B=(1-11x)(11+7x)$\\newline $B=1\\times 11+1\\times 7x-11x\\times"\
           + " 11-11x\\times 7x$\\newline $B=11+7x-121x-77x^{2}$\\newline " \
           + "$B=11+(7-121)x-77x^{2}$\\newline $B=11-114x-77x^{2}$\\newline "])
 
-    expr_3 = NamedExpression("C", expd_3x_minus_sum_xplus3_times_sum_6minus2x)
+    expr_3 = Expression("C", expd_3x_minus_sum_xplus3_times_sum_6minus2x)
     check(expr_3.auto_expansion_and_reduction(),
          [  "$C=3x-(x+3)(6+2x)$\\newline " \
           + "$C=3x-(x\\times 6+x\\times 2x+3\\times 6+3\\times 2x)$\\newline "\
@@ -186,12 +186,12 @@ def action():
           + "$C=(3-6-6)x-2x^{2}-18$\\newline " \
           + "$C=-9x-2x^{2}-18$\\newline "])
 
-    expr_4 = NamedExpression("D", expd_minus1_times_sum_3x_minus_2)
+    expr_4 = Expression("D", expd_minus1_times_sum_3x_minus_2)
     check(expr_4.auto_expansion_and_reduction(),
          [  "$D=-(3x-2)$\\newline " \
           + "$D=-3x+2$\\newline "])
 
-    expr_5 = NamedExpression("E", red_1)
+    expr_5 = Expression("E", red_1)
     check(expr_5.auto_expansion_and_reduction(),
          [  "$E=-3\\times 10-10x\\times (-9x)+7x\\times 8x+8\\times 10" \
           + "$\\newline $E=-30+90x^{2}+56x^{2}+80$\\newline " \
@@ -200,7 +200,7 @@ def action():
     check(red_2.expand_and_reduce_next_step(),
          ["None"])
 
-    expr_6 = NamedExpression("F", red_3)
+    expr_6 = Expression("F", red_3)
     check(expr_6.auto_expansion_and_reduction(),
          [  "$F=-2\\times (-6)-1+3\\times (-x)-8x\\times (-3)$\\newline " \
           + "$F=12-1-3x+24x$\\newline " \
@@ -209,7 +209,7 @@ def action():
 
 
     # 5x + 7x × 8x + 5x × (-1) + 7×8
-    expr_7 = NamedExpression("G", red_4)
+    expr_7 = Expression("G", red_4)
     check(expr_7.auto_expansion_and_reduction(),
          [  "$G=5x+7x\\times 8x+5x\\times (-1)+7\\times 8$\\newline " \
           + "$G=5x+56x^{2}-5x+56$\\newline " \
@@ -218,45 +218,45 @@ def action():
           + "$G=56x^{2}+56$\\newline "])
 
 
-    expr_8 = NamedExpression("H", red_5)
+    expr_8 = Expression("H", red_5)
     check(expr_8.auto_expansion_and_reduction(),
          [  "$H=-30+80+x^{2}$\\newline " \
           + "$H=50+x^{2}$\\newline "])
 
-    expr_9 = NamedExpression("I", red_6)
+    expr_9 = Expression("I", red_6)
     check(expr_9.auto_expansion_and_reduction(),
          [  "$I=4x+(-15x+8-5x)$\\newline " \
           + "$I=4x-15x+8-5x$\\newline " \
           + "$I=(4-15-5)x+8$\\newline " \
           + "$I=-16x+8$\\newline "])
 
-    expr_10 = NamedExpression("J", red_7)
+    expr_10 = Expression("J", red_7)
     check(expr_10.auto_expansion_and_reduction(),
          [  "$J=(3+3x)(3-3x)$\\newline " \
           + "$J=3^{2}-(3x)^{2}$\\newline " \
           + "$J=9-9x^{2}$\\newline "])
 
-    expr_11 = NamedExpression("K", red_8)
+    expr_11 = Expression("K", red_8)
     check(expr_11.auto_expansion_and_reduction(),
          [  "$K=(1+10x)(1-10x)$\\newline " \
           + "$K=1^{2}-(10x)^{2}$\\newline " \
           + "$K=1-100x^{2}$\\newline "])
 
-    expr_12 = NamedExpression("L", red_9)
+    expr_12 = Expression("L", red_9)
     check(expr_12.auto_expansion_and_reduction(),
          [  "$L=-2-x+8x^{2}+x$\\newline " \
           + "$L=-2+(-1+1)x+8x^{2}$\\newline " \
           + "$L=-2+0x+8x^{2}$\\newline " \
           + "$L=-2+8x^{2}$\\newline "])
 
-    expr_13 = NamedExpression("M", red_10)
+    expr_13 = Expression("M", red_10)
     check(expr_13.auto_expansion_and_reduction(),
          [  "$M=-15+(10+14x-10x^{2})$\\newline " \
           + "$M=-15+10+14x-10x^{2}$\\newline " \
           + "$M=-5+14x-10x^{2}$\\newline "])
 
     # -(2x+9)(-3x-7)+4(-3x+9)+13
-    expr_14 = NamedExpression("N", red_11)
+    expr_14 = Expression("N", red_11)
     check(expr_14.auto_expansion_and_reduction(),
          [  "$N=-(2x+9)(-3x-7)+4(-3x+9)+13$\\newline " \
           + "$N=-(2x\\times (-3x)+2x\\times (-7)+9\\times (-3x)" \
@@ -267,7 +267,7 @@ def action():
           + "$N=6x^{2}+29x+112$\\newline "])
 
     # 7(-6x + 6) + (-10x - 3)²
-    expr_15 = NamedExpression("P", dev_1)
+    expr_15 = Expression("P", dev_1)
     check(expr_15.auto_expansion_and_reduction(),
          [  "$P=7(-6x+6)+(-10x-3)^{2}$\\newline " \
           + "$P=7\\times (-6x)+7\\times 6+(-10x)^{2}-2\\times (-10x)\\times 3"\

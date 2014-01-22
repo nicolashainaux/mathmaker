@@ -308,7 +308,7 @@ class Q_Calculation(Q_Structure):
            and is_.a_natural_int(options['expression_number']):
         #___
             number = options['expression_number']
-        self.expression = NamedExpression(number, self.objct)
+        self.expression = Expression(number, self.objct)
 
 
 
@@ -339,7 +339,7 @@ class Q_Calculation(Q_Structure):
 
             self.objct = self.objct.calculate_next_step()
             if self.objct != None:
-                self.expression = NamedExpression(self.expression.name,
+                self.expression = Expression(self.expression.name,
                                                   self.objct)
 
 

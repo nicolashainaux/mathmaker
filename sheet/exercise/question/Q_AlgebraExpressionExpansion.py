@@ -327,9 +327,9 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
            and is_.a_natural_int(options['expression_number']):
         #___
             number = options['expression_number']
-        self.expression = NamedExpression(number, self.expandable_objct)
+        self.expression = Expression(number, self.expandable_objct)
         if self.numeric_aux != None:
-            self.numeric_aux = NamedExpression(number, self.numeric_aux)
+            self.numeric_aux = Expression(number, self.numeric_aux)
 
 
 

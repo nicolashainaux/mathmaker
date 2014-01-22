@@ -435,19 +435,6 @@ class Triangle(Drawable):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Returns the name of the triangle
-    def get_name(self):
-        return self._name
-    # --------------------------------------------------------------------------
-    name = property(get_name,
-                    doc = "Name of the right triangle")
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
     #   @brief Creates the euk string to put in the file
     #   @param options Any options
     #   @return The string to put in the picture file

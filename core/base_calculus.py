@@ -1138,17 +1138,6 @@ class Function(Item):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Returns the name of the Function (e.g. "f" or "cos"...)
-    def get_name(self):
-        return self._name
-
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
     #   @brief Returns the variable as a String
     def get_variable(self):
         return self._variable
@@ -1189,9 +1178,6 @@ class Function(Item):
     numeric_value = property(get_numeric_value,
                              doc = "Value to use to replace the variable"\
                                    " (e.g. '9' or '60\textdegree'...)")
-
-    name = property(get_name,
-                    doc = "Name of the Function (e.g. 'f' or 'cos'...)")
 
     variable = property(get_variable,
                         doc = "Variable of the Function"\
