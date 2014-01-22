@@ -269,9 +269,6 @@ class Triangle(Drawable):
     #   @brief Returns vertex0 (as a Point)
     def get_vertex0(self):
         return self._vertices[0]
-    # --------------------------------------------------------------------------
-    vertex0 = property(get_vertex0,
-                       doc = "First vertex of the Triangle")
 
 
 
@@ -282,9 +279,6 @@ class Triangle(Drawable):
     #   @brief Returns vertex1 (as a Point)
     def get_vertex1(self):
         return self._vertices[1]
-    # --------------------------------------------------------------------------
-    vertex1 = property(get_vertex1,
-                       doc = "Second vertex of the Triangle")
 
 
 
@@ -295,9 +289,7 @@ class Triangle(Drawable):
     #   @brief Returns vertex2 (as a Point)
     def get_vertex2(self):
         return self._vertices[2]
-    # --------------------------------------------------------------------------
-    vertex2 = property(get_vertex2,
-                       doc = "Third vertex of the Triangle")
+
 
 
 
@@ -308,9 +300,6 @@ class Triangle(Drawable):
     #   @brief Returns the three vertices (as a list of Points)
     def get_vertices(self):
         return self._vertices
-    # --------------------------------------------------------------------------
-    vertices = property(get_vertices,
-                        doc = "The three vertices (in a list)")
 
 
 
@@ -321,9 +310,6 @@ class Triangle(Drawable):
     #   @brief Returns the angle of rotation around the isobarycenter
     def get_rotation_angle(self):
         return self._rotation_angle
-    # --------------------------------------------------------------------------
-    rotation_angle = property(get_rotation_angle,
-                              doc = "Angle of rotation around the isobarycenter")
 
 
 
@@ -334,9 +320,6 @@ class Triangle(Drawable):
     #   @brief Returns angle0 (as an Angle)
     def get_angle0(self):
         return self._angles[0]
-    # --------------------------------------------------------------------------
-    angle0 = property(get_angle0,
-                      doc = "First angle of the Triangle")
 
 
 
@@ -347,9 +330,6 @@ class Triangle(Drawable):
     #   @brief Returns angle1 (as an Angle)
     def get_angle1(self):
         return self._angles[1]
-    # --------------------------------------------------------------------------
-    angle1 = property(get_angle1,
-                      doc = "Second angle of the Triangle")
 
 
 
@@ -360,9 +340,6 @@ class Triangle(Drawable):
     #   @brief Returns angle2 (as an Angle)
     def get_angle2(self):
         return self._angles[2]
-    # --------------------------------------------------------------------------
-    angle2 = property(get_angle2,
-                      doc = "Third angle of the Triangle")
 
 
 
@@ -373,9 +350,6 @@ class Triangle(Drawable):
     #   @brief Returns [angles]   (as a list of Angles)
     def get_angles(self):
         return self._angles
-    # --------------------------------------------------------------------------
-    angles = property(get_angles,
-                      doc = "The angles' list of the Triangle")
 
 
 
@@ -386,9 +360,6 @@ class Triangle(Drawable):
     #   @brief Returns side0 (as a Segment)
     def get_side0(self):
         return self._sides[0]
-    # --------------------------------------------------------------------------
-    side0 = property(get_side0,
-                     doc = "First side of the Triangle")
 
 
 
@@ -399,9 +370,6 @@ class Triangle(Drawable):
     #   @brief Returns side1 (as a Segment)
     def get_side1(self):
         return self._sides[1]
-    # --------------------------------------------------------------------------
-    side1 = property(get_side1,
-                     doc = "Second side of the Triangle")
 
 
 
@@ -412,9 +380,6 @@ class Triangle(Drawable):
     #   @brief Returns side2 (as a Segment)
     def get_side2(self):
         return self._sides[2]
-    # --------------------------------------------------------------------------
-    side2 = property(get_side2,
-                     doc = "Third side of the Triangle")
 
 
 
@@ -425,10 +390,50 @@ class Triangle(Drawable):
     #   @brief Returns [sides]   (as a list of Segments)
     def get_sides(self):
         return self._sides
-    # --------------------------------------------------------------------------
+
+
+
+
+
+    vertex0 = property(get_vertex0,
+                       doc = "First vertex of the Triangle")
+
+    vertex1 = property(get_vertex1,
+                       doc = "Second vertex of the Triangle")
+
+
+    vertex2 = property(get_vertex2,
+                       doc = "Third vertex of the Triangle")
+
+    vertices = property(get_vertices,
+                        doc = "The three vertices (in a list)")
+
+    angle0 = property(get_angle0,
+                      doc = "First angle of the Triangle")
+
+    angle1 = property(get_angle1,
+                      doc = "Second angle of the Triangle")
+
+    angle2 = property(get_angle2,
+                      doc = "Third angle of the Triangle")
+
+    angles = property(get_angles,
+                      doc = "The angles' list of the Triangle")
+
+    rotation_angle = property(get_rotation_angle,
+                              doc = "Angle of rotation around the isobarycenter")
+
+    side0 = property(get_side0,
+                     doc = "First side of the Triangle")
+
+    side1 = property(get_side1,
+                     doc = "Second side of the Triangle")
+
+    side2 = property(get_side2,
+                     doc = "Third side of the Triangle")
+
     sides = property(get_sides,
                      doc = "The sides' list of the Triangle")
-
 
 
 
@@ -782,9 +787,6 @@ class RightTriangle(Triangle):
     #   @brief Returns leg0 (as a Segment)
     def get_leg0(self):
         return self._sides[0]
-    # --------------------------------------------------------------------------
-    leg0 = property(get_leg0,
-                    doc = "First leg of the Triangle")
 
 
 
@@ -795,9 +797,6 @@ class RightTriangle(Triangle):
     #   @brief Returns leg1 (as a Segment)
     def get_leg1(self):
         return self._sides[1]
-    # --------------------------------------------------------------------------
-    leg1 = property(get_leg1,
-                    doc = "Second leg of the Triangle")
 
 
 
@@ -808,9 +807,6 @@ class RightTriangle(Triangle):
     #   @brief Returns legs (as a Segment)
     def get_legs(self):
         return [self.leg0, self.leg1]
-    # --------------------------------------------------------------------------
-    legs = property(get_legs,
-                    doc = "The two legs of the Right Triangle (in a list)")
 
 
 
@@ -821,9 +817,6 @@ class RightTriangle(Triangle):
     #   @brief Returns hypotenuse (as a Segment)
     def get_hypotenuse(self):
         return self._sides[2]
-    # --------------------------------------------------------------------------
-    hypotenuse = property(get_hypotenuse,
-                          doc = "Hypotenuse of the Right Triangle")
 
 
 
@@ -834,7 +827,23 @@ class RightTriangle(Triangle):
     #   @brief Returns Tthe right angle (as an Angle)
     def get_right_angle(self):
         return self.angle1
-    # --------------------------------------------------------------------------
+
+
+
+
+
+    leg0 = property(get_leg0,
+                    doc = "First leg of the Triangle")
+
+    leg1 = property(get_leg1,
+                    doc = "Second leg of the Triangle")
+
+    legs = property(get_legs,
+                    doc = "The two legs of the Right Triangle (in a list)")
+
+    hypotenuse = property(get_hypotenuse,
+                          doc = "Hypotenuse of the Right Triangle")
+
     right_angle = property(get_right_angle,
                            doc = "Right Angle of the Right Triangle")
 
