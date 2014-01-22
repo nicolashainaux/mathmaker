@@ -196,19 +196,6 @@ class Point(Drawable):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Sets the name of the Point
-    def set_name(self, arg):
-        if not is_.a_string(arg):
-            raise error.WrongArgument(' a string ', str(arg))
-
-        self._name = arg
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
     #   @brief Returns a new Point after rotation of self
     def rotate(self, center, angle, **options):
         if not isinstance(center, Point):

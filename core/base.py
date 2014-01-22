@@ -134,7 +134,7 @@ class Printable(NamedObject):
 ##
 # @class Drawable
 # @brief All Drawable objects. Any Drawable must reimplement into_euk()
-# Drawable are not renamable, except for the Points
+# Drawable are not renamable
 class Drawable(NamedObject):
 
 
@@ -175,7 +175,8 @@ class Drawable(NamedObject):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Sets the name of the object
+    #   @brief Prevents Drawable objects from being renamed, since they get
+    #          their name from other properties inside them.
     def set_name(self, arg):
         raise error.ImpossibleAction("rename this object")
 
