@@ -21,10 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import machine
-import exercise
+from . import exercise
 from lib import randomly
 
-from S_Structure import S_Structure
+from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = 0
 SHEET_LAYOUT_TYPE = 'short_test'

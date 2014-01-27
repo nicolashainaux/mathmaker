@@ -189,7 +189,7 @@ def action():
     check(item_minus_5_inside_exponent_0,
          ["1"])
 
-    for i in xrange(len(common.machines)):
+    for i in range(len(common.machines)):
         test = common.machines[i].type_string(\
                                        item_minus_5_inside_exponent_0,
                                        force_display_exponent_0='OK')
@@ -260,7 +260,7 @@ def action():
     check(item_to_round.needs_to_get_rounded(4),
           ["False"])
 
-    for i in xrange(len(common.machines)):
+    for i in range(len(common.machines)):
         test = common.machines[i].type_string(\
                                        item_with_unit,
                                        display_unit='yes')

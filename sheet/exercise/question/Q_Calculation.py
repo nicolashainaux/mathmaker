@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
-from Q_Structure import Q_Structure
+from .Q_Structure import Q_Structure
 from core.base_calculus import *
 from core.calculus import *
 
@@ -141,7 +141,7 @@ class Q_Calculation(Q_Structure):
                                                     0.0375, 0, 0.005
                                                     ])
 
-            factors_list = [j+1 for j in xrange(10)]
+            factors_list = [j+1 for j in range(10)]
 
             ten_power_factor1 = 1
             ten_power_factor2 = 1
@@ -173,7 +173,7 @@ class Q_Calculation(Q_Structure):
             # In some cases, the fractions will be generated
             # totally randomly
             if randomly.decimal_0_1() < 0:
-                lil_box = [n+2 for n in xrange(18)]
+                lil_box = [n+2 for n in range(18)]
                 a = randomly.pop(lil_box,
                                  weighted_table= \
                                         FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
@@ -181,7 +181,7 @@ class Q_Calculation(Q_Structure):
                                  weighted_table= \
                                         FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
 
-                lil_box = [n+2 for n in xrange(18)]
+                lil_box = [n+2 for n in range(18)]
                 c = randomly.pop(lil_box,
                                  weighted_table= \
                                         FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
@@ -213,13 +213,13 @@ class Q_Calculation(Q_Structure):
             # and c is a randomly number coprime to a×j
             else:
                 a = randomly.integer(2, 8)
-                lil_box = [i+2 for i in xrange(7)]
+                lil_box = [i+2 for i in range(7)]
                 i = randomly.pop(lil_box)
                 j = randomly.pop(lil_box)
 
-                b = randomly.coprime_to(a*i, [n+2 for n in xrange(15)])
+                b = randomly.coprime_to(a*i, [n+2 for n in range(15)])
                 c = randomly.not_coprime_to(b,
-                                            [n+2 for n in xrange(30)],
+                                            [n+2 for n in range(30)],
                                             excepted=a*j)
 
                 f1 = Fraction((randomly.sign(plus_signs_ratio=0.75),

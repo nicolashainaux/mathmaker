@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
-from X_Structure import X_Structure
-import question
+from .X_Structure import X_Structure
+from . import question
 from core.base_calculus import *
 #from core import randomly
 
@@ -163,7 +163,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
                               'difference_square',
                               'squares_difference']
 
-                for i in xrange(3):
+                for i in range(3):
                     q = default_question(self.machine,
                                          q_kind=randomly.pop(kinds_list),
                                          expression_number=i,
@@ -198,14 +198,14 @@ class X_AlgebraExpressionExpansion(X_Structure):
                 ordered_kinds_list = []
                 squares_differences_option = [0, 0, 0]
 
-                for i in xrange(3):
+                for i in range(3):
                     ordered_kinds_list.append(randomly.pop(kinds_list))
                     if ordered_kinds_list[i] == 'numeric_difference_square':
                         monomials_to_use[i][1].set_sign('-')
                     elif ordered_kinds_list[i] == 'numeric_squares_difference':
                         squares_differences_option[i] = 1
 
-                for i in xrange(3):
+                for i in range(3):
                     if squares_differences_option[i] == 1:
                         q = default_question(self.machine,
                                              q_kind=ordered_kinds_list[i],
@@ -332,14 +332,14 @@ class X_AlgebraExpressionExpansion(X_Structure):
                                                + "mixed_monom_polyn1 option " \
                                                + "has been specified.")
 
-                for i in xrange(int(self.q_nb*ratio) + 1):
+                for i in range(int(self.q_nb*ratio) + 1):
                     choices_list.append('monom0_polyn1')
-                for i in xrange(int(self.q_nb - self.q_nb*ratio)):
+                for i in range(int(self.q_nb - self.q_nb*ratio)):
                     choices_list.append('monom1_polyn1')
 
                 temp_nb = len(choices_list)
 
-                for i in xrange(temp_nb):
+                for i in range(temp_nb):
                     choice = randomly.pop(choices_list)
                     if choice == 'monom0_polyn1':
                         q=default_question(self.machine,
@@ -358,7 +358,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
 
         # OTHER EXERCISES
         else:
-            for i in xrange(self.q_nb):
+            for i in range(self.q_nb):
                 q=default_question(self.machine,
                                    q_kind=self.x_subkind,
                                    expression_number=i+self.start_number,

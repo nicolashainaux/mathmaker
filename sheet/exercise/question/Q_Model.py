@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
-from Q_Structure import Q_Structure
+from .Q_Structure import Q_Structure
 
 #from core.base_calculus import *
 

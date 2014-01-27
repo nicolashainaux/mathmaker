@@ -32,7 +32,7 @@ from core.base_calculus import *
 from lib import *
 import core.base_calculus
 
-import Structure
+from . import Structure
 
 
 # ------------------------------------------------------------------------------

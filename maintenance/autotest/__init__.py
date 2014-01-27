@@ -26,9 +26,9 @@ from optparse import OptionParser
 
 from lib import *
 from lib.common import software
-import common
-import obj_test
-import lib_test
+from . import common
+from . import obj_test
+from . import lib_test
 import sheet
 import machine
 import time
@@ -84,10 +84,10 @@ AVAILABLE_UNITS = [ ("items",
                   ]
 
 AVAILABLE_UNIT_NAMES = [AVAILABLE_UNITS[i][0] \
-                        for i in xrange(len(AVAILABLE_UNITS))]
+                        for i in range(len(AVAILABLE_UNITS))]
 
 AVAILABLE_UNITS_LEXICON = {}
-for i in xrange(len(AVAILABLE_UNITS)):
+for i in range(len(AVAILABLE_UNITS)):
     AVAILABLE_UNITS_LEXICON[AVAILABLE_UNIT_NAMES[i]] = AVAILABLE_UNITS[i][1]
 
 
@@ -97,15 +97,15 @@ def short_test_run(lang):
         M.write(str(sheet.AVAILABLE[elt][0](M)))
 
 def long_test_run(n, lang):
-    for i in xrange(n):
+    for i in range(n):
         short_test_run(lang)
         #time.sleep(2)
 
 def fraction_simplification_coverage(n):
     number_of_failed = 0
-    for i in xrange(int(n)):
+    for i in range(int(n)):
         os.write(common.output, "\n" + str(i+1))
-        for j in xrange(int(n)):
+        for j in range(int(n)):
             # test if the Fraction i over j is reduced the right way
             f = common.Fraction(('+', i+1, j+1))
             if f.is_reducible():
@@ -262,7 +262,7 @@ def main():
     else:
         tested_units = []
         if options.units != None and len(options.units) != 0:
-            for i in xrange(len(options.units)):
+            for i in range(len(options.units)):
                 if options.units[i] in AVAILABLE_UNIT_NAMES:
                     tested_units.append(AVAILABLE_UNITS_LEXICON[\
                                                              options.units[i]])

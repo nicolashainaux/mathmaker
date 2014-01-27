@@ -21,9 +21,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import machine
-import exercise
+from . import exercise
 
-from S_Structure import S_Structure
+from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'mini_test'
@@ -88,7 +88,7 @@ class AlgebraMiniTest1(S_Structure):
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-        for i in xrange(2):
+        for i in range(2):
             ex1 = exercise.X_AlgebraExpressionExpansion(self.machine,
                                                 x_kind='mini_test',
                                                 x_subkind='two_expansions_hard')

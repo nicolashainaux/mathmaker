@@ -24,8 +24,8 @@ import math
 import decimal
 from lib import *
 from lib import translator
-from base import *
-from base_calculus import *
+from .base import *
+from .base_calculus import *
 from lib.common import default
 from lib.maths_lib import *
 from lib.common.cst import *
@@ -286,7 +286,7 @@ class Equality(ComposedCalculable):
             raise error.UncompatibleType(objcts,                       \
                             "should be a list of TWO Exponenteds AT LEAST")
 
-        for i in xrange(len(objcts)):
+        for i in range(len(objcts)):
             if not isinstance(objcts[i], Exponented):
                 raise error.UncompatibleType(objcts[i],                    \
                                             "should be an Exponented")
@@ -301,7 +301,7 @@ class Equality(ComposedCalculable):
                                             + str(len(objcts) - 1) \
                                             + " elements.")
 
-            for i in xrange(len(options['equal_signs'])):
+            for i in range(len(options['equal_signs'])):
                 if not (options['equal_signs'][i] == '=' \
                         or options['equal_signs'][i] == 'neq'):
                 #___
@@ -312,7 +312,7 @@ class Equality(ComposedCalculable):
         self._elements = []
         self._equal_signs = []
 
-        for i in xrange(len(objcts)):
+        for i in range(len(objcts)):
             self._elements.append(objcts[i].clone())
 
             if 'equal_signs' in options:
@@ -384,7 +384,7 @@ class Equality(ComposedCalculable):
         result += self.elements[0].into_str(force_expression_begins=True,
                                             **options)
 
-        for i in xrange(len(self.elements) - 1):
+        for i in range(len(self.elements) - 1):
             result += MARKUP[self.equal_signs[i]] \
                       + self.elements[i+1].into_str( \
                                                  force_expression_begins=True,
@@ -941,10 +941,10 @@ class Equation(ComposedCalculable):
                     left_list = list()
                     right_list = list()
 
-                    for i in xrange(len(box_left)):
+                    for i in range(len(box_left)):
                         left_list.append(randomly.pop(box_left))
 
-                    for i in xrange(len(box_right)):
+                    for i in range(len(box_right)):
                         right_list.append(randomly.pop(box_right))
 
                     self._left_hand_side = Sum(left_list)
@@ -1923,7 +1923,7 @@ class CrossProductEquation(Equation):
                                               "a tuple of four Calculables")
                 else:
                     self._left_hand_side = Quotient(('+', arg[0], arg[2]))
-                    self._right_hand_side = Quotient(('+', arg[01], arg[3]))
+                    self._right_hand_side = Quotient(('+', arg[0o1], arg[3]))
 
 
             # Let's find the variable
@@ -2059,8 +2059,8 @@ class Table(Printable):
                                       + str(len(arg[1])),
                                       "two lists of the same length")
 
-        for j in xrange(2):
-            for i in xrange(len(arg[j])):
+        for j in range(2):
+            for i in range(len(arg[j])):
                 if not isinstance(arg[j][i], Calculable):
                     raise error.WrongArgument("arg[" + str(j) + "][" \
                                               + str(i) + "] is no instance of" \
@@ -2103,7 +2103,7 @@ class Table(Printable):
         if 'as_a_quotients_equality' in options \
             and options['as_a_quotients_equality'] in YES:
         #___
-            for i in xrange(len(self)):
+            for i in range(len(self)):
                 result += Quotient(('+',
                                     self.cell[0][i],
                                     self.cell[1][i]
@@ -2116,15 +2116,15 @@ class Table(Printable):
         else: # there, the table will be displayed normally, as a table
             content = []
 
-            for i in xrange(2):
-                for j in xrange(len(self)):
+            for i in range(2):
+                for j in range(len(self)):
                     content += [self.cell[i][j]\
                                         .into_str(force_expression_begins=True)]
 
             result = translator\
                     .create_table((2, len(self)),
                                    content,
-                                   col_fmt=['c' for i in xrange(len(self))],
+                                   col_fmt=['c' for i in range(len(self))],
                                    borders='all'
                                  )
 
@@ -2232,8 +2232,8 @@ class Table(Printable):
     ##
     #   @brief Returns True if the Table is entirely numeric
     def is_numeric(self):
-        for i in xrange(2):
-            for j in xrange(len(self)):
+        for i in range(2):
+            for j in range(len(self)):
                 if not self.cell[i][j].is_numeric():
                     return False
 
@@ -2297,7 +2297,7 @@ class Table_UP(Table):
         literals_positions = {}
         col_nb = 0
 
-        for i in xrange(len(first_line)):
+        for i in range(len(first_line)):
             if first_line[i] is None and (info[i] is None \
                                           or info[i] == (None, None)):
             #___
@@ -2369,7 +2369,7 @@ class Table_UP(Table):
 
         second_line = []
 
-        for i in xrange(len(first_line)):
+        for i in range(len(first_line)):
             if first_line[i] is None:
                 second_line += [None]
             else:
@@ -2378,7 +2378,7 @@ class Table_UP(Table):
 
         data = [[], []]
 
-        for i in xrange(len(first_line)):
+        for i in range(len(first_line)):
             if info[i] is None:
                 data[0] += [first_line[i]]
                 data[1] += [second_line[i]]
@@ -2422,7 +2422,7 @@ class Table_UP(Table):
             distance = len(data[0])
             final_col = None
 
-            for i in xrange(len(complete_cols)):
+            for i in range(len(complete_cols)):
                 if maths_lib.abs(complete_cols[i] - col_ref) <= distance:
                     final_col = complete_cols[i]
                     distance = maths_lib.abs(complete_cols[i] - col_ref)

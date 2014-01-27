@@ -30,8 +30,8 @@ import math
 from decimal import *
 
 import core
-from base import *
-from root_calculus import *
+from .base import *
+from .root_calculus import *
 
 from lib import randomly
 #from lib import translator
@@ -1034,8 +1034,8 @@ class Item(Exponented):
         elif elt == Item(1):
             return self.is_displ_as_a_single_1()
         else:
-            print elt.dbg_str()
-            print Item(0).dbg_str()
+            print(elt.dbg_str())
+            print(Item(0).dbg_str())
             raise error.UncompatibleType(elt, "neutral element for addition" \
                                               + " or multiplication, e.g." \
                                               + " Item(1) | Item(0).")
@@ -1762,8 +1762,8 @@ class SquareRoot(Function):
         elif elt == Item(1):
             return self.is_displ_as_a_single_1()
         else:
-            print elt.dbg_str()
-            print Item(0).dbg_str()
+            print(elt.dbg_str())
+            print(Item(0).dbg_str())
             raise error.UncompatibleType(elt, "neutral element for addition" \
                                               + " or multiplication, e.g." \
                                               + " Item(1) | Item(0).")
@@ -2609,8 +2609,8 @@ class Quotient (Operation):
         elif elt == Item(1):
             return self.is_displ_as_a_single_1()
         else:
-            print elt.dbg_str()
-            print Item(0).dbg_str()
+            print(elt.dbg_str())
+            print(Item(0).dbg_str())
             raise error.UncompatibleType(elt, "neutral element for addition" \
                                               + " or multiplication, e.g." \
                                               + " Item(1) | Item(0).")
@@ -2731,8 +2731,8 @@ class Fraction(Quotient):
              and (is_.a_sign(arg[2]) or arg[2] == RANDOMLY) \
              and (is_.a_sign(arg[4]) or arg[4] == RANDOMLY):
         #___
-            numbers_box_nume = [j+1 for j in xrange(arg_nume)]
-            numbers_box_deno = [j+1 for j in xrange(arg_deno)]
+            numbers_box_nume = [j+1 for j in range(arg_nume)]
+            numbers_box_deno = [j+1 for j in range(arg_deno)]
 
             nume = randomly.pop(numbers_box_nume)
             nume_sign = '+'
@@ -2804,7 +2804,7 @@ class Fraction(Quotient):
         # Now it may be useful to de-embbed some Products or Sums...
         temp_objects = [self.numerator, self.denominator]
 
-        for i in xrange(len(temp_objects)):
+        for i in range(len(temp_objects)):
             if len(temp_objects[i]) == 1:
                 if isinstance(temp_objects[i].factor[0], Sum) \
                    and len(temp_objects[i].factor[0]) == 1:
@@ -2852,12 +2852,12 @@ class Fraction(Quotient):
     #   @brief Returns True if Fraction's status is simplification_in_progress
     #   @return True if Fraction's status is simplification_in_progress
     def get_simplification_in_progress(self):
-        for i in xrange(len(self.numerator)):
+        for i in range(len(self.numerator)):
             if isinstance(self.numerator.factor[i], Item):
                 if self.numerator.factor[i].is_out_striked:
                     return True
 
-        for i in xrange(len(self.denominator)):
+        for i in range(len(self.denominator)):
             if isinstance(self.denominator.factor[i], Item):
                 if self.denominator.factor[i].is_out_striked:
                     return True
@@ -3224,14 +3224,14 @@ class Fraction(Quotient):
             # striked Items) or at the end by the original values for the
             # factors that haven't changed.
             new_numerator = Product([Item(1)                                  \
-                                         for i in xrange(len(self.numerator))])
+                                         for i in range(len(self.numerator))])
             new_denominator = Product([Item(1)                                \
-                                       for i in xrange(len(self.denominator))])
+                                       for i in range(len(self.denominator))])
 
             this_numerators_factor_has_been_processed = [False                \
-                                          for i in xrange(len(self.numerator))]
+                                          for i in range(len(self.numerator))]
             this_denominators_factor_has_been_processed = [False              \
-                                        for i in xrange(len(self.denominator))]
+                                        for i in range(len(self.denominator))]
 
             # If this method is called on a fraction which already contains
             # striked out Items, then they shouldn't be taken in account, so
@@ -3255,8 +3255,8 @@ class Fraction(Quotient):
             # its 5 will be simplified with the one of the denominator ;
             # which is not false but it would be more natural to simplify the
             # two 5 before decomposing any factor
-            for i in xrange(len(self.numerator)):
-                for j in xrange(len(self.denominator)):
+            for i in range(len(self.numerator)):
+                for j in range(len(self.denominator)):
                     if self.numerator.factor[i].raw_value \
                        == self.denominator.factor[j].raw_value \
                        and not (this_numerators_factor_has_been_processed[i] \
@@ -3282,8 +3282,8 @@ class Fraction(Quotient):
 
             # Now let's check if decomposing some factors could help simplify
             # the fraction
-            for i in xrange(len(self.numerator)):
-                for j in xrange(len(self.denominator)):
+            for i in range(len(self.numerator)):
+                for j in range(len(self.denominator)):
                     if not this_denominators_factor_has_been_processed[j] \
                        and not this_numerators_factor_has_been_processed[i]:
                     #___
@@ -3395,11 +3395,11 @@ class Fraction(Quotient):
                                 this_denominators_factor_has_been_processed[j]\
                                                                          = True
 
-            for i in xrange(len(new_numerator)):
+            for i in range(len(new_numerator)):
                 if not this_numerators_factor_has_been_processed[i]:
                     new_numerator.factor[i] = self.numerator.factor[i]
 
-            for j in xrange(len(new_denominator)):
+            for j in range(len(new_denominator)):
                 if not this_denominators_factor_has_been_processed[j]:
                     new_denominator.factor[j] = self.denominator.factor[j]
 
@@ -3417,30 +3417,30 @@ class Fraction(Quotient):
             # be much better)
             final_numerator = []
             final_denominator = []
-            for i in xrange(len(new_numerator)):
+            for i in range(len(new_numerator)):
                 if isinstance(new_numerator.factor[i], Item):
                     final_numerator.append(new_numerator.factor[i].clone())
                 elif isinstance(new_numerator.factor[i], Product):
-                    for j in xrange(len(new_numerator.factor[i])):
+                    for j in range(len(new_numerator.factor[i])):
                         final_numerator.append(new_numerator.factor[i]\
                                                             .factor[j]\
                                                             .clone())
 
-            for i in xrange(len(new_denominator)):
+            for i in range(len(new_denominator)):
                 if isinstance(new_denominator.factor[i], Item):
                     final_denominator.append(new_denominator.factor[i]\
                                                             .clone())
                 elif isinstance(new_denominator.factor[i], Product):
-                    for j in xrange(len(new_denominator.factor[i])):
+                    for j in range(len(new_denominator.factor[i])):
                         final_denominator.append( \
                                            new_denominator.factor[i]\
                                                           .factor[j]\
                                                           .clone())
 
             # Now let's check if some unstriked Items could be striked
-            for i in xrange(len(final_numerator)):
+            for i in range(len(final_numerator)):
                 if not final_numerator[i].is_out_striked:
-                    for j in xrange(len(final_denominator)):
+                    for j in range(len(final_denominator)):
                         if not final_denominator[j].is_out_striked:
                             if final_numerator[i].raw_value ==                    \
                                final_denominator[j].raw_value:
@@ -3470,7 +3470,7 @@ class Fraction(Quotient):
                             + "signs simplification]",
                               case=debug.simplification_line_minus_signs)
                 for I in [final_numerator, final_denominator]:
-                    for i in xrange(len(I)):
+                    for i in range(len(I)):
                         if I[i].get_sign() == '-':
                             if position_of_the_last_minus_sign is None:
                                 if I == final_numerator:
@@ -3522,13 +3522,13 @@ class Fraction(Quotient):
 
             if debug.ENABLED and debug.simplification_line_minus_signs:
 
-                for i in xrange(len(answer.numerator)):
+                for i in range(len(answer.numerator)):
                     if answer.numerator[i].force_display_sign_once:
                         debug.write("\n[Simplification line : found a plus " \
                                             + "sign forced to display in nume]",
                                     case=debug.simplification_line_minus_signs)
 
-                for i in xrange(len(answer.denominator)):
+                for i in range(len(answer.denominator)):
                     if answer.denominator[i].force_display_sign_once:
                         debug.write("\n[Simplification line : found a plus " \
                                             + "sign forced to display in deno]",
@@ -3557,13 +3557,13 @@ class Fraction(Quotient):
 
         # The values of all striked out factors get replaced by "1"
         # ... numerator :
-        for i in xrange(len(result.numerator)):
+        for i in range(len(result.numerator)):
             if result.numerator.factor[i].is_out_striked:
                 result.numerator.factor[i].set_value_inside(Value(1))
                 result.numerator.factor[i].set_is_out_striked(False)
 
         # ... denominator
-        for j in xrange(len(result.denominator)):
+        for j in range(len(result.denominator)):
             if result.denominator.factor[j].is_out_striked:
                 result.denominator.factor[j].set_value_inside(Value(1))
                 result.denominator.factor[j].set_is_out_striked(False)
@@ -3669,14 +3669,14 @@ class Fraction(Quotient):
                 return False
 
 
-        for i in xrange(len(self.numerator)):
+        for i in range(len(self.numerator)):
             if not (isinstance(self.numerator.factor[i], Item)                \
                     and is_.an_integer(self.numerator.factor[i].raw_value)        \
                     and self.numerator.factor[i].exponent == Value(1)         \
                     ):
                 return False
 
-        for i in xrange(len(self.denominator)):
+        for i in range(len(self.denominator)):
             if not (isinstance(self.denominator.factor[i], Item)              \
                     and is_.an_integer(self.denominator.factor[i].raw_value)      \
                     and self.denominator.factor[i].exponent == Value(1)       \
@@ -3927,7 +3927,7 @@ class CommutativeOperation(Operation):
     #                 or : "[info1|info2||term0, ..., termn]^{exponent}"
     def dbg_str(self, **options):
         elements_list_string = ""
-        for i in xrange(len(self)):
+        for i in range(len(self)):
             elements_list_string += self.element[i].dbg_str()
             if i < len(self) - 1:
                 elements_list_string += ' ' + self.symbol + ' '
@@ -4043,7 +4043,7 @@ class CommutativeOperation(Operation):
     def throw_away_the_neutrals(self):
         collected_positions = list()
 
-        for i in xrange(len(self)):
+        for i in range(len(self)):
             if self.element[i].is_displ_as_a_single_neutral(self.neutral):
                 #DEBUG
                 debug.write("\n" + self.element[i].dbg_str() \
@@ -4067,7 +4067,7 @@ class CommutativeOperation(Operation):
             result.set_info([False])
 
         else:
-            for i in xrange(len(collected_positions)):
+            for i in range(len(collected_positions)):
                 # this - i is necessary in the case of several items
                 # because the real length of the element list diminishes
                 # each time an item is poped.
@@ -4178,9 +4178,9 @@ class Product (CommutativeOperation):
         elif isinstance(arg, Product):
             self._compact_display = arg.compact_display
             self._exponent = arg.exponent.clone()
-            for i in xrange(len(arg.element)):
+            for i in range(len(arg.element)):
                 self._element.append(arg.element[i].clone())
-            for i in xrange(len(arg.info)):
+            for i in range(len(arg.info)):
                 self._info.append(arg.info[i])
 
         # 3d CASE : Number
@@ -4193,7 +4193,7 @@ class Product (CommutativeOperation):
 
         # 5th CASE : [Numbers|Exponenteds]
         elif (type(arg) == list) and len(arg) >= 1:
-            for i in xrange(len(arg)):
+            for i in range(len(arg)):
 
                 if i == 0:
                     self._info.append(False)
@@ -4241,7 +4241,7 @@ class Product (CommutativeOperation):
             if objct in self.factor:
                 aux_list = list()
                 objct_was_found = False
-                for i in xrange(len(self)):
+                for i in range(len(self)):
                     if self.factor[i] != objct:
                         aux_list.append(self.factor[i])
                     else:
@@ -4723,7 +4723,7 @@ class Product (CommutativeOperation):
 
             # If there are other factors :
             if len(self) >= 2:
-                for i in xrange(len(self) - 1):
+                for i in range(len(self) - 1):
                     if self.factor[i + 1].is_displ_as_a_single_1():
                         # inside the product, the 1 factors just don't
                         # matter
@@ -4952,7 +4952,7 @@ class Product (CommutativeOperation):
 
             # Before leaving, maybe close a possibly left unclosed bracket
             if unclosed_bracket >= 1:
-                for i in xrange(unclosed_bracket):
+                for i in range(unclosed_bracket):
                     #DEBUG
                     debug.write( \
                               "\n[end of product]the bracket is */closed/*\n",
@@ -5020,7 +5020,7 @@ class Product (CommutativeOperation):
             # If there are other factors, the × symbols are displayed
             # as well as the next factors
             if len(self) >= 2:
-                for i in xrange(len(self) - 1):
+                for i in range(len(self) - 1):
                     # /!\ The i-th is the last displayed, the (i+1)th is
                     # the current one
                     if self.factor[i].multiply_symbol_is_required(
@@ -5143,7 +5143,7 @@ class Product (CommutativeOperation):
             nb_fractions = 0
 
             # Let's count how many items, fractions etc. there are here
-            for i in xrange(len(self)):
+            for i in range(len(self)):
                 # Is this content factorizable ?
                 if isinstance(self.factor[i], Item):
                     if not (self.factor[i].is_displ_as_a_single_1()      \
@@ -5200,7 +5200,7 @@ class Product (CommutativeOperation):
                 nume_list = []
                 deno_list = []
 
-                for i in xrange(len(self)):
+                for i in range(len(self)):
                     if isinstance(self[i], Item):
                         nume_list += [self[i]]
                     elif isinstance(self[i], Fraction):
@@ -5219,7 +5219,7 @@ class Product (CommutativeOperation):
                 resulting_deno_list = []
                 possibly_items_list = []
 
-                for i in xrange(len(self)):
+                for i in range(len(self)):
                     if isinstance(self.factor[i], Fraction)                   \
                        and not (self.factor[i].is_displ_as_a_single_1()  \
                                or
@@ -5230,14 +5230,14 @@ class Product (CommutativeOperation):
                         # THEY SHOULD BE TREATED EITHER EARLIER (1st CASE)
                         # OR LATER...
                         resulting_sign_list.append(self.factor[i])
-                        for j in xrange(len(self.factor[i].numerator.factor)):
+                        for j in range(len(self.factor[i].numerator.factor)):
                             item_to_add = Item( \
                                             self.factor[i].numerator.factor[j])
                             item_to_add.set_sign('+')
                             resulting_nume_list.append(item_to_add)
 
                         #resulting_nume_list += self.factor[i].numerator.factor
-                        for j in xrange(len(self.factor[ \
+                        for j in range(len(self.factor[ \
                                                        i].denominator.factor)):
                         #___
                             item_to_add = Item( \
@@ -5275,7 +5275,7 @@ class Product (CommutativeOperation):
             elif nb_fractions == 1 and nb_minus_1 == 1:
                 # Let's get this fraction...
                 the_fraction = None
-                for i in xrange(len(self)):
+                for i in range(len(self)):
                     if isinstance(self.factor[i], Fraction):
                         the_fraction = Fraction(self.factor[i])
 
@@ -5293,7 +5293,7 @@ class Product (CommutativeOperation):
             elif nb_fractions == 1 and nb_minus_1 == 0 and nb_items == 0:
                 # Let's get this fraction...
                 the_fraction = None
-                for i in xrange(len(self)):
+                for i in range(len(self)):
                     if isinstance(self.factor[i], Fraction):
                         the_fraction = Fraction(self.factor[i])
 
@@ -5388,7 +5388,7 @@ class Product (CommutativeOperation):
         a_factor_at_least_has_been_modified = False
 
         # check if any of the factors needs to be reduced
-        for i in xrange(len(copy)):
+        for i in range(len(copy)):
             test = copy.factor[i].expand_and_reduce_next_step(**options)
             if test != None:
                 if isinstance(test, CommutativeOperation) and len(test) == 1:
@@ -5418,9 +5418,9 @@ class Product (CommutativeOperation):
                                                       get_first_factor()])
                     new_first_factor = new_first_factor.reduce_()
                     new_copy.element.append(new_first_factor)
-                    for i in xrange(len(copy.factor[1]) - 1):
+                    for i in range(len(copy.factor[1]) - 1):
                         new_copy.element.append(copy.factor[1].factor[i + 1])
-                    for i in xrange(len(copy.factor) - 2):
+                    for i in range(len(copy.factor) - 2):
                         new_copy.element.append(copy.factor[i + 2])
                     copy = new_copy
             return copy
@@ -5472,7 +5472,7 @@ class Product (CommutativeOperation):
         if len(self) != len(objct):
             return -1
 
-        for i in xrange(len(self)):
+        for i in range(len(self)):
             if self.factor[i] != objct.factor[i]:
                 return -1
 
@@ -5893,7 +5893,7 @@ class Product (CommutativeOperation):
         # a×(-b) would be [Item(1)] only. The - sign before the b will be
         # managed in the literal factors' list. So. Let's check if any - sign
         # remains there before asserting the literals are reduced.
-        for i in xrange(len(literals)):
+        for i in range(len(literals)):
             # this next test is to avoid the cases of a literal in first
             # position having a '-' sign (doesn't need to be reduced then)
             # e.g. -ab ; but if the first factor is numeric then we know that
@@ -6014,7 +6014,7 @@ class Sum (CommutativeOperation):
             self._force_inner_brackets_display = \
                                                arg.force_inner_brackets_display
             self._exponent = arg.exponent.clone()
-            for i in xrange(len(arg)):
+            for i in range(len(arg)):
                 self._element.append(arg.term[i].clone())
                 self._info.append(arg.info[i])
 
@@ -6030,13 +6030,13 @@ class Sum (CommutativeOperation):
 
         # 4th CASE : [Numbers|Exponenteds]
         elif (type(arg) == list) and len(arg) >= 1:
-            for i in xrange(len(arg)):
+            for i in range(len(arg)):
                 # The 1-exponent Sum are processed apart from all other
                 # Exponenteds
                 if isinstance(arg[i], Sum)                                    \
                    and arg[i].exponent.is_displ_as_a_single_1():
                 #___
-                    for j in xrange(len(arg[i])):
+                    for j in range(len(arg[i])):
                         self._element.append(arg[i].term[j].clone())
                         self._info.append(arg[i].info[j])
 
@@ -6396,7 +6396,7 @@ class Sum (CommutativeOperation):
                 + "\nforce_inner_brackets_display = " \
                 + str(self.force_inner_brackets_display),
                 case=debug.into_str_in_sum)
-            for i in xrange(len(self)):
+            for i in range(len(self)):
                 # compact_display : zeros won't be displayed
                 if not self.term[i].is_displ_as_a_single_0():
                     resulting_string += self.term[i].into_str(**options)
@@ -6472,7 +6472,7 @@ class Sum (CommutativeOperation):
                 + "\nforce_inner_brackets_display = " \
                 + str(self.force_inner_brackets_display),
                 case=debug.into_str_in_sum)
-            for i in xrange(len(self)):
+            for i in range(len(self)):
                 if self.info[i]                           \
                    and not self.term[i].requires_inner_brackets()             \
                    and not self.term[i].is_displ_as_a_single_0():
@@ -6561,7 +6561,7 @@ class Sum (CommutativeOperation):
         # only one element AND replace these f*** 0-degree-Monomials by
         # equivalent Item/Fraction.
         a_term_has_been_depacked = False
-        for i in xrange(len(copy)):
+        for i in range(len(copy)):
             if (isinstance(copy.term[i], CommutativeOperation) \
                 and len(copy.term[i]) == 1) \
                or isinstance(copy.term[i], Monomial):
@@ -6584,7 +6584,7 @@ class Sum (CommutativeOperation):
         # sign of the fraction in order to get a "clean" Sum and by the way,
         # all denominators will be positive
         a_minus_sign_in_a_fraction_was_found = False
-        for i in xrange(len(copy)):
+        for i in range(len(copy)):
             if isinstance(copy.term[i], Fraction) \
                and (copy.term[i].numerator.get_sign() == '-'\
                     or copy.term[i].denominator.get_sign() == '-'):
@@ -6619,7 +6619,7 @@ class Sum (CommutativeOperation):
         numeric_items_nb = 0
         fractions_nb = 0
 
-        for i in xrange(len(copy)):
+        for i in range(len(copy)):
             if isinstance(copy.term[i], Fraction):
                 fractions_nb += 1
             elif isinstance(copy.term[i], Item) \
@@ -6700,7 +6700,7 @@ class Sum (CommutativeOperation):
                                        case=debug.calculate_next_step_sum)
 
                     first_fraction_met = True
-                    for i in xrange(len(copy)):
+                    for i in range(len(copy)):
                         if not i >= len(copy):
                             #DEBUG
                             debug.write(\
@@ -6741,7 +6741,7 @@ class Sum (CommutativeOperation):
 
         if numeric_items_nb >= 2:
             numeric_terms_collection = []
-            for i in xrange(len(copy)):
+            for i in range(len(copy)):
                 if isinstance(copy.term[i], Item) \
                    and copy.term[i].is_numeric():
                 #___
@@ -6755,7 +6755,7 @@ class Sum (CommutativeOperation):
             # sums)
             if fractions_nb >= 1:
                 first_numeric_item_met = True
-                for i in xrange(len(copy)):
+                for i in range(len(copy)):
                     if not i >= len(copy) \
                        and isinstance(copy.term[i], Item) \
                        and copy.term[i].is_numeric():
@@ -6775,7 +6775,7 @@ class Sum (CommutativeOperation):
 
         a_term_has_been_modified = False
 
-        for i in xrange(len(copy)):
+        for i in range(len(copy)):
             if not copy.term[i] in dont_touch_these:
                 temp = copy.term[i].calculate_next_step(**options)
                 if temp != None:
@@ -6810,7 +6810,7 @@ class Sum (CommutativeOperation):
         # 2. There are only fractions
         if numeric_items_nb == 0 and fractions_nb >= 1:
             denos_list = []
-            for i in xrange(len(copy)):
+            for i in range(len(copy)):
                 denos_list.append(copy.term[i].denominator.factor[0].raw_value)
 
             lcm = lcm_of_the_list(denos_list)
@@ -6823,12 +6823,12 @@ class Sum (CommutativeOperation):
             # will be kept
             same_deno_reduction_required = False
 
-            for i in xrange(len(copy)):
+            for i in range(len(copy)):
                 if lcm_item != copy.term[i].denominator.factor[0]:
                     same_deno_reduction_required = True
 
             if same_deno_reduction_required:
-                for i in xrange(len(copy)):
+                for i in range(len(copy)):
                     aux_item = Item(int(lcm/copy.term[i].\
                                                 denominator.factor[0].raw_value))
                     if aux_item.raw_value != 1:
@@ -6844,7 +6844,7 @@ class Sum (CommutativeOperation):
 
             else:
                 numes_list = []
-                for i in xrange(len(copy)):
+                for i in range(len(copy)):
                     numes_list.append(Product([copy.term[i].numerator.factor[0],
                                                Item((copy.term[i].sign, 1))
                                               ]).reduce_().factor[0]
@@ -6859,7 +6859,7 @@ class Sum (CommutativeOperation):
         # 3. There are fractions mixed with numbers.
         if numeric_items_nb >= 1 and fractions_nb >= 1:
             #copy = Sum(self)
-            for i in xrange(len(copy)):
+            for i in range(len(copy)):
                 if isinstance(copy.term[i], Item) \
                    and copy.term[i].is_numeric():
                 #___
@@ -6910,7 +6910,7 @@ class Sum (CommutativeOperation):
         an_imbricated_sum_has_been_found = False
         a_degree_0_monomial_has_been_found = False
 
-        for i in xrange(len(copy)):
+        for i in range(len(copy)):
             if (not isinstance(copy.term[i], Sum) \
                or (isinstance(copy.term[i], Sum) \
                    and not copy.term[i].exponent.is_displ_as_a_single_1( \
@@ -6929,7 +6929,7 @@ class Sum (CommutativeOperation):
                 new_copy.info.append(copy.info[i])
             else:
                 an_imbricated_sum_has_been_found = True
-                for j in xrange(len(copy.term[i])):
+                for j in range(len(copy.term[i])):
                     new_copy.element.append(copy.term[i].term[j])
                     new_copy.info.append(copy.term[i].info[j])
 
@@ -6975,7 +6975,7 @@ class Sum (CommutativeOperation):
         # first round :
         # check if any of the terms needs to be reduced
         # (excepted numeric terms)
-        for i in xrange(len(copy)):
+        for i in range(len(copy)):
             test = copy.term[i].expand_and_reduce_next_step(**options)
             if test != None:
                 copy.term[i] = test
@@ -6989,7 +6989,7 @@ class Sum (CommutativeOperation):
         if numeric_terms_must_be_reduced \
            and a_term_at_least_has_been_modified:
         #___
-            for i in xrange(len(copy)):
+            for i in range(len(copy)):
                 if copy.term[i].is_numeric() \
                    and not modified_term[i]:
                 #___
@@ -6999,7 +6999,7 @@ class Sum (CommutativeOperation):
                         copy.term[i] = numeric_value
                         the_first_numeric_term_has_been_found = True
 
-            for j in xrange(len(terms_to_remove)):
+            for j in range(len(terms_to_remove)):
                 copy.remove(terms_to_remove[j])
 
 
@@ -7082,7 +7082,7 @@ class Sum (CommutativeOperation):
         if len(self) != len(objct):
             return -1
 
-        for i in xrange(len(self)):
+        for i in range(len(self)):
             if self.term[i] != objct.term[i]:
                 return -1
 
@@ -7111,7 +7111,7 @@ class Sum (CommutativeOperation):
     #   @param position The point where to start from to search
     #   @return The rank of next non-equivalent to 0 term (or None)
     def next_displayable_term_nb(self, position):
-        for i in xrange(len(self) - 1 - position):
+        for i in range(len(self) - 1 - position):
             if not self.term[i + 1 + position].is_displ_as_a_single_0():
                 return i + 1 + position
         return None
@@ -7250,7 +7250,7 @@ class Sum (CommutativeOperation):
         at_least_two_numeric_terms_have_been_found = False
         two_scattered_terms_have_been_found = False
         last_numeric_term_position = -1
-        for i in xrange(len(self)):
+        for i in range(len(self)):
             if self.term[i].is_displ_as_a_single_numeric_Item():
                 if not at_least_one_numeric_term_has_been_found:
                     at_least_one_numeric_term_has_been_found = True
@@ -7896,7 +7896,7 @@ class Polynomial(Sum):
 
         # 2d CASE : [Monomial|Polynomial] or Sum(Monomial|Polynomial)
         elif ((type(arg) == list) and len(arg) >= 1) or isinstance(arg, Sum):
-            for i in xrange(len(arg)):
+            for i in range(len(arg)):
                 #DEBUG
                 debug.write("\nCopying : " + arg[i].dbg_str(),
                                        case=debug.init_in_polynomial)
@@ -7904,7 +7904,7 @@ class Polynomial(Sum):
                     self._element.append(arg[i].clone())
                     self._info.append(False)
                 elif isinstance(arg[i], Polynomial):
-                    for j in xrange(len(arg[i])):
+                    for j in range(len(arg[i])):
                         self._element.append(arg[i].term[j].clone())
                         self._info.append(arg[i].info[j])
                 else:
@@ -7958,9 +7958,9 @@ class Polynomial(Sum):
             current_nb_constant_terms = 0
             deg_to_put_in_again = None
             the_last_drawing_has_to_be_put_in_again = False
-            degrees_list = [i for i in xrange(arg[2] + 1)]
+            degrees_list = [i for i in range(arg[2] + 1)]
 
-            for i in xrange(length):
+            for i in range(length):
                 # Let's determine the coefficient...
                 coeff = randomly.integer(1, arg[1])
 
@@ -7977,7 +7977,7 @@ class Polynomial(Sum):
                 if deg == 0:
                     current_nb_constant_terms += 1
                     if current_nb_constant_terms == max_nb_constant_terms:
-                        degrees_list = [i + 1 for i in xrange(arg[2])]
+                        degrees_list = [i + 1 for i in range(arg[2])]
                         the_last_drawing_has_to_be_put_in_again = False
 
                 # ...and finally append the new Monomial !
@@ -8015,7 +8015,7 @@ class Polynomial(Sum):
     def get_max_degree(self):
         d = ZERO_POLYNOMIAL_DEGREE
 
-        for i in xrange(len(self)):
+        for i in range(len(self)):
             if self.term[i].degree > d:
                 d = self.term[i].degree
 
@@ -8031,10 +8031,10 @@ class Polynomial(Sum):
     #   @return The real Polynomial's degree
     def get_degree(self):
         # Let's glance at the degrees in reverse order
-        for i in xrange(self.get_max_degree(), -1, -1):
+        for i in range(self.get_max_degree(), -1, -1):
             coefficients_sum = 0
             # Let's calculate the sum of coefficients for a given degree
-            for j in xrange(len(self)):
+            for j in range(len(self)):
                 # We check each Monomial of i-th degree
                 if self.term[j].degree == i:
                     if self.term[j].sign == '+':
@@ -8069,7 +8069,7 @@ class Polynomial(Sum):
     #   @return " [[ term0, ..., termn ]]"
     def dbg_str(self, **options):
         resulting_string = " [["
-        for i in xrange(len(self)):
+        for i in range(len(self)):
             resulting_string += self.term[i].dbg_str()
             if i < len(self) - 1:
                 resulting_string += ", "
@@ -8141,9 +8141,9 @@ class Expandable(Product):
         if isinstance(arg, Expandable):
             self._compact_display = arg.compact_display
             self.reset_element()
-            for i in xrange(len(arg.element)):
+            for i in range(len(arg.element)):
                 self._element.append(arg.element[i].clone())
-            for i in xrange(len(arg.info)):
+            for i in range(len(arg.info)):
                 self._info.append(arg.info[i])
 
 
@@ -8255,8 +8255,8 @@ class Expandable(Product):
         # And here we go :
         terms_list = list()
 
-        for i in xrange(len(self.factor[0])):
-            for j in xrange(len(self.factor[1])):
+        for i in range(len(self.factor[0])):
+            for j in range(len(self.factor[1])):
                 temp = Product([self.factor[0].term[i],
                                 self.factor[1].term[j]
                                ])
@@ -8267,7 +8267,7 @@ class Expandable(Product):
            and (self.factor[0].term[0].is_displ_as_a_single_minus_1() \
                 or self.factor[0].term[0].is_displ_as_a_single_1()):
         #___
-            for i in xrange(len(terms_list)):
+            for i in range(len(terms_list)):
                 terms_list[i] = terms_list[i].reduce_()
 
         return Sum(terms_list)
@@ -8319,7 +8319,7 @@ class Expandable(Product):
                     return self.expand()
 
         # check if any of the factors needs to be reduced
-        for i in xrange(len(copy)):
+        for i in range(len(copy)):
             test = copy.factor[i].expand_and_reduce_next_step(**options)
             if test != None:
                 copy.set_element(i, test)
@@ -8413,10 +8413,10 @@ class BinomialIdentity(Expandable):
         # 1st CASE
         # Another BinomialIdentity to copy
         if isinstance(arg, BinomialIdentity):
-            for i in xrange(len(arg.element)):
+            for i in range(len(arg.element)):
                 self._element.append(arg.element[i].clone())
             self._compact_display = arg.compact_display
-            for i in xrange(len(arg.info)):
+            for i in range(len(arg.info)):
                 self._info.append(arg.info[i])
             self._exponent = arg.exponent.clone()
             self._kind = arg.kind

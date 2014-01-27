@@ -22,8 +22,8 @@
 
 
 import machine
-import exercise
-from S_Structure import S_Structure
+from . import exercise
+from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'std'

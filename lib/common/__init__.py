@@ -20,9 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import alphabet
+from . import alphabet
 #import cfg
-import cst
-import default
+from . import cst
+from . import default
 #import latex
 #import software

@@ -27,8 +27,8 @@
 # @package machine
 # @brief The machines know how to write an output according to a given format.
 
-import Structure
-import LaTeX
+from . import Structure
+from . import LaTeX
 
 Structure = Structure.Structure
 LaTeX = LaTeX.LaTeX

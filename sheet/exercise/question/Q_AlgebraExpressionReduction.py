@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
-from Q_Structure import Q_Structure
+from .Q_Structure import Q_Structure
 from core.base_calculus import *
 from core.calculus import *
 from lib.common.cst import *
@@ -218,7 +218,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
                 drawn_letters = list()
 
-                for j in xrange(nb_of_letters_to_draw):
+                for j in range(nb_of_letters_to_draw):
                     drawn_letters.append(randomly.pop(current_letters_package))
 
                 # Let's determine how many times will appear each letter
@@ -227,7 +227,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 pre_items_list = list()
                 items_list = list()
 
-                for j in xrange(len(drawn_letters)):
+                for j in range(len(drawn_letters)):
                     if j == 0:
                         # We make sure that at least one letter occurs twice
                         # so that the exercise remains interesting !
@@ -248,21 +248,21 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                                                  same_letter_max_occurences_nb)
 
                     if occurences_nb >= 1:
-                       for k in xrange(occurences_nb):
+                       for k in range(occurences_nb):
                            pre_items_list.append(drawn_letters[j])
 
                 # draw the number of numeric Items
                 nb_item_num = randomly.integer(1, PR_NUMERIC_ITEMS_MAX_NB)
 
                 # put them in the pre items' list
-                for j in xrange(nb_item_num):
+                for j in range(nb_item_num):
                     pre_items_list.append(NUMERIC)
 
                 # prepare the items' list that will be given to the Product's
                 # constructor
                 loop_nb = len(pre_items_list)
 
-                for j in xrange(loop_nb):
+                for j in range(loop_nb):
                     next_item_kind = randomly.pop(pre_items_list)
 
                     # It's not really useful nor really possible to limit the
@@ -297,7 +297,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
                 # Let's take some × symbols off the Product to match a more
                 # usual situation
-                for i in xrange(len(self.objct) - 1):
+                for i in range(len(self.objct) - 1):
                     if (self.objct.factor[i].is_numeric()                     \
                         and self.objct.factor[i+1].is_literal()               \
                         )                                                     \
@@ -325,7 +325,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             # Creation of the list to give later to the Sum constructor
             products_list = list()
 
-            for i in xrange(length):
+            for i in range(length):
                 monomial1 = Monomial((RANDOMLY,
                                       max_coeff,
                                       max_expon))
@@ -364,7 +364,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 temp_sum = self.objct.term
 
                 degree_1_monomial_here = False
-                for i in xrange(len(temp_sum)):
+                for i in range(len(temp_sum)):
                     if temp_sum[i].degree == 1:
                         degree_1_monomial_here = True
 
@@ -380,7 +380,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
                 self.objct.reset_element()
 
-                for i in xrange(length):
+                for i in range(length):
                     self.objct.term.append(randomly.pop(temp_sum))
                     self.objct.info.append(False)
 
@@ -393,7 +393,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
         if q_kind == 'long_sum':
             m = []
 
-            for i in xrange(length):
+            for i in range(length):
                 m.append(Monomial(RANDOMLY,
                                   max_coeff,
                                   max_expon
@@ -405,7 +405,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
         if q_kind == 'long_sum_including_a_coeff_1':
             m = []
 
-            for i in xrange(length - 1):
+            for i in range(length - 1):
                 m.append(Monomial(RANDOMLY,
                                   max_coeff,
                                   max_expon
@@ -420,7 +420,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
             terms_list = []
 
-            for i in xrange(len(m)):
+            for i in range(len(m)):
                 terms_list.append(randomly.pop(m))
 
             self.objct = Polynomial(terms_list)
@@ -437,14 +437,14 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
             self.objct = Polynomial([randomly.pop(lil_box)])
 
-            for i in xrange(len(lil_box) - 1):
+            for i in range(len(lil_box) - 1):
                 self.objct.append(randomly.pop(lil_box))
 
 
         if q_kind == 'sum_with_minus-brackets':
             minus_brackets = []
 
-            for i in xrange(3):
+            for i in range(3):
                 minus_brackets.append(Expandable((Monomial(('-', 1, 0)),
                                          Polynomial((RANDOMLY,
                                                      15,
@@ -463,7 +463,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
             plus_brackets = []
 
-            for i in xrange(3):
+            for i in range(3):
                 plus_brackets.append(Expandable((Monomial(('+', 1, 0)),
                                         Polynomial((RANDOMLY,
                                                     15,
@@ -485,20 +485,20 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 if options['minus_brackets_nb'] == 3:
                     big_box.append(minus_brackets[2])
 
-            for i in xrange(randomly.integer(1, 4)):
+            for i in range(randomly.integer(1, 4)):
                 big_box.append(randomly.pop(lil_box))
 
             if 'plus_brackets_nb' in options \
                 and options['plus_brackets_nb'] >= 1 \
                 and options['plus_brackets_nb'] <= 3:
             #___
-                for i in xrange(options['plus_brackets_nb']):
+                for i in range(options['plus_brackets_nb']):
                     big_box.append(plus_brackets[i])
 
 
             final_terms = []
 
-            for i in xrange(len(big_box)):
+            for i in range(len(big_box)):
                 final_terms.append(randomly.pop(big_box))
 
             self.objct = Sum(final_terms)

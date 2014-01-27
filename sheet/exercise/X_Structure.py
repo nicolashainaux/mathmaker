@@ -22,7 +22,7 @@
 
 from lib import *
 from lib.common import default
-import question
+from . import question
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -142,12 +142,12 @@ class X_Structure(object):
 
         q_n = 0
 
-        for k in xrange(len(layout)/2):
+        for k in range(len(layout)/2):
             if layout[2*k] is None:
                 how_many = layout[2*k+1]
                 if layout[2*k+1] == 'all_left' or layout[2*k+1] == 'all':
                     how_many = len(self.questions_list) - q_n
-                for i in xrange(how_many):
+                for i in range(how_many):
                     result += self.questions_list[q_n].to_str(ex_or_answers)
                     if ex_or_answers == 'ans':
                         result += M.write_new_line(check=result[len(result)-2:])
@@ -160,14 +160,14 @@ class X_Structure(object):
                     nb_of_lines = len(self.questions_list) / nb_of_cols + \
                         (0 if not len(self.questions_list) % nb_of_cols else 1)
                 content = []
-                for i in xrange(nb_of_lines):
-                    for j in xrange(nb_of_cols):
+                for i in range(nb_of_lines):
+                    for j in range(nb_of_cols):
                         if layout[2*k+1] == 'all':
                             nb_of_q_in_this_cell = 1
                         else:
                             nb_of_q_in_this_cell = layout[2*k+1][i*nb_of_cols+j]
                         cell_content = ""
-                        for n in xrange(nb_of_q_in_this_cell):
+                        for n in range(nb_of_q_in_this_cell):
                             empty_cell = False
                             if q_n >= len(self.questions_list):
                                 cell_content += " "

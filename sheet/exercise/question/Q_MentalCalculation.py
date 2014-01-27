@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
-from Q_Structure import Q_Structure
+from .Q_Structure import Q_Structure
 
 from core.base_calculus import *
 
@@ -46,7 +46,7 @@ def ten_products(pairs):
     calculus_list = []
     results_list = []
 
-    for i in xrange(10):
+    for i in range(10):
         current_pair = randomly.pop(pairs)
         if randomly.heads_or_tails():
             calculus_list.append(Product([current_pair[0],
@@ -144,7 +144,7 @@ class Q_MentalCalculation(Q_Structure):
                      (8, 8), (8, 9),
                      (9, 9)]
 
-            for i in xrange(5):
+            for i in range(5):
                 current_pair = randomly.pop(pairs)
                 if randomly.heads_or_tails():
                     self.calculus_list.append(Product([current_pair[0],
@@ -157,7 +157,7 @@ class Q_MentalCalculation(Q_Structure):
                                                   current_pair[1]]).evaluate()
                                                   )
 
-            for i in xrange(3):
+            for i in range(3):
                 current_pair = randomly.pop(pairs)
                 self.calculus_list.append(Product([current_pair[0],
                                                   current_pair[1]]).evaluate()
@@ -170,7 +170,7 @@ class Q_MentalCalculation(Q_Structure):
             pairs.append((2, 2))
             pairs.append((2, 3))
 
-            for i in xrange(2):
+            for i in range(2):
                 current_pair = randomly.pop(pairs)
 
                 if randomly.heads_or_tails():
@@ -215,12 +215,12 @@ class Q_MentalCalculation(Q_Structure):
         result += M.write_new_line()
 
         size = (3, 10)
-        col_widths = [1.4 for i in xrange(10)]
-        content = [i+1 for i in xrange(10)] \
+        col_widths = [1.4 for i in range(10)]
+        content = [i+1 for i in range(10)] \
                   + [M.write_math_style2(\
-                    M.type_string(self.calculus_list[i])) for i in xrange(10)] \
+                    M.type_string(self.calculus_list[i])) for i in range(10)] \
                   + [M.write_math_style2(\
-                    M.type_string(self.results_list[i])) for i in xrange(10)]
+                    M.type_string(self.results_list[i])) for i in range(10)]
 
         result += M.write_layout(size, col_widths, content,
                                 borders='all', center='ok')

@@ -69,7 +69,7 @@ def check(t, given_string):
     computed_string = []
 
     if isinstance(t, Printable):
-        for i in xrange(len(machines)):
+        for i in range(len(machines)):
             computed_string.append(machines[i].type_string(t))
     else:
         computed_string.append(str(t))
@@ -115,7 +115,7 @@ def check(t, given_string):
             last_was_OK = False
 
     else:
-        for i in xrange(len(machines)):
+        for i in range(len(machines)):
             if len(given_string) >= i + 1:
                 if superverbose:
                     n = str(counter)
@@ -193,7 +193,7 @@ def short_test_run(language):
 
 
 def long_test_run(n, language):
-    for i in xrange(n):
+    for i in range(n):
         short_test_run(language)
 
 
@@ -203,10 +203,10 @@ def language_test(language):
         gettext.translation(software.NAME,
                             localdir,
                             [language]).install()
-    except IOError, msg:
+    except IOError as msg:
         tested_language = 'en'
         gettext.translation(software.NAME,
                             localdir,
                             ['en']).install()
 
-        print "error to check in source code of autotest/__init__()"
+        print("error to check in source code of autotest/__init__()")

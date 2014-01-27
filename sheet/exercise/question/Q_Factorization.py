@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
-from Q_Structure import Q_Structure
+from .Q_Structure import Q_Structure
 
 from core.base_calculus import *
 from core.calculus import *
@@ -469,7 +469,7 @@ class Q_Factorization(Q_Structure):
         #else:
         #    self.steps.append(solution)
 
-        for i in xrange(len(steps)):
+        for i in range(len(steps)):
             if isinstance(steps[i], Exponented):
                 self.steps.append(Expression(number,
                                                       steps[i]
@@ -506,7 +506,7 @@ class Q_Factorization(Q_Structure):
 
         result = ""
 
-        for i in xrange(len(self.steps)):
+        for i in range(len(self.steps)):
             if type(self.steps[i]) == str:
                 result += M.write(self.steps[i])
             else:
@@ -574,12 +574,12 @@ def level_01(q_subkind, **options):
             common_factor.set_sign('+')
 
         coeff_1 = randomly.integer(2, 10)
-        coeff_2 = randomly.coprime_to(coeff_1, [i + 1 for i in xrange(10)])
+        coeff_2 = randomly.coprime_to(coeff_1, [i + 1 for i in range(10)])
         coeff_3 = None
 
         if q_subkind == 'three_terms':
             coeff_3 = randomly.coprime_to(coeff_1 * coeff_2,
-                                          [i + 1 for i in xrange(9)])
+                                          [i + 1 for i in range(9)])
             third_sign = randomly.sign()
             if third_sign == '-':
                 common_factor.set_sign('+')
@@ -652,7 +652,7 @@ def level_01(q_subkind, **options):
 
         # now we put the steps in the right order
         steps = []
-        for i in xrange(len(temp_steps)):
+        for i in range(len(temp_steps)):
             steps.append(temp_steps[len(temp_steps) - 1 - i])
 
         return steps
@@ -662,7 +662,7 @@ def level_01(q_subkind, **options):
         signs = randomly.pop(signs_box)
 
         coeff_1 = randomly.integer(2, 10)
-        coeff_2 = randomly.coprime_to(coeff_1, [i + 1 for i in xrange(10)])
+        coeff_2 = randomly.coprime_to(coeff_1, [i + 1 for i in range(10)])
 
         lil_box = []
         lil_box.append(Monomial(('+', 1, 0)))
@@ -746,7 +746,7 @@ def level_02(q_subkind, **options):
     # deg1 : mx + p
     # and we need two of them
     deg1 = []
-    for i in xrange(2):
+    for i in range(2):
         deg1_mx = Monomial((randomly.sign(),
                             randomly.integer(1, max_coeff),
                             1))
@@ -789,7 +789,7 @@ def level_02(q_subkind, **options):
     # deg2 : mx² + px + r
     # and we also need two of them
     deg2 = []
-    for i in xrange(2):
+    for i in range(2):
         deg2_mx2 = Monomial((randomly.sign(),
                             randomly.integer(1, max_coeff),
                             2))
@@ -843,7 +843,7 @@ def level_02(q_subkind, **options):
             lil_box.append(deg2_r)
 
         monomials_list_for_deg2 = []
-        for i in xrange(len(lil_box)):
+        for i in range(len(lil_box)):
             monomials_list_for_deg2.append(randomly.pop(lil_box))
 
         deg2.append(Polynomial(monomials_list_for_deg2))

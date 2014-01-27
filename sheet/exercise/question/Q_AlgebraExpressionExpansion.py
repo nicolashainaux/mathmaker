@@ -22,7 +22,7 @@
 
 from lib import *
 from lib.common.cst import *
-from Q_Structure import Q_Structure
+from .Q_Structure import Q_Structure
 from core.base_calculus import *
 from core.calculus import *
 
@@ -156,7 +156,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
                         aux_expd_list.append(Expandable((RANDOMLY, t)))
 
                 final_list = list()
-                for i in xrange(len(aux_expd_list)):
+                for i in range(len(aux_expd_list)):
                     final_list.append(randomly.pop(aux_expd_list))
 
                 self.expandable_objct = Sum(final_list)
@@ -179,7 +179,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
                                         )
 
                 final_list = list()
-                for i in xrange(len(aux_expd_list)):
+                for i in range(len(aux_expd_list)):
                     final_list.append(randomly.pop(aux_expd_list))
 
                 self.expandable_objct = Sum(final_list)
@@ -202,7 +202,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
                 aux_expd_list.append(Monomial((RANDOMLY, 15, 2)))
 
                 final_list = list()
-                for i in xrange(len(aux_expd_list)):
+                for i in range(len(aux_expd_list)):
                     final_list.append(randomly.pop(aux_expd_list))
 
                 self.expandable_objct = Sum(final_list)
@@ -281,7 +281,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
             # Now let's distribute the terms randomly
             final_terms_list = list()
-            for i in xrange(len(aux_terms_list)):
+            for i in range(len(aux_terms_list)):
                 final_terms_list.append(randomly.pop(aux_terms_list))
 
             self.expandable_objct = Sum(final_terms_list)

@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
-from X_Structure import X_Structure
-import question
+from .X_Structure import X_Structure
+from . import question
 #from core import *
 from core.calculus import *
 from lib.common import alphabet
@@ -217,7 +217,7 @@ class X_Factorization(X_Structure):
                                    q_subkind='not_factorizable',
                                    expression_number=0))
 
-                for i in xrange(len(lil_box)):
+                for i in range(len(lil_box)):
                         q = randomly.pop(lil_box)
                         q.expression.set_name(alphabet.UPPERCASE[i])
                         for expression in q.steps:
@@ -245,7 +245,7 @@ class X_Factorization(X_Structure):
                              ]
 
 
-                for n in xrange(len(l03_kinds)):
+                for n in range(len(l03_kinds)):
                     lil_box.append(default_question(
                                    self.machine,
                                    q_kind='level_03',
@@ -257,7 +257,7 @@ class X_Factorization(X_Structure):
                              ('type_2_A0', 'yes'),
                              ('type_4_A0', 'no')]
 
-                for n in xrange(len(l02_kinds)):
+                for n in range(len(l02_kinds)):
                     lil_box.append(default_question(
                                    self.machine,
                                    q_kind='level_02',
@@ -267,7 +267,7 @@ class X_Factorization(X_Structure):
                                    expression_number=n+len(l03_kinds)+1)
                                    )
 
-                for i in xrange(len(lil_box)):
+                for i in range(len(lil_box)):
                     q = randomly.pop(lil_box)
                     q.expression.set_name(alphabet.UPPERCASE[i])
                     for expression in q.steps:
@@ -303,7 +303,7 @@ class X_Factorization(X_Structure):
                                    expression_number=2)
                                    )
 
-                for i in xrange(len(lil_box)):
+                for i in range(len(lil_box)):
                     q = randomly.pop(lil_box)
                     q.expression.set_name(\
                                     alphabet.UPPERCASE[i + self.start_number])
@@ -363,7 +363,7 @@ class X_Factorization(X_Structure):
 
                     n -= 1
 
-                for i in xrange(n):
+                for i in range(n):
                     lil_box.append(default_question(
                                    self.machine,
                                    q_kind='level_01',
@@ -371,7 +371,7 @@ class X_Factorization(X_Structure):
                                    expression_number=n-i)
                                   )
 
-                for i in xrange(len(lil_box)):
+                for i in range(len(lil_box)):
                     q = randomly.pop(lil_box)
                     q.expression.set_name(alphabet.UPPERCASE[i])
                     for expression in q.steps:
@@ -387,7 +387,7 @@ class X_Factorization(X_Structure):
 
                 n1 = len(subkinds)
 
-                for i in xrange(n1):
+                for i in range(n1):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='level_02',
@@ -401,7 +401,7 @@ class X_Factorization(X_Structure):
 
                 n2 = len(subkinds)
 
-                for i in xrange(n2):
+                for i in range(n2):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='level_02',
@@ -417,7 +417,7 @@ class X_Factorization(X_Structure):
 
                 n1 = len(subkinds)
 
-                for i in xrange(n1):
+                for i in range(n1):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='level_02',
@@ -431,7 +431,7 @@ class X_Factorization(X_Structure):
 
                 n2 = len(subkinds)
 
-                for i in xrange(n2):
+                for i in range(n2):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='level_02',
@@ -443,7 +443,7 @@ class X_Factorization(X_Structure):
             elif self.x_subkind == 'level_03_sum_squares':
                 lil_box = []
 
-                for n in xrange(2):
+                for n in range(2):
                     lil_box.append(default_question(
                                    self.machine,
                                    q_kind='level_03',
@@ -456,7 +456,7 @@ class X_Factorization(X_Structure):
                                    q_subkind='sum_square_mixed',
                                    expression_number=n+1))
 
-                for i in xrange(len(lil_box)):
+                for i in range(len(lil_box)):
                     q = lil_box[i]
                     q.expression.set_name(alphabet.UPPERCASE[i])
                     for expression in q.steps:
@@ -467,7 +467,7 @@ class X_Factorization(X_Structure):
             elif self.x_subkind == 'level_03_difference_squares':
                 lil_box = []
 
-                for n in xrange(2):
+                for n in range(2):
                     lil_box.append(default_question(
                                    self.machine,
                                    q_kind='level_03',
@@ -480,7 +480,7 @@ class X_Factorization(X_Structure):
                                    subkind ='difference_square_mixed',
                                    expression_number=n+1))
 
-                for i in xrange(len(lil_box)):
+                for i in range(len(lil_box)):
                     q = lil_box[i]
                     q.expression.set_name(alphabet.UPPERCASE[i])
                     for expression in q.steps:
@@ -493,7 +493,7 @@ class X_Factorization(X_Structure):
             elif self.x_subkind == 'level_03_squares_differences':
                 lil_box = []
 
-                for n in xrange(2):
+                for n in range(2):
                     lil_box.append(default_question(
                                    self.machine,
                                    q_kind='level_03',
@@ -506,7 +506,7 @@ class X_Factorization(X_Structure):
                                    q_subkind='squares_difference_mixed',
                                    expression_number=n+1))
 
-                for i in xrange(len(lil_box)):
+                for i in range(len(lil_box)):
                     q = lil_box[i]
                     q.expression.set_name(alphabet.UPPERCASE[i])
                     for expression in q.steps:
@@ -534,19 +534,19 @@ class X_Factorization(X_Structure):
                 lil_box.append(randomly.pop(q1q2))
                 lil_box.append(randomly.pop(q1q2))
 
-                for n in xrange(3):
+                for n in range(3):
                     lil_box.append(default_question(self.machine,
                                                     q_kind='level_03',
                                                     q_subkind='any_true',
                                                     expression_number=n+3))
 
-                for n in xrange(2):
+                for n in range(2):
                     lil_box.append(default_question(self.machine,
                                                     q_kind='level_03',
                                                     q_subkind='any_fake',
                                                     expression_number=n+5))
 
-                for n in xrange(2):
+                for n in range(2):
                     lil_box.append(default_question(self.machine,
                                                     q_kind='level_03',
                                                     q_subkind='any',
@@ -554,7 +554,7 @@ class X_Factorization(X_Structure):
 
 
 
-                for i in xrange(len(lil_box)):
+                for i in range(len(lil_box)):
                     q = lil_box[i]
                     q.expression.set_name(alphabet.UPPERCASE[i])
                     for expression in q.steps:
@@ -589,14 +589,14 @@ class X_Factorization(X_Structure):
 
                 lil_box = []
 
-                for n in xrange(len(all_kinds)):
+                for n in range(len(all_kinds)):
                     lil_box.append(default_question(
                                    self.machine,
                                    q_kind='level_03',
                                    q_subkind=all_kinds[n],
                                    expression_number=n+1))
 
-                for i in xrange(len(lil_box)):
+                for i in range(len(lil_box)):
                     q = lil_box[i]
                     q.expression.set_name(alphabet.UPPERCASE[i])
                     for expression in q.steps:
@@ -608,7 +608,7 @@ class X_Factorization(X_Structure):
 
         # OTHER EXERCISES (BY_PASS OPTION)
         else:
-            for i in xrange(self.q_nb):
+            for i in range(self.q_nb):
                 self.questions_list.append(
                              default_question(self.machine,
                                         expression_number=i+self.start_number,

@@ -27,15 +27,15 @@
 # @package question
 # @brief All question objects should be "declared" here.
 
-import Q_Structure
+from . import Q_Structure
 
-import Q_AlgebraExpressionReduction
-import Q_AlgebraExpressionExpansion
-import Q_Equation
-import Q_Calculation
-import Q_Factorization
-import Q_MentalCalculation
-import Q_RightTriangle
+from . import Q_AlgebraExpressionReduction
+from . import Q_AlgebraExpressionExpansion
+from . import Q_Equation
+from . import Q_Calculation
+from . import Q_Factorization
+from . import Q_MentalCalculation
+from . import Q_RightTriangle
 
 Q_Structure = Q_Structure.Q_Structure
 

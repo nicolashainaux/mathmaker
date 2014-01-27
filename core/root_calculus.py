@@ -26,7 +26,7 @@
 # @package core.root_calculus
 # @brief Mostly abstract classes for mathematical calculus objects.
 
-from base import *
+from .base import *
 from lib.common import alphabet
 from lib import is_
 from lib.maths_lib import *
@@ -228,8 +228,8 @@ class Calculable(Evaluable):
     def __iter__(self):
         return iter(self.get_iteration_list())
 
-    def next(self):
-        return self.get_iteration_list().next()
+    def __next__(self):
+        return next(self.get_iteration_list())
 
 
 
@@ -510,7 +510,7 @@ class Value(Signed):
 
         if type(arg) == float                                             \
             or type(arg) == int                                          \
-            or type(arg) == long                                        \
+            or type(arg) == int                                        \
             or type(arg) == Decimal:
         #___
             self._raw_value = Decimal(str(arg))
@@ -1014,7 +1014,7 @@ class Value(Signed):
     def is_numeric(self):
         if type(self.raw_value) == float                \
             or type(self.raw_value) == int              \
-            or type(self.raw_value) == long             \
+            or type(self.raw_value) == int             \
             or type(self.raw_value) == Decimal:
         #___
             return True

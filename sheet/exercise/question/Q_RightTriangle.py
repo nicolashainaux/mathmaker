@@ -30,7 +30,7 @@ from lib.common import pythagorean
 from lib.common import vocabulary
 from lib.common.cst import *
 from lib.maths_lib import *
-from Q_Structure import Q_Structure
+from .Q_Structure import Q_Structure
 #from core.calculus import Equality
 from core.base_calculus import *
 from core.calculus import *
@@ -213,7 +213,7 @@ class Q_RightTriangle(Q_Structure):
                     # at least 25% and at most 150% of the length of first leg
                     # (and smaller than max_side_value)
                     second_leg_values = []
-                    for i in xrange(int(first_leg*1.5)):
+                    for i in range(int(first_leg*1.5)):
                         if i+int(first_leg*0.25) <= 1.5*first_leg \
                             and i+int(first_leg*0.25) <= max_side_value:
                         #___
@@ -251,7 +251,7 @@ class Q_RightTriangle(Q_Structure):
                     # to avoid "weird" cases (with a very subtle difference
                     # between the given values and the one to calculate)
                     leg_values = []
-                    for i in xrange(int(hypotenuse*0.9)):
+                    for i in range(int(hypotenuse*0.9)):
                         if i+int(hypotenuse*0.25) <= 0.9*hypotenuse:
                             leg_values += [i+int(hypotenuse*0.25)]
 
@@ -323,7 +323,7 @@ class Q_RightTriangle(Q_Structure):
                     if min_delta > max_delta:
                         max_delta = min_delta
                     chosen_delta = randomly.pop(\
-                        [i+min_delta for i in xrange(max_delta-min_delta+1)])
+                        [i+min_delta for i in range(max_delta-min_delta+1)])
 
                     sides_values = [sides_values[0]-chosen_delta,
                                     sides_values[1],
@@ -337,7 +337,7 @@ class Q_RightTriangle(Q_Structure):
                     if min_delta > max_delta:
                         max_delta = min_delta
                     chosen_delta = randomly.pop(\
-                        [i+min_delta for i in xrange(max_delta-min_delta+1)])
+                        [i+min_delta for i in range(max_delta-min_delta+1)])
 
                     sides_values = [sides_values[0],
                                     sides_values[1],

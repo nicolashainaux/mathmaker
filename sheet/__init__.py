@@ -27,29 +27,29 @@
 # @package sheet
 # @brief A sheet contains a title, subtitle, exercises list & answers title.
 
-import S_Structure
-import AlgebraExpressionReduction
-import AlgebraExpressionExpansion
-import AlgebraShortTest
-import AlgebraBalance_01
-import AlgebraBinomialIdentityExpansion
-import EquationsBasic
-import EquationsClassic
-import EquationsHarder
-import EquationsShortTest
-import EquationsTest
-import FractionSimplification
-import FractionsProductAndQuotient
-import FractionsSum
-import AlgebraFactorization_01
-import AlgebraFactorization_02
-import AlgebraFactorization_03
-import MentalCalculation
-import AlgebraTest2
-import AlgebraMiniTest0
-import AlgebraMiniTest1
-import PythagoreanTheoremShortTest
-import ConverseAndContrapositiveOfPythagoreanTheoremShortTest
+from . import S_Structure
+from . import AlgebraExpressionReduction
+from . import AlgebraExpressionExpansion
+from . import AlgebraShortTest
+from . import AlgebraBalance_01
+from . import AlgebraBinomialIdentityExpansion
+from . import EquationsBasic
+from . import EquationsClassic
+from . import EquationsHarder
+from . import EquationsShortTest
+from . import EquationsTest
+from . import FractionSimplification
+from . import FractionsProductAndQuotient
+from . import FractionsSum
+from . import AlgebraFactorization_01
+from . import AlgebraFactorization_02
+from . import AlgebraFactorization_03
+from . import MentalCalculation
+from . import AlgebraTest2
+from . import AlgebraMiniTest0
+from . import AlgebraMiniTest1
+from . import PythagoreanTheoremShortTest
+from . import ConverseAndContrapositiveOfPythagoreanTheoremShortTest
 
 S_Structure = S_Structure.S_Structure
 AlgebraExpressionReduction = \

@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
-from X_Structure import X_Structure
-import question
+from .X_Structure import X_Structure
+from . import question
 
 AVAILABLE_X_KIND_VALUES = \
     {'short_test' : ['easy', 'medium_level'],
@@ -162,7 +162,7 @@ class X_AlgebraExpressionReduction(X_Structure):
                                           expression_number=5)
                         )
 
-                for i in xrange(len(q)):
+                for i in range(len(q)):
                     self.questions_list.append(randomly.pop(q))
 
         # PREFORMATTED EXERCISES
@@ -251,7 +251,7 @@ class X_AlgebraExpressionReduction(X_Structure):
 
         # OTHER EXERCISES (BYPASS OPTION)
         else:
-            for i in xrange(self.q_nb):
+            for i in range(self.q_nb):
                 self.questions_list.append(                                   \
                              default_question(self.machine,
                                          q_kind=self.x_subkind,
