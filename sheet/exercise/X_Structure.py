@@ -142,7 +142,7 @@ class X_Structure(object):
 
         q_n = 0
 
-        for k in range(len(layout)/2):
+        for k in range(int(len(layout)/2)):
             if layout[2*k] is None:
                 how_many = layout[2*k+1]
                 if layout[2*k+1] == 'all_left' or layout[2*k+1] == 'all':
@@ -160,7 +160,7 @@ class X_Structure(object):
                     nb_of_lines = len(self.questions_list) / nb_of_cols + \
                         (0 if not len(self.questions_list) % nb_of_cols else 1)
                 content = []
-                for i in range(nb_of_lines):
+                for i in range(int(nb_of_lines)):
                     for j in range(nb_of_cols):
                         if layout[2*k+1] == 'all':
                             nb_of_q_in_this_cell = 1

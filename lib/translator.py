@@ -92,7 +92,7 @@ def create_table(size, content, **options):
         result += "\\begin{tabular}{"+ tabular_format + "}" + "\n"
         result += h_border
 
-        for i in range(n_lin):
+        for i in range(int(n_lin)):
             for j in range(n_col):
                 result += str(content[i*n_col + j])
                 if j != n_col - 1:

@@ -95,7 +95,7 @@ class S_Structure(object):
                                           str(len(sheet_layout[k])) \
                                           + ' elements')
 
-            for i in range(len(sheet_layout[k]) / 2):
+            for i in range(int(len(sheet_layout[k]) / 2)):
                 if not (sheet_layout[k][2*i] is None \
                     or type(sheet_layout[k][2*i])== list \
                     or sheet_layout[k][2*i] == 'jump'):
@@ -308,7 +308,7 @@ class S_Structure(object):
 
         ex_n = n_of_first_ex
 
-        for k in range(len(layout) /2):
+        for k in range(int(len(layout) /2)):
             if layout[2*k] is None:
                 how_many = layout[2*k+1]
 

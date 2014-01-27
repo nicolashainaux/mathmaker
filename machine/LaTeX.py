@@ -146,45 +146,45 @@ is %(software_license)s.") % {'software_ref' : software.NAME_PRINTABLE,
 
         result += "\documentclass[a4paper,fleqn,12pt]{article}" + "\n"
         if self.encoding == latex.UCS_UTF8X:
-            result += "\usepackage{ucs}" + "\n"
-            result += "\usepackage[" + latex.UTF8X + "]{inputenc}" \
+            result += r"\usepackage{ucs}" + "\n"
+            result += r"\usepackage[" + latex.UTF8X + "]{inputenc}" \
                            + "\n"
         else:
-            result += "\usepackage[" + self.encoding + "]{inputenc}" \
+            result += r"\usepackage[" + self.encoding + "]{inputenc}" \
                            + "\n"
 
-        result += "\usepackage[" \
+        result += r"\usepackage[" \
                        + self.language \
                        + "]{babel}" + "\n"
 
-        result += "\usepackage[T1]{fontenc}" + "\n"
+        result += r"\usepackage[T1]{fontenc}" + "\n"
         result += "% " + _("To solve accent problems : ") + "\n"
-        result += "%\usepackage{lmodern}" + "\n"
+        result += r"%\usepackage{lmodern}" + "\n"
         result += "% " + _("Using lmodern package might be better than \
 cm aeguill") + "\n"
-        result += "\usepackage[cm]{aeguill}" + "\n"
+        result += r"\usepackage[cm]{aeguill}" + "\n"
         result += "% " + _("To strike out numbers ") + "\n"
-        result += "\usepackage{cancel}" + "\n"
+        result += r"\usepackage{cancel}" + "\n"
         result += "% " + _("To use the margin definition command") + "\n"
-        result += "\usepackage{geometry}" + "\n"
+        result += r"\usepackage{geometry}" + "\n"
         result += "% " + _("To use the commands from %(theorem)s ") \
                                 % {'theorem' : '"theorem"'} + "\n"
-        result += "%\usepackage{theorem}" + "\n"
+        result += r"%\usepackage{theorem}" + "\n"
         result += "% " + _("To use multicol environment") + "\n"
-        result += "\usepackage{multicol}" + "\n"
+        result += r"\usepackage{multicol}" + "\n"
         result += "% " + _("To use extra commands to handle tabulars") + "\n"
-        result += "\usepackage{array}" + "\n"
+        result += r"\usepackage{array}" + "\n"
         result += "% " + _("For pretty underlining") + "\n"
-        result += "\usepackage{ulem}" + "\n"
+        result += r"\usepackage{ulem}" + "\n"
         result += "% " + _("To include .eps pictures") + "\n"
-        result += "\usepackage{graphicx}" + "\n"
+        result += r"\usepackage{graphicx}" + "\n"
         result += "% " + _("To use other mathematical symbols") + "\n"
-        result += "\usepackage{amssymb}" + "\n"
-        result += "\usepackage{amsmath}" + "\n"
+        result += r"\usepackage{amssymb}" + "\n"
+        result += r"\usepackage{amsmath}" + "\n"
         result += "% " + _("To use the euro symbol") + "\n"
-        result += "\usepackage{eurosym}" + "\n"
+        result += r"\usepackage{eurosym}" + "\n"
         result += "% " + _("To draw") + "\n"
-        result += "\usepackage{tikz}" + "\n"
+        result += r"\usepackage{tikz}" + "\n"
         result += "% " + _("Page layout ") + "\n"
         result += "\geometry{hmargin=1.5cm, vmargin=1.5cm}" + "\n"
         result += "\setlength{\parindent}{0cm}" + "\n"
@@ -215,7 +215,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 + "\n"
         result += "\\newcommand{\\razcompteur}{\setcounter{n}{0}}" + "\n"
         result += " " + "\n"
-        result += "\usetikzlibrary{calc}" + "\n"
+        result += r"\usetikzlibrary{calc}" + "\n"
 
         if self.redirect_output_to_str:
             return result
@@ -333,7 +333,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
             elif options['emphasize'] == 'italics':
                 output_str = "\\textit{" + given_string + "}" + "\n"
             elif options['emphasize'] == 'underlined':
-                output_str = "\uline{" + given_string + "}" + "\n"
+                output_str = r"\uline{" + given_string + "}" + "\n"
             else:
                 output_str = given_string
         else:
