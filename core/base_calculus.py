@@ -2381,9 +2381,9 @@ class Quotient (Operation):
                self.numerator.dbg_str() +                                     \
                " / " +                                                        \
                self.denominator.dbg_str() +                                   \
-               " ) ^ { " +                                                    \
+               " ) ^ | " +                                                    \
                self.exponent.dbg_str() +                                      \
-               " } #Q"
+               " }| #Q"
 
 
 
@@ -3167,9 +3167,9 @@ class Fraction(Quotient):
                self.numerator.dbg_str() +                                     \
                " / " +                                                        \
                self.denominator.dbg_str() +                                   \
-               " ) ^ { " +                                                    \
+               " ) ^ | " +                                                    \
                self.exponent.dbg_str() +                                      \
-               " } #F"
+               " | #F"
 
 
 
@@ -3935,14 +3935,13 @@ class CommutativeOperation(Operation):
         info = ""
         if 'info' in options:
             info = str(self.compact_display) \
-                 + "|"                         \
-                 + "|"  \
+                 + " info:"  \
                  + str(self.info) \
-                 + "||"
+                 + ":info "
 
         expo = ""
         if not self.exponent.is_displ_as_a_single_1():
-            expo = "^{" + self.exponent.dbg_str() + "}"
+            expo = "^|" + self.exponent.dbg_str() + "|"
 
         return self.str_openmark  \
                + info \
@@ -7773,7 +7772,7 @@ class Monomial(Product):
         expo = ""
 
         if self.exponent != Value(1):
-            expo = "^{" + self.exponent.dbg_str() + "} "
+            expo = "^|" + self.exponent.dbg_str() + "| "
 
         return " <<" + self.coeff.dbg_str()          \
                + "× X ^" + str(self.degree) + ">> " + expo
@@ -8072,7 +8071,7 @@ class Polynomial(Sum):
         for i in range(len(self)):
             resulting_string += self.term[i].dbg_str()
             if i < len(self) - 1:
-                resulting_string += ", "
+                resulting_string += " + "
 
 
         resulting_string += "]] "
@@ -8130,8 +8129,8 @@ class Expandable(Product):
         self._neutral = Item(1)
 
         self._symbol = '×'
-        self.str_openmark = "<XPD:"
-        self.str_closemark = ":XPD>"
+        self.str_openmark = "<X:"
+        self.str_closemark = ":X>"
 
         sum1 = None
         sum2 = None
@@ -8401,8 +8400,8 @@ class BinomialIdentity(Expandable):
         self._neutral = Item(1)
 
         self._symbol = '×'
-        self.str_openmark = "BI:: "
-        self.str_closemark = " ::BI"
+        self.str_openmark = "<B: "
+        self.str_closemark = " :B>"
 
         # This property is to set to help the into_str and expand functions
         # It has to be either 'positive' which refers to (a+b)² objects,
