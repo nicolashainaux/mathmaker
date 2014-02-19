@@ -491,8 +491,8 @@ class Equation(ComposedCalculable):
                                           "a literal Value")
 
             self.__init__((arg[0], arg[1]),
-                           variable_letter_name=literals_list[0].get_first_letter(),
-                           **options
+                       variable_letter_name=literals_list[0].get_first_letter(),
+                       **options
                          )
 
         # Different cases of tuples

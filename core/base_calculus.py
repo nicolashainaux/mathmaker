@@ -7644,8 +7644,8 @@ class Monomial(Product):
     ##
     #   @brief Gets the sign of the Monomial
     #   @return The sign of the Monomial
-    #   This can't be done by CommutativeOperation.get_sign() apparently. Maybe check
-    #   exactly why, some day
+    #   This can't be done by CommutativeOperation.get_sign() apparently.
+    #   Maybe check exactly why, some day
     def get_sign(self):
         if self.is_null():
             return '+'
