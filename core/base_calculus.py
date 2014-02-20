@@ -8399,8 +8399,8 @@ class BinomialIdentity(Expandable):
         self.str_closemark = " :B>"
 
         # This property is to set to help the into_str and expand functions
-        # It has to be either 'positive' which refers to (a+b)² objects,
-        # or 'negative', which refers to (a-b)² objects,
+        # It has to be either 'sum_square' which refers to (a+b)² objects,
+        # or 'difference_square', which refers to (a-b)² objects,
         # or 'squares_difference' which refers to (a+b)(a-b) objects
         self._kind = ""
 
