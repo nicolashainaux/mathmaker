@@ -8355,12 +8355,7 @@ class Expandable(Product):
 # a² -2ab + b² and (a+b)(a-b) = a² - b²
 # This object is a Product of two Sums but won't be displayed as is in the
 # case of (a+b)² and (a-b)².
-# For instance, (3x-2)(3x-2) will be displayed (3x-2)². It would be
-# complicated to derive BinomialIdentity from a Sum since a Sum isn't
-# expandable.
-# Let it derive simultaneously from Sum and Expandable could create problems
-# when calling the into_str function (which of the Sum's or the Product's
-# would be called ?).
+# For instance, (3x-2)(3x-2) will be displayed (3x-2)².
 class BinomialIdentity(Expandable):
 
 
