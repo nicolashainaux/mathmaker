@@ -135,7 +135,6 @@ def a_sign(objct):
 def a_number(objct):
     if (type(objct) == float)                                                 \
       or (type(objct) == int)                                                 \
-      or (type(objct) == int)                                                \
       or (type(objct) == decimal.Decimal):
         return True
     else:
