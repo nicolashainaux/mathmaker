@@ -95,7 +95,7 @@ class S_Structure(object):
                                           str(len(sheet_layout[k])) \
                                           + ' elements')
 
-            for i in range(int(len(sheet_layout[k]) / 2)):
+            for i in range(int(len(sheet_layout[k]) // 2)):
                 if not (sheet_layout[k][2*i] is None \
                     or type(sheet_layout[k][2*i])== list \
                     or sheet_layout[k][2*i] == 'jump'):
@@ -196,7 +196,7 @@ class S_Structure(object):
                 result += self.sheet_header_to_str()
                 result += self.sheet_title_to_str()
                 result += self.sheet_text_to_str()
-                result += self.texts_to_str('exc', len(self.exercises_list)/2)
+                result += self.texts_to_str('exc', len(self.exercises_list) // 2)
                 result += self.machine.write_new_line_twice()
 
                 if n == 2 and i == 0:
@@ -212,7 +212,7 @@ class S_Structure(object):
             result += self.texts_to_str('ans', 0)
             result += self.machine.write_jump_to_next_page()
             result += self.answers_title_to_str()
-            result += self.texts_to_str('ans', len(self.exercises_list)/2)
+            result += self.texts_to_str('ans', len(self.exercises_list) // 2)
             result += self.machine.write_document_ends()
 
         elif self.layout_type == 'mini_test':
@@ -228,7 +228,7 @@ class S_Structure(object):
                 result += self.sheet_header_to_str()
                 result += self.sheet_title_to_str()
                 result += self.sheet_text_to_str()
-                result += self.texts_to_str('exc', len(self.exercises_list)/2)
+                result += self.texts_to_str('exc', len(self.exercises_list)//2)
                 result += self.machine.write_new_line_twice()
 
 
@@ -248,7 +248,7 @@ class S_Structure(object):
             result += self.texts_to_str('ans', 0)
             result += self.machine.write_jump_to_next_page()
             result += self.answers_title_to_str()
-            result += self.texts_to_str('ans', len(self.exercises_list)/2)
+            result += self.texts_to_str('ans', len(self.exercises_list)//2)
 
 
             #result += self.machine.write_jump_to_next_page()
@@ -308,7 +308,7 @@ class S_Structure(object):
 
         ex_n = n_of_first_ex
 
-        for k in range(int(len(layout) /2)):
+        for k in range(int(len(layout) // 2)):
             if layout[2*k] is None:
                 how_many = layout[2*k+1]
 
@@ -316,9 +316,9 @@ class S_Structure(object):
                     how_many = len(self.exercises_list) - ex_n
                     if (self.layout_type == 'short_test' \
                         or self.layout_type == 'mini_test') \
-                        and ex_n < len(self.exercises_list) / 2:
+                        and ex_n < len(self.exercises_list) // 2:
                     #___
-                        how_many = len(self.exercises_list) / 2 - ex_n
+                        how_many = len(self.exercises_list) // 2 - ex_n
                     #elif self.layout_type == 'mini_test':
                     #    if ex_n < len(self.exercises_list) / 4:
                     #        how_many = len(self.exercises_list) / 4 - ex_n

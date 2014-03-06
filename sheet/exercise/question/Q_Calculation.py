@@ -286,8 +286,8 @@ class Q_Calculation(Q_Structure):
             temp1 = randomly.integer(1, 20)
             temp2 = randomly.integer(1, 20)
 
-            num1 = Item(temp1 / gcd(temp1, gen1*seed))
-            num2 = Item(temp2 / gcd(temp2, gen2*seed))
+            num1 = Item(temp1 // gcd(temp1, gen1*seed))
+            num2 = Item(temp2 // gcd(temp2, gen2*seed))
 
             f1 = Fraction((randomly.sign(plus_signs_ratio=0.7),
                           num1,

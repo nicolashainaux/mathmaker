@@ -100,7 +100,7 @@ class X_Calculation(X_Structure):
             if self.x_subkind == 'fraction_simplification':
                 #self.text = _("Simplify the following fractions :")
 
-                for i in range(int(self.q_nb/2)):
+                for i in range(int(self.q_nb // 2)):
                     q=question.Q_Calculation(self.machine,
                                            self.x_subkind,
                                            expression_number=i,
@@ -108,10 +108,10 @@ class X_Calculation(X_Structure):
 
                     self.questions_list.append(q)
 
-                for i in range(self.q_nb - int(self.q_nb/2)):
+                for i in range(self.q_nb - int(self.q_nb // 2)):
                     q=question.Q_Calculation(self.machine,
                                           self.x_subkind,
-                                          expression_number=i+int(self.q_nb/2),
+                                          expression_number=i+int(self.q_nb//2),
                                           with_ten_powers=0.3,
                                           **options)
 
