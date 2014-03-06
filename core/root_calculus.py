@@ -1013,7 +1013,6 @@ class Value(Signed):
     def is_numeric(self):
         if type(self.raw_value) == float                \
             or type(self.raw_value) == int              \
-            or type(self.raw_value) == int             \
             or type(self.raw_value) == Decimal:
         #___
             return True
