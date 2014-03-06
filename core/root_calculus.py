@@ -510,7 +510,6 @@ class Value(Signed):
 
         if type(arg) == float                                             \
             or type(arg) == int                                          \
-            or type(arg) == int                                        \
             or type(arg) == Decimal:
         #___
             self._raw_value = Decimal(str(arg))
