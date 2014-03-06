@@ -1923,7 +1923,7 @@ class CrossProductEquation(Equation):
                                               "a tuple of four Calculables")
                 else:
                     self._left_hand_side = Quotient(('+', arg[0], arg[2]))
-                    self._right_hand_side = Quotient(('+', arg[0o1], arg[3]))
+                    self._right_hand_side = Quotient(('+', arg[1], arg[3]))
 
 
             # Let's find the variable
