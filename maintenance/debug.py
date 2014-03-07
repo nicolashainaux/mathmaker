@@ -28,17 +28,17 @@ sdt_err_output = sys.stderr.fileno()
 
 ENABLED_STRING = cfg.get_value_from_file("DEBUGGING MODE", "ENABLED")
 
-ENABLED = False
+ENABLED = True
 
 if ENABLED_STRING == "True" or ENABLED_STRING == "true":
     ENABLED = True
 
 into_str_in_item = False
-into_str_in_product = False
+into_str_in_product = True
 into_str_in_sum = False
 into_str_in_quotient = False
 requires_brackets_in_sum = False
-requires_inner_brackets_in_product = False
+requires_inner_brackets_in_product = True
 expand_and_reduce_next_step_sum = False
 expand_and_reduce_next_step_product = False
 expand_in_special_identity = False

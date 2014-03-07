@@ -4562,11 +4562,12 @@ class Product (CommutativeOperation):
         # after the first one.
         if self.compact_display:
             #debug
-            #debug.write("\nis_equiv_single_neutral : " \
-            #                       + str(self.element[0].\
-            #                       is_displ_as_a_single_neutral(\
-            #                       self.neutral)),
-            #                       case=debug.into_str_in_product)
+            debug.write("\n[Product.into_str():self.compact_display is True]" \
+                                  + " is_equiv_single_neutral : " \
+                                   + str(self.element[0].\
+                                   is_displ_as_a_single_neutral(\
+                                   self.neutral)),
+                                   case=debug.into_str_in_product)
 
 
             #copy = self.clone().throw_away_the_neutrals()
@@ -4637,7 +4638,8 @@ class Product (CommutativeOperation):
                 pass
             elif self.factor[0].is_displ_as_a_single_minus_1():
                 #DEBUG
-                debug.write("\n[n°0] : processing a '-1' 1st " \
+                debug.write("\n[Product.into_str():n°0]" \
+                                       + " processing a '-1' 1st " \
                                        + "factor : " \
                                        + self.factor[0].dbg_str() \
                                        + "\nwith position forced to " \
@@ -4681,7 +4683,8 @@ class Product (CommutativeOperation):
                    or self.requires_inner_brackets():
                 #___
                     #DEBUG
-                    debug.write("\n[n°1A] : processing 1st " \
+                    debug.write("\n[Product.into_str():n°1A]" \
+                                           + " processing 1st " \
                                            + "factor : " \
                                            + self.factor[0].dbg_str() \
                                            + "\nwith position forced to " \
@@ -4700,7 +4703,7 @@ class Product (CommutativeOperation):
                 else:
                     expression_begins = True
                     #DEBUG
-                    debug.write("\n[n°1B] : processing " \
+                    debug.write("\n[Product.into_str():n°1B] processing " \
                                            + "1st factor :" \
                                            + " " + self.factor[0].dbg_str() \
                                            + "\nwith position NOT forced to "\
@@ -4732,6 +4735,13 @@ class Product (CommutativeOperation):
                 position += 1
                 couple = (self.factor[0], None)
 
+                #DEBUG
+                debug.write("\n[Product.into_str()] " \
+                            + "Finished processing the first factor" \
+                            + " ; couple is (" +  self.factor[0].dbg_str() \
+                            + ", None)",
+                            case=debug.into_str_in_product)
+
             # If there are other factors :
             if len(self) >= 2:
                 for i in range(len(self) - 1):
@@ -4743,6 +4753,11 @@ class Product (CommutativeOperation):
                         if couple == (None, None):
                             # That means it's the first factor that will be
                             # displayed (apart from a possibly only - sign)
+                            #DEBUG
+                            debug.write("\n[Product.into_str()] " \
+                                        + "more than one factor to process " \
+                                        + "current couple == (None, None)",
+                            case=debug.into_str_in_product)
                             couple = (self.factor[i + 1], None)
                             if self.factor[i + 1].requires_brackets(position)\
                                and not Product(self.get_factors_list_except(
@@ -4751,7 +4766,7 @@ class Product (CommutativeOperation):
                             #___
                                 expression_begins = True
                                 #DEBUG
-                                debug.write("\n[n°2A] : " \
+                                debug.write("\n[Product.into_str():n°2A] " \
                                                        + "processing " \
                                                        + "factor : "\
                                                 + self.factor[i+1].dbg_str()\
@@ -4771,8 +4786,8 @@ class Product (CommutativeOperation):
                                 unclosed_bracket += 1
 
                                 if len(self.factor[i+1]) >= 2:
-                                    debug.write("and " \
-                                                            + "*/closed/*\n",
+                                    debug.write("[Product.into_str():]" \
+                                                + "and */closed/*\n",
                                            case=debug.into_str_in_product)
                                     resulting_string += \
                                                       MARKUP['closing_bracket']
@@ -4786,8 +4801,8 @@ class Product (CommutativeOperation):
                                 if orphan_minus_sign:
                                     expression_begins = True
                                     #DEBUG
-                                    debug.write("\n[n°2B] : " \
-                                                       + "(orphan - sign) " \
+                                    debug.write("\n[Product.into_str():n°2B]" \
+                                                       + " (orphan - sign) " \
                                                        + "processing " \
                                                        + "factor : "\
                                                 + self.factor[i+1].dbg_str()\
@@ -4803,7 +4818,7 @@ class Product (CommutativeOperation):
                                                        **options)
                                 else:
                                     #DEBUG
-                                    debug.write("\n[n°2C] : " \
+                                    debug.write("\n[Product.into_str():n°2C] " \
                                                        + "(NO orphan - sign) "\
                                                        + "processing " \
                                                        + "factor : "\
@@ -4843,7 +4858,8 @@ class Product (CommutativeOperation):
                             # and position matches couple[1]'s position
                             #DEBUG
                             debug.write( \
-                               "\nChecking if a × should be required \n" \
+                               "\n[Product.into_str()] "\
+                               + "Checking if a × should be required \n" \
                                + "between " + couple[0].dbg_str() \
                                + "    and    " \
                                + couple[1].dbg_str(),
@@ -4861,8 +4877,8 @@ class Product (CommutativeOperation):
                                                                  0):
                                     #___
                                         #DEBUG
-                                        debug.write( \
-                                           "\nthe bracket is */closed/*\n",
+                                        debug.write( "\n[Product.into_str()]" \
+                                           + "the bracket is */closed/*\n",
                                            case=debug.into_str_in_product)
                                         resulting_string += \
                                                       MARKUP['closing_bracket']
@@ -4897,7 +4913,7 @@ class Product (CommutativeOperation):
                                           #     couple[1])
                                            #   ).is_displ_as_a_single_1():
                                 #DEBUG
-                                debug.write("\n[n°3A] : " \
+                                debug.write("\n[Product.into_str():n°3A] " \
                                                    + "processing " \
                                                    + "factor : "\
                                                    + couple[1].dbg_str()\
@@ -4924,7 +4940,7 @@ class Product (CommutativeOperation):
 
                             else:
                                 #DEBUG
-                                debug.write("\n[n°3B] : " \
+                                debug.write("\n[Product.into_str():n°3B] " \
                                                    + "processing " \
                                                    + "factor : "\
                                                    + couple[1].dbg_str()\
@@ -4965,7 +4981,7 @@ class Product (CommutativeOperation):
             if unclosed_bracket >= 1:
                 for i in range(unclosed_bracket):
                     #DEBUG
-                    debug.write( \
+                    debug.write( "[Product.into_str()] "\
                               "\n[end of product]the bracket is */closed/*\n",
                            case=debug.into_str_in_product)
                     resulting_string += MARKUP['closing_bracket']
@@ -4997,7 +5013,7 @@ class Product (CommutativeOperation):
             #___
                 expression_begins = True
                 #DEBUG
-                debug.write("\n[n°4A]× : " \
+                debug.write("\n[Product.into_str():n°4A]× : " \
                                    + "processing " \
                                    + "1st factor : "\
                                    + self.factor[0].dbg_str()\
@@ -5012,7 +5028,7 @@ class Product (CommutativeOperation):
                                  + MARKUP['closing_bracket']
             else:
                 #DEBUG
-                debug.write("\n[n°4B]× : " \
+                debug.write("\n[Product.into_str():n°4B]× : " \
                                    + "processing " \
                                    + "1st factor : "\
                                    + self.factor[0].dbg_str()\
@@ -5052,7 +5068,7 @@ class Product (CommutativeOperation):
                         # if there are several factors they all will be
                         # displayed
                         #DEBUG
-                        debug.write("\n[n°5A]× : " \
+                        debug.write("\n[Product.into_str():n°5A]× : " \
                                            + "processing " \
                                            + "factor : "\
                                            + self.factor[i+1].dbg_str()\
@@ -5067,7 +5083,7 @@ class Product (CommutativeOperation):
                                          + MARKUP['closing_bracket']
                     else:
                         #DEBUG
-                        debug.write("\n[n°5B]× : " \
+                        debug.write("\n[Product.into_str():n°5B]× : " \
                                            + "processing " \
                                            + "factor : "\
                                            + self.factor[i+1].dbg_str()\
@@ -5087,7 +5103,8 @@ class Product (CommutativeOperation):
         # of the exponent)
         if self.requires_inner_brackets():
             #DEBUG
-            debug.write("\n[n°6] - wrapped in (inner) brackets\n",
+            debug.write("\n[Product.into_str():n°6] " \
+                            + "- wrapped in (inner) brackets\n",
                                    case=debug.into_str_in_product)
 
             resulting_string = MARKUP['opening_bracket']                      \
@@ -5098,7 +5115,8 @@ class Product (CommutativeOperation):
             expression_begins = True
             exponent_string = self.exponent.into_str(**options)
             #DEBUG
-            debug.write("\n[n°7] - processing the exponent\n",
+            debug.write("\n[Product.into_str():n°7] " \
+                        + "- processing the exponent\n",
                                    case=debug.into_str_in_product)
 
             resulting_string += MARKUP['opening_exponent']                    \
