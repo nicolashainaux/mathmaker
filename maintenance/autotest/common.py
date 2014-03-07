@@ -155,7 +155,7 @@ def check(t, given_string):
                                  + '"' + given_string[i].replace("\n", "") \
                                  + '"' + "\n")
                     else:
-                        os.write(output, FAILED)
+                        os.write(output, bytes(FAILED, 'utf-8'))
 
                     failed_counter += 1
                     last_was_OK = False
