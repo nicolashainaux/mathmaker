@@ -94,10 +94,10 @@ def check(t, given_string):
         if computed_string[0].replace("\n", "") == \
                                              given_string[0].replace("\n", ""):
 
-            os.write(output, superverbose_opening_token + add_space \
+            os.write(output, bytes(superverbose_opening_token + add_space \
                              + n + verbose_space + OK \
                              + superverbose_closing_token \
-                             + next_line)
+                             + next_line, 'utf-8'))
             last_was_OK = True
         else:
             if verbose:
@@ -136,10 +136,11 @@ def check(t, given_string):
                 if computed_string[i].replace("\n", "") == \
                                              given_string[i].replace("\n", ""):
 
-                    os.write(output, superverbose_opening_token + add_space \
+                    os.write(output, bytes(superverbose_opening_token \
+                                     + add_space \
                                      + n + verbose_space + OK \
                                      + superverbose_closing_token \
-                                     + next_line)
+                                     + next_line, 'utf-8'))
                     last_was_OK = True
                 else:
                     if verbose:
