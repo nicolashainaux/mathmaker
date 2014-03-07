@@ -643,7 +643,6 @@ class Item(Exponented):
     ##
     #   @brief Compares two Items
     #   @return 0 (i.e. they're equal) if sign, value & exponent are equal
-    #   @obsolete ?
     def __eq__(self, other_item):
         if not isinstance(other_item, Item):
             return -1
@@ -654,6 +653,16 @@ class Item(Exponented):
             return 0
         else:
             return -1
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Makes Items hashable (so, usable as dictionnary keys)
+    def __hash__(self):
+        return hash(str(self.raw_value) + str(self.sign) + str(self.exponent))
 
 
 

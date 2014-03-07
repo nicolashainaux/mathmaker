@@ -109,7 +109,7 @@ def check(t, given_string):
                      + "\nshould have been\n"                                 \
                      + '"' + given_string[0].replace("\n", "") + '"' + "\n")
             else:
-                os.write(output, FAILED)
+                os.write(output, bytes(FAILED, 'utf-8'))
 
             failed_counter += 1
             last_was_OK = False
