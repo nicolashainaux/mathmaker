@@ -5628,7 +5628,8 @@ class Product (CommutativeOperation):
         num_factors = self.get_factors_list(NUMERIC)
 
         literal_factors = self.get_factors_list(LITERALS)
-        literal_factors.sort(Exponented.alphabetical_order_cmp)
+        #python2.7 code : literal_factors.sort(Exponented.alphabetical_order_cmp)
+        sorted(literal_factors)
 
         other_factors = self.get_factors_list(OTHERS)
 
@@ -5666,7 +5667,9 @@ class Product (CommutativeOperation):
         # Literal factors :
         raw_literals_list = self.get_factors_list(LITERALS)
         literals_list = reduce_literal_items_product(raw_literals_list)
-        literals_list.sort(Exponented.alphabetical_order_cmp)
+        #python2.7 code: literals_list.sort(Exponented.alphabetical_order_cmp)
+        sorted(literals_list)
+
 
         # Determine the sign
         final_sign = sign_of_product([numeric_part] + raw_literals_list)
