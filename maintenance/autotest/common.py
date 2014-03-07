@@ -102,12 +102,13 @@ def check(t, given_string):
         else:
             if verbose:
                 os.write(output,
-                     "\n" + superverbose_opening_token + add_space \
+                     bytes("\n" + superverbose_opening_token + add_space \
                      + str(counter) + " "                         \
                      + FAILED                                                 \
                      + '"' + computed_string[0].replace("\n", "") + '"'                         \
                      + "\nshould have been\n"                                 \
-                     + '"' + given_string[0].replace("\n", "") + '"' + "\n")
+                     + '"' + given_string[0].replace("\n", "") + '"' + "\n",
+                     'utf-8'))
             else:
                 os.write(output, bytes(FAILED, 'utf-8'))
 
@@ -145,7 +146,7 @@ def check(t, given_string):
                 else:
                     if verbose:
                         os.write(output,
-                                 "\n" + superverbose_opening_token \
+                                 bytes("\n" + superverbose_opening_token \
                                  + add_space + str(counter) + " "            \
                                  + FAILED                                     \
                                  + '"' \
@@ -153,7 +154,7 @@ def check(t, given_string):
                                  + '"'             \
                                  + "\nshould have been\n"                     \
                                  + '"' + given_string[i].replace("\n", "") \
-                                 + '"' + "\n")
+                                 + '"' + "\n", 'utf-8'))
                     else:
                         os.write(output, bytes(FAILED, 'utf-8'))
 
@@ -163,12 +164,12 @@ def check(t, given_string):
             else:
                 if verbose:
                     os.write(output,
-                                 "\n" + "[# " + str(counter) + " "            \
+                                 bytes("\n" + "[# " + str(counter) + " "      \
                                  + MISSING                                    \
                                  + "more machines than refs strings."
-                                 + "\n")
+                                 + "\n", 'utf-8'))
                 else:
-                    os.write(output, MISSING)
+                    os.write(output, bytes(MISSING, 'utf-8'))
 
                 missing_counter += 1
                 last_was_OK = False
@@ -176,12 +177,12 @@ def check(t, given_string):
         if len(given_string) > len(machines):
             if verbose:
                 os.write(output,
-                         "\n" + "# " + str(counter) + " "                     \
+                         bytes("\n" + "# " + str(counter) + " "                     \
                          + MISSING                                            \
                          + "more refs strings than machines."
-                         + "\n")
+                         + "\n", 'utf-8'))
             else:
-                os.write(output, MISSING)
+                os.write(output, bytes(MISSING, 'utf-8'))
 
             missing_counter += 1
             last_was_OK = False

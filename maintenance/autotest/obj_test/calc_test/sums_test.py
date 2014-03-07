@@ -33,7 +33,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- SUMS\n")
+        os.write(common.output, bytes("--- SUMS\n", 'utf-8'))
 
 
 # --------------------------------------------------------------------------

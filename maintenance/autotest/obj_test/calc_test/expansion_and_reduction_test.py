@@ -36,7 +36,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- --- EXPANSION & REDUCTION\n")
+        os.write(common.output, bytes("--- --- EXPANSION & REDUCTION\n", 'utf-8'))
 
     expd_2_times_sum_of_1_and_5x = Expandable((Item(2),
                                                Sum([Item(1),

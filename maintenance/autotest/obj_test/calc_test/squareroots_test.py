@@ -42,7 +42,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- SQUARE ROOTS\n")
+        os.write(common.output, bytes("--- SQUARE ROOTS\n", 'utf-8'))
 
 
     sq1 = SquareRoot(Item(5))

@@ -33,7 +33,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- MONOMIALS\n")
+        os.write(common.output, bytes("--- MONOMIALS\n", 'utf-8'))
 
     monom_6 = Monomial(('+', 6, 0))
     monom_6_ones_away = monom_6.throw_away_the_neutrals()

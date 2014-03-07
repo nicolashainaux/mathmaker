@@ -42,7 +42,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- TABLES\n")
+        os.write(common.output, bytes("--- TABLES\n", 'utf-8'))
 
     # Don't forget to uncomment the convenient lines above if a test
     # requires to use the locale module.

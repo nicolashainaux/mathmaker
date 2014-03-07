@@ -73,7 +73,7 @@ evaluate_in_operation = False
 def write(provided_string, **options):
     if ENABLED:
         if len(options) == 0:
-            os.write(sdt_err_output, provided_string)
+            os.write(sdt_err_output, bytes(provided_string, 'utf-8'))
 
         elif 'case' in options and options['case'] == True:
-            os.write(sdt_err_output, provided_string)
+            os.write(sdt_err_output, bytes(provided_string, 'utf-8'))

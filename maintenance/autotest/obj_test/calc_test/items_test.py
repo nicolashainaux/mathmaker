@@ -41,7 +41,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- ITEMS\n")
+        os.write(common.output, bytes("--- ITEMS\n", 'utf-8'))
 
     item_1 = Item(1)
     item_minus_1 = Item(-1)

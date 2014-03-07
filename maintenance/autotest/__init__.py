@@ -104,7 +104,7 @@ def long_test_run(n, lang):
 def fraction_simplification_coverage(n):
     number_of_failed = 0
     for i in range(int(n)):
-        os.write(common.output, "\n" + str(i+1))
+        os.write(common.output, bytes("\n" + str(i+1), 'utf-8'))
         for j in range(int(n)):
             # test if the Fraction i over j is reduced the right way
             f = common.Fraction(('+', i+1, j+1))
@@ -113,7 +113,7 @@ def fraction_simplification_coverage(n):
                 while go_on:
                     g = f.simplified()
                     if not g.is_reducible():
-                        os.write(common.output, ".")
+                        os.write(common.output, bytes(".", 'utf-8'))
                         go_on = False
                     elif g.numerator.factor[0].raw_value == \
                                               f.numerator.factor[0].raw_value \
@@ -121,13 +121,13 @@ def fraction_simplification_coverage(n):
                                              f.denominator.factor[0].raw_value:
                     #___
                         os.write(common.err_output,
-                                 "\nFAILED : " \
+                                 bytes("\nFAILED : " \
                                  + str(i+1) + "/" + str(j+1) \
                                  + " -------- Step " \
                                  + str(g.numerator.factor[0].raw_value) \
                                  + "/" \
                                  + str(g.denominator.factor[0].raw_value) \
-                                 + "\n")
+                                 + "\n", 'utf-8'))
                         go_on = False
                         number_of_failed += 1
 
@@ -135,10 +135,10 @@ def fraction_simplification_coverage(n):
                         f = g
                         # go_on is still True
             else:
-                os.write(common.output, ".")
+                os.write(common.output, bytes(".", 'utf-8'))
 
-    os.write(common.output, "\nNumber of failed : " + \
-                                     str(number_of_failed) + "\n")
+    os.write(common.output, bytes("\nNumber of failed : " + \
+                                     str(number_of_failed) + "\n", 'utf-8'))
 
 
 def main():
@@ -245,9 +245,10 @@ def main():
         language_test(options.lang)
 
     if options.units_list:
-        os.write(common.output, "List of available test units :\n")
+        os.write(common.output,
+                 bytes("List of available test units :\n", 'utf-8'))
         for u in AVAILABLE_UNITS:
-            os.write(common.output, u[0] + "\n")
+            os.write(common.output, bytes(u[0] + "\n", 'utf-8'))
 
     elif options.short_test_run:
         short_test_run(common.tested_language)
@@ -268,11 +269,11 @@ def main():
                                                              options.units[i]])
                 else:
                     os.write(common.output,
-                                       "You requested to test the unit '" \
+                                     bytes("You requested to test the unit '" \
                                      + options.units[i] \
                                      + "' but it's not available. " \
                                      + "Run autotest-mathmaker --units-list" \
-                                     + " for more information.\n")
+                                     + " for more information.\n", 'utf-8'))
         else:
             for u in AVAILABLE_UNITS:
                 tested_units.append(u[1])
@@ -282,16 +283,16 @@ def main():
             common.superverbose_counter = 0
             unit.action()
             if common.verbose:
-                os.write(common.output, "\n")
+                os.write(common.output, bytes("\n", 'utf-8'))
 
         if not common.verbose:
-            os.write(common.output, "\n")
+            os.write(common.output, bytes("\n", 'utf-8'))
 
         os.write(common.output,
-                 "FAILED : " + str(common.failed_counter) \
+                 bytes("FAILED : " + str(common.failed_counter) \
                  + " MISSING : " + str(common.missing_counter) \
                  + "\nTotal OK : " \
                  + str(common.global_counter - \
                        common.missing_counter - \
                        common.failed_counter)\
-                 + "/" + str(common.global_counter) + "\n")
+                 + "/" + str(common.global_counter) + "\n", 'utf-8'))

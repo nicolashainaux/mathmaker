@@ -33,7 +33,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- PRODUCTS' REDUCTION\n")
+        os.write(common.output, bytes("--- PRODUCTS' REDUCTION\n", 'utf-8'))
 
     temp_sum = Sum(['x', 3])
     temp_sum.set_exponent(3)
