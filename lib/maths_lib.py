@@ -220,7 +220,7 @@ def ten_power_gcd(a, b):
         raise error.OutOfRangeArgument(b, "Integer but not zero !")
 
     if a % 10 == 0 and b % 10 == 0:
-        return 10 * ten_power_gcd(a / 10, b / 10)
+        return 10 * ten_power_gcd(a // 10, b // 10)
     else:
         return 1
 
