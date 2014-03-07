@@ -262,8 +262,11 @@ class Item(Exponented):
         if self.is_negative() and not self.is_null():
             nb += 1
 
-        if self.raw_value < 0 and is_uneven(self.exponent):
-            nb += 1
+        if self.is_numeric():
+            if Decimal(str(self.raw_value)) < Decimal("0") \
+                and is_uneven(self.exponent):
+            #___
+                nb += 1
 
         return nb
 
