@@ -1569,9 +1569,9 @@ class SquareRoot(Function):
     #   @brief Compares two SquareRoots
     #   @return 0 (i.e. they're equal) if sign, value & exponent are equal
     #   @obsolete ?
-    def __cmp__(self, other_item):
+    def __eq__(self, other_item):
         raise error.MethodShouldBeRedefined(self,
-                                            '__cmp__ in SquareRoot')
+                                            '__eq__ in SquareRoot')
 
 
 
@@ -3192,7 +3192,7 @@ class Fraction(Quotient):
     ##
     #   @brief Compares two Fractions
     #   @return 0 (i.e. they're equal) if sign, nume, deno & exponent are equal
-    def __cmp__(self, obj):
+    def __eq__(self, obj):
         if not isinstance(obj, Fraction):
             return -1
 
@@ -5495,7 +5495,7 @@ class Product (CommutativeOperation):
     #   /!\ a × b will be different from b × a
     #   It's not a mathematical comparison, but a "displayable"'s one.
     #   @return 0 if all factors are the same in the same order & the exponent
-    def __cmp__(self, objct):
+    def __eq__(self, objct):
         if not isinstance(objct, Product):
             return -1
 
@@ -7108,7 +7108,7 @@ class Sum (CommutativeOperation):
     #   /!\ a + b will be different from de b + a
     #   It's not a mathematical comparison, but a "displayable"'s one.
     #   @return 0 if all terms are the same in the same order & the exponent
-    def __cmp__(self, objct):
+    def __eq__(self, objct):
         if not isinstance(objct, Sum):
             return -1
 
