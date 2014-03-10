@@ -67,7 +67,7 @@ def action():
            "C = point(4, 3)"\
            "draw  (A.B.C)"\
            "  $\\rotatebox{0}{4 cm}$ A 0 - 7.5 deg 6.4"\
-           "  $\\rotatebox{-90}{3 cm}$ B 90 - 9 deg 4.8"\
+           "  $\\rotatebox{-90}{3 cm}$ B 90 - 9 deg 4.9"\
            "  $\\rotatebox{37}{5 cm}$ A 37 + 6.5 deg 8"\
            "end"\
            "label"\
