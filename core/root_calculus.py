@@ -790,6 +790,18 @@ class Value(Signed):
 
     # --------------------------------------------------------------------------
     ##
+    #   @brief Makes Values hashable (so, usable as dictionnary keys)
+    def __hash__(self):
+        return hash(str(self.sign) + str(self.raw_value) \
+                    + str(self.has_been_rounded) + str(self.unit)
+                   )
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
     #   @brief Executes the multiplication with another object
     #   @warning Will raise an error if you try to multiply a literal
     #            with a number

@@ -686,6 +686,36 @@ class Item(Exponented):
 
     # --------------------------------------------------------------------------
     ##
+    #   @brief Compares an Item to something else ; it's a reimplementing of
+    #          alphabetical_order_cmp(), since we need this comparison
+    #   @return True if self is lower than the other_item
+    def __lt__(self, other_objct):
+        if self.is_numeric() and other_objct.is_numeric():
+            return False
+
+        elif self.is_literal() and other_objct.is_numeric():
+            return False
+
+        elif self.is_numeric() and other_objct.is_literal():
+            return True
+
+        elif self.is_literal() and other_objct.is_literal():
+            self_value = self.get_first_letter()
+            other_value = other_objct.get_first_letter()
+
+            # let's compare
+            if self_value == other_value:
+                return False
+            elif alphabet.order[self_value] > alphabet.order[other_value]:
+                return False
+            else:
+                return True
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
     #   @brief Makes Items hashable (so, usable as dictionnary keys)
     def __hash__(self):
         return hash(str(self.raw_value) + str(self.sign) \
@@ -1951,6 +1981,21 @@ class Operation(Exponented):
     def reset_element(self):
         self._element = []
 
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Makes any Operation hashable (so, usable as dictionnary keys)
+    #   @warning    Seems that subclasses that redefine __eq__() are forgetting
+    #               __hash__()
+    def __hash__(self):
+        return hash(self.symbol + str(self.sign) \
+                    + [elt.dbg_str() for elt in self.element].join()\
+                    + self.exponent.dbg_str()
+                   )
 
 
 
@@ -5542,6 +5587,19 @@ class Product (CommutativeOperation):
             return False
 
         return True
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Makes Products hashable (so, usable as dictionnary keys)
+    def __hash__(self):
+        return hash(self.symbol + str(self.sign) \
+                    + ''.join([elt.dbg_str() for elt in self.element])\
+                    + self.exponent.dbg_str()
+                   )
 
 
 
