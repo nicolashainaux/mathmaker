@@ -642,17 +642,43 @@ class Item(Exponented):
     # --------------------------------------------------------------------------
     ##
     #   @brief Compares two Items
-    #   @return 0 (i.e. they're equal) if sign, value & exponent are equal
+    #   @return True if they're equal
     def __eq__(self, other_item):
         if not isinstance(other_item, Item):
-            return -1
+            #DEBUG
+            debug.write("\n[Item.__eq__()] : the other object is not an Item,"\
+                        + " returning False",
+                case=debug.eq_in_item)
 
-        if self.sign == other_item.sign                                       \
-                and self.raw_value == other_item.raw_value                            \
+            return False
+
+        if self.sign == other_item.sign                         \
+                and self.raw_value == other_item.raw_value      \
                 and self.exponent == other_item.exponent:
-            return 0
+        #___
+            #DEBUG
+            debug.write("\n[Item.__eq__()] : everything found equal",
+                        case=debug.eq_in_item)
+            return True
         else:
-            return -1
+            #DEBUG
+            debug.write("\n[Item.__eq__()] : "\
+                        + "self.sign is " + str(self.sign) + " "\
+                        + "other_item.sign is " + str(other_item.sign)\
+                        + " and they're equal? " \
+                        + str(self.sign == other_item.sign) \
+                        + "\n[Item.__eq__()] : "\
+                        + "self.raw_value is " + str(self.raw_value) + " "\
+                        + "other_item.raw_value is " + str(other_item.raw_value)\
+                        + " and they're equal? " \
+                        + str(self.raw_value == other_item.raw_value) \
+                        + "\n[Item.__eq__()] : "\
+                        + "self.exponent is " + str(self.exponent) + " "\
+                        + "other_item.exponent is " + str(other_item.exponent)\
+                        + " and they're equal? " \
+                        + str(self.exponent == other_item.exponent),
+                        case=debug.eq_in_item)
+            return False
 
 
 
@@ -3191,21 +3217,21 @@ class Fraction(Quotient):
     # --------------------------------------------------------------------------
     ##
     #   @brief Compares two Fractions
-    #   @return 0 (i.e. they're equal) if sign, nume, deno & exponent are equal
+    #   @return True if they're equal
     def __eq__(self, obj):
         if not isinstance(obj, Fraction):
-            return -1
+            return False
 
         if self.sign == obj.sign                       \
            and self.numerator == obj.numerator            \
            and self.denominator == obj.denominator       \
            and self.exponent == obj.exponent:
         #___
-            return 0
+            return True
         else:
             # it is difficult to tell whether a Fraction is greater or
             # lower than another... needs same denominator reduction etc.
-            return -1
+            return False
 
 
 
@@ -4740,7 +4766,8 @@ class Product (CommutativeOperation):
                 debug.write("\n[Product.into_str()] " \
                             + "Finished processing the first factor" \
                             + " ; couple is (" +  self.factor[0].dbg_str() \
-                            + ", None)",
+                            + ", None) ; flag is " + str(flag) + " position is "\
+                            + str(position),
                             case=debug.into_str_in_product)
 
             # If there are other factors :
@@ -4756,9 +4783,14 @@ class Product (CommutativeOperation):
                             # displayed (apart from a possibly only - sign)
                             #DEBUG
                             debug.write("\n[Product.into_str()] " \
-                                        + "more than one factor to process " \
-                                        + "current couple == (None, None)",
-                            case=debug.into_str_in_product)
+                                        + "more than one factor to process ; "\
+                                        + "current couple is ("\
+                                        + str(couple[0]) + ", "\
+                                        + str(couple[1]) + ") ; "\
+                                        + "flag is " + str(flag)\
+                                        + " position is "\
+                                        + str(position),
+                                        case=debug.into_str_in_product)
                             couple = (self.factor[i + 1], None)
                             if self.factor[i + 1].requires_brackets(position)\
                                and not Product(self.get_factors_list_except(
@@ -5494,22 +5526,22 @@ class Product (CommutativeOperation):
     #   exponents are also the same
     #   /!\ a × b will be different from b × a
     #   It's not a mathematical comparison, but a "displayable"'s one.
-    #   @return 0 if all factors are the same in the same order & the exponent
+    #   @return True if all factors are the same in the same order & the exponent
     def __eq__(self, objct):
         if not isinstance(objct, Product):
-            return -1
+            return False
 
         if len(self) != len(objct):
-            return -1
+            return False
 
         for i in range(len(self)):
             if self.factor[i] != objct.factor[i]:
-                return -1
+                return False
 
         if self.exponent != objct.exponent:
-            return -1
+            return False
 
-        return 0
+        return True
 
 
 
@@ -7107,22 +7139,22 @@ class Sum (CommutativeOperation):
     #   exponents are also the same
     #   /!\ a + b will be different from de b + a
     #   It's not a mathematical comparison, but a "displayable"'s one.
-    #   @return 0 if all terms are the same in the same order & the exponent
+    #   @return True if all terms are the same in the same order & the exponent
     def __eq__(self, objct):
         if not isinstance(objct, Sum):
-            return -1
+            return False
 
         if len(self) != len(objct):
-            return -1
+            return False
 
         for i in range(len(self)):
             if self.term[i] != objct.term[i]:
-                return -1
+                return False
 
         if self.exponent != objct.exponent:
-            return -1
+            return False
 
-        return 0
+        return True
 
 
 

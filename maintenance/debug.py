@@ -28,7 +28,7 @@ sdt_err_output = sys.stderr.fileno()
 
 ENABLED_STRING = cfg.get_value_from_file("DEBUGGING MODE", "ENABLED")
 
-ENABLED = True
+ENABLED = False
 
 if ENABLED_STRING == "True" or ENABLED_STRING == "true":
     ENABLED = True
@@ -60,6 +60,7 @@ product_is_reducible = True
 get_factors_list_product = True
 reduce__product = False
 evaluate_in_operation = False
+eq_in_item = True
 
 
 

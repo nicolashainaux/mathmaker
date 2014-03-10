@@ -236,6 +236,7 @@ def action():
     check(item_to_round.round(0),
           ["7"])
 
+    #35
     check(item_to_round.round(1),
           [locale.str(6.5)])
 
@@ -251,6 +252,7 @@ def action():
     check(item_to_round.needs_to_get_rounded(1),
           ["True"])
 
+    #40
     check(item_to_round.needs_to_get_rounded(2),
           ["True"])
 
@@ -260,10 +262,25 @@ def action():
     check(item_to_round.needs_to_get_rounded(4),
           ["False"])
 
+    it = Item(2)
+    couple = (it, None)
+
+    check(str(it == None),
+         ["False"])
+
+    check(str((it, None) == (None, None)),
+         ["False"])
+
+    #45
+    it0 = Item(0)
+    check(str(it0 == Item(0)),
+         ["True"])
+
+
+
     for i in range(len(common.machines)):
-        test = common.machines[i].type_string(\
-                                       item_with_unit,
-                                       display_unit='yes')
+        test = common.machines[i].type_string(item_with_unit,
+                                              display_unit='yes')
         check(test, ["19,5 cm"])
 
 

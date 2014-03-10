@@ -764,15 +764,15 @@ class Value(Signed):
     #   @brief Compares two Values
     #   @todo check if __eq__ shouldn't return +1 if value of self > objct
     #   @todo comparison directly with numbers... (see alphabetical_order_cmp)
-    #   @return -1|0 (i.e. they're equal)
+    #   @return True if they're equal
     def __eq__(self, other_value):
         if not isinstance(other_value, Value):
-            return -1
+            return False
 
         if self.raw_value == other_value.raw_value:
-            return 0
+            return True
         else:
-            return -1
+            return False
 
 
 
