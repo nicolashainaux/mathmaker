@@ -662,7 +662,8 @@ class Item(Exponented):
     ##
     #   @brief Makes Items hashable (so, usable as dictionnary keys)
     def __hash__(self):
-        return hash(str(self.raw_value) + str(self.sign) + str(self.exponent))
+        return hash(str(self.raw_value) + str(self.sign) \
+                + self.exponent.dbg_str())
 
 
 
