@@ -597,7 +597,7 @@ def action():
 
 
     if common.verbose:
-        os.write(common.output, "\n--- PRODUCTS - evaluate\n")
+        os.write(common.output, bytes("\n--- PRODUCTS - evaluate\n", 'utf-8'))
 
     a = Item(2.5)
     b = Item(3.5)
