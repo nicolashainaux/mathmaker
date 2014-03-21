@@ -190,6 +190,7 @@ cm aeguill") + "\n"
         result += "\setlength{\parindent}{0cm}" + "\n"
         result += "\pagestyle{empty}" + "\n"
         result += " " + "\n"
+        result += r"\usepackage{epstopdf}" + "\n"
         result += "%%% " + _("If you wish to include a picture, \
 please use this command :") + "\n"
         result += "%%% \includegraphics[height=6cm]{"
@@ -216,6 +217,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
         result += "\\newcommand{\\razcompteur}{\setcounter{n}{0}}" + "\n"
         result += " " + "\n"
         result += r"\usetikzlibrary{calc}" + "\n"
+        result += r"\epstopdfsetup{outdir=./}" + "\n"
 
         if self.redirect_output_to_str:
             return result
