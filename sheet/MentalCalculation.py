@@ -20,6 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from lib.common.cst import YES
+
 import machine
 from . import exercise
 
@@ -40,7 +42,8 @@ SHEET_LAYOUT = { 'exc' : [ None,                    'all'
 # ------------------------------------------------------------------------------
 ##
 # @class MentalCalculation
-# @brief This is a sheet for the teacher to make oral mental calculation tests
+# @brief This sheet is either a slideshow of Mental Calculation questions or
+#        a sheet of one single exercise being a tabular of n questions.
 class MentalCalculation(S_Structure):
 
 
@@ -61,20 +64,20 @@ class MentalCalculation(S_Structure):
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
         self.header = ""
-        self.title = _("Mental calculation :")
+        self.title = _("Mental calculation:")
         self.subtitle = ""
         self.text = ""
         self.answers_title = ""
 
-        for i in range(8):
-            ex = exercise.X_MentalCalculation(self.machine,
-                                            x_kind='bypass',
-                                            x_subkind='5m_3rm_2d_2-9',
-                                            number_of_questions=1)
-            self.exercises_list.append(ex)
+        self.slideshow = False
 
-        #for i in xrange(3):
-        #    ex = exercise.X_MentalCalculation(self.machine,
-        #                                    preformatted='yes',
-        #                                    x_kind='5m_3rm_2d_2-9')
-        #    self.exercises_list.append(ex)
+        if 'slideshow' in options and options['slideshow'] in YES:
+            self.slideshow = True
+
+
+
+        ex = exercise.X_MentalCalculation(self.machine,
+                                          x_kind='slideshow' if self.slideshow \
+                                                             else 'tabular',
+                                          number_of_questions=1)
+        self.exercises_list.append(ex)

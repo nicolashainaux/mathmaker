@@ -26,10 +26,46 @@ from .Q_Structure import Q_Structure
 from core.base_calculus import *
 
 
-AVAILABLE_Q_KIND_VALUES = {'10m_2-9': ['default'],
-                           '10m_4-9': ['default'],
-                           '5m_3rm_2d_2-9': ['default']
+AVAILABLE_Q_KIND_VALUES = {'multiplication': ['direct',
+                                              'reversed',
+                                              'decimal',
+                                              'decimal_1',
+                                              'decimal_2'],
+                           'division': ['direct',
+                                        'decimal_1'],
+                           'area': ['rectangle',
+                                    'right_triangle'],
+                           'perimeter': ['rectangle',
+                                         'right_triangle']
                           }
+
+AVAILABLE_NUMBERS = ['table_2-9',
+                     'table_11', # 11×n where 10 < n < 100, no carry over
+                     'table_15', # 15×n where 2 < n < 6
+                     'table_25'  # 25×n where 2 < n < 6
+                     ]
+
+AVAILABLE_ASSOCIATIONS = \
+    {{'multiplication', 'direct'} : ['table_2-9',
+                                     'table_11',
+                                     'table_15',
+                                     'table_25'],
+     {'multiplication', 'reversed'} : ['table_2-9'],
+     {'multiplication', 'decimal'} : ['table_2-9'],
+     {'multiplication', 'decimal_1'} : ['table_2-9'],
+     {'multiplication', 'decimal_2'} : ['table_2-9'],
+     {'division', 'direct'} : ['table_2-9'],
+     {'division', 'decimal_1'} : ['table_2-9'],
+     {'area', 'rectangle'} : ['table_2-9',
+                              'table_11',
+                              'table_15',
+                              'table_25'],
+     {'area', 'right_rectangle'} : ['table_2-9',
+                                    'table_11',
+                                    'table_15',
+                                    'table_25']
+
+    }
 
 # --------------------------------------------------------------------------
 ##

@@ -29,9 +29,8 @@ from . import question
 # Note : the bypass value allows to give the value of *x_subkind* directly to
 # the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
-    {#'short_test' : ['x_subkind1', 'x_subkind2'],
-     #'preformatted' : [''],
-     'bypass' : ['10m_2-9', '10m_4-9', '5m_3rm_2d_2-9']
+    {'tabular' : None,
+     'slideshow' : None
     }
 
 X_LAYOUT_UNIT = "cm"
