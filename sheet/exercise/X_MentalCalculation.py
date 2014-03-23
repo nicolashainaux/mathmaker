@@ -20,14 +20,13 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import shlex
 from lib import *
 from .X_Structure import X_Structure
 from . import question
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
-# Note : the bypass value allows to give the value of *x_subkind* directly to
-# the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
     {'tabular' : None,
      'slideshow' : None
@@ -42,6 +41,42 @@ X_LAYOUTS = {'default' :
                         ]
               }
             }
+
+SEPARATOR_TOKEN = ":"
+
+
+# --------------------------------------------------------------------------
+##
+#   @brief Gets the questions' kinds from the given file.
+def get_q_kinds_from_file(file_name):
+    try:
+        f = open(file_name, mode = 'r')
+    except NameError:
+        raise error.UnreachableData("the file named : " + str(file_name))
+
+    result = []
+    # At the end, result should contain a list of questions' kinds.
+    # Each line of the file matches one question's kind and will be turned into:
+    # [ <q_kind>, <q_subkind>, nb_of_q]
+    # with <q_kind> as a set (see Q_MentalCalculation.AVAILABLE_Q_KIND_VALUES)
+    # <q_subkind> as a str (see Q_MentalCalculation.AVAILABLE_Q_KIND_VALUES)
+    # and nb_of_q as an int
+    # For instance, the line:
+    # multiplication direct : table_2-9 : 4
+    # will be transformed into:
+    # [{'multiplication', 'direct'}, 'table_2-9', 4]
+
+    for line in f:
+        # this will get the <q_kind> set:
+        qk = set(shlex.split(line[0:line.find(':')]))
+        # this will get the <q_subkind> str:
+        qs = line[line.find(':')+1:line.rfind(':')].strip()
+        # this will get the number at the end
+        qn = int(line[line.rfind(':')+1:len(line)])
+
+        result += [[qk, qs, qn]]
+
+    return result
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -105,6 +140,14 @@ class X_MentalCalculation(X_Structure):
         self.text = {'exc' : "",
                      'ans' : ""
                     }
+
+        # HERE: get the list of questions' kinds with get_q_kinds_from_file()
+        # check if the sum of qn is not more than an arbitrary max limit
+        # defined at the beginning of the file (40)
+        # then write the correct loop to append the questions to
+        # self.questions_list, each question should be added qn times,
+        # the order of questions should be randomized and the 'table_2-9'|
+        # 'table_11'|'table_15'etc.'s "gauge" should be managed here too
 
         for i in range(self.q_nb):
             self.questions_list.append(                                   \

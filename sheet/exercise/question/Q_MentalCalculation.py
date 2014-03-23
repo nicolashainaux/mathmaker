@@ -25,27 +25,15 @@ from .Q_Structure import Q_Structure
 
 from core.base_calculus import *
 
+# The matching number indicates how many different questions can be asked
+# in the theme
+AVAILABLE_NUMBERS = {'table_2-9' : 36,
+                     'table_11' : 28, # 11×n where 10 < n < 100, no carry over
+                     'table_15' : 6, # 15×n where 2 <= n <= 6
+                     'table_25' : 6 # 25×n where 2 <= n <= 6
+                    }
 
-AVAILABLE_Q_KIND_VALUES = {'multiplication': ['direct',
-                                              'reversed',
-                                              'decimal',
-                                              'decimal_1',
-                                              'decimal_2'],
-                           'division': ['direct',
-                                        'decimal_1'],
-                           'area': ['rectangle',
-                                    'right_triangle'],
-                           'perimeter': ['rectangle',
-                                         'right_triangle']
-                          }
-
-AVAILABLE_NUMBERS = ['table_2-9',
-                     'table_11', # 11×n where 10 < n < 100, no carry over
-                     'table_15', # 15×n where 2 < n < 6
-                     'table_25'  # 25×n where 2 < n < 6
-                     ]
-
-AVAILABLE_ASSOCIATIONS = \
+AVAILABLE_Q_KIND_VALUES = \
     {{'multiplication', 'direct'} : ['table_2-9',
                                      'table_11',
                                      'table_15',
@@ -56,47 +44,19 @@ AVAILABLE_ASSOCIATIONS = \
      {'multiplication', 'decimal_2'} : ['table_2-9'],
      {'division', 'direct'} : ['table_2-9'],
      {'division', 'decimal_1'} : ['table_2-9'],
-     {'area', 'rectangle'} : ['table_2-9',
-                              'table_11',
-                              'table_15',
-                              'table_25'],
+     {'area', 'rectangle', 'with_drawing'} : ['table_2-9',
+                                              'table_11',
+                                              'table_15',
+                                              'table_25'],
+     {'area', 'rectangle', 'without_drawing'} : ['table_2-9',
+                                                 'table_11',
+                                                 'table_15',
+                                                 'table_25'],
      {'area', 'right_rectangle'} : ['table_2-9',
                                     'table_11',
                                     'table_15',
                                     'table_25']
-
     }
-
-# --------------------------------------------------------------------------
-##
-#   @brief Produces a randomly list of ten products and results
-#   @param embedded_machine The machine to be used
-#   @param **options Any options
-#   @return A couple ([products], [results])
-def ten_products(pairs):
-
-    if not len(pairs) >= 10:
-        raise error.WrongArgument("a list of at least 10 items",
-                                  "a list containing less than 10 items")
-
-    calculus_list = []
-    results_list = []
-
-    for i in range(10):
-        current_pair = randomly.pop(pairs)
-        if randomly.heads_or_tails():
-            calculus_list.append(Product([current_pair[0],
-                                          current_pair[1]]))
-        else:
-            calculus_list.append(Product([current_pair[1],
-                                          current_pair[0]]))
-
-        results_list.append(Product([current_pair[0],
-                                     current_pair[1]]).evaluate()
-                            )
-
-    return (calculus_list, results_list)
-
 
 
 
