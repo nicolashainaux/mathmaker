@@ -28,8 +28,8 @@ from . import question
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
 AVAILABLE_X_KIND_VALUES = \
-    {'tabular' : None,
-     'slideshow' : None
+    {'tabular' : 'default',
+     'slideshow' : 'default'
     }
 
 X_LAYOUT_UNIT = "cm"
@@ -148,6 +148,7 @@ class X_MentalCalculation(X_Structure):
         # self.questions_list, each question should be added qn times,
         # the order of questions should be randomized and the 'table_2-9'|
         # 'table_11'|'table_15'etc.'s "gauge" should be managed here too
+        # also, self.q_nb should be set here
 
         for i in range(self.q_nb):
             self.questions_list.append(                                   \
@@ -170,6 +171,28 @@ class X_MentalCalculation(X_Structure):
 
 
 
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Writes the text of the exercise|answer to the output.
+    def to_str(self, ex_or_answers):
+        M = self.machine
+        result = ""
+
+        if self.slideshow:
+
+
+        # default tabular option:
+        else:
+            result += M.write_layout((self.nb_q, 2),
+                                     [14, 5],
+                                     [self.questions_list[i].\
+                                        to_str(ex_or_answers)\
+                                        for i in range(self.q_nb)
+                                     ],
+                                     borders='all')
+
+        return result
 
 
 
