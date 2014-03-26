@@ -184,12 +184,15 @@ class X_MentalCalculation(X_Structure):
 
         # default tabular option:
         else:
+            q = [self.questions_list[i].to_str('exc') for i in range(self.q_nb)]
+            a = [self.questions_list[i].to_str('ans') for i in range(self.q_nb)]\
+                if ex_or_answers == 'ans' else [" " for i in range(self.q_nb)]
+
+            content = [item for pair in zip(q, a) for item in pair]
+
             result += M.write_layout((self.nb_q, 2),
                                      [14, 5],
-                                     [self.questions_list[i].\
-                                        to_str(ex_or_answers)\
-                                        for i in range(self.q_nb)
-                                     ],
+                                     content,
                                      borders='all')
 
         return result
