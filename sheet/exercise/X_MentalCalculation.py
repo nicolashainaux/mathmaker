@@ -180,7 +180,16 @@ class X_MentalCalculation(X_Structure):
         result = ""
 
         if self.slideshow:
+            result += M.write_frame("", frame='start_frame')
+            for i in range(self.q_nb):
+                result += M.write_frame(self.questions_list[i].to_str('exc'),
+                                    timing=self.questions_list[i].transduration)
 
+            result += M.write_frame("", frame='middle_frame')
+            for i in range(self.q_nb):
+                content = _
+                result += M.write_frame(self.questions_list[i].to_str('ans'),
+                                        timing=0)
 
         # default tabular option:
         else:
@@ -188,7 +197,7 @@ class X_MentalCalculation(X_Structure):
             a = [self.questions_list[i].to_str('ans') for i in range(self.q_nb)]\
                 if ex_or_answers == 'ans' else [" " for i in range(self.q_nb)]
 
-            content = [item for pair in zip(q, a) for item in pair]
+            content = [elt for pair in zip(q, a) for elt in pair]
 
             result += M.write_layout((self.nb_q, 2),
                                      [14, 5],
