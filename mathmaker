@@ -52,6 +52,13 @@ def main():
                            + " Default value is configured in " \
                            + software.NAME + "." + software.CFG_FILE_SUFFIX)
 
+    parser.add_option("-F", "--file",
+                      action="store",
+                      dest="filename",
+                      default=None,
+                      metavar="FILENAME",
+                      help="use FILENAME as sheet file")
+
     (options, args) = parser.parse_args()
 
     path_to_euktoeps = cfg.get_value_from_file("PATHS", "EUKTOEPS")
@@ -159,7 +166,11 @@ complete." % {'software_ref' : software.NAME} + "\n")
 
         sys.exit(2)
 
-    sh = sheet.AVAILABLE[args[0]][0](M);
+    if options.filename != None:
+        sh = sheet.AVAILABLE[args[0]][0](M, filename=options.filename);
+    else:
+        sh = sheet.AVAILABLE[args[0]][0](M)
+
     M.write(str(sh))
 
 
