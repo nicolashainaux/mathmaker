@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib.common.cst import YES
+from lib.common import default
 
 import machine
 from . import exercise
@@ -69,15 +70,15 @@ class MentalCalculation(S_Structure):
         self.text = ""
         self.answers_title = ""
 
-        self.slideshow = False
+        slideshow_or_tabular = 'slideshow' if 'slideshow' in options \
+                                              and options['slideshow'] in YES \
+                                           else 'tabular'
 
-        if 'slideshow' in options and options['slideshow'] in YES:
-            self.slideshow = True
-
-
+        mc_mm_file = options['filename'] if 'filename' in options \
+                                         else default.MC_MM_FILE
 
         ex = exercise.X_MentalCalculation(self.machine,
-                                          x_kind='slideshow' if self.slideshow \
-                                                             else 'tabular',
-                                          number_of_questions=1)
+                                          x_kind=slideshow_or_tabular,
+                                          filename=mc_mm_file
+                                         )
         self.exercises_list.append(ex)
