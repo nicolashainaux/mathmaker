@@ -186,9 +186,12 @@ class X_MentalCalculation(X_Structure):
                                     timing=self.questions_list[i].transduration)
 
             result += M.write_frame("", frame='middle_frame')
+
             for i in range(self.q_nb):
-                content = _
-                result += M.write_frame(self.questions_list[i].to_str('ans'),
+                result += M.write_frame(_("Question:") \
+                                        + self.questions_list[i].to_str('exc')\
+                                        + _("Answer:") \
+                                        + self.questions_list[i].to_str('ans'),
                                         timing=0)
 
         # default tabular option:
