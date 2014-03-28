@@ -57,7 +57,16 @@ def main():
                       dest="filename",
                       default=None,
                       metavar="FILENAME",
-                      help="use FILENAME as sheet file")
+                      help="use FILENAME as sheet file. Only works for mental"\
+                           + " calculation sheets, so far")
+
+        parser.add_option("--slideshow",
+                      action="store",
+                      dest="slideshow",
+                      default=False,
+                      metavar="SLIDESHOW",
+                      help="creates the mental calculation sheet as a "\
+                           + "slideshow instead of a tabular")
 
     (options, args) = parser.parse_args()
 
@@ -167,7 +176,9 @@ complete." % {'software_ref' : software.NAME} + "\n")
         sys.exit(2)
 
     if options.filename != None:
-        sh = sheet.AVAILABLE[args[0]][0](M, filename=options.filename);
+        sh = sheet.AVAILABLE[args[0]][0](M,
+                                         filename=options.filename,
+                                         slideshow=options.slideshow);
     else:
         sh = sheet.AVAILABLE[args[0]][0](M)
 
