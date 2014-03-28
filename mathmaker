@@ -60,13 +60,13 @@ def main():
                       help="use FILENAME as sheet file. Only works for mental"\
                            + " calculation sheets, so far")
 
-        parser.add_option("--slideshow",
-                      action="store",
-                      dest="slideshow",
-                      default=False,
-                      metavar="SLIDESHOW",
-                      help="creates the mental calculation sheet as a "\
-                           + "slideshow instead of a tabular")
+    parser.add_option("--slideshow",
+                  action="store",
+                  dest="slideshow",
+                  default=False,
+                  metavar="SLIDESHOW",
+                  help="creates the mental calculation sheet as a "\
+                       + "slideshow instead of a tabular")
 
     (options, args) = parser.parse_args()
 
