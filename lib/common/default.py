@@ -22,6 +22,7 @@
 
 from . import cfg
 import locale
+import os, sys
 
 LANGUAGE = cfg.get_value_from_file("LOCALES", "LANGUAGE")
 ENCODING = cfg.get_value_from_file("LOCALES", "ENCODING")
@@ -32,6 +33,9 @@ except:
     locale.setlocale(locale.LC_ALL, '')
 
 #DECIMAL_POINT = str(locale.localeconv()['decimal_point'])
+
+MC_MM_FILE = os.path.abspath(os.path.dirname(sys.argv[0])) \
+           + "/sheet/default_mental_calculation.mm"
 
 NUMBER_OF_QUESTIONS = 6
 
