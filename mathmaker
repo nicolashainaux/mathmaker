@@ -55,18 +55,10 @@ def main():
     parser.add_option("-F", "--file",
                       action="store",
                       dest="filename",
-                      default=None,
+                      default=default.MC_MM_FILE,
                       metavar="FILENAME",
                       help="use FILENAME as sheet file. Only works for mental"\
                            + " calculation sheets, so far")
-
-    parser.add_option("--slideshow",
-                      action="store",
-                      dest="slideshow",
-                      default=False,
-                      metavar="SLIDESHOW",
-                      help="creates the mental calculation sheet as a "\
-                           + "slideshow instead of a tabular")
 
     (options, args) = parser.parse_args()
 
@@ -177,8 +169,7 @@ complete." % {'software_ref' : software.NAME} + "\n")
 
     if options.filename != None:
         sh = sheet.AVAILABLE[args[0]][0](M,
-                                         filename=options.filename,
-                                         slideshow=options.slideshow);
+                                         filename=options.filename);
     else:
         sh = sheet.AVAILABLE[args[0]][0](M)
 

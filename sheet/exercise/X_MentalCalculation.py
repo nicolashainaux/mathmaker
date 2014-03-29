@@ -32,6 +32,8 @@ AVAILABLE_X_KIND_VALUES = \
      'slideshow' : 'default'
     }
 
+MAX_NB_OF_QUESTIONS = 40
+
 X_LAYOUT_UNIT = "cm"
 # ----------------------  lines_nb    col_widths   questions
 X_LAYOUTS = {'default' :
@@ -66,17 +68,22 @@ def get_q_kinds_from_file(file_name):
     # will be transformed into:
     # [{'multiplication', 'direct'}, 'table_2-9', 4]
 
+    x_kind = 'tabular'
+
     for line in f:
-        # this will get the <q_kind> set:
-        qk = set(shlex.split(line[0:line.find(':')]))
-        # this will get the <q_subkind> str:
-        qs = line[line.find(':')+1:line.rfind(':')].strip()
-        # this will get the number at the end
-        qn = int(line[line.rfind(':')+1:len(line)])
+        if line == 'slideshow':
+            x_kind = 'slideshow'
+        else:
+            # this will get the <q_kind> set:
+            qk = set(shlex.split(line[0:line.find(':')]))
+            # this will get the <q_subkind> str:
+            qs = line[line.find(':')+1:line.rfind(':')].strip()
+            # this will get the number at the end
+            qn = int(line[line.rfind(':')+1:len(line)])
 
-        result += [[qk, qs, qn]]
+            result += [[qk, qs, qn]]
 
-    return result
+    return (x_kind, result)
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -124,6 +131,11 @@ class X_MentalCalculation(X_Structure):
     #   @return One instance of exercise.Model
     def __init__(self, embedded_machine, x_kind='default_nothing', **options):
         self.derived = True
+        mc_mm_file = options['filename'] if 'filename' in options \
+                                         else default.MC_MM_FILE
+
+        (x_kind, q_list) = get_q_kinds_from_file(mc_mm_file)
+
         X_Structure.__init__(self, embedded_machine,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                              X_LAYOUT_UNIT, **options)
@@ -141,7 +153,7 @@ class X_MentalCalculation(X_Structure):
                      'ans' : ""
                     }
 
-        # HERE: get the list of questions' kinds with get_q_kinds_from_file()
+        # HERE: use q_list, got with get_q_kinds_from_file()
         # check if the sum of qn is not more than an arbitrary max limit
         # defined at the beginning of the file (40)
         # then write the correct loop to append the questions to
@@ -150,13 +162,30 @@ class X_MentalCalculation(X_Structure):
         # 'table_11'|'table_15'etc.'s "gauge" should be managed here too
         # also, self.q_nb should be set here
 
+        #q_box = []
+
+        #for i in range(len(q_list)):
+        #    for j in range(q_list[i][2]):
+        #        q_box.append(q_list[i][0:2])
+
+        q_box = [elt[0:2] for j in range(elt[2]) for elt in q_list]
+
+        self.q_nb = len(q_box)
+
+        # to be sure the number of questions doesn't exceed the MAX number
+        # authorized
+        while len(q_box) > MAX_NB_OF_QUESTIONS:
+            randomly.pop(q_box)
+
         for i in range(self.q_nb):
             self.questions_list.append(                                   \
                          default_question(self.machine,
-                                    q_kind=self.x_subkind,
-                                    expression_number=i+self.start_number,
-                                    **options)
-                                          )
+                                          q_kind=,
+                                          q_subkind=,
+                                          numbers_to_use=,
+                                          **options
+                                         )
+                                      )
 
 
 

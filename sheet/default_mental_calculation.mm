@@ -1,3 +1,4 @@
+tabular
 multiplication direct : table_2-9 : 4
 multiplication direct : table_15 : 1
 multiplication direct : table_25 : 1

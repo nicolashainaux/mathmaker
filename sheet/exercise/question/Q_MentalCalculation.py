@@ -27,11 +27,11 @@ from core.base_calculus import *
 
 # The matching number indicates how many different questions can be asked
 # in the theme
-AVAILABLE_NUMBERS = {'table_2-9' : 36,
-                     'table_11' : 28, # 11×n where 10 < n < 100, no carry over
-                     'table_15' : 6, # 15×n where 2 <= n <= 6
-                     'table_25' : 6 # 25×n where 2 <= n <= 6
-                    }
+GAUGES = {'table_2-9' : 36,
+          'table_11' : 28, # 11×n where 10 < n < 100, no carry over
+          'table_15' : 6, # 15×n where 2 <= n <= 6
+          'table_25' : 6 # 25×n where 2 <= n <= 6
+         }
 
 AVAILABLE_Q_KIND_VALUES = \
     {{'multiplication', 'direct'} : ['table_2-9',

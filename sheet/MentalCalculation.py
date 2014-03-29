@@ -70,15 +70,5 @@ class MentalCalculation(S_Structure):
         self.text = ""
         self.answers_title = ""
 
-        slideshow_or_tabular = 'slideshow' if 'slideshow' in options \
-                                              and options['slideshow'] in YES \
-                                           else 'tabular'
-
-        mc_mm_file = options['filename'] if 'filename' in options \
-                                         else default.MC_MM_FILE
-
-        ex = exercise.X_MentalCalculation(self.machine,
-                                          x_kind=slideshow_or_tabular,
-                                          filename=mc_mm_file
-                                         )
+        ex = exercise.X_MentalCalculation(self.machine, **options)
         self.exercises_list.append(ex)
