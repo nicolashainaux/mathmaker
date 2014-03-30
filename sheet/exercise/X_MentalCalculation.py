@@ -73,6 +73,8 @@ def get_q_kinds_from_file(file_name):
     for line in f:
         if line == 'slideshow':
             x_kind = 'slideshow'
+        elif line == 'tabular':
+            pass
         else:
             # this will get the <q_kind> set:
             qk = set(shlex.split(line[0:line.find(':')]))
@@ -153,36 +155,42 @@ class X_MentalCalculation(X_Structure):
                      'ans' : ""
                     }
 
-        # HERE: use q_list, got with get_q_kinds_from_file()
-        # check if the sum of qn is not more than an arbitrary max limit
-        # defined at the beginning of the file (40)
-        # then write the correct loop to append the questions to
-        # self.questions_list, each question should be added qn times,
-        # the order of questions should be randomized and the 'table_2-9'|
-        # 'table_11'|'table_15'etc.'s "gauge" should be managed here too
-        # also, self.q_nb should be set here
-
+        # The next following lines are replaced by the comprehension below
+        # delete them when the tests show the used comprehension list is fine
         #q_box = []
-
         #for i in range(len(q_list)):
         #    for j in range(q_list[i][2]):
         #        q_box.append(q_list[i][0:2])
 
         q_box = [elt[0:2] for j in range(elt[2]) for elt in q_list]
 
-        self.q_nb = len(q_box)
+        # To be sure the number of questions doesn't exceed the MAX number
+        # authorized. Maybe raise a warning in stderr if len(q_box) is too high?
+        self.q_nb = len(q_box) if len(q_box) <= MAX_NB_OF_QUESTIONS \
+                               else MAX_NB_OF_QUESTIONS
 
-        # to be sure the number of questions doesn't exceed the MAX number
-        # authorized
-        while len(q_box) > MAX_NB_OF_QUESTIONS:
-            randomly.pop(q_box)
+        # Now create a reservoir of numbers.
+        # For instance: {'table_2-9':[the complete list of matching tuples],
+        #                'table_11':[the complete list of matching tuples] etc.}
+        nb_reservoir = dict()
+        for q in q_box:
+            if not q[1] in nb_reservoir:
+                nb_reservoir[q[1]] = question.generate_numbers(q[0], q[1])
 
         for i in range(self.q_nb):
+            # randomly get a question's kind and subkind
+            q = randomly.pop(q_box)
+            # randomly pick a numbers tuple from the reservoir of matching kind
+            nb = randomly.pop(nb_reservoir[q[1]])
+            # if this kind of reservoir is empty, then refill it
+            if len(nb_reservoir[q[1]]) == 0:
+                nb_reservoir[q[1]] = question.generate_numbers(q[0], q[1])
+
             self.questions_list.append(                                   \
                          default_question(self.machine,
-                                          q_kind=,
-                                          q_subkind=,
-                                          numbers_to_use=,
+                                          q_kind=q[0],
+                                          q_subkind=q[1],
+                                          numbers_to_use=nb,
                                           **options
                                          )
                                       )

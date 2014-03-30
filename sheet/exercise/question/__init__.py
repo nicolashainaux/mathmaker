@@ -37,6 +37,7 @@ from . import Q_Factorization
 from . import Q_MentalCalculation
 from . import Q_RightTriangle
 
+
 Q_Structure = Q_Structure.Q_Structure
 
 Q_AlgebraExpressionReduction = \
@@ -46,5 +47,6 @@ Q_AlgebraExpressionExpansion = \
 Q_Calculation = Q_Calculation.Q_Calculation
 Q_Equation = Q_Equation.Q_Equation
 Q_Factorization = Q_Factorization.Q_Factorization
+generate_numbers = Q_MentalCalculation.generate_numbers()
 Q_MentalCalculation = Q_MentalCalculation.Q_MentalCalculation
 Q_RightTriangle = Q_RightTriangle.Q_RightTriangle

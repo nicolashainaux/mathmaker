@@ -62,6 +62,52 @@ AVAILABLE_Q_KIND_VALUES = \
 
 
 
+# --------------------------------------------------------------------------
+##
+#   @brief Returns a list of numbers of the given kind
+def generate_numbers(kind, subkind):
+    if not kind in AVAILABLE_Q_KIND_VALUES:
+        raise error.OutOfRangeArgument(kind,
+                                       str(AVAILABLE_Q_KIND_VALUES.keys()))
+
+    if not subkind in AVAILABLE_Q_KIND_VALUES[kind]:
+        raise error.OutOfRangeArgument(subkind,
+                                       str(AVAILABLE_Q_KIND_VALUES[kind]))
+
+    if subkind == 'table_2-9':
+        return [(2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
+                (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
+                (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
+                (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
+                (6, 6), (6, 7), (6, 8), (6, 9),
+                (7, 7), (7, 8), (7, 9),
+                (8, 8), (8, 9),
+                (9, 9)]
+
+    elif subkind == 'table_11':
+        return [(11, 11), (11, 12), (11, 13), (11, 14), (11, 15), (11, 16),
+                (11, 17), (11, 18),
+                (11, 21), (11, 22), (11, 23), (11, 24), (11, 25), (11, 26),
+                (11, 27),
+                (11, 31), (11, 32), (11, 33), (11, 34), (11, 35), (11, 36),
+                (11, 41), (11, 42), (11, 43), (11, 44), (11, 45),
+                (11, 51), (11, 52), (11, 53), (11, 54),
+                (11, 61), (11, 62), (11, 63),
+                (11, 71), (11, 72),
+                (11, 81)
+               ]
+
+    elif subkind == 'table_15':
+        return[(15, 2), (15,3), (15, 4), (15,5), (15, 6)]
+
+    elif subkind == 'table_25':
+        return[(25, 2), (25,3), (25, 4), (25,5), (25, 6)]
+
+
+
+
+
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -100,14 +146,7 @@ class Q_MentalCalculation(Q_Structure):
             # like (3, 2) which would be the same as (2, 3)
             # pairs = [(i, j) for i in xrange(2, 10) for j in xrange(i, 10)]
             # We put off 2×2 and 2×3
-            pairs = [(2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
-                     (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
-                     (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
-                     (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
-                     (6, 6), (6, 7), (6, 8), (6, 9),
-                     (7, 7), (7, 8), (7, 9),
-                     (8, 8), (8, 9),
-                     (9, 9)]
+            pairs =
 
             (self.calculus_list, self.results_list) = ten_products(pairs)
 
@@ -237,6 +276,12 @@ class Q_MentalCalculation(Q_Structure):
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
         pass
+
+
+
+
+
+
 
 
 
