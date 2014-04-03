@@ -27,7 +27,7 @@ def mix(numbers_to_use):
 
 def q(embedded_machine, numbers):
     return _("Calculate:") + " " + Product([numbers[0],
-                                            numbers[1]).into_str()
+                                            numbers[1]]).into_str()
 
 def a(embedded_machine, numbers):
-    return str(Product([numbers[0], numbers[1]).evaluate())
+    return str(Product([numbers[0], numbers[1]]).evaluate())

@@ -28,42 +28,42 @@ from . import mc_modules
 
 
 AVAILABLE_Q_KIND_VALUES = \
-    {{'multiplication', 'direct'} :\
+    {('multiplication', 'direct') :\
             ['table_2-9',
              'table_11',  # 11×n where 10 < n < 100, no carry over
              'table_15',  # 15×n where 2 <= n <= 6
-             'table_25'], # 25×n where 2 <= n <= 6
-     {'multiplication', 'reversed'} : ['table_2-9'],
-     {'multiplication', 'decimal'} : ['table_2-9'],
-     {'multiplication', 'decimal_1'} : ['table_2-9'],
-     {'multiplication', 'decimal_2'} : ['table_2-9'],
-     {'division', 'direct'} : ['table_2-9'],
-     {'division', 'decimal_1'} : ['table_2-9'],
-     {'area', 'rectangle', 'with_drawing'} : ['table_2-9',
-                                              'table_11',
-                                              'table_15',
-                                              'table_25'],
-     {'area', 'rectangle', 'without_drawing'} : ['table_2-9',
-                                                 'table_11',
-                                                 'table_15',
-                                                 'table_25'],
-     {'area', 'right_triangle'} : ['table_2-9',
-                                   'table_11',
-                                   'table_15',
-                                   'table_25']
+             'table_25'] # 25×n where 2 <= n <= 6
+#     ('multiplication', 'reversed') : ['table_2-9'],
+#     ('multiplication', 'decimal') : ['table_2-9'],
+#     ('multiplication', 'decimal_1') : ['table_2-9'],
+#     ('multiplication', 'decimal_2') : ['table_2-9'],
+#     ('division', 'direct') : ['table_2-9'],
+#     ('division', 'decimal_1') : ['table_2-9'],
+#     ('area', 'rectangle', 'with_drawing') : ['table_2-9',
+#                                              'table_11',
+#                                              'table_15',
+#                                              'table_25'],
+#     ('area', 'rectangle', 'without_drawing') : ['table_2-9',
+#                                                 'table_11',
+#                                                 'table_15',
+#                                                 'table_25'],
+#     ('area', 'right_triangle') : ['table_2-9',
+#                                   'table_11',
+#                                   'table_15',
+#                                   'table_25']
     }
 
 MODULES =  \
-    {{'multiplication', 'direct'} : multi_dir,
-     {'multiplication', 'reversed'} : multi_rev,
-     {'multiplication', 'decimal'} : multi_deci,
-     {'multiplication', 'decimal_1'} : multi_deci1,
-     {'multiplication', 'decimal_2'} : multi_deci2,
-     {'division', 'direct'} : divi_dir,
-     {'division', 'decimal_1'} : divi_deci1,
-     {'area', 'rectangle', 'with_drawing'} : area_rect_dr,
-     {'area', 'rectangle', 'without_drawing'} : area_rect_no_dr,
-     {'area', 'right_triangle'} : area_right_tri
+    {('multiplication', 'direct') : mc_modules.multi_dir
+#     ('multiplication', 'reversed') : mc_modules.multi_rev,
+#     ('multiplication', 'decimal') : mc_modules.multi_deci,
+#     ('multiplication', 'decimal_1') : mc_modules.multi_deci1,
+#     ('multiplication', 'decimal_2') : mc_modules.multi_deci2,
+#     ('division', 'direct') : mc_modules.divi_dir,
+#     ('division', 'decimal_1') : mc_modules.divi_deci1,
+#     ('area', 'rectangle', 'with_drawing') : mc_modules.area_rect_dr,
+#     ('area', 'rectangle', 'without_drawing') : mc_modules.area_rect_no_dr,
+#     ('area', 'right_triangle') : mc_modules.area_right_tri
     }
 
 

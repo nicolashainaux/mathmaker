@@ -47,6 +47,6 @@ Q_AlgebraExpressionExpansion = \
 Q_Calculation = Q_Calculation.Q_Calculation
 Q_Equation = Q_Equation.Q_Equation
 Q_Factorization = Q_Factorization.Q_Factorization
-generate_numbers = Q_MentalCalculation.generate_numbers()
+generate_numbers = Q_MentalCalculation.generate_numbers
 Q_MentalCalculation = Q_MentalCalculation.Q_MentalCalculation
 Q_RightTriangle = Q_RightTriangle.Q_RightTriangle
