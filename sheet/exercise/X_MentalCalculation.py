@@ -71,13 +71,15 @@ def get_q_kinds_from_file(file_name):
     x_kind = 'tabular'
 
     for line in f:
-        if line == 'slideshow':
+        if line == 'slideshow\n':
             x_kind = 'slideshow'
-        elif line == 'tabular':
+        elif line == 'tabular\n':
+            pass
+        elif line[0] == '#':
             pass
         else:
             # this will get the <q_kind> set:
-            qk = set(shlex.split(line[0:line.find(':')]))
+            qk = tuple(shlex.split(line[0:line.find(':')]))
             # this will get the <q_subkind> str:
             qs = line[line.find(':')+1:line.rfind(':')].strip()
             # this will get the number at the end
@@ -162,6 +164,10 @@ class X_MentalCalculation(X_Structure):
         #    for j in range(q_list[i][2]):
         #        q_box.append(q_list[i][0:2])
 
+        #for elt in q_list:
+        #    print(elt)
+
+        elt = q_list[0]
         q_box = [elt[0:2] for j in range(elt[2]) for elt in q_list]
 
         # To be sure the number of questions doesn't exceed the MAX number
@@ -194,8 +200,6 @@ class X_MentalCalculation(X_Structure):
                                           **options
                                          )
                                       )
-
-
 
 
 
@@ -239,8 +243,8 @@ class X_MentalCalculation(X_Structure):
 
             content = [elt for pair in zip(q, a) for elt in pair]
 
-            result += M.write_layout((self.nb_q, 2),
-                                     [14, 5],
+            result += M.write_layout((self.q_nb, 2),
+                                     [12, 4],
                                      content,
                                      borders='all')
 

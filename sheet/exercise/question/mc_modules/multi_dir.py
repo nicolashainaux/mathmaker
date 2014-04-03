@@ -23,11 +23,17 @@
 from core.base_calculus import *
 
 def mix(numbers_to_use):
-    return (randomly.pop(numbers_to_use), randomly.pop(numbers_to_use))
+    nb_list = list(numbers_to_use)
+    return (randomly.pop(nb_list),
+            randomly.pop(nb_list)
+           )
 
-def q(embedded_machine, numbers):
-    return _("Calculate:") + " " + Product([numbers[0],
-                                            numbers[1]]).into_str()
+def q(M, numbers):
+    return _("Calculate:") + " "\
+           + M.write_math_style2(Product([numbers[0],
+                                          numbers[1]]).into_str(\
+                                                   force_expression_begins=True)
+                                          )
 
-def a(embedded_machine, numbers):
-    return str(Product([numbers[0], numbers[1]]).evaluate())
+def a(M, numbers):
+    return M.write_math_style2(str(Product([numbers[0], numbers[1]]).evaluate()))

@@ -276,22 +276,22 @@ class S_Structure(object):
             result += self.machine.write_document_ends()
 
         elif self.layout_type == 'mental':
-            if self.slideshow:
-                result += self.machine.write_document_header(slideshow=True)
-                result += self.machine.write_document_begins()
-                result += self.sheet_header_to_str()
-                result += self.sheet_title_to_str()
-                result += self.sheet_text_to_str()
-                result += self.texts_to_str('exc', 0)
-                result += self.machine.write_document_ends()
-            else:
-                result += self.machine.write_document_header()
-                result += self.machine.write_document_begins()
-                result += self.sheet_header_to_str()
-                result += self.sheet_title_to_str()
-                result += self.sheet_text_to_str()
-                result += self.texts_to_str('exc', 0)
-                result += self.machine.write_document_ends()
+            #if self.slideshow:
+            #    result += self.machine.write_document_header(slideshow=True)
+            #    result += self.machine.write_document_begins()
+            #    result += self.sheet_header_to_str()
+            #    result += self.sheet_title_to_str()
+            #    result += self.sheet_text_to_str()
+            #    result += self.texts_to_str('exc', 0)
+            #    result += self.machine.write_document_ends()
+            #else:
+            result += self.machine.write_document_header()
+            result += self.machine.write_document_begins()
+            result += self.sheet_header_to_str()
+            result += self.sheet_title_to_str()
+            result += self.sheet_text_to_str()
+            result += self.texts_to_str('exc', 0)
+            result += self.machine.write_document_ends()
 
         else:
             raise error.OutOfRangeArgument(self.layout_type,

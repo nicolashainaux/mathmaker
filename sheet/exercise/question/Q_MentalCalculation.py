@@ -106,10 +106,10 @@ def generate_numbers(kind, subkind):
                ]
 
     elif subkind == 'table_15':
-        return[(15, 2), (15,3), (15, 4), (15,5), (15, 6)]
+        return [(15, 2), (15,3), (15, 4), (15,5), (15, 6)]
 
     elif subkind == 'table_25':
-        return[(25, 2), (25,3), (25, 4), (25,5), (25, 6)]
+        return [(25, 2), (25,3), (25, 4), (25,5), (25, 6)]
 
 
 
@@ -146,7 +146,7 @@ class Q_MentalCalculation(Q_Structure):
         options = self.options
 
         # module
-        m = mc_modules.MODULES[self.q_kind]
+        m = MODULES[self.q_kind]
 
         self.numbers_to_use = m.mix(options['numbers_to_use'])
         self.q_text = m.q(embedded_machine, self.numbers_to_use)
