@@ -68,7 +68,7 @@ class MentalCalculation(S_Structure):
         self.title = _("Mental calculation:")
         self.subtitle = ""
         self.text = ""
-        self.answers_title = ""
+        self.answers_title = _("Answers:")
 
         ex = exercise.X_MentalCalculation(self.machine, **options)
         self.exercises_list.append(ex)

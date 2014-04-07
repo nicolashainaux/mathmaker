@@ -164,11 +164,7 @@ class X_MentalCalculation(X_Structure):
         #    for j in range(q_list[i][2]):
         #        q_box.append(q_list[i][0:2])
 
-        #for elt in q_list:
-        #    print(elt)
-
-        elt = q_list[0]
-        q_box = [elt[0:2] for j in range(elt[2]) for elt in q_list]
+        q_box = [elt[0:2] for elt in q_list for j in range(elt[2])]
 
         # To be sure the number of questions doesn't exceed the MAX number
         # authorized. Maybe raise a warning in stderr if len(q_box) is too high?
@@ -246,7 +242,8 @@ class X_MentalCalculation(X_Structure):
             result += M.write_layout((self.q_nb, 2),
                                      [12, 4],
                                      content,
-                                     borders='all')
+                                     borders='all',
+                                     center='yes')
 
         return result
 

@@ -291,6 +291,9 @@ class S_Structure(object):
             result += self.sheet_title_to_str()
             result += self.sheet_text_to_str()
             result += self.texts_to_str('exc', 0)
+            result += self.machine.write_jump_to_next_page()
+            result += self.answers_title_to_str()
+            result += self.texts_to_str('ans', 0)
             result += self.machine.write_document_ends()
 
         else:
