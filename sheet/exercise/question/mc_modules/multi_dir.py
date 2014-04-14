@@ -22,18 +22,24 @@
 
 from core.base_calculus import *
 
-def mix(numbers_to_use):
-    nb_list = list(numbers_to_use)
-    return (randomly.pop(nb_list),
-            randomly.pop(nb_list)
-           )
 
-def q(M, numbers):
-    return _("Calculate:") + " "\
-           + M.write_math_style2(Product([numbers[0],
-                                          numbers[1]]).into_str(\
-                                                   force_expression_begins=True)
-                                          )
+class sub_object(object):
 
-def a(M, numbers):
-    return M.write_math_style2(str(Product([numbers[0], numbers[1]]).evaluate()))
+    def __init__(self, numbers_to_use):
+        nb_list = list(numbers_to_use)
+        self.nb1 = randomly.pop(nb_list)
+        self.nb2 = randomly.pop(nb_list)
+
+    def q(self, M):
+        return _("Calculate:") + " "\
+               + M.write_math_style2(Product([self.nb1,
+                                              self.nb2]).into_str(\
+                                                    force_expression_begins=True
+                                                                 )
+                                              )
+
+    def a(self, M):
+        return M.write_math_style2(str(Product([self.nb1,
+                                                self.nb2]).evaluate()
+                                      )
+                                  )

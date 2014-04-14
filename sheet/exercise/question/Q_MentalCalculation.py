@@ -150,11 +150,10 @@ class Q_MentalCalculation(Q_Structure):
         options = self.options
 
         # module
-        m = MODULES[self.q_kind]
+        m = MODULES[self.q_kind].sub_object(options['numbers_to_use'])
 
-        self.numbers_to_use = m.mix(options['numbers_to_use'])
-        self.q_text = m.q(embedded_machine, self.numbers_to_use)
-        self.q_answer = m.a(embedded_machine, self.numbers_to_use)
+        self.q_text = m.q(embedded_machine)
+        self.q_answer = m.a(embedded_machine)
 
 
 
