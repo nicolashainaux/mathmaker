@@ -243,7 +243,8 @@ class X_MentalCalculation(X_Structure):
                                      [12, 4],
                                      content,
                                      borders='all',
-                                     center='yes')
+                                     center='yes',
+                                     center_vertically='yes')
 
         return result
 

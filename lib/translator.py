@@ -63,6 +63,11 @@ def create_table(size, content, **options):
             center = ">{\centering}"
             new_line_sep = "\\tabularnewline" + "\n"
 
+        cell_fmt = "p{"
+
+        if 'center_vertically' in options:
+            cell_fmt = "m{"
+
         if 'borders' in options and options['borders'] == 'all':
             v_border = "|"
             h_border = "\\hline \n"
@@ -81,7 +86,7 @@ def create_table(size, content, **options):
         for i in range(len(col_fmt)):
             t = col_fmt[i]
             if is_.a_number(col_fmt[i]):
-                t = "p{" + str(col_fmt[i]) + " " + str(length_unit) + "}"
+                t = cell_fmt + str(col_fmt[i]) + " " + str(length_unit) + "}"
 
             tabular_format += v_border \
                               + center \
