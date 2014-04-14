@@ -28,3 +28,4 @@
 # @brief All question objects should be "declared" here.
 
 from . import multi_dir
+from . import multi_rev

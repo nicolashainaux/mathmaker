@@ -36,8 +36,8 @@ AVAILABLE_Q_KIND_VALUES = \
     { frozenset(('multiplication', 'direct')) : ['table_2-9',
                                                  'table_11',
                                                  'table_15',
-                                                 'table_25']
-#     frozenset(('multiplication', 'reversed')) : ['table_2-9'],
+                                                 'table_25'],
+      frozenset(('multiplication', 'reversed')) : ['table_2-9']
 #     frozenset(('multiplication', 'decimal')) : ['table_2-9'],
 #     frozenset(('multiplication', 'decimal_1')) : ['table_2-9'],
 #     frozenset(('multiplication', 'decimal_2')) : ['table_2-9'],
@@ -58,8 +58,8 @@ AVAILABLE_Q_KIND_VALUES = \
     }
 
 MODULES =  \
-    { frozenset(('multiplication', 'direct')) : mc_modules.multi_dir
-#     ('multiplication', 'reversed') : mc_modules.multi_rev,
+    { frozenset(('multiplication', 'direct')) : mc_modules.multi_dir,
+      frozenset(('multiplication', 'reversed')) : mc_modules.multi_rev
 #     ('multiplication', 'decimal') : mc_modules.multi_deci,
 #     ('multiplication', 'decimal_1') : mc_modules.multi_deci1,
 #     ('multiplication', 'decimal_2') : mc_modules.multi_deci2,
