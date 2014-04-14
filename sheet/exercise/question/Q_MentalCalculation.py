@@ -27,34 +27,38 @@ from . import mc_modules
 #from core.base_calculus import *
 
 
+# 'table_2-9'
+# 'table_11' --> 11×n where 10 < n < 100, no carry over
+# 'table_15' --> 15×n where 2 <= n <= 6
+# 'table_25' --> 25×n where 2 <= n <= 6
+
 AVAILABLE_Q_KIND_VALUES = \
-    {('multiplication', 'direct') :\
-            ['table_2-9',
-             'table_11',  # 11×n where 10 < n < 100, no carry over
-             'table_15',  # 15×n where 2 <= n <= 6
-             'table_25'] # 25×n where 2 <= n <= 6
-#     ('multiplication', 'reversed') : ['table_2-9'],
-#     ('multiplication', 'decimal') : ['table_2-9'],
-#     ('multiplication', 'decimal_1') : ['table_2-9'],
-#     ('multiplication', 'decimal_2') : ['table_2-9'],
-#     ('division', 'direct') : ['table_2-9'],
-#     ('division', 'decimal_1') : ['table_2-9'],
-#     ('area', 'rectangle', 'with_drawing') : ['table_2-9',
+    { frozenset(('multiplication', 'direct')) : ['table_2-9',
+                                                 'table_11',
+                                                 'table_15',
+                                                 'table_25']
+#     frozenset(('multiplication', 'reversed')) : ['table_2-9'],
+#     frozenset(('multiplication', 'decimal')) : ['table_2-9'],
+#     frozenset(('multiplication', 'decimal_1')) : ['table_2-9'],
+#     frozenset(('multiplication', 'decimal_2')) : ['table_2-9'],
+#     frozenset(('division', 'direct')) : ['table_2-9'],
+#     frozenset(('division', 'decimal_1')) : ['table_2-9'],
+#     frozenset(('area', 'rectangle', 'with_drawing')) : ['table_2-9',
 #                                              'table_11',
 #                                              'table_15',
 #                                              'table_25'],
-#     ('area', 'rectangle', 'without_drawing') : ['table_2-9',
+#     frozenset(('area', 'rectangle', 'without_drawing')) : ['table_2-9',
 #                                                 'table_11',
 #                                                 'table_15',
 #                                                 'table_25'],
-#     ('area', 'right_triangle') : ['table_2-9',
+#     frozenset(('area', 'right_triangle')) : ['table_2-9',
 #                                   'table_11',
 #                                   'table_15',
 #                                   'table_25']
     }
 
 MODULES =  \
-    {('multiplication', 'direct') : mc_modules.multi_dir
+    { frozenset(('multiplication', 'direct')) : mc_modules.multi_dir
 #     ('multiplication', 'reversed') : mc_modules.multi_rev,
 #     ('multiplication', 'decimal') : mc_modules.multi_deci,
 #     ('multiplication', 'decimal_1') : mc_modules.multi_deci1,

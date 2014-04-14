@@ -79,7 +79,7 @@ def get_q_kinds_from_file(file_name):
             pass
         else:
             # this will get the <q_kind> set:
-            qk = tuple(shlex.split(line[0:line.find(':')]))
+            qk = frozenset(shlex.split(line[0:line.find(':')]))
             # this will get the <q_subkind> str:
             qs = line[line.find(':')+1:line.rfind(':')].strip()
             # this will get the number at the end
