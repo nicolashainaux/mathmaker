@@ -157,7 +157,8 @@ class X_MentalCalculation(X_Structure):
                      'ans' : ""
                     }
 
-        # Creation of the list of questions organized by type of nb :
+        # From q_list, creation of the list of questions organized
+        # by type of nb :
         q_dict = {}
 
         # In q_list, each element is like this:
@@ -170,11 +171,20 @@ class X_MentalCalculation(X_Structure):
             for n in range[q[2]]:
                 q_dict[q[1]].append(q[0])
 
+        # Now, q_dict is organized like this:
+        # {'table_2-9':[frozenset(('multiplication', 'direct')),
+        #               frozenset(('multiplication', 'direct')),
+        #               frozenset(('multiplication', 'direct')),
+        #               frozenset(('multiplication', 'direct'))],
+        #  'nb_type2':[q_type1, q_type1, q_type2,...],
+        #  'etc.'
+        # }
+
         # Now, generate the prioritary numbers (not implemented yet)
 
-        # Then, generate all other numbers
+        # Then, complete the nb_box list with all other numbers
         for q_type in list(q_dict.keys()):
-
+            pass
 
 
         # OTHER EXERCISES
