@@ -26,7 +26,7 @@ import sys
 # DATA RELATING TO THE SOFTWARE
 NAME = "mathmaker"
 NAME_PRINTABLE = "Mathmaker"
-VERSION = "0.4.2 (alpha)"
+VERSION = "0.5 (alpha)"
 LICENSE = "GNU GPL 3"
 AUTHOR = "Nicolas Hainaux <nico_h@users.sourceforge.net>"
 COPYRIGHT = "Copyright 2006-2014"
