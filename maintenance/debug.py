@@ -34,11 +34,11 @@ if ENABLED_STRING == "True" or ENABLED_STRING == "true":
     ENABLED = True
 
 into_str_in_item = False
-into_str_in_product = False
+into_str_in_product = True
 into_str_in_sum = False
 into_str_in_quotient = False
 requires_brackets_in_sum = False
-requires_inner_brackets_in_product = False
+requires_inner_brackets_in_product = True
 expand_and_reduce_next_step_sum = False
 expand_and_reduce_next_step_product = False
 expand_in_special_identity = False
@@ -60,6 +60,7 @@ product_is_reducible = True
 get_factors_list_product = True
 reduce__product = False
 evaluate_in_operation = False
+eq_in_item = True
 
 
 
@@ -73,7 +74,7 @@ evaluate_in_operation = False
 def write(provided_string, **options):
     if ENABLED:
         if len(options) == 0:
-            os.write(sdt_err_output, provided_string)
+            os.write(sdt_err_output, bytes(provided_string, 'utf-8'))
 
         elif 'case' in options and options['case'] == True:
-            os.write(sdt_err_output, provided_string)
+            os.write(sdt_err_output, bytes(provided_string, 'utf-8'))

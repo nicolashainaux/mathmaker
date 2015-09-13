@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
-from X_Structure import X_Structure
-import question
+from .X_Structure import X_Structure
+from . import question
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
@@ -100,7 +100,7 @@ class X_Calculation(X_Structure):
             if self.x_subkind == 'fraction_simplification':
                 #self.text = _("Simplify the following fractions :")
 
-                for i in xrange(int(self.q_nb/2)):
+                for i in range(int(self.q_nb // 2)):
                     q=question.Q_Calculation(self.machine,
                                            self.x_subkind,
                                            expression_number=i,
@@ -108,10 +108,10 @@ class X_Calculation(X_Structure):
 
                     self.questions_list.append(q)
 
-                for i in xrange(self.q_nb - int(self.q_nb/2)):
+                for i in range(self.q_nb - int(self.q_nb // 2)):
                     q=question.Q_Calculation(self.machine,
                                           self.x_subkind,
-                                          expression_number=i+int(self.q_nb/2),
+                                          expression_number=i+int(self.q_nb//2),
                                           with_ten_powers=0.3,
                                           **options)
 
@@ -124,7 +124,7 @@ class X_Calculation(X_Structure):
                 #self.text = _( \
                 #    "Calculate and give the result as a simplified fraction :")
 
-                for i in xrange(self.q_nb):
+                for i in range(self.q_nb):
                     q=question.Q_Calculation(self.machine,
                                            self.x_subkind,
                                            expression_number=i,

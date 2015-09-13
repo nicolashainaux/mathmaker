@@ -45,7 +45,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- [GEO] RIGHT TRIANGLE \n")
+        os.write(common.output, bytes("--- [GEO] RIGHT TRIANGLE \n", 'utf-8'))
 
     # Don't forget to uncomment the convenient lines above if a test
     # requires to use the locale module.
@@ -67,7 +67,7 @@ def action():
            "C = point(4, 3)"\
            "draw  (A.B.C)"\
            "  $\\rotatebox{0}{4 cm}$ A 0 - 7.5 deg 6.4"\
-           "  $\\rotatebox{-90}{3 cm}$ B 90 - 9 deg 4.8"\
+           "  $\\rotatebox{-90}{3 cm}$ B 90 - 9 deg 4.9"\
            "  $\\rotatebox{37}{5 cm}$ A 37 + 6.5 deg 8"\
            "end"\
            "label"\

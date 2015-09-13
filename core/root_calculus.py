@@ -26,7 +26,7 @@
 # @package core.root_calculus
 # @brief Mostly abstract classes for mathematical calculus objects.
 
-from base import *
+from .base import *
 from lib.common import alphabet
 from lib import is_
 from lib.maths_lib import *
@@ -228,8 +228,8 @@ class Calculable(Evaluable):
     def __iter__(self):
         return iter(self.get_iteration_list())
 
-    def next(self):
-        return self.get_iteration_list().next()
+    def __next__(self):
+        return next(self.get_iteration_list())
 
 
 
@@ -510,7 +510,6 @@ class Value(Signed):
 
         if type(arg) == float                                             \
             or type(arg) == int                                          \
-            or type(arg) == long                                        \
             or type(arg) == Decimal:
         #___
             self._raw_value = Decimal(str(arg))
@@ -763,17 +762,17 @@ class Value(Signed):
     # --------------------------------------------------------------------------
     ##
     #   @brief Compares two Values
-    #   @todo check if __cmp__ shouldn't return +1 if value of self > objct
+    #   @todo check if __eq__ shouldn't return +1 if value of self > objct
     #   @todo comparison directly with numbers... (see alphabetical_order_cmp)
-    #   @return -1|0 (i.e. they're equal)
-    def __cmp__(self, other_value):
+    #   @return True if they're equal
+    def __eq__(self, other_value):
         if not isinstance(other_value, Value):
-            return -1
+            return False
 
         if self.raw_value == other_value.raw_value:
-            return 0
+            return True
         else:
-            return -1
+            return False
 
 
 
@@ -785,6 +784,18 @@ class Value(Signed):
     #   @return 1
     def __len__(self):
         return 1
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Makes Values hashable (so, usable as dictionnary keys)
+    def __hash__(self):
+        return hash(str(self.sign) + str(self.raw_value) \
+                    + str(self.has_been_rounded) + str(self.unit)
+                   )
+
 
 
 
@@ -1014,7 +1025,6 @@ class Value(Signed):
     def is_numeric(self):
         if type(self.raw_value) == float                \
             or type(self.raw_value) == int              \
-            or type(self.raw_value) == long             \
             or type(self.raw_value) == Decimal:
         #___
             return True

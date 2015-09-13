@@ -34,7 +34,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- FRACTION SIMPLIFICATION\n")
+        os.write(common.output, bytes("--- FRACTION SIMPLIFICATION\n", 'utf-8'))
 
     fraction_92_76 = Fraction(('+', 92, 76))
     fraction_92_76_bis = Fraction(('+', 92, 76))

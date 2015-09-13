@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import core.base_calculus
-import error
+from . import error
 from decimal import Decimal
 
 
@@ -40,7 +40,7 @@ def reduce_literal_items_product(provided_list):
     if not isinstance(provided_list, list):
         raise error.UncompatibleType(provided_list, "A list")
 
-    for i in xrange(len(provided_list)):
+    for i in range(len(provided_list)):
         if isinstance(provided_list[i], core.base_calculus.Item):
             if provided_list[i].is_literal():
                 if not provided_list[i].raw_value in aux_dict:
@@ -233,7 +233,7 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
     n = 0
     N = len(literals_list)
     #collected_is= []
-    for i in xrange(len(literals_list)):
+    for i in range(len(literals_list)):
         #print "debug : literals_list[" + str(i) + "] = " + literals_list[i].dbg_str() + " is in subst_dict_copy ? " + str(literals_list[i] in subst_dict_copy) + "\n"
         #if i >= 1:
             #print "debug : checking the keys... "

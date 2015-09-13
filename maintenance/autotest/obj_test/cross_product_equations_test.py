@@ -42,7 +42,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- CROSS PRODUCT EQUATIONS\n")
+        os.write(common.output, bytes("--- CROSS PRODUCT EQUATIONS\n", 'utf-8'))
 
 
     e1 = CrossProductEquation((Item("AB"),    Item(3),

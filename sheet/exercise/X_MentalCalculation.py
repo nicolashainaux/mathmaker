@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
-from X_Structure import X_Structure
-import question
+from .X_Structure import X_Structure
+from . import question
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
@@ -107,7 +107,7 @@ class X_MentalCalculation(X_Structure):
                      'ans' : ""
                     }
 
-        for i in xrange(self.q_nb):
+        for i in range(self.q_nb):
             self.questions_list.append(                                   \
                          default_question(self.machine,
                                     q_kind=self.x_subkind,

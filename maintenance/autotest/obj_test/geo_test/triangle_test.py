@@ -43,7 +43,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- [GEO] TRIANGLE \n")
+        os.write(common.output, bytes("--- [GEO] TRIANGLE \n", 'utf-8'))
 
     # Don't forget to uncomment the convenient lines above if a test
     # requires to use the locale module.

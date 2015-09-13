@@ -41,7 +41,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- VALUES\n")
+        os.write(common.output, bytes("--- VALUES\n", 'utf-8'))
 
     integer_value = Value(4)
 

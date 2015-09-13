@@ -69,7 +69,7 @@ def check(t, given_string):
     computed_string = []
 
     if isinstance(t, Printable):
-        for i in xrange(len(machines)):
+        for i in range(len(machines)):
             computed_string.append(machines[i].type_string(t))
     else:
         computed_string.append(str(t))
@@ -94,28 +94,29 @@ def check(t, given_string):
         if computed_string[0].replace("\n", "") == \
                                              given_string[0].replace("\n", ""):
 
-            os.write(output, superverbose_opening_token + add_space \
+            os.write(output, bytes(superverbose_opening_token + add_space \
                              + n + verbose_space + OK \
                              + superverbose_closing_token \
-                             + next_line)
+                             + next_line, 'utf-8'))
             last_was_OK = True
         else:
             if verbose:
                 os.write(output,
-                     "\n" + superverbose_opening_token + add_space \
+                     bytes("\n" + superverbose_opening_token + add_space \
                      + str(counter) + " "                         \
                      + FAILED                                                 \
                      + '"' + computed_string[0].replace("\n", "") + '"'                         \
                      + "\nshould have been\n"                                 \
-                     + '"' + given_string[0].replace("\n", "") + '"' + "\n")
+                     + '"' + given_string[0].replace("\n", "") + '"' + "\n",
+                     'utf-8'))
             else:
-                os.write(output, FAILED)
+                os.write(output, bytes(FAILED, 'utf-8'))
 
             failed_counter += 1
             last_was_OK = False
 
     else:
-        for i in xrange(len(machines)):
+        for i in range(len(machines)):
             if len(given_string) >= i + 1:
                 if superverbose:
                     n = str(counter)
@@ -136,15 +137,16 @@ def check(t, given_string):
                 if computed_string[i].replace("\n", "") == \
                                              given_string[i].replace("\n", ""):
 
-                    os.write(output, superverbose_opening_token + add_space \
+                    os.write(output, bytes(superverbose_opening_token \
+                                     + add_space \
                                      + n + verbose_space + OK \
                                      + superverbose_closing_token \
-                                     + next_line)
+                                     + next_line, 'utf-8'))
                     last_was_OK = True
                 else:
                     if verbose:
                         os.write(output,
-                                 "\n" + superverbose_opening_token \
+                                 bytes("\n" + superverbose_opening_token \
                                  + add_space + str(counter) + " "            \
                                  + FAILED                                     \
                                  + '"' \
@@ -152,9 +154,9 @@ def check(t, given_string):
                                  + '"'             \
                                  + "\nshould have been\n"                     \
                                  + '"' + given_string[i].replace("\n", "") \
-                                 + '"' + "\n")
+                                 + '"' + "\n", 'utf-8'))
                     else:
-                        os.write(output, FAILED)
+                        os.write(output, bytes(FAILED, 'utf-8'))
 
                     failed_counter += 1
                     last_was_OK = False
@@ -162,12 +164,12 @@ def check(t, given_string):
             else:
                 if verbose:
                     os.write(output,
-                                 "\n" + "[# " + str(counter) + " "            \
+                                 bytes("\n" + "[# " + str(counter) + " "      \
                                  + MISSING                                    \
                                  + "more machines than refs strings."
-                                 + "\n")
+                                 + "\n", 'utf-8'))
                 else:
-                    os.write(output, MISSING)
+                    os.write(output, bytes(MISSING, 'utf-8'))
 
                 missing_counter += 1
                 last_was_OK = False
@@ -175,12 +177,12 @@ def check(t, given_string):
         if len(given_string) > len(machines):
             if verbose:
                 os.write(output,
-                         "\n" + "# " + str(counter) + " "                     \
+                         bytes("\n" + "# " + str(counter) + " "                     \
                          + MISSING                                            \
                          + "more refs strings than machines."
-                         + "\n")
+                         + "\n", 'utf-8'))
             else:
-                os.write(output, MISSING)
+                os.write(output, bytes(MISSING, 'utf-8'))
 
             missing_counter += 1
             last_was_OK = False
@@ -193,7 +195,7 @@ def short_test_run(language):
 
 
 def long_test_run(n, language):
-    for i in xrange(n):
+    for i in range(n):
         short_test_run(language)
 
 
@@ -203,10 +205,10 @@ def language_test(language):
         gettext.translation(software.NAME,
                             localdir,
                             [language]).install()
-    except IOError, msg:
+    except IOError as msg:
         tested_language = 'en'
         gettext.translation(software.NAME,
                             localdir,
                             ['en']).install()
 
-        print "error to check in source code of autotest/__init__()"
+        print("error to check in source code of autotest/__init__()")

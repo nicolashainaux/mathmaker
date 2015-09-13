@@ -26,9 +26,9 @@
 #from calculus import *
 #from geometry import *
 
-import base
-import base_calculus
-import base_geometry
-import calculus
-import geometry
+from . import base
+from . import base_calculus
+from . import base_geometry
+from . import calculus
+from . import geometry
 import lib

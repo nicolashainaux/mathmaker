@@ -29,8 +29,8 @@
 import math
 import locale
 from decimal import *
-from base import *
-from base_geometry import *
+from .base import *
+from .base_geometry import *
 from lib import *
 from lib import randomly
 from lib.maths_lib import *
@@ -252,7 +252,7 @@ class Triangle(Drawable):
         self._name = self.vertex0.name + self.vertex1.name + self.vertex2.name
 
         random_number = ""
-        for i in xrange(8):
+        for i in range(8):
             random_number += str(randomly.integer(0, 9))
 
         self._filename = _("Triangle") + "_" + self.name \
@@ -770,7 +770,7 @@ class RightTriangle(Triangle):
         self.right_angle.set_mark("right")
 
         random_number = ""
-        for i in xrange(8):
+        for i in range(8):
             random_number += str(randomly.integer(0, 9))
 
         self._filename = _("RightTriangle") + "_" + self.name \

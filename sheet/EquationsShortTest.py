@@ -21,9 +21,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import machine
-import exercise
+from . import exercise
 
-from S_Structure import S_Structure
+from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'short_test'
@@ -68,7 +68,7 @@ class EquationsShortTest(S_Structure):
         self.answers_title = _("Examples of answers")
 
         # Exercises :
-        for i in xrange(2):
+        for i in range(2):
             ex1 = exercise.X_Equation(self.machine,
                                       x_kind='short_test',
                                       x_subkind='basic')

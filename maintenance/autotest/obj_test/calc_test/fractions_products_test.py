@@ -33,7 +33,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- FRACTIONS PRODUCTS\n")
+        os.write(common.output, bytes("--- FRACTIONS PRODUCTS\n", 'utf-8'))
 
     product_fraction_5_4_times_5_5 = Product([Fraction((5, 4)),
                                               Fraction((5, 5))])

@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
-from X_Structure import X_Structure
-import question
+from .X_Structure import X_Structure
+from . import question
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
@@ -279,21 +279,21 @@ class X_Equation(X_Structure):
         elif self.x_kind == 'preformatted':
             if self.x_subkind == 'basic_additions':
                 #self.number_of_equations_per_column = 3
-                for i in xrange(3):
+                for i in range(3):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='basic_addition',
                                                expression_number=i
                                                                 )
                                                )
-                for i in xrange(2):
+                for i in range(2):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='basic_addition_r',
                                                expression_number=i+3
                                                                 )
                                                )
-                for i in xrange(4):
+                for i in range(4):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='any_basic_addition',
@@ -302,7 +302,7 @@ class X_Equation(X_Structure):
                                                )
             elif self.x_subkind == 'any_basic':
                 #self.number_of_equations_per_column = 3
-                for i in xrange(9):
+                for i in range(9):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='any_basic',
@@ -312,21 +312,21 @@ class X_Equation(X_Structure):
 
             elif self.x_subkind == 'basic_multiplications':
                 #self.number_of_equations_per_column = 3
-                for i in xrange(4):
+                for i in range(4):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='basic_multiplication',
                                                expression_number=i
                                                                 )
                                                )
-                for i in xrange(2):
+                for i in range(2):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='basic_multiplication_r',
                                                expression_number=i+3
                                                                 )
                                                )
-                for i in xrange(3):
+                for i in range(3):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='any_basic_multiplication',
@@ -335,14 +335,14 @@ class X_Equation(X_Structure):
                                                )
 
             elif self.x_subkind == 'classics':
-                for i in xrange(3):
+                for i in range(3):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='classic',
                                                expression_number=i
                                                                 )
                                                )
-                for i in xrange(3):
+                for i in range(3):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='classic_r',
@@ -351,14 +351,14 @@ class X_Equation(X_Structure):
                                                )
 
             elif self.x_subkind == 'classic_xtwice_and_any':
-                for i in xrange(3):
+                for i in range(3):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='classic_x_twice',
                                                expression_number=i
                                                                 )
                                                )
-                for i in xrange(3):
+                for i in range(3):
                     self.questions_list.append(default_question(
                                                self.machine,
                                                q_kind='any_classic',
@@ -371,7 +371,7 @@ class X_Equation(X_Structure):
         # Take care : the displaying of the answers if
         # number_of_questions is different from 6 is not implemented yet !
         else:
-            for i in xrange(self.q_nb):
+            for i in range(self.q_nb):
                 self.questions_list.append(                                   \
                              default_question(self.machine,
                                         q_kind=self.x_subkind,

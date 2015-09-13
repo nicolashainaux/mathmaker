@@ -33,7 +33,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- SUMS' REDUCTION\n")
+        os.write(common.output, bytes("--- SUMS' REDUCTION\n", 'utf-8'))
 
     monomial_3x = Monomial(('+', 3, 1))
     monomial_5x2 = Monomial(('+', 5, 2))

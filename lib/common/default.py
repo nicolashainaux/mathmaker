@@ -20,7 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import cfg
+from . import cfg
 import locale
 
 LANGUAGE = cfg.get_value_from_file("LOCALES", "LANGUAGE")

@@ -43,7 +43,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- EQUATIONS\n")
+        os.write(common.output, bytes("--- EQUATIONS\n", 'utf-8'))
 
     eq_basic1 = Equation((Polynomial([Monomial(('+', 1, 1)),
                                       Monomial(('+', 7, 0))

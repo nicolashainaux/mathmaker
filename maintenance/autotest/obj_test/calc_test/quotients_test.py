@@ -33,7 +33,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- QUOTIENTS\n")
+        os.write(common.output, bytes("--- QUOTIENTS\n", 'utf-8'))
 
     quo_fraction_8over9_div_7over2 = Quotient(('+',
                                                Fraction(('+', 8, 9)),

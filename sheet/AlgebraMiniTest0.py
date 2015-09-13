@@ -21,9 +21,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import machine
-import exercise
+from . import exercise
 
-from S_Structure import S_Structure
+from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'std'
@@ -72,7 +72,7 @@ class AlgebraMiniTest0(S_Structure):
         # ex1 = exercise.ProductReduction(self.machine, many=30)
         # self.exercises_list.append(ex1)
 
-        for i in xrange(10):
+        for i in range(10):
             ex1 = exercise.X_AlgebraExpressionExpansion(self.machine,
                                                     x_kind='mini_test',
                                                     x_subkind='two_randomly')

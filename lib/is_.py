@@ -20,8 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import error
-import common.cfg
+from . import error
+from .common import cfg
 import math
 import decimal
 
@@ -47,7 +47,7 @@ def a_string(objct):
 #   @return True if argument is a string
 def a_numerical_string(objct):
     if type(objct) == str and objct != "":
-        for i in xrange(len(objct)):
+        for i in range(len(objct)):
             if not(objct[i] == '+' \
                or objct[i] == '-' \
                or objct[i] == '.' \
@@ -82,7 +82,7 @@ def a_string_list(objct):
     if type(objct) != list:
         return False
 
-    for i in xrange(len(objct)):
+    for i in range(len(objct)):
         if type(objct[i]) != str:
             return False
 
@@ -100,7 +100,7 @@ def a_string_list(objct):
 def an_ordered_calculable_objects_list(provided_list):
     # Caution, the provided list must contain only Exponented objects that
     # can be ordered with the Exponented.alphabetical_order_cmp() function
-    for i in xrange(len(provided_list)):
+    for i in range(len(provided_list)):
         if i < len(provided_list) - 1:
             if provided_list[i].alphabetical_order_cmp(provided_list[i+1]) > 0:
                 return False
@@ -135,7 +135,6 @@ def a_sign(objct):
 def a_number(objct):
     if (type(objct) == float)                                                 \
       or (type(objct) == int)                                                 \
-      or (type(objct) == long)                                                \
       or (type(objct) == decimal.Decimal):
         return True
     else:

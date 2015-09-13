@@ -24,9 +24,9 @@ import sys
 import math
 from decimal import *
 import core
-import is_
-import randomly
-import utils
+from . import is_
+from . import randomly
+from . import utils
 
 
 # DIVISORS frequently used by the children
@@ -65,7 +65,7 @@ DIVISORS = [(1,1), (1,1), (2,1), (3,1), (4,2,1), (5,1), (6,3,2,1), (7,1),
 
 
 # CONSTANTS CONCERNING MATH OBJECTS
-ZERO_POLYNOMIAL_DEGREE = -sys.maxint
+ZERO_POLYNOMIAL_DEGREE = -sys.maxsize
 
 
 def abs(nb):
@@ -89,7 +89,7 @@ def sign_of_product(signed_objctlist):
 
     minus_signs_nb = 0
 
-    for i in xrange(len(signed_objctlist)):
+    for i in range(len(signed_objctlist)):
 
         if not (is_.a_sign(signed_objctlist[i])                               \
            or is_.a_number(signed_objctlist[i])                               \
@@ -187,7 +187,7 @@ def pupil_gcd(a, b):
 
     result = 1
 
-    for i in xrange(len(DIVISORS[int(a)])):
+    for i in range(len(DIVISORS[int(a)])):
         if (DIVISORS[int(a)][i] in DIVISORS[int(b)]) \
             and DIVISORS[int(a)][i] > result:
         #___
@@ -220,7 +220,7 @@ def ten_power_gcd(a, b):
         raise error.OutOfRangeArgument(b, "Integer but not zero !")
 
     if a % 10 == 0 and b % 10 == 0:
-        return 10 * ten_power_gcd(a / 10, b / 10)
+        return 10 * ten_power_gcd(a // 10, b // 10)
     else:
         return 1
 
@@ -336,7 +336,7 @@ def mean(numberList):
     if len(numberList) == 0:
         raise error.WrongArgument(' a list of length > 0 ', ' an empty list ')
 
-    for i in xrange(len(numberList)):
+    for i in range(len(numberList)):
         if not is_.a_number(numberList[i]):
             raise error.WrongArgument(' a number ', str(type(numberList[i])))
 
@@ -358,7 +358,7 @@ def barycenter(points_list, barycenter_name):
     if len(points_list) == 0:
         raise error.WrongArgument(' a list of length > 0 ', ' an empty list ')
 
-    for i in xrange(len(points_list)):
+    for i in range(len(points_list)):
         if not isinstance(points_list[i], core.base_geometry.Point):
             raise error.WrongArgument(' a Point ', str(type(points_list[i])))
 

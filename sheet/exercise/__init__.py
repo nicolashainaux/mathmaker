@@ -27,15 +27,15 @@
 # @package exercise
 # @brief A exercise consists of a questions list plus output methods.
 
-import X_Structure
+from . import X_Structure
 
-import X_AlgebraExpressionExpansion
-import X_AlgebraExpressionReduction
-import X_Calculation
-import X_Equation
-import X_Factorization
-import X_MentalCalculation
-import X_RightTriangle
+from . import X_AlgebraExpressionExpansion
+from . import X_AlgebraExpressionReduction
+from . import X_Calculation
+from . import X_Equation
+from . import X_Factorization
+from . import X_MentalCalculation
+from . import X_RightTriangle
 
 X_Structure = X_Structure.X_Structure
 

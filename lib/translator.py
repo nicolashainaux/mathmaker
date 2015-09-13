@@ -23,7 +23,7 @@
 from lib.common import cfg
 from lib.common import latex
 from lib import is_
-import error
+from . import error
 
 
 markup_choice = cfg.get_value_from_file('MARKUP', 'USE')
@@ -67,7 +67,7 @@ def create_table(size, content, **options):
             v_border = "|"
             h_border = "\\hline \n"
 
-        col_fmt = ['c' for i in xrange(n_col)]
+        col_fmt = ['c' for i in range(n_col)]
 
         #DBG
         #error.write_warning("type(options['col_fmt']) = " + type(options['col_fmt']))
@@ -75,10 +75,10 @@ def create_table(size, content, **options):
         if 'col_fmt' in options and type(options['col_fmt']) == list \
             and len(options['col_fmt']) == n_col:
         #___
-            for i in xrange(len(col_fmt)):
+            for i in range(len(col_fmt)):
                 col_fmt[i] = options['col_fmt'][i]
 
-        for i in xrange(len(col_fmt)):
+        for i in range(len(col_fmt)):
             t = col_fmt[i]
             if is_.a_number(col_fmt[i]):
                 t = "p{" + str(col_fmt[i]) + " " + str(length_unit) + "}"
@@ -92,8 +92,8 @@ def create_table(size, content, **options):
         result += "\\begin{tabular}{"+ tabular_format + "}" + "\n"
         result += h_border
 
-        for i in xrange(n_lin):
-            for j in xrange(n_col):
+        for i in range(int(n_lin)):
+            for j in range(n_col):
                 result += str(content[i*n_col + j])
                 if j != n_col - 1:
                     result += "&" + "\n"

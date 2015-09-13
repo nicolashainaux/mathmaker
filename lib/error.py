@@ -40,7 +40,9 @@ sdt_err_output = sys.stderr.fileno()
 #   @brief Writes a warning to stderr with the given String as explanation
 #   @param provided_string The explanation accompanying the warning
 def write_warning(provided_string):
-    os.write(sdt_err_output, "Warning : " + provided_string + "\n")
+    os.write(sdt_err_output, bytes("Warning : " + provided_string + "\n",
+                                   'utf-8')
+            )
 
 
 

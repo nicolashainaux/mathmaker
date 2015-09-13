@@ -35,7 +35,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- PRODUCTS\n")
+        os.write(common.output, bytes("--- PRODUCTS\n", 'utf-8'))
 
     item_1 = Item(1)
     item_minus_1 = Item(-1)
@@ -597,7 +597,7 @@ def action():
 
 
     if common.verbose:
-        os.write(common.output, "\n--- PRODUCTS - evaluate\n")
+        os.write(common.output, bytes("\n--- PRODUCTS - evaluate\n", 'utf-8'))
 
     a = Item(2.5)
     b = Item(3.5)

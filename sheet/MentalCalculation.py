@@ -21,9 +21,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import machine
-import exercise
+from . import exercise
 
-from S_Structure import S_Structure
+from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = 0
 SHEET_LAYOUT_TYPE = 'mental'
@@ -66,7 +66,7 @@ class MentalCalculation(S_Structure):
         self.text = ""
         self.answers_title = ""
 
-        for i in xrange(8):
+        for i in range(8):
             ex = exercise.X_MentalCalculation(self.machine,
                                             x_kind='bypass',
                                             x_subkind='5m_3rm_2d_2-9',

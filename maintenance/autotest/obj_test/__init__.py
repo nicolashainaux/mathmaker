@@ -20,10 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import calc_test
-import geo_test
+from . import calc_test
+from . import geo_test
 
-import equations_test
-import table_test
-import cross_product_equations_test
-import table_uncomplete_proportional_test
+from . import equations_test
+from . import table_test
+from . import cross_product_equations_test
+from . import table_uncomplete_proportional_test

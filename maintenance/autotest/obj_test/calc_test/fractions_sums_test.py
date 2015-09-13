@@ -33,7 +33,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, "--- FRACTIONS SUMS\n")
+        os.write(common.output, bytes("--- FRACTIONS SUMS\n", 'utf-8'))
 
     fraction_2_3_plus_fraction_3_4 = Sum([Fraction(('+', 2, 3)),
                                           Fraction(('+', 3, 4))])

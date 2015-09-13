@@ -33,7 +33,7 @@ try:
     gettext.translation(software.NAME,
                         localdir,
                         [default.LANGUAGE]).install()
-except IOError, msg:
+except IOError as msg:
     error.write_warning("gettext returned the following message :\n" \
                         + str(msg) + "\n" \
                         + "It means the language indicated either \
@@ -43,7 +43,7 @@ system." % {'software_ref' : software.NAME} + "\n" )
     try:
         gettext.install(software.NAME,
                         localdir)
-    except IOError, msg:
+    except IOError as msg:
         error.write_warning("gettext returned the following message :\n" \
                         + str(msg) + "\n" \
                         + "It means the language of your system isn't \

@@ -20,6 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import point_test
-import right_triangle_test
-import triangle_test
+from . import point_test
+from . import right_triangle_test
+from . import triangle_test

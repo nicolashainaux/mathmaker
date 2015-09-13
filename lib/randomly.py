@@ -59,14 +59,14 @@ def integer(min_value, max_value, **options):
         #                       gives [0.2, 0.6, 0.9, 1.0] as a result
         proba_scale = list()
         current_sum = 0
-        for i in xrange(len(options['weighted_table'])):
+        for i in range(len(options['weighted_table'])):
             current_sum += options['weighted_table'][i]
             proba_scale.append(current_sum)
 
         random_number = random.random()
         last_step = 0
 
-        for i in xrange(len(proba_scale)):
+        for i in range(len(proba_scale)):
             if random_number >= last_step and random_number < proba_scale[i]:
                 return min_value + i
             else:
@@ -254,7 +254,7 @@ def mix(objects_list):
 
     order_changed = False
 
-    for i in xrange(len(objects_list) - 2):
+    for i in range(len(objects_list) - 2):
         j = integer(0, len(objects_list) - 1)
 
         if i != j and order_changed == False:
