@@ -32,7 +32,12 @@ AUTHOR = "Nicolas Hainaux <nico_h@users.sourceforge.net>"
 COPYRIGHT = "Copyright 2006-2014"
 WEBSITE = "http://mathmaker.sourceforge.net"
 
-__cwd = os.path.abspath(sys.argv[0])
-ROOT_PATH = __cwd[:__cwd.find(NAME)+len(NAME)] + '/'
+PROCESS_NAME = os.path.basename(sys.argv[0])
+ABSPATH = os.path.abspath(sys.argv[0])
+
+__l1 = len(PROCESS_NAME)
+__l2 = len(ABSPATH)
+
+ROOT_PATH = ABSPATH[:__l2-__l1]
 
 CFG_FILE_SUFFIX = 'cfg'
