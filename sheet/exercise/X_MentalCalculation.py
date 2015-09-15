@@ -168,7 +168,7 @@ class X_MentalCalculation(X_Structure):
             if not q[1] in q_dict:
                 q_dict[q[1]] = []
 
-            for n in range[q[2]]:
+            for n in range(q[2]):
                 q_dict[q[1]].append(q[0])
 
         # Now, q_dict is organized like this:
