@@ -35,7 +35,7 @@ except:
 #DECIMAL_POINT = str(locale.localeconv()['decimal_point'])
 
 MC_MM_FILE = os.path.abspath(os.path.dirname(sys.argv[0])) \
-           + "/sheet/default_mental_calculation.mm"
+           + "/sheet/mental_calculation_default.xml"
 
 NUMBER_OF_QUESTIONS = 6
 

@@ -21,6 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import shlex
+import xml.etree.ElementTree as XML_PARSER
+
 from lib import *
 from .X_Structure import X_Structure
 from . import question
@@ -51,43 +53,27 @@ SEPARATOR_TOKEN = ":"
 ##
 #   @brief Gets the questions' kinds from the given file.
 def get_q_kinds_from_file(file_name):
+
     try:
-        f = open(file_name, mode = 'r')
-    except NameError:
+        xml_config = XML_PARSER.parse(file_name).getroot()
+    except FileNotFoundError:
         raise error.UnreachableData("the file named : " + str(file_name))
 
-    result = []
-    # At the end, result should contain a list of questions' kinds.
-    # Each line of the file matches one question's kind and will be turned into:
-    # [ <q_kind>, <q_subkind>, nb_of_q]
-    # with <q_kind> as a set (see Q_MentalCalculation.AVAILABLE_Q_KIND_VALUES)
-    # <q_subkind> as a str (see Q_MentalCalculation.AVAILABLE_Q_KIND_VALUES)
-    # and nb_of_q as an int
-    # For instance, the line:
-    # multiplication direct : table_2-9 : 4
-    # will be transformed into:
-    # [frozenset(('multiplication', 'direct')), 'table_2-9', 4]
+    questions = []
 
-    x_kind = 'tabular'
+    # For instance we will get a list of this kind of elements:
+    # [ 'multi', {'type': 'int', 'direction': 'direct'}, 'table_2-9', 4]
 
-    for line in f:
-        if line == 'slideshow\n':
-            x_kind = 'slideshow'
-        elif line == 'tabular\n':
-            pass
-        elif line[0] == '#':
-            pass
+    x_kind = 'tabular' # default
+
+    for child in xml_config:
+        if child.tag == 'config':
+            x_kind = child.attrib['kind']
         else:
-            # this will get the <q_kind> set:
-            qk = frozenset(shlex.split(line[0:line.find(':')]))
-            # this will get the <q_subkind> str:
-            qs = line[line.find(':')+1:line.rfind(':')].strip()
-            # this will get the number at the end
-            qn = int(line[line.rfind(':')+1:len(line)])
+            for elt in child:
+                questions += [[child.tag, child.attrib, elt.tag, elt.text]]
 
-            result += [[qk, qs, qn]]
-
-    return (x_kind, result)
+    return (x_kind, questions)
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -186,6 +172,11 @@ class X_MentalCalculation(X_Structure):
         for q_type in list(q_dict.keys()):
             pass
 
+        #dbg
+        print(q_dict)
+
+        self.q_nb = len(self.questions_list)
+
 
         # OTHER EXERCISES
 
@@ -221,6 +212,8 @@ class X_MentalCalculation(X_Structure):
 
         # default tabular option:
         else:
+            #dbg
+            print(">" + str(self.questions_list) + ">" + str(self.q_nb))
             q = [self.questions_list[i].to_str('exc') for i in range(self.q_nb)]
             a = [self.questions_list[i].to_str('ans') for i in range(self.q_nb)]\
                 if ex_or_answers == 'ans' else [" " for i in range(self.q_nb)]
