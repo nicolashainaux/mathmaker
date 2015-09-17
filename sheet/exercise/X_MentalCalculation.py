@@ -69,9 +69,11 @@ def get_q_kinds_from_file(file_name):
     for child in xml_config:
         if child.tag == 'config':
             x_kind = child.attrib['kind']
-        else:
-            for elt in child:
-                questions += [[child.tag, child.attrib, elt.tag, elt.text]]
+        elif child.tag == 'exercise':
+            for question in child:
+                for elt in question:
+                    questions += [[question.tag, question.attrib,
+                                   elt.tag, elt.text]]
 
     return (x_kind, questions)
 
