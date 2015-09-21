@@ -279,16 +279,16 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
 
 # --------------------------------------------------------------------------
 ##
-#   @brief Takes all elements of a list1 away if they're in list2
-def take_away(list1, list2):
+#   @brief Returns a list of the elements of list2 that are not in list1
+def inverted_extraction(list1, list2):
     if not (type(list1) == list and type(list2) == list):
         raise error.WrongArgument(str(list1) + " and " + str(list2),
                                   " two lists.")
 
     result = []
 
-    for elt in list1:
-        if not elt in list2:
+    for elt in list2:
+        if not elt in list1:
             result += [elt]
 
     return result
@@ -304,7 +304,3 @@ def correct_normalize_results(d):
         raise error.WrongArgument(str(type(d)), "a Decimal")
 
     return d.quantize(Decimal(1)) if d == d.to_integral() else d.normalize()
-
-
-
-
