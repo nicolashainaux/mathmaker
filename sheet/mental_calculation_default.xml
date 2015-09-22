@@ -2,12 +2,12 @@
 
 <!-- DEFAULT MENTAL CALCULATION SHEET -->
 
-<!-- Available config types for mental calculation: tabular, slideshow -->
 <sheet title="Mental calculation">
 
+	<!-- Available config types for mental calculation: tabular, slideshow -->
 	<config type="tabular"/>
 
-	<exercise ordered="no">
+	<exercise>
 		<question kind="multi" subkind="direct" nb="int" context="none">
 			<table_2-9>4</table_2-9>
 			<table_15>1</table_15>

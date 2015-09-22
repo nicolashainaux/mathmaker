@@ -26,21 +26,21 @@ from . import mc_modules
 
 #from core.base_calculus import *
 
-
 # 'table_2-9'
 # 'table_11' --> 11×n where 10 < n < 100, no carry over
 # 'table_15' --> 15×n where 2 <= n <= 6
 # 'table_25' --> 25×n where 2 <= n <= 6
+AVAILABLE_Q_SUBKIND_VALUES = ['table_2-9',
+                              'table_11',
+                              'table_15',
+                              'table_25']
 
 AVAILABLE_Q_KIND_VALUES = \
-    { frozenset(('multiplication', 'direct')) : ['table_2-9',
-                                                 'table_11',
-                                                 'table_15',
-                                                 'table_25'],
-      frozenset(('multiplication', 'reversed')) : ['table_2-9']
-#     frozenset(('multiplication', 'decimal')) : ['table_2-9'],
-#     frozenset(('multiplication', 'decimal_1')) : ['table_2-9'],
-#     frozenset(('multiplication', 'decimal_2')) : ['table_2-9'],
+    { 'multi_direct' : ['table_2-9',
+                        'table_11',
+                        'table_15',
+                        'table_25'],
+      'multi_reversed' : ['table_2-9']
 #     frozenset(('division', 'direct')) : ['table_2-9'],
 #     frozenset(('division', 'decimal_1')) : ['table_2-9'],
 #     frozenset(('area', 'rectangle', 'with_drawing')) : ['table_2-9',
@@ -58,8 +58,8 @@ AVAILABLE_Q_KIND_VALUES = \
     }
 
 MODULES =  \
-    { frozenset(('multiplication', 'direct')) : mc_modules.multi_dir,
-      frozenset(('multiplication', 'reversed')) : mc_modules.multi_rev
+    { 'multi_direct' : mc_modules.multi_dir,
+      'multi_reversed' : mc_modules.multi_rev
 #     ('multiplication', 'decimal') : mc_modules.multi_deci,
 #     ('multiplication', 'decimal_1') : mc_modules.multi_deci1,
 #     ('multiplication', 'decimal_2') : mc_modules.multi_deci2,
@@ -77,17 +77,9 @@ MODULES =  \
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns a list of numbers of the given kind
-def generate_numbers(kind, subkind):
-    if not kind in AVAILABLE_Q_KIND_VALUES:
-        raise error.OutOfRangeArgument(kind,
-                                       str(AVAILABLE_Q_KIND_VALUES.keys()))
-
-    if not subkind in AVAILABLE_Q_KIND_VALUES[kind]:
-        raise error.OutOfRangeArgument(subkind,
-                                       str(AVAILABLE_Q_KIND_VALUES[kind]))
-
+def generate_numbers(subkind):
     if subkind == 'table_2-9':
-        return [(2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
+        return [(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
                 (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
                 (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
                 (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
@@ -115,7 +107,11 @@ def generate_numbers(kind, subkind):
     elif subkind == 'table_25':
         return [(25, 2), (25,3), (25, 4), (25,5), (25, 6)]
 
-
+    else:
+        raise error.OutOfRangeArgument(subkind,
+                                       "'" \
+                                       + " ,".join(AVAILABLE_Q_SUBKIND_VALUES) \
+                                       + "'")
 
 
 
@@ -135,7 +131,8 @@ class Q_MentalCalculation(Q_Structure):
     #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of question.Q_MentalCalculation
-    def __init__(self, embedded_machine, q_kind='default_nothing', **options):
+    def __init__(self, embedded_machine, q_kind='default_nothing',
+                 q_options, **options):
         self.derived = True
 
         # The call to the mother class __init__() method will set the
@@ -152,8 +149,8 @@ class Q_MentalCalculation(Q_Structure):
         # module
         m = MODULES[self.q_kind].sub_object(options['numbers_to_use'])
 
-        self.q_text = m.q(embedded_machine)
-        self.q_answer = m.a(embedded_machine)
+        self.q_text = m.q(embedded_machine, **options)
+        self.q_answer = m.a(embedded_machine, **options)
 
 
 
@@ -182,14 +179,3 @@ class Q_MentalCalculation(Q_Structure):
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
         return self.q_answer
-
-
-
-
-
-
-
-
-
-
-
