@@ -72,7 +72,7 @@ def get_q_kinds_from_file(file_name):
             for question in child:
                 for elt in question:
                     questions += [[question.attrib,
-                                   elt.tag, elt.text]]
+                                   elt.tag, int(elt.text)]]
 
     return (x_kind, questions)
 
@@ -155,9 +155,9 @@ class X_MentalCalculation(X_Structure):
                 q_dict[q[1]] = []
 
             for n in range(q[2]):
-                q_id = q[0].pop('kind')
+                q_id = q[0]['kind']
                 q_id += "_"
-                q_id += q[0].pop('subkind')
+                q_id += q[0]['subkind']
                 q_dict[q[1]].append((q_id, q[0]))
 
         # Now, q_dict is organized like this:
@@ -174,7 +174,7 @@ class X_MentalCalculation(X_Structure):
         created_questions = {}
 
         for nb_type in q_dict:
-            nb_box = default_question.generate_numbers(nb_type)
+            nb_box = question.generate_numbers(nb_type)
             nb_used = []
             last_nb = []
             created_questions[nb_type] = []
@@ -230,7 +230,7 @@ class X_MentalCalculation(X_Structure):
             nb_type = randomly.pop(list(created_questions.keys()),
                                    weighted_table=w_table)
 
-            self.questions_list += created_questions[nb_type].pop(0)
+            self.questions_list += [created_questions[nb_type].pop(0)]
 
             # We remove the empty keys from created_questions
             if len(created_questions[elt]) == 0:

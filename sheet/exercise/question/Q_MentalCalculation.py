@@ -33,14 +33,17 @@ from . import mc_modules
 AVAILABLE_Q_SUBKIND_VALUES = ['table_2-9',
                               'table_11',
                               'table_15',
-                              'table_25']
+                              'table_25',
+                              'bypass']
 
 AVAILABLE_Q_KIND_VALUES = \
     { 'multi_direct' : ['table_2-9',
                         'table_11',
                         'table_15',
-                        'table_25'],
-      'multi_reversed' : ['table_2-9']
+                        'table_25',
+                        'bypass'],
+      'multi_reversed' : ['table_2-9',
+                          'bypass']
 #     frozenset(('division', 'direct')) : ['table_2-9'],
 #     frozenset(('division', 'decimal_1')) : ['table_2-9'],
 #     frozenset(('area', 'rectangle', 'with_drawing')) : ['table_2-9',
@@ -58,8 +61,8 @@ AVAILABLE_Q_KIND_VALUES = \
     }
 
 MODULES =  \
-    { 'multi_direct' : mc_modules.multi_dir,
-      'multi_reversed' : mc_modules.multi_rev
+    { 'multi_direct' : mc_modules.multi_direct,
+      'multi_reversed' : mc_modules.multi_reversed
 #     ('multiplication', 'decimal') : mc_modules.multi_deci,
 #     ('multiplication', 'decimal_1') : mc_modules.multi_deci1,
 #     ('multiplication', 'decimal_2') : mc_modules.multi_deci2,
@@ -131,7 +134,7 @@ class Q_MentalCalculation(Q_Structure):
     #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of question.Q_MentalCalculation
-    def __init__(self, embedded_machine, q_kind='default_nothing',
+    def __init__(self, embedded_machine, q_kind,
                  q_options, **options):
         self.derived = True
 
@@ -141,7 +144,7 @@ class Q_MentalCalculation(Q_Structure):
         # plus self.machine, self.options (modified)
         Q_Structure.__init__(self, embedded_machine,
                              q_kind, AVAILABLE_Q_KIND_VALUES,
-                             **options)
+                             q_subkind='bypass', **options)
         # The purpose of this next line is to get the possibly modified
         # value of **options
         options = self.options
