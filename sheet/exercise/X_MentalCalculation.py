@@ -61,7 +61,7 @@ def get_q_kinds_from_file(file_name):
     questions = []
 
     # For instance we will get a list of this kind of elements:
-    # [ {'kind': 'multi', 'subkind': 'direct', 'nb': 'int'}, 'table_2-9', 4]
+    # [ {'kind': 'multi', 'subkind': 'direct', 'nb': 'int'}, 'table_2_9', 4]
 
     x_kind = 'tabular' # default
 
@@ -148,7 +148,7 @@ class X_MentalCalculation(X_Structure):
         q_dict = {}
 
         # In q_list, each element is like this:
-        # [{'kind':'multi', 'subkind':'direct', 'nb':'int'}, 'table_2-9', 4]
+        # [{'kind':'multi', 'subkind':'direct', 'nb':'int'}, 'table_2_9', 4]
         # [q[0],                                             q[1],        q[2]]
         for q in q_list:
             if not q[1] in q_dict:
@@ -161,7 +161,7 @@ class X_MentalCalculation(X_Structure):
                 q_dict[q[1]].append((q_id, q[0]))
 
         # Now, q_dict is organized like this:
-        # {'table_2-9':[ ('multi_direct', {'nb':'int'}),
+        # {'table_2_9':[ ('multi_direct', {'nb':'int'}),
         #                ('multi_direct', {'nb':'int'}),
         #                ('multi_direct', {'nb':'int'}),
         #                ('multi_direct', {'nb':'int'}) ],
@@ -195,13 +195,13 @@ class X_MentalCalculation(X_Structure):
                 # tell not to pick anything containing 25 in the table of 25,
                 # for instance, which would be nonsense)
                 last_nb = []
-                if nb_type == 'table_2-9':
+                if nb_type == 'table_2_9':
                     last_nb += [nb_to_use[0], nb_to_use[1]]
                 else:
                     last_nb += [nb_to_use[1]]
 
         # Now created_questions looks like:
-        # {'table_2-9':[ question_object1,
+        # {'table_2_9':[ question_object1,
         #                question_object2,
         #                question_object3,
         #                question_object4 ],

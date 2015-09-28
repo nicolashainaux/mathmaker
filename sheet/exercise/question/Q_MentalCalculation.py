@@ -26,35 +26,35 @@ from . import mc_modules
 
 #from core.base_calculus import *
 
-# 'table_2-9'
+# 'table_2_9'
 # 'table_11' --> 11×n where 10 < n < 100, no carry over
 # 'table_15' --> 15×n where 2 <= n <= 6
 # 'table_25' --> 25×n where 2 <= n <= 6
-AVAILABLE_Q_SUBKIND_VALUES = ['table_2-9',
+AVAILABLE_Q_SUBKIND_VALUES = ['table_2_9',
                               'table_11',
                               'table_15',
                               'table_25',
                               'bypass']
 
 AVAILABLE_Q_KIND_VALUES = \
-    { 'multi_direct' : ['table_2-9',
+    { 'multi_direct' : ['table_2_9',
                         'table_11',
                         'table_15',
                         'table_25',
                         'bypass'],
-      'multi_reversed' : ['table_2-9',
+      'multi_reversed' : ['table_2_9',
                           'bypass']
-#     frozenset(('division', 'direct')) : ['table_2-9'],
-#     frozenset(('division', 'decimal_1')) : ['table_2-9'],
-#     frozenset(('area', 'rectangle', 'with_drawing')) : ['table_2-9',
+#     frozenset(('division', 'direct')) : ['table_2_9'],
+#     frozenset(('division', 'decimal_1')) : ['table_2_9'],
+#     frozenset(('area', 'rectangle', 'with_drawing')) : ['table_2_9',
 #                                              'table_11',
 #                                              'table_15',
 #                                              'table_25'],
-#     frozenset(('area', 'rectangle', 'without_drawing')) : ['table_2-9',
+#     frozenset(('area', 'rectangle', 'without_drawing')) : ['table_2_9',
 #                                                 'table_11',
 #                                                 'table_15',
 #                                                 'table_25'],
-#     frozenset(('area', 'right_triangle')) : ['table_2-9',
+#     frozenset(('area', 'right_triangle')) : ['table_2_9',
 #                                   'table_11',
 #                                   'table_15',
 #                                   'table_25']
@@ -81,7 +81,7 @@ MODULES =  \
 ##
 #   @brief Returns a list of numbers of the given kind
 def generate_numbers(subkind):
-    if subkind == 'table_2-9':
+    if subkind == 'table_2_9':
         return [(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
                 (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
                 (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
