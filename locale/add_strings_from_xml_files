@@ -22,6 +22,8 @@
 import xml.etree.ElementTree as xml_tree
 import os, sys, re
 from tempfile import TemporaryFile
+# Requires to install the polib package separately
+# (it is called python3-polib in ubuntu repos)
 import polib
 
 PROCESS_NAME = os.path.basename(sys.argv[0])
@@ -31,7 +33,6 @@ __l2 = len(ABSPATH)
 LOCALE_PATH = ABSPATH[:__l2-__l1]
 
 KEYWORDS = ['title', 'text']
-XML_POT_FILE_PATH = LOCALE_PATH + 'mathmaker_xml.pot'
 MAIN_POT_FILE_PATH = LOCALE_PATH + 'mathmaker.pot'
 
 os.chdir('..')
@@ -73,7 +74,13 @@ def collect_strings(node, rel_file_name):
                 collected_strings[node.attrib[keyword]] = []
 
             collected_strings[node.attrib[keyword]] += \
-              '#: ' + rel_file_name + ': ' + node.attrib[LINE_DUMMY_ATTR] + '\n'
+                                [(rel_file_name, node.attrib[LINE_DUMMY_ATTR])]
+
+            # collected_strings looks like:
+            # {'Something to translate' : [("this_file.xml", 76),
+            #                              ("this_other_file.xml", 34)],
+            #  'Something else to translate' : [("another_file.xml", 21)],
+            #  etc. }
 
     for child in node:
         collect_strings(child, rel_file_name)
@@ -100,16 +107,16 @@ def browse_files(path):
 
 def main():
     browse_files('.')
-    open(XML_POT_FILE_PATH, 'wt').close()
-    with open(XML_POT_FILE_PATH, "a") as f:
-        for sentence in collected_strings:
-            for ref in collected_strings[sentence]:
-                f.write(ref)
-            f.write('msgid "' + sentence + '"\n')
-            f.write('msgstr ""\n')
+    xml_pot_file = polib.POFile()
+    for sentence in collected_strings:
+        occ = []
+        for elt in collected_strings[sentence]:
+            occ += [(elt[0], elt[1])]
+
+        new_entry = polib.POEntry(msgid=sentence, msgstr="", occurrences=occ)
+        xml_pot_file.append(new_entry)
 
     main_pot_file = polib.pofile(MAIN_POT_FILE_PATH)
-    xml_pot_file = polib.pofile(XML_POT_FILE_PATH)
 
     for xml_entry in xml_pot_file:
         found = False
