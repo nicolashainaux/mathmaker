@@ -43,7 +43,9 @@ AVAILABLE_Q_KIND_VALUES = \
                         'table_25',
                         'bypass'],
       'multi_reversed' : ['table_2_9',
-                          'bypass']
+                          'bypass'],
+      'divi_direct' : ['table_2_9',
+                       'bypass']
 #     frozenset(('division', 'direct')) : ['table_2_9'],
 #     frozenset(('division', 'decimal_1')) : ['table_2_9'],
 #     frozenset(('area', 'rectangle', 'with_drawing')) : ['table_2_9',
@@ -62,7 +64,8 @@ AVAILABLE_Q_KIND_VALUES = \
 
 MODULES =  \
     { 'multi_direct' : mc_modules.multi_direct,
-      'multi_reversed' : mc_modules.multi_reversed
+      'multi_reversed' : mc_modules.multi_reversed,
+      'divi_direct' : mc_modules.divi_direct
 #     ('multiplication', 'decimal') : mc_modules.multi_deci,
 #     ('multiplication', 'decimal_1') : mc_modules.multi_deci1,
 #     ('multiplication', 'decimal_2') : mc_modules.multi_deci2,
