@@ -27,7 +27,6 @@
 # @package mc_modules
 # @brief All question objects should be "declared" here.
 
-from . import multi_direct
-from . import multi_reversed
+from . import multi_direct, multi_reversed, multi_hole
 from . import divi_direct
 from . import multi_decimal, multi_decimal1, multi_decimal2

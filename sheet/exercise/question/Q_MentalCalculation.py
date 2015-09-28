@@ -44,6 +44,8 @@ AVAILABLE_Q_KIND_VALUES = \
                         'bypass'],
       'multi_reversed' : ['table_2_9',
                           'bypass'],
+      'multi_hole' : ['table_2_9',
+                      'bypass'],
       'multi_decimal' : ['table_2_9',
                          'bypass'],
       'multi_decimal1' : ['table_2_9',
@@ -69,6 +71,7 @@ AVAILABLE_Q_KIND_VALUES = \
 MODULES =  \
     { 'multi_direct' : mc_modules.multi_direct,
       'multi_reversed' : mc_modules.multi_reversed,
+      'multi_hole' : mc_modules.multi_hole,
       'multi_decimal' : mc_modules.multi_decimal,
       'multi_decimal1' : mc_modules.multi_decimal1,
       'multi_decimal2' : mc_modules.multi_decimal2,

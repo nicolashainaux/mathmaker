@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2015-09-28 15:55+0200\n"
-"PO-Revision-Date: 2015-09-28 15:56+0100\n"
+"POT-Creation-Date: 2015-09-28 22:06+0200\n"
+"PO-Revision-Date: 2015-09-28 22:06+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -370,11 +370,11 @@ msgstr "Factoriser :"
 msgid "Factorise, if possible :"
 msgstr "Factoriser, si possible :"
 
-#: sheet/exercise/X_MentalCalculation.py:269
+#: sheet/exercise/X_MentalCalculation.py:267
 msgid "Question:"
 msgstr "Question :"
 
-#: sheet/exercise/X_MentalCalculation.py:271
+#: sheet/exercise/X_MentalCalculation.py:269
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -522,9 +522,17 @@ msgstr "Donc, d'après la contraposée du théorème de Pythagore,"
 msgid "%(triangle_name)s has no right angle."
 msgstr "%(triangle_name)s n'est pas rectangle."
 
+#: sheet/exercise/question/mc_modules/divi_direct.py:35
+#: sheet/exercise/question/mc_modules/multi_decimal1.py:41
+#: sheet/exercise/question/mc_modules/multi_decimal2.py:37
+#: sheet/exercise/question/mc_modules/multi_decimal.py:43
 #: sheet/exercise/question/mc_modules/multi_direct.py:34
 msgid "Calculate:"
 msgstr "Calculer :"
+
+#: sheet/exercise/question/mc_modules/multi_hole.py:49
+msgid "Which number can fill the hole in"
+msgstr "Quel nombre permet de compléter le trou dans"
 
 #: sheet/exercise/question/mc_modules/multi_reversed.py:35
 msgid "In the multiplication tables (from 2 to 9), which product is equal to:"
@@ -532,7 +540,6 @@ msgstr ""
 "Dans les tables de multiplication (de 2 à 9), quel produit est égal à :"
 
 #: sheet/mental_calculation_default.xml:5
-#: sheet/mental_calculation_default.xml:11
 msgid "Mental calculation"
 msgstr "Calcul mental"
 
