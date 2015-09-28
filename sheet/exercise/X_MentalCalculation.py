@@ -279,7 +279,7 @@ class X_MentalCalculation(X_Structure):
             content = [elt for pair in zip(q, a) for elt in pair]
 
             result += M.write_layout((self.q_nb, 2),
-                                     [12, 4],
+                                     [14, 4],
                                      content,
                                      borders='all',
                                      center='yes',
