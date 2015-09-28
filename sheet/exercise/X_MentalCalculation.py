@@ -183,6 +183,9 @@ class X_MentalCalculation(X_Structure):
                 q = randomly.pop(questions_to_process)
                 # We put aside the numbers of the last iteration
                 (kept_aside, nb_box) = utils.put_aside(last_nb, nb_box)
+                if len(nb_box) == 0:
+                    nb_box = question.generate_numbers(nb_type)
+                    kept_aside = []
                 nb_to_use = randomly.pop(nb_box)
                 created_questions[nb_type] += [default_question(\
                                                     embedded_machine,
