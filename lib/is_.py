@@ -46,7 +46,7 @@ def a_string(objct):
 #   @param objct The object to test
 #   @return True if argument is a string
 def a_numerical_string(objct):
-    if type(objct) == str and objct != "":
+    if type(objct) == str and objct != "" and objct != '...':
         for i in range(len(objct)):
             if not(objct[i] == '+' \
                or objct[i] == '-' \
