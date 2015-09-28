@@ -30,3 +30,4 @@
 from . import multi_direct
 from . import multi_reversed
 from . import divi_direct
+from . import multi_decimal, multi_decimal1, multi_decimal2

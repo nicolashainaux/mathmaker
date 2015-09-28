@@ -9,18 +9,30 @@
 
 	<exercise>
 
-		<question kind="multi" subkind="direct" nb="int" context="none">
-			<table_2_9>6</table_2_9>
-			<table_15>2</table_15>
-			<table_25>2</table_25>
-			<table_11>2</table_11>
+		<question kind="multi" subkind="direct" context="none">
+			<table_2_9>5</table_2_9>
+			<table_15>1</table_15>
+			<table_25>1</table_25>
+			<table_11>1</table_11>
 		</question>
 
-		<question kind="multi" subkind="reversed" nb="int" context="none">
+		<question kind="multi" subkind="reversed" context="none">
 			<table_2_9>4</table_2_9>
 		</question>
 
-		<question kind="divi" subkind="direct" nb="int" context="none">
+		<question kind="multi" subkind="decimal1" context="none">
+			<table_2_9>1</table_2_9>
+		</question>
+
+		<question kind="multi" subkind="decimal2" context="none">
+			<table_2_9>1</table_2_9>
+		</question>
+
+		<question kind="multi" subkind="decimal" context="none">
+			<table_2_9>2</table_2_9>
+		</question>
+
+		<question kind="divi" subkind="direct" context="none">
 			<table_2_9>4</table_2_9>
 		</question>
 
