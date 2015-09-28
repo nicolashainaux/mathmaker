@@ -178,7 +178,9 @@ class X_MentalCalculation(X_Structure):
             nb_used = []
             last_nb = []
             created_questions[nb_type] = []
-            for q in q_dict[nb_type]:
+            questions_to_process = list(q_dict[nb_type])
+            for i in range(len(q_dict[nb_type])):
+                q = randomly.pop(questions_to_process)
                 # We put aside the numbers of the last iteration
                 (kept_aside, nb_box) = utils.put_aside(last_nb, nb_box)
                 nb_to_use = randomly.pop(nb_box)
@@ -222,19 +224,11 @@ class X_MentalCalculation(X_Structure):
             for elt in created_questions:
                 total_length += len(created_questions[elt])
 
-            w_table = []
-            for elt in created_questions:
-                w_table += [Decimal(Decimal(len(created_questions[elt]))  \
-                                    / Decimal(total_length))]
-
-            nb_type = randomly.pop(list(created_questions.keys()),
-                                   weighted_table=w_table)
-
-            self.questions_list += [created_questions[nb_type].pop(0)]
+            nb_type = randomly.pop(list(created_questions.keys()))
 
             # We remove the empty keys from created_questions
-            if len(created_questions[elt]) == 0:
-                created_questions.pop(elt, None)
+            if len(created_questions[nb_type]) == 0:
+                created_questions.pop(nb_type, None)
 
 
         self.q_nb = len(self.questions_list)
