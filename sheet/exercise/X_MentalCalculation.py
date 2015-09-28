@@ -229,10 +229,11 @@ class X_MentalCalculation(X_Structure):
 
             nb_type = randomly.pop(list(created_questions.keys()))
 
+            self.questions_list += [created_questions[nb_type].pop(0)]
+
             # We remove the empty keys from created_questions
             if len(created_questions[nb_type]) == 0:
                 created_questions.pop(nb_type, None)
-
 
         self.q_nb = len(self.questions_list)
 
