@@ -202,6 +202,8 @@ class X_MentalCalculation(X_Structure):
                 last_nb = []
                 if nb_type == 'table_2_9':
                     last_nb += [nb_to_use[0], nb_to_use[1]]
+                elif nb_type == 'int_irreducible_frac':
+                    last_nb += [nb_to_use[0]]
                 else:
                     last_nb += [nb_to_use[1]]
 

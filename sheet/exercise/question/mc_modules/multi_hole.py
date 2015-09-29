@@ -28,21 +28,24 @@ class sub_object(object):
 
     def __init__(self, numbers_to_use):
         nb_list = list(numbers_to_use)
-        nb1 = randomly.pop(nb_list)
-        nb2 = randomly.pop(nb_list)
-        self.product = Product([nb1, nb2]).evaluate()
-        nb_list = [nb1, nb2]
-        self.hidden_one = randomly.pop(nb_list)
-        ##
-        #   @todo   Cases when the result is not randomly one the two first
-        #           numbers (e.g. the numbers to use are not in the tables
-        #           from 2 to 9)
-        visible_one = randomly.pop(nb_list)
         hole = Item(Value('...'))
+        self.hidden_one = None
+        visible_one = None
+        self.product = Product([nb_list[0], nb_list[1]]).evaluate()
+
+        if isinstance(nb_list[1], Fraction):
+            self.hidden_one = nb_list[1]
+            visible_one = nb_list[0]
+        else:
+            nb1 = randomly.pop(nb_list)
+            nb2 = randomly.pop(nb_list)
+            nb_list = [nb1, nb2]
+            self.hidden_one = Item(randomly.pop(nb_list))
+            visible_one = randomly.pop(nb_list)
+
         factors = [visible_one, hole]
-        f1 = randomly.pop(factors)
-        f2 = randomly.pop(factors)
-        self.holed_product = Product([f1, f2])
+        self.holed_product = Product([randomly.pop(factors),
+                                      randomly.pop(factors)])
         self.holed_product.set_compact_display(False)
 
     def q(self, M, **options):
@@ -54,6 +57,6 @@ class sub_object(object):
                + M.write_math_style2(str(self.product)) \
                + " ?"
 
-
     def a(self, M, **options):
-        return M.write_math_style2(str(self.hidden_one))
+        return M.write_math_style2(\
+                        self.hidden_one.into_str(force_expression_begins=True))

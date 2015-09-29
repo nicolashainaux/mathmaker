@@ -33,7 +33,8 @@
 		</question>
 
 		<question kind="multi" subkind="hole" context="none">
-			<table_2_9>3</table_2_9>
+			<table_2_9>1</table_2_9>
+			<int_irreducible_frac>2</int_irreducible_frac>
 		</question>
 
 		<question kind="divi" subkind="direct" context="none">

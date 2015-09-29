@@ -23,13 +23,13 @@
 from lib import *
 from .Q_Structure import Q_Structure
 from . import mc_modules
-
-#from core.base_calculus import *
+from core.base_calculus import *
 
 # 'table_2_9'
 # 'table_11' --> 11×n where 10 < n < 100, no carry over
 # 'table_15' --> 15×n where 2 <= n <= 6
 # 'table_25' --> 25×n where 2 <= n <= 6
+# 'int_irreducible_frac' --> (n, p/n) where 2 <= n <= 20 and p/n is irreducible
 AVAILABLE_Q_SUBKIND_VALUES = ['table_2_9',
                               'table_11',
                               'table_15',
@@ -85,6 +85,13 @@ MODULES =  \
 
 
 
+# --------------------------------------------------------------------------
+##
+#   @brief Generator of coprime numbers
+def coprime_generator(n):
+    for i in range(20):
+        if maths_lib.gcd(i, n) == 1:
+            yield i
 
 
 # --------------------------------------------------------------------------
@@ -119,6 +126,12 @@ def generate_numbers(subkind):
 
     elif subkind == 'table_25':
         return [(25, 2), (25,3), (25, 4), (25,5), (25, 6)]
+
+    elif subkind == 'int_irreducible_frac':
+        result = []
+        for k in [i+2 for i in range(18)]:
+            result += [(k, Fraction((n, k))) for n in coprime_generator(k)]
+        return result
 
     else:
         raise error.OutOfRangeArgument(subkind,
