@@ -25,6 +25,10 @@
 ##
 # @package core.base_calculus
 # @brief Mathematical elementary arithmetic and algebraic objects.
+
+from functools import cmp_to_key
+
+
 import locale
 import math
 from decimal import *
@@ -5789,7 +5793,7 @@ class Product (CommutativeOperation):
         raw_literals_list = self.get_factors_list(LITERALS)
         literals_list = reduce_literal_items_product(raw_literals_list)
         #python2.7 code: literals_list.sort(Exponented.alphabetical_order_cmp)
-        sorted(literals_list)
+        sorted(literals_list, key=cmp_to_key(Item.__lt__))
 
 
         # Determine the sign
@@ -8808,8 +8812,3 @@ class BinomialIdentity(Expandable):
     #   @return Exponented
     def expand_and_reduce_next_step(self, **options):
         return self.expand()
-
-
-
-
-
