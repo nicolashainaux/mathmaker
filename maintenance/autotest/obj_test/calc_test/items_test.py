@@ -276,12 +276,11 @@ def action():
     check(str(it0 == Item(0)),
          ["True"])
 
-
+    #46
+    check(item_a.__lt__(item_b),
+         ["True"])
 
     for i in range(len(common.machines)):
         test = common.machines[i].type_string(item_with_unit,
                                               display_unit='yes')
         check(test, ["19,5 cm"])
-
-
-
