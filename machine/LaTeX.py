@@ -537,7 +537,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
     #   @brief Sets the font_size_offset field
     def set_font_size_offset(self, arg):
         if not is_.an_integer(arg):
-            raise error.UncompatibleType(objct, "Integer")
+            raise error.UncompatibleType(arg, "Integer")
 
         else:
             self.font_size_offset = arg
@@ -551,9 +551,3 @@ exercises counter (which is useful when begining to write the answers sheet)")\
             self.redirect_output_to_str = arg
         else:
             raise error.OutOfRangeArgument(arg, " boolean ")
-
-
-
-
-
-
