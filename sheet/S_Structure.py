@@ -20,8 +20,59 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import xml.etree.ElementTree as XML_PARSER
+
 from lib import error
 from lib.common.cst import *
+
+# --------------------------------------------------------------------------
+##
+#   @brief Gets the questions' kinds from the given file.
+def get_sheet_config(file_name):
+    try:
+        xml_doc = XML_PARSER.parse(file_name).getroot()
+    except FileNotFoundError:
+        raise error.UnreachableData("the file named : " + str(file_name))
+
+    sheet_layout = { 'exc' : [],
+                     'ans' : []
+                   }
+
+    config = {}
+
+    for child in xml_doc:
+        if child.tag == 'layout':
+            for exc_or_ans in child:
+                for line in exc_or_ans:
+                    if line.attrib['nb'] == 'None':
+                        sheet_layout[exc_or_ans.tag] += [None]
+                        for ex_nb in line:
+                            if ex_nb.text == 'all':
+                                sheet_layout[exc_or_ans.tag] += ['all']
+                            else:
+                                ##
+                                #   @todo   when we need to read a list of numbers
+                                pass
+                else:
+                    ##
+                    #   @todo   when we need to read the col_widths
+                    pass
+
+        elif child.tag == 'config':
+            for key in child.attrib:
+                config[key] = child.attrib[key]
+
+    return (xml_doc.attrib["header"],
+            xml_doc.attrib["title"],
+            xml_doc.attrib["subtitle"],
+            xml_doc.attrib["text"],
+            xml_doc.attrib["answers_title"],
+            config["layout_type"],
+            int(config["font_size_offset"]),
+            config["layout_unit"],
+            sheet_layout
+            )
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -470,8 +521,3 @@ class S_Structure(object):
     #        self.machine.write_exercise_number()
     #        e.write_answer()
     #        self.machine.write_new_line()
-
-
-
-
-

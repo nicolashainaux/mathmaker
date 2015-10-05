@@ -2,12 +2,27 @@
 
 <!-- DEFAULT MENTAL CALCULATION SHEET -->
 
-<sheet title="Mental calculation">
+
+<sheet header="" title="Mental calculation" subtitle="" text="" answers_title="Answers">
 
 	<!-- Available config types for mental calculation: tabular, slideshow -->
-	<config type="tabular"/>
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<config layout_type="mental" type="tabular" font_size_offset="0" layout_unit="cm"/>
 
-	<exercise>
+	<layout>
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<exercise id="mental_calculation">
 
 		<question kind="multi" subkind="direct" context="none">
 			<table_2_9>5</table_2_9>

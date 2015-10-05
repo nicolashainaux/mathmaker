@@ -26,7 +26,7 @@ from . import exercise
 from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = 0
-SHEET_LAYOUT_TYPE = 'std|short_test|mini_test|equations'
+SHEET_LAYOUT_TYPE = 'std|short_test|mini_test|equations|mental'
 SHEET_LAYOUT_UNIT = "cm"
 #EXAMPLE OF A SHEET NOT USING ANY LAYOUT
 # -----------------------  lines_nb    col_widths   exercises

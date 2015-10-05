@@ -27,16 +27,14 @@ import machine
 from . import exercise
 
 from .S_Structure import S_Structure
+from .S_Structure import get_sheet_config
 
-FONT_SIZE_OFFSET = 0
-SHEET_LAYOUT_TYPE = 'mental'
-SHEET_LAYOUT_UNIT = "cm"
 # ------------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc' : [ None,                    'all'
-                         ],
-                 'ans' : [ None,                    'all'
-                         ]
-               }
+#SHEET_LAYOUT = { 'exc' : [ None,                    'all'
+#                         ],
+#                 'ans' : [ None,                    'all'
+#                         ]
+#               }
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -59,16 +57,28 @@ class MentalCalculation(S_Structure):
     #   @return One instance of sheet.MentalCalculation
     def __init__(self, embedded_machine, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
-                             SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
-                             SHEET_LAYOUT_TYPE)
+        mc_mm_file = options['filename'] if 'filename' in options \
+                                         else default.MC_MM_FILE
+        (header,
+         title,
+         subtitle,
+         text,
+         answers_title,
+         sheet_layout_type,
+         font_size_offset,
+         sheet_layout_unit,
+         sheet_layout) = get_sheet_config(mc_mm_file)
+
+        S_Structure.__init__(self, embedded_machine, font_size_offset,
+                             sheet_layout_unit, sheet_layout,
+                             sheet_layout_type, **options)
+
+        self.header = _(header) if header != "" else ""
+        self.title = _(title) if title != "" else ""
+        self.subtitle = _(subtitle) if subtitle != "" else ""
+        self.text = _(text) if text != "" else ""
+        self.answers_title = _(answers_title) if answers_title != "" else ""
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
-        self.header = ""
-        self.title = _("Mental calculation:")
-        self.subtitle = ""
-        self.text = ""
-        self.answers_title = _("Answers:")
-
         ex = exercise.X_MentalCalculation(self.machine, **options)
         self.exercises_list.append(ex)
