@@ -306,11 +306,10 @@ class Q_RightTriangle(Q_Structure):
              or self.q_kind == 'contrapositive_of_pythagorean_theorem':
         #___
             sides_values = [None, None, None]
-            triples = pythagorean.ALL_TRIPLES_5_100
+            triples = list(pythagorean.ALL_TRIPLES_5_100)
 
             if use_decimals:
-                triples = pythagorean.ALL_TRIPLES_5_100 \
-                        + pythagorean.TRIPLES_101_200_WO_TEN_MULTIPLES
+                triples += list(pythagorean.TRIPLES_101_200_WO_TEN_MULTIPLES)
 
             sides_values = randomly.pop(triples)
 
