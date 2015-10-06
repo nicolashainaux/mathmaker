@@ -25,6 +25,7 @@ import xml.etree.ElementTree as XML_PARSER
 from decimal import Decimal
 
 from lib import *
+from lib.common import default
 from .X_Structure import X_Structure
 from . import question
 
@@ -119,7 +120,7 @@ class X_MentalCalculation(X_Structure):
     #                         ...
     #                         ...
     #   @todo Complete the description of the possible options !
-    #   @return One instance of exercise.Model
+    #   @return One instance of exercise.X_MentalCalculation
     def __init__(self, embedded_machine, x_kind='default_nothing', **options):
         self.derived = True
         mc_mm_file = options['filename'] if 'filename' in options \

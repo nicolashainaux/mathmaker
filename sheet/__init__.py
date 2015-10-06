@@ -28,6 +28,7 @@
 # @brief A sheet contains a title, subtitle, exercises list & answers title.
 
 from . import S_Structure
+from . import S_Generic
 from . import AlgebraExpressionReduction
 from . import AlgebraExpressionExpansion
 from . import AlgebraShortTest
@@ -44,14 +45,15 @@ from . import FractionsSum
 from . import AlgebraFactorization_01
 from . import AlgebraFactorization_02
 from . import AlgebraFactorization_03
-from . import MentalCalculation
 from . import AlgebraTest2
 from . import AlgebraMiniTest0
 from . import AlgebraMiniTest1
 from . import PythagoreanTheoremShortTest
 from . import ConverseAndContrapositiveOfPythagoreanTheoremShortTest
+from . import catalog
 
 S_Structure = S_Structure.S_Structure
+S_Generic = S_Generic.S_Generic
 AlgebraExpressionReduction = \
                         AlgebraExpressionReduction.AlgebraExpressionReduction
 AlgebraExpressionExpansion = \
@@ -73,7 +75,6 @@ FractionsSum = FractionsSum.FractionsSum
 AlgebraFactorization_01 = AlgebraFactorization_01.AlgebraFactorization_01
 AlgebraFactorization_02 = AlgebraFactorization_02.AlgebraFactorization_02
 AlgebraFactorization_03 = AlgebraFactorization_03.AlgebraFactorization_03
-MentalCalculation = MentalCalculation.MentalCalculation
 AlgebraTest2 = AlgebraTest2.AlgebraTest2
 AlgebraMiniTest0 = AlgebraMiniTest0.AlgebraMiniTest0
 AlgebraMiniTest1 = AlgebraMiniTest1.AlgebraMiniTest1
@@ -140,13 +141,12 @@ AVAILABLE = {"algebra-expression-reduction" : \
              "fractions-sum": \
                  (FractionsSum,
                   ""),
-             "mental-calculation": \
-                 (MentalCalculation,
-                  ""),
              "pythagorean-theorem-short-test" : \
                  (PythagoreanTheoremShortTest,
                   ""),
              "converse-and-contrapositive-of-pythagorean-theorem-short-test": \
                  (ConverseAndContrapositiveOfPythagoreanTheoremShortTest,
-                  "")
+                  ""),
+             "generic" :\
+                 (S_Generic, "")
              }

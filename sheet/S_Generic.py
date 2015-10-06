@@ -20,14 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib.common.cst import YES
-from lib.common import default
-
-import machine
-from . import exercise
-
 from .S_Structure import S_Structure
-from .S_Structure import get_sheet_config
+from .S_Structure import get_sheet_config, get_exercises_list
 
 # ------------------------  lines_nb    col_widths   exercises
 #SHEET_LAYOUT = { 'exc' : [ None,                    'all'
@@ -40,10 +34,9 @@ from .S_Structure import get_sheet_config
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
-# @class MentalCalculation
-# @brief This sheet is either a slideshow of Mental Calculation questions or
-#        a sheet of one single exercise being a tabular of n questions.
-class MentalCalculation(S_Structure):
+# @class S_Generic
+# @brief This sheet will create a sheet matching the given xml file.
+class S_Generic(S_Structure):
 
 
 
@@ -54,11 +47,10 @@ class MentalCalculation(S_Structure):
     #   @brief Constructor
     #   @param embedded_machine The machine to be used
     #   @param **options Any options
-    #   @return One instance of sheet.MentalCalculation
-    def __init__(self, embedded_machine, **options):
+    #   @return One instance of sheet.Generic
+    def __init__(self, embedded_machine, filename, **options):
         self.derived = True
-        mc_mm_file = options['filename'] if 'filename' in options \
-                                         else default.MC_MM_FILE
+
         (header,
          title,
          subtitle,
@@ -67,7 +59,7 @@ class MentalCalculation(S_Structure):
          sheet_layout_type,
          font_size_offset,
          sheet_layout_unit,
-         sheet_layout) = get_sheet_config(mc_mm_file)
+         sheet_layout) = get_sheet_config(filename)
 
         S_Structure.__init__(self, embedded_machine, font_size_offset,
                              sheet_layout_unit, sheet_layout,
@@ -79,6 +71,5 @@ class MentalCalculation(S_Structure):
         self.text = _(text) if text != "" else ""
         self.answers_title = _(answers_title) if answers_title != "" else ""
 
-        # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
-        ex = exercise.X_MentalCalculation(self.machine, **options)
-        self.exercises_list.append(ex)
+        for ex in get_exercises_list(filename):
+            self.exercises_list.append(ex(self.machine, **options))

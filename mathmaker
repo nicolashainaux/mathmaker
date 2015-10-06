@@ -169,7 +169,7 @@ complete." % {'software_ref' : software.NAME} + "\n")
 
     if options.filename != None:
         sh = sheet.AVAILABLE[args[0]][0](M,
-                                         filename=options.filename);
+                                         filename=options.filename)
     else:
         sh = sheet.AVAILABLE[args[0]][0](M)
 

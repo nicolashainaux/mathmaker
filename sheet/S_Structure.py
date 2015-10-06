@@ -22,6 +22,7 @@
 
 import xml.etree.ElementTree as XML_PARSER
 
+from .catalog import CATALOG
 from lib import error
 from lib.common.cst import *
 
@@ -73,6 +74,25 @@ def get_sheet_config(file_name):
             sheet_layout
             )
 
+# --------------------------------------------------------------------------
+##
+#   @brief Gets the questions' kinds from the given file.
+def get_exercises_list(file_name):
+    try:
+        xml_doc = XML_PARSER.parse(file_name).getroot()
+    except FileNotFoundError:
+        raise error.UnreachableData("the file named : " + str(file_name))
+
+    exercises_list = []
+
+    for child in xml_doc:
+        if child.tag == 'exercise':
+            if not 'id' in child.attrib:
+                exercises_list += [CATALOG['generic']]
+            else:
+                exercises_list += [CATALOG[child.attrib['id']]]
+
+    return exercises_list
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
