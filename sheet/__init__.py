@@ -146,7 +146,5 @@ AVAILABLE = {"algebra-expression-reduction" : \
                   ""),
              "converse-and-contrapositive-of-pythagorean-theorem-short-test": \
                  (ConverseAndContrapositiveOfPythagoreanTheoremShortTest,
-                  ""),
-             "generic" :\
-                 (S_Generic, "")
+                  "")
              }

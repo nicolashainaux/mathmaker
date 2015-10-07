@@ -20,8 +20,14 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from lib.common.software import ROOT_PATH
 from . import exercise
 
-CATALOG = { 'mental_calculation_default' : exercise.X_MentalCalculation,
+D = ROOT_PATH + "sheet/"
+
+XML_SHEETS = { 'mental_calculation_default' : D +\
+                                              "mental_calculation_default.xml"}
+
+CATALOG = { 'mental_calculation' : exercise.X_MentalCalculation,
             #'generic' : exercise.X_Generic
           }

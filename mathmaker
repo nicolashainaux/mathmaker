@@ -52,14 +52,6 @@ def main():
                            + " Default value is configured in " \
                            + software.NAME + "." + software.CFG_FILE_SUFFIX)
 
-    parser.add_option("-F", "--file",
-                      action="store",
-                      dest="filename",
-                      default=default.MC_MM_FILE,
-                      metavar="FILENAME",
-                      help="use FILENAME as sheet file. Only works for mental"\
-                           + " calculation sheets, so far")
-
     (options, args) = parser.parse_args()
 
     path_to_euktoeps = cfg.get_value_from_file("PATHS", "EUKTOEPS")
@@ -77,7 +69,8 @@ def main():
 
     check_euktoeps = shlex.split(subprocess.Popen(["grep", "version"],
                                                   stdin=call_euktoeps.stdout,
-                                                  stdout=subprocess.PIPE).communicate()[0].decode()
+                                                  stdout=subprocess.PIPE)\
+                                                      .communicate()[0].decode()
                                 )
 
     if not len(check_euktoeps) == 3:
@@ -144,34 +137,40 @@ complete." % {'software_ref' : software.NAME} + "\n")
 
     M = machine.LaTeX(options.lang)
 
-    if len(args) == 0:
-        sys.stderr.write("Error : " + software.NAME \
-                         + " requires one argument.\n")
-
+    if len(args) >= 2:
+        sys.stderr.write("Error: " + software.NAME \
+                         + " does not require more than one argument.\n")
         sys.exit(2)
 
-    elif len(args) >= 2:
-        sys.stderr.write("Error : " + software.NAME \
-                         + " requires exactly one argument.\n")
+    elif len(args) == 1:
+        if args[0] in sheet.AVAILABLE:
+            sh = sheet.AVAILABLE[args[0]][0](M)
+
+        elif args[0] in sheet.catalog.XML_SHEETS:
+            sh = sheet.S_Generic(M, filename=sheet.catalog.XML_SHEETS[args[0]])
+
+        elif os.path.isfile(args[0]):
+            sh = sheet.S_Generic(M, filename=args[0])
+
+        else:
+            sys.stderr.write("Error: " + args[0] + " is not a correct argument "\
+                             + "for " \
+                             + software.NAME \
+                             + ", you should use any item from the following " \
+                             + " list:\n" \
+                             + str(sorted([key for key in sheet.AVAILABLE]))\
+                             + str(sorted([key for key in \
+                                                    sheet.catalog.XML_SHEETS]))\
+                             + "\n")
+
+            sys.exit(2)
+
+    elif len(args) == 0:
+        sys.stderr.write("Error: " + software.NAME \
+                         + " requires one argument or" \
+                         + " a valid filename.\n")
 
         sys.exit(2)
-
-    elif not args[0] in sheet.AVAILABLE:
-        sys.stderr.write("Error : " + args[0] + " is not a correct argument " \
-                         + "for " \
-                         + software.NAME \
-                         + ", you should use any item from the following " \
-                         + " list :\n" \
-                         + str(sorted([key for key in sheet.AVAILABLE]))\
-                         + "\n")
-
-        sys.exit(2)
-
-    if options.filename != None:
-        sh = sheet.AVAILABLE[args[0]][0](M,
-                                         filename=options.filename)
-    else:
-        sh = sheet.AVAILABLE[args[0]][0](M)
 
     M.write(str(sh))
 
