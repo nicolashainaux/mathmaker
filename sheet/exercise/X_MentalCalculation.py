@@ -67,9 +67,9 @@ def get_q_kinds_from_file(file_name):
     x_kind = 'tabular' # default
 
     for child in xml_config:
-        if child.tag == 'config':
-            x_kind = child.attrib['type']
-        elif child.tag == 'exercise':
+        if child.tag == 'exercise':
+            if 'kind' in child.attrib:
+                x_kind = child.attrib['kind']
             for question in child:
                 for elt in question:
                     questions += [[question.attrib,

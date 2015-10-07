@@ -5,11 +5,9 @@
 
 <sheet header="" title="Mental calculation" subtitle="" text="" answers_title="Answers">
 
-	<!-- Available config types for mental calculation: tabular, slideshow -->
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
 	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
-	<config layout_type="mental" type="tabular" font_size_offset="0" layout_unit="cm"/>
-
-	<layout>
+	<layout type="mental">
 		<exc>
 			<line nb="None">
 				<exercises>all</exercises>
@@ -22,37 +20,42 @@
 		</ans>
 	</layout>
 
-	<exercise id="mental_calculation">
+	<!-- Default value: id='generic' 
+		 No default for kind and subkind, they must be given -->
+	<!-- Available kinds for mental calculation: tabular, slideshow -->
+	<exercise id="mental_calculation" kind="tabular">
 
-		<question kind="multi" subkind="direct" context="none">
+		<!-- Default value (planned): context="none" 
+			 No default for kind and subkind, they must be given -->
+		<question kind="multi" subkind="direct">
 			<table_2_9>5</table_2_9>
 			<table_15>1</table_15>
 			<table_25>1</table_25>
 			<table_11>1</table_11>
 		</question>
 
-		<question kind="multi" subkind="reversed" context="none">
+		<question kind="multi" subkind="reversed">
 			<table_2_9>4</table_2_9>
 		</question>
 
-		<question kind="multi" subkind="decimal1" context="none">
+		<question kind="multi" subkind="decimal1">
 			<table_2_9>1</table_2_9>
 		</question>
 
-		<question kind="multi" subkind="decimal2" context="none">
+		<question kind="multi" subkind="decimal2">
 			<table_2_9>1</table_2_9>
 		</question>
 
-		<question kind="multi" subkind="decimal" context="none">
+		<question kind="multi" subkind="decimal">
 			<table_2_9>1</table_2_9>
 		</question>
 
-		<question kind="multi" subkind="hole" context="none">
+		<question kind="multi" subkind="hole">
 			<table_2_9>1</table_2_9>
 			<int_irreducible_frac>2</int_irreducible_frac>
 		</question>
 
-		<question kind="divi" subkind="direct" context="none">
+		<question kind="divi" subkind="direct">
 			<table_2_9>2</table_2_9>
 		</question>
 

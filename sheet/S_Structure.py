@@ -39,10 +39,19 @@ def get_sheet_config(file_name):
                      'ans' : []
                    }
 
-    config = {}
+    config = {'layout_type' : 'std',
+              'layout_unit' : 'cm',
+              'font_size_offset' : '0'}
 
     for child in xml_doc:
         if child.tag == 'layout':
+            if 'type' in child.attrib:
+                config['layout_type'] = child.attrib['type']
+            if 'unit' in child.attrib:
+                config['layout_unit'] = child.attrib['unit']
+            if 'font_size_offset' in child.attrib:
+                config['font_size_offset'] = child.attrib['font_size_offset']
+                
             for exc_or_ans in child:
                 for line in exc_or_ans:
                     if line.attrib['nb'] == 'None':
@@ -58,10 +67,6 @@ def get_sheet_config(file_name):
                     ##
                     #   @todo   when we need to read the col_widths
                     pass
-
-        elif child.tag == 'config':
-            for key in child.attrib:
-                config[key] = child.attrib[key]
 
     return (xml_doc.attrib["header"],
             xml_doc.attrib["title"],
