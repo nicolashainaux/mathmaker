@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2015 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -20,26 +20,14 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from . import cfg
-import locale
-import os, sys
+from lib.common.software import ROOT_PATH
+from . import exercise
 
-LANGUAGE = cfg.get_value_from_file("LOCALES", "LANGUAGE")
-ENCODING = cfg.get_value_from_file("LOCALES", "ENCODING")
+D = ROOT_PATH + "sheet/"
 
-try:
-    locale.setlocale(locale.LC_ALL, LANGUAGE + '.' + ENCODING)
-except:
-    locale.setlocale(locale.LC_ALL, '')
+XML_SHEETS = { 'mental_calculation_default' : D +\
+                                              "mental_calculation_default.xml"}
 
-#DECIMAL_POINT = str(locale.localeconv()['decimal_point'])
-
-MC_MM_FILE = os.path.abspath(os.path.dirname(sys.argv[0])) \
-           + "/sheet/mental_calculation_default.xml"
-
-NUMBER_OF_QUESTIONS = 6
-
-MONOMIAL_LETTER = 'x'
-MAX_MONOMIAL_COEFF = 20
-
-EQUATION_NAME = 'E'
+CATALOG = { 'mental_calculation' : exercise.X_MentalCalculation,
+            #'generic' : exercise.X_Generic
+          }

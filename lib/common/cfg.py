@@ -77,4 +77,3 @@ def get_value_from_file(category, option_name):
 
 
 
-

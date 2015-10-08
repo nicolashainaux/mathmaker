@@ -20,19 +20,23 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import shlex
+import xml.etree.ElementTree as XML_PARSER
+from decimal import Decimal
+
 from lib import *
+from lib.common import default
 from .X_Structure import X_Structure
 from . import question
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
-# Note : the bypass value allows to give the value of *x_subkind* directly to
-# the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
-    {#'short_test' : ['x_subkind1', 'x_subkind2'],
-     #'preformatted' : [''],
-     'bypass' : ['10m_2-9', '10m_4-9', '5m_3rm_2d_2-9']
+    {'tabular' : 'default',
+     'slideshow' : 'default'
     }
+
+MAX_NB_OF_QUESTIONS = 40
 
 X_LAYOUT_UNIT = "cm"
 # ----------------------  lines_nb    col_widths   questions
@@ -43,6 +47,35 @@ X_LAYOUTS = {'default' :
                         ]
               }
             }
+
+
+# --------------------------------------------------------------------------
+##
+#   @brief Gets the questions' kinds from the given file.
+def get_q_kinds_from_file(file_name):
+
+    try:
+        xml_config = XML_PARSER.parse(file_name).getroot()
+    except FileNotFoundError:
+        raise error.UnreachableData("the file named : " + str(file_name))
+
+    questions = []
+
+    # For instance we will get a list of this kind of elements:
+    # [ {'kind': 'multi', 'subkind': 'direct', 'nb': 'int'}, 'table_2_9', 4]
+
+    x_kind = 'tabular' # default
+
+    for child in xml_config:
+        if child.tag == 'exercise':
+            if 'kind' in child.attrib:
+                x_kind = child.attrib['kind']
+            for question in child:
+                for elt in question:
+                    questions += [[question.attrib,
+                                   elt.tag, int(elt.text)]]
+
+    return (x_kind, questions)
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -87,9 +120,14 @@ class X_MentalCalculation(X_Structure):
     #                         ...
     #                         ...
     #   @todo Complete the description of the possible options !
-    #   @return One instance of exercise.Model
+    #   @return One instance of exercise.X_MentalCalculation
     def __init__(self, embedded_machine, x_kind='default_nothing', **options):
         self.derived = True
+        mc_mm_file = options['filename'] if 'filename' in options \
+                                         else default.MC_MM_FILE
+
+        (x_kind, q_list) = get_q_kinds_from_file(mc_mm_file)
+
         X_Structure.__init__(self, embedded_machine,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                              X_LAYOUT_UNIT, **options)
@@ -107,16 +145,100 @@ class X_MentalCalculation(X_Structure):
                      'ans' : ""
                     }
 
-        for i in range(self.q_nb):
-            self.questions_list.append(                                   \
-                         default_question(self.machine,
-                                    q_kind=self.x_subkind,
-                                    expression_number=i+self.start_number,
-                                    **options)
-                                          )
+        # From q_list, creation of dict of questions organized by type of nb:
+        q_dict = {}
 
+        # In q_list, each element is like this:
+        # [{'kind':'multi', 'subkind':'direct', 'nb':'int'}, 'table_2_9', 4]
+        # [q[0],                                             q[1],        q[2]]
+        for q in q_list:
+            if not q[1] in q_dict:
+                q_dict[q[1]] = []
 
+            for n in range(q[2]):
+                q_id = q[0]['kind']
+                q_id += "_"
+                q_id += q[0]['subkind']
+                q_dict[q[1]].append((q_id, q[0]))
 
+        # Now, q_dict is organized like this:
+        # {'table_2_9':[ ('multi_direct', {'nb':'int'}),
+        #                ('multi_direct', {'nb':'int'}),
+        #                ('multi_direct', {'nb':'int'}),
+        #                ('multi_direct', {'nb':'int'}) ],
+        #  'nb_type2': [ ('q_id', {'option1' : '', ... }),
+        #                ('q_id', {'option1' : '', ... }) ],
+        #  'etc.'
+        # }
+
+        # Now, we generate the numbers & questions, by type of question first
+        created_questions = {}
+
+        for nb_type in q_dict:
+            nb_box = question.generate_numbers(nb_type)
+            nb_used = []
+            last_nb = []
+            created_questions[nb_type] = []
+            questions_to_process = list(q_dict[nb_type])
+            for i in range(len(q_dict[nb_type])):
+                q = randomly.pop(questions_to_process)
+                # We put aside the numbers of the last iteration
+                (kept_aside, nb_box) = utils.put_aside(last_nb, nb_box)
+                if len(nb_box) == 0:
+                    nb_box = question.generate_numbers(nb_type)
+                    kept_aside = []
+                nb_to_use = randomly.pop(nb_box)
+                created_questions[nb_type] += [default_question(\
+                                                    embedded_machine,
+                                                    q[0],
+                                                    q[1],
+                                                    numbers_to_use=nb_to_use)]
+                nb_box += kept_aside
+
+                # As last numbers we don't want to reuse in the next iteration,
+                # we keep both of them in the case of tables from 2 to 9, but
+                # only the second one in all other cases (otherwise we would
+                # tell not to pick anything containing 25 in the table of 25,
+                # for instance, which would be nonsense)
+                last_nb = []
+                if nb_type == 'table_2_9':
+                    last_nb += [nb_to_use[0], nb_to_use[1]]
+                elif nb_type == 'int_irreducible_frac':
+                    last_nb += [nb_to_use[0]]
+                else:
+                    last_nb += [nb_to_use[1]]
+
+        # Now created_questions looks like:
+        # {'table_2_9':[ question_object1,
+        #                question_object2,
+        #                question_object3,
+        #                question_object4 ],
+        #  'nb_type2': [ question_object5,
+        #                etc. ],
+        #  'etc.'
+        # }
+
+        # Now we will mix the questions but keep the order, per type (e.g.
+        # we can have question_object1, question_object5, question_object2...
+        # but not question_object1, question_object4, question_object2...)
+        total_length = 0
+        for elt in created_questions:
+            total_length += len(created_questions[elt])
+
+        for i in range(total_length):
+            total_length = 0
+            for elt in created_questions:
+                total_length += len(created_questions[elt])
+
+            nb_type = randomly.pop(list(created_questions.keys()))
+
+            self.questions_list += [created_questions[nb_type].pop(0)]
+
+            # We remove the empty keys from created_questions
+            if len(created_questions[nb_type]) == 0:
+                created_questions.pop(nb_type, None)
+
+        self.q_nb = len(self.questions_list)
 
 
         # OTHER EXERCISES
@@ -128,6 +250,45 @@ class X_MentalCalculation(X_Structure):
 
 
 
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Writes the text of the exercise|answer to the output.
+    def to_str(self, ex_or_answers):
+        M = self.machine
+        result = ""
+
+        if self.slideshow:
+            result += M.write_frame("", frame='start_frame')
+            for i in range(self.q_nb):
+                result += M.write_frame(self.questions_list[i].to_str('exc'),
+                                    timing=self.questions_list[i].transduration)
+
+            result += M.write_frame("", frame='middle_frame')
+
+            for i in range(self.q_nb):
+                result += M.write_frame(_("Question:") \
+                                        + self.questions_list[i].to_str('exc')\
+                                        + _("Answer:") \
+                                        + self.questions_list[i].to_str('ans'),
+                                        timing=0)
+
+        # default tabular option:
+        else:
+            q = [self.questions_list[i].to_str('exc') for i in range(self.q_nb)]
+            a = [self.questions_list[i].to_str('ans') for i in range(self.q_nb)]\
+                if ex_or_answers == 'ans' else [" " for i in range(self.q_nb)]
+
+            content = [elt for pair in zip(q, a) for elt in pair]
+
+            result += M.write_layout((self.q_nb, 2),
+                                     [14, 4],
+                                     content,
+                                     borders='all',
+                                     center='yes',
+                                     center_vertically='yes')
+
+        return result
 
 
 

@@ -20,8 +20,84 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import xml.etree.ElementTree as XML_PARSER
+
+from .catalog import CATALOG
 from lib import error
 from lib.common.cst import *
+
+# --------------------------------------------------------------------------
+##
+#   @brief Gets the questions' kinds from the given file.
+def get_sheet_config(file_name):
+    try:
+        xml_doc = XML_PARSER.parse(file_name).getroot()
+    except FileNotFoundError:
+        raise error.UnreachableData("the file named : " + str(file_name))
+
+    sheet_layout = { 'exc' : [],
+                     'ans' : []
+                   }
+
+    config = {'layout_type' : 'std',
+              'layout_unit' : 'cm',
+              'font_size_offset' : '0'}
+
+    for child in xml_doc:
+        if child.tag == 'layout':
+            if 'type' in child.attrib:
+                config['layout_type'] = child.attrib['type']
+            if 'unit' in child.attrib:
+                config['layout_unit'] = child.attrib['unit']
+            if 'font_size_offset' in child.attrib:
+                config['font_size_offset'] = child.attrib['font_size_offset']
+                
+            for exc_or_ans in child:
+                for line in exc_or_ans:
+                    if line.attrib['nb'] == 'None':
+                        sheet_layout[exc_or_ans.tag] += [None]
+                        for ex_nb in line:
+                            if ex_nb.text == 'all':
+                                sheet_layout[exc_or_ans.tag] += ['all']
+                            else:
+                                ##
+                                #   @todo   when we need to read a list of numbers
+                                pass
+                else:
+                    ##
+                    #   @todo   when we need to read the col_widths
+                    pass
+
+    return (xml_doc.attrib["header"],
+            xml_doc.attrib["title"],
+            xml_doc.attrib["subtitle"],
+            xml_doc.attrib["text"],
+            xml_doc.attrib["answers_title"],
+            config["layout_type"],
+            int(config["font_size_offset"]),
+            config["layout_unit"],
+            sheet_layout
+            )
+
+# --------------------------------------------------------------------------
+##
+#   @brief Gets the questions' kinds from the given file.
+def get_exercises_list(file_name):
+    try:
+        xml_doc = XML_PARSER.parse(file_name).getroot()
+    except FileNotFoundError:
+        raise error.UnreachableData("the file named : " + str(file_name))
+
+    exercises_list = []
+
+    for child in xml_doc:
+        if child.tag == 'exercise':
+            if not 'id' in child.attrib:
+                exercises_list += [CATALOG['generic']]
+            else:
+                exercises_list += [CATALOG[child.attrib['id']]]
+
+    return exercises_list
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -276,17 +352,29 @@ class S_Structure(object):
             result += self.machine.write_document_ends()
 
         elif self.layout_type == 'mental':
+            #if self.slideshow:
+            #    result += self.machine.write_document_header(slideshow=True)
+            #    result += self.machine.write_document_begins()
+            #    result += self.sheet_header_to_str()
+            #    result += self.sheet_title_to_str()
+            #    result += self.sheet_text_to_str()
+            #    result += self.texts_to_str('exc', 0)
+            #    result += self.machine.write_document_ends()
+            #else:
             result += self.machine.write_document_header()
             result += self.machine.write_document_begins()
             result += self.sheet_header_to_str()
             result += self.sheet_title_to_str()
             result += self.sheet_text_to_str()
             result += self.texts_to_str('exc', 0)
+            result += self.machine.write_jump_to_next_page()
+            result += self.answers_title_to_str()
+            result += self.texts_to_str('ans', 0)
             result += self.machine.write_document_ends()
 
         else:
             raise error.OutOfRangeArgument(self.layout_type,
-                                "std|short_test|mini_test|equations|mental")
+                                "std|short_test|mini_test|equations")
 
         return result
 
@@ -458,8 +546,3 @@ class S_Structure(object):
     #        self.machine.write_exercise_number()
     #        e.write_answer()
     #        self.machine.write_new_line()
-
-
-
-
-

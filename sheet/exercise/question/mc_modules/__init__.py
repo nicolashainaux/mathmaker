@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2015 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -24,29 +24,9 @@
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
-# @package question
+# @package mc_modules
 # @brief All question objects should be "declared" here.
 
-from . import Q_Structure
-
-from . import Q_AlgebraExpressionReduction
-from . import Q_AlgebraExpressionExpansion
-from . import Q_Equation
-from . import Q_Calculation
-from . import Q_Factorization
-from . import Q_MentalCalculation
-from . import Q_RightTriangle
-
-
-Q_Structure = Q_Structure.Q_Structure
-
-Q_AlgebraExpressionReduction = \
-            Q_AlgebraExpressionReduction.Q_AlgebraExpressionReduction
-Q_AlgebraExpressionExpansion = \
-            Q_AlgebraExpressionExpansion.Q_AlgebraExpressionExpansion
-Q_Calculation = Q_Calculation.Q_Calculation
-Q_Equation = Q_Equation.Q_Equation
-Q_Factorization = Q_Factorization.Q_Factorization
-generate_numbers = Q_MentalCalculation.generate_numbers
-Q_MentalCalculation = Q_MentalCalculation.Q_MentalCalculation
-Q_RightTriangle = Q_RightTriangle.Q_RightTriangle
+from . import multi_direct, multi_reversed, multi_hole
+from . import divi_direct
+from . import multi_decimal, multi_decimal1, multi_decimal2

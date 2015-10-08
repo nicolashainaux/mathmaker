@@ -22,46 +22,122 @@
 
 from lib import *
 from .Q_Structure import Q_Structure
-
+from . import mc_modules
 from core.base_calculus import *
 
+# 'table_2_9'
+# 'table_11' --> 11×n where 10 < n < 100, no carry over
+# 'table_15' --> 15×n where 2 <= n <= 6
+# 'table_25' --> 25×n where 2 <= n <= 6
+# 'int_irreducible_frac' --> (n, p/n) where 2 <= n <= 20 and p/n is irreducible
+AVAILABLE_Q_SUBKIND_VALUES = ['table_2_9',
+                              'table_11',
+                              'table_15',
+                              'table_25',
+                              'bypass']
 
-AVAILABLE_Q_KIND_VALUES = {'10m_2-9': ['default'],
-                           '10m_4-9': ['default'],
-                           '5m_3rm_2d_2-9': ['default']
-                          }
+AVAILABLE_Q_KIND_VALUES = \
+    { 'multi_direct' : ['table_2_9',
+                        'table_11',
+                        'table_15',
+                        'table_25',
+                        'bypass'],
+      'multi_reversed' : ['table_2_9',
+                          'bypass'],
+      'multi_hole' : ['table_2_9',
+                      'bypass'],
+      'multi_decimal' : ['table_2_9',
+                         'bypass'],
+      'multi_decimal1' : ['table_2_9',
+                          'bypass'],
+      'multi_decimal2' : ['table_2_9',
+                          'bypass'],
+      'divi_direct' : ['table_2_9',
+                       'bypass']
+#     frozenset(('area', 'rectangle', 'with_drawing')) : ['table_2_9',
+#                                              'table_11',
+#                                              'table_15',
+#                                              'table_25'],
+#     frozenset(('area', 'rectangle', 'without_drawing')) : ['table_2_9',
+#                                                 'table_11',
+#                                                 'table_15',
+#                                                 'table_25'],
+#     frozenset(('area', 'right_triangle')) : ['table_2_9',
+#                                   'table_11',
+#                                   'table_15',
+#                                   'table_25']
+    }
+
+MODULES =  \
+    { 'multi_direct' : mc_modules.multi_direct,
+      'multi_reversed' : mc_modules.multi_reversed,
+      'multi_hole' : mc_modules.multi_hole,
+      'multi_decimal' : mc_modules.multi_decimal,
+      'multi_decimal1' : mc_modules.multi_decimal1,
+      'multi_decimal2' : mc_modules.multi_decimal2,
+      'divi_direct' : mc_modules.divi_direct
+#     ('division', 'direct') : mc_modules.divi_dir,
+#     ('division', 'decimal_1') : mc_modules.divi_deci1,
+#     ('area', 'rectangle', 'with_drawing') : mc_modules.area_rect_dr,
+#     ('area', 'rectangle', 'without_drawing') : mc_modules.area_rect_no_dr,
+#     ('area', 'right_triangle') : mc_modules.area_right_tri
+    }
+
+
 
 # --------------------------------------------------------------------------
 ##
-#   @brief Produces a randomly list of ten products and results
-#   @param embedded_machine The machine to be used
-#   @param **options Any options
-#   @return A couple ([products], [results])
-def ten_products(pairs):
-
-    if not len(pairs) >= 10:
-        raise error.WrongArgument("a list of at least 10 items",
-                                  "a list containing less than 10 items")
-
-    calculus_list = []
-    results_list = []
-
-    for i in range(10):
-        current_pair = randomly.pop(pairs)
-        if randomly.heads_or_tails():
-            calculus_list.append(Product([current_pair[0],
-                                          current_pair[1]]))
-        else:
-            calculus_list.append(Product([current_pair[1],
-                                          current_pair[0]]))
-
-        results_list.append(Product([current_pair[0],
-                                     current_pair[1]]).evaluate()
-                            )
-
-    return (calculus_list, results_list)
+#   @brief Generator of coprime numbers
+def coprime_generator(n):
+    for i in range(20):
+        if maths_lib.gcd(i, n) == 1:
+            yield i
 
 
+# --------------------------------------------------------------------------
+##
+#   @brief Returns a list of numbers of the given kind
+def generate_numbers(subkind):
+    if subkind == 'table_2_9':
+        return [(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
+                (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
+                (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
+                (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
+                (6, 6), (6, 7), (6, 8), (6, 9),
+                (7, 7), (7, 8), (7, 9),
+                (8, 8), (8, 9),
+                (9, 9)]
+
+    elif subkind == 'table_11':
+        return [(11, 11), (11, 12), (11, 13), (11, 14), (11, 15), (11, 16),
+                (11, 17), (11, 18),
+                (11, 21), (11, 22), (11, 23), (11, 24), (11, 25), (11, 26),
+                (11, 27),
+                (11, 31), (11, 32), (11, 33), (11, 34), (11, 35), (11, 36),
+                (11, 41), (11, 42), (11, 43), (11, 44), (11, 45),
+                (11, 51), (11, 52), (11, 53), (11, 54),
+                (11, 61), (11, 62), (11, 63),
+                (11, 71), (11, 72),
+                (11, 81)
+               ]
+
+    elif subkind == 'table_15':
+        return [(15, 2), (15,3), (15, 4), (15,5), (15, 6)]
+
+    elif subkind == 'table_25':
+        return [(25, 2), (25,3), (25, 4), (25,5), (25, 6)]
+
+    elif subkind == 'int_irreducible_frac':
+        result = []
+        for k in [i+2 for i in range(18)]:
+            result += [(k, Fraction((n, k))) for n in coprime_generator(k)]
+        return result
+
+    else:
+        raise error.OutOfRangeArgument(subkind,
+                                       "'" \
+                                       + " ,".join(AVAILABLE_Q_SUBKIND_VALUES) \
+                                       + "'")
 
 
 
@@ -81,7 +157,8 @@ class Q_MentalCalculation(Q_Structure):
     #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of question.Q_MentalCalculation
-    def __init__(self, embedded_machine, q_kind='default_nothing', **options):
+    def __init__(self, embedded_machine, q_kind,
+                 q_options, **options):
         self.derived = True
 
         # The call to the mother class __init__() method will set the
@@ -90,110 +167,17 @@ class Q_MentalCalculation(Q_Structure):
         # plus self.machine, self.options (modified)
         Q_Structure.__init__(self, embedded_machine,
                              q_kind, AVAILABLE_Q_KIND_VALUES,
-                             **options)
+                             q_subkind='bypass', **options)
         # The purpose of this next line is to get the possibly modified
         # value of **options
         options = self.options
 
-        self.calculus_list = []
-        self.results_list = []
+        # module
+        m = MODULES[self.q_kind].sub_object(options['numbers_to_use'])
 
-        if q_kind == '10m_2-9':
-            # The following intension list creates all (i , j) couples, i and
-            # j taking their values in 2-9 and j >= i to avoid having duplicates
-            # like (3, 2) which would be the same as (2, 3)
-            # pairs = [(i, j) for i in xrange(2, 10) for j in xrange(i, 10)]
-            # We put off 2×2 and 2×3
-            pairs = [(2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
-                     (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
-                     (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
-                     (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
-                     (6, 6), (6, 7), (6, 8), (6, 9),
-                     (7, 7), (7, 8), (7, 9),
-                     (8, 8), (8, 9),
-                     (9, 9)]
+        self.q_text = m.q(embedded_machine, **options)
+        self.q_answer = m.a(embedded_machine, **options)
 
-            (self.calculus_list, self.results_list) = ten_products(pairs)
-
-        elif q_kind == '10m_4-9':
-            # The following intension list creates all (i , j) couples, i and
-            # j taking their values in 4-9 and j >= i to avoid having duplicates
-            # like (5, 6) which would be the same as (6, 5)
-            # pairs = [(i, j) for i in xrange(4, 10) for j in xrange(i, 10)]
-            pairs = [(4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
-                     (5, 5), (5, 6), (5, 7), (5, 8), (5, 9), (6, 6),
-                     (6, 7), (6, 8), (6, 9), (7, 7), (7, 8), (7, 9),
-                     (8, 8), (8, 9), (9, 9)]
-
-
-            (self.calculus_list, self.results_list) = ten_products(pairs)
-
-
-        elif q_kind == '5m_3rm_2d_2-9':
-            # The following intension list creates all (i , j) couples, i and
-            # j take their values in 2 - 9 and j >= i to avoid having duplicates
-            # like (3, 2) which would be the same as (2, 3)
-            # pairs = [(i, j) for i in xrange(2, 10) for j in xrange(i, 10)]
-            # We put off 2×2 and 2×3
-            pairs = [(2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
-                     (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
-                     (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
-                     (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
-                     (6, 6), (6, 7), (6, 8), (6, 9),
-                     (7, 7), (7, 8), (7, 9),
-                     (8, 8), (8, 9),
-                     (9, 9)]
-
-            for i in range(5):
-                current_pair = randomly.pop(pairs)
-                if randomly.heads_or_tails():
-                    self.calculus_list.append(Product([current_pair[0],
-                                                       current_pair[1]]))
-                else:
-                    self.calculus_list.append(Product([current_pair[1],
-                                                       current_pair[0]]))
-
-                self.results_list.append(Product([current_pair[0],
-                                                  current_pair[1]]).evaluate()
-                                                  )
-
-            for i in range(3):
-                current_pair = randomly.pop(pairs)
-                self.calculus_list.append(Product([current_pair[0],
-                                                  current_pair[1]]).evaluate()
-                                                  )
-
-                self.results_list.append(Product([current_pair[0],
-                                                  current_pair[1]]))
-
-            # We put (2, 2) and (2, 3) back in the possible pairs
-            pairs.append((2, 2))
-            pairs.append((2, 3))
-
-            for i in range(2):
-                current_pair = randomly.pop(pairs)
-
-                if randomly.heads_or_tails():
-                    quotient = Quotient(('+',
-                                         Product([current_pair[0],
-                                                  current_pair[1]]).evaluate(),
-                                         current_pair[0]),
-                                         use_divide_symbol='yes')
-
-                    self.calculus_list.append(quotient)
-
-                    self.results_list.append(current_pair[1])
-
-                else:
-                    quotient = Quotient(('+',
-                                         Product([current_pair[0],
-                                                  current_pair[1]]).evaluate(),
-                                         current_pair[1]),
-                                         use_divide_symbol='yes')
-
-                    self.calculus_list.append(quotient)
-
-                    self.results_list.append(current_pair[0])
 
 
 
@@ -207,27 +191,7 @@ class Q_MentalCalculation(Q_Structure):
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
-        M = self.machine
-
-        result = M.write(_("Date") + " : ............." \
-                         + _("Class") + " : .............")
-
-        result += M.write_new_line()
-
-        size = (3, 10)
-        col_widths = [1.4 for i in range(10)]
-        content = [i+1 for i in range(10)] \
-                  + [M.write_math_style2(\
-                    M.type_string(self.calculus_list[i])) for i in range(10)] \
-                  + [M.write_math_style2(\
-                    M.type_string(self.results_list[i])) for i in range(10)]
-
-        result += M.write_layout(size, col_widths, content,
-                                borders='all', center='ok')
-
-        result += M.write_new_line_twice()
-
-        return result
+        return self.q_text
 
 
 
@@ -240,9 +204,4 @@ class Q_MentalCalculation(Q_Structure):
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
-        pass
-
-
-
-
-
+        return self.q_answer
