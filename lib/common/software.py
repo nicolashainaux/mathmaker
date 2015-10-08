@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2015 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -26,10 +26,10 @@ import sys
 # DATA RELATING TO THE SOFTWARE
 NAME = "mathmaker"
 NAME_PRINTABLE = "Mathmaker"
-VERSION = "0.5 (alpha)"
+VERSION = "0.6 (alpha)"
 LICENSE = "GNU GPL 3"
 AUTHOR = "Nicolas Hainaux <nico_h@users.sourceforge.net>"
-COPYRIGHT = "Copyright 2006-2014"
+COPYRIGHT = "Copyright 2006-2015"
 WEBSITE = "http://mathmaker.sourceforge.net"
 
 PROCESS_NAME = os.path.basename(sys.argv[0])
