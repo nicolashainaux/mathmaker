@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2015-09-28 22:06+0200\n"
-"PO-Revision-Date: 2015-09-28 22:06+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-10-12 16:27+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -135,21 +135,21 @@ msgstr "Pour dessiner"
 msgid "Page layout "
 msgstr "Mise en page générale"
 
-#: machine/LaTeX.py:193
+#: machine/LaTeX.py:194
 msgid "If you wish to include a picture, please use this command :"
 msgstr ""
 "Si vous souhaitez inclure une image, utilisez s'il vous plaît cette "
 "commande :"
 
-#: machine/LaTeX.py:196
+#: machine/LaTeX.py:197
 msgid "file_name"
 msgstr "nom_du_fichier"
 
-#: machine/LaTeX.py:199
+#: machine/LaTeX.py:200
 msgid "Exercises counter"
 msgstr "Compteur d'exercices"
 
-#: machine/LaTeX.py:201
+#: machine/LaTeX.py:202
 #, python-format
 msgid ""
 "Definition of the %(exercise)s command, which will insert the word "
@@ -160,11 +160,11 @@ msgstr ""
 "en gras, accompagné de son numéro et qui va incrémenter automatiquement le "
 "compteur"
 
-#: machine/LaTeX.py:205 machine/LaTeX.py:210
+#: machine/LaTeX.py:206 machine/LaTeX.py:211
 msgid "Exercise"
 msgstr "Exercice"
 
-#: machine/LaTeX.py:213
+#: machine/LaTeX.py:214
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -192,8 +192,8 @@ msgstr "Développer et réduire des expressions littérales"
 #: sheet/AlgebraExpressionReduction.py:69 sheet/AlgebraFactorization_01.py:68
 #: sheet/AlgebraFactorization_02.py:67 sheet/AlgebraFactorization_03.py:67
 #: sheet/AlgebraMiniTest0.py:69 sheet/AlgebraMiniTest1.py:89
-#: sheet/AlgebraShortTest.py:69 sheet/AlgebraTest2.py:69
-#: sheet/AlgebraTest.py:69
+#: sheet/AlgebraShortTest.py:69 sheet/AlgebraTest.py:69
+#: sheet/AlgebraTest2.py:69
 #: sheet/ConverseAndContrapositiveOfPythagoreanTheoremShortTest.py:73
 #: sheet/EquationsBasic.py:70 sheet/EquationsClassic.py:69
 #: sheet/EquationsHarder.py:70 sheet/EquationsShortTest.py:68
@@ -293,14 +293,6 @@ msgstr "Produits et quotients de fractions"
 msgid "Sums of fractions"
 msgstr "Somme de fractions"
 
-#: sheet/MentalCalculation.py:68
-msgid "Mental calculation:"
-msgstr "Calcul mental :"
-
-#: sheet/MentalCalculation.py:71
-msgid "Answers:"
-msgstr "Réponses :"
-
 #: sheet/PythagoreanTheoremShortTest.py:66
 msgid "Short Test : pythagorean theorem"
 msgstr "Interrogation : théorème de Pythagore"
@@ -370,11 +362,11 @@ msgstr "Factoriser :"
 msgid "Factorise, if possible :"
 msgstr "Factoriser, si possible :"
 
-#: sheet/exercise/X_MentalCalculation.py:267
+#: sheet/exercise/X_MentalCalculation.py:272
 msgid "Question:"
 msgstr "Question :"
 
-#: sheet/exercise/X_MentalCalculation.py:269
+#: sheet/exercise/X_MentalCalculation.py:274
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -405,7 +397,7 @@ msgstr "Soit"
 #: sheet/exercise/question/Q_Factorization.py:1197
 #: sheet/exercise/question/Q_Factorization.py:1427
 #: sheet/exercise/question/Q_Factorization.py:1445
-#: sheet/exercise/question/Q_RightTriangle.py:452
+#: sheet/exercise/question/Q_RightTriangle.py:451
 msgid "and"
 msgstr "et"
 
@@ -443,31 +435,31 @@ msgstr "À cause des signes,"
 msgid "it does not match a binomial identity."
 msgstr "ça ne correspond pas à une identité remarquable."
 
-#: sheet/exercise/question/Q_RightTriangle.py:398
+#: sheet/exercise/question/Q_RightTriangle.py:397
 #, python-format
 msgid ""
 "The triangle %(triangle_name)s has a right                 angle in "
 "%(right_vertex)s."
 msgstr "%(triangle_name)s est un triangle rectangle en %(right_vertex)s."
 
-#: sheet/exercise/question/Q_RightTriangle.py:412
+#: sheet/exercise/question/Q_RightTriangle.py:411
 msgid "Calculate the length of"
 msgstr "Calculer la longueur de"
 
-#: sheet/exercise/question/Q_RightTriangle.py:418
+#: sheet/exercise/question/Q_RightTriangle.py:417
 msgid "Give the result in"
 msgstr "Donner le résultat en"
 
-#: sheet/exercise/question/Q_RightTriangle.py:422
+#: sheet/exercise/question/Q_RightTriangle.py:421
 msgid "Round the result"
 msgstr "Arrondir le résultat"
 
-#: sheet/exercise/question/Q_RightTriangle.py:440
+#: sheet/exercise/question/Q_RightTriangle.py:439
 #, python-format
 msgid "%(triangle_name)s is a triangle such as"
 msgstr "%(triangle_name)s est un triangle tel que"
 
-#: sheet/exercise/question/Q_RightTriangle.py:461
+#: sheet/exercise/question/Q_RightTriangle.py:460
 msgid ""
 "Is it a right triangle ? Prove your answer and if the             triangle "
 "is right, give the name of the right angle."
@@ -475,62 +467,62 @@ msgstr ""
 "Est-ce un triangle rectangle ? Justifier votre réponse et si le triangle est "
 "rectangle, préciser où se trouve l'angle droit."
 
-#: sheet/exercise/question/Q_RightTriangle.py:482
+#: sheet/exercise/question/Q_RightTriangle.py:481
 #, python-format
 msgid ""
 "The triangle %(triangle_name)s has a right angle in                        "
 "%(right_vertex)s."
 msgstr "%(triangle_name)s est un triangle rectangle en %(right_vertex)s."
 
-#: sheet/exercise/question/Q_RightTriangle.py:490
+#: sheet/exercise/question/Q_RightTriangle.py:489
 msgid "Then by Pythagoras theorem"
 msgstr "Donc d'après le théorème de Pythagore"
 
-#: sheet/exercise/question/Q_RightTriangle.py:522
-#: sheet/exercise/question/Q_RightTriangle.py:627
+#: sheet/exercise/question/Q_RightTriangle.py:521
+#: sheet/exercise/question/Q_RightTriangle.py:626
 msgid "Sketch"
 msgstr "Figure à main levée"
 
-#: sheet/exercise/question/Q_RightTriangle.py:586
+#: sheet/exercise/question/Q_RightTriangle.py:585
 msgid "On one hand:"
 msgstr "D'une part :"
 
-#: sheet/exercise/question/Q_RightTriangle.py:590
+#: sheet/exercise/question/Q_RightTriangle.py:589
 msgid "On the other hand:"
 msgstr "D'autre part :"
 
-#: sheet/exercise/question/Q_RightTriangle.py:594
+#: sheet/exercise/question/Q_RightTriangle.py:593
 msgid "Hence:"
 msgstr "Donc :"
 
-#: sheet/exercise/question/Q_RightTriangle.py:599
+#: sheet/exercise/question/Q_RightTriangle.py:598
 msgid "So, by the converse of the pythagorean theorem,"
 msgstr "Donc, d'après la réciproque du théorème de Pythagore,"
 
-#: sheet/exercise/question/Q_RightTriangle.py:602
+#: sheet/exercise/question/Q_RightTriangle.py:601
 #, python-format
 msgid ""
 "%(triangle_name)s has a right angle                 in %(right_vertex)s."
 msgstr "%(triangle_name)s est un triangle rectangle en %(right_vertex)s."
 
-#: sheet/exercise/question/Q_RightTriangle.py:613
+#: sheet/exercise/question/Q_RightTriangle.py:612
 msgid "So, by the contrapositive of the pythagorean                 theorem,"
 msgstr "Donc, d'après la contraposée du théorème de Pythagore,"
 
-#: sheet/exercise/question/Q_RightTriangle.py:617
+#: sheet/exercise/question/Q_RightTriangle.py:616
 #, python-format
 msgid "%(triangle_name)s has no right angle."
 msgstr "%(triangle_name)s n'est pas rectangle."
 
 #: sheet/exercise/question/mc_modules/divi_direct.py:35
+#: sheet/exercise/question/mc_modules/multi_decimal.py:43
 #: sheet/exercise/question/mc_modules/multi_decimal1.py:41
 #: sheet/exercise/question/mc_modules/multi_decimal2.py:37
-#: sheet/exercise/question/mc_modules/multi_decimal.py:43
 #: sheet/exercise/question/mc_modules/multi_direct.py:34
 msgid "Calculate:"
 msgstr "Calculer :"
 
-#: sheet/exercise/question/mc_modules/multi_hole.py:49
+#: sheet/exercise/question/mc_modules/multi_hole.py:52
 msgid "Which number can fill the hole in"
 msgstr "Quel nombre permet de compléter le trou dans"
 
@@ -539,9 +531,16 @@ msgid "In the multiplication tables (from 2 to 9), which product is equal to:"
 msgstr ""
 "Dans les tables de multiplication (de 2 à 9), quel produit est égal à :"
 
-#: sheet/mental_calculation_default.xml:5
+#: sheet/frameworks/mental_calculation/default.xml:6
 msgid "Mental calculation"
 msgstr "Calcul mental"
+
+#: sheet/frameworks/mental_calculation/default.xml:6
+msgid "Answers"
+msgstr "Réponses"
+
+#~ msgid "Mental calculation:"
+#~ msgstr "Calcul mental :"
 
 #~ msgid "Date"
 #~ msgstr "Date"
