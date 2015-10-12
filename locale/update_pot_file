@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd ..
+xgettext --keyword=_ --output=locale/mathmaker.pot */*.py */*/*.py */*/*/*.py */*/*/*/*.py 
+cd locale/
+./add_strings_from_xml_files

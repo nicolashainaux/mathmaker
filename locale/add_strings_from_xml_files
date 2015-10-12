@@ -32,7 +32,7 @@ __l1 = len(PROCESS_NAME)
 __l2 = len(ABSPATH)
 LOCALE_PATH = ABSPATH[:__l2-__l1]
 
-KEYWORDS = ['title', 'text']
+KEYWORDS = ['header', 'title', 'text', 'subtitle', 'answers_title']
 MAIN_POT_FILE_PATH = LOCALE_PATH + 'mathmaker.pot'
 
 os.chdir('..')
