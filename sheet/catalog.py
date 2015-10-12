@@ -23,10 +23,10 @@
 from lib.common.software import ROOT_PATH
 from . import exercise
 
-D = ROOT_PATH + "sheet/"
+D = ROOT_PATH + "sheet/frameworks/"
 
 XML_SHEETS = { 'mental_calculation_default' : D +\
-                                              "mental_calculation_default.xml"}
+                                              "mental_calculation/default.xml"}
 
 CATALOG = { 'mental_calculation' : exercise.X_MentalCalculation,
             #'generic' : exercise.X_Generic

@@ -26,6 +26,7 @@ from decimal import Decimal
 
 from lib import *
 from lib.common import default
+import sheet
 from .X_Structure import X_Structure
 from . import question
 
@@ -124,7 +125,8 @@ class X_MentalCalculation(X_Structure):
     def __init__(self, embedded_machine, x_kind='default_nothing', **options):
         self.derived = True
         mc_mm_file = options['filename'] if 'filename' in options \
-                                         else default.MC_MM_FILE
+                                         else sheet.catalog.XML_SHEETS[\
+                                                  'mental_calculation_default']
 
         (x_kind, q_list) = get_q_kinds_from_file(mc_mm_file)
 
