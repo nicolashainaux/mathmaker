@@ -23,6 +23,10 @@
 import shlex
 import xml.etree.ElementTree as XML_PARSER
 from decimal import Decimal
+import copy
+import random
+
+import sys
 
 from lib import *
 from lib.common import default
@@ -150,6 +154,8 @@ class X_MentalCalculation(X_Structure):
         # From q_list, creation of dict of questions organized by type of nb:
         q_dict = {}
 
+        self.q_nb = 0
+
         # In q_list, each element is like this:
         # [{'kind':'multi', 'subkind':'direct', 'nb':'int'}, 'table_2_9', 4]
         # [q[0],                                             q[1],        q[2]]
@@ -157,26 +163,36 @@ class X_MentalCalculation(X_Structure):
             if not q[1] in q_dict:
                 q_dict[q[1]] = []
 
+            self.q_nb += q[2]
+
             for n in range(q[2]):
                 q_id = q[0]['kind']
                 q_id += "_"
                 q_id += q[0]['subkind']
-                q_dict[q[1]].append((q_id, q[0]))
+                q0 = copy.deepcopy(q[0])
+                del q0['kind']
+                del q0['subkind']
+                q_dict[q[1]].append((q_id, q0))
 
         # Now, q_dict is organized like this:
         # {'table_2_9':[ ('multi_direct', {'nb':'int'}),
         #                ('multi_direct', {'nb':'int'}),
-        #                ('multi_direct', {'nb':'int'}),
-        #                ('multi_direct', {'nb':'int'}) ],
+        #                ('multi_reversed', {'nb':'int'}),
+        #                ('divi_direct', {'nb':'int'}),
+        #                ('multi_hole', {'nb':'int'}) ],
         #  'nb_type2': [ ('q_id', {'option1' : '', ... }),
         #                ('q_id', {'option1' : '', ... }) ],
         #  'etc.'
         # }
 
+        sys.stderr.write(str(q_dict))
+        sys.stderr.write("\n"+str(self.q_nb))
+
         # Now, we generate the numbers & questions, by type of question first
         created_questions = {}
 
         for nb_type in q_dict:
+            random.shuffle(q_dict[nb_type])
             nb_box = question.generate_numbers(nb_type)
             nb_used = []
             last_nb = []
@@ -190,11 +206,12 @@ class X_MentalCalculation(X_Structure):
                     nb_box = question.generate_numbers(nb_type)
                     kept_aside = []
                 nb_to_use = randomly.pop(nb_box)
-                created_questions[nb_type] += [default_question(\
+                created_questions[nb_type] += [(default_question(\
                                                     embedded_machine,
                                                     q[0],
                                                     q[1],
-                                                    numbers_to_use=nb_to_use)]
+                                                    numbers_to_use=nb_to_use),
+                                                q[0])]
                 nb_box += kept_aside
 
                 # As last numbers we don't want to reuse in the next iteration,
@@ -211,11 +228,11 @@ class X_MentalCalculation(X_Structure):
                     last_nb += [nb_to_use[1]]
 
         # Now created_questions looks like:
-        # {'table_2_9':[ question_object1,
-        #                question_object2,
-        #                question_object3,
-        #                question_object4 ],
-        #  'nb_type2': [ question_object5,
+        # {'table_2_9':[ (q_id, question_object1),
+        #                (q_id, question_object2),
+        #                (q_id, question_object3),
+        #                (q_id, question_object4) ],
+        #  'nb_type2': [ (q_id, question_object5),
         #                etc. ],
         #  'etc.'
         # }
@@ -228,22 +245,23 @@ class X_MentalCalculation(X_Structure):
             total_length += len(created_questions[elt])
 
         for i in range(total_length):
-            total_length = 0
+            w_table = []
             for elt in created_questions:
-                total_length += len(created_questions[elt])
+                w_table += [Decimal(Decimal(len(created_questions[elt]))  \
+                                                    / Decimal(total_length))]
 
-            nb_type = randomly.pop(list(created_questions.keys()))
+            nb_type = randomly.pop(list(created_questions.keys()),
+                                   weighted_table=w_table)
 
-            self.questions_list += [created_questions[nb_type].pop(0)]
+            #nb_type = randomly.pop(list(created_questions.keys()))
+
+            self.questions_list += [created_questions[nb_type].pop(0)[0]]
 
             # We remove the empty keys from created_questions
             if len(created_questions[nb_type]) == 0:
-                created_questions.pop(nb_type, None)
+                del created_questions[nb_type]
 
-        self.q_nb = len(self.questions_list)
-
-
-        # OTHER EXERCISES
+        sys.stderr.write("\n"+str(total_length)+"\n")
 
 
 
