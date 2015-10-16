@@ -54,6 +54,8 @@ X_LAYOUTS = {'default' :
               }
             }
 
+MIN_ROW_HEIGHT = 0.5
+
 
 # --------------------------------------------------------------------------
 ##
@@ -309,7 +311,8 @@ class X_MentalCalculation(X_Structure):
                                      content,
                                      borders='all',
                                      center='yes',
-                                     center_vertically='yes')
+                                     center_vertically='yes',
+                                     min_row_height=MIN_ROW_HEIGHT)
 
         return result
 

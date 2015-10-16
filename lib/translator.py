@@ -58,10 +58,23 @@ def create_table(size, content, **options):
         h_border = ""
         center = ""
         new_line_sep = "\\\\" + "\n"
+        min_row_height = ""
+
+        # The last column is not centered vertically (LaTeX bug?)
+        # As a workaround it's possible to add an extra empty column...
+        extra_last_column = ""
+        extra_col_sep = ""
 
         if 'center' in options:
             center = ">{\centering}"
             new_line_sep = "\\tabularnewline" + "\n"
+            extra_last_column = "@{}m{0pt}@{}"
+            extra_col_sep = " & "
+
+        if 'min_row_height' in options:
+            min_row_height = " [" \
+                           + str(options['min_row_height']) + length_unit \
+                           + "] "
 
         cell_fmt = "p{"
 
@@ -92,7 +105,7 @@ def create_table(size, content, **options):
                               + center \
                               + t
 
-        tabular_format += v_border
+        tabular_format += extra_last_column + v_border
 
         result += "\\begin{tabular}{"+ tabular_format + "}" + "\n"
         result += h_border
@@ -103,9 +116,10 @@ def create_table(size, content, **options):
                 if j != n_col - 1:
                     result += "&" + "\n"
             if i != n_lin - 1:
-                result += new_line_sep + h_border
+                result += extra_col_sep + new_line_sep + min_row_height \
+                       + h_border
 
-        result += new_line_sep + h_border
+        result += extra_col_sep + new_line_sep + min_row_height + h_border
         result += "\end{tabular}" + "\n"
 
         return result
@@ -113,11 +127,3 @@ def create_table(size, content, **options):
     else:
         raise error.NotImplementedYet("create_table using this markup : " \
                                         + markup_choice + " ")
-
-
-
-
-
-
-
-
