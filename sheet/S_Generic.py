@@ -72,4 +72,6 @@ class S_Generic(S_Structure):
         self.answers_title = _(answers_title) if answers_title != "" else ""
 
         for ex in get_exercises_list(filename):
-            self.exercises_list.append(ex(self.machine, **options))
+            self.exercises_list.append(ex(self.machine,
+                                          filename=filename,
+                                          **options))
