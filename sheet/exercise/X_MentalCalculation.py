@@ -25,6 +25,7 @@ import xml.etree.ElementTree as XML_PARSER
 from decimal import Decimal
 import copy
 import random
+from collections import deque
 
 import sys
 
@@ -151,8 +152,12 @@ class X_MentalCalculation(X_Structure):
                      'ans' : ""
                     }
 
-        # From q_list, creation of dict of questions organized by type of nb:
+        # From q_list, we build a dictionary:
         q_dict = {}
+
+        nb_box = {}
+        nb_used = {}
+        last_nb = {}
 
         self.q_nb = 0
 
@@ -160,8 +165,10 @@ class X_MentalCalculation(X_Structure):
         # [{'kind':'multi', 'subkind':'direct', 'nb':'int'}, 'table_2_9', 4]
         # [q[0],                                             q[1],        q[2]]
         for q in q_list:
-            if not q[1] in q_dict:
-                q_dict[q[1]] = []
+            if not q[1] in nb_box:
+                nb_box[q[1]] = question.generate_numbers(q[1])
+                nb_used[q[1]] = []
+                last_nb[q[1]] = []
 
             self.q_nb += q[2]
 
@@ -169,100 +176,96 @@ class X_MentalCalculation(X_Structure):
                 q_id = q[0]['kind']
                 q_id += "_"
                 q_id += q[0]['subkind']
-                q0 = copy.deepcopy(q[0])
-                del q0['kind']
-                del q0['subkind']
-                q_dict[q[1]].append((q_id, q0))
+                q_options = copy.deepcopy(q[0])
+                del q_options['kind']
+                del q_options['subkind']
+                if not q_id in q_dict:
+                    q_dict[q_id] = []
+                q_dict[q_id] += [(q[1], q_options)]
 
         # Now, q_dict is organized like this:
-        # {'table_2_9':[ ('multi_direct', {'nb':'int'}),
-        #                ('multi_direct', {'nb':'int'}),
-        #                ('multi_reversed', {'nb':'int'}),
-        #                ('divi_direct', {'nb':'int'}),
-        #                ('multi_hole', {'nb':'int'}) ],
-        #  'nb_type2': [ ('q_id', {'option1' : '', ... }),
-        #                ('q_id', {'option1' : '', ... }) ],
-        #  'etc.'
+        # { 'multi_direct' :   [('table_2_9', {'nb':'int'}),
+        #                       ('table_2_9', {'nb':'int'})],
+        #   'multi_reversed' : [('table_2_9', {'nb':'int'})],
+        #   'divi_direct' :    [('table_2_9', {'nb':'int'})],
+        #   'multi_hole' :     [('table_2_9', {'nb':'int'})],
+        #   'q_id' :           [('table_15', {'nb':'int'})],
+        #   'q_id :            [('table_25', {'nb':'int'})],
+        #   'etc.'
         # }
 
-        sys.stderr.write(str(q_dict))
-        sys.stderr.write("\n"+str(self.q_nb))
+        # We shuffle the lists a little bit:
+        for key in q_dict:
+            random.shuffle(q_dict[key])
+
+        # Now we mix the questions types (by id):
+        mixed_q_list = []
+        q_id_box = copy.deepcopy(list(q_dict.keys()))
+        q_ids_aside = deque()
+
+        for n in range(self.q_nb):
+            q_nb_in_q_id_box = sum([len(q_dict[q_id]) for q_id in q_dict])
+
+            w_table = [Decimal(Decimal(len(q_dict[q_id])) \
+                               / Decimal(q_nb_in_q_id_box)) \
+                       for q_id in q_id_box]
+
+            q_id = randomly.pop(q_id_box,
+                                weighted_table=w_table)
+
+            info = q_dict[q_id].pop(0)
+
+            mixed_q_list += [(q_id, info[0], info[1])]
+
+            if len(q_dict[q_id]):
+                q_ids_aside.appendleft(q_id)
+                if len(q_ids_aside) >= 4 or len(q_id_box) <= 1:
+                    q_id_box += [q_ids_aside.pop()]
+            else:
+                del q_dict[q_id]
+
+            if len(q_id_box) <= 1 and len(q_ids_aside) > 0:
+                q_id_box += [q_ids_aside.pop()]
+
+        # Now, mixed_q_list is organized like this:
+        # [ ('multi_direct',   'table_2_9', {'nb':'int'}),
+        #   ('multi_reversed', 'table_2_9', {'nb':'int'}),
+        #   ('q_id',           'table_15',  {'nb':'int'}),
+        #   ('multi_hole',     'table_2_9', {'nb':'int'}),
+        #   ('multi_direct',   'table_2_9', {'nb':'int'}),
+        #   ('q_id,            'table_25',  {'nb':'int'}),
+        #   ('divi_direct',    'table_2_9', {'nb':'int'}),
+        #   etc.
+        # ]
 
         # Now, we generate the numbers & questions, by type of question first
-        created_questions = {}
+        self.questions_list = []
 
-        for nb_type in q_dict:
-            random.shuffle(q_dict[nb_type])
-            nb_box = question.generate_numbers(nb_type)
-            nb_used = []
-            last_nb = []
-            created_questions[nb_type] = []
-            questions_to_process = list(q_dict[nb_type])
-            for i in range(len(q_dict[nb_type])):
-                q = randomly.pop(questions_to_process)
-                # We put aside the numbers of the last iteration
-                (kept_aside, nb_box) = utils.put_aside(last_nb, nb_box)
-                if len(nb_box) == 0:
-                    nb_box = question.generate_numbers(nb_type)
-                    kept_aside = []
-                nb_to_use = randomly.pop(nb_box)
-                created_questions[nb_type] += [(default_question(\
-                                                    embedded_machine,
-                                                    q[0],
-                                                    q[1],
-                                                    numbers_to_use=nb_to_use),
-                                                q[0])]
-                nb_box += kept_aside
+        for q in mixed_q_list:
+            (kept_aside, nb_box[q[1]]) = utils.put_aside(last_nb[q[1]],
+                                                         nb_box[q[1]])
 
-                # As last numbers we don't want to reuse in the next iteration,
-                # we keep both of them in the case of tables from 2 to 9, but
-                # only the second one in all other cases (otherwise we would
-                # tell not to pick anything containing 25 in the table of 25,
-                # for instance, which would be nonsense)
-                last_nb = []
-                if nb_type == 'table_2_9':
-                    last_nb += [nb_to_use[0], nb_to_use[1]]
-                elif nb_type == 'int_irreducible_frac':
-                    last_nb += [nb_to_use[0]]
-                else:
-                    last_nb += [nb_to_use[1]]
+            if len(nb_box[q[1]]) == 0:
+                nb_box[q[1]] = question.generate_numbers([q[1]])
+                kept_aside = []
 
-        # Now created_questions looks like:
-        # {'table_2_9':[ (q_id, question_object1),
-        #                (q_id, question_object2),
-        #                (q_id, question_object3),
-        #                (q_id, question_object4) ],
-        #  'nb_type2': [ (q_id, question_object5),
-        #                etc. ],
-        #  'etc.'
-        # }
+            nb_to_use = randomly.pop(nb_box[q[1]])
 
-        # Now we will mix the questions but keep the order, per type (e.g.
-        # we can have question_object1, question_object5, question_object2...
-        # but not question_object1, question_object4, question_object2...)
-        total_length = 0
-        for elt in created_questions:
-            total_length += len(created_questions[elt])
+            nb_box[q[1]] += kept_aside
 
-        for i in range(total_length):
-            w_table = []
-            for elt in created_questions:
-                w_table += [Decimal(Decimal(len(created_questions[elt]))  \
-                                                    / Decimal(total_length))]
+            self.questions_list += [default_question(embedded_machine,
+                                                     q[0],
+                                                     q[2],
+                                                     numbers_to_use=nb_to_use
+                                                     )]
 
-            nb_type = randomly.pop(list(created_questions.keys()),
-                                   weighted_table=w_table)
-
-            #nb_type = randomly.pop(list(created_questions.keys()))
-
-            self.questions_list += [created_questions[nb_type].pop(0)[0]]
-
-            # We remove the empty keys from created_questions
-            if len(created_questions[nb_type]) == 0:
-                del created_questions[nb_type]
-
-        sys.stderr.write("\n"+str(total_length)+"\n")
-
+            last_nb[q[1]] = []
+            if q[1] == 'table_2_9':
+                last_nb[q[1]] += [nb_to_use[0], nb_to_use[1]]
+            elif q[1] == 'int_irreducible_frac':
+                last_nb[q[1]] += [nb_to_use[0]]
+            else:
+                last_nb[q[1]] += [nb_to_use[1]]
 
 
         # END OF THE ZONE TO REWRITE ------------------------------------------
