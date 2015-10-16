@@ -26,7 +26,8 @@ from . import exercise
 D = ROOT_PATH + "sheet/frameworks/"
 
 XML_SHEETS = { 'mental_calculation_default' : D +\
-                                              "mental_calculation/default.xml"}
+                                              "mental_calculation/default.xml",
+               'tables2_9' : D + "mental_calculation/tables2_9.xml"}
 
 CATALOG = { 'mental_calculation' : exercise.X_MentalCalculation,
             #'generic' : exercise.X_Generic
