@@ -27,7 +27,16 @@ D = ROOT_PATH + "sheet/frameworks/"
 
 XML_SHEETS = { 'mental_calculation_default' : D +\
                                               "mental_calculation/default.xml",
-               'tables2_9' : D + "mental_calculation/tables2_9.xml"}
+               'tables2_9' : D + "mental_calculation/tables2_9.xml",
+               'divisions' : D + "mental_calculation/divisions.xml",
+               'multi_hole_tables2_9' : D + \
+                                "mental_calculation/multi_hole_tables2_9.xml",
+               'multi_hole_any_nb' : D + \
+                                "mental_calculation/multi_hole_any_nb.xml",
+               'multi_decimal' : D + \
+                                "mental_calculation/multi_decimal.xml",
+               'multi_reversed' : D + \
+                                "mental_calculation/multi_reversed.xml"}
 
 CATALOG = { 'mental_calculation' : exercise.X_MentalCalculation,
             #'generic' : exercise.X_Generic
