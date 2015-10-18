@@ -51,7 +51,7 @@ def get_sheet_config(file_name):
                 config['layout_unit'] = child.attrib['unit']
             if 'font_size_offset' in child.attrib:
                 config['font_size_offset'] = child.attrib['font_size_offset']
-                
+
             for exc_or_ans in child:
                 for line in exc_or_ans:
                     if line.attrib['nb'] == 'None':
@@ -104,7 +104,7 @@ def get_exercises_list(file_name):
 # ------------------------------------------------------------------------------
 ##
 # @class S_Structure
-# @brief Abstract mother class of all sheets !
+# @brief Abstract mother class of all sheets!
 # The constructor only has to be reimplemented, it is useless to reimplement
 # other methods
 class S_Structure(object):
@@ -374,7 +374,7 @@ class S_Structure(object):
 
         else:
             raise error.OutOfRangeArgument(self.layout_type,
-                                "std|short_test|mini_test|equations")
+                                "std|short_test|mini_test|equations|mental")
 
         return result
 
@@ -480,6 +480,7 @@ class S_Structure(object):
         result += self.machine.write(self.title, emphasize='bold')
         if self.subtitle != "":
             result += self.machine.write_new_line()
+            result += self.machine.write_set_font_size_to('normal')
             result += self.machine.write(self.subtitle, emphasize='bold')
         result += self.machine.write_new_line_twice()
 
