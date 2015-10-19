@@ -25,7 +25,7 @@ import xml.etree.ElementTree as XML_PARSER
 from decimal import Decimal
 import copy
 import random
-from collections import deque
+from collections import deque, namedtuple
 
 import sys
 
@@ -157,9 +157,12 @@ class X_MentalCalculation(X_Structure):
         # From q_list, we build a dictionary:
         q_dict = {}
 
-        nb_box = {}
-        nb_used = {}
-        last_nb = {}
+        nb_box = { key : question.generate_numbers(key) \
+                   for key in question.nb_sources()}
+        nb_used = { key : [] \
+                    for key in question.nb_sources()}
+        last_nb = { key : [] \
+                    for key in question.nb_sources()}
 
         self.q_nb = 0
 
@@ -167,11 +170,6 @@ class X_MentalCalculation(X_Structure):
         # [{'kind':'multi', 'subkind':'direct', 'nb':'int'}, 'table_2_9', 4]
         # [q[0],                                             q[1],        q[2]]
         for q in q_list:
-            if not q[1] in nb_box:
-                nb_box[q[1]] = question.generate_numbers(q[1])
-                nb_used[q[1]] = []
-                last_nb[q[1]] = []
-
             self.q_nb += q[2]
 
             for n in range(q[2]):
@@ -205,6 +203,8 @@ class X_MentalCalculation(X_Structure):
         q_id_box = copy.deepcopy(list(q_dict.keys()))
         q_ids_aside = deque()
 
+        q_info = namedtuple('q_info', 'type,nb_source,options')
+
         for n in range(self.q_nb):
             q_nb_in_q_id_box = sum([len(q_dict[q_id]) for q_id in q_dict])
 
@@ -217,7 +217,7 @@ class X_MentalCalculation(X_Structure):
 
             info = q_dict[q_id].pop(0)
 
-            mixed_q_list += [(q_id, info[0], info[1])]
+            mixed_q_list += [q_info(q_id, info[0], info[1])]
 
             if len(q_dict[q_id]):
                 q_ids_aside.appendleft(q_id)
@@ -230,7 +230,8 @@ class X_MentalCalculation(X_Structure):
                 q_id_box += [q_ids_aside.pop()]
 
         # Now, mixed_q_list is organized like this:
-        # [ ('multi_direct',   'table_2_9', {'nb':'int'}),
+        # [ ('type',           'nb_source', 'options'),
+        #   ('multi_direct',   'table_2_9', {'nb':'int'}),
         #   ('multi_reversed', 'table_2_9', {'nb':'int'}),
         #   ('q_id',           'table_15',  {'nb':'int'}),
         #   ('multi_hole',     'table_2_9', {'nb':'int'}),
@@ -244,30 +245,31 @@ class X_MentalCalculation(X_Structure):
         self.questions_list = []
 
         for q in mixed_q_list:
-            (kept_aside, nb_box[q[1]]) = utils.put_aside(last_nb[q[1]],
-                                                         nb_box[q[1]])
+            (kept_aside,
+             nb_box[q.nb_source]) = utils.put_aside(last_nb[q.nb_source],
+                                                    nb_box[q.nb_source])
 
-            if len(nb_box[q[1]]) == 0:
-                nb_box[q[1]] = question.generate_numbers([q[1]])
+            if len(nb_box[q.nb_source]) == 0:
+                nb_box[q.nb_source] = question.generate_numbers([q.nb_source])
                 kept_aside = []
 
-            nb_to_use = randomly.pop(nb_box[q[1]])
+            nb_to_use = randomly.pop(nb_box[q.nb_source])
 
-            nb_box[q[1]] += kept_aside
+            nb_box[q.nb_source] += kept_aside
 
             self.questions_list += [default_question(embedded_machine,
-                                                     q[0],
-                                                     q[2],
+                                                     q.type,
+                                                     q.options,
                                                      numbers_to_use=nb_to_use
                                                      )]
 
-            last_nb[q[1]] = []
-            if q[1] == 'table_2_9':
-                last_nb[q[1]] += [nb_to_use[0], nb_to_use[1]]
-            elif q[1] == 'int_irreducible_frac':
-                last_nb[q[1]] += [nb_to_use[0]]
+            last_nb[q.nb_source] = []
+            if q.nb_source == 'table_2_9':
+                last_nb[q.nb_source] += [nb_to_use[0], nb_to_use[1]]
+            elif q.nb_source == 'int_irreducible_frac':
+                last_nb[q.nb_source] += [nb_to_use[0]]
             else:
-                last_nb[q[1]] += [nb_to_use[1]]
+                last_nb[q.nb_source] += [nb_to_use[1]]
 
 
         # END OF THE ZONE TO REWRITE ------------------------------------------

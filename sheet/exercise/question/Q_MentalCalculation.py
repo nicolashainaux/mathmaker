@@ -87,6 +87,15 @@ MODULES =  \
 
 # --------------------------------------------------------------------------
 ##
+#   @brief Access to sources of numbers
+def nb_sources():
+    return AVAILABLE_Q_SUBKIND_VALUES
+
+
+
+
+# --------------------------------------------------------------------------
+##
 #   @brief Generator of coprime numbers
 def coprime_generator(n):
     for i in range(20):
@@ -132,6 +141,9 @@ def generate_numbers(subkind):
         for k in [i+2 for i in range(18)]:
             result += [(k, Fraction((n, k))) for n in coprime_generator(k)]
         return result
+
+    elif subkind == 'bypass':
+        return []
 
     else:
         raise error.OutOfRangeArgument(subkind,

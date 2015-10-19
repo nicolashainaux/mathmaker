@@ -48,5 +48,6 @@ Q_Calculation = Q_Calculation.Q_Calculation
 Q_Equation = Q_Equation.Q_Equation
 Q_Factorization = Q_Factorization.Q_Factorization
 generate_numbers = Q_MentalCalculation.generate_numbers
+nb_sources = Q_MentalCalculation.nb_sources
 Q_MentalCalculation = Q_MentalCalculation.Q_MentalCalculation
 Q_RightTriangle = Q_RightTriangle.Q_RightTriangle
