@@ -34,6 +34,7 @@ AVAILABLE_Q_SUBKIND_VALUES = ['table_2_9',
                               'table_11',
                               'table_15',
                               'table_25',
+                              'int_irreducible_frac',
                               'bypass']
 
 AVAILABLE_Q_KIND_VALUES = \
