@@ -30,14 +30,14 @@ class sub_object(object):
 
     def __init__(self, numbers_to_use):
         nb_list = list(numbers_to_use)
-        nb1 = nb_list[randomly.pop([0, 1])]
-        nb2 = nb_list[0]
+        nb1 = nb_list.pop(randomly.pop([0, 1]))
+        nb2 = nb_list.pop()
         nb1 = nb1 / 10
         if randomly.heads_or_tails():
             nb2 = nb2 / 10
         nb_list = [nb1, nb2]
-        self.nb1 = randomly.pop(nb_list)
-        self.nb2 = randomly.pop(nb_list)
+        self.nb1 = nb_list.pop(randomly.pop([0, 1]))
+        self.nb2 = nb_list.pop()
 
     def q(self, M, **options):
         return _("Calculate:") + " "\
