@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2015-10-18 10:26+0100\n"
+"PO-Revision-Date: 2015-10-19 08:44+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -531,10 +531,6 @@ msgid "In the multiplication tables (from 2 to 9), which product is equal to:"
 msgstr ""
 "Dans les tables de multiplication (de 2 à 9), quel produit est égal à :"
 
-#: sheet/frameworks/mental_calculation/multi_reversed.xml:6
-msgid "Reversed multiplications"
-msgstr "Multiplications à l'envers"
-
 #: sheet/frameworks/mental_calculation/multi_decimal.xml:6
 #: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
 #: sheet/frameworks/mental_calculation/multi_reversed.xml:6
@@ -545,15 +541,6 @@ msgstr "Multiplications à l'envers"
 msgid "Answers"
 msgstr "Réponses"
 
-#: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
-#: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
-msgid "Multiplications with a hole"
-msgstr "Multiplications à trou"
-
-#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
-msgid "Simple decimal multiplications"
-msgstr "Multiplications décimales simples"
-
 #: sheet/frameworks/mental_calculation/multi_decimal.xml:6
 #: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
 #: sheet/frameworks/mental_calculation/multi_reversed.xml:6
@@ -563,6 +550,19 @@ msgstr "Multiplications décimales simples"
 #: sheet/frameworks/mental_calculation/divisions.xml:6
 msgid "Mental calculation"
 msgstr "Calcul mental"
+
+#: sheet/frameworks/mental_calculation/multi_reversed.xml:6
+msgid "Reversed multiplications"
+msgstr "Multiplications à l'envers"
+
+#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
+msgid "Simple decimal multiplications"
+msgstr "Multiplications décimales simples"
+
+#: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
+#: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
+msgid "Multiplications with a hole"
+msgstr "Multiplications à trou"
 
 #: sheet/frameworks/mental_calculation/divisions.xml:6
 msgid "Divisions"

@@ -1,19 +1,19 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# MATHMAKER TEMPLATE PO FILE.
+# Copyright (C) 2006-2015 Nicolas Hainaux
+# This file is distributed under the same license as the mathmaker package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 10:25+0200\n"
+"Project-Id-Version: mathmaker 0.6\n"
+"Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
+"POT-Creation-Date: 2015-10-19 08:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
@@ -528,10 +528,6 @@ msgstr ""
 msgid ""
 msgstr ""
 
-#: sheet/frameworks/mental_calculation/multi_reversed.xml:6
-msgid "Reversed multiplications"
-msgstr ""
-
 #: sheet/frameworks/mental_calculation/multi_decimal.xml:6
 #: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
 #: sheet/frameworks/mental_calculation/multi_reversed.xml:6
@@ -542,15 +538,6 @@ msgstr ""
 msgid "Answers"
 msgstr ""
 
-#: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
-#: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
-msgid "Multiplications with a hole"
-msgstr ""
-
-#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
-msgid "Simple decimal multiplications"
-msgstr ""
-
 #: sheet/frameworks/mental_calculation/multi_decimal.xml:6
 #: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
 #: sheet/frameworks/mental_calculation/multi_reversed.xml:6
@@ -559,6 +546,19 @@ msgstr ""
 #: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
 #: sheet/frameworks/mental_calculation/divisions.xml:6
 msgid "Mental calculation"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/multi_reversed.xml:6
+msgid "Reversed multiplications"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
+msgid "Simple decimal multiplications"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
+#: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
+msgid "Multiplications with a hole"
 msgstr ""
 
 #: sheet/frameworks/mental_calculation/divisions.xml:6
