@@ -20,7 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# This module will ask to calculate a multiplication where one of the factor
+# This module will ask to calculate a multiplication where one of the factors
 # is a decimal number having one decimal digit.
 
 from core.base_calculus import *
