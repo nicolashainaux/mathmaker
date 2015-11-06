@@ -20,6 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from decimal import Decimal
+
 YES = ['yes', 'Yes', 'YES', 'ok', 'Ok', 'OK', True]
 
 DEFAULT = "default"
@@ -49,6 +51,60 @@ PRECISION_WORDS = { UNIT : "unit",
                     TEN_THOUSANDTH : "ten thousandth"
                   }
 
+BILLIONS = Decimal("1000000000")
+HUNDREDS_OF_MILLIONS = Decimal("100000000")
+TENS_OF_MILLIONS = Decimal("10000000")
+MILLIONS = Decimal("1000000")
+HUNDREDS_OF_THOUSANDS = Decimal("100000")
+TENS_OF_THOUSANDS = Decimal("10000")
+THOUSANDS = Decimal("1000")
+HUNDREDS = Decimal("100")
+TENS = Decimal("10")
+UNITS = Decimal("1")
+TENTHS = Decimal("0.1")
+HUNDREDTHS = Decimal("0.01")
+THOUSANDTHS = Decimal("0.001")
+
+RANKS_HIGHER = [BILLIONS, HUNDREDS_OF_MILLIONS, TENS_OF_MILLIONS, MILLIONS,
+		        HUNDREDS_OF_THOUSANDS, TENS_OF_THOUSANDS]
+
+RANKS_LOWER = [THOUSANDS, HUNDREDS, TENS, UNITS]
+
+RANKS_INTEGER = RANKS_HIGHER + RANKS_LOWER
+
+RANKS_DECIMAL = [TENTHS, HUNDREDTHS, THOUSANDTHS]
+
+RANKS_CONFUSING = [THOUSANDS, HUNDREDS, TENS, TENTHS, HUNDREDTHS, THOUSANDTHS]
+
+RANKS = RANKS_LOWER + RANKS_DECIMAL
+
+RANKS_EXTENDED = RANKS_INTEGER + RANKS_DECIMAL
+
+RANKS_WORDS = { BILLIONS : "billions",
+                HUNDREDS_OF_MILLIONS : "hundreds of millions",
+			    TENS_OF_MILLIONS : "tens of millions", MILLIONS : "millions",
+				HUNDREDS_OF_THOUSANDS : "hundreds of thousands",
+				TENS_OF_THOUSANDS : "tens of thousands",
+                THOUSANDS : "thousands", HUNDREDS : "hundreds", TENS : "tens",
+                UNITS : "units", TENTHS : "tenths", HUNDREDTHS : "hundredths",
+                THOUSANDTHS : "thousandths"
+              }
+
+RANKS_HOW_MANY = { BILLIONS : "How many billions",
+                   HUNDREDS_OF_MILLIONS : "How many hundreds of millions",
+    			   TENS_OF_MILLIONS : "How many tens of millions",
+                   MILLIONS : "How many millions",
+                   HUNDREDS_OF_THOUSANDS : "How many hundreds of thousands",
+                   TENS_OF_THOUSANDS : "How many tens of thousands",
+                   THOUSANDS : "How many thousands",
+                   HUNDREDS : "How many hundreds",
+                   TENS : "How many tens",
+                   UNITS : "How many units",
+                   TENTHS : "How many tenths",
+                   HUNDREDTHS : "How many hundredths",
+                   THOUSANDTHS : "How many thousandths"
+                  }
+
 LENGTH_UNITS = ['km', 'hm', 'dam', 'm', 'dm', 'cm', 'mm', 'µm', 'nm', 'pm']
 ANGLE_UNITS = ['\\textdegree']
 AVAILABLE_UNITS = LENGTH_UNITS + ANGLE_UNITS
@@ -70,8 +126,3 @@ TEXT_SCALES = ['tiny', 'scriptsize', 'footnotesize', 'small', 'normal',
 
 TEXT_RANKS = {'tiny':0, 'scriptsize':1, 'footnotesize':2, 'small':3,
               'normal':4, 'large':5, 'Large':6, 'LARGE':7, 'huge':8, 'HUGE':9}
-
-
-
-
-

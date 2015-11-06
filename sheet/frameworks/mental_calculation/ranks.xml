@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- RANKS MENTAL CALCULATION SHEET -->
+
+<sheet header="" title="Mental calculation" subtitle="Ranks of figures in a number" text="" answers_title="Answers">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="mental">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default value: id='generic' 
+		 No default for kind and subkind, they must be given -->
+	<!-- Available kinds for mental calculation: tabular, slideshow -->
+	<exercise id="mental_calculation" kind="tabular">
+
+		<!-- No default for kind and subkind, they must be given -->
+		<!-- Default values: width="random" generation_type="mixed" rank_matches_invisible_zero="False" -->
+		<!-- Possible values: width: integer between 1 and the number of possible ranks
+			 				  generation_type: "default" | "alternative" | "mixed"
+										(no effect in case of 'numberof' questions, will be default)
+							  rank_matches_invisible_zero: any string means True except "False" and "" 
+										(no effect in case of rank direct questions)  -->
+		<question kind="rank" subkind="numberof" generation_type="default">
+			<rank_word>5</rank_word>
+		</question>
+
+		<question kind="rank" subkind="reversed">
+			<rank_word>6</rank_word>
+		</question>
+
+		<question kind="rank" subkind="direct">
+			<rank_word>6</rank_word>
+		</question>
+
+		<question kind="rank" subkind="reversed" rank_matches_invisible_zero="True">
+			<rank_word>2</rank_word>
+		</question>
+	
+		<question kind="rank" subkind="numberof" rank_matches_invisible_zero="True" generation_type="default">
+			<rank_word>1</rank_word>
+		</question>
+
+	</exercise>
+
+</sheet>

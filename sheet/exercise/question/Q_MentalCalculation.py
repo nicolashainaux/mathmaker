@@ -20,7 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import sys
+
 from lib import *
+from lib.common.cst import *
 from .Q_Structure import Q_Structure
 from . import mc_modules
 from core.base_calculus import *
@@ -35,6 +38,7 @@ AVAILABLE_Q_SUBKIND_VALUES = ['table_2_9',
                               'table_15',
                               'table_25',
                               'int_irreducible_frac',
+                              'rank_word',
                               'bypass']
 
 AVAILABLE_Q_KIND_VALUES = \
@@ -54,7 +58,13 @@ AVAILABLE_Q_KIND_VALUES = \
       'multi_decimal2' : ['table_2_9',
                           'bypass'],
       'divi_direct' : ['table_2_9',
-                       'bypass']
+                       'bypass'],
+      'rank_direct' : ['rank_word',
+                       'bypass'],
+      'rank_reversed' : ['rank_word',
+                         'bypass'],
+      'rank_numberof' : ['rank_word',
+                           'bypass']
 #     frozenset(('area', 'rectangle', 'with_drawing')) : ['table_2_9',
 #                                              'table_11',
 #                                              'table_15',
@@ -76,7 +86,10 @@ MODULES =  \
       'multi_decimal' : mc_modules.multi_decimal,
       'multi_decimal1' : mc_modules.multi_decimal1,
       'multi_decimal2' : mc_modules.multi_decimal2,
-      'divi_direct' : mc_modules.divi_direct
+      'divi_direct' : mc_modules.divi_direct,
+      'rank_direct' : mc_modules.rank_direct,
+      'rank_reversed' : mc_modules.rank_reversed,
+      'rank_numberof' : mc_modules.rank_numberof
 #     ('division', 'direct') : mc_modules.divi_dir,
 #     ('division', 'decimal_1') : mc_modules.divi_deci1,
 #     ('area', 'rectangle', 'with_drawing') : mc_modules.area_rect_dr,
@@ -143,6 +156,9 @@ def generate_numbers(subkind):
             result += [(k, Fraction((n, k))) for n in coprime_generator(k)]
         return result
 
+    elif subkind == 'rank_word':
+        return [(elt,) for elt in RANKS]
+
     elif subkind == 'bypass':
         return []
 
@@ -185,8 +201,11 @@ class Q_MentalCalculation(Q_Structure):
         # value of **options
         options = self.options
 
+        options.update(q_options)
+
         # module
-        m = MODULES[self.q_kind].sub_object(options['numbers_to_use'])
+        m = MODULES[self.q_kind].sub_object(options['numbers_to_use'],
+                                            **options)
 
         self.q_text = m.q(embedded_machine, **options)
         self.q_answer = m.a(embedded_machine, **options)

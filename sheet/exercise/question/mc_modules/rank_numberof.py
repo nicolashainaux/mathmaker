@@ -20,14 +20,26 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
-# @package mc_modules
-# @brief All question objects should be "declared" here.
+# This module will ask to tell the rank of a figure in a given number.
 
-from . import multi_direct, multi_reversed, multi_hole
-from . import divi_direct
-from . import multi_decimal, multi_decimal1, multi_decimal2
-from . import rank_direct, rank_reversed, rank_numberof
+from decimal import Decimal
+
+from lib.common.cst import *
+from core.base_calculus import *
+from . import rank_reversed
+
+class sub_object(object):
+
+    def __init__(self, rank_to_use, **options):
+        rank_reversed.sub_object.__init__(self, rank_to_use, numberof=True,
+                                          **options)
+
+    def q(self, M, **options):
+        return _("{how_many_rank} are there in \
+{decimal_number}?").format(decimal_number=self.chosen_deci_str,
+                         how_many_rank=_(str(RANKS_HOW_MANY[self.chosen_rank])))
+
+    def a(self, M, **options):
+        n = self.chosen_deci
+        r = self.chosen_rank
+        return Item(((n - n % r) / r)).into_str(force_expression_begins=True)

@@ -245,13 +245,24 @@ class X_MentalCalculation(X_Structure):
         self.questions_list = []
 
         for q in mixed_q_list:
+            if len(nb_box[q.nb_source]) == 0:
+                nb_box[q.nb_source] = question.generate_numbers(q.nb_source)
+
+            if q.nb_source == 'rank_word':
+                if 'rank_matches_invisible_zero' in q.options \
+                    and q.options['rank_matches_invisible_zero'] != ""\
+                    and q.options['rank_matches_invisible_zero'] != "False":
+                #___
+                    if (Decimal("1"),) in nb_box[q.nb_source]:
+                        if len(nb_box[q.nb_source]) == 1:
+                            nb_box[q.nb_source] = \
+                                        question.generate_numbers(q.nb_source)
+
+                        last_nb[q.nb_source] += [Decimal("1")]
+
             (kept_aside,
              nb_box[q.nb_source]) = utils.put_aside(last_nb[q.nb_source],
                                                     nb_box[q.nb_source])
-
-            if len(nb_box[q.nb_source]) == 0:
-                nb_box[q.nb_source] = question.generate_numbers([q.nb_source])
-                kept_aside = []
 
             nb_to_use = randomly.pop(nb_box[q.nb_source])
 
@@ -266,7 +277,8 @@ class X_MentalCalculation(X_Structure):
             last_nb[q.nb_source] = []
             if q.nb_source == 'table_2_9':
                 last_nb[q.nb_source] += [nb_to_use[0], nb_to_use[1]]
-            elif q.nb_source == 'int_irreducible_frac':
+            elif q.nb_source == 'int_irreducible_frac' \
+                 or q.nb_source == 'rank_word':
                 last_nb[q.nb_source] += [nb_to_use[0]]
             else:
                 last_nb[q.nb_source] += [nb_to_use[1]]
