@@ -34,6 +34,8 @@ from core.base_calculus import *
 # 'table_25' --> 25×n where 2 <= n <= 6
 # 'int_irreducible_frac' --> (n, p/n) where 2 <= n <= 20 and p/n is irreducible
 AVAILABLE_Q_SUBKIND_VALUES = ['table_2_9',
+                              'table_2', 'table_3', 'table_4', 'table_2_3',
+                              'table_2_4', 'table_3_4', 'table_2_3_4',
                               'table_11',
                               'table_15',
                               'table_25',
@@ -41,23 +43,46 @@ AVAILABLE_Q_SUBKIND_VALUES = ['table_2_9',
                               'rank_word',
                               'bypass']
 
+PART_OF_ANOTHER_SOURCE = { 'table_2' : 'table_2_9',
+                           'table_3' : 'table_2_9',
+                           'table_4' : 'table_2_9',
+                           'table_2_3' : 'table_2_9',
+                           'table_2_4' : 'table_2_9',
+                           'table_3_4' : 'table_2_9',
+                           'table_2_3_4' : 'table_2_9'
+                         }
+
 AVAILABLE_Q_KIND_VALUES = \
     { 'multi_direct' : ['table_2_9',
+                        'table_2', 'table_3', 'table_4', 'table_2_3',
+                        'table_2_4', 'table_3_4', 'table_2_3_4',
                         'table_11',
                         'table_15',
                         'table_25',
                         'bypass'],
       'multi_reversed' : ['table_2_9',
+                          'table_2', 'table_3', 'table_4', 'table_2_3',
+                          'table_2_4', 'table_3_4', 'table_2_3_4',
                           'bypass'],
       'multi_hole' : ['table_2_9',
+                      'table_2', 'table_3', 'table_4', 'table_2_3',
+                      'table_2_4', 'table_3_4', 'table_2_3_4',
                       'bypass'],
       'multi_decimal' : ['table_2_9',
+                         'table_2', 'table_3', 'table_4', 'table_2_3',
+                         'table_2_4', 'table_3_4', 'table_2_3_4',
                          'bypass'],
       'multi_decimal1' : ['table_2_9',
+                          'table_2', 'table_3', 'table_4', 'table_2_3',
+                          'table_2_4', 'table_3_4', 'table_2_3_4',
                           'bypass'],
       'multi_decimal2' : ['table_2_9',
+                          'table_2', 'table_3', 'table_4', 'table_2_3',
+                          'table_2_4', 'table_3_4', 'table_2_3_4',
                           'bypass'],
       'divi_direct' : ['table_2_9',
+                       'table_2', 'table_3', 'table_4', 'table_2_3',
+                       'table_2_4', 'table_3_4', 'table_2_3_4',
                        'bypass'],
       'rank_direct' : ['rank_word',
                        'bypass'],
@@ -130,6 +155,32 @@ def generate_numbers(subkind):
                 (7, 7), (7, 8), (7, 9),
                 (8, 8), (8, 9),
                 (9, 9)]
+
+    elif subkind == 'table_2':
+        return [(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9)]
+
+    elif subkind == 'table_3':
+        return [(2, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9)]
+
+    elif subkind == 'table_4':
+        return [(2, 4), (3, 4), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9)]
+
+    elif subkind == 'table_2_3':
+        return [(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
+                (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9)]
+
+    elif subkind == 'table_2_4':
+        return [(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
+                (3, 4), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9)]
+
+    elif subkind == 'table_3_4':
+        return [(2, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
+                (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9)]
+
+    if subkind == 'table_2_3_4':
+        return [(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
+                (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
+                (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9)]
 
     elif subkind == 'table_11':
         return [(11, 11), (11, 12), (11, 13), (11, 14), (11, 15), (11, 16),

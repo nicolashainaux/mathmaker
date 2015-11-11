@@ -264,7 +264,11 @@ class X_MentalCalculation(X_Structure):
              nb_box[q.nb_source]) = utils.put_aside(last_nb[q.nb_source],
                                                     nb_box[q.nb_source])
 
-            nb_to_use = randomly.pop(nb_box[q.nb_source])
+            nb_to_use = None
+            if q.nb_source in question.PART_OF_ANOTHER_SOURCE:
+                pass
+            else:
+                nb_to_use = randomly.pop(nb_box[q.nb_source])
 
             nb_box[q.nb_source] += kept_aside
 
