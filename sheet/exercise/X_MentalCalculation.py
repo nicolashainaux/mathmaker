@@ -159,9 +159,9 @@ class X_MentalCalculation(X_Structure):
 
         nb_box = { key : question.generate_numbers(key) \
                    for key in question.nb_sources()}
-        nb_used = { key : [] \
+        nb_used = { key : set() \
                     for key in question.nb_sources()}
-        last_nb = { key : [] \
+        last_nb = { key : set() \
                     for key in question.nb_sources()}
 
         self.q_nb = 0
@@ -258,7 +258,7 @@ class X_MentalCalculation(X_Structure):
                             nb_box[q.nb_source] = \
                                         question.generate_numbers(q.nb_source)
 
-                        last_nb[q.nb_source] += [Decimal("1")]
+                        last_nb[q.nb_source] |= [Decimal("1")]
 
             (kept_aside,
              nb_box[q.nb_source]) = utils.put_aside(last_nb[q.nb_source],
@@ -268,9 +268,9 @@ class X_MentalCalculation(X_Structure):
             if q.nb_source in question.PART_OF_ANOTHER_SOURCE:
                 pass
             else:
-                nb_to_use = randomly.pop(nb_box[q.nb_source])
+                nb_to_use = nb_box[q.nb_source].pop()
 
-            nb_box[q.nb_source] += kept_aside
+            nb_box[q.nb_source] |= kept_aside
 
             self.questions_list += [default_question(embedded_machine,
                                                      q.type,
@@ -278,14 +278,14 @@ class X_MentalCalculation(X_Structure):
                                                      numbers_to_use=nb_to_use
                                                      )]
 
-            last_nb[q.nb_source] = []
+            last_nb[q.nb_source] = set()
             if q.nb_source == 'table_2_9':
-                last_nb[q.nb_source] += [nb_to_use[0], nb_to_use[1]]
+                last_nb[q.nb_source] |= {nb_to_use[0], nb_to_use[1]}
             elif q.nb_source == 'int_irreducible_frac' \
                  or q.nb_source == 'rank_word':
-                last_nb[q.nb_source] += [nb_to_use[0]]
+                last_nb[q.nb_source] |= {nb_to_use[0]}
             else:
-                last_nb[q.nb_source] += [nb_to_use[1]]
+                last_nb[q.nb_source] |= {nb_to_use[1]}
 
 
         # END OF THE ZONE TO REWRITE ------------------------------------------

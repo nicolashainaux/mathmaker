@@ -3265,6 +3265,17 @@ class Fraction(Quotient):
 
     # --------------------------------------------------------------------------
     ##
+    #   @brief Makes Fractions hashable (so, usable as dictionnary keys)
+    def __hash__(self):
+        return hash(self._numerator.dbg_str() + str(self.sign) \
+                    + self._status + self._symbol + self._denominator.dbg_str())
+
+
+
+
+
+        # --------------------------------------------------------------------------
+    ##
     #   @brief Compares two Fractions
     #   @return True if they're equal
     def __eq__(self, obj):
