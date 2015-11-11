@@ -266,7 +266,14 @@ class X_MentalCalculation(X_Structure):
 
             nb_to_use = None
             if q.nb_source in question.PART_OF_ANOTHER_SOURCE:
-                pass
+                second_source = question.PART_OF_ANOTHER_SOURCE[q.nb_source]
+                remaining = set(nb_box[q.nb_source] & nb_box[second_source])
+                if not len(remaining):
+                    nb_box[q.nb_source] |= nb_box[second_source]
+                    remaining = set(nb_box[second_source])
+                nb_to_use = remaining.pop()
+                nb_box[q.nb_source].remove(nb_to_use)
+
             else:
                 nb_to_use = nb_box[q.nb_source].pop()
 
