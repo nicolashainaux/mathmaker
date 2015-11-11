@@ -28,7 +28,7 @@ from lib import randomly
 
 class sub_object(object):
 
-    def __init__(self, numbers_to_use):
+    def __init__(self, numbers_to_use, **options):
         nb_list = list(numbers_to_use)
         nb1 = nb_list.pop(randomly.pop([0, 1]))
         nb2 = nb_list.pop()

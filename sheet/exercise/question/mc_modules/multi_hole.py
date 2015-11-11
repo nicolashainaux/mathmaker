@@ -26,7 +26,7 @@ from core.root_calculus import *
 
 class sub_object(object):
 
-    def __init__(self, numbers_to_use):
+    def __init__(self, numbers_to_use, **options):
         nb_list = list(numbers_to_use)
         hole = Item(Value('...'))
         self.hidden_one = None

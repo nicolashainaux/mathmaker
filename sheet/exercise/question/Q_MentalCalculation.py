@@ -188,6 +188,7 @@ class Q_MentalCalculation(Q_Structure):
     #   @return One instance of question.Q_MentalCalculation
     def __init__(self, embedded_machine, q_kind,
                  q_options, **options):
+
         self.derived = True
 
         # The call to the mother class __init__() method will set the
@@ -203,8 +204,11 @@ class Q_MentalCalculation(Q_Structure):
 
         options.update(q_options)
 
+        numbers_to_use = options['numbers_to_use']
+        del options['numbers_to_use']
+
         # module
-        m = MODULES[self.q_kind].sub_object(options['numbers_to_use'],
+        m = MODULES[self.q_kind].sub_object(numbers_to_use,
                                             **options)
 
         self.q_text = m.q(embedded_machine, **options)
