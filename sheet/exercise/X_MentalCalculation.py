@@ -258,7 +258,7 @@ class X_MentalCalculation(X_Structure):
                             nb_box[q.nb_source] = \
                                         question.generate_numbers(q.nb_source)
 
-                        last_nb[q.nb_source] |= [Decimal("1")]
+                        last_nb[q.nb_source] |= {Decimal("1")}
 
             (kept_aside,
              nb_box[q.nb_source]) = utils.put_aside(last_nb[q.nb_source],
