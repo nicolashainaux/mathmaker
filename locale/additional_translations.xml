@@ -29,4 +29,11 @@
 	<word text="How many tenths"/>
 	<word text="How many hundredths"/>
 	<word text="How many thousandths"/>
+	<word text="What is the half of {number}?"/>
+	<word text="What is the third of {number}?"/>
+	<word text="What is the quarter of {number}?"/>
+	<word text="What is the double of {number}?"/>
+	<word text="What is the triple of {number}?"/>
+	<word text="What is the quadruple of {number}?"/>
+
 </nothing>

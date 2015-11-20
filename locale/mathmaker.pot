@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.6\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2015-11-05 16:28+0100\n"
+"POT-Creation-Date: 2015-11-20 14:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -344,11 +344,11 @@ msgstr ""
 msgid "Factorise, if possible :"
 msgstr ""
 
-#: sheet/exercise/X_MentalCalculation.py:315
+#: sheet/exercise/X_MentalCalculation.py:369
 msgid "Question:"
 msgstr ""
 
-#: sheet/exercise/X_MentalCalculation.py:317
+#: sheet/exercise/X_MentalCalculation.py:371
 msgid "Answer:"
 msgstr ""
 
@@ -520,9 +520,29 @@ msgstr ""
 msgid "{how_many_rank} are there in {decimal_number}?"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/rank_reversed.py:181
+#: sheet/exercise/question/mc_modules/rank_reversed.py:189
 #, python-brace-format
 msgid "Which figure matches the {rank} in the number {decimal_number}?"
+msgstr ""
+
+#: sheet/exercise/question/mc_modules/vocabulary_addi.py:40
+#, python-brace-format
+msgid "How much is the sum of {n1} and {n2}?"
+msgstr ""
+
+#: sheet/exercise/question/mc_modules/vocabulary_divi.py:40
+#, python-brace-format
+msgid "How much is the quotient of {p} by {n1}?"
+msgstr ""
+
+#: sheet/exercise/question/mc_modules/vocabulary_multi.py:39
+#, python-brace-format
+msgid "How much is the product of {n1} and {n2}?"
+msgstr ""
+
+#: sheet/exercise/question/mc_modules/vocabulary_subtr.py:42
+#, python-brace-format
+msgid "How much is the difference between {n1} and {n2}?"
 msgstr ""
 
 #: sheet/frameworks/mental_calculation/multi_decimal.xml:6
@@ -531,6 +551,8 @@ msgstr ""
 #: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
 #: sheet/frameworks/mental_calculation/multi_reversed.xml:6
 #: sheet/frameworks/mental_calculation/multi_reversed.xml:6
+#: sheet/frameworks/mental_calculation/operations_vocabulary.xml:6
+#: sheet/frameworks/mental_calculation/operations_vocabulary.xml:6
 #: sheet/frameworks/mental_calculation/tables2_9.xml:6
 #: sheet/frameworks/mental_calculation/tables2_9.xml:6
 #: sheet/frameworks/mental_calculation/tables2_9.xml:6
@@ -546,40 +568,12 @@ msgstr ""
 msgid ""
 msgstr ""
 
-#: locale/additional_translations.xml:31
-msgid "How many thousandths"
-msgstr ""
-
-#: locale/additional_translations.xml:27
-msgid "How many tens"
-msgstr ""
-
-#: locale/additional_translations.xml:7
-msgid "hundreds of millions"
-msgstr ""
-
-#: locale/additional_translations.xml:24
-msgid "How many tens of thousands"
-msgstr ""
-
-#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
-msgid "Simple decimal multiplications"
-msgstr ""
-
 #: locale/additional_translations.xml:25
 msgid "How many thousands"
 msgstr ""
 
-#: locale/additional_translations.xml:21
-msgid "How many tens of millions"
-msgstr ""
-
-#: locale/additional_translations.xml:16
-msgid "tenths"
-msgstr ""
-
-#: locale/additional_translations.xml:12
-msgid "thousands"
+#: locale/additional_translations.xml:30
+msgid "How many hundredths"
 msgstr ""
 
 #: locale/additional_translations.xml:11
@@ -590,56 +584,30 @@ msgstr ""
 msgid "How many hundreds of millions"
 msgstr ""
 
-#: locale/additional_translations.xml:10
-msgid "hundreds of thousands"
+#: locale/additional_translations.xml:7
+msgid "hundreds of millions"
 msgstr ""
 
-#: sheet/frameworks/mental_calculation/divisions.xml:6
-msgid "Divisions"
+#: locale/additional_translations.xml:9
+msgid "millions"
 msgstr ""
 
-#: sheet/frameworks/mental_calculation/multi_reversed.xml:6
-msgid "Reversed multiplications"
+#: locale/additional_translations.xml:32
+msgid "What is the half of {number}?"
 msgstr ""
 
-#: locale/additional_translations.xml:18
-msgid "thousandths"
+#: locale/additional_translations.xml:24
+msgid "How many tens of thousands"
 msgstr ""
 
-#: locale/additional_translations.xml:13
-msgid "hundreds"
-msgstr ""
-
-#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
-#: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
-#: sheet/frameworks/mental_calculation/multi_reversed.xml:6
-#: sheet/frameworks/mental_calculation/tables2_9.xml:6
-#: sheet/frameworks/mental_calculation/default.xml:6
-#: sheet/frameworks/mental_calculation/ranks.xml:5
-#: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
-#: sheet/frameworks/mental_calculation/divisions.xml:6
-msgid "Answers"
-msgstr ""
-
-#: sheet/frameworks/mental_calculation/ranks.xml:5
-msgid "Ranks of figures in a number"
-msgstr ""
-
-#: locale/additional_translations.xml:6
-msgid "billions"
-msgstr ""
-
-#: locale/additional_translations.xml:8
-msgid "tens of millions"
-msgstr ""
-
-#: locale/additional_translations.xml:29
-msgid "How many tenths"
+#: locale/additional_translations.xml:34
+msgid "What is the quarter of {number}?"
 msgstr ""
 
 #: sheet/frameworks/mental_calculation/multi_decimal.xml:6
 #: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
 #: sheet/frameworks/mental_calculation/multi_reversed.xml:6
+#: sheet/frameworks/mental_calculation/operations_vocabulary.xml:6
 #: sheet/frameworks/mental_calculation/tables2_9.xml:6
 #: sheet/frameworks/mental_calculation/default.xml:6
 #: sheet/frameworks/mental_calculation/ranks.xml:5
@@ -648,36 +616,36 @@ msgstr ""
 msgid "Mental calculation"
 msgstr ""
 
-#: locale/additional_translations.xml:14
-msgid "tens"
+#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
+msgid "Simple decimal multiplications"
+msgstr ""
+
+#: locale/additional_translations.xml:12
+msgid "thousands"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/divisions.xml:6
+msgid "Divisions"
+msgstr ""
+
+#: locale/additional_translations.xml:35
+msgid "What is the double of {number}?"
+msgstr ""
+
+#: locale/additional_translations.xml:10
+msgid "hundreds of thousands"
 msgstr ""
 
 #: locale/additional_translations.xml:17
 msgid "hundredths"
 msgstr ""
 
-#: locale/additional_translations.xml:28
-msgid "How many units"
+#: locale/additional_translations.xml:16
+msgid "tenths"
 msgstr ""
 
-#: locale/additional_translations.xml:30
-msgid "How many hundredths"
-msgstr ""
-
-#: locale/additional_translations.xml:26
-msgid "How many hundreds"
-msgstr ""
-
-#: locale/additional_translations.xml:9
-msgid "millions"
-msgstr ""
-
-#: locale/additional_translations.xml:19
-msgid "How many billions"
-msgstr ""
-
-#: locale/additional_translations.xml:23
-msgid "How many hundreds of thousands"
+#: locale/additional_translations.xml:8
+msgid "tens of millions"
 msgstr ""
 
 #: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
@@ -685,10 +653,94 @@ msgstr ""
 msgid "Multiplications with a hole"
 msgstr ""
 
+#: sheet/frameworks/mental_calculation/operations_vocabulary.xml:6
+msgid "Vocabulary of operations"
+msgstr ""
+
+#: locale/additional_translations.xml:31
+msgid "How many thousandths"
+msgstr ""
+
+#: locale/additional_translations.xml:21
+msgid "How many tens of millions"
+msgstr ""
+
+#: locale/additional_translations.xml:27
+msgid "How many tens"
+msgstr ""
+
+#: locale/additional_translations.xml:23
+msgid "How many hundreds of thousands"
+msgstr ""
+
+#: locale/additional_translations.xml:36
+msgid "What is the triple of {number}?"
+msgstr ""
+
 #: locale/additional_translations.xml:22
 msgid "How many millions"
 msgstr ""
 
+#: locale/additional_translations.xml:13
+msgid "hundreds"
+msgstr ""
+
+#: locale/additional_translations.xml:14
+msgid "tens"
+msgstr ""
+
+#: locale/additional_translations.xml:6
+msgid "billions"
+msgstr ""
+
 #: locale/additional_translations.xml:15
 msgid "units"
+msgstr ""
+
+#: locale/additional_translations.xml:33
+msgid "What is the third of {number}?"
+msgstr ""
+
+#: locale/additional_translations.xml:18
+msgid "thousandths"
+msgstr ""
+
+#: locale/additional_translations.xml:28
+msgid "How many units"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/ranks.xml:5
+msgid "Ranks of figures in a number"
+msgstr ""
+
+#: locale/additional_translations.xml:37
+msgid "What is the quadruple of {number}?"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
+#: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
+#: sheet/frameworks/mental_calculation/multi_reversed.xml:6
+#: sheet/frameworks/mental_calculation/operations_vocabulary.xml:6
+#: sheet/frameworks/mental_calculation/tables2_9.xml:6
+#: sheet/frameworks/mental_calculation/default.xml:6
+#: sheet/frameworks/mental_calculation/ranks.xml:5
+#: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
+#: sheet/frameworks/mental_calculation/divisions.xml:6
+msgid "Answers"
+msgstr ""
+
+#: locale/additional_translations.xml:26
+msgid "How many hundreds"
+msgstr ""
+
+#: locale/additional_translations.xml:19
+msgid "How many billions"
+msgstr ""
+
+#: locale/additional_translations.xml:29
+msgid "How many tenths"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/multi_reversed.xml:6
+msgid "Reversed multiplications"
 msgstr ""

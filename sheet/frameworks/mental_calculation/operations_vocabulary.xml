@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFAULT MENTAL CALCULATION SHEET -->
+
+
+<sheet header="" title="Mental calculation" subtitle="Vocabulary of operations" text="" answers_title="Answers">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="mental">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default value: id='generic' 
+		 No default for kind and subkind, they must be given -->
+	<!-- Available kinds for mental calculation: tabular, slideshow -->
+	<exercise id="mental_calculation" kind="tabular">
+
+		<!-- Default value (planned): context="none" 
+			 No default for kind and subkind, they must be given -->
+
+		<question kind="vocabulary" subkind="half">
+			<table_2>1</table_2>
+		</question>
+
+		<question kind="vocabulary" subkind="third">
+			<table_3>1</table_3>
+		</question>
+
+		<question kind="vocabulary" subkind="quarter">
+			<table_4>1</table_4>
+		</question>
+
+		<question kind="vocabulary" subkind="double">
+			<table_2>1</table_2>
+		</question>
+
+		<question kind="vocabulary" subkind="triple">
+			<table_3>1</table_3>
+		</question>
+
+		<question kind="vocabulary" subkind="quadruple">
+			<table_4>1</table_4>
+		</question>
+
+		<question kind="vocabulary" subkind="simple_parts_of_a_number">
+			<auto_11_50>1</auto_11_50>
+		</question>
+
+		<question kind="vocabulary" subkind="simple_multiples_of_a_number">
+			<auto_11_50>1</auto_11_50>
+		</question>
+
+		<question kind="vocabulary" subkind="multi">
+			<table_2_9>1</table_2_9>
+			<table_15>1</table_15>
+			<table_25>1</table_25>
+			<table_11>1</table_11>
+		</question>
+
+		<question kind="vocabulary" subkind="divi">
+			<table_2_9>3</table_2_9>
+		</question>
+		
+		<question kind="vocabulary" subkind="addi">
+			<integers_10_100_for_sums_diffs>1</integers_10_100_for_sums_diffs>
+			<table_2_9_for_sums_diffs>1</table_2_9_for_sums_diffs>
+		</question>
+
+		<question kind="vocabulary" subkind="subtr">
+			<integers_10_100_for_sums_diffs>1</integers_10_100_for_sums_diffs>
+			<decimals_0_20_1>1</decimals_0_20_1>
+		</question>
+
+		<question kind="vocabulary" subkind="operation">
+			<auto_vocabulary>1</auto_vocabulary>
+		</question>
+
+	</exercise>
+
+</sheet>

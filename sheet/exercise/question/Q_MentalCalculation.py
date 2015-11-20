@@ -20,7 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import sys
+import sys, random
 
 from lib import *
 from lib.common.cst import *
@@ -33,63 +33,131 @@ from core.base_calculus import *
 # 'table_15' --> 15×n where 2 <= n <= 6
 # 'table_25' --> 25×n where 2 <= n <= 6
 # 'int_irreducible_frac' --> (n, p/n) where 2 <= n <= 20 and p/n is irreducible
-AVAILABLE_Q_SUBKIND_VALUES = ['table_2_9',
-                              'table_2', 'table_3', 'table_4', 'table_2_3',
-                              'table_2_4', 'table_3_4', 'table_2_3_4',
+AVAILABLE_Q_SUBKIND_VALUES = ['table_2_9', 'table_2', 'table_3', 'table_4',
+                              'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
+                              'table_2_9_for_sums_diffs',
                               'table_11',
                               'table_15',
                               'table_25',
                               'int_irreducible_frac',
                               'rank_word',
+                              'integers_10_100',
+                              'integers_10_100_for_sums_diffs',
+                              'decimals_0_20_1',
                               'bypass']
 
 PART_OF_ANOTHER_SOURCE = { 'table_2' : 'table_2_9',
                            'table_3' : 'table_2_9',
                            'table_4' : 'table_2_9',
-                           'table_2_3' : 'table_2_9',
-                           'table_2_4' : 'table_2_9',
-                           'table_3_4' : 'table_2_9',
-                           'table_2_3_4' : 'table_2_9'
+                           'integers_10_100_for_sums_diffs' : 'integers_10_100'
                          }
+
+SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number' : {'half', 'third', 'quarter'},
+                      'simple_multiples_of_a_number' : {'double', 'triple',
+                                                        'quadruple'},
+                      'simple_parts_or_multiples_of_a_number' : {'half',
+                                                                 'third',
+                                                                 'quarter',
+                                                                 'double',
+                                                                 'triple',
+                                                                 'quadruple'},
+                      'operation' : {'multi', 'divi', 'addi', 'subtr'}
+                     }
+
+UNPACKABLE_SUBKINDS = {'half', 'third', 'quarter',
+                       'double', 'triple', 'quadruple',
+                       'multi', 'divi', 'addi', 'subtr'
+                      }
+
+SOURCES_TO_UNPACK = {'auto_table' : {'half' : {'table_2'},
+                                     'third' : {'table_3'},
+                                     'quarter' : {'table_4'},
+                                     'double' : {'table_2'},
+                                     'triple' : {'table_3'},
+                                     'quadruple' : {'table_4'},
+                                     'multi' : {'table_2_9'},
+                                     'divi' : {'table_2_9'},
+                                     'addi' : {'table_2_9_for_sums_diffs'},
+                                     'subtr' : {'table_2_9_for_sums_diffs'}},
+                     'auto_11_50' : {'half' : {'table_2_11_50'},
+                                     'third' : {'table_3_11_50'},
+                                     'quarter' : {'table_4_11_50'},
+                                     'double' : {'table_2_11_50'},
+                                     'triple' : {'table_3_11_50'},
+                                     'quadruple' : {'table_4_11_50'}},
+                     'auto_vocabulary' :  \
+                               {'half' : {'table_2', 'table_2_11_50'},
+                                'third' : {'table_3', 'table_3_11_50'},
+                                'quarter' : {'table_4', 'table_4_11_50'},
+                                'double' : {'table_2', 'table_2_11_50'},
+                                'triple' : {'table_3', 'table_3_11_50'},
+                                'quadruple' : {'table_4', 'table_4_11_50'},
+                                'multi' : {'table_2_9'},
+                                'divi' : {'table_2_9'},
+                                'addi' : {'integers_10_100_for_sums_diffs',
+                                          'decimals_0_20_1'},
+                                'subtr' : {'integers_10_100_for_sums_diffs',
+                                           'decimals_0_20_1'}}
+                     }
 
 AVAILABLE_Q_KIND_VALUES = \
     { 'multi_direct' : ['table_2_9',
-                        'table_2', 'table_3', 'table_4', 'table_2_3',
-                        'table_2_4', 'table_3_4', 'table_2_3_4',
+                        'table_2', 'table_3', 'table_4',
                         'table_11',
                         'table_15',
                         'table_25',
                         'bypass'],
       'multi_reversed' : ['table_2_9',
-                          'table_2', 'table_3', 'table_4', 'table_2_3',
-                          'table_2_4', 'table_3_4', 'table_2_3_4',
+                          'table_2', 'table_3', 'table_4',
                           'bypass'],
       'multi_hole' : ['table_2_9',
-                      'table_2', 'table_3', 'table_4', 'table_2_3',
-                      'table_2_4', 'table_3_4', 'table_2_3_4',
+                      'table_2', 'table_3', 'table_4',
                       'bypass'],
       'multi_decimal' : ['table_2_9',
-                         'table_2', 'table_3', 'table_4', 'table_2_3',
-                         'table_2_4', 'table_3_4', 'table_2_3_4',
+                         'table_2', 'table_3', 'table_4',
                          'bypass'],
       'multi_decimal1' : ['table_2_9',
-                          'table_2', 'table_3', 'table_4', 'table_2_3',
-                          'table_2_4', 'table_3_4', 'table_2_3_4',
+                          'table_2', 'table_3', 'table_4',
                           'bypass'],
       'multi_decimal2' : ['table_2_9',
-                          'table_2', 'table_3', 'table_4', 'table_2_3',
-                          'table_2_4', 'table_3_4', 'table_2_3_4',
+                          'table_2', 'table_3', 'table_4',
                           'bypass'],
       'divi_direct' : ['table_2_9',
-                       'table_2', 'table_3', 'table_4', 'table_2_3',
-                       'table_2_4', 'table_3_4', 'table_2_3_4',
+                       'table_2', 'table_3', 'table_4',
                        'bypass'],
       'rank_direct' : ['rank_word',
                        'bypass'],
       'rank_reversed' : ['rank_word',
                          'bypass'],
       'rank_numberof' : ['rank_word',
-                           'bypass']
+                           'bypass'],
+      'vocabulary_half' : {'table_2', 'table_2_11_50', 'bypass'},
+      'vocabulary_third' : {'table_3', 'table_3_11_50', 'bypass'},
+      'vocabulary_quarter' : {'table_4', 'table_4_11_50', 'bypass'},
+      'vocabulary_double' : {'table_2', 'table_2_11_50', 'bypass'},
+      'vocabulary_triple' : {'table_3', 'table_3_11_50', 'bypass'},
+      'vocabulary_quadruple' : {'table_4', 'table_4_11_50', 'bypass'},
+      'vocabulary_multi' : {'table_2_9',
+                            'table_2', 'table_3', 'table_4',
+                            'table_11',
+                            'table_15',
+                            'table_25',
+                            'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
+                            'bypass'},
+      'vocabulary_divi' : {'table_2_9',
+                           'table_2', 'table_3', 'table_4',
+                           'table_11',
+                           'table_15',
+                           'table_25',
+                           'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
+                           'bypass'},
+      'vocabulary_addi' : {'table_2_9', 'table_2_9_for_sums_diffs',
+                           'integers_10_100', 'integers_10_100_for_sums_diffs',
+                           'decimals_0_20_1', 'bypass'},
+      'vocabulary_subtr' : {'table_2_9', 'table_2_9_for_sums_diffs',
+                            'integers_10_100', 'integers_10_100_for_sums_diffs',
+                            'decimals_0_20_1', 'bypass'}
+
 #     frozenset(('area', 'rectangle', 'with_drawing')) : ['table_2_9',
 #                                              'table_11',
 #                                              'table_15',
@@ -114,7 +182,18 @@ MODULES =  \
       'divi_direct' : mc_modules.divi_direct,
       'rank_direct' : mc_modules.rank_direct,
       'rank_reversed' : mc_modules.rank_reversed,
-      'rank_numberof' : mc_modules.rank_numberof
+      'rank_numberof' : mc_modules.rank_numberof,
+      'vocabulary_half' : mc_modules.vocabulary_simple_part_of_a_number,
+      'vocabulary_third' : mc_modules.vocabulary_simple_part_of_a_number,
+      'vocabulary_quarter' : mc_modules.vocabulary_simple_part_of_a_number,
+      'vocabulary_double' : mc_modules.vocabulary_simple_multiple_of_a_number,
+      'vocabulary_triple' : mc_modules.vocabulary_simple_multiple_of_a_number,
+      'vocabulary_quadruple': mc_modules.vocabulary_simple_multiple_of_a_number,
+      'vocabulary_multi' : mc_modules.vocabulary_multi,
+      'vocabulary_divi' : mc_modules.vocabulary_divi,
+      'vocabulary_addi': mc_modules.vocabulary_addi,
+      'vocabulary_subtr' : mc_modules.vocabulary_subtr
+
 #     ('division', 'direct') : mc_modules.divi_dir,
 #     ('division', 'decimal_1') : mc_modules.divi_deci1,
 #     ('area', 'rectangle', 'with_drawing') : mc_modules.area_rect_dr,
@@ -146,8 +225,8 @@ def coprime_generator(n):
 ##
 #   @brief Returns a list of numbers of the given kind
 def generate_numbers(subkind):
-    if subkind == 'table_2_9':
-        return {(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
+    if subkind == 'table_2_9' or subkind == 'table_2_9_for_sums_diffs':
+        return {(2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
                 (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
                 (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
                 (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
@@ -157,30 +236,22 @@ def generate_numbers(subkind):
                 (9, 9)}
 
     elif subkind == 'table_2':
-        return {(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9)}
+        return {(2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9)}
 
     elif subkind == 'table_3':
-        return {(2, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9)}
+        return {(3, 2), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9)}
 
     elif subkind == 'table_4':
-        return {(2, 4), (3, 4), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9)}
+        return {(4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9)}
 
-    elif subkind == 'table_2_3':
-        return {(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
-                (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9)}
+    elif subkind == 'table_2_11_50':
+        return {(2, n+11) for n in range(40)}
 
-    elif subkind == 'table_2_4':
-        return {(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
-                (3, 4), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9)}
+    elif subkind == 'table_3_11_50':
+        return {(3, n+11) for n in range(40)}
 
-    elif subkind == 'table_3_4':
-        return {(2, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
-                (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9)}
-
-    if subkind == 'table_2_3_4':
-        return {(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
-                (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
-                (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9)}
+    elif subkind == 'table_4_11_50':
+        return {(4, n+11) for n in range(40)}
 
     elif subkind == 'table_11':
         return {(11, 11), (11, 12), (11, 13), (11, 14), (11, 15), (11, 16),
@@ -194,12 +265,25 @@ def generate_numbers(subkind):
                 (11, 71), (11, 72),
                 (11, 81)}
 
-
     elif subkind == 'table_15':
         return {(15, 2), (15,3), (15, 4), (15,5), (15, 6)}
 
     elif subkind == 'table_25':
         return {(25, 2), (25,3), (25, 4), (25,5), (25, 6)}
+
+    elif subkind == 'integers_10_100':
+        return { (i+10, j+10) for i in range(90) for j in range(90) if i <= j }
+
+    elif subkind == 'integers_10_100_for_sums_diffs':
+        return set(random.sample({ (i+10, j+10) for i in range(90) \
+                                                for j in range(90) \
+                                                if i < j }, 100))
+
+    elif subkind == 'decimals_0_20_1':
+        return { (Decimal(str(i/10)), Decimal(str(j/10))) for (i, j) in \
+                    random.sample({ (i, j) for i in range(200) \
+                                           for j in range (200) if i < j },
+                                  100)}
 
     elif subkind == 'int_irreducible_frac':
         result = set()

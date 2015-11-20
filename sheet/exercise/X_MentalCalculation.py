@@ -164,6 +164,9 @@ class X_MentalCalculation(X_Structure):
         last_nb = { key : set() \
                     for key in question.nb_sources()}
 
+        to_unpack = copy.deepcopy(question.SUBKINDS_TO_UNPACK)
+        already_unpacked = set()
+
         self.q_nb = 0
 
         # In q_list, each element is like this:
@@ -175,22 +178,40 @@ class X_MentalCalculation(X_Structure):
             for n in range(q[2]):
                 q_id = q[0]['kind']
                 q_id += "_"
-                q_id += q[0]['subkind']
+
+                # Here we 'unpack' some special subkinds.
+                subk = q[0]['subkind']
+                if subk in question.UNPACKABLE_SUBKINDS:
+                    already_unpacked |= {subk}
+                elif subk in to_unpack:
+                    subk_left = to_unpack[subk] - already_unpacked
+                    if not subk_left:
+                        already_unpacked -= copy.deepcopy(\
+                                            question.SUBKINDS_TO_UNPACK[subk])
+                        to_unpack[subk] = copy.deepcopy(\
+                                            question.SUBKINDS_TO_UNPACK[subk])
+                        subk_left = to_unpack[subk] - already_unpacked
+                    s = list(subk_left)
+                    random.shuffle(s)
+                    subk = s.pop()
+                    already_unpacked |= {subk}
+
+                q_id += subk
                 q_options = copy.deepcopy(q[0])
                 del q_options['kind']
                 del q_options['subkind']
                 if not q_id in q_dict:
                     q_dict[q_id] = []
-                q_dict[q_id] += [(q[1], q_options)]
+                q_dict[q_id] += [(q[1], subk, q_options)]
 
         # Now, q_dict is organized like this:
-        # { 'multi_direct' :   [('table_2_9', {'nb':'int'}),
-        #                       ('table_2_9', {'nb':'int'})],
-        #   'multi_reversed' : [('table_2_9', {'nb':'int'})],
-        #   'divi_direct' :    [('table_2_9', {'nb':'int'})],
-        #   'multi_hole' :     [('table_2_9', {'nb':'int'})],
-        #   'q_id' :           [('table_15', {'nb':'int'})],
-        #   'q_id :            [('table_25', {'nb':'int'})],
+        # { 'multi_direct' :   [('table_2_9', 'direct', {'nb':'int'}),
+        #                       ('table_2_9', 'direct', {'nb':'int'})],
+        #   'multi_reversed' : [('table_2_9', 'reversed', {'nb':'int'})],
+        #   'divi_direct' :    [('table_2_9', 'direct', {'nb':'int'})],
+        #   'multi_hole' :     [('table_2_9', 'hole', {'nb':'int'})],
+        #   'q_id' :           [('table_15', 'subkind', {'nb':'int'})],
+        #   'q_id :            [('table_25', 'subkind', {'nb':'int'})],
         #   'etc.'
         # }
 
@@ -203,7 +224,7 @@ class X_MentalCalculation(X_Structure):
         q_id_box = copy.deepcopy(list(q_dict.keys()))
         q_ids_aside = deque()
 
-        q_info = namedtuple('q_info', 'type,nb_source,options')
+        q_info = namedtuple('q_info', 'type,nb_source,subkind,options')
 
         for n in range(self.q_nb):
             q_nb_in_q_id_box = sum([len(q_dict[q_id]) for q_id in q_dict])
@@ -217,7 +238,7 @@ class X_MentalCalculation(X_Structure):
 
             info = q_dict[q_id].pop(0)
 
-            mixed_q_list += [q_info(q_id, info[0], info[1])]
+            mixed_q_list += [q_info(q_id, info[0], info[1], info[2])]
 
             if len(q_dict[q_id]):
                 q_ids_aside.appendleft(q_id)
@@ -230,14 +251,14 @@ class X_MentalCalculation(X_Structure):
                 q_id_box += [q_ids_aside.pop()]
 
         # Now, mixed_q_list is organized like this:
-        # [ ('type',           'nb_source', 'options'),
-        #   ('multi_direct',   'table_2_9', {'nb':'int'}),
-        #   ('multi_reversed', 'table_2_9', {'nb':'int'}),
-        #   ('q_id',           'table_15',  {'nb':'int'}),
-        #   ('multi_hole',     'table_2_9', {'nb':'int'}),
-        #   ('multi_direct',   'table_2_9', {'nb':'int'}),
-        #   ('q_id,            'table_25',  {'nb':'int'}),
-        #   ('divi_direct',    'table_2_9', {'nb':'int'}),
+        # [ ('type',           'nb_source', 'subkind',  'options'),
+        #   ('multi_direct',   'table_2_9', 'direct',   {'nb':'int'}),
+        #   ('multi_reversed', 'table_2_9', 'reversed', {'nb':'int'}),
+        #   ('q_id',           'table_15',  'subkind',  {'nb':'int'}),
+        #   ('multi_hole',     'table_2_9', 'hole',     {'nb':'int'}),
+        #   ('multi_direct',   'table_2_9', 'direct',   {'nb':'int'}),
+        #   ('q_id,            'table_25',  'subkind',  {'nb':'int'}),
+        #   ('divi_direct',    'table_2_9', 'direct',   {'nb':'int'}),
         #   etc.
         # ]
 
@@ -245,54 +266,71 @@ class X_MentalCalculation(X_Structure):
         self.questions_list = []
 
         for q in mixed_q_list:
-            if len(nb_box[q.nb_source]) == 0:
-                nb_box[q.nb_source] = question.generate_numbers(q.nb_source)
+            nb_source = q.nb_source
+            if nb_source in question.SOURCES_TO_UNPACK:
+                s = copy.copy(question.SOURCES_TO_UNPACK)[nb_source][q.subkind]
+                s = list(s)
+                random.shuffle(s)
+                nb_source = s.pop()
 
-            if q.nb_source == 'rank_word':
+            if len(nb_box[nb_source]) == 0:
+                nb_box[nb_source] = question.generate_numbers(nb_source)
+
+            if nb_source == 'rank_word':
                 if 'rank_matches_invisible_zero' in q.options \
                     and q.options['rank_matches_invisible_zero'] != ""\
                     and q.options['rank_matches_invisible_zero'] != "False":
                 #___
-                    if (Decimal("1"),) in nb_box[q.nb_source]:
-                        if len(nb_box[q.nb_source]) == 1:
-                            nb_box[q.nb_source] = \
-                                        question.generate_numbers(q.nb_source)
+                    if (Decimal("1"),) in nb_box[nb_source]:
+                        if len(nb_box[nb_source]) == 1:
+                            nb_box[nb_source] = \
+                                        question.generate_numbers(nb_source)
 
-                        last_nb[q.nb_source] |= {Decimal("1")}
+                        last_nb[nb_source] |= {Decimal("1")}
 
             (kept_aside,
-             nb_box[q.nb_source]) = utils.put_aside(last_nb[q.nb_source],
-                                                    nb_box[q.nb_source])
+             nb_box[nb_source]) = utils.put_aside(last_nb[nb_source],
+                                                  nb_box[nb_source]) \
+                if not nb_source in question.PART_OF_ANOTHER_SOURCE \
+                else (set(), nb_box[nb_source])
 
             nb_to_use = None
-            if q.nb_source in question.PART_OF_ANOTHER_SOURCE:
-                second_source = question.PART_OF_ANOTHER_SOURCE[q.nb_source]
-                remaining = set(nb_box[q.nb_source] & nb_box[second_source])
+            if nb_source in question.PART_OF_ANOTHER_SOURCE:
+                second_source = question.PART_OF_ANOTHER_SOURCE[nb_source]
+                remaining = set(nb_box[nb_source] & nb_box[second_source])
+                reversed_elements = {(j, i) for (i, j) in nb_box[second_source]}
+                extra_elements = set(nb_box[nb_source] & reversed_elements)
+                remaining |= extra_elements
                 if not len(remaining):
-                    nb_box[q.nb_source] |= nb_box[second_source]
-                    remaining = set(nb_box[second_source])
-                nb_to_use = remaining.pop()
-                nb_box[q.nb_source].remove(nb_to_use)
+                    nb_box[nb_source] = question.generate_numbers(nb_source)
+                    remaining = set(nb_box[nb_source])
+                remaining_shuffled = list(remaining)
+                random.shuffle(remaining_shuffled)
+                nb_to_use = remaining_shuffled.pop()
+                nb_box[nb_source].remove(nb_to_use)
+                nb_box[second_source].discard(nb_to_use)
 
             else:
-                nb_to_use = nb_box[q.nb_source].pop()
+                nb_box_shuffled = list(nb_box[nb_source])
+                random.shuffle(nb_box_shuffled)
+                nb_to_use = nb_box_shuffled.pop()
+                nb_box[nb_source].remove(nb_to_use)
 
-            nb_box[q.nb_source] |= kept_aside
-
+            nb_box[nb_source] |= kept_aside
             self.questions_list += [default_question(embedded_machine,
                                                      q.type,
                                                      q.options,
                                                      numbers_to_use=nb_to_use
                                                      )]
 
-            last_nb[q.nb_source] = set()
-            if q.nb_source == 'table_2_9':
-                last_nb[q.nb_source] |= {nb_to_use[0], nb_to_use[1]}
-            elif q.nb_source == 'int_irreducible_frac' \
-                 or q.nb_source == 'rank_word':
-                last_nb[q.nb_source] |= {nb_to_use[0]}
+            last_nb[nb_source] = set()
+            if nb_source == 'table_2_9':
+                last_nb[nb_source] |= {nb_to_use[0], nb_to_use[1]}
+            elif nb_source == 'int_irreducible_frac' \
+                 or nb_source == 'rank_word':
+                last_nb[nb_source] |= {nb_to_use[0]}
             else:
-                last_nb[q.nb_source] |= {nb_to_use[1]}
+                last_nb[nb_source] |= {nb_to_use[1]}
 
 
         # END OF THE ZONE TO REWRITE ------------------------------------------

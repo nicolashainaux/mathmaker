@@ -20,18 +20,25 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
-# @package mc_modules
-# @brief All question objects should be "declared" here.
+# This module will add a question about the sum of two numbers
 
-from . import multi_direct, multi_reversed, multi_hole
-from . import divi_direct
-from . import multi_decimal, multi_decimal1, multi_decimal2
-from . import rank_direct, rank_reversed, rank_numberof
-from . import vocabulary_simple_part_of_a_number
-from . import vocabulary_simple_multiple_of_a_number
-from . import vocabulary_multi, vocabulary_divi
-from . import vocabulary_addi, vocabulary_subtr
+from core.base_calculus import *
+from lib.common.cst import *
+
+class sub_object(object):
+
+    def __init__(self, numbers_to_use, **options):
+        nb_list = list(numbers_to_use)
+        n1 = randomly.pop(nb_list)
+        n2 = randomly.pop(nb_list)
+        self.n1 = Item(n1).into_str(force_expression_begins=True)
+        self.n2 = Item(n2).into_str(force_expression_begins=True)
+        self.s = Item(Sum([n1, n2]).evaluate()).\
+                                        into_str(force_expression_begins=True)
+
+    def q(self, M, **options):
+        return _("How much is the sum of {n1} and {n2}?").format(n1=self.n1,
+                                                                 n2=self.n2)
+
+    def a(self, M, **options):
+        return M.write_math_style2(str(self.s))
