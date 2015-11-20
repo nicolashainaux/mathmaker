@@ -39,7 +39,8 @@ XML_SHEETS = { 'mental_calculation_default' : D +\
                                 "mental_calculation/multi_reversed.xml",
                'ranks' : D + "mental_calculation/ranks.xml",
                'operations_vocabulary' : D + \
-                                "mental_calculation/operations_vocabulary.xml"
+                                "mental_calculation/operations_vocabulary.xml",
+               'test_11_1' : D + "mental_calculation/test_11_1.xml"
                }
 
 CATALOG = { 'mental_calculation' : exercise.X_MentalCalculation,
