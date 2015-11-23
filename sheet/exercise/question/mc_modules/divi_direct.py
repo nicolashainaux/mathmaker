@@ -27,9 +27,18 @@ class sub_object(object):
 
     def __init__(self, numbers_to_use, **options):
         nb_list = list(numbers_to_use)
-        self.nb1 = randomly.pop(nb_list)
-        self.nb2 = randomly.pop(nb_list)
-        self.product = Product([self.nb1, self.nb2]).evaluate()
+        self.nb1 = 0
+        self.nb2 = 0
+
+        if '10_100_1000' in options and options['10_100_1000']:
+            self.nb1 = nb_list[0]
+            self.product = nb_list[1]
+            self.nb2 = Item(Quotient(('+', self.product, self.nb1)).evaluate())\
+                                        .into_str(force_expression_begins=True)
+        else:
+            self.nb1 = randomly.pop(nb_list)
+            self.nb2 = randomly.pop(nb_list)
+            self.product = Product([self.nb1, self.nb2]).evaluate()
 
     def q(self, M, **options):
         return _("Calculate:") + " "\
@@ -40,4 +49,5 @@ class sub_object(object):
                                     )
 
     def a(self, M, **options):
-        return M.write_math_style2(str(self.nb2))
+        return M.write_math_style2(Item(self.nb2)\
+                                    .into_str(force_expression_begins=True))

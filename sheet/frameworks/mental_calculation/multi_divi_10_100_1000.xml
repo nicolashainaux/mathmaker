@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFAULT MENTAL CALCULATION SHEET -->
+
+
+<sheet header="" title="Mental calculation" subtitle="Multiplications and divisions by 10, 100 and 1000" text="" answers_title="Answers">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="mental">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default value: id='generic' 
+		 No default for kind and subkind, they must be given -->
+	<!-- Available kinds for mental calculation: tabular, slideshow -->
+	<exercise id="mental_calculation" kind="tabular">
+
+		<question kind="multi" subkind="direct">
+			<decimal_and_10_100_1000>10</decimal_and_10_100_1000>
+		</question>
+
+		<question kind="divi" subkind="direct">
+			<decimal_and_10_100_1000>10</decimal_and_10_100_1000>
+		</question>
+
+
+
+	</exercise>
+
+</sheet>

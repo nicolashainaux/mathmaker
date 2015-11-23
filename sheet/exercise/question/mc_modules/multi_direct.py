@@ -39,7 +39,7 @@ class sub_object(object):
                                     )
 
     def a(self, M, **options):
-        return M.write_math_style2(str(Product([self.nb1,
-                                                self.nb2]).evaluate()
-                                      )
+        return M.write_math_style2(Item(Product([self.nb1,
+                                                     self.nb2]).evaluate())\
+                                        .into_str(force_expression_begins=True)
                                   )

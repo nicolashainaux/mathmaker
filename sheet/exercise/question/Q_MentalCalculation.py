@@ -44,6 +44,8 @@ AVAILABLE_Q_SUBKIND_VALUES = ['table_2_9', 'table_2', 'table_3', 'table_4',
                               'integers_10_100',
                               'integers_10_100_for_sums_diffs',
                               'decimals_0_20_1',
+                              'decimal_and_10_100_1000_for_divi',
+                              'decimal_and_10_100_1000_for_multi',
                               'bypass']
 
 PART_OF_ANOTHER_SOURCE = { 'table_2' : 'table_2_9',
@@ -97,7 +99,10 @@ SOURCES_TO_UNPACK = {'auto_table' : {'half' : {'table_2'},
                                 'addi' : {'integers_10_100_for_sums_diffs',
                                           'decimals_0_20_1'},
                                 'subtr' : {'integers_10_100_for_sums_diffs',
-                                           'decimals_0_20_1'}}
+                                           'decimals_0_20_1'}},
+                     'decimal_and_10_100_1000' : \
+                            {'multi' : {'decimal_and_10_100_1000_for_multi'},
+                             'divi' : {'decimal_and_10_100_1000_for_divi'}}
                      }
 
 AVAILABLE_Q_KIND_VALUES = \
@@ -106,12 +111,14 @@ AVAILABLE_Q_KIND_VALUES = \
                         'table_11',
                         'table_15',
                         'table_25',
+                        'decimal_and_10_100_1000',
                         'bypass'],
       'multi_reversed' : ['table_2_9',
                           'table_2', 'table_3', 'table_4',
                           'bypass'],
       'multi_hole' : ['table_2_9',
                       'table_2', 'table_3', 'table_4',
+                      'decimal_and_10_100_1000',
                       'bypass'],
       'multi_decimal' : ['table_2_9',
                          'table_2', 'table_3', 'table_4',
@@ -124,6 +131,7 @@ AVAILABLE_Q_KIND_VALUES = \
                           'bypass'],
       'divi_direct' : ['table_2_9',
                        'table_2', 'table_3', 'table_4',
+                       'decimal_and_10_100_1000',
                        'bypass'],
       'rank_direct' : ['rank_word',
                        'bypass'],
@@ -284,6 +292,110 @@ def generate_numbers(subkind):
                     random.sample({ (i, j) for i in range(200) \
                                            for j in range (200) if i < j },
                                   100)}
+
+    elif subkind == 'decimal_and_10_100_1000_for_multi':
+        box_10_100_1000 = [10, 100, 1000]
+
+        result = set()
+
+        for n in range(20):
+            if not box_10_100_1000:
+                box_10_100_1000 = [10, 100, 1000]
+
+            chosen_10_100_1000 = box_10_100_1000.pop()
+
+            ranks_scale = list(RANKS[2:])
+            width = randomly.pop([1, 2, 3], weighted_table=[0.14, 0.63, 0.33])
+
+            start_rank = randomly.pop([n for n in range(len(ranks_scale))])
+
+            # Following lines inspired by rank_reversed, maybe factorize them... ?
+            # Probability to fill a higher rank rather than a lower one
+            phr = 0.5
+            hr = lr = start_rank
+            ranks = [start_rank]
+
+            for i in range(width - 1):
+                if lr == 0:
+                    phr = 1
+                elif hr == len(ranks_scale) - 1:
+                    phr = 0
+
+                if random.random() < phr:
+                    hr += 1
+                    ranks += [hr]
+                    phr *= 0.4
+                else:
+                    lr -= 1
+                    ranks += [lr]
+                    phr *= 2.5
+
+            figures = [str(i+1) for i in range(9)]
+
+            deci = Decimal('0')
+
+            for r in ranks:
+                figure = randomly.pop(figures)
+                deci +=  Decimal(figure) * ranks_scale[r]
+
+            result |= {(chosen_10_100_1000, deci)}
+
+        return result
+
+    elif subkind == 'decimal_and_10_100_1000_for_divi':
+        box_10_100_1000 = [10, 100, 1000]
+
+        result = set()
+
+        for n in range(20):
+            if not box_10_100_1000:
+                box_10_100_1000 = [10, 100, 1000]
+
+            chosen_10_100_1000 = box_10_100_1000.pop()
+
+            ranks_scale = list(RANKS[2:])
+            sys.stderr.write('\n[Q] ranks_scale: ' + str(ranks_scale))
+            width = randomly.pop([1, 2, 3], weighted_table=[0.14, 0.63, 0.33])
+
+            wt = {10 : [0.2, 0.2, 0.2, 0.2, 0.2],
+                  100 : [0.25, 0.25, 0.25, 0.25, 0],
+                  1000 : [0.34, 0.33, 0.33, 0, 0]}
+
+            start_rank = randomly.pop([n for n in range(len(ranks_scale))],
+                                      weighted_table=wt[chosen_10_100_1000])
+
+            # Following lines inspired by rank_reversed, maybe factorize them... ?
+            # Probability to fill a higher rank rather than a lower one
+            phr = 0.5
+            hr = lr = start_rank
+            ranks = [start_rank]
+
+            for i in range(width - 1):
+                if lr == 0:
+                    phr = 1
+                elif hr == len(ranks_scale) - 1:
+                    phr = 0
+
+                if random.random() < phr:
+                    hr += 1
+                    ranks += [hr]
+                    phr *= 0.4
+                else:
+                    lr -= 1
+                    ranks += [lr]
+                    phr *= 2.5
+
+            figures = [str(i+1) for i in range(9)]
+
+            deci = Decimal('0')
+
+            for r in ranks:
+                figure = randomly.pop(figures)
+                deci +=  Decimal(figure) * ranks_scale[r]
+
+            result |= {(chosen_10_100_1000, deci)}
+
+        return result
 
     elif subkind == 'int_irreducible_frac':
         result = set()

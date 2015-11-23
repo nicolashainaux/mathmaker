@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2015-11-20 14:31+0100\n"
+"PO-Revision-Date: 2015-11-23 16:53+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -362,11 +362,11 @@ msgstr "Factoriser :"
 msgid "Factorise, if possible :"
 msgstr "Factoriser, si possible :"
 
-#: sheet/exercise/X_MentalCalculation.py:369
+#: sheet/exercise/X_MentalCalculation.py:370
 msgid "Question:"
 msgstr "Question :"
 
-#: sheet/exercise/X_MentalCalculation.py:371
+#: sheet/exercise/X_MentalCalculation.py:372
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -566,9 +566,110 @@ msgstr "Combien vaut le produit de {n1} par {n2} ?"
 msgid "How much is the difference between {n1} and {n2}?"
 msgstr "Combien vaut la différence entre {n1} et {n2} ?"
 
+#: locale/additional_translations.xml:10
+msgid "hundreds of thousands"
+msgstr "centaines de milliers"
+
+#: locale/additional_translations.xml:8
+msgid "tens of millions"
+msgstr "dizaines de millions"
+
+#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
+#: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
+#: sheet/frameworks/mental_calculation/multi_divi_10_100_1000.xml:6
+#: sheet/frameworks/mental_calculation/multi_reversed.xml:6
+#: sheet/frameworks/mental_calculation/operations_vocabulary.xml:6
+#: sheet/frameworks/mental_calculation/tables2_9.xml:6
+#: sheet/frameworks/mental_calculation/default.xml:6
+#: sheet/frameworks/mental_calculation/ranks.xml:5
+#: sheet/frameworks/mental_calculation/test_11_1.xml:6
+#: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
+#: sheet/frameworks/mental_calculation/divisions.xml:6
+msgid "Answers"
+msgstr "Réponses"
+
+#: sheet/frameworks/mental_calculation/multi_divi_10_100_1000.xml:6
+msgid "Multiplications and divisions by 10, 100 and 1000"
+msgstr "Multiplications et divisions par 10, 100 et 1000"
+
+#: sheet/frameworks/mental_calculation/divisions.xml:6
+msgid "Divisions"
+msgstr "Divisions"
+
+#: locale/additional_translations.xml:33
+msgid "What is the third of {number}?"
+msgstr "Quel est le tiers de {number} ?"
+
+#: locale/additional_translations.xml:16
+msgid "tenths"
+msgstr "dixièmes"
+
+#: locale/additional_translations.xml:37
+msgid "What is the quadruple of {number}?"
+msgstr "Quel est le quadruple de {number} ?"
+
+#: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
+#: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
+msgid "Multiplications with a hole"
+msgstr "Multiplications à trou"
+
+#: sheet/frameworks/mental_calculation/ranks.xml:5
+msgid "Ranks of figures in a number"
+msgstr "Rangs des chiffres dans un nombre"
+
 #: locale/additional_translations.xml:25
 msgid "How many thousands"
 msgstr "Nombre de milliers"
+
+#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
+msgid "Simple decimal multiplications"
+msgstr "Multiplications décimales simples"
+
+#: locale/additional_translations.xml:31
+msgid "How many thousandths"
+msgstr "Nombre de millièmes"
+
+#: locale/additional_translations.xml:15
+msgid "units"
+msgstr "unités"
+
+#: locale/additional_translations.xml:12
+msgid "thousands"
+msgstr "milliers"
+
+#: locale/additional_translations.xml:14
+msgid "tens"
+msgstr "dizaines"
+
+#: locale/additional_translations.xml:7
+msgid "hundreds of millions"
+msgstr "centaines de millions"
+
+#: locale/additional_translations.xml:13
+msgid "hundreds"
+msgstr "centaines"
+
+#: locale/additional_translations.xml:28
+msgid "How many units"
+msgstr "Nombre d'unités"
+
+#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
+#: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
+#: sheet/frameworks/mental_calculation/multi_divi_10_100_1000.xml:6
+#: sheet/frameworks/mental_calculation/multi_reversed.xml:6
+#: sheet/frameworks/mental_calculation/operations_vocabulary.xml:6
+#: sheet/frameworks/mental_calculation/tables2_9.xml:6
+#: sheet/frameworks/mental_calculation/default.xml:6
+#: sheet/frameworks/mental_calculation/ranks.xml:5
+#: sheet/frameworks/mental_calculation/test_11_1.xml:6
+#: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
+#: sheet/frameworks/mental_calculation/divisions.xml:6
+msgid "Mental calculation"
+msgstr "Calcul mental"
+
+#: locale/additional_translations.xml:32
+msgid "What is the half of {number}?"
+msgstr "Quelle est la moitié de {number} ?"
 
 #: locale/additional_translations.xml:30
 msgid "How many hundredths"
@@ -578,166 +679,73 @@ msgstr "Nombre de centièmes"
 msgid "tens of thousands"
 msgstr "dizaines de milliers"
 
-#: locale/additional_translations.xml:20
-msgid "How many hundreds of millions"
-msgstr "Nombre de centaines de millions"
-
-#: locale/additional_translations.xml:7
-msgid "hundreds of millions"
-msgstr "centaines de millions"
-
-#: locale/additional_translations.xml:9
-msgid "millions"
-msgstr "millions"
-
-#: locale/additional_translations.xml:32
-msgid "What is the half of {number}?"
-msgstr "Quelle est la moitié de {number} ?"
+#: locale/additional_translations.xml:36
+msgid "What is the triple of {number}?"
+msgstr "Quel est le triple de {number} ?"
 
 #: locale/additional_translations.xml:24
 msgid "How many tens of thousands"
 msgstr "Nombre de dizaines de milliers"
 
-#: locale/additional_translations.xml:34
-msgid "What is the quarter of {number}?"
-msgstr "Quel est le quart de {number} ?"
-
-#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
-#: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
-#: sheet/frameworks/mental_calculation/multi_reversed.xml:6
-#: sheet/frameworks/mental_calculation/operations_vocabulary.xml:6
-#: sheet/frameworks/mental_calculation/tables2_9.xml:6
-#: sheet/frameworks/mental_calculation/default.xml:6
-#: sheet/frameworks/mental_calculation/ranks.xml:5
-#: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
-#: sheet/frameworks/mental_calculation/divisions.xml:6
-msgid "Mental calculation"
-msgstr "Calcul mental"
-
-#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
-msgid "Simple decimal multiplications"
-msgstr "Multiplications décimales simples"
-
-#: locale/additional_translations.xml:12
-msgid "thousands"
-msgstr "milliers"
-
-#: sheet/frameworks/mental_calculation/divisions.xml:6
-msgid "Divisions"
-msgstr "Divisions"
-
-#: locale/additional_translations.xml:35
-msgid "What is the double of {number}?"
-msgstr "Quel est le double de {number} ?"
-
-#: locale/additional_translations.xml:10
-msgid "hundreds of thousands"
-msgstr "centaines de milliers"
-
-#: locale/additional_translations.xml:17
-msgid "hundredths"
-msgstr "centièmes"
-
-#: locale/additional_translations.xml:16
-msgid "tenths"
-msgstr "dixièmes"
-
-#: locale/additional_translations.xml:8
-msgid "tens of millions"
-msgstr "dizaines de millions"
-
-#: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
-#: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
-msgid "Multiplications with a hole"
-msgstr "Multiplications à trou"
+#: locale/additional_translations.xml:18
+msgid "thousandths"
+msgstr "millièmes"
 
 #: sheet/frameworks/mental_calculation/operations_vocabulary.xml:6
 msgid "Vocabulary of operations"
 msgstr "Vocabulaire des opérations"
 
-#: locale/additional_translations.xml:31
-msgid "How many thousandths"
-msgstr "Nombre de millièmes"
-
-#: locale/additional_translations.xml:21
-msgid "How many tens of millions"
-msgstr "Nombre de dizaines de millions"
-
-#: locale/additional_translations.xml:27
-msgid "How many tens"
-msgstr "Nombre de dizaines"
-
-#: locale/additional_translations.xml:23
-msgid "How many hundreds of thousands"
-msgstr "Nombre de centaines de milliers"
-
-#: locale/additional_translations.xml:36
-msgid "What is the triple of {number}?"
-msgstr "Quel est le triple de {number} ?"
-
-#: locale/additional_translations.xml:22
-msgid "How many millions"
-msgstr "Nombre de millions"
-
-#: locale/additional_translations.xml:13
-msgid "hundreds"
-msgstr "centaines"
-
-#: locale/additional_translations.xml:14
-msgid "tens"
-msgstr "dizaines"
-
 #: locale/additional_translations.xml:6
 msgid "billions"
 msgstr "milliards"
 
-#: locale/additional_translations.xml:15
-msgid "units"
-msgstr "unités"
-
-#: locale/additional_translations.xml:33
-msgid "What is the third of {number}?"
-msgstr "Quel est le tiers de {number} ?"
-
-#: locale/additional_translations.xml:18
-msgid "thousandths"
-msgstr "millièmes"
-
-#: locale/additional_translations.xml:28
-msgid "How many units"
-msgstr "Nombre d'unités"
-
-#: sheet/frameworks/mental_calculation/ranks.xml:5
-msgid "Ranks of figures in a number"
-msgstr "Rangs des chiffres dans un nombre"
-
-#: locale/additional_translations.xml:37
-msgid "What is the quadruple of {number}?"
-msgstr "Quel est le quadruple de {number} ?"
-
-#: sheet/frameworks/mental_calculation/multi_decimal.xml:6
-#: sheet/frameworks/mental_calculation/multi_hole_any_nb.xml:6
-#: sheet/frameworks/mental_calculation/multi_reversed.xml:6
-#: sheet/frameworks/mental_calculation/operations_vocabulary.xml:6
-#: sheet/frameworks/mental_calculation/tables2_9.xml:6
-#: sheet/frameworks/mental_calculation/default.xml:6
-#: sheet/frameworks/mental_calculation/ranks.xml:5
-#: sheet/frameworks/mental_calculation/multi_hole_tables2_9.xml:6
-#: sheet/frameworks/mental_calculation/divisions.xml:6
-msgid "Answers"
-msgstr "Réponses"
-
-#: locale/additional_translations.xml:26
-msgid "How many hundreds"
-msgstr "Nombre de centaines"
+#: locale/additional_translations.xml:29
+msgid "How many tenths"
+msgstr "Nombre de dixièmes"
 
 #: locale/additional_translations.xml:19
 msgid "How many billions"
 msgstr "Nombre de milliards"
 
-#: locale/additional_translations.xml:29
-msgid "How many tenths"
-msgstr "Nombre de dixièmes"
+#: locale/additional_translations.xml:34
+msgid "What is the quarter of {number}?"
+msgstr "Quel est le quart de {number} ?"
+
+#: locale/additional_translations.xml:27
+msgid "How many tens"
+msgstr "Nombre de dizaines"
+
+#: locale/additional_translations.xml:35
+msgid "What is the double of {number}?"
+msgstr "Quel est le double de {number} ?"
+
+#: locale/additional_translations.xml:9
+msgid "millions"
+msgstr "millions"
+
+#: locale/additional_translations.xml:21
+msgid "How many tens of millions"
+msgstr "Nombre de dizaines de millions"
+
+#: locale/additional_translations.xml:23
+msgid "How many hundreds of thousands"
+msgstr "Nombre de centaines de milliers"
+
+#: locale/additional_translations.xml:22
+msgid "How many millions"
+msgstr "Nombre de millions"
+
+#: locale/additional_translations.xml:17
+msgid "hundredths"
+msgstr "centièmes"
+
+#: locale/additional_translations.xml:20
+msgid "How many hundreds of millions"
+msgstr "Nombre de centaines de millions"
+
+#: locale/additional_translations.xml:26
+msgid "How many hundreds"
+msgstr "Nombre de centaines"
 
 #: sheet/frameworks/mental_calculation/multi_reversed.xml:6
 msgid "Reversed multiplications"

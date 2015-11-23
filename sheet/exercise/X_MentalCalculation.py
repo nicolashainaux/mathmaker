@@ -198,20 +198,20 @@ class X_MentalCalculation(X_Structure):
 
                 q_id += subk
                 q_options = copy.deepcopy(q[0])
-                del q_options['kind']
-                del q_options['subkind']
                 if not q_id in q_dict:
                     q_dict[q_id] = []
-                q_dict[q_id] += [(q[1], subk, q_options)]
+                q_dict[q_id] += [(q[1], q_options['kind'], subk, q_options)]
+                del q_options['kind']
+                del q_options['subkind']
 
         # Now, q_dict is organized like this:
-        # { 'multi_direct' :   [('table_2_9', 'direct', {'nb':'int'}),
-        #                       ('table_2_9', 'direct', {'nb':'int'})],
-        #   'multi_reversed' : [('table_2_9', 'reversed', {'nb':'int'})],
-        #   'divi_direct' :    [('table_2_9', 'direct', {'nb':'int'})],
-        #   'multi_hole' :     [('table_2_9', 'hole', {'nb':'int'})],
-        #   'q_id' :           [('table_15', 'subkind', {'nb':'int'})],
-        #   'q_id :            [('table_25', 'subkind', {'nb':'int'})],
+        # { 'multi_direct' :   [('table_2_9', 'multi', 'direct', {'nb':'int'}),
+        #                       ('table_2_9', 'multi', 'direct', {'nb':'int'})],
+        #   'multi_reversed' : [('table_2_9', 'multi', 'reversed', {options})],
+        #   'divi_direct' :    [('table_2_9', 'divi', 'direct', {options})],
+        #   'multi_hole' :     [('table_2_9', 'multi', 'hole', {options})],
+        #   'q_id' :           [('table_15', 'kind', 'subkind', {options})],
+        #   'q_id :            [('table_25', 'kind', 'subkind', {options})],
         #   'etc.'
         # }
 
@@ -224,7 +224,7 @@ class X_MentalCalculation(X_Structure):
         q_id_box = copy.deepcopy(list(q_dict.keys()))
         q_ids_aside = deque()
 
-        q_info = namedtuple('q_info', 'type,nb_source,subkind,options')
+        q_info = namedtuple('q_info', 'type,kind,subkind,nb_source,options')
 
         for n in range(self.q_nb):
             q_nb_in_q_id_box = sum([len(q_dict[q_id]) for q_id in q_dict])
@@ -238,7 +238,7 @@ class X_MentalCalculation(X_Structure):
 
             info = q_dict[q_id].pop(0)
 
-            mixed_q_list += [q_info(q_id, info[0], info[1], info[2])]
+            mixed_q_list += [q_info(q_id, info[1], info[2], info[0], info[3])]
 
             if len(q_dict[q_id]):
                 q_ids_aside.appendleft(q_id)
@@ -251,14 +251,14 @@ class X_MentalCalculation(X_Structure):
                 q_id_box += [q_ids_aside.pop()]
 
         # Now, mixed_q_list is organized like this:
-        # [ ('type',           'nb_source', 'subkind',  'options'),
-        #   ('multi_direct',   'table_2_9', 'direct',   {'nb':'int'}),
-        #   ('multi_reversed', 'table_2_9', 'reversed', {'nb':'int'}),
-        #   ('q_id',           'table_15',  'subkind',  {'nb':'int'}),
-        #   ('multi_hole',     'table_2_9', 'hole',     {'nb':'int'}),
-        #   ('multi_direct',   'table_2_9', 'direct',   {'nb':'int'}),
-        #   ('q_id,            'table_25',  'subkind',  {'nb':'int'}),
-        #   ('divi_direct',    'table_2_9', 'direct',   {'nb':'int'}),
+        # [ ('type',           'kind',      'subkind',  'nb_source', 'options'),
+        #   ('multi_direct',   'multi',     'direct',   'table_2_9', {'nb':}),
+        #   ('multi_reversed', 'multi',     'reversed', 'table_2_9', {'nb':}),
+        #   ('q_id',           'q_',        'id',       'table_15',  {'nb':}),
+        #   ('multi_hole',     'multi',     'hole',     'table_2_9', {'nb':}),
+        #   ('multi_direct',   'multi',     'direct',   'table_2_9', {'nb':}),
+        #   ('q_id,            'q_',        'id',       'table_25',  {'nb':}),
+        #   ('divi_direct',    divi',       'direct',   'table_2_9', {'nb':}),
         #   etc.
         # ]
 
@@ -267,11 +267,23 @@ class X_MentalCalculation(X_Structure):
 
         for q in mixed_q_list:
             nb_source = q.nb_source
+            sys.stderr.write("\n[X] source: " + nb_source)
             if nb_source in question.SOURCES_TO_UNPACK:
-                s = copy.copy(question.SOURCES_TO_UNPACK)[nb_source][q.subkind]
+                sys.stderr.write("\n[X] source to unpack: " + nb_source)
+                s = ''
+                stu = copy.copy(question.SOURCES_TO_UNPACK)
+                sys.stderr.write("\n[X] stu: " + str(stu))
+                if nb_source == 'decimal_and_10_100_1000':
+                    sys.stderr.write("\n[X] q.kind: " + str(q.kind))
+                    s = stu[nb_source][q.kind]
+                    sys.stderr.write("\n[X] s: " + str(s))
+                else:
+                    s = stu[nb_source][q.subkind]
                 s = list(s)
                 random.shuffle(s)
                 nb_source = s.pop()
+
+            sys.stderr.write("\n[X] source: " + nb_source)
 
             if len(nb_box[nb_source]) == 0:
                 nb_box[nb_source] = question.generate_numbers(nb_source)
@@ -293,6 +305,10 @@ class X_MentalCalculation(X_Structure):
                                                   nb_box[nb_source]) \
                 if not nb_source in question.PART_OF_ANOTHER_SOURCE \
                 else (set(), nb_box[nb_source])
+
+            sys.stderr.write('\n[X] last_nb: ' + str(last_nb[nb_source]))
+            sys.stderr.write('\n[X] kept_aside: ' + str(kept_aside))
+            sys.stderr.write('\n[X] nb_box: ' + str(nb_box[nb_source]))
 
             nb_to_use = None
             if nb_source in question.PART_OF_ANOTHER_SOURCE:
@@ -316,6 +332,11 @@ class X_MentalCalculation(X_Structure):
                 nb_to_use = nb_box_shuffled.pop()
                 nb_box[nb_source].remove(nb_to_use)
 
+            if nb_source == 'decimal_and_10_100_1000_for_divi' \
+                or nb_source == 'decimal_and_10_100_1000_for_multi':
+            #___
+                q.options['10_100_1000'] = True
+
             nb_box[nb_source] |= kept_aside
             self.questions_list += [default_question(embedded_machine,
                                                      q.type,
@@ -327,7 +348,9 @@ class X_MentalCalculation(X_Structure):
             if nb_source == 'table_2_9':
                 last_nb[nb_source] |= {nb_to_use[0], nb_to_use[1]}
             elif nb_source == 'int_irreducible_frac' \
-                 or nb_source == 'rank_word':
+                 or nb_source == 'rank_word'\
+                 or nb_source == 'decimal_and_10_100_1000_for_divi'\
+                 or nb_source == 'decimal_and_10_100_1000_for_multi':
                 last_nb[nb_source] |= {nb_to_use[0]}
             else:
                 last_nb[nb_source] |= {nb_to_use[1]}
