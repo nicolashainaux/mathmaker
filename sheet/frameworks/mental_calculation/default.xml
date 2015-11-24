@@ -38,15 +38,15 @@
 			<table_2_9>4</table_2_9>
 		</question>
 
-		<question kind="multi" subkind="decimal1">
+		<question kind="multi" subkind="direct" variant="decimal1">
 			<table_2_9>1</table_2_9>
 		</question>
 
-		<question kind="multi" subkind="decimal2">
+		<question kind="multi" subkind="direct" variant="decimal2">
 			<table_2_9>1</table_2_9>
 		</question>
 
-		<question kind="multi" subkind="decimal">
+		<question kind="multi" subkind="direct" variant="decimal">
 			<table_2_9>1</table_2_9>
 		</question>
 
