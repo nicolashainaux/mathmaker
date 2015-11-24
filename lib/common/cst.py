@@ -114,6 +114,9 @@ MULTIPLE_QUESTIONS = { 2 : "What is the double of {number}?",
                        4 : "What is the quadruple of {number}?"}
 
 LENGTH_UNITS = ['km', 'hm', 'dam', 'm', 'dm', 'cm', 'mm', 'µm', 'nm', 'pm']
+COMMON_LENGTH_UNITS = ['km', 'hm', 'dam', 'm', 'dm', 'cm', 'mm']
+AREA_UNITS = ['\\text{ ' + u + '}^{2}' for u in LENGTH_UNITS]
+LENGTH_TO_AREA = { u : '\\text{ ' + u + '}^{2}' for u in LENGTH_UNITS }
 ANGLE_UNITS = ['\\textdegree']
 AVAILABLE_UNITS = LENGTH_UNITS + ANGLE_UNITS
 VALUE_AND_UNIT_SEPARATOR = {'km':" ",

@@ -101,8 +101,10 @@ SOURCES_TO_UNPACK = {'auto_table' : {'half' : {'table_2'},
                                 'subtr' : {'integers_10_100_for_sums_diffs',
                                            'decimals_0_20_1'}},
                      'decimal_and_10_100_1000' : \
-                            {'multi' : {'decimal_and_10_100_1000_for_multi'},
-                             'divi' : {'decimal_and_10_100_1000_for_divi'}}
+                    {'multi_direct' : {'decimal_and_10_100_1000_for_multi'},
+                     'divi_direct' : {'decimal_and_10_100_1000_for_divi'},
+                     'area_rectangle' : {'decimal_and_10_100_1000_for_multi'}
+                     }
                      }
 
 AVAILABLE_Q_KIND_VALUES = \
@@ -113,6 +115,13 @@ AVAILABLE_Q_KIND_VALUES = \
                         'table_25',
                         'decimal_and_10_100_1000',
                         'bypass'],
+      'area_rectangle' : ['table_2_9',
+                          'table_2', 'table_3', 'table_4',
+                          'table_11',
+                          'table_15',
+                          'table_25',
+                          'decimal_and_10_100_1000',
+                          'bypass'],
       'multi_reversed' : ['table_2_9',
                           'table_2', 'table_3', 'table_4',
                           'bypass'],
@@ -200,7 +209,8 @@ MODULES =  \
       'vocabulary_multi' : mc_modules.vocabulary_multi,
       'vocabulary_divi' : mc_modules.vocabulary_divi,
       'vocabulary_addi': mc_modules.vocabulary_addi,
-      'vocabulary_subtr' : mc_modules.vocabulary_subtr
+      'vocabulary_subtr' : mc_modules.vocabulary_subtr,
+      'area_rectangle' : mc_modules.area_rectangle
 
 #     ('division', 'direct') : mc_modules.divi_dir,
 #     ('division', 'decimal_1') : mc_modules.divi_deci1,
@@ -354,7 +364,6 @@ def generate_numbers(subkind):
             chosen_10_100_1000 = box_10_100_1000.pop()
 
             ranks_scale = list(RANKS[2:])
-            sys.stderr.write('\n[Q] ranks_scale: ' + str(ranks_scale))
             width = randomly.pop([1, 2, 3], weighted_table=[0.14, 0.63, 0.33])
 
             wt = {10 : [0.2, 0.2, 0.2, 0.2, 0.2],

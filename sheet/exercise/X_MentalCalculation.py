@@ -267,23 +267,16 @@ class X_MentalCalculation(X_Structure):
 
         for q in mixed_q_list:
             nb_source = q.nb_source
-            sys.stderr.write("\n[X] source: " + nb_source)
             if nb_source in question.SOURCES_TO_UNPACK:
-                sys.stderr.write("\n[X] source to unpack: " + nb_source)
                 s = ''
                 stu = copy.copy(question.SOURCES_TO_UNPACK)
-                sys.stderr.write("\n[X] stu: " + str(stu))
                 if nb_source == 'decimal_and_10_100_1000':
-                    sys.stderr.write("\n[X] q.kind: " + str(q.kind))
-                    s = stu[nb_source][q.kind]
-                    sys.stderr.write("\n[X] s: " + str(s))
+                    s = stu[nb_source][q.type]
                 else:
                     s = stu[nb_source][q.subkind]
                 s = list(s)
                 random.shuffle(s)
                 nb_source = s.pop()
-
-            sys.stderr.write("\n[X] source: " + nb_source)
 
             if len(nb_box[nb_source]) == 0:
                 nb_box[nb_source] = question.generate_numbers(nb_source)
@@ -305,10 +298,6 @@ class X_MentalCalculation(X_Structure):
                                                   nb_box[nb_source]) \
                 if not nb_source in question.PART_OF_ANOTHER_SOURCE \
                 else (set(), nb_box[nb_source])
-
-            sys.stderr.write('\n[X] last_nb: ' + str(last_nb[nb_source]))
-            sys.stderr.write('\n[X] kept_aside: ' + str(kept_aside))
-            sys.stderr.write('\n[X] nb_box: ' + str(nb_box[nb_source]))
 
             nb_to_use = None
             if nb_source in question.PART_OF_ANOTHER_SOURCE:
