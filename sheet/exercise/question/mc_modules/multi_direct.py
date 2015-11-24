@@ -27,19 +27,32 @@ class sub_object(object):
 
     def __init__(self, numbers_to_use, **options):
         nb_list = list(numbers_to_use)
-        self.nb1 = randomly.pop(nb_list)
-        self.nb2 = randomly.pop(nb_list)
+        nb1 = nb_list.pop(randomly.pop([0, 1]))
+        nb2 = nb_list.pop()
+
+        if 'variant' in options:
+            if options['variant'] == 'decimal':
+                options['variant'] = randomly.pop(['decimal1', 'decimal2'])
+
+            if options['variant'] == 'decimal1':
+                nb1 /= 10
+
+            elif options['variant'] == 'decimal2':
+                nb1 /= 10
+                nb2 /= 10
+
+        nb_list = [nb1, nb2]
+        self.nb1 = nb_list.pop(randomly.pop([0, 1]))
+        self.nb2 = nb_list.pop()
+
+        self.product = Product([self.nb1, self.nb2])
+        self.result = Item(self.product.evaluate())\
+                      .into_str(force_expression_begins=True)
 
     def q(self, M, **options):
         return _("Calculate:") + " "\
-               + M.write_math_style2(Product([self.nb1,
-                                              self.nb2]).into_str(\
-                                                    force_expression_begins=True
-                                                                 )
-                                    )
+               + M.write_math_style2(self.product\
+                                     .into_str(force_expression_begins=True))
 
     def a(self, M, **options):
-        return M.write_math_style2(Item(Product([self.nb1,
-                                                     self.nb2]).evaluate())\
-                                        .into_str(force_expression_begins=True)
-                                  )
+        return M.write_math_style2(self.result)
