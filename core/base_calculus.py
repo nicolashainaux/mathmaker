@@ -486,7 +486,7 @@ class Item(Exponented):
             and (options['display_unit'] == True \
                  or options['display_unit'] == 'yes'):
         #___
-            resulting_string += " " + str(self.unit)
+            resulting_string += "~" + str(self.unit)
 
         expression_begins = False
 
