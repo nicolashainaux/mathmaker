@@ -24,7 +24,7 @@ import copy, sys
 
 from core.base_calculus import *
 from lib.common.cst import *
-
+from . import multi_direct
 
 class sub_object(object):
 
@@ -32,7 +32,8 @@ class sub_object(object):
         units = copy.deepcopy(COMMON_LENGTH_UNITS)
         unit = randomly.pop(units)
         unit_area = LENGTH_TO_AREA[unit]
-        nb_list = list(numbers_to_use)
+        multi_direct.sub_object.__init__(self, numbers_to_use, **options)
+        nb_list = [self.nb1, self.nb2]
         self.w = min(nb_list)
         self.l = max(nb_list)
         self.w_str = Item(self.w)
