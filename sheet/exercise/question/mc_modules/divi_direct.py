@@ -27,27 +27,30 @@ class sub_object(object):
 
     def __init__(self, numbers_to_use, **options):
         nb_list = list(numbers_to_use)
-        self.nb1 = 0
-        self.nb2 = 0
-
+        self.divisor = 0
+        self.result = 0
+        self.dividend = 0
+        
         if '10_100_1000' in options and options['10_100_1000']:
-            self.nb1 = nb_list[0]
-            self.product = nb_list[1]
-            self.nb2 = Item(Quotient(('+', self.product, self.nb1)).evaluate())\
-                                        .into_str(force_expression_begins=True)
+            self.divisor = nb_list[0]
+            self.dividend = nb_list[1]
+            self.result = Item(Quotient(('+', self.dividend, self.divisor))\
+                               .evaluate())\
+                          .into_str(force_expression_begins=True)
         else:
-            self.nb1 = randomly.pop(nb_list)
-            self.nb2 = randomly.pop(nb_list)
-            self.product = Product([self.nb1, self.nb2]).evaluate()
+            self.divisor = randomly.pop(nb_list)
+            self.result = Item(randomly.pop(nb_list))\
+                          .into_str(force_expression_begins=True)
+            self.dividend = Product([self.divisor, self.result]).evaluate()
+
+        self.quotient = Quotient(('+', self.dividend, self.divisor),
+                                 use_divide_symbol=True)
 
     def q(self, M, **options):
         return _("Calculate:") + " "\
-               + M.write_math_style2(Quotient(('+', self.product, self.nb1),
-                                              use_divide_symbol=True).into_str(\
-                                                    force_expression_begins=True
-                                                                 )
+               + M.write_math_style2(self.quotient\
+                                     .into_str(force_expression_begins=True)
                                     )
 
     def a(self, M, **options):
-        return M.write_math_style2(Item(self.nb2)\
-                                    .into_str(force_expression_begins=True))
+        return M.write_math_style2(self.result)
