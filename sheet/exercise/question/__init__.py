@@ -53,5 +53,7 @@ PART_OF_ANOTHER_SOURCE = Q_MentalCalculation.PART_OF_ANOTHER_SOURCE
 SUBKINDS_TO_UNPACK = Q_MentalCalculation.SUBKINDS_TO_UNPACK
 UNPACKABLE_SUBKINDS = Q_MentalCalculation.UNPACKABLE_SUBKINDS
 SOURCES_TO_UNPACK = Q_MentalCalculation.SOURCES_TO_UNPACK
+USER_Q_SUBKIND_VALUES = Q_MentalCalculation.USER_Q_SUBKIND_VALUES
+AVAILABLE_Q_KIND_VALUES = Q_MentalCalculation.AVAILABLE_Q_KIND_VALUES
 Q_MentalCalculation = Q_MentalCalculation.Q_MentalCalculation
 Q_RightTriangle = Q_RightTriangle.Q_RightTriangle

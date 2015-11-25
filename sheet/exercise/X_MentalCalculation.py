@@ -78,10 +78,50 @@ def get_q_kinds_from_file(file_name):
         if child.tag == 'exercise':
             if 'kind' in child.attrib:
                 x_kind = child.attrib['kind']
-            for question in child:
-                for elt in question:
-                    questions += [[question.attrib,
-                                   elt.tag, int(elt.text)]]
+            for subchild in child:
+                if subchild.tag == 'question':
+                    for elt in subchild:
+                        questions += [[subchild.attrib,
+                                       elt.tag, int(elt.text)]]
+                elif subchild.tag == 'mix':
+                    q_temp_list = []
+                    n_temp_list = []
+                    for elt in subchild:
+                        if elt.tag == 'question':
+                            q_temp_list += [elt.attrib]
+                        elif elt.tag in question.USER_Q_SUBKIND_VALUES:
+                            n_temp_list += [[elt.tag, elt.attrib, 1] \
+                                            for i in range(int(elt.text))]
+                        else:
+                            raise error.XMLFileFormatError(\
+                            "Unknown tag found in the xml file: " + elt.tag)
+
+                    if len(q_temp_list) != len(n_temp_list):
+                        raise error.XMLFileFormatError(\
+                        "Incorrect mix section: the number of sources "\
+                        + "of numbers (" + str(len(n_temp_list)) + ") "\
+                        + "does not match the number of questions (" \
+                        + str(len(q_temp_list)) + ").")
+
+                    # So far, we only check if all of the numbers' sources
+                    # may be attributed to any of the questions, in order
+                    # to just distribute them all randomly.
+                    for n in n_temp_list:
+                        for q in q_temp_list:
+                            if not elt.tag \
+            in question.AVAILABLE_Q_KIND_VALUES[q['kind'] + "_" + q['subkind']]:
+                            #___
+                                raise error.XMLFileFormatError(\
+                                "This source: " + str(elt.tag) + " cannot be " \
+                                + "attributed to this question: " \
+                                + str(q['kind'] + "_" + q['subkind']))
+
+                    random.shuffle(q_temp_list)
+                    random.shuffle(n_temp_list)
+
+                    for (q,n) in zip(q_temp_list, n_temp_list):
+                        q.update(n[1])
+                        questions += [[q, n[0], 1]]
 
     return (x_kind, questions)
 

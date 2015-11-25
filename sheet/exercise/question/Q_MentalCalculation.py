@@ -33,7 +33,21 @@ from core.base_calculus import *
 # 'table_15' --> 15×n where 2 <= n <= 6
 # 'table_25' --> 25×n where 2 <= n <= 6
 # 'int_irreducible_frac' --> (n, p/n) where 2 <= n <= 20 and p/n is irreducible
-AVAILABLE_Q_SUBKIND_VALUES = ['table_2_9', 'table_2', 'table_3', 'table_4',
+USER_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
+                         'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
+                         'table_2_9_for_sums_diffs',
+                         'table_11',
+                         'table_15',
+                         'table_25',
+                         'int_irreducible_frac',
+                         'rank_word',
+                         'integers_10_100',
+                         'integers_10_100_for_sums_diffs',
+                         'decimals_0_20_1',
+                         'decimal_and_10_100_1000',
+                         'bypass'}
+                         
+AVAILABLE_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                               'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
                               'table_2_9_for_sums_diffs',
                               'table_11',
@@ -46,7 +60,7 @@ AVAILABLE_Q_SUBKIND_VALUES = ['table_2_9', 'table_2', 'table_3', 'table_4',
                               'decimals_0_20_1',
                               'decimal_and_10_100_1000_for_divi',
                               'decimal_and_10_100_1000_for_multi',
-                              'bypass']
+                              'bypass'}
 
 PART_OF_ANOTHER_SOURCE = { 'table_2' : 'table_2_9',
                            'table_3' : 'table_2_9',

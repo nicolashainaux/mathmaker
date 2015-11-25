@@ -351,3 +351,39 @@ class WrongArgument(Exception):
 
 
 
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+##
+# @exception UnknownXMLTag
+# @brief Raised when a tag out of the expected list is read from an XML file.
+class UnknownXMLTag(Exception):
+    def __init__(self, given_tag):
+        self.given_tag = given_tag
+
+
+
+
+
+    def __str__(self):
+        return "This unknown tag was read from the file: " + str(self.given_tag)
+
+
+
+
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+##
+# @exception XMLFileFormatError
+# @brief Raised when something is wrong in an XML file.
+class XMLFileFormatError(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+
+
+
+
+
+    def __str__(self):
+        return self.msg

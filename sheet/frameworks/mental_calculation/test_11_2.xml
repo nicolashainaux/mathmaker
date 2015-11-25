@@ -27,7 +27,7 @@
 
 		<!-- Default value (planned): context="none" 
 			 No default for kind and subkind, they must be given -->
-		<question kind="area" subkind="rectangle">
+		<!-- <question kind="area" subkind="rectangle">
 			<table_2_9>1</table_2_9>
 			<table_11>1</table_11>
 			<table_15>1</table_15>
@@ -35,8 +35,20 @@
 			<decimal_and_10_100_1000>1</decimal_and_10_100_1000>
 		</question>
 
-		
-		
+		<question kind="area" subkind="rectangle" variant="decimal">
+			<table_2_9>4</table_2_9>
+		</question> -->
+
+		<mix>
+			<question kind="area" subkind="rectangle"></question>
+			<question kind="multi" subkind="direct"></question>
+			<question kind="area" subkind="rectangle"></question>
+			<question kind="multi" subkind="direct"></question>
+			<table_2_9 variant="decimal">1</table_2_9>
+			<table_11>1</table_11>
+			<table_15>1</table_15>
+			<table_25>1</table_25>
+		</mix>
 
 	</exercise>
 
