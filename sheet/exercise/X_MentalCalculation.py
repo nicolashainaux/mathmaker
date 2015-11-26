@@ -310,7 +310,8 @@ class X_MentalCalculation(X_Structure):
             if nb_source in question.SOURCES_TO_UNPACK:
                 s = ''
                 stu = copy.copy(question.SOURCES_TO_UNPACK)
-                if nb_source == 'decimal_and_10_100_1000':
+                if nb_source == 'decimal_and_10_100_1000' \
+                    or nb_source == 'decimal_and_0.1_0.01_0.001':
                     s = stu[nb_source][q.type]
                 else:
                     s = stu[nb_source][q.subkind]

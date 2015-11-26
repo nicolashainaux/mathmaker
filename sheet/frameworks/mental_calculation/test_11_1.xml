@@ -30,6 +30,7 @@
 		<question kind="multi" subkind="direct">
 			<table_2_9>4</table_2_9>
 			<table_11>1</table_11>
+			<decimal_and_0.1_0.01_0.001>1</decimal_and_0.1_0.01_0.001>
 		</question>
 
 		<question kind="multi" subkind="reversed">
@@ -42,8 +43,7 @@
 		</question>
 
 		<question kind="multi" subkind="direct" variant="decimal2">
-			<table_2_9>3</table_2_9>
-			<!-- One should be replaced by a 0,1 × decimal, later -->
+			<table_2_9>2</table_2_9>
 		</question>
 
 		<question kind="multi" subkind="hole">

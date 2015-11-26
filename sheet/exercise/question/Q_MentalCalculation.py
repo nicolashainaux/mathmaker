@@ -45,6 +45,7 @@ USER_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                          'integers_10_100_for_sums_diffs',
                          'decimals_0_20_1',
                          'decimal_and_10_100_1000',
+                         'decimal_and_0.1_0.01_0.001',
                          'bypass'}
 
 AVAILABLE_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
@@ -60,6 +61,8 @@ AVAILABLE_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                               'decimals_0_20_1',
                               'decimal_and_10_100_1000_for_divi',
                               'decimal_and_10_100_1000_for_multi',
+                              'decimal_and_0.1_0.01_0.001_for_divi',
+                              'decimal_and_0.1_0.01_0.001_for_multi',
                               'bypass'}
 
 PART_OF_ANOTHER_SOURCE = { 'table_2' : 'table_2_9',
@@ -115,10 +118,21 @@ SOURCES_TO_UNPACK = {'auto_table' : {'half' : {'table_2'},
                                 'subtr' : {'integers_10_100_for_sums_diffs',
                                            'decimals_0_20_1'}},
                      'decimal_and_10_100_1000' : \
-                    {'multi_direct' : {'decimal_and_10_100_1000_for_multi'},
-                     'divi_direct' : {'decimal_and_10_100_1000_for_divi'},
-                     'area_rectangle' : {'decimal_and_10_100_1000_for_multi'}
-                     }
+                {'multi_direct' : {'decimal_and_10_100_1000_for_multi'},
+                 'divi_direct' : {'decimal_and_10_100_1000_for_divi'},
+                 'area_rectangle' : {'decimal_and_10_100_1000_for_multi'},
+                 'multi_hole' : {'decimal_and_10_100_1000_for_multi'},
+                 'vocabulary_multi' : {'decimal_and_10_100_1000_for_multi'},
+                 'vocabulary_divi' : {'decimal_and_10_100_1000_for_divi'}
+                 },
+                     'decimal_and_0.1_0.01_0.001': \
+                 {'multi_direct' : {'decimal_and_0.1_0.01_0.001_for_multi'},
+                  'divi_direct' : {'decimal_and_0.1_0.01_0.001_for_divi'},
+                  'area_rectangle' : {'decimal_and_0.1_0.01_0.001_for_multi'},
+                  'multi_hole' : {'decimal_and_0.1_0.01_0.001_for_multi'},
+                  'vocabulary_multi' : {'decimal_and_0.1_0.01_0.001_for_multi'},
+                  'vocabulary_divi' : {'decimal_and_0.1_0.01_0.001_for_divi'}
+                  }
                      }
 
 AVAILABLE_Q_KIND_VALUES = \
@@ -128,6 +142,7 @@ AVAILABLE_Q_KIND_VALUES = \
                         'table_15',
                         'table_25',
                         'decimal_and_10_100_1000',
+                        'decimal_and_0.1_0.01_0.001',
                         'bypass'],
       'area_rectangle' : ['table_2_9',
                           'table_2', 'table_3', 'table_4',
@@ -135,6 +150,7 @@ AVAILABLE_Q_KIND_VALUES = \
                           'table_15',
                           'table_25',
                           'decimal_and_10_100_1000',
+                          'decimal_and_0.1_0.01_0.001',
                           'bypass'],
       'multi_reversed' : ['table_2_9',
                           'table_2', 'table_3', 'table_4',
@@ -145,6 +161,7 @@ AVAILABLE_Q_KIND_VALUES = \
                       'table_15',
                       'table_25',
                       'decimal_and_10_100_1000',
+                      'decimal_and_0.1_0.01_0.001',
                       'bypass'],
       'divi_direct' : ['table_2_9',
                        'table_2', 'table_3', 'table_4',
@@ -152,6 +169,7 @@ AVAILABLE_Q_KIND_VALUES = \
                        'table_15',
                        'table_25',
                        'decimal_and_10_100_1000',
+                       'decimal_and_0.1_0.01_0.001',
                        'bypass'],
       'rank_direct' : ['rank_word',
                        'bypass'],
@@ -170,6 +188,8 @@ AVAILABLE_Q_KIND_VALUES = \
                             'table_11',
                             'table_15',
                             'table_25',
+                            'decimal_and_10_100_1000',
+                            'decimal_and_0.1_0.01_0.001',
                             'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
                             'bypass'},
       'vocabulary_divi' : {'table_2_9',
@@ -177,6 +197,8 @@ AVAILABLE_Q_KIND_VALUES = \
                            'table_11',
                            'table_15',
                            'table_25',
+                           'decimal_and_10_100_1000',
+                           'decimal_and_0.1_0.01_0.001',
                            'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
                            'bypass'},
       'vocabulary_addi' : {'table_2_9', 'table_2_9_for_sums_diffs',
@@ -245,6 +267,46 @@ def coprime_generator(n):
     for i in range(20):
         if maths_lib.gcd(i, n) == 1:
             yield i
+
+
+
+
+# --------------------------------------------------------------------------
+##
+#   @brief Returns a list of numbers of the given kind
+def generate_decimal(width, ranks_scale, start_rank):
+    # Probability to fill a higher rank rather than a lower one
+    phr = 0.5
+    hr = lr = start_rank
+    ranks = [start_rank]
+
+    for i in range(width - 1):
+        if lr == 0:
+            phr = 1
+        elif hr == len(ranks_scale) - 1:
+            phr = 0
+
+        if random.random() < phr:
+            hr += 1
+            ranks += [hr]
+            phr *= 0.4
+        else:
+            lr -= 1
+            ranks += [lr]
+            phr *= 2.5
+
+    figures = [str(i+1) for i in range(9)]
+
+    deci = Decimal('0')
+
+    for r in ranks:
+        figure = randomly.pop(figures)
+        deci +=  Decimal(figure) * ranks_scale[r]
+
+    return deci
+
+
+
 
 
 # --------------------------------------------------------------------------
@@ -327,36 +389,8 @@ def generate_numbers(subkind):
 
             start_rank = randomly.pop([n for n in range(len(ranks_scale))])
 
-            # Following lines inspired by rank_reversed, maybe factorize them... ?
-            # Probability to fill a higher rank rather than a lower one
-            phr = 0.5
-            hr = lr = start_rank
-            ranks = [start_rank]
-
-            for i in range(width - 1):
-                if lr == 0:
-                    phr = 1
-                elif hr == len(ranks_scale) - 1:
-                    phr = 0
-
-                if random.random() < phr:
-                    hr += 1
-                    ranks += [hr]
-                    phr *= 0.4
-                else:
-                    lr -= 1
-                    ranks += [lr]
-                    phr *= 2.5
-
-            figures = [str(i+1) for i in range(9)]
-
-            deci = Decimal('0')
-
-            for r in ranks:
-                figure = randomly.pop(figures)
-                deci +=  Decimal(figure) * ranks_scale[r]
-
-            result |= {(chosen_10_100_1000, deci)}
+            result |= {(chosen_10_100_1000,
+                        generate_decimal(width, ranks_scale, start_rank))}
 
         return result
 
@@ -381,36 +415,66 @@ def generate_numbers(subkind):
             start_rank = randomly.pop([n for n in range(len(ranks_scale))],
                                       weighted_table=wt[chosen_10_100_1000])
 
-            # Following lines inspired by rank_reversed, maybe factorize them... ?
-            # Probability to fill a higher rank rather than a lower one
-            phr = 0.5
-            hr = lr = start_rank
-            ranks = [start_rank]
+            result |= {(chosen_10_100_1000,
+                        generate_decimal(width, ranks_scale, start_rank))}
 
-            for i in range(width - 1):
-                if lr == 0:
-                    phr = 1
-                elif hr == len(ranks_scale) - 1:
-                    phr = 0
+        return result
 
-                if random.random() < phr:
-                    hr += 1
-                    ranks += [hr]
-                    phr *= 0.4
-                else:
-                    lr -= 1
-                    ranks += [lr]
-                    phr *= 2.5
+    elif subkind == 'decimal_and_0.1_0.01_0.001_for_multi':
+        box = [Decimal('0.1'), Decimal('0.01'), Decimal('0.001')]
 
-            figures = [str(i+1) for i in range(9)]
+        result = set()
 
-            deci = Decimal('0')
+        for n in range(20):
+            if not box:
+                box = [Decimal('0.1'), Decimal('0.01'), Decimal('0.001')]
 
-            for r in ranks:
-                figure = randomly.pop(figures)
-                deci +=  Decimal(figure) * ranks_scale[r]
+            chosen = box.pop()
 
-            result |= {(chosen_10_100_1000, deci)}
+            ranks_scale = list()
+
+            if chosen == Decimal('0.1'):
+                ranks_scale = list(RANKS[:-1])
+            elif chosen == Decimal('0.01'):
+                ranks_scale = list(RANKS[:-2])
+            elif chosen == Decimal('0.001'):
+                ranks_scale = list(RANKS[:-3])
+
+            width = randomly.pop([1, 2, 3, 4],
+                                 weighted_table=[0.14, 0.43, 0.33, 0.2])
+
+            start_rank = randomly.pop([n for n in range(len(ranks_scale))])
+
+            result |= {(chosen,
+                        generate_decimal(width, ranks_scale, start_rank))}
+
+        return result
+
+    elif subkind == 'decimal_and_0.1_0.01_0.001_for_divi':
+        box = [Decimal('0.1'), Decimal('0.01'), Decimal('0.001')]
+
+        result = set()
+
+        for n in range(20):
+            if not box:
+                box = [Decimal('0.1'), Decimal('0.01'), Decimal('0.001')]
+
+            chosen = box.pop()
+
+            ranks_scale = list()
+
+            if chosen == Decimal('0.1') or chosen == Decimal('0.01'):
+                ranks_scale = list(RANKS)
+            elif chosen == Decimal('0.001'):
+                ranks_scale = list(RANKS[1:])
+
+            width = randomly.pop([1, 2, 3, 4],
+                                 weighted_table=[0.14, 0.43, 0.33, 0.2])
+
+            start_rank = randomly.pop([n for n in range(len(ranks_scale))])
+
+            result |= {(chosen,
+                        generate_decimal(width, ranks_scale, start_rank))}
 
         return result
 
