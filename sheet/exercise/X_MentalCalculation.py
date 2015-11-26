@@ -261,17 +261,23 @@ class X_MentalCalculation(X_Structure):
 
         # Now we mix the questions types (by id):
         mixed_q_list = []
-        q_id_box = copy.deepcopy(list(q_dict.keys()))
-        q_ids_aside = deque()
+        #q_id_box = copy.deepcopy(list(q_dict.keys()))
+        #q_ids_aside = deque()
 
         q_info = namedtuple('q_info', 'type,kind,subkind,nb_source,options')
 
-        for n in range(self.q_nb):
+        """for n in range(self.q_nb):
             q_nb_in_q_id_box = sum([len(q_dict[q_id]) for q_id in q_dict])
 
             w_table = [Decimal(Decimal(len(q_dict[q_id])) \
                                / Decimal(q_nb_in_q_id_box)) \
                        for q_id in q_id_box]
+
+            #dbg
+            zipped = zip(q_id_box, w_table)
+            sys.stderr.write("\n------------------------------------------")
+            for q,w in zipped:
+                sys.stderr.write("\n" + str(q) + ": " + str(w))
 
             q_id = randomly.pop(q_id_box,
                                 weighted_table=w_table)
@@ -288,7 +294,20 @@ class X_MentalCalculation(X_Structure):
                 del q_dict[q_id]
 
             if len(q_id_box) <= 1 and len(q_ids_aside) > 0:
-                q_id_box += [q_ids_aside.pop()]
+                q_id_box += [q_ids_aside.pop()]"""
+
+        q_id_box = [key for key in q_dict.keys() \
+                        for i in range(len(q_dict[key]))]
+
+        random.shuffle(q_id_box)
+
+        for q_id in q_id_box:
+            info = q_dict[q_id].pop(0)
+            mixed_q_list += [q_info(q_id, info[1], info[2], info[0], info[3])]
+
+        for q_i in mixed_q_list:
+            sys.stderr.write("\n" + str(q_i))
+        sys.stderr.write("\n")
 
         # Now, mixed_q_list is organized like this:
         # [ ('type',           'kind',      'subkind',  'nb_source', 'options'),
