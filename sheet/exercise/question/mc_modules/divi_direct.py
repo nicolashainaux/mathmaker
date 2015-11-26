@@ -35,21 +35,19 @@ class sub_object(object):
             self.divisor = nb_list[0]
             self.dividend = nb_list[1]
             self.result = Item(Quotient(('+', self.dividend, self.divisor))\
-                               .evaluate())\
-                          .into_str(force_expression_begins=True)
+                               .evaluate())
         else:
             self.divisor = randomly.pop(nb_list)
             self.result = Item(randomly.pop(nb_list))
             self.dividend = Product([self.divisor, self.result]).evaluate()
-            self.result = self.result.into_str(force_expression_begins=True)
 
+        self.result_str = self.result.into_str(force_expression_begins=True)
         self.quotient = Quotient(('+', self.dividend, self.divisor),
                                  use_divide_symbol=True)
+        self.quotient_str = self.quotient.into_str(force_expression_begins=True)
 
     def q(self, M, **options):
-        return _("Calculate:") + " "\
-               + M.write_math_style2(self.quotient\
-                                     .into_str(force_expression_begins=True))
+        return _("Calculate:") + " " + M.write_math_style2(self.quotient_str)
 
     def a(self, M, **options):
-        return M.write_math_style2(self.result)
+        return M.write_math_style2(self.result_str)
