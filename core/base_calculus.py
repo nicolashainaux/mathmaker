@@ -109,11 +109,13 @@ class Item(Exponented):
     #   If the argument is not of one of these kinds, an exception
     #   will be raised.
     #   @return One instance of Item
-    def __init__(self, arg):
+    def __init__(self, arg, **options):
         Exponented.__init__(self)
         self._is_out_striked = False
         self._force_display_sign_once = False
         self._unit = None
+        if 'unit' in options:
+            self._unit = options['unit']
 
         # 1st CASE : number
         # Item's sign will be number's sign
