@@ -45,12 +45,13 @@ USER_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                          'integers_10_100_for_sums_diffs',
                          'decimals_0_20_1',
                          'decimal_and_10_100_1000',
-                         'decimal_and_0.1_0.01_0.001',
+                         'decimal_and_one_digit',
                          'bypass'}
 
 AVAILABLE_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                               'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
                               'table_2_9_for_sums_diffs',
+                              'table_2_9_for_rectangles',
                               'table_11',
                               'table_15',
                               'table_25',
@@ -61,14 +62,15 @@ AVAILABLE_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                               'decimals_0_20_1',
                               'decimal_and_10_100_1000_for_divi',
                               'decimal_and_10_100_1000_for_multi',
-                              'decimal_and_0.1_0.01_0.001_for_divi',
-                              'decimal_and_0.1_0.01_0.001_for_multi',
+                              'decimal_and_one_digit_for_divi',
+                              'decimal_and_one_digit_for_multi',
                               'bypass'}
 
 PART_OF_ANOTHER_SOURCE = { 'table_2' : 'table_2_9',
                            'table_3' : 'table_2_9',
                            'table_4' : 'table_2_9',
-                           'integers_10_100_for_sums_diffs' : 'integers_10_100'
+                           'integers_10_100_for_sums_diffs' : 'integers_10_100',
+                           'table_2_9_for_rectangles' : 'table_2_9'
                          }
 
 SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number' : {'half', 'third', 'quarter'},
@@ -125,15 +127,18 @@ SOURCES_TO_UNPACK = {'auto_table' : {'half' : {'table_2'},
                  'vocabulary_multi' : {'decimal_and_10_100_1000_for_multi'},
                  'vocabulary_divi' : {'decimal_and_10_100_1000_for_divi'}
                  },
-                     'decimal_and_0.1_0.01_0.001': \
-                 {'multi_direct' : {'decimal_and_0.1_0.01_0.001_for_multi'},
-                  'divi_direct' : {'decimal_and_0.1_0.01_0.001_for_divi'},
-                  'area_rectangle' : {'decimal_and_0.1_0.01_0.001_for_multi'},
-                  'multi_hole' : {'decimal_and_0.1_0.01_0.001_for_multi'},
-                  'vocabulary_multi' : {'decimal_and_0.1_0.01_0.001_for_multi'},
-                  'vocabulary_divi' : {'decimal_and_0.1_0.01_0.001_for_divi'}
+                     'decimal_and_one_digit': \
+                 {'multi_direct' : {'decimal_and_one_digit_for_multi'},
+                  'divi_direct' : {'decimal_and_one_digit_for_divi'},
+                  'area_rectangle' : {'decimal_and_one_digit_for_multi'},
+                  'multi_hole' : {'decimal_and_one_digit_for_multi'},
+                  'vocabulary_multi' : {'decimal_and_one_digit_for_multi'},
+                  'vocabulary_divi' : {'decimal_and_one_digit_for_divi'}
                   }
                      }
+
+SOURCES_TO_TRANSLATE = {'divi_direct_area_width_length_rectangle' : \
+                                {'table_2_9' : 'table_2_9_for_rectangles'}}
 
 AVAILABLE_Q_KIND_VALUES = \
     { 'multi_direct' : ['table_2_9',
@@ -142,7 +147,7 @@ AVAILABLE_Q_KIND_VALUES = \
                         'table_15',
                         'table_25',
                         'decimal_and_10_100_1000',
-                        'decimal_and_0.1_0.01_0.001',
+                        'decimal_and_one_digit',
                         'bypass'],
       'area_rectangle' : ['table_2_9',
                           'table_2', 'table_3', 'table_4',
@@ -150,7 +155,7 @@ AVAILABLE_Q_KIND_VALUES = \
                           'table_15',
                           'table_25',
                           'decimal_and_10_100_1000',
-                          'decimal_and_0.1_0.01_0.001',
+                          'decimal_and_one_digit',
                           'bypass'],
       'multi_reversed' : ['table_2_9',
                           'table_2', 'table_3', 'table_4',
@@ -161,15 +166,15 @@ AVAILABLE_Q_KIND_VALUES = \
                       'table_15',
                       'table_25',
                       'decimal_and_10_100_1000',
-                      'decimal_and_0.1_0.01_0.001',
+                      'decimal_and_one_digit',
                       'bypass'],
-      'divi_direct' : ['table_2_9',
+      'divi_direct' : ['table_2_9', 'table_2_9_for_rectangles',
                        'table_2', 'table_3', 'table_4',
                        'table_11',
                        'table_15',
                        'table_25',
                        'decimal_and_10_100_1000',
-                       'decimal_and_0.1_0.01_0.001',
+                       'decimal_and_one_digit',
                        'bypass'],
       'rank_direct' : ['rank_word',
                        'bypass'],
@@ -189,7 +194,7 @@ AVAILABLE_Q_KIND_VALUES = \
                             'table_15',
                             'table_25',
                             'decimal_and_10_100_1000',
-                            'decimal_and_0.1_0.01_0.001',
+                            'decimal_and_one_digit',
                             'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
                             'bypass'},
       'vocabulary_divi' : {'table_2_9',
@@ -198,7 +203,7 @@ AVAILABLE_Q_KIND_VALUES = \
                            'table_15',
                            'table_25',
                            'decimal_and_10_100_1000',
-                           'decimal_and_0.1_0.01_0.001',
+                           'decimal_and_one_digit',
                            'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
                            'bypass'},
       'vocabulary_addi' : {'table_2_9', 'table_2_9_for_sums_diffs',
@@ -323,6 +328,15 @@ def generate_numbers(subkind):
                 (8, 8), (8, 9),
                 (9, 9)}
 
+    elif subkind == 'table_2_9_for_rectangles':
+        return {(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
+                (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
+                (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
+                (5, 6), (5, 7), (5, 8), (5, 9),
+                (6, 7), (6, 8), (6, 9),
+                (7, 8), (7, 9),
+                (8, 9)}
+
     elif subkind == 'table_2':
         return {(2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9)}
 
@@ -420,7 +434,7 @@ def generate_numbers(subkind):
 
         return result
 
-    elif subkind == 'decimal_and_0.1_0.01_0.001_for_multi':
+    elif subkind == 'decimal_and_one_digit_for_multi':
         box = [Decimal('0.1'), Decimal('0.01'), Decimal('0.001')]
 
         result = set()
@@ -450,7 +464,7 @@ def generate_numbers(subkind):
 
         return result
 
-    elif subkind == 'decimal_and_0.1_0.01_0.001_for_divi':
+    elif subkind == 'decimal_and_one_digit_for_divi':
         box = [Decimal('0.1'), Decimal('0.01'), Decimal('0.001')]
 
         result = set()

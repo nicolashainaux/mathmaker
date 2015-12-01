@@ -20,34 +20,77 @@
 		</ans>
 	</layout>
 
-	<!-- Default value: id='generic' 
+	<!-- Default value: id='generic'
 		 No default for kind and subkind, they must be given -->
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise id="mental_calculation" kind="tabular">
 
-		<!-- Default value (planned): context="none" 
-			 No default for kind and subkind, they must be given -->
-		<!-- <question kind="area" subkind="rectangle">
+		<question kind="divi" subkind="direct" context="area_width_length_rectangle">
 			<table_2_9>1</table_2_9>
-			<table_11>1</table_11>
-			<table_15>1</table_15>
-			<table_25>1</table_25>
-			<decimal_and_10_100_1000>1</decimal_and_10_100_1000>
 		</question>
 
-		<question kind="area" subkind="rectangle" variant="decimal">
-			<table_2_9>4</table_2_9>
-		</question> -->
+		<question kind="multi" subkind="direct">
+			<decimal_and_10_100_1000>1</decimal_and_10_100_1000>
+			<decimal_and_one_digit>1</decimal_and_one_digit>
+		</question>
+
+		<!-- The question about table of 25 should be replaced by a mini-problem -->
+		<question kind="divi" subkind="direct">
+			<decimal_and_10_100_1000>1</decimal_and_10_100_1000>
+			<table_2_9>1</table_2_9>
+			<table_25>1</table_25>
+		</question>
+
+		<!-- The two next ones should be replaced by a calculus of a perimeter of a polygon; and by a "complément à 100" -->
+		<question kind="vocabulary" subkind="simple_parts_or_multiples_of_a_number">
+			<auto_11_50>1</auto_11_50>
+		</question>
+
+		<question kind="vocabulary" subkind="operation">
+			<auto_vocabulary>1</auto_vocabulary>
+		</question>
+
+		<question kind="divi" subkind="direct" variant="decimal">
+			<table_2_9>1</table_2_9>
+		</question>
+
+		<question kind="multi" subkind="hole">
+			<int_irreducible_frac>1</int_irreducible_frac>
+		</question>
+
+		<question kind="multi" subkind="reversed">
+			<table_2_9>1</table_2_9>
+		</question>
+
+		<question kind="vocabulary" subkind="simple_parts_of_a_number">
+			<auto_table>1</auto_table>
+		</question>
+
+		<question kind="vocabulary" subkind="subtr">
+			<decimals_0_20_1>1</decimals_0_20_1>
+		</question>
+
+		<question kind="vocabulary" subkind="subtr">
+			<decimals_0_20_1>1</decimals_0_20_1>
+		</question>
+
+		<question kind="rank" subkind="numberof" generation_type="default">
+			<rank_word>1</rank_word>
+		</question>
+
+		<question kind="rank" subkind="reversed">
+			<rank_word>1</rank_word>
+		</question>
 
 		<mix>
 			<question kind="area" subkind="rectangle"></question>
 			<question kind="multi" subkind="direct"></question>
-			<question kind="area" subkind="rectangle"></question>
 			<question kind="multi" subkind="direct"></question>
-			<table_2_9 variant="decimal">1</table_2_9>
-			<table_11>1</table_11>
+			<question kind="vocabulary" subkind="multi"></question>
 			<table_15>1</table_15>
-			<table_25>1</table_25>
+			<table_11>1</table_11>
+			<table_2_9 variant="decimal1">1</table_2_9>
+			<table_2_9 variant="decimal2">1</table_2_9>
 		</mix>
 
 	</exercise>

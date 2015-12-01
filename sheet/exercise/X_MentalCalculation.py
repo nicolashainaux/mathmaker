@@ -303,11 +303,20 @@ class X_MentalCalculation(X_Structure):
 
         for q_id in q_id_box:
             info = q_dict[q_id].pop(0)
-            mixed_q_list += [q_info(q_id, info[1], info[2], info[0], info[3])]
+            nb_source = info[0]
+            translations_to_check = []
+            if 'variant' in info[3]:
+                translations_to_check += [q_id + "_" + info[3]['variant']]
+            if 'context' in info[3]:
+                translations_to_check += [q_id + "_" + info[3]['context']]
+            for t in translations_to_check:
+                if t in question.SOURCES_TO_TRANSLATE \
+                    and nb_source in question.SOURCES_TO_TRANSLATE[t]:
+                #___
+                    nb_source = question.SOURCES_TO_TRANSLATE[t][nb_source]
+                    break
 
-        for q_i in mixed_q_list:
-            sys.stderr.write("\n" + str(q_i))
-        sys.stderr.write("\n")
+            mixed_q_list += [q_info(q_id, info[1], info[2], nb_source, info[3])]
 
         # Now, mixed_q_list is organized like this:
         # [ ('type',           'kind',      'subkind',  'nb_source', 'options'),
@@ -330,7 +339,7 @@ class X_MentalCalculation(X_Structure):
                 s = ''
                 stu = copy.copy(question.SOURCES_TO_UNPACK)
                 if nb_source == 'decimal_and_10_100_1000' \
-                    or nb_source == 'decimal_and_0.1_0.01_0.001':
+                    or nb_source == 'decimal_and_one_digit':
                     s = stu[nb_source][q.type]
                 else:
                     s = stu[nb_source][q.subkind]
