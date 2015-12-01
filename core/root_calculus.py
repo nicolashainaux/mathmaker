@@ -689,6 +689,8 @@ class Value(Signed):
     #   @return The formated string
     def into_str(self, **options):
 
+        unit_str = ""
+
         if 'display_unit' in options and options['display_unit'] in YES \
             and self.unit != None and self.unit != '':
         #___
@@ -1183,13 +1185,3 @@ class Exponented(Signed):
             return True
         else:
             return False
-
-
-
-
-
-
-
-
-
-

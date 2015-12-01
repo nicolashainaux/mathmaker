@@ -283,4 +283,4 @@ def action():
     for i in range(len(common.machines)):
         test = common.machines[i].type_string(item_with_unit,
                                               display_unit='yes')
-        check(test, ["19,5 cm"])
+        check(test, ["19,5~cm"])
