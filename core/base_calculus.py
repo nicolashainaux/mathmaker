@@ -113,9 +113,7 @@ class Item(Exponented):
         Exponented.__init__(self)
         self._is_out_striked = False
         self._force_display_sign_once = False
-        self._unit = None
-        if 'unit' in options:
-            self._unit = options['unit']
+        self._value_inside = Value(1)
 
         # 1st CASE : number
         # Item's sign will be number's sign
@@ -123,10 +121,10 @@ class Item(Exponented):
         # Item's exponent will be 1
         if is_.a_number(arg):
             if arg > 0:
-                self._value_inside = Value(arg)
+                self._value_inside = Value(arg, **options)
             else:
                 self._sign = '-'
-                self._value_inside = Value(-arg)
+                self._value_inside = Value(-arg, **options)
 
         # 2d CASE : string
         # Item's sign will be either '-' if given, or '+'
@@ -135,10 +133,10 @@ class Item(Exponented):
         elif is_.a_string(arg) and len(arg) >= 1:
             if is_.a_sign(arg[0]) and len(arg) >= 2:
                 self._sign = arg[0]
-                self._value_inside = Value(arg[1:len(arg)])
+                self._value_inside = Value(arg[1:len(arg)], **options)
             else:
                 self._sign = '+'
-                self._value_inside = Value(arg)
+                self._value_inside = Value(arg, **options)
 
         # 3d CASE : Item
         elif type(arg) == Item:
@@ -155,42 +153,42 @@ class Item(Exponented):
                   or isinstance(arg[2], Value)):
         #___
             self._sign = arg[0]
-            self._value_inside = Value(arg[1])
+            self._value_inside = Value(arg[1], **options)
             if isinstance(arg[2], Exponented):
                 self._exponent = arg[2].clone()
             else:
-                self._exponent = Value(arg[2])
+                self._exponent = Value(arg[2], **options)
 
         # 5th CASE : (sign, number|letter)
         elif type(arg) == tuple and len(arg) == 2 and is_.a_sign(arg[0])      \
              and (is_.a_number(arg[1]) or is_.a_string(arg[1])):
         #___
             self._sign = arg[0]
-            self._value_inside = Value(arg[1])
+            self._value_inside = Value(arg[1], **options)
 
         # 6th CASE : None
         elif arg is None:
-            self._value_inside = Value(1)
+            self._value_inside = Value(1, **options)
 
         # 7th CASE : A zero-degree Monomial having an Item as coefficient
         elif isinstance(arg, Monomial) and arg.is_numeric()\
              and isinstance(arg.factor[0], Item):
         #___
             self._sign = arg.get_sign()
-            self._value_inside = Value(arg.factor[0].raw_value)
+            self._value_inside = Value(arg.factor[0].raw_value, **options)
 
         # 8th CASE : A Value (the exponent will be one)
         elif isinstance(arg, Value):
             if arg.is_numeric():
                 if arg.raw_value < 0:
                     self._sign = '-'
-                    self._value_inside = Value(-arg.raw_value)
+                    self._value_inside = Value(-arg.raw_value, **options)
                 else:
                     self._sign = '+'
-                    self._value_inside = Value(arg.raw_value)
+                    self._value_inside = Value(arg.raw_value, **options)
             else:
                 self._sign = '+'
-                self._value_inside = Value(arg.raw_value)
+                self._value_inside = Value(arg.raw_value, **options)
 
             self._value_inside.set_has_been_rounded(arg.has_been_rounded)
 
@@ -252,7 +250,7 @@ class Item(Exponented):
     ##
     #   @brief Returns the unit of the Item
     def get_unit(self):
-        return self._unit
+        return self._value_inside.unit
 
 
 
@@ -332,10 +330,7 @@ class Item(Exponented):
     #   @brief Set the unit of the Item
     #   @param  arg String
     def set_unit(self, arg):
-        if not type(arg) == str:
-            raise error.WrongArgument(str(type(arg)), "a str")
-        else:
-            self._unit = arg
+        self._value_inside.set_unit(arg)
 
 
 
@@ -443,7 +438,7 @@ class Item(Exponented):
                or 'force_display_exponents' in options:
             #___
                 resulting_string += inner_bracket_1                           \
-                                 + self.value_inside.into_str()      \
+                                 + self.value_inside.into_str(**options)      \
                                  + inner_bracket_2                            \
                                  + MARKUP['opening_exponent']                 \
                                  + MARKUP['zero']                             \
@@ -456,7 +451,7 @@ class Item(Exponented):
                 expression_begins = True
 
             resulting_string += inner_bracket_1                               \
-                             + self.value_inside.into_str()          \
+                             + self.value_inside.into_str(**options)          \
                              + inner_bracket_2                                \
                              + MARKUP['opening_exponent']                     \
                              + self.exponent.into_str(**options)           \
@@ -468,14 +463,14 @@ class Item(Exponented):
                or 'force_display_exponents' in options:
             #___
                 resulting_string += inner_bracket_1                           \
-                                 + self.value_inside.into_str()      \
+                                 + self.value_inside.into_str(**options)      \
                                  + inner_bracket_2                            \
                                  + MARKUP['opening_exponent']                 \
                                  + MARKUP['one']                              \
                                  + MARKUP['closing_exponent']
             else:
                 resulting_string += inner_bracket_1                           \
-                                 + self.value_inside.into_str()      \
+                                 + self.value_inside.into_str(**options)      \
                                  + inner_bracket_2
                                  #+ MARKUP['space']
 
@@ -484,11 +479,11 @@ class Item(Exponented):
                                + resulting_string                             \
                                + MARKUP['closing_out_striked']
 
-        if self.unit != None and 'display_unit' in options \
-            and (options['display_unit'] == True \
-                 or options['display_unit'] == 'yes'):
+        #if self.unit != None and 'display_unit' in options \
+        #    and (options['display_unit'] == True \
+        #         or options['display_unit'] == 'yes'):
         #___
-            resulting_string += "~" + str(self.unit)
+        #    resulting_string += "~" + str(self.unit)
 
         expression_begins = False
 

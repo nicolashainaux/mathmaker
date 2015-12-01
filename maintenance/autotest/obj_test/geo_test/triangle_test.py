@@ -72,9 +72,9 @@ def action():
            "P = point(-0.73, 0.12)"\
            "draw"\
            "  (Z.E.P)"\
-           "  $\\rotatebox{-65}{4 cm}$ Z 115 - 7.5 deg 6.4"\
-           "  $\\rotatebox{51}{5 cm}$ E 231 - 6.5 deg 8"\
-           "  $\\rotatebox{3}{4,84 cm}$ Z 183 + 6.7 deg 7.8"\
+           "  $\\rotatebox{-65}{4~cm}$ Z 115 - 7.5 deg 6.4"\
+           "  $\\rotatebox{51}{5~cm}$ E 231 - 6.5 deg 8"\
+           "  $\\rotatebox{3}{4,84~cm}$ Z 183 + 6.7 deg 7.8"\
            "  $\\rotatebox{-31}{?}$ Z 149 deg 2.7"\
            "  $\\rotatebox{83}{64\\textdegree}$ E 263 deg 2.7"\
            "  $\\rotatebox{387}{35\\textdegree}$ P 387 deg 2.7"\
@@ -87,5 +87,3 @@ def action():
            "  E 115 - 45 deg"\
            "  P 115 + 65 deg"\
            "end"])
-
-

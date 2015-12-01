@@ -66,9 +66,9 @@ def action():
            "B = point(4, 0)"\
            "C = point(4, 3)"\
            "draw  (A.B.C)"\
-           "  $\\rotatebox{0}{4 cm}$ A 0 - 7.5 deg 6.4"\
-           "  $\\rotatebox{-90}{3 cm}$ B 90 - 9 deg 4.9"\
-           "  $\\rotatebox{37}{5 cm}$ A 37 + 6.5 deg 8"\
+           "  $\\rotatebox{0}{4~cm}$ A 0 - 7.5 deg 6.4"\
+           "  $\\rotatebox{-90}{3~cm}$ B 90 - 9 deg 4.9"\
+           "  $\\rotatebox{37}{5~cm}$ A 37 + 6.5 deg 8"\
            "end"\
            "label"\
            "  C, B, A right"\
@@ -94,9 +94,9 @@ def action():
           "P = point(2.82, 3.4)"\
           "draw"\
           "  (Y.E.P)"\
-          "  $\\rotatebox{30}{4 cm}$ Y 30 - 7.5 deg 6.4"\
-          "  $\\rotatebox{-60}{3 cm}$ E 120 - 8.9 deg 4.9"\
-          "  $\\rotatebox{67}{5 cm}$ Y 67 + 6.5 deg 8.1"\
+          "  $\\rotatebox{30}{4~cm}$ Y 30 - 7.5 deg 6.4"\
+          "  $\\rotatebox{-60}{3~cm}$ E 120 - 8.9 deg 4.9"\
+          "  $\\rotatebox{67}{5~cm}$ Y 67 + 6.5 deg 8.1"\
           "end"\
           "label"\
           "  P, E, Y right"\
@@ -122,8 +122,8 @@ def action():
           "K = point(-0.32, 2.99)"\
           "draw"\
           "  (Z.A.K)"\
-          "  $\\rotatebox{75}{3,2 cm}$ Z 75 - 9.1 deg 4.8"\
-          "  $\\rotatebox{-15}{4,5 cm}$ A 165 - 7.5 deg 6.5"\
+          "  $\\rotatebox{75}{3,2~cm}$ Z 75 - 9.1 deg 4.8"\
+          "  $\\rotatebox{-15}{4,5~cm}$ A 165 - 7.5 deg 6.5"\
           "end"\
           "label"\
           "  K, A, Z right"\
@@ -153,8 +153,8 @@ def action():
           +"P = point(-2.18, -0.81)"\
           +"draw"\
           +"  (L.O.P)"\
-          +"  $\\rotatebox{-40}{1,5 cm}$ L 140 - 17 deg 3.3"\
-          +"  $\\rotatebox{34}{7 cm}$ L 214 + 5.1 deg 11.7"\
+          +"  $\\rotatebox{-40}{1,5~cm}$ L 140 - 17 deg 3.3"\
+          +"  $\\rotatebox{34}{7~cm}$ L 214 + 5.1 deg 11.7"\
           +"  $\\rotatebox{-2.9}{30\\textdegree}$ L 177.1 deg 2.7"\
           +"end"\
           +"label"\
@@ -220,8 +220,8 @@ def action():
           +"X = point(1, 8)"\
           +"draw"\
           +"  (P.A.X)"\
-          +"  $\\rotatebox{0}{1 cm}$ P 0 - 25 deg 1.6"\
-          +"  $\\rotatebox{-90}{8 cm}$ A 90 - 4.7 deg 12.8"\
+          +"  $\\rotatebox{0}{1~cm}$ P 0 - 25 deg 1.6"\
+          +"  $\\rotatebox{-90}{8~cm}$ A 90 - 4.7 deg 12.8"\
           +"  $\\rotatebox{83}{?}$ P 83 + 4.7 deg 12.9"\
           +"  $\\rotatebox{41.4}{64\\textdegree}$ P 41.4 deg 2.7"\
           +"  $\\rotatebox{86.4}{80\\textdegree}$ X 266.4 deg 7.92"\
