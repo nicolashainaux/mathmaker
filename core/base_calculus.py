@@ -5767,7 +5767,7 @@ class Product (CommutativeOperation):
 
         literal_factors = self.get_factors_list(LITERALS)
         #python2.7 code : literal_factors.sort(Exponented.alphabetical_order_cmp)
-        sorted(literal_factors)
+        sorted(literal_factors, key=cmp_to_key(Item.__lt__))
 
         other_factors = self.get_factors_list(OTHERS)
 
