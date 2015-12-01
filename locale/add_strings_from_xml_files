@@ -93,14 +93,18 @@ def browse_files(path):
     file_names = next(os.walk('.'))[2]
 
     for f in file_names:
+        sys.stdout.write("\nChecking " + str(f))
         file_name, extension = os.path.splitext(f)
         if extension == '.xml' and file_name != 'tmp':
             abspath = os.getcwd() + "/" + f
             relpath = abspath[len(PROJECT_ROOT)+1:]
             collect_strings(parse_xml(f), relpath)
 
+    sys.stdout.write("\n")
+
     for dir_name in next(os.walk('.'))[1]:
-        browse_files(dir_name)
+        if dir_name !=  '.git':
+            browse_files(dir_name)
 
     os.chdir('..')
 
