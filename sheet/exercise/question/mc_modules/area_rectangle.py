@@ -29,30 +29,29 @@ from . import multi_direct
 class sub_object(object):
 
     def __init__(self, numbers_to_use, **options):
-        units = copy.deepcopy(COMMON_LENGTH_UNITS)
-        unit = randomly.pop(units)
-        unit_area = LENGTH_TO_AREA[unit]
+        units_names = copy.deepcopy(COMMON_LENGTH_UNITS)
+        unit_length = Unit(randomly.pop(units_names))
+        unit_area = Unit(unit_length.name, exponent=2)
         multi_direct.sub_object.__init__(self, numbers_to_use, **options)
         nb_list = [self.nb1, self.nb2]
         self.w = min(nb_list)
         self.l = max(nb_list)
-        self.w_str = Item(self.w)
-        self.w_str.set_unit(unit)
+        self.w_str = Item(self.w, unit=unit_length)
         self.w_str = self.w_str.into_str(force_expression_begins=True,
                                          display_unit=True)
-        self.l_str = Item(self.l)
-        self.l_str.set_unit(unit)
+        self.l_str = Item(self.l, unit=unit_length)
         self.l_str = self.l_str.into_str(force_expression_begins=True,
                                          display_unit=True)
-        self.product = Item(Product([self.w,self.l]).evaluate())
-        self.product.set_unit(unit_area)
+        self.product = Item(Product([self.w,self.l]).evaluate(),
+                            unit=unit_area)
         self.product = self.product.into_str(force_expression_begins=True,
                                              display_unit=True)
 
     def q(self, M, **options):
         return _(\
   "Area of a rectangle whose width is {w} and length is {l}?")\
-        .format(w=self.w_str, l=self.l_str)
+        .format(w=M.write_math_style2(self.w_str),
+                l=M.write_math_style2(self.l_str))
 
     def a(self, M, **options):
         return M.write_math_style2(self.product)

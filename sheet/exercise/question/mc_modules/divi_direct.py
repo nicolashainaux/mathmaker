@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import copy
+from core.root_calculus import *
 from core.base_calculus import *
 
 
@@ -51,9 +52,9 @@ class sub_object(object):
         if 'context' in options \
             and options['context'] == 'area_width_length_rectangle':
         #___
-            units = copy.deepcopy(COMMON_LENGTH_UNITS)
-            unit_length = randomly.pop(units)
-            unit_area = LENGTH_TO_AREA[unit_length]
+            units_names = copy.deepcopy(COMMON_LENGTH_UNITS)
+            unit_length = Unit(randomly.pop(units_names))
+            unit_area = Unit(unit_length.name, exponent=2)
             self.q_context = "w" if self.result < self.divisor else "l"
             self.dividend_str = Item(self.dividend, unit=unit_area)\
                                 .into_str(force_expression_begins=True,

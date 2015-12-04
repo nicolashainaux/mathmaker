@@ -505,7 +505,7 @@ class Value(Signed):
 
         self._unit = ""
 
-        if 'unit' in options and options['unit'] in AVAILABLE_UNITS:
+        if 'unit' in options:
             self._unit = options['unit']
 
         if type(arg) == float                                             \
@@ -689,27 +689,13 @@ class Value(Signed):
     #   @return The formated string
     def into_str(self, **options):
 
-        unit_str = ""
-
-        if 'display_unit' in options and options['display_unit'] in YES \
-            and self.unit != None and self.unit != '':
-        #___
-            unit_str = VALUE_AND_UNIT_SEPARATOR[self.unit] + self.unit
-
         if self.is_numeric():
+            unit_str = ""
+
             if 'display_unit' in options and options['display_unit'] in YES:
-                if 'graphic_display' in options\
-                    and options['graphic_display'] in YES:
-                #___
-                    return locale.str(self.raw_value)\
-                           + unit_str
-                else:
-                    return locale.str(self.raw_value)\
-                           + MARKUP['open_text_in_maths']\
-                           + unit_str \
-                           + MARKUP['close_text_in_maths']
-            else:
-                return locale.str(self.raw_value)
+                unit_str = self.unit.into_str(**options)
+
+            return locale.str(self.raw_value) + unit_str
 
         else: # self.is_literal()
             if len(self.get_first_letter()) >= 2 \
@@ -1185,3 +1171,71 @@ class Exponented(Signed):
             return True
         else:
             return False
+
+
+
+
+
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+##
+# @class Unit
+# @brief This class is used to handle with units.
+class Unit(Exponented):
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Constructor
+    #   @return One instance of Unit
+    def __init__(self, arg, **options):
+        Exponented.__init__(self)
+        if type(arg) != str:
+            raise error.WrongArgument(arg, "a string")
+        self._name = arg
+        if 'exponent' in options:
+            self._exponent = options['exponent']
+
+
+
+
+
+    @property
+    def name(self):
+        return self._name
+
+
+    @property
+    def exponent(self):
+        return self._exponent
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Creates a string of the given object in the given ML
+    #   @param options Any options
+    #   @return The formated string
+    def into_str(self, **options):
+
+        text_box_open = MARKUP['open_text_in_maths']
+        text_box_close = MARKUP['close_text_in_maths']
+
+        if 'graphic_display' in options and options['graphic_display'] in YES:
+            text_box_open = ""
+            text_box_close = ""
+
+        exponent = ""
+
+        if self.exponent != Value(1):
+            exponent = MARKUP['opening_exponent'] \
+                       + str(self.exponent) \
+                       + MARKUP['closing_exponent']
+
+        separator = VALUE_AND_UNIT_SEPARATOR[self.name]
+
+        return separator + text_box_open + self.name + text_box_close + exponent
