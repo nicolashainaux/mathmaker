@@ -26,6 +26,8 @@
 # @package core.root_calculus
 # @brief Mostly abstract classes for mathematical calculus objects.
 
+import copy
+
 from .base import *
 from lib.common import alphabet
 from lib import is_
@@ -506,7 +508,7 @@ class Value(Signed):
         self._unit = ""
 
         if 'unit' in options:
-            self._unit = options['unit']
+            self._unit = Unit(options['unit'])
 
         if type(arg) == float                                             \
             or type(arg) == int                                          \
@@ -654,10 +656,7 @@ class Value(Signed):
     #   @brief Set the unit of the Value
     #   @param  arg String
     def set_unit(self, arg):
-        if not type(arg) == str:
-            raise error.WrongArgument(str(type(arg)), "a str")
-        else:
-            self._unit = arg
+        self._unit = Unit(arg)
 
 
 
@@ -1194,11 +1193,18 @@ class Unit(Exponented):
     #   @return One instance of Unit
     def __init__(self, arg, **options):
         Exponented.__init__(self)
-        if type(arg) != str:
-            raise error.WrongArgument(arg, "a string")
-        self._name = arg
-        if 'exponent' in options:
-            self._exponent = options['exponent']
+
+        if type(arg) == str:
+            self._name = arg
+            if 'exponent' in options:
+                self._exponent = options['exponent']
+
+        elif type(arg) == Unit:
+            self._name = copy.deepcopy(arg.name)
+            self._exponent = copy.deepcopy(arg.exponent)
+
+        else:
+            raise error.WrongArgument(arg, "a string or a Unit")
 
 
 
