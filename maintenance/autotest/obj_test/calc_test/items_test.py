@@ -277,8 +277,16 @@ def action():
          ["True"])
 
     #46
-    check(item_a.__lt__(item_b),
+    check(item_a.__gt__(item_b),
+         ["False"])
+
+    #47
+    check(item_b.__gt__(item_a),
          ["True"])
+
+    #48
+    check(str(sorted([item_b, item_a], key=lambda it: it.get_first_letter())),
+          ["[ {+a^.1.} ,  {+b^.1.} ]"])
 
     for i in range(len(common.machines)):
         test = common.machines[i].type_string(item_with_unit,

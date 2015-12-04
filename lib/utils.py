@@ -20,9 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from decimal import Decimal
+
 import core.base_calculus
 from . import error
-from decimal import Decimal
 
 
 
@@ -85,7 +86,7 @@ def reduce_literal_items_product(provided_list):
         aux_item = core.base_calculus.Item(('+', key, aux_dict[key]))
         reduced_list.append(aux_item)
 
-    return reduced_list
+    return sorted(reduced_list, key=lambda elt: elt.get_first_letter())
 
 
 

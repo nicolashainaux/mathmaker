@@ -616,6 +616,17 @@ class Item(Exponented):
 
 
 
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief __repr__() method of the Item (debugging method)
+    #   @param options No option available so far
+    #   @return A string containing "{sign value ^ exponent}"
+    def __repr__(self):
+        return self.dbg_str()
+
+
+
+
 
 
     # --------------------------------------------------------------------------
@@ -712,6 +723,35 @@ class Item(Exponented):
             else:
                 return True
 
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Compares an Item to something else ; it's a reimplementing of
+    #          alphabetical_order_cmp(), since we need this comparison
+    #   @return True if self is lower than the other_item
+    def __gt__(self, other_objct):
+        if self.is_numeric() and other_objct.is_numeric():
+            return True
+
+        elif self.is_literal() and other_objct.is_numeric():
+            return True
+
+        elif self.is_numeric() and other_objct.is_literal():
+            return False
+
+        elif self.is_literal() and other_objct.is_literal():
+            self_value = self.get_first_letter()
+            other_value = other_objct.get_first_letter()
+
+            # let's compare
+            if self_value == other_value:
+                return False
+            elif alphabet.order[self_value] > alphabet.order[other_value]:
+                return True
+            else:
+                return False
 
 
 
@@ -5761,8 +5801,8 @@ class Product (CommutativeOperation):
         num_factors = self.get_factors_list(NUMERIC)
 
         literal_factors = self.get_factors_list(LITERALS)
-        #python2.7 code : literal_factors.sort(Exponented.alphabetical_order_cmp)
-        sorted(literal_factors, key=cmp_to_key(Item.__lt__))
+        literal_factors = sorted(literal_factors,
+                                 key=lambda item: item.get_first_letter())
 
         other_factors = self.get_factors_list(OTHERS)
 
@@ -5800,9 +5840,6 @@ class Product (CommutativeOperation):
         # Literal factors :
         raw_literals_list = self.get_factors_list(LITERALS)
         literals_list = reduce_literal_items_product(raw_literals_list)
-        #python2.7 code: literals_list.sort(Exponented.alphabetical_order_cmp)
-        sorted(literals_list, key=cmp_to_key(Item.__lt__))
-
 
         # Determine the sign
         final_sign = sign_of_product([numeric_part] + raw_literals_list)
