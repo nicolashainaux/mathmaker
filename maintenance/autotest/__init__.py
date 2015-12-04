@@ -93,6 +93,8 @@ for i in range(len(AVAILABLE_UNITS)):
 
 def short_test_run(lang):
     M = machine.LaTeX(lang, create_pic_file='no')
+    for elt in sheet.catalog.XML_SHEETS:
+        M.write(str(sheet.S_Generic(M, filename=sheet.catalog.XML_SHEETS[elt])))
     for elt in sheet.AVAILABLE:
         M.write(str(sheet.AVAILABLE[elt][0](M)))
 
