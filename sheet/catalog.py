@@ -24,26 +24,24 @@ from lib.common.software import ROOT_PATH
 from . import exercise
 
 D = ROOT_PATH + "sheet/frameworks/"
+DM = D + "mental_calculation/"
+L11_1 = "lev11_1/"
+L11_2 = "lev11_2/"
 
-XML_SHEETS = { 'mental_calculation_default' : D +\
-                                              "mental_calculation/default.xml",
-               'tables2_9' : D + "mental_calculation/tables2_9.xml",
-               'divisions' : D + "mental_calculation/divisions.xml",
-               'multi_hole_tables2_9' : D + \
-                                "mental_calculation/multi_hole_tables2_9.xml",
-               'multi_hole_any_nb' : D + \
-                                "mental_calculation/multi_hole_any_nb.xml",
-               'multi_decimal' : D + \
-                                "mental_calculation/multi_decimal.xml",
-               'multi_reversed' : D + \
-                                "mental_calculation/multi_reversed.xml",
-               'ranks' : D + "mental_calculation/ranks.xml",
-               'operations_vocabulary' : D + \
-                                "mental_calculation/operations_vocabulary.xml",
-               'test_11_1' : D + "mental_calculation/test_11_1.xml",
-               'test_11_2' : D + "mental_calculation/test_11_2.xml",
-               'multi_divi_10_100_1000' : D + \
-                                "mental_calculation/multi_divi_10_100_1000.xml"
+XML_SHEETS = { 'mental_calculation_default' : DM + "default.xml",
+               'tables2_9' : DM + L11_1 + "tables2_9.xml",
+               'divisions' : DM + L11_1 + "divisions.xml",
+               'multi_hole_tables2_9' : DM + L11_1 + "multi_hole_tables2_9.xml",
+               'multi_hole_any_nb' : DM + L11_1 + "multi_hole_any_nb.xml",
+               'multi_decimal' : DM + L11_1 + "multi_decimal.xml",
+               'multi_reversed' : DM + L11_1 + "multi_reversed.xml",
+               'ranks' : DM + L11_1 + "ranks.xml",
+               'test_11_1' : DM + L11_1 + "test_11_1.xml",
+               'operations_vocabulary' : DM + L11_2 \
+                                         + "operations_vocabulary.xml",
+               'multi_divi_10_100_1000' : DM + L11_2 \
+                                          + "multi_divi_10_100_1000.xml",
+               'test_11_2' : DM + L11_2 + "test_11_2.xml"
                }
 
 CATALOG = { 'mental_calculation' : exercise.X_MentalCalculation,
