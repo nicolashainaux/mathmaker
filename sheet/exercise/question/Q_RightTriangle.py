@@ -394,11 +394,11 @@ class Q_RightTriangle(Q_Structure):
                 result += M.insert_picture(self.right_triangle)
 
             else:
-                result += _("The triangle %(triangle_name)s has a right \
-                angle in %(right_vertex)s.") \
-                       % {'triangle_name' : str(self.right_triangle.name),
-                          'right_vertex' : str(self.right_triangle.vertex1.name)
-                         }
+                result += _("The triangle {triangle_name} has a right \
+                angle in {right_vertex}.")\
+                    .format(triangle_name=str(self.right_triangle.name),
+                            right_vertex=str(self.right_triangle.vertex1.name))
+
                 result += " " + str(self.known_sides[0].length_name) \
                        + " = " \
                        + self.known_sides[0].label.into_str(display_unit='yes')\
@@ -408,18 +408,18 @@ class Q_RightTriangle(Q_Structure):
                        + self.known_sides[1].label.into_str(display_unit='yes')\
                        + ". " + M.write_new_line()
 
-            result += _("Calculate the length of") \
-                   + " " \
-                   + self.unknown_side.name \
-                   + "."
+            result += _("Calculate the length of {this_side}.")\
+                      .format(this_side=self.unknown_side.name)
 
             if self.final_unit != "":
-                result += " " + _("Give the result in") + " " \
-                       + self.final_unit + "."
+                result += " " + _("Give the result in {this_unit}.")\
+                                .format(this_unit=self.final_unit)
 
             if self.round_to != "":
-                result += " " + _("Round the result") + " " \
-                       + vocabulary.PRECISION_IDIOMS[self.round_to] + "."
+                result += " " + _("Round the result {at_this_precision}.")\
+                                .format(at_this_precision=\
+                                        vocabulary\
+                                        .PRECISION_IDIOMS[self.round_to])
 
         elif self.q_kind == 'converse_of_pythagorean_theorem' \
              or self.q_kind == 'contrapositive_of_pythagorean_theorem':
@@ -436,26 +436,16 @@ class Q_RightTriangle(Q_Structure):
                 side1 = randomly.pop(sides_copy)
                 side2 = randomly.pop(sides_copy)
 
-                result += _("%(triangle_name)s is a triangle such as")\
-                          %{'triangle_name' : str(self.right_triangle.name)
-                           }
-
-                result += " " + str(side0.length_name)
-                result += " = "
-                result += side0.label.into_str(display_unit=True) + ", "
-
-                result += str(side1.length_name)
-                result += " = "
-                result += side1.label.into_str(display_unit=True)
-                result += " "
-                result += _("and")
-                result += " "
-
-                result += str(side2.length_name)
-                result += " = "
-                result += side2.label.into_str(display_unit=True) + "."
-                result += " "
-
+                result += _("{triangle_name} is a triangle such as\
+{side_length0} = {nb0}, {side_length1} = {nb1} and {side_length2} = {nb2}")\
+                          .format(triangle_name=str(self.right_triangle.name),
+                                  side_length0=str(side0.length_name),
+                                  nb0=side0.label.into_str(display_unit=True),
+                                  side_length1=str(side1.length_name),
+                                  nb1=side1.label.into_str(display_unit=True),
+                                  side_length2=str(side2.length_name),
+                                  nb2=side2.label.into_str(display_unit=True)
+                                  )
 
             result += _("Is it a right triangle ? Prove your answer and if the \
             triangle is right, give the name of the right angle.")
@@ -478,11 +468,10 @@ class Q_RightTriangle(Q_Structure):
 
         if self.q_kind == 'pythagorean_theorem':
             # Resolution (and the part with the figure will be dealed later)
-            result = _("The triangle %(triangle_name)s has a right angle in \
-                       %(right_vertex)s.") \
-                    % {'triangle_name' : str(self.right_triangle.name),
-                       'right_vertex' : str(self.right_triangle.vertex1.name)
-                      }
+            result = _("The triangle {triangle_name} has a right angle in \
+                       {right_vertex}.")\
+                    .format(triangle_name=str(self.right_triangle.name),
+                            right_vertex=str(self.right_triangle.vertex1.name))
 
             result += M.write_new_line()
 
@@ -548,20 +537,21 @@ class Q_RightTriangle(Q_Structure):
                                           )
                                     ])
 
-            legs_equality = Equality([Sum([Item(('+',
-                                           self.right_triangle.leg0.length_name,
-                                           2)),
-                                           Item(('+',
-                                           self.right_triangle.leg1.length_name,
-                                           2))
-                                         ]),
-                                      Sum([Item(('+',
-                                           self.right_triangle.leg0.label.raw_value,
-                                           2)),
-                                           Item(('+',
-                                           self.right_triangle.leg1.label.raw_value,
-                                           2))
-                                         ])
+            legs_equality = Equality([\
+                                  Sum([Item(('+',
+                                       self.right_triangle.leg0.length_name,
+                                       2)),
+                                       Item(('+',
+                                       self.right_triangle.leg1.length_name,
+                                       2))
+                                       ]),
+                                  Sum([Item(('+',
+                                       self.right_triangle.leg0.label.raw_value,
+                                       2)),
+                                       Item(('+',
+                                       self.right_triangle.leg1.label.raw_value,
+                                       2))
+                                       ])
                                      ])
             legs_equality_step2 = Equality([\
                                   Sum([Item(('+',
@@ -598,11 +588,10 @@ class Q_RightTriangle(Q_Structure):
                 result += _("So, by the converse of the pythagorean theorem,")
                 #result += M.write_new_line()
                 result += " "
-                result += _("%(triangle_name)s has a right angle\
-                 in %(right_vertex)s.")\
-                     % {'triangle_name' : str(self.right_triangle.name),
-                        'right_vertex' : str(self.right_triangle.vertex1.name)
-                       }
+                result += _("{triangle_name} has a right angle\
+                 in {right_vertex}.")\
+                 .format(triangle_name=str(self.right_triangle.name),
+                         right_vertex=str(self.right_triangle.vertex1.name))
 
             elif self.q_kind == 'contrapositive_of_pythagorean_theorem':
                 result += M.write_math_style1(\
@@ -613,9 +602,8 @@ class Q_RightTriangle(Q_Structure):
                  theorem,")
                 #result += M.write_new_line()
                 result += " "
-                result += _("%(triangle_name)s has no right angle.")\
-                     % {'triangle_name' : str(self.right_triangle.name)
-                       }
+                result += _("{triangle_name} has no right angle.")\
+                          .format(triangle_name=str(self.right_triangle.name))
 
 
 

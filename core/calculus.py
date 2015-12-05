@@ -1626,9 +1626,9 @@ class Equation(ComposedCalculable):
                and new_eq.left_hand_side.get_sign() == \
                     new_eq.right_hand_side.get_sign():
             #___
-                return _( \
-            "Any value of %(variable_name)s is solution of the equation.") \
-            % {'variable_name':new_eq.variable_letter}
+                return _(\
+            "Any value of {variable_name} is solution of the equation.")\
+            .format(variable_name=new_eq.variable_letter)
 
             else:
                 return _("This equation has no solution.")
@@ -2489,15 +2489,3 @@ class Table_UP(Table):
                                     self.cell[1][col0],
                                     self.cell[1][col1]
                                     ))
-
-
-
-
-
-
-
-
-
-
-
-

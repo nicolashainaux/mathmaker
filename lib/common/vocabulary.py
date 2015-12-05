@@ -38,8 +38,8 @@ except IOError as msg:
                         + str(msg) + "\n" \
                         + "It means the language indicated either \
 in the command line or read from the configuration file isn't available yet \
-in %(software_ref)s which will try to produce output in the language of your \
-system." % {'software_ref' : software.NAME} + "\n" )
+in {software_ref} which will try to produce output in the language of your \
+system.".format(software_ref=software.NAME) + "\n" )
     try:
         gettext.install(software.NAME,
                         localdir)
@@ -47,9 +47,9 @@ system." % {'software_ref' : software.NAME} + "\n" )
         error.write_warning("gettext returned the following message :\n" \
                         + str(msg) + "\n" \
                         + "It means the language of your system isn't \
-available yet in %(software_ref)s which will produce output in \
+available yet in {software_ref} which will produce output in \
 english. If this results in producing an error, then your installation isn't \
-complete." % {'software_ref' : software.NAME} + "\n")
+complete.".format(software_ref=software.NAME) + "\n")
         gettext.translation(software.NAME,
                             localdir,
                             ['en']).install()
@@ -61,4 +61,3 @@ PRECISION_IDIOMS = { UNIT : _("to the unit"),
                      THOUSANDTH : _("to the thousandth"),
                      TEN_THOUSANDTH : _("to the ten thousandth")
                    }
-
