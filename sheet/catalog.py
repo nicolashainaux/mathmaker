@@ -33,6 +33,7 @@ XML_SHEETS = { 'mental_calculation_default' : DM + "default.xml",
                'divisions' : DM + L11_1 + "divisions.xml",
                'multi_hole_tables2_9' : DM + L11_1 + "multi_hole_tables2_9.xml",
                'multi_hole_any_nb' : DM + L11_1 + "multi_hole_any_nb.xml",
+               'multi_11_15_25' : DM + L11_1 + "multi_11_15_25.xml",
                'multi_decimal' : DM + L11_1 + "multi_decimal.xml",
                'multi_reversed' : DM + L11_1 + "multi_reversed.xml",
                'ranks' : DM + L11_1 + "ranks.xml",
@@ -41,6 +42,7 @@ XML_SHEETS = { 'mental_calculation_default' : DM + "default.xml",
                                          + "operations_vocabulary.xml",
                'multi_divi_10_100_1000' : DM + L11_2 \
                                           + "multi_divi_10_100_1000.xml",
+               'rectangles' : DM + L11_2 + "rectangles.xml",
                'test_11_2' : DM + L11_2 + "test_11_2.xml"
                }
 
