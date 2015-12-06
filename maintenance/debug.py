@@ -22,11 +22,11 @@
 
 import os
 import sys
-from lib.common import cfg
+from lib.common.cfg import CONFIG
 
 sdt_err_output = sys.stderr.fileno()
 
-ENABLED_STRING = cfg.get_value_from_file("DEBUGGING MODE", "ENABLED")
+ENABLED_STRING = CONFIG["DEBUGGING MODE"]["ENABLED"]
 
 ENABLED = False
 

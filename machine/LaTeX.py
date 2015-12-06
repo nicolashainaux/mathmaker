@@ -22,8 +22,9 @@
 
 import math
 import sys
+
 from lib.common import latex
-from lib.common import cfg
+from lib.common.cfg import CONFIG
 from lib.common import software
 from lib.common.cst import *
 
@@ -76,7 +77,7 @@ class LaTeX(Structure.Structure):
         # Encoding...
         self.encoding = latex.DEFAULT_ENCODING
         try:
-            encoding_cfg = cfg.get_value_from_file(latex.FORMAT, "ENCODING")
+            encoding_cfg = CONFIG[latex.FORMAT]["ENCODING"]
         except error.UnreachableData:
             pass
         else:

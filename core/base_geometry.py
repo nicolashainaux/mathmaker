@@ -29,14 +29,15 @@
 import math
 import locale
 from decimal import *
+
 from .base import *
 from core.base_calculus import Value
 from lib import *
 from lib.maths_lib import *
 from maintenance import debug
-from lib.common import cfg
+from lib.common.cfg import CONFIG
 
-markup_choice = cfg.get_value_from_file('MARKUP', 'USE')
+markup_choice = CONFIG['MARKUP']['USE']
 
 if markup_choice == 'latex':
     from lib.common.latex import MARKUP
@@ -668,12 +669,3 @@ class Angle(Drawable):
 
         else:
             raise error.WrongArgument(arg, 'str')
-
-
-
-
-
-
-
-
-

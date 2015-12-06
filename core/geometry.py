@@ -29,19 +29,20 @@
 import math
 import locale
 from decimal import *
+
 from .base import *
 from .base_geometry import *
 from lib import *
 from lib import randomly
 from lib.maths_lib import *
 from core.calculus import *
-from lib.common import cfg
+from lib.common.cfg import CONFIG
+
+markup_choice = CONFIG['MARKUP']['USE']
 
 if debug.ENABLED:
     from lib.common import latex
     import machine
-
-markup_choice = cfg.get_value_from_file('MARKUP', 'USE')
 
 if markup_choice == 'latex':
     from lib.common.latex import MARKUP
@@ -931,5 +932,3 @@ class RightTriangle(Triangle):
 
 
         return SubstitutableEquality(objcts, subst_dict)
-
-

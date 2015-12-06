@@ -27,6 +27,7 @@
 # @brief Mostly abstract classes for mathematical calculus objects.
 
 import copy
+import locale
 
 from .base import *
 from lib.common import alphabet
@@ -34,9 +35,9 @@ from lib import is_
 from lib.maths_lib import *
 from decimal import *
 from lib.common.cst import *
-import locale
+from lib.common.cfg import CONFIG
 
-markup_choice = cfg.get_value_from_file('MARKUP', 'USE')
+markup_choice = CONFIG['MARKUP']['USE']
 
 if markup_choice == 'latex':
     from lib.common.latex import MARKUP

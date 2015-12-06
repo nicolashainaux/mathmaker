@@ -23,7 +23,7 @@
 import subprocess
 from lib import error
 from lib.common import software
-from lib.common import cfg
+from lib.common.cfg import CONFIG
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -230,10 +230,9 @@ class Drawable(NamedObject):
             f.write(header_comment + self.into_euk(**options))
             f.close()
 
-        path_to_euktoeps = cfg.get_value_from_file("PATHS", "EUKTOEPS")
-        options_of_euktoeps = cfg.get_value_from_file("PATHS",
-                                                      "EUKTOEPS_OPTIONS")
-
+        path_to_euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
+        options_of_euktoeps = CONFIG["PATHS"]["EUKTOEPS_OPTIONS"]
+        
         if 'create_pic_files' in options \
             and not options['create_pic_files'] in YES:
         #___

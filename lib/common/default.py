@@ -20,12 +20,12 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from . import cfg
-import locale
-import os, sys
+import os, sys, locale
 
-LANGUAGE = cfg.get_value_from_file("LOCALES", "LANGUAGE")
-ENCODING = cfg.get_value_from_file("LOCALES", "ENCODING")
+from lib.common.cfg import CONFIG
+
+LANGUAGE = CONFIG["LOCALES"]["LANGUAGE"]
+ENCODING = CONFIG["LOCALES"]["ENCODING"]
 
 try:
     locale.setlocale(locale.LC_ALL, LANGUAGE + '.' + ENCODING)

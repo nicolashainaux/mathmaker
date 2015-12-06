@@ -22,6 +22,7 @@
 
 import math
 import decimal
+
 from lib import *
 from lib import translator
 from .base import *
@@ -30,8 +31,9 @@ from lib.common import default
 from lib.maths_lib import *
 from lib.common.cst import *
 from lib.utils import *
+from lib.common.cfg import CONFIG
 
-markup_choice = cfg.get_value_from_file('MARKUP', 'USE')
+markup_choice = CONFIG['MARKUP']['USE']
 
 if markup_choice == 'latex':
     from lib.common.latex import MARKUP

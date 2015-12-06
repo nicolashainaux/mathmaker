@@ -22,12 +22,13 @@ import sys, os, subprocess
 import gettext
 import shlex
 from optparse import OptionParser
+
 from lib.common import default
 from lib.common import software
+from lib.common.cfg import CONFIG
 from lib import error
 import machine
 import sheet
-from lib.common import cfg
 
 EUKTOEPS_ERR_MSG = "mathmaker requires euktoeps to produce pictures"
 EUKTOEPS_VERSION_ERR_MSG = " but euktoeps did not return the correct version"\
@@ -54,7 +55,7 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    path_to_euktoeps = cfg.get_value_from_file("PATHS", "EUKTOEPS")
+    path_to_euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
     call_euktoeps = None
 
     try:

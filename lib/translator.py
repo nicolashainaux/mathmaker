@@ -20,13 +20,12 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib.common import cfg
 from lib.common import latex
 from lib import is_
 from . import error
+from lib.common.cfg import CONFIG
 
-
-markup_choice = cfg.get_value_from_file('MARKUP', 'USE')
+markup_choice = CONFIG['MARKUP']['USE']
 
 if markup_choice == 'latex':
     from lib.common.latex import MARKUP
