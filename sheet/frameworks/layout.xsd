@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:simpleType name="layoutType">
+		<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="std"/>
+		<xsd:enumeration value="short_test"/>
+		<xsd:enumeration value="mini_test"/>
+		<xsd:enumeration value="equations"/>
+		<xsd:enumeration value="mental"/>
+	  	</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- This will need to change when the xsd will be applied to all sheets -->
+	<xsd:simpleType name="nbLineType">
+		<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="None"/>
+	  	</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:element name="line">
+		<xsd:complexType>
+			<xsd:attribute	name="nb"			type="nbLineType"	use="required"/>
+			<xs:element 	name="exercises"	type="xs:string"	minOccurs="1"		maxOccurs="unbounded"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="partType">
+		<xsd:element ref="line"	minOccurs="1" maxOccurs="unbounded">
+	</xsd:complexType>
+	
+	<xsd:element name="layout">
+		<xsd:complexType>
+			<xsd:attribute name="type"				type="layoutType"	use="required"/>
+			<xsd:attribute name="unit" 				type="xsd:string"	use="optional"	default="cm"/>
+			<xsd:attribute name="font_size_offset"	type="xsd:integer"	use="optional"	default="0"/>
+
+			<xsd:sequence>
+				<xsd:element name="exc"	type="partType"	minOccurs="1" maxOccurs="1">
+				</xsd:element>
+				<xsd:element name="ans" type="partType"	minOccurs="1" maxOccurs="1">
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:include schemaLayout="nb_source.xsd"/>
+	
+	<xsd:element name="question">
+		<xsd:complexType>
+			<xsd:attribute name="kind"				type="xsd:string"	use="required"/>
+			<xsd:attribute name="subkind"			type="xsd:string"	use="required"/>
+			<xsd:attribute name="context"			type="xsd:string"	use="optional"/>
+			<xsd:attribute name="variant"			type="xsd:string"	use="optional"/>
+			<xsd:attribute name="generation_type"	type="xsd:string"	use="optional"/>
+			<xsd:sequence>
+				<xsd:element ref="nb_source" minOccurs="0"	maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
