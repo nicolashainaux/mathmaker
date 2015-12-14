@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<xsd:include schemaLayout="nb_source.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="nb_source.xsd"/>
 	
-	<xsd:element name="question">
-		<xsd:complexType>
-			<xsd:attribute name="kind"				type="xsd:string"	use="required"/>
-			<xsd:attribute name="subkind"			type="xsd:string"	use="required"/>
-			<xsd:attribute name="context"			type="xsd:string"	use="optional"/>
-			<xsd:attribute name="variant"			type="xsd:string"	use="optional"/>
-			<xsd:attribute name="generation_type"	type="xsd:string"	use="optional"/>
-			<xsd:sequence>
-				<xsd:element ref="nb_source" minOccurs="0"	maxOccurs="unbounded"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
+	<xs:element name="question">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nb_source" minOccurs="0"	maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="kind"				type="xs:string"	use="required"/>
+			<xs:attribute name="subkind"			type="xs:string"	use="required"/>
+			<xs:attribute name="context"			type="xs:string"	use="optional"/>
+			<xs:attribute name="variant"			type="xs:string"	use="optional"/>
+			<xs:attribute name="generation_type"	type="xs:string"	use="optional"/>
+		</xs:complexType>
+	</xs:element>
 
-</xsd:schema>
+</xs:schema>

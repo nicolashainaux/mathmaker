@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<xsd:include schemaLayout="layout.xsd"/>
-	<xsd:include schemaLayout="exercise.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="layout.xsd"/>
+	<xs:include schemaLocation="exercise.xsd"/>
 
-	<xsd:element name="sheet">
-		<xsd:complexType>
-			<xsd:attribute name="header"		type="xsd:string"	use="optional"	default=""/>
-			<xsd:attribute name="title"			type="xsd:string"	use="required"/>
-			<xsd:attribute name="subtitle"		type="xsd:string"	use="optional"	default=""/>
-			<xsd:attribute name="text"			type="xsd:string"	use="optional"	default=""/>
-			<xsd:attribute name="answers_title"	type="xsd:string"	use="optional"	default="Answers"/>
-			<xsd:sequence>
-				<xsd:element ref="layout" 	minOccurs="1"	maxOccurs="1"/>
-				<xsd:element ref="exercise"	minOccurs="1"	maxOccurs="unbounded"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
+	<xs:element name="sheet">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="layout"/>
+				<xs:element ref="exercise"	minOccurs="1"	maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="header"		type="xs:string"	use="optional"	default=""/>
+			<xs:attribute name="title"			type="xs:string"	use="required"/>
+			<xs:attribute name="subtitle"		type="xs:string"	use="optional"	default=""/>
+			<xs:attribute name="text"			type="xs:string"	use="optional"	default=""/>
+			<xs:attribute name="answers_title"	type="xs:string"	use="optional"	default="Answers"/>
+		</xs:complexType>
+	</xs:element>
 
-</xsd:schema>
+</xs:schema>

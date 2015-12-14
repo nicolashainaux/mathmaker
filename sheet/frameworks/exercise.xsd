@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<xsd:include schemaLayout="question.xsd"/>
-	<xsd:include schemaLayout="mix.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="question.xsd"/>
+	<xs:include schemaLocation="mix.xsd"/>
 
-	<xsd:element name="exercise">
-		<xsd:complexType>
-			<xsd:attribute name="id"			type="xsd:string"	use="optional"	default="generic"/>
-			<xsd:attribute name="kind"			type="xsd:string"	use="required"/>
-			<xsd:attribute name="subkind"		type="xsd:string"	use="optional"	default=""/>
-			<xsd:attribute name="text"			type="xsd:string"	use="optional"	default=""/>
-			<xsd:choice>
-				<xsd:element ref="question"/>
-				<xsd:element ref="mix"/>
-			</xsd:choice>
-			<xsd:all>
-				<xsd:element ref="question" 	minOccurs="0"	maxOccurs="unbounded"/>
-				<xsd:element ref="mix"			minOccurs="0"	maxOccurs="unbounded"/>
-			</xsd:all>
-		</xsd:complexType>
-	</xsd:element>
+	<xs:element name="exercise">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:choice>
+					<xs:element ref="mix"/>
+					<xs:element ref="question"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id"				type="xs:string"	use="optional"	default="generic"/>
+			<xs:attribute name="kind"			type="xs:string"	use="required"/>
+			<xs:attribute name="subkind"		type="xs:string"	use="optional"	default=""/>
+			<xs:attribute name="text"			type="xs:string"	use="optional"	default=""/>
+		</xs:complexType>
+	</xs:element>
 
-</xsd:schema>
+</xs:schema>

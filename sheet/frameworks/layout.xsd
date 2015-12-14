@@ -1,49 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-	<xsd:simpleType name="layoutType">
-		<xsd:restriction base="xsd:string">
-		<xsd:enumeration value="std"/>
-		<xsd:enumeration value="short_test"/>
-		<xsd:enumeration value="mini_test"/>
-		<xsd:enumeration value="equations"/>
-		<xsd:enumeration value="mental"/>
-	  	</xsd:restriction>
-	</xsd:simpleType>
+	<xs:simpleType name="layoutType">
+		<xs:restriction base="xs:string">
+		<xs:enumeration value="std"/>
+		<xs:enumeration value="short_test"/>
+		<xs:enumeration value="mini_test"/>
+		<xs:enumeration value="equations"/>
+		<xs:enumeration value="mental"/>
+	  	</xs:restriction>
+	</xs:simpleType>
 
 	<!-- This will need to change when the xsd will be applied to all sheets -->
-	<xsd:simpleType name="nbLineType">
-		<xsd:restriction base="xsd:string">
-		<xsd:enumeration value="None"/>
-	  	</xsd:restriction>
-	</xsd:simpleType>
+	<xs:simpleType name="nbLineType">
+		<xs:restriction base="xs:string">
+		<xs:enumeration value="None"/>
+	  	</xs:restriction>
+	</xs:simpleType>
 
-	<xsd:element name="line">
-		<xsd:complexType>
-			<xsd:attribute	name="nb"			type="nbLineType"	use="required"/>
-			<xs:element 	name="exercises"	type="xs:string"	minOccurs="1"		maxOccurs="unbounded"/>
-		</xsd:complexType>
-	</xsd:element>
+	<xs:element name="line">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element 	name="exercises"	type="xs:string"	minOccurs="1"		maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute	name="nb"			type="nbLineType"	use="required"/>
+		</xs:complexType>
+	</xs:element>
 
-	<xsd:complexType name="partType">
-		<xsd:element ref="line"	minOccurs="1" maxOccurs="unbounded">
-	</xsd:complexType>
+	<xs:complexType name="partType">
+		<xs:sequence>
+			<xs:element ref="line"	minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
 	
-	<xsd:element name="layout">
-		<xsd:complexType>
-			<xsd:attribute name="type"				type="layoutType"	use="required"/>
-			<xsd:attribute name="unit" 				type="xsd:string"	use="optional"	default="cm"/>
-			<xsd:attribute name="font_size_offset"	type="xsd:integer"	use="optional"	default="0"/>
+	<xs:element name="layout">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="exc"	type="partType"	minOccurs="1" maxOccurs="1">
+				</xs:element>
+				<xs:element name="ans" type="partType"	minOccurs="1" maxOccurs="1">
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="type"				type="layoutType"	use="required"/>
+			<xs:attribute name="unit" 				type="xs:string"	use="optional"	default="cm"/>
+			<xs:attribute name="font_size_offset"	type="xs:integer"	use="optional"	default="0"/>
+		</xs:complexType>
+	</xs:element>
 
-			<xsd:sequence>
-				<xsd:element name="exc"	type="partType"	minOccurs="1" maxOccurs="1">
-				</xsd:element>
-				<xsd:element name="ans" type="partType"	minOccurs="1" maxOccurs="1">
-				</xsd:element>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-</xsd:schema>
+</xs:schema>
 

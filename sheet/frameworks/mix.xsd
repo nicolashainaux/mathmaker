@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<xsd:include schemaLayout="nb_source.xsd"/>
-	<xsd:include schemaLayout="question.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="nb_source.xsd"/>
+	<xs:include schemaLocation="question.xsd"/>
 
-	<xsd:element name="mix">
-		<xsd:complexType>
-			<xsd:all>
-				<xsd:element ref="question" 	minOccurs="1"	maxOccurs="unbounded"/>
-				<xsd:element ref="nb_source"	minOccurs="1"	maxOccurs="unbounded"/>
-			</xsd:all>
-		</xsd:complexType>
-	</xsd:element>
+	<xs:element name="mix">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="question" 	minOccurs="1"	maxOccurs="unbounded"/>
+				<xs:element ref="nb_source"	minOccurs="1"	maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
-</xsd:schema>
+</xs:schema>
