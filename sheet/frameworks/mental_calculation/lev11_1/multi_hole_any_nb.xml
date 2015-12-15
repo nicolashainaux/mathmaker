@@ -26,11 +26,11 @@
 	<exercise id="mental_calculation" kind="tabular">
 
 		<question kind="multi" subkind="hole">
-			<table_2_9>8</table_2_9>
-			<int_irreducible_frac>7</int_irreducible_frac>
-			<table_15>2</table_15>
-			<table_25>2</table_25>
-			<table_11>1</table_11>
+			<nb source="table_2_9">8</nb>
+			<nb source="int_irreducible_frac">7</nb>
+			<nb source="table_15">2</nb>
+			<nb source="table_25">2</nb>
+			<nb source="table_11">1</nb>
 		</question>
 
 	</exercise>

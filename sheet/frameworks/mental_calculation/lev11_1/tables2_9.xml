@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- DEFAULT MENTAL CALCULATION SHEET -->
-
-
 <sheet header="" title="Mental calculation" subtitle="" text="" answers_title="Answers">
 
 	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
@@ -28,7 +25,7 @@
 		<!-- Default value (planned): context="none" 
 			 No default for kind and subkind, they must be given -->
 		<question kind="multi" subkind="direct">
-			<table_2_9>20</table_2_9>
+			<nb source="table_2_9">20</nb>
 		</question>
 
 	</exercise>

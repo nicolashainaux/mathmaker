@@ -29,60 +29,60 @@
 			 No default for kind and subkind, they must be given -->
 
 		<question kind="vocabulary" subkind="half">
-			<table_2>1</table_2>
+			<nb source="table_2">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="third">
-			<table_3>1</table_3>
+			<nb source="table_3">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="quarter">
-			<table_4>1</table_4>
+			<nb source="table_4">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="double">
-			<table_2>1</table_2>
+			<nb source="table_2">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="triple">
-			<table_3>1</table_3>
+			<nb source="table_3">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="quadruple">
-			<table_4>1</table_4>
+			<nb source="table_4">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="simple_parts_of_a_number">
-			<auto_11_50>1</auto_11_50>
+			<nb source="auto_11_50">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="simple_multiples_of_a_number">
-			<auto_11_50>1</auto_11_50>
+			<nb source="auto_11_50">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="multi">
-			<table_2_9>1</table_2_9>
-			<table_15>1</table_15>
-			<table_25>1</table_25>
-			<table_11>1</table_11>
+			<nb source="table_2_9">1</nb>
+			<nb source="table_15">1</nb>
+			<nb source="table_25">1</nb>
+			<nb source="table_11">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="divi">
-			<table_2_9>3</table_2_9>
+			<nb source="table_2_9">3</nb>
 		</question>
 		
 		<question kind="vocabulary" subkind="addi">
-			<integers_10_100_for_sums_diffs>1</integers_10_100_for_sums_diffs>
-			<table_2_9_for_sums_diffs>1</table_2_9_for_sums_diffs>
+			<nb source="integers_10_100_for_sums_diffs">1</nb>
+			<nb source="table_2_9_for_sums_diffs">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="subtr">
-			<integers_10_100_for_sums_diffs>1</integers_10_100_for_sums_diffs>
-			<decimals_0_20_1>1</decimals_0_20_1>
+			<nb source="integers_10_100_for_sums_diffs">1</nb>
+			<nb source="decimals_0_20_1">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="operation">
-			<auto_vocabulary>1</auto_vocabulary>
+			<nb source="auto_vocabulary">1</nb>
 		</question>
 
 	</exercise>

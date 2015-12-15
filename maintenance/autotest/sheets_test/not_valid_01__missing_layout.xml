@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sheet header="" title="" subtitle="" text="" answers_title="">
+
+
+	<!-- The layout section is missing -->
+
+	<exercise id="mental_calculation" kind="tabular">
+
+		<question kind="multi" subkind="direct">
+			<table_2_9>5</table_2_9>
+		</question>
+
+	</exercise>
+
+</sheet>

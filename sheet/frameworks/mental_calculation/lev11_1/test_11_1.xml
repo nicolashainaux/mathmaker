@@ -28,43 +28,43 @@
 		<!-- Default value (planned): context="none" 
 			 No default for kind and subkind, they must be given -->
 		<question kind="multi" subkind="direct">
-			<table_2_9>4</table_2_9>
-			<table_11>1</table_11>
-			<decimal_and_one_digit>1</decimal_and_one_digit>
+			<nb source="table_2_9">4</nb>
+			<nb source="table_11">1</nb>
+			<nb source="decimal_and_one_digit">1</nb>
 		</question>
 
 		<question kind="multi" subkind="reversed">
-			<table_2_9>2</table_2_9>
+			<nb source="table_2_9">2</nb>
 		</question>
 
 		<question kind="multi" subkind="direct" variant="decimal1">
 			<!-- One should be replaced by a problem, later -->
-			<table_2_9>3</table_2_9>
+			<nb source="table_2_9">3</nb>
 		</question>
 
 		<question kind="multi" subkind="direct" variant="decimal2">
-			<table_2_9>2</table_2_9>
+			<nb source="table_2_9">3</nb>
 		</question>
 
 		<question kind="multi" subkind="hole">
-			<table_2_9>1</table_2_9>
-			<int_irreducible_frac>1</int_irreducible_frac>
+			<nb source="table_2_9">1</nb>
+			<nb source="int_irreducible_frac">1</nb>
 		</question>
 
 		<question kind="divi" subkind="direct">
-			<table_2_9>3</table_2_9>
+			<nb source="table_2_9">3</nb>
 		</question>
 
 		<question kind="rank" subkind="reversed">
-			<rank_word>1</rank_word>
+			<nb source="rank_word">1</nb>
 		</question>
 
 		<question kind="rank" subkind="direct">
-			<rank_word>1</rank_word>
+			<nb source="rank_word">1</nb>
 		</question>
 
 		<question kind="rank" subkind="numberof" generation_type="default">
-			<rank_word>1</rank_word>
+			<nb source="rank_word">1</nb>
 		</question>
 
 		

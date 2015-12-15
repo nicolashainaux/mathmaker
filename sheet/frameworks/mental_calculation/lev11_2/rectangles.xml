@@ -26,28 +26,28 @@
 	<exercise id="mental_calculation" kind="tabular">
 
 		<question kind="area" subkind="rectangle">
-			<table_2_9>2</table_2_9>
-			<table_11>2</table_11>
-			<table_15>2</table_15>
-			<table_25>2</table_25>
-			<decimal_and_10_100_1000>2</decimal_and_10_100_1000>
-			<decimal_and_one_digit>2</decimal_and_one_digit>
+			<nb source="table_2_9">2</nb>
+			<nb source="table_11">2</nb>
+			<nb source="table_15">2</nb>
+			<nb source="table_25">2</nb>
+			<nb source="decimal_and_10_100_1000">2</nb>
+			<nb source="decimal_and_one_digit">2</nb>
 		</question>
 			
 		<question kind="area" subkind="rectangle" variant="decimal1">
-			<table_2_9>1</table_2_9>
+			<nb source="table_2_9">1</nb>
 		</question>
 
 		<question kind="area" subkind="rectangle" variant="decimal2">
-			<table_2_9>1</table_2_9>
+			<nb source="table_2_9">1</nb>
 		</question>
 
 		<question kind="divi" subkind="direct" context="area_width_length_rectangle">
-			<table_2_9>3</table_2_9>
+			<nb source="table_2_9">3</nb>
 		</question>
 
 		<question kind="divi" subkind="direct" variant="decimal" context="area_width_length_rectangle">
-			<table_2_9>3</table_2_9>
+			<nb source="table_2_9">3</nb>
 		</question>
 
 	</exercise>

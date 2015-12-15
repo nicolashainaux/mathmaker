@@ -6,13 +6,14 @@
 	<xs:element name="question">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="nb_source" minOccurs="0"	maxOccurs="unbounded"/>
+				<xs:element ref="nb" minOccurs="0"	maxOccurs="unbounded"/>
 			</xs:sequence>
-			<xs:attribute name="kind"				type="xs:string"	use="required"/>
-			<xs:attribute name="subkind"			type="xs:string"	use="required"/>
-			<xs:attribute name="context"			type="xs:string"	use="optional"/>
-			<xs:attribute name="variant"			type="xs:string"	use="optional"/>
-			<xs:attribute name="generation_type"	type="xs:string"	use="optional"/>
+			<xs:attribute name="kind"							type="xs:string"	use="required"/>
+			<xs:attribute name="subkind"						type="xs:string"	use="required"/>
+			<xs:attribute name="context"						type="xs:string"	use="optional"/>
+			<xs:attribute name="variant"						type="xs:string"	use="optional"/>
+			<xs:attribute name="rank_matches_invisible_zero"	type="xs:string"	use="optional"/>
+			<xs:attribute name="generation_type"				type="xs:string"	use="optional"/>
 		</xs:complexType>
 	</xs:element>
 

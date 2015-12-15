@@ -32,23 +32,23 @@
 							  rank_matches_invisible_zero: any string means True except "False" and "" 
 										(no effect in case of rank direct questions)  -->
 		<question kind="rank" subkind="numberof" generation_type="default">
-			<rank_word>5</rank_word>
+			<nb source="rank_word">5</nb>
 		</question>
 
 		<question kind="rank" subkind="reversed">
-			<rank_word>6</rank_word>
+			<nb source="rank_word">6</nb>
 		</question>
 
 		<question kind="rank" subkind="direct">
-			<rank_word>6</rank_word>
+			<nb source="rank_word">6</nb>
 		</question>
 
 		<question kind="rank" subkind="reversed" rank_matches_invisible_zero="True">
-			<rank_word>2</rank_word>
+			<nb source="rank_word">2</nb>
 		</question>
 	
 		<question kind="rank" subkind="numberof" rank_matches_invisible_zero="True" generation_type="default">
-			<rank_word>1</rank_word>
+			<nb source="rank_word">1</nb>
 		</question>
 
 	</exercise>

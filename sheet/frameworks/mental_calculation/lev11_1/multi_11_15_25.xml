@@ -26,14 +26,14 @@
 	<exercise id="mental_calculation" kind="tabular">
 
 		<question kind="multi" subkind="direct">
-			<table_11>6</table_11>
-			<table_15>5</table_15>
-			<table_25>5</table_25>
+			<nb source="table_11">6</nb>
+			<nb source="table_15">5</nb>
+			<nb source="table_25">5</nb>
 		</question>
 
 		<question kind="multi" subkind="hole">
-			<table_15>2</table_15>
-			<table_25>2</table_25>
+			<nb source="table_15">2</nb>
+			<nb source="table_25">2</nb>
 		</question>
 
 	</exercise>

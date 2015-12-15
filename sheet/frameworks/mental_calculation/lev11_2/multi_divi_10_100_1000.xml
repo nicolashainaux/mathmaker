@@ -26,11 +26,11 @@
 	<exercise id="mental_calculation" kind="tabular">
 
 		<question kind="multi" subkind="direct">
-			<decimal_and_10_100_1000>10</decimal_and_10_100_1000>
+			<nb source="decimal_and_10_100_1000">10</nb>
 		</question>
 
 		<question kind="divi" subkind="direct">
-			<decimal_and_10_100_1000>10</decimal_and_10_100_1000>
+			<nb source="decimal_and_10_100_1000">10</nb>
 		</question>
 
 

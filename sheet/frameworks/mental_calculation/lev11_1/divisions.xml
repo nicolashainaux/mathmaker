@@ -28,7 +28,7 @@
 		<!-- Default value (planned): context="none" 
 			 No default for kind and subkind, they must be given -->
 		<question kind="divi" subkind="direct">
-			<table_2_9>20</table_2_9>
+			<nb source="table_2_9">20</nb>
 		</question>
 
 	</exercise>

@@ -8,42 +8,43 @@
 		</xs:restriction>
 	</xs:simpleType>
 
+	<xs:simpleType name="sourceNameType">
+		<xs:restriction  base="xs:string">
+			<xs:enumeration value="table_2_9"/>
+			<xs:enumeration value="table_2"/>
+			<xs:enumeration value="table_3"/>
+			<xs:enumeration value="table_4"/>
+			<xs:enumeration value="table_2_11_50"/>
+			<xs:enumeration value="table_3_11_50"/>
+			<xs:enumeration value="table_3_11_50"/>
+			<xs:enumeration value="table_2_9_for_sums_diffs"/>
+			<xs:enumeration value="table_11"/>
+			<xs:enumeration value="table_15"/>
+			<xs:enumeration value="table_25"/>
+			<xs:enumeration value="int_irreducible_frac"/>
+			<xs:enumeration value="rank_word"/>
+			<xs:enumeration value="integers_10_100"/>
+			<xs:enumeration value="integers_10_100_for_sums_diffs"/>
+			<xs:enumeration value="decimals_0_20_1"/>
+			<xs:enumeration value="decimal_and_10_100_1000"/>
+			<xs:enumeration value="decimal_and_one_digit"/>
+			<xs:enumeration value="auto_table"/>
+			<xs:enumeration value="auto_11_50"/>
+			<xs:enumeration value="auto_vocabulary"/>
+		</xs:restriction>
+	</xs:simpleType>
+
 	<xs:complexType name="nbSourceType">
-        <xs:simpleContent> 
-            <xs:extension base="nonNullPositiveInteger">  
-				<xs:attribute name="context"			type="xs:string"	use="optional"/>
-				<xs:attribute name="variant"			type="xs:string"	use="optional"/>
-				<xs:attribute name="generation_type"	type="xs:string"	use="optional"/>
-            </xs:extension>  
+        <xs:simpleContent>
+            <xs:extension base="nonNullPositiveInteger">
+				<xs:attribute name="source"				type="sourceNameType"	use="required"/>
+				<xs:attribute name="context"			type="xs:string"		use="optional"/>
+				<xs:attribute name="variant"			type="xs:string"		use="optional"/>
+				<xs:attribute name="generation_type"	type="xs:string"		use="optional"/>
+            </xs:extension>
         </xs:simpleContent>
 	</xs:complexType>
 
-	<xs:element name="nb_source">
-		<xs:complexType>
-			<xs:choice>
-				<xs:element name="table_2_9" type="nbSourceType"/>
-				<xs:element name="table_2" type="nbSourceType"/>
-				<xs:element name="table_3" type="nbSourceType"/>
-				<xs:element name="table_4" type="nbSourceType"/>
-				<xs:element name="table_2_11_50" type="nbSourceType"/>
-				<xs:element name="table_3_11_50" type="nbSourceType"/>
-				<xs:element name="table_4_11_50" type="nbSourceType"/>
-				<xs:element name="table_2_9_for_sums_diffs" type="nbSourceType"/>
-				<xs:element name="table_11" type="nbSourceType"/>
-				<xs:element name="table_15" type="nbSourceType"/>
-				<xs:element name="table_25" type="nbSourceType"/>
-				<xs:element name="int_irreducible_frac" type="nbSourceType"/>
-				<xs:element name="rank_word" type="nbSourceType"/>
-				<xs:element name="integers_10_100" type="nbSourceType"/>
-				<xs:element name="integers_10_100_for_sums_diffs" type="nbSourceType"/>
-				<xs:element name="decimals_0_20_1" type="nbSourceType"/>
-				<xs:element name="decimal_and_10_100_1000" type="nbSourceType"/>
-				<xs:element name="decimal_and_one_digit" type="nbSourceType"/>
-				<xs:element name="auto_table" type="nbSourceType"/>
-				<xs:element name="auto_11_50" type="nbSourceType"/>
-				<xs:element name="auto_vocabulary" type="nbSourceType"/>
-			</xs:choice>
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="nb" type="nbSourceType"></xs:element>
 
 </xs:schema>

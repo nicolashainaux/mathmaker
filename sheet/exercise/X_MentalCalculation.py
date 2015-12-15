@@ -82,19 +82,30 @@ def get_q_kinds_from_file(file_name):
                 if subchild.tag == 'question':
                     for elt in subchild:
                         questions += [[subchild.attrib,
-                                       elt.tag, int(elt.text)]]
+                                       elt.attrib['source'], int(elt.text)]]
                 elif subchild.tag == 'mix':
                     q_temp_list = []
                     n_temp_list = []
                     for elt in subchild:
                         if elt.tag == 'question':
                             q_temp_list += [elt.attrib]
-                        elif elt.tag in question.USER_Q_SUBKIND_VALUES:
-                            n_temp_list += [[elt.tag, elt.attrib, 1] \
-                                            for i in range(int(elt.text))]
+                        elif elt.tag == 'nb':
+                            # We don't check that 'source' is in elt.attrib,
+                            # this should have been checked by the xml schema
+                            if elt.attrib['source'] \
+                                            in question.USER_Q_SUBKIND_VALUES:
+                            #___
+                                n_temp_list += [[elt.attrib['source'],
+                                                 elt.attrib,
+                                                 1] \
+                                                for i in range(int(elt.text))]
+                            else:
+                                raise error.XMLFileFormatError(\
+                                "Unknown source found in the xml file: " \
+                                + elt.attrib['source'])
                         else:
                             raise error.XMLFileFormatError(\
-                            "Unknown tag found in the xml file: " + elt.tag)
+                            "Unknown element found in the xml file: " + elt.tag)
 
                     if len(q_temp_list) != len(n_temp_list):
                         raise error.XMLFileFormatError(\
@@ -108,11 +119,11 @@ def get_q_kinds_from_file(file_name):
                     # to just distribute them all randomly.
                     for n in n_temp_list:
                         for q in q_temp_list:
-                            if not elt.tag \
+                            if not n[0] \
             in question.AVAILABLE_Q_KIND_VALUES[q['kind'] + "_" + q['subkind']]:
                             #___
                                 raise error.XMLFileFormatError(\
-                                "This source: " + str(elt.tag) + " cannot be " \
+                                "This source: " + str(n[0]) + " cannot be " \
                                 + "attributed to this question: " \
                                 + str(q['kind'] + "_" + q['subkind']))
 
@@ -385,6 +396,8 @@ class X_MentalCalculation(X_Structure):
                 nb_box[second_source].discard(nb_to_use)
 
             else:
+                #if len(nb_box[nb_source]) == 0:
+                #    nb_box[nb_source] = question.generate_numbers(nb_source)
                 nb_box_shuffled = list(nb_box[nb_source])
                 random.shuffle(nb_box_shuffled)
                 nb_to_use = nb_box_shuffled.pop()
