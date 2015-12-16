@@ -28,6 +28,8 @@ DM = D + "mental_calculation/"
 L11_1 = "lev11_1/"
 L11_2 = "lev11_2/"
 
+XML_SCHEMA_PATH = D + "sheet.xsd"
+
 XML_SHEETS = { 'tables2_9' : DM + L11_1 + "tables2_9.xml",
                'divisions' : DM + L11_1 + "divisions.xml",
                'multi_hole_tables2_9' : DM + L11_1 + "multi_hole_tables2_9.xml",

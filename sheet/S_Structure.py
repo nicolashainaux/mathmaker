@@ -20,20 +20,35 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import subprocess
 import xml.etree.ElementTree as XML_PARSER
 
-from .catalog import CATALOG
+from .catalog import CATALOG, XML_SCHEMA_PATH
 from lib import error
 from lib.common.cst import *
+from lib.common.cfg import CONFIG
 
 # --------------------------------------------------------------------------
 ##
 #   @brief Gets the questions' kinds from the given file.
 def get_sheet_config(file_name):
-    try:
-        xml_doc = XML_PARSER.parse(file_name).getroot()
-    except FileNotFoundError:
-        raise error.UnreachableData("the file named : " + str(file_name))
+    # Validation of the xml file
+    # xmllint --noout --schema sheet.xsd file_name
+    with open(XML_SCHEMA_PATH, 'r') as schema_file:
+        call_xmllint = subprocess.Popen([CONFIG["PATHS"]["XMLLINT"],
+                                         "--noout",
+                                         "--schema",
+                                         XML_SCHEMA_PATH,
+                                         file_name],
+                                        stderr=subprocess.PIPE)
+        returncode = call_xmllint.wait()
+        if returncode != 0:
+            raise error.XMLFileFormatError(\
+            "\nxmllint exited with a return code of " + str(returncode) + "\n"\
+            + "xmllint error message is:\n" \
+            + str(call_xmllint.stderr.read().decode(encoding='UTF-8')))
+
+    xml_doc = XML_PARSER.parse(file_name).getroot()
 
     sheet_layout = { 'exc' : [],
                      'ans' : []
