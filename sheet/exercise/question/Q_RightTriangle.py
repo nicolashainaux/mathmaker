@@ -284,17 +284,17 @@ class Q_RightTriangle(Q_Structure):
                                rotate_around_isobarycenter=rotation_option
                               )
 
-            self.right_triangle.leg0.set_label(Value(sides_values[0],
+            self.right_triangle.leg[0].set_label(Value(sides_values[0],
                                                      unit=sides_units[0])
                                               )
-            self.right_triangle.leg1.set_label(Value(sides_values[1],
+            self.right_triangle.leg[1].set_label(Value(sides_values[1],
                                                      unit=sides_units[1])
                                               )
             self.right_triangle.hypotenuse.set_label(Value(sides_values[2],
                                                            unit=sides_units[2])
                                                     )
 
-            for side in self.right_triangle.sides:
+            for side in self.right_triangle.side:
                 if side.label.raw_value == "":
                     self.unknown_side = side.clone()
                 else:
@@ -358,10 +358,10 @@ class Q_RightTriangle(Q_Structure):
                                rotate_around_isobarycenter=rotation_option
                              )
 
-            self.right_triangle.leg0.set_label(Value(sides_values[0],
+            self.right_triangle.leg[0].set_label(Value(sides_values[0],
                                                      unit=sides_units[0])
                                               )
-            self.right_triangle.leg1.set_label(Value(sides_values[1],
+            self.right_triangle.leg[1].set_label(Value(sides_values[1],
                                                      unit=sides_units[1])
                                               )
             self.right_triangle.hypotenuse.set_label(Value(sides_values[2],
@@ -397,7 +397,7 @@ class Q_RightTriangle(Q_Structure):
                 result += _("The triangle {triangle_name} has a right \
                 angle in {right_vertex}.")\
                     .format(triangle_name=str(self.right_triangle.name),
-                            right_vertex=str(self.right_triangle.vertex1.name))
+                           right_vertex=str(self.right_triangle.vertex[1].name))
 
                 result += " " + str(self.known_sides[0].length_name) \
                        + " = " \
@@ -428,9 +428,9 @@ class Q_RightTriangle(Q_Structure):
                 result += M.insert_picture(self.right_triangle)
 
             else:
-                sides_copy = [self.right_triangle.sides[0].clone(),
-                              self.right_triangle.sides[1].clone(),
-                              self.right_triangle.sides[2].clone()
+                sides_copy = [self.right_triangle.side[0].clone(),
+                              self.right_triangle.side[1].clone(),
+                              self.right_triangle.side[2].clone()
                              ]
                 side0 = randomly.pop(sides_copy)
                 side1 = randomly.pop(sides_copy)
@@ -471,7 +471,7 @@ class Q_RightTriangle(Q_Structure):
             result = _("The triangle {triangle_name} has a right angle in \
                        {right_vertex}.")\
                     .format(triangle_name=str(self.right_triangle.name),
-                            right_vertex=str(self.right_triangle.vertex1.name))
+                          right_vertex=str(self.right_triangle.vertex[1].name))
 
             result += M.write_new_line()
 
@@ -539,33 +539,33 @@ class Q_RightTriangle(Q_Structure):
 
             legs_equality = Equality([\
                                   Sum([Item(('+',
-                                       self.right_triangle.leg0.length_name,
+                                       self.right_triangle.leg[0].length_name,
                                        2)),
                                        Item(('+',
-                                       self.right_triangle.leg1.length_name,
+                                       self.right_triangle.leg[1].length_name,
                                        2))
                                        ]),
                                   Sum([Item(('+',
-                                       self.right_triangle.leg0.label.raw_value,
+                                       self.right_triangle.leg[0].label.raw_value,
                                        2)),
                                        Item(('+',
-                                       self.right_triangle.leg1.label.raw_value,
+                                       self.right_triangle.leg[1].label.raw_value,
                                        2))
                                        ])
                                      ])
             legs_equality_step2 = Equality([\
                                   Sum([Item(('+',
-                                       self.right_triangle.leg0.length_name,
+                                       self.right_triangle.leg[0].length_name,
                                        2)),
                                        Item(('+',
-                                       self.right_triangle.leg1.length_name,
+                                       self.right_triangle.leg[1].length_name,
                                        2))
                                       ]),
                                   Item(Sum([Item(('+',
-                                       self.right_triangle.leg0.label.raw_value,
+                                       self.right_triangle.leg[0].label.raw_value,
                                        2)),
                                        Item(('+',
-                                       self.right_triangle.leg1.label.raw_value,
+                                       self.right_triangle.leg[1].label.raw_value,
                                        2))
                                           ]).evaluate()
                                        )
@@ -591,7 +591,7 @@ class Q_RightTriangle(Q_Structure):
                 result += _("{triangle_name} has a right angle\
                  in {right_vertex}.")\
                  .format(triangle_name=str(self.right_triangle.name),
-                         right_vertex=str(self.right_triangle.vertex1.name))
+                         right_vertex=str(self.right_triangle.vertex[1].name))
 
             elif self.q_kind == 'contrapositive_of_pythagorean_theorem':
                 result += M.write_math_style1(\

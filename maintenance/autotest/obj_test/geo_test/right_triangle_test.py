@@ -56,8 +56,8 @@ def action():
                        ),
                        rotate_around_isobarycenter='no'
                       )
-    t1.leg0.set_label(Value(4, unit='cm'))
-    t1.leg1.set_label(Value(3, unit='cm'))
+    t1.leg[0].set_label(Value(4, unit='cm'))
+    t1.leg[1].set_label(Value(3, unit='cm'))
     t1.hypotenuse.set_label(Value(5, unit='cm'))
 
     check(t1.into_euk(),
@@ -83,8 +83,8 @@ def action():
                        ),
                        rotate_around_isobarycenter=30
                       )
-    t2.leg0.set_label(Value(4, unit='cm'))
-    t2.leg1.set_label(Value(3, unit='cm'))
+    t2.leg[0].set_label(Value(4, unit='cm'))
+    t2.leg[1].set_label(Value(3, unit='cm'))
     t2.hypotenuse.set_label(Value(5, unit='cm'))
 
     check(t2.into_euk(),
@@ -111,8 +111,8 @@ def action():
                        ),
                        rotate_around_isobarycenter=75
                       )
-    t3.leg0.set_label(Value(3.2, unit='cm'))
-    t3.leg1.set_label(Value(4.5, unit='cm'))
+    t3.leg[0].set_label(Value(3.2, unit='cm'))
+    t3.leg[1].set_label(Value(4.5, unit='cm'))
     t3.hypotenuse.set_label(Value(""))
 
     check(t3.into_euk(),
@@ -139,12 +139,12 @@ def action():
                        rotate_around_isobarycenter=140
                       )
 
-    t4.leg0.set_label(Value(1.5, unit='cm'))
-    t4.leg1.set_label(Value(""))
+    t4.leg[0].set_label(Value(1.5, unit='cm'))
+    t4.leg[1].set_label(Value(""))
     t4.hypotenuse.set_label(Value(7, unit='cm'))
-    t4.angle0.set_mark("back")
-    t4.angle2.set_mark("dotted")
-    t4.angle0.set_label(Value(30, unit="\\textdegree"))
+    t4.angle[0].set_mark("back")
+    t4.angle[2].set_mark("dotted")
+    t4.angle[0].set_label(Value(30, unit="\\textdegree"))
 
     check(t4.into_euk(),
           ["box -2.78, -1.41, 4.45, 5.15"\
@@ -205,13 +205,13 @@ def action():
                        rotate_around_isobarycenter=0
                       )
 
-    t5.leg0.set_label(Value(1, unit='cm'))
-    t5.leg1.set_label(Value(8, unit='cm'))
+    t5.leg[0].set_label(Value(1, unit='cm'))
+    t5.leg[1].set_label(Value(8, unit='cm'))
     t5.hypotenuse.set_label(Value("?"))
-    t5.angle0.set_mark("simple")
-    t5.angle2.set_mark("double")
-    t5.angle0.set_label(Value(64, unit="\\textdegree"))
-    t5.angle2.set_label(Value(80, unit="\\textdegree"))
+    t5.angle[0].set_mark("simple")
+    t5.angle[2].set_mark("double")
+    t5.angle[0].set_label(Value(64, unit="\\textdegree"))
+    t5.angle[2].set_label(Value(80, unit="\\textdegree"))
 
     check(t5.into_euk(),
           ["box -0.6, -0.6, 1.6, 8.6"\

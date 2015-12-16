@@ -52,9 +52,6 @@ try:
 except:
     locale.setlocale(locale.LC_ALL, '')
 
-# GLOBAL
-#expression_begins = True
-
 
 
 
@@ -99,9 +96,9 @@ class Triangle(Drawable):
             raise error.WrongArgument(' Triangle|tuple ',
                                       str(type(arg)))
 
-        self._vertices = [None, None, None]
-        self._sides = [None, None, None]
-        self._angles = [None, None, None]
+        self._vertex = [None, None, None]
+        self._side = [None, None, None]
+        self._angle = [None, None, None]
         self._name = ""
         self._rotation_angle = 0
 
@@ -183,7 +180,7 @@ class Triangle(Drawable):
                                "G"
                                )
 
-                self._vertices = (Point(\
+                self._vertex = (Point(\
                                 start_vertex[0].rotate(G,
                                                        self._rotation_angle,
                                                        keep_name=True
@@ -204,53 +201,62 @@ class Triangle(Drawable):
                                   )
 
             else:
-                self._vertices = (start_vertex[0].clone(),
-                                  start_vertex[1].clone(),
-                                  start_vertex[2].clone()
-                                 )
+                self._vertex = (start_vertex[0].clone(),
+                                start_vertex[1].clone(),
+                                start_vertex[2].clone()
+                               )
 
-            self._sides = (Segment((self._vertices[0],
-                                    self._vertices[1]
+            self._side = (Segment((self._vertex[0],
+                                    self._vertex[1]
                                    )
                                   ),
-                           Segment((self._vertices[1],
-                                    self._vertices[2]
+                           Segment((self._vertex[1],
+                                    self._vertex[2]
                                    )
                                   ),
-                           Segment((self._vertices[2],
-                                    self._vertices[0]
+                           Segment((self._vertex[2],
+                                    self._vertex[0]
                                    )
                                   )
                           )
 
-            self._angles[0] = Angle((self.vertex1, self.vertex0, self.vertex2))
-            self._angles[1] = Angle((self.vertex2, self.vertex1, self.vertex0))
-            self._angles[2] = Angle((self.vertex0, self.vertex2, self.vertex1))
+            self._angle[0] = Angle((self.vertex[1],
+                                    self.vertex[0],
+                                    self.vertex[2]))
 
-            self._angles[0].set_label_display_angle(self._angles[0].measure/2)
-            self._angles[1].set_label_display_angle(180 \
-                                                    - self._angles[1].measure/2)
-            self._angles[2].set_label_display_angle(180 \
-                                                    + self._angles[0].measure \
-                                                    + self._angles[2].measure/2)
+            self._angle[1] = Angle((self.vertex[2],
+                                    self.vertex[1],
+                                    self.vertex[0]))
+
+            self._angle[2] = Angle((self.vertex[0],
+                                    self.vertex[2],
+                                    self.vertex[1]))
+
+            self._angle[0].set_label_display_angle(self._angle[0].measure/2)
+            self._angle[1].set_label_display_angle(180 \
+                                                    - self._angle[1].measure/2)
+            self._angle[2].set_label_display_angle(180 \
+                                                    + self._angle[0].measure \
+                                                    + self._angle[2].measure/2)
 
         else:
             # copy of a given Triangle
-            self._vertices = [arg.vertex0.clone(),
-                              arg.vertex1.clone(),
-                              arg.vertex2.clone()
-                             ]
-            self._rotation_angle = arg.rotation_angle
-            self._sides = [arg.side0.clone(),
-                           arg.side1.clone(),
-                           arg.side2.clone()
-                          ]
-            self._angles = [arg.angle0.clone(),
-                            arg.angle1.clone(),
-                            arg.angle2.clone()
+            self._vertex = [arg.vertex[0].clone(),
+                            arg.vertex[1].clone(),
+                            arg.vertex[2].clone()
                            ]
+            self._rotation_angle = arg.rotation_angle
+            self._side = [arg.side[0].clone(),
+                          arg.side[1].clone(),
+                          arg.side[2].clone()
+                         ]
+            self._angle = [arg.angle[0].clone(),
+                           arg.angle[1].clone(),
+                           arg.angle[2].clone()
+                          ]
 
-        self._name = self.vertex0.name + self.vertex1.name + self.vertex2.name
+        self._name = self.vertex[0].name + self.vertex[1].name \
+                     + self.vertex[2].name
 
         random_number = ""
         for i in range(8):
@@ -267,40 +273,32 @@ class Triangle(Drawable):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Returns vertex0 (as a Point)
-    def get_vertex0(self):
-        return self._vertices[0]
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns vertex1 (as a Point)
-    def get_vertex1(self):
-        return self._vertices[1]
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns vertex2 (as a Point)
-    def get_vertex2(self):
-        return self._vertices[2]
-
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
     #   @brief Returns the three vertices (as a list of Points)
-    def get_vertices(self):
-        return self._vertices
+    @property
+    def vertex(self):
+        return self._vertex
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the three sides (as a list of Segments)
+    @property
+    def side(self):
+        return self._side
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the three angles (as a list of Angles)
+    @property
+    def angle(self):
+        return self._angle
 
 
 
@@ -309,132 +307,10 @@ class Triangle(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the angle of rotation around the isobarycenter
-    def get_rotation_angle(self):
+    @property
+    def rotation_angle(self):
         return self._rotation_angle
 
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns angle0 (as an Angle)
-    def get_angle0(self):
-        return self._angles[0]
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns angle1 (as an Angle)
-    def get_angle1(self):
-        return self._angles[1]
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns angle2 (as an Angle)
-    def get_angle2(self):
-        return self._angles[2]
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns [angles]   (as a list of Angles)
-    def get_angles(self):
-        return self._angles
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns side0 (as a Segment)
-    def get_side0(self):
-        return self._sides[0]
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns side1 (as a Segment)
-    def get_side1(self):
-        return self._sides[1]
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns side2 (as a Segment)
-    def get_side2(self):
-        return self._sides[2]
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns [sides]   (as a list of Segments)
-    def get_sides(self):
-        return self._sides
-
-
-
-
-
-    vertex0 = property(get_vertex0,
-                       doc = "First vertex of the Triangle")
-
-    vertex1 = property(get_vertex1,
-                       doc = "Second vertex of the Triangle")
-
-
-    vertex2 = property(get_vertex2,
-                       doc = "Third vertex of the Triangle")
-
-    vertices = property(get_vertices,
-                        doc = "The three vertices (in a list)")
-
-    angle0 = property(get_angle0,
-                      doc = "First angle of the Triangle")
-
-    angle1 = property(get_angle1,
-                      doc = "Second angle of the Triangle")
-
-    angle2 = property(get_angle2,
-                      doc = "Third angle of the Triangle")
-
-    angles = property(get_angles,
-                      doc = "The angles' list of the Triangle")
-
-    rotation_angle = property(get_rotation_angle,
-                              doc = "Angle of rotation around the isobarycenter")
-
-    side0 = property(get_side0,
-                     doc = "First side of the Triangle")
-
-    side1 = property(get_side1,
-                     doc = "Second side of the Triangle")
-
-    side2 = property(get_side2,
-                     doc = "Third side of the Triangle")
-
-    sides = property(get_sides,
-                     doc = "The sides' list of the Triangle")
 
 
 
@@ -453,10 +329,8 @@ class Triangle(Drawable):
 
         result += "\n\n"
 
-        for vertex in self.vertices:
-            result += vertex.name + " = point(" + str(vertex.x) \
-                                              + ", " \
-                                              + str(vertex.y) + ")\n"
+        for v in self.vertex:
+            result += v.name + " = point(" + str(v.x) + ", " + str(v.y) + ")\n"
 
         result += "\n\n"
 
@@ -464,32 +338,32 @@ class Triangle(Drawable):
 
         result += "\n  "
 
-        result += "(" + self.vertex0.name + "." \
-                      + self.vertex1.name + "." \
-                      + self.vertex2.name + ")"
+        result += "(" + self.vertex[0].name + "." \
+                      + self.vertex[1].name + "." \
+                      + self.vertex[2].name + ")"
 
         scale_factor = 1
         angle_correction = 0
 
-        sides_angles_offsets = {self.sides[0] : 0,
-                                self.sides[1] : 180 - self.angle1.measure,
-                                self.sides[2] : self.angle0.measure
+        sides_angles_offsets = {self.side[0] : 0,
+                                self.side[1] : 180 - self.angle[1].measure,
+                                self.side[2] : self.angle[0].measure
                                }
 
-        labels_angle_correction_signs = {self.sides[0] : "-",
-                                         self.sides[1] : "-",
-                                         self.sides[2] : "+"
+        labels_angle_correction_signs = {self.side[0] : "-",
+                                         self.side[1] : "-",
+                                         self.side[2] : "+"
                                         }
 
-        labels_ref_points = {self.sides[0] : self.vertex0.name,
-                             self.sides[1] : self.vertex1.name,
-                             self.sides[2] : self.vertex0.name
+        labels_ref_points = {self.side[0] : self.vertex[0].name,
+                             self.side[1] : self.vertex[1].name,
+                             self.side[2] : self.vertex[0].name
                             }
 
 
-        for side in self.sides:
-            if side.label != None and side.label != Value(""):
-                x = side.length
+        for s in self.side:
+            if s.label != None and s.label != Value(""):
+                x = s.length
                 scale_factor = round(Decimal(str(1.6*x)),
                                      Decimal('0.1'),
                                      rounding=ROUND_UP
@@ -511,7 +385,7 @@ class Triangle(Drawable):
                 label_position_angle = round(Decimal(str(self.rotation_angle))\
                                              + \
                                              Decimal(str(\
-                                                    sides_angles_offsets[side])),
+                                                    sides_angles_offsets[s])),
                                              Decimal('1'),
                                              rounding=ROUND_HALF_EVEN
                                             )
@@ -531,30 +405,30 @@ class Triangle(Drawable):
                 result += "$\\rotatebox{"
                 result += str(rotate_box_angle)
                 result += "}{"
-                result += side.label.into_str(display_unit='yes',
+                result += s.label.into_str(display_unit='yes',
                                            graphic_display='yes')
                 result += "}$ "
-                result += labels_ref_points[side] + " "
+                result += labels_ref_points[s] + " "
                 result += str(label_position_angle)
-                result += " " + labels_angle_correction_signs[side] + " "
+                result += " " + labels_angle_correction_signs[s] + " "
                 result += str(angle_correction) + " deg "
                 result += str(scale_factor)
                 result += "\n"
 
 
-        for angle in self.angles:
-            if angle.label != None and angle.label != Value(""):
+        for a in self.angle:
+            if a.label != None and a.label != Value(""):
                 scale_factor = Decimal('2.7')
-                if Decimal(str(angle.measure)) < Decimal('28.5'):
+                if Decimal(str(a.measure)) < Decimal('28.5'):
                     scale_factor = round(Decimal('38.1')\
-                                              *pow(Decimal(str(angle.measure)),
+                                              *pow(Decimal(str(a.measure)),
                                                    Decimal('-0.8')
                                                   ),
                                          Decimal('0.01'),
                                          rounding=ROUND_HALF_UP
                                          )
 
-                label_position_angle = Decimal(str(angle.label_display_angle)) \
+                label_position_angle = Decimal(str(a.label_display_angle)) \
                                        + Decimal(str(self.rotation_angle))
                 rotate_box_angle = Decimal(label_position_angle)
 
@@ -571,10 +445,10 @@ class Triangle(Drawable):
                 result += "$\\rotatebox{"
                 result += str(rotate_box_angle)
                 result += "}{"
-                result += angle.label.into_str(display_unit='yes',
-                                            graphic_display='yes')
+                result += a.label.into_str(display_unit='yes',
+                                           graphic_display='yes')
                 result += "}$ "
-                result += angle.vertex.name + " "
+                result += a.vertex.name + " "
                 result += str(label_position_angle) + " deg "
                 result += str(scale_factor)
                 result += "\n"
@@ -587,26 +461,26 @@ class Triangle(Drawable):
 
         result += "\n"
 
-        for angle in self.angles:
-            if angle.mark != "":
-                result += "  " + angle.point0.name + ", " \
-                        + angle.vertex.name + ", " \
-                        + angle.point2.name \
+        for a in self.angle:
+            if a.mark != "":
+                result += "  " + a.point0.name + ", " \
+                        + a.vertex.name + ", " \
+                        + a.point2.name \
                         + " " \
-                        + angle.mark
+                        + a.mark
                 result += "\n"
 
-        result += "  " + self.vertex0.name + " " \
+        result += "  " + self.vertex[0].name + " " \
                + str(self.rotation_angle) + " + 200 deg"
 
         result += "\n"
 
-        result += "  " + self.vertex1.name + " " \
+        result += "  " + self.vertex[1].name + " " \
                + str(self.rotation_angle) + " - 45 deg"
 
         result += "\n"
 
-        result += "  " + self.vertex2.name + " " \
+        result += "  " + self.vertex[2].name + " " \
                + str(self.rotation_angle) + " + 65 deg"
 
         result += "\nend"
@@ -623,13 +497,13 @@ class Triangle(Drawable):
     #   @param options Any options
     #   @return (x1, y1, x2, y2)
     def work_out_euk_box(self, **options):
-        x_list = [self.vertex0.x,
-                  self.vertex1.x,
-                  self.vertex2.x
+        x_list = [self.vertex[0].x,
+                  self.vertex[1].x,
+                  self.vertex[2].x
                   ]
-        y_list = [self.vertex0.y,
-                  self.vertex1.y,
-                  self.vertex2.y
+        y_list = [self.vertex[0].y,
+                  self.vertex[1].y,
+                  self.vertex[2].y
                   ]
 
         return (min(x_list)-Decimal("0.6"), min(y_list)-Decimal("0.6"),
@@ -678,9 +552,9 @@ class RightTriangle(Triangle):
             raise error.WrongArgument(' RightTriangle|tuple ',
                                       str(type(arg)))
 
-        self._vertices = [None, None, None]
+        self._vertex = [None, None, None]
         self._rotation_angle = 0
-        self._sides = [None, None, None]
+        self._side = [None, None, None]
         self._name = ""
 
         if type(arg) == tuple:
@@ -751,22 +625,23 @@ class RightTriangle(Triangle):
 
         else:
             # copy of a given RightTriangle
-            self._vertices = [arg.vertex0.clone(),
-                              arg.vertex1.clone(),
-                              arg.vertex2.clone()
-                             ]
-            self._rotation_angle = arg.rotation_angle
-            self._sides = [arg.side0.clone(),
-                           arg.side1.clone(),
-                           arg.side2.clone()
-                          ]
-            self._angles = [arg.angle0.clone(),
-                            arg.angle1.clone(),
-                            arg.angle2.clone()
+            self._vertex = [arg.vertex[0].clone(),
+                            arg.vertex[1].clone(),
+                            arg.vertex[2].clone()
                            ]
+            self._rotation_angle = arg.rotation_angle
+            self._side = [arg.side[0].clone(),
+                          arg.side[1].clone(),
+                          arg.side[2].clone()
+                         ]
+            self._angle = [arg.angle[0].clone(),
+                           arg.angle[1].clone(),
+                           arg.angle[2].clone()
+                          ]
             # the other fields are re-created hereafter
 
-        self._name = self.vertex0.name + self.vertex1.name + self.vertex2.name
+        self._name = self.vertex[0].name + self.vertex[1].name \
+                     + self.vertex[2].name
 
         self.right_angle.set_mark("right")
 
@@ -781,33 +656,12 @@ class RightTriangle(Triangle):
 
 
 
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns leg0 (as a Segment)
-    def get_leg0(self):
-        return self._sides[0]
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns leg1 (as a Segment)
-    def get_leg1(self):
-        return self._sides[1]
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns legs (as a Segment)
-    def get_legs(self):
-        return [self.leg0, self.leg1]
+    @property
+    def leg(self):
+        return [self._side[0], self._side[1]]
 
 
 
@@ -816,8 +670,9 @@ class RightTriangle(Triangle):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns hypotenuse (as a Segment)
-    def get_hypotenuse(self):
-        return self._sides[2]
+    @property
+    def hypotenuse(self):
+        return self._side[2]
 
 
 
@@ -825,28 +680,10 @@ class RightTriangle(Triangle):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Returns Tthe right angle (as an Angle)
-    def get_right_angle(self):
-        return self.angle1
-
-
-
-
-
-    leg0 = property(get_leg0,
-                    doc = "First leg of the Triangle")
-
-    leg1 = property(get_leg1,
-                    doc = "Second leg of the Triangle")
-
-    legs = property(get_legs,
-                    doc = "The two legs of the Right Triangle (in a list)")
-
-    hypotenuse = property(get_hypotenuse,
-                          doc = "Hypotenuse of the Right Triangle")
-
-    right_angle = property(get_right_angle,
-                           doc = "Right Angle of the Right Triangle")
+    #   @brief Returns the right angle (as an Angle)
+    @property
+    def right_angle(self):
+        return self.angle[1]
 
 
 
@@ -859,8 +696,8 @@ class RightTriangle(Triangle):
     def pythagorean_equality(self, **options):
 
         objcts = [Item(('+', self.hypotenuse.length_name, 2)),
-                  Sum([Item(('+', self.leg0.length_name, 2)),
-                       Item(('+', self.leg1.length_name, 2))]
+                  Sum([Item(('+', self.leg[0].length_name, 2)),
+                       Item(('+', self.leg[1].length_name, 2))]
                      )]
 
         return Equality(objcts, **options)
@@ -878,13 +715,13 @@ class RightTriangle(Triangle):
         # and find the unknown side
         n_numeric_data = 0
         unknown_side = ""
-        if self.leg0.label.is_numeric():
+        if self.leg[0].label.is_numeric():
             n_numeric_data += 1
-        elif self.leg0.label.raw_value == "":
+        elif self.leg[0].label.raw_value == "":
             unknown_side = 'leg0'
-        if self.leg1.label.is_numeric():
+        if self.leg[1].label.is_numeric():
             n_numeric_data += 1
-        elif self.leg1.label.raw_value == "":
+        elif self.leg[1].label.raw_value == "":
             unknown_side = 'leg1'
         if self.hypotenuse.label.is_numeric():
             n_numeric_data += 1
@@ -898,32 +735,32 @@ class RightTriangle(Triangle):
 
         # Now create the SubstitutableEquality (so, also create the dictionnary)
         if unknown_side == 'leg0':
-            subst_dict = {Value(self.leg1.length_name): self.leg1.label,
+            subst_dict = {Value(self.leg[1].length_name): self.leg[1].label,
                           Value(self.hypotenuse.length_name): \
                                                         self.hypotenuse.label
                          }
-            objcts = [Item(('+', self.leg0.length_name, 2)),
+            objcts = [Item(('+', self.leg[0].length_name, 2)),
                       Sum([Item(('+', self.hypotenuse.length_name, 2)),
-                           Item(('-', self.leg1.length_name, 2))]
+                           Item(('-', self.leg[1].length_name, 2))]
                          )]
 
         elif unknown_side == 'leg1':
-            subst_dict = {Value(self.leg0.length_name): self.leg0.label,
+            subst_dict = {Value(self.leg[0].length_name): self.leg[0].label,
                           Value(self.hypotenuse.length_name): \
                                                         self.hypotenuse.label
                          }
-            objcts = [Item(('+', self.leg1.length_name, 2)),
+            objcts = [Item(('+', self.leg[1].length_name, 2)),
                       Sum([Item(('+', self.hypotenuse.length_name, 2)),
-                           Item(('-', self.leg0.length_name, 2))]
+                           Item(('-', self.leg[0].length_name, 2))]
                          )]
 
         elif unknown_side == 'hypotenuse':
-            subst_dict = {Value(self.leg0.length_name): self.leg0.label,
-                          Value(self.leg1.length_name): self.leg1.label
+            subst_dict = {Value(self.leg[0].length_name): self.leg[0].label,
+                          Value(self.leg[1].length_name): self.leg[1].label
                          }
             objcts = [Item(('+', self.hypotenuse.length_name, 2)),
-                      Sum([Item(('+', self.leg0.length_name, 2)),
-                           Item(('+', self.leg1.length_name, 2))]
+                      Sum([Item(('+', self.leg[0].length_name, 2)),
+                           Item(('+', self.leg[1].length_name, 2))]
                          )]
 
         else:
