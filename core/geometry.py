@@ -28,6 +28,7 @@
 
 import math
 import locale
+import copy
 from decimal import *
 
 from .base import *
@@ -52,6 +53,188 @@ try:
 except:
     locale.setlocale(locale.LC_ALL, '')
 
+
+
+
+
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+##
+# @class Polygon
+# @brief
+class Polygon(Drawable):
+
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Polygon's constructor.
+    #   @param arg : Polygon |
+    #                [Point, Point...] |
+    #                [str, str...] <-- not implemented yet
+    #            NB : the str will be the vertices' names
+    #   @param options
+    #   Options details :
+    #   - rotate_around_gravity_center = 'no'|'any'|nb
+    #                        (nb being the angle,
+    #               defaulting to 'any' if sketch or 'no' if not a sketch)
+    def __init__(self, arg, **options):
+        self._rotation_angle = 0
+        if 'rotate_around_isobarycenter' in options:
+            if options['rotate_around_isobarycenter'] == 'randomly':
+                self._rotation_angle = randomly.integer(0, 35) * 10
+            elif is_.a_number(options['rotate_around_isobarycenter']):
+                self._rotation_angle = \
+                                      options['rotate_around_isobarycenter']
+        if isinstance(arg, Polygon):
+            self._vertex = [ v.clone() for v in arg.vertex ]
+            self._rotation_angle = arg.rotation_angle
+            self._side = [s.clone() for s in arg.side ]
+            self._angle = [a.clone() for a in arg.angle ]
+            self._rotation_angle = arg.rotation_angle
+
+        elif type(arg) == list:
+            if len(list) <= 2:
+                raise error.WrongArgument("A list of length " + str(len(arg)),
+                                          "a list of length >= 3")
+            if all([type(elt) == str for elt in arg]):
+                raise NotImplementedError(\
+                                'Using a list of str is not implemented yet')
+            elif all([isinstance(elt, Point) for elt in arg]):
+                self._vertex = [ p.clone() for p in arg ]
+                self._side = []
+                self._angle = []
+                shifted_vertices = copy.deepcopy(self._vertex)
+                shifted_vertices += [shifted_vertices.pop(0)]
+                for (p0, p1) in zip(self._vertex, shifted_vertices):
+                    self._side += [Segment((p0, p1))]
+                twice_shifted_vertices = copy.deepcopy(shifted_vertices)
+                twice_shifted_vertices += [twice_shifted_vertices.pop(0)]
+                for (p0, p1, p2) in zip(self._vertex,
+                                        shifted_vertices,
+                                        twice_shifted_vertices):
+                    self._angle += [Angle((p0, p1, p2))]
+                    self._angle += [self._angle.pop(0)]
+            else:
+                raise error.WrongArgument("A list of Points or str "\
+                                          + str(len(arg)),
+                                          "a list containing something else")
+
+        else:
+            raise error.WrongArgument(str(type(arg)),
+                                      "Polygon|[Point, Point...]|[str, str...]")
+
+        self._name = ''.join([v.name for v in self._vertex])
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the vertices (as a list of Points)
+    @property
+    def vertex(self):
+        return self._vertex
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the sides (as a list of Segments)
+    @property
+    def side(self):
+        return self._side
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the three angles (as a list of Angles)
+    @property
+    def angle(self):
+        return self._angle
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the angle of rotation around the isobarycenter
+    @property
+    def rotation_angle(self):
+        return self._rotation_angle
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Works out the dimensions of the box
+    #   @param options Any options
+    #   @return (x1, y1, x2, y2)
+    def work_out_euk_box(self, **options):
+        x_list = [ v.x for v in self.vertex ]
+        y_list = [ v.y for v in self.vertex ]
+
+        return (min(x_list)-Decimal("0.6"), min(y_list)-Decimal("0.6"),
+                max(x_list)+Decimal("0.6"), max(y_list)+Decimal("0.6"))
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Creates the euk string to put in the file
+    #   @param options Any options
+    #   @return The string to put in the picture file
+    def into_euk(self, **options):
+        box_values = self.work_out_euk_box()
+        result = "box {val0}, {val1}, {val2}, {val3}"\
+                 .format(val0=str(box_values[0]),
+                         val1=str(box_values[1]),
+                         val2=str(box_values[2]),
+                         val3=str(box_values[3]))
+
+        result += "\n\n"
+
+        for v in self.vertex:
+            result += "{name} = point({x}, {y})\n".format(name=v.name,
+                                                          x=v.x,
+                                                          y =v.y)
+
+        result += "\n\ndraw\n"
+
+        result += "("
+        result += '.'.join([v.name for v in self.vertex])
+        result += ")"
+
+
+
+        result += "\nend"
+        result += "\n\nlabel\n"
+
+        for a in self.angle:
+            if a.mark != "":
+                result += "  {p0}, {v}, {p2} {m}\n".format(p0=a.points[0].name,
+                                                           v=a.vertex.name,
+                                                           p2=a.points[2].name,
+                                                           m=a.mark)
+
+        for v in self.vertex:
+            result += "  {n} {a} deg\n".format(n=v.name,
+                                               a=str(self.rotation_angle))
+
+        return result + "\nend"
 
 
 

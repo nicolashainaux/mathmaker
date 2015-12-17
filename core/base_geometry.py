@@ -256,6 +256,8 @@ class Segment(Drawable):
     #   -
     #   @warning Might raise...
     def __init__(self, arg, **options):
+        self._label  = Value("")
+
         if not (type(arg) == tuple or isinstance(arg, Segment)):
             raise error.WrongArgument(' tuple|Segment ', str(type(arg)))
 
@@ -265,8 +267,6 @@ class Segment(Drawable):
                 raise error.WrongArgument(' (Point, Point) ', str(arg))
 
             self._points = (arg[0].clone(), arg[1].clone())
-
-            self._label  = None
 
             if 'label' in options and type(options['label']) == str:
                 self._label = options['label']

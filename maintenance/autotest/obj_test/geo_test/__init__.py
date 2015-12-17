@@ -23,3 +23,4 @@
 from . import point_test
 from . import right_triangle_test
 from . import triangle_test
+from . import polygon_test
