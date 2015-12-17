@@ -77,14 +77,9 @@ class NamedObject(Clonable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the name of the object
-    def get_name(self):
+    @property
+    def name(self):
         return self._name
-
-
-
-
-
-    name = property(get_name, doc = "Name of the object")
 
 
 
@@ -93,7 +88,8 @@ class NamedObject(Clonable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the name of the object
-    def set_name(self, arg):
+    @name.setter
+    def name(self, arg):
         if not (type(arg) == str or type(arg) == int):
             raise error.WrongArgument(str(type(arg)), "str|int")
 
@@ -144,7 +140,8 @@ class Drawable(NamedObject):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the eukleides filename associated to the triangle
-    def get_euk_filename(self):
+    @property
+    def euk_filename(self):
         return self._filename + ".euk"
 
 
@@ -154,20 +151,20 @@ class Drawable(NamedObject):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the eps filename associated to the triangle
-    def get_eps_filename(self):
+    @property
+    def eps_filename(self):
         return self._filename + ".eps"
 
 
 
 
 
-    euk_filename = property(get_euk_filename,
-                            doc = "Eukleides filename associated to " \
-                                  + "the right triangle")
-
-    eps_filename = property(get_eps_filename,
-                            doc = "eps filename associated to " \
-                                  + "the right triangle")
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the name of the object
+    @property
+    def name(self):
+        return self._name
 
 
 
@@ -177,7 +174,8 @@ class Drawable(NamedObject):
     ##
     #   @brief Prevents Drawable objects from being renamed, since they get
     #          their name from other properties inside them.
-    def set_name(self, arg):
+    @name.setter
+    def name(self, arg):
         raise error.ImpossibleAction("rename this object")
 
 
@@ -232,7 +230,7 @@ class Drawable(NamedObject):
 
         path_to_euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
         options_of_euktoeps = CONFIG["PATHS"]["EUKTOEPS_OPTIONS"]
-        
+
         if 'create_pic_files' in options \
             and not options['create_pic_files'] in YES:
         #___

@@ -219,9 +219,9 @@ class X_Factorization(X_Structure):
 
                 for i in range(len(lil_box)):
                         q = randomly.pop(lil_box)
-                        q.expression.set_name(alphabet.UPPERCASE[i])
+                        q.expression.name = alphabet.UPPERCASE[i]
                         for expression in q.steps:
-                            expression.set_name(alphabet.UPPERCASE[i])
+                            expression.name = alphabet.UPPERCASE[i]
                         self.questions_list.append(q)
 
             elif self.x_subkind == 'hard_level':
@@ -269,10 +269,10 @@ class X_Factorization(X_Structure):
 
                 for i in range(len(lil_box)):
                     q = randomly.pop(lil_box)
-                    q.expression.set_name(alphabet.UPPERCASE[i])
+                    q.expression.name = alphabet.UPPERCASE[i]
                     for expression in q.steps:
                         if isinstance(expression, Expression):
-                            expression.set_name(alphabet.UPPERCASE[i])
+                            expression.name = alphabet.UPPERCASE[i]
                     self.questions_list.append(q)
 
         elif self.x_kind == 'mini_test':
@@ -305,12 +305,12 @@ class X_Factorization(X_Structure):
 
                 for i in range(len(lil_box)):
                     q = randomly.pop(lil_box)
-                    q.expression.set_name(\
-                                    alphabet.UPPERCASE[i + self.start_number])
+                    q.expression.name = \
+                                    alphabet.UPPERCASE[i + self.start_number]
                     for expression in q.steps:
                         if isinstance(expression, Expression):
-                            expression.set_name(\
-                                    alphabet.UPPERCASE[i + self.start_number])
+                            expression.name = \
+                                    alphabet.UPPERCASE[i + self.start_number]
                     self.questions_list.append(q)
 
 
@@ -373,9 +373,9 @@ class X_Factorization(X_Structure):
 
                 for i in range(len(lil_box)):
                     q = randomly.pop(lil_box)
-                    q.expression.set_name(alphabet.UPPERCASE[i])
+                    q.expression.name = alphabet.UPPERCASE[i]
                     for expression in q.steps:
-                        expression.set_name(alphabet.UPPERCASE[i])
+                        expression.name = alphabet.UPPERCASE[i]
                     self.questions_list.append(q)
 
 
@@ -458,10 +458,10 @@ class X_Factorization(X_Structure):
 
                 for i in range(len(lil_box)):
                     q = lil_box[i]
-                    q.expression.set_name(alphabet.UPPERCASE[i])
+                    q.expression.name = alphabet.UPPERCASE[i]
                     for expression in q.steps:
                         if isinstance(expression, Expression):
-                            expression.set_name(alphabet.UPPERCASE[i])
+                            expression.name = alphabet.UPPERCASE[i]
                     self.questions_list.append(q)
 
             elif self.x_subkind == 'level_03_difference_squares':
@@ -482,10 +482,10 @@ class X_Factorization(X_Structure):
 
                 for i in range(len(lil_box)):
                     q = lil_box[i]
-                    q.expression.set_name(alphabet.UPPERCASE[i])
+                    q.expression.name = alphabet.UPPERCASE[i]
                     for expression in q.steps:
                         if isinstance(expression, Expression):
-                            expression.set_name(alphabet.UPPERCASE[i])
+                            expression.name = alphabet.UPPERCASE[i]
                     self.questions_list.append(q)
 
 
@@ -508,10 +508,10 @@ class X_Factorization(X_Structure):
 
                 for i in range(len(lil_box)):
                     q = lil_box[i]
-                    q.expression.set_name(alphabet.UPPERCASE[i])
+                    q.expression.name = alphabet.UPPERCASE[i]
                     for expression in q.steps:
                         if isinstance(expression, Expression):
-                            expression.set_name(alphabet.UPPERCASE[i])
+                            expression.name = alphabet.UPPERCASE[i]
                     self.questions_list.append(q)
 
 
@@ -556,10 +556,10 @@ class X_Factorization(X_Structure):
 
                 for i in range(len(lil_box)):
                     q = lil_box[i]
-                    q.expression.set_name(alphabet.UPPERCASE[i])
+                    q.expression.name = alphabet.UPPERCASE[i]
                     for expression in q.steps:
                         if isinstance(expression, Expression):
-                            expression.set_name(alphabet.UPPERCASE[i])
+                            expression.name = alphabet.UPPERCASE[i]
                     self.questions_list.append(q)
 
 
@@ -598,10 +598,10 @@ class X_Factorization(X_Structure):
 
                 for i in range(len(lil_box)):
                     q = lil_box[i]
-                    q.expression.set_name(alphabet.UPPERCASE[i])
+                    q.expression.name = alphabet.UPPERCASE[i]
                     for expression in q.steps:
                         if isinstance(expression, Expression):
-                            expression.set_name(alphabet.UPPERCASE[i])
+                            expression.name = alphabet.UPPERCASE[i]
                     self.questions_list.append(q)
 
 

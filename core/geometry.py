@@ -232,12 +232,10 @@ class Triangle(Drawable):
                                     self.vertex[2],
                                     self.vertex[1]))
 
-            self._angle[0].set_label_display_angle(self._angle[0].measure/2)
-            self._angle[1].set_label_display_angle(180 \
-                                                    - self._angle[1].measure/2)
-            self._angle[2].set_label_display_angle(180 \
-                                                    + self._angle[0].measure \
-                                                    + self._angle[2].measure/2)
+            self._angle[0].label_display_angle = self._angle[0].measure/2
+            self._angle[1].label_display_angle = 180 - self._angle[1].measure/2
+            self._angle[2].label_display_angle = 180 + self._angle[0].measure \
+                                                     + self._angle[2].measure/2
 
         else:
             # copy of a given Triangle
@@ -463,9 +461,9 @@ class Triangle(Drawable):
 
         for a in self.angle:
             if a.mark != "":
-                result += "  " + a.point0.name + ", " \
+                result += "  " + a.points[0].name + ", " \
                         + a.vertex.name + ", " \
-                        + a.point2.name \
+                        + a.points[2].name \
                         + " " \
                         + a.mark
                 result += "\n"
@@ -643,7 +641,7 @@ class RightTriangle(Triangle):
         self._name = self.vertex[0].name + self.vertex[1].name \
                      + self.vertex[2].name
 
-        self.right_angle.set_mark("right")
+        self.right_angle.mark = "right"
 
         random_number = ""
         for i in range(8):

@@ -54,15 +54,15 @@ def action():
                   ),
                   rotate_around_isobarycenter=115
                  )
-    t1.side[0].set_label(Value(4, unit='cm'))
-    t1.side[1].set_label(Value(5, unit='cm'))
-    t1.side[2].set_label(Value(4.84, unit='cm'))
-    t1.angle[0].set_label(Value('?'))
-    t1.angle[1].set_label(Value(64, unit='\\textdegree'))
-    t1.angle[2].set_label(Value(35, unit='\\textdegree'))
-    t1.angle[0].set_mark('simple')
-    t1.angle[1].set_mark('double')
-    t1.angle[2].set_mark('dotted')
+    t1.side[0].label = Value(4, unit='cm')
+    t1.side[1].label = Value(5, unit='cm')
+    t1.side[2].label = Value(4.84, unit='cm')
+    t1.angle[0].label = Value('?')
+    t1.angle[1].label = Value(64, unit='\\textdegree')
+    t1.angle[2].label = Value(35, unit='\\textdegree')
+    t1.angle[0].mark = 'simple'
+    t1.angle[1].mark = 'double'
+    t1.angle[2].mark = 'dotted'
 
 
     check(t1.into_euk(),

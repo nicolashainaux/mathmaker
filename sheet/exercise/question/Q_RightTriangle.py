@@ -284,15 +284,12 @@ class Q_RightTriangle(Q_Structure):
                                rotate_around_isobarycenter=rotation_option
                               )
 
-            self.right_triangle.leg[0].set_label(Value(sides_values[0],
+            self.right_triangle.leg[0].label = Value(sides_values[0],
                                                      unit=sides_units[0])
-                                              )
-            self.right_triangle.leg[1].set_label(Value(sides_values[1],
+            self.right_triangle.leg[1].label = Value(sides_values[1],
                                                      unit=sides_units[1])
-                                              )
-            self.right_triangle.hypotenuse.set_label(Value(sides_values[2],
-                                                           unit=sides_units[2])
-                                                    )
+            self.right_triangle.hypotenuse.label = Value(sides_values[2],
+                                                         unit=sides_units[2])
 
             for side in self.right_triangle.side:
                 if side.label.raw_value == "":
@@ -358,17 +355,14 @@ class Q_RightTriangle(Q_Structure):
                                rotate_around_isobarycenter=rotation_option
                              )
 
-            self.right_triangle.leg[0].set_label(Value(sides_values[0],
+            self.right_triangle.leg[0].label = Value(sides_values[0],
                                                      unit=sides_units[0])
-                                              )
-            self.right_triangle.leg[1].set_label(Value(sides_values[1],
+            self.right_triangle.leg[1].label = Value(sides_values[1],
                                                      unit=sides_units[1])
-                                              )
-            self.right_triangle.hypotenuse.set_label(Value(sides_values[2],
-                                                           unit=sides_units[2])
-                                                    )
+            self.right_triangle.hypotenuse.label = Value(sides_values[2],
+                                                         unit=sides_units[2])
 
-            self.right_triangle.right_angle.set_mark("")
+            self.right_triangle.right_angle.mark = ""
 
 
 

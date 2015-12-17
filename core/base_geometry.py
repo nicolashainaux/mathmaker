@@ -119,7 +119,8 @@ class Point(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the abscissa of the Point, rounded up to the tenth
-    def get_x(self):
+    @property
+    def x(self):
         return round(Decimal(str(self._x)),
                      Decimal('0.01'),
                      rounding=ROUND_HALF_UP
@@ -132,7 +133,8 @@ class Point(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the exact abscissa of the Point
-    def get_x_exact(self):
+    @property
+    def x_exact(self):
         return self._x
 
 
@@ -142,7 +144,8 @@ class Point(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the ordinate of the Point, rounded up to the tenth
-    def get_y(self):
+    @property
+    def y(self):
         return round(Decimal(str(self._y)),
                      Decimal('0.01'),
                      rounding=ROUND_HALF_UP
@@ -155,24 +158,9 @@ class Point(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the exact ordinate of the Point
-    def get_y_exact(self):
+    @property
+    def y_exact(self):
         return self._y
-
-
-
-
-
-
-    x = property(get_x, doc = "Abscissa of the Point (rounded)")
-
-    x_exact = property(get_x_exact, doc = "Abscissa of the Point (exact)")
-
-    y = property(get_y, doc = "Ordinate of the Point (exact)")
-
-    y_exact = property(get_y_exact, doc = "Ordinate of the Point (rounded)")
-
-
-
 
 
 
@@ -181,7 +169,8 @@ class Point(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the abscissa of the Point
-    def set_x(self, arg):
+    @x.setter
+    def x(self, arg):
         if not is_.a_number(arg):
             raise error.WrongArgument(' a number ', str(arg))
 
@@ -193,7 +182,8 @@ class Point(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the ordinate of the Point
-    def set_y(self, arg):
+    @y.setter
+    def y(self, arg):
         if not is_.a_number(arg):
             raise error.WrongArgument(' a number ', str(arg))
 
@@ -297,7 +287,8 @@ class Segment(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the two points
-    def get_points(self):
+    @property
+    def points(self):
         return self._points
 
 
@@ -307,7 +298,8 @@ class Segment(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the label of the Segment
-    def get_label(self):
+    @property
+    def label(self):
         return self._label
 
 
@@ -318,7 +310,8 @@ class Segment(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the length of the Segment
-    def get_length(self):
+    @property
+    def length(self):
         x_delta = self.points[0].x - self.points[1].x
         y_delta = self.points[0].y - self.points[1].y
         return math.hypot(x_delta, y_delta)
@@ -330,7 +323,8 @@ class Segment(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the length name of the Segment
-    def get_length_name(self):
+    @property
+    def length_name(self):
         return self.points[0].name + self.points[1].name
 
 
@@ -340,33 +334,9 @@ class Segment(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the mark of the Segment
-    def get_mark(self):
+    @property
+    def mark(self):
         return self._mark
-
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    points = property(get_points,
-                      doc = "The couple of points ending the segment")
-
-
-
-
-
-    label = property(get_label,
-                     doc = "Label of the Segment")
-
-    length = property(get_length,
-                      doc = "Name of the Segment")
-
-    length_name = property(get_length_name,
-                           doc = "Length's name of the Segment")
-
-    mark = property(get_mark,
-                    doc = "Mark of the Segment")
 
 
 
@@ -375,7 +345,8 @@ class Segment(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the label of the Segment
-    def set_label(self, arg):
+    @label.setter
+    def label(self, arg):
         if not type(arg) == Value:
             raise error.WrongArgument(' Value ', str(type(arg)))
 
@@ -388,7 +359,8 @@ class Segment(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the mark of the Segment
-    def set_mark(self, arg):
+    @mark.setter
+    def mark(self, arg):
         if not type(arg) == str:
             raise error.WrongArgument(' str ', str(type(arg)))
 
@@ -398,21 +370,6 @@ class Segment(Drawable):
 
         self._mark = arg
 
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Sets the points of the Segment (is this useful at all ?)
-    def set_point(self, nb, arg):
-        if not is_.a_number(nb):
-            raise error.WrongArgument(' a number ', str(nb))
-        if not isinstance(arg, Point):
-            raise error.WrongArgument(' a Point ', str(arg))
-
-
-        self._points[nb] = arg.clone()
 
 
 
@@ -530,7 +487,8 @@ class Angle(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the measure of the angle
-    def get_measure(self):
+    @property
+    def measure(self):
         return self._measure
 
 
@@ -539,30 +497,10 @@ class Angle(Drawable):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Returns the point0 of the angle
-    def get_point0(self):
-        return self._points[0]
-
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the vertex of the angle, as a Point
-    def get_point1(self):
-        return self._points[1]
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the point2 of the angle
-    def get_point2(self):
-        return self._points[2]
+    #   @brief Returns the points of the angle
+    @property
+    def points(self):
+        return self._points
 
 
 
@@ -571,7 +509,8 @@ class Angle(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the label of the angle
-    def get_label(self):
+    @property
+    def label(self):
         return self._label
 
 
@@ -581,7 +520,8 @@ class Angle(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the angle (for display) of label's angle
-    def get_label_display_angle(self):
+    @property
+    def label_display_angle(self):
         return self._label_display_angle
 
 
@@ -591,36 +531,22 @@ class Angle(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the mark of the angle
-    def get_mark(self):
+    @property
+    def mark(self):
         return self._mark
 
 
 
 
 
-    measure = property(get_measure,
-                       doc = "Measure of the angle")
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the vertex of the angle
+    @property
+    def vertex(self):
+        return self._points[1]
 
-    point0 = property(get_point0,
-                      doc = "Point0 of the angle")
 
-    point1 = property(get_point1,
-                      doc = "Vertex of the angle")
-
-    point2 = property(get_point2,
-                      doc = "Point2 of the angle")
-
-    vertex = property(get_point1,
-                      doc = "Vertex of the angle")
-
-    label = property(get_label,
-                     doc = "Label of the angle")
-
-    label_display_angle = property(get_label_display_angle,
-                                doc = "Display angle of the label of the angle")
-
-    mark = property(get_mark,
-                          doc = "Mark of the angle")
 
 
 
@@ -629,7 +555,8 @@ class Angle(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the label of the angle
-    def set_label(self, arg):
+    @label.setter
+    def label(self, arg):
         if type(arg) == str or isinstance(arg, Value):
             self._label = Value(arg)
 
@@ -643,7 +570,8 @@ class Angle(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the angle (for display) of label's angle
-    def set_label_display_angle(self, arg):
+    @label_display_angle.setter
+    def label_display_angle(self, arg):
         if not is_.a_number(arg):
             raise error.WrongArgument(arg, ' a number ')
         else:
@@ -659,7 +587,8 @@ class Angle(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the mark of the angle
-    def set_mark(self, arg):
+    @mark.setter
+    def mark(self, arg):
         if type(arg) == str:
             if arg in AVAILABLE_ANGLE_MARKS:
                 self._mark = arg
