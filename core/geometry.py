@@ -98,7 +98,7 @@ class Polygon(Drawable):
             self._rotation_angle = arg.rotation_angle
 
         elif type(arg) == list:
-            if len(list) <= 2:
+            if len(arg) <= 2:
                 raise error.WrongArgument("A list of length " + str(len(arg)),
                                           "a list of length >= 3")
             if all([type(elt) == str for elt in arg]):
@@ -112,13 +112,13 @@ class Polygon(Drawable):
                 shifted_vertices += [shifted_vertices.pop(0)]
                 for (p0, p1) in zip(self._vertex, shifted_vertices):
                     self._side += [Segment((p0, p1))]
-                twice_shifted_vertices = copy.deepcopy(shifted_vertices)
-                twice_shifted_vertices += [twice_shifted_vertices.pop(0)]
-                for (p0, p1, p2) in zip(self._vertex,
-                                        shifted_vertices,
-                                        twice_shifted_vertices):
+                left_shifted_vertices = copy.deepcopy(self._vertex)
+                left_shifted_vertices = [left_shifted_vertices.pop(-1)] \
+                                        + left_shifted_vertices
+                for (p0, p1, p2) in zip(left_shifted_vertices,
+                                        self._vertex,
+                                        shifted_vertices):
                     self._angle += [Angle((p0, p1, p2))]
-                    self._angle += [self._angle.pop(0)]
             else:
                 raise error.WrongArgument("A list of Points or str "\
                                           + str(len(arg)),
@@ -223,16 +223,27 @@ class Polygon(Drawable):
         result += "\nend"
         result += "\n\nlabel\n"
 
+        names_angles_list = []
+
         for a in self.angle:
+            # We add the labels of the angles
             if a.mark != "":
                 result += "  {p0}, {v}, {p2} {m}\n".format(p0=a.points[0].name,
                                                            v=a.vertex.name,
                                                            p2=a.points[2].name,
                                                            m=a.mark)
 
-        for v in self.vertex:
+            # and then we compute the angle to display the name of the vertex
+            # of each angle
+            names_angles_list += [Vector((a.points[0],
+                                          a.points[1]))\
+                                  .bisector_vector(Vector((a.points[2],
+                                                           a.points[1])))\
+                                  .slope]
+
+        for (i, v) in enumerate(self.vertex):
             result += "  {n} {a} deg\n".format(n=v.name,
-                                               a=str(self.rotation_angle))
+                                               a=str(names_angles_list[i]))
 
         return result + "\nend"
 

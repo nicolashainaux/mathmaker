@@ -26,6 +26,7 @@
 # @package core.base_geometry
 # @brief Mathematical elementary geometrical objects.
 
+import sys
 import math
 import locale
 from decimal import *
@@ -112,6 +113,9 @@ class Point(Drawable):
             self._name = arg.name
             self._x = arg.x
             self._y = arg.y
+
+        self._x_exact = self._x
+        self._y_exact = self._y
 
 
 
@@ -391,17 +395,18 @@ class Vector(Point):
     #   @brief Vector's constructor.
     #   @param arg (Point, Point) | Point | (x, y)
     def __init__(self, arg, **options):
+        self._x_exact = Decimal('1')
+        self._y_exact = Decimal('1')
         if isinstance(arg, Point):
-            self._x_exact = arg.x_exact
-            self._y_exact = arg.y_exact
+            Point.__init__(self, Point(["", (arg.x_exact, arg.y_exact)]))
 
         elif isinstance(arg, tuple) and len(arg) == 2:
             if all([isinstance(elt, Point) for elt in arg]):
-                self._x_exact = arg[1].x_exact - arg[0].x_exact
-                self._y_exact = arg[1].y_exact - arg[0].y_exact
+                Point.__init__(self,
+                               Point(["", (arg[1].x_exact - arg[0].x_exact,
+                                           arg[1].y_exact - arg[0].y_exact)]))
             elif all([is_.a_number(elt) for elt in arg]):
-                self._x_exact = arg[0]
-                self._y_exact = arg[0]
+                Point.__init__(self, Point(["", (arg[0], arg[1])]))
             else:
                 raise error.WrongArgument(\
                                         "a tuple not only of Points or numbers",
@@ -436,7 +441,7 @@ class Vector(Point):
     #   @brief Norm of a Vector
     @property
     def norm(self):
-        return math.hypot(self._x_exact, self._y_exact)
+        return Decimal(str(math.hypot(self._x_exact, self._y_exact)))
 
 
 
@@ -447,7 +452,12 @@ class Vector(Point):
     #   @brief Slope of a Vector
     @property
     def slope(self):
-        theta = Decimal(str(math.degrees(math.acos(self._x_exact/self.norm))))
+        theta = round(Decimal(str(math.degrees(\
+                                  math.acos(self._x_exact/self.norm)))),
+                     Decimal('0.1'),
+                     rounding=ROUND_HALF_UP
+                    )
+
         return theta if self._y_exact > 0 else Decimal("360") - theta
 
 
@@ -467,7 +477,7 @@ class Vector(Point):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Returns the unit vector bisecting self and another
+    #   @brief Returns a vector bisecting self and another
     def bisector_vector(self, arg):
         if not isinstance(arg, Vector):
             raise error.WrongArgument(str(type(arg)), "a Vector")
