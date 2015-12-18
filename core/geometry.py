@@ -270,6 +270,51 @@ class Polygon(Drawable):
                 result += str(scale_factor)
                 result += "\n"
 
+
+        for a in self.angle:
+            if a.label != Value(""):
+                scale_factor = Decimal('2.7')
+                if Decimal(str(a.measure)) < Decimal('28.5'):
+                    scale_factor = round(Decimal('38.1')\
+                                              *pow(Decimal(str(a.measure)),
+                                                   Decimal('-0.8')
+                                                  ),
+                                         Decimal('0.01'),
+                                         rounding=ROUND_HALF_UP
+                                         )
+
+                label_display_angle = Vector((a.points[1],
+                                              a.points[0]))\
+                                      .bisector_vector(Vector((a.points[1],
+                                                               a.points[2])))\
+                                      .slope
+
+                label_position_angle = label_display_angle \
+                                       + Decimal(str(self.rotation_angle))
+
+                rotate_box_angle = Decimal(label_position_angle)
+
+                if (rotate_box_angle >= 90 \
+                    and rotate_box_angle <= 270):
+                #___
+                    rotate_box_angle -= Decimal("180")
+                elif (rotate_box_angle <= -90 \
+                    and rotate_box_angle >= -270):
+                #___
+                    rotate_box_angle += Decimal("180")
+
+                result += "\n  "
+                result += "$\\rotatebox{"
+                result += str(rotate_box_angle)
+                result += "}{"
+                result += a.label.into_str(display_unit='yes',
+                                           graphic_display='yes')
+                result += "}$ "
+                result += a.vertex.name + " "
+                result += str(label_position_angle) + " deg "
+                result += str(scale_factor)
+                result += "\n"
+
         result += "\nend"
         result += "\n\nlabel\n"
 
@@ -278,9 +323,9 @@ class Polygon(Drawable):
         for a in self.angle:
             # We add the labels of the angles
             if a.mark != "":
-                result += "  {p0}, {v}, {p2} {m}\n".format(p0=a.points[0].name,
+                result += "  {p0}, {v}, {p2} {m}\n".format(p0=a.points[2].name,
                                                            v=a.vertex.name,
-                                                           p2=a.points[2].name,
+                                                           p2=a.points[0].name,
                                                            m=a.mark)
 
             # and then we compute the angle to display the name of the vertex

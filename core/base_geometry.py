@@ -577,7 +577,7 @@ class Angle(Drawable):
             self._measure = Decimal(str(math.degrees(math.acos(aux_cos))))
 
             if 'label' in options and type(options['label']) == str:
-                self._label = options['label']
+                self._label = Value(options['label'])
 
             if 'mark' in options and type(options['mark']) == str:
                 self._mark = options['mark']

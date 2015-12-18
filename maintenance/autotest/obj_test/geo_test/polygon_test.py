@@ -59,16 +59,14 @@ def action():
     p1.side[1].label = Value(3, unit='cm')
     p1.side[2].label = Value(2, unit='cm')
     p1.side[3].label = Value(6.5, unit='cm')
-    """p1.side[0].label = Value(4, unit='cm')
-    p1.side[1].label = Value(5, unit='cm')
-    p1.side[2].label = Value(4.84, unit='cm')
-    p1.angle[0].label = Value('?')
-    p1.angle[1].label = Value(64, unit='\\textdegree')
-    p1.angle[2].label = Value(35, unit='\\textdegree')
+    p1.angle[0].label = Value(64, unit="\\textdegree")
+    p1.angle[1].label = Value(128, unit="\\textdegree")
+    p1.angle[2].label = Value(32, unit="\\textdegree")
+    p1.angle[3].label = Value(256, unit="\\textdegree")
     p1.angle[0].mark = 'simple'
-    p1.angle[1].mark = 'double'
-    p1.angle[2].mark = 'dotted'"""
-
+    p1.angle[1].mark = 'simple'
+    p1.angle[2].mark = 'simple'
+    p1.angle[3].mark = 'simple'
 
     check(p1.into_euk(),
           ["box -1.33, -0.48, 4.71, 4.6"\
