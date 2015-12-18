@@ -218,7 +218,57 @@ class Polygon(Drawable):
         result += '.'.join([v.name for v in self.vertex])
         result += ")"
 
+        # Let's add the sides' labels, if any
+        for s in self.side:
+            if s.label != Value(""):
+                x = s.length
+                scale_factor = round(Decimal(str(1.6*x)),
+                                     Decimal('0.1'),
+                                     rounding=ROUND_UP)
+                if x <= 3:
+                    angle_correction = round(Decimal(str(-8*x + 33)),
+                                             Decimal('0.1'),
+                                             rounding=ROUND_UP)
+                else:
+                    angle_correction = round(Decimal(str( \
+                                                1.1/(1-0.95*math.exp(-0.027*x))
+                                                        )
+                                                    ),
+                                             Decimal('0.1'),
+                                             rounding=ROUND_UP)
 
+                side_angle = Vector((s.points[0], s.points[1])).slope
+
+                label_position_angle = round(Decimal(str(self.rotation_angle))\
+                                             + side_angle,
+                                             Decimal('1'),
+                                             rounding=ROUND_HALF_EVEN
+                                            )
+
+                rotate_box_angle = Decimal(label_position_angle)
+
+                if (rotate_box_angle >= 90 \
+                    and rotate_box_angle <= 270):
+                #___
+                    rotate_box_angle -= Decimal("180")
+                elif (rotate_box_angle <= -90 \
+                    and rotate_box_angle >= -270):
+               #___
+                    rotate_box_angle += Decimal("180")
+
+                result += "\n  "
+                result += "$\\rotatebox{"
+                result += str(rotate_box_angle)
+                result += "}{"
+                result += s.label.into_str(display_unit='yes',
+                                           graphic_display='yes')
+                result += "}$ "
+                result += s.points[0].name + " "
+                result += str(label_position_angle)
+                result += " - "
+                result += str(angle_correction) + " deg "
+                result += str(scale_factor)
+                result += "\n"
 
         result += "\nend"
         result += "\n\nlabel\n"
