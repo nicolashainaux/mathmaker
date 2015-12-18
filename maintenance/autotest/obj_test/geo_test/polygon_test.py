@@ -69,24 +69,29 @@ def action():
     p1.angle[3].mark = 'simple'
 
     check(p1.into_euk(),
-          ["box -1.33, -0.48, 4.71, 4.6"\
-           "Z = point(4.11, 0.38)"\
-           "E = point(2.42, 4)"\
-           "P = point(-0.73, 0.12)"\
-           "draw"\
-           "  (Z.E.P)"\
-           "  $\\rotatebox{-65}{4~cm}$ Z 115 - 7.5 deg 6.4"\
-           "  $\\rotatebox{51}{5~cm}$ E 231 - 6.5 deg 8"\
-           "  $\\rotatebox{3}{4,84~cm}$ Z 183 + 6.7 deg 7.8"\
-           "  $\\rotatebox{-31}{?}$ Z 149 deg 2.7"\
-           "  $\\rotatebox{83}{64\\textdegree}$ E 263 deg 2.7"\
-           "  $\\rotatebox{387}{35\\textdegree}$ P 387 deg 2.7"\
-           "end"\
-           "label"\
-           "  E, Z, P simple"\
-           "  P, E, Z double"\
-           "  Z, P, E dotted"\
-           "  Z 115 + 200 deg"\
-           "  E 115 - 45 deg"\
-           "  P 115 + 65 deg"\
-           "end"])
+          ["box -0.1, -0.1, 3.8, 4.6"\
+          +"A = point(0.5, 0.5)"\
+          +"B = point(3, 1)"\
+          +"C = point(3.2, 4)"\
+          +"D = point(0.8, 3)"\
+          +"draw"\
+          +"(A.B.C.D)"\
+          +"  $\\rotatebox{11}{4~cm}$ A 11 - 12.7 deg 4.1"\
+          +"  $\\rotatebox{86}{3~cm}$ B 86 - 8.9 deg 4.9"\
+          +"  $\\rotatebox{23}{2~cm}$ C 203 - 12.2 deg 4.2"\
+          +"  $\\rotatebox{83}{6,5~cm}$ D 263 - 12.9 deg 4.1"\
+          +"  $\\rotatebox{47.3}{64\\textdegree}$ A 47.3 deg 2.7"\
+          +"  $\\rotatebox{-41.3}{128\\textdegree}$ B 138.7 deg 2.7"\
+          +"  $\\rotatebox{54.3}{32\\textdegree}$ C 234.3 deg 2.7"\
+          +"  $\\rotatebox{322.7}{256\\textdegree}$ D 322.7 deg 2.7"\
+          +"end"\
+          +"label"\
+          +"  B, A, D simple"\
+          +"  C, B, A simple"\
+          +"  D, C, B simple"\
+          +"  A, D, C simple"\
+          +"  A 227.3 deg"\
+          +"  B 318.7 deg"\
+          +"  C 54.3 deg"\
+          +"  D 142.7 deg"\
+          +"end"])
