@@ -398,7 +398,9 @@ class Vector(Point):
         self._x_exact = Decimal('1')
         self._y_exact = Decimal('1')
         if isinstance(arg, Point):
-            Point.__init__(self, Point(["", (arg.x_exact, arg.y_exact)]))
+            Point.__init__(self,
+                           Point(["", (arg.x_exact, arg.y_exact)]),
+                           **options)
 
         elif isinstance(arg, tuple) and len(arg) == 2:
             if all([isinstance(elt, Point) for elt in arg]):
