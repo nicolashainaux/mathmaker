@@ -40,7 +40,7 @@ sdt_err_output = sys.stderr.fileno()
 #   @brief Writes a warning to stderr with the given String as explanation
 #   @param provided_string The explanation accompanying the warning
 def write_warning(provided_string):
-    os.write(sdt_err_output, bytes("Warning : " + provided_string + "\n",
+    os.write(sdt_err_output, bytes("Warning: " + provided_string + "\n",
                                    'utf-8')
             )
 
@@ -63,7 +63,7 @@ class UnreachableData(Exception):
 
 
     def __str__(self):
-        return "Can't find : " + str(self.data)
+        return "Can't find: " + str(self.data)
 
 
 
@@ -113,7 +113,7 @@ class NotImplementedYet(Exception):
 
     def __str__(self):
         return "The method " + str(self.method)                              \
-               + " must handle with a case that is not implemented yet !"
+               + " must handle with a case that is not implemented yet!"
 
 
 
@@ -136,7 +136,7 @@ class NotInstanciableObject(Exception):
 
 
     def __str__(self):
-        return "It is not allowed to instanciate this type of objects : "     \
+        return "It is not allowed to instanciate this type of objects: "     \
                + str(type(self.objet))
 
 
@@ -160,9 +160,9 @@ class OutOfRangeArgument(Exception):
 
     def __str__(self):
         return "\nValue of the given argument is out " \
-               + "of expected range or values : "      \
+               + "of expected range or values: "      \
                + str(self.objct)                                        \
-               + ".\nExpected range is : "                                    \
+               + ".\nExpected range is: "                                    \
                + str(self.expected_range)
 
 
@@ -187,10 +187,10 @@ class UncompatibleObjects(Exception):
 
 
     def __str__(self):
-        return "The following action is attempted : " + str(self.given_action)\
+        return "The following action is attempted: " + str(self.given_action)\
                + " on " + str(self.objct1)                                    \
                + " and " + str(self.objct2)                                   \
-               + " and expects this result : " + str(self.expected_result)
+               + " and expects this result: " + str(self.expected_result)
 
 
 
@@ -212,9 +212,9 @@ class UncompatibleType(Exception):
 
 
     def __str__(self):
-        return "One tries to use an object from unexpected type : "           \
+        return "One tries to use an object from unexpected type: "           \
                + str(type(self.objct))                                        \
-               + ". Usable types here are : "                                 \
+               + ". Usable types here are: "                                 \
                + str(self.possible_types)
 
 
@@ -237,7 +237,7 @@ class UncompatibleOptions(Exception):
 
 
     def __str__(self):
-        return "One tries to use these two uncompatible options : #1: "      \
+        return "One tries to use these two uncompatible options: #1: "      \
                + str(self.opt1)                                        \
                + " and #2: "                                 \
                + str(self.opt2)
@@ -282,7 +282,7 @@ class ArgumentNeeded(Exception):
 
 
     def __str__(self):
-        return "Expected : " + str(self.data)
+        return "Expected: " + str(self.data)
 
 
 
@@ -325,7 +325,7 @@ class WrongObject(Exception):
 
 
     def __str__(self):
-        return "Cause of the error : " + str(self.data)
+        return "Cause of the error: " + str(self.data)
 
 
 
@@ -345,8 +345,8 @@ class WrongArgument(Exception):
 
 
     def __str__(self):
-        return "This kind of argument was given : " + str(self.given_arg) \
-                + "\nbut this argument was expected : " + str(self.expected_arg)
+        return "This kind of argument was given: " + str(self.given_arg) \
+                + "\nbut this argument was expected: " + str(self.expected_arg)
 
 
 
