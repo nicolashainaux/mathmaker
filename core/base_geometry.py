@@ -378,6 +378,110 @@ class Segment(Drawable):
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
+# @class Vector
+# @brief
+class Vector(Point):
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Vector's constructor.
+    #   @param arg (Point, Point) | Point | (x, y)
+    def __init__(self, arg, **options):
+        if isinstance(arg, Point):
+            self._x_exact = arg.x_exact
+            self._y_exact = arg.y_exact
+
+        elif isinstance(arg, tuple) and len(arg) == 2:
+            if all([isinstance(elt, Point) for elt in arg]):
+                self._x_exact = arg[1].x_exact - arg[0].x_exact
+                self._y_exact = arg[1].y_exact - arg[0].y_exact
+            elif all([is_.a_number(elt) for elt in arg]):
+                self._x_exact = arg[0]
+                self._y_exact = arg[0]
+            else:
+                raise error.WrongArgument(\
+                                        "a tuple not only of Points or numbers",
+                                          "(Point,Point)|(x,y)")
+
+        else:
+            raise error.WrongArgument(str(type(arg)), "Point|(,)")
+
+
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Adds two vectors
+    #   @param arg Vector
+    def __add__(self, arg):
+        if not isinstance(arg, Vector):
+            raise error.WrongArgument(str(type(arg)), "a Vector")
+
+        return Vector((self.x_exact + arg.x_exact,
+                       self.y_exact + arg.y_exact))
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Norm of a Vector
+    @property
+    def norm(self):
+        return math.hypot(self._x_exact, self._y_exact)
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Slope of a Vector
+    @property
+    def slope(self):
+        theta = Decimal(str(math.degrees(math.acos(self._x_exact/self.norm))))
+        return theta if self._y_exact > 0 else Decimal("360") - theta
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the unit vector built from self
+    def unit_vector(self):
+        return Vector((self._x_exact/self.norm,
+                       self._y_exact/self.norm))
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the unit vector bisecting self and another
+    def bisector_vector(self, arg):
+        if not isinstance(arg, Vector):
+            raise error.WrongArgument(str(type(arg)), "a Vector")
+
+        return self.unit_vector() + arg.unit_vector()
+
+
+
+
+
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+##
 # @class Ray
 # @brief
 class Ray(Drawable):
