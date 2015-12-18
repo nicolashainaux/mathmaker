@@ -90,20 +90,20 @@ class Point(Drawable):
 
         elif type(arg) == list:
             if not len(arg) == 2:
-                raise error.WrongArgument(' a list of length 2 ',
-                                          ' a list of length ' \
-                                          + str(len(arg))
+                raise error.WrongArgument(' a list of length ' \
+                                          + str(len(arg)),
+                                          ' a list of length 2 '
                                           )
 
             if not type(arg[0]) == str:
-                raise error.WrongArgument(' a str ', str(type(arg[0])))
+                raise error.WrongArgument(str(type(arg[0])), ' a str ')
 
             if not (type(arg[1]) == tuple \
                 and len(arg[1]) == 2 \
                 and is_.a_number(arg[1][0]) \
                 and is_.a_number(arg[1][1])):
             #___
-                raise error.WrongArgument(' (x, y) ', str(arg))
+                raise error.WrongArgument(str(arg), ' (x, y) ')
 
             self._name = arg[0]
             self._x = Decimal(arg[1][0])
