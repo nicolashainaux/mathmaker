@@ -350,6 +350,73 @@ class Polygon(Drawable):
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
+# @class Rectangle
+# @brief
+class Rectangle(Polygon):
+
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Rectangle's constructor.
+    #   @param arg : Rectangle |
+    #                [Point, length, height, str1, str2, str3]
+    #            NB : the str will be the vertices' names
+    #   @param options
+    #   Options details :
+    #   - rotate_around_gravity_center = 'no'|'any'|nb
+    #                        (nb being the angle,
+    #               defaulting to 'any' if sketch or 'no' if not a sketch)
+    def __init__(self, arg, **options):
+        if isinstance(arg, Rectangle):
+            Polygon.__init__((tuple(arg.points)))
+        elif isinstance(arg, list):
+            if isinstance(arg[0], Point)\
+                and is_.a_number(arg[1])\
+                and is_.a_number(arg[2])\
+                and all(isinstance(arg[i], str) for i in [3, 4, 5]):
+            #___
+                length = arg[1]
+                height = arg[2]
+                Polygon.__init__(self,
+                                 [arg[0],
+                                  Point([arg[3],
+                                         (Decimal(str(arg[0].x_exact)) \
+                                          + Decimal(str(length)),
+                                          arg[0].y_exact)]),
+                                  Point([arg[4],
+                                         (Decimal(str(arg[0].x_exact)) \
+                                          + Decimal(str(length)),
+                                          Decimal(str(arg[0].y_exact)) \
+                                          + Decimal(str(height)))]),
+                                  Point([arg[5],
+                                         (arg[0].x_exact,
+                                          Decimal(str(arg[0].y_exact)) \
+                                          + Decimal(str(height)))
+                                        ])
+                                  ])
+
+            else:
+                raise error.WrongArgument(\
+                            "One of the elements is not of the expected type",
+                            "[Point, nb1, nb2, str1, str2, str3]")
+
+        else:
+            raise error.WrongArgument(str(type(arg)),
+            "Rectangle|[Point, length, height, str1, str2, str3]")
+
+        for a in self._angle:
+            a.mark = 'right'
+
+
+
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+##
 # @class Triangle
 # @brief
 class Triangle(Drawable):
