@@ -83,16 +83,20 @@ class Polygon(Drawable):
     #                        (nb being the angle,
     #               defaulting to 'any' if sketch or 'no' if not a sketch)
     def __init__(self, arg, **options):
+        self._vertex = []
+        self._side = []
+        self._angle = []
         self._rotation_angle = 0
+        
         if 'rotate_around_isobarycenter' in options:
             if options['rotate_around_isobarycenter'] == 'randomly':
                 self._rotation_angle = randomly.integer(0, 35) * 10
             elif is_.a_number(options['rotate_around_isobarycenter']):
                 self._rotation_angle = \
                                       options['rotate_around_isobarycenter']
+
         if isinstance(arg, Polygon):
             self._vertex = [ v.clone() for v in arg.vertex ]
-            self._rotation_angle = arg.rotation_angle
             self._side = [s.clone() for s in arg.side ]
             self._angle = [a.clone() for a in arg.angle ]
             self._rotation_angle = arg.rotation_angle
@@ -105,7 +109,17 @@ class Polygon(Drawable):
                 raise NotImplementedError(\
                                 'Using a list of str is not implemented yet')
             elif all([isinstance(elt, Point) for elt in arg]):
-                self._vertex = [ p.clone() for p in arg ]
+                start_vertices = [ p.clone() for p in arg ]
+
+                if self._rotation_angle != 0:
+                    G = barycenter(start_vertices, "G")
+
+                    self._vertex = [ Point(v.rotate(G, self._rotation_angle,
+                                                    keep_name=True)) \
+                                     for v in start_vertices ]
+                else:
+                    self._vertex = [ v.clone() for v in start_vertices ]
+
                 self._side = []
                 self._angle = []
                 shifted_vertices = copy.deepcopy(self._vertex)
