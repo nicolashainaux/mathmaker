@@ -75,7 +75,7 @@ def action():
           +"C = point(3.2, 4)"\
           +"D = point(0.8, 3)"\
           +"draw"\
-          +"(A.B.C.D)"\
+          +"  (A.B.C.D)"\
           +"  $\\rotatebox{11}{4~cm}$ A 11 - 12.7 deg 4.1"\
           +"  $\\rotatebox{86}{3~cm}$ B 86 - 8.9 deg 4.9"\
           +"  $\\rotatebox{23}{2~cm}$ C 203 - 12.2 deg 4.2"\

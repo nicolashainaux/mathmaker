@@ -66,24 +66,24 @@ def action():
 
 
     check(t1.into_euk(),
-          ["box -1.33, -0.48, 4.71, 4.6"\
-           "Z = point(4.11, 0.38)"\
+          ["box -1.32, -0.48, 4.71, 4.6"\
+           "Z = point(4.11, 0.37)"\
            "E = point(2.42, 4)"\
-           "P = point(-0.73, 0.12)"\
+           "P = point(-0.72, 0.12)"\
            "draw"\
            "  (Z.E.P)"\
-           "  $\\rotatebox{-65}{4~cm}$ Z 115 - 7.5 deg 6.4"\
+           "  $\\rotatebox{-65}{4~cm}$ Z 115 - 7.5 deg 6.5"\
            "  $\\rotatebox{51}{5~cm}$ E 231 - 6.5 deg 8"\
-           "  $\\rotatebox{3}{4,84~cm}$ Z 183 + 6.7 deg 7.8"\
-           "  $\\rotatebox{-31}{?}$ Z 149 deg 2.7"\
-           "  $\\rotatebox{83}{64\\textdegree}$ E 263 deg 2.7"\
-           "  $\\rotatebox{387}{35\\textdegree}$ P 387 deg 2.7"\
+           "  $\\rotatebox{3}{4,84~cm}$ P 3 - 6.7 deg 7.8"\
+           "  $\\rotatebox{-31.2}{?}$ Z 148.8 deg 2.7"\
+           "  $\\rotatebox{82.9}{64\\textdegree}$ E 262.9 deg 2.7"\
+           "  $\\rotatebox{27}{35\\textdegree}$ P 27 deg 2.7"\
            "end"\
            "label"\
            "  E, Z, P simple"\
            "  P, E, Z double"\
            "  Z, P, E dotted"\
-           "  Z 115 + 200 deg"\
-           "  E 115 - 45 deg"\
-           "  P 115 + 65 deg"\
+           "  Z 328.8 deg"\
+           "  E 82.9 deg"\
+           "  P 207 deg"\
            "end"])

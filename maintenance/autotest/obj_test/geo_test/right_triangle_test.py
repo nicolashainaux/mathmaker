@@ -68,13 +68,13 @@ def action():
            "draw  (A.B.C)"\
            "  $\\rotatebox{0}{4~cm}$ A 0 - 7.5 deg 6.4"\
            "  $\\rotatebox{-90}{3~cm}$ B 90 - 9 deg 4.9"\
-           "  $\\rotatebox{37}{5~cm}$ A 37 + 6.5 deg 8"\
+           "  $\\rotatebox{37}{5~cm}$ C 217 - 6.5 deg 8"\
            "end"\
            "label"\
            "  C, B, A right"\
-           "  A 0 + 200 deg"\
-           "  B 0 - 45 deg"\
-           "  C 0 + 65 deg"\
+           "  A 198.4 deg"\
+           "  B 315 deg"\
+           "  C 63.4 deg"\
            "end"])
 
     # 2
@@ -96,13 +96,13 @@ def action():
           "  (Y.E.P)"\
           "  $\\rotatebox{30}{4~cm}$ Y 30 - 7.5 deg 6.4"\
           "  $\\rotatebox{-60}{3~cm}$ E 120 - 8.9 deg 4.9"\
-          "  $\\rotatebox{67}{5~cm}$ Y 67 + 6.5 deg 8.1"\
+          "  $\\rotatebox{67}{5~cm}$ P 247 - 6.5 deg 8.1"\
           "end"\
           "label"\
           "  P, E, Y right"\
-          "  Y 30 + 200 deg"\
-          "  E 30 - 45 deg"\
-          "  P 30 + 65 deg"\
+          "  Y 228.4 deg"\
+          "  E 344.9 deg"\
+          "  P 93.5 deg"\
           "end"])
 
     # 3
@@ -127,9 +127,9 @@ def action():
           "end"\
           "label"\
           "  K, A, Z right"\
-          "  Z 75 + 200 deg"\
-          "  A 75 - 45 deg"\
-          "  K 75 + 65 deg"\
+          "  Z 281.6 deg"\
+          "  A 30 deg"\
+          "  K 146.6 deg"\
           "end"])
 
     # 4
@@ -154,16 +154,16 @@ def action():
           +"draw"\
           +"  (L.O.P)"\
           +"  $\\rotatebox{-40}{1,5~cm}$ L 140 - 17 deg 3.3"\
-          +"  $\\rotatebox{34}{7~cm}$ L 214 + 5.1 deg 11.7"\
+          +"  $\\rotatebox{34}{7~cm}$ P 34 - 5.1 deg 11.7"\
           +"  $\\rotatebox{-2.9}{30\\textdegree}$ L 177.1 deg 2.7"\
           +"end"\
           +"label"\
           +"  O, L, P back"\
           +"  P, O, L right"\
           +"  L, P, O dotted"\
-          +"  L 140 + 200 deg"\
-          +"  O 140 - 45 deg"\
-          +"  P 140 + 65 deg"\
+          +"  L 357.1 deg"\
+          +"  O 94.9 deg"\
+          +"  P 222.1 deg"\
           +"end"])
 
     # 5
@@ -222,15 +222,15 @@ def action():
           +"  (P.A.X)"\
           +"  $\\rotatebox{0}{1~cm}$ P 0 - 25 deg 1.6"\
           +"  $\\rotatebox{-90}{8~cm}$ A 90 - 4.7 deg 12.8"\
-          +"  $\\rotatebox{83}{?}$ P 83 + 4.7 deg 12.9"\
-          +"  $\\rotatebox{41.4}{64\\textdegree}$ P 41.4 deg 2.7"\
-          +"  $\\rotatebox{86.4}{80\\textdegree}$ X 266.4 deg 7.92"\
+          +"  $\\rotatebox{83}{?}$ X 263 - 4.7 deg 12.9"\
+          +"  $\\rotatebox{41.5}{64\\textdegree}$ P 41.5 deg 2.7"\
+          +"  $\\rotatebox{86.5}{80\\textdegree}$ X 266.5 deg 7.92"\
           +"end"\
           +"label"\
           +"  A, P, X simple"\
           +"  X, A, P right"\
           +"  P, X, A double"\
-          +"  P 0 + 200 deg"\
-          +"  A 0 - 45 deg"\
-          +"  X 0 + 65 deg"\
+          +"  P 221.5 deg"\
+          +"  A 315 deg"\
+          +"  X 86.5 deg"\
           +"end"])

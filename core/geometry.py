@@ -269,7 +269,7 @@ class Polygon(Drawable):
                                                           x=v.x,
                                                           y =v.y)
 
-        result += "\n\ndraw\n"
+        result += "\n\ndraw\n  "
 
         result += "("
         result += '.'.join([v.name for v in self.vertex])
@@ -296,11 +296,12 @@ class Polygon(Drawable):
 
                 side_angle = Vector((s.points[0], s.points[1])).slope
 
-                label_position_angle = round(Decimal(str(self.rotation_angle))\
-                                             + side_angle,
+                label_position_angle = round(side_angle,
                                              Decimal('1'),
                                              rounding=ROUND_HALF_EVEN
                                             )
+
+                label_position_angle %= Decimal("360")
 
                 rotate_box_angle = Decimal(label_position_angle)
 
@@ -312,6 +313,8 @@ class Polygon(Drawable):
                     and rotate_box_angle >= -270):
                #___
                     rotate_box_angle += Decimal("180")
+
+                rotate_box_angle %= Decimal("360")
 
                 result += "\n  "
                 result += "$\\rotatebox{"
@@ -346,8 +349,7 @@ class Polygon(Drawable):
                                                                a.points[2])))\
                                       .slope
 
-                label_position_angle = label_display_angle \
-                                       + Decimal(str(self.rotation_angle))
+                label_position_angle = label_display_angle
 
                 rotate_box_angle = Decimal(label_position_angle)
 

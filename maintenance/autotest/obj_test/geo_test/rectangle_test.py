@@ -43,7 +43,7 @@ check = common.check
 
 def action():
     if common.verbose:
-        os.write(common.output, bytes("--- [GEO] POLYGON \n", 'utf-8'))
+        os.write(common.output, bytes("--- [GEO] RECTANGLE \n", 'utf-8'))
 
     # Don't forget to uncomment the convenient lines above if a test
     # requires to use the locale module.
@@ -62,7 +62,7 @@ def action():
           +"C = point(4.5, 3.5)"\
           +"D = point(0.5, 3.5)"\
           +"draw"\
-          +"(A.B.C.D)"\
+          +"  (A.B.C.D)"\
           +"  $\\rotatebox{0}{4~cm}$ C 180 - 7.5 deg 6.4"\
           +"  $\\rotatebox{90}{3~cm}$ D 270 - 9 deg 4.9"\
           +"end"\
