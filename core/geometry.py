@@ -87,7 +87,7 @@ class Polygon(Drawable):
         self._side = []
         self._angle = []
         self._rotation_angle = 0
-        
+
         if 'rotate_around_isobarycenter' in options:
             if options['rotate_around_isobarycenter'] == 'randomly':
                 self._rotation_angle = randomly.integer(0, 35) * 10
@@ -144,6 +144,16 @@ class Polygon(Drawable):
 
         self._name = ''.join([v.name for v in self._vertex])
 
+        self._nature = _(POLYGON_NATURE[len(self._side)]) \
+                       if len(self._side) in POLYGONS_NATURES \
+                       else _("Polygon_of_{n}_sides")\
+                            .format(n=str(len(self._side)))
+
+        self._random_id = ''.join([str(randomly.integer(0, 9)) \
+                                   for i in range(8)])
+
+
+
 
 
     # --------------------------------------------------------------------------
@@ -185,6 +195,39 @@ class Polygon(Drawable):
     @property
     def rotation_angle(self):
         return self._rotation_angle
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the Polygon's name
+    @property
+    def name(self):
+        return self._name
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the Polygon's nature
+    @property
+    def nature(self):
+        return self._nature
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the Polygon's filename
+    @property
+    def filename(self):
+        return self.nature + "_" + self.name + "-" + self._random_id
 
 
 
@@ -424,6 +467,8 @@ class Rectangle(Polygon):
 
         for a in self._angle:
             a.mark = 'right'
+
+        self._nature = _('Rectangle')
 
 
 
