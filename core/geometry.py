@@ -144,7 +144,7 @@ class Polygon(Drawable):
 
         self._name = ''.join([v.name for v in self._vertex])
 
-        self._nature = _(POLYGON_NATURE[len(self._side)]) \
+        self._nature = _(POLYGONS_NATURES[len(self._side)]) \
                        if len(self._side) in POLYGONS_NATURES \
                        else _("Polygon_of_{n}_sides")\
                             .format(n=str(len(self._side)))
