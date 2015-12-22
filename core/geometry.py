@@ -478,7 +478,7 @@ class Rectangle(Polygon):
 ##
 # @class Triangle
 # @brief
-class Triangle(Drawable):
+class Triangle(Polygon):
 
 
 
@@ -511,9 +511,9 @@ class Triangle(Drawable):
             raise error.WrongArgument(' Triangle|tuple ',
                                       str(type(arg)))
 
-        self._vertex = [None, None, None]
-        self._side = [None, None, None]
-        self._angle = [None, None, None]
+        self._vertex = []
+        self._side = []
+        self._angle = []
         self._name = ""
         self._rotation_angle = 0
 
@@ -569,14 +569,8 @@ class Triangle(Drawable):
                     self._rotation_angle = \
                                           options['rotate_around_isobarycenter']
 
-            start_vertex[0] = Point([vertices_names[0],
-                                     (0, 0)
-                                    ]
-                                   )
-            start_vertex[1] = Point([vertices_names[1],
-                                     (side0_length, 0)
-                                    ]
-                                   )
+            start_vertex[0] = Point([vertices_names[0], (0, 0)] )
+            start_vertex[1] = Point([vertices_names[1], (side0_length, 0)] )
             start_vertex[2] = Point([vertices_names[2],
                                      (side0_length \
                                        - side1_length*Decimal(str(math.cos(\
@@ -587,341 +581,15 @@ class Triangle(Drawable):
                                     ]
                                    )
 
-            if self._rotation_angle != 0:
-                G = barycenter([start_vertex[0],
-                                start_vertex[1],
-                                start_vertex[2]
-                               ],
-                               "G"
-                               )
+            Polygon.__init__(self, start_vertex, **options)
 
-                self._vertex = (Point(\
-                                start_vertex[0].rotate(G,
-                                                       self._rotation_angle,
-                                                       keep_name=True
-                                                      )
-                                               ),
-                                  Point(\
-                                start_vertex[1].rotate(G,
-                                                       self._rotation_angle,
-                                                       keep_name=True
-                                                      )
-                                                ),
-                                  Point(\
-                                start_vertex[2].rotate(G,
-                                                       self._rotation_angle,
-                                                       keep_name=True
-                                                      )
-                                                )
-                                  )
-
-            else:
-                self._vertex = (start_vertex[0].clone(),
-                                start_vertex[1].clone(),
-                                start_vertex[2].clone()
-                               )
-
-            self._side = (Segment((self._vertex[0],
-                                    self._vertex[1]
-                                   )
-                                  ),
-                           Segment((self._vertex[1],
-                                    self._vertex[2]
-                                   )
-                                  ),
-                           Segment((self._vertex[2],
-                                    self._vertex[0]
-                                   )
-                                  )
-                          )
-
-            self._angle[0] = Angle((self.vertex[1],
-                                    self.vertex[0],
-                                    self.vertex[2]))
-
-            self._angle[1] = Angle((self.vertex[2],
-                                    self.vertex[1],
-                                    self.vertex[0]))
-
-            self._angle[2] = Angle((self.vertex[0],
-                                    self.vertex[2],
-                                    self.vertex[1]))
-
-            self._angle[0].label_display_angle = self._angle[0].measure/2
-            self._angle[1].label_display_angle = 180 - self._angle[1].measure/2
-            self._angle[2].label_display_angle = 180 + self._angle[0].measure \
-                                                     + self._angle[2].measure/2
+        elif isinstance(arg, Triangle):
+            Polygon.__init__(self, arg, **options)
 
         else:
-            # copy of a given Triangle
-            self._vertex = [arg.vertex[0].clone(),
-                            arg.vertex[1].clone(),
-                            arg.vertex[2].clone()
-                           ]
-            self._rotation_angle = arg.rotation_angle
-            self._side = [arg.side[0].clone(),
-                          arg.side[1].clone(),
-                          arg.side[2].clone()
-                         ]
-            self._angle = [arg.angle[0].clone(),
-                           arg.angle[1].clone(),
-                           arg.angle[2].clone()
-                          ]
-
-        self._name = self.vertex[0].name + self.vertex[1].name \
-                     + self.vertex[2].name
-
-        random_number = ""
-        for i in range(8):
-            random_number += str(randomly.integer(0, 9))
-
-        self._filename = _("Triangle") + "_" + self.name \
-                         + "-" + random_number
-
-
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the three vertices (as a list of Points)
-    @property
-    def vertex(self):
-        return self._vertex
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the three sides (as a list of Segments)
-    @property
-    def side(self):
-        return self._side
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the three angles (as a list of Angles)
-    @property
-    def angle(self):
-        return self._angle
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the angle of rotation around the isobarycenter
-    @property
-    def rotation_angle(self):
-        return self._rotation_angle
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Creates the euk string to put in the file
-    #   @param options Any options
-    #   @return The string to put in the picture file
-    def into_euk(self, **options):
-        box_values = self.work_out_euk_box()
-        result = "box " + str(box_values[0]) + ", " \
-                        + str(box_values[1]) + ", " \
-                        + str(box_values[2]) + ", " \
-                        + str(box_values[3])
-
-        result += "\n\n"
-
-        for v in self.vertex:
-            result += v.name + " = point(" + str(v.x) + ", " + str(v.y) + ")\n"
-
-        result += "\n\n"
-
-        result += "draw"
-
-        result += "\n  "
-
-        result += "(" + self.vertex[0].name + "." \
-                      + self.vertex[1].name + "." \
-                      + self.vertex[2].name + ")"
-
-        scale_factor = 1
-        angle_correction = 0
-
-        sides_angles_offsets = {self.side[0] : 0,
-                                self.side[1] : 180 - self.angle[1].measure,
-                                self.side[2] : self.angle[0].measure
-                               }
-
-        labels_angle_correction_signs = {self.side[0] : "-",
-                                         self.side[1] : "-",
-                                         self.side[2] : "+"
-                                        }
-
-        labels_ref_points = {self.side[0] : self.vertex[0].name,
-                             self.side[1] : self.vertex[1].name,
-                             self.side[2] : self.vertex[0].name
-                            }
-
-
-        for s in self.side:
-            if s.label != None and s.label != Value(""):
-                x = s.length
-                scale_factor = round(Decimal(str(1.6*x)),
-                                     Decimal('0.1'),
-                                     rounding=ROUND_UP
-                                    )
-                if x <= 3:
-                    angle_correction = round(Decimal(str(-8*x + 33)),
-                                             Decimal('0.1'),
-                                             rounding=ROUND_UP
-                                            )
-                else:
-                    angle_correction = round(Decimal(str( \
-                                                1.1/(1-0.95*math.exp(-0.027*x))
-                                                        )
-                                                    ),
-                                             Decimal('0.1'),
-                                             rounding=ROUND_UP
-                                            )
-
-                label_position_angle = round(Decimal(str(self.rotation_angle))\
-                                             + \
-                                             Decimal(str(\
-                                                    sides_angles_offsets[s])),
-                                             Decimal('1'),
-                                             rounding=ROUND_HALF_EVEN
-                                            )
-
-                rotate_box_angle = Decimal(label_position_angle)
-
-                if (rotate_box_angle >= 90 \
-                    and rotate_box_angle <= 270):
-                #___
-                    rotate_box_angle -= Decimal("180")
-                elif (rotate_box_angle <= -90 \
-                    and rotate_box_angle >= -270):
-               #___
-                    rotate_box_angle += Decimal("180")
-
-                result += "\n  "
-                result += "$\\rotatebox{"
-                result += str(rotate_box_angle)
-                result += "}{"
-                result += s.label.into_str(display_unit='yes',
-                                           graphic_display='yes')
-                result += "}$ "
-                result += labels_ref_points[s] + " "
-                result += str(label_position_angle)
-                result += " " + labels_angle_correction_signs[s] + " "
-                result += str(angle_correction) + " deg "
-                result += str(scale_factor)
-                result += "\n"
-
-
-        for a in self.angle:
-            if a.label != None and a.label != Value(""):
-                scale_factor = Decimal('2.7')
-                if Decimal(str(a.measure)) < Decimal('28.5'):
-                    scale_factor = round(Decimal('38.1')\
-                                              *pow(Decimal(str(a.measure)),
-                                                   Decimal('-0.8')
-                                                  ),
-                                         Decimal('0.01'),
-                                         rounding=ROUND_HALF_UP
-                                         )
-
-                label_position_angle = Decimal(str(a.label_display_angle)) \
-                                       + Decimal(str(self.rotation_angle))
-                rotate_box_angle = Decimal(label_position_angle)
-
-                if (rotate_box_angle >= 90 \
-                    and rotate_box_angle <= 270):
-                #___
-                    rotate_box_angle -= Decimal("180")
-                elif (rotate_box_angle <= -90 \
-                    and rotate_box_angle >= -270):
-                #___
-                    rotate_box_angle += Decimal("180")
-
-                result += "\n  "
-                result += "$\\rotatebox{"
-                result += str(rotate_box_angle)
-                result += "}{"
-                result += a.label.into_str(display_unit='yes',
-                                           graphic_display='yes')
-                result += "}$ "
-                result += a.vertex.name + " "
-                result += str(label_position_angle) + " deg "
-                result += str(scale_factor)
-                result += "\n"
-
-        result += "\nend"
-
-        result += "\n\n"
-
-        result += "label"
-
-        result += "\n"
-
-        for a in self.angle:
-            if a.mark != "":
-                result += "  " + a.points[0].name + ", " \
-                        + a.vertex.name + ", " \
-                        + a.points[2].name \
-                        + " " \
-                        + a.mark
-                result += "\n"
-
-        result += "  " + self.vertex[0].name + " " \
-               + str(self.rotation_angle) + " + 200 deg"
-
-        result += "\n"
-
-        result += "  " + self.vertex[1].name + " " \
-               + str(self.rotation_angle) + " - 45 deg"
-
-        result += "\n"
-
-        result += "  " + self.vertex[2].name + " " \
-               + str(self.rotation_angle) + " + 65 deg"
-
-        result += "\nend"
-
-        return result
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Works out the dimensions of the box
-    #   @param options Any options
-    #   @return (x1, y1, x2, y2)
-    def work_out_euk_box(self, **options):
-        x_list = [self.vertex[0].x,
-                  self.vertex[1].x,
-                  self.vertex[2].x
-                  ]
-        y_list = [self.vertex[0].y,
-                  self.vertex[1].y,
-                  self.vertex[2].y
-                  ]
-
-        return (min(x_list)-Decimal("0.6"), min(y_list)-Decimal("0.6"),
-                max(x_list)+Decimal("0.6"), max(y_list)+Decimal("0.6"))
-
+            raise error.WrongArgument(str(type(arg)),
+            "Triangle|" +\
+            "((str, str, str), {'side0':nb0, 'angle1':nb1, 'side1':nb2})")
 
 
 
@@ -1036,34 +704,12 @@ class RightTriangle(Triangle):
                               rotate_around_isobarycenter=rotation
                              )
 
-        else:
-            # copy of a given RightTriangle
-            self._vertex = [arg.vertex[0].clone(),
-                            arg.vertex[1].clone(),
-                            arg.vertex[2].clone()
-                           ]
-            self._rotation_angle = arg.rotation_angle
-            self._side = [arg.side[0].clone(),
-                          arg.side[1].clone(),
-                          arg.side[2].clone()
-                         ]
-            self._angle = [arg.angle[0].clone(),
-                           arg.angle[1].clone(),
-                           arg.angle[2].clone()
-                          ]
-            # the other fields are re-created hereafter
-
-        self._name = self.vertex[0].name + self.vertex[1].name \
-                     + self.vertex[2].name
+        elif isinstance(arg, RightTriangle):
+            Polygon.__init__(self, arg, **options)
 
         self.right_angle.mark = "right"
 
-        random_number = ""
-        for i in range(8):
-            random_number += str(randomly.integer(0, 9))
-
-        self._filename = _("RightTriangle") + "_" + self.name \
-                         + "-" + random_number
+        self._nature = _("RightTriangle")
 
 
 
@@ -1071,7 +717,7 @@ class RightTriangle(Triangle):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Returns legs (as a Segment)
+    #   @brief Returns legs (as a list of two Segments)
     @property
     def leg(self):
         return [self._side[0], self._side[1]]
