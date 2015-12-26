@@ -64,7 +64,7 @@ class AlgebraFactorization_01(S_Structure):
         self.title = _("Training exercises sheet :")
         self.subtitle = _("Factorization")
         self.text = _("Only basic factorizations are expected. \
-                      Don't use fractions.")
+Don't use fractions.")
         self.answers_title = _("Examples of answers")
 
         # For instance :

@@ -389,7 +389,7 @@ class Q_RightTriangle(Q_Structure):
 
             else:
                 result += _("The triangle {triangle_name} has a right \
-                angle in {right_vertex}.")\
+angle in {right_vertex}.")\
                     .format(triangle_name=str(self.right_triangle.name),
                            right_vertex=str(self.right_triangle.vertex[1].name))
 
@@ -430,7 +430,7 @@ class Q_RightTriangle(Q_Structure):
                 side1 = randomly.pop(sides_copy)
                 side2 = randomly.pop(sides_copy)
 
-                result += _("{triangle_name} is a triangle such as\
+                result += _("{triangle_name} is a triangle such as \
 {side_length0} = {nb0}, {side_length1} = {nb1} and {side_length2} = {nb2}")\
                           .format(triangle_name=str(self.right_triangle.name),
                                   side_length0=str(side0.length_name),
@@ -442,7 +442,7 @@ class Q_RightTriangle(Q_Structure):
                                   )
 
             result += _("Is it a right triangle ? Prove your answer and if the \
-            triangle is right, give the name of the right angle.")
+triangle is right, give the name of the right angle.")
 
             result += M.write_new_line()
 
@@ -463,9 +463,8 @@ class Q_RightTriangle(Q_Structure):
         if self.q_kind == 'pythagorean_theorem':
             # Resolution (and the part with the figure will be dealed later)
             result = _("The triangle {triangle_name} has a right angle in \
-                       {right_vertex}.")\
-                    .format(triangle_name=str(self.right_triangle.name),
-                          right_vertex=str(self.right_triangle.vertex[1].name))
+{right_vertex}.").format(triangle_name=str(self.right_triangle.name),
+                         right_vertex=str(self.right_triangle.vertex[1].name))
 
             result += M.write_new_line()
 
@@ -582,8 +581,8 @@ class Q_RightTriangle(Q_Structure):
                 result += _("So, by the converse of the pythagorean theorem,")
                 #result += M.write_new_line()
                 result += " "
-                result += _("{triangle_name} has a right angle\
-                 in {right_vertex}.")\
+                result += _("{triangle_name} has a right angle \
+in {right_vertex}.")\
                  .format(triangle_name=str(self.right_triangle.name),
                          right_vertex=str(self.right_triangle.vertex[1].name))
 
@@ -592,8 +591,8 @@ class Q_RightTriangle(Q_Structure):
                         self.right_triangle.pythagorean_equality(\
                         equal_signs=['neq']).into_str())
 
-                result += _("So, by the contrapositive of the pythagorean\
-                 theorem,")
+                result += _("So, by the contrapositive of the pythagorean \
+theorem,")
                 #result += M.write_new_line()
                 result += " "
                 result += _("{triangle_name} has no right angle.")\

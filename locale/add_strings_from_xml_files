@@ -92,15 +92,12 @@ def browse_files(path):
     os.chdir(path)
     file_names = next(os.walk('.'))[2]
 
-    for f in file_names:
-        sys.stdout.write("\nChecking " + str(f))
-        file_name, extension = os.path.splitext(f)
+    for (file_name, extension) in [os.path.splitext(f) for f in file_names]:
         if extension == '.xml' and file_name != 'tmp':
-            abspath = os.getcwd() + "/" + f
+            sys.stdout.write("\nChecking " + file_name + extension)
+            abspath = os.getcwd() + "/" + file_name + extension
             relpath = abspath[len(PROJECT_ROOT)+1:]
-            collect_strings(parse_xml(f), relpath)
-
-    sys.stdout.write("\n")
+            collect_strings(parse_xml(file_name + extension), relpath)
 
     for dir_name in next(os.walk('.'))[1]:
         if dir_name !=  '.git':
@@ -111,6 +108,7 @@ def browse_files(path):
 
 def main():
     browse_files('.')
+    sys.stdout.write("\n")
     xml_pot_file = polib.POFile()
     for sentence in collected_strings:
         occ = []
