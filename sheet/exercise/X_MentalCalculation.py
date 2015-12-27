@@ -396,8 +396,8 @@ class X_MentalCalculation(X_Structure):
                 nb_box[second_source].discard(nb_to_use)
 
             else:
-                #if len(nb_box[nb_source]) == 0:
-                #    nb_box[nb_source] = question.generate_numbers(nb_source)
+                if len(nb_box[nb_source]) == 0:
+                    nb_box[nb_source] = question.generate_numbers(nb_source)
                 nb_box_shuffled = list(nb_box[nb_source])
                 random.shuffle(nb_box_shuffled)
                 nb_to_use = nb_box_shuffled.pop()
