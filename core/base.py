@@ -142,7 +142,7 @@ class Drawable(NamedObject):
     #   @brief Returns the eukleides filename associated to the triangle
     @property
     def euk_filename(self):
-        return self._filename + ".euk"
+        return self.filename + ".euk"
 
 
 
@@ -153,7 +153,7 @@ class Drawable(NamedObject):
     #   @brief Returns the eps filename associated to the triangle
     @property
     def eps_filename(self):
-        return self._filename + ".eps"
+        return self.filename + ".eps"
 
 
 
