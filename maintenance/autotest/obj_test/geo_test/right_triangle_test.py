@@ -52,7 +52,7 @@ def action():
 
     # 1
     t1 = RightTriangle((("A", "B", "C"),
-                        {'leg0' : 4, 'leg1' : 3}
+                        {'leg0': 4, 'leg1': 3}
                        ),
                        rotate_around_isobarycenter='no'
                       )
@@ -79,7 +79,7 @@ def action():
 
     # 2
     t2 = RightTriangle((("Y", "E", "P"),
-                        {'leg0' : 4, 'leg1' : 3}
+                        {'leg0': 4, 'leg1': 3}
                        ),
                        rotate_around_isobarycenter=30
                       )
@@ -107,7 +107,7 @@ def action():
 
     # 3
     t3 = RightTriangle((("Z", "A", "K"),
-                        {'leg0' : 3, 'leg1' : 4}
+                        {'leg0': 3, 'leg1': 4}
                        ),
                        rotate_around_isobarycenter=75
                       )
@@ -134,7 +134,7 @@ def action():
 
     # 4
     t4 = RightTriangle((("L", "O", "P"),
-                        {'leg0' : 2, 'leg1' : 7}
+                        {'leg0': 2, 'leg1': 7}
                        ),
                        rotate_around_isobarycenter=140
                       )
@@ -200,7 +200,7 @@ def action():
 
     # 10
     t5 = RightTriangle((("P", "A", "X"),
-                        {'leg0' : 1, 'leg1' : 8}
+                        {'leg0': 1, 'leg1': 8}
                        ),
                        rotate_around_isobarycenter=0
                       )

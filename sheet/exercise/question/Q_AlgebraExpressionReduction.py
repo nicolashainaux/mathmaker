@@ -35,33 +35,33 @@ AVAILABLE_Q_KIND_VALUES = {'product': ['default'],
                            'sum_not_reducible': ['default'],
                            'sum_with_minus-brackets': ['default']}
 
-MAX_COEFF_TABLE = {'product' : 10,
-                   'sum_of_products' : 10,
-                   'sum' : 10,
+MAX_COEFF_TABLE = {'product': 10,
+                   'sum_of_products': 10,
+                   'sum': 10,
                    'long_sum':15,
                    'long_sum_including_a_coeff_1':15,
                    'sum_not_reducible':20,
                    'sum_with_minus-brackets':15}
 
-MAX_EXPONENT_TABLE = {'product' : 1,
-                     'sum_of_products' : 1,
-                     'sum' : 2,
+MAX_EXPONENT_TABLE = {'product': 1,
+                     'sum_of_products': 1,
+                     'sum': 2,
                      'long_sum':2,
                      'long_sum_including_a_coeff_1':2,
                      'sum_not_reducible':2,
                      'sum_with_minus-brackets':2}
 
-DEFAULT_MINIMUM_LENGTH_TABLE = {'product' : 1,
-                                'sum_of_products' : 2,
-                                'sum' : 2,
+DEFAULT_MINIMUM_LENGTH_TABLE = {'product': 1,
+                                'sum_of_products': 2,
+                                'sum': 2,
                                 'long_sum':7,
                                 'long_sum_including_a_coeff_1':7,
                                 'sum_not_reducible':2,
                                 'sum_with_minus-brackets':4}
 
-DEFAULT_MAXIMUM_LENGTH_TABLE = {'product' : 1,
-                                'sum_of_products' : 4,
-                                'sum' : 6,
+DEFAULT_MAXIMUM_LENGTH_TABLE = {'product': 1,
+                                'sum_of_products': 4,
+                                'sum': 6,
                                 'long_sum':10,
                                 'long_sum_including_a_coeff_1':10,
                                 'sum_not_reducible':3,
@@ -89,24 +89,24 @@ class Q_AlgebraExpressionReduction(Q_Structure):
     #   @brief Constructor.
     #   @param embedded_machine The machine to be used
     #   @param q_kind= the kind of question desired
-    #          Available values are : 'product'
+    #          Available values are: 'product'
     #                                 'sum'
     #                                 'sum_of_products'
-    #   @param **options Options detailed below :
+    #   @param **options Options detailed below:
     #          - short_test=<string>
     #                         'yes'
     #                         'OK'
     #                         any other value will be understood as 'no'
     #          - q_subkind=<string>
-    #                    'minus_brackets_nb' (values : 1, 2, 3)
-    #                    'plus_brackets_nb' (values : 1, 2, 3)
+    #                    'minus_brackets_nb' (values: 1, 2, 3)
+    #                    'plus_brackets_nb' (values: 1, 2, 3)
     #   @todo describe the different available options in this comment
     #   @return One instance of question.Q_AlgebraExpressionReduction
     def __init__(self, embedded_machine, q_kind='default_nothing', **options):
         self.derived = True
 
         # The call to the mother class __init__() method will set the
-        # fields matching optional arguments which are so far :
+        # fields matching optional arguments which are so far:
         # self.q_kind, self.q_subkind
         # plus self.machine, self.options (modified)
         Q_Structure.__init__(self, embedded_machine,
@@ -147,7 +147,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
 
 
-        # 1st CASE :
+        # 1st CASE:
         # PRODUCT REDUCTION
         if q_kind == 'product':
             # First let's determine a pack of letters where to draw
@@ -192,7 +192,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
                 if 'max_literal_items_nb' in options                       \
                     and options['max_literal_items_nb'] >= 2                  \
-                    and options['max_literal_items_nb'] <= 6 :
+                    and options['max_literal_items_nb'] <= 6:
                 #___
                     max_literal_items_nb = min(options['max_literal_items_nb'],
                                                len(letters_package))
@@ -235,7 +235,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                         # times  should be limited to keep sufficient
                         # simple cases for the pupils to begin with.
                         # It is really easy to make it much more complicated
-                        # simply giving :
+                        # simply giving:
                         # nb_occurences_of_the_same_letter=<enough_high_nb>
                         # as an argument.
                         if randomly.decimal_0_1() < 0.5:
@@ -311,7 +311,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                     #___
                         self.objct.info[i] = False
 
-        # 2d CASE :
+        # 2d CASE:
         # SUM OF PRODUCTS REDUCTION
         if q_kind == 'sum_of_products':
 
@@ -338,7 +338,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             self.objct = Sum(products_list)
 
 
-        # 3d CASE :
+        # 3d CASE:
         # SUM REDUCTION
         if q_kind == 'sum':
             self.kind_of_answer = 'sum'
@@ -506,7 +506,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
 
 
-        # Creation of the expression :
+        # Creation of the expression:
         number = 0
         if 'expression_number' in options                                     \
            and is_.a_natural_int(options['expression_number']):

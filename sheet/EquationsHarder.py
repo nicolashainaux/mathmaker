@@ -29,9 +29,9 @@ FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'equations'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc' : [ None,                    'all'
+SHEET_LAYOUT = { 'exc': [ None,                    'all'
                          ],
-                 'ans' : [ None,                    1,
+                 'ans': [ None,                    1,
                            'jump',                  'next_page',
                            None,                    1
                          ]
@@ -64,7 +64,7 @@ class EquationsHarder(S_Structure):
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
         self.header = ""
-        self.title = _("Training exercises sheet :")
+        self.title = _("Training exercises sheet:")
         self.subtitle = _("Equations")
         self.text = _("Solve the following equations")
         self.answers_title = _("Examples of answers")

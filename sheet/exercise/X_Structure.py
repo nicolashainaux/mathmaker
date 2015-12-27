@@ -30,7 +30,7 @@ from . import question
 # @class X_Structure
 # @brief Mother class of all exercises objects. Not instanciable.
 # This class suggests two default methods which are also in the exercise.Model
-# class : write_text and write_answer. In a new exercise, they can either be
+# class: write_text and write_answer. In a new exercise, they can either be
 # kept untouched (then it would be wise to delete them from the new exercise)
 # or rewritten.
 class X_Structure(object):

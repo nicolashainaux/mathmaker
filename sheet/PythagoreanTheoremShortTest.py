@@ -30,9 +30,9 @@ SHEET_LAYOUT_TYPE = 'short_test'
 SHEET_LAYOUT_UNIT = "cm"
 #EXAMPLE OF A SHEET NOT USING ANY LAYOUT
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc' : [ None,                    'all'
+SHEET_LAYOUT = { 'exc': [ None,                    'all'
                          ],
-                 'ans' : [ None,                    'all'
+                 'ans': [ None,                    'all'
                          ]
                }
 
@@ -62,8 +62,8 @@ class PythagoreanTheoremShortTest(S_Structure):
                              SHEET_LAYOUT_TYPE, write_texts_twice='yes')
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
-        self.header = _("Name : .......................................")
-        self.title = _("Short Test : pythagorean theorem")
+        self.header = _("Name: .......................................")
+        self.title = _("Short Test: pythagorean theorem")
         self.subtitle = ""
         self.text = ""
         self.answers_title = _("Examples of answers")

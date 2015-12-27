@@ -27,12 +27,12 @@ from core.base_calculus import *
 #from core import randomly
 
 AVAILABLE_X_KIND_VALUES = \
-    {'short_test' : ['sign_expansion', 'medium_level',
+    {'short_test': ['sign_expansion', 'medium_level',
                      'three_binomials', 'three_numeric_binomials',
                      'default'],
-     'mini_test' : ['two_expansions_hard', 'two_randomly'],
-     'preformatted' : ['mixed_monom_polyn1'],
-     'bypass' : ['sign_expansion', 'any_basic_expd', 'sum_of_any_basic_expd',
+     'mini_test': ['two_expansions_hard', 'two_randomly'],
+     'preformatted': ['mixed_monom_polyn1'],
+     'bypass': ['sign_expansion', 'any_basic_expd', 'sum_of_any_basic_expd',
                  'sum_square', 'difference_square', 'squares_difference',
                  'any_binomial', 'polyn1_polyn1', 'two_expansions_hard']
     }
@@ -41,17 +41,17 @@ DEFAULT_RATIO_MIXED_MONOM_POLYN1 = 0.5
 
 X_LAYOUT_UNIT = "cm"
 # ----------------------  lines_nb    col_widths   questions
-X_LAYOUTS = {'default' :
-              { 'exc' : [ None,                    'all'
+X_LAYOUTS = {'default':
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ None,                    'all'
+                'ans': [ None,                    'all'
                         ]
               },
 
-             ('short_test', 'three_numeric_binomials') :
-              { 'exc' : [ None,                    'all'
+             ('short_test', 'three_numeric_binomials'):
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ [1,         5.5, 5.5],   (2, 1)
+                'ans': [ [1,         5.5, 5.5],   (2, 1)
                         ],
               }
             }
@@ -72,7 +72,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
     ##
     #   @brief Constructor.
     #   @param embedded_machine The machine that will be used to write output.
-    #   @param **options Options detailed below :
+    #   @param **options Options detailed below:
     #          - start_number=<integer>
     #                         (should be >= 1)
     #          - number_of_questions=<integer>
@@ -111,15 +111,15 @@ class X_AlgebraExpressionExpansion(X_Structure):
         default_question = question.Q_AlgebraExpressionExpansion
 
         # TEXTS OF THE EXERCISE
-        self.text = {'exc' : _("Expand and reduce") + " : ",
-                     'ans' : ""
+        self.text = {'exc': _("Expand and reduce") + ": ",
+                     'ans': ""
                     }
 
         # alternate texts section
         if self.x_subkind == 'three_numeric_binomials':
-            self.text = {'exc' : \
-                           _("Calculate thanks to a binomial identity") + " : ",
-                         'ans' : ""
+            self.text = {'exc': \
+                           _("Calculate thanks to a binomial identity") + ": ",
+                         'ans': ""
                         }
 
         # PREFORMATTED EXERCISES
@@ -310,10 +310,10 @@ class X_AlgebraExpressionExpansion(X_Structure):
                     self.questions_list.append(q)
 
         elif self.x_kind == 'preformatted':
-            # Mixed expandable expressions from the following types :
+            # Mixed expandable expressions from the following types:
             # 0-degree Monomial × (1st-degree Polynomial)
             # 1-degree Monomial × (1st-degree Polynomial)
-            # The Monomial & the polynomial may be swapped : it depends
+            # The Monomial & the polynomial may be swapped: it depends
             # if the option 'reversed' has been given in
             # argument in this method
             if self.x_subkind == 'mixed_monom_polyn1':
@@ -323,7 +323,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
                 if 'ratio_mmp' in options \
                    and is_.a_number(options['ratio_mmp']) \
                    and options['ratio_mmp'] > 0 \
-                   and options['ratio_mmp'] < 1 :
+                   and options['ratio_mmp'] < 1:
                 #___
                     ratio = options['ratio_mmp']
                 else:

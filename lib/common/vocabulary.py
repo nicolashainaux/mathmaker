@@ -34,7 +34,7 @@ try:
                         localdir,
                         [default.LANGUAGE]).install()
 except IOError as msg:
-    error.write_warning("gettext returned the following message :\n" \
+    error.write_warning("gettext returned the following message:\n" \
                         + str(msg) + "\n" \
                         + "It means the language indicated either \
 in the command line or read from the configuration file isn't available yet \
@@ -44,7 +44,7 @@ system.".format(software_ref=software.NAME) + "\n" )
         gettext.install(software.NAME,
                         localdir)
     except IOError as msg:
-        error.write_warning("gettext returned the following message :\n" \
+        error.write_warning("gettext returned the following message:\n" \
                         + str(msg) + "\n" \
                         + "It means the language of your system isn't \
 available yet in {software_ref} which will produce output in \
@@ -55,9 +55,9 @@ complete.".format(software_ref=software.NAME) + "\n")
                             ['en']).install()
 
 
-PRECISION_IDIOMS = { UNIT : _("to the unit"),
-                     TENTH : _("to the tenth"),
-                     HUNDREDTH : _("to the hundreth"),
-                     THOUSANDTH : _("to the thousandth"),
-                     TEN_THOUSANDTH : _("to the ten thousandth")
+PRECISION_IDIOMS = { UNIT: _("to the unit"),
+                     TENTH: _("to the tenth"),
+                     HUNDREDTH: _("to the hundreth"),
+                     THOUSANDTH: _("to the thousandth"),
+                     TEN_THOUSANDTH: _("to the ten thousandth")
                    }

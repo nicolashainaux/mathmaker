@@ -39,7 +39,7 @@ os.chdir('..')
 PROJECT_ROOT = os.getcwd()
 
 # collected_strings will look like:
-# { "Sentence to translate" : ["#: file_name: line", "#: file_name: line", ...]}
+# { "Sentence to translate": ["#: file_name: line", "#: file_name: line", ...]}
 collected_strings = {}
 
 # Next method taken from
@@ -77,9 +77,9 @@ def collect_strings(node, rel_file_name):
                                 [(rel_file_name, node.attrib[LINE_DUMMY_ATTR])]
 
             # collected_strings looks like:
-            # {'Something to translate' : [("this_file.xml", 76),
+            # {'Something to translate': [("this_file.xml", 76),
             #                              ("this_other_file.xml", 34)],
-            #  'Something else to translate' : [("another_file.xml", 21)],
+            #  'Something else to translate': [("another_file.xml", 21)],
             #  etc. }
 
     for child in node:

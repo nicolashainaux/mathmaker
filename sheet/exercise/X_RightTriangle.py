@@ -27,22 +27,22 @@ from lib.common.cst import *
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
-# Note : the bypass value allows to give the value of *x_subkind* directly to
+# Note: the bypass value allows to give the value of *x_subkind* directly to
 # the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
-    {'short_test' : ['pythagorean_theorem_one_of_each',
+    {'short_test': ['pythagorean_theorem_one_of_each',
                      'converse_of_pythagorean_theorem',
                      'contrapositive_of_pythagorean_theorem']
-     #'preformatted' : [''],
-     #'bypass' : ['']
+     #'preformatted': [''],
+     #'bypass': ['']
     }
 
 X_LAYOUT_UNIT = "cm" #[1,         9, 9],       (1, 1)
 # ----------------------  lines_nb    col_widths   questions
-X_LAYOUTS = {'default' :
-              { 'exc' : [ None,                    'all'
+X_LAYOUTS = {'default':
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ None,                    'all'
+                'ans': [ None,                    'all'
                         ]
               }
             }
@@ -67,7 +67,7 @@ class X_RightTriangle(X_Structure):
     #                         see AVAILABLE_X_KIND_VALUES to check the
     #                         possible values to use and their matching
     #                         x_subkind options
-    #   @param **options Options detailed below :
+    #   @param **options Options detailed below:
     #          - x_subkind=<string>
     #                         ...
     #                         ...
@@ -92,21 +92,21 @@ class X_RightTriangle(X_Structure):
         default_question = question.Q_RightTriangle
 
         # TEXTS OF THE EXERCISE
-        self.text = {'exc' : "",
-                     'ans' : ""
+        self.text = {'exc': "",
+                     'ans': ""
                     }
 
         # alternate texts section
         #if self.x_kind == 'short_test' \
         #    and self.x_subkind == 'pythagorean_theorem_one_of_each':
         ##___
-        #    self.text = {'exc' : "",
-        #                 'ans'   : _("The drawings below are only sketches.")
+        #    self.text = {'exc': "",
+        #                 'ans': _("The drawings below are only sketches.")
         #                }
         #
         #elif self.x_kind == '...':
-            #self.text = {'exc' : "",
-            #             'ans'   : ""
+            #self.text = {'exc': "",
+            #             'ans': ""
             #            }
 
         # SHORT TEST & OTHER PREFORMATTED EXERCISES

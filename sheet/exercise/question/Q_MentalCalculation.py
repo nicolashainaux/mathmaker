@@ -66,23 +66,23 @@ AVAILABLE_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                               'decimal_and_one_digit_for_multi',
                               'bypass'}
 
-PART_OF_ANOTHER_SOURCE = { 'table_2' : 'table_2_9',
-                           'table_3' : 'table_2_9',
-                           'table_4' : 'table_2_9',
-                           'integers_10_100_for_sums_diffs' : 'integers_10_100',
-                           'table_2_9_for_rectangles' : 'table_2_9'
+PART_OF_ANOTHER_SOURCE = { 'table_2': 'table_2_9',
+                           'table_3': 'table_2_9',
+                           'table_4': 'table_2_9',
+                           'integers_10_100_for_sums_diffs': 'integers_10_100',
+                           'table_2_9_for_rectangles': 'table_2_9'
                          }
 
-SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number' : {'half', 'third', 'quarter'},
-                      'simple_multiples_of_a_number' : {'double', 'triple',
+SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number': {'half', 'third', 'quarter'},
+                      'simple_multiples_of_a_number': {'double', 'triple',
                                                         'quadruple'},
-                      'simple_parts_or_multiples_of_a_number' : {'half',
+                      'simple_parts_or_multiples_of_a_number': {'half',
                                                                  'third',
                                                                  'quarter',
                                                                  'double',
                                                                  'triple',
                                                                  'quadruple'},
-                      'operation' : {'multi', 'divi', 'addi', 'subtr'}
+                      'operation': {'multi', 'divi', 'addi', 'subtr'}
                      }
 
 UNPACKABLE_SUBKINDS = {'half', 'third', 'quarter',
@@ -90,58 +90,58 @@ UNPACKABLE_SUBKINDS = {'half', 'third', 'quarter',
                        'multi', 'divi', 'addi', 'subtr'
                       }
 
-SOURCES_TO_UNPACK = {'auto_table' : {'half' : {'table_2'},
-                                     'third' : {'table_3'},
-                                     'quarter' : {'table_4'},
-                                     'double' : {'table_2'},
-                                     'triple' : {'table_3'},
-                                     'quadruple' : {'table_4'},
-                                     'multi' : {'table_2_9'},
-                                     'divi' : {'table_2_9'},
-                                     'addi' : {'table_2_9_for_sums_diffs'},
-                                     'subtr' : {'table_2_9_for_sums_diffs'}},
-                     'auto_11_50' : {'half' : {'table_2_11_50'},
-                                     'third' : {'table_3_11_50'},
-                                     'quarter' : {'table_4_11_50'},
-                                     'double' : {'table_2_11_50'},
-                                     'triple' : {'table_3_11_50'},
-                                     'quadruple' : {'table_4_11_50'}},
-                     'auto_vocabulary' :  \
-                               {'half' : {'table_2', 'table_2_11_50'},
-                                'third' : {'table_3', 'table_3_11_50'},
-                                'quarter' : {'table_4', 'table_4_11_50'},
-                                'double' : {'table_2', 'table_2_11_50'},
-                                'triple' : {'table_3', 'table_3_11_50'},
-                                'quadruple' : {'table_4', 'table_4_11_50'},
-                                'multi' : {'table_2_9'},
-                                'divi' : {'table_2_9'},
-                                'addi' : {'integers_10_100_for_sums_diffs',
+SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
+                                     'third': {'table_3'},
+                                     'quarter': {'table_4'},
+                                     'double': {'table_2'},
+                                     'triple': {'table_3'},
+                                     'quadruple': {'table_4'},
+                                     'multi': {'table_2_9'},
+                                     'divi': {'table_2_9'},
+                                     'addi': {'table_2_9_for_sums_diffs'},
+                                     'subtr': {'table_2_9_for_sums_diffs'}},
+                     'auto_11_50': {'half': {'table_2_11_50'},
+                                     'third': {'table_3_11_50'},
+                                     'quarter': {'table_4_11_50'},
+                                     'double': {'table_2_11_50'},
+                                     'triple': {'table_3_11_50'},
+                                     'quadruple': {'table_4_11_50'}},
+                     'auto_vocabulary':  \
+                               {'half': {'table_2', 'table_2_11_50'},
+                                'third': {'table_3', 'table_3_11_50'},
+                                'quarter': {'table_4', 'table_4_11_50'},
+                                'double': {'table_2', 'table_2_11_50'},
+                                'triple': {'table_3', 'table_3_11_50'},
+                                'quadruple': {'table_4', 'table_4_11_50'},
+                                'multi': {'table_2_9'},
+                                'divi': {'table_2_9'},
+                                'addi': {'integers_10_100_for_sums_diffs',
                                           'decimals_0_20_1'},
-                                'subtr' : {'integers_10_100_for_sums_diffs',
+                                'subtr': {'integers_10_100_for_sums_diffs',
                                            'decimals_0_20_1'}},
-                     'decimal_and_10_100_1000' : \
-                {'multi_direct' : {'decimal_and_10_100_1000_for_multi'},
-                 'divi_direct' : {'decimal_and_10_100_1000_for_divi'},
-                 'area_rectangle' : {'decimal_and_10_100_1000_for_multi'},
-                 'multi_hole' : {'decimal_and_10_100_1000_for_multi'},
-                 'vocabulary_multi' : {'decimal_and_10_100_1000_for_multi'},
-                 'vocabulary_divi' : {'decimal_and_10_100_1000_for_divi'}
+                     'decimal_and_10_100_1000': \
+                {'multi_direct': {'decimal_and_10_100_1000_for_multi'},
+                 'divi_direct': {'decimal_and_10_100_1000_for_divi'},
+                 'area_rectangle': {'decimal_and_10_100_1000_for_multi'},
+                 'multi_hole': {'decimal_and_10_100_1000_for_multi'},
+                 'vocabulary_multi': {'decimal_and_10_100_1000_for_multi'},
+                 'vocabulary_divi': {'decimal_and_10_100_1000_for_divi'}
                  },
                      'decimal_and_one_digit': \
-                 {'multi_direct' : {'decimal_and_one_digit_for_multi'},
-                  'divi_direct' : {'decimal_and_one_digit_for_divi'},
-                  'area_rectangle' : {'decimal_and_one_digit_for_multi'},
-                  'multi_hole' : {'decimal_and_one_digit_for_multi'},
-                  'vocabulary_multi' : {'decimal_and_one_digit_for_multi'},
-                  'vocabulary_divi' : {'decimal_and_one_digit_for_divi'}
+                 {'multi_direct': {'decimal_and_one_digit_for_multi'},
+                  'divi_direct': {'decimal_and_one_digit_for_divi'},
+                  'area_rectangle': {'decimal_and_one_digit_for_multi'},
+                  'multi_hole': {'decimal_and_one_digit_for_multi'},
+                  'vocabulary_multi': {'decimal_and_one_digit_for_multi'},
+                  'vocabulary_divi': {'decimal_and_one_digit_for_divi'}
                   }
                      }
 
-SOURCES_TO_TRANSLATE = {'divi_direct_area_width_length_rectangle' : \
-                                {'table_2_9' : 'table_2_9_for_rectangles'}}
+SOURCES_TO_TRANSLATE = {'divi_direct_area_width_length_rectangle': \
+                                {'table_2_9': 'table_2_9_for_rectangles'}}
 
 AVAILABLE_Q_KIND_VALUES = \
-    { 'multi_direct' : ['table_2_9',
+    { 'multi_direct': ['table_2_9',
                         'table_2', 'table_3', 'table_4',
                         'table_11',
                         'table_15',
@@ -149,7 +149,7 @@ AVAILABLE_Q_KIND_VALUES = \
                         'decimal_and_10_100_1000',
                         'decimal_and_one_digit',
                         'bypass'],
-      'area_rectangle' : ['table_2_9',
+      'area_rectangle': ['table_2_9',
                           'table_2', 'table_3', 'table_4',
                           'table_11',
                           'table_15',
@@ -157,10 +157,10 @@ AVAILABLE_Q_KIND_VALUES = \
                           'decimal_and_10_100_1000',
                           'decimal_and_one_digit',
                           'bypass'],
-      'multi_reversed' : ['table_2_9',
+      'multi_reversed': ['table_2_9',
                           'table_2', 'table_3', 'table_4',
                           'bypass'],
-      'multi_hole' : ['table_2_9',
+      'multi_hole': ['table_2_9',
                       'table_2', 'table_3', 'table_4',
                       'table_11',
                       'table_15',
@@ -168,7 +168,7 @@ AVAILABLE_Q_KIND_VALUES = \
                       'decimal_and_10_100_1000',
                       'decimal_and_one_digit',
                       'bypass'],
-      'divi_direct' : ['table_2_9', 'table_2_9_for_rectangles',
+      'divi_direct': ['table_2_9', 'table_2_9_for_rectangles',
                        'table_2', 'table_3', 'table_4',
                        'table_11',
                        'table_15',
@@ -176,19 +176,19 @@ AVAILABLE_Q_KIND_VALUES = \
                        'decimal_and_10_100_1000',
                        'decimal_and_one_digit',
                        'bypass'],
-      'rank_direct' : ['rank_word',
+      'rank_direct': ['rank_word',
                        'bypass'],
-      'rank_reversed' : ['rank_word',
+      'rank_reversed': ['rank_word',
                          'bypass'],
-      'rank_numberof' : ['rank_word',
+      'rank_numberof': ['rank_word',
                            'bypass'],
-      'vocabulary_half' : {'table_2', 'table_2_11_50', 'bypass'},
-      'vocabulary_third' : {'table_3', 'table_3_11_50', 'bypass'},
-      'vocabulary_quarter' : {'table_4', 'table_4_11_50', 'bypass'},
-      'vocabulary_double' : {'table_2', 'table_2_11_50', 'bypass'},
-      'vocabulary_triple' : {'table_3', 'table_3_11_50', 'bypass'},
-      'vocabulary_quadruple' : {'table_4', 'table_4_11_50', 'bypass'},
-      'vocabulary_multi' : {'table_2_9',
+      'vocabulary_half': {'table_2', 'table_2_11_50', 'bypass'},
+      'vocabulary_third': {'table_3', 'table_3_11_50', 'bypass'},
+      'vocabulary_quarter': {'table_4', 'table_4_11_50', 'bypass'},
+      'vocabulary_double': {'table_2', 'table_2_11_50', 'bypass'},
+      'vocabulary_triple': {'table_3', 'table_3_11_50', 'bypass'},
+      'vocabulary_quadruple': {'table_4', 'table_4_11_50', 'bypass'},
+      'vocabulary_multi': {'table_2_9',
                             'table_2', 'table_3', 'table_4',
                             'table_11',
                             'table_15',
@@ -197,7 +197,7 @@ AVAILABLE_Q_KIND_VALUES = \
                             'decimal_and_one_digit',
                             'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
                             'bypass'},
-      'vocabulary_divi' : {'table_2_9',
+      'vocabulary_divi': {'table_2_9',
                            'table_2', 'table_3', 'table_4',
                            'table_11',
                            'table_15',
@@ -206,52 +206,52 @@ AVAILABLE_Q_KIND_VALUES = \
                            'decimal_and_one_digit',
                            'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
                            'bypass'},
-      'vocabulary_addi' : {'table_2_9', 'table_2_9_for_sums_diffs',
+      'vocabulary_addi': {'table_2_9', 'table_2_9_for_sums_diffs',
                            'integers_10_100', 'integers_10_100_for_sums_diffs',
                            'decimals_0_20_1', 'bypass'},
-      'vocabulary_subtr' : {'table_2_9', 'table_2_9_for_sums_diffs',
+      'vocabulary_subtr': {'table_2_9', 'table_2_9_for_sums_diffs',
                             'integers_10_100', 'integers_10_100_for_sums_diffs',
                             'decimals_0_20_1', 'bypass'}
 
-#     frozenset(('area', 'rectangle', 'with_drawing')) : ['table_2_9',
+#     frozenset(('area', 'rectangle', 'with_drawing')): ['table_2_9',
 #                                              'table_11',
 #                                              'table_15',
 #                                              'table_25'],
-#     frozenset(('area', 'rectangle', 'without_drawing')) : ['table_2_9',
+#     frozenset(('area', 'rectangle', 'without_drawing')): ['table_2_9',
 #                                                 'table_11',
 #                                                 'table_15',
 #                                                 'table_25'],
-#     frozenset(('area', 'right_triangle')) : ['table_2_9',
+#     frozenset(('area', 'right_triangle')): ['table_2_9',
 #                                   'table_11',
 #                                   'table_15',
 #                                   'table_25']
     }
 
 MODULES =  \
-    { 'multi_direct' : mc_modules.multi_direct,
-      'multi_reversed' : mc_modules.multi_reversed,
-      'multi_hole' : mc_modules.multi_hole,
-      'divi_direct' : mc_modules.divi_direct,
-      'rank_direct' : mc_modules.rank_direct,
-      'rank_reversed' : mc_modules.rank_reversed,
-      'rank_numberof' : mc_modules.rank_numberof,
-      'vocabulary_half' : mc_modules.vocabulary_simple_part_of_a_number,
-      'vocabulary_third' : mc_modules.vocabulary_simple_part_of_a_number,
-      'vocabulary_quarter' : mc_modules.vocabulary_simple_part_of_a_number,
-      'vocabulary_double' : mc_modules.vocabulary_simple_multiple_of_a_number,
-      'vocabulary_triple' : mc_modules.vocabulary_simple_multiple_of_a_number,
+    { 'multi_direct': mc_modules.multi_direct,
+      'multi_reversed': mc_modules.multi_reversed,
+      'multi_hole': mc_modules.multi_hole,
+      'divi_direct': mc_modules.divi_direct,
+      'rank_direct': mc_modules.rank_direct,
+      'rank_reversed': mc_modules.rank_reversed,
+      'rank_numberof': mc_modules.rank_numberof,
+      'vocabulary_half': mc_modules.vocabulary_simple_part_of_a_number,
+      'vocabulary_third': mc_modules.vocabulary_simple_part_of_a_number,
+      'vocabulary_quarter': mc_modules.vocabulary_simple_part_of_a_number,
+      'vocabulary_double': mc_modules.vocabulary_simple_multiple_of_a_number,
+      'vocabulary_triple': mc_modules.vocabulary_simple_multiple_of_a_number,
       'vocabulary_quadruple': mc_modules.vocabulary_simple_multiple_of_a_number,
-      'vocabulary_multi' : mc_modules.vocabulary_multi,
-      'vocabulary_divi' : mc_modules.vocabulary_divi,
+      'vocabulary_multi': mc_modules.vocabulary_multi,
+      'vocabulary_divi': mc_modules.vocabulary_divi,
       'vocabulary_addi': mc_modules.vocabulary_addi,
-      'vocabulary_subtr' : mc_modules.vocabulary_subtr,
-      'area_rectangle' : mc_modules.area_rectangle
+      'vocabulary_subtr': mc_modules.vocabulary_subtr,
+      'area_rectangle': mc_modules.area_rectangle
 
-#     ('division', 'direct') : mc_modules.divi_dir,
-#     ('division', 'decimal_1') : mc_modules.divi_deci1,
-#     ('area', 'rectangle', 'with_drawing') : mc_modules.area_rect_dr,
-#     ('area', 'rectangle', 'without_drawing') : mc_modules.area_rect_no_dr,
-#     ('area', 'right_triangle') : mc_modules.area_right_tri
+#     ('division', 'direct'): mc_modules.divi_dir,
+#     ('division', 'decimal_1'): mc_modules.divi_deci1,
+#     ('area', 'rectangle', 'with_drawing'): mc_modules.area_rect_dr,
+#     ('area', 'rectangle', 'without_drawing'): mc_modules.area_rect_no_dr,
+#     ('area', 'right_triangle'): mc_modules.area_right_tri
     }
 
 
@@ -422,9 +422,9 @@ def generate_numbers(subkind):
             ranks_scale = list(RANKS[2:])
             width = randomly.pop([1, 2, 3], weighted_table=[0.14, 0.63, 0.33])
 
-            wt = {10 : [0.2, 0.2, 0.2, 0.2, 0.2],
-                  100 : [0.25, 0.25, 0.25, 0.25, 0],
-                  1000 : [0.34, 0.33, 0.33, 0, 0]}
+            wt = {10: [0.2, 0.2, 0.2, 0.2, 0.2],
+                  100: [0.25, 0.25, 0.25, 0.25, 0],
+                  1000: [0.34, 0.33, 0.33, 0, 0]}
 
             start_rank = randomly.pop([n for n in range(len(ranks_scale))],
                                       weighted_table=wt[chosen_10_100_1000])
@@ -534,7 +534,7 @@ class Q_MentalCalculation(Q_Structure):
         self.derived = True
 
         # The call to the mother class __init__() method will set the
-        # fields matching optional arguments which are so far :
+        # fields matching optional arguments which are so far:
         # self.q_kind, self.q_subkind
         # plus self.machine, self.options (modified)
         Q_Structure.__init__(self, embedded_machine,

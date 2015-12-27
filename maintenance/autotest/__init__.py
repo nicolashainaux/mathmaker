@@ -127,7 +127,7 @@ def fraction_simplification_coverage(n):
                                              f.denominator.factor[0].raw_value:
                     #___
                         os.write(common.err_output,
-                                 bytes("\nFAILED : " \
+                                 bytes("\nFAILED: " \
                                  + str(i+1) + "/" + str(j+1) \
                                  + " -------- Step " \
                                  + str(g.numerator.factor[0].raw_value) \
@@ -143,7 +143,7 @@ def fraction_simplification_coverage(n):
             else:
                 os.write(common.output, bytes(".", 'utf-8'))
 
-    os.write(common.output, bytes("\nNumber of failed : " + \
+    os.write(common.output, bytes("\nNumber of failed: " + \
                                      str(number_of_failed) + "\n", 'utf-8'))
 
 
@@ -151,7 +151,7 @@ def main():
     parser = OptionParser(usage="usage: %prog [options] arg",
                           version="autotest for " + software.NAME + "\n" \
                                   + software.NAME + " " + software.VERSION \
-                                  + "\nLicense : " + software.LICENSE \
+                                  + "\nLicense: " + software.LICENSE \
                                   + "\n" + software.COPYRIGHT + " " \
                                   + software.AUTHOR)
 
@@ -214,7 +214,7 @@ def main():
                            + "them (default behaviour). This option can be" \
                            + " repeated to test several units, for instance " \
                            + ": autotest-mathmaker -u item -u " \
-                           + "product will check only these two units :" \
+                           + "product will check only these two units:" \
                            + " item_test and product_test")
 
     parser.add_option("--units-list",
@@ -229,8 +229,8 @@ def main():
         common.verbose = True
         common.verbose_space = " "
         common.OK = "ok "
-        common.FAILED = "FAILED :\n"
-        common.MISSING = "MISSING : "
+        common.FAILED = "FAILED:\n"
+        common.MISSING = "MISSING: "
 
     elif options.superverbose:
         common.verbose = True
@@ -238,7 +238,7 @@ def main():
         common.verbose_space = " "
         common.OK = "ok "
         common.FAILED = "FAILED ]\n"
-        common.MISSING = "MISSING : "
+        common.MISSING = "MISSING: "
         common.superverbose_opening_token = "[#"
         common.superverbose_closing_token = "] "
 
@@ -252,7 +252,7 @@ def main():
 
     if options.units_list:
         os.write(common.output,
-                 bytes("List of available test units :\n", 'utf-8'))
+                 bytes("List of available test units:\n", 'utf-8'))
         for u in AVAILABLE_UNITS:
             os.write(common.output, bytes(u[0] + "\n", 'utf-8'))
 
@@ -295,9 +295,9 @@ def main():
             os.write(common.output, bytes("\n", 'utf-8'))
 
         os.write(common.output,
-                 bytes("FAILED : " + str(common.failed_counter) \
-                 + " MISSING : " + str(common.missing_counter) \
-                 + "\nTotal OK : " \
+                 bytes("FAILED: " + str(common.failed_counter) \
+                 + " MISSING: " + str(common.missing_counter) \
+                 + "\nTotal OK: " \
                  + str(common.global_counter - \
                        common.missing_counter - \
                        common.failed_counter)\

@@ -30,9 +30,9 @@ SHEET_LAYOUT_TYPE = 'std'
 SHEET_LAYOUT_UNIT = "cm"
 #EXAMPLE OF A SHEET NOT USING ANY LAYOUT
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc' : [ None,                    'all'
+SHEET_LAYOUT = { 'exc': [ None,                    'all'
                          ],
-                 'ans' : [ None,                    'all'
+                 'ans': [ None,                    'all'
                          ]
                }
 
@@ -62,13 +62,13 @@ class AlgebraMiniTest0(S_Structure):
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
         self.header = ""
-        #self.title = _("Training exercises sheet :")
+        #self.title = _("Training exercises sheet:")
         self.title = ""
         self.subtitle = ""
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-        # For instance :
+        # For instance:
         # ex1 = exercise.ProductReduction(self.machine, many=30)
         # self.exercises_list.append(ex1)
 
@@ -84,7 +84,7 @@ class AlgebraMiniTest0(S_Structure):
 
 
         # END -----------------------------------------------------------------
-        # Instructions for use (creating a new sheet) :
+        # Instructions for use (creating a new sheet):
         # - Put its name in the header's comment
         #   & in the one of the documentation (@class)
         # - Write the @brief comment
@@ -93,7 +93,7 @@ class AlgebraMiniTest0(S_Structure):
         # - In the constructor's comment, replace Model by the chosen name at
         #   the @return line
         # - Skip to the zone to rewrite and for each exercise, follow the
-        #   example (i.e. write on two lines :
+        #   example (i.e. write on two lines:
         #   - ex_number_n = exercise.ThmPythagore(self.machine, options...)
         #   - self.exercises_list.append(ex_number_n)
         #   and so on with ex<n+1>, ex<n+2> as many as desired)

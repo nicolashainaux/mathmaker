@@ -156,7 +156,7 @@ is {software_license}.").format(software_ref=software.NAME_PRINTABLE,
                        + "]{babel}" + "\n"
 
         result += r"\usepackage[T1]{fontenc}" + "\n"
-        result += "% " + _("To solve accent problems : ") + "\n"
+        result += "% " + _("To solve accent problems: ") + "\n"
         result += r"%\usepackage{lmodern}" + "\n"
         result += "% " + _("Using lmodern package might be better than \
 cm aeguill") + "\n"
@@ -190,7 +190,7 @@ cm aeguill") + "\n"
         result += " " + "\n"
         result += r"\usepackage{epstopdf}" + "\n"
         result += "%%% " + _("If you wish to include a picture, \
-please use this command :") + "\n"
+please use this command:") + "\n"
         result += "%%% \includegraphics[height=6cm]{"
         result += _("file_name")
         result += ".eps} \n"
@@ -392,11 +392,11 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
     ##
     #   @brief Writes a table filled with the given [strings]
-    #   @param size : (nb of lines, nb of columns)
-    #   @param col_widths : [int]
-    #   @param content : [strings]
-    #   @options : borders='all'
-    #   @options : unit='inch' etc. (check the possibilities...)
+    #   @param size: (nb of lines, nb of columns)
+    #   @param col_widths: [int]
+    #   @param content: [strings]
+    #   @options: borders='all'
+    #   @options: unit='inch' etc. (check the possibilities...)
 #    def write_table(self, size, col_widths, content, **options):
 #        n_col = size[1]
 #        n_lin = size[0]
@@ -451,11 +451,11 @@ exercises counter (which is useful when begining to write the answers sheet)")\
     ##
     #   @brief Writes content arranged like in a table.
     #   @brief In the case of latex, it will just be the same.
-    #   @param size : (nb of lines, nb of columns)
-    #   @param col_widths : [int]
-    #   @param content : [strings]
-    #   @options : borders=0|1|2|3... (not implemented yet)
-    #   @options : unit='inch' etc. (check the possibilities...)
+    #   @param size: (nb of lines, nb of columns)
+    #   @param col_widths: [int]
+    #   @param content: [strings]
+    #   @options: borders=0|1|2|3... (not implemented yet)
+    #   @options: unit='inch' etc. (check the possibilities...)
     def write_layout(self, size, col_widths, content, **options):
         if self.redirect_output_to_str:
             return translator.create_table(size,

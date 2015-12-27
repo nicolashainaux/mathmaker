@@ -29,10 +29,10 @@ FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'short_test'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc' : [ [1,         9, 9],       (1, 1),
+SHEET_LAYOUT = { 'exc': [ [1,         9, 9],       (1, 1),
                            [1,         9, 9],       (1, 1)
                          ],
-                 'ans' : [ [1,         9, 9],       (1, 1),
+                 'ans': [ [1,         9, 9],       (1, 1),
                            [1,        12, 6],       (1, 1)
                          ]
                }
@@ -62,13 +62,13 @@ class AlgebraTest(S_Structure):
                              SHEET_LAYOUT_TYPE)
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
-        self.header = _("Name : .......................................")
-        self.title = _("Short Test : Algebra")
+        self.header = _("Name: .......................................")
+        self.title = _("Short Test: Algebra")
         self.subtitle = ""
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-        # Exercises :
+        # Exercises:
         for i in range(2):
             ex1 = exercise.X_AlgebraExpressionReduction(self.machine,
                                                  x_kind='short_test',

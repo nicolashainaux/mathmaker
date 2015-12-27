@@ -104,7 +104,7 @@ class NamedObject(Clonable):
 # ------------------------------------------------------------------------------
 ##
 # @class Printable
-# @brief All Printable objects : Exponenteds & others (Equations...)
+# @brief All Printable objects: Exponenteds & others (Equations...)
 # Any Printable must reimplement the into_str() method
 class Printable(NamedObject):
 

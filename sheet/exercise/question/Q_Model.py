@@ -25,18 +25,18 @@ from .Q_Structure import Q_Structure
 
 #from core.base_calculus import *
 
-# AVAILABLE_Q_KIND_VALUES lists so : {'q_kind1' : ['q_subkind1',
+# AVAILABLE_Q_KIND_VALUES lists so: {'q_kind1': ['q_subkind1',
 #                                                  'q_subkind2',
 #                                                   etc.],
-#                                     'q_kind2' : ...}
+#                                     'q_kind2': ...}
 
-AVAILABLE_Q_KIND_VALUES = {'A' : ['default',
+AVAILABLE_Q_KIND_VALUES = {'A': ['default',
                                   '1',
                                   '2'],
-                           'B' : ['default',
+                           'B': ['default',
                                   '1',
                                   '2'],
-                           'C' : ['default',
+                           'C': ['default',
                                   '1',
                                   '2']}
 
@@ -64,7 +64,7 @@ class Q_Model(Q_Structure):
         self.derived = True
 
         # The call to the mother class __init__() method will set the
-        # fields matching optional arguments which are so far :
+        # fields matching optional arguments which are so far:
         # self.q_kind, self.q_subkind
         # plus self.machine, self.options (modified)
         Q_Structure.__init__(self, embedded_machine,

@@ -29,39 +29,39 @@ from core.calculus import *
 # DON'T FORGET FOR THIS QUESTION TO ALSO DEFINE
 # THE INIT CALLER (JUST AFTER AVAILABLE_Q_KIND_VALUES)
 AVAILABLE_Q_KIND_VALUES = \
-    {'monom01_polyn1' : ['default'], # any of the 2 next
-     'monom0_polyn1' : ['default'], # a×(bx + c)
-     'monom1_polyn1' : ['default'], # ax×(bx + c)
-     'polyn1_polyn1' : ['default'], # (ax + b)×(cx + d)
-     'any_basic_expd' : ['default'], # any of the 3 prev.
-     'sum_of_any_basic_expd' : ['default', 'easy', 'harder', 'with_a_binomial'],
-     'sign_expansion' : ['default'],
-     'sign_expansion_short_test' : ['default'],
-     'numeric_sum_square' : ['default'],
-     'numeric_difference_square' : ['default'],
-     'numeric_squares_difference' : ['default'],
-     'sum_square' : ['default'], # passed to an __init__()
-     'difference_square' : ['default'], # idem
-     'squares_difference' : ['default'],  # idem
-     'any_binomial' : ['default']   # idem (not really good ?)
+    {'monom01_polyn1': ['default'], # any of the 2 next
+     'monom0_polyn1': ['default'], # a×(bx + c)
+     'monom1_polyn1': ['default'], # ax×(bx + c)
+     'polyn1_polyn1': ['default'], # (ax + b)×(cx + d)
+     'any_basic_expd': ['default'], # any of the 3 prev.
+     'sum_of_any_basic_expd': ['default', 'easy', 'harder', 'with_a_binomial'],
+     'sign_expansion': ['default'],
+     'sign_expansion_short_test': ['default'],
+     'numeric_sum_square': ['default'],
+     'numeric_difference_square': ['default'],
+     'numeric_squares_difference': ['default'],
+     'sum_square': ['default'], # passed to an __init__()
+     'difference_square': ['default'], # idem
+     'squares_difference': ['default'],  # idem
+     'any_binomial': ['default']   # idem (not really good ?)
     }
 
 INIT_CALLER = \
-    {'monom01_polyn1' : Expandable,
-     'monom0_polyn1' : Expandable,
-     'monom1_polyn1' : Expandable,
-     'polyn1_polyn1' : Expandable,
-     'any_basic_expd' : Expandable,
-     'sum_of_any_basic_expd' : Expandable,
-     'sign_expansion' : Expandable,
-     'sign_expansion_short_test' : Expandable,
-     'numeric_sum_square' : BinomialIdentity,
-     'numeric_difference_square' : BinomialIdentity,
-     'numeric_squares_difference' : BinomialIdentity,
-     'sum_square' : BinomialIdentity,
-     'difference_square' : BinomialIdentity,
-     'squares_difference' : BinomialIdentity,
-     'any_binomial' : BinomialIdentity
+    {'monom01_polyn1': Expandable,
+     'monom0_polyn1': Expandable,
+     'monom1_polyn1': Expandable,
+     'polyn1_polyn1': Expandable,
+     'any_basic_expd': Expandable,
+     'sum_of_any_basic_expd': Expandable,
+     'sign_expansion': Expandable,
+     'sign_expansion_short_test': Expandable,
+     'numeric_sum_square': BinomialIdentity,
+     'numeric_difference_square': BinomialIdentity,
+     'numeric_squares_difference': BinomialIdentity,
+     'sum_square': BinomialIdentity,
+     'difference_square': BinomialIdentity,
+     'squares_difference': BinomialIdentity,
+     'any_binomial': BinomialIdentity
     }
 
 # ------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
         self.derived = True
 
         # The call to the mother class __init__() method will set the
-        # fields matching optional arguments which are so far :
+        # fields matching optional arguments which are so far:
         # self.q_kind, self.q_subkind
         # plus self.machine, self.options (modified)
         Q_Structure.__init__(self, embedded_machine,
@@ -246,37 +246,37 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
             aux_monomial = Monomial((RANDOMLY, 15, 2))
 
-            # 1st kind : a Monomial and ± (long Polynomial)
+            # 1st kind: a Monomial and ± (long Polynomial)
             # (like in a short test)
             if sign_exp_kind == 1:
                 aux_terms_list.append(long_aux_expd)
                 aux_terms_list.append(aux_monomial)
 
-            # 2d kind : ± (x+3) ± (4x - 7)
+            # 2d kind: ± (x+3) ± (4x - 7)
             elif sign_exp_kind == 2:
                 aux_terms_list.append(aux_expd_1)
                 aux_terms_list.append(aux_expd_2)
 
-            # 3d kind : ± (x+3) ± (4x - 7) ± (x² - 5x)
+            # 3d kind: ± (x+3) ± (4x - 7) ± (x² - 5x)
             elif sign_exp_kind == 3:
                 aux_terms_list.append(aux_expd_1)
                 aux_terms_list.append(aux_expd_2)
                 aux_terms_list.append(aux_expd_3)
 
-            # 4th kind : ± (x+3) ± (4x - 7) ± Monomial
+            # 4th kind: ± (x+3) ± (4x - 7) ± Monomial
             elif sign_exp_kind == 4:
                 aux_terms_list.append(aux_expd_1)
                 aux_terms_list.append(aux_expd_2)
                 aux_terms_list.append(aux_monomial)
 
-            # 5th kind : ± (x+3) ± Monomial ± (long Polynomial)
+            # 5th kind: ± (x+3) ± Monomial ± (long Polynomial)
             elif sign_exp_kind == 5:
                 aux_terms_list.append(aux_expd_2)
                 aux_terms_list.append(aux_monomial)
                 aux_terms_list.append(long_aux_expd)
 
             # add as many possibilities as wanted,
-            # don't forget to increase the last number here :
+            # don't forget to increase the last number here:
             # sign_exp_kind = randomly.integer(1, 5) (what's a bit above)
 
             # Now let's distribute the terms randomly
@@ -321,7 +321,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
 
 
-        # Creation of the expression :
+        # Creation of the expression:
         number = 0
         if 'expression_number' in options                                     \
            and is_.a_natural_int(options['expression_number']):

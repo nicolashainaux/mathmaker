@@ -40,7 +40,7 @@ def main():
 
     parser = OptionParser(usage="usage: %prog [options] arg",
                           version=software.NAME + " " + software.VERSION \
-                                  + "\nLicense : " + software.LICENSE \
+                                  + "\nLicense: " + software.LICENSE \
                                   + "\n" + software.COPYRIGHT + " " \
                                   + software.AUTHOR)
 
@@ -115,7 +115,7 @@ def main():
                             localdir,
                             [options.lang]).install()
     except IOError as msg:
-        error.write_warning("gettext returned the following message :\n" \
+        error.write_warning("gettext returned the following message:\n" \
                             + str(msg) + "\n" \
                             + "It means the language indicated either \
 in the command line or read from the configuration file isn't available yet \
@@ -125,7 +125,7 @@ system.".format(software_ref=software.NAME) + "\n" )
             gettext.install(software.NAME,
                             localdir)
         except IOError as msg:
-            error.write_warning("gettext returned the following message :\n" \
+            error.write_warning("gettext returned the following message:\n" \
                             + str(msg) + "\n" \
                             + "It means the language of your system isn't \
 available yet in {software_ref} which will produce output in \

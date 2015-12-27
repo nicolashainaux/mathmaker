@@ -37,18 +37,18 @@ THOUSANDTH = "1.000"
 TEN_THOUSANDTH = "1.0000"
 
 PRECISION = [UNIT, TENTH, HUNDREDTH, THOUSANDTH, TEN_THOUSANDTH]
-PRECISION_REVERSED = { UNIT : 0,
-                       TENTH : 1,
-                       HUNDREDTH : 2,
-                       THOUSANDTH : 3,
-                       TEN_THOUSANDTH : 4
+PRECISION_REVERSED = { UNIT: 0,
+                       TENTH: 1,
+                       HUNDREDTH: 2,
+                       THOUSANDTH: 3,
+                       TEN_THOUSANDTH: 4
                      }
 
-PRECISION_WORDS = { UNIT : "unit",
-                    TENTH : "tenth",
-                    HUNDREDTH : "hundredth",
-                    THOUSANDTH : "thousandth",
-                    TEN_THOUSANDTH : "ten thousandth"
+PRECISION_WORDS = { UNIT: "unit",
+                    TENTH: "tenth",
+                    HUNDREDTH: "hundredth",
+                    THOUSANDTH: "thousandth",
+                    TEN_THOUSANDTH: "ten thousandth"
                   }
 
 BILLIONS = Decimal("1000000000")
@@ -80,38 +80,38 @@ RANKS = RANKS_LOWER + RANKS_DECIMAL
 
 RANKS_EXTENDED = RANKS_INTEGER + RANKS_DECIMAL
 
-RANKS_WORDS = { BILLIONS : "billions",
-                HUNDREDS_OF_MILLIONS : "hundreds of millions",
-			    TENS_OF_MILLIONS : "tens of millions", MILLIONS : "millions",
-				HUNDREDS_OF_THOUSANDS : "hundreds of thousands",
-				TENS_OF_THOUSANDS : "tens of thousands",
-                THOUSANDS : "thousands", HUNDREDS : "hundreds", TENS : "tens",
-                UNITS : "units", TENTHS : "tenths", HUNDREDTHS : "hundredths",
-                THOUSANDTHS : "thousandths"
+RANKS_WORDS = { BILLIONS: "billions",
+                HUNDREDS_OF_MILLIONS: "hundreds of millions",
+			    TENS_OF_MILLIONS: "tens of millions", MILLIONS: "millions",
+				HUNDREDS_OF_THOUSANDS: "hundreds of thousands",
+				TENS_OF_THOUSANDS: "tens of thousands",
+                THOUSANDS: "thousands", HUNDREDS: "hundreds", TENS: "tens",
+                UNITS: "units", TENTHS: "tenths", HUNDREDTHS: "hundredths",
+                THOUSANDTHS: "thousandths"
               }
 
-RANKS_HOW_MANY = { BILLIONS : "How many billions",
-                   HUNDREDS_OF_MILLIONS : "How many hundreds of millions",
-    			   TENS_OF_MILLIONS : "How many tens of millions",
-                   MILLIONS : "How many millions",
-                   HUNDREDS_OF_THOUSANDS : "How many hundreds of thousands",
-                   TENS_OF_THOUSANDS : "How many tens of thousands",
-                   THOUSANDS : "How many thousands",
-                   HUNDREDS : "How many hundreds",
-                   TENS : "How many tens",
-                   UNITS : "How many units",
-                   TENTHS : "How many tenths",
-                   HUNDREDTHS : "How many hundredths",
-                   THOUSANDTHS : "How many thousandths"
+RANKS_HOW_MANY = { BILLIONS: "How many billions",
+                   HUNDREDS_OF_MILLIONS: "How many hundreds of millions",
+    			   TENS_OF_MILLIONS: "How many tens of millions",
+                   MILLIONS: "How many millions",
+                   HUNDREDS_OF_THOUSANDS: "How many hundreds of thousands",
+                   TENS_OF_THOUSANDS: "How many tens of thousands",
+                   THOUSANDS: "How many thousands",
+                   HUNDREDS: "How many hundreds",
+                   TENS: "How many tens",
+                   UNITS: "How many units",
+                   TENTHS: "How many tenths",
+                   HUNDREDTHS: "How many hundredths",
+                   THOUSANDTHS: "How many thousandths"
                   }
 
-PARTS_QUESTIONS = { 2 : "What is the half of {number}?",
-                    3 : "What is the third of {number}?",
-                    4 : "What is the quarter of {number}?"}
+PARTS_QUESTIONS = { 2: "What is the half of {number}?",
+                    3: "What is the third of {number}?",
+                    4: "What is the quarter of {number}?"}
 
-MULTIPLE_QUESTIONS = { 2 : "What is the double of {number}?",
-                       3 : "What is the triple of {number}?",
-                       4 : "What is the quadruple of {number}?"}
+MULTIPLE_QUESTIONS = { 2: "What is the double of {number}?",
+                       3: "What is the triple of {number}?",
+                       4: "What is the quadruple of {number}?"}
 
 LENGTH_UNITS = ['km', 'hm', 'dam', 'm', 'dm', 'cm', 'mm', 'µm', 'nm', 'pm']
 COMMON_LENGTH_UNITS = LENGTH_UNITS[:-3]

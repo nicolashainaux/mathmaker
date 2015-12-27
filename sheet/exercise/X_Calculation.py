@@ -26,21 +26,21 @@ from . import question
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
-# Note : the bypass value allows to give the value of *x_subkind* directly to
+# Note: the bypass value allows to give the value of *x_subkind* directly to
 # the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
-    {#'short_test' : ['x_subkind1', 'x_subkind2'],
-     'preformatted' : ['fraction_simplification', 'fractions_product',
+    {#'short_test': ['x_subkind1', 'x_subkind2'],
+     'preformatted': ['fraction_simplification', 'fractions_product',
                        'fractions_quotient', 'fractions_sum']
-     #'bypass' : ['']
+     #'bypass': ['']
     }
 
 X_LAYOUT_UNIT = "cm"
 # ----------------------  lines_nb  col_widths             questions
-X_LAYOUTS = {'default' :
-              { 'exc' : [ ['?',     9, 9],                 'all'
+X_LAYOUTS = {'default':
+              { 'exc': [ ['?',     9, 9],                 'all'
                         ],
-                'ans' : [ ['?',     6, 6, 6],              'all'
+                'ans': [ ['?',     6, 6, 6],              'all'
                         ]
               }
 
@@ -51,7 +51,7 @@ X_LAYOUTS = {'default' :
 # ------------------------------------------------------------------------------
 ##
 # @class X_Calculation
-# @brief Calculation questions (calculate : 2-(3+5)×4, simplify a fraction...)
+# @brief Calculation questions (calculate: 2-(3+5)×4, simplify a fraction...)
 class X_Calculation(X_Structure):
 
 
@@ -76,29 +76,29 @@ class X_Calculation(X_Structure):
         default_question = question.Q_Calculation
 
         # TEXTS OF THE EXERCISE
-        self.text = {'exc' : "",
-                     'ans' : ""
+        self.text = {'exc': "",
+                     'ans': ""
                     }
 
         # alternate texts section
         if self.x_kind == 'preformatted':
             if self.x_subkind == 'fraction_simplification':
-                self.text = {'exc' : _("Simplify the following fractions :"),
-                             'ans' : ""
+                self.text = {'exc': _("Simplify the following fractions:"),
+                             'ans': ""
                             }
             elif self.x_subkind == 'fractions_product' \
                  or self.x_subkind == 'fractions_quotient' \
                  or self.x_subkind == 'fractions_sum':
             #___
-                self.text = {'exc' : _( \
-                    "Calculate and give the result as a simplified fraction :"),
-                             'ans' : ""
+                self.text = {'exc': _( \
+                    "Calculate and give the result as a simplified fraction:"),
+                             'ans': ""
                             }
 
         # PREFORMATTED EXERCISES
         if self.x_kind == 'preformatted':
             if self.x_subkind == 'fraction_simplification':
-                #self.text = _("Simplify the following fractions :")
+                #self.text = _("Simplify the following fractions:")
 
                 for i in range(int(self.q_nb // 2)):
                     q=question.Q_Calculation(self.machine,
@@ -122,7 +122,7 @@ class X_Calculation(X_Structure):
                  or self.x_subkind == 'fractions_sum':
             #___
                 #self.text = _( \
-                #    "Calculate and give the result as a simplified fraction :")
+                #    "Calculate and give the result as a simplified fraction:")
 
                 for i in range(self.q_nb):
                     q=question.Q_Calculation(self.machine,
@@ -180,7 +180,7 @@ class X_Calculation(X_Structure):
 
 
     # END ---------------------------------------------------------------------
-    # Instructions to create a new exercise :
+    # Instructions to create a new exercise:
     # - Indicate its name in the header comment
     #   the one of documentation (@class)
     # - Write the @brief description

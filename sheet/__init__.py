@@ -84,64 +84,64 @@ ConverseAndContrapositiveOfPythagoreanTheoremShortTest = \
         ConverseAndContrapositiveOfPythagoreanTheoremShortTest
 
 
-AVAILABLE = {"algebra-expression-reduction" : \
+AVAILABLE = {"algebra-expression-reduction": \
                  (AlgebraExpressionReduction,
                      ""),
-             "algebra-expression-expansion" : \
+             "algebra-expression-expansion": \
                  (AlgebraExpressionExpansion,
                      ""),
-             "algebra-binomial-identities-expansion" : \
+             "algebra-binomial-identities-expansion": \
                  (AlgebraBinomialIdentityExpansion,
                      ""),
-             "algebra-short-test" : \
+             "algebra-short-test": \
                  (AlgebraShortTest,
                      ""),
-             "algebra-balance-01" : \
+             "algebra-balance-01": \
                  (AlgebraBalance_01,
                      ""),
-             "algebra-factorization-01" : \
+             "algebra-factorization-01": \
                  (AlgebraFactorization_01,
                   ""),
-             "algebra-factorization-02" : \
+             "algebra-factorization-02": \
                  (AlgebraFactorization_02,
                   ""),
-             "algebra-factorization-03" : \
+             "algebra-factorization-03": \
                  (AlgebraFactorization_03,
                   ""),
-             "algebra-test-2" : \
+             "algebra-test-2": \
                  (AlgebraTest2,
                   ""),
-             "algebra-mini-test-0" :\
+             "algebra-mini-test-0":\
                  (AlgebraMiniTest0,
                   ""),
-             "algebra-mini-test-1" :\
+             "algebra-mini-test-1":\
                  (AlgebraMiniTest1,
                   ""),
-             "equations-basic" : \
+             "equations-basic": \
                  (EquationsBasic,
                   ""),
-             "equations-classic" : \
+             "equations-classic": \
                  (EquationsClassic,
                    ""),
-             "equations-harder" : \
+             "equations-harder": \
                  (EquationsHarder,
                   ""),
-             "equations-test" : \
+             "equations-test": \
                  (EquationsTest,
                   ""),
-             "equations-short-test" : \
+             "equations-short-test": \
                  (EquationsShortTest,
                   ""),
-             "fraction-simplification" : \
+             "fraction-simplification": \
                  (FractionSimplification,
                   ""),
-             "fractions-product-and-quotient" : \
+             "fractions-product-and-quotient": \
                  (FractionsProductAndQuotient,
                   ""),
              "fractions-sum": \
                  (FractionsSum,
                   ""),
-             "pythagorean-theorem-short-test" : \
+             "pythagorean-theorem-short-test": \
                  (PythagoreanTheoremShortTest,
                   ""),
              "converse-and-contrapositive-of-pythagorean-theorem-short-test": \

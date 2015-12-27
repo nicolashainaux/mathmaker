@@ -79,14 +79,14 @@ class sub_object(object):
         self.quotient_str = self.quotient.into_str(force_expression_begins=True)
 
     def q(self, M, **options):
-        q_text = {"default" : _("Calculate: {quotient}")\
+        q_text = {"default": _("Calculate: {quotient}")\
                               .format(quotient=\
                                       M.write_math_style2(self.quotient_str)),
-                 "w" : _(\
+                 "w": _(\
   "A rectangle has an area of {a} and a length of {l}. What is its width?")\
         .format(a=M.write_math_style2(self.dividend_str),
                 l=M.write_math_style2(self.divisor_str)),
-                  "l" : _(\
+                  "l": _(\
   "A rectangle has an area of {a} and a width of {w}. What is its length?")\
         .format(a=M.write_math_style2(self.dividend_str),
                 w=M.write_math_style2(self.divisor_str))}

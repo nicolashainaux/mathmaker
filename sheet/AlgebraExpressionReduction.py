@@ -29,9 +29,9 @@ FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'std'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc' : [ None,                    'all'
+SHEET_LAYOUT = { 'exc': [ None,                    'all'
                          ],
-                 'ans' : [ [1,         9, 9],       (1, 1),
+                 'ans': [ [1,         9, 9],       (1, 1),
                            'jump',                  'next_page',
                            None,                    'all_left'
                          ]
@@ -63,7 +63,7 @@ class AlgebraExpressionReduction(S_Structure):
 
         # BEGINING REWRITTEN ZONE ---------------------------------------------
         self.header = ""
-        self.title = _("Training exercises sheet :")
+        self.title = _("Training exercises sheet:")
         self.subtitle = _("Reduce an algebraic expression")
         self.text = ""
         self.answers_title = _("Examples of answers")

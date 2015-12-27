@@ -39,17 +39,17 @@ from core.geometry import *
 #from core.base import *
 
 
-AVAILABLE_Q_KIND_VALUES = {'pythagorean_theorem' : ['calculate_hypotenuse',
+AVAILABLE_Q_KIND_VALUES = {'pythagorean_theorem': ['calculate_hypotenuse',
                                                     'calculate_one_leg'],
-                           'converse_of_pythagorean_theorem' : ['default'],
+                           'converse_of_pythagorean_theorem': ['default'],
                            'contrapositive_of_pythagorean_theorem': ['default'],
-                           'cosinus' : ['calculate_hypotenuse',
+                           'cosinus': ['calculate_hypotenuse',
                                         'calculate_one_leg',
                                         'calculate_angle'],
-                           'sinus' : ['calculate_hypotenuse',
+                           'sinus': ['calculate_hypotenuse',
                                       'calculate_one_leg',
                                       'calculate_angle'],
-                           'tangente' : ['calculate_hypotenuse',
+                           'tangente': ['calculate_hypotenuse',
                                          'calculate_one_leg',
                                          'calculate_angle'],
                           }
@@ -78,7 +78,7 @@ class Q_RightTriangle(Q_Structure):
         self.derived = True
 
         # The call to the mother class __init__() method will set the
-        # fields matching optional arguments which are so far :
+        # fields matching optional arguments which are so far:
         # self.q_kind, self.q_subkind
         # plus self.machine, self.options (modified)
         Q_Structure.__init__(self, embedded_machine,
@@ -94,7 +94,7 @@ class Q_RightTriangle(Q_Structure):
         use_pythagorean_triples = False
         if ('use_pythagorean_triples' in options \
             and options['use_pythagorean_triples'] in YES) \
-           or (self.q_kind == 'converse_of_pythagorean_theorem') :
+           or (self.q_kind == 'converse_of_pythagorean_theorem'):
         #___
             use_pythagorean_triples = True
 
@@ -189,7 +189,7 @@ class Q_RightTriangle(Q_Structure):
                     sides_units[2] = ""
 
                 else:
-                    # case : self.q_subkind == 'calculate_one_leg'
+                    # case: self.q_subkind == 'calculate_one_leg'
                     leg0_or_1 = randomly.pop([0, 1])
                     sides_values[leg0_or_1] = ""
                     sides_units[leg0_or_1] = ""
@@ -241,7 +241,7 @@ class Q_RightTriangle(Q_Structure):
                         sides_units[2] = ""
 
                 else:
-                    # case : self.q_subkind == 'calculate_one_leg'
+                    # case: self.q_subkind == 'calculate_one_leg'
 
                     hypotenuse = randomly.integer(min_side_value,
                                                   max_side_value)
@@ -468,7 +468,7 @@ triangle is right, give the name of the right angle.")
 
             result += M.write_new_line()
 
-            result += _("Then by Pythagoras theorem") + " :"
+            result += _("Then by Pythagoras theorem") + ":"
 
             pyth_eq = self.right_triangle.pythagorean_substequality()
 
@@ -500,7 +500,7 @@ triangle is right, give the name of the right angle.")
                 return self.displayable_number + result
             else:
                 content = [self.displayable_number \
-                           + _("Sketch") + " :" \
+                           + _("Sketch") + ":" \
                            + M.write_new_line() \
                            + M.insert_picture(self.right_triangle),
                            result]
@@ -604,7 +604,7 @@ theorem,")
                 return self.displayable_number + result
             else:
                 content = [self.displayable_number \
-                           + _("Sketch") + " :" \
+                           + _("Sketch") + ":" \
                            + M.write_new_line() \
                            + M.insert_picture(self.right_triangle),
                            result]

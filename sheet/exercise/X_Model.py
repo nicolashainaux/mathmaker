@@ -26,36 +26,36 @@ from . import question
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
-# Note : the bypass value allows to give the value of *x_subkind* directly to
+# Note: the bypass value allows to give the value of *x_subkind* directly to
 # the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
-    {'short_test' : ['x_subkind1', 'x_subkind2'],
-     'preformatted' : [''],
-     'bypass' : ['']
+    {'short_test': ['x_subkind1', 'x_subkind2'],
+     'preformatted': [''],
+     'bypass': ['']
     }
 
 X_LAYOUT_UNIT = "cm"
 # ----------------------  lines_nb    col_widths   questions
-X_LAYOUTS = {'default' :
-              { 'exc' : [ None,                    'all'
+X_LAYOUTS = {'default':
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ None,                    'all'
+                'ans': [ None,                    'all'
                         ]
               },
 
-             ('short_test', 'x_subkind1') :
-              { 'exc' : [ [1,         6, 15],      (1, 1),
+             ('short_test', 'x_subkind1'):
+              { 'exc': [ [1,         6, 15],      (1, 1),
                           None,                    1
                         ],
-                'ans' : [ [1,         6.5, 12],    (1, 1),
+                'ans': [ [1,         6.5, 12],    (1, 1),
                           None,                    1
                         ]
               },
 
-             ('short_test', 'x_subkind2') :
-              { 'exc' : [ ['?',       6, 15],      'all'
+             ('short_test', 'x_subkind2'):
+              { 'exc': [ ['?',       6, 15],      'all'
                         ],
-                'ans' : [ [1,         6.5, 12],    (1, 1),
+                'ans': [ [1,         6.5, 12],    (1, 1),
                           None,                    1
                         ]
               }
@@ -81,7 +81,7 @@ class X_Model(X_Structure):
     #                         see AVAILABLE_X_KIND_VALUES to check the
     #                         possible values to use and their matching
     #                         x_subkind options
-    #   @param **options Options detailed below :
+    #   @param **options Options detailed below:
     #          - x_subkind=<string>
     #                         ...
     #                         ...
@@ -106,19 +106,19 @@ class X_Model(X_Structure):
         default_question = None
 
         # TEXTS OF THE EXERCISE
-        self.text = {'exc' : "",
-                     'ans' : ""
+        self.text = {'exc': "",
+                     'ans': ""
                     }
 
         # alternate texts section
         #if self.x_kind == '...':
-            #self.text = {'exc' : "",
-            #             'ans'   : ""
+            #self.text = {'exc': "",
+            #             'ans': ""
             #            }
         #
         #elif self.x_kind == '...':
-            #self.text = {'exc' : "",
-            #             'ans'   : ""
+            #self.text = {'exc': "",
+            #             'ans': ""
             #            }
 
         # SHORT TEST & OTHER PREFORMATTED EXERCISES
@@ -162,7 +162,7 @@ class X_Model(X_Structure):
     #   at the @return line
     # - Write the class name of the default_question. You must mention it
     #   because it will be used in the OTHER EXERCISES section.
-    # - The different sections to rewrite are :
+    # - The different sections to rewrite are:
     #   * TEXTS OF THE EXERCISE:
     #       default text for all exercises of this class
     #   * alternate texts section:

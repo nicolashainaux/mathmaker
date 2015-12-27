@@ -63,9 +63,9 @@ DIVISORS = [(1,1), (1,1), (2,1), (3,1), (4,2,1), (5,1), (6,3,2,1), (7,1),
             (99,33,11,9,3,1), (100,50,25,10,4,2,1)]
 
 
-POLYGONS_NATURES = {3 : 'Triangle', 4 : 'Quadrilatere', 5 : 'Pentagon',
-                    6 : 'Hexagon', 7 : 'Heptagon', 8 : 'Octogon',
-                    9 : 'Enneagon', 10 : 'Decagon'}
+POLYGONS_NATURES = {3: 'Triangle', 4: 'Quadrilatere', 5: 'Pentagon',
+                    6: 'Hexagon', 7: 'Heptagon', 8: 'Octogon',
+                    9: 'Enneagon', 10: 'Decagon'}
 
 # CONSTANTS CONCERNING MATH OBJECTS
 ZERO_POLYNOMIAL_DEGREE = -sys.maxsize
@@ -197,7 +197,7 @@ def pupil_gcd(a, b):
             result = DIVISORS[int(a)][i]
 
     # to finally get the fraction reduced even if the gcd isn't in the
-    # pupil's divisors table :
+    # pupil's divisors table:
     if gcd(a,b) != 1 and result == 1:
         result = gcd(a,b)
 

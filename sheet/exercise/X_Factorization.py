@@ -29,75 +29,75 @@ from lib.common import alphabet
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching self.x_subkind values
-# Note : the bypass value allows to give the value of *x_subkind* directly to
+# Note: the bypass value allows to give the value of *x_subkind* directly to
 # the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
-    {'short_test' : ['medium_level', 'hard_level'],
-     'mini_test' : ['two_factorizations'],
-     'preformatted' : ['level_01_easy', 'level_02_easy',
+    {'short_test': ['medium_level', 'hard_level'],
+     'mini_test': ['two_factorizations'],
+     'preformatted': ['level_01_easy', 'level_02_easy',
                        'level_02_intermediate', 'level_03_sum_squares',
                        'level_03_difference_squares',
                        'level_03_squares_differences',
                        'level_03_some_not_factorizable',
                        'level_03_all_kinds'],
-     'bypass' : ['level_01']
+     'bypass': ['level_01']
     }
 
 X_LAYOUT_UNIT = "cm"
-ALT_DEFAULT_LAYOUT = { 'exc' : [ None,                    'all'
+ALT_DEFAULT_LAYOUT = { 'exc': [ None,                    'all'
                                ],
-                       'ans' : [ [2,         9, 9],       (1, 1,
+                       'ans': [ [2,         9, 9],       (1, 1,
                                                            1, 1),
                                  None,                    1
                                ]
                      }
 # ----------------------  lines_nb    col_widths   questions
-X_LAYOUTS = {'default' :
-              { 'exc' : [ None,                    'all'
+X_LAYOUTS = {'default':
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ [1,         6, 6, 6],    (1, 1, 1)
+                'ans': [ [1,         6, 6, 6],    (1, 1, 1)
                         ]
               },
 
-             ('short_test', 'hard_level') :
-              { 'exc' : [ None,                    'all'
+             ('short_test', 'hard_level'):
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ [4,         9, 9],       (1, 1,
+                'ans': [ [4,         9, 9],       (1, 1,
                                                     1, 1,
                                                     1, 1,
                                                     1, 1)
                         ]
               },
 
-             ('mini_test', 'two_factorizations') :
-              { 'exc' : [ None,                    'all'
+             ('mini_test', 'two_factorizations'):
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ None,                    'all'
+                'ans': [ None,                    'all'
                         ]
               },
 
-             ('preformatted', 'level_01_easy') :
-              { 'exc' : [ None,                    'all'
+             ('preformatted', 'level_01_easy'):
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ ['?',         6, 6, 6],  'all'
+                'ans': [ ['?',         6, 6, 6],  'all'
                         ]
               },
 
-             ('preformatted', 'level_02_easy') : ALT_DEFAULT_LAYOUT,
+             ('preformatted', 'level_02_easy'): ALT_DEFAULT_LAYOUT,
 
-             ('preformatted', 'level_02_intermediate') : ALT_DEFAULT_LAYOUT,
+             ('preformatted', 'level_02_intermediate'): ALT_DEFAULT_LAYOUT,
 
-             ('preformatted', 'level_03_some_not_factorizable') :
-              { 'exc' : [ None,                    'all'
+             ('preformatted', 'level_03_some_not_factorizable'):
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ ['?',         6, 6, 6],  'all'
+                'ans': [ ['?',         6, 6, 6],  'all'
                         ]
               },
 
-             ('bypass', 'level_01') :
-              { 'exc' : [ None,                    'all'
+             ('bypass', 'level_01'):
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ ['?',         9,9],      'all'
+                'ans': [ ['?',         9,9],      'all'
                         ]
               }
 
@@ -120,7 +120,7 @@ class X_Factorization(X_Structure):
     ##
     #   @brief Constructor.
     #   @param embedded_machine The machine that will be used to write output.
-    #   @param **options Options detailed below :
+    #   @param **options Options detailed below:
     #          - start_number=<integer>
     #                         (should be >= 1)
     #          - number_of_questions=<integer>
@@ -162,29 +162,29 @@ class X_Factorization(X_Structure):
         default_question = question.Q_Factorization
 
         # TEXTS OF THE EXERCISE
-        self.text = {'exc' : _("Factorise : "),
-                     'ans'   : ""
+        self.text = {'exc': _("Factorise: "),
+                     'ans': ""
                     }
 
         # alternate texts section
         if self.x_kind == 'level_02_easy' \
            or self.x_kind == 'level_02_intermediate':
-            self.text = {'exc' : _("Factorise :"),
-                         'ans' : ""
+            self.text = {'exc': _("Factorise:"),
+                         'ans': ""
                         }
 
         elif self.x_kind == 'level_03_some_not_factorizable' \
             or (self.x_kind == 'mini_test' \
                 and self.x_subkind == 'two_factorizations'):
         #___
-            self.text = {'exc' : _("Factorise, if possible :"),
-                         'ans' : ""
+            self.text = {'exc': _("Factorise, if possible:"),
+                         'ans': ""
                         }
 
         # SHORT TEST & OTHER PREFORMATTED EXERCISES
         if self.x_kind == 'short_test':
             if self.x_subkind == 'easy_level':
-                # NOTE : the algebra (easy) short test uses directly one
+                # NOTE: the algebra (easy) short test uses directly one
                 # question and passes its arguments (x_kind...) directly
                 # to question.Factorization() (see below, at the end)
                 pass

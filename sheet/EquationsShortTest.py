@@ -29,9 +29,9 @@ FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'short_test'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc' : [ None,                    'all'
+SHEET_LAYOUT = { 'exc': [ None,                    'all'
                          ],
-                 'ans' : [ [1,         9, 9],        (1, 1),
+                 'ans': [ [1,         9, 9],        (1, 1),
                            None,                    1
                          ]
                }
@@ -61,13 +61,13 @@ class EquationsShortTest(S_Structure):
                              SHEET_LAYOUT_TYPE)
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
-        self.header = _("Name : .......................................")
-        self.title = _("Short Test : Equations")
+        self.header = _("Name: .......................................")
+        self.title = _("Short Test: Equations")
         self.subtitle = ""
         self.text = _("Solve the following equations.")
         self.answers_title = _("Examples of answers")
 
-        # Exercises :
+        # Exercises:
         for i in range(2):
             ex1 = exercise.X_Equation(self.machine,
                                       x_kind='short_test',

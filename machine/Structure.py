@@ -176,22 +176,22 @@ class Structure(object):
 
     ##
     #   @brief Writes a table filled with the given [strings]
-    #   @param size : (nb of columns, nb of lines)
-    #   @param col_widths : [int]
-    #   @param content : [strings]
-    #   @options : borders=0|1|2|3... (not implemented yet)
-    #   @options : unit='inch' etc. (check the possibilities...)
+    #   @param size: (nb of columns, nb of lines)
+    #   @param col_widths: [int]
+    #   @param content: [strings]
+    #   @options: borders=0|1|2|3... (not implemented yet)
+    #   @options: unit='inch' etc. (check the possibilities...)
     def write_table(self, size, col_widths, content, **options):
         raise error.MethodShouldBeRedefined(self, 'write_table')
 
     ##
     #   @brief Writes content arranged like in a table (but can be written
     #   @brief without using a table)
-    #   @param size : (nb of columns, nb of lines)
-    #   @param col_widths : [int]
-    #   @param content : [strings]
-    #   @options : borders=0|1|2|3... (not implemented yet)
-    #   @options : unit='inch' etc. (check the possibilities...)
+    #   @param size: (nb of columns, nb of lines)
+    #   @param col_widths: [int]
+    #   @param content: [strings]
+    #   @options: borders=0|1|2|3... (not implemented yet)
+    #   @options: unit='inch' etc. (check the possibilities...)
     def write_layout(self, size, col_widths, content, **options):
         raise error.MethodShouldBeRedefined(self, 'write_layout')
 

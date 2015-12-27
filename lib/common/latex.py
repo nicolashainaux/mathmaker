@@ -40,14 +40,14 @@ FRANCAIS = 'frenchb'
 ENGLISH = 'english'
 
 # MATCHES BETWEEN LANGUAGE CODE ('fr', 'en' etc.)
-# AND RELATED LATEX PACKAGE NAMES :
-LANGUAGE_PACKAGE_NAME = {'fr' : FRANCAIS,
-                         'fr_FR' : FRANCAIS,
-                         'en' : ENGLISH
+# AND RELATED LATEX PACKAGE NAMES:
+LANGUAGE_PACKAGE_NAME = {'fr': FRANCAIS,
+                         'fr_FR': FRANCAIS,
+                         'en': ENGLISH
                         }
 
-LANGUAGE_CODE_NAMES = {FRANCAIS : 'fr',
-                       ENGLISH : 'en'
+LANGUAGE_CODE_NAMES = {FRANCAIS: 'fr',
+                       ENGLISH: 'en'
                       }
 
 # TEXT SIZES
@@ -55,49 +55,49 @@ TEXT_SIZES = ['\\tiny', '\\scriptsize', '\\footnotesize', '\\small',
               '\\normalsize', '\large', '\Large', '\LARGE', '\\huge', '\\HUGE']
 
 # LATEX MARKUPS' DICTIONNARY
-MARKUP = {'LaTeX' : "\LaTeX",
-          'one' : "1",
-          'zero' : "0",
-          'space' : " ",
-          'small_space' : "\\smallskip",
-          'med_space' : "\\medskip",
-          'big_space' : "\\bigskip",
-          'opening_bracket' : "(",
-          'closing_bracket' : ")",
-          'opening_exponent' : "^{",
-          'closing_exponent' : "}",
-          'opening_out_striked' : "\\bcancel{",
-          'closing_out_striked' : "}",
-          'plus' : "+",
-          'minus' : "-",
-          'times' : "\\times ",
-          'divide' : "\div ",
-          'equal' : "=",
-          'not_equal' : "\\neq ",
-          'opening_fraction' : "\\frac{",
-          'fraction_vinculum' : "}{",
-          'closing_fraction' : "}",
-          'opening_subscript' : "_{",
-          'closing_subscript' : "}",
-          'colon' : ":",
-          'newline' : "\\newline ",
-          'opening_math_style2' : "$",
-          'closing_math_style2' : "$",
-          'opening_math_style1' : "\[",
-          'closing_math_style1' : "\]",
-          'simeq' : "\\simeq",
-          'opening_sqrt' : "\\sqrt{",
-          'closing_sqrt' : "}",
-          'open_text_in_maths' : "\\text{",
-          'close_text_in_maths' : "}",
-          'open_underline' : r"\uline{",
-          'close_underline' : "}",
-          'opening_widehat' : "\widehat{",
-          'closing_widehat' : "}",
-          'opening_square_bracket' : "\[",
-          'closing_square_bracket' : "\]",
-          'text_degree' : "\\textdegree",
-          'fct_cos' : "\cos"
+MARKUP = {'LaTeX': "\LaTeX",
+          'one': "1",
+          'zero': "0",
+          'space': " ",
+          'small_space': "\\smallskip",
+          'med_space': "\\medskip",
+          'big_space': "\\bigskip",
+          'opening_bracket': "(",
+          'closing_bracket': ")",
+          'opening_exponent': "^{",
+          'closing_exponent': "}",
+          'opening_out_striked': "\\bcancel{",
+          'closing_out_striked': "}",
+          'plus': "+",
+          'minus': "-",
+          'times': "\\times ",
+          'divide': "\div ",
+          'equal': "=",
+          'not_equal': "\\neq ",
+          'opening_fraction': "\\frac{",
+          'fraction_vinculum': "}{",
+          'closing_fraction': "}",
+          'opening_subscript': "_{",
+          'closing_subscript': "}",
+          'colon': ":",
+          'newline': "\\newline ",
+          'opening_math_style2': "$",
+          'closing_math_style2': "$",
+          'opening_math_style1': "\[",
+          'closing_math_style1': "\]",
+          'simeq': "\\simeq",
+          'opening_sqrt': "\\sqrt{",
+          'closing_sqrt': "}",
+          'open_text_in_maths': "\\text{",
+          'close_text_in_maths': "}",
+          'open_underline': r"\uline{",
+          'close_underline': "}",
+          'opening_widehat': "\widehat{",
+          'closing_widehat': "}",
+          'opening_square_bracket': "\[",
+          'closing_square_bracket': "\]",
+          'text_degree': "\\textdegree",
+          'fct_cos': "\cos"
          }
 
 

@@ -29,9 +29,9 @@ FONT_SIZE_OFFSET = 0
 SHEET_LAYOUT_TYPE = 'std'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc' : [ None,                    'all'
+SHEET_LAYOUT = { 'exc': [ None,                    'all'
                          ],
-                 'ans' : [ None,                    'all'
+                 'ans': [ None,                    'all'
                          ]
                }
 
@@ -61,12 +61,12 @@ class FractionSimplification(S_Structure):
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
         self.header = ""
-        self.title = _("Training exercises sheet :")
+        self.title = _("Training exercises sheet:")
         self.subtitle = _("Simplify fractions")
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-        # For instance :
+        # For instance:
         ex1 = exercise.X_Calculation(self.machine,
                                    x_kind='preformatted',
                                    x_subkind='fraction_simplification',

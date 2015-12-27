@@ -31,8 +31,8 @@ msgstr "This equation has no solution."
 #: sheet/FractionsProductAndQuotient.py:52
 #: sheet/BasicEquations.py:52
 #: sheet/FractionSimplification.py:52
-msgid "Training exercises sheet :"
-msgstr "Training exercises sheet :"
+msgid "Training exercises sheet:"
+msgstr "Training exercises sheet:"
 
 #: sheet/ExpressionReduction.py:53
 msgid "Reduce an algebraic expression"
@@ -60,12 +60,12 @@ msgid "Resolve the following equations."
 msgstr "Resolve the following equations."
 
 #: sheet/AlgebraShortTest.py:51
-msgid "Name : ......................................."
-msgstr "Name : ......................................."
+msgid "Name: ......................................."
+msgstr "Name: ......................................."
 
 #: sheet/AlgebraShortTest.py:52
-msgid "Short Test : Algebra"
-msgstr "Short Test : Algebra"
+msgid "Short Test: Algebra"
+msgstr "Short Test: Algebra"
 
 #: sheet/SpecialIdentityExpansion.py:54
 msgid "Expand special identities"
@@ -84,8 +84,8 @@ msgid "Expand and reduce"
 msgstr "Expand and reduce"
 
 #: sheet/exercise/ProductReduction.py:52
-msgid "Reduce, if possible, the following products :"
-msgstr "Reduce, if possible, the following products :"
+msgid "Reduce, if possible, the following products:"
+msgstr "Reduce, if possible, the following products:"
 
 #: sheet/exercise/ProductReduction.py:151
 #: sheet/exercise/SumReduction.py:90
@@ -93,21 +93,21 @@ msgid "Pay attention that the intermediate line is optional."
 msgstr "Pay attention that the intermediate line is optional."
 
 #: sheet/exercise/SumReduction.py:52
-msgid "Reduce, if possible, the following sums :"
-msgstr "Reduce, if possible, the following sums :"
+msgid "Reduce, if possible, the following sums:"
+msgstr "Reduce, if possible, the following sums:"
 
 #: sheet/exercise/ExpressionReduction.py:54
 #: sheet/exercise/SumOfProductsReduction.py:52
-msgid "Reduce the following expressions :"
-msgstr "Reduce the following expressions :"
+msgid "Reduce the following expressions:"
+msgstr "Reduce the following expressions:"
 
 #: sheet/exercise/Calculation.py:65
-msgid "Simplify the following fractions :"
-msgstr "Simplify the following fractions :"
+msgid "Simplify the following fractions:"
+msgstr "Simplify the following fractions:"
 
 #: sheet/exercise/Calculation.py:91
-msgid "Calculate and give the result as a simplified fraction :"
-msgstr "Calculate and give the result as a simplified fraction :"
+msgid "Calculate and give the result as a simplified fraction:"
+msgstr "Calculate and give the result as a simplified fraction:"
 
 #: sheet/exercise/question/SumReduction.py:156
 msgid "This expression is not reducible."
@@ -139,8 +139,8 @@ msgid "Further details on %(software_website)s"
 msgstr "Further details on %(software_website)s"
 
 #: machine/LaTeX.py:153
-msgid "To solve accent problems : "
-msgstr "To solve accent problems : "
+msgid "To solve accent problems: "
+msgstr "To solve accent problems: "
 
 #: machine/LaTeX.py:155
 msgid "Using lmodern package might be better than cm aeguill"
@@ -188,8 +188,8 @@ msgid "Page layout "
 msgstr "Page layout "
 
 #: machine/LaTeX.py:183
-msgid "If you wish to include a picture, please use this command :"
-msgstr "If you wish to include a picture, please use this command :"
+msgid "If you wish to include a picture, please use this command:"
+msgstr "If you wish to include a picture, please use this command:"
 
 #: machine/LaTeX.py:186
 msgid "file_name"

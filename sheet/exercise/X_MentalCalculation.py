@@ -38,18 +38,18 @@ from . import question
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
 AVAILABLE_X_KIND_VALUES = \
-    {'tabular' : 'default',
-     'slideshow' : 'default'
+    {'tabular': 'default',
+     'slideshow': 'default'
     }
 
 MAX_NB_OF_QUESTIONS = 40
 
 X_LAYOUT_UNIT = "cm"
 # ----------------------  lines_nb    col_widths   questions
-X_LAYOUTS = {'default' :
-              { 'exc' : [ None,                    'all'
+X_LAYOUTS = {'default':
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ None,                    'all'
+                'ans': [ None,                    'all'
                         ]
               }
             }
@@ -65,7 +65,7 @@ def get_q_kinds_from_file(file_name):
     try:
         xml_config = XML_PARSER.parse(file_name).getroot()
     except FileNotFoundError:
-        raise error.UnreachableData("the file named : " + str(file_name))
+        raise error.UnreachableData("the file named: " + str(file_name))
 
     questions = []
 
@@ -152,7 +152,7 @@ class X_MentalCalculation(X_Structure):
     ##
     #   @brief Constructor.
     #   @param embedded_machine The machine that will be used to write output.
-    #   @param **options Options detailed below :
+    #   @param **options Options detailed below:
     #          - start_number=<integer>
     #                         (should be >= 1)
     #          - number_of_questions=<integer>
@@ -201,18 +201,18 @@ class X_MentalCalculation(X_Structure):
         default_question = question.Q_MentalCalculation
 
         # TEXTS OF THE EXERCISE
-        self.text = {'exc' : "",
-                     'ans' : ""
+        self.text = {'exc': "",
+                     'ans': ""
                     }
 
         # From q_list, we build a dictionary:
         q_dict = {}
 
-        nb_box = { key : question.generate_numbers(key) \
+        nb_box = { key: question.generate_numbers(key) \
                    for key in question.nb_sources()}
-        nb_used = { key : set() \
+        nb_used = { key: set() \
                     for key in question.nb_sources()}
-        last_nb = { key : set() \
+        last_nb = { key: set() \
                     for key in question.nb_sources()}
 
         to_unpack = copy.deepcopy(question.SUBKINDS_TO_UNPACK)
@@ -256,13 +256,13 @@ class X_MentalCalculation(X_Structure):
                 del q_options['subkind']
 
         # Now, q_dict is organized like this:
-        # { 'multi_direct' :   [('table_2_9', 'multi', 'direct', {'nb':'int'}),
+        # { 'multi_direct':   [('table_2_9', 'multi', 'direct', {'nb':'int'}),
         #                       ('table_2_9', 'multi', 'direct', {'nb':'int'})],
-        #   'multi_reversed' : [('table_2_9', 'multi', 'reversed', {options})],
-        #   'divi_direct' :    [('table_2_9', 'divi', 'direct', {options})],
-        #   'multi_hole' :     [('table_2_9', 'multi', 'hole', {options})],
-        #   'q_id' :           [('table_15', 'kind', 'subkind', {options})],
-        #   'q_id :            [('table_25', 'kind', 'subkind', {options})],
+        #   'multi_reversed': [('table_2_9', 'multi', 'reversed', {options})],
+        #   'divi_direct':    [('table_2_9', 'divi', 'direct', {options})],
+        #   'multi_hole':     [('table_2_9', 'multi', 'hole', {options})],
+        #   'q_id':           [('table_15', 'kind', 'subkind', {options})],
+        #   'q_id:            [('table_25', 'kind', 'subkind', {options})],
         #   'etc.'
         # }
 
@@ -486,7 +486,7 @@ class X_MentalCalculation(X_Structure):
     #   at the @return line
     # - Write the class name of the default_question. You must mention it
     #   because it will be used in the OTHER EXERCISES section.
-    # - The different sections to rewrite are :
+    # - The different sections to rewrite are:
     #   * TEXTS OF THE EXERCISE:
     #       default text for all exercises of this class
     #   * alternate texts section:

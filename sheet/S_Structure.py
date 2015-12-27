@@ -50,13 +50,13 @@ def get_sheet_config(file_name):
 
     xml_doc = XML_PARSER.parse(file_name).getroot()
 
-    sheet_layout = { 'exc' : [],
-                     'ans' : []
+    sheet_layout = { 'exc': [],
+                     'ans': []
                    }
 
-    config = {'layout_type' : 'std',
-              'layout_unit' : 'cm',
-              'font_size_offset' : '0'}
+    config = {'layout_type': 'std',
+              'layout_unit': 'cm',
+              'font_size_offset': '0'}
 
     for child in xml_doc:
         if child.tag == 'layout':
@@ -101,7 +101,7 @@ def get_exercises_list(file_name):
     try:
         xml_doc = XML_PARSER.parse(file_name).getroot()
     except FileNotFoundError:
-        raise error.UnreachableData("the file named : " + str(file_name))
+        raise error.UnreachableData("the file named: " + str(file_name))
 
     exercises_list = []
 
@@ -211,7 +211,7 @@ class S_Structure(object):
                 elif sheet_layout[k][2*i] == 'jump':
                     if not sheet_layout[k][2*i+1] == 'next_page':
                         raise error.WrongArgument('SHEET_LAYOUT[' + k + '][' \
-                                              + str(2*i+1) + '] should be : '\
+                                              + str(2*i+1) + '] should be: '\
                                               + 'next_page since it follows ' \
                                               + 'the jump' \
                                               + ' keyword',

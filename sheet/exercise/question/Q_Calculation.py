@@ -26,10 +26,10 @@ from core.base_calculus import *
 from core.calculus import *
 
 AVAILABLE_Q_KIND_VALUES = \
-    {'fraction_simplification' : ['default'],
-     'fractions_sum' : ['default'],
-     'fractions_product' : ['default'],
-     'fractions_quotient' : ['default']
+    {'fraction_simplification': ['default'],
+     'fractions_sum': ['default'],
+     'fractions_product': ['default'],
+     'fractions_quotient': ['default']
 
     }
 
@@ -113,7 +113,7 @@ class Q_Calculation(Q_Structure):
         self.derived = True
 
         # The call to the mother class __init__() method will set the
-        # fields matching optional arguments which are so far :
+        # fields matching optional arguments which are so far:
         # self.q_kind, self.q_subkind
         # plus self.machine, self.options (modified)
         Q_Structure.__init__(self, embedded_machine,
@@ -207,7 +207,7 @@ class Q_Calculation(Q_Structure):
                 #f2 = f2.simplified()
 
             # In all other cases (80%), we'll define a "seed" a plus two
-            # randomly numbers i and j to form the Product | Quotient :
+            # randomly numbers i and j to form the Product | Quotient:
             # a×i / b  ×   c / a × j
             # Where b is a randomly number coprime to a×i
             # and c is a randomly number coprime to a×j
@@ -300,9 +300,9 @@ class Q_Calculation(Q_Structure):
                               f2.simplified()])
 
         # 5th
-        # still to imagine :o)
+        # still to imagine:o)
 
-        # Creation of the expression :
+        # Creation of the expression:
         number = 0
         if 'expression_number' in options                                     \
            and is_.a_natural_int(options['expression_number']):

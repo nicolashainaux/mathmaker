@@ -35,12 +35,12 @@ if markup_choice == 'latex':
 # --------------------------------------------------------------------------
 ##
 #   @brief Writes a table filled with the given [strings]
-#   @param size : (nb of lines, nb of columns)
+#   @param size: (nb of lines, nb of columns)
 #   @param chosen_markup
-#   @param content : [strings]
-#   @options col_fmt : [int|<'l'|'c'|'r'>]
-#   @options : borders='all'
-#   @options : unit='inch' etc. (check the possibilities...)
+#   @param content: [strings]
+#   @options col_fmt: [int|<'l'|'c'|'r'>]
+#   @options: borders='all'
+#   @options: unit='inch' etc. (check the possibilities...)
 #   @return
 def create_table(size, content, **options):
     if markup_choice == 'latex':
@@ -124,5 +124,5 @@ def create_table(size, content, **options):
         return result
 
     else:
-        raise error.NotImplementedYet("create_table using this markup : " \
+        raise error.NotImplementedYet("create_table using this markup: " \
                                         + markup_choice + " ")

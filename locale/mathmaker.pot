@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.6\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2015-12-26 14:52+0100\n"
+"POT-Creation-Date: 2015-12-27 08:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,7 +88,7 @@ msgid ""
 msgstr ""
 
 #: machine/LaTeX.py:159
-msgid "To solve accent problems : "
+msgid "To solve accent problems: "
 msgstr ""
 
 #: machine/LaTeX.py:161
@@ -141,7 +141,7 @@ msgid "Page layout "
 msgstr ""
 
 #: machine/LaTeX.py:192
-msgid "If you wish to include a picture, please use this command :"
+msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 
 #: machine/LaTeX.py:195
@@ -177,7 +177,7 @@ msgstr ""
 #: sheet/EquationsHarder.py:67 sheet/FractionSimplification.py:64
 #: sheet/FractionsProductAndQuotient.py:66 sheet/FractionsSum.py:64
 #: sheet/S_Model.py:86
-msgid "Training exercises sheet :"
+msgid "Training exercises sheet:"
 msgstr ""
 
 #: sheet/AlgebraBalance_01.py:65
@@ -225,30 +225,30 @@ msgid "Factorization thanks to binomial identities"
 msgstr ""
 
 #: sheet/AlgebraMiniTest1.py:85 sheet/AlgebraTest2.py:65
-msgid "Name : ....................... Class : ..........."
+msgid "Name: ....................... Class: ..........."
 msgstr ""
 
 #: sheet/AlgebraMiniTest1.py:86
-msgid "Mini Test : Algebra"
+msgid "Mini Test: Algebra"
 msgstr ""
 
 #: sheet/AlgebraShortTest.py:65 sheet/AlgebraTest.py:65
 #: sheet/ConverseAndContrapositiveOfPythagoreanTheoremShortTest.py:68
 #: sheet/EquationsShortTest.py:64 sheet/EquationsTest.py:65
 #: sheet/PythagoreanTheoremShortTest.py:65
-msgid "Name : ......................................."
+msgid "Name: ......................................."
 msgstr ""
 
 #: sheet/AlgebraShortTest.py:66 sheet/AlgebraTest.py:66
-msgid "Short Test : Algebra"
+msgid "Short Test: Algebra"
 msgstr ""
 
 #: sheet/AlgebraTest2.py:66
-msgid "Short Test : Algebra (harder)"
+msgid "Short Test: Algebra (harder)"
 msgstr ""
 
 #: sheet/ConverseAndContrapositiveOfPythagoreanTheoremShortTest.py:70
-msgid "Short Test : converse and contrapositive of pythagorean theorem"
+msgid "Short Test: converse and contrapositive of pythagorean theorem"
 msgstr ""
 
 #: sheet/EquationsBasic.py:69 sheet/EquationsClassic.py:68
@@ -265,7 +265,7 @@ msgid "Solve the following equations"
 msgstr ""
 
 #: sheet/EquationsShortTest.py:65 sheet/EquationsTest.py:66
-msgid "Short Test : Equations"
+msgid "Short Test: Equations"
 msgstr ""
 
 #: sheet/FractionSimplification.py:65
@@ -281,7 +281,7 @@ msgid "Sums of fractions"
 msgstr ""
 
 #: sheet/PythagoreanTheoremShortTest.py:66
-msgid "Short Test : pythagorean theorem"
+msgid "Short Test: pythagorean theorem"
 msgstr ""
 
 #: lib/common/vocabulary.py:58
@@ -313,11 +313,11 @@ msgid "Calculate thanks to a binomial identity"
 msgstr ""
 
 #: sheet/exercise/X_AlgebraExpressionReduction.py:95
-msgid "Reduce the following expressions :"
+msgid "Reduce the following expressions:"
 msgstr ""
 
 #: sheet/exercise/X_AlgebraExpressionReduction.py:102
-msgid "Reduce, if possible, the following products :"
+msgid "Reduce, if possible, the following products:"
 msgstr ""
 
 #: sheet/exercise/X_AlgebraExpressionReduction.py:104
@@ -326,27 +326,27 @@ msgid "Pay attention that the intermediate line is optional."
 msgstr ""
 
 #: sheet/exercise/X_AlgebraExpressionReduction.py:112
-msgid "Reduce, if possible, the following sums :"
+msgid "Reduce, if possible, the following sums:"
 msgstr ""
 
 #: sheet/exercise/X_Calculation.py:86
-msgid "Simplify the following fractions :"
+msgid "Simplify the following fractions:"
 msgstr ""
 
 #: sheet/exercise/X_Calculation.py:94
-msgid "Calculate and give the result as a simplified fraction :"
+msgid "Calculate and give the result as a simplified fraction:"
 msgstr ""
 
 #: sheet/exercise/X_Factorization.py:165
-msgid "Factorise : "
+msgid "Factorise: "
 msgstr ""
 
 #: sheet/exercise/X_Factorization.py:172
-msgid "Factorise :"
+msgid "Factorise:"
 msgstr ""
 
 #: sheet/exercise/X_Factorization.py:180
-msgid "Factorise, if possible :"
+msgid "Factorise, if possible:"
 msgstr ""
 
 #: sheet/exercise/X_MentalCalculation.py:452
@@ -392,11 +392,11 @@ msgid "then"
 msgstr ""
 
 #: sheet/exercise/question/Q_Factorization.py:1202
-msgid "So it is possible to factorize :"
+msgid "So it is possible to factorize:"
 msgstr ""
 
 #: sheet/exercise/question/Q_Factorization.py:1279
-msgid "So, this expression can be factorized :"
+msgid "So, this expression can be factorized:"
 msgstr ""
 
 #: sheet/exercise/question/Q_Factorization.py:1458
@@ -609,80 +609,24 @@ msgstr ""
 msgid ""
 msgstr ""
 
-#: locale/additional_translations.xml:23
-msgid "How many hundreds of thousands"
-msgstr ""
-
-#: locale/additional_translations.xml:17
-msgid "hundredths"
-msgstr ""
-
-#: locale/additional_translations.xml:8
-msgid "tens of millions"
-msgstr ""
-
-#: locale/additional_translations.xml:10
-msgid "hundreds of thousands"
-msgstr ""
-
-#: locale/additional_translations.xml:18
-msgid "thousandths"
-msgstr ""
-
-#: locale/additional_translations.xml:29
-msgid "How many tenths"
-msgstr ""
-
-#: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-msgid "Simple decimal multiplications"
-msgstr ""
-
-#: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
-#: sheet/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/ranks.xml:5
-#: sheet/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
-#: sheet/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-#: sheet/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
 #: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-#: sheet/frameworks/mental_calculation/lev11_2/rectangles.xml:6
-msgid "Mental calculation"
+msgid "Test 2"
 msgstr ""
 
-#: locale/additional_translations.xml:25
-msgid "How many thousands"
+#: locale/additional_translations.xml:7
+msgid "hundreds of millions"
 msgstr ""
 
-#: locale/additional_translations.xml:12
-msgid "thousands"
+#: locale/additional_translations.xml:21
+msgid "How many tens of millions"
 msgstr ""
 
-#: locale/additional_translations.xml:35
-msgid "What is the double of {number}?"
+#: locale/additional_translations.xml:36
+msgid "What is the triple of {number}?"
 msgstr ""
 
-#: locale/additional_translations.xml:16
-msgid "tenths"
-msgstr ""
-
-#: locale/additional_translations.xml:19
-msgid "How many billions"
-msgstr ""
-
-#: locale/additional_translations.xml:14
-msgid "tens"
-msgstr ""
-
-#: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
-msgid "Divisions"
-msgstr ""
-
-#: sheet/frameworks/mental_calculation/lev11_1/ranks.xml:5
-msgid "Ranks of figures in a number"
+#: locale/additional_translations.xml:31
+msgid "How many thousandths"
 msgstr ""
 
 #: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
@@ -701,28 +645,68 @@ msgstr ""
 msgid "Answers"
 msgstr ""
 
+#: sheet/frameworks/mental_calculation/lev11_1/ranks.xml:5
+msgid "Ranks of figures in a number"
+msgstr ""
+
+#: locale/additional_translations.xml:10
+msgid "hundreds of thousands"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: sheet/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: sheet/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: sheet/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: sheet/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+#: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+#: sheet/frameworks/mental_calculation/lev11_2/rectangles.xml:6
+msgid "Mental calculation"
+msgstr ""
+
+#: locale/additional_translations.xml:6
+msgid "billions"
+msgstr ""
+
 #: locale/additional_translations.xml:32
 msgid "What is the half of {number}?"
+msgstr ""
+
+#: locale/additional_translations.xml:37
+msgid "What is the quadruple of {number}?"
 msgstr ""
 
 #: locale/additional_translations.xml:30
 msgid "How many hundredths"
 msgstr ""
 
-#: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-msgid "Test 2"
+#: locale/additional_translations.xml:33
+msgid "What is the third of {number}?"
 msgstr ""
 
-#: locale/additional_translations.xml:20
-msgid "How many hundreds of millions"
+#: locale/additional_translations.xml:25
+msgid "How many thousands"
 msgstr ""
 
-#: locale/additional_translations.xml:7
-msgid "hundreds of millions"
+#: locale/additional_translations.xml:22
+msgid "How many millions"
 msgstr ""
 
-#: locale/additional_translations.xml:13
-msgid "hundreds"
+#: locale/additional_translations.xml:18
+msgid "thousandths"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
+msgid "Divisions"
+msgstr ""
+
+#: locale/additional_translations.xml:28
+msgid "How many units"
 msgstr ""
 
 #: sheet/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
@@ -733,6 +717,78 @@ msgstr ""
 msgid "Reversed multiplications"
 msgstr ""
 
+#: locale/additional_translations.xml:27
+msgid "How many tens"
+msgstr ""
+
+#: locale/additional_translations.xml:35
+msgid "What is the double of {number}?"
+msgstr ""
+
+#: locale/additional_translations.xml:12
+msgid "thousands"
+msgstr ""
+
+#: locale/additional_translations.xml:34
+msgid "What is the quarter of {number}?"
+msgstr ""
+
+#: locale/additional_translations.xml:24
+msgid "How many tens of thousands"
+msgstr ""
+
+#: locale/additional_translations.xml:13
+msgid "hundreds"
+msgstr ""
+
+#: locale/additional_translations.xml:29
+msgid "How many tenths"
+msgstr ""
+
+#: locale/additional_translations.xml:17
+msgid "hundredths"
+msgstr ""
+
+#: locale/additional_translations.xml:15
+msgid "units"
+msgstr ""
+
+#: locale/additional_translations.xml:26
+msgid "How many hundreds"
+msgstr ""
+
+#: locale/additional_translations.xml:16
+msgid "tenths"
+msgstr ""
+
+#: locale/additional_translations.xml:19
+msgid "How many billions"
+msgstr ""
+
+#: locale/additional_translations.xml:8
+msgid "tens of millions"
+msgstr ""
+
+#: locale/additional_translations.xml:14
+msgid "tens"
+msgstr ""
+
+#: locale/additional_translations.xml:23
+msgid "How many hundreds of thousands"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+msgid "Simple decimal multiplications"
+msgstr ""
+
+#: locale/additional_translations.xml:9
+msgid "millions"
+msgstr ""
+
+#: locale/additional_translations.xml:20
+msgid "How many hundreds of millions"
+msgstr ""
+
 #: locale/additional_translations.xml:11
 msgid "tens of thousands"
 msgstr ""
@@ -741,63 +797,7 @@ msgstr ""
 msgid "Multiplications and divisions by 10, 100 and 1000"
 msgstr ""
 
-#: locale/additional_translations.xml:37
-msgid "What is the quadruple of {number}?"
-msgstr ""
-
-#: locale/additional_translations.xml:26
-msgid "How many hundreds"
-msgstr ""
-
-#: locale/additional_translations.xml:36
-msgid "What is the triple of {number}?"
-msgstr ""
-
-#: locale/additional_translations.xml:6
-msgid "billions"
-msgstr ""
-
-#: locale/additional_translations.xml:24
-msgid "How many tens of thousands"
-msgstr ""
-
-#: locale/additional_translations.xml:28
-msgid "How many units"
-msgstr ""
-
-#: locale/additional_translations.xml:31
-msgid "How many thousandths"
-msgstr ""
-
-#: locale/additional_translations.xml:27
-msgid "How many tens"
-msgstr ""
-
-#: locale/additional_translations.xml:22
-msgid "How many millions"
-msgstr ""
-
-#: locale/additional_translations.xml:9
-msgid "millions"
-msgstr ""
-
 #: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
 #: sheet/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
 msgid "Multiplications with a hole"
-msgstr ""
-
-#: locale/additional_translations.xml:15
-msgid "units"
-msgstr ""
-
-#: locale/additional_translations.xml:21
-msgid "How many tens of millions"
-msgstr ""
-
-#: locale/additional_translations.xml:34
-msgid "What is the quarter of {number}?"
-msgstr ""
-
-#: locale/additional_translations.xml:33
-msgid "What is the third of {number}?"
 msgstr ""

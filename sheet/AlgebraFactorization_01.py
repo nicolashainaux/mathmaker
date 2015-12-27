@@ -29,9 +29,9 @@ FONT_SIZE_OFFSET = -2
 SHEET_LAYOUT_TYPE = 'std'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc' : [ None,                    'all'
+SHEET_LAYOUT = { 'exc': [ None,                    'all'
                          ],
-                 'ans' : [ None,                    'all'
+                 'ans': [ None,                    'all'
                          ]
                }
 
@@ -61,13 +61,13 @@ class AlgebraFactorization_01(S_Structure):
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
         self.header = ""
-        self.title = _("Training exercises sheet :")
+        self.title = _("Training exercises sheet:")
         self.subtitle = _("Factorization")
         self.text = _("Only basic factorizations are expected. \
 Don't use fractions.")
         self.answers_title = _("Examples of answers")
 
-        # For instance :
+        # For instance:
         ex1 = exercise.X_Factorization(self.machine,
                                        x_kind='preformatted',
                                        x_subkind='level_01_easy')

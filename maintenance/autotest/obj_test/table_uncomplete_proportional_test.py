@@ -43,7 +43,7 @@ check = common.check
 def action():
     if common.verbose:
         os.write(common.output,
-                 bytes("--- TABLES : uncomplete but proportional\n", 'utf-8')
+                 bytes("--- TABLES: uncomplete but proportional\n", 'utf-8')
                 )
 
     #t1 = Table_UP([[Item((2)),   Item(("AB")),   Item((6)) ],

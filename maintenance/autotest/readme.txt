@@ -1,4 +1,4 @@
-To add a new test section :
+To add a new test section:
 
 - go to the right directory, create a blank ****_test.py,
   copy the (simple) structure from model_test.py

@@ -29,9 +29,9 @@ FONT_SIZE_OFFSET = -2
 SHEET_LAYOUT_TYPE = 'std'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc' : [ None,                    'all'
+SHEET_LAYOUT = { 'exc': [ None,                    'all'
                          ],
-                 'ans' : [ None,                    'all'
+                 'ans': [ None,                    'all'
                          ]
                }
 
@@ -61,7 +61,7 @@ class AlgebraFactorization_02(S_Structure):
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
         self.header = ""
-        self.title = _("Training exercises sheet :")
+        self.title = _("Training exercises sheet:")
         self.subtitle = _("Factorization")
         self.text = ""
         self.answers_title = _("Examples of answers")

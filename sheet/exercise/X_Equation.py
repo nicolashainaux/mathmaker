@@ -26,83 +26,83 @@ from . import question
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
-# Note : the bypass value allows to give the value of *x_subkind* directly to
+# Note: the bypass value allows to give the value of *x_subkind* directly to
 # the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
-    {'short_test' : ['basic', 'classic', 'classic_harder', 'harder',
+    {'short_test': ['basic', 'classic', 'classic_harder', 'harder',
                      'harder_harder'],
-     'preformatted' : ['basic_additions', 'any_basic', 'basic_multiplications',
+     'preformatted': ['basic_additions', 'any_basic', 'basic_multiplications',
                        'classics', 'classic_xtwice_and_any'],
-     'bypass' : ['any_simple_expandable']
+     'bypass': ['any_simple_expandable']
     }
 
 X_LAYOUT_UNIT = "cm"
 
 STD_LAYOUT_for_9_equations = \
-              { 'exc' : [ None,                    'all'
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ [1,         6, 6, 6],    (3, 3, 3)
+                'ans': [ [1,         6, 6, 6],    (3, 3, 3)
                         ]
               }
 
 # ----------------------  lines_nb    col_widths   questions
-X_LAYOUTS = {'default' :
-              { 'exc' : [ None,                    'all'
+X_LAYOUTS = {'default':
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ [2,         6, 6, 6],    (1, 1, 1,
+                'ans': [ [2,         6, 6, 6],    (1, 1, 1,
                                                     1, 1, 1)
                         ]
               },
 
-             ('short_test', 'basic') :
-              { 'exc' : [ None,                    'all'
+             ('short_test', 'basic'):
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ [2,         4.5, 4.5],   (1, 1,
+                'ans': [ [2,         4.5, 4.5],   (1, 1,
                                                     1, 1)
                         ]
               },
 
-             ('short_test', 'classic') :
-              { 'exc' : [ None,                    'all'
+             ('short_test', 'classic'):
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ [1,         4.5, 4.5],   (1, 1)
+                'ans': [ [1,         4.5, 4.5],   (1, 1)
                         ]
               },
 
-             ('short_test', 'harder') :
-              { 'exc' : [ None,                    'all'
+             ('short_test', 'harder'):
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ [1,             6, 6],   (1, 1)
+                'ans': [ [1,             6, 6],   (1, 1)
                         ]
               },
 
-             ('short_test', 'harder_harder') :
-              { 'exc' : [ None,                    'all'
+             ('short_test', 'harder_harder'):
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ [1,         7, 11],      (1, 1)
+                'ans': [ [1,         7, 11],      (1, 1)
                         ]
               },
 
-             ('short_test', 'classic_harder') :
-              { 'exc' : [ None,                    'all'
+             ('short_test', 'classic_harder'):
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ [1,         5, 5, 7],    (2, 1, 1)
+                'ans': [ [1,         5, 5, 7],    (2, 1, 1)
                         ]
               },
 
-             ('preformatted', 'basic_additions') : STD_LAYOUT_for_9_equations,
+             ('preformatted', 'basic_additions'): STD_LAYOUT_for_9_equations,
 
-             ('preformatted', 'any_basic') : STD_LAYOUT_for_9_equations,
+             ('preformatted', 'any_basic'): STD_LAYOUT_for_9_equations,
 
-             ('preformatted', 'basic_multiplications') : \
+             ('preformatted', 'basic_multiplications'): \
                                                     STD_LAYOUT_for_9_equations,
 
-             #('preformatted', 'classic_xtwice_and_any') : EMPTY_LAYOUT,
+             #('preformatted', 'classic_xtwice_and_any'): EMPTY_LAYOUT,
 
-             ('bypass', 'any_simple_expandable') :
-              { 'exc' : [ None,                    'all'
+             ('bypass', 'any_simple_expandable'):
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ [1,            9, 9],    (1, 1),
+                'ans': [ [1,            9, 9],    (1, 1),
                           [1,            9, 9],    (1, 1),
                           [1,            9, 9],    (1, 1)
                         ]
@@ -127,7 +127,7 @@ class X_Equation(X_Structure):
     ##
     #   @brief Constructor.
     #   @param embedded_machine The machine that will be used to write output.
-    #   @param **options Options detailed below :
+    #   @param **options Options detailed below:
     #          - start_number=<integer>
     #                         (should be >= 1)
     #          - number_of_questions=<integer>
@@ -161,7 +161,7 @@ class X_Equation(X_Structure):
 
         default_question = question.Q_Equation
 
-        # FINALLY DEPRECATED :)
+        # FINALLY DEPRECATED:)
         # this field, which is specific to equation exercises, is used
         # in the write_answer() method from the StructureEquation class.
         # it can be changed depending on the x_kind of exercise desired.
@@ -171,8 +171,8 @@ class X_Equation(X_Structure):
         #self.number_of_equations_per_column = 2
 
         # TEXTS OF THE EXERCISE
-        self.text = {'exc' : "",
-                     'ans'   : ""
+        self.text = {'exc': "",
+                     'ans': ""
                     }
 
         # alternate texts section
@@ -368,7 +368,7 @@ class X_Equation(X_Structure):
 
 
         # OTHER EXERCISES
-        # Take care : the displaying of the answers if
+        # Take care: the displaying of the answers if
         # number_of_questions is different from 6 is not implemented yet !
         else:
             for i in range(self.q_nb):
@@ -392,7 +392,7 @@ class X_Equation(X_Structure):
     #   at the @return line
     # - Write the class name of the default_question. You must mention it
     #   because it will be used in the OTHER EXERCISES section.
-    # - The different sections to rewrite are :
+    # - The different sections to rewrite are:
     #   * TEXTS OF THE EXERCISE:
     #       default text for all exercises of this class
     #   * alternate texts section:

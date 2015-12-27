@@ -111,7 +111,7 @@ class Evaluable(Printable):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Sort order : numerics < sorted literals
+    #   @brief Sort order: numerics < sorted literals
     #   @return -1, 0 or +1
     def alphabetical_order_cmp(self, other_objct):
 
@@ -535,7 +535,7 @@ class Value(Signed):
             self._has_been_rounded = arg.has_been_rounded
             self._unit = arg.unit
 
-        # All other unforeseen cases : an exception is raised.
+        # All other unforeseen cases: an exception is raised.
         else:
             raise error.UncompatibleType(arg, "Number|String")
 

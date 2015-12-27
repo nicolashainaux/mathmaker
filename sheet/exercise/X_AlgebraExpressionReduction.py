@@ -25,17 +25,17 @@ from .X_Structure import X_Structure
 from . import question
 
 AVAILABLE_X_KIND_VALUES = \
-    {'short_test' : ['easy', 'medium_level'],
-     'preformatted' : ['product'],
-     'bypass' : ['sum', 'sum_of_products']
+    {'short_test': ['easy', 'medium_level'],
+     'preformatted': ['product'],
+     'bypass': ['sum', 'sum_of_products']
     }
 
 X_LAYOUT_UNIT = "cm"
 # ----------------------  lines_nb    col_widths   questions
-X_LAYOUTS = {'default' :
-              { 'exc' : [ None,                    'all'
+X_LAYOUTS = {'default':
+              { 'exc': [ None,                    'all'
                         ],
-                'ans' : [ None,                    'all'
+                'ans': [ None,                    'all'
                         ]
               }
             }
@@ -57,7 +57,7 @@ class X_AlgebraExpressionReduction(X_Structure):
     ##
     #   @brief Constructor.
     #   @param embedded_machine The machine that will be used to write output.
-    #   @param **options Options detailed below :
+    #   @param **options Options detailed below:
     #          - start_number=<integer>
     #                         (should be >= 1)
     #          - number_of_questions=<integer>
@@ -92,25 +92,25 @@ class X_AlgebraExpressionReduction(X_Structure):
         default_question = question.Q_AlgebraExpressionReduction
 
         # TEXTS OF THE EXERCISES
-        self.text = {'exc' : _("Reduce the following expressions :"),
-                     'ans' : ""
+        self.text = {'exc': _("Reduce the following expressions:"),
+                     'ans': ""
                     }
 
         # alternate texts section
         if self.x_subkind == 'product':
-            self.text = {'exc' : \
-                            _("Reduce, if possible, the following products :"),
-                         'ans' : \
+            self.text = {'exc': \
+                            _("Reduce, if possible, the following products:"),
+                         'ans': \
                      _("Pay attention that the intermediate line is optional.")
                         }
 
         #elif self.x_subkind == 'sum_of_products':
-        #    self.text = _("Reduce the following expressions :")
+        #    self.text = _("Reduce the following expressions:")
 
         elif self.x_subkind == 'sum':
-            self.text = {'exc' : \
-                            _("Reduce, if possible, the following sums :"),
-                         'ans' : \
+            self.text = {'exc': \
+                            _("Reduce, if possible, the following sums:"),
+                         'ans': \
                      _("Pay attention that the intermediate line is optional.")
                         }
 

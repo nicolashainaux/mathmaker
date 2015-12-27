@@ -36,8 +36,8 @@ AVAILABLE_Q_KIND_VALUES = {'level_01':['default',
                                        'mixed',
                                        'mixed_factorizable'],
 
-                          # C : common factor
-                          # F1 & F2 : the other factors
+                          # C: common factor
+                          # F1 & F2: the other factors
                           # deg1 and deg2 represent polynoms
                           # of 1st and 2d degree
                           # F1 and F2 will be randomly exchanged at creation
@@ -64,15 +64,15 @@ AVAILABLE_Q_KIND_VALUES = {'level_01':['default',
              'type_1_I',  # .
              'type_1_0',  # any of type_1_*0 cases
              'type_1_1',  # any of type_1_*1 cases
-             'type_1_A0', # a×deg1 + a×deg1' (deg* : at least 2 terms & a!=1)
-             'type_1_B0', # a×deg2 + a×deg2' (deg* : at least 2 terms & a!=1)
-             'type_1_C0', # a×deg1 + a×deg2 (deg* : at least 2 terms & a!=1)
-             'type_1_D0', # ax×deg1 + ax×deg1' (deg* : at least 2 terms)
-             'type_1_E0', # ax×deg2 + ax×deg2' (deg* : at least 2 terms)
-             'type_1_F0', # ax×deg1 + ax×deg2 (deg* : at least 2 terms)
-             'type_1_G0', # ax²×deg1 + ax²×deg1' (deg* : at least 2 terms)
-             'type_1_H0', # ax²×deg2 + ax²×deg2' (deg* : at least 2 terms)
-             'type_1_I0', # ax²×deg1 + ax²×deg2 (deg* : at least 2 terms)
+             'type_1_A0', # a×deg1 + a×deg1' (deg*: at least 2 terms & a!=1)
+             'type_1_B0', # a×deg2 + a×deg2' (deg*: at least 2 terms & a!=1)
+             'type_1_C0', # a×deg1 + a×deg2 (deg*: at least 2 terms & a!=1)
+             'type_1_D0', # ax×deg1 + ax×deg1' (deg*: at least 2 terms)
+             'type_1_E0', # ax×deg2 + ax×deg2' (deg*: at least 2 terms)
+             'type_1_F0', # ax×deg1 + ax×deg2 (deg*: at least 2 terms)
+             'type_1_G0', # ax²×deg1 + ax²×deg1' (deg*: at least 2 terms)
+             'type_1_H0', # ax²×deg2 + ax²×deg2' (deg*: at least 2 terms)
+             'type_1_I0', # ax²×deg1 + ax²×deg2 (deg*: at least 2 terms)
              'type_1_A1', # a×deg1 + a×1
              'type_1_B1', # a×deg2 + a×1
              #'type_1_C1', # C1 has no sense
@@ -191,7 +191,7 @@ class Q_Factorization(Q_Structure):
         self.derived = True
 
         # The call to the mother class __init__() method will set the
-        # fields matching optional arguments which are so far :
+        # fields matching optional arguments which are so far:
         # self.q_kind, self.q_subkind
         # plus self.machine, self.options (modified)
         Q_Structure.__init__(self, embedded_machine,
@@ -442,7 +442,7 @@ class Q_Factorization(Q_Structure):
 
 
 
-        # Creation of the expression :
+        # Creation of the expression:
         number = 0
         if 'expression_number' in options                                 \
            and is_.a_natural_int(options['expression_number']):
@@ -450,7 +450,7 @@ class Q_Factorization(Q_Structure):
             number = options['expression_number']
         self.expression = Expression(number, steps[0])
 
-        # Putting the steps and the solution together :
+        # Putting the steps and the solution together:
         self.steps = []
 
         #for i in xrange(len(steps) - 1):
@@ -528,7 +528,7 @@ def level_01(q_subkind, **options):
        or q_subkind == 'three_terms' \
        or q_subkind == 'ax + b' \
        or q_subkind == 'ax² + b' \
-       or q_subkind == 'ax² + bx' :
+       or q_subkind == 'ax² + bx':
     #___
         # the idea is to build the final factorized result first and to
         # expand it to get the question (and the solution's steps
@@ -555,7 +555,7 @@ def level_01(q_subkind, **options):
             common_factor.set_degree(1)
 
         # to avoid having a situation like 1×(2x + 3) which isn't
-        # factorizable :
+        # factorizable:
         if common_factor.get_degree() == 0:
             common_factor.set_coeff(randomly.integer(2, 6))
 
@@ -724,7 +724,7 @@ def level_02(q_subkind, **options):
 
     # Creation of the objects
 
-    # The three Monomials : ax², bx and c
+    # The three Monomials: ax², bx and c
     # Maybe we don't need to keep the integer values...
     a_val = randomly.integer(1, max_coeff)
     b_val = randomly.integer(1, max_coeff)
@@ -743,7 +743,7 @@ def level_02(q_subkind, **options):
     bx = Monomial((randomly.sign(), b_val, 1))
     c = Monomial((randomly.sign(), c_val, 0))
 
-    # deg1 : mx + p
+    # deg1: mx + p
     # and we need two of them
     deg1 = []
     for i in range(2):
@@ -767,7 +767,7 @@ def level_02(q_subkind, **options):
            or q_subkind == 'type_1_E1' \
            or q_subkind == 'type_1_G1' \
            or q_subkind == 'type_1_H1' \
-           or q_subkind == 'type_4_A0' :
+           or q_subkind == 'type_4_A0':
         #___
             deg1_p = Monomial((randomly.sign(),
                                randomly.integer(1, max_coeff),
@@ -786,7 +786,7 @@ def level_02(q_subkind, **options):
             deg1.append(deg1_mx)
 
 
-    # deg2 : mx² + px + r
+    # deg2: mx² + px + r
     # and we also need two of them
     deg2 = []
     for i in range(2):
@@ -850,7 +850,7 @@ def level_02(q_subkind, **options):
 
 
     # Let's attribute the common factor C according to the required type
-    # (NB : expression ± C×F1 ± C×F2)
+    # (NB: expression ± C×F1 ± C×F2)
     C = None
 
     if q_subkind == 'type_1_A0' \
@@ -882,7 +882,7 @@ def level_02(q_subkind, **options):
          or q_subkind == 'type_2_C0' \
          or q_subkind == 'type_2_A1' \
          or q_subkind == 'type_2_B1' \
-         or q_subkind == 'type_4_A0' :
+         or q_subkind == 'type_4_A0':
     #___
         C = Polynomial([bx, c])
 
@@ -903,7 +903,7 @@ def level_02(q_subkind, **options):
         C = Polynomial([ax2, bx, c])
 
     # Let's attribute F1 and F2 according to the required type
-    # (NB : expression ± C×F1 ± C×F2)
+    # (NB: expression ± C×F1 ± C×F2)
     F1 = None
     F2 = None
 
@@ -949,7 +949,7 @@ def level_02(q_subkind, **options):
         F1 = deg1[0]
         F2 = deg2[0]
 
-    # The special case type_4_A0 : (ax+b)² + (ax+b)×deg1'
+    # The special case type_4_A0: (ax+b)² + (ax+b)×deg1'
     #                       aka    C² + C×F1
     elif q_subkind == 'type_4_A0':
         F1 = C.clone()
@@ -977,9 +977,9 @@ def level_02(q_subkind, **options):
 
 
     # Let's possibly attribute a minus_sign
-    # (NB : expression ± C×F1 ± C×F2)
+    # (NB: expression ± C×F1 ± C×F2)
     minus_sign = None # this will contain the name of the factor having
-                      # a supplementary minus sign in such cases :
+                      # a supplementary minus sign in such cases:
                       # C×F1 - C×F2
                       # - C×F1 + C×F2
 
@@ -1004,7 +1004,7 @@ def level_02(q_subkind, **options):
          or q_subkind == 'type_1_I0' \
          or q_subkind == 'type_1_G1' \
          or q_subkind == 'type_1_H1') \
-        and a_val < 0) :
+        and a_val < 0):
     #___
         pass # here we let minus_sign equal to None
 
@@ -1199,7 +1199,7 @@ def level_03(q_subkind, **options):
                                                 force_expression_markers='yes')
                      )
 
-        steps.append(_("So it is possible to factorize :"))
+        steps.append(_("So it is possible to factorize:"))
 
         if q_subkind == 'difference_square' \
             or q_subkind == 'difference_square_mixed':
@@ -1216,7 +1216,7 @@ def level_03(q_subkind, **options):
     elif q_subkind == 'squares_difference' \
         or q_subkind == 'squares_difference_mixed':
     #___
-        # To have some (ax)² - b² but also sometimes b² - (ax)² :
+        # To have some (ax)² - b² but also sometimes b² - (ax)²:
         degrees = [2, 0, 1, 0]
 
         if randomly.integer(1, 10) >= 8:
@@ -1238,7 +1238,7 @@ def level_03(q_subkind, **options):
                                    Item(('+', b, 1)).evaluate(),
                                    degrees[3]))
 
-        # The 'mixed' cases are : -b² + (ax)² and -(ax)² + b²
+        # The 'mixed' cases are: -b² + (ax)² and -(ax)² + b²
         if q_subkind == 'squares_difference_mixed':
             [first_term, second_term] = randomly.mix([first_term,
                                                       second_term])
@@ -1276,7 +1276,7 @@ def level_03(q_subkind, **options):
         if q_subkind == 'squares_difference_mixed':
             steps.append(Sum([second_inter, first_inter]))
 
-        steps.append(_("So, this expression can be factorized :"))
+        steps.append(_("So, this expression can be factorized:"))
 
         sum1 = None
         sum2 = None

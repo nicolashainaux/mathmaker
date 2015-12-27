@@ -39,9 +39,9 @@ from lib.maths_lib import *
 #   @param min_value The lowest possible value of the result
 #   @param max_value The highest possible value of the result
 #   @param **options It is possible to use a weighted table
-#   The weighted table is a probability distribution : the sum of its values
+#   The weighted table is a probability distribution: the sum of its values
 #   must be 1 and the number of values must match the number of possible
-#   results. Here's an example : [0.2, 0.4, 0.3, 0.1].
+#   results. Here's an example: [0.2, 0.4, 0.3, 0.1].
 #   @return An integer comprised between min_value & max_value
 def integer(min_value, max_value, **options):
     if not ('weighted_table' in options                                       \

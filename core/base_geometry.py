@@ -77,11 +77,11 @@ class Point(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param arg : [String, (nb,nb)]|Point
-    #   Types details :
+    #   @param arg: [String, (nb,nb)]|Point
+    #   Types details:
     #   -
     #   @param options
-    #   Options details :
+    #   Options details:
     #   -
     #   @warning Might raise...
     def __init__(self, arg, **options):
@@ -253,10 +253,10 @@ class Segment(Drawable):
     ##
     #   @brief Constructor.
     #   @param arg (Point, Point)
-    #   Types details :
+    #   Types details:
     #   -
     #   @param options
-    #   Options details :
+    #   Options details:
     #   -
     #   @warning Might raise...
     def __init__(self, arg, **options):
@@ -369,7 +369,7 @@ class Segment(Drawable):
             raise error.WrongArgument(' str ', str(type(arg)))
 
         if not arg in AVAILABLE_SEGMENT_MARKS:
-            raise error.WrongArgument(arg, 'a string from this list : ' \
+            raise error.WrongArgument(arg, 'a string from this list: ' \
                                       + str(AVAILABLE_SEGMENT_MARKS))
 
         self._mark = arg
@@ -505,9 +505,9 @@ class Ray(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param arg : (Point, Point)
-    #   @param options : label
-    #   Options details :
+    #   @param arg: (Point, Point)
+    #   @param options: label
+    #   Options details:
     #   @warning Might raise...
     def __init__(self, arg, **options):
         self._point0 = None # the initial point
@@ -543,9 +543,9 @@ class Angle(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param arg : (Point, Point, Point)
-    #   @param options : label
-    #   Options details :
+    #   @param arg: (Point, Point, Point)
+    #   @param options: label
+    #   Options details:
     #   @warning Might raise...
     def __init__(self, arg, **options):
         self._ray0 = None
@@ -567,7 +567,7 @@ class Angle(Drawable):
                             arg[1].clone(),
                             arg[2].clone()]
 
-            # Let's determine the measure of the angle :
+            # Let's determine the measure of the angle:
             aux_side0 = Segment((self._points[0], self._points[1]))
             aux_side1 = Segment((self._points[1], self._points[2]))
             aux_side2 = Segment((self._points[2], self._points[0]))
@@ -709,7 +709,7 @@ class Angle(Drawable):
             if arg in AVAILABLE_ANGLE_MARKS:
                 self._mark = arg
             else:
-                raise error.WrongArgument(arg, 'a string from this list : ' \
+                raise error.WrongArgument(arg, 'a string from this list: ' \
                                                + str(AVAILABLE_ANGLE_MARKS))
 
         else:

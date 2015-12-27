@@ -24,9 +24,9 @@ from .S_Structure import S_Structure
 from .S_Structure import get_sheet_config, get_exercises_list
 
 # ------------------------  lines_nb    col_widths   exercises
-#SHEET_LAYOUT = { 'exc' : [ None,                    'all'
+#SHEET_LAYOUT = { 'exc': [ None,                    'all'
 #                         ],
-#                 'ans' : [ None,                    'all'
+#                 'ans': [ None,                    'all'
 #                         ]
 #               }
 

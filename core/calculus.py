@@ -41,7 +41,7 @@ if markup_choice == 'latex':
 MAX_VALUE = 20
 
 # The following tables come from the fractions' calculations sheets...
-# which is a shame : this code must be factorized
+# which is a shame: this code must be factorized
 FRACTIONS_SUMS_TABLE = [([1, 2], 15),
                         ([1, 3], 15),
                         ([1, 4], 15),
@@ -124,7 +124,7 @@ class ComposedCalculable(Printable):
 # ------------------------------------------------------------------------------
 ##
 # @class Expression
-# @brief These are object of the kind : Name = Exponented
+# @brief These are object of the kind: Name = Exponented
 class Expression(ComposedCalculable):
 
 
@@ -239,7 +239,7 @@ class Expression(ComposedCalculable):
         # print aux_expr.into_str()
 
 
-        # Complete expansion & reduction of any expression :o)
+        # Complete expansion & reduction of any expression:o)
         while aux_expr != None:
             result += MARKUP['opening_math_style2'] \
                       + Expression(self.name,
@@ -263,7 +263,7 @@ class Expression(ComposedCalculable):
 # ------------------------------------------------------------------------------
 ##
 # @class Equality
-# @brief These are object of the kind : Exponented = Exponented [= ...]
+# @brief These are object of the kind: Exponented = Exponented [= ...]
 class Equality(ComposedCalculable):
 
 
@@ -716,9 +716,9 @@ class Equation(ComposedCalculable):
                      or arg[1] == 'any_classic':
                 #___
                     # Let's build
-                    # classic : ax + b = d | b + ax = d
-                    # classic_r : d = ax + b | d = b + ax
-                    # classic_x_twice : ax + b = cx + d | ax + b = cx |
+                    # classic: ax + b = d | b + ax = d
+                    # classic_r: d = ax + b | d = b + ax
+                    # classic_x_twice: ax + b = cx + d | ax + b = cx |
                     #                   cx = ax + b | b + ax = cx + d etc.
                     box = list()
                     ax = Monomial((randomly.sign(plus_signs_ratio=0.65),
@@ -858,11 +858,11 @@ class Equation(ComposedCalculable):
                 elif arg[1] == 'any_simple_expandable' \
                     or arg[1] == 'any_double_expandable':
                 #___
-                    # SIMPLE :
+                    # SIMPLE:
                     # a monom0_polyn1 or a ±(...) on one side
                     # + one Monomial with the monom0_polyn1
                     # and one or two Monomials on the other side
-                    # DOUBLE :
+                    # DOUBLE:
                     # The same plus another expandable.
 
                     # Creation of the expandables, to begin with...
@@ -954,7 +954,7 @@ class Equation(ComposedCalculable):
 
 
 
-            # All other unforeseen cases : an exception is raised.
+            # All other unforeseen cases: an exception is raised.
             else:
                 raise error.UncompatibleType(arg,
                                              "(Exponented, Exponented)|" \
@@ -1125,13 +1125,13 @@ class Equation(ComposedCalculable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Raw display of the Equation (debugging method)
-    #   @return A string containing "type : sign coeff × X ^ degree"
+    #   @return A string containing "type: sign coeff × X ^ degree"
     def dbg_str(self):
-        return "\nEquation : " + str(self.name) \
+        return "\nEquation: " + str(self.name) \
                + " " + str(self.number) \
-               + "\n Left hand side : " + self.left_hand_side.dbg_str() \
-               + "\n Right hand side : " + self.right_hand_side.dbg_str() \
-               + "\n Variable : " + str(self.variable_letter)
+               + "\n Left hand side: " + self.left_hand_side.dbg_str() \
+               + "\n Right hand side: " + self.right_hand_side.dbg_str() \
+               + "\n Variable: " + str(self.variable_letter)
 
 
 
@@ -1145,7 +1145,7 @@ class Equation(ComposedCalculable):
     def auto_resolution(self, **options):
         global expression_begins
 
-        # Complete resolution of the equation :o)
+        # Complete resolution of the equation:o)
         result = ""
 
         if not 'dont_display_equations_name' in options:
@@ -1328,11 +1328,11 @@ class Equation(ComposedCalculable):
         new_eq = Equation(self)
         #DEBUG
         debug.write("\nEntering [solve_next_step] " \
-                               + "with Equation :\n" \
+                               + "with Equation:\n" \
                                + new_eq.dbg_str() + "\n",
                                case=debug.solve_next_step)
 
-        # CASE 0 : preparing the Equation : getting recursively rid of
+        # CASE 0: preparing the Equation: getting recursively rid of
         #          imbricated Sums
         if isinstance(new_eq.left_hand_side.term[0], Sum) \
            and len(new_eq.left_hand_side) == 1:
@@ -1387,13 +1387,13 @@ class Equation(ComposedCalculable):
             else:
                 next_left_X_str = next_left_X.dbg_str()
             debug.write("\n[solve_next_step] " \
-                        + "'decimal_result' is in options : " \
+                        + "'decimal_result' is in options: " \
                         + str('decimal_result' in options) \
                         + " len(new_eq.left_hand_side) == " \
                         + str(len(new_eq.left_hand_side)) \
-                        + "\nnext_left_X is : " \
+                        + "\nnext_left_X is: " \
                         + next_left_X_str \
-                        + "\nnew_eq.left_hand_side.term[0].is_literal() : " \
+                        + "\nnew_eq.left_hand_side.term[0].is_literal(): " \
                         + str(new_eq.left_hand_side.term[0].is_literal()) \
                         + " len(new_eq.right_hand_side) == " \
                         + str(len(new_eq.right_hand_side)) \
@@ -1480,7 +1480,7 @@ class Equation(ComposedCalculable):
             # All the literal objects will be moved to the left,
             # all numeric will be moved to the right
             #DEBUG
-            debug.write("\néquation en cours : " \
+            debug.write("\néquation en cours: " \
                                    + self.dbg_str() + "\n",
                                    case=debug.solve_next_step)
 
@@ -1489,14 +1489,14 @@ class Equation(ComposedCalculable):
 
             #DEBUG
             if debug.ENABLED and debug.solve_next_step:
-                debug.write("\nleft content : " \
+                debug.write("\nleft content: " \
                                    + self.left_hand_side.dbg_str(),
                                    case=debug.solve_next_step)
-                debug.write("\nright content : " \
+                debug.write("\nright content: " \
                                    + self.right_hand_side.dbg_str(),
                                    case=debug.solve_next_step)
 
-                lstring = "\nleft collected terms : "
+                lstring = "\nleft collected terms: "
 
                 for t in left_collected_terms:
                     lstring += t.dbg_str()
@@ -1504,7 +1504,7 @@ class Equation(ComposedCalculable):
                 debug.write(lstring,
                             case=debug.solve_next_step)
 
-                rstring = "\nright collected terms : "
+                rstring = "\nright collected terms: "
 
                 for t in right_collected_terms:
                     rstring += t.dbg_str()
@@ -1555,7 +1555,7 @@ class Equation(ComposedCalculable):
                                      new_eq.left_hand_side)).solve_next_step()
 
 
-            # Special Case 2 :
+            # Special Case 2:
             # of Equations like 9 = 3x which should become x = 9/3
             # and not -3x = -9
             if new_eq.left_hand_side.is_numeric() \
@@ -1572,7 +1572,7 @@ class Equation(ComposedCalculable):
 
 
             #DEBUG
-            #debug.write("\nleft_collected_terms : ",
+            #debug.write("\nleft_collected_terms: ",
                        # case=debug.solve_next_step)
 
             for term in left_collected_terms:
@@ -1585,12 +1585,12 @@ class Equation(ComposedCalculable):
                                      Sum([new_eq.right_hand_side, term])
                                      )
                 #DEBUG
-                debug.write("\nNow, right_hand_side looks like : " \
+                debug.write("\nNow, right_hand_side looks like: " \
                             + new_eq.right_hand_side.dbg_str() + "\n",
                             case=debug.solve_next_step)
 
             #DEBUG
-            #debug.write("\nright_collected_terms : \n",
+            #debug.write("\nright_collected_terms: \n",
             #            case=debug.solve_next_step)
 
             for term in right_collected_terms:
@@ -1608,7 +1608,7 @@ class Equation(ComposedCalculable):
             new_eq.right_hand_side.reduce_()
             #DEBUG
             #debug.write("\nafter reduction, "\
-            #                       + "right_hand_side looks like : " \
+            #                       + "right_hand_side looks like: " \
             #                       + str(new_eq.right_hand_side) + "\n",
             #                       case=debug.solve_next_step)
 
@@ -1667,7 +1667,7 @@ class Equation(ComposedCalculable):
 
 
 
-            # Let's get the numeric Exponented to remove from the left :
+            # Let's get the numeric Exponented to remove from the left:
             coefficient = new_eq.left_hand_side.term[0].factor[0]
 
             if coefficient.is_displ_as_a_single_1():
@@ -1755,7 +1755,7 @@ class Equation(ComposedCalculable):
 
 
         #DEBUG
-        #debug.write("\nBefore having thrown away the neutrals : " \
+        #debug.write("\nBefore having thrown away the neutrals: " \
         #                       + "\n" \
         #                       + str(new_eq) + "\n",
         #                       case=debug.solve_next_step)
@@ -1770,13 +1770,13 @@ class Equation(ComposedCalculable):
 
         #DEBUG
         #debug.write("\nafter having thrown away the neutrals,"
-        #                       + " right_hand_side looks like : " \
+        #                       + " right_hand_side looks like: " \
         #                       + str(new_eq.right_hand_side) + "\n",
         #                       case=debug.solve_next_step)
 
         #DEBUG
         debug.write("\nLeaving [solve_next_step] " \
-                               + "with Equation :\n" \
+                               + "with Equation:\n" \
                                + new_eq.dbg_str() + "\n",
                                case=debug.solve_next_step)
         return new_eq
@@ -2056,7 +2056,7 @@ class Table(Printable):
                                       "arg[1] should be a list")
 
         if not len(arg[0]) == len(arg[1]):
-            raise error.WrongArgument("two lists of different lengths : " \
+            raise error.WrongArgument("two lists of different lengths: " \
                                       + str(len(arg[0])) + " and " \
                                       + str(len(arg[1])),
                                       "two lists of the same length")
@@ -2066,7 +2066,7 @@ class Table(Printable):
                 if not isinstance(arg[j][i], Calculable):
                     raise error.WrongArgument("arg[" + str(j) + "][" \
                                               + str(i) + "] is no instance of" \
-                                              + " Calculable ; type : " \
+                                              + " Calculable ; type: " \
                                               + str(type(arg[j][i])),
                                               "a Calculable")
 
@@ -2149,8 +2149,8 @@ class Table(Printable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Produces the cross product of a cell among 4 given
-    #   @param cols : (nb of col 1, nb of col 2)
-    #   @param x_position : position of the unknown variable to compute
+    #   @param cols: (nb of col 1, nb of col 2)
+    #   @param x_position: position of the unknown variable to compute
     #                       it will be 0, 1, 2 or 3
     #                       0: x a     1: a x     2: a b    3: a b
     #                          b c        b c        c x       x c
@@ -2461,7 +2461,7 @@ class Table_UP(Table):
 
     crossproducts_info = property(get_crossproducts_info,
                                   doc = "infos about the cross products")
-    # for instance, {'EF' : (2,0), "GH" : (3,0)} means Item 'EF' can
+    # for instance, {'EF': (2,0), "GH": (3,0)} means Item 'EF' can
     # be calculated by a CrossProduct using columns 2 and 0, etc.
 
 

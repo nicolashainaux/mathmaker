@@ -30,17 +30,17 @@ SHEET_LAYOUT_TYPE = 'mini_test'
 SHEET_LAYOUT_UNIT = "cm"
 #EXAMPLE OF A SHEET NOT USING ANY LAYOUT
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc' : [ [1,         9, 9],       (1, 1)
+SHEET_LAYOUT = { 'exc': [ [1,         9, 9],       (1, 1)
                          ],
-                 'ans' : [ None,                    'all'
+                 'ans': [ None,                    'all'
                          ]
                }
 #ANOTHER EXAMPLE
 # ------------------------  lines_nb    col_widths   exercises
-#SHEET_LAYOUT = { 'exc' : [ [1,         6, 15],      (1, 1),
+#SHEET_LAYOUT = { 'exc': [ [1,         6, 15],      (1, 1),
 #                            None,                    1
 #                         ],
-#                 'ans' : [ [1,         6.5, 12],    (1, 1),
+#                 'ans': [ [1,         6.5, 12],    (1, 1),
 #                            'jump',                 'next_page',
 #                            None,                    1
 #                         ]
@@ -48,7 +48,7 @@ SHEET_LAYOUT = { 'exc' : [ [1,         9, 9],       (1, 1)
 # NOTE THAT FOR SHORT_TEST SHEETS, THE LAYOUT HAS TO BE GIVEN ONLY ONCE
 # AND IT WILL BE DUPLICATED FOR THE SECOND SET OF EXERCISES
 
-# EXPLANATION ABOUT THE EXAMPLE OF SHEET_LAYOUT :
+# EXPLANATION ABOUT THE EXAMPLE OF SHEET_LAYOUT:
 # [1, 6, 15] means a table of 1 line with columns widths 6 and 15.
 # (1, 1) means one exercise in each of these two cells.
 # This tuple should contains as many numbers as nb of lines × nb of cols.
@@ -82,8 +82,8 @@ class AlgebraMiniTest1(S_Structure):
                              SHEET_LAYOUT_TYPE)
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
-        self.header = _("Name : ....................... Class : ...........")
-        self.title = _("Mini Test : Algebra")
+        self.header = _("Name: ....................... Class: ...........")
+        self.title = _("Mini Test: Algebra")
         self.subtitle = ""
         self.text = ""
         self.answers_title = _("Examples of answers")

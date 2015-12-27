@@ -73,12 +73,12 @@ class Polygon(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Polygon's constructor.
-    #   @param arg : Polygon |
+    #   @param arg: Polygon |
     #                [Point, Point...] |
     #                [str, str...] <-- not implemented yet
-    #            NB : the str will be the vertices' names
+    #            NB: the str will be the vertices' names
     #   @param options
-    #   Options details :
+    #   Options details:
     #   - rotate_around_gravity_center = 'no'|'any'|nb
     #                        (nb being the angle,
     #               defaulting to 'any' if sketch or 'no' if not a sketch)
@@ -421,11 +421,11 @@ class Rectangle(Polygon):
     # --------------------------------------------------------------------------
     ##
     #   @brief Rectangle's constructor.
-    #   @param arg : Rectangle |
+    #   @param arg: Rectangle |
     #                [Point, length, height, str1, str2, str3]
-    #            NB : the str will be the vertices' names
+    #            NB: the str will be the vertices' names
     #   @param options
-    #   Options details :
+    #   Options details:
     #   - rotate_around_gravity_center = 'no'|'any'|nb
     #                        (nb being the angle,
     #               defaulting to 'any' if sketch or 'no' if not a sketch)
@@ -489,16 +489,16 @@ class Triangle(Polygon):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param arg : Triangle |
+    #   @param arg: Triangle |
     #                ((str, str, str), (not implemented yet)'sketch'
-    #        OR :                      {'side0':nb0, 'angle1':nb1, 'side1':nb2}
-    #        OR : (not implemented yet){'side0':nb0, 'side1':nb1, 'side2':nb2}
-    #        OR : (not implemented yet) etc.
+    #        OR:                      {'side0':nb0, 'angle1':nb1, 'side1':nb2}
+    #        OR: (not implemented yet){'side0':nb0, 'side1':nb1, 'side2':nb2}
+    #        OR: (not implemented yet) etc.
     #                )
-    #            NB : the three str will be the vertices' names
-    #            NB : 'sketch' will just choose (reasonnably) random values
+    #            NB: the three str will be the vertices' names
+    #            NB: 'sketch' will just choose (reasonnably) random values
     #   @param options
-    #   Options details :
+    #   Options details:
     #   - rotate_around_gravity_center = 'no'|'any'|nb
     #                        (nb being the angle,
     #               defaulting to 'any' if sketch or 'no' if not a sketch)
@@ -612,17 +612,17 @@ class RightTriangle(Triangle):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param arg : RightTriangle |
+    #   @param arg: RightTriangle |
     #                ((str, str, str), 'sketch'
-    #        OR :                      {'leg0' : nb0, 'leg1' : nb1}
-    #        OR : (not implemented yet){'leg0' : nb0, 'angle0' : nb1}
+    #        OR:                      {'leg0': nb0, 'leg1': nb1}
+    #        OR: (not implemented yet){'leg0': nb0, 'angle0': nb1}
     #                )
-    #            NB : the three str will be the vertices' names
+    #            NB: the three str will be the vertices' names
     #                 The second name will be the right corner
     #                 so, hypotenuse will be vertices_names[0] & [2]
-    #            NB : 'sketch' will just choose (reasonnably) random values
+    #            NB: 'sketch' will just choose (reasonnably) random values
     #   @param options
-    #   Options details :
+    #   Options details:
     #   - rotate_around_gravity_center = 'no'|'any'|nb
     #                        (nb being the angle,
     #               defaulting to 'any' if sketch or 'no' if not a sketch)
@@ -690,7 +690,7 @@ class RightTriangle(Triangle):
 
             else:
                 raise error.WrongArgument(" 'sketch' | " \
-                                        + "{'leg0' : nb0, 'leg1' : nb1}",
+                                        + "{'leg0': nb0, 'leg1': nb1}",
                                           str(construction_data))
 
             Triangle.__init__(self,
@@ -698,9 +698,9 @@ class RightTriangle(Triangle):
                                 vertices_names[1],
                                 vertices_names[2]
                                 ),
-                               {'side0' : leg0_length,
-                                'angle1' : 90,
-                                'side1' : leg1_length
+                               {'side0': leg0_length,
+                                'angle1': 90,
+                                'side1': leg1_length
                                }
                               ),
                               rotate_around_isobarycenter=rotation

@@ -49,7 +49,7 @@ def action():
 
     # after you replaced the NAME right above,
     # define your OBJECTS here
-    # for instance : monom_6 = Monomial(('+', 6, 0))
+    # for instance: monom_6 = Monomial(('+', 6, 0))
 
 
 

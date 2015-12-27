@@ -107,7 +107,7 @@ def put_term_in_lexicon(provided_key, associated_coeff, lexi):
     key_s_been_found = False
 
     # We check the lexicon's keys one after the other
-    # IMPORTANT NOTICE : the 'in' operator can't be used because it returns
+    # IMPORTANT NOTICE: the 'in' operator can't be used because it returns
     # True ONLY if the SAME OBJECT has been used as a key (and will return
     # False if another object of same kind and content is already there)
     for key in lexi:
@@ -211,7 +211,7 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
     #debug_str = ""
     #for l in literals_list:
     #    debug_str += l.dbg_str() + " "
-    #print "debug : literals_list = " + debug_str + "\n"
+    #print "debug: literals_list = " + debug_str + "\n"
 
     literals_list = purge_from_duplicates(literals_list)
     #literals_list_bis = []
@@ -221,26 +221,26 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
     #debug_str = ""
     #for l in literals_list:
     #    debug_str += l.dbg_str() + " "
-    #print "debug : literals_list after purging = " + debug_str + "\n"
+    #print "debug: literals_list after purging = " + debug_str + "\n"
 
     subst_dict_copy = {}
     for key in subst_dict:
         subst_dict_copy[key] = subst_dict[key].clone()
 
     #for k in subst_dict_copy:
-    #    print "debug : subst_dict_copy[" + k.dbg_str() + "] = " + subst_dict_copy[k].dbg_str() + "\n"
+    #    print "debug: subst_dict_copy[" + k.dbg_str() + "] = " + subst_dict_copy[k].dbg_str() + "\n"
 
     # Now check if the literals of the expressions are all in the lexicon
     n = 0
     N = len(literals_list)
     #collected_is= []
     for i in range(len(literals_list)):
-        #print "debug : literals_list[" + str(i) + "] = " + literals_list[i].dbg_str() + " is in subst_dict_copy ? " + str(literals_list[i] in subst_dict_copy) + "\n"
+        #print "debug: literals_list[" + str(i) + "] = " + literals_list[i].dbg_str() + " is in subst_dict_copy ? " + str(literals_list[i] in subst_dict_copy) + "\n"
         #if i >= 1:
-            #print "debug : checking the keys... "
+            #print "debug: checking the keys... "
         collected_keys = []
         for key in subst_dict_copy:
-            #print "debug : key = " + k.dbg_str() + " key == literals_list[" + str(i) + "] ? " + str(k == literals_list[i])
+            #print "debug: key = " + k.dbg_str() + " key == literals_list[" + str(i) + "] ? " + str(k == literals_list[i])
             if key == literals_list[i]:
                 n += 1
                 #collected_is += [i]
@@ -253,13 +253,13 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
 
 
         #if literals_list[i] in subst_dict_copy:
-        #    print "debug : found one elt \n"
+        #    print "debug: found one elt \n"
         #    n += 1
         #    literals_list.pop(i)
         #    subst_dict_copy.pop(literals_list[i])
 
     if not len(subst_dict_copy) == 0:
-        #print "debug : quitting here\n"
+        #print "debug: quitting here\n"
         return False
 
     #print "debug: how_many = " + str(how_many) + "\n"
