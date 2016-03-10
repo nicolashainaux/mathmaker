@@ -23,6 +23,7 @@
 import copy, sys
 
 from core.base_calculus import *
+from core.geometry import *
 from lib.common.cst import *
 from . import multi_direct
 
@@ -34,6 +35,7 @@ class sub_object(object):
         unit_area = Unit(unit_length.name, exponent=2)
         multi_direct.sub_object.__init__(self, numbers_to_use, **options)
         nb_list = [self.nb1, self.nb2]
+        self.context = options['context'] if 'context' in options else "default"
         self.w = min(nb_list)
         self.l = max(nb_list)
         self.w_str = Item(self.w, unit=unit_length)
@@ -46,12 +48,27 @@ class sub_object(object):
                             unit=unit_area)
         self.product = self.product.into_str(force_expression_begins=True,
                                              display_unit=True)
+        self.rectangle = None
+        if self.context == "sketch":
+            self.rectangle = Rectangle([Point(["A", (0,0)]),
+                                        self.l,
+                                        self.w,
+                                        "B", "C", "D"])
+
+            self.rectangle.side[2].label = self.l_str
+            self.rectangle.side[3].label = self.w_str
 
     def q(self, M, **options):
-        return _(\
-  "Area of a rectangle whose width is {w} and length is {l}?")\
-        .format(w=M.write_math_style2(self.w_str),
-                l=M.write_math_style2(self.l_str))
+        if self.context == "sketch":
+            return _(M.insert_picture(self.right_triangle) \
+                     + "Area of this rectangle?")\
+            .format(w=M.write_math_style2(self.w_str),
+                    l=M.write_math_style2(self.l_str))
+        else:
+            return _(\
+      "Area of a rectangle whose width is {w} and length is {l}?")\
+            .format(w=M.write_math_style2(self.w_str),
+                    l=M.write_math_style2(self.l_str))
 
     def a(self, M, **options):
         return M.write_math_style2(self.product)

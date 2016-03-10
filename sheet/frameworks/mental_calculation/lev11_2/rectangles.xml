@@ -34,7 +34,7 @@
 			<nb source="decimal_and_one_digit">2</nb>
 		</question>
 			
-		<question kind="area" subkind="rectangle" variant="decimal1">
+		<question kind="area" subkind="rectangle" variant="decimal1" context="sketch">
 			<nb source="table_2_9">1</nb>
 		</question>
 
