@@ -3,11 +3,11 @@
 <!-- DEFAULT MENTAL CALCULATION SHEET -->
 
 
-<sheet header="" title="Mental calculation" subtitle="" text="" answers_title="Answers">
+<sheet header="" title="Mental calculation: areas and perimeters of rectangles" subtitle="" text="" answers_title="Answers">
 
 	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
 	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
-	<layout type="mental">
+	<layout type="mental" font_size_offset="-2">
 		<exc>
 			<line nb="None">
 				<exercises>all</exercises>
@@ -27,21 +27,13 @@
 
 		<question kind="area" subkind="rectangle">
 			<nb source="table_2_9">2</nb>
-			<nb source="table_11">2</nb>
-			<nb source="table_15">2</nb>
+			<nb source="table_11">1</nb>
+			<nb source="table_15">1</nb>
 			<nb source="table_25">2</nb>
-			<nb source="decimal_and_10_100_1000">2</nb>
+			<nb source="decimal_and_10_100_1000">1</nb>
 			<nb source="decimal_and_one_digit">2</nb>
 		</question>
 			
-		<question kind="area" subkind="rectangle" variant="decimal1" context="sketch">
-			<nb source="table_2_9">1</nb>
-		</question>
-
-		<question kind="area" subkind="rectangle" variant="decimal2">
-			<nb source="table_2_9">1</nb>
-		</question>
-
 		<question kind="divi" subkind="direct" context="area_width_length_rectangle">
 			<nb source="table_2_9">3</nb>
 		</question>
@@ -49,6 +41,19 @@
 		<question kind="divi" subkind="direct" variant="decimal" context="area_width_length_rectangle">
 			<nb source="table_2_9">3</nb>
 		</question>
+
+		<mix>
+			<question kind="area" subkind="rectangle" context="sketch"></question>
+			<question kind="area" subkind="rectangle" context="sketch"></question>
+			<question kind="area" subkind="rectangle" context="sketch"></question>
+			<question kind="area" subkind="rectangle"></question>
+			<question kind="area" subkind="rectangle"></question>
+			<nb source="table_15">1</nb>
+			<nb source="table_11">1</nb>
+			<nb source="table_2_9" variant="decimal1">1</nb>
+			<nb source="table_2_9" variant="decimal2">1</nb>
+			<nb source="decimal_and_10_100_1000">1</nb>
+		</mix>
 
 	</exercise>
 

@@ -522,9 +522,19 @@ exercises counter (which is useful when begining to write the answers sheet)")\
         else:
             drawable_arg.into_pic(create_pic_files='no', **options)
 
-        return "\includegraphics[scale=1]{" \
-                + drawable_arg.eps_filename \
-                + "}" + "\\newline" + "\n"
+        s = "1"
+        if 'scale' in options:
+            s = str(options['scale'])
+
+        if 'vertical_alignment_in_a_tabular' in options:
+            return "\\raisebox{-.5\height}{" \
+                   + "\includegraphics[scale=" + s + "]{" \
+                   + drawable_arg.eps_filename \
+                   + "}" + "}"
+        else:
+            return "\includegraphics[scale=" + s + "]{" \
+                    + drawable_arg.eps_filename \
+                    + "}" + "\\newline" + "\n"
 
 
 

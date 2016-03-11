@@ -23,6 +23,7 @@
 import copy, sys
 
 from core.base_calculus import *
+from core.root_calculus import *
 from core.geometry import *
 from lib.common.cst import *
 from . import multi_direct
@@ -38,9 +39,11 @@ class sub_object(object):
         self.context = options['context'] if 'context' in options else "default"
         self.w = min(nb_list)
         self.l = max(nb_list)
+        self.w_val = Value(self.w, unit=unit_length)
         self.w_str = Item(self.w, unit=unit_length)
         self.w_str = self.w_str.into_str(force_expression_begins=True,
                                          display_unit=True)
+        self.l_val = Value(self.l, unit=unit_length)
         self.l_str = Item(self.l, unit=unit_length)
         self.l_str = self.l_str.into_str(force_expression_begins=True,
                                          display_unit=True)
@@ -51,19 +54,21 @@ class sub_object(object):
         self.rectangle = None
         if self.context == "sketch":
             self.rectangle = Rectangle([Point(["A", (0,0)]),
-                                        self.l,
-                                        self.w,
+                                        3,
+                                        1.5,
                                         "B", "C", "D"])
 
-            self.rectangle.side[2].label = self.l_str
-            self.rectangle.side[3].label = self.w_str
+            self.rectangle.side[2].label = self.l_val
+            self.rectangle.side[3].label = self.w_val
 
     def q(self, M, **options):
         if self.context == "sketch":
-            return _(M.insert_picture(self.right_triangle) \
-                     + "Area of this rectangle?")\
-            .format(w=M.write_math_style2(self.w_str),
-                    l=M.write_math_style2(self.l_str))
+            return M.write_layout((1, 2),
+                                  [5, 8],
+                                  [M.insert_picture(self.rectangle,
+                                                    scale=0.75,
+                                         vertical_alignment_in_a_tabular=True),
+                                   _("Area of this rectangle?")])
         else:
             return _(\
       "Area of a rectangle whose width is {w} and length is {l}?")\
