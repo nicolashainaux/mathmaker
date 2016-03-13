@@ -39,7 +39,6 @@ EUKTOEPS_VERSION_ERR_MSG = " but euktoeps did not return the correct version"\
 def main():
 
     settings.init()
-    shared.init()
 
     pathname = os.path.dirname(sys.argv[0])
     localdir = os.path.abspath(pathname) + "/locale"
@@ -117,6 +116,7 @@ def main():
         sys.exit(2)
 
     settings.language = options.lang
+    shared.init()
 
     try:
         gettext.translation(software.NAME,

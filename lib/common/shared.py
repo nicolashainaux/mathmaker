@@ -22,8 +22,8 @@
 
 from random import shuffle
 
-import settings
-import unique_letters_words
+from . import settings
+from lib.common.unique_letters_words import FOUR_LETTERS_WORDS
 
 def four_letters_word(language):
 	memory = FOUR_LETTERS_WORDS[language][:]
