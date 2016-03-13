@@ -87,6 +87,10 @@ class Polygon(Drawable):
         self._side = []
         self._angle = []
         self._rotation_angle = 0
+        self._read_name_clockwise = False
+
+        if 'read_name_clockwise' in options and options['read_name_clockwise']:
+            self._read_name_clockwise = True
 
         if 'rotate_around_isobarycenter' in options:
             if options['rotate_around_isobarycenter'] == 'randomly':
@@ -205,7 +209,10 @@ class Polygon(Drawable):
     #   @brief Returns the Polygon's name
     @property
     def name(self):
-        return self._name
+        if self._read_name_clockwise:
+            return self._name[::-1]
+        else:
+            return self._name
 
 
 
