@@ -24,6 +24,7 @@ import shlex
 from optparse import OptionParser
 
 from lib.common import settings
+from lib.common import shared
 from lib.common import default
 from lib.common import software
 from lib.common.cfg import CONFIG
@@ -38,6 +39,7 @@ EUKTOEPS_VERSION_ERR_MSG = " but euktoeps did not return the correct version"\
 def main():
 
     settings.init()
+    shared.init()
 
     pathname = os.path.dirname(sys.argv[0])
     localdir = os.path.abspath(pathname) + "/locale"
