@@ -23,6 +23,7 @@ import gettext
 import shlex
 from optparse import OptionParser
 
+from lib.common import settings
 from lib.common import default
 from lib.common import software
 from lib.common.cfg import CONFIG
@@ -35,6 +36,9 @@ EUKTOEPS_VERSION_ERR_MSG = " but euktoeps did not return the correct version"\
                            " information"
 
 def main():
+
+    settings.init()
+
     pathname = os.path.dirname(sys.argv[0])
     localdir = os.path.abspath(pathname) + "/locale"
 
@@ -110,6 +114,8 @@ def main():
                          + " (version number should be at least 1.5.4).\n")
         sys.exit(2)
 
+    settings.language = options.lang
+
     try:
         gettext.translation(software.NAME,
                             localdir,
@@ -123,7 +129,9 @@ in {software_ref} which will try to produce output in the language of your \
 system.".format(software_ref=software.NAME) + "\n" )
         try:
             gettext.install(software.NAME,
-                            localdir)
+                            localdir,
+                            [locale.getdefaultlocale()[0]])
+            settings.language = locale.getdefaultlocale()[0]
         except IOError as msg:
             error.write_warning("gettext returned the following message:\n" \
                             + str(msg) + "\n" \
@@ -134,6 +142,7 @@ complete.".format(software_ref=software.NAME) + "\n")
             gettext.translation(software.NAME,
                                 localdir,
                                 ['en']).install()
+            settings.language = 'en'
 
 
     M = machine.LaTeX(options.lang)
