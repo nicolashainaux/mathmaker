@@ -20,15 +20,35 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import polib
+import sys
 from random import shuffle
 
 from . import settings
-from lib.common.unique_letters_words import FOUR_LETTERS_WORDS
+
+NB = {3 : "THREE", 4 : "FOUR", 5 : "FIVE", 6 : "SIX"}
+
+def __get_list_of_words(language, nb_of_letters):
+	output = []
+	po = polib.pofile(settings.localedir \
+					+ settings.language \
+					+ "/LC_MESSAGES/" \
+					+ "mathmaker"\
+					+ ".po")
+
+	for entry in po:
+		if entry.msgid[:-3] == NB[nb_of_letters] + "_LETTERS_WORD_" \
+			and entry.msgstr != "":
+		#___
+			output.append(entry.msgstr)
+
+	return output
 
 def four_letters_word(language):
-	memory = FOUR_LETTERS_WORDS[language][:]
+	memory = __get_list_of_words(language, 4)
 	shuffle(memory)
 	collector = []
+	
 	while(True):
 		collector.append(memory[0])
 		output = memory.pop(0)
