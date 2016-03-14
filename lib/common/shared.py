@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import polib
-import sys
 from random import shuffle
 
 from . import settings
@@ -48,7 +47,7 @@ def four_letters_word(language):
 	memory = __get_list_of_words(language, 4)
 	shuffle(memory)
 	collector = []
-	
+
 	while(True):
 		collector.append(memory[0])
 		output = memory.pop(0)
