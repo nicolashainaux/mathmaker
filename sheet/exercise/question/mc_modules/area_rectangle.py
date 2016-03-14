@@ -26,6 +26,7 @@ from core.base_calculus import *
 from core.root_calculus import *
 from core.geometry import *
 from lib.common.cst import *
+from lib.common import shared
 from . import multi_direct
 
 class sub_object(object):
@@ -53,10 +54,14 @@ class sub_object(object):
                                              display_unit=True)
         self.rectangle = None
         if self.context == "sketch":
-            self.rectangle = Rectangle([Point(["A", (0,0)]),
+            rectangle_name = next(shared.four_letters_word_generator)
+            self.rectangle = Rectangle([Point([rectangle_name[3], (0,0)]),
                                         3,
                                         1.5,
-                                        "B", "C", "D"])
+                                        rectangle_name[2],
+                                        rectangle_name[1],
+                                        rectangle_name[0]],
+                                        read_name_clockwise=True)
 
             self.rectangle.side[2].label = self.l_val
             self.rectangle.side[3].label = self.w_val
