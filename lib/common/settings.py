@@ -22,4 +22,7 @@
 
 def init():
     global language
+    global localedir
+
     language = None
+    localedir = None
