@@ -42,6 +42,7 @@ USER_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                          'int_irreducible_frac',
                          'rank_word',
                          'integers_10_100',
+                         'integers_5_20',
                          'integers_10_100_for_sums_diffs',
                          'decimals_0_20_1',
                          'decimal_and_10_100_1000',
@@ -53,11 +54,15 @@ AVAILABLE_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                               'table_2_9_for_sums_diffs',
                               'table_2_9_for_rectangles',
                               'table_11',
+                              'table_11_for_rectangles',
                               'table_15',
                               'table_25',
                               'int_irreducible_frac',
                               'rank_word',
                               'integers_10_100',
+                              'integers_10_100_for_rectangles',
+                              'integers_5_20',
+                              'integers_5_20_for_rectangles',
                               'integers_10_100_for_sums_diffs',
                               'decimals_0_20_1',
                               'decimal_and_10_100_1000_for_divi',
@@ -70,7 +75,10 @@ PART_OF_ANOTHER_SOURCE = { 'table_2': 'table_2_9',
                            'table_3': 'table_2_9',
                            'table_4': 'table_2_9',
                            'integers_10_100_for_sums_diffs': 'integers_10_100',
-                           'table_2_9_for_rectangles': 'table_2_9'
+                           'table_2_9_for_rectangles': 'table_2_9',
+                           'table_11_for_rectangles': 'table_11',
+                           'integers_5_20_for_rectangles': 'integers_5_20',
+                           'integers_10_100_for_rectangles': 'integers_10_100'
                          }
 
 SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number': {'half', 'third', 'quarter'},
@@ -123,6 +131,7 @@ SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
                 {'multi_direct': {'decimal_and_10_100_1000_for_multi'},
                  'divi_direct': {'decimal_and_10_100_1000_for_divi'},
                  'area_rectangle': {'decimal_and_10_100_1000_for_multi'},
+                 'perimeter_rectangle': {'decimal_and_10_100_1000_for_multi'},
                  'multi_hole': {'decimal_and_10_100_1000_for_multi'},
                  'vocabulary_multi': {'decimal_and_10_100_1000_for_multi'},
                  'vocabulary_divi': {'decimal_and_10_100_1000_for_divi'}
@@ -137,8 +146,18 @@ SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
                   }
                      }
 
+rectangle_translations = {'table_2_9': 'table_2_9_for_rectangles',
+                          'table_11': 'table_11_for_rectangles',
+                          'integers_5_20': 'integers_5_20_for_rectangles',
+                          'integers_10_100': 'integers_10_100_for_rectangles'}
+
 SOURCES_TO_TRANSLATE = {'divi_direct_area_width_length_rectangle': \
-                                {'table_2_9': 'table_2_9_for_rectangles'}}
+                                                rectangle_translations,
+                        'area_rectangle': rectangle_translations,
+                        'area_rectangle_sketch': rectangle_translations,
+                        'perimeter_rectangle': rectangle_translations,
+                        'perimeter_rectangle_sketch': rectangle_translations,
+                       }
 
 AVAILABLE_Q_KIND_VALUES = \
     { 'multi_direct': ['table_2_9',
@@ -150,13 +169,24 @@ AVAILABLE_Q_KIND_VALUES = \
                         'decimal_and_one_digit',
                         'bypass'],
       'area_rectangle': ['table_2_9',
-                          'table_2', 'table_3', 'table_4',
-                          'table_11',
-                          'table_15',
-                          'table_25',
-                          'decimal_and_10_100_1000',
-                          'decimal_and_one_digit',
-                          'bypass'],
+                         'table_2', 'table_3', 'table_4',
+                         'table_11',
+                         'table_15',
+                         'table_25',
+                         'decimal_and_10_100_1000',
+                         'decimal_and_one_digit',
+                         'bypass'],
+      'perimeter_rectangle': ['table_2_9',
+                              'table_2', 'table_3', 'table_4',
+                              'table_11',
+                              'table_15',
+                              'table_25',
+                              'decimal_and_10_100_1000',
+                              'integers_10_100_for_sums_diffs',
+                              'table_2_9_for_sums_diffs',
+                              'integers_10_100',
+                              'integers_5_20',
+                              'bypass'],
       'multi_reversed': ['table_2_9',
                           'table_2', 'table_3', 'table_4',
                           'bypass'],
@@ -245,7 +275,8 @@ MODULES =  \
       'vocabulary_divi': mc_modules.vocabulary_divi,
       'vocabulary_addi': mc_modules.vocabulary_addi,
       'vocabulary_subtr': mc_modules.vocabulary_subtr,
-      'area_rectangle': mc_modules.area_rectangle
+      'area_rectangle': mc_modules.area_rectangle,
+      'perimeter_rectangle': mc_modules.perimeter_rectangle
 
 #     ('division', 'direct'): mc_modules.divi_dir,
 #     ('division', 'decimal_1'): mc_modules.divi_deci1,
@@ -367,6 +398,18 @@ def generate_numbers(subkind):
                 (11, 71), (11, 72),
                 (11, 81)}
 
+    elif subkind == 'table_11_for_rectangles':
+        return {(11, 12), (11, 13), (11, 14), (11, 15), (11, 16),
+                (11, 17), (11, 18),
+                (11, 21), (11, 22), (11, 23), (11, 24), (11, 25), (11, 26),
+                (11, 27),
+                (11, 31), (11, 32), (11, 33), (11, 34), (11, 35), (11, 36),
+                (11, 41), (11, 42), (11, 43), (11, 44), (11, 45),
+                (11, 51), (11, 52), (11, 53), (11, 54),
+                (11, 61), (11, 62), (11, 63),
+                (11, 71), (11, 72),
+                (11, 81)}
+
     elif subkind == 'table_15':
         return {(15, 2), (15,3), (15, 4), (15,5), (15, 6)}
 
@@ -375,6 +418,15 @@ def generate_numbers(subkind):
 
     elif subkind == 'integers_10_100':
         return { (i+10, j+10) for i in range(90) for j in range(90) if i <= j }
+
+    elif subkind == 'integers_10_100_for_rectangles':
+        return { (i+10, j+10) for i in range(90) for j in range(90) if i < j }
+
+    elif subkind == 'integers_5_20':
+        return { (i+5, j+5) for i in range(15) for j in range(15) if i <= j }
+
+    elif subkind == 'integers_5_20_for_rectangles':
+        return { (i+5, j+5) for i in range(15) for j in range(15) if i < j }
 
     elif subkind == 'integers_10_100_for_sums_diffs':
         return set(random.sample({ (i+10, j+10) for i in range(90) \

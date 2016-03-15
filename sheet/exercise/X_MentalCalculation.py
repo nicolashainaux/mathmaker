@@ -315,7 +315,7 @@ class X_MentalCalculation(X_Structure):
         for q_id in q_id_box:
             info = q_dict[q_id].pop(0)
             nb_source = info[0]
-            translations_to_check = []
+            translations_to_check = [q_id]
             if 'variant' in info[3]:
                 translations_to_check += [q_id + "_" + info[3]['variant']]
             if 'context' in info[3]:

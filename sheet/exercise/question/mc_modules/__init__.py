@@ -35,3 +35,4 @@ from . import vocabulary_simple_multiple_of_a_number
 from . import vocabulary_multi, vocabulary_divi
 from . import vocabulary_addi, vocabulary_subtr
 from . import area_rectangle
+from . import perimeter_rectangle
