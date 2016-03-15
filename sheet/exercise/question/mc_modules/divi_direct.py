@@ -24,10 +24,14 @@ from core.base_calculus import *
 from . import recipes
 
 units = recipes.units
+minimal_setup = recipes.minimal_setup
+rectangles = recipes.rectangles
 
 class sub_object(object):
 
     def __init__(self, numbers_to_use, **options):
+        minimal_setup.sub_object.__init__(self, **options)
+
         nb_list = list(numbers_to_use)
         self.divisor = 0
         self.result = 0
@@ -45,14 +49,12 @@ class sub_object(object):
         else:
             self.divisor = randomly.pop(nb_list)
             self.result = randomly.pop(nb_list)
-            if 'variant' in options and options['variant'] == 'decimal':
+            if self.variant[:-1] == 'decimal':
                 self.result /= 10
             self.dividend = Product([self.divisor, self.result]).evaluate()
 
-        if 'context' in options \
-            and options['context'] == 'area_width_length_rectangle':
-        #___
-            units.sub_object.__init__(self, numbers_to_use, **options)
+        if self.context == 'area_width_length_rectangle':
+            units.sub_object.__init__(self, **options)
             self.q_context = "w" if self.result < self.divisor else "l"
             self.dividend_str = Item(self.dividend, unit=self.unit_area)\
                                 .into_str(force_expression_begins=True,
@@ -63,33 +65,62 @@ class sub_object(object):
             self.result_str = Item(self.result, unit=self.unit_length)\
                               .into_str(force_expression_begins=True,
                                         display_unit=True)
+            if self.picture:
+                rectangles.sub_object.__init__(self, numbers_to_use, **options)
+                if self.q_context == "w":
+                    self.rectangle.side[3].label = Value("?")
+                else:
+                    self.rectangle.side[2].label = Value("?")
+                self.q_context += "_pic"
 
         else:
             self.dividend_str = Item(self.dividend)\
                                 .into_str(force_expression_begins=True)
             self.divisor_str = Item(self.divisor)\
-                               .into_str(force_expression_begins=True)
+                                .into_str(force_expression_begins=True)
             self.result_str = Item(self.result)\
-                              .into_str(force_expression_begins=True)
+                                .into_str(force_expression_begins=True)
 
         self.quotient = Quotient(('+', self.dividend, self.divisor),
                                  use_divide_symbol=True)
         self.quotient_str = self.quotient.into_str(force_expression_begins=True)
 
     def q(self, M, **options):
-        q_text = {"default": _("Calculate: {quotient}")\
-                              .format(quotient=\
-                                      M.write_math_style2(self.quotient_str)),
-                 "w": _(\
-  "A rectangle has an area of {a} and a length of {l}. What is its width?")\
-        .format(a=M.write_math_style2(self.dividend_str),
-                l=M.write_math_style2(self.divisor_str)),
-                  "l": _(\
-  "A rectangle has an area of {a} and a width of {w}. What is its length?")\
-        .format(a=M.write_math_style2(self.dividend_str),
-                w=M.write_math_style2(self.divisor_str))}
+        if self.q_context == "w_pic":
+            return M.write_layout((1, 2),
+                                  [3.7, 9.3],
+                                  [M.insert_picture(self.rectangle,
+                                                    scale=0.75,
+                                   vertical_alignment_in_a_tabular=True),
+    _("A rectangle has an area of {a} and a length of {l}. What is its width?")\
+    .format(a=M.write_math_style2(self.dividend_str),
+            l=M.write_math_style2(self.divisor_str)) ] )
 
-        return q_text[self.q_context]
+        elif self.q_context == "l_pic":
+            return M.write_layout((1, 2),
+                                  [3.7, 9.3],
+                                  [M.insert_picture(self.rectangle,
+                                                    scale=0.75,
+                                   vertical_alignment_in_a_tabular=True),
+    _("A rectangle has an area of {a} and a width of {w}. What is its length?")\
+    .format(a=M.write_math_style2(self.dividend_str),
+            w=M.write_math_style2(self.divisor_str)) ] )
+
+        elif self.q_context == "default":
+            return _("Calculate: {quotient}").format(quotient=\
+                                      M.write_math_style2(self.quotient_str))
+
+        elif self.q_context == "w":
+            return _(\
+      "A rectangle has an area of {a} and a length of {l}. What is its width?")\
+            .format(a=M.write_math_style2(self.dividend_str),
+                    l=M.write_math_style2(self.divisor_str))
+
+        elif self.q_context == "l":
+            return _(\
+      "A rectangle has an area of {a} and a width of {w}. What is its length?")\
+            .format(a=M.write_math_style2(self.dividend_str),
+                    w=M.write_math_style2(self.divisor_str))
 
     def a(self, M, **options):
         return M.write_math_style2(self.result_str)

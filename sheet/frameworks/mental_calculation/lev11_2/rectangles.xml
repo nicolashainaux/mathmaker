@@ -36,7 +36,7 @@
 		<mix>
 			<question kind="perimeter" subkind="rectangle" picture="true"></question>
 			<question kind="perimeter" subkind="rectangle" picture="true"></question>
-			<question kind="perimeter" subkind="rectangle" picture="true"></question>
+			<question kind="perimeter" subkind="rectangle"></question>
 			<question kind="perimeter" subkind="rectangle"></question>
 			<question kind="perimeter" subkind="rectangle"></question>
 			<question kind="perimeter" subkind="rectangle"></question>
@@ -49,18 +49,22 @@
 			<nb source="integers_5_20">2</nb>
 		</mix>
 			
-		<question kind="divi" subkind="direct" context="area_width_length_rectangle">
-			<nb source="table_2_9">2</nb>
+		<question kind="divi" subkind="direct" context="area_width_length_rectangle" picture="true">
+			<nb source="table_2_9">1</nb>
 		</question>
 
-		<question kind="divi" subkind="direct" variant="decimal" context="area_width_length_rectangle">
+		<question kind="divi" subkind="direct" context="area_width_length_rectangle">
+			<nb source="table_2_9">1</nb>
+		</question>
+
+		<question kind="divi" subkind="direct" variant="decimal" context="area_width_length_rectangle" picture="true">
 			<nb source="table_2_9">1</nb>
 		</question>
 
 		<mix>
 			<question kind="area" subkind="rectangle" picture="true"></question>
 			<question kind="area" subkind="rectangle" picture="true"></question>
-			<question kind="area" subkind="rectangle" picture="true"></question>
+			<question kind="area" subkind="rectangle" ></question>
 			<question kind="area" subkind="rectangle"></question>
 			<question kind="area" subkind="rectangle"></question>
 			<nb source="table_15">1</nb>
