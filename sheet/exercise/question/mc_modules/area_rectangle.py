@@ -20,51 +20,21 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import copy, sys
-
 from core.base_calculus import *
-from core.root_calculus import *
-from core.geometry import *
-from lib.common.cst import *
-from lib.common import shared
-from . import multi_direct
+from . import recipes
+
+rectangles = recipes.rectangles
 
 class sub_object(object):
 
     def __init__(self, numbers_to_use, **options):
-        units_names = copy.deepcopy(COMMON_LENGTH_UNITS)
-        unit_length = Unit(randomly.pop(units_names))
-        unit_area = Unit(unit_length.name, exponent=2)
-        multi_direct.sub_object.__init__(self, numbers_to_use, **options)
-        nb_list = [self.nb1, self.nb2]
-        self.context = options['context'] if 'context' in options else "default"
-        self.w = min(nb_list)
-        self.l = max(nb_list)
-        self.w_val = Value(self.w, unit=unit_length)
-        self.w_str = Item(self.w, unit=unit_length)
-        self.w_str = self.w_str.into_str(force_expression_begins=True,
-                                         display_unit=True)
-        self.l_val = Value(self.l, unit=unit_length)
-        self.l_str = Item(self.l, unit=unit_length)
-        self.l_str = self.l_str.into_str(force_expression_begins=True,
-                                         display_unit=True)
+        rectangles.sub_object.__init__(self, numbers_to_use, **options)
+
         self.product = Item(Product([self.w,self.l]).evaluate(),
-                            unit=unit_area)
+                            unit=self.unit_area)
         self.product = self.product.into_str(force_expression_begins=True,
                                              display_unit=True)
-        self.rectangle = None
-        if self.context == "sketch":
-            rectangle_name = next(shared.four_letters_word_generator)
-            self.rectangle = Rectangle([Point([rectangle_name[3], (0,0)]),
-                                        3,
-                                        1.5,
-                                        rectangle_name[2],
-                                        rectangle_name[1],
-                                        rectangle_name[0]],
-                                        read_name_clockwise=True)
 
-            self.rectangle.side[2].label = self.l_val
-            self.rectangle.side[3].label = self.w_val
 
     def q(self, M, **options):
         if self.context == "sketch":

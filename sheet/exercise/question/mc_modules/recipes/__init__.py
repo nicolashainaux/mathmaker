@@ -20,24 +20,12 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from core.base_calculus import *
-from . import recipes
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+##
+# @package recipes
+# @brief All question objects should be "declared" here.
 
-nb_variants = recipes.nb_variants
-
-class sub_object(object):
-
-    def __init__(self, numbers_to_use, **options):
-        nb_variants.sub_object.__init__(self, numbers_to_use, **options)
-
-        self.product = Product([self.nb1, self.nb2])
-        self.result = Item(self.product.evaluate())\
-                      .into_str(force_expression_begins=True)
-
-    def q(self, M, **options):
-        return _("Calculate:") + " "\
-               + M.write_math_style2(self.product\
-                                     .into_str(force_expression_begins=True))
-
-    def a(self, M, **options):
-        return M.write_math_style2(self.result)
+from . import nb_variants
+from . import rectangles
