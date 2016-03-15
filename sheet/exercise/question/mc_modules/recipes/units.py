@@ -28,7 +28,7 @@ from lib import randomly
 
 class sub_object(object):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, **options):
         units_names = copy.deepcopy(COMMON_LENGTH_UNITS)
         self.unit_length = Unit(randomly.pop(units_names))
         self.unit_area = Unit(self.unit_length.name, exponent=2)

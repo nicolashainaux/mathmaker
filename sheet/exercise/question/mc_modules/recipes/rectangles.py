@@ -28,14 +28,15 @@ from core.base_geometry import Point
 from core.geometry import Rectangle
 from lib.common import shared
 
-from . import nb_variants, units, minimal_setup
+from . import nb_variants, units
 
 class sub_object(object):
 
     def __init__(self, numbers_to_use, **options):
-        minimal_setup.sub_object.__init__(self, **options)
         nb_variants.sub_object.__init__(self, numbers_to_use, **options)
-        units.sub_object.__init__(self, numbers_to_use, **options)
+
+        if not hasattr(self, 'unit_length'):
+            units.sub_object.__init__(self, **options)
 
         nb_list = [self.nb1, self.nb2]
 

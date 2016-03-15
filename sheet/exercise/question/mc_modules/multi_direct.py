@@ -24,10 +24,12 @@ from core.base_calculus import *
 from . import recipes
 
 nb_variants = recipes.nb_variants
+minimal_setup = recipes.minimal_setup
 
 class sub_object(object):
 
     def __init__(self, numbers_to_use, **options):
+        minimal_setup.__init__(self, **options)
         nb_variants.sub_object.__init__(self, numbers_to_use, **options)
 
         self.product = Product([self.nb1, self.nb2])

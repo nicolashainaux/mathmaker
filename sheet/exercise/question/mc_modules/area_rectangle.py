@@ -24,10 +24,12 @@ from core.base_calculus import *
 from . import recipes
 
 rectangles = recipes.rectangles
+minimal_setup = recipes.minimal_setup
 
 class sub_object(object):
 
     def __init__(self, numbers_to_use, **options):
+        minimal_setup.sub_object.__init__(self, **options)
         rectangles.sub_object.__init__(self, numbers_to_use, **options)
 
         self.product = Item(Product([self.w,self.l]).evaluate(),

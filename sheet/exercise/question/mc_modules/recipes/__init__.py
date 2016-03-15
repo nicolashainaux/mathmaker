@@ -27,6 +27,7 @@
 # @package recipes
 # @brief All question objects should be "declared" here.
 
+from . import minimal_setup
 from . import nb_variants
 from . import rectangles
 from . import units
