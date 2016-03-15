@@ -22,22 +22,19 @@
 
 import copy
 
-from core.base_calculus import *
-from core.root_calculus import *
-from core.geometry import *
-from lib.common.cst import *
+from core.base_calculus import Item
+from core.root_calculus import Value
+from core.base_geometry import Point
+from core.geometry import Rectangle
 from lib.common import shared
 
-from . import nb_variants
+from . import nb_variants, units
 
 class sub_object(object):
 
     def __init__(self, numbers_to_use, **options):
         nb_variants.sub_object.__init__(self, numbers_to_use, **options)
-
-        units_names = copy.deepcopy(COMMON_LENGTH_UNITS)
-        self.unit_length = Unit(randomly.pop(units_names))
-        self.unit_area = Unit(self.unit_length.name, exponent=2)
+        units.sub_object.__init__(self, numbers_to_use, **options)
 
         nb_list = [self.nb1, self.nb2]
 

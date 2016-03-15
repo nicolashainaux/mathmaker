@@ -20,10 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import copy
-from core.root_calculus import *
 from core.base_calculus import *
+from . import recipes
 
+units = recipes.units
 
 class sub_object(object):
 
@@ -52,17 +52,15 @@ class sub_object(object):
         if 'context' in options \
             and options['context'] == 'area_width_length_rectangle':
         #___
-            units_names = copy.deepcopy(COMMON_LENGTH_UNITS)
-            unit_length = Unit(randomly.pop(units_names))
-            unit_area = Unit(unit_length.name, exponent=2)
+            units.sub_object.__init__(self, numbers_to_use, **options)
             self.q_context = "w" if self.result < self.divisor else "l"
-            self.dividend_str = Item(self.dividend, unit=unit_area)\
+            self.dividend_str = Item(self.dividend, unit=self.unit_area)\
                                 .into_str(force_expression_begins=True,
                                           display_unit=True)
-            self.divisor_str = Item(self.divisor, unit=unit_length)\
+            self.divisor_str = Item(self.divisor, unit=self.unit_length)\
                                .into_str(force_expression_begins=True,
                                          display_unit=True)
-            self.result_str = Item(self.result, unit=unit_length)\
+            self.result_str = Item(self.result, unit=self.unit_length)\
                               .into_str(force_expression_begins=True,
                                         display_unit=True)
 

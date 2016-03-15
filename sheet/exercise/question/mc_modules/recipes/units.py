@@ -20,13 +20,15 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
-# @package recipes
-# @brief All question objects should be "declared" here.
+import copy
 
-from . import nb_variants
-from . import rectangles
-from . import units
+from core.root_calculus import Unit
+from lib.common.cst import COMMON_LENGTH_UNITS
+from lib import randomly
+
+class sub_object(object):
+
+    def __init__(self, numbers_to_use, **options):
+        units_names = copy.deepcopy(COMMON_LENGTH_UNITS)
+        self.unit_length = Unit(randomly.pop(units_names))
+        self.unit_area = Unit(self.unit_length.name, exponent=2)
