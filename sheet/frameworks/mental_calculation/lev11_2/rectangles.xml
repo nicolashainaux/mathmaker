@@ -34,9 +34,9 @@
 		</question>
 
 		<mix>
-			<question kind="perimeter" subkind="rectangle" context="sketch"></question>
-			<question kind="perimeter" subkind="rectangle" context="sketch"></question>
-			<question kind="perimeter" subkind="rectangle" context="sketch"></question>
+			<question kind="perimeter" subkind="rectangle" picture="true"></question>
+			<question kind="perimeter" subkind="rectangle" picture="true"></question>
+			<question kind="perimeter" subkind="rectangle" picture="true"></question>
 			<question kind="perimeter" subkind="rectangle"></question>
 			<question kind="perimeter" subkind="rectangle"></question>
 			<question kind="perimeter" subkind="rectangle"></question>
@@ -58,9 +58,9 @@
 		</question>
 
 		<mix>
-			<question kind="area" subkind="rectangle" context="sketch"></question>
-			<question kind="area" subkind="rectangle" context="sketch"></question>
-			<question kind="area" subkind="rectangle" context="sketch"></question>
+			<question kind="area" subkind="rectangle" picture="true"></question>
+			<question kind="area" subkind="rectangle" picture="true"></question>
+			<question kind="area" subkind="rectangle" picture="true"></question>
 			<question kind="area" subkind="rectangle"></question>
 			<question kind="area" subkind="rectangle"></question>
 			<nb source="table_15">1</nb>

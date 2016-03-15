@@ -38,7 +38,7 @@ class sub_object(object):
                                                  display_unit=True)
 
     def q(self, M, **options):
-        if self.context == "sketch":
+        if self.picture:
             return M.write_layout((1, 2),
                                   [5, 8],
                                   [M.insert_picture(self.rectangle,

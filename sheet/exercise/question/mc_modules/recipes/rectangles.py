@@ -28,17 +28,16 @@ from core.base_geometry import Point
 from core.geometry import Rectangle
 from lib.common import shared
 
-from . import nb_variants, units
+from . import nb_variants, units, minimal_setup
 
 class sub_object(object):
 
     def __init__(self, numbers_to_use, **options):
+        minimal_setup.sub_object.__init__(self, **options)
         nb_variants.sub_object.__init__(self, numbers_to_use, **options)
         units.sub_object.__init__(self, numbers_to_use, **options)
 
         nb_list = [self.nb1, self.nb2]
-
-        self.context = options['context'] if 'context' in options else "default"
 
         self.w = min(nb_list)
         self.l = max(nb_list)
@@ -54,7 +53,7 @@ class sub_object(object):
                                          display_unit=True)
 
         self.rectangle = None
-        if self.context == "sketch":
+        if self.picture:
             rectangle_name = next(shared.four_letters_word_generator)
             self.rectangle = Rectangle([Point([rectangle_name[3], (0,0)]),
                                         3,

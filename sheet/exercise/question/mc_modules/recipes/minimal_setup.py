@@ -21,24 +21,15 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from core.base_calculus import *
-from . import minimal_setup
 
 class sub_object(object):
 
-    def __init__(self, numbers_to_use, **options):
-        minimal_setup.sub_object.__init__(self, **options)
+    def __init__(self, **options):
+        if 'variant' in options and options['variant'] == 'decimal':
+                options['variant'] = randomly.pop(['decimal1', 'decimal2'])
 
-        nb_list = list(numbers_to_use)
-        nb1 = nb_list.pop(randomly.pop([0, 1]))
-        nb2 = nb_list.pop()
-
-        if self.variant == 'decimal1':
-            nb1 /= 10
-
-        elif self.variant == 'decimal2':
-            nb1 /= 10
-            nb2 /= 10
-
-        nb_list = [nb1, nb2]
-        self.nb1 = nb_list.pop(randomly.pop([0, 1]))
-        self.nb2 = nb_list.pop()
+        self.variant = options['variant'] if 'variant' in options else "default"
+        self.context = options['context'] if 'context' in options else "default"
+        self.picture = True if 'picture' in options \
+                               and options['picture'] == "true" \
+                            else False

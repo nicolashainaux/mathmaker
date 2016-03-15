@@ -154,9 +154,7 @@ rectangle_translations = {'table_2_9': 'table_2_9_for_rectangles',
 SOURCES_TO_TRANSLATE = {'divi_direct_area_width_length_rectangle': \
                                                 rectangle_translations,
                         'area_rectangle': rectangle_translations,
-                        'area_rectangle_sketch': rectangle_translations,
                         'perimeter_rectangle': rectangle_translations,
-                        'perimeter_rectangle_sketch': rectangle_translations,
                        }
 
 AVAILABLE_Q_KIND_VALUES = \
