@@ -426,11 +426,51 @@ class X_MentalCalculation(X_Structure):
             else:
                 last_nb[nb_source] |= {nb_to_use[1]}
 
+        self.increase_questions_list_disorder(1, "kind_subkind")
+        self.increase_questions_list_disorder(-1, "kind_subkind")
+        self.increase_questions_list_disorder(1, "kind_subkind")
+        self.increase_questions_list_disorder(-1, "kind_subkind")
+        self.increase_questions_list_disorder(1, "kind_subkind")
+        self.increase_questions_list_disorder(-1, "kind_subkind")
 
-        # END OF THE ZONE TO REWRITE ------------------------------------------
 
 
 
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Increases the disorder of the questions' list
+    #   @param fwd_or_rwd is positive or negative, will tell if the pass should
+    #          go from start to end or from end to start of the list
+    #   @param sort_key is unused yet ("kind_subkind" or "kind_subkind_context")
+    def increase_questions_list_disorder(self, fwd_or_rwd, sort_key):
+        if len(self.questions_list) >= 3:
+            if fwd_or_rwd >= 0:
+                for i in range(len(self.questions_list) - 2):
+                    if self.questions_list[i].q_kind \
+                        == self.questions_list[i+1].q_kind:
+                    #___
+                        if self.questions_list[i+2].q_kind \
+                            != self.questions_list[i].q_kind:
+                        #___
+                            (self.questions_list[i+1],
+                             self.questions_list[i+2]) = \
+                                                     (self.questions_list[i+2],
+                                                      self.questions_list[i+1])
+            else:
+                for i in reversed(range(len(self.questions_list) - 2)):
+                    if self.questions_list[i+1].q_kind \
+                        == self.questions_list[i+2].q_kind:
+                    #___
+                        if self.questions_list[i+1].q_kind \
+                            != self.questions_list[i].q_kind:
+                        #___
+                            (self.questions_list[i],
+                             self.questions_list[i+1]) = \
+                                                     (self.questions_list[i+1],
+                                                      self.questions_list[i])
+        else:
+            pass
 
 
     # --------------------------------------------------------------------------
