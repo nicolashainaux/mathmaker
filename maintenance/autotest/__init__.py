@@ -20,7 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import os
+import os, sys
 import gettext
 from optparse import OptionParser
 
@@ -32,6 +32,12 @@ from . import lib_test
 import sheet
 import machine
 import time
+from lib.common import settings
+from lib.common import shared
+
+settings.localedir = os.path.abspath(os.path.dirname(sys.argv[0])) + "/locale/"
+settings.language = 'en'
+shared.init()
 
 AVAILABLE_UNITS = [ ("items",
                      obj_test.calc_test.items_test),
@@ -98,6 +104,8 @@ for i in range(len(AVAILABLE_UNITS)):
 def short_test_run(lang):
     M = machine.LaTeX(lang, create_pic_file='no')
     for elt in sheet.catalog.XML_SHEETS:
+        sys.stderr.write("Current xml: " \
+                                + str(sheet.catalog.XML_SHEETS[elt]) + "\n")
         M.write(str(sheet.S_Generic(M, filename=sheet.catalog.XML_SHEETS[elt])))
     for elt in sheet.AVAILABLE:
         M.write(str(sheet.AVAILABLE[elt][0](M)))
