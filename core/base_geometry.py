@@ -287,6 +287,8 @@ class Segment(Drawable):
 
         self._fake_length = Value(0)
 
+        self._fake_length_has_been_set = False
+
 
 
 
@@ -333,6 +335,17 @@ class Segment(Drawable):
     @property
     def fake_length(self):
         return self._fake_length
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the fake_length_has_been_set flag of the Segment
+    @property
+    def fake_length_has_been_set(self):
+        return self._fake_length_has_been_set
 
 
 
@@ -399,11 +412,11 @@ class Segment(Drawable):
     #   @brief Sets the fake length of the Segment (the one used in a problem)
     @fake_length.setter
     def fake_length(self, arg):
-        if not type(arg) == Value:
-            raise error.WrongArgument(' Value ', str(type(arg)))
+        if not (type(arg) == Value and arg.is_numeric()):
+            raise error.WrongArgument(' numeric Value ', str(type(arg)))
 
         self._fake_length = arg
-
+        self._fake_length_has_been_set = True
 
 
 

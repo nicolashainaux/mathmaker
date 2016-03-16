@@ -156,7 +156,6 @@ class Polygon(Drawable):
         self._random_id = ''.join([str(randomly.integer(0, 9)) \
                                    for i in range(8)])
 
-        self._fake_lengths_have_been_set = False
 
 
 
@@ -246,7 +245,13 @@ class Polygon(Drawable):
     #   @todo   This assumes the fake lengths all have the same Unit...
     @property
     def perimeter(self):
-        return Value(sum([s.fake_length.raw_value for s in self.side]))
+        if not self.fake_lengths_have_been_set:
+            raise error.ImpossibleAction("calculate the perimeter while " \
+                                         + "ignoring the lengths of several " \
+                                         + "sides (fake lengths have not been" \
+                                         + " set yet).")
+        else:
+            return Value(sum([s.fake_length.raw_value for s in self.side]))
 
 
 
@@ -267,7 +272,17 @@ class Polygon(Drawable):
         for s in self.side:
             s.fake_length = lengths_list[self.side.index(s)]
 
-        self._fake_lengths_have_been_set = True
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns True if all fake lengths of the sides have been set.
+    @property
+    def fake_lengths_have_been_set(self):
+        return all(s.fake_length_has_been_set for s in self.side)
 
 
 
