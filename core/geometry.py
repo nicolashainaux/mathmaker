@@ -549,6 +549,47 @@ class Rectangle(Polygon):
 
 
 
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the Rectangle's width
+    @property
+    def width(self):
+        if not self.lengths_have_been_set:
+            raise error.ImpossibleAction("Return the width of a Rectangle " \
+                                         + "before is has been set.")
+
+        return self.side[1].length
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the Rectangle's length
+    @property
+    def length(self):
+        if not self.lengths_have_been_set:
+            raise error.ImpossibleAction("Return the length of a Rectangle " \
+                                         + "before is has been set.")
+
+        return self.side[0].length
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the Rectangle's area
+    @property
+    def area(self):
+        return Value(Product([self.width, self.length]).evaluate())
+
+
+
+
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
