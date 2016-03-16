@@ -319,7 +319,7 @@ class Segment(Drawable):
     ##
     #   @brief Returns the length of the Segment
     @property
-    def length(self):
+    def real_length(self):
         x_delta = self.points[0].x - self.points[1].x
         y_delta = self.points[0].y - self.points[1].y
         return math.hypot(x_delta, y_delta)
@@ -632,10 +632,10 @@ class Angle(Drawable):
             aux_side0 = Segment((self._points[0], self._points[1]))
             aux_side1 = Segment((self._points[1], self._points[2]))
             aux_side2 = Segment((self._points[2], self._points[0]))
-            aux_num = aux_side0.length * aux_side0.length \
-                    + aux_side1.length * aux_side1.length \
-                    - aux_side2.length * aux_side2.length
-            aux_denom = 2 * aux_side0.length * aux_side1.length
+            aux_num = aux_side0.real_length * aux_side0.real_length \
+                    + aux_side1.real_length * aux_side1.real_length \
+                    - aux_side2.real_length * aux_side2.real_length
+            aux_denom = 2 * aux_side0.real_length * aux_side1.real_length
             aux_cos = aux_num / aux_denom
             self._measure = Decimal(str(math.degrees(math.acos(aux_cos))))
 

@@ -353,7 +353,7 @@ class Polygon(Drawable):
         # Let's add the sides' labels, if any
         for s in self.side:
             if s.label != Value(""):
-                x = s.length
+                x = s.real_length
                 scale_factor = round(Decimal(str(1.6*x)),
                                      Decimal('0.1'),
                                      rounding=ROUND_UP)
