@@ -285,6 +285,8 @@ class Segment(Drawable):
 
         self._name = "[" + self.points[0].name + self.points[1].name + "]"
 
+        self._fake_length = Value(0)
+
 
 
 
@@ -326,6 +328,18 @@ class Segment(Drawable):
 
     # --------------------------------------------------------------------------
     ##
+    #   @brief Returns the "fake" length of the Segment (the one used in a
+    #          problem)
+    @property
+    def fake_length(self):
+        return self._fake_length
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
     #   @brief Returns the length name of the Segment
     @property
     def length_name(self):
@@ -348,6 +362,26 @@ class Segment(Drawable):
 
     # --------------------------------------------------------------------------
     ##
+    #   @brief Will set fake_length as the Segment's label, or "?", or nothing
+    #   @param flag If flag evaluates to None, the Segment's label will be set
+    #               to "?". Otherwise, if it evaluates to False, it will be
+    #               set to "", and to True, it will be set to its fake_length.
+    def setup_label(self, flag):
+        if flag == None:
+            self.label = Value("?")
+
+        elif flag:
+            self.label = Value(self.fake_length)
+
+        elif not flag:
+            self.label = Value("")
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
     #   @brief Sets the label of the Segment
     @label.setter
     def label(self, arg):
@@ -355,6 +389,20 @@ class Segment(Drawable):
             raise error.WrongArgument(' Value ', str(type(arg)))
 
         self._label = arg
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Sets the fake length of the Segment (the one used in a problem)
+    @fake_length.setter
+    def fake_length(self, arg):
+        if not type(arg) == Value:
+            raise error.WrongArgument(' Value ', str(type(arg)))
+
+        self._fake_length = arg
 
 
 

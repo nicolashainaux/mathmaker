@@ -156,7 +156,7 @@ class Polygon(Drawable):
         self._random_id = ''.join([str(randomly.integer(0, 9)) \
                                    for i in range(8)])
 
-
+        self._fake_lengths_have_been_set = False
 
 
 
@@ -235,6 +235,59 @@ class Polygon(Drawable):
     @property
     def filename(self):
         return self.nature + "_" + self.name + "-" + self._random_id
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief  Returns the Polygon's perimeter (based on the fake lengths)
+    #   @todo   This assumes the fake lengths all have the same Unit...
+    @property
+    def perimeter(self):
+        return Value(sum([s.fake_length.raw_value for s in self.side]))
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Sets the lengths that will be used in an exercise
+    #          (not the real ones)
+    #   @param lengths_list A list of Values, being as long as len(self.side)
+    def set_fake_lengths(self, lengths_list):
+        if len(lengths_list) != len(self.side):
+            raise error.WrongArgument("A list of length " \
+                                        + str(len(lengths_list)),
+                                      "A list of length the number of sides (" \
+                                        + str(len(self.side)) + ")")
+
+        for s in self.side:
+            s.fake_length = lengths_list[self.side.index(s)]
+
+        self._fake_lengths_have_been_set = True
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Turns "on" or "off" the labels (displaying the fake lengths)
+    #          or potentially displaying a "?".
+    #   @param flags_list A list of True|False|None, being as long as
+    #                     len(self.side)
+    def setup_labels(self, flags_list):
+        if len(flags_list) != len(self.side):
+            raise error.WrongArgument("A list of length " \
+                                        + str(len(flags_list)),
+                                      "A list of length the number of sides (" \
+                                        + str(len(self.side)) + ")")
+
+        for (s, f) in zip(self.side, flags_list):
+            s.setup_label(f)
 
 
 
