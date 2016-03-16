@@ -64,7 +64,7 @@ class sub_object(object):
                                         rectangle_name[0]],
                                         read_name_clockwise=True)
 
-            self.rectangle.set_fake_lengths([self.l_val, self.w_val,
-                                             self.l_val, self.w_val])
+            self.rectangle.set_lengths([self.l_val, self.w_val,
+                                        self.l_val, self.w_val])
 
             self.rectangle.setup_labels([False, False, True, True])

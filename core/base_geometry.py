@@ -285,9 +285,9 @@ class Segment(Drawable):
 
         self._name = "[" + self.points[0].name + self.points[1].name + "]"
 
-        self._fake_length = Value(0)
+        self._length = Value(0)
 
-        self._fake_length_has_been_set = False
+        self._length_has_been_set = False
 
 
 
@@ -333,8 +333,8 @@ class Segment(Drawable):
     #   @brief Returns the "fake" length of the Segment (the one used in a
     #          problem)
     @property
-    def fake_length(self):
-        return self._fake_length
+    def length(self):
+        return self._length
 
 
 
@@ -342,10 +342,10 @@ class Segment(Drawable):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Returns the fake_length_has_been_set flag of the Segment
+    #   @brief Returns the length_has_been_set flag of the Segment
     @property
-    def fake_length_has_been_set(self):
-        return self._fake_length_has_been_set
+    def length_has_been_set(self):
+        return self._length_has_been_set
 
 
 
@@ -375,16 +375,16 @@ class Segment(Drawable):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Will set fake_length as the Segment's label, or "?", or nothing
+    #   @brief Will set length as the Segment's label, or "?", or nothing
     #   @param flag If flag evaluates to None, the Segment's label will be set
     #               to "?". Otherwise, if it evaluates to False, it will be
-    #               set to "", and to True, it will be set to its fake_length.
+    #               set to "", and to True, it will be set to its length.
     def setup_label(self, flag):
         if flag == None:
             self.label = Value("?")
 
         elif flag:
-            self.label = Value(self.fake_length)
+            self.label = Value(self.length)
 
         elif not flag:
             self.label = Value("")
@@ -410,13 +410,13 @@ class Segment(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the fake length of the Segment (the one used in a problem)
-    @fake_length.setter
-    def fake_length(self, arg):
+    @length.setter
+    def length(self, arg):
         if not (type(arg) == Value and arg.is_numeric()):
             raise error.WrongArgument(' numeric Value ', str(type(arg)))
 
-        self._fake_length = arg
-        self._fake_length_has_been_set = True
+        self._length = arg
+        self._length_has_been_set = True
 
 
 
