@@ -498,8 +498,11 @@ class X_MentalCalculation(X_Structure):
         # default tabular option:
         else:
             q = [self.questions_list[i].to_str('exc') for i in range(self.q_nb)]
-            a = [self.questions_list[i].to_str('ans') for i in range(self.q_nb)]\
-                if ex_or_answers == 'ans' else [" " for i in range(self.q_nb)]
+            a = [self.questions_list[i].to_str('ans') \
+                                                    for i in range(self.q_nb)]\
+                if ex_or_answers == 'ans' \
+                else [self.questions_list[i].to_str('hint') \
+                                                    for i in range(self.q_nb)]
 
             content = [elt for pair in zip(q, a) for elt in pair]
 

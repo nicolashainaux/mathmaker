@@ -108,6 +108,9 @@ class Q_Structure(object):
         elif ex_or_answers == 'ans':
             return self.answer_to_str()
 
+        elif ex_or_answers == 'hint':
+            return self.hint_to_str()
+
         else:
             raise error.OutOfRangeArgument(ex_or_answers, 'exc|ans')
 
@@ -141,3 +144,8 @@ class Q_Structure(object):
 
 
 
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns " " if not redefined otherwise.
+    def hint_to_str(self, **options):
+        return " "

@@ -606,6 +606,9 @@ class Q_MentalCalculation(Q_Structure):
         self.q_text = m.q(embedded_machine, **options)
         self.q_answer = m.a(embedded_machine, **options)
 
+        if hasattr(m, 'h'):
+            self.q_hint = m.h(embedded_machine, **options)
+
 
 
 
@@ -633,3 +636,13 @@ class Q_MentalCalculation(Q_Structure):
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
         return self.q_answer
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the answer of the question as a str
+    def hint_to_str(self):
+        return self.q_hint if hasattr(self, 'q_hint') else " "
