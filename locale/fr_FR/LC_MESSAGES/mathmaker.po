@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-03-15 07:20+0100\n"
+"PO-Revision-Date: 2016-03-17 13:14+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -62,11 +62,11 @@ msgstr "est positif."
 msgid "Polygon_of_{n}_sides"
 msgstr "Polygone_à_{n}_côtés"
 
-#: core/geometry.py:480
+#: core/geometry.py:549
 msgid "Rectangle"
 msgstr "Rectangle"
 
-#: core/geometry.py:721
+#: core/geometry.py:856
 msgid "RightTriangle"
 msgstr "TriangleRectangle"
 
@@ -369,11 +369,11 @@ msgstr "Factoriser :"
 msgid "Factorise, if possible:"
 msgstr "Factoriser, si possible :"
 
-#: sheet/exercise/X_MentalCalculation.py:452
+#: sheet/exercise/X_MentalCalculation.py:492
 msgid "Question:"
 msgstr "Question :"
 
-#: sheet/exercise/X_MentalCalculation.py:454
+#: sheet/exercise/X_MentalCalculation.py:494
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -518,35 +518,37 @@ msgstr "Donc, d'après la contraposée du théorème de Pythagore,"
 msgid "{triangle_name} has no right angle."
 msgstr "{triangle_name} n'est pas rectangle."
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:46
+#: sheet/exercise/question/mc_modules/area_rectangle.py:51
 msgid "Area of this rectangle?"
 msgstr "Aire de ce rectangle ?"
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:49
+#: sheet/exercise/question/mc_modules/area_rectangle.py:54
 #, python-brace-format
 msgid "Area of a rectangle whose width is {w} and length is {l}?"
 msgstr "Aire d'un rectangle de largeur {w} et de longueur {l} ?"
 
-#: sheet/exercise/question/mc_modules/divi_direct.py:80
-#, python-brace-format
-msgid "Calculate: {quotient}"
-msgstr "Calculer : {quotient}"
-
-#: sheet/exercise/question/mc_modules/divi_direct.py:84
+#: sheet/exercise/question/mc_modules/divi_direct.py:95
+#: sheet/exercise/question/mc_modules/divi_direct.py:115
 #, python-brace-format
 msgid "A rectangle has an area of {a} and a length of {l}. What is its width?"
 msgstr ""
 "Un rectangle a une aire de {a} et une longueur de {l}. Quelle est sa "
 "largeur ?"
 
-#: sheet/exercise/question/mc_modules/divi_direct.py:88
+#: sheet/exercise/question/mc_modules/divi_direct.py:105
+#: sheet/exercise/question/mc_modules/divi_direct.py:121
 #, python-brace-format
 msgid "A rectangle has an area of {a} and a width of {w}. What is its length?"
 msgstr ""
 "Un rectangle a une aire de {a} et une largeur de {w}. Quelle est sa "
 "longueur ?"
 
-#: sheet/exercise/question/mc_modules/multi_direct.py:38
+#: sheet/exercise/question/mc_modules/divi_direct.py:110
+#, python-brace-format
+msgid "Calculate: {quotient}"
+msgstr "Calculer : {quotient}"
+
+#: sheet/exercise/question/mc_modules/multi_direct.py:40
 msgid "Calculate:"
 msgstr "Calculer :"
 
@@ -559,11 +561,11 @@ msgid "In the multiplication tables (from 2 to 9), which product is equal to:"
 msgstr ""
 "Dans les tables de multiplication (de 2 à 9), quel produit est égal à :"
 
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:47
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:53
 msgid "Perimeter of this rectangle?"
 msgstr "Périmètre de ce rectangle ?"
 
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:50
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:56
 #, python-brace-format
 msgid "Perimeter of a rectangle whose width is {w} and length is {l}?"
 msgstr "Périmètre d'un rectangle de largeur {w} et de longueur {l} ?"
@@ -582,6 +584,18 @@ msgstr "{how_many_rank} dans {decimal_number} ?"
 #, python-brace-format
 msgid "Which figure matches the {rank} in the number {decimal_number}?"
 msgstr "Chiffre des {rank} dans le nombre {decimal_number} ?"
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:74
+#, python-brace-format
+msgid ""
+"What is the width of a rectangle whose perimeter is {p} and length is {l}?"
+msgstr "Largeur d'un rectangle de périmètre {p} et de longueur {l} ?"
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:79
+#, python-brace-format
+msgid ""
+"What is the length of a rectangle whose perimeter is {p} and width is {w}?"
+msgstr "Longueur d'un rectangle de périmètre {p} et de largeur {w} ?"
 
 #: sheet/exercise/question/mc_modules/vocabulary_addi.py:40
 #, python-brace-format
@@ -603,1025 +617,445 @@ msgstr "Combien vaut le produit de {n1} par {n2} ?"
 msgid "How much is the difference between {n1} and {n2}?"
 msgstr "Combien vaut la différence entre {n1} et {n2} ?"
 
-#: locale/additional_translations.xml:328
-msgid "FOUR_LETTERS_WORD_291"
-msgstr "CHOU"
-
-#: locale/additional_translations.xml:98
-msgid "FOUR_LETTERS_WORD_061"
-msgstr ""
-
-#: locale/additional_translations.xml:170
-msgid "FOUR_LETTERS_WORD_133"
-msgstr "ONZE"
-
-#: locale/additional_translations.xml:70
-msgid "FOUR_LETTERS_WORD_033"
-msgstr ""
-
-#: locale/additional_translations.xml:80
-msgid "FOUR_LETTERS_WORD_043"
-msgstr "BLEU"
-
-#: locale/additional_translations.xml:33
-msgid "What is the third of {number}?"
-msgstr "Quel est le tiers de {number} ?"
-
-#: locale/additional_translations.xml:267
-msgid "FOUR_LETTERS_WORD_230"
-msgstr ""
-
-#: locale/additional_translations.xml:55
-msgid "FOUR_LETTERS_WORD_018"
-msgstr ""
-
-#: locale/additional_translations.xml:82
-msgid "FOUR_LETTERS_WORD_045"
-msgstr "FILM"
-
-#: locale/additional_translations.xml:223
-msgid "FOUR_LETTERS_WORD_186"
-msgstr "TRUC"
-
-#: locale/additional_translations.xml:282
-msgid "FOUR_LETTERS_WORD_245"
-msgstr "POUF"
-
-#: locale/additional_translations.xml:53
-msgid "FOUR_LETTERS_WORD_016"
-msgstr "LUTH"
-
-#: locale/additional_translations.xml:139
-msgid "FOUR_LETTERS_WORD_102"
-msgstr "ANGE"
-
-#: locale/additional_translations.xml:178
-msgid "FOUR_LETTERS_WORD_141"
-msgstr ""
-
-#: locale/additional_translations.xml:273
-msgid "FOUR_LETTERS_WORD_236"
-msgstr ""
-
-#: locale/additional_translations.xml:140
-msgid "FOUR_LETTERS_WORD_103"
-msgstr ""
-
-#: locale/additional_translations.xml:127
-msgid "FOUR_LETTERS_WORD_090"
-msgstr "LYNX"
-
-#: locale/additional_translations.xml:50
-msgid "FOUR_LETTERS_WORD_013"
-msgstr ""
-
-#: locale/additional_translations.xml:134
-msgid "FOUR_LETTERS_WORD_097"
-msgstr "GANT"
-
-#: locale/additional_translations.xml:62
-msgid "FOUR_LETTERS_WORD_025"
-msgstr ""
-
-#: locale/additional_translations.xml:163
-msgid "FOUR_LETTERS_WORD_126"
-msgstr "FAON"
-
-#: locale/additional_translations.xml:215
-msgid "FOUR_LETTERS_WORD_178"
-msgstr ""
-
-#: locale/additional_translations.xml:326
-msgid "FOUR_LETTERS_WORD_289"
-msgstr ""
-
-#: locale/additional_translations.xml:333
-msgid "FOUR_LETTERS_WORD_296"
-msgstr "SEPT"
-
-#: locale/additional_translations.xml:268
-msgid "FOUR_LETTERS_WORD_231"
-msgstr ""
-
-#: locale/additional_translations.xml:143
-msgid "FOUR_LETTERS_WORD_106"
-msgstr ""
-
-#: locale/additional_translations.xml:292
-msgid "FOUR_LETTERS_WORD_255"
-msgstr "BUSE"
-
-#: locale/additional_translations.xml:10
-msgid "hundreds of thousands"
-msgstr "centaines de milliers"
-
-#: locale/additional_translations.xml:300
-msgid "FOUR_LETTERS_WORD_263"
-msgstr ""
-
-#: locale/additional_translations.xml:212
-msgid "FOUR_LETTERS_WORD_175"
-msgstr ""
-
-#: locale/additional_translations.xml:149
-msgid "FOUR_LETTERS_WORD_112"
-msgstr ""
-
-#: locale/additional_translations.xml:278
-msgid "FOUR_LETTERS_WORD_241"
-msgstr ""
-
-#: locale/additional_translations.xml:102
-msgid "FOUR_LETTERS_WORD_065"
-msgstr ""
-
-#: locale/additional_translations.xml:311
-msgid "FOUR_LETTERS_WORD_274"
-msgstr ""
-
-#: locale/additional_translations.xml:214
-msgid "FOUR_LETTERS_WORD_177"
-msgstr ""
-
-#: locale/additional_translations.xml:295
-msgid "FOUR_LETTERS_WORD_258"
-msgstr ""
-
-#: locale/additional_translations.xml:270
-msgid "FOUR_LETTERS_WORD_233"
-msgstr "JUDO"
-
-#: locale/additional_translations.xml:289
-msgid "FOUR_LETTERS_WORD_252"
-msgstr "CERF"
-
-#: locale/additional_translations.xml:169
-msgid "FOUR_LETTERS_WORD_132"
-msgstr "PUMA"
-
-#: locale/additional_translations.xml:228
-msgid "FOUR_LETTERS_WORD_191"
-msgstr "VOLT"
-
-#: locale/additional_translations.xml:146
-msgid "FOUR_LETTERS_WORD_109"
-msgstr ""
-
-#: locale/additional_translations.xml:84
-msgid "FOUR_LETTERS_WORD_047"
-msgstr ""
-
-#: locale/additional_translations.xml:135
-msgid "FOUR_LETTERS_WORD_098"
-msgstr ""
-
-#: locale/additional_translations.xml:40
-msgid "FOUR_LETTERS_WORD_003"
-msgstr ""
-
-#: locale/additional_translations.xml:121
-msgid "FOUR_LETTERS_WORD_084"
-msgstr "AVEN"
-
-#: locale/additional_translations.xml:105
-msgid "FOUR_LETTERS_WORD_068"
-msgstr "DAIM"
-
-#: locale/additional_translations.xml:320
-msgid "FOUR_LETTERS_WORD_283"
-msgstr ""
-
-#: locale/additional_translations.xml:262
-msgid "FOUR_LETTERS_WORD_225"
-msgstr "ORGE"
-
-#: locale/additional_translations.xml:133
-msgid "FOUR_LETTERS_WORD_096"
-msgstr "SOIN"
-
-#: locale/additional_translations.xml:35
-msgid "What is the double of {number}?"
-msgstr "Quel est le double de {number} ?"
-
-#: locale/additional_translations.xml:16
-msgid "tenths"
-msgstr "dixièmes"
-
-#: locale/additional_translations.xml:323
-msgid "FOUR_LETTERS_WORD_286"
-msgstr "AUBE"
-
-#: locale/additional_translations.xml:287
-msgid "FOUR_LETTERS_WORD_250"
-msgstr "SEAU"
-
-#: locale/additional_translations.xml:294
-msgid "FOUR_LETTERS_WORD_257"
-msgstr ""
-
-#: locale/additional_translations.xml:136
-msgid "FOUR_LETTERS_WORD_099"
-msgstr "TROU"
-
-#: locale/additional_translations.xml:69
-msgid "FOUR_LETTERS_WORD_032"
-msgstr ""
-
-#: locale/additional_translations.xml:274
-msgid "FOUR_LETTERS_WORD_237"
-msgstr ""
-
-#: locale/additional_translations.xml:153
-msgid "FOUR_LETTERS_WORD_116"
-msgstr ""
-
-#: locale/additional_translations.xml:13
-msgid "hundreds"
-msgstr "centaines"
-
-#: locale/additional_translations.xml:115
-msgid "FOUR_LETTERS_WORD_078"
-msgstr ""
-
-#: locale/additional_translations.xml:64
-msgid "FOUR_LETTERS_WORD_027"
-msgstr "GNOU"
-
-#: locale/additional_translations.xml:161
-msgid "FOUR_LETTERS_WORD_124"
-msgstr "AZUR"
-
-#: locale/additional_translations.xml:6
-msgid "billions"
-msgstr "milliards"
-
-#: locale/additional_translations.xml:68
-msgid "FOUR_LETTERS_WORD_031"
-msgstr "TRAC"
-
-#: locale/additional_translations.xml:197
-msgid "FOUR_LETTERS_WORD_160"
-msgstr ""
-
-#: locale/additional_translations.xml:238
-msgid "FOUR_LETTERS_WORD_201"
-msgstr "THYM"
-
-#: locale/additional_translations.xml:120
-msgid "FOUR_LETTERS_WORD_083"
-msgstr ""
-
-#: locale/additional_translations.xml:124
-msgid "FOUR_LETTERS_WORD_087"
-msgstr "RUSE"
-
-#: sheet/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-msgid "Reversed multiplications"
-msgstr "Multiplications à l'envers"
-
-#: locale/additional_translations.xml:160
-msgid "FOUR_LETTERS_WORD_123"
-msgstr ""
-
-#: locale/additional_translations.xml:175
-msgid "FOUR_LETTERS_WORD_138"
-msgstr ""
-
-#: locale/additional_translations.xml:335
-msgid "FOUR_LETTERS_WORD_298"
-msgstr ""
-
-#: locale/additional_translations.xml:87
-msgid "FOUR_LETTERS_WORD_050"
-msgstr "BOUM"
-
-#: locale/additional_translations.xml:59
-msgid "FOUR_LETTERS_WORD_022"
-msgstr "LOIR"
-
-#: locale/additional_translations.xml:37
-msgid "What is the quadruple of {number}?"
-msgstr "Quel est le quadruple de {number} ?"
-
-#: locale/additional_translations.xml:329
-msgid "FOUR_LETTERS_WORD_292"
-msgstr "VELO"
-
-#: locale/additional_translations.xml:283
-msgid "FOUR_LETTERS_WORD_246"
-msgstr "ZERO"
-
-#: locale/additional_translations.xml:261
-msgid "FOUR_LETTERS_WORD_224"
-msgstr "TRIO"
-
-#: locale/additional_translations.xml:91
-msgid "FOUR_LETTERS_WORD_054"
-msgstr "AUTO"
-
-#: locale/additional_translations.xml:67
-msgid "FOUR_LETTERS_WORD_030"
-msgstr ""
-
-#: locale/additional_translations.xml:272
-msgid "FOUR_LETTERS_WORD_235"
-msgstr "ANIS"
-
-#: locale/additional_translations.xml:203
-msgid "FOUR_LETTERS_WORD_166"
-msgstr "SOIR"
-
-#: locale/additional_translations.xml:241
-msgid "FOUR_LETTERS_WORD_204"
-msgstr "PAIX"
-
-#: locale/additional_translations.xml:110
-msgid "FOUR_LETTERS_WORD_073"
-msgstr ""
-
-#: locale/additional_translations.xml:258
-msgid "FOUR_LETTERS_WORD_221"
-msgstr "OEIL"
-
-#: locale/additional_translations.xml:322
-msgid "FOUR_LETTERS_WORD_285"
-msgstr ""
-
-#: locale/additional_translations.xml:245
-msgid "FOUR_LETTERS_WORD_208"
-msgstr "ITOU"
-
-#: locale/additional_translations.xml:265
-msgid "FOUR_LETTERS_WORD_228"
-msgstr ""
-
-#: locale/additional_translations.xml:11
-msgid "tens of thousands"
-msgstr "dizaines de milliers"
-
-#: locale/additional_translations.xml:88
-msgid "FOUR_LETTERS_WORD_051"
-msgstr ""
-
-#: locale/additional_translations.xml:76
-msgid "FOUR_LETTERS_WORD_039"
-msgstr ""
-
-#: locale/additional_translations.xml:308
-msgid "FOUR_LETTERS_WORD_271"
-msgstr ""
-
-#: locale/additional_translations.xml:219
-msgid "FOUR_LETTERS_WORD_182"
-msgstr ""
-
-#: locale/additional_translations.xml:118
-msgid "FOUR_LETTERS_WORD_081"
-msgstr "BRIO"
-
-#: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-msgid "Simple decimal multiplications"
-msgstr "Multiplications décimales simples"
-
-#: locale/additional_translations.xml:19
-msgid "How many billions"
-msgstr "Nombre de milliards"
-
-#: locale/additional_translations.xml:191
-msgid "FOUR_LETTERS_WORD_154"
-msgstr ""
-
-#: locale/additional_translations.xml:243
-msgid "FOUR_LETTERS_WORD_206"
-msgstr ""
-
-#: locale/additional_translations.xml:14
-msgid "tens"
-msgstr "dizaines"
-
-#: locale/additional_translations.xml:256
-msgid "FOUR_LETTERS_WORD_219"
-msgstr ""
-
-#: locale/additional_translations.xml:81
-msgid "FOUR_LETTERS_WORD_044"
-msgstr ""
-
-#: locale/additional_translations.xml:43
-msgid "FOUR_LETTERS_WORD_006"
-msgstr ""
-
-#: locale/additional_translations.xml:154
-msgid "FOUR_LETTERS_WORD_117"
-msgstr "HUIT"
-
-#: locale/additional_translations.xml:337
-msgid "FOUR_LETTERS_WORD_300"
-msgstr ""
-
-#: locale/additional_translations.xml:106
-msgid "FOUR_LETTERS_WORD_069"
-msgstr ""
-
-#: locale/additional_translations.xml:83
-msgid "FOUR_LETTERS_WORD_046"
-msgstr "CYAN"
-
-#: locale/additional_translations.xml:166
-msgid "FOUR_LETTERS_WORD_129"
-msgstr "EGAL"
-
-#: locale/additional_translations.xml:101
-msgid "FOUR_LETTERS_WORD_064"
-msgstr ""
-
-#: locale/additional_translations.xml:298
-msgid "FOUR_LETTERS_WORD_261"
-msgstr ""
-
-#: locale/additional_translations.xml:9
-msgid "millions"
-msgstr "millions"
-
-#: locale/additional_translations.xml:150
-msgid "FOUR_LETTERS_WORD_113"
-msgstr ""
-
-#: locale/additional_translations.xml:284
-msgid "FOUR_LETTERS_WORD_247"
-msgstr "INDE"
-
-#: locale/additional_translations.xml:291
-msgid "FOUR_LETTERS_WORD_254"
-msgstr "CIAO"
-
-#: locale/additional_translations.xml:93
-msgid "FOUR_LETTERS_WORD_056"
-msgstr ""
-
-#: locale/additional_translations.xml:230
-msgid "FOUR_LETTERS_WORD_193"
-msgstr "PUNK"
-
-#: locale/additional_translations.xml:39
-msgid "FOUR_LETTERS_WORD_002"
-msgstr ""
-
-#: locale/additional_translations.xml:231
-msgid "FOUR_LETTERS_WORD_194"
-msgstr "PUCE"
-
-#: locale/additional_translations.xml:75
-msgid "FOUR_LETTERS_WORD_038"
-msgstr "RAIL"
-
-#: locale/additional_translations.xml:52
-msgid "FOUR_LETTERS_WORD_015"
-msgstr ""
-
-#: locale/additional_translations.xml:158
-msgid "FOUR_LETTERS_WORD_121"
-msgstr "DEUX"
-
-#: locale/additional_translations.xml:307
-msgid "FOUR_LETTERS_WORD_270"
-msgstr "SAXO"
-
-#: locale/additional_translations.xml:30
-msgid "How many hundredths"
-msgstr "Nombre de centièmes"
-
-#: locale/additional_translations.xml:310
-msgid "FOUR_LETTERS_WORD_273"
-msgstr ""
-
-#: locale/additional_translations.xml:313
-msgid "FOUR_LETTERS_WORD_276"
-msgstr "RIEN"
-
-#: locale/additional_translations.xml:331
-msgid "FOUR_LETTERS_WORD_294"
-msgstr ""
-
-#: locale/additional_translations.xml:51
-msgid "FOUR_LETTERS_WORD_014"
-msgstr "CAKE"
-
-#: locale/additional_translations.xml:224
-msgid "FOUR_LETTERS_WORD_187"
-msgstr ""
-
-#: locale/additional_translations.xml:172
-msgid "FOUR_LETTERS_WORD_135"
-msgstr ""
-
-#: locale/additional_translations.xml:305
-msgid "FOUR_LETTERS_WORD_268"
-msgstr "LOUP"
-
-#: locale/additional_translations.xml:24
-msgid "How many tens of thousands"
-msgstr "Nombre de dizaines de milliers"
-
-#: locale/additional_translations.xml:297
-msgid "FOUR_LETTERS_WORD_260"
-msgstr ""
-
-#: locale/additional_translations.xml:57
-msgid "FOUR_LETTERS_WORD_020"
-msgstr "INCA"
-
-#: locale/additional_translations.xml:246
-msgid "FOUR_LETTERS_WORD_209"
-msgstr ""
-
-#: locale/additional_translations.xml:187
-msgid "FOUR_LETTERS_WORD_150"
-msgstr "MARS"
-
-#: locale/additional_translations.xml:288
-msgid "FOUR_LETTERS_WORD_251"
-msgstr "CHAT"
-
-#: locale/additional_translations.xml:77
-msgid "FOUR_LETTERS_WORD_040"
-msgstr ""
-
-#: locale/additional_translations.xml:279
-msgid "FOUR_LETTERS_WORD_242"
-msgstr ""
-
-#: locale/additional_translations.xml:222
-msgid "FOUR_LETTERS_WORD_185"
-msgstr "OEUF"
-
-#: locale/additional_translations.xml:162
-msgid "FOUR_LETTERS_WORD_125"
-msgstr ""
-
-#: locale/additional_translations.xml:296
-msgid "FOUR_LETTERS_WORD_259"
-msgstr "NOVA"
-
-#: locale/additional_translations.xml:332
-msgid "FOUR_LETTERS_WORD_295"
-msgstr "FOLK"
-
-#: locale/additional_translations.xml:251
-msgid "FOUR_LETTERS_WORD_214"
-msgstr "OVNI"
-
-#: locale/additional_translations.xml:15
-msgid "units"
-msgstr "unités"
-
-#: locale/additional_translations.xml:226
-msgid "FOUR_LETTERS_WORD_189"
-msgstr ""
-
-#: locale/additional_translations.xml:48
-msgid "FOUR_LETTERS_WORD_011"
-msgstr "COZY"
-
-#: locale/additional_translations.xml:63
-msgid "FOUR_LETTERS_WORD_026"
-msgstr ""
-
-#: locale/additional_translations.xml:189
-msgid "FOUR_LETTERS_WORD_152"
-msgstr ""
-
-#: locale/additional_translations.xml:255
-msgid "FOUR_LETTERS_WORD_218"
-msgstr ""
-
-#: locale/additional_translations.xml:31
-msgid "How many thousandths"
-msgstr "Nombre de millièmes"
-
-#: locale/additional_translations.xml:176
-msgid "FOUR_LETTERS_WORD_139"
-msgstr ""
-
-#: locale/additional_translations.xml:200
-msgid "FOUR_LETTERS_WORD_163"
-msgstr ""
-
-#: locale/additional_translations.xml:321
-msgid "FOUR_LETTERS_WORD_284"
-msgstr ""
-
-#: locale/additional_translations.xml:325
-msgid "FOUR_LETTERS_WORD_288"
-msgstr ""
-
-#: locale/additional_translations.xml:290
-msgid "FOUR_LETTERS_WORD_253"
-msgstr "APRE"
-
-#: locale/additional_translations.xml:327
-msgid "FOUR_LETTERS_WORD_290"
-msgstr ""
-
-#: sheet/frameworks/mental_calculation/lev11_1/ranks.xml:5
-msgid "Ranks of figures in a number"
-msgstr "Rangs des chiffres dans un nombre"
-
-#: locale/additional_translations.xml:97
-msgid "FOUR_LETTERS_WORD_060"
-msgstr "ALTO"
-
-#: locale/additional_translations.xml:266
-msgid "FOUR_LETTERS_WORD_229"
-msgstr "CODE"
-
-#: locale/additional_translations.xml:207
-msgid "FOUR_LETTERS_WORD_170"
-msgstr "VOEU"
-
-#: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
-#: sheet/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/ranks.xml:5
-#: sheet/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
-#: sheet/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-#: sheet/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
-#: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-msgid "Mental calculation"
-msgstr "Calcul mental"
-
-#: locale/additional_translations.xml:181
-msgid "FOUR_LETTERS_WORD_144"
-msgstr ""
-
-#: locale/additional_translations.xml:254
-msgid "FOUR_LETTERS_WORD_217"
-msgstr ""
-
-#: locale/additional_translations.xml:141
-msgid "FOUR_LETTERS_WORD_104"
-msgstr "VIDE"
-
-#: locale/additional_translations.xml:112
-msgid "FOUR_LETTERS_WORD_075"
-msgstr ""
-
-#: locale/additional_translations.xml:184
-msgid "FOUR_LETTERS_WORD_147"
-msgstr ""
-
-#: locale/additional_translations.xml:28
-msgid "How many units"
-msgstr "Nombre d'unités"
-
-#: locale/additional_translations.xml:95
-msgid "FOUR_LETTERS_WORD_058"
-msgstr ""
-
-#: locale/additional_translations.xml:116
-msgid "FOUR_LETTERS_WORD_079"
-msgstr "ECHO"
-
-#: locale/additional_translations.xml:315
-msgid "FOUR_LETTERS_WORD_278"
-msgstr ""
-
-#: locale/additional_translations.xml:257
-msgid "FOUR_LETTERS_WORD_220"
-msgstr "UBAC"
-
-#: locale/additional_translations.xml:195
-msgid "FOUR_LETTERS_WORD_158"
-msgstr "BRUN"
-
-#: locale/additional_translations.xml:225
-msgid "FOUR_LETTERS_WORD_188"
-msgstr ""
-
-#: locale/additional_translations.xml:144
-msgid "FOUR_LETTERS_WORD_107"
-msgstr ""
-
-#: locale/additional_translations.xml:201
-msgid "FOUR_LETTERS_WORD_164"
-msgstr ""
-
-#: locale/additional_translations.xml:12
-msgid "thousands"
-msgstr "milliers"
-
-#: locale/additional_translations.xml:125
-msgid "FOUR_LETTERS_WORD_088"
-msgstr ""
-
-#: locale/additional_translations.xml:156
-msgid "FOUR_LETTERS_WORD_119"
-msgstr ""
-
-#: locale/additional_translations.xml:259
-msgid "FOUR_LETTERS_WORD_222"
-msgstr ""
-
-#: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-msgid "Test 2"
-msgstr "Test 2"
-
-#: locale/additional_translations.xml:145
-msgid "FOUR_LETTERS_WORD_108"
-msgstr ""
-
-#: locale/additional_translations.xml:217
-msgid "FOUR_LETTERS_WORD_180"
+#: locale/additional_translations.xml:182
+msgid "FOUR_LETTERS_WORD_145"
 msgstr ""
 
 #: locale/additional_translations.xml:220
 msgid "FOUR_LETTERS_WORD_183"
 msgstr ""
 
-#: locale/additional_translations.xml:137
-msgid "FOUR_LETTERS_WORD_100"
-msgstr "VOIX"
+#: locale/additional_translations.xml:332
+msgid "FOUR_LETTERS_WORD_295"
+msgstr "FOLK"
 
-#: locale/additional_translations.xml:21
-msgid "How many tens of millions"
-msgstr "Nombre de dizaines de millions"
-
-#: locale/additional_translations.xml:302
-msgid "FOUR_LETTERS_WORD_265"
+#: locale/additional_translations.xml:146
+msgid "FOUR_LETTERS_WORD_109"
 msgstr ""
 
-#: locale/additional_translations.xml:8
-msgid "tens of millions"
-msgstr "dizaines de millions"
-
-#: locale/additional_translations.xml:126
-msgid "FOUR_LETTERS_WORD_089"
+#: locale/additional_translations.xml:62
+msgid "FOUR_LETTERS_WORD_025"
 msgstr ""
 
-#: locale/additional_translations.xml:193
-msgid "FOUR_LETTERS_WORD_156"
-msgstr "LAOS"
+#: locale/additional_translations.xml:29
+msgid "How many tenths"
+msgstr "Nombre de dixièmes"
 
-#: locale/additional_translations.xml:147
-msgid "FOUR_LETTERS_WORD_110"
+#: locale/additional_translations.xml:264
+msgid "FOUR_LETTERS_WORD_227"
 msgstr ""
 
-#: locale/additional_translations.xml:276
-msgid "FOUR_LETTERS_WORD_239"
-msgstr "GREC"
+#: locale/additional_translations.xml:262
+msgid "FOUR_LETTERS_WORD_225"
+msgstr "ORGE"
 
-#: locale/additional_translations.xml:96
-msgid "FOUR_LETTERS_WORD_059"
-msgstr "INOX"
+#: locale/additional_translations.xml:168
+msgid "FOUR_LETTERS_WORD_131"
+msgstr ""
+
+#: locale/additional_translations.xml:321
+msgid "FOUR_LETTERS_WORD_284"
+msgstr ""
+
+#: locale/additional_translations.xml:6
+msgid "billions"
+msgstr "milliards"
+
+#: locale/additional_translations.xml:66
+msgid "FOUR_LETTERS_WORD_029"
+msgstr ""
+
+#: locale/additional_translations.xml:118
+msgid "FOUR_LETTERS_WORD_081"
+msgstr "BRIO"
+
+#: locale/additional_translations.xml:110
+msgid "FOUR_LETTERS_WORD_073"
+msgstr ""
+
+#: locale/additional_translations.xml:63
+msgid "FOUR_LETTERS_WORD_026"
+msgstr ""
+
+#: locale/additional_translations.xml:268
+msgid "FOUR_LETTERS_WORD_231"
+msgstr ""
+
+#: locale/additional_translations.xml:152
+msgid "FOUR_LETTERS_WORD_115"
+msgstr "UNIX"
+
+#: locale/additional_translations.xml:92
+msgid "FOUR_LETTERS_WORD_055"
+msgstr "LUNE"
+
+#: locale/additional_translations.xml:327
+msgid "FOUR_LETTERS_WORD_290"
+msgstr ""
+
+#: locale/additional_translations.xml:255
+msgid "FOUR_LETTERS_WORD_218"
+msgstr ""
+
+#: locale/additional_translations.xml:89
+msgid "FOUR_LETTERS_WORD_052"
+msgstr "MUSC"
+
+#: locale/additional_translations.xml:164
+msgid "FOUR_LETTERS_WORD_127"
+msgstr ""
+
+#: locale/additional_translations.xml:114
+msgid "FOUR_LETTERS_WORD_077"
+msgstr "FAUX"
+
+#: locale/additional_translations.xml:112
+msgid "FOUR_LETTERS_WORD_075"
+msgstr ""
+
+#: locale/additional_translations.xml:139
+msgid "FOUR_LETTERS_WORD_102"
+msgstr "ANGE"
+
+#: locale/additional_translations.xml:333
+msgid "FOUR_LETTERS_WORD_296"
+msgstr "SEPT"
+
+#: locale/additional_translations.xml:246
+msgid "FOUR_LETTERS_WORD_209"
+msgstr ""
+
+#: locale/additional_translations.xml:283
+msgid "FOUR_LETTERS_WORD_246"
+msgstr "ZERO"
+
+#: locale/additional_translations.xml:237
+msgid "FOUR_LETTERS_WORD_200"
+msgstr "TUBE"
+
+#: locale/additional_translations.xml:230
+msgid "FOUR_LETTERS_WORD_193"
+msgstr "PUNK"
 
 #: locale/additional_translations.xml:46
 msgid "FOUR_LETTERS_WORD_009"
 msgstr ""
 
-#: locale/additional_translations.xml:109
-msgid "FOUR_LETTERS_WORD_072"
+#: locale/additional_translations.xml:101
+msgid "FOUR_LETTERS_WORD_064"
 msgstr ""
 
-#: locale/additional_translations.xml:151
-msgid "FOUR_LETTERS_WORD_114"
+#: locale/additional_translations.xml:335
+msgid "FOUR_LETTERS_WORD_298"
 msgstr ""
 
-#: locale/additional_translations.xml:185
-msgid "FOUR_LETTERS_WORD_148"
+#: locale/additional_translations.xml:330
+msgid "FOUR_LETTERS_WORD_293"
+msgstr "TOUX"
+
+#: locale/additional_translations.xml:296
+msgid "FOUR_LETTERS_WORD_259"
+msgstr "NOVA"
+
+#: locale/additional_translations.xml:107
+msgid "FOUR_LETTERS_WORD_070"
+msgstr "RHUM"
+
+#: locale/additional_translations.xml:242
+msgid "FOUR_LETTERS_WORD_205"
+msgstr "ROUX"
+
+#: locale/additional_translations.xml:315
+msgid "FOUR_LETTERS_WORD_278"
 msgstr ""
 
-#: locale/additional_translations.xml:306
-msgid "FOUR_LETTERS_WORD_269"
+#: locale/additional_translations.xml:25
+msgid "How many thousands"
+msgstr "Nombre de milliers"
+
+#: locale/additional_translations.xml:174
+msgid "FOUR_LETTERS_WORD_137"
+msgstr "PIAF"
+
+#: locale/additional_translations.xml:245
+msgid "FOUR_LETTERS_WORD_208"
+msgstr "ITOU"
+
+#: locale/additional_translations.xml:173
+msgid "FOUR_LETTERS_WORD_136"
+msgstr ""
+
+#: locale/additional_translations.xml:225
+msgid "FOUR_LETTERS_WORD_188"
+msgstr ""
+
+#: locale/additional_translations.xml:15
+msgid "units"
+msgstr "unités"
+
+#: locale/additional_translations.xml:189
+msgid "FOUR_LETTERS_WORD_152"
+msgstr ""
+
+#: locale/additional_translations.xml:214
+msgid "FOUR_LETTERS_WORD_177"
+msgstr ""
+
+#: locale/additional_translations.xml:84
+msgid "FOUR_LETTERS_WORD_047"
+msgstr ""
+
+#: locale/additional_translations.xml:215
+msgid "FOUR_LETTERS_WORD_178"
+msgstr ""
+
+#: locale/additional_translations.xml:270
+msgid "FOUR_LETTERS_WORD_233"
+msgstr "JUDO"
+
+#: locale/additional_translations.xml:122
+msgid "FOUR_LETTERS_WORD_085"
+msgstr "BOXE"
+
+#: locale/additional_translations.xml:170
+msgid "FOUR_LETTERS_WORD_133"
+msgstr "ONZE"
+
+#: locale/additional_translations.xml:284
+msgid "FOUR_LETTERS_WORD_247"
+msgstr "INDE"
+
+#: locale/additional_translations.xml:32
+msgid "What is the half of {number}?"
+msgstr "Quelle est la moitié de {number} ?"
+
+#: locale/additional_translations.xml:181
+msgid "FOUR_LETTERS_WORD_144"
+msgstr ""
+
+#: locale/additional_translations.xml:219
+msgid "FOUR_LETTERS_WORD_182"
+msgstr ""
+
+#: locale/additional_translations.xml:18
+msgid "thousandths"
+msgstr "millièmes"
+
+#: locale/additional_translations.xml:154
+msgid "FOUR_LETTERS_WORD_117"
+msgstr "HUIT"
+
+#: locale/additional_translations.xml:106
+msgid "FOUR_LETTERS_WORD_069"
+msgstr ""
+
+#: locale/additional_translations.xml:203
+msgid "FOUR_LETTERS_WORD_166"
+msgstr "SOIR"
+
+#: locale/additional_translations.xml:136
+msgid "FOUR_LETTERS_WORD_099"
+msgstr "TROU"
+
+#: locale/additional_translations.xml:304
+msgid "FOUR_LETTERS_WORD_267"
+msgstr "NUIT"
+
+#: locale/additional_translations.xml:98
+msgid "FOUR_LETTERS_WORD_061"
+msgstr ""
+
+#: locale/additional_translations.xml:19
+msgid "How many billions"
+msgstr "Nombre de milliards"
+
+#: locale/additional_translations.xml:39
+msgid "FOUR_LETTERS_WORD_002"
+msgstr ""
+
+#: locale/additional_translations.xml:260
+msgid "FOUR_LETTERS_WORD_223"
+msgstr ""
+
+#: locale/additional_translations.xml:69
+msgid "FOUR_LETTERS_WORD_032"
+msgstr ""
+
+#: locale/additional_translations.xml:91
+msgid "FOUR_LETTERS_WORD_054"
+msgstr "AUTO"
+
+#: locale/additional_translations.xml:207
+msgid "FOUR_LETTERS_WORD_170"
+msgstr "VOEU"
+
+#: locale/additional_translations.xml:331
+msgid "FOUR_LETTERS_WORD_294"
+msgstr ""
+
+#: locale/additional_translations.xml:150
+msgid "FOUR_LETTERS_WORD_113"
+msgstr ""
+
+#: locale/additional_translations.xml:294
+msgid "FOUR_LETTERS_WORD_257"
+msgstr ""
+
+#: locale/additional_translations.xml:318
+msgid "FOUR_LETTERS_WORD_281"
+msgstr ""
+
+#: locale/additional_translations.xml:211
+msgid "FOUR_LETTERS_WORD_174"
+msgstr ""
+
+#: locale/additional_translations.xml:223
+msgid "FOUR_LETTERS_WORD_186"
+msgstr "TRUC"
+
+#: locale/additional_translations.xml:83
+msgid "FOUR_LETTERS_WORD_046"
+msgstr "CYAN"
+
+#: locale/additional_translations.xml:124
+msgid "FOUR_LETTERS_WORD_087"
+msgstr "RUSE"
+
+#: locale/additional_translations.xml:33
+msgid "What is the third of {number}?"
+msgstr "Quel est le tiers de {number} ?"
+
+#: locale/additional_translations.xml:308
+msgid "FOUR_LETTERS_WORD_271"
+msgstr ""
+
+#: locale/additional_translations.xml:190
+msgid "FOUR_LETTERS_WORD_153"
+msgstr "CINQ"
+
+#: locale/additional_translations.xml:236
+msgid "FOUR_LETTERS_WORD_199"
+msgstr "YACK"
+
+#: locale/additional_translations.xml:226
+msgid "FOUR_LETTERS_WORD_189"
+msgstr ""
+
+#: locale/additional_translations.xml:217
+msgid "FOUR_LETTERS_WORD_180"
+msgstr ""
+
+#: locale/additional_translations.xml:67
+msgid "FOUR_LETTERS_WORD_030"
+msgstr ""
+
+#: locale/additional_translations.xml:186
+msgid "FOUR_LETTERS_WORD_149"
 msgstr ""
 
 #: locale/additional_translations.xml:42
 msgid "FOUR_LETTERS_WORD_005"
 msgstr ""
 
-#: locale/additional_translations.xml:252
-msgid "FOUR_LETTERS_WORD_215"
-msgstr "LONG"
-
-#: locale/additional_translations.xml:74
-msgid "FOUR_LETTERS_WORD_037"
+#: locale/additional_translations.xml:175
+msgid "FOUR_LETTERS_WORD_138"
 msgstr ""
 
-#: locale/additional_translations.xml:334
-msgid "FOUR_LETTERS_WORD_297"
+#: locale/additional_translations.xml:86
+msgid "FOUR_LETTERS_WORD_049"
+msgstr "BOIS"
+
+#: locale/additional_translations.xml:9
+msgid "millions"
+msgstr "millions"
+
+#: locale/additional_translations.xml:290
+msgid "FOUR_LETTERS_WORD_253"
+msgstr "APRE"
+
+#: locale/additional_translations.xml:337
+msgid "FOUR_LETTERS_WORD_300"
 msgstr ""
 
-#: locale/additional_translations.xml:202
-msgid "FOUR_LETTERS_WORD_165"
-msgstr "SOIF"
+#: locale/additional_translations.xml:307
+msgid "FOUR_LETTERS_WORD_270"
+msgstr "SAXO"
 
-#: locale/additional_translations.xml:45
-msgid "FOUR_LETTERS_WORD_008"
-msgstr "ACTE"
+#: locale/additional_translations.xml:57
+msgid "FOUR_LETTERS_WORD_020"
+msgstr "INCA"
 
-#: locale/additional_translations.xml:44
-msgid "FOUR_LETTERS_WORD_007"
-msgstr ""
-
-#: locale/additional_translations.xml:138
-msgid "FOUR_LETTERS_WORD_101"
-msgstr "OGRE"
-
-#: locale/additional_translations.xml:29
-msgid "How many tenths"
-msgstr "Nombre de dixièmes"
-
-#: locale/additional_translations.xml:71
-msgid "FOUR_LETTERS_WORD_034"
-msgstr ""
-
-#: locale/additional_translations.xml:23
-msgid "How many hundreds of thousands"
-msgstr "Nombre de centaines de milliers"
-
-#: locale/additional_translations.xml:312
-msgid "FOUR_LETTERS_WORD_275"
-msgstr "NOIX"
-
-#: locale/additional_translations.xml:108
-msgid "FOUR_LETTERS_WORD_071"
-msgstr ""
-
-#: locale/additional_translations.xml:285
-msgid "FOUR_LETTERS_WORD_248"
-msgstr ""
-
-#: locale/additional_translations.xml:111
-msgid "FOUR_LETTERS_WORD_074"
-msgstr "AOUT"
-
-#: sheet/frameworks/mental_calculation/lev11_2/rectangles.xml:6
-msgid "Mental calculation: areas and perimeters of rectangles"
-msgstr "Calcul mental : aires et périmètres de rectangles"
-
-#: locale/additional_translations.xml:180
-msgid "FOUR_LETTERS_WORD_143"
-msgstr ""
-
-#: locale/additional_translations.xml:73
-msgid "FOUR_LETTERS_WORD_036"
-msgstr ""
-
-#: locale/additional_translations.xml:113
-msgid "FOUR_LETTERS_WORD_076"
-msgstr ""
-
-#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-msgid "Multiplications with a hole"
-msgstr "Multiplications à trou"
-
-#: locale/additional_translations.xml:165
-msgid "FOUR_LETTERS_WORD_128"
-msgstr "OURS"
-
-#: locale/additional_translations.xml:183
-msgid "FOUR_LETTERS_WORD_146"
-msgstr "KORA"
-
-#: locale/additional_translations.xml:204
-msgid "FOUR_LETTERS_WORD_167"
-msgstr "ZEBU"
-
-#: locale/additional_translations.xml:237
-msgid "FOUR_LETTERS_WORD_200"
-msgstr "TUBE"
-
-#: locale/additional_translations.xml:275
-msgid "FOUR_LETTERS_WORD_238"
-msgstr ""
-
-#: locale/additional_translations.xml:117
-msgid "FOUR_LETTERS_WORD_080"
-msgstr ""
-
-#: locale/additional_translations.xml:194
-msgid "FOUR_LETTERS_WORD_157"
-msgstr "MATH"
-
-#: locale/additional_translations.xml:148
-msgid "FOUR_LETTERS_WORD_111"
-msgstr "ZEST"
-
-#: locale/additional_translations.xml:171
-msgid "FOUR_LETTERS_WORD_134"
-msgstr ""
-
-#: locale/additional_translations.xml:79
-msgid "FOUR_LETTERS_WORD_042"
-msgstr ""
-
-#: locale/additional_translations.xml:177
-msgid "FOUR_LETTERS_WORD_140"
-msgstr ""
-
-#: locale/additional_translations.xml:242
-msgid "FOUR_LETTERS_WORD_205"
-msgstr "ROUX"
-
-#: locale/additional_translations.xml:128
-msgid "FOUR_LETTERS_WORD_091"
-msgstr "ARME"
-
-#: locale/additional_translations.xml:314
-msgid "FOUR_LETTERS_WORD_277"
-msgstr ""
-
-#: locale/additional_translations.xml:7
-msgid "hundreds of millions"
-msgstr "centaines de millions"
-
-#: locale/additional_translations.xml:188
-msgid "FOUR_LETTERS_WORD_151"
-msgstr "BLOC"
-
-#: locale/additional_translations.xml:179
-msgid "FOUR_LETTERS_WORD_142"
-msgstr "CLEF"
-
-#: locale/additional_translations.xml:293
-msgid "FOUR_LETTERS_WORD_256"
-msgstr "FLOT"
-
-#: locale/additional_translations.xml:303
-msgid "FOUR_LETTERS_WORD_266"
-msgstr "KILO"
-
-#: sheet/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-msgid "Multiplications and divisions by 10, 100 and 1000"
-msgstr "Multiplications et divisions par 10, 100 et 1000"
-
-#: locale/additional_translations.xml:164
-msgid "FOUR_LETTERS_WORD_127"
-msgstr ""
-
-#: locale/additional_translations.xml:253
-msgid "FOUR_LETTERS_WORD_216"
-msgstr ""
-
-#: locale/additional_translations.xml:244
-msgid "FOUR_LETTERS_WORD_207"
-msgstr ""
-
-#: locale/additional_translations.xml:99
-msgid "FOUR_LETTERS_WORD_062"
-msgstr "MIEL"
-
-#: locale/additional_translations.xml:56
-msgid "FOUR_LETTERS_WORD_019"
-msgstr "LADY"
-
-#: locale/additional_translations.xml:235
-msgid "FOUR_LETTERS_WORD_198"
-msgstr "ROUE"
-
-#: locale/additional_translations.xml:142
-msgid "FOUR_LETTERS_WORD_105"
-msgstr "BANG"
-
-#: locale/additional_translations.xml:281
-msgid "FOUR_LETTERS_WORD_244"
-msgstr "NEUF"
-
-#: locale/additional_translations.xml:103
-msgid "FOUR_LETTERS_WORD_066"
-msgstr "JOIE"
-
-#: locale/additional_translations.xml:174
-msgid "FOUR_LETTERS_WORD_137"
-msgstr "PIAF"
-
-#: locale/additional_translations.xml:54
-msgid "FOUR_LETTERS_WORD_017"
-msgstr ""
-
-#: locale/additional_translations.xml:38
-msgid "FOUR_LETTERS_WORD_001"
-msgstr "ARDU"
-
-#: locale/additional_translations.xml:17
-msgid "hundredths"
-msgstr "centièmes"
-
-#: locale/additional_translations.xml:319
-msgid "FOUR_LETTERS_WORD_282"
+#: locale/additional_translations.xml:140
+msgid "FOUR_LETTERS_WORD_103"
 msgstr ""
 
 #: locale/additional_translations.xml:132
 msgid "FOUR_LETTERS_WORD_095"
 msgstr "YOGA"
 
+#: locale/additional_translations.xml:305
+msgid "FOUR_LETTERS_WORD_268"
+msgstr "LOUP"
+
+#: locale/additional_translations.xml:204
+msgid "FOUR_LETTERS_WORD_167"
+msgstr "ZEBU"
+
 #: locale/additional_translations.xml:247
 msgid "FOUR_LETTERS_WORD_210"
 msgstr "APTE"
+
+#: locale/additional_translations.xml:312
+msgid "FOUR_LETTERS_WORD_275"
+msgstr "NOIX"
+
+#: locale/additional_translations.xml:297
+msgid "FOUR_LETTERS_WORD_260"
+msgstr ""
+
+#: locale/additional_translations.xml:23
+msgid "How many hundreds of thousands"
+msgstr "Nombre de centaines de milliers"
+
+#: locale/additional_translations.xml:8
+msgid "tens of millions"
+msgstr "dizaines de millions"
+
+#: locale/additional_translations.xml:206
+msgid "FOUR_LETTERS_WORD_169"
+msgstr ""
+
+#: locale/additional_translations.xml:248
+msgid "FOUR_LETTERS_WORD_211"
+msgstr ""
+
+#: locale/additional_translations.xml:165
+msgid "FOUR_LETTERS_WORD_128"
+msgstr "OURS"
+
+#: locale/additional_translations.xml:250
+msgid "FOUR_LETTERS_WORD_213"
+msgstr "ISBA"
+
+#: locale/additional_translations.xml:127
+msgid "FOUR_LETTERS_WORD_090"
+msgstr "LYNX"
+
+#: locale/additional_translations.xml:60
+msgid "FOUR_LETTERS_WORD_023"
+msgstr "EURO"
+
+#: locale/additional_translations.xml:10
+msgid "hundreds of thousands"
+msgstr "centaines de milliers"
+
+#: locale/additional_translations.xml:53
+msgid "FOUR_LETTERS_WORD_016"
+msgstr "LUTH"
+
+#: locale/additional_translations.xml:287
+msgid "FOUR_LETTERS_WORD_250"
+msgstr "SEAU"
 
 #: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
 #: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
@@ -1639,365 +1073,945 @@ msgstr "APTE"
 msgid "Answers"
 msgstr "Réponses"
 
-#: locale/additional_translations.xml:221
-msgid "FOUR_LETTERS_WORD_184"
-msgstr ""
-
-#: locale/additional_translations.xml:167
-msgid "FOUR_LETTERS_WORD_130"
-msgstr "ABRI"
-
-#: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
-msgid "Divisions"
-msgstr "Divisions"
-
-#: locale/additional_translations.xml:304
-msgid "FOUR_LETTERS_WORD_267"
-msgstr "NUIT"
-
-#: locale/additional_translations.xml:36
-msgid "What is the triple of {number}?"
-msgstr "Quel est le triple de {number} ?"
-
-#: locale/additional_translations.xml:269
-msgid "FOUR_LETTERS_WORD_232"
-msgstr "DAME"
-
-#: locale/additional_translations.xml:32
-msgid "What is the half of {number}?"
-msgstr "Quelle est la moitié de {number} ?"
-
-#: locale/additional_translations.xml:107
-msgid "FOUR_LETTERS_WORD_070"
-msgstr "RHUM"
-
-#: locale/additional_translations.xml:190
-msgid "FOUR_LETTERS_WORD_153"
-msgstr "CINQ"
-
-#: locale/additional_translations.xml:264
-msgid "FOUR_LETTERS_WORD_227"
-msgstr ""
-
-#: locale/additional_translations.xml:65
-msgid "FOUR_LETTERS_WORD_028"
-msgstr "AIDE"
-
-#: locale/additional_translations.xml:20
-msgid "How many hundreds of millions"
-msgstr "Nombre de centaines de millions"
-
-#: locale/additional_translations.xml:316
-msgid "FOUR_LETTERS_WORD_279"
-msgstr "PAIN"
-
-#: locale/additional_translations.xml:250
-msgid "FOUR_LETTERS_WORD_213"
-msgstr "ISBA"
-
-#: locale/additional_translations.xml:25
-msgid "How many thousands"
-msgstr "Nombre de milliers"
-
-#: locale/additional_translations.xml:49
-msgid "FOUR_LETTERS_WORD_012"
-msgstr "PILE"
-
-#: locale/additional_translations.xml:122
-msgid "FOUR_LETTERS_WORD_085"
-msgstr "BOXE"
-
-#: locale/additional_translations.xml:22
-msgid "How many millions"
-msgstr "Nombre de millions"
-
-#: locale/additional_translations.xml:58
-msgid "FOUR_LETTERS_WORD_021"
-msgstr "VLAN"
-
-#: locale/additional_translations.xml:211
-msgid "FOUR_LETTERS_WORD_174"
-msgstr ""
-
-#: locale/additional_translations.xml:72
-msgid "FOUR_LETTERS_WORD_035"
-msgstr "BISE"
-
-#: locale/additional_translations.xml:229
-msgid "FOUR_LETTERS_WORD_192"
-msgstr ""
-
-#: locale/additional_translations.xml:18
-msgid "thousandths"
-msgstr "millièmes"
-
-#: locale/additional_translations.xml:186
-msgid "FOUR_LETTERS_WORD_149"
-msgstr ""
-
-#: locale/additional_translations.xml:129
-msgid "FOUR_LETTERS_WORD_092"
-msgstr ""
-
-#: locale/additional_translations.xml:192
-msgid "FOUR_LETTERS_WORD_155"
-msgstr "YANG"
-
-#: locale/additional_translations.xml:206
-msgid "FOUR_LETTERS_WORD_169"
-msgstr ""
-
-#: locale/additional_translations.xml:227
-msgid "FOUR_LETTERS_WORD_190"
-msgstr ""
-
-#: locale/additional_translations.xml:155
-msgid "FOUR_LETTERS_WORD_118"
-msgstr ""
-
-#: locale/additional_translations.xml:61
-msgid "FOUR_LETTERS_WORD_024"
-msgstr "ASIE"
-
-#: locale/additional_translations.xml:159
-msgid "FOUR_LETTERS_WORD_122"
-msgstr "ROCK"
-
-#: locale/additional_translations.xml:280
-msgid "FOUR_LETTERS_WORD_243"
-msgstr ""
-
-#: locale/additional_translations.xml:90
-msgid "FOUR_LETTERS_WORD_053"
-msgstr "IOTA"
-
-#: locale/additional_translations.xml:196
-msgid "FOUR_LETTERS_WORD_159"
-msgstr ""
-
-#: locale/additional_translations.xml:317
-msgid "FOUR_LETTERS_WORD_280"
-msgstr ""
-
-#: locale/additional_translations.xml:60
-msgid "FOUR_LETTERS_WORD_023"
-msgstr "EURO"
-
-#: locale/additional_translations.xml:209
-msgid "FOUR_LETTERS_WORD_172"
-msgstr "JOUR"
-
-#: locale/additional_translations.xml:271
-msgid "FOUR_LETTERS_WORD_234"
-msgstr ""
-
-#: locale/additional_translations.xml:114
-msgid "FOUR_LETTERS_WORD_077"
-msgstr "FAUX"
-
-#: locale/additional_translations.xml:157
-msgid "FOUR_LETTERS_WORD_120"
-msgstr ""
-
-#: locale/additional_translations.xml:249
-msgid "FOUR_LETTERS_WORD_212"
-msgstr "DICO"
-
-#: locale/additional_translations.xml:173
-msgid "FOUR_LETTERS_WORD_136"
-msgstr ""
-
-#: locale/additional_translations.xml:66
-msgid "FOUR_LETTERS_WORD_029"
-msgstr ""
-
-#: locale/additional_translations.xml:94
-msgid "FOUR_LETTERS_WORD_057"
-msgstr "PAGE"
-
-#: locale/additional_translations.xml:168
-msgid "FOUR_LETTERS_WORD_131"
-msgstr ""
-
-#: locale/additional_translations.xml:130
-msgid "FOUR_LETTERS_WORD_093"
-msgstr ""
-
-#: locale/additional_translations.xml:213
-msgid "FOUR_LETTERS_WORD_176"
-msgstr ""
-
-#: locale/additional_translations.xml:152
-msgid "FOUR_LETTERS_WORD_115"
-msgstr "UNIX"
-
-#: locale/additional_translations.xml:239
-msgid "FOUR_LETTERS_WORD_202"
-msgstr "HOUX"
-
-#: locale/additional_translations.xml:131
-msgid "FOUR_LETTERS_WORD_094"
-msgstr "RANG"
-
-#: locale/additional_translations.xml:27
-msgid "How many tens"
-msgstr "Nombre de dizaines"
-
-#: locale/additional_translations.xml:263
-msgid "FOUR_LETTERS_WORD_226"
-msgstr ""
-
 #: locale/additional_translations.xml:123
 msgid "FOUR_LETTERS_WORD_086"
 msgstr "TANK"
 
-#: locale/additional_translations.xml:205
-msgid "FOUR_LETTERS_WORD_168"
+#: locale/additional_translations.xml:41
+msgid "FOUR_LETTERS_WORD_004"
 msgstr ""
 
-#: locale/additional_translations.xml:208
-msgid "FOUR_LETTERS_WORD_171"
+#: locale/additional_translations.xml:44
+msgid "FOUR_LETTERS_WORD_007"
 msgstr ""
 
-#: locale/additional_translations.xml:233
-msgid "FOUR_LETTERS_WORD_196"
-msgstr "ORME"
-
-#: sheet/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
-msgid "Vocabulary of operations"
-msgstr "Vocabulaire des opérations"
-
-#: locale/additional_translations.xml:34
-msgid "What is the quarter of {number}?"
-msgstr "Quel est le quart de {number} ?"
-
-#: locale/additional_translations.xml:299
-msgid "FOUR_LETTERS_WORD_262"
+#: locale/additional_translations.xml:302
+msgid "FOUR_LETTERS_WORD_265"
 msgstr ""
 
-#: locale/additional_translations.xml:85
-msgid "FOUR_LETTERS_WORD_048"
-msgstr "HIER"
+#: locale/additional_translations.xml:97
+msgid "FOUR_LETTERS_WORD_060"
+msgstr "ALTO"
 
-#: locale/additional_translations.xml:119
-msgid "FOUR_LETTERS_WORD_082"
-msgstr "PESO"
-
-#: locale/additional_translations.xml:92
-msgid "FOUR_LETTERS_WORD_055"
-msgstr "LUNE"
-
-#: locale/additional_translations.xml:100
-msgid "FOUR_LETTERS_WORD_063"
+#: locale/additional_translations.xml:102
+msgid "FOUR_LETTERS_WORD_065"
 msgstr ""
 
-#: locale/additional_translations.xml:234
-msgid "FOUR_LETTERS_WORD_197"
+#: locale/additional_translations.xml:235
+msgid "FOUR_LETTERS_WORD_198"
+msgstr "ROUE"
+
+#: locale/additional_translations.xml:183
+msgid "FOUR_LETTERS_WORD_146"
+msgstr "KORA"
+
+#: locale/additional_translations.xml:256
+msgid "FOUR_LETTERS_WORD_219"
 msgstr ""
 
-#: locale/additional_translations.xml:248
-msgid "FOUR_LETTERS_WORD_211"
-msgstr ""
+#: locale/additional_translations.xml:222
+msgid "FOUR_LETTERS_WORD_185"
+msgstr "OEUF"
 
-#: locale/additional_translations.xml:86
-msgid "FOUR_LETTERS_WORD_049"
-msgstr "BOIS"
+#: locale/additional_translations.xml:166
+msgid "FOUR_LETTERS_WORD_129"
+msgstr "EGAL"
 
-#: locale/additional_translations.xml:336
-msgid "FOUR_LETTERS_WORD_299"
-msgstr "FLUX"
-
-#: locale/additional_translations.xml:301
-msgid "FOUR_LETTERS_WORD_264"
-msgstr "AMER"
-
-#: locale/additional_translations.xml:104
-msgid "FOUR_LETTERS_WORD_067"
-msgstr ""
-
-#: locale/additional_translations.xml:210
-msgid "FOUR_LETTERS_WORD_173"
-msgstr ""
-
-#: locale/additional_translations.xml:78
-msgid "FOUR_LETTERS_WORD_041"
-msgstr ""
-
-#: locale/additional_translations.xml:236
-msgid "FOUR_LETTERS_WORD_199"
-msgstr "YACK"
-
-#: locale/additional_translations.xml:232
-msgid "FOUR_LETTERS_WORD_195"
-msgstr ""
-
-#: locale/additional_translations.xml:260
-msgid "FOUR_LETTERS_WORD_223"
-msgstr ""
-
-#: locale/additional_translations.xml:47
-msgid "FOUR_LETTERS_WORD_010"
-msgstr "VRAC"
-
-#: locale/additional_translations.xml:89
-msgid "FOUR_LETTERS_WORD_052"
-msgstr "MUSC"
-
-#: locale/additional_translations.xml:240
-msgid "FOUR_LETTERS_WORD_203"
-msgstr ""
-
-#: locale/additional_translations.xml:216
-msgid "FOUR_LETTERS_WORD_179"
-msgstr "AGIR"
-
-#: locale/additional_translations.xml:26
-msgid "How many hundreds"
-msgstr "Nombre de centaines"
-
-#: locale/additional_translations.xml:324
-msgid "FOUR_LETTERS_WORD_287"
-msgstr "AIGU"
-
-#: locale/additional_translations.xml:286
-msgid "FOUR_LETTERS_WORD_249"
-msgstr "DING"
-
-#: locale/additional_translations.xml:277
-msgid "FOUR_LETTERS_WORD_240"
-msgstr ""
-
-#: locale/additional_translations.xml:199
-msgid "FOUR_LETTERS_WORD_162"
-msgstr "HALO"
-
-#: locale/additional_translations.xml:318
-msgid "FOUR_LETTERS_WORD_281"
+#: locale/additional_translations.xml:172
+msgid "FOUR_LETTERS_WORD_135"
 msgstr ""
 
 #: locale/additional_translations.xml:198
 msgid "FOUR_LETTERS_WORD_161"
 msgstr "CLOU"
 
-#: locale/additional_translations.xml:218
-msgid "FOUR_LETTERS_WORD_181"
+#: locale/additional_translations.xml:100
+msgid "FOUR_LETTERS_WORD_063"
 msgstr ""
+
+#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+msgid "Multiplications with a hole"
+msgstr "Multiplications à trou"
+
+#: locale/additional_translations.xml:120
+msgid "FOUR_LETTERS_WORD_083"
+msgstr ""
+
+#: locale/additional_translations.xml:43
+msgid "FOUR_LETTERS_WORD_006"
+msgstr ""
+
+#: locale/additional_translations.xml:216
+msgid "FOUR_LETTERS_WORD_179"
+msgstr "AGIR"
+
+#: locale/additional_translations.xml:234
+msgid "FOUR_LETTERS_WORD_197"
+msgstr ""
+
+#: locale/additional_translations.xml:253
+msgid "FOUR_LETTERS_WORD_216"
+msgstr ""
+
+#: locale/additional_translations.xml:17
+msgid "hundredths"
+msgstr "centièmes"
+
+#: locale/additional_translations.xml:261
+msgid "FOUR_LETTERS_WORD_224"
+msgstr "TRIO"
+
+#: locale/additional_translations.xml:20
+msgid "How many hundreds of millions"
+msgstr "Nombre de centaines de millions"
+
+#: locale/additional_translations.xml:113
+msgid "FOUR_LETTERS_WORD_076"
+msgstr ""
+
+#: locale/additional_translations.xml:177
+msgid "FOUR_LETTERS_WORD_140"
+msgstr ""
+
+#: locale/additional_translations.xml:229
+msgid "FOUR_LETTERS_WORD_192"
+msgstr ""
+
+#: locale/additional_translations.xml:200
+msgid "FOUR_LETTERS_WORD_163"
+msgstr ""
+
+#: locale/additional_translations.xml:138
+msgid "FOUR_LETTERS_WORD_101"
+msgstr "OGRE"
+
+#: locale/additional_translations.xml:119
+msgid "FOUR_LETTERS_WORD_082"
+msgstr "PESO"
+
+#: locale/additional_translations.xml:99
+msgid "FOUR_LETTERS_WORD_062"
+msgstr "MIEL"
+
+#: locale/additional_translations.xml:329
+msgid "FOUR_LETTERS_WORD_292"
+msgstr "VELO"
+
+#: locale/additional_translations.xml:221
+msgid "FOUR_LETTERS_WORD_184"
+msgstr ""
+
+#: locale/additional_translations.xml:251
+msgid "FOUR_LETTERS_WORD_214"
+msgstr "OVNI"
+
+#: locale/additional_translations.xml:212
+msgid "FOUR_LETTERS_WORD_175"
+msgstr ""
+
+#: locale/additional_translations.xml:52
+msgid "FOUR_LETTERS_WORD_015"
+msgstr ""
+
+#: locale/additional_translations.xml:192
+msgid "FOUR_LETTERS_WORD_155"
+msgstr "YANG"
+
+#: locale/additional_translations.xml:16
+msgid "tenths"
+msgstr "dixièmes"
+
+#: locale/additional_translations.xml:142
+msgid "FOUR_LETTERS_WORD_105"
+msgstr "BANG"
+
+#: locale/additional_translations.xml:208
+msgid "FOUR_LETTERS_WORD_171"
+msgstr ""
+
+#: locale/additional_translations.xml:239
+msgid "FOUR_LETTERS_WORD_202"
+msgstr "HOUX"
+
+#: locale/additional_translations.xml:160
+msgid "FOUR_LETTERS_WORD_123"
+msgstr ""
+
+#: locale/additional_translations.xml:153
+msgid "FOUR_LETTERS_WORD_116"
+msgstr ""
+
+#: locale/additional_translations.xml:169
+msgid "FOUR_LETTERS_WORD_132"
+msgstr "PUMA"
+
+#: locale/additional_translations.xml:111
+msgid "FOUR_LETTERS_WORD_074"
+msgstr "AOUT"
+
+#: locale/additional_translations.xml:141
+msgid "FOUR_LETTERS_WORD_104"
+msgstr "VIDE"
+
+#: locale/additional_translations.xml:195
+msgid "FOUR_LETTERS_WORD_158"
+msgstr "BRUN"
+
+#: locale/additional_translations.xml:179
+msgid "FOUR_LETTERS_WORD_142"
+msgstr "CLEF"
+
+#: locale/additional_translations.xml:56
+msgid "FOUR_LETTERS_WORD_019"
+msgstr "LADY"
+
+#: locale/additional_translations.xml:323
+msgid "FOUR_LETTERS_WORD_286"
+msgstr "AUBE"
+
+#: locale/additional_translations.xml:280
+msgid "FOUR_LETTERS_WORD_243"
+msgstr ""
+
+#: locale/additional_translations.xml:131
+msgid "FOUR_LETTERS_WORD_094"
+msgstr "RANG"
+
+#: locale/additional_translations.xml:233
+msgid "FOUR_LETTERS_WORD_196"
+msgstr "ORME"
+
+#: locale/additional_translations.xml:157
+msgid "FOUR_LETTERS_WORD_120"
+msgstr ""
+
+#: locale/additional_translations.xml:276
+msgid "FOUR_LETTERS_WORD_239"
+msgstr "GREC"
+
+#: locale/additional_translations.xml:156
+msgid "FOUR_LETTERS_WORD_119"
+msgstr ""
+
+#: locale/additional_translations.xml:143
+msgid "FOUR_LETTERS_WORD_106"
+msgstr ""
+
+#: locale/additional_translations.xml:133
+msgid "FOUR_LETTERS_WORD_096"
+msgstr "SOIN"
+
+#: locale/additional_translations.xml:243
+msgid "FOUR_LETTERS_WORD_206"
+msgstr ""
+
+#: locale/additional_translations.xml:210
+msgid "FOUR_LETTERS_WORD_173"
+msgstr ""
+
+#: locale/additional_translations.xml:31
+msgid "How many thousandths"
+msgstr "Nombre de millièmes"
+
+#: locale/additional_translations.xml:317
+msgid "FOUR_LETTERS_WORD_280"
+msgstr ""
+
+#: locale/additional_translations.xml:88
+msgid "FOUR_LETTERS_WORD_051"
+msgstr ""
+
+#: locale/additional_translations.xml:285
+msgid "FOUR_LETTERS_WORD_248"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/lev11_2/rectangles.xml:6
+msgid "Mental calculation: areas and perimeters of rectangles"
+msgstr "Calcul mental : aires et périmètres de rectangles"
+
+#: locale/additional_translations.xml:282
+msgid "FOUR_LETTERS_WORD_245"
+msgstr "POUF"
+
+#: locale/additional_translations.xml:167
+msgid "FOUR_LETTERS_WORD_130"
+msgstr "ABRI"
+
+#: locale/additional_translations.xml:149
+msgid "FOUR_LETTERS_WORD_112"
+msgstr ""
+
+#: locale/additional_translations.xml:326
+msgid "FOUR_LETTERS_WORD_289"
+msgstr ""
+
+#: locale/additional_translations.xml:267
+msgid "FOUR_LETTERS_WORD_230"
+msgstr ""
+
+#: locale/additional_translations.xml:334
+msgid "FOUR_LETTERS_WORD_297"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: sheet/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: sheet/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: sheet/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: sheet/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+#: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+msgid "Mental calculation"
+msgstr "Calcul mental"
+
+#: locale/additional_translations.xml:263
+msgid "FOUR_LETTERS_WORD_226"
+msgstr ""
+
+#: locale/additional_translations.xml:202
+msgid "FOUR_LETTERS_WORD_165"
+msgstr "SOIF"
+
+#: locale/additional_translations.xml:224
+msgid "FOUR_LETTERS_WORD_187"
+msgstr ""
+
+#: locale/additional_translations.xml:313
+msgid "FOUR_LETTERS_WORD_276"
+msgstr "RIEN"
+
+#: locale/additional_translations.xml:40
+msgid "FOUR_LETTERS_WORD_003"
+msgstr ""
+
+#: locale/additional_translations.xml:137
+msgid "FOUR_LETTERS_WORD_100"
+msgstr "VOIX"
+
+#: locale/additional_translations.xml:36
+msgid "What is the triple of {number}?"
+msgstr "Quel est le triple de {number} ?"
+
+#: locale/additional_translations.xml:135
+msgid "FOUR_LETTERS_WORD_098"
+msgstr ""
+
+#: locale/additional_translations.xml:75
+msgid "FOUR_LETTERS_WORD_038"
+msgstr "RAIL"
+
+#: locale/additional_translations.xml:188
+msgid "FOUR_LETTERS_WORD_151"
+msgstr "BLOC"
+
+#: locale/additional_translations.xml:158
+msgid "FOUR_LETTERS_WORD_121"
+msgstr "DEUX"
 
 #: locale/additional_translations.xml:309
 msgid "FOUR_LETTERS_WORD_272"
 msgstr ""
 
-#: locale/additional_translations.xml:41
-msgid "FOUR_LETTERS_WORD_004"
+#: locale/additional_translations.xml:73
+msgid "FOUR_LETTERS_WORD_036"
 msgstr ""
 
-#: locale/additional_translations.xml:182
-msgid "FOUR_LETTERS_WORD_145"
+#: locale/additional_translations.xml:121
+msgid "FOUR_LETTERS_WORD_084"
+msgstr "AVEN"
+
+#: locale/additional_translations.xml:289
+msgid "FOUR_LETTERS_WORD_252"
+msgstr "CERF"
+
+#: locale/additional_translations.xml:301
+msgid "FOUR_LETTERS_WORD_264"
+msgstr "AMER"
+
+#: locale/additional_translations.xml:319
+msgid "FOUR_LETTERS_WORD_282"
 msgstr ""
 
-#: locale/additional_translations.xml:330
-msgid "FOUR_LETTERS_WORD_293"
-msgstr "TOUX"
+#: locale/additional_translations.xml:38
+msgid "FOUR_LETTERS_WORD_001"
+msgstr "ARDU"
+
+#: locale/additional_translations.xml:22
+msgid "How many millions"
+msgstr "Nombre de millions"
+
+#: locale/additional_translations.xml:70
+msgid "FOUR_LETTERS_WORD_033"
+msgstr ""
+
+#: locale/additional_translations.xml:95
+msgid "FOUR_LETTERS_WORD_058"
+msgstr ""
+
+#: locale/additional_translations.xml:24
+msgid "How many tens of thousands"
+msgstr "Nombre de dizaines de milliers"
+
+#: locale/additional_translations.xml:259
+msgid "FOUR_LETTERS_WORD_222"
+msgstr ""
+
+#: locale/additional_translations.xml:314
+msgid "FOUR_LETTERS_WORD_277"
+msgstr ""
+
+#: locale/additional_translations.xml:14
+msgid "tens"
+msgstr "dizaines"
+
+#: locale/additional_translations.xml:228
+msgid "FOUR_LETTERS_WORD_191"
+msgstr "VOLT"
+
+#: locale/additional_translations.xml:128
+msgid "FOUR_LETTERS_WORD_091"
+msgstr "ARME"
+
+#: locale/additional_translations.xml:306
+msgid "FOUR_LETTERS_WORD_269"
+msgstr ""
+
+#: locale/additional_translations.xml:231
+msgid "FOUR_LETTERS_WORD_194"
+msgstr "PUCE"
+
+#: locale/additional_translations.xml:116
+msgid "FOUR_LETTERS_WORD_079"
+msgstr "ECHO"
+
+#: locale/additional_translations.xml:74
+msgid "FOUR_LETTERS_WORD_037"
+msgstr ""
+
+#: locale/additional_translations.xml:240
+msgid "FOUR_LETTERS_WORD_203"
+msgstr ""
+
+#: locale/additional_translations.xml:299
+msgid "FOUR_LETTERS_WORD_262"
+msgstr ""
+
+#: locale/additional_translations.xml:129
+msgid "FOUR_LETTERS_WORD_092"
+msgstr ""
+
+#: locale/additional_translations.xml:275
+msgid "FOUR_LETTERS_WORD_238"
+msgstr ""
+
+#: locale/additional_translations.xml:185
+msgid "FOUR_LETTERS_WORD_148"
+msgstr ""
+
+#: locale/additional_translations.xml:288
+msgid "FOUR_LETTERS_WORD_251"
+msgstr "CHAT"
+
+#: locale/additional_translations.xml:115
+msgid "FOUR_LETTERS_WORD_078"
+msgstr ""
+
+#: locale/additional_translations.xml:82
+msgid "FOUR_LETTERS_WORD_045"
+msgstr "FILM"
+
+#: locale/additional_translations.xml:49
+msgid "FOUR_LETTERS_WORD_012"
+msgstr "PILE"
+
+#: locale/additional_translations.xml:55
+msgid "FOUR_LETTERS_WORD_018"
+msgstr ""
+
+#: locale/additional_translations.xml:93
+msgid "FOUR_LETTERS_WORD_056"
+msgstr ""
+
+#: locale/additional_translations.xml:178
+msgid "FOUR_LETTERS_WORD_141"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+msgid "Simple decimal multiplications"
+msgstr "Multiplications décimales simples"
+
+#: locale/additional_translations.xml:87
+msgid "FOUR_LETTERS_WORD_050"
+msgstr "BOUM"
+
+#: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
+msgid "Divisions"
+msgstr "Divisions"
+
+#: locale/additional_translations.xml:155
+msgid "FOUR_LETTERS_WORD_118"
+msgstr ""
+
+#: locale/additional_translations.xml:277
+msgid "FOUR_LETTERS_WORD_240"
+msgstr ""
+
+#: locale/additional_translations.xml:159
+msgid "FOUR_LETTERS_WORD_122"
+msgstr "ROCK"
+
+#: locale/additional_translations.xml:324
+msgid "FOUR_LETTERS_WORD_287"
+msgstr "AIGU"
+
+#: locale/additional_translations.xml:144
+msgid "FOUR_LETTERS_WORD_107"
+msgstr ""
+
+#: locale/additional_translations.xml:161
+msgid "FOUR_LETTERS_WORD_124"
+msgstr "AZUR"
+
+#: locale/additional_translations.xml:295
+msgid "FOUR_LETTERS_WORD_258"
+msgstr ""
+
+#: locale/additional_translations.xml:68
+msgid "FOUR_LETTERS_WORD_031"
+msgstr "TRAC"
+
+#: locale/additional_translations.xml:201
+msgid "FOUR_LETTERS_WORD_164"
+msgstr ""
+
+#: locale/additional_translations.xml:298
+msgid "FOUR_LETTERS_WORD_261"
+msgstr ""
+
+#: locale/additional_translations.xml:258
+msgid "FOUR_LETTERS_WORD_221"
+msgstr "OEIL"
+
+#: sheet/frameworks/mental_calculation/lev11_1/ranks.xml:5
+msgid "Ranks of figures in a number"
+msgstr "Rangs des chiffres dans un nombre"
+
+#: locale/additional_translations.xml:77
+msgid "FOUR_LETTERS_WORD_040"
+msgstr ""
+
+#: locale/additional_translations.xml:85
+msgid "FOUR_LETTERS_WORD_048"
+msgstr "HIER"
+
+#: locale/additional_translations.xml:125
+msgid "FOUR_LETTERS_WORD_088"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+msgid "Reversed multiplications"
+msgstr "Multiplications à l'envers"
+
+#: locale/additional_translations.xml:71
+msgid "FOUR_LETTERS_WORD_034"
+msgstr ""
+
+#: locale/additional_translations.xml:197
+msgid "FOUR_LETTERS_WORD_160"
+msgstr ""
+
+#: locale/additional_translations.xml:61
+msgid "FOUR_LETTERS_WORD_024"
+msgstr "ASIE"
+
+#: locale/additional_translations.xml:196
+msgid "FOUR_LETTERS_WORD_159"
+msgstr ""
+
+#: locale/additional_translations.xml:227
+msgid "FOUR_LETTERS_WORD_190"
+msgstr ""
+
+#: locale/additional_translations.xml:48
+msgid "FOUR_LETTERS_WORD_011"
+msgstr "COZY"
+
+#: locale/additional_translations.xml:325
+msgid "FOUR_LETTERS_WORD_288"
+msgstr ""
+
+#: locale/additional_translations.xml:278
+msgid "FOUR_LETTERS_WORD_241"
+msgstr ""
+
+#: locale/additional_translations.xml:51
+msgid "FOUR_LETTERS_WORD_014"
+msgstr "CAKE"
+
+#: locale/additional_translations.xml:293
+msgid "FOUR_LETTERS_WORD_256"
+msgstr "FLOT"
+
+#: locale/additional_translations.xml:13
+msgid "hundreds"
+msgstr "centaines"
+
+#: locale/additional_translations.xml:291
+msgid "FOUR_LETTERS_WORD_254"
+msgstr "CIAO"
+
+#: locale/additional_translations.xml:130
+msgid "FOUR_LETTERS_WORD_093"
+msgstr ""
+
+#: locale/additional_translations.xml:21
+msgid "How many tens of millions"
+msgstr "Nombre de dizaines de millions"
+
+#: locale/additional_translations.xml:134
+msgid "FOUR_LETTERS_WORD_097"
+msgstr "GANT"
+
+#: locale/additional_translations.xml:310
+msgid "FOUR_LETTERS_WORD_273"
+msgstr ""
+
+#: locale/additional_translations.xml:72
+msgid "FOUR_LETTERS_WORD_035"
+msgstr "BISE"
+
+#: locale/additional_translations.xml:273
+msgid "FOUR_LETTERS_WORD_236"
+msgstr ""
+
+#: locale/additional_translations.xml:65
+msgid "FOUR_LETTERS_WORD_028"
+msgstr "AIDE"
+
+#: locale/additional_translations.xml:103
+msgid "FOUR_LETTERS_WORD_066"
+msgstr "JOIE"
+
+#: locale/additional_translations.xml:47
+msgid "FOUR_LETTERS_WORD_010"
+msgstr "VRAC"
+
+#: locale/additional_translations.xml:286
+msgid "FOUR_LETTERS_WORD_249"
+msgstr "DING"
+
+#: locale/additional_translations.xml:292
+msgid "FOUR_LETTERS_WORD_255"
+msgstr "BUSE"
+
+#: locale/additional_translations.xml:81
+msgid "FOUR_LETTERS_WORD_044"
+msgstr ""
+
+#: locale/additional_translations.xml:45
+msgid "FOUR_LETTERS_WORD_008"
+msgstr "ACTE"
+
+#: locale/additional_translations.xml:109
+msgid "FOUR_LETTERS_WORD_072"
+msgstr ""
+
+#: locale/additional_translations.xml:147
+msgid "FOUR_LETTERS_WORD_110"
+msgstr ""
+
+#: locale/additional_translations.xml:37
+msgid "What is the quadruple of {number}?"
+msgstr "Quel est le quadruple de {number} ?"
+
+#: locale/additional_translations.xml:7
+msgid "hundreds of millions"
+msgstr "centaines de millions"
+
+#: sheet/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+msgid "Vocabulary of operations"
+msgstr "Vocabulaire des opérations"
+
+#: locale/additional_translations.xml:266
+msgid "FOUR_LETTERS_WORD_229"
+msgstr "CODE"
+
+#: locale/additional_translations.xml:104
+msgid "FOUR_LETTERS_WORD_067"
+msgstr ""
+
+#: locale/additional_translations.xml:94
+msgid "FOUR_LETTERS_WORD_057"
+msgstr "PAGE"
+
+#: locale/additional_translations.xml:187
+msgid "FOUR_LETTERS_WORD_150"
+msgstr "MARS"
+
+#: locale/additional_translations.xml:279
+msgid "FOUR_LETTERS_WORD_242"
+msgstr ""
+
+#: locale/additional_translations.xml:320
+msgid "FOUR_LETTERS_WORD_283"
+msgstr ""
+
+#: locale/additional_translations.xml:328
+msgid "FOUR_LETTERS_WORD_291"
+msgstr "CHOU"
+
+#: locale/additional_translations.xml:191
+msgid "FOUR_LETTERS_WORD_154"
+msgstr ""
+
+#: locale/additional_translations.xml:117
+msgid "FOUR_LETTERS_WORD_080"
+msgstr ""
+
+#: locale/additional_translations.xml:126
+msgid "FOUR_LETTERS_WORD_089"
+msgstr ""
+
+#: locale/additional_translations.xml:252
+msgid "FOUR_LETTERS_WORD_215"
+msgstr "LONG"
+
+#: locale/additional_translations.xml:50
+msgid "FOUR_LETTERS_WORD_013"
+msgstr ""
+
+#: locale/additional_translations.xml:303
+msgid "FOUR_LETTERS_WORD_266"
+msgstr "KILO"
+
+#: locale/additional_translations.xml:30
+msgid "How many hundredths"
+msgstr "Nombre de centièmes"
+
+#: locale/additional_translations.xml:184
+msgid "FOUR_LETTERS_WORD_147"
+msgstr ""
+
+#: locale/additional_translations.xml:12
+msgid "thousands"
+msgstr "milliers"
+
+#: locale/additional_translations.xml:80
+msgid "FOUR_LETTERS_WORD_043"
+msgstr "BLEU"
+
+#: locale/additional_translations.xml:11
+msgid "tens of thousands"
+msgstr "dizaines de milliers"
+
+#: locale/additional_translations.xml:162
+msgid "FOUR_LETTERS_WORD_125"
+msgstr ""
+
+#: locale/additional_translations.xml:193
+msgid "FOUR_LETTERS_WORD_156"
+msgstr "LAOS"
+
+#: locale/additional_translations.xml:218
+msgid "FOUR_LETTERS_WORD_181"
+msgstr ""
+
+#: locale/additional_translations.xml:151
+msgid "FOUR_LETTERS_WORD_114"
+msgstr ""
+
+#: locale/additional_translations.xml:272
+msgid "FOUR_LETTERS_WORD_235"
+msgstr "ANIS"
+
+#: locale/additional_translations.xml:171
+msgid "FOUR_LETTERS_WORD_134"
+msgstr ""
+
+#: locale/additional_translations.xml:105
+msgid "FOUR_LETTERS_WORD_068"
+msgstr "DAIM"
+
+#: sheet/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+msgid "Multiplications and divisions by 10, 100 and 1000"
+msgstr "Multiplications et divisions par 10, 100 et 1000"
+
+#: locale/additional_translations.xml:26
+msgid "How many hundreds"
+msgstr "Nombre de centaines"
+
+#: locale/additional_translations.xml:244
+msgid "FOUR_LETTERS_WORD_207"
+msgstr ""
+
+#: locale/additional_translations.xml:238
+msgid "FOUR_LETTERS_WORD_201"
+msgstr "THYM"
+
+#: locale/additional_translations.xml:213
+msgid "FOUR_LETTERS_WORD_176"
+msgstr ""
+
+#: locale/additional_translations.xml:269
+msgid "FOUR_LETTERS_WORD_232"
+msgstr "DAME"
+
+#: locale/additional_translations.xml:34
+msgid "What is the quarter of {number}?"
+msgstr "Quel est le quart de {number} ?"
+
+#: locale/additional_translations.xml:58
+msgid "FOUR_LETTERS_WORD_021"
+msgstr "VLAN"
+
+#: locale/additional_translations.xml:274
+msgid "FOUR_LETTERS_WORD_237"
+msgstr ""
+
+#: locale/additional_translations.xml:322
+msgid "FOUR_LETTERS_WORD_285"
+msgstr ""
+
+#: locale/additional_translations.xml:27
+msgid "How many tens"
+msgstr "Nombre de dizaines"
+
+#: locale/additional_translations.xml:249
+msgid "FOUR_LETTERS_WORD_212"
+msgstr "DICO"
+
+#: locale/additional_translations.xml:194
+msgid "FOUR_LETTERS_WORD_157"
+msgstr "MATH"
+
+#: locale/additional_translations.xml:199
+msgid "FOUR_LETTERS_WORD_162"
+msgstr "HALO"
+
+#: locale/additional_translations.xml:336
+msgid "FOUR_LETTERS_WORD_299"
+msgstr "FLUX"
+
+#: locale/additional_translations.xml:28
+msgid "How many units"
+msgstr "Nombre d'unités"
+
+#: locale/additional_translations.xml:271
+msgid "FOUR_LETTERS_WORD_234"
+msgstr ""
+
+#: locale/additional_translations.xml:163
+msgid "FOUR_LETTERS_WORD_126"
+msgstr "FAON"
+
+#: locale/additional_translations.xml:241
+msgid "FOUR_LETTERS_WORD_204"
+msgstr "PAIX"
+
+#: locale/additional_translations.xml:96
+msgid "FOUR_LETTERS_WORD_059"
+msgstr "INOX"
+
+#: locale/additional_translations.xml:79
+msgid "FOUR_LETTERS_WORD_042"
+msgstr ""
+
+#: locale/additional_translations.xml:145
+msgid "FOUR_LETTERS_WORD_108"
+msgstr ""
+
+#: locale/additional_translations.xml:232
+msgid "FOUR_LETTERS_WORD_195"
+msgstr ""
+
+#: locale/additional_translations.xml:35
+msgid "What is the double of {number}?"
+msgstr "Quel est le double de {number} ?"
+
+#: locale/additional_translations.xml:108
+msgid "FOUR_LETTERS_WORD_071"
+msgstr ""
+
+#: locale/additional_translations.xml:180
+msgid "FOUR_LETTERS_WORD_143"
+msgstr ""
+
+#: locale/additional_translations.xml:54
+msgid "FOUR_LETTERS_WORD_017"
+msgstr ""
+
+#: locale/additional_translations.xml:59
+msgid "FOUR_LETTERS_WORD_022"
+msgstr "LOIR"
+
+#: locale/additional_translations.xml:64
+msgid "FOUR_LETTERS_WORD_027"
+msgstr "GNOU"
+
+#: locale/additional_translations.xml:78
+msgid "FOUR_LETTERS_WORD_041"
+msgstr ""
+
+#: locale/additional_translations.xml:254
+msgid "FOUR_LETTERS_WORD_217"
+msgstr ""
+
+#: locale/additional_translations.xml:90
+msgid "FOUR_LETTERS_WORD_053"
+msgstr "IOTA"
+
+#: locale/additional_translations.xml:300
+msgid "FOUR_LETTERS_WORD_263"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+msgid "Test 2"
+msgstr "Test 2"
+
+#: locale/additional_translations.xml:205
+msgid "FOUR_LETTERS_WORD_168"
+msgstr ""
+
+#: locale/additional_translations.xml:265
+msgid "FOUR_LETTERS_WORD_228"
+msgstr ""
+
+#: locale/additional_translations.xml:316
+msgid "FOUR_LETTERS_WORD_279"
+msgstr "PAIN"
+
+#: locale/additional_translations.xml:281
+msgid "FOUR_LETTERS_WORD_244"
+msgstr "NEUF"
+
+#: locale/additional_translations.xml:176
+msgid "FOUR_LETTERS_WORD_139"
+msgstr ""
+
+#: locale/additional_translations.xml:257
+msgid "FOUR_LETTERS_WORD_220"
+msgstr "UBAC"
+
+#: locale/additional_translations.xml:148
+msgid "FOUR_LETTERS_WORD_111"
+msgstr "ZEST"
+
+#: locale/additional_translations.xml:209
+msgid "FOUR_LETTERS_WORD_172"
+msgstr "JOUR"
+
+#: locale/additional_translations.xml:311
+msgid "FOUR_LETTERS_WORD_274"
+msgstr ""
+
+#: locale/additional_translations.xml:76
+msgid "FOUR_LETTERS_WORD_039"
+msgstr ""
 
 #~ msgid ""
 #~ "The triangle {triangle_name} has a right angle in                        "

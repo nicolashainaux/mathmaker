@@ -25,6 +25,10 @@
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise id="mental_calculation" kind="tabular">
 
+		<question kind="rectangle" subkind="length_or_width" context="from_perimeter" picture="true">
+			<nb source="integers_5_20">1</nb>
+		</question>
+		
 		<question kind="area" subkind="rectangle">
 			<nb source="table_2_9">1</nb>
 			<nb source="table_15">1</nb>
@@ -49,15 +53,11 @@
 			<nb source="integers_5_20">2</nb>
 		</mix>
 			
-		<question kind="divi" subkind="direct" context="area_width_length_rectangle" picture="true">
+		<question kind="rectangle" subkind="length_or_width" context="from_area">
 			<nb source="table_2_9">1</nb>
 		</question>
 
-		<question kind="divi" subkind="direct" context="area_width_length_rectangle">
-			<nb source="table_2_9">1</nb>
-		</question>
-
-		<question kind="divi" subkind="direct" variant="decimal" context="area_width_length_rectangle" picture="true">
+		<question kind="rectangle" subkind="length_or_width" context="from_area" variant="decimal" picture="true">
 			<nb source="table_2_9">1</nb>
 		</question>
 

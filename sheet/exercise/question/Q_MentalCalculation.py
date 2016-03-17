@@ -160,6 +160,10 @@ SOURCES_TO_TRANSLATE = {'divi_direct_area_width_length_rectangle': \
                                                 rectangle_translations,
                         'area_rectangle': rectangle_translations,
                         'perimeter_rectangle': rectangle_translations,
+                        'rectangle_length_or_width_from_area': \
+                                                rectangle_translations,
+                        'rectangle_length_or_width_from_perimeter': \
+                                                rectangle_translations
                        }
 
 AVAILABLE_Q_KIND_VALUES = \
@@ -190,6 +194,27 @@ AVAILABLE_Q_KIND_VALUES = \
                               'integers_10_100',
                               'integers_5_20',
                               'bypass'],
+      'rectangle_length_or_width_from_perimeter': ['table_2_9',
+                              'table_2', 'table_3', 'table_4',
+                              'table_11',
+                              'table_15',
+                              'table_25',
+                              'decimal_and_10_100_1000',
+                              'integers_10_100_for_sums_diffs',
+                              'table_2_9_for_sums_diffs',
+                              'integers_10_100',
+                              'integers_5_20',
+                              'integer_3_10_decimal_3_10',
+                              'bypass'],
+      'rectangle_length_or_width_from_area': ['table_2_9',
+                                    'table_2_9_for_rectangles',
+                                    'table_2', 'table_3', 'table_4',
+                                    'table_11',
+                                    'table_15',
+                                    'table_25',
+                                    'decimal_and_10_100_1000',
+                                    'decimal_and_one_digit',
+                                    'bypass'],
       'multi_reversed': ['table_2_9',
                           'table_2', 'table_3', 'table_4',
                           'bypass'],
@@ -279,7 +304,8 @@ MODULES =  \
       'vocabulary_addi': mc_modules.vocabulary_addi,
       'vocabulary_subtr': mc_modules.vocabulary_subtr,
       'area_rectangle': mc_modules.area_rectangle,
-      'perimeter_rectangle': mc_modules.perimeter_rectangle
+      'perimeter_rectangle': mc_modules.perimeter_rectangle,
+      'rectangle_length_or_width': mc_modules.rectangle_length_or_width
 
 #     ('division', 'direct'): mc_modules.divi_dir,
 #     ('division', 'decimal_1'): mc_modules.divi_deci1,
