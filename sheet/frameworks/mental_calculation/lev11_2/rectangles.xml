@@ -29,7 +29,7 @@
 			<nb source="integers_5_20">1</nb>
 		</question>
 		
-		<question kind="area" subkind="rectangle">
+		<question kind="rectangle" subkind="area">
 			<nb source="table_2_9">1</nb>
 			<nb source="table_15">1</nb>
 			<nb source="table_25">1</nb>

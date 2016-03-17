@@ -56,6 +56,8 @@ X_LAYOUTS = {'default':
 
 MIN_ROW_HEIGHT = 0.5
 
+SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),
+                              ("rectangle", "perimeter")}
 
 # --------------------------------------------------------------------------
 ##
@@ -80,6 +82,12 @@ def get_q_kinds_from_file(file_name):
                 x_kind = child.attrib['kind']
             for subchild in child:
                 if subchild.tag == 'question':
+                    if (subchild.attrib['kind'], subchild.attrib['subkind']) \
+                        in SWAPPABLE_QKINDS_QSUBKINDS:
+                    #___
+                        (subchild.attrib['kind'], subchild.attrib['subkind']) \
+                        = (subchild.attrib['subkind'], subchild.attrib['kind'])
+
                     for elt in subchild:
                         questions += [[subchild.attrib,
                                        elt.attrib['source'], int(elt.text)]]
