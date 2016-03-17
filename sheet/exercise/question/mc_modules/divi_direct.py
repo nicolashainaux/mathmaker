@@ -122,5 +122,9 @@ class sub_object(object):
             .format(a=M.write_math_style2(self.dividend_str),
                     w=M.write_math_style2(self.divisor_str))
 
+    def h(self, M, **options):
+        return M.write_math_style2("........................ " \
+                                   + self.unit_length.into_str())
+
     def a(self, M, **options):
         return M.write_math_style2(self.result_str)

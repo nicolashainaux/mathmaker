@@ -57,5 +57,9 @@ class sub_object(object):
             .format(w=M.write_math_style2(self.w_str),
                     l=M.write_math_style2(self.l_str))
 
+    def h(self, M, **options):
+        return M.write_math_style2("........................ " \
+                                   + self.unit_length.into_str())
+
     def a(self, M, **options):
         return M.write_math_style2(self.perimeter_str)
