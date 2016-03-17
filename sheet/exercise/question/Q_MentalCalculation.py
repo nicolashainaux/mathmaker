@@ -583,6 +583,8 @@ class Q_MentalCalculation(Q_Structure):
 
         self.derived = True
 
+        options.update(q_options)
+
         # The call to the mother class __init__() method will set the
         # fields matching optional arguments which are so far:
         # self.q_kind, self.q_subkind
@@ -593,8 +595,6 @@ class Q_MentalCalculation(Q_Structure):
         # The purpose of this next line is to get the possibly modified
         # value of **options
         options = self.options
-
-        options.update(q_options)
 
         numbers_to_use = options['numbers_to_use']
         del options['numbers_to_use']

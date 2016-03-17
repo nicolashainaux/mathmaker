@@ -61,10 +61,24 @@ class Q_Structure(object):
         if 'number_of_the_question' in options:
             self.number = options['number_of_the_question']
 
+        q_kind_id = q_kind
+        q_context = ""
+        if 'context' in options:
+            q_context = options['context']
+
         try:
             AVAILABLE_Q_KIND_VALUES[q_kind]
         except KeyError:
-            raise error.OutOfRangeArgument(q_kind, str(AVAILABLE_Q_KIND_VALUES))
+            if q_context == "":
+                raise error.OutOfRangeArgument(q_kind,
+                                               str(AVAILABLE_Q_KIND_VALUES))
+            else:
+                try:
+                    AVAILABLE_Q_KIND_VALUES[q_kind + "_" + q_context]
+                    q_kind_id = q_kind + "_" + q_context
+                except KeyError:
+                    raise error.OutOfRangeArgument(q_kind + "_" + q_context,
+                                                   str(AVAILABLE_Q_KIND_VALUES))
 
         self.displayable_number = ""
 
@@ -83,9 +97,9 @@ class Q_Structure(object):
                     temp_options[key] = options[key]
             self.options = temp_options
 
-        if not q_subkind in AVAILABLE_Q_KIND_VALUES[q_kind]:
+        if not q_subkind in AVAILABLE_Q_KIND_VALUES[q_kind_id]:
             raise error.OutOfRangeArgument(q_subkind,
-                                           str(AVAILABLE_Q_KIND_VALUES[q_kind]))
+                                        str(AVAILABLE_Q_KIND_VALUES[q_kind_id]))
 
         # these two fields for the case of needing to know the them in the
         # answer_to_str() especially
