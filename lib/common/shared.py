@@ -43,8 +43,8 @@ def __get_list_of_words(language, nb_of_letters):
 
 	return output
 
-def four_letters_word(language):
-	memory = __get_list_of_words(language, 4)
+
+def infinite_generator(memory):
 	shuffle(memory)
 	collector = []
 
@@ -57,6 +57,11 @@ def four_letters_word(language):
 			shuffle(memory)
 
 		yield output
+
+
+def four_letters_word(language):
+	return infinite_generator(__get_list_of_words(language, 4))
+
 
 def init():
     global four_letters_word_generator
