@@ -43,6 +43,7 @@ USER_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                          'rank_word',
                          'integers_10_100',
                          'integers_5_20',
+                         'integer_3_10_decimal_3_10',
                          'integers_10_100_for_sums_diffs',
                          'decimals_0_20_1',
                          'decimal_and_10_100_1000',
@@ -62,6 +63,8 @@ AVAILABLE_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                               'integers_10_100',
                               'integers_10_100_for_rectangles',
                               'integers_5_20',
+                              'integer_3_10_decimal_3_10',
+                              'integer_3_10_decimal_3_10_for_rectangles',
                               'integers_5_20_for_rectangles',
                               'integers_10_100_for_sums_diffs',
                               'decimals_0_20_1',
@@ -149,7 +152,9 @@ SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
 rectangle_translations = {'table_2_9': 'table_2_9_for_rectangles',
                           'table_11': 'table_11_for_rectangles',
                           'integers_5_20': 'integers_5_20_for_rectangles',
-                          'integers_10_100': 'integers_10_100_for_rectangles'}
+                          'integers_10_100': 'integers_10_100_for_rectangles',
+                          'integer_3_10_decimal_3_10': \
+                                    'integer_3_10_decimal_3_10_for_rectangles'}
 
 SOURCES_TO_TRANSLATE = {'divi_direct_area_width_length_rectangle': \
                                                 rectangle_translations,
@@ -425,6 +430,18 @@ def generate_numbers(subkind):
 
     elif subkind == 'integers_5_20_for_rectangles':
         return { (i+5, j+5) for i in range(15) for j in range(15) if i < j }
+
+    elif subkind == 'integer_3_10_decimal_3_10':
+        return { (i+3, Decimal(str(j+30)) / Decimal("10")) \
+                            for i in range(7) \
+                            for j in range(70) \
+                if Decimal(str(i+3)) <= Decimal(str(j+30)) / Decimal("10") }
+
+    elif subkind == 'integer_3_10_decimal_3_10_for_rectangles':
+        return { (i+3, Decimal(str(j+30)) / Decimal("10")) \
+                            for i in range(7) \
+                            for j in range(70) \
+                if Decimal(str(i+3)) < Decimal(str(j+30)) / Decimal("10") }
 
     elif subkind == 'integers_10_100_for_sums_diffs':
         return set(random.sample({ (i+10, j+10) for i in range(90) \

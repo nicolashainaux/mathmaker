@@ -25,6 +25,7 @@
 			<xs:enumeration value="rank_word"/>
 			<xs:enumeration value="integers_10_100"/>
 			<xs:enumeration value="integers_5_20"/>
+			<xs:enumeration value="integer_3_10_decimal_3_10"/>
 			<xs:enumeration value="integers_10_100_for_sums_diffs"/>
 			<xs:enumeration value="decimals_0_20_1"/>
 			<xs:enumeration value="decimal_and_10_100_1000"/>
