@@ -693,7 +693,9 @@ class Value(Signed):
             unit_str = ""
 
             if 'display_unit' in options and options['display_unit'] in YES:
-                unit_str = self.unit.into_str(**options)
+                unit_str = self.unit.into_str(**options) \
+                                            if isinstance(self.unit, Unit) \
+                                            else self.unit
 
             return locale.str(self.raw_value) + unit_str
 

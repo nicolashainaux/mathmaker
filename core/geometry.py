@@ -251,7 +251,8 @@ class Polygon(Drawable):
                                          + "sides (fake lengths have not been" \
                                          + " set yet).")
         else:
-            return Value(sum([s.length.raw_value for s in self.side]))
+            return Value(sum([s.length.raw_value for s in self.side]),
+                         unit=self.side[0].length.unit)
 
 
 
@@ -582,9 +583,16 @@ class Rectangle(Polygon):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Rectangle's area
+    #   @todo  This method assumes width and length both have the same Unit
     @property
     def area(self):
-        return Value(Product([self.width, self.length]).evaluate())
+        if self.width.get_unit() != "":
+            return Value(Product([Item(self.width),
+                                  Item(self.length)]).evaluate(),
+                         unit=Unit(self.width.get_unit().name, exponent=2))
+        else:
+            return Value(Product([Item(self.width),
+                                  Item(self.length)]).evaluate())
 
 
 
