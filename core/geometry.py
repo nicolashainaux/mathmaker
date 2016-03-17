@@ -590,6 +590,24 @@ class Rectangle(Polygon):
 
 
 
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Sets the length and width of the Rectangle
+    #   @param lengths_list A list of 2 Values
+    def set_lengths(self, lengths_list):
+        if len(lengths_list) != 2:
+            raise error.WrongArgument("A list of length " \
+                                        + str(len(lengths_list)),
+                                      "A list of length 2.")
+
+        super(Rectangle, self).set_lengths([lengths_list[0], lengths_list[1],
+                                            lengths_list[0], lengths_list[1]])
+
+
+
+
+
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
