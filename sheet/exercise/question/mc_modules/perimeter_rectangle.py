@@ -34,12 +34,14 @@ class sub_object(object):
         units.sub_object.__init__(self, **options)
         rectangles.sub_object.__init__(self, numbers_to_use, **options)
 
-        self.perimeter = Item(Product([Sum([self.w,self.l]),
-                                       Item(2)]).evaluate(),
-                              unit=self.unit_length)
-
-        self.perimeter = self.perimeter.into_str(force_expression_begins=True,
-                                                 display_unit=True)
+        self.w_str = self.rectangle.width.into_str(force_expression_begins=True,
+                                                   display_unit=True)
+        self.l_str = self.rectangle.length.into_str(\
+                                                   force_expression_begins=True,
+                                                   display_unit=True)
+        self.perimeter_str = self.rectangle.perimeter.into_str(\
+                                                   force_expression_begins=True,
+                                                   display_unit=True)
 
     def q(self, M, **options):
         if self.picture:
@@ -56,4 +58,4 @@ class sub_object(object):
                     l=M.write_math_style2(self.l_str))
 
     def a(self, M, **options):
-        return M.write_math_style2(self.perimeter)
+        return M.write_math_style2(self.perimeter_str)

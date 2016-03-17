@@ -32,11 +32,14 @@ class sub_object(object):
         minimal_setup.sub_object.__init__(self, **options)
         rectangles.sub_object.__init__(self, numbers_to_use, **options)
 
-        self.product = Item(Product([self.w,self.l]).evaluate(),
-                            unit=self.unit_area)
-        self.product = self.product.into_str(force_expression_begins=True,
-                                             display_unit=True)
-
+        self.w_str = self.rectangle.width.into_str(force_expression_begins=True,
+                                                   display_unit=True)
+        self.l_str = self.rectangle.length.into_str(\
+                                                   force_expression_begins=True,
+                                                   display_unit=True)
+        self.area_str = self.rectangle.area.into_str(\
+                                                   force_expression_begins=True,
+                                                   display_unit=True)
 
     def q(self, M, **options):
         if self.picture:
@@ -53,4 +56,4 @@ class sub_object(object):
                     l=M.write_math_style2(self.l_str))
 
     def a(self, M, **options):
-        return M.write_math_style2(self.product)
+        return M.write_math_style2(self.area_str)

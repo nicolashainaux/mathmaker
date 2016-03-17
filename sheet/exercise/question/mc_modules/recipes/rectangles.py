@@ -38,32 +38,19 @@ class sub_object(object):
         if not hasattr(self, 'unit_length'):
             units.sub_object.__init__(self, **options)
 
-        nb_list = [self.nb1, self.nb2]
+        rectangle_name = next(shared.four_letters_word_generator)
 
-        self.w = min(nb_list)
-        self.l = max(nb_list)
+        w = Value(min([self.nb1, self.nb2]), unit=self.unit_length)
+        l = Value(max([self.nb1, self.nb2]), unit=self.unit_length)
 
-        self.w_val = Value(self.w, unit=self.unit_length)
-        self.w_str = Item(self.w, unit=self.unit_length)
-        self.w_str = self.w_str.into_str(force_expression_begins=True,
-                                         display_unit=True)
+        self.rectangle = Rectangle([Point([rectangle_name[3], (0,0)]),
+                                    3,
+                                    1.5,
+                                    rectangle_name[2],
+                                    rectangle_name[1],
+                                    rectangle_name[0]],
+                                    read_name_clockwise=True)
 
-        self.l_val = Value(self.l, unit=self.unit_length)
-        self.l_str = Item(self.l, unit=self.unit_length)
-        self.l_str = self.l_str.into_str(force_expression_begins=True,
-                                         display_unit=True)
+        self.rectangle.set_lengths([l, w])
 
-        self.rectangle = None
-        if self.picture:
-            rectangle_name = next(shared.four_letters_word_generator)
-            self.rectangle = Rectangle([Point([rectangle_name[3], (0,0)]),
-                                        3,
-                                        1.5,
-                                        rectangle_name[2],
-                                        rectangle_name[1],
-                                        rectangle_name[0]],
-                                        read_name_clockwise=True)
-
-            self.rectangle.set_lengths([self.l_val, self.w_val])
-
-            self.rectangle.setup_labels([False, False, True, True])
+        self.rectangle.setup_labels([False, False, True, True])
