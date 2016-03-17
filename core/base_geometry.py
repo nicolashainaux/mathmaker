@@ -376,11 +376,11 @@ class Segment(Drawable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Will set length as the Segment's label, or "?", or nothing
-    #   @param flag If flag evaluates to None, the Segment's label will be set
-    #               to "?". Otherwise, if it evaluates to False, it will be
+    #   @param flag If flag evaluates to "?"|None, the Segment's label will be
+    #               set to "?". Otherwise, if it evaluates to False, it will be
     #               set to "", and to True, it will be set to its length.
     def setup_label(self, flag):
-        if flag == None:
+        if flag == None or flag == "?":
             self.label = Value("?")
 
         elif flag:
