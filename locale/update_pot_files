@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# This function will replace the default headers by more appropriated ones.
+# It takes $1 as the file name
+# $2 as the title to insert
+set_header () {
+
+    sed -i 's/Copyright (C) YEAR/Copyright (C) 2006-'`date +%Y`'/' "$1"
+    sed -i 's/This file is distributed under the same license as the PACKAGE package/This file is distributed under the same license as the mathmaker package/' "$1"
+    sed -i 's/SOME DESCRIPTIVE TITLE/'"$2"'/' "$1"
+    sed -i 's/charset=CHARSET/charset=UTF-8/' "$1"
+
+}
+
+cd ..
+xgettext --package-name="mathmaker" --package-version="0.6" --copyright-holder="Nicolas Hainaux" --msgid-bugs-address="nh.techn@gmail.com" --keyword=_ --output=locale/mathmaker_updates.pot */*.py */*/*.py */*/*/*.py */*/*/*/*.py */*/*/*/*/*.py
+
+cd locale/
+
+./check_py_updates
+./check_xml_files
+
+echo "Removing mathmaker_updates.pot"
+rm mathmaker_updates.pot
+#set_header mathmaker.pot 'MATHMAKER TEMPLATE PO FILE'
+
+#./check_xml_files --output /home/nico/dev/mathmaker/mathmaker/locale/four_letters_words.pot --keywords w4l
+#set_header four_letters_words.pot 'MATHMAKER W4L PO FILE'
