@@ -1,0 +1,1218 @@
+# MATHMAKER-FOUR LETTERS WORDS TEMPLATE PO FILE.
+# Copyright (C) 2006-2016 Nicolas Hainaux
+# This file is distributed under the same license as the mathmaker package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mathmaker 0.6\n"
+"Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
+"POT-Creation-Date: 2016-03-17 13:12+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#: locale/xml_additions/w4l/w4l.xml:57
+msgid "FOUR_LETTERS_WORD_052"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:289
+msgid "FOUR_LETTERS_WORD_284"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:285
+msgid "FOUR_LETTERS_WORD_280"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:158
+msgid "FOUR_LETTERS_WORD_153"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:203
+msgid "FOUR_LETTERS_WORD_198"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:59
+msgid "FOUR_LETTERS_WORD_054"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:162
+msgid "FOUR_LETTERS_WORD_157"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:128
+msgid "FOUR_LETTERS_WORD_123"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:174
+msgid "FOUR_LETTERS_WORD_169"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:13
+msgid "FOUR_LETTERS_WORD_008"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:274
+msgid "FOUR_LETTERS_WORD_269"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:258
+msgid "FOUR_LETTERS_WORD_253"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:6
+msgid "FOUR_LETTERS_WORD_001"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:60
+msgid "FOUR_LETTERS_WORD_055"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:178
+msgid "FOUR_LETTERS_WORD_173"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:217
+msgid "FOUR_LETTERS_WORD_212"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:169
+msgid "FOUR_LETTERS_WORD_164"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:98
+msgid "FOUR_LETTERS_WORD_093"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:219
+msgid "FOUR_LETTERS_WORD_214"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:277
+msgid "FOUR_LETTERS_WORD_272"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:161
+msgid "FOUR_LETTERS_WORD_156"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:227
+msgid "FOUR_LETTERS_WORD_222"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:291
+msgid "FOUR_LETTERS_WORD_286"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:97
+msgid "FOUR_LETTERS_WORD_092"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:244
+msgid "FOUR_LETTERS_WORD_239"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:233
+msgid "FOUR_LETTERS_WORD_228"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:100
+msgid "FOUR_LETTERS_WORD_095"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:275
+msgid "FOUR_LETTERS_WORD_270"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:43
+msgid "FOUR_LETTERS_WORD_038"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:36
+msgid "FOUR_LETTERS_WORD_031"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:24
+msgid "FOUR_LETTERS_WORD_019"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:166
+msgid "FOUR_LETTERS_WORD_161"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:93
+msgid "FOUR_LETTERS_WORD_088"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:212
+msgid "FOUR_LETTERS_WORD_207"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:99
+msgid "FOUR_LETTERS_WORD_094"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:278
+msgid "FOUR_LETTERS_WORD_273"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:74
+msgid "FOUR_LETTERS_WORD_069"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:243
+msgid "FOUR_LETTERS_WORD_238"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:211
+msgid "FOUR_LETTERS_WORD_206"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:108
+msgid "FOUR_LETTERS_WORD_103"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:266
+msgid "FOUR_LETTERS_WORD_261"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:280
+msgid "FOUR_LETTERS_WORD_275"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:172
+msgid "FOUR_LETTERS_WORD_167"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:175
+msgid "FOUR_LETTERS_WORD_170"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:282
+msgid "FOUR_LETTERS_WORD_277"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:160
+msgid "FOUR_LETTERS_WORD_155"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:27
+msgid "FOUR_LETTERS_WORD_022"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:300
+msgid "FOUR_LETTERS_WORD_295"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:94
+msgid "FOUR_LETTERS_WORD_089"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:11
+msgid "FOUR_LETTERS_WORD_006"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:260
+msgid "FOUR_LETTERS_WORD_255"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:41
+msgid "FOUR_LETTERS_WORD_036"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:223
+msgid "FOUR_LETTERS_WORD_218"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:20
+msgid "FOUR_LETTERS_WORD_015"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:216
+msgid "FOUR_LETTERS_WORD_211"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:226
+msgid "FOUR_LETTERS_WORD_221"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:241
+msgid "FOUR_LETTERS_WORD_236"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:113
+msgid "FOUR_LETTERS_WORD_108"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:259
+msgid "FOUR_LETTERS_WORD_254"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:208
+msgid "FOUR_LETTERS_WORD_203"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:38
+msgid "FOUR_LETTERS_WORD_033"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:186
+msgid "FOUR_LETTERS_WORD_181"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:281
+msgid "FOUR_LETTERS_WORD_276"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:240
+msgid "FOUR_LETTERS_WORD_235"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:271
+msgid "FOUR_LETTERS_WORD_266"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:119
+msgid "FOUR_LETTERS_WORD_114"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:150
+msgid "FOUR_LETTERS_WORD_145"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:257
+msgid "FOUR_LETTERS_WORD_252"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:37
+msgid "FOUR_LETTERS_WORD_032"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:136
+msgid "FOUR_LETTERS_WORD_131"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:220
+msgid "FOUR_LETTERS_WORD_215"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:66
+msgid "FOUR_LETTERS_WORD_061"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:261
+msgid "FOUR_LETTERS_WORD_256"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:130
+msgid "FOUR_LETTERS_WORD_125"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:105
+msgid "FOUR_LETTERS_WORD_100"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:167
+msgid "FOUR_LETTERS_WORD_162"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:50
+msgid "FOUR_LETTERS_WORD_045"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:61
+msgid "FOUR_LETTERS_WORD_056"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:304
+msgid "FOUR_LETTERS_WORD_299"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:73
+msgid "FOUR_LETTERS_WORD_068"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:229
+msgid "FOUR_LETTERS_WORD_224"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:72
+msgid "FOUR_LETTERS_WORD_067"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:47
+msgid "FOUR_LETTERS_WORD_042"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:40
+msgid "FOUR_LETTERS_WORD_035"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:115
+msgid "FOUR_LETTERS_WORD_110"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:140
+msgid "FOUR_LETTERS_WORD_135"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:75
+msgid "FOUR_LETTERS_WORD_070"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:46
+msgid "FOUR_LETTERS_WORD_041"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:164
+msgid "FOUR_LETTERS_WORD_159"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:102
+msgid "FOUR_LETTERS_WORD_097"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:245
+msgid "FOUR_LETTERS_WORD_240"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:143
+msgid "FOUR_LETTERS_WORD_138"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:294
+msgid "FOUR_LETTERS_WORD_289"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:215
+msgid "FOUR_LETTERS_WORD_210"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:163
+msgid "FOUR_LETTERS_WORD_158"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:17
+msgid "FOUR_LETTERS_WORD_012"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:263
+msgid "FOUR_LETTERS_WORD_258"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:221
+msgid "FOUR_LETTERS_WORD_216"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:206
+msgid "FOUR_LETTERS_WORD_201"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:107
+msgid "FOUR_LETTERS_WORD_102"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:124
+msgid "FOUR_LETTERS_WORD_119"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:14
+msgid "FOUR_LETTERS_WORD_009"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:127
+msgid "FOUR_LETTERS_WORD_122"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:171
+msgid "FOUR_LETTERS_WORD_166"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:52
+msgid "FOUR_LETTERS_WORD_047"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:88
+msgid "FOUR_LETTERS_WORD_083"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:121
+msgid "FOUR_LETTERS_WORD_116"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:184
+msgid "FOUR_LETTERS_WORD_179"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:138
+msgid "FOUR_LETTERS_WORD_133"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:272
+msgid "FOUR_LETTERS_WORD_267"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:44
+msgid "FOUR_LETTERS_WORD_039"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:265
+msgid "FOUR_LETTERS_WORD_260"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:170
+msgid "FOUR_LETTERS_WORD_165"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:81
+msgid "FOUR_LETTERS_WORD_076"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:292
+msgid "FOUR_LETTERS_WORD_287"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:142
+msgid "FOUR_LETTERS_WORD_137"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:129
+msgid "FOUR_LETTERS_WORD_124"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:159
+msgid "FOUR_LETTERS_WORD_154"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:157
+msgid "FOUR_LETTERS_WORD_152"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:109
+msgid "FOUR_LETTERS_WORD_104"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:204
+msgid "FOUR_LETTERS_WORD_199"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:78
+msgid "FOUR_LETTERS_WORD_073"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:156
+msgid "FOUR_LETTERS_WORD_151"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:65
+msgid "FOUR_LETTERS_WORD_060"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:218
+msgid "FOUR_LETTERS_WORD_213"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:302
+msgid "FOUR_LETTERS_WORD_297"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:209
+msgid "FOUR_LETTERS_WORD_204"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:213
+msgid "FOUR_LETTERS_WORD_208"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:238
+msgid "FOUR_LETTERS_WORD_233"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:256
+msgid "FOUR_LETTERS_WORD_251"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:191
+msgid "FOUR_LETTERS_WORD_186"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:192
+msgid "FOUR_LETTERS_WORD_187"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:49
+msgid "FOUR_LETTERS_WORD_044"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:80
+msgid "FOUR_LETTERS_WORD_075"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:32
+msgid "FOUR_LETTERS_WORD_027"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:182
+msgid "FOUR_LETTERS_WORD_177"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:133
+msgid "FOUR_LETTERS_WORD_128"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:71
+msgid "FOUR_LETTERS_WORD_066"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:273
+msgid "FOUR_LETTERS_WORD_268"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:298
+msgid "FOUR_LETTERS_WORD_293"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:151
+msgid "FOUR_LETTERS_WORD_146"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:253
+msgid "FOUR_LETTERS_WORD_248"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:92
+msgid "FOUR_LETTERS_WORD_087"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:207
+msgid "FOUR_LETTERS_WORD_202"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:96
+msgid "FOUR_LETTERS_WORD_091"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:198
+msgid "FOUR_LETTERS_WORD_193"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:183
+msgid "FOUR_LETTERS_WORD_178"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:15
+msgid "FOUR_LETTERS_WORD_010"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:9
+msgid "FOUR_LETTERS_WORD_004"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:214
+msgid "FOUR_LETTERS_WORD_209"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:70
+msgid "FOUR_LETTERS_WORD_065"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:82
+msgid "FOUR_LETTERS_WORD_077"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:231
+msgid "FOUR_LETTERS_WORD_226"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:210
+msgid "FOUR_LETTERS_WORD_205"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:267
+msgid "FOUR_LETTERS_WORD_262"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:225
+msgid "FOUR_LETTERS_WORD_220"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:139
+msgid "FOUR_LETTERS_WORD_134"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:199
+msgid "FOUR_LETTERS_WORD_194"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:33
+msgid "FOUR_LETTERS_WORD_028"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:287
+msgid "FOUR_LETTERS_WORD_282"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:51
+msgid "FOUR_LETTERS_WORD_046"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:7
+msgid "FOUR_LETTERS_WORD_002"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:235
+msgid "FOUR_LETTERS_WORD_230"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:132
+msgid "FOUR_LETTERS_WORD_127"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:249
+msgid "FOUR_LETTERS_WORD_244"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:196
+msgid "FOUR_LETTERS_WORD_191"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:288
+msgid "FOUR_LETTERS_WORD_283"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:236
+msgid "FOUR_LETTERS_WORD_231"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:87
+msgid "FOUR_LETTERS_WORD_082"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:187
+msgid "FOUR_LETTERS_WORD_182"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:85
+msgid "FOUR_LETTERS_WORD_080"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:197
+msgid "FOUR_LETTERS_WORD_192"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:10
+msgid "FOUR_LETTERS_WORD_005"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:68
+msgid "FOUR_LETTERS_WORD_063"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:228
+msgid "FOUR_LETTERS_WORD_223"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:179
+msgid "FOUR_LETTERS_WORD_174"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:31
+msgid "FOUR_LETTERS_WORD_026"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:48
+msgid "FOUR_LETTERS_WORD_043"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:56
+msgid "FOUR_LETTERS_WORD_051"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:42
+msgid "FOUR_LETTERS_WORD_037"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:155
+msgid "FOUR_LETTERS_WORD_150"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:123
+msgid "FOUR_LETTERS_WORD_118"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:101
+msgid "FOUR_LETTERS_WORD_096"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:58
+msgid "FOUR_LETTERS_WORD_053"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:153
+msgid "FOUR_LETTERS_WORD_148"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:250
+msgid "FOUR_LETTERS_WORD_245"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:270
+msgid "FOUR_LETTERS_WORD_265"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:264
+msgid "FOUR_LETTERS_WORD_259"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:8
+msgid "FOUR_LETTERS_WORD_003"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:255
+msgid "FOUR_LETTERS_WORD_250"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:84
+msgid "FOUR_LETTERS_WORD_079"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:190
+msgid "FOUR_LETTERS_WORD_185"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:90
+msgid "FOUR_LETTERS_WORD_085"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:12
+msgid "FOUR_LETTERS_WORD_007"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:230
+msgid "FOUR_LETTERS_WORD_225"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:234
+msgid "FOUR_LETTERS_WORD_229"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:262
+msgid "FOUR_LETTERS_WORD_257"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:299
+msgid "FOUR_LETTERS_WORD_294"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:189
+msgid "FOUR_LETTERS_WORD_184"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:120
+msgid "FOUR_LETTERS_WORD_115"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:110
+msgid "FOUR_LETTERS_WORD_105"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:305
+msgid "FOUR_LETTERS_WORD_300"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:269
+msgid "FOUR_LETTERS_WORD_264"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:53
+msgid "FOUR_LETTERS_WORD_048"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:18
+msgid "FOUR_LETTERS_WORD_013"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:137
+msgid "FOUR_LETTERS_WORD_132"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:224
+msgid "FOUR_LETTERS_WORD_219"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:95
+msgid "FOUR_LETTERS_WORD_090"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:297
+msgid "FOUR_LETTERS_WORD_292"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:125
+msgid "FOUR_LETTERS_WORD_120"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:131
+msgid "FOUR_LETTERS_WORD_126"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:77
+msgid "FOUR_LETTERS_WORD_072"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:188
+msgid "FOUR_LETTERS_WORD_183"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:290
+msgid "FOUR_LETTERS_WORD_285"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:295
+msgid "FOUR_LETTERS_WORD_290"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:152
+msgid "FOUR_LETTERS_WORD_147"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:106
+msgid "FOUR_LETTERS_WORD_101"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:201
+msgid "FOUR_LETTERS_WORD_196"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:177
+msgid "FOUR_LETTERS_WORD_172"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:30
+msgid "FOUR_LETTERS_WORD_025"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:147
+msgid "FOUR_LETTERS_WORD_142"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:173
+msgid "FOUR_LETTERS_WORD_168"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:34
+msgid "FOUR_LETTERS_WORD_029"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:29
+msgid "FOUR_LETTERS_WORD_024"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:54
+msgid "FOUR_LETTERS_WORD_049"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:114
+msgid "FOUR_LETTERS_WORD_109"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:194
+msgid "FOUR_LETTERS_WORD_189"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:117
+msgid "FOUR_LETTERS_WORD_112"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:232
+msgid "FOUR_LETTERS_WORD_227"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:283
+msgid "FOUR_LETTERS_WORD_278"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:25
+msgid "FOUR_LETTERS_WORD_020"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:205
+msgid "FOUR_LETTERS_WORD_200"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:55
+msgid "FOUR_LETTERS_WORD_050"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:21
+msgid "FOUR_LETTERS_WORD_016"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:64
+msgid "FOUR_LETTERS_WORD_059"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:141
+msgid "FOUR_LETTERS_WORD_136"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:301
+msgid "FOUR_LETTERS_WORD_296"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:26
+msgid "FOUR_LETTERS_WORD_021"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:91
+msgid "FOUR_LETTERS_WORD_086"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:247
+msgid "FOUR_LETTERS_WORD_242"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:168
+msgid "FOUR_LETTERS_WORD_163"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:303
+msgid "FOUR_LETTERS_WORD_298"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:22
+msgid "FOUR_LETTERS_WORD_017"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:202
+msgid "FOUR_LETTERS_WORD_197"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:268
+msgid "FOUR_LETTERS_WORD_263"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:222
+msgid "FOUR_LETTERS_WORD_217"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:104
+msgid "FOUR_LETTERS_WORD_099"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:135
+msgid "FOUR_LETTERS_WORD_130"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:165
+msgid "FOUR_LETTERS_WORD_160"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:286
+msgid "FOUR_LETTERS_WORD_281"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:246
+msgid "FOUR_LETTERS_WORD_241"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:200
+msgid "FOUR_LETTERS_WORD_195"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:67
+msgid "FOUR_LETTERS_WORD_062"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:149
+msgid "FOUR_LETTERS_WORD_144"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:39
+msgid "FOUR_LETTERS_WORD_034"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:111
+msgid "FOUR_LETTERS_WORD_106"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:76
+msgid "FOUR_LETTERS_WORD_071"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:19
+msgid "FOUR_LETTERS_WORD_014"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:293
+msgid "FOUR_LETTERS_WORD_288"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:63
+msgid "FOUR_LETTERS_WORD_058"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:62
+msgid "FOUR_LETTERS_WORD_057"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:79
+msgid "FOUR_LETTERS_WORD_074"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:237
+msgid "FOUR_LETTERS_WORD_232"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:118
+msgid "FOUR_LETTERS_WORD_113"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:69
+msgid "FOUR_LETTERS_WORD_064"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:195
+msgid "FOUR_LETTERS_WORD_190"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:185
+msgid "FOUR_LETTERS_WORD_180"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:181
+msgid "FOUR_LETTERS_WORD_176"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:251
+msgid "FOUR_LETTERS_WORD_246"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:28
+msgid "FOUR_LETTERS_WORD_023"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:248
+msgid "FOUR_LETTERS_WORD_243"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:89
+msgid "FOUR_LETTERS_WORD_084"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:180
+msgid "FOUR_LETTERS_WORD_175"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:242
+msgid "FOUR_LETTERS_WORD_237"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:112
+msgid "FOUR_LETTERS_WORD_107"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:144
+msgid "FOUR_LETTERS_WORD_139"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:23
+msgid "FOUR_LETTERS_WORD_018"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:146
+msgid "FOUR_LETTERS_WORD_141"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:252
+msgid "FOUR_LETTERS_WORD_247"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:176
+msgid "FOUR_LETTERS_WORD_171"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:284
+msgid "FOUR_LETTERS_WORD_279"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:35
+msgid "FOUR_LETTERS_WORD_030"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:276
+msgid "FOUR_LETTERS_WORD_271"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:279
+msgid "FOUR_LETTERS_WORD_274"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:16
+msgid "FOUR_LETTERS_WORD_011"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:254
+msgid "FOUR_LETTERS_WORD_249"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:145
+msgid "FOUR_LETTERS_WORD_140"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:148
+msgid "FOUR_LETTERS_WORD_143"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:154
+msgid "FOUR_LETTERS_WORD_149"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:83
+msgid "FOUR_LETTERS_WORD_078"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:239
+msgid "FOUR_LETTERS_WORD_234"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:296
+msgid "FOUR_LETTERS_WORD_291"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:116
+msgid "FOUR_LETTERS_WORD_111"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:103
+msgid "FOUR_LETTERS_WORD_098"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:86
+msgid "FOUR_LETTERS_WORD_081"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:126
+msgid "FOUR_LETTERS_WORD_121"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:45
+msgid "FOUR_LETTERS_WORD_040"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:193
+msgid "FOUR_LETTERS_WORD_188"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:122
+msgid "FOUR_LETTERS_WORD_117"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:134
+msgid "FOUR_LETTERS_WORD_129"
+msgstr ""

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is only intended to provide additional strings for translation -->
+
+<nothing>
+	<word text="billions"/>
+	<word text="hundreds of millions"/>
+	<word text="tens of millions"/>
+	<word text="millions"/>
+	<word text="hundreds of thousands"/>
+	<word text="tens of thousands"/>
+	<word text="thousands"/>
+	<word text="hundreds"/>
+	<word text="tens"/>
+	<word text="units"/>
+	<word text="tenths"/>
+	<word text="hundredths"/>
+	<word text="thousandths"/>
+	<word text="How many billions"/>
+	<word text="How many hundreds of millions"/>
+	<word text="How many tens of millions"/>
+   	<word text="How many millions"/>
+	<word text="How many hundreds of thousands"/>
+	<word text="How many tens of thousands"/>
+	<word text="How many thousands"/>
+	<word text="How many hundreds"/>
+	<word text="How many tens"/>
+	<word text="How many units"/>
+	<word text="How many tenths"/>
+	<word text="How many hundredths"/>
+	<word text="How many thousandths"/>
+	<word text="What is the half of {number}?"/>
+	<word text="What is the third of {number}?"/>
+	<word text="What is the quarter of {number}?"/>
+	<word text="What is the double of {number}?"/>
+	<word text="What is the triple of {number}?"/>
+	<word text="What is the quadruple of {number}?"/>
+</nothing>

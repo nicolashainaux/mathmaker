@@ -36,6 +36,8 @@ LOCALE_PATH = ABSPATH[:__l2-__l1]
 DEFAULT_KEYWORDS = ['header', 'title', 'text', 'subtitle', 'answers_title']
 MAIN_POT_FILE_PATH = LOCALE_PATH + 'mathmaker.pot'
 
+DIR_TO_BROWSE = "."
+
 os.chdir('..')
 PROJECT_ROOT = os.getcwd()
 
@@ -112,9 +114,12 @@ def browse_files(path, keywords_list):
 def main():
 	parser = argparse.ArgumentParser(description=\
 						'Import strings to be translated from xml files.')
-	parser.add_argument('--output', action='store', dest='filename',
+	parser.add_argument('--potfile', action='store', dest='filename',
 						default=MAIN_POT_FILE_PATH,
 						help='to provide an alternative pot file to process.')
+	parser.add_argument('--dir', action='store', dest='dir_to_browse',
+						default=DIR_TO_BROWSE,
+						help='to provide an specific directory to browse.')
 	parser.add_argument('--keywords', action='store', dest='keywords_list',
 						nargs='*', default=DEFAULT_KEYWORDS,
 						help='to provide other keywords.')
@@ -122,13 +127,21 @@ def main():
 
 	if not os.path.isfile(args.filename):
 		raise FileNotFoundError(
-					errno.ENOENT, os.strerror(errno.ENOENT), args.filename)
+				errno.ENOENT, os.strerror(errno.ENOENT), args.filename)
 
-	sys.stdout.write("[check_xml_files] Starting...\n")
+	if not os.path.exists(args.dir_to_browse):
+		raise FileNotFoundError(
+				errno.ENOENT, os.strerror(errno.ENOENT), args.dir_to_browse)
+
+	if not os.path.isdir(args.dir_to_browse):
+		raise NotADirectoryError(
+				errno.ENOTDIR, os.strerror(errno.ENOTDIR), args.dir_to_browse)
+
+	sys.stdout.write("[merge_xml_updates_to_pot_file] Starting...\n")
 	sys.stdout.write("Will look for labels: " \
  					+ str(args.keywords_list) + "\n")
 
-	browse_files('.', args.keywords_list)
+	browse_files(args.dir_to_browse, args.keywords_list)
 	xml_pot_file = polib.POFile()
 	for sentence in collected_strings:
 		occ = []
@@ -180,7 +193,7 @@ def main():
 		sys.stderr.write("No changes to save. " + str(args.filename) \
 						 + " remains unchanged.\n")
 
-	sys.stdout.write("[check_xml_files] Done.\n")
+	sys.stdout.write("[merge_xml_updates_to_pot_file] Done.\n\n")
 
 
 if __name__ == '__main__':
