@@ -19,27 +19,35 @@
 # You should have received a copy of the GNU General Public License
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
+import sys
 import polib
 from random import shuffle
 
 from . import settings
+#import lib.common.surnames
 
 NB = {3 : "THREE", 4 : "FOUR", 5 : "FIVE", 6 : "SIX"}
 
-def __get_list_of_words(language, nb_of_letters):
+def __retrieve_from_po_file(language, nb_of_letters):
 	output = []
 	po = polib.pofile(settings.localedir \
 					+ settings.language \
 					+ "/LC_MESSAGES/" \
-					+ "mathmaker"\
+					+ "w" + str(nb_of_letters) + "l" \
 					+ ".po")
 
 	for entry in po:
-		if entry.msgid[:-3] == NB[nb_of_letters] + "_LETTERS_WORD_" \
-			and entry.msgstr != "":
-		#___
+		if len(entry.msgstr) == nb_of_letters:
 			output.append(entry.msgstr)
+
+	return output
+
+
+def __get_list_of_words(language, nb_of_letters):
+	output = __retrieve_from_po_file(language, nb_of_letters)
+
+	if len(output) < 20:
+		output.append(__retrieve_from_po_file('en', nb_of_letters))
 
 	return output
 
@@ -63,6 +71,13 @@ def four_letters_word(language):
 	return infinite_generator(__get_list_of_words(language, 4))
 
 
+#def surnames():
+#	return infinite_generator(lib.common.surnames.LIST)
+
+
 def init():
     global four_letters_word_generator
+#	global surnames_generator
+
     four_letters_word_generator = four_letters_word(settings.language)
+#	surnames_generator = surnames()
