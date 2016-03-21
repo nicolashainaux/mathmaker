@@ -1,0 +1,1219 @@
+# MATHMAKER-FOUR LETTERS WORDS TEMPLATE PO FILE.
+# Copyright (C) 2006-2016 Nicolas Hainaux
+# This file is distributed under the same license as the mathmaker package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mathmaker 0.6\n"
+"Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
+"POT-Creation-Date: 2016-03-17 13:12+0100\n"
+"PO-Revision-Date: 2016-03-21 16:27+0100\n"
+"Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
+"Language-Team:  <nh.techn@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: fr_FR\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: locale/xml_additions/names/f/feminine.xml:97
+msgid "FEMININE_NAME_092"
+msgstr "Marie"
+
+#: locale/xml_additions/names/f/feminine.xml:63
+msgid "FEMININE_NAME_058"
+msgstr "Nathalie"
+
+#: locale/xml_additions/names/f/feminine.xml:262
+msgid "FEMININE_NAME_257"
+msgstr "Natacha"
+
+#: locale/xml_additions/names/f/feminine.xml:61
+msgid "FEMININE_NAME_056"
+msgstr "Isabelle"
+
+#: locale/xml_additions/names/f/feminine.xml:238
+msgid "FEMININE_NAME_233"
+msgstr "Laurie"
+
+#: locale/xml_additions/names/f/feminine.xml:9
+msgid "FEMININE_NAME_004"
+msgstr "Sandrine"
+
+#: locale/xml_additions/names/f/feminine.xml:267
+msgid "FEMININE_NAME_262"
+msgstr "Stéphanie"
+
+#: locale/xml_additions/names/f/feminine.xml:40
+msgid "FEMININE_NAME_035"
+msgstr "Sophie"
+
+#: locale/xml_additions/names/f/feminine.xml:37
+msgid "FEMININE_NAME_032"
+msgstr "Céline"
+
+#: locale/xml_additions/names/f/feminine.xml:202
+msgid "FEMININE_NAME_197"
+msgstr "Anne"
+
+#: locale/xml_additions/names/f/feminine.xml:14
+msgid "FEMININE_NAME_009"
+msgstr "Julie"
+
+#: locale/xml_additions/names/f/feminine.xml:241
+msgid "FEMININE_NAME_236"
+msgstr "Aurélie"
+
+#: locale/xml_additions/names/f/feminine.xml:251
+msgid "FEMININE_NAME_246"
+msgstr "Laurence"
+
+#: locale/xml_additions/names/f/feminine.xml:133
+msgid "FEMININE_NAME_128"
+msgstr "Annie"
+
+#: locale/xml_additions/names/f/feminine.xml:24
+msgid "FEMININE_NAME_019"
+msgstr "Émilie"
+
+#: locale/xml_additions/names/f/feminine.xml:204
+msgid "FEMININE_NAME_199"
+msgstr "Christelle"
+
+#: locale/xml_additions/names/f/feminine.xml:221
+msgid "FEMININE_NAME_216"
+msgstr "Caroline"
+
+#: locale/xml_additions/names/f/feminine.xml:219
+msgid "FEMININE_NAME_214"
+msgstr "Sarah"
+
+#: locale/xml_additions/names/f/feminine.xml:200
+msgid "FEMININE_NAME_195"
+msgstr "Camille"
+
+#: locale/xml_additions/names/f/feminine.xml:6
+msgid "FEMININE_NAME_001"
+msgstr "Florence"
+
+#: locale/xml_additions/names/f/feminine.xml:278
+msgid "FEMININE_NAME_273"
+msgstr "Laëtitia"
+
+#: locale/xml_additions/names/f/feminine.xml:50
+msgid "FEMININE_NAME_045"
+msgstr "Audrey"
+
+#: locale/xml_additions/names/f/feminine.xml:100
+msgid "FEMININE_NAME_095"
+msgstr "Hélène"
+
+#: locale/xml_additions/names/f/feminine.xml:269
+msgid "FEMININE_NAME_264"
+msgstr "Laura"
+
+#: locale/xml_additions/names/f/feminine.xml:291
+msgid "FEMININE_NAME_286"
+msgstr "Manon"
+
+#: locale/xml_additions/names/f/feminine.xml:150
+msgid "FEMININE_NAME_145"
+msgstr "Cécile"
+
+#: locale/xml_additions/names/f/feminine.xml:7
+msgid "FEMININE_NAME_002"
+msgstr "Béatrice"
+
+#: locale/xml_additions/names/f/feminine.xml:15
+msgid "FEMININE_NAME_010"
+msgstr "Claire"
+
+#: locale/xml_additions/names/f/feminine.xml:87
+msgid "FEMININE_NAME_082"
+msgstr "Pauline"
+
+#: locale/xml_additions/names/f/feminine.xml:185
+msgid "FEMININE_NAME_180"
+msgstr "Delphine"
+
+#: locale/xml_additions/names/f/feminine.xml:64
+msgid "FEMININE_NAME_059"
+msgstr "Mélanie"
+
+#: locale/xml_additions/names/f/feminine.xml:56
+msgid "FEMININE_NAME_051"
+msgstr "Carine"
+
+#: locale/xml_additions/names/f/feminine.xml:66
+msgid "FEMININE_NAME_061"
+msgstr "Marion"
+
+#: locale/xml_additions/names/f/feminine.xml:81
+msgid "FEMININE_NAME_076"
+msgstr "Chloé"
+
+#: locale/xml_additions/names/f/feminine.xml:118
+msgid "FEMININE_NAME_113"
+msgstr "Marine"
+
+#: locale/xml_additions/names/f/feminine.xml:142
+msgid "FEMININE_NAME_137"
+msgstr "Anaïs"
+
+#: locale/xml_additions/names/f/feminine.xml:157
+msgid "FEMININE_NAME_152"
+msgstr "Lucie"
+
+#: locale/xml_additions/names/f/feminine.xml:71
+msgid "FEMININE_NAME_066"
+msgstr "Carole"
+
+#: locale/xml_additions/names/f/feminine.xml:129
+msgid "FEMININE_NAME_124"
+msgstr "Mathilde"
+
+#: locale/xml_additions/names/f/feminine.xml:164
+msgid "FEMININE_NAME_159"
+msgstr "Sandra"
+
+#: locale/xml_additions/names/f/feminine.xml:114
+msgid "FEMININE_NAME_109"
+msgstr "Annick"
+
+#: locale/xml_additions/names/f/feminine.xml:78
+msgid "FEMININE_NAME_073"
+msgstr "Charlotte"
+
+#: locale/xml_additions/names/f/feminine.xml:132
+msgid "FEMININE_NAME_127"
+msgstr "Emma"
+
+#: locale/xml_additions/names/f/feminine.xml:260
+msgid "FEMININE_NAME_255"
+msgstr "Myriam"
+
+#: locale/xml_additions/names/f/feminine.xml:67
+msgid "FEMININE_NAME_062"
+msgstr "Sabrina"
+
+#: locale/xml_additions/names/f/feminine.xml:72
+msgid "FEMININE_NAME_067"
+msgstr "Amandine"
+
+#: locale/xml_additions/names/f/feminine.xml:277
+msgid "FEMININE_NAME_272"
+msgstr "Alexandra"
+
+#: locale/xml_additions/names/f/feminine.xml:145
+msgid "FEMININE_NAME_140"
+msgstr "Vanessa"
+
+#: locale/xml_additions/names/f/feminine.xml:182
+msgid "FEMININE_NAME_177"
+msgstr "Justine"
+
+#: locale/xml_additions/names/f/feminine.xml:110
+msgid "FEMININE_NAME_105"
+msgstr "Emmanuelle"
+
+#: locale/xml_additions/names/f/feminine.xml:105
+msgid "FEMININE_NAME_100"
+msgstr "Océane"
+
+#: locale/xml_additions/names/f/feminine.xml:174
+msgid "FEMININE_NAME_169"
+msgstr "Amélie"
+
+#: locale/xml_additions/names/f/feminine.xml:54
+msgid "FEMININE_NAME_049"
+msgstr "Clara"
+
+#: locale/xml_additions/names/f/feminine.xml:224
+msgid "FEMININE_NAME_219"
+msgstr "Fanny"
+
+#: locale/xml_additions/names/f/feminine.xml:220
+msgid "FEMININE_NAME_215"
+msgstr "Magali"
+
+#: locale/xml_additions/names/f/feminine.xml:295
+msgid "FEMININE_NAME_290"
+msgstr "Morgane"
+
+#: locale/xml_additions/names/f/feminine.xml:55
+msgid "FEMININE_NAME_050"
+msgstr "Inès"
+
+#: locale/xml_additions/names/f/feminine.xml:91
+msgid "FEMININE_NAME_086"
+msgstr "Jessica"
+
+#: locale/xml_additions/names/f/feminine.xml:256
+msgid "FEMININE_NAME_251"
+msgstr "Laure"
+
+#: locale/xml_additions/names/f/feminine.xml:51
+msgid "FEMININE_NAME_046"
+msgstr "Estelle"
+
+#: locale/xml_additions/names/f/feminine.xml:94
+msgid "FEMININE_NAME_089"
+msgstr "Alice"
+
+#: locale/xml_additions/names/f/feminine.xml:214
+msgid "FEMININE_NAME_209"
+msgstr "Léna"
+
+#: locale/xml_additions/names/f/feminine.xml:44
+msgid "FEMININE_NAME_039"
+msgstr "Zoé"
+
+#: locale/xml_additions/names/f/feminine.xml:258
+msgid "FEMININE_NAME_253"
+msgstr "Juliette"
+
+#: locale/xml_additions/names/f/feminine.xml:222
+msgid "FEMININE_NAME_217"
+msgstr "Annabelle"
+
+#: locale/xml_additions/names/f/feminine.xml:28
+msgid "FEMININE_NAME_023"
+msgstr "Coralie"
+
+#: locale/xml_additions/names/f/feminine.xml:303
+msgid "FEMININE_NAME_298"
+msgstr "Amel"
+
+#: locale/xml_additions/names/f/feminine.xml:286
+msgid "FEMININE_NAME_281"
+msgstr "Yasmine"
+
+#: locale/xml_additions/names/f/feminine.xml:268
+msgid "FEMININE_NAME_263"
+msgstr "Elsa"
+
+#: locale/xml_additions/names/f/feminine.xml:176
+msgid "FEMININE_NAME_171"
+msgstr "Leïla"
+
+#: locale/xml_additions/names/f/feminine.xml:166
+msgid "FEMININE_NAME_161"
+msgstr "Samira"
+
+#: locale/xml_additions/names/f/feminine.xml:239
+msgid "FEMININE_NAME_234"
+msgstr "Dalila"
+
+#: locale/xml_additions/names/f/feminine.xml:19
+msgid "FEMININE_NAME_014"
+msgstr "Farah"
+
+#: locale/xml_additions/names/f/feminine.xml:124
+msgid "FEMININE_NAME_119"
+msgstr "Fatima"
+
+#: locale/xml_additions/names/f/feminine.xml:45
+msgid "FEMININE_NAME_040"
+msgstr "Djamila"
+
+#: locale/xml_additions/names/f/feminine.xml:121
+msgid "FEMININE_NAME_116"
+msgstr "Marjane"
+
+#: locale/xml_additions/names/f/feminine.xml:237
+msgid "FEMININE_NAME_232"
+msgstr "Sakina"
+
+#: locale/xml_additions/names/f/feminine.xml:167
+msgid "FEMININE_NAME_162"
+msgstr "Warda"
+
+#: locale/xml_additions/names/f/feminine.xml:217
+msgid "FEMININE_NAME_212"
+msgstr "Lucille"
+
+#: locale/xml_additions/names/f/feminine.xml:187
+msgid "FEMININE_NAME_182"
+msgstr "Zorah"
+
+#: locale/xml_additions/names/f/feminine.xml:73
+msgid "FEMININE_NAME_068"
+msgstr "Romane"
+
+#: locale/xml_additions/names/f/feminine.xml:272
+msgid "FEMININE_NAME_267"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:25
+msgid "FEMININE_NAME_020"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:229
+msgid "FEMININE_NAME_224"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:180
+msgid "FEMININE_NAME_175"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:246
+msgid "FEMININE_NAME_241"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:140
+msgid "FEMININE_NAME_135"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:125
+msgid "FEMININE_NAME_120"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:22
+msgid "FEMININE_NAME_017"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:234
+msgid "FEMININE_NAME_229"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:99
+msgid "FEMININE_NAME_094"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:120
+msgid "FEMININE_NAME_115"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:127
+msgid "FEMININE_NAME_122"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:130
+msgid "FEMININE_NAME_125"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:280
+msgid "FEMININE_NAME_275"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:23
+msgid "FEMININE_NAME_018"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:253
+msgid "FEMININE_NAME_248"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:223
+msgid "FEMININE_NAME_218"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:301
+msgid "FEMININE_NAME_296"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:281
+msgid "FEMININE_NAME_276"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:171
+msgid "FEMININE_NAME_166"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:208
+msgid "FEMININE_NAME_203"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:297
+msgid "FEMININE_NAME_292"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:13
+msgid "FEMININE_NAME_008"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:207
+msgid "FEMININE_NAME_202"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:98
+msgid "FEMININE_NAME_093"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:274
+msgid "FEMININE_NAME_269"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:154
+msgid "FEMININE_NAME_149"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:179
+msgid "FEMININE_NAME_174"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:141
+msgid "FEMININE_NAME_136"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:293
+msgid "FEMININE_NAME_288"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:305
+msgid "FEMININE_NAME_300"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:264
+msgid "FEMININE_NAME_259"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:47
+msgid "FEMININE_NAME_042"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:211
+msgid "FEMININE_NAME_206"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:84
+msgid "FEMININE_NAME_079"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:199
+msgid "FEMININE_NAME_194"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:273
+msgid "FEMININE_NAME_268"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:205
+msgid "FEMININE_NAME_200"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:263
+msgid "FEMININE_NAME_258"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:261
+msgid "FEMININE_NAME_256"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:177
+msgid "FEMININE_NAME_172"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:173
+msgid "FEMININE_NAME_168"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:194
+msgid "FEMININE_NAME_189"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:169
+msgid "FEMININE_NAME_164"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:213
+msgid "FEMININE_NAME_208"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:243
+msgid "FEMININE_NAME_238"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:80
+msgid "FEMININE_NAME_075"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:139
+msgid "FEMININE_NAME_134"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:244
+msgid "FEMININE_NAME_239"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:215
+msgid "FEMININE_NAME_210"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:123
+msgid "FEMININE_NAME_118"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:27
+msgid "FEMININE_NAME_022"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:31
+msgid "FEMININE_NAME_026"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:252
+msgid "FEMININE_NAME_247"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:26
+msgid "FEMININE_NAME_021"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:144
+msgid "FEMININE_NAME_139"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:275
+msgid "FEMININE_NAME_270"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:106
+msgid "FEMININE_NAME_101"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:172
+msgid "FEMININE_NAME_167"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:53
+msgid "FEMININE_NAME_048"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:148
+msgid "FEMININE_NAME_143"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:159
+msgid "FEMININE_NAME_154"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:102
+msgid "FEMININE_NAME_097"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:245
+msgid "FEMININE_NAME_240"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:134
+msgid "FEMININE_NAME_129"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:195
+msgid "FEMININE_NAME_190"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:216
+msgid "FEMININE_NAME_211"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:103
+msgid "FEMININE_NAME_098"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:49
+msgid "FEMININE_NAME_044"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:52
+msgid "FEMININE_NAME_047"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:198
+msgid "FEMININE_NAME_193"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:233
+msgid "FEMININE_NAME_228"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:75
+msgid "FEMININE_NAME_070"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:11
+msgid "FEMININE_NAME_006"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:136
+msgid "FEMININE_NAME_131"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:300
+msgid "FEMININE_NAME_295"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:76
+msgid "FEMININE_NAME_071"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:104
+msgid "FEMININE_NAME_099"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:257
+msgid "FEMININE_NAME_252"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:119
+msgid "FEMININE_NAME_114"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:48
+msgid "FEMININE_NAME_043"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:147
+msgid "FEMININE_NAME_142"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:36
+msgid "FEMININE_NAME_031"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:178
+msgid "FEMININE_NAME_173"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:289
+msgid "FEMININE_NAME_284"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:232
+msgid "FEMININE_NAME_227"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:282
+msgid "FEMININE_NAME_277"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:88
+msgid "FEMININE_NAME_083"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:65
+msgid "FEMININE_NAME_060"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:135
+msgid "FEMININE_NAME_130"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:218
+msgid "FEMININE_NAME_213"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:265
+msgid "FEMININE_NAME_260"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:259
+msgid "FEMININE_NAME_254"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:192
+msgid "FEMININE_NAME_187"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:137
+msgid "FEMININE_NAME_132"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:38
+msgid "FEMININE_NAME_033"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:46
+msgid "FEMININE_NAME_041"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:92
+msgid "FEMININE_NAME_087"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:255
+msgid "FEMININE_NAME_250"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:225
+msgid "FEMININE_NAME_220"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:196
+msgid "FEMININE_NAME_191"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:158
+msgid "FEMININE_NAME_153"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:58
+msgid "FEMININE_NAME_053"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:168
+msgid "FEMININE_NAME_163"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:29
+msgid "FEMININE_NAME_024"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:188
+msgid "FEMININE_NAME_183"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:191
+msgid "FEMININE_NAME_186"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:209
+msgid "FEMININE_NAME_204"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:115
+msgid "FEMININE_NAME_110"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:152
+msgid "FEMININE_NAME_147"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:116
+msgid "FEMININE_NAME_111"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:21
+msgid "FEMININE_NAME_016"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:69
+msgid "FEMININE_NAME_064"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:279
+msgid "FEMININE_NAME_274"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:60
+msgid "FEMININE_NAME_055"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:175
+msgid "FEMININE_NAME_170"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:271
+msgid "FEMININE_NAME_266"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:276
+msgid "FEMININE_NAME_271"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:186
+msgid "FEMININE_NAME_181"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:156
+msgid "FEMININE_NAME_151"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:193
+msgid "FEMININE_NAME_188"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:236
+msgid "FEMININE_NAME_231"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:68
+msgid "FEMININE_NAME_063"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:59
+msgid "FEMININE_NAME_054"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:294
+msgid "FEMININE_NAME_289"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:35
+msgid "FEMININE_NAME_030"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:240
+msgid "FEMININE_NAME_235"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:111
+msgid "FEMININE_NAME_106"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:149
+msgid "FEMININE_NAME_144"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:93
+msgid "FEMININE_NAME_088"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:16
+msgid "FEMININE_NAME_011"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:74
+msgid "FEMININE_NAME_069"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:101
+msgid "FEMININE_NAME_096"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:138
+msgid "FEMININE_NAME_133"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:42
+msgid "FEMININE_NAME_037"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:285
+msgid "FEMININE_NAME_280"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:79
+msgid "FEMININE_NAME_074"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:184
+msgid "FEMININE_NAME_179"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:153
+msgid "FEMININE_NAME_148"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:270
+msgid "FEMININE_NAME_265"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:34
+msgid "FEMININE_NAME_029"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:212
+msgid "FEMININE_NAME_207"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:89
+msgid "FEMININE_NAME_084"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:85
+msgid "FEMININE_NAME_080"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:230
+msgid "FEMININE_NAME_225"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:70
+msgid "FEMININE_NAME_065"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:39
+msgid "FEMININE_NAME_034"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:131
+msgid "FEMININE_NAME_126"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:126
+msgid "FEMININE_NAME_121"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:117
+msgid "FEMININE_NAME_112"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:292
+msgid "FEMININE_NAME_287"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:83
+msgid "FEMININE_NAME_078"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:43
+msgid "FEMININE_NAME_038"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:12
+msgid "FEMININE_NAME_007"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:162
+msgid "FEMININE_NAME_157"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:109
+msgid "FEMININE_NAME_104"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:201
+msgid "FEMININE_NAME_196"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:41
+msgid "FEMININE_NAME_036"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:30
+msgid "FEMININE_NAME_025"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:190
+msgid "FEMININE_NAME_185"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:290
+msgid "FEMININE_NAME_285"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:95
+msgid "FEMININE_NAME_090"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:161
+msgid "FEMININE_NAME_156"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:165
+msgid "FEMININE_NAME_160"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:302
+msgid "FEMININE_NAME_297"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:304
+msgid "FEMININE_NAME_299"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:287
+msgid "FEMININE_NAME_282"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:18
+msgid "FEMININE_NAME_013"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:284
+msgid "FEMININE_NAME_279"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:249
+msgid "FEMININE_NAME_244"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:32
+msgid "FEMININE_NAME_027"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:146
+msgid "FEMININE_NAME_141"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:20
+msgid "FEMININE_NAME_015"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:247
+msgid "FEMININE_NAME_242"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:160
+msgid "FEMININE_NAME_155"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:82
+msgid "FEMININE_NAME_077"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:122
+msgid "FEMININE_NAME_117"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:226
+msgid "FEMININE_NAME_221"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:170
+msgid "FEMININE_NAME_165"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:254
+msgid "FEMININE_NAME_249"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:248
+msgid "FEMININE_NAME_243"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:62
+msgid "FEMININE_NAME_057"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:189
+msgid "FEMININE_NAME_184"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:235
+msgid "FEMININE_NAME_230"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:299
+msgid "FEMININE_NAME_294"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:231
+msgid "FEMININE_NAME_226"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:90
+msgid "FEMININE_NAME_085"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:210
+msgid "FEMININE_NAME_205"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:227
+msgid "FEMININE_NAME_222"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:296
+msgid "FEMININE_NAME_291"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:163
+msgid "FEMININE_NAME_158"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:17
+msgid "FEMININE_NAME_012"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:183
+msgid "FEMININE_NAME_178"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:86
+msgid "FEMININE_NAME_081"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:128
+msgid "FEMININE_NAME_123"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:206
+msgid "FEMININE_NAME_201"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:242
+msgid "FEMININE_NAME_237"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:108
+msgid "FEMININE_NAME_103"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:10
+msgid "FEMININE_NAME_005"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:266
+msgid "FEMININE_NAME_261"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:8
+msgid "FEMININE_NAME_003"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:96
+msgid "FEMININE_NAME_091"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:298
+msgid "FEMININE_NAME_293"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:113
+msgid "FEMININE_NAME_108"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:288
+msgid "FEMININE_NAME_283"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:57
+msgid "FEMININE_NAME_052"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:228
+msgid "FEMININE_NAME_223"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:112
+msgid "FEMININE_NAME_107"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:151
+msgid "FEMININE_NAME_146"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:283
+msgid "FEMININE_NAME_278"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:203
+msgid "FEMININE_NAME_198"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:77
+msgid "FEMININE_NAME_072"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:181
+msgid "FEMININE_NAME_176"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:197
+msgid "FEMININE_NAME_192"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:250
+msgid "FEMININE_NAME_245"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:143
+msgid "FEMININE_NAME_138"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:33
+msgid "FEMININE_NAME_028"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:155
+msgid "FEMININE_NAME_150"
+msgstr ""
+
+#: locale/xml_additions/names/f/feminine.xml:107
+msgid "FEMININE_NAME_102"
+msgstr ""

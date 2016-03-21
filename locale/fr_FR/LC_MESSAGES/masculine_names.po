@@ -1,0 +1,1219 @@
+# MATHMAKER-FOUR LETTERS WORDS TEMPLATE PO FILE.
+# Copyright (C) 2006-2016 Nicolas Hainaux
+# This file is distributed under the same license as the mathmaker package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mathmaker 0.6\n"
+"Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
+"POT-Creation-Date: 2016-03-17 13:12+0100\n"
+"PO-Revision-Date: 2016-03-21 15:44+0100\n"
+"Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
+"Language-Team:  <nh.techn@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: fr_FR\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: locale/xml_additions/names/m/masculine.xml:222
+msgid "MASCULINE_NAME_217"
+msgstr "Jean"
+
+#: locale/xml_additions/names/m/masculine.xml:61
+msgid "MASCULINE_NAME_056"
+msgstr "Philippe"
+
+#: locale/xml_additions/names/m/masculine.xml:140
+msgid "MASCULINE_NAME_135"
+msgstr "Abdel"
+
+#: locale/xml_additions/names/m/masculine.xml:231
+msgid "MASCULINE_NAME_226"
+msgstr "Alain"
+
+#: locale/xml_additions/names/m/masculine.xml:7
+msgid "MASCULINE_NAME_002"
+msgstr "Patrick"
+
+#: locale/xml_additions/names/m/masculine.xml:292
+msgid "MASCULINE_NAME_287"
+msgstr "Nicolas"
+
+#: locale/xml_additions/names/m/masculine.xml:26
+msgid "MASCULINE_NAME_021"
+msgstr "Christophe"
+
+#: locale/xml_additions/names/m/masculine.xml:114
+msgid "MASCULINE_NAME_109"
+msgstr "Pierre"
+
+#: locale/xml_additions/names/m/masculine.xml:28
+msgid "MASCULINE_NAME_023"
+msgstr "Christian"
+
+#: locale/xml_additions/names/m/masculine.xml:181
+msgid "MASCULINE_NAME_176"
+msgstr "Éric"
+
+#: locale/xml_additions/names/m/masculine.xml:264
+msgid "MASCULINE_NAME_259"
+msgstr "Frédéric"
+
+#: locale/xml_additions/names/m/masculine.xml:41
+msgid "MASCULINE_NAME_036"
+msgstr "Laurent"
+
+#: locale/xml_additions/names/m/masculine.xml:59
+msgid "MASCULINE_NAME_054"
+msgstr "Stéphane"
+
+#: locale/xml_additions/names/m/masculine.xml:50
+msgid "MASCULINE_NAME_045"
+msgstr "David"
+
+#: locale/xml_additions/names/m/masculine.xml:246
+msgid "MASCULINE_NAME_241"
+msgstr "Pascal"
+
+#: locale/xml_additions/names/m/masculine.xml:283
+msgid "MASCULINE_NAME_278"
+msgstr "Daniel"
+
+#: locale/xml_additions/names/m/masculine.xml:47
+msgid "MASCULINE_NAME_042"
+msgstr "Sébastien"
+
+#: locale/xml_additions/names/m/masculine.xml:249
+msgid "MASCULINE_NAME_244"
+msgstr "Thierry"
+
+#: locale/xml_additions/names/m/masculine.xml:156
+msgid "MASCULINE_NAME_151"
+msgstr "Julien"
+
+#: locale/xml_additions/names/m/masculine.xml:213
+msgid "MASCULINE_NAME_208"
+msgstr "Olivier"
+
+#: locale/xml_additions/names/m/masculine.xml:24
+msgid "MASCULINE_NAME_019"
+msgstr "Alban"
+
+#: locale/xml_additions/names/m/masculine.xml:215
+msgid "MASCULINE_NAME_210"
+msgstr "Thomas"
+
+#: locale/xml_additions/names/m/masculine.xml:204
+msgid "MASCULINE_NAME_199"
+msgstr "Alexandre"
+
+#: locale/xml_additions/names/m/masculine.xml:23
+msgid "MASCULINE_NAME_018"
+msgstr "Lilian"
+
+#: locale/xml_additions/names/m/masculine.xml:272
+msgid "MASCULINE_NAME_267"
+msgstr "Didier"
+
+#: locale/xml_additions/names/m/masculine.xml:60
+msgid "MASCULINE_NAME_055"
+msgstr "Dominique"
+
+#: locale/xml_additions/names/m/masculine.xml:225
+msgid "MASCULINE_NAME_220"
+msgstr "Vincent"
+
+#: locale/xml_additions/names/m/masculine.xml:56
+msgid "MASCULINE_NAME_051"
+msgstr "François"
+
+#: locale/xml_additions/names/m/masculine.xml:130
+msgid "MASCULINE_NAME_125"
+msgstr "Bruno"
+
+#: locale/xml_additions/names/m/masculine.xml:211
+msgid "MASCULINE_NAME_206"
+msgstr "Guillaume"
+
+#: locale/xml_additions/names/m/masculine.xml:165
+msgid "MASCULINE_NAME_160"
+msgstr "Jérôme"
+
+#: locale/xml_additions/names/m/masculine.xml:110
+msgid "MASCULINE_NAME_105"
+msgstr "Marc"
+
+#: locale/xml_additions/names/m/masculine.xml:241
+msgid "MASCULINE_NAME_236"
+msgstr "Maxime"
+
+#: locale/xml_additions/names/m/masculine.xml:103
+msgid "MASCULINE_NAME_098"
+msgstr "Romain"
+
+#: locale/xml_additions/names/m/masculine.xml:242
+msgid "MASCULINE_NAME_237"
+msgstr "Antoine"
+
+#: locale/xml_additions/names/m/masculine.xml:175
+msgid "MASCULINE_NAME_170"
+msgstr "Franck"
+
+#: locale/xml_additions/names/m/masculine.xml:269
+msgid "MASCULINE_NAME_264"
+msgstr "Anthony"
+
+#: locale/xml_additions/names/m/masculine.xml:195
+msgid "MASCULINE_NAME_190"
+msgstr "Kévin"
+
+#: locale/xml_additions/names/m/masculine.xml:109
+msgid "MASCULINE_NAME_104"
+msgstr "Gilles"
+
+#: locale/xml_additions/names/m/masculine.xml:191
+msgid "MASCULINE_NAME_186"
+msgstr "Cédric"
+
+#: locale/xml_additions/names/m/masculine.xml:304
+msgid "MASCULINE_NAME_299"
+msgstr "Mathieu"
+
+#: locale/xml_additions/names/m/masculine.xml:206
+msgid "MASCULINE_NAME_201"
+msgstr "Benjamin"
+
+#: locale/xml_additions/names/m/masculine.xml:152
+msgid "MASCULINE_NAME_147"
+msgstr "Jérémy"
+
+#: locale/xml_additions/names/m/masculine.xml:119
+msgid "MASCULINE_NAME_114"
+msgstr "Clément"
+
+#: locale/xml_additions/names/m/masculine.xml:44
+msgid "MASCULINE_NAME_039"
+msgstr "Arnaud"
+
+#: locale/xml_additions/names/m/masculine.xml:193
+msgid "MASCULINE_NAME_188"
+msgstr "Paul"
+
+#: locale/xml_additions/names/m/masculine.xml:289
+msgid "MASCULINE_NAME_284"
+msgstr "Lucas"
+
+#: locale/xml_additions/names/m/masculine.xml:122
+msgid "MASCULINE_NAME_117"
+msgstr "Sylvain"
+
+#: locale/xml_additions/names/m/masculine.xml:74
+msgid "MASCULINE_NAME_069"
+msgstr "Florian"
+
+#: locale/xml_additions/names/m/masculine.xml:196
+msgid "MASCULINE_NAME_191"
+msgstr "Damien"
+
+#: locale/xml_additions/names/m/masculine.xml:239
+msgid "MASCULINE_NAME_234"
+msgstr "Alexis"
+
+#: locale/xml_additions/names/m/masculine.xml:200
+msgid "MASCULINE_NAME_195"
+msgstr "Quentin"
+
+#: locale/xml_additions/names/m/masculine.xml:209
+msgid "MASCULINE_NAME_204"
+msgstr "Mickaël"
+
+#: locale/xml_additions/names/m/masculine.xml:155
+msgid "MASCULINE_NAME_150"
+msgstr "Emmanuel"
+
+#: locale/xml_additions/names/m/masculine.xml:11
+msgid "MASCULINE_NAME_006"
+msgstr "Louis"
+
+#: locale/xml_additions/names/m/masculine.xml:207
+msgid "MASCULINE_NAME_202"
+msgstr "Fabien"
+
+#: locale/xml_additions/names/m/masculine.xml:266
+msgid "MASCULINE_NAME_261"
+msgstr "Hugo"
+
+#: locale/xml_additions/names/m/masculine.xml:66
+msgid "MASCULINE_NAME_061"
+msgstr "Jonathan"
+
+#: locale/xml_additions/names/m/masculine.xml:234
+msgid "MASCULINE_NAME_229"
+msgstr "Loïc"
+
+#: locale/xml_additions/names/m/masculine.xml:286
+msgid "MASCULINE_NAME_281"
+msgstr "Théo"
+
+#: locale/xml_additions/names/m/masculine.xml:277
+msgid "MASCULINE_NAME_272"
+msgstr "Adrien"
+
+#: locale/xml_additions/names/m/masculine.xml:29
+msgid "MASCULINE_NAME_024"
+msgstr "Raphaël"
+
+#: locale/xml_additions/names/m/masculine.xml:259
+msgid "MASCULINE_NAME_254"
+msgstr "Grégory"
+
+#: locale/xml_additions/names/m/masculine.xml:296
+msgid "MASCULINE_NAME_291"
+msgstr "Cyril"
+
+#: locale/xml_additions/names/m/masculine.xml:235
+msgid "MASCULINE_NAME_230"
+msgstr "Enzo"
+
+#: locale/xml_additions/names/m/masculine.xml:37
+msgid "MASCULINE_NAME_032"
+msgstr "Baptiste"
+
+#: locale/xml_additions/names/m/masculine.xml:81
+msgid "MASCULINE_NAME_076"
+msgstr "Rémi"
+
+#: locale/xml_additions/names/m/masculine.xml:69
+msgid "MASCULINE_NAME_064"
+msgstr "Aurélien"
+
+#: locale/xml_additions/names/m/masculine.xml:30
+msgid "MASCULINE_NAME_025"
+msgstr "Nathan"
+
+#: locale/xml_additions/names/m/masculine.xml:299
+msgid "MASCULINE_NAME_294"
+msgstr "Gabriel"
+
+#: locale/xml_additions/names/m/masculine.xml:13
+msgid "MASCULINE_NAME_008"
+msgstr "Jules"
+
+#: locale/xml_additions/names/m/masculine.xml:112
+msgid "MASCULINE_NAME_107"
+msgstr "Arthur"
+
+#: locale/xml_additions/names/m/masculine.xml:305
+msgid "MASCULINE_NAME_300"
+msgstr "Ethan"
+
+#: locale/xml_additions/names/m/masculine.xml:54
+msgid "MASCULINE_NAME_049"
+msgstr "Maël"
+
+#: locale/xml_additions/names/m/masculine.xml:93
+msgid "MASCULINE_NAME_088"
+msgstr "Tom"
+
+#: locale/xml_additions/names/m/masculine.xml:279
+msgid "MASCULINE_NAME_274"
+msgstr "Noah"
+
+#: locale/xml_additions/names/m/masculine.xml:146
+msgid "MASCULINE_NAME_141"
+msgstr "Mathis"
+
+#: locale/xml_additions/names/m/masculine.xml:106
+msgid "MASCULINE_NAME_101"
+msgstr "Adam"
+
+#: locale/xml_additions/names/m/masculine.xml:298
+msgid "MASCULINE_NAME_293"
+msgstr "Paco"
+
+#: locale/xml_additions/names/m/masculine.xml:97
+msgid "MASCULINE_NAME_092"
+msgstr "Sacha"
+
+#: locale/xml_additions/names/m/masculine.xml:77
+msgid "MASCULINE_NAME_072"
+msgstr "Mohammed"
+
+#: locale/xml_additions/names/m/masculine.xml:219
+msgid "MASCULINE_NAME_214"
+msgstr "Jalil"
+
+#: locale/xml_additions/names/m/masculine.xml:137
+msgid "MASCULINE_NAME_132"
+msgstr "Malik"
+
+#: locale/xml_additions/names/m/masculine.xml:10
+msgid "MASCULINE_NAME_005"
+msgstr "Ahmed"
+
+#: locale/xml_additions/names/m/masculine.xml:180
+msgid "MASCULINE_NAME_175"
+msgstr "Hamza"
+
+#: locale/xml_additions/names/m/masculine.xml:265
+msgid "MASCULINE_NAME_260"
+msgstr "Reda"
+
+#: locale/xml_additions/names/m/masculine.xml:113
+msgid "MASCULINE_NAME_108"
+msgstr "Yassine"
+
+#: locale/xml_additions/names/m/masculine.xml:125
+msgid "MASCULINE_NAME_120"
+msgstr "Youssef"
+
+#: locale/xml_additions/names/m/masculine.xml:153
+msgid "MASCULINE_NAME_148"
+msgstr "Karim"
+
+#: locale/xml_additions/names/m/masculine.xml:94
+msgid "MASCULINE_NAME_089"
+msgstr "Farid"
+
+#: locale/xml_additions/names/m/masculine.xml:14
+msgid "MASCULINE_NAME_009"
+msgstr "Gianni"
+
+#: locale/xml_additions/names/m/masculine.xml:16
+msgid "MASCULINE_NAME_011"
+msgstr "Medhi"
+
+#: locale/xml_additions/names/m/masculine.xml:233
+msgid "MASCULINE_NAME_228"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:62
+msgid "MASCULINE_NAME_057"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:90
+msgid "MASCULINE_NAME_085"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:138
+msgid "MASCULINE_NAME_133"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:178
+msgid "MASCULINE_NAME_173"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:33
+msgid "MASCULINE_NAME_028"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:89
+msgid "MASCULINE_NAME_084"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:75
+msgid "MASCULINE_NAME_070"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:126
+msgid "MASCULINE_NAME_121"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:302
+msgid "MASCULINE_NAME_297"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:285
+msgid "MASCULINE_NAME_280"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:255
+msgid "MASCULINE_NAME_250"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:217
+msgid "MASCULINE_NAME_212"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:169
+msgid "MASCULINE_NAME_164"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:271
+msgid "MASCULINE_NAME_266"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:132
+msgid "MASCULINE_NAME_127"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:291
+msgid "MASCULINE_NAME_286"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:95
+msgid "MASCULINE_NAME_090"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:21
+msgid "MASCULINE_NAME_016"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:188
+msgid "MASCULINE_NAME_183"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:149
+msgid "MASCULINE_NAME_144"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:58
+msgid "MASCULINE_NAME_053"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:198
+msgid "MASCULINE_NAME_193"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:230
+msgid "MASCULINE_NAME_225"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:174
+msgid "MASCULINE_NAME_169"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:284
+msgid "MASCULINE_NAME_279"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:135
+msgid "MASCULINE_NAME_130"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:85
+msgid "MASCULINE_NAME_080"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:184
+msgid "MASCULINE_NAME_179"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:260
+msgid "MASCULINE_NAME_255"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:108
+msgid "MASCULINE_NAME_103"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:164
+msgid "MASCULINE_NAME_159"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:100
+msgid "MASCULINE_NAME_095"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:166
+msgid "MASCULINE_NAME_161"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:303
+msgid "MASCULINE_NAME_298"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:245
+msgid "MASCULINE_NAME_240"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:163
+msgid "MASCULINE_NAME_158"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:244
+msgid "MASCULINE_NAME_239"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:288
+msgid "MASCULINE_NAME_283"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:187
+msgid "MASCULINE_NAME_182"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:133
+msgid "MASCULINE_NAME_128"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:256
+msgid "MASCULINE_NAME_251"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:254
+msgid "MASCULINE_NAME_249"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:293
+msgid "MASCULINE_NAME_288"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:214
+msgid "MASCULINE_NAME_209"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:243
+msgid "MASCULINE_NAME_238"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:115
+msgid "MASCULINE_NAME_110"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:247
+msgid "MASCULINE_NAME_242"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:128
+msgid "MASCULINE_NAME_123"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:83
+msgid "MASCULINE_NAME_078"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:79
+msgid "MASCULINE_NAME_074"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:150
+msgid "MASCULINE_NAME_145"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:287
+msgid "MASCULINE_NAME_282"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:57
+msgid "MASCULINE_NAME_052"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:300
+msgid "MASCULINE_NAME_295"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:157
+msgid "MASCULINE_NAME_152"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:221
+msgid "MASCULINE_NAME_216"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:42
+msgid "MASCULINE_NAME_037"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:139
+msgid "MASCULINE_NAME_134"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:118
+msgid "MASCULINE_NAME_113"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:92
+msgid "MASCULINE_NAME_087"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:127
+msgid "MASCULINE_NAME_122"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:17
+msgid "MASCULINE_NAME_012"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:167
+msgid "MASCULINE_NAME_162"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:240
+msgid "MASCULINE_NAME_235"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:22
+msgid "MASCULINE_NAME_017"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:190
+msgid "MASCULINE_NAME_185"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:268
+msgid "MASCULINE_NAME_263"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:9
+msgid "MASCULINE_NAME_004"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:136
+msgid "MASCULINE_NAME_131"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:72
+msgid "MASCULINE_NAME_067"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:91
+msgid "MASCULINE_NAME_086"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:274
+msgid "MASCULINE_NAME_269"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:197
+msgid "MASCULINE_NAME_192"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:189
+msgid "MASCULINE_NAME_184"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:145
+msgid "MASCULINE_NAME_140"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:111
+msgid "MASCULINE_NAME_106"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:160
+msgid "MASCULINE_NAME_155"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:226
+msgid "MASCULINE_NAME_221"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:168
+msgid "MASCULINE_NAME_163"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:31
+msgid "MASCULINE_NAME_026"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:290
+msgid "MASCULINE_NAME_285"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:82
+msgid "MASCULINE_NAME_077"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:124
+msgid "MASCULINE_NAME_119"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:216
+msgid "MASCULINE_NAME_211"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:87
+msgid "MASCULINE_NAME_082"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:192
+msgid "MASCULINE_NAME_187"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:212
+msgid "MASCULINE_NAME_207"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:104
+msgid "MASCULINE_NAME_099"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:223
+msgid "MASCULINE_NAME_218"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:202
+msgid "MASCULINE_NAME_197"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:205
+msgid "MASCULINE_NAME_200"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:99
+msgid "MASCULINE_NAME_094"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:275
+msgid "MASCULINE_NAME_270"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:177
+msgid "MASCULINE_NAME_172"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:262
+msgid "MASCULINE_NAME_257"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:105
+msgid "MASCULINE_NAME_100"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:71
+msgid "MASCULINE_NAME_066"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:116
+msgid "MASCULINE_NAME_111"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:194
+msgid "MASCULINE_NAME_189"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:129
+msgid "MASCULINE_NAME_124"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:297
+msgid "MASCULINE_NAME_292"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:159
+msgid "MASCULINE_NAME_154"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:237
+msgid "MASCULINE_NAME_232"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:143
+msgid "MASCULINE_NAME_138"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:123
+msgid "MASCULINE_NAME_118"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:276
+msgid "MASCULINE_NAME_271"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:86
+msgid "MASCULINE_NAME_081"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:32
+msgid "MASCULINE_NAME_027"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:134
+msgid "MASCULINE_NAME_129"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:263
+msgid "MASCULINE_NAME_258"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:120
+msgid "MASCULINE_NAME_115"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:151
+msgid "MASCULINE_NAME_146"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:25
+msgid "MASCULINE_NAME_020"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:43
+msgid "MASCULINE_NAME_038"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:53
+msgid "MASCULINE_NAME_048"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:65
+msgid "MASCULINE_NAME_060"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:172
+msgid "MASCULINE_NAME_167"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:107
+msgid "MASCULINE_NAME_102"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:224
+msgid "MASCULINE_NAME_219"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:182
+msgid "MASCULINE_NAME_177"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:68
+msgid "MASCULINE_NAME_063"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:117
+msgid "MASCULINE_NAME_112"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:162
+msgid "MASCULINE_NAME_157"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:8
+msgid "MASCULINE_NAME_003"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:19
+msgid "MASCULINE_NAME_014"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:144
+msgid "MASCULINE_NAME_139"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:267
+msgid "MASCULINE_NAME_262"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:63
+msgid "MASCULINE_NAME_058"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:208
+msgid "MASCULINE_NAME_203"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:273
+msgid "MASCULINE_NAME_268"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:49
+msgid "MASCULINE_NAME_044"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:295
+msgid "MASCULINE_NAME_290"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:173
+msgid "MASCULINE_NAME_168"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:12
+msgid "MASCULINE_NAME_007"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:227
+msgid "MASCULINE_NAME_222"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:250
+msgid "MASCULINE_NAME_245"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:183
+msgid "MASCULINE_NAME_178"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:199
+msgid "MASCULINE_NAME_194"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:73
+msgid "MASCULINE_NAME_068"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:98
+msgid "MASCULINE_NAME_093"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:171
+msgid "MASCULINE_NAME_166"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:102
+msgid "MASCULINE_NAME_097"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:84
+msgid "MASCULINE_NAME_079"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:6
+msgid "MASCULINE_NAME_001"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:147
+msgid "MASCULINE_NAME_142"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:186
+msgid "MASCULINE_NAME_181"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:148
+msgid "MASCULINE_NAME_143"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:203
+msgid "MASCULINE_NAME_198"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:185
+msgid "MASCULINE_NAME_180"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:179
+msgid "MASCULINE_NAME_174"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:142
+msgid "MASCULINE_NAME_137"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:51
+msgid "MASCULINE_NAME_046"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:280
+msgid "MASCULINE_NAME_275"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:27
+msgid "MASCULINE_NAME_022"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:45
+msgid "MASCULINE_NAME_040"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:121
+msgid "MASCULINE_NAME_116"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:34
+msgid "MASCULINE_NAME_029"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:39
+msgid "MASCULINE_NAME_034"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:248
+msgid "MASCULINE_NAME_243"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:238
+msgid "MASCULINE_NAME_233"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:64
+msgid "MASCULINE_NAME_059"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:161
+msgid "MASCULINE_NAME_156"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:258
+msgid "MASCULINE_NAME_253"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:251
+msgid "MASCULINE_NAME_246"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:101
+msgid "MASCULINE_NAME_096"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:270
+msgid "MASCULINE_NAME_265"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:18
+msgid "MASCULINE_NAME_013"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:40
+msgid "MASCULINE_NAME_035"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:78
+msgid "MASCULINE_NAME_073"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:96
+msgid "MASCULINE_NAME_091"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:38
+msgid "MASCULINE_NAME_033"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:261
+msgid "MASCULINE_NAME_256"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:252
+msgid "MASCULINE_NAME_247"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:48
+msgid "MASCULINE_NAME_043"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:88
+msgid "MASCULINE_NAME_083"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:15
+msgid "MASCULINE_NAME_010"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:232
+msgid "MASCULINE_NAME_227"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:281
+msgid "MASCULINE_NAME_276"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:46
+msgid "MASCULINE_NAME_041"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:154
+msgid "MASCULINE_NAME_149"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:301
+msgid "MASCULINE_NAME_296"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:36
+msgid "MASCULINE_NAME_031"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:70
+msgid "MASCULINE_NAME_065"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:67
+msgid "MASCULINE_NAME_062"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:278
+msgid "MASCULINE_NAME_273"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:220
+msgid "MASCULINE_NAME_215"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:55
+msgid "MASCULINE_NAME_050"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:20
+msgid "MASCULINE_NAME_015"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:35
+msgid "MASCULINE_NAME_030"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:170
+msgid "MASCULINE_NAME_165"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:201
+msgid "MASCULINE_NAME_196"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:229
+msgid "MASCULINE_NAME_224"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:236
+msgid "MASCULINE_NAME_231"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:80
+msgid "MASCULINE_NAME_075"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:131
+msgid "MASCULINE_NAME_126"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:257
+msgid "MASCULINE_NAME_252"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:141
+msgid "MASCULINE_NAME_136"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:282
+msgid "MASCULINE_NAME_277"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:218
+msgid "MASCULINE_NAME_213"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:228
+msgid "MASCULINE_NAME_223"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:158
+msgid "MASCULINE_NAME_153"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:76
+msgid "MASCULINE_NAME_071"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:253
+msgid "MASCULINE_NAME_248"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:52
+msgid "MASCULINE_NAME_047"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:294
+msgid "MASCULINE_NAME_289"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:210
+msgid "MASCULINE_NAME_205"
+msgstr ""
+
+#: locale/xml_additions/names/m/masculine.xml:176
+msgid "MASCULINE_NAME_171"
+msgstr ""
