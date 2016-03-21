@@ -28,12 +28,12 @@ from . import settings
 
 NB = {3 : "THREE", 4 : "FOUR", 5 : "FIVE", 6 : "SIX"}
 
-def __retrieve_from_po_file(language, nb_of_letters):
+def __retrieve_from_po_file(language, po_filename):
 	output = []
 	po = polib.pofile(settings.localedir \
 					+ settings.language \
 					+ "/LC_MESSAGES/" \
-					+ "w" + str(nb_of_letters) + "l" \
+					+ po_filename \
 					+ ".po")
 
 	for entry in po:
@@ -43,11 +43,14 @@ def __retrieve_from_po_file(language, nb_of_letters):
 	return output
 
 
-def __get_list_of_words(language, nb_of_letters):
-	output = __retrieve_from_po_file(language, nb_of_letters)
+def __get_list_of(what, language, arg):
+	what_map = { "words" : "w" + str(nb_of_letters) + "l",
+	 			 "names" : arg + "_names" }
+
+	output = __retrieve_from_po_file(language, what_map[what])
 
 	if len(output) < 20:
-		output.append(__retrieve_from_po_file('en', nb_of_letters))
+		output.append(__retrieve_from_po_file('en', what_map[what]))
 
 	return output
 
@@ -68,16 +71,20 @@ def infinite_generator(memory):
 
 
 def four_letters_word(language):
-	return infinite_generator(__get_list_of_words(language, 4))
+	return infinite_generator(__get_list_of("words", language, 4))
 
+def masculine_names():
+	return infinite_generator(__get_list_of("names", language, "masculine"))
 
-#def surnames():
-#	return infinite_generator(lib.common.surnames.LIST)
+def feminine_names():
+	return infinite_generator(__get_list_of("names", language, "feminine"))
 
 
 def init():
     global four_letters_word_generator
-#	global surnames_generator
+	global masculine_names_generator
+	global feminine_names_generator
 
     four_letters_word_generator = four_letters_word(settings.language)
-#	surnames_generator = surnames()
+	masculine_names_generator = masculine_names(settings.language)
+	feminine_names_generator = feminine_names(settings.language)
