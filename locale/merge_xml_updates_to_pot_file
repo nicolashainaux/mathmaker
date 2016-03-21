@@ -19,6 +19,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+
+# This script is meant to be run from the locale/ directory of the project.
+
 import os, sys, re
 import argparse, errno
 import xml.etree.ElementTree as xml_tree

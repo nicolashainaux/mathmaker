@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Copyright 2006-2016 Nicolas Hainaux <nico_h@users.sourceforge.net>
+
+# This file is part of Mathmaker.
+
+# Mathmaker is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+
+# Mathmaker is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Mathmaker; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+
+
+# This script will copy (and replace) all msgstr (whose msgid matches a
+# particular tag) from one po file to another.
+# Each msgstr will be copied only if the same msgid is found in the
+# destination file. /!\ if there already was a msgstr (translated string)
+# matching this msgid, it will be replaced.
+
+import os, sys
+import argparse, errno
+# Requires to install the polib package separately
+# (it is called python3-polib in ubuntu repos)
+import polib
+
+PROCESS_NAME = os.path.basename(sys.argv[0])
+ABSPATH = os.path.abspath(sys.argv[0])
+__l1 = len(PROCESS_NAME)
+__l2 = len(ABSPATH)
+LOCALE_PATH = ABSPATH[:__l2-__l1]
+
+def main():
+	parser = argparse.ArgumentParser(description=\
+						'Retrieve strings from a PO file and add' \
+						+ ' them to another.')
+	parser.add_argument('--from', action='store', dest='source_file',
+						required=True,
+						help='the source po file to process.')
+	parser.add_argument('--to', action='store', dest='dest_file',
+						required=True,
+						help='the destination file where to write the ' \
+						+ 'translations found.')
+	args = parser.parse_args()
+
+	sys.stdout.write("[Retrieving] Starting...\n")
+
+	if not os.path.isfile(args.source_file):
+		raise FileNotFoundError(
+				errno.ENOENT, os.strerror(errno.ENOENT), args.source_file)
+
+	if not os.path.isfile(args.dest_file):
+		raise FileNotFoundError(
+				errno.ENOENT, os.strerror(errno.ENOENT), args.dest_file)
+
+
+	po_source = polib.pofile(args.source_file)
+	po_dest = polib.pofile(args.dest_file)
+
+	something_changed = False
+
+	for source_entry in po_source:
+		if source_entry.msgid[:18] == "FOUR_LETTERS_WORD_" \
+			and len(source_entry.msgstr) > 0:
+		#___
+			sys.stdout.write("Found " + source_entry.msgstr + " in source...")
+
+			for dest_entry in po_dest:
+				if dest_entry.msgid == source_entry.msgid:
+					sys.stdout.write(" importing... ")
+					dest_entry.msgstr = source_entry.msgstr
+					sys.stdout.write(" done!\n")
+					something_changed = True
+					break
+			else:
+				sys.stdout.write(" but not found in dest :-/\n")
+
+	if something_changed:
+		sys.stdout.write("Writing changes to " + args.dest_file + "\n")
+		po_dest.save(args.dest_file)
+	else:
+		sys.stdout.write("No changes to save. " + args.dest_file \
+						 + " remains unchanged.\n")
+
+	sys.stdout.write("[Retrieving] Done.\n\n")
+
+
+if __name__ == '__main__':
+	main()

@@ -27,8 +27,9 @@ echo
 ./merge_xml_updates_to_pot_file --dir /home/nico/dev/mathmaker/mathmaker/sheet/
 
 # Merging updates from other xml files to other pot files
-./merge_xml_updates_to_pot_file --keywords w4l --dir /home/nico/dev/mathmaker/mathmaker/locale/xml_additions/w4l/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/w4l.pot
-
+#./merge_xml_updates_to_pot_file --keywords w4l --dir /home/nico/dev/mathmaker/mathmaker/locale/xml_additions/w4l/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/w4l.pot
+#./merge_xml_updates_to_pot_file --keywords name --dir /home/nico/dev/mathmaker/mathmaker/locale/xml_additions/names/f/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/names_f.pot
+#./merge_xml_updates_to_pot_file --keywords name --dir /home/nico/dev/mathmaker/mathmaker/locale/xml_additions/names/m/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/names_m.pot
 
 #set_header mathmaker.pot 'MATHMAKER TEMPLATE PO FILE'
 #set_header four_letters_words.pot 'MATHMAKER W4L PO FILE'

@@ -19,6 +19,13 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+
+
+# This script will copy all msgstr found in the source po file and not found
+# in the destination po file. It will only put the imported msgstr in a "free"
+# place (an empty msgstr "" in the destination file), if there's any. It will
+# not import msgstr existing already in destination.
+
 import os, sys
 import argparse, errno
 # Requires to install the polib package separately
@@ -33,8 +40,8 @@ LOCALE_PATH = ABSPATH[:__l2-__l1]
 
 def main():
 	parser = argparse.ArgumentParser(description=\
-						'Retrieve strings from a PO file and add' \
-						+ ' them to another.')
+						'Add strings taken from a PO file ' \
+						+ 'to another.')
 	parser.add_argument('--from', action='store', dest='source_file',
 						required=True,
 						help='the source po file to process.')
@@ -44,7 +51,7 @@ def main():
 						+ 'translations found.')
 	args = parser.parse_args()
 
-	sys.stdout.write("[Retrieving] Starting...\n")
+	sys.stdout.write("[Adding] Starting...\n")
 
 	if not os.path.isfile(args.source_file):
 		raise FileNotFoundError(
@@ -58,23 +65,31 @@ def main():
 	po_source = polib.pofile(args.source_file)
 	po_dest = polib.pofile(args.dest_file)
 
+	all_dest_msgstrs = [ entry.msgstr for entry in po_dest ]
+
+	all_source_entries = [ entry for entry in po_source if entry.msgstr != "" ]
+
 	something_changed = False
 
-	for source_entry in po_source:
-		if source_entry.msgid[:18] == "FOUR_LETTERS_WORD_" \
-			and len(source_entry.msgstr) > 0:
-		#___
-			sys.stdout.write("Found " + source_entry.msgstr + " in source...")
+	for source_entry in all_source_entries:
+		if not source_entry.msgstr in all_dest_msgstrs:
+			sys.stdout.write('"' + source_entry.msgstr + '"' \
+										+ " doesn't exist in destination...")
 
 			for dest_entry in po_dest:
-				if dest_entry.msgid == source_entry.msgid:
+				if dest_entry.msgstr == "":
 					sys.stdout.write(" importing... ")
 					dest_entry.msgstr = source_entry.msgstr
 					sys.stdout.write(" done!\n")
 					something_changed = True
 					break
 			else:
-				sys.stdout.write(" but not found in dest :-/\n")
+				sys.stdout.write(" but no place anymore" \
+										+ " to add in destination file :-/\n")
+
+		else:
+			sys.stdout.write('"' + source_entry.msgstr + '"' \
+										+ " already exists in destination...\n")
 
 	if something_changed:
 		sys.stdout.write("Writing changes to " + args.dest_file + "\n")
@@ -83,7 +98,7 @@ def main():
 		sys.stdout.write("No changes to save. " + args.dest_file \
 						 + " remains unchanged.\n")
 
-	sys.stdout.write("[Retrieving] Done.\n\n")
+	sys.stdout.write("[Adding] Done.\n\n")
 
 
 if __name__ == '__main__':
