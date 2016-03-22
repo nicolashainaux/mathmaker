@@ -24,7 +24,7 @@ rm mathmaker_updates.pot
 echo
 
 # Merging mathmaker entries to main pot file:
-./merge_xml_updates_to_pot_file --dir /home/nico/dev/mathmaker/mathmaker/sheet/
+./merge_xml_updates_to_pot_file --dirs /home/nico/dev/mathmaker/mathmaker/sheet/ /home/nico/dev/mathmaker/mathmaker/locale/xml_additions/translations/
 
 # Merging updates from other xml files to other pot files
 #./merge_xml_updates_to_pot_file --keywords w4l --dir /home/nico/dev/mathmaker/mathmaker/locale/xml_additions/w4l/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/w4l.pot

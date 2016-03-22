@@ -76,10 +76,13 @@ def parse_xml(filename):
 def collect_strings(node, rel_file_name, keywords_list):
 	for keyword in keywords_list:
 		if keyword in node.attrib:
-			if not node.attrib[keyword] in collected_strings:
+			if not node.attrib[keyword] in collected_strings \
+				and node.attrib[keyword] != "":
+			#___
 				collected_strings[node.attrib[keyword]] = []
 
-			collected_strings[node.attrib[keyword]] += \
+			if node.attrib[keyword] != "":
+				collected_strings[node.attrib[keyword]] += \
 								[(rel_file_name, node.attrib[LINE_DUMMY_ATTR])]
 
 			# collected_strings looks like:
@@ -120,9 +123,10 @@ def main():
 	parser.add_argument('--potfile', action='store', dest='filename',
 						default=MAIN_POT_FILE_PATH,
 						help='to provide an alternative pot file to process.')
-	parser.add_argument('--dir', action='store', dest='dir_to_browse',
-						default=DIR_TO_BROWSE,
-						help='to provide an specific directory to browse.')
+	parser.add_argument('--dirs', action='store', dest='dir_to_browse',
+						nargs='*',
+						default=[DIR_TO_BROWSE],
+						help='to provide other specific directories to browse.')
 	parser.add_argument('--keywords', action='store', dest='keywords_list',
 						nargs='*', default=DEFAULT_KEYWORDS,
 						help='to provide other keywords.')
@@ -132,19 +136,22 @@ def main():
 		raise FileNotFoundError(
 				errno.ENOENT, os.strerror(errno.ENOENT), args.filename)
 
-	if not os.path.exists(args.dir_to_browse):
-		raise FileNotFoundError(
-				errno.ENOENT, os.strerror(errno.ENOENT), args.dir_to_browse)
+	for d in args.dir_to_browse:
+		if not os.path.exists(d):
+			raise FileNotFoundError(
+					errno.ENOENT, os.strerror(errno.ENOENT), d)
 
-	if not os.path.isdir(args.dir_to_browse):
-		raise NotADirectoryError(
-				errno.ENOTDIR, os.strerror(errno.ENOTDIR), args.dir_to_browse)
+		if not os.path.isdir(d):
+			raise NotADirectoryError(
+					errno.ENOTDIR, os.strerror(errno.ENOTDIR), d)
 
 	sys.stdout.write("[merge_xml_updates_to_pot_file] Starting...\n")
 	sys.stdout.write("Will look for labels: " \
  					+ str(args.keywords_list) + "\n")
 
-	browse_files(args.dir_to_browse, args.keywords_list)
+	for d in args.dir_to_browse:
+		browse_files(d, args.keywords_list)
+
 	xml_pot_file = polib.POFile()
 	for sentence in collected_strings:
 		occ = []
