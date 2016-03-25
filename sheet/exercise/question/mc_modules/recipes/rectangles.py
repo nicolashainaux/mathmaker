@@ -38,7 +38,7 @@ class sub_object(object):
         if not hasattr(self, 'unit_length'):
             units.sub_object.__init__(self, **options)
 
-        rectangle_name = next(shared.four_letters_word_generator)
+        rectangle_name = next(shared.four_letters_words_source)
 
         w = Value(min([self.nb1, self.nb2]), unit=self.unit_length)
         l = Value(max([self.nb1, self.nb2]), unit=self.unit_length)

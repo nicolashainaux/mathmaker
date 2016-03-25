@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import sys
 import polib
+import random
 from random import shuffle
 
 from . import settings
@@ -29,23 +30,18 @@ from . import settings
 NB = {3 : "THREE", 4 : "FOUR", 5 : "FIVE", 6 : "SIX"}
 
 def __retrieve_from_po_file(language, po_filename):
-	output = []
 	po = polib.pofile(settings.localedir \
 					+ settings.language \
 					+ "/LC_MESSAGES/" \
 					+ po_filename \
 					+ ".po")
 
-	for entry in po:
-		if len(entry.msgstr) == nb_of_letters:
-			output.append(entry.msgstr)
-
-	return output
+	return [ entry.msgstr for entry in po if entry.msgstr != "" ]
 
 
 def __get_list_of(what, language, arg):
-	what_map = { "words" : "w" + str(nb_of_letters) + "l",
-	 			 "names" : arg + "_names" }
+	what_map = { "words" : "w" + str(arg) + "l",
+	 			 "names" : str(arg) + "_names" }
 
 	output = __retrieve_from_po_file(language, what_map[what])
 
@@ -54,37 +50,52 @@ def __get_list_of(what, language, arg):
 
 	return output
 
+class infinite_iterator(object):
 
-def infinite_generator(memory):
-	shuffle(memory)
-	collector = []
+	def __init__(self, sources):
+		self.collector = []
 
-	while(True):
-		collector.append(memory[0])
-		output = memory.pop(0)
+		for s in sources:
+			shuffle(s)
+			self.collector.append([])
 
-		if not memory:
-			(memory, collector) = (collector, memory)
-			shuffle(memory)
+		self.sources = sources
 
-		yield output
+	def __iter__(self):
+		return self
+
+	def __next__(self, **options):
+		sce_nb = 0
+
+		if 'choice' in options:
+			sce_nb = options['choice']
+		else:
+			choices = [ n for n in range(len(self.sources)) ]
+			sce_nb = random.choice(choices)
+
+		source = self.sources[sce_nb]
+		collector = self.collector[sce_nb]
+
+		collector.append(source[0])
+		output = source.pop(0)
+
+		if not source:
+			(source, collector) = (collector, source)
+			shuffle(source)
+
+		return output
 
 
-def four_letters_word(language):
-	return infinite_generator(__get_list_of("words", language, 4))
+def four_letters_words(language):
+	return infinite_iterator([__get_list_of("words", language, 4)])
 
-def masculine_names():
-	return infinite_generator(__get_list_of("names", language, "masculine"))
-
-def feminine_names():
-	return infinite_generator(__get_list_of("names", language, "feminine"))
-
+def names(language):
+	return infinite_iterator([__get_list_of("names", language, "masculine"),
+							  __get_list_of("names", language, "feminine")])
 
 def init():
-    global four_letters_word_generator
-	global masculine_names_generator
-	global feminine_names_generator
+	global four_letters_words_source
+	global names_source
 
-    four_letters_word_generator = four_letters_word(settings.language)
-	masculine_names_generator = masculine_names(settings.language)
-	feminine_names_generator = feminine_names(settings.language)
+	four_letters_words_source = four_letters_words(settings.language)
+	names_source = names(settings.language)
