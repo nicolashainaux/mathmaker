@@ -123,8 +123,11 @@ class sub_object(object):
                     w=M.write_math_style2(self.divisor_str))
 
     def h(self, M, **options):
-        return M.write_math_style2("........................ " \
+        if hasattr(self, "unit_length"):
+            return M.write_math_style2("........................ " \
                                    + self.unit_length.into_str())
+        else:
+            return ""
 
     def a(self, M, **options):
         return M.write_math_style2(self.result_str)
