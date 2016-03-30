@@ -114,21 +114,22 @@ MULTIPLE_QUESTIONS = { 2: "What is the double of {number}?",
                        4: "What is the quadruple of {number}?"}
 
 LENGTH_UNITS = ['km', 'hm', 'dam', 'm', 'dm', 'cm', 'mm', 'µm', 'nm', 'pm']
+CAPACITY_UNITS = ['kL', 'hL', 'daL', 'L', 'dL', 'cL', 'mL', 'µL', 'nL', 'pL']
+MASS_UNITS = ['kg', 'hg', 'dag', 'g', 'dg', 'cg', 'mg', 'µg', 'ng', 'pg']
 COMMON_LENGTH_UNITS = LENGTH_UNITS[:-3]
+COMMON_CAPACITY_UNITS = CAPACITY_UNITS[1:-3]
+COMMON_MASS_UNITS = LENGTH_UNITS[:-3]
 ANGLE_UNITS = ['\\textdegree']
 AVAILABLE_UNITS = LENGTH_UNITS + ANGLE_UNITS
-VALUE_AND_UNIT_SEPARATOR = {'km':"~",
-                            'hm':"~",
-                            'dam':"~",
-                            'm':"~",
-                            'dm':"~",
-                            'cm':"~",
-                            'mm':"~",
-                            'µm':"~",
-                            'nm':"~",
-                            'pm':"~",
-                            '\\textdegree':""
-                            }
+VALUE_AND_UNIT_SEPARATOR = {
+'km':"~", 'hm':"~", 'dam':"~", 'm':"~", 'dm':"~", 'cm':"~", 'mm':"~", 'µm':"~",
+'nm':"~", 'pm':"~",
+'kL':"~", 'hL':"~", 'daL':"~", 'L':"~", 'dL':"~", 'cL':"~", 'mL':"~", 'µL':"~",
+'nL':"~", 'pL':"~",
+'kg':"~", 'hg':"~", 'dag':"~", 'g':"~", 'dg':"~", 'cg':"~", 'mg':"~", 'µg':"~",
+'ng':"~", 'pg':"~",
+'\\textdegree':""
+}
 
 TEXT_SCALES = ['tiny', 'scriptsize', 'footnotesize', 'small', 'normal',
                'large', 'Large', 'LARGE', 'huge', 'HUGE']
