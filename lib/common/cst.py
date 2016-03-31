@@ -120,7 +120,10 @@ COMMON_LENGTH_UNITS = LENGTH_UNITS[:-3]
 COMMON_CAPACITY_UNITS = CAPACITY_UNITS[1:-3]
 COMMON_MASS_UNITS = LENGTH_UNITS[:-3]
 ANGLE_UNITS = ['\\textdegree']
-AVAILABLE_UNITS = LENGTH_UNITS + ANGLE_UNITS
+AVAILABLE_UNITS = LENGTH_UNITS + CAPACITY_UNITS + MASS_UNITS + ANGLE_UNITS
+UNIT_KINDS = {'length': COMMON_LENGTH_UNITS,
+              'mass': COMMON_MASS_UNITS,
+              'capacity': COMMON_CAPACITY_UNITS}
 VALUE_AND_UNIT_SEPARATOR = {
 'km':"~", 'hm':"~", 'dam':"~", 'm':"~", 'dm':"~", 'cm':"~", 'mm':"~", 'µm':"~",
 'nm':"~", 'pm':"~",

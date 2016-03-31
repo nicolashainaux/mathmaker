@@ -684,6 +684,15 @@ class Value(Signed):
 
     # --------------------------------------------------------------------------
     ##
+    #   @brief Temporary shortcut for into_str()
+    def __str__(self, **options):
+        return self.into_str(**options)
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
     #   @return The formated string
@@ -1200,7 +1209,7 @@ class Unit(Exponented):
         if type(arg) == str:
             self._name = arg
             if 'exponent' in options:
-                self._exponent = options['exponent']
+                self._exponent = Value(options['exponent'])
 
         elif type(arg) == Unit:
             self._name = copy.deepcopy(arg.name)
