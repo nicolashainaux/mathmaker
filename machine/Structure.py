@@ -240,3 +240,9 @@ class Structure(object):
 
 
 
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns a non-breaking space
+    def insert_nonbreaking_space(self, **options):
+        raise error.MethodShouldBeRedefined(self, 'insert_nonbreaking_space')

@@ -512,6 +512,15 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
     # --------------------------------------------------------------------------
     ##
+    #   @brief Returns a non-breaking space
+    def insert_nonbreaking_space(self, **options):
+        return "~"
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
     #   @brief Draws and inserts the picture of the drawable_arg
     def insert_picture(self, drawable_arg, **options):
         if not isinstance(drawable_arg, Drawable):
