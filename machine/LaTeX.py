@@ -297,11 +297,13 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
     ##
     #   @brief Prints the given string as a mathematical expression
-    def write_math_style2(self, given_string):
-        output_str = self.markup['opening_math_style2'] + " " \
+    def write_math_style2(self, given_string, **kwargs):
+        spacing = " "
+        if 'extra_spacing' in kwargs and not kwargs['extra_spacing']:
+            spacing = ""
+        output_str = self.markup['opening_math_style2'] + spacing \
               + given_string \
-              + " " + self.markup['closing_math_style2']
-
+              + spacing + self.markup['closing_math_style2']
         if self.redirect_output_to_str:
             return output_str
         else:
