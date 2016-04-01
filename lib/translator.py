@@ -121,7 +121,7 @@ def create_table(size, content, **options):
         result += extra_col_sep + new_line_sep + min_row_height + h_border
         result += "\end{tabular}" + "\n"
 
-        return result
+        return result.replace(" $~", "$~").replace("~$~", "$~")
 
     else:
         raise error.NotImplementedYet("create_table using this markup: " \
