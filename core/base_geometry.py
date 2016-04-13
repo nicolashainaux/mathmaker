@@ -412,9 +412,12 @@ class Segment(Drawable):
     #   @brief Sets the fake length of the Segment (the one used in a problem)
     @length.setter
     def length(self, arg):
-        if not (type(arg) == Value and arg.is_numeric()):
-            raise error.WrongArgument(' numeric Value ', str(type(arg)))
-
+        if not isinstance(arg, Value):
+            raise error.WrongArgument('Value', str(type(arg)))
+        if not arg.is_numeric():
+            raise error.WrongArgument('numeric Value',
+                                      'a Value but not numeric, it contains ' \
+                                      + str(arg.raw_value))
         self._length = arg
         self._length_has_been_set = True
 
