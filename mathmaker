@@ -18,6 +18,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+#import time
+#start_time = time.time()
 import sys, os, subprocess
 import gettext
 import shlex
@@ -177,6 +180,8 @@ complete.".format(software_ref=software.NAME) + "\n")
                                                     sheet.catalog.XML_SHEETS]))\
                              + "\n")
 
+            #print("--- {sec} seconds ---"\
+            #      .format(sec=round(time.time() - start_time, 3)))
             sys.exit(2)
 
     elif len(args) == 0:
@@ -191,3 +196,4 @@ complete.".format(software_ref=software.NAME) + "\n")
 
 if __name__ == '__main__':
     main()
+    #print("--- {sec} seconds ---".format(sec=time.time() - start_time))
