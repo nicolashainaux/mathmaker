@@ -21,23 +21,22 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import polib
-import random
-from random import shuffle
+from lib.common import settings
 
-from . import settings
-from lib.sources_tools import infinite_source
-from lib.po_file_tools import get_list_of
+def retrieve_from_po_file(language, po_filename):
+	po = polib.pofile(settings.localedir \
+					+ settings.language \
+					+ "/LC_MESSAGES/" \
+					+ po_filename \
+					+ ".po")
 
-def four_letters_words(language):
-	return infinite_source([get_list_of("words", language, 4)])
+	return [ entry.msgstr for entry in po if entry.msgstr != "" ]
 
-def names(language):
-	return infinite_source([get_list_of("names", language, "masculine"),
-							get_list_of("names", language, "feminine")])
 
-def init():
-	global four_letters_words_source
-	global names_source
-
-	four_letters_words_source = four_letters_words(settings.language)
-	names_source = names(settings.language)
+def get_list_of(what, language, arg):
+	what_map = { "words" : "w" + str(arg) + "l",
+	 			 "names" : str(arg) + "_names" }
+	output = retrieve_from_po_file(language, what_map[what])
+	if len(output) < 20:
+		output.append(retrieve_from_po_file('en', what_map[what]))
+	return output

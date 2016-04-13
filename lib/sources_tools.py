@@ -19,29 +19,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-import sys
+
 import random
-import polib
-from lib.common import settings
-
-def retrieve_from_po_file(language, po_filename):
-	po = polib.pofile(settings.localedir \
-					+ settings.language \
-					+ "/LC_MESSAGES/" \
-					+ po_filename \
-					+ ".po")
-
-	return [ entry.msgstr for entry in po if entry.msgstr != "" ]
-
-
-def get_list_of(what, language, arg):
-	what_map = { "words" : "w" + str(arg) + "l",
-	 			 "names" : str(arg) + "_names" }
-	output = retrieve_from_po_file(language, what_map[what])
-	if len(output) < 20:
-		output.append(retrieve_from_po_file('en', what_map[what]))
-	return output
-
 
 class infinite_source(object):
 
@@ -73,8 +52,6 @@ class infinite_source(object):
         i = random.choice([ n for n in range(len(self.sources[sce_nb])) ])
         self.collector[sce_nb].append(self.sources[sce_nb][i])
         output = self.sources[sce_nb].pop(i)
-        sys.stderr.write("removing " + output + "\n")
-        # Repopulate any empty 'source'
         if not self.sources[sce_nb]:
             if hasattr(self, 'refresh'):
                 self.sources[sce_nb] = self.refresh.refresh(sce_nb)
