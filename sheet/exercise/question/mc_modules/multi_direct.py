@@ -21,25 +21,32 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from core.base_calculus import *
-from . import recipes
+from . import mc_module
 
-nb_variants = recipes.nb_variants
-minimal_setup = recipes.minimal_setup
+class sub_object(mc_module.structure):
 
-class sub_object(object):
+    def __init__(self, M, numbers_to_use, **options):
+        super().setup(M, "minimal", **options)
+        super().setup(M, "nb_variants", nb=numbers_to_use, **options)
 
-    def __init__(self, numbers_to_use, **options):
-        minimal_setup.sub_object.__init__(self, **options)
-        nb_variants.sub_object.__init__(self, numbers_to_use, **options)
+        product = Product([self.nb1, self.nb2])
+        self.product_str = product.into_str(force_expression_begins=True)
+        self.result_str = Item(product.evaluate())\
+                          .into_str(force_expression_begins=True)
 
-        self.product = Product([self.nb1, self.nb2])
-        self.result = Item(self.product.evaluate())\
-                      .into_str(force_expression_begins=True)
+        if self.context == 'mini_problem':
+            super().setup(M, "mini_problem_wording",
+                          mini_pb_type="multi", **options)
 
     def q(self, M, **options):
-        return _("Calculate:") + " "\
-               + M.write_math_style2(self.product\
-                                     .into_str(force_expression_begins=True))
+        if self.context == 'mini_problem':
+            return self.wording.format(**self.wording_format)
+        else:
+            return _("Calculate: {math_expr}").format(\
+                                math_expr=M.write_math_style2(self.product_str))
 
     def a(self, M, **options):
-        return M.write_math_style2(self.result)
+        u = ""
+        if hasattr(self, 'hint'):
+            u = M.insert_nonbreaking_space() + self.hint
+        return M.write_math_style2(self.result_str) + u

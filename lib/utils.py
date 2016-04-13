@@ -338,13 +338,3 @@ def correct_normalize_results(d):
     return d.quantize(Decimal(1)) if d == d.to_integral() else d.normalize()
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief Returns a string where all words wrapped in <> become wrapped in {}
-#          instead. Like reformat("Word1, <word2> and word3.") returns
-#          "Word1, {word2} and word3."
-def reformat(s):
-    return " ".join([w.replace("<", "{").replace(">", "}") \
-                                if w.startswith("<") and w.endswith(">") \
-                                else w \
-                     for w in s.split()])

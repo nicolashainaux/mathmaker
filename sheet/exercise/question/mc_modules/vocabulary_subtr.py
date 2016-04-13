@@ -27,7 +27,7 @@ from lib.common.cst import *
 
 class sub_object(object):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, M, numbers_to_use, **options):
         nb_list = list(numbers_to_use)
         n1 = randomly.pop(nb_list)
         n2 = randomly.pop(nb_list)

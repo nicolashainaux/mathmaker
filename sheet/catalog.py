@@ -38,6 +38,7 @@ XML_SHEETS = { 'tables2_9': DM + L11_1 + "tables2_9.xml",
                'multi_decimal': DM + L11_1 + "multi_decimal.xml",
                'multi_reversed': DM + L11_1 + "multi_reversed.xml",
                'ranks': DM + L11_1 + "ranks.xml",
+               'mini_problems': DM + L11_1 + "mini_problems.xml",
                'test_11_1': DM + L11_1 + "test_11_1.xml",
                'operations_vocabulary': DM + L11_2 \
                                          + "operations_vocabulary.xml",

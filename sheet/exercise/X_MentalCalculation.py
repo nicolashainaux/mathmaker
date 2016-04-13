@@ -59,6 +59,11 @@ MIN_ROW_HEIGHT = 0.5
 SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),
                               ("rectangle", "perimeter")}
 
+KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE = {
+('divi', 'direct', 'area_width_length_rectangle'): \
+('rectangle', 'length_or_width', 'from_area')
+                                       }
+
 # --------------------------------------------------------------------------
 ##
 #   @brief Gets the questions' kinds from the given file.
@@ -87,6 +92,20 @@ def get_q_kinds_from_file(file_name):
                     #___
                         (subchild.attrib['kind'], subchild.attrib['subkind']) \
                         = (subchild.attrib['subkind'], subchild.attrib['kind'])
+
+                    if 'context' in subchild.attrib:
+                        if (subchild.attrib['kind'],
+                            subchild.attrib['subkind'],
+                            subchild.attrib['context']) \
+                            in KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE:
+                        #___
+                            (subchild.attrib['kind'],
+                             subchild.attrib['subkind'],
+                             subchild.attrib['context']) = \
+                            KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE[\
+                                                 (subchild.attrib['kind'],
+                                                  subchild.attrib['subkind'],
+                                                  subchild.attrib['context'])]
 
                     for elt in subchild:
                         questions += [[subchild.attrib,
@@ -284,36 +303,6 @@ class X_MentalCalculation(X_Structure):
         #q_ids_aside = deque()
 
         q_info = namedtuple('q_info', 'type,kind,subkind,nb_source,options')
-
-        """for n in range(self.q_nb):
-            q_nb_in_q_id_box = sum([len(q_dict[q_id]) for q_id in q_dict])
-
-            w_table = [Decimal(Decimal(len(q_dict[q_id])) \
-                               / Decimal(q_nb_in_q_id_box)) \
-                       for q_id in q_id_box]
-
-            #dbg
-            zipped = zip(q_id_box, w_table)
-            sys.stderr.write("\n------------------------------------------")
-            for q,w in zipped:
-                sys.stderr.write("\n" + str(q) + ": " + str(w))
-
-            q_id = randomly.pop(q_id_box,
-                                weighted_table=w_table)
-
-            info = q_dict[q_id].pop(0)
-
-            mixed_q_list += [q_info(q_id, info[1], info[2], info[0], info[3])]
-
-            if len(q_dict[q_id]):
-                q_ids_aside.appendleft(q_id)
-                if len(q_ids_aside) >= 4 or len(q_id_box) <= 1:
-                    q_id_box += [q_ids_aside.pop()]
-            else:
-                del q_dict[q_id]
-
-            if len(q_id_box) <= 1 and len(q_ids_aside) > 0:
-                q_id_box += [q_ids_aside.pop()]"""
 
         q_id_box = [key for key in q_dict.keys() \
                         for i in range(len(q_dict[key]))]

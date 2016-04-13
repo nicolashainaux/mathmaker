@@ -27,7 +27,7 @@ from lib.common.cst import *
 
 class sub_object(object):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, M, numbers_to_use, **options):
         n = numbers_to_use[0]
         self.m = numbers_to_use[1]
         self.question = MULTIPLE_QUESTIONS[n]

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-03-18 12:25+0100\n"
+"POT-Creation-Date: 2016-03-18 18:44+0100\n"
+"PO-Revision-Date: 2016-04-05 15:11+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -304,42 +304,6 @@ msgstr "Somme de fractions"
 msgid "Short Test: pythagorean theorem"
 msgstr "Interrogation : théorème de Pythagore"
 
-#: lib/common/surnames.py:23
-msgid "Oliver"
-msgstr ""
-
-#: lib/common/surnames.py:23
-msgid "Jack"
-msgstr ""
-
-#: lib/common/surnames.py:23
-msgid "Harry"
-msgstr ""
-
-#: lib/common/surnames.py:23
-msgid "Jacob"
-msgstr ""
-
-#: lib/common/surnames.py:23
-msgid "Charlie"
-msgstr ""
-
-#: lib/common/surnames.py:23
-msgid "Thomas"
-msgstr ""
-
-#: lib/common/surnames.py:23
-msgid "George"
-msgstr ""
-
-#: lib/common/surnames.py:23
-msgid "Oscar"
-msgstr ""
-
-#: lib/common/surnames.py:23
-msgid "James"
-msgstr ""
-
 #: lib/common/vocabulary.py:58
 msgid "to the unit"
 msgstr "à l'unité"
@@ -405,11 +369,11 @@ msgstr "Factoriser :"
 msgid "Factorise, if possible:"
 msgstr "Factoriser, si possible :"
 
-#: sheet/exercise/X_MentalCalculation.py:500
+#: sheet/exercise/X_MentalCalculation.py:519
 msgid "Question:"
 msgstr "Question :"
 
-#: sheet/exercise/X_MentalCalculation.py:502
+#: sheet/exercise/X_MentalCalculation.py:521
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -554,42 +518,6 @@ msgstr "Donc, d'après la contraposée du théorème de Pythagore,"
 msgid "{triangle_name} has no right angle."
 msgstr "{triangle_name} n'est pas rectangle."
 
-#: sheet/exercise/question/mc_modules/addi_direct.py:40
-#: sheet/exercise/question/mc_modules/multi_direct.py:40
-#: sheet/exercise/question/mc_modules/substr_direct.py:40
-msgid "Calculate:"
-msgstr "Calculer :"
-
-#: sheet/exercise/question/mc_modules/area_rectangle.py:51
-msgid "Area of this rectangle?"
-msgstr "Aire de ce rectangle ?"
-
-#: sheet/exercise/question/mc_modules/area_rectangle.py:54
-#, python-brace-format
-msgid "Area of a rectangle whose width is {w} and length is {l}?"
-msgstr "Aire d'un rectangle de largeur {w} et de longueur {l} ?"
-
-#: sheet/exercise/question/mc_modules/divi_direct.py:95
-#: sheet/exercise/question/mc_modules/divi_direct.py:115
-#, python-brace-format
-msgid "A rectangle has an area of {a} and a length of {l}. What is its width?"
-msgstr ""
-"Un rectangle a une aire de {a} et une longueur de {l}. Quelle est sa "
-"largeur ?"
-
-#: sheet/exercise/question/mc_modules/divi_direct.py:105
-#: sheet/exercise/question/mc_modules/divi_direct.py:121
-#, python-brace-format
-msgid "A rectangle has an area of {a} and a width of {w}. What is its length?"
-msgstr ""
-"Un rectangle a une aire de {a} et une largeur de {w}. Quelle est sa "
-"longueur ?"
-
-#: sheet/exercise/question/mc_modules/divi_direct.py:110
-#, python-brace-format
-msgid "Calculate: {quotient}"
-msgstr "Calculer : {quotient}"
-
 #: sheet/exercise/question/mc_modules/multi_hole.py:52
 msgid "Which number can fill the hole in"
 msgstr "Quel nombre permet de compléter le trou dans"
@@ -598,15 +526,6 @@ msgstr "Quel nombre permet de compléter le trou dans"
 msgid "In the multiplication tables (from 2 to 9), which product is equal to:"
 msgstr ""
 "Dans les tables de multiplication (de 2 à 9), quel produit est égal à :"
-
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:53
-msgid "Perimeter of this rectangle?"
-msgstr "Périmètre de ce rectangle ?"
-
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:56
-#, python-brace-format
-msgid "Perimeter of a rectangle whose width is {w} and length is {l}?"
-msgstr "Périmètre d'un rectangle de largeur {w} et de longueur {l} ?"
 
 #: sheet/exercise/question/mc_modules/rank_direct.py:37
 #, python-brace-format
@@ -622,18 +541,6 @@ msgstr "{how_many_rank} dans {decimal_number} ?"
 #, python-brace-format
 msgid "Which figure matches the {rank} in the number {decimal_number}?"
 msgstr "Chiffre des {rank} dans le nombre {decimal_number} ?"
-
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:74
-#, python-brace-format
-msgid ""
-"What is the width of a rectangle whose perimeter is {p} and length is {l}?"
-msgstr "Largeur d'un rectangle de périmètre {p} et de longueur {l} ?"
-
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:79
-#, python-brace-format
-msgid ""
-"What is the length of a rectangle whose perimeter is {p} and width is {w}?"
-msgstr "Longueur d'un rectangle de périmètre {p} et de largeur {w} ?"
 
 #: sheet/exercise/question/mc_modules/vocabulary_addi.py:40
 #, python-brace-format
@@ -655,86 +562,176 @@ msgstr "Combien vaut le produit de {n1} par {n2} ?"
 msgid "How much is the difference between {n1} and {n2}?"
 msgstr "Combien vaut la différence entre {n1} et {n2} ?"
 
-#: locale/additional_translations.xml:15
-msgid "units"
-msgstr "unités"
+#: sheet/exercise/question/mc_modules/addi_direct.py:45
+#: sheet/exercise/question/mc_modules/divi_direct.py:42
+#: sheet/exercise/question/mc_modules/multi_direct.py:45
+#: sheet/exercise/question/mc_modules/substr_direct.py:48
+#, python-brace-format
+msgid "Calculate: {math_expr}"
+msgstr "Calculer : {math_expr}"
 
-#: locale/additional_translations.xml:29
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:39
+#, python-brace-format
+msgid ""
+"My golden goose laid {nb1} eggs each day during {nb2} days. How many eggs "
+"has she laid?"
+msgstr ""
+"Ma poule aux œufs d'or a pondu {nb1} œufs chaque jour pendant {nb2} jours. "
+"Combien d'œufs a-t-elle pondu ?"
+
+#: lib/common/wordings/mini_problems_wordings_additions.py:39
+#, python-brace-format
+msgid ""
+"Yesterday, my golden goose laid {nb1} eggs and today she laid {nb2} eggs. "
+"How many eggs has she laid?"
+msgstr ""
+"Hier, ma poule aux œufs d'or a pondu {nb1} œufs et aujourd'hui elle en a "
+"pondu {nb2}. Combien d'œufs a-t-elle pondu ?"
+
+#: locale/xml_additions/translations/vocabulary.xml:29
 msgid "How many tenths"
 msgstr "Nombre de dixièmes"
 
-#: locale/additional_translations.xml:12
-msgid "thousands"
-msgstr "milliers"
+#: locale/xml_additions/translations/vocabulary.xml:13
+msgid "hundreds"
+msgstr "centaines"
 
-#: locale/additional_translations.xml:34
-msgid "What is the quarter of {number}?"
-msgstr "Quel est le quart de {number} ?"
+#: locale/xml_additions/translations/vocabulary.xml:18
+msgid "thousandths"
+msgstr "millièmes"
 
-#: sheet/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-msgid "Reversed multiplications"
-msgstr "Multiplications à l'envers"
+#: locale/xml_additions/translations/vocabulary.xml:27
+msgid "How many tens"
+msgstr "Nombre de dizaines"
 
-#: locale/additional_translations.xml:19
-msgid "How many billions"
-msgstr "Nombre de milliards"
+#: locale/xml_additions/translations/vocabulary.xml:36
+msgid "What is the triple of {number}?"
+msgstr "Quel est le triple de {number} ?"
 
-#: locale/additional_translations.xml:23
-msgid "How many hundreds of thousands"
-msgstr "Nombre de centaines de milliers"
+#: locale/xml_additions/translations/vocabulary.xml:6
+msgid "billions"
+msgstr "milliards"
 
-#: locale/additional_translations.xml:35
+#: locale/xml_additions/translations/vocabulary.xml:16
+msgid "tenths"
+msgstr "dixièmes"
+
+#: locale/xml_additions/translations/vocabulary.xml:35
 msgid "What is the double of {number}?"
 msgstr "Quel est le double de {number} ?"
 
-#: locale/additional_translations.xml:37
+#: locale/xml_additions/translations/vocabulary.xml:15
+msgid "units"
+msgstr "unités"
+
+#: locale/xml_additions/translations/vocabulary.xml:31
+msgid "How many thousandths"
+msgstr "Nombre de millièmes"
+
+#: locale/xml_additions/translations/vocabulary.xml:20
+msgid "How many hundreds of millions"
+msgstr "Nombre de centaines de millions"
+
+#: locale/xml_additions/translations/vocabulary.xml:21
+msgid "How many tens of millions"
+msgstr "Nombre de dizaines de millions"
+
+#: locale/xml_additions/translations/vocabulary.xml:25
+msgid "How many thousands"
+msgstr "Nombre de milliers"
+
+#: locale/xml_additions/translations/vocabulary.xml:22
+msgid "How many millions"
+msgstr "Nombre de millions"
+
+#: locale/xml_additions/translations/vocabulary.xml:37
 msgid "What is the quadruple of {number}?"
 msgstr "Quel est le quadruple de {number} ?"
+
+#: locale/xml_additions/translations/vocabulary.xml:23
+msgid "How many hundreds of thousands"
+msgstr "Nombre de centaines de milliers"
+
+#: locale/xml_additions/translations/vocabulary.xml:9
+msgid "millions"
+msgstr "millions"
+
+#: locale/xml_additions/translations/vocabulary.xml:26
+msgid "How many hundreds"
+msgstr "Nombre de centaines"
+
+#: locale/xml_additions/translations/vocabulary.xml:14
+msgid "tens"
+msgstr "dizaines"
+
+#: locale/xml_additions/translations/vocabulary.xml:28
+msgid "How many units"
+msgstr "Nombre d'unités"
+
+#: locale/xml_additions/translations/vocabulary.xml:24
+msgid "How many tens of thousands"
+msgstr "Nombre de dizaines de milliers"
+
+#: locale/xml_additions/translations/vocabulary.xml:17
+msgid "hundredths"
+msgstr "centièmes"
+
+#: locale/xml_additions/translations/vocabulary.xml:10
+msgid "hundreds of thousands"
+msgstr "centaines de milliers"
+
+#: locale/xml_additions/translations/vocabulary.xml:32
+msgid "What is the half of {number}?"
+msgstr "Quelle est la moitié de {number} ?"
+
+#: locale/xml_additions/translations/vocabulary.xml:19
+msgid "How many billions"
+msgstr "Nombre de milliards"
+
+#: locale/xml_additions/translations/vocabulary.xml:7
+msgid "hundreds of millions"
+msgstr "centaines de millions"
+
+#: locale/xml_additions/translations/vocabulary.xml:33
+msgid "What is the third of {number}?"
+msgstr "Quel est le tiers de {number} ?"
+
+#: locale/xml_additions/translations/vocabulary.xml:34
+msgid "What is the quarter of {number}?"
+msgstr "Quel est le quart de {number} ?"
+
+#: locale/xml_additions/translations/vocabulary.xml:11
+msgid "tens of thousands"
+msgstr "dizaines de milliers"
+
+#: locale/xml_additions/translations/vocabulary.xml:8
+msgid "tens of millions"
+msgstr "dizaines de millions"
+
+#: locale/xml_additions/translations/vocabulary.xml:12
+msgid "thousands"
+msgstr "milliers"
+
+#: locale/xml_additions/translations/vocabulary.xml:30
+msgid "How many hundredths"
+msgstr "Nombre de centièmes"
 
 #: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
 msgid "Divisions"
 msgstr "Divisions"
 
-#: sheet/frameworks/mental_calculation/lev11_1/ranks.xml:5
-msgid "Ranks of figures in a number"
-msgstr "Rangs des chiffres dans un nombre"
+#: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+msgid "Test 2"
+msgstr "Test 2"
 
-#: locale/additional_translations.xml:28
-msgid "How many units"
-msgstr "Nombre d'unités"
+#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+msgid "Multiplications with a hole"
+msgstr "Multiplications à trou"
 
-#: locale/additional_translations.xml:13
-msgid "hundreds"
-msgstr "centaines"
-
-#: locale/additional_translations.xml:18
-msgid "thousandths"
-msgstr "millièmes"
-
-#: locale/additional_translations.xml:33
-msgid "What is the third of {number}?"
-msgstr "Quel est le tiers de {number} ?"
-
-#: sheet/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
-#, fuzzy
-msgid "Mental calculation: mini-problems"
-msgstr "Calcul mental :"
-
-#: locale/additional_translations.xml:17
-msgid "hundredths"
-msgstr "centièmes"
-
-#: locale/additional_translations.xml:11
-msgid "tens of thousands"
-msgstr "dizaines de milliers"
-
-#: locale/additional_translations.xml:27
-msgid "How many tens"
-msgstr "Nombre de dizaines"
-
-#: locale/additional_translations.xml:30
-msgid "How many hundredths"
-msgstr "Nombre de centièmes"
+#: sheet/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+msgid "Vocabulary of operations"
+msgstr "Vocabulaire des opérations"
 
 #: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
 #: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
@@ -751,21 +748,25 @@ msgstr "Nombre de centièmes"
 msgid "Mental calculation"
 msgstr "Calcul mental"
 
-#: locale/additional_translations.xml:31
-msgid "How many thousandths"
-msgstr "Nombre de millièmes"
+#: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+msgid "Simple decimal multiplications"
+msgstr "Multiplications décimales simples"
 
-#: locale/additional_translations.xml:7
-msgid "hundreds of millions"
-msgstr "centaines de millions"
+#: sheet/frameworks/mental_calculation/lev11_1/ranks.xml:5
+msgid "Ranks of figures in a number"
+msgstr "Rangs des chiffres dans un nombre"
 
-#: locale/additional_translations.xml:14
-msgid "tens"
-msgstr "dizaines"
+#: sheet/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+msgid "Multiplications and divisions by 10, 100 and 1000"
+msgstr "Multiplications et divisions par 10, 100 et 1000"
 
-#: locale/additional_translations.xml:8
-msgid "tens of millions"
-msgstr "dizaines de millions"
+#: sheet/frameworks/mental_calculation/lev11_2/rectangles.xml:6
+msgid "Mental calculation: areas and perimeters of rectangles"
+msgstr "Calcul mental : aires et périmètres de rectangles"
+
+#: sheet/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+msgid "Reversed multiplications"
+msgstr "Multiplications à l'envers"
 
 #: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
 #: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
@@ -784,78 +785,657 @@ msgstr "dizaines de millions"
 msgid "Answers"
 msgstr "Réponses"
 
-#: locale/additional_translations.xml:10
-msgid "hundreds of thousands"
-msgstr "centaines de milliers"
+#: sheet/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+msgid "Mental calculation: mini-problems"
+msgstr "Calcul mental : mini-problèmes"
 
-#: locale/additional_translations.xml:21
-msgid "How many tens of millions"
-msgstr "Nombre de dizaines de millions"
+#: lib/common/wordings/mini_problems_wordings_additions.py:47
+#, python-brace-format
+msgid ""
+"The gardener has planted {nb1} salads last week, and {nb2} salads more this "
+"week. How many salads did he plant altogether?"
+msgstr ""
+"Le jardinier a planté {nb1} salades la semaine dernière, et {nb2} salades de "
+"plus cette semaine. Combien de salades a-t-il planté en tout ?"
 
-#: locale/additional_translations.xml:25
-msgid "How many thousands"
-msgstr "Nombre de milliers"
+#: lib/common/wordings/mini_problems_wordings_additions.py:103
+#, python-brace-format
+msgid ""
+"Our neighbours have {nb1} sheep. We have {nb2} more sheep than them. How "
+"many sheep do we have?"
+msgstr ""
+"Nos voisins ont {nb1} moutons. Nous en avons {nb2} de plus qu'eux. Combien "
+"de moutons avons-nous ?"
 
-#: locale/additional_translations.xml:16
-msgid "tenths"
-msgstr "dixièmes"
+#: lib/common/wordings/mini_problems_wordings_additions.py:105
+#, python-brace-format
+msgid ""
+"Our neighbours have {nb1} sheep. That's {nb2} less than us. How many sheep "
+"do we have?"
+msgstr ""
+"Nos voisins ont {nb1} moutons. C'est {nb2} de moins que nous. Combien de "
+"moutons avons-nous ?"
 
-#: locale/additional_translations.xml:9
-msgid "millions"
-msgstr "millions"
+#: lib/common/wordings/mini_problems_wordings_divisions.py:43
+#, python-brace-format
+msgid ""
+"It took {nb2} days to my golden goose to lay {nb1} eggs. How many eggs did "
+"she lay everyday?"
+msgstr ""
+"Ma poule aux œufs d'or a pondu {nb1} œufs en {nb2} jours. Combien d'œufs a-t-"
+"elle pondu chaque jour ?"
 
-#: sheet/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-msgid "Simple decimal multiplications"
-msgstr "Multiplications décimales simples"
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:44
+#, python-brace-format
+msgid ""
+"The gardener has planted {nb1} rows of {nb2} salads. How many salads did he "
+"plant altogether?"
+msgstr ""
+"Le jardinier a planté {nb1} rangs de {nb2} salades. Combien de salades a-t-"
+"il planté en tout ?"
 
-#: locale/additional_translations.xml:20
-msgid "How many hundreds of millions"
-msgstr "Nombre de centaines de millions"
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:53
+#, python-brace-format
+msgid ""
+"I invited {nb1} friends at my birthday's party and want give {nb2} candies "
+"to each of them. How many candies should I buy?"
+msgstr ""
+"J'ai invité {nb1} amis à mon anniversaire et je veux distribuer {nb2} "
+"bonbons à chacun d'eux. Combien de bonbons devrais-je acheter ?"
 
-#: sheet/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
-msgid "Vocabulary of operations"
-msgstr "Vocabulaire des opérations"
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:84
+#, python-brace-format
+msgid ""
+"We have {nb1} sheep. Our neighbours have {nb2} times more sheep than us. How "
+"many sheep do they have?"
+msgstr ""
+"Nous avons {nb1} moutons. Nos voisins en ont {nb2} fois plus que nous. "
+"Combien de moutons ont-ils ?"
 
-#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: sheet/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-msgid "Multiplications with a hole"
-msgstr "Multiplications à trou"
+#: lib/common/wordings/mini_problems_wordings_substractions.py:42
+#, python-brace-format
+msgid ""
+"Yesterday, my golden goose laid {nb1} eggs we used {nb2} of them to make an "
+"omelet. How many eggs left are there?"
+msgstr ""
+"Hier, ma poule aux œufs d'or a pondu {nb1} œufs et on en a utilisé {nb2} "
+"pour faire une omelette. Combien reste-t-il d'œufs ?"
 
-#: locale/additional_translations.xml:36
-msgid "What is the triple of {number}?"
-msgstr "Quel est le triple de {number} ?"
+#: lib/common/wordings/mini_problems_wordings_substractions.py:47
+#, python-brace-format
+msgid ""
+"The gardener had {nb1} salads in his vegetable garden, and harvested {nb2} "
+"of them last week. How many salads are still in the garden?"
+msgstr ""
+"Le jardinier avait {nb1} salades dans son potager et en a récolté {nb2} la "
+"semaine dernière. Combien reste-t-il de salades dans le potager ?"
 
-#: locale/additional_translations.xml:26
-msgid "How many hundreds"
-msgstr "Nombre de centaines"
+#: lib/common/wordings/mini_problems_wordings_substractions.py:126
+#, python-brace-format
+msgid ""
+"Our neighbours have {nb1} sheep. That's {nb2} more than us. How many sheep "
+"do we have?"
+msgstr ""
+"Nos voisins ont {nb1} moutons. C'est {nb2} de plus que nous. Combien de "
+"moutons avons-nous ?"
 
-#: locale/additional_translations.xml:32
-msgid "What is the half of {number}?"
-msgstr "Quelle est la moitié de {number} ?"
+#: lib/common/wordings/mini_problems_wordings_substractions.py:128
+#, python-brace-format
+msgid ""
+"Our neighbours have {nb1} sheep. We have {nb2} less than them. How many "
+"sheep do we have?"
+msgstr ""
+"Nos voisins ont {nb1} moutons. Nous en avons {nb2} de moins qu'eux. Combien "
+"de moutons avaons-nous ?"
 
-#: sheet/frameworks/mental_calculation/lev11_2/rectangles.xml:6
-msgid "Mental calculation: areas and perimeters of rectangles"
-msgstr "Calcul mental : aires et périmètres de rectangles"
+#: lib/common/wordings/mini_problems_wordings_additions.py:91
+msgid ""
+"I have painted {nb1} {area_unit=m} of this wall and still have {nb2} "
+"{area_unit} to paint it completely. What is the area of the wall? |hint:"
+"area_unit|"
+msgstr ""
+"J'ai peint {nb1} {area_unit=m} de ce mur et je dois encore peindre {nb2} "
+"{area_unit} pour terminer. Quelle est l'aire de ce mur ? |hint:area_unit|"
 
-#: locale/additional_translations.xml:22
-msgid "How many millions"
-msgstr "Nombre de millions"
+#: lib/common/wordings/mini_problems_wordings_additions.py:95
+msgid ""
+"{nb1} {area_unit=m} of this wall are already painted. {nb2} {area_unit} are "
+"still missing to have the wall completely painted. What is its area? |hint:"
+"area_unit|"
+msgstr ""
+"{nb1} {area_unit=m} de ce mur sont déjà peints. Il en reste {nb2} "
+"{area_unit} pour qu'il soit complètement peint. Quelle est son aire ? |hint:"
+"area_unit|"
 
-#: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-msgid "Test 2"
-msgstr "Test 2"
+#: lib/common/wordings/mini_problems_wordings_divisions.py:90
+msgid ""
+"We have loaded {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How "
+"heavy is one packet? |hint:mass_unit|"
+msgstr ""
+"Nous avons chargé {nb1} {mass_unit=kg} de farine, répartis dans {nb2} "
+"paquets. Quel est la masse d'un paquet ? |hint:mass_unit|"
 
-#: locale/additional_translations.xml:6
-msgid "billions"
-msgstr "milliards"
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:97
+msgid ""
+"We have loaded {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How "
+"heavy are they altogether? |hint:mass_unit|"
+msgstr ""
+"Nous avons chargé {nb1} paquets de farine, de {nb2} {mass_unit=kg} chacun. "
+"Quelle masse totale de farine cela représente-t-il ? |hint:mass_unit|"
 
-#: sheet/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-msgid "Multiplications and divisions by 10, 100 and 1000"
-msgstr "Multiplications et divisions par 10, 100 et 1000"
+#: lib/common/wordings/mini_problems_wordings_substractions.py:70
+msgid ""
+"I had to fill this can with {nb2} {capacity_unit=L} of water. It contains "
+"now {nb1} {capacity_unit}. How much water was left in it? |hint:"
+"capacity_unit|"
+msgstr ""
+"J'ai dû remettre {nb2} {capacity_unit=L} d'eau dans ce bidon. Maintenant il "
+"en contient {nb1} {capacity_unit}. Quelle quantité d'eau restait-il ? |hint:"
+"capacity_unit|"
 
-#: locale/additional_translations.xml:24
-msgid "How many tens of thousands"
-msgstr "Nombre de dizaines de milliers"
+#: lib/common/wordings/mini_problems_wordings_substractions.py:103
+msgid ""
+"My bike ride is {nb1} {length_unit=km} long and I already rode {nb2} "
+"{length_unit}. How long do I still have to go cycling? |hint:length_unit|"
+msgstr ""
+"Ma randonnée à vélo est de {nb1} {length_unit=km} et j'ai déjà parcouru "
+"{nb2} {length_unit}. Combien me reste-t-il à parcourir ? |hint:length_unit|"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:107
+msgid ""
+"I already rode {nb2} {length_unit=km} out of {nb1} {length_unit}. How long "
+"do I still have to go cycling? |hint:length_unit|"
+msgstr ""
+"J'ai déjà parcouru {nb2} {length_unit=km} sur les {nb1} {length_unit} de ma "
+"balade à vélo. Combien me reste-t-il à parcourir ? |hint:length_unit|"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:114
+msgid ""
+"I have painted {nb2} {area_unit=m} out of the {nb1} {area_unit} of this "
+"wall. How much is still left to paint? |hint:area_unit|"
+msgstr ""
+"J'ai peint {nb2} {area_unit=m} sur les {nb1} {area_unit} de ce mur. Combien "
+"reste-t-il à peindre ? |hint:area_unit|"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:118
+msgid ""
+"This wall is altogether {nb1} {area_unit=m} wide. I have already painted "
+"{nb2} {area_unit} of it, how much is there still left to paint? |hint:"
+"area_unit|"
+msgstr ""
+"Ce mur a une aire de  {nb1} {area_unit=m}. J'en ai déjà peint {nb2} "
+"{area_unit}, combien reste-t-il à peindre ? |hint:area_unit|"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:74
+msgid ""
+"This can contains altogether {nb1} {capacity_unit=L} of water. I had to "
+"refill it with {nb2} {capacity_unit}. How much water was left in it? |hint:"
+"capacity_unit|"
+msgstr ""
+"Ce bidon contient en tout {nb1} {capacity_unit=L} d'eau. J'ai dû ajouter "
+"{nb2} {capacity_unit} d'eau pour le remplir. Combien d'eau restait-il ? |"
+"hint:capacity_unit|"
+
+#: lib/common/wordings/mini_problems_wordings_divisions.py:48
+#, python-brace-format
+msgid ""
+"The gardener has planted {nb1} salads, splitted in {nb2} rows. How many "
+"salads is there in a row?"
+msgstr ""
+"Le jardinier a planté {nb1} salades sur {nb2} rangs. Combien de salades y-a-"
+"t-il dans un rang ?"
+
+#: lib/common/wordings/mini_problems_wordings_divisions.py:80
+#, python-brace-format
+msgid ""
+"Our neighbours have {nb1} sheep. That's {nb2} times more than us. How many "
+"sheep do we have?"
+msgstr ""
+"Nos voisins ont {nb1} moutons. C'est {nb2} fois plus que nous. Combien de "
+"mouton avons-nous ?"
+
+#: sheet/exercise/question/mc_modules/area_rectangle.py:41
+msgid "Area of this rectangle? |hint:area_unit|"
+msgstr "Aire de ce rectangle ? |hint:area_unit|"
+
+#: sheet/exercise/question/mc_modules/area_rectangle.py:44
+#, python-brace-format
+msgid ""
+"Area of a rectangle whose width is {w} <length_unit> and length is {l} "
+"<length_unit>? |hint:area_unit|"
+msgstr ""
+"Aire d'un rectangle de largeur {w} <length_unit> et de longueur {l}  "
+"<length_unit>? |hint:area_unit|"
+
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:41
+msgid "Perimeter of this rectangle? |hint:length_unit|"
+msgstr "Périmètre de ce rectangle ? |hint:length_unit|"
+
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:44
+#, python-brace-format
+msgid ""
+"Perimeter of a rectangle whose width is {w} <length_unit> and length is {l} "
+"<length_unit>? |hint:length_unit|"
+msgstr ""
+"Périmètre d'un rectangle de largeur {w} <length_unit> et de longueur {l} "
+"<length_unit> ? |hint:length_unit|"
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:39
+#, python-brace-format
+msgid ""
+"A rectangle has an area of {a} <area_unit> and a length of {x} "
+"<length_unit>. What is its width? |hint:length_unit|"
+msgstr ""
+"Un rectangle a une aire de {a} <area_unit> et une longueur de {x} "
+"<length_unit>. Quelle est sa largeur ? |hint:length_unit|"
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:41
+#, python-brace-format
+msgid ""
+"A rectangle has an area of {a} <area_unit> and a width of {x} <length_unit>. "
+"What is its length? |hint:length_unit|"
+msgstr ""
+"Un rectangle a une aire de {a} <area_unit> et une largeur de {x} "
+"<length_unit>. Quelle est sa longueur ? |hint:length_unit|"
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:60
+#, python-brace-format
+msgid ""
+"What is the width of a rectangle whose perimeter is {p} <length_unit> and "
+"length is {x} <length_unit>? |hint:length_unit|"
+msgstr ""
+"Largeur d'un rectangle de périmètre {p} <length_unit> et de longueur {x} "
+"<length_unit> ? |hint:length_unit|"
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:63
+#, python-brace-format
+msgid ""
+"What is the length of a rectangle whose perimeter is {p} <length_unit> and "
+"width is {x} <length_unit>? |hint:length_unit|"
+msgstr ""
+"Longueur d'un rectangle de périmètre {p} <length_unit> et de largeur {x} "
+"<length_unit> ? |hint:length_unit|"
+
+#: lib/common/wordings/mini_problems_wordings_divisions.py:56
+#, python-brace-format
+msgid ""
+"I will give out {nb1} candies to the {nb2} friends that I invited at my "
+"birthday's party. How many candies will receive each of my friends?"
+msgstr ""
+"Je vais distribuer {nb1} bonbons entre les {nb2} amis que j'ai invités pour "
+"mon anniversaire. Combien de bonbons va recevoir chacun d'eux ?"
+
+#: lib/common/wordings/mini_problems_wordings_divisions.py:34
+#, python-brace-format
+msgid ""
+"{masculine_name} has {nb1} marbles. He gives out them to {nb2} friends. How "
+"many marbles will get each friend?"
+msgstr ""
+"{masculine_name} a {nb1} billes. Il les distribue à {nb2} amis. Combien de "
+"billes va recevoir chacun d'eux ?"
+
+#: lib/common/wordings/mini_problems_wordings_divisions.py:37
+#, python-brace-format
+msgid ""
+"{feminine_name} has {nb1} marbles. She gives out them to {nb2} friends. How "
+"many marbles will get each friend?"
+msgstr ""
+"{feminine_name} a {nb1} billes. Elle les distribue à {nb2} amies. Combien de "
+"billes va recevoir chacune d'elles ?"
+
+#: lib/common/wordings/mini_problems_wordings_divisions.py:61
+#, python-brace-format
+msgid ""
+"{name} put {nb1} pencils away in {nb2} boxes. How many pencils are there in "
+"each box?"
+msgstr ""
+"{name} a rangé {nb1} crayons dans {nb2} boîtes. Combien de crayons y-a-t-il "
+"dans chaque boîte ?"
+
+#: lib/common/wordings/mini_problems_wordings_divisions.py:70
+#, python-brace-format
+msgid ""
+"{masculine_name} has received altogether {nb1} £ pocket money in {nb2} "
+"months. How much did he receive every month? |hint:£|"
+msgstr ""
+"{masculine_name} a reçu en tout {nb1} € d'argent de poche en {nb2} mois. "
+"Combien a-t-il reçu chaque mois ? |hint:€|"
+
+#: lib/common/wordings/mini_problems_wordings_divisions.py:73
+#, python-brace-format
+msgid ""
+"{feminine_name} has received altogether {nb1} £ pocket money in {nb2} "
+"months. How much did she receive every month? |hint:£|"
+msgstr ""
+"{feminine_name} a reçu en tout {nb1} € d'argent de poche en {nb2} mois. "
+"Combien a-t-elle reçu chaque mois ?  |hint:€|"
+
+#: lib/common/wordings/mini_problems_wordings_divisions.py:85
+#, python-brace-format
+msgid ""
+"{name} has prepared {nb1} truffles splitted in {nb2} packets. How many "
+"truffles is there in one packet?"
+msgstr ""
+"{name} a préparé {nb1} truffes, rangées dans {nb2} paquets. Combien de "
+"truffes y-a-t-il dans un paquet?"
+
+#: lib/common/wordings/mini_problems_wordings_additions.py:34
+#, python-brace-format
+msgid ""
+"{name1} has {nb1} marbles. {name2} has {nb2} marbles more than {name1}. How "
+"many marbles has {name2}?"
+msgstr ""
+"{name1} a {nb1} billes. {name2} a {nb2} billes de plus que {name1}. Combien "
+"de billes a {name2} ?"
+
+#: lib/common/wordings/mini_problems_wordings_additions.py:56
+#, python-brace-format
+msgid ""
+"{name1} ate {nb1} candies and {name2} ate {nb2} of them. The bag is empty. "
+"How many candies were there in the bag?"
+msgstr ""
+"{name1} a mangé {nb1} bonbons et {name2} en a mangé {nb2}. Il n'en reste "
+"plus. Combien de bonbons y avait-il dans le sac ?"
+
+#: lib/common/wordings/mini_problems_wordings_additions.py:58
+#, python-brace-format
+msgid ""
+"{name} ate {nb1} candies and there are {nb2} candies left in the paperbag. "
+"How many candies were there in the paperbag?"
+msgstr ""
+"{name} a mangé {nb1} bonbons et il en reste {nb2} dans le sachet. Combien y "
+"en avait-il ?"
+
+#: lib/common/wordings/mini_problems_wordings_additions.py:64
+#, python-brace-format
+msgid ""
+"{name1} is {nb1} years old and {name2} is {nb2} years older than {name1}. "
+"How old is {name2}? |hint:years|"
+msgstr ""
+"{name1} a {nb1} ans et {name2} a {nb2} ans de plus que {name1}. Quel âge a "
+"{name2} ? |hint:ans|"
+
+#: lib/common/wordings/mini_problems_wordings_additions.py:69
+msgid ""
+"I had to fill this can with {nb1} {capacity_unit=L} of water. There was "
+"{nb2} {capacity_unit} left in it. How much does it contain? |hint:"
+"capacity_unit|"
+msgstr ""
+"J'ai dû ajouter {nb1} {capacity_unit=L} d'eau pour remplir ce bidon. Il "
+"restait {nb2} {capacity_unit} dedans. Combien contient-il en tout? |hint:"
+"capacity_unit|"
+
+#: lib/common/wordings/mini_problems_wordings_additions.py:75
+#, python-brace-format
+msgid ""
+"{masculine_name} has read {nb1} pages of his book this morning and read "
+"{nb2} pages more this afternoon. How many pages has he read today?"
+msgstr ""
+"{masculine_name} a lu {nb1} pages de son livre ce matin et en a lu {nb2} "
+"pages de plus cet après-midi. Combien de pages a-t-il lues aujourd'hui ?"
+
+#: lib/common/wordings/mini_problems_wordings_additions.py:78
+#, python-brace-format
+msgid ""
+"{feminine_name} has read {nb1} pages of her book this morning and read {nb2} "
+"pages more this afternoon. How many pages has she read today?"
+msgstr ""
+"{feminine_name} a lu {nb1} pages de son livre ce matin et en a lu {nb2} "
+"pages de plus cet après-midi. Combien de pages a-t-elle lu aujourd'hui ?"
+
+#: lib/common/wordings/mini_problems_wordings_additions.py:85
+msgid ""
+"I rode {nb1} {length_unit=km} this morning and still have to ride {nb2} "
+"{length_unit} until back home. What is the length of my ride? |hint:"
+"length_unit|"
+msgstr ""
+"J'ai fait {nb1} {length_unit=km} à vélo ce matin et j'ai encore {nb2} "
+"{length_unit} à parcourir. Quelle distance aurai-je parcouru en tout ? |hint:"
+"length_unit|"
+
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:34
+#, python-brace-format
+msgid ""
+"{name1} has {nb1} marbles. {name2} has {nb2} times more marbles than "
+"{name1}. How many marbles has {name2}?"
+msgstr ""
+"{name1} a {nb1} billes. {name2} a {nb2} fois plus de billes que {name1}. "
+"Combien de billes a {name2} ?"
+
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:58
+#, python-brace-format
+msgid ""
+"{masculine_name} bought {nb1} boxes of {nb2} pencils. How many pens did he "
+"buy?"
+msgstr ""
+"{masculine_name} a acheté {nb1} boîtes de {nb2} crayons. Combien de crayons "
+"a-t-il acheté ?"
+
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:60
+#, python-brace-format
+msgid ""
+"{feminine_name} bought {nb1} boxes of {nb2} pencils. How many pens did she "
+"buy?"
+msgstr ""
+"{feminine_name} a acheté {nb1} boîtes de {nb2} crayons. Combien de crayons a-"
+"t-elle acheté ?"
+
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:66
+#, python-brace-format
+msgid ""
+"{masculine_name} bought {nb1} pens at {nb2} £. How much did he pay? |hint:£|"
+msgstr ""
+"{masculine_name} a acheté {nb1} stylos à {nb2} €. Combien a-t-il payé ?  |"
+"hint:€|"
+
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:68
+#, python-brace-format
+msgid ""
+"{feminine_name} bought {nb1} pens at {nb2} £. How much did she pay? |hint:£|"
+msgstr ""
+"{feminine_name} a acheté {nb1} stylos à {nb2} €. Combien a-t-elle payé ?  |"
+"hint:€|"
+
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:74
+#, python-brace-format
+msgid ""
+"{masculine_name} gets {nb1} £ pocket money every month. If he doesn't spend "
+"it during {nb2} months, how much will he spare? |hint:£|"
+msgstr ""
+"{masculine_name} reçoit {nb1} € d'argent de poche par mois. S'il ne dépense "
+"rien pendant {nb2} mois, combien va-t-il épargner ? |hint:€|"
+
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:77
+#, python-brace-format
+msgid ""
+"{feminine_name} gets {nb1} £ pocket money every month. If she doesn't spend "
+"it during {nb2} months, how much will she spare? |hint:£|"
+msgstr ""
+"{feminine_name} reçoit {nb1} € d'argent de poche par mois. Si elle ne "
+"dépense rien pendant {nb2} mois, combien va-t-elle épargner ? |hint:€|"
+
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:89
+#, python-brace-format
+msgid ""
+"{masculine_name} has prepared {nb1} packets of {nb2} truffles. How many "
+"truffles has he prepared?"
+msgstr ""
+"{masculine_name} a préparé {nb1} paquets de {nb2} truffes. Combien de "
+"truffes a-t-il préparé ?"
+
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:91
+#, python-brace-format
+msgid ""
+"{feminine_name} has prepared {nb1} packets of {nb2} truffles. How many "
+"truffles has she prepared?"
+msgstr ""
+"{feminine_name} a préparé {nb1} paquets de {nb2} truffes. Combien de truffes "
+"a-t-elle préparé ?"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:34
+#, python-brace-format
+msgid ""
+"{name1} has {nb1} marbles. {name2} has {nb2} marbles less than {name1}. How "
+"many marbles has {name2}?"
+msgstr ""
+"{name1} a {nb1} billes. {name2} a {nb2} billes de moins que {name1}. Combien "
+"de billes a {name2} ?"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:36
+#, python-brace-format
+msgid ""
+"{name2} has {nb2} marbles less than {name1}, who has {nb1} of them. How many "
+"marbles has {name2}?"
+msgstr ""
+"{name2} a {nb2} billes de moins que {name1}, qui en a {nb1}. Combien de "
+"billes a {name2} ?"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:62
+#, python-brace-format
+msgid ""
+"{name1} is {nb1} years old and {name2} is {nb2} years younger than {name1}. "
+"How old is {name2}? |hint:years|"
+msgstr ""
+"{name1} a {nb1} ans et {name2} a {nb2} ans de moins que {name1}. Quel âge a "
+"{name2} ? |hint:ans|"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:64
+#, python-brace-format
+msgid ""
+"{name2} is {nb2} years younger than {name1}, who is {nb1} years old. How old "
+"is {name2}? |hint:years|"
+msgstr ""
+"{name2} a {nb2} ans de moins que {name1}, qui a {nb1} ans. Quel âge a "
+"{name2} ? |hint:ans|"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:83
+#, python-brace-format
+msgid ""
+"{masculine_name} read his book from page {nb2} this morning until page {nb1} "
+"this afternoon. How many pages has he read today?"
+msgstr ""
+"{masculine_name} a lu son livre, de la page {nb2} ce matin jusqu'à la page "
+"{nb1} cet après-midi. Combien de pages a-t-il lu aujourd'hui ?"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:86
+#, python-brace-format
+msgid ""
+"{feminine_name} read her book from page {nb2} this morning until page {nb1} "
+"this afternoon. How many pages has she read today?"
+msgstr ""
+"{feminine_name} a lu son livre, de la page {nb2} ce matin jusqu'à la page "
+"{nb1} cet après-midi. Combien de pages a-t-elle lu aujourd'hui ?"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:92
+#, python-brace-format
+msgid ""
+"Today, {masculine_name} has read his book until page {nb1}. This morning he "
+"started at page {nb2}. How many pages has he read today?"
+msgstr ""
+"Aujourd'hui, {masculine_name} a lu son livre jusqu'à la page {nb1}. Ce matin "
+"il avait commencé à la page {nb2}. Combien de pages a-t-il lu aujourd'hui ?"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:95
+#, python-brace-format
+msgid ""
+"Today, {feminine_name} has read her book until page {nb1}. This morning she "
+"started at page {nb2}. How many pages has she read today?"
+msgstr ""
+"Aujourd'hui, {feminine_name} a lu son livre jusqu'à la page {nb1}. Ce matin "
+"elle avait commencé à la page {nb2}. Combien de pages a-t-elle lu "
+"aujourd'hui ?"
+
+#: lib/common/wordings/mini_problems_wordings_divisions.py:66
+#, python-brace-format
+msgid "{name} paid {nb1} £ for {nb2} pens. How much does cost one pen?"
+msgstr "{name} a payé {nb1} € pour {nb2} stylos. Combien coûte un stylo?"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:57
+#, python-brace-format
+msgid ""
+"Some friends shared {nb2} of the {nb1} candies of the packet. How many "
+"candies are there left?"
+msgstr ""
+"Des amis se sont partagé {nb2} des {nb1} bonbons du paquet. Combien en reste-"
+"t-il ?"
+
+#: lib/common/wordings/mini_problems_wordings_additions.py:49
+#, python-brace-format
+msgid ""
+"The gardener has planted {nb1} cabbages last week, and {nb2} cabbages more "
+"this week. How many cabbages did he plant altogether?"
+msgstr ""
+"Le jardinier a planté {nb1} choux la semaine dernière, et {nb2} choux de "
+"plus cette semaine. Combien de choux a-t-il planté en tout ?"
+
+#: lib/common/wordings/mini_problems_wordings_divisions.py:50
+#, python-brace-format
+msgid ""
+"The gardener has planted {nb1} cabbages, splitted in {nb2} rows. How many "
+"cabbages is there in a row?"
+msgstr ""
+"Le jardinier a planté {nb1} choux sur {nb2} rangs. Combien de choux y-a-t-il "
+"dans un rang ?"
+
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:46
+#, python-brace-format
+msgid ""
+"The gardener has planted {nb1} rows of {nb2} cabbages. How many cabbages did "
+"he plant altogether?"
+msgstr ""
+"Le jardinier a planté {nb1} rangs de {nb2} choux. Combien de choux a-t-il "
+"planté en tout ?"
+
+#: lib/common/wordings/mini_problems_wordings_substractions.py:50
+#, python-brace-format
+msgid ""
+"The gardener had {nb1} cabbages in his vegetable garden, and harvested {nb2} "
+"of them last week. How many cabbages are still in the garden?"
+msgstr ""
+"Le jardinier avait {nb1} choux dans son potager et en a récolté {nb2} la "
+"semaine dernière. Combien reste-t-il de choux dans le potager ?"
+
+#: lib/common/wordings/mini_problems_wordings_additions.py:41
+#, python-brace-format
+msgid ""
+"Yesterday, my golden goose laid {nb1} eggs. That's {nb2} less than today. "
+"How many eggs has she laid today?"
+msgstr ""
+"Hier, ma poule aux œufs d'or a pondu {nb1} œufs. C'est {nb2} de moins "
+"qu'aujourd'hui. Combien d'œufs a-t-elle pondu aujourd'hui ?"
+
+#~ msgid ""
+#~ "There were {nb1} candies in {masculine_name}'s paperbag, but he ate {nb2} "
+#~ "of them. How many candies are there left in the bag?"
+#~ msgstr ""
+#~ "Il y avait {nb1} bonbons dans le sachet de {masculine_name}, mais il en a "
+#~ "mangé {nb2}. Combien de bonbons reste-t-il dans le sac ?"
+
+#~ msgid ""
+#~ "There were {nb1} candies in {feminine_name}'s paperbag, but she ate {nb2} "
+#~ "of them. How many candies are there left in the bag?"
+#~ msgstr ""
+#~ "Il y avait {nb1} bonbons dans le sachet de {feminine_name}, mais elle en "
+#~ "a mangé {nb2}. Combien de bonbons reste-t-il dans le sac ?"
+
+#~ msgid ""
+#~ "{masculine_name} ate {nb2} of the {nb1} candies of his paperbag. How many "
+#~ "candies are there left in the bag?"
+#~ msgstr ""
+#~ "{masculine_name} a mangé {nb2} des {nb1} bonbons du paquet. Combien en "
+#~ "reste-t-il ?"
+
+#~ msgid ""
+#~ "{feminine_name} paid {nb1} £ for {nb2} pens. How many pens did she buy?"
+#~ msgstr ""
+#~ "{feminine_name} a payé {nb1} € pour {nb2} stylos. Combien de stylos a-t-"
+#~ "elle acheté ?"
+
+#~ msgid "Calculate: {quotient}"
+#~ msgstr "Calculer : {quotient}"
+
+#~ msgid "Calculate:"
+#~ msgstr "Calculer :"
 
 #~ msgid "FOUR_LETTERS_WORD_295"
 #~ msgstr "FOLK"

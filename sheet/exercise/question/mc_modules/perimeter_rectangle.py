@@ -21,27 +21,31 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from core.base_calculus import *
-from . import recipes
+from . import mc_module
+from lib.wordings_handling_tools import reformat, setup_wording_format_of
 
-rectangles = recipes.rectangles
-minimal_setup = recipes.minimal_setup
-units = recipes.units
+class sub_object(mc_module.structure):
 
-class sub_object(object):
+    def __init__(self, M, numbers_to_use, **options):
+        super().setup(M, "minimal", **options)
+        super().setup(M, "nb_variants", nb=numbers_to_use, **options)
+        super().setup(M, "length_units", **options)
+        super().setup(M, "rectangle", **options)
 
-    def __init__(self, numbers_to_use, **options):
-        minimal_setup.sub_object.__init__(self, **options)
-        units.sub_object.__init__(self, **options)
-        rectangles.sub_object.__init__(self, numbers_to_use, **options)
-
-        self.w_str = self.rectangle.width.into_str(force_expression_begins=True,
-                                                   display_unit=True)
+        self.w_str = self.rectangle.width.into_str(force_expression_begins=True)
         self.l_str = self.rectangle.length.into_str(\
-                                                   force_expression_begins=True,
-                                                   display_unit=True)
+                                                   force_expression_begins=True)
         self.perimeter_str = self.rectangle.perimeter.into_str(\
-                                                   force_expression_begins=True,
-                                                   display_unit=True)
+                                                   force_expression_begins=True)
+        if self.picture:
+            self.wording = _("Perimeter of this rectangle? |hint:length_unit|")
+            setup_wording_format_of(self, M)
+        else:
+            self.wording = reformat(_("Perimeter of a rectangle whose width \
+is {w} <length_unit> and length is {l} <length_unit>? |hint:length_unit|")\
+                                    .format(w=M.write_math_style2(self.w_str),
+                                            l=M.write_math_style2(self.l_str)))
+            setup_wording_format_of(self, M)
 
     def q(self, M, **options):
         if self.picture:
@@ -50,16 +54,12 @@ class sub_object(object):
                                   [M.insert_picture(self.rectangle,
                                                     scale=0.75,
                                          vertical_alignment_in_a_tabular=True),
-                                   _("Perimeter of this rectangle?")])
+                                   self.wording.format(**self.wording_format)])
         else:
-            return _(\
-      "Perimeter of a rectangle whose width is {w} and length is {l}?")\
-            .format(w=M.write_math_style2(self.w_str),
-                    l=M.write_math_style2(self.l_str))
-
-    def h(self, M, **options):
-        return M.write_math_style2("........................ " \
-                                   + self.unit_length.into_str())
+            return self.wording.format(**self.wording_format)
 
     def a(self, M, **options):
-        return M.write_math_style2(self.perimeter_str)
+        u = ""
+        if hasattr(self, 'hint'):
+            u = M.insert_nonbreaking_space() + self.hint
+        return M.write_math_style2(self.perimeter_str) + u

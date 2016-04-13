@@ -36,7 +36,7 @@ DEFAULT_RANKS_SCALE = RANKS
 
 class sub_object(object):
 
-    def __init__(self, rank_to_use, **options):
+    def __init__(self, M, rank_to_use, **options):
         rank_to_use = rank_to_use[0]
 
         generation_type = options['generation_type'] \

@@ -27,7 +27,7 @@ from lib.common.cst import *
 
 class sub_object(object):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, M, numbers_to_use, **options):
         n1 = numbers_to_use[0]
         n2 = numbers_to_use[1]
         self.n1 = Item(n1).into_str(force_expression_begins=True)

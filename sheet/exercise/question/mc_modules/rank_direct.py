@@ -29,7 +29,7 @@ from . import rank_reversed
 
 class sub_object(object):
 
-    def __init__(self, rank_to_use, **options):
+    def __init__(self, M, rank_to_use, **options):
         rank_reversed.sub_object.__init__(self, rank_to_use, direct=True,
                                           **options)
 

@@ -11,6 +11,7 @@
 	<xs:simpleType name="sourceNameType">
 		<xs:restriction  base="xs:string">
 			<xs:enumeration value="table_2_9"/>
+			<xs:enumeration value="table_4_9"/>
 			<xs:enumeration value="table_2"/>
 			<xs:enumeration value="table_3"/>
 			<xs:enumeration value="table_4"/>

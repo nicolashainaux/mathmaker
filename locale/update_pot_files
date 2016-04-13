@@ -13,7 +13,7 @@ set_header () {
 }
 
 cd ..
-xgettext --package-name="mathmaker" --package-version="0.6" --copyright-holder="Nicolas Hainaux" --msgid-bugs-address="nh.techn@gmail.com" --keyword=_ --output=locale/mathmaker_updates.pot */*.py */*/*.py */*/*/*.py */*/*/*/*.py */*/*/*/*/*.py
+xgettext --package-name="mathmaker" --package-version="0.6" --copyright-holder="Nicolas Hainaux" --msgid-bugs-address="nh.techn@gmail.com" --keyword=_ --output=locale/mathmaker_updates.pot */*.py */*/*.py */*/*/*.py */*/*/*/*.py
 
 cd locale/
 

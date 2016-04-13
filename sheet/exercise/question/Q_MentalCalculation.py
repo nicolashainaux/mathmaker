@@ -20,7 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import sys, random
+import random
 
 from lib import *
 from lib.common.cst import *
@@ -64,6 +64,7 @@ AVAILABLE_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                               'rank_word',
                               'integers_10_100',
                               'integers_10_100_for_rectangles',
+                              'integers_10_100_diff7atleast',
                               'integers_5_20',
                               'integer_3_10_decimal_3_10',
                               'integer_3_10_decimal_3_10_for_rectangles',
@@ -84,7 +85,8 @@ PART_OF_ANOTHER_SOURCE = { 'table_2': 'table_2_9',
                            'table_2_9_for_rectangles': 'table_2_9',
                            'table_11_for_rectangles': 'table_11',
                            'integers_5_20_for_rectangles': 'integers_5_20',
-                           'integers_10_100_for_rectangles': 'integers_10_100'
+                           'integers_10_100_for_rectangles': 'integers_10_100',
+                           'integers_10_100_diff7atleast' : 'integers_10_100'
                          }
 
 SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number': {'half', 'third', 'quarter'},
@@ -160,14 +162,14 @@ rectangle_translations = {'table_2_9': 'table_2_9_for_rectangles',
                           'integer_3_10_decimal_3_10': \
                                     'integer_3_10_decimal_3_10_for_rectangles'}
 
-SOURCES_TO_TRANSLATE = {'divi_direct_area_width_length_rectangle': \
-                                                rectangle_translations,
-                        'area_rectangle': rectangle_translations,
+SOURCES_TO_TRANSLATE = {'area_rectangle': rectangle_translations,
                         'perimeter_rectangle': rectangle_translations,
                         'rectangle_length_or_width_from_area': \
                                                 rectangle_translations,
                         'rectangle_length_or_width_from_perimeter': \
-                                                rectangle_translations
+                                                rectangle_translations,
+                        'substr_direct': \
+                            {'integers_10_100': 'integers_10_100_diff7atleast'}
                        }
 
 AVAILABLE_Q_KIND_VALUES = \
@@ -189,6 +191,30 @@ AVAILABLE_Q_KIND_VALUES = \
                          'decimal_and_10_100_1000',
                          'decimal_and_one_digit',
                          'bypass'],
+      'addi_direct': ['table_2_9',
+                              'table_2', 'table_3', 'table_4',
+                              'table_4_9',
+                              'table_11',
+                              'table_15',
+                              'table_25',
+                              'decimal_and_10_100_1000',
+                              'integers_10_100_for_sums_diffs',
+                              'table_2_9_for_sums_diffs',
+                              'integers_10_100',
+                              'integers_5_20',
+                              'bypass'],
+      'substr_direct': ['table_2_9',
+                              'table_2', 'table_3', 'table_4',
+                              'table_4_9',
+                              'table_11',
+                              'table_15',
+                              'table_25',
+                              'decimal_and_10_100_1000',
+                              'integers_10_100_for_sums_diffs',
+                              'table_2_9_for_sums_diffs',
+                              'integers_10_100',
+                              'integers_5_20',
+                              'bypass'],
       'perimeter_rectangle': ['table_2_9',
                               'table_2', 'table_3', 'table_4',
                               'table_4_9',
@@ -305,6 +331,8 @@ MODULES =  \
     { 'multi_direct': mc_modules.multi_direct,
       'multi_reversed': mc_modules.multi_reversed,
       'multi_hole': mc_modules.multi_hole,
+      'addi_direct': mc_modules.addi_direct,
+      'substr_direct': mc_modules.substr_direct,
       'divi_direct': mc_modules.divi_direct,
       'rank_direct': mc_modules.rank_direct,
       'rank_reversed': mc_modules.rank_reversed,
@@ -481,6 +509,11 @@ def generate_numbers(subkind):
 
     elif subkind == 'integers_10_100_for_rectangles':
         return { (i+10, j+10) for i in range(90) for j in range(90) if i < j }
+
+    elif subkind == 'integers_10_100_diff7atleast':
+        return { (i+10, j+10) for i in range(90) \
+                              for j in range(90) \
+                              if i - j >= 7 }
 
     elif subkind == 'integers_5_20':
         return { (i+5, j+5) for i in range(15) for j in range(15) if i <= j }
@@ -674,14 +707,13 @@ class Q_MentalCalculation(Q_Structure):
         del options['numbers_to_use']
 
         # module
-        m = MODULES[self.q_kind].sub_object(numbers_to_use,
+        m = MODULES[self.q_kind].sub_object(embedded_machine,
+                                            numbers_to_use,
                                             **options)
 
         self.q_text = m.q(embedded_machine, **options)
         self.q_answer = m.a(embedded_machine, **options)
-
-        if hasattr(m, 'h'):
-            self.q_hint = m.h(embedded_machine, **options)
+        self.q_hint = m.h(embedded_machine, **options)
 
 
 
@@ -719,4 +751,4 @@ class Q_MentalCalculation(Q_Structure):
     ##
     #   @brief Returns the answer of the question as a str
     def hint_to_str(self):
-        return self.q_hint if hasattr(self, 'q_hint') else " "
+        return self.q_hint

@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2014 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2015 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
 
@@ -20,22 +20,4 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from core.base_calculus import *
-
-class sub_object(object):
-
-    def __init__(self, numbers_to_use, **options):
-        nb_list = list(numbers_to_use)
-        nb1 = nb_list.pop(randomly.pop([0, 1]))
-        nb2 = nb_list.pop()
-
-        if self.variant == 'decimal1':
-            nb1 /= 10
-
-        elif self.variant == 'decimal2':
-            nb1 /= 10
-            nb2 /= 10
-
-        nb_list = [nb1, nb2]
-        self.nb1 = nb_list.pop(randomly.pop([0, 1]))
-        self.nb2 = nb_list.pop()
+from . import mini_problems_wordings

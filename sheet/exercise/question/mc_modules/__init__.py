@@ -28,7 +28,7 @@
 # @brief All question objects should be "declared" here.
 
 from . import multi_direct, multi_reversed, multi_hole
-from . import divi_direct
+from . import divi_direct, addi_direct, substr_direct
 from . import rank_direct, rank_reversed, rank_numberof
 from . import vocabulary_simple_part_of_a_number
 from . import vocabulary_simple_multiple_of_a_number
