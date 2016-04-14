@@ -33,12 +33,6 @@ import argparse, errno
 # (it is called python3-polib in ubuntu repos)
 import polib
 
-PROCESS_NAME = os.path.basename(sys.argv[0])
-ABSPATH = os.path.abspath(sys.argv[0])
-__l1 = len(PROCESS_NAME)
-__l2 = len(ABSPATH)
-LOCALE_PATH = ABSPATH[:__l2-__l1]
-
 def main():
 	parser = argparse.ArgumentParser(description=\
 						'Retrieve strings from a PO file and add' \
