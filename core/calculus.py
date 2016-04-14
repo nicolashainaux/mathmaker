@@ -27,7 +27,7 @@ from lib import *
 from lib import translator
 from .base import *
 from .base_calculus import *
-from lib.common import default
+from lib.common.settings import default
 from lib.maths_lib import *
 from lib.common.cst import *
 from lib.utils import *

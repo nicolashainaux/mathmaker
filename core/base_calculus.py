@@ -40,7 +40,7 @@ from lib import randomly
 #from lib import translator
 from lib.maths_lib import *
 from lib.common.cst import *
-from lib.common.default import *
+from lib.common.settings import default
 from lib.utils import *
 from maintenance import debug
 from lib.common.settings import CONFIG
@@ -56,7 +56,9 @@ if debug.ENABLED:
     import machine
 
 try:
-    locale.setlocale(locale.LC_ALL, LANGUAGE + '.' + ENCODING)
+    locale.setlocale(locale.LC_ALL,
+                     CONFIG["LOCALES"]["LANGUAGE"] \
+                     + '.' + CONFIG["LOCALES"]["ENCODING"])
 except:
     locale.setlocale(locale.LC_ALL, '')
 
@@ -7727,7 +7729,7 @@ class Monomial(Product):
         # 1st CASE: DEFAULT
         if arg == DEFAULT:
             factor1 = Item(1)
-            factor2 = Item(('+', MONOMIAL_LETTER, 0))
+            factor2 = Item(('+', default.MONOMIAL_LETTER, 0))
             self._element.append(factor1)
             self._element.append(factor2)
 
@@ -7746,7 +7748,7 @@ class Monomial(Product):
              and (is_.a_number(arg[1]) and is_.an_integer(arg[2])):
         #___
             factor1 = Item((arg[0], arg[1]))
-            factor2 = Item(('+', MONOMIAL_LETTER, arg[2]))
+            factor2 = Item(('+', default.MONOMIAL_LETTER, arg[2]))
             self._element.append(factor1)
             self._element.append(factor2)
 
@@ -7764,7 +7766,7 @@ class Monomial(Product):
             else:
                 factor1 = arg[0].clone()
 
-            factor2 = Item(('+', MONOMIAL_LETTER, arg[1]))
+            factor2 = Item(('+', default.MONOMIAL_LETTER, arg[1]))
             self._element.append(factor1)
             self._element.append(factor2)
 
@@ -7780,7 +7782,7 @@ class Monomial(Product):
             factor1 = Item((randomly.sign(plus_signs_ratio=aux_ratio),
                             randomly.integer(1, arg[1])))
             factor2 = Item(('+',
-                            MONOMIAL_LETTER,
+                            default.MONOMIAL_LETTER,
                             randomly.integer(0, arg[2])))
             self._element.append(factor1)
             self._element.append(factor2)

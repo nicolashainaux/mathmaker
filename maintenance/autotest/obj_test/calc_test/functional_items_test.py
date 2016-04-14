@@ -25,7 +25,7 @@ import sys
 import math
 #import locale
 
-#from lib.common import default
+#from lib.common.settings import default
 
 from core import *
 from core.base_calculus import *

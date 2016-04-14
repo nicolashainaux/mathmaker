@@ -25,12 +25,21 @@ import configparser
 
 from lib.common import software
 
+class default_object(object):
+    def __init__(self):
+        self.LANGUAGE = CONFIG["LOCALES"]["LANGUAGE"]
+        self.ENCODING = CONFIG["LOCALES"]["ENCODING"]
+        self.NUMBER_OF_QUESTIONS = 6
+        self.MONOMIAL_LETTER = 'x'
+        self.EQUATION_NAME = 'E'
+
 def init():
     global rootdir
     global localedir
     global configfile_name
     global CONFIG
     global language
+    global default
 
     __process_name = os.path.basename(sys.argv[0])
     __abspath = os.path.abspath(sys.argv[0])
@@ -43,5 +52,7 @@ def init():
 
     CONFIG = configparser.ConfigParser()
     CONFIG.read(configfile_name)
+
+    default = default_object()
 
     language = None

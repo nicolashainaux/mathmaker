@@ -23,7 +23,7 @@
 import gettext, os, sys
 from lib import error
 from lib.common import software
-from lib.common import default
+from lib.common.settings import default
 from lib.common.cst import *
 
 pathname = os.path.dirname(sys.argv[0])

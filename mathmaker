@@ -31,7 +31,6 @@ from lib.common import settings
 settings.init()
 
 from lib.common import shared
-from lib.common import default
 from lib.common import software
 from lib.common.settings import CONFIG
 from lib import error
@@ -53,7 +52,7 @@ def main():
     parser.add_option("-l", "--language",
                       action="store",
                       dest="lang",
-                      default=default.LANGUAGE,
+                      default=CONFIG["LOCALES"]["LANGUAGE"],
                       metavar="LANGUAGE",
                       help="force the language of the output to LANGUAGE." \
                            + " Default value is configured in " \

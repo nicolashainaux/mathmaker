@@ -22,6 +22,5 @@
 
 from . import alphabet
 from . import cst
-#from . import default
 #import latex
 #import software
