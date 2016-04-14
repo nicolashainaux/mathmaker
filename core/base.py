@@ -23,7 +23,7 @@
 import subprocess
 from lib import error
 from lib.common import software
-from lib.common.cfg import CONFIG
+from lib.common.settings import CONFIG
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------

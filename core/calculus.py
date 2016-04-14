@@ -31,7 +31,7 @@ from lib.common import default
 from lib.maths_lib import *
 from lib.common.cst import *
 from lib.utils import *
-from lib.common.cfg import CONFIG
+from lib.common.settings import CONFIG
 
 markup_choice = CONFIG['MARKUP']['USE']
 

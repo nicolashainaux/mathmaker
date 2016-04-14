@@ -27,10 +27,13 @@ import shlex
 from optparse import OptionParser
 
 from lib.common import settings
+
+settings.init()
+
 from lib.common import shared
 from lib.common import default
 from lib.common import software
-from lib.common.cfg import CONFIG
+from lib.common.settings import CONFIG
 from lib import error
 import machine
 import sheet
@@ -40,8 +43,6 @@ EUKTOEPS_VERSION_ERR_MSG = " but euktoeps did not return the correct version"\
                            " information"
 
 def main():
-
-    settings.init()
 
     parser = OptionParser(usage="usage: %prog [options] arg",
                           version=software.NAME + " " + software.VERSION \
@@ -56,7 +57,7 @@ def main():
                       metavar="LANGUAGE",
                       help="force the language of the output to LANGUAGE." \
                            + " Default value is configured in " \
-                           + software.NAME + "." + software.CFG_FILE_SUFFIX)
+                           + "mathmaker's config file.")
 
     (options, args) = parser.parse_args()
 
@@ -69,7 +70,7 @@ def main():
     except OSError:
         sys.stderr.write(EUKTOEPS_ERR_MSG \
                          + " but the path to euktoeps " \
-                         + "written in mathmaker.cfg " \
+                         + "written in mathmaker's config file " \
                          + "doesn't seem to match anything.\n")
         sys.exit(2)
 

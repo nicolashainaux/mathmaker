@@ -22,7 +22,7 @@
 
 import os, sys, locale
 
-from lib.common.cfg import CONFIG
+from lib.common.settings import CONFIG
 
 LANGUAGE = CONFIG["LOCALES"]["LANGUAGE"]
 ENCODING = CONFIG["LOCALES"]["ENCODING"]

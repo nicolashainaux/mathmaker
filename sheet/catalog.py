@@ -20,10 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib.common.software import ROOT_PATH
+from lib.common import settings
 from . import exercise
 
-D = ROOT_PATH + "sheet/frameworks/"
+D = settings.rootdir + "sheet/frameworks/"
 DM = D + "mental_calculation/"
 L11_1 = "lev11_1/"
 L11_2 = "lev11_2/"

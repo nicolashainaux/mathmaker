@@ -24,7 +24,7 @@ import math
 import sys
 
 from lib.common import latex
-from lib.common.cfg import CONFIG
+from lib.common.settings import CONFIG
 from lib.common import software
 from lib.common.cst import *
 

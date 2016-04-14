@@ -43,7 +43,7 @@ from lib.common.cst import *
 from lib.common.default import *
 from lib.utils import *
 from maintenance import debug
-from lib.common.cfg import CONFIG
+from lib.common.settings import CONFIG
 
 markup_choice = CONFIG['MARKUP']['USE']
 

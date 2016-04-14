@@ -36,7 +36,7 @@ from core.base_calculus import Value
 from lib import *
 from lib.maths_lib import *
 from maintenance import debug
-from lib.common.cfg import CONFIG
+from lib.common.settings import CONFIG
 
 markup_choice = CONFIG['MARKUP']['USE']
 

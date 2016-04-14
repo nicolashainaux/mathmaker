@@ -21,10 +21,15 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os, sys
+import configparser
+
+from lib.common import software
 
 def init():
     global rootdir
     global localedir
+    global configfile_name
+    global CONFIG
     global language
 
     __process_name = os.path.basename(sys.argv[0])
@@ -33,5 +38,10 @@ def init():
     __l2 = len(__abspath)
     rootdir = __abspath[:__l2-__l1]
     localedir = rootdir + "locale/"
+
+    configfile_name = rootdir + software.NAME + '.cfg'
+
+    CONFIG = configparser.ConfigParser()
+    CONFIG.read(configfile_name)
 
     language = None

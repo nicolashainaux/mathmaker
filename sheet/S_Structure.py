@@ -26,7 +26,7 @@ import xml.etree.ElementTree as XML_PARSER
 from .catalog import CATALOG, XML_SCHEMA_PATH
 from lib import error
 from lib.common.cst import *
-from lib.common.cfg import CONFIG
+from lib.common.settings import CONFIG
 
 # --------------------------------------------------------------------------
 ##

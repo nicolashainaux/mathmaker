@@ -37,7 +37,7 @@ from lib import *
 from lib import randomly
 from lib.maths_lib import *
 from core.calculus import *
-from lib.common.cfg import CONFIG
+from lib.common.settings import CONFIG
 
 markup_choice = CONFIG['MARKUP']['USE']
 
