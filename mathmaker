@@ -43,11 +43,6 @@ def main():
 
     settings.init()
 
-    pathname = os.path.dirname(sys.argv[0])
-    localedir = os.path.abspath(pathname) + "/locale"
-
-    settings.localedir = localedir + "/"
-
     parser = OptionParser(usage="usage: %prog [options] arg",
                           version=software.NAME + " " + software.VERSION \
                                   + "\nLicense: " + software.LICENSE \
@@ -125,7 +120,7 @@ def main():
 
     try:
         gettext.translation(software.NAME,
-                            localedir,
+                            settings.localedir,
                             [options.lang]).install()
     except IOError as msg:
         error.write_warning("gettext returned the following message:\n" \
@@ -136,7 +131,7 @@ in {software_ref} which will try to produce output in the language of your \
 system.".format(software_ref=software.NAME) + "\n" )
         try:
             gettext.install(software.NAME,
-                            localedir,
+                            settings.localedir,
                             [locale.getdefaultlocale()[0]])
             settings.language = locale.getdefaultlocale()[0]
         except IOError as msg:
@@ -147,7 +142,7 @@ available yet in {software_ref} which will produce output in \
 english. If this results in producing an error, then your installation isn't \
 complete.".format(software_ref=software.NAME) + "\n")
             gettext.translation(software.NAME,
-                                localedir,
+                                settings.localedir,
                                 ['en']).install()
             settings.language = 'en'
 

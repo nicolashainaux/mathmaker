@@ -20,9 +20,18 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import os, sys
+
 def init():
-    global language
+    global rootdir
     global localedir
+    global language
+
+    __process_name = os.path.basename(sys.argv[0])
+    __abspath = os.path.abspath(sys.argv[0])
+    __l1 = len(__process_name)
+    __l2 = len(__abspath)
+    rootdir = __abspath[:__l2-__l1]
+    localedir = rootdir + "locale/"
 
     language = None
-    localedir = None
