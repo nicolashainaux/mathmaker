@@ -21,8 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import polib
-import random
-from random import shuffle
 
 from . import settings
 from lib.sources_tools import infinite_source
