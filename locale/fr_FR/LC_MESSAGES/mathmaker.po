@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-04-05 15:11+0100\n"
+"PO-Revision-Date: 2016-04-13 17:20+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -369,11 +369,11 @@ msgstr "Factoriser :"
 msgid "Factorise, if possible:"
 msgstr "Factoriser, si possible :"
 
-#: sheet/exercise/X_MentalCalculation.py:519
+#: sheet/exercise/X_MentalCalculation.py:489
 msgid "Question:"
 msgstr "Question :"
 
-#: sheet/exercise/X_MentalCalculation.py:521
+#: sheet/exercise/X_MentalCalculation.py:491
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -834,7 +834,7 @@ msgstr ""
 "Le jardinier a planté {nb1} rangs de {nb2} salades. Combien de salades a-t-"
 "il planté en tout ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:53
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:52
 #, python-brace-format
 msgid ""
 "I invited {nb1} friends at my birthday's party and want give {nb2} candies "
@@ -843,7 +843,7 @@ msgstr ""
 "J'ai invité {nb1} amis à mon anniversaire et je veux distribuer {nb2} "
 "bonbons à chacun d'eux. Combien de bonbons devrais-je acheter ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:84
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:83
 #, python-brace-format
 msgid ""
 "We have {nb1} sheep. Our neighbours have {nb2} times more sheep than us. How "
@@ -915,7 +915,7 @@ msgstr ""
 "Nous avons chargé {nb1} {mass_unit=kg} de farine, répartis dans {nb2} "
 "paquets. Quel est la masse d'un paquet ? |hint:mass_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:97
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:96
 msgid ""
 "We have loaded {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How "
 "heavy are they altogether? |hint:mass_unit|"
@@ -1202,7 +1202,7 @@ msgstr ""
 "{name1} a {nb1} billes. {name2} a {nb2} fois plus de billes que {name1}. "
 "Combien de billes a {name2} ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:58
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:57
 #, python-brace-format
 msgid ""
 "{masculine_name} bought {nb1} boxes of {nb2} pencils. How many pens did he "
@@ -1211,7 +1211,7 @@ msgstr ""
 "{masculine_name} a acheté {nb1} boîtes de {nb2} crayons. Combien de crayons "
 "a-t-il acheté ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:60
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:59
 #, python-brace-format
 msgid ""
 "{feminine_name} bought {nb1} boxes of {nb2} pencils. How many pens did she "
@@ -1220,7 +1220,7 @@ msgstr ""
 "{feminine_name} a acheté {nb1} boîtes de {nb2} crayons. Combien de crayons a-"
 "t-elle acheté ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:66
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:65
 #, python-brace-format
 msgid ""
 "{masculine_name} bought {nb1} pens at {nb2} £. How much did he pay? |hint:£|"
@@ -1228,7 +1228,7 @@ msgstr ""
 "{masculine_name} a acheté {nb1} stylos à {nb2} €. Combien a-t-il payé ?  |"
 "hint:€|"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:68
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:67
 #, python-brace-format
 msgid ""
 "{feminine_name} bought {nb1} pens at {nb2} £. How much did she pay? |hint:£|"
@@ -1236,7 +1236,7 @@ msgstr ""
 "{feminine_name} a acheté {nb1} stylos à {nb2} €. Combien a-t-elle payé ?  |"
 "hint:€|"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:74
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:73
 #, python-brace-format
 msgid ""
 "{masculine_name} gets {nb1} £ pocket money every month. If he doesn't spend "
@@ -1245,7 +1245,7 @@ msgstr ""
 "{masculine_name} reçoit {nb1} € d'argent de poche par mois. S'il ne dépense "
 "rien pendant {nb2} mois, combien va-t-il épargner ? |hint:€|"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:77
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:76
 #, python-brace-format
 msgid ""
 "{feminine_name} gets {nb1} £ pocket money every month. If she doesn't spend "
@@ -1254,7 +1254,7 @@ msgstr ""
 "{feminine_name} reçoit {nb1} € d'argent de poche par mois. Si elle ne "
 "dépense rien pendant {nb2} mois, combien va-t-elle épargner ? |hint:€|"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:89
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:88
 #, python-brace-format
 msgid ""
 "{masculine_name} has prepared {nb1} packets of {nb2} truffles. How many "
@@ -1263,7 +1263,7 @@ msgstr ""
 "{masculine_name} a préparé {nb1} paquets de {nb2} truffes. Combien de "
 "truffes a-t-il préparé ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:91
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:90
 #, python-brace-format
 msgid ""
 "{feminine_name} has prepared {nb1} packets of {nb2} truffles. How many "

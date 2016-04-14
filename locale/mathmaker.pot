@@ -349,11 +349,11 @@ msgstr ""
 msgid "Factorise, if possible:"
 msgstr ""
 
-#: sheet/exercise/X_MentalCalculation.py:519
+#: sheet/exercise/X_MentalCalculation.py:489
 msgid "Question:"
 msgstr ""
 
-#: sheet/exercise/X_MentalCalculation.py:521
+#: sheet/exercise/X_MentalCalculation.py:491
 msgid "Answer:"
 msgstr ""
 
@@ -795,14 +795,14 @@ msgid ""
 "plant altogether?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:53
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:52
 #, python-brace-format
 msgid ""
 "I invited {nb1} friends at my birthday's party and want give {nb2} candies "
 "to each of them. How many candies should I buy?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:84
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:83
 #, python-brace-format
 msgid ""
 "We have {nb1} sheep. Our neighbours have {nb2} times more sheep than us. How"
@@ -857,7 +857,7 @@ msgid ""
 "heavy is one packet? |hint:mass_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:97
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:96
 msgid ""
 "We have loaded {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How"
 " heavy are they altogether? |hint:mass_unit|"
@@ -1078,54 +1078,54 @@ msgid ""
 "{name1}. How many marbles has {name2}?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:58
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:57
 #, python-brace-format
 msgid ""
 "{masculine_name} bought {nb1} boxes of {nb2} pencils. How many pens did he "
 "buy?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:60
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:59
 #, python-brace-format
 msgid ""
 "{feminine_name} bought {nb1} boxes of {nb2} pencils. How many pens did she "
 "buy?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:66
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:65
 #, python-brace-format
 msgid ""
 "{masculine_name} bought {nb1} pens at {nb2} £. How much did he pay? |hint:£|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:68
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:67
 #, python-brace-format
 msgid ""
 "{feminine_name} bought {nb1} pens at {nb2} £. How much did she pay? |hint:£|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:74
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:73
 #, python-brace-format
 msgid ""
 "{masculine_name} gets {nb1} £ pocket money every month. If he doesn't spend "
 "it during {nb2} months, how much will he spare? |hint:£|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:77
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:76
 #, python-brace-format
 msgid ""
 "{feminine_name} gets {nb1} £ pocket money every month. If she doesn't spend "
 "it during {nb2} months, how much will she spare? |hint:£|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:89
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:88
 #, python-brace-format
 msgid ""
 "{masculine_name} has prepared {nb1} packets of {nb2} truffles. How many "
 "truffles has he prepared?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:91
+#: lib/common/wordings/mini_problems_wordings_multiplications.py:90
 #, python-brace-format
 msgid ""
 "{feminine_name} has prepared {nb1} packets of {nb2} truffles. How many "
