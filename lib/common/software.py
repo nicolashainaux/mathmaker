@@ -20,9 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import os
-import sys
-
 # DATA RELATING TO THE SOFTWARE
 NAME = "mathmaker"
 NAME_PRINTABLE = "Mathmaker"
@@ -31,4 +28,3 @@ LICENSE = "GNU GPL 3"
 AUTHOR = "Nicolas Hainaux <nico_h@users.sourceforge.net>"
 COPYRIGHT = "Copyright 2006-2015"
 WEBSITE = "http://mathmaker.sourceforge.net"
-
