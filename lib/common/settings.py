@@ -27,11 +27,15 @@ from lib.common import software
 
 class default_object(object):
     def __init__(self):
-        self.LANGUAGE = CONFIG["LOCALES"]["LANGUAGE"]
-        self.ENCODING = CONFIG["LOCALES"]["ENCODING"]
         self.NUMBER_OF_QUESTIONS = 6
         self.MONOMIAL_LETTER = 'x'
         self.EQUATION_NAME = 'E'
+
+class config_object(object):
+    def __init__(self):
+        self.LANGUAGE = CONFIG["LOCALES"]["LANGUAGE"]
+        self.ENCODING = CONFIG["LOCALES"]["ENCODING"]
+        self.MARKUP = CONFIG['MARKUP']['USE']
 
 def init():
     global rootdir
@@ -40,6 +44,7 @@ def init():
     global CONFIG
     global language
     global default
+    global config
 
     __process_name = os.path.basename(sys.argv[0])
     __abspath = os.path.abspath(sys.argv[0])
@@ -49,9 +54,9 @@ def init():
     localedir = rootdir + "locale/"
 
     configfile_name = rootdir + software.NAME + '.cfg'
-
     CONFIG = configparser.ConfigParser()
     CONFIG.read(configfile_name)
+    config = config_object()
 
     default = default_object()
 

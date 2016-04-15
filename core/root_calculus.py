@@ -35,15 +35,13 @@ from lib import is_
 from lib.maths_lib import *
 from decimal import *
 from lib.common.cst import *
-from lib.common.settings import CONFIG
+from lib.common.settings import config
 
-markup_choice = CONFIG['MARKUP']['USE']
-
-if markup_choice == 'latex':
+if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP
 
 try:
-    locale.setlocale(locale.LC_ALL, LANGUAGE + '.' + ENCODING)
+    locale.setlocale(locale.LC_ALL, config.LANGUAGE + '.' + config.ENCODING)
 except:
     locale.setlocale(locale.LC_ALL, '')
 

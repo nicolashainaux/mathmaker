@@ -36,11 +36,9 @@ from core.base_calculus import Value
 from lib import *
 from lib.maths_lib import *
 from maintenance import debug
-from lib.common.settings import CONFIG
+from lib.common.settings import config
 
-markup_choice = CONFIG['MARKUP']['USE']
-
-if markup_choice == 'latex':
+if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP
 
 if debug.ENABLED:
@@ -48,7 +46,7 @@ if debug.ENABLED:
     import machine
 
 try:
-    locale.setlocale(locale.LC_ALL, default.LANGUAGE + '.' + default.ENCODING)
+    locale.setlocale(locale.LC_ALL, config.LANGUAGE + '.' + config.ENCODING)
 except:
     locale.setlocale(locale.LC_ALL, '')
 

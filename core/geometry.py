@@ -37,19 +37,17 @@ from lib import *
 from lib import randomly
 from lib.maths_lib import *
 from core.calculus import *
-from lib.common.settings import CONFIG
-
-markup_choice = CONFIG['MARKUP']['USE']
+from lib.common.settings import config
 
 if debug.ENABLED:
     from lib.common import latex
     import machine
 
-if markup_choice == 'latex':
+if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP
 
 try:
-    locale.setlocale(locale.LC_ALL, default.LANGUAGE + '.' + default.ENCODING)
+    locale.setlocale(locale.LC_ALL, config.LANGUAGE + '.' + config.ENCODING)
 except:
     locale.setlocale(locale.LC_ALL, '')
 

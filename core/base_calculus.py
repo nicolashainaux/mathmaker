@@ -43,13 +43,10 @@ from lib.common.cst import *
 from lib.common.settings import default
 from lib.utils import *
 from maintenance import debug
-from lib.common.settings import CONFIG
+from lib.common.settings import config
 
-markup_choice = CONFIG['MARKUP']['USE']
-
-if markup_choice == 'latex':
+if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP
-
 
 if debug.ENABLED:
     from lib.common import latex
@@ -57,8 +54,7 @@ if debug.ENABLED:
 
 try:
     locale.setlocale(locale.LC_ALL,
-                     CONFIG["LOCALES"]["LANGUAGE"] \
-                     + '.' + CONFIG["LOCALES"]["ENCODING"])
+                     config.LANGUAGE + '.' + config.ENCODING)
 except:
     locale.setlocale(locale.LC_ALL, '')
 

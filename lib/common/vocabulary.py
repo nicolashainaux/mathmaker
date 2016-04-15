@@ -23,7 +23,7 @@
 import gettext, os, sys
 from lib import error
 from lib.common import software
-from lib.common.settings import default
+from lib.common.settings import config
 from lib.common.cst import *
 
 pathname = os.path.dirname(sys.argv[0])
@@ -32,7 +32,7 @@ localdir = os.path.abspath(pathname) + "/locale"
 try:
     gettext.translation(software.NAME,
                         localdir,
-                        [default.LANGUAGE]).install()
+                        [config.LANGUAGE]).install()
 except IOError as msg:
     error.write_warning("gettext returned the following message:\n" \
                         + str(msg) + "\n" \

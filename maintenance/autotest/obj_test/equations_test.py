@@ -24,7 +24,7 @@ import os
 import sys
 import locale
 
-from lib.common.settings import default
+from lib.common.settings import config
 from lib.common import latex
 
 from core import *
@@ -34,7 +34,7 @@ from core.calculus import *
 from maintenance.autotest import common
 
 try:
-    locale.setlocale(locale.LC_ALL, default.LANGUAGE + '.' + default.ENCODING)
+    locale.setlocale(locale.LC_ALL, config.LANGUAGE + '.' + config.ENCODING)
 except:
     locale.setlocale(locale.LC_ALL, '')
 

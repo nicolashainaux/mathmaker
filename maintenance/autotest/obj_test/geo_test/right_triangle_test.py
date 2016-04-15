@@ -24,7 +24,7 @@ import os
 import sys
 #import locale
 
-#from utils import default
+#from utils import config
 
 from core import *
 from core.base_calculus import *
@@ -36,7 +36,7 @@ from lib.common import pythagorean
 from maintenance.autotest import common
 
 #try:
-#   locale.setlocale(locale.LC_ALL, default.LANGUAGE + '.' + default.ENCODING)
+#   locale.setlocale(locale.LC_ALL, config.LANGUAGE + '.' + config.ENCODING)
 #except:
 #    locale.setlocale(locale.LC_ALL, '')
 

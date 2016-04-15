@@ -23,11 +23,9 @@
 from lib.common import latex
 from lib import is_
 from . import error
-from lib.common.settings import CONFIG
+from lib.common.settings import config
 
-markup_choice = CONFIG['MARKUP']['USE']
-
-if markup_choice == 'latex':
+if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP
 
 
@@ -43,7 +41,7 @@ if markup_choice == 'latex':
 #   @options: unit='inch' etc. (check the possibilities...)
 #   @return
 def create_table(size, content, **options):
-    if markup_choice == 'latex':
+    if config.MARKUP == 'latex':
         n_col = size[1]
         n_lin = size[0]
         result = ""
@@ -125,4 +123,4 @@ def create_table(size, content, **options):
 
     else:
         raise error.NotImplementedYet("create_table using this markup: " \
-                                        + markup_choice + " ")
+                                        + config.MARKUP + " ")

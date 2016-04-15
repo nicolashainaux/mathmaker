@@ -24,7 +24,7 @@ import math
 import sys
 
 from lib.common import latex
-from lib.common.settings import CONFIG
+from lib.common.settings import CONFIG, config
 from lib.common import software
 from lib.common.cst import *
 
@@ -93,14 +93,14 @@ chosen language ({language_ref}) is not implemented yet in {software_ref}, \
 which will try to use the language entry from the configuration file instead")\
 .format(software_ref=software.NAME,
         language_ref=language))
-            if not default.LANGUAGE in latex.LANGUAGE_PACKAGE_NAME:
+            if not config.LANGUAGE in latex.LANGUAGE_PACKAGE_NAME:
                 error.write_warning(_("the LaTeX language package matching \
 the language entry from the configuration file is neither implemented in \
 {software_ref}, which will use the english package instead")\
 .format(software_ref=software.NAME))
                 self.language = latex.ENGLISH
             else:
-                self.language = latex.LANGUAGE_PACKAGE_NAME[default.LANGUAGE]
+                self.language = latex.LANGUAGE_PACKAGE_NAME[config.LANGUAGE]
 
             self.language_code = latex.LANGUAGE_CODE_NAMES[self.language]
 

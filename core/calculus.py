@@ -27,15 +27,12 @@ from lib import *
 from lib import translator
 from .base import *
 from .base_calculus import *
-from lib.common.settings import default
 from lib.maths_lib import *
 from lib.common.cst import *
 from lib.utils import *
-from lib.common.settings import CONFIG
+from lib.common.settings import default, config
 
-markup_choice = CONFIG['MARKUP']['USE']
-
-if markup_choice == 'latex':
+if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP
 
 MAX_VALUE = 20

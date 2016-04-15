@@ -37,7 +37,7 @@ from lib import utils
 
 
 #try:
-#   locale.setlocale(locale.LC_ALL, default.LANGUAGE + '.' + default.ENCODING)
+#   locale.setlocale(locale.LC_ALL, config.LANGUAGE + '.' + config.ENCODING)
 #except:
 #    locale.setlocale(locale.LC_ALL, '')
 
