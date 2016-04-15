@@ -24,8 +24,9 @@
 import sys, os, subprocess
 import gettext
 import shlex
-from optparse import OptionParser
+import argparse
 
+from _version import __version__
 from lib.common import settings
 
 settings.init()
@@ -42,23 +43,23 @@ EUKTOEPS_VERSION_ERR_MSG = " but euktoeps did not return the correct version"\
                            " information"
 
 def main():
-
-    parser = OptionParser(usage="usage: %prog [options] arg",
-                          version=software.NAME + " " + software.VERSION \
-                                  + "\nLicense: " + software.LICENSE \
-                                  + "\n" + software.COPYRIGHT + " " \
-                                  + software.AUTHOR)
-
-    parser.add_option("-l", "--language",
-                      action="store",
-                      dest="lang",
-                      default=CONFIG["LOCALES"]["LANGUAGE"],
-                      metavar="LANGUAGE",
-                      help="force the language of the output to LANGUAGE." \
-                           + " Default value is configured in " \
-                           + "mathmaker's config file.")
-
-    (options, args) = parser.parse_args()
+    parser = argparse.ArgumentParser(description=\
+                        'Creates mathematical exercices and their answers.')
+    parser.add_argument("-l", "--language", action='store', dest='lang',
+                        default=CONFIG["LOCALES"]["LANGUAGE"],
+                        help="force the language of the output to LANGUAGE." \
+                             + " Default value is configured in " \
+                             + "mathmaker's config file.")
+    parser.add_argument('main_directive', metavar='D',
+                        help='the main directive, what can be either a xml ' \
+                        + 'file or a sheetname included in mathmaker.')
+    parser.add_argument('--version', '-v',
+                        action='version',
+                        version=software.NAME + " " + __version__ \
+                                        + "\nLicense: " + software.LICENSE \
+                                        + "\n" + software.COPYRIGHT + " " \
+                                        + software.AUTHOR)
+    args = parser.parse_args()
 
     path_to_euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
     call_euktoeps = None
@@ -115,13 +116,13 @@ def main():
                          + " (version number should be at least 1.5.4).\n")
         sys.exit(2)
 
-    settings.language = options.lang
+    settings.language = args.lang
     shared.init()
 
     try:
         gettext.translation(software.NAME,
                             settings.localedir,
-                            [options.lang]).install()
+                            [args.lang]).install()
     except IOError as msg:
         error.write_warning("gettext returned the following message:\n" \
                             + str(msg) + "\n" \
@@ -147,43 +148,32 @@ complete.".format(software_ref=software.NAME) + "\n")
             settings.language = 'en'
 
 
-    M = machine.LaTeX(options.lang)
+    M = machine.LaTeX(args.lang)
 
-    if len(args) >= 2:
-        sys.stderr.write("Error: " + software.NAME \
-                         + " does not require more than one argument.\n")
-        sys.exit(2)
+    if args.main_directive in sheet.AVAILABLE:
+        sh = sheet.AVAILABLE[args.main_directive][0](M)
 
-    elif len(args) == 1:
-        if args[0] in sheet.AVAILABLE:
-            sh = sheet.AVAILABLE[args[0]][0](M)
+    elif args.main_directive in sheet.catalog.XML_SHEETS:
+        sh = sheet.S_Generic(M,
+                        filename=sheet.catalog.XML_SHEETS[args.main_directive])
 
-        elif args[0] in sheet.catalog.XML_SHEETS:
-            sh = sheet.S_Generic(M, filename=sheet.catalog.XML_SHEETS[args[0]])
+    elif os.path.isfile(args.main_directive):
+        sh = sheet.S_Generic(M, filename=args.main_directive)
 
-        elif os.path.isfile(args[0]):
-            sh = sheet.S_Generic(M, filename=args[0])
+    else:
+        sys.stderr.write("Error: " + args.main_directive \
+                         + " is not a correct argument "\
+                         + "for " \
+                         + software.NAME \
+                         + ", you should use any item from the following " \
+                         + " list:\n" \
+                         + str(sorted([key for key in sheet.AVAILABLE]))\
+                         + str(sorted([key for key in \
+                                                sheet.catalog.XML_SHEETS]))\
+                         + "\n")
 
-        else:
-            sys.stderr.write("Error: " + args[0] + " is not a correct argument "\
-                             + "for " \
-                             + software.NAME \
-                             + ", you should use any item from the following " \
-                             + " list:\n" \
-                             + str(sorted([key for key in sheet.AVAILABLE]))\
-                             + str(sorted([key for key in \
-                                                    sheet.catalog.XML_SHEETS]))\
-                             + "\n")
-
-            #print("--- {sec} seconds ---"\
-            #      .format(sec=round(time.time() - start_time, 3)))
-            sys.exit(2)
-
-    elif len(args) == 0:
-        sys.stderr.write("Error: " + software.NAME \
-                         + " requires one argument or" \
-                         + " a valid filename.\n")
-
+        #print("--- {sec} seconds ---"\
+        #      .format(sec=round(time.time() - start_time, 3)))
         sys.exit(2)
 
     M.write(str(sh))
