@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Mathmaker creates automatically maths exercises sheets
-# with their answers
 # Copyright 2006-2015 Nicolas Hainaux <nico_h@users.sourceforge.net>
 
 # This file is part of Mathmaker.
@@ -9,7 +7,7 @@
 # Mathmaker is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
-# any later version.
+# (at your option) any later version.
 
 # Mathmaker is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,10 +18,4 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# DATA RELATING TO THE SOFTWARE
-NAME = "mathmaker"
-NAME_PRINTABLE = "Mathmaker"
-LICENSE = "GNU GPL 3"
-AUTHOR = "Nicolas Hainaux <nico_h@users.sourceforge.net>"
-COPYRIGHT = "Copyright 2006-2015"
-WEBSITE = "http://mathmaker.sourceforge.net"
+__version__ = "0.6 (alpha)"

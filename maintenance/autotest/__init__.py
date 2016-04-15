@@ -22,6 +22,7 @@
 
 import os, sys
 import gettext
+import time
 from optparse import OptionParser
 
 from lib import *
@@ -31,9 +32,9 @@ from . import obj_test
 from . import lib_test
 import sheet
 import machine
-import time
 from lib.common import settings
 from lib.common import shared
+from _version import __version__
 
 settings.localedir = os.path.abspath(os.path.dirname(sys.argv[0])) + "/locale/"
 settings.language = 'en'
@@ -158,7 +159,7 @@ def fraction_simplification_coverage(n):
 def main():
     parser = OptionParser(usage="usage: %prog [options] arg",
                           version="autotest for " + software.NAME + "\n" \
-                                  + software.NAME + " " + software.VERSION \
+                                  + software.NAME + " " + __version__ \
                                   + "\nLicense: " + software.LICENSE \
                                   + "\n" + software.COPYRIGHT + " " \
                                   + software.AUTHOR)
