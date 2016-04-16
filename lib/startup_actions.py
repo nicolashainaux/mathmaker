@@ -27,8 +27,9 @@ from lib.common.settings import CONFIG
 
 ##
 #   @brief  Will check if a dependency is installed plus its version number.
-#           The version number is supposed to be displayed at the end of first
-#           line when calling `executable --version` (or the equivalent)
+#           The version number is supposed to be displayed at the end of the
+#           line containing 'version' when calling `executable --version`
+#           (or the equivalent)
 #   @param  name    The name of the executable to test
 #   @param  goal    A string telling shortly why mathmaker needs it
 #   @param  path_to The path to the executable to test
