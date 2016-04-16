@@ -21,73 +21,58 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import sys, subprocess, shlex
+from distutils.version import LooseVersion
 
 from lib.common.settings import CONFIG
 
-def check_xmllint():
-	pass
-
-def check_euktoeps():
-    EUKTOEPS_ERR_MSG = "mathmaker requires euktoeps to produce pictures"
-    EUKTOEPS_VERSION_ERR_MSG = " but euktoeps did not return the correct "\
-                               "version information"
-
-    path_to_euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
-    call_euktoeps = None
-
+##
+#   @brief  Will check if a dependency is installed plus its version number.
+#           The version number is supposed to be displayed at the end of first
+#           line when calling `executable --version` (or the equivalent)
+#   @param  name    The name of the executable to test
+#   @param  goal    A string telling shortly why mathmaker needs it
+#   @param  path_to The path to the executable to test
+#   @param  version_option  Usually it's --version or -v
+#   @param  required_version_nb A string containing the required version number
+def check_dependency(name, goal, path_to, version_option, required_version_nb):
+    ERR_MSG = "mathmaker requires {n} to {g}".format(n=name,
+                                                     g=goal)
+    the_call = None
     try:
-        call_euktoeps = subprocess.Popen([path_to_euktoeps, "-v"],
-                                          stdout=subprocess.PIPE)
+        the_call = subprocess.Popen([path_to, "--version"],
+                                     stdout=subprocess.PIPE,
+                                     stderr=subprocess.STDOUT)
     except OSError:
-        sys.stderr.write(EUKTOEPS_ERR_MSG \
-                         + " but the path to euktoeps " \
-                         + "written in mathmaker's config file " \
-                         + "doesn't seem to match anything.\n")
+        sys.stderr.write(ERR_MSG \
+                         + " but the path to {n} " \
+                         "written in mathmaker's config file " \
+                         "doesn't seem to match anything.\n"\
+                         .format(n=name))
         sys.exit(2)
 
-    check_euktoeps = shlex.split(subprocess.Popen(["grep", "version"],
-                                                  stdin=call_euktoeps.stdout,
-                                                  stdout=subprocess.PIPE)\
-                                                 .communicate()[0].decode()
-                                )
+    v = shlex.split(subprocess.Popen(["grep", "version"],
+                                     stdin=the_call.stdout,
+                                     stdout=subprocess.PIPE)\
+                                    .communicate()[0].decode())[-1]
 
-    if not len(check_euktoeps) == 3:
-        sys.stderr.write(EUKTOEPS_ERR_MSG + EUKTOEPS_VERSION_ERR_MSG + ".\n")
+    installed_version_nb = str(v)
+
+    if LooseVersion(installed_version_nb) <  LooseVersion(required_version_nb):
+        sys.stderr.write(ERR_MSG \
+                         + " but the installed version number {nb1} " \
+                         "is lower than expected (at least {nb2}).\n" \
+                         .format(nb1=installed_version_nb,
+                                 nb2=required_version_nb))
         sys.exit(2)
 
-    if not check_euktoeps[0] == "Euktoeps":
-        sys.stderr.write(  EUKTOEPS_ERR_MSG \
-                         + EUKTOEPS_VERSION_ERR_MSG \
-                         + " (name was not 'Euktoeps').\n")
-        sys.exit(2)
-
-    if not check_euktoeps[1] == "version":
-        sys.stderr.write(  EUKTOEPS_ERR_MSG \
-                         + EUKTOEPS_VERSION_ERR_MSG \
-                         + " (the 'version' word was absent).\n")
-        sys.exit(2)
-
-    if not len(check_euktoeps[2]) == 5:
-        sys.stderr.write(  EUKTOEPS_ERR_MSG \
-                         + EUKTOEPS_VERSION_ERR_MSG \
-                         + " (the version number seems incorrect).\n")
-        sys.exit(2)
-
-    if not check_euktoeps[2][0:3] == "1.5":
-        sys.stderr.write(  EUKTOEPS_ERR_MSG \
-                         + EUKTOEPS_VERSION_ERR_MSG \
-                         + " (version number should begin with '1.5').\n")
-        sys.exit(2)
-
-    if not int(check_euktoeps[2][4]) >= 4:
-        sys.stderr.write(  EUKTOEPS_ERR_MSG \
-                         + EUKTOEPS_VERSION_ERR_MSG \
-                         + " (version number should be at least 1.5.4).\n")
-        sys.exit(2)
-
-
+##
+#   @brief  Will check all mathmaker's dependencies.
 def check_dependencies():
-    check_xmllint()
-    check_euktoeps()
+    check_dependency("euktoeps", "produce pictures",
+                     CONFIG["PATHS"]["EUKTOEPS"], "-v",
+                     "1.5.4")
+    check_dependency("xmllint", "read xml files",
+                     CONFIG["PATHS"]["XMLLINT"], "--version",
+                     "20901")
 
 
