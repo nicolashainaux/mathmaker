@@ -21,9 +21,8 @@
 
 #import time
 #start_time = time.time()
-import sys, os, subprocess
+import sys, os
 import gettext
-import shlex
 import argparse
 
 from _version import __version__
@@ -35,12 +34,9 @@ from lib.common import shared
 from lib.common import software
 from lib.common.settings import CONFIG
 from lib import error
+from lib import startup_actions
 import machine
 import sheet
-
-EUKTOEPS_ERR_MSG = "mathmaker requires euktoeps to produce pictures"
-EUKTOEPS_VERSION_ERR_MSG = " but euktoeps did not return the correct version"\
-                           " information"
 
 def main():
     parser = argparse.ArgumentParser(description=\
@@ -61,60 +57,7 @@ def main():
                                         + software.AUTHOR)
     args = parser.parse_args()
 
-    path_to_euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
-    call_euktoeps = None
-
-    try:
-        call_euktoeps = subprocess.Popen([path_to_euktoeps, "-v"],
-                                          stdout=subprocess.PIPE)
-    except OSError:
-        sys.stderr.write(EUKTOEPS_ERR_MSG \
-                         + " but the path to euktoeps " \
-                         + "written in mathmaker's config file " \
-                         + "doesn't seem to match anything.\n")
-        sys.exit(2)
-
-    check_euktoeps = shlex.split(subprocess.Popen(["grep", "version"],
-                                                  stdin=call_euktoeps.stdout,
-                                                  stdout=subprocess.PIPE)\
-                                                      .communicate()[0].decode()
-                                )
-
-    if not len(check_euktoeps) == 3:
-        sys.stderr.write(  EUKTOEPS_ERR_MSG \
-                            + EUKTOEPS_VERSION_ERR_MSG \
-                            + ".\n")
-        sys.exit(2)
-
-    if not check_euktoeps[0] == "Euktoeps":
-        sys.stderr.write(  EUKTOEPS_ERR_MSG \
-                         + EUKTOEPS_VERSION_ERR_MSG \
-                         + " (name was not 'Euktoeps').\n")
-        sys.exit(2)
-
-    if not check_euktoeps[1] == "version":
-        sys.stderr.write(  EUKTOEPS_ERR_MSG \
-                         + EUKTOEPS_VERSION_ERR_MSG \
-                         + " (the 'version' word was absent).\n")
-        sys.exit(2)
-
-    if not len(check_euktoeps[2]) == 5:
-        sys.stderr.write(  EUKTOEPS_ERR_MSG \
-                         + EUKTOEPS_VERSION_ERR_MSG \
-                         + " (the version number seems incorrect).\n")
-        sys.exit(2)
-
-    if not check_euktoeps[2][0:3] == "1.5":
-        sys.stderr.write(  EUKTOEPS_ERR_MSG \
-                         + EUKTOEPS_VERSION_ERR_MSG \
-                         + " (version number should begin with '1.5').\n")
-        sys.exit(2)
-
-    if not int(check_euktoeps[2][4]) >= 4:
-        sys.stderr.write(  EUKTOEPS_ERR_MSG \
-                         + EUKTOEPS_VERSION_ERR_MSG \
-                         + " (version number should be at least 1.5.4).\n")
-        sys.exit(2)
+    startup_actions.check_dependencies()
 
     settings.language = args.lang
     shared.init()
