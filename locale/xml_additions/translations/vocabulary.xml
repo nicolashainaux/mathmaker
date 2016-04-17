@@ -35,4 +35,9 @@
 	<word text="What is the double of {number}?"/>
 	<word text="What is the triple of {number}?"/>
 	<word text="What is the quadruple of {number}?"/>
+    <word text="to the unit"/>
+    <word text="to the tenth"/>
+    <word text="to the hundreth"/>
+    <word text="to the thousandth"/>
+    <word text="to the ten thousandth"/>
 </nothing>

@@ -61,7 +61,10 @@ class LaTeX(Structure.Structure):
     #   @param expression_begins True if machine's at an expression's beginning
     #   @param **options Any options
     #   @return One instance of machine.LaTeX
-    #   @todo The warning handling should be done in the main program
+    #   @todo The warning handling could be done during startup actions (what
+    #         would stop mathmaker from executing if the chosen language does
+    #         exist in the locale files but is not defined in
+    #         lib/common/latex.py)
     def __init__(self, language, **options):
 
         self.text_sizes = latex.TEXT_SIZES
@@ -87,17 +90,16 @@ class LaTeX(Structure.Structure):
         # Language...
         self.language = ""
 
-
         if not language in latex.LANGUAGE_PACKAGE_NAME:
             error.write_warning(_("the LaTeX language package matching the \
 chosen language ({language_ref}) is not implemented yet in {software_ref}, \
-which will try to use the language entry from the configuration file instead")\
+what will try to use the language entry from the configuration file instead")\
 .format(software_ref=software.NAME,
         language_ref=language))
             if not config.LANGUAGE in latex.LANGUAGE_PACKAGE_NAME:
                 error.write_warning(_("the LaTeX language package matching \
 the language entry from the configuration file is neither implemented in \
-{software_ref}, which will use the english package instead")\
+{software_ref}, what will use the english package instead")\
 .format(software_ref=software.NAME))
                 self.language = latex.ENGLISH
             else:

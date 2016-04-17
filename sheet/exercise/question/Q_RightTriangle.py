@@ -27,7 +27,6 @@ from lib import *
 from lib import utils
 from lib.common import alphabet
 from lib.common import pythagorean
-from lib.common import vocabulary
 from lib.common.cst import *
 from lib.maths_lib import *
 from .Q_Structure import Q_Structure
@@ -380,6 +379,12 @@ class Q_RightTriangle(Q_Structure):
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
+        PRECISION_IDIOMS = { UNIT: _("to the unit"),
+                             TENTH: _("to the tenth"),
+                             HUNDREDTH: _("to the hundreth"),
+                             THOUSANDTH: _("to the thousandth"),
+                             TEN_THOUSANDTH: _("to the ten thousandth")
+                           }
         M = self.machine
         result = self.displayable_number
 
@@ -412,8 +417,7 @@ angle in {right_vertex}.")\
             if self.round_to != "":
                 result += " " + _("Round the result {at_this_precision}.")\
                                 .format(at_this_precision=\
-                                        vocabulary\
-                                        .PRECISION_IDIOMS[self.round_to])
+                                        PRECISION_IDIOMS[self.round_to])
 
         elif self.q_kind == 'converse_of_pythagorean_theorem' \
              or self.q_kind == 'contrapositive_of_pythagorean_theorem':

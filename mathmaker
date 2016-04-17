@@ -22,7 +22,6 @@
 #import time
 #start_time = time.time()
 import sys, os
-import gettext
 import argparse
 
 from _version import __version__
@@ -33,12 +32,12 @@ settings.init()
 from lib.common import shared
 from lib.common import software
 from lib.common.settings import CONFIG
-from lib import error
 from lib import startup_actions
 import machine
 import sheet
 
 def main():
+    startup_actions.check_dependencies()
     parser = argparse.ArgumentParser(description=\
                         'Creates mathematical exercices and their answers.')
     parser.add_argument("-l", "--language", action='store', dest='lang',
@@ -56,53 +55,17 @@ def main():
                                         + "\n" + software.COPYRIGHT + " " \
                                         + software.AUTHOR)
     args = parser.parse_args()
-
-    startup_actions.check_dependencies()
-
-    settings.language = args.lang
+    startup_actions.install_gettext_translations(language=args.lang)
     shared.init()
-
-    try:
-        gettext.translation(software.NAME,
-                            settings.localedir,
-                            [args.lang]).install()
-    except IOError as msg:
-        error.write_warning("gettext returned the following message:\n" \
-                            + str(msg) + "\n" \
-                            + "It means the language indicated either \
-in the command line or read from the configuration file isn't available yet \
-in {software_ref} which will try to produce output in the language of your \
-system.".format(software_ref=software.NAME) + "\n" )
-        try:
-            gettext.install(software.NAME,
-                            settings.localedir,
-                            [locale.getdefaultlocale()[0]])
-            settings.language = locale.getdefaultlocale()[0]
-        except IOError as msg:
-            error.write_warning("gettext returned the following message:\n" \
-                            + str(msg) + "\n" \
-                            + "It means the language of your system isn't \
-available yet in {software_ref} which will produce output in \
-english. If this results in producing an error, then your installation isn't \
-complete.".format(software_ref=software.NAME) + "\n")
-            gettext.translation(software.NAME,
-                                settings.localedir,
-                                ['en']).install()
-            settings.language = 'en'
-
-
-    M = machine.LaTeX(args.lang)
+    M = machine.LaTeX(settings.language)
 
     if args.main_directive in sheet.AVAILABLE:
         sh = sheet.AVAILABLE[args.main_directive][0](M)
-
     elif args.main_directive in sheet.catalog.XML_SHEETS:
         sh = sheet.S_Generic(M,
                         filename=sheet.catalog.XML_SHEETS[args.main_directive])
-
     elif os.path.isfile(args.main_directive):
         sh = sheet.S_Generic(M, filename=args.main_directive)
-
     else:
         sys.stderr.write("Error: " + args.main_directive \
                          + " is not a correct argument "\
@@ -114,7 +77,6 @@ complete.".format(software_ref=software.NAME) + "\n")
                          + str(sorted([key for key in \
                                                 sheet.catalog.XML_SHEETS]))\
                          + "\n")
-
         #print("--- {sec} seconds ---"\
         #      .format(sec=round(time.time() - start_time, 3)))
         sys.exit(2)

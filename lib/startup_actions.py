@@ -21,8 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import sys, subprocess, shlex
+import gettext, locale
 from distutils.version import LooseVersion
 
+from lib import error
+from lib.common import settings, software
 from lib.common.settings import CONFIG
 
 ##
@@ -76,4 +79,40 @@ def check_dependencies():
                      CONFIG["PATHS"]["XMLLINT"], "--version",
                      "20901")
 
+##
+#   @brief  Will install output's language (gettext functions)
+def install_gettext_translations(language=CONFIG["LOCALES"]["LANGUAGE"]):
+    try:
+        gettext.translation(software.NAME,
+                            settings.localedir,
+                            [language]).install()
+        settings.language = language
+    except IOError as msg:
+        error.write_warning("gettext returned the following message:\n" \
+                            + str(msg) + "\n" \
+                            + "It means the language indicated either \
+in the command line or read from the configuration file isn't available yet \
+in {software_ref}, what will try to produce output in the language of your \
+system...".format(software_ref=software.NAME) + "\n" )
+        try:
+            defaultlocale = locale.getdefaultlocale()[0]
+            gettext.install(software.NAME,
+                            settings.localedir,
+                            [defaultlocale])
+            settings.language = defaultlocale
+            error.write_warning("mathmaker will produce output in " \
+                                "the system default locale ({locale_name}).\n"\
+                                .format(locale_name=defaultlocale))
+        except IOError as msg:
+            error.write_warning("gettext returned the following message:\n" \
+                            + str(msg) + "\n" \
+                            + "It means the language of your system isn't \
+available yet in {software_ref} which will produce output in \
+english. If this results in producing an error, then your installation isn't \
+complete.".format(software_ref=software.NAME) + "\n")
+            gettext.translation(software.NAME,
+                                settings.localedir,
+                                ['en']).install()
+            settings.language = 'en'
+            error.write_warning("mathmaker will produce output in english.\n")
 
