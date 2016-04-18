@@ -46,10 +46,6 @@ LANGUAGE_PACKAGE_NAME = {'fr': FRANCAIS,
                          'en': ENGLISH
                         }
 
-LANGUAGE_CODE_NAMES = {FRANCAIS: 'fr',
-                       ENGLISH: 'en'
-                      }
-
 # TEXT SIZES
 TEXT_SIZES = ['\\tiny', '\\scriptsize', '\\footnotesize', '\\small',
               '\\normalsize', '\large', '\Large', '\LARGE', '\\huge', '\\HUGE']

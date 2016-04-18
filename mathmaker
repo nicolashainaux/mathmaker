@@ -56,6 +56,8 @@ def main():
                                         + software.AUTHOR)
     args = parser.parse_args()
     startup_actions.install_gettext_translations(language=args.lang)
+    # From now on, settings.language has its definitive value
+    startup_actions.check_settings_consistency()
     shared.init()
     M = machine.LaTeX(settings.language)
 

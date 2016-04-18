@@ -61,64 +61,17 @@ class LaTeX(Structure.Structure):
     #   @param expression_begins True if machine's at an expression's beginning
     #   @param **options Any options
     #   @return One instance of machine.LaTeX
-    #   @todo The warning handling could be done during startup actions (what
-    #         would stop mathmaker from executing if the chosen language does
-    #         exist in the locale files but is not defined in
-    #         lib/common/latex.py)
-    def __init__(self, language, **options):
-
+    def __init__(self, language, create_pic_files=True, **options):
         self.text_sizes = latex.TEXT_SIZES
-
         self.font_size_offset = 0
-
-        self.create_pic_files = True
-
-        if 'create_pic_files' in options \
-            and not options['create_pic_files'] in YES:
-        #___
-            self.create_pic_files = False
-
-        # Encoding...
-        self.encoding = latex.DEFAULT_ENCODING
-        try:
-            encoding_cfg = CONFIG[latex.FORMAT]["ENCODING"]
-        except error.UnreachableData:
-            pass
-        else:
-            self.encoding = encoding_cfg
-
-        # Language...
-        self.language = ""
-
-        if not language in latex.LANGUAGE_PACKAGE_NAME:
-            error.write_warning(_("the LaTeX language package matching the \
-chosen language ({language_ref}) is not implemented yet in {software_ref}, \
-what will try to use the language entry from the configuration file instead")\
-.format(software_ref=software.NAME,
-        language_ref=language))
-            if not config.LANGUAGE in latex.LANGUAGE_PACKAGE_NAME:
-                error.write_warning(_("the LaTeX language package matching \
-the language entry from the configuration file is neither implemented in \
-{software_ref}, what will use the english package instead")\
-.format(software_ref=software.NAME))
-                self.language = latex.ENGLISH
-            else:
-                self.language = latex.LANGUAGE_PACKAGE_NAME[config.LANGUAGE]
-
-            self.language_code = latex.LANGUAGE_CODE_NAMES[self.language]
-
-        else:
-            self.language = latex.LANGUAGE_PACKAGE_NAME[language]
-            self.language_code = language
-
-
+        self.create_pic_files = create_pic_files
+        self.encoding = CONFIG[latex.FORMAT]["ENCODING"]\
+                        if "ENCODING" in CONFIG[latex.FORMAT] \
+                        else latex.DEFAULT_ENCODING
+        self.language_code = language
+        self.language = latex.LANGUAGE_PACKAGE_NAME[language]
         self.markup = latex.MARKUP
-
         self.out = sys.stdout
-
-        if 'out' in options:
-            self.out = options['out']
-
         self.redirect_output_to_str = False
 
 

@@ -25,7 +25,7 @@ import gettext, locale
 from distutils.version import LooseVersion
 
 from lib import error
-from lib.common import settings, software
+from lib.common import settings, software, latex
 from lib.common.settings import CONFIG
 
 ##
@@ -116,3 +116,8 @@ complete.".format(software_ref=software.NAME) + "\n")
             settings.language = 'en'
             error.write_warning("mathmaker will produce output in english.\n")
 
+##
+#   @brief  Will check the consistency of some settings values.
+def check_settings_consistency():
+    # Check the chosen language belongs to latex.LANGUAGE_PACKAGE_NAME
+    dummy = latex.LANGUAGE_PACKAGE_NAME[settings.language]
