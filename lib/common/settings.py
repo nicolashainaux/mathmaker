@@ -22,6 +22,8 @@
 
 import os, sys
 import configparser
+import logging, logging.config
+import yaml
 
 from lib.common import software
 
@@ -40,11 +42,13 @@ class config_object(object):
 def init():
     global rootdir
     global localedir
+    global libdir
     global configfile_name
     global CONFIG
     global language
     global default
     global config
+    global mainlogger
 
     __process_name = os.path.basename(sys.argv[0])
     __abspath = os.path.abspath(sys.argv[0])
@@ -52,6 +56,7 @@ def init():
     __l2 = len(__abspath)
     rootdir = __abspath[:__l2-__l1]
     localedir = rootdir + "locale/"
+    libdir = rootdir + "lib/"
 
     configfile_name = rootdir + software.NAME + '.cfg'
     CONFIG = configparser.ConfigParser()
@@ -59,5 +64,9 @@ def init():
     config = config_object()
 
     default = default_object()
+
+    with open(libdir + "logging.yml") as f:
+        logging.config.dictConfig(yaml.load(f))
+    mainlogger = logging.getLogger("__main__")
 
     language = None

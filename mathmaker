@@ -36,7 +36,10 @@ from lib import startup_actions
 import machine
 import sheet
 
+log = settings.mainlogger
+
 def main():
+    log.info("Starting...")
     startup_actions.check_dependencies()
     parser = argparse.ArgumentParser(description=\
                         'Creates mathematical exercices and their answers.')
@@ -59,7 +62,11 @@ def main():
     # From now on, settings.language has its definitive value
     startup_actions.check_settings_consistency()
     shared.init()
-    M = machine.LaTeX(settings.language)
+    try:
+        M = machine.LaTeX(settings.language)
+    except Exception:
+        log.error("An exception occured while creating the LaTeX machine.",
+                  exc_info=True)
 
     if args.main_directive in sheet.AVAILABLE:
         sh = sheet.AVAILABLE[args.main_directive][0](M)
@@ -69,21 +76,22 @@ def main():
     elif os.path.isfile(args.main_directive):
         sh = sheet.S_Generic(M, filename=args.main_directive)
     else:
-        sys.stderr.write("Error: " + args.main_directive \
-                         + " is not a correct argument "\
-                         + "for " \
-                         + software.NAME \
-                         + ", you should use any item from the following " \
-                         + " list:\n" \
-                         + str(sorted([key for key in sheet.AVAILABLE]))\
-                         + str(sorted([key for key in \
-                                                sheet.catalog.XML_SHEETS]))\
-                         + "\n")
+        log.error(args.main_directive \
+                  + " is not a correct directive for " + software.NAME \
+                  + ", you should use any item from the following lists: " \
+                  + str(sorted([key for key in sheet.AVAILABLE]))\
+                  + str(sorted([key for key in sheet.catalog.XML_SHEETS])))
         #print("--- {sec} seconds ---"\
         #      .format(sec=round(time.time() - start_time, 3)))
         sys.exit(2)
 
-    M.write(str(sh))
+    try:
+        M.write(str(sh))
+    except Exception:
+        log.error("An exception occured during the creation of the sheet.",
+                  exc_info=True)
+
+    log.info("Done.")
 
 
 if __name__ == '__main__':

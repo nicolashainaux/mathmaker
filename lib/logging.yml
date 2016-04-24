@@ -1,0 +1,39 @@
+version: 1
+
+formatters:
+    rawMessageFormatter:
+        format: '%(message)s'
+        datefmt: ''
+    defaultFormatter:
+        format: '%(asctime)s.%(msecs)d %(filename)s: %(funcName)s: %(message)s'
+        datefmt: '%Y/%m/%d %H:%M:%S'
+    rsyslogdFormatter:
+        format: '%(levelname)s %(filename)s: %(funcName)s: %(message)s'
+    stderrFormatter:
+        format: '[mathmaker] %(levelname)s %(filename)s: %(funcName)s: %(message)s'
+
+handlers:
+    nullHandler:
+        class: logging.NullHandler
+    mainSysLogHandler:
+        class: logging.handlers.SysLogHandler
+        level: INFO
+        formatter: rsyslogdFormatter
+        address: '/dev/log'
+        facility: 'local5'
+    mainStdErrHandler:
+        class: logging.StreamHandler
+        level: WARNING
+        formatter: stderrFormatter
+
+loggers:
+    root:
+        level: INFO
+        handlers: [nullHandler]
+    __main__:
+        level: INFO
+        handlers: [mainSysLogHandler, mainStdErrHandler]
+
+
+
+

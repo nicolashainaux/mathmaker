@@ -24,9 +24,10 @@ import sys, subprocess, shlex
 import gettext, locale
 from distutils.version import LooseVersion
 
-from lib import error
 from lib.common import settings, software, latex
 from lib.common.settings import CONFIG
+
+log = settings.mainlogger
 
 ##
 #   @brief  Will check if a dependency is installed plus its version number.
@@ -47,11 +48,9 @@ def check_dependency(name, goal, path_to, version_option, required_version_nb):
                                      stdout=subprocess.PIPE,
                                      stderr=subprocess.STDOUT)
     except OSError:
-        sys.stderr.write(ERR_MSG \
-                         + " but the path to {n} " \
-                         "written in mathmaker's config file " \
-                         "doesn't seem to match anything.\n"\
-                         .format(n=name))
+        log.error(ERR_MSG + " but the path to {n} written in mathmaker's "\
+                  "config file doesn't seem to match anything."\
+                  .format(n=name))
         sys.exit(2)
 
     v = shlex.split(subprocess.Popen(["grep", "version"],
@@ -62,11 +61,10 @@ def check_dependency(name, goal, path_to, version_option, required_version_nb):
     installed_version_nb = str(v)
 
     if LooseVersion(installed_version_nb) <  LooseVersion(required_version_nb):
-        sys.stderr.write(ERR_MSG \
-                         + " but the installed version number {nb1} " \
-                         "is lower than expected (at least {nb2}).\n" \
-                         .format(nb1=installed_version_nb,
-                                 nb2=required_version_nb))
+        log.error(ERR_MSG + " but the installed version number {nb1} " \
+                  "is lower than expected (at least {nb2})."\
+                  .format(nb1=installed_version_nb,
+                          nb2=required_version_nb))
         sys.exit(2)
 
 ##
@@ -88,36 +86,39 @@ def install_gettext_translations(language=CONFIG["LOCALES"]["LANGUAGE"]):
                             [language]).install()
         settings.language = language
     except IOError as msg:
-        error.write_warning("gettext returned the following message:\n" \
-                            + str(msg) + "\n" \
-                            + "It means the language indicated either \
-in the command line or read from the configuration file isn't available yet \
+        log.warning("gettext returned the following message: '" \
+                    + str(msg) + "'. " \
+                    + "It means the language indicated either in the command \
+line or read from the configuration file ({l}) isn't available yet \
 in {software_ref}, what will try to produce output in the language of your \
-system...".format(software_ref=software.NAME) + "\n" )
+system...".format(software_ref=software.NAME, l=language))
         try:
             defaultlocale = locale.getdefaultlocale()[0]
             gettext.install(software.NAME,
                             settings.localedir,
                             [defaultlocale])
             settings.language = defaultlocale
-            error.write_warning("mathmaker will produce output in " \
-                                "the system default locale ({locale_name}).\n"\
-                                .format(locale_name=defaultlocale))
+            log.warning("mathmaker will produce output in the system default"\
+                        "locale ({locale_name})."\
+                        .format(locale_name=defaultlocale))
         except IOError as msg:
-            error.write_warning("gettext returned the following message:\n" \
-                            + str(msg) + "\n" \
-                            + "It means the language of your system isn't \
-available yet in {software_ref} which will produce output in \
-english. If this results in producing an error, then your installation isn't \
-complete.".format(software_ref=software.NAME) + "\n")
             gettext.translation(software.NAME,
                                 settings.localedir,
                                 ['en']).install()
             settings.language = 'en'
-            error.write_warning("mathmaker will produce output in english.\n")
+            log.warning("gettext returned the following message:'" \
+                        + str(msg) + "'. " \
+                        + "It means the language of your system isn't \
+available yet in {software_ref}, what will produce output in \
+english. If this results in producing an error, then your installation isn't \
+complete.".format(software_ref=software.NAME))
 
 ##
 #   @brief  Will check the consistency of some settings values.
 def check_settings_consistency():
     # Check the chosen language belongs to latex.LANGUAGE_PACKAGE_NAME
-    dummy = latex.LANGUAGE_PACKAGE_NAME[settings.language]
+    try:
+        dummy = latex.LANGUAGE_PACKAGE_NAME[settings.language]
+    except KeyError:
+        log.error("The language chosen for output is not defined in "\
+                  "the LaTeX packages known by mathmaker.", exc_info=True)
