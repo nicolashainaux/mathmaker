@@ -23,15 +23,14 @@
 import polib
 
 from . import settings
-from lib.sources_tools import infinite_source
-from lib.po_file_tools import get_list_of
+from lib.tools import source, po_file
 
 def four_letters_words(language):
-	return infinite_source([get_list_of("words", language, 4)])
+	return source.infinite([po_file.get_list_of("words", language, 4)])
 
 def names(language):
-	return infinite_source([get_list_of("names", language, "masculine"),
-							get_list_of("names", language, "feminine")])
+	return source.infinite([po_file.get_list_of("names", language, "masculine"),
+							po_file.get_list_of("names", language, "feminine")])
 
 def init():
 	global four_letters_words_source

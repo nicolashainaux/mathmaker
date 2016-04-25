@@ -22,7 +22,7 @@
 
 import sys
 
-from lib.sources_tools import bidict, infinite_source
+from lib.tools import source
 from . import mini_problems_wordings_additions
 from . import mini_problems_wordings_substractions
 from . import mini_problems_wordings_multiplications
@@ -65,7 +65,7 @@ def init(**kwargs):
     'integers_10_100_for_rectangles', 'integers_5_20',
     'integers_5_20_for_rectangles', 'integers_10_100_for_sums_diffs']
 
-    WORDINGS_MAP = bidict({
+    WORDINGS_MAP = source.bidict({
     WORDING["multi_direct"]["Marbles"]: tables_and_integers_couples,
     WORDING["multi_direct"]["Golden goose"]: tables_and_integers_couples,
     WORDING["multi_direct"]["Gardener's vegetables"]: \
@@ -117,7 +117,7 @@ def init(**kwargs):
     })
 
     if not 'sce_nb' in kwargs:
-        mini_problems_wordings_source = infinite_source([\
+        mini_problems_wordings_source = source.infinite([\
                                         list(WORDING["addi_direct"].values()),
                                         list(WORDING["substr_direct"].values()),
                                         list(WORDING["multi_direct"].values()),

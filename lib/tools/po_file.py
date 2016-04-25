@@ -23,7 +23,7 @@
 import polib
 from lib.common import settings
 
-def retrieve_from_po_file(language, po_filename):
+def retrieve(language, po_filename):
 	po = polib.pofile(settings.localedir \
 					+ settings.language \
 					+ "/LC_MESSAGES/" \
@@ -36,7 +36,7 @@ def retrieve_from_po_file(language, po_filename):
 def get_list_of(what, language, arg):
 	what_map = { "words" : "w" + str(arg) + "l",
 	 			 "names" : str(arg) + "_names" }
-	output = retrieve_from_po_file(language, what_map[what])
+	output = retrieve(language, what_map[what])
 	if len(output) < 20:
-		output.append(retrieve_from_po_file('en', what_map[what]))
+		output.append(retrieve('en', what_map[what]))
 	return output

@@ -22,7 +22,7 @@
 
 import random
 
-class infinite_source(object):
+class infinite(object):
 
     def __init__(self, sources, **kwargs):
         self.collector = []
