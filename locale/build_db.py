@@ -48,11 +48,11 @@ db.execute('''CREATE TABLE names
           (language TEXT, gender TEXT, name TEXT, drawDate INTEGER)''')
 
 # Extract data from po(t) files and insert them into the db
-for l in next(os.walk(settings.localedir))[1]:
-    settings.language = l
-    if os.path.isfile(settings.localedir + l + "/LC_MESSAGES/w4l.po"):
-        words = po_file.get_list_of('words', l, 4)
-        db_rows = list(zip([l for _ in range(len(words))],
+for lang in next(os.walk(settings.localedir))[1]:
+    settings.language = lang
+    if os.path.isfile(settings.localedir + lang + "/LC_MESSAGES/w4l.po"):
+        words = po_file.get_list_of('words', lang, 4)
+        db_rows = list(zip([lang for _ in range(len(words))],
                             words,
                             [0 for _ in range(len(words))]))
         db.executemany(\
@@ -60,11 +60,11 @@ for l in next(os.walk(settings.localedir))[1]:
                     db_rows)
 
     for gender in ["masculine", "feminine"]:
-        if os.path.isfile(settings.localedir + l \
+        if os.path.isfile(settings.localedir + lang \
                           + "/LC_MESSAGES/" + gender + "_names.po"):
         #___
-            names = po_file.get_list_of('names', l, gender)
-            db_rows = list(zip([l for _ in range(len(names))],
+            names = po_file.get_list_of('names', lang, gender)
+            db_rows = list(zip([lang for _ in range(len(names))],
                                 [gender for _ in range(len(names))],
                                 names,
                                 [0 for _ in range(len(names))]))
