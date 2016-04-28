@@ -24,12 +24,12 @@ rm mathmaker_updates.pot
 echo
 
 # Merging mathmaker entries to main pot file:
-./merge_xml_updates_to_pot_file --dirs /home/nico/dev/mathmaker/mathmaker/sheet/ /home/nico/dev/mathmaker/mathmaker/locale/xml_additions/translations/
+./merge_xml_updates_to_pot_file --dirs /home/nico/dev/mathmaker/mathmaker/sheet/ /home/nico/dev/mathmaker/mathmaker/lib/extra_translations/
 
 # Merging updates from other xml files to other pot files
-#./merge_xml_updates_to_pot_file --keywords w4l --dir /home/nico/dev/mathmaker/mathmaker/locale/xml_additions/w4l/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/w4l.pot
-#./merge_xml_updates_to_pot_file --keywords name --dir /home/nico/dev/mathmaker/mathmaker/locale/xml_additions/names/f/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/names_f.pot
-#./merge_xml_updates_to_pot_file --keywords name --dir /home/nico/dev/mathmaker/mathmaker/locale/xml_additions/names/m/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/names_m.pot
+#./merge_xml_updates_to_pot_file --keywords w4l --dir /home/nico/dev/mathmaker/mathmaker/lib/extra_translations/w4l/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/w4l.pot
+#./merge_xml_updates_to_pot_file --keywords name --dir /home/nico/dev/mathmaker/mathmaker/lib/extra_translations/names/f/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/names_f.pot
+#./merge_xml_updates_to_pot_file --keywords name --dir /home/nico/dev/mathmaker/mathmaker/lib/extra_translations/names/m/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/names_m.pot
 
 #set_header mathmaker.pot 'MATHMAKER TEMPLATE PO FILE'
 #set_header four_letters_words.pot 'MATHMAKER W4L PO FILE'
