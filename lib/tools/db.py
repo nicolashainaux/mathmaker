@@ -20,22 +20,33 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import polib
+import sqlite3
+from lib.common import settings
 
-from . import settings
-from lib.tools import source, po_file, db
+db = sqlite3.connect(settings.path.db)
 
-def four_letters_words(language):
-	#return source.infinite([po_file.get_list_of("words", language, 4)])
-    return db.source("w4l", "word", language=settings.language)
+class source(object):
 
-def names(language):
-	return source.infinite([po_file.get_list_of("names", language, "masculine"),
-							po_file.get_list_of("names", language, "feminine")])
+    def __init__(self, table_name, col, **kwargs):
+        self.table_name = table_name
+        self.col = col
+        if 'language' in kwargs:
+            self.language = kwargs['language']
 
-def init():
-	global four_letters_words_source
-	global names_source
+    def reset(self):
+        pass
 
-	four_letters_words_source = four_letters_words(settings.language)
-	names_source = names(settings.language)
+    def __next__(self):
+        return self.next()
+
+    def next(self, **kwargs):
+        ID, word = tuple(db.execute(\
+        "SELECT id," + self.col + \
+        " FROM " + self.table_name + \
+        " WHERE drawDate = 0 ORDER BY random() LIMIT 1;"))[0]
+        db.execute(\
+        "UPDATE " + self.table_name + \
+        " SET drawDate = datetime() WHERE id = " + str(ID) + ";")
+        db.commit()
+        return word
+

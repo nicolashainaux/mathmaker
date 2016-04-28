@@ -24,6 +24,7 @@ import os, sys
 import configparser
 import logging, logging.config
 import yaml
+from shutil import copyfile
 
 from lib.common import software
 
@@ -39,16 +40,20 @@ class config_object(object):
         self.ENCODING = CONFIG["LOCALES"]["ENCODING"]
         self.MARKUP = CONFIG['MARKUP']['USE']
 
+class path_object(object):
+    def __init__(self):
+        self.db = datadir + "mathmaker.db"
+        self.db_dist = datadir + "mathmaker.db-dist"
+        if not os.path.isfile(self.db)\
+            or os.path.getmtime(self.db) < os.path.getmtime(self.db_dist):
+            copyfile(self.db_dist, self.db)
+
 def init():
-    global rootdir
-    global localedir
-    global libdir
-    global configfile_name
-    global CONFIG
-    global language
-    global default
-    global config
+    global rootdir, localedir, libdir, datadir
+    global configfile_name, CONFIG, config
+    global default, path
     global mainlogger
+    global language
 
     __process_name = os.path.basename(sys.argv[0])
     __abspath = os.path.abspath(sys.argv[0])
@@ -57,6 +62,7 @@ def init():
     rootdir = __abspath[:__l2-__l1]
     localedir = rootdir + "locale/"
     libdir = rootdir + "lib/"
+    datadir = rootdir + "data/"
 
     configfile_name = rootdir + software.NAME + '.cfg'
     CONFIG = configparser.ConfigParser()
@@ -64,6 +70,7 @@ def init():
     config = config_object()
 
     default = default_object()
+    path = path_object()
 
     with open(libdir + "logging.yml") as f:
         logging.config.dictConfig(yaml.load(f))
