@@ -172,9 +172,9 @@ def handle_valueless_names_tags(arg, sentence):
             if vn.startswith('name'):
                 val = next(shared.names_source)
             elif vn.startswith('masculine_name'):
-                val = shared.names_source.next(choice=0)
+                val = shared.names_source.next(gender="masculine")
             elif vn.startswith('feminine_name'):
-                val = shared.names_source.next(choice=1)
+                val = shared.names_source.next(gender="feminine")
             setattr(arg, vn, val)
 
 # --------------------------------------------------------------------------

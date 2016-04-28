@@ -20,22 +20,13 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import polib
-
 from . import settings
-from lib.tools import source, po_file, db
-
-def four_letters_words(language):
-	#return source.infinite([po_file.get_list_of("words", language, 4)])
-    return db.source("w4l", "word", language=settings.language)
-
-def names(language):
-	return source.infinite([po_file.get_list_of("names", language, "masculine"),
-							po_file.get_list_of("names", language, "feminine")])
+from lib.tools import db
 
 def init():
 	global four_letters_words_source
 	global names_source
 
-	four_letters_words_source = four_letters_words(settings.language)
-	names_source = names(settings.language)
+	four_letters_words_source = db.source("w4l", "word",
+                                          language=settings.language)
+	names_source = db.source("names", "name", language=settings.language)

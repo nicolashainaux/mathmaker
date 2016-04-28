@@ -44,8 +44,12 @@ class source(object):
     def next(self, **kwargs):
         l = "AND language = '" + self.language + "' " if self.language != ""\
                                                      else ""
+        kw_conditions = ""
+        for kw in kwargs:
+            kw_conditions += " AND " + kw + " = '" + kwargs[kw] + "' "
         cmd = "SELECT id," + self.col + " FROM " + self.table_name + \
-              " WHERE drawDate = 0 " + l + "ORDER BY random() LIMIT 1;"
+              " WHERE drawDate = 0 " + l + kw_conditions + \
+              "ORDER BY random() LIMIT 1;"
         query_result = tuple(db.execute(cmd))
         if not len(query_result):
             self.reset()

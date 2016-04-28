@@ -45,7 +45,8 @@ db.execute('''CREATE TABLE w4l
           (id INTEGER PRIMARY KEY,
           language TEXT, word TEXT, drawDate INTEGER)''')
 db.execute('''CREATE TABLE names
-          (language TEXT, gender TEXT, name TEXT, drawDate INTEGER)''')
+          (id INTEGER PRIMARY KEY,
+          language TEXT, gender TEXT, name TEXT, drawDate INTEGER)''')
 
 # Extract data from po(t) files and insert them into the db
 for lang in next(os.walk(settings.localedir))[1]:
