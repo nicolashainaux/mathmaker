@@ -23,6 +23,7 @@
 from core.base_calculus import *
 from . import mc_module
 from lib.wordings_handling_tools import reformat, setup_wording_format_of
+from lib.common import shared
 
 class sub_object(mc_module.structure):
 
@@ -38,6 +39,7 @@ class sub_object(mc_module.structure):
         self.area_str = self.rectangle.area.into_str(\
                                                    force_expression_begins=True)
         if self.picture:
+            self.rectangle.rename(next(shared.four_letters_words_source))
             self.wording = _("Area of this rectangle? |hint:area_unit|")
             setup_wording_format_of(self, M)
         else:

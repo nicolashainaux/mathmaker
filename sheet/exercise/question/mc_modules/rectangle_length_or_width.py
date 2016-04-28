@@ -25,6 +25,7 @@ import random
 from core.base_calculus import *
 from . import mc_module
 from lib.wordings_handling_tools import reformat, setup_wording_format_of
+from lib.common import shared
 
 class sub_object(mc_module.structure):
 
@@ -36,6 +37,8 @@ class sub_object(mc_module.structure):
             super().setup(M, "division", nb=numbers_to_use, **options)
             self.nb1, self.nb2 = self.dividend, self.divisor
             super().setup(M, "rectangle", **options)
+            if self.picture:
+                self.rectangle.rename(next(shared.four_letters_words_source))
             wordings = {'w': _("A rectangle has an area of {a} <area_unit> \
 and a length of {x} <length_unit>. What is its width? |hint:length_unit|"),
                         'l': _("A rectangle has an area of {a} <area_unit> \
@@ -49,6 +52,8 @@ and a width of {x} <length_unit>. What is its length? |hint:length_unit|")
         elif self.context == "from_perimeter":
             super().setup(M, "nb_variants", nb=numbers_to_use, **options)
             super().setup(M, "rectangle", **options)
+            if self.picture:
+                self.rectangle.rename(next(shared.four_letters_words_source))
             self.subcontext = random.choice(['w', 'l'])
             self.w_str = self.rectangle.width.into_str(\
                                                   force_expression_begins=True)

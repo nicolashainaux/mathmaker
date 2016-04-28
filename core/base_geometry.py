@@ -197,6 +197,32 @@ class Point(Drawable):
 
     # --------------------------------------------------------------------------
     ##
+    #   @brief Returns the name of the object
+    @property
+    def name(self):
+        return self._name
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Allows to rename Points (other Drawables are not allowed to).
+    @name.setter
+    def name(self, arg):
+        if not (type(arg) == str):
+            raise TypeError("Expected a string")
+        if not (len(arg) == 1):
+            raise ValueError("Expected a string of one char only")
+        self._name = arg
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
     #   @brief Returns a new Point after rotation of self
     def rotate(self, center, angle, **options):
         if not isinstance(center, Point):

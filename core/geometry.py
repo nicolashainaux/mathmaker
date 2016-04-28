@@ -99,8 +99,8 @@ class Polygon(Drawable):
 
         if isinstance(arg, Polygon):
             self._vertex = [ v.clone() for v in arg.vertex ]
-            self._side = [s.clone() for s in arg.side ]
-            self._angle = [a.clone() for a in arg.angle ]
+            self._side = [ s.clone() for s in arg.side ]
+            self._angle = [ a.clone() for a in arg.angle ]
             self._rotation_angle = arg.rotation_angle
 
         elif type(arg) == list:
@@ -211,6 +211,43 @@ class Polygon(Drawable):
         else:
             return self._name
 
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Rename the Polygon
+    def rename(self, n):
+        if not type(n) == str:
+            raise TypeError("The 'n' argument should be a string")
+        if not len(n) == len(self.vertex):
+            raise ValueError("The given name should have the same length as "
+                             "the number of vertices of the Polygon (" \
+                             + str(len(vertex)) + "). " \
+                             "Instead it has a length of " + str(len(n)))
+
+        if not self._read_name_clockwise:
+            n = n[::-1]
+        for i, v in enumerate(self._vertex):
+            v.name = n[i]
+        self._name = ''.join([v.name for v in self._vertex])
+
+        shifted_vertices = copy.deepcopy(self._vertex)
+        shifted_vertices += [shifted_vertices.pop(0)]
+        for i, (p0, p1) in enumerate(zip(self._vertex, shifted_vertices)):
+            self._side[i].points[0].name = p0.name
+            self._side[i].points[1].name = p1.name
+
+        left_shifted_vertices = copy.deepcopy(self._vertex)
+        left_shifted_vertices = [left_shifted_vertices.pop(-1)] \
+                                + left_shifted_vertices
+        for i, (p0, p1, p2) in enumerate(zip(left_shifted_vertices,
+                                             self._vertex,
+                                             shifted_vertices)):
+            self._angle[i].points[0].name = p0.name
+            self._angle[i].points[1].name = p1.name
+            self._angle[i].points[2].name = p2.name
 
 
 
