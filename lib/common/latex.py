@@ -37,13 +37,16 @@ SPRING_HARDNESS = '4'
 
 # LANGUAGE PACKAGES
 FRANCAIS = 'frenchb'
-ENGLISH = 'english'
+US_ENGLISH = 'american'
+US_ENGLISH = 'british'
 
 # MATCHES BETWEEN LANGUAGE CODE ('fr', 'en' etc.)
 # AND RELATED LATEX PACKAGE NAMES:
 LANGUAGE_PACKAGE_NAME = {'fr': FRANCAIS,
                          'fr_FR': FRANCAIS,
-                         'en': ENGLISH
+                         'en': US_ENGLISH,
+                         'en_US' : US_ENGLISH,
+                         'en_GB' : UK_ENGLISH
                         }
 
 # TEXT SIZES
