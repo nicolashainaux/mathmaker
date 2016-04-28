@@ -21,6 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import sys
 import random, copy
+#import time
+#from decimal import Decimal
 
 from lib import error
 from lib.common.cst import *
@@ -170,11 +172,17 @@ def handle_valueless_names_tags(arg, sentence):
         if not hasattr(arg, vn):
             val = ""
             if vn.startswith('name'):
+                #start_time = time.time()
                 val = next(shared.names_source)
+                #sys.stderr.write("{sec}\n".format(sec=Decimal(str(time.time() - start_time))))
             elif vn.startswith('masculine_name'):
+                #start_time = time.time()
                 val = shared.names_source.next(gender="masculine")
+                #sys.stderr.write("{sec}\n".format(sec=Decimal(str(time.time() - start_time))))
             elif vn.startswith('feminine_name'):
+                #start_time = time.time()
                 val = shared.names_source.next(gender="feminine")
+                #sys.stderr.write("{sec}\n".format(sec=Decimal(str(time.time() - start_time))))
             setattr(arg, vn, val)
 
 # --------------------------------------------------------------------------

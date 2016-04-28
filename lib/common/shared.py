@@ -20,13 +20,19 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import sqlite3
+
 from . import settings
-from lib.tools import db
 
 def init():
-	global four_letters_words_source
-	global names_source
+    global db
+    global four_letters_words_source
+    global names_source
 
-	four_letters_words_source = db.source("w4l", "word",
-                                          language=settings.language)
-	names_source = db.source("names", "name", language=settings.language)
+    db = sqlite3.connect(settings.path.db)
+
+    import lib.tools.db
+    four_letters_words_source = lib.tools.db.source("w4l", "word",
+                                                    language=settings.language)
+    names_source = lib.tools.db.source("names", "name",
+                                       language=settings.language)

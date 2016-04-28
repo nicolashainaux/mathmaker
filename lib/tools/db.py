@@ -19,12 +19,11 @@
 # You should have received a copy of the GNU General Public License
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-import sys
+
 import sqlite3
-from lib.common import settings
+from lib.common import settings, shared
 
 log = settings.mainlogger
-db = sqlite3.connect(settings.path.db)
 
 class source(object):
 
@@ -34,9 +33,8 @@ class source(object):
         self.language = kwargs['language'] if 'language' in kwargs else ""
 
     def reset(self):
-        db.execute(\
+        shared.db.execute(\
         "UPDATE " + self.table_name + " SET drawDate = 0;")
-        db.commit()
 
     def __next__(self):
         return self.next()
@@ -50,14 +48,13 @@ class source(object):
         cmd = "SELECT id," + self.col + " FROM " + self.table_name + \
               " WHERE drawDate = 0 " + l + kw_conditions + \
               "ORDER BY random() LIMIT 1;"
-        query_result = tuple(db.execute(cmd))
+        query_result = tuple(shared.db.execute(cmd))
         if not len(query_result):
             self.reset()
-            query_result = tuple(db.execute(cmd))
+            query_result = tuple(shared.db.execute(cmd))
         ID, word = query_result[0]
-        db.execute(\
+        shared.db.execute(\
         "UPDATE " + self.table_name + \
         " SET drawDate = datetime() WHERE id = " + str(ID) + ";")
-        db.commit()
         return word
 
