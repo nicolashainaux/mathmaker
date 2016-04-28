@@ -23,6 +23,7 @@
 import sqlite3
 from lib.common import settings
 
+log = settings.mainlogger
 db = sqlite3.connect(settings.path.db)
 
 class source(object):
@@ -34,16 +35,21 @@ class source(object):
             self.language = kwargs['language']
 
     def reset(self):
-        pass
+        db.execute(\
+        "UPDATE " + self.table_name + " SET drawDate = 0;")
+        db.commit()
 
     def __next__(self):
         return self.next()
 
     def next(self, **kwargs):
-        ID, word = tuple(db.execute(\
-        "SELECT id," + self.col + \
-        " FROM " + self.table_name + \
-        " WHERE drawDate = 0 ORDER BY random() LIMIT 1;"))[0]
+        cmd = "SELECT id," + self.col + " FROM " + self.table_name + \
+              " WHERE drawDate = 0 ORDER BY random() LIMIT 1;"
+        query_result = tuple(db.execute(cmd))
+        if not len(query_result):
+            self.reset()
+            query_result = tuple(db.execute(cmd))
+        ID, word = query_result[0]
         db.execute(\
         "UPDATE " + self.table_name + \
         " SET drawDate = datetime() WHERE id = " + str(ID) + ";")
