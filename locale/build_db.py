@@ -44,14 +44,13 @@ db = sqlite3.connect(settings.path.db_dist)
 db.execute('''CREATE TABLE w4l
           (id INTEGER PRIMARY KEY,
           language TEXT, word TEXT, drawDate INTEGER)''')
-#db.execute('''CREATE TABLE names
-#          (language TEXT, gender TEXT, name TEXT)''')
+db.execute('''CREATE TABLE names
+          (language TEXT, gender TEXT, name TEXT, drawDate INTEGER)''')
 
 # Extract data from po(t) files and insert them into the db
 for l in next(os.walk(settings.localedir))[1]:
     settings.language = l
     if os.path.isfile(settings.localedir + l + "/LC_MESSAGES/w4l.po"):
-        sys.stderr.write("Found for {lg}\n".format(lg=l))
         words = po_file.get_list_of('words', l, 4)
         db_rows = list(zip([l for _ in range(len(words))],
                             words,
@@ -59,6 +58,21 @@ for l in next(os.walk(settings.localedir))[1]:
         db.executemany(\
                     "INSERT INTO w4l(language, word, drawDate) VALUES(?, ?, ?)",
                     db_rows)
+
+    for gender in ["masculine", "feminine"]:
+        if os.path.isfile(settings.localedir + l \
+                          + "/LC_MESSAGES/" + gender + "_names.po"):
+        #___
+            names = po_file.get_list_of('names', l, gender)
+            db_rows = list(zip([l for _ in range(len(names))],
+                                [gender for _ in range(len(names))],
+                                names,
+                                [0 for _ in range(len(names))]))
+            db.executemany("INSERT "\
+                           "INTO names(language, gender, name, drawDate) "\
+                           "VALUES(?, ?, ?, ?)",
+                           db_rows)
+
 
 db.commit()
 db.close()
