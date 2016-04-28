@@ -19,7 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
+import sys
 import sqlite3
 from lib.common import settings
 
@@ -31,8 +31,7 @@ class source(object):
     def __init__(self, table_name, col, **kwargs):
         self.table_name = table_name
         self.col = col
-        if 'language' in kwargs:
-            self.language = kwargs['language']
+        self.language = kwargs['language'] if 'language' in kwargs else ""
 
     def reset(self):
         db.execute(\
@@ -43,8 +42,10 @@ class source(object):
         return self.next()
 
     def next(self, **kwargs):
+        l = "AND language = '" + self.language + "' " if self.language != ""\
+                                                     else ""
         cmd = "SELECT id," + self.col + " FROM " + self.table_name + \
-              " WHERE drawDate = 0 ORDER BY random() LIMIT 1;"
+              " WHERE drawDate = 0 " + l + "ORDER BY random() LIMIT 1;"
         query_result = tuple(db.execute(cmd))
         if not len(query_result):
             self.reset()

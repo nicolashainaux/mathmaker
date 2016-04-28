@@ -48,13 +48,17 @@ db.execute('''CREATE TABLE w4l
 #          (language TEXT, gender TEXT, name TEXT)''')
 
 # Extract data from po(t) files and insert them into the db
-language = settings.language = CONFIG["LOCALES"]["LANGUAGE"]
-words = po_file.get_list_of('words', language, 4)
-db_rows = list(zip([language for _ in range(len(words))],
-                    words,
-                    [0 for _ in range(len(words))]))
-db.executemany('''INSERT INTO w4l(language, word, drawDate) VALUES(?,?,?)''',
-               db_rows)
+for l in next(os.walk(settings.localedir))[1]:
+    settings.language = l
+    if os.path.isfile(settings.localedir + l + "/LC_MESSAGES/w4l.po"):
+        sys.stderr.write("Found for {lg}\n".format(lg=l))
+        words = po_file.get_list_of('words', l, 4)
+        db_rows = list(zip([l for _ in range(len(words))],
+                            words,
+                            [0 for _ in range(len(words))]))
+        db.executemany(\
+                    "INSERT INTO w4l(language, word, drawDate) VALUES(?, ?, ?)",
+                    db_rows)
 
 db.commit()
 db.close()
