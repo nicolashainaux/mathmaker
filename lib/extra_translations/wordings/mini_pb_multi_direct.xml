@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is only intended to provide additional strings for translation -->
+
+<nothing>
+ 	<wording wording_context="marbles"
+             text="{name1} has {nb1} marbles. {name2} has {nb2} times more marbles than {name1}. How many marbles has {name2}?"
+             nb1_min="2" nb1_max="25" nb2_min="2" nb2_max="25" operation="multi_direct"/>
+
+    <wording wording_context="golden goose"
+             text="My golden goose laid {nb1} eggs each day during {nb2} days. How  many eggs has she laid?"
+             nb1_min="2" nb1_max="25" nb2_min="2" nb2_max="25" operation="multi_direct"/>
+
+    <wording wording_context="gardener"
+             text="The gardener has planted {nb1} rows of {nb2} salads. How many salads did he plant altogether?"
+             nb1_min="2" nb1_max="9" nb2_min="2" nb2_max="9" operation="multi_direct"/>
+    <wording wording_context="gardener"
+             text="The gardener has planted {nb1} rows of {nb2} cabbages. How many cabbages did he plant altogether?"
+             nb1_min="2" nb1_max="9" nb2_min="2" nb2_max="9" operation="multi_direct"/>
+
+    <wording wording_context="market gardener"
+             text="A market gardener has planted {nb1} rows of {nb2} salads. How many salads did he plant altogether?"
+             nb1_min="10" nb1_max="100" nb2_min="10" nb2_max="100" operation="multi_direct"/>
+    <wording wording_context="market gardener"
+             text="A market gardener has planted {nb1} rows of {nb2} cabbages. How many cabbages did he plant altogether?"
+             nb1_min="10" nb1_max="100" nb2_min="10" nb2_max="100" operation="multi_direct"/>
+
+    <wording wording_context="candies"
+             text="I invited {nb1} friends at my birthday's party and want give {nb2} candies to each of them. How many candies should I buy?"
+             nb1_min="2" nb1_max="25" nb2_min="2" nb2_max="25" operation="multi_direct"/>
+
+    <wording wording_context="pencils boxes"
+             text="{masculine_name} bought {nb1} boxes of {nb2} pencils. How many pens did he buy?"
+             nb1_min="2" nb1_max="9" nb2_min="2" nb2_max="25" operation="multi_direct"/>
+    <wording wording_context="pencils boxes"
+             text="{feminine_name} bought {nb1} boxes of {nb2} pencils. How many pens did she buy?"
+             nb1_min="2" nb1_max="9" nb2_min="2" nb2_max="25" operation="multi_direct"/>
+
+    <wording wording_context="pens purchase"
+             text="{masculine_name} bought {nb1} pens at {nb2} £. How much did he pay? |hint:£|"
+             nb1_min="2" nb1_max="9" nb2_min="2" nb2_max="9" operation="multi_direct"/>
+    <wording wording_context="pens purchase"
+             text="{feminine_name} bought {nb1} pens at {nb2} £. How much did she pay? |hint:£|"
+             nb1_min="2" nb1_max="9" nb2_min="2" nb2_max="9" operation="multi_direct"/>
+
+    <wording wording_context="pocket money"
+             text="{masculine_name} gets {nb1} £ pocket money every month. If he doesn't spend it during {nb2} months, how much will he spare? |hint:£|"
+             nb1_min="2" nb1_max="30" nb2_min="2" nb2_max="36" operation="multi_direct"/>
+    <wording wording_context="pocket money"
+             text="{feminine_name} gets {nb1} £ pocket money every month. If she doesn't spend it during {nb2} months, how much will she spare? |hint:£|"
+             nb1_min="2" nb1_max="30" nb2_min="2" nb2_max="36" operation="multi_direct"/>
+
+    <wording wording_context="livestock farming"
+             text="We have {nb1} sheep. Our neighbours have {nb2} times more sheep than us. How many sheep do they have?"
+             nb1_min="2" nb1_max="25" nb2_min="2" nb2_max="25" operation="multi_direct"/>
+
+    <wording wording_context="sweets packets"
+             text="{masculine_name} has prepared {nb1} packets of {nb2} truffles. How many truffles has he prepared?"
+             nb1_min="2" nb1_max="25" nb2_min="2" nb2_max="25" operation="multi_direct"/>
+    <wording wording_context="sweets packets"
+             text="{feminine_name} has prepared {nb1} packets of {nb2} truffles. How many truffles has she prepared?"
+             nb1_min="2" nb1_max="25" nb2_min="2" nb2_max="25" operation="multi_direct"/>
+
+    <wording wording_context="starchy foods packets"
+             text="We have loaded {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How heavy are they altogether? |hint:mass_unit|"
+             nb1_min="2" nb1_max="25" nb2_min="2" nb2_max="25" operation="multi_direct"/>
+    <wording wording_context="starchy foods packets"
+             text="We have bought {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How heavy are they altogether? |hint:mass_unit|"
+             nb1_min="2" nb1_max="4" nb2_min="2" nb2_max="5" operation="multi_direct"/>
+
+</nothing>

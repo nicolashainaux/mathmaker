@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is only intended to provide additional strings for translation -->
+
+<nothing>
+ 	<wording wording_context="marbles"
+             text="{name1} has {nb1} marbles. {name2} has {nb2} marbles more than {name1}. How many marbles has {name2}?"
+             nb1_min="2" nb1_max="1000" nb2_min="2" nb2_max="1000" operation="addi_direct"/>
+
+    <wording wording_context="golden goose"
+             text="Yesterday, my golden goose laid {nb1} eggs and today she laid {nb2} eggs. How many eggs has she laid?"
+             nb1_min="2" nb1_max="100" nb2_min="2" nb2_max="100" operation="addi_direct"/>
+    <wording wording_context="golden goose"
+             text="Yesterday, my golden goose laid {nb1} eggs. That's {nb2} less than today. How many eggs has she laid today?"
+             nb1_min="2" nb1_max="100" nb2_min="2" nb2_max="100" operation="addi_direct"/>
+
+    <wording wording_context="gardener"
+             text="The gardener has planted {nb1} salads last week, and {nb2} salads more this week. How many salads did he plant altogether?"
+             nb1_min="2" nb1_max="20" nb2_min="2" nb2_max="20" operation="addi_direct"/>
+    <wording wording_context="gardener"
+             text="The gardener has planted {nb1} cabbages last week, and {nb2} cabbages more this week. How many cabbages did he plant altogether?"
+             nb1_min="2" nb1_max="20" nb2_min="2" nb2_max="20" operation="addi_direct"/>
+
+    <wording wording_context="market gardener"
+             text="A market gardener has planted {nb1} salads last week, and {nb2} salads more this week. How many salads did he plant altogether?"
+             nb1_min="21" nb1_max="100" nb2_min="21" nb2_max="100" operation="addi_direct"/>
+    <wording wording_context="market gardener"
+             text="A market gardener has planted {nb1} cabbages last week, and {nb2} cabbages more this week. How many cabbages did he plant altogether?"
+             nb1_min="21" nb1_max="100" nb2_min="21" nb2_max="100" operation="addi_direct"/>
+
+    <wording wording_context="candies"
+             text="{name1} ate {nb1} candies and {name2} ate {nb2} of them. The bag is empty. How many candies were there in the bag?"
+             nb1_min="2" nb1_max="10" nb2_min="2" nb2_max="10" operation="addi_direct"/>
+    <wording wording_context="candies"
+             text="{name} ate {nb1} candies and there are {nb2} candies left in the paperbag. How many candies were there in the paperbag?"
+             nb1_min="2" nb1_max="10" nb2_min="2" nb2_max="10" operation="addi_direct"/>
+
+    <wording wording_context="ages"
+             text="{name1} is {nb1} years old and {name2} is {nb2} years older than {name1}. How old is {name2}? |hint:years|"
+             nb1_min="2" nb1_max="30" nb2_min="2" nb2_max="30" operation="addi_direct"/>
+
+    <wording wording_context="can filling"
+             text="I had to fill this can with {nb1} {capacity_unit=L} of water. There was {nb2} {capacity_unit} left in it. How much does it contain? |hint:capacity_unit|"
+             nb1_min="2" nb1_max="30" nb2_min="2" nb2_max="30" operation="addi_direct"/>
+
+    <wording wording_context="book reading"
+             text="{masculine_name} has read {nb1} pages of his book this morning and read {nb2} pages more this afternoon. How many pages has he read today?"
+             nb1_min="9" nb1_max="50" nb2_min="9" nb2_max="50" operation="addi_direct"/>
+    <wording wording_context="book reading"
+             text="{feminine_name} has read {nb1} pages of her book this morning and read {nb2} pages more this afternoon. How many pages has she read today?"
+             nb1_min="9" nb1_max="50" nb2_min="9" nb2_max="50" operation="addi_direct"/>
+
+    <wording wording_context="bike riding"
+             text="I rode {nb1} {length_unit=km} this morning and still have to ride {nb2} {length_unit} until back home. What is the length of my ride? |hint:length_unit|"
+             nb1_min="2" nb1_max="100" nb2_min="2" nb2_max="100" operation="addi_direct"/>
+
+    <wording wording_context="painted walls"
+             text="I have painted {nb1} {area_unit=m} of this wall and still have {nb2} {area_unit} to paint it completely. What is the area of the wall? |hint:area_unit|"
+             nb1_min="2" nb1_max="20" nb2_min="2" nb2_max="20" operation="addi_direct"/>
+    <wording wording_context="painted walls"
+             text="{nb1} {area_unit=m} of this wall are already painted. {nb2} {area_unit} are still missing to have the wall completely painted. What is its area? |hint:area_unit|"
+             nb1_min="2" nb1_max="20" nb2_min="2" nb2_max="20" operation="addi_direct"/>
+
+    <wording wording_context="livestock farming"
+             text="Our neighbours have {nb1} sheep. We have {nb2} more sheep than them. How many sheep do we have?"
+             nb1_min="2" nb1_max="200" nb2_min="2" nb2_max="200" operation="addi_direct"/>
+    <wording wording_context="livestock farming"
+             text="Our neighbours have {nb1} sheep. That's {nb2} less than us. How many sheep do we have?"
+             nb1_min="2" nb1_max="200" nb2_min="2" nb2_max="200" operation="addi_direct"/>
+
+
+
+</nothing>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is only intended to provide additional strings for translation -->
+
+<nothing>
+ 	<wording wording_context="marbles"
+             text="{masculine_name} has {nb1} marbles. He gives them out to {nb2} friends. How many marbles will get each friend?"
+             nb1_min="2" nb1_max="500" nb2_min="2" nb2_max="25" operation="divi_direct"/>
+  	<wording wording_context="marbles"
+             text="{feminine_name} has {nb1} marbles. She gives them out to {nb2} friends. How many marbles will get each friend?"
+             nb1_min="2" nb1_max="500" nb2_min="2" nb2_max="25" operation="divi_direct"/>
+
+    <wording wording_context="golden goose"
+             text="It took {nb2} days to my golden goose to lay {nb1} eggs. How many eggs did she lay everyday?"
+             nb1_min="2" nb1_max="100" nb2_min="2" nb2_max="25" operation="divi_direct"/>
+
+    <wording wording_context="gardener"
+             text="The gardener has planted {nb1} salads, splitted in {nb2} rows. How many salads is there in a row?"
+             nb1_min="2" nb1_max="81" nb2_min="2" nb2_max="9" operation="divi_direct"/>
+    <wording wording_context="gardener"
+             text="The gardener has planted {nb1} cabbages, splitted in {nb2} rows. How many cabbages is there in a row?"
+             nb1_min="2" nb1_max="81" nb2_min="2" nb2_max="9" operation="divi_direct"/>
+
+    <wording wording_context="market gardener"
+             text="A market gardener has planted {nb1} salads, splitted in {nb2} rows. How many salads is there in a row?"
+             nb1_min="10" nb1_max="10000" nb2_min="10" nb2_max="100" operation="divi_direct"/>
+    <wording wording_context="market gardener"
+             text="A market gardener has planted {nb1} cabbages, splitted in {nb2} rows. How many cabbages is there in a row?"
+             nb1_min="10" nb1_max="10000" nb2_min="10" nb2_max="100" operation="divi_direct"/>
+
+    <wording wording_context="candies"
+             text="I will give out {nb1} candies to the {nb2} friends that I invited at my birthday's party. How many candies will receive each of my friends?"
+             nb1_min="2" nb1_max="625" nb2_min="2" nb2_max="25" operation="divi_direct"/>
+
+    <wording wording_context="pencils boxes"
+             text="{name} put {nb1} pencils away in {nb2} boxes. How many pencils are there in each box?"
+             nb1_min="2" nb1_max="250" nb2_min="2" nb2_max="25" operation="divi_direct"/>
+
+    <wording wording_context="pens purchase"
+             text="{name} paid {nb1} £ for {nb2} pens. How much does cost one pen? |hint:£|"
+             nb1_min="2" nb1_max="81" nb2_min="2" nb2_max="9" operation="divi_direct"/>
+
+    <wording wording_context="pocket money"
+             text="{masculine_name} has received altogether {nb1} £ pocket money in {nb2} months. How much did he receive every month? |hint:£|"
+             nb1_min="2" nb1_max="10800" nb2_min="2" nb2_max="36" operation="divi_direct"/>
+    <wording wording_context="pocket money"
+             text="{feminine_name} has received altogether {nb1} £ pocket money in {nb2} months. How much did she receive every month? |hint:£|"
+             nb1_min="2" nb1_max="10800" nb2_min="2" nb2_max="36" operation="divi_direct"/>
+
+    <wording wording_context="livestock farming"
+             text="Our neighbours have {nb1} sheep. That's {nb2} times more than us. How many sheep do we have?"
+             nb1_min="2" nb1_max="625" nb2_min="2" nb2_max="25" operation="divi_direct"/>
+
+    <wording wording_context="sweets packets"
+             text="{name} has prepared {nb1} truffles splitted in {nb2} packets. How many truffles is there in one packet?"
+             nb1_min="2" nb1_max="625" nb2_min="2" nb2_max="25" operation="divi_direct"/>
+
+    <wording wording_context="starchy foods packets"
+             text="We have loaded {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How heavy is one packet? |hint:mass_unit|"
+             nb1_min="2" nb1_max="625" nb2_min="2" nb2_max="25" operation="divi_direct"/>
+    <wording wording_context="starchy foods packets"
+             text="We have bought {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How heavy is one packet? |hint:mass_unit|"
+             nb1_min="2" nb1_max="20" nb2_min="2" nb2_max="5" operation="divi_direct"/>
+
+</nothing>
