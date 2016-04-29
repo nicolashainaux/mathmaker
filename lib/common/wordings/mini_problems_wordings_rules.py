@@ -85,7 +85,7 @@
 #        Take care, if the value provided after "hint:" doesn't match an
 #        already existing attribute, it will be handled as is (hence if
 #        you write |hint:area_unit| and no length_unit or area_unit does exist,
-#        mathmaker will display "....... area_unit" is the cell.).
+#        mathmaker will display "....... area_unit" in the cell.).
 #        ALSO, THE HINT HAS TO BE PLACED at the end of the sentence, separated
 #        by a space, with no punctuation close to it, its content must start
 #        with "hint:" and there must be at least one char between : and |
