@@ -12,7 +12,7 @@
 
     <wording wording_context="golden goose"
              wording="Yesterday, my golden goose laid {nb1} eggs we used {nb2} of them to make an omelet. How many eggs left are there?"
-             nb1_min="2" nb1_max="100" nb2_min="2" nb2_max="100" q_id="substr_direct"/>
+             nb1_min="2" nb1_max="100" nb2_min="2" nb2_max="12" q_id="substr_direct"/>
 
     <wording wording_context="gardener"
              wording="The gardener had {nb1} salads in his vegetable garden, and harvested {nb2} of them last week. How many salads are still in the garden?"
