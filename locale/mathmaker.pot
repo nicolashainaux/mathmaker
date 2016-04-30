@@ -521,10 +521,10 @@ msgstr ""
 msgid "How much is the difference between {n1} and {n2}?"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/addi_direct.py:45
-#: sheet/exercise/question/mc_modules/divi_direct.py:42
-#: sheet/exercise/question/mc_modules/multi_direct.py:45
-#: sheet/exercise/question/mc_modules/substr_direct.py:48
+#: sheet/exercise/question/mc_modules/addi_direct.py:48
+#: sheet/exercise/question/mc_modules/divi_direct.py:45
+#: sheet/exercise/question/mc_modules/multi_direct.py:48
+#: sheet/exercise/question/mc_modules/substr_direct.py:51
 #, python-brace-format
 msgid "Calculate: {math_expr}"
 msgstr ""
