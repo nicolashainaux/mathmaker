@@ -54,7 +54,7 @@ db.execute('''CREATE TABLE w4l
 db.execute('''CREATE TABLE names
           (id INTEGER PRIMARY KEY,
           language TEXT, gender TEXT, name TEXT, drawDate INTEGER)''')
-db.execute('''CREATE TABLE wordings
+db.execute('''CREATE TABLE mini_pb_wordings
           (id INTEGER PRIMARY KEY,
           wording_context TEXT, wording TEXT,
           nb1_min INTEGER, nb1_max INTEGER, nb2_min INTEGER, nb2_max INTEGER,
@@ -98,7 +98,7 @@ for f in WORDINGS_FILES:
                         [w['q_id'] for w in wordings],
                         [0 for _ in range(len(wordings))]))
     db.executemany("INSERT "\
-                   "INTO wordings(wording_context, wording, "\
+                   "INTO mini_pb_wordings(wording_context, wording, "\
                    "nb1_min, nb1_max, nb2_min, nb2_max, "\
                    "q_id, drawDate) "\
                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
