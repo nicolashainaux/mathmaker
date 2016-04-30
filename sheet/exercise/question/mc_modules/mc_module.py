@@ -31,7 +31,6 @@ from core.geometry import Rectangle
 from lib import error
 from lib.common import shared
 from lib.common.cst import COMMON_LENGTH_UNITS
-from lib.common.wordings import mini_problems_wordings
 from lib.wordings_handling_tools import setup_wording_format_of
 
 class structure(object):
@@ -148,9 +147,9 @@ class structure(object):
             self.rectangle.setup_labels([False, False, True, True])
 
         elif arg == 'mini_problem_wording':
-            d = {"addi": 0, "substr": 1, "multi": 2, "divi": 3}
-            if not mini_problems_wordings.initialized:
-                mini_problems_wordings.init()
-            self.wording = mini_problems_wordings.mini_problems_wordings_source\
-                           .next(choice=d[options['mini_pb_type']])
+            self.wording = _(shared.mini_problems_wordings_source\
+                             .next(source_id='mini_pb_wording',
+                                   q_id=options['q_id'],
+                                   nb1_to_check=self.nb1,
+                                   nb2_to_check=self.nb2))
             setup_wording_format_of(self, M)

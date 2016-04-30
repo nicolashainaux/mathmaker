@@ -20,6 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import os
+
 from core.base_calculus import *
 from . import mc_module
 
@@ -33,7 +35,8 @@ class sub_object(mc_module.structure):
             self.nb1 = self.dividend
             self.nb2 = self.divisor
             super().setup(M, "mini_problem_wording",
-                          mini_pb_type="divi", **options)
+                          q_id=os.path.splitext(os.path.basename(__file__))[0],
+                          **options)
 
     def q(self, M, **options):
         if self.context == 'mini_problem':

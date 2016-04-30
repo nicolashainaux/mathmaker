@@ -28,6 +28,7 @@ def init():
     global db
     global four_letters_words_source
     global names_source
+    global mini_problems_wordings_source
 
     db = sqlite3.connect(settings.path.db)
 
@@ -36,3 +37,5 @@ def init():
                                                     language=settings.language)
     names_source = lib.tools.db.source("names", "name",
                                        language=settings.language)
+    mini_problems_wordings_source = lib.tools.db.source("mini_pb_wordings",
+                                                        "wording")

@@ -44,17 +44,37 @@ class source(object):
                                                      else ""
         kw_conditions = ""
         for kw in kwargs:
-            kw_conditions += " AND " + kw + " = '" + kwargs[kw] + "' "
-        cmd = "SELECT id," + self.col + " FROM " + self.table_name + \
-              " WHERE drawDate = 0 " + l + kw_conditions + \
+            if kw.endswith("_to_check"):
+                k = kw[:-9]
+                kw_conditions += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
+                kw_conditions += " AND " + k + "_max" + " >= " + str(kwargs[kw]) + " "
+            elif kw == "source_id":
+                pass
+            else:
+                kw_conditions += " AND " + kw + " = '" + kwargs[kw] + "' "
+
+        select_part = "SELECT id," + self.col + " FROM " + self.table_name
+        if 'source_id' in kwargs and kwargs['source_id'] == "mini_pb_wording":
+            select_part = "SELECT id," + self.col + ",wording_context FROM " \
+                          + self.table_name
+
+        cmd = select_part + " WHERE drawDate = 0 " + l + kw_conditions + \
               "ORDER BY random() LIMIT 1;"
         query_result = tuple(shared.db.execute(cmd))
         if not len(query_result):
             self.reset()
             query_result = tuple(shared.db.execute(cmd))
-        ID, word = query_result[0]
-        shared.db.execute(\
-        "UPDATE " + self.table_name + \
-        " SET drawDate = datetime() WHERE id = " + str(ID) + ";")
+
+        if len(query_result[0]) == 2:
+            ID, word = query_result[0]
+            shared.db.execute(\
+            "UPDATE " + self.table_name + \
+            " SET drawDate = datetime() WHERE id = " + str(ID) + ";")
+        elif len(query_result[0]) == 3:
+            ID, word, wording_context = query_result[0]
+            shared.db.execute(\
+            "UPDATE " + self.table_name + \
+            " SET drawDate = datetime() WHERE wording_context = '" \
+            + str(wording_context) + "';")
         return word
 
