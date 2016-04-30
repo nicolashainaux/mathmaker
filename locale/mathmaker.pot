@@ -536,8 +536,8 @@ msgid ""
 "has she laid?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:39
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:10
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:10
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs and today she laid {nb2} eggs. "
 "How many eggs has she laid?"
@@ -616,157 +616,167 @@ msgstr ""
 msgid "Mental calculation: mini-problems"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:47
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:17
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:17
 msgid ""
 "The gardener has planted {nb1} salads last week, and {nb2} salads more this "
 "week. How many salads did he plant altogether?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:103
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:64
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:64
 msgid ""
 "Our neighbours have {nb1} sheep. We have {nb2} more sheep than them. How "
 "many sheep do we have?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:105
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:67
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:67
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} less than us. How many sheep "
 "do we have?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:43
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:13
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:13
 msgid ""
 "It took {nb2} days to my golden goose to lay {nb1} eggs. How many eggs did "
 "she lay everyday?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:44
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:14
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:14
 msgid ""
 "The gardener has planted {nb1} rows of {nb2} salads. How many salads did he "
 "plant altogether?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:52
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:28
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:28
 msgid ""
 "I invited {nb1} friends at my birthday's party and want give {nb2} candies "
 "to each of them. How many candies should I buy?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:83
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:53
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:53
 msgid ""
 "We have {nb1} sheep. Our neighbours have {nb2} times more sheep than us. How"
 " many sheep do they have?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:42
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:13
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:13
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs we used {nb2} of them to make an "
 "omelet. How many eggs left are there?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:47
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:17
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:17
 msgid ""
 "The gardener had {nb1} salads in his vegetable garden, and harvested {nb2} "
 "of them last week. How many salads are still in the garden?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:126
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:76
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:76
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} more than us. How many sheep "
 "do we have?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:128
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:79
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:79
 msgid ""
 "Our neighbours have {nb1} sheep. We have {nb2} less than them. How many "
 "sheep do we have?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:91
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:57
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:57
 msgid ""
 "I have painted {nb1} {area_unit=m} of this wall and still have {nb2} "
 "{area_unit} to paint it completely. What is the area of the wall? "
 "|hint:area_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:95
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:60
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:60
 msgid ""
 "{nb1} {area_unit=m} of this wall are already painted. {nb2} {area_unit} are "
 "still missing to have the wall completely painted. What is its area? "
 "|hint:area_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:90
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:58
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:58
 msgid ""
 "We have loaded {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How "
 "heavy is one packet? |hint:mass_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:96
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:64
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:64
 msgid ""
 "We have loaded {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How"
 " heavy are they altogether? |hint:mass_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:70
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:42
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:42
 msgid ""
 "I had to fill this can with {nb2} {capacity_unit=L} of water. It contains "
 "now {nb1} {capacity_unit}. How much water was left in it? "
 "|hint:capacity_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:103
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:62
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:62
 msgid ""
 "My bike ride is {nb1} {length_unit=km} long and I already rode {nb2} "
 "{length_unit}. How long do I still have to go cycling? |hint:length_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:107
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:65
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:65
 msgid ""
 "I already rode {nb2} {length_unit=km} out of {nb1} {length_unit}. How long "
 "do I still have to go cycling? |hint:length_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:114
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:69
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:69
 msgid ""
 "I have painted {nb2} {area_unit=m} out of the {nb1} {area_unit} of this "
 "wall. How much is still left to paint? |hint:area_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:118
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:72
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:72
 msgid ""
 "This wall is altogether {nb1} {area_unit=m} wide. I have already painted "
 "{nb2} {area_unit} of it, how much is there still left to paint? "
 "|hint:area_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:74
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:45
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:45
 msgid ""
 "This can contains altogether {nb1} {capacity_unit=L} of water. I had to "
 "refill it with {nb2} {capacity_unit}. How much water was left in it? "
 "|hint:capacity_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:48
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:17
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:17
 msgid ""
 "The gardener has planted {nb1} salads, splitted in {nb2} rows. How many "
 "salads is there in a row?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:80
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:50
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:50
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} times more than us. How many "
 "sheep do we have?"
@@ -822,8 +832,8 @@ msgid ""
 "width is {x} <length_unit>? |hint:length_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:56
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:31
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:31
 msgid ""
 "I will give out {nb1} candies to the {nb2} friends that I invited at my "
 "birthday's party. How many candies will receive each of my friends?"
@@ -843,202 +853,204 @@ msgid ""
 "many marbles will get each friend?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:61
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:35
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:35
 msgid ""
 "{name} put {nb1} pencils away in {nb2} boxes. How many pencils are there in "
 "each box?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:70
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:43
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:43
 msgid ""
 "{masculine_name} has received altogether {nb1} £ pocket money in {nb2} "
 "months. How much did he receive every month? |hint:£|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:73
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:46
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:46
 msgid ""
 "{feminine_name} has received altogether {nb1} £ pocket money in {nb2} "
 "months. How much did she receive every month? |hint:£|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:85
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:54
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:54
 msgid ""
 "{name} has prepared {nb1} truffles splitted in {nb2} packets. How many "
 "truffles is there in one packet?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:34
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:6
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} marbles more than {name1}. How "
 "many marbles has {name2}?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:56
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:31
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:31
 msgid ""
 "{name1} ate {nb1} candies and {name2} ate {nb2} of them. The bag is empty. "
 "How many candies were there in the bag?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:58
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:34
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:34
 msgid ""
 "{name} ate {nb1} candies and there are {nb2} candies left in the paperbag. "
 "How many candies were there in the paperbag?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:64
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:38
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:38
 msgid ""
 "{name1} is {nb1} years old and {name2} is {nb2} years older than {name1}. "
 "How old is {name2}? |hint:years|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:69
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:42
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:42
 msgid ""
 "I had to fill this can with {nb1} {capacity_unit=L} of water. There was "
 "{nb2} {capacity_unit} left in it. How much does it contain? "
 "|hint:capacity_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:75
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:46
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:46
 msgid ""
 "{masculine_name} has read {nb1} pages of his book this morning and read "
 "{nb2} pages more this afternoon. How many pages has he read today?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:78
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:49
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:49
 msgid ""
 "{feminine_name} has read {nb1} pages of her book this morning and read {nb2}"
 " pages more this afternoon. How many pages has she read today?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:85
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:53
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:53
 msgid ""
 "I rode {nb1} {length_unit=km} this morning and still have to ride {nb2} "
 "{length_unit} until back home. What is the length of my ride? "
 "|hint:length_unit|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:34
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:6
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} times more marbles than "
 "{name1}. How many marbles has {name2}?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:57
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:32
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:32
 msgid ""
 "{masculine_name} bought {nb1} boxes of {nb2} pencils. How many pens did he "
 "buy?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:59
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:35
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:35
 msgid ""
 "{feminine_name} bought {nb1} boxes of {nb2} pencils. How many pens did she "
 "buy?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:65
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:39
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:39
 msgid ""
 "{masculine_name} bought {nb1} pens at {nb2} £. How much did he pay? |hint:£|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:67
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:42
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:42
 msgid ""
 "{feminine_name} bought {nb1} pens at {nb2} £. How much did she pay? |hint:£|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:73
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:46
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:46
 msgid ""
 "{masculine_name} gets {nb1} £ pocket money every month. If he doesn't spend "
 "it during {nb2} months, how much will he spare? |hint:£|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:76
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:49
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:49
 msgid ""
 "{feminine_name} gets {nb1} £ pocket money every month. If she doesn't spend "
 "it during {nb2} months, how much will she spare? |hint:£|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:88
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:57
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:57
 msgid ""
 "{masculine_name} has prepared {nb1} packets of {nb2} truffles. How many "
 "truffles has he prepared?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:90
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:60
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:60
 msgid ""
 "{feminine_name} has prepared {nb1} packets of {nb2} truffles. How many "
 "truffles has she prepared?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:34
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:6
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} marbles less than {name1}. How "
 "many marbles has {name2}?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:36
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:9
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:9
 msgid ""
 "{name2} has {nb2} marbles less than {name1}, who has {nb1} of them. How many"
 " marbles has {name2}?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:62
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:35
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:35
 msgid ""
 "{name1} is {nb1} years old and {name2} is {nb2} years younger than {name1}. "
 "How old is {name2}? |hint:years|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:64
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:38
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:38
 msgid ""
 "{name2} is {nb2} years younger than {name1}, who is {nb1} years old. How old"
 " is {name2}? |hint:years|"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:83
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:49
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:49
 msgid ""
 "{masculine_name} read his book from page {nb2} this morning until page {nb1}"
 " this afternoon. How many pages has he read today?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:86
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:52
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:52
 msgid ""
 "{feminine_name} read her book from page {nb2} this morning until page {nb1} "
 "this afternoon. How many pages has she read today?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:92
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:55
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:55
 msgid ""
 "Today, {masculine_name} has read his book until page {nb1}. This morning he "
 "started at page {nb2}. How many pages has he read today?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:95
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:58
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:58
 msgid ""
 "Today, {feminine_name} has read her book until page {nb1}. This morning she "
 "started at page {nb2}. How many pages has she read today?"
@@ -1049,43 +1061,43 @@ msgstr ""
 msgid "{name} paid {nb1} £ for {nb2} pens. How much does cost one pen?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:57
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:31
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:31
 msgid ""
 "Some friends shared {nb2} of the {nb1} candies of the packet. How many "
 "candies are there left?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:49
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:20
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:20
 msgid ""
 "The gardener has planted {nb1} cabbages last week, and {nb2} cabbages more "
 "this week. How many cabbages did he plant altogether?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:50
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:20
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:20
 msgid ""
 "The gardener has planted {nb1} cabbages, splitted in {nb2} rows. How many "
 "cabbages is there in a row?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:46
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:17
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:17
 msgid ""
 "The gardener has planted {nb1} rows of {nb2} cabbages. How many cabbages did"
 " he plant altogether?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:50
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:20
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:20
 msgid ""
 "The gardener had {nb1} cabbages in his vegetable garden, and harvested {nb2}"
 " of them last week. How many cabbages are still in the garden?"
 msgstr ""
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:41
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:13
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:13
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs. That's {nb2} less than today. "
 "How many eggs has she laid today?"
@@ -1217,4 +1229,101 @@ msgstr ""
 
 #: lib/extra_translations/vocabulary.xml:11
 msgid "tens of thousands"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:24
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:24
+msgid ""
+"A market gardener has planted {nb1} salads, splitted in {nb2} rows. How many"
+" salads is there in a row?"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:24
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:24
+msgid ""
+"A market gardener has planted {nb1} rows of {nb2} cabbages. How many "
+"cabbages did he plant altogether?"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:27
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:27
+msgid ""
+"A market gardener had {nb1} cabbages in his vegetable garden, and harvested "
+"{nb2} of them last week. How many cabbages are still in the garden?"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:9
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:9
+msgid ""
+"{feminine_name} has {nb1} marbles. She gives them out to {nb2} friends. How "
+"many marbles will get each friend?"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:27
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:27
+msgid ""
+"A market gardener has planted {nb1} cabbages last week, and {nb2} cabbages "
+"more this week. How many cabbages did he plant altogether?"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:24
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:24
+msgid ""
+"A market gardener had {nb1} salads in his vegetable garden, and harvested "
+"{nb2} of them last week. How many salads are still in the garden?"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:61
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:61
+msgid ""
+"We have bought {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How "
+"heavy is one packet? |hint:mass_unit|"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:6
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:6
+msgid ""
+"{masculine_name} has {nb1} marbles. He gives them out to {nb2} friends. How "
+"many marbles will get each friend?"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:27
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:27
+msgid ""
+"A market gardener has planted {nb1} cabbages, splitted in {nb2} rows. How "
+"many cabbages is there in a row?"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:10
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:10
+msgid ""
+"My golden goose laid {nb1} eggs each day during {nb2} days. How  many eggs "
+"has she laid?"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:39
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:39
+msgid ""
+"{name} paid {nb1} £ for {nb2} pens. How much does cost one pen? |hint:£|"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:24
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:24
+msgid ""
+"A market gardener has planted {nb1} salads last week, and {nb2} salads more "
+"this week. How many salads did he plant altogether?"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:21
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:21
+msgid ""
+"A market gardener has planted {nb1} rows of {nb2} salads. How many salads "
+"did he plant altogether?"
+msgstr ""
+
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:67
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:67
+msgid ""
+"We have bought {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How"
+" heavy are they altogether? |hint:mass_unit|"
 msgstr ""

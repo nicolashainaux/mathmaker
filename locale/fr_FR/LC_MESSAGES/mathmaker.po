@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-04-28 15:59+0100\n"
+"PO-Revision-Date: 2016-04-30 11:24+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -556,8 +556,7 @@ msgstr ""
 "Ma poule aux œufs d'or a pondu {nb1} œufs chaque jour pendant {nb2} jours. "
 "Combien d'œufs a-t-elle pondu ?"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:39
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:10
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs and today she laid {nb2} eggs. "
 "How many eggs has she laid?"
@@ -638,8 +637,7 @@ msgstr "Réponses"
 msgid "Mental calculation: mini-problems"
 msgstr "Calcul mental : mini-problèmes"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:47
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:17
 msgid ""
 "The gardener has planted {nb1} salads last week, and {nb2} salads more this "
 "week. How many salads did he plant altogether?"
@@ -647,8 +645,7 @@ msgstr ""
 "Le jardinier a planté {nb1} salades la semaine dernière, et {nb2} salades de "
 "plus cette semaine. Combien de salades a-t-il planté en tout ?"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:103
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:64
 msgid ""
 "Our neighbours have {nb1} sheep. We have {nb2} more sheep than them. How "
 "many sheep do we have?"
@@ -656,8 +653,7 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. Nous en avons {nb2} de plus qu'eux. Combien "
 "de moutons avons-nous ?"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:105
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:67
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} less than us. How many sheep "
 "do we have?"
@@ -665,8 +661,7 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. C'est {nb2} de moins que nous. Combien de "
 "moutons avons-nous ?"
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:43
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:13
 msgid ""
 "It took {nb2} days to my golden goose to lay {nb1} eggs. How many eggs did "
 "she lay everyday?"
@@ -674,8 +669,7 @@ msgstr ""
 "Ma poule aux œufs d'or a pondu {nb1} œufs en {nb2} jours. Combien d'œufs a-t-"
 "elle pondu chaque jour ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:44
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:14
 msgid ""
 "The gardener has planted {nb1} rows of {nb2} salads. How many salads did he "
 "plant altogether?"
@@ -683,8 +677,7 @@ msgstr ""
 "Le jardinier a planté {nb1} rangs de {nb2} salades. Combien de salades a-t-"
 "il planté en tout ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:52
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:28
 msgid ""
 "I invited {nb1} friends at my birthday's party and want give {nb2} candies "
 "to each of them. How many candies should I buy?"
@@ -692,8 +685,7 @@ msgstr ""
 "J'ai invité {nb1} amis à mon anniversaire et je veux distribuer {nb2} "
 "bonbons à chacun d'eux. Combien de bonbons devrais-je acheter ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:83
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:53
 msgid ""
 "We have {nb1} sheep. Our neighbours have {nb2} times more sheep than us. How "
 "many sheep do they have?"
@@ -701,8 +693,7 @@ msgstr ""
 "Nous avons {nb1} moutons. Nos voisins en ont {nb2} fois plus que nous. "
 "Combien de moutons ont-ils ?"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:42
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:13
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs we used {nb2} of them to make an "
 "omelet. How many eggs left are there?"
@@ -710,8 +701,7 @@ msgstr ""
 "Hier, ma poule aux œufs d'or a pondu {nb1} œufs et on en a utilisé {nb2} "
 "pour faire une omelette. Combien reste-t-il d'œufs ?"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:47
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:17
 msgid ""
 "The gardener had {nb1} salads in his vegetable garden, and harvested {nb2} "
 "of them last week. How many salads are still in the garden?"
@@ -719,8 +709,7 @@ msgstr ""
 "Le jardinier avait {nb1} salades dans son potager et en a récolté {nb2} la "
 "semaine dernière. Combien reste-t-il de salades dans le potager ?"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:126
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:76
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} more than us. How many sheep "
 "do we have?"
@@ -728,8 +717,7 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. C'est {nb2} de plus que nous. Combien de "
 "moutons avons-nous ?"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:128
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:79
 msgid ""
 "Our neighbours have {nb1} sheep. We have {nb2} less than them. How many "
 "sheep do we have?"
@@ -737,7 +725,7 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. Nous en avons {nb2} de moins qu'eux. Combien "
 "de moutons avaons-nous ?"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:91
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:57
 msgid ""
 "I have painted {nb1} {area_unit=m} of this wall and still have {nb2} "
 "{area_unit} to paint it completely. What is the area of the wall? |hint:"
@@ -746,7 +734,7 @@ msgstr ""
 "J'ai peint {nb1} {area_unit=m} de ce mur et je dois encore peindre {nb2} "
 "{area_unit} pour terminer. Quelle est l'aire de ce mur ? |hint:area_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:95
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:60
 msgid ""
 "{nb1} {area_unit=m} of this wall are already painted. {nb2} {area_unit} are "
 "still missing to have the wall completely painted. What is its area? |hint:"
@@ -756,7 +744,7 @@ msgstr ""
 "{area_unit} pour qu'il soit complètement peint. Quelle est son aire ? |hint:"
 "area_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:90
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:58
 msgid ""
 "We have loaded {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How "
 "heavy is one packet? |hint:mass_unit|"
@@ -764,7 +752,7 @@ msgstr ""
 "Nous avons chargé {nb1} {mass_unit=kg} de farine, répartis dans {nb2} "
 "paquets. Quel est la masse d'un paquet ? |hint:mass_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:96
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:64
 msgid ""
 "We have loaded {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How "
 "heavy are they altogether? |hint:mass_unit|"
@@ -772,7 +760,7 @@ msgstr ""
 "Nous avons chargé {nb1} paquets de farine, de {nb2} {mass_unit=kg} chacun. "
 "Quelle masse totale de farine cela représente-t-il ? |hint:mass_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:70
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:42
 msgid ""
 "I had to fill this can with {nb2} {capacity_unit=L} of water. It contains "
 "now {nb1} {capacity_unit}. How much water was left in it? |hint:"
@@ -782,7 +770,7 @@ msgstr ""
 "en contient {nb1} {capacity_unit}. Quelle quantité d'eau restait-il ? |hint:"
 "capacity_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:103
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:62
 msgid ""
 "My bike ride is {nb1} {length_unit=km} long and I already rode {nb2} "
 "{length_unit}. How long do I still have to go cycling? |hint:length_unit|"
@@ -790,7 +778,7 @@ msgstr ""
 "Ma randonnée à vélo est de {nb1} {length_unit=km} et j'ai déjà parcouru "
 "{nb2} {length_unit}. Combien me reste-t-il à parcourir ? |hint:length_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:107
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:65
 msgid ""
 "I already rode {nb2} {length_unit=km} out of {nb1} {length_unit}. How long "
 "do I still have to go cycling? |hint:length_unit|"
@@ -798,7 +786,7 @@ msgstr ""
 "J'ai déjà parcouru {nb2} {length_unit=km} sur les {nb1} {length_unit} de ma "
 "balade à vélo. Combien me reste-t-il à parcourir ? |hint:length_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:114
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:69
 msgid ""
 "I have painted {nb2} {area_unit=m} out of the {nb1} {area_unit} of this "
 "wall. How much is still left to paint? |hint:area_unit|"
@@ -806,7 +794,7 @@ msgstr ""
 "J'ai peint {nb2} {area_unit=m} sur les {nb1} {area_unit} de ce mur. Combien "
 "reste-t-il à peindre ? |hint:area_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:118
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:72
 msgid ""
 "This wall is altogether {nb1} {area_unit=m} wide. I have already painted "
 "{nb2} {area_unit} of it, how much is there still left to paint? |hint:"
@@ -815,7 +803,7 @@ msgstr ""
 "Ce mur a une aire de  {nb1} {area_unit=m}. J'en ai déjà peint {nb2} "
 "{area_unit}, combien reste-t-il à peindre ? |hint:area_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:74
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:45
 msgid ""
 "This can contains altogether {nb1} {capacity_unit=L} of water. I had to "
 "refill it with {nb2} {capacity_unit}. How much water was left in it? |hint:"
@@ -825,8 +813,7 @@ msgstr ""
 "{nb2} {capacity_unit} d'eau pour le remplir. Combien d'eau restait-il ? |"
 "hint:capacity_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:48
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:17
 msgid ""
 "The gardener has planted {nb1} salads, splitted in {nb2} rows. How many "
 "salads is there in a row?"
@@ -834,8 +821,7 @@ msgstr ""
 "Le jardinier a planté {nb1} salades sur {nb2} rangs. Combien de salades y-a-"
 "t-il dans un rang ?"
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:80
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:50
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} times more than us. How many "
 "sheep do we have?"
@@ -905,8 +891,7 @@ msgstr ""
 "Longueur d'un rectangle de périmètre {p} <length_unit> et de largeur {x} "
 "<length_unit> ? |hint:length_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:56
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:31
 msgid ""
 "I will give out {nb1} candies to the {nb2} friends that I invited at my "
 "birthday's party. How many candies will receive each of my friends?"
@@ -932,8 +917,7 @@ msgstr ""
 "{feminine_name} a {nb1} billes. Elle les distribue à {nb2} amies. Combien de "
 "billes va recevoir chacune d'elles ?"
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:61
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:35
 msgid ""
 "{name} put {nb1} pencils away in {nb2} boxes. How many pencils are there in "
 "each box?"
@@ -941,8 +925,7 @@ msgstr ""
 "{name} a rangé {nb1} crayons dans {nb2} boîtes. Combien de crayons y-a-t-il "
 "dans chaque boîte ?"
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:70
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:43
 msgid ""
 "{masculine_name} has received altogether {nb1} £ pocket money in {nb2} "
 "months. How much did he receive every month? |hint:£|"
@@ -950,8 +933,7 @@ msgstr ""
 "{masculine_name} a reçu en tout {nb1} € d'argent de poche en {nb2} mois. "
 "Combien a-t-il reçu chaque mois ? |hint:€|"
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:73
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:46
 msgid ""
 "{feminine_name} has received altogether {nb1} £ pocket money in {nb2} "
 "months. How much did she receive every month? |hint:£|"
@@ -959,8 +941,7 @@ msgstr ""
 "{feminine_name} a reçu en tout {nb1} € d'argent de poche en {nb2} mois. "
 "Combien a-t-elle reçu chaque mois ?  |hint:€|"
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:85
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:54
 msgid ""
 "{name} has prepared {nb1} truffles splitted in {nb2} packets. How many "
 "truffles is there in one packet?"
@@ -968,8 +949,7 @@ msgstr ""
 "{name} a préparé {nb1} truffes, rangées dans {nb2} paquets. Combien de "
 "truffes y-a-t-il dans un paquet?"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:34
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} marbles more than {name1}. How "
 "many marbles has {name2}?"
@@ -977,8 +957,7 @@ msgstr ""
 "{name1} a {nb1} billes. {name2} a {nb2} billes de plus que {name1}. Combien "
 "de billes a {name2} ?"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:56
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:31
 msgid ""
 "{name1} ate {nb1} candies and {name2} ate {nb2} of them. The bag is empty. "
 "How many candies were there in the bag?"
@@ -986,8 +965,7 @@ msgstr ""
 "{name1} a mangé {nb1} bonbons et {name2} en a mangé {nb2}. Il n'en reste "
 "plus. Combien de bonbons y avait-il dans le sac ?"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:58
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:34
 msgid ""
 "{name} ate {nb1} candies and there are {nb2} candies left in the paperbag. "
 "How many candies were there in the paperbag?"
@@ -995,8 +973,7 @@ msgstr ""
 "{name} a mangé {nb1} bonbons et il en reste {nb2} dans le sachet. Combien y "
 "en avait-il ?"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:64
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:38
 msgid ""
 "{name1} is {nb1} years old and {name2} is {nb2} years older than {name1}. "
 "How old is {name2}? |hint:years|"
@@ -1004,7 +981,7 @@ msgstr ""
 "{name1} a {nb1} ans et {name2} a {nb2} ans de plus que {name1}. Quel âge a "
 "{name2} ? |hint:ans|"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:69
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:42
 msgid ""
 "I had to fill this can with {nb1} {capacity_unit=L} of water. There was "
 "{nb2} {capacity_unit} left in it. How much does it contain? |hint:"
@@ -1014,8 +991,7 @@ msgstr ""
 "restait {nb2} {capacity_unit} dedans. Combien contient-il en tout? |hint:"
 "capacity_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:75
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:46
 msgid ""
 "{masculine_name} has read {nb1} pages of his book this morning and read "
 "{nb2} pages more this afternoon. How many pages has he read today?"
@@ -1023,8 +999,7 @@ msgstr ""
 "{masculine_name} a lu {nb1} pages de son livre ce matin et en a lu {nb2} "
 "pages de plus cet après-midi. Combien de pages a-t-il lues aujourd'hui ?"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:78
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:49
 msgid ""
 "{feminine_name} has read {nb1} pages of her book this morning and read {nb2} "
 "pages more this afternoon. How many pages has she read today?"
@@ -1032,7 +1007,7 @@ msgstr ""
 "{feminine_name} a lu {nb1} pages de son livre ce matin et en a lu {nb2} "
 "pages de plus cet après-midi. Combien de pages a-t-elle lu aujourd'hui ?"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:85
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:53
 msgid ""
 "I rode {nb1} {length_unit=km} this morning and still have to ride {nb2} "
 "{length_unit} until back home. What is the length of my ride? |hint:"
@@ -1042,8 +1017,7 @@ msgstr ""
 "{length_unit} à parcourir. Quelle distance aurai-je parcouru en tout ? |hint:"
 "length_unit|"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:34
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} times more marbles than "
 "{name1}. How many marbles has {name2}?"
@@ -1051,8 +1025,7 @@ msgstr ""
 "{name1} a {nb1} billes. {name2} a {nb2} fois plus de billes que {name1}. "
 "Combien de billes a {name2} ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:57
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:32
 msgid ""
 "{masculine_name} bought {nb1} boxes of {nb2} pencils. How many pens did he "
 "buy?"
@@ -1060,8 +1033,7 @@ msgstr ""
 "{masculine_name} a acheté {nb1} boîtes de {nb2} crayons. Combien de crayons "
 "a-t-il acheté ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:59
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:35
 msgid ""
 "{feminine_name} bought {nb1} boxes of {nb2} pencils. How many pens did she "
 "buy?"
@@ -1069,24 +1041,21 @@ msgstr ""
 "{feminine_name} a acheté {nb1} boîtes de {nb2} crayons. Combien de crayons a-"
 "t-elle acheté ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:65
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:39
 msgid ""
 "{masculine_name} bought {nb1} pens at {nb2} £. How much did he pay? |hint:£|"
 msgstr ""
 "{masculine_name} a acheté {nb1} stylos à {nb2} €. Combien a-t-il payé ?  |"
 "hint:€|"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:67
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:42
 msgid ""
 "{feminine_name} bought {nb1} pens at {nb2} £. How much did she pay? |hint:£|"
 msgstr ""
 "{feminine_name} a acheté {nb1} stylos à {nb2} €. Combien a-t-elle payé ?  |"
 "hint:€|"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:73
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:46
 msgid ""
 "{masculine_name} gets {nb1} £ pocket money every month. If he doesn't spend "
 "it during {nb2} months, how much will he spare? |hint:£|"
@@ -1094,8 +1063,7 @@ msgstr ""
 "{masculine_name} reçoit {nb1} € d'argent de poche par mois. S'il ne dépense "
 "rien pendant {nb2} mois, combien va-t-il épargner ? |hint:€|"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:76
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:49
 msgid ""
 "{feminine_name} gets {nb1} £ pocket money every month. If she doesn't spend "
 "it during {nb2} months, how much will she spare? |hint:£|"
@@ -1103,8 +1071,7 @@ msgstr ""
 "{feminine_name} reçoit {nb1} € d'argent de poche par mois. Si elle ne "
 "dépense rien pendant {nb2} mois, combien va-t-elle épargner ? |hint:€|"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:88
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:57
 msgid ""
 "{masculine_name} has prepared {nb1} packets of {nb2} truffles. How many "
 "truffles has he prepared?"
@@ -1112,8 +1079,7 @@ msgstr ""
 "{masculine_name} a préparé {nb1} paquets de {nb2} truffes. Combien de "
 "truffes a-t-il préparé ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:90
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:60
 msgid ""
 "{feminine_name} has prepared {nb1} packets of {nb2} truffles. How many "
 "truffles has she prepared?"
@@ -1121,8 +1087,7 @@ msgstr ""
 "{feminine_name} a préparé {nb1} paquets de {nb2} truffes. Combien de truffes "
 "a-t-elle préparé ?"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:34
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} marbles less than {name1}. How "
 "many marbles has {name2}?"
@@ -1130,8 +1095,7 @@ msgstr ""
 "{name1} a {nb1} billes. {name2} a {nb2} billes de moins que {name1}. Combien "
 "de billes a {name2} ?"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:36
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:9
 msgid ""
 "{name2} has {nb2} marbles less than {name1}, who has {nb1} of them. How many "
 "marbles has {name2}?"
@@ -1139,8 +1103,7 @@ msgstr ""
 "{name2} a {nb2} billes de moins que {name1}, qui en a {nb1}. Combien de "
 "billes a {name2} ?"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:62
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:35
 msgid ""
 "{name1} is {nb1} years old and {name2} is {nb2} years younger than {name1}. "
 "How old is {name2}? |hint:years|"
@@ -1148,8 +1111,7 @@ msgstr ""
 "{name1} a {nb1} ans et {name2} a {nb2} ans de moins que {name1}. Quel âge a "
 "{name2} ? |hint:ans|"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:64
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:38
 msgid ""
 "{name2} is {nb2} years younger than {name1}, who is {nb1} years old. How old "
 "is {name2}? |hint:years|"
@@ -1157,8 +1119,7 @@ msgstr ""
 "{name2} a {nb2} ans de moins que {name1}, qui a {nb1} ans. Quel âge a "
 "{name2} ? |hint:ans|"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:83
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:49
 msgid ""
 "{masculine_name} read his book from page {nb2} this morning until page {nb1} "
 "this afternoon. How many pages has he read today?"
@@ -1166,8 +1127,7 @@ msgstr ""
 "{masculine_name} a lu son livre, de la page {nb2} ce matin jusqu'à la page "
 "{nb1} cet après-midi. Combien de pages a-t-il lu aujourd'hui ?"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:86
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:52
 msgid ""
 "{feminine_name} read her book from page {nb2} this morning until page {nb1} "
 "this afternoon. How many pages has she read today?"
@@ -1175,8 +1135,7 @@ msgstr ""
 "{feminine_name} a lu son livre, de la page {nb2} ce matin jusqu'à la page "
 "{nb1} cet après-midi. Combien de pages a-t-elle lu aujourd'hui ?"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:92
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:55
 msgid ""
 "Today, {masculine_name} has read his book until page {nb1}. This morning he "
 "started at page {nb2}. How many pages has he read today?"
@@ -1184,8 +1143,7 @@ msgstr ""
 "Aujourd'hui, {masculine_name} a lu son livre jusqu'à la page {nb1}. Ce matin "
 "il avait commencé à la page {nb2}. Combien de pages a-t-il lu aujourd'hui ?"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:95
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:58
 msgid ""
 "Today, {feminine_name} has read her book until page {nb1}. This morning she "
 "started at page {nb2}. How many pages has she read today?"
@@ -1199,8 +1157,7 @@ msgstr ""
 msgid "{name} paid {nb1} £ for {nb2} pens. How much does cost one pen?"
 msgstr "{name} a payé {nb1} € pour {nb2} stylos. Combien coûte un stylo?"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:57
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:31
 msgid ""
 "Some friends shared {nb2} of the {nb1} candies of the packet. How many "
 "candies are there left?"
@@ -1208,8 +1165,7 @@ msgstr ""
 "Des amis se sont partagé {nb2} des {nb1} bonbons du paquet. Combien en reste-"
 "t-il ?"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:49
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:20
 msgid ""
 "The gardener has planted {nb1} cabbages last week, and {nb2} cabbages more "
 "this week. How many cabbages did he plant altogether?"
@@ -1217,8 +1173,7 @@ msgstr ""
 "Le jardinier a planté {nb1} choux la semaine dernière, et {nb2} choux de "
 "plus cette semaine. Combien de choux a-t-il planté en tout ?"
 
-#: lib/common/wordings/mini_problems_wordings_divisions.py:50
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:20
 msgid ""
 "The gardener has planted {nb1} cabbages, splitted in {nb2} rows. How many "
 "cabbages is there in a row?"
@@ -1226,8 +1181,7 @@ msgstr ""
 "Le jardinier a planté {nb1} choux sur {nb2} rangs. Combien de choux y-a-t-il "
 "dans un rang ?"
 
-#: lib/common/wordings/mini_problems_wordings_multiplications.py:46
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:17
 msgid ""
 "The gardener has planted {nb1} rows of {nb2} cabbages. How many cabbages did "
 "he plant altogether?"
@@ -1235,8 +1189,7 @@ msgstr ""
 "Le jardinier a planté {nb1} rangs de {nb2} choux. Combien de choux a-t-il "
 "planté en tout ?"
 
-#: lib/common/wordings/mini_problems_wordings_substractions.py:50
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:20
 msgid ""
 "The gardener had {nb1} cabbages in his vegetable garden, and harvested {nb2} "
 "of them last week. How many cabbages are still in the garden?"
@@ -1244,8 +1197,7 @@ msgstr ""
 "Le jardinier avait {nb1} choux dans son potager et en a récolté {nb2} la "
 "semaine dernière. Combien reste-t-il de choux dans le potager ?"
 
-#: lib/common/wordings/mini_problems_wordings_additions.py:41
-#, python-brace-format
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:13
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs. That's {nb2} less than today. "
 "How many eggs has she laid today?"
@@ -1380,6 +1332,116 @@ msgstr "centaines"
 #: lib/extra_translations/vocabulary.xml:11
 msgid "tens of thousands"
 msgstr "dizaines de milliers"
+
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:24
+msgid ""
+"A market gardener has planted {nb1} salads, splitted in {nb2} rows. How many "
+"salads is there in a row?"
+msgstr ""
+"Un maraîcher a planté {nb1} salades sur {nb2} rangs. Combien de salades y-a-"
+"t-il dans un rang ?"
+
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:24
+msgid ""
+"A market gardener has planted {nb1} rows of {nb2} cabbages. How many "
+"cabbages did he plant altogether?"
+msgstr ""
+"Un maraîcher a planté {nb1} rangs de {nb2} choux. Combien de choux a-t-il "
+"planté en tout ?"
+
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:27
+msgid ""
+"A market gardener had {nb1} cabbages in his vegetable garden, and harvested "
+"{nb2} of them last week. How many cabbages are still in the garden?"
+msgstr ""
+"Un maraîcher avait {nb1} choux dans son potager et en a récolté {nb2} la "
+"semaine dernière. Combien reste-t-il de choux dans le potager ?"
+
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:9
+msgid ""
+"{feminine_name} has {nb1} marbles. She gives them out to {nb2} friends. How "
+"many marbles will get each friend?"
+msgstr ""
+"{feminine_name} a {nb1} billes. Elle les distribue à {nb2} amies. Combien de "
+"billes va recevoir chacune d'elles ?"
+
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:27
+msgid ""
+"A market gardener has planted {nb1} cabbages last week, and {nb2} cabbages "
+"more this week. How many cabbages did he plant altogether?"
+msgstr ""
+"Un maraîcher a planté {nb1} choux la semaine dernière, et {nb2} choux de "
+"plus cette semaine. Combien de choux a-t-il planté en tout ?"
+
+#: lib/extra_translations/wordings/mini_pb_substr_direct.xml:24
+msgid ""
+"A market gardener had {nb1} salads in his vegetable garden, and harvested "
+"{nb2} of them last week. How many salads are still in the garden?"
+msgstr ""
+"Un maraîcher avait {nb1} salades dans son potager et en a récolté {nb2} la "
+"semaine dernière. Combien reste-t-il de salades dans le potager ?"
+
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:61
+msgid ""
+"We have bought {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How "
+"heavy is one packet? |hint:mass_unit|"
+msgstr ""
+"Nous avons acheté {nb1} {mass_unit=kg} de farine, répartis dans {nb2} "
+"paquets. Quel est la masse d'un paquet ? |hint:mass_unit|"
+
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:6
+msgid ""
+"{masculine_name} has {nb1} marbles. He gives them out to {nb2} friends. How "
+"many marbles will get each friend?"
+msgstr ""
+"{masculine_name} a {nb1} billes. Il les distribue à {nb2} amis. Combien de "
+"billes va recevoir chacun d'eux ?"
+
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:27
+msgid ""
+"A market gardener has planted {nb1} cabbages, splitted in {nb2} rows. How "
+"many cabbages is there in a row?"
+msgstr ""
+"Un maraîcher a planté {nb1} choux sur {nb2} rangs. Combien de choux y-a-t-il "
+"dans un rang ?"
+
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:10
+msgid ""
+"My golden goose laid {nb1} eggs each day during {nb2} days. How  many eggs "
+"has she laid?"
+msgstr ""
+"Ma poule aux œufs d'or a pondu {nb1} œufs chaque jour pendant {nb2} jours. "
+"Combien d'œufs a-t-elle pondu ?"
+
+#: lib/extra_translations/wordings/mini_pb_divi_direct.xml:39
+msgid ""
+"{name} paid {nb1} £ for {nb2} pens. How much does cost one pen? |hint:£|"
+msgstr ""
+"{name} a payé {nb1} € pour {nb2} stylos. Combien coûte un stylo? |hint:€|"
+
+#: lib/extra_translations/wordings/mini_pb_addi_direct.xml:24
+msgid ""
+"A market gardener has planted {nb1} salads last week, and {nb2} salads more "
+"this week. How many salads did he plant altogether?"
+msgstr ""
+"Un maraîcher a planté {nb1} salades la semaine dernière, et {nb2} salades de "
+"plus cette semaine. Combien de salades a-t-il planté en tout ?"
+
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:21
+msgid ""
+"A market gardener has planted {nb1} rows of {nb2} salads. How many salads "
+"did he plant altogether?"
+msgstr ""
+"Un maraîcher a planté {nb1} rangs de {nb2} salades. Combien de salades a-t-"
+"il planté en tout ?"
+
+#: lib/extra_translations/wordings/mini_pb_multi_direct.xml:67
+msgid ""
+"We have bought {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How "
+"heavy are they altogether? |hint:mass_unit|"
+msgstr ""
+"Nous avons acheté {nb1} paquets de farine, de {nb2} {mass_unit=kg} chacun. "
+"Quelle masse totale de farine cela représente-t-il ? |hint:mass_unit|"
 
 #~ msgid ""
 #~ "the LaTeX language package matching the chosen language ({language_ref}) "

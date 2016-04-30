@@ -36,7 +36,8 @@ __l1 = len(PROCESS_NAME)
 __l2 = len(ABSPATH)
 LOCALE_PATH = ABSPATH[:__l2-__l1]
 
-DEFAULT_KEYWORDS = ['header', 'title', 'text', 'subtitle', 'answers_title']
+DEFAULT_KEYWORDS = ['header', 'title', 'text', 'subtitle', 'answers_title',
+                    'wording']
 MAIN_POT_FILE_PATH = LOCALE_PATH + 'mathmaker.pot'
 
 DIR_TO_BROWSE = "."
