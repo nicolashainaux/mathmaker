@@ -65,7 +65,7 @@ for lang in next(os.walk(settings.localedir))[1]:
     settings.language = lang
     if os.path.isfile(settings.localedir + lang + "/LC_MESSAGES/w4l.po"):
         words = po_file.get_list_of('words', lang, 4)
-        db_rows = list(zip([lang for _ in range(len(words))],
+        db_rows = list( zip([lang for _ in range(len(words))],
                             words,
                             [0 for _ in range(len(words))]))
         db.executemany(\
