@@ -34,7 +34,7 @@ os.chdir('..')
 settings.init()
 from lib.common.settings import CONFIG
 
-WORDINGS_DIR = settings.libdir + "extra_translations/wordings/"
+WORDINGS_DIR = settings.datadir + "wordings/"
 WORDINGS_FILES = [ WORDINGS_DIR + n + ".xml"\
                    for n in ["mini_pb_addi_direct",
                              "mini_pb_divi_direct",
