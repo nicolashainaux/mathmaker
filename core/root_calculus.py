@@ -697,14 +697,18 @@ class Value(Signed):
     def into_str(self, **options):
 
         if self.is_numeric():
-            unit_str = ""
-
             if 'display_unit' in options and options['display_unit'] in YES:
                 unit_str = self.unit.into_str(**options) \
                                             if isinstance(self.unit, Unit) \
                                             else self.unit
-
-            return locale.str(self.raw_value) + unit_str
+                return locale.str(self.raw_value) + unit_str
+            elif 'display_SI_unit' in options and options['display_SI_unit']:
+                unit_str = self.unit.name if isinstance(self.unit, Unit) \
+                                          else self.unit
+                return "\SI{" + locale.str(self.raw_value) + "}"\
+                       "{" + unit_str + "}"
+            else:
+                return locale.str(self.raw_value)
 
         else: # self.is_literal()
             if len(self.get_first_letter()) >= 2 \
