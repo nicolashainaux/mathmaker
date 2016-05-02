@@ -37,5 +37,5 @@ def init():
                                                     language=settings.language)
     names_source = lib.tools.db.source("names", "name",
                                        language=settings.language)
-    mini_problems_wordings_source = lib.tools.db.source("mini_pb_wordings",
-                                                        "wording")
+    mini_problems_wordings_source = \
+                lib.tools.db.wordings_source("mini_pb_wordings", "wording")

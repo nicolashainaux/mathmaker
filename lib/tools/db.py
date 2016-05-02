@@ -26,55 +26,98 @@ from lib.common import settings, shared
 log = settings.mainlogger
 
 class source(object):
-
+    ##
+    #   @brief  Initializer
     def __init__(self, table_name, col, **kwargs):
         self.table_name = table_name
         self.col = col
         self.language = kwargs['language'] if 'language' in kwargs else ""
 
+    ##
+    #   @brief  Resets the drawDate of all table's entries (to 0)
     def reset(self):
         shared.db.execute(\
         "UPDATE " + self.table_name + " SET drawDate = 0;")
 
+    ##
+    #   @brief  Creates the "SELECT ...,...,... FROM ...." part of the query
+    def _select_part(self, **kwargs):
+        return "SELECT id," + self.col + " FROM " + self.table_name
+
+    ##
+    #   @brief  Creates the language condition part of the query
+    def _language_part(self, **kwargs):
+        return "AND language = '" + self.language + "' " if self.language != ""\
+                                                     else ""
+
+    ##
+    #   @brief  Creates the conditions of the query, from the given kwargs
+    def _kw_conditions(self, **kwargs):
+        return "".join(" AND " + kw + " = '" + kwargs[kw] + "' " \
+                       for kw in kwargs)
+
+    ##
+    #   @brief  Concatenates the different parts of the query
+    def _cmd(self, **kwargs):
+        return self._select_part(**kwargs) + " WHERE drawDate = 0 " \
+               + self._language_part(**kwargs) + self._kw_conditions(**kwargs) \
+               + "ORDER BY random() LIMIT 1;"
+
+    ##
+    #   @brief  Executes the query. If no result, resets the table and executes
+    #           the query again. Returns the query's result.
+    def _query_result(self, cmd):
+        qr = tuple(shared.db.execute(cmd))
+        if not len(qr):
+            self.reset()
+            qr = tuple(shared.db.execute(cmd))
+        return qr
+
+    ##
+    #   @brief  Set the drawDate to datetime() in all entries where col_name
+    #           has a value of col_match.
+    def update_after_query(self, col_name, col_match):
+        shared.db.execute(\
+        "UPDATE " + self.table_name + \
+        " SET drawDate = datetime()"\
+        " WHERE " + col_name + " = '" + str(col_match) + "';")
+
+    ##
+    #   @brief  Synonym of self.next(), but makes the source an Iterator.
     def __next__(self):
         return self.next()
 
+    ##
+    #   @brief  Handles the choice of the next value to return from the database
     def next(self, **kwargs):
-        l = "AND language = '" + self.language + "' " if self.language != ""\
-                                                     else ""
-        kw_conditions = ""
+        ID, word = self._query_result(self._cmd(**kwargs))[0]
+        self.update_after_query('id', ID)
+        return word
+
+
+class wordings_source(source):
+
+    ##
+    #   @brief  Creates the "SELECT ...,...,... FROM ...." part of the query.
+    #           Wordings require to retrieve the 'wording_context' value instead
+    #           of the id.
+    def _select_part(self, **kwargs):
+        return "SELECT " + self.col + ",wording_context FROM " \
+               + self.table_name
+
+    def _kw_conditions(self, **kwargs):
+        result = ""
         for kw in kwargs:
             if kw.endswith("_to_check"):
                 k = kw[:-9]
-                kw_conditions += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
-                kw_conditions += " AND " + k + "_max" + " >= " + str(kwargs[kw]) + " "
-            elif kw == "source_id":
-                pass
+                result += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
+                result += " AND " + k + "_max" + " >= " + str(kwargs[kw]) + " "
             else:
-                kw_conditions += " AND " + kw + " = '" + kwargs[kw] + "' "
+                result += " AND " + kw + " = '" + kwargs[kw] + "' "
+        return result
 
-        select_part = "SELECT id," + self.col + " FROM " + self.table_name
-        if 'source_id' in kwargs and kwargs['source_id'] == "mini_pb_wording":
-            select_part = "SELECT id," + self.col + ",wording_context FROM " \
-                          + self.table_name
-
-        cmd = select_part + " WHERE drawDate = 0 " + l + kw_conditions + \
-              "ORDER BY random() LIMIT 1;"
-        query_result = tuple(shared.db.execute(cmd))
-        if not len(query_result):
-            self.reset()
-            query_result = tuple(shared.db.execute(cmd))
-
-        if len(query_result[0]) == 2:
-            ID, word = query_result[0]
-            shared.db.execute(\
-            "UPDATE " + self.table_name + \
-            " SET drawDate = datetime() WHERE id = " + str(ID) + ";")
-        elif len(query_result[0]) == 3:
-            ID, word, wording_context = query_result[0]
-            shared.db.execute(\
-            "UPDATE " + self.table_name + \
-            " SET drawDate = datetime() WHERE wording_context = '" \
-            + str(wording_context) + "';")
+    def next(self, **kwargs):
+        word, wording_context = self._query_result(self._cmd(**kwargs))[0]
+        self.update_after_query('wording_context', str(wording_context))
         return word
 

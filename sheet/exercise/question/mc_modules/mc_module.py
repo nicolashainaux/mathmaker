@@ -148,8 +148,7 @@ class structure(object):
 
         elif arg == 'mini_problem_wording':
             self.wording = _(shared.mini_problems_wordings_source\
-                             .next(source_id='mini_pb_wording',
-                                   q_id=options['q_id'],
+                             .next(q_id=options['q_id'],
                                    nb1_to_check=self.nb1,
                                    nb2_to_check=self.nb2))
             setup_wording_format_of(self, M)
