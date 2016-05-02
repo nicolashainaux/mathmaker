@@ -105,6 +105,10 @@ class wordings_source(source):
         return "SELECT " + self.col + ",wording_context FROM " \
                + self.table_name
 
+    ##
+    #   @brief  Creates the conditions of the query, from the given kwargs
+    #           Wordings require to make special checks, like nb1_min <= ...
+    #           and nb1_max >= ...
     def _kw_conditions(self, **kwargs):
         result = ""
         for kw in kwargs:
@@ -116,6 +120,11 @@ class wordings_source(source):
                 result += " AND " + kw + " = '" + kwargs[kw] + "' "
         return result
 
+    ##
+    #   @brief  Handles the choice of the next value to return from the database
+    #           In the case of wordings, the wording_context will be used to
+    #           (temporarily) remove entries sharing the same context as the
+    #           chosen one.
     def next(self, **kwargs):
         word, wording_context = self._query_result(self._cmd(**kwargs))[0]
         self.update_after_query('wording_context', str(wording_context))
