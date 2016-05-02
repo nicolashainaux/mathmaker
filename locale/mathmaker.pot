@@ -120,34 +120,34 @@ msgstr ""
 msgid "To draw"
 msgstr ""
 
-#: machine/LaTeX.py:142
+#: machine/LaTeX.py:144
 msgid "Page layout "
 msgstr ""
 
-#: machine/LaTeX.py:148
+#: machine/LaTeX.py:150
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 
-#: machine/LaTeX.py:151
+#: machine/LaTeX.py:153
 msgid "file_name"
 msgstr ""
 
-#: machine/LaTeX.py:154
+#: machine/LaTeX.py:156
 msgid "Exercises counter"
 msgstr ""
 
-#: machine/LaTeX.py:156
+#: machine/LaTeX.py:158
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
 "bold, with its number and automatically increments the counter"
 msgstr ""
 
-#: machine/LaTeX.py:159 machine/LaTeX.py:163
+#: machine/LaTeX.py:161 machine/LaTeX.py:165
 msgid "Exercise"
 msgstr ""
 
-#: machine/LaTeX.py:166
+#: machine/LaTeX.py:168
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -642,13 +642,6 @@ msgstr ""
 msgid ""
 "The gardener has planted {nb1} rows of {nb2} salads. How many salads did he "
 "plant altogether?"
-msgstr ""
-
-#: data/wordings/mini_pb_multi_direct.xml:28
-#: data/wordings/mini_pb_multi_direct.xml:28
-msgid ""
-"I invited {nb1} friends at my birthday's party and want give {nb2} candies "
-"to each of them. How many candies should I buy?"
 msgstr ""
 
 #: data/wordings/mini_pb_multi_direct.xml:53
@@ -1300,4 +1293,15 @@ msgstr ""
 msgid ""
 "We have bought {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How"
 " heavy are they altogether? |hint:mass_unit|"
+msgstr ""
+
+#: machine/LaTeX.py:142
+msgid "To adjust sizes"
+msgstr ""
+
+#: data/wordings/mini_pb_multi_direct.xml:28
+#: data/wordings/mini_pb_multi_direct.xml:28
+msgid ""
+"I invited {nb1} friends at my birthday's party and want to give {nb2} "
+"candies to each of them. How many candies should I buy?"
 msgstr ""

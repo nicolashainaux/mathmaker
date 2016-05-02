@@ -26,7 +26,7 @@
              nb1_min="10" nb1_max="100" nb2_min="10" nb2_max="100" q_id="multi_direct"/>
 
     <wording wording_context="candies"
-             wording="I invited {nb1} friends at my birthday's party and want give {nb2} candies to each of them. How many candies should I buy?"
+             wording="I invited {nb1} friends at my birthday's party and want to give {nb2} candies to each of them. How many candies should I buy?"
              nb1_min="2" nb1_max="25" nb2_min="2" nb2_max="25" q_id="multi_direct"/>
 
     <wording wording_context="pencils boxes"

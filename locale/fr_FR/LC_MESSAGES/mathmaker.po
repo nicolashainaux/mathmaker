@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-05-01 07:26+0100\n"
+"PO-Revision-Date: 2016-05-01 09:09+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -119,25 +119,25 @@ msgstr "Pour utiliser le symbole de l'euro"
 msgid "To draw"
 msgstr "Pour dessiner"
 
-#: machine/LaTeX.py:142
+#: machine/LaTeX.py:144
 msgid "Page layout "
 msgstr "Mise en page générale"
 
-#: machine/LaTeX.py:148
+#: machine/LaTeX.py:150
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 "Si vous souhaitez inclure une image, utilisez s'il vous plaît cette "
 "commande :"
 
-#: machine/LaTeX.py:151
+#: machine/LaTeX.py:153
 msgid "file_name"
 msgstr "nom_du_fichier"
 
-#: machine/LaTeX.py:154
+#: machine/LaTeX.py:156
 msgid "Exercises counter"
 msgstr "Compteur d'exercices"
 
-#: machine/LaTeX.py:156
+#: machine/LaTeX.py:158
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
@@ -146,11 +146,11 @@ msgstr ""
 "Définition de la commande {cmd_name}, qui va insérer le mot {word} en gras, "
 "accompagné de son numéro et qui va incrémenter automatiquement le compteur"
 
-#: machine/LaTeX.py:159 machine/LaTeX.py:163
+#: machine/LaTeX.py:161 machine/LaTeX.py:165
 msgid "Exercise"
 msgstr "Exercice"
 
-#: machine/LaTeX.py:166
+#: machine/LaTeX.py:168
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -667,14 +667,6 @@ msgid ""
 msgstr ""
 "Le jardinier a planté {nb1} rangs de {nb2} salades. Combien de salades a-t-"
 "il planté en tout ?"
-
-#: data/wordings/mini_pb_multi_direct.xml:28
-msgid ""
-"I invited {nb1} friends at my birthday's party and want give {nb2} candies "
-"to each of them. How many candies should I buy?"
-msgstr ""
-"J'ai invité {nb1} amis à mon anniversaire et je veux distribuer {nb2} "
-"bonbons à chacun d'eux. Combien de bonbons devrais-je acheter ?"
 
 #: data/wordings/mini_pb_multi_direct.xml:53
 msgid ""
@@ -1410,6 +1402,18 @@ msgid ""
 msgstr ""
 "Nous avons acheté {nb1} paquets de farine, de {nb2} {mass_unit=kg} chacun. "
 "Quelle masse totale de farine cela représente-t-il ? |hint:mass_unit|"
+
+#: machine/LaTeX.py:142
+msgid "To adjust sizes"
+msgstr "Pour ajuster les tailles"
+
+#: data/wordings/mini_pb_multi_direct.xml:28
+msgid ""
+"I invited {nb1} friends at my birthday's party and want to give {nb2} "
+"candies to each of them. How many candies should I buy?"
+msgstr ""
+"J'ai invité {nb1} amis à mon anniversaire et je veux distribuer {nb2} "
+"bonbons à chacun d'eux. Combien de bonbons devrais-je acheter ?"
 
 #~ msgid ""
 #~ "My golden goose laid {nb1} eggs each day during {nb2} days. How many eggs "
