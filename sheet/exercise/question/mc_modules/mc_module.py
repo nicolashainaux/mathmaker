@@ -31,7 +31,7 @@ from core.geometry import Rectangle
 from lib import error
 from lib.common import shared
 from lib.common.cst import COMMON_LENGTH_UNITS
-from lib.wordings_handling_tools import setup_wording_format_of
+from lib.tools.wordings_handling import setup_wording_format_of
 
 class structure(object):
 

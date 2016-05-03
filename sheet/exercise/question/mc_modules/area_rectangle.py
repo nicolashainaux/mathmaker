@@ -22,7 +22,7 @@
 
 from core.base_calculus import *
 from . import mc_module
-from lib.wordings_handling_tools import reformat, setup_wording_format_of
+from lib.tools.wordings_handling import reformat, setup_wording_format_of
 from lib.common import shared
 
 class sub_object(mc_module.structure):

@@ -24,7 +24,7 @@ import os
 
 from core.base_calculus import *
 from . import mc_module
-from lib.wordings_handling_tools import post_process
+from lib.tools.wordings_handling import post_process
 
 class sub_object(mc_module.structure):
 
