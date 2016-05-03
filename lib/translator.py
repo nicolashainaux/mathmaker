@@ -78,7 +78,7 @@ def create_table(size, content, **options):
         if 'center_vertically' in options:
             cell_fmt = "m{"
 
-        if 'borders' in options and options['borders'] == 'all':
+        if 'borders' in options and options['borders'] in ['all', 'v_internal']:
             v_border = "|"
             h_border = "\\hline \n"
 
@@ -103,6 +103,9 @@ def create_table(size, content, **options):
                               + t
 
         tabular_format += extra_last_column + v_border
+
+        if 'borders' in options and options['borders'] == 'v_internal':
+            tabular_format = tabular_format[1:-1]
 
         result += "\\begin{tabular}{"+ tabular_format + "}" + "\n"
         result += h_border

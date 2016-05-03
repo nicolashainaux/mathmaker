@@ -506,7 +506,7 @@ class X_MentalCalculation(X_Structure):
             result += M.write_layout((self.q_nb, 2),
                                      [14, 4],
                                      content,
-                                     borders='all',
+                                     borders='v_internal',
                                      center='yes',
                                      center_vertically='yes',
                                      min_row_height=MIN_ROW_HEIGHT)
