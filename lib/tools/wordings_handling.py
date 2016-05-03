@@ -225,7 +225,10 @@ def handle_valueless_unit_tags(arg, sentence):
     for vu in valueless_unitblocks:
         unit_kind, unit_id = vu.split(sep="_")
         if not hasattr(arg, vu):
-            if unit_kind in ['length', 'mass', 'capacity']:
+            if unit_kind == 'currency':
+                val = CURRENCIES_DICT[settings.config.CURRENCY]
+                setattr(arg, vu, val)
+            elif unit_kind in ['length', 'mass', 'capacity']:
                 val = random.choice(d[unit_kind])
                 setattr(arg, vu, val)
             elif unit_kind in ['area', 'volume']:
@@ -371,8 +374,9 @@ def setup_wording_format_of(w_object, M):
     merge_nb_unit_pairs(w_object)
 
     for attr in vars(w_object):
+        #sys.stderr.write("attr: " + str(attr) + "\n")
         if (attr.endswith('_unit') or attr[:-1].endswith('_unit')) \
-            and not attr.startswith('nb'):
+            and not (attr.startswith('nb') or attr.startswith('currency')):
         #___
             #sys.stderr.write("(re)defining: " + attr + "\n")
             n = 1
@@ -411,9 +415,9 @@ def setup_wording_format_of(w_object, M):
 def insert_nonbreaking_spaces(sentence):
     nb_space = shared.markup['nonbreaking_space']
     p = re.compile(r'(\d)(\s)(\w+)', re.LOCALE)
-    sys.stderr.write(sentence+"\n")
+    #sys.stderr.write(sentence+"\n")
     sentence = p.sub(r'\1' + nb_space + r'\3', sentence)
-    sys.stderr.write("--> " + sentence+"\n")
+    #sys.stderr.write("--> " + sentence+"\n")
     return sentence
 
 # --------------------------------------------------------------------------

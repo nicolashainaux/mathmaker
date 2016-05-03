@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-05-03 06:56+0100\n"
+"PO-Revision-Date: 2016-05-03 17:54+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -107,37 +107,33 @@ msgstr "Pour de jolis soulignages"
 msgid "To include .eps pictures"
 msgstr "Pour inclure des images .eps"
 
-#: machine/LaTeX.py:135
+#: machine/LaTeX.py:138
 msgid "To use other mathematical symbols"
 msgstr "Pour utiliser d'autres symboles mathématiques"
 
-#: machine/LaTeX.py:138
-msgid "To use the euro symbol"
-msgstr "Pour utiliser le symbole de l'euro"
-
-#: machine/LaTeX.py:140
+#: machine/LaTeX.py:143
 msgid "To draw"
 msgstr "Pour dessiner"
 
-#: machine/LaTeX.py:144
+#: machine/LaTeX.py:145
 msgid "Page layout "
 msgstr "Mise en page générale"
 
-#: machine/LaTeX.py:150
+#: machine/LaTeX.py:151
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 "Si vous souhaitez inclure une image, utilisez s'il vous plaît cette "
 "commande :"
 
-#: machine/LaTeX.py:153
+#: machine/LaTeX.py:154
 msgid "file_name"
 msgstr "nom_du_fichier"
 
-#: machine/LaTeX.py:156
+#: machine/LaTeX.py:157
 msgid "Exercises counter"
 msgstr "Compteur d'exercices"
 
-#: machine/LaTeX.py:158
+#: machine/LaTeX.py:159
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
@@ -146,11 +142,11 @@ msgstr ""
 "Définition de la commande {cmd_name}, qui va insérer le mot {word} en gras, "
 "accompagné de son numéro et qui va incrémenter automatiquement le compteur"
 
-#: machine/LaTeX.py:161 machine/LaTeX.py:165
+#: machine/LaTeX.py:162 machine/LaTeX.py:166
 msgid "Exercise"
 msgstr "Exercice"
 
-#: machine/LaTeX.py:168
+#: machine/LaTeX.py:169
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -539,10 +535,10 @@ msgstr "Combien vaut le produit de {n1} par {n2} ?"
 msgid "How much is the difference between {n1} and {n2}?"
 msgstr "Combien vaut la différence entre {n1} et {n2} ?"
 
-#: sheet/exercise/question/mc_modules/addi_direct.py:48
-#: sheet/exercise/question/mc_modules/divi_direct.py:45
-#: sheet/exercise/question/mc_modules/multi_direct.py:48
-#: sheet/exercise/question/mc_modules/substr_direct.py:51
+#: sheet/exercise/question/mc_modules/addi_direct.py:49
+#: sheet/exercise/question/mc_modules/divi_direct.py:46
+#: sheet/exercise/question/mc_modules/multi_direct.py:49
+#: sheet/exercise/question/mc_modules/substr_direct.py:52
 #, python-brace-format
 msgid "Calculate: {math_expr}"
 msgstr "Calculer : {math_expr}"
@@ -890,22 +886,6 @@ msgstr ""
 "{name} a rangé {nb1} crayons dans {nb2} boîtes. Combien de crayons y-a-t-il "
 "dans chaque boîte ?"
 
-#: data/wordings/mini_pb_divi_direct.xml:43
-msgid ""
-"{masculine_name} has received altogether {nb1} £ pocket money in {nb2} "
-"months. How much did he receive every month? |hint:£|"
-msgstr ""
-"{masculine_name} a reçu en tout {nb1} € d'argent de poche en {nb2} mois. "
-"Combien a-t-il reçu chaque mois ? |hint:€|"
-
-#: data/wordings/mini_pb_divi_direct.xml:46
-msgid ""
-"{feminine_name} has received altogether {nb1} £ pocket money in {nb2} "
-"months. How much did she receive every month? |hint:£|"
-msgstr ""
-"{feminine_name} a reçu en tout {nb1} € d'argent de poche en {nb2} mois. "
-"Combien a-t-elle reçu chaque mois ?  |hint:€|"
-
 #: data/wordings/mini_pb_divi_direct.xml:54
 msgid ""
 "{name} has prepared {nb1} truffles splitted in {nb2} packets. How many "
@@ -1005,36 +985,6 @@ msgid ""
 msgstr ""
 "{feminine_name} a acheté {nb1} boîtes de {nb2} crayons. Combien de crayons a-"
 "t-elle acheté ?"
-
-#: data/wordings/mini_pb_multi_direct.xml:39
-msgid ""
-"{masculine_name} bought {nb1} pens at {nb2} £. How much did he pay? |hint:£|"
-msgstr ""
-"{masculine_name} a acheté {nb1} stylos à {nb2} €. Combien a-t-il payé ?  |"
-"hint:€|"
-
-#: data/wordings/mini_pb_multi_direct.xml:42
-msgid ""
-"{feminine_name} bought {nb1} pens at {nb2} £. How much did she pay? |hint:£|"
-msgstr ""
-"{feminine_name} a acheté {nb1} stylos à {nb2} €. Combien a-t-elle payé ?  |"
-"hint:€|"
-
-#: data/wordings/mini_pb_multi_direct.xml:46
-msgid ""
-"{masculine_name} gets {nb1} £ pocket money every month. If he doesn't spend "
-"it during {nb2} months, how much will he spare? |hint:£|"
-msgstr ""
-"{masculine_name} reçoit {nb1} € d'argent de poche par mois. S'il ne dépense "
-"rien pendant {nb2} mois, combien va-t-il épargner ? |hint:€|"
-
-#: data/wordings/mini_pb_multi_direct.xml:49
-msgid ""
-"{feminine_name} gets {nb1} £ pocket money every month. If she doesn't spend "
-"it during {nb2} months, how much will she spare? |hint:£|"
-msgstr ""
-"{feminine_name} reçoit {nb1} € d'argent de poche par mois. Si elle ne "
-"dépense rien pendant {nb2} mois, combien va-t-elle épargner ? |hint:€|"
 
 #: data/wordings/mini_pb_multi_direct.xml:57
 msgid ""
@@ -1373,12 +1323,6 @@ msgstr ""
 "Ma poule aux œufs d'or a pondu {nb1} œufs chaque jour pendant {nb2} jours. "
 "Combien d'œufs a-t-elle pondu ?"
 
-#: data/wordings/mini_pb_divi_direct.xml:39
-msgid ""
-"{name} paid {nb1} £ for {nb2} pens. How much does cost one pen? |hint:£|"
-msgstr ""
-"{name} a payé {nb1} € pour {nb2} stylos. Combien coûte un stylo? |hint:€|"
-
 #: data/wordings/mini_pb_addi_direct.xml:24
 msgid ""
 "A market gardener has planted {nb1} salads last week, and {nb2} salads more "
@@ -1403,10 +1347,6 @@ msgstr ""
 "Nous avons acheté {nb1} paquets de farine, de {nb2} {mass_unit=kg} chacun. "
 "Quelle masse totale de farine cela représente-t-il ? |hint:mass_unit|"
 
-#: machine/LaTeX.py:142
-msgid "To adjust sizes"
-msgstr "Pour ajuster les tailles"
-
 #: data/wordings/mini_pb_multi_direct.xml:28
 msgid ""
 "I invited {nb1} friends at my birthday's party and want to give {nb2} "
@@ -1414,6 +1354,80 @@ msgid ""
 msgstr ""
 "J'ai invité {nb1} amis à mon anniversaire et je veux distribuer {nb2} "
 "bonbons à chacun d'eux. Combien de bonbons devrais-je acheter ?"
+
+#: machine/LaTeX.py:135
+msgid "To use some symbols like currency units"
+msgstr "Pour utiliser des symboles (par exemple des unités de monétaires)"
+
+#: machine/LaTeX.py:141
+msgid "To display units correctly"
+msgstr "Pour afficher correctement les unités"
+
+#: data/wordings/mini_pb_divi_direct.xml:39
+msgid ""
+"{name} paid {nb1} {currency_unit} for {nb2} pens. How much does cost one "
+"pen? |hint:currency_unit|"
+msgstr ""
+"{name} a payé {nb1} {currency_unit} pour {nb2} stylos. Combien coûte un "
+"stylo? |hint:currency_unit|"
+
+#: data/wordings/mini_pb_divi_direct.xml:43
+msgid ""
+"{masculine_name} has received altogether {nb1} {currency_unit} pocket money "
+"in {nb2} months. How much did he receive every month? |hint:currency_unit|"
+msgstr ""
+"{masculine_name} a reçu en tout {nb1} {currency_unit} d'argent de poche en "
+"{nb2} mois. Combien a-t-il reçu chaque mois ? |hint:currency_unit|"
+
+#: data/wordings/mini_pb_multi_direct.xml:46
+msgid ""
+"{masculine_name} gets {nb1} {currency_unit} pocket money every month. If he "
+"doesn't spend it during {nb2} months, how much will he spare? |hint:"
+"currency_unit|"
+msgstr ""
+"{masculine_name} reçoit {nb1} {currency_unit} d'argent de poche par mois. "
+"S'il ne dépense rien pendant {nb2} mois, combien va-t-il épargner ? |hint:"
+"currency_unit|"
+
+#: data/wordings/mini_pb_divi_direct.xml:46
+msgid ""
+"{feminine_name} has received altogether {nb1} {currency_unit} pocket money "
+"in {nb2} months. How much did she receive every month? |hint:currency_unit|"
+msgstr ""
+"{feminine_name} a reçu en tout {nb1} {currency_unit} d'argent de poche en "
+"{nb2} mois. Combien a-t-elle reçu chaque mois ?  |hint:currency_unit|"
+
+#: data/wordings/mini_pb_multi_direct.xml:39
+msgid ""
+"{masculine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did he "
+"pay? |hint:currency_unit|"
+msgstr ""
+"{masculine_name} a acheté {nb1} stylos à {nb2} {currency_unit}. Combien a-t-"
+"il payé ?  |hint:currency_unit|"
+
+#: data/wordings/mini_pb_multi_direct.xml:49
+msgid ""
+"{feminine_name} gets {nb1} {currency_unit} pocket money every month. If she "
+"doesn't spend it during {nb2} months, how much will she spare? |hint:"
+"currency_unit|"
+msgstr ""
+"{feminine_name} reçoit {nb1} {currency_unit} d'argent de poche par mois. Si "
+"elle ne dépense rien pendant {nb2} mois, combien va-t-elle épargner ? |hint:"
+"currency_unit|"
+
+#: data/wordings/mini_pb_multi_direct.xml:42
+msgid ""
+"{feminine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did she "
+"pay? |hint:currency_unit|"
+msgstr ""
+"{feminine_name} a acheté {nb1} stylos à {nb2} {currency_unit}. Combien a-t-"
+"elle payé ?  |hint:currency_unit|"
+
+#~ msgid "To use the euro symbol"
+#~ msgstr "Pour utiliser le symbole de l'euro"
+
+#~ msgid "To adjust sizes"
+#~ msgstr "Pour ajuster les tailles"
 
 #~ msgid ""
 #~ "My golden goose laid {nb1} eggs each day during {nb2} days. How many eggs "

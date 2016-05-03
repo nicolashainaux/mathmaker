@@ -37,17 +37,17 @@
              nb1_min="2" nb1_max="9" nb2_min="2" nb2_max="25" q_id="multi_direct"/>
 
     <wording wording_context="pens purchase"
-             wording="{masculine_name} bought {nb1} pens at {nb2} £. How much did he pay? |hint:£|"
+             wording="{masculine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did he pay? |hint:currency_unit|"
              nb1_min="2" nb1_max="9" nb2_min="2" nb2_max="9" q_id="multi_direct"/>
     <wording wording_context="pens purchase"
-             wording="{feminine_name} bought {nb1} pens at {nb2} £. How much did she pay? |hint:£|"
+             wording="{feminine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did she pay? |hint:currency_unit|"
              nb1_min="2" nb1_max="9" nb2_min="2" nb2_max="9" q_id="multi_direct"/>
 
     <wording wording_context="pocket money"
-             wording="{masculine_name} gets {nb1} £ pocket money every month. If he doesn't spend it during {nb2} months, how much will he spare? |hint:£|"
+             wording="{masculine_name} gets {nb1} {currency_unit} pocket money every month. If he doesn't spend it during {nb2} months, how much will he spare? |hint:currency_unit|"
              nb1_min="2" nb1_max="30" nb2_min="2" nb2_max="36" q_id="multi_direct"/>
     <wording wording_context="pocket money"
-             wording="{feminine_name} gets {nb1} £ pocket money every month. If she doesn't spend it during {nb2} months, how much will she spare? |hint:£|"
+             wording="{feminine_name} gets {nb1} {currency_unit} pocket money every month. If she doesn't spend it during {nb2} months, how much will she spare? |hint:currency_unit|"
              nb1_min="2" nb1_max="30" nb2_min="2" nb2_max="36" q_id="multi_direct"/>
 
     <wording wording_context="livestock farming"

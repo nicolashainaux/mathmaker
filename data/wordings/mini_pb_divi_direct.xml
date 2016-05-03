@@ -37,14 +37,14 @@
              nb1_min="2" nb1_max="250" nb2_min="2" nb2_max="25" q_id="divi_direct"/>
 
     <wording wording_context="pens purchase"
-             wording="{name} paid {nb1} £ for {nb2} pens. How much does cost one pen? |hint:£|"
+             wording="{name} paid {nb1} {currency_unit} for {nb2} pens. How much does cost one pen? |hint:currency_unit|"
              nb1_min="2" nb1_max="81" nb2_min="2" nb2_max="9" q_id="divi_direct"/>
 
     <wording wording_context="pocket money"
-             wording="{masculine_name} has received altogether {nb1} £ pocket money in {nb2} months. How much did he receive every month? |hint:£|"
+             wording="{masculine_name} has received altogether {nb1} {currency_unit} pocket money in {nb2} months. How much did he receive every month? |hint:currency_unit|"
              nb1_min="2" nb1_max="10800" nb2_min="2" nb2_max="36" q_id="divi_direct"/>
     <wording wording_context="pocket money"
-             wording="{feminine_name} has received altogether {nb1} £ pocket money in {nb2} months. How much did she receive every month? |hint:£|"
+             wording="{feminine_name} has received altogether {nb1} {currency_unit} pocket money in {nb2} months. How much did she receive every month? |hint:currency_unit|"
              nb1_min="2" nb1_max="10800" nb2_min="2" nb2_max="36" q_id="divi_direct"/>
 
     <wording wording_context="livestock farming"

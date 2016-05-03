@@ -108,46 +108,42 @@ msgstr ""
 msgid "To include .eps pictures"
 msgstr ""
 
-#: machine/LaTeX.py:135
+#: machine/LaTeX.py:138
 msgid "To use other mathematical symbols"
 msgstr ""
 
-#: machine/LaTeX.py:138
-msgid "To use the euro symbol"
-msgstr ""
-
-#: machine/LaTeX.py:140
+#: machine/LaTeX.py:143
 msgid "To draw"
 msgstr ""
 
-#: machine/LaTeX.py:144
+#: machine/LaTeX.py:145
 msgid "Page layout "
 msgstr ""
 
-#: machine/LaTeX.py:150
+#: machine/LaTeX.py:151
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 
-#: machine/LaTeX.py:153
+#: machine/LaTeX.py:154
 msgid "file_name"
 msgstr ""
 
-#: machine/LaTeX.py:156
+#: machine/LaTeX.py:157
 msgid "Exercises counter"
 msgstr ""
 
-#: machine/LaTeX.py:158
+#: machine/LaTeX.py:159
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
 "bold, with its number and automatically increments the counter"
 msgstr ""
 
-#: machine/LaTeX.py:161 machine/LaTeX.py:165
+#: machine/LaTeX.py:162 machine/LaTeX.py:166
 msgid "Exercise"
 msgstr ""
 
-#: machine/LaTeX.py:168
+#: machine/LaTeX.py:169
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -521,10 +517,10 @@ msgstr ""
 msgid "How much is the difference between {n1} and {n2}?"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/addi_direct.py:48
-#: sheet/exercise/question/mc_modules/divi_direct.py:45
-#: sheet/exercise/question/mc_modules/multi_direct.py:48
-#: sheet/exercise/question/mc_modules/substr_direct.py:51
+#: sheet/exercise/question/mc_modules/addi_direct.py:49
+#: sheet/exercise/question/mc_modules/divi_direct.py:46
+#: sheet/exercise/question/mc_modules/multi_direct.py:49
+#: sheet/exercise/question/mc_modules/substr_direct.py:52
 #, python-brace-format
 msgid "Calculate: {math_expr}"
 msgstr ""
@@ -832,20 +828,6 @@ msgid ""
 "each box?"
 msgstr ""
 
-#: data/wordings/mini_pb_divi_direct.xml:43
-#: data/wordings/mini_pb_divi_direct.xml:43
-msgid ""
-"{masculine_name} has received altogether {nb1} £ pocket money in {nb2} "
-"months. How much did he receive every month? |hint:£|"
-msgstr ""
-
-#: data/wordings/mini_pb_divi_direct.xml:46
-#: data/wordings/mini_pb_divi_direct.xml:46
-msgid ""
-"{feminine_name} has received altogether {nb1} £ pocket money in {nb2} "
-"months. How much did she receive every month? |hint:£|"
-msgstr ""
-
 #: data/wordings/mini_pb_divi_direct.xml:54
 #: data/wordings/mini_pb_divi_direct.xml:54
 msgid ""
@@ -930,32 +912,6 @@ msgstr ""
 msgid ""
 "{feminine_name} bought {nb1} boxes of {nb2} pencils. How many pens did she "
 "buy?"
-msgstr ""
-
-#: data/wordings/mini_pb_multi_direct.xml:39
-#: data/wordings/mini_pb_multi_direct.xml:39
-msgid ""
-"{masculine_name} bought {nb1} pens at {nb2} £. How much did he pay? |hint:£|"
-msgstr ""
-
-#: data/wordings/mini_pb_multi_direct.xml:42
-#: data/wordings/mini_pb_multi_direct.xml:42
-msgid ""
-"{feminine_name} bought {nb1} pens at {nb2} £. How much did she pay? |hint:£|"
-msgstr ""
-
-#: data/wordings/mini_pb_multi_direct.xml:46
-#: data/wordings/mini_pb_multi_direct.xml:46
-msgid ""
-"{masculine_name} gets {nb1} £ pocket money every month. If he doesn't spend "
-"it during {nb2} months, how much will he spare? |hint:£|"
-msgstr ""
-
-#: data/wordings/mini_pb_multi_direct.xml:49
-#: data/wordings/mini_pb_multi_direct.xml:49
-msgid ""
-"{feminine_name} gets {nb1} £ pocket money every month. If she doesn't spend "
-"it during {nb2} months, how much will she spare? |hint:£|"
 msgstr ""
 
 #: data/wordings/mini_pb_multi_direct.xml:57
@@ -1268,12 +1224,6 @@ msgid ""
 "has she laid?"
 msgstr ""
 
-#: data/wordings/mini_pb_divi_direct.xml:39
-#: data/wordings/mini_pb_divi_direct.xml:39
-msgid ""
-"{name} paid {nb1} £ for {nb2} pens. How much does cost one pen? |hint:£|"
-msgstr ""
-
 #: data/wordings/mini_pb_addi_direct.xml:24
 #: data/wordings/mini_pb_addi_direct.xml:24
 msgid ""
@@ -1295,13 +1245,68 @@ msgid ""
 " heavy are they altogether? |hint:mass_unit|"
 msgstr ""
 
-#: machine/LaTeX.py:142
-msgid "To adjust sizes"
-msgstr ""
-
 #: data/wordings/mini_pb_multi_direct.xml:28
 #: data/wordings/mini_pb_multi_direct.xml:28
 msgid ""
 "I invited {nb1} friends at my birthday's party and want to give {nb2} "
 "candies to each of them. How many candies should I buy?"
+msgstr ""
+
+#: machine/LaTeX.py:135
+msgid "To use some symbols like currency units"
+msgstr ""
+
+#: machine/LaTeX.py:141
+msgid "To display units correctly"
+msgstr ""
+
+#: data/wordings/mini_pb_divi_direct.xml:39
+#: data/wordings/mini_pb_divi_direct.xml:39
+msgid ""
+"{name} paid {nb1} {currency_unit} for {nb2} pens. How much does cost one "
+"pen? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_divi_direct.xml:43
+#: data/wordings/mini_pb_divi_direct.xml:43
+msgid ""
+"{masculine_name} has received altogether {nb1} {currency_unit} pocket money "
+"in {nb2} months. How much did he receive every month? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_multi_direct.xml:46
+#: data/wordings/mini_pb_multi_direct.xml:46
+msgid ""
+"{masculine_name} gets {nb1} {currency_unit} pocket money every month. If he "
+"doesn't spend it during {nb2} months, how much will he spare? "
+"|hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_divi_direct.xml:46
+#: data/wordings/mini_pb_divi_direct.xml:46
+msgid ""
+"{feminine_name} has received altogether {nb1} {currency_unit} pocket money "
+"in {nb2} months. How much did she receive every month? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_multi_direct.xml:39
+#: data/wordings/mini_pb_multi_direct.xml:39
+msgid ""
+"{masculine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did he"
+" pay? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_multi_direct.xml:49
+#: data/wordings/mini_pb_multi_direct.xml:49
+msgid ""
+"{feminine_name} gets {nb1} {currency_unit} pocket money every month. If she "
+"doesn't spend it during {nb2} months, how much will she spare? "
+"|hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_multi_direct.xml:42
+#: data/wordings/mini_pb_multi_direct.xml:42
+msgid ""
+"{feminine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did she"
+" pay? |hint:currency_unit|"
 msgstr ""
