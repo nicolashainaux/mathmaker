@@ -37,7 +37,7 @@ class structure(object):
 
     def h(self, M, **options):
         if hasattr(self, 'hint'):
-            return "..............." + M.insert_nonbreaking_space() \
+            return "\hfill" + M.insert_nonbreaking_space() \
                     + self.hint
         else:
             return ""

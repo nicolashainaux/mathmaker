@@ -37,7 +37,7 @@ if config.MARKUP == 'latex':
 #   @param chosen_markup
 #   @param content: [strings]
 #   @options col_fmt: [int|<'l'|'c'|'r'>]
-#   @options: borders='all'
+#   @options: borders='all'|'v_internal'
 #   @options: unit='inch' etc. (check the possibilities...)
 #   @return
 def create_table(size, content, **options):

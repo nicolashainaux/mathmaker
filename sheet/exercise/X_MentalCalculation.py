@@ -54,7 +54,7 @@ X_LAYOUTS = {'default':
               }
             }
 
-MIN_ROW_HEIGHT = 0.5
+MIN_ROW_HEIGHT = 0.8
 
 SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),
                               ("rectangle", "perimeter")}
@@ -501,10 +501,12 @@ class X_MentalCalculation(X_Structure):
                 else [self.questions_list[i].to_str('hint') \
                                                     for i in range(self.q_nb)]
 
-            content = [elt for pair in zip(q, a) for elt in pair]
+            n = [ i + 1 for i in range(self.q_nb)]
 
-            result += M.write_layout((self.q_nb, 2),
-                                     [14, 4],
+            content = [elt for triplet in zip(n, q, a) for elt in triplet]
+
+            result += M.write_layout((self.q_nb, 3),
+                                     [0.5, 14.25, 3.75],
                                      content,
                                      borders='v_internal',
                                      center='yes',

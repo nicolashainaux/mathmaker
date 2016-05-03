@@ -7,7 +7,7 @@
 
 	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
 	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
-	<layout type="mental" font_size_offset="-3">
+	<layout type="mental">
 		<exc>
 			<line nb="None">
 				<exercises>all</exercises>
@@ -25,55 +25,36 @@
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise id="mental_calculation" kind="tabular">
 
-		<question kind="rectangle" subkind="length_or_width" context="from_perimeter" picture="true">
-			<nb source="integers_5_20">1</nb>
-		</question>
-		
-		<question kind="rectangle" subkind="area">
+		<mix>
+			<question kind="area" subkind="rectangle" picture="true"></question>
+			<question kind="area" subkind="rectangle" picture="true"></question>
+			<question kind="area" subkind="rectangle" picture="true" ></question>
+			<question kind="area" subkind="rectangle"></question>
+			<question kind="area" subkind="rectangle"></question>
+			<nb source="table_25">1</nb>
 			<nb source="table_2_9">1</nb>
 			<nb source="table_15">1</nb>
-			<nb source="table_25">1</nb>
-			<nb source="decimal_and_10_100_1000">1</nb>
-			<nb source="decimal_and_one_digit">1</nb>
-		</question>
+			<nb source="table_11">1</nb>
+			<nb source="table_2_9" variant="decimal">1</nb>
+		</mix>
 
 		<mix>
 			<question kind="perimeter" subkind="rectangle" picture="true"></question>
 			<question kind="perimeter" subkind="rectangle" picture="true"></question>
 			<question kind="perimeter" subkind="rectangle"></question>
-			<question kind="perimeter" subkind="rectangle"></question>
-			<question kind="perimeter" subkind="rectangle"></question>
-			<question kind="perimeter" subkind="rectangle"></question>
-			<question kind="perimeter" subkind="rectangle"></question>
-			<nb source="table_2_9">1</nb>
 			<nb source="table_2_9" variant="decimal">1</nb>
 			<nb source="table_25">1</nb>
-			<nb source="integers_10_100_for_sums_diffs">1</nb>
 			<nb source="integers_5_20" variant="decimal1">1</nb>
-			<nb source="integers_5_20">2</nb>
 		</mix>
 			
 		<question kind="rectangle" subkind="length_or_width" context="from_area">
 			<nb source="table_2_9">1</nb>
 		</question>
 
-		<question kind="rectangle" subkind="length_or_width" context="from_area" variant="decimal" picture="true">
-			<nb source="table_2_9">1</nb>
+		<question kind="rectangle" subkind="length_or_width" context="from_perimeter" picture="true">
+			<nb source="integers_5_20">1</nb>
 		</question>
-
-		<mix>
-			<question kind="area" subkind="rectangle" picture="true"></question>
-			<question kind="area" subkind="rectangle" picture="true"></question>
-			<question kind="area" subkind="rectangle" ></question>
-			<question kind="area" subkind="rectangle"></question>
-			<question kind="area" subkind="rectangle"></question>
-			<nb source="table_15">1</nb>
-			<nb source="table_11">1</nb>
-			<nb source="table_2_9" variant="decimal1">1</nb>
-			<nb source="table_2_9" variant="decimal2">1</nb>
-			<nb source="decimal_and_10_100_1000">1</nb>
-		</mix>
-
+		
 	</exercise>
 
 </sheet>

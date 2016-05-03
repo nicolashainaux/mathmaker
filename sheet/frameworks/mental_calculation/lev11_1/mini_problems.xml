@@ -7,7 +7,7 @@
 
 	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
 	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
-	<layout type="mental">
+	<layout type="mental" font_size_offset="-1">
 		<exc>
 			<line nb="None">
 				<exercises>all</exercises>
@@ -26,19 +26,19 @@
 	<exercise id="mental_calculation" kind="tabular">
 
 		<question kind="addi" subkind="direct" context="mini_problem">
-			<nb source="integers_5_20">24</nb>
+			<nb source="integers_5_20">5</nb>
 		</question>
 
 		<question kind="multi" subkind="direct" context="mini_problem">
-			<nb source="table_4_9">24</nb>
+			<nb source="table_4_9">5</nb>
 		</question>
 
 		<question kind="substr" subkind="direct" context="mini_problem">
-			<nb source="integers_10_100">24</nb>
+			<nb source="integers_10_100">5</nb>
 		</question>
 
 		<question kind="divi" subkind="direct" context="mini_problem">
-			<nb source="table_4_9">24</nb>
+			<nb source="table_4_9">5</nb>
 		</question>
 
 
