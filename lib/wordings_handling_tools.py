@@ -82,6 +82,20 @@ def is_wrapped_P(opening_str, word, ending_str):
 
 # --------------------------------------------------------------------------
 ##
+#   @brief Returns True if word is a "unit" tag (e.g. ends with _unit})
+def is_unit(word):
+    return (is_wrapped("{", word, "}") and word[1:-1].endswith("_unit")) \
+        or (is_wrapped_P("{", word, "}") and word[1:-2].endswith("_unit"))
+
+# --------------------------------------------------------------------------
+##
+#   @brief Returns True if word is a "unit" tag (e.g. ends with _unitN})
+def is_unitN(word):
+    return (is_wrapped("{", word, "}") and word[1:-2].endswith("_unit")) \
+        or (is_wrapped_P("{", word, "}") and word[1:-3].endswith("_unit"))
+
+# --------------------------------------------------------------------------
+##
 #   @brief rewrap("<", word, ">", "{", "}") will rewrap <word> in {word}.
 #          Take care though, it won't take the positions of "<" and ">" into
 #          account.
@@ -277,18 +291,16 @@ def merge_nb_unit_pairs(arg):
         next_w = words[i+1] if i <= len(words) - 2 else None
         #sys.stderr.write("w= " + w + " next_w= " + str(next_w))
         next_w_is_a_unit = False
-        if next_w != None and ((is_wrapped("{", next_w, "}") \
-                                and next_w[1:-1].endswith("_unit")) \
-                              or (is_wrapped_P("{", next_w, "}") \
-                                and next_w[1:-2].endswith("_unit"))):
-        #___
+        if next_w != None and (is_unit(next_w) or is_unitN(next_w)):
             next_w_is_a_unit = True
         #sys.stderr.write(" next_w_is_a_unit: " + str(next_w_is_a_unit) + "\n")
-        if is_wrapped_p("{", w, "}") and w[1:3] == "nb" and next_w_is_a_unit:
+        if is_wrapped("{", w, "}") and w[1:3] == "nb" and next_w_is_a_unit:
             n = w[1:-1]
-            u = next_w[1:-1]
-            p = ""
-            if is_wrapped_P("{", next_w, "}"):
+            u = ""
+            if is_wrapped("{", next_w, "}"):
+                u = next_w[1:-1]
+                p = ""
+            elif is_wrapped_P("{", next_w, "}"):
                 u = next_w[1:-2]
                 p = next_w[-1]
             new_attr_name = n + "_" + u
