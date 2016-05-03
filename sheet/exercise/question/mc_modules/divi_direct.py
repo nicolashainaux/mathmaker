@@ -24,6 +24,7 @@ import os
 
 from core.base_calculus import *
 from . import mc_module
+from lib.wordings_handling_tools import post_process
 
 class sub_object(mc_module.structure):
 
@@ -40,7 +41,7 @@ class sub_object(mc_module.structure):
 
     def q(self, M, **options):
         if self.context == 'mini_problem':
-            return self.wording.format(**self.wording_format)
+            return post_process(self.wording.format(**self.wording_format))
         else:
             return _("Calculate: {math_expr}").format(math_expr=\
                                       M.write_math_style2(self.quotient_str))

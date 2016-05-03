@@ -23,12 +23,14 @@
 import sqlite3
 
 from . import settings
+from . import latex
 
 def init():
     global db
     global four_letters_words_source
     global names_source
     global mini_problems_wordings_source
+    global markup
 
     db = sqlite3.connect(settings.path.db)
 
@@ -39,3 +41,6 @@ def init():
                                        language=settings.language)
     mini_problems_wordings_source = \
                 lib.tools.db.wordings_source("mini_pb_wordings", "wording")
+
+    if settings.config.MARKUP == 'latex':
+        markup = latex.MARKUP

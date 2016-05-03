@@ -21,12 +21,14 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import sys
 import random, copy
+import re
 #import time
 #from decimal import Decimal
 
 from lib import error
 from lib.common.cst import *
 from lib.common import shared
+from lib.common import settings
 from core.root_calculus import Unit, Value
 
 # --------------------------------------------------------------------------
@@ -401,3 +403,21 @@ def setup_wording_format_of(w_object, M):
         else:
             #sys.stderr.write("Setting as hint value: " + hint + "\n")
             w_object.hint = hint
+
+# --------------------------------------------------------------------------
+##
+#   @brief  Insert nonbreaking spaces instead of spaces between a number and the
+#           following word.
+def insert_nonbreaking_spaces(sentence):
+    nb_space = shared.markup['nonbreaking_space']
+    p = re.compile(r'(\d)(\s)(\w+)', re.LOCALE)
+    sys.stderr.write(sentence+"\n")
+    sentence = p.sub(r'\1' + nb_space + r'\3', sentence)
+    sys.stderr.write("--> " + sentence+"\n")
+    return sentence
+
+# --------------------------------------------------------------------------
+##
+#   @brief  Applies post process on a sentence (e.g. a sentence without {tags}).
+def post_process(sentence):
+    return insert_nonbreaking_spaces(sentence)
