@@ -56,6 +56,9 @@ AVAILABLE_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
                               'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
                               'table_2_9_for_sums_diffs',
                               'table_2_9_for_rectangles',
+                              'table_2_9_for_multi_reversed',
+                              'table_4_9_for_rectangles',
+                              'table_4_9_for_multi_reversed',
                               'table_11',
                               'table_11_for_rectangles',
                               'table_15',
@@ -169,7 +172,10 @@ SOURCES_TO_TRANSLATE = {'area_rectangle': rectangle_translations,
                         'rectangle_length_or_width_from_perimeter': \
                                                 rectangle_translations,
                         'substr_direct': \
-                            {'integers_10_100': 'integers_10_100_diff7atleast'}
+                            {'integers_10_100': 'integers_10_100_diff7atleast'},
+                        'multi_reversed': \
+                            {'table_2_9': 'table_2_9_for_multi_reversed',
+                             'table_4_9': 'table_4_9_for_multi_reversed'}
                        }
 
 AVAILABLE_Q_KIND_VALUES = \
@@ -441,6 +447,21 @@ def generate_numbers(subkind):
                 (7, 8), (7, 9),
                 (8, 9)}
 
+    elif subkind == 'table_2_9_for_multi_reversed':
+        return {(2, 2), (2, 3), (2, 4), (2, 5), (2, 7),
+                (3, 3), (3, 5), (3, 7), (3, 9),
+                (4, 5), (4, 7), (4, 8),
+                (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
+                (6, 7), (6, 8), (6, 9),
+                (7, 7), (7, 8), (7, 9),
+                (8, 8), (8, 9),
+                (9, 9),
+                random.choice([(2, 6), (3, 4)]),
+                random.choice([(2, 8), (4, 4)]),
+                random.choice([(3, 6), (2, 9)]),
+                random.choice([(3, 8), (4, 6)]),
+                random.choice([(4, 9), (6, 6)])}
+
     elif subkind == 'table_4_9':
         return {(4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
                 (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
@@ -455,6 +476,15 @@ def generate_numbers(subkind):
                 (6, 7), (6, 8), (6, 9),
                 (7, 8), (7, 9),
                 (8, 9)}
+
+    elif subkind == 'table_4_9_for_multi_reversed':
+        return {(4, 4), (4, 5), (4, 6), (4, 7), (4, 8),
+                (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
+                (6, 7), (6, 8), (6, 9),
+                (7, 7), (7, 8), (7, 9),
+                (8, 8), (8, 9),
+                (9, 9),
+                random.choice([(4, 9), (6, 6)])}
 
     elif subkind == 'table_2':
         return {(2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9)}
