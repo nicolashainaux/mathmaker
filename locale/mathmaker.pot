@@ -120,30 +120,30 @@ msgstr ""
 msgid "Page layout "
 msgstr ""
 
-#: machine/LaTeX.py:151
+#: machine/LaTeX.py:153
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 
-#: machine/LaTeX.py:154
+#: machine/LaTeX.py:156
 msgid "file_name"
 msgstr ""
 
-#: machine/LaTeX.py:157
+#: machine/LaTeX.py:159
 msgid "Exercises counter"
 msgstr ""
 
-#: machine/LaTeX.py:159
+#: machine/LaTeX.py:161
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
 "bold, with its number and automatically increments the counter"
 msgstr ""
 
-#: machine/LaTeX.py:162 machine/LaTeX.py:166
+#: machine/LaTeX.py:164 machine/LaTeX.py:168
 msgid "Exercise"
 msgstr ""
 
-#: machine/LaTeX.py:169
+#: machine/LaTeX.py:171
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -517,10 +517,10 @@ msgstr ""
 msgid "How much is the difference between {n1} and {n2}?"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/addi_direct.py:49
-#: sheet/exercise/question/mc_modules/divi_direct.py:46
-#: sheet/exercise/question/mc_modules/multi_direct.py:49
-#: sheet/exercise/question/mc_modules/substr_direct.py:52
+#: sheet/exercise/question/mc_modules/addi_direct.py:50
+#: sheet/exercise/question/mc_modules/divi_direct.py:47
+#: sheet/exercise/question/mc_modules/multi_direct.py:50
+#: sheet/exercise/question/mc_modules/substr_direct.py:53
 #, python-brace-format
 msgid "Calculate: {math_expr}"
 msgstr ""
@@ -764,54 +764,12 @@ msgid ""
 "sheep do we have?"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:43
+#: sheet/exercise/question/mc_modules/area_rectangle.py:42
 msgid "Area of this rectangle? |hint:area_unit|"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:46
-#, python-brace-format
-msgid ""
-"Area of a rectangle whose width is {w} <length_unit> and length is {l} "
-"<length_unit>? |hint:area_unit|"
-msgstr ""
-
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:43
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:42
 msgid "Perimeter of this rectangle? |hint:length_unit|"
-msgstr ""
-
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:46
-#, python-brace-format
-msgid ""
-"Perimeter of a rectangle whose width is {w} <length_unit> and length is {l} "
-"<length_unit>? |hint:length_unit|"
-msgstr ""
-
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:42
-#, python-brace-format
-msgid ""
-"A rectangle has an area of {a} <area_unit> and a length of {x} "
-"<length_unit>. What is its width? |hint:length_unit|"
-msgstr ""
-
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:44
-#, python-brace-format
-msgid ""
-"A rectangle has an area of {a} <area_unit> and a width of {x} <length_unit>."
-" What is its length? |hint:length_unit|"
-msgstr ""
-
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:65
-#, python-brace-format
-msgid ""
-"What is the width of a rectangle whose perimeter is {p} <length_unit> and "
-"length is {x} <length_unit>? |hint:length_unit|"
-msgstr ""
-
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:68
-#, python-brace-format
-msgid ""
-"What is the length of a rectangle whose perimeter is {p} <length_unit> and "
-"width is {x} <length_unit>? |hint:length_unit|"
 msgstr ""
 
 #: data/wordings/mini_pb_divi_direct.xml:31
@@ -1309,4 +1267,46 @@ msgstr ""
 msgid ""
 "{feminine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did she"
 " pay? |hint:currency_unit|"
+msgstr ""
+
+#: sheet/exercise/question/mc_modules/area_rectangle.py:46
+#, python-brace-format
+msgid ""
+"Area of a rectangle whose width is {nb1} {length_unit} and length is {nb2} "
+"{length_unit}? |hint:area_unit|"
+msgstr ""
+
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:46
+#, python-brace-format
+msgid ""
+"Perimeter of a rectangle whose width is {nb1} {length_unit} and length is "
+"{nb2} {length_unit}? |hint:length_unit|"
+msgstr ""
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:40
+#, python-brace-format
+msgid ""
+"A rectangle has an area of {nb1} {area_unit} and a length of {nb2} "
+"{length_unit}. What is its width? |hint:length_unit|"
+msgstr ""
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:42
+#, python-brace-format
+msgid ""
+"A rectangle has an area of {nb1} {area_unit} and a width of {nb2} "
+"{length_unit}. What is its length? |hint:length_unit|"
+msgstr ""
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:64
+#, python-brace-format
+msgid ""
+"What is the width of a rectangle whose perimeter is {nb1} {length_unit} and "
+"length is {nb2} {length_unit}? |hint:length_unit|"
+msgstr ""
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:67
+#, python-brace-format
+msgid ""
+"What is the length of a rectangle whose perimeter is {nb1} {length_unit} and"
+" width is {nb2} {length_unit}? |hint:length_unit|"
 msgstr ""

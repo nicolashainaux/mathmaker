@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-05-03 17:54+0100\n"
+"PO-Revision-Date: 2016-05-04 15:34+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -119,21 +119,21 @@ msgstr "Pour dessiner"
 msgid "Page layout "
 msgstr "Mise en page générale"
 
-#: machine/LaTeX.py:151
+#: machine/LaTeX.py:153
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 "Si vous souhaitez inclure une image, utilisez s'il vous plaît cette "
 "commande :"
 
-#: machine/LaTeX.py:154
+#: machine/LaTeX.py:156
 msgid "file_name"
 msgstr "nom_du_fichier"
 
-#: machine/LaTeX.py:157
+#: machine/LaTeX.py:159
 msgid "Exercises counter"
 msgstr "Compteur d'exercices"
 
-#: machine/LaTeX.py:159
+#: machine/LaTeX.py:161
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
@@ -142,11 +142,11 @@ msgstr ""
 "Définition de la commande {cmd_name}, qui va insérer le mot {word} en gras, "
 "accompagné de son numéro et qui va incrémenter automatiquement le compteur"
 
-#: machine/LaTeX.py:162 machine/LaTeX.py:166
+#: machine/LaTeX.py:164 machine/LaTeX.py:168
 msgid "Exercise"
 msgstr "Exercice"
 
-#: machine/LaTeX.py:169
+#: machine/LaTeX.py:171
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -535,10 +535,10 @@ msgstr "Combien vaut le produit de {n1} par {n2} ?"
 msgid "How much is the difference between {n1} and {n2}?"
 msgstr "Combien vaut la différence entre {n1} et {n2} ?"
 
-#: sheet/exercise/question/mc_modules/addi_direct.py:49
-#: sheet/exercise/question/mc_modules/divi_direct.py:46
-#: sheet/exercise/question/mc_modules/multi_direct.py:49
-#: sheet/exercise/question/mc_modules/substr_direct.py:52
+#: sheet/exercise/question/mc_modules/addi_direct.py:50
+#: sheet/exercise/question/mc_modules/divi_direct.py:47
+#: sheet/exercise/question/mc_modules/multi_direct.py:50
+#: sheet/exercise/question/mc_modules/substr_direct.py:53
 #, python-brace-format
 msgid "Calculate: {math_expr}"
 msgstr "Calculer : {math_expr}"
@@ -808,67 +808,13 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. C'est {nb2} fois plus que nous. Combien de "
 "moutons avons-nous ?"
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:43
+#: sheet/exercise/question/mc_modules/area_rectangle.py:42
 msgid "Area of this rectangle? |hint:area_unit|"
 msgstr "Aire de ce rectangle ? |hint:area_unit|"
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:46
-#, python-brace-format
-msgid ""
-"Area of a rectangle whose width is {w} <length_unit> and length is {l} "
-"<length_unit>? |hint:area_unit|"
-msgstr ""
-"Aire d'un rectangle de largeur {w} <length_unit> et de longueur {l}  "
-"<length_unit>? |hint:area_unit|"
-
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:43
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:42
 msgid "Perimeter of this rectangle? |hint:length_unit|"
 msgstr "Périmètre de ce rectangle ? |hint:length_unit|"
-
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:46
-#, python-brace-format
-msgid ""
-"Perimeter of a rectangle whose width is {w} <length_unit> and length is {l} "
-"<length_unit>? |hint:length_unit|"
-msgstr ""
-"Périmètre d'un rectangle de largeur {w} <length_unit> et de longueur {l} "
-"<length_unit> ? |hint:length_unit|"
-
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:42
-#, python-brace-format
-msgid ""
-"A rectangle has an area of {a} <area_unit> and a length of {x} "
-"<length_unit>. What is its width? |hint:length_unit|"
-msgstr ""
-"Un rectangle a une aire de {a} <area_unit> et une longueur de {x} "
-"<length_unit>. Quelle est sa largeur ? |hint:length_unit|"
-
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:44
-#, python-brace-format
-msgid ""
-"A rectangle has an area of {a} <area_unit> and a width of {x} <length_unit>. "
-"What is its length? |hint:length_unit|"
-msgstr ""
-"Un rectangle a une aire de {a} <area_unit> et une largeur de {x} "
-"<length_unit>. Quelle est sa longueur ? |hint:length_unit|"
-
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:65
-#, python-brace-format
-msgid ""
-"What is the width of a rectangle whose perimeter is {p} <length_unit> and "
-"length is {x} <length_unit>? |hint:length_unit|"
-msgstr ""
-"Largeur d'un rectangle de périmètre {p} <length_unit> et de longueur {x} "
-"<length_unit> ? |hint:length_unit|"
-
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:68
-#, python-brace-format
-msgid ""
-"What is the length of a rectangle whose perimeter is {p} <length_unit> and "
-"width is {x} <length_unit>? |hint:length_unit|"
-msgstr ""
-"Longueur d'un rectangle de périmètre {p} <length_unit> et de largeur {x} "
-"<length_unit> ? |hint:length_unit|"
 
 #: data/wordings/mini_pb_divi_direct.xml:31
 msgid ""
@@ -1422,6 +1368,60 @@ msgid ""
 msgstr ""
 "{feminine_name} a acheté {nb1} stylos à {nb2} {currency_unit}. Combien a-t-"
 "elle payé ?  |hint:currency_unit|"
+
+#: sheet/exercise/question/mc_modules/area_rectangle.py:46
+#, python-brace-format
+msgid ""
+"Area of a rectangle whose width is {nb1} {length_unit} and length is {nb2} "
+"{length_unit}? |hint:area_unit|"
+msgstr ""
+"Aire d'un rectangle de largeur {nb1} {length_unit} et de longueur {nb2} "
+"{length_unit}? |hint:area_unit|"
+
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:46
+#, python-brace-format
+msgid ""
+"Perimeter of a rectangle whose width is {nb1} {length_unit} and length is "
+"{nb2} {length_unit}? |hint:length_unit|"
+msgstr ""
+"Périmètre d'un rectangle de largeur {nb1} {length_unit} et de longueur {nb2} "
+"{length_unit} ? |hint:length_unit|"
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:40
+#, python-brace-format
+msgid ""
+"A rectangle has an area of {nb1} {area_unit} and a length of {nb2} "
+"{length_unit}. What is its width? |hint:length_unit|"
+msgstr ""
+"Un rectangle a une aire de {nb1} {area_unit} et une longueur de {nb2} "
+"{length_unit}. Quelle est sa largeur ? |hint:length_unit|"
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:42
+#, python-brace-format
+msgid ""
+"A rectangle has an area of {nb1} {area_unit} and a width of {nb2} "
+"{length_unit}. What is its length? |hint:length_unit|"
+msgstr ""
+"Un rectangle a une aire de {nb1} {area_unit} et une largeur de {nb2} "
+"{length_unit}. Quelle est sa longueur ? |hint:length_unit|"
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:64
+#, python-brace-format
+msgid ""
+"What is the width of a rectangle whose perimeter is {nb1} {length_unit} and "
+"length is {nb2} {length_unit}? |hint:length_unit|"
+msgstr ""
+"Largeur d'un rectangle de périmètre {nb1} {length_unit} et de longueur {nb2} "
+"{length_unit} ? |hint:length_unit|"
+
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:67
+#, python-brace-format
+msgid ""
+"What is the length of a rectangle whose perimeter is {nb1} {length_unit} and "
+"width is {nb2} {length_unit}? |hint:length_unit|"
+msgstr ""
+"Longueur d'un rectangle de périmètre {nb1} {length_unit} et de largeur {nb2} "
+"{length_unit} ? |hint:length_unit|"
 
 #~ msgid "To use the euro symbol"
 #~ msgstr "Pour utiliser le symbole de l'euro"

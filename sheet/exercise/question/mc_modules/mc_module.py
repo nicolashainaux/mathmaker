@@ -136,6 +136,8 @@ class structure(object):
             l = Value(max([nb1, nb2]), unit=self.unit_length)
 
             rectangle_name = "DCBA"
+            if self.picture:
+                rectangle_name = next(shared.four_letters_words_source)
             self.rectangle = Rectangle([Point([rectangle_name[3], (0,0)]),
                                         3,
                                         1.5,

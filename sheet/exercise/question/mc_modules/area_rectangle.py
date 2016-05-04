@@ -21,9 +21,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from core.base_calculus import *
+from core.root_calculus import Value
 from . import mc_module
-from lib.tools.wordings_handling import reformat, setup_wording_format_of
-from lib.common import shared
+from lib.tools.wordings_handling import setup_wording_format_of
 
 class sub_object(mc_module.structure):
 
@@ -33,20 +33,13 @@ class sub_object(mc_module.structure):
         super().setup(M, "length_units", **options)
         super().setup(M, "rectangle", **options)
 
-        self.w_str = self.rectangle.width.into_str(force_expression_begins=True)
-        self.l_str = self.rectangle.length.into_str(\
-                                                   force_expression_begins=True)
-        self.area_str = self.rectangle.area.into_str(\
-                                                   force_expression_begins=True)
         if self.picture:
-            self.rectangle.rename(next(shared.four_letters_words_source))
             self.wording = _("Area of this rectangle? |hint:area_unit|")
             setup_wording_format_of(self, M)
         else:
-            self.wording = reformat(_("Area of a rectangle whose width is {w} \
-<length_unit> and length is {l} <length_unit>? |hint:area_unit|")\
-                                    .format(w=M.write_math_style2(self.w_str),
-                                            l=M.write_math_style2(self.l_str)))
+            self.nb1, self.nb2 = self.rectangle.width, self.rectangle.length
+            self.wording = _("Area of a rectangle whose width is {nb1} \
+{length_unit} and length is {nb2} {length_unit}? |hint:area_unit|")
             setup_wording_format_of(self, M)
 
     def q(self, M, **options):
@@ -61,7 +54,5 @@ class sub_object(mc_module.structure):
             return self.wording.format(**self.wording_format)
 
     def a(self, M, **options):
-        u = ""
-        if hasattr(self, 'hint'):
-            u = M.insert_nonbreaking_space() + self.hint
-        return M.write_math_style2(self.area_str) + u
+        return self.rectangle.area.into_str(display_SI_unit=True)
+
