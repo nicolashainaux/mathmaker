@@ -23,6 +23,7 @@
 import os
 
 from core.base_calculus import *
+from core.root_calculus import Value
 from . import mc_module
 from lib.tools.wordings_handling import post_process
 
@@ -50,7 +51,9 @@ class sub_object(mc_module.structure):
                                 math_expr=M.write_math_style2(self.product_str))
 
     def a(self, M, **options):
-        u = ""
         if hasattr(self, 'hint'):
-            u = M.insert_nonbreaking_space() + self.hint
-        return M.write_math_style2(self.result_str) + u
+            v = Value(self.result_str, unit=self.hint)\
+                .into_str(display_SI_unit=True)
+            return M.write_math_style2(v)
+        else:
+            return M.write_math_style2(self.result_str)

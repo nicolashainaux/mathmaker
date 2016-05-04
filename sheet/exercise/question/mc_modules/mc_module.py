@@ -37,8 +37,8 @@ class structure(object):
 
     def h(self, M, **options):
         if hasattr(self, 'hint'):
-            return "\hfill" + M.insert_nonbreaking_space() \
-                    + self.hint
+            return "\hfill" + Value("", unit=self.hint)\
+                              .into_str(display_SI_unit=True)
         else:
             return ""
 

@@ -385,9 +385,8 @@ def setup_wording_format_of(w_object, M):
             elif attr.startswith('volume'):
                 n = 3
             setattr(w_object, attr,
-                    M.write_math_style2(Unit(getattr(w_object, attr),
-                                             exponent=n).into_str(),
-                                        extra_spacing=False))
+                    Unit(getattr(w_object, attr), exponent=n)\
+                    .into_str(display_SI_unit=True))
 
     setattr(w_object, 'wording_format', {})
     for attr in extract_formatting_tags_from(w_object.wording):

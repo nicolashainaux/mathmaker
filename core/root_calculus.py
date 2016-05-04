@@ -700,16 +700,25 @@ class Value(Signed):
             if 'display_unit' in options and options['display_unit'] in YES:
                 unit_str = self.unit.into_str(**options) \
                                             if isinstance(self.unit, Unit) \
-                                            else self.unit
+                                            else str(self.unit)
                 return locale.str(self.raw_value) + unit_str
             elif 'display_SI_unit' in options and options['display_SI_unit']:
                 unit_str = self.unit.into_str(**options) \
                                             if isinstance(self.unit, Unit) \
-                                            else self.unit
+                                            else str(self.unit)
                 return "\SI{" + locale.str(self.raw_value) + "}"\
                        "{" + unit_str + "}"
             else:
                 return locale.str(self.raw_value)
+
+        elif self.raw_value in ["", " "] and 'display_SI_unit' in options \
+            and options['display_SI_unit']:
+        #___
+            unit_str = self.unit.into_str(**options) \
+                                        if isinstance(self.unit, Unit) \
+                                        else str(self.unit)
+            return "\SI{" + self.raw_value + "}"\
+                       "{" + unit_str + "}"
 
         else: # self.is_literal()
             if len(self.get_first_letter()) >= 2 \
@@ -1246,7 +1255,8 @@ class Unit(Exponented):
         text_box_open = MARKUP['open_text_in_maths']
         text_box_close = MARKUP['close_text_in_maths']
 
-        if 'graphic_display' in options and options['graphic_display'] in YES:
+        if 'graphic_display' in options and options['graphic_display'] in YES\
+            or 'display_SI_unit' in options:
             text_box_open = ""
             text_box_close = ""
 
@@ -1257,6 +1267,8 @@ class Unit(Exponented):
                        + str(self.exponent) \
                        + MARKUP['closing_exponent']
 
-        separator = VALUE_AND_UNIT_SEPARATOR[self.name]
+        separator = VALUE_AND_UNIT_SEPARATOR[self.name] \
+                    if not 'display_SI_unit' in options \
+                    else ""
 
         return separator + text_box_open + self.name + text_box_close + exponent
