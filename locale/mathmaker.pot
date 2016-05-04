@@ -329,11 +329,11 @@ msgstr ""
 msgid "Factorise, if possible:"
 msgstr ""
 
-#: sheet/exercise/X_MentalCalculation.py:489
+#: sheet/exercise/X_MentalCalculation.py:490
 msgid "Question:"
 msgstr ""
 
-#: sheet/exercise/X_MentalCalculation.py:491
+#: sheet/exercise/X_MentalCalculation.py:492
 msgid "Answer:"
 msgstr ""
 
@@ -534,10 +534,6 @@ msgstr ""
 
 #: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
 msgid "Divisions"
-msgstr ""
-
-#: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-msgid "Test 2"
 msgstr ""
 
 #: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
@@ -764,11 +760,11 @@ msgid ""
 "sheep do we have?"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:42
+#: sheet/exercise/question/mc_modules/area_rectangle.py:37
 msgid "Area of this rectangle? |hint:area_unit|"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:42
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:37
 msgid "Perimeter of this rectangle? |hint:length_unit|"
 msgstr ""
 
@@ -1269,14 +1265,14 @@ msgid ""
 " pay? |hint:currency_unit|"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:46
+#: sheet/exercise/question/mc_modules/area_rectangle.py:41
 #, python-brace-format
 msgid ""
 "Area of a rectangle whose width is {nb1} {length_unit} and length is {nb2} "
 "{length_unit}? |hint:area_unit|"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:46
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:41
 #, python-brace-format
 msgid ""
 "Perimeter of a rectangle whose width is {nb1} {length_unit} and length is "
@@ -1297,16 +1293,20 @@ msgid ""
 "{length_unit}. What is its length? |hint:length_unit|"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:64
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:57
 #, python-brace-format
 msgid ""
 "What is the width of a rectangle whose perimeter is {nb1} {length_unit} and "
 "length is {nb2} {length_unit}? |hint:length_unit|"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:67
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:60
 #, python-brace-format
 msgid ""
 "What is the length of a rectangle whose perimeter is {nb1} {length_unit} and"
 " width is {nb2} {length_unit}? |hint:length_unit|"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+msgid "Mental calculation: test 2"
 msgstr ""

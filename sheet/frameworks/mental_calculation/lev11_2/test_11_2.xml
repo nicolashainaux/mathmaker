@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<sheet header="" title="Mental calculation" subtitle="Test 2" text="" answers_title="Answers">
+<sheet header="" title="Mental calculation: test 2" subtitle="" text="" answers_title="Answers">
 
 	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
 	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
-	<layout type="mental">
+	<layout type="mental" font_size_offset="-1" >
 		<exc>
 			<line nb="None">
 				<exercises>all</exercises>
@@ -25,17 +25,19 @@
 		<question kind="divi" subkind="direct" context="area_width_length_rectangle">
 			<nb source="table_2_9">1</nb>
 		</question>
+		
+		<question kind="divi" subkind="direct" context="mini_problem">
+			<nb source="table_25">1</nb>
+		</question>
 
 		<question kind="multi" subkind="direct">
 			<nb source="decimal_and_10_100_1000">1</nb>
 			<nb source="decimal_and_one_digit">1</nb>
 		</question>
 
-		<!-- The question about table of 25 should be replaced by a mini-problem -->
 		<question kind="divi" subkind="direct">
 			<nb source="decimal_and_10_100_1000">1</nb>
 			<nb source="table_2_9">1</nb>
-			<nb source="table_25">1</nb>
 		</question>
 
 		<!-- The two next ones should be replaced by a calculus of a perimeter of a polygon; and by a "complément à 100" -->

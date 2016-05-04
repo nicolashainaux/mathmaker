@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-05-04 15:34+0100\n"
+"PO-Revision-Date: 2016-05-04 17:39+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -342,11 +342,11 @@ msgstr "Factoriser :"
 msgid "Factorise, if possible:"
 msgstr "Factoriser, si possible :"
 
-#: sheet/exercise/X_MentalCalculation.py:489
+#: sheet/exercise/X_MentalCalculation.py:490
 msgid "Question:"
 msgstr "Question :"
 
-#: sheet/exercise/X_MentalCalculation.py:491
+#: sheet/exercise/X_MentalCalculation.py:492
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -554,10 +554,6 @@ msgstr ""
 #: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
 msgid "Divisions"
 msgstr "Divisions"
-
-#: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-msgid "Test 2"
-msgstr "Test 2"
 
 #: sheet/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
 #: sheet/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
@@ -808,11 +804,11 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. C'est {nb2} fois plus que nous. Combien de "
 "moutons avons-nous ?"
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:42
+#: sheet/exercise/question/mc_modules/area_rectangle.py:37
 msgid "Area of this rectangle? |hint:area_unit|"
 msgstr "Aire de ce rectangle ? |hint:area_unit|"
 
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:42
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:37
 msgid "Perimeter of this rectangle? |hint:length_unit|"
 msgstr "Périmètre de ce rectangle ? |hint:length_unit|"
 
@@ -1369,7 +1365,7 @@ msgstr ""
 "{feminine_name} a acheté {nb1} stylos à {nb2} {currency_unit}. Combien a-t-"
 "elle payé ?  |hint:currency_unit|"
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:46
+#: sheet/exercise/question/mc_modules/area_rectangle.py:41
 #, python-brace-format
 msgid ""
 "Area of a rectangle whose width is {nb1} {length_unit} and length is {nb2} "
@@ -1378,7 +1374,7 @@ msgstr ""
 "Aire d'un rectangle de largeur {nb1} {length_unit} et de longueur {nb2} "
 "{length_unit}? |hint:area_unit|"
 
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:46
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:41
 #, python-brace-format
 msgid ""
 "Perimeter of a rectangle whose width is {nb1} {length_unit} and length is "
@@ -1405,7 +1401,7 @@ msgstr ""
 "Un rectangle a une aire de {nb1} {area_unit} et une largeur de {nb2} "
 "{length_unit}. Quelle est sa longueur ? |hint:length_unit|"
 
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:64
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:57
 #, python-brace-format
 msgid ""
 "What is the width of a rectangle whose perimeter is {nb1} {length_unit} and "
@@ -1414,7 +1410,7 @@ msgstr ""
 "Largeur d'un rectangle de périmètre {nb1} {length_unit} et de longueur {nb2} "
 "{length_unit} ? |hint:length_unit|"
 
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:67
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:60
 #, python-brace-format
 msgid ""
 "What is the length of a rectangle whose perimeter is {nb1} {length_unit} and "
@@ -1422,6 +1418,13 @@ msgid ""
 msgstr ""
 "Longueur d'un rectangle de périmètre {nb1} {length_unit} et de largeur {nb2} "
 "{length_unit} ? |hint:length_unit|"
+
+#: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+msgid "Mental calculation: test 2"
+msgstr "Calcul mental : test 2"
+
+#~ msgid "Test 2"
+#~ msgstr "Test 2"
 
 #~ msgid "To use the euro symbol"
 #~ msgstr "Pour utiliser le symbole de l'euro"
