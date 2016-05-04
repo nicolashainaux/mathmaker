@@ -45,8 +45,7 @@ class structure(object):
     def setup(self, M, arg, **options):
         if arg == "minimal":
             if 'variant' in options and options['variant'] == 'decimal':
-                    options['variant'] = random.choice(['decimal1',
-                                                        'decimal2'])
+                options['variant'] = random.choice(['decimal1', 'decimal2'])
 
             self.variant = options['variant'] if 'variant' in options \
                                               else "default"

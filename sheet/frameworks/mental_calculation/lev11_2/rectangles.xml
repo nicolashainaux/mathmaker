@@ -25,7 +25,7 @@
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise id="mental_calculation" kind="tabular">
 
-		<mix>
+        <mix>
 			<question kind="area" subkind="rectangle" picture="true"></question>
 			<question kind="area" subkind="rectangle" picture="true"></question>
 			<question kind="area" subkind="rectangle" picture="true" ></question>
