@@ -145,6 +145,7 @@ cm aeguill") + "\n"
         result += "% " + _("Page layout ") + "\n"
         result += "\geometry{hmargin=0.75cm, vmargin=0.75cm}" + "\n"
         result += "\setlength{\parindent}{0cm}" + "\n"
+        result += r"\setlength{\arrayrulewidth}{0.02pt}" + "\n"
         result += "\pagestyle{empty}" + "\n"
         if settings.language == "fr_FR":
             result += "\sisetup{locale = FR}" + "\n"
