@@ -23,7 +23,7 @@
 import math
 import sys
 
-from lib.common import latex
+from lib.common import latex, settings
 from lib.common.settings import CONFIG, config
 from _version import __version__
 from lib.common import software
@@ -146,6 +146,8 @@ cm aeguill") + "\n"
         result += "\geometry{hmargin=0.75cm, vmargin=0.75cm}" + "\n"
         result += "\setlength{\parindent}{0cm}" + "\n"
         result += "\pagestyle{empty}" + "\n"
+        if settings.language == "fr_FR":
+            result += "\sisetup{locale = FR}" + "\n"
         result += " " + "\n"
         result += r"\usepackage{epstopdf}" + "\n"
         result += "%%% " + _("If you wish to include a picture, \
