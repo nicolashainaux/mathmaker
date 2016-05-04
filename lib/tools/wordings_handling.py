@@ -119,37 +119,6 @@ def rewrap_all_wp(old_opening, sentence, old_closing, new_opening, \
                       else w \
                       for w in sentence.split() ])
 
-
-# --------------------------------------------------------------------------
-##
-#   @brief Will rewrap all words of the given sentence.
-#          Including words followed by punctuation signs . , : ; ? !
-def rewrap_whole_sentence(old_opening, sentence, old_closing, new_opening, \
-                          new_closing):
-    return rewrap_all_wp(old_opening,
-           rewrap_all_wp(old_opening,
-           rewrap_all_wp(old_opening,
-           rewrap_all_wp(old_opening,
-           rewrap_all_wp(old_opening,
-           rewrap_all_wp(old_opening,
-           rewrap_all_wp(old_opening, sentence,
-           old_closing, new_opening, new_closing, "!"),
-           old_closing, new_opening, new_closing, "?"),
-           old_closing, new_opening, new_closing, ";"),
-           old_closing, new_opening, new_closing, ":"),
-           old_closing, new_opening, new_closing, ","),
-           old_closing, new_opening, new_closing, "."),
-           old_closing, new_opening, new_closing, "")
-
-# --------------------------------------------------------------------------
-##
-#   @brief Returns a string where all words wrapped in <> become wrapped in {}
-#          instead.
-#          reformat("Word1, <word2> and word3 or <word4>.")
-#          returns: "Word1, {word2} and word3 or {word4}."
-def reformat(sentence):
-    return rewrap_whole_sentence("<", sentence, ">", "{", "}")
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns a couple (sentence_without_hint, hint). Take care, only
