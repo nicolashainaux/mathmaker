@@ -106,10 +106,11 @@ def get_q_kinds_from_file(file_name):
                                                  (subchild.attrib['kind'],
                                                   subchild.attrib['subkind'],
                                                   subchild.attrib['context'])]
-
                     for elt in subchild:
-                        questions += [[subchild.attrib,
-                                       elt.attrib['source'], int(elt.text)]]
+                        o = copy.deepcopy(subchild.attrib)
+                        o.update(elt.attrib)
+                        questions += [[o, elt.attrib['source'], int(elt.text)]]
+
                 elif subchild.tag == 'mix':
                     q_temp_list = []
                     n_temp_list = []
