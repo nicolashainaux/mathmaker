@@ -73,18 +73,21 @@ class structure(object):
                     self.unit_area = Unit(self.unit_length.name, exponent=2)
                     self.length_unit = self.unit_length.name
 
-        elif arg == "nb_variants":
+        elif arg == "numbers":
             nb_list = list(options['nb'])
-            nb1 = nb_list.pop(random.choice([0, 1]))
-            nb2 = nb_list.pop()
-            if self.variant == 'decimal1':
-                nb1 /= 10
-            elif self.variant == 'decimal2':
-                nb1 /= 10
-                nb2 /= 10
-            nb_list = [nb1, nb2]
-            self.nb1 = nb_list.pop(random.choice([0, 1]))
-            self.nb2 = nb_list.pop()
+            random.shuffle(nb_list)
+            for i in range(len(nb_list)):
+                setattr(self, 'nb' + str(i+1), nb_list[i])
+            self.nb_nb = len(nb_list)
+
+        elif arg == "nb_variants":
+            if self.variant.startswith('decimal'):
+                deci_nb = int(self.variant[-1]) # so, from decimal1 up to 9
+                chosen_ones = random.sample([i for i in range(self.nb_nb)],
+                                            deci_nb)
+                for i in chosen_ones:
+                    setattr(self, 'nb' + str(i+1),
+                            getattr(self, 'nb' + str(i+1))/10)
 
         elif arg == "division":
             nb_list = list(options['nb'])

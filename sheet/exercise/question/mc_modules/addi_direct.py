@@ -31,6 +31,7 @@ class sub_object(mc_module.structure):
 
     def __init__(self, M, numbers_to_use, **options):
         super().setup(M, "minimal", **options)
+        super().setup(M, "numbers", nb=numbers_to_use, **options)
         super().setup(M, "nb_variants", nb=numbers_to_use, **options)
 
         the_sum = Sum([self.nb1, self.nb2])

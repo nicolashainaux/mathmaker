@@ -46,6 +46,7 @@ and a width of {nb2} {length_unit}. What is its length? |hint:length_unit|")
             setup_wording_format_of(self, M)
 
         elif self.context == "from_perimeter":
+            super().setup(M, "numbers", nb=numbers_to_use, **options)
             super().setup(M, "nb_variants", nb=numbers_to_use, **options)
             super().setup(M, "rectangle", **options)
             self.subcontext = random.choice(['w', 'l'])
