@@ -53,7 +53,7 @@ def create_table(size, content, **options):
         tabular_format = ""
         v_border = ""
         h_border = ""
-        center = ""
+        justify = []
         new_line_sep = "\\\\" + "\n"
         min_row_height = ""
 
@@ -62,11 +62,28 @@ def create_table(size, content, **options):
         extra_last_column = ""
         extra_col_sep = ""
 
-        if 'center' in options:
-            center = ">{\centering}"
+        if 'justify' in options and type(options['justify']) == list:
+            if not len(options['justify']) == n_col:
+                raise ValueError("The number of elements of this list should "\
+                                 "be equal to the number of columns of the "\
+                                 "tabular.")
             new_line_sep = "\\tabularnewline" + "\n"
             extra_last_column = "@{}m{0pt}@{}"
             extra_col_sep = " & "
+            for i in range(n_col):
+                if options['justify'][i] == 'center':
+                    justify.append(">{\centering}")
+                elif options['justify'][i] == 'left':
+                    justify.append(">{}")
+                else:
+                    raise ValueError("Expecting 'left' or 'center' as values "\
+                                     "of this list.")
+
+        elif 'center' in options:
+            new_line_sep = "\\tabularnewline" + "\n"
+            extra_last_column = "@{}m{0pt}@{}"
+            extra_col_sep = " & "
+            justify = [">{\centering}" for _ in range(n_col)]
 
         if 'min_row_height' in options:
             min_row_height = " [" \
@@ -78,7 +95,9 @@ def create_table(size, content, **options):
         if 'center_vertically' in options:
             cell_fmt = "m{"
 
-        if 'borders' in options and options['borders'] in ['all', 'v_internal']:
+        if 'borders' in options and options['borders'] in ['all',
+                                                           'v_internal',
+                                                           'penultimate']:
             v_border = "|"
             h_border = "\\hline \n"
 
@@ -98,13 +117,23 @@ def create_table(size, content, **options):
             if is_.a_number(col_fmt[i]):
                 t = cell_fmt + str(col_fmt[i]) + " " + str(length_unit) + "}"
 
-            tabular_format += v_border \
-                              + center \
+            vb = v_border
+            if 'borders' in options and options['borders'] == "penultimate":
+                if i == n_col - 1:
+                    vb = "|"
+                else:
+                    vb = ""
+
+            tabular_format += vb \
+                              + justify[i] \
                               + t
+
+        if 'borders' in options and options['borders'] == "penultimate":
+            v_border = ""
 
         tabular_format += extra_last_column + v_border
 
-        if 'borders' in options and options['borders'] == 'v_internal':
+        if 'borders' in options and options['borders'] in ['v_internal']:
             tabular_format = tabular_format[1:-1]
 
         result += "\\begin{tabular}{"+ tabular_format + "}" + "\n"

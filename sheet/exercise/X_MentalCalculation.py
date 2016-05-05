@@ -502,15 +502,15 @@ class X_MentalCalculation(X_Structure):
                 else [self.questions_list[i].to_str('hint') \
                                                     for i in range(self.q_nb)]
 
-            n = [ i + 1 for i in range(self.q_nb)]
+            n = [ str(i + 1) + "." for i in range(self.q_nb)]
 
             content = [elt for triplet in zip(n, q, a) for elt in triplet]
 
             result += M.write_layout((self.q_nb, 3),
                                      [0.5, 14.25, 3.75],
                                      content,
-                                     borders='v_internal',
-                                     center='yes',
+                                     borders='penultimate',
+                                     justify=['left', 'left', 'center'],
                                      center_vertically='yes',
                                      min_row_height=MIN_ROW_HEIGHT)
 
