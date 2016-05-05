@@ -78,7 +78,7 @@
 		</question>
 
 		<mix>
-			<question kind="area" subkind="rectangle"></question>
+			<question kind="area" subkind="rectangle" picture="true"></question>
 			<question kind="multi" subkind="direct"></question>
 			<question kind="multi" subkind="direct"></question>
 			<question kind="vocabulary" subkind="multi"></question>

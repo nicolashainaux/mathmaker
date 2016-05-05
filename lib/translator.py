@@ -53,7 +53,7 @@ def create_table(size, content, **options):
         tabular_format = ""
         v_border = ""
         h_border = ""
-        justify = []
+        justify = ["" for _ in range(n_col)]
         new_line_sep = "\\\\" + "\n"
         min_row_height = ""
 
@@ -70,6 +70,7 @@ def create_table(size, content, **options):
             new_line_sep = "\\tabularnewline" + "\n"
             extra_last_column = "@{}m{0pt}@{}"
             extra_col_sep = " & "
+            justify = []
             for i in range(n_col):
                 if options['justify'][i] == 'center':
                     justify.append(">{\centering}")
@@ -124,9 +125,7 @@ def create_table(size, content, **options):
                 else:
                     vb = ""
 
-            tabular_format += vb \
-                              + justify[i] \
-                              + t
+            tabular_format += vb + justify[i] + t
 
         if 'borders' in options and options['borders'] == "penultimate":
             v_border = ""
