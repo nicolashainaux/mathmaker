@@ -655,6 +655,117 @@ class Rectangle(Polygon):
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
+# @class Square
+# @brief
+class Square(Polygon):
+
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Rectangle's constructor.
+    #   @param arg: Rectangle |
+    #                [Point, length, str1, str2, str3]
+    #            NB: the str will be the vertices' names
+    #   @param options
+    #   Options details:
+    #   - rotate_around_gravity_center = 'no'|'any'|nb
+    #                        (nb being the angle,
+    #               defaulting to 'any' if sketch or 'no' if not a sketch)
+    def __init__(self, arg, **options):
+        if isinstance(arg, Square):
+            Polygon.__init__((tuple(arg.points)))
+        elif isinstance(arg, list):
+            if isinstance(arg[0], Point)\
+                and is_.a_number(arg[1])\
+                and all(isinstance(arg[i], str) for i in [2, 3, 4]):
+            #___
+                length = arg[1]
+                Rectangle.__init__([arg[0], arg[1], arg[1], arg[2],
+                                    arg[3], arg[4]])
+        else:
+            raise ValueError("Expected argument is:"\
+                             "Square, or [Point, length, str1, str2, str3]")
+
+        for a in self._angle:
+            a.mark = 'right'
+
+        self._nature = _('Square')
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the Square's side's length
+    @property
+    def side_length(self):
+        if not self.lengths_have_been_set:
+            raise error.ImpossibleAction("Return the side's length of a "\
+                                         "Square before is has been set.")
+        return self.side[0].length
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Returns the Square's area
+    @property
+    def area(self):
+        if self.side_length.get_unit() != "":
+            return Value(Product([Item(self.side_length),
+                                  Item(self.side_length)]).evaluate(),
+                         unit=Unit(self.side_length.get_unit().name,
+                                   exponent=2))
+        else:
+            return Value(Product([Item(self.side_length),
+                                  Item(self.side_length)]).evaluate())
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief  Sets the side's length the Square. Defined to match the same
+    #           method of Rectangle.
+    #   @param  lengths_list A list of 1 Value
+    #   @todo   Maybe log a warning instead of raising a ValueError?
+    def set_lengths(self, lengths_list):
+        if not type(lengths_list) == list:
+            raise ValueError("Expected a list, got a " + \
+                             str(type(lengths_list)) + " "\
+                             " instead.")
+        if not len(lengths_list) == 1:
+            raise ValueError("A list of length " + str(len(lengths_list)) + " "\
+                             "was given, whereas a list of length 1 "\
+                             "was expected.")
+        Polygon.set_lengths([lengths_list[0], lengths_list[0],
+                             lengths_list[0], lengths_list[0]])
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Sets the length of the Square's side
+    #   @param  side_length:    a Value
+    def set_side_length(self, side_length):
+        self.set_lengths([side_length])
+
+
+
+
+
+# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+##
 # @class Triangle
 # @brief
 class Triangle(Polygon):
