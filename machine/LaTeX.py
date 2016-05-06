@@ -99,24 +99,10 @@ is {software_license}.").format(software_ref=software.NAME_PRINTABLE,
         result += "% " + software.COPYRIGHT + " " + software.AUTHOR +"\n"
 
         result += "\documentclass[a4paper,fleqn,12pt]{article}" + "\n"
-        if self.encoding == latex.UCS_UTF8X:
-            result += r"\usepackage{ucs}" + "\n"
-            result += r"\usepackage[" + latex.UTF8X + "]{inputenc}" \
-                           + "\n"
-        else:
-            result += r"\usepackage[" + self.encoding + "]{inputenc}" \
-                           + "\n"
-
+        result += r"\usepackage{fontspec}" + "\n"
         result += r"\usepackage[" \
                        + self.language \
                        + "]{babel}" + "\n"
-
-        result += r"\usepackage[T1]{fontenc}" + "\n"
-        result += "% " + _("To solve accent problems: ") + "\n"
-        result += r"%\usepackage{lmodern}" + "\n"
-        result += "% " + _("Using lmodern package might be better than \
-cm aeguill") + "\n"
-        result += r"\usepackage[cm]{aeguill}" + "\n"
         result += "% " + _("To strike out numbers ") + "\n"
         result += r"\usepackage{cancel}" + "\n"
         result += "% " + _("To use the margin definition command") + "\n"

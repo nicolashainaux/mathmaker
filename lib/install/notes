@@ -4,17 +4,21 @@ Before there is a proper installation process
 > Dependencies
 Softwares used by mathmaker:
 - euktoeps
-Provided by package eukleides (on both ubuntu & freebsd)
+Provided by package eukleides (on both Ubuntu & FreeBsd)
 
 - xmllint
-Provided by package: libxml2-utils on ubuntu
+Provided by package: libxml2-utils on Ubuntu
 
 Libraries imported by mathmaker:
 - yaml
-Provided by package: python3-yaml on ubuntu
+Provided by package: python3-yaml on Ubuntu
 
 - polib
-Provided by package: python3-polib on ubuntu
+Provided by package: python3-polib on Ubuntu
+
+> To compile mathmaker's output
+- lualatex
+Provided by package: texlive-luatex on Ubuntu
 
 > Configuration
 - logging for OSes using rsyslogd, like debian, Ubuntu...:
