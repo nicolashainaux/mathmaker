@@ -97,9 +97,7 @@ is {software_license}.").format(software_ref=software.NAME_PRINTABLE,
 
         result += "\documentclass[a4paper,fleqn,12pt]{article}" + "\n"
         result += r"\usepackage{fontspec}" + "\n"
-        result += r"\usepackage[" \
-                       + self.language \
-                       + "]{babel}" + "\n"
+        result += r"\usepackage{polyglossia}" + "\n"
         result += "% " + _("To strike out numbers ") + "\n"
         result += r"\usepackage{cancel}" + "\n"
         result += "% " + _("To use the margin definition command") + "\n"
@@ -130,6 +128,13 @@ is {software_license}.").format(software_ref=software.NAME_PRINTABLE,
         result += "\setlength{\parindent}{0cm}" + "\n"
         result += r"\setlength{\arrayrulewidth}{0.02pt}" + "\n"
         result += "\pagestyle{empty}" + "\n"
+        result += "\setmainlanguage{" + self.language + "}" + "\n"
+        if self.language_code in latex.LANGUAGE_OPTIONS:
+            lod = latex.LANGUAGE_OPTIONS[self.language_code]
+            lang_options = ",".join([ str(o) + "=" + str(lod[o]) \
+                                      for o in lod ])
+            result += "".join(["\setkeys{", self.language, "}"\
+                                       "{", lang_options, "}\n"])
         if settings.language == "fr_FR":
             result += "\sisetup{locale = FR}" + "\n"
         result += " " + "\n"

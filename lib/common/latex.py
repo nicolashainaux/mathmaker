@@ -36,9 +36,9 @@ ANSINEW = 'ansinew'
 SPRING_HARDNESS = '4'
 
 # LANGUAGE PACKAGES
-FRANCAIS = 'frenchb'
-US_ENGLISH = 'american'
-UK_ENGLISH = 'british'
+FRANCAIS = 'french'
+US_ENGLISH = 'english'
+UK_ENGLISH = 'english'
 
 # MATCHES BETWEEN LANGUAGE CODE ('fr', 'en' etc.)
 # AND RELATED LATEX PACKAGE NAMES:
@@ -48,6 +48,10 @@ LANGUAGE_PACKAGE_NAME = {'fr': FRANCAIS,
                          'en_US' : US_ENGLISH,
                          'en_GB' : UK_ENGLISH
                         }
+
+LANGUAGE_OPTIONS = {'en_US' : {'variant': 'american'},
+                    'en_GB' : {'variant': 'british'}
+                    }
 
 # TEXT SIZES
 TEXT_SIZES = ['\\tiny', '\\scriptsize', '\\footnotesize', '\\small',
