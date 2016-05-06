@@ -65,9 +65,6 @@ class LaTeX(Structure.Structure):
         self.text_sizes = latex.TEXT_SIZES
         self.font_size_offset = 0
         self.create_pic_files = create_pic_files
-        self.encoding = CONFIG[latex.FORMAT]["ENCODING"]\
-                        if "ENCODING" in CONFIG[latex.FORMAT] \
-                        else latex.DEFAULT_ENCODING
         self.language_code = language
         self.language = latex.LANGUAGE_PACKAGE_NAME[language]
         self.markup = latex.MARKUP
