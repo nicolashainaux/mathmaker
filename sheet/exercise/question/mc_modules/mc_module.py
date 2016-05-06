@@ -174,6 +174,7 @@ class structure(object):
                                  read_name_clockwise=True)
             self.square.set_lengths([Value(nb1, unit=self.unit_length)])
             self.square.setup_labels([False, False, True, False])
+            self.square.set_marks(random.choice(["simple", "double", "triple"]))
 
         elif arg == 'mini_problem_wording':
             self.wording = _(shared.mini_problems_wordings_source\
