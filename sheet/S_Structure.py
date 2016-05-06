@@ -491,7 +491,7 @@ class S_Structure(object):
     #   @brief Writes to the output the title of the sheet to be generated
     def sheet_title_to_str(self):
         result = ""
-        result += self.machine.write_set_font_size_to('Large')
+        result += self.machine.write_set_font_size_to('large')
         result += self.machine.write(self.title, emphasize='bold')
         if self.subtitle != "":
             result += self.machine.write_new_line()
