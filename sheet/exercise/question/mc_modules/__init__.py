@@ -34,6 +34,6 @@ from . import vocabulary_simple_part_of_a_number
 from . import vocabulary_simple_multiple_of_a_number
 from . import vocabulary_multi, vocabulary_divi
 from . import vocabulary_addi, vocabulary_subtr
-from . import area_rectangle
+from . import area_rectangle, area_square
 from . import perimeter_rectangle, perimeter_square
 from . import rectangle_length_or_width
