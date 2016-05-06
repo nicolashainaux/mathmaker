@@ -55,6 +55,7 @@ and a width of {nb2} {length_unit}. What is its length? |hint:length_unit|")
                                  if self.subcontext == 'l'\
                                  else (self.rectangle.length, \
                                       self.rectangle.width)
+            self.result = self.nb3
             wordings = { 'w': _("What is the width of a rectangle whose \
 perimeter is {nb1} {length_unit} and length is {nb2} {length_unit}? \
 |hint:length_unit|"),
@@ -86,14 +87,5 @@ perimeter is {nb1} {length_unit} and width is {nb2} {length_unit}? \
             return self.wording.format(**self.wording_format)
 
     def a(self, M, **options):
-        result_str = ""
-        if self.context == "from_area":
-            result_str = self.result_str
-        elif self.context == "from_perimeter":
-            result_str = self.nb3.into_str(force_expression_begins=True)
-
-        if hasattr(self, 'hint'):
-            return Value(result_str, unit=self.hint)\
-                   .into_str(display_SI_unit=True)
-        else:
-            return M.write_math_style2(result_str)
+        v = Value(self.result, unit=self.hint).into_str(display_SI_unit=True)
+        return M.write_math_style2(v)
