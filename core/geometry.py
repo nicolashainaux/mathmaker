@@ -542,7 +542,7 @@ class Rectangle(Polygon):
     #               defaulting to 'any' if sketch or 'no' if not a sketch)
     def __init__(self, arg, **options):
         if isinstance(arg, Rectangle):
-            Polygon.__init__((tuple(arg.points)))
+            Polygon.__init__(self, (tuple(arg.points)))
         elif isinstance(arg, list):
             if isinstance(arg[0], Point)\
                 and is_.a_number(arg[1])\
@@ -677,15 +677,15 @@ class Square(Polygon):
     #               defaulting to 'any' if sketch or 'no' if not a sketch)
     def __init__(self, arg, **options):
         if isinstance(arg, Square):
-            Polygon.__init__((tuple(arg.points)))
+            Polygon.__init__((self, tuple(arg.points)))
         elif isinstance(arg, list):
             if isinstance(arg[0], Point)\
                 and is_.a_number(arg[1])\
                 and all(isinstance(arg[i], str) for i in [2, 3, 4]):
             #___
                 length = arg[1]
-                Rectangle.__init__([arg[0], arg[1], arg[1], arg[2],
-                                    arg[3], arg[4]])
+                Rectangle.__init__(self, [arg[0], arg[1], arg[1], arg[2],
+                                    arg[3], arg[4]], **options)
         else:
             raise ValueError("Expected argument is:"\
                              "Square, or [Point, length, str1, str2, str3]")
@@ -744,8 +744,8 @@ class Square(Polygon):
             raise ValueError("A list of length " + str(len(lengths_list)) + " "\
                              "was given, whereas a list of length 1 "\
                              "was expected.")
-        Polygon.set_lengths([lengths_list[0], lengths_list[0],
-                             lengths_list[0], lengths_list[0]])
+        Polygon.set_lengths(self, [lengths_list[0], lengths_list[0],
+                                   lengths_list[0], lengths_list[0]])
 
 
 
