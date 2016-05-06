@@ -45,7 +45,8 @@ XML_SHEETS = { 'tables2_9': DM + L11_1 + "tables2_9.xml",
                'multi_divi_10_100_1000': DM + L11_2 \
                                           + "multi_divi_10_100_1000.xml",
                'rectangles': DM + L11_2 + "rectangles.xml",
-               'test_11_2': DM + L11_2 + "test_11_2.xml"
+               'test_11_2': DM + L11_2 + "test_11_2.xml",
+               'polygons_perimeters': DM + L11_2 + "polygons_perimeters.xml"
                }
 
 CATALOG = { 'mental_calculation': exercise.X_MentalCalculation,

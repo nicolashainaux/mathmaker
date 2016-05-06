@@ -27,7 +27,7 @@ from decimal import Decimal
 from core.root_calculus import Unit, Value
 from core.base_calculus import Product, Quotient, Item
 from core.base_geometry import Point
-from core.geometry import Rectangle
+from core.geometry import Rectangle, Square
 from lib import error
 from lib.common import shared
 from lib.common.cst import COMMON_LENGTH_UNITS
@@ -149,6 +149,31 @@ class structure(object):
                                         read_name_clockwise=True)
             self.rectangle.set_lengths([l, w])
             self.rectangle.setup_labels([False, False, True, True])
+
+        elif arg == "square":
+            if hasattr(self, 'nb1'):
+                nb1 = self.nb1
+            elif 'nb' in options:
+                nb1 = options['nb'][0]
+            else:
+                raise error.ImpossibleAction("Setup a square if no side's "\
+                                             "length have been provided "\
+                                             "yet.")
+            if not hasattr(self, 'unit_length') \
+            or not hasattr(self, 'unit_area'):
+                self.setup(self, "units", **options)
+
+            square_name = "DCBA"
+            if self.picture:
+                square_name = next(shared.four_letters_words_source)
+            self.square = Square([Point([square_name[3], (0,0)]),
+                                 2,
+                                 square_name[2],
+                                 square_name[1],
+                                 square_name[0]],
+                                 read_name_clockwise=True)
+            self.square.set_lengths([Value(nb1, unit=self.unit_length)])
+            self.square.setup_labels([False, False, True, False])
 
         elif arg == 'mini_problem_wording':
             self.wording = _(shared.mini_problems_wordings_source\

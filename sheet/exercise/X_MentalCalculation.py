@@ -57,7 +57,9 @@ X_LAYOUTS = {'default':
 MIN_ROW_HEIGHT = 0.8
 
 SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),
-                              ("rectangle", "perimeter")}
+                              ("rectangle", "perimeter"),
+                              ("square", "area"),
+                              ("square", "perimeter")}
 
 KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE = {
 ('divi', 'direct', 'area_width_length_rectangle'): \
