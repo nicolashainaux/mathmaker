@@ -22,7 +22,7 @@
 
 import os
 
-from core.base_calculus import *
+from core.base_calculus import Sum
 from core.root_calculus import Value
 from . import mc_module
 from lib.tools.wordings_handling import post_process
@@ -39,8 +39,7 @@ class sub_object(mc_module.structure):
         self.nb1, self.nb2 = max(self.nb1, self.nb2), min(self.nb1, self.nb2)
         the_diff = Sum([self.nb1, -self.nb2])
         self.diff_str = the_diff.into_str(force_expression_begins=True)
-        self.result_str = Item(the_diff.evaluate())\
-                          .into_str(force_expression_begins=True)
+        self.result = the_diff.evaluate()
 
         if self.context == 'mini_problem':
             super().setup(M, "mini_problem_wording",
@@ -55,9 +54,10 @@ class sub_object(mc_module.structure):
                                 math_expr=M.write_math_style2(self.sum_str))
 
     def a(self, M, **options):
+        v = None
         if hasattr(self, 'hint'):
-            v = Value(self.result_str, unit=self.hint)\
+            v = Value(self.result, unit=self.hint)\
                 .into_str(display_SI_unit=True)
-            return M.write_math_style2(v)
         else:
-            return M.write_math_style2(self.result_str)
+            v = Value(self.result).into_str()
+        return M.write_math_style2(v)
