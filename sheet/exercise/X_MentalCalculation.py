@@ -504,7 +504,8 @@ class X_MentalCalculation(X_Structure):
                 else [self.questions_list[i].to_str('hint') \
                                                     for i in range(self.q_nb)]
 
-            n = [ str(i + 1) + "." for i in range(self.q_nb)]
+            n = [ M.write(str(i + 1) + ".", emphasize='bold') \
+                  for i in range(self.q_nb)]
 
             content = [elt for triplet in zip(n, q, a) for elt in triplet]
 
