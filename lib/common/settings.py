@@ -38,6 +38,7 @@ class config_object(object):
     def __init__(self):
         self.LANGUAGE = CONFIG["LOCALES"]["LANGUAGE"]
         self.ENCODING = CONFIG["LOCALES"]["ENCODING"]
+        self.FONT = CONFIG["LATEX"]["FONT"]
         self.CURRENCY = CONFIG["LOCALES"]["CURRENCY"]
         self.MARKUP = CONFIG['MARKUP']['USE']
 

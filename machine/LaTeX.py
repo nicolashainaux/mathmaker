@@ -162,6 +162,9 @@ exercises counter (which is useful when begining to write the answers sheet)")\
         result += " " + "\n"
         result += r"\usetikzlibrary{calc}" + "\n"
         result += r"\epstopdfsetup{outdir=./}" + "\n"
+        if config.FONT != "":
+            result += r"\setmainfont{" + config.FONT + "}" + "\n"
+
 
         if self.redirect_output_to_str:
             return result
