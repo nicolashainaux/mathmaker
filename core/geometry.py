@@ -510,6 +510,13 @@ class Polygon(Drawable):
             result += "  {n} {a} deg\n".format(n=v.name,
                                                a=str(names_angles_list[i]))
 
+        for s in self.side:
+            if s.mark != "":
+                result += "  {p1}.{p2} {m}\n"\
+                          .format(p1=s.points[0].name,
+                                  p2=s.points[1].name,
+                                  m=s.mark)
+
         return result + "\nend"
 
 
@@ -746,6 +753,18 @@ class Square(Polygon):
                              "was expected.")
         Polygon.set_lengths(self, [lengths_list[0], lengths_list[0],
                                    lengths_list[0], lengths_list[0]])
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief  Sets marks on the Square's sides.
+    #   @param  arg The mark to be used.
+    def set_marks(self, arg):
+        for s in self.side:
+            s.mark = arg
 
 
 

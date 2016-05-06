@@ -54,7 +54,7 @@ except:
 # produce buggy results sometimes from euktopst
 AVAILABLE_ANGLE_MARKS = ['', 'simple', 'double', 'triple', 'right',
                          'forth', 'back', 'dotted']
-AVAILABLE_SEGMENT_MARKS = []
+AVAILABLE_SEGMENT_MARKS = ['', 'simple', 'double', 'triple', 'cross']
 
 # GLOBAL
 #expression_begins = True
