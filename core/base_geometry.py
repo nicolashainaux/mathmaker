@@ -437,7 +437,8 @@ class Segment(Drawable):
     @length.setter
     def length(self, arg):
         if not isinstance(arg, Value):
-            raise error.WrongArgument('Value', str(type(arg)))
+            raise ValueError('Expected a Value, got ' + str(type(arg)) + " "\
+                             'instead.')
         if not arg.is_numeric():
             raise error.WrongArgument('numeric Value',
                                       'a Value but not numeric, it contains ' \
