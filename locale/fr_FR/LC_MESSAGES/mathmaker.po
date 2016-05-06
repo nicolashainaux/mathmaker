@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-05-04 17:39+0100\n"
+"PO-Revision-Date: 2016-05-06 13:43+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -62,11 +62,11 @@ msgstr "est positif."
 msgid "Polygon_of_{n}_sides"
 msgstr "Polygone_à_{n}_côtés"
 
-#: core/geometry.py:584
+#: core/geometry.py:591
 msgid "Rectangle"
 msgstr "Rectangle"
 
-#: core/geometry.py:891
+#: core/geometry.py:1021
 msgid "RightTriangle"
 msgstr "TriangleRectangle"
 
@@ -119,21 +119,21 @@ msgstr "Pour dessiner"
 msgid "Page layout "
 msgstr "Mise en page générale"
 
-#: machine/LaTeX.py:153
+#: machine/LaTeX.py:154
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 "Si vous souhaitez inclure une image, utilisez s'il vous plaît cette "
 "commande :"
 
-#: machine/LaTeX.py:156
+#: machine/LaTeX.py:157
 msgid "file_name"
 msgstr "nom_du_fichier"
 
-#: machine/LaTeX.py:159
+#: machine/LaTeX.py:160
 msgid "Exercises counter"
 msgstr "Compteur d'exercices"
 
-#: machine/LaTeX.py:161
+#: machine/LaTeX.py:162
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
@@ -142,11 +142,11 @@ msgstr ""
 "Définition de la commande {cmd_name}, qui va insérer le mot {word} en gras, "
 "accompagné de son numéro et qui va incrémenter automatiquement le compteur"
 
-#: machine/LaTeX.py:164 machine/LaTeX.py:168
+#: machine/LaTeX.py:165 machine/LaTeX.py:169
 msgid "Exercise"
 msgstr "Exercice"
 
-#: machine/LaTeX.py:171
+#: machine/LaTeX.py:172
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -342,11 +342,11 @@ msgstr "Factoriser :"
 msgid "Factorise, if possible:"
 msgstr "Factoriser, si possible :"
 
-#: sheet/exercise/X_MentalCalculation.py:490
+#: sheet/exercise/X_MentalCalculation.py:492
 msgid "Question:"
 msgstr "Question :"
 
-#: sheet/exercise/X_MentalCalculation.py:492
+#: sheet/exercise/X_MentalCalculation.py:494
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -535,10 +535,10 @@ msgstr "Combien vaut le produit de {n1} par {n2} ?"
 msgid "How much is the difference between {n1} and {n2}?"
 msgstr "Combien vaut la différence entre {n1} et {n2} ?"
 
-#: sheet/exercise/question/mc_modules/addi_direct.py:50
+#: sheet/exercise/question/mc_modules/addi_direct.py:51
 #: sheet/exercise/question/mc_modules/divi_direct.py:47
-#: sheet/exercise/question/mc_modules/multi_direct.py:50
-#: sheet/exercise/question/mc_modules/substr_direct.py:53
+#: sheet/exercise/question/mc_modules/multi_direct.py:51
+#: sheet/exercise/question/mc_modules/substr_direct.py:54
 #, python-brace-format
 msgid "Calculate: {math_expr}"
 msgstr "Calculer : {math_expr}"
@@ -609,6 +609,7 @@ msgstr "Multiplications à l'envers"
 #: sheet/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
 #: sheet/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
 #: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: sheet/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
 #: sheet/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
 #: sheet/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
 #: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
@@ -804,11 +805,12 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. C'est {nb2} fois plus que nous. Combien de "
 "moutons avons-nous ?"
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:37
+#: sheet/exercise/question/mc_modules/area_rectangle.py:38
 msgid "Area of this rectangle? |hint:area_unit|"
 msgstr "Aire de ce rectangle ? |hint:area_unit|"
 
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:37
+#: sheet/exercise/question/mc_modules/perimeter_irregular_quadrilateral.py:38
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:38
 msgid "Perimeter of this rectangle? |hint:length_unit|"
 msgstr "Périmètre de ce rectangle ? |hint:length_unit|"
 
@@ -1365,7 +1367,7 @@ msgstr ""
 "{feminine_name} a acheté {nb1} stylos à {nb2} {currency_unit}. Combien a-t-"
 "elle payé ?  |hint:currency_unit|"
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:41
+#: sheet/exercise/question/mc_modules/area_rectangle.py:42
 #, python-brace-format
 msgid ""
 "Area of a rectangle whose width is {nb1} {length_unit} and length is {nb2} "
@@ -1374,7 +1376,8 @@ msgstr ""
 "Aire d'un rectangle de largeur {nb1} {length_unit} et de longueur {nb2} "
 "{length_unit}? |hint:area_unit|"
 
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:41
+#: sheet/exercise/question/mc_modules/perimeter_irregular_quadrilateral.py:42
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:42
 #, python-brace-format
 msgid ""
 "Perimeter of a rectangle whose width is {nb1} {length_unit} and length is "
@@ -1401,7 +1404,7 @@ msgstr ""
 "Un rectangle a une aire de {nb1} {area_unit} et une largeur de {nb2} "
 "{length_unit}. Quelle est sa longueur ? |hint:length_unit|"
 
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:57
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:58
 #, python-brace-format
 msgid ""
 "What is the width of a rectangle whose perimeter is {nb1} {length_unit} and "
@@ -1410,7 +1413,7 @@ msgstr ""
 "Largeur d'un rectangle de périmètre {nb1} {length_unit} et de longueur {nb2} "
 "{length_unit} ? |hint:length_unit|"
 
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:60
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:61
 #, python-brace-format
 msgid ""
 "What is the length of a rectangle whose perimeter is {nb1} {length_unit} and "
@@ -1422,6 +1425,25 @@ msgstr ""
 #: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
 msgid "Mental calculation: test 2"
 msgstr "Calcul mental : test 2"
+
+#: core/geometry.py:703
+msgid "Square"
+msgstr "Carré"
+
+#: sheet/exercise/question/mc_modules/perimeter_square.py:38
+msgid "Perimeter of this square? |hint:length_unit|"
+msgstr "Périmètre de ce carré ? |hint:length_unit|"
+
+#: sheet/exercise/question/mc_modules/perimeter_square.py:42
+#, python-brace-format
+msgid ""
+"Perimeter of a square whose side's length is {nb1} {length_unit}? |hint:"
+"length_unit|"
+msgstr "Périmètre d'un carré de côté {nb1} {length_unit} ? |hint:length_unit|"
+
+#: sheet/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
+msgid "Mental calculation: perimeters of simple polygons"
+msgstr "Calcul mental : périmètres de polygones simples"
 
 #~ msgid "Test 2"
 #~ msgstr "Test 2"

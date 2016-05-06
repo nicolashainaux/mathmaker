@@ -63,11 +63,11 @@ msgstr ""
 msgid "Polygon_of_{n}_sides"
 msgstr ""
 
-#: core/geometry.py:584
+#: core/geometry.py:591
 msgid "Rectangle"
 msgstr ""
 
-#: core/geometry.py:891
+#: core/geometry.py:1021
 msgid "RightTriangle"
 msgstr ""
 
@@ -120,30 +120,30 @@ msgstr ""
 msgid "Page layout "
 msgstr ""
 
-#: machine/LaTeX.py:153
+#: machine/LaTeX.py:154
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 
-#: machine/LaTeX.py:156
+#: machine/LaTeX.py:157
 msgid "file_name"
 msgstr ""
 
-#: machine/LaTeX.py:159
+#: machine/LaTeX.py:160
 msgid "Exercises counter"
 msgstr ""
 
-#: machine/LaTeX.py:161
+#: machine/LaTeX.py:162
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
 "bold, with its number and automatically increments the counter"
 msgstr ""
 
-#: machine/LaTeX.py:164 machine/LaTeX.py:168
+#: machine/LaTeX.py:165 machine/LaTeX.py:169
 msgid "Exercise"
 msgstr ""
 
-#: machine/LaTeX.py:171
+#: machine/LaTeX.py:172
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -329,11 +329,11 @@ msgstr ""
 msgid "Factorise, if possible:"
 msgstr ""
 
-#: sheet/exercise/X_MentalCalculation.py:490
+#: sheet/exercise/X_MentalCalculation.py:492
 msgid "Question:"
 msgstr ""
 
-#: sheet/exercise/X_MentalCalculation.py:492
+#: sheet/exercise/X_MentalCalculation.py:494
 msgid "Answer:"
 msgstr ""
 
@@ -517,10 +517,10 @@ msgstr ""
 msgid "How much is the difference between {n1} and {n2}?"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/addi_direct.py:50
+#: sheet/exercise/question/mc_modules/addi_direct.py:51
 #: sheet/exercise/question/mc_modules/divi_direct.py:47
-#: sheet/exercise/question/mc_modules/multi_direct.py:50
-#: sheet/exercise/question/mc_modules/substr_direct.py:53
+#: sheet/exercise/question/mc_modules/multi_direct.py:51
+#: sheet/exercise/question/mc_modules/substr_direct.py:54
 #, python-brace-format
 msgid "Calculate: {math_expr}"
 msgstr ""
@@ -590,6 +590,7 @@ msgstr ""
 #: sheet/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
 #: sheet/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
 #: sheet/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: sheet/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
 #: sheet/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
 #: sheet/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
 #: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
@@ -760,11 +761,12 @@ msgid ""
 "sheep do we have?"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:37
+#: sheet/exercise/question/mc_modules/area_rectangle.py:38
 msgid "Area of this rectangle? |hint:area_unit|"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:37
+#: sheet/exercise/question/mc_modules/perimeter_irregular_quadrilateral.py:38
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:38
 msgid "Perimeter of this rectangle? |hint:length_unit|"
 msgstr ""
 
@@ -1265,14 +1267,15 @@ msgid ""
 " pay? |hint:currency_unit|"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/area_rectangle.py:41
+#: sheet/exercise/question/mc_modules/area_rectangle.py:42
 #, python-brace-format
 msgid ""
 "Area of a rectangle whose width is {nb1} {length_unit} and length is {nb2} "
 "{length_unit}? |hint:area_unit|"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:41
+#: sheet/exercise/question/mc_modules/perimeter_irregular_quadrilateral.py:42
+#: sheet/exercise/question/mc_modules/perimeter_rectangle.py:42
 #, python-brace-format
 msgid ""
 "Perimeter of a rectangle whose width is {nb1} {length_unit} and length is "
@@ -1293,14 +1296,14 @@ msgid ""
 "{length_unit}. What is its length? |hint:length_unit|"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:57
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:58
 #, python-brace-format
 msgid ""
 "What is the width of a rectangle whose perimeter is {nb1} {length_unit} and "
 "length is {nb2} {length_unit}? |hint:length_unit|"
 msgstr ""
 
-#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:60
+#: sheet/exercise/question/mc_modules/rectangle_length_or_width.py:61
 #, python-brace-format
 msgid ""
 "What is the length of a rectangle whose perimeter is {nb1} {length_unit} and"
@@ -1309,4 +1312,23 @@ msgstr ""
 
 #: sheet/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
 msgid "Mental calculation: test 2"
+msgstr ""
+
+#: core/geometry.py:703
+msgid "Square"
+msgstr ""
+
+#: sheet/exercise/question/mc_modules/perimeter_square.py:38
+msgid "Perimeter of this square? |hint:length_unit|"
+msgstr ""
+
+#: sheet/exercise/question/mc_modules/perimeter_square.py:42
+#, python-brace-format
+msgid ""
+"Perimeter of a square whose side's length is {nb1} {length_unit}? "
+"|hint:length_unit|"
+msgstr ""
+
+#: sheet/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
+msgid "Mental calculation: perimeters of simple polygons"
 msgstr ""
