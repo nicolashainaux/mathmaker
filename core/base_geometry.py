@@ -305,7 +305,7 @@ class Segment(Drawable):
                            )
             self._label = arg.label
 
-        self._mark = None
+        self._mark = ""
 
         self._name = "[" + self.points[0].name + self.points[1].name + "]"
 
