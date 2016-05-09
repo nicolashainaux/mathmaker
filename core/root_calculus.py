@@ -709,9 +709,9 @@ class Value(Signed):
                 return "\SI{" + locale.str(self.raw_value) + "}"\
                        "{" + unit_str + "}"
             else:
-                return MARKUP['open_num'] \
+                return MARKUP['open_text_in_maths'] \
                        + locale.str(self.raw_value) \
-                       + MARKUP['close_num']
+                       + MARKUP['close_text_in_maths']
 
         elif self.raw_value in ["", " "] and 'display_SI_unit' in options \
             and options['display_SI_unit']:
