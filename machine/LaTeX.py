@@ -97,7 +97,30 @@ is {software_license}.").format(software_ref=software.NAME_PRINTABLE,
 
         result += "\documentclass[a4paper,fleqn,12pt]{article}" + "\n"
         result += r"\usepackage{fontspec}" + "\n"
+        if config.FONT != "":
+            result += r"\setmainfont{" + config.FONT + "}" + "\n"
+            result += r"\newfontfamily\configfont{" + config.FONT + "}\n"
         result += r"\usepackage{polyglossia}" + "\n"
+        result += "\setmainlanguage{" + self.language + "}" + "\n"
+        if self.language_code in latex.LANGUAGE_OPTIONS:
+            lod = latex.LANGUAGE_OPTIONS[self.language_code]
+            lang_options = ",".join([ str(o) + "=" + str(lod[o]) \
+                                      for o in lod ])
+            result += "".join(["\setkeys{", self.language, "}"\
+                                       "{", lang_options, "}\n"])
+        result += "% " + _("To display units correctly") + "\n"
+        result += r"\usepackage[detect-all]{siunitx}" + "\n"
+        sisetup_dict = {}
+        if settings.language == "fr_FR":
+            sisetup_dict.update({'locale': 'FR'})
+        if config.FONT  != "":
+            sisetup_dict.update({'text-rm': r'\configfont'})
+        if len(sisetup_dict):
+            sisetup_str = ", ".join([k + " = " + sisetup_dict[k] \
+                                     for k in sisetup_dict])
+            result += "\AtBeginDocument{\n"
+            result += "\sisetup{" + sisetup_str + "}\n"
+            result += "}\n"
         result += "% " + _("To strike out numbers ") + "\n"
         result += r"\usepackage{cancel}" + "\n"
         result += "% " + _("To use the margin definition command") + "\n"
@@ -119,8 +142,6 @@ is {software_license}.").format(software_ref=software.NAME_PRINTABLE,
         result += "% " + _("To use other mathematical symbols") + "\n"
         result += r"\usepackage{amssymb}" + "\n"
         result += r"\usepackage{amsmath}" + "\n"
-        result += "% " + _("To display units correctly") + "\n"
-        result += r"\usepackage{siunitx}" + "\n"
         result += "% " + _("To draw") + "\n"
         result += r"\usepackage{tikz}" + "\n"
         result += "% " + _("Page layout ") + "\n"
@@ -128,15 +149,6 @@ is {software_license}.").format(software_ref=software.NAME_PRINTABLE,
         result += "\setlength{\parindent}{0cm}" + "\n"
         result += r"\setlength{\arrayrulewidth}{0.02pt}" + "\n"
         result += "\pagestyle{empty}" + "\n"
-        result += "\setmainlanguage{" + self.language + "}" + "\n"
-        if self.language_code in latex.LANGUAGE_OPTIONS:
-            lod = latex.LANGUAGE_OPTIONS[self.language_code]
-            lang_options = ",".join([ str(o) + "=" + str(lod[o]) \
-                                      for o in lod ])
-            result += "".join(["\setkeys{", self.language, "}"\
-                                       "{", lang_options, "}\n"])
-        if settings.language == "fr_FR":
-            result += "\sisetup{locale = FR}" + "\n"
         result += " " + "\n"
         result += r"\usepackage{epstopdf}" + "\n"
         result += "%%% " + _("If you wish to include a picture, \
@@ -164,9 +176,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
         result += " " + "\n"
         result += r"\usetikzlibrary{calc}" + "\n"
         result += r"\epstopdfsetup{outdir=./}" + "\n"
-        if config.FONT != "":
-            result += r"\setmainfont{" + config.FONT + "}" + "\n"
-
+        result += r"\usepackage{lxfonts}" + "\n"
 
         if self.redirect_output_to_str:
             return result
@@ -182,7 +192,9 @@ exercises counter (which is useful when begining to write the answers sheet)")\
     ##
     #   @brief Writes to the output the command to begin the document
     def write_document_begins(self):
-        output_str = "\\begin{document}" + "\n"
+        output_str = "\\begin{document}\n"
+        if config.FONT != "":
+            output_str += "\\fontspec{" + config.FONT + "}\n"
         if self.redirect_output_to_str:
             return output_str
         else:
