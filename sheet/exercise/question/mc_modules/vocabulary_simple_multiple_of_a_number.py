@@ -35,7 +35,7 @@ class sub_object(object):
                                         into_str(force_expression_begins=True)
 
     def q(self, M, **options):
-        return _(self.question).format(number=M.write_math_style2(str(self.m)))
+        return _(self.question).format(number=self.m)
 
     def a(self, M, **options):
-        return M.write_math_style2(self.p)
+        return str(self.p)

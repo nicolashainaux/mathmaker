@@ -88,4 +88,4 @@ perimeter is {nb1} {length_unit} and width is {nb2} {length_unit}? \
 
     def a(self, M, **options):
         v = Value(self.result, unit=self.hint).into_str(display_SI_unit=True)
-        return M.write_math_style2(v)
+        return v

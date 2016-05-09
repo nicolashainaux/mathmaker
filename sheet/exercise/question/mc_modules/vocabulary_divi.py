@@ -41,4 +41,4 @@ class sub_object(object):
                                                                     n1=self.n1)
 
     def a(self, M, **options):
-        return M.write_math_style2(str(self.n2))
+        return str(self.n2)

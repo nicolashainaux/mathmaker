@@ -57,4 +57,4 @@ class sub_object(mc_module.structure):
                 .into_str(display_SI_unit=True)
         else:
             v = Value(self.result).into_str()
-        return M.write_math_style2(v)
+        return v

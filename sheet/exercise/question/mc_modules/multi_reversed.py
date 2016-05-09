@@ -20,21 +20,23 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from core.base_calculus import *
+import random
+
+from core.root_calculus import Value
+from core.base_calculus import Product
 
 
 class sub_object(object):
 
     def __init__(self, M, numbers_to_use, **options):
         nb_list = list(numbers_to_use)
-        self.nb1 = randomly.pop(nb_list)
-        self.nb2 = randomly.pop(nb_list)
+        self.nb1, self.nb2 = random.sample(nb_list, 2)
         self.product = Product([self.nb1, self.nb2]).evaluate()
 
     def q(self, M, **options):
         return _("In the multiplication tables (from 2 to 9), "\
                 +"which product is equal to:") + " "\
-               + M.write_math_style2(str(self.product)) \
+               + Value(self.product).into_str() \
                + " ?"
 
     def a(self, M, **options):

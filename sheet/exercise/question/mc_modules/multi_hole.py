@@ -31,7 +31,7 @@ class sub_object(object):
         hole = Item(Value('...'))
         self.hidden_one = None
         visible_one = None
-        self.product = Product([nb_list[0], nb_list[1]]).evaluate()
+        self.product = Value(Product([nb_list[0], nb_list[1]]).evaluate())
 
         if isinstance(nb_list[1], Fraction):
             self.hidden_one = nb_list[1]
@@ -54,7 +54,7 @@ class sub_object(object):
                + M.write_math_style2(\
                self.holed_product.into_str(force_expression_begins=True)) \
                + " = " \
-               + M.write_math_style2(str(self.product)) \
+               + self.product.into_str() \
                + " ?"
 
     def a(self, M, **options):

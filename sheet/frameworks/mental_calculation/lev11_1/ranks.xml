@@ -6,7 +6,7 @@
 
 	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
 	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
-	<layout type="mental">
+	<layout type="mental" font_size_offset="-1">
 		<exc>
 			<line nb="None">
 				<exercises>all</exercises>
