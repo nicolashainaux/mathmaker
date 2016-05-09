@@ -709,9 +709,9 @@ class Value(Signed):
                 return "\SI{" + locale.str(self.raw_value) + "}"\
                        "{" + unit_str + "}"
             else:
-                return MARKUP['open_text_in_maths'] \
+                return MARKUP['open_num'] \
                        + locale.str(self.raw_value) \
-                       + MARKUP['close_text_in_maths']
+                       + MARKUP['close_num']
 
         elif self.raw_value in ["", " "] and 'display_SI_unit' in options \
             and options['display_SI_unit']:
@@ -724,8 +724,7 @@ class Value(Signed):
 
         else: # self.is_literal()
             if len(self.get_first_letter()) >= 2 \
-                and not (self.get_first_letter()[0] == "-" \
-                        or self.get_first_letter()[0] == "+"):
+                and not self.get_first_letter()[0] in ["-", "+"]:
             #___
                 return MARKUP['open_text_in_maths'] \
                        + str(self.raw_value) \
