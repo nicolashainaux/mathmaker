@@ -22,26 +22,13 @@
 
 # This module will add a question about the sum of two numbers
 
-from core.base_calculus import *
-from lib.common.cst import *
+from core.base_calculus import Sum
+from . import vocabulary_questions
 
-class sub_object(object):
+class sub_object(vocabulary_questions.structure):
 
     def __init__(self, M, numbers_to_use, **options):
-        nb_list = list(numbers_to_use)
-        n1 = randomly.pop(nb_list)
-        n2 = randomly.pop(nb_list)
-        self.n1 = Item(n1).into_str(force_expression_begins=True)
-        self.n2 = Item(n2).into_str(force_expression_begins=True)
-        m = -min(n1, n2)
-        M = max(n1, n2)
-        self.d = Item(Sum([M, m]).evaluate()).\
-                                        into_str(force_expression_begins=True)
+        super().__init__(M, numbers_to_use,
+                         result_fct=lambda x,y: Sum([max(x, y), -min(x, y)]),
+             wording=_("How much is the difference between {nb1} and {nb2}?"))
 
-    def q(self, M, **options):
-        return _("How much is the difference between {n1} and {n2}?")\
-                                                            .format(n1=self.n1,
-                                                                    n2=self.n2)
-
-    def a(self, M, **options):
-        return str(self.d)

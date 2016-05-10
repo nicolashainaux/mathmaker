@@ -105,14 +105,6 @@ RANKS_HOW_MANY = { BILLIONS: "How many billions",
                    THOUSANDTHS: "How many thousandths"
                   }
 
-PARTS_QUESTIONS = { 2: "What is the half of {number}?",
-                    3: "What is the third of {number}?",
-                    4: "What is the quarter of {number}?"}
-
-MULTIPLE_QUESTIONS = { 2: "What is the double of {number}?",
-                       3: "What is the triple of {number}?",
-                       4: "What is the quadruple of {number}?"}
-
 LENGTH_UNITS = ['km', 'hm', 'dam', 'm', 'dm', 'cm', 'mm', 'µm', 'nm', 'pm']
 CAPACITY_UNITS = ['kL', 'hL', 'daL', 'L', 'dL', 'cL', 'mL', 'µL', 'nL', 'pL']
 MASS_UNITS = ['kg', 'hg', 'dag', 'g', 'dg', 'cg', 'mg', 'µg', 'ng', 'pg']

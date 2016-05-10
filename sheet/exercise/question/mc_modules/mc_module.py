@@ -42,7 +42,7 @@ class structure(object):
         else:
             return ""
 
-    def setup(self, M, arg, **options):
+    def setup(self, M, arg, shuffle_nbs=True, **options):
         if arg == "minimal":
             if 'variant' in options and options['variant'] == 'decimal':
                 options['variant'] = random.choice(['decimal1', 'decimal2'])
@@ -75,7 +75,8 @@ class structure(object):
 
         elif arg == "numbers":
             nb_list = list(options['nb'])
-            random.shuffle(nb_list)
+            if shuffle_nbs:
+                random.shuffle(nb_list)
             for i in range(len(nb_list)):
                 setattr(self, 'nb' + str(i+1), nb_list[i])
             self.nb_nb = len(nb_list)

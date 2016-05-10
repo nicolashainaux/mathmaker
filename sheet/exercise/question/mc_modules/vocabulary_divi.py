@@ -22,23 +22,14 @@
 
 # This module will add a question about the quotient of two numbers
 
-from core.base_calculus import *
-from lib.common.cst import *
+from core.base_calculus import Product
+from . import vocabulary_questions
 
-class sub_object(object):
+class sub_object(vocabulary_questions.structure):
 
     def __init__(self, M, numbers_to_use, **options):
-        nb_list = list(numbers_to_use)
-        n1 = randomly.pop(nb_list)
-        n2 = randomly.pop(nb_list)
-        self.n1 = Item(n1).into_str(force_expression_begins=True)
-        self.n2 = Item(n2).into_str(force_expression_begins=True)
-        self.p = Item(Product([n1, n2]).evaluate()).\
-                                        into_str(force_expression_begins=True)
+        super().__init__(M, numbers_to_use,
+                         result_fct=lambda x,y: Product([x, y]),
+                    wording=_("How much is the quotient of {nb1} by {nb2}?"),
+                         permute_nb1_nb2_result=True)
 
-    def q(self, M, **options):
-        return _("How much is the quotient of {p} by {n1}?").format(p=self.p,
-                                                                    n1=self.n1)
-
-    def a(self, M, **options):
-        return str(self.n2)

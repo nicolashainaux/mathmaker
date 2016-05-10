@@ -22,20 +22,19 @@
 
 # This module will add a question about the half|third|quarter of a number
 
-from core.base_calculus import *
-from lib.common.cst import *
+from core.base_calculus import Product
+from . import vocabulary_questions
 
-class sub_object(object):
+class sub_object(vocabulary_questions.structure):
 
     def __init__(self, M, numbers_to_use, **options):
-        n = numbers_to_use[0]
-        self.m = numbers_to_use[1]
-        self.question = PARTS_QUESTIONS[n]
-        self.p = Item(Product([n, self.m]).evaluate()).\
-                                        into_str(force_expression_begins=True)
+        PARTS_QUESTIONS = { 2: _("What is the half of {nb1}?"),
+                            3: _("What is the third of {nb1}?"),
+                            4: _("What is the quarter of {nb1}?")}
+        super().__init__(M, numbers_to_use,
+                         result_fct=lambda x,y: Product([x, y]),
+                         wording=PARTS_QUESTIONS[numbers_to_use[0]],
+                         shuffle_nbs=False,
+                         permute_nb1_nb2_result=True
+                         )
 
-    def q(self, M, **options):
-        return _(self.question).format(number=self.p)
-
-    def a(self, M, **options):
-        return str(self.m)
