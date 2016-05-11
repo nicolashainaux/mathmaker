@@ -59,8 +59,8 @@ TEXT_SIZES = ['\\tiny', '\\scriptsize', '\\footnotesize', '\\small',
 
 # LATEX MARKUPS' DICTIONNARY
 MARKUP = {'LaTeX': "\LaTeX",
-          'one': "1",
-          'zero': "0",
+          'one': "\\text{1}",
+          'zero': "\\text{0}",
           'space': " ",
           'small_space': "\\smallskip",
           'med_space': "\\medskip",
