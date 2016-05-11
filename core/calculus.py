@@ -973,6 +973,37 @@ class Equation(ComposedCalculable):
 
     # --------------------------------------------------------------------------
     ##
+    #   @brief Returns the name of the object
+    @property
+    def name(self):
+        if self.number == '':
+            return MARKUP['opening_bracket'] \
+                       + MARKUP['open_text_in_maths'] \
+                       + self._name \
+                       + MARKUP['close_text_in_maths'] \
+                       + MARKUP['closing_bracket'] \
+                       + MARKUP['colon'] \
+                       + MARKUP['space']
+        else:
+            return MARKUP['opening_bracket'] \
+                       + MARKUP['open_text_in_maths'] \
+                       + self._name \
+                       + MARKUP['close_text_in_maths'] \
+                       + MARKUP['opening_subscript'] \
+                       + MARKUP['open_text_in_maths'] \
+                       + str(self.number) \
+                       + MARKUP['close_text_in_maths'] \
+                       + MARKUP['closing_subscript'] \
+                       + MARKUP['closing_bracket'] \
+                       + MARKUP['colon'] \
+                       + MARKUP['space']
+
+
+
+
+
+    # --------------------------------------------------------------------------
+    ##
     #   @brief Returns the number of the Equality
     def get_number(self):
         return self._number
@@ -1083,21 +1114,7 @@ class Equation(ComposedCalculable):
         beginning = ''
 
         if 'display_name' in options:
-            if self.number == '':
-                beginning = MARKUP['opening_bracket'] \
-                           + self.name \
-                           + MARKUP['closing_bracket'] \
-                           + MARKUP['colon'] \
-                           + MARKUP['space']
-            else:
-                beginning = MARKUP['opening_bracket'] \
-                           + self.name \
-                           + MARKUP['opening_subscript'] \
-                           + str(self.number) \
-                           + MARKUP['closing_subscript'] \
-                           + MARKUP['closing_bracket'] \
-                           + MARKUP['colon'] \
-                           + MARKUP['space']
+            beginning = self.name
 
         left = self.left_hand_side.into_str(force_expression_begins=True)
 
@@ -1146,24 +1163,8 @@ class Equation(ComposedCalculable):
         result = ""
 
         if not 'dont_display_equations_name' in options:
-            if self.number == '':
-                result = MARKUP['opening_math_style2'] \
-                         + MARKUP['opening_bracket'] \
+            result = MARKUP['opening_math_style2'] \
                          + self.name \
-                         + MARKUP['closing_bracket'] \
-                         + MARKUP['colon'] \
-                         + MARKUP['space'] \
-                         + MARKUP['closing_math_style2']
-            else:
-                result = MARKUP['opening_math_style2'] \
-                         + MARKUP['opening_bracket'] \
-                         + self.name \
-                         + MARKUP['opening_subscript'] \
-                         + str(self.number) \
-                         + MARKUP['closing_subscript'] \
-                         + MARKUP['closing_bracket'] \
-                         + MARKUP['colon'] \
-                         + MARKUP['space'] \
                          + MARKUP['closing_math_style2']
 
         #result += MARKUP['newline']
