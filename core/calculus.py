@@ -195,20 +195,25 @@ class Expression(ComposedCalculable):
         if is_.an_integer(self.name):
             i = self.name
             if i < len(alphabet.UPPERCASE):
-                final_name = alphabet.UPPERCASE[i]
+                final_name = MARKUP['open_text_in_maths'] \
+                             + alphabet.UPPERCASE[i] \
+                             + MARKUP['close_text_in_maths']
             else:
                 nb_letters = len(alphabet.UPPERCASE)
-                final_name = alphabet.UPPERCASE[i -
-                                                    nb_letters
-                                                    *
-                                                    int(i/nb_letters)
-                                                ]                             \
+                final_name =  MARKUP['open_text_in_maths'] \
+                             + alphabet.UPPERCASE[\
+                                        i - nb_letters*int(i/nb_letters)] \
+                             + MARKUP['close_text_in_maths'] \
                              + MARKUP['opening_subscript']                    \
+                             + MARKUP['open_text_in_maths'] \
                              + str(int(i/nb_letters))                         \
+                             + MARKUP['close_text_in_maths'] \
                              + MARKUP['closing_subscript']
 
         elif is_.a_string(self.name):
-            final_name = self.name
+            final_name = MARKUP['open_text_in_maths'] \
+                         + self.name \
+                         + MARKUP['close_text_in_maths'] \
 
         expression_begins = True
 
