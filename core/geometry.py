@@ -430,7 +430,7 @@ class Polygon(Drawable):
                 result += "\n  "
                 result += "$\\rotatebox{"
                 result += str(rotate_box_angle)
-                result += "}{"
+                result += "}{\sffamily "
                 result += s.label.into_str(display_unit='yes',
                                            graphic_display='yes')
                 result += "}$ "
@@ -476,7 +476,7 @@ class Polygon(Drawable):
                 result += "\n  "
                 result += "$\\rotatebox{"
                 result += str(rotate_box_angle)
-                result += "}{"
+                result += "}{\sffamily "
                 result += a.label.into_str(display_unit='yes',
                                            graphic_display='yes')
                 result += "}$ "
@@ -485,31 +485,26 @@ class Polygon(Drawable):
                 result += str(scale_factor)
                 result += "\n"
 
+        names_angles_list = [Vector((a.points[0],
+                                          a.points[1]))\
+                                  .bisector_vector(Vector((a.points[2],
+                                                           a.points[1])))\
+                                  .slope \
+                             for a in self.angle]
+
+        for (i, v) in enumerate(self.vertex):
+            result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
+                      .format(n=v.name, a=str(names_angles_list[i]))
+
         result += "\nend"
         result += "\n\nlabel\n"
 
-        names_angles_list = []
-
         for a in self.angle:
-            # We add the labels of the angles
             if a.mark != "":
                 result += "  {p0}, {v}, {p2} {m}\n".format(p0=a.points[2].name,
                                                            v=a.vertex.name,
                                                            p2=a.points[0].name,
                                                            m=a.mark)
-
-            # and then we compute the angle to display the name of the vertex
-            # of each angle
-            names_angles_list += [Vector((a.points[0],
-                                          a.points[1]))\
-                                  .bisector_vector(Vector((a.points[2],
-                                                           a.points[1])))\
-                                  .slope]
-
-        for (i, v) in enumerate(self.vertex):
-            result += "  {n} {a} deg\n".format(n=v.name,
-                                               a=str(names_angles_list[i]))
-
         for s in self.side:
             if s.mark != "":
                 result += "  {p1}.{p2} {m}\n"\
