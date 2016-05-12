@@ -166,6 +166,21 @@ def get_q_kinds_from_file(file_name):
 
     return (x_kind, questions)
 
+# --------------------------------------------------------------------------
+##
+#   @brief Increases the disorder of the questions' list
+#   @param  l           The list
+#   @param  sort_key    The list's objects' attribute that will be used to
+#                       determine whether the order should be changed or not
+def increase_alternation(l, sort_key):
+    if len(l) >= 3:
+        for i in range(len(l) - 2):
+            if getattr(l[i], sort_key) == getattr(l[i+1], sort_key):
+                if getattr(l[i+2], sort_key) != getattr(l[i], sort_key):
+                    l[i+1], l[i+2] = l[i+2], l[i+1]
+
+    return l
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -344,6 +359,11 @@ class X_MentalCalculation(X_Structure):
         # Now, we generate the numbers & questions, by type of question first
         self.questions_list = []
 
+        mixed_q_list = increase_alternation(mixed_q_list, 'type')
+        mixed_q_list.reverse()
+        mixed_q_list = increase_alternation(mixed_q_list, 'type')
+        mixed_q_list.reverse()
+
         for q in mixed_q_list:
             nb_source = q.nb_source
             if nb_source in question.SOURCES_TO_UNPACK:
@@ -426,51 +446,6 @@ class X_MentalCalculation(X_Structure):
             else:
                 last_nb[nb_source] |= {nb_to_use[1]}
 
-        self.increase_questions_list_disorder(1, "kind_subkind")
-        self.increase_questions_list_disorder(-1, "kind_subkind")
-        self.increase_questions_list_disorder(1, "kind_subkind")
-        self.increase_questions_list_disorder(-1, "kind_subkind")
-        self.increase_questions_list_disorder(1, "kind_subkind")
-        self.increase_questions_list_disorder(-1, "kind_subkind")
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Increases the disorder of the questions' list
-    #   @param fwd_or_rwd is positive or negative, will tell if the pass should
-    #          go from start to end or from end to start of the list
-    #   @param sort_key is unused yet ("kind_subkind" or "kind_subkind_context")
-    def increase_questions_list_disorder(self, fwd_or_rwd, sort_key):
-        if len(self.questions_list) >= 3:
-            if fwd_or_rwd >= 0:
-                for i in range(len(self.questions_list) - 2):
-                    if self.questions_list[i].q_kind \
-                        == self.questions_list[i+1].q_kind:
-                    #___
-                        if self.questions_list[i+2].q_kind \
-                            != self.questions_list[i].q_kind:
-                        #___
-                            (self.questions_list[i+1],
-                             self.questions_list[i+2]) = \
-                                                     (self.questions_list[i+2],
-                                                      self.questions_list[i+1])
-            else:
-                for i in reversed(range(len(self.questions_list) - 2)):
-                    if self.questions_list[i+1].q_kind \
-                        == self.questions_list[i+2].q_kind:
-                    #___
-                        if self.questions_list[i+1].q_kind \
-                            != self.questions_list[i].q_kind:
-                        #___
-                            (self.questions_list[i],
-                             self.questions_list[i+1]) = \
-                                                     (self.questions_list[i+1],
-                                                      self.questions_list[i])
-        else:
-            pass
 
 
     # --------------------------------------------------------------------------
