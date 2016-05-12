@@ -378,6 +378,8 @@ class X_MentalCalculation(X_Structure):
                 random.shuffle(s)
                 nb_source = s.pop()
 
+# -------------après ce point nb_source est déterminé----------------------------------------------------------------
+
             if len(nb_box[nb_source]) == 0:
                 nb_box[nb_source] = question.generate_numbers(nb_source)
 
@@ -422,18 +424,23 @@ class X_MentalCalculation(X_Structure):
                 random.shuffle(nb_box_shuffled)
                 nb_to_use = nb_box_shuffled.pop()
                 nb_box[nb_source].remove(nb_to_use)
+# ---------ici on a pu déterminer nb_to_use--------------------------------------------------------------------
 
             if nb_source == 'decimal_and_10_100_1000_for_divi' \
                 or nb_source == 'decimal_and_10_100_1000_for_multi':
             #___
                 q.options['10_100_1000'] = True
 
+
+# -----------------------------------------------------------------------------
             nb_box[nb_source] |= kept_aside
+# ----------ci-dessous on crée la question-------------------------------------------------------------------
             self.questions_list += [default_question(embedded_machine,
                                                      q.type,
                                                      q.options,
                                                      numbers_to_use=nb_to_use
                                                      )]
+# -----------------------------------------------------------------------------
 
             last_nb[nb_source] = set()
             if nb_source == 'table_2_9':
@@ -445,6 +452,7 @@ class X_MentalCalculation(X_Structure):
                 last_nb[nb_source] |= {nb_to_use[0]}
             else:
                 last_nb[nb_source] |= {nb_to_use[1]}
+# -----------------------------------------------------------------------------
 
 
 
