@@ -255,8 +255,6 @@ class X_MentalCalculation(X_Structure):
 
         nb_box = { key: question.generate_numbers(key) \
                    for key in question.nb_sources()}
-        nb_used = { key: set() \
-                    for key in question.nb_sources()}
         last_nb = { key: set() \
                     for key in question.nb_sources()}
 
