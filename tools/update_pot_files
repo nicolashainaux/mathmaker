@@ -15,16 +15,12 @@ set_header () {
 cd ..
 xgettext --package-name="mathmaker" --package-version="0.6" --copyright-holder="Nicolas Hainaux" --msgid-bugs-address="nh.techn@gmail.com" --keyword=_ --output=locale/mathmaker_updates.pot */*.py */*/*.py */*/*/*.py */*/*/*/*.py
 
-cd locale/
+./tools/merge_py_updates_to_main_pot_file
 
-./merge_py_updates_to_main_pot_file
-
-echo "Removing mathmaker_updates.pot"
-rm mathmaker_updates.pot
 echo
 
 # Merging mathmaker entries to main pot file:
-./merge_xml_updates_to_pot_file --dirs /home/nico/dev/mathmaker/mathmaker/sheet/ /home/nico/dev/mathmaker/mathmaker/data/ /home/nico/dev/mathmaker/mathmaker/data/wordings/
+./tools/merge_xml_updates_to_pot_file --dirs /home/nico/dev/mathmaker/mathmaker/sheet/ /home/nico/dev/mathmaker/mathmaker/data/ /home/nico/dev/mathmaker/mathmaker/data/wordings/
 
 # Merging updates from other xml files to other pot files
 #./merge_xml_updates_to_pot_file --keywords w4l --dir /home/nico/dev/mathmaker/mathmaker/data/w4l/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/w4l.pot
@@ -33,3 +29,6 @@ echo
 
 #set_header mathmaker.pot 'MATHMAKER TEMPLATE PO FILE'
 #set_header four_letters_words.pot 'MATHMAKER W4L PO FILE'
+
+echo "Removing mathmaker_updates.pot"
+rm ./locale/mathmaker_updates.pot
