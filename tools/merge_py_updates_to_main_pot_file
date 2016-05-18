@@ -29,7 +29,8 @@ PROCESS_NAME = os.path.basename(sys.argv[0])
 ABSPATH = os.path.abspath(sys.argv[0])
 __l1 = len(PROCESS_NAME)
 __l2 = len(ABSPATH)
-LOCALE_PATH = ABSPATH[:__l2-__l1]
+TOOLS_PATH = ABSPATH[:__l2-__l1]
+LOCALE_PATH = os.path.abspath(os.path.join(TOOLS_PATH, os.pardir)) + "/locale/"
 
 POT_FILE_PATH = LOCALE_PATH + 'mathmaker.pot'
 UPDATES_PATH = LOCALE_PATH + 'mathmaker_updates.pot'
