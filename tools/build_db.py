@@ -109,7 +109,7 @@ for f in WORDINGS_FILES:
                    db_rows)
 
 # Insert integers pairs into the db
-# Tables of 2, 3... 9
+# Tables of 2, 3... 99
 db_rows = [(i+2, j+2, 0, 0) for i in range(98) for j in range(98) if j >= i]
 db.executemany("INSERT "\
                "INTO int_pairs(nb1, nb2, "\
