@@ -28,9 +28,15 @@ log = settings.mainlogger
 class source(object):
     ##
     #   @brief  Initializer
-    def __init__(self, table_name, col, **kwargs):
+    #   @param  table_name  The name of the table in the database
+    #   @param  cols        The name of the cols used to return values. The
+    #                       first one will be used to timestamp the retrieved
+    #                       data and won't be returned. If only one value is
+    #                       returned it is unpacked from the tuple containing
+    #                       it.
+    def __init__(self, table_name, cols, **kwargs):
         self.table_name = table_name
-        self.col = col
+        self.cols = ",".join(cols)
         self.language = kwargs['language'] if 'language' in kwargs else ""
 
     ##
@@ -42,7 +48,7 @@ class source(object):
     ##
     #   @brief  Creates the "SELECT ...,...,... FROM ...." part of the query
     def _select_part(self, **kwargs):
-        return "SELECT id," + self.col + " FROM " + self.table_name
+        return "SELECT " + self.cols + " FROM " + self.table_name
 
     ##
     #   @brief  Creates the language condition part of the query
@@ -52,9 +58,18 @@ class source(object):
 
     ##
     #   @brief  Creates the conditions of the query, from the given kwargs
+    #           Some special checks are allowed, like nb1_min <= ...
+    #           and nb1_max >= ...
     def _kw_conditions(self, **kwargs):
-        return "".join(" AND " + kw + " = '" + kwargs[kw] + "' " \
-                       for kw in kwargs)
+        result = ""
+        for kw in kwargs:
+            if kw.endswith("_to_check"):
+                k = kw[:-9]
+                result += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
+                result += " AND " + k + "_max" + " >= " + str(kwargs[kw]) + " "
+            else:
+                result += " AND " + kw + " = '" + kwargs[kw] + "' "
+        return result
 
     ##
     #   @brief  Concatenates the different parts of the query
@@ -76,7 +91,7 @@ class source(object):
     ##
     #   @brief  Set the drawDate to datetime() in all entries where col_name
     #           has a value of col_match.
-    def update_after_query(self, col_name, col_match):
+    def timestamp(self, col_name, col_match):
         shared.db.execute(\
         "UPDATE " + self.table_name + \
         " SET drawDate = datetime()"\
@@ -90,43 +105,9 @@ class source(object):
     ##
     #   @brief  Handles the choice of the next value to return from the database
     def next(self, **kwargs):
-        ID, word = self._query_result(self._cmd(**kwargs))[0]
-        self.update_after_query('id', ID)
-        return word
-
-
-class wordings_source(source):
-
-    ##
-    #   @brief  Creates the "SELECT ...,...,... FROM ...." part of the query.
-    #           Wordings require to retrieve the 'wording_context' value instead
-    #           of the id.
-    def _select_part(self, **kwargs):
-        return "SELECT " + self.col + ",wording_context FROM " \
-               + self.table_name
-
-    ##
-    #   @brief  Creates the conditions of the query, from the given kwargs
-    #           Wordings require to make special checks, like nb1_min <= ...
-    #           and nb1_max >= ...
-    def _kw_conditions(self, **kwargs):
-        result = ""
-        for kw in kwargs:
-            if kw.endswith("_to_check"):
-                k = kw[:-9]
-                result += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
-                result += " AND " + k + "_max" + " >= " + str(kwargs[kw]) + " "
-            else:
-                result += " AND " + kw + " = '" + kwargs[kw] + "' "
-        return result
-
-    ##
-    #   @brief  Handles the choice of the next value to return from the database
-    #           In the case of wordings, the wording_context will be used to
-    #           (temporarily) remove entries sharing the same context as the
-    #           chosen one.
-    def next(self, **kwargs):
-        word, wording_context = self._query_result(self._cmd(**kwargs))[0]
-        self.update_after_query('wording_context', str(wording_context))
-        return word
-
+        t = self._query_result(self._cmd(**kwargs))[0]
+        self.timestamp(str(self.cols[0]), str(t[0]))
+        if len(t) == 2:
+            return t[1]
+        else:
+            return t[1:len(t)]
