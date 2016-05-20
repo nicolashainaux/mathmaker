@@ -32,6 +32,7 @@ def init():
     global mini_problems_wordings_source
     global markup
     global int_pairs_source
+    global mc_source
 
     db = sqlite3.connect(settings.path.db)
 
