@@ -8,39 +8,10 @@
 		</xs:restriction>
 	</xs:simpleType>
 
-	<xs:simpleType name="sourceNameType">
-		<xs:restriction  base="xs:string">
-			<xs:enumeration value="table_2_9"/>
-			<xs:enumeration value="table_4_9"/>
-			<xs:enumeration value="table_2"/>
-			<xs:enumeration value="table_3"/>
-			<xs:enumeration value="table_4"/>
-			<xs:enumeration value="table_2_11_50"/>
-			<xs:enumeration value="table_3_11_50"/>
-			<xs:enumeration value="table_3_11_50"/>
-			<xs:enumeration value="table_2_9_for_sums_diffs"/>
-			<xs:enumeration value="table_11"/>
-			<xs:enumeration value="table_15"/>
-			<xs:enumeration value="table_25"/>
-			<xs:enumeration value="int_irreducible_frac"/>
-			<xs:enumeration value="rank_word"/>
-			<xs:enumeration value="integers_10_100"/>
-			<xs:enumeration value="integers_5_20"/>
-			<xs:enumeration value="integer_3_10_decimal_3_10"/>
-			<xs:enumeration value="integers_10_100_for_sums_diffs"/>
-			<xs:enumeration value="decimals_0_20_1"/>
-			<xs:enumeration value="decimal_and_10_100_1000"/>
-			<xs:enumeration value="decimal_and_one_digit"/>
-			<xs:enumeration value="auto_table"/>
-			<xs:enumeration value="auto_11_50"/>
-			<xs:enumeration value="auto_vocabulary"/>
-		</xs:restriction>
-	</xs:simpleType>
-
 	<xs:complexType name="nbSourceType">
         <xs:simpleContent>
             <xs:extension base="nonNullPositiveInteger">
-				<xs:attribute name="source"				type="sourceNameType"	use="required"/>
+				<xs:attribute name="source"				type="xs:string"	    use="required"/>
 				<xs:attribute name="context"			type="xs:string"		use="optional"/>
 				<xs:attribute name="variant"			type="xs:string"		use="optional"/>
 				<xs:attribute name="generation_type"	type="xs:string"		use="optional"/>
