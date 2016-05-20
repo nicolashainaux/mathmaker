@@ -67,6 +67,19 @@ class source(object):
                 k = kw[:-9]
                 result += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
                 result += " AND " + k + "_max" + " >= " + str(kwargs[kw]) + " "
+            elif kw.endswith("_min"):
+                k = kw[:-4]
+                result += " AND " + k + " >= " + str(kwargs[kw]) + " "
+            elif kw.endswith("_max"):
+                k = kw[:-4]
+                result += " AND " + k + " <= " + str(kwargs[kw]) + " "
+            elif kw.endswith("_in"):
+                k = kw[:-3]
+                result += " AND " + k + " IN (" + ", ".join(kwargs[kw]) + ") "
+            elif kw == 'rectangle':
+                result += " AND nb1 != nb2 "
+            elif kw == 'square':
+                result += " AND nb1 = nb2 "
             else:
                 result += " AND " + kw + " = '" + kwargs[kw] + "' "
         return result
