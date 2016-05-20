@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import sqlite3
+
 from lib.common import settings, shared
 
 log = settings.mainlogger
@@ -36,6 +37,7 @@ class source(object):
     #                       it.
     def __init__(self, table_name, cols, **kwargs):
         self.table_name = table_name
+        self.cols_names = cols
         self.cols = ",".join(cols)
         self.language = kwargs['language'] if 'language' in kwargs else ""
 
@@ -119,7 +121,7 @@ class source(object):
     #   @brief  Handles the choice of the next value to return from the database
     def next(self, **kwargs):
         t = self._query_result(self._cmd(**kwargs))[0]
-        self.timestamp(str(self.cols[0]), str(t[0]))
+        self.timestamp(str(self.cols_names[0]), str(t[0]))
         if len(t) == 2:
             return t[1]
         else:
