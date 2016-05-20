@@ -37,8 +37,9 @@ class source(object):
     #                       it.
     def __init__(self, table_name, cols, **kwargs):
         self.table_name = table_name
-        self.cols_names = cols
-        self.cols = ",".join(cols)
+        self.allcols = cols
+        self.idcol = cols[0]
+        self.valcols = cols[1:]
         self.language = kwargs['language'] if 'language' in kwargs else ""
 
     ##
@@ -50,7 +51,7 @@ class source(object):
     ##
     #   @brief  Creates the "SELECT ...,...,... FROM ...." part of the query
     def _select_part(self, **kwargs):
-        return "SELECT " + self.cols + " FROM " + self.table_name
+        return "SELECT " + ",".join(self.allcols) + " FROM " + self.table_name
 
     ##
     #   @brief  Creates the language condition part of the query
@@ -75,9 +76,14 @@ class source(object):
             elif kw.endswith("_max"):
                 k = kw[:-4]
                 result += " AND " + k + " <= " + str(kwargs[kw]) + " "
+            elif kw == "not_in":
+                for c in self.valcols:
+                    result += " AND " + c  + " NOT IN (" \
+                           +  ", ".join(str(x) for x in kwargs[kw]) + ") "
             elif kw.endswith("_in"):
                 k = kw[:-3]
-                result += " AND " + k + " IN (" + ", ".join(kwargs[kw]) + ") "
+                result += " AND " + k + " IN (" \
+                       +  ", ".join(str(x) for x in kwargs[kw]) + ") "
             elif kw == 'rectangle':
                 result += " AND nb1 != nb2 "
             elif kw == 'square':
@@ -121,7 +127,7 @@ class source(object):
     #   @brief  Handles the choice of the next value to return from the database
     def next(self, **kwargs):
         t = self._query_result(self._cmd(**kwargs))[0]
-        self._timestamp(str(self.cols_names[0]), str(t[0]))
+        self._timestamp(str(self.idcol), str(t[0]))
         if len(t) == 2:
             return t[1]
         else:
