@@ -31,16 +31,21 @@ def init():
     global names_source
     global mini_problems_wordings_source
     global markup
+    global int_pairs_source
 
     db = sqlite3.connect(settings.path.db)
 
     import lib.tools.db
-    four_letters_words_source = lib.tools.db.source("w4l", "word",
+    four_letters_words_source = lib.tools.db.source("w4l", ["id", "word"],
                                                     language=settings.language)
-    names_source = lib.tools.db.source("names", "name",
+    names_source = lib.tools.db.source("names", ["id", "name"],
                                        language=settings.language)
-    mini_problems_wordings_source = \
-                lib.tools.db.wordings_source("mini_pb_wordings", "wording")
+    mini_problems_wordings_source = lib.tools.db.source("mini_pb_wordings",
+                                                ["wording_context", "wording"])
+    int_pairs_source = lib.tools.db.source("int_pairs", ["id", "nb1", "nb2"])
 
     if settings.config.MARKUP == 'latex':
         markup = latex.MARKUP
+
+    import lib.sources
+    mc_source = lib.sources.mc_source()
