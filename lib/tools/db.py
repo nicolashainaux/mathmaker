@@ -31,7 +31,7 @@ class source(object):
     #   @brief  Initializer
     #   @param  table_name  The name of the table in the database
     #   @param  cols        The name of the cols used to return values. The
-    #                       first one will be used to timestamp the retrieved
+    #                       first one will be used to _timestamp the retrieved
     #                       data and won't be returned. If only one value is
     #                       returned it is unpacked from the tuple containing
     #                       it.
@@ -43,7 +43,7 @@ class source(object):
 
     ##
     #   @brief  Resets the drawDate of all table's entries (to 0)
-    def reset(self):
+    def _reset(self):
         shared.db.execute(\
         "UPDATE " + self.table_name + " SET drawDate = 0;")
 
@@ -94,19 +94,19 @@ class source(object):
                + "ORDER BY random() LIMIT 1;"
 
     ##
-    #   @brief  Executes the query. If no result, resets the table and executes
+    #   @brief  Executes the query. If no result, _resets the table and executes
     #           the query again. Returns the query's result.
     def _query_result(self, cmd):
         qr = tuple(shared.db.execute(cmd))
         if not len(qr):
-            self.reset()
+            self._reset()
             qr = tuple(shared.db.execute(cmd))
         return qr
 
     ##
     #   @brief  Set the drawDate to datetime() in all entries where col_name
     #           has a value of col_match.
-    def timestamp(self, col_name, col_match):
+    def _timestamp(self, col_name, col_match):
         shared.db.execute(\
         "UPDATE " + self.table_name + \
         " SET drawDate = datetime()"\
@@ -121,7 +121,7 @@ class source(object):
     #   @brief  Handles the choice of the next value to return from the database
     def next(self, **kwargs):
         t = self._query_result(self._cmd(**kwargs))[0]
-        self.timestamp(str(self.cols_names[0]), str(t[0]))
+        self._timestamp(str(self.cols_names[0]), str(t[0]))
         if len(t) == 2:
             return t[1]
         else:
