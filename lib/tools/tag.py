@@ -21,6 +21,16 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 ##
+#   @brief  Will get number N from tags multipleofN_*to* and table_N shortcuts
+#           otherwise it will return ''
+def get_multiple_from(tag):
+    if tag.startswith('table_'):
+        return tag[6:]
+    elif tag.startswith('multipleof'):
+        return tag.split(sep='_')[0][10:]
+    return ''
+
+##
 #   @brief  Will tell if the tag belongs to int pairs, decimal numbers etc.
 def classify_tag(tag):
     if (tag.startswith('intpairs_') or tag.startswith('table_')

@@ -32,6 +32,7 @@ import sys
 from lib import *
 from lib.common.settings import default
 from lib.common import shared
+from lib.tools.tag import get_multiple_from
 import sheet
 from .X_Structure import X_Structure
 from . import question
@@ -384,8 +385,10 @@ class X_MentalCalculation(X_Structure):
         for q in mixed_q_list:
             nb_source = get_nb_source_from_question_info(q)
             nb_to_use = shared.mc_source.next(nb_source, not_in=last_draw)
-
-            last_draw = list(nb_to_use)
+            last_draw = [ str(n) for n in nb_to_use]
+            N = str(get_multiple_from(nb_source))
+            if len(N) and N in last_draw:
+                last_draw.remove(N)
 
             if nb_source == 'decimal_and_10_100_1000_for_divi' \
                 or nb_source == 'decimal_and_10_100_1000_for_multi':
