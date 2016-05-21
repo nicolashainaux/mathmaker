@@ -26,19 +26,19 @@
 	<exercise id="mental_calculation" kind="tabular">
 
 		<question kind="addi" subkind="direct" context="mini_problem">
-			<nb source="integers_5_20">5</nb>
+			<nb source="intpairs_5to20">5</nb>
 		</question>
 
 		<question kind="multi" subkind="direct" context="mini_problem">
-			<nb source="table_4_9">5</nb>
+			<nb source="intpairs_4to9">5</nb>
 		</question>
 
 		<question kind="substr" subkind="direct" context="mini_problem">
-			<nb source="integers_10_100">5</nb>
+			<nb source="intpairs_10to100">5</nb>
 		</question>
 
 		<question kind="divi" subkind="direct" context="mini_problem">
-			<nb source="table_4_9">5</nb>
+			<nb source="intpairs_4to9">5</nb>
 		</question>
 
 
