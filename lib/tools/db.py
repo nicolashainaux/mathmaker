@@ -66,7 +66,9 @@ class source(object):
     def _kw_conditions(self, **kwargs):
         result = ""
         for kw in kwargs:
-            if kw.endswith("_to_check"):
+            if kw == "raw":
+                result += " AND " + kwargs[kw] + " "
+            elif kw.endswith("_to_check"):
                 k = kw[:-9]
                 result += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
                 result += " AND " + k + "_max" + " >= " + str(kwargs[kw]) + " "
