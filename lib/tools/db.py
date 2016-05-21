@@ -68,6 +68,8 @@ class source(object):
         for kw in kwargs:
             if kw == "raw":
                 result += " AND " + kwargs[kw] + " "
+            elif kw == "prevails":
+                pass
             elif kw.endswith("_to_check"):
                 k = kw[:-9]
                 result += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
@@ -79,9 +81,19 @@ class source(object):
                 k = kw[:-4]
                 result += " AND " + k + " <= " + str(kwargs[kw]) + " "
             elif kw == "not_in":
+                updated_notin_list = list(kwargs[kw])
                 for c in self.valcols:
-                    result += " AND " + c  + " NOT IN (" \
-                           +  ", ".join(str(x) for x in kwargs[kw]) + ") "
+                    if c in kwargs and kwargs[c] in updated_notin_list:
+                        updated_notin_list.remove(kwargs[c])
+                if "prevails" in kwargs:
+                    for n in kwargs["prevails"]:
+                        if n in updated_notin_list:
+                            updated_notin_list.remove(n)
+                if len(updated_notin_list):
+                    for c in self.valcols:
+                        result += " AND " + c  + " NOT IN (" \
+                               +  ", ".join(str(x)
+                                            for x in updated_notin_list) + ") "
             elif kw.endswith("_in"):
                 k = kw[:-3]
                 result += " AND " + k + " IN (" \

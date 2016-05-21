@@ -32,7 +32,6 @@ import sys
 from lib import *
 from lib.common.settings import default
 from lib.common import shared
-from lib.tools.tag import get_multiple_from
 import sheet
 from .X_Structure import X_Structure
 from . import question
@@ -253,7 +252,6 @@ def build_mixed_q_list(q_dict):
     return mixed_q_list
 
 
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Increases the disorder of the questions' list
@@ -268,6 +266,7 @@ def increase_alternation(l, sort_key):
                     l[i+1], l[i+2] = l[i+2], l[i+1]
 
     return l
+
 
 # --------------------------------------------------------------------------
 ##
@@ -287,6 +286,7 @@ def get_nb_source_from_question_info(q_i):
         random.shuffle(s)
         nb_source = s.pop()
     return nb_source
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -379,22 +379,15 @@ class X_MentalCalculation(X_Structure):
 
         # Now, we generate the numbers & questions, by type of question first
         self.questions_list = []
-
         last_draw = [0, 0]
-
         for q in mixed_q_list:
             nb_source = get_nb_source_from_question_info(q)
             nb_to_use = shared.mc_source.next(nb_source, not_in=last_draw)
             last_draw = [ str(n) for n in nb_to_use]
-            N = str(get_multiple_from(nb_source))
-            if len(N) and N in last_draw:
-                last_draw.remove(N)
-
             if nb_source == 'decimal_and_10_100_1000_for_divi' \
                 or nb_source == 'decimal_and_10_100_1000_for_multi':
             #___
                 q.options['10_100_1000'] = True
-
             self.questions_list += [default_question(embedded_machine,
                                                      q.type,
                                                      q.options,

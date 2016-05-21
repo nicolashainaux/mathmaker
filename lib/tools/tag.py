@@ -20,15 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-##
-#   @brief  Will get number N from tags multipleofN_*to* and table_N shortcuts
-#           otherwise it will return ''
-def get_multiple_from(tag):
-    if tag.startswith('table_'):
-        return tag[6:]
-    elif tag.startswith('multipleof'):
-        return tag.split(sep='_')[0][10:]
-    return ''
 
 ##
 #   @brief  Will tell if the tag belongs to int pairs, decimal numbers etc.
@@ -42,6 +33,13 @@ def classify_tag(tag):
 
 ##
 #   @brief  Will turn the tag into the matching conditions for the db query.
+#           Note that any value matching a 'nbN' key (like 'nb1': '11') will
+#           be automatically removed from any "NOT IN(...)" condition in a
+#           query. The "raw" keyword allows to give more complex queries but
+#           as the 'nbN' keys are then "buried" inside the query string, it's
+#           possible to add a "prevail": 'value' in the returned dictionary
+#           to allow this very same behaviour (as directly adding a
+#           'nbN': 'value' may change the query).
 #   @return A dictionary
 def translate_int_pairs_tag(tag):
     d = {}
@@ -68,7 +66,8 @@ def translate_int_pairs_tag(tag):
         mini, maxi = r.split(sep='to')
         d = { 'raw': '(nb1 = ' + N + ' and (nb2 >= ' + mini \
                      + ' and nb2 <= ' + maxi + ')) or (nb2 = ' + N \
-                     + ' and (nb1 >= ' + mini + ' and nb1 <= ' + maxi + '))' }
+                     + ' and (nb1 >= ' + mini + ' and nb1 <= ' + maxi + '))',
+              'prevails': [N] }
 
     return d
 
