@@ -33,6 +33,7 @@ def init():
     global markup
     global int_pairs_source
     global rank_words_source
+    global int_fracs_source
     global mc_source
 
     db = sqlite3.connect(settings.path.db)
@@ -51,4 +52,5 @@ def init():
 
     import lib.sources
     rank_words_source = lib.sources.sub_source('rank_words')
+    int_fracs_source = lib.sources.sub_source('int_irreducible_frac')
     mc_source = lib.sources.mc_source()

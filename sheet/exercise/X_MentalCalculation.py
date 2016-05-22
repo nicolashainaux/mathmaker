@@ -385,7 +385,8 @@ class X_MentalCalculation(X_Structure):
             nb_to_use = shared.mc_source.next(nb_source,
                                               not_in=last_draw,
                                               **question.get_modifier(q.type))
-            last_draw = [str(n) for n in nb_to_use]
+            last_draw = [str(n) for n in set(nb_to_use)
+                                if (isinstance(n, int) or isinstance(n, str))]
             if nb_source == 'decimal_and_10_100_1000_for_divi' \
                 or nb_source == 'decimal_and_10_100_1000_for_multi':
             #___

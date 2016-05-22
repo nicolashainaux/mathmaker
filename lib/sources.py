@@ -24,7 +24,9 @@ import random
 
 from lib.common import shared
 from lib.common.cst import RANKS
+from lib.maths_lib import coprime_generator
 from lib.tools.tag import classify_tag, translate_int_pairs_tag
+from core.base_calculus import Fraction
 
 ##
 #   @todo   Turn the old source ids' tags into the new ones:
@@ -61,8 +63,8 @@ INT_PAIRS_IDS = ['tables_2_9', 'tables_4_9', 'table_2', 'table_3', 'table_4',
 #   @brief  Generates a list of values to be used
 def generate_values(source_id):
     if source_id == 'int_irreducible_frac':
-        return [(k, Fraction((n, k))) for n in coprime_generator(k)
-                                      for k in [i+2 for i in range(18)]]
+        return [(k, Fraction((n, k))) for k in [i+2 for i in range(18)]
+                                      for n in coprime_generator(k)]
     elif source_id == 'rank_words':
         return [(elt,) for elt in RANKS]
     elif source_id == 'bypass':
@@ -105,9 +107,12 @@ class mc_source(object):
     ##
     #   @brief  Handles the choice of the next value to return
     def next(self, source_id, **kwargs):
-        if classify_tag(source_id) == 'int_pairs':
+        tag_classification = classify_tag(source_id)
+        if tag_classification == 'int_pairs':
             kwargs.update(translate_int_pairs_tag(source_id))
             return shared.int_pairs_source.next(**kwargs)
-        elif classify_tag(source_id) == 'rank_words':
+        elif tag_classification == 'rank_words':
             return shared.rank_words_source.next(**kwargs)
+        elif tag_classification == 'int_irreducible_frac':
+            return shared.int_fracs_source.next(**kwargs)
 

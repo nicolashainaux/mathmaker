@@ -127,17 +127,6 @@ MODULES =  \
 
 # --------------------------------------------------------------------------
 ##
-#   @brief Generator of coprime numbers
-def coprime_generator(n):
-    for i in range(20):
-        if maths_lib.gcd(i, n) == 1:
-            yield i
-
-
-
-
-# --------------------------------------------------------------------------
-##
 #   @brief Returns a list of numbers of the given kind
 def generate_decimal(width, ranks_scale, start_rank):
     # Probability to fill a higher rank rather than a lower one

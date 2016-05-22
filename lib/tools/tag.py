@@ -28,7 +28,7 @@ def classify_tag(tag):
         or tag.startswith('multiplesof')):
     #___
         return 'int_pairs'
-    elif tag in ['rank_words']:
+    elif tag in ['rank_words', 'int_irreducible_frac']:
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
                      "used in a mathmaker xml file.")

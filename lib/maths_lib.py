@@ -377,7 +377,13 @@ def barycenter(points_list, barycenter_name):
                  ])
 
 
-
+# --------------------------------------------------------------------------
+##
+#   @brief Generator of coprime numbers
+def coprime_generator(n):
+    for i in range(20):
+        if gcd(i, n) == 1:
+            yield i
 
 
 # --------------------------------------------------------------------------
