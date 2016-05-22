@@ -26,7 +26,7 @@
 	<exercise id="mental_calculation" kind="tabular">
 
 		<question kind="multi" subkind="hole">
-			<nb source="table_2_9">8</nb>
+			<nb source="intpairs_2to9">8</nb>
 			<nb source="int_irreducible_frac">7</nb>
 			<nb source="table_15">2</nb>
 			<nb source="table_25">2</nb>
