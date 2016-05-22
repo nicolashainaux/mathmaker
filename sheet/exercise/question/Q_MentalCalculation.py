@@ -28,76 +28,6 @@ from .Q_Structure import Q_Structure
 from . import mc_modules
 from core.base_calculus import *
 
-# 'table_2_9'
-# 'table_11' --> 11×n where 10 < n < 100, no carry over
-# 'table_15' --> 15×n where 2 <= n <= 6
-# 'table_25' --> 25×n where 2 <= n <= 6
-# 'int_irreducible_frac' --> (n, p/n) where 2 <= n <= 20 and p/n is irreducible
-"""USER_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
-                         'table_4_9',
-                         'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
-                         'table_2_9_for_sums_diffs',
-                         'table_11',
-                         'table_15',
-                         'table_25',
-                         'int_irreducible_frac',
-                         'rank_word',
-                         'integers_10_100',
-                         'integers_5_20',
-                         'integer_3_10_decimal_3_10',
-                         'integers_10_100_for_sums_diffs',
-                         'decimals_0_20_1',
-                         'decimal_and_10_100_1000',
-                         'decimal_and_one_digit',
-                         'bypass'}"""
-
-"""AVAILABLE_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
-                              'squares_2_9',
-                              'table_4_9', 'squares_4_9',
-                              'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
-                              'table_2_9_for_sums_diffs',
-                              'table_2_9_for_rectangles',
-                              'table_2_9_for_multi_reversed',
-                              'table_4_9_for_rectangles',
-                              'table_4_9_for_multi_reversed',
-                              'table_11', 'square_11',
-                              'table_11_for_rectangles',
-                              'table_15',
-                              'table_25',
-                              'int_irreducible_frac',
-                              'rank_word',
-                              'integers_10_100', 'squares_10_100',
-                              'integers_10_100_for_rectangles',
-                              'integers_10_100_diff7atleast',
-                              'integers_5_20', 'squares_5_20',
-                              'integer_3_10_decimal_3_10',
-                              'integer_3_10_decimal_3_10_for_rectangles',
-                              'integers_5_20_for_rectangles',
-                              'integers_10_100_for_sums_diffs',
-                              'decimals_0_20_1',
-                              'decimal_and_10_100_1000_for_divi',
-                              'decimal_and_10_100_1000_for_multi',
-                              'decimal_and_one_digit_for_divi',
-                              'decimal_and_one_digit_for_multi',
-                              'bypass'}"""
-
-PART_OF_ANOTHER_SOURCE = { 'table_2': 'table_2_9',
-                           'table_3': 'table_2_9',
-                           'table_4': 'table_2_9',
-                           'table_4_9': 'table_2_9',
-                           'integers_10_100_for_sums_diffs': 'integers_10_100',
-                           'table_2_9_for_rectangles': 'table_2_9',
-                           'table_11_for_rectangles': 'table_11',
-                           'integers_5_20_for_rectangles': 'integers_5_20',
-                           'integers_10_100_for_rectangles': 'integers_10_100',
-                           'integers_10_100_diff7atleast' : 'integers_10_100',
-                           'squares_2_9': 'table_2_9',
-                           'squares_4_9': 'table_4_9',
-                           'square_11': 'table_11',
-                           'squares_5_20': 'integers_5_20',
-                           'squares_10_100': 'integers_10_100'
-                         }
-
 SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number': {'half', 'third', 'quarter'},
                       'simple_multiples_of_a_number': {'double', 'triple',
                                                         'quadruple'},
@@ -163,201 +93,9 @@ SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
                   }
                      }
 
-rectangle_translations = {'table_2_9': 'table_2_9_for_rectangles',
-                          'table_4_9': 'table_4_9_for_rectangles',
-                          'table_11': 'table_11_for_rectangles',
-                          'integers_5_20': 'integers_5_20_for_rectangles',
-                          'integers_10_100': 'integers_10_100_for_rectangles',
-                          'integer_3_10_decimal_3_10': \
-                                    'integer_3_10_decimal_3_10_for_rectangles'}
-
-square_translations = {'table_2_9': 'squares_2_9',
-                       'table_4_9': 'squares_4_9',
-                       'table_11': 'square_11',
-                       'integers_5_20': 'squares_5_20',
-                       'integers_10_100': 'squares_10_100'}
-
-SOURCES_TO_TRANSLATE = {'area_rectangle': rectangle_translations,
-                        'perimeter_rectangle': rectangle_translations,
-                        'area_square': square_translations,
-                        'perimeter_square': square_translations,
-                        'rectangle_length_or_width_from_area': \
-                                                rectangle_translations,
-                        'rectangle_length_or_width_from_perimeter': \
-                                                rectangle_translations,
-                        'substr_direct': \
-                            {'integers_10_100': 'integers_10_100_diff7atleast'},
-                        'multi_reversed': \
-                            {'table_2_9': 'table_2_9_for_multi_reversed',
-                             'table_4_9': 'table_4_9_for_multi_reversed'}
-                       }
-
-AVAILABLE_Q_KIND_VALUES = \
-    { 'multi_direct': ['table_2_9',
-                        'table_2', 'table_3', 'table_4',
-                        'table_4_9',
-                        'table_11',
-                        'table_15',
-                        'table_25',
-                        'decimal_and_10_100_1000',
-                        'decimal_and_one_digit',
-                        'bypass'],
-      'area_rectangle': ['table_2_9',
-                         'table_2', 'table_3', 'table_4',
-                         'table_4_9',
-                         'table_11',
-                         'table_15',
-                         'table_25',
-                         'decimal_and_10_100_1000',
-                         'decimal_and_one_digit',
-                         'bypass'],
-      'addi_direct': ['table_2_9',
-                              'table_2', 'table_3', 'table_4',
-                              'table_4_9',
-                              'table_11',
-                              'table_15',
-                              'table_25',
-                              'decimal_and_10_100_1000',
-                              'integers_10_100_for_sums_diffs',
-                              'table_2_9_for_sums_diffs',
-                              'integers_10_100',
-                              'integers_5_20',
-                              'bypass'],
-      'substr_direct': ['table_2_9',
-                              'table_2', 'table_3', 'table_4',
-                              'table_4_9',
-                              'table_11',
-                              'table_15',
-                              'table_25',
-                              'decimal_and_10_100_1000',
-                              'integers_10_100_for_sums_diffs',
-                              'table_2_9_for_sums_diffs',
-                              'integers_10_100',
-                              'integers_5_20',
-                              'bypass'],
-      'perimeter_rectangle': ['table_2_9',
-                              'table_2', 'table_3', 'table_4',
-                              'table_4_9',
-                              'table_11',
-                              'table_15',
-                              'table_25',
-                              'decimal_and_10_100_1000',
-                              'integers_10_100_for_sums_diffs',
-                              'table_2_9_for_sums_diffs',
-                              'integers_10_100',
-                              'integers_5_20',
-                              'bypass'],
-      'perimeter_square': ['table_2_9',
-                           'table_4_9',
-                           'table_11',
-                           'integers_10_100',
-                           'integers_5_20',
-                           'bypass'],
-      'area_square': ['table_2_9',
-                      'table_4_9',
-                      'table_11',
-                      'integers_10_100',
-                      'integers_5_20',
-                      'bypass'],
-      'rectangle_length_or_width_from_perimeter': ['table_2_9',
-                              'table_2', 'table_3', 'table_4',
-                              'table_4_9',
-                              'table_11',
-                              'table_15',
-                              'table_25',
-                              'decimal_and_10_100_1000',
-                              'integers_10_100_for_sums_diffs',
-                              'table_2_9_for_sums_diffs',
-                              'integers_10_100',
-                              'integers_5_20',
-                              'integer_3_10_decimal_3_10',
-                              'bypass'],
-      'rectangle_length_or_width_from_area': ['table_2_9',
-                                    'table_2_9_for_rectangles',
-                                    'table_2', 'table_3', 'table_4',
-                                    'table_4_9',
-                                    'table_11',
-                                    'table_15',
-                                    'table_25',
-                                    'decimal_and_10_100_1000',
-                                    'decimal_and_one_digit',
-                                    'bypass'],
-      'multi_reversed': ['table_2_9',
-                          'table_2', 'table_3', 'table_4',
-                          'table_4_9',
-                          'bypass'],
-      'multi_hole': ['table_2_9',
-                      'table_2', 'table_3', 'table_4',
-                      'table_4_9',
-                      'table_11',
-                      'table_15',
-                      'table_25',
-                      'decimal_and_10_100_1000',
-                      'decimal_and_one_digit',
-                      'bypass'],
-      'divi_direct': ['table_2_9', 'table_2_9_for_rectangles',
-                       'table_2', 'table_3', 'table_4',
-                       'table_4_9',
-                       'table_11',
-                       'table_15',
-                       'table_25',
-                       'decimal_and_10_100_1000',
-                       'decimal_and_one_digit',
-                       'bypass'],
-      'rank_direct': ['rank_word',
-                       'bypass'],
-      'rank_reversed': ['rank_word',
-                         'bypass'],
-      'rank_numberof': ['rank_word',
-                           'bypass'],
-      'vocabulary_half': {'table_2', 'table_2_11_50', 'bypass'},
-      'vocabulary_third': {'table_3', 'table_3_11_50', 'bypass'},
-      'vocabulary_quarter': {'table_4', 'table_4_11_50', 'bypass'},
-      'vocabulary_double': {'table_2', 'table_2_11_50', 'bypass'},
-      'vocabulary_triple': {'table_3', 'table_3_11_50', 'bypass'},
-      'vocabulary_quadruple': {'table_4', 'table_4_11_50', 'bypass'},
-      'vocabulary_multi': {'table_2_9',
-                            'table_2', 'table_3', 'table_4',
-                            'table_4_9',
-                            'table_11',
-                            'table_15',
-                            'table_25',
-                            'decimal_and_10_100_1000',
-                            'decimal_and_one_digit',
-                            'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
-                            'bypass'},
-      'vocabulary_divi': {'table_2_9',
-                           'table_2', 'table_3', 'table_4',
-                           'table_4_9',
-                           'table_11',
-                           'table_15',
-                           'table_25',
-                           'decimal_and_10_100_1000',
-                           'decimal_and_one_digit',
-                           'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
-                           'bypass'},
-      'vocabulary_addi': {'table_2_9', 'table_2_9_for_sums_diffs',
-                           'table_4_9',
-                           'integers_10_100', 'integers_10_100_for_sums_diffs',
-                           'decimals_0_20_1', 'bypass'},
-      'vocabulary_subtr': {'table_2_9', 'table_2_9_for_sums_diffs',
-                            'table_4_9',
-                            'integers_10_100', 'integers_10_100_for_sums_diffs',
-                            'decimals_0_20_1', 'bypass'}
-
-#     frozenset(('area', 'rectangle', 'with_drawing')): ['table_2_9',
-#                                              'table_11',
-#                                              'table_15',
-#                                              'table_25'],
-#     frozenset(('area', 'rectangle', 'without_drawing')): ['table_2_9',
-#                                                 'table_11',
-#                                                 'table_15',
-#                                                 'table_25'],
-#     frozenset(('area', 'right_triangle')): ['table_2_9',
-#                                   'table_11',
-#                                   'table_15',
-#                                   'table_25']
-    }
+SOURCES_TO_TRANSLATE = {'substr_direct': \
+                            {'integers_10_100': 'integers_10_100_diff7atleast'}
+                        }
 
 MODULES =  \
     { 'multi_direct': mc_modules.multi_direct,
@@ -384,23 +122,7 @@ MODULES =  \
       'rectangle_length_or_width': mc_modules.rectangle_length_or_width,
       'perimeter_square': mc_modules.perimeter_square,
       'area_square': mc_modules.area_square
-
-#     ('division', 'direct'): mc_modules.divi_dir,
-#     ('division', 'decimal_1'): mc_modules.divi_deci1,
-#     ('area', 'rectangle', 'with_drawing'): mc_modules.area_rect_dr,
-#     ('area', 'rectangle', 'without_drawing'): mc_modules.area_rect_no_dr,
-#     ('area', 'right_triangle'): mc_modules.area_right_tri
     }
-
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief Access to sources of numbers
-def nb_sources():
-    return AVAILABLE_Q_SUBKIND_VALUES
-
-
 
 
 # --------------------------------------------------------------------------
@@ -451,6 +173,62 @@ def generate_decimal(width, ranks_scale, start_rank):
 
 # --------------------------------------------------------------------------
 ##
+#   @brief  Tells if the given question's type and source number do match
+#   @todo   The 'integer_3_10_decimal_3_10' may be later turned into
+#           'intpairs_3to10' with variant='decimal1', so this condition can
+#           certainly be removed.
+def match_qtype_sourcenb(q_type, source_nb):
+    if q_type in ['multi_direct', 'area_rectangle', 'multi_hole',
+                  'rectangle_length_or_width_from_area', 'divi_direct',
+                  'vocabulary_multi', 'vocabulary_divi']:
+    #___
+        return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('multipleof'),
+                    source_nb.startswith('table_'),
+                    source_nb == 'decimal_and_10_100_1000',
+                    source_nb == 'decimal_and_one_digit',
+                    source_nb == 'bypass'])
+    elif q_type in ['addi_direct', 'substr_direct', 'perimeter_rectangle',
+                    'rectangle_length_or_width_from_perimeter',
+                    'vocabulary_addi', 'vocabulary_subtr']:
+    #___
+        return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('multipleof'),
+                    source_nb.startswith('table_'),
+                    source_nb == 'decimal_and_10_100_1000',
+                    source_nb == 'integer_3_10_decimal_3_10',
+                    source_nb == 'decimals_0_20_1',
+                    source_nb == 'bypass'])
+    elif q_type.startswith('rank_'):
+        return any([source_nb == 'rank_word', source_nb == 'bypass'])
+    elif q_type in ['perimeter_square', 'area_square']:
+        return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('multipleof'),
+                    source_nb.startswith('table_'),
+                    source_nb == 'bypass'])
+    elif q_type in ['vocabulary_half', 'vocabulary_double']:
+        return any([source_nb.startswith('multipleof2'),
+                    source_nb == 'table_2',
+                    source_nb == 'bypass'])
+    elif q_type in ['vocabulary_third', 'vocabulary_triple']:
+        return any([source_nb.startswith('multipleof3'),
+                    source_nb == 'table_3',
+                    source_nb == 'bypass'])
+    elif q_type in ['vocabulary_quarter', 'vocabulary_quadruple']:
+        return any([source_nb.startswith('multipleof4'),
+                    source_nb == 'table_4',
+                    source_nb == 'bypass'])
+    elif q_type == 'multi_reversed':
+        return any([(source_nb.startswith('intpairs_')
+                     and source_nb.endswith('to9')),
+                    source_nb == 'table_2',
+                    source_nb == 'table_3',
+                    source_nb == 'table_4',
+                    source_nb == 'bypass'])
+
+
+# --------------------------------------------------------------------------
+##
 #   @brief Returns a dictionary to give some special informations needed for
 #          certain questions.
 def get_modifier(q_type):
@@ -468,6 +246,10 @@ def get_modifier(q_type):
                                     (4, 9): [(4, 9), (6, 6)],
                                     (6, 6): [(4, 9), (6, 6)],
                                     }})
+    elif 'rectangle' in q_type:
+        d.update({'rectangle': True})
+    elif 'square' in q_type:
+        d.update({'square': True})
     return d
 
 # --------------------------------------------------------------------------
@@ -788,7 +570,7 @@ class Q_MentalCalculation(Q_Structure):
         # self.q_kind, self.q_subkind
         # plus self.machine, self.options (modified)
         Q_Structure.__init__(self, embedded_machine,
-                             q_kind, AVAILABLE_Q_KIND_VALUES,
+                             q_kind, None,
                              q_subkind='bypass', **options)
         # The purpose of this next line is to get the possibly modified
         # value of **options

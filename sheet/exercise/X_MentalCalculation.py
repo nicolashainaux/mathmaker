@@ -150,8 +150,8 @@ def get_q_kinds_from_file(file_name):
                     # to just distribute them all randomly.
                     for n in n_temp_list:
                         for q in q_temp_list:
-                            if not n[0] \
-            in question.AVAILABLE_Q_KIND_VALUES[q['kind'] + "_" + q['subkind']]:
+                            if not question.match_qtype_sourcenb(
+                                        q['kind'] + "_" + q['subkind'], n[0]):
                             #___
                                 raise error.XMLFileFormatError(\
                                 "This source: " + str(n[0]) + " cannot be " \
