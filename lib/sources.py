@@ -20,14 +20,17 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib.tools.tag import classify_tag, translate_int_pairs_tag
+import random
+
 from lib.common import shared
+from lib.common.cst import RANKS
+from lib.tools.tag import classify_tag, translate_int_pairs_tag
 
 ##
 #   @todo   Turn the old source ids' tags into the new ones:
 #           table_2_9       ->      intpairs_2to9
 #           table_4_9       ->      intpairs_4to9
-#           table_N_11_50   ->      multipleofN_11to50
+#           table_N_11_50   ->      multiplesofN_11to50
 #           integers_10_100 ->      intpairs_10to100
 #           integers_5_20   ->      intpairs_5to20
 #           The ones that remain the same:
@@ -54,18 +57,57 @@ INT_PAIRS_IDS = ['tables_2_9', 'tables_4_9', 'table_2', 'table_3', 'table_4',
                  'integers_5_20_for_rectangles',
                  'table_2_9_for_multi_reversed', 'table_4_9_for_multi_reversed']
 
-class mc_source(object):
+##
+#   @brief  Generates a list of values to be used
+def generate_values(source_id):
+    if source_id == 'int_irreducible_frac':
+        return [(k, Fraction((n, k))) for n in coprime_generator(k)
+                                      for k in [i+2 for i in range(18)]]
+    elif source_id == 'rank_words':
+        return [(elt,) for elt in RANKS]
+    elif source_id == 'bypass':
+        return []
+
+
+class sub_source(object):
     ##
     #   @brief  Initializer
-    #def __init__(self):
-    #    pass
+    def __init__(self, source_id):
+        self.values = generate_values(source_id)
+        random.shuffle(self.values)
+        self.current = 0
+        self.max = len(self.values)
 
+
+    ##
+    #   @brief  Resets the source
+    def _reset(self):
+        random.shuffle(self.values)
+        self.current = 0
+
+
+    ##
+    #   @brief  Synonym of self.next(), but makes the source an Iterator.
+    def __next__(self):
+        return self.next()
+
+
+    ##
+    #   @brief  Handles the choice of the next value to return
+    def next(self, **kwargs):
+        if self.current == self.max:
+            self._reset()
+        self.current += 1
+        return self.values[self.current - 1]
+
+
+class mc_source(object):
     ##
     #   @brief  Handles the choice of the next value to return
     def next(self, source_id, **kwargs):
         if classify_tag(source_id) == 'int_pairs':
             kwargs.update(translate_int_pairs_tag(source_id))
             return shared.int_pairs_source.next(**kwargs)
-        #elif classify_tag(source_id) == '...':
-        #    return...
+        elif classify_tag(source_id) == 'rank_words':
+            return shared.rank_words_source.next(**kwargs)
 

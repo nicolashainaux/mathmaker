@@ -200,7 +200,7 @@ def match_qtype_sourcenb(q_type, source_nb):
                     source_nb == 'decimals_0_20_1',
                     source_nb == 'bypass'])
     elif q_type.startswith('rank_'):
-        return any([source_nb == 'rank_word', source_nb == 'bypass'])
+        return any([source_nb == 'rank_words', source_nb == 'bypass'])
     elif q_type in ['perimeter_square', 'area_square']:
         return any([source_nb.startswith('intpairs_'),
                     source_nb.startswith('multiplesof'),

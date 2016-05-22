@@ -32,6 +32,7 @@ def init():
     global mini_problems_wordings_source
     global markup
     global int_pairs_source
+    global rank_words_source
     global mc_source
 
     db = sqlite3.connect(settings.path.db)
@@ -49,4 +50,5 @@ def init():
         markup = latex.MARKUP
 
     import lib.sources
+    rank_words_source = lib.sources.sub_source('rank_words')
     mc_source = lib.sources.mc_source()
