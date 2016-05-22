@@ -42,22 +42,29 @@ class source(object):
         self.valcols = cols[1:]
         self.language = kwargs['language'] if 'language' in kwargs else ""
 
+
     ##
     #   @brief  Resets the drawDate of all table's entries (to 0)
-    def _reset(self):
-        shared.db.execute(\
-        "UPDATE " + self.table_name + " SET drawDate = 0;")
+    def _reset(self, **kwargs):
+        shared.db.execute("UPDATE " + self.table_name + " SET drawDate = 0;")
+        if "multi_reversed" in kwargs:
+            shared.db.execute("UPDATE "
+                              + self.table_name
+                              + " SET multirev_locked = 0;")
+
 
     ##
     #   @brief  Creates the "SELECT ...,...,... FROM ...." part of the query
     def _select_part(self, **kwargs):
         return "SELECT " + ",".join(self.allcols) + " FROM " + self.table_name
 
+
     ##
     #   @brief  Creates the language condition part of the query
     def _language_part(self, **kwargs):
         return "AND language = '" + self.language + "' " if self.language != ""\
                                                      else ""
+
 
     ##
     #   @brief  Creates the conditions of the query, from the given kwargs
@@ -68,8 +75,10 @@ class source(object):
         for kw in kwargs:
             if kw == "raw":
                 result += " AND " + kwargs[kw] + " "
-            elif kw == "prevails":
+            elif kw == "prevails" or kw.startswith("info_"):
                 pass
+            elif kw == "multi_reversed":
+                result += " AND multirev_locked = 0 "
             elif kw.endswith("_to_check"):
                 k = kw[:-9]
                 result += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
@@ -106,6 +115,7 @@ class source(object):
                 result += " AND " + kw + " = '" + kwargs[kw] + "' "
         return result
 
+
     ##
     #   @brief  Concatenates the different parts of the query
     def _cmd(self, **kwargs):
@@ -113,35 +123,53 @@ class source(object):
                + self._language_part(**kwargs) + self._kw_conditions(**kwargs) \
                + "ORDER BY random() LIMIT 1;"
 
+
     ##
-    #   @brief  Executes the query. If no result, _resets the table and executes
+    #   @brief  Executes the query. If no result, resets the table and executes
     #           the query again. Returns the query's result.
-    def _query_result(self, cmd):
+    def _query_result(self, cmd, **kwargs):
         qr = tuple(shared.db.execute(cmd))
         if not len(qr):
-            self._reset()
+            self._reset(**kwargs)
             qr = tuple(shared.db.execute(cmd))
         return qr
+
 
     ##
     #   @brief  Set the drawDate to datetime() in all entries where col_name
     #           has a value of col_match.
     def _timestamp(self, col_name, col_match):
-        shared.db.execute(\
-        "UPDATE " + self.table_name + \
-        " SET drawDate = datetime()"\
-        " WHERE " + col_name + " = '" + str(col_match) + "';")
+        shared.db.execute(
+        "UPDATE " + self.table_name
+        + " SET drawDate = datetime()"
+        + " WHERE " + col_name + " = '" + str(col_match) + "';")
+
+
+    ##
+    #   @brief  Will 'lock' some entries
+    def _lock(self, t, **kwargs):
+        if 'multi_reversed' in kwargs:
+            if t in kwargs['info_multirev']:
+                for couple in kwargs['info_multirev'][t]:
+                    shared.db.execute(
+                    "UPDATE " + self.table_name
+                    + " SET multirev_locked = 1"
+                    + " WHERE nb1 = '" + str(couple[0])
+                    + "' and nb2 = '" + str(couple[1]) + "';")
+
 
     ##
     #   @brief  Synonym of self.next(), but makes the source an Iterator.
     def __next__(self):
         return self.next()
 
+
     ##
     #   @brief  Handles the choice of the next value to return from the database
     def next(self, **kwargs):
-        t = self._query_result(self._cmd(**kwargs))[0]
+        t = self._query_result(self._cmd(**kwargs), **kwargs)[0]
         self._timestamp(str(self.idcol), str(t[0]))
+        self._lock(t[1:len(t)], **kwargs)
         if len(t) == 2:
             return t[1]
         else:

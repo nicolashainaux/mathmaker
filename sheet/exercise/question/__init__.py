@@ -48,6 +48,7 @@ Q_Calculation = Q_Calculation.Q_Calculation
 Q_Equation = Q_Equation.Q_Equation
 Q_Factorization = Q_Factorization.Q_Factorization
 generate_numbers = Q_MentalCalculation.generate_numbers
+get_modifier = Q_MentalCalculation.get_modifier
 nb_sources = Q_MentalCalculation.nb_sources
 PART_OF_ANOTHER_SOURCE = Q_MentalCalculation.PART_OF_ANOTHER_SOURCE
 SUBKINDS_TO_UNPACK = Q_MentalCalculation.SUBKINDS_TO_UNPACK

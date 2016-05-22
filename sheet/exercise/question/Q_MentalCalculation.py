@@ -449,8 +449,26 @@ def generate_decimal(width, ranks_scale, start_rank):
     return deci
 
 
-
-
+# --------------------------------------------------------------------------
+##
+#   @brief Returns a dictionary to give some special informations needed for
+#          certain questions.
+def get_modifier(q_type):
+    d = {}
+    if q_type == 'multi_reversed':
+        d.update({'multi_reversed': True,
+                  'info_multirev': {(2, 6): [(2, 6), (3, 4)],
+                                    (3, 4): [(2, 6), (3, 4)],
+                                    (2, 8): [(2, 8), (4, 4)],
+                                    (4, 4): [(2, 8), (4, 4)],
+                                    (3, 6): [(3, 6), (2, 9)],
+                                    (2, 9): [(3, 6), (2, 9)],
+                                    (3, 8): [(3, 8), (4, 6)],
+                                    (4, 6): [(3, 8), (4, 6)],
+                                    (4, 9): [(4, 9), (6, 6)],
+                                    (6, 6): [(4, 9), (6, 6)],
+                                    }})
+    return d
 
 # --------------------------------------------------------------------------
 ##
