@@ -34,6 +34,10 @@ def init():
     global int_pairs_source
     global rank_words_source
     global int_fracs_source
+    global deci_10_100_1000_multi_source
+    global deci_10_100_1000_divi_source
+    global deci_one_digit_multi_source
+    global deci_one_digit_divi_source
     global mc_source
 
     db = sqlite3.connect(settings.path.db)
@@ -53,4 +57,12 @@ def init():
     import lib.sources
     rank_words_source = lib.sources.sub_source('rank_words')
     int_fracs_source = lib.sources.sub_source('int_irreducible_frac')
+    deci_10_100_1000_multi_source = lib.sources.sub_source(
+                                        'decimal_and_10_100_1000_for_multi')
+    deci_10_100_1000_divi_source = lib.sources.sub_source(
+                                        'decimal_and_10_100_1000_for_divi')
+    deci_one_digit_multi_source = lib.sources.sub_source(
+                                        'decimal_and_one_digit_for_multi')
+    deci_one_digit_divi_source = lib.sources.sub_source(
+                                        'decimal_and_one_digit_for_divi')
     mc_source = lib.sources.mc_source()

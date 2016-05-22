@@ -22,6 +22,7 @@
 
 import sys
 import math
+import random
 from decimal import *
 import core
 from . import is_
@@ -384,6 +385,38 @@ def coprime_generator(n):
     for i in range(20):
         if gcd(i, n) == 1:
             yield i
+
+
+# --------------------------------------------------------------------------
+##
+#   @brief Returns a list of numbers of the given kind
+def generate_decimal(width, ranks_scale, start_rank):
+    # Probability to fill a higher rank rather than a lower one
+    phr = 0.5
+    hr = lr = start_rank
+    ranks = [start_rank]
+
+    for i in range(width - 1):
+        if lr == 0:
+            phr = 1
+        elif hr == len(ranks_scale) - 1:
+            phr = 0
+        if random.random() < phr:
+            hr += 1
+            ranks += [hr]
+            phr *= 0.4
+        else:
+            lr -= 1
+            ranks += [lr]
+            phr *= 2.5
+
+    figures = [str(i+1) for i in range(9)]
+    random.shuffle(figures)
+    deci = Decimal('0')
+    for r in ranks:
+        figure = figures.pop()
+        deci +=  Decimal(figure) * ranks_scale[r]
+    return deci
 
 
 # --------------------------------------------------------------------------
