@@ -183,7 +183,7 @@ def match_qtype_sourcenb(q_type, source_nb):
                   'vocabulary_multi', 'vocabulary_divi']:
     #___
         return any([source_nb.startswith('intpairs_'),
-                    source_nb.startswith('multipleof'),
+                    source_nb.startswith('multiplesof'),
                     source_nb.startswith('table_'),
                     source_nb == 'decimal_and_10_100_1000',
                     source_nb == 'decimal_and_one_digit',
@@ -193,7 +193,7 @@ def match_qtype_sourcenb(q_type, source_nb):
                     'vocabulary_addi', 'vocabulary_subtr']:
     #___
         return any([source_nb.startswith('intpairs_'),
-                    source_nb.startswith('multipleof'),
+                    source_nb.startswith('multiplesof'),
                     source_nb.startswith('table_'),
                     source_nb == 'decimal_and_10_100_1000',
                     source_nb == 'integer_3_10_decimal_3_10',
@@ -203,19 +203,19 @@ def match_qtype_sourcenb(q_type, source_nb):
         return any([source_nb == 'rank_word', source_nb == 'bypass'])
     elif q_type in ['perimeter_square', 'area_square']:
         return any([source_nb.startswith('intpairs_'),
-                    source_nb.startswith('multipleof'),
+                    source_nb.startswith('multiplesof'),
                     source_nb.startswith('table_'),
                     source_nb == 'bypass'])
     elif q_type in ['vocabulary_half', 'vocabulary_double']:
-        return any([source_nb.startswith('multipleof2'),
+        return any([source_nb.startswith('multiplesof2'),
                     source_nb == 'table_2',
                     source_nb == 'bypass'])
     elif q_type in ['vocabulary_third', 'vocabulary_triple']:
-        return any([source_nb.startswith('multipleof3'),
+        return any([source_nb.startswith('multiplesof3'),
                     source_nb == 'table_3',
                     source_nb == 'bypass'])
     elif q_type in ['vocabulary_quarter', 'vocabulary_quadruple']:
-        return any([source_nb.startswith('multipleof4'),
+        return any([source_nb.startswith('multiplesof4'),
                     source_nb == 'table_4',
                     source_nb == 'bypass'])
     elif q_type == 'multi_reversed':

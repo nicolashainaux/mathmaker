@@ -25,7 +25,7 @@
 #   @brief  Will tell if the tag belongs to int pairs, decimal numbers etc.
 def classify_tag(tag):
     if (tag.startswith('intpairs_') or tag.startswith('table_')
-        or tag.startswith('multipleof')):
+        or tag.startswith('multiplesof')):
     #___
         return 'int_pairs'
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -50,18 +50,18 @@ def translate_int_pairs_tag(tag):
                          '34', '35', '36', '41', '42', '43', '44', '45', '51',
                          '52', '53', '54', '61', '62', '63', '71', '72', '81'],
               'nb1': '11' }
-    # 'table_N' is a shortcut for 'multipleofN_2to9' if N <= 10
-    # and for 'multipleofN_2to6' if N >= 12 (11 is managed separately)
+    # 'table_N' is a shortcut for 'multiplesofN_2to9' if N <= 10
+    # and for 'multiplesofN_2to6' if N >= 12 (11 is managed separately)
     elif tag.startswith('table_'):
         n = int(tag[6:])
         r = "_2to9" if n <= 10 else "_2to6"
-        tag = 'multipleof' + str(n) + r
+        tag = 'multiplesof' + str(n) + r
 
     if tag.startswith('intpairs_'):
         n1, n2 = tag[9:].split(sep='to')
         d = { 'nb1_min': n1, 'nb1_max': n2,
               'nb2_min': n1, 'nb2_max': n2 }
-    elif tag.startswith('multipleof'):
+    elif tag.startswith('multiplesof'):
         N, r = tag[10:].split(sep='_')
         mini, maxi = r.split(sep='to')
         d = { 'raw': '(nb1 = ' + N + ' and (nb2 >= ' + mini \
