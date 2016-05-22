@@ -64,7 +64,7 @@ def translate_int_pairs_tag(tag):
         d = { 'nb1_min': n1, 'nb1_max': n2,
               'nb2_min': n1, 'nb2_max': n2 }
     elif tag.startswith('multiplesof'):
-        N, r = tag[10:].split(sep='_')
+        N, r = tag[11:].split(sep='_')
         mini, maxi = r.split(sep='to')
         d = { 'raw': '(nb1 = ' + N + ' and (nb2 >= ' + mini \
                      + ' and nb2 <= ' + maxi + ')) or (nb2 = ' + N \
