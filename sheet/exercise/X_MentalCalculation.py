@@ -273,18 +273,24 @@ def increase_alternation(l, sort_key):
 #   @brief  Determine the
 #   @param  q_i     The Q_info object
 def get_nb_source_from_question_info(q_i):
-    nb_source = q_i.nb_source
+    tag_to_unpack = nb_source = q_i.nb_source
     if nb_source in question.SOURCES_TO_UNPACK:
         s = ''
         stu = copy.copy(question.SOURCES_TO_UNPACK)
-        if nb_source == 'decimal_and_10_100_1000' \
-            or nb_source == 'decimal_and_one_digit':
+        if (nb_source == 'decimal_and_10_100_1000'
+            or nb_source == 'decimal_and_one_digit'):
+        #__
             s = stu[nb_source][q_i.type]
         else:
             s = stu[nb_source][q_i.subkind]
         s = list(s)
         random.shuffle(s)
         nb_source = s.pop()
+        if (tag_to_unpack == 'auto_vocabulary'
+            and q_i.subkind in ['addi', 'substr']
+            and nb_source == 'intpairs_2to200'):
+        #___
+            q_i.options.update({'variant': 'decimal2'})
     return nb_source
 
 
