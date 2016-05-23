@@ -110,7 +110,7 @@ for f in WORDINGS_FILES:
 
 # Insert integers pairs into the db
 # Tables of 2, 3... 99
-db_rows = [(i+2, j+2, 0, 0) for i in range(99) for j in range(99) if j >= i]
+db_rows = [(i+2, j+2, 0, 0) for i in range(199) for j in range(199) if j >= i]
 db.executemany("INSERT "\
                "INTO int_pairs(nb1, nb2, "\
                "multirev_locked, drawDate) "\
