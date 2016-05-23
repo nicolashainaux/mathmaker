@@ -63,6 +63,7 @@ INT_PAIRS_IDS = ['tables_2_9', 'tables_4_9', 'table_2', 'table_3', 'table_4',
 
 ##
 #   @brief  Generates a list of values to be used
+#   @todo   Several cases should be factorized or maybe later moved to the db
 def generate_values(source_id):
     if source_id == 'int_irreducible_frac':
         return [(k, Fraction((n, k))) for k in [i+2 for i in range(18)]
