@@ -238,7 +238,10 @@ def get_modifier(q_type):
                                     (4, 9): [(4, 9), (6, 6)],
                                     (6, 6): [(4, 9), (6, 6)],
                                     }})
-    elif 'rectangle' in q_type:
+    elif any(['rectangle' in q_type,
+              q_type.startswith('addi_'), q_type.endswith('_addi'),
+              q_type.startswith('subtr_'), q_type.endswith('_subtr')]):
+    #___
         d.update({'rectangle': True})
     elif 'square' in q_type:
         d.update({'square': True})
