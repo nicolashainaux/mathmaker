@@ -47,7 +47,7 @@ class X_Structure(object):
     #   @param **options Any options
     def __init__(self, embedded_machine,
                  x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
-                 X_LAYOUT_UNIT, **options):
+                 X_LAYOUT_UNIT, number_of_questions=6, **options):
         try:
             self.derived
         except AttributeError:
@@ -99,16 +99,12 @@ class X_Structure(object):
             self.start_number = options['start_number']
 
         # Number of questions
-        self.q_nb = default.NUMBER_OF_QUESTIONS
-        if 'number_of_questions' in options:
-            if not is_.an_integer(options['number_of_questions']):
-                raise error.UncompatibleType(options['number_of_questions'],
-                                             "integer")
-            if not (options['number_of_questions'] >= 1):
-                raise error.OutOfRangeArgument(options['number_of_questions'],
-                                               "should be >= 1")
-
-            self.q_nb = options['number_of_questions']
+        if (not isinstance(number_of_questions, int)
+            and number_of_questions >= 1):
+        #___
+            raise ValueError("The number_of_questions keyword argument should "
+                             "be an int and greater than 6.")
+        self.q_nb = number_of_questions
 
 
         self.x_layout_unit = X_LAYOUT_UNIT

@@ -30,7 +30,6 @@ from lib.common import software
 
 class default_object(object):
     def __init__(self):
-        self.NUMBER_OF_QUESTIONS = 6
         self.MONOMIAL_LETTER = 'x'
         self.EQUATION_NAME = 'E'
 
