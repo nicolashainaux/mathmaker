@@ -30,36 +30,6 @@ from lib.maths_lib import coprime_generator, generate_decimal
 from lib.tools.tag import classify_tag, translate_int_pairs_tag
 from core.base_calculus import Fraction
 
-##
-#   @todo   Turn the old source ids' tags into the new ones:
-#           table_2_9       ->      intpairs_2to9
-#           table_4_9       ->      intpairs_4to9
-#           table_N_11_50   ->      multiplesofN_11to50
-#           integers_10_100 ->      intpairs_10to100
-#           integers_5_20   ->      intpairs_5to20
-#           The ones that remain the same:
-#           table_N (for N in [2, 3, ..., 9, 11, 15, 25])
-#           The ones that will disappear:
-#           *_for_sums_diffs:   a kwarg should be added to inform the source
-#                               there's a special condition on the numbers to
-#                               return
-#           *_for_rectangles:   same as above
-#           *_for_multi_reversed:   same as above
-#           square*
-#           Yet to think about: integers_10_100_diff7atleast
-INT_PAIRS_IDS = ['tables_2_9', 'tables_4_9', 'table_2', 'table_3', 'table_4',
-                 'table_11', 'table_15', 'table_25',
-                 'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
-                 'integers_10_100', 'integers_5_20',
-                 'integers_10_100_diff7atleast',
-                 'table_2_9_for_sums_diffs',
-                 'integers_10_100_for_sums_diffs',
-                 'squares_2_9', 'squares_4_9', 'square_11',
-                 'squares_10_100', 'squares_5_20',
-                 'table_2_9_for_rectangles', 'table_4_9_for_rectangles',
-                 'table_11_for_rectangles', 'integers_10_100_for_rectangles',
-                 'integers_5_20_for_rectangles',
-                 'table_2_9_for_multi_reversed', 'table_4_9_for_multi_reversed']
 
 ##
 #   @brief  Generates a list of values to be used

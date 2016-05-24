@@ -236,19 +236,7 @@ def build_mixed_q_list(q_dict):
     random.shuffle(q_id_box)
     for q_id in q_id_box:
         info = q_dict[q_id].pop(0)
-        nb_source = info[0]
-        translations_to_check = [q_id]
-        if 'variant' in info[3]:
-            translations_to_check += [q_id + "_" + info[3]['variant']]
-        if 'context' in info[3]:
-            translations_to_check += [q_id + "_" + info[3]['context']]
-        for t in translations_to_check:
-            if t in question.SOURCES_TO_TRANSLATE \
-                and nb_source in question.SOURCES_TO_TRANSLATE[t]:
-            #___
-                nb_source = question.SOURCES_TO_TRANSLATE[t][nb_source]
-                break
-        mixed_q_list += [Q_info(q_id, info[1], info[2], nb_source, info[3])]
+        mixed_q_list += [Q_info(q_id, info[1], info[2], info[0], info[3])]
     return mixed_q_list
 
 
