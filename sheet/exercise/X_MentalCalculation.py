@@ -287,7 +287,7 @@ def get_nb_source_from_question_info(q_i):
         random.shuffle(s)
         nb_source = s.pop()
         if (tag_to_unpack == 'auto_vocabulary'
-            and q_i.subkind in ['addi', 'substr']
+            and q_i.subkind in ['addi', 'subtr']
             and nb_source == 'intpairs_2to200'):
         #___
             q_i.options.update({'variant': 'decimal2'})

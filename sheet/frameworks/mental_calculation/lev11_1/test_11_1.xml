@@ -41,7 +41,7 @@
 		
 		<mix>
 			<question kind="addi" subkind="direct" context="mini_problem"></question>
-			<question kind="substr" subkind="direct" context="mini_problem"></question>
+			<question kind="subtr" subkind="direct" context="mini_problem"></question>
 			<nb source="intpairs_10to100">2</nb>
 		</mix>
 

@@ -33,7 +33,7 @@
 			<nb source="intpairs_4to9">5</nb>
 		</question>
 
-		<question kind="substr" subkind="direct" context="mini_problem">
+		<question kind="subtr" subkind="direct" context="mini_problem">
 			<nb source="intpairs_10to100">5</nb>
 		</question>
 

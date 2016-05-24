@@ -38,7 +38,7 @@ WORDINGS_DIR = settings.datadir + "wordings/"
 WORDINGS_FILES = [ WORDINGS_DIR + n + ".xml"\
                    for n in ["mini_pb_addi_direct",
                              "mini_pb_divi_direct",
-                             "mini_pb_substr_direct",
+                             "mini_pb_subtr_direct",
                              "mini_pb_multi_direct"] ]
 
 # Existent db is deleted. A brand new empty db is created.

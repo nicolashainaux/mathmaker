@@ -96,7 +96,7 @@ SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
                   }
                      }
 
-SOURCES_TO_TRANSLATE = {'substr_direct': \
+SOURCES_TO_TRANSLATE = {'subtr_direct': \
                             {'integers_10_100': 'integers_10_100_diff7atleast'}
                         }
 
@@ -105,7 +105,7 @@ MODULES =  \
       'multi_reversed': mc_modules.multi_reversed,
       'multi_hole': mc_modules.multi_hole,
       'addi_direct': mc_modules.addi_direct,
-      'substr_direct': mc_modules.substr_direct,
+      'subtr_direct': mc_modules.subtr_direct,
       'divi_direct': mc_modules.divi_direct,
       'rank_direct': mc_modules.rank_direct,
       'rank_reversed': mc_modules.rank_reversed,
@@ -180,7 +180,7 @@ def match_qtype_sourcenb(q_type, source_nb):
                     source_nb == 'decimal_and_10_100_1000',
                     source_nb == 'decimal_and_one_digit',
                     source_nb == 'bypass'])
-    elif q_type in ['addi_direct', 'substr_direct', 'perimeter_rectangle',
+    elif q_type in ['addi_direct', 'subtr_direct', 'perimeter_rectangle',
                     'rectangle_length_or_width_from_perimeter',
                     'vocabulary_addi', 'vocabulary_subtr']:
     #___
