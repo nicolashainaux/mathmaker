@@ -111,6 +111,8 @@ class source(object):
                 result += " AND nb1 != nb2 "
             elif kw == 'square':
                 result += " AND nb1 = nb2 "
+            elif kw == 'diff7atleast':
+                result += " AND nb2 - nb1 >= 7 "
             else:
                 result += " AND " + kw + " = '" + kwargs[kw] + "' "
         return result

@@ -223,7 +223,7 @@ def match_qtype_sourcenb(q_type, source_nb):
 ##
 #   @brief Returns a dictionary to give some special informations needed for
 #          certain questions.
-def get_modifier(q_type):
+def get_modifier(q_type, nb_source):
     d = {}
     if q_type == 'multi_reversed':
         d.update({'multi_reversed': True,
@@ -238,6 +238,8 @@ def get_modifier(q_type):
                                     (4, 9): [(4, 9), (6, 6)],
                                     (6, 6): [(4, 9), (6, 6)],
                                     }})
+    elif q_type == 'subtr_direct' and nb_source.startswith('intpairs_10'):
+        d.update({'diff7atleast': True})
     elif any(['rectangle' in q_type,
               q_type.startswith('addi_'), q_type.endswith('_addi'),
               q_type.startswith('subtr_'), q_type.endswith('_subtr')]):
