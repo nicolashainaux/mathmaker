@@ -28,8 +28,10 @@ from . import vocabulary_questions
 class sub_object(vocabulary_questions.structure):
 
     def __init__(self, M, numbers_to_use, **options):
-        super().__init__(M, numbers_to_use,
-                         result_fct=lambda x,y: Product([x, y]),
-                    wording=_("How much is the quotient of {nb1} by {nb2}?"),
-                         permute_nb1_nb2_result=True)
+        super().__init__(
+                M, numbers_to_use,
+                result_fct=lambda x,y: Product([x, y]),
+                wording=_("How much is the quotient of {nb1} by {nb2}?"),
+                permute_nb1_nb2_result=True,
+                **options)
 

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-05-18 07:35+0100\n"
+"PO-Revision-Date: 2016-05-24 06:58+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -334,11 +334,11 @@ msgstr "Factoriser :"
 msgid "Factorise, if possible:"
 msgstr "Factoriser, si possible :"
 
-#: sheet/exercise/X_MentalCalculation.py:486
+#: sheet/exercise/X_MentalCalculation.py:424
 msgid "Question:"
 msgstr "Question :"
 
-#: sheet/exercise/X_MentalCalculation.py:488
+#: sheet/exercise/X_MentalCalculation.py:426
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -510,7 +510,7 @@ msgstr "Chiffre des {rank} dans le nombre {decimal_number} ?"
 #: sheet/exercise/question/mc_modules/addi_direct.py:50
 #: sheet/exercise/question/mc_modules/divi_direct.py:46
 #: sheet/exercise/question/mc_modules/multi_direct.py:50
-#: sheet/exercise/question/mc_modules/substr_direct.py:53
+#: sheet/exercise/question/mc_modules/subtr_direct.py:53
 #, python-brace-format
 msgid "Calculate: {math_expr}"
 msgstr "Calculer : {math_expr}"
@@ -640,7 +640,7 @@ msgstr ""
 "Nous avons {nb1} moutons. Nos voisins en ont {nb2} fois plus que nous. "
 "Combien de moutons ont-ils ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:13
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:13
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs we used {nb2} of them to make an "
 "omelet. How many eggs left are there?"
@@ -648,7 +648,7 @@ msgstr ""
 "Hier, ma poule aux œufs d'or a pondu {nb1} œufs et on en a utilisé {nb2} "
 "pour faire une omelette. Combien reste-t-il d'œufs ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:17
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:17
 msgid ""
 "The gardener had {nb1} salads in his vegetable garden, and harvested {nb2} "
 "of them last week. How many salads are still in the garden?"
@@ -656,7 +656,7 @@ msgstr ""
 "Le jardinier avait {nb1} salades dans son potager et en a récolté {nb2} la "
 "semaine dernière. Combien reste-t-il de salades dans le potager ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:76
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:76
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} more than us. How many sheep "
 "do we have?"
@@ -664,7 +664,7 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. C'est {nb2} de plus que nous. Combien de "
 "moutons avons-nous ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:79
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:79
 msgid ""
 "Our neighbours have {nb1} sheep. We have {nb2} less than them. How many "
 "sheep do we have?"
@@ -707,7 +707,7 @@ msgstr ""
 "Nous avons chargé {nb1} paquets de farine, de {nb2} {mass_unit=kg} chacun. "
 "Quelle masse totale de farine cela représente-t-il ? |hint:mass_unit|"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:42
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:42
 msgid ""
 "I had to fill this can with {nb2} {capacity_unit=L} of water. It contains "
 "now {nb1} {capacity_unit}. How much water was left in it? |hint:"
@@ -717,7 +717,7 @@ msgstr ""
 "en contient {nb1} {capacity_unit}. Quelle quantité d'eau restait-il ? |hint:"
 "capacity_unit|"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:62
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:62
 msgid ""
 "My bike ride is {nb1} {length_unit=km} long and I already rode {nb2} "
 "{length_unit}. How long do I still have to go cycling? |hint:length_unit|"
@@ -725,7 +725,7 @@ msgstr ""
 "Ma randonnée à vélo est de {nb1} {length_unit=km} et j'ai déjà parcouru "
 "{nb2} {length_unit}. Combien me reste-t-il à parcourir ? |hint:length_unit|"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:65
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:65
 msgid ""
 "I already rode {nb2} {length_unit=km} out of {nb1} {length_unit}. How long "
 "do I still have to go cycling? |hint:length_unit|"
@@ -733,7 +733,7 @@ msgstr ""
 "J'ai déjà parcouru {nb2} {length_unit=km} sur les {nb1} {length_unit} de ma "
 "balade à vélo. Combien me reste-t-il à parcourir ? |hint:length_unit|"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:69
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:69
 msgid ""
 "I have painted {nb2} {area_unit=m} out of the {nb1} {area_unit} of this "
 "wall. How much is still left to paint? |hint:area_unit|"
@@ -741,7 +741,7 @@ msgstr ""
 "J'ai peint {nb2} {area_unit=m} sur les {nb1} {area_unit} de ce mur. Combien "
 "reste-t-il à peindre ? |hint:area_unit|"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:72
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:72
 msgid ""
 "This wall is altogether {nb1} {area_unit=m} wide. I have already painted "
 "{nb2} {area_unit} of it, how much is there still left to paint? |hint:"
@@ -750,7 +750,7 @@ msgstr ""
 "Ce mur a une aire de  {nb1} {area_unit=m}. J'en ai déjà peint {nb2} "
 "{area_unit}, combien reste-t-il à peindre ? |hint:area_unit|"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:45
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:45
 msgid ""
 "This can contains altogether {nb1} {capacity_unit=L} of water. I had to "
 "refill it with {nb2} {capacity_unit}. How much water was left in it? |hint:"
@@ -917,7 +917,7 @@ msgstr ""
 "{feminine_name} a préparé {nb1} paquets de {nb2} truffes. Combien de truffes "
 "a-t-elle préparé ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:6
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} marbles less than {name1}. How "
 "many marbles has {name2}?"
@@ -925,7 +925,7 @@ msgstr ""
 "{name1} a {nb1} billes. {name2} a {nb2} billes de moins que {name1}. Combien "
 "de billes a {name2} ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:9
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:9
 msgid ""
 "{name2} has {nb2} marbles less than {name1}, who has {nb1} of them. How many "
 "marbles has {name2}?"
@@ -933,7 +933,7 @@ msgstr ""
 "{name2} a {nb2} billes de moins que {name1}, qui en a {nb1}. Combien de "
 "billes a {name2} ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:35
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:35
 msgid ""
 "{name1} is {nb1} years old and {name2} is {nb2} years younger than {name1}. "
 "How old is {name2}? |hint:years|"
@@ -941,7 +941,7 @@ msgstr ""
 "{name1} a {nb1} ans et {name2} a {nb2} ans de moins que {name1}. Quel âge a "
 "{name2} ? |hint:ans|"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:38
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:38
 msgid ""
 "{name2} is {nb2} years younger than {name1}, who is {nb1} years old. How old "
 "is {name2}? |hint:years|"
@@ -949,7 +949,7 @@ msgstr ""
 "{name2} a {nb2} ans de moins que {name1}, qui a {nb1} ans. Quel âge a "
 "{name2} ? |hint:ans|"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:49
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:49
 msgid ""
 "{masculine_name} read his book from page {nb2} this morning until page {nb1} "
 "this afternoon. How many pages has he read today?"
@@ -957,7 +957,7 @@ msgstr ""
 "{masculine_name} a lu son livre, de la page {nb2} ce matin jusqu'à la page "
 "{nb1} cet après-midi. Combien de pages a-t-il lu aujourd'hui ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:52
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:52
 msgid ""
 "{feminine_name} read her book from page {nb2} this morning until page {nb1} "
 "this afternoon. How many pages has she read today?"
@@ -965,7 +965,7 @@ msgstr ""
 "{feminine_name} a lu son livre, de la page {nb2} ce matin jusqu'à la page "
 "{nb1} cet après-midi. Combien de pages a-t-elle lu aujourd'hui ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:55
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:55
 msgid ""
 "Today, {masculine_name} has read his book until page {nb1}. This morning he "
 "started at page {nb2}. How many pages has he read today?"
@@ -973,7 +973,7 @@ msgstr ""
 "Aujourd'hui, {masculine_name} a lu son livre jusqu'à la page {nb1}. Ce matin "
 "il avait commencé à la page {nb2}. Combien de pages a-t-il lu aujourd'hui ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:58
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:58
 msgid ""
 "Today, {feminine_name} has read her book until page {nb1}. This morning she "
 "started at page {nb2}. How many pages has she read today?"
@@ -982,7 +982,7 @@ msgstr ""
 "elle avait commencé à la page {nb2}. Combien de pages a-t-elle lu "
 "aujourd'hui ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:31
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:31
 msgid ""
 "Some friends shared {nb2} of the {nb1} candies of the packet. How many "
 "candies are there left?"
@@ -1014,7 +1014,7 @@ msgstr ""
 "Le jardinier a planté {nb1} rangs de {nb2} choux. Combien de choux a-t-il "
 "planté en tout ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:20
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:20
 msgid ""
 "The gardener had {nb1} cabbages in his vegetable garden, and harvested {nb2} "
 "of them last week. How many cabbages are still in the garden?"
@@ -1174,7 +1174,7 @@ msgstr ""
 "Un maraîcher a planté {nb1} rangs de {nb2} choux. Combien de choux a-t-il "
 "planté en tout ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:27
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:27
 msgid ""
 "A market gardener had {nb1} cabbages in his vegetable garden, and harvested "
 "{nb2} of them last week. How many cabbages are still in the garden?"
@@ -1198,7 +1198,7 @@ msgstr ""
 "Un maraîcher a planté {nb1} choux la semaine dernière, et {nb2} choux de "
 "plus cette semaine. Combien de choux a-t-il planté en tout ?"
 
-#: mathmaker/data/wordings/mini_pb_substr_direct.xml:24
+#: mathmaker/data/wordings/mini_pb_subtr_direct.xml:24
 msgid ""
 "A market gardener had {nb1} salads in his vegetable garden, and harvested "
 "{nb2} of them last week. How many salads are still in the garden?"
@@ -1426,22 +1426,22 @@ msgid ""
 "Area of a square whose side's length is {nb1} {length_unit}? |hint:area_unit|"
 msgstr "Aire d'un carré de côté {nb1} {length_unit} ? |hint:area_unit|"
 
-#: sheet/exercise/question/mc_modules/vocabulary_addi.py:33
+#: sheet/exercise/question/mc_modules/vocabulary_addi.py:34
 #, python-brace-format
 msgid "How much is the sum of {nb1} and {nb2}?"
 msgstr "Combien vaut la somme de {nb1} et de {nb2} ?"
 
-#: sheet/exercise/question/mc_modules/vocabulary_divi.py:33
+#: sheet/exercise/question/mc_modules/vocabulary_divi.py:34
 #, python-brace-format
 msgid "How much is the quotient of {nb1} by {nb2}?"
 msgstr "Combien vaut le quotient de {nb1} par {nb2} ?"
 
-#: sheet/exercise/question/mc_modules/vocabulary_multi.py:33
+#: sheet/exercise/question/mc_modules/vocabulary_multi.py:34
 #, python-brace-format
 msgid "How much is the product of {nb1} by {nb2}?"
 msgstr "Combien vaut le produit de {nb1} par {nb2} ?"
 
-#: sheet/exercise/question/mc_modules/vocabulary_subtr.py:33
+#: sheet/exercise/question/mc_modules/vocabulary_subtr.py:34
 #, python-brace-format
 msgid "How much is the difference between {nb1} and {nb2}?"
 msgstr "Combien vaut la différence entre {nb1} et {nb2} ?"

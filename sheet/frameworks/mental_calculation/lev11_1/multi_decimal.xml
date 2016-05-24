@@ -26,7 +26,7 @@
 	<exercise id="mental_calculation" kind="tabular">
 
 		<question kind="multi" subkind="direct" variant="decimal">
-			<nb source="table_2_9">20</nb>
+			<nb source="intpairs_2to9">20</nb>
 		</question>
 
 	</exercise>

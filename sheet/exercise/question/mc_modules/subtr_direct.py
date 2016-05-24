@@ -51,7 +51,7 @@ class sub_object(mc_module.structure):
             return post_process(self.wording.format(**self.wording_format))
         else:
             return _("Calculate: {math_expr}").format(\
-                                math_expr=M.write_math_style2(self.sum_str))
+                                math_expr=M.write_math_style2(self.diff_str))
 
     def a(self, M, **options):
         v = None

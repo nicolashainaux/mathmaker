@@ -25,7 +25,7 @@
 		<!-- Default value (planned): context="none" 
 			 No default for kind and subkind, they must be given -->
 		<question kind="multi" subkind="direct">
-			<nb source="table_2_9">20</nb>
+			<nb source="intpairs_2to9">20</nb>
 		</question>
 
 	</exercise>

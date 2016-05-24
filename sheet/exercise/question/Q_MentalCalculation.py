@@ -28,76 +28,6 @@ from .Q_Structure import Q_Structure
 from . import mc_modules
 from core.base_calculus import *
 
-# 'table_2_9'
-# 'table_11' --> 11×n where 10 < n < 100, no carry over
-# 'table_15' --> 15×n where 2 <= n <= 6
-# 'table_25' --> 25×n where 2 <= n <= 6
-# 'int_irreducible_frac' --> (n, p/n) where 2 <= n <= 20 and p/n is irreducible
-USER_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
-                         'table_4_9',
-                         'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
-                         'table_2_9_for_sums_diffs',
-                         'table_11',
-                         'table_15',
-                         'table_25',
-                         'int_irreducible_frac',
-                         'rank_word',
-                         'integers_10_100',
-                         'integers_5_20',
-                         'integer_3_10_decimal_3_10',
-                         'integers_10_100_for_sums_diffs',
-                         'decimals_0_20_1',
-                         'decimal_and_10_100_1000',
-                         'decimal_and_one_digit',
-                         'bypass'}
-
-AVAILABLE_Q_SUBKIND_VALUES = {'table_2_9', 'table_2', 'table_3', 'table_4',
-                              'squares_2_9',
-                              'table_4_9', 'squares_4_9',
-                              'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
-                              'table_2_9_for_sums_diffs',
-                              'table_2_9_for_rectangles',
-                              'table_2_9_for_multi_reversed',
-                              'table_4_9_for_rectangles',
-                              'table_4_9_for_multi_reversed',
-                              'table_11', 'square_11',
-                              'table_11_for_rectangles',
-                              'table_15',
-                              'table_25',
-                              'int_irreducible_frac',
-                              'rank_word',
-                              'integers_10_100', 'squares_10_100',
-                              'integers_10_100_for_rectangles',
-                              'integers_10_100_diff7atleast',
-                              'integers_5_20', 'squares_5_20',
-                              'integer_3_10_decimal_3_10',
-                              'integer_3_10_decimal_3_10_for_rectangles',
-                              'integers_5_20_for_rectangles',
-                              'integers_10_100_for_sums_diffs',
-                              'decimals_0_20_1',
-                              'decimal_and_10_100_1000_for_divi',
-                              'decimal_and_10_100_1000_for_multi',
-                              'decimal_and_one_digit_for_divi',
-                              'decimal_and_one_digit_for_multi',
-                              'bypass'}
-
-PART_OF_ANOTHER_SOURCE = { 'table_2': 'table_2_9',
-                           'table_3': 'table_2_9',
-                           'table_4': 'table_2_9',
-                           'table_4_9': 'table_2_9',
-                           'integers_10_100_for_sums_diffs': 'integers_10_100',
-                           'table_2_9_for_rectangles': 'table_2_9',
-                           'table_11_for_rectangles': 'table_11',
-                           'integers_5_20_for_rectangles': 'integers_5_20',
-                           'integers_10_100_for_rectangles': 'integers_10_100',
-                           'integers_10_100_diff7atleast' : 'integers_10_100',
-                           'squares_2_9': 'table_2_9',
-                           'squares_4_9': 'table_4_9',
-                           'square_11': 'table_11',
-                           'squares_5_20': 'integers_5_20',
-                           'squares_10_100': 'integers_10_100'
-                         }
-
 SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number': {'half', 'third', 'quarter'},
                       'simple_multiples_of_a_number': {'double', 'triple',
                                                         'quadruple'},
@@ -121,29 +51,32 @@ SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
                                      'double': {'table_2'},
                                      'triple': {'table_3'},
                                      'quadruple': {'table_4'},
-                                     'multi': {'table_2_9'},
-                                     'divi': {'table_2_9'},
-                                     'addi': {'table_2_9_for_sums_diffs'},
-                                     'subtr': {'table_2_9_for_sums_diffs'}},
-                     'auto_11_50': {'half': {'table_2_11_50'},
-                                     'third': {'table_3_11_50'},
-                                     'quarter': {'table_4_11_50'},
-                                     'double': {'table_2_11_50'},
-                                     'triple': {'table_3_11_50'},
-                                     'quadruple': {'table_4_11_50'}},
+                                     'multi': {'intpairs_2to9'},
+                                     'divi': {'intpairs_2to9'},
+                                     'addi': {'intpairs_2to9'},
+                                     'subtr': {'intpairs_2to9'}},
+                     'auto_11_50': {'half': {'multiplesof2_11to50'},
+                                     'third': {'multiplesof3_11to50'},
+                                     'quarter': {'multiplesof4_11to50'},
+                                     'double': {'multiplesof2_11to50'},
+                                     'triple': {'multiplesof3_11to50'},
+                                     'quadruple': {'multiplesof4_11to50'}},
                      'auto_vocabulary':  \
-                               {'half': {'table_2', 'table_2_11_50'},
-                                'third': {'table_3', 'table_3_11_50'},
-                                'quarter': {'table_4', 'table_4_11_50'},
-                                'double': {'table_2', 'table_2_11_50'},
-                                'triple': {'table_3', 'table_3_11_50'},
-                                'quadruple': {'table_4', 'table_4_11_50'},
-                                'multi': {'table_2_9'},
-                                'divi': {'table_2_9'},
-                                'addi': {'integers_10_100_for_sums_diffs',
-                                          'decimals_0_20_1'},
-                                'subtr': {'integers_10_100_for_sums_diffs',
-                                           'decimals_0_20_1'}},
+                               {'half': {'table_2', 'multiplesof2_11to50'},
+                                'third': {'table_3', 'multiplesof3_11to50'},
+                                'quarter': {'table_4', 'multiplesof4_11to50'},
+                                'double': {'table_2', 'multiplesof2_11to50'},
+                                'triple': {'table_3', 'multiplesof3_11to50'},
+                                'quadruple': {'table_4', 'multiplesof4_11to50'},
+                                'multi': {'intpairs_2to9'},
+                                'divi': {'intpairs_2to9'},
+                                # The 'intpairs_2to200' below will get divided
+                                # by 10 to produce two decimals between 0.2
+                                # and 20.
+                                'addi': {'intpairs_10to100',
+                                         'intpairs_2to200'},
+                                'subtr': {'intpairs_10to100',
+                                          'intpairs_2to200'}},
                      'decimal_and_10_100_1000': \
                 {'multi_direct': {'decimal_and_10_100_1000_for_multi'},
                  'divi_direct': {'decimal_and_10_100_1000_for_divi'},
@@ -163,208 +96,12 @@ SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
                   }
                      }
 
-rectangle_translations = {'table_2_9': 'table_2_9_for_rectangles',
-                          'table_4_9': 'table_4_9_for_rectangles',
-                          'table_11': 'table_11_for_rectangles',
-                          'integers_5_20': 'integers_5_20_for_rectangles',
-                          'integers_10_100': 'integers_10_100_for_rectangles',
-                          'integer_3_10_decimal_3_10': \
-                                    'integer_3_10_decimal_3_10_for_rectangles'}
-
-square_translations = {'table_2_9': 'squares_2_9',
-                       'table_4_9': 'squares_4_9',
-                       'table_11': 'square_11',
-                       'integers_5_20': 'squares_5_20',
-                       'integers_10_100': 'squares_10_100'}
-
-SOURCES_TO_TRANSLATE = {'area_rectangle': rectangle_translations,
-                        'perimeter_rectangle': rectangle_translations,
-                        'area_square': square_translations,
-                        'perimeter_square': square_translations,
-                        'rectangle_length_or_width_from_area': \
-                                                rectangle_translations,
-                        'rectangle_length_or_width_from_perimeter': \
-                                                rectangle_translations,
-                        'substr_direct': \
-                            {'integers_10_100': 'integers_10_100_diff7atleast'},
-                        'multi_reversed': \
-                            {'table_2_9': 'table_2_9_for_multi_reversed',
-                             'table_4_9': 'table_4_9_for_multi_reversed'}
-                       }
-
-AVAILABLE_Q_KIND_VALUES = \
-    { 'multi_direct': ['table_2_9',
-                        'table_2', 'table_3', 'table_4',
-                        'table_4_9',
-                        'table_11',
-                        'table_15',
-                        'table_25',
-                        'decimal_and_10_100_1000',
-                        'decimal_and_one_digit',
-                        'bypass'],
-      'area_rectangle': ['table_2_9',
-                         'table_2', 'table_3', 'table_4',
-                         'table_4_9',
-                         'table_11',
-                         'table_15',
-                         'table_25',
-                         'decimal_and_10_100_1000',
-                         'decimal_and_one_digit',
-                         'bypass'],
-      'addi_direct': ['table_2_9',
-                              'table_2', 'table_3', 'table_4',
-                              'table_4_9',
-                              'table_11',
-                              'table_15',
-                              'table_25',
-                              'decimal_and_10_100_1000',
-                              'integers_10_100_for_sums_diffs',
-                              'table_2_9_for_sums_diffs',
-                              'integers_10_100',
-                              'integers_5_20',
-                              'bypass'],
-      'substr_direct': ['table_2_9',
-                              'table_2', 'table_3', 'table_4',
-                              'table_4_9',
-                              'table_11',
-                              'table_15',
-                              'table_25',
-                              'decimal_and_10_100_1000',
-                              'integers_10_100_for_sums_diffs',
-                              'table_2_9_for_sums_diffs',
-                              'integers_10_100',
-                              'integers_5_20',
-                              'bypass'],
-      'perimeter_rectangle': ['table_2_9',
-                              'table_2', 'table_3', 'table_4',
-                              'table_4_9',
-                              'table_11',
-                              'table_15',
-                              'table_25',
-                              'decimal_and_10_100_1000',
-                              'integers_10_100_for_sums_diffs',
-                              'table_2_9_for_sums_diffs',
-                              'integers_10_100',
-                              'integers_5_20',
-                              'bypass'],
-      'perimeter_square': ['table_2_9',
-                           'table_4_9',
-                           'table_11',
-                           'integers_10_100',
-                           'integers_5_20',
-                           'bypass'],
-      'area_square': ['table_2_9',
-                      'table_4_9',
-                      'table_11',
-                      'integers_10_100',
-                      'integers_5_20',
-                      'bypass'],
-      'rectangle_length_or_width_from_perimeter': ['table_2_9',
-                              'table_2', 'table_3', 'table_4',
-                              'table_4_9',
-                              'table_11',
-                              'table_15',
-                              'table_25',
-                              'decimal_and_10_100_1000',
-                              'integers_10_100_for_sums_diffs',
-                              'table_2_9_for_sums_diffs',
-                              'integers_10_100',
-                              'integers_5_20',
-                              'integer_3_10_decimal_3_10',
-                              'bypass'],
-      'rectangle_length_or_width_from_area': ['table_2_9',
-                                    'table_2_9_for_rectangles',
-                                    'table_2', 'table_3', 'table_4',
-                                    'table_4_9',
-                                    'table_11',
-                                    'table_15',
-                                    'table_25',
-                                    'decimal_and_10_100_1000',
-                                    'decimal_and_one_digit',
-                                    'bypass'],
-      'multi_reversed': ['table_2_9',
-                          'table_2', 'table_3', 'table_4',
-                          'table_4_9',
-                          'bypass'],
-      'multi_hole': ['table_2_9',
-                      'table_2', 'table_3', 'table_4',
-                      'table_4_9',
-                      'table_11',
-                      'table_15',
-                      'table_25',
-                      'decimal_and_10_100_1000',
-                      'decimal_and_one_digit',
-                      'bypass'],
-      'divi_direct': ['table_2_9', 'table_2_9_for_rectangles',
-                       'table_2', 'table_3', 'table_4',
-                       'table_4_9',
-                       'table_11',
-                       'table_15',
-                       'table_25',
-                       'decimal_and_10_100_1000',
-                       'decimal_and_one_digit',
-                       'bypass'],
-      'rank_direct': ['rank_word',
-                       'bypass'],
-      'rank_reversed': ['rank_word',
-                         'bypass'],
-      'rank_numberof': ['rank_word',
-                           'bypass'],
-      'vocabulary_half': {'table_2', 'table_2_11_50', 'bypass'},
-      'vocabulary_third': {'table_3', 'table_3_11_50', 'bypass'},
-      'vocabulary_quarter': {'table_4', 'table_4_11_50', 'bypass'},
-      'vocabulary_double': {'table_2', 'table_2_11_50', 'bypass'},
-      'vocabulary_triple': {'table_3', 'table_3_11_50', 'bypass'},
-      'vocabulary_quadruple': {'table_4', 'table_4_11_50', 'bypass'},
-      'vocabulary_multi': {'table_2_9',
-                            'table_2', 'table_3', 'table_4',
-                            'table_4_9',
-                            'table_11',
-                            'table_15',
-                            'table_25',
-                            'decimal_and_10_100_1000',
-                            'decimal_and_one_digit',
-                            'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
-                            'bypass'},
-      'vocabulary_divi': {'table_2_9',
-                           'table_2', 'table_3', 'table_4',
-                           'table_4_9',
-                           'table_11',
-                           'table_15',
-                           'table_25',
-                           'decimal_and_10_100_1000',
-                           'decimal_and_one_digit',
-                           'table_2_11_50', 'table_3_11_50', 'table_4_11_50',
-                           'bypass'},
-      'vocabulary_addi': {'table_2_9', 'table_2_9_for_sums_diffs',
-                           'table_4_9',
-                           'integers_10_100', 'integers_10_100_for_sums_diffs',
-                           'decimals_0_20_1', 'bypass'},
-      'vocabulary_subtr': {'table_2_9', 'table_2_9_for_sums_diffs',
-                            'table_4_9',
-                            'integers_10_100', 'integers_10_100_for_sums_diffs',
-                            'decimals_0_20_1', 'bypass'}
-
-#     frozenset(('area', 'rectangle', 'with_drawing')): ['table_2_9',
-#                                              'table_11',
-#                                              'table_15',
-#                                              'table_25'],
-#     frozenset(('area', 'rectangle', 'without_drawing')): ['table_2_9',
-#                                                 'table_11',
-#                                                 'table_15',
-#                                                 'table_25'],
-#     frozenset(('area', 'right_triangle')): ['table_2_9',
-#                                   'table_11',
-#                                   'table_15',
-#                                   'table_25']
-    }
-
 MODULES =  \
     { 'multi_direct': mc_modules.multi_direct,
       'multi_reversed': mc_modules.multi_reversed,
       'multi_hole': mc_modules.multi_hole,
       'addi_direct': mc_modules.addi_direct,
-      'substr_direct': mc_modules.substr_direct,
+      'subtr_direct': mc_modules.subtr_direct,
       'divi_direct': mc_modules.divi_direct,
       'rank_direct': mc_modules.rank_direct,
       'rank_reversed': mc_modules.rank_reversed,
@@ -384,364 +121,95 @@ MODULES =  \
       'rectangle_length_or_width': mc_modules.rectangle_length_or_width,
       'perimeter_square': mc_modules.perimeter_square,
       'area_square': mc_modules.area_square
-
-#     ('division', 'direct'): mc_modules.divi_dir,
-#     ('division', 'decimal_1'): mc_modules.divi_deci1,
-#     ('area', 'rectangle', 'with_drawing'): mc_modules.area_rect_dr,
-#     ('area', 'rectangle', 'without_drawing'): mc_modules.area_rect_no_dr,
-#     ('area', 'right_triangle'): mc_modules.area_right_tri
     }
 
 
-
 # --------------------------------------------------------------------------
 ##
-#   @brief Access to sources of numbers
-def nb_sources():
-    return AVAILABLE_Q_SUBKIND_VALUES
-
-
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief Generator of coprime numbers
-def coprime_generator(n):
-    for i in range(20):
-        if maths_lib.gcd(i, n) == 1:
-            yield i
-
-
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief Returns a list of numbers of the given kind
-def generate_decimal(width, ranks_scale, start_rank):
-    # Probability to fill a higher rank rather than a lower one
-    phr = 0.5
-    hr = lr = start_rank
-    ranks = [start_rank]
-
-    for i in range(width - 1):
-        if lr == 0:
-            phr = 1
-        elif hr == len(ranks_scale) - 1:
-            phr = 0
-
-        if random.random() < phr:
-            hr += 1
-            ranks += [hr]
-            phr *= 0.4
-        else:
-            lr -= 1
-            ranks += [lr]
-            phr *= 2.5
-
-    figures = [str(i+1) for i in range(9)]
-
-    deci = Decimal('0')
-
-    for r in ranks:
-        figure = randomly.pop(figures)
-        deci +=  Decimal(figure) * ranks_scale[r]
-
-    return deci
-
-
-
+#   @brief  Tells if the given question's type and source number do match
+#   @todo   The 'integer_3_10_decimal_3_10' may be later turned into
+#           'intpairs_3to10' with variant='decimal1', so this condition can
+#           certainly be removed.
+def match_qtype_sourcenb(q_type, source_nb):
+    if q_type in ['multi_direct', 'area_rectangle', 'multi_hole',
+                  'rectangle_length_or_width_from_area', 'divi_direct',
+                  'vocabulary_multi', 'vocabulary_divi']:
+    #___
+        return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('multiplesof'),
+                    source_nb.startswith('table_'),
+                    source_nb == 'decimal_and_10_100_1000',
+                    source_nb == 'decimal_and_one_digit',
+                    source_nb == 'bypass'])
+    elif q_type in ['addi_direct', 'subtr_direct', 'perimeter_rectangle',
+                    'rectangle_length_or_width_from_perimeter',
+                    'vocabulary_addi', 'vocabulary_subtr']:
+    #___
+        return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('multiplesof'),
+                    source_nb.startswith('table_'),
+                    source_nb == 'decimal_and_10_100_1000',
+                    source_nb == 'integer_3_10_decimal_3_10',
+                    source_nb == 'decimals_0_20_1',
+                    source_nb == 'bypass'])
+    elif q_type.startswith('rank_'):
+        return any([source_nb == 'rank_words', source_nb == 'bypass'])
+    elif q_type in ['perimeter_square', 'area_square']:
+        return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('multiplesof'),
+                    source_nb.startswith('table_'),
+                    source_nb == 'bypass'])
+    elif q_type in ['vocabulary_half', 'vocabulary_double']:
+        return any([source_nb.startswith('multiplesof2'),
+                    source_nb == 'table_2',
+                    source_nb == 'bypass'])
+    elif q_type in ['vocabulary_third', 'vocabulary_triple']:
+        return any([source_nb.startswith('multiplesof3'),
+                    source_nb == 'table_3',
+                    source_nb == 'bypass'])
+    elif q_type in ['vocabulary_quarter', 'vocabulary_quadruple']:
+        return any([source_nb.startswith('multiplesof4'),
+                    source_nb == 'table_4',
+                    source_nb == 'bypass'])
+    elif q_type == 'multi_reversed':
+        return any([(source_nb.startswith('intpairs_')
+                     and source_nb.endswith('to9')),
+                    source_nb == 'table_2',
+                    source_nb == 'table_3',
+                    source_nb == 'table_4',
+                    source_nb == 'bypass'])
 
 
 # --------------------------------------------------------------------------
 ##
-#   @brief Returns a list of numbers of the given kind
-def generate_numbers(subkind):
-    if subkind == 'table_2_9' or subkind == 'table_2_9_for_sums_diffs':
-        return {(2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
-                (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
-                (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
-                (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
-                (6, 6), (6, 7), (6, 8), (6, 9),
-                (7, 7), (7, 8), (7, 9),
-                (8, 8), (8, 9),
-                (9, 9)}
-
-    elif subkind == 'table_2_9_for_rectangles':
-        return {(2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9),
-                (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9),
-                (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
-                (5, 6), (5, 7), (5, 8), (5, 9),
-                (6, 7), (6, 8), (6, 9),
-                (7, 8), (7, 9),
-                (8, 9)}
-
-    elif subkind == 'table_2_9_for_multi_reversed':
-        return {(2, 2), (2, 3), (2, 4), (2, 5), (2, 7),
-                (3, 3), (3, 5), (3, 7), (3, 9),
-                (4, 5), (4, 7), (4, 8),
-                (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
-                (6, 7), (6, 8), (6, 9),
-                (7, 7), (7, 8), (7, 9),
-                (8, 8), (8, 9),
-                (9, 9),
-                random.choice([(2, 6), (3, 4)]),
-                random.choice([(2, 8), (4, 4)]),
-                random.choice([(3, 6), (2, 9)]),
-                random.choice([(3, 8), (4, 6)]),
-                random.choice([(4, 9), (6, 6)])}
-
-    elif subkind == 'squares_2_9':
-        return {(2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9)}
-
-    elif subkind == 'table_4_9':
-        return {(4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
-                (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
-                (6, 6), (6, 7), (6, 8), (6, 9),
-                (7, 7), (7, 8), (7, 9),
-                (8, 8), (8, 9),
-                (9, 9)}
-
-    elif subkind == 'table_4_9_for_rectangles':
-        return {(4, 5), (4, 6), (4, 7), (4, 8), (4, 9),
-                (5, 6), (5, 7), (5, 8), (5, 9),
-                (6, 7), (6, 8), (6, 9),
-                (7, 8), (7, 9),
-                (8, 9)}
-
-    elif subkind == 'table_4_9_for_multi_reversed':
-        return {(4, 4), (4, 5), (4, 6), (4, 7), (4, 8),
-                (5, 5), (5, 6), (5, 7), (5, 8), (5, 9),
-                (6, 7), (6, 8), (6, 9),
-                (7, 7), (7, 8), (7, 9),
-                (8, 8), (8, 9),
-                (9, 9),
-                random.choice([(4, 9), (6, 6)])}
-
-    elif subkind == 'squares_4_9':
-        return {(4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9)}
-
-    elif subkind == 'table_2':
-        return {(2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9)}
-
-    elif subkind == 'table_3':
-        return {(3, 2), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9)}
-
-    elif subkind == 'table_4':
-        return {(4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9)}
-
-    elif subkind == 'table_2_11_50':
-        return {(2, n+11) for n in range(40)}
-
-    elif subkind == 'table_3_11_50':
-        return {(3, n+11) for n in range(40)}
-
-    elif subkind == 'table_4_11_50':
-        return {(4, n+11) for n in range(40)}
-
-    elif subkind == 'table_11':
-        return {(11, 11), (11, 12), (11, 13), (11, 14), (11, 15), (11, 16),
-                (11, 17), (11, 18),
-                (11, 21), (11, 22), (11, 23), (11, 24), (11, 25), (11, 26),
-                (11, 27),
-                (11, 31), (11, 32), (11, 33), (11, 34), (11, 35), (11, 36),
-                (11, 41), (11, 42), (11, 43), (11, 44), (11, 45),
-                (11, 51), (11, 52), (11, 53), (11, 54),
-                (11, 61), (11, 62), (11, 63),
-                (11, 71), (11, 72),
-                (11, 81)}
-
-    elif subkind == 'table_11_for_rectangles':
-        return {(11, 12), (11, 13), (11, 14), (11, 15), (11, 16),
-                (11, 17), (11, 18),
-                (11, 21), (11, 22), (11, 23), (11, 24), (11, 25), (11, 26),
-                (11, 27),
-                (11, 31), (11, 32), (11, 33), (11, 34), (11, 35), (11, 36),
-                (11, 41), (11, 42), (11, 43), (11, 44), (11, 45),
-                (11, 51), (11, 52), (11, 53), (11, 54),
-                (11, 61), (11, 62), (11, 63),
-                (11, 71), (11, 72),
-                (11, 81)}
-
-    elif subkind == 'square_11':
-        return {(11, 11)}
-
-    elif subkind == 'table_15':
-        return {(15, 2), (15,3), (15, 4), (15,5), (15, 6)}
-
-    elif subkind == 'table_25':
-        return {(25, 2), (25,3), (25, 4), (25,5), (25, 6)}
-
-    elif subkind == 'integers_10_100':
-        return { (i+10, j+10) for i in range(90) for j in range(90) if i <= j }
-
-    elif subkind == 'squares_10_100':
-        return { (i+10, i+10) for i in range(90) }
-
-    elif subkind == 'integers_10_100_for_rectangles':
-        return { (i+10, j+10) for i in range(90) for j in range(90) if i < j }
-
-    elif subkind == 'integers_10_100_diff7atleast':
-        return { (i+10, j+10) for i in range(90) \
-                              for j in range(90) \
-                              if i - j >= 7 }
-
-    elif subkind == 'integers_5_20':
-        return { (i+5, j+5) for i in range(15) for j in range(15) if i <= j }
-
-    elif subkind == 'squares_5_20':
-        return { (i+5, i+5) for i in range(15) }
-
-    elif subkind == 'integers_5_20_for_rectangles':
-        return { (i+5, j+5) for i in range(15) for j in range(15) if i < j }
-
-    elif subkind == 'integer_3_10_decimal_3_10':
-        return { (i+3, Decimal(str(j+30)) / Decimal("10")) \
-                            for i in range(7) \
-                            for j in range(70) \
-                if Decimal(str(i+3)) <= Decimal(str(j+30)) / Decimal("10") }
-
-    elif subkind == 'integer_3_10_decimal_3_10_for_rectangles':
-        return { (i+3, Decimal(str(j+30)) / Decimal("10")) \
-                            for i in range(7) \
-                            for j in range(70) \
-                if Decimal(str(i+3)) < Decimal(str(j+30)) / Decimal("10") }
-
-    elif subkind == 'integers_10_100_for_sums_diffs':
-        return set(random.sample({ (i+10, j+10) for i in range(90) \
-                                                for j in range(90) \
-                                                if i < j }, 100))
-
-    elif subkind == 'decimals_0_20_1':
-        return { (Decimal(str(i/10)), Decimal(str(j/10))) for (i, j) in \
-                    random.sample({ (i, j) for i in range(200) \
-                                           for j in range (200) if i < j },
-                                  100)}
-
-    elif subkind == 'decimal_and_10_100_1000_for_multi':
-        box_10_100_1000 = [10, 100, 1000]
-
-        result = set()
-
-        for n in range(20):
-            if not box_10_100_1000:
-                box_10_100_1000 = [10, 100, 1000]
-
-            chosen_10_100_1000 = box_10_100_1000.pop()
-
-            ranks_scale = list(RANKS[2:])
-            width = randomly.pop([1, 2, 3], weighted_table=[0.14, 0.63, 0.33])
-
-            start_rank = randomly.pop([n for n in range(len(ranks_scale))])
-
-            result |= {(chosen_10_100_1000,
-                        generate_decimal(width, ranks_scale, start_rank))}
-
-        return result
-
-    elif subkind == 'decimal_and_10_100_1000_for_divi':
-        box_10_100_1000 = [10, 100, 1000]
-
-        result = set()
-
-        for n in range(20):
-            if not box_10_100_1000:
-                box_10_100_1000 = [10, 100, 1000]
-
-            chosen_10_100_1000 = box_10_100_1000.pop()
-
-            ranks_scale = list(RANKS[2:])
-            width = randomly.pop([1, 2, 3], weighted_table=[0.14, 0.63, 0.33])
-
-            wt = {10: [0.2, 0.2, 0.2, 0.2, 0.2],
-                  100: [0.25, 0.25, 0.25, 0.25, 0],
-                  1000: [0.34, 0.33, 0.33, 0, 0]}
-
-            start_rank = randomly.pop([n for n in range(len(ranks_scale))],
-                                      weighted_table=wt[chosen_10_100_1000])
-
-            result |= {(chosen_10_100_1000,
-                        generate_decimal(width, ranks_scale, start_rank))}
-
-        return result
-
-    elif subkind == 'decimal_and_one_digit_for_multi':
-        box = [Decimal('0.1'), Decimal('0.01'), Decimal('0.001')]
-
-        result = set()
-
-        for n in range(20):
-            if not box:
-                box = [Decimal('0.1'), Decimal('0.01'), Decimal('0.001')]
-
-            chosen = box.pop()
-
-            ranks_scale = list()
-
-            if chosen == Decimal('0.1'):
-                ranks_scale = list(RANKS[:-1])
-            elif chosen == Decimal('0.01'):
-                ranks_scale = list(RANKS[:-2])
-            elif chosen == Decimal('0.001'):
-                ranks_scale = list(RANKS[:-3])
-
-            width = randomly.pop([1, 2, 3, 4],
-                                 weighted_table=[0.14, 0.43, 0.33, 0.2])
-
-            start_rank = randomly.pop([n for n in range(len(ranks_scale))])
-
-            result |= {(chosen,
-                        generate_decimal(width, ranks_scale, start_rank))}
-
-        return result
-
-    elif subkind == 'decimal_and_one_digit_for_divi':
-        box = [Decimal('0.1'), Decimal('0.01'), Decimal('0.001')]
-
-        result = set()
-
-        for n in range(20):
-            if not box:
-                box = [Decimal('0.1'), Decimal('0.01'), Decimal('0.001')]
-
-            chosen = box.pop()
-
-            ranks_scale = list()
-
-            if chosen == Decimal('0.1') or chosen == Decimal('0.01'):
-                ranks_scale = list(RANKS)
-            elif chosen == Decimal('0.001'):
-                ranks_scale = list(RANKS[1:])
-
-            width = randomly.pop([1, 2, 3, 4],
-                                 weighted_table=[0.14, 0.43, 0.33, 0.2])
-
-            start_rank = randomly.pop([n for n in range(len(ranks_scale))])
-
-            result |= {(chosen,
-                        generate_decimal(width, ranks_scale, start_rank))}
-
-        return result
-
-    elif subkind == 'int_irreducible_frac':
-        result = set()
-        for k in [i+2 for i in range(18)]:
-            result |= {(k, Fraction((n, k))) for n in coprime_generator(k)}
-        return result
-
-    elif subkind == 'rank_word':
-        return {(elt,) for elt in RANKS}
-
-    elif subkind == 'bypass':
-        return set()
-
-    else:
-        raise error.OutOfRangeArgument(subkind,
-                                       "'" \
-                                       + " ,".join(AVAILABLE_Q_SUBKIND_VALUES) \
-                                       + "'")
-
-
-
+#   @brief Returns a dictionary to give some special informations needed for
+#          certain questions.
+def get_modifier(q_type, nb_source):
+    d = {}
+    if q_type == 'multi_reversed':
+        d.update({'multi_reversed': True,
+                  'info_multirev': {(2, 6): [(2, 6), (3, 4)],
+                                    (3, 4): [(2, 6), (3, 4)],
+                                    (2, 8): [(2, 8), (4, 4)],
+                                    (4, 4): [(2, 8), (4, 4)],
+                                    (3, 6): [(3, 6), (2, 9)],
+                                    (2, 9): [(3, 6), (2, 9)],
+                                    (3, 8): [(3, 8), (4, 6)],
+                                    (4, 6): [(3, 8), (4, 6)],
+                                    (4, 9): [(4, 9), (6, 6)],
+                                    (6, 6): [(4, 9), (6, 6)],
+                                    }})
+    elif q_type == 'subtr_direct' and nb_source.startswith('intpairs_10'):
+        d.update({'diff7atleast': True})
+    elif any(['rectangle' in q_type,
+              q_type.startswith('addi_'), q_type.endswith('_addi'),
+              q_type.startswith('subtr_'), q_type.endswith('_subtr')]):
+    #___
+        d.update({'rectangle': True})
+    elif 'square' in q_type:
+        d.update({'square': True})
+    return d
+    
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -770,7 +238,7 @@ class Q_MentalCalculation(Q_Structure):
         # self.q_kind, self.q_subkind
         # plus self.machine, self.options (modified)
         Q_Structure.__init__(self, embedded_machine,
-                             q_kind, AVAILABLE_Q_KIND_VALUES,
+                             q_kind, None,
                              q_subkind='bypass', **options)
         # The purpose of this next line is to get the possibly modified
         # value of **options

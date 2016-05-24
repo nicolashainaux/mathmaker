@@ -27,13 +27,13 @@
 
 		<question kind="multi" subkind="direct">
 			<nb source="table_11">6</nb>
-			<nb source="table_15">5</nb>
-			<nb source="table_25">5</nb>
+			<nb source="table_15">3</nb>
+			<nb source="table_25">3</nb>
 		</question>
 
 		<question kind="multi" subkind="hole">
-			<nb source="table_15">2</nb>
-			<nb source="table_25">2</nb>
+			<nb source="table_15">4</nb>
+			<nb source="table_25">4</nb>
 		</question>
 
 	</exercise>

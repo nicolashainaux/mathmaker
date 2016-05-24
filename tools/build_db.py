@@ -38,7 +38,7 @@ WORDINGS_DIR = settings.datadir + "wordings/"
 WORDINGS_FILES = [ WORDINGS_DIR + n + ".xml"\
                    for n in ["mini_pb_addi_direct",
                              "mini_pb_divi_direct",
-                             "mini_pb_substr_direct",
+                             "mini_pb_subtr_direct",
                              "mini_pb_multi_direct"] ]
 
 # Existent db is deleted. A brand new empty db is created.
@@ -59,6 +59,10 @@ db.execute('''CREATE TABLE mini_pb_wordings
           wording_context TEXT, wording TEXT,
           nb1_min INTEGER, nb1_max INTEGER, nb2_min INTEGER, nb2_max INTEGER,
           q_id TEXT, drawDate INTEGER)''')
+db.execute('''CREATE TABLE int_pairs
+          (id INTEGER PRIMARY KEY,
+          nb1 INTEGER, nb2 INTEGER,
+          multirev_locked INTEGER, drawDate INTEGER)''')
 
 # Extract data from po(t) files and insert them into the db
 for lang in next(os.walk(settings.localedir))[1]:
@@ -103,6 +107,16 @@ for f in WORDINGS_FILES:
                    "q_id, drawDate) "\
                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
                    db_rows)
+
+# Insert integers pairs into the db
+# Tables of 2, 3... 99
+db_rows = [(i+2, j+2, 0, 0) for i in range(199) for j in range(199) if j >= i]
+db.executemany("INSERT "\
+               "INTO int_pairs(nb1, nb2, "\
+               "multirev_locked, drawDate) "\
+               "VALUES(?, ?, ?, ?)",
+               db_rows)
+
 
 db.commit()
 db.close()

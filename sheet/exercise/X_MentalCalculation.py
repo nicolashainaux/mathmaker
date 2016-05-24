@@ -31,6 +31,7 @@ import sys
 
 from lib import *
 from lib.common.settings import default
+from lib.common import shared
 import sheet
 from .X_Structure import X_Structure
 from . import question
@@ -124,18 +125,15 @@ def get_q_kinds_from_file(file_name):
                             q_temp_list += [elt.attrib]
                         elif elt.tag == 'nb':
                             # We don't check that 'source' is in elt.attrib,
-                            # this should have been checked by the xml schema
-                            if elt.attrib['source'] \
-                                            in question.USER_Q_SUBKIND_VALUES:
-                            #___
-                                n_temp_list += [[elt.attrib['source'],
-                                                 elt.attrib,
-                                                 1] \
-                                                for i in range(int(elt.text))]
-                            else:
-                                raise error.XMLFileFormatError(\
-                                "Unknown source found in the xml file: " \
-                                + elt.attrib['source'])
+                            # this should have been checked by the xml schema,
+                            # nor we don't check if the source tag is valid.
+                            # This would be best done by the xml schema
+                            # (requires to use xsd1.1 but lxml validates only
+                            # xsd1.0). So far, it is done partially and later,
+                            # in lib/tools/tags.py
+                            n_temp_list += [[elt.attrib['source'],
+                                             elt.attrib,
+                                             1] for i in range(int(elt.text))]
                         else:
                             raise error.XMLFileFormatError(\
                             "Unknown element found in the xml file: " + elt.tag)
@@ -152,8 +150,8 @@ def get_q_kinds_from_file(file_name):
                     # to just distribute them all randomly.
                     for n in n_temp_list:
                         for q in q_temp_list:
-                            if not n[0] \
-            in question.AVAILABLE_Q_KIND_VALUES[q['kind'] + "_" + q['subkind']]:
+                            if not question.match_qtype_sourcenb(
+                                        q['kind'] + "_" + q['subkind'], n[0]):
                             #___
                                 raise error.XMLFileFormatError(\
                                 "This source: " + str(n[0]) + " cannot be " \
@@ -238,21 +236,8 @@ def build_mixed_q_list(q_dict):
     random.shuffle(q_id_box)
     for q_id in q_id_box:
         info = q_dict[q_id].pop(0)
-        nb_source = info[0]
-        translations_to_check = [q_id]
-        if 'variant' in info[3]:
-            translations_to_check += [q_id + "_" + info[3]['variant']]
-        if 'context' in info[3]:
-            translations_to_check += [q_id + "_" + info[3]['context']]
-        for t in translations_to_check:
-            if t in question.SOURCES_TO_TRANSLATE \
-                and nb_source in question.SOURCES_TO_TRANSLATE[t]:
-            #___
-                nb_source = question.SOURCES_TO_TRANSLATE[t][nb_source]
-                break
-        mixed_q_list += [Q_info(q_id, info[1], info[2], nb_source, info[3])]
+        mixed_q_list += [Q_info(q_id, info[1], info[2], info[0], info[3])]
     return mixed_q_list
-
 
 
 # --------------------------------------------------------------------------
@@ -270,24 +255,32 @@ def increase_alternation(l, sort_key):
 
     return l
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief  Determine the
 #   @param  q_i     The Q_info object
 def get_nb_source_from_question_info(q_i):
-    nb_source = q_i.nb_source
+    tag_to_unpack = nb_source = q_i.nb_source
     if nb_source in question.SOURCES_TO_UNPACK:
         s = ''
         stu = copy.copy(question.SOURCES_TO_UNPACK)
-        if nb_source == 'decimal_and_10_100_1000' \
-            or nb_source == 'decimal_and_one_digit':
+        if (nb_source == 'decimal_and_10_100_1000'
+            or nb_source == 'decimal_and_one_digit'):
+        #__
             s = stu[nb_source][q_i.type]
         else:
             s = stu[nb_source][q_i.subkind]
         s = list(s)
         random.shuffle(s)
         nb_source = s.pop()
+        if (tag_to_unpack == 'auto_vocabulary'
+            and q_i.subkind in ['addi', 'subtr']
+            and nb_source == 'intpairs_2to200'):
+        #___
+            q_i.options.update({'variant': 'decimal2'})
     return nb_source
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -356,11 +349,6 @@ class X_MentalCalculation(X_Structure):
         # TEXTS OF THE EXERCISE
         self.text = {'exc': "", 'ans': ""}
 
-        nb_box = { key: question.generate_numbers(key) \
-                   for key in question.nb_sources()}
-        last_nb = { key: set() \
-                    for key in question.nb_sources()}
-
         # From q_list, we build a dictionary and then a complete questions'
         # list:
         q_dict, self.q_nb = build_q_dict(q_list)
@@ -385,85 +373,25 @@ class X_MentalCalculation(X_Structure):
 
         # Now, we generate the numbers & questions, by type of question first
         self.questions_list = []
-
+        last_draw = [0, 0]
         for q in mixed_q_list:
             nb_source = get_nb_source_from_question_info(q)
-
-# -------------après ce point nb_source est déterminé----------------------------------------------------------------
-
-            if len(nb_box[nb_source]) == 0:
-                nb_box[nb_source] = question.generate_numbers(nb_source)
-
-            if nb_source == 'rank_word':
-                if 'rank_matches_invisible_zero' in q.options \
-                    and q.options['rank_matches_invisible_zero'] != ""\
-                    and q.options['rank_matches_invisible_zero'] != "False":
-                #___
-                    if (Decimal("1"),) in nb_box[nb_source]:
-                        if len(nb_box[nb_source]) == 1:
-                            nb_box[nb_source] = \
-                                        question.generate_numbers(nb_source)
-
-                        last_nb[nb_source] |= {Decimal("1")}
-
-            (kept_aside,
-             nb_box[nb_source]) = utils.put_aside(last_nb[nb_source],
-                                                  nb_box[nb_source]) \
-                if not nb_source in question.PART_OF_ANOTHER_SOURCE \
-                else (set(), nb_box[nb_source])
-
-            nb_to_use = None
-            if nb_source in question.PART_OF_ANOTHER_SOURCE:
-                second_source = question.PART_OF_ANOTHER_SOURCE[nb_source]
-                remaining = set(nb_box[nb_source] & nb_box[second_source])
-                reversed_elements = {(j, i) for (i, j) in nb_box[second_source]}
-                extra_elements = set(nb_box[nb_source] & reversed_elements)
-                remaining |= extra_elements
-                if not len(remaining):
-                    nb_box[nb_source] = question.generate_numbers(nb_source)
-                    remaining = set(nb_box[nb_source])
-                remaining_shuffled = list(remaining)
-                random.shuffle(remaining_shuffled)
-                nb_to_use = remaining_shuffled.pop()
-                nb_box[nb_source].remove(nb_to_use)
-                nb_box[second_source].discard(nb_to_use)
-
-            else:
-                if len(nb_box[nb_source]) == 0:
-                    nb_box[nb_source] = question.generate_numbers(nb_source)
-                nb_box_shuffled = list(nb_box[nb_source])
-                random.shuffle(nb_box_shuffled)
-                nb_to_use = nb_box_shuffled.pop()
-                nb_box[nb_source].remove(nb_to_use)
-# ---------ici on a pu déterminer nb_to_use--------------------------------------------------------------------
-
+            nb_to_use = shared.mc_source.next(nb_source,
+                                              not_in=last_draw,
+                                              **question.get_modifier(
+                                                                    q.type,
+                                                                    nb_source))
+            last_draw = [str(n) for n in set(nb_to_use)
+                                if (isinstance(n, int) or isinstance(n, str))]
             if nb_source == 'decimal_and_10_100_1000_for_divi' \
                 or nb_source == 'decimal_and_10_100_1000_for_multi':
             #___
                 q.options['10_100_1000'] = True
-
-
-# -----------------------------------------------------------------------------
-            nb_box[nb_source] |= kept_aside
-# ----------ci-dessous on crée la question-------------------------------------------------------------------
             self.questions_list += [default_question(embedded_machine,
                                                      q.type,
                                                      q.options,
                                                      numbers_to_use=nb_to_use
                                                      )]
-# -----------------------------------------------------------------------------
-
-            last_nb[nb_source] = set()
-            if nb_source == 'table_2_9':
-                last_nb[nb_source] |= {nb_to_use[0], nb_to_use[1]}
-            elif nb_source == 'int_irreducible_frac' \
-                 or nb_source == 'rank_word'\
-                 or nb_source == 'decimal_and_10_100_1000_for_divi'\
-                 or nb_source == 'decimal_and_10_100_1000_for_multi':
-                last_nb[nb_source] |= {nb_to_use[0]}
-            else:
-                last_nb[nb_source] |= {nb_to_use[1]}
-# -----------------------------------------------------------------------------
 
 
 

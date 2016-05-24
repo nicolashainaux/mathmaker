@@ -61,26 +61,28 @@
 		</question>
 
 		<question kind="vocabulary" subkind="multi">
-			<nb source="table_2_9">1</nb>
+			<nb source="intpairs_2to9">1</nb>
 			<nb source="table_15">1</nb>
 			<nb source="table_25">1</nb>
 			<nb source="table_11">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="divi">
-			<nb source="table_2_9">3</nb>
+			<nb source="intpairs_2to9">3</nb>
 		</question>
 		
 		<question kind="vocabulary" subkind="addi">
-			<nb source="integers_10_100_for_sums_diffs">1</nb>
-			<nb source="table_2_9_for_sums_diffs">1</nb>
+			<!--<nb source="integers_10_100_for_sums_diffs">1</nb>
+			<nb source="table_2_9_for_sums_diffs">1</nb>-->
+			<nb source="intpairs_10to100">1</nb>
+			<nb source="intpairs_2to9">1</nb>
 		</question>
 
 		<question kind="vocabulary" subkind="subtr">
-			<nb source="integers_10_100_for_sums_diffs">1</nb>
-			<nb source="decimals_0_20_1">1</nb>
+			<nb source="intpairs_10to100">1</nb>
+			<nb source="intpairs_2to200" variant="decimal2">1</nb>
 		</question>
-
+		
 		<question kind="vocabulary" subkind="operation">
 			<nb source="auto_vocabulary">1</nb>
 		</question>

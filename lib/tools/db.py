@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import sqlite3
+
 from lib.common import settings, shared
 
 log = settings.mainlogger
@@ -28,21 +29,35 @@ log = settings.mainlogger
 class source(object):
     ##
     #   @brief  Initializer
-    def __init__(self, table_name, col, **kwargs):
+    #   @param  table_name  The name of the table in the database
+    #   @param  cols        The name of the cols used to return values. The
+    #                       first one will be used to _timestamp the retrieved
+    #                       data and won't be returned. If only one value is
+    #                       returned it is unpacked from the tuple containing
+    #                       it.
+    def __init__(self, table_name, cols, **kwargs):
         self.table_name = table_name
-        self.col = col
+        self.allcols = cols
+        self.idcol = cols[0]
+        self.valcols = cols[1:]
         self.language = kwargs['language'] if 'language' in kwargs else ""
+
 
     ##
     #   @brief  Resets the drawDate of all table's entries (to 0)
-    def reset(self):
-        shared.db.execute(\
-        "UPDATE " + self.table_name + " SET drawDate = 0;")
+    def _reset(self, **kwargs):
+        shared.db.execute("UPDATE " + self.table_name + " SET drawDate = 0;")
+        if "multi_reversed" in kwargs:
+            shared.db.execute("UPDATE "
+                              + self.table_name
+                              + " SET multirev_locked = 0;")
+
 
     ##
     #   @brief  Creates the "SELECT ...,...,... FROM ...." part of the query
     def _select_part(self, **kwargs):
-        return "SELECT id," + self.col + " FROM " + self.table_name
+        return "SELECT " + ",".join(self.allcols) + " FROM " + self.table_name
+
 
     ##
     #   @brief  Creates the language condition part of the query
@@ -50,11 +65,58 @@ class source(object):
         return "AND language = '" + self.language + "' " if self.language != ""\
                                                      else ""
 
+
     ##
     #   @brief  Creates the conditions of the query, from the given kwargs
+    #           Some special checks are allowed, like nb1_min <= ...
+    #           and nb1_max >= ...
     def _kw_conditions(self, **kwargs):
-        return "".join(" AND " + kw + " = '" + kwargs[kw] + "' " \
-                       for kw in kwargs)
+        result = ""
+        for kw in kwargs:
+            if kw == "raw":
+                result += " AND " + kwargs[kw] + " "
+            elif kw == "prevails" or kw.startswith("info_"):
+                pass
+            elif kw == "multi_reversed":
+                result += " AND multirev_locked = 0 "
+            elif kw.endswith("_to_check"):
+                k = kw[:-9]
+                result += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
+                result += " AND " + k + "_max" + " >= " + str(kwargs[kw]) + " "
+            elif kw.endswith("_min"):
+                k = kw[:-4]
+                result += " AND " + k + " >= " + str(kwargs[kw]) + " "
+            elif kw.endswith("_max"):
+                k = kw[:-4]
+                result += " AND " + k + " <= " + str(kwargs[kw]) + " "
+            elif kw == "not_in":
+                updated_notin_list = list(kwargs[kw])
+                for c in self.valcols:
+                    if c in kwargs and kwargs[c] in updated_notin_list:
+                        updated_notin_list.remove(kwargs[c])
+                if "prevails" in kwargs:
+                    for n in kwargs["prevails"]:
+                        if n in updated_notin_list:
+                            updated_notin_list.remove(n)
+                if len(updated_notin_list):
+                    for c in self.valcols:
+                        result += " AND " + c  + " NOT IN (" \
+                               +  ", ".join(str(x)
+                                            for x in updated_notin_list) + ") "
+            elif kw.endswith("_in"):
+                k = kw[:-3]
+                result += " AND " + k + " IN (" \
+                       +  ", ".join(str(x) for x in kwargs[kw]) + ") "
+            elif kw == 'rectangle':
+                result += " AND nb1 != nb2 "
+            elif kw == 'square':
+                result += " AND nb1 = nb2 "
+            elif kw == 'diff7atleast':
+                result += " AND nb2 - nb1 >= 7 "
+            else:
+                result += " AND " + kw + " = '" + kwargs[kw] + "' "
+        return result
+
 
     ##
     #   @brief  Concatenates the different parts of the query
@@ -63,70 +125,54 @@ class source(object):
                + self._language_part(**kwargs) + self._kw_conditions(**kwargs) \
                + "ORDER BY random() LIMIT 1;"
 
+
     ##
     #   @brief  Executes the query. If no result, resets the table and executes
     #           the query again. Returns the query's result.
-    def _query_result(self, cmd):
+    def _query_result(self, cmd, **kwargs):
         qr = tuple(shared.db.execute(cmd))
         if not len(qr):
-            self.reset()
+            self._reset(**kwargs)
             qr = tuple(shared.db.execute(cmd))
         return qr
+
 
     ##
     #   @brief  Set the drawDate to datetime() in all entries where col_name
     #           has a value of col_match.
-    def update_after_query(self, col_name, col_match):
-        shared.db.execute(\
-        "UPDATE " + self.table_name + \
-        " SET drawDate = datetime()"\
-        " WHERE " + col_name + " = '" + str(col_match) + "';")
+    def _timestamp(self, col_name, col_match):
+        shared.db.execute(
+        "UPDATE " + self.table_name
+        + " SET drawDate = datetime()"
+        + " WHERE " + col_name + " = '" + str(col_match) + "';")
+
+
+    ##
+    #   @brief  Will 'lock' some entries
+    def _lock(self, t, **kwargs):
+        if 'multi_reversed' in kwargs:
+            if t in kwargs['info_multirev']:
+                for couple in kwargs['info_multirev'][t]:
+                    shared.db.execute(
+                    "UPDATE " + self.table_name
+                    + " SET multirev_locked = 1"
+                    + " WHERE nb1 = '" + str(couple[0])
+                    + "' and nb2 = '" + str(couple[1]) + "';")
+
 
     ##
     #   @brief  Synonym of self.next(), but makes the source an Iterator.
     def __next__(self):
         return self.next()
 
-    ##
-    #   @brief  Handles the choice of the next value to return from the database
-    def next(self, **kwargs):
-        ID, word = self._query_result(self._cmd(**kwargs))[0]
-        self.update_after_query('id', ID)
-        return word
-
-
-class wordings_source(source):
-
-    ##
-    #   @brief  Creates the "SELECT ...,...,... FROM ...." part of the query.
-    #           Wordings require to retrieve the 'wording_context' value instead
-    #           of the id.
-    def _select_part(self, **kwargs):
-        return "SELECT " + self.col + ",wording_context FROM " \
-               + self.table_name
-
-    ##
-    #   @brief  Creates the conditions of the query, from the given kwargs
-    #           Wordings require to make special checks, like nb1_min <= ...
-    #           and nb1_max >= ...
-    def _kw_conditions(self, **kwargs):
-        result = ""
-        for kw in kwargs:
-            if kw.endswith("_to_check"):
-                k = kw[:-9]
-                result += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
-                result += " AND " + k + "_max" + " >= " + str(kwargs[kw]) + " "
-            else:
-                result += " AND " + kw + " = '" + kwargs[kw] + "' "
-        return result
 
     ##
     #   @brief  Handles the choice of the next value to return from the database
-    #           In the case of wordings, the wording_context will be used to
-    #           (temporarily) remove entries sharing the same context as the
-    #           chosen one.
     def next(self, **kwargs):
-        word, wording_context = self._query_result(self._cmd(**kwargs))[0]
-        self.update_after_query('wording_context', str(wording_context))
-        return word
-
+        t = self._query_result(self._cmd(**kwargs), **kwargs)[0]
+        self._timestamp(str(self.idcol), str(t[0]))
+        self._lock(t[1:len(t)], **kwargs)
+        if len(t) == 2:
+            return t[1]
+        else:
+            return t[1:len(t)]

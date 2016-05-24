@@ -28,7 +28,7 @@
 		<!-- Default value (planned): context="none" 
 			 No default for kind and subkind, they must be given -->
 		<question kind="multi" subkind="direct">
-			<nb source="table_2_9">1</nb>
+			<nb source="intpairs_2to9">1</nb>
 			<nb source="table_11">1</nb>
 			<nb source="decimal_and_one_digit">1</nb>
 		</question>
@@ -36,47 +36,47 @@
 		<mix>
 			<question kind="multi" subkind="direct" context="mini_problem"></question>
 			<question kind="divi" subkind="direct" context="mini_problem"></question>
-			<nb source="table_4_9">2</nb>
+			<nb source="intpairs_4to9">2</nb>
 		</mix>
 		
 		<mix>
 			<question kind="addi" subkind="direct" context="mini_problem"></question>
-			<question kind="substr" subkind="direct" context="mini_problem"></question>
-			<nb source="integers_10_100_for_sums_diffs">2</nb>
+			<question kind="subtr" subkind="direct" context="mini_problem"></question>
+			<nb source="intpairs_10to100">2</nb>
 		</mix>
 
 		<question kind="multi" subkind="reversed">
-			<nb source="table_4_9">2</nb>
+			<nb source="intpairs_4to9">2</nb>
 		</question>
 
 		<question kind="multi" subkind="direct" variant="decimal1">
 			<!-- One should be replaced by a problem, later -->
-			<nb source="table_2_9">2</nb>
+			<nb source="intpairs_2to9">2</nb>
 		</question>
 
 		<question kind="multi" subkind="direct" variant="decimal2">
-			<nb source="table_2_9">2</nb>
+			<nb source="intpairs_2to9">2</nb>
 		</question>
 
 		<question kind="multi" subkind="hole">
-			<nb source="table_2_9">1</nb>
+			<nb source="intpairs_2to9">1</nb>
 			<nb source="int_irreducible_frac">1</nb>
 		</question>
 
 		<question kind="divi" subkind="direct">
-			<nb source="table_4_9">2</nb>
+			<nb source="intpairs_4to9">2</nb>
 		</question>
 
 		<question kind="rank" subkind="reversed">
-			<nb source="rank_word">1</nb>
+			<nb source="rank_words">1</nb>
 		</question>
 
 		<question kind="rank" subkind="direct">
-			<nb source="rank_word">1</nb>
+			<nb source="rank_words">1</nb>
 		</question>
 
 		<question kind="rank" subkind="numberof" generation_type="default">
-			<nb source="rank_word">1</nb>
+			<nb source="rank_words">1</nb>
 		</question>
 
 		
