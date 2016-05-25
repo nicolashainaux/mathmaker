@@ -31,9 +31,9 @@ from lib.common import software
 
 
 def config_logger():
-    debug_conf_filename = libdir + "debug_conf.yaml"
-    if os.path.isfile(libdir + "debug_conf-dev.yaml"):
-        debug_conf_filename = libdir + "debug_conf-dev.yaml"
+    debug_conf_filename = settingsdir + "debug_conf.yaml"
+    if os.path.isfile(settingsdir + "debug_conf-dev.yaml"):
+        debug_conf_filename = settingsdir + "debug_conf-dev.yaml"
 
     with open(debug_conf_filename) as f:
         d = flat_dict(yaml.safe_load(f))
@@ -67,7 +67,7 @@ class path_object(object):
 
 
 def init():
-    global rootdir, localedir, libdir, datadir
+    global rootdir, localedir, libdir, datadir, settingsdir
     global CONFIG, config
     global default, path
     global mainlogger
@@ -92,9 +92,9 @@ def init():
     default = default_object()
     path = path_object()
 
-    logging_conf_filename = libdir + "logging.yaml"
-    if os.path.isfile(libdir + "logging-dev.yaml"):
-        logging_conf_filename = libdir + "logging-dev.yaml"
+    logging_conf_filename = settingsdir + "logging.yaml"
+    if os.path.isfile(settingsdir + "logging-dev.yaml"):
+        logging_conf_filename = settingsdir + "logging-dev.yaml"
 
     with open(logging_conf_filename) as f:
         logging.config.dictConfig(yaml.load(f))
