@@ -26,7 +26,7 @@ import random
 
 from core.root_calculus import Value
 from . import mc_module
-from lib.tools.wordings_handling import setup_wording_format_of
+from lib.tools.wording import setup_wording_format_of
 
 class structure(mc_module.structure):
 

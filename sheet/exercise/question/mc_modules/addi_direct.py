@@ -25,7 +25,7 @@ import os
 from core.base_calculus import Sum
 from core.root_calculus import Value
 from . import mc_module
-from lib.tools.wordings_handling import post_process
+from lib.tools.wording import post_process
 
 class sub_object(mc_module.structure):
 
