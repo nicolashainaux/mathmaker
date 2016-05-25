@@ -68,7 +68,7 @@ class path_object(object):
 
 def init():
     global rootdir, localedir, libdir, datadir
-    global configfile_name, CONFIG, config
+    global CONFIG, config
     global default, path
     global mainlogger
     global dbg_logger
@@ -82,8 +82,9 @@ def init():
     localedir = rootdir + "locale/"
     libdir = rootdir + "lib/"
     datadir = rootdir + "data/"
+    settingsdir = rootdir + "settings/"
 
-    configfile_name = rootdir + software.NAME + '.cfg'
+    configfile_name = settingsdir + 'user.config'
     CONFIG = configparser.ConfigParser()
     CONFIG.read(configfile_name)
     config = config_object()
