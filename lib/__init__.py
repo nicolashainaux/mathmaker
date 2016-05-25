@@ -20,3 +20,19 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+
+# --------------------------------------------------------------------------
+##
+#   @brief  Turns a dictionary containing nested dictionaries into a one level
+#           dictionary. Like {'a': {'a1': 3, 'a2':4}, 'b': 'data'} will
+#           become {'a.a1': 3, 'a.a2': 4, 'b': 'data'}
+def flat_dict(d, sep='.'):
+    output = {}
+    for key in d:
+        if isinstance(d[key], dict):
+            ud = flat_dict(d[key])
+            for k in ud:
+                output.update({str(key) + sep + str(k): ud[k]})
+        else:
+            output.update({key: d[key]})
+    return output

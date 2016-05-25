@@ -26,7 +26,21 @@ import logging, logging.config
 import yaml
 from shutil import copyfile
 
+from lib import flat_dict
 from lib.common import software
+
+
+def config_logger():
+    debug_conf_filename = libdir + "debug_conf.yaml"
+    if os.path.isfile(libdir + "debug_conf-dev.yaml"):
+        debug_conf_filename = libdir + "debug_conf-dev.yaml"
+
+    with open(debug_conf_filename) as f:
+        d = flat_dict(yaml.safe_load(f))
+
+        for loggername, level in d.items():
+            logging.getLogger(loggername).setLevel(getattr(logging, level))
+
 
 class default_object(object):
     def __init__(self):
@@ -54,6 +68,7 @@ def init():
     global configfile_name, CONFIG, config
     global default, path
     global mainlogger
+    global dbg_logger
     global language
 
     __process_name = os.path.basename(sys.argv[0])
@@ -73,8 +88,14 @@ def init():
     default = default_object()
     path = path_object()
 
-    with open(libdir + "logging.yml") as f:
+    logging_conf_filename = libdir + "logging.yaml"
+    if os.path.isfile(libdir + "logging-dev.yaml"):
+        logging_conf_filename = libdir + "logging-dev.yaml"
+
+    with open(logging_conf_filename) as f:
         logging.config.dictConfig(yaml.load(f))
     mainlogger = logging.getLogger("__main__")
+    dbg_logger = logging.getLogger("dbg")
+    config_logger()
 
     language = None

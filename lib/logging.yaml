@@ -1,5 +1,10 @@
 version: 1
 
+# Don't modify this file.
+# If you wish to define customized logging configuration,
+# you should duplicate it as logging-dev.yaml and edit this copy instead
+# (for instance, turn debug logging on by setting dbg level to DEBUG).
+
 formatters:
     rawMessageFormatter:
         format: '%(message)s'
@@ -25,6 +30,10 @@ handlers:
         class: logging.StreamHandler
         level: WARNING
         formatter: stderrFormatter
+    debugHandler:
+        class: logging.StreamHandler
+        level: DEBUG
+        formatter: rawMessageFormatter
 
 loggers:
     root:
@@ -33,6 +42,10 @@ loggers:
     __main__:
         level: INFO
         handlers: [mainSysLogHandler, mainStdErrHandler]
+    dbg:
+        # The 'INFO' level inhibits the debug messages.
+        level: INFO
+        handlers: [debugHandler]
 
 
 

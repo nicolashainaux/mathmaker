@@ -24,7 +24,7 @@ import sqlite3
 
 from lib.common import settings, shared
 
-log = settings.mainlogger
+log = settings.dbg_logger.getChild('db')
 
 class source(object):
     ##
@@ -130,6 +130,7 @@ class source(object):
     #   @brief  Executes the query. If no result, resets the table and executes
     #           the query again. Returns the query's result.
     def _query_result(self, cmd, **kwargs):
+        log.debug(cmd)
         qr = tuple(shared.db.execute(cmd))
         if not len(qr):
             self._reset(**kwargs)
