@@ -39,13 +39,6 @@ from lib.maths_lib import *
 from core.calculus import *
 from settings import config
 
-if debug.ENABLED:
-    from lib.common import latex
-    import machine
-
-if config.MARKUP == 'latex':
-    from lib.common.latex import MARKUP
-
 try:
     locale.setlocale(locale.LC_ALL, config.LANGUAGE + '.' + config.ENCODING)
 except:

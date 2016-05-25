@@ -35,15 +35,10 @@ from .base import *
 from core.base_calculus import Value
 from lib import *
 from lib.maths_lib import *
-from maintenance import debug
 from settings import config
 
 if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP
-
-if debug.ENABLED:
-    from lib.common import latex
-    import machine
 
 try:
     locale.setlocale(locale.LC_ALL, config.LANGUAGE + '.' + config.ENCODING)
