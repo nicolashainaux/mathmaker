@@ -32,7 +32,7 @@ from . import obj_test
 from . import lib_test
 import sheet
 import machine
-from lib.common import settings
+import settings
 from lib.common import shared
 from _version import __version__
 

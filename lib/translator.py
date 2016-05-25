@@ -23,7 +23,7 @@
 from lib.common import latex
 from lib import is_
 from . import error
-from lib.common.settings import config
+from settings import config
 
 if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP

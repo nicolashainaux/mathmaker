@@ -27,12 +27,12 @@ import argparse
 
 current_dir = os.path.dirname(os.path.abspath(inspect.getsourcefile(lambda:0)))
 sys.path.insert(0, current_dir[:current_dir.rfind(os.path.sep)])
-from lib.common import settings
+import settings
 from lib.tools import po_file, xml_file
 sys.path.pop(0)
 os.chdir('..')
 settings.init()
-from lib.common.settings import CONFIG
+from settings import CONFIG
 
 WORDINGS_DIR = settings.datadir + "wordings/"
 WORDINGS_FILES = [ WORDINGS_DIR + n + ".xml"\

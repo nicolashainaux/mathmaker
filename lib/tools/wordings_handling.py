@@ -25,10 +25,10 @@ import re
 #import time
 #from decimal import Decimal
 
+import settings
 from lib import error
 from lib.common.cst import *
 from lib.common import shared
-from lib.common import settings
 from core.root_calculus import Unit, Value
 
 # --------------------------------------------------------------------------

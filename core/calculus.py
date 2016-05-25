@@ -30,7 +30,7 @@ from .base_calculus import *
 from lib.maths_lib import *
 from lib.common.cst import *
 from lib.utils import *
-from lib.common.settings import default, config
+from settings import default, config
 
 if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP

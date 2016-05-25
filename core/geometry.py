@@ -37,7 +37,7 @@ from lib import *
 from lib import randomly
 from lib.maths_lib import *
 from core.calculus import *
-from lib.common.settings import config
+from settings import config
 
 if debug.ENABLED:
     from lib.common import latex

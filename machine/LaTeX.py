@@ -23,8 +23,9 @@
 import math
 import sys
 
-from lib.common import latex, settings
-from lib.common.settings import CONFIG, config
+import settings
+from settings import CONFIG, config
+from lib.common import latex
 from _version import __version__
 from lib.common import software
 from lib.common.cst import *

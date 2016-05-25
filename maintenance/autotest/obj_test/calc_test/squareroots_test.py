@@ -24,7 +24,7 @@ import os
 import sys
 import locale
 
-from lib.common.settings import config
+from settings import config
 
 from core import *
 from core.base_calculus import *

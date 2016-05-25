@@ -30,7 +30,7 @@ from collections import deque, namedtuple
 import sys
 
 from lib import *
-from lib.common.settings import default
+from settings import default
 from lib.common import shared
 import sheet
 from .X_Structure import X_Structure

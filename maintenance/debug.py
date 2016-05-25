@@ -22,7 +22,7 @@
 
 import os
 import sys
-from lib.common.settings import CONFIG
+from settings import CONFIG
 
 sdt_err_output = sys.stderr.fileno()
 

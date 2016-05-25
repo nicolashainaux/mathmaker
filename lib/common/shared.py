@@ -22,7 +22,7 @@
 
 import sqlite3
 
-from . import settings
+import settings
 from . import latex
 
 def init():

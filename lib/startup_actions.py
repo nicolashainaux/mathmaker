@@ -24,8 +24,9 @@ import sys, subprocess, shlex
 import gettext, locale
 from distutils.version import LooseVersion
 
-from lib.common import settings, software, latex
-from lib.common.settings import CONFIG
+import settings
+from settings import CONFIG
+from lib.common import software, latex
 
 log = settings.mainlogger
 

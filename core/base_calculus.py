@@ -40,10 +40,10 @@ from lib import randomly
 #from lib import translator
 from lib.maths_lib import *
 from lib.common.cst import *
-from lib.common.settings import default
+from settings import default
 from lib.utils import *
 from maintenance import debug
-from lib.common.settings import config
+from settings import config
 
 if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP

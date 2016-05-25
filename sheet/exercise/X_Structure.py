@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
-from lib.common.settings import default
+from settings import default
 from . import question
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------

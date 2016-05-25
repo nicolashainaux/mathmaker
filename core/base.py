@@ -24,7 +24,7 @@ import subprocess
 from lib import error
 from lib.common import software
 from _version import __version__
-from lib.common.settings import CONFIG
+from settings import CONFIG
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------

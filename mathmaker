@@ -25,13 +25,13 @@ import sys, os
 import argparse
 
 from _version import __version__
-from lib.common import settings
+import settings
 
 settings.init()
 
 from lib.common import shared
 from lib.common import software
-from lib.common.settings import CONFIG
+from settings import CONFIG
 from lib import startup_actions
 import machine
 import sheet

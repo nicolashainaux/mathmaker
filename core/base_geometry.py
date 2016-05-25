@@ -36,7 +36,7 @@ from core.base_calculus import Value
 from lib import *
 from lib.maths_lib import *
 from maintenance import debug
-from lib.common.settings import config
+from settings import config
 
 if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP

@@ -35,7 +35,7 @@ from lib import is_
 from lib.maths_lib import *
 from decimal import *
 from lib.common.cst import *
-from lib.common.settings import config
+from settings import config
 
 if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP
