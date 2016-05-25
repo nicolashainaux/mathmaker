@@ -31,7 +31,7 @@ import sys
 
 from lib import *
 from settings import default
-from lib.common import shared
+from lib import shared
 import sheet
 from .X_Structure import X_Structure
 from . import question

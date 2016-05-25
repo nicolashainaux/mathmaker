@@ -23,7 +23,7 @@
 import sqlite3
 
 import settings
-from . import latex
+from lib.common import latex
 
 def init():
     global db

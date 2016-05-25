@@ -28,7 +28,7 @@ import re
 import settings
 from lib import error
 from lib.common.cst import *
-from lib.common import shared
+from lib import shared
 from core.root_calculus import Unit, Value
 
 # --------------------------------------------------------------------------

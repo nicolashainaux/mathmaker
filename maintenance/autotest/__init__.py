@@ -33,7 +33,7 @@ from . import lib_test
 import sheet
 import machine
 import settings
-from lib.common import shared
+from lib import shared
 from _version import __version__
 
 settings.localedir = os.path.abspath(os.path.dirname(sys.argv[0])) + "/locale/"

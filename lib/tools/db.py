@@ -23,7 +23,7 @@
 import sqlite3
 
 import settings
-from lib.common import shared
+from lib import shared
 
 log = settings.dbg_logger.getChild('db')
 

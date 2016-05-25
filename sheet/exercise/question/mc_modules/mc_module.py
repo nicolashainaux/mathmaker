@@ -29,7 +29,7 @@ from core.base_calculus import Product, Quotient, Item
 from core.base_geometry import Point
 from core.geometry import Rectangle, Square
 from lib import error
-from lib.common import shared
+from lib import shared
 from lib.common.cst import COMMON_LENGTH_UNITS
 from lib.tools.wording import setup_wording_format_of
 

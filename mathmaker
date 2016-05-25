@@ -29,7 +29,7 @@ import settings
 
 settings.init()
 
-from lib.common import shared
+from lib import shared
 from lib.common import software
 from settings import CONFIG
 from lib import startup_actions

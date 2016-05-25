@@ -23,7 +23,7 @@
 import random
 from decimal import Decimal
 
-from lib.common import shared
+from lib import shared
 from lib.common.cst import RANKS
 from lib import randomly
 from lib.maths_lib import coprime_generator, generate_decimal
