@@ -47,6 +47,7 @@ class default_object(object):
         self.MONOMIAL_LETTER = 'x'
         self.EQUATION_NAME = 'E'
 
+
 class config_object(object):
     def __init__(self):
         self.LANGUAGE = CONFIG["LOCALES"]["LANGUAGE"]
@@ -55,6 +56,7 @@ class config_object(object):
         self.CURRENCY = CONFIG["LOCALES"]["CURRENCY"]
         self.MARKUP = CONFIG['MARKUP']['USE']
 
+
 class path_object(object):
     def __init__(self):
         self.db = datadir + "mathmaker.db"
@@ -62,6 +64,7 @@ class path_object(object):
         if not os.path.isfile(self.db)\
             or os.path.getmtime(self.db) < os.path.getmtime(self.db_dist):
             copyfile(self.db_dist, self.db)
+
 
 def init():
     global rootdir, localedir, libdir, datadir
