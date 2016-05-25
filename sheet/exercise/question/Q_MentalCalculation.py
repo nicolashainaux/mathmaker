@@ -96,33 +96,6 @@ SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
                   }
                      }
 
-MODULES =  \
-    { 'multi_direct': mc_modules.multi_direct,
-      'multi_reversed': mc_modules.multi_reversed,
-      'multi_hole': mc_modules.multi_hole,
-      'addi_direct': mc_modules.addi_direct,
-      'subtr_direct': mc_modules.subtr_direct,
-      'divi_direct': mc_modules.divi_direct,
-      'rank_direct': mc_modules.rank_direct,
-      'rank_reversed': mc_modules.rank_reversed,
-      'rank_numberof': mc_modules.rank_numberof,
-      'vocabulary_half': mc_modules.vocabulary_simple_part_of_a_number,
-      'vocabulary_third': mc_modules.vocabulary_simple_part_of_a_number,
-      'vocabulary_quarter': mc_modules.vocabulary_simple_part_of_a_number,
-      'vocabulary_double': mc_modules.vocabulary_simple_multiple_of_a_number,
-      'vocabulary_triple': mc_modules.vocabulary_simple_multiple_of_a_number,
-      'vocabulary_quadruple': mc_modules.vocabulary_simple_multiple_of_a_number,
-      'vocabulary_multi': mc_modules.vocabulary_multi,
-      'vocabulary_divi': mc_modules.vocabulary_divi,
-      'vocabulary_addi': mc_modules.vocabulary_addi,
-      'vocabulary_subtr': mc_modules.vocabulary_subtr,
-      'area_rectangle': mc_modules.area_rectangle,
-      'perimeter_rectangle': mc_modules.perimeter_rectangle,
-      'rectangle_length_or_width': mc_modules.rectangle_length_or_width,
-      'perimeter_square': mc_modules.perimeter_square,
-      'area_square': mc_modules.area_square
-    }
-
 
 # --------------------------------------------------------------------------
 ##
@@ -209,7 +182,7 @@ def get_modifier(q_type, nb_source):
     elif 'square' in q_type:
         d.update({'square': True})
     return d
-    
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -247,10 +220,17 @@ class Q_MentalCalculation(Q_Structure):
         numbers_to_use = options['numbers_to_use']
         del options['numbers_to_use']
 
-        # module
-        m = MODULES[self.q_kind].sub_object(embedded_machine,
-                                            numbers_to_use,
-                                            **options)
+        # modules
+        if self.q_kind in ['vocabulary_half', 'vocabulary_third',
+                           'vocabulary_quarter', 'vocabulary_double',
+                           'vocabulary_triple', 'vocabulary_quadruple']:
+        #___
+            module = getattr(mc_modules,
+                             'vocabulary_simple_multiple_of_a_number')
+
+        else:
+            module = getattr(mc_modules, self.q_kind)
+        m = module.sub_object(embedded_machine, numbers_to_use, **options)
 
         self.q_text = m.q(embedded_machine, **options)
         self.q_answer = m.a(embedded_machine, **options)
