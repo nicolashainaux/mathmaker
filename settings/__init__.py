@@ -29,6 +29,14 @@ from shutil import copyfile
 from lib import flat_dict
 from lib.common import software
 
+##
+#   @brief  This filter removes the first 4 chars of the name (to avoid having
+#           all recorded messages start with "dbg.").
+class ContextFilter(logging.Filter):
+    def filter(self, record):
+        record.name = record.name[4:]
+        return True
+
 
 def config_logger():
     debug_conf_filename = settingsdir + "debug_conf.yaml"
@@ -40,6 +48,7 @@ def config_logger():
 
         for loggername, level in d.items():
             logging.getLogger(loggername).setLevel(getattr(logging, level))
+            logging.getLogger(loggername).addFilter(ContextFilter())
 
 
 class default_object(object):

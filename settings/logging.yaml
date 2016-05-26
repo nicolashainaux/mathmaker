@@ -6,9 +6,10 @@ version: 1
 # (for instance, turn debug logging on by setting dbg level to DEBUG).
 
 formatters:
+    dbgMessageFormatter:
+        format: '[%(name)s] %(message)s'
     rawMessageFormatter:
         format: '%(message)s'
-        datefmt: ''
     defaultFormatter:
         format: '%(asctime)s.%(msecs)d %(filename)s: %(funcName)s: %(message)s'
         datefmt: '%Y/%m/%d %H:%M:%S'
@@ -33,7 +34,7 @@ handlers:
     debugHandler:
         class: logging.StreamHandler
         level: DEBUG
-        formatter: rawMessageFormatter
+        formatter: dbgMessageFormatter
 
 loggers:
     root:
