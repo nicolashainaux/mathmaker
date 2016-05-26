@@ -23,6 +23,7 @@
 import sqlite3
 
 import settings
+import machine as machine_lib
 from lib.common import latex
 
 def init():
@@ -39,6 +40,9 @@ def init():
     global deci_one_digit_multi_source
     global deci_one_digit_divi_source
     global mc_source
+    global machine
+
+    log = settings.mainlogger
 
     db = sqlite3.connect(settings.path.db)
 
@@ -66,3 +70,10 @@ def init():
     deci_one_digit_divi_source = lib.sources.sub_source(
                                         'decimal_and_one_digit_for_divi')
     mc_source = lib.sources.mc_source()
+
+    try:
+        machine = machine_lib.LaTeX(settings.language)
+    except Exception:
+        log.error("An exception occured while creating the LaTeX machine.",
+                  exc_info=True)
+
