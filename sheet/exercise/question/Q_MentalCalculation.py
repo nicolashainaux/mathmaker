@@ -210,8 +210,7 @@ class Q_MentalCalculation(Q_Structure):
         # fields matching optional arguments which are so far:
         # self.q_kind, self.q_subkind
         # plus self.machine, self.options (modified)
-        Q_Structure.__init__(self, embedded_machine,
-                             q_kind, None,
+        Q_Structure.__init__(self, q_kind, None,
                              q_subkind='bypass', **options)
         # The purpose of this next line is to get the possibly modified
         # value of **options
@@ -230,12 +229,12 @@ class Q_MentalCalculation(Q_Structure):
 
         else:
             module = getattr(mc_modules, self.q_kind)
-        m = module.sub_object(embedded_machine, numbers_to_use, **options)
+        m = module.sub_object(numbers_to_use, **options)
 
-        self.q_text = m.q(embedded_machine, **options)
-        self.q_answer = m.a(embedded_machine, **options)
+        self.q_text = m.q(**options)
+        self.q_answer = m.a(**options)
         if hasattr(m, 'h'):
-            self.q_hint = m.h(embedded_machine, **options)
+            self.q_hint = m.h(**options)
         else:
             self.q_hint = ""
 

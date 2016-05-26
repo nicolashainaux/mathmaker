@@ -36,7 +36,7 @@ DEFAULT_RANKS_SCALE = RANKS
 
 class sub_object(object):
 
-    def __init__(self, M, rank_to_use, **options):
+    def __init__(self, rank_to_use, **options):
         rank_to_use = rank_to_use[0]
 
         generation_type = options['generation_type'] \
@@ -185,10 +185,10 @@ class sub_object(object):
         self.chosen_rank = rank_to_use
 
 
-    def q(self, M, **options):
+    def q(self, **options):
         return _("Which figure matches the {rank} in the number \
 {decimal_number}?").format(decimal_number=self.chosen_deci_str,
                            rank=_(str(RANKS_WORDS[self.chosen_rank])))
 
-    def a(self, M, **options):
+    def a(self, **options):
         return self.chosen_figure

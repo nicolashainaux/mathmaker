@@ -27,9 +27,9 @@ from . import vocabulary_questions
 
 class sub_object(vocabulary_questions.structure):
 
-    def __init__(self, M, numbers_to_use, **options):
+    def __init__(self, numbers_to_use, **options):
         super().__init__(
-                M, numbers_to_use,
+                numbers_to_use,
                 result_fct=lambda x,y: Product([x, y]),
                 wording=_("How much is the product of {nb1} by {nb2}?"),
                 **options)

@@ -168,6 +168,13 @@ class Structure(object):
 
     ##
     #   @brief /!\ Must be redefined.
+    #   Writes to the output the given string
+    #   @warning Will raise an exception if not redefined
+    def write_out(self, given_string, **options):
+        raise error.MethodShouldBeRedefined(self, 'write_out')
+
+    ##
+    #   @brief /!\ Must be redefined.
     #   Writes to the output the command setting the text size
     #   @warning Will raise an exception if not redefined
     def write_set_font_size_to(self, arg):

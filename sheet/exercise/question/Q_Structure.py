@@ -20,7 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from lib import shared
 from lib import error
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -37,18 +39,15 @@ class Q_Structure(object):
     ##
     #   @brief /!\ Must be redefined. Constructor.
     #   @warning Exception NotInstanciableObject.
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
-    def __init__(self, embedded_machine,
-                 q_kind, AVAILABLE_Q_KIND_VALUES,
+    def __init__(self, q_kind, AVAILABLE_Q_KIND_VALUES,
                  **options):
         try:
             self.derived
         except AttributeError:
             raise error.NotInstanciableObject(self)
 
-        self.machine = embedded_machine.clone(embedded_machine.language_code)
-        self.machine.set_redirect_output_to_str(True)
+        self.machine = shared.machine.clone(shared.machine.language_code)
 
         # OPTIONS -------------------------------------------------------------
         # It is necessary to define an options field to pass the

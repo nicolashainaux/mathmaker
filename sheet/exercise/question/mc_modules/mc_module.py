@@ -35,14 +35,14 @@ from lib.tools.wording import setup_wording_format_of
 
 class structure(object):
 
-    def h(self, M, **options):
+    def h(self, **options):
         if hasattr(self, 'hint'):
             return "\hfill" + Value("", unit=self.hint)\
                               .into_str(display_SI_unit=True)
         else:
             return ""
 
-    def setup(self, M, arg, shuffle_nbs=True, **options):
+    def setup(self, arg, shuffle_nbs=True, **options):
         if arg == "minimal":
             if 'variant' in options and options['variant'] == 'decimal':
                 options['variant'] = random.choice(['decimal1', 'decimal2'])

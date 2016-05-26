@@ -142,7 +142,6 @@ class S_Structure(object):
             raise error.NotInstanciableObject(self)
 
         self.machine = embedded_machine.clone(embedded_machine.language_code)
-        self.machine.set_redirect_output_to_str(True)
         self.exercises_list = list()
         self.machine.set_font_size_offset(font_size_offset)
 

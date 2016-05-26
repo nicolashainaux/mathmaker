@@ -20,13 +20,14 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from lib import shared
 from core.base_calculus import *
 from core.root_calculus import *
 
 
 class sub_object(object):
 
-    def __init__(self, M, numbers_to_use, **options):
+    def __init__(self, numbers_to_use, **options):
         nb_list = list(numbers_to_use)
         hole = Item(Value('...'))
         self.hidden_one = None
@@ -48,15 +49,15 @@ class sub_object(object):
                                       randomly.pop(factors)])
         self.holed_product.set_compact_display(False)
 
-    def q(self, M, **options):
+    def q(self, **options):
         return _("Which number can fill the hole in") \
                + " "\
-               + M.write_math_style2(\
+               + shared.machine.write_math_style2(\
                self.holed_product.into_str(force_expression_begins=True)) \
                + " = " \
                + self.product.into_str() \
                + " ?"
 
-    def a(self, M, **options):
-        return M.write_math_style2(\
+    def a(self, **options):
+        return shared.machine.write_math_style2(\
                         self.hidden_one.into_str(force_expression_begins=True))

@@ -29,14 +29,14 @@ from . import rank_reversed
 
 class sub_object(object):
 
-    def __init__(self, M, rank_to_use, **options):
-        rank_reversed.sub_object.__init__(self, M, rank_to_use, direct=True,
+    def __init__(self, rank_to_use, **options):
+        rank_reversed.sub_object.__init__(self, rank_to_use, direct=True,
                                           **options)
 
-    def q(self, M, **options):
+    def q(self, **options):
         return _("What is the rank of the figure {figure} in the number \
 {decimal_number}?").format(decimal_number=self.chosen_deci_str,
                            figure=self.chosen_figure)
 
-    def a(self, M, **options):
+    def a(self, **options):
         return _(str(RANKS_WORDS[self.chosen_rank]))

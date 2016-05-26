@@ -30,16 +30,16 @@ from . import rank_reversed
 
 class sub_object(object):
 
-    def __init__(self, M, rank_to_use, **options):
-        rank_reversed.sub_object.__init__(self, M, rank_to_use, numberof=True,
+    def __init__(self, rank_to_use, **options):
+        rank_reversed.sub_object.__init__(self, rank_to_use, numberof=True,
                                           **options)
 
-    def q(self, M, **options):
+    def q(self, **options):
         return _("{how_many_rank} are there in \
 {decimal_number}?").format(decimal_number=self.chosen_deci_str,
                          how_many_rank=_(str(RANKS_HOW_MANY[self.chosen_rank])))
 
-    def a(self, M, **options):
+    def a(self, **options):
         n = self.chosen_deci
         r = self.chosen_rank
         return Item(((n - n % r) / r)).into_str(force_expression_begins=True)

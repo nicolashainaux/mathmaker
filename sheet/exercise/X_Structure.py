@@ -54,7 +54,6 @@ class X_Structure(object):
             raise error.NotInstanciableObject(self)
 
         self.machine = embedded_machine.clone(embedded_machine.language_code)
-        self.machine.set_redirect_output_to_str(True)
 
         self.questions_list = list()
 

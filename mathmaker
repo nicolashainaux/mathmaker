@@ -80,7 +80,7 @@ def main():
         sys.exit(2)
 
     try:
-        shared.machine.write(str(sh))
+        shared.machine.write_out(str(sh))
     except Exception:
         log.error("An exception occured during the creation of the sheet.",
                   exc_info=True)

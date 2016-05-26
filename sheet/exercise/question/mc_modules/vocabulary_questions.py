@@ -30,12 +30,12 @@ from lib.tools.wording import setup_wording_format_of
 
 class structure(mc_module.structure):
 
-    def __init__(self, M, nbs_to_use, **kwargs):
+    def __init__(self, nbs_to_use, **kwargs):
         result_fct = kwargs.pop('result_fct', None)
         wording = kwargs.pop('wording', "")
-        super().setup(M, "minimal", **kwargs)
-        super().setup(M, "numbers", nb=nbs_to_use, **kwargs)
-        super().setup(M, "nb_variants", nb=nbs_to_use, **kwargs)
+        super().setup("minimal", **kwargs)
+        super().setup("numbers", nb=nbs_to_use, **kwargs)
+        super().setup("nb_variants", nb=nbs_to_use, **kwargs)
         self.result = Value(result_fct(self.nb1, self.nb2).evaluate())\
                                                                     .into_str()
         if 'swap_nb1_nb2' in kwargs and kwargs['swap_nb1_nb2']:
@@ -49,8 +49,8 @@ class structure(mc_module.structure):
         self.wording = wording
         setup_wording_format_of(self)
 
-    def q(self, M, **kwargs):
+    def q(self, **kwargs):
         return self.wording.format(**self.wording_format)
 
-    def a(self, M, **kwargs):
+    def a(self, **kwargs):
         return str(self.result)

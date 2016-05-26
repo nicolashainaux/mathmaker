@@ -70,7 +70,7 @@ class LaTeX(Structure.Structure):
         self.language = latex.LANGUAGE_PACKAGE_NAME[language]
         self.markup = latex.MARKUP
         self.out = sys.stdout
-        self.redirect_output_to_str = False
+        self.redirect_output_to_str = True
 
 
 
@@ -286,6 +286,14 @@ exercises counter (which is useful when begining to write the answers sheet)")\
             return output_str
         else:
             self.out.write(output_str)
+
+    ##
+    #   @brief Writes to the output the given string
+    def write_out(self, given_string, **options):
+        self.out.write(given_string)
+
+
+
 
     ##
     #   @brief Writes to the output the given string

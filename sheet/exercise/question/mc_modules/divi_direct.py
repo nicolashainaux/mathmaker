@@ -22,31 +22,32 @@
 
 import os
 
+from lib import shared
 from core.root_calculus import Value
 from . import mc_module
 from lib.tools.wording import post_process
 
 class sub_object(mc_module.structure):
 
-    def __init__(self, M, numbers_to_use, **options):
-        super().setup(M, "minimal", **options)
-        super().setup(M, "division", nb=numbers_to_use, **options)
+    def __init__(self, numbers_to_use, **options):
+        super().setup("minimal", **options)
+        super().setup("division", nb=numbers_to_use, **options)
 
         if self.context == 'mini_problem':
             self.nb1 = self.dividend
             self.nb2 = self.divisor
-            super().setup(M, "mini_problem_wording",
+            super().setup("mini_problem_wording",
                           q_id=os.path.splitext(os.path.basename(__file__))[0],
                           **options)
 
-    def q(self, M, **options):
+    def q(self, **options):
         if self.context == 'mini_problem':
             return post_process(self.wording.format(**self.wording_format))
         else:
             return _("Calculate: {math_expr}").format(math_expr=\
-                                      M.write_math_style2(self.quotient_str))
+                        shared.machine.write_math_style2(self.quotient_str))
 
-    def a(self, M, **options):
+    def a(self, **options):
         v = None
         if hasattr(self, 'hint'):
             v = Value(self.result, unit=self.hint)\

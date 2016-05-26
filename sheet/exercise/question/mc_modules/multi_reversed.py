@@ -22,83 +22,84 @@
 
 import random
 
+from lib import shared
 from core.root_calculus import Value
 from core.base_calculus import Product
 
 
 class sub_object(object):
 
-    def __init__(self, M, numbers_to_use, **options):
+    def __init__(self, numbers_to_use, **options):
         nb_list = list(numbers_to_use)
         self.nb1, self.nb2 = random.sample(nb_list, 2)
         self.product = Product([self.nb1, self.nb2]).evaluate()
 
-    def q(self, M, **options):
+    def q(self, **options):
         return _("In the multiplication tables (from 2 to 9), "\
                 +"which product is equal to:") + " "\
                + Value(self.product).into_str() \
                + " ?"
 
-    def a(self, M, **options):
+    def a(self, **options):
         if self.product == 12:
-            return M.write_math_style2(Product([2, 6]).into_str(\
-                                                    force_expression_begins=True
+            return shared.machine.write_math_style2(Product([2, 6]).into_str(\
+                                                force_expression_begins=True
                                                                  )
                                   ) \
-                   + " " + _("or") + " " \
-                   + M.write_math_style2(Product([3, 4]).into_str(\
-                                                    force_expression_begins=True
+                  + " " + _("or") + " " \
+                  + shared.machine.write_math_style2(Product([3, 4]).into_str(\
+                                                force_expression_begins=True
                                                                  )
                                         )
 
         elif self.product == 16:
-            return M.write_math_style2(Product([2, 8]).into_str(\
-                                                    force_expression_begins=True
+            return shared.machine.write_math_style2(Product([2, 8]).into_str(\
+                                                force_expression_begins=True
                                                                  )
                                   ) \
                    + " " + _("or") + " " \
-                   + M.write_math_style2(Product([4, 4]).into_str(\
-                                                    force_expression_begins=True
+                  + shared.machine.write_math_style2(Product([4, 4]).into_str(\
+                                                force_expression_begins=True
                                                                  )
                                         )
 
         elif self.product == 18:
-            return M.write_math_style2(Product([2, 9]).into_str(\
-                                                    force_expression_begins=True
+            return shared.machine.write_math_style2(Product([2, 9]).into_str(\
+                                                force_expression_begins=True
                                                                  )
                                   ) \
                    + " " + _("or") + " " \
-                   + M.write_math_style2(Product([3, 6]).into_str(\
-                                                    force_expression_begins=True
+                  + shared.machine.write_math_style2(Product([3, 6]).into_str(\
+                                                force_expression_begins=True
                                                                  )
                                         )
 
         elif self.product == 24:
-            return M.write_math_style2(Product([4, 6]).into_str(\
-                                                    force_expression_begins=True
+            return shared.machine.write_math_style2(Product([4, 6]).into_str(\
+                                                force_expression_begins=True
                                                                  )
                                   ) \
                    + " " + _("or") + " " \
-                   + M.write_math_style2(Product([3, 8]).into_str(\
-                                                    force_expression_begins=True
+                  + shared.machine.write_math_style2(Product([3, 8]).into_str(\
+                                                force_expression_begins=True
                                                                  )
                                         )
 
         elif self.product == 36:
-            return M.write_math_style2(Product([6, 6]).into_str(\
-                                                    force_expression_begins=True
+            return shared.machine.write_math_style2(Product([6, 6]).into_str(\
+                                                force_expression_begins=True
                                                                  )
                                   ) \
                    + " " + _("or") + " " \
-                   + M.write_math_style2(Product([4, 9]).into_str(\
-                                                    force_expression_begins=True
+                  + shared.machine.write_math_style2(Product([4, 9]).into_str(\
+                                                force_expression_begins=True
                                                                  )
                                         )
 
         else:
-            return M.write_math_style2(Product([self.nb1,
+            return shared.machine.write_math_style2(Product([self.nb1,
                                                 self.nb2]).into_str(\
-                                                    force_expression_begins=True
+                                                force_expression_begins=True
                                                                  )
 
                                       )

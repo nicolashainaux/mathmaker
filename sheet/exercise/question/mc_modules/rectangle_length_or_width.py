@@ -22,6 +22,7 @@
 
 import random
 
+from lib import shared
 from core.base_calculus import *
 from core.root_calculus import Value
 from . import mc_module
@@ -29,14 +30,14 @@ from lib.tools.wording import setup_wording_format_of
 
 class sub_object(mc_module.structure):
 
-    def __init__(self, M, numbers_to_use, **options):
-        super().setup(M, "minimal", **options)
-        super().setup(M, "length_units", **options)
+    def __init__(self, numbers_to_use, **options):
+        super().setup("minimal", **options)
+        super().setup("length_units", **options)
 
         if self.context == "from_area":
-            super().setup(M, "division", nb=numbers_to_use, **options)
+            super().setup("division", nb=numbers_to_use, **options)
             self.nb1, self.nb2 = self.dividend, self.divisor
-            super().setup(M, "rectangle", **options)
+            super().setup("rectangle", **options)
             wordings = {'w': _("A rectangle has an area of {nb1} {area_unit} \
 and a length of {nb2} {length_unit}. What is its width? |hint:length_unit|"),
                         'l': _("A rectangle has an area of {nb1} {area_unit} \
@@ -46,9 +47,9 @@ and a width of {nb2} {length_unit}. What is its length? |hint:length_unit|")
             setup_wording_format_of(self)
 
         elif self.context == "from_perimeter":
-            super().setup(M, "numbers", nb=numbers_to_use, **options)
-            super().setup(M, "nb_variants", nb=numbers_to_use, **options)
-            super().setup(M, "rectangle", **options)
+            super().setup("numbers", nb=numbers_to_use, **options)
+            super().setup("nb_variants", nb=numbers_to_use, **options)
+            super().setup("rectangle", **options)
             self.subcontext = random.choice(['w', 'l'])
             self.nb1 = self.rectangle.perimeter
             self.nb2, self.nb3 = (self.rectangle.width, self.rectangle.length)\
@@ -75,17 +76,19 @@ perimeter is {nb1} {length_unit} and width is {nb2} {length_unit}? \
         elif self.subcontext == "l":
             self.rectangle.setup_labels([False, False, "?", True])
 
-    def q(self, M, **options):
+    def q(self, **options):
         if self.picture:
-            return M.write_layout((1, 2),
-                                  [3.5, 9.5],
-                                  [M.insert_picture(self.rectangle,
-                                                    scale=0.75,
-                                     vertical_alignment_in_a_tabular=True),
-                                   self.wording.format(**self.wording_format)])
+            return shared.machine.write_layout(
+                            (1, 2),
+                            [3.5, 9.5],
+                            [shared.machine.insert_picture(
+                                    self.rectangle,
+                                    scale=0.75,
+                                    vertical_alignment_in_a_tabular=True),
+                             self.wording.format(**self.wording_format)])
         else:
             return self.wording.format(**self.wording_format)
 
-    def a(self, M, **options):
+    def a(self, **options):
         v = Value(self.result, unit=self.hint).into_str(display_SI_unit=True)
         return v

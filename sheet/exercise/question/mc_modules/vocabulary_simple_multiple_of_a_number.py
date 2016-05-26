@@ -27,11 +27,11 @@ from . import vocabulary_questions
 
 class sub_object(vocabulary_questions.structure):
 
-    def __init__(self, M, numbers_to_use, **options):
+    def __init__(self, numbers_to_use, **options):
         MULTIPLE_QUESTIONS = { 2: _("What is the double of {nb1}?"),
                                3: _("What is the triple of {nb1}?"),
                                4: _("What is the quadruple of {nb1}?") }
-        super().__init__(M, numbers_to_use,
+        super().__init__(numbers_to_use,
                          result_fct=lambda x,y: Product([x, y]),
                          wording=MULTIPLE_QUESTIONS[numbers_to_use[0]],
                          shuffle_nbs=False,
