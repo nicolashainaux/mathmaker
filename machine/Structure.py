@@ -37,7 +37,6 @@ class Structure(object):
     ##
     #   @brief /!\ Must be redefined. Constructor.
     #   @warning Will raise an exception if not redefined
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     def __init__(self, language):
         raise error.NotInstanciableObject(self)

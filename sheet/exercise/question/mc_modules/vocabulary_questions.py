@@ -47,7 +47,7 @@ class structure(mc_module.structure):
         self.nb1 = Value(self.nb1)
         self.nb2 = Value(self.nb2)
         self.wording = wording
-        setup_wording_format_of(self, M)
+        setup_wording_format_of(self)
 
     def q(self, M, **kwargs):
         return self.wording.format(**self.wording_format)

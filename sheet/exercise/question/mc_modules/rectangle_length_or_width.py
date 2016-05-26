@@ -43,7 +43,7 @@ and a length of {nb2} {length_unit}. What is its width? |hint:length_unit|"),
 and a width of {nb2} {length_unit}. What is its length? |hint:length_unit|")
                        }
             self.wording = wordings[self.subcontext]
-            setup_wording_format_of(self, M)
+            setup_wording_format_of(self)
 
         elif self.context == "from_perimeter":
             super().setup(M, "numbers", nb=numbers_to_use, **options)
@@ -64,7 +64,7 @@ perimeter is {nb1} {length_unit} and width is {nb2} {length_unit}? \
 |hint:length_unit|")
                        }
             self.wording = wordings[self.subcontext]
-            setup_wording_format_of(self, M)
+            setup_wording_format_of(self)
 
         else:
             raise error.ImpossibleAction("Create this question without any "\

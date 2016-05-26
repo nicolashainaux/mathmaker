@@ -36,12 +36,12 @@ class sub_object(mc_module.structure):
 
         if self.picture:
             self.wording = _("Perimeter of this square? |hint:length_unit|")
-            setup_wording_format_of(self, M)
+            setup_wording_format_of(self)
         else:
             self.nb1 = self.square.side_length
             self.wording = _("Perimeter of a square whose side's length \
 is {nb1} {length_unit}? |hint:length_unit|")
-            setup_wording_format_of(self, M)
+            setup_wording_format_of(self)
 
     def q(self, M, **options):
         if self.picture:

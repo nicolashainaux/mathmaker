@@ -182,4 +182,4 @@ class structure(object):
                              .next(q_id=options['q_id'],
                                    nb1_to_check=self.nb1,
                                    nb2_to_check=self.nb2))
-            setup_wording_format_of(self, M)
+            setup_wording_format_of(self)

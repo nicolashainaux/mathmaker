@@ -312,8 +312,7 @@ def extract_formatting_tags_from(s):
 #   @brief  Sets or resets the object's attributes according to its 'wording'
 #           attribute. Also process the 'wording' attribute.
 #   @param  w_object The object having a 'wording' attribute to process.
-#   @param  M        The typing machine
-def setup_wording_format_of(w_object, M):
+def setup_wording_format_of(w_object):
     #sys.stderr.write("---- NEW RAW WORDING\n" \
     #+ str(w_object.wording) + "\n")
     w_object.wording, hint = cut_off_hint_from(w_object.wording)

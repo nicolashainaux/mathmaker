@@ -36,12 +36,12 @@ class sub_object(mc_module.structure):
 
         if self.picture:
             self.wording = _("Area of this rectangle? |hint:area_unit|")
-            setup_wording_format_of(self, M)
+            setup_wording_format_of(self)
         else:
             self.nb1, self.nb2 = self.rectangle.width, self.rectangle.length
             self.wording = _("Area of a rectangle whose width is {nb1} \
 {length_unit} and length is {nb2} {length_unit}? |hint:area_unit|")
-            setup_wording_format_of(self, M)
+            setup_wording_format_of(self)
 
     def q(self, M, **options):
         if self.picture:
