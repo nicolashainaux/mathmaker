@@ -23,6 +23,7 @@
 import math
 import decimal
 
+import settings
 from lib import *
 from lib import translator
 from .base import *
@@ -31,6 +32,9 @@ from lib.maths_lib import *
 from lib.common.cst import *
 from lib.utils import *
 from settings import default, config
+
+log_equation_solve_next_step = \
+settings.dbg_logger.getChild('Equation.solve_next_step')
 
 if config.MARKUP == 'latex':
     from lib.common.latex import MARKUP
@@ -237,10 +241,6 @@ class Expression(ComposedCalculable):
         aux_expr = self.right_hand_side
         result = ""
 
-        #DEBUG
-        # print aux_expr.into_str()
-
-
         # Complete expansion & reduction of any expression:o)
         while aux_expr != None:
             result += MARKUP['opening_math_style2'] \
@@ -249,9 +249,6 @@ class Expression(ComposedCalculable):
                       + MARKUP['closing_math_style2'] \
                       + MARKUP['newline'] \
                       + "\n"
-            #DEBUG
-            #print "\n ++ " + str(aux_expr) + " ++ \n"
-            #print "\n ++ " + str(type(aux_expr)) + " ++ \n"
             aux_expr = aux_expr.expand_and_reduce_next_step()
 
         return result
@@ -1329,29 +1326,22 @@ class Equation(ComposedCalculable):
     #   @return An Equation
     def solve_next_step(self, **options):
         new_eq = Equation(self)
-        #DEBUG
-        debug.write("\nEntering [solve_next_step] " \
-                               + "with Equation:\n" \
-                               + new_eq.dbg_str() + "\n",
-                               case=debug.solve_next_step)
+        log_equation_solve_next_step.debug(
+                                "Entering, with Equation: " + new_eq.dbg_str())
 
         # CASE 0: preparing the Equation: getting recursively rid of
         #          imbricated Sums
         if isinstance(new_eq.left_hand_side.term[0], Sum) \
            and len(new_eq.left_hand_side) == 1:
         #___
-            #DEBUG
-            debug.write("\n[solve_next_step] CASE-0s-left\n",
-                        case=debug.solve_next_step)
+            log_equation_solve_next_step.debug("CASE-0s-left")
             new_eq.set_hand_side("left", new_eq.left_hand_side.term[0])
             return new_eq.solve_next_step(**options)
 
         elif isinstance(new_eq.right_hand_side.term[0], Sum) \
            and len(new_eq.right_hand_side) == 1:
         #___
-            #DEBUG
-            debug.write("\n[solve_next_step] CASE-0s-right\n",
-                        case=debug.solve_next_step)
+            log_equation_solve_next_step.debug("CASE-0s-right")
             new_eq.set_hand_side("right", new_eq.right_hand_side.term[0])
             return new_eq.solve_next_step(**options)
 
@@ -1359,9 +1349,7 @@ class Equation(ComposedCalculable):
            and len(new_eq.left_hand_side) == 1 \
            and len(new_eq.left_hand_side.term[0]) == 1:
         #___
-            #DEBUG
-            debug.write("\n[solve_next_step] CASE-0p-left\n",
-                        case=debug.solve_next_step)
+            log_equation_solve_next_step.debug("CASE-0p-left")
             new_eq.set_hand_side("left",
                             Sum(new_eq.left_hand_side.term[0].factor[0]))
             return new_eq.solve_next_step(**options)
@@ -1370,9 +1358,7 @@ class Equation(ComposedCalculable):
            and len(new_eq.right_hand_side) == 1 \
            and len(new_eq.right_hand_side.term[0]) == 1:
         #___
-            #DEBUG
-            debug.write("\n[solve_next_step] CASE-0p-right\n",
-                        case=debug.solve_next_step)
+            log_equation_solve_next_step.debug("CASE-0p-right")
             new_eq.set_hand_side("right",
                             Sum(new_eq.right_hand_side.term[0].factor[0]))
             return new_eq.solve_next_step(**options)
@@ -1389,23 +1375,20 @@ class Equation(ComposedCalculable):
                 next_left_X_str = str(next_left_X)
             else:
                 next_left_X_str = next_left_X.dbg_str()
-            debug.write("\n[solve_next_step] " \
-                        + "'decimal_result' is in options: " \
-                        + str('decimal_result' in options) \
-                        + " len(new_eq.left_hand_side) == " \
-                        + str(len(new_eq.left_hand_side)) \
-                        + "\nnext_left_X is: " \
-                        + next_left_X_str \
-                        + "\nnew_eq.left_hand_side.term[0].is_literal(): " \
-                        + str(new_eq.left_hand_side.term[0].is_literal()) \
-                        + " len(new_eq.right_hand_side) == " \
-                        + str(len(new_eq.right_hand_side)) \
-                        + "\nisinstance(new_eq.right_hand_side.term[0], " \
-                        + "Fraction)" \
+            log_equation_solve_next_step.debug(
+                        "'decimal_result' is in options? "
+                        + str('decimal_result' in options) + "; "
+                        "len(new_eq.left_hand_side): "
+                        + str(len(new_eq.left_hand_side))
+                        + "\nnext_left_X is: " + next_left_X_str
+                        + "\nnew_eq.left_hand_side.term[0].is_literal()? "
+                        + str(new_eq.left_hand_side.term[0].is_literal()) +"; "
+                        "len(new_eq.right_hand_side): "
+                        + str(len(new_eq.right_hand_side))
+                        + "\nisinstance(new_eq.right_hand_side.term[0], "
+                        "Fraction)? "
                         + str(isinstance(new_eq.right_hand_side.term[0],
-                                         Fraction)) \
-                        + "\n",
-                        case=debug.solve_next_step)
+                                         Fraction)))
 
         if ('skip_fraction_simplification' in options \
             and not 'decimal_result' in options)\
@@ -1442,9 +1425,7 @@ class Equation(ComposedCalculable):
             and (isinstance(new_eq.right_hand_side.term[0], Quotient) \
                or isinstance(new_eq.right_hand_side.term[0], SquareRoot)):
         #___
-            #DEBUG
-            debug.write("\n[solve_next_step] Decimal Result CASE\n",
-                                   case=debug.solve_next_step)
+            log_equation_solve_next_step.debug("Decimal Result CASE")
             new_eq.set_hand_side("right",
                                  new_eq.\
                                     right_hand_side.\
@@ -1454,9 +1435,7 @@ class Equation(ComposedCalculable):
         # Expand & reduce each side of the Equation, whenever possible
         elif (next_left_X != None) or (next_right_X != None):
         #___
-            #DEBUG
-            debug.write("\n[solve_next_step] 1st CASE\n",
-                                   case=debug.solve_next_step)
+            log_equation_solve_next_step.debug("1st CASE")
             if next_left_X != None:
             #___
                 new_eq.set_hand_side("left", next_left_X)
@@ -1477,43 +1456,27 @@ class Equation(ComposedCalculable):
               or (len(new_eq.right_hand_side) == 1 \
                   and not new_eq.right_hand_side.term[0].is_numeric()):
         #___
-            #DEBUG
-            debug.write("\n[solve_next_step] 2d CASE\n",
-                                   case=debug.solve_next_step)
+            log_equation_solve_next_step.debug("2d CASE")
             # All the literal objects will be moved to the left,
             # all numeric will be moved to the right
-            #DEBUG
-            debug.write("\néquation en cours: " \
-                                   + self.dbg_str() + "\n",
-                                   case=debug.solve_next_step)
+            log_equation_solve_next_step.debug(
+                                        "Current Equation: " + self.dbg_str())
 
             left_collected_terms = new_eq.left_hand_side.get_numeric_terms()
             right_collected_terms = new_eq.right_hand_side.get_literal_terms()
 
-            #DEBUG
-            if debug.ENABLED and debug.solve_next_step:
-                debug.write("\nleft content: " \
-                                   + self.left_hand_side.dbg_str(),
-                                   case=debug.solve_next_step)
-                debug.write("\nright content: " \
-                                   + self.right_hand_side.dbg_str(),
-                                   case=debug.solve_next_step)
+            log_equation_solve_next_step.debug(
+                            "left content: " + self.left_hand_side.dbg_str()
+                            + "\nright content: "
+                            + self.right_hand_side.dbg_str())
 
-                lstring = "\nleft collected terms: "
+            log_equation_solve_next_step.debug(
+                        "\nleft collected terms: "
+                        + "".join([t.dbg_str() for t in left_collected_terms]))
 
-                for t in left_collected_terms:
-                    lstring += t.dbg_str()
-
-                debug.write(lstring,
-                            case=debug.solve_next_step)
-
-                rstring = "\nright collected terms: "
-
-                for t in right_collected_terms:
-                    rstring += t.dbg_str()
-
-                debug.write(rstring + "\n",
-                            case=debug.solve_next_step)
+            log_equation_solve_next_step.debug(
+                        "\nright collected terms: "
+                        + "".join([t.dbg_str() for t in right_collected_terms]))
 
             # Special case of equations like 5 = x - 9
             # which should become x = 5 + 9 at the next line, instead of
@@ -1523,24 +1486,17 @@ class Equation(ComposedCalculable):
                and len(new_eq.right_hand_side) == 2 \
                and len(right_collected_terms) == 1:
             #___
-                # DEBUG
-                debug.write("\nEntered in the Special Case [part of 2d Case]",
-                                   case=debug.solve_next_step)
-                debug.write("\nisinstance(right_collected_terms[0], " \
-                            + "Product) is " \
-                            + str(isinstance(right_collected_terms[0], \
-                                             Product)) \
-                            + "\nlen(right_collected_terms[0]) == 2 is " \
-                            + str(len(right_collected_terms[0]) == 2) \
-                            + "\nright_collected_terms[0][0] is " \
-                            #+ str(right_collected_terms[0][0]) \
-                            + "\nlen(right_collected_terms[0]) == 1 is " \
-                            + str(len(right_collected_terms[0]) == 1) \
-                            + "\nisinstance(right_collected_terms[0], " \
-                            + "Item) is " \
-                            + str(isinstance(right_collected_terms[0], \
-                                             Item)),
-                            case=debug.solve_next_step)
+                log_equation_solve_next_step.debug(
+                        "Entered in the Special Case [part of 2d Case]")
+                log_equation_solve_next_step.debug(
+                        "isinstance(right_collected_terms[0], Product)? "
+                        + str(isinstance(right_collected_terms[0], Product))
+                        + "\nlen(right_collected_terms[0]) == 2? "
+                        + str(len(right_collected_terms[0]) == 2)
+                        + "\nlen(right_collected_terms[0]) == 1? "
+                        + str(len(right_collected_terms[0]) == 1)
+                        + "\nisinstance(right_collected_terms[0], Item)? "
+                        + str(isinstance(right_collected_terms[0], Item)))
 
                 if (isinstance(right_collected_terms[0], Product) \
                     and len(right_collected_terms[0]) == 2 \
@@ -1550,9 +1506,7 @@ class Equation(ComposedCalculable):
                    or (isinstance(right_collected_terms[0], Item) \
                        and right_collected_terms[0].is_positive()):
                 #___
-                    # DEBUG
-                    debug.write("\nSpecial Case [part 2]",
-                                   case=debug.solve_next_step)
+                    log_equation_solve_next_step.debug("Special Case [part 2]")
 
                     return Equation((new_eq.right_hand_side,
                                      new_eq.left_hand_side)).solve_next_step()
@@ -1566,40 +1520,26 @@ class Equation(ComposedCalculable):
                and len(new_eq.right_hand_side) == 1 \
                and isinstance(right_collected_terms[0], Product):
             #___
-                # DEBUG
-                debug.write("\nSpecial Case [part 3]",
-                               case=debug.solve_next_step)
+                log_equation_solve_next_step.debug("Special Case [part 3]")
 
                 return Equation((new_eq.right_hand_side,
                                  new_eq.left_hand_side)).solve_next_step()
 
-
-            #DEBUG
-            #debug.write("\nleft_collected_terms: ",
-                       # case=debug.solve_next_step)
-
             for term in left_collected_terms:
-                #DEBUG
-                #debug.write("\n" + str(term) + "\n",
-                #            case=debug.solve_next_step)
+                #log_equation_solve_next_step.debug("(left)term: "
+                #                                   + str(term))
                 new_eq.left_hand_side.remove(term)
                 term.set_sign(sign_of_product(['-', term.sign]))
                 new_eq.set_hand_side("right",
                                      Sum([new_eq.right_hand_side, term])
                                      )
-                #DEBUG
-                debug.write("\nNow, right_hand_side looks like: " \
-                            + new_eq.right_hand_side.dbg_str() + "\n",
-                            case=debug.solve_next_step)
-
-            #DEBUG
-            #debug.write("\nright_collected_terms: \n",
-            #            case=debug.solve_next_step)
+                log_equation_solve_next_step.debug(
+                        "Now, right_hand_side looks like: "
+                        + new_eq.right_hand_side.dbg_str())
 
             for term in right_collected_terms:
-                #DEBUG
-                #debug.write("\n" + str(term) + "\n",
-                #                       case=debug.solve_next_step)
+                #log_equation_solve_next_step.debug("(right)term: "
+                #                                   + str(term))
                 new_eq.right_hand_side.remove(term)
                 #term.set_sign(sign_of_product(['-', term.sign]))
                 term = Product([term, Item(-1)]).reduce_()
@@ -1609,13 +1549,9 @@ class Equation(ComposedCalculable):
 
             new_eq.left_hand_side.reduce_()
             new_eq.right_hand_side.reduce_()
-            #DEBUG
-            #debug.write("\nafter reduction, "\
-            #                       + "right_hand_side looks like: " \
-            #                       + str(new_eq.right_hand_side) + "\n",
-            #                       case=debug.solve_next_step)
-
-
+            #log_equation_solve_next_step.debug("after reduction, "
+            #                       + "right_hand_side looks like: "
+            #                       + str(new_eq.right_hand_side))
 
         # 3rd CASE
         # Weird cases like 0 = 1 or 2 = 2
@@ -1623,9 +1559,7 @@ class Equation(ComposedCalculable):
              and (new_eq.right_hand_side.term[0].is_numeric())
              ):
         #___
-            #DEBUG
-            debug.write("\n[solve_next_step] 3rd CASE\n",
-                                   case=debug.solve_next_step)
+            log_equation_solve_next_step.debug("3rd CASE")
             if new_eq.left_hand_side.term[0].raw_value == \
                 new_eq.right_hand_side.term[0].raw_value \
                and new_eq.left_hand_side.get_sign() == \
@@ -1648,9 +1582,7 @@ class Equation(ComposedCalculable):
         # have been already treated before
         elif isinstance(new_eq.left_hand_side.term[0], Product):
         #___
-            #DEBUG
-            debug.write("\n[solve_next_step] 4th CASE\n",
-                                   case=debug.solve_next_step)
+            log_equation_solve_next_step.debug("4th CASE")
 
             # Let's replace the possibly remaining Monomial of degree 0
             # at the right by an equivalent Item or Fraction
@@ -1756,12 +1688,9 @@ class Equation(ComposedCalculable):
                 else:
                     return None
 
-
-        #DEBUG
-        #debug.write("\nBefore having thrown away the neutrals: " \
-        #                       + "\n" \
-        #                       + str(new_eq) + "\n",
-        #                       case=debug.solve_next_step)
+        #log_equation_solve_next_step.debug(
+        #                   "Before having thrown away the neutrals: "
+        #                   + str(new_eq))
 
         # throwing away the possibly zeros left..
         new_eq.set_hand_side("left",
@@ -1771,17 +1700,13 @@ class Equation(ComposedCalculable):
                              new_eq.right_hand_side.throw_away_the_neutrals()
                             )
 
-        #DEBUG
-        #debug.write("\nafter having thrown away the neutrals,"
-        #                       + " right_hand_side looks like: " \
-        #                       + str(new_eq.right_hand_side) + "\n",
-        #                       case=debug.solve_next_step)
+        #log_equation_solve_next_step.debug(
+        #                   "After having thrown away the neutrals,"
+        #                    right_hand_side looks like: "
+        #                    + str(new_eq.right_hand_side))
 
-        #DEBUG
-        debug.write("\nLeaving [solve_next_step] " \
-                               + "with Equation:\n" \
-                               + new_eq.dbg_str() + "\n",
-                               case=debug.solve_next_step)
+        log_equation_solve_next_step.debug(
+                                "Leaving, with Equation: " + new_eq.dbg_str())
         return new_eq
 
 
