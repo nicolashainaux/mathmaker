@@ -43,7 +43,6 @@ from lib.maths_lib import *
 from lib.common.cst import *
 from settings import default
 from lib.utils import *
-from maintenance import debug
 from settings import config
 
 log_item_into_str = settings.dbg_logger.getChild('Item.into_str')
@@ -3621,18 +3620,15 @@ class Fraction(Quotient):
                                Product(final_denominator)
                               ))
 
-            if debug.ENABLED and debug.simplification_line_minus_signs:
+            for i in range(len(answer.numerator)):
+                if answer.numerator[i].force_display_sign_once:
+                    log_fraction_simplification_line.debug(
+                            "Found a plus sign forced to display in nume")
 
-                for i in range(len(answer.numerator)):
-                    if answer.numerator[i].force_display_sign_once:
-                        log_fraction_simplification_line.debug(
-                                "Found a plus sign forced to display in nume")
-
-                for i in range(len(answer.denominator)):
-                    if answer.denominator[i].force_display_sign_once:
-                        log_fraction_simplification_line.debug(
-                                "Found a plus sign forced to display in deno")
-
+            for i in range(len(answer.denominator)):
+                if answer.denominator[i].force_display_sign_once:
+                    log_fraction_simplification_line.debug(
+                            "Found a plus sign forced to display in deno")
 
             answer.set_status("simplification_in_progress")
 
@@ -3764,14 +3760,14 @@ class Fraction(Quotient):
 
         for i in range(len(self.numerator)):
             if not (isinstance(self.numerator.factor[i], Item)                \
-                    and is_.an_integer(self.numerator.factor[i].raw_value)        \
+                    and is_.an_integer(self.numerator.factor[i].raw_value)    \
                     and self.numerator.factor[i].exponent == Value(1)         \
                     ):
                 return False
 
         for i in range(len(self.denominator)):
             if not (isinstance(self.denominator.factor[i], Item)              \
-                    and is_.an_integer(self.denominator.factor[i].raw_value)      \
+                    and is_.an_integer(self.denominator.factor[i].raw_value)  \
                     and self.denominator.factor[i].exponent == Value(1)       \
                     ):
                 return False

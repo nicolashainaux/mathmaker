@@ -1368,27 +1368,26 @@ class Equation(ComposedCalculable):
         #next_left_C = new_eq.left_hand_side.calculate_next_step()
         #next_right_C = new_eq.right_hand_side.calculate_next_step()
 
-        if debug.ENABLED and debug.solve_next_step:
-            if not (isinstance(next_left_X, Calculable) \
-                    or isinstance(next_left_X, ComposedCalculable)):
-            #___
-                next_left_X_str = str(next_left_X)
-            else:
-                next_left_X_str = next_left_X.dbg_str()
-            log_equation_solve_next_step.debug(
-                        "'decimal_result' is in options? "
-                        + str('decimal_result' in options) + "; "
-                        "len(new_eq.left_hand_side): "
-                        + str(len(new_eq.left_hand_side))
-                        + "\nnext_left_X is: " + next_left_X_str
-                        + "\nnew_eq.left_hand_side.term[0].is_literal()? "
-                        + str(new_eq.left_hand_side.term[0].is_literal()) +"; "
-                        "len(new_eq.right_hand_side): "
-                        + str(len(new_eq.right_hand_side))
-                        + "\nisinstance(new_eq.right_hand_side.term[0], "
-                        "Fraction)? "
-                        + str(isinstance(new_eq.right_hand_side.term[0],
-                                         Fraction)))
+        if not (isinstance(next_left_X, Calculable) \
+                or isinstance(next_left_X, ComposedCalculable)):
+        #___
+            next_left_X_str = str(next_left_X)
+        else:
+            next_left_X_str = next_left_X.dbg_str()
+        log_equation_solve_next_step.debug(
+                    "'decimal_result' is in options? "
+                    + str('decimal_result' in options) + "; "
+                    "len(new_eq.left_hand_side): "
+                    + str(len(new_eq.left_hand_side))
+                    + "\nnext_left_X is: " + next_left_X_str
+                    + "\nnew_eq.left_hand_side.term[0].is_literal()? "
+                    + str(new_eq.left_hand_side.term[0].is_literal()) +"; "
+                    "len(new_eq.right_hand_side): "
+                    + str(len(new_eq.right_hand_side))
+                    + "\nisinstance(new_eq.right_hand_side.term[0], "
+                    "Fraction)? "
+                    + str(isinstance(new_eq.right_hand_side.term[0],
+                                     Fraction)))
 
         if ('skip_fraction_simplification' in options \
             and not 'decimal_result' in options)\
