@@ -35,6 +35,10 @@ handlers:
         class: logging.StreamHandler
         level: DEBUG
         formatter: dbgMessageFormatter
+    rawHandler:
+        class: logging.StreamHandler
+        level: DEBUG
+        formatter: rawMessageFormatter
 
 loggers:
     root:
@@ -47,6 +51,9 @@ loggers:
         # The 'INFO' level inhibits the debug messages.
         level: INFO
         handlers: [debugHandler]
+    raw:
+        level: DEBUG
+        handlers: [rawHandler]
 
 
 

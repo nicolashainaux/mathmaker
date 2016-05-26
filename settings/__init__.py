@@ -47,8 +47,13 @@ def config_logger():
         d = flat_dict(yaml.safe_load(f))
 
         for loggername, level in d.items():
-            logging.getLogger(loggername).setLevel(getattr(logging, level))
-            logging.getLogger(loggername).addFilter(ContextFilter())
+            l = logging.getLogger(loggername)
+            l.setLevel(getattr(logging, level))
+            l.addFilter(ContextFilter())
+            if loggername in ["dbg.db"]:
+                raw_logger = logging.getLogger("raw")
+                l.addHandler(raw_logger.handlers[0])
+                l.propagate = False
 
 
 class default_object(object):
