@@ -24,7 +24,7 @@ from lib import *
 from lib import shared
 from .Q_Structure import Q_Structure
 
-#from core.base_calculus import *
+#from lib.core.base_calculus import *
 
 # AVAILABLE_Q_KIND_VALUES lists so: {'q_kind1': ['q_subkind1',
 #                                                  'q_subkind2',

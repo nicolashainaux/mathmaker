@@ -33,7 +33,7 @@ import locale
 import math
 from decimal import *
 
-import core
+import lib.core
 import settings
 from .base import *
 from .root_calculus import *
@@ -1208,7 +1208,7 @@ class Function(Item):
         if not type(arg[0]) == str:
             raise error.WrongArgument(str(type(arg[0])), "a str")
 
-        if not isinstance(arg[1], core.base_geometry.Angle) \
+        if not isinstance(arg[1], lib.core.base_geometry.Angle) \
             and not (isinstance(arg[1], Calculable) and arg[1].is_literal()):
         #___
             raise error.WrongArgument(str(type(arg[1])),

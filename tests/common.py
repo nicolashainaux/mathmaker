@@ -26,8 +26,8 @@ import gettext
 import string
 from optparse import OptionParser
 from lib import *
-from core.base_calculus import *
-from core.calculus import *
+from lib.core.base_calculus import *
+from lib.core.calculus import *
 import sheet
 import machine
 

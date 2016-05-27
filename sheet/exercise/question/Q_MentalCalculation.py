@@ -26,7 +26,7 @@ from lib import *
 from lib.common.cst import *
 from .Q_Structure import Q_Structure
 from . import mc_modules
-from core.base_calculus import *
+from lib.core.base_calculus import *
 
 SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number': {'half', 'third', 'quarter'},
                       'simple_multiples_of_a_number': {'double', 'triple',

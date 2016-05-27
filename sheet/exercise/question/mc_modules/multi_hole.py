@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import shared
-from core.base_calculus import *
-from core.root_calculus import *
+from lib.core.base_calculus import *
+from lib.core.root_calculus import *
 
 
 class sub_object(object):

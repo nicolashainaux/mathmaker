@@ -23,8 +23,8 @@
 import random
 
 from lib import shared
-from core.base_calculus import *
-from core.root_calculus import Value
+from lib.core.base_calculus import *
+from lib.core.root_calculus import Value
 from . import mc_module
 from lib.tools.wording import setup_wording_format_of
 

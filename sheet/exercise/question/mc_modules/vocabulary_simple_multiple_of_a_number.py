@@ -22,7 +22,7 @@
 
 # This module will add a question about the double|triple|quadruple of a number
 
-from core.base_calculus import Product
+from lib.core.base_calculus import Product
 from . import vocabulary_questions
 
 class sub_object(vocabulary_questions.structure):

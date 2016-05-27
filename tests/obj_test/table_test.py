@@ -27,9 +27,9 @@ import math
 
 #from settings import config
 
-from core import *
-from core.base_calculus import *
-from core.calculus import *
+from lib.core import *
+from lib.core.base_calculus import *
+from lib.core.calculus import *
 
 from maintenance.autotest import common
 

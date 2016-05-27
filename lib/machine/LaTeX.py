@@ -30,10 +30,10 @@ from _version import __version__
 from lib.common import software
 from lib.common.cst import *
 
-from core.base import *
-from core.base_calculus import *
+from lib.core.base import *
+from lib.core.base_calculus import *
 from lib import *
-import core.base_calculus
+import lib.core.base_calculus
 
 from . import Structure
 
@@ -453,7 +453,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
     #   @brief Creates a LaTeX string of the given object
     def type_string(self, objct, **options):
         if isinstance(objct, Printable):
-            core.base_calculus.expression_begins = True
+            lib.core.base_calculus.expression_begins = True
             return objct.into_str(**options)
         elif is_.a_number(objct) or is_.a_string(objct):
             return str(objct)

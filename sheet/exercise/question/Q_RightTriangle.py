@@ -31,12 +31,12 @@ from lib.common import pythagorean
 from lib.common.cst import *
 from lib.maths_lib import *
 from .Q_Structure import Q_Structure
-#from core.calculus import Equality
-from core.base_calculus import *
-from core.calculus import *
-#from core.base_geometry import *
-from core.geometry import *
-#from core.base import *
+#from lib.core.calculus import Equality
+from lib.core.base_calculus import *
+from lib.core.calculus import *
+#from lib.core.base_geometry import *
+from lib.core.geometry import *
+#from lib.core.base import *
 
 
 AVAILABLE_Q_KIND_VALUES = {'pythagorean_theorem': ['calculate_hypotenuse',

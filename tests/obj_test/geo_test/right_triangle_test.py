@@ -26,10 +26,10 @@ import sys
 
 #from utils import config
 
-from core import *
-from core.base_calculus import *
-from core.base_geometry import *
-from core.geometry import *
+from lib.core import *
+from lib.core.base_calculus import *
+from lib.core.base_geometry import *
+from lib.core.geometry import *
 
 from lib.common import pythagorean
 

@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import shared
-from core.base_calculus import *
-from core.root_calculus import Value
+from lib.core.base_calculus import *
+from lib.core.root_calculus import Value
 from . import mc_module
 from lib.tools.wording import setup_wording_format_of
 

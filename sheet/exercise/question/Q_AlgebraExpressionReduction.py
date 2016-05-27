@@ -23,8 +23,8 @@
 from lib import *
 from lib import shared
 from .Q_Structure import Q_Structure
-from core.base_calculus import *
-from core.calculus import *
+from lib.core.base_calculus import *
+from lib.core.calculus import *
 from lib.common.cst import *
 
 # Shared constants

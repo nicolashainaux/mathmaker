@@ -24,7 +24,7 @@ import sys
 import math
 import random
 from decimal import *
-import core
+import lib.core
 from . import is_
 from . import randomly
 from . import utils
@@ -97,7 +97,8 @@ def sign_of_product(signed_objctlist):
 
         if not (is_.a_sign(signed_objctlist[i])                               \
            or is_.a_number(signed_objctlist[i])                               \
-           or isinstance(signed_objctlist[i], core.base_calculus.Exponented)):
+           or isinstance(signed_objctlist[i],
+                         lib.core.base_calculus.Exponented)):
         #___
             raise error.UncompatibleType(signed_objctlist[i],                 \
                                          "'+' or '-'|number|Exponented")
@@ -108,7 +109,8 @@ def sign_of_product(signed_objctlist):
         elif is_.a_number(signed_objctlist[i]) and signed_objctlist[i] < 0:
             minus_signs_nb += 1
 
-        elif isinstance(signed_objctlist[i], core.base_calculus.Exponented):
+        elif isinstance(signed_objctlist[i],
+                        lib.core.base_calculus.Exponented):
             minus_signs_nb += signed_objctlist[i].get_minus_signs_nb()
 
     if is_even(minus_signs_nb):
@@ -266,10 +268,12 @@ def is_even(objct):
         else:
             return False
 
-    elif isinstance(objct, core.base_calculus.Item) and objct.is_numeric():
+    elif isinstance(objct,
+                    lib.core.base_calculus.Item) and objct.is_numeric():
         return is_even(objct.raw_value)
 
-    elif isinstance(objct, core.base_calculus.Value) and objct.is_numeric():
+    elif isinstance(objct,
+                    lib.core.base_calculus.Value) and objct.is_numeric():
         return is_even(objct.raw_value)
 
     else:
@@ -291,10 +295,12 @@ def is_uneven(objct):
         else:
             return True
 
-    elif isinstance(objct, core.base_calculus.Item) and objct.is_numeric():
+    elif (isinstance(objct, lib.core.base_calculus.Item)
+            and objct.is_numeric()):
         return is_uneven(objct.raw_value)
 
-    elif isinstance(objct, core.base_calculus.Value) and objct.is_numeric():
+    elif (isinstance(objct, lib.core.base_calculus.Value)
+            and objct.is_numeric()):
         return is_uneven(objct.raw_value)
 
     else:
@@ -363,7 +369,7 @@ def barycenter(points_list, barycenter_name):
         raise error.WrongArgument(' a list of length > 0 ', ' an empty list ')
 
     for i in range(len(points_list)):
-        if not isinstance(points_list[i], core.base_geometry.Point):
+        if not isinstance(points_list[i], lib.core.base_geometry.Point):
             raise error.WrongArgument(' a Point ', str(type(points_list[i])))
 
     if not type(barycenter_name) == str:
@@ -372,10 +378,10 @@ def barycenter(points_list, barycenter_name):
     abscissas_list = [P.x_exact for P in points_list]
     ordinates_list = [P.y_exact for P in points_list]
 
-    return core.base_geometry.Point([barycenter_name, (mean(abscissas_list),
-                                    mean(ordinates_list)
-                                   )
-                 ])
+    return lib.core.base_geometry.Point([barycenter_name,
+                                         (mean(abscissas_list),
+                                          mean(ordinates_list))
+                                        ])
 
 
 # --------------------------------------------------------------------------

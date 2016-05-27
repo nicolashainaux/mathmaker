@@ -23,8 +23,8 @@
 import os
 
 from lib import shared
-from core.base_calculus import Product
-from core.root_calculus import Value
+from lib.core.base_calculus import Product
+from lib.core.root_calculus import Value
 from . import mc_module
 from lib.tools.wording import post_process
 

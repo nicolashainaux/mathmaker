@@ -28,7 +28,7 @@ from lib.common.cst import RANKS
 from lib import randomly
 from lib.maths_lib import coprime_generator, generate_decimal
 from lib.tools.tag import classify_tag, translate_int_pairs_tag
-from core.base_calculus import Fraction
+from lib.core.base_calculus import Fraction
 
 
 ##

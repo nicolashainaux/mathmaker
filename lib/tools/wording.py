@@ -29,7 +29,7 @@ import settings
 from lib import error
 from lib.common.cst import *
 from lib import shared
-from core.root_calculus import Unit, Value
+from lib.core.root_calculus import Unit, Value
 
 # --------------------------------------------------------------------------
 ##

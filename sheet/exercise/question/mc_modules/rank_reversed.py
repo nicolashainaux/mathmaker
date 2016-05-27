@@ -26,7 +26,7 @@ import os, random, copy
 
 import sys
 
-from core.base_calculus import *
+from lib.core.base_calculus import *
 from lib import randomly
 from lib.common.cst import *
 from lib import error

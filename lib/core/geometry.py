@@ -36,7 +36,7 @@ from .base_geometry import *
 from lib import *
 from lib import randomly
 from lib.maths_lib import *
-from core.calculus import *
+from lib.core.calculus import *
 from settings import config
 
 try:

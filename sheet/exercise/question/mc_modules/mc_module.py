@@ -24,10 +24,10 @@ import random
 import copy
 from decimal import Decimal
 
-from core.root_calculus import Unit, Value
-from core.base_calculus import Product, Quotient, Item
-from core.base_geometry import Point
-from core.geometry import Rectangle, Square
+from lib.core.root_calculus import Unit, Value
+from lib.core.base_calculus import Product, Quotient, Item
+from lib.core.base_geometry import Point
+from lib.core.geometry import Rectangle, Square
 from lib import error
 from lib import shared
 from lib.common.cst import COMMON_LENGTH_UNITS

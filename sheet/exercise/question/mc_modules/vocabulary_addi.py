@@ -22,7 +22,7 @@
 
 # This module will add a question about the sum of two numbers
 
-from core.base_calculus import Sum
+from lib.core.base_calculus import Sum
 from . import vocabulary_questions
 
 class sub_object(vocabulary_questions.structure):

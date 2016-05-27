@@ -23,8 +23,8 @@
 from lib import *
 from .X_Structure import X_Structure
 from . import question
-#from core import *
-from core.calculus import *
+#from lib.core import *
+from lib.core.calculus import *
 from lib.common import alphabet
 
 # Here the list of available values for the parameter x_kind='' and the

@@ -29,10 +29,10 @@ from maintenance.autotest import common
 
 from lib import utils
 
-#from core import *
-#from core.base_calculus import *
-#from core.base_geometry import *
-#from core.geometry import *
+#from lib.core import *
+#from lib.core.base_calculus import *
+#from lib.core.base_geometry import *
+#from lib.core.geometry import *
 
 
 

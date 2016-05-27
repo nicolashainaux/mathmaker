@@ -23,8 +23,8 @@
 from lib import *
 from .X_Structure import X_Structure
 from . import question
-from core.base_calculus import *
-#from core import randomly
+from lib.core.base_calculus import *
+#from lib.core import randomly
 
 AVAILABLE_X_KIND_VALUES = \
     {'short_test': ['sign_expansion', 'medium_level',

@@ -22,7 +22,7 @@
 
 from decimal import Decimal
 
-import core.base_calculus
+import lib.core.base_calculus
 from . import error
 
 
@@ -42,25 +42,25 @@ def reduce_literal_items_product(provided_list):
         raise error.UncompatibleType(provided_list, "A list")
 
     for i in range(len(provided_list)):
-        if isinstance(provided_list[i], core.base_calculus.Item):
+        if isinstance(provided_list[i], lib.core.base_calculus.Item):
             if provided_list[i].is_literal():
                 if not provided_list[i].raw_value in aux_dict:
-                    aux_dict[provided_list[i].raw_value] =                        \
-                                                provided_list[i].exponent.raw_value
+                    aux_dict[provided_list[i].raw_value] =         \
+                                    provided_list[i].exponent.raw_value
                 else:
-                    aux_dict[provided_list[i].raw_value] +=                       \
-                                                provided_list[i].exponent.raw_value
-        elif isinstance(provided_list[i], core.base_calculus.Product):
+                    aux_dict[provided_list[i].raw_value] +=        \
+                                    provided_list[i].exponent.raw_value
+        elif isinstance(provided_list[i], lib.core.base_calculus.Product):
             if len(provided_list[i].factor) == 1:
                 if isinstance(provided_list[i].factor[0],
-                              core.base_calculus.Item):
+                              lib.core.base_calculus.Item):
                     if provided_list[i].factor[0].is_literal():
                         if not provided_list[i].factor[0].raw_value in aux_dict:
-                            aux_dict[provided_list[i].factor[0].raw_value] =      \
+                            aux_dict[provided_list[i].factor[0].raw_value] =  \
                                           provided_list[i].exponent           \
                                           * provided_list[i].factor[0].exponent
                         else:
-                            aux_dict[provided_list[i].factor[0].raw_value] +=     \
+                            aux_dict[provided_list[i].factor[0].raw_value] += \
                                            provided_list[i].exponent          \
                                           * provided_list[i].factor[0].exponent
                     else:
@@ -83,7 +83,7 @@ def reduce_literal_items_product(provided_list):
     reduced_list = []
 
     for key in aux_dict:
-        aux_item = core.base_calculus.Item(('+', key, aux_dict[key]))
+        aux_item = lib.core.base_calculus.Item(('+', key, aux_dict[key]))
         reduced_list.append(aux_item)
 
     return sorted(reduced_list, key=lambda elt: elt.get_first_letter())
@@ -118,7 +118,7 @@ def put_term_in_lexicon(provided_key, associated_coeff, lexi):
             key_s_been_found = True
 
     if not key_s_been_found:
-        new_coeff_sum = core.base_calculus.Sum([associated_coeff])
+        new_coeff_sum = lib.core.base_calculus.Sum([associated_coeff])
         lexi[provided_key] = new_coeff_sum
 
 
@@ -131,10 +131,10 @@ def put_term_in_lexicon(provided_key, associated_coeff, lexi):
 #   @param xpr The (Calculable) expression to iter over
 #   @return [literal Values]
 def gather_literals(xpr):
-    if not isinstance(xpr, core.base_calculus.Calculable):
+    if not isinstance(xpr, lib.core.base_calculus.Calculable):
         raise error.UncompatibleType(xpr, " Calculable ")
 
-    if isinstance(xpr, core.base_calculus.Value):
+    if isinstance(xpr, lib.core.base_calculus.Value):
         if xpr.is_literal():
             return [xpr]
         else:
@@ -187,16 +187,16 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
         raise error.UncompatibleType(objcts, " list ")
 
     for elt in objcts:
-        if not isinstance(elt, core.base_calculus.Calculable):
+        if not isinstance(elt, lib.core.base_calculus.Calculable):
             raise error.UncompatibleType(elt, " Calculable ")
 
     if not type(subst_dict) == dict:
         raise error.UncompatibleType(subst_dict, " dict ")
 
     for elt in subst_dict:
-        if not (isinstance(elt, core.base_calculus.Value) \
+        if not (isinstance(elt, lib.core.base_calculus.Value) \
                 and elt.is_literal() \
-                and isinstance(subst_dict[elt], core.base_calculus.Value) \
+                and isinstance(subst_dict[elt], lib.core.base_calculus.Value) \
                 and subst_dict[elt].is_numeric()
                 ):
         #___
