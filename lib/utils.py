@@ -210,7 +210,7 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
 
     #debug_str = ""
     #for l in literals_list:
-    #    debug_str += l.dbg_str() + " "
+    #    debug_str += repr(l) + " "
     #print "debug: literals_list = " + debug_str + "\n"
 
     literals_list = purge_from_duplicates(literals_list)
@@ -220,7 +220,7 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
 
     #debug_str = ""
     #for l in literals_list:
-    #    debug_str += l.dbg_str() + " "
+    #    debug_str += repr(l) + " "
     #print "debug: literals_list after purging = " + debug_str + "\n"
 
     subst_dict_copy = {}
@@ -228,19 +228,19 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
         subst_dict_copy[key] = subst_dict[key].clone()
 
     #for k in subst_dict_copy:
-    #    print "debug: subst_dict_copy[" + k.dbg_str() + "] = " + subst_dict_copy[k].dbg_str() + "\n"
+    #    print "debug: subst_dict_copy[" + repr(k) + "] = " + repr(subst_dict_copy[k]) + "\n"
 
     # Now check if the literals of the expressions are all in the lexicon
     n = 0
     N = len(literals_list)
     #collected_is= []
     for i in range(len(literals_list)):
-        #print "debug: literals_list[" + str(i) + "] = " + literals_list[i].dbg_str() + " is in subst_dict_copy ? " + str(literals_list[i] in subst_dict_copy) + "\n"
+        #print "debug: literals_list[" + str(i) + "] = " + repr(literals_list[i]) + " is in subst_dict_copy ? " + str(literals_list[i] in subst_dict_copy) + "\n"
         #if i >= 1:
             #print "debug: checking the keys... "
         collected_keys = []
         for key in subst_dict_copy:
-            #print "debug: key = " + k.dbg_str() + " key == literals_list[" + str(i) + "] ? " + str(k == literals_list[i])
+            #print "debug: key = " + repr(k) + " key == literals_list[" + str(i) + "] ? " + str(k == literals_list[i])
             if key == literals_list[i]:
                 n += 1
                 #collected_is += [i]

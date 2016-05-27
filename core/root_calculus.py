@@ -438,7 +438,7 @@ class Signed(Calculable):
         else:
             # this case should never happen, just to secure the code
             raise error.WrongObject("The sign of the object " \
-                                    + self.dbg_str() \
+                                    + repr(self) \
                                     + " is " \
                                     + str(self.sign) \
                                     + " instead of '+' or '-'.")
@@ -671,7 +671,7 @@ class Value(Signed):
         else:
             # this case should never happen, just to secure the code
             raise error.WrongObject("The sign of the object " \
-                                    + self.dbg_str() \
+                                    + repr(self) \
                                     + " is " \
                                     + str(self.sign) \
                                     + " instead of '+' or '-'.")
@@ -764,7 +764,7 @@ class Value(Signed):
     # --------------------------------------------------------------------------
     ##
     #   @brief Debugging method to print the Value
-    def dbg_str(self, **options):
+    def __repr__(self, **options):
         return "." + str(self.raw_value) + "."
 
 

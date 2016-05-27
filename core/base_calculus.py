@@ -556,7 +556,7 @@ class Item(Exponented):
             raise error.UncompatibleType(self, "Number|numeric Exponented")
 
         log_item_calculate_next_step.debug("Entered; current Item is: "
-                                           + self.dbg_str())
+                                           + repr(self))
 
         # First, either get the exponent as a Number or calculate it further
         expon_test = self.exponent.calculate_next_step(**options)
@@ -633,7 +633,7 @@ class Item(Exponented):
     #   @param options No option available so far
     #   @return A string containing "{sign value ^ exponent}"
     def __repr__(self):
-        return self.dbg_str()
+        return repr(self)
 
 
 
@@ -645,7 +645,7 @@ class Item(Exponented):
     #   @brief Raw display of the Item (debugging method)
     #   @param options No option available so far
     #   @return A string containing "{sign value ^ exponent}"
-    def dbg_str(self, **options):
+    def __repr__(self, **options):
         if self.is_out_striked:
             begining = " s{"
         else:
@@ -656,7 +656,7 @@ class Item(Exponented):
                + self.sign                                   \
                + str(self.raw_value)                              \
                + "^"                                           \
-               + self.exponent.dbg_str() +"} "
+               + repr(self.exponent) +"} "
 
 
 
@@ -765,7 +765,7 @@ class Item(Exponented):
     #   @brief Makes Items hashable (so, usable as dictionnary keys)
     def __hash__(self):
         return hash(str(self.raw_value) + str(self.sign) \
-                                        + self.exponent.dbg_str())
+                                        + repr(self.exponent))
 
 
 
@@ -1149,8 +1149,8 @@ class Item(Exponented):
         elif elt == Item(1):
             return self.is_displ_as_a_single_1()
         else:
-            print(elt.dbg_str())
-            print(Item(0).dbg_str())
+            print(repr(elt))
+            print(repr(Item(0)))
             raise error.UncompatibleType(elt, "neutral element for addition" \
                                               + " or multiplication, e.g." \
                                               + " Item(1) | Item(0).")
@@ -1628,7 +1628,7 @@ class SquareRoot(Function):
         # There should be the code to handle the steps of SquareRoots'
         # simplification, in an analog way as by Fractions.
         else:
-            #print "here + " + self.dbg_str() + "\n"
+            #print "here + " + repr(self) + "\n"
             return None
 
 
@@ -1656,10 +1656,10 @@ class SquareRoot(Function):
     #   @brief Raw display of the SquareRoot (debugging method)
     #   @param options No option available so far
     #   @return A string containing "signSQR{{str(object)}}"
-    def dbg_str(self, **options):
+    def __repr__(self, **options):
         return " " + self.sign \
                + "SQR{{ "   \
-               + self.radicand.dbg_str()  \
+               + repr(self.radicand)  \
                + " }} "
 
 
@@ -1877,8 +1877,8 @@ class SquareRoot(Function):
         elif elt == Item(1):
             return self.is_displ_as_a_single_1()
         else:
-            print(elt.dbg_str())
-            print(Item(0).dbg_str())
+            print(repr(elt))
+            print(repr(Item(0)))
             raise error.UncompatibleType(elt, "neutral element for addition" \
                                               + " or multiplication, e.g." \
                                               + " Item(1) | Item(0).")
@@ -2039,8 +2039,8 @@ class Operation(Exponented):
     #               __hash__()
     def __hash__(self):
         return hash(self.symbol + str(self.sign) \
-                    + [elt.dbg_str() for elt in self.element].join()\
-                    + self.exponent.dbg_str()
+                    + [repr(elt) for elt in self.element].join()\
+                    + repr(self.exponent)
                    )
 
 
@@ -2300,7 +2300,7 @@ class Quotient (Operation):
     def into_str(self, **options):
         global expression_begins
 
-        log_quotient_into_str.debug("Entering with: " + self.dbg_str())
+        log_quotient_into_str.debug("Entering with: " + repr(self))
         if 'force_expression_begins' in options \
            and options['force_expression_begins'] == True:
         #___
@@ -2500,15 +2500,15 @@ class Quotient (Operation):
     #   @brief Raw display of the Quotient (debugging method)
     #   @param options No option available so far
     #   @return A string: "Q# sign ( numerator / denominator )^{ exponent }#Q"
-    def dbg_str(self, **options):
+    def __repr__(self, **options):
         return "Q# " +                                       \
                str(self.sign) +                                               \
                " ( " +                                                        \
-               self.numerator.dbg_str() +                                     \
+               repr(self.numerator) +                                     \
                " / " +                                                        \
-               self.denominator.dbg_str() +                                   \
+               repr(self.denominator) +                                   \
                " ) ^ | " +                                                    \
-               self.exponent.dbg_str() +                                      \
+               repr(self.exponent) +                                      \
                " }| #Q"
 
 
@@ -2735,8 +2735,8 @@ class Quotient (Operation):
         elif elt == Item(1):
             return self.is_displ_as_a_single_1()
         else:
-            print(elt.dbg_str())
-            print(Item(0).dbg_str())
+            print(repr(elt))
+            print(repr(Item(0)))
             raise error.UncompatibleType(elt, "neutral element for addition" \
                                               + " or multiplication, e.g." \
                                               + " Item(1) | Item(0).")
@@ -3117,7 +3117,7 @@ class Fraction(Quotient):
     #   in the simplified method)
     def calculate_next_step(self, **options):
         log_fraction_calculate_next_step.debug(
-                                            "Entering with: " + self.dbg_str())
+                                            "Entering with: " + repr(self))
 
         # First, let's handle the case when a Decimal Result is awaited
         # rather than a Fraction's simplification
@@ -3136,7 +3136,7 @@ class Fraction(Quotient):
                             )
             log_fraction_calculate_next_step.debug(
                            "Decimal calculation has been done. Result: \n"
-                           + result.dbg_str() + " which _has_been_rounded: "
+                           + repr(result) + " which _has_been_rounded: "
                            + str(result.contains_a_rounded_number()))
             return result
 
@@ -3259,15 +3259,15 @@ class Fraction(Quotient):
     #   @brief Raw display of the Fraction (debugging method)
     #   @param options No option available so far
     #   @return A string: "F# sign ( numerator / denominator )^{ exponent }#F"
-    def dbg_str(self, **options):
+    def __repr__(self, **options):
         return "F# " +                                       \
                str(self.sign) +                                               \
                " ( " +                                                        \
-               self.numerator.dbg_str() +                                     \
+               repr(self.numerator) +                                     \
                " / " +                                                        \
-               self.denominator.dbg_str() +                                   \
+               repr(self.denominator) +                                   \
                " ) ^ | " +                                                    \
-               self.exponent.dbg_str() +                                      \
+               repr(self.exponent) +                                      \
                " | #F"
 
 
@@ -3278,8 +3278,8 @@ class Fraction(Quotient):
     ##
     #   @brief Makes Fractions hashable (so, usable as dictionnary keys)
     def __hash__(self):
-        return hash(self._numerator.dbg_str() + str(self.sign) \
-                    + self._status + self._symbol + self._denominator.dbg_str())
+        return hash(repr(self._numerator) + str(self.sign) \
+                    + self._status + self._symbol + repr(self._denominator))
 
 
 
@@ -3377,7 +3377,7 @@ class Fraction(Quotient):
                         new_numerator.element[i].set_is_out_striked(True)
                         log_fraction_simplification_line.debug(
                                 "[0] Striked out: "
-                                + new_numerator.factor[i].dbg_str())
+                                + repr(new_numerator.factor[i]))
 
                         new_denominator.set_element(j,
                                                     self.denominator.factor[j]\
@@ -3385,7 +3385,7 @@ class Fraction(Quotient):
                         new_denominator.factor[j].set_is_out_striked(True)
                         log_fraction_simplification_line.debug(
                                 "[1] Striked out: "
-                                + new_denominator.factor[j].dbg_str())
+                                + repr(new_denominator.factor[j]))
 
                         this_numerators_factor_has_been_processed[i] = True
                         this_denominators_factor_has_been_processed[j] = True
@@ -3409,7 +3409,7 @@ class Fraction(Quotient):
 
                                 log_fraction_simplification_line.debug(
                                         "[2A]Striked out: " \
-                                        + new_numerator.factor[i].dbg_str())
+                                        + repr(new_numerator.factor[i]))
 
                                 this_numerators_factor_has_been_processed[i] =\
                                                                            True
@@ -3423,7 +3423,7 @@ class Fraction(Quotient):
                                 item1 = Item(factor1)
                                 item1.set_is_out_striked(True)
                                 log_fraction_simplification_line.debug(
-                                        "[2B]Striked out: " + item1.dbg_str())
+                                        "[2B]Striked out: " + repr(item1))
 
 
                                 item2 = Item(factor2)
@@ -3454,7 +3454,7 @@ class Fraction(Quotient):
                                 item1 = Item(factor1)
                                 item1.set_is_out_striked(True)
                                 log_fraction_simplification_line.debug(
-                                        "[3]Striked out: " + item1.dbg_str())
+                                        "[3]Striked out: " + repr(item1))
 
                                 item2 = Item(factor2)
 
@@ -3474,7 +3474,7 @@ class Fraction(Quotient):
                                 item1 = Item(factor1)
                                 item1.set_is_out_striked(True)
                                 log_fraction_simplification_line.debug(
-                                        "[4]Striked out: " + item1.dbg_str())
+                                        "[4]Striked out: " + repr(item1))
 
                                 item2 = Item(factor2)
 
@@ -3493,7 +3493,7 @@ class Fraction(Quotient):
                                 item1 = Item(factor1)
                                 item1.set_is_out_striked(True)
                                 log_fraction_simplification_line.debug(
-                                        "[5]Striked out: " + item1.dbg_str())
+                                        "[5]Striked out: " + repr(item1))
                                 item2 = Item(factor2)
 
                                 new_denominator.factor[j] = Product([item1,
@@ -3555,11 +3555,11 @@ class Fraction(Quotient):
                                 final_numerator[i].set_is_out_striked(True)
                                 log_fraction_simplification_line.debug(
                                         "[6]Striked out: "
-                                        + final_numerator[i].dbg_str())
+                                        + repr(final_numerator[i]))
                                 final_denominator[j].set_is_out_striked(True)
                                 log_fraction_simplification_line.debug(
                                         "[7]Striked out: "
-                                        + final_denominator[j].dbg_str())
+                                        + repr(final_denominator[j]))
 
             # Now let's simplify eventually minus signs and display them
             # as forced "+". We'll do that only if the numerator and/or the
@@ -3643,7 +3643,7 @@ class Fraction(Quotient):
     #   @brief Replace the striked out Items by Item(1)
     def replace_striked_out(self):
         log_fraction_replace_striked_out.debug(
-                                            "Entering on: " + self.dbg_str())
+                                            "Entering on: " + repr(self))
 
         result = Fraction(self)
 
@@ -3671,7 +3671,7 @@ class Fraction(Quotient):
     ##
     #   @brief Returns the fraction after a simplification step
     def simplified(self):
-        log_fraction_simplified.debug("Entering, on: " + self.dbg_str())
+        log_fraction_simplified.debug("Entering, on: " + repr(self))
 
         aux_fraction = None
 
@@ -3944,7 +3944,7 @@ class CommutativeOperation(Operation):
     #   @return The result as a number
     def evaluate(self, **options):
         log_commutative_operation_evaluate.debug(
-                                            "Entered with: " + self.dbg_str())
+                                            "Entered with: " + repr(self))
 
         if not('stop_recursion' in options
                and options['stop_recursion'] in YES):
@@ -3954,14 +3954,14 @@ class CommutativeOperation(Operation):
             if next_step != None:
                 log_commutative_operation_evaluate.debug(
                                         "Exiting, returning evaluate() "
-                                        "called on: " + next_step.dbg_str())
+                                        "called on: " + repr(next_step))
                 return next_step.evaluate()
 
         answer = self.neutral.raw_value
 
         for elt in self.element:
             log_commutative_operation_evaluate.debug(
-                                            "current elt is: " + elt.dbg_str())
+                                            "current elt is: " + repr(elt))
             if isinstance(elt, Item) or isinstance(elt, Value):
                 # we don't check if the possibly Item is numeric.
                 # if it's not, an error will be raised
@@ -4003,10 +4003,10 @@ class CommutativeOperation(Operation):
     #   @param options: info='OK' let dbg_str display more info
     #   @return A string: "<info1|info2||factor0, ..., factorn>^{exponent}"
     #                 or: "[info1|info2||term0, ..., termn]^{exponent}"
-    def dbg_str(self, **options):
+    def __repr__(self, **options):
         elements_list_string = ""
         for i in range(len(self)):
-            elements_list_string += self.element[i].dbg_str()
+            elements_list_string += repr(self.element[i])
             if i < len(self) - 1:
                 elements_list_string += ' ' + self.symbol + ' '
 
@@ -4019,7 +4019,7 @@ class CommutativeOperation(Operation):
 
         expo = ""
         if not self.exponent.is_displ_as_a_single_1():
-            expo = "^|" + self.exponent.dbg_str() + "|"
+            expo = "^|" + repr(self.exponent) + "|"
 
         return self.str_openmark  \
                + info \
@@ -4104,7 +4104,7 @@ class CommutativeOperation(Operation):
         if i == len(self):
             raise error.UnreachableData(str(elt) \
                                         + " in " \
-                                        + self.dbg_str())
+                                        + repr(self))
 
         # Then pop the right one
         self._element.pop(i)
@@ -4123,9 +4123,9 @@ class CommutativeOperation(Operation):
         for i in range(len(self)):
             if self.element[i].is_displ_as_a_single_neutral(self.neutral):
                 log_commutative_operation_throw_away_the_neutrals.debug(
-                        self.element[i].dbg_str() + "has been detected as "
+                        repr(self.element[i]) + "has been detected as "
                         "'single neutral' the ref. neutral being "
-                        + self.neutral.dbg_str())
+                        + repr(self.neutral))
                 collected_positions.append(i)
 
         result = None
@@ -4325,9 +4325,9 @@ class Product (CommutativeOperation):
                             objct_was_found = True
                 return aux_list
             else:
-                raise error.UnreachableData("the object: " + objct.dbg_str() \
+                raise error.UnreachableData("the object: " + repr(objct) \
                                             + " in this Product: "           \
-                                            + self.dbg_str())
+                                            + repr(self))
 
 
 
@@ -4408,11 +4408,11 @@ class Product (CommutativeOperation):
         a_factor_not_equivalent_to_1_has_been_found = False
         log_product_get_factors_list.debug(
                                 "Entered, looking for " + given_kind
-                                + "\ncurrent Product is: " + self.dbg_str())
+                                + "\ncurrent Product is: " + repr(self))
 
         for factor in self.element:
             log_product_get_factors_list.debug(
-                                "current factor is: " + factor.dbg_str())
+                                "current factor is: " + repr(factor))
 
             if isinstance(factor, Item)                              \
                and (                                                          \
@@ -4454,7 +4454,7 @@ class Product (CommutativeOperation):
                     item_to_be_added.set_is_out_striked(factor.is_out_striked)
                     resulting_list.append(item_to_be_added)
                     log_product_get_factors_list.debug(
-                                    "adding: " + item_to_be_added.dbg_str())
+                                    "adding: " + repr(item_to_be_added))
                     a_factor_not_equivalent_to_1_has_been_found = True
 
                 elif factor.is_negative():
@@ -4471,7 +4471,7 @@ class Product (CommutativeOperation):
                         item_to_be_added = Product([factor])
                     item_to_be_added.set_exponent(self.exponent)
                     log_product_get_factors_list.debug(
-                                    "adding: " + item_to_be_added.dbg_str())
+                                    "adding: " + repr(item_to_be_added))
                     resulting_list.append(item_to_be_added)
                     a_factor_not_equivalent_to_1_has_been_found = True
 
@@ -4593,7 +4593,7 @@ class Product (CommutativeOperation):
         log_product_into_str.debug(
                         "expression_begins = " + str(expression_begins)
                         + " | position set to " + str(position)
-                        + "\nCurrent Product: " + self.dbg_str())
+                        + "\nCurrent Product: " + repr(self))
 
 
         # All Product objects are treated here
@@ -4673,7 +4673,7 @@ class Product (CommutativeOperation):
             elif self.factor[0].is_displ_as_a_single_minus_1():
                 log_product_into_str.debug(
                                 "[n°0] processing a '-1' 1st factor: "
-                                + self.factor[0].dbg_str()
+                                + repr(self.factor[0])
                                 + " with position forced to " + str(position))
                 if position >= 1:
                     log_product_into_str.debug("and a bracket is */opened/*")
@@ -4713,7 +4713,7 @@ class Product (CommutativeOperation):
                 #___
                     log_product_into_str.debug(
                                 "[n°1A] processing 1st factor: "
-                                + self.factor[0].dbg_str()
+                                + repr(self.factor[0])
                                 + " with position forced to " + str(position)
                                 + " ; NO brackets")
 
@@ -4729,7 +4729,7 @@ class Product (CommutativeOperation):
                     expression_begins = True
                     log_product_into_str.debug(
                             "[n°1B] processing 1st factor: "
-                            + self.factor[0].dbg_str()
+                            + repr(self.factor[0])
                             + " with position NOT forced to " + str(position)
                             + ", needs brackets ? "
                             + str(self.factor[0].requires_brackets(position))
@@ -4755,7 +4755,7 @@ class Product (CommutativeOperation):
 
                 log_product_into_str.debug(
                             "Finished processing the first factor; "
-                            "couple is (" +  self.factor[0].dbg_str()
+                            "couple is (" +  repr(self.factor[0])
                             + ", None); flag is " + str(flag)
                             + "; position is " + str(position))
 
@@ -4786,7 +4786,7 @@ class Product (CommutativeOperation):
                                 expression_begins = True
                                 log_product_into_str.debug(
                                             "[n°2A] processing factor: "
-                                            + self.factor[i+1].dbg_str()
+                                            + repr(self.factor[i+1])
                                             + "with position NOT forced to "
                                             + str(position) + " ; "
                                             "a bracket is */opened/*")
@@ -4815,7 +4815,7 @@ class Product (CommutativeOperation):
                                     log_product_into_str.debug(
                                             "[n°2B] (orphan - sign) "
                                             "processing factor: "
-                                            + self.factor[i+1].dbg_str()
+                                            + repr(self.factor[i+1])
                                             + " with position forced to "
                                             + str(position)+ "; NO brackets")
 
@@ -4827,7 +4827,7 @@ class Product (CommutativeOperation):
                                     log_product_into_str.debug(
                                             "[n°2C] (NO orphan - sign) "
                                             "processing factor: "
-                                            + self.factor[i+1].dbg_str()
+                                            + repr(self.factor[i+1])
                                             + " with position forced to "
                                             + str(position) + "; NO brackets")
 
@@ -4860,8 +4860,8 @@ class Product (CommutativeOperation):
                             # and position matches couple[1]'s position
                             log_product_into_str.debug(
                                     "Checking if a × should be required "
-                                    "between " + couple[0].dbg_str()
-                                    + "    and    " + couple[1].dbg_str())
+                                    "between " + repr(couple[0])
+                                    + "    and    " + repr(couple[1]))
                             if couple[0].multiply_symbol_is_required(couple[1],
                                                                  position - 1):
                             #___
@@ -4904,7 +4904,7 @@ class Product (CommutativeOperation):
                                            #   ).is_displ_as_a_single_1():
                                 log_product_into_str.debug(
                                             "[n°3A] processing factor: "
-                                            + couple[1].dbg_str()
+                                            + repr(couple[1])
                                             + " with position NOT forced to "
                                             + str(position)
                                             + " ; a bracket is */opened/*")
@@ -4925,7 +4925,7 @@ class Product (CommutativeOperation):
                             else:
                                 log_product_into_str.debug(
                                             "[n°3B] processing factor: "
-                                            + couple[1].dbg_str()
+                                            + repr(couple[1])
                                             + "with position forced to "
                                             + str(position) + "; NO brackets")
 
@@ -4991,7 +4991,7 @@ class Product (CommutativeOperation):
                 expression_begins = True
                 log_product_into_str.debug(
                             "[n°4A]×: processing 1st factor: "
-                            + self.factor[0].dbg_str() + " with position "
+                            + repr(self.factor[0]) + " with position "
                             "NOT forced to " + str(position)
                             + "; WITH brackets")
 
@@ -5001,7 +5001,7 @@ class Product (CommutativeOperation):
             else:
                 log_product_into_str.debug(
                             "[:n°4B]×: processing 1st factor: "
-                            + self.factor[0].dbg_str()+ " with position "
+                            + repr(self.factor[0])+ " with position "
                             "forced to " + str(position) + "; NO brackets")
                 resulting_string += self.factor[0].into_str( \
                                                        force_position=position,
@@ -5035,7 +5035,7 @@ class Product (CommutativeOperation):
                         # displayed
                         log_product_into_str.debug(
                                 "[n°5A]×: processing factor: "
-                                + self.factor[i+1].dbg_str()
+                                + repr(self.factor[i+1])
                                 + "with position NOT forced to "
                                 + str(position) + "; WITH brackets")
 
@@ -5045,7 +5045,7 @@ class Product (CommutativeOperation):
                     else:
                         log_product_into_str.debug(
                                 "[n°5B]×: processing factor: "
-                                + self.factor[i+1].dbg_str()
+                                + repr(self.factor[i+1])
                                 + " with position forced to " + str(position)
                                 + "; NO brackets")
                         resulting_string += self.factor[i+1].into_str(
@@ -5339,7 +5339,7 @@ class Product (CommutativeOperation):
     #   @return Exponented
     def expand_and_reduce_next_step(self, **options):
         log_product_expand_and_reduce_next_step.debug(
-                                            "Entered on: " + self.dbg_str())
+                                            "Entered on: " + repr(self))
 
         if type(self) == BinomialIdentity:
             return self.expand()
@@ -5457,8 +5457,8 @@ class Product (CommutativeOperation):
     #   @brief Makes Products hashable (so, usable as dictionnary keys)
     def __hash__(self):
         return hash(self.symbol + str(self.sign) \
-                    + ''.join([elt.dbg_str() for elt in self.element])\
-                    + self.exponent.dbg_str()
+                    + ''.join([repr(elt) for elt in self.element])\
+                    + repr(self.exponent)
                    )
 
 
@@ -5623,7 +5623,7 @@ class Product (CommutativeOperation):
         # Get each kind of factors possible (numeric, literals, others like
         # Sums of more than one term)
 
-        log_product_reduce.debug("Entered on:" + self.dbg_str())
+        log_product_reduce.debug("Entered on:" + repr(self))
 
         # So, numeric factors:
         numeric_part = Product(self.get_factors_list(NUMERIC)).evaluate()
@@ -5879,7 +5879,7 @@ class Product (CommutativeOperation):
             else:
                 log_product_is_reducible.debug("returning True - K")
                 log_product_is_reducible.debug(
-                                    "numerics[0] = " + numerics[0].dbg_str())
+                                    "numerics[0] = " + repr(numerics[0]))
                 return True
 
         # This last return should be useless
@@ -6332,7 +6332,7 @@ class Sum (CommutativeOperation):
                     else:
                         log_sum_into_str.debug(
                                         "the next term to display is "
-                                        + self.term[next_term_nb].dbg_str())
+                                        + repr(self.term[next_term_nb]))
 
                     if next_term_nb != None                                   \
                        and (                                                  \
@@ -6450,7 +6450,7 @@ class Sum (CommutativeOperation):
 
         copy = self.clone()
         log_sum_calculate_next_step.debug(
-                            "Entering with copied Sum: " + copy.dbg_str())
+                            "Entering with copied Sum: " + repr(copy))
         # First recursively dive into embedded sums &| products &| fractions:
         if len(copy) == 1 and (isinstance(copy.term[0], CommutativeOperation) \
                                or isinstance(copy.term[0], Fraction)):
@@ -6475,7 +6475,7 @@ class Sum (CommutativeOperation):
             log_sum_calculate_next_step.debug(
                             "Exiting, having depacked one element at least"
                             + "calculate_next_step is called on: "
-                            + copy.dbg_str())
+                            + repr(copy))
             return copy.calculate_next_step(**options)
 
 
@@ -6503,7 +6503,7 @@ class Sum (CommutativeOperation):
         if a_minus_sign_in_a_fraction_was_found:
             log_sum_calculate_next_step.debug(
                         "Exiting, having changed negative denominators, "
-                        "the returned object is: " + copy.dbg_str())
+                        "the returned object is: " + repr(copy))
             return copy
 
         # Then, check if the case is not this special one:
@@ -6549,8 +6549,8 @@ class Sum (CommutativeOperation):
                     put_term_in_lexicon(objct.denominator, objct, lexi)
 
 
-            built_lexi = "".join(["Key: " + k.dbg_str() + " "
-                                  "Value: " + v.dbg_str() + "\n"
+            built_lexi = "".join(["Key: " + repr(k) + " "
+                                  "Value: " + repr(v) + "\n"
                                   for k, v in lexi.items()])
             log_sum_calculate_next_step.debug(
                         "Looking for fractions having the same denominator; "
@@ -6580,25 +6580,25 @@ class Sum (CommutativeOperation):
                     log_sum_calculate_next_step.debug(
                             "Found " + str(len(lexi[denominator_key]))
                             + " fractions having this denominator: "
-                            + denominator_key.dbg_str()
+                            + repr(denominator_key)
                             + "\nnew_fraction looks like: "
-                            + new_fraction.dbg_str())
+                            + repr(new_fraction))
 
                     first_fraction_met = True
                     for i in range(len(copy)):
                         if not i >= len(copy):
                             log_sum_calculate_next_step.debug(
                                    "copy.term[" + str(i) + "] = "
-                                   + copy.term[i].dbg_str()
+                                   + repr(copy.term[i])
                                    + "\nlooked for here: "
-                                   + lexi[denominator_key].dbg_str())
+                                   + repr(lexi[denominator_key]))
                             if isinstance(copy.term[i], Fraction) \
                                and copy.term[i] in lexi[denominator_key].term:
                             #___
                                 log_sum_calculate_next_step.debug(
                                       "copy.term[" + str(i) + "] is in"
                                       " this lexicon: "
-                                      + lexi[denominator_key].dbg_str())
+                                      + repr(lexi[denominator_key]))
                                 if first_fraction_met:
                                     copy.set_element(i, new_fraction)
                                     first_fraction_met = False
@@ -6766,7 +6766,7 @@ class Sum (CommutativeOperation):
             return self.calculate_next_step(**options)
 
         log_sum_expand_and_reduce_next_step.debug(
-                "Entered, on: " + self.dbg_str() + "; info: " + str(self.info))
+                "Entered, on: " + repr(self) + "; info: " + str(self.info))
 
         copy = Sum(self).throw_away_the_neutrals()
 
@@ -6811,7 +6811,7 @@ class Sum (CommutativeOperation):
         #___
             log_sum_expand_and_reduce_next_step.debug(
                 "Exiting, a term has been modified, so recursive call on: "
-                + new_copy.dbg_str())
+                + repr(new_copy))
 
             return new_copy.expand_and_reduce_next_step(**options)
 
@@ -6888,7 +6888,7 @@ class Sum (CommutativeOperation):
         if a_term_at_least_has_been_modified:
             log_sum_expand_and_reduce_next_step.debug(
                         "Exiting, a term has been modified, so returning: "
-                        + copy.dbg_str())
+                        + repr(copy))
             return copy
 
         # no term of the Sum needs to be reduced
@@ -6896,7 +6896,7 @@ class Sum (CommutativeOperation):
             if copy.is_numeric() and copy.is_reducible():
                 log_sum_expand_and_reduce_next_step.debug(
                         "Exiting, no term has been modified, but: "
-                        + copy.dbg_str() + "\nis numeric and reducible "
+                        + repr(copy) + "\nis numeric and reducible "
                         "so, returning a reduced copy of it.")
 
                 return copy.reduce_()
@@ -6904,7 +6904,7 @@ class Sum (CommutativeOperation):
             elif copy.is_reducible():
                 log_sum_expand_and_reduce_next_step.debug(
                         "Exiting, no term has been modified, and: "
-                        + copy.dbg_str() + "\nisn't numeric but is reducible "
+                        + repr(copy) + "\nisn't numeric but is reducible "
                         "so, returning the intermediate line generated "
                         "from it.")
 
@@ -6913,7 +6913,7 @@ class Sum (CommutativeOperation):
             else:
                 log_sum_expand_and_reduce_next_step.debug(
                         "Exiting, no term has been modified, and: "
-                        + copy.dbg_str() + "\nisn't numeric nor reducible, "
+                        + repr(copy) + "\nisn't numeric nor reducible, "
                         "so, returning None.")
 
                 return None
@@ -7202,10 +7202,10 @@ class Sum (CommutativeOperation):
         # is that the numeric part will be evaluated
         (lexi, index) = self.get_terms_lexicon()
 
-        log_sum_reduce.debug("Entered on:" + self.dbg_str())
+        log_sum_reduce.debug("Entered on:" + repr(self))
 
-        lexi_content = "".join([k.dbg_str() + ": "
-                                + v.dbg_str() + "; "
+        lexi_content = "".join([repr(k) + ": "
+                                + repr(v) + "; "
                                 for k, v in lexi.items()])
 
         log_sum_reduce.debug(
@@ -7243,7 +7243,7 @@ class Sum (CommutativeOperation):
         #___
             final_sum = final_sum.term[0]
 
-        log_sum_reduce.debug("Leaving, returning: " + final_sum.dbg_str())
+        log_sum_reduce.debug("Leaving, returning: " + repr(final_sum))
 
         return final_sum
 
@@ -7610,14 +7610,14 @@ class Monomial(Product):
     #   @brief Raw display of the Monomial (debugging method)
     #   @param options No option available so far
     #   @return A string containing " << coeff × X ^ degree>> "
-    def dbg_str(self, **options):
+    def __repr__(self, **options):
 
         expo = ""
 
         if self.exponent != Value(1):
-            expo = "^|" + self.exponent.dbg_str() + "| "
+            expo = "^|" + repr(self.exponent) + "| "
 
-        return " <<" + self.coeff.dbg_str()          \
+        return " <<" + repr(self.coeff)          \
                + "× X ^" + str(self.degree) + ">> " + expo
 
 
@@ -7739,7 +7739,7 @@ class Polynomial(Sum):
         # 2d CASE: [Monomial|Polynomial] or Sum(Monomial|Polynomial)
         elif ((type(arg) == list) and len(arg) >= 1) or isinstance(arg, Sum):
             for i in range(len(arg)):
-                log_polynomial_init.debug("Copying: " + arg[i].dbg_str())
+                log_polynomial_init.debug("Copying: " + repr(arg[i]))
                 if isinstance(arg[i], Monomial):
                     self._element.append(arg[i].clone())
                     self._info.append(False)
@@ -7753,7 +7753,7 @@ class Polynomial(Sum):
                                                  + " only Monomials & " \
                                                  + "Polynomials welcome. " \
                                                  "Given object: " \
-                                                 + arg[i].dbg_str())
+                                                 + repr(arg[i]))
 
         # 3d CASE: (RANDOMLY, max_coeff, max_degree, length)
         elif type(arg) == tuple and len(arg) == 4 and arg[0] == RANDOMLY:
@@ -7824,7 +7824,7 @@ class Polynomial(Sum):
                 self.append(Monomial((randomly.sign(), coeff, deg)))
 
             log_sum_reduce.debug(
-                        "Randomly Created Polynomial is: \n" + self.dbg_str()
+                        "Randomly Created Polynomial is: \n" + repr(self)
                         + "\ninfo: " + str(self.info))
 
 
@@ -7903,10 +7903,10 @@ class Polynomial(Sum):
     #   @brief Raw display of the Polynomial (debugging method)
     #   @param options No option available so far
     #   @return " [[ term0, ..., termn ]]"
-    def dbg_str(self, **options):
+    def __repr__(self, **options):
         resulting_string = " [["
         for i in range(len(self)):
-            resulting_string += self.term[i].dbg_str()
+            resulting_string += repr(self.term[i])
             if i < len(self) - 1:
                 resulting_string += " + "
 

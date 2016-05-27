@@ -483,12 +483,12 @@ class Equation(ComposedCalculable):
                  + "SubstitutableEquality containing more than ONE unknown " \
                  + "literal. This one contains " + str(len(literals_list)) \
                  + " literals which are " \
-                 + str([elt.dbg_str() for elt in literals_list]))
+                 + str([repr(elt) for elt in literals_list]))
 
             if not isinstance(literals_list[0], Value) \
                 and not literals_list[0].is_literal():
             #___
-                raise error.WrongArgument(literals_list[0].dbg_str(),
+                raise error.WrongArgument(repr(literals_list[0]),
                                           "a literal Value")
 
             self.__init__((arg[0], arg[1]),
@@ -1142,11 +1142,11 @@ class Equation(ComposedCalculable):
     ##
     #   @brief Raw display of the Equation (debugging method)
     #   @return A string containing "type: sign coeff × X ^ degree"
-    def dbg_str(self):
+    def __repr__(self):
         return "\nEquation: " + str(self.name) \
                + " " + str(self.number) \
-               + "\n Left hand side: " + self.left_hand_side.dbg_str() \
-               + "\n Right hand side: " + self.right_hand_side.dbg_str() \
+               + "\n Left hand side: " + repr(self.left_hand_side) \
+               + "\n Right hand side: " + repr(self.right_hand_side) \
                + "\n Variable: " + str(self.variable_letter)
 
 
@@ -1327,7 +1327,7 @@ class Equation(ComposedCalculable):
     def solve_next_step(self, **options):
         new_eq = Equation(self)
         log_equation_solve_next_step.debug(
-                                "Entering, with Equation: " + new_eq.dbg_str())
+                                "Entering, with Equation: " + repr(new_eq))
 
         # CASE 0: preparing the Equation: getting recursively rid of
         #          imbricated Sums
@@ -1373,7 +1373,7 @@ class Equation(ComposedCalculable):
         #___
             next_left_X_str = str(next_left_X)
         else:
-            next_left_X_str = next_left_X.dbg_str()
+            next_left_X_str = repr(next_left_X)
         log_equation_solve_next_step.debug(
                     "'decimal_result' is in options? "
                     + str('decimal_result' in options) + "; "
@@ -1459,23 +1459,23 @@ class Equation(ComposedCalculable):
             # All the literal objects will be moved to the left,
             # all numeric will be moved to the right
             log_equation_solve_next_step.debug(
-                                        "Current Equation: " + self.dbg_str())
+                                        "Current Equation: " + repr(self))
 
             left_collected_terms = new_eq.left_hand_side.get_numeric_terms()
             right_collected_terms = new_eq.right_hand_side.get_literal_terms()
 
             log_equation_solve_next_step.debug(
-                            "left content: " + self.left_hand_side.dbg_str()
+                            "left content: " + repr(self.left_hand_side)
                             + "\nright content: "
-                            + self.right_hand_side.dbg_str())
+                            + repr(self.right_hand_side))
 
             log_equation_solve_next_step.debug(
                         "\nleft collected terms: "
-                        + "".join([t.dbg_str() for t in left_collected_terms]))
+                        + "".join([repr(t) for t in left_collected_terms]))
 
             log_equation_solve_next_step.debug(
                         "\nright collected terms: "
-                        + "".join([t.dbg_str() for t in right_collected_terms]))
+                        + "".join([repr(t) for t in right_collected_terms]))
 
             # Special case of equations like 5 = x - 9
             # which should become x = 5 + 9 at the next line, instead of
@@ -1534,7 +1534,7 @@ class Equation(ComposedCalculable):
                                      )
                 log_equation_solve_next_step.debug(
                         "Now, right_hand_side looks like: "
-                        + new_eq.right_hand_side.dbg_str())
+                        + repr(new_eq.right_hand_side))
 
             for term in right_collected_terms:
                 #log_equation_solve_next_step.debug("(right)term: "
@@ -1705,7 +1705,7 @@ class Equation(ComposedCalculable):
         #                    + str(new_eq.right_hand_side))
 
         log_equation_solve_next_step.debug(
-                                "Leaving, with Equation: " + new_eq.dbg_str())
+                                "Leaving, with Equation: " + repr(new_eq))
         return new_eq
 
 
@@ -2219,7 +2219,7 @@ class Table_UP(Table):
             if elt != None and not is_.a_number(elt) \
                 and not (isinstance(elt, Calculable) and elt.is_numeric()):
             #___
-                raise error.WrongArgument(str(type(elt)) + " " + elt.dbg_str(),
+                raise error.WrongArgument(str(type(elt)) + " " + repr(elt),
                                           "None | nb | numericCalculable ")
 
         complete_cols = []
@@ -2334,12 +2334,12 @@ class Table_UP(Table):
         #    if data[0][i] is None:
         #        d0 = "None"
         #    else:
-        #        d0 =  data[0][i].dbg_str()
+        #        d0 =  repr(data[0][i])
 
         #    if data[1][i] is None:
         #        d1 = "None"
         #    else:
-        #        d1 =  data[1][i].dbg_str()
+        #        d1 =  repr(data[1][i])
 
         #    print "data[0][" + str(i) + "] = " + d0 + "\n"
         #    print "data[1][" + str(i) + "] = " + d1 + "\n"
