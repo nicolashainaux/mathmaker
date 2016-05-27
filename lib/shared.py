@@ -23,7 +23,7 @@
 import sqlite3
 
 import settings
-import machine as machine_lib
+import lib.machine
 from lib.common import latex
 
 def init():
@@ -72,7 +72,7 @@ def init():
     mc_source = lib.sources.mc_source()
 
     try:
-        machine = machine_lib.LaTeX(settings.language)
+        machine = lib.machine.LaTeX(settings.language)
     except Exception:
         log.error("An exception occured while creating the LaTeX machine.",
                   exc_info=True)
