@@ -490,22 +490,29 @@ class Polygon(Drawable):
                       .format(n=v.name, a=str(names_angles_list[i]))
 
         result += "\nend"
-        result += "\n\nlabel\n"
 
-        for a in self.angle:
-            if a.mark != "":
-                result += "  {p0}, {v}, {p2} {m}\n".format(p0=a.points[2].name,
-                                                           v=a.vertex.name,
-                                                           p2=a.points[0].name,
-                                                           m=a.mark)
-        for s in self.side:
-            if s.mark != "":
-                result += "  {p1}.{p2} {m}\n"\
-                          .format(p1=s.points[0].name,
-                                  p2=s.points[1].name,
-                                  m=s.mark)
+        # To avoid empty label...end sections (what make euktoeps raise a
+        # syntax error), we first check whether there's anything to put in it.
+        all_marks = "".join([a.mark + s.mark
+                             for a, s in zip(self.angle, self.side)])
+        if all_marks != "":
+            result += "\n\nlabel\n"
+            for a in self.angle:
+                if a.mark != "":
+                    result += "  {p0}, {v}, {p2} {m}\n".format(
+                                                        p0=a.points[2].name,
+                                                        v=a.vertex.name,
+                                                        p2=a.points[0].name,
+                                                        m=a.mark)
+            for s in self.side:
+                if s.mark != "":
+                    result += "  {p1}.{p2} {m}\n"\
+                              .format(p1=s.points[0].name,
+                                      p2=s.points[1].name,
+                                      m=s.mark)
+            result += "\nend"
 
-        return result + "\nend"
+        return result
 
 
 
