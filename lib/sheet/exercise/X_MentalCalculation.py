@@ -32,7 +32,6 @@ import sys
 from lib import *
 from settings import default
 from lib import shared
-import sheet
 from .X_Structure import X_Structure
 from . import question
 
@@ -327,6 +326,7 @@ class X_MentalCalculation(X_Structure):
     #   @return One instance of exercise.X_MentalCalculation
     def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
+        from lib import sheet
         mc_mm_file = options['filename'] if 'filename' in options \
                                          else sheet.catalog.XML_SHEETS[\
                                                   'mental_calculation_default']

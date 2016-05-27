@@ -23,7 +23,7 @@
 import settings
 from . import exercise
 
-D = settings.rootdir + "sheet/frameworks/"
+D = settings.libdir + "sheet/frameworks/"
 DM = D + "mental_calculation/"
 L11_1 = "lev11_1/"
 L11_2 = "lev11_2/"

@@ -33,7 +33,7 @@ from lib import shared
 from lib.common import software
 from settings import CONFIG
 from lib import startup_actions
-import sheet
+from lib import sheet
 
 log = settings.mainlogger
 

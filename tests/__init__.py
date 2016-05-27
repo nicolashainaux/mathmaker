@@ -30,8 +30,8 @@ from lib.common import software
 from . import common
 from . import obj_test
 from . import lib_test
-import sheet
-import machine
+from lib import sheet
+from lib import machine
 import settings
 from lib import shared
 from _version import __version__

@@ -28,8 +28,8 @@ from optparse import OptionParser
 from lib import *
 from lib.core.base_calculus import *
 from lib.core.calculus import *
-import sheet
-import machine
+from lib import sheet
+from lib import machine
 
 
 
