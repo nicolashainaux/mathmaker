@@ -119,7 +119,6 @@ class X_Factorization(X_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param embedded_machine The machine that will be used to write output.
     #   @param **options Options detailed below:
     #          - start_number=<integer>
     #                         (should be >= 1)
@@ -148,9 +147,9 @@ class X_Factorization(X_Structure):
     #                         ...
     #   @todo Complete the description of the possible options !
     #   @return One instance of exercise.Factorization
-    def __init__(self, embedded_machine, x_kind='default_nothing', **options):
+    def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
-        X_Structure.__init__(self, embedded_machine,
+        X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                              X_LAYOUT_UNIT, **options)
         # The purpose of this next line is to get the possibly modified
@@ -193,26 +192,22 @@ class X_Factorization(X_Structure):
                 lil_box = []
 
                 lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_01',
                                    q_subkind='ax² + bx',
                                    expression_number=0))
 
                 if randomly.heads_or_tails():
                     lil_box.append(default_question(
-                                       self.machine,
                                        q_kind='level_01',
                                        q_subkind='ax² + b',
                                        expression_number=0))
                 else:
                     lil_box.append(default_question(
-                                       self.machine,
                                        q_kind='level_01',
                                        q_subkind='ax + b',
                                        expression_number=0))
 
                 lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_01',
                                    q_subkind='not_factorizable',
                                    expression_number=0))
@@ -247,7 +242,6 @@ class X_Factorization(X_Structure):
 
                 for n in range(len(l03_kinds)):
                     lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_03',
                                    q_subkind=l03_kinds[n],
                                    expression_number=n+1))
@@ -259,7 +253,6 @@ class X_Factorization(X_Structure):
 
                 for n in range(len(l02_kinds)):
                     lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_02',
                                    q_subkind=l02_kinds[n][0],
                                    max_coeff=10,
@@ -279,7 +272,7 @@ class X_Factorization(X_Structure):
             if self.x_subkind == 'two_factorizations':
                 lil_box = []
 
-                lil_box.append(default_question(self.machine,
+                lil_box.append(default_question(
                             q_kind='level_03',
                             q_subkind=randomly.pop(['any_fake',
                                                     'any_true'],
@@ -295,7 +288,6 @@ class X_Factorization(X_Structure):
                 n = randomly.pop([0, 1, 2])
 
                 lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_02',
                                    q_subkind=l02_kinds[n][0],
                                    max_coeff=10,
@@ -321,7 +313,6 @@ class X_Factorization(X_Structure):
                 lil_box = []
 
                 lil_box.append(default_question(
-                               self.machine,
                                q_kind='level_01',
                                q_subkind='ax² + bx',
                                expression_number=10-n))
@@ -330,7 +321,6 @@ class X_Factorization(X_Structure):
 
                 if randomly.heads_or_tails():
                     lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_01',
                                    q_subkind='ax² + bx',
                                    expression_number=10-n))
@@ -338,7 +328,6 @@ class X_Factorization(X_Structure):
                     n -= 1
 
                 lil_box.append(default_question(
-                               self.machine,
                                q_kind='level_01',
                                q_subkind='ax² + b',
                                expression_number=10-n))
@@ -347,7 +336,6 @@ class X_Factorization(X_Structure):
 
                 if randomly.heads_or_tails():
                     lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_01',
                                    q_subkind='ax² + b',
                                    expression_number=10-n))
@@ -356,7 +344,6 @@ class X_Factorization(X_Structure):
 
                 if randomly.heads_or_tails():
                     lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_01',
                                    q_subkind='ax² + b',
                                    expression_number=10-n))
@@ -365,7 +352,6 @@ class X_Factorization(X_Structure):
 
                 for i in range(n):
                     lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_01',
                                    q_subkind='ax + b',
                                    expression_number=n-i)
@@ -389,7 +375,6 @@ class X_Factorization(X_Structure):
 
                 for i in range(n1):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='level_02',
                                                q_subkind=randomly.pop(subkinds),
                                                minus_sign='no',
@@ -403,7 +388,6 @@ class X_Factorization(X_Structure):
 
                 for i in range(n2):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='level_02',
                                                q_subkind=randomly.pop(subkinds),
                                                minus_sign='no',
@@ -419,7 +403,6 @@ class X_Factorization(X_Structure):
 
                 for i in range(n1):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='level_02',
                                                q_subkind=randomly.pop(subkinds),
                                                minus_sign='no',
@@ -433,7 +416,6 @@ class X_Factorization(X_Structure):
 
                 for i in range(n2):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='level_02',
                                                q_subkind=randomly.pop(subkinds),
                                                minus_sign='no',
@@ -445,13 +427,11 @@ class X_Factorization(X_Structure):
 
                 for n in range(2):
                     lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_03',
                                    q_subkind='sum_square',
                                    expression_number=n+1))
 
                 lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_03',
                                    q_subkind='sum_square_mixed',
                                    expression_number=n+1))
@@ -469,13 +449,11 @@ class X_Factorization(X_Structure):
 
                 for n in range(2):
                     lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_03',
                                    q_subkind='difference_square',
                                    expression_number=n+1))
 
                 lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_03',
                                    subkind ='difference_square_mixed',
                                    expression_number=n+1))
@@ -495,13 +473,11 @@ class X_Factorization(X_Structure):
 
                 for n in range(2):
                     lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_03',
                                    q_subkind='squares_difference',
                                    expression_number=n+1))
 
                 lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_03',
                                    q_subkind='squares_difference_mixed',
                                    expression_number=n+1))
@@ -519,12 +495,12 @@ class X_Factorization(X_Structure):
             elif self.x_subkind == 'level_03_some_not_factorizable':
                 lil_box = []
 
-                q1 = default_question(self.machine,
+                q1 = default_question(
                                       q_kind='level_03',
                                       q_subkind='any_true_mixed',
                                       expression_number=1)
 
-                q2 = default_question(self.machine,
+                q2 = default_question(
                                       q_kind='level_03',
                                       q_subkind='any_fake_straight',
                                       expression_number=2)
@@ -535,20 +511,17 @@ class X_Factorization(X_Structure):
                 lil_box.append(randomly.pop(q1q2))
 
                 for n in range(3):
-                    lil_box.append(default_question(self.machine,
-                                                    q_kind='level_03',
+                    lil_box.append(default_question(q_kind='level_03',
                                                     q_subkind='any_true',
                                                     expression_number=n+3))
 
                 for n in range(2):
-                    lil_box.append(default_question(self.machine,
-                                                    q_kind='level_03',
+                    lil_box.append(default_question(q_kind='level_03',
                                                     q_subkind='any_fake',
                                                     expression_number=n+5))
 
                 for n in range(2):
-                    lil_box.append(default_question(self.machine,
-                                                    q_kind='level_03',
+                    lil_box.append(default_question(q_kind='level_03',
                                                     q_subkind='any',
                                                     expression_number=n+7))
 
@@ -591,7 +564,6 @@ class X_Factorization(X_Structure):
 
                 for n in range(len(all_kinds)):
                     lil_box.append(default_question(
-                                   self.machine,
                                    q_kind='level_03',
                                    q_subkind=all_kinds[n],
                                    expression_number=n+1))
@@ -610,53 +582,9 @@ class X_Factorization(X_Structure):
         else:
             for i in range(self.q_nb):
                 self.questions_list.append(
-                             default_question(self.machine,
+                             default_question(
                                         expression_number=i+self.start_number,
                                         q_kind = self.x_subkind,
                                         **options)
                                           )
 
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Writes the answers of the questions to the output.
-    #def write_answer(self):
-    #    M = self.machine
-    #    max_per_page = 12
-    #    i_count = 0
-    #    j = 0
-    #    tabular_format = [3, "p{6 cm} p{6 cm} p{6 cm}"]
-
-    #    if 'short_test' in self.options \
-    #         and (self.options['short_test'] == 'hard_level'):
-    #    #___
-    #        tabular_format = [2, "p{9 cm} p{9 cm}"]
-
-    #    M.write_tabular_begins(tabular_format[1])
-    #    for i in xrange(len(self.questions_list)):
-    #        j += 1
-    #        i_count += 1
-    #        self.questions_list[i].write_answer()
-    #        if j < tabular_format[0]:
-    #            M.write_separator_tabular_columns()
-    #        if j == tabular_format[0] and i_count < max_per_page - 1:
-    #            M.write_separator_tabular_lines()
-    #            j = 0
-
-    #        if i_count == max_per_page - 1:
-    #            i_count = 0
-    #            j = 0
-    #            M.write_tabular_ends()
-    #            M.write_tabular_begins(tabular_format[1])
-            #M.write_new_line()
-
-    #    M.write_tabular_ends()
-
-        #M.write_new_line()
-
-
-
-
-
-
-        # END OF THE ZONE TO REWRITE ------------------------------------------

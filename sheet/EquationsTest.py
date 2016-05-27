@@ -52,12 +52,11 @@ class EquationsTest(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.EquationsTest
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE)
 
@@ -70,15 +69,15 @@ class EquationsTest(S_Structure):
 
         # Exercises:
         for i in range(2):
-            ex1 = exercise.X_Equation(self.machine,
+            ex1 = exercise.X_Equation(
                                       x_kind='short_test',
                                       x_subkind='basic')
 
-            ex2 = exercise.X_Equation(self.machine,
+            ex2 = exercise.X_Equation(
                                       x_kind='short_test',
                                       x_subkind='classic_harder')
 
-            ex3 = exercise.X_Equation(self.machine,
+            ex3 = exercise.X_Equation(
                                       x_kind='short_test',
                                       x_subkind='harder_harder')
 
@@ -86,55 +85,3 @@ class EquationsTest(S_Structure):
             self.exercises_list.append(ex2)
             self.exercises_list.append(ex3)
 
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Writes to the output all exercises' answers
-    #def write_answers(self, first_and_last):
-    #    first = first_and_last[0]
-    #    last = first_and_last[1]
-    #    self.machine.reset_exercises_counter()
-    #    self.machine.write_set_font_size_to('large')
-    #    for i in xrange(last - first + 1):
-
-    #        if self.tabular_format_answers[2*i] != 0:
-    #            if self.tabular_format_answers[2*i] == 'end':
-    #                self.machine.write_tabular_ends()
-    #            elif self.tabular_format_answers[2*i] == '&':
-    #                self.machine.write_separator_tabular_columns()
-    #            elif type(self.tabular_format_answers[2*i]) == str:
-    #                self.machine.write_tabular_begins(\
-    #                                          self.tabular_format_answers[2*i])
-
-    #        self.machine.write_exercise_number()
-
-    #        self.exercises_list[i + first].write_answer()
-
-
-    #        if self.tabular_format_answers[2*i+1] != 0:
-    #            if self.tabular_format_answers[2*i+1] == 'end':
-    #                self.machine.write_tabular_ends()
-    #            elif self.tabular_format_answers[2*i+1] == '&':
-    #                self.machine.write_separator_tabular_columns()
-    #            elif type(self.tabular_format_answers[2*i+1]) == str:
-    #                self.machine.write_tabular_begins(\
-    #                                        self.tabular_format_answers[2*i+1])
-
-    #        if i == 0:
-    #            self.machine.write_new_line()
-
-    #        if i == 1:
-    #            self.machine.write_jump_to_next_page()
-
-
-
-
-
-
-
-
-
-
-    # END ---------------------------------------------------------------------

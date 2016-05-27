@@ -56,7 +56,6 @@ class X_AlgebraExpressionReduction(X_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param embedded_machine The machine that will be used to write output.
     #   @param **options Options detailed below:
     #          - start_number=<integer>
     #                         (should be >= 1)
@@ -80,9 +79,9 @@ class X_AlgebraExpressionReduction(X_Structure):
     #                         'OK'
     #                         any other value will be understood as 'no'
     #   @return One instance of exercise.ExpressionReduction
-    def __init__(self, embedded_machine, x_kind = 'default_nothing', **options):
+    def __init__(self, x_kind = 'default_nothing', **options):
         self.derived = True
-        X_Structure.__init__(self, embedded_machine,
+        X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                              X_LAYOUT_UNIT, **options)
         # The purpose of this next line is to get the possibly modified
@@ -117,20 +116,20 @@ class X_AlgebraExpressionReduction(X_Structure):
         # SHORT TEST EXERCISES
         if self.x_kind == 'short_test':
             if self.x_subkind == 'easy':
-                self.questions_list.append(default_question(self.machine,
+                self.questions_list.append(default_question(
                                                         q_kind='product',
                                                         short_test='OK',
                                                         expression_number=0)
                                           )
 
-                self.questions_list.append(default_question(self.machine,
+                self.questions_list.append(default_question(
                                                         q_kind='sum',
                                                         short_test='OK',
                                                         length=4,
                                                         expression_number=1)
                                           )
 
-                self.questions_list.append(default_question(self.machine,
+                self.questions_list.append(default_question(
                                                         q_kind='sum_of_products',
                                                         length=2,
                                                         expression_number=2)
@@ -139,24 +138,24 @@ class X_AlgebraExpressionReduction(X_Structure):
             if self.x_subkind == 'medium_level':
                 q = []
 
-                q.append(default_question(self.machine,
+                q.append(default_question(
                                           q_kind='long_sum',
                                           expression_number=2)
                         )
 
-                q.append(default_question(self.machine,
+                q.append(default_question(
                                           q_kind='sum_not_reducible',
                                           expression_number=3)
                         )
 
-                q.append(default_question(self.machine,
+                q.append(default_question(
                                           q_kind='sum_with_minus-brackets',
                                           minus_brackets_nb=2,
                                           plus_brackets_nb=1,
                                           expression_number=4)
                         )
 
-                q.append(default_question(self.machine,
+                q.append(default_question(
                                           q_kind='long_sum_including_a_coeff_1',
                                           length=7,
                                           expression_number=5)
@@ -169,7 +168,6 @@ class X_AlgebraExpressionReduction(X_Structure):
         elif self.x_kind == 'preformatted':
             if self.x_subkind == 'product':
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='product',
                                            expression_number=0,
                                            use_these_letters=['a', 'b'],
@@ -177,8 +175,7 @@ class X_AlgebraExpressionReduction(X_Structure):
                                            **options
                                            ))
 
-                self.questions_list.append(default_question(\
-                                           self.machine,
+                self.questions_list.append(default_question(
                                            q_kind='product',
                                            expression_number=1,
                                            use_these_letters=['x', 'y'],
@@ -187,7 +184,6 @@ class X_AlgebraExpressionReduction(X_Structure):
                                            ))
 
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='product',
                                            expression_number=2,
                                            use_these_letters=['t', 'u'],
@@ -196,7 +192,6 @@ class X_AlgebraExpressionReduction(X_Structure):
                                            ))
 
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='product',
                                            expression_number=3,
                                            use_these_letters=['x', 'y', 'z'],
@@ -205,7 +200,6 @@ class X_AlgebraExpressionReduction(X_Structure):
                                            ))
 
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='product',
                                            expression_number=4,
                                            use_these_letters=['p', 'q', 'r'],
@@ -213,7 +207,6 @@ class X_AlgebraExpressionReduction(X_Structure):
                                            ))
 
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='product',
                                            expression_number=5,
                                            use_these_letters=['a', 'b', 'x'],
@@ -222,7 +215,6 @@ class X_AlgebraExpressionReduction(X_Structure):
                                            ))
 
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='product',
                                            expression_number=6,
                                            use_reduced_alphabet='OK',
@@ -231,7 +223,6 @@ class X_AlgebraExpressionReduction(X_Structure):
                                            ))
 
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='product',
                                            expression_number=7,
                                            use_these_letters=['a', 'b', 'x'],
@@ -240,7 +231,6 @@ class X_AlgebraExpressionReduction(X_Structure):
                                            ))
 
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='product',
                                            expression_number=8,
                                            use_these_letters=['x', 'y'],
@@ -253,7 +243,7 @@ class X_AlgebraExpressionReduction(X_Structure):
         else:
             for i in range(self.q_nb):
                 self.questions_list.append(                                   \
-                             default_question(self.machine,
+                             default_question(
                                          q_kind=self.x_subkind,
                                          expression_number=i+self.start_number,
                                          **options)

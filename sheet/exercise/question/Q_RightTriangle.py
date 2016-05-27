@@ -24,6 +24,7 @@ import math
 from decimal import Decimal
 
 from lib import *
+from lib import shared
 from lib import utils
 from lib.common import alphabet
 from lib.common import pythagorean
@@ -70,17 +71,16 @@ class Q_RightTriangle(Q_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param embedded_machine The machine to be used
     #   @options
     #   @return One instance of question.Q_RightTriangle
-    def __init__(self, embedded_machine, q_kind='default_nothing', **options):
+    def __init__(self, q_kind='default_nothing', **options):
         self.derived = True
 
         # The call to the mother class __init__() method will set the
         # fields matching optional arguments which are so far:
         # self.q_kind, self.q_subkind
-        # plus self.machine, self.options (modified)
-        Q_Structure.__init__(self, embedded_machine,
+        # plus self.options (modified)
+        Q_Structure.__init__(self,
                              q_kind, AVAILABLE_Q_KIND_VALUES,
                              **options)
         # The purpose of this next line is to get the possibly modified
@@ -385,7 +385,7 @@ class Q_RightTriangle(Q_Structure):
                              THOUSANDTH: _("to the thousandth"),
                              TEN_THOUSANDTH: _("to the ten thousandth")
                            }
-        M = self.machine
+        M = shared.machine
         result = self.displayable_number
 
         if self.q_kind == 'pythagorean_theorem':
@@ -462,7 +462,7 @@ triangle is right, give the name of the right angle.")
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
-        M = self.machine
+        M = shared.machine
 
         if self.q_kind == 'pythagorean_theorem':
             # Resolution (and the part with the figure will be dealed later)

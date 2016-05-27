@@ -52,12 +52,11 @@ class EquationsClassic(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.EquationsClassic
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE)
 
@@ -69,11 +68,11 @@ class EquationsClassic(S_Structure):
         self.answers_title = _("Examples of answers")
 
 
-        ex1 = exercise.X_Equation(self.machine,
+        ex1 = exercise.X_Equation(
                                   x_kind='preformatted',
                                   x_subkind='classics')
 
-        ex2 = exercise.X_Equation(self.machine,
+        ex2 = exercise.X_Equation(
                                   x_kind='preformatted',
                                   x_subkind='classic_xtwice_and_any')
 

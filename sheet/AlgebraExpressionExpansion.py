@@ -51,12 +51,11 @@ class AlgebraExpressionExpansion(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.ExpressionExpansion
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE)
 
@@ -67,7 +66,7 @@ class AlgebraExpressionExpansion(S_Structure):
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-        ex1 = exercise.X_AlgebraExpressionExpansion(self.machine,
+        ex1 = exercise.X_AlgebraExpressionExpansion(
                                                   x_kind='preformatted',
                                                   x_subkind='mixed_monom_polyn1',
                                                   ratio_mmp=0.4,
@@ -75,7 +74,7 @@ class AlgebraExpressionExpansion(S_Structure):
                                                   randomly_reversed=0.25)
 
 
-        ex2 = exercise.X_AlgebraExpressionExpansion(self.machine,
+        ex2 = exercise.X_AlgebraExpressionExpansion(
                                                   x_kind='bypass',
                                                   x_subkind='polyn1_polyn1',
                                                   number_of_questions=5)

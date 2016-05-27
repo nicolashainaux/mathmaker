@@ -54,13 +54,12 @@ class ConverseAndContrapositiveOfPythagoreanTheoremShortTest(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of
     #   @return sheet.ConverseAndContrapositiveOfPythagoreanTheoremShortTest
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE)
 
@@ -74,24 +73,24 @@ class ConverseAndContrapositiveOfPythagoreanTheoremShortTest(S_Structure):
 
         boolean_list = [True, False]
 
-        ex1 = exercise.X_RightTriangle(self.machine,
+        ex1 = exercise.X_RightTriangle(
                                        x_kind='short_test',
                         x_subkind='contrapositive_of_pythagorean_theorem',
                         use_decimals=randomly.pop(boolean_list))
 
-        ex2 = exercise.X_RightTriangle(self.machine,
+        ex2 = exercise.X_RightTriangle(
                                        x_kind='short_test',
                         x_subkind='converse_of_pythagorean_theorem',
                         use_decimals=randomly.pop(boolean_list))
 
         boolean_list = [True, False]
 
-        ex3 = exercise.X_RightTriangle(self.machine,
+        ex3 = exercise.X_RightTriangle(
                                        x_kind='short_test',
                         x_subkind='converse_of_pythagorean_theorem',
                         use_decimals=randomly.pop(boolean_list))
 
-        ex4 = exercise.X_RightTriangle(self.machine,
+        ex4 = exercise.X_RightTriangle(
                                        x_kind='short_test',
                         x_subkind='contrapositive_of_pythagorean_theorem',
                         use_decimals=randomly.pop(boolean_list))

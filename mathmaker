@@ -63,12 +63,12 @@ def main():
     shared.init()
 
     if args.main_directive in sheet.AVAILABLE:
-        sh = sheet.AVAILABLE[args.main_directive][0](shared.machine)
+        sh = sheet.AVAILABLE[args.main_directive][0]()
     elif args.main_directive in sheet.catalog.XML_SHEETS:
-        sh = sheet.S_Generic(shared.machine,
+        sh = sheet.S_Generic(
                         filename=sheet.catalog.XML_SHEETS[args.main_directive])
     elif os.path.isfile(args.main_directive):
-        sh = sheet.S_Generic(shared.machine, filename=args.main_directive)
+        sh = sheet.S_Generic(filename=args.main_directive)
     else:
         log.error(args.main_directive \
                   + " is not a correct directive for " + software.NAME \

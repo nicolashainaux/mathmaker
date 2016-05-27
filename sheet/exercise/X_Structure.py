@@ -20,6 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from lib import shared
 from lib import *
 from settings import default
 from . import question
@@ -43,17 +44,13 @@ class X_Structure(object):
     ##
     #   @brief /!\ Must be redefined. Constructor.
     #   @warning Exception NotInstanciableObject.
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
-    def __init__(self, embedded_machine,
-                 x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
+    def __init__(self, x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                  X_LAYOUT_UNIT, number_of_questions=6, **options):
         try:
             self.derived
         except AttributeError:
             raise error.NotInstanciableObject(self)
-
-        self.machine = embedded_machine.clone(embedded_machine.language_code)
 
         self.questions_list = list()
 
@@ -133,7 +130,7 @@ class X_Structure(object):
     ##
     #   @brief Writes the text of the exercise|answer to the output.
     def to_str(self, ex_or_answers):
-        M = self.machine
+        M = shared.machine
         layout = self.x_layout[ex_or_answers]
 
         result = ""

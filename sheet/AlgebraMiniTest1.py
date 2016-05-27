@@ -72,12 +72,11 @@ class AlgebraMiniTest1(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.AlgebraMiniTest1
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE)
 
@@ -89,12 +88,12 @@ class AlgebraMiniTest1(S_Structure):
         self.answers_title = _("Examples of answers")
 
         for i in range(2):
-            ex1 = exercise.X_AlgebraExpressionExpansion(self.machine,
+            ex1 = exercise.X_AlgebraExpressionExpansion(
                                                 x_kind='mini_test',
                                                 x_subkind='two_expansions_hard')
             self.exercises_list.append(ex1)
 
-            ex2 = exercise.X_Factorization(self.machine,
+            ex2 = exercise.X_Factorization(
                                            x_kind='mini_test',
                                            x_subkind='two_factorizations',
                                            start_number=2)

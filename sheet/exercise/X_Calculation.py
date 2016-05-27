@@ -61,12 +61,11 @@ class X_Calculation(X_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param embedded_machine The machine that will be used to write output.
     #   @param **options Any options
     #   @return One instance of exercise.Calculation
-    def __init__(self, embedded_machine, x_kind='default_nothing', **options):
+    def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
-        X_Structure.__init__(self, embedded_machine,
+        X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                              X_LAYOUT_UNIT, **options)
         # The purpose of this next line is to get the possibly modified
@@ -101,7 +100,7 @@ class X_Calculation(X_Structure):
                 #self.text = _("Simplify the following fractions:")
 
                 for i in range(int(self.q_nb // 2)):
-                    q=question.Q_Calculation(self.machine,
+                    q=question.Q_Calculation(
                                            self.x_subkind,
                                            expression_number=i,
                                            **options)
@@ -109,7 +108,7 @@ class X_Calculation(X_Structure):
                     self.questions_list.append(q)
 
                 for i in range(self.q_nb - int(self.q_nb // 2)):
-                    q=question.Q_Calculation(self.machine,
+                    q=question.Q_Calculation(
                                           self.x_subkind,
                                           expression_number=i+int(self.q_nb//2),
                                           with_ten_powers=0.3,
@@ -125,68 +124,10 @@ class X_Calculation(X_Structure):
                 #    "Calculate and give the result as a simplified fraction:")
 
                 for i in range(self.q_nb):
-                    q=question.Q_Calculation(self.machine,
+                    q=question.Q_Calculation(
                                            self.x_subkind,
                                            expression_number=i,
                                            **options)
 
                     self.questions_list.append(q)
 
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Writes the text of the exercise to the output.
-    #def write_text(self):
-    #    M = self.machine
-
-    #    if self.text != "":
-    #        M.write(self.text)
-    #        M.write_new_line()
-
-    #    final_str = ""
-
-    #    for i in xrange(len(self.questions_list)):
-    #        final_str += self.questions_list[i].write_text(redirect='to_str')
-
-    #    M.write(final_str, multicolumns=2)
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Writes the answers of the questions to the output.
-    #def write_answer(self):
-    #    M = self.machine
-    #    j = 0
-
-    #    M.write_tabular_begins("p{4.5 cm} p{4.5 cm} p{4.5 cm} p{4.5 cm}")
-    #    for i in xrange(len(self.questions_list)):
-    #        j += 1
-    #        self.questions_list[i].write_answer()
-    #        if j == 2 and i < len(self.questions_list) - 1:
-    #            M.write_separator_tabular_columns()
-    #            j = 0
-    #        #M.write_new_line()
-
-    #    M.write_tabular_ends()
-
-        #M.write_new_line()
-
-
-
-
-    # END ---------------------------------------------------------------------
-    # Instructions to create a new exercise:
-    # - Indicate its name in the header comment
-    #   the one of documentation (@class)
-    # - Write the @brief description
-    # - Replace the Model class name by the chosen one
-    # - In the constructor comment, replace Model with the chosen name
-    #   at the @return line
-    # - Go to the rewriting zone and for each question, just follow this example
-    #   [THIS COMMENT IS TO COMPLETE]
-    # - Finally, edit or delete the two write_* functions

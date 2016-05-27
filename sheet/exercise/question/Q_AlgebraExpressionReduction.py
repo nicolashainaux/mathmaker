@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from lib import *
+from lib import shared
 from .Q_Structure import Q_Structure
 from core.base_calculus import *
 from core.calculus import *
@@ -87,7 +88,6 @@ class Q_AlgebraExpressionReduction(Q_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param embedded_machine The machine to be used
     #   @param q_kind= the kind of question desired
     #          Available values are: 'product'
     #                                 'sum'
@@ -102,14 +102,14 @@ class Q_AlgebraExpressionReduction(Q_Structure):
     #                    'plus_brackets_nb' (values: 1, 2, 3)
     #   @todo describe the different available options in this comment
     #   @return One instance of question.Q_AlgebraExpressionReduction
-    def __init__(self, embedded_machine, q_kind='default_nothing', **options):
+    def __init__(self, q_kind='default_nothing', **options):
         self.derived = True
 
         # The call to the mother class __init__() method will set the
         # fields matching optional arguments which are so far:
         # self.q_kind, self.q_subkind
-        # plus self.machine, self.options (modified)
-        Q_Structure.__init__(self, embedded_machine,
+        # plus self.options (modified)
+        Q_Structure.__init__(self,
                              q_kind, AVAILABLE_Q_KIND_VALUES,
                              **options)
         # The purpose of this next line is to get the possibly modified
@@ -523,7 +523,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
-        M = self.machine
+        M = shared.machine
 
         result = M.write_math_style2(M.type_string(self.expression))
         result += M.write_new_line()
@@ -538,7 +538,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
-        M = self.machine
+        M = shared.machine
 
         result = ""
 

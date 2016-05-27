@@ -196,10 +196,9 @@ class Q_MentalCalculation(Q_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of question.Q_MentalCalculation
-    def __init__(self, embedded_machine, q_kind,
+    def __init__(self, q_kind,
                  q_options, **options):
 
         self.derived = True
@@ -209,7 +208,7 @@ class Q_MentalCalculation(Q_Structure):
         # The call to the mother class __init__() method will set the
         # fields matching optional arguments which are so far:
         # self.q_kind, self.q_subkind
-        # plus self.machine, self.options (modified)
+        # plus self.options (modified)
         Q_Structure.__init__(self, q_kind, None,
                              q_subkind='bypass', **options)
         # The purpose of this next line is to get the possibly modified

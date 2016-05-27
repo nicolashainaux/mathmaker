@@ -51,12 +51,11 @@ class EquationsShortTest(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.Model
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE)
 
@@ -69,15 +68,15 @@ class EquationsShortTest(S_Structure):
 
         # Exercises:
         for i in range(2):
-            ex1 = exercise.X_Equation(self.machine,
+            ex1 = exercise.X_Equation(
                                       x_kind='short_test',
                                       x_subkind='basic')
 
-            ex2 = exercise.X_Equation(self.machine,
+            ex2 = exercise.X_Equation(
                                       x_kind='short_test',
                                       x_subkind='classic')
 
-            ex3 = exercise.X_Equation(self.machine,
+            ex3 = exercise.X_Equation(
                                       x_kind='short_test',
                                       x_subkind='harder')
 
@@ -85,37 +84,3 @@ class EquationsShortTest(S_Structure):
             self.exercises_list.append(ex2)
             self.exercises_list.append(ex3)
 
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Writes to the output all exercises' answers
-    #def write_answers(self, first_and_last):
-    #    first = first_and_last[0]
-    #    last = first_and_last[1]
-
-    #    self.machine.reset_exercises_counter()
-    #    self.machine.write_set_font_size_to('large')
-
-    #    self.machine.write_exercise_number()
-    #    self.exercises_list[first].write_answer()
-    #    self.machine.write_new_line()
-
-    #    self.machine.write_tabular_begins("p{9 cm} p{9 cm}")
-
-    #    self.machine.write_exercise_number()
-    #    self.exercises_list[first+1].write_answer()
-
-    #    self.machine.write_separator_tabular_columns()
-
-    #    self.machine.write_exercise_number()
-    #    self.exercises_list[first+2].write_answer()
-
-    #    self.machine.write_tabular_ends()
-
-
-
-
-
-    # END ---------------------------------------------------------------------

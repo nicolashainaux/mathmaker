@@ -76,7 +76,6 @@ class X_Model(X_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param embedded_machine The machine that will be used to write output.
     #          - x_kind=<string>
     #                         see AVAILABLE_X_KIND_VALUES to check the
     #                         possible values to use and their matching
@@ -91,9 +90,9 @@ class X_Model(X_Structure):
     #            /!\ probably only useful if you use bypass
     #                         (should be >= 1)
     #   @return One instance of exercise.Model
-    def __init__(self, embedded_machine, x_kind='default_nothing', **options):
+    def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
-        X_Structure.__init__(self, embedded_machine,
+        X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                              X_LAYOUT_UNIT, **options)
         # The purpose of this next line is to get the possibly modified
@@ -124,8 +123,7 @@ class X_Model(X_Structure):
         # SHORT TEST & OTHER PREFORMATTED EXERCISES
         #if self.x_kind == 'short_test':
         #   if self.x_subkind == 'sub1':
-        #       self.questions_list.append(default_question( \
-            #                                       self.machine,
+        #       self.questions_list.append(default_question(
             #                                       q_kind='product',
             #                                       expression_number=0)
             #                           )
@@ -133,7 +131,6 @@ class X_Model(X_Structure):
         #elif self.x_kind == 'preformatted':
         #    if self.x_subkind == '...':
                 #self.questions_list.append(default_question(
-                #                           self.machine,
                 #
                 # etc.
 
@@ -142,7 +139,7 @@ class X_Model(X_Structure):
         #else:
          #   for i in xrange(self.q_nb):
          #       self.questions_list.append(
-         #                    default_question(self.machine,
+         #                    default_question(
          #                              q_kind=self.x_subkind,
          #                               expression_number=i+self.start_number,
          #                               **options)

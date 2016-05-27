@@ -52,12 +52,11 @@ class PythagoreanTheoremShortTest(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.PythagoreanTheoremShortTest
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE, write_texts_twice='yes')
 
@@ -70,7 +69,7 @@ class PythagoreanTheoremShortTest(S_Structure):
 
 
         for i in range(2):
-            ex1 = exercise.X_RightTriangle(self.machine,
+            ex1 = exercise.X_RightTriangle(
                                    x_kind='short_test',
                                    x_subkind='pythagorean_theorem_one_of_each')
 

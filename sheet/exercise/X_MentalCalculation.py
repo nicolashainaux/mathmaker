@@ -297,7 +297,6 @@ class X_MentalCalculation(X_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param embedded_machine The machine that will be used to write output.
     #   @param **options Options detailed below:
     #          - start_number=<integer>
     #                         (should be >= 1)
@@ -326,7 +325,7 @@ class X_MentalCalculation(X_Structure):
     #                         ...
     #   @todo Complete the description of the possible options !
     #   @return One instance of exercise.X_MentalCalculation
-    def __init__(self, embedded_machine, x_kind='default_nothing', **options):
+    def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
         mc_mm_file = options['filename'] if 'filename' in options \
                                          else sheet.catalog.XML_SHEETS[\
@@ -334,7 +333,7 @@ class X_MentalCalculation(X_Structure):
 
         (x_kind, q_list) = get_q_kinds_from_file(mc_mm_file)
 
-        X_Structure.__init__(self, embedded_machine,
+        X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                              X_LAYOUT_UNIT, **options)
         # The purpose of this next line is to get the possibly modified
@@ -387,8 +386,7 @@ class X_MentalCalculation(X_Structure):
                 or nb_source == 'decimal_and_10_100_1000_for_multi':
             #___
                 q.options['10_100_1000'] = True
-            self.questions_list += [default_question(embedded_machine,
-                                                     q.type,
+            self.questions_list += [default_question(q.type,
                                                      q.options,
                                                      numbers_to_use=nb_to_use
                                                      )]
@@ -399,7 +397,7 @@ class X_MentalCalculation(X_Structure):
     ##
     #   @brief Writes the text of the exercise|answer to the output.
     def to_str(self, ex_or_answers):
-        M = self.machine
+        M = shared.machine
         result = ""
 
         if self.slideshow:

@@ -23,6 +23,7 @@
 import subprocess
 import xml.etree.ElementTree as XML_PARSER
 
+from lib import shared
 from .catalog import CATALOG, XML_SCHEMA_PATH
 from lib import error
 from lib.common.cst import *
@@ -131,9 +132,8 @@ class S_Structure(object):
     ##
     #   @brief /!\ Must be redefined. Constructor.
     #   @warning Exception NotInstanciableObject.
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
-    def __init__(self, embedded_machine, font_size_offset,
+    def __init__(self, font_size_offset,
                  sheet_layout_unit, sheet_layout, layout_type,
                  **options):
         try:
@@ -141,9 +141,8 @@ class S_Structure(object):
         except AttributeError:
             raise error.NotInstanciableObject(self)
 
-        self.machine = embedded_machine.clone(embedded_machine.language_code)
         self.exercises_list = list()
-        self.machine.set_font_size_offset(font_size_offset)
+        shared.machine.set_font_size_offset(font_size_offset)
 
         self.sheet_layout_unit = sheet_layout_unit
         self.layout_type = layout_type
@@ -257,20 +256,20 @@ class S_Structure(object):
     def __str__(self):
         result = ""
         if self.layout_type == 'std' or self.layout_type == 'equations':
-            result += self.machine.write_document_header()
-            result += self.machine.write_document_begins()
+            result += shared.machine.write_document_header()
+            result += shared.machine.write_document_begins()
             result += self.sheet_header_to_str()
             result += self.sheet_title_to_str()
             result += self.sheet_text_to_str()
             result += self.texts_to_str('exc', 0)
-            result += self.machine.write_jump_to_next_page()
+            result += shared.machine.write_jump_to_next_page()
             result += self.answers_title_to_str()
             result += self.texts_to_str('ans', 0)
-            result += self.machine.write_document_ends()
+            result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'short_test':
-            result += self.machine.write_document_header()
-            result += self.machine.write_document_begins()
+            result += shared.machine.write_document_header()
+            result += shared.machine.write_document_begins()
 
             n = 1
             if self.write_texts_twice:
@@ -281,110 +280,111 @@ class S_Structure(object):
                 result += self.sheet_title_to_str()
                 result += self.sheet_text_to_str()
                 result += self.texts_to_str('exc', 0)
-                result += self.machine.write_new_line_twice()
+                result += shared.machine.write_new_line_twice()
 
                 result += self.sheet_header_to_str()
                 result += self.sheet_title_to_str()
                 result += self.sheet_text_to_str()
-                result += self.texts_to_str('exc', len(self.exercises_list) // 2)
-                result += self.machine.write_new_line_twice()
+                result += self.texts_to_str('exc',
+                                            len(self.exercises_list) // 2)
+                result += shared.machine.write_new_line_twice()
 
                 if n == 2 and i == 0:
-                    result += self.machine.insert_dashed_hline()
-                    result += self.machine.write_new_line()
-                    result += self.machine.insert_vspace()
-                    result += self.machine.write_new_line_twice()
+                    result += shared.machine.insert_dashed_hline()
+                    result += shared.machine.write_new_line()
+                    result += shared.machine.insert_vspace()
+                    result += shared.machine.write_new_line_twice()
 
 
-            result += self.machine.write_jump_to_next_page()
+            result += shared.machine.write_jump_to_next_page()
 
             result += self.answers_title_to_str()
             result += self.texts_to_str('ans', 0)
-            result += self.machine.write_jump_to_next_page()
+            result += shared.machine.write_jump_to_next_page()
             result += self.answers_title_to_str()
             result += self.texts_to_str('ans', len(self.exercises_list) // 2)
-            result += self.machine.write_document_ends()
+            result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'mini_test':
-            result += self.machine.write_document_header()
-            result += self.machine.write_document_begins()
+            result += shared.machine.write_document_header()
+            result += shared.machine.write_document_begins()
 
             for i in range(3):
                 result += self.sheet_header_to_str()
                 result += self.sheet_title_to_str()
                 result += self.sheet_text_to_str()
                 result += self.texts_to_str('exc', 0)
-                result += self.machine.write_new_line_twice()
+                result += shared.machine.write_new_line_twice()
                 result += self.sheet_header_to_str()
                 result += self.sheet_title_to_str()
                 result += self.sheet_text_to_str()
                 result += self.texts_to_str('exc', len(self.exercises_list)//2)
-                result += self.machine.write_new_line_twice()
+                result += shared.machine.write_new_line_twice()
 
 
             #result += self.sheet_header_to_str()
             #result += self.sheet_title_to_str()
             #result += self.sheet_text_to_str()
             #result += self.texts_to_str('exc', len(self.exercises_list)/2)
-            #result += self.machine.write_new_line_twice()
+            #result += shared.machine.write_new_line_twice()
             #result += self.sheet_header_to_str()
             #result += self.sheet_title_to_str()
             #result += self.sheet_text_to_str()
             #result += self.texts_to_str('exc', 3*len(self.exercises_list)/4)
 
-            result += self.machine.write_jump_to_next_page()
+            result += shared.machine.write_jump_to_next_page()
 
             result += self.answers_title_to_str()
             result += self.texts_to_str('ans', 0)
-            result += self.machine.write_jump_to_next_page()
+            result += shared.machine.write_jump_to_next_page()
             result += self.answers_title_to_str()
             result += self.texts_to_str('ans', len(self.exercises_list)//2)
 
 
-            #result += self.machine.write_jump_to_next_page()
+            #result += shared.machine.write_jump_to_next_page()
             #result += self.answers_title_to_str()
             #result += self.texts_to_str('ans', len(self.exercises_list)/2)
-            #result += self.machine.write_jump_to_next_page()
+            #result += shared.machine.write_jump_to_next_page()
             #result += self.answers_title_to_str()
             #result += self.texts_to_str('ans', 3*len(self.exercises_list)/4)
 
-            result += self.machine.write_document_ends()
+            result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'mini_training':
-            result += self.machine.write_document_header()
-            result += self.machine.write_document_begins()
+            result += shared.machine.write_document_header()
+            result += shared.machine.write_document_begins()
 
             for i in range(6):
                 result += self.texts_to_str('exc', 0)
-                result += self.machine.write_new_line_twice()
+                result += shared.machine.write_new_line_twice()
 
-            result += self.machine.write_jump_to_next_page()
+            result += shared.machine.write_jump_to_next_page()
 
             result += self.answers_title_to_str()
             result += self.texts_to_str('ans', 0)
 
-            result += self.machine.write_document_ends()
+            result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'mental':
             #if self.slideshow:
-            #    result += self.machine.write_document_header(slideshow=True)
-            #    result += self.machine.write_document_begins()
+            #    result += shared.machine.write_document_header(slideshow=True)
+            #    result += shared.machine.write_document_begins()
             #    result += self.sheet_header_to_str()
             #    result += self.sheet_title_to_str()
             #    result += self.sheet_text_to_str()
             #    result += self.texts_to_str('exc', 0)
-            #    result += self.machine.write_document_ends()
+            #    result += shared.machine.write_document_ends()
             #else:
-            result += self.machine.write_document_header()
-            result += self.machine.write_document_begins()
+            result += shared.machine.write_document_header()
+            result += shared.machine.write_document_begins()
             result += self.sheet_header_to_str()
             result += self.sheet_title_to_str()
             result += self.sheet_text_to_str()
             result += self.texts_to_str('exc', 0)
-            result += self.machine.write_jump_to_next_page()
+            result += shared.machine.write_jump_to_next_page()
             result += self.answers_title_to_str()
             result += self.texts_to_str('ans', 0)
-            result += self.machine.write_document_ends()
+            result += shared.machine.write_document_ends()
 
         else:
             raise error.OutOfRangeArgument(self.layout_type,
@@ -400,7 +400,7 @@ class S_Structure(object):
     ##
     #   @brief Return as str exercises' or answers'texts
     def texts_to_str(self, ex_or_answers, n_of_first_ex):
-        M = self.machine
+        M = shared.machine
 
         result = ""
 
@@ -476,9 +476,9 @@ class S_Structure(object):
     def sheet_header_to_str(self):
         result = ""
         if self.header != "":
-            result += self.machine.write_set_font_size_to('large')
+            result += shared.machine.write_set_font_size_to('large')
             result += self.header
-            result += self.machine.write_new_line()
+            result += shared.machine.write_new_line()
 
         return result
 
@@ -490,13 +490,13 @@ class S_Structure(object):
     #   @brief Writes to the output the title of the sheet to be generated
     def sheet_title_to_str(self):
         result = ""
-        result += self.machine.write_set_font_size_to('large')
-        result += self.machine.write(self.title, emphasize='bold')
+        result += shared.machine.write_set_font_size_to('large')
+        result += shared.machine.write(self.title, emphasize='bold')
         if self.subtitle != "":
-            result += self.machine.write_new_line()
-            result += self.machine.write_set_font_size_to('normal')
-            result += self.machine.write(self.subtitle, emphasize='bold')
-        result += self.machine.write_new_line_twice()
+            result += shared.machine.write_new_line()
+            result += shared.machine.write_set_font_size_to('normal')
+            result += shared.machine.write(self.subtitle, emphasize='bold')
+        result += shared.machine.write_new_line_twice()
 
         return result
 
@@ -510,8 +510,8 @@ class S_Structure(object):
     def sheet_text_to_str(self):
         result = ""
         if self.text != "":
-            result += self.machine.write(self.text)
-            result += self.machine.write_new_line_twice()
+            result += shared.machine.write(self.text)
+            result += shared.machine.write_new_line_twice()
 
         return result
 
@@ -526,38 +526,9 @@ class S_Structure(object):
     def answers_title_to_str(self):
         result = ""
 
-        result += self.machine.write_set_font_size_to('Large')
-        result += self.machine.write(self.answers_title, emphasize='bold')
-        result += self.machine.write_new_line_twice()
+        result += shared.machine.write_set_font_size_to('Large')
+        result += shared.machine.write(self.answers_title, emphasize='bold')
+        result += shared.machine.write_new_line_twice()
 
         return result
 
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Writes to the output all exercises' texts
-    #def write_texts(self):
-    #    self.machine.reset_exercises_counter()
-    #    self.machine.write_set_font_size_to('large')
-    #    for e in self.exercises_list:
-    #        self.machine.write_exercise_number()
-    #        e.write_text()
-    #        self.machine.write_new_line()
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Writes to the output all exercises' answers
-    #def write_answers(self):
-    #    self.machine.reset_exercises_counter()
-    #    self.machine.write_set_font_size_to('large')
-    #    for e in self.exercises_list:
-    #        self.machine.write_exercise_number()
-    #        e.write_answer()
-    #        self.machine.write_new_line()

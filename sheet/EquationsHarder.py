@@ -53,12 +53,11 @@ class EquationsHarder(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.EquationsHarder
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE)
 
@@ -69,11 +68,11 @@ class EquationsHarder(S_Structure):
         self.text = _("Solve the following equations")
         self.answers_title = _("Examples of answers")
 
-        ex1 = exercise.X_Equation(self.machine,
+        ex1 = exercise.X_Equation(
                                   x_kind='preformatted',
                                   x_subkind='classic_xtwice_and_any')
 
-        ex2 = exercise.X_Equation(self.machine,
+        ex2 = exercise.X_Equation(
                                   x_kind='bypass',
                                   x_subkind='any_simple_expandable',
                                   number_of_questions=6)

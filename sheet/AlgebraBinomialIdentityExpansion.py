@@ -22,7 +22,7 @@
 
 import machine
 from . import exercise
-
+from lib import shared
 from lib.common import cst
 from .S_Structure import S_Structure
 
@@ -53,12 +53,11 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.Model
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE)
 
@@ -70,7 +69,7 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
         self.answers_title = _("Examples of answers")
 
         # ex1
-        ex1 = exercise.X_AlgebraExpressionExpansion(self.machine,
+        ex1 = exercise.X_AlgebraExpressionExpansion(
                                                   x_kind='bypass',
                                                   x_subkind='sum_square',
                                                   number_of_questions=5
@@ -80,7 +79,7 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
 
 
         # ex2
-        ex2 = exercise.X_AlgebraExpressionExpansion(self.machine,
+        ex2 = exercise.X_AlgebraExpressionExpansion(
                                                   x_kind='bypass',
                                                   x_subkind='difference_square',
                                                   number_of_questions=5
@@ -89,7 +88,7 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
         self.exercises_list.append(ex2)
 
         # ex3
-        ex3 = exercise.X_AlgebraExpressionExpansion(self.machine,
+        ex3 = exercise.X_AlgebraExpressionExpansion(
                                                   x_kind='bypass',
                                                   x_subkind='squares_difference',
                                                   number_of_questions=5
@@ -98,7 +97,7 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
         self.exercises_list.append(ex3)
 
         # ex4
-        ex4 = exercise.X_AlgebraExpressionExpansion(self.machine,
+        ex4 = exercise.X_AlgebraExpressionExpansion(
                                                   x_kind='bypass',
                                                   x_subkind='any_binomial',
                                                   number_of_questions=5
@@ -114,37 +113,32 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
     ##
     #   @brief Writes to the output all exercises' answers
     def write_answers(self):
-        self.machine.reset_exercises_counter()
-        self.machine.write_set_font_size_to('large')
+        shared.machine.reset_exercises_counter()
+        shared.machine.write_set_font_size_to('large')
 
-        #for e in self.exercises_list:
-        #    self.machine.write_exercise_number()
-        #    e.write_answer()
-        #    self.machine.write_new_line()
+        shared.machine.write_tabular_begins("p{9 cm} p{9 cm}")
 
-        self.machine.write_tabular_begins("p{9 cm} p{9 cm}")
-
-        self.machine.write_exercise_number()
+        shared.machine.write_exercise_number()
         self.exercises_list[0].write_answer()
 
-        self.machine.write_separator_tabular_columns()
+        shared.machine.write_separator_tabular_columns()
 
-        self.machine.write_exercise_number()
+        shared.machine.write_exercise_number()
         self.exercises_list[1].write_answer()
 
-        self.machine.write_tabular_ends()
+        shared.machine.write_tabular_ends()
 
-        self.machine.write_tabular_begins("p{9 cm} p{9 cm}")
+        shared.machine.write_tabular_begins("p{9 cm} p{9 cm}")
 
-        self.machine.write_exercise_number()
+        shared.machine.write_exercise_number()
         self.exercises_list[2].write_answer()
 
-        self.machine.write_separator_tabular_columns()
+        shared.machine.write_separator_tabular_columns()
 
-        self.machine.write_exercise_number()
+        shared.machine.write_exercise_number()
         self.exercises_list[3].write_answer()
 
-        self.machine.write_tabular_ends()
+        shared.machine.write_tabular_ends()
 
 
     # END ---------------------------------------------------------------------

@@ -50,12 +50,11 @@ class AlgebraFactorization_02(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.Model
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE)
 
@@ -66,17 +65,17 @@ class AlgebraFactorization_02(S_Structure):
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-        #ex0 = exercise.Factorization(self.machine,
+        #ex0 = exercise.Factorization(
         #                             x_kind='level_02',
         #                             subkind = 'default')
         #self.exercises_list.append(ex0)
 
-        ex1 = exercise.X_Factorization(self.machine,
+        ex1 = exercise.X_Factorization(
                                        x_kind='preformatted',
                                        x_subkind='level_02_easy')
         self.exercises_list.append(ex1)
 
-        ex2 = exercise.X_Factorization(self.machine,
+        ex2 = exercise.X_Factorization(
                                        x_kind='preformatted',
                                        x_subkind='level_02_intermediate')
         self.exercises_list.append(ex2)

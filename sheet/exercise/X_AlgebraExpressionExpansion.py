@@ -71,7 +71,6 @@ class X_AlgebraExpressionExpansion(X_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param embedded_machine The machine that will be used to write output.
     #   @param **options Options detailed below:
     #          - start_number=<integer>
     #                         (should be >= 1)
@@ -99,9 +98,9 @@ class X_AlgebraExpressionExpansion(X_Structure):
     #                         ...
     #                         ...
     #   @return One instance of exercise.AlgebraExpressionExpansion
-    def __init__(self, embedded_machine, x_kind = 'default_nothing', **options):
+    def __init__(self, x_kind = 'default_nothing', **options):
         self.derived = True
-        X_Structure.__init__(self, embedded_machine,
+        X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                              X_LAYOUT_UNIT, **options)
         # The purpose of this next line is to get the possibly modified
@@ -125,8 +124,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
         # PREFORMATTED EXERCISES
         if self.x_kind == 'short_test':
             if self.x_subkind == 'sign_expansion':
-                q = default_question(self.machine,
-                                     q_kind='sign_expansion_short_test',
+                q = default_question(q_kind='sign_expansion_short_test',
                                      expression_number=self.start_number,
                                      **options)
 
@@ -134,22 +132,19 @@ class X_AlgebraExpressionExpansion(X_Structure):
 
             elif self.x_subkind == 'medium_level':
 
-                q = default_question(self.machine,
-                                     q_kind='monom01_polyn1',
+                q = default_question(q_kind='monom01_polyn1',
                                      expression_number=self.start_number,
                                      **options)
 
                 self.questions_list.append(q)
 
-                q = default_question(self.machine,
-                                     q_kind='polyn1_polyn1',
+                q = default_question(q_kind='polyn1_polyn1',
                                      expression_number=self.start_number,
                                      **options)
 
                 self.questions_list.append(q)
 
-                q = default_question(self.machine,
-                                     q_kind='sum_of_any_basic_expd',
+                q = default_question(q_kind='sum_of_any_basic_expd',
                                      expression_number=self.start_number,
                                      **options)
 
@@ -164,8 +159,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
                               'squares_difference']
 
                 for i in range(3):
-                    q = default_question(self.machine,
-                                         q_kind=randomly.pop(kinds_list),
+                    q = default_question(q_kind=randomly.pop(kinds_list),
                                          expression_number=i,
                                          **options)
                     self.questions_list.append(q)
@@ -207,15 +201,13 @@ class X_AlgebraExpressionExpansion(X_Structure):
 
                 for i in range(3):
                     if squares_differences_option[i] == 1:
-                        q = default_question(self.machine,
-                                             q_kind=ordered_kinds_list[i],
+                        q = default_question(q_kind=ordered_kinds_list[i],
                                              couple=monomials_to_use[i],
                                              squares_difference='yes',
                                              expression_number=i,
                                              **options)
                     else:
-                        q = default_question(self.machine,
-                                             q_kind=ordered_kinds_list[i],
+                        q = default_question(q_kind=ordered_kinds_list[i],
                                              couple=monomials_to_use[i],
                                              expression_number=i,
                                              **options)
@@ -225,27 +217,22 @@ class X_AlgebraExpressionExpansion(X_Structure):
 
             else: # default short_test option
                 if randomly.heads_or_tails():
-                    q1=default_question(self.machine,
-                                        q_kind='monom0_polyn1',
+                    q1=default_question(q_kind='monom0_polyn1',
                                         expression_number=0+self.start_number)
 
-                    q2=default_question(self.machine,
-                                        q_kind='monom1_polyn1',
+                    q2=default_question(q_kind='monom1_polyn1',
                                         expression_number=1+self.start_number,
                                         reversed='OK')
 
                 else:
-                    q1=default_question(self.machine,
-                                        q_kind='monom0_polyn1',
+                    q1=default_question(q_kind='monom0_polyn1',
                                         reversed='OK',
                                         expression_number=0+self.start_number)
 
-                    q2=default_question(self.machine,
-                                        q_kind='monom1_polyn1',
+                    q2=default_question(q_kind='monom1_polyn1',
                                         expression_number=1+self.start_number)
 
-                q3=default_question(self.machine,
-                                    q_kind='polyn1_polyn1',
+                q3=default_question(q_kind='polyn1_polyn1',
                                     expression_number=2+self.start_number)
 
                 self.questions_list.append(q1)
@@ -255,22 +242,18 @@ class X_AlgebraExpressionExpansion(X_Structure):
         elif self.x_kind == 'mini_test':
             if self.x_subkind == 'two_expansions_hard':
                 if randomly.heads_or_tails():
-                    q1=default_question(self.machine,
-                                        q_kind='sum_of_any_basic_expd',
+                    q1=default_question(q_kind='sum_of_any_basic_expd',
                                         q_subkind='harder',
                                         expression_number=0+self.start_number)
 
-                    q2=default_question(self.machine,
-                                        q_kind='sum_of_any_basic_expd',
+                    q2=default_question(q_kind='sum_of_any_basic_expd',
                                         q_subkind='with_a_binomial',
                                         expression_number=1+self.start_number)
                 else:
-                    q1=default_question(self.machine,
-                                        q_kind='sum_of_any_basic_expd',
+                    q1=default_question(q_kind='sum_of_any_basic_expd',
                                         q_subkind='with_a_binomial',
                                         expression_number=0+self.start_number)
-                    q2=default_question(self.machine,
-                                        q_kind='sum_of_any_basic_expd',
+                    q2=default_question(q_kind='sum_of_any_basic_expd',
                                         q_subkind='harder',
                                         expression_number=1+self.start_number)
 
@@ -279,30 +262,26 @@ class X_AlgebraExpressionExpansion(X_Structure):
 
             elif self.x_subkind == 'two_randomly':
                 if randomly.heads_or_tails():
-                    q = default_question(self.machine,
-                                         q_kind='sign_expansion_short_test',
+                    q = default_question(q_kind='sign_expansion_short_test',
                                          expression_number=self.start_number,
                                          **options)
 
                     self.questions_list.append(q)
 
-                    q = default_question(self.machine,
-                                         q_kind='polyn1_polyn1',
+                    q = default_question(q_kind='polyn1_polyn1',
                                          expression_number=self.start_number+1,
                                          **options)
 
                     self.questions_list.append(q)
 
                 else:
-                    q = default_question(self.machine,
-                                         q_kind='monom01_polyn1',
+                    q = default_question(q_kind='monom01_polyn1',
                                          expression_number=self.start_number,
                                          **options)
 
                     self.questions_list.append(q)
 
-                    q = default_question(self.machine,
-                                         q_kind='sum_of_any_basic_expd',
+                    q = default_question(q_kind='sum_of_any_basic_expd',
                                          q_subkind='easy',
                                          expression_number=self.start_number+1,
                                          **options)
@@ -342,13 +321,13 @@ class X_AlgebraExpressionExpansion(X_Structure):
                 for i in range(temp_nb):
                     choice = randomly.pop(choices_list)
                     if choice == 'monom0_polyn1':
-                        q=default_question(self.machine,
+                        q=default_question(
                                          q_kind='monom0_polyn1',
                                          expression_number=i+self.start_number,
                                          **options)
                         self.questions_list.append(q)
                     else:
-                        q=default_question(self.machine,
+                        q=default_question(
                                          q_kind='monom1_polyn1',
                                          expression_number=i+self.start_number,
                                          **options)
@@ -359,46 +338,8 @@ class X_AlgebraExpressionExpansion(X_Structure):
         # OTHER EXERCISES
         else:
             for i in range(self.q_nb):
-                q=default_question(self.machine,
-                                   q_kind=self.x_subkind,
+                q=default_question(q_kind=self.x_subkind,
                                    expression_number=i+self.start_number,
                                    **options)
                 self.questions_list.append(q)
-
-
-
-
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Writes the answers of the questions to the output.
-    #def write_answer(self):
-    #    M = self.machine
-
-    #    if self.answers_text != "":
-    #        M.write(self.answers_text)
-    #        M.write_new_line()
-
-    #    if self.x_subkind == 'three_numeric_binomials':
-    #        M.write_tabular_begins("p{5.5 cm} p{5.5 cm}")
-    #        self.questions_list[0].write_answer()
-    #        M.write_new_line()
-    #        self.questions_list[1].write_answer()
-
-    #        M.write_separator_tabular_columns()
-
-    #        self.questions_list[2].write_answer()
-
-    #        M.write_tabular_ends()
-
-    #    else: # same as in the matching structure file
-    #        for i in xrange(len(self.questions_list)):
-    #            self.questions_list[i].write_answer()
-    #            M.write_new_line()
-
-    #    M.write_new_line()
-
-
-
-
 

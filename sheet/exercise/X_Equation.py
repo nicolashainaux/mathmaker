@@ -126,7 +126,6 @@ class X_Equation(X_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param embedded_machine The machine that will be used to write output.
     #   @param **options Options detailed below:
     #          - start_number=<integer>
     #                         (should be >= 1)
@@ -150,9 +149,9 @@ class X_Equation(X_Structure):
     #                         'OK'
     #                         any other value will be understood as 'no'
     #   @return One instance of exercise.Model
-    def __init__(self, embedded_machine, x_kind='default_nothing', **options):
+    def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
-        X_Structure.__init__(self, embedded_machine,
+        X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                              X_LAYOUT_UNIT, **options)
         # The purpose of this next line is to get the possibly modified
@@ -183,38 +182,32 @@ class X_Equation(X_Structure):
         if self.x_kind == 'short_test':
             if self.x_subkind == 'basic':
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='basic_addition',
                                            expression_number=0
                                                             )
                                            )
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='basic_addition_r',
                                            expression_number=1
                                                             )
                                            )
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='basic_multiplication',
                                            expression_number=2
                                                             )
                                            )
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='basic_multiplication_r',
                                            expression_number=3
                                                             )
                                            )
             elif self.x_subkind == 'classic':
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='classic',
                                            expression_number=4
                                                             )
                                            )
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='classic_r',
                                            expression_number=5
                                                             )
@@ -223,25 +216,21 @@ class X_Equation(X_Structure):
             elif self.x_subkind == 'classic_harder':
             #___
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='classic',
                                            expression_number=4
                                                             )
                                            )
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='classic_r',
                                            expression_number=5
                                                             )
                                            )
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='classic_x_twice',
                                            expression_number=6
                                                             )
                                            )
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='classic_with_fractions',
                                            expression_number=7
                                                             )
@@ -249,13 +238,11 @@ class X_Equation(X_Structure):
 
             elif self.x_subkind == 'harder':
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='classic_x_twice',
                                            expression_number=6
                                                             )
                                            )
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='any_simple_expandable',
                                            expression_number=7
                                                             )
@@ -264,13 +251,11 @@ class X_Equation(X_Structure):
             elif self.x_subkind == 'harder_harder':
                 #self.number_of_equations_per_column = 1
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='any_simple_expandable',
                                            expression_number=8
                                                             )
                                            )
                 self.questions_list.append(default_question(
-                                           self.machine,
                                            q_kind='any_double_expandable',
                                            expression_number=9
                                                             )
@@ -281,21 +266,18 @@ class X_Equation(X_Structure):
                 #self.number_of_equations_per_column = 3
                 for i in range(3):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='basic_addition',
                                                expression_number=i
                                                                 )
                                                )
                 for i in range(2):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='basic_addition_r',
                                                expression_number=i+3
                                                                 )
                                                )
                 for i in range(4):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='any_basic_addition',
                                                expression_number=i+5
                                                                 )
@@ -304,7 +286,6 @@ class X_Equation(X_Structure):
                 #self.number_of_equations_per_column = 3
                 for i in range(9):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='any_basic',
                                                expression_number=i
                                                                 )
@@ -314,37 +295,32 @@ class X_Equation(X_Structure):
                 #self.number_of_equations_per_column = 3
                 for i in range(4):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='basic_multiplication',
                                                expression_number=i
                                                                 )
                                                )
                 for i in range(2):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='basic_multiplication_r',
                                                expression_number=i+3
                                                                 )
                                                )
                 for i in range(3):
                     self.questions_list.append(default_question(
-                                               self.machine,
-                                               q_kind='any_basic_multiplication',
-                                               expression_number=i+5
+                                             q_kind='any_basic_multiplication',
+                                             expression_number=i+5
                                                                 )
                                                )
 
             elif self.x_subkind == 'classics':
                 for i in range(3):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='classic',
                                                expression_number=i
                                                                 )
                                                )
                 for i in range(3):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='classic_r',
                                                expression_number=i+3
                                                                 )
@@ -353,14 +329,12 @@ class X_Equation(X_Structure):
             elif self.x_subkind == 'classic_xtwice_and_any':
                 for i in range(3):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='classic_x_twice',
                                                expression_number=i
                                                                 )
                                                )
                 for i in range(3):
                     self.questions_list.append(default_question(
-                                               self.machine,
                                                q_kind='any_classic',
                                                expression_number=i+3
                                                                 )
@@ -373,7 +347,7 @@ class X_Equation(X_Structure):
         else:
             for i in range(self.q_nb):
                 self.questions_list.append(                                   \
-                             default_question(self.machine,
+                             default_question(
                                         q_kind=self.x_subkind,
                                         expression_number=i+self.start_number,
                                         **options)

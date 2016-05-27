@@ -50,12 +50,11 @@ class AlgebraFactorization_03(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.AlgebraFactorization_03
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE)
 
@@ -66,22 +65,22 @@ class AlgebraFactorization_03(S_Structure):
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-        ex1 = exercise.X_Factorization(self.machine,
+        ex1 = exercise.X_Factorization(
                                        x_kind='preformatted',
                                        x_subkind='level_03_sum_squares')
         self.exercises_list.append(ex1)
 
-        ex2 = exercise.X_Factorization(self.machine,
+        ex2 = exercise.X_Factorization(
                                        x_kind='preformatted',
                                        x_subkind='level_03_difference_squares')
         self.exercises_list.append(ex2)
 
-        ex3 = exercise.X_Factorization(self.machine,
+        ex3 = exercise.X_Factorization(
                                        x_kind='preformatted',
                                        x_subkind='level_03_squares_differences')
         self.exercises_list.append(ex3)
 
-        ex4 = exercise.X_Factorization(self.machine,
+        ex4 = exercise.X_Factorization(
                                     x_kind='preformatted',
                                     x_subkind='level_03_some_not_factorizable')
         self.exercises_list.append(ex4)

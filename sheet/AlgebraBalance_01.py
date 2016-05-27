@@ -50,12 +50,11 @@ class AlgebraBalance_01(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.AlgebraBalance_01
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE)
 
@@ -67,23 +66,23 @@ class AlgebraBalance_01(S_Structure):
         self.answers_title = _("Examples of answers")
 
         # Exercises list:
-        ex1 = exercise.X_AlgebraExpressionReduction(self.machine,
+        ex1 = exercise.X_AlgebraExpressionReduction(
                                                   x_kind='short_test',
                                                   x_subkind='easy')
 
-        ex2 = exercise.X_AlgebraExpressionExpansion(self.machine,
+        ex2 = exercise.X_AlgebraExpressionExpansion(
                                                   x_kind='bypass',
                                                   x_subkind='sign_expansion',
                                                   number_of_questions=4,
                                                   start_number=3)
 
-        ex3 = exercise.X_AlgebraExpressionExpansion(self.machine,
+        ex3 = exercise.X_AlgebraExpressionExpansion(
                                                   x_kind='bypass',
                                                   x_subkind='any_basic_expd',
                                                   number_of_questions=5,
                                                   start_number=7)
 
-        ex4 = exercise.X_AlgebraExpressionExpansion(self.machine,
+        ex4 = exercise.X_AlgebraExpressionExpansion(
                                                   x_kind='bypass',
                                             x_subkind='sum_of_any_basic_expd',
                                                   number_of_questions=3,

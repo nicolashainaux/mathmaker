@@ -45,10 +45,9 @@ class S_Generic(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.Generic
-    def __init__(self, embedded_machine, filename, **options):
+    def __init__(self, filename, **options):
         self.derived = True
 
         (header,
@@ -61,7 +60,7 @@ class S_Generic(S_Structure):
          sheet_layout_unit,
          sheet_layout) = get_sheet_config(filename)
 
-        S_Structure.__init__(self, embedded_machine, font_size_offset,
+        S_Structure.__init__(self, font_size_offset,
                              sheet_layout_unit, sheet_layout,
                              sheet_layout_type, **options)
 
@@ -72,6 +71,6 @@ class S_Generic(S_Structure):
         self.answers_title = _(answers_title) if answers_title != "" else ""
 
         for ex in get_exercises_list(filename):
-            self.exercises_list.append(ex(self.machine,
+            self.exercises_list.append(ex(
                                           filename=filename,
                                           **options))

@@ -51,12 +51,11 @@ class AlgebraMiniTest0(S_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param embedded_machine The machine to be used
     #   @param **options Any options
     #   @return One instance of sheet.Model
-    def __init__(self, embedded_machine, **options):
+    def __init__(self, **options):
         self.derived = True
-        S_Structure.__init__(self, embedded_machine, FONT_SIZE_OFFSET,
+        S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
                              SHEET_LAYOUT_TYPE)
 
@@ -69,11 +68,11 @@ class AlgebraMiniTest0(S_Structure):
         self.answers_title = _("Examples of answers")
 
         # For instance:
-        # ex1 = exercise.ProductReduction(self.machine, many=30)
+        # ex1 = exercise.ProductReduction(many=30)
         # self.exercises_list.append(ex1)
 
         for i in range(10):
-            ex1 = exercise.X_AlgebraExpressionExpansion(self.machine,
+            ex1 = exercise.X_AlgebraExpressionExpansion(
                                                     x_kind='mini_test',
                                                     x_subkind='two_randomly')
 
@@ -94,6 +93,6 @@ class AlgebraMiniTest0(S_Structure):
         #   the @return line
         # - Skip to the zone to rewrite and for each exercise, follow the
         #   example (i.e. write on two lines:
-        #   - ex_number_n = exercise.ThmPythagore(self.machine, options...)
+        #   - ex_number_n = exercise.ThmPythagore(options...)
         #   - self.exercises_list.append(ex_number_n)
         #   and so on with ex<n+1>, ex<n+2> as many as desired)

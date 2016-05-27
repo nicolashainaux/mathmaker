@@ -62,7 +62,6 @@ class X_RightTriangle(X_Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
-    #   @param embedded_machine The machine that will be used to write output.
     #          - x_kind=<string>
     #                         see AVAILABLE_X_KIND_VALUES to check the
     #                         possible values to use and their matching
@@ -77,9 +76,9 @@ class X_RightTriangle(X_Structure):
     #            /!\ probably only useful if you use bypass
     #                         (should be >= 1)
     #   @return One instance of exercise.X_RightTriangle
-    def __init__(self, embedded_machine, x_kind='default_nothing', **options):
+    def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
-        X_Structure.__init__(self, embedded_machine,
+        X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                              X_LAYOUT_UNIT, **options)
         # The purpose of this next line is to get the possibly modified
@@ -124,7 +123,6 @@ class X_RightTriangle(X_Structure):
                 if randomly.heads_or_tails():
 
                     self.questions_list.append(default_question(
-                                              self.machine,
                                               q_kind='pythagorean_theorem',
                                               q_subkind=randomly.pop(q_subkinds),
                                               use_pythagorean_triples=True,
@@ -140,7 +138,6 @@ class X_RightTriangle(X_Structure):
                                                )
 
                     self.questions_list.append(default_question(
-                                              self.machine,
                                               q_kind='pythagorean_theorem',
                                               q_subkind=randomly.pop(q_subkinds),
                                               use_pythagorean_triples=False,
@@ -158,7 +155,6 @@ class X_RightTriangle(X_Structure):
                 else:
 
                     self.questions_list.append(default_question(
-                                              self.machine,
                                               q_kind='pythagorean_theorem',
                                               q_subkind=randomly.pop(q_subkinds),
                                               use_pythagorean_triples=False,
@@ -175,7 +171,6 @@ class X_RightTriangle(X_Structure):
                                                )
 
                     self.questions_list.append(default_question(
-                                              self.machine,
                                               q_kind='pythagorean_theorem',
                                               q_subkind=randomly.pop(q_subkinds),
                                               use_pythagorean_triples=True,
@@ -192,16 +187,15 @@ class X_RightTriangle(X_Structure):
             elif self.x_subkind == 'converse_of_pythagorean_theorem':
 
                 self.questions_list.append(default_question(
-                                          self.machine,
-                                          q_kind='converse_of_pythagorean_theorem',
-                                          q_subkind='default',
-                                          use_pythagorean_triples=True,
-#                                          use_decimals=randomly.heads_or_tails(),
-                                          final_unit=randomly.pop(units),
-                                          figure_in_the_text='no',
-                                          rotate_around_barycenter=\
-                 randomly.pop(angles) + random_signs[0]*randomly.integer(0,
-                                                                         20),
+                                      q_kind='converse_of_pythagorean_theorem',
+                                      q_subkind='default',
+                                      use_pythagorean_triples=True,
+#                                     use_decimals=randomly.heads_or_tails(),
+                                      final_unit=randomly.pop(units),
+                                      figure_in_the_text='no',
+                                      rotate_around_barycenter=\
+             randomly.pop(angles) + random_signs[0]*randomly.integer(0,
+                                                                     20),
                                           **options
 
                                                            )
@@ -210,49 +204,16 @@ class X_RightTriangle(X_Structure):
             elif self.x_subkind == 'contrapositive_of_pythagorean_theorem':
 
                 self.questions_list.append(default_question(
-                                          self.machine,
-                                          q_kind='contrapositive_of_pythagorean_theorem',
-                                          q_subkind='default',
-#                                          use_decimals=randomly.heads_or_tails(),
-                                          final_unit=randomly.pop(units),
-                                          figure_in_the_text='no',
-                                          rotate_around_barycenter=\
-                 randomly.pop(angles) + random_signs[0]*randomly.integer(0,
-                                                                         20),
+                          q_kind='contrapositive_of_pythagorean_theorem',
+                          q_subkind='default',
+#                         use_decimals=randomly.heads_or_tails(),
+                          final_unit=randomly.pop(units),
+                          figure_in_the_text='no',
+                          rotate_around_barycenter=\
+ randomly.pop(angles) + random_signs[0]*randomly.integer(0,
+                                                         20),
                                           **options
 
                                                            )
                                            )
 
-
-
-        #elif self.x_kind == 'preformatted':
-        #    if self.x_subkind == '...':
-                #self.questions_list.append(default_question(
-                #                           self.machine,
-                #
-                # etc.
-
-
-        # OTHER EXERCISES (BYPASS OPTION !)
-        #else:
-         #   for i in xrange(self.q_nb):
-         #       self.questions_list.append(
-         #                    default_question(self.machine,
-         #                              q_kind=self.x_subkind,
-         #                               expression_number=i+self.start_number,
-         #                               **options)
-         #                                 )
-
-        # END OF THE ZONE TO REWRITE ------------------------------------------
-
-
-
-
-    # INSTRUCTIONS TO CREATE A NEW EXERCISE -----------------------------------
-    #   * PREFORMATTED EXERCISES
-    #       that's where preformatted exercises are described (the ones that
-    #       won't repeat n times the same kind of randomly question)
-    #   * OTHER EXERCISES section is meant to all exercises that repeat
-    #       the same (maybe randomly chosen among many) kind of question.
-    #       shouldn't be rewritten

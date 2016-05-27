@@ -47,8 +47,6 @@ class Q_Structure(object):
         except AttributeError:
             raise error.NotInstanciableObject(self)
 
-        self.machine = shared.machine.clone(shared.machine.language_code)
-
         # OPTIONS -------------------------------------------------------------
         # It is necessary to define an options field to pass the
         # possibly modified value to the child class
@@ -86,7 +84,7 @@ class Q_Structure(object):
 
         if self.number != "":
             self.displayable_number = \
-                self.machine.write(str(self.number) + ". ", emphasize='bold')
+                shared.machine.write(str(self.number) + ". ", emphasize='bold')
 
         q_subkind = 'default'
         if 'q_subkind' in options:
