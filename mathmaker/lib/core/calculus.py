@@ -25,7 +25,6 @@ import decimal
 
 import settings
 from lib import *
-from lib import translator
 from .base import *
 from .base_calculus import *
 from lib.maths_lib import *
@@ -2049,12 +2048,12 @@ class Table(Printable):
                     content += [self.cell[i][j]\
                                         .into_str(force_expression_begins=True)]
 
-            result = translator\
-                    .create_table((2, len(self)),
-                                   content,
-                                   col_fmt=['c' for i in range(len(self))],
-                                   borders='all'
-                                 )
+            from lib.shared import machine
+            result = shared.machine\
+                     .create_table((2, len(self)),
+                                    content,
+                                    col_fmt=['c' for i in range(len(self))],
+                                    borders='all')
 
 
         return result

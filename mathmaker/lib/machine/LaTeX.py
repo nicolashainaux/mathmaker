@@ -29,6 +29,8 @@ from lib.common import latex
 from lib import generate_header_comment
 from lib.common.cst import *
 
+from lib import is_
+from lib.common.latex import MARKUP
 from lib.core.base import *
 from lib.core.base_calculus import *
 from lib import *
@@ -420,18 +422,134 @@ exercises counter (which is useful when begining to write the answers sheet)")\
     #   @options: unit='inch' etc. (check the possibilities...)
     def write_layout(self, size, col_widths, content, **options):
         if self.redirect_output_to_str:
-            return translator.create_table(size,
-                                           content,
-                                           col_fmt=col_widths,
-                                           **options)
+            return self.create_table(size,
+                                     content,
+                                     col_fmt=col_widths,
+                                     **options)
         else:
-            self.out.write(translator.create_table(size,
-                                                   content,
-                                                   col_fmt=col_widths,
-                                                   **options))
+            self.out.write(self.create_table(size,
+                                             content,
+                                             col_fmt=col_widths,
+                                             **options))
 
 
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Writes a table filled with the given [strings]
+    #   @param size: (nb of lines, nb of columns)
+    #   @param chosen_markup
+    #   @param content: [strings]
+    #   @options col_fmt: [int|<'l'|'c'|'r'>]
+    #   @options: borders='all'|'v_internal'
+    #   @options: unit='inch' etc. (check the possibilities...)
+    #   @return
+    def create_table(self, size, content, **options):
+        n_col = size[1]
+        n_lin = size[0]
+        result = ""
 
+        length_unit = 'cm'
+        if 'unit' in options:
+            length_unit = options['unit']
+
+        tabular_format = ""
+        v_border = ""
+        h_border = ""
+        justify = ["" for _ in range(n_col)]
+        new_line_sep = "\\\\" + "\n"
+        min_row_height = ""
+
+        # The last column is not centered vertically (LaTeX bug?)
+        # As a workaround it's possible to add an extra empty column...
+        extra_last_column = ""
+        extra_col_sep = ""
+
+        if 'justify' in options and type(options['justify']) == list:
+            if not len(options['justify']) == n_col:
+                raise ValueError("The number of elements of this list should "\
+                                 "be equal to the number of columns of the "\
+                                 "tabular.")
+            new_line_sep = "\\tabularnewline" + "\n"
+            extra_last_column = "@{}m{0pt}@{}"
+            extra_col_sep = " & "
+            justify = []
+            for i in range(n_col):
+                if options['justify'][i] == 'center':
+                    justify.append(">{\centering}")
+                elif options['justify'][i] == 'left':
+                    justify.append(">{}")
+                else:
+                    raise ValueError("Expecting 'left' or 'center' as values "\
+                                     "of this list.")
+
+        elif 'center' in options:
+            new_line_sep = "\\tabularnewline" + "\n"
+            extra_last_column = "@{}m{0pt}@{}"
+            extra_col_sep = " & "
+            justify = [">{\centering}" for _ in range(n_col)]
+
+        if 'min_row_height' in options:
+            min_row_height = " [" \
+                           + str(options['min_row_height']) + length_unit \
+                           + "] "
+
+        cell_fmt = "p{"
+
+        if 'center_vertically' in options:
+            cell_fmt = "m{"
+
+        if 'borders' in options and options['borders'] in ['all',
+                                                           'v_internal',
+                                                           'penultimate']:
+            v_border = "|"
+            h_border = "\\hline \n"
+
+        col_fmt = ['c' for i in range(n_col)]
+
+        if 'col_fmt' in options and type(options['col_fmt']) == list \
+            and len(options['col_fmt']) == n_col:
+        #___
+            for i in range(len(col_fmt)):
+                col_fmt[i] = options['col_fmt'][i]
+
+        for i in range(len(col_fmt)):
+            t = col_fmt[i]
+            if is_.a_number(col_fmt[i]):
+                t = cell_fmt + str(col_fmt[i]) + " " + str(length_unit) + "}"
+
+            vb = v_border
+            if 'borders' in options and options['borders'] == "penultimate":
+                if i == n_col - 1:
+                    vb = "|"
+                else:
+                    vb = ""
+
+            tabular_format += vb + justify[i] + t
+
+        if 'borders' in options and options['borders'] == "penultimate":
+            v_border = ""
+
+        tabular_format += extra_last_column + v_border
+
+        if 'borders' in options and options['borders'] in ['v_internal']:
+            tabular_format = tabular_format[1:-1]
+
+        result += "\\begin{tabular}{"+ tabular_format + "}" + "\n"
+        result += h_border
+
+        for i in range(int(n_lin)):
+            for j in range(n_col):
+                result += str(content[i*n_col + j])
+                if j != n_col - 1:
+                    result += "&" + "\n"
+            if i != n_lin - 1:
+                result += extra_col_sep + new_line_sep + min_row_height \
+                       + h_border
+
+        result += extra_col_sep + new_line_sep + min_row_height + h_border
+        result += "\end{tabular}" + "\n"
+
+        return result.replace(" $~", "$~").replace("~$~", "$~")
 
 
     # --------------------------------------------------------------------------
