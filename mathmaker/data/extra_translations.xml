@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file is only intended to provide additional strings for translation -->
+
+<nothing>
+	<word text="{software_ref} is free software. Its license is {software_license}."/>
+    <word text='Further details on {software_website}'/>
+    <word text="{software_name} {v}\nLicense: {l}\n{c} {contact}"/>
+</nothing>

@@ -37,8 +37,7 @@ from decimal import *
 from lib.common.cst import *
 from settings import config
 
-if config.MARKUP == 'latex':
-    from lib.common.latex import MARKUP
+from lib.common.latex import MARKUP
 
 try:
     locale.setlocale(locale.LC_ALL, config.LANGUAGE + '.' + config.ENCODING)

@@ -27,48 +27,69 @@ import yaml
 from shutil import copyfile
 
 from lib import flat_dict
-from lib.common import software
+from lib.tools.config_file import load_config
 
-##
-#   @brief  This filter removes the first 4 chars of the name (to avoid having
-#           all recorded messages start with "dbg.").
+
 class ContextFilter(logging.Filter):
+    """
+    Removes the 'dbg.' at the beginning of logged messages.
+    """
     def filter(self, record):
         record.name = record.name[4:]
         return True
 
 
-def config_logger():
-    debug_conf_filename = settingsdir + "debug_conf.yaml"
-    if os.path.isfile(settingsdir + "debug_conf-dev.yaml"):
-        debug_conf_filename = settingsdir + "debug_conf-dev.yaml"
-
-    with open(debug_conf_filename) as f:
-        d = flat_dict(yaml.safe_load(f))
-
-        for loggername, level in d.items():
-            l = logging.getLogger(loggername)
-            l.setLevel(getattr(logging, level))
-            l.addFilter(ContextFilter())
-            if loggername in ["dbg.db"]:
-                raw_logger = logging.getLogger("raw")
-                l.addHandler(raw_logger.handlers[0])
-                l.propagate = False
+def config_dbglogger():
+    """
+    Configures dbg_logger, using to the configuration file values.
+    """
+    d = flat_dict(load_config('debug_conf', settingsdir))
+    for loggername, level in d.items():
+        l = logging.getLogger(loggername)
+        l.setLevel(getattr(logging, level))
+        l.addFilter(ContextFilter())
+        if loggername in ['dbg.db']:
+            raw_logger = logging.getLogger('raw')
+            l.addHandler(raw_logger.handlers[0])
+            l.propagate = False
 
 
 class default_object(object):
     def __init__(self):
         self.MONOMIAL_LETTER = 'x'
         self.EQUATION_NAME = 'E'
+        self.CURRENCY = {'fr': 'euro', 'fr_FR': 'euro',
+                         'en': 'dollar', 'en_US': 'dollar',
+                         'en_GB': 'sterling'}
 
 
 class config_object(object):
     def __init__(self):
-        self.LANGUAGE = CONFIG["LOCALES"]["LANGUAGE"]
-        self.ENCODING = CONFIG["LOCALES"]["ENCODING"]
-        self.FONT = CONFIG["LATEX"]["FONT"]
-        self.CURRENCY = CONFIG["LOCALES"]["CURRENCY"]
-        self.MARKUP = CONFIG['MARKUP']['USE']
+        try:
+            dummy = CONFIG['LOCALES']
+            dummy = CONFIG['LATEX']
+        except KeyError:
+            mainlogger.error('KeyError: missing category in user_config.yaml.')
+            raise KeyError('One expected category is missing in '
+                           'user_config.yaml')
+        try:
+            self.LANGUAGE = CONFIG['LOCALES']['LANGUAGE']
+        except KeyError:
+            self.LANGUAGE = 'en'
+            mainlogger.warning('No value found for the language in '
+                               'user_config.yaml. Defaulting to english.')
+        # If there's no category/item, then the value will get the default
+        # from get()
+        # But if no value matches an category/item, the value will still
+        # be None, so we have to set it afterwards.
+        self.ENCODING = CONFIG['LOCALES'].get('ENCODING', 'UTF-8')
+        if self.ENCODING is None:
+            self.ENCODING = 'UTF-8'
+        self.CURRENCY = CONFIG['LOCALES'].get('CURRENCY',
+                                              default.CURRENCY[self.LANGUAGE])
+        if self.CURRENCY is None:
+            self.CURRENCY = default.CURRENCY[self.LANGUAGE]
+        self.FONT = CONFIG['LATEX'].get('FONT') # defaults to None in all cases
 
 
 class path_object(object):
@@ -98,22 +119,16 @@ def init():
     datadir = rootdir + "data/"
     settingsdir = rootdir + "settings/"
 
-    configfile_name = settingsdir + 'user.config'
-    CONFIG = configparser.ConfigParser()
-    CONFIG.read(configfile_name)
-    config = config_object()
-
     default = default_object()
     path = path_object()
 
-    logging_conf_filename = settingsdir + "logging.yaml"
-    if os.path.isfile(settingsdir + "logging-dev.yaml"):
-        logging_conf_filename = settingsdir + "logging-dev.yaml"
-
-    with open(logging_conf_filename) as f:
-        logging.config.dictConfig(yaml.load(f))
+    logging.config.dictConfig(load_config('logging', settingsdir))
     mainlogger = logging.getLogger("__main__")
+    mainlogger.info("Starting...")
     dbg_logger = logging.getLogger("dbg")
-    config_logger()
+    config_dbglogger()
+
+    CONFIG = load_config('user_config', settingsdir)
+    config = config_object()
 
     language = None

@@ -23,4 +23,3 @@
 from . import alphabet
 from . import cst
 #import latex
-#import software

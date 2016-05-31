@@ -37,8 +37,7 @@ from lib import *
 from lib.maths_lib import *
 from settings import config
 
-if config.MARKUP == 'latex':
-    from lib.common.latex import MARKUP
+from lib.common.latex import MARKUP
 
 try:
     locale.setlocale(locale.LC_ALL, config.LANGUAGE + '.' + config.ENCODING)
@@ -432,8 +431,8 @@ class Segment(Drawable):
     @length.setter
     def length(self, arg):
         if not isinstance(arg, Value):
-            raise ValueError('Expected a Value, got ' + str(type(arg)) + " "\
-                             'instead.')
+            raise TypeError('Expected a Value, got ' + str(type(arg)) + " "\
+                            'instead.')
         if not arg.is_numeric():
             raise error.WrongArgument('numeric Value',
                                       'a Value but not numeric, it contains ' \

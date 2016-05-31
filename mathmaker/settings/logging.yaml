@@ -2,7 +2,7 @@ version: 1
 
 # Don't modify this file.
 # If you wish to define customized logging configuration,
-# you should duplicate it as logging-dev.yaml and edit this copy instead
+# you should duplicate it as dev/logging.yaml and edit this copy instead
 # (for instance, turn debug logging on by setting dbg level to DEBUG).
 
 formatters:
@@ -42,10 +42,10 @@ handlers:
 
 loggers:
     root:
-        level: INFO
+        level: WARNING
         handlers: [nullHandler]
     __main__:
-        level: INFO
+        level: WARNING
         handlers: [mainSysLogHandler, mainStdErrHandler]
     dbg:
         # The 'INFO' level inhibits the debug messages.

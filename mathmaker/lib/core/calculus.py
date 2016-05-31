@@ -36,8 +36,7 @@ from settings import default, config
 log_equation_solve_next_step = \
 settings.dbg_logger.getChild('Equation.solve_next_step')
 
-if config.MARKUP == 'latex':
-    from lib.common.latex import MARKUP
+from lib.common.latex import MARKUP
 
 MAX_VALUE = 20
 

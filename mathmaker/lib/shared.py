@@ -55,8 +55,7 @@ def init():
                                                 ["wording_context", "wording"])
     int_pairs_source = lib.tools.db.source("int_pairs", ["id", "nb1", "nb2"])
 
-    if settings.config.MARKUP == 'latex':
-        markup = latex.MARKUP
+    markup = latex.MARKUP
 
     import lib.sources
     rank_words_source = lib.sources.sub_source('rank_words')

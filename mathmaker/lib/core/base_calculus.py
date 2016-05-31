@@ -26,19 +26,16 @@
 # @package core.base_calculus
 # @brief Mathematical elementary arithmetic and algebraic objects.
 
-from functools import cmp_to_key
-
-
 import locale
 import math
 from decimal import *
+from functools import cmp_to_key
 
 import lib.core
 import settings
 from .base import *
 from .root_calculus import *
 from lib import randomly
-#from lib import translator
 from lib.maths_lib import *
 from lib.common.cst import *
 from settings import default
@@ -83,8 +80,7 @@ log_binomial_identity_expand = settings.dbg_logger.getChild(
                                 'BinomialIdentity.expand')
 
 
-if config.MARKUP == 'latex':
-    from lib.common.latex import MARKUP
+from lib.common.latex import MARKUP
 
 try:
     locale.setlocale(locale.LC_ALL,

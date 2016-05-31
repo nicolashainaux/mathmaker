@@ -25,8 +25,7 @@ from lib import is_
 from . import error
 from settings import config
 
-if config.MARKUP == 'latex':
-    from lib.common.latex import MARKUP
+from lib.common.latex import MARKUP
 
 
 
@@ -41,117 +40,113 @@ if config.MARKUP == 'latex':
 #   @options: unit='inch' etc. (check the possibilities...)
 #   @return
 def create_table(size, content, **options):
-    if config.MARKUP == 'latex':
-        n_col = size[1]
-        n_lin = size[0]
-        result = ""
+    n_col = size[1]
+    n_lin = size[0]
+    result = ""
 
-        length_unit = 'cm'
-        if 'unit' in options:
-            length_unit = options['unit']
+    length_unit = 'cm'
+    if 'unit' in options:
+        length_unit = options['unit']
 
-        tabular_format = ""
-        v_border = ""
-        h_border = ""
-        justify = ["" for _ in range(n_col)]
-        new_line_sep = "\\\\" + "\n"
-        min_row_height = ""
+    tabular_format = ""
+    v_border = ""
+    h_border = ""
+    justify = ["" for _ in range(n_col)]
+    new_line_sep = "\\\\" + "\n"
+    min_row_height = ""
 
-        # The last column is not centered vertically (LaTeX bug?)
-        # As a workaround it's possible to add an extra empty column...
-        extra_last_column = ""
-        extra_col_sep = ""
+    # The last column is not centered vertically (LaTeX bug?)
+    # As a workaround it's possible to add an extra empty column...
+    extra_last_column = ""
+    extra_col_sep = ""
 
-        if 'justify' in options and type(options['justify']) == list:
-            if not len(options['justify']) == n_col:
-                raise ValueError("The number of elements of this list should "\
-                                 "be equal to the number of columns of the "\
-                                 "tabular.")
-            new_line_sep = "\\tabularnewline" + "\n"
-            extra_last_column = "@{}m{0pt}@{}"
-            extra_col_sep = " & "
-            justify = []
-            for i in range(n_col):
-                if options['justify'][i] == 'center':
-                    justify.append(">{\centering}")
-                elif options['justify'][i] == 'left':
-                    justify.append(">{}")
-                else:
-                    raise ValueError("Expecting 'left' or 'center' as values "\
-                                     "of this list.")
+    if 'justify' in options and type(options['justify']) == list:
+        if not len(options['justify']) == n_col:
+            raise ValueError("The number of elements of this list should "\
+                             "be equal to the number of columns of the "\
+                             "tabular.")
+        new_line_sep = "\\tabularnewline" + "\n"
+        extra_last_column = "@{}m{0pt}@{}"
+        extra_col_sep = " & "
+        justify = []
+        for i in range(n_col):
+            if options['justify'][i] == 'center':
+                justify.append(">{\centering}")
+            elif options['justify'][i] == 'left':
+                justify.append(">{}")
+            else:
+                raise ValueError("Expecting 'left' or 'center' as values "\
+                                 "of this list.")
 
-        elif 'center' in options:
-            new_line_sep = "\\tabularnewline" + "\n"
-            extra_last_column = "@{}m{0pt}@{}"
-            extra_col_sep = " & "
-            justify = [">{\centering}" for _ in range(n_col)]
+    elif 'center' in options:
+        new_line_sep = "\\tabularnewline" + "\n"
+        extra_last_column = "@{}m{0pt}@{}"
+        extra_col_sep = " & "
+        justify = [">{\centering}" for _ in range(n_col)]
 
-        if 'min_row_height' in options:
-            min_row_height = " [" \
-                           + str(options['min_row_height']) + length_unit \
-                           + "] "
+    if 'min_row_height' in options:
+        min_row_height = " [" \
+                       + str(options['min_row_height']) + length_unit \
+                       + "] "
 
-        cell_fmt = "p{"
+    cell_fmt = "p{"
 
-        if 'center_vertically' in options:
-            cell_fmt = "m{"
+    if 'center_vertically' in options:
+        cell_fmt = "m{"
 
-        if 'borders' in options and options['borders'] in ['all',
-                                                           'v_internal',
-                                                           'penultimate']:
-            v_border = "|"
-            h_border = "\\hline \n"
+    if 'borders' in options and options['borders'] in ['all',
+                                                       'v_internal',
+                                                       'penultimate']:
+        v_border = "|"
+        h_border = "\\hline \n"
 
-        col_fmt = ['c' for i in range(n_col)]
+    col_fmt = ['c' for i in range(n_col)]
 
-        #DBG
-        #error.write_warning("type(options['col_fmt']) = " + type(options['col_fmt']))
+    #DBG
+    #error.write_warning("type(options['col_fmt']) = " + type(options['col_fmt']))
 
-        if 'col_fmt' in options and type(options['col_fmt']) == list \
-            and len(options['col_fmt']) == n_col:
-        #___
-            for i in range(len(col_fmt)):
-                col_fmt[i] = options['col_fmt'][i]
-
+    if 'col_fmt' in options and type(options['col_fmt']) == list \
+        and len(options['col_fmt']) == n_col:
+    #___
         for i in range(len(col_fmt)):
-            t = col_fmt[i]
-            if is_.a_number(col_fmt[i]):
-                t = cell_fmt + str(col_fmt[i]) + " " + str(length_unit) + "}"
+            col_fmt[i] = options['col_fmt'][i]
 
-            vb = v_border
-            if 'borders' in options and options['borders'] == "penultimate":
-                if i == n_col - 1:
-                    vb = "|"
-                else:
-                    vb = ""
+    for i in range(len(col_fmt)):
+        t = col_fmt[i]
+        if is_.a_number(col_fmt[i]):
+            t = cell_fmt + str(col_fmt[i]) + " " + str(length_unit) + "}"
 
-            tabular_format += vb + justify[i] + t
-
+        vb = v_border
         if 'borders' in options and options['borders'] == "penultimate":
-            v_border = ""
+            if i == n_col - 1:
+                vb = "|"
+            else:
+                vb = ""
 
-        tabular_format += extra_last_column + v_border
+        tabular_format += vb + justify[i] + t
 
-        if 'borders' in options and options['borders'] in ['v_internal']:
-            tabular_format = tabular_format[1:-1]
+    if 'borders' in options and options['borders'] == "penultimate":
+        v_border = ""
 
-        result += "\\begin{tabular}{"+ tabular_format + "}" + "\n"
-        result += h_border
+    tabular_format += extra_last_column + v_border
 
-        for i in range(int(n_lin)):
-            for j in range(n_col):
-                result += str(content[i*n_col + j])
-                if j != n_col - 1:
-                    result += "&" + "\n"
-            if i != n_lin - 1:
-                result += extra_col_sep + new_line_sep + min_row_height \
-                       + h_border
+    if 'borders' in options and options['borders'] in ['v_internal']:
+        tabular_format = tabular_format[1:-1]
 
-        result += extra_col_sep + new_line_sep + min_row_height + h_border
-        result += "\end{tabular}" + "\n"
+    result += "\\begin{tabular}{"+ tabular_format + "}" + "\n"
+    result += h_border
 
-        return result.replace(" $~", "$~").replace("~$~", "$~")
+    for i in range(int(n_lin)):
+        for j in range(n_col):
+            result += str(content[i*n_col + j])
+            if j != n_col - 1:
+                result += "&" + "\n"
+        if i != n_lin - 1:
+            result += extra_col_sep + new_line_sep + min_row_height \
+                   + h_border
 
-    else:
-        raise error.NotImplementedYet("create_table using this markup: " \
-                                        + config.MARKUP + " ")
+    result += extra_col_sep + new_line_sep + min_row_height + h_border
+    result += "\end{tabular}" + "\n"
+
+    return result.replace(" $~", "$~").replace("~$~", "$~")
+

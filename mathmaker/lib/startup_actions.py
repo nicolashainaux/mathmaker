@@ -26,7 +26,8 @@ from distutils.version import LooseVersion
 
 import settings
 from settings import CONFIG
-from lib.common import software, latex
+from __init__ import __software_name__
+from lib.common import latex
 
 log = settings.mainlogger
 
@@ -82,7 +83,7 @@ def check_dependencies():
 #   @brief  Will install output's language (gettext functions)
 def install_gettext_translations(language=CONFIG["LOCALES"]["LANGUAGE"]):
     try:
-        gettext.translation(software.NAME,
+        gettext.translation(__software_name__,
                             settings.localedir,
                             [language]).install()
         settings.language = language
@@ -92,10 +93,10 @@ def install_gettext_translations(language=CONFIG["LOCALES"]["LANGUAGE"]):
                     + "It means the language indicated either in the command \
 line or read from the configuration file ({l}) isn't available yet \
 in {software_ref}, what will try to produce output in the language of your \
-system...".format(software_ref=software.NAME, l=language))
+system...".format(software_ref=__software_name__, l=language))
         try:
             defaultlocale = locale.getdefaultlocale()[0]
-            gettext.install(software.NAME,
+            gettext.install(__software_name__,
                             settings.localedir,
                             [defaultlocale])
             settings.language = defaultlocale
@@ -103,7 +104,7 @@ system...".format(software_ref=software.NAME, l=language))
                         "locale ({locale_name})."\
                         .format(locale_name=defaultlocale))
         except IOError as msg:
-            gettext.translation(software.NAME,
+            gettext.translation(__software_name__,
                                 settings.localedir,
                                 ['en']).install()
             settings.language = 'en'
@@ -112,7 +113,7 @@ system...".format(software_ref=software.NAME, l=language))
                         + "It means the language of your system isn't \
 available yet in {software_ref}, what will produce output in \
 english. If this results in producing an error, then your installation isn't \
-complete.".format(software_ref=software.NAME))
+complete.".format(software_ref=__software_name__))
 
 ##
 #   @brief  Will check the consistency of some settings values.

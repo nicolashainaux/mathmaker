@@ -1,6 +1,6 @@
 # Don't modify this file.
 # If you wish to define a customized debugging configuration,
-# you should duplicate it as debug_conf-dev.yaml and edit this copy instead
+# you should duplicate it as dev/debug_conf.yaml and edit this copy instead
 # (then you can turn any logger to DEBUG level instead of INFO;
 # make sure you also set dbg (and raw, if any) logger level to DEBUG too ).
 dbg:
