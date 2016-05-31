@@ -12,15 +12,15 @@ set_header () {
 
 }
 
-cd ..
-xgettext --package-name="mathmaker" --package-version="0.6" --copyright-holder="Nicolas Hainaux" --msgid-bugs-address="nh.techn@gmail.com" --keyword=_ --output=locale/mathmaker_updates.pot */*.py */*/*.py */*/*/*.py */*/*/*/*.py
+cd ../mathmaker/
+xgettext --package-name="mathmaker" --package-version="0.6" --copyright-holder="Nicolas Hainaux" --msgid-bugs-address="nh.techn@gmail.com" --keyword=_ --output=locale/mathmaker_updates.pot *.py */*.py */*/*.py */*/*/*.py */*/*/*/*.py */*/*/*/*/*.py
 
-./tools/merge_py_updates_to_main_pot_file
+../tools/merge_py_updates_to_main_pot_file
 
 echo
 
 # Merging mathmaker entries to main pot file:
-./tools/merge_xml_updates_to_pot_file --dirs /home/nico/dev/mathmaker/mathmaker/sheet/ /home/nico/dev/mathmaker/mathmaker/data/ /home/nico/dev/mathmaker/mathmaker/data/wordings/
+../tools/merge_xml_updates_to_pot_file --dirs /home/nico/dev/mathmaker/mathmaker/mathmaker/lib/sheet/ /home/nico/dev/mathmaker/mathmaker/mathmaker/data/ /home/nico/dev/mathmaker/mathmaker/mathmaker/data/wordings/
 
 # Merging updates from other xml files to other pot files
 #./merge_xml_updates_to_pot_file --keywords w4l --dir /home/nico/dev/mathmaker/mathmaker/data/w4l/ --potfile /home/nico/dev/mathmaker/mathmaker/locale/w4l.pot

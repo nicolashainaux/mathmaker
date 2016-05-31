@@ -35,7 +35,8 @@ ABSPATH = os.path.abspath(sys.argv[0])
 __l1 = len(PROCESS_NAME)
 __l2 = len(ABSPATH)
 TOOLS_PATH = ABSPATH[:__l2-__l1]
-LOCALE_PATH = os.path.abspath(os.path.join(TOOLS_PATH, os.pardir)) + "/locale/"
+LOCALE_PATH = os.path.abspath(os.path.join(TOOLS_PATH, os.pardir)) \
+              + "/mathmaker/locale/"
 
 DEFAULT_KEYWORDS = ['header', 'title', 'text', 'subtitle', 'answers_title',
                     'wording']
@@ -120,6 +121,7 @@ def browse_files(path, keywords_list):
 
 
 def main():
+	sys.stdout.write("[merge_xml_updates_to_pot_file] Starting...\n")
 	parser = argparse.ArgumentParser(description=\
 						'Import strings to be translated from xml files.')
 	parser.add_argument('--potfile', action='store', dest='filename',
@@ -147,7 +149,6 @@ def main():
 			raise NotADirectoryError(
 					errno.ENOTDIR, os.strerror(errno.ENOTDIR), d)
 
-	sys.stdout.write("[merge_xml_updates_to_pot_file] Starting...\n")
 	sys.stdout.write("Will look for labels: " \
  					+ str(args.keywords_list) + "\n")
 
