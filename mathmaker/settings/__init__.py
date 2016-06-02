@@ -109,15 +109,17 @@ def init():
     global dbg_logger
     global language
 
-    __process_name = os.path.basename(sys.argv[0])
-    __abspath = os.path.abspath(sys.argv[0])
+    settings_dirname = "settings/"
+
+    __process_name = os.path.basename(__file__)
+    __abspath = os.path.abspath(__file__)
     __l1 = len(__process_name)
     __l2 = len(__abspath)
-    rootdir = __abspath[:__l2-__l1]
+    rootdir = __abspath[:__l2-__l1][:-(len(settings_dirname))]
     localedir = rootdir + "locale/"
     libdir = rootdir + "lib/"
     datadir = rootdir + "data/"
-    settingsdir = rootdir + "settings/"
+    settingsdir = rootdir + settings_dirname
 
     default = default_object()
     path = path_object()
