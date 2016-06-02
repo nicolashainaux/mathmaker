@@ -26,7 +26,7 @@ from distutils.version import LooseVersion
 
 import settings
 from settings import CONFIG
-from __init__ import __software_name__
+from lib import __software_name__
 from lib.common import latex
 
 log = settings.mainlogger

@@ -24,7 +24,7 @@
 import sys, os
 import argparse
 
-from __init__ import __info__, __software_name__
+from lib import __info__, __software_name__
 
 import settings
 settings.init()

@@ -20,15 +20,3 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#from base import *
-#from base_calculus import *
-#from base_geometry import *
-#from calculus import *
-#from geometry import *
-
-from . import base
-from . import base_calculus
-from . import base_geometry
-from . import calculus
-from . import geometry
-import lib
