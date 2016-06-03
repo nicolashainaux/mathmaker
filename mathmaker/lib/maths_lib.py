@@ -27,7 +27,6 @@ from decimal import *
 import lib.core
 from . import is_
 from . import randomly
-from . import utils
 
 
 # DIVISORS frequently used by the children
@@ -427,10 +426,21 @@ def generate_decimal(width, ranks_scale, start_rank):
 
 # --------------------------------------------------------------------------
 ##
+#   @brief Transforms the xE+n results in decimal form (ex. 1E+1 -> 10)
+def correct_normalize_results(d):
+    if not isinstance(d, Decimal):
+        raise error.WrongArgument(str(type(d)), "a Decimal")
+
+    return d.quantize(Decimal(1)) if d == d.to_integral() else d.normalize()
+
+
+# --------------------------------------------------------------------------
+##
 #   @brief Rounds correctly a Decimal
 #   @options They are the same as the decimal's module quantize() method
 def round(d, precision, **options):
     if not isinstance(d, Decimal):
         raise error.WrongArgument(str(type(d)), "a Decimal")
 
-    return utils.correct_normalize_results(d.quantize(precision, **options))
+    return correct_normalize_results(d.quantize(precision, **options))
+

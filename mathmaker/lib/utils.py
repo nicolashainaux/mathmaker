@@ -325,16 +325,3 @@ def put_aside(set1, set2):
 
     return (extracted_elts, remaining_elts)
 
-
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief Transforms the xE+n results in decimal form (ex. 1E+1 -> 10)
-def correct_normalize_results(d):
-    if not isinstance(d, Decimal):
-        raise error.WrongArgument(str(type(d)), "a Decimal")
-
-    return d.quantize(Decimal(1)) if d == d.to_integral() else d.normalize()
-
-
