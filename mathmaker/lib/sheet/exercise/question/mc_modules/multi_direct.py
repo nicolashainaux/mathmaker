@@ -36,7 +36,7 @@ class sub_object(mc_module.structure):
         super().setup("nb_variants", nb=numbers_to_use, **options)
 
         product = Product([self.nb1, self.nb2])
-        self.product_str = product.into_str(force_expression_begins=True)
+        self.product_str = product.printed
         self.result = product.evaluate()
 
         if self.context == 'mini_problem':

@@ -1116,9 +1116,9 @@ class Equation(ComposedCalculable):
         if 'display_name' in options:
             beginning = self.name
 
-        left = self.left_hand_side.into_str(force_expression_begins=True)
+        left = self.left_hand_side.printed
 
-        right = self.right_hand_side.into_str(force_expression_begins=True)
+        right = self.right_hand_side.printed
 
         egal_sign = MARKUP['equal']
 
@@ -1672,8 +1672,7 @@ class Equation(ComposedCalculable):
                         #___
                             new_eq2 = MARKUP['open_text_in_maths'] \
                                       + " " + _("because") + " " \
-                                      + temp_item.into_str(
-                                        force_expression_begins=True) \
+                                      + temp_item.printed \
                                       + " " + _("is positive.") \
                                       + MARKUP['close_text_in_maths']
 
@@ -2034,8 +2033,7 @@ class Table(Printable):
                 result += Quotient(('+',
                                     self.cell[0][i],
                                     self.cell[1][i]
-                                    ))\
-                          .into_str(force_expression_begins=True)
+                                    )).printed
 
                 if i < len(self) - 1:
                     result += MARKUP['equal']
@@ -2045,8 +2043,7 @@ class Table(Printable):
 
             for i in range(2):
                 for j in range(len(self)):
-                    content += [self.cell[i][j]\
-                                        .into_str(force_expression_begins=True)]
+                    content += [self.cell[i][j].printed]
 
             from lib.shared import machine
             result = shared.machine\

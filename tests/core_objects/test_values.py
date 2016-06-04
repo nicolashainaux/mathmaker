@@ -22,6 +22,7 @@
 
 import sys
 import pytest
+import locale
 from decimal import Decimal
 
 sys.path.insert(1, 'mathmaker')
@@ -45,10 +46,29 @@ def v3(): return Value(4.257)
 def v4(): return Value(4.2571)
 
 @pytest.fixture()
+def negv(): return Value(-4.2)
+
+@pytest.fixture()
 def perfect_square(): return Value(16)
 
 @pytest.fixture()
 def perfect_decimal_square(): return Value(1.96)
+
+
+def test_0_display(v0):
+    """Is the value correctly displayed?"""
+    assert str(v0) == "\\text{4}"
+
+def test_1_display(v1):
+    """Is the value correctly displayed?"""
+    locale.setlocale(locale.LC_NUMERIC, 'en_US.utf8')
+    assert str(v1) == "\\text{4.2}"
+
+def test_negv_display(negv):
+    """Is the value correctly displayed?"""
+    locale.setlocale(locale.LC_NUMERIC, 'en_US.utf8')
+    assert str(negv) == "-\\text{4.2}"
+
 
 def test_0digit_numbers(v0):
     """Is an integer's number of digits detected as 0?"""

@@ -42,4 +42,4 @@ class sub_object(object):
     def a(self, **options):
         n = self.chosen_deci
         r = self.chosen_rank
-        return Item(((n - n % r) / r)).into_str(force_expression_begins=True)
+        return Item(((n - n % r) / r)).printed

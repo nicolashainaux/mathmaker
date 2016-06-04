@@ -36,7 +36,7 @@ class sub_object(mc_module.structure):
         super().setup("nb_variants", nb=numbers_to_use, **options)
 
         the_sum = Sum([self.nb1, self.nb2])
-        self.sum_str = the_sum.into_str(force_expression_begins=True)
+        self.sum_str = the_sum.printed
         self.result = the_sum.evaluate()
 
         if self.context == 'mini_problem':

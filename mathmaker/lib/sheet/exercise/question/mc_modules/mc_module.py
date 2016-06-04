@@ -109,15 +109,12 @@ class structure(object):
             if self.context == "from_area":
                 self.subcontext = "w" if self.result < self.divisor else "l"
 
-            self.dividend_str = Item(self.dividend)\
-                                .into_str(force_expression_begins=True)
-            self.divisor_str = Item(self.divisor)\
-                               .into_str(force_expression_begins=True)
-            self.result_str = Item(self.result)\
-                              .into_str(force_expression_begins=True)
+            self.dividend_str = Item(self.dividend).printed
+            self.divisor_str = Item(self.divisor).printed
+            self.result_str = Item(self.result).printed
             q = Quotient(('+', self.dividend, self.divisor),
                          use_divide_symbol=True)
-            self.quotient_str = q.into_str(force_expression_begins=True)
+            self.quotient_str = q.printed
 
         elif arg == "rectangle":
             if hasattr(self, 'nb1') and hasattr(self, 'nb2'):

@@ -53,11 +53,10 @@ class sub_object(object):
         return _("Which number can fill the hole in") \
                + " "\
                + shared.machine.write_math_style2(\
-               self.holed_product.into_str(force_expression_begins=True)) \
+               self.holed_product.printed) \
                + " = " \
                + self.product.into_str() \
                + " ?"
 
     def a(self, **options):
-        return shared.machine.write_math_style2(\
-                        self.hidden_one.into_str(force_expression_begins=True))
+        return shared.machine.write_math_style2(self.hidden_one.printed)

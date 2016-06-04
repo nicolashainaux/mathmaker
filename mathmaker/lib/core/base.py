@@ -121,8 +121,15 @@ class Printable(NamedObject):
     def into_str(self, **options):
         raise error.MethodShouldBeRedefined(self, 'into_str')
 
+    @property
+    def printed(self):
+        """
+        Shortcut for self.into_str(force_expression_begins=True)
 
-
+        This returns the string of the Printable object, assuming it starts
+        the expression.
+        """
+        return self.into_str(force_expression_begins=True)
 
 
 # ------------------------------------------------------------------------------

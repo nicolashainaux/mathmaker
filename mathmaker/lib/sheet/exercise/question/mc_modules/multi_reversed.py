@@ -42,64 +42,31 @@ class sub_object(object):
 
     def a(self, **options):
         if self.product == 12:
-            return shared.machine.write_math_style2(Product([2, 6]).into_str(\
-                                                force_expression_begins=True
-                                                                 )
-                                  ) \
-                  + " " + _("or") + " " \
-                  + shared.machine.write_math_style2(Product([3, 4]).into_str(\
-                                                force_expression_begins=True
-                                                                 )
-                                        )
+            return shared.machine.write_math_style2(Product([2, 6]).printed) \
+                   + " " + _("or") + " " \
+                   + shared.machine.write_math_style2(Product([3, 4]).printed)
 
         elif self.product == 16:
-            return shared.machine.write_math_style2(Product([2, 8]).into_str(\
-                                                force_expression_begins=True
-                                                                 )
-                                  ) \
+            return shared.machine.write_math_style2(Product([2, 8]).printed) \
                    + " " + _("or") + " " \
-                  + shared.machine.write_math_style2(Product([4, 4]).into_str(\
-                                                force_expression_begins=True
-                                                                 )
-                                        )
+                  + shared.machine.write_math_style2(Product([4, 4]).printed)
 
         elif self.product == 18:
-            return shared.machine.write_math_style2(Product([2, 9]).into_str(\
-                                                force_expression_begins=True
-                                                                 )
-                                  ) \
+            return shared.machine.write_math_style2(Product([2, 9]).printed) \
                    + " " + _("or") + " " \
-                  + shared.machine.write_math_style2(Product([3, 6]).into_str(\
-                                                force_expression_begins=True
-                                                                 )
-                                        )
+                  + shared.machine.write_math_style2(Product([3, 6]).printed)
 
         elif self.product == 24:
-            return shared.machine.write_math_style2(Product([4, 6]).into_str(\
-                                                force_expression_begins=True
-                                                                 )
-                                  ) \
+            return shared.machine.write_math_style2(Product([4, 6]).printed) \
                    + " " + _("or") + " " \
-                  + shared.machine.write_math_style2(Product([3, 8]).into_str(\
-                                                force_expression_begins=True
-                                                                 )
-                                        )
+                  + shared.machine.write_math_style2(Product([3, 8]).printed)
 
         elif self.product == 36:
-            return shared.machine.write_math_style2(Product([6, 6]).into_str(\
-                                                force_expression_begins=True
-                                                                 )
-                                  ) \
+            return shared.machine.write_math_style2(Product([6, 6]).printed) \
                    + " " + _("or") + " " \
-                  + shared.machine.write_math_style2(Product([4, 9]).into_str(\
-                                                force_expression_begins=True
-                                                                 )
-                                        )
+                  + shared.machine.write_math_style2(Product([4, 9]).printed)
 
         else:
             return shared.machine.write_math_style2(Product([self.nb1,
-                                                self.nb2]).into_str(\
-                                                force_expression_begins=True
-                                                                 )
+                                                self.nb2]).printed)
 
-                                      )

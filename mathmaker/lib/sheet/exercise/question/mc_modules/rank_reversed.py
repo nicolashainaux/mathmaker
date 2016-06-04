@@ -179,8 +179,7 @@ class sub_object(object):
         self.chosen_figure = (self.chosen_deci \
                                 % (rank_to_use * Decimal('10'))) // rank_to_use
 
-        self.chosen_deci_str = Item((self.chosen_deci)).into_str(\
-                                                  force_expression_begins=True)
+        self.chosen_deci_str = Item((self.chosen_deci)).printed
 
         self.chosen_rank = rank_to_use
 
