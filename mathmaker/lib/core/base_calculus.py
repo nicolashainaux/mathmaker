@@ -622,18 +622,11 @@ class Item(Exponented):
             return None
 
 
-
     # --------------------------------------------------------------------------
     ##
-    #   @brief __repr__() method of the Item (debugging method)
-    #   @param options No option available so far
-    #   @return A string containing "{sign value ^ exponent}"
-    def __repr__(self):
-        return repr(self)
-
-
-
-
+    #   @brief Shortcut for into_str
+    def __str__(self, **options):
+        return self.into_str(**options)
 
 
     # --------------------------------------------------------------------------
