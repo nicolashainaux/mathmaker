@@ -531,10 +531,19 @@ class Value(Signed):
             self._raw_value = arg.raw_value
             self._has_been_rounded = arg.has_been_rounded
             self._unit = arg.unit
+            self._sign = arg.sign
 
         # All other unforeseen cases: an exception is raised.
         else:
             raise error.UncompatibleType(arg, "Number|String")
+
+        if self._sign == '-':
+            if isinstance(self._raw_value, str):
+                self._abs_value = self._raw_value[1:]
+            else:
+                self._abs_value = - self._raw_value
+        else:
+            self._abs_value = self._raw_value
 
 
 
@@ -579,7 +588,9 @@ class Value(Signed):
     def get_unit(self):
         return self._unit
 
-
+    @property
+    def abs_value(self):
+        return self._abs_value
 
 
 
@@ -694,22 +705,25 @@ class Value(Signed):
     #   @param options Any options
     #   @return The formated string
     def into_str(self, **options):
+        sign = ''
+        if self._sign == '-':
+            sign = '-'
 
         if self.is_numeric():
             if 'display_unit' in options and options['display_unit'] in YES:
                 unit_str = self.unit.into_str(**options) \
                                             if isinstance(self.unit, Unit) \
                                             else str(self.unit)
-                return locale.str(self.raw_value) + unit_str
+                return sign + locale.str(self.abs_value) + unit_str
             elif 'display_SI_unit' in options and options['display_SI_unit']:
                 unit_str = self.unit.into_str(**options) \
                                             if isinstance(self.unit, Unit) \
                                             else str(self.unit)
-                return "\SI{" + locale.str(self.raw_value) + "}"\
+                return sign + "\SI{" + locale.str(self.abs_value) + "}"\
                        "{" + unit_str + "}"
             else:
-                return MARKUP['open_text_in_maths'] \
-                       + locale.str(self.raw_value) \
+                return sign + MARKUP['open_text_in_maths'] \
+                       + locale.str(self.abs_value) \
                        + MARKUP['close_text_in_maths']
 
         elif self.raw_value in ["", " "] and 'display_SI_unit' in options \
@@ -718,15 +732,15 @@ class Value(Signed):
             unit_str = self.unit.into_str(**options) \
                                         if isinstance(self.unit, Unit) \
                                         else str(self.unit)
-            return "\SI{" + self.raw_value + "}"\
+            return sign + "\SI{" + self.abs_value + "}"\
                        "{" + unit_str + "}"
 
         else: # self.is_literal()
             if len(self.get_first_letter()) >= 2 \
                 and not self.get_first_letter()[0] in ["-", "+"]:
             #___
-                return MARKUP['open_text_in_maths'] \
-                       + str(self.raw_value) \
+                return sign + MARKUP['open_text_in_maths'] \
+                       + str(self.abs_value) \
                        + MARKUP['close_text_in_maths']
             else:
                 return str(self.raw_value)
