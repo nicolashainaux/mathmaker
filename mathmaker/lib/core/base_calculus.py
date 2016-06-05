@@ -228,6 +228,10 @@ class Item(Exponented):
                                          + "(sign, Number|String, exponent)|" \
                                          + "(sign, Number|String)")
 
+        unit = options.get('unit', None)
+        if unit is not None:
+            self.set_unit(unit)
+
 
     # --------------------------------------------------------------------------
     ##
