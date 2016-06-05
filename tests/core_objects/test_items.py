@@ -24,10 +24,8 @@ import sys
 import pytest
 import locale
 
-sys.path.insert(1, 'mathmaker')
-import settings
-settings.init()
 from lib.core.base_calculus import Item, Sum, Product
+from tools import wrap_nb
 
 @pytest.fixture()
 def pos6(): return Item(6)
@@ -63,7 +61,7 @@ def test_1_is_displayable_as_a_single_1():
     assert Item(1).is_displ_as_a_single_1()
 def test_1_display():
     """Is Item(1) correctly printed?"""
-    assert Item(1).printed == '\\text{1}'
+    assert Item(1).printed == wrap_nb('1')
 
 
 def test_6_is_not_displayable_as_a_single_1():
@@ -82,7 +80,7 @@ def test_6_is_item_6(pos6):
 
 def test_neg1_printed():
     """Is Item(-1) correctly printed?"""
-    assert Item(-1).printed == '-\\text{1}'
+    assert Item(-1).printed == wrap_nb('-1')
 
 
 def test_negneg1_eval(negneg1):
@@ -90,7 +88,7 @@ def test_negneg1_eval(negneg1):
     assert negneg1.evaluate() == 1
 def test_negneg1_printed(negneg1):
     """Is Item(('-', -1)) correctly printed as -(-1)?"""
-    assert negneg1.printed == '-(-\\text{1})'
+    assert negneg1.printed == wrap_nb('-(-1)')
 
 
 def test_neg1_exp_negneg1_eval():
@@ -98,8 +96,7 @@ def test_neg1_exp_negneg1_eval():
     assert Item(('+', -1, Item(('-', -1)))).evaluate() == -1
 def test_neg1_exp_negneg1_printed():
     """Is Item(('+', -1, Item(('-', -1)))) correctly printed?"""
-    assert Item(('+', -1, Item(('-', -1)))).printed == \
-                                                '-\\text{1}^{-(-\\text{1})}'
+    assert Item(('+', -1, Item(('-', -1)))).printed == wrap_nb('-1^{-(-1)}')
 
 
 def test_neg1_exp2_eval():
@@ -107,7 +104,7 @@ def test_neg1_exp2_eval():
     assert Item(('-', 1, Item(2))).evaluate() == -1
 def test_neg1_exp2_printed():
     """Is Item(('-', 1, Item(2))) correctly printed?"""
-    assert Item(('-', 1, Item(2))).printed == '-\\text{1}^{\\text{2}}'
+    assert Item(('-', 1, Item(2))).printed == wrap_nb('-1^{2}')
 
 
 def test_neg1_inside_exp2_negative_raw_value(neg1_inside_exp2):
@@ -124,17 +121,17 @@ def test_neg1_inside_exp2_eval(neg1_inside_exp2):
     assert neg1_inside_exp2.evaluate() == 1
 def test_neg1_inside_exp2_printed(neg1_inside_exp2):
     """Is  Item(('+', -1, Item(2))) correctly printed?"""
-    assert neg1_inside_exp2.printed == '(-\\text{1})^{\\text{2}}'
+    assert neg1_inside_exp2.printed == wrap_nb('(-1)^{2}')
 
 
 def test_neg5_inside_exp0_printed(neg5_inside_exp0):
     """Is (-5)^{0} correctly printed as 1?"""
-    assert neg5_inside_exp0.printed == '\\text{1}'
+    assert neg5_inside_exp0.printed == wrap_nb('1')
 def test_neg5_inside_exp0_printed_bis(neg5_inside_exp0):
     """Is (-5)^{0} correctly printed as (-5)^{0} when explicitely desired?"""
     assert neg5_inside_exp0.into_str(force_display_exponent_0='OK',
                                      force_expression_begins=True) == \
-                                                    '(-\\text{5})^{\\text{0}}'
+                                                            wrap_nb('(-5)^{0}')
 
 
 def test_pos3_exp_2plus6_eval(pos3_exp_2plus6):
@@ -142,7 +139,7 @@ def test_pos3_exp_2plus6_eval(pos3_exp_2plus6):
     assert pos3_exp_2plus6.evaluate() == 81
 def test_pos3_exp_2plus6_printed(pos3_exp_2plus6):
     """Is Item(('+', 3, Sum([-2, 6]))) evaluated to 81?"""
-    assert pos3_exp_2plus6.printed == '\\text{3}^{-\\text{2}+\\text{6}}'
+    assert pos3_exp_2plus6.printed == wrap_nb('3^{-2+6}')
 
 
 def test_a_printed():
@@ -165,38 +162,37 @@ def test_neg3_inside_exp_2plus5_eval(neg3_inside_exp_2plus5):
     assert neg3_inside_exp_2plus5.evaluate() == -27
 def test_neg3_inside_exp_2plus5_printed(neg3_inside_exp_2plus5):
     """Is Item(('+', -3, Sum([-2, 5]))) correctly printed?"""
-    assert neg3_inside_exp_2plus5.printed == \
-                                        '(-\\text{3})^{-\\text{2}+\\text{5}}'
+    assert neg3_inside_exp_2plus5.printed == wrap_nb('(-3)^{-2+5}')
 
 
 def test_pos2_exp_neg2_inside_exp4_printed():
     """Is Item(('+', 2, Item(('+', -2, 4)))) correctly printed?"""
     assert Item(('+', 2, Item(('+', -2, 4)))).printed == \
-                                        '\\text{2}^{(-\\text{2})^{\\text{4}}}'
+                                                        wrap_nb('2^{(-2)^{4}}')
 
 
 def test_pos2_exp_sum_neg2_inside_exp4_printed():
     """Is Item(('+', 2, Sum([Item(('+', -2, 4))]))) correctly printed?"""
     assert Item(('+', 2, Sum([Item(('+', -2, 4))]))).printed == \
-                                        '\\text{2}^{(-\\text{2})^{\\text{4}}}'
+                                                        wrap_nb('2^{(-2)^{4}}')
 
 
 def test_neg2_inside_exp_1plus0_printed():
     """Is Item(('+', -2, Sum([1, 0]))) correctly printed?"""
-    assert Item(('+', -2, Sum([1, 0]))).printed == '-\\text{2}'
+    assert Item(('+', -2, Sum([1, 0]))).printed == wrap_nb('-2')
 
 
 def test_neg2_inside_exp_sum_of_product_of_1plus0_printed():
     """Is Item(('+', -2, Sum([Product([Sum([1, 0])])]))) correctly printed?"""
     assert Item(('+', -2, Sum([Product([Sum([1, 0])])]))).printed == \
-                                                                '-\\text{2}'
+                                                                wrap_nb('-2')
 
 
 def test_neg2_inside_exp_sum_of_product_of_1plus1_printed(
                                     neg2_inside_exp_sum_of_product_of_1plus1):
     """Is Item(('+', -2, Sum([Product([Sum([1, 1])])]))) correctly printed?"""
     assert neg2_inside_exp_sum_of_product_of_1plus1.printed == \
-                                        '(-\\text{2})^{\\text{1}+\\text{1}}'
+                                                        wrap_nb('(-2)^{1+1}')
 def test_neg2_inside_exp_sum_of_product_of_1plus1_printed_bis(
                                     neg2_inside_exp_sum_of_product_of_1plus1):
     """
@@ -207,25 +203,25 @@ def test_neg2_inside_exp_sum_of_product_of_1plus1_printed_bis(
                                             .term[0]\
                                             .set_compact_display(False)
     assert neg2_inside_exp_sum_of_product_of_1plus1.printed == \
-                                        '(-\\text{2})^{\\text{1}+\\text{1}}'
+                                                        wrap_nb('(-2)^{1+1}')
 
 
 def test_neg2_inside_exp_sum_of_sum_of_1plus1_printed():
     """Is Item(('+', -2, Sum([Sum([Sum([1, 1])])]))) correctly printed?"""
     assert Item(('+', -2, Sum([Sum([Sum([1, 1])])]))).printed == \
-                                        '(-\\text{2})^{\\text{1}+\\text{1}}'
+                                                        wrap_nb('(-2)^{1+1}')
 
 
 def test_neg2_inside_exp_sum_of_sum_of_2times2_printed():
     """Is Item(('+', -2, Sum([Sum([Product([2, 2])])]))) correctly printed?"""
     assert Item(('+', -2, Sum([Sum([Product([2, 2])])]))).printed == \
-                                    '(-\\text{2})^{\\text{2}\\times \\text{2}}'
+                                                wrap_nb('(-2)^{2\\times 2}')
 
 
 def test_neg2_inside_exp_sum_of_product_of_sum_of_2_printed():
     """Is Item(('+', -2, Sum([Product([Sum([2])])]))) correctly printed?"""
     assert Item(('+', -2, Sum([Product([Sum([2])])]))).printed == \
-                                                    '(-\\text{2})^{\\text{2}}'
+                                                        wrap_nb('(-2)^{2}')
 
 
 def test_order_a_b():

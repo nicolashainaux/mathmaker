@@ -25,10 +25,8 @@ import pytest
 import locale
 from decimal import Decimal
 
-sys.path.insert(1, 'mathmaker')
-import settings
-settings.init()
 from lib.core.root_calculus import Value
+from tools import wrap_nb
 
 @pytest.fixture()
 def v0(): return Value(4)
@@ -57,17 +55,17 @@ def perfect_decimal_square(): return Value(1.96)
 
 def test_0_display(v0):
     """Is the value correctly displayed?"""
-    assert str(v0) == "\\text{4}"
+    assert str(v0) == wrap_nb('4')
 
 def test_1_display(v1):
     """Is the value correctly displayed?"""
     locale.setlocale(locale.LC_NUMERIC, 'en_US.utf8')
-    assert str(v1) == "\\text{4.2}"
+    assert str(v1) == wrap_nb('4.2')
 
 def test_negv_display(negv):
     """Is the value correctly displayed?"""
     locale.setlocale(locale.LC_NUMERIC, 'en_US.utf8')
-    assert str(negv) == "-\\text{4.2}"
+    assert str(negv) == wrap_nb('-4.2')
 
 
 def test_0digit_numbers(v0):
