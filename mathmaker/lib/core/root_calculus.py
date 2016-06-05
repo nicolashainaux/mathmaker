@@ -800,7 +800,9 @@ class Value(Signed):
             return False
 
 
-
+    def __ne__(self, other_value):
+        """Basically the contrary of __eq__, to allow comparisons with !="""
+        return not self.__eq__(other_value)
 
 
     # --------------------------------------------------------------------------
