@@ -23,6 +23,7 @@
 import sys
 import pytest
 import locale
+import decimal
 
 from lib.core.base_calculus import Item, Sum, Product
 from tools import wrap_nb
@@ -284,4 +285,9 @@ def test_item_with_unit_printed(item_with_unit):
     assert item_with_unit.into_str(display_unit='yes',
                                    graphic_display='yes',
                                    force_expression_begins=True) == '19.5~cm'
+
+
+def test_item_eval():
+    """Is Item.evaluate() a decimal.Decimal instance?"""
+    assert isinstance(Item(2.5).evaluate(), decimal.Decimal)
 
