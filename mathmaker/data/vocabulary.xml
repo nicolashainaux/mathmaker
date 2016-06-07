@@ -3,6 +3,10 @@
 <!-- This file is only intended to provide additional strings for translation -->
 
 <nothing>
+    <word text="Polygon_of_{n}_sides"/>
+    <word text="Rectangle"/>
+    <word text="Square"/>
+    <word text="RightTriangle"/>
 	<word text="billions"/>
 	<word text="hundreds of millions"/>
 	<word text="tens of millions"/>

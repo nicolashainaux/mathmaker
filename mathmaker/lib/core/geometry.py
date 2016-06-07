@@ -139,9 +139,9 @@ class Polygon(Drawable):
 
         self._name = ''.join([v.name for v in self._vertex])
 
-        self._nature = _(POLYGONS_NATURES[len(self._side)]) \
+        self._nature = POLYGONS_NATURES[len(self._side)] \
                        if len(self._side) in POLYGONS_NATURES \
-                       else _("Polygon_of_{n}_sides")\
+                       else "Polygon_of_{n}_sides"\
                             .format(n=str(len(self._side)))
 
         self._random_id = ''.join([str(randomly.integer(0, 9)) \
@@ -261,7 +261,7 @@ class Polygon(Drawable):
     #   @brief Returns the Polygon's filename
     @property
     def filename(self):
-        return self.nature + "_" + self.name + "-" + self._random_id
+        return _(self.nature) + "_" + self.name + "-" + self._random_id
 
 
 
@@ -360,24 +360,24 @@ class Polygon(Drawable):
     #   @return The string to put in the picture file
     def into_euk(self, **options):
         box_values = self.work_out_euk_box()
-        result = "box {val0}, {val1}, {val2}, {val3}"\
+        result = "box {val0}, {val1}, {val2}, {val3}\n"\
                  .format(val0=str(box_values[0]),
                          val1=str(box_values[1]),
                          val2=str(box_values[2]),
                          val3=str(box_values[3]))
 
-        result += "\n\n"
+        result += "\n"
 
         for v in self.vertex:
             result += "{name} = point({x}, {y})\n".format(name=v.name,
                                                           x=v.x,
                                                           y =v.y)
 
-        result += "\n\ndraw\n  "
+        result += "\ndraw\n  "
 
         result += "("
         result += '.'.join([v.name for v in self.vertex])
-        result += ")"
+        result += ")\n"
 
         # Let's add the sides' labels, if any
         for s in self.side:
@@ -420,8 +420,7 @@ class Polygon(Drawable):
 
                 rotate_box_angle %= Decimal("360")
 
-                result += "\n  "
-                result += "$\\rotatebox{"
+                result += "  $\\rotatebox{"
                 result += str(rotate_box_angle)
                 result += "}{\sffamily "
                 result += s.label.into_str(display_unit='yes',
@@ -466,8 +465,7 @@ class Polygon(Drawable):
                 #___
                     rotate_box_angle += Decimal("180")
 
-                result += "\n  "
-                result += "$\\rotatebox{"
+                result += "  $\\rotatebox{"
                 result += str(rotate_box_angle)
                 result += "}{\sffamily "
                 result += a.label.into_str(display_unit='yes',
@@ -489,14 +487,14 @@ class Polygon(Drawable):
             result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
                       .format(n=v.name, a=str(names_angles_list[i]))
 
-        result += "\nend"
+        result += "end\n"
 
         # To avoid empty label...end sections (what make euktoeps raise a
         # syntax error), we first check whether there's anything to put in it.
         all_marks = "".join([a.mark + s.mark
                              for a, s in zip(self.angle, self.side)])
         if all_marks != "":
-            result += "\n\nlabel\n"
+            result += "\nlabel\n"
             for a in self.angle:
                 if a.mark != "":
                     result += "  {p0}, {v}, {p2} {m}\n".format(
@@ -510,7 +508,7 @@ class Polygon(Drawable):
                               .format(p1=s.points[0].name,
                                       p2=s.points[1].name,
                                       m=s.mark)
-            result += "\nend"
+            result += "end"
 
         return result
 
@@ -583,7 +581,7 @@ class Rectangle(Polygon):
         for a in self._angle:
             a.mark = 'right'
 
-        self._nature = _('Rectangle')
+        self._nature = 'Rectangle'
 
 
 
@@ -695,7 +693,7 @@ class Square(Polygon):
         for a in self._angle:
             a.mark = 'right'
 
-        self._nature = _('Square')
+        self._nature = 'Square'
 
 
 
@@ -1013,7 +1011,7 @@ class RightTriangle(Triangle):
 
         self.right_angle.mark = "right"
 
-        self._nature = _("RightTriangle")
+        self._nature = 'RightTriangle'
 
 
 
