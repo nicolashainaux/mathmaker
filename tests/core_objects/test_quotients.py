@@ -25,7 +25,7 @@ import pytest
 import locale
 import decimal
 
-from lib.core.base_calculus import Quotient, Fraction
+from lib.core.base_calculus import Item, Quotient, Fraction
 from tools import wrap_nb
 
 @pytest.fixture
@@ -41,6 +41,23 @@ def q2(): return Quotient(('-',
                            Fraction(('+', 1, 3)),
                            1,
                            'use_divide_symbol'))
+
+@pytest.fixture
+def fq0(): return Quotient(('+',
+                            Fraction(('+', Item(9), Item(3))),
+                            Fraction(('+', Item(1), Item(-3))),
+                            1, 'use_divide_symbol'
+                            ))
+@pytest.fixture
+def fq0_step1(fq0): return fq0.calculate_next_step()
+@pytest.fixture
+def fq0_step2(fq0_step1): return fq0_step1.calculate_next_step()
+@pytest.fixture
+def fq0_step3(fq0_step2): return fq0_step2.calculate_next_step()
+@pytest.fixture
+def fq0_step4(fq0_step3): return fq0_step3.calculate_next_step()
+@pytest.fixture
+def fq0_step5(fq0_step4): return fq0_step4.calculate_next_step()
 
 
 def test_q1_printed(q1):
@@ -81,4 +98,30 @@ def test_q2_next_step3(q2):
     assert q2.calculate_next_step().calculate_next_step()\
            .calculate_next_step().printed == \
                                 wrap_nb('-\\frac{3}{2}')
+
+
+def test_fq0_step1(fq0_step1):
+    """Is this Quotient's calculation's 1st step correct?"""
+    assert fq0_step1.printed == wrap_nb('\\frac{9}{3}\\times \\frac{-3}{1}')
+
+
+def test_fq0_step2(fq0_step2):
+    """Is this Quotient's calculation's 2d step correct?"""
+    assert fq0_step2.printed == wrap_nb('-\\frac{9\\times 3}{3\\times 1}')
+
+
+def test_fq0_step3(fq0_step3):
+    """Is this Quotient's calculation's 3rd step correct?"""
+    assert fq0_step3.printed == \
+                        wrap_nb('-\\frac{9\\times \\bcancel{3}}{\\bcancel{3}}')
+
+
+def test_fq0_step4(fq0_step4):
+    """Is this Quotient's calculation's 4th step correct?"""
+    assert fq0_step4.printed == wrap_nb('-9')
+
+
+def test_fq0_step5(fq0_step5):
+    """Is this Quotient's calculation's 5th step correct?"""
+    assert fq0_step5 is None
 
