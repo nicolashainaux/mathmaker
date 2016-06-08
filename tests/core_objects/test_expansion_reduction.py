@@ -29,8 +29,6 @@ from lib.core.base_calculus import Polynomial, BinomialIdentity
 from lib.core.calculus import Expression
 from tools import wrap_nb
 
-# YET TO ADD Product([Sum([Item(146)]), Item(('+', "x", 2))]) next_step is None
-
 @pytest.fixture
 def expA():
     t = Expandable((Item(2), Sum([Item(1), Monomial((5, 1))])))
