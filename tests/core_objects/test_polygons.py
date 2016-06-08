@@ -31,7 +31,7 @@ from lib.core.geometry import Polygon
 from tools import wrap_nb
 
 
-def test_t1_into_euk():
+def test_p1_into_euk():
     """Check Polygon's generated euk file."""
     locale.setlocale(locale.LC_NUMERIC, 'en_US.utf8')
     p1 = Polygon([Point(["A", (0.5, 0.5)]),
