@@ -33,3 +33,5 @@ settings.locale_id = 'en_US.UTF-8'
 gettext.translation(__software_name__,
                     settings.localedir,
                     ['en']).install()
+from lib import shared
+shared.init()
