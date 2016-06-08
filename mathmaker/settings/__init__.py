@@ -108,6 +108,7 @@ def init():
     global mainlogger
     global dbg_logger
     global language
+    global locale_id
 
     settings_dirname = "settings/"
 
@@ -132,5 +133,7 @@ def init():
 
     CONFIG = load_config('user_config', settingsdir)
     config = config_object()
+
+    locale_id = config.LANGUAGE + '.' + config.ENCODING
 
     language = None

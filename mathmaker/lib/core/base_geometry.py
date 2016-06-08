@@ -35,12 +35,12 @@ from .base import *
 from lib.core.base_calculus import Value
 from lib import *
 from lib.maths_lib import *
-from settings import config
+import settings
 
 from lib.common.latex import MARKUP
 
 try:
-    locale.setlocale(locale.LC_ALL, config.LANGUAGE + '.' + config.ENCODING)
+    locale.setlocale(locale.LC_ALL, settings.locale_id)
 except:
     locale.setlocale(locale.LC_ALL, '')
 

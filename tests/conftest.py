@@ -29,6 +29,7 @@ from lib import __software_name__
 import settings
 settings.init()
 settings.language = 'en'
+settings.locale_id = 'en_US.UTF-8'
 gettext.translation(__software_name__,
                     settings.localedir,
                     ['en']).install()

@@ -35,12 +35,12 @@ from lib import is_
 from lib.maths_lib import *
 from decimal import *
 from lib.common.cst import *
-from settings import config
+import settings
 
 from lib.common.latex import MARKUP
 
 try:
-    locale.setlocale(locale.LC_ALL, config.LANGUAGE + '.' + config.ENCODING)
+    locale.setlocale(locale.LC_ALL, settings.locale_id)
 except:
     locale.setlocale(locale.LC_ALL, '')
 

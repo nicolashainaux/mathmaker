@@ -40,7 +40,7 @@ from lib.maths_lib import *
 from lib.common.cst import *
 from settings import default
 from lib.utils import *
-from settings import config
+import settings
 
 log_item_into_str = settings.dbg_logger.getChild('Item.into_str')
 log_item_calculate_next_step = settings.dbg_logger.getChild(
@@ -83,8 +83,7 @@ log_binomial_identity_expand = settings.dbg_logger.getChild(
 from lib.common.latex import MARKUP
 
 try:
-    locale.setlocale(locale.LC_ALL,
-                     config.LANGUAGE + '.' + config.ENCODING)
+    locale.setlocale(locale.LC_ALL, settings.locale_id)
 except:
     locale.setlocale(locale.LC_ALL, '')
 
