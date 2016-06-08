@@ -18,17 +18,12 @@
 
 # You should have received a copy of the GNU General Public License
 # along with Mathmaker; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  US
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import sys
-import gettext
 import locale
 
-sys.path.insert(1, 'mathmaker')
-from lib import __software_name__
-import settings
-settings.init()
-settings.language = 'en'
-gettext.translation(__software_name__,
-                    settings.localedir,
-                    ['en']).install()
+def test_aaaa():
+    """Set the numeric locale."""
+    locale.setlocale(locale.LC_NUMERIC, 'en_US.utf8')
+    assert True
+

@@ -20,9 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import sys
 import pytest
-import locale
 import decimal
 
 from lib.core.root_calculus import Value
@@ -32,7 +30,6 @@ from tools import wrap_nb
 
 def test_t1_into_euk():
     """Check Triangle's generated euk file."""
-    locale.setlocale(locale.LC_NUMERIC, 'en_US.utf8')
     t1 = Triangle((("Z", "E", "P"),
                    {'side0':4, 'angle1':64, 'side1':5}),
                   rotate_around_isobarycenter=115)

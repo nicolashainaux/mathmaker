@@ -20,9 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import sys
 import pytest
-import locale
 import decimal
 
 from lib.core.root_calculus import Value
@@ -33,7 +31,6 @@ from tools import wrap_nb
 
 def test_p1_into_euk():
     """Check Polygon's generated euk file."""
-    locale.setlocale(locale.LC_NUMERIC, 'en_US.utf8')
     p1 = Polygon([Point(["A", (0.5, 0.5)]),
                   Point(["B", (3, 1)]),
                   Point(["C", (3.2, 4)]),

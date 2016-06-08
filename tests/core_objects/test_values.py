@@ -20,7 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import sys
 import pytest
 import locale
 from decimal import Decimal
@@ -59,12 +58,10 @@ def test_0_display(v0):
 
 def test_1_display(v1):
     """Is the value correctly displayed?"""
-    locale.setlocale(locale.LC_NUMERIC, 'en_US.utf8')
     assert str(v1) == wrap_nb('4.2')
 
 def test_negv_display(negv):
     """Is the value correctly displayed?"""
-    locale.setlocale(locale.LC_NUMERIC, 'en_US.utf8')
     assert str(negv) == wrap_nb('-4.2')
 
 
