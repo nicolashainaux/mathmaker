@@ -27,7 +27,7 @@ import yaml
 from shutil import copyfile
 
 from lib import flat_dict
-from lib.tools.config_file import load_config
+from lib.tools.config import load_config
 
 
 class ContextFilter(logging.Filter):
