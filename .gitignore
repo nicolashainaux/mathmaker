@@ -1,0 +1,10 @@
+*.pyc
+*~
+mathmaker/data/mathmaker.db
+mathmaker/log/*
+*.bak
+mathmaker/settings/dev
+legacy_tests/
+htmlcov/
+.coverage
+.cache/
