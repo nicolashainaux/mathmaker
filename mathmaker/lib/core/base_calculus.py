@@ -2111,7 +2111,7 @@ class Operation(Exponented):
 ##
 # @class Quotient
 # @brief Sign, Exponented numerator, Exponented denominator, exponent
-class Quotient (Operation):
+class Quotient(Operation):
 
 
 
@@ -4193,7 +4193,7 @@ class CommutativeOperation(Operation):
 ##
 # @class Product
 # @brief Has Exponented factors & an exponent. Iterable. Two display modes.
-class Product (CommutativeOperation):
+class Product(CommutativeOperation):
 
 
 
@@ -5887,7 +5887,7 @@ class Product (CommutativeOperation):
 ##
 # @class Sum
 # @brief Has Exponented terms & an exponent. Iterable. Two display modes.
-class Sum (CommutativeOperation):
+class Sum(CommutativeOperation):
 
 
 
