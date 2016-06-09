@@ -23,7 +23,7 @@
 import subprocess
 
 from lib import error
-from lib import generate_header_comment
+from lib.tools import header_comment
 from settings import CONFIG
 
 # ------------------------------------------------------------------------------
@@ -206,7 +206,7 @@ class Drawable(NamedObject):
     #   @brief Creates the picture of the drawable object
     #   @return Nothing, just creates the picture file
     def into_pic(self, **options):
-        header_comment = generate_header_comment('eukleides')
+        hc = header_comment.generate('eukleides')
 
         if 'create_pic_files' in options \
             and not options['create_pic_files'] in YES:
@@ -215,7 +215,7 @@ class Drawable(NamedObject):
 
         else:
             f = open(self.euk_filename, 'w')
-            f.write(header_comment + self.into_euk(**options))
+            f.write(hc + self.into_euk(**options))
             f.close()
 
         path_to_euktoeps = CONFIG["PATHS"]["EUKTOEPS"]

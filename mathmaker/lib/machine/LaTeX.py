@@ -26,7 +26,7 @@ import sys
 import settings
 from settings import CONFIG, config
 from lib.common import latex
-from lib import generate_header_comment
+from lib.tools import header_comment
 from lib.common.cst import *
 
 from lib import is_
@@ -83,7 +83,7 @@ class LaTeX(Structure.Structure):
     ##
     #   @brief Write the complete LaTeX header of the sheet to the output.
     def write_document_header(self):
-        result = generate_header_comment(latex.FORMAT_NAME_PRINT)
+        result = header_comment.generate(latex.FORMAT_NAME_PRINT)
         result += "\documentclass[a4paper,fleqn,12pt]{article}" + "\n"
         result += r"\usepackage{fontspec}" + "\n"
         if config.FONT != None:
