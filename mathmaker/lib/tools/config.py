@@ -25,31 +25,43 @@ import logging
 import errno
 import yaml
 
+from .ext_dict import ext_dict
+
 def load_config(file_tag, settingsdir):
     """
-    Will load the yaml config file, named file_tag.yaml.
+    Will load the values from the yaml config file, named file_tag.yaml.
 
-    load_config will first look for the file in mathmaker/settings/dev,
-    then in ~/.config/mathmaker/, then in /etc/mathmaker/, finally in
-    mathmaker/settings. If no config file can be found, a FileNotFoundError
-    is raised.
+    The default configuration values are loaded from mathmaker/settings/*.yaml,
+    then load_config will update with values found successively in
+    /etc/mathmaker/*.yaml, then in ~/.config/mathmaker/*.yaml, finally in
+    mathmaker/settings/dev/*.yaml.
     """
     if file_tag != 'logging':
         mainlogger = logging.getLogger("__main__")
-    for d in [settingsdir + 'dev',
+    configuration = ext_dict()
+    try:
+        with open(os.path.join(settingsdir, file_tag + '.yaml')) as file_path:
+            if file_tag != 'logging':
+                mainlogger.info('Loading ' + file_tag + '.yaml from '
+                                + file_path.name)
+            configuration = ext_dict(yaml.load(file_path))
+    except IOError:
+        if file_tag != 'logging':
+            mainlogger.error('FileNotFoundError: No default config file for '
+                             + file_tag)
+        raise FileNotFoundError(errno.ENOENT,
+                                os.strerror(errno.ENOENT),
+                                file_tag + ".yaml")
+    for d in ['/etc/mathmaker',
               os.path.join(os.path.expanduser("~"), '.config', 'mathmaker'),
-              "/etc/mathmaker",
-              settingsdir]:
+              settingsdir + 'dev']:
         try:
             with open(os.path.join(d, file_tag + '.yaml')) as file_path:
                 if file_tag != 'logging':
-                    mainlogger.info('Loading ' + file_tag + '.yaml '\
-                                    + 'from ' + file_path.name)
-                return yaml.load(file_path)
+                    mainlogger.info('Updating config values for ' + file_tag
+                                    + ' from ' + file_path.name + '.yaml ')
+                configuration.recursive_update(yaml.load(file_path))
         except IOError:
             pass
-    mainlogger.error('FileNotFoundError: No config file found for ' + file_tag)
-    raise FileNotFoundError(errno.ENOENT,
-                            os.strerror(errno.ENOENT),
-                            file_tag + ".yaml")
+    return configuration
 
