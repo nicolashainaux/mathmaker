@@ -38,23 +38,6 @@ __info__ = '{software_name} {v}\nLicense: {l}\n{c} {contact}'\
                    contact=__contact__)
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief  Turns a dictionary containing nested dictionaries into a one level
-#           dictionary. Like {'a': {'a1': 3, 'a2':4}, 'b': 'data'} will
-#           become {'a.a1': 3, 'a.a2': 4, 'b': 'data'}
-def flat_dict(d, sep='.'):
-    output = {}
-    for key in d:
-        if isinstance(d[key], dict):
-            ud = flat_dict(d[key])
-            for k in ud:
-                output.update({str(key) + sep + str(k): ud[k]})
-        else:
-            output.update({key: d[key]})
-    return output
-
-
 def generate_header_comment(document_format, comment_symbol="%"):
     """Returns the header comment for output text files."""
     hc = comment_symbol + " "\

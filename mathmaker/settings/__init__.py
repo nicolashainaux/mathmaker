@@ -26,7 +26,7 @@ import logging, logging.config
 import yaml
 from shutil import copyfile
 
-from lib import flat_dict
+from lib.tools.ext_dict import ext_dict
 from lib.tools.config import load_config
 
 
@@ -43,7 +43,7 @@ def config_dbglogger():
     """
     Configures dbg_logger, using to the configuration file values.
     """
-    d = flat_dict(load_config('debug_conf', settingsdir))
+    d = ext_dict(load_config('debug_conf', settingsdir)).flat()
     for loggername, level in d.items():
         l = logging.getLogger(loggername)
         l.setLevel(getattr(logging, level))
