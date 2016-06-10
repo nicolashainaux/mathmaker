@@ -57,6 +57,14 @@ def main():
                              'to compile the document. You can configure '
                              'a default value for the font in '
                              'mathmaker\'s config file.')
+    parser.add_argument('-e', '--encoding', action='store',
+                        dest='encoding',
+                        default=settings.encoding,
+                        help='The encoding to use. Take care it\'s available '
+                             ' on your system, otherwise you may have trouble '
+                             'to compile the document. You can configure '
+                             'a default value for the encoding in '
+                             'mathmaker\'s config file.')
     parser.add_argument('main_directive', metavar='[DIRECTIVE|FILE]',
                         help='this can be either a sheetname included in '\
                              'mathmaker or a mathmaker xml file.')
@@ -68,6 +76,7 @@ def main():
     # From now on, settings.language has its definitive value
     settings.outputdir = args.outputdir
     settings.font = args.font
+    settings.encoding = args.encoding
     startup_actions.check_settings_consistency()
     shared.init()
 
