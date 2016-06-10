@@ -294,34 +294,3 @@ def inverted_extraction(list1, list2):
 
     return result
 
-
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief Returns a set containing the elements of set2 without its elements
-#          *containing* any element of set1. set2 is a set of iterables.
-def put_aside(set1, set2):
-    if not (type(set1) == set and type(set2) == set):
-        raise error.WrongArgument(str(set1) + " and " + str(set2),
-                                  " two sets.")
-
-    extracted_elts = set()
-    remaining_elts = set()
-
-    # set1: { b, c, h,...}
-    # set2: {(a,b,...), (c,d,...), ...}
-
-    for elt in set2:
-        put_this_aside = False
-        for i in elt:
-            for j in set1:
-                if i == j:
-                    put_this_aside = True
-        if put_this_aside:
-            extracted_elts |= {elt}
-        else:
-            remaining_elts |= {elt}
-
-    return (extracted_elts, remaining_elts)
-
