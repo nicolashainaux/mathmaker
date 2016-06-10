@@ -29,7 +29,7 @@ from .base import *
 from .base_calculus import *
 from lib.maths_lib import *
 from lib.common.cst import *
-from lib.utils import *
+from .utils import *
 from settings import default
 
 log_equation_solve_next_step = \

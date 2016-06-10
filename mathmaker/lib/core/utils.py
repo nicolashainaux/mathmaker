@@ -23,7 +23,6 @@
 from decimal import Decimal
 
 import lib.core.base_calculus
-from . import error
 
 
 
@@ -39,7 +38,8 @@ def reduce_literal_items_product(provided_list):
     aux_dict = {}
 
     if not isinstance(provided_list, list):
-        raise error.UncompatibleType(provided_list, "A list")
+        raise TypeError('A list is expected, not a '
+                        + str(type(provided_list)))
 
     for i in range(len(provided_list)):
         if isinstance(provided_list[i], lib.core.base_calculus.Item):
@@ -64,21 +64,18 @@ def reduce_literal_items_product(provided_list):
                                            provided_list[i].exponent          \
                                           * provided_list[i].factor[0].exponent
                     else:
-                        raise error.UncompatibleType(                         \
-                                              provided_list[i].factor[0],     \
-                                              "This Item should be a literal")
+                        raise TypeError('A literal Item was expected, not '                         \
+                                        'a numeric one.')
                 else:
-                    raise error.UncompatibleType(provided_list[i].factor[0],  \
-                                               "This object should be an Item")
+                    raise TypeError('Expected an Item, not a '
+                                    + str(type(provided_list[i].factor[0])))
             else:
-                raise error.UncompatibleType(provided_list[i],                \
-                                          "This Product should contain exactly\
-                                          one object (and this should be a \
-                                          literal Item)")
+                raise ValueError('A list of length 1 was expected, not a '
+                                 'list of length '
+                                 + str(len(provided_list[i].factor)))
         else:
-            raise error.UncompatibleType(provided_list[i],                    \
-                                       "A literal Item or a Product \
-                                       containing only one literal Item")
+            raise TypeError('A Product was expected, not a '
+                            + str(type(provided_list[i])))
 
     reduced_list = []
 
@@ -132,7 +129,7 @@ def put_term_in_lexicon(provided_key, associated_coeff, lexi):
 #   @return [literal Values]
 def gather_literals(xpr):
     if not isinstance(xpr, lib.core.base_calculus.Calculable):
-        raise error.UncompatibleType(xpr, " Calculable ")
+        raise TypeError('Expected a Calculable, not a ' + str(type(xpr)))
 
     if isinstance(xpr, lib.core.base_calculus.Value):
         if xpr.is_literal():
@@ -160,18 +157,19 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
     if not (how_many == 'all' or how_many == 'all_but_one' \
             or how_many == 'at_least_one' or type(how_many) == int):
     #___
-        raise error.UncompatibleType(how_many, " 'all'|'all_but_one'" \
-                                               + "|'at_least_one'|int ")
+        raise ValueError('Argument how_many should contain '
+                         "'all'|'all_but_one'|'at_least_one' or an int, "
+                         'not ' + str(how_many))
 
     if not type(objcts) == list:
-        raise error.UncompatibleType(objcts, " list ")
+        raise TypeError('Expected a list, not a ' + str(type(objcts)))
 
     for elt in objcts:
         if not isinstance(elt, lib.core.base_calculus.Calculable):
-            raise error.UncompatibleType(elt, " Calculable ")
+            raise TypeError('Expected a Calculable, not a ' + str(type(elt)))
 
     if not type(subst_dict) == dict:
-        raise error.UncompatibleType(subst_dict, " dict ")
+        raise TypeError('Expected a dict, not a ' + str(type(subst_dict)))
 
     for elt in subst_dict:
         if not (isinstance(elt, lib.core.base_calculus.Value) \
@@ -180,9 +178,8 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
                 and subst_dict[elt].is_numeric()
                 ):
         #___
-            raise error.WrongArgument(subst_dict, " this dict should contain " \
-                                            + "only " \
-                                            + "literal Value: numeric Value")
+            raise TypeError('Expected key: value pairs being of type '
+                            'literal Value: numeric Value')
 
     # Make the list of all literals
     for xpr in objcts:

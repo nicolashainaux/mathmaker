@@ -39,7 +39,7 @@ from lib import randomly
 from lib.maths_lib import *
 from lib.common.cst import *
 from settings import default
-from lib.utils import *
+from .utils import *
 import settings
 
 log_item_into_str = settings.dbg_logger.getChild('Item.into_str')
