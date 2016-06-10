@@ -24,7 +24,6 @@ import math
 import sys
 
 import settings
-from settings import CONFIG, config
 from lib.common import latex
 from lib.tools import header_comment
 from lib.common.cst import *
@@ -86,9 +85,9 @@ class LaTeX(Structure.Structure):
         result = header_comment.generate(latex.FORMAT_NAME_PRINT)
         result += "\documentclass[a4paper,fleqn,12pt]{article}" + "\n"
         result += r"\usepackage{fontspec}" + "\n"
-        if config.FONT != None:
-            result += r"\setmainfont{" + config.FONT + "}" + "\n"
-            result += r"\newfontfamily\configfont{" + config.FONT + "}\n"
+        if settings.font != None:
+            result += r"\setmainfont{" + settings.font + "}" + "\n"
+            result += r"\newfontfamily\configfont{" + settings.font + "}\n"
         result += r"\usepackage{polyglossia}" + "\n"
         result += "\setmainlanguage{" + self.language + "}" + "\n"
         if self.language_code in latex.LANGUAGE_OPTIONS:
@@ -102,7 +101,7 @@ class LaTeX(Structure.Structure):
         sisetup_dict = {}
         if settings.language == "fr_FR":
             sisetup_dict.update({'locale': 'FR'})
-        if config.FONT  != None:
+        if settings.font  != None:
             sisetup_dict.update({'text-rm': r'\configfont'})
         if len(sisetup_dict):
             sisetup_str = ", ".join([k + " = " + sisetup_dict[k] \
@@ -182,8 +181,8 @@ exercises counter (which is useful when begining to write the answers sheet)")\
     #   @brief Writes to the output the command to begin the document
     def write_document_begins(self):
         output_str = "\\begin{document}\n"
-        if config.FONT != None:
-            output_str += "\\fontspec{" + config.FONT + "}\n"
+        if settings.font != None:
+            output_str += "\\fontspec{" + settings.font + "}\n"
         if self.redirect_output_to_str:
             return output_str
         else:

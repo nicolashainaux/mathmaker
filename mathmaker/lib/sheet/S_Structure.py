@@ -23,11 +23,11 @@
 import subprocess
 import xml.etree.ElementTree as XML_PARSER
 
+import settings
 from lib import shared
 from .catalog import CATALOG, XML_SCHEMA_PATH
 from lib import error
 from lib.common.cst import *
-from settings import CONFIG
 
 # --------------------------------------------------------------------------
 ##
@@ -36,7 +36,7 @@ def get_sheet_config(file_name):
     # Validation of the xml file
     # xmllint --noout --schema sheet.xsd file_name
     with open(XML_SCHEMA_PATH, 'r') as schema_file:
-        call_xmllint = subprocess.Popen([CONFIG["PATHS"]["XMLLINT"],
+        call_xmllint = subprocess.Popen([settings.xmllint,
                                          "--noout",
                                          "--schema",
                                          XML_SCHEMA_PATH,

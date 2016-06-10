@@ -29,7 +29,6 @@ from lib import __info__, __software_name__
 import settings
 settings.init()
 from lib import shared
-from settings import CONFIG
 from lib import startup_actions
 from lib import sheet
 
@@ -40,7 +39,7 @@ def main():
     parser = argparse.ArgumentParser(description=\
                         'Creates maths exercices and their answers.')
     parser.add_argument("-l", "--language", action='store', dest='lang',
-                        default=CONFIG["LOCALES"]["LANGUAGE"],
+                        default=settings.language,
                         help="force the language of the output to LANGUAGE." \
                              + " Default value is configured in " \
                              + "mathmaker's config file.")

@@ -22,9 +22,9 @@
 
 import subprocess
 
+import settings
 from lib import error
 from lib.tools import header_comment
-from settings import CONFIG
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -218,17 +218,14 @@ class Drawable(NamedObject):
             f.write(hc + self.into_euk(**options))
             f.close()
 
-        path_to_euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
-        options_of_euktoeps = CONFIG["PATHS"]["EUKTOEPS_OPTIONS"]
-
         if 'create_pic_files' in options \
             and not options['create_pic_files'] in YES:
         #___
             pass
 
         else:
-            call_euktoeps = subprocess.Popen([path_to_euktoeps,
-                                              options_of_euktoeps,
+            call_euktoeps = subprocess.Popen([settings.euktoeps,
+                                              settings.euktoeps_options,
                                               self.euk_filename
                                               ]
                                              )

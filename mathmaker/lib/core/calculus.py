@@ -30,7 +30,7 @@ from .base_calculus import *
 from lib.maths_lib import *
 from lib.common.cst import *
 from lib.utils import *
-from settings import default, config
+from settings import default
 
 log_equation_solve_next_step = \
 settings.dbg_logger.getChild('Equation.solve_next_step')

@@ -25,7 +25,6 @@ import gettext, locale
 from distutils.version import LooseVersion
 
 import settings
-from settings import CONFIG
 from lib import __software_name__
 from lib.common import latex
 
@@ -73,15 +72,15 @@ def check_dependency(name, goal, path_to, version_option, required_version_nb):
 #   @brief  Will check all mathmaker's dependencies.
 def check_dependencies():
     check_dependency("euktoeps", "produce pictures",
-                     CONFIG["PATHS"]["EUKTOEPS"], "-v",
+                     settings.euktoeps, "-v",
                      "1.5.4")
     check_dependency("xmllint", "read xml files",
-                     CONFIG["PATHS"]["XMLLINT"], "--version",
+                     settings.xmllint, "--version",
                      "20901")
 
 ##
 #   @brief  Will install output's language (gettext functions)
-def install_gettext_translations(language=CONFIG["LOCALES"]["LANGUAGE"]):
+def install_gettext_translations(language=settings.language):
     try:
         gettext.translation(__software_name__,
                             settings.localedir,

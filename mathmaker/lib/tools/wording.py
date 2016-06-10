@@ -195,7 +195,7 @@ def handle_valueless_unit_tags(arg, sentence):
         unit_kind, unit_id = vu.split(sep="_")
         if not hasattr(arg, vu):
             if unit_kind == 'currency':
-                val = CURRENCIES_DICT[settings.config.CURRENCY]
+                val = CURRENCIES_DICT[settings.currency]
                 setattr(arg, vu, val)
             elif unit_kind in ['length', 'mass', 'capacity']:
                 val = random.choice(d[unit_kind])

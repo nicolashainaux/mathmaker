@@ -39,10 +39,8 @@ from lib.maths_lib import *
 from lib.core.calculus import *
 import settings
 
-try:
-    locale.setlocale(locale.LC_ALL, settings.locale_id)
-except:
-    locale.setlocale(locale.LC_ALL, '')
+locale.setlocale(locale.LC_ALL, settings.locale)
+
 
 
 

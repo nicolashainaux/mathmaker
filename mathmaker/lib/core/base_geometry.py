@@ -39,10 +39,8 @@ import settings
 
 from lib.common.latex import MARKUP
 
-try:
-    locale.setlocale(locale.LC_ALL, settings.locale_id)
-except:
-    locale.setlocale(locale.LC_ALL, '')
+locale.setlocale(locale.LC_ALL, settings.locale)
+
 
 # the mark 'dashed' has been removed from the available list since it may
 # produce buggy results sometimes from euktopst

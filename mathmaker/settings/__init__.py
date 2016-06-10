@@ -29,6 +29,11 @@ from shutil import copyfile
 from lib.tools.ext_dict import ext_dict
 from lib.tools.config import load_config
 
+AVAILABLE = {'LANGUAGES': ['fr', 'fr_FR', 'en', 'en_US', 'en_GB'],
+             'CURRENCY':  {'fr': 'euro', 'fr_FR': 'euro',
+                           'en': 'dollar', 'en_US': 'dollar',
+                           'en_GB': 'sterling'}}
+
 
 class ContextFilter(logging.Filter):
     """
@@ -58,38 +63,6 @@ class default_object(object):
     def __init__(self):
         self.MONOMIAL_LETTER = 'x'
         self.EQUATION_NAME = 'E'
-        self.CURRENCY = {'fr': 'euro', 'fr_FR': 'euro',
-                         'en': 'dollar', 'en_US': 'dollar',
-                         'en_GB': 'sterling'}
-
-
-class config_object(object):
-    def __init__(self):
-        try:
-            dummy = CONFIG['LOCALES']
-            dummy = CONFIG['LATEX']
-        except KeyError:
-            mainlogger.error('KeyError: missing category in user_config.yaml.')
-            raise KeyError('One expected category is missing in '
-                           'user_config.yaml')
-        try:
-            self.LANGUAGE = CONFIG['LOCALES']['LANGUAGE']
-        except KeyError:
-            self.LANGUAGE = 'en'
-            mainlogger.warning('No value found for the language in '
-                               'user_config.yaml. Defaulting to english.')
-        # If there's no category/item, then the value will get the default
-        # from get()
-        # But if no value matches an category/item, the value will still
-        # be None, so we have to set it afterwards.
-        self.ENCODING = CONFIG['LOCALES'].get('ENCODING', 'UTF-8')
-        if self.ENCODING is None:
-            self.ENCODING = 'UTF-8'
-        self.CURRENCY = CONFIG['LOCALES'].get('CURRENCY',
-                                              default.CURRENCY[self.LANGUAGE])
-        if self.CURRENCY is None:
-            self.CURRENCY = default.CURRENCY[self.LANGUAGE]
-        self.FONT = CONFIG['LATEX'].get('FONT') # defaults to None in all cases
 
 
 class path_object(object):
@@ -103,12 +76,16 @@ class path_object(object):
 
 def init():
     global rootdir, localedir, libdir, datadir, settingsdir
-    global CONFIG, config
     global default, path
     global mainlogger
     global dbg_logger
     global language
-    global locale_id
+    global locale
+    global currency
+    global font
+    global encoding
+    global xmllint
+    global euktoeps
 
     settings_dirname = "settings/"
 
@@ -132,8 +109,26 @@ def init():
     config_dbglogger()
 
     CONFIG = load_config('user_config', settingsdir)
-    config = config_object()
+    xmllint = CONFIG["PATHS"]["XMLLINT"]
+    euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
+    euktoeps_options = CONFIG["PATHS"]["EUKTOEPS_OPTIONS"]
+    language = CONFIG['LOCALES'].get('LANGUAGE', 'en_US')
+    if language not in AVAILABLE['LANGUAGES']:
+        language = 'en_US'
+        mainlogger.warning('The language was overriden by an unsupported '
+                           'value (' + str(language) + ') in a '
+                           'a configuration file.')
+    encoding = CONFIG['LOCALES'].get('ENCODING', 'UTF-8')
+    if encoding is None:
+        encoding = 'UTF-8'
+        mainlogger.warning('The encoding was overriden by None in '
+                           'a configuration file.')
+    currency = CONFIG['LOCALES'].get('CURRENCY',
+                                     AVAILABLE['CURRENCY'][language])
+    if currency is None:
+        currency = AVAILABLE['CURRENCY'][language]
+    if currency not in iter(AVAILABLE['CURRENCY'].values()):
+        currency = AVAILABLE['CURRENCY'][language]
+    font = CONFIG['LATEX'].get('FONT') # defaults to None in all cases
+    locale = language + '.' + encoding
 
-    locale_id = config.LANGUAGE + '.' + config.ENCODING
-
-    language = None
