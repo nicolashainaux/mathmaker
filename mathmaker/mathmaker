@@ -38,11 +38,17 @@ def main():
     startup_actions.check_dependencies()
     parser = argparse.ArgumentParser(description=\
                         'Creates maths exercices and their answers.')
-    parser.add_argument("-l", "--language", action='store', dest='lang',
+    parser.add_argument('-l', '--language', action='store', dest='lang',
                         default=settings.language,
-                        help="force the language of the output to LANGUAGE." \
-                             + " Default value is configured in " \
-                             + "mathmaker's config file.")
+                        help='force the language of the output to LANGUAGE. '
+                             'You can configure the value to be read from '
+                             'mathmaker\'s config file.')
+    parser.add_argument('-d', '--output-directory', action='store',
+                        dest='outputdir',
+                        default=settings.outputdir,
+                        help='where to put the possible output files, like '
+                             'pictures. Default value is set to current '
+                             'directory in mathmaker\'s config file.')
     parser.add_argument('main_directive', metavar='[DIRECTIVE|FILE]',
                         help='this can be either a sheetname included in '\
                              'mathmaker or a mathmaker xml file.')
@@ -52,6 +58,7 @@ def main():
     args = parser.parse_args()
     startup_actions.install_gettext_translations(language=args.lang)
     # From now on, settings.language has its definitive value
+    settings.outputdir = args.outputdir
     startup_actions.check_settings_consistency()
     shared.init()
 

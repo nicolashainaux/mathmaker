@@ -76,6 +76,7 @@ class path_object(object):
 
 def init():
     global rootdir, localedir, libdir, datadir, settingsdir
+    global outputdir
     global default, path
     global mainlogger
     global dbg_logger
@@ -85,7 +86,7 @@ def init():
     global font
     global encoding
     global xmllint
-    global euktoeps
+    global euktoeps, euktoeps_options
 
     settings_dirname = "settings/"
 
@@ -131,4 +132,8 @@ def init():
         currency = AVAILABLE['CURRENCY'][language]
     font = CONFIG['LATEX'].get('FONT') # defaults to None in all cases
     locale = language + '.' + encoding
+    outputdir = CONFIG['PATHS'].get('OUTPUT_DIR')
+    if not os.path.isdir(outputdir):
+        mainlogger.warning('The output directory read from the '
+                           'configuration is not a valid directory.')
 

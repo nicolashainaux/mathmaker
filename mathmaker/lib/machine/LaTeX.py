@@ -608,7 +608,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
         if self.create_pic_files:
             drawable_arg.into_pic(**options)
         else:
-            drawable_arg.into_pic(create_pic_files='no', **options)
+            drawable_arg.into_pic(create_pic_files=False, **options)
 
         s = "1"
         if 'scale' in options:

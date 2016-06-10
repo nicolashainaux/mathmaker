@@ -20,6 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import os
 import subprocess
 
 import settings
@@ -208,24 +209,16 @@ class Drawable(NamedObject):
     def into_pic(self, **options):
         hc = header_comment.generate('eukleides')
 
-        if 'create_pic_files' in options \
-            and not options['create_pic_files'] in YES:
-        #___
+        if 'create_pic_files' in options and not options['create_pic_files']:
             pass
-
         else:
+            curdir = os.getcwd()
+            os.chdir(settings.outputdir)
             f = open(self.euk_filename, 'w')
             f.write(hc + self.into_euk(**options))
             f.close()
-
-        if 'create_pic_files' in options \
-            and not options['create_pic_files'] in YES:
-        #___
-            pass
-
-        else:
             call_euktoeps = subprocess.Popen([settings.euktoeps,
                                               settings.euktoeps_options,
-                                              self.euk_filename
-                                              ]
-                                             )
+                                              self.euk_filename])
+            os.chdir(curdir)
+

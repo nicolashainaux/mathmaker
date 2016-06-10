@@ -20,6 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import os
 import sys, subprocess, shlex
 import gettext, locale
 from distutils.version import LooseVersion
@@ -121,5 +122,15 @@ def check_settings_consistency():
     try:
         dummy = latex.LANGUAGE_PACKAGE_NAME[settings.language]
     except KeyError:
-        log.error("The language chosen for output is not defined in "\
-                  "the LaTeX packages known by mathmaker.", exc_info=True)
+        log.critical('The language chosen for output is not defined in '
+                     'the LaTeX packages known by mathmaker. '
+                     'Stopping mathmaker.',
+                     exc_info=True)
+        sys.exit(1)
+
+    if not os.path.isdir(settings.outputdir):
+        log.critical('The output directory is not valid. Stopping mathmaker.')
+        sys.exit(1)
+    elif not settings.outputdir.endswith('/'):
+        settings.outputdir += '/'
+
