@@ -42,13 +42,14 @@ def main():
                         default=settings.language,
                         help='force the language of the output to LANGUAGE. '
                              'You can configure the value to be read from '
-                             'mathmaker\'s config file.')
+                             '~/.config/mathmaker/user_config.yaml')
     parser.add_argument('-d', '--output-directory', action='store',
                         dest='outputdir',
                         default=settings.outputdir,
                         help='where to put the possible output files, like '
                              'pictures. Default value is set to current '
-                             'directory in mathmaker\'s config file.')
+                             'directory. You can change it too in '
+                             '~/.config/mathmaker/user_config.yaml')
     parser.add_argument('-F', '--font', action='store',
                         dest='font',
                         default=settings.font,
@@ -56,7 +57,7 @@ def main():
                              'your system, lualatex will have then trouble '
                              'to compile the document. You can configure '
                              'a default value for the font in '
-                             'mathmaker\'s config file.')
+                             '~/.config/mathmaker/user_config.yaml')
     parser.add_argument('-e', '--encoding', action='store',
                         dest='encoding',
                         default=settings.encoding,
@@ -64,7 +65,7 @@ def main():
                              ' on your system, otherwise you may have trouble '
                              'to compile the document. You can configure '
                              'a default value for the encoding in '
-                             'mathmaker\'s config file.')
+                             '~/.config/mathmaker/user_config.yaml')
     parser.add_argument('main_directive', metavar='[DIRECTIVE|FILE]',
                         help='this can be either a sheetname included in '\
                              'mathmaker or a mathmaker xml file.')
