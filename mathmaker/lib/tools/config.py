@@ -31,16 +31,19 @@ def load_config(file_tag, settingsdir):
     """
     Will load the values from the yaml config file, named file_tag.yaml.
 
-    The default configuration values are loaded from mathmaker/settings/*.yaml,
-    then load_config will update with values found successively in
-    /etc/mathmaker/*.yaml, then in ~/.config/mathmaker/*.yaml, finally in
-    mathmaker/settings/dev/*.yaml.
+    The default configuration values are loaded from
+    mathmaker/settings/default/*.yaml, then load_config
+    will update with values found successively in
+    /etc/mathmaker/*.yaml, then in ~/.config/mathmaker/*.yaml,
+    finally in mathmaker/settings/dev/*.yaml.
     """
     if file_tag != 'logging':
         mainlogger = logging.getLogger("__main__")
     configuration = ext_dict()
     try:
-        with open(os.path.join(settingsdir, file_tag + '.yaml')) as file_path:
+        with open(os.path.join(settingsdir, 'default/', file_tag + '.yaml'))\
+            as file_path:
+        #___
             if file_tag != 'logging':
                 mainlogger.info('Loading ' + file_tag + '.yaml from '
                                 + file_path.name)

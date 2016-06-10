@@ -3,13 +3,12 @@
 
 # If you wish different values, you should make a copy and
 # edit your copy only.
-# As a user, your copy should be ~/.config/user_config.yaml
-# As a dev, your copy should be:
+# As a user, your copy should be stored as ~/.config/user_config.yaml
+# As a dev, your copy should be stored as:
 # path/to/mathmaker/mathmaker/settings/dev/user_config.yaml
 # (it will be ignored by git).
-# Only the modified parts will be taken into account.
-# e.g. if your copy does not contain any PATHS: values, the
-# default ones will be used.
+# The values redefined in a copy will override the default ones
+# below.
 
 PATHS:
     EUKTOEPS: euktoeps
