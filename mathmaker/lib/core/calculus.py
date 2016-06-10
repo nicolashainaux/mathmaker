@@ -473,9 +473,8 @@ class Equation(ComposedCalculable):
                 raise error.ImpossibleAction("turn into an Equation a " \
                             "SubstitutableEquality having not exactly 2 " \
                             "members")
-            literals_list = purge_from_duplicates(gather_literals(arg[0]) \
-                                                  + gather_literals(arg[1])
-                                                 )
+            literals_list = list(set(gather_literals(arg[0])
+                                     + gather_literals(arg[1])))
             if not len(literals_list) == 1:
                 raise error.ImpossibleAction("create an Equation from a " \
                  + "SubstitutableEquality containing more than ONE unknown " \

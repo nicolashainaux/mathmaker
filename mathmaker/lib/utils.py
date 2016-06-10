@@ -146,26 +146,6 @@ def gather_literals(xpr):
         return result
 
 
-
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief Purges the given list from duplicates elements
-#   @param l The list
-#   @return [list purged from duplicates elements]
-def purge_from_duplicates(l):
-    result = []
-
-    for elt in l:
-        if not elt in result:
-            result += [elt]
-
-    return result
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Checks if the literals of a *Equality|*Expression can be replaced
@@ -213,7 +193,7 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
     #    debug_str += repr(l) + " "
     #print "debug: literals_list = " + debug_str + "\n"
 
-    literals_list = purge_from_duplicates(literals_list)
+    literals_list = list(set(literals_list))
     #literals_list_bis = []
     #for elt in literals_list:
     #    literals_list_bis += [elt.clone()]
