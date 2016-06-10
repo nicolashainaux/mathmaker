@@ -20,8 +20,8 @@ LOCALES:
     LANGUAGE: en_US
     ENCODING: UTF-8
     # Values can be 'euro', 'sterling', 'dollar'
-    CURRENCY: euro
+    CURRENCY: dollar
 
 LATEX:
-    FONT: 
+    FONT:
 
