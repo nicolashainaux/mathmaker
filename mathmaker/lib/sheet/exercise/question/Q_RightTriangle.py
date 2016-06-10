@@ -221,9 +221,9 @@ class Q_RightTriangle(Q_Structure):
                     second_leg_unauthorized_values = \
                         pythagorean.get_legs_matching_given_leg(first_leg)
 
-                    second_leg_possible_values = utils.inverted_extraction(\
-                                                second_leg_unauthorized_values,
-                                                second_leg_values)
+                    second_leg_possible_values = \
+                                    list(set(second_leg_values)
+                                         - set(second_leg_unauthorized_values))
 
                     if randomly.heads_or_tails():
                         sides_values = [first_leg,
@@ -258,9 +258,8 @@ class Q_RightTriangle(Q_Structure):
                         pythagorean.get_legs_matching_given_hypotenuse(\
                                                                      hypotenuse)
 
-                    leg_possible_values = utils.inverted_extraction(\
-                                                        leg_unauthorized_values,
-                                                        leg_values)
+                    leg_possible_values = list(set(leg_values)
+                                               - set(leg_unauthorized_values))
 
                     if randomly.heads_or_tails():
                         sides_values = ["",

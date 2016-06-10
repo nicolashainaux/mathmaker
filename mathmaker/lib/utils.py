@@ -274,23 +274,3 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
     else:
         return n == how_many
 
-
-
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief Returns a list of the elements of list2 that are not in list1
-def inverted_extraction(list1, list2):
-    if not (type(list1) == list and type(list2) == list):
-        raise error.WrongArgument(str(list1) + " and " + str(list2),
-                                  " two lists.")
-
-    result = []
-
-    for elt in list2:
-        if not elt in list1:
-            result += [elt]
-
-    return result
-
