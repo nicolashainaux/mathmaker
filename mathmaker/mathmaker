@@ -68,7 +68,7 @@ def main():
                              'a default value for the encoding in '
                              '~/.config/mathmaker/user_config.yaml')
     parser.add_argument('main_directive', metavar='[DIRECTIVE|FILE]',
-                        help='this can be either a sheetname included in '\
+                        help='this can be either a sheetname included in '
                              'mathmaker or a mathmaker xml file.')
     parser.add_argument('--version', '-v',
                         action='version',
@@ -85,15 +85,14 @@ def main():
     if args.main_directive in sheet.AVAILABLE:
         sh = sheet.AVAILABLE[args.main_directive][0]()
     elif args.main_directive in XML_SHEETS:
-        sh = sheet.S_Generic(
-                        filename=XML_SHEETS[args.main_directive])
+        sh = sheet.S_Generic(filename=XML_SHEETS[args.main_directive])
     elif os.path.isfile(args.main_directive):
         sh = sheet.S_Generic(filename=args.main_directive)
     else:
-        log.error(args.main_directive \
-                  + " is not a correct directive for " + __software_name__ \
-                  + ", you should use any item from the following lists: " \
-                  + str(sorted([key for key in sheet.AVAILABLE]))\
+        log.error(args.main_directive
+                  + " is not a correct directive for " + __software_name__
+                  + ", you should use any item from the following lists: "
+                  + str(sorted([key for key in sheet.AVAILABLE]))
                   + str(sorted([key for key in XML_SHEETS])))
         #print("--- {sec} seconds ---"\
         #      .format(sec=round(time.time() - start_time, 3)))
