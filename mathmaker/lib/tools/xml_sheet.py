@@ -20,8 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import os
+import errno
 import subprocess
 import copy
+import logging
 
 import settings
 import xml.etree.ElementTree as XML_PARSER
@@ -56,12 +59,20 @@ CATALOG = { 'mental_calculation': exercise.X_MentalCalculation,
             #'generic': exercise.X_Generic
           }
 
-##
-#   @brief  Returns the attributes dictionary of node's child whose tag is
-#           matching the tag given as param. Recursively add the results for
-#           grandchildren too.
-#   @param  tag: the tag we're looking for
+
 def _get_attributes(node, tag, output=[]):
+    """
+    Gathers the attributes of all *node*'s children matching *tag*.
+
+    All attributes that match *tag* are recursively added to the output list.
+    :param node: The XML Tree node where to start from.
+    :type node: :class:`xml.etree.ElementTree.Element` instance
+    :param tag: The tag we're looking for.
+    :type tag: str
+    :param output: The attributes' list.
+    :type output: list
+    :rtype: list
+    """
     for child in node:
         if child.tag == tag:
             output.append(child.attrib)
@@ -69,17 +80,28 @@ def _get_attributes(node, tag, output=[]):
             output += _get_attributes(grandchild, tag)
     return output
 
-##
-#   @brief  Will return a list of all attributes dictionaries of all nodes
-#           whose tag matches the param tag, in filename.
+
 def get_attributes(filename, tag):
+    """
+    Gathers the attributes of all *filename*'s '*node*'s matching *tag*.
+
+    :param filename: The XML file name.
+    :type filename: str
+    :param tag: The tag we're looking for.
+    :type tag: str
+    :rtype: list
+    """
     return _get_attributes(XML_PARSER.parse(filename).getroot(), tag)
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief Gets the questions' kinds from the given file.
 def get_sheet_config(file_name):
+    """
+    Retrieves the sheet configuration values from *file_name*.
+
+    :param file_name: The XML file name.
+    :type file_name: str
+    :rtype: tuple
+    """
     # Validation of the xml file
     # xmllint --noout --schema sheet.xsd file_name
     with open(XML_SCHEMA_PATH, 'r') as schema_file:
@@ -142,14 +164,22 @@ def get_sheet_config(file_name):
             sheet_layout
             )
 
-# --------------------------------------------------------------------------
-##
-#   @brief Gets the questions' kinds from the given file.
+
 def get_exercises_list(file_name):
+    """
+    Retrieves the exercises' list from *file_name*.
+
+    :param file_name: The XML file name.
+    :type file_name: str
+    :rtype: list
+    """
+    mainlogger = logging.getLogger("__main__")
     try:
         xml_doc = XML_PARSER.parse(file_name).getroot()
     except FileNotFoundError:
-        raise error.UnreachableData("the file named: " + str(file_name))
+        mainlogger.error('FileNotFoundError: ' + file_tag)
+        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),
+                                str(file_name))
 
     exercises_list = []
 
@@ -163,14 +193,23 @@ def get_exercises_list(file_name):
     return exercises_list
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief Gets the questions' kinds from the given file.
 def get_q_kinds_from(file_name, sw_k_s={}, k_s_ctxt_tr={}):
+    """
+    Retrieves the exercise kind and the questions from *file_name*.
 
+    :param file_name: The XML file name.
+    :type file_name: str
+    :param sw_k_s: The swappable qkinds and qsubkinds dict.
+    :type sw_k_s: dict
+    :param k_s_ctxt_tr: The kind-subkind_contexts to translate.
+    :type k_s_ctxt_tr: dict
+    :rtype: tuple
+    """
+    mainlogger = logging.getLogger("__main__")
     try:
         xml_config = XML_PARSER.parse(file_name).getroot()
     except FileNotFoundError:
+        mainlogger.error('FileNotFoundError: ' + str(file_name))
         raise error.UnreachableData("the file named: " + str(file_name))
 
     questions = []
@@ -228,7 +267,8 @@ def get_q_kinds_from(file_name, sw_k_s={}, k_s_ctxt_tr={}):
                                              1] for i in range(int(elt.text))]
                         else:
                             raise error.XMLFileFormatError(\
-                            "Unknown element found in the xml file: " + elt.tag)
+                                    "Unknown element found in the xml file: "
+                                    + elt.tag)
 
                     if len(q_temp_list) != len(n_temp_list):
                         raise error.XMLFileFormatError(\
