@@ -50,7 +50,6 @@ from . import AlgebraMiniTest0
 from . import AlgebraMiniTest1
 from . import PythagoreanTheoremShortTest
 from . import ConverseAndContrapositiveOfPythagoreanTheoremShortTest
-from . import catalog
 
 S_Structure = S_Structure.S_Structure
 S_Generic = S_Generic.S_Generic

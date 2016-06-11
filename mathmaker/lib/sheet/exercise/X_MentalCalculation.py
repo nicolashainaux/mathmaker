@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import shlex
-import xml.etree.ElementTree as XML_PARSER
 from decimal import Decimal
 import copy
 import random
@@ -69,102 +68,6 @@ KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE = {
 to_unpack = copy.deepcopy(question.SUBKINDS_TO_UNPACK)
 Q_info = namedtuple('Q_info', 'type,kind,subkind,nb_source,options')
 
-# --------------------------------------------------------------------------
-##
-#   @brief Gets the questions' kinds from the given file.
-def get_q_kinds_from_file(file_name):
-
-    try:
-        xml_config = XML_PARSER.parse(file_name).getroot()
-    except FileNotFoundError:
-        raise error.UnreachableData("the file named: " + str(file_name))
-
-    questions = []
-
-    # For instance we will get a list of this kind of elements:
-    # [ {'kind': 'multi', 'subkind': 'direct', 'nb': 'int'}, 'table_2_9', 4]
-
-    x_kind = 'tabular' # default
-
-    for child in xml_config:
-        if child.tag == 'exercise':
-            if 'kind' in child.attrib:
-                x_kind = child.attrib['kind']
-            for subchild in child:
-                if subchild.tag == 'question':
-                    if (subchild.attrib['kind'], subchild.attrib['subkind']) \
-                        in SWAPPABLE_QKINDS_QSUBKINDS:
-                    #___
-                        (subchild.attrib['kind'], subchild.attrib['subkind']) \
-                        = (subchild.attrib['subkind'], subchild.attrib['kind'])
-
-                    if 'context' in subchild.attrib:
-                        if (subchild.attrib['kind'],
-                            subchild.attrib['subkind'],
-                            subchild.attrib['context']) \
-                            in KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE:
-                        #___
-                            (subchild.attrib['kind'],
-                             subchild.attrib['subkind'],
-                             subchild.attrib['context']) = \
-                            KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE[\
-                                                 (subchild.attrib['kind'],
-                                                  subchild.attrib['subkind'],
-                                                  subchild.attrib['context'])]
-                    for elt in subchild:
-                        o = copy.deepcopy(subchild.attrib)
-                        o.update(elt.attrib)
-                        questions += [[o, elt.attrib['source'], int(elt.text)]]
-
-                elif subchild.tag == 'mix':
-                    q_temp_list = []
-                    n_temp_list = []
-                    for elt in subchild:
-                        if elt.tag == 'question':
-                            q_temp_list += [elt.attrib]
-                        elif elt.tag == 'nb':
-                            # We don't check that 'source' is in elt.attrib,
-                            # this should have been checked by the xml schema,
-                            # nor we don't check if the source tag is valid.
-                            # This would be best done by the xml schema
-                            # (requires to use xsd1.1 but lxml validates only
-                            # xsd1.0). So far, it is done partially and later,
-                            # in lib/tools/tags.py
-                            n_temp_list += [[elt.attrib['source'],
-                                             elt.attrib,
-                                             1] for i in range(int(elt.text))]
-                        else:
-                            raise error.XMLFileFormatError(\
-                            "Unknown element found in the xml file: " + elt.tag)
-
-                    if len(q_temp_list) != len(n_temp_list):
-                        raise error.XMLFileFormatError(\
-                        "Incorrect mix section: the number of sources "\
-                        + "of numbers (" + str(len(n_temp_list)) + ") "\
-                        + "does not match the number of questions (" \
-                        + str(len(q_temp_list)) + ").")
-
-                    # So far, we only check if all of the numbers' sources
-                    # may be attributed to any of the questions, in order
-                    # to just distribute them all randomly.
-                    for n in n_temp_list:
-                        for q in q_temp_list:
-                            if not question.match_qtype_sourcenb(
-                                        q['kind'] + "_" + q['subkind'], n[0]):
-                            #___
-                                raise error.XMLFileFormatError(\
-                                "This source: " + str(n[0]) + " cannot be " \
-                                + "attributed to this question: " \
-                                + str(q['kind'] + "_" + q['subkind']))
-
-                    random.shuffle(q_temp_list)
-                    random.shuffle(n_temp_list)
-
-                    for (q,n) in zip(q_temp_list, n_temp_list):
-                        q.update(n[1])
-                        questions += [[q, n[0], 1]]
-
-    return (x_kind, questions)
 
 # --------------------------------------------------------------------------
 ##
@@ -327,11 +230,16 @@ class X_MentalCalculation(X_Structure):
     def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
         from lib import sheet
+        from lib.tools.xml_sheet import get_q_kinds_from, XML_SHEETS
+
         mc_mm_file = options['filename'] if 'filename' in options \
-                                         else sheet.catalog.XML_SHEETS[\
+                                         else XML_SHEETS[\
                                                   'mental_calculation_default']
 
-        (x_kind, q_list) = get_q_kinds_from_file(mc_mm_file)
+        (x_kind, q_list) = get_q_kinds_from(
+                            mc_mm_file,
+                            sw_k_s=SWAPPABLE_QKINDS_QSUBKINDS,
+                            k_s_ctxt_tr=KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE)
 
         X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,

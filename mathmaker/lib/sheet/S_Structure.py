@@ -20,100 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import subprocess
-import xml.etree.ElementTree as XML_PARSER
-
 import settings
 from lib import shared
-from .catalog import CATALOG, XML_SCHEMA_PATH
 from lib import error
 from lib.common.cst import *
 
-# --------------------------------------------------------------------------
-##
-#   @brief Gets the questions' kinds from the given file.
-def get_sheet_config(file_name):
-    # Validation of the xml file
-    # xmllint --noout --schema sheet.xsd file_name
-    with open(XML_SCHEMA_PATH, 'r') as schema_file:
-        call_xmllint = subprocess.Popen([settings.xmllint,
-                                         "--noout",
-                                         "--schema",
-                                         XML_SCHEMA_PATH,
-                                         file_name],
-                                        stderr=subprocess.PIPE)
-        returncode = call_xmllint.wait()
-        if returncode != 0:
-            raise error.XMLFileFormatError(\
-            "\nxmllint exited with a return code of " + str(returncode) + "\n"\
-            + "xmllint error message is:\n" \
-            + str(call_xmllint.stderr.read().decode(encoding='UTF-8')))
-
-    xml_doc = XML_PARSER.parse(file_name).getroot()
-
-    sheet_layout = { 'exc': [],
-                     'ans': []
-                   }
-
-    config = {'layout_type': 'std',
-              'layout_unit': 'cm',
-              'font_size_offset': '0'}
-
-    for child in xml_doc:
-        if child.tag == 'layout':
-            if 'type' in child.attrib:
-                config['layout_type'] = child.attrib['type']
-            if 'unit' in child.attrib:
-                config['layout_unit'] = child.attrib['unit']
-            if 'font_size_offset' in child.attrib:
-                config['font_size_offset'] = child.attrib['font_size_offset']
-
-            for exc_or_ans in child:
-                for line in exc_or_ans:
-                    if line.attrib['nb'] == 'None':
-                        sheet_layout[exc_or_ans.tag] += [None]
-                        for ex_nb in line:
-                            if ex_nb.text == 'all':
-                                sheet_layout[exc_or_ans.tag] += ['all']
-                            else:
-                                ##
-                                #   @todo   when we need to read a list of numbers
-                                pass
-                else:
-                    ##
-                    #   @todo   when we need to read the col_widths
-                    pass
-
-    return (xml_doc.attrib["header"],
-            xml_doc.attrib["title"],
-            xml_doc.attrib["subtitle"],
-            xml_doc.attrib["text"],
-            xml_doc.attrib["answers_title"],
-            config["layout_type"],
-            int(config["font_size_offset"]),
-            config["layout_unit"],
-            sheet_layout
-            )
-
-# --------------------------------------------------------------------------
-##
-#   @brief Gets the questions' kinds from the given file.
-def get_exercises_list(file_name):
-    try:
-        xml_doc = XML_PARSER.parse(file_name).getroot()
-    except FileNotFoundError:
-        raise error.UnreachableData("the file named: " + str(file_name))
-
-    exercises_list = []
-
-    for child in xml_doc:
-        if child.tag == 'exercise':
-            if not 'id' in child.attrib:
-                exercises_list += [CATALOG['generic']]
-            else:
-                exercises_list += [CATALOG[child.attrib['id']]]
-
-    return exercises_list
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------

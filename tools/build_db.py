@@ -28,7 +28,7 @@ import argparse
 current_dir = os.path.dirname(os.path.abspath(inspect.getsourcefile(lambda:0)))
 sys.path.insert(0, current_dir[:current_dir.rfind(os.path.sep)])
 import settings
-from lib.tools import po_file, xml_file
+from lib.tools import po_file, xml_sheet
 sys.path.pop(0)
 os.chdir('..')
 settings.init()
@@ -92,7 +92,7 @@ for lang in next(os.walk(settings.localedir))[1]:
 
 # Extract data from xml files and insert them into the db
 for f in WORDINGS_FILES:
-    wordings = xml_file.get_attributes(f, "wording")
+    wordings = xml_sheet.get_attributes(f, "wording")
     db_rows = list( zip([w['wording_context'] for w in wordings],
                         [w['wording'] for w in wordings],
                         [w['nb1_min'] for w in wordings],
