@@ -164,7 +164,8 @@ exercises counter (which is useful when begining to write the answers sheet)")\
         result += " " + "\n"
         result += r"\usetikzlibrary{calc}" + "\n"
         result += r"\epstopdfsetup{outdir=./}" + "\n"
-        result += r"\usepackage{lxfonts}" + "\n"
+        if settings.round_letters_in_math_expr:
+            result += r"\usepackage{lxfonts}" + "\n"
 
         if self.redirect_output_to_str:
             return result

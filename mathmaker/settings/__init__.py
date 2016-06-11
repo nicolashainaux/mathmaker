@@ -87,6 +87,7 @@ def init():
     global encoding
     global xmllint
     global euktoeps, euktoeps_options
+    global round_letters_in_math_expr
 
     settings_dirname = "settings/"
 
@@ -136,4 +137,6 @@ def init():
     if not os.path.isdir(outputdir):
         mainlogger.warning('The output directory read from the '
                            'configuration is not a valid directory.')
+    round_letters_in_math_expr = CONFIG['LATEX']\
+                                 .get('ROUND_LETTERS_IN_MATH_EXPR', False)
 
