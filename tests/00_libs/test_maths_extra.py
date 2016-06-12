@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import pytest
-import locale
 
 from lib.maths_lib import ten_power_gcd
 from tools import wrap_nb
