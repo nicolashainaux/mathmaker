@@ -34,7 +34,12 @@ from lib.core.root_calculus import Unit, Value
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns the word wrapped between the two given strings.
-def wrap(opening_str, word, ending_str):
+def wrap(word, braces='{}', o_str=None, e_str=None):
+    opening_str, ending_str = braces
+    if o_str not in [None, '']:
+        opening_str = o_str
+    if e_str not in [None, '']:
+        ending_str = e_str
     return opening_str + word + ending_str
 
 # --------------------------------------------------------------------------
@@ -42,9 +47,9 @@ def wrap(opening_str, word, ending_str):
 #   @brief Returns the word but with removed first and last char, plus
 #          possibly following punctuation.
 def unwrapped(word):
-    if word.endswith('.') or word.endswith(',') \
-    or word.endswith(':') or word.endswith(';') \
-    or word.endswith('?') or word.endswith('!'):
+    if (word.endswith('.') or word.endswith(',')
+        or word.endswith(':') or word.endswith(';')
+        or word.endswith('?') or word.endswith('!')):
         return word[1:-2]
     else:
         return word[1:-1]
@@ -52,14 +57,16 @@ def unwrapped(word):
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns True if word is wrapped by opening_str and ending_str
-def is_wrapped(opening_str, word, ending_str):
+def is_wrapped(word, braces='{}'):
+    opening_str, ending_str = braces
     return word.startswith(opening_str) and word.endswith(ending_str)
 
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns True if word is wrapped by opening_str and ending_str or
 #          ending_str plus a punctuation.
-def is_wrapped_p(opening_str, word, ending_str):
+def is_wrapped_p(word, braces='{}'):
+    opening_str, ending_str = braces
     return word.startswith(opening_str) \
            and (word.endswith(ending_str) \
                 or word.endswith(ending_str + ".") \
@@ -73,7 +80,8 @@ def is_wrapped_p(opening_str, word, ending_str):
 ##
 #   @brief Returns True if word is wrapped by opening_str and ending_str plus
 #          a punctuation.
-def is_wrapped_P(opening_str, word, ending_str):
+def is_wrapped_P(word, braces='{}'):
+    opening_str, ending_str = braces
     return word.startswith(opening_str) \
            and (word.endswith(ending_str + ".") \
                 or word.endswith(ending_str + ",") \
@@ -86,38 +94,16 @@ def is_wrapped_P(opening_str, word, ending_str):
 ##
 #   @brief Returns True if word is a "unit" tag (e.g. ends with _unit})
 def is_unit(word):
-    return (is_wrapped("{", word, "}") and word[1:-1].endswith("_unit")) \
-        or (is_wrapped_P("{", word, "}") and word[1:-2].endswith("_unit"))
+    return (is_wrapped(word) and word[1:-1].endswith("_unit")) \
+        or (is_wrapped_P(word) and word[1:-2].endswith("_unit"))
 
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns True if word is a "unit" tag (e.g. ends with _unitN})
 def is_unitN(word):
-    return (is_wrapped("{", word, "}") and word[1:-2].endswith("_unit")) \
-        or (is_wrapped_P("{", word, "}") and word[1:-3].endswith("_unit"))
+    return (is_wrapped(word) and word[1:-2].endswith("_unit")) \
+        or (is_wrapped_P(word) and word[1:-3].endswith("_unit"))
 
-# --------------------------------------------------------------------------
-##
-#   @brief rewrap("<", word, ">", "{", "}") will rewrap <word> in {word}.
-#          Take care though, it won't take the positions of "<" and ">" into
-#          account.
-def rewrap(old_opening, word, old_closing, new_opening, new_closing):
-    return word.replace(old_opening, new_opening)\
-               .replace(old_closing, new_closing)
-
-# --------------------------------------------------------------------------
-##
-#   @brief rewrap_all_wp("<", sentence, ">", "{", "}", ".") will rewrap all
-#          '<word>.' in '{word}.'
-#          Take care though, it won't take the positions of "<" and ">" into
-#          account.
-def rewrap_all_wp(old_opening, sentence, old_closing, new_opening, \
-                    new_closing, punctuation):
-    return " ".join([ rewrap(old_opening, w, old_closing + punctuation,
-                              new_opening, new_closing + punctuation) \
-                      if is_wrapped(old_opening, w, old_closing + punctuation) \
-                      else w \
-                      for w in sentence.split() ])
 
 # --------------------------------------------------------------------------
 ##
@@ -125,7 +111,7 @@ def rewrap_all_wp(old_opening, sentence, old_closing, new_opening, \
 #          one hint will be taken into account.
 def cut_off_hint_from(sentence):
     last_word = sentence.split()[-1:][0]
-    hint_block = last_word if is_wrapped("|", last_word, "|") \
+    hint_block = last_word if is_wrapped(last_word, braces='||') \
                            and last_word[1:-1].startswith('hint:') \
                            else ""
     if len(hint_block):
@@ -143,13 +129,13 @@ def cut_off_hint_from(sentence):
 def handle_valueless_names_tags(arg, sentence):
     valueless_nameblocks = [ w[1:-1] for w in sentence.split() \
                              if not '=' in w \
-                                 and is_wrapped("{", w, "}") \
+                                 and is_wrapped(w) \
                                  and (w[1:].startswith('name') \
                                       or w[1:].startswith('masculine_name') \
                                       or w[1:].startswith('feminine_name')) ] \
                          + [ w[1:-2] for w in sentence.split()\
                              if not '=' in w \
-                                 and is_wrapped_P("{", w, "}") \
+                                 and is_wrapped_P(w) \
                                  and (w[1:].startswith('name') \
                                        or w[1:].startswith('masculine_name') \
                                        or w[1:].startswith('feminine_name')) ]
@@ -178,14 +164,14 @@ def handle_valueless_names_tags(arg, sentence):
 def handle_valueless_unit_tags(arg, sentence):
     valueless_unitblocks = [ w[1:-1] for w in sentence.split() \
                                if not '=' in w
-                                  and (is_wrapped("{", w, "}") \
-                                       or is_wrapped("<", w, ">")) \
+                                  and (is_wrapped(w) \
+                                       or is_wrapped(w, braces='<>')) \
                                   and (w[:-1].endswith('_unit') \
                                        or w[:-2].endswith('_unit') ) ] \
                          + [ w[1:-2] for w in sentence.split()\
                                 if not '=' in w \
-                                   and (is_wrapped_P("{", w, "}") \
-                                        or is_wrapped_P("<", w, ">")) \
+                                   and (is_wrapped_P(w) \
+                                        or is_wrapped_P(w, braces='<>')) \
                                    and (w[:-2].endswith('_unit') \
                                         or w[:-3].endswith('_unit') )]
     d = copy.deepcopy(UNIT_KINDS)
@@ -223,8 +209,8 @@ def handle_valueless_unit_tags(arg, sentence):
 def process_attr_values(sentence):
     attr_values = {}
     key_val_blocks = [ w for w in sentence.split() \
-                         if (is_wrapped_p("{", w, "}") \
-                             or is_wrapped_p("<", w, ">")) \
+                         if (is_wrapped_p(w) \
+                             or is_wrapped_p(w, braces='<>')) \
                             and '=' in w ]
     for kv in key_val_blocks:
         [key, val] = unwrapped(kv).split(sep='=')
@@ -236,16 +222,16 @@ def process_attr_values(sentence):
             if not 'length_' + unit_id in attr_values:
                 pairs_to_add.update({'length_' + unit_id: attr_values[key]})
     attr_values.update(pairs_to_add)
-    transformed_sentence = " ".join([ wrap("{", w[1:-1].split(sep='=')[0], "}")\
-                                      if (is_wrapped("{", w, "}") \
-                                          or is_wrapped("<", w, ">")) \
+    transformed_sentence = " ".join([ wrap(w[1:-1].split(sep='=')[0])\
+                                      if (is_wrapped(w) \
+                                          or is_wrapped(w, braces='<>')) \
                                          and '=' in w \
                                       else w \
                                       for w in sentence.split() ])
-    transformed_sentence = " ".join([ wrap("{", w[1:-2].split(sep='=')[0],
-                                           "}" + w[-1:]) \
-                                      if (is_wrapped_P("{", w, "}") \
-                                          or is_wrapped_P("<", w, ">")) \
+    transformed_sentence = " ".join([ wrap(w[1:-2].split(sep='=')[0],
+                                           e_str='}' + w[-1:]) \
+                                      if (is_wrapped_P(w) \
+                                          or is_wrapped_P(w, braces='<>')) \
                                          and '=' in w \
                                       else w \
                                       for w in transformed_sentence.split() ])
@@ -268,13 +254,13 @@ def merge_nb_unit_pairs(arg):
         if next_w != None and (is_unit(next_w) or is_unitN(next_w)):
             next_w_is_a_unit = True
         #sys.stderr.write(" next_w_is_a_unit: " + str(next_w_is_a_unit) + "\n")
-        if is_wrapped("{", w, "}") and w[1:3] == "nb" and next_w_is_a_unit:
+        if is_wrapped(w) and w[1:3] == "nb" and next_w_is_a_unit:
             n = w[1:-1]
             u = ""
-            if is_wrapped("{", next_w, "}"):
+            if is_wrapped(next_w):
                 u = next_w[1:-1]
                 p = ""
-            elif is_wrapped_P("{", next_w, "}"):
+            elif is_wrapped_P(next_w):
                 u = next_w[1:-2]
                 p = next_w[-1]
             new_attr_name = n + "_" + u
@@ -304,8 +290,8 @@ def merge_nb_unit_pairs(arg):
 ##
 #   @brief  Returns all values found wrapped in {}.
 def extract_formatting_tags_from(s):
-    return [ w[1:-1] for w in s.split() if is_wrapped("{", w, "}") ] \
-           + [ w[1:-2] for w in s.split() if is_wrapped_P("{", w, "}") ]
+    return [w[1:-1] for w in s.split() if is_wrapped(w)] \
+           + [w[1:-2] for w in s.split() if is_wrapped_P(w)]
 
 # --------------------------------------------------------------------------
 ##
