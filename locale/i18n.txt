@@ -1,4 +1,0 @@
-GENERATING THE POT FILE :
-
-cd <path_to_mathmaker>
-xgettext --keyword=_ --output=locale/mathmaker.pot *.py */*.py */*/*.py */*/*/*.py
