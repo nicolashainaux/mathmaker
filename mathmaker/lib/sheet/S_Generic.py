@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from .S_Structure import S_Structure
-from lib.tools.xml_sheet import get_sheet_config, get_exercises_list
 
 # ------------------------  lines_nb    col_widths   exercises
 #SHEET_LAYOUT = { 'exc': [ None,                    'all'
@@ -49,6 +48,7 @@ class S_Generic(S_Structure):
     #   @return One instance of sheet.Generic
     def __init__(self, filename, **options):
         self.derived = True
+        from lib.tools.xml_sheet import get_sheet_config, get_exercises_list
 
         (header,
          title,

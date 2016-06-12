@@ -25,10 +25,12 @@ import errno
 import subprocess
 import copy
 import logging
+import random
 
 import settings
 import xml.etree.ElementTree as XML_PARSER
 from lib.sheet import exercise
+from lib.sheet.exercise import question
 
 D = settings.libdir + "sheet/frameworks/"
 XML_SCHEMA_PATH = D + "sheet.xsd"

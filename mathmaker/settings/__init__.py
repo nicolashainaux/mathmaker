@@ -76,6 +76,7 @@ class path_object(object):
 
 def init():
     global rootdir, localedir, libdir, datadir, settingsdir
+    global projectdir
     global outputdir
     global default, path
     global mainlogger
@@ -100,6 +101,7 @@ def init():
     libdir = rootdir + "lib/"
     datadir = rootdir + "data/"
     settingsdir = rootdir + settings_dirname
+    projectdir = rootdir[:-len('mathmaker/')]
 
     default = default_object()
     path = path_object()

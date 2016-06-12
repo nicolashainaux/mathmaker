@@ -8,3 +8,4 @@ legacy_tests/
 htmlcov/
 .coverage
 .cache/
+tests/outfiles/

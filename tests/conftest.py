@@ -33,5 +33,6 @@ settings.locale = 'en_US.UTF-8'
 gettext.translation(__software_name__,
                     settings.localedir,
                     ['en']).install()
+settings.outputdir = settings.projectdir + 'tests/outfiles/'
 from lib import shared
 shared.init()
