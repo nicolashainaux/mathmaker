@@ -79,9 +79,10 @@ def check_dependency(name, goal, path_to, required_version_nb):
 
 def check_dependencies():
     """Will check all mathmaker's dependencies."""
-    check_dependency("euktoeps", "produce pictures", settings.euktoeps,
-                     "1.5.4")
-    check_dependency("xmllint", "read xml files", settings.xmllint, "20901")
+    return (check_dependency("euktoeps", "produce pictures",
+                            settings.euktoeps, "1.5.4")
+            and check_dependency("xmllint", "read xml files",
+                                 settings.xmllint, "20901"))
 
 
 def install_gettext_translations(language=settings.language):
@@ -96,25 +97,26 @@ def install_gettext_translations(language=settings.language):
         settings.language = language
     except IOError as msg:
         log.critical(err_msg.format(gettext_msg=msg, l=language))
-        raise ValueError(err_msg.format(gettext_msg=msg, l=language))
+        raise EnvironmentError(err_msg.format(gettext_msg=msg, l=language))
     return True
 
 
-def check_settings_consistency():
+def check_settings_consistency(language=settings.language,
+                               od=settings.outputdir):
     """Will check the consistency of several settings values."""
     # Check the chosen language belongs to latex.LANGUAGE_PACKAGE_NAME
-    err_msg = 'The language chosen for output (' + settings.language \
+    err_msg = 'The language chosen for output (' + language \
               + ') is not defined in the LaTeX packages known by mathmaker. '\
               'Stopping mathmaker.'
     try:
-        dummy = latex.LANGUAGE_PACKAGE_NAME[settings.language]
+        dummy = latex.LANGUAGE_PACKAGE_NAME[language]
     except KeyError:
         log.critical(err_msg, exc_info=True)
         raise ValueError(err_msg)
 
-    err_msg = 'The output directory (' + str(settings.outputdir) \
+    err_msg = 'The output directory (' + str(od) \
               + ') is not valid. Stopping mathmaker.'
-    if not os.path.isdir(settings.outputdir):
+    if not os.path.isdir(od):
         log.critical(err_msg)
         raise NotADirectoryError(err_msg)
     elif not settings.outputdir.endswith('/'):
