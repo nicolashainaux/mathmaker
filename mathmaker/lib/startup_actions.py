@@ -47,6 +47,7 @@ def check_dependency(name, goal, path_to, required_version_nb):
     :type path_to: str
     :param required_version_nb: well, the required version number
     :type required_version_nb: str
+    :rtype: bool
     """
     err_msg = "mathmaker requires {n} to {g}".format(n=name, g=goal)
     the_call = None
@@ -103,7 +104,14 @@ def install_gettext_translations(language=settings.language):
 
 def check_settings_consistency(language=settings.language,
                                od=settings.outputdir):
-    """Will check the consistency of several settings values."""
+    """
+    Will check the consistency of several settings values.
+
+    :param language: language to use. Should be settings.language.
+    :type language: str
+    :param od: output directory. Shouldn't be else than settings.outputdir
+    :type od: str
+    """
     # Check the chosen language belongs to latex.LANGUAGE_PACKAGE_NAME
     err_msg = 'The language chosen for output (' + language \
               + ') is not defined in the LaTeX packages known by mathmaker. '\
@@ -119,6 +127,7 @@ def check_settings_consistency(language=settings.language,
     if not os.path.isdir(od):
         log.critical(err_msg)
         raise NotADirectoryError(err_msg)
+    # We need to modify settings.outputdir directly, so no use of od kw
     elif not settings.outputdir.endswith('/'):
         log.warning('The output directory is correct but should end '
                     'with a /. Correcting it.')
