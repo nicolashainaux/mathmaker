@@ -31,29 +31,34 @@ from lib.common import latex
 
 log = settings.mainlogger
 
-##
-#   @brief  Will check if a dependency is installed plus its version number.
-#           The version number is supposed to be displayed at the end of the
-#           line containing 'version' when calling `executable --version`
-#           (or the equivalent)
-#   @param  name    The name of the executable to test
-#   @param  goal    A string telling shortly why mathmaker needs it
-#   @param  path_to The path to the executable to test
-#   @param  version_option  Usually it's --version or -v
-#   @param  required_version_nb A string containing the required version number
-def check_dependency(name, goal, path_to, version_option, required_version_nb):
-    ERR_MSG = "mathmaker requires {n} to {g}".format(n=name,
-                                                     g=goal)
+
+def check_dependency(name, goal, path_to, required_version_nb):
+    """
+    Will check if a dependency is installed plus its version number.
+
+    The version number is supposed to be displayed at the end of the
+    line containing 'version' when calling `executable --version`
+    (or the equivalent).
+    :param name: the dependency's name.
+    :type name: str
+    :param goal: tells shortly why mathmaker needs it for
+    :type goal: str
+    :param path_to: the path to the executable to test
+    :type path_to: str
+    :param required_version_nb: well, the required version number
+    :type required_version_nb: str
+    """
+    err_msg = "mathmaker requires {n} to {g}".format(n=name, g=goal)
     the_call = None
     try:
         the_call = subprocess.Popen([path_to, "--version"],
                                      stdout=subprocess.PIPE,
                                      stderr=subprocess.STDOUT)
     except OSError:
-        log.error(ERR_MSG + " but the path to {n} written in mathmaker's "\
-                  "config file doesn't seem to match anything."\
-                  .format(n=name))
-        sys.exit(2)
+        add_msg = " but the path to {n} written in mathmaker's "\
+                  "config file doesn't seem to match anything.".format(n=name)
+        log.error(err_msg + add_msg)
+        raise EnvironmentError(err_msg + add_msg)
 
     v = shlex.split(subprocess.Popen(["grep", "version"],
                                      stdin=the_call.stdout,
@@ -62,75 +67,58 @@ def check_dependency(name, goal, path_to, version_option, required_version_nb):
 
     installed_version_nb = str(v)
 
-    if LooseVersion(installed_version_nb) <  LooseVersion(required_version_nb):
-        log.error(ERR_MSG + " but the installed version number {nb1} " \
+    if LooseVersion(installed_version_nb) < LooseVersion(required_version_nb):
+        add_msg = " but the installed version number {nb1} " \
                   "is lower than expected (at least {nb2})."\
-                  .format(nb1=installed_version_nb,
-                          nb2=required_version_nb))
-        sys.exit(2)
+                  .format(nb1=installed_version_nb, nb2=required_version_nb)
+        log.error(err_msg + add_msg)
+        raise EnvironmentError(err_msg + add_msg)
 
-##
-#   @brief  Will check all mathmaker's dependencies.
+    return True
+
+
 def check_dependencies():
-    check_dependency("euktoeps", "produce pictures",
-                     settings.euktoeps, "-v",
+    """Will check all mathmaker's dependencies."""
+    check_dependency("euktoeps", "produce pictures", settings.euktoeps,
                      "1.5.4")
-    check_dependency("xmllint", "read xml files",
-                     settings.xmllint, "--version",
-                     "20901")
+    check_dependency("xmllint", "read xml files", settings.xmllint, "20901")
 
-##
-#   @brief  Will install output's language (gettext functions)
+
 def install_gettext_translations(language=settings.language):
+    """Will install output's language (gettext functions)"""
+    err_msg = 'gettext returned the following message:"{gettext_msg}"'\
+              '. It means the desired language ({l}) isn\'t available yet '\
+              'in mathmaker. Can\'t continue. Stopping mathmaker.'
     try:
         gettext.translation(__software_name__,
                             settings.localedir,
                             [language]).install()
         settings.language = language
     except IOError as msg:
-        log.warning("gettext returned the following message: '" \
-                    + str(msg) + "'. " \
-                    + "It means the language indicated either in the command \
-line or read from the configuration file ({l}) isn't available yet \
-in {software_ref}, what will try to produce output in the language of your \
-system...".format(software_ref=__software_name__, l=language))
-        try:
-            defaultlocale = locale.getdefaultlocale()[0]
-            gettext.install(__software_name__,
-                            settings.localedir,
-                            [defaultlocale])
-            settings.language = defaultlocale
-            log.warning("mathmaker will produce output in the system default"\
-                        "locale ({locale_name})."\
-                        .format(locale_name=defaultlocale))
-        except IOError as msg:
-            gettext.translation(__software_name__,
-                                settings.localedir,
-                                ['en']).install()
-            settings.language = 'en'
-            log.warning("gettext returned the following message:'" \
-                        + str(msg) + "'. " \
-                        + "It means the language of your system isn't \
-available yet in {software_ref}, what will produce output in \
-english. If this results in producing an error, then your installation isn't \
-complete.".format(software_ref=__software_name__))
+        log.critical(err_msg.format(gettext_msg=msg, l=language))
+        raise ValueError(err_msg.format(gettext_msg=msg, l=language))
+    return True
 
-##
-#   @brief  Will check the consistency of some settings values.
+
 def check_settings_consistency():
+    """Will check the consistency of several settings values."""
     # Check the chosen language belongs to latex.LANGUAGE_PACKAGE_NAME
+    err_msg = 'The language chosen for output (' + settings.language \
+              + ') is not defined in the LaTeX packages known by mathmaker. '\
+              'Stopping mathmaker.'
     try:
         dummy = latex.LANGUAGE_PACKAGE_NAME[settings.language]
     except KeyError:
-        log.critical('The language chosen for output is not defined in '
-                     'the LaTeX packages known by mathmaker. '
-                     'Stopping mathmaker.',
-                     exc_info=True)
-        sys.exit(1)
+        log.critical(err_msg, exc_info=True)
+        raise ValueError(err_msg)
 
+    err_msg = 'The output directory (' + str(settings.outputdir) \
+              + ') is not valid. Stopping mathmaker.'
     if not os.path.isdir(settings.outputdir):
-        log.critical('The output directory is not valid. Stopping mathmaker.')
-        sys.exit(1)
+        log.critical(err_msg)
+        raise NotADirectoryError(err_msg)
     elif not settings.outputdir.endswith('/'):
+        log.warning('The output directory is correct but should end '
+                    'with a /. Correcting it.')
         settings.outputdir += '/'
 
