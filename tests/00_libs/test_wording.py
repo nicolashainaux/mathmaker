@@ -22,6 +22,7 @@
 
 import pytest
 
+from lib import shared
 from lib.tools.wording import *
 from tools import wrap_nb
 
@@ -32,6 +33,58 @@ class raw_obj(object): pass
 def o1():
     o = raw_obj()
     o.name = 'Cosette'
+    o.capacity_unit = 'L'
+    return o
+
+@pytest.fixture
+def ow7():
+    o = raw_obj()
+    o.nb1 = 3
+    o.capacity_unit = 'L'
+    o.nb = 20
+    o.length_unit1 = 'cm'
+    o.nb3 = 9
+    o.length_unit3 = 'mm'
+    o.volume_unit3 = 'mm'
+    o.wording = 'A glas of {nb1} {capacity_unit} and a rule of ' \
+                '{nb} {length_unit1} long and a dice of {nb3} {volume_unit3}.'
+    return o
+
+@pytest.fixture
+def ow2():
+    o = raw_obj()
+    o.nb = 6
+    o.nb3 = 11
+    o.wording = 'Just a try for a {name}, a {nb} {capacity_unit}; a ' \
+                '{nb1=8} {length_unit1} and finally {nb3} {volume_unit3=cm}.'
+    return o
+
+@pytest.fixture
+def ow1():
+    o = raw_obj()
+    o.nb1 = 4
+    o.wording = 'Calculate the volume of a cube whose side\'s length is ' \
+                '{nb1} {length_unit=cm}. |hint:volume_unit|'
+    setup_wording_format_of(o)
+    return o
+
+@pytest.fixture
+def ow2bis():
+    o = raw_obj()
+    o.nb1 = 4
+    o.nb2 = 7
+    o.wording = 'How much is {nb1} {length_unit1=dm} '\
+                '+ {nb2} {length_unit2=cm}? |hint:length_unit1|'
+    setup_wording_format_of(o)
+    return o
+
+@pytest.fixture
+def ow2ter():
+    o = raw_obj()
+    o.nb1 = 27
+    o.wording = 'What\'s the area of the side of a cube whose volume '\
+                'is {nb1} {volume_unit=cm}? |hint:area_unit|'
+    setup_wording_format_of(o)
     return o
 
 
@@ -150,6 +203,13 @@ def test_is_wrapped_P_05():
     assert is_wrapped_P('<Two words>?', braces='<>') is True
 
 
+def test_extract_formatting_tags_from_01():
+    """Checks if {all} {these} {tags}, and even this {one}! are found."""
+    assert extract_formatting_tags_from('{all} {these} {tags}, and even '
+                                        'this {one}! are found') == \
+                                                ['all', 'these', 'tags', 'one']
+
+
 def test_is_unit_01():
     """Checks if is_unit('{some_unit}') is True."""
     assert is_unit('{some_unit}') is True
@@ -236,4 +296,151 @@ def test_handle_valueless_names_tags_03(o1):
     assert o1.name == 'Cosette'
 
 
+def test_handle_valueless_names_tags_04(o1):
+    """Checks if only valueless (yet) names tags are handled (correctly)."""
+    handle_valueless_names_tags(o1, 'We know her {feminine_name} '
+                                    'but not her {name=Fantine}')
+    assert o1.name == 'Cosette'
 
+
+def test_handle_valueless_names_tags_05(o1):
+    """Checks if only valueless (yet) names tags are handled (correctly)."""
+    handle_valueless_names_tags(o1, 'We know her {feminine_name=Margaret} '
+                                    'but not her {name=Fantine}')
+    assert not hasattr(o1, 'feminine_name')
+
+
+def test_handle_valueless_unit_tags_01(o1):
+    """Checks if only valueless (yet) units tags are handled (correctly)."""
+    handle_valueless_unit_tags(o1, 'It weighs {nb1} {mass_unit}.')
+    assert hasattr(o1, 'mass_unit')
+
+
+def test_handle_valueless_unit_tags_02(o1):
+    """Checks if only valueless (yet) units tags are handled (correctly)."""
+    handle_valueless_unit_tags(o1, 'Its area is {nb1} {area_unit}.')
+    assert hasattr(o1, 'length_unit')
+
+
+def test_handle_valueless_unit_tags_03(o1):
+    """Checks if only valueless (yet) units tags are handled (correctly)."""
+    handle_valueless_unit_tags(o1, 'Its volume is {nb1} {volume_unit}.')
+    assert hasattr(o1, 'length_unit')
+
+
+def test_handle_valueless_unit_tags_04(o1):
+    """Checks if only valueless (yet) units tags are handled (correctly)."""
+    handle_valueless_unit_tags(o1, 'The first is {nb1} {length_unit1} long '
+                                   'and the second\'s area is {nb2} '
+                                   '{area_unit2}.')
+    assert hasattr(o1, 'length_unit2')
+
+
+def test_process_attr_values_01():
+    """Checks if {such_tags=val} are correctly processed."""
+    assert process_attr_values('He likes {animal=cat}. He has a garden '
+                               'as wide as {nb1} {area_unit1}. He wants '
+                               'a {nb2} {volume_unit2=m} swiming pool.') == \
+    ('He likes {animal}. He has a garden as wide as {nb1} {area_unit1}. '
+     'He wants a {nb2} {volume_unit2} swiming pool.', {'animal': 'cat',
+                                                       'length_unit2': 'm',
+                                                       'volume_unit2': 'm'})
+
+
+def test_merge_nb_unit_pairs_01(ow7):
+    """Checks if {nb} {*unit} pairs are correctly processed in obj.wording."""
+    merge_nb_unit_pairs(ow7)
+    assert ow7.wording == 'A glas of {nb1_capacity_unit} and a rule of ' \
+                '{nb_length_unit1} long and a dice of {nb3_volume_unit3}.'
+
+
+def test_merge_nb_unit_pairs_02(ow7):
+    """Checks if {nb} {*unit} pairs are correctly processed in obj.wording."""
+    merge_nb_unit_pairs(ow7)
+    assert ow7.nb_length_unit1 == '\\SI{20}{cm}'
+
+
+def test_merge_nb_unit_pairs_03(ow7):
+    """Checks if {nb} {*unit} pairs are correctly processed in obj.wording."""
+    merge_nb_unit_pairs(ow7)
+    assert ow7.nb1_capacity_unit == '\\SI{3}{L}'
+
+
+def test_merge_nb_unit_pairs_04(ow7):
+    """Checks if {nb} {*unit} pairs are correctly processed in obj.wording."""
+    merge_nb_unit_pairs(ow7)
+    assert ow7.nb3_volume_unit3 == '\\SI{9}{mm^{\\text{3}}}'
+
+
+def test_setup_wording_format_of_01(ow2):
+    """Checks if obj.wording is correctly setup."""
+    setup_wording_format_of(ow2)
+    assert ow2.wording == 'Just a try for a {name}, a {nb_capacity_unit}; '\
+                          'a {nb1_length_unit1} and finally '\
+                          '{nb3_volume_unit3}.'
+
+
+def test_setup_wording_format_of_02(ow2):
+    """Checks if obj.wording is correctly setup."""
+    setup_wording_format_of(ow2)
+    assert hasattr(ow2, 'name')
+
+
+def test_setup_wording_format_of_03(ow2):
+    """Checks if obj.wording is correctly setup."""
+    setup_wording_format_of(ow2)
+    assert ow2.nb3_volume_unit3 == '\\SI{11}{cm^{\\text{3}}}'
+
+
+def test_setup_wording_format_of_04(ow2):
+    """Checks if obj.wording is correctly setup."""
+    setup_wording_format_of(ow2)
+    assert ow2.nb1_length_unit1.startswith('\\SI{8}{')
+
+
+def test_setup_wording_format_of_05(ow2):
+    """Checks if obj.wording is correctly setup."""
+    setup_wording_format_of(ow2)
+    assert hasattr(ow2, 'nb_capacity_unit')
+
+
+def test_setup_wording_format_of_06(ow1):
+    """Checks if obj.wording is correctly setup."""
+    assert hasattr(ow1, 'volume_unit')
+
+
+def test_setup_wording_format_of_07(ow1):
+    """Checks if obj.wording is correctly setup."""
+    assert ow1.volume_unit == 'cm^{\\text{3}}'
+
+
+def test_setup_wording_format_of_08(ow2bis):
+    """Checks if obj.wording is correctly setup."""
+    assert ow2bis.hint == 'dm'
+
+
+def test_setup_wording_format_of_09(ow2bis):
+    """Checks if obj.wording is correctly setup."""
+    assert ow2bis.nb1_length_unit1 == '\\SI{4}{dm}'
+
+
+def test_setup_wording_format_of_10(ow2ter):
+    """Checks if obj.wording is correctly setup."""
+    assert ow2ter.volume_unit == 'cm^{\\text{3}}'
+
+
+def test_setup_wording_format_of_11(ow2ter):
+    """Checks if obj.wording is correctly setup."""
+    assert ow2ter.area_unit == 'cm^{\\text{2}}'
+
+
+def test_insert_nonbreaking_spaces():
+    """Checks if non breaking spaces are correctly inserted."""
+    assert insert_nonbreaking_spaces('It weighs about 45 kg.') == \
+    'It weighs about 45' + shared.markup['nonbreaking_space'] + 'kg.'
+
+
+def test_post_process():
+    """Checks if non breaking spaces are correctly inserted."""
+    assert post_process('It weighs about 45 kg.') == \
+    'It weighs about 45' + shared.markup['nonbreaking_space'] + 'kg.'
