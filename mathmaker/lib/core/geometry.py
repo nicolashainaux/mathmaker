@@ -49,8 +49,6 @@ locale.setlocale(locale.LC_ALL, settings.locale)
 # @class Polygon
 # @brief
 class Polygon(Drawable):
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Polygon's constructor.
@@ -77,13 +75,12 @@ class Polygon(Drawable):
             if options['rotate_around_isobarycenter'] == 'randomly':
                 self._rotation_angle = randomly.integer(0, 35) * 10
             elif is_.a_number(options['rotate_around_isobarycenter']):
-                self._rotation_angle = \
-                                      options['rotate_around_isobarycenter']
+                self._rotation_angle = options['rotate_around_isobarycenter']
 
         if isinstance(arg, Polygon):
-            self._vertex = [ v.clone() for v in arg.vertex ]
-            self._side = [ s.clone() for s in arg.side ]
-            self._angle = [ a.clone() for a in arg.angle ]
+            self._vertex = [v.clone() for v in arg.vertex]
+            self._side = [s.clone() for s in arg.side]
+            self._angle = [a.clone() for a in arg.angle]
             self._rotation_angle = arg.rotation_angle
 
         elif type(arg) == list:
@@ -91,19 +88,20 @@ class Polygon(Drawable):
                 raise error.WrongArgument("A list of length " + str(len(arg)),
                                           "a list of length >= 3")
             if all([type(elt) == str for elt in arg]):
-                raise NotImplementedError(\
-                                'Using a list of str is not implemented yet')
+                raise NotImplementedError(
+                    'Using a list of str is not implemented yet')
             elif all([isinstance(elt, Point) for elt in arg]):
-                start_vertices = [ p.clone() for p in arg ]
+                start_vertices = [p.clone() for p in arg]
 
                 if self._rotation_angle != 0:
                     G = barycenter(start_vertices, "G")
 
-                    self._vertex = [ Point(v.rotate(G, self._rotation_angle,
-                                                    keep_name=True)) \
-                                     for v in start_vertices ]
+                    self._vertex = [
+                        Point(v.rotate(
+                            G, self._rotation_angle, keep_name=True))
+                        for v in start_vertices]
                 else:
-                    self._vertex = [ v.clone() for v in start_vertices ]
+                    self._vertex = [v.clone() for v in start_vertices]
 
                 self._side = []
                 self._angle = []
@@ -112,30 +110,31 @@ class Polygon(Drawable):
                 for (p0, p1) in zip(self._vertex, shifted_vertices):
                     self._side += [Segment((p0, p1))]
                 left_shifted_vertices = copy.deepcopy(self._vertex)
-                left_shifted_vertices = [left_shifted_vertices.pop(-1)] \
-                                        + left_shifted_vertices
+                left_shifted_vertices = \
+                    [left_shifted_vertices.pop(-1)] + left_shifted_vertices
                 for (p0, p1, p2) in zip(left_shifted_vertices,
                                         self._vertex,
                                         shifted_vertices):
                     self._angle += [Angle((p0, p1, p2))]
             else:
-                raise error.WrongArgument("A list of Points or str "\
+                raise error.WrongArgument("A list of Points or str "
                                           + str(len(arg)),
                                           "a list containing something else")
 
         else:
             raise error.WrongArgument(str(type(arg)),
-                                      "Polygon|[Point, Point...]|[str, str...]")
+                                      "Polygon|[Point]|[str]")
 
         self._name = ''.join([v.name for v in self._vertex])
 
-        self._nature = POLYGONS_NATURES[len(self._side)] \
-                       if len(self._side) in POLYGONS_NATURES \
-                       else "Polygon_of_{n}_sides"\
-                            .format(n=str(len(self._side)))
+        if len(self._side) in POLYGONS_NATURES:
+            self._nature = POLYGONS_NATURES[len(self._side)]
+        else:
+            self._nature = \
+                "Polygon_of_{n}_sides".format(n=str(len(self._side)))
 
-        self._random_id = ''.join([str(randomly.integer(0, 9)) \
-                                   for i in range(8)])
+        self._random_id = \
+            ''.join([str(randomly.integer(0, 9)) for i in range(8)])
 
     # --------------------------------------------------------------------------
     ##
@@ -183,8 +182,8 @@ class Polygon(Drawable):
             raise TypeError("The 'n' argument should be a string")
         if not len(n) == len(self.vertex):
             raise ValueError("The given name should have the same length as "
-                             "the number of vertices of the Polygon (" \
-                             + str(len(vertex)) + "). " \
+                             "the number of vertices of the Polygon ("
+                             + str(len(vertex)) + "). "
                              "Instead it has a length of " + str(len(n)))
 
         if not self._read_name_clockwise:
@@ -200,8 +199,8 @@ class Polygon(Drawable):
             self._side[i].points[1].name = p1.name
 
         left_shifted_vertices = copy.deepcopy(self._vertex)
-        left_shifted_vertices = [left_shifted_vertices.pop(-1)] \
-                                + left_shifted_vertices
+        left_shifted_vertices = \
+            [left_shifted_vertices.pop(-1)] + left_shifted_vertices
         for i, (p0, p1, p2) in enumerate(zip(left_shifted_vertices,
                                              self._vertex,
                                              shifted_vertices)):
@@ -230,9 +229,9 @@ class Polygon(Drawable):
     @property
     def perimeter(self):
         if not self.lengths_have_been_set:
-            raise error.ImpossibleAction("calculate the perimeter while " \
-                                         + "ignoring the lengths of several " \
-                                         + "sides (fake lengths have not been" \
+            raise error.ImpossibleAction("calculate the perimeter while "
+                                         + "ignoring the lengths of several "
+                                         + "sides (fake lengths have not been"
                                          + " set yet).")
         else:
             return Value(sum([s.length.raw_value for s in self.side]),
@@ -245,14 +244,13 @@ class Polygon(Drawable):
     #   @param lengths_list A list of Values, being as long as len(self.side)
     def set_lengths(self, lengths_list):
         if len(lengths_list) != len(self.side):
-            raise error.WrongArgument("A list of length " \
-                                        + str(len(lengths_list)),
-                                      "A list of length the number of sides (" \
-                                        + str(len(self.side)) + ")")
+            raise error.WrongArgument("A list of length "
+                                      + str(len(lengths_list)),
+                                      "A list of length the number of sides ("
+                                      + str(len(self.side)) + ")")
 
         for s in self.side:
             s.length = lengths_list[self.side.index(s)]
-
 
     # --------------------------------------------------------------------------
     ##
@@ -269,10 +267,10 @@ class Polygon(Drawable):
     #                     len(self.side)
     def setup_labels(self, flags_list):
         if len(flags_list) != len(self.side):
-            raise error.WrongArgument("A list of length " \
-                                        + str(len(flags_list)),
-                                      "A list of length the number of sides (" \
-                                        + str(len(self.side)) + ")")
+            raise error.WrongArgument("A list of length "
+                                      + str(len(flags_list)),
+                                      "A list of length the number of sides ("
+                                      + str(len(self.side)) + ")")
 
         for (s, f) in zip(self.side, flags_list):
             s.setup_label(f)
@@ -283,11 +281,11 @@ class Polygon(Drawable):
     #   @param options Any options
     #   @return (x1, y1, x2, y2)
     def work_out_euk_box(self, **options):
-        x_list = [ v.x for v in self.vertex ]
-        y_list = [ v.y for v in self.vertex ]
+        x_list = [v.x for v in self.vertex]
+        y_list = [v.y for v in self.vertex]
 
-        return (min(x_list)-Decimal("0.6"), min(y_list)-Decimal("0.6"),
-                max(x_list)+Decimal("0.6"), max(y_list)+Decimal("0.6"))
+        return (min(x_list) - Decimal("0.6"), min(y_list) - Decimal("0.6"),
+                max(x_list) + Decimal("0.6"), max(y_list) + Decimal("0.6"))
 
     # --------------------------------------------------------------------------
     ##
@@ -307,7 +305,7 @@ class Polygon(Drawable):
         for v in self.vertex:
             result += "{name} = point({x}, {y})\n".format(name=v.name,
                                                           x=v.x,
-                                                          y =v.y)
+                                                          y=v.y)
 
         result += "\ndraw\n  "
 
@@ -319,39 +317,34 @@ class Polygon(Drawable):
         for s in self.side:
             if s.label != Value(""):
                 x = s.real_length
-                scale_factor = round(Decimal(str(1.6*x)),
+                scale_factor = round(Decimal(str(1.6 * x)),
                                      Decimal('0.1'),
                                      rounding=ROUND_UP)
                 if x <= 3:
-                    angle_correction = round(Decimal(str(-8*x + 33)),
+                    angle_correction = round(Decimal(str(-8 * x + 33)),
                                              Decimal('0.1'),
                                              rounding=ROUND_UP)
                 else:
-                    angle_correction = round(Decimal(str( \
-                                                1.1/(1-0.95*math.exp(-0.027*x))
-                                                        )
-                                                    ),
-                                             Decimal('0.1'),
-                                             rounding=ROUND_UP)
+                    angle_correction = \
+                        round(
+                            Decimal(
+                                str(1.1 / (1 - 0.95 * math.exp(-0.027 * x)))),
+                            Decimal('0.1'),
+                            rounding=ROUND_UP)
 
                 side_angle = Vector((s.points[0], s.points[1])).slope
 
                 label_position_angle = round(side_angle,
                                              Decimal('1'),
-                                             rounding=ROUND_HALF_EVEN
-                                            )
+                                             rounding=ROUND_HALF_EVEN)
 
                 label_position_angle %= Decimal("360")
 
                 rotate_box_angle = Decimal(label_position_angle)
 
-                if (rotate_box_angle >= 90 \
-                    and rotate_box_angle <= 270):
-                # __
+                if (rotate_box_angle >= 90 and rotate_box_angle <= 270):
                     rotate_box_angle -= Decimal("180")
-                elif (rotate_box_angle <= -90 \
-                    and rotate_box_angle >= -270):
-               # __
+                elif (rotate_box_angle <= -90 and rotate_box_angle >= -270):
                     rotate_box_angle += Decimal("180")
 
                 rotate_box_angle %= Decimal("360")
@@ -369,36 +362,28 @@ class Polygon(Drawable):
                 result += str(scale_factor)
                 result += "\n"
 
-
         for a in self.angle:
             if a.label != Value(""):
                 scale_factor = Decimal('2.7')
                 if Decimal(str(a.measure)) < Decimal('28.5'):
-                    scale_factor = round(Decimal('38.1')\
-                                              *pow(Decimal(str(a.measure)),
-                                                   Decimal('-0.8')
-                                                  ),
-                                         Decimal('0.01'),
-                                         rounding=ROUND_HALF_UP
-                                         )
+                    scale_factor = round(
+                        Decimal('38.1') * pow(Decimal(str(a.measure)),
+                                              Decimal('-0.8')),
+                        Decimal('0.01'),
+                        rounding=ROUND_HALF_UP)
 
-                label_display_angle = Vector((a.points[1],
-                                              a.points[0]))\
-                                      .bisector_vector(Vector((a.points[1],
-                                                               a.points[2])))\
-                                      .slope
+                label_display_angle = \
+                    Vector((a.points[1], a.points[0]))\
+                    .bisector_vector(Vector((a.points[1], a.points[2])))\
+                    .slope
 
                 label_position_angle = label_display_angle
 
                 rotate_box_angle = Decimal(label_position_angle)
 
-                if (rotate_box_angle >= 90 \
-                    and rotate_box_angle <= 270):
-                # __
+                if (rotate_box_angle >= 90 and rotate_box_angle <= 270):
                     rotate_box_angle -= Decimal("180")
-                elif (rotate_box_angle <= -90 \
-                    and rotate_box_angle >= -270):
-                # __
+                elif (rotate_box_angle <= -90 and rotate_box_angle >= -270):
                     rotate_box_angle += Decimal("180")
 
                 result += "  $\\rotatebox{"
@@ -412,12 +397,10 @@ class Polygon(Drawable):
                 result += str(scale_factor)
                 result += "\n"
 
-        names_angles_list = [Vector((a.points[0],
-                                          a.points[1]))\
-                                  .bisector_vector(Vector((a.points[2],
-                                                           a.points[1])))\
-                                  .slope \
-                             for a in self.angle]
+        names_angles_list = [Vector((a.points[0], a.points[1]))
+                             .bisector_vector(Vector((a.points[2],
+                                                      a.points[1])))
+                             .slope for a in self.angle]
 
         for (i, v) in enumerate(self.vertex):
             result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
@@ -433,11 +416,11 @@ class Polygon(Drawable):
             result += "\nlabel\n"
             for a in self.angle:
                 if a.mark != "":
-                    result += "  {p0}, {v}, {p2} {m}\n".format(
-                                                        p0=a.points[2].name,
-                                                        v=a.vertex.name,
-                                                        p2=a.points[0].name,
-                                                        m=a.mark)
+                    result += "  {p0}, {v}, {p2} {m}\n"\
+                              .format(p0=a.points[2].name,
+                                      v=a.vertex.name,
+                                      p2=a.points[0].name,
+                                      m=a.mark)
             for s in self.side:
                 if s.mark != "":
                     result += "  {p1}.{p2} {m}\n"\
@@ -448,6 +431,7 @@ class Polygon(Drawable):
 
         return result
 
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -455,8 +439,6 @@ class Polygon(Drawable):
 # @class Rectangle
 # @brief
 class Rectangle(Polygon):
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Rectangle's constructor.
@@ -472,10 +454,10 @@ class Rectangle(Polygon):
         if isinstance(arg, Rectangle):
             Polygon.__init__(self, (tuple(arg.points)))
         elif isinstance(arg, list):
-            if isinstance(arg[0], Point)\
-                and is_.a_number(arg[1])\
-                and is_.a_number(arg[2])\
-                and all(isinstance(arg[i], str) for i in [3, 4, 5]):
+            if (isinstance(arg[0], Point)
+                and is_.a_number(arg[1])
+                and is_.a_number(arg[2])
+                and all(isinstance(arg[i], str) for i in [3, 4, 5])):
             # __
                 length = arg[1]
                 height = arg[2]
