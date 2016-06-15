@@ -84,7 +84,7 @@ class X_Calculation(X_Structure):
             elif self.x_subkind == 'fractions_product' \
                  or self.x_subkind == 'fractions_quotient' \
                  or self.x_subkind == 'fractions_sum':
-            #___
+            # __
                 self.text = {'exc': _( \
                     "Calculate and give the result as a simplified fraction:"),
                              'ans': ""
@@ -115,7 +115,7 @@ class X_Calculation(X_Structure):
             elif self.x_subkind == 'fractions_product' \
                  or self.x_subkind == 'fractions_quotient' \
                  or self.x_subkind == 'fractions_sum':
-            #___
+            # __
                 #self.text = _( \
                 #    "Calculate and give the result as a simplified fraction:")
 

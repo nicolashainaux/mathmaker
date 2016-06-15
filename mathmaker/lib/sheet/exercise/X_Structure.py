@@ -93,7 +93,7 @@ class X_Structure(object):
         # Number of questions
         if (not isinstance(number_of_questions, int)
             and number_of_questions >= 1):
-        #___
+        # __
             raise ValueError("The number_of_questions keyword argument should "
                              "be an int and greater than 6.")
         self.q_nb = number_of_questions

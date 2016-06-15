@@ -95,7 +95,7 @@ def sign_of_product(signed_objctlist):
            or is_.a_number(signed_objctlist[i])                               \
            or isinstance(signed_objctlist[i],
                          lib.core.base_calculus.Exponented)):
-        #___
+        # __
             raise error.UncompatibleType(signed_objctlist[i],                 \
                                          "'+' or '-'|number|Exponented")
 
@@ -180,7 +180,7 @@ def pupil_gcd(a, b):
     for i in range(len(DIVISORS[int(a)])):
         if (DIVISORS[int(a)][i] in DIVISORS[int(b)]) \
             and DIVISORS[int(a)][i] > result:
-        #___
+        # __
             result = DIVISORS[int(a)][i]
 
     # to finally get the fraction reduced even if the gcd isn't in the

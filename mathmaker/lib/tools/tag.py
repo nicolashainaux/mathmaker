@@ -26,14 +26,14 @@
 def classify_tag(tag):
     if (tag.startswith('intpairs_') or tag.startswith('table_')
         or tag.startswith('multiplesof')):
-    #___
+    # __
         return 'int_pairs'
     elif tag in ['rank_words', 'int_irreducible_frac',
                  'decimal_and_10_100_1000_for_multi',
                  'decimal_and_10_100_1000_for_divi',
                  'decimal_and_one_digit_for_multi',
                  'decimal_and_one_digit_for_divi' ]:
-    #___
+    # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
                      "used in a mathmaker xml file.")

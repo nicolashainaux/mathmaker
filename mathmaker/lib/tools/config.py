@@ -43,7 +43,7 @@ def load_config(file_tag, settingsdir):
     try:
         with open(os.path.join(settingsdir, 'default/', file_tag + '.yaml'))\
             as file_path:
-        #___
+        # __
             if file_tag != 'logging':
                 mainlogger.info('Loading ' + file_tag + '.yaml from '
                                 + file_path.name)

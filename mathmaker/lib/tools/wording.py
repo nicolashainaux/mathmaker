@@ -328,7 +328,7 @@ def setup_wording_format_of(w_object):
         #sys.stderr.write("attr: " + str(attr) + "\n")
         if (attr.endswith('_unit') or attr[:-1].endswith('_unit')) \
             and not (attr.startswith('nb') or attr.startswith('currency')):
-        #___
+        # __
             #sys.stderr.write("(re)defining: " + attr + "\n")
             n = 1
             if attr.startswith('area'):

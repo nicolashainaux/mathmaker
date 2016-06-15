@@ -289,7 +289,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
         if 'multicolumns' in options:
             if type(options['multicolumns']) == int \
                 and options['multicolumns'] >= 1:
-            #___
+            # __
                 output_str = "\\begin{multicols}{" \
                              + str(options['multicolumns']) + "} " + "\n" \
                              + output_str \
@@ -490,7 +490,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
         if 'col_fmt' in options and type(options['col_fmt']) == list \
             and len(options['col_fmt']) == n_col:
-        #___
+        # __
             for i in range(len(col_fmt)):
                 col_fmt[i] = options['col_fmt'][i]
 

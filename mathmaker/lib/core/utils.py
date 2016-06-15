@@ -144,7 +144,7 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
 
     if not (how_many == 'all' or how_many == 'all_but_one' \
             or how_many == 'at_least_one' or type(how_many) == int):
-    #___
+    # __
         raise ValueError('Argument how_many should contain '
                          "'all'|'all_but_one'|'at_least_one' or an int, "
                          'not ' + str(how_many))
@@ -165,7 +165,7 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
                 and isinstance(subst_dict[elt], lib.core.base_calculus.Value) \
                 and subst_dict[elt].is_numeric()
                 ):
-        #___
+        # __
             raise TypeError('Expected key: value pairs being of type '
                             'literal Value: numeric Value')
 
