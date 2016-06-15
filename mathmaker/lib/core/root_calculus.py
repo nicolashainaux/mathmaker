@@ -376,7 +376,7 @@ class Value(Signed):
         if type(arg) == float                                             \
             or type(arg) == int                                          \
             or type(arg) == Decimal:
-        # __
+            # __
             self._raw_value = Decimal(str(arg))
             if arg >= 0:
                 self._sign = '+'
@@ -554,7 +554,7 @@ class Value(Signed):
 
         elif self.raw_value in ["", " "] and 'display_SI_unit' in options \
             and options['display_SI_unit']:
-        # __
+            # __
             unit_str = self.unit.into_str(**options) \
                                         if isinstance(self.unit, Unit) \
                                         else str(self.unit)
@@ -564,7 +564,7 @@ class Value(Signed):
         else: # self.is_literal()
             if len(self.get_first_letter()) >= 2 \
                 and not self.get_first_letter()[0] in ["-", "+"]:
-            # __
+                # __
                 return sign + MARKUP['open_text_in_maths'] \
                        + str(self.abs_value) \
                        + MARKUP['close_text_in_maths']
@@ -692,7 +692,7 @@ class Value(Signed):
                                 THOUSANDTH,
                                 TEN_THOUSANDTH] \
              or (type(precision) == int and precision >= 0 and precision <= 4)):
-        # __
+            # __
             raise error.UncompatibleType(precision, "must be UNIT or" \
                                                     + "TENTH, " \
                                                     + "HUNDREDTH, " \
@@ -753,7 +753,7 @@ class Value(Signed):
                               THOUSANDTH,
                               TEN_THOUSANDTH] \
              or (type(precision) == int and precision >= 0 and precision <= 4)):
-        # __
+            # __
             raise error.UncompatibleType(precision, "must be UNIT or" \
                                                     + "TENTH, " \
                                                     + "HUNDREDTH, " \
@@ -819,7 +819,7 @@ class Value(Signed):
         if type(self.raw_value) == float                \
             or type(self.raw_value) == int              \
             or type(self.raw_value) == Decimal:
-        # __
+            # __
             return True
         else:
             return False
@@ -829,7 +829,7 @@ class Value(Signed):
     #   @brief True if the object only contains literal objects
     def is_literal(self):
         if type(self.raw_value) == str:
-        # __
+            # __
             return True
         else:
             return False

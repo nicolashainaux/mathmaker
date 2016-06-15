@@ -46,7 +46,7 @@ from lib.maths_lib import *
 def integer(min_value, max_value, **options):
     if not ('weighted_table' in options                                       \
             and len(options['weighted_table']) == max_value - min_value +1):
-    # __
+        # __
         return int(math.ceil(random.random()*(max_value - min_value + 1)      \
                              + min_value                                      \
                              )                                                \
@@ -85,7 +85,7 @@ def sign(**options):
     if 'plus_signs_ratio' in options                                          \
        and options['plus_signs_ratio'] >= 0                                   \
        and options['plus_signs_ratio'] <= 1:
-    # __
+        # __
         plus_signs_ratio = options['plus_signs_ratio']
 
     if (random.random() < plus_signs_ratio):
@@ -101,7 +101,7 @@ def sign(**options):
 def pop(provided_list, **options):
     if not ('weighted_table' in options \
             and len(options['weighted_table']) == len(provided_list)):
-    # __
+        # __
         random_rank = integer(0, len(provided_list) - 1)
 
         return provided_list.pop(random_rank)

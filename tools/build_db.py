@@ -79,7 +79,7 @@ for lang in next(os.walk(settings.localedir))[1]:
     for gender in ["masculine", "feminine"]:
         if os.path.isfile(settings.localedir + lang \
                           + "/LC_MESSAGES/" + gender + "_names.po"):
-        # __
+            # __
             names = po_file.get_list_of('names', lang, gender)
             db_rows = list(zip([lang for _ in range(len(names))],
                                 [gender for _ in range(len(names))],

@@ -94,7 +94,7 @@ class X_RightTriangle(X_Structure):
         # alternate texts section
         #if self.x_kind == 'short_test' \
         #    and self.x_subkind == 'pythagorean_theorem_one_of_each':
-        ## __
+        #    # __
         #    self.text = {'exc': "",
         #                 'ans': _("The drawings below are only sketches.")
         #                }

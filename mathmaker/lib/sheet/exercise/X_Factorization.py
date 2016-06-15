@@ -171,7 +171,7 @@ class X_Factorization(X_Structure):
         elif self.x_kind == 'level_03_some_not_factorizable' \
             or (self.x_kind == 'mini_test' \
                 and self.x_subkind == 'two_factorizations'):
-        # __
+            # __
             self.text = {'exc': _("Factorise, if possible:"),
                          'ans': ""
                         }

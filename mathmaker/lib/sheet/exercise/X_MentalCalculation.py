@@ -179,7 +179,7 @@ def get_nb_source_from_question_info(q_i):
         if (tag_to_unpack == 'auto_vocabulary'
             and q_i.subkind in ['addi', 'subtr']
             and nb_source == 'intpairs_2to200'):
-        # __
+            # __
             q_i.options.update({'variant': 'decimal2'})
     return nb_source
 
@@ -288,7 +288,7 @@ class X_MentalCalculation(X_Structure):
                                 if (isinstance(n, int) or isinstance(n, str))]
             if nb_source == 'decimal_and_10_100_1000_for_divi' \
                 or nb_source == 'decimal_and_10_100_1000_for_multi':
-            # __
+                # __
                 q.options['10_100_1000'] = True
             self.questions_list += [default_question(q.type,
                                                      q.options,

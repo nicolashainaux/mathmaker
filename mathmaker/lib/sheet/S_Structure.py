@@ -58,7 +58,7 @@ class S_Structure(object):
 
         if 'write_texts_twice' in options \
             and options['write_texts_twice'] in YES:
-        # __
+            # __
             self.write_texts_twice = True
 
         # Some tests on sheet_layout before using it ;
@@ -96,7 +96,7 @@ class S_Structure(object):
                 if not (sheet_layout[k][2*i] is None \
                     or type(sheet_layout[k][2*i])== list \
                     or sheet_layout[k][2*i] == 'jump'):
-                # __
+                    # __
                     raise error.WrongArgument('SHEET_LAYOUT[' + k + '][' \
                                               + str(2*i) + '] should be either'\
                                               + ' a list or None or "jump"',
@@ -107,7 +107,7 @@ class S_Structure(object):
                         or sheet_layout[k][2*i+1] == 'all' \
                         or sheet_layout[k][2*i+1] == 'all_left' \
                         or sheet_layout[k][2*i+1] == 'jump'):
-                    # __
+                        # __
                         raise error.WrongArgument('SHEET_LAYOUT[' + k + '][' \
                                               + str(2*i+1) + '] should be an '\
                                               + 'int since it follows the None'\
@@ -132,7 +132,7 @@ class S_Structure(object):
 
                     if not len(sheet_layout[k][2*i+1]) \
                        == (len(sheet_layout[k][2*i])-1)*sheet_layout[k][2*i][0]:
-                    # __
+                        # __
                         raise error.WrongArgument('SHEET_LAYOUT[' + k + '][' \
                                               + str(2*i+1) + '] should have ' \
                                               + ' as many elements as the ' \
@@ -319,7 +319,7 @@ class S_Structure(object):
                     if (self.layout_type == 'short_test' \
                         or self.layout_type == 'mini_test') \
                         and ex_n < len(self.exercises_list) // 2:
-                    # __
+                        # __
                         how_many = len(self.exercises_list) // 2 - ex_n
                     #elif self.layout_type == 'mini_test':
                     #    if ex_n < len(self.exercises_list) / 4:
@@ -336,7 +336,7 @@ class S_Structure(object):
                     result += M.write_new_line(check=result[len(result)-2:])
                     #if not (ex_or_answers == 'ans' \
                     #    and self.layout_type == 'equations'):
-                    # __
+                        # __
                     #    result += M.write_new_line()
                     ex_n += 1
 

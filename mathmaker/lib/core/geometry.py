@@ -458,7 +458,7 @@ class Rectangle(Polygon):
                 and is_.a_number(arg[1])
                 and is_.a_number(arg[2])
                 and all(isinstance(arg[i], str) for i in [3, 4, 5])):
-            # __
+                # __
                 length = arg[1]
                 height = arg[2]
                 Polygon.__init__(self,
@@ -572,7 +572,7 @@ class Square(Polygon):
             if isinstance(arg[0], Point)\
                 and is_.a_number(arg[1])\
                 and all(isinstance(arg[i], str) for i in [2, 3, 4]):
-            # __
+                # __
                 length = arg[1]
                 Rectangle.__init__(self, [arg[0], arg[1], arg[1], arg[2],
                                     arg[3], arg[4]], **options)
@@ -701,7 +701,7 @@ class Triangle(Polygon):
             if not type(vertices_names[0]) == str \
                 and type(vertices_names[1]) == str \
                 and type(vertices_names[2]) == str:
-            # __
+                # __
                 raise error.WrongArgument(' three strings ',
                                         ' one of them at least is not a string')
 
@@ -720,7 +720,7 @@ class Triangle(Polygon):
                             ) \
                         ) \
                     ):
-            # __
+                # __
                 raise error.WrongArgument(" 'sketch' | " \
                               + "{'side0':nb0, 'angle1':nb1, 'side1':nb2} | ",
                               str(construction_data))
@@ -813,7 +813,7 @@ class RightTriangle(Triangle):
             if not type(vertices_names[0]) == str \
                 and type(vertices_names[1]) == str \
                 and type(vertices_names[2]) == str:
-            # __
+                # __
                 raise error.WrongArgument(' three strings ',
                                         ' one of them at least is not a string')
 
@@ -821,12 +821,12 @@ class RightTriangle(Triangle):
 
             if 'rotate_around_isobarycenter' in options \
                 and options['rotate_around_isobarycenter'] == 'randomly':
-            # __
+                # __
                 rotation = randomly.integer(0, 35) * 10
 
             elif 'rotate_around_isobarycenter' in options \
                 and is_.a_number(options['rotate_around_isobarycenter']):
-            # __
+                # __
                 rotation = options['rotate_around_isobarycenter']
 
             leg0_length = 0
@@ -842,7 +842,7 @@ class RightTriangle(Triangle):
                 and is_.a_number(construction_data['leg0']) \
                 and 'leg1' in construction_data \
                 and is_.a_number(construction_data['leg1']):
-            # __
+                # __
                 leg0_length = construction_data['leg0']
                 leg1_length = construction_data['leg1']
 

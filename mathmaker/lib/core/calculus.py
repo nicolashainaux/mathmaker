@@ -121,7 +121,7 @@ class Expression(ComposedCalculable):
         # just check if the given arguments are right
         if not (is_.a_string(integer_or_letter)                               \
                 or is_.an_integer(integer_or_letter)):
-        # __
+            # __
             raise error.UncompatibleType(integer_or_letter,                   \
                                          "integer_or_letter")
 
@@ -255,7 +255,7 @@ class Equality(ComposedCalculable):
             for i in range(len(options['equal_signs'])):
                 if not (options['equal_signs'][i] == '=' \
                         or options['equal_signs'][i] == 'neq'):
-                # __
+                    # __
                     raise error.UncompatibleType(options['equal_signs'][i],                    \
                                                     " should be '=' or 'neq'")
 
@@ -312,7 +312,7 @@ class Equality(ComposedCalculable):
 
         if 'force_expression_markers' in options\
             and options['force_expression_markers'] == 'yes':
-        # __
+            # __
             result += MARKUP['opening_math_style2']
 
 
@@ -327,7 +327,7 @@ class Equality(ComposedCalculable):
 
         if 'force_expression_markers' in options\
             and options['force_expression_markers'] == 'yes':
-        # __
+            # __
             result += MARKUP['closing_math_style2']
 
         return result
@@ -383,7 +383,7 @@ class Equation(ComposedCalculable):
         # Then the letter
         if 'variable_letter_name' in options \
            and is_.a_string(options['variable_letter_name']):
-        # __
+            # __
             self._variable_letter = options['variable_letter_name'][0]
 
         # Then determine its left & right hand sides
@@ -404,7 +404,7 @@ class Equation(ComposedCalculable):
 
             if not isinstance(literals_list[0], Value) \
                 and not literals_list[0].is_literal():
-            # __
+                # __
                 raise error.WrongArgument(repr(literals_list[0]),
                                           "a literal Value")
 
@@ -420,7 +420,7 @@ class Equation(ComposedCalculable):
             # Given objects
             if isinstance(arg[0], Exponented) \
                 and isinstance(arg[1], Exponented):
-            # __
+                # __
                 if isinstance(arg[0], Sum):
                     # TO FIX ?
                     # this could be secured by checking the given Sum
@@ -630,7 +630,7 @@ class Equation(ComposedCalculable):
                      or arg[1] == 'classic_r' \
                      or arg[1] == 'classic_x_twice' \
                      or arg[1] == 'any_classic':
-                # __
+                    # __
                     # Let's build
                     # classic: ax + b = d | b + ax = d
                     # classic_r: d = ax + b | d = b + ax
@@ -723,7 +723,7 @@ class Equation(ComposedCalculable):
                     # forbid high denominators.
                     if seed * chosen_seed_and_generator[0][0] \
                             * chosen_seed_and_generator[0][1] >= 75:
-                    # __
+                        # __
                         seed = randomly.integer(2, chosen_seed_and_generator[1])
 
                     lil_box = [0, 1]
@@ -773,7 +773,7 @@ class Equation(ComposedCalculable):
 
                 elif arg[1] == 'any_simple_expandable' \
                     or arg[1] == 'any_double_expandable':
-                # __
+                    # __
                     # SIMPLE:
                     # a monom0_polyn1 or a ±(...) on one side
                     # + one Monomial with the monom0_polyn1
@@ -826,7 +826,7 @@ class Equation(ComposedCalculable):
                     box_2.append(Monomial((RANDOMLY, 9, 1)))
 
                     if randomly.decimal_0_1() <= 0.25:
-                    # __
+                        # __
                         box_2.append(additional_Monomial2)
 
                     if arg[1] == 'any_double_expandable':
@@ -1012,7 +1012,7 @@ class Equation(ComposedCalculable):
 
         if self.left_hand_side.contains_a_rounded_number() \
            or self.right_hand_side.contains_a_rounded_number():
-        # __
+            # __
             egal_sign = MARKUP['simeq']
 
         return beginning \
@@ -1053,14 +1053,14 @@ class Equation(ComposedCalculable):
         uline2 = ""
         if 'underline_result' in options \
             and options['underline_result'] in YES:
-        # __
+            # __
             uline1 = MARKUP['open_underline']
             uline2 = MARKUP['close_underline']
 
         eq_aux = None
         if isinstance(self, Equation) \
             and not isinstance(self, CrossProductEquation):
-        # __
+            # __
             eq_aux = Equation(self)
         elif isinstance(self, CrossProductEquation):
             eq_aux = CrossProductEquation(self)
@@ -1092,7 +1092,7 @@ class Equation(ComposedCalculable):
 
                 if next_eq_aux is None or type(next_eq_aux) == str \
                     or isinstance(next_eq_aux, tuple):
-                # __
+                    # __
                     eq_aux = next_eq_aux
                 else:
                     eq_aux = Equation(next_eq_aux)
@@ -1157,7 +1157,7 @@ class Equation(ComposedCalculable):
 
                 if not isinstance(eq_aux1, Equation) \
                    and not isinstance(eq_aux2, Equation):
-                # __
+                    # __
                     go_on = False
 
                 if eq_aux1 != None or eq_aux2 != None:
@@ -1207,14 +1207,14 @@ class Equation(ComposedCalculable):
         #          imbricated Sums
         if isinstance(new_eq.left_hand_side.term[0], Sum) \
            and len(new_eq.left_hand_side) == 1:
-        # __
+            # __
             log_equation_solve_next_step.debug("CASE-0s-left")
             new_eq.set_hand_side("left", new_eq.left_hand_side.term[0])
             return new_eq.solve_next_step(**options)
 
         elif isinstance(new_eq.right_hand_side.term[0], Sum) \
            and len(new_eq.right_hand_side) == 1:
-        # __
+            # __
             log_equation_solve_next_step.debug("CASE-0s-right")
             new_eq.set_hand_side("right", new_eq.right_hand_side.term[0])
             return new_eq.solve_next_step(**options)
@@ -1222,7 +1222,7 @@ class Equation(ComposedCalculable):
         if isinstance(new_eq.left_hand_side.term[0], Product) \
            and len(new_eq.left_hand_side) == 1 \
            and len(new_eq.left_hand_side.term[0]) == 1:
-        # __
+            # __
             log_equation_solve_next_step.debug("CASE-0p-left")
             new_eq.set_hand_side("left",
                             Sum(new_eq.left_hand_side.term[0].factor[0]))
@@ -1231,7 +1231,7 @@ class Equation(ComposedCalculable):
         elif isinstance(new_eq.right_hand_side.term[0], Product) \
            and len(new_eq.right_hand_side) == 1 \
            and len(new_eq.right_hand_side.term[0]) == 1:
-        # __
+            # __
             log_equation_solve_next_step.debug("CASE-0p-right")
             new_eq.set_hand_side("right",
                             Sum(new_eq.right_hand_side.term[0].factor[0]))
@@ -1244,7 +1244,7 @@ class Equation(ComposedCalculable):
 
         if not (isinstance(next_left_X, Calculable) \
                 or isinstance(next_left_X, ComposedCalculable)):
-        # __
+            # __
             next_left_X_str = str(next_left_X)
         else:
             next_left_X_str = repr(next_left_X)
@@ -1271,7 +1271,7 @@ class Equation(ComposedCalculable):
             and len(new_eq.right_hand_side) == 1 \
             and isinstance(new_eq.right_hand_side.term[0], Fraction) \
             and new_eq.right_hand_side.term[0].is_reducible():
-        # __
+            # __
             new_eq.set_hand_side("right",
                                  new_eq.\
                                    right_hand_side.term[0].completely_reduced())
@@ -1284,7 +1284,7 @@ class Equation(ComposedCalculable):
             and len(new_eq.right_hand_side) == 1 \
             and isinstance(new_eq.right_hand_side.term[0], Fraction) \
             and new_eq.right_hand_side.term[0].is_reducible():
-        # __
+            # __
             new_eq.set_hand_side("right",
                                  Item(new_eq.\
                                    right_hand_side.term[0].evaluate(**options)))
@@ -1297,7 +1297,7 @@ class Equation(ComposedCalculable):
             and len(new_eq.right_hand_side) == 1 \
             and (isinstance(new_eq.right_hand_side.term[0], Quotient) \
                or isinstance(new_eq.right_hand_side.term[0], SquareRoot)):
-        # __
+            # __
             log_equation_solve_next_step.debug("Decimal Result CASE")
             new_eq.set_hand_side("right",
                                  new_eq.\
@@ -1307,14 +1307,14 @@ class Equation(ComposedCalculable):
         # 1st CASE
         # Expand & reduce each side of the Equation, whenever possible
         elif (next_left_X != None) or (next_right_X != None):
-        # __
+            # __
             log_equation_solve_next_step.debug("1st CASE")
             if next_left_X != None:
-            # __
+                # __
                 new_eq.set_hand_side("left", next_left_X)
 
             if next_right_X != None:
-            # __
+                # __
                 new_eq.set_hand_side("right", next_right_X)
 
 
@@ -1328,7 +1328,7 @@ class Equation(ComposedCalculable):
               or (len(new_eq.right_hand_side) >= 2) \
               or (len(new_eq.right_hand_side) == 1 \
                   and not new_eq.right_hand_side.term[0].is_numeric()):
-        # __
+            # __
             log_equation_solve_next_step.debug("2d CASE")
             # All the literal objects will be moved to the left,
             # all numeric will be moved to the right
@@ -1358,7 +1358,7 @@ class Equation(ComposedCalculable):
                and not new_eq.right_hand_side.is_numeric() \
                and len(new_eq.right_hand_side) == 2 \
                and len(right_collected_terms) == 1:
-            # __
+                # __
                 log_equation_solve_next_step.debug(
                         "Entered in the Special Case [part of 2d Case]")
                 log_equation_solve_next_step.debug(
@@ -1378,7 +1378,7 @@ class Equation(ComposedCalculable):
                     and len(right_collected_terms[0]) == 1) \
                    or (isinstance(right_collected_terms[0], Item) \
                        and right_collected_terms[0].is_positive()):
-                # __
+                    # __
                     log_equation_solve_next_step.debug("Special Case [part 2]")
 
                     return Equation((new_eq.right_hand_side,
@@ -1392,7 +1392,7 @@ class Equation(ComposedCalculable):
                and not new_eq.right_hand_side.is_numeric() \
                and len(new_eq.right_hand_side) == 1 \
                and isinstance(right_collected_terms[0], Product):
-            # __
+                # __
                 log_equation_solve_next_step.debug("Special Case [part 3]")
 
                 return Equation((new_eq.right_hand_side,
@@ -1431,13 +1431,13 @@ class Equation(ComposedCalculable):
         elif (new_eq.left_hand_side.term[0].is_numeric() \
              and (new_eq.right_hand_side.term[0].is_numeric())
              ):
-        # __
+            # __
             log_equation_solve_next_step.debug("3rd CASE")
             if new_eq.left_hand_side.term[0].raw_value == \
                 new_eq.right_hand_side.term[0].raw_value \
                and new_eq.left_hand_side.get_sign() == \
                     new_eq.right_hand_side.get_sign():
-            # __
+                # __
                 return _(\
             "Any value of {variable_name} is solution of the equation.")\
             .format(variable_name=new_eq.variable_letter)
@@ -1451,7 +1451,7 @@ class Equation(ComposedCalculable):
         # The Product in the left side can't be numeric, or it would
         # have been already treated before
         elif isinstance(new_eq.left_hand_side.term[0], Product):
-        # __
+            # __
             log_equation_solve_next_step.debug("4th CASE")
 
             # Let's replace the possibly remaining Monomial of degree 0
@@ -1459,13 +1459,13 @@ class Equation(ComposedCalculable):
             if isinstance(new_eq.right_hand_side.term[0], Monomial):
                 if isinstance(new_eq.right_hand_side.term[0].factor[0],
                               Item):
-                # __
+                    # __
                     new_eq.right_hand_side.set_term(0,
                                 Item(new_eq.right_hand_side.term[0])
                                                     )
                 elif isinstance(new_eq.right_hand_side.term[0].factor[0],
                                 Fraction):
-                # __
+                    # __
                     new_eq.right_hand_side.set_term(0,
                                 Fraction(new_eq.right_hand_side.term[0])
                                                     )
@@ -1487,7 +1487,7 @@ class Equation(ComposedCalculable):
 
             elif isinstance(coefficient, Item)\
                  and isinstance(new_eq.right_hand_side.term[0], Item):
-            # __
+                # __
                 new_eq.left_hand_side.term[0].set_factor(0, Item(1))
                 new_eq.set_hand_side("right",
                                 Fraction(('+',
@@ -1514,7 +1514,7 @@ class Equation(ComposedCalculable):
         # been treated before
         elif isinstance(new_eq.left_hand_side.term[0], Item) \
              and new_eq.left_hand_side.term[0].is_literal():
-        # __
+            # __
             if new_eq.left_hand_side.term[0].get_sign() == '-':
                 new_eq.left_hand_side.term[0].set_opposite_sign()
                 new_eq.right_hand_side.term[0].set_opposite_sign()
@@ -1542,7 +1542,7 @@ class Equation(ComposedCalculable):
 
                         if 'pythagorean_mode' in options \
                             and options['pythagorean_mode'] == 'yes':
-                        # __
+                            # __
                             new_eq2 = MARKUP['open_text_in_maths'] \
                                       + " " + _("because") + " " \
                                       + temp_item.printed \
@@ -1608,7 +1608,7 @@ class SubstitutableEquality(Equality):
         if not check_lexicon_for_substitution(objcts,
                                               subst_dict,
                                               'at_least_one'):
-        # __
+            # __
             raise error.WrongArgument(subst_dict,
                                       " a lexicon that matches the literals "\
                                       + "of the objects list"
@@ -1672,7 +1672,7 @@ class CrossProductEquation(Equation):
             if len(arg) == 2:
                 if not(isinstance(arg[0], Quotient) \
                     and isinstance(arg[1], Quotient)):
-                # __
+                    # __
                     raise error.WrongArgument("a tuple of " + str(type(arg[0]))\
                                               + "and of " + str(type(arg[1]),
                                               "a tuple of two Quotients")
@@ -1686,7 +1686,7 @@ class CrossProductEquation(Equation):
                     and isinstance(arg[1], Calculable) \
                     and isinstance(arg[2], Calculable) \
                     and isinstance(arg[3], Calculable)):
-                # __
+                    # __
                     raise error.WrongArgument("a tuple of " + str(type(arg[0]))\
                                               + ", " + str(type(arg[1])) \
                                               + ", " + str(type(arg[2])) \
@@ -1838,7 +1838,7 @@ class Table(Printable):
 
         if 'as_a_quotients_equality' in options \
             and options['as_a_quotients_equality'] in YES:
-        # __
+            # __
             for i in range(len(self)):
                 result += Quotient(('+',
                                     self.cell[0][i],
@@ -1912,7 +1912,7 @@ class Table(Printable):
             if self.cell[0][col[1]].is_displ_as_a_single_int() \
                 and self.cell[1][col[0]].is_displ_as_a_single_int() \
                 and self.cell[1][col[1]].is_displ_as_a_single_int():
-            # __
+                # __
                 return Fraction((num, deno))
             else:
                 return Quotient(('+', num, deno))
@@ -1923,7 +1923,7 @@ class Table(Printable):
             if self.cell[0][col[0]].is_displ_as_a_single_int() \
                 and self.cell[1][col[1]].is_displ_as_a_single_int() \
                 and self.cell[1][col[0]].is_displ_as_a_single_int():
-            # __
+                # __
                 return Fraction((num, deno))
             else:
                 return Quotient(('+', num, deno))
@@ -1934,7 +1934,7 @@ class Table(Printable):
             if self.cell[0][col[1]].is_displ_as_a_single_int() \
                 and self.cell[1][col[0]].is_displ_as_a_single_int() \
                 and self.cell[0][col[0]].is_displ_as_a_single_int():
-            # __
+                # __
                 return Fraction((num, deno))
             else:
                 return Quotient(('+', num, deno))
@@ -1946,7 +1946,7 @@ class Table(Printable):
             if self.cell[0][col[0]].is_displ_as_a_single_int() \
                 and self.cell[1][col[1]].is_displ_as_a_single_int() \
                 and self.cell[0][col[1]].is_displ_as_a_single_int():
-            # __
+                # __
                 return Fraction((num, deno))
             else:
                 return Quotient(('+', num, deno))
@@ -1984,7 +1984,7 @@ class Table_UP(Table):
 
         if not is_.a_number(coeff) \
             and not (isinstance(coeff, Calculable) and coeff.is_numeric()):
-        # __
+            # __
             raise error.WrongArgument(str(type(coeff)),
                                       " a number or a numeric Calculable ")
 
@@ -2004,7 +2004,7 @@ class Table_UP(Table):
         for elt in first_line:
             if elt != None and not is_.a_number(elt) \
                 and not (isinstance(elt, Calculable) and elt.is_numeric()):
-            # __
+                # __
                 raise error.WrongArgument(str(type(elt)) + " " + repr(elt),
                                           "None | nb | numericCalculable ")
 
@@ -2015,7 +2015,7 @@ class Table_UP(Table):
         for i in range(len(first_line)):
             if first_line[i] is None and (info[i] is None \
                                           or info[i] == (None, None)):
-            # __
+                # __
                 raise error.WrongArgument("first_line[i] and info[i] are" \
                                           + " both equal to None",
                                           "only one of them can be None" \
@@ -2039,7 +2039,7 @@ class Table_UP(Table):
                          and elt[0].is_literal()
                         ) \
                         or elt[0] is None):
-                # __
+                    # __
                     raise error.WrongArgument(str(elt[0]),
                                               "None|literalCalculable")
 
@@ -2047,7 +2047,7 @@ class Table_UP(Table):
                          and elt[1].is_literal()
                         ) \
                         or elt[1] is None):
-                # __
+                    # __
                     raise error.WrongArgument(str(type(elt[1])),
                                               "None|literalCalculable")
 
@@ -2058,7 +2058,7 @@ class Table_UP(Table):
                 else:
                     if isinstance(elt[0], Calculable) \
                         and not isinstance(elt[1], Calculable):
-                    # __
+                        # __
                         literals_positions[elt[0]] = col_nb
 
                 if elt[1] in literals_positions:
@@ -2068,7 +2068,7 @@ class Table_UP(Table):
                 else:
                     if isinstance(elt[1], Calculable) \
                         and not isinstance(elt[0], Calculable):
-                    # __:
+                        # __:
                         literals_positions[elt[1]] = col_nb
 
 

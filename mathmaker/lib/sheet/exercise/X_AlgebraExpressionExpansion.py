@@ -296,7 +296,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
                    and is_.a_number(options['ratio_mmp']) \
                    and options['ratio_mmp'] > 0 \
                    and options['ratio_mmp'] < 1:
-                # __
+                    # __
                     ratio = options['ratio_mmp']
                 else:
                     raise error.ArgumentNeeded("the ratio_mmp option " \

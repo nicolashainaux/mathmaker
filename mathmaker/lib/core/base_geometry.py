@@ -88,7 +88,7 @@ class Point(Drawable):
                 and len(arg[1]) == 2 \
                 and is_.a_number(arg[1][0]) \
                 and is_.a_number(arg[1][1])):
-            # __
+                # __
                 raise error.WrongArgument(str(arg), ' (x, y) ')
 
             self._name = arg[0]
@@ -233,7 +233,7 @@ class Segment(Drawable):
 
         elif type(arg) == tuple:
             if not (isinstance(arg[0], Point) and isinstance(arg[1], Point)):
-            # __
+                # __
                 raise error.WrongArgument(' (Point, Point) ', str(arg))
 
             self._points = (arg[0].clone(), arg[1].clone())
@@ -470,7 +470,7 @@ class Ray(Drawable):
         if isinstance(arg, tuple) and len(arg) == 2 \
             and isinstance(arg[0], Point) \
             and isinstance(arg[1], Point):
-        # __
+            # __
             self._point0 = arg[0].clone()
             self._point1 = arg[1].clone()
             self._name = MARKUP['opening_square_bracket']
@@ -505,7 +505,7 @@ class Angle(Drawable):
             and isinstance(arg[0], Point) \
             and isinstance(arg[1], Point) \
             and isinstance(arg[2], Point):
-        # __
+            # __
             self._ray0 = Ray((arg[1], arg[0]))
             self._ray1 = Ray((arg[1], arg[2]))
             self._points = [arg[0].clone(),
