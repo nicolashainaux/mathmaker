@@ -31,6 +31,8 @@ import locale
 import copy
 from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
 
+import settings
+from lib import randomly
 from lib import is_, error
 from lib.maths_lib import deg_to_rad, barycenter, POLYGONS_NATURES, round
 from .root_calculus import Value, Unit
@@ -38,13 +40,6 @@ from .base_calculus import Item, Product, Sum
 from .calculus import Equality, SubstitutableEquality
 from .base import Drawable
 from .base_geometry import Point, Segment, Angle, Vector
-# from .base import *
-# from .base_geometry import *
-# from lib import *
-# from lib.maths_lib import *
-#  *
-import settings
-from lib import randomly
 
 locale.setlocale(locale.LC_ALL, settings.locale)
 
