@@ -19,17 +19,17 @@
 # You should have received a copy of the GNU General Public License
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-import sys
-import random, copy
+
+import random
+import copy
 import re
-#import time
-#from decimal import Decimal
 
 import settings
 from lib import error
 from lib.common.cst import *
 from lib import shared
 from lib.core.root_calculus import Unit, Value
+
 
 # --------------------------------------------------------------------------
 ##
@@ -41,6 +41,7 @@ def wrap(word, braces='{}', o_str=None, e_str=None):
     if e_str not in [None, '']:
         ending_str = e_str
     return opening_str + word + ending_str
+
 
 # --------------------------------------------------------------------------
 ##
@@ -54,6 +55,7 @@ def unwrapped(word):
     else:
         return word[1:-1]
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns True if word is wrapped by opening_str and ending_str
@@ -61,20 +63,22 @@ def is_wrapped(word, braces='{}'):
     opening_str, ending_str = braces
     return word.startswith(opening_str) and word.endswith(ending_str)
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns True if word is wrapped by opening_str and ending_str or
 #          ending_str plus a punctuation.
 def is_wrapped_p(word, braces='{}'):
     opening_str, ending_str = braces
-    return word.startswith(opening_str) \
-           and (word.endswith(ending_str) \
-                or word.endswith(ending_str + ".") \
-                or word.endswith(ending_str + ",") \
-                or word.endswith(ending_str + ":") \
-                or word.endswith(ending_str + ";") \
-                or word.endswith(ending_str + "?") \
-                or word.endswith(ending_str + "!"))
+    return (word.startswith(opening_str)
+            and (word.endswith(ending_str)
+                 or word.endswith(ending_str + ".")
+                 or word.endswith(ending_str + ",")
+                 or word.endswith(ending_str + ":")
+                 or word.endswith(ending_str + ";")
+                 or word.endswith(ending_str + "?")
+                 or word.endswith(ending_str + "!")))
+
 
 # --------------------------------------------------------------------------
 ##
@@ -82,13 +86,14 @@ def is_wrapped_p(word, braces='{}'):
 #          a punctuation.
 def is_wrapped_P(word, braces='{}'):
     opening_str, ending_str = braces
-    return word.startswith(opening_str) \
-           and (word.endswith(ending_str + ".") \
-                or word.endswith(ending_str + ",") \
-                or word.endswith(ending_str + ":") \
-                or word.endswith(ending_str + ";") \
-                or word.endswith(ending_str + "?") \
-                or word.endswith(ending_str + "!"))
+    return (word.startswith(opening_str)
+            and (word.endswith(ending_str + ".")
+                 or word.endswith(ending_str + ",")
+                 or word.endswith(ending_str + ":")
+                 or word.endswith(ending_str + ";")
+                 or word.endswith(ending_str + "?")
+                 or word.endswith(ending_str + "!")))
+
 
 # --------------------------------------------------------------------------
 ##
@@ -96,6 +101,7 @@ def is_wrapped_P(word, braces='{}'):
 def is_unit(word):
     return (is_wrapped(word) and word[1:-1].endswith("_unit")) \
         or (is_wrapped_P(word) and word[1:-2].endswith("_unit"))
+
 
 # --------------------------------------------------------------------------
 ##
@@ -111,9 +117,11 @@ def is_unitN(word):
 #          one hint will be taken into account.
 def cut_off_hint_from(sentence):
     last_word = sentence.split()[-1:][0]
-    hint_block = last_word if is_wrapped(last_word, braces='||') \
-                           and last_word[1:-1].startswith('hint:') \
-                           else ""
+    hint_block = ""
+    if (is_wrapped(last_word, braces='||')
+        and last_word[1:-1].startswith('hint:')):
+        # __
+        hint_block = last_word
     if len(hint_block):
         new_s = " ".join(w for w in sentence.split() if w != hint_block)
         hint = hint_block[1:-1].split(sep=':')[1]
@@ -121,40 +129,36 @@ def cut_off_hint_from(sentence):
     else:
         return (sentence, "")
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief  Will set a random name to all {name}, {nameN}, {masculine_name},
 #			{masculine_nameN}, {feminine_name} and {feminine_nameN} tags.
 #   @param  arg The object to check (whether it has these attributes or not)
 def handle_valueless_names_tags(arg, sentence):
-    valueless_nameblocks = [ w[1:-1] for w in sentence.split() \
-                             if not '=' in w \
-                                 and is_wrapped(w) \
-                                 and (w[1:].startswith('name') \
-                                      or w[1:].startswith('masculine_name') \
-                                      or w[1:].startswith('feminine_name')) ] \
-                         + [ w[1:-2] for w in sentence.split()\
-                             if not '=' in w \
-                                 and is_wrapped_P(w) \
-                                 and (w[1:].startswith('name') \
-                                       or w[1:].startswith('masculine_name') \
-                                       or w[1:].startswith('feminine_name')) ]
+    valueless_nameblocks = [w[1:-1] for w in sentence.split()
+                            if ('=' not in w
+                                and is_wrapped(w)
+                                and (w[1:].startswith('name')
+                                     or w[1:].startswith('masculine_name')
+                                     or w[1:].startswith('feminine_name')))] \
+                            + [w[1:-2] for w in sentence.split()
+                               if ('=' not in w
+                                   and is_wrapped_P(w)
+                                   and (w[1:].startswith('name')
+                                        or w[1:].startswith('masculine_name')
+                                        or w[1:].startswith('feminine_name')))]
     for vn in valueless_nameblocks:
         if not hasattr(arg, vn):
             val = ""
             if vn.startswith('name'):
-                #start_time = time.time()
                 val = next(shared.names_source)
-                #sys.stderr.write("{sec}\n".format(sec=Decimal(str(time.time() - start_time))))
             elif vn.startswith('masculine_name'):
-                #start_time = time.time()
                 val = shared.names_source.next(gender="masculine")
-                #sys.stderr.write("{sec}\n".format(sec=Decimal(str(time.time() - start_time))))
             elif vn.startswith('feminine_name'):
-                #start_time = time.time()
                 val = shared.names_source.next(gender="feminine")
-                #sys.stderr.write("{sec}\n".format(sec=Decimal(str(time.time() - start_time))))
             setattr(arg, vn, val)
+
 
 # --------------------------------------------------------------------------
 ##
@@ -162,18 +166,18 @@ def handle_valueless_names_tags(arg, sentence):
 #           tags. <*_unit> and <*_unitN> are also handled by this function.
 #   @param  arg The object to check (whether it has the attributes or not)
 def handle_valueless_unit_tags(arg, sentence):
-    valueless_unitblocks = [ w[1:-1] for w in sentence.split() \
-                               if not '=' in w
-                                  and (is_wrapped(w) \
-                                       or is_wrapped(w, braces='<>')) \
-                                  and (w[:-1].endswith('_unit') \
-                                       or w[:-2].endswith('_unit') ) ] \
-                         + [ w[1:-2] for w in sentence.split()\
-                                if not '=' in w \
-                                   and (is_wrapped_P(w) \
-                                        or is_wrapped_P(w, braces='<>')) \
-                                   and (w[:-2].endswith('_unit') \
-                                        or w[:-3].endswith('_unit') )]
+    valueless_unitblocks = [w[1:-1] for w in sentence.split()
+                            if ('=' not in w
+                                and (is_wrapped(w)
+                                     or is_wrapped(w, braces='<>'))
+                                and (w[:-1].endswith('_unit')
+                                     or w[:-2].endswith('_unit')))] \
+                         + [w[1:-2] for w in sentence.split()
+                            if ('=' not in w
+                                and (is_wrapped_P(w)
+                                     or is_wrapped_P(w, braces='<>'))
+                                and (w[:-2].endswith('_unit')
+                                     or w[:-3].endswith('_unit')))]
     d = copy.deepcopy(UNIT_KINDS)
     d.update({'area': COMMON_LENGTH_UNITS, 'volume': COMMON_LENGTH_UNITS})
     area_or_volume_tags = []
@@ -199,6 +203,7 @@ def handle_valueless_unit_tags(arg, sentence):
             setattr(arg, 'length_' + unit_id, val)
         setattr(arg, vu, val)
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief  Builds a dictionary from all {key=val} occurrences found in
@@ -208,10 +213,10 @@ def handle_valueless_unit_tags(arg, sentence):
 #   @return A couple: (transformed_sentence, {key:val, ...}).
 def process_attr_values(sentence):
     attr_values = {}
-    key_val_blocks = [ w for w in sentence.split() \
-                         if (is_wrapped_p(w) \
-                             or is_wrapped_p(w, braces='<>')) \
-                            and '=' in w ]
+    key_val_blocks = [w for w in sentence.split()
+                      if ((is_wrapped_p(w)
+                           or is_wrapped_p(w, braces='<>'))
+                          and '=' in w)]
     for kv in key_val_blocks:
         [key, val] = unwrapped(kv).split(sep='=')
         attr_values.update({key: val})
@@ -222,20 +227,21 @@ def process_attr_values(sentence):
             if not 'length_' + unit_id in attr_values:
                 pairs_to_add.update({'length_' + unit_id: attr_values[key]})
     attr_values.update(pairs_to_add)
-    transformed_sentence = " ".join([ wrap(w[1:-1].split(sep='=')[0])\
-                                      if (is_wrapped(w) \
-                                          or is_wrapped(w, braces='<>')) \
-                                         and '=' in w \
-                                      else w \
-                                      for w in sentence.split() ])
-    transformed_sentence = " ".join([ wrap(w[1:-2].split(sep='=')[0],
-                                           e_str='}' + w[-1:]) \
-                                      if (is_wrapped_P(w) \
-                                          or is_wrapped_P(w, braces='<>')) \
-                                         and '=' in w \
-                                      else w \
-                                      for w in transformed_sentence.split() ])
+    transformed_sentence = " ".join([wrap(w[1:-1].split(sep='=')[0])
+                                     if ((is_wrapped(w)
+                                          or is_wrapped(w, braces='<>'))
+                                         and '=' in w)
+                                     else w
+                                     for w in sentence.split()])
+    transformed_sentence = " ".join([wrap(w[1:-2].split(sep='=')[0],
+                                          e_str='}' + w[-1:])
+                                     if ((is_wrapped_P(w)
+                                          or is_wrapped_P(w, braces='<>'))
+                                         and '=' in w)
+                                     else w
+                                     for w in transformed_sentence.split()])
     return (transformed_sentence, attr_values)
+
 
 # --------------------------------------------------------------------------
 ##
@@ -283,12 +289,14 @@ def merge_nb_unit_pairs(arg):
     arg.wording = " ".join(new_words_list)
     #sys.stderr.write("Turned into: " + arg.wording + "\n")
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief  Returns all values found wrapped in {}.
 def extract_formatting_tags_from(s):
     return [w[1:-1] for w in s.split() if is_wrapped(w)] \
            + [w[1:-2] for w in s.split() if is_wrapped_P(w)]
+
 
 # --------------------------------------------------------------------------
 ##
@@ -358,6 +366,7 @@ def setup_wording_format_of(w_object):
             #sys.stderr.write("Setting as hint value: " + hint + "\n")
             w_object.hint = hint
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief  Insert nonbreaking spaces instead of spaces between a number and the
@@ -369,6 +378,7 @@ def insert_nonbreaking_spaces(sentence):
     sentence = p.sub(r'\1' + nb_space + r'\3', sentence)
     #sys.stderr.write("--> " + sentence+"\n")
     return sentence
+
 
 # --------------------------------------------------------------------------
 ##
