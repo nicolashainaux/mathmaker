@@ -43,10 +43,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief A short test on first degree equations
 class EquationsShortTest(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor

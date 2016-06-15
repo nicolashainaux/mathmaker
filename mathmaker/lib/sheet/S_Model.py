@@ -64,10 +64,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief Use it as a copy/paste model to create new sheets.
 class S_Model(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -89,10 +85,6 @@ class S_Model(S_Structure):
         # For instance:
         # ex1 = exercise.ProductReduction( many=30)
         # self.exercises_list.append(ex1)
-
-
-
-
 
 
         # END -----------------------------------------------------------------

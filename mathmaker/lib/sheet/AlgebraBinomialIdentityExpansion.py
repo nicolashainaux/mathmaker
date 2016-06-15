@@ -45,10 +45,6 @@ SHEET_LAYOUT = { 'exc': [ [2,         9, 9],       (1, 1,
 # @brief Expand (a+b)², (a-b)², (a+b)(a-b)...
 class AlgebraBinomialIdentityExpansion(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -103,10 +99,6 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
                                                  )
 
         self.exercises_list.append(ex4)
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##

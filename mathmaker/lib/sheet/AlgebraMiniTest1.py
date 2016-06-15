@@ -64,10 +64,6 @@ SHEET_LAYOUT = { 'exc': [ [1,         9, 9],       (1, 1)
 # @brief One expansion (randomly but sum of 2 expandables) + 2 factorizations
 class AlgebraMiniTest1(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -97,12 +93,5 @@ class AlgebraMiniTest1(S_Structure):
                                            x_subkind='two_factorizations',
                                            start_number=2)
             self.exercises_list.append(ex2)
-
-
-
-
-
-
-
 
         # END -----------------------------------------------------------------

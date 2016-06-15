@@ -36,9 +36,6 @@ from lib.common.cst import *
 # other methods
 class S_Structure(object):
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined. Constructor.
@@ -156,10 +153,6 @@ class S_Structure(object):
                                               )
 
         self.sheet_layout = sheet_layout
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -303,10 +296,6 @@ class S_Structure(object):
 
         return result
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Return as str exercises' or answers'texts
@@ -393,9 +382,6 @@ class S_Structure(object):
 
         return result
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output the title of the sheet to be generated
@@ -411,10 +397,6 @@ class S_Structure(object):
 
         return result
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output the sheet's text
@@ -425,10 +407,6 @@ class S_Structure(object):
             result += shared.machine.write_new_line_twice()
 
         return result
-
-
-
-
 
 
     # --------------------------------------------------------------------------

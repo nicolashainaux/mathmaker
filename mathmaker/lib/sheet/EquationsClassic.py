@@ -44,10 +44,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief Collection of basic equations to solve (like x+7=-9, 5x=10, 3=2-x...).
 class EquationsClassic(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -78,10 +74,6 @@ class EquationsClassic(S_Structure):
 
         self.exercises_list.append(ex1)
         self.exercises_list.append(ex2)
-
-
-
-
 
 
 

@@ -41,10 +41,6 @@ from lib.common.latex import MARKUP
 
 locale.setlocale(locale.LC_ALL, settings.locale)
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -54,10 +50,6 @@ locale.setlocale(locale.LC_ALL, settings.locale)
 # It is not possible to implement any Evaluable object
 class Evaluable(Printable):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief If the object is literal, returns the first letter
@@ -65,19 +57,11 @@ class Evaluable(Printable):
     def get_first_letter(self):
         raise error.MethodShouldBeRedefined(self, 'get_first_letter')
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the numeric value of the object
     def evaluate(self):
         raise error.MethodShouldBeRedefined(self, 'evaluate')
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -85,10 +69,6 @@ class Evaluable(Printable):
     #   @return True or False
     def contains_a_rounded_number(self):
         raise error.MethodShouldBeRedefined(self, 'contains_a_rounded_number')
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -99,10 +79,6 @@ class Evaluable(Printable):
     #   @return True if the object contains exactly the given objct
     def contains_exactly(self, objct):
         raise error.MethodShouldBeRedefined(self, 'contains_exactly')
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -131,19 +107,11 @@ class Evaluable(Printable):
             else:
                 return -1
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains numeric objects
     def is_numeric(self):
         raise error.MethodShouldBeRedefined(self, 'is_numeric')
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -151,19 +119,11 @@ class Evaluable(Printable):
     def is_literal(self):
         raise error.MethodShouldBeRedefined(self, 'is_literal')
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the evaluated value of an object is null
     def is_null(self):
         raise error.MethodShouldBeRedefined(self, 'is_null')
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -174,27 +134,17 @@ class Evaluable(Printable):
 # It is not possible to implement any Calculable object
 class Calculable(Evaluable):
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the list of elements to iter over
     def get_iteration_list(self):
         raise error.MethodShouldBeRedefined(self, 'get_iteration_list')
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the next Calculable object during a numeric calculation
     def calculate_next_step(self, **options):
         raise error.MethodShouldBeRedefined(self, 'calculate_next_step')
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -206,19 +156,11 @@ class Calculable(Evaluable):
         raise error.MethodShouldBeRedefined(self,
                                             'expand_and_reduce_next_step')
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of elements of the Exponented
     def __len__(self):
         raise error.MethodShouldBeRedefined(self, "__len__()")
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -228,10 +170,6 @@ class Calculable(Evaluable):
 
     def __next__(self):
         return next(self.get_iteration_list())
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -243,10 +181,6 @@ class Calculable(Evaluable):
         raise error.MethodShouldBeRedefined(self,
                                             'multiply_symbol_is_required')
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the argument requires brackets in a product
@@ -255,10 +189,6 @@ class Calculable(Evaluable):
     #   @return True if the object requires brackets in a Product
     def requires_brackets(self, position):
         raise error.MethodShouldBeRedefined(self, 'requires_brackets')
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -271,19 +201,12 @@ class Calculable(Evaluable):
                                             'requires_innner_brackets')
 
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Uses the given lexicon to substitute literal Values in self
     def substitute(self, subst_dict):
         for elt in self:
             elt.substitute(subst_dict)
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -293,20 +216,12 @@ class Calculable(Evaluable):
         raise error.MethodShouldBeRedefined(self,
                                             'is_displ_as_a_single_1')
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single int
     def is_displ_as_a_single_int(self):
         raise error.MethodShouldBeRedefined(self,
                                             'is_displ_as_a_single_1')
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -315,10 +230,6 @@ class Calculable(Evaluable):
     def is_displ_as_a_single_minus_1(self):
         raise error.MethodShouldBeRedefined(self,
                                            'is_displ_as_a_single_minus_1')
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -329,10 +240,6 @@ class Calculable(Evaluable):
         raise error.MethodShouldBeRedefined(self,
                                             'is_displ_as_a_single_0')
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object is or only contains one numeric Item
@@ -340,20 +247,12 @@ class Calculable(Evaluable):
         raise error.MethodShouldBeRedefined(self,
                                       'is_displ_as_a_single_numeric_Item')
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be considered as a neutral element
     def is_displ_as_a_single_neutral(self, elt):
         raise error.MethodShouldBeRedefined(self,
                                       'is_displ_as_a_single_neutral')
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -373,19 +272,11 @@ class Signed(Calculable):
     def __init__(self):
         self._sign = '+'
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of minus signs in the object
     def get_minus_signs_nb(self):
         raise error.MethodShouldBeRedefined(self, 'get_minus_signs_nb')
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -395,10 +286,6 @@ class Signed(Calculable):
     # --------------------------------------------------------------------------
     sign = property(get_sign,
                     doc = "Sign of the object")
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -420,10 +307,6 @@ class Signed(Calculable):
         else:
             raise error.UncompatibleType(self, "'+' or '-' or 1 or -1")
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Changes the sign of the object
@@ -440,10 +323,6 @@ class Signed(Calculable):
                                     + str(self.sign) \
                                     + " instead of '+' or '-'.")
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if object's *sign* is '-' (ie -(-1) would be "negative")
@@ -451,19 +330,11 @@ class Signed(Calculable):
         return self.sign == '-'
 
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if object's *sign* is '+'
     def is_positive(self):
         return self.sign == '+'
-
-
-
-
 
 
 # ------------------------------------------------------------------------------
@@ -482,10 +353,6 @@ class Signed(Calculable):
 #        Up from 2010/11/19, it is decided that all numeric Values will contain
 #        a Decimal.decimal number.
 class Value(Signed):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -543,10 +410,6 @@ class Value(Signed):
         else:
             self._abs_value = self._raw_value
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief If the object is literal, returns the value
@@ -591,13 +454,6 @@ class Value(Signed):
         return self._abs_value
 
 
-
-
-
-
-
-
-
     raw_value = property(get_raw_value,
                          doc = "Raw value of the object")
     has_been_rounded = property(get_has_been_rounded,
@@ -610,13 +466,6 @@ class Value(Signed):
 
 
 
-
-
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the "has been rounded" state of the Value
@@ -625,13 +474,6 @@ class Value(Signed):
             raise error.WrongArgument(str(type(arg)), "True|False")
         else:
             self._has_been_rounded = arg
-
-
-
-
-
-
-
 
 
     # --------------------------------------------------------------------------
@@ -654,19 +496,12 @@ class Value(Signed):
         else:
             raise error.UncompatibleType(self, "'+' or '-' or 1 or -1")
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Set the unit of the Value
     #   @param  arg String
     def set_unit(self, arg):
         self._unit = Unit(arg)
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -684,18 +519,11 @@ class Value(Signed):
                                     + str(self.sign) \
                                     + " instead of '+' or '-'.")
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Temporary shortcut for into_str()
     def __str__(self, **options):
         return self.into_str(**options)
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -743,10 +571,6 @@ class Value(Signed):
             else:
                 return str(self.raw_value)
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the value of a numeric Value
@@ -758,29 +582,17 @@ class Value(Signed):
             return self.raw_value
 
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns None
     def calculate_next_step(self, **options):
         return None
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Debugging method to print the Value
     def __repr__(self, **options):
         return "." + str(self.raw_value) + "."
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -810,9 +622,6 @@ class Value(Signed):
     def __len__(self):
         return 1
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Makes Values hashable (so, usable as dictionnary keys)
@@ -820,10 +629,6 @@ class Value(Signed):
         return hash(str(self.sign) + str(self.raw_value) \
                     + str(self.has_been_rounded) + str(self.unit)
                    )
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -836,10 +641,6 @@ class Value(Signed):
         else:
             return self.raw_value * objct
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Executes the addition with another object
@@ -849,10 +650,6 @@ class Value(Signed):
             return self.raw_value + objct.evaluate()
         else:
             return self.raw_value + objct
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -871,10 +668,6 @@ class Value(Signed):
 
         else:
             pass
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -927,9 +720,6 @@ class Value(Signed):
 
             return result_value
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of digits of a numerical value
@@ -950,10 +740,6 @@ class Value(Signed):
                 return 0
             else:
                 return temp_result
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -984,20 +770,12 @@ class Value(Signed):
 
         return self.digits_number() > precision_to_test
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief To check if this contains a rounded number...
     #   @return True or False depending on the Value inside
     def contains_a_rounded_number(self):
         return self.has_been_rounded
-
-
-
-
 
 
     # --------------------------------------------------------------------------
@@ -1007,10 +785,6 @@ class Value(Signed):
     #   @return False
     def contains_exactly(self, objct):
         return False
-
-
-
-
 
 
     # --------------------------------------------------------------------------
@@ -1025,9 +799,6 @@ class Value(Signed):
         else:
             return len(str(self.raw_value)) > len(str(self.raw_value.sqrt()))
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object contains an integer (numeric)
@@ -1041,9 +812,6 @@ class Value(Signed):
 
         return getcontext().flags[Rounded] == 0
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains numeric objects
@@ -1056,10 +824,6 @@ class Value(Signed):
         else:
             return False
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains literal objects
@@ -1070,10 +834,6 @@ class Value(Signed):
         else:
             return False
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the evaluated value of an object is null
@@ -1082,10 +842,6 @@ class Value(Signed):
             return True
         else:
             return False
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1096,10 +852,6 @@ class Value(Signed):
         else:
             return False
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single -1
@@ -1108,10 +860,6 @@ class Value(Signed):
             return True
         else:
             return False
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1122,28 +870,17 @@ class Value(Signed):
         else:
             return False
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object is or only contains one numeric Item
     def is_displ_as_a_single_numeric_Item(self):
         return False
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single int
     def is_displ_as_a_single_int(self):
         return self.is_numeric() and self.is_an_integer()
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -1155,10 +892,6 @@ class Value(Signed):
 # methods that are not already defined hereafter
 class Exponented(Signed):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -1166,10 +899,6 @@ class Exponented(Signed):
     def __init__(self):
         Signed.__init__(self)
         self._exponent = Value(1)
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1179,10 +908,6 @@ class Exponented(Signed):
         return self._exponent
     # --------------------------------------------------------------------------
     exponent = property(get_exponent, doc = "Exponent of the Function")
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1195,10 +920,6 @@ class Exponented(Signed):
         else:
             self._exponent = Value(arg)
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the exponent isn't equivalent to a single 1
@@ -1209,10 +930,6 @@ class Exponented(Signed):
         else:
             return False
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -1220,10 +937,6 @@ class Exponented(Signed):
 # @class Unit
 # @brief This class is used to handle with units.
 class Unit(Exponented):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1243,10 +956,6 @@ class Unit(Exponented):
 
         else:
             raise error.WrongArgument(arg, "a string or a Unit")
-
-
-
-
 
     @property
     def name(self):

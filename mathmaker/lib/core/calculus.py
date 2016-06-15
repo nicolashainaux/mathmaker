@@ -87,14 +87,6 @@ FRACTIONS_SUMS_SCALE_TABLE = [0.02,  #(1, 2)
 
 
 
-
-
-
-
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -103,20 +95,12 @@ FRACTIONS_SUMS_SCALE_TABLE = [0.02,  #(1, 2)
 # @brief Abstract mother class of objects composed of Calculable=Calculable=...
 class ComposedCalculable(Printable):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Must be redefined
     def __init__(self):
         raise error.MethodShouldBeRedefined(self, "__init__")
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -125,10 +109,6 @@ class ComposedCalculable(Printable):
 # @class Expression
 # @brief These are object of the kind: Name = Exponented
 class Expression(ComposedCalculable):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -151,10 +131,6 @@ class Expression(ComposedCalculable):
         self._name = integer_or_letter
         self._right_hand_side = objct.clone()
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the right hand side of the Expression e.g. the Expression
@@ -162,16 +138,8 @@ class Expression(ComposedCalculable):
     def get_right_hand_side(self):
         return self._right_hand_side
 
-
-
-
-
     right_hand_side = property(get_right_hand_side,
                                doc = "Right hand side of the object")
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -181,10 +149,6 @@ class Expression(ComposedCalculable):
             raise error.UncompatibleType(objct, "Exponented")
 
         self._right_hand_side = arg.clone()
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -225,10 +189,6 @@ class Expression(ComposedCalculable):
                                                **options)
 
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Create a string of the expression's exp. & red. in the given ML
@@ -251,10 +211,6 @@ class Expression(ComposedCalculable):
 
         return result
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -262,10 +218,6 @@ class Expression(ComposedCalculable):
 # @class Equality
 # @brief These are object of the kind: Exponented = Exponented [= ...]
 class Equality(ComposedCalculable):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -329,19 +281,11 @@ class Equality(ComposedCalculable):
             else:
                 self._equal_signs.append('equal')
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the elements of the Equality
     def get_elements(self):
         return self._elements
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -349,17 +293,9 @@ class Equality(ComposedCalculable):
     def get_equal_signs(self):
         return self._equal_signs
 
-
-
-
-
     elements = property(get_elements, doc = "Elements of the object")
 
     equal_signs = property(get_equal_signs, doc = "Equal signs of the object")
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -396,10 +332,6 @@ class Equality(ComposedCalculable):
 
         return result
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief It is possible to index an Equality
@@ -413,19 +345,11 @@ class Equality(ComposedCalculable):
 
         self._elements[i] = data.clone()
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of elements of the Equality
     def __len__(self):
         return len(self._elements)
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -434,10 +358,6 @@ class Equality(ComposedCalculable):
 # @class Equation
 # @brief One degree one variable. Sum=Sum. Name, number, left/right hand side.
 class Equation(ComposedCalculable):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -967,9 +887,6 @@ class Equation(ComposedCalculable):
         else:
             raise error.UncompatibleType(arg, "Equation|tuple")
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the name of the object
@@ -997,19 +914,11 @@ class Equation(ComposedCalculable):
                        + MARKUP['colon'] \
                        + MARKUP['space']
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of the Equality
     def get_number(self):
         return self._number
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1017,29 +926,17 @@ class Equation(ComposedCalculable):
     def get_left_hand_side(self):
         return self._left_hand_side
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Getter for right hand side
     def get_right_hand_side(self):
         return self._right_hand_side
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Getter for the variable letter
     def get_variable_letter(self):
         return self._variable_letter
-
-
-
-
 
     number = property(get_number, doc = "Number of the Equation")
 
@@ -1062,10 +959,6 @@ class Equation(ComposedCalculable):
             raise error.WrongArgument(str(type(arg)), "int")
 
         self._number = str(arg)
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1098,10 +991,6 @@ class Equation(ComposedCalculable):
         else:
             raise error.UncompatibleType(arg, "Equation|tuple")
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
@@ -1131,10 +1020,6 @@ class Equation(ComposedCalculable):
                + egal_sign \
                + right
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Raw display of the Equation (debugging method)
@@ -1145,10 +1030,6 @@ class Equation(ComposedCalculable):
                + "\n Left hand side: " + repr(self.left_hand_side) \
                + "\n Right hand side: " + repr(self.right_hand_side) \
                + "\n Variable: " + str(self.variable_letter)
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1310,10 +1191,6 @@ class Equation(ComposedCalculable):
 
 
         return result
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1568,9 +1445,6 @@ class Equation(ComposedCalculable):
             else:
                 return _("This equation has no solution.")
 
-
-
-
         # 4th CASE
         # Irreducible PRODUCTS ax = b or -x = b or x = b,
         # where a and b are Exponenteds.
@@ -1704,10 +1578,6 @@ class Equation(ComposedCalculable):
                                 "Leaving, with Equation: " + repr(new_eq))
         return new_eq
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -1715,10 +1585,6 @@ class Equation(ComposedCalculable):
 # @class SubstitutableEquality
 # @brief Like an Equality with literals and the numeric values to replace them
 class SubstitutableEquality(Equality):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1750,26 +1616,14 @@ class SubstitutableEquality(Equality):
 
         self._subst_dict = subst_dict
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Getter for the substitution dictionnary
     def get_subst_dict(self):
         return self._subst_dict
 
-
-
-
-
     subst_dict = property(get_subst_dict,
                 doc = "Substitution dictionnary of the SubstitutableEquality")
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1780,10 +1634,6 @@ class SubstitutableEquality(Equality):
 
         return self
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -1791,10 +1641,6 @@ class SubstitutableEquality(Equality):
 # @class CrossProductEquation
 # @brief All objects that are displayable as Cross Product Equations
 class CrossProductEquation(Equation):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1885,19 +1731,11 @@ class CrossProductEquation(Equation):
 
             self._variable_obj = variable_obj
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Getter for the variable obj
     def get_variable_obj(self):
         return self._variable_obj
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1905,18 +1743,10 @@ class CrossProductEquation(Equation):
     def get_variable_position(self):
         return self._variable_position
 
-
-
-
-
     variable_obj = property(get_variable_obj,
                                doc = "Variable object of the Equation")
     variable_position = property(get_variable_position,
                                doc = "Variable position in the Equation")
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1938,13 +1768,6 @@ class CrossProductEquation(Equation):
         return new_eq
 
 
-
-
-
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -1952,10 +1775,6 @@ class CrossProductEquation(Equation):
 # @class Table
 # @brief All objects that are displayable as Tables
 class Table(Printable):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1998,10 +1817,6 @@ class Table(Printable):
 
         self._data = arg
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Table's content as a list of two lists so it
@@ -2011,10 +1826,6 @@ class Table(Printable):
     # --------------------------------------------------------------------------
     cell = property(get_cell,
                     doc = "t.cell is the complete Table t.cell[i][j] is a cell")
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -2054,18 +1865,11 @@ class Table(Printable):
 
         return result
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of columns of the Table
     def __len__(self):
         return self._nb_of_cols
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -2147,10 +1951,6 @@ class Table(Printable):
             else:
                 return Quotient(('+', num, deno))
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns True if the Table is entirely numeric
@@ -2162,10 +1962,6 @@ class Table(Printable):
 
         return True
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -2173,10 +1969,6 @@ class Table(Printable):
 # @class Table_UP
 # @brief All objects that are displayable as proportional Tables but uncomplete
 class Table_UP(Table):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -2354,28 +2146,17 @@ class Table_UP(Table):
 
         self._crossproducts_info = literals_positions
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Table's coefficient
     def get_coeff(self):
         return self._coeff
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the info about Cross Products
     def get_crossproducts_info(self):
         return self._crossproducts_info
-
-
-
-
 
     coeff = property(get_coeff,
                      doc = "the coefficient of the Table_UP")
@@ -2384,10 +2165,6 @@ class Table_UP(Table):
                                   doc = "infos about the cross products")
     # for instance, {'EF': (2,0), "GH": (3,0)} means Item 'EF' can
     # be calculated by a CrossProduct using columns 2 and 0, etc.
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##

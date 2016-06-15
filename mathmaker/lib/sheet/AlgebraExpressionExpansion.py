@@ -43,10 +43,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief One exercise with 3x(2-7x) & 5(3+x) objects, another with (2+x)(3-x)
 class AlgebraExpressionExpansion(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -81,8 +77,5 @@ class AlgebraExpressionExpansion(S_Structure):
 
         self.exercises_list.append(ex1)
         self.exercises_list.append(ex2)
-
-
-
 
 

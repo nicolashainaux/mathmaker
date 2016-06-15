@@ -46,10 +46,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief pythagorean theorem
 class ConverseAndContrapositiveOfPythagoreanTheoremShortTest(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -100,9 +96,5 @@ class ConverseAndContrapositiveOfPythagoreanTheoremShortTest(S_Structure):
             x_list = [ex3, ex4, ex1, ex2]
 
         self.exercises_list = x_list
-
-
-
-
 
         # END -----------------------------------------------------------------

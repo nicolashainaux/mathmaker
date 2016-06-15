@@ -283,9 +283,6 @@ def merge_nb_unit_pairs(arg):
     arg.wording = " ".join(new_words_list)
     #sys.stderr.write("Turned into: " + arg.wording + "\n")
 
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief  Returns all values found wrapped in {}.

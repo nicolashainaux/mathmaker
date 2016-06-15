@@ -662,10 +662,3 @@ def test_big_product_reduced(big_product):
 
 
 
-
-
-
-
-
-
-

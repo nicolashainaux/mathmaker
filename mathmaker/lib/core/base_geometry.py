@@ -60,10 +60,6 @@ AVAILABLE_SEGMENT_MARKS = ['', 'simple', 'double', 'triple', 'cross']
 # @brief
 class Point(Drawable):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -107,9 +103,6 @@ class Point(Drawable):
         self._x_exact = self._x
         self._y_exact = self._y
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the abscissa of the Point, rounded up to the tenth
@@ -120,20 +113,12 @@ class Point(Drawable):
                      rounding=ROUND_HALF_UP
                     )
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the exact abscissa of the Point
     @property
     def x_exact(self):
         return self._x
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -145,20 +130,12 @@ class Point(Drawable):
                      rounding=ROUND_HALF_UP
                     )
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the exact ordinate of the Point
     @property
     def y_exact(self):
         return self._y
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -170,9 +147,6 @@ class Point(Drawable):
 
         self._x = arg
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the ordinate of the Point
@@ -183,20 +157,12 @@ class Point(Drawable):
 
         self._y = arg
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the name of the object
     @property
     def name(self):
         return self._name
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -208,10 +174,6 @@ class Point(Drawable):
         if not (len(arg) == 1):
             raise ValueError("Expected a string of one char only")
         self._name = arg
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -245,14 +207,6 @@ class Point(Drawable):
 
 
 
-
-
-
-
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -260,10 +214,6 @@ class Point(Drawable):
 # @class Segment
 # @brief
 class Segment(Drawable):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -305,9 +255,6 @@ class Segment(Drawable):
 
         self._length_has_been_set = False
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the two points
@@ -315,20 +262,12 @@ class Segment(Drawable):
     def points(self):
         return self._points
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the label of the Segment
     @property
     def label(self):
         return self._label
-
-
-
-
 
 
     # --------------------------------------------------------------------------
@@ -340,10 +279,6 @@ class Segment(Drawable):
         y_delta = self.points[0].y - self.points[1].y
         return math.hypot(x_delta, y_delta)
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the "fake" length of the Segment (the one used in a
@@ -352,20 +287,12 @@ class Segment(Drawable):
     def length(self):
         return self._length
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the length_has_been_set flag of the Segment
     @property
     def length_has_been_set(self):
         return self._length_has_been_set
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -374,20 +301,12 @@ class Segment(Drawable):
     def length_name(self):
         return self.points[0].name + self.points[1].name
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the mark of the Segment
     @property
     def mark(self):
         return self._mark
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -405,10 +324,6 @@ class Segment(Drawable):
         elif not flag:
             self.label = Value("")
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the label of the Segment
@@ -418,10 +333,6 @@ class Segment(Drawable):
             raise error.WrongArgument(' Value ', str(type(arg)))
 
         self._label = arg
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -438,9 +349,6 @@ class Segment(Drawable):
         self._length = arg
         self._length_has_been_set = True
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the mark of the Segment
@@ -455,10 +363,6 @@ class Segment(Drawable):
 
         self._mark = arg
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -466,10 +370,6 @@ class Segment(Drawable):
 # @class Vector
 # @brief
 class Vector(Point):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -500,10 +400,6 @@ class Vector(Point):
 
 
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Adds two vectors
@@ -515,20 +411,12 @@ class Vector(Point):
         return Vector((self.x_exact + arg.x_exact,
                        self.y_exact + arg.y_exact))
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Norm of a Vector
     @property
     def norm(self):
         return Decimal(str(math.hypot(self._x_exact, self._y_exact)))
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -543,20 +431,12 @@ class Vector(Point):
 
         return theta if self._y_exact > 0 else Decimal("360") - theta
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the unit vector built from self
     def unit_vector(self):
         return Vector((self._x_exact/self.norm,
                        self._y_exact/self.norm))
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -567,10 +447,6 @@ class Vector(Point):
 
         return self.unit_vector() + arg.unit_vector()
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -578,10 +454,6 @@ class Vector(Point):
 # @class Ray
 # @brief
 class Ray(Drawable):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -605,10 +477,6 @@ class Ray(Drawable):
             self._name += arg[0].name + arg[1].name
             self._name += MARKUP['closing_bracket']
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -616,10 +484,6 @@ class Ray(Drawable):
 # @class Angle
 # @brief
 class Angle(Drawable):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -677,20 +541,12 @@ class Angle(Drawable):
                                           rounding=ROUND_HALF_UP
                                          ) / 2
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the measure of the angle
     @property
     def measure(self):
         return self._measure
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -699,20 +555,12 @@ class Angle(Drawable):
     def points(self):
         return self._points
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the label of the angle
     @property
     def label(self):
         return self._label
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -721,10 +569,6 @@ class Angle(Drawable):
     def label_display_angle(self):
         return self._label_display_angle
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the mark of the angle
@@ -732,20 +576,12 @@ class Angle(Drawable):
     def mark(self):
         return self._mark
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the vertex of the angle
     @property
     def vertex(self):
         return self._points[1]
-
-
-
-
 
 
 
@@ -760,10 +596,6 @@ class Angle(Drawable):
         else:
             raise error.WrongArgument(arg, 'str or Value')
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the angle (for display) of label's angle
@@ -776,10 +608,6 @@ class Angle(Drawable):
                                               Decimal('0.1'),
                                               rounding=ROUND_HALF_UP
                                              )
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##

@@ -45,10 +45,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief Equations with at least one simple expandable expression inside.
 class EquationsHarder(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -78,9 +74,5 @@ class EquationsHarder(S_Structure):
 
         self.exercises_list.append(ex1)
         self.exercises_list.append(ex2)
-
-
-
-
 
     # END ---------------------------------------------------------------------

@@ -44,10 +44,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief Products & Quotients of Fractions
 class FractionsProductAndQuotient(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor

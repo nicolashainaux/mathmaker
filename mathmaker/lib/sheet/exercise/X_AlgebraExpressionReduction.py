@@ -49,10 +49,6 @@ X_LAYOUTS = {'default':
 # reduction exercises
 class X_AlgebraExpressionReduction(X_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -248,9 +244,5 @@ class X_AlgebraExpressionReduction(X_Structure):
                                          expression_number=i+self.start_number,
                                          **options)
                                            )
-
-
-
-
 
 

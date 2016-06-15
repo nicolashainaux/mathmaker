@@ -119,10 +119,6 @@ X_LAYOUTS = {'default':
 # @brief All exercises related with equations resolution.
 class X_Equation(X_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -352,10 +348,6 @@ class X_Equation(X_Structure):
                                         expression_number=i+self.start_number,
                                         **options)
                                               )
-
-
-
-
 
     # INSTRUCTIONS TO CREATE A NEW EXERCISE -----------------------------------
     # - Indicate its name in the header comment

@@ -47,10 +47,6 @@ from . import Structure
 # @todo When creating another machine, some things might have to change here
 class LaTeX(Structure.Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -71,10 +67,6 @@ class LaTeX(Structure.Structure):
         self.markup = latex.MARKUP
         self.out = sys.stdout
         self.redirect_output_to_str = True
-
-
-
-
 
 
 
@@ -172,10 +164,6 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
         else:
             self.out.write(result)
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -280,9 +268,6 @@ exercises counter (which is useful when begining to write the answers sheet)")\
     def write_out(self, given_string, **options):
         self.out.write(given_string)
 
-
-
-
     ##
     #   @brief Writes to the output the given string
     #   @option emphasize='bold'|'italics'|'underlined'
@@ -350,9 +335,6 @@ exercises counter (which is useful when begining to write the answers sheet)")\
             return output_str
         else:
             self.out.write(output_str)
-
-
-
 
     ##
     #   @brief Writes a table filled with the given [strings]
@@ -564,10 +546,6 @@ exercises counter (which is useful when begining to write the answers sheet)")\
         else:
             raise error.UncompatibleType(objct, "String|Number|Printable")
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Draws a horizontal dashed line
@@ -576,28 +554,17 @@ exercises counter (which is useful when begining to write the answers sheet)")\
                + "\draw[black,line width=0.5pt,dashed] (0,0)--(9,0);" \
                + "\end{tikzpicture}" + "\n"
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Puts a vertical space (default 1 cm)
     def insert_vspace(self, **options):
         return "\\vspace{1 cm}"
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns a non-breaking space
     def insert_nonbreaking_space(self, **options):
         return "~"
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -624,10 +591,6 @@ exercises counter (which is useful when begining to write the answers sheet)")\
             return "\includegraphics[scale=" + s + "]{" \
                     + drawable_arg.eps_filename \
                     + "}" + "\\newline" + "\n"
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##

@@ -44,10 +44,6 @@ SHEET_LAYOUT = { 'exc': [ [1,         6, 15],      (1, 1),
 # @brief A test on elementary algebra, "harder" level (binomials exp/fact)
 class AlgebraTest2(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor

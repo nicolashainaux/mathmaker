@@ -36,10 +36,6 @@ from lib.tools import header_comment
 # Any Clonable are provided the clone() method, no need to reimplement it
 class Clonable(object):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns a deep copy of the object
@@ -47,10 +43,6 @@ class Clonable(object):
         result = object.__new__(type(self))
         result.__init__(self)
         return result
-
-
-
-
 
 
 # ------------------------------------------------------------------------------
@@ -61,10 +53,6 @@ class Clonable(object):
 # @brief Abstract mother class of objects having a name
 class NamedObject(Clonable):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -72,20 +60,12 @@ class NamedObject(Clonable):
     def __init__(self):
         raise error.MethodShouldBeRedefined(self, "__init__")
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the name of the object
     @property
     def name(self):
         return self._name
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -97,10 +77,6 @@ class NamedObject(Clonable):
 
         self._name = str(arg)
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -109,10 +85,6 @@ class NamedObject(Clonable):
 # @brief All Printable objects: Exponenteds & others (Equations...)
 # Any Printable must reimplement the into_str() method
 class Printable(NamedObject):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -142,20 +114,12 @@ class Printable(NamedObject):
 # Drawable are not renamable
 class Drawable(NamedObject):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the eukleides filename associated to the triangle
     @property
     def euk_filename(self):
         return self.filename + ".euk"
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -164,20 +128,12 @@ class Drawable(NamedObject):
     def eps_filename(self):
         return self.filename + ".eps"
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the name of the object
     @property
     def name(self):
         return self._name
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -187,10 +143,6 @@ class Drawable(NamedObject):
     def name(self, arg):
         raise error.ImpossibleAction("rename this object")
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Creates the euk string to put in the file
@@ -198,9 +150,6 @@ class Drawable(NamedObject):
     #   @return The string to put in the picture file
     def into_euk(self, **options):
         raise error.MethodShouldBeRedefined(self, 'into_euk')
-
-
-
 
     # --------------------------------------------------------------------------
     ##

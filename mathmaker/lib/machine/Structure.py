@@ -29,10 +29,6 @@ from lib import error
 # @brief Not instanciable mother class of all machine objects.
 class Structure(object):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined. Constructor.
@@ -40,10 +36,6 @@ class Structure(object):
     #   @param **options Any options
     def __init__(self, language):
         raise error.NotInstanciableObject(self)
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -53,9 +45,6 @@ class Structure(object):
         result.__init__(language)
         return result
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
@@ -63,10 +52,6 @@ class Structure(object):
     #   @warning Will raise an exception if not redefined
     def write_document_header(self):
         raise error.MethodShouldBeRedefined(self, 'write_document_header')
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -231,9 +216,6 @@ class Structure(object):
     def insert_dashed_hline(self, **options):
         raise error.MethodShouldBeRedefined(self, 'insert_dashed_hline')
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
@@ -242,10 +224,6 @@ class Structure(object):
     #   @warning Will raise an exception if not redefined
     def insert_vspace(self, **options):
         raise error.MethodShouldBeRedefined(self, 'insert_vspace')
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##

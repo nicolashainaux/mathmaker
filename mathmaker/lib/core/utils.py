@@ -24,10 +24,6 @@ from decimal import Decimal
 
 import lib.core.base_calculus
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns the reduced Product made from the given literals list
@@ -85,10 +81,6 @@ def reduce_literal_items_product(provided_list):
 
     return sorted(reduced_list, key=lambda elt: elt.get_first_letter())
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief A substitute for append() in a special case, for dictionaries
@@ -117,10 +109,6 @@ def put_term_in_lexicon(provided_key, associated_coeff, lexi):
     if not key_s_been_found:
         new_coeff_sum = lib.core.base_calculus.Sum([associated_coeff])
         lexi[provided_key] = new_coeff_sum
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##

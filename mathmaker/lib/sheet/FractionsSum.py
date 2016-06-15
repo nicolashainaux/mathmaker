@@ -42,10 +42,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief Exercises about calculating the sum of two or more fractions.
 class FractionsSum(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor

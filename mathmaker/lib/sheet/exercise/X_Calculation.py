@@ -54,10 +54,6 @@ X_LAYOUTS = {'default':
 # @brief Calculation questions (calculate: 2-(3+5)×4, simplify a fraction...)
 class X_Calculation(X_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.

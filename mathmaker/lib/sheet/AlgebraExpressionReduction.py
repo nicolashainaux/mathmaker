@@ -44,10 +44,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief Reduce a Product, a Sum, a Sum of Products
 class AlgebraExpressionReduction(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -87,15 +83,7 @@ class AlgebraExpressionReduction(S_Structure):
         self.exercises_list.append(ex2)
         self.exercises_list.append(ex3)
 
-
-
-
-
         # END -----------------------------------------------------------------
-
-
-
-
 
 
 

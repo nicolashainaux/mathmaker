@@ -74,10 +74,6 @@ def integer(min_value, max_value, **options):
 
         return max_value
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns a '+' or a '-'
@@ -97,10 +93,6 @@ def sign(**options):
     else:
         return '-'
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Pops an element from the provided list
@@ -118,20 +110,12 @@ def pop(provided_list, **options):
         i = integer(0, len(provided_list) - 1, **options)
         return provided_list.pop(i)
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns a randomly decimal number between 0 and 1
 #   @return A randomly decimal number between 0 and 1
 def decimal_0_1():
     return random.random()
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##
@@ -142,10 +126,6 @@ def heads_or_tails():
         return True
     else:
         return False
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##
@@ -166,9 +146,6 @@ def coprime_to(n, range):
 
     else:
         return pop(collected_numbers)
-
-
-
 
 # --------------------------------------------------------------------------
 ##
@@ -207,9 +184,6 @@ def coprime_to_the_first(n, p, range):
         else:
             return pop(collected_numbers_coprime_to_n)
 
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns a randomly integer which is not coprime to the given arg.
@@ -239,9 +213,6 @@ def not_coprime_to(n, range, **options):
 
     else:
         return pop(collected_numbers)
-
-
-
 
 # --------------------------------------------------------------------------
 ##
@@ -279,8 +250,5 @@ def mix(objects_list):
 
 
     return result
-
-
-
 
 

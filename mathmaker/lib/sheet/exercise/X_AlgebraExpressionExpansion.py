@@ -64,10 +64,6 @@ X_LAYOUTS = {'default':
 # @brief Expressions to expand (like 2(x-3) or 4x(2-9x) or (3+x)(x-1))
 class X_AlgebraExpressionExpansion(X_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -149,9 +145,6 @@ class X_AlgebraExpressionExpansion(X_Structure):
                                      **options)
 
                 self.questions_list.append(q)
-
-
-
 
             elif self.x_subkind == 'three_binomials':
                 kinds_list = ['sum_square',

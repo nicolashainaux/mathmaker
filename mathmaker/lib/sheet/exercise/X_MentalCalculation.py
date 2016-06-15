@@ -192,10 +192,6 @@ def get_nb_source_from_question_info(q_i):
 # @brief Creates a tabular with n questions and answers
 class X_MentalCalculation(X_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -346,10 +342,6 @@ class X_MentalCalculation(X_Structure):
                                      min_row_height=MIN_ROW_HEIGHT)
 
         return result
-
-
-
-
 
     # INSTRUCTIONS TO CREATE A NEW EXERCISE -----------------------------------
     # - Indicate its name in the header comment

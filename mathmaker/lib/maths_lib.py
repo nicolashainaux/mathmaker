@@ -77,9 +77,6 @@ def abs(nb):
     else:
         return -nb
 
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns the sign of the product of relatives numbers
@@ -117,10 +114,6 @@ def sign_of_product(signed_objctlist):
     else:
         return '-'
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns the GCD of two integers
@@ -139,10 +132,6 @@ def gcd(a, b):
 
     return gcd(b, a % b)
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns the GCD of a list of integers
@@ -151,10 +140,6 @@ def gcd_of_the_list(l):
         return gcd(l[0], l[1])
     else:
         return gcd(l.pop(), gcd_of_the_list(l))
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##
@@ -205,10 +190,6 @@ def pupil_gcd(a, b):
 
     return result
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns the GCD among powers of 10
@@ -229,18 +210,11 @@ def ten_power_gcd(a, b):
     else:
         return 1
 
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns the lcm of two integers
 def lcm(a, b):
     return int(math.fabs(a*b/gcd(a,b)))
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##
@@ -250,10 +224,6 @@ def lcm_of_the_list(l):
         return lcm(l[0], l[1])
     else:
         return lcm(l.pop(), lcm_of_the_list(l))
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##
@@ -278,10 +248,6 @@ def is_even(objct):
     else:
         return False
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief True if objct is an uneven number|numeric Item. Otherwise, False
@@ -305,10 +271,6 @@ def is_uneven(objct):
     else:
         return False
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Conversions between degrees and radians
@@ -318,10 +280,6 @@ def deg_to_rad(arg):
 
     return arg*math.pi/180
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Conversions between degrees and radians
@@ -330,10 +288,6 @@ def rad_to_deg(arg):
         raise error.WrongArgument(' a number ', str(type(arg)))
 
     return arg*180/math.pi
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##
@@ -352,10 +306,6 @@ def mean(numberList):
     decimalNums = [Decimal(str(x)) for x in numberList]
 
     return Decimal(str(sum(decimalNums) / len(numberList)))
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##

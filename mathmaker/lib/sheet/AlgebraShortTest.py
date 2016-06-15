@@ -44,10 +44,6 @@ SHEET_LAYOUT = { 'exc': [ [1,         9, 9],       (1, 1),
 # @brief A short test on elementary algebra, "easy" level
 class AlgebraShortTest(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor

@@ -44,10 +44,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief The short test about the pythagorean theorem
 class PythagoreanTheoremShortTest(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -73,8 +69,5 @@ class PythagoreanTheoremShortTest(S_Structure):
                                    x_subkind='pythagorean_theorem_one_of_each')
 
             self.exercises_list.append(ex1)
-
-
-
 
         # END -----------------------------------------------------------------

@@ -42,10 +42,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief A complete expansion&reduction training sheet. 01 without binomials
 class AlgebraBalance_01(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -91,10 +87,6 @@ class AlgebraBalance_01(S_Structure):
         self.exercises_list.append(ex2)
         self.exercises_list.append(ex3)
         self.exercises_list.append(ex4)
-
-
-
-
 
 
     # END ---------------------------------------------------------------------

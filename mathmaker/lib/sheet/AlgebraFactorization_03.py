@@ -42,10 +42,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief Factorizing binomial identities training sheet
 class AlgebraFactorization_03(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -83,10 +79,6 @@ class AlgebraFactorization_03(S_Structure):
                                     x_kind='preformatted',
                                     x_subkind='level_03_some_not_factorizable')
         self.exercises_list.append(ex4)
-
-
-
-
 
 
 

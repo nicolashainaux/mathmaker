@@ -35,10 +35,6 @@ def a_string(objct):
     else:
         return False
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief True if argument is a string containing only numbers 0-9, -, + or .
@@ -68,10 +64,6 @@ def a_numerical_string(objct):
     else:
         return False
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief True if argument is a list containing only strings
@@ -86,10 +78,6 @@ def a_string_list(objct):
             return False
 
     return True
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##
@@ -106,10 +94,6 @@ def an_ordered_calculable_objects_list(provided_list):
 
     return True
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief True if argument is a sign ('+' or '-')
@@ -120,10 +104,6 @@ def a_sign(objct):
         return True
     else:
         return False
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##
@@ -139,10 +119,6 @@ def a_number(objct):
     else:
         return False
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief True if argument is an int or a decimal.Decimal containing an int
@@ -156,10 +132,6 @@ def an_integer(objct):
     else:
         return False
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief True if argument is an int
@@ -170,10 +142,6 @@ def an_int(objct):
         return True
     else:
         return False
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##

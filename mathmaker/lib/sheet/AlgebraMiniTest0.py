@@ -43,10 +43,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief A simple algebra mini-test
 class AlgebraMiniTest0(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -76,10 +72,6 @@ class AlgebraMiniTest0(S_Structure):
                                                     x_subkind='two_randomly')
 
             self.exercises_list.append(ex1)
-
-
-
-
 
         # END -----------------------------------------------------------------
         # Instructions for use (creating a new sheet):

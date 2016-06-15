@@ -36,10 +36,6 @@ from . import question
 # or rewritten.
 class X_Structure(object):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined. Constructor.
@@ -119,10 +115,6 @@ class X_Structure(object):
             self.slideshow = True
 
         # END OF OPTIONS ------------------------------------------------------
-
-
-
-
 
 
 

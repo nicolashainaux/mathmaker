@@ -42,10 +42,6 @@ SHEET_LAYOUT = { 'exc': [ None,                    'all'
 # @brief Some easy factorization exercises.
 class AlgebraFactorization_02(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -78,10 +74,6 @@ class AlgebraFactorization_02(S_Structure):
                                        x_kind='preformatted',
                                        x_subkind='level_02_intermediate')
         self.exercises_list.append(ex2)
-
-
-
-
 
 
     # END ---------------------------------------------------------------------

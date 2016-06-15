@@ -31,10 +31,6 @@ import os
 import sys
 sdt_err_output = sys.stderr.fileno()
 
-
-
-
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Writes a warning to stderr with the given String as explanation
@@ -43,10 +39,6 @@ def write_warning(provided_string):
     os.write(sdt_err_output, bytes("Warning: " + provided_string + "\n",
                                    'utf-8')
             )
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -58,16 +50,8 @@ class UnreachableData(Exception):
     def __init__(self, data):
         self.data = data
 
-
-
-
-
     def __str__(self):
         return "Can't find: " + str(self.data)
-
-
-
-
 
 
 # ------------------------------------------------------------------------------
@@ -81,19 +65,11 @@ class MethodShouldBeRedefined(Exception):
         self.objct = objct
         self.method = method
 
-
-
-
-
     def __str__(self):
         return "The method " + str(self.method)                              \
                + " has just been called by this type of object "              \
                + str(type(self.objct)) \
                + " that should have redefined it in order to use it."
-
-
-
-
 
 
 
@@ -107,17 +83,9 @@ class NotImplementedYet(Exception):
     def __init__(self, method):
         self.method = method
 
-
-
-
-
     def __str__(self):
         return "The method " + str(self.method)                              \
                + " must handle with a case that is not implemented yet!"
-
-
-
-
 
 
 
@@ -131,17 +99,9 @@ class NotInstanciableObject(Exception):
     def __init__(self, objct):
         self.objct = objct
 
-
-
-
-
     def __str__(self):
         return "It is not allowed to instanciate this type of objects: "     \
                + str(type(self.objet))
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -154,20 +114,12 @@ class OutOfRangeArgument(Exception):
         self.objct = objct
         self.expected_range = expected_range
 
-
-
-
-
     def __str__(self):
         return "\nValue of the given argument is out " \
                + "of expected range or values: "      \
                + str(self.objct)                                        \
                + ".\nExpected range is: "                                    \
                + str(self.expected_range)
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -183,18 +135,11 @@ class UncompatibleObjects(Exception):
         self.given_action = given_action
         self.expected_result = self.expected_result
 
-
-
-
     def __str__(self):
         return "The following action is attempted: " + str(self.given_action)\
                + " on " + str(self.objct1)                                    \
                + " and " + str(self.objct2)                                   \
                + " and expects this result: " + str(self.expected_result)
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -207,19 +152,11 @@ class UncompatibleType(Exception):
         self.objct = objct
         self.possible_types = possible_types
 
-
-
-
-
     def __str__(self):
         return "One tries to use an object from unexpected type: "           \
                + str(type(self.objct))                                        \
                + ". Usable types here are: "                                 \
                + str(self.possible_types)
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -232,19 +169,11 @@ class UncompatibleOptions(Exception):
         self.opt1 = opt1
         self.opt2 = opt2
 
-
-
-
-
     def __str__(self):
         return "One tries to use these two uncompatible options: #1: "      \
                + str(self.opt1)                                        \
                + " and #2: "                                 \
                + str(self.opt2)
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -256,16 +185,8 @@ class UnknownOutputFormat(Exception):
     def __init__(self, given_format):
         self.given_format = given_format
 
-
-
-
-
     def __str__(self):
         return str(self.given_format) + " isn't available yet."
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -277,16 +198,8 @@ class ArgumentNeeded(Exception):
     def __init__(self, data):
         self.data = data
 
-
-
-
-
     def __str__(self):
         return "Expected: " + str(self.data)
-
-
-
-
 
 
 # ------------------------------------------------------------------------------
@@ -299,16 +212,8 @@ class ImpossibleAction(Exception):
     def __init__(self, data):
         self.data = data
 
-
-
-
-
     def __str__(self):
         return "Impossible to " + str(self.data)
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -319,10 +224,6 @@ class ImpossibleAction(Exception):
 class WrongObject(Exception):
     def __init__(self, data):
         self.data = data
-
-
-
-
 
     def __str__(self):
         return "Cause of the error: " + str(self.data)
@@ -340,16 +241,9 @@ class WrongArgument(Exception):
         self.given_arg = given_arg
         self.expected_arg = expected_arg
 
-
-
-
-
     def __str__(self):
         return "This kind of argument was given: " + str(self.given_arg) \
                 + "\nbut this argument was expected: " + str(self.expected_arg)
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -361,15 +255,8 @@ class UnknownXMLTag(Exception):
     def __init__(self, given_tag):
         self.given_tag = given_tag
 
-
-
-
-
     def __str__(self):
         return "This unknown tag was read from the file: " + str(self.given_tag)
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -380,10 +267,6 @@ class UnknownXMLTag(Exception):
 class XMLFileFormatError(Exception):
     def __init__(self, msg):
         self.msg = msg
-
-
-
-
 
     def __str__(self):
         return self.msg

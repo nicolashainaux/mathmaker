@@ -37,10 +37,6 @@ from .S_Structure import S_Structure
 # @brief This sheet will create a sheet matching the given xml file.
 class S_Generic(S_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor

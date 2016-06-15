@@ -69,10 +69,6 @@ X_LAYOUTS = {'default':
 # @brief Use it as a copy/paste model to create new exercises.
 class X_Model(X_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -146,9 +142,6 @@ class X_Model(X_Structure):
          #                                 )
 
         # END OF THE ZONE TO REWRITE ------------------------------------------
-
-
-
 
     # INSTRUCTIONS TO CREATE A NEW EXERCISE -----------------------------------
     # - Indicate its name in the header comment

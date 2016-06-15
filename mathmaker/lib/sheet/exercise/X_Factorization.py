@@ -112,10 +112,6 @@ X_LAYOUTS = {'default':
 # @brief Factorization exercises.
 class X_Factorization(X_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.

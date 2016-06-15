@@ -55,10 +55,6 @@ X_LAYOUTS = {'default':
 # @brief All exercices about the Right Triangle.
 class X_RightTriangle(X_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.

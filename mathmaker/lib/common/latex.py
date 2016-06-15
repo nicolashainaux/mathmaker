@@ -107,6 +107,3 @@ MARKUP = {'LaTeX': "\LaTeX",
          }
 
 
-
-
-

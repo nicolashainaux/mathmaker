@@ -81,10 +81,3 @@ def test_t0_as_cross_product_4(t0):
 
 
 
-
-
-
-
-
-
-

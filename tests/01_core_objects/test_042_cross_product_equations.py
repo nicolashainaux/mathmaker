@@ -79,6 +79,3 @@ def test_cpeq1_autoresolution():
             '\[\\text{AB}=0.35\]')
 
 
-
-
-

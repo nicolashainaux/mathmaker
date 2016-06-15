@@ -42,10 +42,6 @@ import settings
 locale.setlocale(locale.LC_ALL, settings.locale)
 
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -53,10 +49,6 @@ locale.setlocale(locale.LC_ALL, settings.locale)
 # @class Polygon
 # @brief
 class Polygon(Drawable):
-
-
-
-
 
 
     # --------------------------------------------------------------------------
@@ -145,19 +137,12 @@ class Polygon(Drawable):
         self._random_id = ''.join([str(randomly.integer(0, 9)) \
                                    for i in range(8)])
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the vertices (as a list of Points)
     @property
     def vertex(self):
         return self._vertex
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -166,10 +151,6 @@ class Polygon(Drawable):
     def side(self):
         return self._side
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the three angles (as a list of Angles)
@@ -177,20 +158,12 @@ class Polygon(Drawable):
     def angle(self):
         return self._angle
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the angle of rotation around the isobarycenter
     @property
     def rotation_angle(self):
         return self._rotation_angle
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -201,10 +174,6 @@ class Polygon(Drawable):
             return self._name[::-1]
         else:
             return self._name
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -240,9 +209,6 @@ class Polygon(Drawable):
             self._angle[i].points[1].name = p1.name
             self._angle[i].points[2].name = p2.name
 
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Polygon's nature
@@ -250,20 +216,12 @@ class Polygon(Drawable):
     def nature(self):
         return self._nature
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Polygon's filename
     @property
     def filename(self):
         return _(self.nature) + "_" + self.name + "-" + self._random_id
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -279,10 +237,6 @@ class Polygon(Drawable):
         else:
             return Value(sum([s.length.raw_value for s in self.side]),
                          unit=self.side[0].length.unit)
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -300,20 +254,12 @@ class Polygon(Drawable):
             s.length = lengths_list[self.side.index(s)]
 
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns True if all fake lengths of the sides have been set.
     @property
     def lengths_have_been_set(self):
         return all(s.length_has_been_set for s in self.side)
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -331,10 +277,6 @@ class Polygon(Drawable):
         for (s, f) in zip(self.side, flags_list):
             s.setup_label(f)
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Works out the dimensions of the box
@@ -346,10 +288,6 @@ class Polygon(Drawable):
 
         return (min(x_list)-Decimal("0.6"), min(y_list)-Decimal("0.6"),
                 max(x_list)+Decimal("0.6"), max(y_list)+Decimal("0.6"))
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -510,10 +448,6 @@ class Polygon(Drawable):
 
         return result
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -521,10 +455,6 @@ class Polygon(Drawable):
 # @class Rectangle
 # @brief
 class Rectangle(Polygon):
-
-
-
-
 
 
     # --------------------------------------------------------------------------
@@ -594,10 +524,6 @@ class Rectangle(Polygon):
 
         return self.side[1].length
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Rectangle's length
@@ -608,10 +534,6 @@ class Rectangle(Polygon):
                                          + "before is has been set.")
 
         return self.side[0].length
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -627,10 +549,6 @@ class Rectangle(Polygon):
             return Value(Product([Item(self.width),
                                   Item(self.length)]).evaluate())
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the length and width of the Rectangle
@@ -645,10 +563,6 @@ class Rectangle(Polygon):
                                             lengths_list[0], lengths_list[1]])
 
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -656,10 +570,6 @@ class Rectangle(Polygon):
 # @class Square
 # @brief
 class Square(Polygon):
-
-
-
-
 
 
     # --------------------------------------------------------------------------
@@ -705,10 +615,6 @@ class Square(Polygon):
                                          "Square before is has been set.")
         return self.side[0].length
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Square's area
@@ -722,10 +628,6 @@ class Square(Polygon):
         else:
             return Value(Product([Item(self.side_length),
                                   Item(self.side_length)]).evaluate())
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -745,10 +647,6 @@ class Square(Polygon):
         Polygon.set_lengths(self, [lengths_list[0], lengths_list[0],
                                    lengths_list[0], lengths_list[0]])
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief  Sets marks on the Square's sides.
@@ -757,20 +655,12 @@ class Square(Polygon):
         for s in self.side:
             s.mark = arg
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the length of the Square's side
     #   @param  side_length:    a Value
     def set_side_length(self, side_length):
         self.set_lengths([side_length])
-
-
-
-
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -779,10 +669,6 @@ class Square(Polygon):
 # @class Triangle
 # @brief
 class Triangle(Polygon):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -891,10 +777,6 @@ class Triangle(Polygon):
             "Triangle|" +\
             "((str, str, str), {'side0':nb0, 'angle1':nb1, 'side1':nb2})")
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -902,10 +784,6 @@ class Triangle(Polygon):
 # @class RightTriangle
 # @brief
 class RightTriangle(Triangle):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1011,20 +889,12 @@ class RightTriangle(Triangle):
 
         self._nature = 'RightTriangle'
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns legs (as a list of two Segments)
     @property
     def leg(self):
         return [self._side[0], self._side[1]]
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1033,20 +903,12 @@ class RightTriangle(Triangle):
     def hypotenuse(self):
         return self._side[2]
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the right angle (as an Angle)
     @property
     def right_angle(self):
         return self.angle[1]
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -1060,9 +922,6 @@ class RightTriangle(Triangle):
                      )]
 
         return Equality(objcts, **options)
-
-
-
 
 # --------------------------------------------------------------------------
     ##
