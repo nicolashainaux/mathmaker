@@ -73,10 +73,6 @@ INIT_CALLER = \
 # @brief An object to expand (like 2(x-3), 4x(2-9x), (3+x)(x-1) or (x+1)² etc.)
 class Q_AlgebraExpressionExpansion(Q_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
@@ -331,11 +327,6 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
         if self.numeric_aux != None:
             self.numeric_aux = Expression(number, self.numeric_aux)
 
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
@@ -358,11 +349,6 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
         return result
 
 
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
@@ -381,9 +367,5 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
         result += M.write(self.expression.auto_expansion_and_reduction())
 
         return result
-
-
-
-
 
 

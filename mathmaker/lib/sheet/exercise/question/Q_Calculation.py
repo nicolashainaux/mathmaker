@@ -100,10 +100,6 @@ FRACTIONS_SUMS_SCALE_TABLE = [0.02,  #(1, 2)
 # Products, numeric Sums & Products with priorities etc.)
 class Q_Calculation(Q_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -321,11 +317,6 @@ class Q_Calculation(Q_Structure):
         return M.write_math_style1(M.type_string(self.expression))
 
 
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
@@ -344,10 +335,5 @@ class Q_Calculation(Q_Structure):
 
 
         return result
-
-
-
-
-
 
 

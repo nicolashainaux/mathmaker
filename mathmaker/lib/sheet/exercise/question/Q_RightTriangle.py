@@ -63,10 +63,6 @@ AVAILABLE_Q_KIND_VALUES = {'pythagorean_theorem': ['calculate_hypotenuse',
 # @brief All questions about the right triangle
 class Q_RightTriangle(Q_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -363,16 +359,6 @@ class Q_RightTriangle(Q_Structure):
 
 
 
-
-
-
-
-
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
@@ -450,11 +436,6 @@ triangle is right, give the name of the right angle.")
 
 
         return result + M.write_new_line()
-
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##

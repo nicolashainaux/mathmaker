@@ -31,10 +31,6 @@ from lib import error
 # @brief Contains the method to be reimplemented by any question.*
 class Q_Structure(object):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined. Constructor.
@@ -108,11 +104,6 @@ class Q_Structure(object):
         self.q_subkind = q_subkind
 
 
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   Redirects to text_to_str() or answer_to_str()
@@ -129,11 +120,6 @@ class Q_Structure(object):
         else:
             raise error.OutOfRangeArgument(ex_or_answers, 'exc|ans')
 
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
@@ -142,11 +128,6 @@ class Q_Structure(object):
     def text_to_str(self, **options):
         raise error.MethodShouldBeRedefined(self, 'text_to_str')
 
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
@@ -154,10 +135,6 @@ class Q_Structure(object):
     #   @warning Exception NotInstanciableObject.
     def answer_to_str(self, **options):
         raise error.MethodShouldBeRedefined(self, 'answer_to_str')
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##

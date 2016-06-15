@@ -51,10 +51,6 @@ AVAILABLE_Q_KIND_VALUES = {'A': ['default',
 # @brief Use it as a copy/paste model to create new questions.
 class Q_Model(Q_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -81,14 +77,6 @@ class Q_Model(Q_Structure):
         #    if self.q_subkind == '...':
         # etc.
 
-
-
-
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
@@ -98,11 +86,6 @@ class Q_Model(Q_Structure):
 
         return result
 
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
@@ -111,8 +94,5 @@ class Q_Model(Q_Structure):
         result = ""
 
         return result
-
-
-
 
 

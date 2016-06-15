@@ -178,10 +178,6 @@ AVAILABLE_Q_KIND_VALUES = {'level_01':['default',
 # @brief Question related to the factorization of a literal expression
 class Q_Factorization(Q_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -434,13 +430,7 @@ class Q_Factorization(Q_Structure):
                                           'fake_04_C',
                                           'fake_04_D'])
 
-
-
-
         steps = steps_method(q_subkind, **options)
-
-
-
 
         # Creation of the expression:
         number = 0
@@ -478,10 +468,6 @@ class Q_Factorization(Q_Structure):
             else:
                 self.steps.append(steps[i])
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
@@ -492,11 +478,6 @@ class Q_Factorization(Q_Structure):
         result += M.write_new_line()
 
         return result
-
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -514,10 +495,6 @@ class Q_Factorization(Q_Structure):
             result += M.write_new_line()
 
         return result
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##
@@ -693,10 +670,6 @@ def level_01(q_subkind, **options):
         steps.append(solution)
 
         return steps
-
-
-
-
 
 # --------------------------------------------------------------------------
 ##
@@ -1472,10 +1445,5 @@ def level_03(q_subkind, **options):
 
 
     return steps
-
-
-
-
-
 
 

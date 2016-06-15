@@ -43,10 +43,6 @@ AVAILABLE_Q_KIND_VALUES = {'any_basic': ['default'],
                            'any_double_expandable': ['default']
                           }
 
-
-
-
-
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -54,10 +50,6 @@ AVAILABLE_Q_KIND_VALUES = {'any_basic': ['default'],
 # @class Q_Equation
 # @brief All questions about Equations (first degree, one unknown variable)
 class Q_Equation(Q_Structure):
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -89,11 +81,6 @@ class Q_Equation(Q_Structure):
         if 'expression_number' in options:
             self.equation.set_number(options['expression_number'])
 
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
@@ -106,11 +93,6 @@ class Q_Equation(Q_Structure):
 
         return result
 
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
@@ -118,8 +100,5 @@ class Q_Equation(Q_Structure):
         M = shared.machine
 
         return M.write(self.equation.auto_resolution())
-
-
-
 
 

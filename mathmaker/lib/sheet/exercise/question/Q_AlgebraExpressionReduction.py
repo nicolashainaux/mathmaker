@@ -81,10 +81,6 @@ PR_NUMERIC_ITEMS_MAX_NB = 2
 # @brief All algebraic expression reduction questions
 class Q_AlgebraExpressionReduction(Q_Structure):
 
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -143,9 +139,6 @@ class Q_AlgebraExpressionReduction(Q_Structure):
            and options['length'] >= 2:
         #___
             length = options['length']
-
-
-
 
         # 1st CASE:
         # PRODUCT REDUCTION
@@ -503,9 +496,6 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
             self.objct = Sum(final_terms)
 
-
-
-
         # Creation of the expression:
         number = 0
         if 'expression_number' in options                                     \
@@ -514,10 +504,6 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             number = options['expression_number']
 
         self.expression = Expression(number, self.objct)
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -529,10 +515,6 @@ class Q_AlgebraExpressionReduction(Q_Structure):
         result += M.write_new_line()
 
         return result
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##

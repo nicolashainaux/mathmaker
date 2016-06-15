@@ -237,15 +237,6 @@ class Q_MentalCalculation(Q_Structure):
         else:
             self.q_hint = ""
 
-
-
-
-
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
@@ -254,20 +245,11 @@ class Q_MentalCalculation(Q_Structure):
 
 
 
-
-
-
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
         return self.q_answer
-
-
-
-
 
     # --------------------------------------------------------------------------
     ##
