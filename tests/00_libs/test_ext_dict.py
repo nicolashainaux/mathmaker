@@ -20,10 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import pytest
 
 from lib.tools.ext_dict import ext_dict
-from tools import wrap_nb
 
 
 def test_recursive_update():
@@ -43,4 +41,3 @@ def test_flat():
                   'c': {'z': 26, 'y': 25, 'x': {1: 'a', 2: 64}}})
     assert d.flat() == {'a': 1, 'b': 2,
                         'c.z': 26, 'c.y': 25, 'c.x.1': 'a', 'c.x.2': 64}
-

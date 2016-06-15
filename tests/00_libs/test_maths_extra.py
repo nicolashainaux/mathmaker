@@ -20,10 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import pytest
-
 from lib.maths_lib import ten_power_gcd
-from tools import wrap_nb
 
 
 def test_ten_power_gcd_1():
@@ -49,4 +46,3 @@ def test_ten_power_gcd_4():
 def test_ten_power_gcd_5():
     """Checks ten_power_gcd() on a couple of integers."""
     assert ten_power_gcd(21000, 400) == 100
-

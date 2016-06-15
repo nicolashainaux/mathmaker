@@ -23,11 +23,19 @@
 import pytest
 
 from lib import shared
-from lib.tools.wording import *
-from tools import wrap_nb
+from lib.tools.wording import (wrap, unwrapped, is_wrapped, is_wrapped_P,
+                               is_wrapped_p, is_unit, is_unitN,
+                               extract_formatting_tags_from, cut_off_hint_from,
+                               setup_wording_format_of,
+                               handle_valueless_names_tags,
+                               handle_valueless_unit_tags, process_attr_values,
+                               merge_nb_unit_pairs, insert_nonbreaking_spaces,
+                               post_process)
 
 
-class raw_obj(object): pass
+class raw_obj(object):
+    pass
+
 
 @pytest.fixture
 def o1():
@@ -35,6 +43,7 @@ def o1():
     o.name = 'Cosette'
     o.capacity_unit = 'L'
     return o
+
 
 @pytest.fixture
 def ow7():
@@ -50,6 +59,7 @@ def ow7():
                 '{nb} {length_unit1} long and a dice of {nb3} {volume_unit3}.'
     return o
 
+
 @pytest.fixture
 def ow2():
     o = raw_obj()
@@ -58,6 +68,7 @@ def ow2():
     o.wording = 'Just a try for a {name}, a {nb} {capacity_unit}; a ' \
                 '{nb1=8} {length_unit1} and finally {nb3} {volume_unit3=cm}.'
     return o
+
 
 @pytest.fixture
 def ow1():
@@ -68,6 +79,7 @@ def ow1():
     setup_wording_format_of(o)
     return o
 
+
 @pytest.fixture
 def ow2bis():
     o = raw_obj()
@@ -77,6 +89,7 @@ def ow2bis():
                 '+ {nb2} {length_unit2=cm}? |hint:length_unit1|'
     setup_wording_format_of(o)
     return o
+
 
 @pytest.fixture
 def ow2ter():
@@ -207,7 +220,7 @@ def test_extract_formatting_tags_from_01():
     """Checks if {all} {these} {tags}, and even this {one}! are found."""
     assert extract_formatting_tags_from('{all} {these} {tags}, and even '
                                         'this {one}! are found') == \
-                                                ['all', 'these', 'tags', 'one']
+        ['all', 'these', 'tags', 'one']
 
 
 def test_is_unit_01():
@@ -264,15 +277,13 @@ def test_cutoff_hint_from_01():
     """Checks if the hint is removed correctly from the sentence."""
     assert cut_off_hint_from('How many {nb1} {length_unit} have you been '
                              'riding? |hint:length_unit|') == \
-                             ('How many {nb1} {length_unit} have you been '\
-                             'riding?', 'length_unit')
+        ('How many {nb1} {length_unit} have you been riding?', 'length_unit')
 
 
 def test_cutoff_hint_from_02():
     """Checks if the hint is removed correctly from the sentence."""
     assert cut_off_hint_from('No hint to remove from this wording, sorry.') ==\
-                             ('No hint to remove from this wording, sorry.',
-                             '')
+        ('No hint to remove from this wording, sorry.', '')
 
 
 def test_handle_valueless_names_tags_01(o1):
@@ -341,17 +352,18 @@ def test_process_attr_values_01():
     assert process_attr_values('He likes {animal=cat}. He has a garden '
                                'as wide as {nb1} {area_unit1}. He wants '
                                'a {nb2} {volume_unit2=m} swiming pool.') == \
-    ('He likes {animal}. He has a garden as wide as {nb1} {area_unit1}. '
-     'He wants a {nb2} {volume_unit2} swiming pool.', {'animal': 'cat',
-                                                       'length_unit2': 'm',
-                                                       'volume_unit2': 'm'})
+        ('He likes {animal}. He has a garden as wide as {nb1} {area_unit1}. '
+         'He wants a {nb2} {volume_unit2} swiming pool.',
+            {'animal': 'cat',
+             'length_unit2': 'm',
+             'volume_unit2': 'm'})
 
 
 def test_merge_nb_unit_pairs_01(ow7):
     """Checks if {nb} {*unit} pairs are correctly processed in obj.wording."""
     merge_nb_unit_pairs(ow7)
     assert ow7.wording == 'A glas of {nb1_capacity_unit} and a rule of ' \
-                '{nb_length_unit1} long and a dice of {nb3_volume_unit3}.'
+        '{nb_length_unit1} long and a dice of {nb3_volume_unit3}.'
 
 
 def test_merge_nb_unit_pairs_02(ow7):
@@ -437,10 +449,10 @@ def test_setup_wording_format_of_11(ow2ter):
 def test_insert_nonbreaking_spaces():
     """Checks if non breaking spaces are correctly inserted."""
     assert insert_nonbreaking_spaces('It weighs about 45 kg.') == \
-    'It weighs about 45' + shared.markup['nonbreaking_space'] + 'kg.'
+        'It weighs about 45' + shared.markup['nonbreaking_space'] + 'kg.'
 
 
 def test_post_process():
     """Checks if non breaking spaces are correctly inserted."""
     assert post_process('It weighs about 45 kg.') == \
-    'It weighs about 45' + shared.markup['nonbreaking_space'] + 'kg.'
+        'It weighs about 45' + shared.markup['nonbreaking_space'] + 'kg.'

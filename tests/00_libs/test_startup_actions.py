@@ -22,7 +22,9 @@
 
 import pytest
 
-from lib.startup_actions import *
+from lib.startup_actions import (check_dependency, check_dependencies,
+                                 install_gettext_translations,
+                                 check_settings_consistency)
 
 
 def test_check_dependency_01():
@@ -67,6 +69,3 @@ def test_check_settings_consistency_02():
     """Checks an exception is raised for an unvalid output directory."""
     with pytest.raises(NotADirectoryError):
         check_settings_consistency(od='/path/to/nowhere')
-
-
-
