@@ -29,15 +29,22 @@
 import math
 import locale
 import copy
-from decimal import *
+from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
 
-from .base import *
-from .base_geometry import *
-from lib import *
-from lib import randomly
-from lib.maths_lib import *
-from lib.core.calculus import *
+from lib import is_, error
+from lib.maths_lib import deg_to_rad, barycenter, POLYGONS_NATURES, round
+from .root_calculus import Value, Unit
+from .base_calculus import Item, Product, Sum
+from .calculus import Equality, SubstitutableEquality
+from .base import Drawable
+from .base_geometry import Point, Segment, Angle, Vector
+# from .base import *
+# from .base_geometry import *
+# from lib import *
+# from lib.maths_lib import *
+#  *
 import settings
+from lib import randomly
 
 locale.setlocale(locale.LC_ALL, settings.locale)
 
@@ -183,7 +190,7 @@ class Polygon(Drawable):
         if not len(n) == len(self.vertex):
             raise ValueError("The given name should have the same length as "
                              "the number of vertices of the Polygon ("
-                             + str(len(vertex)) + "). "
+                             + str(len(self.vertex)) + "). "
                              "Instead it has a length of " + str(len(n)))
 
         if not self._read_name_clockwise:
@@ -464,36 +471,34 @@ class Rectangle(Polygon):
                 Polygon.__init__(self,
                                  [arg[0],
                                   Point([arg[3],
-                                         (Decimal(str(arg[0].x_exact)) \
+                                         (Decimal(str(arg[0].x_exact))
                                           + Decimal(str(length)),
                                           arg[0].y_exact)]),
                                   Point([arg[4],
-                                         (Decimal(str(arg[0].x_exact)) \
+                                         (Decimal(str(arg[0].x_exact))
                                           + Decimal(str(length)),
-                                          Decimal(str(arg[0].y_exact)) \
+                                          Decimal(str(arg[0].y_exact))
                                           + Decimal(str(height)))]),
                                   Point([arg[5],
                                          (arg[0].x_exact,
-                                          Decimal(str(arg[0].y_exact)) \
-                                          + Decimal(str(height)))
-                                        ])
+                                          Decimal(str(arg[0].y_exact))
+                                          + Decimal(str(height)))])
                                   ])
 
             else:
-                raise error.WrongArgument(\
-                            "One of the elements is not of the expected type",
-                            "[Point, nb1, nb2, str1, str2, str3]")
+                raise error.WrongArgument(
+                    "One of the elements is not of the expected type",
+                    "[Point, nb1, nb2, str1, str2, str3]")
 
         else:
-            raise error.WrongArgument(str(type(arg)),
-            "Rectangle|[Point, length, height, str1, str2, str3]")
+            raise error.WrongArgument(
+                str(type(arg)),
+                "Rectangle|[Point, length, height, str1, str2, str3]")
 
         for a in self._angle:
             a.mark = 'right'
 
         self._nature = 'Rectangle'
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -501,7 +506,7 @@ class Rectangle(Polygon):
     @property
     def width(self):
         if not self.lengths_have_been_set:
-            raise error.ImpossibleAction("Return the width of a Rectangle " \
+            raise error.ImpossibleAction("Return the width of a Rectangle "
                                          + "before is has been set.")
 
         return self.side[1].length
@@ -512,7 +517,7 @@ class Rectangle(Polygon):
     @property
     def length(self):
         if not self.lengths_have_been_set:
-            raise error.ImpossibleAction("Return the length of a Rectangle " \
+            raise error.ImpossibleAction("Return the length of a Rectangle "
                                          + "before is has been set.")
 
         return self.side[0].length
@@ -537,8 +542,8 @@ class Rectangle(Polygon):
     #   @param lengths_list A list of 2 Values
     def set_lengths(self, lengths_list):
         if len(lengths_list) != 2:
-            raise error.WrongArgument("A list of length " \
-                                        + str(len(lengths_list)),
+            raise error.WrongArgument("A list of length "
+                                      + str(len(lengths_list)),
                                       "A list of length 2.")
 
         super(Rectangle, self).set_lengths([lengths_list[0], lengths_list[1],
@@ -552,8 +557,6 @@ class Rectangle(Polygon):
 # @class Square
 # @brief
 class Square(Polygon):
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Rectangle's constructor.
@@ -569,15 +572,14 @@ class Square(Polygon):
         if isinstance(arg, Square):
             Polygon.__init__((self, tuple(arg.points)))
         elif isinstance(arg, list):
-            if isinstance(arg[0], Point)\
-                and is_.a_number(arg[1])\
-                and all(isinstance(arg[i], str) for i in [2, 3, 4]):
+            if (isinstance(arg[0], Point)
+                and is_.a_number(arg[1])
+                and all(isinstance(arg[i], str) for i in [2, 3, 4])):
                 # __
-                length = arg[1]
                 Rectangle.__init__(self, [arg[0], arg[1], arg[1], arg[2],
-                                    arg[3], arg[4]], **options)
+                                   arg[3], arg[4]], **options)
         else:
-            raise ValueError("Expected argument is:"\
+            raise ValueError("Expected argument is:"
                              "Square, or [Point, length, str1, str2, str3]")
 
         for a in self._angle:
@@ -585,15 +587,13 @@ class Square(Polygon):
 
         self._nature = 'Square'
 
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Square's side's length
     @property
     def side_length(self):
         if not self.lengths_have_been_set:
-            raise error.ImpossibleAction("Return the side's length of a "\
+            raise error.ImpossibleAction("Return the side's length of a "
                                          "Square before is has been set.")
         return self.side[0].length
 
@@ -619,12 +619,11 @@ class Square(Polygon):
     #   @todo   Maybe log a warning instead of raising a ValueError?
     def set_lengths(self, lengths_list):
         if not type(lengths_list) == list:
-            raise ValueError("Expected a list, got a " + \
-                             str(type(lengths_list)) + " "\
-                             " instead.")
+            raise ValueError("Expected a list, got a "
+                             + str(type(lengths_list)) + " instead.")
         if not len(lengths_list) == 1:
-            raise ValueError("A list of length " + str(len(lengths_list)) + " "\
-                             "was given, whereas a list of length 1 "\
+            raise ValueError("A list of length " + str(len(lengths_list)) + " "
+                             "was given, whereas a list of length 1 "
                              "was expected.")
         Polygon.set_lengths(self, [lengths_list[0], lengths_list[0],
                                    lengths_list[0], lengths_list[0]])
@@ -644,6 +643,7 @@ class Square(Polygon):
     def set_side_length(self, side_length):
         self.set_lengths([side_length])
 
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -651,7 +651,6 @@ class Square(Polygon):
 # @class Triangle
 # @brief
 class Triangle(Polygon):
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -688,9 +687,8 @@ class Triangle(Polygon):
         if type(arg) == tuple:
             if not len(arg) == 2:
                 raise error.WrongArgument(' tuple of length 2 ',
-                                          ' tuple of length ' \
-                                          + str(len(arg))
-                                         )
+                                          ' tuple of length '
+                                          + str(len(arg)))
 
             vertices_names = arg[0]
             construction_data = arg[1]
@@ -698,32 +696,29 @@ class Triangle(Polygon):
             if not type(vertices_names) == tuple:
                 raise error.WrongArgument(' a tuple ', str(vertices_names))
 
-            if not type(vertices_names[0]) == str \
-                and type(vertices_names[1]) == str \
-                and type(vertices_names[2]) == str:
+            if (not type(vertices_names[0]) == str
+                and type(vertices_names[1]) == str
+                and type(vertices_names[2]) == str):
                 # __
                 raise error.WrongArgument(' three strings ',
-                                        ' one of them at least is not a string')
+                                          ' one of them at least is not '
+                                          'a string')
 
-            if not (construction_data == 'sketch' \
-                    or (type(construction_data) == dict \
-                        and 'side0' in construction_data \
-                        and is_.a_number(construction_data['side0']) \
-                        and (('side1' in construction_data \
-                              and is_.a_number(construction_data['side1']) \
-                             ) \
-                             or \
-                             (('angle1' in construction_data \
-                              and is_.a_number(construction_data['angle1']) \
-                              ) \
-                             ) \
-                            ) \
-                        ) \
-                    ):
+            if not (construction_data == 'sketch'
+                    or (type(construction_data) == dict
+                        and 'side0' in construction_data
+                        and is_.a_number(construction_data['side0'])
+                        and (('side1' in construction_data
+                              and is_.a_number(construction_data['side1']))
+                             or
+                             (('angle1' in construction_data
+                               and is_.a_number(
+                                   construction_data['angle1'])))))):
                 # __
-                raise error.WrongArgument(" 'sketch' | " \
-                              + "{'side0':nb0, 'angle1':nb1, 'side1':nb2} | ",
-                              str(construction_data))
+                raise error.WrongArgument(
+                    " 'sketch' | "
+                    + "{'side0':nb0, 'angle1':nb1, 'side1':nb2} | ",
+                    str(construction_data))
 
             start_vertex = [None, None, None]
 
@@ -735,19 +730,15 @@ class Triangle(Polygon):
                     self._rotation_angle = randomly.integer(0, 35) * 10
                 elif is_.a_number(options['rotate_around_isobarycenter']):
                     self._rotation_angle = \
-                                          options['rotate_around_isobarycenter']
+                        options['rotate_around_isobarycenter']
 
-            start_vertex[0] = Point([vertices_names[0], (0, 0)] )
-            start_vertex[1] = Point([vertices_names[1], (side0_length, 0)] )
-            start_vertex[2] = Point([vertices_names[2],
-                                     (side0_length \
-                                       - side1_length*Decimal(str(math.cos(\
-                                     deg_to_rad(construction_data['angle1'])))),
-                                      side1_length*Decimal(str(math.sin( \
-                                     deg_to_rad(construction_data['angle1']))))
-                                     )
-                                    ]
-                                   )
+            start_vertex[0] = Point([vertices_names[0], (0, 0)])
+            start_vertex[1] = Point([vertices_names[1], (side0_length, 0)])
+            cos1 = math.cos(deg_to_rad(construction_data['angle1']))
+            sin1 = math.sin(deg_to_rad(construction_data['angle1']))
+            x2 = side0_length - side1_length * Decimal(str(cos1))
+            y2 = side1_length * Decimal(str(sin1))
+            start_vertex[2] = Point([vertices_names[2], (x2, y2)])
 
             Polygon.__init__(self, start_vertex, **options)
 
@@ -756,8 +747,10 @@ class Triangle(Polygon):
 
         else:
             raise error.WrongArgument(str(type(arg)),
-            "Triangle|" +\
-            "((str, str, str), {'side0':nb0, 'angle1':nb1, 'side1':nb2})")
+                                      "Triangle|((str, str, str),"
+                                      " {'side0':nb0, 'angle1':nb1, "
+                                      "'side1':nb2})")
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -766,7 +759,6 @@ class Triangle(Polygon):
 # @class RightTriangle
 # @brief
 class RightTriangle(Triangle):
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
@@ -801,31 +793,31 @@ class RightTriangle(Triangle):
         if type(arg) == tuple:
             if not len(arg) == 2:
                 raise error.WrongArgument(' tuple of length 2 ',
-                                          ' tuple of length ' \
-                                          + str(len(arg))
-                                         )
+                                          ' tuple of length '
+                                          + str(len(arg)))
             vertices_names = arg[0]
             construction_data = arg[1]
 
             if not type(vertices_names) == tuple:
                 raise error.WrongArgument(' a tuple ', str(vertices_names))
 
-            if not type(vertices_names[0]) == str \
-                and type(vertices_names[1]) == str \
-                and type(vertices_names[2]) == str:
+            if (not type(vertices_names[0]) == str
+                and type(vertices_names[1]) == str
+                and type(vertices_names[2]) == str):
                 # __
                 raise error.WrongArgument(' three strings ',
-                                        ' one of them at least is not a string')
+                                          ' one of them at least is '
+                                          'not a string')
 
             rotation = 0
 
-            if 'rotate_around_isobarycenter' in options \
-                and options['rotate_around_isobarycenter'] == 'randomly':
+            if ('rotate_around_isobarycenter' in options
+                and options['rotate_around_isobarycenter'] == 'randomly'):
                 # __
                 rotation = randomly.integer(0, 35) * 10
 
-            elif 'rotate_around_isobarycenter' in options \
-                and is_.a_number(options['rotate_around_isobarycenter']):
+            elif ('rotate_around_isobarycenter' in options
+                  and is_.a_number(options['rotate_around_isobarycenter'])):
                 # __
                 rotation = options['rotate_around_isobarycenter']
 
@@ -833,22 +825,23 @@ class RightTriangle(Triangle):
             leg1_length = 0
 
             if construction_data == 'sketch':
-                leg0_length = Decimal(str(randomly.integer(35, 55)))/10
-                leg1_length = Decimal(str(randomly.integer(7, 17))) \
-                              / Decimal("20") * leg0_length
+                leg0_length = Decimal(str(randomly.integer(35, 55))) / 10
+                leg1_length = \
+                    Decimal(str(randomly.integer(7, 17))) \
+                    / Decimal("20") * leg0_length
 
-            elif type(construction_data) == dict \
-                and 'leg0' in construction_data \
-                and is_.a_number(construction_data['leg0']) \
-                and 'leg1' in construction_data \
-                and is_.a_number(construction_data['leg1']):
+            elif (type(construction_data) == dict
+                  and 'leg0' in construction_data
+                  and is_.a_number(construction_data['leg0'])
+                  and 'leg1' in construction_data
+                  and is_.a_number(construction_data['leg1'])):
                 # __
                 leg0_length = construction_data['leg0']
                 leg1_length = construction_data['leg1']
 
             else:
-                raise error.WrongArgument(" 'sketch' | " \
-                                        + "{'leg0': nb0, 'leg1': nb1}",
+                raise error.WrongArgument(" 'sketch' | "
+                                          + "{'leg0': nb0, 'leg1': nb1}",
                                           str(construction_data))
 
             Triangle.__init__(self,
@@ -858,11 +851,8 @@ class RightTriangle(Triangle):
                                 ),
                                {'side0': leg0_length,
                                 'angle1': 90,
-                                'side1': leg1_length
-                               }
-                              ),
-                              rotate_around_isobarycenter=rotation
-                             )
+                                'side1': leg1_length}),
+                              rotate_around_isobarycenter=rotation)
 
         elif isinstance(arg, RightTriangle):
             Polygon.__init__(self, arg, **options)
@@ -900,8 +890,7 @@ class RightTriangle(Triangle):
 
         objcts = [Item(('+', self.hypotenuse.length_name, 2)),
                   Sum([Item(('+', self.leg[0].length_name, 2)),
-                       Item(('+', self.leg[1].length_name, 2))]
-                     )]
+                       Item(('+', self.leg[1].length_name, 2))])]
 
         return Equality(objcts, **options)
 
@@ -929,43 +918,37 @@ class RightTriangle(Triangle):
             unknown_side = 'hypotenuse'
 
         if n_numeric_data != 2:
-            raise error.ImpossibleAction("creation of a pythagorean equality "\
-                                         "when the number of known numeric " \
+            raise error.ImpossibleAction("creation of a pythagorean equality "
+                                         "when the number of known numeric "
                                          "values is different from 2.")
 
-        # Now create the SubstitutableEquality (so, also create the dictionnary)
+        # Now create the SubstitutableEquality
+        # (so, also create the dictionnary)
         if unknown_side == 'leg0':
             subst_dict = {Value(self.leg[1].length_name): self.leg[1].label,
-                          Value(self.hypotenuse.length_name): \
-                                                        self.hypotenuse.label
-                         }
+                          Value(self.hypotenuse.length_name):
+                          self.hypotenuse.label}
             objcts = [Item(('+', self.leg[0].length_name, 2)),
                       Sum([Item(('+', self.hypotenuse.length_name, 2)),
-                           Item(('-', self.leg[1].length_name, 2))]
-                         )]
+                           Item(('-', self.leg[1].length_name, 2))])]
 
         elif unknown_side == 'leg1':
             subst_dict = {Value(self.leg[0].length_name): self.leg[0].label,
-                          Value(self.hypotenuse.length_name): \
-                                                        self.hypotenuse.label
-                         }
+                          Value(self.hypotenuse.length_name):
+                          self.hypotenuse.label}
             objcts = [Item(('+', self.leg[1].length_name, 2)),
                       Sum([Item(('+', self.hypotenuse.length_name, 2)),
-                           Item(('-', self.leg[0].length_name, 2))]
-                         )]
+                           Item(('-', self.leg[0].length_name, 2))])]
 
         elif unknown_side == 'hypotenuse':
             subst_dict = {Value(self.leg[0].length_name): self.leg[0].label,
-                          Value(self.leg[1].length_name): self.leg[1].label
-                         }
+                          Value(self.leg[1].length_name): self.leg[1].label}
             objcts = [Item(('+', self.hypotenuse.length_name, 2)),
                       Sum([Item(('+', self.leg[0].length_name, 2)),
-                           Item(('+', self.leg[1].length_name, 2))]
-                         )]
+                           Item(('+', self.leg[1].length_name, 2))])]
 
         else:
-            raise error.ImpossibleAction("creation of a pythagorean equality "\
+            raise error.ImpossibleAction("creation of a pythagorean equality "
                                          "because no unknown side was found")
-
 
         return SubstitutableEquality(objcts, subst_dict)
