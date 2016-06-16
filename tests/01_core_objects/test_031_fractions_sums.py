@@ -21,123 +21,220 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import pytest
-import decimal
 
 from lib.core.base_calculus import Item, Sum, Fraction
 from tools import wrap_nb
 
+
 @pytest.fixture
 def fs0(): return Sum([Fraction(('+', 2, 3)), Fraction(('+', 3, 4))])
+
+
 @pytest.fixture
 def fs0_step1(fs0): return fs0.calculate_next_step()
+
+
 @pytest.fixture
 def fs0_step2(fs0_step1): return fs0_step1.calculate_next_step()
+
+
 @pytest.fixture
 def fs0_step3(fs0_step2): return fs0_step2.calculate_next_step()
+
+
 @pytest.fixture
 def fs0_step4(fs0_step3): return fs0_step3.calculate_next_step()
+
+
 @pytest.fixture
 def fs0_step5(fs0_step4): return fs0_step4.calculate_next_step()
 
+
 @pytest.fixture
 def fs1(): return Sum([Fraction(('+', 1, 4)), Fraction(('+', 1, 8))])
+
+
 @pytest.fixture
 def fs1_step1(fs1): return fs1.calculate_next_step()
+
+
 @pytest.fixture
 def fs1_step2(fs1_step1): return fs1_step1.calculate_next_step()
+
+
 @pytest.fixture
 def fs1_step3(fs1_step2): return fs1_step2.calculate_next_step()
+
+
 @pytest.fixture
 def fs1_step4(fs1_step3): return fs1_step3.calculate_next_step()
+
+
 @pytest.fixture
 def fs1_step5(fs1_step4): return fs1_step4.calculate_next_step()
 
+
 @pytest.fixture
 def fs2(): return Sum([Fraction(('+', 1, 9)), Fraction(('+', 1, -12))])
+
+
 @pytest.fixture
 def fs2_step1(fs2): return fs2.calculate_next_step()
+
+
 @pytest.fixture
 def fs2_step2(fs2_step1): return fs2_step1.calculate_next_step()
+
+
 @pytest.fixture
 def fs2_step3(fs2_step2): return fs2_step2.calculate_next_step()
+
+
 @pytest.fixture
 def fs2_step4(fs2_step3): return fs2_step3.calculate_next_step()
+
+
 @pytest.fixture
 def fs2_step5(fs2_step4): return fs2_step4.calculate_next_step()
+
+
 @pytest.fixture
 def fs2_step6(fs2_step5): return fs2_step5.calculate_next_step()
 
+
 @pytest.fixture
 def fs3(): return Sum([Fraction(('+', -7, 10)), Fraction(('-', 11, -15))])
+
+
 @pytest.fixture
 def fs3_step1(fs3): return fs3.calculate_next_step()
+
+
 @pytest.fixture
 def fs3_step2(fs3_step1): return fs3_step1.calculate_next_step()
+
+
 @pytest.fixture
 def fs3_step3(fs3_step2): return fs3_step2.calculate_next_step()
+
+
 @pytest.fixture
 def fs3_step4(fs3_step3): return fs3_step3.calculate_next_step()
+
+
 @pytest.fixture
 def fs3_step5(fs3_step4): return fs3_step4.calculate_next_step()
+
+
 @pytest.fixture
 def fs3_step6(fs3_step5): return fs3_step5.calculate_next_step()
 
+
 @pytest.fixture
 def fs4(): return Sum([Fraction(('+', 3, 4)), Item(-5)])
+
+
 @pytest.fixture
 def fs4_step1(fs4): return fs4.calculate_next_step()
+
+
 @pytest.fixture
 def fs4_step2(fs4_step1): return fs4_step1.calculate_next_step()
+
+
 @pytest.fixture
 def fs4_step3(fs4_step2): return fs4_step2.calculate_next_step()
+
+
 @pytest.fixture
 def fs4_step4(fs4_step3): return fs4_step3.calculate_next_step()
+
+
 @pytest.fixture
 def fs4_step5(fs4_step4): return fs4_step4.calculate_next_step()
+
+
 @pytest.fixture
 def fs4_step6(fs4_step5): return fs4_step5.calculate_next_step()
 
+
 @pytest.fixture
 def fs5(): return Sum([Fraction(('+', 25, 10)), Fraction(('+', 1, 10))])
+
+
 @pytest.fixture
 def fs5_step1(fs5): return fs5.calculate_next_step()
+
+
 @pytest.fixture
 def fs5_step2(fs5_step1): return fs5_step1.calculate_next_step()
+
+
 @pytest.fixture
 def fs5_step3(fs5_step2): return fs5_step2.calculate_next_step()
+
+
 @pytest.fixture
 def fs5_step4(fs5_step3): return fs5_step3.calculate_next_step()
+
+
 @pytest.fixture
 def fs5_step5(fs5_step4): return fs5_step4.calculate_next_step()
 
+
 @pytest.fixture
 def fs6(): return Sum([Fraction(('-', 18, 5)), Fraction(('-', 2, 5))])
+
+
 @pytest.fixture
 def fs6_step1(fs6): return fs6.calculate_next_step()
+
+
 @pytest.fixture
 def fs6_step2(fs6_step1): return fs6_step1.calculate_next_step()
+
+
 @pytest.fixture
 def fs6_step3(fs6_step2): return fs6_step2.calculate_next_step()
+
+
 @pytest.fixture
 def fs6_step4(fs6_step3): return fs6_step3.calculate_next_step()
+
+
 @pytest.fixture
 def fs6_step5(fs6_step4): return fs6_step4.calculate_next_step()
+
 
 @pytest.fixture
 def fs7(): return Sum([Item(4), Fraction((25, 10)),
                        Item(-7), Fraction((1, 10))])
+
+
 @pytest.fixture
 def fs7_step1(fs7): return fs7.calculate_next_step()
+
+
 @pytest.fixture
 def fs7_step2(fs7_step1): return fs7_step1.calculate_next_step()
+
+
 @pytest.fixture
 def fs7_step3(fs7_step2): return fs7_step2.calculate_next_step()
+
+
 @pytest.fixture
 def fs7_step4(fs7_step3): return fs7_step3.calculate_next_step()
+
+
 @pytest.fixture
 def fs7_step5(fs7_step4): return fs7_step4.calculate_next_step()
+
+
 @pytest.fixture
 def fs7_step6(fs7_step5): return fs7_step5.calculate_next_step()
+
+
 @pytest.fixture
 def fs7_step7(fs7_step6): return fs7_step6.calculate_next_step()
 
@@ -187,7 +284,7 @@ def test_fs1_step1(fs1_step1):
 def test_fs1_step2(fs1_step2):
     """Is this Sum's calculation's 2d step correct?"""
     assert fs1_step2.printed == \
-                wrap_nb('\\frac{2}{8}+\\frac{1}{8}')
+        wrap_nb('\\frac{2}{8}+\\frac{1}{8}')
 
 
 def test_fs1_step3(fs1_step3):
@@ -415,4 +512,3 @@ def test_fs7_step6(fs7_step6):
 def test_fs7_step7(fs7_step7):
     """Is this Sum's calculation's 7th step correct?"""
     assert fs7_step7.printed == wrap_nb('-\\frac{15}{5}+\\frac{13}{5}')
-

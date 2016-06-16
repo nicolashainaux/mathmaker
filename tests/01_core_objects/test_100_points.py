@@ -20,14 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import pytest
-import decimal
-
 from lib.core.base_geometry import Point
-from tools import wrap_nb
 
 
 def test_p0x():
     """Check Point's abscissa."""
     assert Point(["A", (0, 0)]).x == 0
-

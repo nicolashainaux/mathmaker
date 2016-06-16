@@ -26,26 +26,34 @@ from decimal import Decimal
 from lib.core.root_calculus import Value
 from tools import wrap_nb
 
+
 @pytest.fixture()
 def v0(): return Value(4)
+
 
 @pytest.fixture()
 def v1(): return Value(4.2)
 
+
 @pytest.fixture()
 def v2(): return Value(4.25)
+
 
 @pytest.fixture()
 def v3(): return Value(4.257)
 
+
 @pytest.fixture()
 def v4(): return Value(4.2571)
+
 
 @pytest.fixture()
 def negv(): return Value(-4.2)
 
+
 @pytest.fixture()
 def perfect_square(): return Value(16)
+
 
 @pytest.fixture()
 def perfect_decimal_square(): return Value(1.96)
@@ -55,9 +63,11 @@ def test_0_display(v0):
     """Is the value correctly displayed?"""
     assert str(v0) == wrap_nb('4')
 
+
 def test_1_display(v1):
     """Is the value correctly displayed?"""
     assert str(v1) == wrap_nb('4.2')
+
 
 def test_negv_display(negv):
     """Is the value correctly displayed?"""
@@ -68,17 +78,21 @@ def test_0digit_numbers(v0):
     """Is an integer's number of digits detected as 0?"""
     assert v0.digits_number() == 0
 
+
 def test_1digit_numbers(v1):
     """Is the number of digits detected right?"""
     assert v1.digits_number() == 1
+
 
 def test_2digit_numbers(v2):
     """Is the number of digits detected right?"""
     assert v2.digits_number() == 2
 
+
 def test_3digit_numbers(v3):
     """Is the number of digits detected right?"""
     assert v3.digits_number() == 3
+
 
 def test_4digit_numbers(v4):
     """Is the number of digits detected right?"""
@@ -89,17 +103,21 @@ def test_round_0digit_to_unit(v0):
     """Is the number correctly rounded?"""
     assert v0.round(0).raw_value == 4
 
+
 def test_round_1digit_to_unit(v1):
     """Is the number correctly rounded?"""
     assert v1.round(0).raw_value == 4
+
 
 def test_round_2digit_to_unit(v2):
     """Is the number correctly rounded?"""
     assert v2.round(0).raw_value == 4
 
+
 def test_round_3digit_to_unit(v3):
     """Is the number correctly rounded?"""
     assert v3.round(0).raw_value == 4
+
 
 def test_round_4digit_to_unit(v4):
     """Is the number correctly rounded?"""
@@ -110,17 +128,21 @@ def test_round_0digit_to_tenth(v0):
     """Is the number correctly rounded?"""
     assert v0.round(1).raw_value == 4
 
+
 def test_round_1digit_to_tenth(v1):
     """Is the number correctly rounded?"""
     assert v1.round(1).raw_value == Decimal('4.2')
+
 
 def test_round_2digit_to_tenth(v2):
     """Is the number correctly rounded?"""
     assert v2.round(1).raw_value == Decimal('4.3')
 
+
 def test_round_3digit_to_tenth(v3):
     """Is the number correctly rounded?"""
     assert v3.round(1).raw_value == Decimal('4.3')
+
 
 def test_round_4digit_to_tenth(v4):
     """Is the number correctly rounded?"""
@@ -131,17 +153,21 @@ def test_round_0digit_to_hundredth(v0):
     """Is the number correctly rounded?"""
     assert v0.round(2).raw_value == 4
 
+
 def test_round_1digit_to_hundredth(v1):
     """Is the number correctly rounded?"""
     assert v1.round(2).raw_value == Decimal('4.2')
+
 
 def test_round_2digit_to_hundredth(v2):
     """Is the number correctly rounded?"""
     assert v2.round(2).raw_value == Decimal('4.25')
 
+
 def test_round_3digit_to_hundredth(v3):
     """Is the number correctly rounded?"""
     assert v3.round(2).raw_value == Decimal('4.26')
+
 
 def test_round_4digit_to_hundredth(v4):
     """Is the number correctly rounded?"""
@@ -152,17 +178,21 @@ def test_round_0digit_to_thousandth(v0):
     """Is the number correctly rounded?"""
     assert v0.round(3).raw_value == 4
 
+
 def test_round_1digit_to_thousandth(v1):
     """Is the number correctly rounded?"""
     assert v1.round(3).raw_value == Decimal('4.2')
+
 
 def test_round_2digit_to_thousandth(v2):
     """Is the number correctly rounded?"""
     assert v2.round(3).raw_value == Decimal('4.25')
 
+
 def test_round_3digit_to_thousandth(v3):
     """Is the number correctly rounded?"""
     assert v3.round(3).raw_value == Decimal('4.257')
+
 
 def test_round_4digit_to_thousandth(v4):
     """Is the number correctly rounded?"""
@@ -173,17 +203,21 @@ def test_round_0digit_to_tenthousandth(v0):
     """Is the number correctly rounded?"""
     assert v0.round(4).raw_value == 4
 
+
 def test_round_1digit_to_tenthousandth(v1):
     """Is the number correctly rounded?"""
     assert v1.round(4).raw_value == Decimal('4.2')
+
 
 def test_round_2digit_to_tenthousandth(v2):
     """Is the number correctly rounded?"""
     assert v2.round(4).raw_value == Decimal('4.25')
 
+
 def test_round_3digit_to_tenthousandth(v3):
     """Is the number correctly rounded?"""
     assert v3.round(4).raw_value == Decimal('4.257')
+
 
 def test_round_4digit_to_tenthousandth(v4):
     """Is the number correctly rounded?"""
@@ -194,6 +228,7 @@ def test_needs_to_get_rounded_0digit_to_unit(v0):
     """Is the number correctly detected as needing to get rounded?"""
     assert not v0.needs_to_get_rounded(0)
 
+
 def test_needs_to_get_rounded_0digit_to_tenth(v0):
     """Is the number correctly detected as needing to get rounded?"""
     assert not v0.needs_to_get_rounded(1)
@@ -203,9 +238,11 @@ def test_needs_to_get_rounded_1digit_to_unit(v1):
     """Is the number correctly detected as needing to get rounded?"""
     assert v1.needs_to_get_rounded(0)
 
+
 def test_needs_to_get_rounded_1digit_to_tenth(v1):
     """Is the number correctly detected as needing to get rounded?"""
     assert not v1.needs_to_get_rounded(1)
+
 
 def test_needs_to_get_rounded_1digit_to_hundredth(v1):
     """Is the number correctly detected as needing to get rounded?"""
@@ -216,9 +253,11 @@ def test_needs_to_get_rounded_2digit_to_unit(v2):
     """Is the number correctly detected as needing to get rounded?"""
     assert v2.needs_to_get_rounded(0)
 
+
 def test_needs_to_get_rounded_2digit_to_tenth(v2):
     """Is the number correctly detected as needing to get rounded?"""
     assert v2.needs_to_get_rounded(1)
+
 
 def test_needs_to_get_rounded_2digit_to_hundredth(v2):
     """Is the number correctly detected as needing to get rounded?"""
@@ -229,13 +268,16 @@ def test_needs_to_get_rounded_3digit_to_unit(v3):
     """Is the number correctly detected as needing to get rounded?"""
     assert v3.needs_to_get_rounded(0)
 
+
 def test_needs_to_get_rounded_3digit_to_tenth(v3):
     """Is the number correctly detected as needing to get rounded?"""
     assert v3.needs_to_get_rounded(1)
 
+
 def test_needs_to_get_rounded_3digit_to_hundredth(v3):
     """Is the number correctly detected as needing to get rounded?"""
     assert v3.needs_to_get_rounded(2)
+
 
 def test_needs_to_get_rounded_3digit_to_thousandth(v3):
     """Is the number correctly detected as needing to get rounded?"""
@@ -246,17 +288,21 @@ def test_needs_to_get_rounded_4digit_to_unit(v4):
     """Is the number correctly detected as needing to get rounded?"""
     assert v4.needs_to_get_rounded(0)
 
+
 def test_needs_to_get_rounded_4digit_to_tenth(v4):
     """Is the number correctly detected as needing to get rounded?"""
     assert v4.needs_to_get_rounded(1)
+
 
 def test_needs_to_get_rounded_4digit_to_hundredth(v4):
     """Is the number correctly detected as needing to get rounded?"""
     assert v4.needs_to_get_rounded(2)
 
+
 def test_needs_to_get_rounded_4digit_to_thousandth(v4):
     """Is the number correctly detected as needing to get rounded?"""
     assert v4.needs_to_get_rounded(3)
+
 
 def test_needs_to_get_rounded_4digit_to_tenthousandth(v4):
     """Is the number correctly detected as needing to get rounded?"""
@@ -267,9 +313,11 @@ def test_is_a_perfect_square_sq(perfect_square):
     """Is the number detected as a perfect square?"""
     assert perfect_square.is_a_perfect_square()
 
+
 def test_is_a_perfect_square_dsq(perfect_decimal_square):
     """Is the number detected as a perfect square?"""
     assert perfect_decimal_square.is_a_perfect_square()
+
 
 def test_is_a_perfect_square_v2(v2):
     """Is the number detected as a perfect square?"""
@@ -285,7 +333,7 @@ def test_is_integer_v0(v0):
     """Is a no-digit Value an integer?"""
     assert v0.is_an_integer()
 
+
 def test_is_integer_v1(v1):
     """Is a one-digit Value not an integer?"""
     assert not v1.is_an_integer()
-

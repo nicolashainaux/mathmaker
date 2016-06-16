@@ -20,9 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import pytest
-import decimal
-
 from lib.core.base_calculus import Item, Monomial
 from tools import wrap_nb
 
@@ -31,7 +28,7 @@ def test_monom6_printed():
     """Is this Monomial printed correctly?"""
     m = Monomial(('+', 6, 0))
     m1 = m.throw_away_the_neutrals()
-    assert m.printed == wrap_nb('6')
+    assert m1.printed == wrap_nb('6')
 
 
 def test_monom1_is_not_a_single_neutral_item0():
@@ -53,4 +50,3 @@ def test_mon_deg0_5_squared_printed():
     m = Monomial(('+', 5, 0))
     m.set_exponent(2)
     assert m.printed == wrap_nb('5^{2}')
-

@@ -21,10 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import pytest
-import decimal
 
-from lib.core.base_calculus import Item, Quotient, Fraction
+from lib.core.base_calculus import Quotient, Fraction
 from tools import wrap_nb
+
 
 @pytest.fixture
 def q1(): return Quotient(('+',
@@ -32,6 +32,7 @@ def q1(): return Quotient(('+',
                            Fraction(('+', 7, 2)),
                            1,
                            'use_divide_symbol'))
+
 
 @pytest.fixture
 def q2(): return Quotient(('-',
@@ -49,12 +50,13 @@ def test_q1_printed(q1):
 def test_q1_next_step(q1):
     """Is this Quotient's calculation's next step correct?"""
     assert q1.calculate_next_step().printed == \
-                                wrap_nb('\\frac{8}{9}\\times \\frac{2}{7}')
+        wrap_nb('\\frac{8}{9}\\times \\frac{2}{7}')
+
 
 def test_q1_next_step2(q1):
     """Is this Quotient's calculation's 2d next step correct?"""
     assert q1.calculate_next_step().calculate_next_step().printed == \
-                                wrap_nb('\\frac{8\\times 2}{9\\times 7}')
+        wrap_nb('\\frac{8\\times 2}{9\\times 7}')
 
 
 def test_q2_printed(q2):
@@ -65,18 +67,17 @@ def test_q2_printed(q2):
 def test_q2_next_step(q2):
     """Is this Quotient's calculation's next step correct?"""
     assert q2.calculate_next_step().printed == \
-                                wrap_nb('-\\frac{1}{2}\\times \\frac{3}{1}')
+        wrap_nb('-\\frac{1}{2}\\times \\frac{3}{1}')
 
 
 def test_q2_next_step2(q2):
     """Is this Quotient's calculation's 2d next step correct?"""
     assert q2.calculate_next_step().calculate_next_step().printed == \
-                                wrap_nb('-\\frac{1\\times 3}{2\\times 1}')
+        wrap_nb('-\\frac{1\\times 3}{2\\times 1}')
 
 
 def test_q2_next_step3(q2):
     """Is this Quotient's calculation's 3rd next step correct?"""
     assert q2.calculate_next_step().calculate_next_step()\
-           .calculate_next_step().printed == \
-                                wrap_nb('-\\frac{3}{2}')
-
+        .calculate_next_step().printed == \
+        wrap_nb('-\\frac{3}{2}')

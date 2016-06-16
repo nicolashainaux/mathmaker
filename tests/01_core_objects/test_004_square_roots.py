@@ -20,9 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import pytest
-import decimal
-
 from lib.core.base_calculus import Item, SquareRoot
 from tools import wrap_nb
 
@@ -35,10 +32,10 @@ def test_sq5_printed():
 def test_sq5_next_step():
     """Is SquareRoot(Item(5)) calculation's next step correct?"""
     assert SquareRoot(Item(5)).calculate_next_step(decimal_result=4)\
-           .printed == wrap_nb('2.2361')
+        .printed == wrap_nb('2.2361')
+
 
 def test_sq16_next_step():
     """Is SquareRoot(Item(16)) calculation's next step correct?"""
     assert SquareRoot(Item(16)).calculate_next_step(decimal_result=4)\
-           .printed == wrap_nb('4')
-
+        .printed == wrap_nb('4')

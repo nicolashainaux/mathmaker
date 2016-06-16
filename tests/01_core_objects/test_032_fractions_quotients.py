@@ -21,10 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import pytest
-import decimal
 
 from lib.core.base_calculus import Item, Quotient, Fraction
 from tools import wrap_nb
+
 
 @pytest.fixture
 def fq0(): return Quotient(('+',
@@ -32,14 +32,24 @@ def fq0(): return Quotient(('+',
                             Fraction(('+', Item(1), Item(-3))),
                             1, 'use_divide_symbol'
                             ))
+
+
 @pytest.fixture
 def fq0_step1(fq0): return fq0.calculate_next_step()
+
+
 @pytest.fixture
 def fq0_step2(fq0_step1): return fq0_step1.calculate_next_step()
+
+
 @pytest.fixture
 def fq0_step3(fq0_step2): return fq0_step2.calculate_next_step()
+
+
 @pytest.fixture
 def fq0_step4(fq0_step3): return fq0_step3.calculate_next_step()
+
+
 @pytest.fixture
 def fq0_step5(fq0_step4): return fq0_step4.calculate_next_step()
 
@@ -57,7 +67,7 @@ def test_fq0_step2(fq0_step2):
 def test_fq0_step3(fq0_step3):
     """Is this Quotient's calculation's 3rd step correct?"""
     assert fq0_step3.printed == \
-                        wrap_nb('-\\frac{9\\times \\bcancel{3}}{\\bcancel{3}}')
+        wrap_nb('-\\frac{9\\times \\bcancel{3}}{\\bcancel{3}}')
 
 
 def test_fq0_step4(fq0_step4):
@@ -68,4 +78,3 @@ def test_fq0_step4(fq0_step4):
 def test_fq0_step5(fq0_step5):
     """Is this Quotient's calculation's 5th step correct?"""
     assert fq0_step5 is None
-

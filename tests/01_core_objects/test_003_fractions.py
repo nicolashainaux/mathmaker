@@ -26,12 +26,15 @@ import decimal
 from lib.core.base_calculus import Item, Product, Fraction
 from tools import wrap_nb
 
+
 @pytest.fixture
 def f1(): return Fraction(('+', 92, 76))
 
+
 @pytest.fixture
-def f2(): return Fraction(('+', Product([Item(10), Item(6)]),
-                                Product([Item(7), Item(2)])))
+def f2(): return Fraction(('+',
+                           Product([Item(10), Item(6)]),
+                           Product([Item(7),  Item(2)])))
 
 
 def test_f1_printed(f1):
@@ -42,13 +45,13 @@ def test_f1_printed(f1):
 def test_f1_next_step(f1):
     """Is this Fraction's calculation's next step correct?"""
     assert f1.calculate_next_step().printed == \
-    wrap_nb('\\frac{\\bcancel{2}\\times 46}{\\bcancel{2}\\times 38}')
+        wrap_nb('\\frac{\\bcancel{2}\\times 46}{\\bcancel{2}\\times 38}')
 
 
 def test_f1_next_step2(f1):
     """Is this Fraction's calculation's 2d next step correct?"""
     assert f1.calculate_next_step().calculate_next_step().printed == \
-     wrap_nb('\\frac{\\bcancel{2}\\times 23}{\\bcancel{2}\\times 19}')
+        wrap_nb('\\frac{\\bcancel{2}\\times 23}{\\bcancel{2}\\times 19}')
 
 
 def test_f1_simplified(f1):
@@ -59,7 +62,7 @@ def test_f1_simplified(f1):
 def test_f1_simplification_line_simplified(f1):
     """Is this Fraction's simplification's next step correct?"""
     assert f1.simplification_line().simplified().printed == \
-                                                    wrap_nb('\\frac{46}{38}')
+        wrap_nb('\\frac{46}{38}')
 
 
 def test_f2_is_reducible(f2):
@@ -70,45 +73,51 @@ def test_f2_is_reducible(f2):
 def test_f2_next_step(f2):
     """Is this Fraction's calculation's next step correct?"""
     assert f2.calculate_next_step().printed == \
-    wrap_nb('\\frac{\\bcancel{2}\\times 5\\times 6}{7\\times \\bcancel{2}}')
+        wrap_nb('\\frac{\\bcancel{2}\\times 5\\times 6}'
+                '{7\\times \\bcancel{2}}')
 
 
 def test_f3_simplification_line():
     """Is this Fraction's simplification line correct?"""
-    assert Fraction(('+', Product([Item(7), Item(6)]),
-                          Product([Item(3), Item(3)])))\
-           .simplification_line().printed == \
-    wrap_nb('\\frac{7\\times \\bcancel{3}\\times 2}{\\bcancel{3}\\times 3}')
+    assert Fraction(('+',
+                     Product([Item(7), Item(6)]),
+                     Product([Item(3), Item(3)])))\
+        .simplification_line().printed == \
+        wrap_nb('\\frac{7\\times \\bcancel{3}\\times 2}'
+                '{\\bcancel{3}\\times 3}')
 
 
 def test_f4_next_step():
     """Is this Fraction's calculation's next step correct?"""
-    assert Fraction(('+', Product([Item(3), Item(7)]),
-                          Product([Item(10), Item(4)])))\
-           .calculate_next_step().printed == wrap_nb('\\frac{21}{40}')
+    assert Fraction(('+',
+                     Product([Item(3), Item(7)]),
+                     Product([Item(10), Item(4)])))\
+        .calculate_next_step().printed == wrap_nb('\\frac{21}{40}')
 
 
 def test_f5_simplification_line():
     """Is this Fraction's simplification line correct?"""
-    assert Fraction(('+', Product([Item(8), Item(3)]),
-                          Product([Item(5), Item(6)])))\
-           .simplification_line().printed == \
-    wrap_nb('\\frac{\\bcancel{2}\\times 4\\times \\bcancel{3}}{5\\times'
-            ' \\bcancel{2}\\times \\bcancel{3}}')
+    assert Fraction(('+',
+                     Product([Item(8), Item(3)]),
+                     Product([Item(5), Item(6)])))\
+        .simplification_line().printed == \
+        wrap_nb('\\frac{\\bcancel{2}\\times 4\\times \\bcancel{3}}{5\\times'
+                ' \\bcancel{2}\\times \\bcancel{3}}')
 
 
 def test_f6_simplification_line():
     """Is this Fraction's simplification line correct?"""
-    assert Fraction(('+', Product([Item(10), Item(5)]),
-                          Product([Item(5), Item(9)])))\
-           .simplification_line().printed == \
-    wrap_nb('\\frac{10\\times \\bcancel{5}}{\\bcancel{5}\\times 9}')
+    assert Fraction(('+',
+                     Product([Item(10), Item(5)]),
+                     Product([Item(5), Item(9)])))\
+        .simplification_line().printed == \
+        wrap_nb('\\frac{10\\times \\bcancel{5}}{\\bcancel{5}\\times 9}')
 
 
 def test_f7_reduced():
     """Is this Fraction's simplification correct?"""
     assert Fraction(('+', 3, 7)).completely_reduced().printed == \
-                                                        wrap_nb('\\frac{3}{7}')
+        wrap_nb('\\frac{3}{7}')
 
 
 def test_f7_is_not_decimal():
@@ -139,12 +148,11 @@ def test_f11_eval():
 def test_f12_eval():
     """Is this Fraction correctly evaluated?"""
     assert Fraction((Item(3), Item(7))).evaluate() == \
-                            decimal.Decimal('0.4285714285714285714285714286')
+        decimal.Decimal('0.4285714285714285714285714286')
 
 
 def test_f12_eval2():
     """Is this Fraction correctly evaluated?"""
     assert Fraction((Item(3), Item(7)))\
-           .evaluate(keep_not_decimal_nb_as_fractions=True).printed == \
-           wrap_nb('\\frac{3}{7}')
-
+        .evaluate(keep_not_decimal_nb_as_fractions=True).printed == \
+        wrap_nb('\\frac{3}{7}')
