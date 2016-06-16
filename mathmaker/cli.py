@@ -19,12 +19,13 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#import time
-#start_time = time.time()
-import sys, os
+# import time
+# start_time = time.time()
+import sys
+import os
 import argparse
 
-from lib import __info__, __software_name__
+from .lib import __info__, __software_name__
 
 import settings
 settings.init()
@@ -33,12 +34,12 @@ from lib import startup_actions
 from lib import sheet
 from lib.tools.xml_sheet import XML_SHEETS
 
-log = settings.mainlogger
 
 def main():
+    log = settings.mainlogger
     startup_actions.check_dependencies()
-    parser = argparse.ArgumentParser(description=\
-                        'Creates maths exercices and their answers.')
+    parser = argparse.ArgumentParser(description='Creates maths exercices and '
+                                                 'their answers.')
     parser.add_argument('-l', '--language', action='store', dest='lang',
                         default=settings.language,
                         help='force the language of the output to LANGUAGE. '
@@ -94,7 +95,7 @@ def main():
                   + ", you should use any item from the following lists: "
                   + str(sorted([key for key in sheet.AVAILABLE]))
                   + str(sorted([key for key in XML_SHEETS])))
-        #print("--- {sec} seconds ---"\
+        # print("--- {sec} seconds ---"\
         #      .format(sec=round(time.time() - start_time, 3)))
         sys.exit(2)
 
@@ -111,4 +112,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    #print("--- {sec} seconds ---".format(sec=time.time() - start_time))
+    # print("--- {sec} seconds ---".format(sec=time.time() - start_time))

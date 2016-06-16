@@ -36,5 +36,3 @@ __info__ = '{software_name} {v}\nLicense: {l}\n{c} {contact}'\
            .format(software_name=__software_name__,
                    v=__version__, l=__licence__, c=__copyright__,
                    contact=__contact__)
-
-

@@ -20,18 +20,14 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import math
 import sys
 
 import settings
 from lib.common import latex
 from lib.tools import header_comment
 from lib.common.cst import *
-
 from lib import is_
-from lib.common.latex import MARKUP
-from lib.core.base import *
-from lib.core.base_calculus import *
+from lib.core.base import Printable, Drawable
 from lib import *
 import lib.core.base_calculus
 
