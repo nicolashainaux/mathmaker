@@ -5,6 +5,10 @@
 # make sure you also set dbg (and raw, if any) logger level to DEBUG too ).
 dbg:
     db: INFO
+    wording:
+        merge_nb_unit_pairs: INFO
+        setup_wording_format_of: INFO
+        insert_nonbreaking_spaces: INFO
     Item:
         into_str: INFO
         calculate_next_step: INFO
