@@ -20,10 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import pytest
-
 from lib import shared
 from lib.sheet import AVAILABLE
+
 
 def test_direct_theorem():
     """
@@ -40,5 +39,4 @@ def test_converse_and_contrapositive():
     is generated without any error.
     """
     shared.machine.write_out(str(AVAILABLE[
-    'converse-and-contrapositive-of-pythagorean-theorem-short-test'][0]()))
-
+        'converse-and-contrapositive-of-pythagorean-theorem-short-test'][0]()))

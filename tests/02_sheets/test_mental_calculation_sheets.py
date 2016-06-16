@@ -20,11 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import pytest
 
 from lib import shared
 from lib.tools.xml_sheet import XML_SHEETS
 from lib.sheet import S_Generic
+
 
 def test_tables2_9():
     """Checks if 'table_2_9' is generated without any error."""
@@ -97,4 +97,3 @@ def test_test_11_1():
 def test_test_11_2():
     """Checks if 'test_11_2' is generated without any error."""
     shared.machine.write_out(str(S_Generic(XML_SHEETS['test_11_2'])))
-

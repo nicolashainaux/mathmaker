@@ -20,10 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import pytest
-
 from lib import shared
 from lib.sheet import AVAILABLE
+
 
 def test_basic():
     """Checks if 'equations-basic' is generated without any error."""
@@ -48,4 +47,3 @@ def test_test():
 def test_short_test():
     """Checks if 'equations-short-test' is generated without any error."""
     shared.machine.write_out(str(AVAILABLE['equations-short-test'][0]()))
-

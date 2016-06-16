@@ -20,10 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import pytest
-
 from lib import shared
 from lib.sheet import AVAILABLE
+
 
 def test_balance_01():
     """Checks if 'algebra-balance-01' is generated without any error."""
@@ -88,4 +87,3 @@ def test_mini_test_0():
 def test_mini_test_1():
     """Checks if 'algebra-mini-test-1' is generated without any error."""
     shared.machine.write_out(str(AVAILABLE['algebra-mini-test-1'][0]()))
-
