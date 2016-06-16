@@ -34,7 +34,7 @@ def f1(): return Fraction(('+', 92, 76))
 @pytest.fixture
 def f2(): return Fraction(('+',
                            Product([Item(10), Item(6)]),
-                           Product([Item(7),  Item(2)])))
+                           Product([Item(7), Item(2)])))
 
 
 def test_f1_printed(f1):

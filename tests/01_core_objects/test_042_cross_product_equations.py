@@ -29,8 +29,8 @@ from tools import wrap_nb
 
 @pytest.fixture
 def cpeq0():
-    return CrossProductEquation((Item("AB"),    Item(3),
-                                 Item(4),       Item(8)))
+    return CrossProductEquation((Item("AB"), Item(3),
+                                 Item(4), Item(8)))
 
 
 def test_cpeq0_printed(cpeq0):
@@ -70,7 +70,7 @@ def test_cpeq0_autoresolution_ter(cpeq0):
 
 def test_cpeq1_autoresolution():
     """Is this Equation correctly auto-resolved?"""
-    eq = CrossProductEquation((Item(6),   Item(1.4),
+    eq = CrossProductEquation((Item(6), Item(1.4),
                                Item(1.5), Item("AB")))
     assert eq.auto_resolution(dont_display_equations_name=True,
                               skip_fraction_simplification=True,

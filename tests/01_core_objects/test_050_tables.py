@@ -29,7 +29,7 @@ from tools import wrap_nb
 
 @pytest.fixture
 def t0():
-    return Table([[Item((2)), Item((5)),  Item((6)),  Item((7))],
+    return Table([[Item((2)), Item((5)), Item((6)), Item((7))],
                   [Item((4)), Item((10)), Item((12)), Item((14))]])
 
 

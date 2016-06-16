@@ -22,7 +22,6 @@
 
 import sys
 import gettext
-import locale
 
 sys.path.insert(1, 'mathmaker')
 from lib import __software_name__

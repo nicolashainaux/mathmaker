@@ -157,7 +157,7 @@ def test_eq8_autoresolution():
 
 def test_eq9_autoresolution():
     """Is this Equation correctly auto-resolved?"""
-    eq = Equation((Polynomial([Monomial(('-', 2, 1)),  Monomial(('+', 5, 0))]),
+    eq = Equation((Polynomial([Monomial(('-', 2, 1)), Monomial(('+', 5, 0))]),
                    Polynomial([Monomial(('+', 3, 1)), Monomial(('-', 4, 0))])),
                   number=1)
     assert eq.auto_resolution() == wrap_nb('$(\\text{E}_{1}): $'

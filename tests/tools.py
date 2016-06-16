@@ -22,6 +22,7 @@
 
 import re
 
+
 def wrap_nb(s):
     """
     All numbers of the string s get wrapped inside \\text{}.
@@ -34,4 +35,3 @@ def wrap_nb(s):
     """
     p = re.compile(r'((\d*\.\d+)|(\d+))', re.LOCALE)
     return p.sub(r'\\text{' + r'\1' + r'}', s)
-

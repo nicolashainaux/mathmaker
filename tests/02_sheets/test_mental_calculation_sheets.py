@@ -54,7 +54,7 @@ def test_multi_decimal():
 def test_multi_divi_10_100_1000():
     """Checks if 'multi_divi_10_100_1000' is generated without any error."""
     shared.machine.write_out(
-                        str(S_Generic(XML_SHEETS['multi_divi_10_100_1000'])))
+        str(S_Generic(XML_SHEETS['multi_divi_10_100_1000'])))
 
 
 def test_multi_hole_any_nb():
@@ -65,7 +65,7 @@ def test_multi_hole_any_nb():
 def test_multi_hole_tables2_9():
     """Checks if 'multi_hole_tables2_9' is generated without any error."""
     shared.machine.write_out(
-                            str(S_Generic(XML_SHEETS['multi_hole_tables2_9'])))
+        str(S_Generic(XML_SHEETS['multi_hole_tables2_9'])))
 
 
 def test_multi_reversed():
@@ -76,7 +76,7 @@ def test_multi_reversed():
 def test_operations_vocabulary():
     """Checks if 'operations_vocabulary' is generated without any error."""
     shared.machine.write_out(
-                        str(S_Generic(XML_SHEETS['operations_vocabulary'])))
+        str(S_Generic(XML_SHEETS['operations_vocabulary'])))
 
 
 def test_ranks():

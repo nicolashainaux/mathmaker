@@ -35,6 +35,7 @@ def pos6(): return Item(6)
 def negneg1(): return Item(('-', -1))
 
 
+@pytest.fixture()
 def neg1_inside_exp2(): return Item(('+', -1, Item(2)))
 
 
@@ -224,14 +225,14 @@ def test_neg2_inside_exp_sum_of_product_of_1plus0_printed():
 
 
 def test_neg2_inside_exp_sum_of_product_of_1plus1_printed(
-                                    neg2_inside_exp_sum_of_product_of_1plus1):
+        neg2_inside_exp_sum_of_product_of_1plus1):
     """Is Item(('+', -2, Sum([Product([Sum([1, 1])])]))) correctly printed?"""
     assert neg2_inside_exp_sum_of_product_of_1plus1.printed == \
         wrap_nb('(-2)^{1+1}')
 
 
 def test_neg2_inside_exp_sum_of_product_of_1plus1_printed_bis(
-                                    neg2_inside_exp_sum_of_product_of_1plus1):
+        neg2_inside_exp_sum_of_product_of_1plus1):
     """
     Is Item(('+', -2, Sum([Product([Sum([1, 1])])]))) still correctly printed
     if the 'embedded' Product is not set to compact display?
@@ -274,7 +275,7 @@ def test_order_b_a():
 def test_sort_b_a():
     assert sorted([Item('b'), Item('a')],
                   key=lambda item: item.get_first_letter()) == \
-           [Item('a'), Item('b')]
+        [Item('a'), Item('b')]
 
 
 def test_item_to_round_digits_number(item_to_round):

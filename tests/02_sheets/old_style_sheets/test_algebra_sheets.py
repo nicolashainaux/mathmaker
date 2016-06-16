@@ -34,7 +34,7 @@ def test_expression_reduction():
     Checks if 'algebra-expression-reduction' is generated without any error.
     """
     shared.machine.write_out(
-                        str(AVAILABLE['algebra-expression-reduction'][0]()))
+        str(AVAILABLE['algebra-expression-reduction'][0]()))
 
 
 def test_expression_expansion():
@@ -42,7 +42,7 @@ def test_expression_expansion():
     Checks if 'algebra-expression-expansion' is generated without any error.
     """
     shared.machine.write_out(
-                        str(AVAILABLE['algebra-expression-expansion'][0]()))
+        str(AVAILABLE['algebra-expression-expansion'][0]()))
 
 
 def test_binomial_identities_expansion():
@@ -51,7 +51,7 @@ def test_binomial_identities_expansion():
     without any error.
     """
     shared.machine.write_out(
-                str(AVAILABLE['algebra-binomial-identities-expansion'][0]()))
+        str(AVAILABLE['algebra-binomial-identities-expansion'][0]()))
 
 
 def test_short_test():

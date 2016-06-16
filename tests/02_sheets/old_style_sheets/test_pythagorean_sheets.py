@@ -29,7 +29,7 @@ def test_direct_theorem():
     Checks if 'pythagorean-theorem-short-test' is generated without any error.
     """
     shared.machine.write_out(
-                        str(AVAILABLE['pythagorean-theorem-short-test'][0]()))
+        str(AVAILABLE['pythagorean-theorem-short-test'][0]()))
 
 
 def test_converse_and_contrapositive():
