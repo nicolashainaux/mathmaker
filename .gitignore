@@ -1,5 +1,8 @@
 .tox/
 *.pyc
+build/
+dist/
+*.egg-info/
 *~
 mathmaker/data/mathmaker.db
 mathmaker/log/*

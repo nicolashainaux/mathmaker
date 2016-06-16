@@ -1,0 +1,10 @@
+include *.rst
+include *.md
+include *.txt
+include *.xml
+include *.db-dist
+include *.yaml
+#include mathmaker
+include .gitignore
+include LICENSE
+
