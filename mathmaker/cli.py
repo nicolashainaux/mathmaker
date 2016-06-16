@@ -24,8 +24,9 @@
 import sys
 import os
 import argparse
+import locale
 
-from .lib import __info__, __software_name__
+from lib import __info__, __software_name__
 
 import settings
 settings.init()
@@ -80,6 +81,9 @@ def main():
     settings.outputdir = args.outputdir
     settings.font = args.font
     settings.encoding = args.encoding
+    # todo: update settings.locale according to the final settings.encoding
+    #       value
+    locale.setlocale(locale.LC_ALL, settings.locale)
     startup_actions.check_settings_consistency()
     shared.init()
 

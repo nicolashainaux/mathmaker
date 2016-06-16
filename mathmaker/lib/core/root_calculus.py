@@ -39,7 +39,7 @@ import settings
 
 from lib.common.latex import MARKUP
 
-locale.setlocale(locale.LC_ALL, settings.locale)
+# locale.setlocale(locale.LC_ALL, settings.locale)
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------

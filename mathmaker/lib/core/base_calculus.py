@@ -82,7 +82,7 @@ log_binomial_identity_expand = settings.dbg_logger.getChild(
 
 from lib.common.latex import MARKUP
 
-locale.setlocale(locale.LC_ALL, settings.locale)
+# locale.setlocale(locale.LC_ALL, settings.locale)
 
 
 # Maximum ratio of constant terms accepted during the creation of random

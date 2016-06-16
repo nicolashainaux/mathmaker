@@ -41,7 +41,7 @@ from .calculus import Equality, SubstitutableEquality
 from .base import Drawable
 from .base_geometry import Point, Segment, Angle, Vector
 
-locale.setlocale(locale.LC_ALL, settings.locale)
+# locale.setlocale(locale.LC_ALL, settings.locale)
 
 
 # ------------------------------------------------------------------------------
