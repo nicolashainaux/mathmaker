@@ -31,11 +31,11 @@ from lib.maths_lib import *
 from lib.common.cst import *
 from .utils import *
 from settings import default
+from lib.common.latex import MARKUP
 
 log_equation_solve_next_step = \
-settings.dbg_logger.getChild('Equation.solve_next_step')
+    settings.dbg_logger.getChild('Equation.solve_next_step')
 
-from lib.common.latex import MARKUP
 
 MAX_VALUE = 20
 

@@ -27,6 +27,7 @@ import yaml
 
 from .ext_dict import ext_dict
 
+
 def load_config(file_tag, settingsdir):
     """
     Will load the values from the yaml config file, named file_tag.yaml.
@@ -42,7 +43,7 @@ def load_config(file_tag, settingsdir):
     configuration = ext_dict()
     try:
         with open(os.path.join(settingsdir, 'default/', file_tag + '.yaml'))\
-            as file_path:
+                as file_path:
             # __
             if file_tag != 'logging':
                 mainlogger.info('Loading ' + file_tag + '.yaml from '
@@ -67,4 +68,3 @@ def load_config(file_tag, settingsdir):
         except IOError:
             pass
     return configuration
-

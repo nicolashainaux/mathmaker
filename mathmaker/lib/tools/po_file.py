@@ -23,20 +23,20 @@
 import polib
 import settings
 
-def retrieve(language, po_filename):
-	po = polib.pofile(settings.localedir \
-					+ settings.language \
-					+ "/LC_MESSAGES/" \
-					+ po_filename \
-					+ ".po")
 
-	return [ entry.msgstr for entry in po if entry.msgstr != "" ]
+def retrieve(language, po_filename):
+    po = polib.pofile(settings.localedir
+                      + settings.language
+                      + "/LC_MESSAGES/"
+                      + po_filename
+                      + ".po")
+    return [entry.msgstr for entry in po if entry.msgstr != ""]
 
 
 def get_list_of(what, language, arg):
-	what_map = { "words" : "w" + str(arg) + "l",
-	 			 "names" : str(arg) + "_names" }
-	output = retrieve(language, what_map[what])
-	if len(output) < 20:
-		output.append(retrieve('en', what_map[what]))
-	return output
+    what_map = {"words": "w" + str(arg) + "l",
+                "names": str(arg) + "_names"}
+    output = retrieve(language, what_map[what])
+    if len(output) < 20:
+        output.append(retrieve('en', what_map[what]))
+    return output

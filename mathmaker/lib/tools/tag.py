@@ -32,11 +32,12 @@ def classify_tag(tag):
                  'decimal_and_10_100_1000_for_multi',
                  'decimal_and_10_100_1000_for_divi',
                  'decimal_and_one_digit_for_multi',
-                 'decimal_and_one_digit_for_divi' ]:
+                 'decimal_and_one_digit_for_divi']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
                      "used in a mathmaker xml file.")
+
 
 ##
 #   @brief  Will turn the tag into the matching conditions for the db query.
@@ -52,11 +53,11 @@ def translate_int_pairs_tag(tag):
     d = {}
     # 'table_11' is a shortcut for a special range
     if tag == 'table_11':
-        d = { 'nb2_in': ['11', '12', '13', '14', '15', '16', '17', '18', '21',
-                         '22', '23', '24', '25', '26', '27', '31', '32', '33',
-                         '34', '35', '36', '41', '42', '43', '44', '45', '51',
-                         '52', '53', '54', '61', '62', '63', '71', '72', '81'],
-              'nb1': '11' }
+        d = {'nb2_in': ['11', '12', '13', '14', '15', '16', '17', '18', '21',
+                        '22', '23', '24', '25', '26', '27', '31', '32', '33',
+                        '34', '35', '36', '41', '42', '43', '44', '45', '51',
+                        '52', '53', '54', '61', '62', '63', '71', '72', '81'],
+             'nb1': '11'}
     # 'table_N' is a shortcut for 'multiplesofN_2to9' if N <= 10
     # and for 'multiplesofN_2to6' if N >= 12 (11 is managed separately)
     elif tag.startswith('table_'):
@@ -66,17 +67,14 @@ def translate_int_pairs_tag(tag):
 
     if tag.startswith('intpairs_'):
         n1, n2 = tag[9:].split(sep='to')
-        d = { 'nb1_min': n1, 'nb1_max': n2,
-              'nb2_min': n1, 'nb2_max': n2 }
+        d = {'nb1_min': n1, 'nb1_max': n2,
+             'nb2_min': n1, 'nb2_max': n2}
     elif tag.startswith('multiplesof'):
         N, r = tag[11:].split(sep='_')
         mini, maxi = r.split(sep='to')
-        d = { 'raw': '(nb1 = ' + N + ' and (nb2 >= ' + mini \
-                     + ' and nb2 <= ' + maxi + ')) or (nb2 = ' + N \
-                     + ' and (nb1 >= ' + mini + ' and nb1 <= ' + maxi + '))',
-              'prevails': [N] }
+        d = {'raw': '(nb1 = ' + N + ' and (nb2 >= ' + mini
+                    + ' and nb2 <= ' + maxi + ')) or (nb2 = ' + N
+                    + ' and (nb1 >= ' + mini + ' and nb1 <= ' + maxi + '))',
+             'prevails': [N]}
 
     return d
-
-
-

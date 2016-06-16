@@ -54,8 +54,7 @@ XML_SHEETS = {
     'multi_divi_10_100_1000': DM + L11_2 + "multi_divi_10_100_1000.xml",
     'rectangles': DM + L11_2 + "rectangles.xml",
     'test_11_2': DM + L11_2 + "test_11_2.xml",
-    'polygons_perimeters': DM + L11_2 + "polygons_perimeters.xml"
-    }
+    'polygons_perimeters': DM + L11_2 + "polygons_perimeters.xml"}
 
 CATALOG = {'mental_calculation': exercise.X_MentalCalculation}
 # 'generic': exercise.X_Generic
@@ -241,9 +240,9 @@ def get_q_kinds_from(file_name, sw_k_s={}, k_s_ctxt_tr={}):
                             (subchild.attrib['kind'],
                              subchild.attrib['subkind'],
                              subchild.attrib['context']) = \
-                                    k_s_ctxt_tr[(subchild.attrib['kind'],
-                                                 subchild.attrib['subkind'],
-                                                 subchild.attrib['context'])]
+                                k_s_ctxt_tr[(subchild.attrib['kind'],
+                                             subchild.attrib['subkind'],
+                                             subchild.attrib['context'])]
                     for elt in subchild:
                         o = copy.deepcopy(subchild.attrib)
                         o.update(elt.attrib)
@@ -283,8 +282,9 @@ def get_q_kinds_from(file_name, sw_k_s={}, k_s_ctxt_tr={}):
                     # to just distribute them all randomly.
                     for n in n_temp_list:
                         for q in q_temp_list:
-                            if not question.match_qtype_sourcenb(
-                                        q['kind'] + "_" + q['subkind'], n[0]):
+                            if (not question.match_qtype_sourcenb(
+                                q['kind'] + "_" + q['subkind'], n[0])):
+                                # __
                                 raise error.XMLFileFormatError(
                                     "This source: " + str(n[0]) + " cannot "
                                     "be attributed to this question:"

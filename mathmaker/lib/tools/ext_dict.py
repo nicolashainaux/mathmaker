@@ -35,8 +35,9 @@ class ext_dict(dict):
         other1 = {key: val
                   for key, val in iter(self.items())
                   if not isinstance(val, dict)}
-        nested2 = {key: val for key, val in iter(d2.items())
-                            if isinstance(val, dict)}
+        nested2 = {key: val
+                   for key, val in iter(d2.items())
+                   if isinstance(val, dict)}
         other2 = {key: val
                   for key, val in iter(d2.items())
                   if not isinstance(val, dict)}
@@ -46,7 +47,6 @@ class ext_dict(dict):
                 nested1[key].recursive_update(nested2[key])
         other1.update(nested1)
         self.update(other1)
-
 
     def flat(self, sep='.'):
         """
@@ -66,4 +66,3 @@ class ext_dict(dict):
             else:
                 output.update({key: self[key]})
         return output
-

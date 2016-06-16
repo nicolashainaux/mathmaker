@@ -20,12 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import sqlite3
-
 import settings
 from lib import shared
 
 log = settings.dbg_logger.getChild('db')
+
 
 class source(object):
     ##
@@ -43,7 +42,6 @@ class source(object):
         self.valcols = cols[1:]
         self.language = kwargs['language'] if 'language' in kwargs else ""
 
-
     ##
     #   @brief  Resets the drawDate of all table's entries (to 0)
     def _reset(self, **kwargs):
@@ -53,19 +51,17 @@ class source(object):
                               + self.table_name
                               + " SET multirev_locked = 0;")
 
-
     ##
     #   @brief  Creates the "SELECT ...,...,... FROM ...." part of the query
     def _select_part(self, **kwargs):
         return "SELECT " + ",".join(self.allcols) + " FROM " + self.table_name
 
-
     ##
     #   @brief  Creates the language condition part of the query
     def _language_part(self, **kwargs):
-        return "AND language = '" + self.language + "' " if self.language != ""\
-                                                     else ""
-
+        return "AND language = '" + self.language + "' " \
+            if self.language != ""\
+            else ""
 
     ##
     #   @brief  Creates the conditions of the query, from the given kwargs
@@ -101,13 +97,12 @@ class source(object):
                             updated_notin_list.remove(n)
                 if len(updated_notin_list):
                     for c in self.valcols:
-                        result += " AND " + c  + " NOT IN (" \
-                               +  ", ".join(str(x)
-                                            for x in updated_notin_list) + ") "
+                        result += " AND " + c + " NOT IN (" + ", "\
+                            .join(str(x) for x in updated_notin_list) + ") "
             elif kw.endswith("_in"):
                 k = kw[:-3]
-                result += " AND " + k + " IN (" \
-                       +  ", ".join(str(x) for x in kwargs[kw]) + ") "
+                result += " AND " + k + " IN (" + ", "\
+                    .join(str(x) for x in kwargs[kw]) + ") "
             elif kw == 'rectangle':
                 result += " AND nb1 != nb2 "
             elif kw == 'square':
@@ -118,14 +113,12 @@ class source(object):
                 result += " AND " + kw + " = '" + kwargs[kw] + "' "
         return result
 
-
     ##
     #   @brief  Concatenates the different parts of the query
     def _cmd(self, **kwargs):
         return self._select_part(**kwargs) + " WHERE drawDate = 0 " \
-               + self._language_part(**kwargs) + self._kw_conditions(**kwargs) \
-               + "ORDER BY random() LIMIT 1;"
-
+            + self._language_part(**kwargs) + self._kw_conditions(**kwargs) \
+            + "ORDER BY random() LIMIT 1;"
 
     ##
     #   @brief  Executes the query. If no result, resets the table and executes
@@ -138,16 +131,14 @@ class source(object):
             qr = tuple(shared.db.execute(cmd))
         return qr
 
-
     ##
     #   @brief  Set the drawDate to datetime() in all entries where col_name
     #           has a value of col_match.
     def _timestamp(self, col_name, col_match):
         shared.db.execute(
-        "UPDATE " + self.table_name
-        + " SET drawDate = datetime()"
-        + " WHERE " + col_name + " = '" + str(col_match) + "';")
-
+            "UPDATE " + self.table_name
+            + " SET drawDate = datetime()"
+            + " WHERE " + col_name + " = '" + str(col_match) + "';")
 
     ##
     #   @brief  Will 'lock' some entries
@@ -156,20 +147,19 @@ class source(object):
             if t in kwargs['info_multirev']:
                 for couple in kwargs['info_multirev'][t]:
                     shared.db.execute(
-                    "UPDATE " + self.table_name
-                    + " SET multirev_locked = 1"
-                    + " WHERE nb1 = '" + str(couple[0])
-                    + "' and nb2 = '" + str(couple[1]) + "';")
-
+                        "UPDATE " + self.table_name
+                        + " SET multirev_locked = 1"
+                        + " WHERE nb1 = '" + str(couple[0])
+                        + "' and nb2 = '" + str(couple[1]) + "';")
 
     ##
     #   @brief  Synonym of self.next(), but makes the source an Iterator.
     def __next__(self):
         return self.next()
 
-
     ##
-    #   @brief  Handles the choice of the next value to return from the database
+    #   @brief  Handles the choice of the next value to return from the
+    #           database
     def next(self, **kwargs):
         t = self._query_result(self._cmd(**kwargs), **kwargs)[0]
         self._timestamp(str(self.idcol), str(t[0]))
