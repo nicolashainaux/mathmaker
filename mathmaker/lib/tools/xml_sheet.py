@@ -33,31 +33,40 @@ from lib.sheet import exercise
 from lib.sheet.exercise import question
 from lib import error
 
-D = settings.libdir + "sheet/frameworks/"
-XML_SCHEMA_PATH = D + "sheet.xsd"
-DM = D + "mental_calculation/"
-L11_1 = "lev11_1/"
-L11_2 = "lev11_2/"
-
-XML_SHEETS = {
-    'tables2_9': DM + L11_1 + "tables2_9.xml",
-    'divisions': DM + L11_1 + "divisions.xml",
-    'multi_hole_tables2_9': DM + L11_1 + "multi_hole_tables2_9.xml",
-    'multi_hole_any_nb': DM + L11_1 + "multi_hole_any_nb.xml",
-    'multi_11_15_25': DM + L11_1 + "multi_11_15_25.xml",
-    'multi_decimal': DM + L11_1 + "multi_decimal.xml",
-    'multi_reversed': DM + L11_1 + "multi_reversed.xml",
-    'ranks': DM + L11_1 + "ranks.xml",
-    'mini_problems': DM + L11_1 + "mini_problems.xml",
-    'test_11_1': DM + L11_1 + "test_11_1.xml",
-    'operations_vocabulary': DM + L11_2 + "operations_vocabulary.xml",
-    'multi_divi_10_100_1000': DM + L11_2 + "multi_divi_10_100_1000.xml",
-    'rectangles': DM + L11_2 + "rectangles.xml",
-    'test_11_2': DM + L11_2 + "test_11_2.xml",
-    'polygons_perimeters': DM + L11_2 + "polygons_perimeters.xml"}
 
 CATALOG = {'mental_calculation': exercise.X_MentalCalculation}
 # 'generic': exercise.X_Generic
+
+
+def get_xml_frameworks_path():
+    return settings.libdir + 'sheet/frameworks/'
+
+
+def get_xml_schema_path():
+    return get_xml_frameworks_path() + 'sheet.xsd'
+
+
+def get_xml_sheets_paths():
+    D = get_xml_frameworks_path()
+    DM = D + "mental_calculation/"
+    L11_1 = "lev11_1/"
+    L11_2 = "lev11_2/"
+    return {
+        'tables2_9': DM + L11_1 + "tables2_9.xml",
+        'divisions': DM + L11_1 + "divisions.xml",
+        'multi_hole_tables2_9': DM + L11_1 + "multi_hole_tables2_9.xml",
+        'multi_hole_any_nb': DM + L11_1 + "multi_hole_any_nb.xml",
+        'multi_11_15_25': DM + L11_1 + "multi_11_15_25.xml",
+        'multi_decimal': DM + L11_1 + "multi_decimal.xml",
+        'multi_reversed': DM + L11_1 + "multi_reversed.xml",
+        'ranks': DM + L11_1 + "ranks.xml",
+        'mini_problems': DM + L11_1 + "mini_problems.xml",
+        'test_11_1': DM + L11_1 + "test_11_1.xml",
+        'operations_vocabulary': DM + L11_2 + "operations_vocabulary.xml",
+        'multi_divi_10_100_1000': DM + L11_2 + "multi_divi_10_100_1000.xml",
+        'rectangles': DM + L11_2 + "rectangles.xml",
+        'test_11_2': DM + L11_2 + "test_11_2.xml",
+        'polygons_perimeters': DM + L11_2 + "polygons_perimeters.xml"}
 
 
 def _get_attributes(node, tag, output=[]):
@@ -104,11 +113,11 @@ def get_sheet_config(file_name):
     """
     # Validation of the xml file
     # xmllint --noout --schema sheet.xsd file_name
-    with open(XML_SCHEMA_PATH, 'r'):
+    with open(get_xml_schema_path(), 'r'):
         call_xmllint = subprocess.Popen([settings.xmllint,
                                          "--noout",
                                          "--schema",
-                                         XML_SCHEMA_PATH,
+                                         get_xml_schema_path(),
                                          file_name],
                                         stderr=subprocess.PIPE)
         returncode = call_xmllint.wait()

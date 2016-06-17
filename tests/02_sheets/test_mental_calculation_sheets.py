@@ -22,8 +22,10 @@
 
 
 from lib import shared
-from lib.tools.xml_sheet import XML_SHEETS
+from lib.tools.xml_sheet import get_xml_sheets_paths
 from lib.sheet import S_Generic
+
+XML_SHEETS = get_xml_sheets_paths()
 
 
 def test_tables2_9():

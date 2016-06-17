@@ -23,8 +23,6 @@
 import settings
 from lib import shared
 
-log = settings.dbg_logger.getChild('db')
-
 
 class source(object):
     ##
@@ -124,6 +122,7 @@ class source(object):
     #   @brief  Executes the query. If no result, resets the table and executes
     #           the query again. Returns the query's result.
     def _query_result(self, cmd, **kwargs):
+        log = settings.dbg_logger.getChild('db')
         log.debug(cmd)
         qr = tuple(shared.db.execute(cmd))
         if not len(qr):

@@ -36,10 +36,7 @@ from . import question
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
-AVAILABLE_X_KIND_VALUES = \
-    {'tabular': 'default',
-     'slideshow': 'default'
-    }
+AVAILABLE_X_KIND_VALUES = {'tabular': 'default', 'slideshow': 'default'}
 
 MAX_NB_OF_QUESTIONS = 40
 
@@ -225,8 +222,9 @@ class X_MentalCalculation(X_Structure):
     #   @return One instance of exercise.X_MentalCalculation
     def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
-        from lib import sheet
-        from lib.tools.xml_sheet import get_q_kinds_from, XML_SHEETS
+        from lib.tools.xml_sheet import get_q_kinds_from, get_xml_sheets_paths
+
+        XML_SHEETS = get_xml_sheets_paths()
 
         mc_mm_file = options['filename'] if 'filename' in options \
                                          else XML_SHEETS[\

@@ -21,15 +21,14 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
-import sys, subprocess, shlex
-import gettext, locale
+import subprocess
+import shlex
+import gettext
 from distutils.version import LooseVersion
 
 import settings
 from lib import __software_name__
 from lib.common import latex
-
-log = settings.mainlogger
 
 
 def check_dependency(name, goal, path_to, required_version_nb):
@@ -49,6 +48,7 @@ def check_dependency(name, goal, path_to, required_version_nb):
     :type required_version_nb: str
     :rtype: bool
     """
+    log = settings.mainlogger
     err_msg = "mathmaker requires {n} to {g}".format(n=name, g=goal)
     the_call = None
     try:
@@ -86,8 +86,10 @@ def check_dependencies():
                                  settings.xmllint, "20901"))
 
 
-def install_gettext_translations(language=settings.language):
+def install_gettext_translations(**kwargs):
     """Will install output's language (gettext functions)"""
+    log = settings.mainlogger
+    language = kwargs.get('language', settings.language)
     err_msg = 'gettext returned the following message:"{gettext_msg}"'\
               '. It means the desired language ({l}) isn\'t available yet '\
               'in mathmaker. Can\'t continue. Stopping mathmaker.'
@@ -102,8 +104,7 @@ def install_gettext_translations(language=settings.language):
     return True
 
 
-def check_settings_consistency(language=settings.language,
-                               od=settings.outputdir):
+def check_settings_consistency(**kwargs):
     """
     Will check the consistency of several settings values.
 
@@ -112,6 +113,9 @@ def check_settings_consistency(language=settings.language,
     :param od: output directory. Shouldn't be else than settings.outputdir
     :type od: str
     """
+    log = settings.mainlogger
+    language = kwargs.get('language', settings.language)
+    od = kwargs.get('od', settings.outputdir)
     # Check the chosen language belongs to latex.LANGUAGE_PACKAGE_NAME
     err_msg = 'The language chosen for output (' + language \
               + ') is not defined in the LaTeX packages known by mathmaker. '\
@@ -132,4 +136,3 @@ def check_settings_consistency(language=settings.language,
         log.warning('The output directory is correct but should end '
                     'with a /. Correcting it.')
         settings.outputdir += '/'
-

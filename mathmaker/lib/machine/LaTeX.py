@@ -29,7 +29,6 @@ from lib.common.cst import *
 from lib import is_
 from lib.core.base import Printable, Drawable
 from lib import *
-import lib.core.base_calculus
 
 from . import Structure
 
@@ -529,13 +528,12 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
         return result.replace(" $~", "$~").replace("~$~", "$~")
 
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Creates a LaTeX string of the given object
     def type_string(self, objct, **options):
         if isinstance(objct, Printable):
-            lib.core.base_calculus.expression_begins = True
+            options.update({'force_expression_begins': True})
             return objct.into_str(**options)
         elif is_.a_number(objct) or is_.a_string(objct):
             return str(objct)

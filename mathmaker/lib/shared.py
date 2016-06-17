@@ -26,6 +26,7 @@ import settings
 import lib.machine
 from lib.common import latex
 
+
 def init():
     global db
     global four_letters_words_source

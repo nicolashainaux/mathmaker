@@ -29,14 +29,15 @@ import locale
 from lib import __info__, __software_name__
 
 import settings
-settings.init()
 from lib import shared
 from lib import startup_actions
 from lib import sheet
-from lib.tools.xml_sheet import XML_SHEETS
+from lib.tools.xml_sheet import get_xml_sheets_paths
 
 
 def main():
+    settings.init()
+    XML_SHEETS = get_xml_sheets_paths()
     log = settings.mainlogger
     startup_actions.check_dependencies()
     parser = argparse.ArgumentParser(description='Creates maths exercices and '
