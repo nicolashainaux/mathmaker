@@ -23,14 +23,14 @@
 import math
 import decimal
 
-import settings
+from mathmaker import settings
 from lib import *
 from .base import *
 from .base_calculus import *
 from lib.maths_lib import *
 from lib.common.cst import *
 from .utils import *
-from settings import default
+from mathmaker.lib import shared
 from lib.common.latex import MARKUP
 
 
@@ -364,11 +364,11 @@ class Equation(ComposedCalculable):
     #              |SubstitutableEquality
     #   @return One instance of Equation
     def __init__(self, arg, **options):
-        self._name = default.EQUATION_NAME
+        self._name = settings.default.EQUATION_NAME
         self._number = ''
         self._left_hand_side = None
         self._right_hand_side = None
-        self._variable_letter = default.MONOMIAL_LETTER
+        self._variable_letter = settings.default.MONOMIAL_LETTER
 
         # First determine name and number of the equation
         if 'name' in options and is_.a_string(options['name']):
@@ -1657,7 +1657,7 @@ class CrossProductEquation(Equation):
             self._variable_obj = arg.variable_obj.clone()
 
         else:
-            self._name = default.EQUATION_NAME
+            self._name = settings.default.EQUATION_NAME
             self._number = ''
 
             if len(arg) == 2:
@@ -1846,7 +1846,6 @@ class Table(Printable):
                 for j in range(len(self)):
                     content += [self.cell[i][j].printed]
 
-            from lib.shared import machine
             result = shared.machine\
                      .create_table((2, len(self)),
                                     content,

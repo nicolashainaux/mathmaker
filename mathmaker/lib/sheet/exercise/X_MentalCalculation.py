@@ -20,17 +20,12 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import shlex
-from decimal import Decimal
 import copy
 import random
-from collections import deque, namedtuple
-
-import sys
+from collections import namedtuple
 
 from lib import *
-from settings import default
-from lib import shared
+from mathmaker.lib import shared
 from .X_Structure import X_Structure
 from . import question
 

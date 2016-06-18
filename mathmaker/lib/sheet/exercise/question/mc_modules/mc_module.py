@@ -29,7 +29,7 @@ from lib.core.base_calculus import Product, Quotient, Item
 from lib.core.base_geometry import Point
 from lib.core.geometry import Rectangle, Square
 from lib import error
-from lib import shared
+from mathmaker.lib import shared
 from lib.common.cst import COMMON_LENGTH_UNITS
 from lib.tools.wording import setup_wording_format_of
 

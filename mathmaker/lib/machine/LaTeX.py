@@ -22,7 +22,7 @@
 
 import sys
 
-import settings
+from mathmaker import settings
 from lib.common import latex
 from lib.tools import header_comment
 from lib.common.cst import *

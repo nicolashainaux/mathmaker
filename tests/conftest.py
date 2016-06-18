@@ -23,15 +23,12 @@
 import sys
 import gettext
 
-sys.path.insert(1, 'mathmaker')
 from lib import __software_name__
-import settings
+from mathmaker import settings
+from mathmaker.lib import shared
 settings.init()
 settings.language = 'en'
 settings.locale = 'en_US.UTF-8'
-gettext.translation(__software_name__,
-                    settings.localedir,
-                    ['en']).install()
+gettext.translation(__software_name__, settings.localedir, ['en']).install()
 settings.outputdir = settings.projectdir + 'tests/outfiles/'
-from lib import shared
 shared.init()

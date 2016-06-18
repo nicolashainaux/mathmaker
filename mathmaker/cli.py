@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Copyright 2006-2015 Nicolas Hainaux <nico_h@users.sourceforge.net>
@@ -26,16 +25,15 @@ import os
 import argparse
 import locale
 
-from lib import __info__, __software_name__
+from .lib import __info__, __software_name__
+from . import settings
+from .lib import shared
+from .lib import startup_actions
+from .lib import sheet
+from .lib.tools.xml_sheet import get_xml_sheets_paths
 
-import settings
-from lib import shared
-from lib import startup_actions
-from lib import sheet
-from lib.tools.xml_sheet import get_xml_sheets_paths
 
-
-def main():
+def entry_point():
     settings.init()
     XML_SHEETS = get_xml_sheets_paths()
     log = settings.mainlogger
@@ -116,5 +114,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    entry_point()
     # print("--- {sec} seconds ---".format(sec=time.time() - start_time))

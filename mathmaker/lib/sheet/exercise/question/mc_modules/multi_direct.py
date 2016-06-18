@@ -22,7 +22,7 @@
 
 import os
 
-from lib import shared
+from mathmaker.lib import shared
 from lib.core.base_calculus import Product
 from lib.core.root_calculus import Value
 from . import mc_module

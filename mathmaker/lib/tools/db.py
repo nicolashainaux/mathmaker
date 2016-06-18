@@ -20,8 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import settings
-from lib import shared
+from mathmaker import settings
+from mathmaker.lib import shared
 
 
 class source(object):

@@ -26,7 +26,7 @@ import shlex
 import gettext
 from distutils.version import LooseVersion
 
-import settings
+from mathmaker import settings
 from lib import __software_name__
 from lib.common import latex
 

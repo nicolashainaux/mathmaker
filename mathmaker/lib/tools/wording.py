@@ -24,9 +24,9 @@ import random
 import copy
 import re
 
-import settings
+from mathmaker import settings
 from lib import error
-from lib import shared
+from mathmaker.lib import shared
 from lib.core.root_calculus import Unit, Value
 from lib.common.cst import UNIT_KINDS, COMMON_LENGTH_UNITS, CURRENCIES_DICT
 

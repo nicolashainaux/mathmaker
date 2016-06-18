@@ -45,9 +45,7 @@ setup(
     long_description=read('README.rst', 'CHANGELOG.rst'),
     packages=find_packages(exclude=['tests']),
     entry_points={
-        'console_scripts': [
-            'mathmaker = mathmaker.cli:main',
-        ],
+        'console_scripts': ['mathmaker = mathmaker.cli:entry_point'],
     },
     include_package_data=True,
     platforms='any',

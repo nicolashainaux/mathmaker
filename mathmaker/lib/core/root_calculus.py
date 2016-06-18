@@ -35,11 +35,9 @@ from lib import is_
 from lib.maths_lib import *
 from decimal import *
 from lib.common.cst import *
-import settings
 
 from lib.common.latex import MARKUP
 
-# locale.setlocale(locale.LC_ALL, settings.locale)
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------

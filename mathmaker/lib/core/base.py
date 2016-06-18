@@ -23,7 +23,7 @@
 import os
 import subprocess
 
-import settings
+from mathmaker import settings
 from lib import error
 from lib.tools import header_comment
 

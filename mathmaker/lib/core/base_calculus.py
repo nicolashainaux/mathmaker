@@ -30,17 +30,14 @@ import math
 from decimal import *
 
 import lib.core
-import settings
+from mathmaker import settings
 from .base import *
 from .root_calculus import *
 from lib import randomly
 from lib.maths_lib import *
 from lib.common.cst import *
-from settings import default
 from .utils import *
 from lib.common.latex import MARKUP
-
-# locale.setlocale(locale.LC_ALL, settings.locale)
 
 
 # Maximum ratio of constant terms accepted during the creation of random
@@ -6505,7 +6502,7 @@ class Monomial(Product):
         # 1st CASE: DEFAULT
         if arg == DEFAULT:
             factor1 = Item(1)
-            factor2 = Item(('+', default.MONOMIAL_LETTER, 0))
+            factor2 = Item(('+', settings.default.MONOMIAL_LETTER, 0))
             self._element.append(factor1)
             self._element.append(factor2)
 
@@ -6524,7 +6521,7 @@ class Monomial(Product):
              and (is_.a_number(arg[1]) and is_.an_integer(arg[2])):
             # __
             factor1 = Item((arg[0], arg[1]))
-            factor2 = Item(('+', default.MONOMIAL_LETTER, arg[2]))
+            factor2 = Item(('+', settings.default.MONOMIAL_LETTER, arg[2]))
             self._element.append(factor1)
             self._element.append(factor2)
 
@@ -6542,7 +6539,7 @@ class Monomial(Product):
             else:
                 factor1 = arg[0].clone()
 
-            factor2 = Item(('+', default.MONOMIAL_LETTER, arg[1]))
+            factor2 = Item(('+', settings.default.MONOMIAL_LETTER, arg[1]))
             self._element.append(factor1)
             self._element.append(factor2)
 
@@ -6558,7 +6555,7 @@ class Monomial(Product):
             factor1 = Item((randomly.sign(plus_signs_ratio=aux_ratio),
                             randomly.integer(1, arg[1])))
             factor2 = Item(('+',
-                            default.MONOMIAL_LETTER,
+                            settings.default.MONOMIAL_LETTER,
                             randomly.integer(0, arg[2])))
             self._element.append(factor1)
             self._element.append(factor2)

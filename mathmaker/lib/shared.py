@@ -22,7 +22,7 @@
 
 import sqlite3
 
-import settings
+from mathmaker import settings
 import lib.machine
 from lib.common import latex
 

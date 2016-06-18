@@ -20,7 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib import shared
+from mathmaker.lib import shared
 from lib import *
 from lib.common.cst import *
 from .Q_Structure import Q_Structure
