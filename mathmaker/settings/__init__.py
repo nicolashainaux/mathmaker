@@ -20,19 +20,18 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import os, sys
-import configparser
-import logging, logging.config
-import yaml
+import os
+import logging
+import logging.config
 from shutil import copyfile
 
 from lib.tools.ext_dict import ext_dict
 from lib.tools.config import load_config
 
 AVAILABLE = {'LANGUAGES': ['fr', 'fr_FR', 'en', 'en_US', 'en_GB'],
-             'CURRENCY':  {'fr': 'euro', 'fr_FR': 'euro',
-                           'en': 'dollar', 'en_US': 'dollar',
-                           'en_GB': 'sterling'}}
+             'CURRENCY': {'fr': 'euro', 'fr_FR': 'euro',
+                          'en': 'dollar', 'en_US': 'dollar',
+                          'en_GB': 'sterling'}}
 
 
 class ContextFilter(logging.Filter):
@@ -44,11 +43,11 @@ class ContextFilter(logging.Filter):
         return True
 
 
-def config_dbglogger():
+def config_dbglogger(sd):
     """
     Configures dbg_logger, using to the configuration file values.
     """
-    d = ext_dict(load_config('debug_conf', settingsdir)).flat()
+    d = ext_dict(load_config('debug_conf', sd)).flat()
     for loggername, level in d.items():
         l = logging.getLogger(loggername)
         l.setLevel(getattr(logging, level))
@@ -66,11 +65,13 @@ class default_object(object):
 
 
 class path_object(object):
-    def __init__(self):
-        self.db = datadir + "mathmaker.db"
-        self.db_dist = datadir + "mathmaker.db-dist"
-        if not os.path.isfile(self.db)\
-            or os.path.getmtime(self.db) < os.path.getmtime(self.db_dist):
+    def __init__(self, **dirs):
+        dd = dirs.get('dd')
+        self.db = dd + "mathmaker.db"
+        self.db_dist = dd + "mathmaker.db-dist"
+        if (not os.path.isfile(self.db)
+            or os.path.getmtime(self.db) < os.path.getmtime(self.db_dist)):
+            # __
             copyfile(self.db_dist, self.db)
 
 
@@ -96,7 +97,7 @@ def init():
     __abspath = os.path.abspath(__file__)
     __l1 = len(__process_name)
     __l2 = len(__abspath)
-    rootdir = __abspath[:__l2-__l1][:-(len(settings_dirname))]
+    rootdir = __abspath[:__l2 - __l1][:-(len(settings_dirname))]
     localedir = rootdir + "locale/"
     libdir = rootdir + "lib/"
     datadir = rootdir + "data/"
@@ -104,13 +105,13 @@ def init():
     projectdir = rootdir[:-len('mathmaker/')]
 
     default = default_object()
-    path = path_object()
+    path = path_object(dd=datadir)
 
     logging.config.dictConfig(load_config('logging', settingsdir))
     mainlogger = logging.getLogger("__main__")
     mainlogger.info("Starting...")
     dbg_logger = logging.getLogger("dbg")
-    config_dbglogger()
+    config_dbglogger(settingsdir)
 
     CONFIG = load_config('user_config', settingsdir)
     xmllint = CONFIG["PATHS"]["XMLLINT"]
@@ -140,5 +141,4 @@ def init():
         mainlogger.warning('The output directory read from the '
                            'configuration is not a valid directory.')
     round_letters_in_math_expr = CONFIG['LATEX']\
-                                 .get('ROUND_LETTERS_IN_MATH_EXPR', False)
-
+        .get('ROUND_LETTERS_IN_MATH_EXPR', False)
