@@ -13,3 +13,4 @@ htmlcov/
 .coverage
 .cache/
 tests/outfiles/
+*.mo
