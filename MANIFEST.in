@@ -11,7 +11,6 @@ recursive-include mathmaker *.pot
 recursive-include mathmaker *.xml
 recursive-include mathmaker *.xsd
 recursive-include mathmaker *.yaml
-recursive-include *.db-dist
 recursive-include tests *.py
 prune tools/*
 prune tools
