@@ -1,10 +1,21 @@
 include *.rst
 include *.md
 include *.txt
-include *.xml
-include *.db-dist
-include *.yaml
-#include mathmaker
-include .gitignore
+include .flake8
+include MANIFEST.in
+include tox.ini
 include LICENSE
-
+include mathmaker/data/mathmaker.db-dist
+recursive-include mathmaker *.po
+recursive-include mathmaker *.pot
+recursive-include mathmaker *.xml
+recursive-include mathmaker *.xsd
+recursive-include mathmaker *.yaml
+recursive-include *.db-dist
+recursive-include tests *.py
+prune tools/*
+prune tools
+prune mathmaker/lib/core/triangles_architecture.png
+prune mathmaker/lib/install
+prune mathmaker/settings/dev
+prune tests/01_core_objects/YET_TO_ADD*.py
