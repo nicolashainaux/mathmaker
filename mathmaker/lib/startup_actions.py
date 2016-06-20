@@ -27,7 +27,7 @@ import gettext
 from distutils.version import LooseVersion
 
 from mathmaker import settings
-from mathmaker.lib import __software_name__
+from mathmaker import __software_name__
 from mathmaker.lib.common import latex
 
 

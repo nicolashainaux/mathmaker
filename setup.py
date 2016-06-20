@@ -52,16 +52,16 @@ def create_mo_files():
     return data_files
 
 setup(
-    name=mathmaker.lib.__software_name__,
-    version=mathmaker.lib.__version__,
+    name=mathmaker.__software_name__,
+    version=mathmaker.__version__,
     url='http://github.com/zezollo/mathmaker/',
-    license=mathmaker.lib.__licence__,
-    author=mathmaker.lib.__author__,
+    license=mathmaker.__licence__,
+    author=mathmaker.__author__,
     tests_require=['pytest'],
     install_requires=['PyYAML>=3.11',
                       'polib>=1.0.7'],
     cmdclass={'test': PyTest},
-    author_email=mathmaker.lib.__author_email__,
+    author_email=mathmaker.__author_email__,
     description='Mathmaker creates automatically elementary maths exercises '
                 'and their (detailed) answers.',
     long_description=read('README.rst', 'CHANGELOG.rst'),
@@ -77,7 +77,7 @@ setup(
         'Programming Language :: Python',
         'Development Status :: 3 - Alpha',
         'Natural Language :: English',
-        'License :: OSI Approved :: ' + mathmaker.lib.__licence__],
+        'License :: OSI Approved :: ' + mathmaker.__licence__],
     extras_require={'testing': ['pytest']}
 )
 

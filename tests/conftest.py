@@ -20,10 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  US
 
-import sys
 import gettext
 
-from mathmaker.lib import __software_name__
+from mathmaker import __software_name__
 from mathmaker import settings
 from mathmaker.lib import shared
 settings.init()

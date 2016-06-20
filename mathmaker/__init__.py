@@ -22,4 +22,21 @@
 
 from . import lib
 
+__software_name__ = 'mathmaker'
+__version__ = '0.6.1 (alpha)'
+__author__ = 'Nicolas Hainaux'
+__author_email__ = 'nh.techn@gmail.com'
+__licence__ = 'GNU General Public License v3 or later (GPLv3+)'
+__url__ = 'http://mathmaker.sourceforge.net'
+__copyright__ = 'Copyright 2006-2016'
+__contact__ = '{author} <{author_email}>'\
+              .format(author=__author__, author_email=__author_email__)
+__licence_info__ = '{software_ref} is free software. Its license is '\
+                   '{software_license}.'
+__url_info__ = 'Further details on {software_website}'
+__info__ = '{software_name} {v}\nLicense: {l}\n{c} {contact}'\
+           .format(software_name=__software_name__,
+                   v=__version__, l=__licence__, c=__copyright__,
+                   contact=__contact__)
+
 __all__ = ['lib', ]

@@ -25,7 +25,7 @@ import os
 import argparse
 import locale
 
-from .lib import __info__, __software_name__
+from . import __info__, __software_name__
 from . import settings
 from .lib import shared
 from .lib import startup_actions

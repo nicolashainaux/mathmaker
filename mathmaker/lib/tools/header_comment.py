@@ -20,8 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import __software_name__, __version__, __licence_info__, __contact__
-from mathmaker.lib import __licence__, __url_info__, __url__, __copyright__
+from mathmaker import (__software_name__, __version__,
+                       __licence_info__, __contact__)
+from mathmaker import __licence__, __url_info__, __url__, __copyright__
 
 
 def generate(document_format, comment_symbol="%"):
