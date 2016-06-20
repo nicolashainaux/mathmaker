@@ -1,0 +1,1218 @@
+# MATHMAKER-FOUR LETTERS WORDS TEMPLATE PO FILE.
+# Copyright (C) 2006-2016 Nicolas Hainaux
+# This file is distributed under the same license as the mathmaker package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mathmaker 0.6\n"
+"Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
+"POT-Creation-Date: 2016-03-17 13:12+0100\n"
+"PO-Revision-Date: 2016-06-20 18:17+0100\n"
+"Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_GB\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: locale/xml_additions/w4l/w4l.xml:57
+msgid "FOUR_LETTERS_WORD_052"
+msgstr "HARD"
+
+#: locale/xml_additions/w4l/w4l.xml:289
+msgid "FOUR_LETTERS_WORD_284"
+msgstr "WISE"
+
+#: locale/xml_additions/w4l/w4l.xml:285
+msgid "FOUR_LETTERS_WORD_280"
+msgstr "COIL"
+
+#: locale/xml_additions/w4l/w4l.xml:158
+msgid "FOUR_LETTERS_WORD_153"
+msgstr "LEAK"
+
+#: locale/xml_additions/w4l/w4l.xml:203
+msgid "FOUR_LETTERS_WORD_198"
+msgstr "BEAN"
+
+#: locale/xml_additions/w4l/w4l.xml:59
+msgid "FOUR_LETTERS_WORD_054"
+msgstr "HALF"
+
+#: locale/xml_additions/w4l/w4l.xml:162
+msgid "FOUR_LETTERS_WORD_157"
+msgstr "ACID"
+
+#: locale/xml_additions/w4l/w4l.xml:128
+msgid "FOUR_LETTERS_WORD_123"
+msgstr "BANG"
+
+#: locale/xml_additions/w4l/w4l.xml:174
+msgid "FOUR_LETTERS_WORD_169"
+msgstr "BASH"
+
+#: locale/xml_additions/w4l/w4l.xml:13
+msgid "FOUR_LETTERS_WORD_008"
+msgstr "GLUE"
+
+#: locale/xml_additions/w4l/w4l.xml:274
+msgid "FOUR_LETTERS_WORD_269"
+msgstr "DECK"
+
+#: locale/xml_additions/w4l/w4l.xml:258
+msgid "FOUR_LETTERS_WORD_253"
+msgstr "WILD"
+
+#: locale/xml_additions/w4l/w4l.xml:6
+msgid "FOUR_LETTERS_WORD_001"
+msgstr "IRON"
+
+#: locale/xml_additions/w4l/w4l.xml:60
+msgid "FOUR_LETTERS_WORD_055"
+msgstr "PINK"
+
+#: locale/xml_additions/w4l/w4l.xml:178
+msgid "FOUR_LETTERS_WORD_173"
+msgstr "GEMS"
+
+#: locale/xml_additions/w4l/w4l.xml:217
+msgid "FOUR_LETTERS_WORD_212"
+msgstr "BEAM"
+
+#: locale/xml_additions/w4l/w4l.xml:169
+msgid "FOUR_LETTERS_WORD_164"
+msgstr "EURO"
+
+#: locale/xml_additions/w4l/w4l.xml:98
+msgid "FOUR_LETTERS_WORD_093"
+msgstr "NICE"
+
+#: locale/xml_additions/w4l/w4l.xml:219
+msgid "FOUR_LETTERS_WORD_214"
+msgstr "LENS"
+
+#: locale/xml_additions/w4l/w4l.xml:277
+msgid "FOUR_LETTERS_WORD_272"
+msgstr "LAMB"
+
+#: locale/xml_additions/w4l/w4l.xml:161
+msgid "FOUR_LETTERS_WORD_156"
+msgstr "LYNX"
+
+#: locale/xml_additions/w4l/w4l.xml:227
+msgid "FOUR_LETTERS_WORD_222"
+msgstr "FROG"
+
+#: locale/xml_additions/w4l/w4l.xml:291
+msgid "FOUR_LETTERS_WORD_286"
+msgstr "CORE"
+
+#: locale/xml_additions/w4l/w4l.xml:97
+msgid "FOUR_LETTERS_WORD_092"
+msgstr "LAMP"
+
+#: locale/xml_additions/w4l/w4l.xml:244
+msgid "FOUR_LETTERS_WORD_239"
+msgstr "TUNE"
+
+#: locale/xml_additions/w4l/w4l.xml:233
+msgid "FOUR_LETTERS_WORD_228"
+msgstr "TECH"
+
+#: locale/xml_additions/w4l/w4l.xml:100
+msgid "FOUR_LETTERS_WORD_095"
+msgstr "ONCE"
+
+#: locale/xml_additions/w4l/w4l.xml:275
+msgid "FOUR_LETTERS_WORD_270"
+msgstr "HEAP"
+
+#: locale/xml_additions/w4l/w4l.xml:43
+msgid "FOUR_LETTERS_WORD_038"
+msgstr "NODE"
+
+#: locale/xml_additions/w4l/w4l.xml:36
+msgid "FOUR_LETTERS_WORD_031"
+msgstr "MILD"
+
+#: locale/xml_additions/w4l/w4l.xml:24
+msgid "FOUR_LETTERS_WORD_019"
+msgstr "PAGE"
+
+#: locale/xml_additions/w4l/w4l.xml:166
+msgid "FOUR_LETTERS_WORD_161"
+msgstr "NEAT"
+
+#: locale/xml_additions/w4l/w4l.xml:93
+msgid "FOUR_LETTERS_WORD_088"
+msgstr "GIFT"
+
+#: locale/xml_additions/w4l/w4l.xml:212
+msgid "FOUR_LETTERS_WORD_207"
+msgstr "COLD"
+
+#: locale/xml_additions/w4l/w4l.xml:99
+msgid "FOUR_LETTERS_WORD_094"
+msgstr "BREW"
+
+#: locale/xml_additions/w4l/w4l.xml:278
+msgid "FOUR_LETTERS_WORD_273"
+msgstr "POEM"
+
+#: locale/xml_additions/w4l/w4l.xml:74
+msgid "FOUR_LETTERS_WORD_069"
+msgstr "PATH"
+
+#: locale/xml_additions/w4l/w4l.xml:243
+msgid "FOUR_LETTERS_WORD_238"
+msgstr "SILK"
+
+#: locale/xml_additions/w4l/w4l.xml:211
+msgid "FOUR_LETTERS_WORD_206"
+msgstr "HERO"
+
+#: locale/xml_additions/w4l/w4l.xml:108
+msgid "FOUR_LETTERS_WORD_103"
+msgstr "CITY"
+
+#: locale/xml_additions/w4l/w4l.xml:266
+msgid "FOUR_LETTERS_WORD_261"
+msgstr "SHIP"
+
+#: locale/xml_additions/w4l/w4l.xml:280
+msgid "FOUR_LETTERS_WORD_275"
+msgstr "LANE"
+
+#: locale/xml_additions/w4l/w4l.xml:172
+msgid "FOUR_LETTERS_WORD_167"
+msgstr "BAIT"
+
+#: locale/xml_additions/w4l/w4l.xml:175
+msgid "FOUR_LETTERS_WORD_170"
+msgstr "FONT"
+
+#: locale/xml_additions/w4l/w4l.xml:282
+msgid "FOUR_LETTERS_WORD_277"
+msgstr "SNOW"
+
+#: locale/xml_additions/w4l/w4l.xml:160
+msgid "FOUR_LETTERS_WORD_155"
+msgstr "RAIN"
+
+#: locale/xml_additions/w4l/w4l.xml:27
+msgid "FOUR_LETTERS_WORD_022"
+msgstr "CALM"
+
+#: locale/xml_additions/w4l/w4l.xml:300
+msgid "FOUR_LETTERS_WORD_295"
+msgstr "ZEBU"
+
+#: locale/xml_additions/w4l/w4l.xml:94
+msgid "FOUR_LETTERS_WORD_089"
+msgstr "GLAD"
+
+#: locale/xml_additions/w4l/w4l.xml:11
+msgid "FOUR_LETTERS_WORD_006"
+msgstr "DUSK"
+
+#: locale/xml_additions/w4l/w4l.xml:260
+msgid "FOUR_LETTERS_WORD_255"
+msgstr "OPEN"
+
+#: locale/xml_additions/w4l/w4l.xml:41
+msgid "FOUR_LETTERS_WORD_036"
+msgstr "MILK"
+
+#: locale/xml_additions/w4l/w4l.xml:223
+msgid "FOUR_LETTERS_WORD_218"
+msgstr "EVIL"
+
+#: locale/xml_additions/w4l/w4l.xml:20
+msgid "FOUR_LETTERS_WORD_015"
+msgstr "DUCK"
+
+#: locale/xml_additions/w4l/w4l.xml:216
+msgid "FOUR_LETTERS_WORD_211"
+msgstr "WOLF"
+
+#: locale/xml_additions/w4l/w4l.xml:226
+msgid "FOUR_LETTERS_WORD_221"
+msgstr "EASY"
+
+#: locale/xml_additions/w4l/w4l.xml:241
+msgid "FOUR_LETTERS_WORD_236"
+msgstr "CYAN"
+
+#: locale/xml_additions/w4l/w4l.xml:113
+msgid "FOUR_LETTERS_WORD_108"
+msgstr "MAIL"
+
+#: locale/xml_additions/w4l/w4l.xml:259
+msgid "FOUR_LETTERS_WORD_254"
+msgstr "PLUM"
+
+#: locale/xml_additions/w4l/w4l.xml:208
+msgid "FOUR_LETTERS_WORD_203"
+msgstr "BIRD"
+
+#: locale/xml_additions/w4l/w4l.xml:38
+msgid "FOUR_LETTERS_WORD_033"
+msgstr "WASP"
+
+#: locale/xml_additions/w4l/w4l.xml:186
+msgid "FOUR_LETTERS_WORD_181"
+msgstr "LAND"
+
+#: locale/xml_additions/w4l/w4l.xml:281
+msgid "FOUR_LETTERS_WORD_276"
+msgstr "SAIL"
+
+#: locale/xml_additions/w4l/w4l.xml:240
+msgid "FOUR_LETTERS_WORD_235"
+msgstr "WIDE"
+
+#: locale/xml_additions/w4l/w4l.xml:271
+msgid "FOUR_LETTERS_WORD_266"
+msgstr "EDGY"
+
+#: locale/xml_additions/w4l/w4l.xml:119
+msgid "FOUR_LETTERS_WORD_114"
+msgstr "YACK"
+
+#: locale/xml_additions/w4l/w4l.xml:150
+msgid "FOUR_LETTERS_WORD_145"
+msgstr "BANK"
+
+#: locale/xml_additions/w4l/w4l.xml:257
+msgid "FOUR_LETTERS_WORD_252"
+msgstr "LION"
+
+#: locale/xml_additions/w4l/w4l.xml:37
+msgid "FOUR_LETTERS_WORD_032"
+msgstr "KING"
+
+#: locale/xml_additions/w4l/w4l.xml:136
+msgid "FOUR_LETTERS_WORD_131"
+msgstr "YETI"
+
+#: locale/xml_additions/w4l/w4l.xml:220
+msgid "FOUR_LETTERS_WORD_215"
+msgstr "LONG"
+
+#: locale/xml_additions/w4l/w4l.xml:66
+msgid "FOUR_LETTERS_WORD_061"
+msgstr "BACK"
+
+#: locale/xml_additions/w4l/w4l.xml:261
+msgid "FOUR_LETTERS_WORD_256"
+msgstr "LEAF"
+
+#: locale/xml_additions/w4l/w4l.xml:130
+msgid "FOUR_LETTERS_WORD_125"
+msgstr "LOCH"
+
+#: locale/xml_additions/w4l/w4l.xml:105
+msgid "FOUR_LETTERS_WORD_100"
+msgstr "ALOE"
+
+#: locale/xml_additions/w4l/w4l.xml:167
+msgid "FOUR_LETTERS_WORD_162"
+msgstr "HUGE"
+
+#: locale/xml_additions/w4l/w4l.xml:50
+msgid "FOUR_LETTERS_WORD_045"
+msgstr "HERB"
+
+#: locale/xml_additions/w4l/w4l.xml:61
+msgid "FOUR_LETTERS_WORD_056"
+msgstr "LOAD"
+
+#: locale/xml_additions/w4l/w4l.xml:304
+msgid "FOUR_LETTERS_WORD_299"
+msgstr "TRUE"
+
+#: locale/xml_additions/w4l/w4l.xml:73
+msgid "FOUR_LETTERS_WORD_068"
+msgstr "ANIS"
+
+#: locale/xml_additions/w4l/w4l.xml:229
+msgid "FOUR_LETTERS_WORD_224"
+msgstr "KILO"
+
+#: locale/xml_additions/w4l/w4l.xml:72
+msgid "FOUR_LETTERS_WORD_067"
+msgstr "BELT"
+
+#: locale/xml_additions/w4l/w4l.xml:47
+msgid "FOUR_LETTERS_WORD_042"
+msgstr "SHOE"
+
+#: locale/xml_additions/w4l/w4l.xml:40
+msgid "FOUR_LETTERS_WORD_035"
+msgstr "MENU"
+
+#: locale/xml_additions/w4l/w4l.xml:115
+msgid "FOUR_LETTERS_WORD_110"
+msgstr "NAVY"
+
+#: locale/xml_additions/w4l/w4l.xml:140
+msgid "FOUR_LETTERS_WORD_135"
+msgstr "BLUE"
+
+#: locale/xml_additions/w4l/w4l.xml:75
+msgid "FOUR_LETTERS_WORD_070"
+msgstr "ATOM"
+
+#: locale/xml_additions/w4l/w4l.xml:46
+msgid "FOUR_LETTERS_WORD_041"
+msgstr "FLAT"
+
+#: locale/xml_additions/w4l/w4l.xml:164
+msgid "FOUR_LETTERS_WORD_159"
+msgstr "JOKE"
+
+#: locale/xml_additions/w4l/w4l.xml:102
+msgid "FOUR_LETTERS_WORD_097"
+msgstr "FLOW"
+
+#: locale/xml_additions/w4l/w4l.xml:245
+msgid "FOUR_LETTERS_WORD_240"
+msgstr "FOLK"
+
+#: locale/xml_additions/w4l/w4l.xml:143
+msgid "FOUR_LETTERS_WORD_138"
+msgstr "CARD"
+
+#: locale/xml_additions/w4l/w4l.xml:294
+msgid "FOUR_LETTERS_WORD_289"
+msgstr "MASK"
+
+#: locale/xml_additions/w4l/w4l.xml:215
+msgid "FOUR_LETTERS_WORD_210"
+msgstr "EPIC"
+
+#: locale/xml_additions/w4l/w4l.xml:163
+msgid "FOUR_LETTERS_WORD_158"
+msgstr "IOTA"
+
+#: locale/xml_additions/w4l/w4l.xml:17
+msgid "FOUR_LETTERS_WORD_012"
+msgstr "FOAL"
+
+#: locale/xml_additions/w4l/w4l.xml:263
+msgid "FOUR_LETTERS_WORD_258"
+msgstr "GLOW"
+
+#: locale/xml_additions/w4l/w4l.xml:221
+msgid "FOUR_LETTERS_WORD_216"
+msgstr "LUCK"
+
+#: locale/xml_additions/w4l/w4l.xml:206
+msgid "FOUR_LETTERS_WORD_201"
+msgstr "FORK"
+
+#: locale/xml_additions/w4l/w4l.xml:107
+msgid "FOUR_LETTERS_WORD_102"
+msgstr "LEFT"
+
+#: locale/xml_additions/w4l/w4l.xml:124
+msgid "FOUR_LETTERS_WORD_119"
+msgstr "FAKE"
+
+#: locale/xml_additions/w4l/w4l.xml:14
+msgid "FOUR_LETTERS_WORD_009"
+msgstr "BATH"
+
+#: locale/xml_additions/w4l/w4l.xml:127
+msgid "FOUR_LETTERS_WORD_122"
+msgstr "LAKE"
+
+#: locale/xml_additions/w4l/w4l.xml:171
+msgid "FOUR_LETTERS_WORD_166"
+msgstr "NAME"
+
+#: locale/xml_additions/w4l/w4l.xml:52
+msgid "FOUR_LETTERS_WORD_047"
+msgstr "NINE"
+
+#: locale/xml_additions/w4l/w4l.xml:88
+msgid "FOUR_LETTERS_WORD_083"
+msgstr "DRUM"
+
+#: locale/xml_additions/w4l/w4l.xml:121
+msgid "FOUR_LETTERS_WORD_116"
+msgstr "LEAN"
+
+#: locale/xml_additions/w4l/w4l.xml:184
+msgid "FOUR_LETTERS_WORD_179"
+msgstr "RICE"
+
+#: locale/xml_additions/w4l/w4l.xml:138
+msgid "FOUR_LETTERS_WORD_133"
+msgstr "MAZE"
+
+#: locale/xml_additions/w4l/w4l.xml:272
+msgid "FOUR_LETTERS_WORD_267"
+msgstr "KORA"
+
+#: locale/xml_additions/w4l/w4l.xml:44
+msgid "FOUR_LETTERS_WORD_039"
+msgstr "ALTO"
+
+#: locale/xml_additions/w4l/w4l.xml:265
+msgid "FOUR_LETTERS_WORD_260"
+msgstr "CUTE"
+
+#: locale/xml_additions/w4l/w4l.xml:170
+msgid "FOUR_LETTERS_WORD_165"
+msgstr "ZERO"
+
+#: locale/xml_additions/w4l/w4l.xml:81
+msgid "FOUR_LETTERS_WORD_076"
+msgstr "PUMA"
+
+#: locale/xml_additions/w4l/w4l.xml:292
+msgid "FOUR_LETTERS_WORD_287"
+msgstr "HEAD"
+
+#: locale/xml_additions/w4l/w4l.xml:142
+msgid "FOUR_LETTERS_WORD_137"
+msgstr "MIND"
+
+#: locale/xml_additions/w4l/w4l.xml:129
+msgid "FOUR_LETTERS_WORD_124"
+msgstr "SEAL"
+
+#: locale/xml_additions/w4l/w4l.xml:159
+msgid "FOUR_LETTERS_WORD_154"
+msgstr "JUDO"
+
+#: locale/xml_additions/w4l/w4l.xml:157
+msgid "FOUR_LETTERS_WORD_152"
+msgstr "SAND"
+
+#: locale/xml_additions/w4l/w4l.xml:109
+msgid "FOUR_LETTERS_WORD_104"
+msgstr "WAVE"
+
+#: locale/xml_additions/w4l/w4l.xml:204
+msgid "FOUR_LETTERS_WORD_199"
+msgstr "THIN"
+
+#: locale/xml_additions/w4l/w4l.xml:78
+msgid "FOUR_LETTERS_WORD_073"
+msgstr "OILY"
+
+#: locale/xml_additions/w4l/w4l.xml:156
+msgid "FOUR_LETTERS_WORD_151"
+msgstr "WINK"
+
+#: locale/xml_additions/w4l/w4l.xml:65
+msgid "FOUR_LETTERS_WORD_060"
+msgstr "GREY"
+
+#: locale/xml_additions/w4l/w4l.xml:218
+msgid "FOUR_LETTERS_WORD_213"
+msgstr "SALT"
+
+#: locale/xml_additions/w4l/w4l.xml:302
+msgid "FOUR_LETTERS_WORD_297"
+msgstr "LOAF"
+
+#: locale/xml_additions/w4l/w4l.xml:209
+msgid "FOUR_LETTERS_WORD_204"
+msgstr "FIVE"
+
+#: locale/xml_additions/w4l/w4l.xml:213
+msgid "FOUR_LETTERS_WORD_208"
+msgstr "KNOB"
+
+#: locale/xml_additions/w4l/w4l.xml:238
+msgid "FOUR_LETTERS_WORD_233"
+msgstr "HELP"
+
+#: locale/xml_additions/w4l/w4l.xml:256
+msgid "FOUR_LETTERS_WORD_251"
+msgstr "SLIM"
+
+#: locale/xml_additions/w4l/w4l.xml:191
+msgid "FOUR_LETTERS_WORD_186"
+msgstr "LIFE"
+
+#: locale/xml_additions/w4l/w4l.xml:192
+msgid "FOUR_LETTERS_WORD_187"
+msgstr "DISH"
+
+#: locale/xml_additions/w4l/w4l.xml:49
+msgid "FOUR_LETTERS_WORD_044"
+msgstr "HOLE"
+
+#: locale/xml_additions/w4l/w4l.xml:80
+msgid "FOUR_LETTERS_WORD_075"
+msgstr "BOLD"
+
+#: locale/xml_additions/w4l/w4l.xml:32
+msgid "FOUR_LETTERS_WORD_027"
+msgstr "IDLE"
+
+#: locale/xml_additions/w4l/w4l.xml:182
+msgid "FOUR_LETTERS_WORD_177"
+msgstr "COSY"
+
+#: locale/xml_additions/w4l/w4l.xml:133
+msgid "FOUR_LETTERS_WORD_128"
+msgstr "MEAL"
+
+#: locale/xml_additions/w4l/w4l.xml:71
+msgid "FOUR_LETTERS_WORD_066"
+msgstr "BIKE"
+
+#: locale/xml_additions/w4l/w4l.xml:273
+msgid "FOUR_LETTERS_WORD_268"
+msgstr "ROCK"
+
+#: locale/xml_additions/w4l/w4l.xml:298
+msgid "FOUR_LETTERS_WORD_293"
+msgstr "AXON"
+
+#: locale/xml_additions/w4l/w4l.xml:151
+msgid "FOUR_LETTERS_WORD_146"
+msgstr "FACE"
+
+#: locale/xml_additions/w4l/w4l.xml:253
+msgid "FOUR_LETTERS_WORD_248"
+msgstr "TILE"
+
+#: locale/xml_additions/w4l/w4l.xml:92
+msgid "FOUR_LETTERS_WORD_087"
+msgstr "LADY"
+
+#: locale/xml_additions/w4l/w4l.xml:207
+msgid "FOUR_LETTERS_WORD_202"
+msgstr "SOFT"
+
+#: locale/xml_additions/w4l/w4l.xml:96
+msgid "FOUR_LETTERS_WORD_091"
+msgstr "GOLD"
+
+#: locale/xml_additions/w4l/w4l.xml:198
+msgid "FOUR_LETTERS_WORD_193"
+msgstr "MELT"
+
+#: locale/xml_additions/w4l/w4l.xml:183
+msgid "FOUR_LETTERS_WORD_178"
+msgstr "DOWN"
+
+#: locale/xml_additions/w4l/w4l.xml:15
+msgid "FOUR_LETTERS_WORD_010"
+msgstr "TINY"
+
+#: locale/xml_additions/w4l/w4l.xml:9
+msgid "FOUR_LETTERS_WORD_004"
+msgstr "WIND"
+
+#: locale/xml_additions/w4l/w4l.xml:214
+msgid "FOUR_LETTERS_WORD_209"
+msgstr "HOPE"
+
+#: locale/xml_additions/w4l/w4l.xml:70
+msgid "FOUR_LETTERS_WORD_065"
+msgstr "INKY"
+
+#: locale/xml_additions/w4l/w4l.xml:82
+msgid "FOUR_LETTERS_WORD_077"
+msgstr "FOAM"
+
+#: locale/xml_additions/w4l/w4l.xml:231
+msgid "FOUR_LETTERS_WORD_226"
+msgstr "YANG"
+
+#: locale/xml_additions/w4l/w4l.xml:210
+msgid "FOUR_LETTERS_WORD_205"
+msgstr "ECHO"
+
+#: locale/xml_additions/w4l/w4l.xml:267
+msgid "FOUR_LETTERS_WORD_262"
+msgstr "BEAD"
+
+#: locale/xml_additions/w4l/w4l.xml:225
+msgid "FOUR_LETTERS_WORD_220"
+msgstr "BOAR"
+
+#: locale/xml_additions/w4l/w4l.xml:139
+msgid "FOUR_LETTERS_WORD_134"
+msgstr "PUNK"
+
+#: locale/xml_additions/w4l/w4l.xml:199
+msgid "FOUR_LETTERS_WORD_194"
+msgstr "SLOW"
+
+#: locale/xml_additions/w4l/w4l.xml:33
+msgid "FOUR_LETTERS_WORD_028"
+msgstr "FAUN"
+
+#: locale/xml_additions/w4l/w4l.xml:287
+msgid "FOUR_LETTERS_WORD_282"
+msgstr "MATH"
+
+#: locale/xml_additions/w4l/w4l.xml:51
+msgid "FOUR_LETTERS_WORD_046"
+msgstr "BODY"
+
+#: locale/xml_additions/w4l/w4l.xml:7
+msgid "FOUR_LETTERS_WORD_002"
+msgstr "GOAL"
+
+#: locale/xml_additions/w4l/w4l.xml:235
+msgid "FOUR_LETTERS_WORD_230"
+msgstr "FISH"
+
+#: locale/xml_additions/w4l/w4l.xml:132
+msgid "FOUR_LETTERS_WORD_127"
+msgstr "LIME"
+
+#: locale/xml_additions/w4l/w4l.xml:249
+msgid "FOUR_LETTERS_WORD_244"
+msgstr "MEOW"
+
+#: locale/xml_additions/w4l/w4l.xml:196
+msgid "FOUR_LETTERS_WORD_191"
+msgstr "LOCK"
+
+#: locale/xml_additions/w4l/w4l.xml:288
+msgid "FOUR_LETTERS_WORD_283"
+msgstr "PUNY"
+
+#: locale/xml_additions/w4l/w4l.xml:236
+msgid "FOUR_LETTERS_WORD_231"
+msgstr "SOAP"
+
+#: locale/xml_additions/w4l/w4l.xml:87
+msgid "FOUR_LETTERS_WORD_082"
+msgstr "MARS"
+
+#: locale/xml_additions/w4l/w4l.xml:187
+msgid "FOUR_LETTERS_WORD_182"
+msgstr "ABLE"
+
+#: locale/xml_additions/w4l/w4l.xml:85
+msgid "FOUR_LETTERS_WORD_080"
+msgstr "PEAR"
+
+#: locale/xml_additions/w4l/w4l.xml:197
+msgid "FOUR_LETTERS_WORD_192"
+msgstr "HALO"
+
+#: locale/xml_additions/w4l/w4l.xml:10
+msgid "FOUR_LETTERS_WORD_005"
+msgstr "CAKE"
+
+#: locale/xml_additions/w4l/w4l.xml:68
+msgid "FOUR_LETTERS_WORD_063"
+msgstr "WARM"
+
+#: locale/xml_additions/w4l/w4l.xml:228
+msgid "FOUR_LETTERS_WORD_223"
+msgstr "ISBA"
+
+#: locale/xml_additions/w4l/w4l.xml:179
+msgid "FOUR_LETTERS_WORD_174"
+msgstr "BAND"
+
+#: locale/xml_additions/w4l/w4l.xml:31
+msgid "FOUR_LETTERS_WORD_026"
+msgstr "DARK"
+
+#: locale/xml_additions/w4l/w4l.xml:48
+msgid "FOUR_LETTERS_WORD_043"
+msgstr "STAR"
+
+#: locale/xml_additions/w4l/w4l.xml:56
+msgid "FOUR_LETTERS_WORD_051"
+msgstr "NOVA"
+
+#: locale/xml_additions/w4l/w4l.xml:42
+msgid "FOUR_LETTERS_WORD_037"
+msgstr "DOVE"
+
+#: locale/xml_additions/w4l/w4l.xml:155
+msgid "FOUR_LETTERS_WORD_150"
+msgstr "BEAR"
+
+#: locale/xml_additions/w4l/w4l.xml:123
+msgid "FOUR_LETTERS_WORD_118"
+msgstr "FIRE"
+
+#: locale/xml_additions/w4l/w4l.xml:101
+msgid "FOUR_LETTERS_WORD_096"
+msgstr "JACK"
+
+#: locale/xml_additions/w4l/w4l.xml:58
+msgid "FOUR_LETTERS_WORD_053"
+msgstr "CRAB"
+
+#: locale/xml_additions/w4l/w4l.xml:153
+msgid "FOUR_LETTERS_WORD_148"
+msgstr "DICE"
+
+#: locale/xml_additions/w4l/w4l.xml:250
+msgid "FOUR_LETTERS_WORD_245"
+msgstr "TIDY"
+
+#: locale/xml_additions/w4l/w4l.xml:270
+msgid "FOUR_LETTERS_WORD_265"
+msgstr "RUST"
+
+#: locale/xml_additions/w4l/w4l.xml:264
+msgid "FOUR_LETTERS_WORD_259"
+msgstr "YOGA"
+
+#: locale/xml_additions/w4l/w4l.xml:8
+msgid "FOUR_LETTERS_WORD_003"
+msgstr "CIAO"
+
+#: locale/xml_additions/w4l/w4l.xml:255
+msgid "FOUR_LETTERS_WORD_250"
+msgstr "OGRE"
+
+#: locale/xml_additions/w4l/w4l.xml:84
+msgid "FOUR_LETTERS_WORD_079"
+msgstr "BOWL"
+
+#: locale/xml_additions/w4l/w4l.xml:190
+msgid "FOUR_LETTERS_WORD_185"
+msgstr "DAWN"
+
+#: locale/xml_additions/w4l/w4l.xml:90
+msgid "FOUR_LETTERS_WORD_085"
+msgstr "ROAD"
+
+#: locale/xml_additions/w4l/w4l.xml:12
+msgid "FOUR_LETTERS_WORD_007"
+msgstr "FAME"
+
+#: locale/xml_additions/w4l/w4l.xml:230
+msgid "FOUR_LETTERS_WORD_225"
+msgstr "DJIN"
+
+#: locale/xml_additions/w4l/w4l.xml:234
+msgid "FOUR_LETTERS_WORD_229"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:262
+msgid "FOUR_LETTERS_WORD_257"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:299
+msgid "FOUR_LETTERS_WORD_294"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:189
+msgid "FOUR_LETTERS_WORD_184"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:120
+msgid "FOUR_LETTERS_WORD_115"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:110
+msgid "FOUR_LETTERS_WORD_105"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:305
+msgid "FOUR_LETTERS_WORD_300"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:269
+msgid "FOUR_LETTERS_WORD_264"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:53
+msgid "FOUR_LETTERS_WORD_048"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:18
+msgid "FOUR_LETTERS_WORD_013"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:137
+msgid "FOUR_LETTERS_WORD_132"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:224
+msgid "FOUR_LETTERS_WORD_219"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:95
+msgid "FOUR_LETTERS_WORD_090"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:297
+msgid "FOUR_LETTERS_WORD_292"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:125
+msgid "FOUR_LETTERS_WORD_120"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:131
+msgid "FOUR_LETTERS_WORD_126"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:77
+msgid "FOUR_LETTERS_WORD_072"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:188
+msgid "FOUR_LETTERS_WORD_183"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:290
+msgid "FOUR_LETTERS_WORD_285"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:295
+msgid "FOUR_LETTERS_WORD_290"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:152
+msgid "FOUR_LETTERS_WORD_147"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:106
+msgid "FOUR_LETTERS_WORD_101"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:201
+msgid "FOUR_LETTERS_WORD_196"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:177
+msgid "FOUR_LETTERS_WORD_172"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:30
+msgid "FOUR_LETTERS_WORD_025"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:147
+msgid "FOUR_LETTERS_WORD_142"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:173
+msgid "FOUR_LETTERS_WORD_168"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:34
+msgid "FOUR_LETTERS_WORD_029"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:29
+msgid "FOUR_LETTERS_WORD_024"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:54
+msgid "FOUR_LETTERS_WORD_049"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:114
+msgid "FOUR_LETTERS_WORD_109"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:194
+msgid "FOUR_LETTERS_WORD_189"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:117
+msgid "FOUR_LETTERS_WORD_112"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:232
+msgid "FOUR_LETTERS_WORD_227"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:283
+msgid "FOUR_LETTERS_WORD_278"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:25
+msgid "FOUR_LETTERS_WORD_020"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:205
+msgid "FOUR_LETTERS_WORD_200"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:55
+msgid "FOUR_LETTERS_WORD_050"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:21
+msgid "FOUR_LETTERS_WORD_016"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:64
+msgid "FOUR_LETTERS_WORD_059"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:141
+msgid "FOUR_LETTERS_WORD_136"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:301
+msgid "FOUR_LETTERS_WORD_296"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:26
+msgid "FOUR_LETTERS_WORD_021"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:91
+msgid "FOUR_LETTERS_WORD_086"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:247
+msgid "FOUR_LETTERS_WORD_242"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:168
+msgid "FOUR_LETTERS_WORD_163"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:303
+msgid "FOUR_LETTERS_WORD_298"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:22
+msgid "FOUR_LETTERS_WORD_017"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:202
+msgid "FOUR_LETTERS_WORD_197"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:268
+msgid "FOUR_LETTERS_WORD_263"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:222
+msgid "FOUR_LETTERS_WORD_217"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:104
+msgid "FOUR_LETTERS_WORD_099"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:135
+msgid "FOUR_LETTERS_WORD_130"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:165
+msgid "FOUR_LETTERS_WORD_160"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:286
+msgid "FOUR_LETTERS_WORD_281"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:246
+msgid "FOUR_LETTERS_WORD_241"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:200
+msgid "FOUR_LETTERS_WORD_195"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:67
+msgid "FOUR_LETTERS_WORD_062"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:149
+msgid "FOUR_LETTERS_WORD_144"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:39
+msgid "FOUR_LETTERS_WORD_034"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:111
+msgid "FOUR_LETTERS_WORD_106"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:76
+msgid "FOUR_LETTERS_WORD_071"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:19
+msgid "FOUR_LETTERS_WORD_014"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:293
+msgid "FOUR_LETTERS_WORD_288"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:63
+msgid "FOUR_LETTERS_WORD_058"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:62
+msgid "FOUR_LETTERS_WORD_057"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:79
+msgid "FOUR_LETTERS_WORD_074"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:237
+msgid "FOUR_LETTERS_WORD_232"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:118
+msgid "FOUR_LETTERS_WORD_113"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:69
+msgid "FOUR_LETTERS_WORD_064"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:195
+msgid "FOUR_LETTERS_WORD_190"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:185
+msgid "FOUR_LETTERS_WORD_180"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:181
+msgid "FOUR_LETTERS_WORD_176"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:251
+msgid "FOUR_LETTERS_WORD_246"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:28
+msgid "FOUR_LETTERS_WORD_023"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:248
+msgid "FOUR_LETTERS_WORD_243"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:89
+msgid "FOUR_LETTERS_WORD_084"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:180
+msgid "FOUR_LETTERS_WORD_175"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:242
+msgid "FOUR_LETTERS_WORD_237"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:112
+msgid "FOUR_LETTERS_WORD_107"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:144
+msgid "FOUR_LETTERS_WORD_139"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:23
+msgid "FOUR_LETTERS_WORD_018"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:146
+msgid "FOUR_LETTERS_WORD_141"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:252
+msgid "FOUR_LETTERS_WORD_247"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:176
+msgid "FOUR_LETTERS_WORD_171"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:284
+msgid "FOUR_LETTERS_WORD_279"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:35
+msgid "FOUR_LETTERS_WORD_030"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:276
+msgid "FOUR_LETTERS_WORD_271"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:279
+msgid "FOUR_LETTERS_WORD_274"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:16
+msgid "FOUR_LETTERS_WORD_011"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:254
+msgid "FOUR_LETTERS_WORD_249"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:145
+msgid "FOUR_LETTERS_WORD_140"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:148
+msgid "FOUR_LETTERS_WORD_143"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:154
+msgid "FOUR_LETTERS_WORD_149"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:83
+msgid "FOUR_LETTERS_WORD_078"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:239
+msgid "FOUR_LETTERS_WORD_234"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:296
+msgid "FOUR_LETTERS_WORD_291"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:116
+msgid "FOUR_LETTERS_WORD_111"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:103
+msgid "FOUR_LETTERS_WORD_098"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:86
+msgid "FOUR_LETTERS_WORD_081"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:126
+msgid "FOUR_LETTERS_WORD_121"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:45
+msgid "FOUR_LETTERS_WORD_040"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:193
+msgid "FOUR_LETTERS_WORD_188"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:122
+msgid "FOUR_LETTERS_WORD_117"
+msgstr ""
+
+#: locale/xml_additions/w4l/w4l.xml:134
+msgid "FOUR_LETTERS_WORD_129"
+msgstr ""
