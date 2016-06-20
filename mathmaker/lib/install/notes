@@ -9,6 +9,9 @@ Provided by package eukleides (on both Ubuntu & FreeBsd)
 - xmllint
 Provided by package: libxml2-utils on Ubuntu
 
+- msgfmt
+For installation only, provided by package: gettext on Ubuntu
+
 Libraries imported by mathmaker:
 - yaml
 Provided by package: python3-yaml on Ubuntu
