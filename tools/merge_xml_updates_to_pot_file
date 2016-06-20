@@ -22,30 +22,24 @@
 
 # This script is meant to be run from the locale/ directory of the project.
 
-import os, sys, re
-import argparse, errno
-import xml.etree.ElementTree as xml_tree
+import os
+import sys
+import errno
+import re
+import argparse
 from tempfile import TemporaryFile
-# Requires to install the polib package separately
-# (it is called python3-polib in ubuntu repos)
+import xml.etree.ElementTree as xml_tree
+
 import polib
 
-PROCESS_NAME = os.path.basename(sys.argv[0])
-ABSPATH = os.path.abspath(sys.argv[0])
-__l1 = len(PROCESS_NAME)
-__l2 = len(ABSPATH)
-TOOLS_PATH = ABSPATH[:__l2-__l1]
-LOCALE_PATH = os.path.abspath(os.path.join(TOOLS_PATH, os.pardir)) \
-              + "/mathmaker/locale/"
+from mathmaker import settings
+
+settings.init()
 
 DEFAULT_KEYWORDS = ['header', 'title', 'text', 'subtitle', 'answers_title',
                     'wording']
-MAIN_POT_FILE_PATH = LOCALE_PATH + 'mathmaker.pot'
-
-DIR_TO_BROWSE = "."
-
-os.chdir('..')
-PROJECT_ROOT = os.getcwd()
+MAIN_POT_FILE_PATH = settings.localedir + 'mathmaker.pot'
+PROJECT_ROOT = DIR_TO_BROWSE = settings.rootdir
 
 # collected_strings will look like:
 # { "Sentence to translate": ["#: file_name: line", "#: file_name: line", ...]}
@@ -55,159 +49,161 @@ collected_strings = {}
 # http://stackoverflow.com/questions/4789171/python-reporting-line-column-of
 # -origin-of-xml-node/27356944#27356944
 LINE_DUMMY_ATTR = '_DUMMY_LINE'
+
+
 def parse_xml(filename):
-	with open(filename, "r") as f, TemporaryFile(mode='r+t') as tmp_file:
-		l = 1
-		for line in f:
-			processed = re.sub(r'<(\w+)',
-								r'<\1 ' \
-								+ LINE_DUMMY_ATTR \
-								+ '="' \
-								+ str(l) \
-								+ '"',
-								line)
-			l += 1
-			tmp_file.write(processed)
+    with open(filename, "r") as f, TemporaryFile(mode='r+t') as tmp_file:
+        l = 1
+        for line in f:
+            processed = re.sub(r'<(\w+)',
+                               r'<\1 '
+                               + LINE_DUMMY_ATTR
+                               + '="'
+                               + str(l)
+                               + '"',
+                               line)
+            l += 1
+            tmp_file.write(processed)
 
-		tmp_file.seek(0)
+        tmp_file.seek(0)
 
-		return(xml_tree.parse(tmp_file).getroot())
+        return(xml_tree.parse(tmp_file).getroot())
 
 
 ##
 #   @brief  Collects the strings to translate from the xml file.
 def collect_strings(node, rel_file_name, keywords_list):
-	for keyword in keywords_list:
-		if keyword in node.attrib:
-			if not node.attrib[keyword] in collected_strings \
-				and node.attrib[keyword] != "":
-			#___
-				collected_strings[node.attrib[keyword]] = []
+    for keyword in keywords_list:
+        if keyword in node.attrib:
+            if (not node.attrib[keyword] in collected_strings
+                and node.attrib[keyword] != ""):
+                # __
+                collected_strings[node.attrib[keyword]] = []
 
-			if node.attrib[keyword] != "":
-				collected_strings[node.attrib[keyword]] += \
-								[(rel_file_name, node.attrib[LINE_DUMMY_ATTR])]
+            if node.attrib[keyword] != "":
+                collected_strings[node.attrib[keyword]] += \
+                    [(rel_file_name, node.attrib[LINE_DUMMY_ATTR])]
 
-			# collected_strings looks like:
-			# {'Something to translate': [("this_file.xml", 76),
-			#                              ("this_other_file.xml", 34)],
-			#  'Something else to translate': [("another_file.xml", 21)],
-			#  etc. }
+            # collected_strings looks like:
+            # {'Something to translate': [("this_file.xml", 76),
+            #                              ("this_other_file.xml", 34)],
+            #  'Something else to translate': [("another_file.xml", 21)],
+            #  etc. }
 
-	for child in node:
-		collect_strings(child, rel_file_name, keywords_list)
+    for child in node:
+        collect_strings(child, rel_file_name, keywords_list)
 
 
 ##
 #   @brief  Browse files looking for xml ones.
 def browse_files(path, keywords_list):
-	os.chdir(path)
-	file_names = next(os.walk('.'))[2]
+    os.chdir(path)
+    file_names = next(os.walk('.'))[2]
 
-	for (file_name, extension) in [os.path.splitext(f) for f in file_names]:
-		if extension == '.xml' and file_name != 'tmp':
-			#sys.stdout.write("Checking " + file_name + extension + "\n")
-			abspath = os.getcwd() + "/" + file_name + extension
-			relpath = abspath[len(PROJECT_ROOT)+1:]
-			collect_strings(parse_xml(file_name + extension),
-							relpath,
-							keywords_list)
+    for (file_name, extension) in [os.path.splitext(f) for f in file_names]:
+        if extension == '.xml' and file_name != 'tmp':
+            # sys.stdout.write("Checking " + file_name + extension + "\n")
+            abspath = os.getcwd() + "/" + file_name + extension
+            relpath = abspath[len(PROJECT_ROOT) + 1:]
+            collect_strings(parse_xml(file_name + extension),
+                            relpath,
+                            keywords_list)
 
-	for dir_name in next(os.walk('.'))[1]:
-		if dir_name !=  '.git':
-			browse_files(dir_name, keywords_list)
+    for dir_name in next(os.walk('.'))[1]:
+        if dir_name != '.git':
+            browse_files(dir_name, keywords_list)
 
-	os.chdir('..')
+    os.chdir('..')
 
 
 def main():
-	sys.stdout.write("[merge_xml_updates_to_pot_file] Starting...\n")
-	parser = argparse.ArgumentParser(description=\
-						'Import strings to be translated from xml files.')
-	parser.add_argument('--potfile', action='store', dest='filename',
-						default=MAIN_POT_FILE_PATH,
-						help='to provide an alternative pot file to process.')
-	parser.add_argument('--dirs', action='store', dest='dir_to_browse',
-						nargs='*',
-						default=[DIR_TO_BROWSE],
-						help='to provide other specific directories to browse.')
-	parser.add_argument('--keywords', action='store', dest='keywords_list',
-						nargs='*', default=DEFAULT_KEYWORDS,
-						help='to provide other keywords.')
-	args = parser.parse_args()
+    sys.stdout.write("[merge_xml_updates_to_pot_file] Starting...\n")
+    parser = argparse.ArgumentParser(description='Import strings to be '
+                                                 'translated from xml files.')
+    parser.add_argument('--potfile', action='store', dest='filename',
+                        default=MAIN_POT_FILE_PATH,
+                        help='to provide an alternative pot file to process.')
+    parser.add_argument('--dirs', action='store', dest='dir_to_browse',
+                        nargs='*',
+                        default=[DIR_TO_BROWSE],
+                        help='to provide other specific directories '
+                             'to browse.')
+    parser.add_argument('--keywords', action='store', dest='keywords_list',
+                        nargs='*', default=DEFAULT_KEYWORDS,
+                        help='to provide other keywords.')
+    args = parser.parse_args()
 
-	if not os.path.isfile(args.filename):
-		raise FileNotFoundError(
-				errno.ENOENT, os.strerror(errno.ENOENT), args.filename)
+    if not os.path.isfile(args.filename):
+        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),
+                                args.filename)
 
-	for d in args.dir_to_browse:
-		if not os.path.exists(d):
-			raise FileNotFoundError(
-					errno.ENOENT, os.strerror(errno.ENOENT), d)
+    for d in args.dir_to_browse:
+        if not os.path.exists(d):
+            raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), d)
 
-		if not os.path.isdir(d):
-			raise NotADirectoryError(
-					errno.ENOTDIR, os.strerror(errno.ENOTDIR), d)
+        if not os.path.isdir(d):
+            raise NotADirectoryError(errno.ENOTDIR,
+                                     os.strerror(errno.ENOTDIR),
+                                     d)
 
-	sys.stdout.write("Will look for labels: " \
- 					+ str(args.keywords_list) + "\n")
+    sys.stdout.write("Will look for labels: " + str(args.keywords_list) + "\n")
 
-	for d in args.dir_to_browse:
-		browse_files(d, args.keywords_list)
+    for d in args.dir_to_browse:
+        browse_files(d, args.keywords_list)
 
-	xml_pot_file = polib.POFile()
-	for sentence in collected_strings:
-		occ = []
-		for elt in collected_strings[sentence]:
-			occ += [(elt[0], elt[1])]
+    xml_pot_file = polib.POFile()
+    for sentence in collected_strings:
+        occ = []
+        for elt in collected_strings[sentence]:
+            occ += [(elt[0], elt[1])]
 
-		new_entry = polib.POEntry(msgid=sentence, msgstr="", occurrences=occ)
-		xml_pot_file.append(new_entry)
+        new_entry = polib.POEntry(msgid=sentence, msgstr="", occurrences=occ)
+        xml_pot_file.append(new_entry)
 
-	main_pot_file = polib.pofile(args.filename)
-	msgids_from_main_file = [entry.msgid for entry in main_pot_file]
+    main_pot_file = polib.pofile(args.filename)
+    msgids_from_main_file = [entry.msgid for entry in main_pot_file]
 
-	something_changed = False
-	for xml_entry in xml_pot_file:
-		if xml_entry.msgid in msgids_from_main_file:
-			for main_entry in main_pot_file:
-				if xml_entry.msgid == main_entry.msgid:
-					for ref in xml_entry.occurrences:
-						if not ref in main_entry.occurrences:
-							sys.stderr.write("Merging this entry: \n" \
-	 										 + str(xml_entry) + "\n")
-							main_entry.merge(xml_entry)
-							something_changed = True
-							break
-		else:
-			sys.stderr.write("Adding new entry: \n" + str(xml_entry) + "\n")
-			main_pot_file.append(xml_entry)
-			something_changed = True
+    something_changed = False
+    for xml_entry in xml_pot_file:
+        if xml_entry.msgid in msgids_from_main_file:
+            for main_entry in main_pot_file:
+                if xml_entry.msgid == main_entry.msgid:
+                    for ref in xml_entry.occurrences:
+                        if ref not in main_entry.occurrences:
+                            sys.stderr.write("Merging this entry: \n"
+                                             + str(xml_entry) + "\n")
+                            main_entry.merge(xml_entry)
+                            something_changed = True
+                            break
+        else:
+            sys.stderr.write("Adding new entry: \n" + str(xml_entry) + "\n")
+            main_pot_file.append(xml_entry)
+            something_changed = True
 
-	msgids_from_xml_pot_file = [entry.msgid for entry in xml_pot_file]
+    msgids_from_xml_pot_file = [entry.msgid for entry in xml_pot_file]
 
-	to_delete = []
-	for main_entry in main_pot_file:
-		ext_list = [ o[0][-4:] for o in main_entry.occurrences ]
-		if all(ext == ".xml" for ext in ext_list):
-			if not main_entry.msgid in msgids_from_xml_pot_file:
-				to_delete.append(main_entry)
-				sys.stderr.write("Will remove this obsolete entry: \n" \
-													+ str(main_entry) + "\n")
-				something_changed = True
+    to_delete = []
+    for main_entry in main_pot_file:
+        ext_list = [o[0][-4:] for o in main_entry.occurrences]
+        if all(ext == ".xml" for ext in ext_list):
+            if main_entry.msgid not in msgids_from_xml_pot_file:
+                to_delete.append(main_entry)
+                sys.stderr.write("Will remove this obsolete entry: \n"
+                                 + str(main_entry) + "\n")
+                something_changed = True
 
-	for entry in to_delete:
-		del main_pot_file[main_pot_file.index(entry)]
+    for entry in to_delete:
+        del main_pot_file[main_pot_file.index(entry)]
 
-	if something_changed:
-		sys.stderr.write("Writing changes to " + str(args.filename) + "\n")
-		main_pot_file.save(args.filename)
-	else:
-		sys.stderr.write("No changes to save. " + str(args.filename) \
-						 + " remains unchanged.\n")
+    if something_changed:
+        sys.stderr.write("Writing changes to " + str(args.filename) + "\n")
+        main_pot_file.save(args.filename)
+    else:
+        sys.stderr.write("No changes to save. " + str(args.filename)
+                         + " remains unchanged.\n")
 
-	sys.stdout.write("[merge_xml_updates_to_pot_file] Done.\n\n")
+    sys.stdout.write("[merge_xml_updates_to_pot_file] Done.\n\n")
 
 
 if __name__ == '__main__':
-	main()
+    main()

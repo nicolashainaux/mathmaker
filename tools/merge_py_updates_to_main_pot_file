@@ -19,20 +19,16 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import os, sys
-import errno
-# Requires to install the polib package separately
-# (it is called python3-polib in ubuntu repos)
+import os
+import sys
+
 import polib
 
-PROCESS_NAME = os.path.basename(sys.argv[0])
-ABSPATH = os.path.abspath(sys.argv[0])
-__l1 = len(PROCESS_NAME)
-__l2 = len(ABSPATH)
-TOOLS_PATH = ABSPATH[:__l2-__l1]
-LOCALE_PATH = os.path.abspath(os.path.join(TOOLS_PATH, os.pardir)) \
-              + "/mathmaker/locale/"
+from mathmaker import settings
 
+settings.init()
+
+LOCALE_PATH = settings.localedir
 POT_FILE_PATH = LOCALE_PATH + 'mathmaker.pot'
 UPDATES_PATH = LOCALE_PATH + 'mathmaker_updates.pot'
 
@@ -46,8 +42,8 @@ def main():
 
     main_pot_file = polib.pofile(POT_FILE_PATH)
     updates_file = polib.pofile(UPDATES_PATH)
-    main_pot_file_msgids = [ entry.msgid for entry in main_pot_file ]
-    updates_file_msgids = [ entry.msgid for entry in updates_file ]
+    main_pot_file_msgids = [entry.msgid for entry in main_pot_file]
+    updates_file_msgids = [entry.msgid for entry in updates_file]
     something_changed = False
 
     # First, remove the msgids present in the old file and absent from
@@ -60,19 +56,19 @@ def main():
                 if updates_entry.msgid == main_entry.msgid:
                     o_to_delete = []
                     for o in main_entry.occurrences:
-                        if not o in updates_entry.occurrences:
+                        if o not in updates_entry.occurrences:
                             o_to_delete.append(o)
                             something_changed = True
                     for o in o_to_delete:
-                        sys.stderr.write("Deleting this occurrence: " \
-                                         + str(o) + " from this entry " \
+                        sys.stderr.write("Deleting this occurrence: "
+                                         + str(o) + " from this entry "
                                          + str(main_entry.msgid) + "\n")
-                        del main_entry.occurrences[\
-                                            main_entry.occurrences.index(o)]
+                        del main_entry.occurrences[
+                            main_entry.occurrences.index(o)]
 
-        else: # This entry is absent from the update, so...
+        else:  # This entry is absent from the update, so...
             # either there is no .xml occurrence, then remove the entry
-            ext_list = [ o[0][-3:] for o in main_entry.occurrences ]
+            ext_list = [o[0][-3:] for o in main_entry.occurrences]
             if all(ext == ".py" for ext in ext_list):
                 to_delete.append(main_entry)
                 something_changed = True
@@ -85,8 +81,8 @@ def main():
                         o_to_delete.append(o)
                         something_changed = True
                 for o in o_to_delete:
-                    sys.stderr.write("Deleting this occurrence: " \
-                                     + str(o) + " from this entry " \
+                    sys.stderr.write("Deleting this occurrence: "
+                                     + str(o) + " from this entry "
                                      + str(main_entry.msgid) + "\n")
                     del main_entry.occurrences[main_entry.occurrences.index(o)]
 
@@ -101,15 +97,16 @@ def main():
             for main_entry in main_pot_file:
                 if updates_entry.msgid == main_entry.msgid:
                     for ref in updates_entry.occurrences:
-                        if not ref in main_entry.occurrences:
-                            sys.stderr.write("Merging this entry: \n" \
+                        if ref not in main_entry.occurrences:
+                            sys.stderr.write("Merging this entry: \n"
                                              + str(updates_entry) + "\n")
                             main_entry.merge(updates_entry)
                             something_changed = True
                             break
 
-        else: # This entry is absent from the main pot file, so add it
-            sys.stderr.write("Adding new entry: \n" + str(updates_entry) + "\n")
+        else:  # This entry is absent from the main pot file, so add it
+            sys.stderr.write("Adding new entry: \n"
+                             + str(updates_entry) + "\n")
             main_pot_file.append(updates_entry)
             something_changed = True
 
@@ -117,7 +114,7 @@ def main():
         sys.stderr.write("Writing changes to " + POT_FILE_PATH + "\n")
         main_pot_file.save(POT_FILE_PATH)
     else:
-        sys.stderr.write("No changes to save. " + str(POT_FILE_PATH) \
+        sys.stderr.write("No changes to save. " + str(POT_FILE_PATH)
                          + " remains unchanged.\n")
 
     sys.stdout.write("[merge_py_updates_to_main_pot_file] Done.\n\n")
@@ -125,4 +122,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

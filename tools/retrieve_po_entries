@@ -20,73 +20,73 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-
 # This script will copy (and replace) all msgstr (whose msgid matches a
 # particular tag) from one po file to another.
 # Each msgstr will be copied only if the same msgid is found in the
 # destination file. /!\ if there already was a msgstr (translated string)
 # matching this msgid, it will be replaced.
 
-import os, sys
-import argparse, errno
-# Requires to install the polib package separately
-# (it is called python3-polib in ubuntu repos)
+import os
+import sys
+import errno
+import argparse
+
 import polib
 
+
 def main():
-	parser = argparse.ArgumentParser(description=\
-						'Retrieve strings from a PO file and add' \
-						+ ' them to another.')
-	parser.add_argument('--from', action='store', dest='source_file',
-						required=True,
-						help='the source po file to process.')
-	parser.add_argument('--to', action='store', dest='dest_file',
-						required=True,
-						help='the destination file where to write the ' \
-						+ 'translations found.')
-	args = parser.parse_args()
+    parser = argparse.ArgumentParser(description='Retrieve strings from a PO '
+                                                 'file and add them '
+                                                 'to another.')
+    parser.add_argument('--from', action='store', dest='source_file',
+                        required=True,
+                        help='the source po file to process.')
+    parser.add_argument('--to', action='store', dest='dest_file',
+                        required=True,
+                        help='the destination file where to write the '
+                        + 'translations found.')
+    args = parser.parse_args()
 
-	sys.stdout.write("[Retrieving] Starting...\n")
+    sys.stdout.write("[Retrieving] Starting...\n")
 
-	if not os.path.isfile(args.source_file):
-		raise FileNotFoundError(
-				errno.ENOENT, os.strerror(errno.ENOENT), args.source_file)
+    if not os.path.isfile(args.source_file):
+        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),
+                                args.source_file)
 
-	if not os.path.isfile(args.dest_file):
-		raise FileNotFoundError(
-				errno.ENOENT, os.strerror(errno.ENOENT), args.dest_file)
+    if not os.path.isfile(args.dest_file):
+        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),
+                                args.dest_file)
 
+    po_source = polib.pofile(args.source_file)
+    po_dest = polib.pofile(args.dest_file)
 
-	po_source = polib.pofile(args.source_file)
-	po_dest = polib.pofile(args.dest_file)
+    something_changed = False
 
-	something_changed = False
+    for source_entry in po_source:
+        if (source_entry.msgid[:18] == "FOUR_LETTERS_WORD_"
+            and len(source_entry.msgstr) > 0):
+            # __
+            sys.stdout.write("Found " + source_entry.msgstr + " in source...")
 
-	for source_entry in po_source:
-		if source_entry.msgid[:18] == "FOUR_LETTERS_WORD_" \
-			and len(source_entry.msgstr) > 0:
-		#___
-			sys.stdout.write("Found " + source_entry.msgstr + " in source...")
+            for dest_entry in po_dest:
+                if dest_entry.msgid == source_entry.msgid:
+                    sys.stdout.write(" importing... ")
+                    dest_entry.msgstr = source_entry.msgstr
+                    sys.stdout.write(" done!\n")
+                    something_changed = True
+                    break
+            else:
+                sys.stdout.write(" but not found in dest :-/\n")
 
-			for dest_entry in po_dest:
-				if dest_entry.msgid == source_entry.msgid:
-					sys.stdout.write(" importing... ")
-					dest_entry.msgstr = source_entry.msgstr
-					sys.stdout.write(" done!\n")
-					something_changed = True
-					break
-			else:
-				sys.stdout.write(" but not found in dest :-/\n")
+    if something_changed:
+        sys.stdout.write("Writing changes to " + args.dest_file + "\n")
+        po_dest.save(args.dest_file)
+    else:
+        sys.stdout.write("No changes to save. " + args.dest_file
+                         + " remains unchanged.\n")
 
-	if something_changed:
-		sys.stdout.write("Writing changes to " + args.dest_file + "\n")
-		po_dest.save(args.dest_file)
-	else:
-		sys.stdout.write("No changes to save. " + args.dest_file \
-						 + " remains unchanged.\n")
-
-	sys.stdout.write("[Retrieving] Done.\n\n")
+    sys.stdout.write("[Retrieving] Done.\n\n")
 
 
 if __name__ == '__main__':
-	main()
+    main()
