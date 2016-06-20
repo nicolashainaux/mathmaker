@@ -24,14 +24,14 @@ import math
 import decimal
 
 from mathmaker import settings
-from lib import *
+from mathmaker.lib import *
 from .base import *
 from .base_calculus import *
-from lib.maths_lib import *
-from lib.common.cst import *
+from mathmaker.lib.maths_lib import *
+from mathmaker.lib.common.cst import *
 from .utils import *
 from mathmaker.lib import shared
-from lib.common.latex import MARKUP
+from mathmaker.lib.common.latex import MARKUP
 
 
 MAX_VALUE = 20

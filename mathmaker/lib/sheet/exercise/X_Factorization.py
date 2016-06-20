@@ -20,12 +20,12 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib import *
+from mathmaker.lib import *
 from .X_Structure import X_Structure
 from . import question
-#from lib.core import *
-from lib.core.calculus import *
-from lib.common import alphabet
+#from mathmaker.lib.core import *
+from mathmaker.lib.core.calculus import *
+from mathmaker.lib.common import alphabet
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching self.x_subkind values

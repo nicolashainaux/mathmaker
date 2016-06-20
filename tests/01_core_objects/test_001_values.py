@@ -23,7 +23,7 @@
 import pytest
 from decimal import Decimal
 
-from lib.core.root_calculus import Value
+from mathmaker.lib.core.root_calculus import Value
 from tools import wrap_nb
 
 

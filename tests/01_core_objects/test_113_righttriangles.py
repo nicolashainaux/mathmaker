@@ -22,11 +22,11 @@
 
 import pytest
 
-from lib.common.cst import HUNDREDTH
-from lib.core.root_calculus import Value
-from lib.core.calculus import Equation
-from lib.core.geometry import RightTriangle
-from lib.common import pythagorean
+from mathmaker.lib.common.cst import HUNDREDTH
+from mathmaker.lib.core.root_calculus import Value
+from mathmaker.lib.core.calculus import Equation
+from mathmaker.lib.core.geometry import RightTriangle
+from mathmaker.lib.common import pythagorean
 from tools import wrap_nb
 
 

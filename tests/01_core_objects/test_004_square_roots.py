@@ -20,7 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib.core.base_calculus import Item, SquareRoot
+from mathmaker.lib.core.base_calculus import Item, SquareRoot
 from tools import wrap_nb
 
 

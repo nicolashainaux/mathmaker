@@ -31,9 +31,9 @@ import locale
 import copy
 from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
 
-from lib import randomly
-from lib import is_, error
-from lib.maths_lib import deg_to_rad, barycenter, POLYGONS_NATURES, round
+from mathmaker.lib import randomly
+from mathmaker.lib import is_, error
+from mathmaker.lib.maths_lib import deg_to_rad, barycenter, POLYGONS_NATURES, round
 from .root_calculus import Value, Unit
 from .base_calculus import Item, Product, Sum
 from .calculus import Equality, SubstitutableEquality

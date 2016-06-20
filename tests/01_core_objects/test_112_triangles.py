@@ -20,8 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib.core.root_calculus import Value
-from lib.core.geometry import Triangle
+from mathmaker.lib.core.root_calculus import Value
+from mathmaker.lib.core.geometry import Triangle
 
 
 def test_t1_into_euk():

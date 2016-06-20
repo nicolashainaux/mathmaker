@@ -23,8 +23,8 @@
 import sqlite3
 
 from mathmaker import settings
-import lib.machine
-from lib.common import latex
+from mathmaker.lib.machine import LaTeX
+from mathmaker.lib.common import latex
 
 
 def init():
@@ -47,33 +47,33 @@ def init():
 
     db = sqlite3.connect(settings.path.db)
 
-    import lib.tools.db
-    four_letters_words_source = lib.tools.db.source("w4l", ["id", "word"],
-                                                    language=settings.language)
-    names_source = lib.tools.db.source("names", ["id", "name"],
-                                       language=settings.language)
-    mini_problems_wordings_source = lib.tools.db.source("mini_pb_wordings",
-                                                ["wording_context", "wording"])
-    int_pairs_source = lib.tools.db.source("int_pairs", ["id", "nb1", "nb2"])
+    from mathmaker.lib.tools import db as database
+    four_letters_words_source = database.source("w4l", ["id", "word"],
+                                                language=settings.language)
+    names_source = database.source("names", ["id", "name"],
+                                   language=settings.language)
+    mini_problems_wordings_source = database.source("mini_pb_wordings",
+                                                    ["wording_context",
+                                                     "wording"])
+    int_pairs_source = database.source("int_pairs", ["id", "nb1", "nb2"])
 
     markup = latex.MARKUP
 
-    import lib.sources
-    rank_words_source = lib.sources.sub_source('rank_words')
-    int_fracs_source = lib.sources.sub_source('int_irreducible_frac')
-    deci_10_100_1000_multi_source = lib.sources.sub_source(
-                                        'decimal_and_10_100_1000_for_multi')
-    deci_10_100_1000_divi_source = lib.sources.sub_source(
-                                        'decimal_and_10_100_1000_for_divi')
-    deci_one_digit_multi_source = lib.sources.sub_source(
-                                        'decimal_and_one_digit_for_multi')
-    deci_one_digit_divi_source = lib.sources.sub_source(
-                                        'decimal_and_one_digit_for_divi')
-    mc_source = lib.sources.mc_source()
+    from mathmaker.lib import sources
+    rank_words_source = sources.sub_source('rank_words')
+    int_fracs_source = sources.sub_source('int_irreducible_frac')
+    deci_10_100_1000_multi_source = sources.sub_source(
+        'decimal_and_10_100_1000_for_multi')
+    deci_10_100_1000_divi_source = sources.sub_source(
+        'decimal_and_10_100_1000_for_divi')
+    deci_one_digit_multi_source = sources.sub_source(
+        'decimal_and_one_digit_for_multi')
+    deci_one_digit_divi_source = sources.sub_source(
+        'decimal_and_one_digit_for_divi')
+    mc_source = sources.mc_source()
 
     try:
-        machine = lib.machine.LaTeX(settings.language)
+        machine = LaTeX(settings.language)
     except Exception:
         log.error("An exception occured while creating the LaTeX machine.",
                   exc_info=True)
-

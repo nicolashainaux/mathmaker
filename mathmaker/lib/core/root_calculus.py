@@ -30,13 +30,13 @@ import copy
 import locale
 
 from .base import *
-from lib.common import alphabet
-from lib import is_
-from lib.maths_lib import *
+from mathmaker.lib.common import alphabet
+from mathmaker.lib import is_
+from mathmaker.lib.maths_lib import *
 from decimal import *
-from lib.common.cst import *
+from mathmaker.lib.common.cst import *
 
-from lib.common.latex import MARKUP
+from mathmaker.lib.common.latex import MARKUP
 
 
 # ------------------------------------------------------------------------------

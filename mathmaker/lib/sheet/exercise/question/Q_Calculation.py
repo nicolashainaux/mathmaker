@@ -20,11 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib import *
+from mathmaker.lib import *
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
-from lib.core.base_calculus import *
-from lib.core.calculus import *
+from mathmaker.lib.core.base_calculus import *
+from mathmaker.lib.core.calculus import *
 
 AVAILABLE_Q_KIND_VALUES = \
     {'fraction_simplification': ['default'],

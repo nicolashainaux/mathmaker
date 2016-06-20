@@ -23,7 +23,7 @@
 import pytest
 
 from mathmaker.lib import shared
-from lib.tools.wording import (wrap, unwrapped, is_wrapped, is_wrapped_P,
+from mathmaker.lib.tools.wording import (wrap, unwrapped, is_wrapped, is_wrapped_P,
                                is_wrapped_p, is_unit, is_unitN,
                                extract_formatting_tags_from, cut_off_hint_from,
                                setup_wording_format_of,

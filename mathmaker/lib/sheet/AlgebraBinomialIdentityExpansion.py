@@ -22,7 +22,7 @@
 
 from . import exercise
 from mathmaker.lib import shared
-from lib.common import cst
+from mathmaker.lib.common import cst
 from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = -1

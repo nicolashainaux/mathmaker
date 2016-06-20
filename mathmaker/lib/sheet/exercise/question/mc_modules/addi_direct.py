@@ -23,10 +23,10 @@
 import os
 
 from mathmaker.lib import shared
-from lib.core.base_calculus import Sum
-from lib.core.root_calculus import Value
+from mathmaker.lib.core.base_calculus import Sum
+from mathmaker.lib.core.root_calculus import Value
 from . import mc_module
-from lib.tools.wording import post_process
+from mathmaker.lib.tools.wording import post_process
 
 class sub_object(mc_module.structure):
 

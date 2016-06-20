@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-from lib.tools.ext_dict import ext_dict
+from mathmaker.lib.tools.ext_dict import ext_dict
 
 
 def test_recursive_update():

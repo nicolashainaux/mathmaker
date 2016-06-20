@@ -23,19 +23,19 @@
 import math
 from decimal import Decimal
 
-from lib import *
+from mathmaker.lib import *
 from mathmaker.lib import shared
-from lib.common import alphabet
-from lib.common import pythagorean
-from lib.common.cst import *
-from lib.maths_lib import *
+from mathmaker.lib.common import alphabet
+from mathmaker.lib.common import pythagorean
+from mathmaker.lib.common.cst import *
+from mathmaker.lib.maths_lib import *
 from .Q_Structure import Q_Structure
-#from lib.core.calculus import Equality
-from lib.core.base_calculus import *
-from lib.core.calculus import *
-#from lib.core.base_geometry import *
-from lib.core.geometry import *
-#from lib.core.base import *
+#from mathmaker.lib.core.calculus import Equality
+from mathmaker.lib.core.base_calculus import *
+from mathmaker.lib.core.calculus import *
+#from mathmaker.lib.core.base_geometry import *
+from mathmaker.lib.core.geometry import *
+#from mathmaker.lib.core.base import *
 
 
 AVAILABLE_Q_KIND_VALUES = {'pythagorean_theorem': ['calculate_hypotenuse',

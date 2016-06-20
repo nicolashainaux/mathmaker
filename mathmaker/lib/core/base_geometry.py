@@ -32,11 +32,11 @@ import locale
 from decimal import *
 
 from .base import *
-from lib.core.base_calculus import Value
-from lib import *
-from lib.maths_lib import *
+from mathmaker.lib.core.base_calculus import Value
+from mathmaker.lib import *
+from mathmaker.lib.maths_lib import *
 
-from lib.common.latex import MARKUP
+from mathmaker.lib.common.latex import MARKUP
 
 
 # the mark 'dashed' has been removed from the available list since it may

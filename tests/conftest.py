@@ -23,7 +23,7 @@
 import sys
 import gettext
 
-from lib import __software_name__
+from mathmaker.lib import __software_name__
 from mathmaker import settings
 from mathmaker.lib import shared
 settings.init()

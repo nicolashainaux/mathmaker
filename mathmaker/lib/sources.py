@@ -24,11 +24,11 @@ import random
 from decimal import Decimal
 
 from mathmaker.lib import shared
-from lib.common.cst import RANKS
-from lib import randomly
-from lib.maths_lib import coprime_generator, generate_decimal
-from lib.tools.tag import classify_tag, translate_int_pairs_tag
-from lib.core.base_calculus import Fraction
+from mathmaker.lib.common.cst import RANKS
+from mathmaker.lib import randomly
+from mathmaker.lib.maths_lib import coprime_generator, generate_decimal
+from mathmaker.lib.tools.tag import classify_tag, translate_int_pairs_tag
+from mathmaker.lib.core.base_calculus import Fraction
 
 
 ##

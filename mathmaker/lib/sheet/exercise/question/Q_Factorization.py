@@ -20,13 +20,13 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib import *
+from mathmaker.lib import *
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
 
-from lib.core.base_calculus import *
-from lib.core.calculus import *
-from lib.common.cst import *
+from mathmaker.lib.core.base_calculus import *
+from mathmaker.lib.core.calculus import *
+from mathmaker.lib.common.cst import *
 
 AVAILABLE_Q_KIND_VALUES = {'level_01':['default',
                                        'ax + b',

@@ -23,7 +23,8 @@
 import pytest
 import decimal
 
-from lib.core.base_calculus import Item, Sum, Product
+from mathmaker.lib.core.root_calculus import Exponented
+from mathmaker.lib.core.base_calculus import Item, Sum, Product
 from tools import wrap_nb
 
 
@@ -57,6 +58,11 @@ def item_to_round(): return Item(6.548)
 
 @pytest.fixture()
 def item_with_unit(): return Item(19.5, unit='cm')
+
+
+def test_isinstance_01():
+    """Is Item correctly detected as an instance of Exponented?"""
+    assert isinstance(Item(4), Exponented)
 
 
 @pytest.fixture()

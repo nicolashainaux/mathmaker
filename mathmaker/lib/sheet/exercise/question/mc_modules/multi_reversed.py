@@ -23,8 +23,8 @@
 import random
 
 from mathmaker.lib import shared
-from lib.core.root_calculus import Value
-from lib.core.base_calculus import Product
+from mathmaker.lib.core.root_calculus import Value
+from mathmaker.lib.core.base_calculus import Product
 
 
 class sub_object(object):

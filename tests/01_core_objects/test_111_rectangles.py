@@ -20,9 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib.core.root_calculus import Value
-from lib.core.base_geometry import Point
-from lib.core.geometry import Rectangle
+from mathmaker.lib.core.root_calculus import Value
+from mathmaker.lib.core.base_geometry import Point
+from mathmaker.lib.core.geometry import Rectangle
 
 
 def test_r1_into_euk():

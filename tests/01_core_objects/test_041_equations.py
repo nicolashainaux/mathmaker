@@ -22,10 +22,10 @@
 
 import pytest
 
-from lib.core.base_calculus import Item, Monomial, Sum, Fraction, SquareRoot
-from lib.core.base_calculus import Expandable
-from lib.core.base_calculus import Polynomial
-from lib.core.calculus import Equation
+from mathmaker.lib.core.base_calculus import Item, Monomial, Sum, Fraction, SquareRoot
+from mathmaker.lib.core.base_calculus import Expandable
+from mathmaker.lib.core.base_calculus import Polynomial
+from mathmaker.lib.core.calculus import Equation
 from tools import wrap_nb
 
 

@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
-from lib import error
-from lib.common.cst import *
+from mathmaker.lib import error
+from mathmaker.lib.common.cst import *
 
 
 # ------------------------------------------------------------------------------

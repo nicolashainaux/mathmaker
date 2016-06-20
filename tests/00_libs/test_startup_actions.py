@@ -22,7 +22,7 @@
 
 import pytest
 
-from lib.startup_actions import (check_dependency, check_dependencies,
+from mathmaker.lib.startup_actions import (check_dependency, check_dependencies,
                                  install_gettext_translations,
                                  check_settings_consistency)
 

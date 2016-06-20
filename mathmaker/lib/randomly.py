@@ -22,9 +22,8 @@
 
 import math
 import random
-import lib.maths_lib
-from lib import error
-from lib.maths_lib import *
+from mathmaker.lib import error
+from mathmaker.lib.maths_lib import gcd
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -44,14 +43,12 @@ from lib.maths_lib import *
 #   results. Here's an example: [0.2, 0.4, 0.3, 0.1].
 #   @return An integer comprised between min_value & max_value
 def integer(min_value, max_value, **options):
-    if not ('weighted_table' in options                                       \
-            and len(options['weighted_table']) == max_value - min_value +1):
+    if not ('weighted_table' in options
+            and len(options['weighted_table']) == max_value - min_value + 1):
         # __
-        return int(math.ceil(random.random()*(max_value - min_value + 1)      \
-                             + min_value                                      \
-                             )                                                \
-                   - 1                                                        \
-                   )
+        return int(math.ceil(random.random() * (max_value - min_value + 1)
+                             + min_value)
+                   - 1)
 
     else:
         # The probability scale will be calculated there from the weighted
@@ -70,9 +67,10 @@ def integer(min_value, max_value, **options):
             if random_number >= last_step and random_number < proba_scale[i]:
                 return min_value + i
             else:
-                last_step  = random_number
+                last_step = random_number
 
         return max_value
+
 
 # --------------------------------------------------------------------------
 ##
@@ -93,13 +91,14 @@ def sign(**options):
     else:
         return '-'
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief Pops an element from the provided list
 #   @param provided_list The list where to pop an element from
 #   @return The randomly chosen element
 def pop(provided_list, **options):
-    if not ('weighted_table' in options \
+    if not ('weighted_table' in options
             and len(options['weighted_table']) == len(provided_list)):
         # __
         random_rank = integer(0, len(provided_list) - 1)
@@ -110,12 +109,14 @@ def pop(provided_list, **options):
         i = integer(0, len(provided_list) - 1, **options)
         return provided_list.pop(i)
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns a randomly decimal number between 0 and 1
 #   @return A randomly decimal number between 0 and 1
 def decimal_0_1():
     return random.random()
+
 
 # --------------------------------------------------------------------------
 ##
@@ -127,6 +128,7 @@ def heads_or_tails():
     else:
         return False
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns a randomly integer which is coprime to the given argument
@@ -137,15 +139,16 @@ def coprime_to(n, range):
     collected_numbers = []
 
     for number in range:
-        if lib.maths_lib.gcd(n, number) == 1:
+        if gcd(n, number) == 1:
             collected_numbers.append(number)
 
     if len(collected_numbers) == 0:
-        raise error.ImpossibleAction("find a number coprime to n " \
-                                     + "in the given range.")
+        raise error.ImpossibleAction("find a number coprime to n "
+                                     "in the given range.")
 
     else:
         return pop(collected_numbers)
+
 
 # --------------------------------------------------------------------------
 ##
@@ -162,11 +165,11 @@ def coprime_to_the_first(n, p, range):
     collected_numbers = []
 
     for number in range:
-        if lib.maths_lib.gcd(n, number) == 1:
+        if gcd(n, number) == 1:
             collected_numbers_coprime_to_n.append(number)
 
     for number in range:
-        if lib.maths_lib.gcd(p, number) > 1:
+        if gcd(p, number) > 1:
             collected_numbers_not_coprime_to_p.append(number)
 
     for number in collected_numbers_coprime_to_n:
@@ -178,11 +181,12 @@ def coprime_to_the_first(n, p, range):
 
     else:
         if len(collected_numbers_coprime_to_n) == 0:
-            raise error.ImpossibleAction("find a number coprime to n " \
-                                         + "in the given range.")
+            raise error.ImpossibleAction("find a number coprime to n "
+                                         "in the given range.")
 
         else:
             return pop(collected_numbers_coprime_to_n)
+
 
 # --------------------------------------------------------------------------
 ##
@@ -203,16 +207,17 @@ def not_coprime_to(n, range, **options):
         avoid = options['excepted']
 
     for number in range:
-        if lib.maths_lib.gcd(n, number) != 1:
+        if gcd(n, number) != 1:
             if not (check and number == avoid):
                 collected_numbers.append(number)
 
     if len(collected_numbers) == 0:
-        raise error.ImpossibleAction("find a number not coprime to n " \
+        raise error.ImpossibleAction("find a number not coprime to n "
                                      + "in the given range.")
 
     else:
         return pop(collected_numbers)
+
 
 # --------------------------------------------------------------------------
 ##
@@ -228,11 +233,11 @@ def mix(objects_list):
     for i in range(len(objects_list) - 2):
         j = integer(0, len(objects_list) - 1)
 
-        if i != j and order_changed == False:
+        if i != j and order_changed is False:
             order_changed = True
 
         next_to_add = objects_list[j].clone()
-        trash = objects_list.pop(j)
+        objects_list.pop(j)
 
         result.append(next_to_add)
 
@@ -248,7 +253,4 @@ def mix(objects_list):
         next_to_add = objects_list[0].clone()
         result.append(next_to_add)
 
-
     return result
-
-

@@ -20,7 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib.maths_lib import ten_power_gcd
+from mathmaker.lib.maths_lib import ten_power_gcd
 
 
 def test_ten_power_gcd_1():

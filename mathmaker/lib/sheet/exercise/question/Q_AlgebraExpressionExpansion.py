@@ -21,11 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
-from lib import *
-from lib.common.cst import *
+from mathmaker.lib import *
+from mathmaker.lib.common.cst import *
 from .Q_Structure import Q_Structure
-from lib.core.base_calculus import *
-from lib.core.calculus import *
+from mathmaker.lib.core.base_calculus import *
+from mathmaker.lib.core.calculus import *
 
 # DON'T FORGET FOR THIS QUESTION TO ALSO DEFINE
 # THE INIT CALLER (JUST AFTER AVAILABLE_Q_KIND_VALUES)

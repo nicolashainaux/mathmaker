@@ -24,7 +24,7 @@ import copy
 import random
 from collections import namedtuple
 
-from lib import *
+from mathmaker.lib import *
 from mathmaker.lib import shared
 from .X_Structure import X_Structure
 from . import question
@@ -217,7 +217,7 @@ class X_MentalCalculation(X_Structure):
     #   @return One instance of exercise.X_MentalCalculation
     def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
-        from lib.tools.xml_sheet import get_q_kinds_from, get_xml_sheets_paths
+        from mathmaker.lib.tools.xml_sheet import get_q_kinds_from, get_xml_sheets_paths
 
         XML_SHEETS = get_xml_sheets_paths()
 

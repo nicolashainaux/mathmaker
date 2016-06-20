@@ -44,7 +44,7 @@ class S_Generic(S_Structure):
     #   @return One instance of sheet.Generic
     def __init__(self, filename, **options):
         self.derived = True
-        from lib.tools.xml_sheet import get_sheet_config, get_exercises_list
+        from mathmaker.lib.tools.xml_sheet import get_sheet_config, get_exercises_list
 
         (header,
          title,

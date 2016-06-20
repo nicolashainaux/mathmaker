@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
-from lib.core.base_calculus import *
-from lib.core.root_calculus import *
+from mathmaker.lib.core.base_calculus import *
+from mathmaker.lib.core.root_calculus import *
 
 
 class sub_object(object):

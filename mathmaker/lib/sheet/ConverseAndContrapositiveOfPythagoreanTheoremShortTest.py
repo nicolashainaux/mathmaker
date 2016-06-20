@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from . import exercise
-from lib import randomly
+from mathmaker.lib import randomly
 
 from .S_Structure import S_Structure
 

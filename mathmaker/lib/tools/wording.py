@@ -25,10 +25,10 @@ import copy
 import re
 
 from mathmaker import settings
-from lib import error
+from mathmaker.lib import error
 from mathmaker.lib import shared
-from lib.core.root_calculus import Unit, Value
-from lib.common.cst import UNIT_KINDS, COMMON_LENGTH_UNITS, CURRENCIES_DICT
+from mathmaker.lib.core.root_calculus import Unit, Value
+from mathmaker.lib.common.cst import UNIT_KINDS, COMMON_LENGTH_UNITS, CURRENCIES_DICT
 
 
 # --------------------------------------------------------------------------

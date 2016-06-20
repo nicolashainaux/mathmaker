@@ -22,7 +22,7 @@
 
 import pytest
 
-from lib.core.base_calculus import Item, Sum, Fraction
+from mathmaker.lib.core.base_calculus import Item, Sum, Fraction
 from tools import wrap_nb
 
 

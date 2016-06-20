@@ -22,8 +22,8 @@
 
 import pytest
 
-from lib.core.base_calculus import Item
-from lib.core.calculus import Table
+from mathmaker.lib.core.base_calculus import Item
+from mathmaker.lib.core.calculus import Table
 from tools import wrap_nb
 
 

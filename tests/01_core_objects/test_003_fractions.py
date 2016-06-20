@@ -23,7 +23,7 @@
 import pytest
 import decimal
 
-from lib.core.base_calculus import Item, Product, Fraction
+from mathmaker.lib.core.base_calculus import Item, Product, Fraction
 from tools import wrap_nb
 
 

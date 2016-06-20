@@ -29,15 +29,14 @@
 import math
 from decimal import *
 
-import lib.core
 from mathmaker import settings
 from .base import *
-from .root_calculus import *
-from lib import randomly
-from lib.maths_lib import *
-from lib.common.cst import *
+from mathmaker.lib.core.root_calculus import *
+from mathmaker.lib import randomly
+from mathmaker.lib.maths_lib import *
+from mathmaker.lib.common.cst import *
 from .utils import *
-from lib.common.latex import MARKUP
+from mathmaker.lib.common.latex import MARKUP
 
 
 # Maximum ratio of constant terms accepted during the creation of random
@@ -974,6 +973,7 @@ class Function(Item):
     #   meant to be the inverse function of the third one
     #   @return One instance of Function
     def __init__(self, arg):
+        from mathmaker.lib.core.base_geometry import Angle
         if not type(arg) == tuple:
             raise error.WrongArgument(str(type(arg)), "a tuple")
 
@@ -984,7 +984,7 @@ class Function(Item):
         if not type(arg[0]) == str:
             raise error.WrongArgument(str(type(arg[0])), "a str")
 
-        if not isinstance(arg[1], lib.core.base_geometry.Angle) \
+        if not isinstance(arg[1], Angle) \
             and not (isinstance(arg[1], Calculable) and arg[1].is_literal()):
             # __
             raise error.WrongArgument(str(type(arg[1])),

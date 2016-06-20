@@ -24,8 +24,8 @@ import os
 import subprocess
 
 from mathmaker import settings
-from lib import error
-from lib.tools import header_comment
+from mathmaker.lib import error
+from mathmaker.lib.tools import header_comment
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------

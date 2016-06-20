@@ -27,8 +27,8 @@ import gettext
 from distutils.version import LooseVersion
 
 from mathmaker import settings
-from lib import __software_name__
-from lib.common import latex
+from mathmaker.lib import __software_name__
+from mathmaker.lib.common import latex
 
 
 def check_dependency(name, goal, path_to, required_version_nb):
@@ -53,8 +53,8 @@ def check_dependency(name, goal, path_to, required_version_nb):
     the_call = None
     try:
         the_call = subprocess.Popen([path_to, "--version"],
-                                     stdout=subprocess.PIPE,
-                                     stderr=subprocess.STDOUT)
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.STDOUT)
     except OSError:
         add_msg = " but the path to {n} written in mathmaker's "\
                   "config file doesn't seem to match anything.".format(n=name)
@@ -63,8 +63,8 @@ def check_dependency(name, goal, path_to, required_version_nb):
 
     v = shlex.split(subprocess.Popen(["grep", "version"],
                                      stdin=the_call.stdout,
-                                     stdout=subprocess.PIPE)\
-                                    .communicate()[0].decode())[-1]
+                                     stdout=subprocess.PIPE)
+                    .communicate()[0].decode())[-1]
 
     installed_version_nb = str(v)
 
@@ -81,7 +81,7 @@ def check_dependency(name, goal, path_to, required_version_nb):
 def check_dependencies():
     """Will check all mathmaker's dependencies."""
     return (check_dependency("euktoeps", "produce pictures",
-                            settings.euktoeps, "1.5.4")
+                             settings.euktoeps, "1.5.4")
             and check_dependency("xmllint", "read xml files",
                                  settings.xmllint, "20901"))
 
@@ -121,7 +121,7 @@ def check_settings_consistency(**kwargs):
               + ') is not defined in the LaTeX packages known by mathmaker. '\
               'Stopping mathmaker.'
     try:
-        dummy = latex.LANGUAGE_PACKAGE_NAME[language]
+        latex.LANGUAGE_PACKAGE_NAME[language]
     except KeyError:
         log.critical(err_msg, exc_info=True)
         raise ValueError(err_msg)

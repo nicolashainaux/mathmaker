@@ -20,11 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from lib import *
+from mathmaker.lib import *
 from .X_Structure import X_Structure
 from . import question
-from lib.core.base_calculus import *
-#from lib.core import randomly
+from mathmaker.lib.core.base_calculus import *
+#from mathmaker.lib.core import randomly
 
 AVAILABLE_X_KIND_VALUES = \
     {'short_test': ['sign_expansion', 'medium_level',

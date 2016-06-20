@@ -22,7 +22,7 @@
 
 import pytest
 
-from lib.core.base_calculus import Quotient, Fraction
+from mathmaker.lib.core.base_calculus import Quotient, Fraction
 from tools import wrap_nb
 
 

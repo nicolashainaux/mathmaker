@@ -23,12 +23,12 @@
 import sys
 
 from mathmaker import settings
-from lib.common import latex
-from lib.tools import header_comment
-from lib.common.cst import *
-from lib import is_
-from lib.core.base import Printable, Drawable
-from lib import *
+from mathmaker.lib.common import latex
+from mathmaker.lib.tools import header_comment
+from mathmaker.lib.common.cst import *
+from mathmaker.lib import is_
+from mathmaker.lib.core.base import Printable, Drawable
+from mathmaker.lib import *
 
 from . import Structure
 

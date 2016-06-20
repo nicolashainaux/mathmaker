@@ -20,9 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from decimal import Decimal
-
-import lib.core.base_calculus
 
 # --------------------------------------------------------------------------
 ##
@@ -31,6 +28,7 @@ import lib.core.base_calculus
 #   Notice that the Items' sign isn't managed here
 #   @param provided_list The literal Items list
 def reduce_literal_items_product(provided_list):
+    from mathmaker.lib.core.base_calculus import Item, Product
     aux_dict = {}
 
     if not isinstance(provided_list, list):
@@ -38,29 +36,30 @@ def reduce_literal_items_product(provided_list):
                         + str(type(provided_list)))
 
     for i in range(len(provided_list)):
-        if isinstance(provided_list[i], lib.core.base_calculus.Item):
+        if isinstance(provided_list[i], Item):
             if provided_list[i].is_literal():
-                if not provided_list[i].raw_value in aux_dict:
-                    aux_dict[provided_list[i].raw_value] =         \
-                                    provided_list[i].exponent.raw_value
+                if provided_list[i].raw_value not in aux_dict:
+                    aux_dict[provided_list[i].raw_value] = \
+                        provided_list[i].exponent.raw_value
                 else:
-                    aux_dict[provided_list[i].raw_value] +=        \
-                                    provided_list[i].exponent.raw_value
-        elif isinstance(provided_list[i], lib.core.base_calculus.Product):
+                    aux_dict[provided_list[i].raw_value] += \
+                        provided_list[i].exponent.raw_value
+        elif isinstance(provided_list[i], Product):
             if len(provided_list[i].factor) == 1:
-                if isinstance(provided_list[i].factor[0],
-                              lib.core.base_calculus.Item):
+                if isinstance(provided_list[i].factor[0], Item):
                     if provided_list[i].factor[0].is_literal():
-                        if not provided_list[i].factor[0].raw_value in aux_dict:
-                            aux_dict[provided_list[i].factor[0].raw_value] =  \
-                                          provided_list[i].exponent           \
-                                          * provided_list[i].factor[0].exponent
+                        if (provided_list[i].factor[0].raw_value
+                            not in aux_dict):
+                            # __
+                            aux_dict[provided_list[i].factor[0].raw_value] = \
+                                provided_list[i].exponent \
+                                * provided_list[i].factor[0].exponent
                         else:
                             aux_dict[provided_list[i].factor[0].raw_value] += \
-                                           provided_list[i].exponent          \
-                                          * provided_list[i].factor[0].exponent
+                                provided_list[i].exponent \
+                                * provided_list[i].factor[0].exponent
                     else:
-                        raise TypeError('A literal Item was expected, not '                         \
+                        raise TypeError('A literal Item was expected, not '
                                         'a numeric one.')
                 else:
                     raise TypeError('Expected an Item, not a '
@@ -76,10 +75,10 @@ def reduce_literal_items_product(provided_list):
     reduced_list = []
 
     for key in aux_dict:
-        aux_item = lib.core.base_calculus.Item(('+', key, aux_dict[key]))
-        reduced_list.append(aux_item)
+        reduced_list.append(Item(('+', key, aux_dict[key])))
 
     return sorted(reduced_list, key=lambda elt: elt.get_first_letter())
+
 
 # --------------------------------------------------------------------------
 ##
@@ -92,6 +91,7 @@ def reduce_literal_items_product(provided_list):
 #   @param  associated_coeff The value to save in the or add to the Sum
 #   @param  lexi The dictionary where to put the couple key/coeff
 def put_term_in_lexicon(provided_key, associated_coeff, lexi):
+    from mathmaker.lib.core.base_calculus import Sum
     # This flag will remain False as long as the key isn't found in the lexicon
     key_s_been_found = False
 
@@ -107,8 +107,9 @@ def put_term_in_lexicon(provided_key, associated_coeff, lexi):
             key_s_been_found = True
 
     if not key_s_been_found:
-        new_coeff_sum = lib.core.base_calculus.Sum([associated_coeff])
+        new_coeff_sum = Sum([associated_coeff])
         lexi[provided_key] = new_coeff_sum
+
 
 # --------------------------------------------------------------------------
 ##
@@ -116,10 +117,11 @@ def put_term_in_lexicon(provided_key, associated_coeff, lexi):
 #   @param xpr The (Calculable) expression to iter over
 #   @return [literal Values]
 def gather_literals(xpr):
-    if not isinstance(xpr, lib.core.base_calculus.Calculable):
+    from mathmaker.lib.core.root_calculus import Value, Calculable
+    if not isinstance(xpr, Calculable):
         raise TypeError('Expected a Calculable, not a ' + str(type(xpr)))
 
-    if isinstance(xpr, lib.core.base_calculus.Value):
+    if isinstance(xpr, Value):
         if xpr.is_literal():
             return [xpr]
         else:
@@ -140,9 +142,10 @@ def gather_literals(xpr):
 #                   ('all'|'all_but_one'|'at_least_one'|int)
 #   @return True|False
 def check_lexicon_for_substitution(objcts, subst_dict, how_many):
+    from mathmaker.lib.core.root_calculus import Value, Calculable
     literals_list = []
 
-    if not (how_many == 'all' or how_many == 'all_but_one' \
+    if not (how_many == 'all' or how_many == 'all_but_one'
             or how_many == 'at_least_one' or type(how_many) == int):
         # __
         raise ValueError('Argument how_many should contain '
@@ -153,18 +156,17 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
         raise TypeError('Expected a list, not a ' + str(type(objcts)))
 
     for elt in objcts:
-        if not isinstance(elt, lib.core.base_calculus.Calculable):
+        if not isinstance(elt, Calculable):
             raise TypeError('Expected a Calculable, not a ' + str(type(elt)))
 
     if not type(subst_dict) == dict:
         raise TypeError('Expected a dict, not a ' + str(type(subst_dict)))
 
     for elt in subst_dict:
-        if not (isinstance(elt, lib.core.base_calculus.Value) \
-                and elt.is_literal() \
-                and isinstance(subst_dict[elt], lib.core.base_calculus.Value) \
-                and subst_dict[elt].is_numeric()
-                ):
+        if not (isinstance(elt, Value)
+                and elt.is_literal()
+                and isinstance(subst_dict[elt], Value)
+                and subst_dict[elt].is_numeric()):
             # __
             raise TypeError('Expected key: value pairs being of type '
                             'literal Value: numeric Value')
@@ -173,69 +175,71 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
     for xpr in objcts:
         literals_list += gather_literals(xpr)
 
-    #debug_str = ""
-    #for l in literals_list:
+    # debug_str = ""
+    # for l in literals_list:
     #    debug_str += repr(l) + " "
-    #print "debug: literals_list = " + debug_str + "\n"
+    # print "debug: literals_list = " + debug_str + "\n"
 
     literals_list = list(set(literals_list))
-    #literals_list_bis = []
-    #for elt in literals_list:
+    # literals_list_bis = []
+    # for elt in literals_list:
     #    literals_list_bis += [elt.clone()]
 
-    #debug_str = ""
-    #for l in literals_list:
+    # debug_str = ""
+    # for l in literals_list:
     #    debug_str += repr(l) + " "
-    #print "debug: literals_list after purging = " + debug_str + "\n"
+    # print "debug: literals_list after purging = " + debug_str + "\n"
 
     subst_dict_copy = {}
     for key in subst_dict:
         subst_dict_copy[key] = subst_dict[key].clone()
 
-    #for k in subst_dict_copy:
-    #    print "debug: subst_dict_copy[" + repr(k) + "] = " + repr(subst_dict_copy[k]) + "\n"
+    # for k in subst_dict_copy:
+    #    print "debug: subst_dict_copy[" + repr(k) + "] = "
+    # + repr(subst_dict_copy[k]) + "\n"
 
     # Now check if the literals of the expressions are all in the lexicon
     n = 0
     N = len(literals_list)
-    #collected_is= []
+    # collected_is= []
     for i in range(len(literals_list)):
-        #print "debug: literals_list[" + str(i) + "] = " + repr(literals_list[i]) + " is in subst_dict_copy ? " + str(literals_list[i] in subst_dict_copy) + "\n"
-        #if i >= 1:
-            #print "debug: checking the keys... "
+        # print "debug: literals_list[" + str(i) + "] = "
+        # + repr(literals_list[i]) + " is in subst_dict_copy ? "
+        # + str(literals_list[i] in subst_dict_copy) + "\n"
+        # if i >= 1:
+            # print "debug: checking the keys... "
         collected_keys = []
         for key in subst_dict_copy:
-            #print "debug: key = " + repr(k) + " key == literals_list[" + str(i) + "] ? " + str(k == literals_list[i])
+            # print "debug: key = " + repr(k) + " key == literals_list[" +
+            # str(i) + "] ? " + str(k == literals_list[i])
             if key == literals_list[i]:
                 n += 1
-                #collected_is += [i]
+                # collected_is += [i]
                 collected_keys += [key]
         for k in collected_keys:
             subst_dict_copy.pop(k)
 
-    #for i in collected_is:
+    # for i in collected_is:
     #    literals_list.pop(i)
 
-
-        #if literals_list[i] in subst_dict_copy:
+        # if literals_list[i] in subst_dict_copy:
         #    print "debug: found one elt \n"
         #    n += 1
         #    literals_list.pop(i)
         #    subst_dict_copy.pop(literals_list[i])
 
     if not len(subst_dict_copy) == 0:
-        #print "debug: quitting here\n"
+        # print "debug: quitting here\n"
         return False
 
-    #print "debug: how_many = " + str(how_many) + "\n"
+    # print "debug: how_many = " + str(how_many) + "\n"
 
     if how_many == 'all':
         return n == N
     elif how_many == 'all_but_one':
         return n == N - 1
     elif how_many == 'at_least_one':
-        #print "debug: n = " + str(n) + "\n"
+        # print "debug: n = " + str(n) + "\n"
         return n >= 1
     else:
         return n == how_many
-

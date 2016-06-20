@@ -24,14 +24,14 @@ import random
 import copy
 from decimal import Decimal
 
-from lib.core.root_calculus import Unit, Value
-from lib.core.base_calculus import Product, Quotient, Item
-from lib.core.base_geometry import Point
-from lib.core.geometry import Rectangle, Square
-from lib import error
+from mathmaker.lib.core.root_calculus import Unit, Value
+from mathmaker.lib.core.base_calculus import Product, Quotient, Item
+from mathmaker.lib.core.base_geometry import Point
+from mathmaker.lib.core.geometry import Rectangle, Square
+from mathmaker.lib import error
 from mathmaker.lib import shared
-from lib.common.cst import COMMON_LENGTH_UNITS
-from lib.tools.wording import setup_wording_format_of
+from mathmaker.lib.common.cst import COMMON_LENGTH_UNITS
+from mathmaker.lib.tools.wording import setup_wording_format_of
 
 class structure(object):
 

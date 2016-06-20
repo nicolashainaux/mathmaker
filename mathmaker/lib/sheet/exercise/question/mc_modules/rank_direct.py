@@ -24,7 +24,7 @@
 
 from decimal import Decimal
 
-from lib.common.cst import *
+from mathmaker.lib.common.cst import *
 from . import rank_reversed
 
 class sub_object(object):

@@ -26,10 +26,10 @@ import os, random, copy
 
 import sys
 
-from lib.core.base_calculus import *
-from lib import randomly
-from lib.common.cst import *
-from lib import error
+from mathmaker.lib.core.base_calculus import *
+from mathmaker.lib import randomly
+from mathmaker.lib.common.cst import *
+from mathmaker.lib import error
 
 DEFAULT_WIDTH = "random"
 DEFAULT_RANKS_SCALE = RANKS

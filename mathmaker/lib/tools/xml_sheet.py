@@ -29,9 +29,9 @@ import random
 
 from mathmaker import settings
 import xml.etree.ElementTree as XML_PARSER
-from lib.sheet import exercise
-from lib.sheet.exercise import question
-from lib import error
+from mathmaker.lib.sheet import exercise
+from mathmaker.lib.sheet.exercise import question
+from mathmaker.lib import error
 
 
 CATALOG = {'mental_calculation': exercise.X_MentalCalculation}

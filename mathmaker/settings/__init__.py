@@ -25,8 +25,8 @@ import logging
 import logging.config
 from shutil import copyfile
 
-from lib.tools.ext_dict import ext_dict
-from lib.tools.config import load_config
+from mathmaker.lib.tools.ext_dict import ext_dict
+from mathmaker.lib.tools.config import load_config
 
 AVAILABLE = {'LANGUAGES': ['fr', 'fr_FR', 'en', 'en_US', 'en_GB'],
              'CURRENCY': {'fr': 'euro', 'fr_FR': 'euro',
