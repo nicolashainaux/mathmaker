@@ -39,7 +39,7 @@ CATALOG = {'mental_calculation': exercise.X_MentalCalculation}
 
 
 def get_xml_frameworks_path():
-    return settings.libdir + 'sheet/frameworks/'
+    return settings.datadir + 'frameworks/'
 
 
 def get_xml_schema_path():
