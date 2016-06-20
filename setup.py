@@ -66,7 +66,6 @@ setup(
                 'and their (detailed) answers.',
     long_description=read('README.rst', 'CHANGELOG.rst'),
     packages=find_packages(exclude=['tests']),
-    #    package_dir={'mathmaker': 'mathmaker'},
     entry_points={
         'console_scripts': ['mathmaker = mathmaker.cli:entry_point'],
     },
