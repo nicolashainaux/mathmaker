@@ -26,16 +26,13 @@
 # @package core.base_geometry
 # @brief Mathematical elementary geometrical objects.
 
-import sys
 import math
-import locale
-from decimal import *
+from decimal import Decimal, ROUND_HALF_UP
 
-from .base import *
+from mathmaker.lib import error, is_
+from mathmaker.lib.maths_lib import deg_to_rad
+from mathmaker.lib.base import Drawable
 from mathmaker.lib.core.base_calculus import Value
-from mathmaker.lib import *
-from mathmaker.lib.maths_lib import *
-
 from mathmaker.lib.common.latex import MARKUP
 
 
@@ -44,9 +41,6 @@ from mathmaker.lib.common.latex import MARKUP
 AVAILABLE_ANGLE_MARKS = ['', 'simple', 'double', 'triple', 'right',
                          'forth', 'back', 'dotted']
 AVAILABLE_SEGMENT_MARKS = ['', 'simple', 'double', 'triple', 'cross']
-
-# GLOBAL
-#expression_begins = True
 
 
 # ------------------------------------------------------------------------------
@@ -73,18 +67,17 @@ class Point(Drawable):
 
         elif type(arg) == list:
             if not len(arg) == 2:
-                raise error.WrongArgument(' a list of length ' \
+                raise error.WrongArgument(' a list of length '
                                           + str(len(arg)),
-                                          ' a list of length 2 '
-                                          )
+                                          ' a list of length 2 ')
 
             if not type(arg[0]) == str:
                 raise error.WrongArgument(str(type(arg[0])), ' a str ')
 
-            if not (type(arg[1]) == tuple \
-                and len(arg[1]) == 2 \
-                and is_.a_number(arg[1][0]) \
-                and is_.a_number(arg[1][1])):
+            if not (type(arg[1]) == tuple
+                    and len(arg[1]) == 2
+                    and is_.a_number(arg[1][0])
+                    and is_.a_number(arg[1][1])):
                 # __
                 raise error.WrongArgument(str(arg), ' (x, y) ')
 
@@ -107,8 +100,7 @@ class Point(Drawable):
     def x(self):
         return round(Decimal(str(self._x)),
                      Decimal('0.01'),
-                     rounding=ROUND_HALF_UP
-                    )
+                     rounding=ROUND_HALF_UP)
 
     # --------------------------------------------------------------------------
     ##
@@ -124,8 +116,7 @@ class Point(Drawable):
     def y(self):
         return round(Decimal(str(self._y)),
                      Decimal('0.01'),
-                     rounding=ROUND_HALF_UP
-                    )
+                     rounding=ROUND_HALF_UP)
 
     # --------------------------------------------------------------------------
     ##
@@ -185,12 +176,12 @@ class Point(Drawable):
         delta_x = self.x_exact - center.x_exact
         delta_y = self.y_exact - center.y_exact
 
-        rx = delta_x*Decimal(str(math.cos(deg_to_rad(angle)))) \
-             - delta_y*Decimal(str(math.sin(deg_to_rad(angle)))) \
-             + center.x_exact
-        ry = delta_x*Decimal(str(math.sin(deg_to_rad(angle)))) \
-             + delta_y*Decimal(str(math.cos(deg_to_rad(angle)))) \
-             + center.y_exact
+        rx = delta_x * Decimal(str(math.cos(deg_to_rad(angle)))) \
+            - delta_y * Decimal(str(math.sin(deg_to_rad(angle)))) \
+            + center.x_exact
+        ry = delta_x * Decimal(str(math.sin(deg_to_rad(angle)))) \
+            + delta_y * Decimal(str(math.cos(deg_to_rad(angle)))) \
+            + center.y_exact
 
         new_name = self.name + "'"
 
@@ -201,7 +192,6 @@ class Point(Drawable):
             new_name = options['new_name']
 
         return Point([new_name, (rx, ry)])
-
 
 
 # ------------------------------------------------------------------------------
@@ -223,11 +213,9 @@ class Segment(Drawable):
     #   -
     #   @warning Might raise...
     def __init__(self, arg, **options):
-        self._label  = Value("")
-
+        self._label = Value("")
         if not (type(arg) == tuple or isinstance(arg, Segment)):
             raise error.WrongArgument(' tuple|Segment ', str(type(arg)))
-
         elif type(arg) == tuple:
             if not (isinstance(arg[0], Point) and isinstance(arg[1], Point)):
                 # __
@@ -237,19 +225,13 @@ class Segment(Drawable):
 
             if 'label' in options and type(options['label']) == str:
                 self._label = options['label']
-
         else:
             self._points = (arg.points[0].clone(),
-                            arg.points[1].clone()
-                           )
+                            arg.points[1].clone())
             self._label = arg.label
-
         self._mark = ""
-
         self._name = "[" + self.points[0].name + self.points[1].name + "]"
-
         self._length = Value(0)
-
         self._length_has_been_set = False
 
     # --------------------------------------------------------------------------
@@ -265,7 +247,6 @@ class Segment(Drawable):
     @property
     def label(self):
         return self._label
-
 
     # --------------------------------------------------------------------------
     ##
@@ -312,7 +293,7 @@ class Segment(Drawable):
     #               set to "?". Otherwise, if it evaluates to False, it will be
     #               set to "", and to True, it will be set to its length.
     def setup_label(self, flag):
-        if flag == None or flag == "?":
+        if flag is None or flag == "?":
             self.label = Value("?")
 
         elif flag:
@@ -337,11 +318,11 @@ class Segment(Drawable):
     @length.setter
     def length(self, arg):
         if not isinstance(arg, Value):
-            raise TypeError('Expected a Value, got ' + str(type(arg)) + " "\
+            raise TypeError('Expected a Value, got ' + str(type(arg)) + " "
                             'instead.')
         if not arg.is_numeric():
             raise error.WrongArgument('numeric Value',
-                                      'a Value but not numeric, it contains ' \
+                                      'a Value but not numeric, it contains '
                                       + str(arg.raw_value))
         self._length = arg
         self._length_has_been_set = True
@@ -354,11 +335,12 @@ class Segment(Drawable):
         if not type(arg) == str:
             raise error.WrongArgument(' str ', str(type(arg)))
 
-        if not arg in AVAILABLE_SEGMENT_MARKS:
-            raise error.WrongArgument(arg, 'a string from this list: ' \
+        if arg not in AVAILABLE_SEGMENT_MARKS:
+            raise error.WrongArgument(arg, 'a string from this list: '
                                       + str(AVAILABLE_SEGMENT_MARKS))
 
         self._mark = arg
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -388,14 +370,11 @@ class Vector(Point):
             elif all([is_.a_number(elt) for elt in arg]):
                 Point.__init__(self, Point(["", (arg[0], arg[1])]))
             else:
-                raise error.WrongArgument(\
-                                        "a tuple not only of Points or numbers",
+                raise error.WrongArgument("a tuple not only of Points or"
+                                          " numbers",
                                           "(Point,Point)|(x,y)")
-
         else:
             raise error.WrongArgument(str(type(arg)), "Point|(,)")
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -420,20 +399,18 @@ class Vector(Point):
     #   @brief Slope of a Vector
     @property
     def slope(self):
-        theta = round(Decimal(str(math.degrees(\
-                                  math.acos(self._x_exact/self.norm)))),
-                     Decimal('0.1'),
-                     rounding=ROUND_HALF_UP
-                    )
-
+        theta = round(Decimal(str(math.degrees(
+                                  math.acos(self._x_exact / self.norm)))),
+                      Decimal('0.1'),
+                      rounding=ROUND_HALF_UP)
         return theta if self._y_exact > 0 else Decimal("360") - theta
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the unit vector built from self
     def unit_vector(self):
-        return Vector((self._x_exact/self.norm,
-                       self._y_exact/self.norm))
+        return Vector((self._x_exact / self.norm,
+                       self._y_exact / self.norm))
 
     # --------------------------------------------------------------------------
     ##
@@ -443,6 +420,7 @@ class Vector(Point):
             raise error.WrongArgument(str(type(arg)), "a Vector")
 
         return self.unit_vector() + arg.unit_vector()
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -460,19 +438,20 @@ class Ray(Drawable):
     #   Options details:
     #   @warning Might raise...
     def __init__(self, arg, **options):
-        self._point0 = None # the initial point
+        self._point0 = None  # the initial point
         self._point1 = None
         self._name = None
 
-        if isinstance(arg, tuple) and len(arg) == 2 \
-            and isinstance(arg[0], Point) \
-            and isinstance(arg[1], Point):
+        if (isinstance(arg, tuple) and len(arg) == 2
+            and isinstance(arg[0], Point)
+            and isinstance(arg[1], Point)):
             # __
             self._point0 = arg[0].clone()
             self._point1 = arg[1].clone()
             self._name = MARKUP['opening_square_bracket']
             self._name += arg[0].name + arg[1].name
             self._name += MARKUP['closing_bracket']
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -498,10 +477,10 @@ class Angle(Drawable):
         self._label = Value("")
         self._name = None
 
-        if isinstance(arg, tuple) and len(arg) == 3 \
-            and isinstance(arg[0], Point) \
-            and isinstance(arg[1], Point) \
-            and isinstance(arg[2], Point):
+        if (isinstance(arg, tuple) and len(arg) == 3
+            and isinstance(arg[0], Point)
+            and isinstance(arg[1], Point)
+            and isinstance(arg[2], Point)):
             # __
             self._ray0 = Ray((arg[1], arg[0]))
             self._ray1 = Ray((arg[1], arg[2]))
@@ -514,8 +493,8 @@ class Angle(Drawable):
             aux_side1 = Segment((self._points[1], self._points[2]))
             aux_side2 = Segment((self._points[2], self._points[0]))
             aux_num = aux_side0.real_length * aux_side0.real_length \
-                    + aux_side1.real_length * aux_side1.real_length \
-                    - aux_side2.real_length * aux_side2.real_length
+                + aux_side1.real_length * aux_side1.real_length \
+                - aux_side2.real_length * aux_side2.real_length
             aux_denom = 2 * aux_side0.real_length * aux_side1.real_length
             aux_cos = aux_num / aux_denom
             self._measure = Decimal(str(math.degrees(math.acos(aux_cos))))
@@ -529,14 +508,13 @@ class Angle(Drawable):
             self._name = MARKUP['opening_widehat']
             self._name += arg[0].name + arg[1].name + arg[2].name
             self._name += MARKUP['closing_widehat']
-
         else:
-            raise error.WrongArgument(' (Point, Point, Point) ', str(type(arg)))
+            raise error.WrongArgument(' (Point, Point, Point) ',
+                                      str(type(arg)))
 
         self._label_display_angle = round(Decimal(str(self._measure)),
                                           Decimal('0.1'),
-                                          rounding=ROUND_HALF_UP
-                                         ) / 2
+                                          rounding=ROUND_HALF_UP) / 2
 
     # --------------------------------------------------------------------------
     ##
@@ -580,8 +558,6 @@ class Angle(Drawable):
     def vertex(self):
         return self._points[1]
 
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the label of the angle
@@ -603,8 +579,7 @@ class Angle(Drawable):
         else:
             self._label_display_angle = round(Decimal(str(arg)),
                                               Decimal('0.1'),
-                                              rounding=ROUND_HALF_UP
-                                             )
+                                              rounding=ROUND_HALF_UP)
 
     # --------------------------------------------------------------------------
     ##
@@ -615,7 +590,7 @@ class Angle(Drawable):
             if arg in AVAILABLE_ANGLE_MARKS:
                 self._mark = arg
             else:
-                raise error.WrongArgument(arg, 'a string from this list: ' \
+                raise error.WrongArgument(arg, 'a string from this list: '
                                                + str(AVAILABLE_ANGLE_MARKS))
 
         else:

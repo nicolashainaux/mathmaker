@@ -56,32 +56,29 @@ FRACTIONS_SUMS_TABLE = [([1, 2], 15),
                         ([5, 7], 4),
                         ([6, 7], 3)]
 
-FRACTIONS_SUMS_SCALE_TABLE = [0.02,  #(1, 2)
+FRACTIONS_SUMS_SCALE_TABLE = [0.02,  # (1, 2)
                               0.02,
                               0.02,
                               0.01,
                               0.005,
-                              0.005,  #(1, 7)
-                              0.21,  #(2, 3)
-                              0.14,  #(2, 5)
-                              0.02,  #(2, 7)
-                              0.21,  #(3, 4)
-                              0.14,  #(3, 5)
-                              0.01,  #(3, 7)
-                              0.16,  #(4, 5)
-                              0.01,  #(4, 7)
-                              0.01,  #(5, 6)
-                              0.005,  #(5, 7)
-                              0.005]  #(6, 7)
-
-
+                              0.005,  # (1, 7)
+                              0.21,  # (2, 3)
+                              0.14,  # (2, 5)
+                              0.02,  # (2, 7)
+                              0.21,  # (3, 4)
+                              0.14,  # (3, 5)
+                              0.01,  # (3, 7)
+                              0.16,  # (4, 5)
+                              0.01,  # (4, 7)
+                              0.01,  # (5, 6)
+                              0.005,  # (5, 7)
+                              0.005]  # (6, 7)
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
 # @package core.calculus
-
 
 
 # ------------------------------------------------------------------------------
@@ -98,6 +95,7 @@ class ComposedCalculable(Printable):
     #   @warning Must be redefined
     def __init__(self):
         raise error.MethodShouldBeRedefined(self, "__init__")
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -116,10 +114,10 @@ class Expression(ComposedCalculable):
     #   @return One instance of Expression
     def __init__(self, integer_or_letter, objct):
         # just check if the given arguments are right
-        if not (is_.a_string(integer_or_letter)                               \
+        if not (is_.a_string(integer_or_letter)
                 or is_.an_integer(integer_or_letter)):
             # __
-            raise error.UncompatibleType(integer_or_letter,                   \
+            raise error.UncompatibleType(integer_or_letter,
                                          "integer_or_letter")
 
         if not (isinstance(objct, Exponented) or objct is None):
@@ -130,8 +128,8 @@ class Expression(ComposedCalculable):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Returns the right hand side of the Expression e.g. the Expression
-    #          in itself
+    #   @brief Returns the right hand side of the Expression e.g.
+    #           the Expression in itself
     def get_right_hand_side(self):
         return self._right_hand_side
 
@@ -159,33 +157,32 @@ class Expression(ComposedCalculable):
             i = self.name
             if i < len(alphabet.UPPERCASE):
                 final_name = MARKUP['open_text_in_maths'] \
-                             + alphabet.UPPERCASE[i] \
-                             + MARKUP['close_text_in_maths']
+                    + alphabet.UPPERCASE[i] \
+                    + MARKUP['close_text_in_maths']
             else:
                 nb_letters = len(alphabet.UPPERCASE)
-                final_name =  MARKUP['open_text_in_maths'] \
-                             + alphabet.UPPERCASE[\
-                                        i - nb_letters*int(i/nb_letters)] \
-                             + MARKUP['close_text_in_maths'] \
-                             + MARKUP['opening_subscript']                    \
-                             + MARKUP['open_text_in_maths'] \
-                             + str(int(i/nb_letters))                         \
-                             + MARKUP['close_text_in_maths'] \
-                             + MARKUP['closing_subscript']
+                final_name = MARKUP['open_text_in_maths'] \
+                    + alphabet.UPPERCASE[
+                        i - nb_letters * int(i / nb_letters)] \
+                    + MARKUP['close_text_in_maths'] \
+                    + MARKUP['opening_subscript'] \
+                    + MARKUP['open_text_in_maths'] \
+                    + str(int(i / nb_letters)) \
+                    + MARKUP['close_text_in_maths'] \
+                    + MARKUP['closing_subscript']
 
         elif is_.a_string(self.name):
             final_name = MARKUP['open_text_in_maths'] \
-                         + self.name \
-                         + MARKUP['close_text_in_maths'] \
+                + self.name \
+                + MARKUP['close_text_in_maths'] \
 
         expression_begins = True
 
         options.update({'force_expression_begins': True})
 
-        return final_name                                                     \
-               + MARKUP['equal']                                              \
-               + self.right_hand_side.into_str(**options)
-
+        return final_name \
+            + MARKUP['equal'] \
+            + self.right_hand_side.into_str(**options)
 
     # --------------------------------------------------------------------------
     ##
@@ -200,14 +197,14 @@ class Expression(ComposedCalculable):
         # Complete expansion & reduction of any expression:o)
         while aux_expr is not None:
             result += MARKUP['opening_math_style2'] \
-                      + Expression(self.name,
-                                        aux_expr).into_str() \
-                      + MARKUP['closing_math_style2'] \
-                      + MARKUP['newline'] \
-                      + "\n"
+                + Expression(self.name,
+                             aux_expr).into_str() \
+                + MARKUP['closing_math_style2'] \
+                + MARKUP['newline'] + "\n"
             aux_expr = aux_expr.expand_and_reduce_next_step()
 
         return result
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -222,41 +219,41 @@ class Equality(ComposedCalculable):
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
     #   @param objcts is a [Exponented] of 2 elements at least
-    #   @option equal_signs Contains a list of equal/not equal signs. Must be as
-    #   @option             long as len(objcts) - 1. The signs are "=" or "neq"
+    #   @option equal_signs Contains a list of equal/not equal signs. Must be
+    #   @option             as long as len(objcts) - 1. The signs are "=" or
+    #                       "neq"
     #   @return One instance of Equality
     def __init__(self, objcts, **options):
         # just check if the given arguments are right
         if not (isinstance(objcts, list)):
-            raise error.UncompatibleType(objcts,                   \
-                            "should be a LIST (of two Exponenteds at least)")
-
+            raise error.UncompatibleType(objcts, "should be a LIST "
+                                                 "(of two Exponenteds "
+                                                 "at least)")
         if not len(objcts) >= 2:
-            raise error.UncompatibleType(objcts,                       \
-                            "should be a list of TWO Exponenteds AT LEAST")
+            raise error.UncompatibleType(objcts, "should be a list of "
+                                                 "TWO Exponenteds AT LEAST")
 
         for i in range(len(objcts)):
             if not isinstance(objcts[i], Exponented):
-                raise error.UncompatibleType(objcts[i],                    \
-                                            "should be an Exponented")
+                raise error.UncompatibleType(objcts[i], "should be an "
+                                                        "Exponented")
 
         if 'equal_signs' in options:
             if not type(options['equal_signs']) == list:
-                raise error.UncompatibleType(options['equal_signs'],                    \
-                                            "should be a list")
+                raise error.UncompatibleType(options['equal_signs'],
+                                             "should be a list")
             if not len(options['equal_signs']) == len(objcts) - 1:
-                raise error.UncompatibleType(options['equal_signs'],                    \
-                                            "should contain " \
-                                            + str(len(objcts) - 1) \
-                                            + " elements.")
+                raise error.UncompatibleType(options['equal_signs'],
+                                             "should contain "
+                                             + str(len(objcts) - 1)
+                                             + " elements.")
 
             for i in range(len(options['equal_signs'])):
-                if not (options['equal_signs'][i] == '=' \
+                if not (options['equal_signs'][i] == '='
                         or options['equal_signs'][i] == 'neq'):
                     # __
-                    raise error.UncompatibleType(options['equal_signs'][i],                    \
-                                                    " should be '=' or 'neq'")
-
+                    raise error.UncompatibleType(options['equal_signs'][i],
+                                                 " should be '=' or 'neq'")
 
         self._elements = []
         self._equal_signs = []
@@ -335,7 +332,6 @@ class Equality(ComposedCalculable):
     def __getitem__(self, i):
         return self._elements[i]
 
-
     def __setitem__(self, i, data):
         if not isinstance(data, Exponented):
             raise error.UncompatibleType(data, "should be a Exponented")
@@ -347,6 +343,7 @@ class Equality(ComposedCalculable):
     #   @brief Returns the number of elements of the Equality
     def __len__(self):
         return len(self._elements)
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -387,36 +384,40 @@ class Equation(ComposedCalculable):
 
         if type(arg) == SubstitutableEquality:
             if not len(arg) == 2:
-                raise error.ImpossibleAction("turn into an Equation a " \
-                            "SubstitutableEquality having not exactly 2 " \
-                            "members")
+                raise error.ImpossibleAction("turn into an Equation a "
+                                             "SubstitutableEquality having "
+                                             "not exactly 2 members")
             literals_list = list(set(gather_literals(arg[0])
                                      + gather_literals(arg[1])))
             if not len(literals_list) == 1:
-                raise error.ImpossibleAction("create an Equation from a " \
-                 + "SubstitutableEquality containing more than ONE unknown " \
-                 + "literal. This one contains " + str(len(literals_list)) \
-                 + " literals which are " \
-                 + str([repr(elt) for elt in literals_list]))
+                raise error.ImpossibleAction("create an Equation from a "
+                                             "SubstitutableEquality "
+                                             "containing more than ONE "
+                                             "unknown literal. This one "
+                                             "contains "
+                                             + str(len(literals_list))
+                                             + " literals which are "
+                                             + str([repr(elt)
+                                                    for elt in literals_list]))
 
-            if not isinstance(literals_list[0], Value) \
-                and not literals_list[0].is_literal():
+            if (not isinstance(literals_list[0], Value)
+                and not literals_list[0].is_literal()):
                 # __
                 raise error.WrongArgument(repr(literals_list[0]),
                                           "a literal Value")
 
             self.__init__((arg[0], arg[1]),
-                       variable_letter_name=literals_list[0].get_first_letter(),
-                       **options
-                         )
+                          variable_letter_name=literals_list[0]
+                          .get_first_letter(),
+                          **options)
 
         # Different cases of tuples
         elif type(arg) == tuple and len(arg) == 2:
 
             # 1st CASE
             # Given objects
-            if isinstance(arg[0], Exponented) \
-                and isinstance(arg[1], Exponented):
+            if (isinstance(arg[0], Exponented)
+                and isinstance(arg[1], Exponented)):
                 # __
                 if isinstance(arg[0], Sum):
                     # TO FIX ?
@@ -441,61 +442,43 @@ class Equation(ComposedCalculable):
             elif arg[0] == RANDOMLY:
                 if arg[1] == 'basic_addition':
                     self._left_hand_side = Polynomial([
-                                          Monomial(('+',
-                                                         1,
-                                                         1)),
-                                          Monomial((randomly.sign(),
-                                                         randomly.integer(1,
-                                                                    MAX_VALUE),
-                                                         0))
-                                                          ])
+                        Monomial(('+', 1, 1)),
+                        Monomial((randomly.sign(),
+                                  randomly.integer(1, MAX_VALUE),
+                                  0))])
 
-                    self._right_hand_side = Sum(Item((randomly.sign(),
-                                                      randomly.integer(1,
-                                                                    MAX_VALUE)
-                                                     ))
-                                                   )
+                    self._right_hand_side = Sum(
+                        Item((randomly.sign(),
+                              randomly.integer(1, MAX_VALUE))))
 
-
-                    self._left_hand_side.term[0].set_letter(
-                                                          self.variable_letter)
-
+                    self._left_hand_side.term[0]\
+                        .set_letter(self.variable_letter)
 
                 elif arg[1] == 'basic_addition_r':
                     self._right_hand_side = Polynomial([
-                                          Monomial(('+',
-                                                         1,
-                                                         1)),
-                                          Monomial((randomly.sign(),
-                                                         randomly.integer(1,
-                                                                    MAX_VALUE),
-                                                         0))
-                                                          ])
+                        Monomial(('+', 1, 1)),
+                        Monomial((randomly.sign(),
+                                  randomly.integer(1, MAX_VALUE),
+                                  0))])
 
-                    self._left_hand_side = Sum(Item((randomly.sign(),
-                                                      randomly.integer(1,
-                                                                    MAX_VALUE)
-                                                     ))
-                                                  )
+                    self._left_hand_side = Sum(
+                        Item((randomly.sign(),
+                              randomly.integer(1, MAX_VALUE))))
 
+                    self._right_hand_side.term[0]\
+                        .set_letter(self.variable_letter)
 
-                    self._right_hand_side.term[0].set_letter(
-                                                          self.variable_letter)
                 elif arg[1] == 'any_basic_addition':
                     cst_list = list()
-                    m1 = Monomial((randomly.sign(plus_signs_ratio=0.8),
-                                        1,
-                                        1))
-
+                    m1 = Monomial((randomly.sign(plus_signs_ratio=0.8), 1, 1))
                     m1.set_letter(self.variable_letter)
-
                     m2 = Monomial((randomly.sign(),
-                                        randomly.integer(1,MAX_VALUE),
-                                        0))
+                                   randomly.integer(1, MAX_VALUE),
+                                   0))
 
                     m3 = Monomial((randomly.sign(),
-                                        randomly.integer(1,MAX_VALUE),
-                                        0))
+                                   randomly.integer(1, MAX_VALUE),
+                                   0))
 
                     cst_list.append(m2)
                     cst_list.append(m3)
@@ -507,7 +490,7 @@ class Equation(ComposedCalculable):
                     polyn_list.append(drawn_to_be_with_x)
 
                     polyn = Polynomial([randomly.pop(polyn_list),
-                                             randomly.pop(polyn_list)])
+                                        randomly.pop(polyn_list)])
                     sides = list()
                     sides.append(polyn)
                     sides.append(Sum(randomly.pop(cst_list)))
@@ -517,53 +500,41 @@ class Equation(ComposedCalculable):
 
                 elif arg[1] == 'basic_multiplication':
                     self._left_hand_side = Sum(
-                                          Monomial(( \
-                                          randomly.sign(plus_signs_ratio=0.75),
-                                          randomly.integer(2, MAX_VALUE),
-                                          1))
-                                                  )
-
+                        Monomial((randomly.sign(plus_signs_ratio=0.75),
+                                  randomly.integer(2, MAX_VALUE),
+                                  1)))
 
                     self._right_hand_side = Sum(
-                                          Item(( \
-                                          randomly.sign(plus_signs_ratio=0.75),
-                                          randomly.integer(1, MAX_VALUE),
-                                          1))
-                                                   )
+                        Item((randomly.sign(plus_signs_ratio=0.75),
+                              randomly.integer(1, MAX_VALUE),
+                              1)))
 
-
-                    self._left_hand_side.term[0].\
-                                        set_letter(self.variable_letter)
+                    self._left_hand_side.term[0]\
+                        .set_letter(self.variable_letter)
 
                 elif arg[1] == 'basic_multiplication_r':
                     self._right_hand_side = Sum(
-                                          Monomial(( \
-                                          randomly.sign(plus_signs_ratio=0.75),
-                                          randomly.integer(2, MAX_VALUE),
-                                          1))
-                                                   )
-
+                        Monomial((randomly.sign(plus_signs_ratio=0.75),
+                                  randomly.integer(2, MAX_VALUE),
+                                  1)))
 
                     self._left_hand_side = Sum(
-                                          Item(( \
-                                          randomly.sign(plus_signs_ratio=0.75),
-                                          randomly.integer(1, MAX_VALUE),
-                                          1))
-                                                  )
+                        Item((randomly.sign(plus_signs_ratio=0.75),
+                              randomly.integer(1, MAX_VALUE),
+                              1)))
 
-
-                    self._right_hand_side.term[0].\
-                                        set_letter(self.variable_letter)
+                    self._right_hand_side.term[0]\
+                        .set_letter(self.variable_letter)
 
                 elif arg[1] == 'any_basic_multiplication':
                     m1 = Monomial((randomly.sign(plus_signs_ratio=0.75),
-                                        randomly.integer(2, MAX_VALUE),
-                                        1))
+                                   randomly.integer(2, MAX_VALUE),
+                                   1))
                     m1.set_letter(self.variable_letter)
 
                     m2 = Item((randomly.sign(plus_signs_ratio=0.75),
-                                    randomly.integer(1, MAX_VALUE),
-                                    1))
+                               randomly.integer(1, MAX_VALUE),
+                               1))
 
                     items_list = list()
                     items_list.append(Sum(m1))
@@ -572,17 +543,16 @@ class Equation(ComposedCalculable):
                     self._left_hand_side = randomly.pop(items_list)
                     self._right_hand_side = randomly.pop(items_list)
 
-                elif arg[1] == 'any_basic': # code duplication... done quickly
+                elif arg[1] == 'any_basic':  # code duplication... done quickly
                     if randomly.heads_or_tails():
-                        m1 = Monomial((randomly.sign(plus_signs_ratio= \
-                                                                         0.75),
-                                            randomly.integer(2, MAX_VALUE),
-                                            1))
+                        m1 = Monomial((randomly.sign(plus_signs_ratio=0.75),
+                                       randomly.integer(2, MAX_VALUE),
+                                       1))
                         m1.set_letter(self.variable_letter)
 
                         m2 = Item((randomly.sign(plus_signs_ratio=0.75),
-                                        randomly.integer(1, MAX_VALUE),
-                                        1))
+                                   randomly.integer(1, MAX_VALUE),
+                                   1))
 
                         items_list = list()
                         items_list.append(Sum(m1))
@@ -592,18 +562,16 @@ class Equation(ComposedCalculable):
                         self._right_hand_side = randomly.pop(items_list)
                     else:
                         cst_list = list()
-                        m1 = Monomial((randomly.sign(plus_signs_ratio= \
-                                                                          0.8),
-                                            1,
-                                            1))
+                        m1 = Monomial((randomly.sign(plus_signs_ratio=0.8),
+                                       1,
+                                       1))
                         m1.set_letter(self.variable_letter)
-
                         m2 = Monomial((randomly.sign(),
-                                            randomly.integer(1,MAX_VALUE),
-                                            0))
+                                       randomly.integer(1, MAX_VALUE),
+                                       0))
                         m3 = Monomial((randomly.sign(),
-                                            randomly.integer(1,MAX_VALUE),
-                                            0))
+                                       randomly.integer(1, MAX_VALUE),
+                                       0))
 
                         cst_list.append(m2)
                         cst_list.append(m3)
@@ -615,7 +583,7 @@ class Equation(ComposedCalculable):
                         polyn_list.append(drawn_to_be_with_x)
 
                         polyn = Polynomial([randomly.pop(polyn_list),
-                                                 randomly.pop(polyn_list)])
+                                            randomly.pop(polyn_list)])
                         sides = list()
                         sides.append(polyn)
                         sides.append(Sum(randomly.pop(cst_list)))
@@ -623,10 +591,8 @@ class Equation(ComposedCalculable):
                         self._left_hand_side = randomly.pop(sides)
                         self._right_hand_side = randomly.pop(sides)
 
-                elif arg[1] == 'classic' \
-                     or arg[1] == 'classic_r' \
-                     or arg[1] == 'classic_x_twice' \
-                     or arg[1] == 'any_classic':
+                elif (arg[1] in ['classic', 'classic_r', 'classic_x_twice',
+                      'any_classic']):
                     # __
                     # Let's build
                     # classic: ax + b = d | b + ax = d

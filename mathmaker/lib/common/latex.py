@@ -45,13 +45,11 @@ UK_ENGLISH = 'english'
 LANGUAGE_PACKAGE_NAME = {'fr': FRANCAIS,
                          'fr_FR': FRANCAIS,
                          'en': US_ENGLISH,
-                         'en_US' : US_ENGLISH,
-                         'en_GB' : UK_ENGLISH
-                        }
+                         'en_US': US_ENGLISH,
+                         'en_GB': UK_ENGLISH}
 
-LANGUAGE_OPTIONS = {'en_US' : {'variant': 'american'},
-                    'en_GB' : {'variant': 'british'}
-                    }
+LANGUAGE_OPTIONS = {'en_US': {'variant': 'american'},
+                    'en_GB': {'variant': 'british'}}
 
 # TEXT SIZES
 TEXT_SIZES = ['\\tiny', '\\scriptsize', '\\footnotesize', '\\small',
@@ -103,7 +101,4 @@ MARKUP = {'LaTeX': "\LaTeX",
           'opening_square_bracket': "\[",
           'closing_square_bracket': "\]",
           'text_degree': "\\textdegree",
-          'fct_cos': "\cos"
-         }
-
-
+          'fct_cos': "\cos"}
