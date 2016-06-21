@@ -135,6 +135,7 @@ def init():
     if currency not in iter(AVAILABLE['CURRENCY'].values()):
         currency = AVAILABLE['CURRENCY'][language]
     font = CONFIG['LATEX'].get('FONT')  # defaults to None in all cases
+    # The locale must be redefined after command line options are known
     locale = language + '.' + encoding
     outputdir = CONFIG['PATHS'].get('OUTPUT_DIR')
     if not os.path.isdir(outputdir):

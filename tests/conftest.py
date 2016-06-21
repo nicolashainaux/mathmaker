@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  US
 
 import gettext
+import locale
 
 from mathmaker import __software_name__
 from mathmaker import settings
@@ -28,6 +29,7 @@ from mathmaker.lib import shared
 settings.init()
 settings.language = 'en'
 settings.locale = 'en_US.UTF-8'
+locale.setlocale(locale.LC_ALL, settings.locale)
 gettext.translation(__software_name__, settings.localedir, ['en']).install()
 settings.outputdir = settings.projectdir + 'tests/outfiles/'
 shared.init()

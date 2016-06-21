@@ -80,8 +80,7 @@ def entry_point():
     settings.outputdir = args.outputdir
     settings.font = args.font
     settings.encoding = args.encoding
-    # todo: update settings.locale according to the final settings.encoding
-    #       value
+    settings.locale = settings.language + '.' + settings.encoding
     locale.setlocale(locale.LC_ALL, settings.locale)
     startup_actions.check_settings_consistency()
     shared.init()
