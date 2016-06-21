@@ -8,6 +8,8 @@ from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 import mathmaker
+from mathmaker.lib.startup_actions import check_dependencies
+from mathmaker import settings
 
 
 def read(*filenames, **kwargs):
@@ -50,6 +52,13 @@ def create_mo_files():
             mo_files.append(d + mo_file)
         data_files.append((d, mo_files))
     return data_files
+
+settings.init()
+try:
+    check_dependencies()
+except EnvironmentError as e:
+    raise EnvironmentError(str(e) + 'Once you have installed all correct '
+                           'versions, you can run mathmaker\'s setup again.')
 
 setup(
     name=mathmaker.__software_name__,

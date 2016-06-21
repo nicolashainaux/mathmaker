@@ -75,15 +75,30 @@ def check_dependency(name, goal, path_to, required_version_nb):
         log.error(err_msg + add_msg)
         raise EnvironmentError(err_msg + add_msg)
 
-    return True
-
 
 def check_dependencies():
     """Will check all mathmaker's dependencies."""
-    return (check_dependency("euktoeps", "produce pictures",
-                             settings.euktoeps, "1.5.4")
-            and check_dependency("xmllint", "read xml files",
-                                 settings.xmllint, "20901"))
+    infos = ''
+    missing_dependency = False
+    try:
+        check_dependency("euktoeps", "produce pictures",
+                         settings.euktoeps, "1.5.4")
+    except EnvironmentError as e:
+        infos += str(e) + '\n'
+        missing_dependency = True
+    try:
+        check_dependency("xmllint", "read xml files",
+                         settings.xmllint, "20901")
+    except EnvironmentError as e:
+        infos += str(e) + '\n'
+        missing_dependency = True
+    if missing_dependency:
+        raise EnvironmentError('Some dependencies are missing or outdated. '
+                               'Following message(s) have been returned:\n'
+                               + infos + '\n'
+                               'You will have to install the correct versions '
+                               'of these dependencies in order to run '
+                               'mathmaker correctly.\n')
 
 
 def install_gettext_translations(**kwargs):
