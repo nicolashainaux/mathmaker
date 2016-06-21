@@ -36,8 +36,8 @@ from mathmaker.lib.core.base_calculus import Fraction
 #   @todo   Several cases should be factorized or maybe later moved to the db
 def generate_values(source_id):
     if source_id == 'int_irreducible_frac':
-        return [(k, Fraction((n, k))) for k in [i+2 for i in range(18)]
-                                      for n in coprime_generator(k)]
+        return [(k, Fraction((n, k))) for k in [i + 2 for i in range(18)]
+                for n in coprime_generator(k)]
 
     elif source_id == 'rank_words':
         return [(elt,) for elt in RANKS]
@@ -127,19 +127,16 @@ class sub_source(object):
         self.current = 0
         self.max = len(self.values)
 
-
     ##
     #   @brief  Resets the source
     def _reset(self):
         random.shuffle(self.values)
         self.current = 0
 
-
     ##
     #   @brief  Synonym of self.next(), but makes the source an Iterator.
     def __next__(self):
         return self.next()
-
 
     ##
     #   @brief  Handles the choice of the next value to return
@@ -170,4 +167,3 @@ class mc_source(object):
             return shared.deci_one_digit_multi_source.next(**kwargs)
         elif tag_classification == 'decimal_and_one_digit_for_divi':
             return shared.deci_one_digit_divi_source.next(**kwargs)
-

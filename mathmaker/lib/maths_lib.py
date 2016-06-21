@@ -23,7 +23,8 @@
 import sys
 import math
 import random
-from decimal import *
+from decimal import Decimal
+
 from . import is_
 
 
@@ -39,26 +40,32 @@ DIVISORS = [(1, 1), (1, 1), (2, 1), (3, 1), (4, 2, 1), (5, 1), (6, 3, 2, 1),
             (7, 1), (8, 4, 2, 1), (9, 3, 1), (10, 5, 2, 1), (11, 1),
             (12, 6, 4, 3, 2, 1), (13, 1), (14, 7, 2, 1),
             (15, 5, 3, 1), (16, 8, 4, 2, 1), (17, 1), (18, 9, 6, 3, 2, 1),
-            (19,1), (20, 10, 5, 4, 2, 1), (21, 7, 3, 1), (22,11,2,1), (23,1),
-            (24,12,8,6,4,3,2,1), (25,5,1), (26,13,2,1), (27,9,3,1),
-            (28,7,4,2,1), (29,1), (30,15,10,6,5,3,2,1), (31,1),
-            (32,16,8,4,2,1), (33,11,3,1), (34,17,2,1), (35,7,5,1),
-            (36,18,12,9,6,4,3,2,1), (37,1), (38,19,2,1), (39,13,3,1),
-            (40,20,10,8,5,4,2,1), (41,1), (42,21,7,6,2,1), (43,1),
-            (44,22,11,4,2,1), (45,9,5,1), (46,23,2,1), (47,1),
-            (48,24,8,6,2,1), (49,7,1), (50,25,10,5,2,1), (51,17,3,1),
-            (52,26,13,4,2,1), (53,1), (54,27,9,6,2,1), (55,11,5,1),
-            (56,28,8,7,2,1), (57,19,3,1), (58,29,2,1), (59,1),
-            (60,30,20,15,12,10,6,5,4,3,2,1), (61,1), (62,31,2,1),
-            (63,21,9,7,3,1), (64,32,8,2,1), (65,13,5,1), (66,33,2,1), (67,1),
-            (68,34,17,4,2,1), (69,23,3,1), (70,35,10,7,5,2,1), (71,1),
-            (72,12,9,8,6,2,1), (73,1), (74,37,2,1), (75,15,5,1), (76,38,2,1),
-            (77,11,7,1), (78,39,26,3,2,1), (79,1), (80,40,20,10,8,4,2,1),
-            (81,9,1), (82,41,2,1), (83,1), (84,42,2,1), (85,17,5,1),
-            (86,43,2,1), (87,29,3,1), (88,44,22,11,8,4,2,1), (89,1),
-            (90,45,30,10,9,3,2,1), (91,13,7,1), (92,46,2,1), (93,31,3,1),
-            (94,47,2,1), (95,19,5,1), (96,48,2,1), (97,1), (98,49,2,1),
-            (99,33,11,9,3,1), (100,50,25,10,4,2,1)]
+            (19, 1), (20, 10, 5, 4, 2, 1), (21, 7, 3, 1), (22, 11, 2, 1),
+            (23, 1), (24, 12, 8, 6, 4, 3, 2, 1), (25, 5, 1), (26, 13, 2, 1),
+            (27, 9, 3, 1), (28, 7, 4, 2, 1), (29, 1),
+            (30, 15, 10, 6, 5, 3, 2, 1), (31, 1), (32, 16, 8, 4, 2, 1),
+            (33, 11, 3, 1), (34, 17, 2, 1), (35, 7, 5, 1),
+            (36, 18, 12, 9, 6, 4, 3, 2, 1), (37, 1), (38, 19, 2, 1),
+            (39, 13, 3, 1), (40, 20, 10, 8, 5, 4, 2, 1), (41, 1),
+            (42, 21, 7, 6, 2, 1), (43, 1), (44, 22, 11, 4, 2, 1),
+            (45, 9, 5, 1), (46, 23, 2, 1), (47, 1), (48, 24, 8, 6, 2, 1),
+            (49, 7, 1), (50, 25, 10, 5, 2, 1), (51, 17, 3, 1),
+            (52, 26, 13, 4, 2, 1), (53, 1), (54, 27, 9, 6, 2, 1),
+            (55, 11, 5, 1), (56, 28, 8, 7, 2, 1), (57, 19, 3, 1),
+            (58, 29, 2, 1), (59, 1),
+            (60, 30, 20, 15, 12, 10, 6, 5, 4, 3, 2, 1), (61, 1),
+            (62, 31, 2, 1), (63, 21, 9, 7, 3, 1), (64, 32, 8, 2, 1),
+            (65, 13, 5, 1), (66, 33, 2, 1), (67, 1), (68, 34, 17, 4, 2, 1),
+            (69, 23, 3, 1), (70, 35, 10, 7, 5, 2, 1), (71, 1),
+            (72, 12, 9, 8, 6, 2, 1), (73, 1), (74, 37, 2, 1), (75, 15, 5, 1),
+            (76, 38, 2, 1), (77, 11, 7, 1), (78, 39, 26, 3, 2, 1), (79, 1),
+            (80, 40, 20, 10, 8, 4, 2, 1), (81, 9, 1), (82, 41, 2, 1), (83, 1),
+            (84, 42, 2, 1), (85, 17, 5, 1), (86, 43, 2, 1), (87, 29, 3, 1),
+            (88, 44, 22, 11, 8, 4, 2, 1), (89, 1),
+            (90, 45, 30, 10, 9, 3, 2, 1), (91, 13, 7, 1), (92, 46, 2, 1),
+            (93, 31, 3, 1), (94, 47, 2, 1), (95, 19, 5, 1), (96, 48, 2, 1),
+            (97, 1), (98, 49, 2, 1), (99, 33, 11, 9, 3, 1),
+            (100, 50, 25, 10, 4, 2, 1)]
 
 
 POLYGONS_NATURES = {3: 'Triangle', 4: 'Quadrilatere', 5: 'Pentagon',
@@ -84,8 +91,12 @@ def abs(nb):
 def sign_of_product(signed_objctlist):
     from mathmaker.lib.core.base_calculus import Exponented
 
-    if not(type(signed_objctlist) == list) or not(len(signed_objctlist) >= 1):
-        raise error.UncompatibleType(signed_objctlist, "non empty list")
+    if not(type(signed_objctlist) == list):
+        raise TypeError('Expected a list, got a '
+                        + str(type(signed_objctlist)) + 'instead')
+
+    if not(len(signed_objctlist) >= 1):
+        raise ValueError('This list shouldn\'t be empty')
 
     minus_signs_nb = 0
 
@@ -95,8 +106,9 @@ def sign_of_product(signed_objctlist):
             or is_.a_number(signed_objctlist[i])
             or isinstance(signed_objctlist[i], Exponented))):
             # __
-            raise error.UncompatibleType(signed_objctlist[i],
-                                         "'+' or '-'|number|Exponented")
+            raise TypeError('Expected a sign + or -, or a number, or an '
+                            'Exponented. Got a '
+                            + str(type(signed_objctlist[i])) + ' instead')
 
         elif signed_objctlist[i] == '-':
             minus_signs_nb += 1
@@ -112,23 +124,27 @@ def sign_of_product(signed_objctlist):
     else:
         return '-'
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns the GCD of two integers
 def gcd(a, b):
     if not is_.an_integer(a):
-        raise error.UncompatibleType(a, "Integer")
+        raise TypeError('Expected an Integer, got a '
+                        + str(type(a)) + ' instead')
 
     if not is_.an_integer(b):
-        raise error.UncompatibleType(b, "Integer")
+        raise TypeError('Expected an Integer, got a '
+                        + str(type(b)) + ' instead')
 
     if b == 0:
-        raise error.OutOfRangeArgument(b, "Integer but not zero !")
+        raise ValueError('Expected a value different from 0.')
 
     if a % b == 0:
         return int(math.fabs(b))
 
     return gcd(b, a % b)
+
 
 # --------------------------------------------------------------------------
 ##
@@ -139,6 +155,7 @@ def gcd_of_the_list(l):
     else:
         return gcd(l.pop(), gcd_of_the_list(l))
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns the GCD that a pupil would think of
@@ -146,13 +163,15 @@ def gcd_of_the_list(l):
 #   reducible fractions found irreducible.
 def pupil_gcd(a, b):
     if not is_.an_integer(a):
-        raise error.UncompatibleType(a, "Integer")
+        raise TypeError('Expected an Integer, got a '
+                        + str(type(a)) + ' instead')
 
     if not is_.an_integer(b):
-        raise error.UncompatibleType(b, "Integer")
+        raise TypeError('Expected an Integer, got a '
+                        + str(type(b)) + ' instead')
 
     if b == 0:
-        raise error.OutOfRangeArgument(b, "Integer but not zero !")
+        raise ValueError('Expected a value different from 0.')
 
     if a == b:
         return a
@@ -171,22 +190,23 @@ def pupil_gcd(a, b):
             return 3
 
         else:
-            return gcd(a,b)
+            return gcd(a, b)
 
     result = 1
 
     for i in range(len(DIVISORS[int(a)])):
-        if (DIVISORS[int(a)][i] in DIVISORS[int(b)]) \
-            and DIVISORS[int(a)][i] > result:
+        if ((DIVISORS[int(a)][i] in DIVISORS[int(b)])
+            and DIVISORS[int(a)][i] > result):
             # __
             result = DIVISORS[int(a)][i]
 
     # to finally get the fraction reduced even if the gcd isn't in the
     # pupil's divisors table:
-    if gcd(a,b) != 1 and result == 1:
-        result = gcd(a,b)
+    if gcd(a, b) != 1 and result == 1:
+        result = gcd(a, b)
 
     return result
+
 
 # --------------------------------------------------------------------------
 ##
@@ -195,24 +215,28 @@ def pupil_gcd(a, b):
 #   ten_power_gcd(3000, 6000) returns 1000.
 def ten_power_gcd(a, b):
     if not is_.an_integer(a):
-        raise error.UncompatibleType(a, "Integer")
+        raise TypeError('Expected an Integer, got a '
+                        + str(type(a)) + ' instead')
 
     if not is_.an_integer(b):
-        raise error.UncompatibleType(b, "Integer")
+        raise TypeError('Expected an Integer, got a '
+                        + str(type(b)) + ' instead')
 
     if b == 0:
-        raise error.OutOfRangeArgument(b, "Integer but not zero !")
+        raise ValueError('Expected a value different from 0.')
 
     if a % 10 == 0 and b % 10 == 0:
         return 10 * ten_power_gcd(a // 10, b // 10)
     else:
         return 1
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief Returns the lcm of two integers
 def lcm(a, b):
-    return int(math.fabs(a*b/gcd(a,b)))
+    return int(math.fabs(a * b / gcd(a, b)))
+
 
 # --------------------------------------------------------------------------
 ##
@@ -280,7 +304,8 @@ def is_uneven(objct):
 #   @brief Conversions between degrees and radians
 def deg_to_rad(arg):
     if not is_.a_number(arg):
-        raise error.WrongArgument(' a number ', str(type(arg)))
+        raise TypeError('Expected a number, got a ' + str(type(arg))
+                        + ' instead.')
 
     return arg * math.pi / 180
 
@@ -290,7 +315,8 @@ def deg_to_rad(arg):
 #   @brief Conversions between degrees and radians
 def rad_to_deg(arg):
     if not is_.a_number(arg):
-        raise error.WrongArgument(' a number ', str(type(arg)))
+        raise TypeError('Expected a number, got a ' + str(type(arg))
+                        + ' instead.')
 
     return arg * 180 / math.pi
 
@@ -300,14 +326,16 @@ def rad_to_deg(arg):
 #   @brief Mean of a list of numbers
 def mean(numberList):
     if not type(numberList) == list:
-        raise error.WrongArgument(' a list ', str(type(arg)))
+        raise TypeError('Expected a list, got a '
+                        + str(type(numberList)) + 'instead')
 
     if len(numberList) == 0:
-        raise error.WrongArgument(' a list of length > 0 ', ' an empty list ')
+        raise ValueError('This list shouldn\'t be empty')
 
     for i in range(len(numberList)):
         if not is_.a_number(numberList[i]):
-            raise error.WrongArgument(' a number ', str(type(numberList[i])))
+            raise TypeError('Expected a number, got a '
+                            + str(type(numberList[i])) + ' instead')
 
     decimalNums = [Decimal(str(x)) for x in numberList]
 
@@ -320,17 +348,20 @@ def mean(numberList):
 def barycenter(points_list, barycenter_name):
     from mathmaker.lib.core.base_geometry import Point
     if not type(points_list) == list:
-        raise error.WrongArgument(' a list ', str(type(points_list)))
+        raise TypeError('Expected a list, got a '
+                        + str(type(points_list)) + 'instead')
 
     if len(points_list) == 0:
-        raise error.WrongArgument(' a list of length > 0 ', ' an empty list ')
+        raise ValueError('This list shouldn\'t be empty')
 
     for i in range(len(points_list)):
         if not isinstance(points_list[i], Point):
-            raise error.WrongArgument(' a Point ', str(type(points_list[i])))
+            raise TypeError('Expected a Point, got a '
+                            + str(type(points_list[i])) + ' instead')
 
     if not type(barycenter_name) == str:
-        raise error.WrongArgument(' a str ', str(type(barycenter_name)))
+        raise TypeError('Expected a str, got a '
+                        + str(type(barycenter_name)) + 'instead')
 
     abscissas_list = [P.x_exact for P in points_list]
     ordinates_list = [P.y_exact for P in points_list]
@@ -385,7 +416,8 @@ def generate_decimal(width, ranks_scale, start_rank):
 #   @brief Transforms the xE+n results in decimal form (ex. 1E+1 -> 10)
 def correct_normalize_results(d):
     if not isinstance(d, Decimal):
-        raise error.WrongArgument(str(type(d)), "a Decimal")
+        raise TypeError('Expected a Decimal, got a '
+                        + str(type(d)) + 'instead')
 
     return d.quantize(Decimal(1)) if d == d.to_integral() else d.normalize()
 
@@ -396,6 +428,7 @@ def correct_normalize_results(d):
 #   @options They are the same as the decimal's module quantize() method
 def round(d, precision, **options):
     if not isinstance(d, Decimal):
-        raise error.WrongArgument(str(type(d)), "a Decimal")
+        raise TypeError('Expected a Decimal, got a '
+                        + str(type(d)) + 'instead')
 
     return correct_normalize_results(d.quantize(precision, **options))
