@@ -170,7 +170,7 @@ def test_t4_pyth_eq_autoresolution(t4):
     eq_t4 = Equation(t4.pythagorean_substequality().substitute())
     assert eq_t4.auto_resolution(dont_display_equations_name=True,
                                  decimal_result=HUNDREDTH,
-                                 pythagorean_mode='yes',
+                                 pythagorean_mode=True,
                                  unit='cm') == \
         wrap_nb('\[\\text{OP}^{2}=7^{2}-1.5^{2}\]'
                 '\[\\text{OP}^{2}=49-2.25\]'

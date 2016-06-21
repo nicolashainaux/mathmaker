@@ -204,7 +204,7 @@ class X_MentalCalculation(X_Structure):
     #                         'yes'
     #                         'OK'
     #                         any other value will be understood as 'no'
-    #          - short_test=<string>
+    #          - short_test=bool
     #            /!\ the x_kind option above can't be used along this option
     #            use subtype if you need to make different short_test exercises
     #                         'yes'
@@ -331,7 +331,7 @@ class X_MentalCalculation(X_Structure):
                                      content,
                                      borders='penultimate',
                                      justify=['left', 'left', 'center'],
-                                     center_vertically='yes',
+                                     center_vertically=True,
                                      min_row_height=MIN_ROW_HEIGHT)
 
         return result

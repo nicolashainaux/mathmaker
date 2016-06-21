@@ -340,8 +340,8 @@ def test_item_to_round_round_to_thousandth(item_to_round):
 
 def test_item_with_unit_printed(item_with_unit):
     """Is Item(19.5, unit='cm') correctly printed?"""
-    assert item_with_unit.into_str(display_unit='yes',
-                                   graphic_display='yes',
+    assert item_with_unit.into_str(display_unit=True,
+                                   graphic_display=True,
                                    force_expression_begins=True) == '19.5~cm'
 
 

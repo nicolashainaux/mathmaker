@@ -684,15 +684,10 @@ def level_02(q_subkind, **options):
 
     attribute_a_minus_sign = 'randomly'
 
-    if 'minus_sign' in options \
-       and (options['minus_sign'] == 'yes' \
-            or options['minus_sign'] == 'OK'):
-    #___
+    if 'minus_sign' in options and options['minus_sign']:
         attribute_a_minus_sign = 'yes'
 
-    elif 'minus_sign' in options \
-         and (options['minus_sign'] == 'no'):
-    #___
+    elif 'minus_sign' in options and not options['minus_sign']:
         attribute_a_minus_sign = 'no'
 
     # Creation of the objects
@@ -1130,10 +1125,10 @@ def level_03(q_subkind, **options):
                              sq_b_monom
                              ])
 
-        steps.append(_("Let") + " " \
-                     + let_a_eq.into_str(force_expression_markers='yes') \
-                     + " " + _("and") + " " \
-                     + let_b_eq.into_str(force_expression_markers='yes'))
+        steps.append(_("Let") + " "
+                     + let_a_eq.into_str(force_expression_markers=True)
+                     + " " + _("and") + " "
+                     + let_b_eq.into_str(force_expression_markers=True))
 
         sq_a_monom.set_exponent(2)
         sq_b_monom.set_exponent(2)
@@ -1148,11 +1143,11 @@ def level_03(q_subkind, **options):
                                 sq_b_monom.reduce_()
                                 ])
 
-        steps.append(_("then") + " " \
-                     + a_square_eq.into_str(force_expression_markers='yes'))
+        steps.append(_("then") + " "
+                     + a_square_eq.into_str(force_expression_markers=True))
 
-        steps.append(_("and") + " " \
-                     + b_square_eq.into_str(force_expression_markers='yes'))
+        steps.append(_("and") + " "
+                     + b_square_eq.into_str(force_expression_markers=True))
 
         two_times_a_times_b_numeric = Product([Item(2),
                                                Monomial(('+', a, 1)),
@@ -1167,10 +1162,8 @@ def level_03(q_subkind, **options):
                                            two_times_a_times_b_reduced
                                            ])
 
-        steps.append(_("and") + " " \
-                     + two_times_a_times_b_eq.into_str(
-                                                force_expression_markers='yes')
-                     )
+        steps.append(_("and") + " " + two_times_a_times_b_eq.into_str(
+            force_expression_markers=True))
 
         steps.append(_("So it is possible to factorize:"))
 
@@ -1384,8 +1377,6 @@ def level_03(q_subkind, **options):
             steps.append(mixed_expression)
             steps.append(ordered_expression)
 
-
-
         if q_subkind in match_pb_cases:
             let_a_eq = Equality([Item('a'),
                                  ax
@@ -1395,11 +1386,10 @@ def level_03(q_subkind, **options):
                                  b_
                                  ])
 
-            steps.append(_("Let") + " " \
-                         + let_a_eq.into_str(force_expression_markers='yes')\
-                         + " " + _("and") + " " \
-                         + let_b_eq.into_str(force_expression_markers='yes'))
-
+            steps.append(_("Let") + " "
+                         + let_a_eq.into_str(force_expression_markers=True)
+                         + " " + _("and") + " "
+                         + let_b_eq.into_str(force_expression_markers=True))
 
             a_square_eq = Equality([Item(('+', 'a', 2)),
                                     ax_2,
@@ -1411,13 +1401,11 @@ def level_03(q_subkind, **options):
                                     b2
                                     ])
 
-            steps.append(_("then") + " " \
-                     + a_square_eq.into_str(force_expression_markers='yes'))
+            steps.append(_("then") + " "
+                         + a_square_eq.into_str(force_expression_markers=True))
 
-
-            steps.append(_("and") + " " \
-                     + b_square_eq.into_str(force_expression_markers='yes'))
-
+            steps.append(_("and") + " "
+                         + b_square_eq.into_str(force_expression_markers=True))
 
             two_times_a_times_b_eq = Equality([Product([Item(2),
                                                         Item('a'),
@@ -1428,14 +1416,12 @@ def level_03(q_subkind, **options):
                                                ],
                                                equal_signs=['=', '=', 'neq'])
 
-            steps.append(_("but") + " " \
-                     + two_times_a_times_b_eq.into_str(
-                                                force_expression_markers='yes')
-                     )
+            steps.append(_("but") + " "
+                         + two_times_a_times_b_eq.into_str(
+                force_expression_markers=True))
 
             steps.append(_("So it does not match a binomial identity."))
             steps.append(_("This expression cannot be factorized."))
-
 
         elif q_subkind in sign_pb_cases:
             steps.append(_("Because of the signs,"))

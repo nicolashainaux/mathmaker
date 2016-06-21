@@ -308,8 +308,8 @@ class Equality(ComposedCalculable):
 
         result = ''
 
-        if 'force_expression_markers' in options\
-            and options['force_expression_markers'] == 'yes':
+        if ('force_expression_markers' in options
+            and options['force_expression_markers']):
             # __
             result += MARKUP['opening_math_style2']
 
@@ -320,10 +320,10 @@ class Equality(ComposedCalculable):
         for i in range(len(self.elements) - 1):
             options.update({'force_expression_begins': True})
             result += MARKUP[self.equal_signs[i]] \
-                      + self.elements[i+1].into_str(**options)
+                + self.elements[i + 1].into_str(**options)
 
-        if 'force_expression_markers' in options\
-            and options['force_expression_markers'] == 'yes':
+        if ('force_expression_markers' in options
+            and options['force_expression_markers']):
             # __
             result += MARKUP['closing_math_style2']
 
@@ -1048,9 +1048,7 @@ class Equation(ComposedCalculable):
 
         uline1 = ""
         uline2 = ""
-        if 'underline_result' in options \
-            and options['underline_result'] in YES:
-            # __
+        if 'underline_result' in options and options['underline_result']:
             uline1 = MARKUP['open_underline']
             uline2 = MARKUP['close_underline']
 
@@ -1182,10 +1180,7 @@ class Equation(ComposedCalculable):
                 else:
                     result += eq_aux1 + MARKUP['newline']
 
-
-        #if 'get_solution' in options and options['get_solution'] in YES:
-
-
+        # if 'get_solution' in options and options['get_solution']:
 
         return result
 
@@ -1495,7 +1490,7 @@ class Equation(ComposedCalculable):
                                               new_eq.right_hand_side.term[0],
                                               coefficient
                                               ),
-                                              use_divide_symbol = 'yes')
+                                              use_divide_symbol=True)
                                                 )
 
         # 5th CASE
@@ -1531,8 +1526,8 @@ class Equation(ComposedCalculable):
                         new_eq2 = Equation((temp_item,
                                             temp_sqrt2))
 
-                        if 'pythagorean_mode' in options \
-                            and options['pythagorean_mode'] == 'yes':
+                        if ('pythagorean_mode' in options
+                            and options['pythagorean_mode']):
                             # __
                             new_eq2 = MARKUP['open_text_in_maths'] \
                                       + " " + _("because") + " " \
@@ -1827,8 +1822,8 @@ class Table(Printable):
     def into_str(self, **options):
         result = ""
 
-        if 'as_a_quotients_equality' in options \
-            and options['as_a_quotients_equality'] in YES:
+        if ('as_a_quotients_equality' in options
+            and options['as_a_quotients_equality']):
             # __
             for i in range(len(self)):
                 result += Quotient(('+',

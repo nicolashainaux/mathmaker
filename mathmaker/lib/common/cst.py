@@ -22,8 +22,6 @@
 
 from decimal import Decimal
 
-YES = ['yes', 'Yes', 'YES', 'ok', 'Ok', 'OK', True]
-
 DEFAULT = "default"
 RANDOMLY = "randomly"
 NUMERIC = "numeric"

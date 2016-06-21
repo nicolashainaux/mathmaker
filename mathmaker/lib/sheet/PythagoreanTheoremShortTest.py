@@ -53,7 +53,7 @@ class PythagoreanTheoremShortTest(S_Structure):
         self.derived = True
         S_Structure.__init__(self, FONT_SIZE_OFFSET,
                              SHEET_LAYOUT_UNIT, SHEET_LAYOUT,
-                             SHEET_LAYOUT_TYPE, write_texts_twice='yes')
+                             SHEET_LAYOUT_TYPE, write_texts_twice=True)
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
         self.header = _("Name: .......................................")

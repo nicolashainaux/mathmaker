@@ -125,7 +125,7 @@ class X_RightTriangle(X_Structure):
                                               use_decimals=True,
                                               final_unit=randomly.pop(units),
                                               number_of_the_question='a',
-                                              figure_in_the_text='no',
+                                              figure_in_the_text=False,
                                               rotate_around_barycenter=\
                      randomly.pop(angles) + random_signs[0]*randomly.integer(0,
                                                                              20)
@@ -141,7 +141,7 @@ class X_RightTriangle(X_Structure):
                                                                      HUNDREDTH]),
                                               final_unit=randomly.pop(units),
                                               number_of_the_question='b',
-                                              figure_in_the_text='no',
+                                              figure_in_the_text=False,
                                               rotate_around_barycenter=\
                      randomly.pop(angles) + random_signs[1]*randomly.integer(0,
                                                                              20)
@@ -158,7 +158,7 @@ class X_RightTriangle(X_Structure):
                                                                      HUNDREDTH]),
                                               final_unit=randomly.pop(units),
                                               number_of_the_question='a',
-                                              figure_in_the_text='no',
+                                              figure_in_the_text=False,
                                               rotate_around_barycenter=\
                      randomly.pop(angles) + random_signs[0]*randomly.integer(0,
                                                                              20)
@@ -173,7 +173,7 @@ class X_RightTriangle(X_Structure):
                                               use_decimals=True,
                                               final_unit=randomly.pop(units),
                                               number_of_the_question='b',
-                                              figure_in_the_text='no',
+                                              figure_in_the_text=False,
                                               rotate_around_barycenter=\
                      randomly.pop(angles) + random_signs[1]*randomly.integer(0,
                                                                              20)
@@ -188,7 +188,7 @@ class X_RightTriangle(X_Structure):
                                       use_pythagorean_triples=True,
 #                                     use_decimals=randomly.heads_or_tails(),
                                       final_unit=randomly.pop(units),
-                                      figure_in_the_text='no',
+                                      figure_in_the_text=False,
                                       rotate_around_barycenter=\
              randomly.pop(angles) + random_signs[0]*randomly.integer(0,
                                                                      20),
@@ -204,7 +204,7 @@ class X_RightTriangle(X_Structure):
                           q_subkind='default',
 #                         use_decimals=randomly.heads_or_tails(),
                           final_unit=randomly.pop(units),
-                          figure_in_the_text='no',
+                          figure_in_the_text=False,
                           rotate_around_barycenter=\
  randomly.pop(angles) + random_signs[0]*randomly.integer(0,
                                                          20),

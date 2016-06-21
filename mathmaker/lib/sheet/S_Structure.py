@@ -55,9 +55,7 @@ class S_Structure(object):
         self.layout_type = layout_type
         self.write_texts_twice = False
 
-        if 'write_texts_twice' in options \
-            and options['write_texts_twice'] in YES:
-            # __
+        if 'write_texts_twice' in options and options['write_texts_twice']:
             self.write_texts_twice = True
 
         # Some tests on sheet_layout before using it ;

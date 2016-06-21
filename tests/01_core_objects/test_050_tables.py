@@ -53,7 +53,7 @@ def test_t0_into_str(t0):
 
 def test_t0_into_str_bis(t0):
     """Is this Table correctly turned into a string?"""
-    assert t0.into_str(as_a_quotients_equality='yes') == \
+    assert t0.into_str(as_a_quotients_equality=True) == \
         wrap_nb('\\frac{2}{4}=\\frac{5}{10}=\\frac{6}{12}=\\frac{7}{14}')
 
 

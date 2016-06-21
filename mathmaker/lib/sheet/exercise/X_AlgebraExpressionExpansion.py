@@ -84,7 +84,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
     #                         'yes'
     #                         'OK'
     #                         any other value will be understood as 'no'
-    #          - short_test=<string>
+    #          - short_test=bool
     #            /!\ the x_kind option above can't be used along this option
     #            use subtype if you need to make different short_test exercises
     #                         'yes'
@@ -196,7 +196,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
                     if squares_differences_option[i] == 1:
                         q = default_question(q_kind=ordered_kinds_list[i],
                                              couple=monomials_to_use[i],
-                                             squares_difference='yes',
+                                             squares_difference=True,
                                              expression_number=i,
                                              **options)
                     else:

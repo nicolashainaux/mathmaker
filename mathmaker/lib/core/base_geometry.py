@@ -194,7 +194,7 @@ class Point(Drawable):
 
         new_name = self.name + "'"
 
-        if 'keep_name' in options and options['keep_name'] == True:
+        if 'keep_name' in options and options['keep_name']:
             new_name = self.name
 
         elif 'new_name' in options and type(options['new_name']) == str:

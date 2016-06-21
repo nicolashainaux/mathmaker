@@ -20,7 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import math
 from decimal import Decimal
 
 from mathmaker.lib import *
@@ -82,20 +81,16 @@ class Q_RightTriangle(Q_Structure):
         # value of **options
         options = self.options
 
-
-
         # Set the default values of the different options
         use_pythagorean_triples = False
-        if ('use_pythagorean_triples' in options \
-            and options['use_pythagorean_triples'] in YES) \
-           or (self.q_kind == 'converse_of_pythagorean_theorem'):
-        #___
+        if (('use_pythagorean_triples' in options
+             and options['use_pythagorean_triples'])
+            or (self.q_kind == 'converse_of_pythagorean_theorem')):
+            # __
             use_pythagorean_triples = True
 
         use_decimals = True
-        if 'use_decimals' in options \
-            and not options['use_decimals'] in YES:
-        #___
+        if 'use_decimals' in options and not options['use_decimals']:
             use_decimals = False
 
         self.round_to = ""
@@ -114,9 +109,9 @@ class Q_RightTriangle(Q_Structure):
 
         self.figure_in_the_text = True
 
-        if 'figure_in_the_text' in options \
-            and not options['figure_in_the_text'] in YES:
-        #___
+        if ('figure_in_the_text' in options
+            and not options['figure_in_the_text']):
+            # __
             self.figure_in_the_text = False
 
         rotation_option = 'no'
@@ -384,11 +379,11 @@ angle in {right_vertex}.")\
 
                 result += " " + str(self.known_sides[0].length_name) \
                        + " = " \
-                       + self.known_sides[0].label.into_str(display_unit='yes')\
+                       + self.known_sides[0].label.into_str(display_unit=True)\
                        + ". " \
                        + str(self.known_sides[1].length_name) \
                        + " = " \
-                       + self.known_sides[1].label.into_str(display_unit='yes')\
+                       + self.known_sides[1].label.into_str(display_unit=True)\
                        + ". " + M.write_new_line()
 
             result += _("Calculate the length of {this_side}.")\
@@ -461,9 +456,9 @@ triangle is right, give the name of the right angle.")
                 result += M.write(Equation(pyth_eq.substitute()).\
                                         auto_resolution( \
                                             dont_display_equations_name=True,
-                                            pythagorean_mode='yes',
+                                            pythagorean_mode=True,
                                             unit=self.final_unit,
-                                            underline_result='yes')
+                                            underline_result=True)
                                  )
 
 
@@ -472,9 +467,9 @@ triangle is right, give the name of the right angle.")
                                         auto_resolution( \
                                             dont_display_equations_name=True,
                                             decimal_result=self.round_to,
-                                            pythagorean_mode='yes',
+                                            pythagorean_mode=True,
                                             unit=self.final_unit,
-                                            underline_result='yes')
+                                            underline_result=True)
                                   )
 
 

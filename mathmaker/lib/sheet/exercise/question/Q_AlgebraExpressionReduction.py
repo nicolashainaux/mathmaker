@@ -89,7 +89,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
     #                                 'sum'
     #                                 'sum_of_products'
     #   @param **options Options detailed below:
-    #          - short_test=<string>
+    #          - short_test=bool
     #                         'yes'
     #                         'OK'
     #                         any other value will be understood as 'no'
@@ -135,9 +135,9 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                                   DEFAULT_MAXIMUM_LENGTH,
                                   weighted_table=[0.15, 0.25, 0.6])
 
-        if 'length' in options and is_.an_integer(options['length'])      \
-           and options['length'] >= 2:
-        #___
+        if ('length' in options and is_.an_integer(options['length'])
+            and options['length'] >= 2):
+            # __
             length = options['length']
 
         # 1st CASE:
@@ -148,13 +148,10 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             # but the reduced or entire alphabets can be used as well
             letters_package = alphabet.abc + alphabet.xyz
 
-            if 'short_test' in options \
-                and (options['short_test'] == 'yes' \
-                     or options['short_test'] == 'OK'):
-            #___
+            if 'short_test' in options and options['short_test']:
+                # __
                 self.objct = Product([Monomial((RANDOMLY, 12, 1)),
-                                      Monomial((RANDOMLY, 12, 1))
-                                     ])
+                                      Monomial((RANDOMLY, 12, 1))])
 
                 self.objct.factor[0].set_degree(1)
                 self.objct.factor[1].set_degree(1)

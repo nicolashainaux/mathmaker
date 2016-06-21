@@ -102,14 +102,14 @@ def expI():
 @pytest.fixture
 def expJ():
     t = BinomialIdentity((Item(3), Monomial(('+', 3, 1))),
-                         squares_difference='OK')
+                         squares_difference=True)
     return Expression("J", t)
 
 
 @pytest.fixture
 def expK():
     t = BinomialIdentity((Item(1), Monomial(('+', 10, 1))),
-                         squares_difference='OK')
+                         squares_difference=True)
     return Expression("K", t)
 
 

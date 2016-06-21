@@ -472,7 +472,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
         cell_fmt = "p{"
 
-        if 'center_vertically' in options:
+        if 'center_vertically' in options and options['center_vertically']:
             cell_fmt = "m{"
 
         if 'borders' in options and options['borders'] in ['all',

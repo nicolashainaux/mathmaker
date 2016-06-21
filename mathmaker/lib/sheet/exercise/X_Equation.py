@@ -139,7 +139,7 @@ class X_Equation(X_Structure):
     #                         'yes'
     #                         'OK'
     #                         any other value will be understood as 'no'
-    #          - short_test=<string>
+    #          - short_test=bool
     #            /!\ the x_kind option above can't be used along this option
     #                         'yes'
     #                         'OK'

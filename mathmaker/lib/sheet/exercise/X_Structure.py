@@ -109,7 +109,7 @@ class X_Structure(object):
         # The slideshow option (for MentalCalculation sheets)
         self.slideshow = False
 
-        if 'slideshow' in options and options['slideshow'] in YES:
+        if 'slideshow' in options and options['slideshow']:
             self.slideshow = True
 
         # END OF OPTIONS ------------------------------------------------------

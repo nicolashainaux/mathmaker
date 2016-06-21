@@ -534,7 +534,7 @@ class Value(Signed):
             sign = '-'
 
         if self.is_numeric():
-            if 'display_unit' in options and options['display_unit'] in YES:
+            if 'display_unit' in options and options['display_unit']:
                 unit_str = self.unit.into_str(**options) \
                                             if isinstance(self.unit, Unit) \
                                             else str(self.unit)
@@ -976,8 +976,9 @@ class Unit(Exponented):
         text_box_open = MARKUP['open_text_in_maths']
         text_box_close = MARKUP['close_text_in_maths']
 
-        if 'graphic_display' in options and options['graphic_display'] in YES\
-            or 'display_SI_unit' in options:
+        if ('graphic_display' in options and options['graphic_display']
+            or 'display_SI_unit' in options):
+            # __
             text_box_open = ""
             text_box_close = ""
 

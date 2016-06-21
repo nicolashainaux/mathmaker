@@ -30,12 +30,15 @@ import math
 from decimal import *
 
 from mathmaker import settings
-from .base import *
-from mathmaker.lib.core.root_calculus import *
-from mathmaker.lib import randomly
-from mathmaker.lib.maths_lib import *
-from mathmaker.lib.common.cst import *
-from .utils import *
+from mathmaker.lib.core.root_calculus import Calculable, Value, Exponented
+from mathmaker.lib import randomly, is_
+from mathmaker.lib.common import alphabet
+from mathmaker.lib.maths_lib import (sign_of_product, gcd, pupil_gcd,
+                                     lcm_of_the_list, is_even, is_uneven,
+                                     ZERO_POLYNOMIAL_DEGREE)
+from mathmaker.lib.common.cst import (DEFAULT, RANDOMLY, NUMERIC, LITERALS,
+                                      OTHERS)
+from .utils import reduce_literal_items_product, put_term_in_lexicon
 from mathmaker.lib.common.latex import MARKUP
 
 
@@ -314,8 +317,8 @@ class Item(Exponented):
         # of an expression).
         # Everytime an Item is written, expression_begins is set to False again
 
-        if 'force_expression_begins' in options \
-           and options['force_expression_begins'] == True:
+        if ('force_expression_begins' in options
+            and options['force_expression_begins']):
             # __
             expression_begins = options['force_expression_begins']
             options['force_expression_begins'] = False
@@ -388,16 +391,15 @@ class Item(Exponented):
                 resulting_string += inner_bracket_1                           \
                                  + self.value_inside.into_str(**options)      \
                                  + inner_bracket_2
-                                 #+ MARKUP['space']
+                                 # + MARKUP['space']
 
         if self.is_out_striked:
             resulting_string = MARKUP['opening_out_striked']                  \
                                + resulting_string                             \
                                + MARKUP['closing_out_striked']
 
-        #if self.unit != None and 'display_unit' in options \
-        #    and (options['display_unit'] == True \
-        #         or options['display_unit'] == 'yes'):
+        # if self.unit != None and 'display_unit' in options \
+        #    and options['display_unit']:
             # __
         #    resulting_string += "~" + str(self.unit)
 
@@ -1141,9 +1143,6 @@ class SquareRoot(Function):
     #   @warning Might raise an UncompatibleType exception.
     #   @param arg Exponented|(sign, Exponented)
     #           The given Exponented will be "embedded" in the SquareRoot
-    #   @param options: copy='yes' can be used to produce a copy of
-    #                    another SquareRoot. If not used, the other SquareRoot
-    #                    will get embedded in a new SquareRoot.
     #   @return One instance of SquareRoot
     def __init__(self, arg, **options):
         Exponented.__init__(self)
@@ -1152,9 +1151,7 @@ class SquareRoot(Function):
 
         # 1st CASE: a SquareRoot
         if isinstance(arg, SquareRoot):
-            if 'embbed' in options \
-                and options['embbed'] == 'yes':
-                # __
+            if 'embbed' in options and options['embbed']:
                 self.radicand = arg.clone()
             else:
                 self._force_display_sign_once = arg.force_display_sign_once
@@ -1234,8 +1231,8 @@ class SquareRoot(Function):
         # Everytime an SquareRoot is written,
         # expression_begins is set to False again
 
-        if 'force_expression_begins' in options \
-           and options['force_expression_begins'] == True:
+        if ('force_expression_begins' in options
+            and options['force_expression_begins']):
             # __
             expression_begins = options['force_expression_begins']
             options['force_expression_begins'] = False
@@ -1683,7 +1680,7 @@ class Quotient(Operation):
         self._denominator = Value(1)
         self._symbol = 'like_a_fraction'
 
-        if 'use_divide_symbol' in options:
+        if 'use_divide_symbol' in options and options['use_divide_symbol']:
             self._symbol = 'use_divide_symbol'
 
         # 1st CASE: (sign, Exponented num, Exponented deno)
@@ -1806,12 +1803,11 @@ class Quotient(Operation):
     #   @return The formated string
     def into_str(self, **options):
         global expression_begins
-        log = settings.dbg_logger.getChild(
-            'Quotient.into_str')
+        log = settings.dbg_logger.getChild('Quotient.into_str')
 
         log.debug("Entering with: " + repr(self))
-        if 'force_expression_begins' in options \
-           and options['force_expression_begins'] == True:
+        if ('force_expression_begins' in options
+            and options['force_expression_begins']):
             # __
             expression_begins = True
             options['force_expression_begins'] = False
@@ -1912,7 +1908,7 @@ class Quotient(Operation):
     ##
     #   @brief Returns the value of a numerically evaluable object
     def evaluate(self, **options):
-        if not('stop_recursion' in options and options['stop_recursion'] in YES):
+        if not('stop_recursion' in options and options['stop_recursion']):
             next_step = self.calculate_next_step()
 
             if next_step != None:
@@ -2491,9 +2487,9 @@ class Fraction(Quotient):
     ##
     #   @brief Returns the value of a numerically evaluable object
     def evaluate(self, **options):
-        if 'keep_not_decimal_nb_as_fractions' in options \
-            and options['keep_not_decimal_nb_as_fractions'] in YES \
-            and not self.is_a_decimal_number():
+        if ('keep_not_decimal_nb_as_fractions' in options
+            and options['keep_not_decimal_nb_as_fractions']
+            and not self.is_a_decimal_number()):
             # __
             return self.completely_reduced()
         else:
@@ -3270,9 +3266,7 @@ class CommutativeOperation(Operation):
         log.debug(
                                             "Entered with: " + repr(self))
 
-        if not('stop_recursion' in options
-               and options['stop_recursion'] in YES):
-            # __
+        if not('stop_recursion' in options and options['stop_recursion']):
             next_step = self.calculate_next_step()
 
             if next_step != None:
@@ -3320,7 +3314,7 @@ class CommutativeOperation(Operation):
     # --------------------------------------------------------------------------
     ##
     #   @brief Raw display of the CommutativeOperation (debugging method)
-    #   @param options: info='OK' let dbg_str display more info
+    #   @param options: info=True let dbg_str display more info
     #   @return A string: "<info1|info2||factor0, ..., factorn>^{exponent}"
     #                 or: "[info1|info2||term0, ..., termn]^{exponent}"
     def __repr__(self, **options):
@@ -3331,11 +3325,9 @@ class CommutativeOperation(Operation):
                 elements_list_string += ' ' + self.symbol + ' '
 
         info = ""
-        if 'info' in options:
-            info = str(self.compact_display) \
-                 + " info:"  \
-                 + str(self.info) \
-                 + ":info "
+        if 'info' in options and options['info']:
+            info = str(self.compact_display) + " info:"\
+                + str(self.info) + ":info "
 
         expo = ""
         if not self.exponent.is_displ_as_a_single_1():
@@ -3825,8 +3817,8 @@ class Product(CommutativeOperation):
         global expression_begins
         log = settings.dbg_logger.getChild('Product.into_str')
 
-        if 'force_expression_begins' in options \
-           and options['force_expression_begins'] == True:
+        if ('force_expression_begins' in options
+            and options['force_expression_begins']):
             # __
             expression_begins = True
             options['force_expression_begins'] = False
@@ -5431,8 +5423,8 @@ class Sum(CommutativeOperation):
         global expression_begins
         log = settings.dbg_logger.getChild('Sum.into_str')
 
-        if 'force_expression_begins' in options \
-           and options['force_expression_begins'] == True:
+        if ('force_expression_begins' in options
+            and options['force_expression_begins']):
             # __
             expression_begins = options['force_expression_begins']
             options['force_expression_begins'] = False
@@ -7421,12 +7413,6 @@ class BinomialIdentity(Expandable):
     #   @return The formated string
     def into_str(self, **options):
         global expression_begins
-
-        #if 'force_expression_begins' in options \
-        #   and options['force_expression_begins'] == True:
-            # __
-        #    expression_begins = options['force_expression_begins']
-        #    options['force_expression_begins'] = False
 
         if self.kind == 'squares_difference':
             return Product(self.factor).into_str(**options)

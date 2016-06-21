@@ -132,7 +132,7 @@ class X_Factorization(X_Structure):
     #                         'yes'
     #                         'OK'
     #                         any other value will be understood as 'no'
-    #          - short_test=<string>
+    #          - short_test=bool
     #            /!\ the x_kind option above can't be used along this option
     #            use subtype if you need to make different short_test exercises
     #                         'yes'
@@ -243,9 +243,9 @@ class X_Factorization(X_Structure):
                                    expression_number=n+1))
 
 
-                l02_kinds = [('type_2_A1', 'no'),
-                             ('type_2_A0', 'yes'),
-                             ('type_4_A0', 'no')]
+                l02_kinds = [('type_2_A1', False),
+                             ('type_2_A0', True),
+                             ('type_4_A0', False)]
 
                 for n in range(len(l02_kinds)):
                     lil_box.append(default_question(
@@ -277,9 +277,9 @@ class X_Factorization(X_Structure):
                                                   ),
                             expression_number=1))
 
-                l02_kinds = [('type_2_A1', 'no'),
-                             ('type_2_A0', 'yes'),
-                             ('type_4_A0', 'no')]
+                l02_kinds = [('type_2_A1', False),
+                             ('type_2_A0', True),
+                             ('type_4_A0', False)]
 
                 n = randomly.pop([0, 1, 2])
 
@@ -373,7 +373,7 @@ class X_Factorization(X_Structure):
                     self.questions_list.append(default_question(
                                                q_kind='level_02',
                                                q_subkind=randomly.pop(subkinds),
-                                               minus_sign='no',
+                                               minus_sign=False,
                                                expression_number=i)
                                               )
 
@@ -386,7 +386,7 @@ class X_Factorization(X_Structure):
                     self.questions_list.append(default_question(
                                                q_kind='level_02',
                                                q_subkind=randomly.pop(subkinds),
-                                               minus_sign='no',
+                                               minus_sign=False,
                                                expression_number=i+n1)
                                               )
 
@@ -401,7 +401,7 @@ class X_Factorization(X_Structure):
                     self.questions_list.append(default_question(
                                                q_kind='level_02',
                                                q_subkind=randomly.pop(subkinds),
-                                               minus_sign='no',
+                                               minus_sign=False,
                                                expression_number=i)
                                               )
 
@@ -414,7 +414,7 @@ class X_Factorization(X_Structure):
                     self.questions_list.append(default_question(
                                                q_kind='level_02',
                                                q_subkind=randomly.pop(subkinds),
-                                               minus_sign='no',
+                                               minus_sign=False,
                                                expression_number=i+n1)
                                               )
 

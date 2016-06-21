@@ -69,7 +69,7 @@ class X_AlgebraExpressionReduction(X_Structure):
     #                         'yes'
     #                         'OK'
     #                         any other value will be understood as 'no'
-    #          - short_test=<string>
+    #          - short_test=bool
     #            /!\ the x_kind option above can't be used along this option
     #                         'yes'
     #                         'OK'
@@ -114,13 +114,13 @@ class X_AlgebraExpressionReduction(X_Structure):
             if self.x_subkind == 'easy':
                 self.questions_list.append(default_question(
                                                         q_kind='product',
-                                                        short_test='OK',
+                                                        short_test=True,
                                                         expression_number=0)
                                           )
 
                 self.questions_list.append(default_question(
                                                         q_kind='sum',
-                                                        short_test='OK',
+                                                        short_test=True,
                                                         length=4,
                                                         expression_number=1)
                                           )

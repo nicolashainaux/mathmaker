@@ -27,19 +27,18 @@
 # @brief Mathematical geometrical objects.
 
 import math
-import locale
 import copy
 from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
 
 from mathmaker.lib import randomly
 from mathmaker.lib import is_, error
-from mathmaker.lib.maths_lib import deg_to_rad, barycenter, POLYGONS_NATURES, round
+from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
+                                     POLYGONS_NATURES, round)
 from .root_calculus import Value, Unit
 from .base_calculus import Item, Product, Sum
 from .calculus import Equality, SubstitutableEquality
 from .base import Drawable
 from .base_geometry import Point, Segment, Angle, Vector
-
 
 
 # ------------------------------------------------------------------------------
@@ -352,8 +351,8 @@ class Polygon(Drawable):
                 result += "  $\\rotatebox{"
                 result += str(rotate_box_angle)
                 result += "}{\sffamily "
-                result += s.label.into_str(display_unit='yes',
-                                           graphic_display='yes')
+                result += s.label.into_str(display_unit=True,
+                                           graphic_display=True)
                 result += "}$ "
                 result += s.points[0].name + " "
                 result += str(label_position_angle)
@@ -389,8 +388,8 @@ class Polygon(Drawable):
                 result += "  $\\rotatebox{"
                 result += str(rotate_box_angle)
                 result += "}{\sffamily "
-                result += a.label.into_str(display_unit='yes',
-                                           graphic_display='yes')
+                result += a.label.into_str(display_unit=True,
+                                           graphic_display=True)
                 result += "}$ "
                 result += a.vertex.name + " "
                 result += str(label_position_angle) + " deg "

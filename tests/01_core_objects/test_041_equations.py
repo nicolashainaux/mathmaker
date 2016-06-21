@@ -563,7 +563,7 @@ def test_eq34_autoresolution_ter(eq34):
     eq = eq34
     assert eq.auto_resolution(dont_display_equations_name=True,
                               decimal_result=2,
-                              pythagorean_mode='yes') == \
+                              pythagorean_mode=True) == \
         wrap_nb('\[x^{2}=5\]'
                 '\[x=\\sqrt{\mathstrut 5}'
                 '\\text{ because x is positive.}\]'
@@ -577,7 +577,7 @@ def test_eq35_autoresolution():
                   number=1, variable_letter_name="AB")
     assert eq.auto_resolution(dont_display_equations_name=True,
                               decimal_result=2,
-                              pythagorean_mode='yes') == \
+                              pythagorean_mode=True) == \
         wrap_nb('\[73^{2}=48^{2}+\\text{AB}^{2}\]'
                 '\[5329=2304+\\text{AB}^{2}\]'
                 '\[\\text{AB}^{2}=5329-2304\]'
@@ -595,7 +595,7 @@ def test_eq36_autoresolution():
                    Sum([Item(('+', 60, 2)), Item(('+', 91, 2))])),
                   number=1, variable_letter_name="AB")
     assert eq.auto_resolution(dont_display_equations_name=True,
-                              pythagorean_mode='yes',
+                              pythagorean_mode=True,
                               unit='cm') == \
         wrap_nb('\[\\text{EF}^{2}=60^{2}+91^{2}\]'
                 '\[\\text{EF}^{2}=3600+8281\]'
