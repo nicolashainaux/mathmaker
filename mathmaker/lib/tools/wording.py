@@ -28,7 +28,8 @@ from mathmaker import settings
 from mathmaker.lib import error
 from mathmaker.lib import shared
 from mathmaker.lib.core.root_calculus import Unit, Value
-from mathmaker.lib.common.cst import UNIT_KINDS, COMMON_LENGTH_UNITS, CURRENCIES_DICT
+from mathmaker.lib.common.cst import (UNIT_KINDS, COMMON_LENGTH_UNITS,
+                                      CURRENCIES_DICT)
 
 
 # --------------------------------------------------------------------------
@@ -133,7 +134,7 @@ def cut_off_hint_from(sentence):
 # --------------------------------------------------------------------------
 ##
 #   @brief  Will set a random name to all {name}, {nameN}, {masculine_name},
-#   		{masculine_nameN}, {feminine_name} and {feminine_nameN} tags.
+#           {masculine_nameN}, {feminine_name} and {feminine_nameN} tags.
 #   @param  arg The object to check (whether it has these attributes or not)
 def handle_valueless_names_tags(arg, sentence):
     valueless_nameblocks = [w[1:-1] for w in sentence.split()

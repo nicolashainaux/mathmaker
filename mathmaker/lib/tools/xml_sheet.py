@@ -128,7 +128,7 @@ def get_sheet_config(file_name):
                 "xmllint error message is:\n"
                 "" + str(call_xmllint.stderr.read().decode(encoding='UTF-8')))
 
-    xml_doc = XML_PARSER.parse(file_name).getroot()
+    xml_doc=XML_PARSER.parse(file_name).getroot()
 
     sheet_layout = {'exc': [],
                     'ans': []}
@@ -185,7 +185,7 @@ def get_exercises_list(file_name):
     """
     mainlogger = logging.getLogger("__main__")
     try:
-        xml_doc = XML_PARSER.parse(file_name).getroot()
+        xml_doc=XML_PARSER.parse(file_name).getroot()
     except FileNotFoundError:
         mainlogger.error('FileNotFoundError: ' + file_name)
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),

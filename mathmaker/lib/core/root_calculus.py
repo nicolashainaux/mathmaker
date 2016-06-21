@@ -28,14 +28,16 @@
 
 import copy
 import locale
+from decimal import Decimal, getcontext, Rounded, ROUND_HALF_UP, ROUND_DOWN
 
-from .base import *
+from mathmaker.lib.maths_lib import round
+from mathmaker.lib.common.cst import (UNIT, TENTH, HUNDREDTH, THOUSANDTH,
+                                      TEN_THOUSANDTH, PRECISION,
+                                      PRECISION_REVERSED,
+                                      VALUE_AND_UNIT_SEPARATOR)
 from mathmaker.lib.common import alphabet
-from mathmaker.lib import is_
-from mathmaker.lib.maths_lib import *
-from decimal import *
-from mathmaker.lib.common.cst import *
-
+from mathmaker.lib.core.base import Printable
+from mathmaker.lib import is_, error
 from mathmaker.lib.common.latex import MARKUP
 
 
@@ -123,6 +125,7 @@ class Evaluable(Printable):
     def is_null(self):
         raise error.MethodShouldBeRedefined(self, 'is_null')
 
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -198,7 +201,6 @@ class Calculable(Evaluable):
         raise error.MethodShouldBeRedefined(self,
                                             'requires_innner_brackets')
 
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Uses the given lexicon to substitute literal Values in self
@@ -227,7 +229,7 @@ class Calculable(Evaluable):
     # For instance, the Product 1×1×(-1)×1 or the Sum 0 + 0 - 1 + 0
     def is_displ_as_a_single_minus_1(self):
         raise error.MethodShouldBeRedefined(self,
-                                           'is_displ_as_a_single_minus_1')
+                                            'is_displ_as_a_single_minus_1')
 
     # --------------------------------------------------------------------------
     ##
@@ -242,26 +244,26 @@ class Calculable(Evaluable):
     ##
     #   @brief True if the object is or only contains one numeric Item
     def is_displ_as_a_single_numeric_Item(self):
-        raise error.MethodShouldBeRedefined(self,
-                                      'is_displ_as_a_single_numeric_Item')
+        raise error.MethodShouldBeRedefined(self, 'is_displ_as_a_single'
+                                                  '_numeric_Item')
 
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be considered as a neutral element
     def is_displ_as_a_single_neutral(self, elt):
-        raise error.MethodShouldBeRedefined(self,
-                                      'is_displ_as_a_single_neutral')
+        raise error.MethodShouldBeRedefined(self, 'is_displ_as_a_single'
+                                                  '_neutral')
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
 # @class Signed
-# @brief Signed objects: CommutativeOperations (Sums&Products), Items, Quotients...
+# @brief Signed objects: CommutativeOperations (Sums&Products), Items,
+#        Quotients...
 # Any Signed must have a sign field
 class Signed(Calculable):
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -283,7 +285,7 @@ class Signed(Calculable):
         return self._sign
     # --------------------------------------------------------------------------
     sign = property(get_sign,
-                    doc = "Sign of the object")
+                    doc="Sign of the object")
 
     # --------------------------------------------------------------------------
     ##
@@ -315,10 +317,10 @@ class Signed(Calculable):
             self.set_sign('-')
         else:
             # this case should never happen, just to secure the code
-            raise error.WrongObject("The sign of the object " \
-                                    + repr(self) \
-                                    + " is " \
-                                    + str(self.sign) \
+            raise error.WrongObject("The sign of the object "
+                                    + repr(self)
+                                    + " is "
+                                    + str(self.sign)
                                     + " instead of '+' or '-'.")
 
     # --------------------------------------------------------------------------
@@ -326,7 +328,6 @@ class Signed(Calculable):
     #   @brief True if object's *sign* is '-' (ie -(-1) would be "negative")
     def is_negative(self):
         return self.sign == '-'
-
 
     # --------------------------------------------------------------------------
     ##
@@ -371,9 +372,9 @@ class Value(Signed):
         if 'unit' in options:
             self._unit = Unit(options['unit'])
 
-        if type(arg) == float                                             \
-            or type(arg) == int                                          \
-            or type(arg) == Decimal:
+        if (type(arg) == float
+            or type(arg) == int
+            or type(arg) == Decimal):
             # __
             self._raw_value = Decimal(str(arg))
             if arg >= 0:
@@ -416,31 +417,37 @@ class Value(Signed):
             return self.raw_value
         else:
             raise error.UncompatibleType(self, "str, i.e. literal Value")
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the "has been rounded" state of the Value
     def get_has_been_rounded(self):
         return self._has_been_rounded
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the list of elements to iter over
     def get_iteration_list(self):
         return [self.raw_value]
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of minus signs in the object
     def get_minus_signs_nb(self):
         raise error.MethodShouldBeRedefined(self, 'get_minus_signs_nb')
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the raw value contained in the Value
     def get_raw_value(self):
         return self._raw_value
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the sign of the Value
     def get_sign(self):
         return self._sign
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the unit of the Value
@@ -451,28 +458,24 @@ class Value(Signed):
     def abs_value(self):
         return self._abs_value
 
-
     raw_value = property(get_raw_value,
-                         doc = "Raw value of the object")
+                         doc="Raw value of the object")
     has_been_rounded = property(get_has_been_rounded,
-                         doc = "'has been rounded' state of the Value")
+                                doc="'has been rounded' state of the Value")
     sign = property(get_sign,
-                    doc = "Sign of the Value")
+                    doc="Sign of the Value")
 
     unit = property(get_unit,
-                    doc = "Unit of the Value")
-
-
+                    doc="Unit of the Value")
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the "has been rounded" state of the Value
     def set_has_been_rounded(self, arg):
-        if not arg in [True, False]:
+        if arg not in [True, False]:
             raise error.WrongArgument(str(type(arg)), "True|False")
         else:
             self._has_been_rounded = arg
-
 
     # --------------------------------------------------------------------------
     ##
@@ -511,10 +514,10 @@ class Value(Signed):
             self.set_sign('-')
         else:
             # this case should never happen, just to secure the code
-            raise error.WrongObject("The sign of the object " \
-                                    + repr(self) \
-                                    + " is " \
-                                    + str(self.sign) \
+            raise error.WrongObject("The sign of the object "
+                                    + repr(self)
+                                    + " is "
+                                    + str(self.sign)
                                     + " instead of '+' or '-'.")
 
     # --------------------------------------------------------------------------
@@ -536,36 +539,36 @@ class Value(Signed):
         if self.is_numeric():
             if 'display_unit' in options and options['display_unit']:
                 unit_str = self.unit.into_str(**options) \
-                                            if isinstance(self.unit, Unit) \
-                                            else str(self.unit)
+                    if isinstance(self.unit, Unit) \
+                    else str(self.unit)
                 return sign + locale.str(self.abs_value) + unit_str
             elif 'display_SI_unit' in options and options['display_SI_unit']:
                 unit_str = self.unit.into_str(**options) \
-                                            if isinstance(self.unit, Unit) \
-                                            else str(self.unit)
+                    if isinstance(self.unit, Unit) \
+                    else str(self.unit)
                 return sign + "\SI{" + locale.str(self.abs_value) + "}"\
-                       "{" + unit_str + "}"
+                    "{" + unit_str + "}"
             else:
                 return sign + MARKUP['open_text_in_maths'] \
-                       + locale.str(self.abs_value) \
-                       + MARKUP['close_text_in_maths']
+                    + locale.str(self.abs_value) \
+                    + MARKUP['close_text_in_maths']
 
-        elif self.raw_value in ["", " "] and 'display_SI_unit' in options \
-            and options['display_SI_unit']:
+        elif (self.raw_value in ["", " "] and 'display_SI_unit' in options
+              and options['display_SI_unit']):
             # __
             unit_str = self.unit.into_str(**options) \
-                                        if isinstance(self.unit, Unit) \
-                                        else str(self.unit)
+                if isinstance(self.unit, Unit) \
+                else str(self.unit)
             return sign + "\SI{" + self.abs_value + "}"\
-                       "{" + unit_str + "}"
+                "{" + unit_str + "}"
 
-        else: # self.is_literal()
-            if len(self.get_first_letter()) >= 2 \
-                and not self.get_first_letter()[0] in ["-", "+"]:
+        else:  # self.is_literal()
+            if (len(self.get_first_letter()) >= 2
+                and not self.get_first_letter()[0] in ["-", "+"]):
                 # __
                 return sign + MARKUP['open_text_in_maths'] \
-                       + str(self.abs_value) \
-                       + MARKUP['close_text_in_maths']
+                    + str(self.abs_value) \
+                    + MARKUP['close_text_in_maths']
             else:
                 return str(self.raw_value)
 
@@ -578,7 +581,6 @@ class Value(Signed):
             raise error.UncompatibleType(self, "numeric Value")
         else:
             return self.raw_value
-
 
     # --------------------------------------------------------------------------
     ##
@@ -607,11 +609,9 @@ class Value(Signed):
         else:
             return False
 
-
     def __ne__(self, other_value):
         """Basically the contrary of __eq__, to allow comparisons with !="""
         return not self.__eq__(other_value)
-
 
     # --------------------------------------------------------------------------
     ##
@@ -624,9 +624,8 @@ class Value(Signed):
     ##
     #   @brief Makes Values hashable (so, usable as dictionnary keys)
     def __hash__(self):
-        return hash(str(self.sign) + str(self.raw_value) \
-                    + str(self.has_been_rounded) + str(self.unit)
-                   )
+        return hash(str(self.sign) + str(self.raw_value)
+                    + str(self.has_been_rounded) + str(self.unit))
 
     # --------------------------------------------------------------------------
     ##
@@ -657,13 +656,6 @@ class Value(Signed):
             for key in subst_dict:
                 if self == key:
                     self.__init__(subst_dict[key])
-                    #done = True
-
-            #if not done:
-            #    raise error.ImpossibleAction("substitute because the numeric "\
-            #                + "value matching the literal here is not in the "\
-            #                + "substitution dictionnary")
-
         else:
             pass
 
@@ -676,26 +668,21 @@ class Value(Signed):
         else:
             raise error.UncompatibleType(self, "numeric Value")
 
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the value once rounded to the given precision
     def round(self, precision):
         if not self.is_numeric():
             raise error.UncompatibleType(self, "numeric Value")
-        elif not (precision in [UNIT,
-                                TENTH,
-                                HUNDREDTH,
-                                THOUSANDTH,
-                                TEN_THOUSANDTH] \
-             or (type(precision) == int and precision >= 0 and precision <= 4)):
+        elif (not (precision in [UNIT, TENTH, HUNDREDTH, THOUSANDTH,
+                                 TEN_THOUSANDTH]
+              or (type(precision) == int and 0 <= precision <= 4))):
             # __
-            raise error.UncompatibleType(precision, "must be UNIT or" \
-                                                    + "TENTH, " \
-                                                    + "HUNDREDTH, " \
-                                                    + "THOUSANDTH, " \
-                                                    + "TEN_THOUSANDTH, "\
+            raise error.UncompatibleType(precision, "must be UNIT or"
+                                                    + "TENTH, "
+                                                    + "HUNDREDTH, "
+                                                    + "THOUSANDTH, "
+                                                    + "TEN_THOUSANDTH, "
                                                     + "or 0, 1, 2, 3 or 4.")
         else:
             result_value = None
@@ -703,15 +690,11 @@ class Value(Signed):
             if type(precision) == int:
                 result_value = Value(round(self.raw_value,
                                            Decimal(PRECISION[precision]),
-                                           rounding=ROUND_HALF_UP
-                                          )
-                                    )
+                                           rounding=ROUND_HALF_UP))
             else:
                 result_value = Value(round(self.raw_value,
                                            Decimal(precision),
-                                           rounding=ROUND_HALF_UP
-                                          )
-                                    )
+                                           rounding=ROUND_HALF_UP))
 
             if self.needs_to_get_rounded(precision):
                 result_value.set_has_been_rounded(True)
@@ -725,15 +708,10 @@ class Value(Signed):
         if not self.is_numeric():
             raise error.UncompatibleType(self, "numeric Value")
         else:
-            temp_result = len(str((self.raw_value \
+            temp_result = len(str((self.raw_value
                                    - round(self.raw_value,
                                            Decimal(UNIT),
-                                           rounding=ROUND_DOWN
-                                          )
-                                  ))
-                              ) \
-                           - 2
-
+                                           rounding=ROUND_DOWN)))) - 2
             if temp_result < 0:
                 return 0
             else:
@@ -745,18 +723,15 @@ class Value(Signed):
     #          rounded (for instance 2.68 doesn't need to get rounded if
     #          precision is HUNDREDTH or more, but needs it if it is less)
     def needs_to_get_rounded(self, precision):
-        if not (precision in [UNIT,
-                              TENTH,
-                              HUNDREDTH,
-                              THOUSANDTH,
-                              TEN_THOUSANDTH] \
-             or (type(precision) == int and precision >= 0 and precision <= 4)):
+        if (not (precision in [UNIT, TENTH, HUNDREDTH, THOUSANDTH,
+                               TEN_THOUSANDTH]
+            or (type(precision) == int and 0 <= precision <= 4))):
             # __
-            raise error.UncompatibleType(precision, "must be UNIT or" \
-                                                    + "TENTH, " \
-                                                    + "HUNDREDTH, " \
-                                                    + "THOUSANDTH, " \
-                                                    + "TEN_THOUSANDTH, "\
+            raise error.UncompatibleType(precision, "must be UNIT or"
+                                                    + "TENTH, "
+                                                    + "HUNDREDTH, "
+                                                    + "THOUSANDTH, "
+                                                    + "TEN_THOUSANDTH, "
                                                     + "or 0, 1, 2, 3 or 4.")
 
         precision_to_test = 0
@@ -775,7 +750,6 @@ class Value(Signed):
     def contains_a_rounded_number(self):
         return self.has_been_rounded
 
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Always False for a Value
@@ -784,10 +758,10 @@ class Value(Signed):
     def contains_exactly(self, objct):
         return False
 
-
     # --------------------------------------------------------------------------
     ##
-    #   @brief True if the object contains a perfect square (integer or decimal)
+    #   @brief  True if the object contains a perfect square
+    #           (integer or decimal)
     def is_a_perfect_square(self):
         if not self.is_numeric():
             raise error.UncompatibleType(self, "numeric Value")
@@ -803,24 +777,15 @@ class Value(Signed):
     def is_an_integer(self):
         if not self.is_numeric():
             raise error.UncompatibleType(self, "numeric Value")
-
         getcontext().clear_flags()
-
-        trash = self.raw_value.to_integral_exact()
-
+        self.raw_value.to_integral_exact()
         return getcontext().flags[Rounded] == 0
 
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains numeric objects
     def is_numeric(self):
-        if type(self.raw_value) == float                \
-            or type(self.raw_value) == int              \
-            or type(self.raw_value) == Decimal:
-            # __
-            return True
-        else:
-            return False
+        return type(self.raw_value) in [float, int, Decimal]
 
     # --------------------------------------------------------------------------
     ##
@@ -880,12 +845,14 @@ class Value(Signed):
     def is_displ_as_a_single_int(self):
         return self.is_numeric() and self.is_an_integer()
 
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
 # @class Exponented
-# @brief Exponented objects: CommutativeOperations (Sums&Products), Items, Quotients...
+# @brief Exponented objects: CommutativeOperations (Sums&Products), Items,
+#           Quotients...
 # Any Exponented must have a exponent field and should reimplement the
 # methods that are not already defined hereafter
 class Exponented(Signed):
@@ -905,7 +872,7 @@ class Exponented(Signed):
     def get_exponent(self):
         return self._exponent
     # --------------------------------------------------------------------------
-    exponent = property(get_exponent, doc = "Exponent of the Function")
+    exponent = property(get_exponent, doc="Exponent of the Function")
 
     # --------------------------------------------------------------------------
     ##
@@ -927,6 +894,7 @@ class Exponented(Signed):
             return True
         else:
             return False
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -959,12 +927,9 @@ class Unit(Exponented):
     def name(self):
         return self._name
 
-
     @property
     def exponent(self):
         return self._exponent
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -986,11 +951,12 @@ class Unit(Exponented):
 
         if self.exponent != Value(1):
             exponent = MARKUP['opening_exponent'] \
-                       + str(self.exponent) \
-                       + MARKUP['closing_exponent']
+                + str(self.exponent) \
+                + MARKUP['closing_exponent']
 
         separator = VALUE_AND_UNIT_SEPARATOR[self.name] \
-                    if not 'display_SI_unit' in options \
-                    else ""
+            if 'display_SI_unit' not in options \
+            else ""
 
-        return separator + text_box_open + self.name + text_box_close + exponent
+        return separator + text_box_open + self.name \
+            + text_box_close + exponent

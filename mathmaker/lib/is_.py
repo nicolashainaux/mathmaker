@@ -20,9 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from . import error
-import math
 import decimal
+
 
 # --------------------------------------------------------------------------
 ##
@@ -35,6 +34,7 @@ def a_string(objct):
     else:
         return False
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief True if argument is a string containing only numbers 0-9, -, + or .
@@ -42,27 +42,11 @@ def a_string(objct):
 #   @return True if argument is a string
 def a_numerical_string(objct):
     if type(objct) == str and objct != "" and objct != '...':
-        for i in range(len(objct)):
-            if not(objct[i] == '+' \
-               or objct[i] == '-' \
-               or objct[i] == '.' \
-               or objct[i] == '0' \
-               or objct[i] == '1' \
-               or objct[i] == '2' \
-               or objct[i] == '3' \
-               or objct[i] == '4' \
-               or objct[i] == '5' \
-               or objct[i] == '6' \
-               or objct[i] == '7' \
-               or objct[i] == '8' \
-               or objct[i] == '9'):
-                # __
-                return False
-
-        return True
-
+        return all(o in ['+', '-', '.', '0', '1', '2', '3', '4', '5',
+                         '6', '7', '8', '9'] for o in objct)
     else:
         return False
+
 
 # --------------------------------------------------------------------------
 ##
@@ -79,6 +63,7 @@ def a_string_list(objct):
 
     return True
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief True if argument is an ordered Exponented objects list
@@ -89,10 +74,13 @@ def an_ordered_calculable_objects_list(provided_list):
     # can be ordered with the Exponented.alphabetical_order_cmp() function
     for i in range(len(provided_list)):
         if i < len(provided_list) - 1:
-            if provided_list[i].alphabetical_order_cmp(provided_list[i+1]) > 0:
+            if (provided_list[i].alphabetical_order_cmp(
+                provided_list[i + 1]) > 0):
+                # __
                 return False
 
     return True
+
 
 # --------------------------------------------------------------------------
 ##
@@ -105,6 +93,7 @@ def a_sign(objct):
     else:
         return False
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief True if the argument is a number
@@ -112,12 +101,8 @@ def a_sign(objct):
 #   @todo Maybe add other kind of objects like fractions ??...
 #   @return True if the argument is a number
 def a_number(objct):
-    if (type(objct) == float)                                                 \
-      or (type(objct) == int)                                                 \
-      or (type(objct) == decimal.Decimal):
-        return True
-    else:
-        return False
+    return type(objct) in [float, int, decimal.Decimal]
+
 
 # --------------------------------------------------------------------------
 ##
@@ -132,6 +117,7 @@ def an_integer(objct):
     else:
         return False
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief True if argument is an int
@@ -142,6 +128,7 @@ def an_int(objct):
         return True
     else:
         return False
+
 
 # --------------------------------------------------------------------------
 ##

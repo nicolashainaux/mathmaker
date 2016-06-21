@@ -250,16 +250,16 @@ class Item(Exponented):
             raise error.UncompatibleType(self, "Litteral Item")
 
     is_out_striked = property(get_is_out_striked,
-                              doc = "Item's is_out_striked field")
+                              doc="Item's is_out_striked field")
 
     force_display_sign_once = property(get_force_display_sign_once,
-                              doc = "Item's force_display_sign_once field")
+                              doc="Item's force_display_sign_once field")
 
-    raw_value = property(get_raw_value, doc = "Item's raw value")
+    raw_value = property(get_raw_value, doc="Item's raw value")
 
-    value_inside = property(get_value_inside, doc = "Item's Value")
+    value_inside = property(get_value_inside, doc="Item's Value")
 
-    unit = property(get_unit, doc = "Unit of the Item")
+    unit = property(get_unit, doc="Unit of the Item")
 
     # --------------------------------------------------------------------------
     ##
@@ -398,7 +398,7 @@ class Item(Exponented):
                                + resulting_string                             \
                                + MARKUP['closing_out_striked']
 
-        # if self.unit != None and 'display_unit' in options \
+        # if self.unit is not None and 'display_unit' in options \
         #    and options['display_unit']:
             # __
         #    resulting_string += "~" + str(self.unit)
@@ -447,7 +447,7 @@ class Item(Exponented):
 
         log.debug("expon_test = " + str(expon_test))
 
-        if expon_test != None:
+        if expon_test is not None:
             return Item((self.sign,
                              self.raw_value,
                              expon_test
@@ -1050,18 +1050,18 @@ class Function(Item):
         return self._internal_expression
 
     numeric_value = property(get_numeric_value,
-                             doc = "Value to use to replace the variable"\
+                             doc="Value to use to replace the variable"\
                                    " (e.g. '9' or '60\textdegree'...)")
 
     variable = property(get_variable,
-                        doc = "Variable of the Function"\
+                        doc="Variable of the Function"\
                               " (e.g. 'x' or '\widehat{ABC}'...)")
 
     displayed_value = property(get_displayed_value,
-                               doc = "Value to display (variable or numeric)")
+                               doc="Value to display (variable or numeric)")
 
     internal_expression = property(get_internal_expression,
-                                   doc = "Used to evaluate the Function")
+                                   doc="Used to evaluate the Function")
 
     # --------------------------------------------------------------------------
     ##
@@ -1201,7 +1201,7 @@ class SquareRoot(Function):
         return self._force_display_sign_once
 
     force_display_sign_once = property(get_force_display_sign_once,
-                              doc = "Item's force_display_sign_once field")
+                              doc="Item's force_display_sign_once field")
 
     # --------------------------------------------------------------------------
     ##
@@ -1558,13 +1558,13 @@ class Operation(Exponented):
         return self.element  + [self.exponent]
 
     element = property(get_element,
-                       doc = "element field of Operation")
+                       doc="element field of Operation")
 
     neutral = property(get_neutral,
-                       doc = "neutral field of Operation")
+                       doc="neutral field of Operation")
 
     symbol = property(get_symbol,
-                      doc = "symbol field of Operation")
+                      doc="symbol field of Operation")
 
     # --------------------------------------------------------------------------
     ##
@@ -1769,10 +1769,10 @@ class Quotient(Operation):
                       + self.denominator.get_minus_signs_nb()
 
     numerator = property(get_numerator,
-                         doc = "numerator field of Quotient")
+                         doc="numerator field of Quotient")
 
     denominator = property(get_denominator,
-                           doc = "denominator field of Quotient")
+                           doc="denominator field of Quotient")
 
 
 
@@ -1911,7 +1911,7 @@ class Quotient(Operation):
         if not('stop_recursion' in options and options['stop_recursion']):
             next_step = self.calculate_next_step()
 
-            if next_step != None:
+            if next_step is not None:
                 return next_step.evaluate()
 
 
@@ -1947,8 +1947,8 @@ class Quotient(Operation):
         if 'decimal_result' in options:
             return Item(self.evaluate(**options))
 
-        if self.numerator.calculate_next_step(**options) != None:
-            if self.denominator.calculate_next_step(**options) != None:
+        if self.numerator.calculate_next_step(**options) is not None:
+            if self.denominator.calculate_next_step(**options) is not None:
                 return Quotient((self.sign,
                              self.numerator.calculate_next_step(**options),
                              self.denominator.calculate_next_step(**options),
@@ -1961,7 +1961,7 @@ class Quotient(Operation):
                                  self.exponent,
                                  self.symbol))
 
-        elif self.denominator.calculate_next_step(**options) != None:
+        elif self.denominator.calculate_next_step(**options) is not None:
             return Quotient((self.sign,
                              self.numerator,
                              self.denominator.calculate_next_step(**options),
@@ -2406,15 +2406,15 @@ class Fraction(Quotient):
         return False
 
     status = property(get_status,
-                      doc = "Fraction's status")
+                      doc="Fraction's status")
 
     simplification_in_progress = property(get_simplification_in_progress,
-                                          doc = "Fraction's simplification_" \
+                                          doc="Fraction's simplification_" \
                                           + "in_progress status")
 
     same_deno_reduction_in_progress = property(
                       get_same_deno_reduction_in_progress,
-                      doc = "Fraction's same_deno_reduction_in_progress field")
+                      doc="Fraction's same_deno_reduction_in_progress field")
 
     # --------------------------------------------------------------------------
     ##
@@ -2559,15 +2559,15 @@ class Fraction(Quotient):
             new_nume = self.numerator
             new_deno = self.denominator
 
-            if temp_next_nume != None:
+            if temp_next_nume is not None:
                 new_nume = temp_next_nume
-            if temp_next_deno != None:
+            if temp_next_deno is not None:
                 new_deno = temp_next_deno
 
             resulting_fraction = Fraction((new_nume, new_deno),
                                           copy_other_fields_from=self)
 
-            if temp_next_deno != None or temp_next_nume != None:
+            if temp_next_deno is not None or temp_next_nume != None:
                 return resulting_fraction
             else:
                 return None
@@ -2589,14 +2589,14 @@ class Fraction(Quotient):
                 return self.numerator
 
         # 5th CASE
-        elif temp_next_nume != None or temp_next_deno != None:
+        elif temp_next_nume is not None or temp_next_deno != None:
             log.debug("6th CASE")
             new_nume = self.numerator
             new_deno = self.denominator
 
-            if temp_next_nume != None:
+            if temp_next_nume is not None:
                 new_nume = temp_next_nume
-            if temp_next_deno != None:
+            if temp_next_deno is not None:
                 new_deno = temp_next_deno
 
             resulting_fraction = Fraction((new_nume, new_deno),
@@ -3269,7 +3269,7 @@ class CommutativeOperation(Operation):
         if not('stop_recursion' in options and options['stop_recursion']):
             next_step = self.calculate_next_step()
 
-            if next_step != None:
+            if next_step is not None:
                 log.debug(
                                         "Exiting, returning evaluate() "
                                         "called on: " + repr(next_step))
@@ -3798,7 +3798,7 @@ class Product(CommutativeOperation):
 
 
     factor = property(CommutativeOperation.get_element,
-                      doc = "To access the factors of the Product.")
+                      doc="To access the factors of the Product.")
 
     # --------------------------------------------------------------------------
     ##
@@ -4559,7 +4559,7 @@ class Product(CommutativeOperation):
 
             elif isinstance(self.factor[0], Sum):
                 new_sum = self.factor[0].calculate_next_step(**options)
-                if new_sum != None:
+                if new_sum is not None:
                     return Product([new_sum])
                 else:
                     return None
@@ -4601,7 +4601,7 @@ class Product(CommutativeOperation):
         # check if any of the factors needs to be reduced
         for i in range(len(copy)):
             test = copy.factor[i].expand_and_reduce_next_step(**options)
-            if test != None:
+            if test is not None:
                 if isinstance(test, CommutativeOperation) and len(test) == 1:
                     # in order to depack useless 1-element CommutativeOperations...
                     copy.set_element(i, test[0])
@@ -5396,10 +5396,10 @@ class Sum(CommutativeOperation):
         return self._force_inner_brackets_display
 
     term = property(CommutativeOperation.get_element,
-                    doc = "To access the terms of the Sum.")
+                    doc="To access the terms of the Sum.")
 
     force_inner_brackets_display = property(get_force_inner_brackets_display,
-                    doc = "force_inner_brackets_display field of a Sum")
+                    doc="force_inner_brackets_display field of a Sum")
 
     # --------------------------------------------------------------------------
     ##
@@ -5492,7 +5492,7 @@ class Sum(CommutativeOperation):
                                         "the next term to display is "
                                         + repr(self.term[next_term_nb]))
 
-                    if next_term_nb != None                                   \
+                    if next_term_nb is not None                                   \
                        and (                                                  \
                        self.term[next_term_nb].requires_inner_brackets()      \
                             or (isinstance(self.term[next_term_nb], Product)  \
@@ -5560,7 +5560,7 @@ class Sum(CommutativeOperation):
                 # to be complete-writing displayed
                 next_term_nb = self.next_displayable_term_nb(i)
 
-                if next_term_nb != None                                   \
+                if next_term_nb is not None                                   \
                    and self.info[next_term_nb]:
                     # __
                     resulting_string += MARKUP['plus']
@@ -5814,7 +5814,7 @@ class Sum(CommutativeOperation):
         for i in range(len(copy)):
             if not copy.term[i] in dont_touch_these:
                 temp = copy.term[i].calculate_next_step(**options)
-                if temp != None:
+                if temp is not None:
                     copy.term[i] = temp
                     a_term_has_been_modified = True
 
@@ -5997,7 +5997,7 @@ class Sum(CommutativeOperation):
         # (excepted numeric terms)
         for i in range(len(copy)):
             test = copy.term[i].expand_and_reduce_next_step(**options)
-            if test != None:
+            if test is not None:
                 copy.term[i] = test
                 a_term_at_least_has_been_modified = True
                 modified_term.append(True)
@@ -6624,18 +6624,18 @@ class Monomial(Product):
     def get_value_inside(self):
         return self._value_inside
 
-    sign = property(get_sign, doc = "Monomial's sign")
+    sign = property(get_sign, doc="Monomial's sign")
 
-    coeff = property(get_coeff, doc = "Monomial's coefficient")
+    coeff = property(get_coeff, doc="Monomial's coefficient")
 
-    raw_value = property(get_raw_value, doc = "0-degree-Monomial's value")
+    raw_value = property(get_raw_value, doc="0-degree-Monomial's value")
 
-    degree = property(get_degree, doc = "Monomial's degree")
+    degree = property(get_degree, doc="Monomial's degree")
 
-    letter = property(get_first_letter, doc = "Monomial's letter")
+    letter = property(get_first_letter, doc="Monomial's letter")
 
     value_inside = property(get_value_inside,
-                            doc = "0-degree Monomial's Value inside")
+                            doc="0-degree Monomial's Value inside")
 
     # --------------------------------------------------------------------------
     ##
@@ -6911,7 +6911,7 @@ class Polynomial(Sum):
 
         return ZERO_POLYNOMIAL_DEGREE
 
-    degree = property(get_degree, doc = 'Real degree of the Polynomial')
+    degree = property(get_degree, doc='Real degree of the Polynomial')
 
     # --------------------------------------------------------------------------
     ##
@@ -7153,7 +7153,7 @@ class Expandable(Product):
         # check if any of the factors needs to be reduced
         for i in range(len(copy)):
             test = copy.factor[i].expand_and_reduce_next_step(**options)
-            if test != None:
+            if test is not None:
                 copy.set_element(i, test)
                 a_factor_at_least_has_been_modified = True
 

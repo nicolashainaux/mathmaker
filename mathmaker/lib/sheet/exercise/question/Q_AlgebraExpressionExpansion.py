@@ -324,7 +324,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
         #___
             number = options['expression_number']
         self.expression = Expression(number, self.expandable_objct)
-        if self.numeric_aux != None:
+        if self.numeric_aux is not None:
             self.numeric_aux = Expression(number, self.numeric_aux)
 
     # --------------------------------------------------------------------------

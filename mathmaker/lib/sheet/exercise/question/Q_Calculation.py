@@ -325,11 +325,11 @@ class Q_Calculation(Q_Structure):
 
         result = ""
 
-        while self.objct != None:
+        while self.objct is not None:
             result += M.write_math_style1(M.type_string(self.expression))
 
             self.objct = self.objct.calculate_next_step()
-            if self.objct != None:
+            if self.objct is not None:
                 self.expression = Expression(self.expression.name,
                                                   self.objct)
 

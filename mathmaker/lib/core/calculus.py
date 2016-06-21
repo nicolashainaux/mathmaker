@@ -136,7 +136,7 @@ class Expression(ComposedCalculable):
         return self._right_hand_side
 
     right_hand_side = property(get_right_hand_side,
-                               doc = "Right hand side of the object")
+                               doc="Right hand side of the object")
 
     # --------------------------------------------------------------------------
     ##
@@ -198,7 +198,7 @@ class Expression(ComposedCalculable):
         result = ""
 
         # Complete expansion & reduction of any expression:o)
-        while aux_expr != None:
+        while aux_expr is not None:
             result += MARKUP['opening_math_style2'] \
                       + Expression(self.name,
                                         aux_expr).into_str() \
@@ -291,9 +291,9 @@ class Equality(ComposedCalculable):
     def get_equal_signs(self):
         return self._equal_signs
 
-    elements = property(get_elements, doc = "Elements of the object")
+    elements = property(get_elements, doc="Elements of the object")
 
-    equal_signs = property(get_equal_signs, doc = "Equal signs of the object")
+    equal_signs = property(get_equal_signs, doc="Equal signs of the object")
 
     # --------------------------------------------------------------------------
     ##
@@ -935,16 +935,16 @@ class Equation(ComposedCalculable):
     def get_variable_letter(self):
         return self._variable_letter
 
-    number = property(get_number, doc = "Number of the Equation")
+    number = property(get_number, doc="Number of the Equation")
 
     left_hand_side = property(get_left_hand_side,
-                              doc = "Left hand side of the Equation")
+                              doc="Left hand side of the Equation")
 
     right_hand_side = property(get_right_hand_side,
-                               doc = "Right hand side of the Equation")
+                               doc="Right hand side of the Equation")
 
     variable_letter = property(get_variable_letter,
-                               doc = "Variable letter of the Equation")
+                               doc="Variable letter of the Equation")
 
 
 
@@ -1106,7 +1106,7 @@ class Equation(ComposedCalculable):
                 if isinstance(eq_aux2, Equation):
                     next_eq_aux2 = eq_aux2.solve_next_step(**options)
 
-                if eq_aux1 != None or eq_aux2 != None:
+                if eq_aux1 is not None or eq_aux2 != None:
                     result += MARKUP['opening_math_style1']
 
 
@@ -1128,7 +1128,7 @@ class Equation(ComposedCalculable):
                     if isinstance(eq_aux2, Equation):
                         result += " " + _("or") + " "
 
-                elif eq_aux1 != None:
+                elif eq_aux1 is not None:
                     result += eq_aux1
 
                 if isinstance(eq_aux2, Equation):
@@ -1146,7 +1146,7 @@ class Equation(ComposedCalculable):
                     if next_eq_aux2 is None:
                         result += uline2
 
-                elif eq_aux2 != None:
+                elif eq_aux2 is not None:
                     result += eq_aux2
                     eq_aux2 = None
 
@@ -1155,7 +1155,7 @@ class Equation(ComposedCalculable):
                     # __
                     go_on = False
 
-                if eq_aux1 != None or eq_aux2 != None:
+                if eq_aux1 is not None or eq_aux2 != None:
                     result += MARKUP['closing_math_style1']
 
                 if isinstance(eq_aux1, Equation):
@@ -1298,14 +1298,14 @@ class Equation(ComposedCalculable):
 
         # 1st CASE
         # Expand & reduce each side of the Equation, whenever possible
-        elif (next_left_X != None) or (next_right_X != None):
+        elif (next_left_X is not None) or (next_right_X != None):
             # __
             log.debug("1st CASE")
-            if next_left_X != None:
+            if next_left_X is not None:
                 # __
                 new_eq.set_hand_side("left", next_left_X)
 
-            if next_right_X != None:
+            if next_right_X is not None:
                 # __
                 new_eq.set_hand_side("right", next_right_X)
 
@@ -1609,7 +1609,7 @@ class SubstitutableEquality(Equality):
         return self._subst_dict
 
     subst_dict = property(get_subst_dict,
-                doc = "Substitution dictionnary of the SubstitutableEquality")
+                doc="Substitution dictionnary of the SubstitutableEquality")
 
     # --------------------------------------------------------------------------
     ##
@@ -1730,9 +1730,9 @@ class CrossProductEquation(Equation):
         return self._variable_position
 
     variable_obj = property(get_variable_obj,
-                               doc = "Variable object of the Equation")
+                               doc="Variable object of the Equation")
     variable_position = property(get_variable_position,
-                               doc = "Variable position in the Equation")
+                               doc="Variable position in the Equation")
 
     # --------------------------------------------------------------------------
     ##
@@ -1811,7 +1811,7 @@ class Table(Printable):
         return self._data
     # --------------------------------------------------------------------------
     cell = property(get_cell,
-                    doc = "t.cell is the complete Table t.cell[i][j] is a cell")
+                    doc="t.cell is the complete Table t.cell[i][j] is a cell")
 
     # --------------------------------------------------------------------------
     ##
@@ -1987,7 +1987,7 @@ class Table_UP(Table):
                                       " two lists of the same length.")
 
         for elt in first_line:
-            if elt != None and not is_.a_number(elt) \
+            if elt is not None and not is_.a_number(elt) \
                 and not (isinstance(elt, Calculable) and elt.is_numeric()):
                 # __
                 raise error.WrongArgument(str(type(elt)) + " " + repr(elt),
@@ -2144,10 +2144,10 @@ class Table_UP(Table):
         return self._crossproducts_info
 
     coeff = property(get_coeff,
-                     doc = "the coefficient of the Table_UP")
+                     doc="the coefficient of the Table_UP")
 
     crossproducts_info = property(get_crossproducts_info,
-                                  doc = "infos about the cross products")
+                                  doc="infos about the cross products")
     # for instance, {'EF': (2,0), "GH": (3,0)} means Item 'EF' can
     # be calculated by a CrossProduct using columns 2 and 0, etc.
 

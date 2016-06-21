@@ -63,8 +63,6 @@ class LaTeX(Structure.Structure):
         self.out = sys.stdout
         self.redirect_output_to_str = True
 
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Write the complete LaTeX header of the sheet to the output.
@@ -72,26 +70,26 @@ class LaTeX(Structure.Structure):
         result = header_comment.generate(latex.FORMAT_NAME_PRINT)
         result += "\documentclass[a4paper,fleqn,12pt]{article}" + "\n"
         result += r"\usepackage{fontspec}" + "\n"
-        if settings.font != None:
+        if settings.font is not None:
             result += r"\setmainfont{" + settings.font + "}" + "\n"
             result += r"\newfontfamily\configfont{" + settings.font + "}\n"
         result += r"\usepackage{polyglossia}" + "\n"
         result += "\setmainlanguage{" + self.language + "}" + "\n"
         if self.language_code in latex.LANGUAGE_OPTIONS:
             lod = latex.LANGUAGE_OPTIONS[self.language_code]
-            lang_options = ",".join([ str(o) + "=" + str(lod[o]) \
-                                      for o in lod ])
-            result += "".join(["\setkeys{", self.language, "}"\
-                                       "{", lang_options, "}\n"])
+            lang_options = ",".join([str(o) + "=" + str(lod[o])
+                                     for o in lod])
+            result += "".join(["\setkeys{", self.language, "}"
+                               "{", lang_options, "}\n"])
         result += "% " + _("To display units correctly") + "\n"
         result += r"\usepackage[detect-all]{siunitx}" + "\n"
         sisetup_dict = {}
         if settings.language == "fr_FR":
             sisetup_dict.update({'locale': 'FR'})
-        if settings.font  != None:
+        if settings.font is not None:
             sisetup_dict.update({'text-rm': r'\configfont'})
         if len(sisetup_dict):
-            sisetup_str = ", ".join([k + " = " + sisetup_dict[k] \
+            sisetup_str = ", ".join([k + " = " + sisetup_dict[k]
                                      for k in sisetup_dict])
             result += "\AtBeginDocument{\n"
             result += "\sisetup{" + sisetup_str + "}\n"
@@ -101,7 +99,7 @@ class LaTeX(Structure.Structure):
         result += "% " + _("To use the margin definition command") + "\n"
         result += r"\usepackage{geometry}" + "\n"
         result += "% " + _("To use the commands from {pkg_name} ")\
-                         .format(pkg_name="theorem") + "\n"
+            .format(pkg_name="theorem") + "\n"
         result += r"%\usepackage{theorem}" + "\n"
         result += "% " + _("To use multicol environment") + "\n"
         result += r"\usepackage{multicol}" + "\n"
@@ -139,14 +137,14 @@ which will insert the word {word} in bold, with its number and \
 automatically increments the counter").format(cmd_name="exercise",
                                               word=_("Exercise")) + "\n"
         result += "\\newcommand{\exercise}{\\noindent \hspace{-.25cm}" \
-              + " \stepcounter{n} " + self.translate_font_size('Large') \
-              + " \\textbf{" \
-              + _("Exercise") \
-              + " \\arabic{n}} " \
-              + "\\newline " + self.translate_font_size('large') + " }" + " \n"
-        result += "% " + _("Definition of the command resetting the \
-exercises counter (which is useful when begining to write the answers sheet)")\
-+ "\n"
+            + " \stepcounter{n} " + self.translate_font_size('Large') \
+            + " \\textbf{" \
+            + _("Exercise") \
+            + " \\arabic{n}} " \
+            + "\\newline " + self.translate_font_size('large') + " }" + " \n"
+        result += "% " + _('Definition of the command resetting the '
+                           'exercises counter (which is useful when begining '
+                           'to write the answers sheet)') + '\n'
         result += "\\newcommand{\\razcompteur}{\setcounter{n}{0}}" + "\n"
         result += " " + "\n"
         result += r"\usetikzlibrary{calc}" + "\n"
@@ -165,7 +163,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
     #   @brief Writes to the output the command to begin the document
     def write_document_begins(self):
         output_str = "\\begin{document}\n"
-        if settings.font != None:
+        if settings.font is not None:
             output_str += "\\fontspec{" + settings.font + "}\n"
         if self.redirect_output_to_str:
             return output_str
@@ -239,8 +237,8 @@ exercises counter (which is useful when begining to write the answers sheet)")\
         if 'extra_spacing' in kwargs and not kwargs['extra_spacing']:
             spacing = ""
         output_str = self.markup['opening_math_style2'] + spacing \
-              + given_string \
-              + spacing + self.markup['closing_math_style2']
+            + given_string \
+            + spacing + self.markup['closing_math_style2']
         if self.redirect_output_to_str:
             return output_str
         else:
@@ -250,8 +248,8 @@ exercises counter (which is useful when begining to write the answers sheet)")\
     #   @brief Prints the given string as a mathematical expression
     def write_math_style1(self, given_string):
         output_str = self.markup['opening_math_style1'] + " " \
-              + given_string \
-              + " " + self.markup['closing_math_style1']
+            + given_string \
+            + " " + self.markup['closing_math_style1']
 
         if self.redirect_output_to_str:
             return output_str
@@ -271,7 +269,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
         if 'emphasize' in options:
             if options['emphasize'] == 'bold':
-                output_str = "\\textbf{"  + given_string + "}" + "\n"
+                output_str = "\\textbf{" + given_string + "}" + "\n"
             elif options['emphasize'] == 'italics':
                 output_str = "\\textit{" + given_string + "}" + "\n"
             elif options['emphasize'] == 'underlined':
@@ -282,8 +280,8 @@ exercises counter (which is useful when begining to write the answers sheet)")\
             output_str = given_string
 
         if 'multicolumns' in options:
-            if type(options['multicolumns']) == int \
-                and options['multicolumns'] >= 1:
+            if (type(options['multicolumns']) == int
+                and options['multicolumns'] >= 1):
                 # __
                 output_str = "\\begin{multicols}{" \
                              + str(options['multicolumns']) + "} " + "\n" \
@@ -298,7 +296,6 @@ exercises counter (which is useful when begining to write the answers sheet)")\
         else:
             self.out.write(output_str)
 
-
     ##
     #   @brief turn the size keyword in LaTeX matching keyword
     #   @warning if you chose a too low or too high value as font_size_offset,
@@ -306,8 +303,8 @@ exercises counter (which is useful when begining to write the answers sheet)")\
     def translate_font_size(self, arg):
         if not type(arg) == str:
             raise error.UncompatibleType(objct, "String")
-        elif not arg in TEXT_SCALES:
-            raise error.UncompatibleType(objct, "a text size" \
+        elif arg not in TEXT_SCALES:
+            raise error.UncompatibleType(objct, "a text size"
                                                 + " (see TEXT_SCALES)")
 
         arg_num = TEXT_RANKS[arg]
@@ -321,7 +318,6 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
         return self.text_sizes[size_to_use]
 
-
     ##
     #   @brief Writes to the output the command setting the text size
     def write_set_font_size_to(self, arg):
@@ -330,64 +326,6 @@ exercises counter (which is useful when begining to write the answers sheet)")\
             return output_str
         else:
             self.out.write(output_str)
-
-    ##
-    #   @brief Writes a table filled with the given [strings]
-    #   @param size: (nb of lines, nb of columns)
-    #   @param col_widths: [int]
-    #   @param content: [strings]
-    #   @options: borders='all'
-    #   @options: unit='inch' etc. (check the possibilities...)
-#    def write_table(self, size, col_widths, content, **options):
-#        n_col = size[1]
-#        n_lin = size[0]
-#        result = ""
-
-#        length_unit = 'cm'
-#        if 'unit' in options:
- #           length_unit = options['unit']
-#
- #       tabular_format = ""
- #       v_border = ""
- #       h_border = ""
- ##       center = ""
- #       new_line_sep = "\\\\" + "\n"
-#
- #       if 'center' in options:
-  #          center = ">{\centering}"
-  #          new_line_sep = "\\tabularnewline" + "\n"
-#
-   #     if 'borders' in options and options['borders'] == 'all':
-  #          v_border = "|"
-   #         h_border = "\\hline \n"
-
-  #      for i in xrange(len(col_widths)):
-   #         tabular_format += v_border \
-   #                           + center \
-    #                          + "p{" + str(col_widths[i]) + " " \
-    #                          + str(length_unit) + "}"
-#
-   #     tabular_format += v_border
-
-    #    result += "\\begin{tabular}{"+ tabular_format + "}" + "\n"
-    #    result += h_border
-
-  #    #  for i in xrange(n_lin):
-  #          for j in xrange(n_col):
-   #             result += str(content[i*n_col + j])
-   #             if j != n_col - 1:
-    #                result += "&" + "\n"
-    #        if i != n_lin - 1:
-    #            result += new_line_sep + h_border
-
-    #    result += new_line_sep + h_border
-    #    result += "\end{tabular} " + "\n"
-
-     #   if self.redirect_output_to_str:
-     #       return result
-      #  else:
-      #      self.out.write(result)
-
 
     ##
     #   @brief Writes content arranged like in a table.
@@ -408,7 +346,6 @@ exercises counter (which is useful when begining to write the answers sheet)")\
                                              content,
                                              col_fmt=col_widths,
                                              **options))
-
 
     # --------------------------------------------------------------------------
     ##
@@ -443,8 +380,8 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
         if 'justify' in options and type(options['justify']) == list:
             if not len(options['justify']) == n_col:
-                raise ValueError("The number of elements of this list should "\
-                                 "be equal to the number of columns of the "\
+                raise ValueError("The number of elements of this list should "
+                                 "be equal to the number of columns of the "
                                  "tabular.")
             new_line_sep = "\\tabularnewline" + "\n"
             extra_last_column = "@{}m{0pt}@{}"
@@ -456,7 +393,7 @@ exercises counter (which is useful when begining to write the answers sheet)")\
                 elif options['justify'][i] == 'left':
                     justify.append(">{}")
                 else:
-                    raise ValueError("Expecting 'left' or 'center' as values "\
+                    raise ValueError("Expecting 'left' or 'center' as values "
                                      "of this list.")
 
         elif 'center' in options:
@@ -466,9 +403,8 @@ exercises counter (which is useful when begining to write the answers sheet)")\
             justify = [">{\centering}" for _ in range(n_col)]
 
         if 'min_row_height' in options:
-            min_row_height = " [" \
-                           + str(options['min_row_height']) + length_unit \
-                           + "] "
+            min_row_height = " [" + str(options['min_row_height']) \
+                + length_unit + "] "
 
         cell_fmt = "p{"
 
@@ -483,8 +419,8 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
         col_fmt = ['c' for i in range(n_col)]
 
-        if 'col_fmt' in options and type(options['col_fmt']) == list \
-            and len(options['col_fmt']) == n_col:
+        if ('col_fmt' in options and type(options['col_fmt']) == list
+            and len(options['col_fmt']) == n_col):
             # __
             for i in range(len(col_fmt)):
                 col_fmt[i] = options['col_fmt'][i]
@@ -511,17 +447,17 @@ exercises counter (which is useful when begining to write the answers sheet)")\
         if 'borders' in options and options['borders'] in ['v_internal']:
             tabular_format = tabular_format[1:-1]
 
-        result += "\\begin{tabular}{"+ tabular_format + "}" + "\n"
+        result += "\\begin{tabular}{" + tabular_format + "}" + "\n"
         result += h_border
 
         for i in range(int(n_lin)):
             for j in range(n_col):
-                result += str(content[i*n_col + j])
+                result += str(content[i * n_col + j])
                 if j != n_col - 1:
                     result += "&" + "\n"
             if i != n_lin - 1:
                 result += extra_col_sep + new_line_sep + min_row_height \
-                       + h_border
+                    + h_border
 
         result += extra_col_sep + new_line_sep + min_row_height + h_border
         result += "\end{tabular}" + "\n"
@@ -583,8 +519,8 @@ exercises counter (which is useful when begining to write the answers sheet)")\
                    + "}" + "}"
         else:
             return "\includegraphics[scale=" + s + "]{" \
-                    + drawable_arg.eps_filename \
-                    + "}" + "\\newline" + "\n"
+                + drawable_arg.eps_filename \
+                + "}" + "\\newline" + "\n"
 
     # --------------------------------------------------------------------------
     ##
@@ -595,7 +531,6 @@ exercises counter (which is useful when begining to write the answers sheet)")\
 
         else:
             self.font_size_offset = arg
-
 
     # --------------------------------------------------------------------------
     ##

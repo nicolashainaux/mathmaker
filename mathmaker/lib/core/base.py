@@ -27,6 +27,7 @@ from mathmaker import settings
 from mathmaker.lib import error
 from mathmaker.lib.tools import header_comment
 
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -76,6 +77,7 @@ class NamedObject(Clonable):
             raise error.WrongArgument(str(type(arg)), "str|int")
 
         self._name = str(arg)
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -166,8 +168,7 @@ class Drawable(NamedObject):
             f = open(self.euk_filename, 'w')
             f.write(hc + self.into_euk(**options))
             f.close()
-            call_euktoeps = subprocess.Popen([settings.euktoeps,
-                                              settings.euktoeps_options,
-                                              self.euk_filename])
+            subprocess.Popen([settings.euktoeps,
+                              settings.euktoeps_options,
+                              self.euk_filename])
             os.chdir(curdir)
-

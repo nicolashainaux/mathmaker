@@ -623,7 +623,7 @@ def level_01(q_subkind, **options):
         temp_steps = []
         current_step = solution.clone()
 
-        while current_step != None:
+        while current_step is not None:
             temp_steps.append(current_step)
             current_step = current_step.expand_and_reduce_next_step()
 
@@ -1050,7 +1050,7 @@ def level_02(q_subkind, **options):
 
     F1F2_sum = F1F2_sum.expand_and_reduce_next_step()
 
-    while F1F2_sum != None:
+    while F1F2_sum is not None:
         steps.append(Product([C, F1F2_sum]))
         F1F2_sum = F1F2_sum.expand_and_reduce_next_step()
 

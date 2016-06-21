@@ -21,6 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import error
+
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -108,7 +110,6 @@ class Structure(object):
     def translate_font_size(self, arg):
         raise error.MethodShouldBeRedefined(self, 'translate_font_size')
 
-
     ##
     #   @brief /!\ Must be redefined.
     #   Writes to the output the end of document command
@@ -195,7 +196,6 @@ class Structure(object):
     def type_string(self, objct, **options):
         raise error.MethodShouldBeRedefined(self, 'type_string')
 
-
     # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined.
@@ -204,8 +204,6 @@ class Structure(object):
     #   @warning Will raise an exception if not redefined
     def insert_picture(self, drawable_arg, **options):
         raise error.MethodShouldBeRedefined(self, 'insert_picture')
-
-
 
     # --------------------------------------------------------------------------
     ##
