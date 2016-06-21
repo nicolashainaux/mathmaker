@@ -99,6 +99,7 @@ def check_dependencies():
                                'You will have to install the correct versions '
                                'of these dependencies in order to run '
                                'mathmaker correctly.\n')
+    return True
 
 
 def install_gettext_translations(**kwargs):
