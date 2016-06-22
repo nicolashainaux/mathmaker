@@ -20,6 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  US
 
+import os
 import gettext
 import locale
 
@@ -31,5 +32,7 @@ settings.language = 'en'
 settings.locale = 'en_US.UTF-8'
 locale.setlocale(locale.LC_ALL, settings.locale)
 gettext.translation(__software_name__, settings.localedir, ['en']).install()
-settings.outputdir = settings.projectdir + 'tests/outfiles/'
+settings.outputdir = settings.projectdir + 'outfiles/'
+if not os.path.isdir(settings.outputdir):
+    os.mkdir(settings.outputdir, mode=0o777)
 shared.init()

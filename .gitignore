@@ -1,3 +1,4 @@
+*.egg/
 .tox/
 *.pyc
 build/
@@ -13,4 +14,5 @@ htmlcov/
 .coverage
 .cache/
 tests/outfiles/
+outfiles/
 *.mo

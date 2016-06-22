@@ -34,6 +34,29 @@ class PyTest(TestCommand):
         sys.exit(errcode)
 
 
+class Tox(TestCommand):
+    # user_options = [('tox-args=', 'a', "Arguments to pass to tox")]
+
+    def initialize_options(self):
+        TestCommand.initialize_options(self)
+        self.tox_args = None
+
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        # import here, cause outside the eggs aren't loaded
+        import tox
+        import shlex
+        args = self.tox_args
+        if args:
+            args = shlex.split(self.tox_args)
+        errno = tox.cmdline(args=args)
+        sys.exit(errno)
+
+
 def create_mo_files():
     data_files = []
     localedir = 'mathmaker/locale'
@@ -66,10 +89,10 @@ setup(
     url='http://github.com/zezollo/mathmaker/',
     license=mathmaker.__licence__,
     author=mathmaker.__author__,
-    tests_require=['pytest'],
+    tests_require=['tox'],
     install_requires=['PyYAML>=3.11',
                       'polib>=1.0.7'],
-    cmdclass={'test': PyTest},
+    cmdclass={'test': Tox},
     author_email=mathmaker.__author_email__,
     description='Mathmaker creates automatically elementary maths exercises '
                 'and their (detailed) answers.',
@@ -89,26 +112,3 @@ setup(
         'License :: OSI Approved :: ' + mathmaker.__licence__],
     extras_require={'testing': ['pytest']}
 )
-
-"""
-setup(
-
-    package_dir={'python_boilerplate':
-                 'python_boilerplate'},
-    include_package_data=True,
-    install_requires=requirements,
-    license="ISCL",
-    zip_safe=False,
-    keywords='python_boilerplate',
-    classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: ISC License (ISCL)',
-        'Natural Language :: English',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-    ],
-    test_suite='tests',
-    tests_require=test_requirements
-)
-"""
