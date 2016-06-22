@@ -30,8 +30,8 @@ import math
 from decimal import Decimal, ROUND_HALF_UP
 
 from mathmaker.lib import error, is_
-from mathmaker.lib.maths_lib import deg_to_rad
-from mathmaker.lib.base import Drawable
+from mathmaker.lib.maths_lib import deg_to_rad, round
+from mathmaker.lib.core.base import Drawable
 from mathmaker.lib.core.base_calculus import Value
 from mathmaker.lib.common.latex import MARKUP
 
