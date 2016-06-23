@@ -23,11 +23,11 @@
 from .S_Structure import S_Structure
 
 # ------------------------  lines_nb    col_widths   exercises
-# SHEET_LAYOUT = { 'exc': [ None,                    'all'
+# SHEET_LAYOUT = {'exc': [None, 'all'
 #                         ],
-#                 'ans': [ None,                    'all'
+#                'ans': [None, 'all'
 #                         ]
-#               }
+#                }
 
 
 # ------------------------------------------------------------------------------
@@ -45,7 +45,8 @@ class S_Generic(S_Structure):
     #   @return One instance of sheet.Generic
     def __init__(self, filename, **options):
         self.derived = True
-        from mathmaker.lib.tools.xml_sheet import get_sheet_config, get_exercises_list
+        from mathmaker.lib.tools.xml_sheet import (get_sheet_config,
+                                                   get_exercises_list)
 
         (header,
          title,
@@ -68,6 +69,5 @@ class S_Generic(S_Structure):
         self.answers_title = _(answers_title) if answers_title != "" else ""
 
         for ex in get_exercises_list(filename):
-            self.exercises_list.append(ex(
-                                          filename=filename,
+            self.exercises_list.append(ex(filename=filename,
                                           **options))

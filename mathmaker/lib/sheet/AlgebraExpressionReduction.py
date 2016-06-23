@@ -28,13 +28,12 @@ FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'std'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ None,                    'all'
-                         ],
-                 'ans': [ [1,         9, 9],       (1, 1),
-                           'jump',                  'next_page',
-                           None,                    'all_left'
-                         ]
-               }
+SHEET_LAYOUT = {'exc': [None, 'all'],
+                'ans': [[1, 9, 9], (1, 1),
+                        'jump', 'next_page',
+                        None, 'all_left']
+                }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -62,28 +61,18 @@ class AlgebraExpressionReduction(S_Structure):
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-        ex1 = exercise.X_AlgebraExpressionReduction(
-                                                    x_kind='preformatted',
-                                                    x_subkind='product'
-                                                    )
+        ex1 = exercise.X_AlgebraExpressionReduction(x_kind='preformatted',
+                                                    x_subkind='product')
 
-        ex2 = exercise.X_AlgebraExpressionReduction(
-                                                    x_kind='bypass',
+        ex2 = exercise.X_AlgebraExpressionReduction(x_kind='bypass',
                                                     x_subkind='sum',
-                                                    number_of_questions=10
-                                                    )
+                                                    number_of_questions=10)
 
-        ex3 = exercise.X_AlgebraExpressionReduction(
-                                                    x_kind='bypass',
-                                                    x_subkind='sum_of_products',
-                                                    number_of_questions=10
-                                                    )
+        ex3 = exercise.X_AlgebraExpressionReduction(x_kind='bypass',
+                                                    x_subkind='sum_of_'
+                                                              'products',
+                                                    number_of_questions=10)
 
         self.exercises_list.append(ex1)
         self.exercises_list.append(ex2)
         self.exercises_list.append(ex3)
-
-        # END -----------------------------------------------------------------
-
-
-

@@ -27,11 +27,12 @@ from .S_Structure import S_Structure
 FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'std'
 SHEET_LAYOUT_UNIT = "cm"
-#EXAMPLE OF A SHEET NOT USING ANY LAYOUT
+# EXAMPLE OF A SHEET NOT USING ANY LAYOUT
 # -----------------------  lines_nb    col_widths   exercises
 SHEET_LAYOUT = {'exc': [None, 'all'],
                 'ans': [None, 'all']
                 }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -54,7 +55,7 @@ class AlgebraMiniTest0(S_Structure):
 
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
         self.header = ""
-        #self.title = _("Training exercises sheet:")
+        # self.title = _("Training exercises sheet:")
         self.title = ""
         self.subtitle = ""
         self.text = ""
@@ -65,23 +66,7 @@ class AlgebraMiniTest0(S_Structure):
         # self.exercises_list.append(ex1)
 
         for i in range(10):
-            ex1 = exercise.X_AlgebraExpressionExpansion(
-                                                    x_kind='mini_test',
-                                                    x_subkind='two_randomly')
-
+            ex1 = exercise.X_AlgebraExpressionExpansion(x_kind='mini_test',
+                                                        x_subkind='two_'
+                                                                  'randomly')
             self.exercises_list.append(ex1)
-
-        # END -----------------------------------------------------------------
-        # Instructions for use (creating a new sheet):
-        # - Put its name in the header's comment
-        #   & in the one of the documentation (@class)
-        # - Write the @brief comment
-        # - Replace Model by the chosen name
-        # - Choose the values for the globals
-        # - In the constructor's comment, replace Model by the chosen name at
-        #   the @return line
-        # - Skip to the zone to rewrite and for each exercise, follow the
-        #   example (i.e. write on two lines:
-        #   - ex_number_n = exercise.ThmPythagore(options...)
-        #   - self.exercises_list.append(ex_number_n)
-        #   and so on with ex<n+1>, ex<n+2> as many as desired)

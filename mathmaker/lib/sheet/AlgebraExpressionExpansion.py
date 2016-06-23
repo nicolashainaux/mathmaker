@@ -21,19 +21,16 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from . import exercise
-
-from mathmaker.lib.common import cst
 from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'std'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ None,                    'all'
-                         ],
-                 'ans': [ [1,         7.5, 10.5],      (1, 1)
-                         ]
-               }
+SHEET_LAYOUT = {'exc': [None, 'all'],
+                'ans': [[1, 7.5, 10.5], (1, 1)]
+                }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -60,22 +57,14 @@ class AlgebraExpressionExpansion(S_Structure):
         self.subtitle = _("Expand an algebraic expression")
         self.text = ""
         self.answers_title = _("Examples of answers")
-
-        ex1 = exercise.X_AlgebraExpressionExpansion(
-                                                  x_kind='preformatted',
-                                                  x_subkind='mixed_monom_polyn1',
-                                                  ratio_mmp=0.4,
-                                                  number_of_questions=5,
-                                                  randomly_reversed=0.25)
-
-
-        ex2 = exercise.X_AlgebraExpressionExpansion(
-                                                  x_kind='bypass',
-                                                  x_subkind='polyn1_polyn1',
-                                                  number_of_questions=5)
-
-
+        ex1 = exercise.X_AlgebraExpressionExpansion(x_kind='preformatted',
+                                                    x_subkind='mixed_monom'
+                                                              '_polyn1',
+                                                    ratio_mmp=0.4,
+                                                    number_of_questions=5,
+                                                    randomly_reversed=0.25)
+        ex2 = exercise.X_AlgebraExpressionExpansion(x_kind='bypass',
+                                                    x_subkind='polyn1_polyn1',
+                                                    number_of_questions=5)
         self.exercises_list.append(ex1)
         self.exercises_list.append(ex2)
-
-

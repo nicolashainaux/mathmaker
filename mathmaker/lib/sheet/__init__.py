@@ -64,7 +64,7 @@ EquationsShortTest = EquationsShortTest.EquationsShortTest
 EquationsTest = EquationsTest.EquationsTest
 AlgebraShortTest = AlgebraShortTest.AlgebraShortTest
 AlgebraBalance_01 = AlgebraBalance_01.AlgebraBalance_01
-#StructureShortTest = StructureShortTest.StructureShortTest
+# StructureShortTest = StructureShortTest.StructureShortTest
 AlgebraBinomialIdentityExpansion = \
             AlgebraBinomialIdentityExpansion.AlgebraBinomialIdentityExpansion
 FractionSimplification = FractionSimplification.FractionSimplification

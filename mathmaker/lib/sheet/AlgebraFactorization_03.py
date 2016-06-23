@@ -32,6 +32,7 @@ SHEET_LAYOUT = {'exc': [None, 'all'],
                 'ans': [None, 'all']
                 }
 
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -58,26 +59,20 @@ class AlgebraFactorization_03(S_Structure):
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-        ex1 = exercise.X_Factorization(
-                                       x_kind='preformatted',
+        ex1 = exercise.X_Factorization(x_kind='preformatted',
                                        x_subkind='level_03_sum_squares')
         self.exercises_list.append(ex1)
 
-        ex2 = exercise.X_Factorization(
-                                       x_kind='preformatted',
+        ex2 = exercise.X_Factorization(x_kind='preformatted',
                                        x_subkind='level_03_difference_squares')
         self.exercises_list.append(ex2)
 
-        ex3 = exercise.X_Factorization(
-                                       x_kind='preformatted',
-                                       x_subkind='level_03_squares_differences')
+        ex3 = exercise.X_Factorization(x_kind='preformatted',
+                                       x_subkind='level_03_squares_'
+                                                 'differences')
         self.exercises_list.append(ex3)
 
-        ex4 = exercise.X_Factorization(
-                                    x_kind='preformatted',
-                                    x_subkind='level_03_some_not_factorizable')
+        ex4 = exercise.X_Factorization(x_kind='preformatted',
+                                       x_subkind='level_03_some_not_'
+                                                 'factorizable')
         self.exercises_list.append(ex4)
-
-
-
-    # END ---------------------------------------------------------------------

@@ -27,23 +27,21 @@ from .S_Structure import S_Structure
 FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'mini_test'
 SHEET_LAYOUT_UNIT = "cm"
-#EXAMPLE OF A SHEET NOT USING ANY LAYOUT
+# EXAMPLE OF A SHEET NOT USING ANY LAYOUT
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ [1,         9, 9],       (1, 1)
-                         ],
-                 'ans': [ None,                    'all'
-                         ]
-               }
-#ANOTHER EXAMPLE
+SHEET_LAYOUT = {'exc': [[1, 9, 9], (1, 1)],
+                'ans': [None, 'all']
+                }
+# ANOTHER EXAMPLE
 # ------------------------  lines_nb    col_widths   exercises
-#SHEET_LAYOUT = { 'exc': [ [1,         6, 15],      (1, 1),
-#                            None,                    1
+# SHEET_LAYOUT = {'exc': [[1, 6, 15], (1, 1),
+#                            None, 1
 #                         ],
-#                 'ans': [ [1,         6.5, 12],    (1, 1),
-#                            'jump',                 'next_page',
-#                            None,                    1
+#                'ans': [[1, 6.5, 12], (1, 1),
+#                            'jump',   'next_page',
+#                            None, 1
 #                         ]
-#               }
+#                }
 # NOTE THAT FOR SHORT_TEST SHEETS, THE LAYOUT HAS TO BE GIVEN ONLY ONCE
 # AND IT WILL BE DUPLICATED FOR THE SECOND SET OF EXERCISES
 
@@ -55,6 +53,7 @@ SHEET_LAYOUT = { 'exc': [ [1,         9, 9],       (1, 1)
 # None means no tabular and the following 1 means for the 1 next exercise.
 # 'all' and 'all_left' are synonym
 # 'jump' and 'next_page' will include a jump to next page before the next ones
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -83,15 +82,13 @@ class AlgebraMiniTest1(S_Structure):
         self.answers_title = _("Examples of answers")
 
         for i in range(2):
-            ex1 = exercise.X_AlgebraExpressionExpansion(
-                                                x_kind='mini_test',
-                                                x_subkind='two_expansions_hard')
+            ex1 = exercise.X_AlgebraExpressionExpansion(x_kind='mini_test',
+                                                        x_subkind='two_'
+                                                                  'expansions_'
+                                                                  'hard')
             self.exercises_list.append(ex1)
 
-            ex2 = exercise.X_Factorization(
-                                           x_kind='mini_test',
+            ex2 = exercise.X_Factorization(x_kind='mini_test',
                                            x_subkind='two_factorizations',
                                            start_number=2)
             self.exercises_list.append(ex2)
-
-        # END -----------------------------------------------------------------

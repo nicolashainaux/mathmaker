@@ -28,13 +28,12 @@ FONT_SIZE_OFFSET = -2
 SHEET_LAYOUT_TYPE = 'short_test'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ [1,         6, 15],      (1, 1),
-                           None,                    1
-                         ],
-                 'ans': [ [1,         6.5, 12],    (1, 1),
-                           None,                    1
-                         ]
-               }
+SHEET_LAYOUT = {'exc': [[1, 6, 15], (1, 1),
+                        None, 1],
+                'ans': [[1, 6.5, 12], (1, 1),
+                        None, 1]
+                }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -64,19 +63,19 @@ class AlgebraTest2(S_Structure):
 
         # Exercises:
         for i in range(2):
-            ex1 = exercise.X_AlgebraExpressionExpansion(
-                                                x_kind='short_test',
-                                                x_subkind='three_binomials',
-                                                start_number=1)
+            ex1 = exercise.X_AlgebraExpressionExpansion(x_kind='short_test',
+                                                        x_subkind='three_'
+                                                                  'binomials',
+                                                        start_number=1)
 
-            ex2 = exercise.X_AlgebraExpressionExpansion(
-                                           x_kind='short_test',
-                                           x_subkind='three_numeric_binomials',
-                                           start_number=1)
+            ex2 = exercise.X_AlgebraExpressionExpansion(x_kind='short_test',
+                                                        x_subkind='three_'
+                                                                  'numeric_'
+                                                                  'binomials',
+                                                        start_number=1)
 
             # start_number seems to be unused (--> fix it ?)
-            ex3 = exercise.X_Factorization(
-                                           x_kind='short_test',
+            ex3 = exercise.X_Factorization(x_kind='short_test',
                                            x_subkind='hard_level',
                                            start_number=7)
 

@@ -32,6 +32,7 @@ SHEET_LAYOUT = {'exc': [None, 'all'],
                 'ans': [None, 'all']
                 }
 
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -57,21 +58,9 @@ class AlgebraFactorization_02(S_Structure):
         self.subtitle = _("Factorization")
         self.text = ""
         self.answers_title = _("Examples of answers")
-
-        #ex0 = exercise.Factorization(
-        #                             x_kind='level_02',
-        #                             subkind = 'default')
-        #self.exercises_list.append(ex0)
-
-        ex1 = exercise.X_Factorization(
-                                       x_kind='preformatted',
+        ex1 = exercise.X_Factorization(x_kind='preformatted',
                                        x_subkind='level_02_easy')
         self.exercises_list.append(ex1)
-
-        ex2 = exercise.X_Factorization(
-                                       x_kind='preformatted',
+        ex2 = exercise.X_Factorization(x_kind='preformatted',
                                        x_subkind='level_02_intermediate')
         self.exercises_list.append(ex2)
-
-
-    # END ---------------------------------------------------------------------

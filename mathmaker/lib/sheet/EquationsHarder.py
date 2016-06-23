@@ -28,13 +28,11 @@ FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'equations'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ None,                    'all'
-                         ],
-                 'ans': [ None,                    1,
-                           'jump',                  'next_page',
-                           None,                    1
-                         ]
-               }
+SHEET_LAYOUT = {'exc': [None, 'all'],
+                'ans': [None, 1,
+                        'jump', 'next_page',
+                        None, 1]
+                }
 
 
 # ------------------------------------------------------------------------------
@@ -63,16 +61,12 @@ class EquationsHarder(S_Structure):
         self.text = _("Solve the following equations")
         self.answers_title = _("Examples of answers")
 
-        ex1 = exercise.X_Equation(
-                                  x_kind='preformatted',
+        ex1 = exercise.X_Equation(x_kind='preformatted',
                                   x_subkind='classic_xtwice_and_any')
 
-        ex2 = exercise.X_Equation(
-                                  x_kind='bypass',
+        ex2 = exercise.X_Equation(x_kind='bypass',
                                   x_subkind='any_simple_expandable',
                                   number_of_questions=6)
 
         self.exercises_list.append(ex1)
         self.exercises_list.append(ex2)
-
-    # END ---------------------------------------------------------------------

@@ -28,7 +28,7 @@ from .S_Structure import S_Structure
 FONT_SIZE_OFFSET = 0
 SHEET_LAYOUT_TYPE = 'short_test'
 SHEET_LAYOUT_UNIT = "cm"
-#EXAMPLE OF A SHEET NOT USING ANY LAYOUT
+# EXAMPLE OF A SHEET NOT USING ANY LAYOUT
 # -----------------------  lines_nb    col_widths   exercises
 SHEET_LAYOUT = {'exc': [None, 'all'],
                 'ans': [None, 'all']
@@ -66,27 +66,27 @@ class ConverseAndContrapositiveOfPythagoreanTheoremShortTest(S_Structure):
 
         boolean_list = [True, False]
 
-        ex1 = exercise.X_RightTriangle(
-                                       x_kind='short_test',
-                        x_subkind='contrapositive_of_pythagorean_theorem',
-                        use_decimals=randomly.pop(boolean_list))
+        ex1 = exercise.X_RightTriangle(x_kind='short_test',
+                                       x_subkind='contrapositive_of_'
+                                                 'pythagorean_theorem',
+                                       use_decimals=randomly.pop(boolean_list))
 
-        ex2 = exercise.X_RightTriangle(
-                                       x_kind='short_test',
-                        x_subkind='converse_of_pythagorean_theorem',
-                        use_decimals=randomly.pop(boolean_list))
+        ex2 = exercise.X_RightTriangle(x_kind='short_test',
+                                       x_subkind='converse_of_pythagorean'
+                                                 '_theorem',
+                                       use_decimals=randomly.pop(boolean_list))
 
         boolean_list = [True, False]
 
-        ex3 = exercise.X_RightTriangle(
-                                       x_kind='short_test',
-                        x_subkind='converse_of_pythagorean_theorem',
-                        use_decimals=randomly.pop(boolean_list))
+        ex3 = exercise.X_RightTriangle(x_kind='short_test',
+                                       x_subkind='converse_of_'
+                                                 'pythagorean_theorem',
+                                       use_decimals=randomly.pop(boolean_list))
 
-        ex4 = exercise.X_RightTriangle(
-                                       x_kind='short_test',
-                        x_subkind='contrapositive_of_pythagorean_theorem',
-                        use_decimals=randomly.pop(boolean_list))
+        ex4 = exercise.X_RightTriangle(x_kind='short_test',
+                                       x_subkind='contrapositive_of_'
+                                                 'pythagorean_theorem',
+                                       use_decimals=randomly.pop(boolean_list))
 
         if randomly.heads_or_tails():
             x_list = [ex1, ex2, ex3, ex4]
@@ -94,5 +94,3 @@ class ConverseAndContrapositiveOfPythagoreanTheoremShortTest(S_Structure):
             x_list = [ex3, ex4, ex1, ex2]
 
         self.exercises_list = x_list
-
-        # END -----------------------------------------------------------------

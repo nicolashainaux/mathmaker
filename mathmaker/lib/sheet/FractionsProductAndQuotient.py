@@ -28,13 +28,12 @@ FONT_SIZE_OFFSET = 0
 SHEET_LAYOUT_TYPE = 'std'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ None,                    'all'
-                         ],
-                 'ans': [ None,                    1,
-                           'jump',                  'next_page',
-                           None,                    1
-                         ]
-               }
+SHEET_LAYOUT = {'exc': [None, 'all'],
+                'ans': [None, 1,
+                        'jump', 'next_page',
+                        None, 1]
+                }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -62,16 +61,12 @@ class FractionsProductAndQuotient(S_Structure):
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-        ex1 = exercise.X_Calculation(
-                                   x_kind='preformatted',
-                                   x_subkind='fractions_product',
-                                   number_of_questions=6)
+        ex1 = exercise.X_Calculation(x_kind='preformatted',
+                                     x_subkind='fractions_product',
+                                     number_of_questions=6)
         self.exercises_list.append(ex1)
 
-
-        ex2 = exercise.X_Calculation(
-                                   x_kind='preformatted',
-                                   x_subkind='fractions_quotient',
-                                   number_of_questions=6)
+        ex2 = exercise.X_Calculation(x_kind='preformatted',
+                                     x_subkind='fractions_quotient',
+                                     number_of_questions=6)
         self.exercises_list.append(ex2)
-

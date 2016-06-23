@@ -20,9 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import shared
-from mathmaker.lib import error
-from mathmaker.lib.common.cst import *
+from mathmaker.lib import shared, error
 
 
 # ------------------------------------------------------------------------------
@@ -69,85 +67,86 @@ class S_Structure(object):
 
         if len(sheet_layout) != 2:
             raise error.WrongArgument('SHEET_LAYOUT should have two keys',
-                                      'it has ' + str(len(sheet_layout)) \
+                                      'it has ' + str(len(sheet_layout))
                                       + ' keys')
 
         for k in ['exc', 'ans']:
-            if not k in sheet_layout:
-                raise error.WrongArgument('SHEET_LAYOUT should have a key ' \
+            if k not in sheet_layout:
+                raise error.WrongArgument('SHEET_LAYOUT should have a key '
                                           + k,
                                           'it has no such key')
 
             if type(sheet_layout[k]) != list:
-                raise error.WrongArgument('SHEET_LAYOUT[' + k + '] should be' \
+                raise error.WrongArgument('SHEET_LAYOUT[' + k + '] should be'
                                           + ' a list',
                                           str(type(sheet_layout[k])))
 
             if len(sheet_layout[k]) % 2:
-                raise error.WrongArgument('SHEET_LAYOUT[' + k + '] should have'\
+                raise error.WrongArgument('SHEET_LAYOUT[' + k + '] should have'
                                           + ' an even number of elements',
-                                          str(len(sheet_layout[k])) \
+                                          str(len(sheet_layout[k]))
                                           + ' elements')
 
             for i in range(int(len(sheet_layout[k]) // 2)):
-                if not (sheet_layout[k][2*i] is None \
-                    or type(sheet_layout[k][2*i])== list \
-                    or sheet_layout[k][2*i] == 'jump'):
+                if (not (sheet_layout[k][2 * i] is None
+                    or type(sheet_layout[k][2 * i]) == list
+                    or sheet_layout[k][2 * i] == 'jump')):
                     # __
-                    raise error.WrongArgument('SHEET_LAYOUT[' + k + '][' \
-                                              + str(2*i) + '] should be either'\
-                                              + ' a list or None or "jump"',
-                                              str(type(sheet_layout[k][2*i]))
-                                              )
-                elif sheet_layout[k][2*i] is None:
-                    if not (type(sheet_layout[k][2*i+1]) == int \
-                        or sheet_layout[k][2*i+1] == 'all' \
-                        or sheet_layout[k][2*i+1] == 'all_left' \
-                        or sheet_layout[k][2*i+1] == 'jump'):
+                    raise error.WrongArgument('SHEET_LAYOUT[' + k + ']['
+                                              + str(2 * i) + '] should be '
+                                              'either a list '
+                                              'or None or "jump"',
+                                              str(type(
+                                                  sheet_layout[k][2 * i])))
+                elif sheet_layout[k][2 * i] is None:
+                    if (not (type(sheet_layout[k][2 * i + 1]) == int
+                        or sheet_layout[k][2 * i + 1]
+                        in ['all', 'all_left', 'jump'])):
                         # __
-                        raise error.WrongArgument('SHEET_LAYOUT[' + k + '][' \
-                                              + str(2*i+1) + '] should be an '\
-                                              + 'int since it follows the None'\
-                                              + 'keyword',
-                                              type(sheet_layout[k][2*i+1]))
+                        raise error.WrongArgument(
+                            'SHEET_LAYOUT[' + k + ']['
+                            + str(2 * i + 1) + '] should be an '
+                            + 'int since it follows the None'
+                            + 'keyword',
+                            type(sheet_layout[k][2 * i + 1]))
 
-                elif sheet_layout[k][2*i] == 'jump':
-                    if not sheet_layout[k][2*i+1] == 'next_page':
-                        raise error.WrongArgument('SHEET_LAYOUT[' + k + '][' \
-                                              + str(2*i+1) + '] should be: '\
-                                              + 'next_page since it follows ' \
-                                              + 'the jump' \
-                                              + ' keyword',
-                                              type(sheet_layout[k][2*i+1]))
+                elif sheet_layout[k][2 * i] == 'jump':
+                    if not sheet_layout[k][2 * i + 1] == 'next_page':
+                        raise error.WrongArgument(
+                            'SHEET_LAYOUT[' + k + ']['
+                            + str(2 * i + 1) + '] should be: '
+                            + 'next_page since it follows '
+                            + 'the jump keyword',
+                            type(sheet_layout[k][2 * i + 1]))
 
-                elif type(sheet_layout[k][2*i]) == list:
-                    if not type(sheet_layout[k][2*i+1]) == tuple:
-                        raise error.WrongArgument('SHEET_LAYOUT[' + k + '][' \
-                                              + str(2*i+1) + '] should be a '\
-                                              + 'tuple',
-                                              type(sheet_layout[k][2*i+1]))
+                elif type(sheet_layout[k][2 * i]) == list:
+                    if not type(sheet_layout[k][2 * i + 1]) == tuple:
+                        raise error.WrongArgument(
+                            'SHEET_LAYOUT[' + k + ']['
+                            + str(2 * i + 1) + '] should be a tuple',
+                            type(sheet_layout[k][2 * i + 1]))
 
-                    if not len(sheet_layout[k][2*i+1]) \
-                       == (len(sheet_layout[k][2*i])-1)*sheet_layout[k][2*i][0]:
+                    if (not len(sheet_layout[k][2 * i + 1])
+                        == (len(sheet_layout[k][2 * i]) - 1)
+                        * sheet_layout[k][2 * i][0]):
                         # __
-                        raise error.WrongArgument('SHEET_LAYOUT[' + k + '][' \
-                                              + str(2*i+1) + '] should have ' \
-                                              + ' as many elements as the ' \
-                                              + 'number of cols described in '\
-                                              + 'SHEET_LAYOUT[' + k + '][' \
-                                              + str(2*i) + ']',
-                                              str(len(sheet_layout[k][2*i+1])) \
-                                              + ' instead of ' \
-                                              + str(len(sheet_layout[k][2*i]) \
-                                                    - 1)
-                                              )
+                        raise error.WrongArgument(
+                            'SHEET_LAYOUT[' + k + ']['
+                            + str(2 * i + 1) + '] should have '
+                            + ' as many elements as the '
+                            + 'number of cols described in '
+                            + 'SHEET_LAYOUT[' + k + ']['
+                            + str(2 * i) + ']',
+                            str(len(sheet_layout[k][2 * i + 1]))
+                            + ' instead of '
+                            + str(len(sheet_layout[k][2 * i]) - 1))
                 else:
-                    raise error.WrongArgument('SHEET_LAYOUT[' + k + '][' \
-                                              + str(2*i) + '] is not of any ' \
-                                              + ' of the expected types or ' \
-                                              + 'values.',
-                                              str(len(sheet_layout[k][2*i]))
-                                              )
+                    raise error.WrongArgument(
+                        'SHEET_LAYOUT[' + k + ']['
+                        + str(2 * i) + '] is not of any '
+                        + ' of the expected types or '
+                        + 'values.',
+                        str(len(sheet_layout[k][2 * i])))
 
         self.sheet_layout = sheet_layout
 
@@ -196,7 +195,6 @@ class S_Structure(object):
                     result += shared.machine.insert_vspace()
                     result += shared.machine.write_new_line_twice()
 
-
             result += shared.machine.write_jump_to_next_page()
 
             result += self.answers_title_to_str()
@@ -219,19 +217,19 @@ class S_Structure(object):
                 result += self.sheet_header_to_str()
                 result += self.sheet_title_to_str()
                 result += self.sheet_text_to_str()
-                result += self.texts_to_str('exc', len(self.exercises_list)//2)
+                result += self.texts_to_str('exc',
+                                            len(self.exercises_list) // 2)
                 result += shared.machine.write_new_line_twice()
 
-
-            #result += self.sheet_header_to_str()
-            #result += self.sheet_title_to_str()
-            #result += self.sheet_text_to_str()
-            #result += self.texts_to_str('exc', len(self.exercises_list)/2)
-            #result += shared.machine.write_new_line_twice()
-            #result += self.sheet_header_to_str()
-            #result += self.sheet_title_to_str()
-            #result += self.sheet_text_to_str()
-            #result += self.texts_to_str('exc', 3*len(self.exercises_list)/4)
+            # result += self.sheet_header_to_str()
+            # result += self.sheet_title_to_str()
+            # result += self.sheet_text_to_str()
+            # result += self.texts_to_str('exc', len(self.exercises_list)/2)
+            # result += shared.machine.write_new_line_twice()
+            # result += self.sheet_header_to_str()
+            # result += self.sheet_title_to_str()
+            # result += self.sheet_text_to_str()
+            # result += self.texts_to_str('exc', 3*len(self.exercises_list)/4)
 
             result += shared.machine.write_jump_to_next_page()
 
@@ -239,15 +237,14 @@ class S_Structure(object):
             result += self.texts_to_str('ans', 0)
             result += shared.machine.write_jump_to_next_page()
             result += self.answers_title_to_str()
-            result += self.texts_to_str('ans', len(self.exercises_list)//2)
+            result += self.texts_to_str('ans', len(self.exercises_list) // 2)
 
-
-            #result += shared.machine.write_jump_to_next_page()
-            #result += self.answers_title_to_str()
-            #result += self.texts_to_str('ans', len(self.exercises_list)/2)
-            #result += shared.machine.write_jump_to_next_page()
-            #result += self.answers_title_to_str()
-            #result += self.texts_to_str('ans', 3*len(self.exercises_list)/4)
+            # result += shared.machine.write_jump_to_next_page()
+            # result += self.answers_title_to_str()
+            # result += self.texts_to_str('ans', len(self.exercises_list)/2)
+            # result += shared.machine.write_jump_to_next_page()
+            # result += self.answers_title_to_str()
+            # result += self.texts_to_str('ans', 3*len(self.exercises_list)/4)
 
             result += shared.machine.write_document_ends()
 
@@ -267,7 +264,7 @@ class S_Structure(object):
             result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'mental':
-            #if self.slideshow:
+            # if self.slideshow:
             #    result += shared.machine.write_document_header(slideshow=True)
             #    result += shared.machine.write_document_begins()
             #    result += self.sheet_header_to_str()
@@ -275,7 +272,7 @@ class S_Structure(object):
             #    result += self.sheet_text_to_str()
             #    result += self.texts_to_str('exc', 0)
             #    result += shared.machine.write_document_ends()
-            #else:
+            # else:
             result += shared.machine.write_document_header()
             result += shared.machine.write_document_begins()
             result += self.sheet_header_to_str()
@@ -288,8 +285,9 @@ class S_Structure(object):
             result += shared.machine.write_document_ends()
 
         else:
-            raise error.OutOfRangeArgument(self.layout_type,
-                                "std|short_test|mini_test|equations|mental")
+            raise error.OutOfRangeArgument(
+                self.layout_type,
+                "std|short_test|mini_test|equations|mental")
 
         return result
 
@@ -308,17 +306,16 @@ class S_Structure(object):
         ex_n = n_of_first_ex
 
         for k in range(int(len(layout) // 2)):
-            if layout[2*k] is None:
-                how_many = layout[2*k+1]
+            if layout[2 * k] is None:
+                how_many = layout[2 * k + 1]
 
-                if layout[2*k+1] == 'all_left' or layout[2*k+1] == 'all':
+                if layout[2 * k + 1] in ['all_left', 'all']:
                     how_many = len(self.exercises_list) - ex_n
-                    if (self.layout_type == 'short_test' \
-                        or self.layout_type == 'mini_test') \
-                        and ex_n < len(self.exercises_list) // 2:
+                    if (self.layout_type in ['short_test', 'mini_test']
+                        and ex_n < len(self.exercises_list) // 2):
                         # __
                         how_many = len(self.exercises_list) // 2 - ex_n
-                    #elif self.layout_type == 'mini_test':
+                    # elif self.layout_type == 'mini_test':
                     #    if ex_n < len(self.exercises_list) / 4:
                     #        how_many = len(self.exercises_list) / 4 - ex_n
                     #    elif ex_n < len(self.exercises_list) / 2:
@@ -330,24 +327,25 @@ class S_Structure(object):
                     if not self.layout_type == 'mental':
                         result += M.write_exercise_number()
                     result += self.exercises_list[ex_n].to_str(ex_or_answers)
-                    result += M.write_new_line(check=result[len(result)-2:])
-                    #if not (ex_or_answers == 'ans' \
+                    result += M.write_new_line(check=result[-2:])
+                    # if not (ex_or_answers == 'ans' \
                     #    and self.layout_type == 'equations'):
-                        # __
+                    # __
                     #    result += M.write_new_line()
                     ex_n += 1
 
-            elif layout[2*k] == 'jump' and layout[2*k+1] == 'next_page':
+            elif layout[2 * k] == 'jump' and layout[2 * k + 1] == 'next_page':
                 result += M.write_jump_to_next_page()
 
             else:
-                nb_of_lines = layout[2*k][0]
-                nb_of_cols = len(layout[2*k]) - 1
-                col_widths = layout[2*k][1:len(layout[2*k])]
+                nb_of_lines = layout[2 * k][0]
+                nb_of_cols = len(layout[2 * k]) - 1
+                col_widths = layout[2 * k][1:]
                 content = []
                 for i in range(nb_of_lines):
                     for j in range(nb_of_cols):
-                        nb_of_ex_in_this_cell = layout[2*k + 1][i*nb_of_cols+j]
+                        nb_of_ex_in_this_cell = \
+                            layout[2 * k + 1][i * nb_of_cols + j]
                         cell_content = ""
                         for n in range(nb_of_ex_in_this_cell):
                             if not self.layout_type == 'mental':
@@ -358,12 +356,10 @@ class S_Structure(object):
                         content += [cell_content]
 
                 result += M.write_layout((nb_of_lines, nb_of_cols),
-                                          col_widths,
-                                          content)
+                                         col_widths,
+                                         content)
 
         return result
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -405,7 +401,6 @@ class S_Structure(object):
 
         return result
 
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output title of the answers' sheet to be generated
@@ -417,4 +412,3 @@ class S_Structure(object):
         result += shared.machine.write_new_line_twice()
 
         return result
-

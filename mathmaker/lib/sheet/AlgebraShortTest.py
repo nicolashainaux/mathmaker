@@ -28,13 +28,12 @@ FONT_SIZE_OFFSET = 0
 SHEET_LAYOUT_TYPE = 'short_test'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ [1,         9, 9],       (1, 1),
-                           [1,         9, 9],       (1, 1)
-                         ],
-                 'ans': [ [1,         9, 9],       (1, 1),
-                           [1,    11.5, 6.5],       (1, 1)
-                         ]
-               }
+SHEET_LAYOUT = {'exc': [[1, 9, 9], (1, 1),
+                        [1, 9, 9], (1, 1)],
+                'ans': [[1, 9, 9], (1, 1),
+                        [1, 11.5, 6.5], (1, 1)]
+                }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -64,24 +63,21 @@ class AlgebraShortTest(S_Structure):
 
         # Exercises:
         for i in range(2):
-            ex1 = exercise.X_AlgebraExpressionReduction(
-                                                 x_kind='short_test',
-                                                 x_subkind='easy')
+            ex1 = exercise.X_AlgebraExpressionReduction(x_kind='short_test',
+                                                        x_subkind='easy')
 
-            ex2 = exercise.X_AlgebraExpressionExpansion(
-                                                 x_kind='short_test',
-                                                 x_subkind='sign_expansion',
-                                                 start_number=3)
+            ex2 = exercise.X_AlgebraExpressionExpansion(x_kind='short_test',
+                                                        x_subkind='sign_'
+                                                                  'expansion',
+                                                        start_number=3)
 
-            ex3 = exercise.X_AlgebraExpressionExpansion(
-                                                 x_kind='short_test',
-                                                 x_subkind='default',
-                                                 start_number=4)
+            ex3 = exercise.X_AlgebraExpressionExpansion(x_kind='short_test',
+                                                        x_subkind='default',
+                                                        start_number=4)
 
-            ex4 = exercise.X_Factorization(
-                                           x_kind='bypass',
+            ex4 = exercise.X_Factorization(x_kind='bypass',
                                            x_subkind='level_01',
-                                           q_subkind = 'default',
+                                           q_subkind='default',
                                            start_number=7,
                                            number_of_questions=1)
 
@@ -89,7 +85,3 @@ class AlgebraShortTest(S_Structure):
             self.exercises_list.append(ex2)
             self.exercises_list.append(ex3)
             self.exercises_list.append(ex4)
-
-
-
-

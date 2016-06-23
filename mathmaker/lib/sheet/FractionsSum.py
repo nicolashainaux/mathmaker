@@ -32,6 +32,7 @@ SHEET_LAYOUT = {'exc': [None, 'all'],
                 'ans': [None, 'all']
                 }
 
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -58,11 +59,8 @@ class FractionsSum(S_Structure):
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-        ex1 = exercise.X_Calculation(
-                                   x_kind='preformatted',
-                                   x_subkind='fractions_sum',
-                                   number_of_questions=6)
-
+        ex1 = exercise.X_Calculation(x_kind='preformatted',
+                                     x_subkind='fractions_sum',
+                                     number_of_questions=6)
 
         self.exercises_list.append(ex1)
-

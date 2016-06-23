@@ -21,13 +21,12 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from . import exercise
-
 from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'short_test'
 SHEET_LAYOUT_UNIT = "cm"
-#EXAMPLE OF A SHEET NOT USING ANY LAYOUT
+# EXAMPLE OF A SHEET NOT USING ANY LAYOUT
 # -----------------------  lines_nb    col_widths   exercises
 SHEET_LAYOUT = {'exc': [None, 'all'],
                 'ans': [None, 'all']
@@ -60,12 +59,9 @@ class PythagoreanTheoremShortTest(S_Structure):
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-
         for i in range(2):
-            ex1 = exercise.X_RightTriangle(
-                                   x_kind='short_test',
-                                   x_subkind='pythagorean_theorem_one_of_each')
+            ex1 = exercise.X_RightTriangle(x_kind='short_test',
+                                           x_subkind='pythagorean_theorem_'
+                                                     'one_of_each')
 
             self.exercises_list.append(ex1)
-
-        # END -----------------------------------------------------------------

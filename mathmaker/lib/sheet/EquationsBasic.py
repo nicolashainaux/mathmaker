@@ -28,13 +28,11 @@ FONT_SIZE_OFFSET = -3
 SHEET_LAYOUT_TYPE = 'equations'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ None,                    'all'
-                         ],
-                 'ans': [ None,                    2,
-                           'jump',                  'next_page',
-                           None,                    1
-                         ]
-               }
+SHEET_LAYOUT = {'exc': [None, 'all'],
+                'ans': [None, 2,
+                        'jump', 'next_page',
+                        None, 1]
+                }
 
 
 # ------------------------------------------------------------------------------
@@ -63,24 +61,15 @@ class EquationsBasic(S_Structure):
         self.text = _("Solve the following equations.")
         self.answers_title = _("Examples of answers")
 
-
-        ex1 = exercise.X_Equation(
-                                  x_kind='preformatted',
+        ex1 = exercise.X_Equation(x_kind='preformatted',
                                   x_subkind='basic_additions')
 
-
-        ex2 = exercise.X_Equation(
-                                  x_kind='preformatted',
+        ex2 = exercise.X_Equation(x_kind='preformatted',
                                   x_subkind='basic_multiplications')
 
-
-        ex3 = exercise.X_Equation(
-                                  x_kind='preformatted',
+        ex3 = exercise.X_Equation(x_kind='preformatted',
                                   x_subkind='any_basic')
-
 
         self.exercises_list.append(ex1)
         self.exercises_list.append(ex2)
         self.exercises_list.append(ex3)
-
-    # END ---------------------------------------------------------------------

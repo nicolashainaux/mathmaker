@@ -27,21 +27,21 @@ from .S_Structure import S_Structure
 FONT_SIZE_OFFSET = 0
 SHEET_LAYOUT_TYPE = 'std|short_test|mini_test|equations|mental'
 SHEET_LAYOUT_UNIT = "cm"
-#EXAMPLE OF A SHEET NOT USING ANY LAYOUT
+# EXAMPLE OF A SHEET NOT USING ANY LAYOUT
 # -----------------------  lines_nb    col_widths   exercises
 SHEET_LAYOUT = {'exc': [None, 'all'],
-                'ans': [None, 'all']
-                }
-#ANOTHER EXAMPLE
+               'ans': [None, 'all']
+                 }
+# ANOTHER EXAMPLE
 # ------------------------  lines_nb    col_widths   exercises
-#SHEET_LAYOUT = { 'exc': [ [1,         6, 15],      (1, 1),
-#                            None,                    1
+# SHEET_LAYOUT = {'exc': [[1, 6, 15], (1, 1),
+#                            None, 1
 #                         ],
-#                 'ans': [ [1,         6.5, 12],    (1, 1),
-#                            'jump',                 'next_page',
-#                            None,                    1
+#                'ans': [[1, 6.5, 12], (1, 1),
+#                            'jump',   'next_page',
+#                            None, 1
 #                         ]
-#               }
+#                }
 # NOTE THAT FOR SHORT_TEST SHEETS, THE LAYOUT HAS TO BE GIVEN ONLY ONCE
 # AND IT WILL BE DUPLICATED FOR THE SECOND SET OF EXERCISES
 

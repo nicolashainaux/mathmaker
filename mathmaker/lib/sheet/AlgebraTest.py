@@ -28,13 +28,12 @@ FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'short_test'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ [1,         9, 9],       (1, 1),
-                           [1,         9, 9],       (1, 1)
-                         ],
-                 'ans': [ [1,         9, 9],       (1, 1),
-                           [1,        12, 6],       (1, 1)
-                         ]
-               }
+SHEET_LAYOUT = {'exc': [[1, 9, 9], (1, 1),
+                        [1, 9, 9], (1, 1)],
+                'ans': [[1, 9, 9], (1, 1),
+                        [1, 12, 6], (1, 1)]
+                }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -64,24 +63,19 @@ class AlgebraTest(S_Structure):
 
         # Exercises:
         for i in range(2):
-            ex1 = exercise.X_AlgebraExpressionReduction(
-                                                 x_kind='short_test',
-                                                 x_subkind='medium_level')
+            ex1 = exercise.X_AlgebraExpressionReduction(x_kind='short_test',
+                                                        x_subkind='medium_'
+                                                                  'level')
 
-            ex2 = exercise.X_AlgebraExpressionExpansion(
-                                                 x_kind='short_test',
-                                                 x_subkind='medium_level',
-                                                 start_number=3)
+            ex2 = exercise.X_AlgebraExpressionExpansion(x_kind='short_test',
+                                                        x_subkind='medium_'
+                                                                  'level',
+                                                        start_number=3)
 
-            ex3 = exercise.X_Factorization(
-                                           x_kind='short_test',
+            ex3 = exercise.X_Factorization(x_kind='short_test',
                                            x_subkind='medium_level',
                                            start_number=7)
 
             self.exercises_list.append(ex1)
             self.exercises_list.append(ex2)
             self.exercises_list.append(ex3)
-
-
-
-

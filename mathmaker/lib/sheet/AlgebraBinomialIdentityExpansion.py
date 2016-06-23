@@ -22,20 +22,18 @@
 
 from . import exercise
 from mathmaker.lib import shared
-from mathmaker.lib.common import cst
 from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = -1
 SHEET_LAYOUT_TYPE = 'std'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ [2,         9, 9],       (1, 1,
-                                                     1, 1)
-                         ],
-                 'ans': [ [2,         9, 9],       (1, 1,
-                                                     1, 1)
-                         ]
-               }
+SHEET_LAYOUT = {'exc': [[2, 9, 9], (1, 1,
+                                    1, 1)],
+                'ans': [[2, 9, 9], (1, 1,
+                                    1, 1)]
+                }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -64,39 +62,32 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
         self.answers_title = _("Examples of answers")
 
         # ex1
-        ex1 = exercise.X_AlgebraExpressionExpansion(
-                                                  x_kind='bypass',
-                                                  x_subkind='sum_square',
-                                                  number_of_questions=5
-                                                  )
+        ex1 = exercise.X_AlgebraExpressionExpansion(x_kind='bypass',
+                                                    x_subkind='sum_square',
+                                                    number_of_questions=5)
 
         self.exercises_list.append(ex1)
 
-
         # ex2
-        ex2 = exercise.X_AlgebraExpressionExpansion(
-                                                  x_kind='bypass',
-                                                  x_subkind='difference_square',
-                                                  number_of_questions=5
-                                                 )
+        ex2 = exercise.X_AlgebraExpressionExpansion(x_kind='bypass',
+                                                    x_subkind='difference_'
+                                                              'square',
+                                                    number_of_questions=5)
 
         self.exercises_list.append(ex2)
 
         # ex3
-        ex3 = exercise.X_AlgebraExpressionExpansion(
-                                                  x_kind='bypass',
-                                                  x_subkind='squares_difference',
-                                                  number_of_questions=5
-                                                 )
+        ex3 = exercise.X_AlgebraExpressionExpansion(x_kind='bypass',
+                                                    x_subkind='squares_'
+                                                              'difference',
+                                                    number_of_questions=5)
 
         self.exercises_list.append(ex3)
 
         # ex4
-        ex4 = exercise.X_AlgebraExpressionExpansion(
-                                                  x_kind='bypass',
-                                                  x_subkind='any_binomial',
-                                                  number_of_questions=5
-                                                 )
+        ex4 = exercise.X_AlgebraExpressionExpansion(x_kind='bypass',
+                                                    x_subkind='any_binomial',
+                                                    number_of_questions=5)
 
         self.exercises_list.append(ex4)
 
@@ -130,6 +121,3 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
         self.exercises_list[3].write_answer()
 
         shared.machine.write_tabular_ends()
-
-
-    # END ---------------------------------------------------------------------

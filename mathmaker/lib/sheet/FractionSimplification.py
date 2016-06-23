@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from . import exercise
-
 from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = 0
@@ -31,6 +30,7 @@ SHEET_LAYOUT_UNIT = "cm"
 SHEET_LAYOUT = {'exc': [None, 'all'],
                 'ans': [None, 'all']
                 }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -59,9 +59,7 @@ class FractionSimplification(S_Structure):
         self.answers_title = _("Examples of answers")
 
         # For instance:
-        ex1 = exercise.X_Calculation(
-                                   x_kind='preformatted',
-                                   x_subkind='fraction_simplification',
-                                   number_of_questions=8)
+        ex1 = exercise.X_Calculation(x_kind='preformatted',
+                                     x_subkind='fraction_simplification',
+                                     number_of_questions=8)
         self.exercises_list.append(ex1)
-

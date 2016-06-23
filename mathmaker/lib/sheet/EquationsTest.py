@@ -28,13 +28,12 @@ FONT_SIZE_OFFSET = -2
 SHEET_LAYOUT_TYPE = 'short_test'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ None,                    'all'
-                         ],
-                 'ans': [ None,                    2,
-                           'jump',                  'next_page',
-                           None,                    1
-                         ]
-               }
+SHEET_LAYOUT = {'exc': [None, 'all'],
+                'ans': [None, 2,
+                        'jump', 'next_page',
+                        None, 1]
+                }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -64,19 +63,15 @@ class EquationsTest(S_Structure):
 
         # Exercises:
         for i in range(2):
-            ex1 = exercise.X_Equation(
-                                      x_kind='short_test',
+            ex1 = exercise.X_Equation(x_kind='short_test',
                                       x_subkind='basic')
 
-            ex2 = exercise.X_Equation(
-                                      x_kind='short_test',
+            ex2 = exercise.X_Equation(x_kind='short_test',
                                       x_subkind='classic_harder')
 
-            ex3 = exercise.X_Equation(
-                                      x_kind='short_test',
+            ex3 = exercise.X_Equation(x_kind='short_test',
                                       x_subkind='harder_harder')
 
             self.exercises_list.append(ex1)
             self.exercises_list.append(ex2)
             self.exercises_list.append(ex3)
-
