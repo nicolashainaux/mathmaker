@@ -28,11 +28,10 @@ FONT_SIZE_OFFSET = 0
 SHEET_LAYOUT_TYPE = 'std'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ None,                    'all'
-                         ],
-                 'ans': [ None,                    'all'
-                         ]
-               }
+SHEET_LAYOUT = {'exc': [None, 'all'],
+                'ans': [None, 'all']
+                }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -61,32 +60,26 @@ class AlgebraBalance_01(S_Structure):
         self.answers_title = _("Examples of answers")
 
         # Exercises list:
-        ex1 = exercise.X_AlgebraExpressionReduction(
-                                                  x_kind='short_test',
-                                                  x_subkind='easy')
+        ex1 = exercise.X_AlgebraExpressionReduction(x_kind='short_test',
+                                                    x_subkind='easy')
 
-        ex2 = exercise.X_AlgebraExpressionExpansion(
-                                                  x_kind='bypass',
-                                                  x_subkind='sign_expansion',
-                                                  number_of_questions=4,
-                                                  start_number=3)
+        ex2 = exercise.X_AlgebraExpressionExpansion(x_kind='bypass',
+                                                    x_subkind='sign_expansion',
+                                                    number_of_questions=4,
+                                                    start_number=3)
 
-        ex3 = exercise.X_AlgebraExpressionExpansion(
-                                                  x_kind='bypass',
-                                                  x_subkind='any_basic_expd',
-                                                  number_of_questions=5,
-                                                  start_number=7)
+        ex3 = exercise.X_AlgebraExpressionExpansion(x_kind='bypass',
+                                                    x_subkind='any_basic_expd',
+                                                    number_of_questions=5,
+                                                    start_number=7)
 
-        ex4 = exercise.X_AlgebraExpressionExpansion(
-                                                  x_kind='bypass',
-                                            x_subkind='sum_of_any_basic_expd',
-                                                  number_of_questions=3,
-                                                  start_number=12)
+        ex4 = exercise.X_AlgebraExpressionExpansion(x_kind='bypass',
+                                                    x_subkind='sum_of_any_'
+                                                              'basic_expd',
+                                                    number_of_questions=3,
+                                                    start_number=12)
 
         self.exercises_list.append(ex1)
         self.exercises_list.append(ex2)
         self.exercises_list.append(ex3)
         self.exercises_list.append(ex4)
-
-
-    # END ---------------------------------------------------------------------

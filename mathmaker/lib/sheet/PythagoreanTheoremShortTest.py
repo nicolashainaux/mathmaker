@@ -29,11 +29,9 @@ SHEET_LAYOUT_TYPE = 'short_test'
 SHEET_LAYOUT_UNIT = "cm"
 #EXAMPLE OF A SHEET NOT USING ANY LAYOUT
 # -----------------------  lines_nb    col_widths   exercises
-SHEET_LAYOUT = { 'exc': [ None,                    'all'
-                         ],
-                 'ans': [ None,                    'all'
-                         ]
-               }
+SHEET_LAYOUT = {'exc': [None, 'all'],
+                'ans': [None, 'all']
+                }
 
 
 # ------------------------------------------------------------------------------

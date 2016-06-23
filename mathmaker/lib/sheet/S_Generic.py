@@ -23,11 +23,12 @@
 from .S_Structure import S_Structure
 
 # ------------------------  lines_nb    col_widths   exercises
-#SHEET_LAYOUT = { 'exc': [ None,                    'all'
+# SHEET_LAYOUT = { 'exc': [ None,                    'all'
 #                         ],
 #                 'ans': [ None,                    'all'
 #                         ]
 #               }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
