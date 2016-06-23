@@ -20,17 +20,23 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import math
-import decimal
-
 from mathmaker import settings
-from mathmaker.lib import *
-from .base import *
-from .base_calculus import *
-from mathmaker.lib.maths_lib import *
-from mathmaker.lib.common.cst import *
-from .utils import *
-from mathmaker.lib import shared
+from mathmaker.lib import shared, error, is_, randomly, maths_lib
+from mathmaker.lib.common import alphabet
+from mathmaker.lib.common.cst import RANDOMLY
+from mathmaker.lib.core.utils import (gather_literals,
+                                      check_lexicon_for_substitution)
+from mathmaker.lib.core.base import Printable
+from mathmaker.lib.core.root_calculus import Exponented, Value, Calculable
+from mathmaker.lib.core.base_calculus import (Monomial, Sum, Item, Polynomial,
+                                              Fraction, Expandable, Product,
+                                              Quotient, SquareRoot)
+# from mathmaker.lib import *
+# from .base import *
+# from .base_calculus import *
+# from mathmaker.lib.maths_lib import *
+# from mathmaker.lib.common.cst import *
+# from .utils import *
 from mathmaker.lib.common.latex import MARKUP
 
 
@@ -140,8 +146,8 @@ class Expression(ComposedCalculable):
     ##
     #   @brief Sets the right hand side of the Expression
     def set_right_hand_side(self, arg):
-        if not (isinstance(objct, Exponented)):
-            raise error.UncompatibleType(objct, "Exponented")
+        if not (isinstance(arg, Exponented)):
+            raise error.UncompatibleType(arg, "Exponented")
 
         self._right_hand_side = arg.clone()
 
@@ -601,27 +607,26 @@ class Equation(ComposedCalculable):
                     #                   cx = ax + b | b + ax = cx + d etc.
                     box = list()
                     ax = Monomial((randomly.sign(plus_signs_ratio=0.65),
-                                        randomly.integer(1,MAX_VALUE),
-                                        1))
+                                   randomly.integer(1, MAX_VALUE),
+                                   1))
                     ax.set_letter(self.variable_letter)
 
                     b = Monomial((randomly.sign(),
-                                        randomly.integer(1,MAX_VALUE),
-                                        0))
+                                  randomly.integer(1, MAX_VALUE),
+                                  0))
                     cx = Monomial((randomly.sign(plus_signs_ratio=0.65),
-                                        randomly.integer(1,MAX_VALUE),
-                                        1))
+                                   randomly.integer(1, MAX_VALUE),
+                                   1))
                     cx.set_letter(self.variable_letter)
 
                     d = Monomial((randomly.sign(),
-                                        randomly.integer(1,MAX_VALUE),
-                                        0))
+                                  randomly.integer(1, MAX_VALUE),
+                                  0))
 
                     box.append(ax)
                     box.append(b)
 
-                    polyn1 = Polynomial([randomly.pop(box),
-                                             randomly.pop(box)])
+                    polyn1 = Polynomial([randomly.pop(box), randomly.pop(box)])
 
                     if arg[1] == 'classic' or arg[1] == 'classic_r':
                         polyn2 = Polynomial([d])
@@ -631,7 +636,7 @@ class Equation(ComposedCalculable):
                             box.append(cx)
                             box.append(d)
                             polyn2 = Polynomial([randomly.pop(box),
-                                                      randomly.pop(box)])
+                                                 randomly.pop(box)])
                         else:
                             polyn2 = Polynomial([cx])
 
@@ -642,7 +647,7 @@ class Equation(ComposedCalculable):
                             box.append(cx)
                             box.append(d)
                             polyn2 = Polynomial([randomly.pop(box),
-                                                      randomly.pop(box)])
+                                                 randomly.pop(box)])
                         elif random_nb < 0.7:
                             polyn2 = Polynomial([d])
 
@@ -655,8 +660,7 @@ class Equation(ComposedCalculable):
                     elif arg[1] == 'classic_r':
                         self._left_hand_side = polyn2
                         self._right_hand_side = polyn1
-                    elif arg[1] == 'classic_x_twice' \
-                         or arg[1] == 'any_classic':
+                    elif arg[1] in ['classic_x_twice', 'any_classic']:
                         box = list()
                         box.append(polyn1)
                         box.append(polyn2)
@@ -666,41 +670,40 @@ class Equation(ComposedCalculable):
                 elif arg[1] == 'classic_with_fractions':
                     # the following code is copied from Calculation.py
                     # -> must be factorized
-                    randomly_position = randomly.integer(0,
-                                                    16,
-                                                    weighted_table=\
-                                                    FRACTIONS_SUMS_SCALE_TABLE)
+                    randomly_position = randomly\
+                        .integer(0, 16,
+                                 weighted_table=FRACTIONS_SUMS_SCALE_TABLE)
 
-                    chosen_seed_and_generator = FRACTIONS_SUMS_TABLE[\
-                                                             randomly_position]
-
+                    chosen_seed_and_generator = FRACTIONS_SUMS_TABLE[
+                        randomly_position]
 
                     seed = randomly.integer(2, chosen_seed_and_generator[1])
 
-                    # The following test is only intended to avoid having "high"
-                    # results too often. We just check if the common denominator
-                    # will be higher than 75 (arbitrary) and if yes, we
-                    # redetermine
+                    # The following test is only intended to avoid having
+                    # "high" results too often. We just check if the common
+                    # denominator will be higher than 75 (arbitrary)
+                    # and if yes, we redetermine
                     # it once. We don't do it twice since we don't want to
                     # totally
                     # forbid high denominators.
                     if seed * chosen_seed_and_generator[0][0] \
                             * chosen_seed_and_generator[0][1] >= 75:
                         # __
-                        seed = randomly.integer(2, chosen_seed_and_generator[1])
+                        seed = randomly.integer(2,
+                                                chosen_seed_and_generator[1])
 
                     lil_box = [0, 1]
                     gen1 = chosen_seed_and_generator[0][lil_box.pop()]
                     gen2 = chosen_seed_and_generator[0][lil_box.pop()]
 
-                    den1 = Item(gen1*seed)
-                    den2 = Item(gen2*seed)
+                    den1 = Item(gen1 * seed)
+                    den2 = Item(gen2 * seed)
 
                     temp1 = randomly.integer(1, 20)
                     temp2 = randomly.integer(1, 20)
 
-                    num1 = Item(temp1 // gcd(temp1, gen1*seed))
-                    num2 = Item(temp2 // gcd(temp2, gen2*seed))
+                    num1 = Item(temp1 // maths_lib.gcd(temp1, gen1 * seed))
+                    num2 = Item(temp2 // maths_lib.gcd(temp2, gen2 * seed))
 
                     f1 = Fraction((randomly.sign(plus_signs_ratio=0.7),
                                   num1,
@@ -709,17 +712,14 @@ class Equation(ComposedCalculable):
                                   num2,
                                   den2))
 
-                    # END OF COPIED CODE ---------------------------------------
+                    # END OF COPIED CODE --------------------------------------
 
                     box = list()
-                    ax = Monomial((Fraction((randomly.sign(\
-                                                          plus_signs_ratio=0.7),
-                                                  Item(randomly.integer(1,
-                                                                        10)),
-                                                  Item(randomly.integer(2,
-                                                                        10))
-                                                  )).simplified(),
-                                        1))
+                    ax = Monomial((Fraction((
+                        randomly.sign(plus_signs_ratio=0.7),
+                        Item(randomly.integer(1, 10)),
+                        Item(randomly.integer(2, 10))))
+                        .simplified(), 1))
                     ax.set_letter(self.variable_letter)
 
                     b = Monomial((f1.simplified(), 0))
@@ -729,13 +729,12 @@ class Equation(ComposedCalculable):
                     box.append(b)
 
                     self._left_hand_side = Polynomial([randomly.pop(box),
-                                                           randomly.pop(box)])
+                                                       randomly.pop(box)])
 
                     self._right_hand_side = Sum([d])
 
-
-                elif arg[1] == 'any_simple_expandable' \
-                    or arg[1] == 'any_double_expandable':
+                elif arg[1] in ['any_simple_expandable',
+                                'any_double_expandable']:
                     # __
                     # SIMPLE:
                     # a monom0_polyn1 or a ±(...) on one side
@@ -747,21 +746,15 @@ class Equation(ComposedCalculable):
                     # Creation of the expandables, to begin with...
                     if randomly.decimal_0_1() <= 0.8:
                         aux_expd_1 = Expandable((RANDOMLY,
-                                                      'monom0_polyn1'),
-                                                      max_coeff=9)
+                                                 'monom0_polyn1'),
+                                                max_coeff=9)
                         expd_kind = 'monom0_polyn1'
 
                     else:
                         sign = randomly.sign()
-                        aux_expd_1 = Expandable(( \
-                                            Monomial((sign,
-                                                           1,
-                                                           0)),
-                                            Polynomial((RANDOMLY,
-                                                             9,
-                                                             1,
-                                                             2))
-                                                ))
+                        aux_expd_1 = Expandable((
+                            Monomial((sign, 1, 0)),
+                            Polynomial((RANDOMLY, 9, 1, 2))))
                         if sign == '+':
                             expd_kind = '+(...)'
                         else:
@@ -771,12 +764,8 @@ class Equation(ComposedCalculable):
                     box_1 = []
                     box_2 = []
 
-                    additional_Monomial = Monomial((RANDOMLY,
-                                                         9,
-                                                         1))
-                    additional_Monomial2 = Monomial((RANDOMLY,
-                                                          9,
-                                                          1))
+                    additional_Monomial = Monomial((RANDOMLY, 9, 1))
+                    additional_Monomial2 = Monomial((RANDOMLY, 9, 1))
 
                     if additional_Monomial.degree == 0:
                         additional_Monomial2.set_degree(1)
@@ -795,20 +784,14 @@ class Equation(ComposedCalculable):
                     if arg[1] == 'any_double_expandable':
                         if randomly.decimal_0_1() <= 0.8:
                             aux_expd_2 = Expandable((RANDOMLY,
-                                                          'monom0_polyn1'),
-                                                          max_coeff=9)
+                                                     'monom0_polyn1'),
+                                                    max_coeff=9)
 
                         else:
                             sign = randomly.sign()
-                            aux_expd_2 = Expandable(( \
-                                                Monomial((sign,
-                                                               1,
-                                                               0)),
-                                                Polynomial((RANDOMLY,
-                                                                 9,
-                                                                 1,
-                                                                 2))
-                                                    ))
+                            aux_expd_2 = Expandable((
+                                Monomial((sign, 1, 0)),
+                                Polynomial((RANDOMLY, 9, 1, 2))))
 
                         if randomly.decimal_0_1() <= 0.5:
                             box_1.append(aux_expd_2)
@@ -831,13 +814,11 @@ class Equation(ComposedCalculable):
                     self._left_hand_side = Sum(left_list)
                     self._right_hand_side = Sum(right_list)
 
-
-
             # All other unforeseen cases: an exception is raised.
             else:
                 raise error.UncompatibleType(arg,
-                                             "(Exponented, Exponented)|" \
-                                             + "(RANDOMLY, <option>)")
+                                             "(Exponented, Exponented)|"
+                                             "(RANDOMLY, <option>)")
 
         # Another Equation to copy
         elif isinstance(arg, Equation):
@@ -857,25 +838,25 @@ class Equation(ComposedCalculable):
     def name(self):
         if self.number == '':
             return MARKUP['opening_bracket'] \
-                       + MARKUP['open_text_in_maths'] \
-                       + self._name \
-                       + MARKUP['close_text_in_maths'] \
-                       + MARKUP['closing_bracket'] \
-                       + MARKUP['colon'] \
-                       + MARKUP['space']
+                + MARKUP['open_text_in_maths'] \
+                + self._name \
+                + MARKUP['close_text_in_maths'] \
+                + MARKUP['closing_bracket'] \
+                + MARKUP['colon'] \
+                + MARKUP['space']
         else:
             return MARKUP['opening_bracket'] \
-                       + MARKUP['open_text_in_maths'] \
-                       + self._name \
-                       + MARKUP['close_text_in_maths'] \
-                       + MARKUP['opening_subscript'] \
-                       + MARKUP['open_text_in_maths'] \
-                       + str(self.number) \
-                       + MARKUP['close_text_in_maths'] \
-                       + MARKUP['closing_subscript'] \
-                       + MARKUP['closing_bracket'] \
-                       + MARKUP['colon'] \
-                       + MARKUP['space']
+                + MARKUP['open_text_in_maths'] \
+                + self._name \
+                + MARKUP['close_text_in_maths'] \
+                + MARKUP['opening_subscript'] \
+                + MARKUP['open_text_in_maths'] \
+                + str(self.number) \
+                + MARKUP['close_text_in_maths'] \
+                + MARKUP['closing_subscript'] \
+                + MARKUP['closing_bracket'] \
+                + MARKUP['colon'] \
+                + MARKUP['space']
 
     # --------------------------------------------------------------------------
     ##
@@ -911,8 +892,6 @@ class Equation(ComposedCalculable):
 
     variable_letter = property(get_variable_letter,
                                doc="Variable letter of the Equation")
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -978,10 +957,7 @@ class Equation(ComposedCalculable):
             # __
             egal_sign = MARKUP['simeq']
 
-        return beginning \
-               + left \
-               + egal_sign \
-               + right
+        return beginning + left + egal_sign + right
 
     # --------------------------------------------------------------------------
     ##
@@ -1005,12 +981,12 @@ class Equation(ComposedCalculable):
         # Complete resolution of the equation:o)
         result = ""
 
-        if not 'dont_display_equations_name' in options:
+        if 'dont_display_equations_name' not in options:
             result = MARKUP['opening_math_style2'] \
-                         + self.name \
-                         + MARKUP['closing_math_style2']
+                + self.name \
+                + MARKUP['closing_math_style2']
 
-        #result += MARKUP['newline']
+        # result += MARKUP['newline']
 
         uline1 = ""
         uline2 = ""
@@ -1019,8 +995,8 @@ class Equation(ComposedCalculable):
             uline2 = MARKUP['close_underline']
 
         eq_aux = None
-        if isinstance(self, Equation) \
-            and not isinstance(self, CrossProductEquation):
+        if (isinstance(self, Equation)
+            and not isinstance(self, CrossProductEquation)):
             # __
             eq_aux = Equation(self)
         elif isinstance(self, CrossProductEquation):
@@ -1039,20 +1015,20 @@ class Equation(ComposedCalculable):
                 if next_eq_aux is None and 'unit' in options:
 
                     result += MARKUP['opening_math_style1'] \
-                           + uline1 \
-                           + eq_aux.into_str() \
-                           + MARKUP['open_text_in_maths'] \
-                           + " " + str(options['unit']) \
-                           + MARKUP['close_text_in_maths'] \
-                           + uline2 \
-                           + MARKUP['closing_math_style1']
+                        + uline1 \
+                        + eq_aux.into_str() \
+                        + MARKUP['open_text_in_maths'] \
+                        + " " + str(options['unit']) \
+                        + MARKUP['close_text_in_maths'] \
+                        + uline2 \
+                        + MARKUP['closing_math_style1']
                 else:
                     result += MARKUP['opening_math_style1'] \
-                           + eq_aux.into_str() \
-                           + MARKUP['closing_math_style1']
+                        + eq_aux.into_str() \
+                        + MARKUP['closing_math_style1']
 
-                if next_eq_aux is None or type(next_eq_aux) == str \
-                    or isinstance(next_eq_aux, tuple):
+                if (next_eq_aux is None or type(next_eq_aux) == str
+                    or isinstance(next_eq_aux, tuple)):
                     # __
                     eq_aux = next_eq_aux
                 else:
@@ -1072,9 +1048,8 @@ class Equation(ComposedCalculable):
                 if isinstance(eq_aux2, Equation):
                     next_eq_aux2 = eq_aux2.solve_next_step(**options)
 
-                if eq_aux1 is not None or eq_aux2 != None:
+                if eq_aux1 is not None or eq_aux2 is not None:
                     result += MARKUP['opening_math_style1']
-
 
                 if isinstance(eq_aux1, Equation):
                     if next_eq_aux1 is None:
@@ -1084,12 +1059,11 @@ class Equation(ComposedCalculable):
 
                     if next_eq_aux1 is None and 'unit' in options:
                         result += MARKUP['open_text_in_maths'] \
-                               + " " + str(options['unit']) \
-                               + MARKUP['close_text_in_maths']
+                            + " " + str(options['unit']) \
+                            + MARKUP['close_text_in_maths']
 
                     if next_eq_aux1 is None:
                         result += uline2
-
 
                     if isinstance(eq_aux2, Equation):
                         result += " " + _("or") + " "
@@ -1106,8 +1080,8 @@ class Equation(ComposedCalculable):
 
                     if next_eq_aux2 is None and 'unit' in options:
                         result += MARKUP['open_text_in_maths'] \
-                               + " " + str(options['unit']) \
-                               + MARKUP['close_text_in_maths']
+                            + " " + str(options['unit']) \
+                            + MARKUP['close_text_in_maths']
 
                     if next_eq_aux2 is None:
                         result += uline2
@@ -1121,7 +1095,7 @@ class Equation(ComposedCalculable):
                     # __
                     go_on = False
 
-                if eq_aux1 is not None or eq_aux2 != None:
+                if eq_aux1 is not None or eq_aux2 is not None:
                     result += MARKUP['closing_math_style1']
 
                 if isinstance(eq_aux1, Equation):
@@ -1129,8 +1103,6 @@ class Equation(ComposedCalculable):
 
                 if isinstance(eq_aux2, Equation):
                     eq_aux2 = eq_aux2.solve_next_step(**options)
-
-
 
         if (not equation_did_split_in_two):
             if eq_aux is None:
@@ -1170,8 +1142,8 @@ class Equation(ComposedCalculable):
             new_eq.set_hand_side("left", new_eq.left_hand_side.term[0])
             return new_eq.solve_next_step(**options)
 
-        elif isinstance(new_eq.right_hand_side.term[0], Sum) \
-           and len(new_eq.right_hand_side) == 1:
+        elif (isinstance(new_eq.right_hand_side.term[0], Sum)
+              and len(new_eq.right_hand_side) == 1):
             # __
             log.debug("CASE-0s-right")
             new_eq.set_hand_side("right", new_eq.right_hand_side.term[0])
@@ -1183,88 +1155,86 @@ class Equation(ComposedCalculable):
             # __
             log.debug("CASE-0p-left")
             new_eq.set_hand_side("left",
-                            Sum(new_eq.left_hand_side.term[0].factor[0]))
+                                 Sum(new_eq.left_hand_side.term[0].factor[0]))
             return new_eq.solve_next_step(**options)
 
-        elif isinstance(new_eq.right_hand_side.term[0], Product) \
-           and len(new_eq.right_hand_side) == 1 \
-           and len(new_eq.right_hand_side.term[0]) == 1:
+        elif (isinstance(new_eq.right_hand_side.term[0], Product)
+              and len(new_eq.right_hand_side) == 1
+              and len(new_eq.right_hand_side.term[0]) == 1):
             # __
             log.debug("CASE-0p-right")
             new_eq.set_hand_side("right",
-                            Sum(new_eq.right_hand_side.term[0].factor[0]))
+                                 Sum(new_eq.right_hand_side.term[0].factor[0]))
             return new_eq.solve_next_step(**options)
 
         next_left_X = new_eq.left_hand_side.expand_and_reduce_next_step()
         next_right_X = new_eq.right_hand_side.expand_and_reduce_next_step()
-        #next_left_C = new_eq.left_hand_side.calculate_next_step()
-        #next_right_C = new_eq.right_hand_side.calculate_next_step()
+        # next_left_C = new_eq.left_hand_side.calculate_next_step()
+        # next_right_C = new_eq.right_hand_side.calculate_next_step()
 
-        if not (isinstance(next_left_X, Calculable) \
+        if not (isinstance(next_left_X, Calculable)
                 or isinstance(next_left_X, ComposedCalculable)):
             # __
             next_left_X_str = str(next_left_X)
         else:
             next_left_X_str = repr(next_left_X)
-        log.debug(
-                    "'decimal_result' is in options? "
-                    + str('decimal_result' in options) + "; "
-                    "len(new_eq.left_hand_side): "
-                    + str(len(new_eq.left_hand_side))
-                    + "\nnext_left_X is: " + next_left_X_str
-                    + "\nnew_eq.left_hand_side.term[0].is_literal()? "
-                    + str(new_eq.left_hand_side.term[0].is_literal()) +"; "
-                    "len(new_eq.right_hand_side): "
-                    + str(len(new_eq.right_hand_side))
-                    + "\nisinstance(new_eq.right_hand_side.term[0], "
-                    "Fraction)? "
-                    + str(isinstance(new_eq.right_hand_side.term[0],
-                                     Fraction)))
+        log.debug("'decimal_result' is in options? "
+                  + str('decimal_result' in options) + "; "
+                  "len(new_eq.left_hand_side): "
+                  + str(len(new_eq.left_hand_side))
+                  + "\nnext_left_X is: " + next_left_X_str
+                  + "\nnew_eq.left_hand_side.term[0].is_literal()? "
+                  + str(new_eq.left_hand_side.term[0].is_literal()) + "; "
+                  "len(new_eq.right_hand_side): "
+                  + str(len(new_eq.right_hand_side))
+                  + "\nisinstance(new_eq.right_hand_side.term[0], "
+                  "Fraction)? "
+                  + str(isinstance(new_eq.right_hand_side.term[0],
+                                   Fraction)))
 
-        if ('skip_fraction_simplification' in options \
-            and not 'decimal_result' in options)\
-            and len(new_eq.left_hand_side)  == 1 \
-            and next_left_X is None \
-            and not new_eq.left_hand_side.term[0].is_numeric() \
-            and len(new_eq.right_hand_side) == 1 \
-            and isinstance(new_eq.right_hand_side.term[0], Fraction) \
-            and new_eq.right_hand_side.term[0].is_reducible():
+        if (('skip_fraction_simplification' in options
+             and 'decimal_result' not in options)
+            and len(new_eq.left_hand_side) == 1
+            and next_left_X is None
+            and not new_eq.left_hand_side.term[0].is_numeric()
+            and len(new_eq.right_hand_side) == 1
+            and isinstance(new_eq.right_hand_side.term[0], Fraction)
+            and new_eq.right_hand_side.term[0].is_reducible()):
             # __
             new_eq.set_hand_side("right",
-                                 new_eq.\
-                                   right_hand_side.term[0].completely_reduced())
+                                 new_eq.right_hand_side.term[0]
+                                 .completely_reduced())
 
-        elif ('skip_fraction_simplification' in options \
-            and 'decimal_result' in options)\
-            and len(new_eq.left_hand_side)  == 1 \
-            and next_left_X is None \
-            and not new_eq.left_hand_side.term[0].is_numeric() \
-            and len(new_eq.right_hand_side) == 1 \
-            and isinstance(new_eq.right_hand_side.term[0], Fraction) \
-            and new_eq.right_hand_side.term[0].is_reducible():
+        elif (('skip_fraction_simplification' in options
+               and 'decimal_result' in options)
+              and len(new_eq.left_hand_side) == 1
+              and next_left_X is None
+              and not new_eq.left_hand_side.term[0].is_numeric()
+              and len(new_eq.right_hand_side) == 1
+              and isinstance(new_eq.right_hand_side.term[0], Fraction)
+              and new_eq.right_hand_side.term[0].is_reducible()):
             # __
             new_eq.set_hand_side("right",
-                                 Item(new_eq.\
-                                   right_hand_side.term[0].evaluate(**options)))
+                                 Item(new_eq
+                                      .right_hand_side.term[0]
+                                      .evaluate(**options)))
 
-
-        elif 'decimal_result' in options\
-            and len(new_eq.left_hand_side)  == 1 \
-            and next_left_X is None \
-            and not new_eq.left_hand_side.term[0].is_numeric() \
-            and len(new_eq.right_hand_side) == 1 \
-            and (isinstance(new_eq.right_hand_side.term[0], Quotient) \
-               or isinstance(new_eq.right_hand_side.term[0], SquareRoot)):
+        elif ('decimal_result' in options
+              and len(new_eq.left_hand_side) == 1
+              and next_left_X is None
+              and not new_eq.left_hand_side.term[0].is_numeric()
+              and len(new_eq.right_hand_side) == 1
+              and (isinstance(new_eq.right_hand_side.term[0], Quotient)
+                   or isinstance(new_eq.right_hand_side.term[0], SquareRoot))):
             # __
             log.debug("Decimal Result CASE")
             new_eq.set_hand_side("right",
-                                 new_eq.\
-                                    right_hand_side.\
-                                    expand_and_reduce_next_step(**options))
+                                 new_eq.right_hand_side.
+                                 expand_and_reduce_next_step(**options))
 
         # 1st CASE
         # Expand & reduce each side of the Equation, whenever possible
-        elif (next_left_X is not None) or (next_right_X != None):
+        elif (next_left_X is not None) or (next_right_X is not None):
             # __
             log.debug("1st CASE")
             if next_left_X is not None:
@@ -1275,17 +1245,16 @@ class Equation(ComposedCalculable):
                 # __
                 new_eq.set_hand_side("right", next_right_X)
 
-
         # 2d CASE
         # Irreducible SUMS, like 3 + x = 5 or x - 2 = 3x + 7
         # It seems useless to test if one side is reducible, if it was,
         # then it would have been treated in the first case.
         # After that case is treated, every literal term will be moved
         # to the left, and every numeric term moved to the right.
-        elif (len(new_eq.left_hand_side) >= 2) \
-              or (len(new_eq.right_hand_side) >= 2) \
-              or (len(new_eq.right_hand_side) == 1 \
-                  and not new_eq.right_hand_side.term[0].is_numeric()):
+        elif (len(new_eq.left_hand_side) >= 2
+              or len(new_eq.right_hand_side) >= 2
+              or (len(new_eq.right_hand_side) == 1
+                  and not new_eq.right_hand_side.term[0].is_numeric())):
             # __
             log.debug("2d CASE")
             # All the literal objects will be moved to the left,
@@ -1323,22 +1292,21 @@ class Equation(ComposedCalculable):
                           + "\nisinstance(right_collected_terms[0], Item)? "
                           + str(isinstance(right_collected_terms[0], Item)))
 
-                if (isinstance(right_collected_terms[0], Product) \
-                    and len(right_collected_terms[0]) == 2 \
-                    and right_collected_terms[0][0].is_positive()) \
-                   or (isinstance(right_collected_terms[0], Product) \
-                    and len(right_collected_terms[0]) == 1) \
-                   or (isinstance(right_collected_terms[0], Item) \
-                       and right_collected_terms[0].is_positive()):
+                if ((isinstance(right_collected_terms[0], Product)
+                     and len(right_collected_terms[0]) == 2
+                     and right_collected_terms[0][0].is_positive())
+                    or (isinstance(right_collected_terms[0], Product)
+                        and len(right_collected_terms[0]) == 1)
+                    or (isinstance(right_collected_terms[0], Item)
+                        and right_collected_terms[0].is_positive())):
                     # __
                     log.debug("Special Case [part 2]")
 
                     return Equation((new_eq.right_hand_side,
                                      new_eq.left_hand_side)).solve_next_step()
 
-
             # Special Case 2:
-            # of Equations like 9 = 3x which should become x = 9/3
+            # of Equations like 9 = 3x which should become x = 9/3
             # and not -3x = -9
             if new_eq.left_hand_side.is_numeric() \
                and not new_eq.right_hand_side.is_numeric() \
@@ -1351,38 +1319,32 @@ class Equation(ComposedCalculable):
                                  new_eq.left_hand_side)).solve_next_step()
 
             for term in left_collected_terms:
-                #log.debug("(left)term: "
-                #                                   + str(term))
+                # log.debug("(left)term: " + str(term))
                 new_eq.left_hand_side.remove(term)
-                term.set_sign(sign_of_product(['-', term.sign]))
+                term.set_sign(maths_lib.sign_of_product(['-', term.sign]))
                 new_eq.set_hand_side("right",
-                                     Sum([new_eq.right_hand_side, term])
-                                     )
-                log.debug(
-                        "Now, right_hand_side looks like: "
-                        + repr(new_eq.right_hand_side))
+                                     Sum([new_eq.right_hand_side, term]))
+                log.debug("Now, right_hand_side looks like: "
+                          + repr(new_eq.right_hand_side))
 
             for term in right_collected_terms:
-                #log.debug("(right)term: "
-                #                                   + str(term))
+                # log.debug("(right)term: " + str(term))
                 new_eq.right_hand_side.remove(term)
-                #term.set_sign(sign_of_product(['-', term.sign]))
+                # term.set_sign(sign_of_product(['-', term.sign]))
                 term = Product([term, Item(-1)]).reduce_()
                 new_eq.set_hand_side("left", Sum([new_eq.left_hand_side,
-                                                  term])
-                                    )
+                                                  term]))
 
             new_eq.left_hand_side.reduce_()
             new_eq.right_hand_side.reduce_()
-            #log.debug("after reduction, "
+            # log.debug("after reduction, "
             #                       + "right_hand_side looks like: "
             #                       + str(new_eq.right_hand_side))
 
         # 3rd CASE
         # Weird cases like 0 = 1 or 2 = 2
-        elif (new_eq.left_hand_side.term[0].is_numeric() \
-             and (new_eq.right_hand_side.term[0].is_numeric())
-             ):
+        elif (new_eq.left_hand_side.term[0].is_numeric()
+              and (new_eq.right_hand_side.term[0].is_numeric())):
             # __
             log.debug("3rd CASE")
             if new_eq.left_hand_side.term[0].raw_value == \
@@ -1390,12 +1352,12 @@ class Equation(ComposedCalculable):
                and new_eq.left_hand_side.get_sign() == \
                     new_eq.right_hand_side.get_sign():
                 # __
-                return _(\
-            "Any value of {variable_name} is solution of the equation.")\
-            .format(variable_name=new_eq.variable_letter)
+                return _('Any value of {variable_name} is '
+                         'solution of the equation.')\
+                    .format(variable_name=new_eq.variable_letter)
 
             else:
-                return _("This equation has no solution.")
+                return _('This equation has no solution.')
 
         # 4th CASE
         # Irreducible PRODUCTS ax = b or -x = b or x = b,
@@ -1412,60 +1374,58 @@ class Equation(ComposedCalculable):
                 if isinstance(new_eq.right_hand_side.term[0].factor[0],
                               Item):
                     # __
-                    new_eq.right_hand_side.set_term(0,
-                                Item(new_eq.right_hand_side.term[0])
-                                                    )
+                    new_eq.right_hand_side\
+                        .set_term(0,
+                                  Item(new_eq.right_hand_side.term[0]))
                 elif isinstance(new_eq.right_hand_side.term[0].factor[0],
                                 Fraction):
                     # __
-                    new_eq.right_hand_side.set_term(0,
-                                Fraction(new_eq.right_hand_side.term[0])
-                                                    )
-
-
+                    new_eq.right_hand_side\
+                        .set_term(0,
+                                  Fraction(new_eq.right_hand_side.term[0]))
 
             # Let's get the numeric Exponented to remove from the left:
             coefficient = new_eq.left_hand_side.term[0].factor[0]
 
             if coefficient.is_displ_as_a_single_1():
                 new_eq.set_hand_side("left",
-                                     Item(new_eq.left_hand_side.term[0]\
-                                                                    .factor[1]))
+                                     Item(new_eq.left_hand_side.term[0]
+                                          .factor[1]))
                 return new_eq.solve_next_step(**options)
 
             elif coefficient.is_displ_as_a_single_minus_1():
                 new_eq.left_hand_side.term[0].set_opposite_sign()
                 new_eq.right_hand_side.term[0].set_opposite_sign()
 
-            elif isinstance(coefficient, Item)\
-                 and isinstance(new_eq.right_hand_side.term[0], Item):
+            elif (isinstance(coefficient, Item)
+                  and isinstance(new_eq.right_hand_side.term[0], Item)):
                 # __
                 new_eq.left_hand_side.term[0].set_factor(0, Item(1))
                 new_eq.set_hand_side("right",
-                                Fraction(('+',
-                                          new_eq.right_hand_side.term[0],
-                                          Item(coefficient)
-                                         ))
-                                    )
-                new_eq.right_hand_side.term[0].set_down_numerator_s_minus_sign()
+                                     Fraction(('+',
+                                               new_eq.right_hand_side.term[0],
+                                               Item(coefficient))))
+                new_eq.right_hand_side.term[0]\
+                    .set_down_numerator_s_minus_sign()
 
             else:
                 new_eq.left_hand_side.term[0].set_factor(0, Item(1))
-                new_eq.right_hand_side.set_term(0,
-                                Quotient(('+',
-                                              new_eq.right_hand_side.term[0],
-                                              coefficient
-                                              ),
-                                              use_divide_symbol=True)
-                                                )
+                new_eq.right_hand_side\
+                    .set_term(0,
+                              Quotient(('+',
+                                        new_eq
+                                        .right_hand_side
+                                        .term[0],
+                                        coefficient),
+                                       use_divide_symbol=True))
 
         # 5th CASE
         # Literal Items -x = b (or -x² = b) or x = b, or x² = b
         # where a and b are (reduced/simplified) Exponenteds.
         # The Item at the left can't be numeric, the case should have
         # been treated before
-        elif isinstance(new_eq.left_hand_side.term[0], Item) \
-             and new_eq.left_hand_side.term[0].is_literal():
+        elif (isinstance(new_eq.left_hand_side.term[0], Item)
+              and new_eq.left_hand_side.term[0].is_literal()):
             # __
             if new_eq.left_hand_side.term[0].get_sign() == '-':
                 new_eq.left_hand_side.term[0].set_opposite_sign()
@@ -1481,8 +1441,8 @@ class Equation(ComposedCalculable):
                         new_eq.left_hand_side.term[0].set_exponent(Value(1))
 
                     else:
-                        temp_sqrt1 = SquareRoot(new_eq.\
-                                                     right_hand_side.term[0])
+                        temp_sqrt1 = SquareRoot(new_eq.
+                                                right_hand_side.term[0])
                         temp_sqrt2 = SquareRoot(temp_sqrt1)
                         temp_sqrt2.set_sign('-')
                         temp_item = Item(new_eq.left_hand_side.term[0])
@@ -1495,40 +1455,36 @@ class Equation(ComposedCalculable):
                         if ('pythagorean_mode' in options
                             and options['pythagorean_mode']):
                             # __
-                            new_eq2 = MARKUP['open_text_in_maths'] \
-                                      + " " + _("because") + " " \
-                                      + temp_item.printed \
-                                      + " " + _("is positive.") \
-                                      + MARKUP['close_text_in_maths']
+                            new_eq2 = MARKUP['open_text_in_maths'] + ' '\
+                                + _('because {L} is positive.')\
+                                .format(L=temp_item.printed)\
+                                + MARKUP['close_text_in_maths']
 
                         return (new_eq1, new_eq2)
-
 
                 # Now the exponent must be equivalent to a single 1
                 # or the algorithm just doesn't know how to solve further.
                 else:
                     return None
 
-        #log.debug(
+        # log.debug(
         #                   "Before having thrown away the neutrals: "
         #                   + str(new_eq))
 
         # throwing away the possibly zeros left..
         new_eq.set_hand_side("left",
-                             new_eq.left_hand_side.throw_away_the_neutrals()
-                            )
+                             new_eq.left_hand_side.throw_away_the_neutrals())
         new_eq.set_hand_side("right",
-                             new_eq.right_hand_side.throw_away_the_neutrals()
-                            )
+                             new_eq.right_hand_side.throw_away_the_neutrals())
 
-        #log.debug(
+        # log.debug(
         #                   "After having thrown away the neutrals,"
         #                    right_hand_side looks like: "
         #                    + str(new_eq.right_hand_side))
 
-        log.debug(
-                                "Leaving, with Equation: " + repr(new_eq))
+        log.debug("Leaving, with Equation: " + repr(new_eq))
         return new_eq
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -1544,8 +1500,9 @@ class SubstitutableEquality(Equality):
     #   @warning Might raise an UncompatibleType exception.
     #   @param objcts is a [Exponented] of 2 elements at least
     #   @param subst_dict is a {literal Value: numeric Value}
-    #   @option equal_signs Contains a list of equal/not equal signs. Must be as
-    #   @option             long as len(objcts) - 1. The signs are "=" or "neq"
+    #   @option equal_signs Contains a list of equal/not equal signs. Must be
+    #   @option             as long as len(objcts) - 1. The signs are "=" or
+    #                       "neq"
     #   @return One instance of SubstitutableEquality
     def __init__(self, objcts, subst_dict, **options):
         # This will check the objcts argument and take the possibly options
@@ -1554,17 +1511,15 @@ class SubstitutableEquality(Equality):
 
         # Now, let's make the checks specific to SubstitutableEquality
         if not (isinstance(subst_dict, dict)):
-            raise error.UncompatibleType(subst_dict,                   \
-                                         "should be a dictionnary")
+            raise error.UncompatibleType(subst_dict, "should be a dictionnary")
 
         if not check_lexicon_for_substitution(objcts,
                                               subst_dict,
                                               'at_least_one'):
             # __
             raise error.WrongArgument(subst_dict,
-                                      " a lexicon that matches the literals "\
-                                      + "of the objects list"
-                                      )
+                                      " a lexicon that matches the literals "
+                                      "of the objects list")
 
         self._subst_dict = subst_dict
 
@@ -1575,7 +1530,8 @@ class SubstitutableEquality(Equality):
         return self._subst_dict
 
     subst_dict = property(get_subst_dict,
-                doc="Substitution dictionnary of the SubstitutableEquality")
+                          doc="Substitution dictionnary of the "
+                              "SubstitutableEquality")
 
     # --------------------------------------------------------------------------
     ##
@@ -1585,6 +1541,7 @@ class SubstitutableEquality(Equality):
             elt.substitute(self.subst_dict)
 
         return self
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -1622,32 +1579,30 @@ class CrossProductEquation(Equation):
             self._number = ''
 
             if len(arg) == 2:
-                if not(isinstance(arg[0], Quotient) \
-                    and isinstance(arg[1], Quotient)):
+                if not(isinstance(arg[0], Quotient)
+                       and isinstance(arg[1], Quotient)):
                     # __
-                    raise error.WrongArgument("a tuple of " + str(type(arg[0]))\
+                    raise error.WrongArgument("a tuple of " + str(type(arg[0]))
                                               + "and of " + str(type(arg[1]),
-                                              "a tuple of two Quotients")
-                                             )
+                                              "a tuple of two Quotients"))
                 else:
                     self._left_hand_side = arg[0].clone()
                     self._right_hand_side = arg[1].clone()
 
             elif len(arg) == 4:
-                if not(isinstance(arg[0], Calculable) \
-                    and isinstance(arg[1], Calculable) \
-                    and isinstance(arg[2], Calculable) \
-                    and isinstance(arg[3], Calculable)):
+                if not(isinstance(arg[0], Calculable)
+                       and isinstance(arg[1], Calculable)
+                       and isinstance(arg[2], Calculable)
+                       and isinstance(arg[3], Calculable)):
                     # __
-                    raise error.WrongArgument("a tuple of " + str(type(arg[0]))\
-                                              + ", " + str(type(arg[1])) \
-                                              + ", " + str(type(arg[2])) \
+                    raise error.WrongArgument("a tuple of " + str(type(arg[0]))
+                                              + ", " + str(type(arg[1]))
+                                              + ", " + str(type(arg[2]))
                                               + "and " + str(type(arg[3])),
                                               "a tuple of four Calculables")
                 else:
                     self._left_hand_side = Quotient(('+', arg[0], arg[2]))
                     self._right_hand_side = Quotient(('+', arg[1], arg[3]))
-
 
             # Let's find the variable
             # In the same time, we'll determine its position and the var obj
@@ -1672,10 +1627,10 @@ class CrossProductEquation(Equation):
                     literal_position += 1
 
             if not literals == 1:
-                raise error.WrongArgument("found " + str(literals) +\
+                raise error.WrongArgument("found " + str(literals) +
                                           "literal objects",
-                                          "exactly one literal object "\
-                                          + "among 4")
+                                          "exactly one literal object "
+                                          "among 4")
 
             self._variable_letter = variable_letter
 
@@ -1696,9 +1651,9 @@ class CrossProductEquation(Equation):
         return self._variable_position
 
     variable_obj = property(get_variable_obj,
-                               doc="Variable object of the Equation")
+                            doc="Variable object of the Equation")
     variable_position = property(get_variable_position,
-                               doc="Variable position in the Equation")
+                                 doc="Variable position in the Equation")
 
     # --------------------------------------------------------------------------
     ##
@@ -1708,15 +1663,11 @@ class CrossProductEquation(Equation):
         temp_table = Table([[self.left_hand_side.numerator,
                              self.right_hand_side.numerator],
                             [self.left_hand_side.denominator,
-                             self.right_hand_side.denominator]
-                           ]
-                          )
+                             self.right_hand_side.denominator]])
 
         new_eq = Equation((self.variable_obj,
                            temp_table.cross_product((0, 1),
-                                                    self.variable_position)
-                         ))
-
+                                                    self.variable_position)))
         return new_eq
 
 
@@ -1738,8 +1689,9 @@ class Table(Printable):
             raise error.WrongArgument(arg, "a list (of two lists)")
 
         if not len(arg) == 2:
-            raise error.WrongArgument("a list of " + str(len(arg)) + "elements",
-                                        "a list of 2 elements")
+            raise error.WrongArgument("a list of " + str(len(arg))
+                                      + "elements",
+                                      "a list of 2 elements")
 
         if not type(arg[0]) == list:
             raise error.WrongArgument(str(type(arg[0])),
@@ -1750,23 +1702,20 @@ class Table(Printable):
                                       "arg[1] should be a list")
 
         if not len(arg[0]) == len(arg[1]):
-            raise error.WrongArgument("two lists of different lengths: " \
-                                      + str(len(arg[0])) + " and " \
+            raise error.WrongArgument("two lists of different lengths: "
+                                      + str(len(arg[0])) + " and "
                                       + str(len(arg[1])),
                                       "two lists of the same length")
 
         for j in range(2):
             for i in range(len(arg[j])):
                 if not isinstance(arg[j][i], Calculable):
-                    raise error.WrongArgument("arg[" + str(j) + "][" \
-                                              + str(i) + "] is no instance of" \
-                                              + " Calculable ; type: " \
+                    raise error.WrongArgument("arg[" + str(j) + "]["
+                                              + str(i) + "] is no instance of"
+                                              + " Calculable ; type: "
                                               + str(type(arg[j][i])),
                                               "a Calculable")
-
-
         self._nb_of_cols = len(arg[0])
-
         self._data = arg
 
     # --------------------------------------------------------------------------
@@ -1787,7 +1736,6 @@ class Table(Printable):
     #   @todo Separate this from the LaTeX format (seems difficult to do)
     def into_str(self, **options):
         result = ""
-
         if ('as_a_quotients_equality' in options
             and options['as_a_quotients_equality']):
             # __
@@ -1796,24 +1744,19 @@ class Table(Printable):
                                     self.cell[0][i],
                                     self.cell[1][i]
                                     )).printed
-
                 if i < len(self) - 1:
                     result += MARKUP['equal']
 
-        else: # there, the table will be displayed normally, as a table
+        else:  # there, the table will be displayed normally, as a table
             content = []
-
             for i in range(2):
                 for j in range(len(self)):
                     content += [self.cell[i][j].printed]
-
             result = shared.machine\
-                     .create_table((2, len(self)),
-                                    content,
-                                    col_fmt=['c' for i in range(len(self))],
-                                    borders='all')
-
-
+                .create_table((2, len(self)),
+                              content,
+                              col_fmt=['c' for i in range(len(self))],
+                              borders='all')
         return result
 
     # --------------------------------------------------------------------------
@@ -1835,34 +1778,24 @@ class Table(Printable):
     def cross_product(self, col, x_position, **options):
         if col[0] >= len(self) or col[1] >= len(self):
             raise error.OutOfRangeArgument(str(col[0]) + " or " + str(col[1]),
-                                           "should be < len(self) = " \
-                                           + str(len(self))
-                                           )
-        if not x_position in [0, 1, 2, 3]:
+                                           "should be < len(self) = "
+                                           + str(len(self)))
+        if x_position not in [0, 1, 2, 3]:
             raise error.OutOfRangeArgument(str(x_position),
-                                           "should be in [0, 1, 2, 3]"
-                                           )
-
+                                           "should be in [0, 1, 2, 3]")
         num = None
-
         if x_position == 0 or x_position == 2:
             num = Product([self.cell[0][col[1]],
-                           self.cell[1][col[0]]
-                          ])
-
+                           self.cell[1][col[0]]])
         elif x_position == 1 or x_position == 3:
             num = Product([self.cell[0][col[0]],
-                           self.cell[1][col[1]]
-                          ])
-
+                           self.cell[1][col[1]]])
         deno = None
-
         if x_position == 0:
             deno = self.cell[1][col[1]]
-
-            if self.cell[0][col[1]].is_displ_as_a_single_int() \
-                and self.cell[1][col[0]].is_displ_as_a_single_int() \
-                and self.cell[1][col[1]].is_displ_as_a_single_int():
+            if (self.cell[0][col[1]].is_displ_as_a_single_int()
+                and self.cell[1][col[0]].is_displ_as_a_single_int()
+                and self.cell[1][col[1]].is_displ_as_a_single_int()):
                 # __
                 return Fraction((num, deno))
             else:
@@ -1871,9 +1804,9 @@ class Table(Printable):
         elif x_position == 1:
             deno = self.cell[1][col[0]]
 
-            if self.cell[0][col[0]].is_displ_as_a_single_int() \
-                and self.cell[1][col[1]].is_displ_as_a_single_int() \
-                and self.cell[1][col[0]].is_displ_as_a_single_int():
+            if (self.cell[0][col[0]].is_displ_as_a_single_int()
+                and self.cell[1][col[1]].is_displ_as_a_single_int()
+                and self.cell[1][col[0]].is_displ_as_a_single_int()):
                 # __
                 return Fraction((num, deno))
             else:
@@ -1882,21 +1815,19 @@ class Table(Printable):
         elif x_position == 2:
             deno = self.cell[0][col[0]]
 
-            if self.cell[0][col[1]].is_displ_as_a_single_int() \
-                and self.cell[1][col[0]].is_displ_as_a_single_int() \
-                and self.cell[0][col[0]].is_displ_as_a_single_int():
+            if (self.cell[0][col[1]].is_displ_as_a_single_int()
+                and self.cell[1][col[0]].is_displ_as_a_single_int()
+                and self.cell[0][col[0]].is_displ_as_a_single_int()):
                 # __
                 return Fraction((num, deno))
             else:
                 return Quotient(('+', num, deno))
 
-
         elif x_position == 3:
             deno = self.cell[0][col[1]]
-
-            if self.cell[0][col[0]].is_displ_as_a_single_int() \
-                and self.cell[1][col[1]].is_displ_as_a_single_int() \
-                and self.cell[0][col[1]].is_displ_as_a_single_int():
+            if (self.cell[0][col[0]].is_displ_as_a_single_int()
+                and self.cell[1][col[1]].is_displ_as_a_single_int()
+                and self.cell[0][col[1]].is_displ_as_a_single_int()):
                 # __
                 return Fraction((num, deno))
             else:
@@ -1912,6 +1843,7 @@ class Table(Printable):
                     return False
 
         return True
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -1933,8 +1865,8 @@ class Table_UP(Table):
     #   (means the column is completely numeric)
     def __init__(self, coeff, first_line, info):
 
-        if not is_.a_number(coeff) \
-            and not (isinstance(coeff, Calculable) and coeff.is_numeric()):
+        if (not is_.a_number(coeff)
+            and not (isinstance(coeff, Calculable) and coeff.is_numeric())):
             # __
             raise error.WrongArgument(str(type(coeff)),
                                       " a number or a numeric Calculable ")
@@ -1948,13 +1880,13 @@ class Table_UP(Table):
                                       " a list ")
 
         if not len(info) == len(first_line):
-            raise error.WrongArgument("two lists of lengths " + str(len(info))\
+            raise error.WrongArgument("two lists of lengths " + str(len(info))
                                       + " and " + str(len(first_line)),
                                       " two lists of the same length.")
 
         for elt in first_line:
-            if elt is not None and not is_.a_number(elt) \
-                and not (isinstance(elt, Calculable) and elt.is_numeric()):
+            if (elt is not None and not is_.a_number(elt)
+                and not (isinstance(elt, Calculable) and elt.is_numeric())):
                 # __
                 raise error.WrongArgument(str(type(elt)) + " " + repr(elt),
                                           "None | nb | numericCalculable ")
@@ -1964,12 +1896,12 @@ class Table_UP(Table):
         col_nb = 0
 
         for i in range(len(first_line)):
-            if first_line[i] is None and (info[i] is None \
+            if first_line[i] is None and (info[i] is None
                                           or info[i] == (None, None)):
                 # __
-                raise error.WrongArgument("first_line[i] and info[i] are" \
+                raise error.WrongArgument("first_line[i] and info[i] are"
                                           + " both equal to None",
-                                          "only one of them can be None" \
+                                          "only one of them can be None"
                                           + " in the same time")
             elt = info[i]
 
@@ -1982,49 +1914,44 @@ class Table_UP(Table):
 
             if type(elt) == tuple:
                 if not len(elt) == 2:
-                    raise error.WrongArgument("a tuple of length " \
+                    raise error.WrongArgument("a tuple of length "
                                               + str(len(elt)),
                                               "a tuple of length 2")
 
-                if not ((isinstance(elt[0], Calculable) \
-                         and elt[0].is_literal()
-                        ) \
+                if not ((isinstance(elt[0], Calculable)
+                         and elt[0].is_literal())
                         or elt[0] is None):
                     # __
                     raise error.WrongArgument(str(elt[0]),
                                               "None|literalCalculable")
 
-                if not ((isinstance(elt[1], Calculable) \
-                         and elt[1].is_literal()
-                        ) \
+                if not ((isinstance(elt[1], Calculable)
+                         and elt[1].is_literal())
                         or elt[1] is None):
                     # __
                     raise error.WrongArgument(str(type(elt[1])),
                                               "None|literalCalculable")
 
                 if elt[0] in literals_positions:
-                    raise error.WrongArgument(elt[0].into_str() + " is already"\
+                    raise error.WrongArgument(elt[0].into_str() + " is already"
                                               " in the Table.",
                                               "it should be there only once")
                 else:
-                    if isinstance(elt[0], Calculable) \
-                        and not isinstance(elt[1], Calculable):
+                    if (isinstance(elt[0], Calculable)
+                        and not isinstance(elt[1], Calculable)):
                         # __
                         literals_positions[elt[0]] = col_nb
 
                 if elt[1] in literals_positions:
-                    raise error.WrongArgument(elt[1].into_str() + " is already"\
+                    raise error.WrongArgument(elt[1].into_str() + " is already"
                                               " in the Table.",
                                               "it should be there only once")
                 else:
-                    if isinstance(elt[1], Calculable) \
-                        and not isinstance(elt[0], Calculable):
+                    if (isinstance(elt[1], Calculable)
+                        and not isinstance(elt[0], Calculable)):
                         # __:
                         literals_positions[elt[1]] = col_nb
-
-
             col_nb += 1
-
 
         if len(complete_cols) == 0:
             raise error.WrongArgument("no complete column found",
@@ -2067,7 +1994,7 @@ class Table_UP(Table):
                     else:
                         data[1] += [info[i][1]]
 
-        #for i in xrange(len(data[0])):
+        # for i in xrange(len(data[0])):
         #    if data[0][i] is None:
         #        d0 = "None"
         #    else:
@@ -2122,9 +2049,9 @@ class Table_UP(Table):
     #   @argument   arg is expected to be an object that exists in the cp info
     #   @brief Returns the CrossProductEquation matching the given arg
     def into_crossproduct_equation(self, arg):
-        if not arg in self.crossproducts_info:
-            raise error.WrongArgument(str(arg), "an object expected to exist" \
-                                                + "in self.crossproducts_info")
+        if arg not in self.crossproducts_info:
+            raise error.WrongArgument(str(arg), "an object expected to exist"
+                                                "in self.crossproducts_info")
 
         col0 = self.crossproducts_info[arg][0]
         col1 = self.crossproducts_info[arg][1]
@@ -2138,5 +2065,4 @@ class Table_UP(Table):
         return CrossProductEquation((self.cell[0][col0],
                                     self.cell[0][col1],
                                     self.cell[1][col0],
-                                    self.cell[1][col1]
-                                    ))
+                                    self.cell[1][col1]))
