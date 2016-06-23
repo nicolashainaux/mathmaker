@@ -23,7 +23,6 @@
 from mathmaker.lib import *
 from .X_Structure import X_Structure
 from . import question
-#from mathmaker.lib.core import *
 from mathmaker.lib.core.calculus import *
 from mathmaker.lib.common import alphabet
 

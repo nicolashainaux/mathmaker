@@ -39,7 +39,7 @@ AVAILABLE_X_KIND_VALUES = \
 X_LAYOUT_UNIT = "cm"
 
 STD_LAYOUT_for_9_equations = \
-              { 'exc': [ None,                    'all'
+              {'exc': [ None,                    'all'
                         ],
                 'ans': [ [1,         6, 6, 6],    (3, 3, 3)
                         ]

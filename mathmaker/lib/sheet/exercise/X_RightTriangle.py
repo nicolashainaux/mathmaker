@@ -31,13 +31,11 @@ from mathmaker.lib.common.cst import *
 # the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
     {'short_test': ['pythagorean_theorem_one_of_each',
-                     'converse_of_pythagorean_theorem',
-                     'contrapositive_of_pythagorean_theorem']
-     #'preformatted': [''],
-     #'bypass': ['']
-    }
+                    'converse_of_pythagorean_theorem',
+                    'contrapositive_of_pythagorean_theorem']
+     }
 
-X_LAYOUT_UNIT = "cm" #[1,         9, 9],       (1, 1)
+X_LAYOUT_UNIT = "cm"  # [1,         9, 9],       (1, 1)
 # ----------------------  lines_nb    col_widths   questions
 X_LAYOUTS = {'default':
               { 'exc': [ None,                    'all'

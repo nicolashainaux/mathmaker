@@ -21,7 +21,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
-from mathmaker.lib import *
+from mathmaker.lib import error, is_
+
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -56,7 +58,8 @@ class X_Structure(object):
         try:
             AVAILABLE_X_KIND_VALUES[x_kind]
         except KeyError:
-            raise error.OutOfRangeArgument(x_kind, str(AVAILABLE_X_KIND_VALUES))
+            raise error.OutOfRangeArgument(x_kind,
+                                           str(AVAILABLE_X_KIND_VALUES))
 
         x_subkind = 'default'
         if 'x_subkind' in options:
@@ -69,9 +72,10 @@ class X_Structure(object):
                     temp_options[key] = options[key]
             self.options = temp_options
 
-        if not x_subkind in AVAILABLE_X_KIND_VALUES[x_kind]:
+        if x_subkind not in AVAILABLE_X_KIND_VALUES[x_kind]:
             raise error.OutOfRangeArgument(x_subkind,
-                                           str(AVAILABLE_X_KIND_VALUES[x_kind]))
+                                           str(AVAILABLE_X_KIND_VALUES[
+                                               x_kind]))
 
         self.x_kind = x_kind
         self.x_subkind = x_subkind
@@ -96,7 +100,6 @@ class X_Structure(object):
                              "be an int and greater than 6.")
         self.q_nb = number_of_questions
 
-
         self.x_layout_unit = X_LAYOUT_UNIT
 
         if (self.x_kind, self.x_subkind) in X_LAYOUTS:
@@ -105,7 +108,6 @@ class X_Structure(object):
         else:
             self.x_layout = X_LAYOUTS['default']
 
-
         # The slideshow option (for MentalCalculation sheets)
         self.slideshow = False
 
@@ -113,8 +115,6 @@ class X_Structure(object):
             self.slideshow = True
 
         # END OF OPTIONS ------------------------------------------------------
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -131,29 +131,30 @@ class X_Structure(object):
         q_n = 0
 
         for k in range(int(len(layout) // 2)):
-            if layout[2*k] is None:
-                how_many = layout[2*k+1]
-                if layout[2*k+1] == 'all_left' or layout[2*k+1] == 'all':
+            if layout[2 * k] is None:
+                how_many = layout[2 * k + 1]
+                if layout[2 * k + 1] in ['all_left', 'all']:
                     how_many = len(self.questions_list) - q_n
                 for i in range(how_many):
                     result += self.questions_list[q_n].to_str(ex_or_answers)
                     if ex_or_answers == 'ans':
-                        result += M.write_new_line(check=result[len(result)-2:])
+                        result += M.write_new_line(check=result[-2:])
                     q_n += 1
             else:
-                nb_of_cols = len(layout[2*k]) - 1
-                col_widths = layout[2*k][1:len(layout[2*k])]
-                nb_of_lines = layout[2*k][0]
+                nb_of_cols = len(layout[2 * k]) - 1
+                col_widths = layout[2 * k][1:]
+                nb_of_lines = layout[2 * k][0]
                 if nb_of_lines == '?':
                     nb_of_lines = len(self.questions_list) // nb_of_cols + \
                         (0 if not len(self.questions_list) % nb_of_cols else 1)
                 content = []
                 for i in range(int(nb_of_lines)):
                     for j in range(nb_of_cols):
-                        if layout[2*k+1] == 'all':
+                        if layout[2 * k + 1] == 'all':
                             nb_of_q_in_this_cell = 1
                         else:
-                            nb_of_q_in_this_cell = layout[2*k+1][i*nb_of_cols+j]
+                            nb_of_q_in_this_cell = \
+                                layout[2 * k + 1][i * nb_of_cols + j]
                         cell_content = ""
                         for n in range(nb_of_q_in_this_cell):
                             empty_cell = False
@@ -161,16 +162,17 @@ class X_Structure(object):
                                 cell_content += " "
                                 empty_cell = True
                             else:
-                                cell_content += self.questions_list[q_n].\
-                                                           to_str(ex_or_answers)
+                                cell_content += \
+                                    self.questions_list[q_n].\
+                                    to_str(ex_or_answers)
                             if ex_or_answers == 'ans' and not empty_cell:
-                                cell_content += M.write_new_line(\
-                                       check=cell_content[len(cell_content)-2:])
+                                cell_content += M.write_new_line(
+                                    check=cell_content[-2:])
                             q_n += 1
                         content += [cell_content]
 
                 result += M.write_layout((nb_of_lines, nb_of_cols),
-                                          col_widths,
-                                          content)
+                                         col_widths,
+                                         content)
 
         return result
