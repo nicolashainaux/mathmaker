@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-06-23 09:54+0100\n"
+"PO-Revision-Date: 2016-06-24 06:59+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -115,132 +115,132 @@ msgstr ""
 "Définition de la commande réinitialisant le compteur d'exercices (ce qui est "
 "utile quand on commence à écrire le corrigé)"
 
-#: lib/sheet/AlgebraBalance_01.py:58
-#: lib/sheet/AlgebraBinomialIdentityExpansion.py:61
-#: lib/sheet/AlgebraExpressionExpansion.py:59
-#: lib/sheet/AlgebraExpressionReduction.py:60
-#: lib/sheet/AlgebraFactorization_01.py:58
-#: lib/sheet/AlgebraFactorization_02.py:58
-#: lib/sheet/AlgebraFactorization_03.py:58 lib/sheet/EquationsBasic.py:61
-#: lib/sheet/EquationsClassic.py:60 lib/sheet/EquationsHarder.py:61
-#: lib/sheet/FractionSimplification.py:58
-#: lib/sheet/FractionsProductAndQuotient.py:60 lib/sheet/FractionsSum.py:58
-#: lib/sheet/S_Model.py:80
+#: lib/sheet/AlgebraBalance_01.py:57
+#: lib/sheet/AlgebraBinomialIdentityExpansion.py:59
+#: lib/sheet/AlgebraExpressionExpansion.py:56
+#: lib/sheet/AlgebraExpressionReduction.py:59
+#: lib/sheet/AlgebraFactorization_01.py:57
+#: lib/sheet/AlgebraFactorization_02.py:57
+#: lib/sheet/AlgebraFactorization_03.py:57 lib/sheet/EquationsBasic.py:59
+#: lib/sheet/EquationsClassic.py:59 lib/sheet/EquationsHarder.py:59
+#: lib/sheet/FractionSimplification.py:56
+#: lib/sheet/FractionsProductAndQuotient.py:59 lib/sheet/FractionsSum.py:57
+#: lib/sheet/S_Model.py:78
 msgid "Training exercises sheet:"
 msgstr "Feuille d'exercices d'entraînement :"
 
-#: lib/sheet/AlgebraBalance_01.py:59
+#: lib/sheet/AlgebraBalance_01.py:58
 msgid "Expanding and reducing algebraic expressions"
 msgstr "Développer et réduire des expressions littérales"
 
-#: lib/sheet/AlgebraBalance_01.py:61
-#: lib/sheet/AlgebraBinomialIdentityExpansion.py:64
-#: lib/sheet/AlgebraExpressionExpansion.py:62
-#: lib/sheet/AlgebraExpressionReduction.py:63
-#: lib/sheet/AlgebraFactorization_01.py:62
-#: lib/sheet/AlgebraFactorization_02.py:61
-#: lib/sheet/AlgebraFactorization_03.py:61 lib/sheet/AlgebraMiniTest0.py:63
-#: lib/sheet/AlgebraMiniTest1.py:83 lib/sheet/AlgebraShortTest.py:63
-#: lib/sheet/AlgebraTest.py:63 lib/sheet/AlgebraTest2.py:63
-#: lib/sheet/ConverseAndContrapositiveOfPythagoreanTheoremShortTest.py:67
-#: lib/sheet/EquationsBasic.py:64 lib/sheet/EquationsClassic.py:63
-#: lib/sheet/EquationsHarder.py:64 lib/sheet/EquationsShortTest.py:62
-#: lib/sheet/EquationsTest.py:63 lib/sheet/FractionSimplification.py:61
-#: lib/sheet/FractionsProductAndQuotient.py:63 lib/sheet/FractionsSum.py:61
-#: lib/sheet/PythagoreanTheoremShortTest.py:63 lib/sheet/S_Model.py:83
+#: lib/sheet/AlgebraBalance_01.py:60
+#: lib/sheet/AlgebraBinomialIdentityExpansion.py:62
+#: lib/sheet/AlgebraExpressionExpansion.py:59
+#: lib/sheet/AlgebraExpressionReduction.py:62
+#: lib/sheet/AlgebraFactorization_01.py:61
+#: lib/sheet/AlgebraFactorization_02.py:60
+#: lib/sheet/AlgebraFactorization_03.py:60 lib/sheet/AlgebraMiniTest0.py:62
+#: lib/sheet/AlgebraMiniTest1.py:82 lib/sheet/AlgebraShortTest.py:62
+#: lib/sheet/AlgebraTest.py:62 lib/sheet/AlgebraTest2.py:62
+#: lib/sheet/ConverseAndContrapositiveOfPythagoreanTheoremShortTest.py:65
+#: lib/sheet/EquationsBasic.py:62 lib/sheet/EquationsClassic.py:62
+#: lib/sheet/EquationsHarder.py:62 lib/sheet/EquationsShortTest.py:61
+#: lib/sheet/EquationsTest.py:62 lib/sheet/FractionSimplification.py:59
+#: lib/sheet/FractionsProductAndQuotient.py:62 lib/sheet/FractionsSum.py:60
+#: lib/sheet/PythagoreanTheoremShortTest.py:60 lib/sheet/S_Model.py:81
 msgid "Examples of answers"
 msgstr "Exemple de corrigé"
 
-#: lib/sheet/AlgebraBinomialIdentityExpansion.py:62
+#: lib/sheet/AlgebraBinomialIdentityExpansion.py:60
 msgid "Expand special identities"
 msgstr "Développer une expression à l'aide des identités remarquables"
 
-#: lib/sheet/AlgebraExpressionExpansion.py:60
+#: lib/sheet/AlgebraExpressionExpansion.py:57
 msgid "Expand an algebraic expression"
 msgstr "Développer une expression littérale"
 
-#: lib/sheet/AlgebraExpressionReduction.py:61
+#: lib/sheet/AlgebraExpressionReduction.py:60
 msgid "Reduce an algebraic expression"
 msgstr "Réduire une expression littérale"
 
-#: lib/sheet/AlgebraFactorization_01.py:59
-#: lib/sheet/AlgebraFactorization_02.py:59
+#: lib/sheet/AlgebraFactorization_01.py:58
+#: lib/sheet/AlgebraFactorization_02.py:58
 msgid "Factorization"
 msgstr "Factorisation"
 
-#: lib/sheet/AlgebraFactorization_01.py:60
+#: lib/sheet/AlgebraFactorization_01.py:59
 msgid "Only basic factorizations are expected. Don't use fractions."
 msgstr ""
 "Seules des factorisations simples sont attendues. Ne pas utiliser de "
 "fractions."
 
-#: lib/sheet/AlgebraFactorization_03.py:59
+#: lib/sheet/AlgebraFactorization_03.py:58
 msgid "Factorization thanks to binomial identities"
 msgstr "Factorisation à l'aide d'identités remarquables"
 
-#: lib/sheet/AlgebraMiniTest1.py:79 lib/sheet/AlgebraTest2.py:59
+#: lib/sheet/AlgebraMiniTest1.py:78 lib/sheet/AlgebraTest2.py:58
 msgid "Name: ....................... Class: ..........."
 msgstr ""
 "Nom et "
 "prénom : ............................................................  "
 "Classe : 3e...... Note :      /20"
 
-#: lib/sheet/AlgebraMiniTest1.py:80
+#: lib/sheet/AlgebraMiniTest1.py:79
 msgid "Mini Test: Algebra"
 msgstr "Mini-Interro : Calcul littéral (coeff. 0,5)"
 
-#: lib/sheet/AlgebraShortTest.py:59 lib/sheet/AlgebraTest.py:59
-#: lib/sheet/ConverseAndContrapositiveOfPythagoreanTheoremShortTest.py:62
-#: lib/sheet/EquationsShortTest.py:58 lib/sheet/EquationsTest.py:59
-#: lib/sheet/PythagoreanTheoremShortTest.py:59
+#: lib/sheet/AlgebraShortTest.py:58 lib/sheet/AlgebraTest.py:58
+#: lib/sheet/ConverseAndContrapositiveOfPythagoreanTheoremShortTest.py:60
+#: lib/sheet/EquationsShortTest.py:57 lib/sheet/EquationsTest.py:58
+#: lib/sheet/PythagoreanTheoremShortTest.py:56
 msgid "Name: ......................................."
 msgstr ""
 "Nom et "
 "prénom : ............................................................  "
 "Classe : 4e...... Note :      /20"
 
-#: lib/sheet/AlgebraShortTest.py:60 lib/sheet/AlgebraTest.py:60
+#: lib/sheet/AlgebraShortTest.py:59 lib/sheet/AlgebraTest.py:59
 msgid "Short Test: Algebra"
 msgstr "Interrogation : Calcul littéral (coeff. 2)"
 
-#: lib/sheet/AlgebraTest2.py:60
+#: lib/sheet/AlgebraTest2.py:59
 msgid "Short Test: Algebra (harder)"
 msgstr "Interrogation : Calcul littéral (coeff. 3)"
 
-#: lib/sheet/ConverseAndContrapositiveOfPythagoreanTheoremShortTest.py:64
+#: lib/sheet/ConverseAndContrapositiveOfPythagoreanTheoremShortTest.py:62
 msgid "Short Test: converse and contrapositive of pythagorean theorem"
 msgstr "Interrogation : réciproque et contraposée du théorème de Pythagore"
 
-#: lib/sheet/EquationsBasic.py:63 lib/sheet/EquationsClassic.py:62
-#: lib/sheet/EquationsShortTest.py:61 lib/sheet/EquationsTest.py:62
+#: lib/sheet/EquationsBasic.py:61 lib/sheet/EquationsClassic.py:61
+#: lib/sheet/EquationsShortTest.py:60 lib/sheet/EquationsTest.py:61
 msgid "Solve the following equations."
 msgstr "Résoudre les équations suivantes."
 
-#: lib/sheet/EquationsHarder.py:62
+#: lib/sheet/EquationsHarder.py:60
 msgid "Equations"
 msgstr "Équations"
 
-#: lib/sheet/EquationsHarder.py:63
+#: lib/sheet/EquationsHarder.py:61
 msgid "Solve the following equations"
 msgstr "Résoudre les équations suivantes"
 
-#: lib/sheet/EquationsShortTest.py:59 lib/sheet/EquationsTest.py:60
+#: lib/sheet/EquationsShortTest.py:58 lib/sheet/EquationsTest.py:59
 msgid "Short Test: Equations"
 msgstr "Interrogation : Équations (coeff. 2)"
 
-#: lib/sheet/FractionSimplification.py:59
+#: lib/sheet/FractionSimplification.py:57
 msgid "Simplify fractions"
 msgstr "Simplification de fractions"
 
-#: lib/sheet/FractionsProductAndQuotient.py:61
+#: lib/sheet/FractionsProductAndQuotient.py:60
 msgid "Products and quotients of fractions"
 msgstr "Produits et quotients de fractions"
 
-#: lib/sheet/FractionsSum.py:59
+#: lib/sheet/FractionsSum.py:58
 msgid "Sums of fractions"
 msgstr "Somme de fractions"
 
-#: lib/sheet/PythagoreanTheoremShortTest.py:60
+#: lib/sheet/PythagoreanTheoremShortTest.py:57
 msgid "Short Test: pythagorean theorem"
 msgstr "Interrogation : théorème de Pythagore"
 
@@ -264,56 +264,52 @@ msgstr "au millième"
 msgid "to the ten thousandth"
 msgstr "au dix-millième"
 
-#: lib/sheet/exercise/X_AlgebraExpressionExpansion.py:109
+#: lib/sheet/exercise/X_AlgebraExpressionExpansion.py:102
 msgid "Expand and reduce"
 msgstr "Développer et réduire"
 
-#: lib/sheet/exercise/X_AlgebraExpressionExpansion.py:116
-msgid "Calculate thanks to a binomial identity"
-msgstr "Calculer à l'aide d'une identité remarquable"
-
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:90
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:85
 msgid "Reduce the following expressions:"
 msgstr "Réduire les expressions suivantes :"
 
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:97
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:90
 msgid "Reduce, if possible, the following products:"
 msgstr "Réduire, si possible, les produits suivants :"
 
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:99
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:109
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:92
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:100
 msgid "Pay attention that the intermediate line is optional."
 msgstr "La ligne intermédiaire indiquée est optionnelle."
 
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:107
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:99
 msgid "Reduce, if possible, the following sums:"
 msgstr "Réduire, si possible, les sommes suivantes :"
 
-#: lib/sheet/exercise/X_Calculation.py:81
+#: lib/sheet/exercise/X_Calculation.py:76
 msgid "Simplify the following fractions:"
 msgstr "Simplifier les fractions suivantes :"
 
-#: lib/sheet/exercise/X_Calculation.py:89
+#: lib/sheet/exercise/X_Calculation.py:82
 msgid "Calculate and give the result as a simplified fraction:"
 msgstr "Calculer et donner le résultat sous forme de fraction simplifiée :"
 
-#: lib/sheet/exercise/X_Factorization.py:160
+#: lib/sheet/exercise/X_Factorization.py:144
 msgid "Factorise: "
 msgstr "Factoriser :"
 
-#: lib/sheet/exercise/X_Factorization.py:167
+#: lib/sheet/exercise/X_Factorization.py:151
 msgid "Factorise:"
 msgstr "Factoriser :"
 
-#: lib/sheet/exercise/X_Factorization.py:175
+#: lib/sheet/exercise/X_Factorization.py:159
 msgid "Factorise, if possible:"
 msgstr "Factoriser, si possible :"
 
-#: lib/sheet/exercise/X_MentalCalculation.py:309
+#: lib/sheet/exercise/X_MentalCalculation.py:301
 msgid "Question:"
 msgstr "Question :"
 
-#: lib/sheet/exercise/X_MentalCalculation.py:311
+#: lib/sheet/exercise/X_MentalCalculation.py:303
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -1471,6 +1467,10 @@ msgstr "Polygone_à_{n}_côtés"
 #, python-brace-format
 msgid "because {L} is positive."
 msgstr "car {L} est positif."
+
+#: lib/sheet/exercise/X_AlgebraExpressionExpansion.py:107
+msgid "Calculate thanks to a binomial identity:"
+msgstr "Calculer à l'aide d'une identité remarquable :"
 
 #~ msgid "because"
 #~ msgstr "car"

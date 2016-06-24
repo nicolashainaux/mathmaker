@@ -20,7 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import *
 from .X_Structure import X_Structure
 from . import question
 
@@ -30,86 +29,58 @@ from . import question
 # the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
     {'short_test': ['basic', 'classic', 'classic_harder', 'harder',
-                     'harder_harder'],
+                    'harder_harder'],
      'preformatted': ['basic_additions', 'any_basic', 'basic_multiplications',
-                       'classics', 'classic_xtwice_and_any'],
-     'bypass': ['any_simple_expandable']
-    }
+                      'classics', 'classic_xtwice_and_any'],
+     'bypass': ['any_simple_expandable']}
 
 X_LAYOUT_UNIT = "cm"
 
-STD_LAYOUT_for_9_equations = \
-              {'exc': [ None,                    'all'
-                        ],
-                'ans': [ [1,         6, 6, 6],    (3, 3, 3)
-                        ]
-              }
+STD_LAYOUT_for_9_equations = {'exc': [None, 'all'],
+                              'ans': [[1, 6, 6, 6], (3, 3, 3)]}
 
 # ----------------------  lines_nb    col_widths   questions
 X_LAYOUTS = {'default':
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ [2,         6, 6, 6],    (1, 1, 1,
-                                                    1, 1, 1)
-                        ]
-              },
+             {'exc': [None, 'all'],
+              'ans': [[2, 6, 6, 6], (1, 1, 1,
+                                     1, 1, 1)]},
 
              ('short_test', 'basic'):
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ [2,         4.5, 4.5],   (1, 1,
-                                                    1, 1)
-                        ]
-              },
+             {'exc': [None, 'all'],
+              'ans': [[2, 4.5, 4.5], (1, 1,
+                                      1, 1)]},
 
              ('short_test', 'classic'):
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ [1,         4.5, 4.5],   (1, 1)
-                        ]
-              },
+             {'exc': [None, 'all'],
+              'ans': [[1, 4.5, 4.5], (1, 1)]},
 
              ('short_test', 'harder'):
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ [1,             6, 6],   (1, 1)
-                        ]
-              },
+             {'exc': [None, 'all'],
+              'ans': [[1, 6, 6], (1, 1)]},
 
              ('short_test', 'harder_harder'):
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ [1,         7, 11],      (1, 1)
-                        ]
-              },
+             {'exc': [None, 'all'],
+              'ans': [[1, 7, 11], (1, 1)]},
 
              ('short_test', 'classic_harder'):
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ [1,         5, 5, 7],    (2, 1, 1)
-                        ]
-              },
+             {'exc': [None, 'all'],
+              'ans': [[1, 5, 5, 7], (2, 1, 1)]},
 
              ('preformatted', 'basic_additions'): STD_LAYOUT_for_9_equations,
 
              ('preformatted', 'any_basic'): STD_LAYOUT_for_9_equations,
 
-             ('preformatted', 'basic_multiplications'): \
-                                                    STD_LAYOUT_for_9_equations,
+             ('preformatted', 'basic_multiplications'):
+             STD_LAYOUT_for_9_equations,
 
-             #('preformatted', 'classic_xtwice_and_any'): EMPTY_LAYOUT,
+             # ('preformatted', 'classic_xtwice_and_any'): EMPTY_LAYOUT,
 
              ('bypass', 'any_simple_expandable'):
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ [1,            9, 9],    (1, 1),
-                          [1,            9, 9],    (1, 1),
-                          [1,            9, 9],    (1, 1)
-                        ]
-              }
+             {'exc': [None, 'all'],
+              'ans': [[1, 9, 9], (1, 1),
+                      [1, 9, 9], (1, 1),
+                      [1, 9, 9], (1, 1)]}}
 
-
-            }
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -163,212 +134,134 @@ class X_Equation(X_Structure):
         # should be useful as long as write_answer() is better implemented
         # to manage itself the displaying choices... maybe with the help
         # of a self.x_kind field ?
-        #self.number_of_equations_per_column = 2
+        # self.number_of_equations_per_column = 2
 
         # TEXTS OF THE EXERCISE
         self.text = {'exc': "",
-                     'ans': ""
-                    }
+                     'ans': ""}
 
         # alternate texts section
-        #if self.x_kind == '...':
-            #self.text = ...
+        # if self.x_kind == '...':
+        # self.text = ...
 
         # PREFORMATTED EXERCISES
         if self.x_kind == 'short_test':
             if self.x_subkind == 'basic':
                 self.questions_list.append(default_question(
                                            q_kind='basic_addition',
-                                           expression_number=0
-                                                            )
-                                           )
+                                           expression_number=0))
                 self.questions_list.append(default_question(
                                            q_kind='basic_addition_r',
-                                           expression_number=1
-                                                            )
-                                           )
+                                           expression_number=1))
                 self.questions_list.append(default_question(
                                            q_kind='basic_multiplication',
-                                           expression_number=2
-                                                            )
-                                           )
+                                           expression_number=2))
                 self.questions_list.append(default_question(
                                            q_kind='basic_multiplication_r',
-                                           expression_number=3
-                                                            )
-                                           )
+                                           expression_number=3))
             elif self.x_subkind == 'classic':
                 self.questions_list.append(default_question(
                                            q_kind='classic',
-                                           expression_number=4
-                                                            )
-                                           )
+                                           expression_number=4))
                 self.questions_list.append(default_question(
                                            q_kind='classic_r',
-                                           expression_number=5
-                                                            )
-                                           )
+                                           expression_number=5))
 
             elif self.x_subkind == 'classic_harder':
                 # __
                 self.questions_list.append(default_question(
                                            q_kind='classic',
-                                           expression_number=4
-                                                            )
-                                           )
+                                           expression_number=4))
                 self.questions_list.append(default_question(
                                            q_kind='classic_r',
-                                           expression_number=5
-                                                            )
-                                           )
+                                           expression_number=5))
                 self.questions_list.append(default_question(
                                            q_kind='classic_x_twice',
-                                           expression_number=6
-                                                            )
-                                           )
+                                           expression_number=6))
                 self.questions_list.append(default_question(
                                            q_kind='classic_with_fractions',
-                                           expression_number=7
-                                                            )
-                                           )
+                                           expression_number=7))
 
             elif self.x_subkind == 'harder':
                 self.questions_list.append(default_question(
                                            q_kind='classic_x_twice',
-                                           expression_number=6
-                                                            )
-                                           )
+                                           expression_number=6))
                 self.questions_list.append(default_question(
                                            q_kind='any_simple_expandable',
-                                           expression_number=7
-                                                            )
-                                           )
+                                           expression_number=7))
 
             elif self.x_subkind == 'harder_harder':
-                #self.number_of_equations_per_column = 1
+                # self.number_of_equations_per_column = 1
                 self.questions_list.append(default_question(
                                            q_kind='any_simple_expandable',
-                                           expression_number=8
-                                                            )
-                                           )
+                                           expression_number=8))
                 self.questions_list.append(default_question(
                                            q_kind='any_double_expandable',
-                                           expression_number=9
-                                                            )
-                                           )
+                                           expression_number=9))
 
         elif self.x_kind == 'preformatted':
             if self.x_subkind == 'basic_additions':
-                #self.number_of_equations_per_column = 3
+                # self.number_of_equations_per_column = 3
                 for i in range(3):
                     self.questions_list.append(default_question(
                                                q_kind='basic_addition',
-                                               expression_number=i
-                                                                )
-                                               )
+                                               expression_number=i))
                 for i in range(2):
                     self.questions_list.append(default_question(
                                                q_kind='basic_addition_r',
-                                               expression_number=i+3
-                                                                )
-                                               )
+                                               expression_number=i + 3))
                 for i in range(4):
                     self.questions_list.append(default_question(
                                                q_kind='any_basic_addition',
-                                               expression_number=i+5
-                                                                )
-                                               )
+                                               expression_number=i + 5))
             elif self.x_subkind == 'any_basic':
-                #self.number_of_equations_per_column = 3
+                # self.number_of_equations_per_column = 3
                 for i in range(9):
                     self.questions_list.append(default_question(
                                                q_kind='any_basic',
-                                               expression_number=i
-                                                                )
-                                               )
+                                               expression_number=i))
 
             elif self.x_subkind == 'basic_multiplications':
-                #self.number_of_equations_per_column = 3
+                # self.number_of_equations_per_column = 3
                 for i in range(4):
                     self.questions_list.append(default_question(
                                                q_kind='basic_multiplication',
-                                               expression_number=i
-                                                                )
-                                               )
+                                               expression_number=i))
                 for i in range(2):
                     self.questions_list.append(default_question(
                                                q_kind='basic_multiplication_r',
-                                               expression_number=i+3
-                                                                )
-                                               )
+                                               expression_number=i + 3))
                 for i in range(3):
                     self.questions_list.append(default_question(
-                                             q_kind='any_basic_multiplication',
-                                             expression_number=i+5
-                                                                )
-                                               )
+                        q_kind='any_basic_multiplication',
+                        expression_number=i + 5))
 
             elif self.x_subkind == 'classics':
                 for i in range(3):
                     self.questions_list.append(default_question(
                                                q_kind='classic',
-                                               expression_number=i
-                                                                )
-                                               )
+                                               expression_number=i))
                 for i in range(3):
                     self.questions_list.append(default_question(
                                                q_kind='classic_r',
-                                               expression_number=i+3
-                                                                )
-                                               )
+                                               expression_number=i + 3))
 
             elif self.x_subkind == 'classic_xtwice_and_any':
                 for i in range(3):
                     self.questions_list.append(default_question(
                                                q_kind='classic_x_twice',
-                                               expression_number=i
-                                                                )
-                                               )
+                                               expression_number=i))
                 for i in range(3):
                     self.questions_list.append(default_question(
                                                q_kind='any_classic',
-                                               expression_number=i+3
-                                                                )
-                                               )
-
+                                               expression_number=i + 3))
 
         # OTHER EXERCISES
         # Take care: the displaying of the answers if
         # number_of_questions is different from 6 is not implemented yet !
         else:
             for i in range(self.q_nb):
-                self.questions_list.append(                                   \
-                             default_question(
-                                        q_kind=self.x_subkind,
-                                        expression_number=i+self.start_number,
-                                        **options)
-                                              )
-
-    # INSTRUCTIONS TO CREATE A NEW EXERCISE -----------------------------------
-    # - Indicate its name in the header comment
-    #   the one of documentation (@class)
-    # - Write the @brief description
-    # - Replace the Model class name by the chosen one
-    # - In the constructor comment, replace Model with the chosen name
-    #   at the @return line
-    # - Write the class name of the default_question. You must mention it
-    #   because it will be used in the OTHER EXERCISES section.
-    # - The different sections to rewrite are:
-    #   * TEXTS OF THE EXERCISE:
-    #       default text for all exercises of this class
-    #   * alternate texts section:
-    #       if you want to specify a different text for any particular kind
-    #       of exercise
-    #   * PREFORMATTED EXERCISES
-    #       that's where preformatted exercises are described (the ones that
-    #       won't repeat n times the same kind of randomly question)
-    #   * OTHER EXERCISES section is meant to all exercises that repeat
-    #       the same (maybe randomly chosen among many) kind of question.
-    #       shouldn't be rewritten
-    # - Finally, if the write_* methods from the exercise.Structure don't
-    #   match your needs, copy & modify or rewrite them
+                self.questions_list.append(
+                    default_question(q_kind=self.x_subkind,
+                                     expression_number=i + self.start_number,
+                                     **options))

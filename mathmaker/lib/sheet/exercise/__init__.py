@@ -40,9 +40,9 @@ from . import X_RightTriangle
 X_Structure = X_Structure.X_Structure
 
 X_AlgebraExpressionExpansion = \
-            X_AlgebraExpressionExpansion.X_AlgebraExpressionExpansion
+    X_AlgebraExpressionExpansion.X_AlgebraExpressionExpansion
 X_AlgebraExpressionReduction = \
-            X_AlgebraExpressionReduction.X_AlgebraExpressionReduction
+    X_AlgebraExpressionReduction.X_AlgebraExpressionReduction
 X_Calculation = X_Calculation.X_Calculation
 X_Equation = X_Equation.X_Equation
 X_Factorization = X_Factorization.X_Factorization

@@ -20,25 +20,20 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import *
+from mathmaker.lib import randomly
 from .X_Structure import X_Structure
 from . import question
 
-AVAILABLE_X_KIND_VALUES = \
-    {'short_test': ['easy', 'medium_level'],
-     'preformatted': ['product'],
-     'bypass': ['sum', 'sum_of_products']
-    }
+AVAILABLE_X_KIND_VALUES = {'short_test': ['easy', 'medium_level'],
+                           'preformatted': ['product'],
+                           'bypass': ['sum', 'sum_of_products']}
 
 X_LAYOUT_UNIT = "cm"
 # ----------------------  lines_nb    col_widths   questions
 X_LAYOUTS = {'default':
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ None,                    'all'
-                        ]
-              }
-            }
+             {'exc': [None, 'all'],
+              'ans': [None, 'all']}}
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -75,7 +70,7 @@ class X_AlgebraExpressionReduction(X_Structure):
     #                         'OK'
     #                         any other value will be understood as 'no'
     #   @return One instance of exercise.ExpressionReduction
-    def __init__(self, x_kind = 'default_nothing', **options):
+    def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
         X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
@@ -88,74 +83,56 @@ class X_AlgebraExpressionReduction(X_Structure):
 
         # TEXTS OF THE EXERCISES
         self.text = {'exc': _("Reduce the following expressions:"),
-                     'ans': ""
-                    }
+                     'ans': ""}
 
         # alternate texts section
         if self.x_subkind == 'product':
-            self.text = {'exc': \
-                            _("Reduce, if possible, the following products:"),
-                         'ans': \
-                     _("Pay attention that the intermediate line is optional.")
-                        }
+            self.text = {'exc': _("Reduce, if possible, the following "
+                                  "products:"),
+                         'ans': _("Pay attention that the intermediate "
+                                  "line is optional.")}
 
-        #elif self.x_subkind == 'sum_of_products':
+        # elif self.x_subkind == 'sum_of_products':
         #    self.text = _("Reduce the following expressions:")
 
         elif self.x_subkind == 'sum':
-            self.text = {'exc': \
-                            _("Reduce, if possible, the following sums:"),
-                         'ans': \
-                     _("Pay attention that the intermediate line is optional.")
-                        }
+            self.text = {'exc': _("Reduce, if possible, the following sums:"),
+                         'ans': _("Pay attention that the intermediate line "
+                                  "is optional.")}
 
         # SHORT TEST EXERCISES
         if self.x_kind == 'short_test':
             if self.x_subkind == 'easy':
-                self.questions_list.append(default_question(
-                                                        q_kind='product',
-                                                        short_test=True,
-                                                        expression_number=0)
-                                          )
+                self.questions_list.append(
+                    default_question(q_kind='product', short_test=True,
+                                     expression_number=0))
 
-                self.questions_list.append(default_question(
-                                                        q_kind='sum',
-                                                        short_test=True,
-                                                        length=4,
-                                                        expression_number=1)
-                                          )
+                self.questions_list.append(
+                    default_question(q_kind='sum', short_test=True, length=4,
+                                     expression_number=1))
 
-                self.questions_list.append(default_question(
-                                                        q_kind='sum_of_products',
-                                                        length=2,
-                                                        expression_number=2)
-                                          )
+                self.questions_list.append(
+                    default_question(q_kind='sum_of_products', length=2,
+                                     expression_number=2))
 
             if self.x_subkind == 'medium_level':
                 q = []
 
-                q.append(default_question(
-                                          q_kind='long_sum',
-                                          expression_number=2)
-                        )
+                q.append(default_question(q_kind='long_sum',
+                                          expression_number=2))
 
-                q.append(default_question(
-                                          q_kind='sum_not_reducible',
-                                          expression_number=3)
-                        )
+                q.append(default_question(q_kind='sum_not_reducible',
+                                          expression_number=3))
 
-                q.append(default_question(
-                                          q_kind='sum_with_minus-brackets',
+                q.append(default_question(q_kind='sum_with_minus-brackets',
                                           minus_brackets_nb=2,
                                           plus_brackets_nb=1,
-                                          expression_number=4)
-                        )
+                                          expression_number=4))
 
-                q.append(default_question(
-                                          q_kind='long_sum_including_a_coeff_1',
+                q.append(default_question(q_kind='long_sum_including_'
+                                                 'a_coeff_1',
                                           length=7,
-                                          expression_number=5)
-                        )
+                                          expression_number=5))
 
                 for i in range(len(q)):
                     self.questions_list.append(randomly.pop(q))
@@ -168,81 +145,67 @@ class X_AlgebraExpressionReduction(X_Structure):
                                            expression_number=0,
                                            use_these_letters=['a', 'b'],
                                            nb_occurences_of_the_same_letter=1,
-                                           **options
-                                           ))
+                                           **options))
 
                 self.questions_list.append(default_question(
                                            q_kind='product',
                                            expression_number=1,
                                            use_these_letters=['x', 'y'],
                                            nb_occurences_of_the_same_letter=1,
-                                           **options
-                                           ))
+                                           **options))
 
                 self.questions_list.append(default_question(
                                            q_kind='product',
                                            expression_number=2,
                                            use_these_letters=['t', 'u'],
                                            nb_occurences_of_the_same_letter=1,
-                                           **options
-                                           ))
+                                           **options))
 
                 self.questions_list.append(default_question(
                                            q_kind='product',
                                            expression_number=3,
                                            use_these_letters=['x', 'y', 'z'],
                                            nb_occurences_of_the_same_letter=1,
-                                           **options
-                                           ))
+                                           **options))
 
                 self.questions_list.append(default_question(
                                            q_kind='product',
                                            expression_number=4,
                                            use_these_letters=['p', 'q', 'r'],
-                                           **options
-                                           ))
+                                           **options))
 
                 self.questions_list.append(default_question(
                                            q_kind='product',
                                            expression_number=5,
                                            use_these_letters=['a', 'b', 'x'],
                                            nb_occurences_of_the_same_letter=1,
-                                           **options
-                                           ))
+                                           **options))
 
                 self.questions_list.append(default_question(
                                            q_kind='product',
                                            expression_number=6,
                                            use_reduced_alphabet='OK',
                                            nb_occurences_of_the_same_letter=1,
-                                           **options
-                                           ))
+                                           **options))
 
                 self.questions_list.append(default_question(
                                            q_kind='product',
                                            expression_number=7,
                                            use_these_letters=['a', 'b', 'x'],
                                            nb_occurences_of_the_same_letter=1,
-                                           **options
-                                           ))
+                                           **options))
 
                 self.questions_list.append(default_question(
                                            q_kind='product',
                                            expression_number=8,
                                            use_these_letters=['x', 'y'],
                                            nb_occurences_of_the_same_letter=1,
-                                           **options
-                                           ))
-
+                                           **options))
 
         # OTHER EXERCISES (BYPASS OPTION)
         else:
             for i in range(self.q_nb):
-                self.questions_list.append(                                   \
-                             default_question(
-                                         q_kind=self.x_subkind,
-                                         expression_number=i+self.start_number,
-                                         **options)
-                                           )
-
-
+                self.questions_list.append(
+                    default_question(q_kind=self.x_subkind,
+                                     expression_number=i + self.start_number,
+                                     **options))

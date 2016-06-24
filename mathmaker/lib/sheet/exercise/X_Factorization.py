@@ -20,11 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import *
+from mathmaker.lib import randomly
+from mathmaker.lib.core.calculus import Expression
+from mathmaker.lib.common import alphabet
 from .X_Structure import X_Structure
 from . import question
-from mathmaker.lib.core.calculus import *
-from mathmaker.lib.common import alphabet
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching self.x_subkind values
@@ -34,52 +34,42 @@ AVAILABLE_X_KIND_VALUES = \
     {'short_test': ['medium_level', 'hard_level'],
      'mini_test': ['two_factorizations'],
      'preformatted': ['level_01_easy', 'level_02_easy',
-                       'level_02_intermediate', 'level_03_sum_squares',
-                       'level_03_difference_squares',
-                       'level_03_squares_differences',
-                       'level_03_some_not_factorizable',
-                       'level_03_all_kinds'],
+                      'level_02_intermediate', 'level_03_sum_squares',
+                      'level_03_difference_squares',
+                      'level_03_squares_differences',
+                      'level_03_some_not_factorizable',
+                      'level_03_all_kinds'],
      'bypass': ['level_01']
-    }
+     }
 
 X_LAYOUT_UNIT = "cm"
-ALT_DEFAULT_LAYOUT = { 'exc': [ None,                    'all'
-                               ],
-                       'ans': [ [2,         9, 9],       (1, 1,
-                                                           1, 1),
-                                 None,                    1
-                               ]
-                     }
+ALT_DEFAULT_LAYOUT = {'exc': [None, 'all'],
+                      'ans': [[2, 9, 9], (1, 1,
+                                          1, 1),
+                              None, 1]
+                      }
 # ----------------------  lines_nb    col_widths   questions
 X_LAYOUTS = {'default':
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ [1,         6, 6, 6],    (1, 1, 1)
-                        ]
+             {'exc': [None, 'all'],
+              'ans': [[1, 6, 6, 6], (1, 1, 1)]
               },
 
              ('short_test', 'hard_level'):
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ [4,         9, 9],       (1, 1,
-                                                    1, 1,
-                                                    1, 1,
-                                                    1, 1)
-                        ]
+             {'exc': [None, 'all'],
+              'ans': [[4, 9, 9], (1, 1,
+                                  1, 1,
+                                  1, 1,
+                                  1, 1)]
               },
 
              ('mini_test', 'two_factorizations'):
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ None,                    'all'
-                        ]
+             {'exc': [None, 'all'],
+              'ans': [None, 'all']
               },
 
              ('preformatted', 'level_01_easy'):
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ ['?',         6, 6, 6],  'all'
-                        ]
+             {'exc': [None, 'all'],
+              'ans': [['?', 6, 6, 6], 'all']
               },
 
              ('preformatted', 'level_02_easy'): ALT_DEFAULT_LAYOUT,
@@ -87,21 +77,16 @@ X_LAYOUTS = {'default':
              ('preformatted', 'level_02_intermediate'): ALT_DEFAULT_LAYOUT,
 
              ('preformatted', 'level_03_some_not_factorizable'):
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ ['?',         6, 6, 6],  'all'
-                        ]
+             {'exc': [None, 'all'],
+              'ans': [['?', 6, 6, 6], 'all']
               },
 
              ('bypass', 'level_01'):
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ ['?',         9,9],      'all'
-                        ]
+             {'exc': [None, 'all'],
+              'ans': [['?', 9, 9], 'all']
               }
+             }
 
-
-            }
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -158,22 +143,22 @@ class X_Factorization(X_Structure):
         # TEXTS OF THE EXERCISE
         self.text = {'exc': _("Factorise: "),
                      'ans': ""
-                    }
+                     }
 
         # alternate texts section
         if self.x_kind == 'level_02_easy' \
            or self.x_kind == 'level_02_intermediate':
             self.text = {'exc': _("Factorise:"),
                          'ans': ""
-                        }
+                         }
 
-        elif self.x_kind == 'level_03_some_not_factorizable' \
-            or (self.x_kind == 'mini_test' \
-                and self.x_subkind == 'two_factorizations'):
+        elif (self.x_kind == 'level_03_some_not_factorizable'
+              or (self.x_kind, self.x_subkind)
+              == ('mini_test', 'two_factorizations')):
             # __
             self.text = {'exc': _("Factorise, if possible:"),
                          'ans': ""
-                        }
+                         }
 
         # SHORT TEST & OTHER PREFORMATTED EXERCISES
         if self.x_kind == 'short_test':
@@ -186,26 +171,22 @@ class X_Factorization(X_Structure):
             elif self.x_subkind == 'medium_level':
                 lil_box = []
 
-                lil_box.append(default_question(
-                                   q_kind='level_01',
-                                   q_subkind='ax² + bx',
-                                   expression_number=0))
+                lil_box.append(default_question(q_kind='level_01',
+                                                q_subkind='ax² + bx',
+                                                expression_number=0))
 
                 if randomly.heads_or_tails():
-                    lil_box.append(default_question(
-                                       q_kind='level_01',
-                                       q_subkind='ax² + b',
-                                       expression_number=0))
+                    lil_box.append(default_question(q_kind='level_01',
+                                                    q_subkind='ax² + b',
+                                                    expression_number=0))
                 else:
-                    lil_box.append(default_question(
-                                       q_kind='level_01',
-                                       q_subkind='ax + b',
-                                       expression_number=0))
+                    lil_box.append(default_question(q_kind='level_01',
+                                                    q_subkind='ax + b',
+                                                    expression_number=0))
 
-                lil_box.append(default_question(
-                                   q_kind='level_01',
-                                   q_subkind='not_factorizable',
-                                   expression_number=0))
+                lil_box.append(default_question(q_kind='level_01',
+                                                q_subkind='not_factorizable',
+                                                expression_number=0))
 
                 for i in range(len(lil_box)):
                         q = randomly.pop(lil_box)
@@ -219,28 +200,21 @@ class X_Factorization(X_Structure):
 
                 l03_kinds = ['sum_square_mixed',
                              'difference_square_mixed',
-                             randomly.pop(
-                                        ['squares_difference',
-                                         'squares_difference_mixed'
-                                         ]),
-                             randomly.pop(
-                                        ['fake_01',
-                                         'fake_01_mixed',
-                                         'fake_02',
-                                         'fake_02_mixed',
-                                         'fake_03',
-                                         'fake_03_mixed'
-                                         ]),
-                             'fake_04_any_mixed'
-                             ]
-
+                             randomly.pop(['squares_difference',
+                                           'squares_difference_mixed']),
+                             randomly.pop(['fake_01',
+                                           'fake_01_mixed',
+                                           'fake_02',
+                                           'fake_02_mixed',
+                                           'fake_03',
+                                           'fake_03_mixed']),
+                             'fake_04_any_mixed']
 
                 for n in range(len(l03_kinds)):
                     lil_box.append(default_question(
                                    q_kind='level_03',
                                    q_subkind=l03_kinds[n],
-                                   expression_number=n+1))
-
+                                   expression_number=n + 1))
 
                 l02_kinds = [('type_2_A1', False),
                              ('type_2_A0', True),
@@ -252,8 +226,7 @@ class X_Factorization(X_Structure):
                                    q_subkind=l02_kinds[n][0],
                                    max_coeff=10,
                                    minus_sign=l02_kinds[n][1],
-                                   expression_number=n+len(l03_kinds)+1)
-                                   )
+                                   expression_number=n + len(l03_kinds) + 1))
 
                 for i in range(len(lil_box)):
                     q = randomly.pop(lil_box)
@@ -268,13 +241,11 @@ class X_Factorization(X_Structure):
                 lil_box = []
 
                 lil_box.append(default_question(
-                            q_kind='level_03',
-                            q_subkind=randomly.pop(['any_fake',
-                                                    'any_true'],
-                                                    weighted_table=[0.2,
-                                                                    0.8]
-                                                  ),
-                            expression_number=1))
+                    q_kind='level_03',
+                    q_subkind=randomly.pop(['any_fake',
+                                            'any_true'],
+                                           weighted_table=[0.2, 0.8]),
+                    expression_number=1))
 
                 l02_kinds = [('type_2_A1', False),
                              ('type_2_A0', True),
@@ -282,24 +253,21 @@ class X_Factorization(X_Structure):
 
                 n = randomly.pop([0, 1, 2])
 
-                lil_box.append(default_question(
-                                   q_kind='level_02',
-                                   q_subkind=l02_kinds[n][0],
-                                   max_coeff=10,
-                                   minus_sign=l02_kinds[n][1],
-                                   expression_number=2)
-                                   )
+                lil_box.append(default_question(q_kind='level_02',
+                                                q_subkind=l02_kinds[n][0],
+                                                max_coeff=10,
+                                                minus_sign=l02_kinds[n][1],
+                                                expression_number=2))
 
                 for i in range(len(lil_box)):
                     q = randomly.pop(lil_box)
                     q.expression.name = \
-                                    alphabet.UPPERCASE[i + self.start_number]
+                        alphabet.UPPERCASE[i + self.start_number]
                     for expression in q.steps:
                         if isinstance(expression, Expression):
                             expression.name = \
-                                    alphabet.UPPERCASE[i + self.start_number]
+                                alphabet.UPPERCASE[i + self.start_number]
                     self.questions_list.append(q)
-
 
         elif self.x_kind == 'preformatted':
             if self.x_subkind == 'level_01_easy':
@@ -310,22 +278,21 @@ class X_Factorization(X_Structure):
                 lil_box.append(default_question(
                                q_kind='level_01',
                                q_subkind='ax² + bx',
-                               expression_number=10-n))
+                               expression_number=10 - n))
 
                 n -= 1
 
                 if randomly.heads_or_tails():
-                    lil_box.append(default_question(
-                                   q_kind='level_01',
-                                   q_subkind='ax² + bx',
-                                   expression_number=10-n))
+                    lil_box.append(default_question(q_kind='level_01',
+                                                    q_subkind='ax² + bx',
+                                                    expression_number=10 - n))
 
                     n -= 1
 
                 lil_box.append(default_question(
                                q_kind='level_01',
                                q_subkind='ax² + b',
-                               expression_number=10-n))
+                               expression_number=10 - n))
 
                 n -= 1
 
@@ -333,7 +300,7 @@ class X_Factorization(X_Structure):
                     lil_box.append(default_question(
                                    q_kind='level_01',
                                    q_subkind='ax² + b',
-                                   expression_number=10-n))
+                                   expression_number=10 - n))
 
                     n -= 1
 
@@ -341,7 +308,7 @@ class X_Factorization(X_Structure):
                     lil_box.append(default_question(
                                    q_kind='level_01',
                                    q_subkind='ax² + b',
-                                   expression_number=10-n))
+                                   expression_number=10 - n))
 
                     n -= 1
 
@@ -349,8 +316,7 @@ class X_Factorization(X_Structure):
                     lil_box.append(default_question(
                                    q_kind='level_01',
                                    q_subkind='ax + b',
-                                   expression_number=n-i)
-                                  )
+                                   expression_number=n - i))
 
                 for i in range(len(lil_box)):
                     q = randomly.pop(lil_box)
@@ -358,8 +324,6 @@ class X_Factorization(X_Structure):
                     for expression in q.steps:
                         expression.name = alphabet.UPPERCASE[i]
                     self.questions_list.append(q)
-
-
 
             elif self.x_subkind == 'level_02_easy':
                 subkinds = ['type_1_A0',
@@ -369,12 +333,11 @@ class X_Factorization(X_Structure):
                 n1 = len(subkinds)
 
                 for i in range(n1):
-                    self.questions_list.append(default_question(
-                                               q_kind='level_02',
-                                               q_subkind=randomly.pop(subkinds),
-                                               minus_sign=False,
-                                               expression_number=i)
-                                              )
+                    self.questions_list.append(
+                        default_question(q_kind='level_02',
+                                         q_subkind=randomly.pop(subkinds),
+                                         minus_sign=False,
+                                         expression_number=i))
 
                 subkinds = ['type_2_A0',
                             'type_2_D0']
@@ -382,12 +345,11 @@ class X_Factorization(X_Structure):
                 n2 = len(subkinds)
 
                 for i in range(n2):
-                    self.questions_list.append(default_question(
-                                               q_kind='level_02',
-                                               q_subkind=randomly.pop(subkinds),
-                                               minus_sign=False,
-                                               expression_number=i+n1)
-                                              )
+                    self.questions_list.append(
+                        default_question(q_kind='level_02',
+                                         q_subkind=randomly.pop(subkinds),
+                                         minus_sign=False,
+                                         expression_number=i + n1))
 
             elif self.x_subkind == 'level_02_intermediate':
                 subkinds = ['type_1_D',
@@ -397,12 +359,11 @@ class X_Factorization(X_Structure):
                 n1 = len(subkinds)
 
                 for i in range(n1):
-                    self.questions_list.append(default_question(
-                                               q_kind='level_02',
-                                               q_subkind=randomly.pop(subkinds),
-                                               minus_sign=False,
-                                               expression_number=i)
-                                              )
+                    self.questions_list.append(
+                        default_question(q_kind='level_02',
+                                         q_subkind=randomly.pop(subkinds),
+                                         minus_sign=False,
+                                         expression_number=i))
 
                 subkinds = randomly.pop([['type_2_A0', 'type_2_D1'],
                                          ['type_2_A1', 'type_2_D0']])
@@ -410,12 +371,11 @@ class X_Factorization(X_Structure):
                 n2 = len(subkinds)
 
                 for i in range(n2):
-                    self.questions_list.append(default_question(
-                                               q_kind='level_02',
-                                               q_subkind=randomly.pop(subkinds),
-                                               minus_sign=False,
-                                               expression_number=i+n1)
-                                              )
+                    self.questions_list.append(
+                        default_question(q_kind='level_02',
+                                         q_subkind=randomly.pop(subkinds),
+                                         minus_sign=False,
+                                         expression_number=i + n1))
 
             elif self.x_subkind == 'level_03_sum_squares':
                 lil_box = []
@@ -424,12 +384,11 @@ class X_Factorization(X_Structure):
                     lil_box.append(default_question(
                                    q_kind='level_03',
                                    q_subkind='sum_square',
-                                   expression_number=n+1))
+                                   expression_number=n + 1))
 
-                lil_box.append(default_question(
-                                   q_kind='level_03',
-                                   q_subkind='sum_square_mixed',
-                                   expression_number=n+1))
+                lil_box.append(default_question(q_kind='level_03',
+                                                q_subkind='sum_square_mixed',
+                                                expression_number=n + 1))
 
                 for i in range(len(lil_box)):
                     q = lil_box[i]
@@ -446,12 +405,12 @@ class X_Factorization(X_Structure):
                     lil_box.append(default_question(
                                    q_kind='level_03',
                                    q_subkind='difference_square',
-                                   expression_number=n+1))
+                                   expression_number=n + 1))
 
-                lil_box.append(default_question(
-                                   q_kind='level_03',
-                                   subkind ='difference_square_mixed',
-                                   expression_number=n+1))
+                lil_box.append(default_question(q_kind='level_03',
+                                                subkind='difference_square'
+                                                        '_mixed',
+                                                expression_number=n + 1))
 
                 for i in range(len(lil_box)):
                     q = lil_box[i]
@@ -460,8 +419,6 @@ class X_Factorization(X_Structure):
                         if isinstance(expression, Expression):
                             expression.name = alphabet.UPPERCASE[i]
                     self.questions_list.append(q)
-
-
 
             elif self.x_subkind == 'level_03_squares_differences':
                 lil_box = []
@@ -470,12 +427,12 @@ class X_Factorization(X_Structure):
                     lil_box.append(default_question(
                                    q_kind='level_03',
                                    q_subkind='squares_difference',
-                                   expression_number=n+1))
+                                   expression_number=n + 1))
 
                 lil_box.append(default_question(
-                                   q_kind='level_03',
-                                   q_subkind='squares_difference_mixed',
-                                   expression_number=n+1))
+                               q_kind='level_03',
+                               q_subkind='squares_difference_mixed',
+                               expression_number=n + 1))
 
                 for i in range(len(lil_box)):
                     q = lil_box[i]
@@ -485,18 +442,14 @@ class X_Factorization(X_Structure):
                             expression.name = alphabet.UPPERCASE[i]
                     self.questions_list.append(q)
 
-
-
             elif self.x_subkind == 'level_03_some_not_factorizable':
                 lil_box = []
 
-                q1 = default_question(
-                                      q_kind='level_03',
+                q1 = default_question(q_kind='level_03',
                                       q_subkind='any_true_mixed',
                                       expression_number=1)
 
-                q2 = default_question(
-                                      q_kind='level_03',
+                q2 = default_question(q_kind='level_03',
                                       q_subkind='any_fake_straight',
                                       expression_number=2)
 
@@ -508,19 +461,17 @@ class X_Factorization(X_Structure):
                 for n in range(3):
                     lil_box.append(default_question(q_kind='level_03',
                                                     q_subkind='any_true',
-                                                    expression_number=n+3))
+                                                    expression_number=n + 3))
 
                 for n in range(2):
                     lil_box.append(default_question(q_kind='level_03',
                                                     q_subkind='any_fake',
-                                                    expression_number=n+5))
+                                                    expression_number=n + 5))
 
                 for n in range(2):
                     lil_box.append(default_question(q_kind='level_03',
                                                     q_subkind='any',
-                                                    expression_number=n+7))
-
-
+                                                    expression_number=n + 7))
 
                 for i in range(len(lil_box)):
                     q = lil_box[i]
@@ -529,8 +480,6 @@ class X_Factorization(X_Structure):
                         if isinstance(expression, Expression):
                             expression.name = alphabet.UPPERCASE[i]
                     self.questions_list.append(q)
-
-
 
             elif self.x_subkind == 'level_03_all_kinds':
                 all_kinds = ['sum_square',
@@ -552,8 +501,7 @@ class X_Factorization(X_Structure):
                              'fake_04_C',
                              'fake_04_C_mixed',
                              'fake_04_D',
-                             'fake_04_D_mixed'
-                             ]
+                             'fake_04_D_mixed']
 
                 lil_box = []
 
@@ -561,7 +509,7 @@ class X_Factorization(X_Structure):
                     lil_box.append(default_question(
                                    q_kind='level_03',
                                    q_subkind=all_kinds[n],
-                                   expression_number=n+1))
+                                   expression_number=n + 1))
 
                 for i in range(len(lil_box)):
                     q = lil_box[i]
@@ -571,15 +519,10 @@ class X_Factorization(X_Structure):
                             expression.name = alphabet.UPPERCASE[i]
                     self.questions_list.append(q)
 
-
-
         # OTHER EXERCISES (BY_PASS OPTION)
         else:
             for i in range(self.q_nb):
                 self.questions_list.append(
-                             default_question(
-                                        expression_number=i+self.start_number,
-                                        q_kind = self.x_subkind,
-                                        **options)
-                                          )
-
+                    default_question(expression_number=i + self.start_number,
+                                     q_kind=self.x_subkind,
+                                     **options))

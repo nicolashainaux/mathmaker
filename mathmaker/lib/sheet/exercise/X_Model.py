@@ -20,9 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import *
+# from mathmaker.lib import ...
 from .X_Structure import X_Structure
-from . import question
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
@@ -32,34 +31,29 @@ AVAILABLE_X_KIND_VALUES = \
     {'short_test': ['x_subkind1', 'x_subkind2'],
      'preformatted': [''],
      'bypass': ['']
-    }
+     }
 
 X_LAYOUT_UNIT = "cm"
 # ----------------------  lines_nb    col_widths   questions
 X_LAYOUTS = {'default':
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ None,                    'all'
-                        ]
+             {'exc': [None, 'all'],
+              'ans': [None, 'all']
               },
 
              ('short_test', 'x_subkind1'):
-              { 'exc': [ [1,         6, 15],      (1, 1),
-                          None,                    1
-                        ],
-                'ans': [ [1,         6.5, 12],    (1, 1),
-                          None,                    1
-                        ]
+             {'exc': [[1, 6, 15], (1, 1),
+                      None, 1],
+              'ans': [[1, 6.5, 12], (1, 1),
+                      None, 1]
               },
 
              ('short_test', 'x_subkind2'):
-              { 'exc': [ ['?',       6, 15],      'all'
-                        ],
-                'ans': [ [1,         6.5, 12],    (1, 1),
-                          None,                    1
-                        ]
+             {'exc': [['?', 6, 15], 'all'],
+              'ans': [[1, 6.5, 12], (1, 1),
+                      None, 1]
               }
-            }
+             }
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -98,48 +92,47 @@ class X_Model(X_Structure):
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
 
         # should be default_question = question.Something
-        default_question = None
+        # default_question = None
 
         # TEXTS OF THE EXERCISE
         self.text = {'exc': "",
                      'ans': ""
-                    }
+                     }
 
         # alternate texts section
-        #if self.x_kind == '...':
-            #self.text = {'exc': "",
-            #             'ans': ""
-            #            }
+        # if self.x_kind == '...':
+        # self.text = {'exc': "",
+        #             'ans': ""
+        #            }
         #
-        #elif self.x_kind == '...':
-            #self.text = {'exc': "",
-            #             'ans': ""
-            #            }
+        # elif self.x_kind == '...':
+        # self.text = {'exc': "",
+        #             'ans': ""
+        #            }
 
         # SHORT TEST & OTHER PREFORMATTED EXERCISES
-        #if self.x_kind == 'short_test':
+        # if self.x_kind == 'short_test':
         #   if self.x_subkind == 'sub1':
         #       self.questions_list.append(default_question(
-            #                                       q_kind='product',
-            #                                       expression_number=0)
-            #                           )
-            # etc.
-        #elif self.x_kind == 'preformatted':
+        #                                       q_kind='product',
+        #                                       expression_number=0)
+        #                           )
+        # etc.
+        # elif self.x_kind == 'preformatted':
         #    if self.x_subkind == '...':
-                #self.questions_list.append(default_question(
-                #
-                # etc.
-
+        # self.questions_list.append(default_question(
+        #
+        # etc.
 
         # OTHER EXERCISES (BYPASS OPTION !)
-        #else:
-         #   for i in xrange(self.q_nb):
-         #       self.questions_list.append(
-         #                    default_question(
-         #                              q_kind=self.x_subkind,
-         #                               expression_number=i+self.start_number,
-         #                               **options)
-         #                                 )
+        # else:
+        #   for i in xrange(self.q_nb):
+        #       self.questions_list.append(
+        #                    default_question(
+        #                              q_kind=self.x_subkind,
+        #                               expression_number=i+self.start_number,
+        #                               **options)
+        #                                 )
 
         # END OF THE ZONE TO REWRITE ------------------------------------------
 

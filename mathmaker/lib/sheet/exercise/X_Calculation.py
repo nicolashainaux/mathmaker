@@ -20,7 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import *
 from .X_Structure import X_Structure
 from . import question
 
@@ -29,22 +28,18 @@ from . import question
 # Note: the bypass value allows to give the value of *x_subkind* directly to
 # the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
-    {#'short_test': ['x_subkind1', 'x_subkind2'],
-     'preformatted': ['fraction_simplification', 'fractions_product',
-                       'fractions_quotient', 'fractions_sum']
-     #'bypass': ['']
-    }
+    {'preformatted': ['fraction_simplification', 'fractions_product',
+                      'fractions_quotient', 'fractions_sum']
+     }
 
 X_LAYOUT_UNIT = "cm"
 # ----------------------  lines_nb  col_widths             questions
 X_LAYOUTS = {'default':
-              { 'exc': [ ['?',     9, 9],                 'all'
-                        ],
-                'ans': [ ['?',     6, 6, 6],              'all'
-                        ]
+             {'exc': [['?', 9, 9], 'all'],
+              'ans': [['?', 6, 6, 6], 'all']
               }
+             }
 
-            }
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -73,57 +68,43 @@ class X_Calculation(X_Structure):
         # TEXTS OF THE EXERCISE
         self.text = {'exc': "",
                      'ans': ""
-                    }
+                     }
 
         # alternate texts section
         if self.x_kind == 'preformatted':
             if self.x_subkind == 'fraction_simplification':
                 self.text = {'exc': _("Simplify the following fractions:"),
                              'ans': ""
-                            }
-            elif self.x_subkind == 'fractions_product' \
-                 or self.x_subkind == 'fractions_quotient' \
-                 or self.x_subkind == 'fractions_sum':
+                             }
+            elif self.x_subkind in ['fractions_product', 'fractions_quotient',
+                                    'fractions_sum']:
                 # __
-                self.text = {'exc': _( \
-                    "Calculate and give the result as a simplified fraction:"),
+                self.text = {'exc': _("Calculate and give the result as "
+                                      "a simplified fraction:"),
                              'ans': ""
-                            }
+                             }
 
         # PREFORMATTED EXERCISES
         if self.x_kind == 'preformatted':
             if self.x_subkind == 'fraction_simplification':
-                #self.text = _("Simplify the following fractions:")
 
                 for i in range(int(self.q_nb // 2)):
-                    q=question.Q_Calculation(
-                                           self.x_subkind,
-                                           expression_number=i,
-                                           **options)
-
+                    q = default_question(self.x_subkind,
+                                         expression_number=i,
+                                         **options)
                     self.questions_list.append(q)
 
                 for i in range(self.q_nb - int(self.q_nb // 2)):
-                    q=question.Q_Calculation(
-                                          self.x_subkind,
-                                          expression_number=i+int(self.q_nb//2),
-                                          with_ten_powers=0.3,
-                                          **options)
-
+                    q = default_question(self.x_subkind,
+                                         expression_number=i
+                                         + int(self.q_nb // 2),
+                                         with_ten_powers=0.3, **options)
                     self.questions_list.append(q)
 
-            elif self.x_subkind == 'fractions_product' \
-                 or self.x_subkind == 'fractions_quotient' \
-                 or self.x_subkind == 'fractions_sum':
+            elif self.x_subkind in ['fractions_product', 'fractions_quotient',
+                                    'fractions_sum']:
                 # __
-                #self.text = _( \
-                #    "Calculate and give the result as a simplified fraction:")
-
                 for i in range(self.q_nb):
-                    q=question.Q_Calculation(
-                                           self.x_subkind,
-                                           expression_number=i,
-                                           **options)
-
+                    q = default_question(self.x_subkind,
+                                         expression_number=i, **options)
                     self.questions_list.append(q)
-

@@ -24,7 +24,6 @@ import copy
 import random
 from collections import namedtuple
 
-from mathmaker.lib import *
 from mathmaker.lib import shared
 from .X_Structure import X_Structure
 from . import question
@@ -38,12 +37,10 @@ MAX_NB_OF_QUESTIONS = 40
 X_LAYOUT_UNIT = "cm"
 # ----------------------  lines_nb    col_widths   questions
 X_LAYOUTS = {'default':
-              { 'exc': [ None,                    'all'
-                        ],
-                'ans': [ None,                    'all'
-                        ]
+             {'exc': [None, 'all'],
+              'ans': [None, 'all']
               }
-            }
+             }
 
 MIN_ROW_HEIGHT = 0.8
 
@@ -53,9 +50,8 @@ SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),
                               ("square", "perimeter")}
 
 KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE = {
-('divi', 'direct', 'area_width_length_rectangle'): \
-('rectangle', 'length_or_width', 'from_area')
-                                       }
+    ('divi', 'direct', 'area_width_length_rectangle'):
+    ('rectangle', 'length_or_width', 'from_area')}
 
 to_unpack = copy.deepcopy(question.SUBKINDS_TO_UNPACK)
 Q_info = namedtuple('Q_info', 'type,kind,subkind,nb_source,options')
@@ -70,7 +66,7 @@ Q_info = namedtuple('Q_info', 'type,kind,subkind,nb_source,options')
 def build_q_dict(q_list):
     # In q_list, each element is like this:
     # [{'kind':'multi', 'subkind':'direct', 'nb':'int'}, 'table_2_9', 4]
-    # [q[0],                                             q[1],        q[2]]
+    # [q[0], q[1], q[2]]
     q_dict = {}
     already_unpacked = set()
     q_nb = 0
@@ -88,10 +84,10 @@ def build_q_dict(q_list):
             elif subk in to_unpack:
                 subk_left = to_unpack[subk] - already_unpacked
                 if not subk_left:
-                    already_unpacked -= copy.deepcopy(\
-                                        question.SUBKINDS_TO_UNPACK[subk])
-                    to_unpack[subk] = copy.deepcopy(\
-                                        question.SUBKINDS_TO_UNPACK[subk])
+                    already_unpacked -= copy.deepcopy(
+                        question.SUBKINDS_TO_UNPACK[subk])
+                    to_unpack[subk] = copy.deepcopy(
+                        question.SUBKINDS_TO_UNPACK[subk])
                     subk_left = to_unpack[subk] - already_unpacked
                 s = list(subk_left)
                 random.shuffle(s)
@@ -100,13 +96,13 @@ def build_q_dict(q_list):
 
             q_id += subk
             q_options = copy.deepcopy(q[0])
-            if not q_id in q_dict:
-                q_dict[q_id] = []
+            q_dict.setdefault(q_id, [])
             q_dict[q_id] += [(q[1], q_options['kind'], subk, q_options)]
             del q_options['kind']
             del q_options['subkind']
 
     return q_dict, q_nb
+
 
 # --------------------------------------------------------------------------
 ##
@@ -125,8 +121,8 @@ def build_mixed_q_list(q_dict):
     #   'etc.'
     # }
     mixed_q_list = []
-    q_id_box = [key for key in q_dict.keys() \
-                    for i in range(len(q_dict[key]))]
+    q_id_box = [key for key in q_dict.keys()
+                for i in range(len(q_dict[key]))]
     random.shuffle(q_id_box)
     for q_id in q_id_box:
         info = q_dict[q_id].pop(0)
@@ -143,9 +139,9 @@ def build_mixed_q_list(q_dict):
 def increase_alternation(l, sort_key):
     if len(l) >= 3:
         for i in range(len(l) - 2):
-            if getattr(l[i], sort_key) == getattr(l[i+1], sort_key):
-                if getattr(l[i+2], sort_key) != getattr(l[i], sort_key):
-                    l[i+1], l[i+2] = l[i+2], l[i+1]
+            if getattr(l[i], sort_key) == getattr(l[i + 1], sort_key):
+                if getattr(l[i + 2], sort_key) != getattr(l[i], sort_key):
+                    l[i + 1], l[i + 2] = l[i + 2], l[i + 1]
 
     return l
 
@@ -159,9 +155,9 @@ def get_nb_source_from_question_info(q_i):
     if nb_source in question.SOURCES_TO_UNPACK:
         s = ''
         stu = copy.copy(question.SOURCES_TO_UNPACK)
-        if (nb_source == 'decimal_and_10_100_1000'
-            or nb_source == 'decimal_and_one_digit'):
-        #__
+        if nb_source in ['decimal_and_10_100_1000',
+                         'decimal_and_one_digit']:
+            # __
             s = stu[nb_source][q_i.type]
         else:
             s = stu[nb_source][q_i.subkind]
@@ -217,18 +213,16 @@ class X_MentalCalculation(X_Structure):
     #   @return One instance of exercise.X_MentalCalculation
     def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
-        from mathmaker.lib.tools.xml_sheet import get_q_kinds_from, get_xml_sheets_paths
-
+        from mathmaker.lib.tools.xml_sheet import (get_q_kinds_from,
+                                                   get_xml_sheets_paths)
         XML_SHEETS = get_xml_sheets_paths()
-
-        mc_mm_file = options['filename'] if 'filename' in options \
-                                         else XML_SHEETS[\
-                                                  'mental_calculation_default']
+        mc_mm_file = options.get('filename',
+                                 XML_SHEETS['mental_calculation_default'])
 
         (x_kind, q_list) = get_q_kinds_from(
-                            mc_mm_file,
-                            sw_k_s=SWAPPABLE_QKINDS_QSUBKINDS,
-                            k_s_ctxt_tr=KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE)
+            mc_mm_file,
+            sw_k_s=SWAPPABLE_QKINDS_QSUBKINDS,
+            k_s_ctxt_tr=KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE)
 
         X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
@@ -256,14 +250,14 @@ class X_MentalCalculation(X_Structure):
         mixed_q_list = increase_alternation(mixed_q_list, 'type')
 
         # mixed_q_list is organized like this:
-        # [ ('type',           'kind',      'subkind',  'nb_source', 'options'),
-        #   ('multi_direct',   'multi',     'direct',   'table_2_9', {'nb':}),
-        #   ('multi_reversed', 'multi',     'reversed', 'table_2_9', {'nb':}),
-        #   ('q_id',           'q_',        'id',       'table_15',  {'nb':}),
-        #   ('multi_hole',     'multi',     'hole',     'table_2_9', {'nb':}),
-        #   ('multi_direct',   'multi',     'direct',   'table_2_9', {'nb':}),
-        #   ('q_id,            'q_',        'id',       'table_25',  {'nb':}),
-        #   ('divi_direct',    divi',       'direct',   'table_2_9', {'nb':}),
+        # [ ('type', 'kind', 'subkind', 'nb_source', 'options'),
+        #   ('multi_direct', 'multi', 'direct', 'table_2_9', {'nb':}),
+        #   ('multi_reversed', 'multi', 'reversed', 'table_2_9', {'nb':}),
+        #   ('q_id', 'q_', 'id', 'table_15', {'nb':}),
+        #   ('multi_hole', 'multi', 'hole', 'table_2_9', {'nb':}),
+        #   ('multi_direct', 'multi', 'direct', 'table_2_9', {'nb':}),
+        #   ('q_id, 'q_', 'id', 'table_25', {'nb':}),
+        #   ('divi_direct', divi', 'direct', 'table_2_9', {'nb':}),
         #   etc.
         # ]
 
@@ -272,23 +266,20 @@ class X_MentalCalculation(X_Structure):
         last_draw = [0, 0]
         for q in mixed_q_list:
             nb_source = get_nb_source_from_question_info(q)
-            nb_to_use = shared.mc_source.next(nb_source,
-                                              not_in=last_draw,
-                                              **question.get_modifier(
-                                                                    q.type,
-                                                                    nb_source))
+            nb_to_use = shared.mc_source\
+                .next(nb_source,
+                      not_in=last_draw,
+                      **question.get_modifier(q.type, nb_source))
             last_draw = [str(n) for n in set(nb_to_use)
-                                if (isinstance(n, int) or isinstance(n, str))]
-            if nb_source == 'decimal_and_10_100_1000_for_divi' \
-                or nb_source == 'decimal_and_10_100_1000_for_multi':
+                         if (isinstance(n, int) or isinstance(n, str))]
+            if nb_source in ['decimal_and_10_100_1000_for_divi',
+                             'decimal_and_10_100_1000_for_multi']:
                 # __
                 q.options['10_100_1000'] = True
             self.questions_list += [default_question(q.type,
                                                      q.options,
                                                      numbers_to_use=nb_to_use
                                                      )]
-
-
 
     # --------------------------------------------------------------------------
     ##
@@ -300,29 +291,31 @@ class X_MentalCalculation(X_Structure):
         if self.slideshow:
             result += M.write_frame("", frame='start_frame')
             for i in range(self.q_nb):
-                result += M.write_frame(self.questions_list[i].to_str('exc'),
-                                    timing=self.questions_list[i].transduration)
+                result += M.write_frame(
+                    self.questions_list[i].to_str('exc'),
+                    timing=self.questions_list[i].transduration)
 
             result += M.write_frame("", frame='middle_frame')
 
             for i in range(self.q_nb):
-                result += M.write_frame(_("Question:") \
-                                        + self.questions_list[i].to_str('exc')\
-                                        + _("Answer:") \
+                result += M.write_frame(_("Question:")
+                                        + self.questions_list[i].to_str('exc')
+                                        + _("Answer:")
                                         + self.questions_list[i].to_str('ans'),
                                         timing=0)
 
         # default tabular option:
         else:
-            q = [self.questions_list[i].to_str('exc') for i in range(self.q_nb)]
-            a = [self.questions_list[i].to_str('ans') \
-                                                    for i in range(self.q_nb)]\
+            q = [self.questions_list[i].to_str('exc')
+                 for i in range(self.q_nb)]
+            a = [self.questions_list[i].to_str('ans')
+                 for i in range(self.q_nb)]\
                 if ex_or_answers == 'ans' \
-                else [self.questions_list[i].to_str('hint') \
-                                                    for i in range(self.q_nb)]
+                else [self.questions_list[i].to_str('hint')
+                      for i in range(self.q_nb)]
 
-            n = [ M.write(str(i + 1) + ".", emphasize='bold') \
-                  for i in range(self.q_nb)]
+            n = [M.write(str(i + 1) + ".", emphasize='bold')
+                 for i in range(self.q_nb)]
 
             content = [elt for triplet in zip(n, q, a) for elt in triplet]
 
