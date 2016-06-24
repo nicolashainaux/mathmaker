@@ -54,9 +54,9 @@ from . import ConverseAndContrapositiveOfPythagoreanTheoremShortTest
 S_Structure = S_Structure.S_Structure
 S_Generic = S_Generic.S_Generic
 AlgebraExpressionReduction = \
-                        AlgebraExpressionReduction.AlgebraExpressionReduction
+    AlgebraExpressionReduction.AlgebraExpressionReduction
 AlgebraExpressionExpansion = \
-                        AlgebraExpressionExpansion.AlgebraExpressionExpansion
+    AlgebraExpressionExpansion.AlgebraExpressionExpansion
 EquationsBasic = EquationsBasic.EquationsBasic
 EquationsClassic = EquationsClassic.EquationsClassic
 EquationsHarder = EquationsHarder.EquationsHarder
@@ -66,10 +66,10 @@ AlgebraShortTest = AlgebraShortTest.AlgebraShortTest
 AlgebraBalance_01 = AlgebraBalance_01.AlgebraBalance_01
 # StructureShortTest = StructureShortTest.StructureShortTest
 AlgebraBinomialIdentityExpansion = \
-            AlgebraBinomialIdentityExpansion.AlgebraBinomialIdentityExpansion
+    AlgebraBinomialIdentityExpansion.AlgebraBinomialIdentityExpansion
 FractionSimplification = FractionSimplification.FractionSimplification
 FractionsProductAndQuotient = \
-                    FractionsProductAndQuotient.FractionsProductAndQuotient
+    FractionsProductAndQuotient.FractionsProductAndQuotient
 FractionsSum = FractionsSum.FractionsSum
 AlgebraFactorization_01 = AlgebraFactorization_01.AlgebraFactorization_01
 AlgebraFactorization_02 = AlgebraFactorization_02.AlgebraFactorization_02
@@ -77,73 +77,37 @@ AlgebraFactorization_03 = AlgebraFactorization_03.AlgebraFactorization_03
 AlgebraTest2 = AlgebraTest2.AlgebraTest2
 AlgebraMiniTest0 = AlgebraMiniTest0.AlgebraMiniTest0
 AlgebraMiniTest1 = AlgebraMiniTest1.AlgebraMiniTest1
-PythagoreanTheoremShortTest = PythagoreanTheoremShortTest.PythagoreanTheoremShortTest
+PythagoreanTheoremShortTest = \
+    PythagoreanTheoremShortTest.PythagoreanTheoremShortTest
 ConverseAndContrapositiveOfPythagoreanTheoremShortTest = \
     ConverseAndContrapositiveOfPythagoreanTheoremShortTest.\
-        ConverseAndContrapositiveOfPythagoreanTheoremShortTest
+    ConverseAndContrapositiveOfPythagoreanTheoremShortTest
 
 
-AVAILABLE = {"algebra-expression-reduction": \
-                 (AlgebraExpressionReduction,
-                     ""),
-             "algebra-expression-expansion": \
-                 (AlgebraExpressionExpansion,
-                     ""),
-             "algebra-binomial-identities-expansion": \
-                 (AlgebraBinomialIdentityExpansion,
-                     ""),
-             "algebra-short-test": \
-                 (AlgebraShortTest,
-                     ""),
-             "algebra-balance-01": \
-                 (AlgebraBalance_01,
-                     ""),
-             "algebra-factorization-01": \
-                 (AlgebraFactorization_01,
-                  ""),
-             "algebra-factorization-02": \
-                 (AlgebraFactorization_02,
-                  ""),
-             "algebra-factorization-03": \
-                 (AlgebraFactorization_03,
-                  ""),
-             "algebra-test-2": \
-                 (AlgebraTest2,
-                  ""),
-             "algebra-mini-test-0":\
-                 (AlgebraMiniTest0,
-                  ""),
-             "algebra-mini-test-1":\
-                 (AlgebraMiniTest1,
-                  ""),
-             "equations-basic": \
-                 (EquationsBasic,
-                  ""),
-             "equations-classic": \
-                 (EquationsClassic,
-                   ""),
-             "equations-harder": \
-                 (EquationsHarder,
-                  ""),
-             "equations-test": \
-                 (EquationsTest,
-                  ""),
-             "equations-short-test": \
-                 (EquationsShortTest,
-                  ""),
-             "fraction-simplification": \
-                 (FractionSimplification,
-                  ""),
-             "fractions-product-and-quotient": \
-                 (FractionsProductAndQuotient,
-                  ""),
-             "fractions-sum": \
-                 (FractionsSum,
-                  ""),
-             "pythagorean-theorem-short-test": \
-                 (PythagoreanTheoremShortTest,
-                  ""),
-             "converse-and-contrapositive-of-pythagorean-theorem-short-test": \
+AVAILABLE = {"algebra-expression-reduction": (AlgebraExpressionReduction, ""),
+             "algebra-expression-expansion": (AlgebraExpressionExpansion, ""),
+             "algebra-binomial-identities-expansion":
+                 (AlgebraBinomialIdentityExpansion, ""),
+             "algebra-short-test": (AlgebraShortTest, ""),
+             "algebra-balance-01": (AlgebraBalance_01, ""),
+             "algebra-factorization-01": (AlgebraFactorization_01, ""),
+             "algebra-factorization-02": (AlgebraFactorization_02, ""),
+             "algebra-factorization-03": (AlgebraFactorization_03, ""),
+             "algebra-test-2": (AlgebraTest2, ""),
+             "algebra-mini-test-0": (AlgebraMiniTest0, ""),
+             "algebra-mini-test-1": (AlgebraMiniTest1, ""),
+             "equations-basic": (EquationsBasic, ""),
+             "equations-classic": (EquationsClassic, ""),
+             "equations-harder": (EquationsHarder, ""),
+             "equations-test": (EquationsTest, ""),
+             "equations-short-test": (EquationsShortTest, ""),
+             "fraction-simplification": (FractionSimplification, ""),
+             "fractions-product-and-quotient": (FractionsProductAndQuotient,
+                                                ""),
+             "fractions-sum": (FractionsSum, ""),
+             "pythagorean-theorem-short-test": (PythagoreanTheoremShortTest,
+                                                ""),
+             "converse-and-contrapositive-of-pythagorean-theorem-short-test":
                  (ConverseAndContrapositiveOfPythagoreanTheoremShortTest,
                   "")
              }

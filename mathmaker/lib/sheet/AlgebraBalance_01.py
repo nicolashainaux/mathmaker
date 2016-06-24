@@ -29,8 +29,8 @@ SHEET_LAYOUT_TYPE = 'std'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
 SHEET_LAYOUT = {'exc': [None, 'all'],
-               'ans': [None, 'all']
-                 }
+                'ans': [None, 'all']
+                }
 
 
 # ------------------------------------------------------------------------------

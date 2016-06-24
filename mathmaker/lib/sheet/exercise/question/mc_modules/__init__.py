@@ -37,3 +37,11 @@ from . import vocabulary_addi, vocabulary_subtr
 from . import area_rectangle, area_square
 from . import perimeter_rectangle, perimeter_square
 from . import rectangle_length_or_width
+
+__all__ = ['multi_direct', 'multi_reversed', 'multi_hole', 'divi_direct',
+           'addi_direct', 'subtr_direct', 'rank_direct', 'rank_reversed',
+           'rank_numberof', 'vocabulary_simple_part_of_a_number',
+           'vocabulary_simple_multiple_of_a_number', 'vocabulary_multi',
+           'vocabulary_divi', 'vocabulary_addi', 'vocabulary_subtr',
+           'area_rectangle', 'area_square', 'perimeter_rectangle',
+           'perimeter_square', 'rectangle_length_or_width', ]

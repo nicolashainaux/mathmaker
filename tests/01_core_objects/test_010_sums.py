@@ -22,7 +22,8 @@
 
 import pytest
 
-from mathmaker.lib.core.base_calculus import Item, Sum, Product, Monomial, Polynomial
+from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Monomial,
+                                              Polynomial)
 from mathmaker.lib.core.base_calculus import BinomialIdentity, Expandable
 from tools import wrap_nb
 

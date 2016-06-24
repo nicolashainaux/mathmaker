@@ -23,12 +23,11 @@
 import sys
 
 from mathmaker import settings
+from mathmaker.lib import is_, error
 from mathmaker.lib.common import latex
+from mathmaker.lib.common.cst import TEXT_SCALES, TEXT_RANKS
 from mathmaker.lib.tools import header_comment
-from mathmaker.lib.common.cst import *
-from mathmaker.lib import is_
 from mathmaker.lib.core.base import Printable, Drawable
-from mathmaker.lib import *
 
 from . import Structure
 
@@ -302,10 +301,9 @@ automatically increments the counter").format(cmd_name="exercise",
     #   @warning then all the text will be either tiny or Huge.
     def translate_font_size(self, arg):
         if not type(arg) == str:
-            raise error.UncompatibleType(objct, "String")
+            raise error.UncompatibleType(arg, "String")
         elif arg not in TEXT_SCALES:
-            raise error.UncompatibleType(objct, "a text size"
-                                                + " (see TEXT_SCALES)")
+            raise error.UncompatibleType(arg, "a text size (see TEXT_SCALES)")
 
         arg_num = TEXT_RANKS[arg]
 

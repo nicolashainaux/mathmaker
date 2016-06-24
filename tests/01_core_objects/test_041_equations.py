@@ -22,7 +22,8 @@
 
 import pytest
 
-from mathmaker.lib.core.base_calculus import Item, Monomial, Sum, Fraction, SquareRoot
+from mathmaker.lib.core.base_calculus import (Item, Monomial, Sum, Fraction,
+                                              SquareRoot)
 from mathmaker.lib.core.base_calculus import Expandable
 from mathmaker.lib.core.base_calculus import Polynomial
 from mathmaker.lib.core.calculus import Equation

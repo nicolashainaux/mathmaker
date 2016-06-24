@@ -23,14 +23,18 @@
 import pytest
 
 from mathmaker.lib import shared
-from mathmaker.lib.tools.wording import (wrap, unwrapped, is_wrapped, is_wrapped_P,
-                               is_wrapped_p, is_unit, is_unitN,
-                               extract_formatting_tags_from, cut_off_hint_from,
-                               setup_wording_format_of,
-                               handle_valueless_names_tags,
-                               handle_valueless_unit_tags, process_attr_values,
-                               merge_nb_unit_pairs, insert_nonbreaking_spaces,
-                               post_process)
+from mathmaker.lib.tools.wording import (wrap, unwrapped, is_wrapped,
+                                         is_wrapped_P,
+                                         is_wrapped_p, is_unit, is_unitN,
+                                         extract_formatting_tags_from,
+                                         cut_off_hint_from,
+                                         setup_wording_format_of,
+                                         handle_valueless_names_tags,
+                                         handle_valueless_unit_tags,
+                                         process_attr_values,
+                                         merge_nb_unit_pairs,
+                                         insert_nonbreaking_spaces,
+                                         post_process)
 
 
 class raw_obj(object):

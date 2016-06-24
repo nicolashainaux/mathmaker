@@ -20,8 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from . import exercise
-
+# from . import exercise
 from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = 0
@@ -30,8 +29,8 @@ SHEET_LAYOUT_UNIT = "cm"
 # EXAMPLE OF A SHEET NOT USING ANY LAYOUT
 # -----------------------  lines_nb    col_widths   exercises
 SHEET_LAYOUT = {'exc': [None, 'all'],
-               'ans': [None, 'all']
-                 }
+                'ans': [None, 'all']
+                }
 # ANOTHER EXAMPLE
 # ------------------------  lines_nb    col_widths   exercises
 # SHEET_LAYOUT = {'exc': [[1, 6, 15], (1, 1),
@@ -53,6 +52,7 @@ SHEET_LAYOUT = {'exc': [None, 'all'],
 # None means no tabular and the following 1 means for the 1 next exercise.
 # 'all' and 'all_left' are synonym
 # 'jump' and 'next_page' will include a jump to next page before the next ones
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -83,7 +83,6 @@ class S_Model(S_Structure):
         # For instance:
         # ex1 = exercise.ProductReduction( many=30)
         # self.exercises_list.append(ex1)
-
 
         # END -----------------------------------------------------------------
         # Instructions for use (creating a new sheet):
