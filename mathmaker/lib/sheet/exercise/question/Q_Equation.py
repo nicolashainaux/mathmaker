@@ -20,12 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import *
+from mathmaker.lib.common.cst import RANDOMLY
 from mathmaker.lib import shared
+from mathmaker.lib.core.calculus import Equation
 from .Q_Structure import Q_Structure
-from mathmaker.lib.core.base_calculus import *
-from mathmaker.lib.core.calculus import *
-from mathmaker.lib.common.cst import *
 
 AVAILABLE_Q_KIND_VALUES = {'any_basic': ['default'],
                            'basic_addition': ['default'],
@@ -41,6 +39,7 @@ AVAILABLE_Q_KIND_VALUES = {'any_basic': ['default'],
                            'classic_x_twice': ['default'],
                            'any_simple_expandable': ['default'],
                            'any_double_expandable': ['default']}
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -72,7 +71,7 @@ class Q_Equation(Q_Structure):
         # That's the number of the question, not of the expressions it might
         # contain !
         self.number = ""
-        #if 'number_of_questions' in options:
+        # if 'number_of_questions' in options:
         #    self.number = options['number_of_questions']
 
         self.equation = Equation((RANDOMLY, q_kind))
@@ -99,5 +98,3 @@ class Q_Equation(Q_Structure):
         M = shared.machine
 
         return M.write(self.equation.auto_resolution())
-
-

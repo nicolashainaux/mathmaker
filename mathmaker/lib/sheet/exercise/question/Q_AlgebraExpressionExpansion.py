@@ -21,28 +21,30 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
-from mathmaker.lib import *
-from mathmaker.lib.common.cst import *
+from mathmaker.lib import randomly, is_
+from mathmaker.lib.common.cst import RANDOMLY
 from .Q_Structure import Q_Structure
-from mathmaker.lib.core.base_calculus import *
-from mathmaker.lib.core.calculus import *
+from mathmaker.lib.core.base_calculus import (Expandable, BinomialIdentity,
+                                              Sum, Product, Monomial,
+                                              Polynomial)
+from mathmaker.lib.core.calculus import Expression
 
 # DON'T FORGET FOR THIS QUESTION TO ALSO DEFINE
 # THE INIT CALLER (JUST AFTER AVAILABLE_Q_KIND_VALUES)
 AVAILABLE_Q_KIND_VALUES = \
-    {'monom01_polyn1': ['default'], # any of the 2 next
-     'monom0_polyn1': ['default'], # a×(bx + c)
-     'monom1_polyn1': ['default'], # ax×(bx + c)
-     'polyn1_polyn1': ['default'], # (ax + b)×(cx + d)
-     'any_basic_expd': ['default'], # any of the 3 prev.
+    {'monom01_polyn1': ['default'],  # any of the 2 next
+     'monom0_polyn1': ['default'],  # a×(bx + c)
+     'monom1_polyn1': ['default'],  # ax×(bx + c)
+     'polyn1_polyn1': ['default'],  # (ax + b)×(cx + d)
+     'any_basic_expd': ['default'],  # any of the 3 prev.
      'sum_of_any_basic_expd': ['default', 'easy', 'harder', 'with_a_binomial'],
      'sign_expansion': ['default'],
      'sign_expansion_short_test': ['default'],
      'numeric_sum_square': ['default'],
      'numeric_difference_square': ['default'],
      'numeric_squares_difference': ['default'],
-     'sum_square': ['default'], # passed to an __init__()
-     'difference_square': ['default'], # idem
+     'sum_square': ['default'],  # passed to an __init__()
+     'difference_square': ['default'],  # idem
      'squares_difference': ['default'],  # idem
      'any_binomial': ['default']   # idem (not really good ?)
      }
@@ -63,6 +65,7 @@ INIT_CALLER = \
      'difference_square': BinomialIdentity,
      'squares_difference': BinomialIdentity,
      'any_binomial': BinomialIdentity}
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -91,44 +94,43 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
         # value of **options
         options = self.options
 
-
         init_caller = INIT_CALLER[q_kind]
 
         self.expandable_objct = None
 
         self.numeric_aux = None
 
-        if q_kind=='any_basic_expd':
+        if q_kind == 'any_basic_expd':
             randomly_drawn = randomly.decimal_0_1()
             if randomly_drawn <= 0.25:
                 self.expandable_objct = Expandable((RANDOMLY,
                                                     'monom0_polyn1'),
-                                                    randomly_reversed=0.5)
+                                                   randomly_reversed=0.5)
             elif randomly_drawn <= 0.50:
                 self.expandable_objct = Expandable((RANDOMLY,
                                                     'monom1_polyn1'),
-                                                    randomly_reversed=0.5)
+                                                   randomly_reversed=0.5)
             else:
                 self.expandable_objct = Expandable((RANDOMLY,
                                                     'polyn1_polyn1'))
 
-        elif q_kind=='monom0_polyn1' or q_kind=='monom1_polyn1':
+        elif q_kind in ['monom0_polyn1', 'monom1_polyn1']:
             self.expandable_objct = Expandable((RANDOMLY,
                                                 q_kind),
-                                                 randomly_reversed=0.5)
-        elif q_kind=='monom01_polyn1':
+                                               randomly_reversed=0.5)
+        elif q_kind == 'monom01_polyn1':
             self.expandable_objct = Expandable((RANDOMLY,
-                                            randomly.pop(['monom0_polyn1',
-                                                          'monom1_polyn1'])),
-                                            randomly_reversed=0.5)
+                                                randomly
+                                                .pop(['monom0_polyn1',
+                                                      'monom1_polyn1'])),
+                                               randomly_reversed=0.5)
 
-        elif q_kind=='polyn1_polyn1':
+        elif q_kind == 'polyn1_polyn1':
             self.expandable_objct = Expandable((RANDOMLY,
                                                 'polyn1_polyn1'))
 
-        elif q_kind=='sum_of_any_basic_expd':
-            if self.q_subkind == 'harder' \
-                or self.q_subkind == 'with_a_binomial':
+        elif q_kind == 'sum_of_any_basic_expd':
+            if self.q_subkind in ['harder', 'with_a_binomial']:
                 # __
                 choices = ['monom0_polyn1', 'monom1_polyn1']
 
@@ -146,7 +148,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
                     if t == 'any_binomial':
                         aux_expd_list.append(BinomialIdentity((RANDOMLY,
                                                                'any'),
-                                                               **options))
+                                                              **options))
                     else:
                         aux_expd_list.append(Expandable((RANDOMLY, t)))
 
@@ -167,7 +169,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
                     aux_expd_list.append(Expandable((RANDOMLY, 'sign_exp')))
                 else:
                     aux_expd_list.append(Monomial((RANDOMLY, 15,
-                                                   randomly.integer(0,2))))
+                                                   randomly.integer(0, 2))))
 
                 final_list = list()
                 for i in range(len(aux_expd_list)):
@@ -198,14 +200,10 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
                 self.expandable_objct = Sum(final_list)
 
-        elif q_kind=='sign_expansion' or q_kind=='sign_expansion_short_test':
-            # __
-            sign_exp_kind = 0
+        elif q_kind in ['sign_expansion', 'sign_expansion_short_test']:
+            sign_exp_kind = options.get('sign_exp_kind', 0)
 
-            if 'sign_exp_kind' in options:
-                sign_exp_kind = options['sign_exp_kind']
-
-            if q_kind=='sign_expansion_short_test':
+            if q_kind == 'sign_expansion_short_test':
                 sign_exp_kind = 1
 
             if sign_exp_kind == 0:
@@ -226,7 +224,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
             long_aux_expd = Expandable((Monomial((randomly.sign(), 1, 0)),
                                         Polynomial((RANDOMLY, 15, 2, 3))))
 
-            if q_kind=='sign_expansion_short_test':
+            if q_kind == 'sign_expansion_short_test':
                 long_aux_expd = Expandable((Monomial(('-', 1, 0)),
                                             Polynomial((RANDOMLY, 15, 2, 3))))
 
@@ -272,27 +270,24 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
             self.expandable_objct = Sum(final_terms_list)
 
-        elif q_kind == 'numeric_sum_square' \
-            or q_kind == 'numeric_difference_square' \
-            or q_kind == 'numeric_squares_difference':
+        elif q_kind in ['numeric_sum_square', 'numeric_difference_square',
+                        'numeric_squares_difference']:
             # __
             self.expandable_objct = init_caller((options['couple'][0],
                                                  options['couple'][1]),
-                                                 **options)
-            if q_kind == 'numeric_sum_square' \
-                or q_kind == 'numeric_difference_square':
-                # __
+                                                **options)
+            if q_kind in ['numeric_sum_square', 'numeric_difference_square']:
                 self.numeric_aux = Sum([options['couple'][0],
-                                                 options['couple'][1]]).reduce_()
+                                        options['couple'][1]]).reduce_()
                 self.numeric_aux.set_exponent(2)
 
-            else: # squares_difference's case
+            else:  # squares_difference's case
                 aux1 = Sum([options['couple'][0],
-                                     options['couple'][1]]).reduce_()
+                            options['couple'][1]]).reduce_()
                 temp = options['couple'][1].clone()
                 temp.set_sign('-')
                 aux2 = Sum([options['couple'][0],
-                                     temp]).reduce_()
+                            temp]).reduce_()
                 self.numeric_aux = Product([aux1, aux2])
 
         else:
@@ -300,9 +295,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
                 q_kind = 'any'
 
             self.expandable_objct = init_caller((RANDOMLY, q_kind),
-                                                 **options)
-
-
+                                                **options)
 
         # Creation of the expression:
         number = 0
@@ -322,9 +315,8 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
         result = ""
 
-        if self.q_kind == 'numeric_sum_square' \
-            or self.q_kind == 'numeric_difference_square' \
-            or self.q_kind == 'numeric_squares_difference':
+        if self.q_kind in ['numeric_sum_square', 'numeric_difference_square',
+                           'numeric_squares_difference']:
             # __
             result += M.write_math_style2(M.type_string(self.numeric_aux))
 
@@ -335,7 +327,6 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
         return result
 
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
@@ -344,9 +335,8 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
         result = ""
 
-        if self.q_kind == 'numeric_sum_square' \
-            or self.q_kind == 'numeric_difference_square' \
-            or self.q_kind == 'numeric_squares_difference':
+        if self.q_kind in ['numeric_sum_square', 'numeric_difference_square',
+                           'numeric_squares_difference']:
             # __
             result += M.write_math_style2(M.type_string(self.numeric_aux))
             result += M.write_new_line()
@@ -354,5 +344,3 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
         result += M.write(self.expression.auto_expansion_and_reduction())
 
         return result
-
-

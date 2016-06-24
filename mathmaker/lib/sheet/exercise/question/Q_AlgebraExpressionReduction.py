@@ -20,12 +20,14 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import *
+from mathmaker.lib import randomly, is_
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
-from mathmaker.lib.core.base_calculus import *
-from mathmaker.lib.core.calculus import *
-from mathmaker.lib.common.cst import *
+from mathmaker.lib.core.base_calculus import (Product, Monomial, Item, Sum,
+                                              Polynomial, Expandable)
+from mathmaker.lib.core.calculus import Expression
+from mathmaker.lib.common.cst import RANDOMLY, NUMERIC
+from mathmaker.lib.common import alphabet
 
 # Shared constants
 AVAILABLE_Q_KIND_VALUES = {'product': ['default'],
@@ -39,39 +41,40 @@ AVAILABLE_Q_KIND_VALUES = {'product': ['default'],
 MAX_COEFF_TABLE = {'product': 10,
                    'sum_of_products': 10,
                    'sum': 10,
-                   'long_sum':15,
-                   'long_sum_including_a_coeff_1':15,
-                   'sum_not_reducible':20,
-                   'sum_with_minus-brackets':15}
+                   'long_sum': 15,
+                   'long_sum_including_a_coeff_1': 15,
+                   'sum_not_reducible': 20,
+                   'sum_with_minus-brackets': 15}
 
 MAX_EXPONENT_TABLE = {'product': 1,
-                     'sum_of_products': 1,
-                     'sum': 2,
-                     'long_sum':2,
-                     'long_sum_including_a_coeff_1':2,
-                     'sum_not_reducible':2,
-                     'sum_with_minus-brackets':2}
+                      'sum_of_products': 1,
+                      'sum': 2,
+                      'long_sum': 2,
+                      'long_sum_including_a_coeff_1': 2,
+                      'sum_not_reducible': 2,
+                      'sum_with_minus-brackets': 2}
 
 DEFAULT_MINIMUM_LENGTH_TABLE = {'product': 1,
                                 'sum_of_products': 2,
                                 'sum': 2,
-                                'long_sum':7,
-                                'long_sum_including_a_coeff_1':7,
-                                'sum_not_reducible':2,
-                                'sum_with_minus-brackets':4}
+                                'long_sum': 7,
+                                'long_sum_including_a_coeff_1': 7,
+                                'sum_not_reducible': 2,
+                                'sum_with_minus-brackets': 4}
 
 DEFAULT_MAXIMUM_LENGTH_TABLE = {'product': 1,
                                 'sum_of_products': 4,
                                 'sum': 6,
-                                'long_sum':10,
-                                'long_sum_including_a_coeff_1':10,
-                                'sum_not_reducible':3,
-                                'sum_with_minus-brackets':6}
+                                'long_sum': 10,
+                                'long_sum_including_a_coeff_1': 10,
+                                'sum_not_reducible': 3,
+                                'sum_with_minus-brackets': 6}
 
 # Product Reduction constants (PR_*)
 PR_MAX_LITERAL_ITEMS_NB = 2
 PR_SAME_LETTER_MAX_OCCURENCES_NB = 2
 PR_NUMERIC_ITEMS_MAX_NB = 2
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -171,32 +174,29 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                     # __
                     letters_package = options['use_these_letters']
 
-
                 # Maximum Items number. (We make sure at the same time that
                 # we won't
                 # risk to draw a greater number of letters than the available
                 # letters
                 # in letters_package)
                 max_literal_items_nb = min(PR_MAX_LITERAL_ITEMS_NB,
-                                                len(letters_package))
+                                           len(letters_package))
 
-                if 'max_literal_items_nb' in options                       \
-                    and options['max_literal_items_nb'] >= 2                  \
-                    and options['max_literal_items_nb'] <= 6:
+                if ('max_literal_items_nb' in options
+                    and 2 <= options['max_literal_items_nb'] <= 6):
                     # __
                     max_literal_items_nb = min(options['max_literal_items_nb'],
                                                len(letters_package))
 
                 # Maximum number of occurences of the same letter in
                 # the initial expression
-                same_letter_max_occurences_nb = \
-                                               PR_SAME_LETTER_MAX_OCCURENCES_NB
+                same_letter_max_occurences = PR_SAME_LETTER_MAX_OCCURENCES_NB
 
-                if 'nb_occurences_of_the_same_letter' in options             \
-                   and options['nb_occurences_of_the_same_letter'] >= 1:
+                if ('nb_occurences_of_the_same_letter' in options
+                    and options['nb_occurences_of_the_same_letter'] >= 1):
                     # __
-                    same_letter_max_occurences_nb = options[                 \
-                                            'nb_occurences_of_the_same_letter']
+                    same_letter_max_occurences = options['nb_occurences_of'
+                                                         '_the_same_letter']
 
                 # CREATION OF THE EXPRESSION
                 # We draw randomly the letters that will appear
@@ -222,7 +222,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                         # We make sure that at least one letter occurs twice
                         # so that the exercise remains interesting !
                         # But the number of cases this letter occurs 3 three
-                        # times  should be limited to keep sufficient
+                        # times  should be limited to keep sufficient
                         # simple cases for the pupils to begin with.
                         # It is really easy to make it much more complicated
                         # simply giving:
@@ -231,15 +231,15 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                         if randomly.decimal_0_1() < 0.5:
                             occurences_nb = 2
                         else:
-                            occurences_nb = randomly.integer(2,
-                                                 same_letter_max_occurences_nb)
+                            occurences_nb = randomly\
+                                .integer(2, same_letter_max_occurences)
                     else:
-                        occurences_nb = randomly.integer(1,
-                                                 same_letter_max_occurences_nb)
+                        occurences_nb = randomly\
+                            .integer(1, same_letter_max_occurences)
 
                     if occurences_nb >= 1:
-                       for k in range(occurences_nb):
-                           pre_items_list.append(drawn_letters[j])
+                        for k in range(occurences_nb):
+                            pre_items_list.append(drawn_letters[j])
 
                 # draw the number of numeric Items
                 nb_item_num = randomly.integer(1, PR_NUMERIC_ITEMS_MAX_NB)
@@ -261,7 +261,8 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                     # a row because it belongs to the exercise and there
                     # are many cases when
                     # the same letter is in the list in 3 over 4 elements.
-                    #if j >= 1 and next_item_kind == items_list[j - 1].raw_value:
+                    # if j >= 1 and next_item_kind == items_list[j - 1]
+                    # .raw_value:
                     #    pre_items_list.append(next_item_kind)
                     #    next_item_kind = randomly.pop(pre_items_list)
 
@@ -286,23 +287,21 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 # Let's take some × symbols off the Product to match a more
                 # usual situation
                 for i in range(len(self.objct) - 1):
-                    if (self.objct.factor[i].is_numeric()                     \
-                        and self.objct.factor[i + 1].is_literal())       \
-                       or                                                     \
-                       (self.objct.factor[i].is_literal()                     \
-                        and self.objct.factor[i + 1].is_literal()               \
-                        and self.objct.factor[i].raw_value                        \
-                                              != self.objct.factor[i + 1].raw_value \
-                        and randomly.decimal_0_1() > 0.5):
+                    if ((self.objct.factor[i].is_numeric()
+                         and self.objct.factor[i + 1].is_literal())
+                        or (self.objct.factor[i].is_literal()
+                            and self.objct.factor[i + 1].is_literal()
+                            and self.objct.factor[i].raw_value
+                            != self.objct.factor[i + 1].raw_value
+                        and randomly.decimal_0_1() > 0.5)):
                         # __
                         self.objct.info[i] = False
 
         # 2d CASE:
         # SUM OF PRODUCTS REDUCTION
         if q_kind == 'sum_of_products':
-
-            if not ('length' in options and is_.an_integer(options['length'])      \
-               and options['length'] >= 2):
+            if (not ('length' in options and is_.an_integer(options['length'])
+                and options['length'] >= 2)):
                 # __
                 length = randomly.integer(DEFAULT_MINIMUM_LENGTH,
                                           DEFAULT_MAXIMUM_LENGTH,
@@ -323,19 +322,18 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             # Creation of the Sum
             self.objct = Sum(products_list)
 
-
         # 3d CASE:
         # SUM REDUCTION
         if q_kind == 'sum':
             self.kind_of_answer = 'sum'
             # Let's determine the length of the Sum to create
-            if not ('length' in options and is_.an_integer(options['length'])      \
-               and options['length'] >= 1):
+            if not ('length' in options and is_.an_integer(options['length'])
+                    and options['length'] >= 1):
                 # __
-                length = randomly.integer(DEFAULT_MINIMUM_LENGTH,
-                                      DEFAULT_MAXIMUM_LENGTH,
-                                      weighted_table=[0.1, 0.25, 0.5,
-                                                      0.1, 0.05])
+                length = randomly\
+                    .integer(DEFAULT_MINIMUM_LENGTH,
+                             DEFAULT_MAXIMUM_LENGTH,
+                             weighted_table=[0.1, 0.25, 0.5, 0.1, 0.05])
 
             else:
                 length = options['length']
@@ -358,11 +356,9 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                     temp_sum.append(Monomial((randomly.sign(),
                                               1,
                                               1)))
-                else: # this should be 2d degree Polynomial without
-                      # any 1st degree term
-                    temp_sum.append(Monomial((randomly.sign(),
-                                              1,
-                                              2)))
+                else:
+                    # this should be 2d deg Polynomial w/out any 1st deg term
+                    temp_sum.append(Monomial((randomly.sign(), 1, 2)))
 
                 self.objct.reset_element()
 
@@ -405,7 +401,6 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
             self.objct = Polynomial(terms_list)
 
-
         if q_kind == 'sum_not_reducible':
             self.kind_of_answer = 'sum_not_reducible'
 
@@ -420,17 +415,16 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             for i in range(len(lil_box) - 1):
                 self.objct.append(randomly.pop(lil_box))
 
-
         if q_kind == 'sum_with_minus-brackets':
             minus_brackets = []
 
             for i in range(3):
                 minus_brackets.append(Expandable((Monomial(('-', 1, 0)),
-                                         Polynomial((RANDOMLY,
-                                                     15,
-                                                     2,
-                                                     randomly.integer(2,3))))))
-
+                                                  Polynomial((RANDOMLY,
+                                                              15, 2,
+                                                              randomly
+                                                              .integer(2,
+                                                                       3))))))
             m1 = Monomial((RANDOMLY, max_coeff, 0))
             m2 = Monomial((RANDOMLY, max_coeff, 1))
             m3 = Monomial((RANDOMLY, max_coeff, 2))
@@ -442,17 +436,17 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
             for i in range(3):
                 plus_brackets.append(Expandable((Monomial(('+', 1, 0)),
-                                        Polynomial((RANDOMLY,
-                                                    15,
-                                                    2,
-                                                    randomly.integer(2,3))))))
+                                                 Polynomial((RANDOMLY,
+                                                             15, 2,
+                                                             randomly
+                                                             .integer(2,
+                                                                      3))))))
 
             big_box = []
             big_box.append(minus_brackets[0])
 
-            if 'minus_brackets_nb' in options \
-                and options['minus_brackets_nb'] >= 2 \
-                and options['minus_brackets_nb'] <= 3:
+            if ('minus_brackets_nb' in options
+                and 2 <= options['minus_brackets_nb'] <= 3):
                 # __
                 big_box.append(minus_brackets[1])
 
@@ -462,13 +456,11 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             for i in range(randomly.integer(1, 4)):
                 big_box.append(randomly.pop(lil_box))
 
-            if 'plus_brackets_nb' in options \
-                and options['plus_brackets_nb'] >= 1 \
-                and options['plus_brackets_nb'] <= 3:
+            if ('plus_brackets_nb' in options
+                and 1 <= options['plus_brackets_nb'] <= 3):
                 # __
                 for i in range(options['plus_brackets_nb']):
                     big_box.append(plus_brackets[i])
-
 
             final_terms = []
 
@@ -479,8 +471,8 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
         # Creation of the expression:
         number = 0
-        if 'expression_number' in options                                     \
-           and is_.a_natural_int(options['expression_number']):
+        if ('expression_number' in options
+            and is_.a_natural_int(options['expression_number'])):
             # __
             number = options['expression_number']
 
@@ -513,21 +505,21 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 ordered_product = self.objct.order()
                 ordered_product.set_compact_display(False)
                 ordered_expression = Expression(self.expression.name,
-                                                     ordered_product)
-                result += M.write_math_style2(M.type_string(ordered_expression))
+                                                ordered_product)
+                result += M.write_math_style2(
+                    M.type_string(ordered_expression))
                 result += M.write_new_line()
 
             final_product = self.objct.reduce_()
             final_expression = Expression(self.expression.name,
-                                               final_product)
+                                          final_product)
 
             result += M.write_math_style2(M.type_string(final_expression))
             result += M.write_new_line()
 
-        elif (self.kind_of_answer == 'sum' \
-              or self.kind_of_answer == 'sum_not_reducible')\
-             and self.expression.\
-                         right_hand_side.expand_and_reduce_next_step() is None:
+        elif ((self.kind_of_answer in ['sum', 'sum_not_reducible'])
+              and self.expression.
+              right_hand_side.expand_and_reduce_next_step() is None):
             # __
             result += M.write_math_style2(M.type_string(self.expression))
             result += M.write_new_line()
@@ -538,7 +530,3 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             result += M.write(self.expression.auto_expansion_and_reduction())
 
         return result
-
-
-
-

@@ -20,27 +20,19 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import *
-from mathmaker.lib import shared
+# from mathmaker.lib import shared
+# from mathmaker.lib import ...
+# from mathmaker.lib.core.base_calculus import ...
 from .Q_Structure import Q_Structure
-
-#from mathmaker.lib.core.base_calculus import *
 
 # AVAILABLE_Q_KIND_VALUES lists so: {'q_kind1': ['q_subkind1',
 #                                                  'q_subkind2',
 #                                                   etc.],
 #                                     'q_kind2': ...}
 
-AVAILABLE_Q_KIND_VALUES = {'A': ['default',
-                                  '1',
-                                  '2'],
-                           'B': ['default',
-                                  '1',
-                                  '2'],
-                           'C': ['default',
-                                  '1',
-                                  '2']}
-
+AVAILABLE_Q_KIND_VALUES = {'A': ['default', '1', '2'],
+                           'B': ['default', '1', '2'],
+                           'C': ['default', '1', '2']}
 
 
 # ------------------------------------------------------------------------------
@@ -70,7 +62,6 @@ class Q_Model(Q_Structure):
         # value of **options
         options = self.options
 
-
         # Here you can begin to write code for the different
         # q_kinds & q_subkinds
         # if self.q_kind == '...':
@@ -81,7 +72,7 @@ class Q_Model(Q_Structure):
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
-        M = shared.machine
+        # M = shared.machine
         result = ""
 
         return result
@@ -90,9 +81,7 @@ class Q_Model(Q_Structure):
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
-        M = shared.machine
+        # M = shared.machine
         result = ""
 
         return result
-
-

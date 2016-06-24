@@ -20,151 +20,148 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import *
+from mathmaker.lib import randomly, is_
 from mathmaker.lib import shared
+
+from mathmaker.lib.core.root_calculus import Value, Exponented
+from mathmaker.lib.core.base_calculus import (Item, Product, Expandable, Sum,
+                                              Monomial, Polynomial)
+from mathmaker.lib.core.calculus import Equality, Expression
 from .Q_Structure import Q_Structure
+from mathmaker.lib.common.cst import RANDOMLY
 
-from mathmaker.lib.core.base_calculus import *
-from mathmaker.lib.core.calculus import *
-from mathmaker.lib.common.cst import *
+AVAILABLE_Q_KIND_VALUES = \
+    {'level_01':
+     ['default',
+      'ax + b',
+      'ax² + b',
+      'ax² + bx',
+      'three_terms',
+      'not_factorizable',
+      'mixed',
+      'mixed_factorizable'],
+     # C: common factor
+     # F1 & F2: the other factors
+     # deg1 and deg2 represent polynoms
+     # of 1st and 2d degree
+     # F1 and F2 will be randomly exchanged at creation
+     # of the expression, so a case like a×deg1 + a×deg2
+     # contains also a×deg2 + a×deg1
 
-AVAILABLE_Q_KIND_VALUES = {'level_01':['default',
-                                       'ax + b',
-                                       'ax² + b',
-                                       'ax² + bx',
-                                       'three_terms',
-                                       'not_factorizable',
-                                       'mixed',
-                                       'mixed_factorizable'],
+     # C × F1  ±  C × F2
 
-                          # C: common factor
-                          # F1 & F2: the other factors
-                          # deg1 and deg2 represent polynoms
-                          # of 1st and 2d degree
-                          # F1 and F2 will be randomly exchanged at creation
-                          # of the expression, so a case like a×deg1 + a×deg2
-                          # contains also a×deg2 + a×deg1
+     'level_02':
+     ['default',   # synonym to type_123
+      'type_123',  # any of type_1, type_2, type_3 (a polynom as common factor)
+      'type_1',    # any of type_1_*
+      'type_1_ABC',  # any of type 1 A, B and C cases
+      'type_1_DEF',  # any of type 1 D, E and F cases
+      'type_1_GHI',  # any of type 1 G, H and I cases
+      'type_1_A',  # any of A1 or A0
+      'type_1_B',  # any of B1 or B0
+      'type_1_C',  # synonym to C0
+      'type_1_D',  # any of D1 or D0
+      'type_1_E',  # .
+      'type_1_F',  # .
+      'type_1_G',  # .
+      'type_1_H',  # .
+      'type_1_I',  # .
+      'type_1_0',  # any of type_1_ * 0 cases
+      'type_1_1',  # any of type_1_*1 cases
+      'type_1_A0',  # a×deg1 + a×deg1' (deg * : at least 2 terms & a!=1)
+      'type_1_B0',  # a×deg2 + a×deg2' (deg * : at least 2 terms & a!=1)
+      'type_1_C0',  # a×deg1 + a×deg2 (deg * : at least 2 terms & a!=1)
+      'type_1_D0',  # ax×deg1 + ax×deg1' (deg * : at least 2 terms)
+      'type_1_E0',  # ax×deg2 + ax×deg2' (deg * : at least 2 terms)
+      'type_1_F0',  # ax×deg1 + ax×deg2 (deg * : at least 2 terms)
+      'type_1_G0',  # ax²×deg1 + ax²×deg1' (deg * : at least 2 terms)
+      'type_1_H0',  # ax²×deg2 + ax²×deg2' (deg * : at least 2 terms)
+      'type_1_I0',  # ax²×deg1 + ax²×deg2 (deg * : at least 2 terms)
+      'type_1_A1',  # a×deg1 + a×1
+      'type_1_B1',  # a×deg2 + a×1
+      # 'type_1_C1', # C1 has no sense
+      'type_1_D1',  # ax×deg1 + ax×1
+      'type_1_E1',  # ax×deg2 + ax×1
+      # 'type_1_F1', # F1 has no sense
+      'type_1_G1',  # ax²×deg1 + ax²×1
+      'type_1_H1',  # ax²×deg2 + ax²×1
+      # 'type_1_I1', # I1 has no sense
 
-                          # C × F1  ±  C × F2
+      'type_2',    # any of type_2_*
+      'type_2_ABC',  # any of type 2 A, B and C cases
+      'type_2_DEF',  # any of type 2 D, E and F cases
+      'type_2_A',  # any of A1 or A0
+      'type_2_B',  # any of B1 or B0
+      'type_2_C',  # synonym to C0
+      'type_2_D',  # any of D1 or D0
+      'type_2_E',  # .
+      'type_2_F',  # .
+      'type_2_0',  # any of type_2_ * 0 cases
+      'type_2_1',  # any of type_2_*1 cases
+      'type_2_A0',  # (ax+b)×deg1 + (ax+b)×deg1'
+      'type_2_B0',  # (ax+b)×deg2 + (ax+b)×deg2'
+      'type_2_C0',  # (ax+b)×deg1 + (ax+b)×deg2
+      'type_2_D0',  # (ax²+b)×deg1 + (ax²+b)×deg1'
+      'type_2_E0',  # (ax²+b)×deg2 + (ax²+b)×deg2'
+      'type_2_F0',  # (ax²+b)×deg1 + (ax²+b)×deg2
+      'type_2_A1',  # (ax+b)×deg1 + (ax+b)×1
+      'type_2_B1',  # (ax+b)×deg2 + (ax+b)×1
+      # 'type_2_C1', # C1 has no sense
+      'type_2_D1',  # (ax²+b)×deg1 + (ax²+b)×1
+      'type_2_E1',  # (ax²+b)×deg2 + (ax²+b)×1
+      # 'type_2_F1', # F1 has no sense
 
- 'level_02':['default',   # synonym to type_123
-             'type_123',  # any of type_1, type_2, type_3 (a polynom as
-                          #                                   common factor)
-             'type_1',    # any of type_1_*
-             'type_1_ABC', # any of type 1 A, B and C cases
-             'type_1_DEF', # any of type 1 D, E and F cases
-             'type_1_GHI', # any of type 1 G, H and I cases
-             'type_1_A',  # any of A1 or A0
-             'type_1_B',  # any of B1 or B0
-             'type_1_C',  # synonym to C0
-             'type_1_D',  # any of D1 or D0
-             'type_1_E',  # .
-             'type_1_F',  # .
-             'type_1_G',  # .
-             'type_1_H',  # .
-             'type_1_I',  # .
-             'type_1_0',  # any of type_1_ * 0 cases
-             'type_1_1',  # any of type_1_*1 cases
-             'type_1_A0', # a×deg1 + a×deg1' (deg * : at least 2 terms & a!=1)
-             'type_1_B0', # a×deg2 + a×deg2' (deg * : at least 2 terms & a!=1)
-             'type_1_C0', # a×deg1 + a×deg2 (deg * : at least 2 terms & a!=1)
-             'type_1_D0', # ax×deg1 + ax×deg1' (deg * : at least 2 terms)
-             'type_1_E0', # ax×deg2 + ax×deg2' (deg * : at least 2 terms)
-             'type_1_F0', # ax×deg1 + ax×deg2 (deg * : at least 2 terms)
-             'type_1_G0', # ax²×deg1 + ax²×deg1' (deg * : at least 2 terms)
-             'type_1_H0', # ax²×deg2 + ax²×deg2' (deg * : at least 2 terms)
-             'type_1_I0', # ax²×deg1 + ax²×deg2 (deg * : at least 2 terms)
-             'type_1_A1', # a×deg1 + a×1
-             'type_1_B1', # a×deg2 + a×1
-             #'type_1_C1', # C1 has no sense
-             'type_1_D1', # ax×deg1 + ax×1
-             'type_1_E1', # ax×deg2 + ax×1
-             #'type_1_F1', # F1 has no sense
-             'type_1_G1', # ax²×deg1 + ax²×1
-             'type_1_H1', # ax²×deg2 + ax²×1
-             #'type_1_I1', # I1 has no sense
+      'type_3',    # any of type_3_*
+      'type_3_ABC',  # any of type 3 A, B and C cases
+      'type_3_A',  # any of A1 or A0
+      'type_3_B',  # any of B1 or B0
+      'type_3_C',  # synonym to C0
+      'type_3_0',   # any of type_3_ * 0 cases
+      'type_3_1'   # any of type_3_*1 cases
+      'type_3_A0',  # (ax²+bx+c)×deg1 + (ax²+bx+c)×deg1'
+      'type_3_B0',  # (ax²+bx+c)×deg2 + (ax²+bx+c)×deg2'
+      'type_3_C0',  # (ax²+bx+c)×deg1 + (ax²+bx+c)×deg2
+      'type_3_A1',  # (ax²+bx+c)×deg1 + (ax²+bx+c)×1
+      'type_3_B1',  # (ax²+bx+c)×deg2 + (ax²+bx+c)×1
+      # 'type_3_C1'  # C1 has no sense
+      'type_4_A0'  # (ax+b)²×deg1 + (ax+b)×deg1'
+      ],
 
-             'type_2',    # any of type_2_*
-             'type_2_ABC', # any of type 2 A, B and C cases
-             'type_2_DEF', # any of type 2 D, E and F cases
-             'type_2_A',  # any of A1 or A0
-             'type_2_B',  # any of B1 or B0
-             'type_2_C',  # synonym to C0
-             'type_2_D',  # any of D1 or D0
-             'type_2_E',  # .
-             'type_2_F',  # .
-             'type_2_0',  # any of type_2_ * 0 cases
-             'type_2_1',  # any of type_2_*1 cases
-             'type_2_A0', # (ax+b)×deg1 + (ax+b)×deg1'
-             'type_2_B0', # (ax+b)×deg2 + (ax+b)×deg2'
-             'type_2_C0', # (ax+b)×deg1 + (ax+b)×deg2
-             'type_2_D0', # (ax²+b)×deg1 + (ax²+b)×deg1'
-             'type_2_E0', # (ax²+b)×deg2 + (ax²+b)×deg2'
-             'type_2_F0', # (ax²+b)×deg1 + (ax²+b)×deg2
-             'type_2_A1', # (ax+b)×deg1 + (ax+b)×1
-             'type_2_B1', # (ax+b)×deg2 + (ax+b)×1
-             #'type_2_C1', # C1 has no sense
-             'type_2_D1', # (ax²+b)×deg1 + (ax²+b)×1
-             'type_2_E1', # (ax²+b)×deg2 + (ax²+b)×1
-             #'type_2_F1', # F1 has no sense
-
-             'type_3',    # any of type_3_*
-             'type_3_ABC', # any of type 3 A, B and C cases
-             'type_3_A',  # any of A1 or A0
-             'type_3_B',  # any of B1 or B0
-             'type_3_C',  # synonym to C0
-             'type_3_0',   # any of type_3_ * 0 cases
-             'type_3_1'   # any of type_3_*1 cases
-             'type_3_A0', # (ax²+bx+c)×deg1 + (ax²+bx+c)×deg1'
-             'type_3_B0', # (ax²+bx+c)×deg2 + (ax²+bx+c)×deg2'
-             'type_3_C0', # (ax²+bx+c)×deg1 + (ax²+bx+c)×deg2
-             'type_3_A1', # (ax²+bx+c)×deg1 + (ax²+bx+c)×1
-             'type_3_B1', # (ax²+bx+c)×deg2 + (ax²+bx+c)×1
-             #'type_3_C1' # C1 has no sense
-
-             'type_4_A0'  # (ax+b)²×deg1 + (ax+b)×deg1'
-],
-
-
-           # Here are the binomial identities
-
-'level_03':['default',   # synonym to 'any'
-            'any',
-            'any_mixed',              # any but from the mixed types
-                                      # (order of the terms is changed)
-            'any_straight',           # any but not from a mixed type
-            'any_true',               # any that can be factorized
-            'any_fake',               # any that cannot be factorized
-            'any_true_straight',      # any that can be factorized, not mixed
-            'any_fake_straight',      # any that cannot be factorized, not mixed
-            'any_true_mixed',         # any that can be factorized, mixed
-            'any_fake_mixed',         # any that cannot be factorized, mixed
-            'sum_square',               # (ax)² + 2abx + b²
-            'sum_square_mixed',         # like above but terms' order is changed
-            'difference_square',        # (ax)² - 2abx + b²
-            'difference_square_mixed',  # like above but terms' order is changed
-            'squares_difference',       # (ax)² - b²
-            'squares_difference_mixed', # like above but terms' order is changed
-            'fake_01',       # 2×a×b doesn't match a² and b² (sum)
-            'fake_01_mixed', # 2×a×b doesn't match a² and b² (sum, mixed)
-            'fake_02',       # 2×a×b doesn't match a² and b² (difference)
-            'fake_02_mixed', # 2×a×b doesn't match a² and b² (difference, mixed)
-            'fake_03',       # (ax)² + b²
-            'fake_03_mixed', # b² + (ax)²
-            'fake_04_any',   # any of fake_04 (signs don't match a binomial)
-            'fake_04_any_straight',
-            'fake_04_any_mixed',
-            'fake_04_A',        #  (ax)² + 2abx - b²
-            'fake_04_A_mixed',
-            'fake_04_B',        # -(ax)² + 2abx + b²
-            'fake_04_B_mixed',
-            'fake_04_C',        #  (ax)² - 2abx - b²
-            'fake_04_C_mixed',
-            'fake_04_D',        # -(ax)² - 2abx + b²
-            'fake_04_D_mixed']
-
-}
-
+     # Here are the binomial identities
+     'level_03':
+     ['default',   # synonym to 'any'
+      'any',
+      'any_mixed',  # any but from the mixed types (changed order of the terms)
+      'any_straight',           # any but not from a mixed type
+      'any_true',               # any that can be factorized
+      'any_fake',               # any that cannot be factorized
+      'any_true_straight',      # any that can be factorized, not mixed
+      'any_fake_straight',      # any that cannot be factorized, not mixed
+      'any_true_mixed',         # any that can be factorized, mixed
+      'any_fake_mixed',         # any that cannot be factorized, mixed
+      'sum_square',               # (ax)² + 2abx + b²
+      'sum_square_mixed',         # like above but terms' order is changed
+      'difference_square',        # (ax)² - 2abx + b²
+      'difference_square_mixed',  # like above but terms' order is changed
+      'squares_difference',       # (ax)² - b²
+      'squares_difference_mixed',  # like above but terms' order is changed
+      'fake_01',       # 2×a×b doesn't match a² and b² (sum)
+      'fake_01_mixed',  # 2×a×b doesn't match a² and b² (sum, mixed)
+      'fake_02',       # 2×a×b doesn't match a² and b² (difference)
+      'fake_02_mixed',  # 2×a×b doesn't match a² and b² (difference, mixed)
+      'fake_03',       # (ax)² + b²
+      'fake_03_mixed',  # b² + (ax)²
+      'fake_04_any',   # any of fake_04 (signs don't match a binomial)
+      'fake_04_any_straight',
+      'fake_04_any_mixed',
+      'fake_04_A',        # (ax)² + 2abx - b²
+      'fake_04_A_mixed',
+      'fake_04_B',        # -(ax)² + 2abx + b²
+      'fake_04_B_mixed',
+      'fake_04_C',        # (ax)² - 2abx - b²
+      'fake_04_C_mixed',
+      'fake_04_D',        # -(ax)² - 2abx + b²
+      'fake_04_D_mixed']}
 
 
 # ------------------------------------------------------------------------------
@@ -206,13 +203,13 @@ class Q_Factorization(Q_Structure):
 
             if q_subkind == 'mixed':
                 q_subkind = randomly.pop(['default',
-                                        'three_terms',
-                                        'not_factorizable'])
+                                          'three_terms',
+                                          'not_factorizable'])
             elif q_subkind == 'mixed_factorizable':
                 q_subkind = randomly.pop(['default',
-                                        'three_terms'])
+                                          'three_terms'])
 
-            #steps = level_01(subkind)
+            # steps = level_01(subkind)
 
         elif q_kind == 'level_02':
             steps_method = level_02
@@ -225,145 +222,143 @@ class Q_Factorization(Q_Structure):
 
             if q_subkind == 'type_1':
                 q_subkind = randomly.pop(['type_1_ABC',
-                                        'type_1_DEF',
-                                        'type_1_GHI'])
+                                          'type_1_DEF',
+                                          'type_1_GHI'])
 
             if q_subkind == 'type_1_ABC':
                 q_subkind = randomly.pop(['type_1_A',
-                                        'type_1_B',
-                                        'type_1_C'])
+                                          'type_1_B',
+                                          'type_1_C'])
 
             if q_subkind == 'type_1_DEF':
                 q_subkind = randomly.pop(['type_1_D',
-                                        'type_1_E',
-                                        'type_1_F'])
+                                          'type_1_E',
+                                          'type_1_F'])
 
             if q_subkind == 'type_1_GHI':
                 q_subkind = randomly.pop(['type_1_G',
-                                        'type_1_H',
-                                        'type_1_I'])
+                                          'type_1_H',
+                                          'type_1_I'])
 
             if q_subkind == 'type_1_A':
                 q_subkind = randomly.pop(['type_1_A0',
-                                        'type_1_A1'])
+                                          'type_1_A1'])
             if q_subkind == 'type_1_B':
                 q_subkind = randomly.pop(['type_1_B0',
-                                        'type_1_B1'])
+                                          'type_1_B1'])
             if q_subkind == 'type_1_C':
                 q_subkind = 'type_1_C0'
 
             if q_subkind == 'type_1_D':
                 q_subkind = randomly.pop(['type_1_D0',
-                                        'type_1_D1'])
+                                          'type_1_D1'])
             if q_subkind == 'type_1_E':
                 q_subkind = randomly.pop(['type_1_E0',
-                                        'type_1_E1'])
+                                          'type_1_E1'])
             if q_subkind == 'type_1_F':
                 q_subkind = 'type_1_F0'
 
             if q_subkind == 'type_1_G':
                 q_subkind = randomly.pop(['type_1_G0',
-                                        'type_1_G1'])
+                                          'type_1_G1'])
             if q_subkind == 'type_1_H':
                 q_subkind = randomly.pop(['type_1_H0',
-                                        'type_1_H1'])
+                                          'type_1_H1'])
             if q_subkind == 'type_1_I':
                 q_subkind = 'type_1_I0'
 
             if q_subkind == 'type_1_0':
                 q_subkind = randomly.pop(['type_1_A0',
-                                        'type_1_B0',
-                                        'type_1_C0',
-                                        'type_1_D0',
-                                        'type_1_E0',
-                                        'type_1_F0',
-                                        'type_1_G0',
-                                        'type_1_H0',
-                                        'type_1_I0'])
+                                          'type_1_B0',
+                                          'type_1_C0',
+                                          'type_1_D0',
+                                          'type_1_E0',
+                                          'type_1_F0',
+                                          'type_1_G0',
+                                          'type_1_H0',
+                                          'type_1_I0'])
 
             if q_subkind == 'type_1_1':
                 q_subkind = randomly.pop(['type_1_A1',
-                                        'type_1_B1',
-                                        'type_1_D1',
-                                        'type_1_E1',
-                                        'type_1_G1',
-                                        'type_1_H1'])
+                                          'type_1_B1',
+                                          'type_1_D1',
+                                          'type_1_E1',
+                                          'type_1_G1',
+                                          'type_1_H1'])
 
             if q_subkind == 'type_2':
                 q_subkind = randomly.pop(['type_2_ABC',
-                                        'type_2_DEF'])
+                                          'type_2_DEF'])
 
             if q_subkind == 'type_2_ABC':
                 q_subkind = randomly.pop(['type_2_A',
-                                        'type_2_B',
-                                        'type_2_C'])
+                                          'type_2_B',
+                                          'type_2_C'])
 
             if q_subkind == 'type_2_DEF':
                 q_subkind = randomly.pop(['type_2_D',
-                                        'type_2_E',
-                                        'type_2_F'])
+                                          'type_2_E',
+                                          'type_2_F'])
 
             if q_subkind == 'type_2_A':
                 q_subkind = randomly.pop(['type_2_A0',
-                                        'type_2_A1'])
+                                          'type_2_A1'])
             if q_subkind == 'type_2_B':
                 q_subkind = randomly.pop(['type_2_B0',
-                                        'type_2_B1'])
+                                          'type_2_B1'])
             if q_subkind == 'type_2_C':
                 q_subkind = 'type_2_C0'
 
             if q_subkind == 'type_2_D':
                 q_subkind = randomly.pop(['type_2_D0',
-                                        'type_2_D1'])
+                                          'type_2_D1'])
             if q_subkind == 'type_2_E':
                 q_subkind = randomly.pop(['type_2_E0',
-                                        'type_2_E1'])
+                                          'type_2_E1'])
             if q_subkind == 'type_2_F':
                 q_subkind = 'type_2_F0'
 
             if q_subkind == 'type_2_0':
                 q_subkind = randomly.pop(['type_2_A0',
-                                        'type_2_B0',
-                                        'type_2_C0',
-                                        'type_2_D0',
-                                        'type_2_E0',
-                                        'type_2_F0'])
+                                          'type_2_B0',
+                                          'type_2_C0',
+                                          'type_2_D0',
+                                          'type_2_E0',
+                                          'type_2_F0'])
 
             if q_subkind == 'type_2_1':
                 q_subkind = randomly.pop(['type_2_A1',
-                                        'type_2_B1',
-                                        'type_2_D1',
-                                        'type_2_E1'])
+                                          'type_2_B1',
+                                          'type_2_D1',
+                                          'type_2_E1'])
 
             if q_subkind == 'type_3':
                 q_subkind = 'type_3_ABC'
 
             if q_subkind == 'type_3_ABC':
                 q_subkind = randomly.pop(['type_3_A',
-                                        'type_3_B',
-                                        'type_3_C'])
+                                          'type_3_B',
+                                          'type_3_C'])
 
             if q_subkind == 'type_3_A':
                 q_subkind = randomly.pop(['type_3_A0',
-                                        'type_3_A1'])
+                                          'type_3_A1'])
             if q_subkind == 'type_3_B':
                 q_subkind = randomly.pop(['type_3_B0',
-                                        'type_3_B1'])
+                                          'type_3_B1'])
             if q_subkind == 'type_3_C':
                 q_subkind = 'type_3_C0'
 
             if q_subkind == 'type_3_0':
                 q_subkind = randomly.pop(['type_3_A0',
-                                        'type_3_B0',
-                                        'type_3_C0'])
+                                          'type_3_B0',
+                                          'type_3_C0'])
 
             if q_subkind == 'type_3_1':
                 q_subkind = randomly.pop(['type_3_A1',
-                                        'type_3_B1'])
+                                          'type_3_B1'])
 
-
-
-            #steps = level_02(subkind, **options)
+            # steps = level_02(subkind, **options)
 
         elif q_kind == 'level_03':
             steps_method = level_03
@@ -431,8 +426,8 @@ class Q_Factorization(Q_Structure):
 
         # Creation of the expression:
         number = 0
-        if 'expression_number' in options                                 \
-           and is_.a_natural_int(options['expression_number']):
+        if ('expression_number' in options
+            and is_.a_natural_int(options['expression_number'])):
             # __
             number = options['expression_number']
         self.expression = Expression(number, steps[0])
@@ -440,26 +435,25 @@ class Q_Factorization(Q_Structure):
         # Putting the steps and the solution together:
         self.steps = []
 
-        #for i in xrange(len(steps) - 1):
+        # for i in xrange(len(steps) - 1):
         #    self.steps.append(Expression(number,
         #                                          steps[i]
         #                                          )
         #                     )
         #
-        #solution = steps[len(steps) - 1]
+        # solution = steps[len(steps) - 1]
         #
-        #if isinstance(solution, Exponented):
+        # if isinstance(solution, Exponented):
         #    self.steps.append(Expression(number,
         #                                          solution
         #                                          )
         #                     )
-        #else:
+        # else:
         #    self.steps.append(solution)
 
         for i in range(len(steps)):
             if isinstance(steps[i], Exponented):
-                self.steps.append(Expression(number,
-                                                      steps[i]))
+                self.steps.append(Expression(number, steps[i]))
             else:
                 self.steps.append(steps[i])
 
@@ -491,6 +485,7 @@ class Q_Factorization(Q_Structure):
 
         return result
 
+
 # --------------------------------------------------------------------------
 ##
 #   @brief Creates & returns the solution and the answer's steps.
@@ -514,11 +509,7 @@ def level_01(q_subkind, **options):
                                                       1,
                                                       weighted_table=[0.85,
                                                                       0.15]))
-
-        elif q_subkind == 'three_terms' \
-            or q_subkind == 'ax + b' \
-            or q_subkind == 'ax² + b':
-            # __
+        elif q_subkind in ['three_terms', 'ax + b', 'ax² + b']:
             common_factor = Monomial((RANDOMLY, 6, 0))
 
         elif q_subkind == 'ax² + bx':
@@ -529,7 +520,6 @@ def level_01(q_subkind, **options):
         # factorizable:
         if common_factor.get_degree() == 0:
             common_factor.set_coeff(randomly.integer(2, 6))
-
 
         # signs are randomly chosen ; the only case that is to be avoided
         # is all signs are negative (then it wouldn't factorize well...
@@ -565,17 +555,16 @@ def level_01(q_subkind, **options):
         else:
             lil_box.append(Monomial(('+', 1, 1)))
 
-        if (common_factor.get_degree() == 0 \
-           and randomly.integer(1, 20) > 17 \
-           and q_subkind == 'default') \
-           or q_subkind == 'three_terms':
+        if ((common_factor.get_degree() == 0
+             and randomly.integer(1, 20) > 17
+             and q_subkind == 'default')
+            or q_subkind == 'three_terms'):
             # __
             lil_box.append(Monomial(('+', 1, 2)))
 
         first_term = randomly.pop(lil_box)
         second_term = randomly.pop(lil_box)
         third_term = None
-
 
         first_term.set_coeff(coeff_1)
         first_term.set_sign(randomly.pop(signs))
@@ -658,12 +647,13 @@ def level_01(q_subkind, **options):
                 second_term.set_degree(0)
 
         steps = []
-        solution = \
-        _("So far, we don't know if this expression can be factorized.")
+        solution = _("So far, we don't know if this expression can be "
+                     "factorized.")
         steps.append(Sum([first_term, second_term]))
         steps.append(solution)
 
         return steps
+
 
 # --------------------------------------------------------------------------
 ##
@@ -692,12 +682,8 @@ def level_02(q_subkind, **options):
     b_val = randomly.integer(1, max_coeff)
     c_val = randomly.integer(1, max_coeff)
 
-    if q_subkind == 'type_1_A0' \
-       or q_subkind == 'type_1_B0' \
-       or q_subkind == 'type_1_C0' \
-       or q_subkind == 'type_1_A1' \
-       or q_subkind == 'type_1_B1' \
-       or q_subkind == 'type_1_C1':
+    if q_subkind in ['type_1_A0', 'type_1_B0', 'type_1_C0', 'type_1_A1',
+                     'type_1_B1', 'type_1_C1']:
         # __
         c_val = randomly.integer(2, max_coeff)
 
@@ -714,22 +700,10 @@ def level_02(q_subkind, **options):
                             1))
         deg1_p = None
 
-        if q_subkind == 'type_1_A0' \
-           or q_subkind == 'type_1_B0' \
-           or q_subkind == 'type_1_C0' \
-           or q_subkind == 'type_1_D0' \
-           or q_subkind == 'type_1_E0' \
-           or q_subkind == 'type_1_F0' \
-           or q_subkind == 'type_1_G0' \
-           or q_subkind == 'type_1_H0' \
-           or q_subkind == 'type_1_I0' \
-           or q_subkind == 'type_1_A1' \
-           or q_subkind == 'type_1_B1' \
-           or q_subkind == 'type_1_D1' \
-           or q_subkind == 'type_1_E1' \
-           or q_subkind == 'type_1_G1' \
-           or q_subkind == 'type_1_H1' \
-           or q_subkind == 'type_4_A0':
+        if q_subkind in ['type_1_A0', 'type_1_B0', 'type_1_C0', 'type_1_D0',
+                         'type_1_E0', 'type_1_F0', 'type_1_G0', 'type_1_H0',
+                         'type_1_I0', 'type_1_A1', 'type_1_B1', 'type_1_D1',
+                         'type_1_E1', 'type_1_G1', 'type_1_H1', 'type_4_A0']:
             # __
             deg1_p = Monomial((randomly.sign(),
                                randomly.integer(1, max_coeff),
@@ -747,7 +721,6 @@ def level_02(q_subkind, **options):
         else:
             deg1.append(deg1_mx)
 
-
     # deg2: mx² + px + r
     # and we also need two of them
     deg2 = []
@@ -759,43 +732,32 @@ def level_02(q_subkind, **options):
         deg2_px = None
         deg2_r = None
 
-        if q_subkind == 'type_1_A0' \
-           or q_subkind == 'type_1_B0' \
-           or q_subkind == 'type_1_C0' \
-           or q_subkind == 'type_1_D0' \
-           or q_subkind == 'type_1_E0' \
-           or q_subkind == 'type_1_F0' \
-           or q_subkind == 'type_1_G0' \
-           or q_subkind == 'type_1_H0' \
-           or q_subkind == 'type_1_I0' \
-           or q_subkind == 'type_1_A1' \
-           or q_subkind == 'type_1_B1' \
-           or q_subkind == 'type_1_D1' \
-           or q_subkind == 'type_1_E1' \
-           or q_subkind == 'type_1_G1' \
-           or q_subkind == 'type_1_H1':
+        if q_subkind in ['type_1_A0', 'type_1_B0', 'type_1_C0', 'type_1_D0',
+                         'type_1_E0', 'type_1_F0', 'type_1_G0', 'type_1_H0',
+                         'type_1_I0', 'type_1_A1', 'type_1_B1', 'type_1_D1',
+                         'type_1_E1', 'type_1_G1', 'type_1_H1']:
             # __
             if randomly.heads_or_tails():
                 deg2_px = Monomial((randomly.sign(),
                                     randomly.integer(1, max_coeff),
                                     1))
                 deg2_r = Monomial((randomly.sign(),
-                                    randomly.integer(0, max_coeff),
-                                    0))
+                                   randomly.integer(0, max_coeff),
+                                   0))
             else:
                 deg2_px = Monomial((randomly.sign(),
                                     randomly.integer(0, max_coeff),
                                     1))
                 deg2_r = Monomial((randomly.sign(),
-                                    randomly.integer(1, max_coeff),
-                                    0))
+                                   randomly.integer(1, max_coeff),
+                                   0))
         else:
             deg2_px = Monomial((randomly.sign(),
                                 randomly.integer(0, max_coeff),
                                 1))
             deg2_r = Monomial((randomly.sign(),
-                                randomly.integer(0, max_coeff),
-                                0))
+                               randomly.integer(0, max_coeff),
+                               0))
 
         lil_box = [deg2_mx2]
 
@@ -810,57 +772,37 @@ def level_02(q_subkind, **options):
 
         deg2.append(Polynomial(monomials_list_for_deg2))
 
-
     # Let's attribute the common factor C according to the required type
     # (NB: expression ± C×F1 ± C×F2)
     C = None
 
-    if q_subkind == 'type_1_A0' \
-       or q_subkind == 'type_1_B0' \
-       or q_subkind == 'type_1_C0' \
-       or q_subkind == 'type_1_A1' \
-       or q_subkind == 'type_1_B1':
+    if q_subkind in ['type_1_A0', 'type_1_B0', 'type_1_C0', 'type_1_A1',
+                     'type_1_B1']:
         # __
         C = c
 
-    elif q_subkind == 'type_1_D0' \
-         or q_subkind == 'type_1_E0' \
-         or q_subkind == 'type_1_F0' \
-         or q_subkind == 'type_1_D1' \
-         or q_subkind == 'type_1_E1':
+    elif q_subkind in ['type_1_D0', 'type_1_E0', 'type_1_F0', 'type_1_D1',
+                       'type_1_E1']:
         # __
         C = bx
 
-    elif q_subkind == 'type_1_G0' \
-         or q_subkind == 'type_1_H0' \
-         or q_subkind == 'type_1_I0' \
-         or q_subkind == 'type_1_G1' \
-         or q_subkind == 'type_1_H1':
+    elif q_subkind in ['type_1_G0', 'type_1_H0', 'type_1_I0', 'type_1_G1',
+                       'type_1_H1']:
         # __
         C = ax2
 
-    elif q_subkind == 'type_2_A0' \
-         or q_subkind == 'type_2_B0' \
-         or q_subkind == 'type_2_C0' \
-         or q_subkind == 'type_2_A1' \
-         or q_subkind == 'type_2_B1' \
-         or q_subkind == 'type_4_A0':
+    elif q_subkind in ['type_2_A0', 'type_2_B0', 'type_2_C0', 'type_2_A1',
+                       'type_2_B1', 'type_4_A0']:
         # __
         C = Polynomial([bx, c])
 
-    elif q_subkind == 'type_2_D0' \
-         or q_subkind == 'type_2_E0' \
-         or q_subkind == 'type_2_F0' \
-         or q_subkind == 'type_2_D1' \
-         or q_subkind == 'type_2_E1':
+    elif q_subkind in ['type_2_D0', 'type_2_E0', 'type_2_F0', 'type_2_D1',
+                       'type_2_E1']:
         # __
         C = Polynomial([ax2, c])
 
-    elif q_subkind == 'type_3_A0' \
-         or q_subkind == 'type_3_B0' \
-         or q_subkind == 'type_3_C0' \
-         or q_subkind == 'type_3_A1' \
-         or q_subkind == 'type_3_B1':
+    elif q_subkind in ['type_3_A0', 'type_3_B0', 'type_3_C0', 'type_3_A1',
+                       'type_3_B1']:
         # __
         C = Polynomial([ax2, bx, c])
 
@@ -869,44 +811,22 @@ def level_02(q_subkind, **options):
     F1 = None
     F2 = None
 
-    if q_subkind == 'type_1_A0' \
-       or q_subkind == 'type_1_A1' \
-       or q_subkind == 'type_1_D0' \
-       or q_subkind == 'type_1_D1' \
-       or q_subkind == 'type_1_G0' \
-       or q_subkind == 'type_1_G1' \
-       or q_subkind == 'type_2_A0' \
-       or q_subkind == 'type_2_A1' \
-       or q_subkind == 'type_2_D0' \
-       or q_subkind == 'type_2_D1' \
-       or q_subkind == 'type_3_A0' \
-       or q_subkind == 'type_3_A1':
+    if q_subkind in ['type_1_A0', 'type_1_A1', 'type_1_D0', 'type_1_D1',
+                     'type_1_G0', 'type_1_G1', 'type_2_A0', 'type_2_A1',
+                     'type_2_D0', 'type_2_D1', 'type_3_A0', 'type_3_A1']:
         # __
         F1 = deg1[0]
         F2 = deg1[1]
 
-    elif q_subkind == 'type_1_B0' \
-         or q_subkind == 'type_1_B1' \
-         or q_subkind == 'type_1_E0' \
-         or q_subkind == 'type_1_E1' \
-         or q_subkind == 'type_1_H0' \
-         or q_subkind == 'type_1_H1' \
-         or q_subkind == 'type_2_B0' \
-         or q_subkind == 'type_2_B1' \
-         or q_subkind == 'type_2_E0' \
-         or q_subkind == 'type_2_E1' \
-         or q_subkind == 'type_3_B0' \
-         or q_subkind == 'type_3_B1':
+    elif q_subkind in ['type_1_B0', 'type_1_B1', 'type_1_E0', 'type_1_E1',
+                       'type_1_H0', 'type_1_H1', 'type_2_B0', 'type_2_B1',
+                       'type_2_E0', 'type_2_E1', 'type_3_B0', 'type_3_B1']:
         # __
         F1 = deg2[0]
         F2 = deg2[1]
 
-    elif q_subkind == 'type_1_C0' \
-         or q_subkind == 'type_1_F0' \
-         or q_subkind == 'type_1_I0' \
-         or q_subkind == 'type_2_C0' \
-         or q_subkind == 'type_2_F0'  \
-         or q_subkind == 'type_3_C0':
+    elif q_subkind in ['type_1_C0', 'type_1_F0', 'type_1_I0', 'type_2_C0',
+                       'type_2_F0', 'type_3_C0']:
         # __
         F1 = deg1[0]
         F2 = deg2[0]
@@ -918,78 +838,50 @@ def level_02(q_subkind, **options):
         F2 = deg1[0]
 
     # Let's put a "1" somewhere in the type_*_*1
-    if q_subkind == 'type_1_A1' \
-       or q_subkind == 'type_1_D1' \
-       or q_subkind == 'type_1_G1' \
-       or q_subkind == 'type_2_A1' \
-       or q_subkind == 'type_2_D1' \
-       or q_subkind == 'type_3_A1' \
-       or q_subkind == 'type_1_B1' \
-       or q_subkind == 'type_1_E1' \
-       or q_subkind == 'type_1_H1' \
-       or q_subkind == 'type_2_B1' \
-       or q_subkind == 'type_2_E1' \
-       or q_subkind == 'type_3_B1':
+    if q_subkind in ['type_1_A1', 'type_1_D1', 'type_1_G1', 'type_2_A1',
+                     'type_2_D1', 'type_3_A1', 'type_1_B1', 'type_1_E1'
+                     'type_1_H1', 'type_2_B1', 'type_2_E1', 'type_3_B1']:
         # __
         if randomly.heads_or_tails():
             F1 = Item(1)
         else:
             F2 = Item(1)
 
-
-
     # Let's possibly attribute a minus_sign
     # (NB: expression ± C×F1 ± C×F2)
-    minus_sign = None # this will contain the name of the factor having
-                      # a supplementary minus sign in such cases:
-                      # C×F1 - C×F2
-                      # - C×F1 + C×F2
+    minus_sign = None
+    # this will contain the name of the factor having
+    # a supplementary minus sign in such cases:
+    # C×F1 - C×F2# - C×F1 + C×F2
 
     # in all the following cases, it doesn't bring anything to attribute
     # a minus sign
-    if ((q_subkind == 'type_1_A0' \
-         or q_subkind == 'type_1_B0' \
-         or q_subkind == 'type_1_C0' \
-         or q_subkind == 'type_1_A1' \
-         or q_subkind == 'type_1_B1') \
-        and c_val < 0) \
-       or \
-       ((q_subkind == 'type_1_D0' \
-         or q_subkind == 'type_1_E0' \
-         or q_subkind == 'type_1_F0' \
-         or q_subkind == 'type_1_D1' \
-         or q_subkind == 'type_1_E1') \
-        and b_val < 0) \
-       or \
-       ((q_subkind == 'type_1_G0' \
-         or q_subkind == 'type_1_H0' \
-         or q_subkind == 'type_1_I0' \
-         or q_subkind == 'type_1_G1' \
-         or q_subkind == 'type_1_H1') \
-        and a_val < 0):
+    if ((q_subkind in ['type_1_A0', 'type_1_B0', 'type_1_C0', 'type_1_A1',
+                       'type_1_B1'] and c_val < 0)
+        or ((q_subkind in ['type_1_D0', 'type_1_E0', 'type_1_F0', 'type_1_D1',
+                           'type_1_E1']) and b_val < 0)
+        or ((q_subkind in ['type_1_G0', 'type_1_H0', 'type_1_I0', 'type_1_G1',
+                           'type_1_H1']) and a_val < 0)):
         # __
-        pass # here we let minus_sign equal to None
+        pass  # here we let minus_sign equal to None
 
     # otherwise, let's attribute one randomly,
     # depending on attribute_a_minus_sign
     else:
-        if attribute_a_minus_sign == 'randomly' \
-           or attribute_a_minus_sign == 'yes':
+        if attribute_a_minus_sign in ['yes', 'randomly']:
             # __
-            if attribute_a_minus_sign == 'yes' \
-               or randomly.heads_or_tails():
+            if (attribute_a_minus_sign == 'yes'
+                or randomly.heads_or_tails()):
                 # __
                 if randomly.heads_or_tails():
                     minus_sign = "F1"
                 else:
                     minus_sign = "F2"
             else:
-                pass # here we let minus_sign equal to None
-
+                pass  # here we let minus_sign equal to None
 
     # Now let's build the expression !
     expression = None
-
     box_product1 = [C, F1]
     box_product2 = [C, F2]
 
@@ -1056,7 +948,6 @@ def level_02(q_subkind, **options):
     return steps
 
 
-
 # --------------------------------------------------------------------------
 ##
 #   @brief Creates & returns the solution and the answer's steps.
@@ -1068,30 +959,24 @@ def level_03(q_subkind, **options):
 
     steps = []
 
-    if q_subkind == 'sum_square' or q_subkind == 'sum_square_mixed' \
-        or q_subkind == 'difference_square' \
-        or q_subkind == 'difference_square_mixed':
+    if q_subkind in ['sum_square', 'sum_square_mixed', 'difference_square',
+                     'difference_square_mixed']:
         # __
         first_term = Monomial(('+',
                                Item(('+', a, 2)).evaluate(),
                                2))
 
         second_term = Monomial(('+',
-                                Item(('+', Product([2, a, b])\
-                                           .evaluate(), 1))\
-                                    .evaluate(),
+                                Item(('+', Product([2, a, b]).evaluate(), 1))
+                                .evaluate(),
                                 1))
 
         third_term = Monomial(('+', Item(('+', b, 2)).evaluate(), 0))
 
-        if q_subkind == 'difference_square' \
-            or q_subkind == 'difference_square_mixed':
-            # __
+        if q_subkind in ['difference_square', 'difference_square_mixed']:
             second_term.set_sign('-')
 
-        if q_subkind == 'sum_square_mixed' \
-            or q_subkind == 'difference_square_mixed':
-            # __
+        if q_subkind in ['sum_square_mixed', 'difference_square_mixed']:
             ordered_expression = Polynomial([first_term,
                                              second_term,
                                              third_term])
@@ -1100,12 +985,9 @@ def level_03(q_subkind, **options):
                                                                   second_term,
                                                                   third_term])
 
-
         steps.append(Polynomial([first_term, second_term, third_term]))
 
-        if q_subkind == 'sum_square_mixed' \
-            or q_subkind == 'difference_square_mixed':
-            # __
+        if q_subkind in ['sum_square_mixed', 'difference_square_mixed']:
             steps.append(ordered_expression)
 
         sq_a_monom = Monomial(('+', a, 1))
@@ -1156,9 +1038,7 @@ def level_03(q_subkind, **options):
 
         steps.append(_("So it is possible to factorize:"))
 
-        if q_subkind == 'difference_square' \
-            or q_subkind == 'difference_square_mixed':
-            # __
+        if q_subkind in ['difference_square', 'difference_square_mixed']:
             b = -b
 
         factorized_expression = Sum([Monomial(('+', a, 1)), Item(b)])
@@ -1166,11 +1046,7 @@ def level_03(q_subkind, **options):
 
         steps.append(factorized_expression)
 
-
-
-    elif q_subkind == 'squares_difference' \
-        or q_subkind == 'squares_difference_mixed':
-        # __
+    elif q_subkind in ['squares_difference', 'squares_difference_mixed']:
         # To have some (ax)² - b² but also sometimes b² - (ax)²:
         degrees = [2, 0, 1, 0]
 
@@ -1200,12 +1076,10 @@ def level_03(q_subkind, **options):
             [sq_first_term, sq_second_term] = randomly.mix([sq_first_term,
                                                             sq_second_term])
 
-
         positive_sq_first = sq_first_term.clone()
         positive_sq_first.set_sign('+')
         positive_sq_second = sq_second_term.clone()
         positive_sq_second.set_sign('+')
-
 
         steps.append(Polynomial([first_term, second_term]))
 
@@ -1224,7 +1098,6 @@ def level_03(q_subkind, **options):
             first_inter = Product([-1, temp_first_inter])
             second_inter = positive_sq_second.clone()
             second_inter.set_exponent(2)
-
 
         steps.append(Sum([first_inter, second_inter]))
 
@@ -1251,58 +1124,47 @@ def level_03(q_subkind, **options):
         steps.append(Product([randomly.pop(lil_box),
                               randomly.pop(lil_box)]))
 
-    elif q_subkind == 'fake_01' or q_subkind == 'fake_01_mixed' \
-        or q_subkind == 'fake_02' or q_subkind == 'fake_02_mixed' \
-        or q_subkind == 'fake_03' or q_subkind == 'fake_03_mixed' \
-        or q_subkind == 'fake_04_A' or q_subkind == 'fake_04_A_mixed' \
-        or q_subkind == 'fake_04_B' or q_subkind == 'fake_04_B_mixed' \
-        or q_subkind == 'fake_04_C' or q_subkind == 'fake_04_C_mixed' \
-        or q_subkind == 'fake_04_D' or q_subkind == 'fake_04_D_mixed':
+    elif q_subkind in ['fake_01', 'fake_01_mixed', 'fake_02', 'fake_02_mixed',
+                       'fake_03', 'fake_03_mixed', 'fake_04_A',
+                       'fake_04_A_mixed', 'fake_04_B', 'fake_04_B_mixed',
+                       'fake_04_C', 'fake_04_C_mixed', 'fake_04_D',
+                       'fake_04_D_mixed']:
         # __
-
         straight_cases = ['fake_01', 'fake_02', 'fake_03',
                           'fake_04_A', 'fake_04_B', 'fake_04_C', 'fake_04_D']
-        mixed_cases = ['fake_01_mixed', 'fake_02_mixed', 'fake_03_mixed',
-                       'fake_04_A_mixed', 'fake_04_B_mixed',
-                       'fake_04_C_mixed', 'fake_04_D_mixed']
-
         match_pb_cases = ['fake_01', 'fake_02',
                           'fake_01_mixed', 'fake_02_mixed']
-
         sign_pb_cases = ['fake_03', 'fake_03_mixed',
                          'fake_04_A', 'fake_04_B', 'fake_04_C', 'fake_04_D',
                          'fake_04_A_mixed', 'fake_04_B_mixed',
                          'fake_04_C_mixed', 'fake_04_D_mixed']
 
         ax = Monomial(('+', a, 1))
-
         b_ = Monomial(('+', b, 0))
 
         ax_2 = ax.clone()
         ax_2.set_exponent(2)
-
-        a2x2 = Monomial(('+', a*a, 2))
+        a2x2 = Monomial(('+', a * a, 2))
 
         b_2 = Monomial(('+', b, 0))
         b_2.set_exponent(2)
 
-        b2 = Monomial(('+', b*b, 0))
+        b2 = Monomial(('+', b * b, 0))
 
         two_ax_b = Product([Item(2),
                             Monomial(('+', a, 1)),
                             Item(b)])
 
-        twoabx = Monomial(('+', 2*a*b, 1))
+        twoabx = Monomial(('+', 2 * a * b, 1))
 
-        fake_twoabx = Monomial(('+', a*b, 1))
+        fake_twoabx = Monomial(('+', a * b, 1))
 
         if randomly.integer(1, 10) >= 8:
             fake_twoabx = Monomial(('+',
-                                    2*a*b \
-                                    + randomly.pop([-1, 1])\
-                                    *randomly.integer(1, 5),
+                                    2 * a * b
+                                    + randomly.pop([-1, 1])
+                                    * randomly.integer(1, 5),
                                     1))
-
         first_term = None
         second_term = None
         third_term = None
@@ -1320,8 +1182,8 @@ def level_03(q_subkind, **options):
             first_term = a2x2.clone()
             third_term = b2.clone()
 
-            if q_subkind == 'fake_01' or q_subkind == 'fake_01_mixed'\
-                or q_subkind == 'fake_02' or q_subkind == 'fake_02_mixed':
+            if q_subkind in ['fake_01', 'fake_01_mixed', 'fake_02',
+                             'fake_02_mixed']:
                 # __
                 second_term = fake_twoabx.clone()
 
@@ -1352,8 +1214,6 @@ def level_03(q_subkind, **options):
             mixed_expression = Polynomial(randomly.mix([first_term,
                                                         second_term,
                                                         third_term]))
-
-
         if q_subkind in straight_cases:
             steps.append(ordered_expression)
 
@@ -1396,7 +1256,7 @@ def level_03(q_subkind, **options):
                                                two_ax_b,
                                                twoabx,
                                                fake_twoabx],
-                                               equal_signs=['=', '=', 'neq'])
+                                              equal_signs=['=', '=', 'neq'])
 
             steps.append(_("but") + " "
                          + two_times_a_times_b_eq.into_str(
@@ -1410,8 +1270,4 @@ def level_03(q_subkind, **options):
             steps.append(_("it does not match a binomial identity."))
             steps.append(_("This expression cannot be factorized."))
 
-
-
     return steps
-
-

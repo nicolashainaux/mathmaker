@@ -20,23 +20,18 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import random
-
-from mathmaker.lib import *
-from mathmaker.lib.common.cst import *
 from .Q_Structure import Q_Structure
 from . import mc_modules
-from mathmaker.lib.core.base_calculus import *
 
 SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number': {'half', 'third', 'quarter'},
                       'simple_multiples_of_a_number': {'double', 'triple',
-                                                        'quadruple'},
+                                                       'quadruple'},
                       'simple_parts_or_multiples_of_a_number': {'half',
-                                                                 'third',
-                                                                 'quarter',
-                                                                 'double',
-                                                                 'triple',
-                                                                 'quadruple'},
+                                                                'third',
+                                                                'quarter',
+                                                                'double',
+                                                                'triple',
+                                                                'quadruple'},
                       'operation': {'multi', 'divi', 'addi', 'subtr'}}
 
 UNPACKABLE_SUBKINDS = {'half', 'third', 'quarter',
@@ -44,52 +39,52 @@ UNPACKABLE_SUBKINDS = {'half', 'third', 'quarter',
                        'multi', 'divi', 'addi', 'subtr'}
 
 SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
-                                     'third': {'table_3'},
-                                     'quarter': {'table_4'},
-                                     'double': {'table_2'},
-                                     'triple': {'table_3'},
-                                     'quadruple': {'table_4'},
-                                     'multi': {'intpairs_2to9'},
-                                     'divi': {'intpairs_2to9'},
-                                     'addi': {'intpairs_2to9'},
-                                     'subtr': {'intpairs_2to9'}},
+                                    'third': {'table_3'},
+                                    'quarter': {'table_4'},
+                                    'double': {'table_2'},
+                                    'triple': {'table_3'},
+                                    'quadruple': {'table_4'},
+                                    'multi': {'intpairs_2to9'},
+                                    'divi': {'intpairs_2to9'},
+                                    'addi': {'intpairs_2to9'},
+                                    'subtr': {'intpairs_2to9'}},
                      'auto_11_50': {'half': {'multiplesof2_11to50'},
-                                     'third': {'multiplesof3_11to50'},
-                                     'quarter': {'multiplesof4_11to50'},
-                                     'double': {'multiplesof2_11to50'},
-                                     'triple': {'multiplesof3_11to50'},
-                                     'quadruple': {'multiplesof4_11to50'}},
-                     'auto_vocabulary':  \
-                               {'half': {'table_2', 'multiplesof2_11to50'},
-                                'third': {'table_3', 'multiplesof3_11to50'},
-                                'quarter': {'table_4', 'multiplesof4_11to50'},
-                                'double': {'table_2', 'multiplesof2_11to50'},
-                                'triple': {'table_3', 'multiplesof3_11to50'},
-                                'quadruple': {'table_4', 'multiplesof4_11to50'},
-                                'multi': {'intpairs_2to9'},
-                                'divi': {'intpairs_2to9'},
-                                # The 'intpairs_2to200' below will get divided
-                                # by 10 to produce two decimals between 0.2
-                                # and 20.
-                                'addi': {'intpairs_10to100',
-                                         'intpairs_2to200'},
-                                'subtr': {'intpairs_10to100',
-                                          'intpairs_2to200'}},
-                     'decimal_and_10_100_1000': \
-                {'multi_direct': {'decimal_and_10_100_1000_for_multi'},
-                 'divi_direct': {'decimal_and_10_100_1000_for_divi'},
-                 'area_rectangle': {'decimal_and_10_100_1000_for_multi'},
-                 'perimeter_rectangle': {'decimal_and_10_100_1000_for_multi'},
-                 'multi_hole': {'decimal_and_10_100_1000_for_multi'},
-                 'vocabulary_multi': {'decimal_and_10_100_1000_for_multi'},
-                 'vocabulary_divi': {'decimal_and_10_100_1000_for_divi'}},
+                                    'third': {'multiplesof3_11to50'},
+                                    'quarter': {'multiplesof4_11to50'},
+                                    'double': {'multiplesof2_11to50'},
+                                    'triple': {'multiplesof3_11to50'},
+                                    'quadruple': {'multiplesof4_11to50'}},
+                     'auto_vocabulary':
+                     {'half': {'table_2', 'multiplesof2_11to50'},
+                      'third': {'table_3', 'multiplesof3_11to50'},
+                      'quarter': {'table_4', 'multiplesof4_11to50'},
+                      'double': {'table_2', 'multiplesof2_11to50'},
+                      'triple': {'table_3', 'multiplesof3_11to50'},
+                      'quadruple': {'table_4', 'multiplesof4_11to50'},
+                      'multi': {'intpairs_2to9'},
+                      'divi': {'intpairs_2to9'},
+                      # The 'intpairs_2to200' below will get divided
+                      # by 10 to produce two decimals between 0.2
+                      # and 20.
+                      'addi': {'intpairs_10to100', 'intpairs_2to200'},
+                      'subtr': {'intpairs_10to100', 'intpairs_2to200'}},
+                     'decimal_and_10_100_1000':
+                     {'multi_direct': {'decimal_and_10_100_1000_for_multi'},
+                      'divi_direct': {'decimal_and_10_100_1000_for_divi'},
+                      'area_rectangle': {'decimal_and_10_100_1000_for_multi'},
+                      'perimeter_rectangle': {'decimal_and_10_100_1000_for'
+                                              '_multi'},
+                      'multi_hole': {'decimal_and_10_100_1000_for_multi'},
+                      'vocabulary_multi': {'decimal_and_10_100_1000_for'
+                                           '_multi'},
+                      'vocabulary_divi': {'decimal_and_10_100_1000_for_divi'}},
                      'decimal_and_one_digit': \
-                 {'multi_direct': {'decimal_and_one_digit_for_multi'},
-                  'divi_direct': {'decimal_and_one_digit_for_divi'},
-                  'area_rectangle': {'decimal_and_one_digit_for_multi'},
-                  'multi_hole': {'decimal_and_one_digit_for_multi'},
-                  'vocabulary_multi': {'decimal_and_one_digit_for_multi'},
-                  'vocabulary_divi': {'decimal_and_one_digit_for_divi'}}}
+                     {'multi_direct': {'decimal_and_one_digit_for_multi'},
+                      'divi_direct': {'decimal_and_one_digit_for_divi'},
+                      'area_rectangle': {'decimal_and_one_digit_for_multi'},
+                      'multi_hole': {'decimal_and_one_digit_for_multi'},
+                      'vocabulary_multi': {'decimal_and_one_digit_for_multi'},
+                      'vocabulary_divi': {'decimal_and_one_digit_for_divi'}}}
 
 
 # --------------------------------------------------------------------------
@@ -165,7 +160,7 @@ def get_modifier(q_type, nb_source):
                                     (3, 8): [(3, 8), (4, 6)],
                                     (4, 6): [(3, 8), (4, 6)],
                                     (4, 9): [(4, 9), (6, 6)],
-                                    (6, 6): [(4, 9), (6, 6)],}})
+                                    (6, 6): [(4, 9), (6, 6)]}})
     elif q_type == 'subtr_direct' and nb_source.startswith('intpairs_10'):
         d.update({'diff7atleast': True})
     elif any(['rectangle' in q_type,
@@ -185,7 +180,6 @@ def get_modifier(q_type, nb_source):
 # @class Q_MentalCalculation
 # @brief Creates one whole tabular full of questions + answers
 class Q_MentalCalculation(Q_Structure):
-
 
     # --------------------------------------------------------------------------
     ##
@@ -236,8 +230,6 @@ class Q_MentalCalculation(Q_Structure):
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
         return self.q_text
-
-
 
     # --------------------------------------------------------------------------
     ##

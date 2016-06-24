@@ -20,38 +20,40 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import *
+from mathmaker.lib import randomly, is_
+from mathmaker.lib.maths_lib import gcd
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
-from mathmaker.lib.core.base_calculus import *
-from mathmaker.lib.core.calculus import *
+from mathmaker.lib.core.base_calculus import (Item, Fraction, Product,
+                                              Quotient, Sum)
+from mathmaker.lib.core.calculus import Expression
 
 AVAILABLE_Q_KIND_VALUES = \
     {'fraction_simplification': ['default'],
      'fractions_sum': ['default'],
      'fractions_product': ['default'],
      'fractions_quotient': ['default']
-}
+     }
 
-FRACTION_PRODUCT_AND_QUOTIENT_TABLE = [0.07, #2
-                                       0.08, #3
-                                       0.08, #4
-                                       0.08, #5
-                                       0.08, #6
-                                       0.07, #7
-                                       0.08, #8
-                                       0.08, #9
-                                       0.09, #10
-                                       0.02, #11
-                                       0.05, #12
-                                       0.02, #13
-                                       0.05, #14
-                                       0.03, #15
-                                       0.04, #16
-                                       0.01, #17
-                                       0.03, #18
-                                       0.01, #19
-                                       0.03  #20
+FRACTION_PRODUCT_AND_QUOTIENT_TABLE = [0.07,  # 2
+                                       0.08,  # 3
+                                       0.08,  # 4
+                                       0.08,  # 5
+                                       0.08,  # 6
+                                       0.07,  # 7
+                                       0.08,  # 8
+                                       0.08,  # 9
+                                       0.09,  # 10
+                                       0.02,  # 11
+                                       0.05,  # 12
+                                       0.02,  # 13
+                                       0.05,  # 14
+                                       0.03,  # 15
+                                       0.04,  # 16
+                                       0.01,  # 17
+                                       0.03,  # 18
+                                       0.01,  # 19
+                                       0.03   # 20
                                        ]
 
 FRACTIONS_SUMS_TABLE = [([1, 2], 15),
@@ -72,23 +74,24 @@ FRACTIONS_SUMS_TABLE = [([1, 2], 15),
                         ([5, 7], 4),
                         ([6, 7], 3)]
 
-FRACTIONS_SUMS_SCALE_TABLE = [0.02,  #(1, 2)
+FRACTIONS_SUMS_SCALE_TABLE = [0.02,  # (1, 2)
                               0.02,
                               0.02,
                               0.01,
                               0.005,
-                              0.005,  #(1, 7)
-                              0.21,  #(2, 3)
-                              0.14,  #(2, 5)
-                              0.02,  #(2, 7)
-                              0.21,  #(3, 4)
-                              0.14,  #(3, 5)
-                              0.01,  #(3, 7)
-                              0.16,  #(4, 5)
-                              0.01,  #(4, 7)
-                              0.01,  #(5, 6)
-                              0.005,  #(5, 7)
-                              0.005]  #(6, 7)
+                              0.005,  # (1, 7)
+                              0.21,  # (2, 3)
+                              0.14,  # (2, 5)
+                              0.02,  # (2, 7)
+                              0.21,  # (3, 4)
+                              0.14,  # (3, 5)
+                              0.01,  # (3, 7)
+                              0.16,  # (4, 5)
+                              0.01,  # (4, 7)
+                              0.01,  # (5, 6)
+                              0.005,  # (5, 7)
+                              0.005]  # (6, 7)
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -135,7 +138,7 @@ class Q_Calculation(Q_Structure):
                                                     0, 0.0375, 0, 0, 0,
                                                     0.0375, 0, 0.005])
 
-            factors_list = [j+1 for j in range(10)]
+            factors_list = [j + 1 for j in range(10)]
 
             ten_power_factor1 = 1
             ten_power_factor2 = 1
@@ -150,37 +153,33 @@ class Q_Calculation(Q_Structure):
                     ten_power_factor1 = randomly.pop(ten_powers_list)
                     ten_power_factor2 = randomly.pop(ten_powers_list)
 
-
-
             self.objct = Fraction(('+',
-                                   root*randomly.pop(factors_list) \
-                                     * ten_power_factor1,
-                                   root*randomly.pop(factors_list) \
-                                     * ten_power_factor2))
+                                   root * randomly.pop(factors_list)
+                                   * ten_power_factor1,
+                                   root * randomly.pop(factors_list)
+                                   * ten_power_factor2))
 
         # 2d & 3d OPTIONS
         # Fractions Products | Quotients
-        elif q_kind == 'fractions_product' \
-             or q_kind == 'fractions_quotient':
-            # __
+        elif q_kind in ['fractions_product', 'fractions_quotient']:
             # In some cases, the fractions will be generated
             # totally randomly
             if randomly.decimal_0_1() < 0:
-                lil_box = [n+2 for n in range(18)]
-                a = randomly.pop(lil_box,
-                                 weighted_table= \
-                                        FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
-                b = randomly.pop(lil_box,
-                                 weighted_table= \
-                                        FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
+                lil_box = [n + 2 for n in range(18)]
+                a = randomly.pop(
+                    lil_box,
+                    weighted_table=FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
+                b = randomly.pop(
+                    lil_box,
+                    weighted_table=FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
 
-                lil_box = [n+2 for n in range(18)]
-                c = randomly.pop(lil_box,
-                                 weighted_table= \
-                                        FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
-                d = randomly.pop(lil_box,
-                                 weighted_table= \
-                                        FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
+                lil_box = [n + 2 for n in range(18)]
+                c = randomly.pop(
+                    lil_box,
+                    weighted_table=FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
+                d = randomly.pop(
+                    lil_box,
+                    weighted_table=FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
 
                 f1 = Fraction((randomly.sign(plus_signs_ratio=0.75),
                                Item((randomly.sign(plus_signs_ratio=0.80),
@@ -194,8 +193,8 @@ class Q_Calculation(Q_Structure):
                                Item((randomly.sign(plus_signs_ratio=0.80),
                                      d))))
 
-                #f1 = f1.simplified()
-                #f2 = f2.simplified()
+                # f1 = f1.simplified()
+                # f2 = f2.simplified()
 
             # In all other cases (80%), we'll define a "seed" a plus two
             # randomly numbers i and j to form the Product | Quotient:
@@ -208,14 +207,14 @@ class Q_Calculation(Q_Structure):
                 i = randomly.pop(lil_box)
                 j = randomly.pop(lil_box)
 
-                b = randomly.coprime_to(a*i, [n+2 for n in range(15)])
+                b = randomly.coprime_to(a * i, [n + 2 for n in range(15)])
                 c = randomly.not_coprime_to(b,
-                                            [n+2 for n in range(30)],
-                                            excepted=a*j)
+                                            [n + 2 for n in range(30)],
+                                            excepted=a * j)
 
                 f1 = Fraction((randomly.sign(plus_signs_ratio=0.75),
                                Item((randomly.sign(plus_signs_ratio=0.80),
-                                     a*i)),
+                                     a * i)),
                                Item((randomly.sign(plus_signs_ratio=0.80),
                                      b))))
 
@@ -223,7 +222,7 @@ class Q_Calculation(Q_Structure):
                                Item((randomly.sign(plus_signs_ratio=0.80),
                                      c)),
                                Item((randomly.sign(plus_signs_ratio=0.80),
-                                     a*j))))
+                                     a * j))))
 
                 if randomly.heads_or_tails():
                     f3 = f1.clone()
@@ -240,17 +239,13 @@ class Q_Calculation(Q_Structure):
                 self.objct = Quotient(('+', f1, f2, 1,
                                        'use_divide_symbol'))
 
-
         # 4th OPTION
         # Fractions Sums
         elif q_kind == 'fractions_sum':
-            randomly_position = randomly.integer(0,
-                                                 16,
-                                                 weighted_table=\
-                                                 FRACTIONS_SUMS_SCALE_TABLE)
+            randomly_position = randomly\
+                .integer(0, 16, weighted_table=FRACTIONS_SUMS_SCALE_TABLE)
 
             chosen_seed_and_generator = FRACTIONS_SUMS_TABLE[randomly_position]
-
 
             seed = randomly.integer(2, chosen_seed_and_generator[1])
 
@@ -268,14 +263,14 @@ class Q_Calculation(Q_Structure):
             gen1 = chosen_seed_and_generator[0][lil_box.pop()]
             gen2 = chosen_seed_and_generator[0][lil_box.pop()]
 
-            den1 = Item(gen1*seed)
-            den2 = Item(gen2*seed)
+            den1 = Item(gen1 * seed)
+            den2 = Item(gen2 * seed)
 
             temp1 = randomly.integer(1, 20)
             temp2 = randomly.integer(1, 20)
 
-            num1 = Item(temp1 // gcd(temp1, gen1*seed))
-            num2 = Item(temp2 // gcd(temp2, gen2*seed))
+            num1 = Item(temp1 // gcd(temp1, gen1 * seed))
+            num2 = Item(temp2 // gcd(temp2, gen2 * seed))
 
             f1 = Fraction((randomly.sign(plus_signs_ratio=0.7),
                           num1,
@@ -298,8 +293,6 @@ class Q_Calculation(Q_Structure):
             number = options['expression_number']
         self.expression = Expression(number, self.objct)
 
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
@@ -307,7 +300,6 @@ class Q_Calculation(Q_Structure):
         M = shared.machine
 
         return M.write_math_style1(M.type_string(self.expression))
-
 
     # --------------------------------------------------------------------------
     ##
@@ -323,9 +315,5 @@ class Q_Calculation(Q_Structure):
             self.objct = self.objct.calculate_next_step()
             if self.objct is not None:
                 self.expression = Expression(self.expression.name,
-                                                  self.objct)
-
-
+                                             self.objct)
         return result
-
-
