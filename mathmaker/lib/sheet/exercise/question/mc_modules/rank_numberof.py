@@ -22,11 +22,10 @@
 
 # This module will ask to tell the rank of a figure in a given number.
 
-from decimal import Decimal
-
-from mathmaker.lib.common.cst import *
-from mathmaker.lib.core.base_calculus import *
+from mathmaker.lib.common.cst import RANKS_HOW_MANY
+from mathmaker.lib.core.base_calculus import Item
 from . import rank_reversed
+
 
 class sub_object(object):
 
@@ -35,9 +34,9 @@ class sub_object(object):
                                           **options)
 
     def q(self, **options):
-        return _("{how_many_rank} are there in \
-{decimal_number}?").format(decimal_number=self.chosen_deci_str,
-                         how_many_rank=_(str(RANKS_HOW_MANY[self.chosen_rank])))
+        return _("{how_many_rank} are there in {decimal_number}?")\
+            .format(decimal_number=self.chosen_deci_str,
+                    how_many_rank=_(str(RANKS_HOW_MANY[self.chosen_rank])))
 
     def a(self, **options):
         n = self.chosen_deci

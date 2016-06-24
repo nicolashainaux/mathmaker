@@ -22,7 +22,6 @@
 
 import random
 import copy
-from decimal import Decimal
 
 from mathmaker.lib.core.root_calculus import Unit, Value
 from mathmaker.lib.core.base_calculus import Product, Quotient, Item
@@ -33,12 +32,13 @@ from mathmaker.lib import shared
 from mathmaker.lib.common.cst import COMMON_LENGTH_UNITS
 from mathmaker.lib.tools.wording import setup_wording_format_of
 
+
 class structure(object):
 
     def h(self, **options):
         if hasattr(self, 'hint'):
             return "\hfill" + Value("", unit=self.hint)\
-                              .into_str(display_SI_unit=True)
+                .into_str(display_SI_unit=True)
         else:
             return ""
 
@@ -47,13 +47,10 @@ class structure(object):
             if 'variant' in options and options['variant'] == 'decimal':
                 options['variant'] = random.choice(['decimal1', 'decimal2'])
 
-            self.variant = options['variant'] if 'variant' in options \
-                                              else "default"
-            self.context = options['context'] if 'context' in options \
-                                              else "default"
-            self.picture = True if 'picture' in options \
-                                   and options['picture'] == "true" \
-                                else False
+            self.variant = options.get('variant', "default")
+            self.context = options.get('context', "default")
+            pic = options.get('picture', "false")
+            self.picture = True if pic == "true" else False
 
         elif arg == "length_units":
             if 'unit' in options:
@@ -78,17 +75,17 @@ class structure(object):
             if shuffle_nbs:
                 random.shuffle(nb_list)
             for i in range(len(nb_list)):
-                setattr(self, 'nb' + str(i+1), nb_list[i])
+                setattr(self, 'nb' + str(i + 1), nb_list[i])
             self.nb_nb = len(nb_list)
 
         elif arg == "nb_variants":
             if self.variant.startswith('decimal'):
-                deci_nb = int(self.variant[-1]) # so, from decimal1 up to 9
+                deci_nb = int(self.variant[-1])  # so, from decimal1 up to 9
                 chosen_ones = random.sample([i for i in range(self.nb_nb)],
                                             deci_nb)
                 for i in chosen_ones:
-                    setattr(self, 'nb' + str(i+1),
-                            getattr(self, 'nb' + str(i+1))/10)
+                    setattr(self, 'nb' + str(i + 1),
+                            getattr(self, 'nb' + str(i + 1)) / 10)
 
         elif arg == "division":
             nb_list = list(options['nb'])
@@ -98,7 +95,7 @@ class structure(object):
             if '10_100_1000' in options and options['10_100_1000']:
                 self.divisor, self.dividend = nb_list[0], nb_list[1]
                 self.result = Quotient(('+', self.dividend, self.divisor))\
-                              .evaluate()
+                    .evaluate()
             else:
                 self.divisor = nb_list.pop(random.choice([0, 1]))
                 self.result = nb_list.pop()
@@ -122,15 +119,15 @@ class structure(object):
             elif 'nb' in options:
                 nb1, nb2 = options['nb'][0], options['nb'][1]
             else:
-                raise error.ImpossibleAction("Setup a rectangle if no width " \
-                                             + "nor length have been provided"\
-                                             + " yet.")
-            if not hasattr(self, 'unit_length') \
-            or not hasattr(self, 'unit_area'):
+                raise error.ImpossibleAction("Setup a rectangle if no width "
+                                             "nor length have been provided"
+                                             " yet.")
+            if (not hasattr(self, 'unit_length')
+                or not hasattr(self, 'unit_area')):
                 self.setup(self, "units", **options)
 
-            #nb1 = Decimal(str(nb1))
-            #nb2 = Decimal(str(nb2))
+            # nb1 = Decimal(str(nb1))
+            # nb2 = Decimal(str(nb2))
 
             w = Value(min([nb1, nb2]), unit=self.unit_length)
             l = Value(max([nb1, nb2]), unit=self.unit_length)
@@ -138,13 +135,13 @@ class structure(object):
             rectangle_name = "DCBA"
             if self.picture:
                 rectangle_name = next(shared.four_letters_words_source)
-            self.rectangle = Rectangle([Point([rectangle_name[3], (0,0)]),
+            self.rectangle = Rectangle([Point([rectangle_name[3], (0, 0)]),
                                         3,
                                         1.5,
                                         rectangle_name[2],
                                         rectangle_name[1],
                                         rectangle_name[0]],
-                                        read_name_clockwise=True)
+                                       read_name_clockwise=True)
             self.rectangle.set_lengths([l, w])
             self.rectangle.setup_labels([False, False, True, True])
 
@@ -154,17 +151,18 @@ class structure(object):
             elif 'nb' in options:
                 nb1 = options['nb'][0]
             else:
-                raise error.ImpossibleAction("Setup a square if no side's "\
-                                             "length have been provided "\
+                raise error.ImpossibleAction("Setup a square if no side's "
+                                             "length have been provided "
                                              "yet.")
-            if not hasattr(self, 'unit_length') \
-            or not hasattr(self, 'unit_area'):
+            if (not hasattr(self, 'unit_length')
+                or not hasattr(self, 'unit_area')):
+                # __
                 self.setup(self, "units", **options)
 
             square_name = "DCBA"
             if self.picture:
                 square_name = next(shared.four_letters_words_source)
-            self.square = Square([Point([square_name[3], (0,0)]),
+            self.square = Square([Point([square_name[3], (0, 0)]),
                                  2,
                                  square_name[2],
                                  square_name[1],
@@ -172,10 +170,11 @@ class structure(object):
                                  read_name_clockwise=True)
             self.square.set_lengths([Value(nb1, unit=self.unit_length)])
             self.square.setup_labels([False, False, True, False])
-            self.square.set_marks(random.choice(["simple", "double", "triple"]))
+            self.square.set_marks(random.choice(["simple", "double",
+                                                 "triple"]))
 
         elif arg == 'mini_problem_wording':
-            self.wording = _(shared.mini_problems_wordings_source\
+            self.wording = _(shared.mini_problems_wordings_source
                              .next(q_id=options['q_id'],
                                    nb1_to_check=self.nb1,
                                    nb2_to_check=self.nb2))

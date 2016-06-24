@@ -28,6 +28,7 @@ from mathmaker.lib.core.root_calculus import Value
 from . import mc_module
 from mathmaker.lib.tools.wording import post_process
 
+
 class sub_object(mc_module.structure):
 
     def __init__(self, numbers_to_use, **options):
@@ -51,8 +52,9 @@ class sub_object(mc_module.structure):
         if self.context == 'mini_problem':
             return post_process(self.wording.format(**self.wording_format))
         else:
-            return _("Calculate: {math_expr}").format(\
-                    math_expr=shared.machine.write_math_style2(self.diff_str))
+            return _("Calculate: {math_expr}")\
+                .format(
+                math_expr=shared.machine.write_math_style2(self.diff_str))
 
     def a(self, **options):
         v = None

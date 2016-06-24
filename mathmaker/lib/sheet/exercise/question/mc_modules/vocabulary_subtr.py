@@ -25,12 +25,12 @@
 from mathmaker.lib.core.base_calculus import Sum
 from . import vocabulary_questions
 
+
 class sub_object(vocabulary_questions.structure):
 
     def __init__(self, numbers_to_use, **options):
         super().__init__(
             numbers_to_use,
-            result_fct=lambda x,y: Sum([max(x, y), -min(x, y)]),
+            result_fct=lambda x, y: Sum([max(x, y), -min(x, y)]),
             wording=_("How much is the difference between {nb1} and {nb2}?"),
             **options)
-

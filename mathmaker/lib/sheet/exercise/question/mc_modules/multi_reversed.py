@@ -35,38 +35,47 @@ class sub_object(object):
         self.product = Product([self.nb1, self.nb2]).evaluate()
 
     def q(self, **options):
-        return _("In the multiplication tables (from 2 to 9), "\
-                +"which product is equal to:") + " "\
-               + Value(self.product).into_str() \
-               + " ?"
+        return _("In the multiplication tables (from 2 to 9), "
+                 "which product is equal to {n}?")\
+            .format(n=Value(self.product).into_str())
 
     def a(self, **options):
         if self.product == 12:
-            return shared.machine.write_math_style2(Product([2, 6]).printed) \
-                   + " " + _("or") + " " \
-                   + shared.machine.write_math_style2(Product([3, 4]).printed)
+            return _("{product1} or {product2}")\
+                .format(product1=shared.machine.write_math_style2(
+                        Product([2, 6]).printed),
+                        product2=shared.machine.write_math_style2(
+                        Product([3, 4]).printed))
 
         elif self.product == 16:
-            return shared.machine.write_math_style2(Product([2, 8]).printed) \
-                   + " " + _("or") + " " \
-                  + shared.machine.write_math_style2(Product([4, 4]).printed)
+            return _("{product1} or {product2}")\
+                .format(product1=shared.machine.write_math_style2(
+                        Product([2, 8]).printed),
+                        product2=shared.machine.write_math_style2(
+                        Product([4, 4]).printed))
 
         elif self.product == 18:
-            return shared.machine.write_math_style2(Product([2, 9]).printed) \
-                   + " " + _("or") + " " \
-                  + shared.machine.write_math_style2(Product([3, 6]).printed)
+            return _("{product1} or {product2}")\
+                .format(product1=shared.machine.write_math_style2(
+                        Product([2, 9]).printed),
+                        product2=shared.machine.write_math_style2(
+                        Product([3, 6]).printed))
 
         elif self.product == 24:
-            return shared.machine.write_math_style2(Product([4, 6]).printed) \
-                   + " " + _("or") + " " \
-                  + shared.machine.write_math_style2(Product([3, 8]).printed)
+            return _("{product1} or {product2}")\
+                .format(product1=shared.machine.write_math_style2(
+                        Product([3, 8]).printed),
+                        product2=shared.machine.write_math_style2(
+                        Product([4, 6]).printed))
 
         elif self.product == 36:
-            return shared.machine.write_math_style2(Product([6, 6]).printed) \
-                   + " " + _("or") + " " \
-                  + shared.machine.write_math_style2(Product([4, 9]).printed)
+            return _("{product1} or {product2}")\
+                .format(product1=shared.machine.write_math_style2(
+                        Product([6, 6]).printed),
+                        product2=shared.machine.write_math_style2(
+                        Product([4, 9]).printed))
 
         else:
             return shared.machine.write_math_style2(Product([self.nb1,
-                                                self.nb2]).printed)
-
+                                                             self.nb2])
+                                                    .printed)

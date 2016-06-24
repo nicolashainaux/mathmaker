@@ -25,16 +25,16 @@
 from mathmaker.lib.core.base_calculus import Product
 from . import vocabulary_questions
 
+
 class sub_object(vocabulary_questions.structure):
 
     def __init__(self, numbers_to_use, **options):
-        PARTS_QUESTIONS = { 2: _("What is the half of {nb1}?"),
-                            3: _("What is the third of {nb1}?"),
-                            4: _("What is the quarter of {nb1}?")}
+        PARTS_QUESTIONS = {2: _("What is the half of {nb1}?"),
+                           3: _("What is the third of {nb1}?"),
+                           4: _("What is the quarter of {nb1}?")}
         super().__init__(numbers_to_use,
-                         result_fct=lambda x,y: Product([x, y]),
+                         result_fct=lambda x, y: Product([x, y]),
                          wording=PARTS_QUESTIONS[numbers_to_use[0]],
                          shuffle_nbs=False,
                          permute_nb1_nb2_result=True
                          )
-

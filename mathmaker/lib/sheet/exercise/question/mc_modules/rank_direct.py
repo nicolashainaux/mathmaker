@@ -22,10 +22,9 @@
 
 # This module will ask to tell the rank of a figure in a given number.
 
-from decimal import Decimal
-
-from mathmaker.lib.common.cst import *
+from mathmaker.lib.common.cst import RANKS_WORDS
 from . import rank_reversed
+
 
 class sub_object(object):
 

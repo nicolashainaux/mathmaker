@@ -22,11 +22,10 @@
 
 # This module will add a question about the sum of two numbers
 
-import random
-
 from mathmaker.lib.core.root_calculus import Value
 from . import mc_module
 from mathmaker.lib.tools.wording import setup_wording_format_of
+
 
 class structure(mc_module.structure):
 
@@ -36,13 +35,13 @@ class structure(mc_module.structure):
         super().setup("minimal", **kwargs)
         super().setup("numbers", nb=nbs_to_use, **kwargs)
         super().setup("nb_variants", nb=nbs_to_use, **kwargs)
-        self.result = Value(result_fct(self.nb1, self.nb2).evaluate())\
-                                                                    .into_str()
+        self.result = Value(result_fct(self.nb1, self.nb2)
+                            .evaluate()).into_str()
         if 'swap_nb1_nb2' in kwargs and kwargs['swap_nb1_nb2']:
             self.nb1, self.nb2 = self.nb2, self.nb1
-        if 'permute_nb1_nb2_result' in kwargs \
-            and kwargs['permute_nb1_nb2_result']:
-        #___
+        if ('permute_nb1_nb2_result' in kwargs
+            and kwargs['permute_nb1_nb2_result']):
+            # __
             self.nb1, self.nb2, self.result = self.result, self.nb1, self.nb2
         self.nb1 = Value(self.nb1)
         self.nb2 = Value(self.nb2)

@@ -20,9 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import shared
-from mathmaker.lib.core.base_calculus import *
-from mathmaker.lib.core.root_calculus import *
+from mathmaker.lib import shared, randomly
+from mathmaker.lib.core.base_calculus import Product, Item, Fraction
+from mathmaker.lib.core.root_calculus import Value
+from mathmaker.lib.core.calculus import Equality
 
 
 class sub_object(object):
@@ -32,7 +33,7 @@ class sub_object(object):
         hole = Item(Value('...'))
         self.hidden_one = None
         visible_one = None
-        self.product = Value(Product([nb_list[0], nb_list[1]]).evaluate())
+        self.product = Item(Product([nb_list[0], nb_list[1]]).evaluate())
 
         if isinstance(nb_list[1], Fraction):
             self.hidden_one = nb_list[1]
@@ -50,13 +51,9 @@ class sub_object(object):
         self.holed_product.set_compact_display(False)
 
     def q(self, **options):
-        return _("Which number can fill the hole in") \
-               + " "\
-               + shared.machine.write_math_style2(\
-               self.holed_product.printed) \
-               + " = " \
-               + self.product.into_str() \
-               + " ?"
+        m_expr = Equality([self.holed_product, self.product]).printed
+        return _("Which number can fill the hole in: {math_expr}?")\
+            .format(math_expr=shared.machine.write_math_style2(m_expr))
 
     def a(self, **options):
         return shared.machine.write_math_style2(self.hidden_one.printed)

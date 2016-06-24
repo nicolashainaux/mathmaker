@@ -21,10 +21,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
-from mathmaker.lib.core.base_calculus import *
-from mathmaker.lib.core.root_calculus import Value
 from . import mc_module
 from mathmaker.lib.tools.wording import setup_wording_format_of
+
 
 class sub_object(mc_module.structure):
 
@@ -40,23 +39,23 @@ class sub_object(mc_module.structure):
             setup_wording_format_of(self)
         else:
             self.nb1, self.nb2 = self.rectangle.width, self.rectangle.length
-            self.wording = _("Perimeter of a rectangle whose width \
-is {nb1} {length_unit} and length is {nb2} {length_unit}? |hint:length_unit|")
+            self.wording = _("Perimeter of a rectangle whose width "
+                             "is {nb1} {length_unit} and length is "
+                             "{nb2} {length_unit}? |hint:length_unit|")
             setup_wording_format_of(self)
 
     def q(self, **options):
         if self.picture:
             return shared.machine.write_layout(
-                    (1, 2),
-                    [5, 8],
-                    [shared.machine.insert_picture(
-                                        self.rectangle,
-                                        scale=0.75,
-                                        vertical_alignment_in_a_tabular=True),
-                     self.wording.format(**self.wording_format)])
+                (1, 2),
+                [5, 8],
+                [shared.machine.insert_picture(
+                 self.rectangle,
+                 scale=0.75,
+                 vertical_alignment_in_a_tabular=True),
+                 self.wording.format(**self.wording_format)])
         else:
             return self.wording.format(**self.wording_format)
 
     def a(self, **options):
         return self.rectangle.perimeter.into_str(display_SI_unit=True)
-

@@ -22,11 +22,11 @@
 
 import random
 
-from mathmaker.lib import shared
-from mathmaker.lib.core.base_calculus import *
+from mathmaker.lib import shared, error
 from mathmaker.lib.core.root_calculus import Value
 from . import mc_module
 from mathmaker.lib.tools.wording import setup_wording_format_of
+
 
 class sub_object(mc_module.structure):
 
@@ -38,11 +38,13 @@ class sub_object(mc_module.structure):
             super().setup("division", nb=numbers_to_use, **options)
             self.nb1, self.nb2 = self.dividend, self.divisor
             super().setup("rectangle", **options)
-            wordings = {'w': _("A rectangle has an area of {nb1} {area_unit} \
-and a length of {nb2} {length_unit}. What is its width? |hint:length_unit|"),
-                        'l': _("A rectangle has an area of {nb1} {area_unit} \
-and a width of {nb2} {length_unit}. What is its length? |hint:length_unit|")
-                       }
+            wordings = {'w': _("A rectangle has an area of {nb1} {area_unit} "
+                               "and a length of {nb2} {length_unit}. What is "
+                               "its width? |hint:length_unit|"),
+                        'l': _("A rectangle has an area of {nb1} {area_unit} "
+                               "and a width of {nb2} {length_unit}. What is "
+                               "its length? |hint:length_unit|")
+                        }
             self.wording = wordings[self.subcontext]
             setup_wording_format_of(self)
 
@@ -52,24 +54,26 @@ and a width of {nb2} {length_unit}. What is its length? |hint:length_unit|")
             super().setup("rectangle", **options)
             self.subcontext = random.choice(['w', 'l'])
             self.nb1 = self.rectangle.perimeter
-            self.nb2, self.nb3 = (self.rectangle.width, self.rectangle.length)\
-                                 if self.subcontext == 'l'\
-                                 else (self.rectangle.length, \
+            if self.subcontext == 'l':
+                self.nb2, self.nb3 = (self.rectangle.width,
+                                      self.rectangle.length)
+            else:
+                self.nb2, self.nb3 = (self.rectangle.length,
                                       self.rectangle.width)
             self.result = self.nb3
-            wordings = { 'w': _("What is the width of a rectangle whose \
-perimeter is {nb1} {length_unit} and length is {nb2} {length_unit}? \
-|hint:length_unit|"),
-                         'l': _("What is the length of a rectangle whose \
-perimeter is {nb1} {length_unit} and width is {nb2} {length_unit}? \
-|hint:length_unit|")
-                       }
+            wordings = {'w': _("What is the width of a rectangle whose "
+                               "perimeter is {nb1} {length_unit} and length "
+                               "is {nb2} {length_unit}? |hint:length_unit|"),
+                        'l': _("What is the length of a rectangle whose "
+                               "perimeter is {nb1} {length_unit} and width "
+                               "is {nb2} {length_unit}? |hint:length_unit|")
+                        }
             self.wording = wordings[self.subcontext]
             setup_wording_format_of(self)
 
         else:
-            raise error.ImpossibleAction("Create this question without any "\
-                                         + "context.")
+            raise error.ImpossibleAction("Create this question without any "
+                                         "context.")
 
         if self.subcontext == "w":
             self.rectangle.setup_labels([False, False, True, "?"])
@@ -79,13 +83,13 @@ perimeter is {nb1} {length_unit} and width is {nb2} {length_unit}? \
     def q(self, **options):
         if self.picture:
             return shared.machine.write_layout(
-                            (1, 2),
-                            [3.5, 9.5],
-                            [shared.machine.insert_picture(
-                                    self.rectangle,
-                                    scale=0.75,
-                                    vertical_alignment_in_a_tabular=True),
-                             self.wording.format(**self.wording_format)])
+                (1, 2),
+                [3.5, 9.5],
+                [shared.machine.insert_picture(
+                    self.rectangle,
+                    scale=0.75,
+                    vertical_alignment_in_a_tabular=True),
+                 self.wording.format(**self.wording_format)])
         else:
             return self.wording.format(**self.wording_format)
 
