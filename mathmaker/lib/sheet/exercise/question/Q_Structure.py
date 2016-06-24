@@ -23,6 +23,7 @@
 from mathmaker.lib import shared
 from mathmaker.lib import error
 
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -64,17 +65,20 @@ class Q_Structure(object):
                 AVAILABLE_Q_KIND_VALUES[q_kind]
             except KeyError:
                 if q_context == "":
-                    raise error.OutOfRangeArgument(
-                                                q_kind,
-                                                str(AVAILABLE_Q_KIND_VALUES))
+                    raise KeyError('The given question kind (' + q_kind
+                                   + ') does not belong to the available '
+                                   'questions kinds: '
+                                   + str(AVAILABLE_Q_KIND_VALUES))
                 else:
                     try:
                         AVAILABLE_Q_KIND_VALUES[q_kind + "_" + q_context]
                         q_kind_id = q_kind + "_" + q_context
                     except KeyError:
-                        raise error.OutOfRangeArgument(
-                                                q_kind + "_" + q_context,
-                                                str(AVAILABLE_Q_KIND_VALUES))
+                        raise KeyError('The give question_context kind ('
+                                       + q_kind + "_" + q_context
+                                       + ') does not belong to the available '
+                                       'questions kinds: '
+                                       + str(AVAILABLE_Q_KIND_VALUES))
 
         self.displayable_number = ""
 
@@ -94,15 +98,16 @@ class Q_Structure(object):
             self.options = temp_options
 
         if AVAILABLE_Q_KIND_VALUES is not None:
-            if not q_subkind in AVAILABLE_Q_KIND_VALUES[q_kind_id]:
-                raise error.OutOfRangeArgument(q_subkind,
-                                    str(AVAILABLE_Q_KIND_VALUES[q_kind_id]))
+            if q_subkind not in AVAILABLE_Q_KIND_VALUES[q_kind_id]:
+                raise KeyError('The question subkinds (' + q_subkind
+                               + ') does not belong to available question '
+                               'subkinds: '
+                               + str(AVAILABLE_Q_KIND_VALUES[q_kind_id]))
 
         # these two fields for the case of needing to know the them in the
         # answer_to_str() especially
         self.q_kind = q_kind
         self.q_subkind = q_subkind
-
 
     # --------------------------------------------------------------------------
     ##

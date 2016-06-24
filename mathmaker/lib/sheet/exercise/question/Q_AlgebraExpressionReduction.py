@@ -168,7 +168,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
                 elif 'use_these_letters' in options                           \
                      and is_.a_string_list(options['use_these_letters']):
-                #___
+                    # __
                     letters_package = options['use_these_letters']
 
 
@@ -183,7 +183,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 if 'max_literal_items_nb' in options                       \
                     and options['max_literal_items_nb'] >= 2                  \
                     and options['max_literal_items_nb'] <= 6:
-                #___
+                    # __
                     max_literal_items_nb = min(options['max_literal_items_nb'],
                                                len(letters_package))
 
@@ -194,7 +194,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
                 if 'nb_occurences_of_the_same_letter' in options             \
                    and options['nb_occurences_of_the_same_letter'] >= 1:
-                #___
+                    # __
                     same_letter_max_occurences_nb = options[                 \
                                             'nb_occurences_of_the_same_letter']
 
@@ -268,16 +268,14 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                     if next_item_kind == NUMERIC:
                         temp_item = Item((randomly.sign(plus_signs_ratio=0.75),
                                           randomly.integer(1, max_coeff),
-                                          1
-                                         ))
+                                          1))
                         items_list.append(temp_item)
 
                     else:
                         item_value = next_item_kind
                         temp_item = Item((randomly.sign(plus_signs_ratio=0.9),
                                           item_value,
-                                          randomly.integer(1, max_expon)
-                                         ))
+                                          randomly.integer(1, max_expon)))
                         items_list.append(temp_item)
 
                 # so now that the items_list is complete,
@@ -289,16 +287,14 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 # usual situation
                 for i in range(len(self.objct) - 1):
                     if (self.objct.factor[i].is_numeric()                     \
-                        and self.objct.factor[i+1].is_literal()               \
-                        )                                                     \
+                        and self.objct.factor[i + 1].is_literal())       \
                        or                                                     \
                        (self.objct.factor[i].is_literal()                     \
-                        and self.objct.factor[i+1].is_literal()               \
+                        and self.objct.factor[i + 1].is_literal()               \
                         and self.objct.factor[i].raw_value                        \
-                                              != self.objct.factor[i+1].raw_value \
-                        and randomly.decimal_0_1() > 0.5                      \
-                        ):
-                    #___
+                                              != self.objct.factor[i + 1].raw_value \
+                        and randomly.decimal_0_1() > 0.5):
+                        # __
                         self.objct.info[i] = False
 
         # 2d CASE:
@@ -307,7 +303,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
             if not ('length' in options and is_.an_integer(options['length'])      \
                and options['length'] >= 2):
-            #___
+                # __
                 length = randomly.integer(DEFAULT_MINIMUM_LENGTH,
                                           DEFAULT_MAXIMUM_LENGTH,
                                           weighted_table=[0.15, 0.25, 0.6])
@@ -335,7 +331,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             # Let's determine the length of the Sum to create
             if not ('length' in options and is_.an_integer(options['length'])      \
                and options['length'] >= 1):
-            #___
+                # __
                 length = randomly.integer(DEFAULT_MINIMUM_LENGTH,
                                       DEFAULT_MAXIMUM_LENGTH,
                                       weighted_table=[0.1, 0.25, 0.5,
@@ -386,9 +382,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             for i in range(length):
                 m.append(Monomial(RANDOMLY,
                                   max_coeff,
-                                  max_expon
-                                  )
-                        )
+                                  max_expon))
 
             self.objct = Polynomial(m)
 
@@ -398,15 +392,11 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             for i in range(length - 1):
                 m.append(Monomial(RANDOMLY,
                                   max_coeff,
-                                  max_expon
-                                  )
-                        )
+                                  max_expon))
 
             m.append(Monomial(RANDOMLY,
                               1,
-                              max_expon
-                              )
-                    )
+                              max_expon))
 
             terms_list = []
 
@@ -439,10 +429,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                                          Polynomial((RANDOMLY,
                                                      15,
                                                      2,
-                                                     randomly.integer(2,3)
-                                                    ))
-                                        ))
-                                      )
+                                                     randomly.integer(2,3))))))
 
             m1 = Monomial((RANDOMLY, max_coeff, 0))
             m2 = Monomial((RANDOMLY, max_coeff, 1))
@@ -458,10 +445,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                                         Polynomial((RANDOMLY,
                                                     15,
                                                     2,
-                                                    randomly.integer(2,3)
-                                                   ))
-                                        ))
-                                     )
+                                                    randomly.integer(2,3))))))
 
             big_box = []
             big_box.append(minus_brackets[0])
@@ -469,7 +453,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             if 'minus_brackets_nb' in options \
                 and options['minus_brackets_nb'] >= 2 \
                 and options['minus_brackets_nb'] <= 3:
-            #___
+                # __
                 big_box.append(minus_brackets[1])
 
                 if options['minus_brackets_nb'] == 3:
@@ -481,7 +465,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             if 'plus_brackets_nb' in options \
                 and options['plus_brackets_nb'] >= 1 \
                 and options['plus_brackets_nb'] <= 3:
-            #___
+                # __
                 for i in range(options['plus_brackets_nb']):
                     big_box.append(plus_brackets[i])
 
@@ -497,7 +481,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
         number = 0
         if 'expression_number' in options                                     \
            and is_.a_natural_int(options['expression_number']):
-        #___
+            # __
             number = options['expression_number']
 
         self.expression = Expression(number, self.objct)
@@ -544,7 +528,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
               or self.kind_of_answer == 'sum_not_reducible')\
              and self.expression.\
                          right_hand_side.expand_and_reduce_next_step() is None:
-        #___
+            # __
             result += M.write_math_style2(M.type_string(self.expression))
             result += M.write_new_line()
             result += M.write(_("This expression is not reducible."))

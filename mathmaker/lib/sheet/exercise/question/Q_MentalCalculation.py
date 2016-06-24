@@ -37,13 +37,11 @@ SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number': {'half', 'third', 'quarter'},
                                                                  'double',
                                                                  'triple',
                                                                  'quadruple'},
-                      'operation': {'multi', 'divi', 'addi', 'subtr'}
-                     }
+                      'operation': {'multi', 'divi', 'addi', 'subtr'}}
 
 UNPACKABLE_SUBKINDS = {'half', 'third', 'quarter',
                        'double', 'triple', 'quadruple',
-                       'multi', 'divi', 'addi', 'subtr'
-                      }
+                       'multi', 'divi', 'addi', 'subtr'}
 
 SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
                                      'third': {'table_3'},
@@ -84,17 +82,14 @@ SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
                  'perimeter_rectangle': {'decimal_and_10_100_1000_for_multi'},
                  'multi_hole': {'decimal_and_10_100_1000_for_multi'},
                  'vocabulary_multi': {'decimal_and_10_100_1000_for_multi'},
-                 'vocabulary_divi': {'decimal_and_10_100_1000_for_divi'}
-                 },
+                 'vocabulary_divi': {'decimal_and_10_100_1000_for_divi'}},
                      'decimal_and_one_digit': \
                  {'multi_direct': {'decimal_and_one_digit_for_multi'},
                   'divi_direct': {'decimal_and_one_digit_for_divi'},
                   'area_rectangle': {'decimal_and_one_digit_for_multi'},
                   'multi_hole': {'decimal_and_one_digit_for_multi'},
                   'vocabulary_multi': {'decimal_and_one_digit_for_multi'},
-                  'vocabulary_divi': {'decimal_and_one_digit_for_divi'}
-                  }
-                     }
+                  'vocabulary_divi': {'decimal_and_one_digit_for_divi'}}}
 
 
 # --------------------------------------------------------------------------
@@ -107,7 +102,7 @@ def match_qtype_sourcenb(q_type, source_nb):
     if q_type in ['multi_direct', 'area_rectangle', 'multi_hole',
                   'rectangle_length_or_width_from_area', 'divi_direct',
                   'vocabulary_multi', 'vocabulary_divi']:
-    #___
+        # __
         return any([source_nb.startswith('intpairs_'),
                     source_nb.startswith('multiplesof'),
                     source_nb.startswith('table_'),
@@ -117,7 +112,7 @@ def match_qtype_sourcenb(q_type, source_nb):
     elif q_type in ['addi_direct', 'subtr_direct', 'perimeter_rectangle',
                     'rectangle_length_or_width_from_perimeter',
                     'vocabulary_addi', 'vocabulary_subtr']:
-    #___
+        # __
         return any([source_nb.startswith('intpairs_'),
                     source_nb.startswith('multiplesof'),
                     source_nb.startswith('table_'),
@@ -170,14 +165,13 @@ def get_modifier(q_type, nb_source):
                                     (3, 8): [(3, 8), (4, 6)],
                                     (4, 6): [(3, 8), (4, 6)],
                                     (4, 9): [(4, 9), (6, 6)],
-                                    (6, 6): [(4, 9), (6, 6)],
-                                    }})
+                                    (6, 6): [(4, 9), (6, 6)],}})
     elif q_type == 'subtr_direct' and nb_source.startswith('intpairs_10'):
         d.update({'diff7atleast': True})
     elif any(['rectangle' in q_type,
               q_type.startswith('addi_'), q_type.endswith('_addi'),
               q_type.startswith('subtr_'), q_type.endswith('_subtr')]):
-    #___
+        # __
         d.update({'rectangle': True})
     elif 'square' in q_type:
         d.update({'square': True})
@@ -222,7 +216,7 @@ class Q_MentalCalculation(Q_Structure):
         if self.q_kind in ['vocabulary_half', 'vocabulary_third',
                            'vocabulary_quarter', 'vocabulary_double',
                            'vocabulary_triple', 'vocabulary_quadruple']:
-        #___
+            # __
             module = getattr(mc_modules,
                              'vocabulary_simple_multiple_of_a_number')
 

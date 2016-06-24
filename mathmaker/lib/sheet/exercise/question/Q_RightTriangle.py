@@ -22,36 +22,34 @@
 
 from decimal import Decimal
 
-from mathmaker.lib import *
+from mathmaker.lib import randomly
 from mathmaker.lib import shared
 from mathmaker.lib.common import alphabet
 from mathmaker.lib.common import pythagorean
-from mathmaker.lib.common.cst import *
-from mathmaker.lib.maths_lib import *
+from mathmaker.lib.common.cst import (PRECISION, HUNDREDTH, TENTH,
+                                      LENGTH_UNITS, UNIT, THOUSANDTH,
+                                      TEN_THOUSANDTH)
 from .Q_Structure import Q_Structure
-#from mathmaker.lib.core.calculus import Equality
-from mathmaker.lib.core.base_calculus import *
-from mathmaker.lib.core.calculus import *
-#from mathmaker.lib.core.base_geometry import *
-from mathmaker.lib.core.geometry import *
-#from mathmaker.lib.core.base import *
+from mathmaker.lib.core.base_calculus import Item, Sum
+from mathmaker.lib.core.root_calculus import Value
+from mathmaker.lib.core.calculus import Equation, Equality
+from mathmaker.lib.core.geometry import RightTriangle
 
 
 AVAILABLE_Q_KIND_VALUES = {'pythagorean_theorem': ['calculate_hypotenuse',
-                                                    'calculate_one_leg'],
+                                                   'calculate_one_leg'],
                            'converse_of_pythagorean_theorem': ['default'],
-                           'contrapositive_of_pythagorean_theorem': ['default'],
+                           'contrapositive_of_pythagorean_theorem':
+                           ['default'],
                            'cosinus': ['calculate_hypotenuse',
-                                        'calculate_one_leg',
-                                        'calculate_angle'],
+                                       'calculate_one_leg',
+                                       'calculate_angle'],
                            'sinus': ['calculate_hypotenuse',
-                                      'calculate_one_leg',
-                                      'calculate_angle'],
+                                     'calculate_one_leg',
+                                     'calculate_angle'],
                            'tangente': ['calculate_hypotenuse',
-                                         'calculate_one_leg',
-                                         'calculate_angle'],
-                          }
-
+                                        'calculate_one_leg',
+                                        'calculate_angle']}
 
 
 # ------------------------------------------------------------------------------
@@ -121,9 +119,9 @@ class Q_RightTriangle(Q_Structure):
 
         self.final_unit = ""
 
-        if 'final_unit' in options \
-            and options['final_unit'] in LENGTH_UNITS:
-        #___
+        if ('final_unit' in options
+            and options['final_unit'] in LENGTH_UNITS):
+            # __
             self.final_unit = options['final_unit']
 
         sides_units = [self.final_unit,
@@ -134,9 +132,9 @@ class Q_RightTriangle(Q_Structure):
         # than the final expected unit ; allow different units for different
         # sides (for instance giving a list in option 'sides_units')...
         # So far we will do with only ONE unit
-        #if 'sides_units' in options \
+        # if 'sides_units' in options \
         #    and options['sides_units'] in LENGTH_UNITS:
-        ##___
+        #     # __
         #    sides_units = options['sides_units']
 
         self.right_triangle = None
@@ -144,14 +142,12 @@ class Q_RightTriangle(Q_Structure):
         self.unknown_side = None
         self.known_sides = []
 
-
         # Now set some randomly values
         letters = [elt for elt in alphabet.UPPERCASE]
 
         vertices_names = (randomly.pop(letters),
                           randomly.pop(letters),
                           randomly.pop(letters))
-
 
         # Here you can begin to write code for the different
         # q_kinds & q_subkinds
@@ -163,15 +159,15 @@ class Q_RightTriangle(Q_Structure):
 
                 if use_decimals:
                     triples = pythagorean.ALL_TRIPLES_5_100 \
-                            + pythagorean.TRIPLES_101_200_WO_TEN_MULTIPLES
+                        + pythagorean.TRIPLES_101_200_WO_TEN_MULTIPLES
 
                 sides_values = randomly.pop(triples)
 
                 if use_decimals:
-                    sides_values = [Decimal(str(Decimal(sides_values[0])/10)),
-                                    Decimal(str(Decimal(sides_values[1])/10)),
-                                    Decimal(str(Decimal(sides_values[2])/10))
-                                   ]
+                    sides_values = \
+                        [Decimal(str(Decimal(sides_values[0]) / 10)),
+                         Decimal(str(Decimal(sides_values[1]) / 10)),
+                         Decimal(str(Decimal(sides_values[2]) / 10))]
 
                 if self.q_subkind == 'calculate_hypotenuse':
                     sides_values[2] = ""
@@ -202,31 +198,31 @@ class Q_RightTriangle(Q_Structure):
                     # at least 25% and at most 150% of the length of first leg
                     # (and smaller than max_side_value)
                     second_leg_values = []
-                    for i in range(int(first_leg*1.5)):
-                        if i+int(first_leg*0.25) <= 1.5*first_leg \
-                            and i+int(first_leg*0.25) <= max_side_value:
-                        #___
-                            second_leg_values += [i+int(first_leg*0.25)]
+                    for i in range(int(first_leg * 1.5)):
+                        if (i + int(first_leg * 0.25) <= 1.5 * first_leg
+                            and i + int(first_leg * 0.25) <= max_side_value):
+                            # __
+                            second_leg_values += [i + int(first_leg * 0.25)]
 
                     second_leg_unauthorized_values = \
                         pythagorean.get_legs_matching_given_leg(first_leg)
 
                     second_leg_possible_values = \
-                                    list(set(second_leg_values)
-                                         - set(second_leg_unauthorized_values))
+                        list(set(second_leg_values)
+                             - set(second_leg_unauthorized_values))
 
                     if randomly.heads_or_tails():
-                        sides_values = [first_leg,
-                                        randomly.pop(second_leg_possible_values),
-                                        ""
-                                        ]
+                        sides_values = \
+                            [first_leg,
+                             randomly.pop(second_leg_possible_values),
+                             ""]
                         sides_units[2] = ""
 
                     else:
-                        sides_values = [randomly.pop(second_leg_possible_values),
-                                        first_leg,
-                                        ""
-                                        ]
+                        sides_values = \
+                            [randomly.pop(second_leg_possible_values),
+                             first_leg,
+                             ""]
                         sides_units[2] = ""
 
                 else:
@@ -240,13 +236,13 @@ class Q_RightTriangle(Q_Structure):
                     # to avoid "weird" cases (with a very subtle difference
                     # between the given values and the one to calculate)
                     leg_values = []
-                    for i in range(int(hypotenuse*0.9)):
-                        if i+int(hypotenuse*0.25) <= 0.9*hypotenuse:
-                            leg_values += [i+int(hypotenuse*0.25)]
+                    for i in range(int(hypotenuse * 0.9)):
+                        if i + int(hypotenuse * 0.25) <= 0.9 * hypotenuse:
+                            leg_values += [i + int(hypotenuse * 0.25)]
 
                     leg_unauthorized_values = \
-                        pythagorean.get_legs_matching_given_hypotenuse(\
-                                                                     hypotenuse)
+                        pythagorean\
+                        .get_legs_matching_given_hypotenuse(hypotenuse)
 
                     leg_possible_values = list(set(leg_values)
                                                - set(leg_unauthorized_values))
@@ -254,23 +250,19 @@ class Q_RightTriangle(Q_Structure):
                     if randomly.heads_or_tails():
                         sides_values = ["",
                                         randomly.pop(leg_possible_values),
-                                        hypotenuse
-                                        ]
+                                        hypotenuse]
                         sides_units[0] = ""
 
                     else:
                         sides_values = [randomly.pop(leg_possible_values),
                                         "",
-                                        hypotenuse
-                                        ]
+                                        hypotenuse]
                         sides_units[1] = ""
 
             self.right_triangle = \
                 RightTriangle((vertices_names,
-                               'sketch'
-                              ),
-                               rotate_around_isobarycenter=rotation_option
-                              )
+                               'sketch'),
+                              rotate_around_isobarycenter=rotation_option)
 
             self.right_triangle.leg[0].label = Value(sides_values[0],
                                                      unit=sides_units[0])
@@ -285,11 +277,9 @@ class Q_RightTriangle(Q_Structure):
                 else:
                     self.known_sides += [side.clone()]
 
-
-
-        elif self.q_kind == 'converse_of_pythagorean_theorem' \
-             or self.q_kind == 'contrapositive_of_pythagorean_theorem':
-        #___
+        elif self.q_kind in ['converse_of_pythagorean_theorem',
+                             'contrapositive_of_pythagorean_theorem']:
+            # __
             sides_values = [None, None, None]
             triples = list(pythagorean.ALL_TRIPLES_5_100)
 
@@ -307,13 +297,13 @@ class Q_RightTriangle(Q_Structure):
                     min_delta = 1
                     if min_delta > max_delta:
                         max_delta = min_delta
-                    chosen_delta = randomly.pop(\
-                        [i+min_delta for i in range(max_delta-min_delta+1)])
+                    chosen_delta = randomly.pop(
+                        [i + min_delta
+                         for i in range(max_delta - min_delta + 1)])
 
-                    sides_values = [sides_values[0]-chosen_delta,
+                    sides_values = [sides_values[0] - chosen_delta,
                                     sides_values[1],
-                                    sides_values[2]
-                                   ]
+                                    sides_values[2]]
 
                 else:
                     # We will increase the highest value
@@ -321,27 +311,23 @@ class Q_RightTriangle(Q_Structure):
                     min_delta = 1
                     if min_delta > max_delta:
                         max_delta = min_delta
-                    chosen_delta = randomly.pop(\
-                        [i+min_delta for i in range(max_delta-min_delta+1)])
+                    chosen_delta = randomly.pop(
+                        [i + min_delta
+                         for i in range(max_delta - min_delta + 1)])
 
                     sides_values = [sides_values[0],
                                     sides_values[1],
-                                    sides_values[2]+chosen_delta
-                                   ]
+                                    sides_values[2] + chosen_delta]
 
             if use_decimals:
-                sides_values = [Decimal(str(Decimal(sides_values[0])/10)),
-                                Decimal(str(Decimal(sides_values[1])/10)),
-                                Decimal(str(Decimal(sides_values[2])/10))
-                               ]
-
+                sides_values = [Decimal(str(Decimal(sides_values[0]) / 10)),
+                                Decimal(str(Decimal(sides_values[1]) / 10)),
+                                Decimal(str(Decimal(sides_values[2]) / 10))]
 
             self.right_triangle = \
                 RightTriangle((vertices_names,
-                               'sketch'
-                              ),
-                               rotate_around_isobarycenter=rotation_option
-                             )
+                               'sketch'),
+                              rotate_around_isobarycenter=rotation_option)
 
             self.right_triangle.leg[0].label = Value(sides_values[0],
                                                      unit=sides_units[0])
@@ -352,18 +338,15 @@ class Q_RightTriangle(Q_Structure):
 
             self.right_triangle.right_angle.mark = ""
 
-
-
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
-        PRECISION_IDIOMS = { UNIT: _("to the unit"),
-                             TENTH: _("to the tenth"),
-                             HUNDREDTH: _("to the hundreth"),
-                             THOUSANDTH: _("to the thousandth"),
-                             TEN_THOUSANDTH: _("to the ten thousandth")
-                           }
+        PRECISION_IDIOMS = {UNIT: _("to the unit"),
+                            TENTH: _("to the tenth"),
+                            HUNDREDTH: _("to the hundreth"),
+                            THOUSANDTH: _("to the thousandth"),
+                            TEN_THOUSANDTH: _("to the ten thousandth")}
         M = shared.machine
         result = self.displayable_number
 
@@ -375,60 +358,59 @@ class Q_RightTriangle(Q_Structure):
                 result += _("The triangle {triangle_name} has a right \
 angle in {right_vertex}.")\
                     .format(triangle_name=str(self.right_triangle.name),
-                           right_vertex=str(self.right_triangle.vertex[1].name))
+                            right_vertex=str(self.right_triangle.vertex[1]
+                                             .name))
 
                 result += " " + str(self.known_sides[0].length_name) \
-                       + " = " \
-                       + self.known_sides[0].label.into_str(display_unit=True)\
-                       + ". " \
-                       + str(self.known_sides[1].length_name) \
-                       + " = " \
-                       + self.known_sides[1].label.into_str(display_unit=True)\
-                       + ". " + M.write_new_line()
+                    + " = " \
+                    + self.known_sides[0].label.into_str(display_unit=True)\
+                    + ". " \
+                    + str(self.known_sides[1].length_name) \
+                    + " = " \
+                    + self.known_sides[1].label.into_str(display_unit=True)\
+                    + ". " + M.write_new_line()
 
             result += _("Calculate the length of {this_side}.")\
-                      .format(this_side=self.unknown_side.name)
+                .format(this_side=self.unknown_side.name)
 
             if self.final_unit != "":
                 result += " " + _("Give the result in {this_unit}.")\
-                                .format(this_unit=self.final_unit)
+                    .format(this_unit=self.final_unit)
 
             if self.round_to != "":
                 result += " " + _("Round the result {at_this_precision}.")\
-                                .format(at_this_precision=\
-                                        PRECISION_IDIOMS[self.round_to])
+                    .format(at_this_precision=PRECISION_IDIOMS[self.round_to])
 
-        elif self.q_kind == 'converse_of_pythagorean_theorem' \
-             or self.q_kind == 'contrapositive_of_pythagorean_theorem':
-        #___
+        elif self.q_kind in ['converse_of_pythagorean_theorem',
+                             'contrapositive_of_pythagorean_theorem']:
+            # __
             if self.figure_in_the_text:
                 result += M.insert_picture(self.right_triangle)
 
             else:
                 sides_copy = [self.right_triangle.side[0].clone(),
                               self.right_triangle.side[1].clone(),
-                              self.right_triangle.side[2].clone()
-                             ]
+                              self.right_triangle.side[2].clone()]
                 side0 = randomly.pop(sides_copy)
                 side1 = randomly.pop(sides_copy)
                 side2 = randomly.pop(sides_copy)
 
-                result += _("{triangle_name} is a triangle such as \
-{side_length0} = {nb0}, {side_length1} = {nb1} and {side_length2} = {nb2}")\
-                          .format(triangle_name=str(self.right_triangle.name),
-                                  side_length0=str(side0.length_name),
-                                  nb0=side0.label.into_str(display_unit=True),
-                                  side_length1=str(side1.length_name),
-                                  nb1=side1.label.into_str(display_unit=True),
-                                  side_length2=str(side2.length_name),
-                                  nb2=side2.label.into_str(display_unit=True)
-                                  )
+                result += _("{triangle_name} is a triangle such as "
+                            "{side_length0} = {nb0}, {side_length1} = {nb1} "
+                            "and {side_length2} = {nb2}")\
+                    .format(triangle_name=str(self.right_triangle.name),
+                            side_length0=str(side0.length_name),
+                            nb0=side0.label.into_str(display_unit=True),
+                            side_length1=str(side1.length_name),
+                            nb1=side1.label.into_str(display_unit=True),
+                            side_length2=str(side2.length_name),
+                            nb2=side2.label.into_str(display_unit=True))
 
-            result += _("Is it a right triangle ? Prove your answer and if the \
-triangle is right, give the name of the right angle.")
+            result += _("Is it a right triangle ? Prove your answer and if "
+                        "the triangle is right, give the name of the right "
+                        "angle.")
 
             result += M.write_new_line()
-
 
         return result + M.write_new_line()
 
@@ -440,9 +422,10 @@ triangle is right, give the name of the right angle.")
 
         if self.q_kind == 'pythagorean_theorem':
             # Resolution (and the part with the figure will be dealed later)
-            result = _("The triangle {triangle_name} has a right angle in \
-{right_vertex}.").format(triangle_name=str(self.right_triangle.name),
-                         right_vertex=str(self.right_triangle.vertex[1].name))
+            result = _("The triangle {triangle_name} has a right angle in "
+                       "{right_vertex}.")\
+                .format(triangle_name=str(self.right_triangle.name),
+                        right_vertex=str(self.right_triangle.vertex[1].name))
 
             result += M.write_new_line()
 
@@ -453,95 +436,76 @@ triangle is right, give the name of the right angle.")
             result += M.write_math_style1(pyth_eq.into_str())
 
             if self.use_pythagorean_triples:
-                result += M.write(Equation(pyth_eq.substitute()).\
-                                        auto_resolution( \
-                                            dont_display_equations_name=True,
-                                            pythagorean_mode=True,
-                                            unit=self.final_unit,
-                                            underline_result=True)
-                                 )
-
-
+                result += M.write(Equation(pyth_eq.substitute())
+                                  .auto_resolution(
+                                  dont_display_equations_name=True,
+                                  pythagorean_mode=True,
+                                  unit=self.final_unit,
+                                  underline_result=True))
             else:
-                result += M.write(Equation(pyth_eq.substitute()).\
-                                        auto_resolution( \
-                                            dont_display_equations_name=True,
-                                            decimal_result=self.round_to,
-                                            pythagorean_mode=True,
-                                            unit=self.final_unit,
-                                            underline_result=True)
-                                  )
-
-
+                result += M.write(Equation(pyth_eq.substitute())
+                                  .auto_resolution(
+                                  dont_display_equations_name=True,
+                                  decimal_result=self.round_to,
+                                  pythagorean_mode=True,
+                                  unit=self.final_unit,
+                                  underline_result=True))
 
             if self.figure_in_the_text:
                 return self.displayable_number + result
             else:
-                content = [self.displayable_number \
-                           + _("Sketch") + ":" \
-                           + M.write_new_line() \
+                content = [self.displayable_number
+                           + _("Sketch") + ":"
+                           + M.write_new_line()
                            + M.insert_picture(self.right_triangle),
                            result]
                 return M.write_layout((1, 2), [9, 9], content)
 
-
-        elif self.q_kind == 'converse_of_pythagorean_theorem' \
-             or self.q_kind == 'contrapositive_of_pythagorean_theorem':
-        #___
+        elif self.q_kind in ['converse_of_pythagorean_theorem',
+                             'contrapositive_of_pythagorean_theorem']:
+            # __
             hyp_equality = Equality([Item(('+',
-                                          self.right_triangle.\
-                                               hypotenuse.length_name,
+                                          self.right_triangle.
+                                          hypotenuse.length_name,
                                           2)),
                                      Item(('+',
-                                          self.right_triangle.\
-                                               hypotenuse.label.raw_value,
-                                          2))
-                                    ])
+                                          self.right_triangle.
+                                          hypotenuse.label.raw_value,
+                                          2))])
             hyp_equality_step2 = Equality([Item(('+',
-                                          self.right_triangle.\
-                                               hypotenuse.length_name,
+                                          self.right_triangle.
+                                          hypotenuse.length_name,
                                           2)),
-                                     Item(Item(('+',
-                                          self.right_triangle.\
-                                               hypotenuse.label.raw_value,
-                                          2)).evaluate()
-                                          )
-                                    ])
-
-            legs_equality = Equality([\
-                                  Sum([Item(('+',
-                                       self.right_triangle.leg[0].length_name,
-                                       2)),
-                                       Item(('+',
-                                       self.right_triangle.leg[1].length_name,
-                                       2))
-                                       ]),
-                                  Sum([Item(('+',
-                                       self.right_triangle.leg[0].label.raw_value,
-                                       2)),
-                                       Item(('+',
-                                       self.right_triangle.leg[1].label.raw_value,
-                                       2))
-                                       ])
-                                     ])
-            legs_equality_step2 = Equality([\
-                                  Sum([Item(('+',
-                                       self.right_triangle.leg[0].length_name,
-                                       2)),
-                                       Item(('+',
-                                       self.right_triangle.leg[1].length_name,
-                                       2))
-                                      ]),
-                                  Item(Sum([Item(('+',
-                                       self.right_triangle.leg[0].label.raw_value,
-                                       2)),
-                                       Item(('+',
-                                       self.right_triangle.leg[1].label.raw_value,
-                                       2))
-                                          ]).evaluate()
-                                       )
-                                           ])
-
+                                           Item(Item(('+',
+                                                self.right_triangle.
+                                                hypotenuse.label.raw_value,
+                                                2)).evaluate())])
+            legs_equality = Equality([
+                Sum([Item(('+',
+                           self.right_triangle.leg[0].length_name,
+                           2)),
+                     Item(('+',
+                           self.right_triangle.leg[1].length_name,
+                           2))]),
+                Sum([Item(('+',
+                           self.right_triangle.leg[0].label.raw_value,
+                           2)),
+                     Item(('+',
+                           self.right_triangle.leg[1].label.raw_value,
+                           2))])])
+            legs_equality_step2 = Equality([
+                Sum([Item(('+',
+                           self.right_triangle.leg[0].length_name,
+                           2)),
+                     Item(('+',
+                           self.right_triangle.leg[1].length_name,
+                           2))]),
+                Item(Sum([Item(('+',
+                                self.right_triangle.leg[0].label.raw_value,
+                                2)),
+                          Item(('+',
+                                self.right_triangle.leg[1].label.raw_value,
+                                2))]).evaluate())])
 
             result = _("On one hand:") + M.write_new_line()
             result += M.write_math_style1(hyp_equality.into_str())
@@ -554,36 +518,34 @@ triangle is right, give the name of the right angle.")
             result += _("Hence:")
 
             if self.q_kind == 'converse_of_pythagorean_theorem':
-                result += M.write_math_style1(\
-                        self.right_triangle.pythagorean_equality().into_str())
+                result += M.write_math_style1(
+                    self.right_triangle.pythagorean_equality().into_str())
                 result += _("So, by the converse of the pythagorean theorem,")
-                #result += M.write_new_line()
+                # result += M.write_new_line()
                 result += " "
-                result += _("{triangle_name} has a right angle \
-in {right_vertex}.")\
-                 .format(triangle_name=str(self.right_triangle.name),
-                         right_vertex=str(self.right_triangle.vertex[1].name))
+                result += _("{triangle_name} has a right angle "
+                            "in {right_vertex}.")\
+                    .format(triangle_name=str(self.right_triangle.name),
+                            right_vertex=str(
+                            self.right_triangle.vertex[1].name))
 
             elif self.q_kind == 'contrapositive_of_pythagorean_theorem':
-                result += M.write_math_style1(\
-                        self.right_triangle.pythagorean_equality(\
+                result += M.write_math_style1(
+                    self.right_triangle.pythagorean_equality(
                         equal_signs=['neq']).into_str())
 
-                result += _("So, by the contrapositive of the pythagorean \
-theorem,")
-                #result += M.write_new_line()
+                result += _("So, by the contrapositive of the pythagorean "
+                            "theorem,")
                 result += " "
                 result += _("{triangle_name} has no right angle.")\
-                          .format(triangle_name=str(self.right_triangle.name))
-
-
+                    .format(triangle_name=str(self.right_triangle.name))
 
             if self.figure_in_the_text:
                 return self.displayable_number + result
             else:
-                content = [self.displayable_number \
-                           + _("Sketch") + ":" \
-                           + M.write_new_line() \
+                content = [self.displayable_number
+                           + _("Sketch") + ":"
+                           + M.write_new_line()
                            + M.insert_picture(self.right_triangle),
                            result]
                 return M.write_layout((1, 2), [6, 12], content)

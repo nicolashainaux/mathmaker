@@ -40,8 +40,7 @@ AVAILABLE_Q_KIND_VALUES = {'any_basic': ['default'],
                            'classic_with_fractions': ['default'],
                            'classic_x_twice': ['default'],
                            'any_simple_expandable': ['default'],
-                           'any_double_expandable': ['default']
-                          }
+                           'any_double_expandable': ['default']}
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------

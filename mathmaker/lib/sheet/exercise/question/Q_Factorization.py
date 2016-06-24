@@ -63,17 +63,17 @@ AVAILABLE_Q_KIND_VALUES = {'level_01':['default',
              'type_1_G',  # .
              'type_1_H',  # .
              'type_1_I',  # .
-             'type_1_0',  # any of type_1_*0 cases
+             'type_1_0',  # any of type_1_ * 0 cases
              'type_1_1',  # any of type_1_*1 cases
-             'type_1_A0', # a×deg1 + a×deg1' (deg*: at least 2 terms & a!=1)
-             'type_1_B0', # a×deg2 + a×deg2' (deg*: at least 2 terms & a!=1)
-             'type_1_C0', # a×deg1 + a×deg2 (deg*: at least 2 terms & a!=1)
-             'type_1_D0', # ax×deg1 + ax×deg1' (deg*: at least 2 terms)
-             'type_1_E0', # ax×deg2 + ax×deg2' (deg*: at least 2 terms)
-             'type_1_F0', # ax×deg1 + ax×deg2 (deg*: at least 2 terms)
-             'type_1_G0', # ax²×deg1 + ax²×deg1' (deg*: at least 2 terms)
-             'type_1_H0', # ax²×deg2 + ax²×deg2' (deg*: at least 2 terms)
-             'type_1_I0', # ax²×deg1 + ax²×deg2 (deg*: at least 2 terms)
+             'type_1_A0', # a×deg1 + a×deg1' (deg * : at least 2 terms & a!=1)
+             'type_1_B0', # a×deg2 + a×deg2' (deg * : at least 2 terms & a!=1)
+             'type_1_C0', # a×deg1 + a×deg2 (deg * : at least 2 terms & a!=1)
+             'type_1_D0', # ax×deg1 + ax×deg1' (deg * : at least 2 terms)
+             'type_1_E0', # ax×deg2 + ax×deg2' (deg * : at least 2 terms)
+             'type_1_F0', # ax×deg1 + ax×deg2 (deg * : at least 2 terms)
+             'type_1_G0', # ax²×deg1 + ax²×deg1' (deg * : at least 2 terms)
+             'type_1_H0', # ax²×deg2 + ax²×deg2' (deg * : at least 2 terms)
+             'type_1_I0', # ax²×deg1 + ax²×deg2 (deg * : at least 2 terms)
              'type_1_A1', # a×deg1 + a×1
              'type_1_B1', # a×deg2 + a×1
              #'type_1_C1', # C1 has no sense
@@ -93,7 +93,7 @@ AVAILABLE_Q_KIND_VALUES = {'level_01':['default',
              'type_2_D',  # any of D1 or D0
              'type_2_E',  # .
              'type_2_F',  # .
-             'type_2_0',  # any of type_2_*0 cases
+             'type_2_0',  # any of type_2_ * 0 cases
              'type_2_1',  # any of type_2_*1 cases
              'type_2_A0', # (ax+b)×deg1 + (ax+b)×deg1'
              'type_2_B0', # (ax+b)×deg2 + (ax+b)×deg2'
@@ -113,7 +113,7 @@ AVAILABLE_Q_KIND_VALUES = {'level_01':['default',
              'type_3_A',  # any of A1 or A0
              'type_3_B',  # any of B1 or B0
              'type_3_C',  # synonym to C0
-             'type_3_0',   # any of type_3_*0 cases
+             'type_3_0',   # any of type_3_ * 0 cases
              'type_3_1'   # any of type_3_*1 cases
              'type_3_A0', # (ax²+bx+c)×deg1 + (ax²+bx+c)×deg1'
              'type_3_B0', # (ax²+bx+c)×deg2 + (ax²+bx+c)×deg2'
@@ -123,8 +123,7 @@ AVAILABLE_Q_KIND_VALUES = {'level_01':['default',
              #'type_3_C1' # C1 has no sense
 
              'type_4_A0'  # (ax+b)²×deg1 + (ax+b)×deg1'
-
-             ],
+],
 
 
            # Here are the binomial identities
@@ -162,9 +161,7 @@ AVAILABLE_Q_KIND_VALUES = {'level_01':['default',
             'fake_04_C',        #  (ax)² - 2abx - b²
             'fake_04_C_mixed',
             'fake_04_D',        # -(ax)² - 2abx + b²
-            'fake_04_D_mixed'
-           ]
-
+            'fake_04_D_mixed']
 
 }
 
@@ -436,7 +433,7 @@ class Q_Factorization(Q_Structure):
         number = 0
         if 'expression_number' in options                                 \
            and is_.a_natural_int(options['expression_number']):
-        #___
+            # __
             number = options['expression_number']
         self.expression = Expression(number, steps[0])
 
@@ -462,9 +459,7 @@ class Q_Factorization(Q_Structure):
         for i in range(len(steps)):
             if isinstance(steps[i], Exponented):
                 self.steps.append(Expression(number,
-                                                      steps[i]
-                                                      )
-                                 )
+                                                      steps[i]))
             else:
                 self.steps.append(steps[i])
 
@@ -506,7 +501,7 @@ def level_01(q_subkind, **options):
        or q_subkind == 'ax + b' \
        or q_subkind == 'ax² + b' \
        or q_subkind == 'ax² + bx':
-    #___
+        # __
         # the idea is to build the final factorized result first and to
         # expand it to get the question (and the solution's steps
         # in the same time)
@@ -518,13 +513,12 @@ def level_01(q_subkind, **options):
             common_factor.set_degree(randomly.integer(0,
                                                       1,
                                                       weighted_table=[0.85,
-                                                                      0.15])
-                                    )
+                                                                      0.15]))
 
         elif q_subkind == 'three_terms' \
             or q_subkind == 'ax + b' \
             or q_subkind == 'ax² + b':
-        #___
+            # __
             common_factor = Monomial((RANDOMLY, 6, 0))
 
         elif q_subkind == 'ax² + bx':
@@ -575,7 +569,7 @@ def level_01(q_subkind, **options):
            and randomly.integer(1, 20) > 17 \
            and q_subkind == 'default') \
            or q_subkind == 'three_terms':
-        #___
+            # __
             lil_box.append(Monomial(('+', 1, 2)))
 
         first_term = randomly.pop(lil_box)
@@ -594,14 +588,14 @@ def level_01(q_subkind, **options):
             third_term.set_sign(randomly.pop(signs))
             if first_term.is_positive() and second_term.is_positive()\
                and third_term.is_positive():
-            #___
+                # __
                 common_factor.set_sign(randomly.sign())
 
         if not (q_subkind == 'three_terms'):
             if common_factor.get_degree() == 0 \
                and first_term.get_degree() >= 1 \
                and second_term.get_degree() >= 1:
-            #___
+                # __
                 if randomly.heads_or_tails():
                     first_term.set_degree(0)
                 else:
@@ -657,7 +651,7 @@ def level_01(q_subkind, **options):
 
         if first_term.get_degree() >= 1 \
            and second_term.get_degree() >= 1:
-        #___
+            # __
             if randomly.heads_or_tails():
                 first_term.set_degree(0)
             else:
@@ -704,7 +698,7 @@ def level_02(q_subkind, **options):
        or q_subkind == 'type_1_A1' \
        or q_subkind == 'type_1_B1' \
        or q_subkind == 'type_1_C1':
-    #___
+        # __
         c_val = randomly.integer(2, max_coeff)
 
     ax2 = Monomial((randomly.sign(), a_val, 2))
@@ -736,7 +730,7 @@ def level_02(q_subkind, **options):
            or q_subkind == 'type_1_G1' \
            or q_subkind == 'type_1_H1' \
            or q_subkind == 'type_4_A0':
-        #___
+            # __
             deg1_p = Monomial((randomly.sign(),
                                randomly.integer(1, max_coeff),
                                0))
@@ -780,7 +774,7 @@ def level_02(q_subkind, **options):
            or q_subkind == 'type_1_E1' \
            or q_subkind == 'type_1_G1' \
            or q_subkind == 'type_1_H1':
-        #___
+            # __
             if randomly.heads_or_tails():
                 deg2_px = Monomial((randomly.sign(),
                                     randomly.integer(1, max_coeff),
@@ -826,7 +820,7 @@ def level_02(q_subkind, **options):
        or q_subkind == 'type_1_C0' \
        or q_subkind == 'type_1_A1' \
        or q_subkind == 'type_1_B1':
-    #___
+        # __
         C = c
 
     elif q_subkind == 'type_1_D0' \
@@ -834,7 +828,7 @@ def level_02(q_subkind, **options):
          or q_subkind == 'type_1_F0' \
          or q_subkind == 'type_1_D1' \
          or q_subkind == 'type_1_E1':
-    #___
+        # __
         C = bx
 
     elif q_subkind == 'type_1_G0' \
@@ -842,7 +836,7 @@ def level_02(q_subkind, **options):
          or q_subkind == 'type_1_I0' \
          or q_subkind == 'type_1_G1' \
          or q_subkind == 'type_1_H1':
-    #___
+        # __
         C = ax2
 
     elif q_subkind == 'type_2_A0' \
@@ -851,7 +845,7 @@ def level_02(q_subkind, **options):
          or q_subkind == 'type_2_A1' \
          or q_subkind == 'type_2_B1' \
          or q_subkind == 'type_4_A0':
-    #___
+        # __
         C = Polynomial([bx, c])
 
     elif q_subkind == 'type_2_D0' \
@@ -859,7 +853,7 @@ def level_02(q_subkind, **options):
          or q_subkind == 'type_2_F0' \
          or q_subkind == 'type_2_D1' \
          or q_subkind == 'type_2_E1':
-    #___
+        # __
         C = Polynomial([ax2, c])
 
     elif q_subkind == 'type_3_A0' \
@@ -867,7 +861,7 @@ def level_02(q_subkind, **options):
          or q_subkind == 'type_3_C0' \
          or q_subkind == 'type_3_A1' \
          or q_subkind == 'type_3_B1':
-    #___
+        # __
         C = Polynomial([ax2, bx, c])
 
     # Let's attribute F1 and F2 according to the required type
@@ -887,7 +881,7 @@ def level_02(q_subkind, **options):
        or q_subkind == 'type_2_D1' \
        or q_subkind == 'type_3_A0' \
        or q_subkind == 'type_3_A1':
-    #___
+        # __
         F1 = deg1[0]
         F2 = deg1[1]
 
@@ -903,7 +897,7 @@ def level_02(q_subkind, **options):
          or q_subkind == 'type_2_E1' \
          or q_subkind == 'type_3_B0' \
          or q_subkind == 'type_3_B1':
-    #___
+        # __
         F1 = deg2[0]
         F2 = deg2[1]
 
@@ -913,7 +907,7 @@ def level_02(q_subkind, **options):
          or q_subkind == 'type_2_C0' \
          or q_subkind == 'type_2_F0'  \
          or q_subkind == 'type_3_C0':
-    #___
+        # __
         F1 = deg1[0]
         F2 = deg2[0]
 
@@ -936,7 +930,7 @@ def level_02(q_subkind, **options):
        or q_subkind == 'type_2_B1' \
        or q_subkind == 'type_2_E1' \
        or q_subkind == 'type_3_B1':
-    #___
+        # __
         if randomly.heads_or_tails():
             F1 = Item(1)
         else:
@@ -973,7 +967,7 @@ def level_02(q_subkind, **options):
          or q_subkind == 'type_1_G1' \
          or q_subkind == 'type_1_H1') \
         and a_val < 0):
-    #___
+        # __
         pass # here we let minus_sign equal to None
 
     # otherwise, let's attribute one randomly,
@@ -981,10 +975,10 @@ def level_02(q_subkind, **options):
     else:
         if attribute_a_minus_sign == 'randomly' \
            or attribute_a_minus_sign == 'yes':
-        #___
+            # __
             if attribute_a_minus_sign == 'yes' \
                or randomly.heads_or_tails():
-            #___
+                # __
                 if randomly.heads_or_tails():
                     minus_sign = "F1"
                 else:
@@ -1077,7 +1071,7 @@ def level_03(q_subkind, **options):
     if q_subkind == 'sum_square' or q_subkind == 'sum_square_mixed' \
         or q_subkind == 'difference_square' \
         or q_subkind == 'difference_square_mixed':
-    #___
+        # __
         first_term = Monomial(('+',
                                Item(('+', a, 2)).evaluate(),
                                2))
@@ -1092,12 +1086,12 @@ def level_03(q_subkind, **options):
 
         if q_subkind == 'difference_square' \
             or q_subkind == 'difference_square_mixed':
-        #___
+            # __
             second_term.set_sign('-')
 
         if q_subkind == 'sum_square_mixed' \
             or q_subkind == 'difference_square_mixed':
-        #___
+            # __
             ordered_expression = Polynomial([first_term,
                                              second_term,
                                              third_term])
@@ -1111,19 +1105,17 @@ def level_03(q_subkind, **options):
 
         if q_subkind == 'sum_square_mixed' \
             or q_subkind == 'difference_square_mixed':
-        #___
+            # __
             steps.append(ordered_expression)
 
         sq_a_monom = Monomial(('+', a, 1))
         sq_b_monom = Monomial(('+', b, 0))
 
         let_a_eq = Equality([Item('a'),
-                             sq_a_monom
-                             ])
+                             sq_a_monom])
 
         let_b_eq = Equality([Item('b'),
-                             sq_b_monom
-                             ])
+                             sq_b_monom])
 
         steps.append(_("Let") + " "
                      + let_a_eq.into_str(force_expression_markers=True)
@@ -1135,13 +1127,11 @@ def level_03(q_subkind, **options):
 
         a_square_eq = Equality([Item(('+', 'a', 2)),
                                 sq_a_monom,
-                                sq_a_monom.reduce_()
-                                ])
+                                sq_a_monom.reduce_()])
 
         b_square_eq = Equality([Item(('+', 'b', 2)),
                                 sq_b_monom,
-                                sq_b_monom.reduce_()
-                                ])
+                                sq_b_monom.reduce_()])
 
         steps.append(_("then") + " "
                      + a_square_eq.into_str(force_expression_markers=True))
@@ -1159,8 +1149,7 @@ def level_03(q_subkind, **options):
                                                     Item('a'),
                                                     Item('b')]),
                                            two_times_a_times_b_numeric,
-                                           two_times_a_times_b_reduced
-                                           ])
+                                           two_times_a_times_b_reduced])
 
         steps.append(_("and") + " " + two_times_a_times_b_eq.into_str(
             force_expression_markers=True))
@@ -1169,7 +1158,7 @@ def level_03(q_subkind, **options):
 
         if q_subkind == 'difference_square' \
             or q_subkind == 'difference_square_mixed':
-        #___
+            # __
             b = -b
 
         factorized_expression = Sum([Monomial(('+', a, 1)), Item(b)])
@@ -1181,7 +1170,7 @@ def level_03(q_subkind, **options):
 
     elif q_subkind == 'squares_difference' \
         or q_subkind == 'squares_difference_mixed':
-    #___
+        # __
         # To have some (ax)² - b² but also sometimes b² - (ax)²:
         degrees = [2, 0, 1, 0]
 
@@ -1260,9 +1249,7 @@ def level_03(q_subkind, **options):
         lil_box = [sum1, sum2]
 
         steps.append(Product([randomly.pop(lil_box),
-                              randomly.pop(lil_box)
-                            ])
-                     )
+                              randomly.pop(lil_box)]))
 
     elif q_subkind == 'fake_01' or q_subkind == 'fake_01_mixed' \
         or q_subkind == 'fake_02' or q_subkind == 'fake_02_mixed' \
@@ -1271,7 +1258,7 @@ def level_03(q_subkind, **options):
         or q_subkind == 'fake_04_B' or q_subkind == 'fake_04_B_mixed' \
         or q_subkind == 'fake_04_C' or q_subkind == 'fake_04_C_mixed' \
         or q_subkind == 'fake_04_D' or q_subkind == 'fake_04_D_mixed':
-    #___
+        # __
 
         straight_cases = ['fake_01', 'fake_02', 'fake_03',
                           'fake_04_A', 'fake_04_B', 'fake_04_C', 'fake_04_D']
@@ -1335,7 +1322,7 @@ def level_03(q_subkind, **options):
 
             if q_subkind == 'fake_01' or q_subkind == 'fake_01_mixed'\
                 or q_subkind == 'fake_02' or q_subkind == 'fake_02_mixed':
-            #___
+                # __
                 second_term = fake_twoabx.clone()
 
             else:
@@ -1379,12 +1366,10 @@ def level_03(q_subkind, **options):
 
         if q_subkind in match_pb_cases:
             let_a_eq = Equality([Item('a'),
-                                 ax
-                                 ])
+                                 ax])
 
             let_b_eq = Equality([Item('b'),
-                                 b_
-                                 ])
+                                 b_])
 
             steps.append(_("Let") + " "
                          + let_a_eq.into_str(force_expression_markers=True)
@@ -1393,13 +1378,11 @@ def level_03(q_subkind, **options):
 
             a_square_eq = Equality([Item(('+', 'a', 2)),
                                     ax_2,
-                                    a2x2
-                                    ])
+                                    a2x2])
 
             b_square_eq = Equality([Item(('+', 'b', 2)),
                                     b_2,
-                                    b2
-                                    ])
+                                    b2])
 
             steps.append(_("then") + " "
                          + a_square_eq.into_str(force_expression_markers=True))
@@ -1412,8 +1395,7 @@ def level_03(q_subkind, **options):
                                                         Item('b')]),
                                                two_ax_b,
                                                twoabx,
-                                               fake_twoabx
-                                               ],
+                                               fake_twoabx],
                                                equal_signs=['=', '=', 'neq'])
 
             steps.append(_("but") + " "

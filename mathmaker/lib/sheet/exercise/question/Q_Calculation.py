@@ -31,8 +31,7 @@ AVAILABLE_Q_KIND_VALUES = \
      'fractions_sum': ['default'],
      'fractions_product': ['default'],
      'fractions_quotient': ['default']
-
-    }
+}
 
 FRACTION_PRODUCT_AND_QUOTIENT_TABLE = [0.07, #2
                                        0.08, #3
@@ -53,7 +52,7 @@ FRACTION_PRODUCT_AND_QUOTIENT_TABLE = [0.07, #2
                                        0.03, #18
                                        0.01, #19
                                        0.03  #20
-                                      ]
+                                       ]
 
 FRACTIONS_SUMS_TABLE = [([1, 2], 15),
                         ([1, 3], 15),
@@ -134,8 +133,7 @@ class Q_Calculation(Q_Structure):
                                     weighted_table=[0.225, 0.225, 0, 0.2,
                                                     0, 0.2, 0, 0, 0, 0.07,
                                                     0, 0.0375, 0, 0, 0,
-                                                    0.0375, 0, 0.005
-                                                    ])
+                                                    0.0375, 0, 0.005])
 
             factors_list = [j+1 for j in range(10)]
 
@@ -146,7 +144,7 @@ class Q_Calculation(Q_Structure):
                and is_.a_number(options['with_ten_powers']) \
                and options['with_ten_powers'] <= 1 \
                and options['with_ten_powers'] >= 0:
-            #___
+                # __
                 if randomly.decimal_0_1() < options['with_ten_powers']:
                     ten_powers_list = [10, 10, 100, 100]
                     ten_power_factor1 = randomly.pop(ten_powers_list)
@@ -158,14 +156,13 @@ class Q_Calculation(Q_Structure):
                                    root*randomly.pop(factors_list) \
                                      * ten_power_factor1,
                                    root*randomly.pop(factors_list) \
-                                     * ten_power_factor2
-                                   ))
+                                     * ten_power_factor2))
 
         # 2d & 3d OPTIONS
         # Fractions Products | Quotients
         elif q_kind == 'fractions_product' \
              or q_kind == 'fractions_quotient':
-        #___
+            # __
             # In some cases, the fractions will be generated
             # totally randomly
             if randomly.decimal_0_1() < 0:
@@ -189,15 +186,13 @@ class Q_Calculation(Q_Structure):
                                Item((randomly.sign(plus_signs_ratio=0.80),
                                      a)),
                                Item((randomly.sign(plus_signs_ratio=0.80),
-                                     b))
-                              ))
+                                     b))))
 
                 f2 = Fraction((randomly.sign(plus_signs_ratio=0.75),
                                Item((randomly.sign(plus_signs_ratio=0.80),
                                      c)),
                                Item((randomly.sign(plus_signs_ratio=0.80),
-                                     d))
-                              ))
+                                     d))))
 
                 #f1 = f1.simplified()
                 #f2 = f2.simplified()
@@ -209,7 +204,7 @@ class Q_Calculation(Q_Structure):
             # and c is a randomly number coprime to a×j
             else:
                 a = randomly.integer(2, 8)
-                lil_box = [i+2 for i in range(7)]
+                lil_box = [i + 2 for i in range(7)]
                 i = randomly.pop(lil_box)
                 j = randomly.pop(lil_box)
 
@@ -222,15 +217,13 @@ class Q_Calculation(Q_Structure):
                                Item((randomly.sign(plus_signs_ratio=0.80),
                                      a*i)),
                                Item((randomly.sign(plus_signs_ratio=0.80),
-                                     b))
-                              ))
+                                     b))))
 
                 f2 = Fraction((randomly.sign(plus_signs_ratio=0.75),
                                Item((randomly.sign(plus_signs_ratio=0.80),
                                      c)),
                                Item((randomly.sign(plus_signs_ratio=0.80),
-                                     a*j))
-                              ))
+                                     a*j))))
 
                 if randomly.heads_or_tails():
                     f3 = f1.clone()
@@ -245,8 +238,7 @@ class Q_Calculation(Q_Structure):
 
             elif q_kind == 'fractions_quotient':
                 self.objct = Quotient(('+', f1, f2, 1,
-                                       'use_divide_symbol'
-                                     ))
+                                       'use_divide_symbol'))
 
 
         # 4th OPTION
@@ -269,7 +261,7 @@ class Q_Calculation(Q_Structure):
             # forbid high denominators.
             if seed * chosen_seed_and_generator[0][0] \
                     * chosen_seed_and_generator[0][1] >= 75:
-            #___
+                # __
                 seed = randomly.integer(2, chosen_seed_and_generator[1])
 
             lil_box = [0, 1]
@@ -302,7 +294,7 @@ class Q_Calculation(Q_Structure):
         number = 0
         if 'expression_number' in options                                     \
            and is_.a_natural_int(options['expression_number']):
-        #___
+            # __
             number = options['expression_number']
         self.expression = Expression(number, self.objct)
 

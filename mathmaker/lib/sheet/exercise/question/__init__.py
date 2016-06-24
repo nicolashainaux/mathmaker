@@ -41,9 +41,9 @@ from . import Q_RightTriangle
 Q_Structure = Q_Structure.Q_Structure
 
 Q_AlgebraExpressionReduction = \
-            Q_AlgebraExpressionReduction.Q_AlgebraExpressionReduction
+    Q_AlgebraExpressionReduction.Q_AlgebraExpressionReduction
 Q_AlgebraExpressionExpansion = \
-            Q_AlgebraExpressionExpansion.Q_AlgebraExpressionExpansion
+    Q_AlgebraExpressionExpansion.Q_AlgebraExpressionExpansion
 Q_Calculation = Q_Calculation.Q_Calculation
 Q_Equation = Q_Equation.Q_Equation
 Q_Factorization = Q_Factorization.Q_Factorization
