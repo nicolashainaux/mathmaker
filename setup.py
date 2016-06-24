@@ -92,7 +92,8 @@ setup(
     tests_require=['tox'],
     install_requires=['PyYAML>=3.11',
                       'polib>=1.0.7'],
-    cmdclass={'test': Tox},
+    cmdclass={'test': PyTest,
+              'tox': Tox},
     author_email=mathmaker.__author_email__,
     description='Mathmaker creates automatically elementary maths exercises '
                 'and their (detailed) answers.',
