@@ -38,16 +38,12 @@ CATALOG = {'mental_calculation': exercise.X_MentalCalculation}
 # 'generic': exercise.X_Generic
 
 
-def get_xml_frameworks_path():
-    return settings.datadir + 'frameworks/'
-
-
 def get_xml_schema_path():
-    return get_xml_frameworks_path() + 'sheet.xsd'
+    return settings.frameworksdir + 'sheet.xsd'
 
 
 def get_xml_sheets_paths():
-    D = get_xml_frameworks_path()
+    D = settings.frameworksdir
     DM = D + "mental_calculation/"
     L11_1 = "lev11_1/"
     L11_2 = "lev11_2/"

@@ -79,6 +79,7 @@ def init():
     global rootdir, localedir, libdir, datadir, settingsdir
     global projectdir
     global outputdir
+    global frameworksdir
     global default, path
     global mainlogger
     global dbg_logger
@@ -101,6 +102,7 @@ def init():
     localedir = rootdir + "locale/"
     libdir = rootdir + "lib/"
     datadir = rootdir + "data/"
+    frameworksdir = datadir + 'frameworks/'
     settingsdir = rootdir + settings_dirname
     projectdir = rootdir[:-len('mathmaker/')]
 
