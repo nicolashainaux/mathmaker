@@ -34,7 +34,7 @@ def main():
     if not len(args) == 2:
         sys.stderr.write("Error : pythagoricians requires exactly "
                          "two arguments.\n")
-        sys.exit(2)
+        sys.exit(1)
 
     try:
         a = int(args[0])
@@ -42,7 +42,7 @@ def main():
     except ValueError:
         sys.stderr.write("Error : both pythagoricians's arguments "
                          "must be integers.\n")
-        sys.exit(2)
+        sys.exit(1)
 
     sys.stdout.write(triplets(a, b))
 

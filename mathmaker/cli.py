@@ -90,6 +90,7 @@ def entry_point():
 
     if args.main_directive == 'list':
         sys.stdout.write(list_sheets.list_all_sheets())
+        shared.db.close()
         sys.exit(0)
     elif args.main_directive in sheet.AVAILABLE:
         sh = sheet.AVAILABLE[args.main_directive][0]()
@@ -104,17 +105,21 @@ def entry_point():
                   "list of directives.")
         # print("--- {sec} seconds ---"\
         #      .format(sec=round(time.time() - start_time, 3)))
-        sys.exit(2)
+        shared.db.close()
+        sys.exit(1)
 
     try:
         shared.machine.write_out(str(sh))
     except Exception:
         log.error("An exception occured during the creation of the sheet.",
                   exc_info=True)
+        shared.db.close()
+        sys.exit(1)
 
     shared.db.commit()
     shared.db.close()
     log.info("Done.")
+    sys.exit(0)
 
 
 if __name__ == '__main__':
