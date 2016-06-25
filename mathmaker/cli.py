@@ -30,6 +30,7 @@ from . import settings
 from .lib import shared
 from .lib import startup_actions
 from .lib import sheet
+from .lib import list_sheets
 from .lib.tools.xml_sheet import get_xml_sheets_paths
 
 
@@ -70,7 +71,9 @@ def entry_point():
                              '~/.config/mathmaker/user_config.yaml')
     parser.add_argument('main_directive', metavar='[DIRECTIVE|FILE]',
                         help='this can be either a sheetname included in '
-                             'mathmaker or a mathmaker xml file.')
+                             'mathmaker or a mathmaker xml file, or the '
+                             'special directive "list" to get the complete '
+                             'list.')
     parser.add_argument('--version', '-v',
                         action='version',
                         version=__info__)
@@ -85,7 +88,10 @@ def entry_point():
     startup_actions.check_settings_consistency()
     shared.init()
 
-    if args.main_directive in sheet.AVAILABLE:
+    if args.main_directive == 'list':
+        sys.stdout.write(list_sheets.list_all_sheets())
+        sys.exit(0)
+    elif args.main_directive in sheet.AVAILABLE:
         sh = sheet.AVAILABLE[args.main_directive][0]()
     elif args.main_directive in XML_SHEETS:
         sh = sheet.S_Generic(filename=XML_SHEETS[args.main_directive])
@@ -94,9 +100,8 @@ def entry_point():
     else:
         log.error(args.main_directive
                   + " is not a correct directive for " + __software_name__
-                  + ", you should use any item from the following lists: "
-                  + str(sorted([key for key in sheet.AVAILABLE]))
-                  + str(sorted([key for key in XML_SHEETS])))
+                  + ", you can run `mathmaker list` to get the complete "
+                  "list of directives.")
         # print("--- {sec} seconds ---"\
         #      .format(sec=round(time.time() - start_time, 3)))
         sys.exit(2)
