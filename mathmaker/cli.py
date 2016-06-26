@@ -40,40 +40,42 @@ def entry_point():
     log = settings.mainlogger
     startup_actions.check_dependencies()
     parser = argparse.ArgumentParser(description='Creates maths exercices and '
-                                                 'their answers.')
+                                                 'their solutions.')
     parser.add_argument('-l', '--language', action='store', dest='lang',
                         default=settings.language,
                         help='force the language of the output to LANGUAGE. '
-                             'You can configure the value to be read from '
-                             '~/.config/mathmaker/user_config.yaml')
+                             'This will override any value you may have set '
+                             'in ~/.config/mathmaker/user_config.yaml')
     parser.add_argument('-d', '--output-directory', action='store',
                         dest='outputdir',
                         default=settings.outputdir,
                         help='where to put the possible output files, like '
-                             'pictures. Default value is set to current '
-                             'directory. You can change it too in '
-                             '~/.config/mathmaker/user_config.yaml')
+                             'pictures. '
+                             'This will override any value you may have set '
+                             '~/.config/mathmaker/user_config.yaml. '
+                             'Left undefined, the default will be current '
+                             'directory.')
     parser.add_argument('-F', '--font', action='store',
                         dest='font',
                         default=settings.font,
                         help='The font to use. If it\'s not installed on '
-                             'your system, lualatex will have then trouble '
-                             'to compile the document. You can configure '
-                             'a default value for the font in '
-                             '~/.config/mathmaker/user_config.yaml')
+                             'your system, lualatex will not be able '
+                             'to compile the document. '
+                             'This will override any value you may have set '
+                             'in ~/.config/mathmaker/user_config.yaml')
     parser.add_argument('-e', '--encoding', action='store',
                         dest='encoding',
                         default=settings.encoding,
                         help='The encoding to use. Take care it\'s available '
-                             ' on your system, otherwise you may have trouble '
-                             'to compile the document. You can configure '
-                             'a default value for the encoding in '
-                             '~/.config/mathmaker/user_config.yaml')
+                             'on your system, otherwise lualatex will not be '
+                             'able to compile the document. '
+                             'This will override any value you may have set '
+                             'in ~/.config/mathmaker/user_config.yaml')
     parser.add_argument('main_directive', metavar='[DIRECTIVE|FILE]',
-                        help='this can be either a sheetname included in '
-                             'mathmaker or a mathmaker xml file, or the '
-                             'special directive "list" to get the complete '
-                             'list.')
+                        help='this can either match a sheetname included in '
+                             'mathmaker, or a mathmaker xml file, or it may '
+                             'be the special directive "list", that will '
+                             'print the complete list and exit.')
     parser.add_argument('--version', '-v',
                         action='version',
                         version=__info__)
