@@ -39,8 +39,8 @@ def entry_point():
     XML_SHEETS = get_xml_sheets_paths()
     log = settings.mainlogger
     startup_actions.check_dependencies()
-    parser = argparse.ArgumentParser(description='Creates maths exercices and '
-                                                 'their solutions.')
+    parser = argparse.ArgumentParser(description='Creates maths exercices '
+                                                 'sheets and their solutions.')
     parser.add_argument('-l', '--language', action='store', dest='lang',
                         default=settings.language,
                         help='force the language of the output to LANGUAGE. '
