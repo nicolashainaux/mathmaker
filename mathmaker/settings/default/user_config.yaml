@@ -3,7 +3,8 @@
 
 # If you wish different values, you should make a copy and
 # edit your copy only.
-# As a user, your copy should be stored as ~/.config/user_config.yaml
+# As a user, your copy should be stored as:
+# ~/.config/mathmaker/user_config.yaml
 # As a dev, your copy should be stored as:
 # path/to/mathmaker/mathmaker/settings/dev/user_config.yaml
 # (it will be ignored by git).
