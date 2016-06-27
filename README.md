@@ -50,7 +50,7 @@ Some of them can be changed as mathmaker options:
 
 ```
 $ mathmaker --help
-usage: mathmaker [-h] [-l LANG] [-d OUTPUTDIR] [-F FONT] [-e ENCODING]
+usage: mathmaker [-h] [-l LANG] [-d OUTPUTDIR] [-f FONT] [--encoding ENCODING]
                  [--version]
                  [DIRECTIVE|FILE]
 
@@ -73,12 +73,11 @@ optional arguments:
                         This will override any value you may have set
                         ~/.config/mathmaker/user_config.yaml. Left undefined,
                         the default will be current directory.
-  -F FONT, --font FONT  The font to use. If it's not installed on your system,
+  -f FONT, --font FONT  The font to use. If it's not installed on your system,
                         lualatex will not be able to compile the document.
                         This will override any value you may have set in
                         ~/.config/mathmaker/user_config.yaml
-  -e ENCODING, --encoding ENCODING
-                        The encoding to use. Take care it's available on your
+  --encoding ENCODING   The encoding to use. Take care it's available on your
                         system, otherwise lualatex will not be able to compile
                         the document. This will override any value you may
                         have set in ~/.config/mathmaker/user_config.yaml
