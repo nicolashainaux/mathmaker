@@ -55,7 +55,7 @@ def entry_point():
                              '~/.config/mathmaker/user_config.yaml. '
                              'Left undefined, the default will be current '
                              'directory.')
-    parser.add_argument('-F', '--font', action='store',
+    parser.add_argument('-f', '--font', action='store',
                         dest='font',
                         default=settings.font,
                         help='The font to use. If it\'s not installed on '
@@ -63,7 +63,7 @@ def entry_point():
                              'to compile the document. '
                              'This will override any value you may have set '
                              'in ~/.config/mathmaker/user_config.yaml')
-    parser.add_argument('-e', '--encoding', action='store',
+    parser.add_argument('--encoding', action='store',
                         dest='encoding',
                         default=settings.encoding,
                         help='The encoding to use. Take care it\'s available '
