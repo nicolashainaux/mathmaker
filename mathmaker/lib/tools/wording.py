@@ -20,6 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+"""Use these functions to process sentences or objects containing a wording."""
+
 import random
 import copy
 import re
@@ -32,10 +34,30 @@ from mathmaker.lib.common.cst import (UNIT_KINDS, COMMON_LENGTH_UNITS,
                                       CURRENCIES_DICT)
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief Returns the word wrapped between the two given strings.
-def wrap(word, braces='{}', o_str=None, e_str=None):
+def wrap(word: str, braces='{}', o_str=None, e_str=None) -> str:
+    """
+    Return the word wrapped between the two given strings.
+
+    Using o_str and e_str (e.g. opening str and ending str) will override
+    braces content. It's interesting when one want to wrap the word with
+    something longer than a char.
+
+    :param word: the chunk of text to be wrapped
+    :param braces: the pair of braces that will wrap the word
+    :param o_str: prefix the word.
+    :param e_str: suffix the word
+
+    :Examples:
+
+    >>> wrap('wonderful')
+    '{wonderful}'
+    >>> wrap('wonderful', braces='<>')
+    '<wonderful>'
+    >>> wrap('wonderful', o_str='<<', e_str='>>')
+    '<<wonderful>>'
+    >>> wrap('wonderful', e_str='}*')
+    '{wonderful}*'
+    """
     opening_str, ending_str = braces
     if o_str not in [None, '']:
         opening_str = o_str
@@ -44,11 +66,19 @@ def wrap(word, braces='{}', o_str=None, e_str=None):
     return opening_str + word + ending_str
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief Returns the word but with removed first and last char, plus
-#          possibly following punctuation.
-def unwrapped(word):
+def unwrapped(word: str) -> str:
+    """
+    Remove first and last char plus possible punctuation of word.
+
+    :Examples:
+
+    >>> unwrapped('{word}')
+    'word'
+    >>> unwrapped('{word},')
+    'word'
+    >>> unwrapped('{word}:')
+    'word'
+    """
     if (word.endswith('.') or word.endswith(',')
         or word.endswith(':') or word.endswith(';')
         or word.endswith('?') or word.endswith('!')):
@@ -57,19 +87,48 @@ def unwrapped(word):
         return word[1:-1]
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief Returns True if word is wrapped by opening_str and ending_str
-def is_wrapped(word, braces='{}'):
+def is_wrapped(word: str, braces='{}') -> bool:
+    """
+    Return True if word is wrapped between braces.
+
+    :param word: the word to inspect
+    :braces: to change the default {} braces to something else, like [] or <>
+
+    :Examples:
+
+    >>> is_wrapped('{word}')
+    True
+    >>> is_wrapped('{word},')
+    False
+    >>> is_wrapped('<word>')
+    False
+    >>> is_wrapped('<word>', braces='<>')
+    True
+    """
     opening_str, ending_str = braces
     return word.startswith(opening_str) and word.endswith(ending_str)
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief Returns True if word is wrapped by opening_str and ending_str or
-#          ending_str plus a punctuation.
-def is_wrapped_p(word, braces='{}'):
+def is_wrapped_p(word: str, braces='{}') -> bool:
+    """
+    Return True if word is wrapped between braces. Punctuation has no effect.
+
+    :param word: the word to inspect
+    :braces: to change the default {} braces to something else, like [] or <>
+
+    :Examples:
+
+    >>> is_wrapped_p('{word}')
+    True
+    >>> is_wrapped_p('{word},')
+    True
+    >>> is_wrapped_p('<word>')
+    False
+    >>> is_wrapped_p('<word>', braces='<>')
+    True
+    >>> is_wrapped_p('<word>:', braces='<>')
+    True
+    """
     opening_str, ending_str = braces
     return (word.startswith(opening_str)
             and (word.endswith(ending_str)
@@ -81,11 +140,26 @@ def is_wrapped_p(word, braces='{}'):
                  or word.endswith(ending_str + "!")))
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief Returns True if word is wrapped by opening_str and ending_str plus
-#          a punctuation.
-def is_wrapped_P(word, braces='{}'):
+def is_wrapped_P(word: str, braces='{}') -> bool:
+    """
+    Return True if word is wrapped between braces & followed by a punctuation.
+
+    :param word: the word to inspect
+    :braces: to change the default {} braces to something else, like [] or <>
+
+    :Examples:
+
+    >>> is_wrapped_P('{word}')
+    False
+    >>> is_wrapped_P('{word},')
+    True
+    >>> is_wrapped_P('<word>')
+    False
+    >>> is_wrapped_P('<word>', braces='<>')
+    False
+    >>> is_wrapped_P('<word>:', braces='<>')
+    True
+    """
     opening_str, ending_str = braces
     return (word.startswith(opening_str)
             and (word.endswith(ending_str + ".")
@@ -96,27 +170,51 @@ def is_wrapped_P(word, braces='{}'):
                  or word.endswith(ending_str + "!")))
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief Returns True if word is a "unit" tag (e.g. ends with _unit})
-def is_unit(word):
+def is_unit(word: str) -> bool:
+    """
+    Return True if word is a "unit" tag (e.g. ends with _unit}).
+
+    Punctuation has no effect.
+
+    :param word: the word to inspect
+    """
     return (is_wrapped(word) and word[1:-1].endswith("_unit")) \
         or (is_wrapped_P(word) and word[1:-2].endswith("_unit"))
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief Returns True if word is a "unit" tag (e.g. ends with _unitN})
 def is_unitN(word):
+    """
+    Return True if word is a "unitN" tag (e.g. ends with _unitN}).
+
+    Punctuation has no effect.
+
+    :param word: the word to inspect
+    """
     return (is_wrapped(word) and word[1:-2].endswith("_unit")) \
         or (is_wrapped_P(word) and word[1:-3].endswith("_unit"))
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief Returns a couple (sentence_without_hint, hint). Take care, only
-#          one hint will be taken into account.
-def cut_off_hint_from(sentence):
+def cut_off_hint_from(sentence: str) -> tuple:
+    """
+    Return the sentence and the possible hint separated.
+
+    Only one hint will be taken into account.
+
+    :param sentence: the sentence to inspect
+
+    :Examples:
+
+    >>> cut_off_hint_from("This sentence has no hint.")
+    ('This sentence has no hint.', '')
+    >>> cut_off_hint_from("This sentence has a hint: |hint:length_unit|")
+    ('This sentence has a hint:', 'length_unit')
+    >>> cut_off_hint_from("Malformed hint:|hint:length_unit|")
+    ('Malformed hint:|hint:length_unit|', '')
+    >>> cut_off_hint_from("Malformed hint: |hint0:length_unit|")
+    ('Malformed hint: |hint0:length_unit|', '')
+    >>> cut_off_hint_from("Two hints: |hint:unit| |hint:something_else|")
+    ('Two hints: |hint:unit|', 'something_else')
+    """
     last_word = sentence.split()[-1:][0]
     hint_block = ""
     if (is_wrapped(last_word, braces='||')
@@ -131,12 +229,29 @@ def cut_off_hint_from(sentence):
         return (sentence, "")
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief  Will set a random name to all {name}, {nameN}, {masculine_name},
-#           {masculine_nameN}, {feminine_name} and {feminine_nameN} tags.
-#   @param  arg The object to check (whether it has these attributes or not)
-def handle_valueless_names_tags(arg, sentence):
+def handle_valueless_names_tags(arg: object, sentence: str):
+    """
+    Each {name} tag found triggers an arg.name attribute to be randomly set.
+
+    All concerned tags are: {name}, {nameN}, {masculine_name},
+    {masculine_nameN}, {feminine_name}, {feminine_nameN}.
+
+    If the tag embbeds a value, like in {name=John}, then it's ignored by this
+    function. If arg already has an attribute matching the tag, then it's also
+    ignored by this function.
+
+    Now, say arg has no attributes like name, name1, etc. then, if sentence
+    contains:
+
+    * "{name}" then arg.name will receive a random name.
+    * "{name1}", then arg.name1 will receive a random name.
+    * "{name=Michael}", then this function ignores it.
+    * "{feminine_name}", then arg.feminine_name will get a random feminine
+      name.
+
+    :param arg: the object that attributes must be checked and possibly set
+    :param sentence: the sentence where to look for "name" tags.
+    """
     valueless_nameblocks = [w[1:-1] for w in sentence.split()
                             if ('=' not in w
                                 and is_wrapped(w)
@@ -161,12 +276,26 @@ def handle_valueless_names_tags(arg, sentence):
             setattr(arg, vn, val)
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief  Will set missing attributes matching the {*_unit} and {*_unitN}
-#           tags. <*_unit> and <*_unitN> are also handled by this function.
-#   @param  arg The object to check (whether it has the attributes or not)
-def handle_valueless_unit_tags(arg, sentence):
+def handle_valueless_unit_tags(arg: object, sentence: str):
+    r"""
+    Each {\*_unit} tag triggers an arg.\*_unit attribute to be randomly set.
+
+    For instance, if {length_unit} is found, then arg.length_unit will get a
+    random length unit.
+    Moreover, if {area_unit} or {volume_unit} are found, arg.length_unit is
+    set accordingly too. If arg.length_unit does already exist,
+    then arg.area_unit will be set accordingly (and not randomly any more).
+
+    {\*_unitN}, <\*_unit> and <\*_unitN> tags will be handled the same way
+    by this function.
+
+    If the tag embbeds a value, like in {capacity_unit=dL}, then it's ignored
+    by this function. If arg already has an attribute matching the tag, then
+    it's also ignored by this function.
+
+    :param arg: the object that attributes must be checked and possibly set
+    :param sentence: the sentence where to look for "unit" tags.
+    """
     valueless_unitblocks = [w[1:-1] for w in sentence.split()
                             if ('=' not in w
                                 and (is_wrapped(w)
@@ -203,14 +332,15 @@ def handle_valueless_unit_tags(arg, sentence):
         setattr(arg, vu, val)
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief  Builds a dictionary from all {key=val} occurrences found in
-#           sentence. All {key=val} occurrences are then replaced by {key} in
-#           the sentence. All <key=val> occurrences will be handled in the same
-#           way (and replaced by a single {key} too).
-#   @return A couple: (transformed_sentence, {key:val, ...}).
-def process_attr_values(sentence):
+def process_attr_values(sentence: str) -> tuple:
+    """
+    Build a dict with all {key=val} occurrences in sentence. Update such tags.
+
+    All {key=val} occurrences will be replaced by {key}.
+
+    :param sentence: the sentence to process
+    :return: this couple: (transformed_sentence, {key:val, ...})
+    """
     attr_values = {}
     key_val_blocks = [w for w in sentence.split()
                       if ((is_wrapped_p(w)
@@ -242,12 +372,31 @@ def process_attr_values(sentence):
     return (transformed_sentence, attr_values)
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief  Turn all occurences of {nbN} {*_unit} into single {nbN_*_unit} and
-#           sets as matching attribute 'nbN_*_unit' with the resulting string
-#           of Item(nbN, unit=*_unit)
-def merge_nb_unit_pairs(arg):
+def merge_nb_unit_pairs(arg: object):
+    r"""
+    Merge all occurences of {nbN} {\*_unit} in arg.wording into {nbN\_\*_unit}.
+
+    In the same time, the matching attribute arg.nbN\_\*_unit is set with
+    Value(nbN, unit=Unit(arg.\*_unit)).into_str(display_SI_unit=True)
+    (the possible exponent is taken into account too).
+
+    :param arg: the object whose attribute wording will be processed. It must
+      have a wording attribute as well as nbN and \*_unit attributes.
+
+    :Example:
+
+    >>> class Object(object): pass
+    ...
+    >>> arg = Object()
+    >>> arg.wording = 'I have {nb1} {capacity_unit} of water.'
+    >>> arg.nb1 = 2
+    >>> arg.capacity_unit = 'L'
+    >>> merge_nb_unit_pairs(arg)
+    >>> arg.wording
+    'I have {nb1_capacity_unit} of water.'
+    >>> arg.nb1_capacity_unit
+    '\\SI{2}{L}'
+    """
     logger = settings.dbg_logger.getChild('wording.merge_nb_unit_pairs')
     logger.debug("Retrieved wording: " + arg.wording + "\n")
     new_words_list = []
@@ -290,20 +439,47 @@ def merge_nb_unit_pairs(arg):
     logger.debug("Turned into: " + arg.wording + "\n")
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief  Returns all values found wrapped in {}.
-def extract_formatting_tags_from(s):
+def extract_formatting_tags_from(s: str):
+    """
+    Return all tags found wrapped in {}. Punctuation has no effect.
+
+    :param s: the sentence where to look for {tags}.
+    """
     return [w[1:-1] for w in s.split() if is_wrapped(w)] \
         + [w[1:-2] for w in s.split() if is_wrapped_P(w)]
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief  Sets or resets the object's attributes according to its 'wording'
-#           attribute. Also process the 'wording' attribute.
-#   @param  w_object The object having a 'wording' attribute to process.
-def setup_wording_format_of(w_object):
+def setup_wording_format_of(w_object: object):
+    r"""
+    Set w_object's attributes according to the tags found in w_object.wording.
+
+    This is the complete process of the wording.
+    w_object.wording will also be modified in the process.
+
+    For instance, if w_object.wording is:
+    "Here are one {name}, {nb1} {length_unit1} of roads, and a square of
+    {nb2} {volume_unit=cm}. What is the side's length of the
+    cube? |hint:length_unit|"
+
+    Then w_object.wording becomes:
+    "Here are one {name}, {nb1_length_unit1} of roads, and a square of
+    {nb2_volume_unit}. What is the side's length of the
+    cube?"
+
+    w_object.name will be set with a random name,
+
+    w_object.nb1_length_unit1 will be set with:
+    '\\SI{<value of nb1>}{<random length unit>}'
+
+    w_object.length_unit will be set to centimeters
+
+    w_object.nb2_volume_unit will be set with:
+    '\\SI{<value of nb2>}{cm^{3}}'
+
+    w_object.hint will be set with: 'cm'
+
+    :param w_object: The object having a 'wording' attribute to process.
+    """
     logger = settings.dbg_logger.getChild('wording.setup_wording_format_of')
     logger.debug("---- NEW RAW WORDING\n" + str(w_object.wording) + "\n")
     w_object.wording, hint = cut_off_hint_from(w_object.wording)
@@ -366,11 +542,12 @@ def setup_wording_format_of(w_object):
             w_object.hint = hint
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief  Insert nonbreaking spaces instead of spaces between a number and
-#           the following word.
-def insert_nonbreaking_spaces(sentence):
+def insert_nonbreaking_spaces(sentence: str):
+    """
+    Replace spaces by nonbreaking ones between a number and the next word.
+
+    :param sentence: the sentence to process
+    """
     logger = settings.dbg_logger.getChild('wording.insert_nonbreaking_spaces')
     nb_space = shared.markup['nonbreaking_space']
     p = re.compile(r'(\d)(\s)(\w+)', re.LOCALE)
@@ -380,8 +557,13 @@ def insert_nonbreaking_spaces(sentence):
     return sentence
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief  Applies post process on a sentence (without {tags}).
-def post_process(sentence):
+def post_process(sentence: str):
+    """
+    Apply all desired post processes to a sentence without {tags}.
+
+    So far, this is only the replacement of spaces following a number and
+    preceding a word by nonbreaking spaces.
+
+    :param sentence: the sentence to post process
+    """
     return insert_nonbreaking_spaces(sentence)

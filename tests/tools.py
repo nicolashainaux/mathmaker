@@ -20,18 +20,24 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+"""Auxiliary functions to help writing tests."""
+
 import re
 
 
 def wrap_nb(s):
-    """
+    r"""
     All numbers of the string s get wrapped inside \\text{}.
 
     Dots are taken into account, but not signs.
-    Example:
-    >>> wrap_nb('34\\times 67.2 + 6 - 4 + (-5) - (+7.2)')
-    '\\text{34}\\times \\text{67.2} + \\text{6} - \\text{4} + (-\\text{5})
-    - (+\\text{7.2})'
+    This function is meant to lighten the writing of LaTeX expressions.
+
+    :Example:
+
+    >>> wrap_nb('34\\times 67.2 + 6 - 4 + (-5)')
+    '\\text{34}\\times \\text{67.2} + \\text{6} - \\text{4} + (-\\text{5})'
+    >>> wrap_nb(' - (+7.2)')
+    ' - (+\\text{7.2})'
     """
     p = re.compile(r'((\d*\.\d+)|(\d+))', re.LOCALE)
     return p.sub(r'\\text{' + r'\1' + r'}', s)

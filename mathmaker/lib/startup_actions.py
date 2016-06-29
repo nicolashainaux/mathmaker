@@ -20,6 +20,13 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+"""
+This module gathers functions that should be run at startup.
+
+These functions check dependencies, settings consistency and setup the
+language for gettext translations.
+"""
+
 import os
 import subprocess
 import shlex
@@ -31,22 +38,19 @@ from mathmaker import __software_name__
 from mathmaker.lib.common import latex
 
 
-def check_dependency(name, goal, path_to, required_version_nb):
+def check_dependency(name: str, goal: str, path_to: str,
+                     required_version_nb: str) -> bool:
     """
     Will check if a dependency is installed plus its version number.
 
     The version number is supposed to be displayed at the end of the
     line containing 'version' when calling `executable --version`
     (or the equivalent).
+
     :param name: the dependency's name.
-    :type name: str
     :param goal: tells shortly why mathmaker needs it for
-    :type goal: str
     :param path_to: the path to the executable to test
-    :type path_to: str
     :param required_version_nb: well, the required version number
-    :type required_version_nb: str
-    :rtype: bool
     """
     log = settings.mainlogger
     err_msg = "mathmaker requires {n} to {g}".format(n=name, g=goal)
@@ -76,7 +80,7 @@ def check_dependency(name, goal, path_to, required_version_nb):
         raise EnvironmentError(err_msg + add_msg)
 
 
-def check_dependencies():
+def check_dependencies() -> bool:
     """Will check all mathmaker's dependencies."""
     infos = ''
     missing_dependency = False
@@ -103,7 +107,7 @@ def check_dependencies():
 
 
 def install_gettext_translations(**kwargs):
-    """Will install output's language (gettext functions)"""
+    """Will install output's language (gettext functions)."""
     log = settings.mainlogger
     language = kwargs.get('language', settings.language)
     err_msg = 'gettext returned the following message:"{gettext_msg}"'\
