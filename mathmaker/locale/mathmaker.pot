@@ -35,71 +35,71 @@ msgstr ""
 msgid "This equation has no solution."
 msgstr ""
 
-#: lib/machine/LaTeX.py:97
+#: lib/machine/LaTeX.py:96
 msgid "To strike out numbers "
 msgstr ""
 
-#: lib/machine/LaTeX.py:99
+#: lib/machine/LaTeX.py:98
 msgid "To use the margin definition command"
 msgstr ""
 
-#: lib/machine/LaTeX.py:101
+#: lib/machine/LaTeX.py:100
 #, python-brace-format
 msgid "To use the commands from {pkg_name} "
 msgstr ""
 
-#: lib/machine/LaTeX.py:104
+#: lib/machine/LaTeX.py:103
 msgid "To use multicol environment"
 msgstr ""
 
-#: lib/machine/LaTeX.py:106
+#: lib/machine/LaTeX.py:105
 msgid "To use extra commands to handle tabulars"
 msgstr ""
 
-#: lib/machine/LaTeX.py:108
+#: lib/machine/LaTeX.py:107
 msgid "For pretty underlining"
 msgstr ""
 
-#: lib/machine/LaTeX.py:110
+#: lib/machine/LaTeX.py:109
 msgid "To include .eps pictures"
 msgstr ""
 
-#: lib/machine/LaTeX.py:115
+#: lib/machine/LaTeX.py:114
 msgid "To use other mathematical symbols"
 msgstr ""
 
-#: lib/machine/LaTeX.py:118
+#: lib/machine/LaTeX.py:117
 msgid "To draw"
 msgstr ""
 
-#: lib/machine/LaTeX.py:120
+#: lib/machine/LaTeX.py:119
 msgid "Page layout "
 msgstr ""
 
-#: lib/machine/LaTeX.py:127
+#: lib/machine/LaTeX.py:126
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 
-#: lib/machine/LaTeX.py:130
+#: lib/machine/LaTeX.py:129
 msgid "file_name"
 msgstr ""
 
-#: lib/machine/LaTeX.py:133
+#: lib/machine/LaTeX.py:132
 msgid "Exercises counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:135
+#: lib/machine/LaTeX.py:134
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
 "bold, with its number and automatically increments the counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:138 lib/machine/LaTeX.py:142
+#: lib/machine/LaTeX.py:137 lib/machine/LaTeX.py:141
 msgid "Exercise"
 msgstr ""
 
-#: lib/machine/LaTeX.py:145
+#: lib/machine/LaTeX.py:144
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -226,23 +226,23 @@ msgstr ""
 msgid "Short Test: pythagorean theorem"
 msgstr ""
 
-#: ata/vocabulary.xml:42
+#: data/vocabulary.xml:42 lib/sheet/exercise/question/Q_RightTriangle.py:345
 msgid "to the unit"
 msgstr ""
 
-#: ata/vocabulary.xml:43
+#: data/vocabulary.xml:43 lib/sheet/exercise/question/Q_RightTriangle.py:346
 msgid "to the tenth"
 msgstr ""
 
-#: ata/vocabulary.xml:44
+#: lib/sheet/exercise/question/Q_RightTriangle.py:347 data/vocabulary.xml:44
 msgid "to the hundreth"
 msgstr ""
 
-#: ata/vocabulary.xml:45
+#: data/vocabulary.xml:45 lib/sheet/exercise/question/Q_RightTriangle.py:348
 msgid "to the thousandth"
 msgstr ""
 
-#: ata/vocabulary.xml:46
+#: data/vocabulary.xml:46 lib/sheet/exercise/question/Q_RightTriangle.py:349
 msgid "to the ten thousandth"
 msgstr ""
 
@@ -423,750 +423,788 @@ msgstr ""
 msgid "{triangle_name} has no right angle."
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:10
-#: ata/wordings/mini_pb_addi_direct.xml:10
+#: data/wordings/mini_pb_addi_direct.xml:10
+#: data/wordings/mini_pb_addi_direct.xml:10
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs and today she laid {nb2} eggs. "
 "How many eggs has she laid?"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
 msgid "Divisions"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
 msgid "Multiplications with a hole"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
 msgid "Vocabulary of operations"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
-#: ata/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/ranks.xml:5
-#: ata/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/divisions.xml:6
-#: ata/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-#: ata/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
 msgid "Mental calculation"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
 msgid "Simple decimal multiplications"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
 msgid "Ranks of figures in a number"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
 msgid "Multiplications and divisions by 10, 100 and 1000"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_2/rectangles.xml:6
+#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
+#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
 msgid "Mental calculation: areas and perimeters of rectangles"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
 msgid "Reversed multiplications"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
-#: ata/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/ranks.xml:5
-#: ata/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/divisions.xml:6
-#: ata/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
-#: ata/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-#: ata/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
-#: ata/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-#: ata/frameworks/mental_calculation/lev11_2/rectangles.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: data/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: data/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
 msgid "Answers"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
 msgid "Mental calculation: mini-problems"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:17
-#: ata/wordings/mini_pb_addi_direct.xml:17
+#: data/wordings/mini_pb_addi_direct.xml:17
+#: data/wordings/mini_pb_addi_direct.xml:17
 msgid ""
 "The gardener has planted {nb1} salads last week, and {nb2} salads more this "
 "week. How many salads did he plant altogether?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:64
-#: ata/wordings/mini_pb_addi_direct.xml:64
+#: data/wordings/mini_pb_addi_direct.xml:64
+#: data/wordings/mini_pb_addi_direct.xml:64
 msgid ""
 "Our neighbours have {nb1} sheep. We have {nb2} more sheep than them. How "
 "many sheep do we have?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:67
-#: ata/wordings/mini_pb_addi_direct.xml:67
+#: data/wordings/mini_pb_addi_direct.xml:67
+#: data/wordings/mini_pb_addi_direct.xml:67
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} less than us. How many sheep "
 "do we have?"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:13
-#: ata/wordings/mini_pb_divi_direct.xml:13
+#: data/wordings/mini_pb_divi_direct.xml:13
+#: data/wordings/mini_pb_divi_direct.xml:13
 msgid ""
 "It took {nb2} days to my golden goose to lay {nb1} eggs. How many eggs did "
 "she lay everyday?"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:14
-#: ata/wordings/mini_pb_multi_direct.xml:14
+#: data/wordings/mini_pb_multi_direct.xml:14
+#: data/wordings/mini_pb_multi_direct.xml:14
 msgid ""
 "The gardener has planted {nb1} rows of {nb2} salads. How many salads did he "
 "plant altogether?"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:53
-#: ata/wordings/mini_pb_multi_direct.xml:53
+#: data/wordings/mini_pb_multi_direct.xml:53
+#: data/wordings/mini_pb_multi_direct.xml:53
 msgid ""
 "We have {nb1} sheep. Our neighbours have {nb2} times more sheep than us. How"
 " many sheep do they have?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:13
-#: ata/wordings/mini_pb_subtr_direct.xml:13
+#: data/wordings/mini_pb_subtr_direct.xml:13
+#: data/wordings/mini_pb_subtr_direct.xml:13
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs we used {nb2} of them to make an "
 "omelet. How many eggs left are there?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:17
-#: ata/wordings/mini_pb_subtr_direct.xml:17
+#: data/wordings/mini_pb_subtr_direct.xml:17
+#: data/wordings/mini_pb_subtr_direct.xml:17
 msgid ""
 "The gardener had {nb1} salads in his vegetable garden, and harvested {nb2} "
 "of them last week. How many salads are still in the garden?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:76
-#: ata/wordings/mini_pb_subtr_direct.xml:76
+#: data/wordings/mini_pb_subtr_direct.xml:76
+#: data/wordings/mini_pb_subtr_direct.xml:76
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} more than us. How many sheep "
 "do we have?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:79
-#: ata/wordings/mini_pb_subtr_direct.xml:79
+#: data/wordings/mini_pb_subtr_direct.xml:79
+#: data/wordings/mini_pb_subtr_direct.xml:79
 msgid ""
 "Our neighbours have {nb1} sheep. We have {nb2} less than them. How many "
 "sheep do we have?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:57
-#: ata/wordings/mini_pb_addi_direct.xml:57
+#: data/wordings/mini_pb_addi_direct.xml:57
+#: data/wordings/mini_pb_addi_direct.xml:57
 msgid ""
 "I have painted {nb1} {area_unit=m} of this wall and still have {nb2} "
 "{area_unit} to paint it completely. What is the area of the wall? "
 "|hint:area_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:60
-#: ata/wordings/mini_pb_addi_direct.xml:60
+#: data/wordings/mini_pb_addi_direct.xml:60
+#: data/wordings/mini_pb_addi_direct.xml:60
 msgid ""
 "{nb1} {area_unit=m} of this wall are already painted. {nb2} {area_unit} are "
 "still missing to have the wall completely painted. What is its area? "
 "|hint:area_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:58
-#: ata/wordings/mini_pb_divi_direct.xml:58
+#: data/wordings/mini_pb_divi_direct.xml:58
+#: data/wordings/mini_pb_divi_direct.xml:58
 msgid ""
 "We have loaded {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How "
 "heavy is one packet? |hint:mass_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:64
-#: ata/wordings/mini_pb_multi_direct.xml:64
+#: data/wordings/mini_pb_multi_direct.xml:64
+#: data/wordings/mini_pb_multi_direct.xml:64
 msgid ""
 "We have loaded {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How"
 " heavy are they altogether? |hint:mass_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:42
-#: ata/wordings/mini_pb_subtr_direct.xml:42
+#: data/wordings/mini_pb_subtr_direct.xml:42
+#: data/wordings/mini_pb_subtr_direct.xml:42
 msgid ""
 "I had to fill this can with {nb2} {capacity_unit=L} of water. It contains "
 "now {nb1} {capacity_unit}. How much water was left in it? "
 "|hint:capacity_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:62
-#: ata/wordings/mini_pb_subtr_direct.xml:62
+#: data/wordings/mini_pb_subtr_direct.xml:62
+#: data/wordings/mini_pb_subtr_direct.xml:62
 msgid ""
 "My bike ride is {nb1} {length_unit=km} long and I already rode {nb2} "
 "{length_unit}. How long do I still have to go cycling? |hint:length_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:65
-#: ata/wordings/mini_pb_subtr_direct.xml:65
+#: data/wordings/mini_pb_subtr_direct.xml:65
+#: data/wordings/mini_pb_subtr_direct.xml:65
 msgid ""
 "I already rode {nb2} {length_unit=km} out of {nb1} {length_unit}. How long "
 "do I still have to go cycling? |hint:length_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:69
-#: ata/wordings/mini_pb_subtr_direct.xml:69
+#: data/wordings/mini_pb_subtr_direct.xml:69
+#: data/wordings/mini_pb_subtr_direct.xml:69
 msgid ""
 "I have painted {nb2} {area_unit=m} out of the {nb1} {area_unit} of this "
 "wall. How much is still left to paint? |hint:area_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:72
-#: ata/wordings/mini_pb_subtr_direct.xml:72
+#: data/wordings/mini_pb_subtr_direct.xml:72
+#: data/wordings/mini_pb_subtr_direct.xml:72
 msgid ""
 "This wall is altogether {nb1} {area_unit=m} wide. I have already painted "
 "{nb2} {area_unit} of it, how much is there still left to paint? "
 "|hint:area_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:45
-#: ata/wordings/mini_pb_subtr_direct.xml:45
+#: data/wordings/mini_pb_subtr_direct.xml:45
+#: data/wordings/mini_pb_subtr_direct.xml:45
 msgid ""
 "This can contains altogether {nb1} {capacity_unit=L} of water. I had to "
 "refill it with {nb2} {capacity_unit}. How much water was left in it? "
 "|hint:capacity_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:17
-#: ata/wordings/mini_pb_divi_direct.xml:17
+#: data/wordings/mini_pb_divi_direct.xml:17
+#: data/wordings/mini_pb_divi_direct.xml:17
 msgid ""
 "The gardener has planted {nb1} salads, splitted in {nb2} rows. How many "
 "salads is there in a row?"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:50
-#: ata/wordings/mini_pb_divi_direct.xml:50
+#: data/wordings/mini_pb_divi_direct.xml:50
+#: data/wordings/mini_pb_divi_direct.xml:50
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} times more than us. How many "
 "sheep do we have?"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:31
-#: ata/wordings/mini_pb_divi_direct.xml:31
+#: data/wordings/mini_pb_divi_direct.xml:31
+#: data/wordings/mini_pb_divi_direct.xml:31
 msgid ""
 "I will give out {nb1} candies to the {nb2} friends that I invited at my "
 "birthday's party. How many candies will receive each of my friends?"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:35
-#: ata/wordings/mini_pb_divi_direct.xml:35
+#: data/wordings/mini_pb_divi_direct.xml:35
+#: data/wordings/mini_pb_divi_direct.xml:35
 msgid ""
 "{name} put {nb1} pencils away in {nb2} boxes. How many pencils are there in "
 "each box?"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:54
-#: ata/wordings/mini_pb_divi_direct.xml:54
+#: data/wordings/mini_pb_divi_direct.xml:54
+#: data/wordings/mini_pb_divi_direct.xml:54
 msgid ""
 "{name} has prepared {nb1} truffles splitted in {nb2} packets. How many "
 "truffles is there in one packet?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:6
-#: ata/wordings/mini_pb_addi_direct.xml:6
+#: data/wordings/mini_pb_addi_direct.xml:6
+#: data/wordings/mini_pb_addi_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} marbles more than {name1}. How "
 "many marbles has {name2}?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:31
-#: ata/wordings/mini_pb_addi_direct.xml:31
+#: data/wordings/mini_pb_addi_direct.xml:31
+#: data/wordings/mini_pb_addi_direct.xml:31
 msgid ""
 "{name1} ate {nb1} candies and {name2} ate {nb2} of them. The bag is empty. "
 "How many candies were there in the bag?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:34
-#: ata/wordings/mini_pb_addi_direct.xml:34
+#: data/wordings/mini_pb_addi_direct.xml:34
+#: data/wordings/mini_pb_addi_direct.xml:34
 msgid ""
 "{name} ate {nb1} candies and there are {nb2} candies left in the paperbag. "
 "How many candies were there in the paperbag?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:38
-#: ata/wordings/mini_pb_addi_direct.xml:38
+#: data/wordings/mini_pb_addi_direct.xml:38
+#: data/wordings/mini_pb_addi_direct.xml:38
 msgid ""
 "{name1} is {nb1} years old and {name2} is {nb2} years older than {name1}. "
 "How old is {name2}? |hint:years|"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:42
-#: ata/wordings/mini_pb_addi_direct.xml:42
+#: data/wordings/mini_pb_addi_direct.xml:42
+#: data/wordings/mini_pb_addi_direct.xml:42
 msgid ""
 "I had to fill this can with {nb1} {capacity_unit=L} of water. There was "
 "{nb2} {capacity_unit} left in it. How much does it contain? "
 "|hint:capacity_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:46
-#: ata/wordings/mini_pb_addi_direct.xml:46
+#: data/wordings/mini_pb_addi_direct.xml:46
+#: data/wordings/mini_pb_addi_direct.xml:46
 msgid ""
 "{masculine_name} has read {nb1} pages of his book this morning and read "
 "{nb2} pages more this afternoon. How many pages has he read today?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:49
-#: ata/wordings/mini_pb_addi_direct.xml:49
+#: data/wordings/mini_pb_addi_direct.xml:49
+#: data/wordings/mini_pb_addi_direct.xml:49
 msgid ""
 "{feminine_name} has read {nb1} pages of her book this morning and read {nb2}"
 " pages more this afternoon. How many pages has she read today?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:53
-#: ata/wordings/mini_pb_addi_direct.xml:53
+#: data/wordings/mini_pb_addi_direct.xml:53
+#: data/wordings/mini_pb_addi_direct.xml:53
 msgid ""
 "I rode {nb1} {length_unit=km} this morning and still have to ride {nb2} "
 "{length_unit} until back home. What is the length of my ride? "
 "|hint:length_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:6
-#: ata/wordings/mini_pb_multi_direct.xml:6
+#: data/wordings/mini_pb_multi_direct.xml:6
+#: data/wordings/mini_pb_multi_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} times more marbles than "
 "{name1}. How many marbles has {name2}?"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:32
-#: ata/wordings/mini_pb_multi_direct.xml:32
+#: data/wordings/mini_pb_multi_direct.xml:32
+#: data/wordings/mini_pb_multi_direct.xml:32
 msgid ""
 "{masculine_name} bought {nb1} boxes of {nb2} pencils. How many pens did he "
 "buy?"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:35
-#: ata/wordings/mini_pb_multi_direct.xml:35
+#: data/wordings/mini_pb_multi_direct.xml:35
+#: data/wordings/mini_pb_multi_direct.xml:35
 msgid ""
 "{feminine_name} bought {nb1} boxes of {nb2} pencils. How many pens did she "
 "buy?"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:57
-#: ata/wordings/mini_pb_multi_direct.xml:57
+#: data/wordings/mini_pb_multi_direct.xml:57
+#: data/wordings/mini_pb_multi_direct.xml:57
 msgid ""
 "{masculine_name} has prepared {nb1} packets of {nb2} truffles. How many "
 "truffles has he prepared?"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:60
-#: ata/wordings/mini_pb_multi_direct.xml:60
+#: data/wordings/mini_pb_multi_direct.xml:60
+#: data/wordings/mini_pb_multi_direct.xml:60
 msgid ""
 "{feminine_name} has prepared {nb1} packets of {nb2} truffles. How many "
 "truffles has she prepared?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:6
-#: ata/wordings/mini_pb_subtr_direct.xml:6
+#: data/wordings/mini_pb_subtr_direct.xml:6
+#: data/wordings/mini_pb_subtr_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} marbles less than {name1}. How "
 "many marbles has {name2}?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:9
-#: ata/wordings/mini_pb_subtr_direct.xml:9
+#: data/wordings/mini_pb_subtr_direct.xml:9
+#: data/wordings/mini_pb_subtr_direct.xml:9
 msgid ""
 "{name2} has {nb2} marbles less than {name1}, who has {nb1} of them. How many"
 " marbles has {name2}?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:35
-#: ata/wordings/mini_pb_subtr_direct.xml:35
+#: data/wordings/mini_pb_subtr_direct.xml:35
+#: data/wordings/mini_pb_subtr_direct.xml:35
 msgid ""
 "{name1} is {nb1} years old and {name2} is {nb2} years younger than {name1}. "
 "How old is {name2}? |hint:years|"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:38
-#: ata/wordings/mini_pb_subtr_direct.xml:38
+#: data/wordings/mini_pb_subtr_direct.xml:38
+#: data/wordings/mini_pb_subtr_direct.xml:38
 msgid ""
 "{name2} is {nb2} years younger than {name1}, who is {nb1} years old. How old"
 " is {name2}? |hint:years|"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:49
-#: ata/wordings/mini_pb_subtr_direct.xml:49
+#: data/wordings/mini_pb_subtr_direct.xml:49
+#: data/wordings/mini_pb_subtr_direct.xml:49
 msgid ""
 "{masculine_name} read his book from page {nb2} this morning until page {nb1}"
 " this afternoon. How many pages has he read today?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:52
-#: ata/wordings/mini_pb_subtr_direct.xml:52
+#: data/wordings/mini_pb_subtr_direct.xml:52
+#: data/wordings/mini_pb_subtr_direct.xml:52
 msgid ""
 "{feminine_name} read her book from page {nb2} this morning until page {nb1} "
 "this afternoon. How many pages has she read today?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:55
-#: ata/wordings/mini_pb_subtr_direct.xml:55
+#: data/wordings/mini_pb_subtr_direct.xml:55
+#: data/wordings/mini_pb_subtr_direct.xml:55
 msgid ""
 "Today, {masculine_name} has read his book until page {nb1}. This morning he "
 "started at page {nb2}. How many pages has he read today?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:58
-#: ata/wordings/mini_pb_subtr_direct.xml:58
+#: data/wordings/mini_pb_subtr_direct.xml:58
+#: data/wordings/mini_pb_subtr_direct.xml:58
 msgid ""
 "Today, {feminine_name} has read her book until page {nb1}. This morning she "
 "started at page {nb2}. How many pages has she read today?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:31
-#: ata/wordings/mini_pb_subtr_direct.xml:31
+#: data/wordings/mini_pb_subtr_direct.xml:31
+#: data/wordings/mini_pb_subtr_direct.xml:31
 msgid ""
 "Some friends shared {nb2} of the {nb1} candies of the packet. How many "
 "candies are there left?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:20
-#: ata/wordings/mini_pb_addi_direct.xml:20
+#: data/wordings/mini_pb_addi_direct.xml:20
+#: data/wordings/mini_pb_addi_direct.xml:20
 msgid ""
 "The gardener has planted {nb1} cabbages last week, and {nb2} cabbages more "
 "this week. How many cabbages did he plant altogether?"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:20
-#: ata/wordings/mini_pb_divi_direct.xml:20
+#: data/wordings/mini_pb_divi_direct.xml:20
+#: data/wordings/mini_pb_divi_direct.xml:20
 msgid ""
 "The gardener has planted {nb1} cabbages, splitted in {nb2} rows. How many "
 "cabbages is there in a row?"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:17
-#: ata/wordings/mini_pb_multi_direct.xml:17
+#: data/wordings/mini_pb_multi_direct.xml:17
+#: data/wordings/mini_pb_multi_direct.xml:17
 msgid ""
 "The gardener has planted {nb1} rows of {nb2} cabbages. How many cabbages did"
 " he plant altogether?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:20
-#: ata/wordings/mini_pb_subtr_direct.xml:20
+#: data/wordings/mini_pb_subtr_direct.xml:20
+#: data/wordings/mini_pb_subtr_direct.xml:20
 msgid ""
 "The gardener had {nb1} cabbages in his vegetable garden, and harvested {nb2}"
 " of them last week. How many cabbages are still in the garden?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:13
-#: ata/wordings/mini_pb_addi_direct.xml:13
+#: data/wordings/mini_pb_addi_direct.xml:13
+#: data/wordings/mini_pb_addi_direct.xml:13
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs. That's {nb2} less than today. "
 "How many eggs has she laid today?"
 msgstr ""
 
-#: ata/vocabulary.xml:29
+#: data/vocabulary.xml:29
 msgid "How many thousands"
 msgstr ""
 
-#: ata/vocabulary.xml:22
+#: data/vocabulary.xml:22
 msgid "thousandths"
 msgstr ""
 
-#: ata/vocabulary.xml:23
+#: data/vocabulary.xml:23
 msgid "How many billions"
 msgstr ""
 
-#: ata/vocabulary.xml:12
+#: data/vocabulary.xml:12
 msgid "tens of millions"
 msgstr ""
 
-#: ata/vocabulary.xml:16
+#: data/vocabulary.xml:16
 msgid "thousands"
 msgstr ""
 
-#: ata/vocabulary.xml:41
+#: data/vocabulary.xml:41
 msgid "What is the quadruple of {number}?"
 msgstr ""
 
-#: ata/vocabulary.xml:36
+#: data/vocabulary.xml:36
 msgid "What is the half of {number}?"
 msgstr ""
 
-#: ata/vocabulary.xml:38
+#: data/vocabulary.xml:38
 msgid "What is the quarter of {number}?"
 msgstr ""
 
-#: ata/vocabulary.xml:28
+#: data/vocabulary.xml:28
 msgid "How many tens of thousands"
 msgstr ""
 
-#: ata/vocabulary.xml:37
+#: data/vocabulary.xml:37
 msgid "What is the third of {number}?"
 msgstr ""
 
-#: ata/vocabulary.xml:40
+#: data/vocabulary.xml:40
 msgid "What is the triple of {number}?"
 msgstr ""
 
-#: ata/vocabulary.xml:30
+#: data/vocabulary.xml:30
 msgid "How many hundreds"
 msgstr ""
 
-#: ata/vocabulary.xml:34
+#: data/vocabulary.xml:34
 msgid "How many hundredths"
 msgstr ""
 
-#: ata/vocabulary.xml:31
+#: data/vocabulary.xml:31
 msgid "How many tens"
 msgstr ""
 
-#: ata/vocabulary.xml:10
+#: data/vocabulary.xml:10
 msgid "billions"
 msgstr ""
 
-#: ata/vocabulary.xml:25
+#: data/vocabulary.xml:25
 msgid "How many tens of millions"
 msgstr ""
 
-#: ata/vocabulary.xml:39
+#: data/vocabulary.xml:39
 msgid "What is the double of {number}?"
 msgstr ""
 
-#: ata/vocabulary.xml:18
+#: data/vocabulary.xml:18
 msgid "tens"
 msgstr ""
 
-#: ata/vocabulary.xml:24
+#: data/vocabulary.xml:24
 msgid "How many hundreds of millions"
 msgstr ""
 
-#: ata/vocabulary.xml:11
+#: data/vocabulary.xml:11
 msgid "hundreds of millions"
 msgstr ""
 
-#: ata/vocabulary.xml:19
+#: data/vocabulary.xml:19
 msgid "units"
 msgstr ""
 
-#: ata/vocabulary.xml:20
+#: data/vocabulary.xml:20
 msgid "tenths"
 msgstr ""
 
-#: ata/vocabulary.xml:32
+#: data/vocabulary.xml:32
 msgid "How many units"
 msgstr ""
 
-#: ata/vocabulary.xml:13
+#: data/vocabulary.xml:13
 msgid "millions"
 msgstr ""
 
-#: ata/vocabulary.xml:14
+#: data/vocabulary.xml:14
 msgid "hundreds of thousands"
 msgstr ""
 
-#: ata/vocabulary.xml:27
+#: data/vocabulary.xml:27
 msgid "How many hundreds of thousands"
 msgstr ""
 
-#: ata/vocabulary.xml:35
+#: data/vocabulary.xml:35
 msgid "How many thousandths"
 msgstr ""
 
-#: ata/vocabulary.xml:26
+#: data/vocabulary.xml:26
 msgid "How many millions"
 msgstr ""
 
-#: ata/vocabulary.xml:33
+#: data/vocabulary.xml:33
 msgid "How many tenths"
 msgstr ""
 
-#: ata/vocabulary.xml:21
+#: data/vocabulary.xml:21
 msgid "hundredths"
 msgstr ""
 
-#: ata/vocabulary.xml:17
+#: data/vocabulary.xml:17
 msgid "hundreds"
 msgstr ""
 
-#: ata/vocabulary.xml:15
+#: data/vocabulary.xml:15
 msgid "tens of thousands"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:24
-#: ata/wordings/mini_pb_divi_direct.xml:24
+#: data/wordings/mini_pb_divi_direct.xml:24
+#: data/wordings/mini_pb_divi_direct.xml:24
 msgid ""
 "A market gardener has planted {nb1} salads, splitted in {nb2} rows. How many"
 " salads is there in a row?"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:24
-#: ata/wordings/mini_pb_multi_direct.xml:24
+#: data/wordings/mini_pb_multi_direct.xml:24
+#: data/wordings/mini_pb_multi_direct.xml:24
 msgid ""
 "A market gardener has planted {nb1} rows of {nb2} cabbages. How many "
 "cabbages did he plant altogether?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:27
-#: ata/wordings/mini_pb_subtr_direct.xml:27
+#: data/wordings/mini_pb_subtr_direct.xml:27
+#: data/wordings/mini_pb_subtr_direct.xml:27
 msgid ""
 "A market gardener had {nb1} cabbages in his vegetable garden, and harvested "
 "{nb2} of them last week. How many cabbages are still in the garden?"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:9
-#: ata/wordings/mini_pb_divi_direct.xml:9
+#: data/wordings/mini_pb_divi_direct.xml:9
+#: data/wordings/mini_pb_divi_direct.xml:9
 msgid ""
 "{feminine_name} has {nb1} marbles. She gives them out to {nb2} friends. How "
 "many marbles will get each friend?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:27
-#: ata/wordings/mini_pb_addi_direct.xml:27
+#: data/wordings/mini_pb_addi_direct.xml:27
+#: data/wordings/mini_pb_addi_direct.xml:27
 msgid ""
 "A market gardener has planted {nb1} cabbages last week, and {nb2} cabbages "
 "more this week. How many cabbages did he plant altogether?"
 msgstr ""
 
-#: ata/wordings/mini_pb_subtr_direct.xml:24
-#: ata/wordings/mini_pb_subtr_direct.xml:24
+#: data/wordings/mini_pb_subtr_direct.xml:24
+#: data/wordings/mini_pb_subtr_direct.xml:24
 msgid ""
 "A market gardener had {nb1} salads in his vegetable garden, and harvested "
 "{nb2} of them last week. How many salads are still in the garden?"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:61
-#: ata/wordings/mini_pb_divi_direct.xml:61
+#: data/wordings/mini_pb_divi_direct.xml:61
+#: data/wordings/mini_pb_divi_direct.xml:61
 msgid ""
 "We have bought {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How "
 "heavy is one packet? |hint:mass_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:6
-#: ata/wordings/mini_pb_divi_direct.xml:6
+#: data/wordings/mini_pb_divi_direct.xml:6
+#: data/wordings/mini_pb_divi_direct.xml:6
 msgid ""
 "{masculine_name} has {nb1} marbles. He gives them out to {nb2} friends. How "
 "many marbles will get each friend?"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:27
-#: ata/wordings/mini_pb_divi_direct.xml:27
+#: data/wordings/mini_pb_divi_direct.xml:27
+#: data/wordings/mini_pb_divi_direct.xml:27
 msgid ""
 "A market gardener has planted {nb1} cabbages, splitted in {nb2} rows. How "
 "many cabbages is there in a row?"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:10
-#: ata/wordings/mini_pb_multi_direct.xml:10
+#: data/wordings/mini_pb_multi_direct.xml:10
+#: data/wordings/mini_pb_multi_direct.xml:10
 msgid ""
 "My golden goose laid {nb1} eggs each day during {nb2} days. How  many eggs "
 "has she laid?"
 msgstr ""
 
-#: ata/wordings/mini_pb_addi_direct.xml:24
-#: ata/wordings/mini_pb_addi_direct.xml:24
+#: data/wordings/mini_pb_addi_direct.xml:24
+#: data/wordings/mini_pb_addi_direct.xml:24
 msgid ""
 "A market gardener has planted {nb1} salads last week, and {nb2} salads more "
 "this week. How many salads did he plant altogether?"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:21
-#: ata/wordings/mini_pb_multi_direct.xml:21
+#: data/wordings/mini_pb_multi_direct.xml:21
+#: data/wordings/mini_pb_multi_direct.xml:21
 msgid ""
 "A market gardener has planted {nb1} rows of {nb2} salads. How many salads "
 "did he plant altogether?"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:67
-#: ata/wordings/mini_pb_multi_direct.xml:67
+#: data/wordings/mini_pb_multi_direct.xml:67
+#: data/wordings/mini_pb_multi_direct.xml:67
 msgid ""
 "We have bought {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How"
 " heavy are they altogether? |hint:mass_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:28
-#: ata/wordings/mini_pb_multi_direct.xml:28
+#: data/wordings/mini_pb_multi_direct.xml:28
+#: data/wordings/mini_pb_multi_direct.xml:28
 msgid ""
 "I invited {nb1} friends at my birthday's party and want to give {nb2} "
 "candies to each of them. How many candies should I buy?"
 msgstr ""
 
-#: lib/machine/LaTeX.py:112
+#: lib/machine/LaTeX.py:111
 msgid "To use some symbols like currency units"
 msgstr ""
 
-#: lib/machine/LaTeX.py:84
+#: lib/machine/LaTeX.py:83
 msgid "To display units correctly"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:39
-#: ata/wordings/mini_pb_divi_direct.xml:39
+#: data/wordings/mini_pb_divi_direct.xml:39
+#: data/wordings/mini_pb_divi_direct.xml:39
 msgid ""
 "{name} paid {nb1} {currency_unit} for {nb2} pens. How much does cost one "
 "pen? |hint:currency_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:43
-#: ata/wordings/mini_pb_divi_direct.xml:43
+#: data/wordings/mini_pb_divi_direct.xml:43
+#: data/wordings/mini_pb_divi_direct.xml:43
 msgid ""
 "{masculine_name} has received altogether {nb1} {currency_unit} pocket money "
 "in {nb2} months. How much did he receive every month? |hint:currency_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:46
-#: ata/wordings/mini_pb_multi_direct.xml:46
+#: data/wordings/mini_pb_multi_direct.xml:46
+#: data/wordings/mini_pb_multi_direct.xml:46
 msgid ""
 "{masculine_name} gets {nb1} {currency_unit} pocket money every month. If he "
 "doesn't spend it during {nb2} months, how much will he spare? "
 "|hint:currency_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_divi_direct.xml:46
-#: ata/wordings/mini_pb_divi_direct.xml:46
+#: data/wordings/mini_pb_divi_direct.xml:46
+#: data/wordings/mini_pb_divi_direct.xml:46
 msgid ""
 "{feminine_name} has received altogether {nb1} {currency_unit} pocket money "
 "in {nb2} months. How much did she receive every month? |hint:currency_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:39
-#: ata/wordings/mini_pb_multi_direct.xml:39
+#: data/wordings/mini_pb_multi_direct.xml:39
+#: data/wordings/mini_pb_multi_direct.xml:39
 msgid ""
 "{masculine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did he"
 " pay? |hint:currency_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:49
-#: ata/wordings/mini_pb_multi_direct.xml:49
+#: data/wordings/mini_pb_multi_direct.xml:49
+#: data/wordings/mini_pb_multi_direct.xml:49
 msgid ""
 "{feminine_name} gets {nb1} {currency_unit} pocket money every month. If she "
 "doesn't spend it during {nb2} months, how much will she spare? "
 "|hint:currency_unit|"
 msgstr ""
 
-#: ata/wordings/mini_pb_multi_direct.xml:42
-#: ata/wordings/mini_pb_multi_direct.xml:42
+#: data/wordings/mini_pb_multi_direct.xml:42
+#: data/wordings/mini_pb_multi_direct.xml:42
 msgid ""
 "{feminine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did she"
 " pay? |hint:currency_unit|"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
 msgid "Mental calculation: test 2"
 msgstr ""
 
-#: ata/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
+#: data/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
+#: data/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
 msgid "Mental calculation: perimeters of simple polygons"
 msgstr ""
 
 #: lib/sheet/exercise/question/mc_modules/addi_direct.py:52
-#: lib/sheet/exercise/question/mc_modules/divi_direct.py:47
-#: lib/sheet/exercise/question/mc_modules/multi_direct.py:51
-#: lib/sheet/exercise/question/mc_modules/subtr_direct.py:54
+#: lib/sheet/exercise/question/mc_modules/divi_direct.py:48
+#: lib/sheet/exercise/question/mc_modules/multi_direct.py:52
+#: lib/sheet/exercise/question/mc_modules/subtr_direct.py:55
 #, python-brace-format
 msgid "Calculate: {math_expr}"
 msgstr ""
@@ -1182,11 +1220,11 @@ msgid ""
 "{length_unit}? |hint:area_unit|"
 msgstr ""
 
-#: lib/sheet/exercise/question/mc_modules/area_square.py:39
+#: lib/sheet/exercise/question/mc_modules/area_square.py:38
 msgid "Area of this square? |hint:area_unit|"
 msgstr ""
 
-#: lib/sheet/exercise/question/mc_modules/area_square.py:43
+#: lib/sheet/exercise/question/mc_modules/area_square.py:42
 #, python-brace-format
 msgid ""
 "Area of a square whose side's length is {nb1} {length_unit}? "
@@ -1276,32 +1314,32 @@ msgstr ""
 msgid "How much is the product of {nb1} by {nb2}?"
 msgstr ""
 
-#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_multiple_of_a_number.py:31
+#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_multiple_of_a_number.py:32
 #, python-brace-format
 msgid "What is the double of {nb1}?"
 msgstr ""
 
-#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_multiple_of_a_number.py:32
+#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_multiple_of_a_number.py:33
 #, python-brace-format
 msgid "What is the triple of {nb1}?"
 msgstr ""
 
-#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_multiple_of_a_number.py:33
+#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_multiple_of_a_number.py:34
 #, python-brace-format
 msgid "What is the quadruple of {nb1}?"
 msgstr ""
 
-#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_part_of_a_number.py:31
+#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_part_of_a_number.py:32
 #, python-brace-format
 msgid "What is the half of {nb1}?"
 msgstr ""
 
-#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_part_of_a_number.py:32
+#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_part_of_a_number.py:33
 #, python-brace-format
 msgid "What is the third of {nb1}?"
 msgstr ""
 
-#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_part_of_a_number.py:33
+#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_part_of_a_number.py:34
 #, python-brace-format
 msgid "What is the quarter of {nb1}?"
 msgstr ""
@@ -1311,31 +1349,31 @@ msgstr ""
 msgid "How much is the difference between {nb1} and {nb2}?"
 msgstr ""
 
-#: ata/extra_translations.xml:8
+#: data/extra_translations.xml:8
 msgid "{software_name} {v}\\nLicense: {l}\\n{c} {contact}"
 msgstr ""
 
-#: ata/extra_translations.xml:6
+#: data/extra_translations.xml:6
 msgid "{software_ref} is free software. Its license is {software_license}."
 msgstr ""
 
-#: ata/extra_translations.xml:7
+#: data/extra_translations.xml:7
 msgid "Further details on {software_website}"
 msgstr ""
 
-#: ata/vocabulary.xml:7
+#: data/vocabulary.xml:7
 msgid "Rectangle"
 msgstr ""
 
-#: ata/vocabulary.xml:9
+#: data/vocabulary.xml:9
 msgid "RightTriangle"
 msgstr ""
 
-#: ata/vocabulary.xml:8
+#: data/vocabulary.xml:8
 msgid "Square"
 msgstr ""
 
-#: ata/vocabulary.xml:6
+#: data/vocabulary.xml:6
 msgid "Polygon_of_{n}_sides"
 msgstr ""
 

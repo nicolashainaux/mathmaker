@@ -56,12 +56,13 @@ def main():
                 if updates_entry.msgid == main_entry.msgid:
                     o_to_delete = []
                     for o in main_entry.occurrences:
-                        if o not in updates_entry.occurrences:
+                        if (o not in updates_entry.occurrences
+                            and not o[0].endswith('.xml')):
                             o_to_delete.append(o)
                             something_changed = True
                     for o in o_to_delete:
                         sys.stderr.write("Deleting this occurrence: "
-                                         + str(o) + " from this entry "
+                                         + str(o) + " from this entry: "
                                          + str(main_entry.msgid) + "\n")
                         del main_entry.occurrences[
                             main_entry.occurrences.index(o)]
@@ -82,7 +83,7 @@ def main():
                         something_changed = True
                 for o in o_to_delete:
                     sys.stderr.write("Deleting this occurrence: "
-                                     + str(o) + " from this entry "
+                                     + str(o) + " from this entry: "
                                      + str(main_entry.msgid) + "\n")
                     del main_entry.occurrences[main_entry.occurrences.index(o)]
 
@@ -101,6 +102,8 @@ def main():
                             sys.stderr.write("Merging this entry: \n"
                                              + str(updates_entry) + "\n")
                             main_entry.merge(updates_entry)
+                            main_entry.occurrences = list(
+                                set(main_entry.occurrences))
                             something_changed = True
                             break
 

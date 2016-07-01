@@ -20,11 +20,19 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-# This script will copy (and replace) all msgstr (whose msgid matches a
-# particular tag) from one po file to another.
-# Each msgstr will be copied only if the same msgid is found in the
-# destination file. /!\ if there already was a msgstr (translated string)
-# matching this msgid, it will be replaced.
+"""
+This script will move a number of msgstr from one po file to another.
+
+This script will copy (and replace) all msgstr (whose msgid starts with a
+particular tag) from one po file to another. Each msgstr will be copied only
+if the same msgid is found in the destination file. /!\ if there already was
+a msgstr (translated string) matching this msgid, it will be replaced.
+The tag is hardcoded in this script (see just below). It's only there to
+prevent handling all messages.
+This script is mainly useful to extract some messages identified by the
+starting tag and insert them into another po file (not useful very often,
+but when it's needed, it saves time!).
+"""
 
 import os
 import sys
@@ -32,6 +40,8 @@ import errno
 import argparse
 
 import polib
+
+TAG = "FOUR_LETTERS_WORD_"
 
 
 def main():
@@ -63,7 +73,7 @@ def main():
     something_changed = False
 
     for source_entry in po_source:
-        if (source_entry.msgid[:18] == "FOUR_LETTERS_WORD_"
+        if (source_entry.msgid[:len(TAG)] == TAG
             and len(source_entry.msgstr) > 0):
             # __
             sys.stdout.write("Found " + source_entry.msgstr + " in source...")

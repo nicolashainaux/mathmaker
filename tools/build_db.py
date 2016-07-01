@@ -21,6 +21,18 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+"""
+This script adds new entries to the database.
+
+It actually erases the database and builds it entirely.
+It will add all entries:
+- from files mini_pb_addi_direct.xml,mini_pb_divi_direct.xml,
+  mini_pb_subtr_direct.xml and mini_pb_multi_direct.xml from data/wordings/,
+- from all w4l.po files from locale/*/LC_MESSAGES/
+- from all *_names.po files from locale/*/LC_MESSAGES/
+- and all integers pairs from 2 to 199
+"""
+
 import os
 import sqlite3
 

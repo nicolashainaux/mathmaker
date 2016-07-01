@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-06-24 15:32+0100\n"
+"PO-Revision-Date: 2016-07-01 15:03+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -34,62 +34,62 @@ msgstr "N'importe quelle valeur de {variable_name} est solution de l'équation."
 msgid "This equation has no solution."
 msgstr "Cette équation n'a pas de solution."
 
-#: lib/machine/LaTeX.py:97
+#: lib/machine/LaTeX.py:96
 msgid "To strike out numbers "
 msgstr "Pour pouvoir rayer des nombres"
 
-#: lib/machine/LaTeX.py:99
+#: lib/machine/LaTeX.py:98
 msgid "To use the margin definition command"
 msgstr "Pour utiliser la commande de définition des marges"
 
-#: lib/machine/LaTeX.py:101
+#: lib/machine/LaTeX.py:100
 #, python-brace-format
 msgid "To use the commands from {pkg_name} "
 msgstr "Pour utiliser les commandes de {pkg_name} "
 
-#: lib/machine/LaTeX.py:104
+#: lib/machine/LaTeX.py:103
 msgid "To use multicol environment"
 msgstr "Pour faire une présentation multicolonnes"
 
-#: lib/machine/LaTeX.py:106
+#: lib/machine/LaTeX.py:105
 msgid "To use extra commands to handle tabulars"
 msgstr "Pour utiliser des commandes supplémentaires pour les tableaux"
 
-#: lib/machine/LaTeX.py:108
+#: lib/machine/LaTeX.py:107
 msgid "For pretty underlining"
 msgstr "Pour de jolis soulignages"
 
-#: lib/machine/LaTeX.py:110
+#: lib/machine/LaTeX.py:109
 msgid "To include .eps pictures"
 msgstr "Pour inclure des images .eps"
 
-#: lib/machine/LaTeX.py:115
+#: lib/machine/LaTeX.py:114
 msgid "To use other mathematical symbols"
 msgstr "Pour utiliser d'autres symboles mathématiques"
 
-#: lib/machine/LaTeX.py:118
+#: lib/machine/LaTeX.py:117
 msgid "To draw"
 msgstr "Pour dessiner"
 
-#: lib/machine/LaTeX.py:120
+#: lib/machine/LaTeX.py:119
 msgid "Page layout "
 msgstr "Mise en page générale"
 
-#: lib/machine/LaTeX.py:127
+#: lib/machine/LaTeX.py:126
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 "Si vous souhaitez inclure une image, utilisez s'il vous plaît cette "
 "commande :"
 
-#: lib/machine/LaTeX.py:130
+#: lib/machine/LaTeX.py:129
 msgid "file_name"
 msgstr "nom_du_fichier"
 
-#: lib/machine/LaTeX.py:133
+#: lib/machine/LaTeX.py:132
 msgid "Exercises counter"
 msgstr "Compteur d'exercices"
 
-#: lib/machine/LaTeX.py:135
+#: lib/machine/LaTeX.py:134
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
@@ -98,11 +98,11 @@ msgstr ""
 "Définition de la commande {cmd_name}, qui va insérer le mot {word} en gras, "
 "accompagné de son numéro et qui va incrémenter automatiquement le compteur"
 
-#: lib/machine/LaTeX.py:138 lib/machine/LaTeX.py:142
+#: lib/machine/LaTeX.py:137 lib/machine/LaTeX.py:141
 msgid "Exercise"
 msgstr "Exercice"
 
-#: lib/machine/LaTeX.py:145
+#: lib/machine/LaTeX.py:144
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -239,23 +239,23 @@ msgstr "Somme de fractions"
 msgid "Short Test: pythagorean theorem"
 msgstr "Interrogation : théorème de Pythagore"
 
-#: ata/vocabulary.xml:42
+#: data/vocabulary.xml:42 lib/sheet/exercise/question/Q_RightTriangle.py:345
 msgid "to the unit"
 msgstr "à l'unité"
 
-#: ata/vocabulary.xml:43
+#: data/vocabulary.xml:43 lib/sheet/exercise/question/Q_RightTriangle.py:346
 msgid "to the tenth"
 msgstr "au dixième"
 
-#: ata/vocabulary.xml:44
+#: lib/sheet/exercise/question/Q_RightTriangle.py:347 data/vocabulary.xml:44
 msgid "to the hundreth"
 msgstr "au centième"
 
-#: ata/vocabulary.xml:45
+#: data/vocabulary.xml:45 lib/sheet/exercise/question/Q_RightTriangle.py:348
 msgid "to the thousandth"
 msgstr "au millième"
 
-#: ata/vocabulary.xml:46
+#: data/vocabulary.xml:46 lib/sheet/exercise/question/Q_RightTriangle.py:349
 msgid "to the ten thousandth"
 msgstr "au dix-millième"
 
@@ -441,7 +441,7 @@ msgstr "Donc, d'après la contraposée du théorème de Pythagore,"
 msgid "{triangle_name} has no right angle."
 msgstr "{triangle_name} n'est pas rectangle."
 
-#: ata/wordings/mini_pb_addi_direct.xml:10
+#: data/wordings/mini_pb_addi_direct.xml:10
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs and today she laid {nb2} eggs. "
 "How many eggs has she laid?"
@@ -449,76 +449,76 @@ msgstr ""
 "Hier, ma poule aux œufs d'or a pondu {nb1} œufs et aujourd'hui elle en a "
 "pondu {nb2}. Combien d'œufs a-t-elle pondu ?"
 
-#: ata/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
 msgid "Divisions"
 msgstr "Divisions"
 
-#: ata/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
 msgid "Multiplications with a hole"
 msgstr "Multiplications à trou"
 
-#: ata/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
 msgid "Vocabulary of operations"
 msgstr "Vocabulaire des opérations"
 
-#: ata/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
-#: ata/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/ranks.xml:5
-#: ata/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/divisions.xml:6
-#: ata/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-#: ata/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
 msgid "Mental calculation"
 msgstr "Calcul mental"
 
-#: ata/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
 msgid "Simple decimal multiplications"
 msgstr "Multiplications décimales simples"
 
-#: ata/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
 msgid "Ranks of figures in a number"
 msgstr "Rangs des chiffres dans un nombre"
 
-#: ata/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
 msgid "Multiplications and divisions by 10, 100 and 1000"
 msgstr "Multiplications et divisions par 10, 100 et 1000"
 
-#: ata/frameworks/mental_calculation/lev11_2/rectangles.xml:6
+#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
 msgid "Mental calculation: areas and perimeters of rectangles"
 msgstr "Calcul mental : aires et périmètres de rectangles"
 
-#: ata/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
 msgid "Reversed multiplications"
 msgstr "Multiplications à l'envers"
 
-#: ata/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
-#: ata/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/ranks.xml:5
-#: ata/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-#: ata/frameworks/mental_calculation/lev11_1/divisions.xml:6
-#: ata/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
-#: ata/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-#: ata/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
-#: ata/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-#: ata/frameworks/mental_calculation/lev11_2/rectangles.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: data/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
 msgid "Answers"
 msgstr "Réponses"
 
-#: ata/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
 msgid "Mental calculation: mini-problems"
 msgstr "Calcul mental : mini-problèmes"
 
-#: ata/wordings/mini_pb_addi_direct.xml:17
+#: data/wordings/mini_pb_addi_direct.xml:17
 msgid ""
 "The gardener has planted {nb1} salads last week, and {nb2} salads more this "
 "week. How many salads did he plant altogether?"
@@ -526,7 +526,7 @@ msgstr ""
 "Le jardinier a planté {nb1} salades la semaine dernière, et {nb2} salades de "
 "plus cette semaine. Combien de salades a-t-il planté en tout ?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:64
+#: data/wordings/mini_pb_addi_direct.xml:64
 msgid ""
 "Our neighbours have {nb1} sheep. We have {nb2} more sheep than them. How "
 "many sheep do we have?"
@@ -534,7 +534,7 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. Nous en avons {nb2} de plus qu'eux. Combien "
 "de moutons avons-nous ?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:67
+#: data/wordings/mini_pb_addi_direct.xml:67
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} less than us. How many sheep "
 "do we have?"
@@ -542,7 +542,7 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. C'est {nb2} de moins que nous. Combien de "
 "moutons avons-nous ?"
 
-#: ata/wordings/mini_pb_divi_direct.xml:13
+#: data/wordings/mini_pb_divi_direct.xml:13
 msgid ""
 "It took {nb2} days to my golden goose to lay {nb1} eggs. How many eggs did "
 "she lay everyday?"
@@ -550,7 +550,7 @@ msgstr ""
 "Ma poule aux œufs d'or a pondu {nb1} œufs en {nb2} jours. Combien d'œufs a-t-"
 "elle pondu chaque jour ?"
 
-#: ata/wordings/mini_pb_multi_direct.xml:14
+#: data/wordings/mini_pb_multi_direct.xml:14
 msgid ""
 "The gardener has planted {nb1} rows of {nb2} salads. How many salads did he "
 "plant altogether?"
@@ -558,7 +558,7 @@ msgstr ""
 "Le jardinier a planté {nb1} rangs de {nb2} salades. Combien de salades a-t-"
 "il planté en tout ?"
 
-#: ata/wordings/mini_pb_multi_direct.xml:53
+#: data/wordings/mini_pb_multi_direct.xml:53
 msgid ""
 "We have {nb1} sheep. Our neighbours have {nb2} times more sheep than us. How "
 "many sheep do they have?"
@@ -566,7 +566,7 @@ msgstr ""
 "Nous avons {nb1} moutons. Nos voisins en ont {nb2} fois plus que nous. "
 "Combien de moutons ont-ils ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:13
+#: data/wordings/mini_pb_subtr_direct.xml:13
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs we used {nb2} of them to make an "
 "omelet. How many eggs left are there?"
@@ -574,7 +574,7 @@ msgstr ""
 "Hier, ma poule aux œufs d'or a pondu {nb1} œufs et on en a utilisé {nb2} "
 "pour faire une omelette. Combien reste-t-il d'œufs ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:17
+#: data/wordings/mini_pb_subtr_direct.xml:17
 msgid ""
 "The gardener had {nb1} salads in his vegetable garden, and harvested {nb2} "
 "of them last week. How many salads are still in the garden?"
@@ -582,7 +582,7 @@ msgstr ""
 "Le jardinier avait {nb1} salades dans son potager et en a récolté {nb2} la "
 "semaine dernière. Combien reste-t-il de salades dans le potager ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:76
+#: data/wordings/mini_pb_subtr_direct.xml:76
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} more than us. How many sheep "
 "do we have?"
@@ -590,7 +590,7 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. C'est {nb2} de plus que nous. Combien de "
 "moutons avons-nous ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:79
+#: data/wordings/mini_pb_subtr_direct.xml:79
 msgid ""
 "Our neighbours have {nb1} sheep. We have {nb2} less than them. How many "
 "sheep do we have?"
@@ -598,7 +598,7 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. Nous en avons {nb2} de moins qu'eux. Combien "
 "de moutons avons-nous ?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:57
+#: data/wordings/mini_pb_addi_direct.xml:57
 msgid ""
 "I have painted {nb1} {area_unit=m} of this wall and still have {nb2} "
 "{area_unit} to paint it completely. What is the area of the wall? |hint:"
@@ -607,7 +607,7 @@ msgstr ""
 "J'ai peint {nb1} {area_unit=m} de ce mur et je dois encore peindre {nb2} "
 "{area_unit} pour terminer. Quelle est l'aire de ce mur ? |hint:area_unit|"
 
-#: ata/wordings/mini_pb_addi_direct.xml:60
+#: data/wordings/mini_pb_addi_direct.xml:60
 msgid ""
 "{nb1} {area_unit=m} of this wall are already painted. {nb2} {area_unit} are "
 "still missing to have the wall completely painted. What is its area? |hint:"
@@ -617,7 +617,7 @@ msgstr ""
 "{area_unit} pour qu'il soit complètement peint. Quelle est son aire ? |hint:"
 "area_unit|"
 
-#: ata/wordings/mini_pb_divi_direct.xml:58
+#: data/wordings/mini_pb_divi_direct.xml:58
 msgid ""
 "We have loaded {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How "
 "heavy is one packet? |hint:mass_unit|"
@@ -625,7 +625,7 @@ msgstr ""
 "Nous avons chargé {nb1} {mass_unit=kg} de farine, répartis dans {nb2} "
 "paquets. Quel est la masse d'un paquet ? |hint:mass_unit|"
 
-#: ata/wordings/mini_pb_multi_direct.xml:64
+#: data/wordings/mini_pb_multi_direct.xml:64
 msgid ""
 "We have loaded {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How "
 "heavy are they altogether? |hint:mass_unit|"
@@ -633,7 +633,7 @@ msgstr ""
 "Nous avons chargé {nb1} paquets de farine, de {nb2} {mass_unit=kg} chacun. "
 "Quelle masse totale de farine cela représente-t-il ? |hint:mass_unit|"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:42
+#: data/wordings/mini_pb_subtr_direct.xml:42
 msgid ""
 "I had to fill this can with {nb2} {capacity_unit=L} of water. It contains "
 "now {nb1} {capacity_unit}. How much water was left in it? |hint:"
@@ -643,7 +643,7 @@ msgstr ""
 "en contient {nb1} {capacity_unit}. Quelle quantité d'eau restait-il ? |hint:"
 "capacity_unit|"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:62
+#: data/wordings/mini_pb_subtr_direct.xml:62
 msgid ""
 "My bike ride is {nb1} {length_unit=km} long and I already rode {nb2} "
 "{length_unit}. How long do I still have to go cycling? |hint:length_unit|"
@@ -651,7 +651,7 @@ msgstr ""
 "Ma randonnée à vélo est de {nb1} {length_unit=km} et j'ai déjà parcouru "
 "{nb2} {length_unit}. Combien me reste-t-il à parcourir ? |hint:length_unit|"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:65
+#: data/wordings/mini_pb_subtr_direct.xml:65
 msgid ""
 "I already rode {nb2} {length_unit=km} out of {nb1} {length_unit}. How long "
 "do I still have to go cycling? |hint:length_unit|"
@@ -659,7 +659,7 @@ msgstr ""
 "J'ai déjà parcouru {nb2} {length_unit=km} sur les {nb1} {length_unit} de ma "
 "balade à vélo. Combien me reste-t-il à parcourir ? |hint:length_unit|"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:69
+#: data/wordings/mini_pb_subtr_direct.xml:69
 msgid ""
 "I have painted {nb2} {area_unit=m} out of the {nb1} {area_unit} of this "
 "wall. How much is still left to paint? |hint:area_unit|"
@@ -667,7 +667,7 @@ msgstr ""
 "J'ai peint {nb2} {area_unit=m} sur les {nb1} {area_unit} de ce mur. Combien "
 "reste-t-il à peindre ? |hint:area_unit|"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:72
+#: data/wordings/mini_pb_subtr_direct.xml:72
 msgid ""
 "This wall is altogether {nb1} {area_unit=m} wide. I have already painted "
 "{nb2} {area_unit} of it, how much is there still left to paint? |hint:"
@@ -676,7 +676,7 @@ msgstr ""
 "Ce mur a une aire de  {nb1} {area_unit=m}. J'en ai déjà peint {nb2} "
 "{area_unit}, combien reste-t-il à peindre ? |hint:area_unit|"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:45
+#: data/wordings/mini_pb_subtr_direct.xml:45
 msgid ""
 "This can contains altogether {nb1} {capacity_unit=L} of water. I had to "
 "refill it with {nb2} {capacity_unit}. How much water was left in it? |hint:"
@@ -686,7 +686,7 @@ msgstr ""
 "{nb2} {capacity_unit} d'eau pour le remplir. Combien d'eau restait-il ? |"
 "hint:capacity_unit|"
 
-#: ata/wordings/mini_pb_divi_direct.xml:17
+#: data/wordings/mini_pb_divi_direct.xml:17
 msgid ""
 "The gardener has planted {nb1} salads, splitted in {nb2} rows. How many "
 "salads is there in a row?"
@@ -694,7 +694,7 @@ msgstr ""
 "Le jardinier a planté {nb1} salades sur {nb2} rangs. Combien de salades y-a-"
 "t-il dans un rang ?"
 
-#: ata/wordings/mini_pb_divi_direct.xml:50
+#: data/wordings/mini_pb_divi_direct.xml:50
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} times more than us. How many "
 "sheep do we have?"
@@ -702,7 +702,7 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. C'est {nb2} fois plus que nous. Combien de "
 "moutons avons-nous ?"
 
-#: ata/wordings/mini_pb_divi_direct.xml:31
+#: data/wordings/mini_pb_divi_direct.xml:31
 msgid ""
 "I will give out {nb1} candies to the {nb2} friends that I invited at my "
 "birthday's party. How many candies will receive each of my friends?"
@@ -710,7 +710,7 @@ msgstr ""
 "Je vais distribuer {nb1} bonbons entre les {nb2} amis que j'ai invités pour "
 "mon anniversaire. Combien de bonbons va recevoir chacun d'eux ?"
 
-#: ata/wordings/mini_pb_divi_direct.xml:35
+#: data/wordings/mini_pb_divi_direct.xml:35
 msgid ""
 "{name} put {nb1} pencils away in {nb2} boxes. How many pencils are there in "
 "each box?"
@@ -718,7 +718,7 @@ msgstr ""
 "{name} a rangé {nb1} crayons dans {nb2} boîtes. Combien de crayons y-a-t-il "
 "dans chaque boîte ?"
 
-#: ata/wordings/mini_pb_divi_direct.xml:54
+#: data/wordings/mini_pb_divi_direct.xml:54
 msgid ""
 "{name} has prepared {nb1} truffles splitted in {nb2} packets. How many "
 "truffles is there in one packet?"
@@ -726,7 +726,7 @@ msgstr ""
 "{name} a préparé {nb1} truffes, rangées dans {nb2} paquets. Combien de "
 "truffes y-a-t-il dans un paquet?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:6
+#: data/wordings/mini_pb_addi_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} marbles more than {name1}. How "
 "many marbles has {name2}?"
@@ -734,7 +734,7 @@ msgstr ""
 "{name1} a {nb1} billes. {name2} a {nb2} billes de plus que {name1}. Combien "
 "de billes a {name2} ?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:31
+#: data/wordings/mini_pb_addi_direct.xml:31
 msgid ""
 "{name1} ate {nb1} candies and {name2} ate {nb2} of them. The bag is empty. "
 "How many candies were there in the bag?"
@@ -742,7 +742,7 @@ msgstr ""
 "{name1} a mangé {nb1} bonbons et {name2} en a mangé {nb2}. Il n'en reste "
 "plus. Combien de bonbons y avait-il dans le sac ?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:34
+#: data/wordings/mini_pb_addi_direct.xml:34
 msgid ""
 "{name} ate {nb1} candies and there are {nb2} candies left in the paperbag. "
 "How many candies were there in the paperbag?"
@@ -750,7 +750,7 @@ msgstr ""
 "{name} a mangé {nb1} bonbons et il en reste {nb2} dans le sachet. Combien y "
 "en avait-il ?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:38
+#: data/wordings/mini_pb_addi_direct.xml:38
 msgid ""
 "{name1} is {nb1} years old and {name2} is {nb2} years older than {name1}. "
 "How old is {name2}? |hint:years|"
@@ -758,7 +758,7 @@ msgstr ""
 "{name1} a {nb1} ans et {name2} a {nb2} ans de plus que {name1}. Quel âge a "
 "{name2} ? |hint:ans|"
 
-#: ata/wordings/mini_pb_addi_direct.xml:42
+#: data/wordings/mini_pb_addi_direct.xml:42
 msgid ""
 "I had to fill this can with {nb1} {capacity_unit=L} of water. There was "
 "{nb2} {capacity_unit} left in it. How much does it contain? |hint:"
@@ -768,7 +768,7 @@ msgstr ""
 "restait {nb2} {capacity_unit} dedans. Combien contient-il en tout? |hint:"
 "capacity_unit|"
 
-#: ata/wordings/mini_pb_addi_direct.xml:46
+#: data/wordings/mini_pb_addi_direct.xml:46
 msgid ""
 "{masculine_name} has read {nb1} pages of his book this morning and read "
 "{nb2} pages more this afternoon. How many pages has he read today?"
@@ -776,7 +776,7 @@ msgstr ""
 "{masculine_name} a lu {nb1} pages de son livre ce matin et en a lu {nb2} de "
 "plus cet après-midi. Combien de pages a-t-il lues aujourd'hui ?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:49
+#: data/wordings/mini_pb_addi_direct.xml:49
 msgid ""
 "{feminine_name} has read {nb1} pages of her book this morning and read {nb2} "
 "pages more this afternoon. How many pages has she read today?"
@@ -784,7 +784,7 @@ msgstr ""
 "{feminine_name} a lu {nb1} pages de son livre ce matin et en a lu {nb2} de "
 "plus cet après-midi. Combien de pages a-t-elle lu aujourd'hui ?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:53
+#: data/wordings/mini_pb_addi_direct.xml:53
 msgid ""
 "I rode {nb1} {length_unit=km} this morning and still have to ride {nb2} "
 "{length_unit} until back home. What is the length of my ride? |hint:"
@@ -794,7 +794,7 @@ msgstr ""
 "{length_unit} à parcourir. Quelle distance aurai-je parcouru en tout ? |hint:"
 "length_unit|"
 
-#: ata/wordings/mini_pb_multi_direct.xml:6
+#: data/wordings/mini_pb_multi_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} times more marbles than "
 "{name1}. How many marbles has {name2}?"
@@ -802,7 +802,7 @@ msgstr ""
 "{name1} a {nb1} billes. {name2} a {nb2} fois plus de billes que {name1}. "
 "Combien de billes a {name2} ?"
 
-#: ata/wordings/mini_pb_multi_direct.xml:32
+#: data/wordings/mini_pb_multi_direct.xml:32
 msgid ""
 "{masculine_name} bought {nb1} boxes of {nb2} pencils. How many pens did he "
 "buy?"
@@ -810,7 +810,7 @@ msgstr ""
 "{masculine_name} a acheté {nb1} boîtes de {nb2} crayons. Combien de crayons "
 "a-t-il acheté ?"
 
-#: ata/wordings/mini_pb_multi_direct.xml:35
+#: data/wordings/mini_pb_multi_direct.xml:35
 msgid ""
 "{feminine_name} bought {nb1} boxes of {nb2} pencils. How many pens did she "
 "buy?"
@@ -818,7 +818,7 @@ msgstr ""
 "{feminine_name} a acheté {nb1} boîtes de {nb2} crayons. Combien de crayons a-"
 "t-elle acheté ?"
 
-#: ata/wordings/mini_pb_multi_direct.xml:57
+#: data/wordings/mini_pb_multi_direct.xml:57
 msgid ""
 "{masculine_name} has prepared {nb1} packets of {nb2} truffles. How many "
 "truffles has he prepared?"
@@ -826,7 +826,7 @@ msgstr ""
 "{masculine_name} a préparé {nb1} paquets de {nb2} truffes. Combien de "
 "truffes a-t-il préparé ?"
 
-#: ata/wordings/mini_pb_multi_direct.xml:60
+#: data/wordings/mini_pb_multi_direct.xml:60
 msgid ""
 "{feminine_name} has prepared {nb1} packets of {nb2} truffles. How many "
 "truffles has she prepared?"
@@ -834,7 +834,7 @@ msgstr ""
 "{feminine_name} a préparé {nb1} paquets de {nb2} truffes. Combien de truffes "
 "a-t-elle préparé ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:6
+#: data/wordings/mini_pb_subtr_direct.xml:6
 msgid ""
 "{name1} has {nb1} marbles. {name2} has {nb2} marbles less than {name1}. How "
 "many marbles has {name2}?"
@@ -842,7 +842,7 @@ msgstr ""
 "{name1} a {nb1} billes. {name2} a {nb2} billes de moins que {name1}. Combien "
 "de billes a {name2} ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:9
+#: data/wordings/mini_pb_subtr_direct.xml:9
 msgid ""
 "{name2} has {nb2} marbles less than {name1}, who has {nb1} of them. How many "
 "marbles has {name2}?"
@@ -850,7 +850,7 @@ msgstr ""
 "{name2} a {nb2} billes de moins que {name1}, qui en a {nb1}. Combien de "
 "billes a {name2} ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:35
+#: data/wordings/mini_pb_subtr_direct.xml:35
 msgid ""
 "{name1} is {nb1} years old and {name2} is {nb2} years younger than {name1}. "
 "How old is {name2}? |hint:years|"
@@ -858,7 +858,7 @@ msgstr ""
 "{name1} a {nb1} ans et {name2} a {nb2} ans de moins que {name1}. Quel âge a "
 "{name2} ? |hint:ans|"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:38
+#: data/wordings/mini_pb_subtr_direct.xml:38
 msgid ""
 "{name2} is {nb2} years younger than {name1}, who is {nb1} years old. How old "
 "is {name2}? |hint:years|"
@@ -866,7 +866,7 @@ msgstr ""
 "{name2} a {nb2} ans de moins que {name1}, qui a {nb1} ans. Quel âge a "
 "{name2} ? |hint:ans|"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:49
+#: data/wordings/mini_pb_subtr_direct.xml:49
 msgid ""
 "{masculine_name} read his book from page {nb2} this morning until page {nb1} "
 "this afternoon. How many pages has he read today?"
@@ -874,7 +874,7 @@ msgstr ""
 "{masculine_name} a lu son livre, de la page {nb2} ce matin jusqu'à la page "
 "{nb1} cet après-midi. Combien de pages a-t-il lu aujourd'hui ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:52
+#: data/wordings/mini_pb_subtr_direct.xml:52
 msgid ""
 "{feminine_name} read her book from page {nb2} this morning until page {nb1} "
 "this afternoon. How many pages has she read today?"
@@ -882,7 +882,7 @@ msgstr ""
 "{feminine_name} a lu son livre, de la page {nb2} ce matin jusqu'à la page "
 "{nb1} cet après-midi. Combien de pages a-t-elle lu aujourd'hui ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:55
+#: data/wordings/mini_pb_subtr_direct.xml:55
 msgid ""
 "Today, {masculine_name} has read his book until page {nb1}. This morning he "
 "started at page {nb2}. How many pages has he read today?"
@@ -890,7 +890,7 @@ msgstr ""
 "Aujourd'hui, {masculine_name} a lu son livre jusqu'à la page {nb1}. Ce matin "
 "il avait commencé à la page {nb2}. Combien de pages a-t-il lu aujourd'hui ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:58
+#: data/wordings/mini_pb_subtr_direct.xml:58
 msgid ""
 "Today, {feminine_name} has read her book until page {nb1}. This morning she "
 "started at page {nb2}. How many pages has she read today?"
@@ -899,7 +899,7 @@ msgstr ""
 "elle avait commencé à la page {nb2}. Combien de pages a-t-elle lu "
 "aujourd'hui ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:31
+#: data/wordings/mini_pb_subtr_direct.xml:31
 msgid ""
 "Some friends shared {nb2} of the {nb1} candies of the packet. How many "
 "candies are there left?"
@@ -907,7 +907,7 @@ msgstr ""
 "Des amis se sont partagé {nb2} des {nb1} bonbons du paquet. Combien en reste-"
 "t-il ?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:20
+#: data/wordings/mini_pb_addi_direct.xml:20
 msgid ""
 "The gardener has planted {nb1} cabbages last week, and {nb2} cabbages more "
 "this week. How many cabbages did he plant altogether?"
@@ -915,7 +915,7 @@ msgstr ""
 "Le jardinier a planté {nb1} choux la semaine dernière, et {nb2} choux de "
 "plus cette semaine. Combien de choux a-t-il planté en tout ?"
 
-#: ata/wordings/mini_pb_divi_direct.xml:20
+#: data/wordings/mini_pb_divi_direct.xml:20
 msgid ""
 "The gardener has planted {nb1} cabbages, splitted in {nb2} rows. How many "
 "cabbages is there in a row?"
@@ -923,7 +923,7 @@ msgstr ""
 "Le jardinier a planté {nb1} choux sur {nb2} rangs. Combien de choux y-a-t-il "
 "dans un rang ?"
 
-#: ata/wordings/mini_pb_multi_direct.xml:17
+#: data/wordings/mini_pb_multi_direct.xml:17
 msgid ""
 "The gardener has planted {nb1} rows of {nb2} cabbages. How many cabbages did "
 "he plant altogether?"
@@ -931,7 +931,7 @@ msgstr ""
 "Le jardinier a planté {nb1} rangs de {nb2} choux. Combien de choux a-t-il "
 "planté en tout ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:20
+#: data/wordings/mini_pb_subtr_direct.xml:20
 msgid ""
 "The gardener had {nb1} cabbages in his vegetable garden, and harvested {nb2} "
 "of them last week. How many cabbages are still in the garden?"
@@ -939,7 +939,7 @@ msgstr ""
 "Le jardinier avait {nb1} choux dans son potager et en a récolté {nb2} la "
 "semaine dernière. Combien reste-t-il de choux dans le potager ?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:13
+#: data/wordings/mini_pb_addi_direct.xml:13
 msgid ""
 "Yesterday, my golden goose laid {nb1} eggs. That's {nb2} less than today. "
 "How many eggs has she laid today?"
@@ -947,135 +947,135 @@ msgstr ""
 "Hier, ma poule aux œufs d'or a pondu {nb1} œufs. C'est {nb2} de moins "
 "qu'aujourd'hui. Combien d'œufs a-t-elle pondu aujourd'hui ?"
 
-#: ata/vocabulary.xml:29
+#: data/vocabulary.xml:29
 msgid "How many thousands"
 msgstr "Nombre de milliers"
 
-#: ata/vocabulary.xml:22
+#: data/vocabulary.xml:22
 msgid "thousandths"
 msgstr "millièmes"
 
-#: ata/vocabulary.xml:23
+#: data/vocabulary.xml:23
 msgid "How many billions"
 msgstr "Nombre de milliards"
 
-#: ata/vocabulary.xml:12
+#: data/vocabulary.xml:12
 msgid "tens of millions"
 msgstr "dizaines de millions"
 
-#: ata/vocabulary.xml:16
+#: data/vocabulary.xml:16
 msgid "thousands"
 msgstr "milliers"
 
-#: ata/vocabulary.xml:41
+#: data/vocabulary.xml:41
 msgid "What is the quadruple of {number}?"
 msgstr "Quel est le quadruple de {number} ?"
 
-#: ata/vocabulary.xml:36
+#: data/vocabulary.xml:36
 msgid "What is the half of {number}?"
 msgstr "Quelle est la moitié de {number} ?"
 
-#: ata/vocabulary.xml:38
+#: data/vocabulary.xml:38
 msgid "What is the quarter of {number}?"
 msgstr "Quel est le quart de {number} ?"
 
-#: ata/vocabulary.xml:28
+#: data/vocabulary.xml:28
 msgid "How many tens of thousands"
 msgstr "Nombre de dizaines de milliers"
 
-#: ata/vocabulary.xml:37
+#: data/vocabulary.xml:37
 msgid "What is the third of {number}?"
 msgstr "Quel est le tiers de {number} ?"
 
-#: ata/vocabulary.xml:40
+#: data/vocabulary.xml:40
 msgid "What is the triple of {number}?"
 msgstr "Quel est le triple de {number} ?"
 
-#: ata/vocabulary.xml:30
+#: data/vocabulary.xml:30
 msgid "How many hundreds"
 msgstr "Nombre de centaines"
 
-#: ata/vocabulary.xml:34
+#: data/vocabulary.xml:34
 msgid "How many hundredths"
 msgstr "Nombre de centièmes"
 
-#: ata/vocabulary.xml:31
+#: data/vocabulary.xml:31
 msgid "How many tens"
 msgstr "Nombre de dizaines"
 
-#: ata/vocabulary.xml:10
+#: data/vocabulary.xml:10
 msgid "billions"
 msgstr "milliards"
 
-#: ata/vocabulary.xml:25
+#: data/vocabulary.xml:25
 msgid "How many tens of millions"
 msgstr "Nombre de dizaines de millions"
 
-#: ata/vocabulary.xml:39
+#: data/vocabulary.xml:39
 msgid "What is the double of {number}?"
 msgstr "Quel est le double de {number} ?"
 
-#: ata/vocabulary.xml:18
+#: data/vocabulary.xml:18
 msgid "tens"
 msgstr "dizaines"
 
-#: ata/vocabulary.xml:24
+#: data/vocabulary.xml:24
 msgid "How many hundreds of millions"
 msgstr "Nombre de centaines de millions"
 
-#: ata/vocabulary.xml:11
+#: data/vocabulary.xml:11
 msgid "hundreds of millions"
 msgstr "centaines de millions"
 
-#: ata/vocabulary.xml:19
+#: data/vocabulary.xml:19
 msgid "units"
 msgstr "unités"
 
-#: ata/vocabulary.xml:20
+#: data/vocabulary.xml:20
 msgid "tenths"
 msgstr "dixièmes"
 
-#: ata/vocabulary.xml:32
+#: data/vocabulary.xml:32
 msgid "How many units"
 msgstr "Nombre d'unités"
 
-#: ata/vocabulary.xml:13
+#: data/vocabulary.xml:13
 msgid "millions"
 msgstr "millions"
 
-#: ata/vocabulary.xml:14
+#: data/vocabulary.xml:14
 msgid "hundreds of thousands"
 msgstr "centaines de milliers"
 
-#: ata/vocabulary.xml:27
+#: data/vocabulary.xml:27
 msgid "How many hundreds of thousands"
 msgstr "Nombre de centaines de milliers"
 
-#: ata/vocabulary.xml:35
+#: data/vocabulary.xml:35
 msgid "How many thousandths"
 msgstr "Nombre de millièmes"
 
-#: ata/vocabulary.xml:26
+#: data/vocabulary.xml:26
 msgid "How many millions"
 msgstr "Nombre de millions"
 
-#: ata/vocabulary.xml:33
+#: data/vocabulary.xml:33
 msgid "How many tenths"
 msgstr "Nombre de dixièmes"
 
-#: ata/vocabulary.xml:21
+#: data/vocabulary.xml:21
 msgid "hundredths"
 msgstr "centièmes"
 
-#: ata/vocabulary.xml:17
+#: data/vocabulary.xml:17
 msgid "hundreds"
 msgstr "centaines"
 
-#: ata/vocabulary.xml:15
+#: data/vocabulary.xml:15
 msgid "tens of thousands"
 msgstr "dizaines de milliers"
 
-#: ata/wordings/mini_pb_divi_direct.xml:24
+#: data/wordings/mini_pb_divi_direct.xml:24
 msgid ""
 "A market gardener has planted {nb1} salads, splitted in {nb2} rows. How many "
 "salads is there in a row?"
@@ -1083,7 +1083,7 @@ msgstr ""
 "Un maraîcher a planté {nb1} salades sur {nb2} rangs. Combien de salades y-a-"
 "t-il dans un rang ?"
 
-#: ata/wordings/mini_pb_multi_direct.xml:24
+#: data/wordings/mini_pb_multi_direct.xml:24
 msgid ""
 "A market gardener has planted {nb1} rows of {nb2} cabbages. How many "
 "cabbages did he plant altogether?"
@@ -1091,7 +1091,7 @@ msgstr ""
 "Un maraîcher a planté {nb1} rangs de {nb2} choux. Combien de choux a-t-il "
 "planté en tout ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:27
+#: data/wordings/mini_pb_subtr_direct.xml:27
 msgid ""
 "A market gardener had {nb1} cabbages in his vegetable garden, and harvested "
 "{nb2} of them last week. How many cabbages are still in the garden?"
@@ -1099,7 +1099,7 @@ msgstr ""
 "Un maraîcher avait {nb1} choux dans son potager et en a récolté {nb2} la "
 "semaine dernière. Combien reste-t-il de choux dans le potager ?"
 
-#: ata/wordings/mini_pb_divi_direct.xml:9
+#: data/wordings/mini_pb_divi_direct.xml:9
 msgid ""
 "{feminine_name} has {nb1} marbles. She gives them out to {nb2} friends. How "
 "many marbles will get each friend?"
@@ -1107,7 +1107,7 @@ msgstr ""
 "{feminine_name} a {nb1} billes. Elle les distribue à {nb2} amies. Combien de "
 "billes va recevoir chacune d'elles ?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:27
+#: data/wordings/mini_pb_addi_direct.xml:27
 msgid ""
 "A market gardener has planted {nb1} cabbages last week, and {nb2} cabbages "
 "more this week. How many cabbages did he plant altogether?"
@@ -1115,7 +1115,7 @@ msgstr ""
 "Un maraîcher a planté {nb1} choux la semaine dernière, et {nb2} choux de "
 "plus cette semaine. Combien de choux a-t-il planté en tout ?"
 
-#: ata/wordings/mini_pb_subtr_direct.xml:24
+#: data/wordings/mini_pb_subtr_direct.xml:24
 msgid ""
 "A market gardener had {nb1} salads in his vegetable garden, and harvested "
 "{nb2} of them last week. How many salads are still in the garden?"
@@ -1123,7 +1123,7 @@ msgstr ""
 "Un maraîcher avait {nb1} salades dans son potager et en a récolté {nb2} la "
 "semaine dernière. Combien reste-t-il de salades dans le potager ?"
 
-#: ata/wordings/mini_pb_divi_direct.xml:61
+#: data/wordings/mini_pb_divi_direct.xml:61
 msgid ""
 "We have bought {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How "
 "heavy is one packet? |hint:mass_unit|"
@@ -1131,7 +1131,7 @@ msgstr ""
 "Nous avons acheté {nb1} {mass_unit=kg} de farine, répartis dans {nb2} "
 "paquets. Quel est la masse d'un paquet ? |hint:mass_unit|"
 
-#: ata/wordings/mini_pb_divi_direct.xml:6
+#: data/wordings/mini_pb_divi_direct.xml:6
 msgid ""
 "{masculine_name} has {nb1} marbles. He gives them out to {nb2} friends. How "
 "many marbles will get each friend?"
@@ -1139,7 +1139,7 @@ msgstr ""
 "{masculine_name} a {nb1} billes. Il les distribue à {nb2} amis. Combien de "
 "billes va recevoir chacun d'eux ?"
 
-#: ata/wordings/mini_pb_divi_direct.xml:27
+#: data/wordings/mini_pb_divi_direct.xml:27
 msgid ""
 "A market gardener has planted {nb1} cabbages, splitted in {nb2} rows. How "
 "many cabbages is there in a row?"
@@ -1147,7 +1147,7 @@ msgstr ""
 "Un maraîcher a planté {nb1} choux sur {nb2} rangs. Combien de choux y-a-t-il "
 "dans un rang ?"
 
-#: ata/wordings/mini_pb_multi_direct.xml:10
+#: data/wordings/mini_pb_multi_direct.xml:10
 msgid ""
 "My golden goose laid {nb1} eggs each day during {nb2} days. How  many eggs "
 "has she laid?"
@@ -1155,7 +1155,7 @@ msgstr ""
 "Ma poule aux œufs d'or a pondu {nb1} œufs chaque jour pendant {nb2} jours. "
 "Combien d'œufs a-t-elle pondu ?"
 
-#: ata/wordings/mini_pb_addi_direct.xml:24
+#: data/wordings/mini_pb_addi_direct.xml:24
 msgid ""
 "A market gardener has planted {nb1} salads last week, and {nb2} salads more "
 "this week. How many salads did he plant altogether?"
@@ -1163,7 +1163,7 @@ msgstr ""
 "Un maraîcher a planté {nb1} salades la semaine dernière, et {nb2} salades de "
 "plus cette semaine. Combien de salades a-t-il planté en tout ?"
 
-#: ata/wordings/mini_pb_multi_direct.xml:21
+#: data/wordings/mini_pb_multi_direct.xml:21
 msgid ""
 "A market gardener has planted {nb1} rows of {nb2} salads. How many salads "
 "did he plant altogether?"
@@ -1171,7 +1171,7 @@ msgstr ""
 "Un maraîcher a planté {nb1} rangs de {nb2} salades. Combien de salades a-t-"
 "il planté en tout ?"
 
-#: ata/wordings/mini_pb_multi_direct.xml:67
+#: data/wordings/mini_pb_multi_direct.xml:67
 msgid ""
 "We have bought {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How "
 "heavy are they altogether? |hint:mass_unit|"
@@ -1179,7 +1179,7 @@ msgstr ""
 "Nous avons acheté {nb1} paquets de farine, de {nb2} {mass_unit=kg} chacun. "
 "Quelle masse totale de farine cela représente-t-il ? |hint:mass_unit|"
 
-#: ata/wordings/mini_pb_multi_direct.xml:28
+#: data/wordings/mini_pb_multi_direct.xml:28
 msgid ""
 "I invited {nb1} friends at my birthday's party and want to give {nb2} "
 "candies to each of them. How many candies should I buy?"
@@ -1187,15 +1187,15 @@ msgstr ""
 "J'ai invité {nb1} amis à mon anniversaire et je veux distribuer {nb2} "
 "bonbons à chacun d'eux. Combien de bonbons devrais-je acheter ?"
 
-#: lib/machine/LaTeX.py:112
+#: lib/machine/LaTeX.py:111
 msgid "To use some symbols like currency units"
 msgstr "Pour utiliser des symboles (par exemple des unités de monétaires)"
 
-#: lib/machine/LaTeX.py:84
+#: lib/machine/LaTeX.py:83
 msgid "To display units correctly"
 msgstr "Pour afficher correctement les unités"
 
-#: ata/wordings/mini_pb_divi_direct.xml:39
+#: data/wordings/mini_pb_divi_direct.xml:39
 msgid ""
 "{name} paid {nb1} {currency_unit} for {nb2} pens. How much does cost one "
 "pen? |hint:currency_unit|"
@@ -1203,7 +1203,7 @@ msgstr ""
 "{name} a payé {nb1} {currency_unit} pour {nb2} stylos. Combien coûte un "
 "stylo? |hint:currency_unit|"
 
-#: ata/wordings/mini_pb_divi_direct.xml:43
+#: data/wordings/mini_pb_divi_direct.xml:43
 msgid ""
 "{masculine_name} has received altogether {nb1} {currency_unit} pocket money "
 "in {nb2} months. How much did he receive every month? |hint:currency_unit|"
@@ -1211,7 +1211,7 @@ msgstr ""
 "{masculine_name} a reçu en tout {nb1} {currency_unit} d'argent de poche en "
 "{nb2} mois. Combien a-t-il reçu chaque mois ? |hint:currency_unit|"
 
-#: ata/wordings/mini_pb_multi_direct.xml:46
+#: data/wordings/mini_pb_multi_direct.xml:46
 msgid ""
 "{masculine_name} gets {nb1} {currency_unit} pocket money every month. If he "
 "doesn't spend it during {nb2} months, how much will he spare? |hint:"
@@ -1221,7 +1221,7 @@ msgstr ""
 "S'il ne dépense rien pendant {nb2} mois, combien va-t-il épargner ? |hint:"
 "currency_unit|"
 
-#: ata/wordings/mini_pb_divi_direct.xml:46
+#: data/wordings/mini_pb_divi_direct.xml:46
 msgid ""
 "{feminine_name} has received altogether {nb1} {currency_unit} pocket money "
 "in {nb2} months. How much did she receive every month? |hint:currency_unit|"
@@ -1229,7 +1229,7 @@ msgstr ""
 "{feminine_name} a reçu en tout {nb1} {currency_unit} d'argent de poche en "
 "{nb2} mois. Combien a-t-elle reçu chaque mois ?  |hint:currency_unit|"
 
-#: ata/wordings/mini_pb_multi_direct.xml:39
+#: data/wordings/mini_pb_multi_direct.xml:39
 msgid ""
 "{masculine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did he "
 "pay? |hint:currency_unit|"
@@ -1237,7 +1237,7 @@ msgstr ""
 "{masculine_name} a acheté {nb1} stylos à {nb2} {currency_unit}. Combien a-t-"
 "il payé ?  |hint:currency_unit|"
 
-#: ata/wordings/mini_pb_multi_direct.xml:49
+#: data/wordings/mini_pb_multi_direct.xml:49
 msgid ""
 "{feminine_name} gets {nb1} {currency_unit} pocket money every month. If she "
 "doesn't spend it during {nb2} months, how much will she spare? |hint:"
@@ -1247,7 +1247,7 @@ msgstr ""
 "elle ne dépense rien pendant {nb2} mois, combien va-t-elle épargner ? |hint:"
 "currency_unit|"
 
-#: ata/wordings/mini_pb_multi_direct.xml:42
+#: data/wordings/mini_pb_multi_direct.xml:42
 msgid ""
 "{feminine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did she "
 "pay? |hint:currency_unit|"
@@ -1255,18 +1255,18 @@ msgstr ""
 "{feminine_name} a acheté {nb1} stylos à {nb2} {currency_unit}. Combien a-t-"
 "elle payé ?  |hint:currency_unit|"
 
-#: ata/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
 msgid "Mental calculation: test 2"
 msgstr "Calcul mental : test 2"
 
-#: ata/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
+#: data/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
 msgid "Mental calculation: perimeters of simple polygons"
 msgstr "Calcul mental : périmètres de polygones simples"
 
 #: lib/sheet/exercise/question/mc_modules/addi_direct.py:52
-#: lib/sheet/exercise/question/mc_modules/divi_direct.py:47
-#: lib/sheet/exercise/question/mc_modules/multi_direct.py:51
-#: lib/sheet/exercise/question/mc_modules/subtr_direct.py:54
+#: lib/sheet/exercise/question/mc_modules/divi_direct.py:48
+#: lib/sheet/exercise/question/mc_modules/multi_direct.py:52
+#: lib/sheet/exercise/question/mc_modules/subtr_direct.py:55
 #, python-brace-format
 msgid "Calculate: {math_expr}"
 msgstr "Calculer : {math_expr}"
@@ -1284,11 +1284,11 @@ msgstr ""
 "Aire d'un rectangle de largeur {nb1} {length_unit} et de longueur {nb2} "
 "{length_unit}? |hint:area_unit|"
 
-#: lib/sheet/exercise/question/mc_modules/area_square.py:39
+#: lib/sheet/exercise/question/mc_modules/area_square.py:38
 msgid "Area of this square? |hint:area_unit|"
 msgstr "Aire de ce carré ? |hint:area_unit|"
 
-#: lib/sheet/exercise/question/mc_modules/area_square.py:43
+#: lib/sheet/exercise/question/mc_modules/area_square.py:42
 #, python-brace-format
 msgid ""
 "Area of a square whose side's length is {nb1} {length_unit}? |hint:area_unit|"
@@ -1386,32 +1386,32 @@ msgstr "Combien vaut le quotient de {nb1} par {nb2} ?"
 msgid "How much is the product of {nb1} by {nb2}?"
 msgstr "Combien vaut le produit de {nb1} par {nb2} ?"
 
-#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_multiple_of_a_number.py:31
+#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_multiple_of_a_number.py:32
 #, python-brace-format
 msgid "What is the double of {nb1}?"
 msgstr "Quel est le double de {nb1} ?"
 
-#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_multiple_of_a_number.py:32
+#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_multiple_of_a_number.py:33
 #, python-brace-format
 msgid "What is the triple of {nb1}?"
 msgstr "Quel est le triple de {nb1} ?"
 
-#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_multiple_of_a_number.py:33
+#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_multiple_of_a_number.py:34
 #, python-brace-format
 msgid "What is the quadruple of {nb1}?"
 msgstr "Quel est le quadruple de {nb1} ?"
 
-#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_part_of_a_number.py:31
+#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_part_of_a_number.py:32
 #, python-brace-format
 msgid "What is the half of {nb1}?"
 msgstr "Quelle est la moitié de {nb1} ?"
 
-#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_part_of_a_number.py:32
+#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_part_of_a_number.py:33
 #, python-brace-format
 msgid "What is the third of {nb1}?"
 msgstr "Quel est le tiers de {nb1} ?"
 
-#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_part_of_a_number.py:33
+#: lib/sheet/exercise/question/mc_modules/vocabulary_simple_part_of_a_number.py:34
 #, python-brace-format
 msgid "What is the quarter of {nb1}?"
 msgstr "Quel est le quart de {nb1} ?"
@@ -1421,31 +1421,31 @@ msgstr "Quel est le quart de {nb1} ?"
 msgid "How much is the difference between {nb1} and {nb2}?"
 msgstr "Combien vaut la différence entre {nb1} et {nb2} ?"
 
-#: ata/extra_translations.xml:8
+#: data/extra_translations.xml:8
 msgid "{software_name} {v}\\nLicense: {l}\\n{c} {contact}"
 msgstr "{software_name} {v}\\nLicence: {l}\\n{c} {contact}"
 
-#: ata/extra_translations.xml:6
+#: data/extra_translations.xml:6
 msgid "{software_ref} is free software. Its license is {software_license}."
 msgstr "{software_ref} est un logiciel libre sous licence {software_license}."
 
-#: ata/extra_translations.xml:7
+#: data/extra_translations.xml:7
 msgid "Further details on {software_website}"
 msgstr "Plus de détails sur {software_website}"
 
-#: ata/vocabulary.xml:7
+#: data/vocabulary.xml:7
 msgid "Rectangle"
 msgstr "Rectangle"
 
-#: ata/vocabulary.xml:9
+#: data/vocabulary.xml:9
 msgid "RightTriangle"
 msgstr "TriangleRectangle"
 
-#: ata/vocabulary.xml:8
+#: data/vocabulary.xml:8
 msgid "Square"
 msgstr "Carré"
 
-#: ata/vocabulary.xml:6
+#: data/vocabulary.xml:6
 msgid "Polygon_of_{n}_sides"
 msgstr "Polygone_à_{n}_côtés"
 

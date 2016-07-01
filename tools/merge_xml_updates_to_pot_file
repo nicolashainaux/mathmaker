@@ -41,14 +41,14 @@ DEFAULT_KEYWORDS = ['header', 'title', 'text', 'subtitle', 'answers_title',
 MAIN_POT_FILE_PATH = settings.localedir + 'mathmaker.pot'
 PROJECT_ROOT = DIR_TO_BROWSE = settings.rootdir
 
-# collected_strings will look like:
+# COLLECTED_STRINGS will look like:
 # { "Sentence to translate": ["#: file_name: line", "#: file_name: line", ...]}
-collected_strings = {}
+COLLECTED_STRINGS = {}
 
 # Next method taken from
 # http://stackoverflow.com/questions/4789171/python-reporting-line-column-of
 # -origin-of-xml-node/27356944#27356944
-LINE_DUMMY_ATTR = '_DUMMY_LINE'
+LINE_DUMMY_ATTR = 'THATS_A_DUMMY_LINE'
 
 
 def parse_xml(filename):
@@ -75,18 +75,18 @@ def parse_xml(filename):
 def collect_strings(node, rel_file_name, keywords_list):
     for keyword in keywords_list:
         if keyword in node.attrib:
-            if (not node.attrib[keyword] in collected_strings
+            if (not node.attrib[keyword] in COLLECTED_STRINGS
                 and node.attrib[keyword] != ""):
                 # __
-                collected_strings[node.attrib[keyword]] = []
+                COLLECTED_STRINGS[node.attrib[keyword]] = []
 
             if node.attrib[keyword] != "":
-                collected_strings[node.attrib[keyword]] += \
+                COLLECTED_STRINGS[node.attrib[keyword]] += \
                     [(rel_file_name, node.attrib[LINE_DUMMY_ATTR])]
 
-            # collected_strings looks like:
+            # COLLECTED_STRINGS looks like:
             # {'Something to translate': [("this_file.xml", 76),
-            #                              ("this_other_file.xml", 34)],
+            #                             ("this_other_file.xml", 34)],
             #  'Something else to translate': [("another_file.xml", 21)],
             #  etc. }
 
@@ -104,7 +104,7 @@ def browse_files(path, keywords_list):
         if extension == '.xml' and file_name != 'tmp':
             # sys.stdout.write("Checking " + file_name + extension + "\n")
             abspath = os.getcwd() + "/" + file_name + extension
-            relpath = abspath[len(PROJECT_ROOT) + 1:]
+            relpath = abspath[len(PROJECT_ROOT):]
             collect_strings(parse_xml(file_name + extension),
                             relpath,
                             keywords_list)
@@ -152,9 +152,9 @@ def main():
         browse_files(d, args.keywords_list)
 
     xml_pot_file = polib.POFile()
-    for sentence in collected_strings:
+    for sentence in COLLECTED_STRINGS:
         occ = []
-        for elt in collected_strings[sentence]:
+        for elt in COLLECTED_STRINGS[sentence]:
             occ += [(elt[0], elt[1])]
 
         new_entry = polib.POEntry(msgid=sentence, msgstr="", occurrences=occ)
@@ -172,7 +172,11 @@ def main():
                         if ref not in main_entry.occurrences:
                             sys.stderr.write("Merging this entry: \n"
                                              + str(xml_entry) + "\n")
+                            previous_occ = main_entry.occurrences
                             main_entry.merge(xml_entry)
+                            main_entry.occurrences = list(
+                                set(main_entry.occurrences) |
+                                set(previous_occ))
                             something_changed = True
                             break
         else:

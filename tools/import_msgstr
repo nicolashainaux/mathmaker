@@ -20,10 +20,16 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-# This script will copy all msgstr found in the source po file and not found
-# in the destination po file. It will only put the imported msgstr in a "free"
-# place (an empty msgstr "" in the destination file), if there's any. It will
-# not import msgstr existing already in destination.
+"""
+This script will copy a number of msgstr from one po file to another.
+
+Only the ones that are found in the source file but not in the destination
+file will be copied. It will only put the imported msgstr in a "free"
+place (an empty msgstr "" in the destination file), if there's any. It will
+not import msgstr existing already in destination. It is useful to transfer
+"as is" a number of msgstr from one file to another, in the case of "fake"
+translation files, like w4l.po or *_names.po.
+"""
 
 import os
 import sys
