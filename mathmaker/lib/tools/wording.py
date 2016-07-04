@@ -459,7 +459,7 @@ def setup_wording_format_of(w_object: object):
     For instance, if w_object.wording is:
     "Here are one {name}, {nb1} {length_unit1} of roads, and a square of
     {nb2} {volume_unit=cm}. What is the side's length of the
-    cube? |hint:length_unit|"
+    cube? \|hint:length_unit\|"
 
     Then w_object.wording becomes:
     "Here are one {name}, {nb1_length_unit1} of roads, and a square of

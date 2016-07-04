@@ -19,15 +19,22 @@
 # You should have received a copy of the GNU General Public License
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+"""Extend dict."""
 
 
 class ext_dict(dict):
-    """A dict with more methods"""
+    """A dict with more methods."""
+
     def recursive_update(self, d2):
         """
-        Will update self with d2 key/values, recursively updating dict values.
+        Update self with d2 key/values, recursively update nested dicts.
 
+        :Example:
 
+        >>> d = ext_dict({'a': 1, 'b': {'a': 7, 'c': 10}})
+        >>> d.recursive_update({'a': 24, 'd': 13, 'b': {'c': 100}})
+        >>> print(d == {'a': 24, 'd': 13, 'b': {'a': 7, 'c': 100}})
+        True
         """
         nested1 = {key: ext_dict(val)
                    for key, val in iter(self.items())
@@ -50,12 +57,16 @@ class ext_dict(dict):
 
     def flat(self, sep='.'):
         """
-        Returns a recursively flattened dict.
+        Return a recursively flattened dict.
 
         If the dictionary contains nested dictionaries, this function
         will return a one-level ("flat") dictionary.
-        Like:        {'a': {'a1': 3, 'a2':4}, 'b': 'data'}
-        will become: {'a.a1': 3, 'a.a2': 4, 'b': 'data'}
+
+        :Example:
+
+        >>> d = ext_dict({'a': {'a1': 3, 'a2': {'z': 5}}, 'b': 'data'})
+        >>> d.flat() == {'a.a1': 3, 'a.a2.z': 5, 'b': 'data'}
+        True
         """
         output = {}
         for key in self:

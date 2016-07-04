@@ -19,6 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+"""Read configuration files."""
 
 import os
 import logging
@@ -38,6 +39,10 @@ def load_config(file_tag, settingsdir):
     /etc/mathmaker/*.yaml, then in ~/.config/mathmaker/*.yaml,
     finally in mathmaker/settings/dev/*.yaml.
     """
+    # As one wants to log anything as soon as possible, but at least the
+    # default values from ``logging.yaml`` must be read before anything
+    # can be logged, the logger is only set and used if the filename is
+    # not 'logging.yaml'.
     if file_tag != 'logging':
         mainlogger = logging.getLogger("__main__")
     configuration = ext_dict()
