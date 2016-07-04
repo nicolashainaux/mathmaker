@@ -1,23 +1,26 @@
-# Mathmaker
-
 [comment]: # (Récupérer les boutons)
 
+# Overview
 Mathmaker creates elementary maths worksheets with detailed solutions.
 
 The output documents can be compiled into pdf files by lualatex. Examples of available themes are: first degree equations, pythagorean theorem, fractions calculation...
 
-## Quickstart
-### Install
+# Quickstart
+## Install
 Required dependencies:
+
+* python >=3.4
 * euktoeps >=1.5.4
 * xmllint
 
 Recommended dependencies:
+
 * lualatex
 * a bunch of LaTeX packages<sup>(1)</sup>
 
 To install them:
-* on Ubuntu:
+
+* on Ubuntu, python3.4 is already installed, so:
 ```
 $ sudo apt-get install eukleides libxml2-utils
 ```
@@ -33,7 +36,7 @@ $ pip3 install mathmaker
 (this will automatically install two extra python3 libraries too: polib and PyYAML).
 
 
-### Basic use
+## Basic use
 ```
 $ mathmaker pythagorean-theorem-short-test > out.tex
 $ lualatex out.tex
@@ -43,7 +46,7 @@ Get the list of all provided sheets<sup>(2)</sup>:
 $ mathmaker list
 ```
 
-### Some settings
+## Some settings
 The default settings can be overriden by user defined values in `~/.config/mathmaker/user_config.yaml`. Read [the complete documentation]() for more information.
 
 Some of them can be changed as mathmaker options:
@@ -84,16 +87,16 @@ optional arguments:
   --version, -v         show program's version number and exit
 ```
 
-### Advanced use
+## Advanced use
 It's possible to create your own sheets in xml (only for the mental calculation theme yet). Read [the complete documentation]() for more information.
 
-## Contribute
+# Contribute
 You can contribute to mathmaker:
 
-### As a wordings contributor:
+## As a wordings contributor
 Mathmaker needs contexts for problems wordings. There are already some, but the more there is, the better. Existing wordings can be found [here][]. You can submit any new idea as an enhancement proposal [there]() (should be written in english, french or german).
 
-### As a translator:
+## As a translator
 You can help translating mathmaker to your language (or any language you like, if you have enough elementary maths vocabulary for that).
 
 If the translation to your language isn't started yet, there are several pot files to get [here]() (see explanations about their respective roles [there]()). You can use an editor like [poedit](https://poedit.net/) or any other you like better, to create po files from them and start to translate.
@@ -102,7 +105,7 @@ If you want to add missing translations, or to correct some, you can find the po
 
 Once you're done, you can send the po files to [???]().
 
-### As a developer:
+## As a developer
 Please check the [documentation for developers]().
 
 --------
@@ -110,24 +113,24 @@ Please check the [documentation for developers]().
 
 (1) Complete list of recommended LaTeX packages:
 
-CTAN Package Name             | Package name (Ubuntu 14.04 )                  | Package name  (FreeBSD  )                      
-------------------------------|-----------------------------------------------|-----------------------------------------------
-fontspec                      | texlive-latex-recommended                     |
-polyglossia                   | texlive-xetex |
-geometry                      | texlive-latex-base |
-graphicx                      | texlive-pstricks |
-epstopdf                      | texlive-font-utils |
-tikz                          | texlive-latex-extra |
-amssymb                       | texlive-base |
-amsmath                       | texlive-latex-base |
-siunitx                       | texlive-science                               |
-cancel                        | texlive-pictures |
-array                         | texlive-latex-base |
-ulem                          | texlive-generic-recommended |
-textcomp                      | texlive-latex-base |
-eurosym                       | texlive-fonts-recommended |
-lxfonts                       | texlive-fonts-extra |
-multicol                      | texlive-latex-base |
+CTAN Package Name             | Package name (Ubuntu 14.04 )                 
+------------------------------|-------------------------------
+fontspec                      | texlive-latex-recommended
+polyglossia                   | texlive-xetex
+geometry                      | texlive-latex-base
+graphicx                      | texlive-pstricks
+epstopdf                      | texlive-font-utils
+tikz                          | texlive-latex-extra
+amssymb                       | texlive-base
+amsmath                       | texlive-latex-base
+siunitx                       | texlive-science
+cancel                        | texlive-pictures
+array                         | texlive-latex-base
+ulem                          | texlive-generic-recommended
+textcomp                      | texlive-latex-base
+eurosym                       | texlive-fonts-recommended
+lxfonts                       | texlive-fonts-extra
+multicol                      | texlive-latex-base
 
 (2) Complete list of provided sheets:
 

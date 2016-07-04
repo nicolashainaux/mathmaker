@@ -1,5 +1,5 @@
-Mathmaker
-=========
+Overview
+========
 
 Mathmaker creates elementary maths worksheets with detailed solutions.
 
@@ -8,29 +8,40 @@ Examples of available themes are: first degree equations, pythagorean
 theorem, fractions calculation...
 
 Quickstart
-----------
+==========
+
+.. _install:
 
 Install
-~~~~~~~
+-------
 
-Required dependencies: \* euktoeps >=1.5.4 \* xmllint
+Required dependencies:
 
-Recommended dependencies: \* lualatex \* a bunch of LaTeX packages(1)
+-  python >=3.4
+-  euktoeps >=1.5.4
+-  xmllint
 
-To install them: \* on Ubuntu:
+Recommended dependencies:
 
-::
+-  lualatex
+-  a bunch of LaTeX packages(1)
 
-    $ sudo apt-get install eukleides libxml2-utils
+To install them:
 
-Recommended dependencies: you can either install the complete texlive
-distribution (takes some room on the hard disk): run
-``$ sudo apt-get install texlive-full``, or install only the necessary
-packages:
+-  on Ubuntu, python3.4 is already installed, so:
 
-::
+   ::
 
-    $ sudo apt-get install texlive-luatex texlive-latex-recommended texlive-xetex texlive-latex-base texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-latex-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
+       $ sudo apt-get install eukleides libxml2-utils
+
+   Recommended dependencies: you can either install the complete texlive
+   distribution (takes some room on the hard disk): run
+   ``$ sudo apt-get install texlive-full``, or install only the
+   necessary packages:
+
+   ::
+
+       $ sudo apt-get install texlive-luatex texlive-latex-recommended texlive-xetex texlive-latex-base texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-latex-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
 
 Once you're done, you can proceed installing mathmaker:
 
@@ -42,7 +53,7 @@ Once you're done, you can proceed installing mathmaker:
 and PyYAML).
 
 Basic use
-~~~~~~~~~
+---------
 
 ::
 
@@ -56,7 +67,7 @@ Get the list of all provided sheets(2):
     $ mathmaker list
 
 Some settings
-~~~~~~~~~~~~~
+-------------
 
 The default settings can be overriden by user defined values in
 ``~/.config/mathmaker/user_config.yaml``. Read `the complete
@@ -101,27 +112,27 @@ Some of them can be changed as mathmaker options:
       --version, -v         show program's version number and exit
 
 Advanced use
-~~~~~~~~~~~~
+------------
 
 It's possible to create your own sheets in xml (only for the mental
 calculation theme yet). Read `the complete documentation <>`__ for more
 information.
 
 Contribute
-----------
+==========
 
 You can contribute to mathmaker:
 
-As a wordings contributor:
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+As a wordings contributor
+-------------------------
 
 Mathmaker needs contexts for problems wordings. There are already some,
 but the more there is, the better. Existing wordings can be found
 [here][]. You can submit any new idea as an enhancement proposal
 `there <>`__ (should be written in english, french or german).
 
-As a translator:
-~~~~~~~~~~~~~~~~
+As a translator
+---------------
 
 You can help translating mathmaker to your language (or any language you
 like, if you have enough elementary maths vocabulary for that).
@@ -137,8 +148,8 @@ find the po files in the subdirectories `here <>`__.
 
 Once you're done, you can send the po files to `??? <>`__.
 
-As a developer:
-~~~~~~~~~~~~~~~
+As a developer
+--------------
 
 Please check the `documentation for developers <>`__.
 
@@ -148,41 +159,41 @@ Please check the `documentation for developers <>`__.
 
 (1) Complete list of recommended LaTeX packages:
 
-+---------------------+--------------------------------+---------------------------+
-| CTAN Package Name   | Package name (Ubuntu 14.04 )   | Package name (FreeBSD )   |
-+=====================+================================+===========================+
++---------------------+--------------------------------+
+| CTAN Package Name   | Package name (Ubuntu 14.04 )   |
++=====================+================================+
 | fontspec            | texlive-latex-recommended      |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | polyglossia         | texlive-xetex                  |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | geometry            | texlive-latex-base             |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | graphicx            | texlive-pstricks               |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | epstopdf            | texlive-font-utils             |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | tikz                | texlive-latex-extra            |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | amssymb             | texlive-base                   |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | amsmath             | texlive-latex-base             |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | siunitx             | texlive-science                |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | cancel              | texlive-pictures               |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | array               | texlive-latex-base             |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | ulem                | texlive-generic-recommended    |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | textcomp            | texlive-latex-base             |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | eurosym             | texlive-fonts-recommended      |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | lxfonts             | texlive-fonts-extra            |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 | multicol            | texlive-latex-base             |
-+---------------------+--------------------------------+---------------------------+
++---------------------+--------------------------------+
 
 (2) Complete list of provided sheets:
 
