@@ -86,7 +86,7 @@ except EnvironmentError as e:
 setup(
     name=mathmaker.__software_name__,
     version=mathmaker.__version__,
-    url='http://github.com/zezollo/mathmaker/',
+    url='http://github.com/nicolas.hainaux/mathmaker/',
     license=mathmaker.__licence__,
     author=mathmaker.__author__,
     tests_require=['tox'],
@@ -98,7 +98,7 @@ setup(
     description='Mathmaker creates automatically elementary maths exercises '
                 'and their (detailed) answers.',
     long_description=read('README.rst', 'CHANGELOG.rst'),
-    packages=find_packages(exclude=['tests']),
+    packages=find_packages(exclude=['tests', 'docs']),
     entry_points={
         'console_scripts': ['mathmaker = mathmaker.cli:entry_point'],
     },
