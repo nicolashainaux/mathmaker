@@ -22,8 +22,11 @@
 
 from . import lib
 
+__version_info__ = (0, 7, 0)
+__version__ = '.'.join(str(c) for c in __version_info__)
+
 __software_name__ = 'mathmaker'
-__version__ = '0.6.1 (alpha)'
+__release__ = __version__ + ' (alpha)'
 __author__ = 'Nicolas Hainaux'
 __author_email__ = 'nh.techn@gmail.com'
 __licence__ = 'GNU General Public License v3 or later (GPLv3+)'
@@ -34,9 +37,9 @@ __contact__ = '{author} <{author_email}>'\
 __licence_info__ = '{software_ref} is free software. Its license is '\
                    '{software_license}.'
 __url_info__ = 'Further details on {software_website}'
-__info__ = '{software_name} {v}\nLicense: {l}\n{c} {contact}'\
+__info__ = '{software_name} {r}\nLicense: {l}\n{c} {contact}'\
            .format(software_name=__software_name__,
-                   v=__version__, l=__licence__, c=__copyright__,
+                   r=__release__, l=__licence__, c=__copyright__,
                    contact=__contact__)
 
 __all__ = ['lib', ]
