@@ -46,6 +46,8 @@ def entry_point():
                         help='force the language of the output to LANGUAGE. '
                              'This will override any value you may have set '
                              'in ~/.config/mathmaker/user_config.yaml')
+    parser.add_argument('--pdf', action='store_true', dest='pdf_output',
+                        help='the output will be in pdf format')
     parser.add_argument('-d', '--output-directory', action='store',
                         dest='outputdir',
                         default=settings.outputdir,
@@ -111,7 +113,7 @@ def entry_point():
         sys.exit(1)
 
     try:
-        shared.machine.write_out(str(sh))
+        shared.machine.write_out(str(sh), pdf_output=args.pdf_output)
     except Exception:
         log.error("An exception occured during the creation of the sheet.",
                   exc_info=True)

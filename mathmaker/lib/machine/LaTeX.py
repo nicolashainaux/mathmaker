@@ -20,7 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import os
 import sys
+import time
+import subprocess
+from tempfile import NamedTemporaryFile
 
 from mathmaker import settings
 from mathmaker.lib import is_, error
@@ -255,10 +259,44 @@ automatically increments the counter").format(cmd_name="exercise",
         else:
             self.out.write(output_str)
 
-    ##
-    #   @brief Writes to the output the given string
-    def write_out(self, given_string, **options):
-        self.out.write(given_string)
+    def write_out(self, latex_document: str, pdf_output=False):
+        """
+        Writes the given document to the output.
+
+        If pdf_output is set to True then the document will be compiled into
+        a pdf and the pdf content will be written to output.
+
+        :param latex_document: contains the entire LaTeX document
+        :param pdf_output: if True, output will be written in pdf format
+        """
+        document = latex_document
+        if pdf_output:
+            with NamedTemporaryFile(mode='r+t') as tmp_file:
+                tmp_file_name = os.path.basename(tmp_file.name)
+                tmp_log_name = tmp_file_name + '.log'
+                pdf_file_name = tmp_file_name + '.pdf'
+                tmp_file.write(latex_document)
+                tmp_file.seek(0)
+                p = subprocess.Popen(['lualatex',
+                                      '-interaction',
+                                      'nonstopmode',
+                                      tmp_file.name],
+                                     stdout=sys.stderr)
+                returncode = p.wait()
+                if returncode:
+                    saved_log_name = 'lualatex_' \
+                        + time.strftime("%Y%m%d-%H%M%S") + '.log'
+                    with open(tmp_log_name, mode='rt') as tmplog,\
+                        open(saved_log_name, mode='wt') as savedlog:  # noqa
+                        # __
+                        savedlog.write(tmplog.read())
+                        raise RuntimeError('lualatex had a problem while '
+                                           'compiling. See ' + saved_log_name)
+                with open(pdf_file_name, mode='rb') as pdf_file:
+                    document = pdf_file.read()
+                self.out = sys.stdout.buffer
+                os.remove(pdf_file_name)
+        self.out.write(document)
 
     ##
     #   @brief Writes to the output the given string
