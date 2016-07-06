@@ -103,7 +103,8 @@ setup(
     long_description=read('README.rst', 'CHANGELOG.rst'),
     packages=find_packages(exclude=['tests', 'docs']),
     entry_points={
-        'console_scripts': ['mathmaker = mathmaker.cli:entry_point'],
+        'console_scripts': ['mathmaker = mathmaker.cli:entry_point',
+                            'mathmakerd = mathmaker.daemon:run'],
     },
     data_files=create_mo_files() + ['mathmaker/data/fonts_list.txt'],
     include_package_data=True,

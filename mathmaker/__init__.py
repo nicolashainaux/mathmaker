@@ -42,4 +42,6 @@ __info__ = '{software_name} {r}\nLicense: {l}\n{c} {contact}'\
                    r=__release__, l=__licence__, c=__copyright__,
                    contact=__contact__)
 
+DAEMON_PORT = 9999
+
 __all__ = ['lib', ]

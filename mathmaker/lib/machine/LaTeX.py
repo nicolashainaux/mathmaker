@@ -273,14 +273,15 @@ automatically increments the counter").format(cmd_name="exercise",
         if pdf_output:
             with NamedTemporaryFile(mode='r+t') as tmp_file:
                 tmp_file_name = os.path.basename(tmp_file.name)
-                tmp_log_name = tmp_file_name + '.log'
-                pdf_file_name = tmp_file_name + '.pdf'
+                tmp_log_name = settings.outputdir + tmp_file_name + '.log'
+                pdf_file_name = settings.outputdir + tmp_file_name + '.pdf'
                 tmp_file.write(latex_document)
                 tmp_file.seek(0)
                 p = subprocess.Popen(['lualatex',
                                       '-interaction',
                                       'nonstopmode',
                                       tmp_file.name],
+                                     cwd=settings.outputdir,
                                      stdout=sys.stderr)
                 returncode = p.wait()
                 if returncode:
