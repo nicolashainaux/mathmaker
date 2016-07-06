@@ -116,6 +116,13 @@ setup(
         'Programming Language :: Python',
         'Development Status :: 3 - Alpha',
         'Natural Language :: English',
-        'License :: OSI Approved :: ' + mathmaker.__licence__],
+        'License :: OSI Approved :: ' + mathmaker.__licence__,
+        'Topic :: Education :: Computer Aided Instruction (CAI)',
+        'Environment :: Web Environment',
+        'Environment :: Console',
+        'Intended Audience :: Education',
+        'Operating System :: Unix',
+        'Operating System :: POSIX :: Linux',
+        'Operating System :: POSIX :: BSD'],
     extras_require={'testing': ['pytest']}
 )
