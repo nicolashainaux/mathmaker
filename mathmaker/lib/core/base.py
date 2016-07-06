@@ -20,7 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import os
 import subprocess
 
 from mathmaker import settings
@@ -163,12 +162,10 @@ class Drawable(NamedObject):
         if 'create_pic_files' in options and not options['create_pic_files']:
             pass
         else:
-            curdir = os.getcwd()
-            os.chdir(settings.outputdir)
-            f = open(self.euk_filename, 'w')
-            f.write(hc + self.into_euk(**options))
-            f.close()
+            euk_path = settings.outputdir + self.euk_filename
+            with open(euk_path, 'w') as f:
+                f.write(hc + self.into_euk(**options))
             subprocess.Popen([settings.euktoeps,
                               settings.euktoeps_options,
-                              self.euk_filename])
-            os.chdir(curdir)
+                              euk_path],
+                             cwd=settings.outputdir)

@@ -20,7 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import os
 import subprocess
 
 from mathmaker import settings
@@ -33,9 +32,7 @@ def create_list():
     The file is mathmaker/data/fonts_list.txt
     """
     with open(settings.datadir + 'fonts_list.txt', mode='wt') as f:
-        curdir = os.getcwd()
-        os.chdir(settings.toolsdir)
         p = subprocess.Popen([settings.toolsdir + 'listluatexfonts'],
-                             stdout=f)
+                             stdout=f,
+                             cwd=settings.toolsdir)
         p.wait()
-        os.chdir(curdir)
