@@ -15,6 +15,8 @@ PATHS:
     EUKTOEPS: euktoeps
     EUKTOEPS_OPTIONS: -i \usepackage{eukleides,graphicx,textcomp}
     XMLLINT: xmllint
+    LUALATEX: lualatex
+    TEXLUA: texlua
     OUTPUT_DIR: ./
 
 LOCALES:

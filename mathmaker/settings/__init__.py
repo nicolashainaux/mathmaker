@@ -79,6 +79,7 @@ def init():
     global rootdir, localedir, libdir, datadir, settingsdir
     global projectdir
     global outputdir
+    global toolsdir
     global frameworksdir
     global default, path
     global mainlogger
@@ -90,6 +91,8 @@ def init():
     global encoding
     global xmllint
     global euktoeps, euktoeps_options
+    global lualatex
+    global texlua
     global round_letters_in_math_expr
 
     settings_dirname = "settings/"
@@ -102,6 +105,7 @@ def init():
     localedir = rootdir + "locale/"
     libdir = rootdir + "lib/"
     datadir = rootdir + "data/"
+    toolsdir = rootdir + 'tools/'
     frameworksdir = datadir + 'frameworks/'
     settingsdir = rootdir + settings_dirname
     projectdir = rootdir[:-len('mathmaker/')]
@@ -117,6 +121,8 @@ def init():
 
     CONFIG = load_config('user_config', settingsdir)
     xmllint = CONFIG["PATHS"]["XMLLINT"]
+    lualatex = CONFIG["PATHS"]["LUALATEX"]
+    texlua = CONFIG["PATHS"]["TEXLUA"]
     euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
     euktoeps_options = CONFIG["PATHS"]["EUKTOEPS_OPTIONS"]
     language = CONFIG['LOCALES'].get('LANGUAGE', 'en_US')

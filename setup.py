@@ -10,6 +10,7 @@ from setuptools.command.test import test as TestCommand
 import mathmaker
 from mathmaker.lib.startup_actions import check_dependencies
 from mathmaker import settings
+from mathmaker.lib.tools import fonts
 
 
 def read(*filenames, **kwargs):
@@ -83,6 +84,8 @@ except EnvironmentError as e:
     raise EnvironmentError(str(e) + 'Once you have installed all correct '
                            'versions, you can run mathmaker\'s setup again.')
 
+fonts.create_list()
+
 setup(
     name=mathmaker.__software_name__,
     version=mathmaker.__version__,
@@ -102,7 +105,7 @@ setup(
     entry_points={
         'console_scripts': ['mathmaker = mathmaker.cli:entry_point'],
     },
-    data_files=create_mo_files(),
+    data_files=create_mo_files() + ['mathmaker/data/fonts_list.txt'],
     include_package_data=True,
     platforms='any',
     test_suite='tests',

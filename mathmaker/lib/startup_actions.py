@@ -34,6 +34,7 @@ import gettext
 from distutils.version import LooseVersion
 
 from mathmaker import settings
+from mathmaker.lib.tools import fonts
 from mathmaker import __software_name__
 from mathmaker.lib.common import latex
 
@@ -65,10 +66,17 @@ def check_dependency(name: str, goal: str, path_to: str,
         log.error(err_msg + add_msg)
         raise EnvironmentError(err_msg + add_msg)
 
-    v = shlex.split(subprocess.Popen(["grep", "version"],
-                                     stdin=the_call.stdout,
-                                     stdout=subprocess.PIPE)
-                    .communicate()[0].decode())[-1]
+    if name in ['lualatex', 'texlua']:
+        temp = shlex.split(subprocess.Popen(["grep", "Version"],
+                                            stdin=the_call.stdout,
+                                            stdout=subprocess.PIPE)
+                                     .communicate()[0].decode())[4]
+        v = temp.split(sep='-')[1]
+    else:
+        v = shlex.split(subprocess.Popen(["grep", "version"],
+                                         stdin=the_call.stdout,
+                                         stdout=subprocess.PIPE)
+                        .communicate()[0].decode())[-1]
 
     installed_version_nb = str(v)
 
@@ -93,6 +101,18 @@ def check_dependencies() -> bool:
     try:
         check_dependency("xmllint", "read xml files",
                          settings.xmllint, "20901")
+    except EnvironmentError as e:
+        infos += str(e) + '\n'
+        missing_dependency = True
+    try:
+        check_dependency("lualatex", "compile LaTeX files",
+                         settings.lualatex, "0.76.0")
+    except EnvironmentError as e:
+        infos += str(e) + '\n'
+        missing_dependency = True
+    try:
+        check_dependency("texlua", "find the fonts available for lualatex",
+                         settings.texlua, "0.76.0")
     except EnvironmentError as e:
         infos += str(e) + '\n'
         missing_dependency = True
@@ -124,18 +144,36 @@ def install_gettext_translations(**kwargs):
     return True
 
 
-def check_settings_consistency(**kwargs):
+def check_font() -> bool:
+    """
+    Will check if settings.font belongs to data/fonts_list.txt.
+
+    It will first check if the exact name is in the list, then if one line
+    of the list starts with the exact name.
+    """
+    with open(settings.datadir + 'fonts_list.txt', mode='r') as f:
+        if settings.font.lower() in f.readlines():
+            return True
+        else:
+            f.seek(0)
+            for line in f:
+                if line.startswith(settings.font.lower()):
+                    return True
+            return False
+
+
+def check_settings_consistency():
     """
     Will check the consistency of several settings values.
 
-    :param language: language to use. Should be settings.language.
-    :type language: str
-    :param od: output directory. Shouldn't be else than settings.outputdir
-    :type od: str
+    The checked values are: whether the language is supported as a LaTeX
+    package that mathmaker uses, the output directory (is it an existing
+    directory?) and whether the chosen font is usable by lualatex.
     """
     log = settings.mainlogger
-    language = kwargs.get('language', settings.language)
-    od = kwargs.get('od', settings.outputdir)
+    language = settings.language
+    od = settings.outputdir
+    font = settings.font
     # Check the chosen language belongs to latex.LANGUAGE_PACKAGE_NAME
     err_msg = 'The language chosen for output (' + language \
               + ') is not defined in the LaTeX packages known by mathmaker. '\
@@ -153,6 +191,17 @@ def check_settings_consistency(**kwargs):
         raise NotADirectoryError(err_msg)
     # We need to modify settings.outputdir directly, so no use of od kw
     elif not settings.outputdir.endswith('/'):
-        log.warning('The output directory is correct but should end '
-                    'with a /. Correcting it.')
         settings.outputdir += '/'
+
+    err_msg = 'Looks like the chosen font (' + str(font) + ') is not '\
+        'in the list of available fonts for lualatex. Will try to update the '\
+        'list.'
+    if not check_font():
+        log.warning(err_msg)
+        err_msg = 'Unable to find the chosen font (' + str(font) + ') after '\
+            'the update of luatex available fonts. Check if it is installed '\
+            'and if you have not misspelled it.'
+        fonts.create_list()
+        if not check_font():
+            log.critical(err_msg)
+            raise ValueError(err_msg)
