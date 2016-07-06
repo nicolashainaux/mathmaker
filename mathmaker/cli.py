@@ -25,13 +25,13 @@ import os
 import argparse
 import locale
 
-from . import __info__, __software_name__
-from . import settings
-from .lib import shared
-from .lib import startup_actions
-from .lib import sheet
-from .lib import list_sheets
-from .lib.tools.xml_sheet import get_xml_sheets_paths
+from mathmaker import __info__, __software_name__
+from mathmaker import settings
+from mathmaker.lib import shared
+from mathmaker.lib import startup_actions
+from mathmaker.lib import sheet
+from mathmaker.lib import list_sheets
+from mathmaker.lib.tools.xml_sheet import get_xml_sheets_paths
 
 
 def entry_point():
