@@ -5,6 +5,8 @@ Mathmaker creates elementary maths worksheets with detailed solutions.
 
 The output documents can be compiled into pdf files by lualatex. Examples of available themes are: first degree equations, pythagorean theorem, fractions calculation...
 
+!!! The links in this document are not up-to-date but will be, very quickly
+
 # Quickstart
 ## Install
 Required dependencies:
@@ -12,9 +14,7 @@ Required dependencies:
 * python >=3.4
 * euktoeps >=1.5.4
 * xmllint
-
-Recommended dependencies:
-
+* msgfmt
 * lualatex
 * a bunch of LaTeX packages<sup>(1)</sup>
 
@@ -22,11 +22,11 @@ To install them:
 
 * on Ubuntu, python3.4 is already installed, so:
 ```
-$ sudo apt-get install eukleides libxml2-utils
+$ sudo apt-get install eukleides libxml2-utils gettext texlive-latex-base
 ```
-Recommended dependencies: you can either install the complete texlive distribution (takes some room on the hard disk): run `$ sudo apt-get install texlive-full`, or install only the necessary packages:
+And for the LaTeX packages: you can either install the complete texlive distribution (takes some room on the hard disk): run `$ sudo apt-get install texlive-full`, or install only the necessary packages:
 ```
-$ sudo apt-get install texlive-luatex texlive-latex-recommended texlive-xetex texlive-latex-base texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-latex-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
+$ sudo apt-get install texlive-luatex texlive-latex-recommended texlive-xetex texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-latex-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
 ```
 
 Once you're done, you can proceed installing mathmaker:
@@ -53,8 +53,8 @@ Some of them can be changed as mathmaker options:
 
 ```
 $ mathmaker --help
-usage: mathmaker [-h] [-l LANG] [-d OUTPUTDIR] [-f FONT] [--encoding ENCODING]
-                 [--version]
+usage: mathmaker [-h] [-l LANG] [--pdf] [-d OUTPUTDIR] [-f FONT]
+                 [--encoding ENCODING] [--version]
                  [DIRECTIVE|FILE]
 
 Creates maths exercices sheets and their solutions.
@@ -71,6 +71,7 @@ optional arguments:
                         force the language of the output to LANGUAGE. This
                         will override any value you may have set in
                         ~/.config/mathmaker/user_config.yaml
+  --pdf                 the output will be in pdf format instead of LaTeX
   -d OUTPUTDIR, --output-directory OUTPUTDIR
                         where to put the possible output files, like pictures.
                         This will override any value you may have set

@@ -1,4 +1,5 @@
 mathmaker/data/fonts_list.txt
+docs/_build/
 *.egg/
 .tox/
 *.pyc
