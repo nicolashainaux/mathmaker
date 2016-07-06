@@ -72,6 +72,11 @@ def check_dependency(name: str, goal: str, path_to: str,
                                             stdout=subprocess.PIPE)
                                      .communicate()[0].decode())[4]
         v = temp.split(sep='-')[1]
+    elif name in ['msgfmt']:
+        v = shlex.split(subprocess.Popen(["grep", name],
+                                         stdin=the_call.stdout,
+                                         stdout=subprocess.PIPE)
+                                  .communicate()[0].decode())[-1]
     else:
         v = shlex.split(subprocess.Popen(["grep", "version"],
                                          stdin=the_call.stdout,

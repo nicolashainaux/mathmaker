@@ -17,6 +17,7 @@ PATHS:
     XMLLINT: xmllint
     LUALATEX: lualatex
     TEXLUA: texlua
+    MSGFMT: msgfmt
     OUTPUT_DIR: ./
 
 LOCALES:
