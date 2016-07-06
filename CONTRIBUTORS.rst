@@ -5,7 +5,7 @@ Development
 
 * Developers: Vaibhav Gupta
 
-* Wise advices: Olivier Cecillon
+* Clever advices: Olivier Cecillon
 
 Translation
 ===========
@@ -16,3 +16,8 @@ Problems wordings
 =================
 
 Nicolas Hainaux
+
+Patience and chocolate cakes
+============================
+
+Sophie Reboud
