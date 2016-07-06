@@ -47,7 +47,8 @@ def entry_point():
                              'This will override any value you may have set '
                              'in ~/.config/mathmaker/user_config.yaml')
     parser.add_argument('--pdf', action='store_true', dest='pdf_output',
-                        help='the output will be in pdf format')
+                        help='the output will be in pdf format instead '
+                             'of LaTeX')
     parser.add_argument('-d', '--output-directory', action='store',
                         dest='outputdir',
                         default=settings.outputdir,
