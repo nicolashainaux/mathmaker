@@ -33,7 +33,7 @@ Once you're done, you can proceed installing mathmaker:
 ```
 $ pip3 install mathmaker
 ```
-(this will automatically install two extra python3 libraries too: polib and PyYAML).
+(this will automatically install three extra python3 libraries too: polib, PyYAML and python-daemon).
 
 
 ## Basic use
