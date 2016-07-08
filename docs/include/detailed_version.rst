@@ -289,6 +289,75 @@ A summary of the conventions used to represent the different core objects (i.e. 
 
 .. image:: pics/dbg_all.png
 
+System log configuration
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Systems using ``rsyslog``, like Ubuntu
+""""""""""""""""""""""""""""""""""""""
+
+Ensure ``/etc/rsyslog.conf`` contains:
+::
+
+    $IncludeConfig /etc/rsyslog.d/*.conf
+
+Then create (if not created yet) a 'local' configuration file, like: ``/etc/rsyslog.d/40-local.conf`` and put (or add) in it:
+
+.. code-block:: text
+
+    #  Local user rules for rsyslog.
+    #
+    #
+    local5.*                     /var/log/mathmaker.log
+    local6.*                     /var/log/mathmakerd.log
+
+Then save it and:
+
+.. code-block:: console
+
+    # service rsyslog restart
+
+.. warning::
+    Do not create ``/var/log/mathmaker.log`` yourself with the wrong rights, otherwise nothing will be logged.
+
+To format the messages in a nicer way, it's possible to add this in /etc/rsyslog.conf:
+
+.. code-block:: text
+
+    $template MathmakerTpl,"%$now% %timegenerated:12:23:date-rfc3339% %syslogtag%%msg%\n"
+
+and then, modify /etc/rsyslog.d/40-local.conf like:
+
+.. code-block:: text
+
+    local5.*                        /var/log/mathmaker.log;MathmakerTpl
+    local6.*                        /var/log/mathmakerd.log;MathmakerTpl
+
+Tools to check everything's fine: after having restarted rsyslog, enable some more informations output:
+
+.. code-block:: console
+
+    # export RSYSLOG_DEBUGLOG="/var/log/myrsyslogd.log"
+    # export RSYSLOG_DEBUG="Debug"
+
+and running the configuration validation:
+
+.. code-block:: console
+
+    # rsyslogd -N2 | grep "mathmaker"
+
+should show something like (errorless):
+
+.. code-block:: console
+
+    rsyslogd: version 7.4.4, config validation run (level 2), master config /etc/rsyslog.conf
+    2564.153590773:7f559632b780:   ACTION 0x2123160 [builtin:omfile:/var/log/mathmaker.log;MathmakerTpl]
+    2564.154126386:7f559632b780:   ACTION 0x2123990 [builtin:omfile:/var/log/mathmakerd.log;MathmakerTpl]
+    2564.158461309:7f559632b780:   ACTION 0x2123160 [builtin:omfile:/var/log/mathmaker.log;MathmakerTpl]
+    2564.158729012:7f559632b780:   ACTION 0x2123990 [builtin:omfile:/var/log/mathmakerd.log;MathmakerTpl]
+    rsyslogd: End of config validation run. Bye.
+
+Once you've checked this works as expected, do not forget to configure your log rotation.
+
 Documentation
 ^^^^^^^^^^^^^
 
