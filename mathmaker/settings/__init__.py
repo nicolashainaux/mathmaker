@@ -84,6 +84,7 @@ def init():
     global default, path
     global mainlogger
     global dbg_logger
+    global daemon_logger
     global language
     global locale
     global currency
@@ -119,6 +120,7 @@ def init():
     mainlogger.info("Starting...")
     dbg_logger = logging.getLogger("dbg")
     config_dbglogger(settingsdir)
+    daemon_logger = logging.getLogger('__daemon__')
 
     CONFIG = load_config('user_config', settingsdir)
     xmllint = CONFIG["PATHS"]["XMLLINT"]

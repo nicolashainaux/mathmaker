@@ -2,7 +2,6 @@ Developer's documentation
 =========================
 
 .. toctree::
-   :maxdepth: 2
 
    dev_doc
 

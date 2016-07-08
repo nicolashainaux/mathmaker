@@ -53,8 +53,8 @@ Type ``mathmaker --help`` to get information on these command-line options.
 
 .. _http_server:
 
-http server
------------
+http server (mathmakerd)
+------------------------
 
 Once everything is installed, it's possible to run a server to communicate with mathmaker through a web browser.
 
@@ -62,21 +62,23 @@ Run the server:
 
 ::
 
-    $ mathmakerd
+    $ mathmakerd start
 
 Then go to your web browser and as url, you can enter:
 
 ::
 
-    http://127.0.0.1:9999/?sheetname=
+    http://127.0.0.1:9999/?sheetname=<sheetname>
 
-and add one sheetname (from ``mathmaker list``), for instance:
+and replace ``<sheetname>`` by an available sheet's name (from ``mathmaker list``), for instance:
 
 ::
 
     http://127.0.0.1:9999/?sheetname=pythagorean-theorem-short-test
 
 ``mathmaker`` will create the new sheet, compile it and return the pdf result to be displayed in the web browser.
+
+At the moment, ``mathmakerd stop`` doesn't work correctly, you'll have to ``kill`` it directly (``ps aux | grep mathmakerd`` then ``kill`` with the appropriate pid).
 
 
 xml sheets

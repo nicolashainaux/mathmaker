@@ -22,10 +22,10 @@ This is handled by ``mathmaker/lib/tools/config.py``. It works the same way for 
 
 An extended dict class is used to deal easier with dicts created from yaml files. See ``mathmaker/lib/tools/ext_dict.py``.
 
-The "daemon"
-------------
+The daemon
+----------
 
-It's not a real daemon yet. It is a simple web server that allows to communicate with mathmaker through http requests. See :ref:`http_server`.
+It's a daemonized web server that allows to communicate with mathmaker through http requests. See :ref:`http_server`.
 
 Shared
 ------

@@ -18,10 +18,13 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import sys
 from subprocess import Popen, PIPE
 from http.server import HTTPServer
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import parse_qs
+
+import daemon
 
 from mathmaker import settings
 from mathmaker import DAEMON_PORT
@@ -31,25 +34,34 @@ from mathmaker.lib.tools.xml_sheet import get_xml_sheets_paths
 
 class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
+        # settings.init() is required here in order to have the logger
+        # working (if it's in run(), even in the with clause, it works once)
+        settings.init()
+        log = settings.daemon_logger
         XML_SHEETS = get_xml_sheets_paths()
         all_sheets = {}
         all_sheets.update(sheet.AVAILABLE)
         all_sheets.update(XML_SHEETS)
         query = parse_qs(self.path[2:])
         if len(query) != 1:
-            self.send_response(400)
+            self.send_response(404)
             self.send_header('Content-Type', 'text/html')
             self.end_headers()
-            self.wfile.write(bytes('Error 400: only one parameter allowed',
+            self.wfile.write(bytes('Error 404: only one parameter allowed',
                                    'UTF-8'))
+            log.warning(self.address_string() + ' ' + self.requestline
+                        + ' 404 (only one parameter allowed)')
         else:
             if 'sheetname' not in query:
-                self.send_response(400)
+                self.send_response(404)
                 self.send_header('Content-Type', 'text/html')
                 self.end_headers()
-                self.wfile.write(bytes('Error 400: No allowed parameter '
+                self.wfile.write(bytes('Error 404: No allowed parameter '
                                        'other than sheetname',
                                        'UTF-8'))
+                log.warning(self.address_string() + ' ' + self.requestline
+                            + ' 404 (no allowed parameter other than '
+                            'sheetname)')
             else:
                 if query['sheetname'][0] in all_sheets:
                     document = ''
@@ -65,11 +77,15 @@ class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
                         self.end_headers()
                         self.wfile.write(bytes('Error 500: something failed',
                                                'UTF-8'))
+                        log.error(self.address_string() + ' '
+                                  + self.requestline + ' 500')
                     else:
                         self.send_response(200)
                         self.send_header('Content-Type', 'application/pdf')
                         self.end_headers()
                         self.wfile.write(document)
+                        log.info(self.address_string() + ' '
+                                 + self.requestline + ' 200')
                 else:
                     self.send_response(404)
                     self.send_header('Content-Type', 'text/html')
@@ -77,12 +93,15 @@ class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
                     self.wfile.write(bytes('Error 404: No such sheetname',
                                            'UTF-8'))
 
+                    log.warning(self.address_string() + ' ' + self.requestline
+                                + ' 404 (no such sheetname)')
+
 
 def run():
-    settings.init()
-    server_address = ('', DAEMON_PORT)
-    httpd = HTTPServer(server_address, MathmakerHTTPRequestHandler)
-    httpd.serve_forever()
+    with daemon.DaemonContext(stdout=sys.stdout, stderr=sys.stderr):
+        server_address = ('', DAEMON_PORT)
+        httpd = HTTPServer(server_address, MathmakerHTTPRequestHandler)
+        httpd.serve_forever()
 
 if __name__ == '__main__':
     run()

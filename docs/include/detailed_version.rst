@@ -211,8 +211,8 @@ Be sure you have different versions of python installed correctly on your comput
 
 .. _logging_debugging:
 
-Logging and debugging
-^^^^^^^^^^^^^^^^^^^^^
+Loggers: main, daemon, debugging
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 See :ref:`dev_settings` to know how to use the settings files and enable or disable logging and debugging.
 
@@ -249,6 +249,11 @@ If an Exception led to stop ``mathmaker``, then the message should include its T
                   exc_info=True)
         shared.db.close()
         sys.exit(1)
+
+Daemon logger
+"""""""""""""
+
+This logger is intended to be used by the daemon script. Works the same way as the main logger.
 
 Debugging logger
 """"""""""""""""
