@@ -80,7 +80,7 @@ def create_mo_files():
 settings.init()
 try:
     check_dependency("msgfmt", "compile the translations files at intall",
-                     settings.msgfmt, "0.18.13")
+                     settings.msgfmt, "0.18.3")
     check_dependencies()
 except EnvironmentError as e:
     raise EnvironmentError(str(e) + 'Once you have installed all correct '
