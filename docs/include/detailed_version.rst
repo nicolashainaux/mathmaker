@@ -371,8 +371,6 @@ Current state
 
 As stated in the :ref:`guided_tour.foreword`, the documentation is being turned from doxygen to Sphinx, so there are missing parts .
 
-The module `mathmaker.lib.tools.wording` can be considered as a reference on how to write correct docstrings.
-
 Any new function or module has to be documented as described in `PEP 257  <https://www.python.org/dev/peps/pep-0257/>`_.
 
 The doxygen documentation for version 0.6 is `here <http://mathmaker.sourceforge.net/contribute/doc/annotated.html>`_. The core parts are still correct, so far.
@@ -428,7 +426,7 @@ And of course, all the code is written in english.
 
 As to PEP 8, mathmaker 's code being free from errors, the best is to use a linter, like ``flake8``. They also exist as plugins to various text editors or IDE (see :ref:`atom_packages` for instance). Three `error codes <http://pep8.readthedocs.io/en/latest/intro.html#error-codes>`_ are ignored (see ``.flake8``):
 
-* E129 because it is triggered anytime a comment is used to separate a multiline conditional of an ``if`` statement from its nested suite. A choice has been made to realize this separation using a ``# __`` comment (or any other comment if it's necessary) and this complies with PEP 8 (second option here):
+* E129 because it is triggered anytime a comment is used to separate a multiline conditional of an ``if`` statement from its nested suite. A choice has been made to wrap multiline conditions in ``()`` and realize the separation with next indented block using a ``# __`` comment (or any other comment if it's necessary) and this complies with PEP 8 (second option here):
 
     Acceptable options in this situation include, but are not limited to:
 
@@ -454,9 +452,80 @@ Other choices are:
 
 * A maximum line length of 79
 * Declare ``_`` as builtin, otherwise all calls to ``_()`` (i.e. the translation function installed by gettext) would trigger flake8's error F821 (undefined name).
-* Not to check complexity. This might change in the future, but the algorithms in the core are complex. It's not easy to make them more simple (if anyone wants to try, (s)he's welcome).
+* No complexity check. This might change in the future, but the algorithms in the core are complex. It's not easy to make them more simple (if anyone wants to try, (s)he's welcome).
+* Name modules, functions, instances, and other variables in lower case, whenever possible using a single ``word`` but if necessary, using ``several_words_separated_with_underscores``.
+* Name classes in CapitalizedWords, like: ``SuchAWonderfullClass`` (don't use mixedCase, like ``wrongCapitalizedClass``).
+* All ``import`` statements must be at the top of any module. It must be avoided to add ``from ... import ...`` at the top of some functions, but sometimes it's necessary. A solution to avoid this is always preferred.
+* All text files (including program code) are encoded in UTF-8.
 
 As to PEP 257, this is also a good idea to use a linter, but lots of documentation being written as doxygen comments, the linter will detect a lot of missing docstrings. Just be sure the part you intend to push does not introduce new PEP 257 errors (their number must decrease with time, never increase).
+
+The text of any docstring is marked up with reStructuredText.
+
+The module `mathmaker.lib.tools.wording` can be considered as a reference on how to write correct docstrings. As an example, the code of two functions is reproduced here (note that the use of python3's annotations and ``sphinx-autodoc-annotation`` will automatically add the types to the generated documentation, so there's no need to write them):
+
+.. code-block:: python
+
+    def cut_off_hint_from(sentence: str) -> tuple:
+        """
+        Return the sentence and the possible hint separated.
+
+        Only one hint will be taken into account.
+
+        :param sentence: the sentence to inspect
+
+        :Examples:
+
+        >>> cut_off_hint_from("This sentence has no hint.")
+        ('This sentence has no hint.', '')
+        >>> cut_off_hint_from("This sentence has a hint: |hint:length_unit|")
+        ('This sentence has a hint:', 'length_unit')
+        >>> cut_off_hint_from("Malformed hint:|hint:length_unit|")
+        ('Malformed hint:|hint:length_unit|', '')
+        >>> cut_off_hint_from("Malformed hint: |hint0:length_unit|")
+        ('Malformed hint: |hint0:length_unit|', '')
+        >>> cut_off_hint_from("Two hints: |hint:unit| |hint:something_else|")
+        ('Two hints: |hint:unit|', 'something_else')
+        """
+        last_word = sentence.split()[-1:][0]
+        hint_block = ""
+        if (is_wrapped(last_word, braces='||')
+            and last_word[1:-1].startswith('hint:')):
+            # __
+            hint_block = last_word
+        if len(hint_block):
+            new_s = " ".join(w for w in sentence.split() if w != hint_block)
+            hint = hint_block[1:-1].split(sep=':')[1]
+            return (new_s, hint)
+        else:
+            return (sentence, "")
+
+
+    def merge_nb_unit_pairs(arg: object):
+        r"""
+        Merge all occurences of {nbN} {\*_unit} in arg.wording into {nbN\_\*_unit}.
+
+        In the same time, the matching attribute arg.nbN\_\*_unit is set with
+        Value(nbN, unit=Unit(arg.\*_unit)).into_str(display_SI_unit=True)
+        (the possible exponent is taken into account too).
+
+        :param arg: the object whose attribute wording will be processed. It must
+          have a wording attribute as well as nbN and \*_unit attributes.
+
+        :Example:
+
+        >>> class Object(object): pass
+        ...
+        >>> arg = Object()
+        >>> arg.wording = 'I have {nb1} {capacity_unit} of water.'
+        >>> arg.nb1 = 2
+        >>> arg.capacity_unit = 'L'
+        >>> merge_nb_unit_pairs(arg)
+        >>> arg.wording
+        'I have {nb1_capacity_unit} of water.'
+        >>> arg.nb1_capacity_unit
+        '\\SI{2}{L}'
+        """
 
 .. _atom_packages:
 
