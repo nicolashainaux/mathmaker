@@ -22,6 +22,7 @@
 """Read configuration files."""
 
 import os
+import sys
 import logging
 import errno
 import yaml
@@ -61,6 +62,16 @@ def load_config(file_tag, settingsdir):
         raise FileNotFoundError(errno.ENOENT,
                                 os.strerror(errno.ENOENT),
                                 file_tag + ".yaml")
+    if file_tag == 'logging' and sys.platform.startswith('freebsd'):
+        try:
+            with open(os.path.join(settingsdir, 'default/',
+                                   file_tag + '_freebsd.yaml')) as file_path:
+                # __
+                configuration.recursive_update(yaml.load(file_path))
+        except IOError:
+            raise FileNotFoundError(errno.ENOENT,
+                                    os.strerror(errno.ENOENT),
+                                    file_tag + "_freebsd.yaml")
     for d in ['/etc/mathmaker',
               os.path.join(os.path.expanduser("~"), '.config', 'mathmaker'),
               settingsdir + 'dev']:
@@ -72,4 +83,13 @@ def load_config(file_tag, settingsdir):
                 configuration.recursive_update(yaml.load(file_path))
         except IOError:
             pass
+        if file_tag == 'logging' and sys.platform.startswith('freebsd'):
+            try:
+                with open(os.path.join(d,
+                                       file_tag
+                                       + '_freebsd.yaml')) as file_path:
+                    # __
+                    configuration.recursive_update(yaml.load(file_path))
+            except IOError:
+                pass
     return configuration

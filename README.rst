@@ -43,6 +43,13 @@ To install them:
 
        $ sudo apt-get install texlive-luatex texlive-latex-recommended texlive-xetex texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-latex-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
 
+-  on FreeBSD(2):
+
+   ::
+
+       $ sudo pkg install python34 py34-sqlite3 gettext eukleides libxml2 texlive-full
+       $ rehash
+
 Once you're done, you can proceed installing mathmaker:
 
 ::
@@ -60,7 +67,7 @@ Basic use
     $ mathmaker pythagorean-theorem-short-test > out.tex
     $ lualatex out.tex
 
-Get the list of all provided sheets(2):
+Get the list of all provided sheets(3):
 
 ::
 
@@ -196,7 +203,12 @@ Please check the `documentation for developers <>`__.
 | multicol            | texlive-latex-base             |
 +---------------------+--------------------------------+
 
-(2) Complete list of provided sheets:
+(2) Using ``pkg``, you'll have to install ``texlive-full``; if you wish
+    to install only the relevant LaTeX packages, you'll have to browse
+    the ports, I haven't done this yet so cannot tell you exactly which
+    ones are necessary.
+
+(3) Complete list of provided sheets:
 
 +-----------------------+------------------+-----------------------------------------------------------------+
 | Theme                 | Subtheme         | Directive name                                                  |

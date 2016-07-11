@@ -1,15 +1,20 @@
 Short version
 -------------
 
-Install dependencies on Ubuntu:
+Install dependencies:
 
-::
+* Ubuntu::
 
    $ sudo apt-get install eukleides libxml2-utils gettext texlive-full
 
+* FreeBSD::
+
+   $ sudo pkg install python34 py34-sqlite3 gettext eukleides libxml2 texlive-full
+   $ rehash
+
 To install mathmaker in dev mode in a venv, get to the directory where you want to work, and (assuming git and python3.4 are installed):
 
-::
+* Ubuntu::
 
     $ pyvenv-3.4 dev0
     $ source dev0/bin/activate
@@ -18,6 +23,19 @@ To install mathmaker in dev mode in a venv, get to the directory where you want 
     (dev0) $ cd mathmaker/
     (dev0) $ git cl.....
     (dev0) $ python3 setup.py develop
+
+
+* FreeBSD::
+
+    $ pyvenv-3.4 dev0
+    $ source dev0/bin/activate.csh
+    (dev0) $ pip3 install pytest tox flake8 pydocstyle sphinx sphinx-autodoc-annotation sphinx-rtd-theme
+    (dev0) $ mkdir mathmaker
+    (dev0) $ cd mathmaker/
+    (dev0) $ git cl.....
+    (dev0) $ python3 setup.py develop
+
+
 
 Usage: get to an empty directory and:
 

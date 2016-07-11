@@ -22,17 +22,15 @@
 
 import subprocess
 
-from mathmaker import settings
 
-
-def create_list():
+def create_list(datadir='mathmaker/data/', toolsdir='mathmaker/tools/'):
     """
     Store in a file the list of the fonts available for lualatex.
 
     The file is mathmaker/data/fonts_list.txt
     """
-    with open(settings.datadir + 'fonts_list.txt', mode='wt') as f:
-        p = subprocess.Popen([settings.toolsdir + 'listluatexfonts'],
+    with open(datadir + 'fonts_list.txt', mode='wt') as f:
+        p = subprocess.Popen(['./listluatexfonts'],
                              stdout=f,
-                             cwd=settings.toolsdir)
+                             cwd=toolsdir)
         p.wait()

@@ -33,8 +33,6 @@ import shlex
 import gettext
 from distutils.version import LooseVersion
 
-from mathmaker import settings
-from mathmaker.lib.tools import fonts
 from mathmaker import __software_name__
 from mathmaker.lib.common import latex
 
@@ -53,7 +51,6 @@ def check_dependency(name: str, goal: str, path_to: str,
     :param path_to: the path to the executable to test
     :param required_version_nb: well, the required version number
     """
-    log = settings.mainlogger
     err_msg = "mathmaker requires {n} to {g}".format(n=name, g=goal)
     the_call = None
     try:
@@ -63,7 +60,6 @@ def check_dependency(name: str, goal: str, path_to: str,
     except OSError:
         add_msg = " but the path to {n} written in mathmaker's "\
                   "config file doesn't seem to match anything.".format(n=name)
-        log.error(err_msg + add_msg)
         raise EnvironmentError(err_msg + add_msg)
 
     if name in ['lualatex', 'texlua']:
@@ -89,35 +85,37 @@ def check_dependency(name: str, goal: str, path_to: str,
         add_msg = " but the installed version number {nb1} " \
                   "is lower than expected (at least {nb2})."\
                   .format(nb1=installed_version_nb, nb2=required_version_nb)
-        log.error(err_msg + add_msg)
         raise EnvironmentError(err_msg + add_msg)
 
 
-def check_dependencies() -> bool:
+def check_dependencies(euktoeps='euktoeps',
+                       xmllint='xmllint',
+                       lualatex='lualatex',
+                       texlua='texlua') -> bool:
     """Will check all mathmaker's dependencies."""
     infos = ''
     missing_dependency = False
     try:
         check_dependency("euktoeps", "produce pictures",
-                         settings.euktoeps, "1.5.4")
+                         euktoeps, "1.5.4")
     except EnvironmentError as e:
         infos += str(e) + '\n'
         missing_dependency = True
     try:
         check_dependency("xmllint", "read xml files",
-                         settings.xmllint, "20901")
+                         xmllint, "20901")
     except EnvironmentError as e:
         infos += str(e) + '\n'
         missing_dependency = True
     try:
         check_dependency("lualatex", "compile LaTeX files",
-                         settings.lualatex, "0.76.0")
+                         lualatex, "0.76.0")
     except EnvironmentError as e:
         infos += str(e) + '\n'
         missing_dependency = True
     try:
         check_dependency("texlua", "find the fonts available for lualatex",
-                         settings.texlua, "0.76.0")
+                         texlua, "0.76.0")
     except EnvironmentError as e:
         infos += str(e) + '\n'
         missing_dependency = True
@@ -133,6 +131,7 @@ def check_dependencies() -> bool:
 
 def install_gettext_translations(**kwargs):
     """Will install output's language (gettext functions)."""
+    from mathmaker import settings
     log = settings.mainlogger
     language = kwargs.get('language', settings.language)
     err_msg = 'gettext returned the following message:"{gettext_msg}"'\
@@ -156,15 +155,17 @@ def check_font() -> bool:
     It will first check if the exact name is in the list, then if one line
     of the list starts with the exact name.
     """
-    with open(settings.datadir + 'fonts_list.txt', mode='r') as f:
-        if settings.font.lower() in f.readlines():
-            return True
-        else:
-            f.seek(0)
-            for line in f:
-                if line.startswith(settings.font.lower()):
-                    return True
-            return False
+    from mathmaker import settings
+    if settings.font:
+        with open(settings.datadir + 'fonts_list.txt', mode='r') as f:
+            if settings.font.lower() in f.readlines():
+                return True
+            else:
+                f.seek(0)
+                for line in f:
+                    if line.startswith(settings.font.lower()):
+                        return True
+                return False
 
 
 def check_settings_consistency():
@@ -175,6 +176,8 @@ def check_settings_consistency():
     package that mathmaker uses, the output directory (is it an existing
     directory?) and whether the chosen font is usable by lualatex.
     """
+    from mathmaker.lib.tools import fonts
+    from mathmaker import settings
     log = settings.mainlogger
     language = settings.language
     od = settings.outputdir

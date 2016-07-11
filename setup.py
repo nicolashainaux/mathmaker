@@ -8,8 +8,7 @@ from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 import mathmaker
-from mathmaker.lib.startup_actions import check_dependencies, check_dependency
-from mathmaker import settings
+from mathmaker.lib.startup_actions import check_dependency, check_dependencies
 from mathmaker.lib.tools import fonts
 
 
@@ -77,13 +76,23 @@ def create_mo_files():
         data_files.append((d, mo_files))
     return data_files
 
-settings.init()
+missing_dependency = False
+infos = ""
+
 try:
     check_dependency("msgfmt", "compile the translations files at intall",
-                     settings.msgfmt, "0.18.3")
+                     'msgfmt', "0.18.3")
+except EnvironmentError as e:
+    infos += str(e) + '\n'
+    missing_dependency = True
+try:
     check_dependencies()
 except EnvironmentError as e:
-    raise EnvironmentError(str(e) + 'Once you have installed all correct '
+    infos += str(e) + '\n'
+    missing_dependency = True
+
+if missing_dependency:
+    raise EnvironmentError(infos + ' Once you have installed all correct '
                            'versions, you can run mathmaker\'s setup again.')
 
 fonts.create_list()

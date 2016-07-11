@@ -1,0 +1,14 @@
+version: 1
+
+# Don't modify this file.
+# It contains modifications to logging configuration that are specific to
+# freebsd platform.
+# If you wish to define customized logging configuration,
+# you should duplicate it as dev/logging_freebsd.yaml and edit this copy
+# instead.
+
+handlers:
+    mainSysLogHandler:
+        address: '/var/run/log'
+    daemonSysLogHandler:
+        address: '/var/run/log'

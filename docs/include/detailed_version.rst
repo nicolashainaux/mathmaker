@@ -28,10 +28,13 @@ It is strongly advised to install mathmaker in develop mode inside of a python v
 
 From there, you can activate it:
 
-::
+on Ubuntu::
 
     $ source dev0/bin/activate
 
+on FreeBSD::
+
+    $ source dev0/bin/activate.csh
 
 Install mathmaker
 """""""""""""""""
