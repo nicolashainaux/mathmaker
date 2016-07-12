@@ -157,15 +157,12 @@ def check_font() -> bool:
     """
     from mathmaker import settings
     if settings.font:
-        with open(settings.datadir + 'fonts_list.txt', mode='r') as f:
-            if settings.font.lower() in f.readlines():
-                return True
-            else:
-                f.seek(0)
-                for line in f:
-                    if line.startswith(settings.font.lower()):
-                        return True
-                return False
+        found = int(subprocess.check_output(['grep', '-c',
+                                             settings.font.lower(),
+                                             settings.fonts_list_file]))
+        return found >= 1
+    else:
+        return True
 
 
 def check_settings_consistency():

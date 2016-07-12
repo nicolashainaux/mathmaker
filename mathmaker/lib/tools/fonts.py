@@ -21,16 +21,21 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import subprocess
+from tempfile import TemporaryFile
 
 
-def create_list(datadir='mathmaker/data/', toolsdir='mathmaker/tools/'):
+def create_list(fonts_list_file='mathmaker/data/fonts_list.txt') -> tuple:
     """
     Store in a file the list of the fonts available for lualatex.
-
-    The file is mathmaker/data/fonts_list.txt
     """
-    with open(datadir + 'fonts_list.txt', mode='wt') as f:
-        p = subprocess.Popen(['./listluatexfonts'],
-                             stdout=f,
-                             cwd=toolsdir)
+    with TemporaryFile() as tmp_file:
+        p = subprocess.Popen('luaotfload-tool --list "*"',
+                             shell=True,
+                             stdout=tmp_file)
         p.wait()
+        tmp_file.seek(0)
+        with open(fonts_list_file, mode='wt') as f:
+            for line in tmp_file.readlines():
+                if not line.startswith(b'luaotfload') and line[:-1]:
+                    f.write(line.decode('utf-8').lower())
+    return [('mathmaker/data/', ['mathmaker/data/fonts_list.txt'])]

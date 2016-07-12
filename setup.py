@@ -95,8 +95,6 @@ if missing_dependency:
     raise EnvironmentError(infos + ' Once you have installed all correct '
                            'versions, you can run mathmaker\'s setup again.')
 
-fonts.create_list()
-
 setup(
     name=mathmaker.__software_name__,
     version=mathmaker.__version__,
@@ -118,7 +116,7 @@ setup(
         'console_scripts': ['mathmaker = mathmaker.cli:entry_point',
                             'mathmakerd = mathmaker.daemon:run'],
     },
-    data_files=create_mo_files() + ['mathmaker/data/fonts_list.txt'],
+    data_files=create_mo_files() + fonts.create_list(),
     include_package_data=True,
     platforms='any',
     test_suite='tests',

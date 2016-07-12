@@ -89,6 +89,7 @@ def init():
     global locale
     global currency
     global font
+    global fonts_list_file
     global encoding
     global xmllint
     global euktoeps, euktoeps_options
@@ -107,6 +108,7 @@ def init():
     localedir = rootdir + "locale/"
     libdir = rootdir + "lib/"
     datadir = rootdir + "data/"
+    fonts_list_file = datadir + 'fonts_list.txt'
     toolsdir = rootdir + 'tools/'
     frameworksdir = datadir + 'frameworks/'
     settingsdir = rootdir + settings_dirname
