@@ -92,7 +92,7 @@ def init():
     global fonts_list_file
     global encoding
     global xmllint
-    global euktoeps, euktoeps_options
+    global euktoeps
     global lualatex
     global texlua
     global msgfmt
@@ -130,7 +130,6 @@ def init():
     texlua = CONFIG["PATHS"]["TEXLUA"]
     msgfmt = CONFIG["PATHS"]["MSGFMT"]
     euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
-    euktoeps_options = CONFIG["PATHS"]["EUKTOEPS_OPTIONS"]
     language = CONFIG['LOCALES'].get('LANGUAGE', 'en_US')
     if language not in AVAILABLE['LANGUAGES']:
         language = 'en_US'
