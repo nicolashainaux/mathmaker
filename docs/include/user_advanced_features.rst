@@ -12,18 +12,17 @@ The default settings are following:
 
     PATHS:
         EUKTOEPS: euktoeps
-        EUKTOEPS_OPTIONS: -i \usepackage{eukleides,graphicx,textcomp}
         XMLLINT: xmllint
         LUALATEX: lualatex
-        TEXLUA: texlua
+        LUAOTFLOAD_TOOL: luaotfload-tool
         MSGFMT: msgfmt
         OUTPUT_DIR: ./
 
     LOCALES:
-    # Available values can be checked in the locale directory.
+        # Available values can be checked in the locale directory.
         LANGUAGE: en_US
         ENCODING: UTF-8
-    # Values can be 'euro', 'sterling', 'dollar'
+        # Values can be 'euro', 'sterling', 'dollar'
         CURRENCY: dollar
 
     LATEX:
@@ -33,8 +32,6 @@ The default settings are following:
 Some explanations:
 
 * The ``PATHS:`` section is here to provide a mean to change the paths to ``euktoeps``, ``lualatex`` and ``xmllint`` mainly. In case one of them is not reachable the way it is set in this section, you can change that easily.
-
-* The ``PATHS:`` section contains also an ``EUKTOEPS_OPTIONS:`` entry. This is mainly a temporary patch, to provide some libraries that are currently missing to ``euktoeps``. You shouldn't modify it. It will be removed in a next version, when ``euktoeps`` is corrected.
 
 * The ``PATHS:`` section contains also an ``OUTPUT_DIR:`` entry. This is the directory where ``mathmaker`` will store the possible picture files (.euk and .eps). Default value is "current directory". You can set another value, at your liking.
 
