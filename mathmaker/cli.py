@@ -41,7 +41,8 @@ def entry_point():
     startup_actions.check_dependencies(euktoeps=settings.euktoeps,
                                        xmllint=settings.xmllint,
                                        lualatex=settings.lualatex,
-                                       texlua=settings.texlua)
+                                       luaotfload_tool=settings
+                                       .luaotfload_tool)
     parser = argparse.ArgumentParser(description='Creates maths exercices '
                                                  'sheets and their solutions.')
     parser.add_argument('-l', '--language', action='store', dest='lang',

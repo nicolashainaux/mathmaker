@@ -94,7 +94,7 @@ def init():
     global xmllint
     global euktoeps
     global lualatex
-    global texlua
+    global luaotfload_tool
     global msgfmt
     global round_letters_in_math_expr
 
@@ -127,7 +127,7 @@ def init():
     CONFIG = load_config('user_config', settingsdir)
     xmllint = CONFIG["PATHS"]["XMLLINT"]
     lualatex = CONFIG["PATHS"]["LUALATEX"]
-    texlua = CONFIG["PATHS"]["TEXLUA"]
+    luaotfload_tool = CONFIG["PATHS"]["LUAOTFLOAD_TOOL"]
     msgfmt = CONFIG["PATHS"]["MSGFMT"]
     euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
     language = CONFIG['LOCALES'].get('LANGUAGE', 'en_US')

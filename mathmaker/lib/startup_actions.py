@@ -62,12 +62,19 @@ def check_dependency(name: str, goal: str, path_to: str,
                   "config file doesn't seem to match anything.".format(n=name)
         raise EnvironmentError(err_msg + add_msg)
 
-    if name in ['lualatex', 'texlua']:
+    if name in ['lualatex']:
         temp = shlex.split(subprocess.Popen(["grep", "Version"],
                                             stdin=the_call.stdout,
                                             stdout=subprocess.PIPE)
                                      .communicate()[0].decode())[4]
         v = temp.split(sep='-')[1]
+    elif name in ['luaotfload-tool']:
+        temp = shlex.split(subprocess.Popen(["grep",
+                                             "luaotfload-tool version"],
+                                            stdin=the_call.stdout,
+                                            stdout=subprocess.PIPE)
+                                     .communicate()[0].decode())[-1]
+        v = temp[1:-1]
     elif name in ['msgfmt']:
         v = shlex.split(subprocess.Popen(["grep", name],
                                          stdin=the_call.stdout,
@@ -91,7 +98,7 @@ def check_dependency(name: str, goal: str, path_to: str,
 def check_dependencies(euktoeps='euktoeps',
                        xmllint='xmllint',
                        lualatex='lualatex',
-                       texlua='texlua') -> bool:
+                       luaotfload_tool='luaotfload-tool') -> bool:
     """Will check all mathmaker's dependencies."""
     infos = ''
     missing_dependency = False
@@ -114,8 +121,9 @@ def check_dependencies(euktoeps='euktoeps',
         infos += str(e) + '\n'
         missing_dependency = True
     try:
-        check_dependency("texlua", "find the fonts available for lualatex",
-                         texlua, "0.76.0")
+        check_dependency("luaotfload-tool", "list the fonts available for"
+                                            " lualatex",
+                         luaotfload_tool, "2.4-3")
     except EnvironmentError as e:
         infos += str(e) + '\n'
         missing_dependency = True

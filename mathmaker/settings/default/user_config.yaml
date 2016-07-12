@@ -15,7 +15,7 @@ PATHS:
     EUKTOEPS: euktoeps
     XMLLINT: xmllint
     LUALATEX: lualatex
-    TEXLUA: texlua
+    LUAOTFLOAD_TOOL: luaotfload-tool
     MSGFMT: msgfmt
     OUTPUT_DIR: ./
 
