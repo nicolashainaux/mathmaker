@@ -111,7 +111,7 @@ except EnvironmentError as e:
     infos += str(e) + '\n'
     missing_dependency = True
 
-if missing_dependency:
+if missing_dependency and '--force' not in sys.argv:
     raise EnvironmentError(infos + ' Once you have installed all correct '
                            'versions, you can run mathmaker\'s setup again. '
                            'You can check https://readthedocs.org/projects/'
