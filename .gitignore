@@ -1,4 +1,5 @@
 mathmaker/data/fonts_list.txt
+README.md
 docs/_build/
 *.egg/
 .tox/
