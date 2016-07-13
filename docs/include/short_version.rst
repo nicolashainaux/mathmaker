@@ -12,6 +12,8 @@ Install dependencies:
    $ sudo pkg install python34 py34-sqlite3 gettext eukleides libxml2 texlive-full
    $ rehash
 
+And FreeBSD users should check the :ref:`eukleides_patch_for_freebsd`
+
 To install mathmaker in dev mode in a venv, get to the directory where you want to work, and (assuming git and python3.4 are installed):
 
 * Ubuntu::

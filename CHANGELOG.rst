@@ -1,7 +1,10 @@
-New in version 0.7
-==================
+Changelog
+=========
 
-* Standardized structure (``mathmaker`` becomes pip3-installable, available on PyPI and github, and the documentation is hosted on readthedocs; tests are made with py.test)
+New in version 0.7
+------------------
+
+* Standardized structure (``mathmaker`` becomes pip3-installable, available on PyPI and github; its documentation is hosted on readthedocs; tests are made with py.test)
 
 * A daemon is added (``mathmakerd``) to provide communication with ``mathmaker`` through http connections.
 

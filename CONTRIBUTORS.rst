@@ -1,5 +1,8 @@
+Contributors
+============
+
 Development
-===========
+-----------
 
 * Lead developer: Nicolas Hainaux
 
@@ -8,16 +11,16 @@ Development
 * Clever advices: Olivier Cecillon
 
 Translation
-===========
+-----------
 
 * French: Nicolas Hainaux
 
 Problems wordings
-=================
+-----------------
 
 Nicolas Hainaux
 
 Patience and chocolate cakes
-============================
+----------------------------
 
 Sophie Reboud

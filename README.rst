@@ -1,30 +1,29 @@
 Overview
 ========
 
+.. warning::
+
+    Although most of this document is up to date, the links are not (but will be, very quickly). Also the package is about to be uploaded to PyPI, but is not pip installable yet. Please wait this warning removed before starting anything.
+
 Mathmaker creates elementary maths worksheets with detailed solutions.
 
 The output documents can be compiled into pdf files by lualatex.
-Examples of available themes are: first degree equations, pythagorean
-theorem, fractions calculation...
+Examples of available themes are: first degree equations, pythagorean theorem, fractions calculation...
 
-.. warning::
+It can run from command line, but can be controlled via http requests too.
 
-    The links in this document are not up-to-date but will be, very quickly
+License: see `here <>`__
+
 
 Quickstart
 ==========
 
+.. _install:
+
 Install
 -------
 
-Required dependencies:
-
--  python >=3.4
--  euktoeps >=1.5.4
--  xmllint
--  msgfmt
--  lualatex
--  a bunch of LaTeX packages(1)
+Required (non python) dependencies are python >=3.4, euktoeps >=1.5.4, xmllint, msgfmt, lualatex, luaotfload-tool and a bunch of LaTeX packages(1)
 
 To install them:
 
@@ -50,6 +49,9 @@ To install them:
        $ sudo pkg install python34 py34-sqlite3 gettext eukleides libxml2 texlive-full
        $ rehash
 
+   .. note::
+       Check how to fix eukleides install in `the complete documentation <>`__
+
 Once you're done, you can proceed installing mathmaker:
 
 ::
@@ -59,6 +61,9 @@ Once you're done, you can proceed installing mathmaker:
 (this will automatically install three extra python3 libraries too:
 polib, PyYAML and python-daemon).
 
+.. note::
+    FreeBSD users, check how to fix mathmaker install if it stops with an error in python-daemon install, in `the complete documentation <>`__
+
 Basic use
 ---------
 
@@ -66,6 +71,12 @@ Basic use
 
     $ mathmaker pythagorean-theorem-short-test > out.tex
     $ lualatex out.tex
+
+or directly:
+
+::
+
+    $ mathmaker pythagorean-theorem-short-test --pdf > out.pdf
 
 Get the list of all provided sheets(3):
 
@@ -76,55 +87,16 @@ Get the list of all provided sheets(3):
 Some settings
 -------------
 
-The default settings can be overriden by user defined values in
+Check ``mathmaker --help`` to see which settings can be changed as command line arguments.
+
+Some more settings can be overriden by user defined values in
 ``~/.config/mathmaker/user_config.yaml``. Read `the complete
 documentation <>`__ for more information.
-
-Some of them can be changed as mathmaker options:
-
-::
-
-    $ mathmaker --help
-    usage: mathmaker [-h] [-l LANG] [--pdf] [-d OUTPUTDIR] [-f FONT]
-                     [--encoding ENCODING] [--version]
-                     [DIRECTIVE|FILE]
-
-    Creates maths exercices sheets and their solutions.
-
-    positional arguments:
-      [DIRECTIVE|FILE]      this can either match a sheetname included in
-                            mathmaker, or a mathmaker xml file, or it may be the
-                            special directive "list", that will print the complete
-                            list and exit.
-
-    optional arguments:
-      -h, --help            show this help message and exit
-      -l LANG, --language LANG
-                            force the language of the output to LANGUAGE. This
-                            will override any value you may have set in
-                            ~/.config/mathmaker/user_config.yaml
-      --pdf                 the output will be in pdf format instead of LaTeX
-      -d OUTPUTDIR, --output-directory OUTPUTDIR
-                            where to put the possible output files, like pictures.
-                            This will override any value you may have set
-                            ~/.config/mathmaker/user_config.yaml. Left undefined,
-                            the default will be current directory.
-      -f FONT, --font FONT  The font to use. If it's not installed on your system,
-                            lualatex will not be able to compile the document.
-                            This will override any value you may have set in
-                            ~/.config/mathmaker/user_config.yaml
-      --encoding ENCODING   The encoding to use. Take care it's available on your
-                            system, otherwise lualatex will not be able to compile
-                            the document. This will override any value you may
-                            have set in ~/.config/mathmaker/user_config.yaml
-      --version, -v         show program's version number and exit
 
 Advanced use
 ------------
 
-It's possible to create your own sheets in xml (only for the mental
-calculation theme yet). Read `the complete documentation <>`__ for more
-information.
+It's possible to create your own sheets in xml (only for the mental calculation theme yet). Read `the complete documentation <>`__ for more information.
 
 Contribute
 ==========
@@ -160,6 +132,11 @@ As a developer
 --------------
 
 Please check the `documentation for developers <>`__.
+
+.. include:: ../CONTRIBUTORS.rst
+
+.. include:: ../CHANGELOG.rst
+
 
 --------------
 
