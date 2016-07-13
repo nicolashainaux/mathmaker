@@ -4,7 +4,7 @@
 import sys
 import os
 import subprocess
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Command
 from setuptools.command.test import test as TestCommand
 
 import mathmaker
@@ -20,6 +20,26 @@ def read(*filenames, **kwargs):
         with open(filename, encoding=encoding) as f:
             buf.append(f.read())
     return sep.join(buf)
+
+
+class CleanCommand(Command):
+    """
+    Custom clean command to tidy up the project root.
+
+    Taken from http://stackoverflow.com/questions/3779915/why-does-python-
+    setup-py-sdist-create-unwanted-project-egg-info-in-project-r
+    """
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        os.system('rm -vrf ./build ./dist ./*.pyc ./*.tgz ./*.egg-info '
+                  './*.egg')
 
 
 class PyTest(TestCommand):
@@ -106,7 +126,8 @@ setup(
                       'polib>=1.0.7',
                       'python-daemon>=2.1.1'],
     cmdclass={'test': PyTest,
-              'tox': Tox},
+              'tox': Tox,
+              'clean': CleanCommand},
     author_email=mathmaker.__author_email__,
     description='Mathmaker creates automatically elementary maths exercises '
                 'and their (detailed) answers.',

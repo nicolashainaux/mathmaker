@@ -56,6 +56,11 @@ There you can install mathmaker in developer mode:
 
     (dev0) $ python3 setup.py develop
 
+It's possible to clean the project's main directory:
+::
+
+    (dev0) $ python3 setup.py clean
+
 
 Run mathmaker and tools
 """""""""""""""""""""""
