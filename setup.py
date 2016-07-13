@@ -113,7 +113,9 @@ except EnvironmentError as e:
 
 if missing_dependency:
     raise EnvironmentError(infos + ' Once you have installed all correct '
-                           'versions, you can run mathmaker\'s setup again.')
+                           'versions, you can run mathmaker\'s setup again. '
+                           'You can check https://readthedocs.org/projects/'
+                           'mathmaker/ to find instructions on install.')
 
 setup(
     name=mathmaker.__software_name__,

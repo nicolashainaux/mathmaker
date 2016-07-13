@@ -12,8 +12,9 @@ Examples of available themes are: first degree equations, pythagorean theorem, f
 
 It can run from command line, but can be controlled via http requests too.
 
-License: see `here <>`__
+**License** is to be found `here <>`__
 
+**Documentation** is `over there <>`__.
 
 Quickstart
 ==========
@@ -33,14 +34,14 @@ To install them:
 
        $ sudo apt-get install eukleides libxml2-utils gettext texlive-latex-base
 
-   And for the LaTeX packages: you can either install the complete
+   And for the yet missing LaTeX packages: you can either install the complete
    texlive distribution (takes some room on the hard disk): run
    ``$ sudo apt-get install texlive-full``, or install only the
    necessary packages:
 
    ::
 
-       $ sudo apt-get install texlive-luatex texlive-latex-recommended texlive-xetex texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-latex-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
+       $ sudo apt-get install texlive-luatex texlive-latex-recommended texlive-xetex texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
 
 -  on FreeBSD(2):
 
