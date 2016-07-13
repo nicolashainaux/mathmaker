@@ -77,7 +77,9 @@ class Tox(TestCommand):
         sys.exit(errno)
 
 
-def create_mo_files():
+def create_mo_files(force=False):
+    if force:
+        return []
     data_files = []
     localedir = 'mathmaker/locale'
     po_dirs = [localedir + '/' + l + '/LC_MESSAGES/'
@@ -111,7 +113,7 @@ except EnvironmentError as e:
     infos += str(e) + '\n'
     missing_dependency = True
 
-if missing_dependency and '--force' not in sys.argv:
+if missing_dependency and '--force' not in sys.argv[0]:
     raise EnvironmentError(infos + ' Once you have installed all correct '
                            'versions, you can run mathmaker\'s setup again. '
                            'You can check https://readthedocs.org/projects/'
@@ -139,7 +141,8 @@ setup(
         'console_scripts': ['mathmaker = mathmaker.cli:entry_point',
                             'mathmakerd = mathmaker.daemon:run'],
     },
-    data_files=create_mo_files() + fonts.create_list(),
+    data_files=create_mo_files(force='--force' in sys.argv[0])
+    + fonts.create_list(force='--force' in sys.argv[0]),
     include_package_data=True,
     platforms='any',
     test_suite='tests',

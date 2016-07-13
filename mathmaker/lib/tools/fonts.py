@@ -24,10 +24,13 @@ import subprocess
 from tempfile import TemporaryFile
 
 
-def create_list(fonts_list_file='mathmaker/data/fonts_list.txt') -> tuple:
+def create_list(fonts_list_file='mathmaker/data/fonts_list.txt',
+                force=False) -> tuple:
     """
     Store in a file the list of the fonts available for lualatex.
     """
+    if force:
+        return []
     with TemporaryFile() as tmp_file:
         p = subprocess.Popen('luaotfload-tool --list "*"',
                              shell=True,
