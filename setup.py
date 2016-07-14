@@ -114,7 +114,8 @@ except EnvironmentError as e:
     missing_dependency = True
 
 if missing_dependency and '--force' not in sys.argv[0]:
-    raise EnvironmentError(infos + ' Once you have installed all correct '
+    raise EnvironmentError('force: ' + str('--force' in sys.argv[0]) +
+                           infos + ' Once you have installed all correct '
                            'versions, you can run mathmaker\'s setup again. '
                            'You can check https://readthedocs.org/projects/'
                            'mathmaker/ to find instructions on install.')
