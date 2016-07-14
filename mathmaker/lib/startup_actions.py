@@ -178,7 +178,7 @@ def check_font() -> bool:
         return True
 
 
-def check_settings_consistency():
+def check_settings_consistency(language=None, od=None):
     """
     Will check the consistency of several settings values.
 
@@ -189,8 +189,8 @@ def check_settings_consistency():
     from mathmaker.lib.tools import fonts
     from mathmaker import settings
     log = settings.mainlogger
-    language = settings.language
-    od = settings.outputdir
+    language = language if language is not None else settings.language
+    od = od if od is not None else settings.outputdir
     font = settings.font
     # Check the chosen language belongs to latex.LANGUAGE_PACKAGE_NAME
     err_msg = 'The language chosen for output (' + language \
