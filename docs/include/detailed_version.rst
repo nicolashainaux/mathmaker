@@ -128,11 +128,13 @@ You'll need to install these dependencies in the virtual environment:
 
 ::
 
-    (dev0) $ pip3 install sphinx sphinx-autodoc-annotation sphinx-rtd-theme
+    (dev0) $ pip3 install sphinx sphinx-rtd-theme
 
 ``sphinx-rtd-theme`` is the theme used for mathmaker's documentation. It's the `readthedocs <https://readthedocs.org/>`_ theme.
 
-``sphinx-autodoc-annotation`` makes writing docstrings lighter when using python3 annotations. It is suggested to do so to conform to already existing style. Refer to mathmaker/lib/tools/wording.py as an example. If an IndexError is raised by ``sphinx-autodoc-annotation``, the patch can be found in `this commit <https://github.com/hsoft/sphinx-autodoc-annotation/commit/2210fd86f7b650c7cc5bb8cb0c273643a563360a>`_.
+.. note::
+
+    ``sphinx-autodoc-annotation`` makes writing docstrings lighter when using python3 annotations. Problem is, this package currently has a bug that prevents to build the doc on `readthedocs <https://readthedocs.org/>`_.
 
 Below is more information about `documentation`_.
 
@@ -470,7 +472,11 @@ As to PEP 257, this is also a good idea to use a linter, but lots of documentati
 
 The text of any docstring is marked up with reStructuredText.
 
-The module `mathmaker.lib.tools.wording` can be considered as a reference on how to write correct docstrings. As an example, the code of two functions is reproduced here (note that the use of python3's annotations and ``sphinx-autodoc-annotation`` will automatically add the types to the generated documentation, so there's no need to write them):
+The module `mathmaker.lib.tools.wording` can be considered as a reference on how to write correct docstrings. As an example, the code of two functions is reproduced here.
+
+.. note::
+
+    The use of python3's annotations and ``sphinx-autodoc-annotation`` would automatically add the types (including return type) to the generated documentation. If ``sphinx-autodoc-annotation``'s bug is corrected, the ``:type ...: ...`` and ``:rtype: ...`` lines will be removed.
 
 .. code-block:: python
 
@@ -481,6 +487,8 @@ The module `mathmaker.lib.tools.wording` can be considered as a reference on how
         Only one hint will be taken into account.
 
         :param sentence: the sentence to inspect
+        :type sentence: str
+        :rtype: tuple
 
         :Examples:
 
@@ -519,6 +527,8 @@ The module `mathmaker.lib.tools.wording` can be considered as a reference on how
 
         :param arg: the object whose attribute wording will be processed. It must
           have a wording attribute as well as nbN and \*_unit attributes.
+        :type arg: object
+        :rtype: None
 
         :Example:
 

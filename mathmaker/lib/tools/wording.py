@@ -43,9 +43,14 @@ def wrap(word: str, braces='{}', o_str=None, e_str=None) -> str:
     something longer than a char.
 
     :param word: the chunk of text to be wrapped
+    :type word: str
     :param braces: the pair of braces that will wrap the word
+    :type braces: str
     :param o_str: prefix the word.
+    :type o_str: str
     :param e_str: suffix the word
+    :type e_str: str
+    :rtype: str
 
     :Examples:
 
@@ -201,6 +206,8 @@ def cut_off_hint_from(sentence: str) -> tuple:
     Only one hint will be taken into account.
 
     :param sentence: the sentence to inspect
+    :type sentence: str
+    :rtype: tuple
 
     :Examples:
 
@@ -294,7 +301,10 @@ def handle_valueless_unit_tags(arg: object, sentence: str):
     it's also ignored by this function.
 
     :param arg: the object that attributes must be checked and possibly set
+    :type arg: object
     :param sentence: the sentence where to look for "unit" tags.
+    :type sentence: str
+    :rtype: None
     """
     valueless_unitblocks = [w[1:-1] for w in sentence.split()
                             if ('=' not in w
@@ -382,6 +392,8 @@ def merge_nb_unit_pairs(arg: object):
 
     :param arg: the object whose attribute wording will be processed. It must
       have a wording attribute as well as nbN and \*_unit attributes.
+    :type arg: object
+    :rtype: None
 
     :Example:
 

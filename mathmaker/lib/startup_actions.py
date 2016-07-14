@@ -47,9 +47,14 @@ def check_dependency(name: str, goal: str, path_to: str,
     (or the equivalent).
 
     :param name: the dependency's name.
+    :type name: str
     :param goal: tells shortly why mathmaker needs it for
+    :type goal: str
     :param path_to: the path to the executable to test
+    :type path_to: str
     :param required_version_nb: well, the required version number
+    :type required_version_nb: str
+    :rtype: bool
     """
     err_msg = "mathmaker requires {n} to {g}".format(n=name, g=goal)
     the_call = None
