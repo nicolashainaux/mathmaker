@@ -22,7 +22,7 @@
 
 from . import lib
 
-__version_info__ = (0, 7, 0)
+__version_info__ = (0, 6, 9)
 __version__ = '.'.join(str(c) for c in __version_info__)
 
 __software_name__ = 'mathmaker'
