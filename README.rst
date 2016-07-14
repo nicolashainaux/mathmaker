@@ -112,6 +112,8 @@ but the more there is, the better. Existing wordings can be found
 `here <https://github.com/nicolashainaux/mathmaker/tree/dev/mathmaker/data/wordings>`_. You can submit any new idea as an enhancement proposal
 `there <https://github.com/nicolashainaux/mathmaker/issues>`__ (should be written in english, french or german).
 
+Any question can be sent to nh dot techn (hosted at gmail dot com).
+
 As a translator
 ---------------
 
@@ -128,6 +130,8 @@ If you want to add missing translations, or to correct some, you can
 find the po files in the subdirectories `here <https://github.com/nicolashainaux/mathmaker/tree/dev/mathmaker/locale>`__.
 
 Once you're done, you can make a pull request `here <https://github.com/nicolashainaux/mathmaker/pulls>`__.
+
+Any question can be sent to nh dot techn (hosted at gmail dot com).
 
 As a developer
 --------------
