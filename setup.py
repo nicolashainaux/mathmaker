@@ -135,7 +135,7 @@ setup(
     author_email=mathmaker.__author_email__,
     description='Mathmaker creates automatically elementary maths exercises '
                 'and their (detailed) answers.',
-    long_description=read('README.rst', 'CHANGELOG.rst'),
+    long_description=read('README.md', 'CHANGELOG.rst'),
     packages=find_packages(exclude=['tests', 'docs']),
     entry_points={
         'console_scripts': ['mathmaker = mathmaker.cli:entry_point',
@@ -148,6 +148,8 @@ setup(
     test_suite='tests',
     classifiers=[
         'Programming Language :: Python',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Development Status :: 3 - Alpha',
         'Natural Language :: English',
         'License :: OSI Approved :: ' + mathmaker.__licence__,
