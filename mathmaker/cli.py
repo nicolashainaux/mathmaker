@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright 2006-2015 Nicolas Hainaux <nico_h@users.sourceforge.net>
+# Copyright 2006-2016 Nicolas Hainaux <nh.techn@gmail.com>
 
 # This file is part of Mathmaker.
 
