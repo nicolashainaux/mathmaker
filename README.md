@@ -1,6 +1,8 @@
 [![PyPI](https://img.shields.io/pypi/v/mathmaker.svg?maxAge=2592000)]()
 [![PyPI](https://img.shields.io/pypi/status/mathmaker.svg?maxAge=2592000)]()
 [![PyPI](https://img.shields.io/pypi/pyversions/mathmaker.svg?maxAge=2592000)]()
+[![Travis branch](https://img.shields.io/travis/nicolashainaux/mathmaker/dev.svg?maxAge=2592000)]()
+[![Coveralls branch](https://img.shields.io/coveralls/nicolashainaux/mathmaker/dev.svg?maxAge=2592000)]()
 [![Documentation Status](https://readthedocs.org/projects/mathmaker/badge/?version=master)](http://mathmaker.readthedocs.io/en/master/?badge=master)
 [![Documentation Status](https://readthedocs.org/projects/mathmaker/badge/?version=latest)](http://mathmaker.readthedocs.io/en/latest/?badge=latest) [![Maintenance](https://img.shields.io/maintenance/yes/2016.svg?maxAge=2592000)]()
 
@@ -38,7 +40,7 @@ Complete install
 
         $ sudo apt-get install eukleides libxml2-utils gettext texlive-full
 
-    Note: to avoid installing `texlive-full`, check the  [documentation](http://mathmaker.readthedocs.io/en/master/index.html).
+    Note: to avoid installing `texlive-full`, check the  [documentation](http://mathmaker.readthedocs.io/en/master/user_doc.html#install).
 
     Then:
 
