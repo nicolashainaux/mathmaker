@@ -1,10 +1,6 @@
 Overview
 ========
 
-.. warning::
-
-    Although most of this document is up to date, the links are not (but will be, very quickly). Also the package is about to be uploaded to PyPI, but is not pip installable yet. Please wait this warning removed before starting anything.
-
 Mathmaker creates elementary maths worksheets with detailed solutions.
 
 The output documents can be compiled into pdf files by lualatex.
