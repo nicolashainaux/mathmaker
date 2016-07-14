@@ -132,7 +132,11 @@ Once you're done, you can make a pull request `here <https://github.com/nicolash
 As a developer
 --------------
 
-Please check the `documentation for developers <http://mathmaker.readthedocs.io/en/latest/dev_index.html>`__.
+Before submitting a PR, please ensure you've had a look at the `writing rules <http://mathmaker.readthedocs.io/en/latest/dev_doc.html#writing-rules>`_.
+
+More details can be found in the `documentation for developers <http://mathmaker.readthedocs.io/en/latest/dev_index.html>`__.
+
+Any question can be sent to nh dot techn (hosted at gmail dot com).
 
 .. include:: ../CONTRIBUTORS.rst
 
