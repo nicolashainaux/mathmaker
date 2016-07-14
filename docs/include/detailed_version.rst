@@ -15,7 +15,7 @@ In the folder of your choice:
 
 ::
 
-    $ git cl.....
+    $ git clone https://github.com/nicolashainaux/mathmaker.git
 
 Setup a python virtual environment
 """"""""""""""""""""""""""""""""""
