@@ -115,13 +115,13 @@ def check_dependencies(euktoeps='euktoeps',
         missing_dependency = True
     try:
         check_dependency("xmllint", "read xml files",
-                         xmllint, "20708")
+                         xmllint, "20901")
     except EnvironmentError as e:
         infos += str(e) + '\n'
         missing_dependency = True
     try:
         check_dependency("lualatex", "compile LaTeX files",
-                         lualatex, "0.70.1")
+                         lualatex, "0.76.0")
     except EnvironmentError as e:
         infos += str(e) + '\n'
         missing_dependency = True

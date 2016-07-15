@@ -103,7 +103,7 @@ infos = ""
 
 try:
     check_dependency("msgfmt", "compile the translations files at intall",
-                     'msgfmt', "0.18.1")
+                     'msgfmt', "0.18.3")
 except EnvironmentError as e:
     infos += str(e) + '\n'
     missing_dependency = True
