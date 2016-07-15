@@ -12,9 +12,17 @@ recursive-include mathmaker *.xml
 recursive-include mathmaker *.xsd
 recursive-include mathmaker *.yaml
 recursive-include tests *.py
+include pytest.ini
+recursive-include docs *.bat
+recursive-include docs *.ggb
+recursive-include docs *.png
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs Makefile
 prune tools/*
 prune tools
 prune mathmaker/lib/core/triangles_architecture.png
 prune mathmaker/lib/install
 prune mathmaker/settings/dev
 prune tests/01_core_objects/YET_TO_ADD*.py
+prune docs/_build
