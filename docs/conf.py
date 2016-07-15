@@ -16,7 +16,8 @@
 # import sys
 # import pkg_resources
 
-from mathmaker import __version__, __author__, __copyright__, __software_name__
+from mathmaker import (__version__, __author__, __copyright__,
+                       __contact__, __software_name__)
 
 # try:
 #     release = pkg_resources.get_distribution('mathmaker').__version__
@@ -274,7 +275,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'mathmaker.tex', 'mathmaker Documentation',
-     'Author', 'manual'),
+     __contact__, 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
