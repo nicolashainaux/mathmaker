@@ -16,7 +16,7 @@
 # import sys
 # import pkg_resources
 
-from mathmaker import __version__
+from mathmaker import __version__, __author__, __copyright__, __software_name__
 
 # try:
 #     release = pkg_resources.get_distribution('mathmaker').__version__
@@ -62,9 +62,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'mathmaker'
-copyright = '2016, Author'
-author = 'Author'
+project = __software_name__
+copyright = ','.join([__copyright__, __author__])
+author = __author__
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -147,11 +147,11 @@ html_theme = 'sphinx_rtd_theme'
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
 #
-# html_title = 'mathmaker v'
+html_title = ' '.join([__software_name__, __version__])
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #
-# html_short_title = None
+html_short_title = html_title
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.

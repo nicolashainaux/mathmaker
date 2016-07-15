@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/nicolashainaux/mathmaker.svg?branch=dev)](https://travis-ci.org/nicolashainaux/mathmaker)
 [![Coveralls branch](https://img.shields.io/coveralls/nicolashainaux/mathmaker/dev.svg?maxAge=2592000)]()
 [![Documentation Status](https://readthedocs.org/projects/mathmaker/badge/?version=master)](http://mathmaker.readthedocs.io/en/master/?badge=master)
-[![Documentation Status](https://readthedocs.org/projects/mathmaker/badge/?version=latest)](http://mathmaker.readthedocs.io/en/latest/?badge=latest) [![Maintenance](https://img.shields.io/maintenance/yes/2016.svg?maxAge=2592000)]()
+[![Documentation Status](https://readthedocs.org/projects/mathmaker/badge/?version=dev)](http://mathmaker.readthedocs.io/en/dev/?badge=dev) [![Maintenance](https://img.shields.io/maintenance/yes/2016.svg?maxAge=2592000)]()
 
 [![PyPI](https://img.shields.io/pypi/l/mathmaker.svg?maxAge=2592000)]()
 
@@ -20,13 +20,10 @@ theorem, fractions calculation...
 It can run from command line, but can be controlled via http requests
 too.
 
-**License** is to be found
-[here](https://github.com/nicolashainaux/mathmaker/blob/master/LICENSE)
+[License](https://github.com/nicolashainaux/mathmaker/blob/master/LICENSE)
 
-**Documentation** is [there (for the latest
-release)](http://mathmaker.readthedocs.io/en/master/index.html) and
-[over there (for the latest development
-version)](http://mathmaker.readthedocs.io/en/latest/index.html).
+[Documentation (master release)](http://mathmaker.readthedocs.io/en/master/index.html)
+[Documentation (latest development version))](http://mathmaker.readthedocs.io/en/dev/index.html).
 
 Quickstart
 ==========
@@ -120,7 +117,7 @@ If the translation to your language isn't started yet, there are several
 pot files to get
 [here](https://github.com/nicolashainaux/mathmaker/tree/dev/mathmaker/locale)
 (see explanations about their respective roles
-[there](http://mathmaker.readthedocs.io/en/latest/dev_doc.html#the-real-and-the-fake-translation-files)).
+[there](http://mathmaker.readthedocs.io/en/dev/dev_doc.html#the-real-and-the-fake-translation-files)).
 You can use an editor like [poedit](https://poedit.net/) or any other
 you like better, to create po files from them and start to translate.
 
@@ -137,10 +134,10 @@ As a developer
 --------------
 
 Before submitting a PR, please ensure you've had a look at the [writing
-rules](http://mathmaker.readthedocs.io/en/latest/dev_doc.html#writing-rules).
+rules](http://mathmaker.readthedocs.io/en/dev/dev_doc.html#writing-rules).
 
 More details can be found in the [documentation for
-developers](http://mathmaker.readthedocs.io/en/latest/dev_index.html).
+developers](http://mathmaker.readthedocs.io/en/dev/dev_index.html).
 
 Any question can be sent to nh dot techn (hosted at gmail dot com).
 

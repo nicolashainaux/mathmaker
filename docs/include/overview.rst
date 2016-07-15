@@ -8,9 +8,11 @@ Examples of available themes are: first degree equations, pythagorean theorem, f
 
 It can run from command line, but can be controlled via http requests too.
 
-**License** is to be found `here <https://github.com/nicolashainaux/mathmaker/blob/master/LICENSE>`__
+`License <https://github.com/nicolashainaux/mathmaker/blob/master/LICENSE>`__
 
-**Documentation** is `there (for the latest release) <http://mathmaker.readthedocs.io/en/master/index.html>`__ and `over there (for the latest development version) <http://mathmaker.readthedocs.io/en/latest/index.html>`_.
+`Documentation (master release) <http://mathmaker.readthedocs.io/en/master/index.html>`__
+
+`Documentation (latest development release) <http://mathmaker.readthedocs.io/en/dev/index.html>`_.
 
 Quickstart
 ==========
@@ -118,7 +120,7 @@ like, if you have enough elementary maths vocabulary for that).
 
 If the translation to your language isn't started yet, there are several
 pot files to get `here <https://github.com/nicolashainaux/mathmaker/tree/dev/mathmaker/locale>`__ (see explanations about their respective
-roles `there <http://mathmaker.readthedocs.io/en/latest/dev_doc.html#the-real-and-the-fake-translation-files>`__). You can use an editor like
+roles `there <http://mathmaker.readthedocs.io/en/dev/dev_doc.html#the-real-and-the-fake-translation-files>`__). You can use an editor like
 `poedit <https://poedit.net/>`__ or any other you like better, to create
 po files from them and start to translate.
 
@@ -132,9 +134,9 @@ Any question can be sent to nh dot techn (hosted at gmail dot com).
 As a developer
 --------------
 
-Before submitting a PR, please ensure you've had a look at the `writing rules <http://mathmaker.readthedocs.io/en/latest/dev_doc.html#writing-rules>`_.
+Before submitting a PR, please ensure you've had a look at the `writing rules <http://mathmaker.readthedocs.io/en/dev/dev_doc.html#writing-rules>`_.
 
-More details can be found in the `documentation for developers <http://mathmaker.readthedocs.io/en/latest/dev_index.html>`__.
+More details can be found in the `documentation for developers <http://mathmaker.readthedocs.io/en/dev/dev_index.html>`__.
 
 Any question can be sent to nh dot techn (hosted at gmail dot com).
 
