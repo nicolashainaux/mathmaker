@@ -3,6 +3,21 @@
 FreeBSD notes
 =============
 
+.. _eukleides_patch_for_freebsd:
+
+eukleides fix
+-------------
+
+``eukleides`` currently does not work out of the box. The pkg-installed version has a functional euktoeps script, it is required, so keep it somewhere. Then do ``pkg remove eukleides`` and re-install it from source:
+
+- get the 1.5.4 source from http://www.eukleides.org/, for instance ``wget http://www.eukleides.org/files/eukleides-1.5.4.tar.bz2``
+- then ``tar xvzf eukleides-1.5.4.tar.bz2``
+- then possibly modify the prefix for install in the ``Config`` file, at your liking
+- remove the making of documentation and manpages from the ``install`` target in the ``Makefile`` (they cause errors)
+- install the required dependencies to compile eukleides: ``pkg install bison flex gmake gcc``
+- do ``gmake`` and then ``gmake install``. This will provide functional binaries.
+- replace the euktoeps script by the one you did get from the pkg installed version.
+
 python-daemon error at install
 ------------------------------
 
@@ -30,18 +45,3 @@ And finish the install:
 .. code-block:: console
 
     # pip3 install mathmaker
-
-.. _eukleides_patch_for_freebsd:
-
-eukleides fix
--------------
-
-``eukleides`` currently does not work out of the box. The pkg-installed version has a functional euktoeps script, it is required, so keep it somewhere. Then do ``pkg remove eukleides`` and re-install it from source:
-
-- get the 1.5.4 source from http://www.eukleides.org/, for instance ``wget http://www.eukleides.org/files/eukleides-1.5.4.tar.bz2``
-- then ``tar xvzf eukleides-1.5.4.tar.bz2``
-- then possibly modify the prefix for install in the ``Config`` file, at your liking
-- remove the making of documentation and manpages from the ``install`` target in the ``Makefile`` (they cause errors)
-- install the required dependencies to compile eukleides, at least ``bison``, ``flex``, ``gmake``
-- do ``gmake`` and then ``gmake install``. This will provide functional binaries.
-- replace the euktoeps script by the one you did get from the pkg installed version.
