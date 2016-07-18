@@ -1,18 +1,13 @@
 Changelog
 =========
 
-New in version 0.7.0-2
-----------------------
+New in version 0.7.0-3 (2016-07-18)
+-----------------------------------
 
-* Fixed the install
+* Fixed the install of locale files and font listing file
 
-New in version 0.7.0-1
-----------------------
-
-* Small patch to add missing locale files
-
-New in version 0.7
-------------------
+New in version 0.7 (2016-07-15)
+-------------------------------
 
 * Standardized structure (``mathmaker`` becomes pip3-installable, available on PyPI and github; its documentation is hosted on readthedocs; tests are made with py.test)
 
