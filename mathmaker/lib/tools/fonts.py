@@ -25,6 +25,7 @@ from tempfile import TemporaryFile
 
 
 def create_list(fonts_list_file='mathmaker/data/fonts_list.txt',
+                datadir='mathmaker/data',
                 force=False) -> tuple:
     """
     Store in a file the list of the fonts available for lualatex.
@@ -41,4 +42,4 @@ def create_list(fonts_list_file='mathmaker/data/fonts_list.txt',
             for line in tmp_file.readlines():
                 if not line.startswith(b'luaotfload') and line[:-1]:
                     f.write(line.decode('utf-8').lower())
-    return [('mathmaker/data/', ['mathmaker/data/fonts_list.txt'])]
+    return [(datadir, [fonts_list_file])]
