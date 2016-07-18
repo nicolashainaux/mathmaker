@@ -14,7 +14,7 @@ eukleides fix
 - then ``tar xvzf eukleides-1.5.4.tar.bz2``
 - then possibly modify the prefix for install in the ``Config`` file, at your liking
 - remove the making of documentation and manpages from the ``install`` target in the ``Makefile`` (they cause errors)
-- install the required dependencies to compile eukleides, at least ``bison``, ``flex``, ``gmake``
+- install the required dependencies to compile eukleides: ``pkg install bison flex gmake gcc``
 - do ``gmake`` and then ``gmake install``. This will provide functional binaries.
 - replace the euktoeps script by the one you did get from the pkg installed version.
 
