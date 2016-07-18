@@ -1,6 +1,11 @@
 Changelog
 =========
 
+New in version 0.7.0-2
+----------------------
+
+* Fixed the install
+
 New in version 0.7.0-1
 ----------------------
 

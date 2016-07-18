@@ -170,10 +170,16 @@ def check_font() -> bool:
     """
     from mathmaker import settings
     if settings.font:
-        found = int(subprocess.check_output(['grep', '-c',
-                                             settings.font.lower(),
-                                             settings.fonts_list_file]))
-        return found >= 1
+        try:
+            found = int(subprocess.check_output(['grep', '-c',
+                                                 settings.font.lower(),
+                                                 settings.fonts_list_file]))
+            return found >= 1
+        except subprocess.CalledProcessError as e:
+            if e.returncode == 1:
+                return False
+            else:
+                raise
     else:
         return True
 
