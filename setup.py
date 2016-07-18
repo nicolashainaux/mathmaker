@@ -81,8 +81,8 @@ def create_mo_files(force=False):
     if force:
         return []
     data_files = []
-    localedir = 'mathmaker/locale'
-    po_dirs = [localedir + '/' + l + '/LC_MESSAGES/'
+    localedir = 'mathmaker/locale/'
+    po_dirs = [localedir + l + '/LC_MESSAGES/'
                for l in next(os.walk(localedir))[1]]
     for d in po_dirs:
         mo_files = []
@@ -94,6 +94,8 @@ def create_mo_files(force=False):
             mo_file = filename + '.mo'
             msgfmt_cmd = 'msgfmt {} -o {}'.format(d + po_file, d + mo_file)
             subprocess.call(msgfmt_cmd, shell=True)
+            sys.stdout.write('Compiled {}\n      as {}\n'.format(d + po_file,
+                                                                 d + mo_file))
             mo_files.append(d + mo_file)
         data_files.append((d, mo_files))
     return data_files
