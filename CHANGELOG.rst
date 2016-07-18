@@ -1,6 +1,11 @@
 Changelog
 =========
 
+New in version 0.7.0-1
+----------------------
+
+* Small patch to add missing locale files
+
 New in version 0.7
 ------------------
 
