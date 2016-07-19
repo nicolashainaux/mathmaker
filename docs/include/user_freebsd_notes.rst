@@ -17,7 +17,7 @@ eukleides fix
 - install the required dependencies to compile eukleides: ``pkg install bison flex gmake gcc``
 - do ``gmake`` and then ``gmake install``. This will provide functional binaries.
 - replace the euktoeps script by the one you did get from the pkg installed version.
-- if necessary (if ``lualatex`` complains about not finding ``eukleides.sty``), reinstall the ``eukleides.sty`` and ``eukleides.tex`` correctly:
+- if necessary (if ``lualatex`` complains about not finding ``eukleides.sty``), reinstall ``eukleides.sty`` and ``eukleides.tex`` correctly:
 
     .. code-block:: console
 

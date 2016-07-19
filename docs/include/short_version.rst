@@ -31,11 +31,11 @@ To install mathmaker in dev mode in a venv, get to the directory where you want 
 
     $ pyvenv-3.4 dev0
     $ source dev0/bin/activate.csh
-    (dev0) $ pip3 install pytest tox flake8 pydocstyle sphinx sphinx-autodoc-annotation sphinx-rtd-theme
-    (dev0) $ mkdir mathmaker
-    (dev0) $ cd mathmaker/
-    (dev0) $ git clone https://github.com/nicolashainaux/mathmaker.git
-    (dev0) $ python3 setup.py develop
+    [dev0] $ sudo pip3 install pytest tox flake8 pydocstyle sphinx sphinx-autodoc-annotation sphinx-rtd-theme
+    [dev0] $ mkdir mathmaker
+    [dev0] $ cd mathmaker/
+    [dev0] $ git clone https://github.com/nicolashainaux/mathmaker.git
+    [dev0] $ python3 setup.py develop
 
 
 
