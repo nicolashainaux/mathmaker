@@ -43,13 +43,14 @@ class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
         # settings.init() is required here in order to have the logger
         # working (if it's in run(), even in the with clause, it works once)
         settings.init()
+        log = settings.daemon_logger
         # If the db is too old (more than 1 hour, hardcoded), we delete it.
         now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         now_timestamp = time.mktime(datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
                                     .timetuple())
         if os.path.isfile(settings.path.daemon_db):
             t = time.strftime('%Y-%m-%d %H:%M:%S',
-                              time.gmtime(os.path.getmtime(
+                              time.localtime(os.path.getmtime(
                                   settings.path.daemon_db)))
             last_access_timestamp = time.mktime(datetime.strptime(t,
                                                 "%Y-%m-%d %H:%M:%S")
@@ -66,7 +67,6 @@ class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
                        ip_addr TEXT, timeStamp TEXT)''')
             db.close()
 
-        log = settings.daemon_logger
         XML_SHEETS = get_xml_sheets_paths()
         all_sheets = {}
         all_sheets.update(sheet.AVAILABLE)
