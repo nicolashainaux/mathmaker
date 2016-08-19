@@ -77,6 +77,12 @@ and replace ``<sheetname>`` by an available sheet's name (from ``mathmaker list`
 
 At the moment, ``mathmakerd stop`` doesn't work correctly, you'll have to ``kill`` it directly (``ps aux | grep mathmakerd`` then ``kill`` with the appropriate pid).
 
+It's possible to pass an IP address in an extra parameter named ``ip``, like:
+
+    http://127.0.0.1:9999/?sheetname=pythagorean-theorem-short-test&ip=127.0.0.1
+
+In this case, ``mathmakerd`` will check if the last request is older than 10 seconds (this is hardcoded, so far) and if not, then a http status 429 will be returned. In order to do that, ``mathmakerd`` uses a small database that it erases when the last request is older than one hour (also hardcoded, so far).
+
 
 xml sheets
 ----------
