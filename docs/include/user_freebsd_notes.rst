@@ -17,6 +17,14 @@ eukleides fix
 - install the required dependencies to compile eukleides: ``pkg install bison flex gmake gcc``
 - do ``gmake`` and then ``gmake install``. This will provide functional binaries.
 - replace the euktoeps script by the one you did get from the pkg installed version.
+- if necessary (if ``lualatex`` complains about not finding ``eukleides.sty``), reinstall ``eukleides.sty`` and ``eukleides.tex`` correctly:
+
+    .. code-block:: console
+
+        # mkdir /usr/local/share/texmf-dist/tex/latex/eukleides
+        # cp /usr/local/share/texmf/tex/latex/eukleides/eukleides.* /usr/local/share/texmf-dist/tex/latex/eukleides/
+        # mktexlsr
+
 
 python-daemon error at install
 ------------------------------

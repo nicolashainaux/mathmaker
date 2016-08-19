@@ -69,6 +69,7 @@ class path_object(object):
         dd = dirs.get('dd')
         self.db = dd + "mathmaker.db"
         self.db_dist = dd + "mathmaker.db-dist"
+        self.daemon_db = dd + "mathmakerd.db"
         if (not os.path.isfile(self.db)
             or os.path.getmtime(self.db) < os.path.getmtime(self.db_dist)):
             # __
