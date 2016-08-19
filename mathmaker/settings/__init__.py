@@ -98,6 +98,7 @@ def init():
     global luaotfload_tool
     global msgfmt
     global round_letters_in_math_expr
+    global mm_executable
 
     settings_dirname = "settings/"
 
@@ -131,6 +132,7 @@ def init():
     luaotfload_tool = CONFIG["PATHS"]["LUAOTFLOAD_TOOL"]
     msgfmt = CONFIG["PATHS"]["MSGFMT"]
     euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
+    mm_executable = CONFIG["DAEMON"]["MATHMAKER_EXECUTABLE"]
     language = CONFIG['LOCALES'].get('LANGUAGE', 'en_US')
     if language not in AVAILABLE['LANGUAGES']:
         language = 'en_US'

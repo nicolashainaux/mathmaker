@@ -137,7 +137,7 @@ class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
                     if query['sheetname'][0] in all_sheets:
                         document = ''
                         try:
-                            p = Popen(['mathmaker',
+                            p = Popen([settings.mm_executable,
                                        '--pdf',
                                        query['sheetname'][0]],
                                       stdout=PIPE)
@@ -150,7 +150,8 @@ class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
                                                    'failed',
                                                    'UTF-8'))
                             log.error(self.address_string() + ' '
-                                      + self.requestline + ' 500')
+                                      + self.requestline + ' 500',
+                                      exc_info=True)
                         else:
                             self.send_response(200)
                             self.send_header('Content-Type', 'application/pdf')
