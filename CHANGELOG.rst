@@ -1,6 +1,16 @@
 Changelog
 =========
 
+New in version 0.7.0-6 (2016-08-19)
+-----------------------------------
+
+* Added a setting to let the user change mathmaker's path (to be used by the daemon)
+
+New in version 0.7.0-5 (2016-08-19)
+-----------------------------------
+
+* Bugfix
+
 New in version 0.7.0-4 (2016-08-19)
 -----------------------------------
 

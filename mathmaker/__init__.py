@@ -23,7 +23,7 @@
 from . import lib
 
 __version_info__ = (0, 7, 0)
-__patch_nb__ = 5
+__patch_nb__ = 6
 __version__ = '.'.join(str(c) for c in __version_info__)
 if __patch_nb__ != 0:
     __version__ += '-' + str(__patch_nb__)
