@@ -43,26 +43,24 @@ def get_xml_schema_path():
 
 
 def get_xml_sheets_paths():
-    D = settings.frameworksdir
-    DM = D + "mental_calculation/"
-    L11_1 = "lev11_1/"
-    L11_2 = "lev11_2/"
-    return {
-        'tables2_9': DM + L11_1 + "tables2_9.xml",
-        'divisions': DM + L11_1 + "divisions.xml",
-        'multi_hole_tables2_9': DM + L11_1 + "multi_hole_tables2_9.xml",
-        'multi_hole_any_nb': DM + L11_1 + "multi_hole_any_nb.xml",
-        'multi_11_15_25': DM + L11_1 + "multi_11_15_25.xml",
-        'multi_decimal': DM + L11_1 + "multi_decimal.xml",
-        'multi_reversed': DM + L11_1 + "multi_reversed.xml",
-        'ranks': DM + L11_1 + "ranks.xml",
-        'mini_problems': DM + L11_1 + "mini_problems.xml",
-        'test_11_1': DM + L11_1 + "test_11_1.xml",
-        'operations_vocabulary': DM + L11_2 + "operations_vocabulary.xml",
-        'multi_divi_10_100_1000': DM + L11_2 + "multi_divi_10_100_1000.xml",
-        'rectangles': DM + L11_2 + "rectangles.xml",
-        'test_11_2': DM + L11_2 + "test_11_2.xml",
-        'polygons_perimeters': DM + L11_2 + "polygons_perimeters.xml"}
+    """
+    Returns all paths to default xml frameworks.
+
+    They are returned as a dictionary like:
+    {id: path_to_matching_file.xml, ...}
+    the id being the filename without its extension.
+
+    :rtype: dict
+    """
+    # We assume all files are to be found as:
+    # frameworks/theme_name/subtheme_name/filename.xml
+    files = [settings.frameworksdir + d + '/' + sd + '/' + f
+             for d in next(os.walk(settings.frameworksdir))[1]
+             for sd in next(os.walk(settings.frameworksdir + d))[1]
+             for f in next(os.walk(settings.frameworksdir + d + '/' + sd))[2]]
+    return {os.path.splitext(os.path.basename(f))[0]: f
+            for f in files
+            if os.path.splitext(f)[1] == '.xml'}
 
 
 def _get_attributes(node, tag, output=[]):
