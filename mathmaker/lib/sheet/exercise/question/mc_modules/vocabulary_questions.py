@@ -23,11 +23,11 @@
 # This module will add a question about the sum of two numbers
 
 from mathmaker.lib.core.root_calculus import Value
-from . import mc_module
+from .. import submodule
 from mathmaker.lib.tools.wording import setup_wording_format_of
 
 
-class structure(mc_module.structure):
+class structure(submodule.structure):
 
     def __init__(self, nbs_to_use, **kwargs):
         result_fct = kwargs.pop('result_fct', None)

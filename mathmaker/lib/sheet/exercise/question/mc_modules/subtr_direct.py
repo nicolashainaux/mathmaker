@@ -25,11 +25,11 @@ import os
 from mathmaker.lib import shared
 from mathmaker.lib.core.base_calculus import Sum
 from mathmaker.lib.core.root_calculus import Value
-from . import mc_module
+from .. import submodule
 from mathmaker.lib.tools.wording import post_process
 
 
-class sub_object(mc_module.structure):
+class sub_object(submodule.structure):
 
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)

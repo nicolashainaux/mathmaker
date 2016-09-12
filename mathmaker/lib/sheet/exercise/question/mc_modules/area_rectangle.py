@@ -22,11 +22,11 @@
 
 from mathmaker.lib import shared
 # from mathmaker.lib.core.base_calculus import *
-from . import mc_module
+from .. import submodule
 from mathmaker.lib.tools.wording import setup_wording_format_of
 
 
-class sub_object(mc_module.structure):
+class sub_object(submodule.structure):
 
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
