@@ -213,11 +213,8 @@ class X_MentalCalculation(X_Structure):
     #   @return One instance of exercise.X_MentalCalculation
     def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
-        from mathmaker.lib.tools.xml_sheet import (get_q_kinds_from,
-                                                   get_xml_sheets_paths)
-        XML_SHEETS = get_xml_sheets_paths()
-        mc_mm_file = options.get('filename',
-                                 XML_SHEETS['mental_calculation_default'])
+        from mathmaker.lib.tools.xml_sheet import get_q_kinds_from
+        mc_mm_file = options.get('filename')
 
         (x_kind, q_list) = get_q_kinds_from(
             mc_mm_file,

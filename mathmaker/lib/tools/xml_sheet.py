@@ -62,8 +62,7 @@ def get_xml_sheets_paths():
         'multi_divi_10_100_1000': DM + L11_2 + "multi_divi_10_100_1000.xml",
         'rectangles': DM + L11_2 + "rectangles.xml",
         'test_11_2': DM + L11_2 + "test_11_2.xml",
-        'polygons_perimeters': DM + L11_2 + "polygons_perimeters.xml",
-        'mental_calculation_default': DM + L11_1 + "test_11_1.xml"}
+        'polygons_perimeters': DM + L11_2 + "polygons_perimeters.xml"}
 
 
 def _get_attributes(node, tag, output=[]):
