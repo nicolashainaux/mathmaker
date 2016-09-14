@@ -1,6 +1,11 @@
 Changelog
 =========
 
+New in version 0.7.1dev1 (2016-09-14)
+-------------------------------------
+
+* A new sheet (declined in two versions): expansion of double brackets. Defined in an xml sheet as for mental calculation sheets.
+
 New in version 0.7.0-6 (2016-08-19)
 -----------------------------------
 
