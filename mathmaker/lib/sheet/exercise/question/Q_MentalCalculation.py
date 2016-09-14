@@ -94,6 +94,7 @@ SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
 #           'intpairs_3to10' with variant='decimal1', so this condition can
 #           certainly be removed.
 def match_qtype_sourcenb(q_type, source_nb):
+    source_nb = source_nb[0]
     if q_type in ['multi_direct', 'area_rectangle', 'multi_hole',
                   'rectangle_length_or_width_from_area', 'divi_direct',
                   'vocabulary_multi', 'vocabulary_divi']:

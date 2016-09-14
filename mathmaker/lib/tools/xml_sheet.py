@@ -274,7 +274,7 @@ def get_q_kinds_from(file_name, sw_k_s={}, k_s_ctxt_tr={}):
                             # in lib/tools/tags.py
                             # So far it's not possible to mix questions
                             # requiring several sources with other questions
-                            n_temp_list += [[elt.attrib['source'],
+                            n_temp_list += [[[elt.attrib['source']],
                                              elt.attrib,
                                              1] for i in range(int(elt.text))]
                         else:
