@@ -28,6 +28,7 @@
 # @brief All question objects should be "declared" here.
 
 from . import Q_Structure
+from . import Q_Generic
 
 from . import Q_AlgebraExpressionReduction
 from . import Q_AlgebraExpressionExpansion
@@ -39,6 +40,7 @@ from . import Q_RightTriangle
 
 
 Q_Structure = Q_Structure.Q_Structure
+Q_Generic = Q_Generic.Q_Generic
 
 Q_AlgebraExpressionReduction = \
     Q_AlgebraExpressionReduction.Q_AlgebraExpressionReduction

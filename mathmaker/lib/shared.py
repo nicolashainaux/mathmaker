@@ -42,6 +42,7 @@ def init():
     global deci_one_digit_divi_source
     global mc_source
     global machine
+    global number_of_the_question
 
     log = settings.mainlogger
 
@@ -77,3 +78,5 @@ def init():
     except Exception:
         log.error("An exception occured while creating the LaTeX machine.",
                   exc_info=True)
+
+    number_of_the_question = 0

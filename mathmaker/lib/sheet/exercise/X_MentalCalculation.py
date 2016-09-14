@@ -20,12 +20,12 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import copy
 import random
-from collections import namedtuple
 
 from mathmaker.lib import shared
 from .X_Structure import X_Structure
+from .X_Generic import (build_q_dict, build_mixed_q_list,
+                        get_nb_sources_from_question_info)
 from . import question
 
 # Here the list of available values for the parameter x_kind='' and the
@@ -53,82 +53,6 @@ KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE = {
     ('divi', 'direct', 'area_width_length_rectangle'):
     ('rectangle', 'length_or_width', 'from_area')}
 
-to_unpack = copy.deepcopy(question.SUBKINDS_TO_UNPACK)
-Q_info = namedtuple('Q_info', 'type,kind,subkind,nb_source,options')
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief Will reorganize the raw questions lists into a dictionary
-#   @param  q_list          The questions' list
-#   @return (q_dict, q_nb)  The questions' dictionary + the total number of
-#                           questions
-def build_q_dict(q_list):
-    # In q_list, each element is like this:
-    # [{'kind':'multi', 'subkind':'direct', 'nb':'int'}, 'table_2_9', 4]
-    # [q[0], q[1], q[2]]
-    q_dict = {}
-    already_unpacked = set()
-    q_nb = 0
-    for q in q_list:
-        q_nb += q[2]
-
-        for n in range(q[2]):
-            q_id = q[0]['kind']
-            q_id += "_"
-
-            # Here we 'unpack' some special subkinds.
-            subk = q[0]['subkind']
-            if subk in question.UNPACKABLE_SUBKINDS:
-                already_unpacked |= {subk}
-            elif subk in to_unpack:
-                subk_left = to_unpack[subk] - already_unpacked
-                if not subk_left:
-                    already_unpacked -= copy.deepcopy(
-                        question.SUBKINDS_TO_UNPACK[subk])
-                    to_unpack[subk] = copy.deepcopy(
-                        question.SUBKINDS_TO_UNPACK[subk])
-                    subk_left = to_unpack[subk] - already_unpacked
-                s = list(subk_left)
-                random.shuffle(s)
-                subk = s.pop()
-                already_unpacked |= {subk}
-
-            q_id += subk
-            q_options = copy.deepcopy(q[0])
-            q_dict.setdefault(q_id, [])
-            q_dict[q_id] += [(q[1], q_options['kind'], subk, q_options)]
-            del q_options['kind']
-            del q_options['subkind']
-
-    return q_dict, q_nb
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief Will create a complete and mixed questions' list from q_dict
-#   @param  q_dict  The questions' dictionary
-#   @return q_list  The new mixed questions' list
-def build_mixed_q_list(q_dict):
-    # q_dict is organized like this:
-    # { 'multi_direct':   [('table_2_9', 'multi', 'direct', {'nb':'int'}),
-    #                       ('table_2_9', 'multi', 'direct', {'nb':'int'})],
-    #   'multi_reversed': [('table_2_9', 'multi', 'reversed', {options})],
-    #   'divi_direct':    [('table_2_9', 'divi', 'direct', {options})],
-    #   'multi_hole':     [('table_2_9', 'multi', 'hole', {options})],
-    #   'q_id':           [('table_15', 'kind', 'subkind', {options})],
-    #   'q_id:            [('table_25', 'kind', 'subkind', {options})],
-    #   'etc.'
-    # }
-    mixed_q_list = []
-    q_id_box = [key for key in q_dict.keys()
-                for i in range(len(q_dict[key]))]
-    random.shuffle(q_id_box)
-    for q_id in q_id_box:
-        info = q_dict[q_id].pop(0)
-        mixed_q_list += [Q_info(q_id, info[1], info[2], info[0], info[3])]
-    return mixed_q_list
-
 
 # --------------------------------------------------------------------------
 ##
@@ -144,32 +68,6 @@ def increase_alternation(l, sort_key):
                     l[i + 1], l[i + 2] = l[i + 2], l[i + 1]
 
     return l
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief  Determine the
-#   @param  q_i     The Q_info object
-def get_nb_source_from_question_info(q_i):
-    tag_to_unpack = nb_source = q_i.nb_source
-    if nb_source in question.SOURCES_TO_UNPACK:
-        s = ''
-        stu = copy.copy(question.SOURCES_TO_UNPACK)
-        if nb_source in ['decimal_and_10_100_1000',
-                         'decimal_and_one_digit']:
-            # __
-            s = stu[nb_source][q_i.type]
-        else:
-            s = stu[nb_source][q_i.subkind]
-        s = list(s)
-        random.shuffle(s)
-        nb_source = s.pop()
-        if (tag_to_unpack == 'auto_vocabulary'
-            and q_i.subkind in ['addi', 'subtr']
-            and nb_source == 'intpairs_2to200'):
-            # __
-            q_i.options.update({'variant': 'decimal2'})
-    return nb_source
 
 
 # ------------------------------------------------------------------------------
@@ -247,32 +145,33 @@ class X_MentalCalculation(X_Structure):
         mixed_q_list = increase_alternation(mixed_q_list, 'type')
 
         # mixed_q_list is organized like this:
-        # [ ('type', 'kind', 'subkind', 'nb_source', 'options'),
-        #   ('multi_direct', 'multi', 'direct', 'table_2_9', {'nb':}),
-        #   ('multi_reversed', 'multi', 'reversed', 'table_2_9', {'nb':}),
-        #   ('q_id', 'q_', 'id', 'table_15', {'nb':}),
-        #   ('multi_hole', 'multi', 'hole', 'table_2_9', {'nb':}),
-        #   ('multi_direct', 'multi', 'direct', 'table_2_9', {'nb':}),
-        #   ('q_id, 'q_', 'id', 'table_25', {'nb':}),
-        #   ('divi_direct', divi', 'direct', 'table_2_9', {'nb':}),
-        #   etc.
+        # [('type', 'kind', 'subkind', 'nb_source', 'options'),
+        #  ('q_id', 'q_', 'id', 'table_15', {'nb':}),
+        #  ('multi_direct', 'multi', 'direct', ['table_2_9'], {'nb':}),
+        #  ('multi_reversed', 'multi', 'reversed', ['table_2_9'], {'nb':}),
+        #  ('multi_hole', 'multi', 'hole', ['table_2_9'], {'nb':}),
+        #  ('multi_direct', 'multi', 'direct', ['table_2_9'], {'nb':}),
+        #  ('divi_direct', divi', 'direct', ['table_2_9'], {'nb':}),
+        #  etc.
         # ]
 
         # Now, we generate the numbers & questions, by type of question first
         self.questions_list = []
         last_draw = [0, 0]
         for q in mixed_q_list:
-            nb_source = get_nb_source_from_question_info(q)
-            nb_to_use = shared.mc_source\
-                .next(nb_source,
-                      not_in=last_draw,
-                      **question.get_modifier(q.type, nb_source))
-            last_draw = [str(n) for n in set(nb_to_use)
-                         if (isinstance(n, int) or isinstance(n, str))]
-            if nb_source in ['decimal_and_10_100_1000_for_divi',
-                             'decimal_and_10_100_1000_for_multi']:
-                # __
-                q.options['10_100_1000'] = True
+            nb_sources = get_nb_sources_from_question_info(q)
+            nb_to_use = tuple()
+            for nb_source in nb_sources:
+                nb_to_use += shared.mc_source\
+                    .next(nb_source,
+                          not_in=last_draw,
+                          **question.get_modifier(q.type, nb_source))
+                last_draw = [str(n) for n in set(nb_to_use)
+                             if (isinstance(n, int) or isinstance(n, str))]
+                if nb_source in ['decimal_and_10_100_1000_for_divi',
+                                 'decimal_and_10_100_1000_for_multi']:
+                    # __
+                    q.options['10_100_1000'] = True
             self.questions_list += [default_question(q.type,
                                                      q.options,
                                                      numbers_to_use=nb_to_use

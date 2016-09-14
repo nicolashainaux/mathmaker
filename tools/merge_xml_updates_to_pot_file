@@ -37,7 +37,7 @@ from mathmaker import settings
 settings.init()
 
 DEFAULT_KEYWORDS = ['header', 'title', 'text', 'subtitle', 'answers_title',
-                    'wording']
+                    'wording', 'text_exc', 'text_ans']
 MAIN_POT_FILE_PATH = settings.localedir + 'mathmaker.pot'
 PROJECT_ROOT = DIR_TO_BROWSE = settings.rootdir
 

@@ -13,9 +13,10 @@
 				</xs:choice>
 			</xs:sequence>
 			<xs:attribute name="id"				type="xs:string"	use="optional"	default="generic"/>
-			<xs:attribute name="kind"			type="xs:string"	use="required"/>
+			<xs:attribute name="kind"			type="xs:string"	use="optional"/>
 			<xs:attribute name="subkind"		type="xs:string"	use="optional"	default=""/>
-			<xs:attribute name="text"			type="xs:string"	use="optional"	default=""/>
+			<xs:attribute name="text_exc"			type="xs:string"	use="optional"	default=""/>
+			<xs:attribute name="text_ans"			type="xs:string"	use="optional"	default=""/>
 		</xs:complexType>
 	</xs:element>
 

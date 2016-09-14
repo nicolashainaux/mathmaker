@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFAULT MENTAL CALCULATION SHEET -->
+
+
+<sheet header="" title="Algebra: expand and reduce double brackets" subtitle="" text="" answers_title="Answers">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="std">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default values: id='generic' kind='' subkind='default' -->
+	<exercise text_exc="Expand and reduce the following expressions:" text_ans="Example of detailed solutions:">
+		<!-- Default value (planned): context="none"
+			 No default for kind and subkind, they must be given -->
+		<question kind="expand_and_reduce" subkind="double">
+			<nb source="intpairs_2to9" source2="intpairs_2to9">5</nb>
+		</question>
+
+	</exercise>
+
+</sheet>

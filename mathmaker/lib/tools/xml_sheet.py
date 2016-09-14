@@ -34,8 +34,9 @@ from mathmaker.lib.sheet.exercise import question
 from mathmaker.lib import error
 
 
-CATALOG = {'mental_calculation': exercise.X_MentalCalculation}
-# 'generic': exercise.X_Generic
+CATALOG = {'mental_calculation': exercise.X_MentalCalculation,
+           'generic': exercise.X_Generic
+           }
 
 
 def get_xml_schema_path():
@@ -190,9 +191,9 @@ def get_exercises_list(file_name):
     for child in xml_doc:
         if child.tag == 'exercise':
             if 'id' not in child.attrib:
-                exercises_list += [CATALOG['generic']]
+                exercises_list += [(CATALOG['generic'], child.attrib)]
             else:
-                exercises_list += [CATALOG[child.attrib['id']]]
+                exercises_list += [(CATALOG[child.attrib['id']], child.attrib)]
 
     return exercises_list
 
@@ -219,14 +220,17 @@ def get_q_kinds_from(file_name, sw_k_s={}, k_s_ctxt_tr={}):
     questions = []
 
     # For instance we will get a list of this kind of elements:
-    # [ {'kind': 'multi', 'subkind': 'direct', 'nb': 'int'}, 'table_2_9', 4]
+    # [{'kind': 'multi', 'subkind': 'direct', 'nb': 'int'}, 'table_2_9', 4]
+    # [{'kind': 'expand_and_reduce', 'subkind': 'double_expansion'},
+    #  'table_2_9',
+    #  4]
 
-    x_kind = 'tabular'  # default
+    x_kind = ''  # default, what will lead to use X_Generic
 
     for child in xml_config:
         if child.tag == 'exercise':
-            if 'kind' in child.attrib:
-                x_kind = child.attrib['kind']
+            # if no kind is defined, x_kind will still contain the default ''
+            x_kind = child.attrib.get('kind', '')
             for subchild in child:
                 if subchild.tag == 'question':
                     if ((subchild.attrib['kind'], subchild.attrib['subkind'])
@@ -249,7 +253,10 @@ def get_q_kinds_from(file_name, sw_k_s={}, k_s_ctxt_tr={}):
                     for elt in subchild:
                         o = copy.deepcopy(subchild.attrib)
                         o.update(elt.attrib)
-                        questions += [[o, elt.attrib['source'], int(elt.text)]]
+                        sources = [elt.attrib['source']]
+                        if 'source2' in elt.attrib:
+                            sources += [elt.attrib['source2']]
+                        questions += [[o, sources, int(elt.text)]]
 
                 elif subchild.tag == 'mix':
                     q_temp_list = []
@@ -265,6 +272,8 @@ def get_q_kinds_from(file_name, sw_k_s={}, k_s_ctxt_tr={}):
                             # (requires to use xsd1.1 but lxml validates only
                             # xsd1.0). So far, it is done partially and later,
                             # in lib/tools/tags.py
+                            # So far it's not possible to mix questions
+                            # requiring several sources with other questions
                             n_temp_list += [[elt.attrib['source'],
                                              elt.attrib,
                                              1] for i in range(int(elt.text))]
