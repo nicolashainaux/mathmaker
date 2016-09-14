@@ -2,7 +2,7 @@
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:include schemaLocation="nb_source.xsd"/>
-	
+
 	<xs:element name="question">
 		<xs:complexType>
 			<xs:sequence>
@@ -12,6 +12,7 @@
 			<xs:attribute name="subkind"						type="xs:string"	use="required"/>
 			<xs:attribute name="context"						type="xs:string"	use="optional"/>
 			<xs:attribute name="variant"						type="xs:string"	use="optional"/>
+			<xs:attribute name="detailed"						type="xs:boolean"	use="optional" default="true"/>
 			<xs:attribute name="picture"						type="xs:boolean"	use="optional"/>
 			<xs:attribute name="rank_matches_invisible_zero"	type="xs:string"	use="optional"/>
 			<xs:attribute name="generation_type"				type="xs:string"	use="optional"/>

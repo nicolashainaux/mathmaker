@@ -73,4 +73,4 @@ class sub_object(submodule.structure):
 
     def a(self, **options):
         return shared.machine.write(
-            self.expression.auto_expansion_and_reduction())
+            self.expression.auto_expansion_and_reduction(**options))

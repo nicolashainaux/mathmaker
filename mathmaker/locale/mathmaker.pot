@@ -497,22 +497,23 @@ msgstr ""
 msgid "Reversed multiplications"
 msgstr ""
 
-#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:6
-#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
-#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
-#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
-#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
-#: data/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
-#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
 #: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
 #: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion_detailed_solutions.xml:6
+#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: data/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
 #: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
 msgid "Answers"
 msgstr ""
 
@@ -1388,13 +1389,20 @@ msgid ""
 msgstr ""
 
 #: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
+#: data/frameworks/algebra/expand_and_reduce/double_expansion_detailed_solutions.xml:24
 msgid "Example of detailed solutions:"
 msgstr ""
 
 #: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
+#: data/frameworks/algebra/expand_and_reduce/double_expansion_detailed_solutions.xml:24
 msgid "Expand and reduce the following expressions:"
 msgstr ""
 
 #: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion_detailed_solutions.xml:6
 msgid "Algebra: expand and reduce double brackets"
+msgstr ""
+
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
+msgid "Example of solutions:"
 msgstr ""

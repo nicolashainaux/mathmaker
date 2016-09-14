@@ -5747,7 +5747,14 @@ class Sum(CommutativeOperation):
                           "so, returning the intermediate line generated "
                           "from it.")
 
-                return copy.intermediate_reduction_line()
+                detailed = options.get('detailed', "true")
+                detailed = {"true": True,
+                            "false": False}[detailed]
+                if detailed:
+                    return copy.intermediate_reduction_line()
+                else:
+                    return copy.intermediate_reduction_line()\
+                        .expand_and_reduce_next_step()
 
             else:
                 log.debug("Exiting, no term has been modified, and: "
@@ -6716,7 +6723,7 @@ class Expandable(Product):
     # --------------------------------------------------------------------------
     ##
     #   @brief The expanded object, like 2×(x+3) would return 2×x + 2×3
-    def expand(self):
+    def expand(self, **options):
         # First: imbricated Sums are managed recursively
         if len(self.factor[0]) == 1 \
            and isinstance(self.factor[0].term[0], Sum):
@@ -6749,7 +6756,14 @@ class Expandable(Product):
             for i in range(len(terms_list)):
                 terms_list[i] = terms_list[i].reduce_()
 
-        return Sum(terms_list)
+        detailed = options.get('detailed', "true")
+        detailed = {"true": True,
+                    "false": False}[detailed]
+
+        if detailed:
+            return Sum(terms_list)
+        else:
+            return Sum(terms_list).expand_and_reduce_next_step(**options)
 
     # --------------------------------------------------------------------------
     ##
@@ -6786,7 +6800,7 @@ class Expandable(Product):
                     and len(self.factor[1]) > 1
                     and self.factor[1].exponent.is_displ_as_a_single_1()):
                     # __
-                    return self.expand()
+                    return self.expand(**options)
 
         # check if any of the factors needs to be reduced
         for i in range(len(copy)):
@@ -6800,7 +6814,7 @@ class Expandable(Product):
 
         # no factor of the Expandable needs to be reduced
         else:
-            return self.expand()
+            return self.expand(**options)
 
     # --------------------------------------------------------------------------
     ##

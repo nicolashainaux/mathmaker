@@ -207,7 +207,7 @@ class Expression(ComposedCalculable):
                              aux_expr).into_str() \
                 + MARKUP['closing_math_style2'] \
                 + MARKUP['newline'] + "\n"
-            aux_expr = aux_expr.expand_and_reduce_next_step()
+            aux_expr = aux_expr.expand_and_reduce_next_step(**options)
 
         return result
 

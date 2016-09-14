@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-09-14 07:58+0100\n"
+"PO-Revision-Date: 2016-09-14 08:41+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -496,22 +496,23 @@ msgstr "Calcul mental : aires et périmètres de rectangles"
 msgid "Reversed multiplications"
 msgstr "Multiplications à l'envers"
 
-#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:6
-#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
-#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
-#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
-#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
-#: data/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
-#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
 #: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
 #: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion_detailed_solutions.xml:6
+#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
+#: data/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
 #: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
 msgid "Answers"
 msgstr "Réponses"
 
@@ -1477,16 +1478,23 @@ msgstr ""
 "Dans les tables de multiplication (de 2 à 9), quel produit est égal à {n} ?"
 
 #: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
+#: data/frameworks/algebra/expand_and_reduce/double_expansion_detailed_solutions.xml:24
 msgid "Example of detailed solutions:"
 msgstr "Exemple de solutions détaillées :"
 
 #: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
+#: data/frameworks/algebra/expand_and_reduce/double_expansion_detailed_solutions.xml:24
 msgid "Expand and reduce the following expressions:"
 msgstr "Développer et réduire les expressions suivantes :"
 
 #: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion_detailed_solutions.xml:6
 msgid "Algebra: expand and reduce double brackets"
 msgstr "Calcul littéral: développement \"double\""
+
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
+msgid "Example of solutions:"
+msgstr "Exemple de solutions :"
 
 #~ msgid "Mental calculation: perimeters of simple polygons"
 #~ msgstr "Calcul mental : périmètres de polygones simples"
