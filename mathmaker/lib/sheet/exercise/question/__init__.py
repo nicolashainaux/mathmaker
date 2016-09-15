@@ -35,7 +35,6 @@ from . import Q_AlgebraExpressionExpansion
 from . import Q_Equation
 from . import Q_Calculation
 from . import Q_Factorization
-from . import Q_MentalCalculation
 from . import Q_RightTriangle
 
 
@@ -53,6 +52,5 @@ match_qtype_sourcenb = Q_Generic.match_qtype_sourcenb
 SUBKINDS_TO_UNPACK = Q_Generic.SUBKINDS_TO_UNPACK
 UNPACKABLE_SUBKINDS = Q_Generic.UNPACKABLE_SUBKINDS
 SOURCES_TO_UNPACK = Q_Generic.SOURCES_TO_UNPACK
-Q_MentalCalculation = Q_MentalCalculation.Q_MentalCalculation
 Q_Generic = Q_Generic.Q_Generic
 Q_RightTriangle = Q_RightTriangle.Q_RightTriangle
