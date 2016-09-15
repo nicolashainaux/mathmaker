@@ -35,7 +35,6 @@ from . import X_AlgebraExpressionReduction
 from . import X_Calculation
 from . import X_Equation
 from . import X_Factorization
-from . import X_MentalCalculation
 from . import X_RightTriangle
 
 X_Structure = X_Structure.X_Structure
@@ -48,5 +47,4 @@ X_AlgebraExpressionReduction = \
 X_Calculation = X_Calculation.X_Calculation
 X_Equation = X_Equation.X_Equation
 X_Factorization = X_Factorization.X_Factorization
-X_MentalCalculation = X_MentalCalculation.X_MentalCalculation
 X_RightTriangle = X_RightTriangle.X_RightTriangle

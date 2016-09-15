@@ -34,11 +34,6 @@ from mathmaker.lib.sheet.exercise import question
 from mathmaker.lib import error
 
 
-CATALOG = {'mental_calculation': exercise.X_MentalCalculation,
-           'generic': exercise.X_Generic
-           }
-
-
 def get_xml_schema_path():
     return settings.frameworksdir + 'sheet.xsd'
 
@@ -190,10 +185,7 @@ def get_exercises_list(file_name):
 
     for child in xml_doc:
         if child.tag == 'exercise':
-            if 'id' not in child.attrib:
-                exercises_list += [(CATALOG['generic'], child.attrib)]
-            else:
-                exercises_list += [(CATALOG[child.attrib['id']], child.attrib)]
+            exercises_list += [(exercise.X_Generic, child.attrib)]
 
     return exercises_list
 

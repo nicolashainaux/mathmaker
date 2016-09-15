@@ -287,11 +287,11 @@ msgstr ""
 msgid "Factorise, if possible:"
 msgstr ""
 
-#: lib/sheet/exercise/X_MentalCalculation.py:197
+#: lib/sheet/exercise/X_Structure.py:197
 msgid "Question:"
 msgstr ""
 
-#: lib/sheet/exercise/X_MentalCalculation.py:199
+#: lib/sheet/exercise/X_Structure.py:200
 msgid "Answer:"
 msgstr ""
 

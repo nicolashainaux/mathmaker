@@ -23,6 +23,8 @@
 from mathmaker.lib import shared
 from mathmaker.lib import error, is_
 
+MIN_ROW_HEIGHT = 0.8  # this is for mental calculation exercises
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -121,58 +123,106 @@ class X_Structure(object):
     #   @brief Writes the text of the exercise|answer to the output.
     def to_str(self, ex_or_answers):
         M = shared.machine
-        layout = self.x_layout[ex_or_answers]
-
         result = ""
-        if self.text[ex_or_answers] != "":
-            result += self.text[ex_or_answers]
-            result += M.write_new_line()
 
-        q_n = 0
+        if self.x_kind not in ['tabular', 'slideshow']:
+            layout = self.x_layout[ex_or_answers]
 
-        for k in range(int(len(layout) // 2)):
-            if layout[2 * k] is None:
-                how_many = layout[2 * k + 1]
-                if layout[2 * k + 1] in ['all_left', 'all']:
-                    how_many = len(self.questions_list) - q_n
-                for i in range(how_many):
-                    result += self.questions_list[q_n].to_str(ex_or_answers)
-                    if ex_or_answers == 'ans':
-                        result += M.write_new_line(check=result[-2:])
-                    q_n += 1
-            else:
-                nb_of_cols = len(layout[2 * k]) - 1
-                col_widths = layout[2 * k][1:]
-                nb_of_lines = layout[2 * k][0]
-                if nb_of_lines == '?':
-                    nb_of_lines = len(self.questions_list) // nb_of_cols + \
-                        (0 if not len(self.questions_list) % nb_of_cols else 1)
-                content = []
-                for i in range(int(nb_of_lines)):
-                    for j in range(nb_of_cols):
-                        if layout[2 * k + 1] == 'all':
-                            nb_of_q_in_this_cell = 1
-                        else:
-                            nb_of_q_in_this_cell = \
-                                layout[2 * k + 1][i * nb_of_cols + j]
-                        cell_content = ""
-                        for n in range(nb_of_q_in_this_cell):
-                            empty_cell = False
-                            if q_n >= len(self.questions_list):
-                                cell_content += " "
-                                empty_cell = True
+            if self.text[ex_or_answers] != "":
+                result += self.text[ex_or_answers]
+                result += M.write_new_line()
+
+            q_n = 0
+
+            for k in range(int(len(layout) // 2)):
+                if layout[2 * k] is None:
+                    how_many = layout[2 * k + 1]
+                    if layout[2 * k + 1] in ['all_left', 'all']:
+                        how_many = len(self.questions_list) - q_n
+                    for i in range(how_many):
+                        result += self.questions_list[q_n]\
+                            .to_str(ex_or_answers)
+                        if ex_or_answers == 'ans':
+                            result += M.write_new_line(check=result[-2:])
+                        q_n += 1
+                else:
+                    nb_of_cols = len(layout[2 * k]) - 1
+                    col_widths = layout[2 * k][1:]
+                    nb_of_lines = layout[2 * k][0]
+                    if nb_of_lines == '?':
+                        nb_of_lines = len(self.questions_list) // nb_of_cols \
+                            + (0
+                               if not len(self.questions_list) % nb_of_cols
+                               else 1)
+                    content = []
+                    for i in range(int(nb_of_lines)):
+                        for j in range(nb_of_cols):
+                            if layout[2 * k + 1] == 'all':
+                                nb_of_q_in_this_cell = 1
                             else:
-                                cell_content += \
-                                    self.questions_list[q_n].\
-                                    to_str(ex_or_answers)
-                            if ex_or_answers == 'ans' and not empty_cell:
-                                cell_content += M.write_new_line(
-                                    check=cell_content[-2:])
-                            q_n += 1
-                        content += [cell_content]
+                                nb_of_q_in_this_cell = \
+                                    layout[2 * k + 1][i * nb_of_cols + j]
+                            cell_content = ""
+                            for n in range(nb_of_q_in_this_cell):
+                                empty_cell = False
+                                if q_n >= len(self.questions_list):
+                                    cell_content += " "
+                                    empty_cell = True
+                                else:
+                                    cell_content += \
+                                        self.questions_list[q_n].\
+                                        to_str(ex_or_answers)
+                                if ex_or_answers == 'ans' and not empty_cell:
+                                    cell_content += M.write_new_line(
+                                        check=cell_content[-2:])
+                                q_n += 1
+                            content += [cell_content]
 
-                result += M.write_layout((nb_of_lines, nb_of_cols),
-                                         col_widths,
-                                         content)
+                    result += M.write_layout((nb_of_lines, nb_of_cols),
+                                             col_widths,
+                                             content)
 
-        return result
+            return result
+        else:
+            if self.slideshow:
+                result += M.write_frame("", frame='start_frame')
+                for i in range(self.q_nb):
+                    result += M.write_frame(
+                        self.questions_list[i].to_str('exc'),
+                        timing=self.questions_list[i].transduration)
+
+                result += M.write_frame("", frame='middle_frame')
+
+                for i in range(self.q_nb):
+                    result += M.write_frame(_("Question:")
+                                            + self.questions_list[i]
+                                            .to_str('exc')
+                                            + _("Answer:")
+                                            + self.questions_list[i]
+                                            .to_str('ans'),
+                                            timing=0)
+
+            # default tabular option:
+            else:
+                q = [self.questions_list[i].to_str('exc')
+                     for i in range(self.q_nb)]
+                a = [self.questions_list[i].to_str('ans')
+                     for i in range(self.q_nb)]\
+                    if ex_or_answers == 'ans' \
+                    else [self.questions_list[i].to_str('hint')
+                          for i in range(self.q_nb)]
+
+                n = [M.write(str(i + 1) + ".", emphasize='bold')
+                     for i in range(self.q_nb)]
+
+                content = [elt for triplet in zip(n, q, a) for elt in triplet]
+
+                result += M.write_layout((self.q_nb, 3),
+                                         [0.5, 14.25, 3.75],
+                                         content,
+                                         borders='penultimate',
+                                         justify=['left', 'left', 'center'],
+                                         center_vertically=True,
+                                         min_row_height=MIN_ROW_HEIGHT)
+
+            return result

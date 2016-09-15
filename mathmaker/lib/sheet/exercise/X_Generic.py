@@ -35,6 +35,8 @@ from . import question
 AVAILABLE_X_KIND_VALUES = \
     {'': ['default'],
      'std': ['default'],
+     'tabular': ['default'],  # reserved to mental calculation
+     'slideshow': ['default'],  # reserved to mental calculation
      'bypass': ['']
      }
 
@@ -48,6 +50,17 @@ X_LAYOUTS = {'default':
 
 to_unpack = copy.deepcopy(question.SUBKINDS_TO_UNPACK)
 Q_info = namedtuple('Q_info', 'type,kind,subkind,nb_source,options')
+
+MIN_ROW_HEIGHT = 0.8
+
+SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),
+                              ("rectangle", "perimeter"),
+                              ("square", "area"),
+                              ("square", "perimeter")}
+
+KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE = {
+    ('divi', 'direct', 'area_width_length_rectangle'):
+    ('rectangle', 'length_or_width', 'from_area')}
 
 
 # --------------------------------------------------------------------------
@@ -152,6 +165,22 @@ def get_nb_sources_from_question_info(q_i):
     return nb_sources
 
 
+# --------------------------------------------------------------------------
+##
+#   @brief Increases the disorder of the questions' list
+#   @param  l           The list
+#   @param  sort_key    The list's objects' attribute that will be used to
+#                       determine whether the order should be changed or not
+def increase_alternation(l, sort_key):
+    if len(l) >= 3:
+        for i in range(len(l) - 2):
+            if getattr(l[i], sort_key) == getattr(l[i + 1], sort_key):
+                if getattr(l[i + 2], sort_key) != getattr(l[i], sort_key):
+                    l[i + 1], l[i + 2] = l[i + 2], l[i + 1]
+
+    return l
+
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -167,21 +196,15 @@ class X_Generic(X_Structure):
     #                         see AVAILABLE_X_KIND_VALUES to check the
     #                         possible values to use and their matching
     #                         x_subkind options
-    #   @param **options Options detailed below:
-    #          - x_subkind=<string>
-    #                         ...
-    #                         ...
-    #          - start_number=<integer>
-    #                         (should be >= 1)
-    #          - number_of_questions=<integer>
-    #            /!\ probably only useful if you use bypass
-    #                         (should be >= 1)
     #   @return One instance of exercise.Generic
     def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
         from mathmaker.lib.tools.xml_sheet import get_q_kinds_from
         source_file = options.get('filename')
-        (x_kind, q_list) = get_q_kinds_from(source_file)
+        (x_kind, q_list) = get_q_kinds_from(
+            source_file,
+            sw_k_s=SWAPPABLE_QKINDS_QSUBKINDS,
+            k_s_ctxt_tr=KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE)
 
         X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
@@ -202,8 +225,19 @@ class X_Generic(X_Structure):
         if self.text['ans'] != '':
             self.text['ans'] = _(self.text['ans'])
 
+        # From q_list, we build a dictionary and then a complete questions'
+        # list:
         q_dict, self.q_nb = build_q_dict(q_list)
+        # in case of mental calculation exercises we shuffle the questions
+        if self.x_kind in ['tabular', 'slideshow']:
+            for key in q_dict:
+                random.shuffle(q_dict[key])
         mixed_q_list = build_mixed_q_list(q_dict)
+        # in case of mental calculation exercises we shuffle the questions
+        if self.x_kind in ['tabular', 'slideshow']:
+            mixed_q_list = increase_alternation(mixed_q_list, 'type')
+            mixed_q_list.reverse()
+            mixed_q_list = increase_alternation(mixed_q_list, 'type')
 
         # mixed_q_list is organized like this:
         # [('type', 'kind', 'subkind', 'nb_source', 'options'),
@@ -212,8 +246,8 @@ class X_Generic(X_Structure):
         #  etc.
         # ]
 
+        # Now, we generate the numbers & questions, by type of question first
         self.questions_list = []
-
         last_draw = [0, 0]
         for q in mixed_q_list:
             nb_sources = get_nb_sources_from_question_info(q)
