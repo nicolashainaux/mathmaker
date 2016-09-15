@@ -40,7 +40,6 @@ from . import Q_RightTriangle
 
 
 Q_Structure = Q_Structure.Q_Structure
-Q_Generic = Q_Generic.Q_Generic
 
 Q_AlgebraExpressionReduction = \
     Q_AlgebraExpressionReduction.Q_AlgebraExpressionReduction
@@ -49,10 +48,11 @@ Q_AlgebraExpressionExpansion = \
 Q_Calculation = Q_Calculation.Q_Calculation
 Q_Equation = Q_Equation.Q_Equation
 Q_Factorization = Q_Factorization.Q_Factorization
-get_modifier = Q_MentalCalculation.get_modifier
-match_qtype_sourcenb = Q_MentalCalculation.match_qtype_sourcenb
-SUBKINDS_TO_UNPACK = Q_MentalCalculation.SUBKINDS_TO_UNPACK
-UNPACKABLE_SUBKINDS = Q_MentalCalculation.UNPACKABLE_SUBKINDS
-SOURCES_TO_UNPACK = Q_MentalCalculation.SOURCES_TO_UNPACK
+get_modifier = Q_Generic.get_modifier
+match_qtype_sourcenb = Q_Generic.match_qtype_sourcenb
+SUBKINDS_TO_UNPACK = Q_Generic.SUBKINDS_TO_UNPACK
+UNPACKABLE_SUBKINDS = Q_Generic.UNPACKABLE_SUBKINDS
+SOURCES_TO_UNPACK = Q_Generic.SOURCES_TO_UNPACK
 Q_MentalCalculation = Q_MentalCalculation.Q_MentalCalculation
+Q_Generic = Q_Generic.Q_Generic
 Q_RightTriangle = Q_RightTriangle.Q_RightTriangle

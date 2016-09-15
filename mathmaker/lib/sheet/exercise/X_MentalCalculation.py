@@ -129,7 +129,7 @@ class X_MentalCalculation(X_Structure):
         # BEGINING OF THE ZONE TO REWRITE (see explanations below) ------------
 
         # should be default_question = question.Something
-        default_question = question.Q_MentalCalculation
+        default_question = question.Q_Generic
 
         # TEXTS OF THE EXERCISE
         self.text = {'exc': "", 'ans': ""}
