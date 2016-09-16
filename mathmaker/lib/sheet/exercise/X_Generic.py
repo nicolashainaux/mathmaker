@@ -142,7 +142,13 @@ def build_mixed_q_list(q_dict):
 #   @param  q_i     The Q_info object
 def get_nb_sources_from_question_info(q_i):
     nb_sources = []
-    for nb_sce in q_i.nb_source:
+    extra_infos = {'merge_sources': False}
+    questions_sources = q_i.nb_source
+    if len(q_i.nb_source) == 1 and q_i.nb_source[0].startswith('inttriplets_'):
+        questions_sources = ['intpairs_' + q_i.nb_source[0][12:],
+                             'intpairs_' + q_i.nb_source[0][12:]]
+        extra_infos.update({'merge_sources': True})
+    for nb_sce in questions_sources:
         tag_to_unpack = nb_source = nb_sce
         if nb_source in question.SOURCES_TO_UNPACK:
             s = ''
@@ -162,7 +168,7 @@ def get_nb_sources_from_question_info(q_i):
                 # __
                 q_i.options.update({'variant': 'decimal2'})
         nb_sources += [nb_source]
-    return nb_sources
+    return nb_sources, extra_infos
 
 
 # --------------------------------------------------------------------------
@@ -250,13 +256,19 @@ class X_Generic(X_Structure):
         self.questions_list = []
         last_draw = [0, 0]
         for q in mixed_q_list:
-            nb_sources = get_nb_sources_from_question_info(q)
+            nb_sources, extra_infos = get_nb_sources_from_question_info(q)
             nb_to_use = tuple()
-            for nb_source in nb_sources:
-                nb_to_use += shared.mc_source\
-                    .next(nb_source,
-                          not_in=last_draw,
-                          **question.get_modifier(q.type, nb_source))
+            for i, nb_source in enumerate(nb_sources):
+                if i == 1 and extra_infos['merge_sources']:
+                    nb_to_use += shared.mc_source\
+                        .next(nb_source,
+                              either_nb1_nb2_in=last_draw,
+                              **question.get_modifier(q.type, nb_source))
+                else:
+                    nb_to_use += shared.mc_source\
+                        .next(nb_source,
+                              not_in=last_draw,
+                              **question.get_modifier(q.type, nb_source))
                 last_draw = [str(n) for n in set(nb_to_use)
                              if (isinstance(n, int) or isinstance(n, str))]
                 if nb_source in ['decimal_and_10_100_1000_for_divi',

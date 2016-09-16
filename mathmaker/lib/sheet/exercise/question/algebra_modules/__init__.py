@@ -27,6 +27,6 @@
 # @package mc_modules
 # @brief All question objects should be "declared" here.
 
-from . import (expand_and_reduce_double)
+from . import (expand_and_reduce_double, expand_and_reduce_simple)
 
-__all__ = ['expand_and_reduce_double', ]
+__all__ = ['expand_and_reduce_double', 'expand_and_reduce_simple']

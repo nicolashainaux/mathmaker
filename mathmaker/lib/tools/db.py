@@ -97,6 +97,12 @@ class source(object):
                     for c in self.valcols:
                         result += " AND " + c + " NOT IN (" + ", "\
                             .join(str(x) for x in updated_notin_list) + ") "
+            elif kw.startswith("either_") and kw.endswith("_in"):
+                k = kw.split(sep='_')[1:-1]
+                result += " AND ( " + k[0] + " IN (" + ", "\
+                    .join(str(x) for x in kwargs[kw]) + ") OR "\
+                    + k[1] + " IN (" + ", "\
+                    .join(str(x) for x in kwargs[kw]) + ") )"
             elif kw.endswith("_in"):
                 k = kw[:-3]
                 result += " AND " + k + " IN (" + ", "\
