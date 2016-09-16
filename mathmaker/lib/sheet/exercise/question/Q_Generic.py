@@ -209,7 +209,8 @@ class Q_Generic(Q_Structure):
         numbers_to_use = options['numbers_to_use']
         del options['numbers_to_use']
 
-        self.add_new_line_to_text = shared.machine.write_new_line()
+        self.add_new_line_to_text = shared.machine.write_new_line() \
+            + shared.machine.write_new_line()
 
         # modules
         if self.q_kind in ['vocabulary_half', 'vocabulary_third',
