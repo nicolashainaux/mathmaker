@@ -227,7 +227,7 @@ class Q_Generic(Q_Structure):
                         self.add_new_line_to_text = ''
                     break
             else:
-                # Should raise an Exception (module not found!)
+                # todo: should raise an Exception (module not found!)
                 pass
         m = module.sub_object(numbers_to_use, **options)
 
