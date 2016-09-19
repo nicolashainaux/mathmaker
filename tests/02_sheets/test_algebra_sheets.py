@@ -37,3 +37,14 @@ def test_double_expansion_detailed_solutions():
     """Checks generation of 'double_expansion_detailed_solutions'."""
     shared.machine.write_out(
         str(S_Generic(XML_SHEETS['double_expansion_detailed_solutions'])))
+
+
+def test_simple_expansion():
+    """Checks if 'simple_expansion' is generated without any error."""
+    shared.machine.write_out(str(S_Generic(XML_SHEETS['simple_expansion'])))
+
+
+def test_simplee_expansion_detailed_solutions():
+    """Checks generation of 'simple_expansion_detailed_solutions'."""
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['simple_expansion_detailed_solutions'])))
