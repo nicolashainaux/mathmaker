@@ -55,7 +55,7 @@ class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
             last_access_timestamp = time.mktime(datetime.strptime(t,
                                                 "%Y-%m-%d %H:%M:%S")
                                                 .timetuple())
-            if now_timestamp - last_access_timestamp >= 6000:
+            if now_timestamp - last_access_timestamp >= 3600:
                 os.remove(settings.path.daemon_db)
 
         # If there's no db, a brand new one is created
