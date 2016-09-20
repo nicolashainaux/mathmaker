@@ -27,7 +27,8 @@ from mathmaker.lib import shared
 from mathmaker.lib.common.cst import RANKS
 from mathmaker.lib import randomly
 from mathmaker.lib.maths_lib import coprime_generator, generate_decimal
-from mathmaker.lib.tools.tag import classify_tag, translate_int_pairs_tag
+from mathmaker.lib.tools.tag import (classify_tag, translate_int_pairs_tag,
+                                     translate_single_int_tag)
 from mathmaker.lib.core.base_calculus import Fraction
 
 
@@ -155,6 +156,9 @@ class mc_source(object):
         if tag_classification == 'int_pairs':
             kwargs.update(translate_int_pairs_tag(source_id))
             return shared.int_pairs_source.next(**kwargs)
+        elif tag_classification == 'single_int':
+            kwargs.update(translate_single_int_tag(source_id))
+            return shared.single_ints_source.next(**kwargs)
         elif tag_classification == 'int_deci_clever_pairs':
             return shared.int_deci_clever_pairs_source.next(**kwargs)
         elif tag_classification == 'rank_words':

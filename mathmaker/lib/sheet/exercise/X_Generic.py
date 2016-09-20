@@ -265,10 +265,16 @@ class X_Generic(X_Structure):
                               either_nb1_nb2_in=last_draw,
                               **question.get_modifier(q.type, nb_source))
                 else:
-                    nb_to_use += shared.mc_source\
-                        .next(nb_source,
-                              not_in=last_draw,
-                              **question.get_modifier(q.type, nb_source))
+                    drawn = shared.mc_source.next(nb_source,
+                                                  not_in=last_draw,
+                                                  **question
+                                                  .get_modifier(
+                                                      q.type,
+                                                      nb_source))
+                    if isinstance(drawn, int):
+                        nb_to_use += (drawn, )
+                    else:
+                        nb_to_use += drawn
                 last_draw = [str(n) for n in set(nb_to_use)
                              if (isinstance(n, int) or isinstance(n, str))]
                 if nb_source in ['decimal_and_10_100_1000_for_divi',

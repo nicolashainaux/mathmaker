@@ -28,6 +28,8 @@ def classify_tag(tag):
         or tag.startswith('multiplesof')):
         # __
         return 'int_pairs'
+    elif tag.startswith('singleint_'):
+        return 'single_int'
     elif tag in ['int_deci_clever_pairs', 'rank_words',
                  'int_irreducible_frac',
                  'decimal_and_10_100_1000_for_multi',
@@ -78,4 +80,11 @@ def translate_int_pairs_tag(tag):
                     + ' and (nb1 >= ' + mini + ' and nb1 <= ' + maxi + '))',
              'prevails': [N]}
 
+    return d
+
+
+def translate_single_int_tag(tag):
+    if tag.startswith('singleint_'):
+        n1, n2 = tag[10:].split(sep='to')
+        d = {'nb1_min': n1, 'nb1_max': n2}
     return d

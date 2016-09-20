@@ -30,6 +30,7 @@ It will add all entries:
   mini_pb_subtr_direct.xml and mini_pb_multi_direct.xml from data/wordings/,
 - from all w4l.po files from locale/*/LC_MESSAGES/
 - from all *_names.po files from locale/*/LC_MESSAGES/
+- all single ints from 2 to 500
 - all integers pairs from 2 to 500
 - a list of "clever" couples of (integer, decimal) (for multiplications)
 """
@@ -66,6 +67,8 @@ db.execute('''CREATE TABLE mini_pb_wordings
           wording_context TEXT, wording TEXT,
           nb1_min INTEGER, nb1_max INTEGER, nb2_min INTEGER, nb2_max INTEGER,
           q_id TEXT, drawDate INTEGER)''')
+db.execute('''CREATE TABLE single_ints
+          (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
 db.execute('''CREATE TABLE int_pairs
           (id INTEGER PRIMARY KEY,
           nb1 INTEGER, nb2 INTEGER,
@@ -162,5 +165,11 @@ db.executemany("INSERT "
                "VALUES(?, ?, ?, ?, ?)",
                db_rows)
 
+# Single ints
+db_rows = [(i + 1, 0) for i in range(500)]
+db.executemany("INSERT "
+               "INTO single_ints(nb1, drawDate) "
+               "VALUES(?, ?)",
+               db_rows)
 db.commit()
 db.close()

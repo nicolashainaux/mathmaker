@@ -34,6 +34,7 @@ def init():
     global mini_problems_wordings_source
     global markup
     global int_pairs_source
+    global single_ints_source
     global int_deci_clever_pairs_source
     global rank_words_source
     global int_fracs_source
@@ -58,6 +59,7 @@ def init():
                                                     ["wording_context",
                                                      "wording"])
     int_pairs_source = database.source("int_pairs", ["id", "nb1", "nb2"])
+    single_ints_source = database.source("single_ints", ["id", "nb1"])
     int_deci_clever_pairs_source = database.source("int_deci_clever_pairs",
                                                    ["id", "nb1", "nb2"])
 

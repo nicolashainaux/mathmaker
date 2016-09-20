@@ -58,30 +58,46 @@ class sub_object(submodule.structure):
                                                       'table_name':
                                                       'int_deci_clever_pairs'})
 
-        # In order to avoid having the two "special" numbers in a row at the
-        # two first places, we will shuffle all numbers in a special way.
-        if random.choice([True, False]):
-            # In this case, the first number will NOT be from the "special"
-            # ones, so no matter what follows
-            nb_to_use = list(numbers_to_use)
-            random.shuffle(nb_to_use)
-            four_nb = [nb_to_use.pop(0)]
-            remaining = nb_to_use + list(second_couple)
+        # We shuffle the numbers in a special way
+        if len(numbers_to_use) == 1:
+            # There is only one number in addition to the 2 special ones
+            # so either we put it in the first place, or in the middle
+            # (not at the end, otherwise, the 2 special ones would be at the
+            # two first places)
+            special_ones = list(second_couple)
+            random.shuffle(special_ones)
+            all_nb = [list(numbers_to_use).pop(0), special_ones.pop(0)]
+            random.shuffle(all_nb)
+            all_nb += [special_ones.pop(0)]
         else:
-            # In this case, it will, so, at the second place we put a number
-            # from the other source (the user specified one)
-            first_couple = list(numbers_to_use)
-            random.shuffle(first_couple)
-            nb_to_use = list(second_couple)
-            random.shuffle(nb_to_use)
-            four_nb = [nb_to_use.pop(0), first_couple.pop(0)]
-            remaining = nb_to_use + first_couple
-        random.shuffle(remaining)
-        four_nb += remaining
+            # It is assumed there are 2 numbers_to_use (so 4 altogether)
+            # In order to avoid having the two "special" numbers in a row at
+            # the two first places, we will shuffle all numbers in a special
+            # way.
+            if random.choice([True, False]):
+                # In this case, the first number will NOT be from the "special"
+                # ones, so no matter what follows
+                nb_to_use = list(numbers_to_use)
+                random.shuffle(nb_to_use)
+                all_nb = [nb_to_use.pop(0)]
+                remaining = nb_to_use + list(second_couple)
+            else:
+                # In this case, it will, so, at the second place we put a
+                # number from the other source (the user specified one)
+                first_couple = list(numbers_to_use)
+                random.shuffle(first_couple)
+                nb_to_use = list(second_couple)
+                random.shuffle(nb_to_use)
+                all_nb = [nb_to_use.pop(0), first_couple.pop(0)]
+                remaining = nb_to_use + first_couple
+            random.shuffle(remaining)
+            all_nb += remaining
 
-        super().setup("numbers", nb=four_nb, shuffle_nbs=False, **options)
+        super().setup("numbers", nb=all_nb, shuffle_nbs=False, **options)
 
-        product = Product([self.nb1, self.nb2, self.nb3, self.nb4])
+        product = Product([getattr(self,
+                                   'nb' + str(i + 1))
+                           for i in range(self.nb_nb)])
         self.product_str = product.printed
         self.result = product.evaluate()
 
