@@ -28,7 +28,8 @@ def classify_tag(tag):
         or tag.startswith('multiplesof')):
         # __
         return 'int_pairs'
-    elif tag in ['rank_words', 'int_irreducible_frac',
+    elif tag in ['int_deci_clever_pairs', 'rank_words',
+                 'int_irreducible_frac',
                  'decimal_and_10_100_1000_for_multi',
                  'decimal_and_10_100_1000_for_divi',
                  'decimal_and_one_digit_for_multi',

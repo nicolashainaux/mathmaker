@@ -48,11 +48,16 @@ class source(object):
             shared.db.execute("UPDATE "
                               + self.table_name
                               + " SET multirev_locked = 0;")
+        if "union" in kwargs:
+            shared.db.execute("UPDATE "
+                              + kwargs['union']['table_name']
+                              + " SET drawDate = 0;")
 
     ##
     #   @brief  Creates the "SELECT ...,...,... FROM ...." part of the query
     def _select_part(self, **kwargs):
-        return "SELECT " + ",".join(self.allcols) + " FROM " + self.table_name
+        table_name = kwargs.get('table_name', self.table_name)
+        return "SELECT " + ",".join(self.allcols) + " FROM " + table_name
 
     ##
     #   @brief  Creates the language condition part of the query
@@ -70,7 +75,9 @@ class source(object):
         for kw in kwargs:
             if kw == "raw":
                 result += " AND " + kwargs[kw] + " "
-            elif kw == "prevails" or kw.startswith("info_"):
+            elif (kw == "prevails" or kw.startswith("info_") or kw == "union"
+                  or kw == 'table_name' or kw == 'no_order_by_random'):
+                # __
                 pass
             elif kw == "multi_reversed":
                 result += " AND multirev_locked = 0 "
@@ -114,15 +121,27 @@ class source(object):
             elif kw == 'diff7atleast':
                 result += " AND nb2 - nb1 >= 7 "
             else:
-                result += " AND " + kw + " = '" + kwargs[kw] + "' "
+                result += " AND " + kw + " = '" + str(kwargs[kw]) + "' "
         return result
 
     ##
     #   @brief  Concatenates the different parts of the query
     def _cmd(self, **kwargs):
-        return self._select_part(**kwargs) + " WHERE drawDate = 0 " \
-            + self._language_part(**kwargs) + self._kw_conditions(**kwargs) \
-            + "ORDER BY random() LIMIT 1;"
+        if 'union' in kwargs:
+            kwargs2 = kwargs.pop('union')
+            return "SELECT * FROM (" \
+                + self._cmd(no_order_by_random=True, **kwargs) \
+                + " UNION " \
+                + self._cmd(no_order_by_random=True, **kwargs2) \
+                + ") ORDER BY random() LIMIT 1;"
+        else:
+            order_by_random = "ORDER BY random() LIMIT 1;"
+            if 'no_order_by_random' in kwargs:
+                order_by_random = ""
+            return self._select_part(**kwargs) + " WHERE drawDate = 0 " \
+                + self._language_part(**kwargs) \
+                + self._kw_conditions(**kwargs) \
+                + order_by_random
 
     ##
     #   @brief  Executes the query. If no result, resets the table and executes
@@ -139,11 +158,16 @@ class source(object):
     ##
     #   @brief  Set the drawDate to datetime() in all entries where col_name
     #           has a value of col_match.
-    def _timestamp(self, col_name, col_match):
+    def _timestamp(self, col_name, col_match, **kwargs):
         shared.db.execute(
             "UPDATE " + self.table_name
             + " SET drawDate = datetime()"
             + " WHERE " + col_name + " = '" + str(col_match) + "';")
+        if 'union' in kwargs:
+            shared.db.execute(
+                "UPDATE " + kwargs['union']['table_name']
+                + " SET drawDate = datetime()"
+                + " WHERE " + col_name + " = '" + str(col_match) + "';")
 
     ##
     #   @brief  Will 'lock' some entries
@@ -167,7 +191,7 @@ class source(object):
     #           database
     def next(self, **kwargs):
         t = self._query_result(self._cmd(**kwargs), **kwargs)[0]
-        self._timestamp(str(self.idcol), str(t[0]))
+        self._timestamp(str(self.idcol), str(t[0]), **kwargs)
         self._lock(t[1:len(t)], **kwargs)
         if len(t) == 2:
             return t[1]

@@ -28,6 +28,7 @@
 # @brief All question objects should be "declared" here.
 
 from . import (multi_direct, multi_reversed, multi_hole, divi_direct,
+               multi_clever,
                addi_direct, subtr_direct, rank_direct, rank_reversed,
                rank_numberof, vocabulary_simple_part_of_a_number,
                vocabulary_simple_multiple_of_a_number,
@@ -37,6 +38,7 @@ from . import (multi_direct, multi_reversed, multi_hole, divi_direct,
                rectangle_length_or_width)
 
 __all__ = ['multi_direct', 'multi_reversed', 'multi_hole', 'divi_direct',
+           'multi_clever',
            'addi_direct', 'subtr_direct', 'rank_direct', 'rank_reversed',
            'rank_numberof', 'vocabulary_simple_part_of_a_number',
            'vocabulary_simple_multiple_of_a_number', 'vocabulary_multi',

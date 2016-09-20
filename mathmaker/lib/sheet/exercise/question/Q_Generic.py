@@ -228,8 +228,10 @@ class Q_Generic(Q_Structure):
                         self.add_new_line_to_text = ''
                     break
             else:
-                # todo: should raise an Exception (module not found!)
-                pass
+                raise AttributeError(self.q_kind + ' not found in '
+                                     'ALL_MODULES: '
+                                     + ', '.join([m.__name__
+                                                 for m in ALL_MODULES]))
         m = module.sub_object(numbers_to_use, **options)
 
         self.q_text = m.q(**options)

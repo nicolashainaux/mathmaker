@@ -155,6 +155,8 @@ class mc_source(object):
         if tag_classification == 'int_pairs':
             kwargs.update(translate_int_pairs_tag(source_id))
             return shared.int_pairs_source.next(**kwargs)
+        elif tag_classification == 'int_deci_clever_pairs':
+            return shared.int_deci_clever_pairs_source.next(**kwargs)
         elif tag_classification == 'rank_words':
             return shared.rank_words_source.next(**kwargs)
         elif tag_classification == 'int_irreducible_frac':

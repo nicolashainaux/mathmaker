@@ -34,6 +34,7 @@ def init():
     global mini_problems_wordings_source
     global markup
     global int_pairs_source
+    global int_deci_clever_pairs_source
     global rank_words_source
     global int_fracs_source
     global deci_10_100_1000_multi_source
@@ -57,6 +58,8 @@ def init():
                                                     ["wording_context",
                                                      "wording"])
     int_pairs_source = database.source("int_pairs", ["id", "nb1", "nb2"])
+    int_deci_clever_pairs_source = database.source("int_deci_clever_pairs",
+                                                   ["id", "nb1", "nb2"])
 
     markup = latex.MARKUP
 

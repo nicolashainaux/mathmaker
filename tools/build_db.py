@@ -30,7 +30,8 @@ It will add all entries:
   mini_pb_subtr_direct.xml and mini_pb_multi_direct.xml from data/wordings/,
 - from all w4l.po files from locale/*/LC_MESSAGES/
 - from all *_names.po files from locale/*/LC_MESSAGES/
-- and all integers pairs from 2 to 199
+- all integers pairs from 2 to 500
+- a list of "clever" couples of (integer, decimal) (for multiplications)
 """
 
 import os
@@ -68,7 +69,16 @@ db.execute('''CREATE TABLE mini_pb_wordings
 db.execute('''CREATE TABLE int_pairs
           (id INTEGER PRIMARY KEY,
           nb1 INTEGER, nb2 INTEGER,
-          multirev_locked INTEGER, drawDate INTEGER)''')
+          multirev_locked INTEGER, drawDate INTEGER,
+          clever INTEGER)''')
+# As int_deci_clever_pairs may be 'unioned' with int_pairs, its ids will be
+# determined starting from the max id of int_pairs, in order to have unique
+# ids over the two tables.
+db.execute('''CREATE TABLE int_deci_clever_pairs
+          (id INTEGER,
+          nb1 FLOAT, nb2 FLOAT,
+          drawDate INTEGER,
+          clever INTEGER)''')
 
 # Extract data from po(t) files and insert them into the db
 for lang in next(os.walk(settings.localedir))[1]:
@@ -115,15 +125,41 @@ for f in WORDINGS_FILES:
                    db_rows)
 
 # Insert integers pairs into the db
-# Tables of 2, 3... 99
-db_rows = [(i + 2, j + 2, 0, 0)
-           for i in range(199)
-           for j in range(199)
+# Tables of 2, 3... 500
+db_rows = [(i + 2, j + 2, 0, 0, 0)
+           for i in range(499)
+           for j in range(499)
            if j >= i]
 db.executemany("INSERT "
-               "INTO int_pairs(nb1, nb2, "
-               "multirev_locked, drawDate) "
-               "VALUES(?, ?, ?, ?)",
+               "INTO int_pairs(nb1, nb2, multirev_locked, drawDate, clever) "
+               "VALUES(?, ?, ?, ?, ?)",
+               db_rows)
+
+for couple in [(2, 5), (2, 50), (2, 500), (5, 20), (5, 200)]:
+    db.execute("UPDATE int_pairs SET clever = 5"
+               + " WHERE nb1 = '" + str(couple[0])
+               + "' and nb2 = '" + str(couple[1]) + "';")
+
+for couple in [(4, 25), (4, 250)]:
+    db.execute("UPDATE int_pairs SET clever = 4"
+               + " WHERE nb1 = '" + str(couple[0])
+               + "' and nb2 = '" + str(couple[1]) + "';")
+
+# Insert integer/decimal "clever" pairs into the db
+# The tenths series (only one yet) is identified by a 10
+# the quarters series by a 4
+# the halfs/fifths series by a 5
+start_id = tuple(db.execute("SELECT MAX(id) FROM int_pairs "))[0][0] + 1
+
+db_rows = list(zip([i + start_id for i in range(5)],
+                   [0.2, 2, 4, 4, 0.1],
+                   [5, 0.5, 0.25, 2.5, 10],
+                   [0, 0, 0, 0, 0],
+                   [5, 5, 4, 4, 10]))
+
+db.executemany("INSERT "
+               "INTO int_deci_clever_pairs(id, nb1, nb2, drawDate, clever) "
+               "VALUES(?, ?, ?, ?, ?)",
                db_rows)
 
 db.commit()

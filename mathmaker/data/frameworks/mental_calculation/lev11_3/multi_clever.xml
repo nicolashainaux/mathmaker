@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sheet header="" title="Mental calculation" subtitle="" text="" answers_title="Answers">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="mental" font_size_offset="-1">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default value: id='generic'
+		 No default for kind and subkind, they must be given -->
+	<!-- Available kinds for mental calculation: tabular, slideshow -->
+	<exercise id="mental_calculation" kind="tabular">
+
+		<!-- Default value (planned): context="none"
+			 No default for kind and subkind, they must be given -->
+		<question kind="multi" subkind="clever">
+			<nb source="intpairs_2to9">4</nb>
+		</question>
+		<question kind="multi" subkind="clever" variant="with_a_decimal">
+			<nb source="intpairs_2to9">10</nb>
+		</question>
+		<question kind="multi" subkind="clever" variant="integers_only">
+			<nb source="intpairs_2to9">1</nb>
+		</question>
+		<question kind="multi" subkind="clever" variant="fifths_series">
+			<nb source="intpairs_2to9">1</nb>
+		</question>
+		<question kind="multi" subkind="clever" variant="quarters_series">
+			<nb source="intpairs_2to9">1</nb>
+		</question>
+		<question kind="multi" subkind="clever">
+			<nb source="table_11">1</nb>
+		</question>
+		<question kind="multi" subkind="clever">
+			<nb source="table_15">1</nb>
+		</question>
+		<question kind="multi" subkind="clever">
+			<nb source="int_deci_clever_pairs">1</nb>
+		</question>
+
+	</exercise>
+
+</sheet>
