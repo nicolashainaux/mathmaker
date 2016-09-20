@@ -99,3 +99,8 @@ def test_test_11_1():
 def test_test_11_2():
     """Checks if 'test_11_2' is generated without any error."""
     shared.machine.write_out(str(S_Generic(XML_SHEETS['test_11_2'])))
+
+
+def test_test_multi_clever():
+    """Checks if 'multi_clever' is generated without any error."""
+    shared.machine.write_out(str(S_Generic(XML_SHEETS['multi_clever'])))
