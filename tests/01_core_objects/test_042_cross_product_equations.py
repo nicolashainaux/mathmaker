@@ -35,8 +35,7 @@ def cpeq0():
 
 def test_cpeq0_printed(cpeq0):
     """Is this Equation correctly printed?"""
-    assert cpeq0.printed == \
-        wrap_nb('\\frac{\\text{AB}}{4}=\\frac{3}{8}')
+    assert cpeq0.printed == wrap_nb('\\frac{\\text{AB}}{4}=\\frac{3}{8}')
 
 
 def test_cpeq0_autoresolution(cpeq0):
