@@ -324,7 +324,7 @@ def rad_to_deg(arg):
 # --------------------------------------------------------------------------
 ##
 #   @brief Mean of a list of numbers
-def mean(numberList):
+def mean(numberList, weights=None):
     if not type(numberList) == list:
         raise TypeError('Expected a list, got a '
                         + str(type(numberList)) + 'instead')
@@ -338,14 +338,24 @@ def mean(numberList):
                             + str(type(numberList[i])) + ' instead')
 
     decimalNums = [Decimal(str(x)) for x in numberList]
+    if weights is None:
+        weights = [1 for n in decimalNums]
 
-    return Decimal(str(sum(decimalNums) / len(numberList)))
+    if len(weights) != len(decimalNums):
+        raise ValueError('There should be as many weights as numbers, but '
+                         'there are {w} weights and {n} numbers.'
+                         .format(w=len(weights), n=len(decimalNums)))
+
+    total_weight = Decimal(str(sum(weights)))
+    terms = [Decimal(str(w)) * d for w, d in zip(weights, decimalNums)]
+
+    return Decimal(str(sum(terms) / total_weight))
 
 
 # --------------------------------------------------------------------------
 ##
 #   @brief Barycenter of a list of Points
-def barycenter(points_list, barycenter_name):
+def barycenter(points_list, barycenter_name, weights=None):
     from mathmaker.lib.core.base_geometry import Point
     if not type(points_list) == list:
         raise TypeError('Expected a list, got a '
@@ -362,12 +372,15 @@ def barycenter(points_list, barycenter_name):
     if not type(barycenter_name) == str:
         raise TypeError('Expected a str, got a '
                         + str(type(barycenter_name)) + 'instead')
+    if weights is None:
+        weights = [1 for p in points_list]
 
     abscissas_list = [P.x_exact for P in points_list]
     ordinates_list = [P.y_exact for P in points_list]
 
     return Point([barycenter_name,
-                  (mean(abscissas_list), mean(ordinates_list))])
+                  (mean(abscissas_list, weights=weights),
+                   mean(ordinates_list, weights=weights))])
 
 
 # --------------------------------------------------------------------------
