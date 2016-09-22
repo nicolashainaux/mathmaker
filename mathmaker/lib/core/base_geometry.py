@@ -387,39 +387,48 @@ class Vector(Point):
         return Vector((self.x_exact + arg.x_exact,
                        self.y_exact + arg.y_exact))
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Norm of a Vector
     @property
     def norm(self):
+        """Return the norm of self."""
         return Decimal(str(math.hypot(self._x_exact, self._y_exact)))
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Slope of a Vector
     @property
     def slope(self):
+        """Return the slope of self."""
         theta = round(Decimal(str(math.degrees(
                                   math.acos(self._x_exact / self.norm)))),
                       Decimal('0.1'),
                       rounding=ROUND_HALF_UP)
         return theta if self._y_exact > 0 else Decimal("360") - theta
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the unit vector built from self
     def unit_vector(self):
+        """Return the unit vector built from self"""
         return Vector((self._x_exact / self.norm,
                        self._y_exact / self.norm))
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns a vector bisecting self and another
     def bisector_vector(self, arg):
+        """
+        Return a vector colinear to the bisector of self and another vector.
+
+        :param arg: the other vector
+        :type arg: Vector
+        """
         if not isinstance(arg, Vector):
             raise error.WrongArgument(str(type(arg)), "a Vector")
-
         return self.unit_vector() + arg.unit_vector()
+
+    def orthogonal_unit_vector(self, clockwise=True):
+        """
+        Return a unit vector that's (default clockwise) orthogonal to self.
+
+        If clockwise is set to False, then the anti-clockwise orthogonal
+        vector is returned.
+        """
+        u = self.unit_vector()
+        if clockwise:
+            return Vector((u._y_exact, -u._x_exact))
+        else:
+            return Vector((-u._y_exact, u._x_exact))
 
 
 # ------------------------------------------------------------------------------
