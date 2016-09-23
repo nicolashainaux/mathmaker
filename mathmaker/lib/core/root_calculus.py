@@ -648,6 +648,21 @@ class Value(Signed):
         else:
             return self.raw_value + objct
 
+    def __sub__(self, v):
+        """
+        Return the difference between self and another Value, as a Value.
+
+        :param v: the Value to substract of self
+        :type v: Value
+        :rtype: Value
+        """
+        if isinstance(v, Value):
+            return Value(self.raw_value - v.raw_value)
+        else:
+            raise TypeError('TypeError: unsupported operand type(s) for -:'
+                            ' \'Value\' and \'{}\''
+                            .format(str(type(v))))
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Uses the given lexicon to substitute literal Values in self
