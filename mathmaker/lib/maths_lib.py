@@ -307,7 +307,7 @@ def deg_to_rad(arg):
         raise TypeError('Expected a number, got a ' + str(type(arg))
                         + ' instead.')
 
-    return arg * math.pi / 180
+    return Decimal(str(arg)) * Decimal(str(math.pi / 180))
 
 
 # --------------------------------------------------------------------------
