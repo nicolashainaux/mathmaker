@@ -31,12 +31,12 @@ from mathmaker.lib.core.geometry import InterceptTheoremConfiguration
 def fig0():
     fig0 = InterceptTheoremConfiguration(sketch=False,
                                          rotate_around_isobarycenter=40)
+    fig0.set_lengths([6, 12, 9], Fraction((Item(4), Item(3))))
     return fig0
 
 
 def test_fig0_into_euk(fig0):
     """Check this figure's generated euk file."""
-    fig0.set_lengths([6, 12, 9], Fraction((Item(4), Item(3))))
     fig0.setup_labels([True, True, True, True, True, True, True, True],
                       segments_list=[fig0.u, fig0.side[1], fig0.v]
                       + fig0.small + fig0.chunk)
@@ -74,3 +74,11 @@ def test_fig0_into_euk(fig0):
         '  $\\rotatebox{305}{\sffamily 12}$ V1 305 - 6.2 deg 8.7\n'\
         '  $\\rotatebox{-10}{\sffamily 16}$ B 170 - 5.2 deg 11.2\n'\
         'end'
+
+
+def test_fig0_into_euk2(fig0):
+    """Check this figure's generated euk file (less labels to display)."""
+    fig0.setup_labels(['?', True, False, True, True, True, False, False],
+                      segments_list=[fig0.u, fig0.side[1], fig0.v]
+                      + fig0.small + fig0.chunk)
+    assert fig0.into_euk() == ''

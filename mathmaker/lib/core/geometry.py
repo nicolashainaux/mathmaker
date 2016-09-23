@@ -1020,8 +1020,12 @@ class InterceptTheoremConfiguration(Triangle):
 
     def into_euk(self, **options):
         """Create the euk string to save in the file"""
-        box_values = self.work_out_euk_box(
-            vertices=self.vertex + self._U0U1 + self._V0V1)
+        points_list_for_the_box = copy.deepcopy(self.vertex)
+        if self.u.label != Value(''):
+            points_list_for_the_box += self._U0U1
+        if self.v.label != Value(''):
+            points_list_for_the_box += self._V0V1
+        box_values = self.work_out_euk_box(vertices=points_list_for_the_box)
         result = "box {val0}, {val1}, {val2}, {val3}\n"\
                  .format(val0=str(box_values[0]),
                          val1=str(box_values[1]),
@@ -1052,6 +1056,7 @@ class InterceptTheoremConfiguration(Triangle):
                                                       a.points[1])))
                              .slope for a in self.angle]
         for (i, v) in enumerate(self.vertex):
+            print('i: ' + str(i) + '; v.name= ' + str(v.name))
             result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
                       .format(n=v.name, a=str(names_angles_list[i]))
 
@@ -1060,10 +1065,12 @@ class InterceptTheoremConfiguration(Triangle):
             result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
                       .format(n=p.name, a=str(names_angles_list[i]))
 
-        result += '  u {}\n'.format(self._U0U1[0].name)
-        result += '  -u {}\n'.format(self._U0U1[1].name)
-        result += '  v {}\n'.format(self._V0V1[0].name)
-        result += '  -v {}\n'.format(self._V0V1[1].name)
+        if self.u.label != Value(''):
+            result += '  u {}\n'.format(self._U0U1[0].name)
+            result += '  -u {}\n'.format(self._U0U1[1].name)
+        if self.v.label != Value(''):
+            result += '  v {}\n'.format(self._V0V1[0].name)
+            result += '  -v {}\n'.format(self._V0V1[1].name)
 
         for s in self._small + self._chunk + [self.u, self.v, self.side[1]]:
             result += s.label_into_euk()
