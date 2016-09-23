@@ -27,7 +27,7 @@
 # @brief Mathematical elementary geometrical objects.
 
 import math
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
 
 from mathmaker.lib import error, is_
 from mathmaker.lib.maths_lib import deg_to_rad, round
@@ -340,6 +340,59 @@ class Segment(Drawable):
                                       + str(AVAILABLE_SEGMENT_MARKS))
 
         self._mark = arg
+
+    def label_into_euk(self):
+        """Return the label correctly positionned along the Segment."""
+        if self.label == Value(""):
+            return ''
+        else:
+            result = ''
+            x = self.real_length
+            scale_factor = round(Decimal(str(1.6 * x)),
+                                 Decimal('0.1'),
+                                 rounding=ROUND_UP)
+            if x <= 3:
+                angle_correction = round(Decimal(str(-8 * x + 33)),
+                                         Decimal('0.1'),
+                                         rounding=ROUND_UP)
+            else:
+                angle_correction = \
+                    round(
+                        Decimal(
+                            str(1.1 / (1 - 0.95 * math.exp(-0.027 * x)))),
+                        Decimal('0.1'),
+                        rounding=ROUND_UP)
+
+            side_angle = Vector((self.points[0], self.points[1])).slope
+
+            label_position_angle = round(side_angle,
+                                         Decimal('1'),
+                                         rounding=ROUND_HALF_EVEN)
+
+            label_position_angle %= Decimal("360")
+
+            rotate_box_angle = Decimal(label_position_angle)
+
+            if (rotate_box_angle >= 90 and rotate_box_angle <= 270):
+                rotate_box_angle -= Decimal("180")
+            elif (rotate_box_angle <= -90 and rotate_box_angle >= -270):
+                rotate_box_angle += Decimal("180")
+
+            rotate_box_angle %= Decimal("360")
+
+            result += "  $\\rotatebox{"
+            result += str(rotate_box_angle)
+            result += "}{\sffamily "
+            result += self.label.into_str(display_unit=True,
+                                          graphic_display=True)
+            result += "}$ "
+            result += self.points[0].name + " "
+            result += str(label_position_angle)
+            result += " - "
+            result += str(angle_correction) + " deg "
+            result += str(scale_factor)
+            result += "\n"
+            return result
 
 
 # ------------------------------------------------------------------------------

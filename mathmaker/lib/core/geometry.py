@@ -28,13 +28,13 @@
 
 import math
 import copy
-from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
+from decimal import Decimal, ROUND_HALF_UP
 
 from mathmaker.lib import randomly
 from mathmaker.lib import is_, error
 from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
                                      POLYGONS_NATURES, round)
-from .root_calculus import Value, Unit
+from .root_calculus import Evaluable, Value, Unit
 from .base_calculus import Item, Product, Sum
 from .calculus import Equality, SubstitutableEquality
 from .base import Drawable
@@ -258,20 +258,34 @@ class Polygon(Drawable):
     def lengths_have_been_set(self):
         return all(s.length_has_been_set for s in self.side)
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Turns "on" or "off" the labels (displaying the fake lengths)
-    #          or potentially displaying a "?".
-    #   @param flags_list A list of True|False|None, being as long as
-    #                     len(self.side)
-    def setup_labels(self, flags_list):
-        if len(flags_list) != len(self.side):
-            raise error.WrongArgument("A list of length "
-                                      + str(len(flags_list)),
-                                      "A list of length the number of sides ("
-                                      + str(len(self.side)) + ")")
+    def setup_labels(self, flags_list, segments_list=None):
+        """
+        Tells what to display along each segment of the list.
 
-        for (s, f) in zip(self.side, flags_list):
+        If no segments' list is provided, it defaults to the Polygon's sides'
+        list. It is expected that both the flags' and segments' lists have the
+        same length.
+        Meaning of the flags' list:
+        - a '?' will be displayed for each Segment flagged as None or '?'
+        - its length will be displayed if it's flagged as anything else
+          evaluating to True
+        - nothing will be displayed it it's flagged as anything else evaluating
+          to False
+
+        :param flags_list: the list of the flags
+        :type flags_list: list
+        :param segments_list: the list of the Segments to flag
+        :type segments_list: list (of Segments)
+        """
+        if segments_list is None:
+            segments_list = self.side
+        if len(flags_list) != len(segments_list):
+            raise ValueError("The number of flags ({}) should be equal "
+                             "to the number of segments ({})."
+                             .format(str(len(flags_list)),
+                                     str(len(segments_list))))
+
+        for (s, f) in zip(segments_list, flags_list):
             s.setup_label(f)
 
     # --------------------------------------------------------------------------
@@ -279,9 +293,11 @@ class Polygon(Drawable):
     #   @brief Works out the dimensions of the box
     #   @param options Any options
     #   @return (x1, y1, x2, y2)
-    def work_out_euk_box(self, **options):
-        x_list = [v.x for v in self.vertex]
-        y_list = [v.y for v in self.vertex]
+    def work_out_euk_box(self, vertices=None):
+        if vertices is None:
+            vertices = self.vertex
+        x_list = [v.x for v in vertices]
+        y_list = [v.y for v in vertices]
 
         return (min(x_list) - Decimal("0.6"), min(y_list) - Decimal("0.6"),
                 max(x_list) + Decimal("0.6"), max(y_list) + Decimal("0.6"))
@@ -314,52 +330,7 @@ class Polygon(Drawable):
 
         # Let's add the sides' labels, if any
         for s in self.side:
-            if s.label != Value(""):
-                x = s.real_length
-                scale_factor = round(Decimal(str(1.6 * x)),
-                                     Decimal('0.1'),
-                                     rounding=ROUND_UP)
-                if x <= 3:
-                    angle_correction = round(Decimal(str(-8 * x + 33)),
-                                             Decimal('0.1'),
-                                             rounding=ROUND_UP)
-                else:
-                    angle_correction = \
-                        round(
-                            Decimal(
-                                str(1.1 / (1 - 0.95 * math.exp(-0.027 * x)))),
-                            Decimal('0.1'),
-                            rounding=ROUND_UP)
-
-                side_angle = Vector((s.points[0], s.points[1])).slope
-
-                label_position_angle = round(side_angle,
-                                             Decimal('1'),
-                                             rounding=ROUND_HALF_EVEN)
-
-                label_position_angle %= Decimal("360")
-
-                rotate_box_angle = Decimal(label_position_angle)
-
-                if (rotate_box_angle >= 90 and rotate_box_angle <= 270):
-                    rotate_box_angle -= Decimal("180")
-                elif (rotate_box_angle <= -90 and rotate_box_angle >= -270):
-                    rotate_box_angle += Decimal("180")
-
-                rotate_box_angle %= Decimal("360")
-
-                result += "  $\\rotatebox{"
-                result += str(rotate_box_angle)
-                result += "}{\sffamily "
-                result += s.label.into_str(display_unit=True,
-                                           graphic_display=True)
-                result += "}$ "
-                result += s.points[0].name + " "
-                result += str(label_position_angle)
-                result += " - "
-                result += str(angle_correction) + " deg "
-                result += str(scale_factor)
-                result += "\n"
+            result += s.label_into_euk()
 
         for a in self.angle:
             if a.label != Value(""):
@@ -647,9 +618,9 @@ class Triangle(Polygon):
     ##
     #   @brief Constructor.
     #   @param arg: Triangle |
-    #                ((str, str, str), (not implemented yet)'sketch'
-    #        OR:                      {'side0':nb0, 'angle1':nb1, 'side1':nb2}
-    #        OR: (not implemented yet){'side0':nb0, 'side1':nb1, 'side2':nb2}
+    #                ((str, str, str), 'sketch'
+    #        OR:                       {'side0':nb0, 'angle1':nb1, 'side1':nb2}
+    #        OR: (not implemented yet) {'side0':nb0, 'side1':nb1, 'side2':nb2}
     #        OR: (not implemented yet) etc.
     #                )
     #            NB: the three str will be the vertices' names
@@ -716,18 +687,25 @@ class Triangle(Polygon):
 
             side0_length = construction_data['side0']
             side1_length = construction_data['side1']
+            angle1 = construction_data['angle1']
 
-            if 'rotate_around_isobarycenter' in options:
-                if options['rotate_around_isobarycenter'] == 'randomly':
-                    self._rotation_angle = randomly.integer(0, 35) * 10
-                elif is_.a_number(options['rotate_around_isobarycenter']):
-                    self._rotation_angle = \
-                        options['rotate_around_isobarycenter']
+            rotate_around_isobarycenter = \
+                options.get('rotate_around_isobarycenter', 'no')
+            if construction_data == 'sketch':
+                rotate_around_isobarycenter = 'randomly'
+                side0_length = Decimal(str(randomly.integer(35, 55))) / 10
+                side1_length = Decimal(str(randomly.integer(35, 55))) / 10
+                angle1 = randomly.integer(20, 70)
+
+            if rotate_around_isobarycenter == 'randomly':
+                self._rotation_angle = randomly.integer(0, 35) * 10
+            elif is_.a_number(rotate_around_isobarycenter):
+                self._rotation_angle = rotate_around_isobarycenter
 
             start_vertex[0] = Point([vertices_names[0], (0, 0)])
             start_vertex[1] = Point([vertices_names[1], (side0_length, 0)])
-            cos1 = math.cos(deg_to_rad(construction_data['angle1']))
-            sin1 = math.sin(deg_to_rad(construction_data['angle1']))
+            cos1 = math.cos(deg_to_rad(angle1))
+            sin1 = math.sin(deg_to_rad(angle1))
             x2 = side0_length - side1_length * Decimal(str(cos1))
             y2 = side1_length * Decimal(str(sin1))
             start_vertex[2] = Point([vertices_names[2], (x2, y2)])
@@ -740,8 +718,8 @@ class Triangle(Polygon):
         else:
             raise error.WrongArgument(str(type(arg)),
                                       "Triangle|((str, str, str),"
-                                      " {'side0':nb0, 'angle1':nb1, "
-                                      "'side1':nb2})")
+                                      " {'side0': nb0, 'angle1': nb1, "
+                                      "'side1': nb2})")
 
 
 # ------------------------------------------------------------------------------
@@ -944,3 +922,198 @@ class RightTriangle(Triangle):
                                          "because no unknown side was found")
 
         return SubstitutableEquality(objcts, subst_dict)
+
+
+class InterceptTheoremConfiguration(Triangle):
+
+    def __init__(self,
+                 points_names=None,  # ['A', 'M', 'B', 'C', 'N']
+                 butterfly=False,
+                 sketch=True,
+                 ratio=None,  # Decimal('0.75')
+                 dimensions=None,
+                 # {'side0': Decimal('5'),
+                 #  'angle1': Decimal('50'),
+                 #  'side1': Decimal('7')}
+                 rotate_around_isobarycenter='no',
+                 ):
+        """
+        Intercept theorem configuration initialization.
+
+        :param points_names: a list of 5 points names.
+        :type points_names: a list of str
+        :param butterfly: turn to True if you want to use the "butterfly"
+        configuration. Not implemented yet (0.7.1dev2).
+        :type butterfly: boolean
+        :param sketch: turn to False if you want to use custom values for
+        sides, angles and ratio. As long as it is True, these values will be
+        randomly defined (inside of a reasonable range), and
+        rotate_around_isobarycenter will be turned to 'randomly'
+        :type sketch: boolean
+        :param ratio: the ratio to compute the "small" triangle inside
+        :type ratio: numeric Value
+        :param dimensions: dimensions of the main (biggest) triangle
+        :type dimensions: dict providing 'side0', 'angle1', and 'side1' keys.
+        Any other possibility is not implemented yet (0.7.1dev2)
+        :param rotate_around_isobarycenter: tells if the main triangle should
+        be rotated around its barycenter. If sketch is True, it will be
+        considered as 'randomly'.
+        :type rotate_around_isobarycenter: either 'no', 'randomly', or a Value
+        (the number of degrees to use)
+        """
+        if points_names is None:
+            points_names = ['A', 'M', 'B', 'C', 'N']
+        if ratio is None:
+            ratio = Decimal('0.75')
+        self._ratio = ratio
+        if dimensions is None:
+            dimensions = {'side0': Decimal('5'),
+                          'angle1': Decimal('50'),
+                          'side1': Decimal('7')}
+        r = rotate_around_isobarycenter
+        if sketch:
+            super().__init__(((points_names[0],
+                               points_names[2],
+                               points_names[3]),
+                              'sketch'))
+        else:
+            super().__init__(((points_names[0],
+                               points_names[2],
+                               points_names[3]),
+                              dimensions),
+                             rotate_around_isobarycenter=r)
+
+        x_A, x_B, x_C = (self.vertex[0].x_exact,
+                         self.vertex[1].x_exact,
+                         self.vertex[2].x_exact)
+        y_A, y_B, y_C = (self.vertex[0].y_exact,
+                         self.vertex[1].y_exact,
+                         self.vertex[2].y_exact)
+        k = ratio
+        self._point = [Point([points_names[1],
+                             (x_A + k * (x_B - x_A),
+                              y_A + k * (y_B - y_A))]),
+                       Point([points_names[4],
+                              (x_A + k * (x_C - x_A),
+                               y_A + k * (y_C - y_A))])]
+        self._small = [Segment((self._vertex[0], self._point[0])),
+                       Segment((self._point[0], self._point[1])),
+                       Segment((self._point[1], self._vertex[0]))]
+        self._chunk = [Segment((self._point[0], self._vertex[1])),
+                       Segment((self._vertex[2], self._point[1]))]
+
+        AB = Vector((self._vertex[1], self._vertex[0]))
+        AC = Vector((self._vertex[2], self._vertex[0]))
+        u = AB.orthogonal_unit_vector(clockwise=False)
+        v = AC.orthogonal_unit_vector()
+
+        self._U0U1 = [Point(['U0', (x_A + u.x_exact, y_A + u.y_exact)]),
+                      Point(['U1', (x_B + u.x_exact, y_B + u.y_exact)])]
+        self._V0V1 = [Point(['V1', (x_C + v.x_exact, y_C + v.y_exact)]),
+                      Point(['V0', (x_A + v.x_exact, y_A + v.y_exact)])]
+
+        self._u = Segment(tuple(self._U0U1))
+        self._v = Segment(tuple(self._V0V1))
+
+        self._ortho_u = u
+        self._ortho_v = v
+
+    def into_euk(self, **options):
+        """Create the euk string to save in the file"""
+        box_values = self.work_out_euk_box(
+            vertices=self.vertex + self._U0U1 + self._V0V1)
+        result = "box {val0}, {val1}, {val2}, {val3}\n"\
+                 .format(val0=str(box_values[0]),
+                         val1=str(box_values[1]),
+                         val2=str(box_values[2]),
+                         val3=str(box_values[3]))
+
+        result += "\n"
+
+        for l in [self.vertex, self._point, self._U0U1, self._V0V1]:
+            for p in l:
+                result += "{name} = point({x}, {y})\n".format(name=p.name,
+                                                              x=p.x,
+                                                              y=p.y)
+        result += "u = vector({}, {})\n"\
+            .format(self._U0U1[0].name, self._U0U1[1].name)
+        result += "v = vector({}, {})\n"\
+            .format(self._V0V1[0].name, self._V0V1[1].name)
+
+        result += "\ndraw\n  "
+        result += "("
+        result += '.'.join([v.name for v in self.vertex])
+        result += ")\n"
+        result += '  ' + '.'.join([p.name for p in self._point])
+        result += "\n"
+
+        names_angles_list = [Vector((a.points[0], a.points[1]))
+                             .bisector_vector(Vector((a.points[2],
+                                                      a.points[1])))
+                             .slope for a in self.angle]
+        for (i, v) in enumerate(self.vertex):
+            result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
+                      .format(n=v.name, a=str(names_angles_list[i]))
+
+        names_angles_list = [self._ortho_u.slope, self._ortho_v.slope]
+        for (i, p) in enumerate(self._point):
+            result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
+                      .format(n=p.name, a=str(names_angles_list[i]))
+
+        result += '  u {}\n'.format(self._U0U1[0].name)
+        result += '  -u {}\n'.format(self._U0U1[1].name)
+        result += '  v {}\n'.format(self._V0V1[0].name)
+        result += '  -v {}\n'.format(self._V0V1[1].name)
+
+        for s in self._small + self._chunk + [self.u, self.v, self.side[1]]:
+            result += s.label_into_euk()
+
+        result += "end"
+        return result
+
+    def set_lengths(self, lengths_list, enlargement_ratio):
+        """
+        Set all ("fake") lengths of the figure.
+
+        The given lengths' list matches the three small sides. The ratio
+        will be used to compute all other segments' sides. As these lengths
+        are the "fake" ones (not the ones used to draw the figure, but the
+        ones that will show up on the figure), this ratio is the "fake" one
+        (not the same as self.ratio).
+
+        :param lengths_list: the list of the lengths for small0, small1, small2
+        :type lengths_list: a list (of Values)
+        :param enlargement_ratio: the enlargement ratio of the exercise.
+        :type enlargement_ratio: any Evaluable
+        """
+        if len(lengths_list) != 3:
+            raise ValueError('This list should contain 3 lengths, not {}.'
+                             .format(str(len(lengths_list))))
+        if not isinstance(enlargement_ratio, Evaluable):
+            raise TypeError('Expected any Evaluable, got a {}.'
+                            .format(str(type(enlargement_ratio))))
+        for i, s in enumerate(self._small):
+            s.length = Value(lengths_list[i])
+        for i, s in enumerate([self._u, self.side[1], self._v]):
+            s.length = Value(Product([lengths_list[i], enlargement_ratio])
+                             .evaluate())
+        self._chunk[0].length = Value(self.u.length
+                                      - self.small[0].length)
+        self._chunk[1].length = Value(self.v.length
+                                      - self.small[2].length)
+
+    @property
+    def chunk(self):
+        return self._chunk
+
+    @property
+    def small(self):
+        return self._small
+
+    @property
+    def u(self):
+        return self._u
+
+    @property
+    def v(self):
+        return self._v
