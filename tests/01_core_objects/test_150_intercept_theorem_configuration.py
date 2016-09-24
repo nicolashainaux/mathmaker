@@ -81,4 +81,32 @@ def test_fig0_into_euk2(fig0):
     fig0.setup_labels(['?', True, False, True, True, True, False, False],
                       segments_list=[fig0.u, fig0.side[1], fig0.v]
                       + fig0.small + fig0.chunk)
-    assert fig0.into_euk() == ''
+    assert fig0.into_euk() == \
+        'box -2.08, -2.13, 6.65, 4.27\n\n'\
+        'A = point(1.58, -0.76)\n'\
+        'B = point(5.41, 2.45)\n'\
+        'C = point(-1.48, 3.67)\n'\
+        'M = point(4.45, 1.65)\n'\
+        'N = point(-0.72, 2.56)\n'\
+        'U0 = point(2.22, -1.53)\n'\
+        'U1 = point(6.05, 1.68)\n'\
+        'V1 = point(-2.3, 3.1)\n'\
+        'V0 = point(0.76, -1.33)\n'\
+        'u = vector(U0, U1)\n'\
+        'v = vector(V1, V0)\n\n'\
+        'draw\n'\
+        '  (A.B.C)\n'\
+        '  M.N\n'\
+        '  "A" A 262.2 deg, font("sffamily")\n'\
+        '  "B" B 15 deg, font("sffamily")\n'\
+        '  "C" C 147.4 deg, font("sffamily")\n'\
+        '  "M" M 309.7 deg, font("sffamily")\n'\
+        '  "N" N 214.8 deg, font("sffamily")\n'\
+        '  u U0\n'\
+        '  -u U1\n'\
+        '  $\\rotatebox{40}{\sffamily 6}$ A 40 - 7.8 deg 6\n'\
+        '  $\\rotatebox{-10}{\sffamily 12}$ M 170 - 6.3 deg 8.4\n'\
+        '  $\\rotatebox{305}{\sffamily 9}$ N 305 - 7.5 deg 6.5\n'\
+        '  $\\rotatebox{40}{\sffamily ?}$ U0 40 - 6.5 deg 8\n'\
+        '  $\\rotatebox{-10}{\sffamily 16}$ B 170 - 5.2 deg 11.2\n'\
+        'end'

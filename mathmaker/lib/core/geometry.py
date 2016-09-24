@@ -1056,7 +1056,6 @@ class InterceptTheoremConfiguration(Triangle):
                                                       a.points[1])))
                              .slope for a in self.angle]
         for (i, v) in enumerate(self.vertex):
-            print('i: ' + str(i) + '; v.name= ' + str(v.name))
             result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
                       .format(n=v.name, a=str(names_angles_list[i]))
 
