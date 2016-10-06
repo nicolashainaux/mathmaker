@@ -75,6 +75,17 @@ class source(object):
         for kw in kwargs:
             if kw == "raw":
                 result += " AND " + kwargs[kw] + " "
+            elif kw == "triangle_inequality":
+                common_nb, t1, t2 = kwargs[kw]
+                mini = str(abs(t1 - t2) + 1)  # we avoid "too flat" triangles
+                maxi = str(t1 + t2 - 1)
+                result += 'AND ('\
+                    '(nb1 = ' + str(common_nb) + ' '\
+                    'AND (nb2 >= ' + mini + ' AND nb2 <= ' + maxi + ') '\
+                    ') OR '\
+                    '(nb2 = ' + str(common_nb) + ' '\
+                    'AND (nb1 >= ' + mini + ' AND nb1 <= ' + maxi + ') '\
+                    '))'
             elif (kw == "prevails" or kw.startswith("info_") or kw == "union"
                   or kw == 'table_name' or kw == 'no_order_by_random'):
                 # __
