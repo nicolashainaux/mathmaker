@@ -291,16 +291,16 @@ class Segment(Drawable):
     #   @brief Will set length as the Segment's label, or "?", or nothing
     #   @param flag If flag evaluates to "?"|None, the Segment's label will be
     #               set to "?". Otherwise, if it evaluates to False, it will be
-    #               set to "", and to True, it will be set to its length.
+    #               set to '', and to True, it will be set to its length.
     def setup_label(self, flag):
-        if flag is None or flag == "?":
-            self.label = Value("?")
-
+        if flag is None or flag == '?':
+            self.label = Value('?')
+        elif flag in ['hid', 'hidden', 'known_but_hidden']:
+            self.label = Value('hidden')
         elif flag:
             self.label = Value(self.length)
-
         elif not flag:
-            self.label = Value("")
+            self.label = Value('')
 
     # --------------------------------------------------------------------------
     ##
@@ -343,7 +343,7 @@ class Segment(Drawable):
 
     def label_into_euk(self):
         """Return the label correctly positionned along the Segment."""
-        if self.label == Value(""):
+        if self.label in [Value(''), Value('hidden')]:
             return ''
         else:
             result = ''
