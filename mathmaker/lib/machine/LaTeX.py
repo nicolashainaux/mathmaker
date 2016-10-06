@@ -110,7 +110,8 @@ class LaTeX(Structure.Structure):
         result += r"\usepackage{array}" + "\n"
         result += "% " + _("For pretty underlining") + "\n"
         result += r"\usepackage{ulem}" + "\n"
-        result += "% " + _("To include .eps pictures") + "\n"
+        result += "% " + _("To include .eps pictures (loads graphicx)") + "\n"
+        # result += r"\usepackage{graphbox}" + "\n"
         result += r"\usepackage{graphicx}" + "\n"
         result += "% " + _("To use some symbols like currency units") + "\n"
         result += r"\usepackage{textcomp}" + "\n"
@@ -140,7 +141,7 @@ which will insert the word {word} in bold, with its number and \
 automatically increments the counter").format(cmd_name="exercise",
                                               word=_("Exercise")) + "\n"
         result += "\\newcommand{\exercise}{\\noindent \hspace{-.25cm}" \
-            + " \stepcounter{n} " + self.translate_font_size('Large') \
+            + " \stepcounter{n} " + self.translate_font_size('large') \
             + " \\textbf{" \
             + _("Exercise") \
             + " \\arabic{n}} " \
@@ -154,6 +155,10 @@ automatically increments the counter").format(cmd_name="exercise",
         result += r"\epstopdfsetup{outdir=./}" + "\n"
         if settings.round_letters_in_math_expr:
             result += r"\usepackage{lxfonts}" + "\n"
+
+        if settings.language == "fr_FR":
+            result += r"\renewcommand{\parallel}{\mathbin{/\negthickspace/}}" \
+                + "\n"
 
         if self.redirect_output_to_str:
             return result
@@ -324,7 +329,7 @@ automatically increments the counter").format(cmd_name="exercise",
                 output_str = "\\begin{multicols}{" \
                              + str(options['multicolumns']) + "} " + "\n" \
                              + output_str \
-                             + "\end{multicols}" + "\n"
+                             + "\end{multicols}" + "\n~"
             else:
                 raise error.OutOfRangeArgument(options['multicolumns'],
                                                ' should be an int >=1\n')
@@ -551,6 +556,14 @@ automatically increments the counter").format(cmd_name="exercise",
 
         if 'vertical_alignment_in_a_tabular' in options:
             return "\\raisebox{-.5\height}{" \
+                   + "\includegraphics[scale=" + s + "]{" \
+                   + drawable_arg.eps_filename \
+                   + "}" + "}"
+        elif 'top_aligned_in_a_tabular' in options:
+            # return "\includegraphics[align=t, scale=" + s + "]{" \
+            #     + drawable_arg.eps_filename \
+            #     + "}" + "\\newline" + "\n"
+            return "\\raisebox{-0.9\height}{" \
                    + "\includegraphics[scale=" + s + "]{" \
                    + drawable_arg.eps_filename \
                    + "}" + "}"
