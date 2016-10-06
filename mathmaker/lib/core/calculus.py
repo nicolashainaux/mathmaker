@@ -1007,25 +1007,27 @@ class Equation(ComposedCalculable):
         equation_did_split_in_two = False
         go_on = True
 
+        step_nb = 0
+
         while go_on:
+            step_nb += 1
             if not equation_did_split_in_two:
 
                 next_eq_aux = eq_aux.solve_next_step(**options)
-
-                if next_eq_aux is None and 'unit' in options:
-
-                    result += MARKUP['opening_math_style1'] \
-                        + uline1 \
-                        + eq_aux.into_str() \
-                        + MARKUP['open_text_in_maths'] \
-                        + " " + str(options['unit']) \
-                        + MARKUP['close_text_in_maths'] \
-                        + uline2 \
-                        + MARKUP['closing_math_style1']
-                else:
-                    result += MARKUP['opening_math_style1'] \
-                        + eq_aux.into_str() \
-                        + MARKUP['closing_math_style1']
+                if not('skip_first_step' in options and step_nb == 1):
+                    if next_eq_aux is None and 'unit' in options:
+                        result += MARKUP['opening_math_style1'] \
+                            + uline1 \
+                            + eq_aux.into_str() \
+                            + MARKUP['open_text_in_maths'] \
+                            + " " + str(options['unit']) \
+                            + MARKUP['close_text_in_maths'] \
+                            + uline2 \
+                            + MARKUP['closing_math_style1']
+                    else:
+                        result += MARKUP['opening_math_style1'] \
+                            + eq_aux.into_str() \
+                            + MARKUP['closing_math_style1']
 
                 if (next_eq_aux is None or type(next_eq_aux) == str
                     or isinstance(next_eq_aux, tuple)):
@@ -1539,7 +1541,6 @@ class SubstitutableEquality(Equality):
     def substitute(self):
         for elt in self._elements:
             elt.substitute(self.subst_dict)
-
         return self
 
 
@@ -1864,6 +1865,7 @@ class Table_UP(Table):
     #   info should contain at least one None|(None, None) element
     #   (means the column is completely numeric)
     def __init__(self, coeff, first_line, info):
+        log = settings.dbg_logger.getChild('Table_UP.init')
 
         if (not is_.a_number(coeff)
             and not (isinstance(coeff, Calculable) and coeff.is_numeric())):
@@ -1904,6 +1906,7 @@ class Table_UP(Table):
                                           "only one of them can be None"
                                           + " in the same time")
             elt = info[i]
+            log.debug('elt: ' + str(elt))
 
             if not (elt is None or type(elt) == tuple):
                 raise error.WrongArgument(str(type(elt)),
