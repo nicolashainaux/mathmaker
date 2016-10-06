@@ -105,6 +105,18 @@ def ow2ter():
     return o
 
 
+@pytest.fixture
+def ow2qua():
+    o = raw_obj()
+    o.line1 = 'AB'
+    o.line2 = 'MN'
+    o.s = 'BC'
+    o.wording = '({line1}) is parallel to ({line2}). '\
+                'Calculate the length of segment [{s}].'
+    setup_wording_format_of(o)
+    return o
+
+
 def test_wrap_01():
     """Checks wrap('s') gives out '{s}'."""
     assert wrap('Something like this.') == '{Something like this.}'
@@ -448,6 +460,13 @@ def test_setup_wording_format_of_10(ow2ter):
 def test_setup_wording_format_of_11(ow2ter):
     """Checks if obj.wording is correctly setup."""
     assert ow2ter.area_unit == 'cm^{\\text{2}}'
+
+
+def test_setup_wording_format_of_12(ow2qua):
+    """Checks if obj.wording is correctly setup."""
+    assert ow2qua.wording.format(**ow2qua.wording_format) == \
+        '(AB) is parallel to (MN). '\
+        'Calculate the length of segment [BC].'
 
 
 def test_insert_nonbreaking_spaces():

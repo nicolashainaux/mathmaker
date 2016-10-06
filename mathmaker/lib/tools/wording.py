@@ -92,13 +92,15 @@ def unwrapped(word: str) -> str:
         return word[1:-1]
 
 
-def is_wrapped(word: str, braces='{}') -> bool:
+def is_wrapped(word: str, braces='{}', extra_braces='') -> bool:
     """
     Return True if word is wrapped between braces.
 
     :param word: the word to inspect
-    :braces: to change the default {} braces to something else, like [] or <>
-
+    :param braces: to change the default {} braces to something else,
+    like [] or <>
+    :param extra_braces: to add extra braces around the usual ones. Like in
+    ({tag}) or [{tag}]
     :Examples:
 
     >>> is_wrapped('{word}')
@@ -109,17 +111,31 @@ def is_wrapped(word: str, braces='{}') -> bool:
     False
     >>> is_wrapped('<word>', braces='<>')
     True
+    >>> is_wrapped('({word})')
+    False
+    >>> is_wrapped('({word})', extra_braces='()')
+    True
+    >>> is_wrapped('[{word}]', extra_braces='()')
+    False
     """
     opening_str, ending_str = braces
-    return word.startswith(opening_str) and word.endswith(ending_str)
+    if len(extra_braces) == 2:
+        left, right = extra_braces
+    else:
+        left = right = ''
+    return (word.startswith(left + opening_str)
+            and word.endswith(ending_str + right))
 
 
-def is_wrapped_p(word: str, braces='{}') -> bool:
+def is_wrapped_p(word: str, braces='{}', extra_braces='') -> bool:
     """
     Return True if word is wrapped between braces. Punctuation has no effect.
 
     :param word: the word to inspect
-    :braces: to change the default {} braces to something else, like [] or <>
+    :param braces: to change the default {} braces to something else,
+    like [] or <>
+    :param extra_braces: to add extra braces around the usual ones. Like in
+    ({tag}) or [{tag}]
 
     :Examples:
 
@@ -133,24 +149,37 @@ def is_wrapped_p(word: str, braces='{}') -> bool:
     True
     >>> is_wrapped_p('<word>:', braces='<>')
     True
+    >>> is_wrapped_p('({word}).')
+    False
+    >>> is_wrapped_p('({word}).', extra_braces='()')
+    True
+    >>> is_wrapped_p('[{word}]?', extra_braces='[]')
+    True
     """
     opening_str, ending_str = braces
-    return (word.startswith(opening_str)
-            and (word.endswith(ending_str)
-                 or word.endswith(ending_str + ".")
-                 or word.endswith(ending_str + ",")
-                 or word.endswith(ending_str + ":")
-                 or word.endswith(ending_str + ";")
-                 or word.endswith(ending_str + "?")
-                 or word.endswith(ending_str + "!")))
+    if len(extra_braces) == 2:
+        left, right = extra_braces
+    else:
+        left = right = ''
+    return (word.startswith(left + opening_str)
+            and (word.endswith(ending_str + right)
+                 or word.endswith(ending_str + right + ".")
+                 or word.endswith(ending_str + right + ",")
+                 or word.endswith(ending_str + right + ":")
+                 or word.endswith(ending_str + right + ";")
+                 or word.endswith(ending_str + right + "?")
+                 or word.endswith(ending_str + right + "!")))
 
 
-def is_wrapped_P(word: str, braces='{}') -> bool:
+def is_wrapped_P(word: str, braces='{}', extra_braces='') -> bool:
     """
     Return True if word is wrapped between braces & followed by a punctuation.
 
     :param word: the word to inspect
-    :braces: to change the default {} braces to something else, like [] or <>
+    :param braces: to change the default {} braces to something else,
+    like [] or <>
+    :param extra_braces: to add extra braces around the usual ones. Like in
+    ({tag}) or [{tag}]
 
     :Examples:
 
@@ -164,15 +193,25 @@ def is_wrapped_P(word: str, braces='{}') -> bool:
     False
     >>> is_wrapped_P('<word>:', braces='<>')
     True
+    >>> is_wrapped_P('({word})', extra_braces='()')
+    False
+    >>> is_wrapped_P('({word}).', extra_braces='()')
+    True
+    >>> is_wrapped_P('[{word}]?', extra_braces='[]')
+    True
     """
     opening_str, ending_str = braces
-    return (word.startswith(opening_str)
-            and (word.endswith(ending_str + ".")
-                 or word.endswith(ending_str + ",")
-                 or word.endswith(ending_str + ":")
-                 or word.endswith(ending_str + ";")
-                 or word.endswith(ending_str + "?")
-                 or word.endswith(ending_str + "!")))
+    if len(extra_braces) == 2:
+        left, right = extra_braces
+    else:
+        left = right = ''
+    return (word.startswith(left + opening_str)
+            and (word.endswith(ending_str + right + ".")
+                 or word.endswith(ending_str + right + ",")
+                 or word.endswith(ending_str + right + ":")
+                 or word.endswith(ending_str + right + ";")
+                 or word.endswith(ending_str + right + "?")
+                 or word.endswith(ending_str + right + "!")))
 
 
 def is_unit(word: str) -> bool:
@@ -354,7 +393,9 @@ def process_attr_values(sentence: str) -> tuple:
     attr_values = {}
     key_val_blocks = [w for w in sentence.split()
                       if ((is_wrapped_p(w)
-                           or is_wrapped_p(w, braces='<>'))
+                           or is_wrapped_p(w, braces='<>')
+                           or is_wrapped_p(w, extra_braces='()')
+                           or is_wrapped_p(w, extra_braces='[]'))
                           and '=' in w)]
     for kv in key_val_blocks:
         [key, val] = unwrapped(kv).split(sep='=')
@@ -382,7 +423,7 @@ def process_attr_values(sentence: str) -> tuple:
     return (transformed_sentence, attr_values)
 
 
-def merge_nb_unit_pairs(arg: object):
+def merge_nb_unit_pairs(arg: object, w_prefix=''):
     r"""
     Merge all occurences of {nbN} {\*_unit} in arg.wording into {nbN\_\*_unit}.
 
@@ -409,10 +450,11 @@ def merge_nb_unit_pairs(arg: object):
     >>> arg.nb1_capacity_unit
     '\\SI{2}{L}'
     """
+    w_object_wording = getattr(arg, w_prefix + 'wording')
     logger = settings.dbg_logger.getChild('wording.merge_nb_unit_pairs')
-    logger.debug("Retrieved wording: " + arg.wording + "\n")
+    logger.debug("Retrieved wording: " + w_object_wording + "\n")
     new_words_list = []
-    words = arg.wording.split()
+    words = w_object_wording.split()
     skip_next_w = False
     for i, w in enumerate(words):
         next_w = words[i + 1] if i <= len(words) - 2 else None
@@ -441,14 +483,18 @@ def merge_nb_unit_pairs(arg: object):
                                       exponent=Value(expnt)))\
                 .into_str(display_SI_unit=True)
             new_words_list += ["{" + new_attr_name + "}" + p]
+            logger.debug(" setattr: name=" + str(new_attr_name) + "; val= "
+                         + str(new_val) + "\n")
             setattr(arg, new_attr_name, new_val)
             skip_next_w = True
         elif skip_next_w:
             skip_next_w = False
         else:
             new_words_list += [w]
-    arg.wording = " ".join(new_words_list)
-    logger.debug("Turned into: " + arg.wording + "\n")
+    new_wording = " ".join(new_words_list)
+    logger.debug(" setattr: name=" + w_prefix + 'wording' + "; val= "
+                 + new_wording + "\n")
+    setattr(arg, w_prefix + 'wording', new_wording)
 
 
 def extract_formatting_tags_from(s: str):
@@ -458,10 +504,26 @@ def extract_formatting_tags_from(s: str):
     :param s: the sentence where to look for {tags}.
     """
     return [w[1:-1] for w in s.split() if is_wrapped(w)] \
-        + [w[1:-2] for w in s.split() if is_wrapped_P(w)]
+        + [w[1:-2] for w in s.split() if is_wrapped_P(w)] \
+        + [w[2:-2] for w in s.split() if is_wrapped(w, extra_braces='()')] \
+        + [w[2:-3] for w in s.split() if is_wrapped_P(w, extra_braces='()')] \
+        + [w[2:-2] for w in s.split() if is_wrapped(w, extra_braces='[]')] \
+        + [w[2:-3] for w in s.split() if is_wrapped_P(w, extra_braces='[]')]
 
 
-def setup_wording_format_of(w_object: object):
+def wrap_latex_keywords(s: str) -> str:
+    """
+    Replace some {kw} by {{kw}}, to prevent format() from using them as keys.
+    """
+    # First, we replace the {numbers} by {{numbers}}
+    p = re.compile(r'{(\d{1,}\.?\,?\d*)}', re.LOCALE)
+    s = p.sub(r'{{\1}}', s)
+    for w in ['multicols', 'tabular', 'tikzpicture', '\centering']:
+        s = s.replace('{' + w + '}', '{{' + w + '}}')
+    return s
+
+
+def setup_wording_format_of(w_object: object, w_prefix=''):
     r"""
     Set w_object's attributes according to the tags found in w_object.wording.
 
@@ -490,23 +552,32 @@ def setup_wording_format_of(w_object: object):
 
     w_object.hint will be set with: 'cm'
 
+    If w_prefix is set, the "wording" processed attributes will be
+    w_object.<prefix>wording and w_object.<prefix>wording_format. This allows
+    to process several different wordings.
+
     :param w_object: The object having a 'wording' attribute to process.
+    :param w_prefix: The possible prefix of the "wording" attributes to
+    process.
     """
     logger = settings.dbg_logger.getChild('wording.setup_wording_format_of')
-    logger.debug("---- NEW RAW WORDING\n" + str(w_object.wording) + "\n")
-    w_object.wording, hint = cut_off_hint_from(w_object.wording)
+    w_object_wording = getattr(w_object, w_prefix + 'wording')
+    logger.debug("---- NEW RAW WORDING\n" + str(w_object_wording) + "\n")
+    w_object_wording, hint = cut_off_hint_from(w_object_wording)
+    setattr(w_object, w_prefix + 'wording', w_object_wording)
     logger.debug("---- same wording, but hintless:\n"
-                 + str(w_object.wording) + "\n")
+                 + str(w_object_wording) + "\n")
     logger.debug("---- the hint is:\n" + str(hint) + "\n")
-    w_object.wording, attr_dict = process_attr_values(w_object.wording)
+    w_object_wording, attr_dict = process_attr_values(w_object_wording)
+    setattr(w_object, w_prefix + 'wording', w_object_wording)
     logger.debug("---- same wording, but {k=v} have been processed:\n"
-                 + str(w_object.wording) + "\n")
+                 + str(w_object_wording) + "\n")
     for key in attr_dict:
         setattr(w_object, key, attr_dict[key])
-    handle_valueless_names_tags(w_object, w_object.wording)
-    handle_valueless_unit_tags(w_object, w_object.wording)
+    handle_valueless_names_tags(w_object, w_object_wording)
+    handle_valueless_unit_tags(w_object, w_object_wording)
     logger.debug("---- same wording, but {valueless_units} "
-                 "have been processed:\n" + str(w_object.wording) + "\n")
+                 "have been processed:\n" + str(w_object_wording) + "\n")
     if hint.startswith('area_unit') or hint.startswith('volume_unit'):
         unit_kind, unit_id = hint.split(sep="_")
         if hasattr(w_object, 'length_' + unit_id):
@@ -517,6 +588,7 @@ def setup_wording_format_of(w_object: object):
                                          "been defined already.")
 
     merge_nb_unit_pairs(w_object)
+    w_object_wording = getattr(w_object, w_prefix + 'wording')
 
     for attr in vars(w_object):
         logger.debug("attr: " + str(attr) + "\n")
@@ -533,10 +605,14 @@ def setup_wording_format_of(w_object: object):
                     Unit(getattr(w_object, attr), exponent=n)
                     .into_str(display_SI_unit=True))
 
-    setattr(w_object, 'wording_format', {})
-    for attr in extract_formatting_tags_from(w_object.wording):
+    w_object_wording_format = {}
+    for attr in extract_formatting_tags_from(w_object_wording):
         logger.debug("Found attr: " + attr + "\n")
-        w_object.wording_format.update({attr: getattr(w_object, attr)})
+        w_object_wording_format.update({attr: getattr(w_object, attr)})
+    setattr(w_object, w_prefix + 'wording_format', w_object_wording_format)
+
+    setattr(w_object, w_prefix + 'wording',
+            wrap_latex_keywords(w_object_wording))
 
     # If the extracted hint refers to another attribute of the question,
     # then this attribute's content will be put in self.hint, otherwise
