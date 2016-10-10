@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-10-03 16:47+0100\n"
+"PO-Revision-Date: 2016-10-10 16:00+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -1515,7 +1515,7 @@ msgstr "Calcul littéral: développement \"simple\""
 msgid "To include .eps pictures (loads graphicx)"
 msgstr "Pour inclure des images .eps (charge aussi graphicx)"
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:311
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:350
 #, python-brace-format
 msgid ""
 "The drawn figure is out of shape. {newline} The lengths are given in "
@@ -1526,7 +1526,7 @@ msgstr ""
 "données en {length_unit}. {newline} ({line1}) et ({line2}) sont parallèles. "
 "{newline} {newline} Calculer {length1_name}."
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:318
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:357
 #, python-brace-format
 msgid ""
 "The drawn figure is out of shape. {newline} The lengths are given in "
@@ -1537,17 +1537,17 @@ msgstr ""
 "données en {length_unit}. {newline} ({line1}) et ({line2}) sont parallèles. "
 "{newline} {newline} Calculer {length1_name} et {length2_name}."
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:341
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:432
 #, python-brace-format
 msgid "hence: {resolution0} "
 msgstr "donc : {resolution0} "
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:351
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:443
 #, python-brace-format
 msgid "and: {resolution1} "
 msgstr "et : {resolution1} "
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:354
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:488
 #, python-brace-format
 msgid ""
 "As: {line1} {parallel_to} {line2}, {point0_name} {belongs_to} "
@@ -1558,6 +1558,16 @@ msgstr ""
 "{point0_name} {belongs_to} [{side0_length_name}] {newline} {point1_name} "
 "{belongs_to} [{side1_length_name}]  {newline} Donc d'après le théorème de "
 "Thalès : {newline} {ratios} donc : {ratios_substituted} "
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:484
+#, python-brace-format
+msgid "so: {chunk_reso1} "
+msgstr "donc : {chunk_reso1} "
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:465
+#, python-brace-format
+msgid "so: {chunk_reso0} "
+msgstr "donc : {chunk_reso0} "
 
 #~ msgid "Mental calculation: perimeters of simple polygons"
 #~ msgstr "Calcul mental : périmètres de polygones simples"

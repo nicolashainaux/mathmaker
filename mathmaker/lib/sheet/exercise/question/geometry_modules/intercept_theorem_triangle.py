@@ -462,7 +462,7 @@ class sub_object(submodule.structure):
                         decimal_result=2,
                         unit=self.length_unit,
                         underline_result=True)
-                chunks_part += 'so: {chunk_reso0} '
+                chunks_part += _('so: {chunk_reso0} ')
             if len(chunks_to_calculate) == 2:
                 chunk_equality1 = SubstitutableEquality(
                     [Item(chunks_to_calculate[1]),

@@ -1415,7 +1415,7 @@ msgstr ""
 msgid "To include .eps pictures (loads graphicx)"
 msgstr ""
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:311
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:350
 #, python-brace-format
 msgid ""
 "The drawn figure is out of shape. {newline} The lengths are given in "
@@ -1423,7 +1423,7 @@ msgid ""
 "{newline} Determine the length of {length1_name}."
 msgstr ""
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:318
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:357
 #, python-brace-format
 msgid ""
 "The drawn figure is out of shape. {newline} The lengths are given in "
@@ -1431,20 +1431,30 @@ msgid ""
 "{newline} Determine the lengths of {length1_name} and {length2_name}."
 msgstr ""
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:341
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:432
 #, python-brace-format
 msgid "hence: {resolution0} "
 msgstr ""
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:351
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:443
 #, python-brace-format
 msgid "and: {resolution1} "
 msgstr ""
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:354
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:488
 #, python-brace-format
 msgid ""
 "As: {line1} {parallel_to} {line2}, {point0_name} {belongs_to} "
 "{side0_length_name} and {point1_name} {belongs_to} {side1_length_name}, then"
 " by the intercept theorem: {newline} {ratios} thus: {ratios_substituted} "
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:484
+#, python-brace-format
+msgid "so: {chunk_reso1} "
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:465
+#, python-brace-format
+msgid "so: {chunk_reso0} "
 msgstr ""
