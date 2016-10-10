@@ -25,7 +25,7 @@
 ##
 # @package core.geometry
 # @brief Mathematical geometrical objects.
-import sys
+
 import math
 import copy
 from decimal import Decimal, ROUND_HALF_UP
@@ -687,8 +687,6 @@ class Triangle(Polygon):
 
             rotate_around_isobarycenter = \
                 options.get('rotate_around_isobarycenter', 'no')
-            sys.stderr.write('\n>>> {}\n'
-                             .format(str(rotate_around_isobarycenter)))
             if construction_data == 'sketch':
                 rotate_around_isobarycenter = 'randomly'
                 side0_length = Decimal(str(randomly.integer(35, 55))) / 10
