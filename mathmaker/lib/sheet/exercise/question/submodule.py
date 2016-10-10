@@ -188,6 +188,8 @@ class structure(object):
                                              "provided.")
             points_names = rotate(next(shared.five_letters_words_source),
                                   random.choice(range(5)))
+            alpha, beta = next(shared.angle_ranges_source)
+            rotation_angle = alpha + random.choice(range(beta - alpha))
             self.figure = InterceptTheoremConfiguration(
                 points_names=points_names,
                 build_ratio=random.choice(range(25, 75)) / 100,
@@ -197,7 +199,7 @@ class structure(object):
                                   str(random.choice(range(45, 120)))),
                                   'side1': Decimal(
                                   str(random.choice(range(20, 60)) / 10))},
-                rotate_around_isobarycenter=random.choice(range(0, 360)))
+                rotate_around_isobarycenter=rotation_angle)
 
             self.figure.set_lengths([self.nb2, self.nb3, self.nb4],
                                     Value(self.nb1))
