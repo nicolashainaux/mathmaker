@@ -1,0 +1,1218 @@
+# MATHMAKER TEMPLATE PO FILE.
+# Copyright (C) 2006-2016 Nicolas Hainaux
+# This file is distributed under the same license as the mathmaker package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mathmaker 0.7.1\n"
+"Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
+"POT-Creation-Date: 2016-03-18 18:44+0100\n"
+"PO-Revision-Date: 2016-10-10 14:09+0100\n"
+"Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
+"Language-Team: <nh.techn@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_US\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: data/w5l/w5l.xml:8
+msgid "FIVE_LETTERS_WORD_003"
+msgstr "DAILY"
+
+#: data/w5l/w5l.xml:111
+msgid "FIVE_LETTERS_WORD_106"
+msgstr "DECOY"
+
+#: data/w5l/w5l.xml:13
+msgid "FIVE_LETTERS_WORD_008"
+msgstr "DELTA"
+
+#: data/w5l/w5l.xml:297
+msgid "FIVE_LETTERS_WORD_292"
+msgstr "ABOVE"
+
+#: data/w5l/w5l.xml:265
+msgid "FIVE_LETTERS_WORD_260"
+msgstr "ACORN"
+
+#: data/w5l/w5l.xml:89
+msgid "FIVE_LETTERS_WORD_084"
+msgstr "ACTOR"
+
+#: data/w5l/w5l.xml:14
+msgid "FIVE_LETTERS_WORD_009"
+msgstr "DEPTH"
+
+#: data/w5l/w5l.xml:244
+msgid "FIVE_LETTERS_WORD_239"
+msgstr "AZURE"
+
+#: data/w5l/w5l.xml:68
+msgid "FIVE_LETTERS_WORD_063"
+msgstr "ACUTE"
+
+#: data/w5l/w5l.xml:187
+msgid "FIVE_LETTERS_WORD_182"
+msgstr "DIRTY"
+
+#: data/w5l/w5l.xml:291
+msgid "FIVE_LETTERS_WORD_286"
+msgstr "DISCO"
+
+#: data/w5l/w5l.xml:207
+msgid "FIVE_LETTERS_WORD_202"
+msgstr "ADIOS"
+
+#: data/w5l/w5l.xml:80
+msgid "FIVE_LETTERS_WORD_075"
+msgstr "DOILY"
+
+#: data/w5l/w5l.xml:168
+msgid "FIVE_LETTERS_WORD_163"
+msgstr "AUDIO"
+
+#: data/w5l/w5l.xml:191
+msgid "FIVE_LETTERS_WORD_186"
+msgstr "DOLCE"
+
+#: data/w5l/w5l.xml:95
+msgid "FIVE_LETTERS_WORD_090"
+msgstr "DOZEN"
+
+#: data/w5l/w5l.xml:205
+msgid "FIVE_LETTERS_WORD_200"
+msgstr "DRAFT"
+
+#: data/w5l/w5l.xml:33
+msgid "FIVE_LETTERS_WORD_028"
+msgstr "DRINK"
+
+#: data/w5l/w5l.xml:81
+msgid "FIVE_LETTERS_WORD_076"
+msgstr "DUSTY"
+
+#: data/w5l/w5l.xml:39
+msgid "FIVE_LETTERS_WORD_034"
+msgstr "ANGLE"
+
+#: data/w5l/w5l.xml:158
+msgid "FIVE_LETTERS_WORD_153"
+msgstr "APHID"
+
+#: data/w5l/w5l.xml:292
+msgid "FIVE_LETTERS_WORD_287"
+msgstr "EARLY"
+
+#: data/w5l/w5l.xml:72
+msgid "FIVE_LETTERS_WORD_067"
+msgstr "AMPLE"
+
+#: data/w5l/w5l.xml:140
+msgid "FIVE_LETTERS_WORD_135"
+msgstr "EARTH"
+
+#: data/w5l/w5l.xml:293
+msgid "FIVE_LETTERS_WORD_288"
+msgstr "ANGEL"
+
+#: data/w5l/w5l.xml:60
+msgid "FIVE_LETTERS_WORD_055"
+msgstr "AMIGO"
+
+#: data/w5l/w5l.xml:75
+msgid "FIVE_LETTERS_WORD_070"
+msgstr "EIGHT"
+
+#: data/w5l/w5l.xml:29
+msgid "FIVE_LETTERS_WORD_024"
+msgstr "EMPTY"
+
+#: data/w5l/w5l.xml:288
+msgid "FIVE_LETTERS_WORD_283"
+msgstr "AMBER"
+
+#: data/w5l/w5l.xml:132
+msgid "FIVE_LETTERS_WORD_127"
+msgstr "EMAIL"
+
+#: data/w5l/w5l.xml:148
+msgid "FIVE_LETTERS_WORD_143"
+msgstr "ENJOY"
+
+#: data/w5l/w5l.xml:114
+msgid "FIVE_LETTERS_WORD_109"
+msgstr "ALIVE"
+
+#: data/w5l/w5l.xml:204
+msgid "FIVE_LETTERS_WORD_199"
+msgstr "ALONE"
+
+#: data/w5l/w5l.xml:79
+msgid "FIVE_LETTERS_WORD_074"
+msgstr "ALTER"
+
+#: data/w5l/w5l.xml:251
+msgid "FIVE_LETTERS_WORD_246"
+msgstr "ALBUM"
+
+#: data/w5l/w5l.xml:116
+msgid "FIVE_LETTERS_WORD_111"
+msgstr "ALIEN"
+
+#: data/w5l/w5l.xml:242
+msgid "FIVE_LETTERS_WORD_237"
+msgstr "EQUAL"
+
+#: data/w5l/w5l.xml:135
+msgid "FIVE_LETTERS_WORD_130"
+msgstr "AGILE"
+
+#: data/w5l/w5l.xml:86
+msgid "FIVE_LETTERS_WORD_081"
+msgstr "AGLOW"
+
+#: data/w5l/w5l.xml:302
+msgid "FIVE_LETTERS_WORD_297"
+msgstr "BACON"
+
+#: data/w5l/w5l.xml:40
+msgid "FIVE_LETTERS_WORD_035"
+msgstr "BADGE"
+
+#: data/w5l/w5l.xml:239
+msgid "FIVE_LETTERS_WORD_234"
+msgstr "ETHIC"
+
+#: data/w5l/w5l.xml:213
+msgid "FIVE_LETTERS_WORD_208"
+msgstr "EXTRA"
+
+#: data/w5l/w5l.xml:88
+msgid "FIVE_LETTERS_WORD_083"
+msgstr "BAKED"
+
+#: data/w5l/w5l.xml:94
+msgid "FIVE_LETTERS_WORD_089"
+msgstr "FABLE"
+
+#: data/w5l/w5l.xml:266
+msgid "FIVE_LETTERS_WORD_261"
+msgstr "BANCO"
+
+#: data/w5l/w5l.xml:105
+msgid "FIVE_LETTERS_WORD_100"
+msgstr "BANJO"
+
+#: data/w5l/w5l.xml:217
+msgid "FIVE_LETTERS_WORD_212"
+msgstr "FAIRY"
+
+#: data/w5l/w5l.xml:164
+msgid "FIVE_LETTERS_WORD_159"
+msgstr "BASIC"
+
+#: data/w5l/w5l.xml:59
+msgid "FIVE_LETTERS_WORD_054"
+msgstr "FAKED"
+
+#: data/w5l/w5l.xml:301
+msgid "FIVE_LETTERS_WORD_296"
+msgstr "BAYOU"
+
+#: data/w5l/w5l.xml:117
+msgid "FIVE_LETTERS_WORD_112"
+msgstr "FAKIR"
+
+#: data/w5l/w5l.xml:63
+msgid "FIVE_LETTERS_WORD_058"
+msgstr "FALSE"
+
+#: data/w5l/w5l.xml:120
+msgid "FIVE_LETTERS_WORD_115"
+msgstr "FINCH"
+
+#: data/w5l/w5l.xml:236
+msgid "FIVE_LETTERS_WORD_231"
+msgstr "FJORD"
+
+#: data/w5l/w5l.xml:100
+msgid "FIVE_LETTERS_WORD_095"
+msgstr "BELOW"
+
+#: data/w5l/w5l.xml:153
+msgid "FIVE_LETTERS_WORD_148"
+msgstr "BENTO"
+
+#: data/w5l/w5l.xml:163
+msgid "FIVE_LETTERS_WORD_158"
+msgstr "BERYL"
+
+#: data/w5l/w5l.xml:155
+msgid "FIVE_LETTERS_WORD_150"
+msgstr "FLAKE"
+
+#: data/w5l/w5l.xml:254
+msgid "FIVE_LETTERS_WORD_249"
+msgstr "BINGO"
+
+#: data/w5l/w5l.xml:143
+msgid "FIVE_LETTERS_WORD_138"
+msgstr "FREAK"
+
+#: data/w5l/w5l.xml:97
+msgid "FIVE_LETTERS_WORD_092"
+msgstr "BIRTH"
+
+#: data/w5l/w5l.xml:152
+msgid "FIVE_LETTERS_WORD_147"
+msgstr "FRESH"
+
+#: data/w5l/w5l.xml:103
+msgid "FIVE_LETTERS_WORD_098"
+msgstr "FROST"
+
+#: data/w5l/w5l.xml:65
+msgid "FIVE_LETTERS_WORD_060"
+msgstr "BEACH"
+
+#: data/w5l/w5l.xml:87
+msgid "FIVE_LETTERS_WORD_082"
+msgstr "FUNKY"
+
+#: data/w5l/w5l.xml:214
+msgid "FIVE_LETTERS_WORD_209"
+msgstr "BLAZE"
+
+#: data/w5l/w5l.xml:208
+msgid "FIVE_LETTERS_WORD_203"
+msgstr "GUILE"
+
+#: data/w5l/w5l.xml:157
+msgid "FIVE_LETTERS_WORD_152"
+msgstr "BLINK"
+
+#: data/w5l/w5l.xml:142
+msgid "FIVE_LETTERS_WORD_137"
+msgstr "BLOND"
+
+#: data/w5l/w5l.xml:195
+msgid "FIVE_LETTERS_WORD_190"
+msgstr "BLOWN"
+
+#: data/w5l/w5l.xml:11
+msgid "FIVE_LETTERS_WORD_006"
+msgstr "BLUET"
+
+#: data/w5l/w5l.xml:193
+msgid "FIVE_LETTERS_WORD_188"
+msgstr "BLUSH"
+
+#: data/w5l/w5l.xml:129
+msgid "FIVE_LETTERS_WORD_124"
+msgstr "BOARD"
+
+#: data/w5l/w5l.xml:83
+msgid "FIVE_LETTERS_WORD_078"
+msgstr "BOAST"
+
+#: data/w5l/w5l.xml:223
+msgid "FIVE_LETTERS_WORD_218"
+msgstr "BOGUS"
+
+#: data/w5l/w5l.xml:122
+msgid "FIVE_LETTERS_WORD_117"
+msgstr "BONUS"
+
+#: data/w5l/w5l.xml:260
+msgid "FIVE_LETTERS_WORD_255"
+msgstr "GUTSY"
+
+#: data/w5l/w5l.xml:286
+msgid "FIVE_LETTERS_WORD_281"
+msgstr "BRAVO"
+
+#: data/w5l/w5l.xml:196
+msgid "FIVE_LETTERS_WORD_191"
+msgstr "BREAD"
+
+#: data/w5l/w5l.xml:25
+msgid "FIVE_LETTERS_WORD_020"
+msgstr "BROKE"
+
+#: data/w5l/w5l.xml:295
+msgid "FIVE_LETTERS_WORD_290"
+msgstr "BROTH"
+
+#: data/w5l/w5l.xml:31
+msgid "FIVE_LETTERS_WORD_026"
+msgstr "BROWN"
+
+#: data/w5l/w5l.xml:268
+msgid "FIVE_LETTERS_WORD_263"
+msgstr "BRUIN"
+
+#: data/w5l/w5l.xml:154
+msgid "FIVE_LETTERS_WORD_149"
+msgstr "BRUME"
+
+#: data/w5l/w5l.xml:230
+msgid "FIVE_LETTERS_WORD_225"
+msgstr "BRUTE"
+
+#: data/w5l/w5l.xml:144
+msgid "FIVE_LETTERS_WORD_139"
+msgstr "GUIDE"
+
+#: data/w5l/w5l.xml:43
+msgid "FIVE_LETTERS_WORD_038"
+msgstr "BUMPY"
+
+#: data/w5l/w5l.xml:201
+msgid "FIVE_LETTERS_WORD_196"
+msgstr "BUILT"
+
+#: data/w5l/w5l.xml:50
+msgid "FIVE_LETTERS_WORD_045"
+msgstr "BULGE"
+
+#: data/w5l/w5l.xml:224
+msgid "FIVE_LETTERS_WORD_219"
+msgstr "CABLE"
+
+#: data/w5l/w5l.xml:162
+msgid "FIVE_LETTERS_WORD_157"
+msgstr "CAIRN"
+
+#: data/w5l/w5l.xml:149
+msgid "FIVE_LETTERS_WORD_144"
+msgstr "CAJUN"
+
+#: data/w5l/w5l.xml:10
+msgid "FIVE_LETTERS_WORD_005"
+msgstr "CAMEL"
+
+#: data/w5l/w5l.xml:225
+msgid "FIVE_LETTERS_WORD_220"
+msgstr "CANDY"
+
+#: data/w5l/w5l.xml:7
+msgid "FIVE_LETTERS_WORD_002"
+msgstr "CANOE"
+
+#: data/w5l/w5l.xml:151
+msgid "FIVE_LETTERS_WORD_146"
+msgstr "CARGO"
+
+#: data/w5l/w5l.xml:136
+msgid "FIVE_LETTERS_WORD_131"
+msgstr "CHAIN"
+
+#: data/w5l/w5l.xml:280
+msgid "FIVE_LETTERS_WORD_275"
+msgstr "CHAIR"
+
+#: data/w5l/w5l.xml:55
+msgid "FIVE_LETTERS_WORD_050"
+msgstr "CHALK"
+
+#: data/w5l/w5l.xml:285
+msgid "FIVE_LETTERS_WORD_280"
+msgstr "CHAOS"
+
+#: data/w5l/w5l.xml:181
+msgid "FIVE_LETTERS_WORD_176"
+msgstr "CHEAP"
+
+#: data/w5l/w5l.xml:282
+msgid "FIVE_LETTERS_WORD_277"
+msgstr "CHEAT"
+
+#: data/w5l/w5l.xml:222
+msgid "FIVE_LETTERS_WORD_217"
+msgstr "CHILD"
+
+#: data/w5l/w5l.xml:272
+msgid "FIVE_LETTERS_WORD_267"
+msgstr "CHIMP"
+
+#: data/w5l/w5l.xml:290
+msgid "FIVE_LETTERS_WORD_285"
+msgstr "CHORD"
+
+#: data/w5l/w5l.xml:118
+msgid "FIVE_LETTERS_WORD_113"
+msgstr "CHUNK"
+
+#: data/w5l/w5l.xml:203
+msgid "FIVE_LETTERS_WORD_198"
+msgstr "CLEAN"
+
+#: data/w5l/w5l.xml:146
+msgid "FIVE_LETTERS_WORD_141"
+msgstr "CLEAR"
+
+#: data/w5l/w5l.xml:172
+msgid "FIVE_LETTERS_WORD_167"
+msgstr "CLOAK"
+
+#: data/w5l/w5l.xml:66
+msgid "FIVE_LETTERS_WORD_061"
+msgstr "CLONE"
+
+#: data/w5l/w5l.xml:174
+msgid "FIVE_LETTERS_WORD_169"
+msgstr "CLOTH"
+
+#: data/w5l/w5l.xml:245
+msgid "FIVE_LETTERS_WORD_240"
+msgstr "CLOUD"
+
+#: data/w5l/w5l.xml:77
+msgid "FIVE_LETTERS_WORD_072"
+msgstr "CLOWN"
+
+#: data/w5l/w5l.xml:235
+msgid "FIVE_LETTERS_WORD_230"
+msgstr "COMFY"
+
+#: data/w5l/w5l.xml:38
+msgid "FIVE_LETTERS_WORD_033"
+msgstr "CONEY"
+
+#: data/w5l/w5l.xml:34
+msgid "FIVE_LETTERS_WORD_029"
+msgstr "CRAZY"
+
+#: data/w5l/w5l.xml:90
+msgid "FIVE_LETTERS_WORD_085"
+msgstr "CROWN"
+
+#: data/w5l/w5l.xml:21
+msgid "FIVE_LETTERS_WORD_016"
+msgstr "CRUEL"
+
+#: data/w5l/w5l.xml:257
+msgid "FIVE_LETTERS_WORD_252"
+msgstr "CRUMB"
+
+#: data/w5l/w5l.xml:186
+msgid "FIVE_LETTERS_WORD_181"
+msgstr "CURLY"
+
+#: data/w5l/w5l.xml:121
+msgid "FIVE_LETTERS_WORD_116"
+msgstr "CUSHY"
+
+#: data/w5l/w5l.xml:108
+msgid "FIVE_LETTERS_WORD_103"
+msgstr "CURVY"
+
+#: data/w5l/w5l.xml:26
+msgid "FIVE_LETTERS_WORD_021"
+msgstr "GUEST"
+
+#: data/w5l/w5l.xml:70
+msgid "FIVE_LETTERS_WORD_065"
+msgstr "GRUMP"
+
+#: data/w5l/w5l.xml:6
+msgid "FIVE_LETTERS_WORD_001"
+msgstr "GROVE"
+
+#: data/w5l/w5l.xml:19
+msgid "FIVE_LETTERS_WORD_014"
+msgstr "GAUDY"
+
+#: data/w5l/w5l.xml:113
+msgid "FIVE_LETTERS_WORD_108"
+msgstr "GECKO"
+
+#: data/w5l/w5l.xml:274
+msgid "FIVE_LETTERS_WORD_269"
+msgstr "GHOST"
+
+#: data/w5l/w5l.xml:198
+msgid "FIVE_LETTERS_WORD_193"
+msgstr "GLUON"
+
+#: data/w5l/w5l.xml:133
+msgid "FIVE_LETTERS_WORD_128"
+msgstr "GNOME"
+
+#: data/w5l/w5l.xml:294
+msgid "FIVE_LETTERS_WORD_289"
+msgstr "GRAPE"
+
+#: data/w5l/w5l.xml:218
+msgid "FIVE_LETTERS_WORD_213"
+msgstr "HOGAN"
+
+#: data/w5l/w5l.xml:115
+msgid "FIVE_LETTERS_WORD_110"
+msgstr "HAIKU"
+
+#: data/w5l/w5l.xml:17
+msgid "FIVE_LETTERS_WORD_012"
+msgstr "HANDY"
+
+#: data/w5l/w5l.xml:138
+msgid "FIVE_LETTERS_WORD_133"
+msgstr "HASTY"
+
+#: data/w5l/w5l.xml:189
+msgid "FIVE_LETTERS_WORD_184"
+msgstr "HEART"
+
+#: data/w5l/w5l.xml:22
+msgid "FIVE_LETTERS_WORD_017"
+msgstr "HEAVY"
+
+#: data/w5l/w5l.xml:127
+msgid "FIVE_LETTERS_WORD_122"
+msgstr "HERON"
+
+#: data/w5l/w5l.xml:145
+msgid "FIVE_LETTERS_WORD_140"
+msgstr "HONEY"
+
+#: data/w5l/w5l.xml:9
+msgid "FIVE_LETTERS_WORD_004"
+msgstr "HORSE"
+
+#: data/w5l/w5l.xml:238
+msgid "FIVE_LETTERS_WORD_233"
+msgstr "HOUSE"
+
+#: data/w5l/w5l.xml:278
+msgid "FIVE_LETTERS_WORD_273"
+msgstr "IDEAL"
+
+#: data/w5l/w5l.xml:74
+msgid "FIVE_LETTERS_WORD_069"
+msgstr "IMAGE"
+
+#: data/w5l/w5l.xml:279
+msgid "FIVE_LETTERS_WORD_274"
+msgstr "IRONY"
+
+#: data/w5l/w5l.xml:91
+msgid "FIVE_LETTERS_WORD_086"
+msgstr "ITCHY"
+
+#: data/w5l/w5l.xml:96
+msgid "FIVE_LETTERS_WORD_091"
+msgstr "IVORY"
+
+#: data/w5l/w5l.xml:16
+msgid "FIVE_LETTERS_WORD_011"
+msgstr "JUDGE"
+
+#: data/w5l/w5l.xml:131
+msgid "FIVE_LETTERS_WORD_126"
+msgstr "JUICY"
+
+#: data/w5l/w5l.xml:255
+msgid "FIVE_LETTERS_WORD_250"
+msgstr "KENDO"
+
+#: data/w5l/w5l.xml:281
+msgid "FIVE_LETTERS_WORD_276"
+msgstr "LARGE"
+
+#: data/w5l/w5l.xml:104
+msgid "FIVE_LETTERS_WORD_099"
+msgstr "LEMON"
+
+#: data/w5l/w5l.xml:141
+msgid "FIVE_LETTERS_WORD_136"
+msgstr "LIGHT"
+
+#: data/w5l/w5l.xml:177
+msgid "FIVE_LETTERS_WORD_172"
+msgstr "LOGIC"
+
+#: data/w5l/w5l.xml:101
+msgid "FIVE_LETTERS_WORD_096"
+msgstr "LOTUS"
+
+#: data/w5l/w5l.xml:61
+msgid "FIVE_LETTERS_WORD_056"
+msgstr "MAGIC"
+
+#: data/w5l/w5l.xml:134
+msgid "FIVE_LETTERS_WORD_129"
+msgstr "MANGO"
+
+#: data/w5l/w5l.xml:106
+msgid "FIVE_LETTERS_WORD_101"
+msgstr "MAPLE"
+
+#: data/w5l/w5l.xml:49
+msgid "FIVE_LETTERS_WORD_044"
+msgstr "MELON"
+
+#: data/w5l/w5l.xml:229
+msgid "FIVE_LETTERS_WORD_224"
+msgstr "MINUS"
+
+#: data/w5l/w5l.xml:85
+msgid "FIVE_LETTERS_WORD_080"
+msgstr "MISTY"
+
+#: data/w5l/w5l.xml:20
+msgid "FIVE_LETTERS_WORD_015"
+msgstr "MUSIC"
+
+#: data/w5l/w5l.xml:170
+msgid "FIVE_LETTERS_WORD_165"
+msgstr "NACHO"
+
+#: data/w5l/w5l.xml:303
+msgid "FIVE_LETTERS_WORD_298"
+msgstr "NIFTY"
+
+#: data/w5l/w5l.xml:171
+msgid "FIVE_LETTERS_WORD_166"
+msgstr "NIGHT"
+
+#: data/w5l/w5l.xml:262
+msgid "FIVE_LETTERS_WORD_257"
+msgstr "NORTH"
+
+#: data/w5l/w5l.xml:23
+msgid "FIVE_LETTERS_WORD_018"
+msgstr "OAKEN"
+
+#: data/w5l/w5l.xml:128
+msgid "FIVE_LETTERS_WORD_123"
+msgstr "OCEAN"
+
+#: data/w5l/w5l.xml:51
+msgid "FIVE_LETTERS_WORD_046"
+msgstr "OKAPI"
+
+#: data/w5l/w5l.xml:197
+msgid "FIVE_LETTERS_WORD_192"
+msgstr "OLIVE"
+
+#: data/w5l/w5l.xml:102
+msgid "FIVE_LETTERS_WORD_097"
+msgstr "OMEGA"
+
+#: data/w5l/w5l.xml:93
+msgid "FIVE_LETTERS_WORD_088"
+msgstr "PAUSE"
+
+#: data/w5l/w5l.xml:190
+msgid "FIVE_LETTERS_WORD_185"
+msgstr "PEACH"
+
+#: data/w5l/w5l.xml:299
+msgid "FIVE_LETTERS_WORD_294"
+msgstr "PEARL"
+
+#: data/w5l/w5l.xml:237
+msgid "FIVE_LETTERS_WORD_232"
+msgstr "PIANO"
+
+#: data/w5l/w5l.xml:247
+msgid "FIVE_LETTERS_WORD_242"
+msgstr "PIXEL"
+
+#: data/w5l/w5l.xml:112
+msgid "FIVE_LETTERS_WORD_107"
+msgstr "PLUSH"
+
+#: data/w5l/w5l.xml:167
+msgid "FIVE_LETTERS_WORD_162"
+msgstr "POESY"
+
+#: data/w5l/w5l.xml:243
+msgid "FIVE_LETTERS_WORD_238"
+msgstr "POLKA"
+
+#: data/w5l/w5l.xml:289
+msgid "FIVE_LETTERS_WORD_284"
+msgstr "PRUNE"
+
+#: data/w5l/w5l.xml:252
+msgid "FIVE_LETTERS_WORD_247"
+msgstr "QUACK"
+
+#: data/w5l/w5l.xml:165
+msgid "FIVE_LETTERS_WORD_160"
+msgstr "QUAIL"
+
+#: data/w5l/w5l.xml:261
+msgid "FIVE_LETTERS_WORD_256"
+msgstr "QUARK"
+
+#: data/w5l/w5l.xml:277
+msgid "FIVE_LETTERS_WORD_272"
+msgstr "QUEST"
+
+#: data/w5l/w5l.xml:215
+msgid "FIVE_LETTERS_WORD_210"
+msgstr "QUICK"
+
+#: data/w5l/w5l.xml:126
+msgid "FIVE_LETTERS_WORD_121"
+msgstr "QUIET"
+
+#: data/w5l/w5l.xml:231
+msgid "FIVE_LETTERS_WORD_226"
+msgstr "QUIRK"
+
+#: data/w5l/w5l.xml:194
+msgid "FIVE_LETTERS_WORD_189"
+msgstr "RADIO"
+
+#: data/w5l/w5l.xml:57
+msgid "FIVE_LETTERS_WORD_052"
+msgstr "RAINY"
+
+#: data/w5l/w5l.xml:147
+msgid "FIVE_LETTERS_WORD_142"
+msgstr "RAVEN"
+
+#: data/w5l/w5l.xml:248
+msgid "FIVE_LETTERS_WORD_243"
+msgstr "READY"
+
+#: data/w5l/w5l.xml:273
+msgid "FIVE_LETTERS_WORD_268"
+msgstr "REALM"
+
+#: data/w5l/w5l.xml:99
+msgid "FIVE_LETTERS_WORD_094"
+msgstr "RELAX"
+
+#: data/w5l/w5l.xml:159
+msgid "FIVE_LETTERS_WORD_154"
+msgstr "RUGBY"
+
+#: data/w5l/w5l.xml:284
+msgid "FIVE_LETTERS_WORD_279"
+msgstr "RUSTY"
+
+#: data/w5l/w5l.xml:64
+msgid "FIVE_LETTERS_WORD_059"
+msgstr "SABER"
+
+#: data/w5l/w5l.xml:161
+msgid "FIVE_LETTERS_WORD_156"
+msgstr "SALTY"
+
+#: data/w5l/w5l.xml:27
+msgid "FIVE_LETTERS_WORD_022"
+msgstr "SATIN"
+
+#: data/w5l/w5l.xml:42
+msgid "FIVE_LETTERS_WORD_037"
+msgstr "SCONE"
+
+#: data/w5l/w5l.xml:233
+msgid "FIVE_LETTERS_WORD_228"
+msgstr "SHARK"
+
+#: data/w5l/w5l.xml:228
+msgid "FIVE_LETTERS_WORD_223"
+msgstr "SHINY"
+
+#: data/w5l/w5l.xml:267
+msgid "FIVE_LETTERS_WORD_262"
+msgstr "SIREN"
+
+#: data/w5l/w5l.xml:178
+msgid "FIVE_LETTERS_WORD_173"
+msgstr "SIXTY"
+
+#: data/w5l/w5l.xml:192
+msgid "FIVE_LETTERS_WORD_187"
+msgstr "SKATE"
+
+#: data/w5l/w5l.xml:240
+msgid "FIVE_LETTERS_WORD_235"
+msgstr "SMART"
+
+#: data/w5l/w5l.xml:53
+msgid "FIVE_LETTERS_WORD_048"
+msgstr "SMILE"
+
+#: data/w5l/w5l.xml:173
+msgid "FIVE_LETTERS_WORD_168"
+msgstr "SNAIL"
+
+#: data/w5l/w5l.xml:41
+msgid "FIVE_LETTERS_WORD_036"
+msgstr "SOUTH"
+
+#: data/w5l/w5l.xml:182
+msgid "FIVE_LETTERS_WORD_177"
+msgstr "SPACE"
+
+#: data/w5l/w5l.xml:30
+msgid "FIVE_LETTERS_WORD_025"
+msgstr "SPICY"
+
+#: data/w5l/w5l.xml:298
+msgid "FIVE_LETTERS_WORD_293"
+msgstr "SPORT"
+
+#: data/w5l/w5l.xml:256
+msgid "FIVE_LETTERS_WORD_251"
+msgstr "SQUIB"
+
+#: data/w5l/w5l.xml:71
+msgid "FIVE_LETTERS_WORD_066"
+msgstr "SQUID"
+
+#: data/w5l/w5l.xml:46
+msgid "FIVE_LETTERS_WORD_041"
+msgstr "STEAM"
+
+#: data/w5l/w5l.xml:156
+msgid "FIVE_LETTERS_WORD_151"
+msgstr "STONE"
+
+#: data/w5l/w5l.xml:264
+msgid "FIVE_LETTERS_WORD_259"
+msgstr "STORY"
+
+#: data/w5l/w5l.xml:15
+msgid "FIVE_LETTERS_WORD_010"
+msgstr "STOVE"
+
+#: data/w5l/w5l.xml:283
+msgid "FIVE_LETTERS_WORD_278"
+msgstr "SUGAR"
+
+#: data/w5l/w5l.xml:258
+msgid "FIVE_LETTERS_WORD_253"
+msgstr "SULKY"
+
+#: data/w5l/w5l.xml:160
+msgid "FIVE_LETTERS_WORD_155"
+msgstr "SWIFT"
+
+#: data/w5l/w5l.xml:109
+msgid "FIVE_LETTERS_WORD_104"
+msgstr "SWORD"
+
+#: data/w5l/w5l.xml:139
+msgid "FIVE_LETTERS_WORD_134"
+msgstr "TANGO"
+
+#: data/w5l/w5l.xml:37
+msgid "FIVE_LETTERS_WORD_032"
+msgstr "THICK"
+
+#: data/w5l/w5l.xml:234
+msgid "FIVE_LETTERS_WORD_229"
+msgstr "THIEF"
+
+#: data/w5l/w5l.xml:82
+msgid "FIVE_LETTERS_WORD_077"
+msgstr "THING"
+
+#: data/w5l/w5l.xml:275
+msgid "FIVE_LETTERS_WORD_270"
+msgstr "THIRD"
+
+#: data/w5l/w5l.xml:287
+msgid "FIVE_LETTERS_WORD_282"
+msgstr "THUMB"
+
+#: data/w5l/w5l.xml:179
+msgid "FIVE_LETTERS_WORD_174"
+msgstr "TULIP"
+
+#: data/w5l/w5l.xml:188
+msgid "FIVE_LETTERS_WORD_183"
+msgstr "TUNED"
+
+#: data/w5l/w5l.xml:210
+msgid "FIVE_LETTERS_WORD_205"
+msgstr "UNBOX"
+
+#: data/w5l/w5l.xml:211
+msgid "FIVE_LETTERS_WORD_206"
+msgstr "UPSET"
+
+#: data/w5l/w5l.xml:270
+msgid "FIVE_LETTERS_WORD_265"
+msgstr "URBAN"
+
+#: data/w5l/w5l.xml:276
+msgid "FIVE_LETTERS_WORD_271"
+msgstr "VIPER"
+
+#: data/w5l/w5l.xml:52
+msgid "FIVE_LETTERS_WORD_047"
+msgstr "VINYL"
+
+#: data/w5l/w5l.xml:48
+msgid "FIVE_LETTERS_WORD_043"
+msgstr "WATER"
+
+#: data/w5l/w5l.xml:209
+msgid "FIVE_LETTERS_WORD_204"
+msgstr "WAXED"
+
+#: data/w5l/w5l.xml:78
+msgid "FIVE_LETTERS_WORD_073"
+msgstr "WEIRD"
+
+#: data/w5l/w5l.xml:47
+msgid "FIVE_LETTERS_WORD_042"
+msgstr "WHITE"
+
+#: data/w5l/w5l.xml:296
+msgid "FIVE_LETTERS_WORD_291"
+msgstr "WORLD"
+
+#: data/w5l/w5l.xml:110
+msgid "FIVE_LETTERS_WORD_105"
+msgstr "WORTH"
+
+#: data/w5l/w5l.xml:206
+msgid "FIVE_LETTERS_WORD_201"
+msgstr "WRECK"
+
+#: data/w5l/w5l.xml:219
+msgid "FIVE_LETTERS_WORD_214"
+msgstr "WRONG"
+
+#: data/w5l/w5l.xml:221
+msgid "FIVE_LETTERS_WORD_216"
+msgstr "YEAST"
+
+#: data/w5l/w5l.xml:62
+msgid "FIVE_LETTERS_WORD_057"
+msgstr "YIKES"
+
+#: data/w5l/w5l.xml:199
+msgid "FIVE_LETTERS_WORD_194"
+msgstr "YODEL"
+
+#: data/w5l/w5l.xml:184
+msgid "FIVE_LETTERS_WORD_179"
+msgstr "YOUNG"
+
+#: data/w5l/w5l.xml:76
+msgid "FIVE_LETTERS_WORD_071"
+msgstr "YOUTH"
+
+#: data/w5l/w5l.xml:54
+msgid "FIVE_LETTERS_WORD_049"
+msgstr "ZEBRA"
+
+#: data/w5l/w5l.xml:249
+msgid "FIVE_LETTERS_WORD_244"
+msgstr ""
+
+#: data/w5l/w5l.xml:67
+msgid "FIVE_LETTERS_WORD_062"
+msgstr ""
+
+#: data/w5l/w5l.xml:58
+msgid "FIVE_LETTERS_WORD_053"
+msgstr ""
+
+#: data/w5l/w5l.xml:18
+msgid "FIVE_LETTERS_WORD_013"
+msgstr ""
+
+#: data/w5l/w5l.xml:202
+msgid "FIVE_LETTERS_WORD_197"
+msgstr ""
+
+#: data/w5l/w5l.xml:32
+msgid "FIVE_LETTERS_WORD_027"
+msgstr ""
+
+#: data/w5l/w5l.xml:124
+msgid "FIVE_LETTERS_WORD_119"
+msgstr ""
+
+#: data/w5l/w5l.xml:259
+msgid "FIVE_LETTERS_WORD_254"
+msgstr ""
+
+#: data/w5l/w5l.xml:269
+msgid "FIVE_LETTERS_WORD_264"
+msgstr ""
+
+#: data/w5l/w5l.xml:24
+msgid "FIVE_LETTERS_WORD_019"
+msgstr ""
+
+#: data/w5l/w5l.xml:253
+msgid "FIVE_LETTERS_WORD_248"
+msgstr ""
+
+#: data/w5l/w5l.xml:45
+msgid "FIVE_LETTERS_WORD_040"
+msgstr ""
+
+#: data/w5l/w5l.xml:84
+msgid "FIVE_LETTERS_WORD_079"
+msgstr ""
+
+#: data/w5l/w5l.xml:98
+msgid "FIVE_LETTERS_WORD_093"
+msgstr ""
+
+#: data/w5l/w5l.xml:44
+msgid "FIVE_LETTERS_WORD_039"
+msgstr ""
+
+#: data/w5l/w5l.xml:250
+msgid "FIVE_LETTERS_WORD_245"
+msgstr ""
+
+#: data/w5l/w5l.xml:73
+msgid "FIVE_LETTERS_WORD_068"
+msgstr ""
+
+#: data/w5l/w5l.xml:180
+msgid "FIVE_LETTERS_WORD_175"
+msgstr ""
+
+#: data/w5l/w5l.xml:263
+msgid "FIVE_LETTERS_WORD_258"
+msgstr ""
+
+#: data/w5l/w5l.xml:200
+msgid "FIVE_LETTERS_WORD_195"
+msgstr ""
+
+#: data/w5l/w5l.xml:125
+msgid "FIVE_LETTERS_WORD_120"
+msgstr ""
+
+#: data/w5l/w5l.xml:123
+msgid "FIVE_LETTERS_WORD_118"
+msgstr ""
+
+#: data/w5l/w5l.xml:150
+msgid "FIVE_LETTERS_WORD_145"
+msgstr ""
+
+#: data/w5l/w5l.xml:137
+msgid "FIVE_LETTERS_WORD_132"
+msgstr ""
+
+#: data/w5l/w5l.xml:227
+msgid "FIVE_LETTERS_WORD_222"
+msgstr ""
+
+#: data/w5l/w5l.xml:305
+msgid "FIVE_LETTERS_WORD_300"
+msgstr ""
+
+#: data/w5l/w5l.xml:246
+msgid "FIVE_LETTERS_WORD_241"
+msgstr ""
+
+#: data/w5l/w5l.xml:212
+msgid "FIVE_LETTERS_WORD_207"
+msgstr ""
+
+#: data/w5l/w5l.xml:130
+msgid "FIVE_LETTERS_WORD_125"
+msgstr ""
+
+#: data/w5l/w5l.xml:36
+msgid "FIVE_LETTERS_WORD_031"
+msgstr ""
+
+#: data/w5l/w5l.xml:12
+msgid "FIVE_LETTERS_WORD_007"
+msgstr ""
+
+#: data/w5l/w5l.xml:107
+msgid "FIVE_LETTERS_WORD_102"
+msgstr ""
+
+#: data/w5l/w5l.xml:241
+msgid "FIVE_LETTERS_WORD_236"
+msgstr ""
+
+#: data/w5l/w5l.xml:300
+msgid "FIVE_LETTERS_WORD_295"
+msgstr ""
+
+#: data/w5l/w5l.xml:56
+msgid "FIVE_LETTERS_WORD_051"
+msgstr ""
+
+#: data/w5l/w5l.xml:92
+msgid "FIVE_LETTERS_WORD_087"
+msgstr ""
+
+#: data/w5l/w5l.xml:220
+msgid "FIVE_LETTERS_WORD_215"
+msgstr ""
+
+#: data/w5l/w5l.xml:183
+msgid "FIVE_LETTERS_WORD_178"
+msgstr ""
+
+#: data/w5l/w5l.xml:119
+msgid "FIVE_LETTERS_WORD_114"
+msgstr ""
+
+#: data/w5l/w5l.xml:185
+msgid "FIVE_LETTERS_WORD_180"
+msgstr ""
+
+#: data/w5l/w5l.xml:169
+msgid "FIVE_LETTERS_WORD_164"
+msgstr ""
+
+#: data/w5l/w5l.xml:166
+msgid "FIVE_LETTERS_WORD_161"
+msgstr ""
+
+#: data/w5l/w5l.xml:35
+msgid "FIVE_LETTERS_WORD_030"
+msgstr ""
+
+#: data/w5l/w5l.xml:176
+msgid "FIVE_LETTERS_WORD_171"
+msgstr ""
+
+#: data/w5l/w5l.xml:216
+msgid "FIVE_LETTERS_WORD_211"
+msgstr ""
+
+#: data/w5l/w5l.xml:271
+msgid "FIVE_LETTERS_WORD_266"
+msgstr ""
+
+#: data/w5l/w5l.xml:69
+msgid "FIVE_LETTERS_WORD_064"
+msgstr ""
+
+#: data/w5l/w5l.xml:175
+msgid "FIVE_LETTERS_WORD_170"
+msgstr ""
+
+#: data/w5l/w5l.xml:232
+msgid "FIVE_LETTERS_WORD_227"
+msgstr ""
+
+#: data/w5l/w5l.xml:304
+msgid "FIVE_LETTERS_WORD_299"
+msgstr ""
+
+#: data/w5l/w5l.xml:28
+msgid "FIVE_LETTERS_WORD_023"
+msgstr ""
+
+#: data/w5l/w5l.xml:226
+msgid "FIVE_LETTERS_WORD_221"
+msgstr ""
