@@ -2,15 +2,15 @@
 # Copyright (C) 2006-2016 Nicolas Hainaux
 # This file is distributed under the same license as the mathmaker package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.6\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-17 13:12+0100\n"
-"PO-Revision-Date: 2016-03-19 08:09+0100\n"
+"PO-Revision-Date: 2016-10-05 20:40+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
-"Language-Team: <nh.techn@gmail.com>\n"
+"Language-Team:  <nh.techn@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -612,7 +612,7 @@ msgstr "NAME"
 
 #: locale/xml_additions/w4l/w4l.xml:9
 msgid "FOUR_LETTERS_WORD_004"
-msgstr "NINE"
+msgstr ""
 
 #: locale/xml_additions/w4l/w4l.xml:214
 msgid "FOUR_LETTERS_WORD_209"

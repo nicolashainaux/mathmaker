@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.6\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-17 13:12+0100\n"
-"PO-Revision-Date: 2016-06-20 18:17+0100\n"
+"PO-Revision-Date: 2016-10-05 20:41+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -435,7 +435,7 @@ msgstr "NAME"
 
 #: locale/xml_additions/w4l/w4l.xml:52
 msgid "FOUR_LETTERS_WORD_047"
-msgstr "NINE"
+msgstr ""
 
 #: locale/xml_additions/w4l/w4l.xml:88
 msgid "FOUR_LETTERS_WORD_083"
