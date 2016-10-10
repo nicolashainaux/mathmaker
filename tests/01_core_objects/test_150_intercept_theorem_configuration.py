@@ -24,7 +24,7 @@ import pytest
 
 from mathmaker.lib.core.base_calculus import Item, Fraction
 from mathmaker.lib.core.geometry import InterceptTheoremConfiguration
-# from tools import wrap_nb
+from tools import wrap_nb
 
 
 @pytest.fixture
@@ -33,6 +33,17 @@ def fig0():
                                          rotate_around_isobarycenter=40)
     fig0.set_lengths([6, 12, 9], Fraction((Item(4), Item(3))))
     return fig0
+
+
+@pytest.fixture
+def fig0b():
+    fig0b = InterceptTheoremConfiguration(sketch=False,
+                                          rotate_around_isobarycenter=40)
+    fig0b.set_lengths([6, 12, 9], Fraction((Item(4), Item(3))))
+    fig0b.setup_labels(['?', True, False, True, True, True, False, False],
+                       segments_list=[fig0b.u, fig0b.side[1], fig0b.v]
+                       + fig0b.small + fig0b.chunk)
+    return fig0b
 
 
 def test_fig0_into_euk(fig0):
@@ -76,12 +87,9 @@ def test_fig0_into_euk(fig0):
         'end'
 
 
-def test_fig0_into_euk2(fig0):
+def test_fig0b_into_euk2(fig0b):
     """Check this figure's generated euk file (less labels to display)."""
-    fig0.setup_labels(['?', True, False, True, True, True, False, False],
-                      segments_list=[fig0.u, fig0.side[1], fig0.v]
-                      + fig0.small + fig0.chunk)
-    assert fig0.into_euk() == \
+    assert fig0b.into_euk() == \
         'box -2.08, -2.13, 6.65, 4.27\n\n'\
         'A = point(1.58, -0.76)\n'\
         'B = point(5.41, 2.45)\n'\
@@ -110,3 +118,30 @@ def test_fig0_into_euk2(fig0):
         '  $\\rotatebox{40}{\sffamily ?}$ U0 40 - 6.5 deg 8\n'\
         '  $\\rotatebox{-10}{\sffamily 16}$ B 170 - 5.2 deg 11.2\n'\
         'end'
+
+
+def test_fig0_ratios_equalities(fig0):
+    assert fig0.ratios_equalities().into_str(as_a_quotients_equality=True) == \
+        '\\frac{\\text{AM}}{\\text{AB}}='\
+        '\\frac{\\text{MN}}{\\text{BC}}='\
+        '\\frac{\\text{NA}}{\\text{CA}}'
+
+
+def test_fig0b_ratios_equalities_substituted(fig0b):
+    assert fig0b.ratios_equalities_substituted()\
+        .into_str(as_a_quotients_equality=True) == wrap_nb(
+            '\\frac{6}{\\text{AB}}='
+            '\\frac{12}{16}='
+            '\\frac{9}{\\text{CA}}')
+
+
+def test_fig0b_cross_product_equation1(fig0b):
+    assert fig0b.ratios_equalities_substituted()\
+        .into_crossproduct_equation(Item('AB')).printed == wrap_nb(
+            '\\frac{6}{\\text{AB}}=\\frac{12}{16}')
+
+
+def test_fig0b_cross_product_equation2(fig0b):
+    assert fig0b.ratios_equalities_substituted()\
+        .into_crossproduct_equation(Item('CA')).printed == wrap_nb(
+            '\\frac{12}{16}=\\frac{9}{\\text{CA}}')

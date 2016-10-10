@@ -22,14 +22,16 @@
 
 import random
 import copy
+from decimal import Decimal
 
 from mathmaker.lib.core.root_calculus import Unit, Value
 from mathmaker.lib.core.base_calculus import Product, Quotient, Item
 from mathmaker.lib.core.base_geometry import Point
-from mathmaker.lib.core.geometry import Rectangle, Square
+from mathmaker.lib.core.geometry import (Rectangle, Square,
+                                         InterceptTheoremConfiguration)
 from mathmaker.lib import error
 from mathmaker.lib import shared
-from mathmaker.lib.common.cst import COMMON_LENGTH_UNITS
+from mathmaker.lib.common.cst import COMMON_LENGTH_UNITS, XML_BOOLEANS
 from mathmaker.lib.tools.wording import setup_wording_format_of
 
 
@@ -44,13 +46,15 @@ class structure(object):
 
     def setup(self, arg, shuffle_nbs=True, **options):
         if arg == "minimal":
+            self.newline = '\\newline'
+            self.parallel_to = '$\parallel$'
+            self.belongs_to = '$\in$'
             if 'variant' in options and options['variant'] == 'decimal':
                 options['variant'] = random.choice(['decimal1', 'decimal2'])
 
             self.variant = options.get('variant', "default")
             self.context = options.get('context', "default")
-            pic = options.get('picture', "false")
-            self.picture = True if pic == "true" else False
+            self.picture = XML_BOOLEANS[options.get('picture', "false")]()
 
         elif arg == "length_units":
             if 'unit' in options:
@@ -172,6 +176,43 @@ class structure(object):
             self.square.setup_labels([False, False, True, False])
             self.square.set_marks(random.choice(["simple", "double",
                                                  "triple"]))
+
+        elif arg == 'intercept_theorem_triangle':
+            if not all([hasattr(self, 'nb1'), hasattr(self, 'nb2'),
+                        hasattr(self, 'nb3'), hasattr(self, 'nb4')]):
+                # __
+                raise error.ImpossibleAction("Setup an intercept theorem "
+                                             "(triangle) figure without a "
+                                             "coefficient and 3 other lengths "
+                                             "provided.")
+            points_names = "AMBCN"
+            self.figure = InterceptTheoremConfiguration(
+                points_names=points_names,
+                build_ratio=random.choice(range(25, 75)) / 100,
+                sketch=False,
+                build_dimensions={'side0': Decimal('5'),
+                                  'angle1': Decimal(
+                                  str(random.choice(range(45, 120)))),
+                                  'side1': Decimal(
+                                  str(random.choice(range(20, 60)) / 10))},
+                rotate_around_isobarycenter=random.choice(range(0, 360)))
+
+            self.figure.set_lengths([self.nb2, self.nb3, self.nb4],
+                                    Value(self.nb1))
+            self.point0_name = self.figure.point[0].name
+            self.point1_name = self.figure.point[1].name
+            self.side0_length_name = self.figure.side[0].length_name
+            self.small0_length_name = self.figure.small[0].length_name
+            self.chunk0_length_name = self.figure.chunk[0].length_name
+            self.side0_length = str(self.figure.side[0].length)
+            self.small0_length = str(self.figure.small[0].length)
+            self.chunk0_length = str(self.figure.chunk[0].length)
+            self.side1_length_name = self.figure.side[2].length_name
+            self.small1_length_name = self.figure.small[2].length_name
+            self.chunk1_length_name = self.figure.chunk[1].length_name
+            self.side1_length = str(self.figure.side[2].length)
+            self.small1_length = str(self.figure.small[2].length)
+            self.chunk1_length = str(self.figure.chunk[1].length)
 
         elif arg == 'mini_problem_wording':
             self.wording = _(shared.mini_problems_wordings_source

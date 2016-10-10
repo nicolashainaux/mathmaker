@@ -22,9 +22,9 @@
 
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
-from . import algebra_modules, mc_modules
+from . import algebra_modules, mc_modules, geometry_modules
 
-ALL_MODULES = (algebra_modules, mc_modules)
+ALL_MODULES = (algebra_modules, mc_modules, geometry_modules)
 
 SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number': {'half', 'third', 'quarter'},
                       'simple_multiples_of_a_number': {'double', 'triple',

@@ -25,7 +25,7 @@
 ##
 # @package core.geometry
 # @brief Mathematical geometrical objects.
-
+import sys
 import math
 import copy
 from decimal import Decimal, ROUND_HALF_UP
@@ -36,7 +36,7 @@ from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
                                      POLYGONS_NATURES, round)
 from .root_calculus import Evaluable, Value, Unit
 from .base_calculus import Item, Product, Sum
-from .calculus import Equality, SubstitutableEquality
+from .calculus import Equality, SubstitutableEquality, Table, Table_UP
 from .base import Drawable
 from .base_geometry import Point, Segment, Angle, Vector
 
@@ -627,7 +627,7 @@ class Triangle(Polygon):
     #            NB: 'sketch' will just choose (reasonnably) random values
     #   @param options
     #   Options details:
-    #   - rotate_around_gravity_center = 'no'|'any'|nb
+    #   - rotate_around_isobarycenter = 'no'|'any'|nb
     #                        (nb being the angle,
     #               defaulting to 'any' if sketch or 'no' if not a sketch)
     #   FOLLOWING STUFF CAN BE REPLACED BY SETTERS
@@ -685,17 +685,19 @@ class Triangle(Polygon):
 
             start_vertex = [None, None, None]
 
-            side0_length = construction_data['side0']
-            side1_length = construction_data['side1']
-            angle1 = construction_data['angle1']
-
             rotate_around_isobarycenter = \
                 options.get('rotate_around_isobarycenter', 'no')
+            sys.stderr.write('\n>>> {}\n'
+                             .format(str(rotate_around_isobarycenter)))
             if construction_data == 'sketch':
                 rotate_around_isobarycenter = 'randomly'
                 side0_length = Decimal(str(randomly.integer(35, 55))) / 10
                 side1_length = Decimal(str(randomly.integer(35, 55))) / 10
                 angle1 = randomly.integer(20, 70)
+            else:
+                side0_length = construction_data['side0']
+                side1_length = construction_data['side1']
+                angle1 = construction_data['angle1']
 
             if rotate_around_isobarycenter == 'randomly':
                 self._rotation_angle = randomly.integer(0, 35) * 10
@@ -743,7 +745,7 @@ class RightTriangle(Triangle):
     #            NB: 'sketch' will just choose (reasonnably) random values
     #   @param options
     #   Options details:
-    #   - rotate_around_gravity_center = 'no'|'any'|nb
+    #   - rotate_around_isobarycenter = 'no'|'any'|nb
     #                        (nb being the angle,
     #               defaulting to 'any' if sketch or 'no' if not a sketch)
     #   FOLLOWING ONES HAVE BEEN REPLACED BY MATCHING SETTERS
@@ -927,11 +929,11 @@ class RightTriangle(Triangle):
 class InterceptTheoremConfiguration(Triangle):
 
     def __init__(self,
-                 points_names=None,  # ['A', 'M', 'B', 'C', 'N']
+                 points_names=None,  # 'AMBCN'
                  butterfly=False,
                  sketch=True,
-                 ratio=None,  # Decimal('0.75')
-                 dimensions=None,
+                 build_ratio=None,  # Decimal('0.75')
+                 build_dimensions=None,
                  # {'side0': Decimal('5'),
                  #  'angle1': Decimal('50'),
                  #  'side1': Decimal('7')}
@@ -939,6 +941,13 @@ class InterceptTheoremConfiguration(Triangle):
                  ):
         """
         Intercept theorem configuration initialization.
+
+        Beware, build_ratio and build_dimensions are used to draw the figure,
+        not as the "fake" ratio and lengths used in the exercise, what will
+        be set by set_lengths(). build_ratio is a ratio to reduce the bigger
+        triangle to form the smaller, whereas enlargement_ratio is the
+        enlargement ratio *of the exercise* to enlarge the smaller triangle
+        to form the bigger.
 
         :param points_names: a list of 5 points names.
         :type points_names: a list of str
@@ -950,26 +959,28 @@ class InterceptTheoremConfiguration(Triangle):
         randomly defined (inside of a reasonable range), and
         rotate_around_isobarycenter will be turned to 'randomly'
         :type sketch: boolean
-        :param ratio: the ratio to compute the "small" triangle inside
-        :type ratio: numeric Value
-        :param dimensions: dimensions of the main (biggest) triangle
-        :type dimensions: dict providing 'side0', 'angle1', and 'side1' keys.
-        Any other possibility is not implemented yet (0.7.1dev2)
+        :param build_ratio: the ratio to compute the "small" triangle inside
+        :type build_ratio: numeric Value
+        :param build_dimensions: dimensions of the main (biggest) triangle
+        :type build_dimensions: dict providing 'side0', 'angle1', and 'side1'
+        keys. Any other possibility is not implemented yet (0.7.1dev2)
         :param rotate_around_isobarycenter: tells if the main triangle should
         be rotated around its barycenter. If sketch is True, it will be
         considered as 'randomly'.
         :type rotate_around_isobarycenter: either 'no', 'randomly', or a Value
         (the number of degrees to use)
         """
+        self._enlargement_ratio = None
+
         if points_names is None:
-            points_names = ['A', 'M', 'B', 'C', 'N']
-        if ratio is None:
-            ratio = Decimal('0.75')
-        self._ratio = ratio
-        if dimensions is None:
-            dimensions = {'side0': Decimal('5'),
-                          'angle1': Decimal('50'),
-                          'side1': Decimal('7')}
+            points_names = 'AMBCN'
+        if build_ratio is None:
+            build_ratio = Decimal('0.75')
+        self._ratio = build_ratio
+        if build_dimensions is None:
+            build_dimensions = {'side0': Decimal('5'),
+                                'angle1': Decimal('50'),
+                                'side1': Decimal('7')}
         r = rotate_around_isobarycenter
         if sketch:
             super().__init__(((points_names[0],
@@ -980,7 +991,7 @@ class InterceptTheoremConfiguration(Triangle):
             super().__init__(((points_names[0],
                                points_names[2],
                                points_names[3]),
-                              dimensions),
+                              build_dimensions),
                              rotate_around_isobarycenter=r)
 
         x_A, x_B, x_C = (self.vertex[0].x_exact,
@@ -989,7 +1000,7 @@ class InterceptTheoremConfiguration(Triangle):
         y_A, y_B, y_C = (self.vertex[0].y_exact,
                          self.vertex[1].y_exact,
                          self.vertex[2].y_exact)
-        k = ratio
+        k = Decimal(str(build_ratio))
         self._point = [Point([points_names[1],
                              (x_A + k * (x_B - x_A),
                               y_A + k * (y_B - y_A))]),
@@ -1064,10 +1075,10 @@ class InterceptTheoremConfiguration(Triangle):
             result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
                       .format(n=p.name, a=str(names_angles_list[i]))
 
-        if self.u.label != Value(''):
+        if self.u.label not in [Value(''), Value('hidden')]:
             result += '  u {}\n'.format(self._U0U1[0].name)
             result += '  -u {}\n'.format(self._U0U1[1].name)
-        if self.v.label != Value(''):
+        if self.v.label not in [Value(''), Value('hidden')]:
             result += '  v {}\n'.format(self._V0V1[0].name)
             result += '  -v {}\n'.format(self._V0V1[1].name)
 
@@ -1098,19 +1109,47 @@ class InterceptTheoremConfiguration(Triangle):
         if not isinstance(enlargement_ratio, Evaluable):
             raise TypeError('Expected any Evaluable, got a {}.'
                             .format(str(type(enlargement_ratio))))
+        self._enlargement_ratio = enlargement_ratio
         for i, s in enumerate(self._small):
             s.length = Value(lengths_list[i])
-        for i, s in enumerate([self._u, self.side[1], self._v]):
+        for i, s in enumerate(self.side):
             s.length = Value(Product([lengths_list[i], enlargement_ratio])
                              .evaluate())
-        self._chunk[0].length = Value(self.u.length
+        self._u.length = Value(Product([lengths_list[0],
+                               enlargement_ratio]).evaluate())
+        self._v.length = Value(Product([lengths_list[2],
+                               enlargement_ratio]).evaluate())
+        self._chunk[0].length = Value(self._u.length
                                       - self.small[0].length)
-        self._chunk[1].length = Value(self.v.length
+        self._chunk[1].length = Value(self._v.length
                                       - self.small[2].length)
+
+    def ratios_equalities(self) -> Table:
+        """Return a Table matching the ratios equalities."""
+        return Table([[Item(v.length_name) for v in self.small],
+                      [Item(v.length_name) for v in self.side]])
+
+    def ratios_equalities_substituted(self) -> Table_UP:
+        """
+        Return the ratios equalities containing known numbers.
+
+        It is returned as a Table_UP object.
+        """
+        masks_on = [Value(''), Value('?')]
+        infos = [(Item(s.length_name) if s.label in masks_on else None,
+                  Item(b.length_name) if b.label in masks_on else None)
+                 for s, b in zip(self.small, self.side)]
+        return Table_UP(self.enlargement_ratio,
+                        [s.length for s in self.small],
+                        infos)
 
     @property
     def chunk(self):
         return self._chunk
+
+    @property
+    def point(self):
+        return self._point
 
     @property
     def small(self):
@@ -1123,3 +1162,7 @@ class InterceptTheoremConfiguration(Triangle):
     @property
     def v(self):
         return self._v
+
+    @property
+    def enlargement_ratio(self):
+        return self._enlargement_ratio

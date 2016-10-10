@@ -34,6 +34,16 @@ from mathmaker.lib.sheet.exercise import question
 from mathmaker.lib import error
 
 
+SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),
+                              ("rectangle", "perimeter"),
+                              ("square", "area"),
+                              ("square", "perimeter")}
+
+KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE = {
+    ('divi', 'direct', 'area_width_length_rectangle'):
+    ('rectangle', 'length_or_width', 'from_area')}
+
+
 def get_xml_schema_path():
     return settings.frameworksdir + 'sheet.xsd'
 
@@ -165,6 +175,128 @@ def get_sheet_config(file_name):
             )
 
 
+def check_q_consistency(q_attrib, sources):
+    """
+    (Unfinished) Check the consistency of question's kind, subkind and source.
+    """
+    if (('_'.join([q_attrib['kind'], q_attrib['subkind']])
+         == 'intercept_theorem_triangle')
+        and sources[0].startswith('ext_proportionality_quadruplet')):
+        # __
+        mini, maxi = sources[0].split(sep='_')[3].split(sep='to')
+        if int(mini) < 11:
+            raise error.XMLFileFormatError('For intercept_theorem_triangle '
+                                           'questions, the minimum number '
+                                           'should be 11. Here it is only {}.'
+                                           .format(mini))
+        if int(maxi) - int(mini) < 19:
+            raise error.XMLFileFormatError('For intercept_theorem_triangle '
+                                           'questions, the range between '
+                                           'minimum and maximum should be at '
+                                           'least 19. Here it is only {}.'
+                                           .format(str(int(maxi) - int(mini))))
+
+
+def get_q_kinds_from(exercise_node):
+    """
+    Retrieves the exercise kind and the questions from one exercise section.
+
+    :param exercise_node: The XML node of the exercise.
+    :type exercise_node:
+    :rtype: tuple
+    """
+    questions = []
+    # For instance we will get a list of this kind of elements:
+    # [{'kind': 'multi', 'subkind': 'direct', 'nb': 'int'}, 'table_2_9', 4]
+    # [{'kind': 'expand_and_reduce', 'subkind': 'double_expansion'},
+    #  'table_2_9',
+    #  4]
+
+    # if no kind is defined, x_kind will still contain the default '', what
+    # will lead to use X_Generic
+    x_kind = exercise_node.attrib.get('kind', '')
+    for child in exercise_node:
+        if child.tag == 'question':
+            if ((child.attrib['kind'], child.attrib['subkind'])
+                    in SWAPPABLE_QKINDS_QSUBKINDS):
+                (child.attrib['kind'], child.attrib['subkind'])\
+                    = (child.attrib['subkind'], child.attrib['kind'])
+
+            if 'context' in child.attrib:
+                if ((child.attrib['kind'],
+                    child.attrib['subkind'],
+                    child.attrib['context'])
+                        in KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE):
+                    (child.attrib['kind'],
+                     child.attrib['subkind'],
+                     child.attrib['context']) = \
+                        KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE[
+                        (child.attrib['kind'],
+                         child.attrib['subkind'],
+                         child.attrib['context'])]
+            for elt in child:
+                o = copy.deepcopy(child.attrib)
+                o.update(elt.attrib)
+                sources = [elt.attrib['source']]
+                if 'source2' in elt.attrib:
+                    sources += [elt.attrib['source2']]
+                check_q_consistency(o, sources)
+                questions += [[o, sources, int(elt.text)]]
+
+        elif child.tag == 'mix':
+            q_temp_list = []
+            n_temp_list = []
+            for elt in child:
+                if elt.tag == 'question':
+                    q_temp_list += [elt.attrib]
+                elif elt.tag == 'nb':
+                    # We don't check that 'source' is in elt.attrib,
+                    # this should have been checked by the xml schema,
+                    # nor we don't check if the source tag is valid.
+                    # This would be best done by the xml schema
+                    # (requires to use xsd1.1 but lxml validates only
+                    # xsd1.0). So far, it is done partially and later,
+                    # in lib/tools/tags.py
+                    # So far it's not possible to mix questions
+                    # requiring several sources with other questions
+                    n_temp_list += [[[elt.attrib['source']],
+                                     elt.attrib,
+                                     1] for i in range(int(elt.text))]
+                else:
+                    raise error.XMLFileFormatError(
+                        "Unknown element found in the xml file: "
+                        '' + elt.tag)
+
+            if len(q_temp_list) != len(n_temp_list):
+                raise error.XMLFileFormatError(
+                    "Incorrect mix section: the number of sources "
+                    "of numbers (" + str(len(n_temp_list)) + ") "
+                    "does not match the number of questions "
+                    "(" + str(len(q_temp_list)) + ").")
+
+            # So far, we only check if all of the numbers' sources
+            # may be attributed to any of the questions, in order
+            # to just distribute them all randomly.
+            for n in n_temp_list:
+                for q in q_temp_list:
+                    if (not question.match_qtype_sourcenb(
+                        q['kind'] + "_" + q['subkind'], n[0])):
+                        # __
+                        raise error.XMLFileFormatError(
+                            "This source: " + str(n[0]) + " cannot "
+                            "be attributed to this question:"
+                            " " + str(q['kind'] + "_" + q['subkind']))
+
+            random.shuffle(q_temp_list)
+            random.shuffle(n_temp_list)
+
+            for (q, n) in zip(q_temp_list, n_temp_list):
+                q.update(n[1])
+                questions += [[q, n[0], 1]]
+
+    return (x_kind, questions)
+
+
 def get_exercises_list(file_name):
     """
     Retrieves the exercises' list from *file_name*.
@@ -180,125 +312,10 @@ def get_exercises_list(file_name):
         mainlogger.error('FileNotFoundError: ' + file_name)
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),
                                 str(file_name))
-
     exercises_list = []
-
     for child in xml_doc:
         if child.tag == 'exercise':
-            exercises_list += [(exercise.X_Generic, child.attrib)]
-
+            exercises_list += [(exercise.X_Generic,
+                                child.attrib,
+                                get_q_kinds_from(child))]
     return exercises_list
-
-
-def get_q_kinds_from(file_name, sw_k_s={}, k_s_ctxt_tr={}):
-    """
-    Retrieves the exercise kind and the questions from *file_name*.
-
-    :param file_name: The XML file name.
-    :type file_name: str
-    :param sw_k_s: The swappable qkinds and qsubkinds dict.
-    :type sw_k_s: dict
-    :param k_s_ctxt_tr: The kind-subkind_contexts to translate.
-    :type k_s_ctxt_tr: dict
-    :rtype: tuple
-    """
-    mainlogger = logging.getLogger("__main__")
-    try:
-        xml_config = XML_PARSER.parse(file_name).getroot()
-    except FileNotFoundError:
-        mainlogger.error('FileNotFoundError: ' + str(file_name))
-        raise error.UnreachableData("the file named: " + str(file_name))
-
-    questions = []
-
-    # For instance we will get a list of this kind of elements:
-    # [{'kind': 'multi', 'subkind': 'direct', 'nb': 'int'}, 'table_2_9', 4]
-    # [{'kind': 'expand_and_reduce', 'subkind': 'double_expansion'},
-    #  'table_2_9',
-    #  4]
-
-    x_kind = ''  # default, what will lead to use X_Generic
-
-    for child in xml_config:
-        if child.tag == 'exercise':
-            # if no kind is defined, x_kind will still contain the default ''
-            x_kind = child.attrib.get('kind', '')
-            for subchild in child:
-                if subchild.tag == 'question':
-                    if ((subchild.attrib['kind'], subchild.attrib['subkind'])
-                            in sw_k_s):
-                        (subchild.attrib['kind'], subchild.attrib['subkind'])\
-                            = (subchild.attrib['subkind'],
-                               subchild.attrib['kind'])
-
-                    if 'context' in subchild.attrib:
-                        if ((subchild.attrib['kind'],
-                            subchild.attrib['subkind'],
-                            subchild.attrib['context'])
-                                in k_s_ctxt_tr):
-                            (subchild.attrib['kind'],
-                             subchild.attrib['subkind'],
-                             subchild.attrib['context']) = \
-                                k_s_ctxt_tr[(subchild.attrib['kind'],
-                                             subchild.attrib['subkind'],
-                                             subchild.attrib['context'])]
-                    for elt in subchild:
-                        o = copy.deepcopy(subchild.attrib)
-                        o.update(elt.attrib)
-                        sources = [elt.attrib['source']]
-                        if 'source2' in elt.attrib:
-                            sources += [elt.attrib['source2']]
-                        questions += [[o, sources, int(elt.text)]]
-
-                elif subchild.tag == 'mix':
-                    q_temp_list = []
-                    n_temp_list = []
-                    for elt in subchild:
-                        if elt.tag == 'question':
-                            q_temp_list += [elt.attrib]
-                        elif elt.tag == 'nb':
-                            # We don't check that 'source' is in elt.attrib,
-                            # this should have been checked by the xml schema,
-                            # nor we don't check if the source tag is valid.
-                            # This would be best done by the xml schema
-                            # (requires to use xsd1.1 but lxml validates only
-                            # xsd1.0). So far, it is done partially and later,
-                            # in lib/tools/tags.py
-                            # So far it's not possible to mix questions
-                            # requiring several sources with other questions
-                            n_temp_list += [[[elt.attrib['source']],
-                                             elt.attrib,
-                                             1] for i in range(int(elt.text))]
-                        else:
-                            raise error.XMLFileFormatError(
-                                "Unknown element found in the xml file: "
-                                '' + elt.tag)
-
-                    if len(q_temp_list) != len(n_temp_list):
-                        raise error.XMLFileFormatError(
-                            "Incorrect mix section: the number of sources "
-                            "of numbers (" + str(len(n_temp_list)) + ") "
-                            "does not match the number of questions "
-                            "(" + str(len(q_temp_list)) + ").")
-
-                    # So far, we only check if all of the numbers' sources
-                    # may be attributed to any of the questions, in order
-                    # to just distribute them all randomly.
-                    for n in n_temp_list:
-                        for q in q_temp_list:
-                            if (not question.match_qtype_sourcenb(
-                                q['kind'] + "_" + q['subkind'], n[0])):
-                                # __
-                                raise error.XMLFileFormatError(
-                                    "This source: " + str(n[0]) + " cannot "
-                                    "be attributed to this question:"
-                                    " " + str(q['kind'] + "_" + q['subkind']))
-
-                    random.shuffle(q_temp_list)
-                    random.shuffle(n_temp_list)
-
-                    for (q, n) in zip(q_temp_list, n_temp_list):
-                        q.update(n[1])
-                        questions += [[q, n[0], 1]]
-
-    return (x_kind, questions)

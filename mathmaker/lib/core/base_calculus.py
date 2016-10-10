@@ -37,7 +37,7 @@ from mathmaker.lib.maths_lib import (sign_of_product, gcd, pupil_gcd,
                                      lcm_of_the_list, is_even, is_uneven,
                                      ZERO_POLYNOMIAL_DEGREE)
 from mathmaker.lib.common.cst import (DEFAULT, RANDOMLY, NUMERIC, LITERALS,
-                                      OTHERS)
+                                      OTHERS, XML_BOOLEANS)
 from .utils import reduce_literal_items_product, put_term_in_lexicon
 from mathmaker.lib.common.latex import MARKUP
 
@@ -3359,7 +3359,7 @@ class Product(CommutativeOperation):
                 if isinstance(arg[i], Exponented):
                     self._element.append(arg[i].clone())
 
-                elif is_.a_number(arg[i]):
+                elif is_.a_number(arg[i]) or isinstance(arg[i], Value):
                     self._element.append(Item(arg[i]))
 
                 elif arg[i] is None:
@@ -5747,9 +5747,7 @@ class Sum(CommutativeOperation):
                           "so, returning the intermediate line generated "
                           "from it.")
 
-                detailed = options.get('detailed', "true")
-                detailed = {"true": True,
-                            "false": False}[detailed]
+                detailed = XML_BOOLEANS[options.get('detailed', 'true')]()
                 if detailed:
                     return copy.intermediate_reduction_line()
                 else:
@@ -6756,9 +6754,7 @@ class Expandable(Product):
             for i in range(len(terms_list)):
                 terms_list[i] = terms_list[i].reduce_()
 
-        detailed = options.get('detailed', "true")
-        detailed = {"true": True,
-                    "false": False}[detailed]
+        detailed = XML_BOOLEANS[options.get('detailed', 'true')]()
 
         if detailed:
             return Sum(terms_list)

@@ -30,6 +30,7 @@ echo
 ../tools/merge_xml_updates_to_pot_file --dirs "$ROOT_DIR""/data/"
 
 # Merging updates from other xml files to other pot files
+# /!\ You'd better not use relative paths, it seems it causes the polib library not to work properly
 #./merge_xml_updates_to_pot_file --keywords w4l --dir "$ROOT_DIR""/data/w4l" --potfile "$ROOT_DIR""/locale/w4l.pot"
 #./merge_xml_updates_to_pot_file --keywords name --dir "$ROOT_DIR""/data/names/f/" --potfile "$ROOT_DIR""/locale/names_f.pot"
 #./merge_xml_updates_to_pot_file --keywords name --dir "$ROOT_DIR""/data/names/m/" --potfile "$ROOT_DIR""/locale/names_m.pot"

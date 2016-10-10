@@ -20,7 +20,12 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import random
 from decimal import Decimal
+
+XML_BOOLEANS = {'true': lambda: True,
+                'false': lambda: False,
+                'random': lambda: random.choice([True, False])}
 
 DEFAULT = "default"
 RANDOMLY = "randomly"

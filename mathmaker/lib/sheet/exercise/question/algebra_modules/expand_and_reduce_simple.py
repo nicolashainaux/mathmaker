@@ -31,23 +31,6 @@ from .. import submodule
 class sub_object(submodule.structure):
 
     def __init__(self, numbers_to_use, **options):
-        # We get 4 numbers, one of them being present twice.
-        # First we should make a triplet, the first number being the one
-        # found once in (nb1, nb2) and in (nb3, nb4):
-        if numbers_to_use[0] == numbers_to_use[2]:
-            numbers_to_use = numbers_to_use[0:2] + (numbers_to_use[3],)
-        elif numbers_to_use[0] == numbers_to_use[3]:
-            numbers_to_use = numbers_to_use[0:3]
-        elif numbers_to_use[1] == numbers_to_use[2]:
-            numbers_to_use = (numbers_to_use[1], numbers_to_use[0],
-                              numbers_to_use[3])
-        elif numbers_to_use[1] == numbers_to_use[3]:
-            numbers_to_use = (numbers_to_use[1], numbers_to_use[0],
-                              numbers_to_use[2])
-        else:
-            raise ValueError('Either the first or second number of this tuple '
-                             'should have been equal to one of the two last '
-                             'numbers: ' + str(numbers_to_use))
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
                       **options)

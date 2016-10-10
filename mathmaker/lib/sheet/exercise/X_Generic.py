@@ -53,14 +53,55 @@ Q_info = namedtuple('Q_info', 'type,kind,subkind,nb_source,options')
 
 MIN_ROW_HEIGHT = 0.8
 
-SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),
-                              ("rectangle", "perimeter"),
-                              ("square", "area"),
-                              ("square", "perimeter")}
 
-KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE = {
-    ('divi', 'direct', 'area_width_length_rectangle'):
-    ('rectangle', 'length_or_width', 'from_area')}
+def get_common_nb_from_pairs_pair(pair):
+    """
+    Return the common number found in a pair of pairs.
+
+    :param pair: the pair of pairs
+    :type pair: a tuple or a list (of two elements)
+    :rtype: number
+    """
+    if pair[0][0] in pair[1]:
+        return pair[0][0]
+    elif pair[0][1] in pair[1]:
+        return pair[0][1]
+    else:
+        raise ValueError('One of the numbers of the first pair is expected '
+                         'to be found in the second pair, but hasn\'nt been.')
+
+
+def merge_pair_to_tuple(n_tuple, pair, common_nb):
+    """
+    Add one number from the pair to the n_tuple.
+
+    It is assumed n_tuple and pair both contain common_nb.
+    If n_tuple has more than 2 elements, it is also assumed that the first one
+    is common_nb. If it has 2 elements, then it might need to get reordered.
+    :param n_tuple: a tuple of 2 or more elements
+    :type n_tuple: tuple
+    :param pair: a tuple of 2 elements. One of them (at least) is common_nb,
+    and will be removed, the other one will be added to n_tuple
+    :type pair: tuple
+    :param common_nb: the number contained in both n_tuple and pair
+    :type common_nb: a number
+    :rtype: tuple
+    """
+    if not ((common_nb in n_tuple) and (common_nb in pair)):
+        raise ValueError('The number in common ({}) should be present at '
+                         'least once in both n_tuple ({}) and pair ({}).'
+                         .format(str(common_nb), str(n_tuple), str(pair)))
+    elif len(n_tuple) == 2:
+        if common_nb != n_tuple[0]:
+            # In the case the first number was not the common number, now it is
+            n_tuple = (n_tuple[1], n_tuple[0])
+
+    if pair[0] != common_nb:
+        n_tuple += (pair[0], )
+    else:
+        n_tuple += (pair[1], )
+
+    return n_tuple
 
 
 # --------------------------------------------------------------------------
@@ -144,10 +185,20 @@ def get_nb_sources_from_question_info(q_i):
     nb_sources = []
     extra_infos = {'merge_sources': False}
     questions_sources = q_i.nb_source
-    if len(q_i.nb_source) == 1 and q_i.nb_source[0].startswith('inttriplets_'):
-        questions_sources = ['intpairs_' + q_i.nb_source[0][12:],
-                             'intpairs_' + q_i.nb_source[0][12:]]
-        extra_infos.update({'merge_sources': True})
+    if len(q_i.nb_source) == 1:
+        if q_i.nb_source[0].startswith('inttriplets_'):
+            questions_sources = ['intpairs_' + q_i.nb_source[0][12:],
+                                 'intpairs_' + q_i.nb_source[0][12:]]
+            extra_infos.update({'merge_sources': True})
+        elif q_i.nb_source[0].startswith('ext_'):
+            chunks = q_i.nb_source[0][4:].split(sep='_')
+            if chunks[0] == 'proportionality':
+                if chunks[1] == 'quadruplet':
+                    questions_sources = ['intpairs_' + chunks[2],
+                                         'intpairs_' + chunks[2],
+                                         'intpairs_' + chunks[2]]
+                    extra_infos.update({'merge_sources': True,
+                                        'triangle_inequality': True})
     for nb_sce in questions_sources:
         tag_to_unpack = nb_source = nb_sce
         if nb_source in question.SOURCES_TO_UNPACK:
@@ -203,15 +254,9 @@ class X_Generic(X_Structure):
     #                         possible values to use and their matching
     #                         x_subkind options
     #   @return One instance of exercise.Generic
-    def __init__(self, x_kind='default_nothing', **options):
+    def __init__(self, **options):
         self.derived = True
-        from mathmaker.lib.tools.xml_sheet import get_q_kinds_from
-        source_file = options.get('filename')
-        (x_kind, q_list) = get_q_kinds_from(
-            source_file,
-            sw_k_s=SWAPPABLE_QKINDS_QSUBKINDS,
-            k_s_ctxt_tr=KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE)
-
+        (x_kind, q_list) = options.get('q_list')
         X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                              X_LAYOUT_UNIT, **options)
@@ -258,12 +303,34 @@ class X_Generic(X_Structure):
         for q in mixed_q_list:
             nb_sources, extra_infos = get_nb_sources_from_question_info(q)
             nb_to_use = tuple()
+            common_nb = None
             for i, nb_source in enumerate(nb_sources):
                 if i == 1 and extra_infos['merge_sources']:
-                    nb_to_use += shared.mc_source\
+                    second_couple_drawn = shared.mc_source\
                         .next(nb_source,
                               either_nb1_nb2_in=last_draw,
                               **question.get_modifier(q.type, nb_source))
+                    common_nb = get_common_nb_from_pairs_pair(
+                        (nb_to_use, second_couple_drawn))
+                    nb_to_use = merge_pair_to_tuple(nb_to_use,
+                                                    second_couple_drawn,
+                                                    common_nb)
+                elif i > 1 and extra_infos['merge_sources']:
+                    if (i == 2
+                        and extra_infos.get('triangle_inequality', False)):
+                        # __
+                        new_couple_drawn = shared.mc_source\
+                            .next(nb_source,
+                                  triangle_inequality=nb_to_use,
+                                  **question.get_modifier(q.type, nb_source))
+                    else:
+                        new_couple_drawn = shared.mc_source\
+                            .next(nb_source,
+                                  either_nb1_nb2_in=[common_nb],
+                                  **question.get_modifier(q.type, nb_source))
+                    nb_to_use = merge_pair_to_tuple(nb_to_use,
+                                                    new_couple_drawn,
+                                                    common_nb)
                 else:
                     drawn = shared.mc_source.next(nb_source,
                                                   not_in=last_draw,
