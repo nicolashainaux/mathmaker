@@ -61,7 +61,7 @@ def load_config(file_tag, settingsdir):
                              + file_tag)
         raise FileNotFoundError(errno.ENOENT,
                                 os.strerror(errno.ENOENT),
-                                file_tag + ".yaml")
+                                file_tag + '.yaml')
     if file_tag == 'logging' and sys.platform.startswith('freebsd'):
         try:
             with open(os.path.join(settingsdir, 'default/',
@@ -79,7 +79,7 @@ def load_config(file_tag, settingsdir):
             with open(os.path.join(d, file_tag + '.yaml')) as file_path:
                 if file_tag != 'logging':
                     mainlogger.info('Updating config values for ' + file_tag
-                                    + ' from ' + file_path.name + '.yaml ')
+                                    + ' from ' + file_path.name)
                 configuration.recursive_update(yaml.load(file_path))
         except IOError:
             pass
