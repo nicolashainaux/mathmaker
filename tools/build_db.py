@@ -34,6 +34,7 @@ It will add all entries:
 - all single ints from 2 to 500
 - all integers pairs from 2 to 500
 - a list of "clever" couples of (integer, decimal) (for multiplications)
+- a list of angles' ranges (around 0, 90, 180, 270)
 """
 
 import os
@@ -78,6 +79,9 @@ def __main__():
               q_id TEXT, drawDate INTEGER)''')
     db.execute('''CREATE TABLE single_ints
               (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
+    db.execute('''CREATE TABLE angle_ranges
+              (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
+              drawDate INTEGER)''')
     db.execute('''CREATE TABLE int_pairs
               (id INTEGER PRIMARY KEY,
               nb1 INTEGER, nb2 INTEGER,
@@ -186,6 +190,14 @@ def __main__():
                    "INTO single_ints(nb1, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)
+
+    # Angle ranges
+    db_rows = [(i - 20, i + 20, 0) for i in [0, 90, 180, 270]]
+    db.executemany("INSERT "
+                   "INTO angle_ranges(nb1, nb2, drawDate) "
+                   "VALUES(?, ?, ?)",
+                   db_rows)
+
     db.commit()
     db.close()
 
