@@ -30,6 +30,7 @@ from mathmaker.lib.common import latex
 def init():
     global db
     global four_letters_words_source
+    global five_letters_words_source
     global names_source
     global mini_problems_wordings_source
     global markup
@@ -52,6 +53,9 @@ def init():
 
     from mathmaker.lib.tools import db as database
     four_letters_words_source = database.source("w4l", ["id", "word"],
+                                                language=settings.language)
+
+    five_letters_words_source = database.source("w5l", ["id", "word"],
                                                 language=settings.language)
     names_source = database.source("names", ["id", "name"],
                                    language=settings.language)

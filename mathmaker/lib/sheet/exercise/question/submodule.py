@@ -33,6 +33,7 @@ from mathmaker.lib import error
 from mathmaker.lib import shared
 from mathmaker.lib.common.cst import COMMON_LENGTH_UNITS, XML_BOOLEANS
 from mathmaker.lib.tools.wording import setup_wording_format_of
+from mathmaker.lib.tools.auxiliary_functions import rotate
 
 
 class structure(object):
@@ -185,7 +186,8 @@ class structure(object):
                                              "(triangle) figure without a "
                                              "coefficient and 3 other lengths "
                                              "provided.")
-            points_names = "AMBCN"
+            points_names = rotate(next(shared.five_letters_words_source),
+                                  random.choice(range(5)))
             self.figure = InterceptTheoremConfiguration(
                 points_names=points_names,
                 build_ratio=random.choice(range(25, 75)) / 100,

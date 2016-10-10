@@ -22,6 +22,11 @@
 """Various auxiliary functions."""
 
 
+def rotate(l, n):
+    """Rotate list l of n places, to the right if n > 0; else to the left."""
+    return l[-n:] + l[:-n]
+
+
 def check_unique_letters_words(words_list, n):
     """
     Check if each word of the list contains exactly n letters, all unique.
