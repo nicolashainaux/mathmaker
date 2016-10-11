@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-10-10 16:00+0100\n"
+"PO-Revision-Date: 2016-10-11 13:11+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -1568,6 +1568,21 @@ msgstr "donc : {chunk_reso1} "
 #, python-brace-format
 msgid "so: {chunk_reso0} "
 msgstr "donc : {chunk_reso0} "
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:410
+#, python-brace-format
+msgid "Note: {pre_reso0} {newline} and: {pre_reso1} {newline} "
+msgstr "Remarque : {pre_reso0} {newline} et : {pre_reso1} {newline} "
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:413
+#, python-brace-format
+msgid "Note: {pre_reso0} {newline} "
+msgstr "Remarque : {pre_reso0} {newline} "
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:415
+#, python-brace-format
+msgid "Note: {pre_reso1} {newline} "
+msgstr "Remarque : {pre_reso1} {newline} "
 
 #~ msgid "Mental calculation: perimeters of simple polygons"
 #~ msgstr "Calcul mental : périmètres de polygones simples"

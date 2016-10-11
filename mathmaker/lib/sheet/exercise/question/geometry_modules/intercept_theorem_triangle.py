@@ -407,12 +407,12 @@ class sub_object(submodule.structure):
                         unit=self.length_unit,
                         underline_result=True)
             if labels_conf[6] and labels_conf[7]:
-                preamble = 'Note: {pre_reso0} {newline} and: {pre_reso1} ' \
-                    '{newline} '
+                preamble = _('Note: {pre_reso0} {newline} and: {pre_reso1} '
+                             '{newline} ')
             elif labels_conf[6]:
-                preamble = 'Note: {pre_reso0} {newline} '
+                preamble = _('Note: {pre_reso0} {newline} ')
             elif labels_conf[7]:
-                preamble = 'Note: {pre_reso1} {newline} '
+                preamble = _('Note: {pre_reso1} {newline} ')
 
         self.ratios = shared.machine.write_math_style1(
             self.figure.ratios_equalities()

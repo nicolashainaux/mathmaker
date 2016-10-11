@@ -1458,3 +1458,18 @@ msgstr ""
 #, python-brace-format
 msgid "so: {chunk_reso0} "
 msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:410
+#, python-brace-format
+msgid "Note: {pre_reso0} {newline} and: {pre_reso1} {newline} "
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:413
+#, python-brace-format
+msgid "Note: {pre_reso0} {newline} "
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:415
+#, python-brace-format
+msgid "Note: {pre_reso1} {newline} "
+msgstr ""
