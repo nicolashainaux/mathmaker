@@ -516,7 +516,7 @@ def wrap_latex_keywords(s: str) -> str:
     Replace some {kw} by {{kw}}, to prevent format() from using them as keys.
     """
     # First, we replace the {numbers} by {{numbers}}
-    p = re.compile(r'{(\d{1,}\.?\,?\d*)}', re.LOCALE)
+    p = re.compile(r'{(\d{1,}\.?\,?\d*(?:pt|em|cm)*)}', re.LOCALE)
     s = p.sub(r'{{\1}}', s)
     for w in ['multicols', 'tabular', 'tikzpicture', '\centering']:
         s = s.replace('{' + w + '}', '{{' + w + '}}')
