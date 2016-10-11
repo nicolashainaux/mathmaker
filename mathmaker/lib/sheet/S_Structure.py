@@ -327,7 +327,11 @@ class S_Structure(object):
                     if not self.layout_type == 'mental':
                         result += M.write_exercise_number()
                     result += self.exercises_list[ex_n].to_str(ex_or_answers)
-                    result += M.write_new_line(check=result[-2:])
+                    if self.layout_type == 'std' and ex_or_answers == 'ans':
+                        if i < how_many - 1:
+                            result += M.addvspace(height='30.0pt')
+                    else:
+                        result += M.write_new_line(check=result[-2:])
                     # if not (ex_or_answers == 'ans' \
                     #    and self.layout_type == 'equations'):
                     # __

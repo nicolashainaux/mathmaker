@@ -219,6 +219,7 @@ class Q_Generic(Q_Structure):
             # __
             module = getattr(mc_modules,
                              'vocabulary_simple_multiple_of_a_number')
+            self.add_new_line_to_text = ''
 
         else:
             for m in ALL_MODULES:

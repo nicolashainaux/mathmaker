@@ -142,8 +142,8 @@ class X_Structure(object):
                     for i in range(how_many):
                         result += self.questions_list[q_n]\
                             .to_str(ex_or_answers)
-                        if ex_or_answers == 'ans':
-                            result += M.write_new_line(check=result[-2:])
+                        if ex_or_answers == 'ans' and i < how_many - 1:
+                            result += M.addvspace(height='20.0pt')
                         q_n += 1
                 else:
                     nb_of_cols = len(layout[2 * k]) - 1

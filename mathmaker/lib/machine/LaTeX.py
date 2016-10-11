@@ -214,6 +214,16 @@ automatically increments the counter").format(cmd_name="exercise",
         else:
             self.out.write(output_str)
 
+    def addvspace(self, height='30.0pt', **options):
+        """
+        Add a vertical space.
+        """
+        output_str = "\n\n\\addvspace{{{height}}}\n\n".format(height=height)
+        if self.redirect_output_to_str:
+            return output_str
+        else:
+            self.out.write(output_str)
+
     ##
     #   @brief Writes to the output the new line command
     def write_new_line(self, **options):
@@ -329,7 +339,7 @@ automatically increments the counter").format(cmd_name="exercise",
                 output_str = "\\begin{multicols}{" \
                              + str(options['multicolumns']) + "} " + "\n" \
                              + output_str \
-                             + "\end{multicols}" + "\n~"
+                             + "\end{multicols}" + "\n"
             else:
                 raise error.OutOfRangeArgument(options['multicolumns'],
                                                ' should be an int >=1\n')
