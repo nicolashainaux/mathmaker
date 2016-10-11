@@ -31,26 +31,26 @@
 			   It's also impossible to ask to calculate the two chunks (so display all lengths available)
 			   and in the same time to require an "additive" version of the exercise (1st flag true),
 			   so this case will be automatically removed. -->
-		<question kind="intercept_theorem" subkind="triangle">
+		<question kind="intercept_theorem" subkind="triangle" variant="oneside_all_false">
 			<nb source="ext_proportionality_quadruplet_11to30">1</nb>
-		</question>
-	</exercise>
-
-	<exercise>
-		<question kind="intercept_theorem" subkind="triangle" variant="twosides_random_false">
-			<nb source="ext_proportionality_quadruplet_21to40">1</nb>
-		</question>
-	</exercise>
-
-	<exercise>
-		<question kind="intercept_theorem" subkind="triangle" variant="twochunks_random_random">
-			<nb source="ext_proportionality_quadruplet_31to50">1</nb>
 		</question>
 	</exercise>
 
 	<exercise>
 		<question kind="intercept_theorem" subkind="triangle" variant="oneside_twocouples_true">
 			<nb source="ext_proportionality_quadruplet_11to50">1</nb>
+		</question>
+	</exercise>
+
+	<exercise>
+		<question kind="intercept_theorem" subkind="triangle" variant="twosides_all_false">
+			<nb source="ext_proportionality_quadruplet_21to40">1</nb>
+		</question>
+	</exercise>
+
+	<exercise>
+		<question kind="intercept_theorem" subkind="triangle" variant="onesideonechunk_all_true">
+			<nb source="ext_proportionality_quadruplet_31to50">1</nb>
 		</question>
 	</exercise>
 
