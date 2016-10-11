@@ -463,6 +463,9 @@ class sub_object(submodule.structure):
                         unit=self.length_unit,
                         underline_result=True)
                 chunks_part += _('so: {chunk_reso0} ')
+            else:
+                chunks_part += '~\n\n\\newline\\newline\\newline\\newline\n\n'
+
             if len(chunks_to_calculate) == 2:
                 chunk_equality1 = SubstitutableEquality(
                     [Item(chunks_to_calculate[1]),
