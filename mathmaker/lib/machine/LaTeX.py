@@ -333,16 +333,19 @@ automatically increments the counter").format(cmd_name="exercise",
             output_str = given_string
 
         if 'multicolumns' in options:
+            keyword = 'multicols'
+            if options.get('unbalanced', False):
+                keyword = 'multicols*'
             if (type(options['multicolumns']) == int
                 and options['multicolumns'] >= 1):
                 # __
-                output_str = "\\begin{multicols}{" \
+                output_str = '\\begin{' + keyword + '}{' \
                              + str(options['multicolumns']) + "} " + "\n" \
                              + output_str \
-                             + "\end{multicols}" + "\n"
+                             + '\end{' + keyword + '}\n'
             else:
-                raise error.OutOfRangeArgument(options['multicolumns'],
-                                               ' should be an int >=1\n')
+                raise ValueError('This: {} should be an int >=1\n'
+                                 .format(str(options['multicolumns'])))
 
         if self.redirect_output_to_str:
             return output_str
