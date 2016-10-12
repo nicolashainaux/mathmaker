@@ -179,8 +179,8 @@ def check_q_consistency(q_attrib, sources):
     """
     (Unfinished) Check the consistency of question's kind, subkind and source.
     """
-    if (('_'.join([q_attrib['kind'], q_attrib['subkind']])
-         == 'intercept_theorem_triangle')
+    q_kind_subkind = '_'.join([q_attrib['kind'], q_attrib['subkind']])
+    if (q_kind_subkind == 'intercept_theorem_triangle'
         and sources[0].startswith('ext_proportionality_quadruplet')):
         # __
         mini, maxi = sources[0].split(sep='_')[3].split(sep='to')
@@ -195,6 +195,13 @@ def check_q_consistency(q_attrib, sources):
                                            'minimum and maximum should be at '
                                            'least 19. Here it is only {}.'
                                            .format(str(int(maxi) - int(mini))))
+    if (q_kind_subkind == 'intercept_theorem_triangle_formula'
+        and not sources[0] == 'nothing'):
+        # __
+        raise error.XMLFileFormatError('For intercept_theorem_triangle_formula'
+                                       ' questions, the only possible source '
+                                       'is \'nothing\'. \'{}\' is not correct.'
+                                       .format(sources[0]))
 
 
 def get_q_kinds_from(exercise_node):
