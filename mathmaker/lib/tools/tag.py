@@ -31,7 +31,7 @@ def classify_tag(tag):
     elif tag.startswith('singleint_'):
         return 'single_int'
     elif tag in ['int_deci_clever_pairs', 'rank_words',
-                 'int_irreducible_frac',
+                 'int_irreducible_frac', 'nothing',
                  'decimal_and_10_100_1000_for_multi',
                  'decimal_and_10_100_1000_for_divi',
                  'decimal_and_one_digit_for_multi',

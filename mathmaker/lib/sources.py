@@ -115,7 +115,7 @@ def generate_values(source_id):
                         generate_decimal(width, ranks_scale, start_rank))}
         return list(result)
 
-    elif source_id == 'bypass':
+    elif source_id in ['nothing', 'bypass']:
         return []
 
 
@@ -173,3 +173,5 @@ class mc_source(object):
             return shared.deci_one_digit_multi_source.next(**kwargs)
         elif tag_classification == 'decimal_and_one_digit_for_divi':
             return shared.deci_one_digit_divi_source.next(**kwargs)
+        elif tag_classification == 'nothing':
+            return shared.dried_up_source.next(**kwargs)

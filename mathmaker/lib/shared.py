@@ -45,6 +45,7 @@ def init():
     global deci_one_digit_multi_source
     global deci_one_digit_divi_source
     global mc_source
+    global dried_up_source
     global machine
     global number_of_the_question
 
@@ -82,6 +83,7 @@ def init():
         'decimal_and_one_digit_for_multi')
     deci_one_digit_divi_source = sources.sub_source(
         'decimal_and_one_digit_for_divi')
+    dried_up_source = sources.sub_source('nothing')
     mc_source = sources.mc_source()
 
     try:
