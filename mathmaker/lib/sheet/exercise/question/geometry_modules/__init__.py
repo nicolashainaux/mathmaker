@@ -27,6 +27,6 @@
 # @package mc_modules
 # @brief All question objects should be "declared" here.
 
-from . import (intercept_theorem_triangle)
+from . import (intercept_theorem_triangle, intercept_theorem_triangle_formula)
 
-__all__ = ['intercept_theorem_triangle']
+__all__ = ['intercept_theorem_triangle', 'intercept_theorem_triangle_formula']

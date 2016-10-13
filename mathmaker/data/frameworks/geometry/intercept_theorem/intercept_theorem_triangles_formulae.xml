@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFAULT MENTAL CALCULATION SHEET -->
+
+
+<sheet header="" title="Intercept theorem: quotients' equalities" subtitle="" text="" answers_title="Example of solutions:">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="std" font_size_offset="-1">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default values: id='generic' kind='' subkind='default' -->
+	<exercise text_exc="For each figure, write the correct formula:" text_ans="Note: in each quotients' equalities, given as example of solution, it is possible to change the order of the quotients and to invert all quotients. Moreover, each length can be written in two different ways (for instance, AB is the same as BA).">
+		<question kind="intercept_theorem" subkind="triangle_formula">
+			<nb source="nothing">6</nb>
+		</question>
+	</exercise>
+
+</sheet>
