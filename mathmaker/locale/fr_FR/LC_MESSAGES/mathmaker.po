@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-10-11 13:11+0100\n"
+"PO-Revision-Date: 2016-10-13 10:29+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -255,52 +255,52 @@ msgstr "au millième"
 msgid "to the ten thousandth"
 msgstr "au dix-millième"
 
-#: lib/sheet/exercise/X_AlgebraExpressionExpansion.py:102
+#: lib/sheet/exercise/X_AlgebraExpressionExpansion.py:106
 msgid "Expand and reduce"
 msgstr "Développer et réduire"
 
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:85
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:89
 msgid "Reduce the following expressions:"
 msgstr "Réduire les expressions suivantes :"
 
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:90
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:94
 msgid "Reduce, if possible, the following products:"
 msgstr "Réduire, si possible, les produits suivants :"
 
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:92
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:100
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:96
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:104
 msgid "Pay attention that the intermediate line is optional."
 msgstr "La ligne intermédiaire indiquée est optionnelle."
 
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:99
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:103
 msgid "Reduce, if possible, the following sums:"
 msgstr "Réduire, si possible, les sommes suivantes :"
 
-#: lib/sheet/exercise/X_Calculation.py:76
+#: lib/sheet/exercise/X_Calculation.py:80
 msgid "Simplify the following fractions:"
 msgstr "Simplifier les fractions suivantes :"
 
-#: lib/sheet/exercise/X_Calculation.py:82
+#: lib/sheet/exercise/X_Calculation.py:86
 msgid "Calculate and give the result as a simplified fraction:"
 msgstr "Calculer et donner le résultat sous forme de fraction simplifiée :"
 
-#: lib/sheet/exercise/X_Factorization.py:144
+#: lib/sheet/exercise/X_Factorization.py:148
 msgid "Factorise: "
 msgstr "Factoriser :"
 
-#: lib/sheet/exercise/X_Factorization.py:151
+#: lib/sheet/exercise/X_Factorization.py:155
 msgid "Factorise:"
 msgstr "Factoriser :"
 
-#: lib/sheet/exercise/X_Factorization.py:159
+#: lib/sheet/exercise/X_Factorization.py:163
 msgid "Factorise, if possible:"
 msgstr "Factoriser, si possible :"
 
-#: lib/sheet/exercise/X_Structure.py:197
+#: lib/sheet/exercise/X_Structure.py:195
 msgid "Question:"
 msgstr "Question :"
 
-#: lib/sheet/exercise/X_Structure.py:200
+#: lib/sheet/exercise/X_Structure.py:198
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -1453,7 +1453,7 @@ msgstr "Polygone_à_{n}_côtés"
 msgid "because {L} is positive."
 msgstr "car {L} est positif."
 
-#: lib/sheet/exercise/X_AlgebraExpressionExpansion.py:107
+#: lib/sheet/exercise/X_AlgebraExpressionExpansion.py:111
 msgid "Calculate thanks to a binomial identity:"
 msgstr "Calculer à l'aide d'une identité remarquable :"
 
@@ -1495,10 +1495,11 @@ msgstr "Développer et réduire les expressions suivantes :"
 msgid "Algebra: expand and reduce double brackets"
 msgstr "Calcul littéral: développement \"double\""
 
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:24
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
 msgid "Example of solutions:"
 msgstr "Exemple de solutions :"
 
@@ -1547,7 +1548,7 @@ msgstr "donc : {resolution0} "
 msgid "and: {resolution1} "
 msgstr "et : {resolution1} "
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:488
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:491
 #, python-brace-format
 msgid ""
 "As: {line1} {parallel_to} {line2}, {point0_name} {belongs_to} "
@@ -1559,7 +1560,7 @@ msgstr ""
 "{belongs_to} [{side1_length_name}]  {newline} Donc d'après le théorème de "
 "Thalès : {newline} {ratios} donc : {ratios_substituted} "
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:484
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:487
 #, python-brace-format
 msgid "so: {chunk_reso1} "
 msgstr "donc : {chunk_reso1} "
@@ -1583,6 +1584,30 @@ msgstr "Remarque : {pre_reso0} {newline} "
 #, python-brace-format
 msgid "Note: {pre_reso1} {newline} "
 msgstr "Remarque : {pre_reso1} {newline} "
+
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
+msgid "Intercept theorem: quotients' equalities"
+msgstr "Théorème de Thalès : égalités de quotients"
+
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:25
+msgid ""
+"For each figure, it is possible to apply the intercept theorem. Write the "
+"correct quotients' equalities:"
+msgstr ""
+"Pour chaque figure, il est possible d'appliquer le théorème de Thalès. "
+"Écrire les égalités de quotients :"
+
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:25
+msgid ""
+"Note: in each quotients' equalities, given as example of solution, it is "
+"possible to change the order of the quotients and to invert all quotients "
+"(at once). Moreover, each length can be written in two different ways (for "
+"instance, AB is the same as BA)."
+msgstr ""
+"Remarque : dans chaque égalité de quotients, donnée comme exemple de "
+"solution, il est possible de changer l'ordre des quotients et d'inverser "
+"tous les quotients (en même temps). De plus, chaque longueur peut être "
+"écrite de deux façons différentes (par exemple, AB est la même chose que BA)."
 
 #~ msgid "Mental calculation: perimeters of simple polygons"
 #~ msgstr "Calcul mental : périmètres de polygones simples"

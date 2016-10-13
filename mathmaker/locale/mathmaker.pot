@@ -242,52 +242,52 @@ msgstr ""
 msgid "to the ten thousandth"
 msgstr ""
 
-#: lib/sheet/exercise/X_AlgebraExpressionExpansion.py:102
+#: lib/sheet/exercise/X_AlgebraExpressionExpansion.py:106
 msgid "Expand and reduce"
 msgstr ""
 
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:85
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:89
 msgid "Reduce the following expressions:"
 msgstr ""
 
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:90
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:94
 msgid "Reduce, if possible, the following products:"
 msgstr ""
 
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:92
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:100
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:96
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:104
 msgid "Pay attention that the intermediate line is optional."
 msgstr ""
 
-#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:99
+#: lib/sheet/exercise/X_AlgebraExpressionReduction.py:103
 msgid "Reduce, if possible, the following sums:"
 msgstr ""
 
-#: lib/sheet/exercise/X_Calculation.py:76
+#: lib/sheet/exercise/X_Calculation.py:80
 msgid "Simplify the following fractions:"
 msgstr ""
 
-#: lib/sheet/exercise/X_Calculation.py:82
+#: lib/sheet/exercise/X_Calculation.py:86
 msgid "Calculate and give the result as a simplified fraction:"
 msgstr ""
 
-#: lib/sheet/exercise/X_Factorization.py:144
+#: lib/sheet/exercise/X_Factorization.py:148
 msgid "Factorise: "
 msgstr ""
 
-#: lib/sheet/exercise/X_Factorization.py:151
+#: lib/sheet/exercise/X_Factorization.py:155
 msgid "Factorise:"
 msgstr ""
 
-#: lib/sheet/exercise/X_Factorization.py:159
+#: lib/sheet/exercise/X_Factorization.py:163
 msgid "Factorise, if possible:"
 msgstr ""
 
-#: lib/sheet/exercise/X_Structure.py:197
+#: lib/sheet/exercise/X_Structure.py:195
 msgid "Question:"
 msgstr ""
 
-#: lib/sheet/exercise/X_Structure.py:200
+#: lib/sheet/exercise/X_Structure.py:198
 msgid "Answer:"
 msgstr ""
 
@@ -1354,7 +1354,7 @@ msgstr ""
 msgid "because {L} is positive."
 msgstr ""
 
-#: lib/sheet/exercise/X_AlgebraExpressionExpansion.py:107
+#: lib/sheet/exercise/X_AlgebraExpressionExpansion.py:111
 msgid "Calculate thanks to a binomial identity:"
 msgstr ""
 
@@ -1395,10 +1395,11 @@ msgstr ""
 msgid "Algebra: expand and reduce double brackets"
 msgstr ""
 
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:24
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
 msgid "Example of solutions:"
 msgstr ""
 
@@ -1441,7 +1442,7 @@ msgstr ""
 msgid "and: {resolution1} "
 msgstr ""
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:488
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:491
 #, python-brace-format
 msgid ""
 "As: {line1} {parallel_to} {line2}, {point0_name} {belongs_to} "
@@ -1449,7 +1450,7 @@ msgid ""
 " by the intercept theorem: {newline} {ratios} thus: {ratios_substituted} "
 msgstr ""
 
-#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:484
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:487
 #, python-brace-format
 msgid "so: {chunk_reso1} "
 msgstr ""
@@ -1472,4 +1473,22 @@ msgstr ""
 #: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:415
 #, python-brace-format
 msgid "Note: {pre_reso1} {newline} "
+msgstr ""
+
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
+msgid "Intercept theorem: quotients' equalities"
+msgstr ""
+
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:25
+msgid ""
+"For each figure, it is possible to apply the intercept theorem. Write the "
+"correct quotients' equalities:"
+msgstr ""
+
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:25
+msgid ""
+"Note: in each quotients' equalities, given as example of solution, it is "
+"possible to change the order of the quotients and to invert all quotients "
+"(at once). Moreover, each length can be written in two different ways (for "
+"instance, AB is the same as BA)."
 msgstr ""
