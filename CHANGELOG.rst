@@ -1,6 +1,17 @@
 Changelog
 =========
 
+New in version 0.7.1dev2 (2016-10-13)
+-------------------------------------
+
+* New sheets:
+  - expansion of simple brackets (declined in two versions)
+  - clever multiplications (mental calculation)
+  - intercept theorem: write the correct quotients' equalities
+  - intercept theorem: solve simple exercises
+
+These sheets and all future sheets will be defined in xml files.
+
 New in version 0.7.1dev1 (2016-09-14)
 -------------------------------------
 
