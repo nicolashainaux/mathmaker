@@ -25,6 +25,7 @@ import random
 from collections import namedtuple
 
 from mathmaker.lib import shared, error
+from mathmaker.lib.common import alphabet
 from .X_Structure import X_Structure
 from . import question
 
@@ -242,6 +243,33 @@ def increase_alternation(l, sort_key):
     return l
 
 
+def numbering_device(numbering_kind='disabled'):
+    """
+    This generator provides "limitless" new items for numbering questions.
+
+    Possible values of the argument are:
+    - 'disabled': an empty string will be returned
+    - 'numeric': an integer is returned (until the maximal value is reached,
+    but let's consider there won't be that long exercises!)
+    - 'alphabetic': a letter is returned (once the alphabet is over, as a
+    security, the letter is returned doubled, tripled, etc., thought it is not
+    expected to need more than 26 questions in the same exercise.)
+    """
+    if numbering_kind == 'disabled':
+        while True:
+            yield ''
+    elif numbering_kind == 'numeric':
+        i = 0
+        while True:
+            yield i + 1
+            i += 1
+    elif numbering_kind in ['alphabet', 'alphabetical', 'default']:
+        i = 0
+        while True:
+            yield alphabet.lowercase[i % 26] * ((i // 26 + 1))
+            i += 1
+
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -261,6 +289,7 @@ class X_Generic(X_Structure):
     def __init__(self, **options):
         self.derived = True
         (x_kind, q_list) = options.get('q_list')
+        self.q_numbering = options.get('q_numbering', 'disabled')
         self.layout = options.get('layout', 'default')
         if self.layout != 'default':
             l = self.layout.split(sep='_')
@@ -330,6 +359,7 @@ class X_Generic(X_Structure):
         # Now, we generate the numbers & questions, by type of question first
         self.questions_list = []
         last_draw = [0, 0]
+        numbering = numbering_device(self.q_numbering)
         for q in mixed_q_list:
             nb_sources, extra_infos = get_nb_sources_from_question_info(q)
             nb_to_use = tuple()
@@ -378,9 +408,11 @@ class X_Generic(X_Structure):
                                  'decimal_and_10_100_1000_for_multi']:
                     # __
                     q.options['10_100_1000'] = True
-            self.questions_list += [default_question(q.type,
-                                                     q.options,
-                                                     numbers_to_use=nb_to_use
-                                                     )]
+            self.questions_list += \
+                [default_question(q.type,
+                 q.options,
+                 numbers_to_use=nb_to_use,
+                 number_of_the_question=next(numbering),
+                                  )]
 
         shared.number_of_the_question = 0
