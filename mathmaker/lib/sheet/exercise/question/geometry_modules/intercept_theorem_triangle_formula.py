@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
+from mathmaker.lib.tools.wording import setup_wording_format_of
 from .. import submodule
 
 
@@ -43,8 +44,14 @@ class sub_object(submodule.structure):
             self.figure.ratios_equalities()
             .into_str(as_a_quotients_equality=True))
 
+        self.wording = _(' {line1} {parallel_to} {line2}')
+        self.line1 = self.figure.small[1].length_name
+        self.line2 = self.figure.side[1].length_name
+        setup_wording_format_of(self)
+
     def q(self, **options):
-        return shared.machine.insert_picture(self.figure, scale=0.85)
+        return shared.machine.insert_picture(self.figure, scale=0.85) \
+            + self.wording.format(**self.wording_format)
 
     def a(self, **options):
         return self.ratios
