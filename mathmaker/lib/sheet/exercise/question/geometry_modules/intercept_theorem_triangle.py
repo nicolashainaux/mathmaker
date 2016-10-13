@@ -36,7 +36,7 @@ ALL_LENGTHS_TO_CALCULATE = ['oneside', 'onechunk', 'twosides', 'twochunks',
 
 class sub_object(submodule.structure):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, numbers_to_use, picture='true', **options):
         super().setup("minimal", **options)
         if numbers_to_use[0] < 11:
             raise ValueError('numbers_to_use[0] == {} whereas it should be '
