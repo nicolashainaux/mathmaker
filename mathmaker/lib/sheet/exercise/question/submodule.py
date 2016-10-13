@@ -179,13 +179,15 @@ class structure(object):
                                                  "triple"]))
 
         elif arg == 'intercept_theorem_triangle':
-            if not all([hasattr(self, 'nb1'), hasattr(self, 'nb2'),
-                        hasattr(self, 'nb3'), hasattr(self, 'nb4')]):
-                # __
-                raise error.ImpossibleAction("Setup an intercept theorem "
-                                             "(triangle) figure without a "
-                                             "coefficient and 3 other lengths "
-                                             "provided.")
+            set_lengths = options.get('set_lengths', True)
+            if set_lengths:
+                if not all([hasattr(self, 'nb1'), hasattr(self, 'nb2'),
+                            hasattr(self, 'nb3'), hasattr(self, 'nb4')]):
+                    # __
+                    raise error.ImpossibleAction("Setup an intercept theorem "
+                                                 "(triangle) figure without a "
+                                                 "coefficient and 3 other "
+                                                 "lengths provided.")
             points_names = rotate(next(shared.five_letters_words_source),
                                   random.choice(range(5)))
             alpha, beta = next(shared.angle_ranges_source)
@@ -201,8 +203,9 @@ class structure(object):
                                   str(random.choice(range(20, 60)) / 10))},
                 rotate_around_isobarycenter=rotation_angle)
 
-            self.figure.set_lengths([self.nb2, self.nb3, self.nb4],
-                                    Value(self.nb1))
+            if set_lengths:
+                self.figure.set_lengths([self.nb2, self.nb3, self.nb4],
+                                        Value(self.nb1))
             self.point0_name = self.figure.point[0].name
             self.point1_name = self.figure.point[1].name
             self.side0_length_name = self.figure.side[0].length_name
