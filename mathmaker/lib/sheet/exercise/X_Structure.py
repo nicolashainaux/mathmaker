@@ -111,10 +111,7 @@ class X_Structure(object):
             self.x_layout = X_LAYOUTS['default']
 
         # The slideshow option (for MentalCalculation sheets)
-        self.slideshow = False
-
-        if 'slideshow' in options and options['slideshow']:
-            self.slideshow = True
+        self.slideshow = options.get('slideshow', False)
 
         # END OF OPTIONS ------------------------------------------------------
 
