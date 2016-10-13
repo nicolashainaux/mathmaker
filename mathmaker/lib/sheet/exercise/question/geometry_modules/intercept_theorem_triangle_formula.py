@@ -44,7 +44,7 @@ class sub_object(submodule.structure):
             .into_str(as_a_quotients_equality=True))
 
     def q(self, **options):
-        return shared.machine.insert_picture(self.figure, scale=0.7)
+        return shared.machine.insert_picture(self.figure, scale=0.85)
 
     def a(self, **options):
         return self.ratios
