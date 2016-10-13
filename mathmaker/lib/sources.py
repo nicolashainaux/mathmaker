@@ -174,4 +174,4 @@ class mc_source(object):
         elif tag_classification == 'decimal_and_one_digit_for_divi':
             return shared.deci_one_digit_divi_source.next(**kwargs)
         elif tag_classification == 'nothing':
-            return shared.dried_up_source.next(**kwargs)
+            return ()
