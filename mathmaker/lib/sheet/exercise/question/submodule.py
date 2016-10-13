@@ -206,6 +206,8 @@ class structure(object):
             if set_lengths:
                 self.figure.set_lengths([self.nb2, self.nb3, self.nb4],
                                         Value(self.nb1))
+            self.figure.side[2].invert_length_name()
+            self.figure.small[2].invert_length_name()
             self.point0_name = self.figure.point[0].name
             self.point1_name = self.figure.point[1].name
             self.side0_length_name = self.figure.side[0].length_name

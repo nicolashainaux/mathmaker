@@ -233,6 +233,7 @@ class Segment(Drawable):
         self._name = "[" + self.points[0].name + self.points[1].name + "]"
         self._length = Value(0)
         self._length_has_been_set = False
+        self._length_name = self._points[0].name + self._points[1].name
 
     # --------------------------------------------------------------------------
     ##
@@ -277,7 +278,11 @@ class Segment(Drawable):
     #   @brief Returns the length name of the Segment
     @property
     def length_name(self):
-        return self.points[0].name + self.points[1].name
+        return self._length_name
+
+    def invert_length_name(self):
+        """Swap points' names in the length name. E.g. AB becomes BA."""
+        self._length_name = self._length_name[::-1]
 
     # --------------------------------------------------------------------------
     ##
