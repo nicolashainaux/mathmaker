@@ -148,16 +148,6 @@ def gcd(a, b):
 
 # --------------------------------------------------------------------------
 ##
-#   @brief Returns the GCD of a list of integers
-def gcd_of_the_list(l):
-    if len(l) == 2:
-        return gcd(l[0], l[1])
-    else:
-        return gcd(l.pop(), gcd_of_the_list(l))
-
-
-# --------------------------------------------------------------------------
-##
 #   @brief Returns the GCD that a pupil would think of
 #   If the numbers are too high, the real gcd will be returned to avoid having
 #   reducible fractions found irreducible.
@@ -308,17 +298,6 @@ def deg_to_rad(arg):
                         + ' instead.')
 
     return Decimal(str(arg)) * Decimal(str(math.pi / 180))
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief Conversions between degrees and radians
-def rad_to_deg(arg):
-    if not is_.a_number(arg):
-        raise TypeError('Expected a number, got a ' + str(type(arg))
-                        + ' instead.')
-
-    return arg * 180 / math.pi
 
 
 # --------------------------------------------------------------------------
