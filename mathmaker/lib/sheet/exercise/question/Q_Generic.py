@@ -246,14 +246,14 @@ class Q_Generic(Q_Structure):
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
-        return self.displayable_number + self.q_text \
+        return str(self.displayable_number) + str(self.q_text) \
             + self.add_new_line_to_text
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
-        return self.displayable_number + self.q_answer
+        return str(self.displayable_number) + str(self.q_answer)
 
     # --------------------------------------------------------------------------
     ##
