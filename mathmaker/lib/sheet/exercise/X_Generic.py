@@ -24,7 +24,7 @@ import copy
 import random
 from collections import namedtuple
 
-from mathmaker.lib import shared
+from mathmaker.lib import shared, error
 from .X_Structure import X_Structure
 from . import question
 
@@ -47,6 +47,10 @@ X_LAYOUTS = {'default':
               'ans': [None, 'all']
               }
              }
+
+LAYOUTS = {'default': [None, 'all'],
+           '2cols': [['?', 9, 9], 'all'],
+           }
 
 to_unpack = copy.deepcopy(question.SUBKINDS_TO_UNPACK)
 Q_info = namedtuple('Q_info', 'type,kind,subkind,nb_source,options')
@@ -257,6 +261,32 @@ class X_Generic(X_Structure):
     def __init__(self, **options):
         self.derived = True
         (x_kind, q_list) = options.get('q_list')
+        self.layout = options.get('layout', 'default')
+        if self.layout != 'default':
+            l = self.layout.split(sep='_')
+            if not len(l) == 2:
+                raise error.XMLFileFormatError('A \'layout\' attribute in an '
+                                               'exercise should have two '
+                                               'parts linked with a _. This '
+                                               'is not the case of \'{}\'.'
+                                               .format(str(self.layout)))
+            exc_l, ans_l = l
+            if exc_l not in LAYOUTS:
+                raise error.XMLFileFormatError('The first part of the layout '
+                                               'value (\'{}\') is not correct.'
+                                               ' It should belong to: {}. '
+                                               .format(str(exc_l),
+                                                       str(
+                                                       list(LAYOUTS.keys()))))
+            if ans_l not in LAYOUTS:
+                raise error.XMLFileFormatError('The second part of the layout '
+                                               'value (\'{}\') is not correct.'
+                                               ' It should belong to: {}. '
+                                               .format(str(ans_l),
+                                                       str(
+                                                       list(LAYOUTS.keys()))))
+            X_LAYOUTS.update({self.layout: {'exc': LAYOUTS[exc_l],
+                                            'ans': LAYOUTS[ans_l]}})
         X_Structure.__init__(self,
                              x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                              X_LAYOUT_UNIT, **options)

@@ -21,7 +21,8 @@
 	</layout>
 
 	<!-- Default values: id='generic' kind='' subkind='default' -->
-	<exercise text_exc="For each figure, write the correct formula:" text_ans="Note: in each quotients' equalities, given as example of solution, it is possible to change the order of the quotients and to invert all quotients. Moreover, each length can be written in two different ways (for instance, AB is the same as BA).">
+	<!-- layout="2cols_default" means questions will be in two columns, answers just as usual (no special layout) -->
+	<exercise layout="2cols_default" text_exc="For each figure, write the correct formula:" text_ans="Note: in each quotients' equalities, given as example of solution, it is possible to change the order of the quotients and to invert all quotients. Moreover, each length can be written in two different ways (for instance, AB is the same as BA).">
 		<question kind="intercept_theorem" subkind="triangle_formula">
 			<nb source="nothing">6</nb>
 		</question>

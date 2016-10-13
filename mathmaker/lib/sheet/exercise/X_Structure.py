@@ -102,13 +102,14 @@ class X_Structure(object):
                              "be an int and greater than 6.")
         self.q_nb = number_of_questions
 
+        self.layout = options.get('layout', 'default')
         self.x_layout_unit = X_LAYOUT_UNIT
 
         if (self.x_kind, self.x_subkind) in X_LAYOUTS:
             self.x_layout = X_LAYOUTS[(self.x_kind, self.x_subkind)]
 
         else:
-            self.x_layout = X_LAYOUTS['default']
+            self.x_layout = X_LAYOUTS[self.layout]
 
         # The slideshow option (for MentalCalculation sheets)
         self.slideshow = options.get('slideshow', False)

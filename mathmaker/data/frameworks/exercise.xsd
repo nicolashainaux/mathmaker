@@ -17,6 +17,7 @@
 			<xs:attribute name="subkind"		type="xs:string"	use="optional"	default=""/>
 			<xs:attribute name="text_exc"			type="xs:string"	use="optional"	default=""/>
 			<xs:attribute name="text_ans"			type="xs:string"	use="optional"	default=""/>
+			<xs:attribute name="layout"			type="xs:string"	use="optional"	default="default"/>
 		</xs:complexType>
 	</xs:element>
 
