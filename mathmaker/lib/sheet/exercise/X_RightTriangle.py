@@ -37,6 +37,10 @@ AVAILABLE_X_KIND_VALUES = \
 
 X_LAYOUT_UNIT = "cm"  # [1, 9, 9], (1, 1)
 # ----------------------  lines_nb    col_widths   questions
+# In each list, the first number is the number of lines (or the value '?'),
+# then follow the columns widths. The tuple contains the questions per cell.
+# For instance, [2, 6, 6, 6], (1, 1, 1, 1, 1, 1) means 2 lines, 3 cols (widths
+# 6 cm each), then 1 question per cell.
 X_LAYOUTS = {'default':
              {'exc': [None, 'all'],
               'ans': [None, 'all']}

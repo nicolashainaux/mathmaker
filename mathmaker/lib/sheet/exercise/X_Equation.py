@@ -40,6 +40,10 @@ STD_LAYOUT_for_9_equations = {'exc': [None, 'all'],
                               'ans': [[1, 6, 6, 6], (3, 3, 3)]}
 
 # ----------------------  lines_nb    col_widths   questions
+# In each list, the first number is the number of lines (or the value '?'),
+# then follow the columns widths. The tuple contains the questions per cell.
+# For instance, [2, 6, 6, 6], (1, 1, 1, 1, 1, 1) means 2 lines, 3 cols (widths
+# 6 cm each), then 1 question per cell.
 X_LAYOUTS = {'default':
              {'exc': [None, 'all'],
               'ans': [[2, 6, 6, 6], (1, 1, 1,
