@@ -1492,3 +1492,8 @@ msgid ""
 "(at once). Moreover, each length can be written in two different ways (for "
 "instance, AB is the same as BA)."
 msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle_formula.py:47
+#, python-brace-format
+msgid " {line1} {parallel_to} {line2}"
+msgstr ""

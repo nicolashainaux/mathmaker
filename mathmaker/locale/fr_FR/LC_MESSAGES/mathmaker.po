@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-10-13 10:29+0100\n"
+"PO-Revision-Date: 2016-10-13 11:17+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -1608,6 +1608,11 @@ msgstr ""
 "solution, il est possible de changer l'ordre des quotients et d'inverser "
 "tous les quotients (en même temps). De plus, chaque longueur peut être "
 "écrite de deux façons différentes (par exemple, AB est la même chose que BA)."
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle_formula.py:47
+#, python-brace-format
+msgid " {line1} {parallel_to} {line2}"
+msgstr " ({line1}) {parallel_to} ({line2})"
 
 #~ msgid "Mental calculation: perimeters of simple polygons"
 #~ msgstr "Calcul mental : périmètres de polygones simples"
