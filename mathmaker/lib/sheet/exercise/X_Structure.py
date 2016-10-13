@@ -128,7 +128,7 @@ class X_Structure(object):
 
             if self.text[ex_or_answers] != "":
                 result += self.text[ex_or_answers]
-                result += M.write_new_line()
+                result += M.addvspace(height='10.0pt')
 
             q_n = 0
 

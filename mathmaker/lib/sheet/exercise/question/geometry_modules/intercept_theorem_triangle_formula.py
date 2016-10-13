@@ -50,8 +50,8 @@ class sub_object(submodule.structure):
         setup_wording_format_of(self)
 
     def q(self, **options):
-        return shared.machine.insert_picture(self.figure, scale=0.85) \
-            + self.wording.format(**self.wording_format)
+        return self.wording.format(**self.wording_format) + ' \\newline '\
+            + shared.machine.insert_picture(self.figure, scale=0.85)
 
     def a(self, **options):
         return self.ratios
