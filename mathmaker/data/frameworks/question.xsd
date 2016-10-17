@@ -12,6 +12,7 @@
 			<xs:attribute name="subkind"						type="xs:string"	use="required"/>
 			<xs:attribute name="context"						type="xs:string"	use="optional"/>
 			<xs:attribute name="variant"						type="xs:string"	use="optional"/>
+			<xs:attribute name="ans_variant"			type="xs:string"	use="optional"	default="default"/>
 			<xs:attribute name="detailed"						type="xs:boolean"	use="optional" default="true"/>
 			<xs:attribute name="picture"						type="xs:boolean"	use="optional"/>
 			<xs:attribute name="rank_matches_invisible_zero"	type="xs:string"	use="optional"/>

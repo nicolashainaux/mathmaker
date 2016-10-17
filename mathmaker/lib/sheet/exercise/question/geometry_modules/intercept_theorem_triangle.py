@@ -487,13 +487,34 @@ class sub_object(submodule.structure):
                     chunks_part + _('so: {chunk_reso1} '),
                     multicolumns=2)
 
+        ans_variant = options.get('ans_variant', 'default')
+        ans_texts = {
+            'default': _('As: {line1} {parallel_to} {line2}, '
+                         '{point0_name} {belongs_to} {side0_length_name} and '
+                         '{point1_name} {belongs_to} {side1_length_name}, '
+                         'then by the intercept theorem: {newline} '
+                         '{ratios} '
+                         'thus: {ratios_substituted} '),
+            'alternative1': _('As {line1} is parallel to {line2}, '
+                              'and as the line {chunk0_length_name} cuts '
+                              'the line {chunk1_length_name} at point '
+                              '{main_vertex_name}, '
+                              'then by the intercept theorem: {newline} '
+                              '{ratios} '
+                              'thus: {ratios_substituted} '),
+            'alternative2': _('As: {line1} is parallel to {line2}, '
+                              'and as {vertex1_name}, {point0_name} and '
+                              '{main_vertex_name} on one hand, '
+                              '{vertex2_name}, {point1_name} and '
+                              '{main_vertex_name} on the other hand,'
+                              'are aligned in the same order, '
+                              'then by the intercept theorem: {newline} '
+                              '{ratios} '
+                              'thus: {ratios_substituted} ')
+        }
+
         self.answer_wording = preamble \
-            + _('As: {line1} {parallel_to} {line2}, '
-                '{point0_name} {belongs_to} {side0_length_name} and '
-                '{point1_name} {belongs_to} {side1_length_name}, '
-                'then by the intercept theorem: {newline} '
-                '{ratios} '
-                'thus: {ratios_substituted} ') \
+            + ans_texts[ans_variant] \
             + lengths_resolutions_part \
             + chunks_part
 

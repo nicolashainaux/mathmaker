@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFAULT MENTAL CALCULATION SHEET -->
+
+
+<sheet header="" title="Intercept theorem" subtitle="" text="" answers_title="Example of solutions:">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="std" font_size_offset="-1">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default values: id='generic' kind='' subkind='default' -->
+	<exercise>
+		<!-- variant consists of 3 "flags" connected by '_' (underscore)
+			   1st flag is whether a side should be computed or a chunk of a side, or (oneside/onechunk/onerandom/twosides/twochunks/onesideonechunk/tworandom/random)
+			   2d flag is whether all lengths values will be displayed or only two couples of values (random/all/twocouples)
+				 /!\ if 1st value belongs to twosides/twochunks/onesideonechunk/tworandom or if random leads to one of these, then 2d value will be automatically considered as 'all'
+				 3d flag is whether two lengths should be added to get another, at some point, or not (false/true/random)
+			   Default values (if variant is not here) will be as if variant="oneside_random_false"
+			   It's also impossible to ask to calculate the two chunks (so display all lengths available)
+			   and in the same time to require an "additive" version of the exercise (1st flag true),
+			   so this case will be automatically removed. -->
+		<question kind="intercept_theorem" subkind="triangle" variant="oneside_all_false" ans_variant="alternative2">
+			<nb source="ext_proportionality_quadruplet_11to30">1</nb>
+		</question>
+	</exercise>
+
+	<exercise>
+		<question kind="intercept_theorem" subkind="triangle" variant="oneside_twocouples_true" ans_variant="alternative2">
+			<nb source="ext_proportionality_quadruplet_11to50">1</nb>
+		</question>
+	</exercise>
+
+	<exercise>
+		<question kind="intercept_theorem" subkind="triangle" variant="twosides_all_false" ans_variant="alternative2">
+			<nb source="ext_proportionality_quadruplet_21to40">1</nb>
+		</question>
+	</exercise>
+
+	<exercise>
+		<question kind="intercept_theorem" subkind="triangle" variant="onesideonechunk_all_true" ans_variant="alternative2">
+			<nb source="ext_proportionality_quadruplet_31to50">1</nb>
+		</question>
+	</exercise>
+
+	<!-- <exercise>
+		<question kind="intercept_theorem" subkind="triangle">
+			<nb source="ext_proportionality_quadruplet_2to100">1</nb>
+		</question>
+	</exercise>
+
+	<exercise>
+		<question kind="intercept_theorem" subkind="triangle">
+			<nb source="ext_proportionality_quadruplet_2to100">1</nb>
+		</question>
+	</exercise> -->
+
+</sheet>

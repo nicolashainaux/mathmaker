@@ -210,6 +210,9 @@ class structure(object):
             self.figure.small[2].invert_length_name()
             self.point0_name = self.figure.point[0].name
             self.point1_name = self.figure.point[1].name
+            self.main_vertex_name = self.figure.vertex[0].name
+            self.vertex1_name = self.figure.vertex[1].name
+            self.vertex2_name = self.figure.vertex[2].name
             self.side0_length_name = self.figure.side[0].length_name
             self.small0_length_name = self.figure.small[0].length_name
             self.chunk0_length_name = self.figure.chunk[0].length_name
