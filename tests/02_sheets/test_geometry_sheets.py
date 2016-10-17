@@ -36,6 +36,22 @@ def test_intercept_theorem_triangles():
         str(S_Generic(XML_SHEETS['intercept_theorem_triangles'])))
 
 
+def test_intercept_theorem_triangles_alt1():
+    """
+    Checks if 'intercept_theorem_triangles_alt1' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['intercept_theorem_triangles_alt1'])))
+
+
+def test_intercept_theorem_triangles_alt2():
+    """
+    Checks if 'intercept_theorem_triangles_alt2' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['intercept_theorem_triangles_alt2'])))
+
+
 def test_intercept_theorem_triangles_formulae():
     """
     Is 'intercept_theorem_triangles_formulae' generated with no error?
