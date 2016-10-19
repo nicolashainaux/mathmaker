@@ -950,7 +950,7 @@ class InterceptTheoremConfiguration(Triangle):
         :param points_names: a list of 5 points names.
         :type points_names: a list of str
         :param butterfly: turn to True if you want to use the "butterfly"
-        configuration. Not implemented yet (0.7.1dev2).
+        configuration.
         :type butterfly: boolean
         :param sketch: turn to False if you want to use custom values for
         sides, angles and ratio. As long as it is True, these values will be
@@ -961,7 +961,7 @@ class InterceptTheoremConfiguration(Triangle):
         :type build_ratio: numeric Value
         :param build_dimensions: dimensions of the main (biggest) triangle
         :type build_dimensions: dict providing 'side0', 'angle1', and 'side1'
-        keys. Any other possibility is not implemented yet (0.7.1dev2)
+        keys. Any other possibility is not implemented yet (0.7.1dev3)
         :param rotate_around_isobarycenter: tells if the main triangle should
         be rotated around its barycenter. If sketch is True, it will be
         considered as 'randomly'.
@@ -976,6 +976,10 @@ class InterceptTheoremConfiguration(Triangle):
             points_names = default_points_names[butterfly]
         if build_ratio is None:
             build_ratio = Decimal('-0.75') if butterfly else Decimal('0.75')
+        else:
+            build_ratio = Decimal(build_ratio)
+        if butterfly and build_ratio > 0:
+            build_ratio *= -1
         self._ratio = build_ratio
         if build_dimensions is None:
             build_dimensions = {'side0': Decimal('5'),
@@ -1080,6 +1084,8 @@ class InterceptTheoremConfiguration(Triangle):
                              .bisector_vector(Vector((a.points[2],
                                                       a.points[1])))
                              .slope for a in self.angle]
+        if self.butterfly:
+            names_angles_list[0] = (names_angles_list[0] + 90) % 360
         for (i, v) in enumerate(self.vertex):
             result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
                       .format(n=v.name, a=str(names_angles_list[i]))
