@@ -29,7 +29,7 @@ class sub_object(submodule.structure):
 
     def __init__(self, numbers_to_use, picture='true', **options):
         super().setup("minimal", **options)
-        super().setup("intercept_theorem_triangle", set_lengths=False,
+        super().setup("intercept_theorem_figure", set_lengths=False,
                       **options)
 
         all_segments = self.figure.small \

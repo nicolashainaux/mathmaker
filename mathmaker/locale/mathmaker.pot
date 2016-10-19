@@ -1395,16 +1395,18 @@ msgstr ""
 msgid "Algebra: expand and reduce double brackets"
 msgstr ""
 
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
-#: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:24
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
+#: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:24
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
 msgid "Example of solutions:"
 msgstr ""
 
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
@@ -1421,6 +1423,7 @@ msgid "To include .eps pictures (loads graphicx)"
 msgstr ""
 
 #: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:350
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_butterfly.py:141
 #, python-brace-format
 msgid ""
 "The drawn figure is out of shape. {newline} The lengths are given in "
@@ -1428,6 +1431,7 @@ msgid ""
 "{newline} Determine the length of {length1_name}."
 msgstr ""
 
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_butterfly.py:148
 #: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:357
 #, python-brace-format
 msgid ""
@@ -1437,11 +1441,13 @@ msgid ""
 msgstr ""
 
 #: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:432
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_butterfly.py:172
 #, python-brace-format
 msgid "hence: {resolution0} "
 msgstr ""
 
 #: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:443
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_butterfly.py:183
 #, python-brace-format
 msgid "and: {resolution1} "
 msgstr ""
@@ -1503,6 +1509,7 @@ msgid " {line1} {parallel_to} {line2}"
 msgstr ""
 
 #: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle.py:498
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_butterfly.py:195
 #, python-brace-format
 msgid ""
 "As {line1} is parallel to {line2}, and as the line {chunk0_length_name} cuts"
@@ -1517,4 +1524,22 @@ msgid ""
 " {main_vertex_name} on one hand, {vertex2_name}, {point1_name} and "
 "{main_vertex_name} on the other hand,are aligned in the same order, then by "
 "the intercept theorem: {newline} {ratios} thus: {ratios_substituted} "
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_butterfly.py:188
+#, python-brace-format
+msgid ""
+"As: {line1} {parallel_to} {line2}, {main_vertex_name} {belongs_to} "
+"{chunk0_length_name} and {main_vertex_name} {belongs_to} "
+"{chunk1_length_name}, then by the intercept theorem: {newline} {ratios} "
+"thus: {ratios_substituted} "
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_butterfly.py:202
+#, python-brace-format
+msgid ""
+"As: {line1} is parallel to {line2}, and as {point0_name}, {main_vertex_name}"
+" and {vertex1_name} on one hand, {point1_name}, {main_vertex_name} and "
+"{vertex2_name} on the other hand,are aligned in the same order, then by the "
+"intercept theorem: {newline} {ratios} thus: {ratios_substituted} "
 msgstr ""

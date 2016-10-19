@@ -170,7 +170,7 @@ def test_fig1_into_euk(fig1):
         'draw\n'\
         '  (C.D.E)\n'\
         '  (C.B.A)\n\n'\
-        '  "C" C 262.2 deg, font("sffamily")\n'\
+        '  "C" C 352.2 deg, font("sffamily")\n'\
         '  "D" D 15 deg, font("sffamily")\n'\
         '  "E" E 147.4 deg, font("sffamily")\n'\
         '  "B" B 214.8 deg, font("sffamily")\n'\

@@ -178,29 +178,44 @@ class structure(object):
             self.square.set_marks(random.choice(["simple", "double",
                                                  "triple"]))
 
-        elif arg == 'intercept_theorem_triangle':
+        elif arg == 'intercept_theorem_figure':
+            butterfly = options.get('butterfly', False)
             set_lengths = options.get('set_lengths', True)
             if set_lengths:
                 if not all([hasattr(self, 'nb1'), hasattr(self, 'nb2'),
                             hasattr(self, 'nb3'), hasattr(self, 'nb4')]):
                     # __
                     raise error.ImpossibleAction("Setup an intercept theorem "
-                                                 "(triangle) figure without a "
+                                                 "figure without a "
                                                  "coefficient and 3 other "
                                                  "lengths provided.")
-            points_names = rotate(next(shared.five_letters_words_source),
-                                  random.choice(range(5)))
+            points_names = next(shared.five_letters_words_source)
+            if butterfly:
+                points_names = list(rotate(points_names, -1))
+                (points_names[0], points_names[1]) = (points_names[1],
+                                                      points_names[0])
+                points_names = ''.join(points_names)
+            else:
+                points_names = rotate(points_names, random.choice(range(5)))
             alpha, beta = next(shared.angle_ranges_source)
             rotation_angle = alpha + random.choice(range(beta - alpha))
             self.figure = InterceptTheoremConfiguration(
                 points_names=points_names,
                 build_ratio=random.choice(range(25, 75)) / 100,
                 sketch=False,
-                build_dimensions={'side0': Decimal('5'),
-                                  'angle1': Decimal(
-                                  str(random.choice(range(45, 120)))),
-                                  'side1': Decimal(
-                                  str(random.choice(range(20, 60)) / 10))},
+                butterfly=butterfly,
+                build_dimensions={
+                    False: {'side0': Decimal('5'),
+                            'angle1':
+                            Decimal(str(random.choice(range(45, 120)))),
+                            'side1':
+                            Decimal(str(random.choice(range(20, 60)) / 10))},
+                    True: {'side0': Decimal('4'),
+                           'angle1':
+                           Decimal(str(random.choice(range(55, 110)))),
+                           'side1':
+                           Decimal(str(random.choice(range(15, 50)) / 10))}
+                }[butterfly],
                 rotate_around_isobarycenter=rotation_angle)
 
             if set_lengths:

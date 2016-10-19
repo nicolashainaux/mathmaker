@@ -45,7 +45,7 @@ class sub_object(submodule.structure):
         super().setup("numbers", nb=numbers_to_use,
                       shuffle_nbs=False, **options)
         super().setup("length_units", **options)
-        super().setup("intercept_theorem_triangle", **options)
+        super().setup("intercept_theorem_figure", **options)
 
         if self.variant == 'default':
             variant = ['oneside', 'random', 'false']
