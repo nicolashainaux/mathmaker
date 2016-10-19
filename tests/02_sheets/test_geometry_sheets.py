@@ -82,3 +82,11 @@ def test_intercept_theorem_butterflies_alt2():
     """
     shared.machine.write_out(
         str(S_Generic(XML_SHEETS['intercept_theorem_butterflies_alt2'])))
+
+
+def test_intercept_theorem_butterflies_formulae():
+    """
+    Is 'intercept_theorem_butterflies_formulae' generated with no error?
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['intercept_theorem_butterflies_formulae'])))
