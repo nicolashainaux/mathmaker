@@ -927,7 +927,7 @@ class RightTriangle(Triangle):
 class InterceptTheoremConfiguration(Triangle):
 
     def __init__(self,
-                 points_names=None,  # 'AMBCN'
+                 points_names=None,  # 'AMBCN' | 'CBDEA' ("butterfly" version)
                  butterfly=False,
                  sketch=True,
                  build_ratio=None,  # Decimal('0.75')
@@ -950,7 +950,7 @@ class InterceptTheoremConfiguration(Triangle):
         :param points_names: a list of 5 points names.
         :type points_names: a list of str
         :param butterfly: turn to True if you want to use the "butterfly"
-        configuration. Not implemented yet (0.7.1dev2).
+        configuration.
         :type butterfly: boolean
         :param sketch: turn to False if you want to use custom values for
         sides, angles and ratio. As long as it is True, these values will be
@@ -961,7 +961,7 @@ class InterceptTheoremConfiguration(Triangle):
         :type build_ratio: numeric Value
         :param build_dimensions: dimensions of the main (biggest) triangle
         :type build_dimensions: dict providing 'side0', 'angle1', and 'side1'
-        keys. Any other possibility is not implemented yet (0.7.1dev2)
+        keys. Any other possibility is not implemented yet (0.7.1dev3)
         :param rotate_around_isobarycenter: tells if the main triangle should
         be rotated around its barycenter. If sketch is True, it will be
         considered as 'randomly'.
@@ -969,11 +969,17 @@ class InterceptTheoremConfiguration(Triangle):
         (the number of degrees to use)
         """
         self._enlargement_ratio = None
+        self._butterfly = butterfly
 
         if points_names is None:
-            points_names = 'AMBCN'
+            default_points_names = {False: 'AMBCN', True: 'CBDEA'}
+            points_names = default_points_names[butterfly]
         if build_ratio is None:
-            build_ratio = Decimal('0.75')
+            build_ratio = Decimal('-0.75') if butterfly else Decimal('0.75')
+        else:
+            build_ratio = Decimal(build_ratio)
+        if butterfly and build_ratio > 0:
+            build_ratio *= -1
         self._ratio = build_ratio
         if build_dimensions is None:
             build_dimensions = {'side0': Decimal('5'),
@@ -1028,12 +1034,15 @@ class InterceptTheoremConfiguration(Triangle):
         self._ortho_v = v
 
     def into_euk(self, **options):
-        """Create the euk string to save in the file"""
+        """Create the euk file content, as a str"""
         points_list_for_the_box = copy.deepcopy(self.vertex)
-        if self.u.label != Value(''):
-            points_list_for_the_box += self._U0U1
-        if self.v.label != Value(''):
-            points_list_for_the_box += self._V0V1
+        if not self.butterfly:
+            if self.u.label != Value(''):
+                points_list_for_the_box += self._U0U1
+            if self.v.label != Value(''):
+                points_list_for_the_box += self._V0V1
+        else:
+            points_list_for_the_box += self.point
         box_values = self.work_out_euk_box(vertices=points_list_for_the_box)
         result = "box {val0}, {val1}, {val2}, {val3}\n"\
                  .format(val0=str(box_values[0]),
@@ -1043,44 +1052,64 @@ class InterceptTheoremConfiguration(Triangle):
 
         result += "\n"
 
-        for l in [self.vertex, self._point, self._U0U1, self._V0V1]:
+        points_list = [self.vertex, self._point]
+        if not self.butterfly:
+            points_list += [self._U0U1, self._V0V1]
+        for l in points_list:
             for p in l:
                 result += "{name} = point({x}, {y})\n".format(name=p.name,
                                                               x=p.x,
                                                               y=p.y)
-        result += "u = vector({}, {})\n"\
-            .format(self._U0U1[0].name, self._U0U1[1].name)
-        result += "v = vector({}, {})\n"\
-            .format(self._V0V1[0].name, self._V0V1[1].name)
+        if not self.butterfly:
+            result += "u = vector({}, {})\n"\
+                .format(self._U0U1[0].name, self._U0U1[1].name)
+            result += "v = vector({}, {})\n"\
+                .format(self._V0V1[0].name, self._V0V1[1].name)
 
         result += "\ndraw\n  "
         result += "("
         result += '.'.join([v.name for v in self.vertex])
         result += ")\n"
-        result += '  ' + '.'.join([p.name for p in self._point])
+        if self.butterfly:
+            result += "  ("
+            result += '.'.join(v.name for v in [self.vertex[0],
+                                                self._point[0],
+                                                self._point[1]])
+            result += ")\n"
+        else:
+            result += '  ' + '.'.join([p.name for p in self._point])
         result += "\n"
 
         names_angles_list = [Vector((a.points[0], a.points[1]))
                              .bisector_vector(Vector((a.points[2],
                                                       a.points[1])))
                              .slope for a in self.angle]
+        if self.butterfly:
+            names_angles_list[0] = (names_angles_list[0] + 90) % 360
         for (i, v) in enumerate(self.vertex):
             result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
                       .format(n=v.name, a=str(names_angles_list[i]))
 
         names_angles_list = [self._ortho_u.slope, self._ortho_v.slope]
+        if self.butterfly:
+            names_angles_list = names_angles_list[::-1]
         for (i, p) in enumerate(self._point):
             result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
                       .format(n=p.name, a=str(names_angles_list[i]))
 
-        if self.u.label not in [Value(''), Value('hidden')]:
-            result += '  u {}\n'.format(self._U0U1[0].name)
-            result += '  -u {}\n'.format(self._U0U1[1].name)
-        if self.v.label not in [Value(''), Value('hidden')]:
-            result += '  v {}\n'.format(self._V0V1[0].name)
-            result += '  -v {}\n'.format(self._V0V1[1].name)
+        if not self.butterfly:
+            if self.u.label not in [Value(''), Value('hidden')]:
+                result += '  u {}\n'.format(self._U0U1[0].name)
+                result += '  -u {}\n'.format(self._U0U1[1].name)
+            if self.v.label not in [Value(''), Value('hidden')]:
+                result += '  v {}\n'.format(self._V0V1[0].name)
+                result += '  -v {}\n'.format(self._V0V1[1].name)
 
-        for s in self._small + self._chunk + [self.u, self.v, self.side[1]]:
+        label_segments = {False: self._small + self._chunk
+                          + [self.u, self.v, self.side[1]],
+                          True: self._small + self._side
+                          }
+        for s in label_segments[self.butterfly]:
             result += s.label_into_euk()
 
         result += "end"
@@ -1140,6 +1169,10 @@ class InterceptTheoremConfiguration(Triangle):
         return Table_UP(self.enlargement_ratio,
                         [s.length for s in self.small],
                         infos)
+
+    @property
+    def butterfly(self):
+        return self._butterfly
 
     @property
     def chunk(self):

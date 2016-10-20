@@ -36,9 +36,57 @@ def test_intercept_theorem_triangles():
         str(S_Generic(XML_SHEETS['intercept_theorem_triangles'])))
 
 
+def test_intercept_theorem_triangles_alt1():
+    """
+    Checks if 'intercept_theorem_triangles_alt1' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['intercept_theorem_triangles_alt1'])))
+
+
+def test_intercept_theorem_triangles_alt2():
+    """
+    Checks if 'intercept_theorem_triangles_alt2' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['intercept_theorem_triangles_alt2'])))
+
+
 def test_intercept_theorem_triangles_formulae():
     """
     Is 'intercept_theorem_triangles_formulae' generated with no error?
     """
     shared.machine.write_out(
         str(S_Generic(XML_SHEETS['intercept_theorem_triangles_formulae'])))
+
+
+def test_intercept_theorem_butterflies():
+    """
+    Checks if 'intercept_theorem_butterflies' is generated without any error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['intercept_theorem_butterflies'])))
+
+
+def test_intercept_theorem_butterflies_alt1():
+    """
+    Checks if 'intercept_theorem_butterflies_alt1' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['intercept_theorem_butterflies_alt1'])))
+
+
+def test_intercept_theorem_butterflies_alt2():
+    """
+    Checks if 'intercept_theorem_butterflies_alt2' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['intercept_theorem_butterflies_alt2'])))
+
+
+def test_intercept_theorem_butterflies_formulae():
+    """
+    Is 'intercept_theorem_butterflies_formulae' generated with no error?
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['intercept_theorem_butterflies_formulae'])))

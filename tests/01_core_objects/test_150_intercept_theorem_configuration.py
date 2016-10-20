@@ -46,6 +46,15 @@ def fig0b():
     return fig0b
 
 
+@pytest.fixture
+def fig1():
+    fig1 = InterceptTheoremConfiguration(sketch=False,
+                                         butterfly=True,
+                                         rotate_around_isobarycenter=40)
+    fig1.set_lengths([6, 12, 9], Fraction((Item(4), Item(3))))
+    return fig1
+
+
 def test_fig0_into_euk(fig0):
     """Check this figure's generated euk file."""
     fig0.setup_labels([True, True, True, True, True, True, True, True],
@@ -145,3 +154,31 @@ def test_fig0b_cross_product_equation2(fig0b):
     assert fig0b.ratios_equalities_substituted()\
         .into_crossproduct_equation(Item('CA')).printed == wrap_nb(
             '\\frac{12}{16}=\\frac{9}{\\text{CA}}')
+
+
+def test_fig1_into_euk(fig1):
+    """Check this figure's generated euk file."""
+    fig1.setup_labels([True, True, True, True, True, True],
+                      segments_list=fig1.side + fig1.small)
+    assert fig1.into_euk() == \
+        'box -2.08, -4.68, 6.01, 4.27\n\n'\
+        'C = point(1.58, -0.76)\n'\
+        'D = point(5.41, 2.45)\n'\
+        'E = point(-1.48, 3.67)\n'\
+        'B = point(-1.29, -3.17)\n'\
+        'A = point(3.88, -4.08)\n\n'\
+        'draw\n'\
+        '  (C.D.E)\n'\
+        '  (C.B.A)\n\n'\
+        '  "C" C 352.2 deg, font("sffamily")\n'\
+        '  "D" D 15 deg, font("sffamily")\n'\
+        '  "E" E 147.4 deg, font("sffamily")\n'\
+        '  "B" B 214.8 deg, font("sffamily")\n'\
+        '  "A" A 309.7 deg, font("sffamily")\n'\
+        '  $\\rotatebox{40}{\sffamily 6}$ C 220 - 7.8 deg 6\n'\
+        '  $\\rotatebox{350}{\sffamily 12}$ B 350 - 6.3 deg 8.4\n'\
+        '  $\\rotatebox{-55}{\sffamily 9}$ A 125 - 7.5 deg 6.5\n'\
+        '  $\\rotatebox{40}{\sffamily 8}$ C 40 - 6.5 deg 8\n'\
+        '  $\\rotatebox{-10}{\sffamily 16}$ D 170 - 5.2 deg 11.2\n'\
+        '  $\\rotatebox{305}{\sffamily 12}$ E 305 - 6.2 deg 8.7\n'\
+        'end'

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFAULT MENTAL CALCULATION SHEET -->
+
+
+<sheet header="" title="Intercept theorem" subtitle="" text="" answers_title="Example of solutions:">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="std" font_size_offset="-1">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default values: id='generic' kind='' subkind='default' -->
+	<exercise>
+		<!-- variant consists of 2 "flags" connected by '_' (underscore)
+			   1st flag is whether one or two sides should be computed (oneside/twosides/random)
+			   2d flag is whether all lengths values will be displayed or only two couples of values (random/all/twocouples)
+				 /!\ if 1st value is twosides (or if random leads to it), then 2d value will be automatically considered as 'all'
+			   Default values (if variant is not here) will be as if variant="random_random" -->
+		<question kind="intercept_theorem" subkind="butterfly" variant="oneside_all" ans_variant="alternative2">
+			<nb source="ext_proportionality_quadruplet_21to30">1</nb>
+		</question>
+	</exercise>
+
+	<exercise>
+		<question kind="intercept_theorem" subkind="butterfly" variant="oneside_twocouples" ans_variant="alternative2">
+			<nb source="ext_proportionality_quadruplet_15to30">1</nb>
+		</question>
+	</exercise>
+
+	<exercise>
+		<question kind="intercept_theorem" subkind="butterfly" variant="twosides_all" ans_variant="alternative2">
+			<nb source="ext_proportionality_quadruplet_15to30">1</nb>
+		</question>
+	</exercise>
+
+	<exercise>
+		<question kind="intercept_theorem" subkind="butterfly" variant="twosides_all" ans_variant="alternative2">
+			<nb source="ext_proportionality_quadruplet_15to50">1</nb>
+		</question>
+	</exercise>
+
+</sheet>
