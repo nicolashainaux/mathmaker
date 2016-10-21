@@ -1,6 +1,13 @@
 Changelog
 =========
 
+New in version 0.7.1dev3 (2016-10-21)
+-------------------------------------
+
+* New sheets:
+  - intercept theorem: "butterfly" configuration
+  - intercept theorem: converse
+
 New in version 0.7.1dev2 (2016-10-13)
 -------------------------------------
 

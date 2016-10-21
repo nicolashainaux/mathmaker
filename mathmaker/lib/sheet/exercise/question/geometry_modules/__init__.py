@@ -29,8 +29,12 @@
 
 from . import (intercept_theorem_triangle, intercept_theorem_triangle_formula,
                intercept_theorem_butterfly,
-               intercept_theorem_butterfly_formula)
+               intercept_theorem_butterfly_formula,
+               intercept_theorem_converse_triangle,
+               intercept_theorem_converse_butterfly)
 
 __all__ = ['intercept_theorem_triangle', 'intercept_theorem_triangle_formula',
            'intercept_theorem_butterfly',
-           'intercept_theorem_butterfly_formula']
+           'intercept_theorem_butterfly_formula',
+           'intercept_theorem_converse_triangle',
+           'intercept_theorem_converse_butterfly']

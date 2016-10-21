@@ -329,7 +329,7 @@ class S_Structure(object):
                     result += self.exercises_list[ex_n].to_str(ex_or_answers)
                     if self.layout_type == 'std' and ex_or_answers == 'ans':
                         if i < how_many - 1:
-                            result += M.addvspace(height='30.0pt')
+                            result += M.addvspace(height='29.0pt')
                     else:
                         result += M.write_new_line(check=result[-2:])
                     # if not (ex_or_answers == 'ans' \

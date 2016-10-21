@@ -218,7 +218,8 @@ automatically increments the counter").format(cmd_name="exercise",
         """
         Add a vertical space.
         """
-        output_str = "\n\n\\addvspace{{{height}}}\n\n".format(height=height)
+        output_str = "\n\n\n\\addvspace{{{height}}}\n\n\n"\
+            .format(height=height)
         if self.redirect_output_to_str:
             return output_str
         else:

@@ -519,7 +519,7 @@ def wrap_latex_keywords(s: str) -> str:
     p = re.compile(r'{(\d{1,}\.?\,?\d*(?:pt|em|cm)*)}', re.LOCALE)
     s = p.sub(r'{{\1}}', s)
     for w in ['multicols', 'multicols*', 'tabular', 'tikzpicture',
-              '\centering']:
+              '\centering', 'll']:
         s = s.replace('{' + w + '}', '{{' + w + '}}')
     return s
 

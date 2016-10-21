@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2016-10-19 08:31+0100\n"
+"PO-Revision-Date: 2016-10-21 07:21+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -1495,21 +1495,28 @@ msgstr "Développer et réduire les expressions suivantes :"
 msgid "Algebra: expand and reduce double brackets"
 msgstr "Calcul littéral: développement \"double\""
 
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:6
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:24
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
 msgid "Example of solutions:"
 msgstr "Exemple de solutions :"
 
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
 msgid "Intercept theorem"
 msgstr "Théorème de Thalès"
 
@@ -1596,9 +1603,11 @@ msgid "Note: {pre_reso1} {newline} "
 msgstr "Remarque : {pre_reso1} {newline} "
 
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:6
 msgid "Intercept theorem: quotients' equalities"
 msgstr "Théorème de Thalès : égalités de quotients"
 
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:25
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:25
 msgid ""
 "For each figure, it is possible to apply the intercept theorem. Write the "
@@ -1607,6 +1616,7 @@ msgstr ""
 "Pour chaque figure, il est possible d'appliquer le théorème de Thalès. "
 "Écrire les égalités de quotients :"
 
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:25
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:25
 msgid ""
 "Note: in each quotients' equalities, given as example of solution, it is "
@@ -1620,6 +1630,7 @@ msgstr ""
 "écrite de deux façons différentes (par exemple, AB est la même chose que BA)."
 
 #: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle_formula.py:47
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_butterfly_formula.py:44
 #, python-brace-format
 msgid " {line1} {parallel_to} {line2}"
 msgstr " ({line1}) {parallel_to} ({line2})"
@@ -1677,6 +1688,104 @@ msgstr ""
 "{point1_name}, {main_vertex_name} et {vertex2_name} d'autre part, {newline} "
 "sont alignés dans le même ordre. {newline} Donc d'après le théorème de "
 "Thalès : {newline} {ratios} donc : {ratios_substituted} "
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_butterfly.py:52
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_triangle.py:54
+#, python-brace-format
+msgid ""
+"The drawn figure is out of shape. {newline} The lengths are given in "
+"{length_unit}. {newline} {newline} Prove that {line1} is parallel to {line2}."
+msgstr ""
+"La figure ci-contre n'est pas à l'échelle. {newline} Les longueurs sont "
+"données en {length_unit}. {newline} {newline} Montrer que ({line1}) et "
+"({line2}) sont parallèles. "
+
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:6
+msgid "Converse of intercept theorem"
+msgstr "Réciproque du théorème de Thalès"
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_butterfly.py:93
+#, python-brace-format
+msgid ""
+"{vertex1_name}, {main_vertex_name} and {point0_name} on one hand, "
+"{vertex2_name}, {main_vertex_name} and {point1_name} on the other hand,are "
+"aligned in the same order. "
+msgstr ""
+"{vertex1_name}, {main_vertex_name} et {point0_name} d'une part, "
+"{vertex2_name}, {main_vertex_name} et {point1_name} d'autre part, sont "
+"alignés dans le même ordre. "
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_butterfly.py:100
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_triangle.py:101
+#, python-brace-format
+msgid ""
+"\\begin{multicols}{2} On one hand: {ratio1} and on the other hand: {ratio2} "
+"\\end{multicols} ans as: {crossproduct} then: {equal_ratios} {newline} "
+msgstr ""
+"\\begin{multicols}{2} D'une part : {ratio1} d'autre part : {ratio2} "
+"\\end{multicols} or : {crossproduct} donc : {equal_ratios} {newline} "
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_triangle.py:94
+#, python-brace-format
+msgid ""
+"{main_vertex_name}, {point0_name} and {vertex1_name} on one hand, "
+"{main_vertex_name}, {point1_name} and {vertex2_name} on the other hand, are "
+"aligned in the same order. {newline} "
+msgstr ""
+"{main_vertex_name}, {point0_name} et {vertex1_name} d'une part, "
+"{main_vertex_name}, {point1_name} et {vertex2_name} d'autre part, sont "
+"alignés dans le même ordre.  {newline} "
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_butterfly.py:107
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_triangle.py:108
+#, python-brace-format
+msgid ""
+"Hence by the converse of the intercept theorem, {line1} is parallel to "
+"{line2}."
+msgstr ""
+"Donc d'après la réciproque du théorème de Thalès, ({line1}) est parallèle à "
+"({line2})."
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_triangle.py:88
+#, python-brace-format
+msgid ""
+"\\begin{tabular}{ll}We have: & {point0_name} {belongs_to} "
+"{side0_length_name} \\\\  & {point1_name} {belongs_to} {side1_length_name} "
+"\\end{tabular}"
+msgstr ""
+"\\begin{tabular}{ll}On sait que : & {point0_name} {belongs_to} "
+"[{side0_length_name}] \\\\  & {point1_name} {belongs_to} "
+"[{side1_length_name}] \\end{tabular}"
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_butterfly.py:86
+#, python-brace-format
+msgid ""
+"\\begin{tabular}{ll}We have: & {main_vertex_name} {belongs_to} "
+"{chunk0_length_name} \\\\  & {main_vertex_name} {belongs_to} "
+"{chunk1_length_name} \\end{tabular}"
+msgstr ""
+"\\begin{tabular}{ll}On sait que : & {main_vertex_name} {belongs_to} "
+"[{chunk0_length_name}] \\\\  & {main_vertex_name} {belongs_to} "
+"[{chunk1_length_name}] \\end{tabular}"
+
+#~ msgid ""
+#~ "\\begin{multicols}{2} On one hand: {ratio1} and on the other hand: "
+#~ "{ratio2} \\end{multicols} ans as: {crossproduct} then: {equal_ratios} "
+#~ "{newline} hence by the converse of the intercept theorem, {line1} is "
+#~ "parallel to {line2}."
+#~ msgstr ""
+#~ "\\begin{multicols}{2} D'une part : {ratio1} d'autre part : {ratio2} "
+#~ "\\end{multicols} or : {crossproduct} donc : {equal_ratios} {newline} donc "
+#~ "d'après la réciproque du théorème de Thalès, ({line1}) est parallèle à "
+#~ "({line2})."
+
+#~ msgid ""
+#~ "{main_vertex_name} {belongs_to} {chunk0_length_name} and "
+#~ "{main_vertex_name} {belongs_to} {chunk1_length_name}. "
+#~ msgstr ""
+#~ "{main_vertex_name} {belongs_to} [{chunk0_length_name}] et "
+#~ "{main_vertex_name} {belongs_to} [{chunk1_length_name}]. "
 
 #~ msgid "Mental calculation: perimeters of simple polygons"
 #~ msgstr "Calcul mental : périmètres de polygones simples"
