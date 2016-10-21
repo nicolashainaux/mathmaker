@@ -90,3 +90,19 @@ def test_intercept_theorem_butterflies_formulae():
     """
     shared.machine.write_out(
         str(S_Generic(XML_SHEETS['intercept_theorem_butterflies_formulae'])))
+
+
+def test_intercept_theorem_converse():
+    """
+    Checks if 'intercept_theorem_converse' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['intercept_theorem_converse'])))
+
+
+def test_intercept_theorem_converse_alt2():
+    """
+    Checks if 'intercept_theorem_converse_alt2' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['intercept_theorem_converse_alt2'])))

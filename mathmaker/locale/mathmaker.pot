@@ -1395,21 +1395,28 @@ msgstr ""
 msgid "Algebra: expand and reduce double brackets"
 msgstr ""
 
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:6
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:24
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
 msgid "Example of solutions:"
 msgstr ""
 
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
 msgid "Intercept theorem"
 msgstr ""
 
@@ -1486,15 +1493,18 @@ msgid "Note: {pre_reso1} {newline} "
 msgstr ""
 
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:6
 msgid "Intercept theorem: quotients' equalities"
 msgstr ""
 
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:25
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:25
 msgid ""
 "For each figure, it is possible to apply the intercept theorem. Write the "
 "correct quotients' equalities:"
 msgstr ""
 
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:25
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:25
 msgid ""
 "Note: in each quotients' equalities, given as example of solution, it is "
@@ -1504,6 +1514,7 @@ msgid ""
 msgstr ""
 
 #: lib/sheet/exercise/question/geometry_modules/intercept_theorem_triangle_formula.py:47
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_butterfly_formula.py:44
 #, python-brace-format
 msgid " {line1} {parallel_to} {line2}"
 msgstr ""
@@ -1542,4 +1553,66 @@ msgid ""
 " and {vertex1_name} on one hand, {point1_name}, {main_vertex_name} and "
 "{vertex2_name} on the other hand,are aligned in the same order, then by the "
 "intercept theorem: {newline} {ratios} thus: {ratios_substituted} "
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_butterfly.py:52
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_triangle.py:54
+#, python-brace-format
+msgid ""
+"The drawn figure is out of shape. {newline} The lengths are given in "
+"{length_unit}. {newline} {newline} Prove that {line1} is parallel to "
+"{line2}."
+msgstr ""
+
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:6
+msgid "Converse of intercept theorem"
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_butterfly.py:93
+#, python-brace-format
+msgid ""
+"{vertex1_name}, {main_vertex_name} and {point0_name} on one hand, "
+"{vertex2_name}, {main_vertex_name} and {point1_name} on the other hand,are "
+"aligned in the same order. "
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_butterfly.py:100
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_triangle.py:101
+#, python-brace-format
+msgid ""
+"\\begin{multicols}{2} On one hand: {ratio1} and on the other hand: {ratio2} "
+"\\end{multicols} ans as: {crossproduct} then: {equal_ratios} {newline} "
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_triangle.py:94
+#, python-brace-format
+msgid ""
+"{main_vertex_name}, {point0_name} and {vertex1_name} on one hand, "
+"{main_vertex_name}, {point1_name} and {vertex2_name} on the other hand, are "
+"aligned in the same order. {newline} "
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_butterfly.py:107
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_triangle.py:108
+#, python-brace-format
+msgid ""
+"Hence by the converse of the intercept theorem, {line1} is parallel to "
+"{line2}."
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_triangle.py:88
+#, python-brace-format
+msgid ""
+"\\begin{tabular}{ll}We have: & {point0_name} {belongs_to} "
+"{side0_length_name} \\\\  & {point1_name} {belongs_to} {side1_length_name} "
+"\\end{tabular}"
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/intercept_theorem_converse_butterfly.py:86
+#, python-brace-format
+msgid ""
+"\\begin{tabular}{ll}We have: & {main_vertex_name} {belongs_to} "
+"{chunk0_length_name} \\\\  & {main_vertex_name} {belongs_to} "
+"{chunk1_length_name} \\end{tabular}"
 msgstr ""

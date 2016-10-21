@@ -1156,6 +1156,13 @@ class InterceptTheoremConfiguration(Triangle):
         return Table([[Item(v.length_name) for v in self.small],
                       [Item(v.length_name) for v in self.side]])
 
+    def ratios_for_converse(self) -> Table:
+        """Return a Table matching the ratios equality for converse."""
+        return Table([[Item(v.length_name) for v in [self.small[0],
+                                                     self.small[2]]],
+                     [Item(v.length_name) for v in [self.side[0],
+                                                    self.side[2]]]])
+
     def ratios_equalities_substituted(self) -> Table_UP:
         """
         Return the ratios equalities containing known numbers.
