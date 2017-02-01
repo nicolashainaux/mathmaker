@@ -516,7 +516,7 @@ def wrap_latex_keywords(s: str) -> str:
     Replace some {kw} by {{kw}}, to prevent format() from using them as keys.
     """
     # First, we replace the {numbers} by {{numbers}}
-    p = re.compile(r'{(\d{1,}\.?\,?\d*(?:pt|em|cm)*)}', re.LOCALE)
+    p = re.compile(r'{(\d{1,}\.?\,?\d*(?:pt|em|cm)*)}')
     s = p.sub(r'{{\1}}', s)
     for w in ['multicols', 'multicols*', 'tabular', 'tikzpicture',
               '\centering', 'll']:
@@ -639,7 +639,7 @@ def insert_nonbreaking_spaces(sentence: str):
     """
     logger = settings.dbg_logger.getChild('wording.insert_nonbreaking_spaces')
     nb_space = shared.markup['nonbreaking_space']
-    p = re.compile(r'(\d)(\s)(\w+)', re.LOCALE)
+    p = re.compile(r'(\d)(\s)(\w+)')
     logger.debug(sentence + "\n")
     sentence = p.sub(r'\1' + nb_space + r'\3', sentence)
     logger.debug("--> " + sentence + "\n")
