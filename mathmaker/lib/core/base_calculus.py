@@ -27,6 +27,7 @@
 # @brief Mathematical elementary arithmetic and algebraic objects.
 
 import math
+import types
 from decimal import Decimal
 
 from mathmaker import settings
@@ -922,178 +923,126 @@ class Item(Exponented):
         return False
 
 
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
-#   @class Function
-#   @brief It's all the f(x), cos(x) etc. with only one variable at the moment
 class Function(Item):
+    """
+    Represent the image of a number under a function like f(x) or cos(ABC).
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
-    #   @param arg (String,
-    #               literalCalculable|Angle,
-    #               None|math.function()|Calculable,
-    #               None|math.function()|Calculable)
-    #   The first String will be the name of the function, the second arg
-    #   will give the variable String
-    #   The third argument can be either None (if None is needed), a function
-    #   of the math module, or a Calculable
-    #   The fourth one can be of the same type as the third one ; this is
-    #   meant to be the inverse function of the third one
-    #   @return One instance of Function
-    def __init__(self, arg):
+    They can be displayed exactly as Items while having some extra properties.
+    """
+
+    def __init__(self, name='f', var=Item('x'), fct=lambda x: x,
+                 num_val=Value(1), display_mode='literal', inv_fct=None):
         from mathmaker.lib.core.base_geometry import Angle
-        if not type(arg) == tuple:
-            raise error.WrongArgument(str(type(arg)), "a tuple")
 
-        if not len(arg) == 4:
-            raise error.WrongArgument("a tuple of length " + str(len(arg)),
-                                      "a tuple of length 4")
+        if not type(name) == str:
+            raise TypeError('name should be a str')
 
-        if not type(arg[0]) == str:
-            raise error.WrongArgument(str(type(arg[0])), "a str")
-
-        if (not isinstance(arg[1], Angle)
-            and not (isinstance(arg[1], Calculable) and arg[1].is_literal())):
+        if not (isinstance(var, Angle)
+                or (isinstance(var, Calculable) and var.is_literal())):
             # __
-            raise error.WrongArgument(str(type(arg[1])),
-                                      "literalCalculable|Angle")
+            raise TypeError('var should be a literal Calculable or an Angle')
 
-        # the hasattr conditions test if the elt is a function from math module
-        for elt in [arg[2], arg[3]]:
-            if not (elt is None
-                    or isinstance(elt, Calculable)
-                    or (hasattr(elt, "__name__")
-                        and hasattr(math, elt.__name__))):
+        if not ((isinstance(num_val, Value) or isinstance(num_val, Item))
+                and num_val.is_numeric()):
+            raise TypeError('num_val should be a numeric Value or Item')
+
+        if display_mode not in ['literal', 'numeric']:
+            raise TypeError("display_mode should be 'literal' or 'numeric'")
+
+        for elt in [fct, inv_fct]:
+            if not (elt is None or isinstance(elt, types.LambdaType)):
                 # __
-                raise error.WrongArgument(str(type(elt)),
-                                          "None|math.function()|Calculable")
+                raise TypeError('fct and inv_fct must both be None or '
+                                'types.LambdaType')
 
-        self._name = arg[0]
-
-        self._variable = arg[1]
-
-        self._internal_expression = arg[2]
-        self._reverse_expression = arg[3]
+        self._name = name
+        self._var = var
+        self._fct = fct
+        self._inv_fct = inv_fct
+        self._num_val = num_val
+        self._display_mode = display_mode
 
         self._sign = "+"
 
-        self._numeric_value = None
-
-        self._displayed_value = self._variable
-
         self._exponent = Value(1)
-
-        self._value_inside = Value('x')
-
+        self._possible_values = {'literal': Value(name
+                                                  + MARKUP['opening_bracket']
+                                                  + var.printed
+                                                  + MARKUP['closing_bracket'],
+                                                  text_in_maths=False),
+                                 'numeric': Value(name
+                                                  + MARKUP['opening_bracket']
+                                                  + num_val.printed
+                                                  + MARKUP['closing_bracket'],
+                                                  text_in_maths=False)}
+        self._value_inside = self._possible_values['literal']
         self._is_out_striked = False
         self._force_display_sign_once = False
         self._unit = ""
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the variable as a String
-    def get_variable(self):
-        return self._variable
+    @property
+    def value_inside(self):
+        return self._possible_values[self._display_mode]
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the numeric Value to replace the variable with
-    def get_numeric_value(self):
-        return self._numeric_value
+    @property
+    def num_val(self):
+        return self._num_val
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns either the variable or the numeric value to display
-    def get_displayed_value(self):
-        return self._displayed_value
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the expression used to evaluate the Function
-    def get_internal_expression(self):
-        return self._internal_expression
-
-    numeric_value = property(get_numeric_value,
-                             doc="Value to use to replace the variable"
-                                 " (e.g. '9' or '60\textdegree'...)")
-
-    variable = property(get_variable,
-                        doc="Variable of the Function"
-                            " (e.g. 'x' or '\widehat{ABC}'...)")
-
-    displayed_value = property(get_displayed_value,
-                               doc="Value to display (variable or numeric)")
-
-    internal_expression = property(get_internal_expression,
-                                   doc="Used to evaluate the Function")
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Sets the numeric Value to replace the variable with
-    def set_numeric_value(self, arg):
+    @num_val.setter
+    def num_val(self, arg):
         if not (isinstance(arg, Item) or isinstance(arg, Value)):
-            raise error.WrongArgument(arg, "an Item|Value")
-
+            raise TypeError("arg should be an Item or Value")
         if not arg.is_numeric():
-            raise error.WrongArgument(arg, "a numeric Item|Value")
+            raise TypeError("arg should be a numeric Item or Value")
+        self._num_val = Item(arg)
+        self._possible_values['numeric'] = Value(self._name
+                                                 + MARKUP['opening_bracket']
+                                                 + self.num_val.printed
+                                                 + MARKUP['closing_bracket'],
+                                                 text_in_maths=False)
 
-        self._numeric_value = arg.clone()
+    @property
+    def fct(self):
+        return self._fct
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Sets the displayed value to the literal one
-    #   @return Nothing
-    def swap_to_literal(self):
-        self._displayed_value = self._variable
+    def set_literal_mode(self):
+        """Sets the display mode to 'literal'."""
+        self._display_mode = 'literal'
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Sets the displayed value to the numeric one
-    #   @return Nothing
-    def swap_to_numeric(self):
-        self._displayed_value = self._numeric_value
+    def set_numeric_mode(self):
+        """Sets the display mode to 'numeric'."""
+        self._display_mode = 'numeric'
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Always False
     def is_displ_as_a_single_1(self):
+        """f(x) is never a single 1."""
         return False
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief True if the object can be displayed as a single int
     def is_displ_as_a_single_int(self):
+        """f(x) is never a single int."""
         return False
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Always False
     def is_displ_as_a_single_minus_1(self):
+        """f(x) is never a single -1."""
         return False
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Always False
     def is_displ_as_a_single_0(self):
+        """f(x) is never a single 0."""
         return False
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Always False
     def is_displ_as_a_single_numeric_Item(self):
+        """f(x) is never a single numeric Item (like any single number)."""
         return False
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief False
-    #   @return False
     def is_expandable(self):
+        """f(x) is not expandable."""
         return False
+
+    def evaluate(self):
+        """Return the value of f(number)."""
+        num = Item((self.sign,
+                    self.fct(self.num_val.evaluate()),
+                    self._exponent))
+        return num.evaluate()
 
 
 # ------------------------------------------------------------------------------
@@ -7069,6 +7018,7 @@ class BinomialIdentity(Expandable):
     ##
     #   @brief The expanded object, like (2x+3)² would return (2x)²+2×2x×3+3²
     def expand(self):
+
         log = settings.dbg_logger.getChild(
             'BinomialIdentity.expand')
         log.debug("Entering, self.kind = " + str(self.kind))

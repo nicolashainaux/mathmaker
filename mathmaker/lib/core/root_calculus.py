@@ -362,12 +362,14 @@ class Value(Signed):
     #   If the argument is not of one of these kinds, an exception
     #   will be raised.
     #   @return One instance of Value
-    def __init__(self, arg, **options):
+    def __init__(self, arg, text_in_maths=True, **options):
         Signed.__init__(self)
 
         self._has_been_rounded = False
 
         self._unit = ""
+
+        self._text_in_maths = text_in_maths
 
         if 'unit' in options:
             self._unit = Unit(options['unit'])
@@ -536,6 +538,14 @@ class Value(Signed):
         if self._sign == '-':
             sign = '-'
 
+        open_text_in_maths = MARKUP['open_text_in_maths'] \
+            if self._text_in_maths \
+            else ''
+
+        close_text_in_maths = MARKUP['close_text_in_maths'] \
+            if self._text_in_maths \
+            else ''
+
         if self.is_numeric():
             if 'display_unit' in options and options['display_unit']:
                 unit_str = self.unit.into_str(**options) \
@@ -549,9 +559,9 @@ class Value(Signed):
                 return sign + "\SI{" + locale.str(self.abs_value) + "}"\
                     "{" + unit_str + "}"
             else:
-                return sign + MARKUP['open_text_in_maths'] \
+                return sign + open_text_in_maths \
                     + locale.str(self.abs_value) \
-                    + MARKUP['close_text_in_maths']
+                    + close_text_in_maths
 
         elif (self.raw_value in ["", " "] and 'display_SI_unit' in options
               and options['display_SI_unit']):
@@ -566,9 +576,9 @@ class Value(Signed):
             if (len(self.get_first_letter()) >= 2
                 and not self.get_first_letter()[0] in ["-", "+"]):
                 # __
-                return sign + MARKUP['open_text_in_maths'] \
+                return sign + open_text_in_maths \
                     + str(self.abs_value) \
-                    + MARKUP['close_text_in_maths']
+                    + close_text_in_maths
             else:
                 return str(self.raw_value)
 
@@ -740,7 +750,7 @@ class Value(Signed):
     def needs_to_get_rounded(self, precision):
         if (not (precision in [UNIT, TENTH, HUNDREDTH, THOUSANDTH,
                                TEN_THOUSANDTH]
-            or (type(precision) == int and 0 <= precision <= 4))):
+                 or (type(precision) == int and 0 <= precision <= 4))):
             # __
             raise error.UncompatibleType(precision, "must be UNIT or"
                                                     + "TENTH, "
