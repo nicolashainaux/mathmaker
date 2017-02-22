@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/nicolashainaux/mathmaker.svg?branch=dev)](https://travis-ci.org/nicolashainaux/mathmaker)
 [![Coveralls branch](https://img.shields.io/coveralls/nicolashainaux/mathmaker/dev.svg?maxAge=2592000)](https://coveralls.io/github/nicolashainaux/mathmaker)
 [![Documentation Status1](https://readthedocs.org/projects/mathmaker/badge/?version=master)](http://mathmaker.readthedocs.io/en/master/)
-[![Documentation Status2](https://readthedocs.org/projects/mathmaker/badge/?version=dev)](http://mathmaker.readthedocs.io/en/dev/) [![Maintenance](https://img.shields.io/maintenance/yes/2016.svg?maxAge=2592000)](https://github.com/nicolashainaux/mathmaker/)
+[![Documentation Status2](https://readthedocs.org/projects/mathmaker/badge/?version=dev)](http://mathmaker.readthedocs.io/en/dev/) [![Maintenance](https://img.shields.io/maintenance/yes/2017.svg?maxAge=2592000)](https://github.com/nicolashainaux/mathmaker/)
 
 [![PyPI4](https://img.shields.io/pypi/l/mathmaker.svg?maxAge=2592000)](https://github.com/nicolashainaux/mathmaker/blob/master/LICENSE)
 
