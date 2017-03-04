@@ -42,6 +42,12 @@ def test_f_x_printed(f_x):
     assert f_x.printed == wrap_nb('f(x)')
 
 
+def test_f_x_cloned(f_x):
+    """Is f(x) correctly cloned?"""
+    g_x = f_x.clone()
+    assert f_x == g_x
+
+
 def test_f_1_printed(f_x):
     """Is f(1) correctly printed?"""
     f_x.set_numeric_mode()

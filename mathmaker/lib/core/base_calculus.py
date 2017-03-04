@@ -930,55 +930,66 @@ class Function(Item):
     They can be displayed exactly as Items while having some extra properties.
     """
 
-    def __init__(self, name='f', var=Item('x'), fct=lambda x: x,
+    def __init__(self, arg=None, name='f', var=Item('x'), fct=lambda x: x,
                  num_val=Value(1), display_mode='literal', inv_fct=None):
         from mathmaker.lib.core.base_geometry import Angle
+        if arg is None:
+            if not type(name) == str:
+                raise TypeError('name should be a str')
+            self._possible_values = \
+                {'literal': Value(name
+                                  + MARKUP['opening_bracket']
+                                  + var.printed
+                                  + MARKUP['closing_bracket'],
+                                  text_in_maths=False),
+                 'numeric': Value(name
+                                  + MARKUP['opening_bracket']
+                                  + num_val.printed
+                                  + MARKUP['closing_bracket'],
+                                  text_in_maths=False)}
+            Item.__init__(self, self._possible_values['literal'].printed)
 
-        if not type(name) == str:
-            raise TypeError('name should be a str')
-
-        if not (isinstance(var, Angle)
-                or (isinstance(var, Calculable) and var.is_literal())):
-            # __
-            raise TypeError('var should be a literal Calculable or an Angle')
-
-        if not ((isinstance(num_val, Value) or isinstance(num_val, Item))
-                and num_val.is_numeric()):
-            raise TypeError('num_val should be a numeric Value or Item')
-
-        if display_mode not in ['literal', 'numeric']:
-            raise TypeError("display_mode should be 'literal' or 'numeric'")
-
-        for elt in [fct, inv_fct]:
-            if not (elt is None or isinstance(elt, types.LambdaType)):
+            if not (isinstance(var, Angle)
+                    or (isinstance(var, Calculable) and var.is_literal())):
                 # __
-                raise TypeError('fct and inv_fct must both be None or '
-                                'types.LambdaType')
+                raise TypeError('var should be a literal Calculable '
+                                'or an Angle')
 
-        self._name = name
-        self._var = var
-        self._fct = fct
-        self._inv_fct = inv_fct
-        self._num_val = num_val
-        self._display_mode = display_mode
+            if not ((isinstance(num_val, Value)
+                    or isinstance(num_val, Item))
+                    and num_val.is_numeric()):
+                raise TypeError('num_val should be a numeric Value or Item')
 
-        self._sign = "+"
+            if display_mode not in ['literal', 'numeric']:
+                raise TypeError("display_mode should be 'literal' "
+                                "or 'numeric'")
 
-        self._exponent = Value(1)
-        self._possible_values = {'literal': Value(name
-                                                  + MARKUP['opening_bracket']
-                                                  + var.printed
-                                                  + MARKUP['closing_bracket'],
-                                                  text_in_maths=False),
-                                 'numeric': Value(name
-                                                  + MARKUP['opening_bracket']
-                                                  + num_val.printed
-                                                  + MARKUP['closing_bracket'],
-                                                  text_in_maths=False)}
-        self._value_inside = self._possible_values['literal']
-        self._is_out_striked = False
-        self._force_display_sign_once = False
-        self._unit = ""
+            for elt in [fct, inv_fct]:
+                if not (elt is None or isinstance(elt, types.LambdaType)):
+                    # __
+                    raise TypeError('fct and inv_fct must both be None or '
+                                    'types.LambdaType')
+
+            self._name = name
+            self._var = var
+            self._fct = fct
+            self._inv_fct = inv_fct
+            self._num_val = num_val
+            self._display_mode = display_mode
+            self._value_inside = self._possible_values['literal']
+        else:
+            if not isinstance(arg, Function):
+                raise TypeError('If arg is not None, it should be '
+                                'a Function')
+            Item.__init__(self, arg.name)
+            self._name = arg._name
+            self._var = arg._var
+            self._fct = arg._fct
+            self._inv_fct = arg._inv_fct
+            self._num_val = arg._num_val
+            self._display_mode = arg._display_mode
+            self._possible_values = arg._possible_values
+            self._value_inside = arg._value_inside
 
     @property
     def value_inside(self):
