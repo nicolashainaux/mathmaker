@@ -624,7 +624,7 @@ class Item(Exponented):
         # 1st CASE: Item × Item
         # and other cases inside: numeric × numeric or numeric × literal etc.
         # The code could be shortened but will not, for better comprehension.
-        if isinstance(objct, Item):
+        if isinstance(objct, Item) or isinstance(objct, Function):
             # ex: 2 × 4
             if ((self.is_numeric() or self.is_displ_as_a_single_1())
                 and (objct.is_numeric()
@@ -923,31 +923,18 @@ class Item(Exponented):
         return False
 
 
-class Function(Item):
+class Function(Exponented):
     """
     Represent the image of a number under a function like f(x) or cos(ABC).
-
-    They can be displayed exactly as Items while having some extra properties.
     """
 
-    def __init__(self, arg=None, name='f', var=Item('x'), fct=lambda x: x,
-                 num_val=Value(1), display_mode='literal', inv_fct=None):
+    def __init__(self, copy_this=None, name='f', var=Item('x'),
+                 fct=lambda x: x, num_val=Value(1), display_mode='literal',
+                 inv_fct=None):
         from mathmaker.lib.core.base_geometry import Angle
-        if arg is None:
+        if copy_this is None:
             if not type(name) == str:
                 raise TypeError('name should be a str')
-            self._possible_values = \
-                {'literal': Value(name
-                                  + MARKUP['opening_bracket']
-                                  + var.printed
-                                  + MARKUP['closing_bracket'],
-                                  text_in_maths=False),
-                 'numeric': Value(name
-                                  + MARKUP['opening_bracket']
-                                  + num_val.printed
-                                  + MARKUP['closing_bracket'],
-                                  text_in_maths=False)}
-            Item.__init__(self, self._possible_values['literal'].printed)
 
             if not (isinstance(var, Angle)
                     or (isinstance(var, Calculable) and var.is_literal())):
@@ -970,30 +957,51 @@ class Function(Item):
                     raise TypeError('fct and inv_fct must both be None or '
                                     'types.LambdaType')
 
+            Exponented.__init__(self)
+            self._force_display_sign_once = False
+            self._image_notations = \
+                {'literal': Value(name
+                                  + MARKUP['opening_bracket']
+                                  + var.printed
+                                  + MARKUP['closing_bracket'],
+                                  text_in_maths=False),
+                 'numeric': Value(name
+                                  + MARKUP['opening_bracket']
+                                  + num_val.printed
+                                  + MARKUP['closing_bracket'],
+                                  text_in_maths=False)}
+            self._arguments = {'literal': var, 'numeric': num_val}
             self._name = name
             self._var = var
             self._fct = fct
             self._inv_fct = inv_fct
             self._num_val = num_val
             self._display_mode = display_mode
-            self._value_inside = self._possible_values['literal']
+            self._image_notation = self._image_notations[display_mode]
         else:
-            if not isinstance(arg, Function):
-                raise TypeError('If arg is not None, it should be '
+            if not isinstance(copy_this, Function):
+                raise TypeError('If copy_this is not None, it should be '
                                 'a Function')
-            Item.__init__(self, arg.name)
-            self._name = arg._name
-            self._var = arg._var
-            self._fct = arg._fct
-            self._inv_fct = arg._inv_fct
-            self._num_val = arg._num_val
-            self._display_mode = arg._display_mode
-            self._possible_values = arg._possible_values
-            self._value_inside = arg._value_inside
+            Exponented.__init__(self)
+            self._sign = copy_this._sign
+            self._force_display_sign_once = copy_this._force_display_sign_once
+            self._arguments = copy_this._arguments
+            self._name = copy_this._name
+            self._var = copy_this._var
+            self._fct = copy_this._fct
+            self._inv_fct = copy_this._inv_fct
+            self._num_val = copy_this._num_val
+            self._display_mode = copy_this._display_mode
+            self._image_notations = copy_this._image_notations
+            self._image_notation = copy_this._image_notation
 
     @property
-    def value_inside(self):
-        return self._possible_values[self._display_mode]
+    def image_notation(self):
+        return self._image_notations[self._display_mode]
+
+    @property
+    def argument(self):
+        return self._arguments[self._display_mode]
 
     @property
     def num_val(self):
@@ -1006,7 +1014,7 @@ class Function(Item):
         if not arg.is_numeric():
             raise TypeError("arg should be a numeric Item or Value")
         self._num_val = Item(arg)
-        self._possible_values['numeric'] = Value(self._name
+        self._image_notations['numeric'] = Value(self._name
                                                  + MARKUP['opening_bracket']
                                                  + self.num_val.printed
                                                  + MARKUP['closing_bracket'],
@@ -1014,15 +1022,136 @@ class Function(Item):
 
     @property
     def fct(self):
+        """The lambda function to use for evaluation."""
         return self._fct
 
+    def get_first_letter(self):
+        """Return the first letter of Function's name."""
+        return self._name[0]
+
+    def get_minus_signs_nb(self):
+        """
+        1 if Function object has a negative sign and no even exponent, else 0.
+        """
+        if (self.is_negative() and not self.is_null()
+            and is_uneven(self.exponent)):
+            return 1
+        return 0
+
+    def get_iteration_list(self):
+        """Return [Item('f(x)'), the exponent]."""
+        return [Item(self._image_notation), self.exponent]
+
+    def contains_a_rounded_number(self):
+        """f(...) neither its argument never have any reason to be rounded."""
+        return False
+
+    def contains_exactly(self, objct):
+        """True if the looked for object is self."""
+        return self == objct
+
     def set_literal_mode(self):
-        """Sets the display mode to 'literal'."""
+        """Set the display mode to 'literal'."""
         self._display_mode = 'literal'
 
     def set_numeric_mode(self):
-        """Sets the display mode to 'numeric'."""
+        """Set the display mode to 'numeric'."""
         self._display_mode = 'numeric'
+
+    def __len__(self):
+        """Function's length."""
+        return 1
+
+    def __repr__(self, **options):
+        """Function's string representation for debugging."""
+        return '{fct ' + self.sign + self.name + '(' \
+            + str(self.argument) \
+            + ')' + '^' + repr(self.exponent) + ' fct} '
+
+    def __eq__(self, other_fct):
+        """True if self 'equals' other_fct."""
+        if not isinstance(other_fct, Function):
+            return False
+        else:
+            return (self._sign == other_fct._sign
+                    and self._exponent == other_fct._exponent
+                    and self._force_display_sign_once ==
+                    other_fct._force_display_sign_once
+                    and self._image_notations == other_fct._image_notations
+                    and self._arguments == other_fct._arguments
+                    and self._name == other_fct._name
+                    and self._var == other_fct._var
+                    and self._fct == other_fct._fct
+                    and self._inv_fct == other_fct._inv_fct
+                    and self._num_val == other_fct._num_val
+                    and self._display_mode == other_fct._display_mode
+                    and self._image_notation == other_fct._image_notation)
+
+    def requires_brackets(self, position):
+        """True if Function requires brackets inside a Product."""
+        if position == 0:
+            return False
+        else:
+            return self.sign == '-'
+
+    def requires_inner_brackets(self):
+        """Return True for cases like (-f(x))^2"""
+        return self.sign == '-' and is_uneven(self.exponent)
+
+    def multiply_symbol_is_required(self, objct, position):
+        """True if × is required between self and next objct in a Product."""
+        # 1st CASE: a) Function × Item
+        if isinstance(objct, Item):
+            return True
+
+        # 1st CASE: b) Function × Item
+        if isinstance(objct, Function):
+            return False
+
+        # 2d CASE: Function × Product
+        if isinstance(objct, Product):
+            return self.multiply_symbol_is_required(objct.factor[0], position)
+
+        # 3d CASE: Function × Sum
+        if isinstance(objct, Sum):
+            if len(objct.throw_away_the_neutrals()) >= 2:
+                # This is not exactly necessary, but more readable
+                return True
+            else:
+                return self\
+                    .multiply_symbol_is_required(objct.
+                                                 throw_away_the_neutrals()
+                                                 .term[0],
+                                                 position)
+
+        # 4th CASE: Function × Quotient
+        if isinstance(objct, Quotient):
+            return True
+
+    def calculate_next_step(self, **options):
+        """Will only swap to numeric argument, no automatic evaluation."""
+        if self._display_mode == 'literal':
+            self.set_numeric_mode()
+            return self
+        return None
+
+    def expand_and_reduce_next_step(self, **options):
+        """Same as calculate_ntext_step(), for Functions."""
+        return self.calculate_next_step(**options)
+
+    def is_numeric(self):
+        """Return True if current display mode is numeric."""
+        # return self._display_mode == 'numeric'
+        return False
+
+    def is_literal(self):
+        """Return True if current display mode is literal."""
+        # return self._display_mode == 'literal'
+        return True
+
+    def is_null(self):
+        """True if self evaluates to 0."""
+        return self.evaluate() == 0
 
     def is_displ_as_a_single_1(self):
         """f(x) is never a single 1."""
@@ -1044,9 +1173,96 @@ class Function(Item):
         """f(x) is never a single numeric Item (like any single number)."""
         return False
 
+    def is_displ_as_a_single_neutral(self, elt):
+        """f(x) is never a single neutral element."""
+        return False
+
     def is_expandable(self):
         """f(x) is not expandable."""
         return False
+
+    def substitute(self, subst_dict):
+        """Substitute the argument by its value, if available in subst_dict."""
+        if self.var in subst_dict:
+            self.num_val = subst_dict[self.var]
+            self.set_numeric_mode()
+
+    def into_str(self, **options):
+        """Creates the str version of the Function."""
+        # Very similar to Item's into_str()...
+        global expression_begins
+
+        if ('force_expression_begins' in options
+            and options['force_expression_begins']):
+            # __
+            expression_begins = options['force_expression_begins']
+            options['force_expression_begins'] = False
+
+        resulting_string = ""
+        sign = ''
+        inner_bracket_1 = ''
+        inner_bracket_2 = ''
+
+        if self.requires_inner_brackets():
+            inner_bracket_1 = MARKUP['opening_bracket']
+            inner_bracket_2 = MARKUP['closing_bracket']
+
+        if (not expression_begins
+            or ('force_display_sign' in options and self.is_numeric())
+            or self._force_display_sign_once):
+            # __
+            if self.sign == '+' or self.is_null():
+                sign = MARKUP['plus']
+            else:
+                sign = MARKUP['minus']
+            if self._force_display_sign_once:
+                self._force_display_sign_once = False
+        else:
+            if self.sign == '-' and not self.is_null():
+                sign = MARKUP['minus']
+
+        if self.exponent.is_displ_as_a_single_0():
+            # __
+            if ('force_display_exponent_0' in options
+                or 'force_display_exponents' in options):
+                # __
+                resulting_string += inner_bracket_1\
+                    + self.image_notation.into_str(**options)\
+                    + inner_bracket_2\
+                    + MARKUP['opening_exponent']\
+                    + MARKUP['zero']\
+                    + MARKUP['closing_exponent']
+            else:
+                resulting_string += MARKUP['one']
+
+        elif self.exponent_must_be_displayed():
+            if isinstance(self.exponent, Exponented):
+                expression_begins = True
+
+            resulting_string += inner_bracket_1\
+                + self.image_notation.into_str(**options)\
+                + inner_bracket_2\
+                + MARKUP['opening_exponent']\
+                + self.exponent.into_str(**options)\
+                + MARKUP['closing_exponent']
+
+        else:   # that should only concern cases where the exponent
+                # is equivalent to 1
+            if ('force_display_exponent_1' in options
+                or 'force_display_exponents' in options):
+                # __
+                resulting_string += inner_bracket_1\
+                    + self.image_notation.into_str(**options)\
+                    + inner_bracket_2\
+                    + MARKUP['opening_exponent']\
+                    + MARKUP['one']\
+                    + MARKUP['closing_exponent']
+            else:
+                resulting_string += inner_bracket_1\
+                    + self.image_notation.into_str(**options) + inner_bracket_2
+
+        expression_begins = False
+        return sign + resulting_string
 
     def evaluate(self):
         """Return the value of f(number)."""
@@ -1578,9 +1794,10 @@ class Quotient(Operation):
     #   @param options Can be use_divide_symbol
     #   @todo Maybe: (RANDOMLY, num_max, deno_max) as possible argument ?
     #   @return One instance of Quotient
-    def __init__(self, arg, **options):
+    def __init__(self, arg, ignore_1_denominator=False, **options):
         Operation.__init__(self)
 
+        self._ignore_1_denominator = ignore_1_denominator
         # default initialization of other fields
         self._numerator = Value(1)
         self._denominator = Value(1)
@@ -1628,6 +1845,7 @@ class Quotient(Operation):
             self._denominator = arg.denominator.clone()
             self._sign = arg.sign
             self._symbol = arg.symbol
+            self._ignore_1_denominator = arg._ignore_1_denominator
 
         # All other unforeseen cases: an exception is raised.
         else:
@@ -1706,6 +1924,13 @@ class Quotient(Operation):
     def into_str(self, **options):
         global expression_begins
         log = settings.dbg_logger.getChild('Quotient.into_str')
+
+        if (self._ignore_1_denominator
+            and self.denominator.is_displ_as_a_single_1()):
+            if self.sign == '-':
+                return Product([Value(-1), self.numerator]).into_str(**options)
+            else:
+                return Product([Value(1), self.numerator]).into_str(**options)
 
         log.debug("Entering with: " + repr(self))
         if ('force_expression_begins' in options
@@ -2085,7 +2310,7 @@ class Fraction(Quotient):
     #                       sign)
     #   @todo ? raise a division by zero error !
     #   @return One instance of Fraction
-    def __init__(self, arg, **options):
+    def __init__(self, arg, ignore_1_denominator=False, **options):
         Exponented.__init__(self)
 
         # default initialization of the other fields
@@ -2094,6 +2319,7 @@ class Fraction(Quotient):
         self._status = "nothing"
         self._symbol = 'like_a_fraction'
         self._same_deno_reduction_in_progress = False
+        self._ignore_1_denominator = ignore_1_denominator
 
         arg_sign = 'default'
         arg_nume = 'default'
@@ -2211,6 +2437,7 @@ class Fraction(Quotient):
             self._status = arg.status
             self._same_deno_reduction_in_progress = \
                 arg.same_deno_reduction_in_progress
+            self._ignore_1_denominator = arg._ignore_1_denominator
 
         # 4th CASE:
         elif arg == "default":
@@ -3053,14 +3280,19 @@ class CommutativeOperation(Operation):
 
         for elt in self.element:
             log.debug("current elt is: " + repr(elt))
-            if isinstance(elt, Item) or isinstance(elt, Value):
+            if (isinstance(elt, Item) or isinstance(elt, Value)
+                or isinstance(elt, Function)):
                 # we don't check if the possibly Item is numeric.
                 # if it's not, an error will be raised
                 val = elt.raw_value
+                if isinstance(elt, Function):
+                    val = Item((elt.sign,
+                                elt.fct(elt.num_val.evaluate()),
+                                1)).evaluate()
                 expo = 1
                 sign_val = 1
 
-                if isinstance(elt, Item):
+                if isinstance(elt, Item) or isinstance(elt, Function):
                     expo = elt.exponent.evaluate()
                     if elt.is_negative():
                         sign_val = -1
@@ -4117,6 +4349,8 @@ class Product(CommutativeOperation):
             # 1st
             # There are only Items:
             if nb_fractions == 0 and nb_items >= 1:
+                import pytest
+                pytest.set_trace()
                 return Product([Item(self.evaluate(stop_recursion=True))])
 
             # 2d
@@ -4403,8 +4637,8 @@ class Product(CommutativeOperation):
     #   @return True if the writing rules require × between self & obj
     def multiply_symbol_is_required(self, objct, position):
         next_to_last = len(self) - 1
-        # 1st CASE: Product × Item
-        if isinstance(objct, Item):
+        # 1st CASE: Product × Item|Function
+        if isinstance(objct, Item) or isinstance(objct, Function):
             return self.factor[next_to_last]\
                 .multiply_symbol_is_required(objct, position)
 
@@ -5769,8 +6003,8 @@ class Sum(CommutativeOperation):
     #   @param position The position (integer) of self in the Product
     #   @return True if the writing rules require × between self & obj
     def multiply_symbol_is_required(self, objct, position):
-        # 1st CASE: Sum × Item
-        if isinstance(objct, Item):
+        # 1st CASE: Sum × Item|Function
+        if isinstance(objct, Item) or isinstance(objct, Function):
             if len(self) >= 2:
                 return objct.is_numeric() or (objct.is_literal()
                                               and objct.sign == '-')
