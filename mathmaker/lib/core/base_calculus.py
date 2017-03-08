@@ -558,10 +558,10 @@ class Item(Exponented):
         elif self.is_literal() and other_objct.is_numeric():
             return False
 
-        elif self.is_numeric() and other_objct.is_literal():
+        elif self.is_numeric() and other_objct.is_literal(displ_as=True):
             return True
 
-        elif self.is_literal() and other_objct.is_literal():
+        elif self.is_literal() and other_objct.is_literal(displ_as=True):
             self_value = self.get_first_letter()
             other_value = other_objct.get_first_letter()
 
@@ -585,10 +585,10 @@ class Item(Exponented):
         elif self.is_literal() and other_objct.is_numeric():
             return True
 
-        elif self.is_numeric() and other_objct.is_literal():
+        elif self.is_numeric() and other_objct.is_literal(displ_as=True):
             return False
 
-        elif self.is_literal() and other_objct.is_literal():
+        elif self.is_literal() and other_objct.is_literal(displ_as=True):
             self_value = self.get_first_letter()
             other_value = other_objct.get_first_letter()
 
@@ -624,7 +624,7 @@ class Item(Exponented):
         # 1st CASE: Item × Item
         # and other cases inside: numeric × numeric or numeric × literal etc.
         # The code could be shortened but will not, for better comprehension.
-        if isinstance(objct, Item) or isinstance(objct, Function):
+        if isinstance(objct, Item):
             # ex: 2 × 4
             if ((self.is_numeric() or self.is_displ_as_a_single_1())
                 and (objct.is_numeric()
@@ -639,7 +639,7 @@ class Item(Exponented):
                 # __
                 return True
 
-            elif self.is_numeric() and objct.is_literal():
+            elif self.is_numeric() and objct.is_literal(displ_as=True):
                 if (self.raw_value == 1
                     or self.requires_brackets(position)
                     or objct.requires_brackets(position + 1)):
@@ -648,7 +648,7 @@ class Item(Exponented):
                 else:
                     return False
 
-            elif self.is_literal() and objct.is_literal():
+            elif self.is_literal() and objct.is_literal(displ_as=True):
                 if (self.requires_brackets(position)
                     or objct.requires_brackets(position + 1)):
                     # __
@@ -741,7 +741,7 @@ class Item(Exponented):
                     return True
 
             # LITERAL exponents
-            elif self.exponent.is_literal():
+            elif self.exponent.is_literal(displ_as=True):
                 return True
 
             # Now the cases of non-Item-but-though-(numeric) Exponented
@@ -837,8 +837,14 @@ class Item(Exponented):
     # --------------------------------------------------------------------------
     ##
     #   @brief True if it's a literal Item
-    def is_literal(self):
-        return self.value_inside.is_literal() or self.exponent.is_literal()
+    def is_literal(self, displ_as=False) -> bool:
+        """
+        Return True if Item is to be considered literal.
+
+        :param displ_as: not applicable to Items
+        """
+        return (self.value_inside.is_literal()
+                or self.exponent.is_literal(displ_as=displ_as))
 
     # --------------------------------------------------------------------------
     ##
@@ -923,7 +929,7 @@ class Item(Exponented):
         return False
 
 
-class Function(Exponented):
+class Function(Item):
     """
     Represent the image of a number under a function like f(x) or cos(ABC).
     """
@@ -1100,13 +1106,13 @@ class Function(Exponented):
 
     def multiply_symbol_is_required(self, objct, position):
         """True if × is required between self and next objct in a Product."""
-        # 1st CASE: a) Function × Item
-        if isinstance(objct, Item):
-            return True
-
-        # 1st CASE: b) Function × Item
+        # 1st CASE: a) Function × Function
         if isinstance(objct, Function):
             return False
+
+        # 1st CASE: b) Function × Item
+        if isinstance(objct, Item):
+            return True
 
         # 2d CASE: Function × Product
         if isinstance(objct, Product):
@@ -1144,10 +1150,20 @@ class Function(Exponented):
         # return self._display_mode == 'numeric'
         return False
 
-    def is_literal(self):
-        """Return True if current display mode is literal."""
-        # return self._display_mode == 'literal'
-        return True
+    def is_literal(self, displ_as=False) -> bool:
+        """
+        Return True if Function is to be considered literal.
+
+        :param displ_as: if displ_as is True, it's about knowing whether the
+                         object should be considered literal for display,
+                         otherwise, it's about knowing wether it can be
+                         numerically evaluated (directly, without replacing
+                         its variable by a Value).
+        """
+        if displ_as:
+            return True
+        else:
+            return self._display_mode == 'literal'
 
     def is_null(self):
         """True if self evaluates to 0."""
@@ -1560,8 +1576,13 @@ class SquareRoot(Function):
     # --------------------------------------------------------------------------
     ##
     #   @brief True if it's a literal SquareRoot
-    def is_literal(self):
-        return self.radicand.is_literal()
+    def is_literal(self, displ_as=False):
+        """
+        Return True if SquareRoot is to be considered literal.
+
+        :param displ_as: not applicable to SquareRoots
+        """
+        return self.radicand.is_literal(displ_as=displ_as)
 
     # --------------------------------------------------------------------------
     ##
@@ -1767,9 +1788,14 @@ class Operation(Exponented):
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the Operation contains only literal terms
-    def is_literal(self):
+    def is_literal(self, displ_as=False) -> bool:
+        """
+        Return True if Operation is to be considered literal.
+
+        :param displ_as: not applicable to Operations
+        """
         for elt in self:
-            if not elt.is_literal():
+            if not elt.is_literal(displ_as=displ_as):
                 return False
 
         return True
@@ -2111,6 +2137,22 @@ class Quotient(Operation):
                 # maybe it could become useful later... ?
                 return None
 
+    def expand_and_reduce_next_step(self, **options):
+        """If possible, expands Quotient's numerator and/or denominator."""
+        next_nume = self.numerator.expand_and_reduce_next_step(**options)
+        next_deno = self.denominator.expand_and_reduce_next_step(**options)
+        if (next_nume, next_deno) is not (None, None):
+            if next_nume is None:
+                next_nume = self.numerator.clone()
+            if next_deno is None:
+                next_deno = self.denominator.clone()
+            result = Quotient(self)
+            result.set_numerator(next_nume)
+            result.set_denominator(next_deno)
+            return result
+        else:
+            return None
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Raw display of the Quotient (debugging method)
@@ -2154,7 +2196,7 @@ class Quotient(Operation):
             return True
 
         # 2d CASE: Quotient × <anything but a Quotient>
-        if objct.is_literal():
+        if objct.is_literal(displ_as=True):
             return False
         else:
             return True
@@ -3210,7 +3252,7 @@ class CommutativeOperation(Operation):
     ##
     #   @brief If the Product is literal, returns the first factor's letter
     def get_first_letter(self):
-        if self.is_literal():
+        if self.is_literal(displ_as=True):
             return self.element[0].get_first_letter()
 
         else:
@@ -3284,15 +3326,16 @@ class CommutativeOperation(Operation):
                 or isinstance(elt, Function)):
                 # we don't check if the possibly Item is numeric.
                 # if it's not, an error will be raised
-                val = elt.raw_value
-                if isinstance(elt, Function):
+                if not isinstance(elt, Function):
+                    val = elt.raw_value
+                else:
                     val = Item((elt.sign,
                                 elt.fct(elt.num_val.evaluate()),
                                 1)).evaluate()
                 expo = 1
                 sign_val = 1
 
-                if isinstance(elt, Item) or isinstance(elt, Function):
+                if isinstance(elt, Item):
                     expo = elt.exponent.evaluate()
                     if elt.is_negative():
                         sign_val = -1
@@ -4349,8 +4392,6 @@ class Product(CommutativeOperation):
             # 1st
             # There are only Items:
             if nb_fractions == 0 and nb_items >= 1:
-                import pytest
-                pytest.set_trace()
                 return Product([Item(self.evaluate(stop_recursion=True))])
 
             # 2d
@@ -4638,7 +4679,7 @@ class Product(CommutativeOperation):
     def multiply_symbol_is_required(self, objct, position):
         next_to_last = len(self) - 1
         # 1st CASE: Product × Item|Function
-        if isinstance(objct, Item) or isinstance(objct, Function):
+        if isinstance(objct, Item):
             return self.factor[next_to_last]\
                 .multiply_symbol_is_required(objct, position)
 
@@ -6004,9 +6045,9 @@ class Sum(CommutativeOperation):
     #   @return True if the writing rules require × between self & obj
     def multiply_symbol_is_required(self, objct, position):
         # 1st CASE: Sum × Item|Function
-        if isinstance(objct, Item) or isinstance(objct, Function):
+        if isinstance(objct, Item):
             if len(self) >= 2:
-                return objct.is_numeric() or (objct.is_literal()
+                return objct.is_numeric() or (objct.is_literal(displ_as=True)
                                               and objct.sign == '-')
             else:
                 return self.term[0].multiply_symbol_is_required(objct,

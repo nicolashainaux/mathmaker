@@ -815,7 +815,12 @@ class Value(Signed):
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains literal objects
-    def is_literal(self):
+    def is_literal(self, displ_as=False) -> bool:
+        """
+        Return True if Value is to be considered literal.
+
+        :param displ_as: not applicable to Values
+        """
         if type(self.raw_value) == str:
             # __
             return True
