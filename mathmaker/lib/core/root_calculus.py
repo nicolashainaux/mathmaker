@@ -110,7 +110,7 @@ class Evaluable(Printable):
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains numeric objects
-    def is_numeric(self):
+    def is_numeric(self, displ_as=False):
         raise error.MethodShouldBeRedefined(self, 'is_numeric')
 
     # --------------------------------------------------------------------------
@@ -809,7 +809,7 @@ class Value(Signed):
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains numeric objects
-    def is_numeric(self):
+    def is_numeric(self, displ_as=False):
         return type(self.raw_value) in [float, int, Decimal]
 
     # --------------------------------------------------------------------------

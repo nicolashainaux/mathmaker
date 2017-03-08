@@ -1848,10 +1848,10 @@ class Table(Printable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns True if the Table is entirely numeric
-    def is_numeric(self):
+    def is_numeric(self, displ_as=False):
         for i in range(2):
             for j in range(len(self)):
-                if not self.cell[i][j].is_numeric():
+                if not self.cell[i][j].is_numeric(displ_as=displ_as):
                     return False
 
         return True

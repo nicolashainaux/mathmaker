@@ -552,10 +552,10 @@ class Item(Exponented):
     #          alphabetical_order_cmp(), since we need this comparison
     #   @return True if self is lower than the other_item
     def __lt__(self, other_objct):
-        if self.is_numeric() and other_objct.is_numeric():
+        if self.is_numeric() and other_objct.is_numeric(displ_as=True):
             return False
 
-        elif self.is_literal() and other_objct.is_numeric():
+        elif self.is_literal() and other_objct.is_numeric(displ_as=True):
             return False
 
         elif self.is_numeric() and other_objct.is_literal(displ_as=True):
@@ -579,10 +579,10 @@ class Item(Exponented):
     #          alphabetical_order_cmp(), since we need this comparison
     #   @return True if self is lower than the other_item
     def __gt__(self, other_objct):
-        if self.is_numeric() and other_objct.is_numeric():
+        if self.is_numeric() and other_objct.is_numeric(displ_as=True):
             return True
 
-        elif self.is_literal() and other_objct.is_numeric():
+        elif self.is_literal() and other_objct.is_numeric(displ_as=True):
             return True
 
         elif self.is_numeric() and other_objct.is_literal(displ_as=True):
@@ -627,14 +627,14 @@ class Item(Exponented):
         if isinstance(objct, Item):
             # ex: 2 × 4
             if ((self.is_numeric() or self.is_displ_as_a_single_1())
-                and (objct.is_numeric()
+                and (objct.is_numeric(displ_as=True)
                      or objct.is_displ_as_a_single_1())):
                 # __
                 return True
 
             # ex: a × 3 (writing a3 isn't OK)
             elif (self.is_literal()
-                  and (objct.is_numeric()
+                  and (objct.is_numeric(displ_as=True)
                        or objct.is_displ_as_a_single_1())):
                 # __
                 return True
@@ -735,7 +735,7 @@ class Item(Exponented):
             #                    having already be managed just above)
             if ((isinstance(self.exponent, Value)
                  or isinstance(self.exponent, Item))
-                and self.exponent.is_numeric()):
+                and self.exponent.is_numeric(displ_as=True)):
                 # __
                 if is_even(self.exponent):
                     return True
@@ -828,8 +828,9 @@ class Item(Exponented):
     # --------------------------------------------------------------------------
     ##
     #   @brief True if it's a numeric Item
-    def is_numeric(self):
-        if self.value_inside.is_numeric() and self.exponent.is_numeric():
+    def is_numeric(self, displ_as=False):
+        if (self.value_inside.is_numeric()
+            and self.exponent.is_numeric(displ_as=displ_as)):
             return True
         else:
             return False
@@ -897,7 +898,7 @@ class Item(Exponented):
     ##
     #   @brief True if the Item is numeric
     def is_displ_as_a_single_numeric_Item(self):
-        return self.is_numeric()
+        return self.is_numeric(displ_as=True)
 
     # --------------------------------------------------------------------------
     ##
@@ -1145,10 +1146,18 @@ class Function(Item):
         """Same as calculate_ntext_step(), for Functions."""
         return self.calculate_next_step(**options)
 
-    def is_numeric(self):
-        """Return True if current display mode is numeric."""
-        # return self._display_mode == 'numeric'
-        return False
+    def is_numeric(self, displ_as=False):
+        """Return True if current display mode is numeric.
+
+        :param displ_as: if displ_as is True, it's about knowing whether the
+                         object should be considered numeric for display,
+                         otherwise, it's about knowing wether it can be
+                         numerically evaluated (directly, without replacing
+                         its variable by a Value)."""
+        if displ_as:
+            return False
+        else:
+            return self._display_mode == 'numeric'
 
     def is_literal(self, displ_as=False) -> bool:
         """
@@ -1570,8 +1579,8 @@ class SquareRoot(Function):
     # --------------------------------------------------------------------------
     ##
     #   @brief True if it's a numeric SquareRoot
-    def is_numeric(self):
-        return self.radicand.is_numeric()
+    def is_numeric(self, displ_as=False):
+        return self.radicand.is_numeric(displ_as=displ_as)
 
     # --------------------------------------------------------------------------
     ##
@@ -1778,9 +1787,9 @@ class Operation(Exponented):
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the Operation contains only numeric elements
-    def is_numeric(self):
+    def is_numeric(self, displ_as=False):
         for elt in self:
-            if not elt.is_numeric():
+            if not elt.is_numeric(displ_as=displ_as):
                 return False
 
         return True
@@ -6047,8 +6056,9 @@ class Sum(CommutativeOperation):
         # 1st CASE: Sum × Item|Function
         if isinstance(objct, Item):
             if len(self) >= 2:
-                return objct.is_numeric() or (objct.is_literal(displ_as=True)
-                                              and objct.sign == '-')
+                return (objct.is_numeric(displ_as=True)
+                        or (objct.is_literal(displ_as=True)
+                            and objct.sign == '-'))
             else:
                 return self.term[0].multiply_symbol_is_required(objct,
                                                                 position)
@@ -6119,7 +6129,7 @@ class Sum(CommutativeOperation):
         if self.exponent_must_be_displayed():
             if len(self) == 1 or self.is_displ_as_a_single_1():
                 return not(self.get_sign() == '+'
-                           and self.term[0].is_numeric())
+                           and self.term[0].is_numeric(displ_as=True))
             # this case is when there are several terms
             else:
                 return True
@@ -6586,7 +6596,7 @@ class Monomial(Product):
     # --------------------------------------------------------------------------
     ##
     #   @brief True if Monomial's degree is 0 or ZERO_POLYNOMIAL_DEGREE
-    def is_numeric(self):
+    def is_numeric(self, displ_as=False):
         return self.is_null() or self.degree == 0
 
     # --------------------------------------------------------------------------
