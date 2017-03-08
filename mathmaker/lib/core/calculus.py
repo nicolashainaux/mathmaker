@@ -1185,6 +1185,7 @@ class Equation(ComposedCalculable):
                   "len(new_eq.left_hand_side): "
                   + str(len(new_eq.left_hand_side))
                   + "\nnext_left_X is: " + next_left_X_str
+                  + "\nnext_right_X is: " + repr(next_right_X)
                   + "\nnew_eq.left_hand_side.term[0].is_literal()? "
                   + str(new_eq.left_hand_side.term[0].is_literal()) + "; "
                   "len(new_eq.right_hand_side): "
@@ -1602,8 +1603,10 @@ class CrossProductEquation(Equation):
                                               + "and " + str(type(arg[3])),
                                               "a tuple of four Calculables")
                 else:
-                    self._left_hand_side = Quotient(('+', arg[0], arg[2]))
-                    self._right_hand_side = Quotient(('+', arg[1], arg[3]))
+                    self._left_hand_side = Quotient(('+', arg[0], arg[2]),
+                                                    ignore_1_denominator=True)
+                    self._right_hand_side = Quotient(('+', arg[1], arg[3]),
+                                                     ignore_1_denominator=True)
 
             # Let's find the variable
             # In the same time, we'll determine its position and the var obj
@@ -1666,9 +1669,11 @@ class CrossProductEquation(Equation):
                             [self.left_hand_side.denominator,
                              self.right_hand_side.denominator]])
 
+        r1d = options.get('remove_1_deno', True)
         new_eq = Equation((self.variable_obj,
                            temp_table.cross_product((0, 1),
-                                                    self.variable_position)))
+                                                    self.variable_position,
+                                                    remove_1_deno=r1d)))
         return new_eq
 
 
@@ -1776,7 +1781,7 @@ class Table(Printable):
     #                          b c        b c        c x       x c
     #   @param options Any options
     #   @return A Quotient or possibly a Fraction
-    def cross_product(self, col, x_position, **options):
+    def cross_product(self, col, x_position, remove_1_deno=True, **options):
         if col[0] >= len(self) or col[1] >= len(self):
             raise error.OutOfRangeArgument(str(col[0]) + " or " + str(col[1]),
                                            "should be < len(self) = "
@@ -1794,6 +1799,8 @@ class Table(Printable):
         deno = None
         if x_position == 0:
             deno = self.cell[1][col[1]]
+            if deno.is_displ_as_a_single_1() and remove_1_deno:
+                return num
             if (self.cell[0][col[1]].is_displ_as_a_single_int()
                 and self.cell[1][col[0]].is_displ_as_a_single_int()
                 and self.cell[1][col[1]].is_displ_as_a_single_int()):
@@ -1804,7 +1811,8 @@ class Table(Printable):
 
         elif x_position == 1:
             deno = self.cell[1][col[0]]
-
+            if deno.is_displ_as_a_single_1() and remove_1_deno:
+                return num
             if (self.cell[0][col[0]].is_displ_as_a_single_int()
                 and self.cell[1][col[1]].is_displ_as_a_single_int()
                 and self.cell[1][col[0]].is_displ_as_a_single_int()):
@@ -1815,7 +1823,8 @@ class Table(Printable):
 
         elif x_position == 2:
             deno = self.cell[0][col[0]]
-
+            if deno.is_displ_as_a_single_1() and remove_1_deno:
+                return num
             if (self.cell[0][col[1]].is_displ_as_a_single_int()
                 and self.cell[1][col[0]].is_displ_as_a_single_int()
                 and self.cell[0][col[0]].is_displ_as_a_single_int()):
@@ -1826,6 +1835,8 @@ class Table(Printable):
 
         elif x_position == 3:
             deno = self.cell[0][col[1]]
+            if deno.is_displ_as_a_single_1() and remove_1_deno:
+                return num
             if (self.cell[0][col[0]].is_displ_as_a_single_int()
                 and self.cell[1][col[1]].is_displ_as_a_single_int()
                 and self.cell[0][col[1]].is_displ_as_a_single_int()):
