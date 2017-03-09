@@ -24,8 +24,15 @@ import pytest
 import math
 
 from mathmaker.lib.core.root_calculus import Value
-from mathmaker.lib.core.base_calculus import Function
+from mathmaker.lib.core.base_calculus import Item, Function
+from mathmaker.lib.core.base_geometry import Point, Angle
 from tools import wrap_nb
+
+
+@pytest.fixture()
+def ABC(): return Angle((Point(['A', (1, 0)]),
+                         Point(['B', (0, 0)]),
+                         Point(['C', (0.5, 0.75)])))
 
 
 @pytest.fixture()
@@ -35,6 +42,12 @@ def f_x(): return Function()
 @pytest.fixture()
 def cos_x(): return Function(name='cos',
                              fct=lambda x: math.cos(math.radians(x)))
+
+
+@pytest.fixture()
+def cos_ABC(ABC): return Function(name='cos',
+                                  var=ABC,
+                                  fct=lambda x: math.cos(math.radians(x)))
 
 
 def test_f_x_printed(f_x):
@@ -78,9 +91,26 @@ def test_cos_x_printed(cos_x):
     assert cos_x.printed == wrap_nb('cos(x)')
 
 
+def test_cos_x_substituted(cos_x):
+    """Is cos(x) correctly substituted?"""
+    cos_x.substitute({Item('x'): Value(75)})
+    assert cos_x.printed == wrap_nb('cos(75)')
+
+
 def test_cos_x_evaluated0(cos_x):
     """Is cos(x) correctly printed?"""
     cos_x.num_val = Value(60)
     cos_x.set_numeric_mode()
     assert cos_x.printed == wrap_nb('cos(60)')
     assert Value(cos_x.evaluate()).round(4) == Value('0.5')
+
+
+def test_cos_ABC_printed(cos_ABC):
+    """Is cos(ABC) correctly printed?"""
+    assert cos_ABC.printed == wrap_nb('cos(\widehat{ABC})')
+
+
+def test_cos_ABC_substituted(cos_ABC, ABC):
+    """Is cos(ABC) correctly substituted?"""
+    cos_ABC.substitute({ABC: Value(25)})
+    assert cos_ABC.printed == wrap_nb('cos(25)')

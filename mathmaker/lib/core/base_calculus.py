@@ -1011,6 +1011,10 @@ class Function(Item):
         return self._arguments[self._display_mode]
 
     @property
+    def var(self):
+        return self._var
+
+    @property
     def num_val(self):
         return self._num_val
 
@@ -1211,6 +1215,7 @@ class Function(Item):
         if self.var in subst_dict:
             self.num_val = subst_dict[self.var]
             self.set_numeric_mode()
+        self.exponent.substitute(subst_dict)
 
     def into_str(self, **options):
         """Creates the str version of the Function."""

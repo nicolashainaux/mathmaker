@@ -31,7 +31,7 @@ from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
 
 from mathmaker.lib import error, is_
 from mathmaker.lib.maths_lib import deg_to_rad, round
-from mathmaker.lib.core.base import Drawable
+from mathmaker.lib.core.base import Drawable, Printable
 from mathmaker.lib.core.base_calculus import Value
 from mathmaker.lib.common.latex import MARKUP
 
@@ -526,7 +526,7 @@ class Ray(Drawable):
 ##
 # @class Angle
 # @brief
-class Angle(Drawable):
+class Angle(Drawable, Printable):
 
     # --------------------------------------------------------------------------
     ##
@@ -662,3 +662,6 @@ class Angle(Drawable):
 
         else:
             raise error.WrongArgument(arg, 'str')
+
+    def into_str(self, **options):
+        return self._name
