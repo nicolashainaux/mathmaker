@@ -4325,6 +4325,8 @@ class Product(CommutativeOperation):
     #   @todo The way the exponents are handled is still to be decided
     #   @todo the inner '-' signs (±(-2)) are not handled by this method so far
     def calculate_next_step(self, **options):
+        log = settings.dbg_logger.getChild('Product.calculate_next_step')
+        log.debug('Entering')
         if not self.is_numeric() or isinstance(self, Monomial):
             return self.expand_and_reduce_next_step(**options)
 
@@ -4401,6 +4403,7 @@ class Product(CommutativeOperation):
             # 1st
             # There are only Items:
             if nb_fractions == 0 and nb_items >= 1:
+                log.debug('Evaluating everything')
                 return Product([Item(self.evaluate(stop_recursion=True))])
 
             # 2d
