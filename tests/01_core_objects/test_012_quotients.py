@@ -22,6 +22,7 @@
 
 import pytest
 
+from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.base_calculus import Quotient, Fraction
 from tools import wrap_nb
 
@@ -40,6 +41,13 @@ def q2(): return Quotient(('-',
                            Fraction(('+', 1, 3)),
                            1,
                            'use_divide_symbol'))
+
+
+@pytest.fixture
+def q3(): return Quotient(('+',
+                           Value(8),
+                           Value(1),
+                           1), ignore_1_denominator=True)
 
 
 def test_q1_printed(q1):
@@ -81,3 +89,8 @@ def test_q2_next_step3(q2):
     assert q2.calculate_next_step().calculate_next_step()\
         .calculate_next_step().printed == \
         wrap_nb('-\\frac{3}{2}')
+
+
+def test_q3_printed(q3):
+    """Is this Quotient correctly printed?"""
+    assert q3.printed == wrap_nb('8')
