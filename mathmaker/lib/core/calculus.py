@@ -30,7 +30,8 @@ from mathmaker.lib.core.base import Printable
 from mathmaker.lib.core.root_calculus import Exponented, Value, Calculable
 from mathmaker.lib.core.base_calculus import (Monomial, Sum, Item, Polynomial,
                                               Fraction, Expandable, Product,
-                                              Quotient, SquareRoot)
+                                              Quotient, Function, SquareRoot,
+                                              CommutativeOperation)
 # from mathmaker.lib import *
 # from .base import *
 # from .base_calculus import *
@@ -915,20 +916,14 @@ class Equation(ComposedCalculable):
                                          '"left" or "right"')
 
         if isinstance(arg, Exponented):
-            if isinstance(arg, Sum):
-                # TO FIX ?
-                # this could be secured by checking the given Sum
-                # is not containing only one term which would be also
-                # a Sum
-                if left_or_right == "left":
-                    self._left_hand_side = arg
-                else:
-                    self._right_hand_side = arg
+            if isinstance(arg, CommutativeOperation) and len(arg) == 1:
+                arg = arg.element[0]
+            if not isinstance(arg, Sum):
+                arg = Sum(arg)
+            if left_or_right == "left":
+                self._left_hand_side = arg
             else:
-                if left_or_right == "left":
-                    self._left_hand_side = Sum(arg)
-                else:
-                    self._right_hand_side = Sum(arg)
+                self._right_hand_side = arg
 
         else:
             raise error.UncompatibleType(arg, "Equation|tuple")
@@ -1195,42 +1190,40 @@ class Equation(ComposedCalculable):
                   + str(isinstance(new_eq.right_hand_side.term[0],
                                    Fraction)))
 
-        if (('skip_fraction_simplification' in options
-             and 'decimal_result' not in options)
-            and len(new_eq.left_hand_side) == 1
-            and next_left_X is None
-            and not new_eq.left_hand_side.term[0].is_numeric()
-            and len(new_eq.right_hand_side) == 1
+        at_left_one_literal_not_expandable_element = \
+            (len(new_eq.left_hand_side) == 1
+             and next_left_X is None
+             and not new_eq.left_hand_side.term[0].is_numeric()
+             and len(new_eq.right_hand_side) == 1)
+
+        if (at_left_one_literal_not_expandable_element
             and isinstance(new_eq.right_hand_side.term[0], Fraction)
-            and new_eq.right_hand_side.term[0].is_reducible()):
+            and new_eq.right_hand_side.term[0].is_reducible()
+            and 'skip_fraction_simplification' in options):
             # __
-            new_eq.set_hand_side("right",
-                                 new_eq.right_hand_side.term[0]
-                                 .completely_reduced())
-
-        elif (('skip_fraction_simplification' in options
-               and 'decimal_result' in options)
-              and len(new_eq.left_hand_side) == 1
-              and next_left_X is None
-              and not new_eq.left_hand_side.term[0].is_numeric()
-              and len(new_eq.right_hand_side) == 1
-              and isinstance(new_eq.right_hand_side.term[0], Fraction)
-              and new_eq.right_hand_side.term[0].is_reducible()):
-            # __
-            new_eq.set_hand_side("right",
-                                 Item(new_eq
-                                      .right_hand_side.term[0]
-                                      .evaluate(**options)))
-
-        elif ('decimal_result' in options
-              and len(new_eq.left_hand_side) == 1
-              and next_left_X is None
-              and not new_eq.left_hand_side.term[0].is_numeric()
-              and len(new_eq.right_hand_side) == 1
+            log.debug('At left, one literal not reducible element; '
+                      'at right, one reducible Fraction, but Fraction '
+                      'simplification must be skipped.')
+            if 'decimal_result' in options:
+                log.debug('And decimal result is required')
+                new_eq.set_hand_side("right",
+                                     Item(new_eq
+                                          .right_hand_side.term[0]
+                                          .evaluate(**options)))
+            else:
+                log.debug('But no decimal result is required')
+                new_eq.set_hand_side("right",
+                                     new_eq.right_hand_side.term[0]
+                                     .completely_reduced())
+        elif (at_left_one_literal_not_expandable_element
+              and 'decimal_result' in options
               and (isinstance(new_eq.right_hand_side.term[0], Quotient)
+                   or isinstance(new_eq.right_hand_side.term[0], Function)
                    or isinstance(new_eq.right_hand_side.term[0], SquareRoot))):
             # __
-            log.debug("Decimal Result CASE")
+            log.debug('At left, one literal not reducible element; '
+                      'at right, one Quotient|Function|SquareRoot and '
+                      'decimal result is required.')
             new_eq.set_hand_side("right",
                                  new_eq.right_hand_side.
                                  expand_and_reduce_next_step(**options))
@@ -1247,6 +1240,20 @@ class Equation(ComposedCalculable):
             if next_right_X is not None:
                 # __
                 new_eq.set_hand_side("right", next_right_X)
+                at_left_one_literal_not_expandable_element = \
+                    (len(new_eq.left_hand_side) == 1
+                     and next_left_X is None
+                     and not new_eq.left_hand_side.term[0].is_numeric()
+                     and len(new_eq.right_hand_side) == 1)
+                if (at_left_one_literal_not_expandable_element
+                    and 'decimal_result' in options
+                    and isinstance(new_eq.right_hand_side.term[0], Item)
+                    and new_eq.right_hand_side.term[0]
+                    .needs_to_get_rounded(options['decimal_result'])):
+                    # __
+                    new_eq.set_hand_side("right",
+                                         new_eq.right_hand_side.term[0]
+                                         .round(options['decimal_result']))
 
         # 2d CASE
         # Irreducible SUMS, like 3 + x = 5 or x - 2 = 3x + 7
@@ -1430,9 +1437,11 @@ class Equation(ComposedCalculable):
         elif (isinstance(new_eq.left_hand_side.term[0], Item)
               and new_eq.left_hand_side.term[0].is_literal()):
             # __
+            log.debug("5th CASE")
             if new_eq.left_hand_side.term[0].get_sign() == '-':
                 new_eq.left_hand_side.term[0].set_opposite_sign()
                 new_eq.right_hand_side.term[0].set_opposite_sign()
+                log.debug("Swapped signs")
             else:
                 # CASES x² = b
                 if new_eq.left_hand_side.term[0].exponent == Value(2):
@@ -1468,6 +1477,7 @@ class Equation(ComposedCalculable):
                 # Now the exponent must be equivalent to a single 1
                 # or the algorithm just doesn't know how to solve further.
                 else:
+                    log.debug("Returning None")
                     return None
 
         # log.debug(
