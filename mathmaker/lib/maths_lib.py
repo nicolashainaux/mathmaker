@@ -244,7 +244,7 @@ def lcm_of_the_list(l):
 #   @param objct The object to test
 #   @return True if objct is an even number|numeric Item. Otherwise, False
 def is_even(objct):
-    from mathmaker.lib.core.base_calculus import Item
+    from mathmaker.lib.core.base_calculus import Item, Function
     from mathmaker.lib.core.root_calculus import Value
 
     if is_.an_integer(objct) or isinstance(objct, Decimal):
@@ -253,7 +253,8 @@ def is_even(objct):
         else:
             return False
 
-    elif isinstance(objct, Item) and objct.is_numeric():
+    elif (isinstance(objct, Item) and objct.is_numeric()
+          and not isinstance(objct, Function)):
         return is_even(objct.raw_value)
 
     elif isinstance(objct, Value) and objct.is_numeric():
@@ -269,7 +270,7 @@ def is_even(objct):
 #   @param objct The object to test
 #   @return True if objct is an uneven number|numeric Item. Otherwise, False
 def is_uneven(objct):
-    from mathmaker.lib.core.base_calculus import Item
+    from mathmaker.lib.core.base_calculus import Item, Function
     from mathmaker.lib.core.root_calculus import Value
     if is_.an_integer(objct):
         if objct % 2 == 0:
@@ -277,12 +278,11 @@ def is_uneven(objct):
         else:
             return True
 
-    elif (isinstance(objct, Item)
-            and objct.is_numeric()):
+    elif (isinstance(objct, Item) and objct.is_numeric()
+          and not isinstance(objct, Function)):
         return is_uneven(objct.raw_value)
 
-    elif (isinstance(objct, Value)
-            and objct.is_numeric()):
+    elif (isinstance(objct, Value) and objct.is_numeric()):
         return is_uneven(objct.raw_value)
 
     else:
