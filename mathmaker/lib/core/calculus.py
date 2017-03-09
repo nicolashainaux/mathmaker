@@ -823,7 +823,7 @@ class Equation(ComposedCalculable):
 
         # Another Equation to copy
         elif isinstance(arg, Equation):
-            self._name = arg.name
+            self._name = arg._name
             self._number = arg.number
             self._left_hand_side = arg.left_hand_side.clone()
             self._right_hand_side = arg.right_hand_side.clone()
