@@ -42,9 +42,9 @@ def cos_x(): return Function(name='cos',
 
 
 @pytest.fixture()
-def cos_ABC(a): return Function(name='cos',
-                                var=a,
-                                fct=lambda x: math.cos(math.radians(x)))
+def cos_ABC(ABC): return Function(name='cos',
+                                  var=ABC,
+                                  fct=lambda x: math.cos(math.radians(x)))
 
 
 @pytest.fixture
@@ -123,8 +123,8 @@ def test_t1_into_str_as_QE(t1):
 
 def test_t1_substituted(t1):
     """Are the literals in this table correctly substituted?"""
-    t1.substitute({Value('x'): 35,
-                   Value('BA'): 10})
+    t1.substitute({Value('x'): Value(35),
+                   Value('BA'): Value(10)})
     assert t1.into_str(as_a_quotients_equality=True,
                        ignore_1_denominator=True) == \
         wrap_nb('cos(35)=\\frac{\\text{BC}}{10}')
@@ -135,3 +135,12 @@ def test_t2_into_str_as_QE(t2):
     assert t2.into_str(as_a_quotients_equality=True,
                        ignore_1_denominator=True) == \
         wrap_nb('cos(\widehat{ABC})=\\frac{\\text{EG}}{\\text{EF}}')
+
+
+def test_t2_substituted(t2, ABC):
+    """Are the literals in this table correctly substituted?"""
+    t2.substitute({ABC: Value(27),
+                   Value('EF'): Value(5)})
+    assert t2.into_str(as_a_quotients_equality=True,
+                       ignore_1_denominator=True) == \
+        wrap_nb('cos(27)=\\frac{\\text{EG}}{5}')

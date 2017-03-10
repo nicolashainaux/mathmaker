@@ -599,6 +599,14 @@ class Angle(Drawable, Printable):
     def __repr__(self):
         return ' ∡ ' + self._name + ' ∡ '
 
+    def __hash__(self):
+        return hash(self._name)
+
+    def __eq__(self, other_objct):
+        if not isinstance(other_objct, Angle):
+            return False
+        return self._name == other_objct._name
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the measure of the angle
