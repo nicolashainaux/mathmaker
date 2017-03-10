@@ -45,5 +45,7 @@ dbg:
         expand: INFO
     Equation:
         solve_next_step: INFO
+    Table:
+        substitute: INFO
     Table_UP:
         init: INFO

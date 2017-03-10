@@ -1781,6 +1781,19 @@ class Table(Printable):
     def __len__(self):
         return self._nb_of_cols
 
+    def substitute(self, subst_dict):
+        log = settings.dbg_logger.getChild('Table.substitute')
+        rebuilt_data = []
+        for row in self._data:
+            rebuilt_row = []
+            for cell in row:
+                log.debug(repr(cell))
+                cell.substitute(subst_dict)
+                rebuilt_row.append(cell)
+            rebuilt_data.append(rebuilt_row)
+        log.debug('Table data once substituted: ' + str(rebuilt_data))
+        self._data = rebuilt_data
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Produces the cross product of a cell among 4 given

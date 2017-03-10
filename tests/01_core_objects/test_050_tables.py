@@ -23,6 +23,7 @@
 import pytest
 import math
 
+from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.base_calculus import Item, Function
 from mathmaker.lib.core.base_geometry import Point, Angle
 from mathmaker.lib.core.calculus import Table
@@ -118,6 +119,15 @@ def test_t1_into_str_as_QE(t1):
     assert t1.into_str(as_a_quotients_equality=True,
                        ignore_1_denominator=True) == \
         wrap_nb('cos(x)=\\frac{\\text{BC}}{\\text{BA}}')
+
+
+def test_t1_substituted(t1):
+    """Are the literals in this table correctly substituted?"""
+    t1.substitute({Value('x'): 35,
+                   Value('BA'): 10})
+    assert t1.into_str(as_a_quotients_equality=True,
+                       ignore_1_denominator=True) == \
+        wrap_nb('cos(35)=\\frac{\\text{BC}}{10}')
 
 
 def test_t2_into_str_as_QE(t2):
