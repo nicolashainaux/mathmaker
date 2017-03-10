@@ -1069,6 +1069,11 @@ class Function(Item):
         """Set the display mode to 'numeric'."""
         self._display_mode = 'numeric'
 
+    def __hash__(self):
+        """A hash value for Function"""
+        return hash(str(self.name) + str(self.sign) + str(self.var)
+                    + str(self.fct))
+
     def __len__(self):
         """Function's length."""
         return 1
@@ -1212,10 +1217,19 @@ class Function(Item):
 
     def substitute(self, subst_dict):
         """Substitute the argument by its value, if available in subst_dict."""
-        if self.var in subst_dict:
+        substituted = False
+        var = self.var.clone()
+        if isinstance(var, Calculable) and var.substitute(subst_dict):
+            substituted = True
+            self.num_val = var
+            self.set_numeric_mode()
+        elif self.var in subst_dict:
+            substituted = True
             self.num_val = subst_dict[self.var]
             self.set_numeric_mode()
-        self.exponent.substitute(subst_dict)
+        if self.exponent.substitute(subst_dict):
+            substituted = True
+        return substituted
 
     def into_str(self, **options):
         """Creates the str version of the Function."""

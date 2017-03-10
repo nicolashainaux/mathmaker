@@ -91,7 +91,13 @@ def test_cos_x_printed(cos_x):
     assert cos_x.printed == wrap_nb('cos(x)')
 
 
-def test_cos_x_substituted(cos_x):
+def test_cos_x_value_substituted(cos_x):
+    """Is cos(x) correctly substituted?"""
+    cos_x.substitute({Value('x'): Value(75)})
+    assert cos_x.printed == wrap_nb('cos(75)')
+
+
+def test_cos_x_item_substituted(cos_x):
     """Is cos(x) correctly substituted?"""
     cos_x.substitute({Item('x'): Value(75)})
     assert cos_x.printed == wrap_nb('cos(75)')

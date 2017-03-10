@@ -205,8 +205,11 @@ class Calculable(Evaluable):
     ##
     #   @brief Uses the given lexicon to substitute literal Values in self
     def substitute(self, subst_dict):
+        substituted = False
         for elt in self:
-            elt.substitute(subst_dict)
+            if elt.substitute(subst_dict):
+                substituted = True
+        return substituted
 
     # --------------------------------------------------------------------------
     ##
@@ -677,12 +680,15 @@ class Value(Signed):
     ##
     #   @brief Uses the given lexicon to substitute literal Values in self
     def substitute(self, subst_dict):
+        substituted = False
         if self.is_literal():
             for key in subst_dict:
                 if self == key:
                     self.__init__(subst_dict[key])
+                    substituted = True
         else:
             pass
+        return substituted
 
     # --------------------------------------------------------------------------
     ##
