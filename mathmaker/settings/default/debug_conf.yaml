@@ -13,6 +13,8 @@ dbg:
         into_str: INFO
         calculate_next_step: INFO
         eq: INFO
+    Function:
+        into_str: INFO
     Quotient:
         into_str: INFO
     Fraction:

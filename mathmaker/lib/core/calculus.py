@@ -1759,7 +1759,7 @@ class Table(Printable):
                 result += Quotient(('+',
                                     self.cell[0][i],
                                     self.cell[1][i]
-                                    )).printed
+                                    ), **options).printed
                 if i < len(self) - 1:
                     result += MARKUP['equal']
 

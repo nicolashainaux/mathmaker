@@ -1221,12 +1221,17 @@ class Function(Item):
         """Creates the str version of the Function."""
         # Very similar to Item's into_str()...
         global expression_begins
+        log = settings.dbg_logger.getChild('Function.into_str')
+        log.debug('Entering with options: ' + str(options))
 
         if ('force_expression_begins' in options
             and options['force_expression_begins']):
             # __
             expression_begins = options['force_expression_begins']
             options['force_expression_begins'] = False
+
+        log.debug('expression_begins set to: '
+                  + str(expression_begins))
 
         resulting_string = ""
         sign = ''
@@ -1292,6 +1297,7 @@ class Function(Item):
                     + self.image_notation.into_str(**options) + inner_bracket_2
 
         expression_begins = False
+        log.debug('Leaving, returning ' + sign + resulting_string)
         return sign + resulting_string
 
     def evaluate(self):
@@ -3877,9 +3883,14 @@ class Product(CommutativeOperation):
                     temp_options[key] = options[key]
             options = temp_options
 
-        log.debug("expression_begins = " + str(expression_begins)
-                  + " | position set to " + str(position)
-                  + "\nCurrent Product: " + repr(self))
+        remember = expression_begins
+        # Looks like the repr(self) in log.debug changes expression_begins
+        # what we don't want
+        log.debug('expression_begins = ' + str(expression_begins)
+                  + ' | position set to ' + str(position)
+                  + '\nCurrent Product: ' + repr(self))
+
+        expression_begins = remember
 
         # All Product objects are treated here
         # (including Monomials & Developables)
@@ -3887,9 +3898,11 @@ class Product(CommutativeOperation):
         # In a product, this flag has to be reset to True for each new factor
         # after the first one.
         if self.compact_display:
-            log.debug("self.compact_display is True; is_equiv_single_neutral: "
+            log.debug('(0) expression_begins = ' + str(expression_begins))
+            log.debug('self.compact_display is True; is_equiv_single_neutral: '
                       + str(self.element[0].is_displ_as_a_single_neutral(
                           self.neutral)))
+            log.debug('(1) expression_begins = ' + str(expression_begins))
 
             # copy = self.clone().throw_away_the_neutrals()
             # log.debug(
@@ -3905,7 +3918,7 @@ class Product(CommutativeOperation):
             #   the end
             # - And -1 is displayed if the product contains only one -1 and
             #   items equal to 1
-            resulting_string = ""
+            resulting_string = ''
 
             # This couple is a couple of objects to display.
             # It is needed to determine wether a - sign is necessary or not
@@ -3942,6 +3955,7 @@ class Product(CommutativeOperation):
             # Its processing is made apart from the others because it
             # requires a special processing if it is a -1
             if self.factor[0].is_displ_as_a_single_1():
+                log.debug('(2) expression_begins = ' + str(expression_begins))
                 # Nothing has to be done. If the product only contains
                 # ones, a "1" will be displayed at the end (because flag
                 # will then remain to False)
@@ -3952,11 +3966,13 @@ class Product(CommutativeOperation):
                 # then other factors will set expression_begins to False
                 pass
             elif self.factor[0].is_displ_as_a_single_minus_1():
-                log.debug("[n°0] processing a '-1' 1st factor: "
+                log.debug('[n°0] processing a \'-1\' 1st factor: '
                           + repr(self.factor[0])
-                          + " with position forced to " + str(position))
+                          + ' with position forced to ' + str(position))
+                log.debug('[n°0] expression_begins = '
+                          + str(expression_begins))
                 if position >= 1:
-                    log.debug("and a bracket is */opened/*")
+                    log.debug('and a bracket is */opened/*')
                     resulting_string += MARKUP['opening_bracket']
                     unclosed_bracket += 1
 
@@ -3974,6 +3990,7 @@ class Product(CommutativeOperation):
                 # orphan_minus_sign which is used later to reset expressions_
                 # begins to True just in time:o)
                 expression_begins = False
+                log.debug('[n°0] expression_begins set to False')
             else:
                 # In this case, the first factor is different
                 # from 1 and from -1: it will be displayed normally.
@@ -3984,16 +4001,17 @@ class Product(CommutativeOperation):
                 # the current Product might not be the first to be displayed:
                 # the current "first" factor is maybe not the first factor
                 # to be displayed
+                log.debug('(3) expression_begins = ' + str(expression_begins))
                 if ((Product(self.get_factors_list_except(self.factor[0]))
                      .is_displ_as_a_single_1() and position == 0)
                     or not (self.factor[0].requires_brackets(position)
                             and len(self) >= 2)
                     or self.requires_inner_brackets()):
                     # __
-                    log.debug("[n°1A] processing 1st factor: "
+                    log.debug('[n°1A] processing 1st factor: '
                               + repr(self.factor[0])
-                              + " with position forced to " + str(position)
-                              + " ; NO brackets")
+                              + ' with position forced to ' + str(position)
+                              + ' ; NO brackets')
 
                     resulting_string += self.factor[0]\
                         .into_str(force_position=position, **options)
@@ -4002,12 +4020,14 @@ class Product(CommutativeOperation):
                 # patch" in Product.requires_brackets()
                 else:
                     expression_begins = True
-                    log.debug("[n°1B] processing 1st factor: "
+                    log.debug('[n°1B] processing 1st factor: '
                               + repr(self.factor[0])
-                              + " with position NOT forced to " + str(position)
-                              + ", needs brackets ? "
+                              + ' with position NOT forced to ' + str(position)
+                              + ', needs brackets ? '
                               + str(self.factor[0].requires_brackets(position))
-                              + "; a bracket is */opened/*")
+                              + '; a bracket is */opened/*')
+                    log.debug('(4) expression_begins = '
+                              + str(expression_begins))
 
                     resulting_string += MARKUP['opening_bracket'] \
                         + self.factor[0].into_str(**options)
@@ -4015,7 +4035,7 @@ class Product(CommutativeOperation):
                     unclosed_bracket += 1
 
                     if len(self.factor[0]) >= 2:
-                        log.debug("and */closed/*")
+                        log.debug('and */closed/*')
                         resulting_string += MARKUP['closing_bracket']
                         unclosed_bracket -= 1
 
@@ -4025,14 +4045,19 @@ class Product(CommutativeOperation):
                 flag = True
                 position += 1
                 couple = (self.factor[0], None)
-                log.debug("Finished processing the first factor; "
-                          "couple is (" + repr(self.factor[0])
-                          + ", None); flag is " + str(flag)
-                          + "; position is " + str(position))
+                log.debug('Finished processing the first factor; '
+                          'couple is (' + repr(self.factor[0])
+                          + ', None); flag is ' + str(flag)
+                          + '; position is ' + str(position))
+                log.debug('(5) expression_begins = ' + str(expression_begins))
 
             # If there are other factors:
+            log.debug('(6) expression_begins = ' + str(expression_begins))
             if len(self) >= 2:
                 for i in range(len(self) - 1):
+                    log.debug('Processing factor #{n}, '
+                              'expression_begins = {eb}'
+                              .format(n=str(i + 1), eb=str(expression_begins)))
                     if self.factor[i + 1].is_displ_as_a_single_1():
                         # inside the product, the 1 factors just don't
                         # matter
@@ -4060,6 +4085,11 @@ class Product(CommutativeOperation):
                                           + "with position NOT forced to "
                                           + str(position) + " ; "
                                           "a bracket is */opened/*")
+                                # Not sure it has an incidence, but would the
+                                # msg here above change expression_begins, it
+                                # should be set back to True before calling
+                                # the next .into_str() right below
+                                # expression_begins = True
 
                                 resulting_string += MARKUP['opening_bracket'] \
                                     + self.factor[i + 1].into_str(**options)
@@ -4089,12 +4119,20 @@ class Product(CommutativeOperation):
                                         .into_str(force_position=position,
                                                   **options)
                                 else:
+                                    log.debug('(7) expression_begins = '
+                                              + str(expression_begins))
+                                    remember = expression_begins
                                     log.debug("[n°2C] (NO orphan - sign) "
                                               "processing factor: "
                                               + repr(self.factor[i + 1])
                                               + " with position forced to "
                                               + str(position)
                                               + "; NO brackets")
+
+                                    expression_begins = remember
+
+                                    options['force_expression_begins'] = \
+                                        expression_begins
 
                                     resulting_string += self.factor[i + 1]\
                                         .into_str(force_position=position,
