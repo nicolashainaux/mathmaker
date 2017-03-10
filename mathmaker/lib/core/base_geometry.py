@@ -519,6 +519,11 @@ class Ray(Drawable):
             self._name += arg[0].name + arg[1].name
             self._name += MARKUP['closing_bracket']
 
+        elif isinstance(arg, Ray):
+            self._point0 = arg._point0.clone()
+            self._point1 = arg._point1.clone()
+            self._name = arg._name
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -575,13 +580,21 @@ class Angle(Drawable, Printable):
             self._name = MARKUP['opening_widehat']
             self._name += arg[0].name + arg[1].name + arg[2].name
             self._name += MARKUP['closing_widehat']
+            self._label_display_angle = round(Decimal(str(self._measure)),
+                                              Decimal('0.1'),
+                                              rounding=ROUND_HALF_UP) / 2
+        elif isinstance(arg, Angle):
+            self._ray0 = arg._ray0.clone()
+            self._ray1 = arg._ray1.clone()
+            self._points = [p.clone() for p in arg._points]
+            self._measure = arg._measure
+            self._mark = arg._mark
+            self._label = arg._label.clone()
+            self._name = arg._name
+            self._label_display_angle = arg._label_display_angle
         else:
             raise error.WrongArgument(' (Point, Point, Point) ',
                                       str(type(arg)))
-
-        self._label_display_angle = round(Decimal(str(self._measure)),
-                                          Decimal('0.1'),
-                                          rounding=ROUND_HALF_UP) / 2
 
     # --------------------------------------------------------------------------
     ##
