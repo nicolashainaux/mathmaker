@@ -596,6 +596,9 @@ class Angle(Drawable, Printable):
             raise error.WrongArgument(' (Point, Point, Point) ',
                                       str(type(arg)))
 
+    def __repr__(self):
+        return ' ∡ ' + self._name + ' ∡ '
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the measure of the angle
