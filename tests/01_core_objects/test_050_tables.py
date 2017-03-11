@@ -144,3 +144,14 @@ def test_t2_substituted(t2, ABC):
     assert t2.into_str(as_a_quotients_equality=True,
                        ignore_1_denominator=True) == \
         wrap_nb('cos(27)=\\frac{\\text{EG}}{5}')
+
+
+def test_t2_into_crossproduct_eq(t2, ABC):
+    """Are the literals in this table correctly substituted?"""
+    t2.substitute({ABC: Value(32),
+                   Value('EF'): Value(9)})
+    assert t2.into_str(as_a_quotients_equality=True,
+                       ignore_1_denominator=True) == \
+        wrap_nb('cos(32)=\\frac{\\text{EG}}{9}')
+    assert t2.into_crossproduct_equation().printed == \
+        wrap_nb('cos(32)=\\frac{\\text{EG}}{9}')

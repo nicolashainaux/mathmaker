@@ -1879,6 +1879,22 @@ class Table(Printable):
 
         return True
 
+    def into_crossproduct_equation(self,
+                                   col0=0,
+                                   col1=1) -> CrossProductEquation:
+        """
+        Create a CrossProductEquation from two columns.
+
+        Ensure there is only one literal among the four cells before using it.
+
+        :param col0: the number of the first column to use
+        :param col1: the number of the second column to use
+        """
+        return CrossProductEquation((self.cell[0][col0],
+                                     self.cell[0][col1],
+                                     self.cell[1][col0],
+                                     self.cell[1][col1]))
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
