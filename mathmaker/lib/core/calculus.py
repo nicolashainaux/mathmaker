@@ -2116,6 +2116,6 @@ class Table_UP(Table):
             col0 = col_temp
 
         return CrossProductEquation((self.cell[0][col0],
-                                    self.cell[0][col1],
-                                    self.cell[1][col0],
-                                    self.cell[1][col1]))
+                                     self.cell[0][col1],
+                                     self.cell[1][col0],
+                                     self.cell[1][col1]))
