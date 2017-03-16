@@ -24,7 +24,7 @@ import pytest
 import math
 
 from mathmaker.lib.core.root_calculus import Value
-from mathmaker.lib.core.base_calculus import Item, Function
+from mathmaker.lib.core.base_calculus import Item, Function, AngleItem
 from mathmaker.lib.core.base_geometry import Point, Angle
 from mathmaker.lib.core.calculus import Table
 from tools import wrap_nb
@@ -134,12 +134,12 @@ def test_t2_into_str_as_QE(t2):
     """Is this Table correctly turned into a string?"""
     assert t2.into_str(as_a_quotients_equality=True,
                        ignore_1_denominator=True) == \
-        wrap_nb('cos(\widehat{ABC})=\\frac{\\text{EG}}{\\text{EF}}')
+        wrap_nb('cos(\widehat{\\text{ABC}})=\\frac{\\text{EG}}{\\text{EF}}')
 
 
 def test_t2_substituted(t2, ABC):
     """Are the literals in this table correctly substituted?"""
-    t2.substitute({ABC: Value(27),
+    t2.substitute({AngleItem(from_this_angle=ABC): Value(27),
                    Value('EF'): Value(5)})
     assert t2.into_str(as_a_quotients_equality=True,
                        ignore_1_denominator=True) == \
@@ -148,7 +148,7 @@ def test_t2_substituted(t2, ABC):
 
 def test_t2_into_crossproduct_eq(t2, ABC):
     """Are the literals in this table correctly substituted?"""
-    t2.substitute({ABC: Value(32),
+    t2.substitute({AngleItem(from_this_angle=ABC): Value(32),
                    Value('EF'): Value(9)})
     assert t2.into_str(as_a_quotients_equality=True,
                        ignore_1_denominator=True) == \

@@ -24,7 +24,7 @@ import pytest
 import math
 
 from mathmaker.lib.core.root_calculus import Value
-from mathmaker.lib.core.base_calculus import Item, Function
+from mathmaker.lib.core.base_calculus import Item, Function, AngleItem
 from mathmaker.lib.core.base_geometry import Point, Angle
 from tools import wrap_nb
 
@@ -113,10 +113,10 @@ def test_cos_x_evaluated0(cos_x):
 
 def test_cos_ABC_printed(cos_ABC):
     """Is cos(ABC) correctly printed?"""
-    assert cos_ABC.printed == wrap_nb('cos(\widehat{ABC})')
+    assert cos_ABC.printed == wrap_nb('cos(\widehat{\\text{ABC}})')
 
 
 def test_cos_ABC_substituted(cos_ABC, ABC):
     """Is cos(ABC) correctly substituted?"""
-    cos_ABC.substitute({ABC: Value(25)})
+    cos_ABC.substitute({AngleItem(from_this_angle=ABC): Value(25)})
     assert cos_ABC.printed == wrap_nb('cos(25)')
