@@ -31,7 +31,7 @@ from mathmaker.lib.core.root_calculus import Exponented, Value, Calculable
 from mathmaker.lib.core.base_calculus import (Monomial, Sum, Item, Polynomial,
                                               Fraction, Expandable, Product,
                                               Quotient, Function, SquareRoot,
-                                              CommutativeOperation)
+                                              AngleItem, CommutativeOperation)
 # from mathmaker.lib import *
 # from .base import *
 # from .base_calculus import *
@@ -910,11 +910,9 @@ class Equation(ComposedCalculable):
     #   @return Nothing, just sets the given argument to the left hand side,
     #           turned into a Sum if necessary
     def set_hand_side(self, left_or_right, arg):
-
         if not (left_or_right == "left" or left_or_right == "right"):
             raise error.UncompatibleType(left_or_right,
                                          '"left" or "right"')
-
         if isinstance(arg, Exponented):
             if isinstance(arg, CommutativeOperation) and len(arg) == 1:
                 arg = arg.element[0]
@@ -926,7 +924,7 @@ class Equation(ComposedCalculable):
                 self._right_hand_side = arg
 
         else:
-            raise error.UncompatibleType(arg, "Equation|tuple")
+            raise TypeError('arg should have been an Exponented')
 
     # --------------------------------------------------------------------------
     ##
@@ -1197,9 +1195,25 @@ class Equation(ComposedCalculable):
              and len(new_eq.right_hand_side) == 1)
 
         if (at_left_one_literal_not_expandable_element
-            and isinstance(new_eq.right_hand_side.term[0], Fraction)
-            and new_eq.right_hand_side.term[0].is_reducible()
-            and 'skip_fraction_simplification' in options):
+            and isinstance(new_eq.left_hand_side.term[0], Function)
+            and new_eq.right_hand_side.is_numeric()):
+            log.debug("A Function to invert")
+            item_class = Item
+            if isinstance(new_eq.left_hand_side.term[0].var, AngleItem):
+                item_class = AngleItem
+            new_eq.set_hand_side('right',
+                                 item_class(new_eq.left_hand_side
+                                            .term[0].inv_fct(
+                                                new_eq.right_hand_side.term[0]
+                                                .evaluate(**options)))
+                                 .round(options['decimal_result']))
+            new_eq.set_hand_side('left',
+                                 new_eq.left_hand_side.term[0].var)
+
+        elif (at_left_one_literal_not_expandable_element
+              and isinstance(new_eq.right_hand_side.term[0], Fraction)
+              and new_eq.right_hand_side.term[0].is_reducible()
+              and 'skip_fraction_simplification' in options):
             # __
             log.debug('At left, one literal not reducible element; '
                       'at right, one reducible Fraction, but Fraction '
@@ -1684,6 +1698,9 @@ class CrossProductEquation(Equation):
                            temp_table.cross_product((0, 1),
                                                     self.variable_position,
                                                     remove_1_deno=r1d)))
+        if (self.left_hand_side.numerator.is_literal()
+            and self.left_hand_side.denominator.is_displ_as_a_single_1()):
+            new_eq = new_eq.solve_next_step(**options)
         return new_eq
 
 
@@ -1815,10 +1832,10 @@ class Table(Printable):
         num = None
         if x_position == 0 or x_position == 2:
             num = Product([self.cell[0][col[1]],
-                           self.cell[1][col[0]]])
+                           self.cell[1][col[0]]]).throw_away_the_neutrals()
         elif x_position == 1 or x_position == 3:
             num = Product([self.cell[0][col[0]],
-                           self.cell[1][col[1]]])
+                           self.cell[1][col[1]]]).throw_away_the_neutrals()
         deno = None
         if x_position == 0:
             deno = self.cell[1][col[1]]

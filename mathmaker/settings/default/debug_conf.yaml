@@ -15,6 +15,7 @@ dbg:
         eq: INFO
     Function:
         into_str: INFO
+        substitute: INFO
     Quotient:
         into_str: INFO
     Fraction:

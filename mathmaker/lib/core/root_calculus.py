@@ -441,11 +441,38 @@ class Value(Signed):
     def get_minus_signs_nb(self):
         raise error.MethodShouldBeRedefined(self, 'get_minus_signs_nb')
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the raw value contained in the Value
-    def get_raw_value(self):
+    @property
+    def raw_value(self):
         return self._raw_value
+
+    @raw_value.setter
+    def raw_value(self, arg):
+        if (type(arg) == float
+            or type(arg) == int
+            or type(arg) == Decimal):
+            # __
+            self._raw_value = Decimal(str(arg))
+            if arg >= 0:
+                self._sign = '+'
+            else:
+                self._sign = '-'
+
+        elif type(arg) == str:
+            if is_.a_numerical_string(arg):
+                self._raw_value = Decimal(arg)
+            else:
+                self._raw_value = arg
+
+            if len(arg) >= 1 and arg[0] == '-':
+                self._sign = '-'
+
+        if self._sign == '-':
+            if isinstance(self._raw_value, str):
+                self._abs_value = self._raw_value[1:]
+            else:
+                self._abs_value = - self._raw_value
+        else:
+            self._abs_value = self._raw_value
 
     # --------------------------------------------------------------------------
     ##
@@ -463,8 +490,6 @@ class Value(Signed):
     def abs_value(self):
         return self._abs_value
 
-    raw_value = property(get_raw_value,
-                         doc="Raw value of the object")
     has_been_rounded = property(get_has_been_rounded,
                                 doc="'has been rounded' state of the Value")
     sign = property(get_sign,
@@ -716,16 +741,16 @@ class Value(Signed):
                                                     + "TEN_THOUSANDTH, "
                                                     + "or 0, 1, 2, 3 or 4.")
         else:
-            result_value = None
+            result_value = self.clone()
 
             if type(precision) == int:
-                result_value = Value(round(self.raw_value,
-                                           Decimal(PRECISION[precision]),
-                                           rounding=ROUND_HALF_UP))
+                result_value.raw_value = round(self.raw_value,
+                                               Decimal(PRECISION[precision]),
+                                               rounding=ROUND_HALF_UP)
             else:
-                result_value = Value(round(self.raw_value,
-                                           Decimal(precision),
-                                           rounding=ROUND_HALF_UP))
+                result_value.raw_value = round(self.raw_value,
+                                               Decimal(precision),
+                                               rounding=ROUND_HALF_UP)
 
             if self.needs_to_get_rounded(precision):
                 result_value.set_has_been_rounded(True)
@@ -996,3 +1021,10 @@ class Unit(Exponented):
 
         return separator + text_box_open + self.name \
             + text_box_close + exponent
+
+    def __repr__(self):
+        """Raw representation of a Unit object"""
+        expo_str = ''
+        if not self.exponent.is_displ_as_a_single_1():
+            expo_str = '^' + repr(self.exponent)
+        return self._name + expo_str

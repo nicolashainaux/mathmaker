@@ -119,7 +119,7 @@ class Item(Exponented):
                 self._value_inside = Value(arg, **options)
 
         # 3d CASE: Item
-        elif type(arg) == Item:
+        elif isinstance(arg, Item):
             self._sign = arg.sign
             self._value_inside = arg.value_inside.clone()
             self._exponent = arg.exponent.clone()
@@ -511,7 +511,12 @@ class Item(Exponented):
         else:
             begining = " {"
 
-        return begining + self.sign + str(self.raw_value) \
+        unit_str = ''
+
+        if self.unit is not None:
+            unit_str = ' (unit={u}) '.format(u=repr(self.unit))
+
+        return begining + self.sign + str(self.raw_value) + unit_str \
             + "^" + repr(self.exponent) + "} "
 
     # --------------------------------------------------------------------------
@@ -794,7 +799,9 @@ class Item(Exponented):
             raise error.UncompatibleType(self, "the exponent should be"
                                                " equivalent to a single 1")
         else:
-            return Item(self.value_inside.round(precision))
+            result = self.clone()
+            result.set_value_inside(self.value_inside.round(precision))
+            return result
 
     # --------------------------------------------------------------------------
     ##
@@ -939,7 +946,7 @@ class Function(Item):
 
     def __init__(self, copy_this=None, name='f', var=Item('x'),
                  fct=lambda x: x, num_val=Value(1), display_mode='literal',
-                 inv_fct=None):
+                 inv_fct=None, unlocked=False):
         from mathmaker.lib.core.base_geometry import Angle
         if copy_this is None:
             if not type(name) == str:
@@ -966,6 +973,12 @@ class Function(Item):
                     raise TypeError('fct and inv_fct must both be None or '
                                     'types.LambdaType')
 
+            if unlocked not in [True, False]:
+                raise TypeError('unlocked should be a boolean')
+
+            if isinstance(var, Angle):
+                var = AngleItem(from_this_angle=var)
+
             Exponented.__init__(self)
             self._force_display_sign_once = False
             self._image_notations = \
@@ -987,6 +1000,7 @@ class Function(Item):
             self._num_val = num_val
             self._display_mode = display_mode
             self._image_notation = self._image_notations[display_mode]
+            self._unlocked = unlocked
         else:
             if not isinstance(copy_this, Function):
                 raise TypeError('If copy_this is not None, it should be '
@@ -1003,6 +1017,7 @@ class Function(Item):
             self._display_mode = copy_this._display_mode
             self._image_notations = copy_this._image_notations
             self._image_notation = copy_this._image_notation
+            self._unlocked = copy_this._unlocked
 
     @property
     def image_notation(self):
@@ -1011,6 +1026,17 @@ class Function(Item):
     @property
     def argument(self):
         return self._arguments[self._display_mode]
+
+    @property
+    def unlocked(self):
+        return self._unlocked
+
+    @unlocked.setter
+    def unlocked(self, arg):
+        if arg not in [True, False]:
+            raise TypeError('arg should be a boolean')
+        else:
+            self._unlocked = arg
 
     @property
     def var(self):
@@ -1037,6 +1063,11 @@ class Function(Item):
     def fct(self):
         """The lambda function to use for evaluation."""
         return self._fct
+
+    @property
+    def inv_fct(self):
+        """The lambda function to use for evaluation."""
+        return self._inv_fct
 
     def get_first_letter(self):
         """Return the first letter of Function's name."""
@@ -1148,7 +1179,7 @@ class Function(Item):
 
     def calculate_next_step(self, **options):
         """Will only swap to numeric argument, no automatic evaluation."""
-        if self._display_mode == 'literal':
+        if self._display_mode == 'literal' and self.unlocked:
             self.set_numeric_mode()
             return self
         return None
@@ -1219,13 +1250,16 @@ class Function(Item):
 
     def substitute(self, subst_dict):
         """Substitute the argument by its value, if available in subst_dict."""
+        log = settings.dbg_logger.getChild('Function.substitute')
         substituted = False
         var = self.var.clone()
         if isinstance(var, Calculable) and var.substitute(subst_dict):
+            log.debug('Case 1')
             substituted = True
             self.num_val = var
             self.set_numeric_mode()
         elif self.var in subst_dict:
+            log.debug('Case 2')
             substituted = True
             self.num_val = subst_dict[self.var]
             self.set_numeric_mode()
@@ -1329,7 +1363,7 @@ class AngleItem(Item):
     Represent Angles' names, like \widehat{ABC} (handled as Items).
     """
 
-    def __init__(self, copy_this=None, from_this_angle=None, raw_value=None):
+    def __init__(self, raw_value=None, copy_this=None, from_this_angle=None):
         """
         Initialize the AngleItem.
 
@@ -1363,6 +1397,21 @@ class AngleItem(Item):
             raise ValueError('Exactly one of the optional arguments '
                              '(copy_this, from_this_angle or raw_value) '
                              'must be different from None (or False).')
+
+    def __repr__(self, **options):
+        """Raw representation of the AngleItem"""
+        if self.is_out_striked:
+            begining = " s{∡ "
+        else:
+            begining = " {∡ "
+
+        unit_str = ''
+
+        if self.unit is not None:
+            unit_str = ' (unit={u}) '.format(u=repr(self.unit))
+
+        return begining + self.sign + str(self.raw_value) + unit_str \
+            + "^" + repr(self.exponent) + " ∡ } "
 
     def into_str(self, **options):
         """
@@ -5347,10 +5396,9 @@ class Sum(CommutativeOperation):
                     associated_coeff = Item(-1)
 
                 # Create the Item "without sign" (this version is used
-                # as a key in the lexicon
-                positive_associated_item = Item(('+',
-                                                 term.raw_value,
-                                                 term.exponent))
+                # as a key in the lexicon)
+                positive_associated_item = term.clone()
+                positive_associated_item.set_sign('+')
 
                 # and put it in the lexicon:
                 put_term_in_lexicon(positive_associated_item,
