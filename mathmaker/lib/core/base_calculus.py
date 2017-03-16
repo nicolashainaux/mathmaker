@@ -91,6 +91,10 @@ class Item(Exponented):
         self._force_display_sign_once = False
         self._value_inside = Value(1)
 
+        unit = options.get('unit', None)
+        if unit is not None:
+            self.set_unit(unit)
+
         # 1st CASE: number
         # Item's sign will be number's sign
         # Item's value will be abs(number)
@@ -121,6 +125,8 @@ class Item(Exponented):
             self._exponent = arg.exponent.clone()
             self._is_out_striked = arg.is_out_striked
             self._force_display_sign_once = arg.force_display_sign_once
+            if arg.get_unit() is not None:
+                self.set_unit(arg.get_unit())
 
         # 4th CASE: (sign, number|letter, <exponent as number|Exponented>)
         elif (type(arg) == tuple and len(arg) == 3 and is_.a_sign(arg[0])
@@ -174,10 +180,6 @@ class Item(Exponented):
                                          "Number|String|Item|"
                                          "(sign, Number|String, exponent)|"
                                          "(sign, Number|String)")
-
-        unit = options.get('unit', None)
-        if unit is not None:
-            self.set_unit(unit)
 
     # --------------------------------------------------------------------------
     ##
@@ -1320,6 +1322,63 @@ class Function(Item):
                     self.fct(self.num_val.evaluate()),
                     self._exponent))
         return num.evaluate()
+
+
+class AngleItem(Item):
+    """
+    Represent Angles' names, like \widehat{ABC} (handled as Items).
+    """
+
+    def __init__(self, copy_this=None, from_this_angle=None, raw_value=None):
+        """
+        Initialize the AngleItem.
+
+        One exactly of the optional arguments must be correctly set.
+
+        :param copy_this: another AngleItem (to clone)
+        :type copy_this: AngleItem
+        :param from_this_angle: an Angle to turn into (Angle)Item
+        :type from_this_angle: Angle
+        :param raw_value: any value that Item.__init__() can use
+        :type raw_value: see Item.__init__()
+        """
+        from mathmaker.lib.core.base_geometry import Angle
+        i = iter([copy_this, from_this_angle, raw_value])
+        # Check if exactly one of the options is not None (or False):
+        if any(i) and not any(i):
+            if copy_this is not None:
+                if not isinstance(copy_this, AngleItem):
+                    raise TypeError('copy_this should be an AngleItem.')
+                Item.__init__(self, copy_this)
+            elif from_this_angle is not None:
+                if not isinstance(from_this_angle, Angle):
+                    raise TypeError('from_this_angle should be an Angle.')
+                Item.__init__(self,
+                              from_this_angle.points[0].name
+                              + from_this_angle.points[1].name
+                              + from_this_angle.points[2].name)
+            else:
+                Item.__init__(self, raw_value, unit=MARKUP['text_degree'])
+        else:
+            raise ValueError('Exactly one of the optional arguments '
+                             '(copy_this, from_this_angle or raw_value) '
+                             'must be different from None (or False).')
+
+    def into_str(self, **options):
+        """
+        Return the printed version of the AngleItem.
+
+        If the AngleItem is literal, it will be displayed like a literal Item
+        yet wrapped in a 'wide hat'.
+        If it is numeric, the unit will be automatically displayed."""
+        if 'display_SI_unit' in options:
+            del options['display_SI_unit']
+        if self.is_literal():
+            return MARKUP['opening_widehat']\
+                + Item.into_str(self, display_SI_unit=False, **options)\
+                + MARKUP['closing_widehat']
+        else:
+            return Item.into_str(self, display_SI_unit=True, **options)
 
 
 # ------------------------------------------------------------------------------
