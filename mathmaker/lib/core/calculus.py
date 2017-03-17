@@ -1717,7 +1717,7 @@ class Table(Printable):
     #   @brief Constructor
     #   @param arg [[Calculable], [Calculable]]   (the Calculables' lists must
     #                                              have the same length)
-    def __init__(self, arg):
+    def __init__(self, arg, displ_as_qe=False):
         if not type(arg) == list:
             raise error.WrongArgument(arg, "a list (of two lists)")
 
@@ -1748,8 +1748,17 @@ class Table(Printable):
                                               + " Calculable ; type: "
                                               + str(type(arg[j][i])),
                                               "a Calculable")
+
+        if not isinstance(displ_as_qe, bool):
+            raise TypeError('displ_as_qe should be a boolean')
+
         self._nb_of_cols = len(arg[0])
         self._data = arg
+        self._displ_as_qe = displ_as_qe
+
+    @property
+    def displ_as_qe(self):
+        return self._displ_as_qe
 
     # --------------------------------------------------------------------------
     ##
@@ -1767,11 +1776,13 @@ class Table(Printable):
     #   @param options Any options
     #   @return The formated string
     #   @todo Separate this from the LaTeX format (seems difficult to do)
-    def into_str(self, **options):
+    def into_str(self, as_a_quotients_equality=None, **options):
+        if as_a_quotients_equality is None:
+            as_a_quotients_equality = self._displ_as_qe
+        elif not isinstance(as_a_quotients_equality, bool):
+            raise TypeError('as_a_quotients_equality should be a boolean.')
         result = ""
-        if ('as_a_quotients_equality' in options
-            and options['as_a_quotients_equality']):
-            # __
+        if as_a_quotients_equality:
             for i in range(len(self)):
                 result += Quotient(('+',
                                     self.cell[0][i],
@@ -1931,7 +1942,7 @@ class Table_UP(Table):
     #   info and first_line should have the same length
     #   info should contain at least one None|(None, None) element
     #   (means the column is completely numeric)
-    def __init__(self, coeff, first_line, info):
+    def __init__(self, coeff, first_line, info, displ_as_qe=False):
         log = settings.dbg_logger.getChild('Table_UP.init')
 
         if (not is_.a_number(coeff)
@@ -2078,7 +2089,7 @@ class Table_UP(Table):
         #    print "data[0][" + str(i) + "] = " + d0 + "\n"
         #    print "data[1][" + str(i) + "] = " + d1 + "\n"
 
-        Table.__init__(self, data)
+        Table.__init__(self, data, displ_as_qe=displ_as_qe)
 
         for elt in literals_positions:
             col_ref = literals_positions[elt]

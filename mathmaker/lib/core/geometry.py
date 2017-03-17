@@ -1154,14 +1154,16 @@ class InterceptTheoremConfiguration(Triangle):
     def ratios_equalities(self) -> Table:
         """Return a Table matching the ratios equalities."""
         return Table([[Item(v.length_name) for v in self.small],
-                      [Item(v.length_name) for v in self.side]])
+                      [Item(v.length_name) for v in self.side]],
+                     displ_as_qe=True)
 
     def ratios_for_converse(self) -> Table:
         """Return a Table matching the ratios equality for converse."""
         return Table([[Item(v.length_name) for v in [self.small[0],
                                                      self.small[2]]],
-                     [Item(v.length_name) for v in [self.side[0],
-                                                    self.side[2]]]])
+                      [Item(v.length_name) for v in [self.side[0],
+                                                     self.side[2]]]],
+                     displ_as_qe=True)
 
     def ratios_equalities_substituted(self) -> Table_UP:
         """
@@ -1175,7 +1177,8 @@ class InterceptTheoremConfiguration(Triangle):
                  for s, b in zip(self.small, self.side)]
         return Table_UP(self.enlargement_ratio,
                         [s.length for s in self.small],
-                        infos)
+                        infos,
+                        displ_as_qe=True)
 
     @property
     def butterfly(self):

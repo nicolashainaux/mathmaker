@@ -130,7 +130,7 @@ def test_fig0b_into_euk2(fig0b):
 
 
 def test_fig0_ratios_equalities(fig0):
-    assert fig0.ratios_equalities().into_str(as_a_quotients_equality=True) == \
+    assert fig0.ratios_equalities().into_str() == \
         '\\frac{\\text{AM}}{\\text{AB}}='\
         '\\frac{\\text{MN}}{\\text{BC}}='\
         '\\frac{\\text{NA}}{\\text{CA}}'
@@ -138,7 +138,7 @@ def test_fig0_ratios_equalities(fig0):
 
 def test_fig0b_ratios_equalities_substituted(fig0b):
     assert fig0b.ratios_equalities_substituted()\
-        .into_str(as_a_quotients_equality=True) == wrap_nb(
+        .into_str() == wrap_nb(
             '\\frac{6}{\\text{AB}}='
             '\\frac{12}{16}='
             '\\frac{9}{\\text{CA}}')

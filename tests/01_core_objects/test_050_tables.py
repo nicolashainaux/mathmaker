@@ -56,13 +56,15 @@ def t0():
 @pytest.fixture
 def t1():
     return Table([[cos_x(), Item(('BC'))],
-                  [Item((1)), Item(('BA'))]])
+                  [Item((1)), Item(('BA'))]],
+                 displ_as_qe=True)
 
 
 @pytest.fixture
 def t2():
     return Table([[cos_ABC(ABC()), Item(('EG'))],
-                  [Item((1)), Item(('EF'))]])
+                  [Item((1)), Item(('EF'))]],
+                 displ_as_qe=True)
 
 
 def test_t0_length(t0):
@@ -116,8 +118,7 @@ def test_t0_as_cross_product_4(t0):
 
 def test_t1_into_str_as_QE(t1):
     """Is this Table correctly turned into a string?"""
-    assert t1.into_str(as_a_quotients_equality=True,
-                       ignore_1_denominator=True) == \
+    assert t1.into_str(ignore_1_denominator=True) == \
         wrap_nb('cos(x)=\\frac{\\text{BC}}{\\text{BA}}')
 
 
@@ -125,15 +126,13 @@ def test_t1_substituted(t1):
     """Are the literals in this table correctly substituted?"""
     t1.substitute({Value('x'): Value(35),
                    Value('BA'): Value(10)})
-    assert t1.into_str(as_a_quotients_equality=True,
-                       ignore_1_denominator=True) == \
+    assert t1.into_str(ignore_1_denominator=True) == \
         wrap_nb('cos(35)=\\frac{\\text{BC}}{10}')
 
 
 def test_t2_into_str_as_QE(t2):
     """Is this Table correctly turned into a string?"""
-    assert t2.into_str(as_a_quotients_equality=True,
-                       ignore_1_denominator=True) == \
+    assert t2.into_str(ignore_1_denominator=True) == \
         wrap_nb('cos(\widehat{\\text{ABC}})=\\frac{\\text{EG}}{\\text{EF}}')
 
 
@@ -141,8 +140,7 @@ def test_t2_substituted(t2, ABC):
     """Are the literals in this table correctly substituted?"""
     t2.substitute({AngleItem(from_this_angle=ABC): Value(27),
                    Value('EF'): Value(5)})
-    assert t2.into_str(as_a_quotients_equality=True,
-                       ignore_1_denominator=True) == \
+    assert t2.into_str(ignore_1_denominator=True) == \
         wrap_nb('cos(27)=\\frac{\\text{EG}}{5}')
 
 
@@ -150,8 +148,7 @@ def test_t2_into_crossproduct_eq(t2, ABC):
     """Are the literals in this table correctly substituted?"""
     t2.substitute({AngleItem(from_this_angle=ABC): Value(32),
                    Value('EF'): Value(9)})
-    assert t2.into_str(as_a_quotients_equality=True,
-                       ignore_1_denominator=True) == \
+    assert t2.into_str(ignore_1_denominator=True) == \
         wrap_nb('cos(32)=\\frac{\\text{EG}}{9}')
     assert t2.into_crossproduct_equation().printed == \
         wrap_nb('cos(32)=\\frac{\\text{EG}}{9}')
