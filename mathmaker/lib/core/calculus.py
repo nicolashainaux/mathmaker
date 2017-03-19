@@ -1740,8 +1740,8 @@ class Table(Printable):
         return self._displ_as_qe
 
     @property
-    def ignore_1_deno(self):
-        return self._ignore_1_deno
+    def ignore_1_denos(self):
+        return self._ignore_1_denos
 
     # --------------------------------------------------------------------------
     ##
