@@ -1717,7 +1717,7 @@ class Table(Printable):
     #   @brief Constructor
     #   @param arg [[Calculable], [Calculable]]   (the Calculables' lists must
     #                                              have the same length)
-    def __init__(self, arg, displ_as_qe=False):
+    def __init__(self, arg, displ_as_qe=False, ignore_1_denos=None):
         if not type(arg) == list:
             raise error.WrongArgument(arg, "a list (of two lists)")
 
@@ -1752,13 +1752,23 @@ class Table(Printable):
         if not isinstance(displ_as_qe, bool):
             raise TypeError('displ_as_qe should be a boolean')
 
+        if ignore_1_denos is not None and not isinstance(ignore_1_denos, bool):
+            raise TypeError('if set, ignore_1_denos should be a boolean')
+
         self._nb_of_cols = len(arg[0])
         self._data = arg
         self._displ_as_qe = displ_as_qe
+        self._ignore_1_denos = displ_as_qe
+        if ignore_1_denos is not None:
+            self._ignore_1_denos = ignore_1_denos
 
     @property
     def displ_as_qe(self):
         return self._displ_as_qe
+
+    @property
+    def ignore_1_deno(self):
+        return self._ignore_1_deno
 
     # --------------------------------------------------------------------------
     ##
@@ -1776,14 +1786,20 @@ class Table(Printable):
     #   @param options Any options
     #   @return The formated string
     #   @todo Separate this from the LaTeX format (seems difficult to do)
-    def into_str(self, as_a_quotients_equality=None, **options):
+    def into_str(self, as_a_quotients_equality=None, ignore_1_denos=None,
+                 **options):
         if as_a_quotients_equality is None:
             as_a_quotients_equality = self._displ_as_qe
         elif not isinstance(as_a_quotients_equality, bool):
             raise TypeError('as_a_quotients_equality should be a boolean.')
+        if ignore_1_denos is None:
+            ignore_1_denos = self._ignore_1_denos
+        elif not isinstance(ignore_1_denos, bool):
+            raise TypeError('ignore_1_denos should be a boolean.')
         result = ""
         if as_a_quotients_equality:
             for i in range(len(self)):
+                options['ignore_1_denominator'] = ignore_1_denos
                 result += Quotient(('+',
                                     self.cell[0][i],
                                     self.cell[1][i]
