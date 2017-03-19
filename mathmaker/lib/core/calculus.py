@@ -1886,6 +1886,13 @@ class Table(Printable, Substitutable):
                                      self.cell[1][col0],
                                      self.cell[1][col1]))
 
+    def auto_resolution(self, col0=0, col1=1, subst_dict=None, **options):
+        result = MARKUP['opening_math_style1'] + self.printed\
+            + MARKUP['closing_math_style1']
+        self.substitute(subst_dict=subst_dict)
+        return result + self.into_crossproduct_equation(col0=col0, col1=col1)\
+            .auto_resolution(**options)
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
