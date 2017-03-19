@@ -1650,14 +1650,28 @@ class CrossProductEquation(Equation):
 ##
 # @class Table
 # @brief All objects that are displayable as Tables
-class Table(Printable):
+class Table(Printable, Substitutable):
+
+    class SubstitutableList(list, Substitutable):
+        """A list that can call substitute() on its elements."""
+        def __init__(self, *args, subst_dict=None):
+            list.__init__(self, *args)
+            Substitutable.__init__(self, subst_dict=subst_dict)
+
+        @property
+        def content(self):
+            """
+            The content to be substituted (list containing literal objects).
+            """
+            return self
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @param arg [[Calculable], [Calculable]]   (the Calculables' lists must
     #                                              have the same length)
-    def __init__(self, arg, displ_as_qe=False, ignore_1_denos=None):
+    def __init__(self, arg, displ_as_qe=False, ignore_1_denos=None,
+                 subst_dict=None):
         if not type(arg) == list:
             raise error.WrongArgument(arg, "a list (of two lists)")
 
@@ -1696,11 +1710,13 @@ class Table(Printable):
             raise TypeError('if set, ignore_1_denos should be a boolean')
 
         self._nb_of_cols = len(arg[0])
-        self._data = arg
+        self._data = [Table.SubstitutableList(arg[0], subst_dict=None),
+                      Table.SubstitutableList(arg[1], subst_dict=None)]
         self._displ_as_qe = displ_as_qe
         self._ignore_1_denos = displ_as_qe
         if ignore_1_denos is not None:
             self._ignore_1_denos = ignore_1_denos
+        Substitutable.__init__(self, subst_dict=subst_dict)
 
     @property
     def displ_as_qe(self):
@@ -1709,6 +1725,10 @@ class Table(Printable):
     @property
     def ignore_1_denos(self):
         return self._ignore_1_denos
+
+    @property
+    def content(self):
+        return self._data
 
     # --------------------------------------------------------------------------
     ##
@@ -1764,19 +1784,6 @@ class Table(Printable):
     #   @brief Returns the number of columns of the Table
     def __len__(self):
         return self._nb_of_cols
-
-    def substitute(self, subst_dict):
-        log = settings.dbg_logger.getChild('Table.substitute')
-        rebuilt_data = []
-        for row in self._data:
-            rebuilt_row = []
-            for cell in row:
-                log.debug(repr(cell))
-                cell.substitute(subst_dict)
-                rebuilt_row.append(cell)
-            rebuilt_data.append(rebuilt_row)
-        log.debug('Table data once substituted: ' + str(rebuilt_data))
-        self._data = rebuilt_data
 
     # --------------------------------------------------------------------------
     ##
