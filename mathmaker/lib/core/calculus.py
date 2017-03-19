@@ -2110,3 +2110,14 @@ class Table_UP(Table):
                                      self.cell[0][col1],
                                      self.cell[1][col0],
                                      self.cell[1][col1]))
+
+
+class QuotientsEquality(Table):
+    """A shortcut to create Tables as quotients equalities."""
+
+    def __init__(self, arg, displ_as_qe=True, ignore_1_denos=True,
+                 subst_dict=None):
+        """Initialization of the Table as a Quotients equality."""
+        Table.__init__(self, arg, displ_as_qe=displ_as_qe,
+                       ignore_1_denos=ignore_1_denos,
+                       subst_dict=subst_dict)
