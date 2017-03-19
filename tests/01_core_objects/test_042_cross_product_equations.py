@@ -40,7 +40,8 @@ def ABC(): return Angle((Point(['A', (1, 0)]),
 def cos_ABC(ABC): return Function(name='cos',
                                   var=ABC,
                                   fct=lambda x: math.cos(math.radians(x)),
-                                  inv_fct=lambda x: math.degrees(math.acos(x)))
+                                  inv_fct=lambda x: math.degrees(
+                                      math.acos(x)))
 
 
 @pytest.fixture()
