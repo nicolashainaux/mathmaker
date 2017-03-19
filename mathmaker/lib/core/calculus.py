@@ -230,7 +230,7 @@ class Equality(ComposedCalculable):
     #   @option             as long as len(objcts) - 1. The signs are "=" or
     #                       "neq"
     #   @return One instance of Equality
-    def __init__(self, objcts, **options):
+    def __init__(self, objcts, subst_dict=None, **options):
         # just check if the given arguments are right
         if not (isinstance(objcts, list)):
             raise error.UncompatibleType(objcts, "should be a LIST "
@@ -283,6 +283,10 @@ class Equality(ComposedCalculable):
             else:
                 self._equal_signs.append('equal')
 
+        self._subst_dict = None
+        if subst_dict is not None:
+            self.subst_dict = subst_dict
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the elements of the Equality
@@ -333,23 +337,49 @@ class Equality(ComposedCalculable):
 
         return result
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief It is possible to index an Equality
     def __getitem__(self, i):
+        """Make Equality indexable."""
         return self._elements[i]
 
     def __setitem__(self, i, data):
+        """Make Equality indexable."""
         if not isinstance(data, Exponented):
-            raise error.UncompatibleType(data, "should be a Exponented")
-
+            raise TypeError('data should be a Exponented')
         self._elements[i] = data.clone()
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the number of elements of the Equality
     def __len__(self):
+        """Return the number of elements of the Equality."""
         return len(self._elements)
+
+    @property
+    def subst_dict(self):
+        return self._subst_dict
+
+    @subst_dict.setter
+    def subst_dict(self, arg):
+        if not isinstance(arg, dict):
+            raise TypeError('arg should be a dictionnary')
+
+        if not check_lexicon_for_substitution(self._elements, arg,
+                                              'at_least_one'):
+            raise ValueError('dictionary arg should match the literals '
+                             'of the objects list')
+        self._subst_dict = arg
+
+    def substitute(self, subst_dict=None):
+        """
+        If a subst_dict has been defined, it is used for literals substitution.
+        """
+        d = self.subst_dict
+        if subst_dict is not None:
+            d = subst_dict
+        if d is not None:
+            for elt in self._elements:
+                elt.substitute(d)
+            return self
+        else:
+            raise RuntimeError('No dictionary has been provided '
+                               'to perform substitution')
 
 
 # ------------------------------------------------------------------------------
@@ -364,8 +394,7 @@ class Equation(ComposedCalculable):
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
-    #   @param arg Equation|(Exponented, Exponented)|(RANDOMLY, ...)
-    #              |SubstitutableEquality
+    #   @param arg Equation|(Exponented, Exponented)|(RANDOMLY, ...)|Equality
     #   @return One instance of Equation
     def __init__(self, arg, **options):
         self._name = settings.default.EQUATION_NAME
@@ -389,16 +418,16 @@ class Equation(ComposedCalculable):
 
         # Then determine its left & right hand sides
 
-        if type(arg) == SubstitutableEquality:
+        if isinstance(arg, Equality):
             if not len(arg) == 2:
-                raise error.ImpossibleAction("turn into an Equation a "
-                                             "SubstitutableEquality having "
-                                             "not exactly 2 members")
+                raise error.ImpossibleAction('turn into an Equation an '
+                                             'Equality having '
+                                             'not exactly 2 members')
             literals_list = list(set(gather_literals(arg[0])
                                      + gather_literals(arg[1])))
             if not len(literals_list) == 1:
-                raise error.ImpossibleAction("create an Equation from a "
-                                             "SubstitutableEquality "
+                raise error.ImpossibleAction("create an Equation from an "
+                                             "Equality "
                                              "containing more than ONE "
                                              "unknown literal. This one "
                                              "contains "
@@ -1511,62 +1540,6 @@ class Equation(ComposedCalculable):
 
         log.debug("Leaving, with Equation: " + repr(new_eq))
         return new_eq
-
-
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
-# @class SubstitutableEquality
-# @brief Like an Equality with literals and the numeric values to replace them
-class SubstitutableEquality(Equality):
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
-    #   @param objcts is a [Exponented] of 2 elements at least
-    #   @param subst_dict is a {literal Value: numeric Value}
-    #   @option equal_signs Contains a list of equal/not equal signs. Must be
-    #   @option             as long as len(objcts) - 1. The signs are "=" or
-    #                       "neq"
-    #   @return One instance of SubstitutableEquality
-    def __init__(self, objcts, subst_dict, **options):
-        # This will check the objcts argument and take the possibly options
-        # into account
-        Equality.__init__(self, objcts, **options)
-
-        # Now, let's make the checks specific to SubstitutableEquality
-        if not (isinstance(subst_dict, dict)):
-            raise error.UncompatibleType(subst_dict, "should be a dictionnary")
-
-        if not check_lexicon_for_substitution(objcts,
-                                              subst_dict,
-                                              'at_least_one'):
-            # __
-            raise error.WrongArgument(subst_dict,
-                                      " a lexicon that matches the literals "
-                                      "of the objects list")
-
-        self._subst_dict = subst_dict
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Getter for the substitution dictionnary
-    def get_subst_dict(self):
-        return self._subst_dict
-
-    subst_dict = property(get_subst_dict,
-                          doc="Substitution dictionnary of the "
-                              "SubstitutableEquality")
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Executes the substitution of the literal Values by the numeric
-    def substitute(self):
-        for elt in self._elements:
-            elt.substitute(self.subst_dict)
-        return self
 
 
 # ------------------------------------------------------------------------------

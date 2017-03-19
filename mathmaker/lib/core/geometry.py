@@ -36,7 +36,7 @@ from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
                                      POLYGONS_NATURES, round)
 from .root_calculus import Evaluable, Value, Unit
 from .base_calculus import Item, Product, Sum
-from .calculus import Equality, SubstitutableEquality, Table, Table_UP
+from .calculus import Equality, Table, Table_UP
 from .base import Drawable
 from .base_geometry import Point, Segment, Angle, Vector
 
@@ -868,7 +868,7 @@ class RightTriangle(Triangle):
     ##
     #   @brief Creates the correct (substitutable) pythagorean equality
     #   @brief Uses the labels to determine the result...
-    #   @return a SubstitutableEquality
+    #   @return a substitutable Equality
     def pythagorean_substequality(self, **options):
         # First, check the number of numeric data
         # and find the unknown side
@@ -892,7 +892,7 @@ class RightTriangle(Triangle):
                                          "when the number of known numeric "
                                          "values is different from 2.")
 
-        # Now create the SubstitutableEquality
+        # Now create the substitutable Equality
         # (so, also create the dictionnary)
         if unknown_side == 'leg0':
             subst_dict = {Value(self.leg[1].length_name): self.leg[1].label,
@@ -921,7 +921,7 @@ class RightTriangle(Triangle):
             raise error.ImpossibleAction("creation of a pythagorean equality "
                                          "because no unknown side was found")
 
-        return SubstitutableEquality(objcts, subst_dict)
+        return Equality(objcts, subst_dict=subst_dict)
 
 
 class InterceptTheoremConfiguration(Triangle):
