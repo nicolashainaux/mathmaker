@@ -47,9 +47,9 @@ class Substitutable(object):
     Any object whose (literal) value(s) can be substituted by numeric ones.
 
     Any Substitutable must define a content property, should include an
-    optional subst_dict argument in its __init__() method and should call
-    Substitutable.__init__(self, subst_dict=...) to ensure a _subst_dict
-    field is defined.
+    optional subst_dict argument in its __init__() method and must ensure
+    that a _subst_dict is defined (an easy way to do this is calling
+    Substitutable.__init__(self, subst_dict=subst_dict).
     The substitute() method is redefined by some Substitutable objects.
     """
     def __init__(self, subst_dict=None):
