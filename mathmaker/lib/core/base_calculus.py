@@ -1067,6 +1067,9 @@ class Function(Item):
     @property
     def inv_fct(self):
         """The lambda function to use for evaluation."""
+        if self._inv_fct is None:
+            raise RuntimeError('The inverse function is required but has '
+                               'not been defined yet!')
         return self._inv_fct
 
     def get_first_letter(self):

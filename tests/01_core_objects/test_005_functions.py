@@ -91,6 +91,12 @@ def test_cos_x_printed(cos_x):
     assert cos_x.printed == wrap_nb('cos(x)')
 
 
+def test_cos_x_inv_fct_undefined(cos_x):
+    """Is a call to an undefined inv fct raising a RuntimeError?"""
+    with pytest.raises(RuntimeError):
+        cos_x.inv_fct(0.5)
+
+
 def test_cos_x_value_substituted(cos_x):
     """Is cos(x) correctly substituted?"""
     cos_x.substitute({Value('x'): Value(75)})
