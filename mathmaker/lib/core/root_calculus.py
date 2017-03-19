@@ -31,6 +31,7 @@ import locale
 from decimal import Decimal, getcontext, Rounded, ROUND_HALF_UP, ROUND_DOWN
 
 from mathmaker.lib.maths_lib import round
+from mathmaker.lib.core.utils import check_lexicon_for_substitution
 from mathmaker.lib.common.cst import (UNIT, TENTH, HUNDREDTH, THOUSANDTH,
                                       TEN_THOUSANDTH, PRECISION,
                                       PRECISION_REVERSED,
@@ -39,6 +40,61 @@ from mathmaker.lib.common import alphabet
 from mathmaker.lib.core.base import Printable
 from mathmaker.lib import is_, error
 from mathmaker.lib.common.latex import MARKUP
+
+
+class Substitutable(object):
+    """
+    Any object whose (literal) value(s) can be substituted by numeric ones.
+
+    Any Substitutable must define a content property, should include an
+    optional subst_dict argument in its __init__() method and should call
+    Substitutable.__init__(self, subst_dict=...) to ensure a _subst_dict
+    field is defined.
+    The substitute() method is redefined by some Substitutable objects.
+    """
+    def __init__(self, subst_dict=None):
+        self._subst_dict = None
+        if subst_dict is not None:
+            self.subst_dict = subst_dict
+
+    @property
+    def content(self):
+        """The content to be substituted (list containing literal objects)."""
+        raise NotImplementedError('In order to be substitutable, this object '
+                                  'should define where is the content to be '
+                                  'substituted.')
+
+    @property
+    def subst_dict(self):
+        """Get the default dictionary to use for substitution."""
+        return self._subst_dict
+
+    @subst_dict.setter
+    def subst_dict(self, arg):
+        """Set the default dictionary to use for substitution."""
+        if not isinstance(arg, dict):
+            raise TypeError('arg should be a dictionnary')
+
+        if not check_lexicon_for_substitution(self.content, arg,
+                                              'at_least_one'):
+            raise ValueError('dictionary arg should match the literals '
+                             'of the objects list')
+        self._subst_dict = arg
+
+    def substitute(self, subst_dict=None):
+        """
+        If a subst_dict has been defined, it is used for literals substitution.
+        """
+        d = self.subst_dict
+        if subst_dict is not None:
+            d = subst_dict
+        if d is not None:
+            for elt in self.content:
+                elt.substitute(d)
+            return self
+        else:
+            raise RuntimeError('No dictionary has been provided '
+                               'to perform substitution')
 
 
 # ------------------------------------------------------------------------------

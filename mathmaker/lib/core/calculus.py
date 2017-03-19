@@ -24,20 +24,14 @@ from mathmaker import settings
 from mathmaker.lib import shared, error, is_, randomly, maths_lib
 from mathmaker.lib.common import alphabet
 from mathmaker.lib.common.cst import RANDOMLY
-from mathmaker.lib.core.utils import (gather_literals,
-                                      check_lexicon_for_substitution)
+from mathmaker.lib.core.utils import gather_literals
 from mathmaker.lib.core.base import Printable
-from mathmaker.lib.core.root_calculus import Exponented, Value, Calculable
+from mathmaker.lib.core.root_calculus import (Exponented, Value, Calculable,
+                                              Substitutable)
 from mathmaker.lib.core.base_calculus import (Monomial, Sum, Item, Polynomial,
                                               Fraction, Expandable, Product,
                                               Quotient, Function, SquareRoot,
                                               AngleItem, CommutativeOperation)
-# from mathmaker.lib import *
-# from .base import *
-# from .base_calculus import *
-# from mathmaker.lib.maths_lib import *
-# from mathmaker.lib.common.cst import *
-# from .utils import *
 from mathmaker.lib.common.latex import MARKUP
 
 
@@ -219,7 +213,7 @@ class Expression(ComposedCalculable):
 ##
 # @class Equality
 # @brief These are object of the kind: Exponented = Exponented [= ...]
-class Equality(ComposedCalculable):
+class Equality(ComposedCalculable, Substitutable):
 
     # --------------------------------------------------------------------------
     ##
@@ -283,9 +277,12 @@ class Equality(ComposedCalculable):
             else:
                 self._equal_signs.append('equal')
 
-        self._subst_dict = None
-        if subst_dict is not None:
-            self.subst_dict = subst_dict
+        Substitutable.__init__(self, subst_dict=subst_dict)
+
+    @property
+    def content(self):
+        """The content to be substituted (list containing literal objects)."""
+        return self._elements
 
     # --------------------------------------------------------------------------
     ##
@@ -350,36 +347,6 @@ class Equality(ComposedCalculable):
     def __len__(self):
         """Return the number of elements of the Equality."""
         return len(self._elements)
-
-    @property
-    def subst_dict(self):
-        return self._subst_dict
-
-    @subst_dict.setter
-    def subst_dict(self, arg):
-        if not isinstance(arg, dict):
-            raise TypeError('arg should be a dictionnary')
-
-        if not check_lexicon_for_substitution(self._elements, arg,
-                                              'at_least_one'):
-            raise ValueError('dictionary arg should match the literals '
-                             'of the objects list')
-        self._subst_dict = arg
-
-    def substitute(self, subst_dict=None):
-        """
-        If a subst_dict has been defined, it is used for literals substitution.
-        """
-        d = self.subst_dict
-        if subst_dict is not None:
-            d = subst_dict
-        if d is not None:
-            for elt in self._elements:
-                elt.substitute(d)
-            return self
-        else:
-            raise RuntimeError('No dictionary has been provided '
-                               'to perform substitution')
 
 
 # ------------------------------------------------------------------------------
