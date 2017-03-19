@@ -136,7 +136,7 @@ def gather_literals(xpr):
 # --------------------------------------------------------------------------
 ##
 #   @brief Checks if the literals of a *Equality|*Expression can be replaced
-#   @param objcts The list of literal expressions
+#   @param objcts The list of literal expressions (or a list of lists of such)
 #   @param subst_dict The dictionnary to use
 #   @param how_many To tell if all the literals must be replaced
 #                   ('all'|'all_but_one'|'at_least_one'|int)
@@ -155,6 +155,11 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
     if not type(objcts) == list:
         raise TypeError('Expected a list, not a ' + str(type(objcts)))
 
+    # If objcts is a list of lists of Calculables, we "unpack" it before
+    # checking its elements.
+    if all(isinstance(elt, list) for elt in objcts):
+        objcts = [e for elt in objcts for e in elt]
+
     for elt in objcts:
         if not isinstance(elt, Calculable):
             raise TypeError('Expected a Calculable, not a ' + str(type(elt)))
@@ -169,7 +174,15 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
                 and subst_dict[elt].is_numeric()):
             # __
             raise TypeError('Expected key: value pairs being of type '
-                            'literal Value: numeric Value')
+                            'literal Value: numeric Value, instead, got: '
+                            '{kv} ({lk}): {vv} ({nv})'
+                            .format(kv=str(type(elt)),
+                                    lk='literal'
+                                    if elt.is_literal() else 'numeric',
+                                    vv=str(type(subst_dict[elt])),
+                                    nv='literal'
+                                    if subst_dict[elt].is_literal()
+                                    else 'numeric'))
 
     # Make the list of all literals
     for xpr in objcts:
