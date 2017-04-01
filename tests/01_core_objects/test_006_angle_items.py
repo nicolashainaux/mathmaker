@@ -60,3 +60,8 @@ def test_ABC_printed(ABC):
     """Is AngleItem ABC correctly printed?"""
     assert AngleItem(from_this_angle=ABC).printed == \
         wrap_nb('\widehat{\\text{ABC}}')
+
+
+def test_ABC_raw_value(ABC):
+    """Is AngleItem ABC's raw value correct?"""
+    assert AngleItem(from_this_angle=ABC).raw_value == 'ABC'
