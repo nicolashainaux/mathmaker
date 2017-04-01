@@ -1086,8 +1086,8 @@ class Function(Item):
         return 0
 
     def get_iteration_list(self):
-        """Return [Item('f(x)'), the exponent]."""
-        return [Item(self._image_notation), self.exponent]
+        """Return [variable, exponent]."""
+        return [self.var, self.exponent]
 
     def contains_a_rounded_number(self):
         """f(...) neither its argument never have any reason to be rounded."""
@@ -1117,7 +1117,7 @@ class Function(Item):
     def __repr__(self, **options):
         """Function's string representation for debugging."""
         return '{fct ' + self.sign + self.name + '(' \
-            + str(self.argument) \
+            + repr(self.argument) \
             + ')' + '^' + repr(self.exponent) + ' fct} '
 
     def __eq__(self, other_fct):
