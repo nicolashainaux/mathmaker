@@ -24,6 +24,7 @@ import pytest
 
 from mathmaker.lib.common.cst import HUNDREDTH
 from mathmaker.lib.core.root_calculus import Value
+from mathmaker.lib.core.base_calculus import AngleItem
 from mathmaker.lib.core.calculus import Equation
 from mathmaker.lib.core.geometry import RightTriangle
 from mathmaker.lib.common import pythagorean
@@ -178,6 +179,36 @@ def test_t4_pyth_eq_autoresolution(t4):
                 '\[\\text{OP}=\\sqrt{\mathstrut 46.75}'
                 '\\text{ because \\text{OP} is positive.}\]'
                 '\[\\text{OP}\\simeq6.84\\text{ cm}\]')
+
+
+def test_t4_trigo_equalities(t4):
+    """Check the trigonometric equalities created from t4."""
+    eq1 = t4.trigonometric_equality(angle=t4.angle[0], trigo_fct='cos')
+    eq2 = t4.trigonometric_equality(angle=t4.angle[0], trigo_fct='sin')
+    eq3 = t4.trigonometric_equality(angle=t4.angle[0], trigo_fct='tan')
+    assert eq1.printed == \
+        'cos(\widehat{\\text{PLO}})=\\frac{\\text{LO}}{\\text{PL}}'
+    assert eq2.printed == \
+        'sin(\widehat{\\text{PLO}})=\\frac{\\text{OP}}{\\text{PL}}'
+    assert eq3.printed == \
+        'tan(\widehat{\\text{PLO}})=\\frac{\\text{OP}}{\\text{LO}}'
+
+
+def test_t4_trigo_equalities_autoresolution(t4):
+    """Check the autoresolution of a trigonometric equality created from t4."""
+    alpha_i = AngleItem(from_this_angle=t4.angle[0])
+    eq1 = t4.trigonometric_equality(angle=t4.angle[0],
+                                    trigo_fct='cos',
+                                    subst_dict={Value('PL'): Value(10),
+                                                alpha_i: Value(40)
+                                                })
+    assert eq1.auto_resolution(dont_display_equations_name=True,
+                               skip_fraction_simplification=True,
+                               decimal_result=2) == \
+        '\[cos(\widehat{\\text{PLO}})=\\frac{\\text{LO}}{\\text{PL}}\]'\
+        '\[cos(\\text{40})=\\frac{\\text{LO}}{\\text{10}}\]'\
+        '\[\\text{LO}=cos(\\text{40})\\times \\text{10}\]'\
+        '\[\\text{LO}\simeq\\text{7.66}\]'
 
 
 def test_t5_into_euk():

@@ -35,10 +35,18 @@ from mathmaker.lib import is_, error
 from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
                                      POLYGONS_NATURES, round)
 from .root_calculus import Evaluable, Value, Unit
-from .base_calculus import Item, Product, Sum
-from .calculus import Equality, Table, Table_UP
+from .base_calculus import Item, Product, Sum, Function
+from .calculus import Equality, Table, Table_UP, QuotientsEquality
 from .base import Drawable
 from .base_geometry import Point, Segment, Angle, Vector
+
+TRIGO_FCT = {'cos': lambda x: math.cos(math.radians(x)),
+             'sin': lambda x: math.sin(math.radians(x)),
+             'tan': lambda x: math.tan(math.radians(x)),
+             'acos': lambda x: math.degrees(math.acos(x)),
+             'asin': lambda x: math.degrees(math.asin(x)),
+             'atan': lambda x: math.degrees(math.atan(x))
+             }
 
 
 # ------------------------------------------------------------------------------
@@ -922,6 +930,50 @@ class RightTriangle(Triangle):
                                          "because no unknown side was found")
 
         return Equality(objcts, subst_dict=subst_dict)
+
+    def trigonometric_ratios(self):
+        """Definitions of the three standard trigonometric ratios."""
+        return {'cos': {self.angle[0]: [self.side[0].length_name,
+                                        self.hypotenuse.length_name],
+                        self.angle[2]: [self.side[1].length_name,
+                                        self.hypotenuse.length_name]},
+                'sin': {self.angle[0]: [self.side[1].length_name,
+                                        self.hypotenuse.length_name],
+                        self.angle[2]: [self.side[0].length_name,
+                                        self.hypotenuse.length_name]},
+                'tan': {self.angle[0]: [self.side[1].length_name,
+                                        self.side[0].length_name],
+                        self.angle[2]: [self.side[0].length_name,
+                                        self.side[1].length_name]}
+                }
+
+    def trigonometric_equality(self, angle=None, trigo_fct=None,
+                               subst_dict=None):
+        """
+        Return the required trigonometric equality.
+
+        :param angle: the acute Angle to use
+        :type angle: Angle
+        :param trigo_fct: either 'cos', 'sin' or 'tan'
+        :type trigo_fct: str
+        """
+        if angle is None or trigo_fct is None:
+            raise ValueError('Both angle and trigo_fct must be set.')
+        if angle not in [self.angle[0], self.angle[2]]:
+            raise ValueError('angle should be one of the acute '
+                             'angles of self')
+        if trigo_fct not in ['cos', 'sin', 'tan']:
+            raise ValueError("trigo_fct must be either 'cos', 'sin' "
+                             "or 'tan'")
+        tr = self.trigonometric_ratios()
+        return QuotientsEquality([[Function(name=trigo_fct,
+                                            var=angle,
+                                            fct=TRIGO_FCT[trigo_fct],
+                                            inv_fct=TRIGO_FCT['a' + trigo_fct]
+                                            ),
+                                   Item(tr[trigo_fct][angle][0])],
+                                  [Item((1)), Item(tr[trigo_fct][angle][1])]],
+                                 subst_dict=subst_dict)
 
 
 class InterceptTheoremConfiguration(Triangle):
