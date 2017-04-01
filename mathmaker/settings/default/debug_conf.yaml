@@ -48,3 +48,5 @@ dbg:
         solve_next_step: INFO
     Table_UP:
         init: INFO
+    Utils:
+        check_lexicon_for_substitution: INFO
