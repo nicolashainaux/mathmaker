@@ -638,16 +638,14 @@ class Angle(Drawable, Printable):
     def vertex(self):
         return self._points[1]
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Sets the label of the angle
     @label.setter
     def label(self, arg):
+        """Properly set the Angle's label."""
         if type(arg) == str or isinstance(arg, Value):
             self._label = Value(arg)
-
         else:
-            raise error.WrongArgument(arg, 'str or Value')
+            raise TypeError('Expected a str or a Value. Got {t} instead.'
+                            .format(t=str(type(arg))))
 
     # --------------------------------------------------------------------------
     ##
