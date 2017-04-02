@@ -701,9 +701,9 @@ class Triangle(Polygon):
                 side1_length = Decimal(str(randomly.integer(35, 55))) / 10
                 angle1 = randomly.integer(20, 70)
             else:
-                side0_length = construction_data['side0']
-                side1_length = construction_data['side1']
-                angle1 = construction_data['angle1']
+                side0_length = Decimal(str(construction_data['side0']))
+                side1_length = Decimal(str(construction_data['side1']))
+                angle1 = Decimal(str(construction_data['angle1']))
 
             if rotate_around_isobarycenter == 'randomly':
                 self._rotation_angle = randomly.integer(0, 35) * 10
