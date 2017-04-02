@@ -45,6 +45,14 @@ def t4():
     return t4
 
 
+@pytest.fixture
+def t6():
+    t6 = RightTriangle((('Z', 'A', 'D'),
+                        {'leg0': 3, 'leg1': 2.5}),
+                       rotate_around_isobarycenter=90)
+    return t6
+
+
 def test_t1_into_euk():
     """Check RightTriangle's generated euk file."""
     t1 = RightTriangle((("A", "B", "C"),
@@ -257,3 +265,18 @@ def test_hypmatching_36():
     """Check if the hypotenuses matching a leg of 36 are correct."""
     assert pythagorean.get_legs_matching_given_leg(36) == \
         [15, 27, 48, 77, 105, 160]
+
+
+def test_t6_trigo_equalities_autoresolution(t6):
+    """Check the autoresolution of a trigonometric equality created from t6."""
+    t6.setup_for_trigonometry(angle_nb=0, trigo_fct='tan',
+                              angle_val=Value(32, unit='\\textdegree'),
+                              down_length_val=Value(3.5, unit='cm'))
+    eq1 = t6.trigonometric_equality(autosetup=True)
+    assert eq1.auto_resolution(dont_display_equations_name=True,
+                               skip_fraction_simplification=True,
+                               decimal_result=2) == \
+        '\[tan(\widehat{\\text{DZA}})=\\frac{\\text{AD}}{\\text{ZA}}\]'\
+        '\[tan(\\text{32})=\\frac{\\text{AD}}{\\text{3.5}}\]'\
+        '\[\\text{AD}=tan(\\text{32})\\times \\text{3.5}\]'\
+        '\[\\text{AD}\simeq\\text{2.19}\]'

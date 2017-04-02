@@ -35,7 +35,7 @@ from mathmaker.lib import is_, error
 from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
                                      POLYGONS_NATURES, round)
 from .root_calculus import Evaluable, Value, Unit
-from .base_calculus import Item, Product, Sum, Function
+from .base_calculus import Item, Product, Sum, Function, AngleItem
 from .calculus import Equality, Table, Table_UP, QuotientsEquality
 from .base import Drawable
 from .base_geometry import Point, Segment, Angle, Vector
@@ -767,6 +767,8 @@ class RightTriangle(Triangle):
         self._rotation_angle = 0
         self._side = [None, None, None]
         self._name = ""
+        self._subst_dict = None
+        self._trigo_setup = ''
 
         if type(arg) == tuple:
             if not len(arg) == 2:
@@ -833,6 +835,8 @@ class RightTriangle(Triangle):
                               rotate_around_isobarycenter=rotation)
 
         elif isinstance(arg, RightTriangle):
+            self._trigo_setup = arg._trigo_setup
+            self._subst_dict = arg.subst_dict
             Polygon.__init__(self, arg, **options)
 
         self.right_angle.mark = "right"
@@ -947,8 +951,74 @@ class RightTriangle(Triangle):
                                         self.side[1].length_name]}
                 }
 
+    def setup_for_trigonometry(self, angle_nb=None, trigo_fct=None,
+                               angle_val=None,
+                               up_length_val=None,
+                               down_length_val=None):
+        """
+        Setup labels, determine subst_dict and stores configuration details.
+
+        Exactly one parameter among the three *_val ones must be left to None.
+        According to the chosen trigo_fct and this parameter, this method will
+        create the correct subst_dict.
+
+        :param angle_nb: must be either 0 or 2 (index of an acute angle)
+        :type angle_nb: int
+        :param trigo_fct: must belong to ['cos', 'sin', 'tan']
+        :type trigo_fct: str
+        :param angle_val: the angle's Value
+        :type angle_val: Value (or leave it to None to use it as the unknown
+            value to calculate)
+        :param up_length_val: the length's Value of the side that's at the
+            numerator of the trigonometric formula
+        :type up_length_val: Value (or leave it to None to use it as the
+            unknown value to calculate)
+        :param down_length_val: the length's Value of the side that's at the
+            denominator of the trigonometric formula
+        :type down_length_val: Value (or leave it to None to use it as the
+            unknown value to calculate)
+        """
+        if [angle_val, up_length_val, down_length_val].count(None) != 1:
+            raise ValueError('Exactly one of the optional arguments '
+                             '(angle_val, up_length_val, down_length_val)'
+                             ' must be None.')
+        if angle_nb not in [0, 2]:
+            raise ValueError('angle_nb must be 0 or 2 (got {n} instead)'
+                             .format(n=str(angle_nb)))
+        if trigo_fct not in ['cos', 'sin', 'tan']:
+            raise ValueError("trigo_fct must be either 'cos', 'sin' "
+                             "or 'tan'")
+        side_nb = {'cos': {0: {'up': 0, 'down': 2},
+                           2: {'up': 1, 'down': 2}},
+                   'sin': {0: {'up': 1, 'down': 2},
+                           2: {'up': 0, 'down': 2}},
+                   'tan': {0: {'up': 1, 'down': 0},
+                           2: {'up': 0, 'down': 1}}}
+        upside_nb = side_nb[trigo_fct][angle_nb]['up']
+        downside_nb = side_nb[trigo_fct][angle_nb]['down']
+        subst_dict = {}
+        if angle_val is None:
+            self.angle[angle_nb].label = Value('?')
+        else:
+            self.angle[angle_nb].label = angle_val
+            subst_dict[AngleItem(from_this_angle=self.angle[angle_nb])] = \
+                angle_val
+        if up_length_val is None:
+            self.side[upside_nb].label = Value('?')
+        else:
+            self.side[upside_nb].label = up_length_val
+            subst_dict[Value(self.side[upside_nb].length_name)] = up_length_val
+        if down_length_val is None:
+            self.side[downside_nb].label = Value('?')
+        else:
+            self.side[downside_nb].label = down_length_val
+            subst_dict[Value(self.side[downside_nb].length_name)] = \
+                down_length_val
+        self._subst_dict = subst_dict
+        self._trigo_setup = str(trigo_fct) + '_' + str(angle_nb)
+
     def trigonometric_equality(self, angle=None, trigo_fct=None,
-                               subst_dict=None):
+                               subst_dict=None, autosetup=False):
         """
         Return the required trigonometric equality.
 
@@ -956,15 +1026,26 @@ class RightTriangle(Triangle):
         :type angle: Angle
         :param trigo_fct: either 'cos', 'sin' or 'tan'
         :type trigo_fct: str
+        :param subst_dict: a correct substitution dictionary
+        :type subst_dict: dict
+        :param autosetup: if enabled, will take the angle, trigo_fct and
+            subst_dict from preconfigured values (requires to have called
+            setup_for_trigonometry() previously).
+        :type autosetup: bool
         """
-        if angle is None or trigo_fct is None:
-            raise ValueError('Both angle and trigo_fct must be set.')
-        if angle not in [self.angle[0], self.angle[2]]:
-            raise ValueError('angle should be one of the acute '
-                             'angles of self')
-        if trigo_fct not in ['cos', 'sin', 'tan']:
-            raise ValueError("trigo_fct must be either 'cos', 'sin' "
-                             "or 'tan'")
+        if autosetup:
+            subst_dict = self._subst_dict
+            trigo_fct, angle_nb = self._trigo_setup.split(sep='_')
+            angle = self.angle[int(angle_nb)]
+        else:
+            if angle is None or trigo_fct is None:
+                raise ValueError('Both angle and trigo_fct must be set.')
+            if angle not in [self.angle[0], self.angle[2]]:
+                raise ValueError('angle should be one of the acute '
+                                 'angles of self')
+            if trigo_fct not in ['cos', 'sin', 'tan']:
+                raise ValueError("trigo_fct must be either 'cos', 'sin' "
+                                 "or 'tan'")
         tr = self.trigonometric_ratios()
         return QuotientsEquality([[Function(name=trigo_fct,
                                             var=angle,
