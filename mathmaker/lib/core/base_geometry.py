@@ -242,42 +242,31 @@ class Segment(Drawable):
     def points(self):
         return self._points
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the label of the Segment
     @property
     def label(self):
+        """Label of the Segment (the displayed information)."""
         return self._label
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the length of the Segment
     @property
     def real_length(self):
+        """Real length (build length) of the Segment."""
         x_delta = self.points[0].x - self.points[1].x
         y_delta = self.points[0].y - self.points[1].y
         return math.hypot(x_delta, y_delta)
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the "fake" length of the Segment (the one used in a
-    #          problem)
     @property
     def length(self):
+        """Fake length of the Segment (the one used in a problem)."""
         return self._length
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the length_has_been_set flag of the Segment
     @property
     def length_has_been_set(self):
+        """Whether the (fake) length has been set or not."""
         return self._length_has_been_set
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the length name of the Segment
     @property
     def length_name(self):
+        """Length's name of the Segment, like AB."""
         return self._length_name
 
     def invert_length_name(self):
