@@ -28,6 +28,7 @@ from mathmaker.lib import shared, error
 from mathmaker.lib.common import alphabet
 from .X_Structure import X_Structure
 from . import question
+from .question import Q_Generic
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
@@ -323,8 +324,6 @@ class X_Generic(X_Structure):
         # value of **options
         options = self.options
 
-        default_question = question.Q_Generic
-
         # TEXTS OF THE EXERCISE
         self.text = {'exc': options.get('text_exc', ''),
                      'ans': options.get('text_ans', '')}
@@ -409,10 +408,9 @@ class X_Generic(X_Structure):
                     # __
                     q.options['10_100_1000'] = True
             self.questions_list += \
-                [default_question(q.type,
-                 q.options,
-                 numbers_to_use=nb_to_use,
-                 number_of_the_question=next(numbering),
-                                  )]
+                [Q_Generic(q.type,
+                           q.options,
+                           numbers_to_use=nb_to_use,
+                           number_of_the_question=next(numbering),)]
 
         shared.number_of_the_question = 0
