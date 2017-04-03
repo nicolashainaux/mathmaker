@@ -25,7 +25,7 @@
 		<!-- Default value (planned): context="none"
 			 No default for kind and subkind, they must be given -->
 		<question kind="expand_and_reduce" subkind="double" detailed="false">
-			<nb source="intpairs_2to9" source2="intpairs_2to9">5</nb>
+			<nb source="intpairs_2to9;;intpairs_2to9">5</nb>
 		</question>
 
 	</exercise>
