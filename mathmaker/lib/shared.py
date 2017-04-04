@@ -29,6 +29,7 @@ from mathmaker.lib.common import latex
 
 def init():
     global db
+    global three_letters_words_source
     global four_letters_words_source
     global five_letters_words_source
     global names_source
@@ -53,6 +54,8 @@ def init():
     db = sqlite3.connect(settings.path.db)
 
     from mathmaker.lib.tools import db as database
+    three_letters_words_source = database.source("w3l", ["id", "word"],
+                                                 language=settings.language)
     four_letters_words_source = database.source("w4l", ["id", "word"],
                                                 language=settings.language)
 

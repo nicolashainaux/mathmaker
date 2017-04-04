@@ -28,6 +28,7 @@ It actually erases the database and builds it entirely.
 It will add all entries:
 - from files mini_pb_addi_direct.xml,mini_pb_divi_direct.xml,
   mini_pb_subtr_direct.xml and mini_pb_multi_direct.xml from data/wordings/,
+- from all w3l.po files from locale/*/LC_MESSAGES/
 - from all w4l.po files from locale/*/LC_MESSAGES/
 - from all w5l.po files from locale/*/LC_MESSAGES/
 - from all *_names.po files from locale/*/LC_MESSAGES/
@@ -62,6 +63,9 @@ def __main__():
     db = sqlite3.connect(settings.path.db_dist)
 
     # Creation of the tables
+    db.execute('''CREATE TABLE w3l
+              (id INTEGER PRIMARY KEY,
+              language TEXT, word TEXT, drawDate INTEGER)''')
     db.execute('''CREATE TABLE w4l
               (id INTEGER PRIMARY KEY,
               language TEXT, word TEXT, drawDate INTEGER)''')
@@ -99,7 +103,7 @@ def __main__():
     # Extract data from po(t) files and insert them into the db
     for lang in next(os.walk(settings.localedir))[1]:
         settings.language = lang
-        for n in [4, 5]:
+        for n in [3, 4, 5]:
             if os.path.isfile(settings.localedir + lang
                               + "/LC_MESSAGES/w{}l.po".format(str(n))):
                 words = po_file.get_list_of('words', lang, n)
