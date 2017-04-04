@@ -27,7 +27,7 @@ from decimal import Decimal
 from mathmaker.lib.core.root_calculus import Unit, Value
 from mathmaker.lib.core.base_calculus import Product, Quotient, Item
 from mathmaker.lib.core.base_geometry import Point
-from mathmaker.lib.core.geometry import (Rectangle, Square,
+from mathmaker.lib.core.geometry import (Rectangle, Square, RightTriangle,
                                          InterceptTheoremConfiguration)
 from mathmaker.lib import error
 from mathmaker.lib import shared
@@ -177,6 +177,20 @@ class structure(object):
             self.square.setup_labels([False, False, True, False])
             self.square.set_marks(random.choice(["simple", "double",
                                                  "triple"]))
+
+        elif arg == 'right_triangle':
+            # Too many different possibilities for a Right Triangle,
+            # so the angles|lengths' labels must be set outside of this setup()
+            if (not hasattr(self, 'unit_length')
+                or not hasattr(self, 'unit_area')):
+                self.setup(self, "units", **options)
+
+            rt_name = next(shared.three_letters_words_source)
+            self.right_triangle = RightTriangle(
+                ((rt_name[0], rt_name[1], rt_name[2]),
+                 {'leg0': Decimal(str(random.choice(range(10, 40)) / 10)),
+                  'leg1': Decimal(str(random.choice(range(10, 40)) / 10))}),
+                rotate_around_isobarycenter='any')
 
         elif arg == 'intercept_theorem_figure':
             butterfly = options.get('butterfly', False)
