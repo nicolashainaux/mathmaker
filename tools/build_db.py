@@ -33,6 +33,7 @@ It will add all entries:
 - from all w5l.po files from locale/*/LC_MESSAGES/
 - from all *_names.po files from locale/*/LC_MESSAGES/
 - all single ints from 2 to 500
+- all single decimal numbers with one digit from 0.0 to 100.0
 - all integers pairs from 2 to 500
 - a list of "clever" couples of (integer, decimal) (for multiplications)
 - a list of angles' ranges (around 0, 90, 180, 270)
@@ -83,6 +84,8 @@ def __main__():
               q_id TEXT, drawDate INTEGER)''')
     db.execute('''CREATE TABLE single_ints
               (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
+    db.execute('''CREATE TABLE single_deci1
+              (id INTEGER PRIMARY KEY, nb1 DECIMAL(4, 1), drawDate INTEGER)''')
     db.execute('''CREATE TABLE angle_ranges
               (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
               drawDate INTEGER)''')
@@ -195,6 +198,13 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
+    # Single decimal numbers
+    db_rows = [(i / 10, 0) for i in range(1001)]
+    db.executemany("INSERT "
+                   "INTO single_deci1(nb1, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+
     # Angle ranges
     db_rows = [(i - 20, i + 20, 0) for i in [0, 90, 180, 270]]
     db.executemany("INSERT "
@@ -204,6 +214,7 @@ def __main__():
 
     db.commit()
     db.close()
+
 
 if __name__ == '__main__':
     __main__()

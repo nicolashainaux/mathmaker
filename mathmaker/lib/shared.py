@@ -37,6 +37,7 @@ def init():
     global markup
     global int_pairs_source
     global single_ints_source
+    global single_deci1_source
     global angle_ranges_source
     global int_deci_clever_pairs_source
     global rank_words_source
@@ -68,6 +69,7 @@ def init():
                                                      "wording"])
     int_pairs_source = database.source("int_pairs", ["id", "nb1", "nb2"])
     single_ints_source = database.source("single_ints", ["id", "nb1"])
+    single_deci1_source = database.source("single_deci1", ["id", "nb1"])
     angle_ranges_source = database.source("angle_ranges", ["id", "nb1", "nb2"])
     int_deci_clever_pairs_source = database.source("int_deci_clever_pairs",
                                                    ["id", "nb1", "nb2"])
