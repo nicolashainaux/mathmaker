@@ -188,8 +188,8 @@ class structure(object):
             rt_name = next(shared.three_letters_words_source)
             self.right_triangle = RightTriangle(
                 ((rt_name[0], rt_name[1], rt_name[2]),
-                 {'leg0': Decimal(str(random.choice(range(10, 40)) / 10)),
-                  'leg1': Decimal(str(random.choice(range(10, 40)) / 10))}),
+                 {'leg0': Decimal(str(random.choice(range(20, 40)) / 10)),
+                  'leg1': Decimal(str(random.choice(range(20, 40)) / 10))}),
                 rotate_around_isobarycenter='any')
 
         elif arg == 'intercept_theorem_figure':
