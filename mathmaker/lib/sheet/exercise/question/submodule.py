@@ -186,11 +186,13 @@ class structure(object):
                 self.setup(self, "units", **options)
 
             rt_name = next(shared.three_letters_words_source)
+            alpha, beta = next(shared.angle_ranges_source)
+            rotation_angle = alpha + random.choice(range(beta - alpha))
             self.right_triangle = RightTriangle(
                 ((rt_name[0], rt_name[1], rt_name[2]),
                  {'leg0': Decimal(str(random.choice(range(20, 40)) / 10)),
                   'leg1': Decimal(str(random.choice(range(20, 40)) / 10))}),
-                rotate_around_isobarycenter='any')
+                rotate_around_isobarycenter=rotation_angle)
 
         elif arg == 'intercept_theorem_figure':
             butterfly = options.get('butterfly', False)
