@@ -180,17 +180,13 @@ def check_lexicon_for_substitution(objcts, subst_dict, how_many):
                 and isinstance(subst_dict[elt], Value)
                 and subst_dict[elt].is_numeric()):
             # __
-            raise TypeError('Expected key: value pairs being of type '
-                            'literal Value|AngleIem: numeric Value, '
+            raise TypeError('{{key: value}} pairs should be of type '
+                            '{{literal Value|AngleItem: numeric Value}}, '
                             'got instead: '
-                            '{kv} ({lk}): {vv} ({nv})'
+                            '{kv}: {vv}'
                             .format(kv=str(type(elt)),
-                                    lk='literal'
-                                    if elt.is_literal() else 'numeric',
-                                    vv=str(type(subst_dict[elt])),
-                                    nv='literal'
-                                    if subst_dict[elt].is_literal()
-                                    else 'numeric'))
+                                    vv=str(type(subst_dict[elt]))
+                                    ))
 
     # Make the list of all literals
     for xpr in objcts:
