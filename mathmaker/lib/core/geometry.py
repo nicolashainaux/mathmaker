@@ -954,7 +954,8 @@ class RightTriangle(Triangle):
     def setup_for_trigonometry(self, angle_nb=None, trigo_fct=None,
                                angle_val=None,
                                up_length_val=None,
-                               down_length_val=None):
+                               down_length_val=None,
+                               length_unit=None):
         """
         Setup labels, determine subst_dict and stores configuration details.
 
@@ -977,6 +978,8 @@ class RightTriangle(Triangle):
             denominator of the trigonometric formula
         :type down_length_val: Value (or leave it to None to use it as the
             unknown value to calculate)
+        :param length_unit: the length's unit to use for lengths
+        :type length_unit: anything that can be used as argument for Units
         """
         if [angle_val, up_length_val, down_length_val].count(None) != 1:
             raise ValueError('Exactly one of the optional arguments '
@@ -988,6 +991,8 @@ class RightTriangle(Triangle):
         if trigo_fct not in ['cos', 'sin', 'tan']:
             raise ValueError("trigo_fct must be either 'cos', 'sin' "
                              "or 'tan'")
+        if length_unit is None:
+            raise ValueError('length_unit must be defined')
         side_nb = {'cos': {0: {'up': 0, 'down': 2},
                            2: {'up': 1, 'down': 2}},
                    'sin': {0: {'up': 1, 'down': 2},
@@ -1001,19 +1006,20 @@ class RightTriangle(Triangle):
         if angle_val is None:
             self.angle[angle_nb].label = Value('?')
         else:
-            self.angle[angle_nb].label = Value(angle_val)
+            self.angle[angle_nb].label = Value(angle_val, unit='\\textdegree')
             subst_dict[AngleItem(from_this_angle=self.angle[angle_nb])] = \
-                Value(angle_val)
+                Value(angle_val, unit='\\textdegree')
         if up_length_val is None:
             self.side[upside_nb].label = Value('?')
         else:
-            self.side[upside_nb].label = Value(up_length_val)
+            self.side[upside_nb].label = Value(up_length_val, unit=length_unit)
             subst_dict[Value(self.side[upside_nb].length_name)] = \
                 Value(up_length_val)
         if down_length_val is None:
             self.side[downside_nb].label = Value('?')
         else:
-            self.side[downside_nb].label = Value(down_length_val)
+            self.side[downside_nb].label = Value(down_length_val,
+                                                 unit=length_unit)
             subst_dict[Value(self.side[downside_nb].length_name)] = \
                 Value(down_length_val)
         self._subst_dict = subst_dict
