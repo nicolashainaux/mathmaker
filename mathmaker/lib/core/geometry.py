@@ -997,6 +997,7 @@ class RightTriangle(Triangle):
         upside_nb = side_nb[trigo_fct][angle_nb]['up']
         downside_nb = side_nb[trigo_fct][angle_nb]['down']
         subst_dict = {}
+        self.angle[angle_nb].mark = 'simple'
         if angle_val is None:
             self.angle[angle_nb].label = Value('?')
         else:
