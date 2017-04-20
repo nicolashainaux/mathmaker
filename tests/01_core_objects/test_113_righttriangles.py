@@ -271,7 +271,8 @@ def test_t6_trigo_equalities_autoresolution(t6):
     """Check the autoresolution of a trigonometric equality created from t6."""
     t6.setup_for_trigonometry(angle_nb=0, trigo_fct='tan',
                               angle_val=Value(32, unit='\\textdegree'),
-                              down_length_val=Value(3.5, unit='cm'))
+                              down_length_val=Value(3.5, unit='cm'),
+                              length_unit='cm')
     eq1 = t6.trigonometric_equality(autosetup=True)
     assert eq1.auto_resolution(dont_display_equations_name=True,
                                skip_fraction_simplification=True,
