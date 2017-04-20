@@ -23,7 +23,7 @@
 import pytest
 
 from mathmaker.lib.core.base_calculus import (Item, Monomial, Sum, Fraction,
-                                              SquareRoot)
+                                              SquareRoot, Function)
 from mathmaker.lib.core.base_calculus import Expandable
 from mathmaker.lib.core.base_calculus import Polynomial
 from mathmaker.lib.core.calculus import Equation
@@ -56,6 +56,13 @@ def eq34():
 @pytest.fixture
 def eq40():
     return Equation((Item(2), Item(2)), number=1)
+
+
+@pytest.fixture
+def eq41():
+    f_1 = Function()
+    f_1.set_numeric_mode()
+    return Equation((Item('CU'), f_1))
 
 
 def test_eq0_autoresolution():
@@ -669,3 +676,11 @@ def test_eq40_nextstep(eq40):
     assert eq40.solve_next_step() == \
         wrap_nb('Any value of {x} is solution of the equation.'
                 .format(x=eq40.variable_letter))
+
+
+def test_eq41_autoresolution(eq41):
+    """Is this Equation correctly auto-resolved?"""
+    assert eq41.auto_resolution(dont_display_equations_name=True,
+                                decimal_result=2) == \
+        wrap_nb('\[\\text{CU}=f(1)\]'
+                '\[\\text{CU}=1\]')

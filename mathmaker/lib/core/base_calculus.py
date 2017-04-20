@@ -1185,7 +1185,11 @@ class Function(Item):
         if self._display_mode == 'literal' and self.unlocked:
             self.set_numeric_mode()
             return self
-        return None
+        force_eval = options.get('force_evaluation', False)
+        if force_eval:
+            return self.evaluate()
+        else:
+            return None
 
     def expand_and_reduce_next_step(self, **options):
         """Same as calculate_ntext_step(), for Functions."""

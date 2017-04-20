@@ -920,7 +920,8 @@ class Equation(ComposedCalculable):
                 self._right_hand_side = arg
 
         else:
-            raise TypeError('arg should have been an Exponented')
+            raise TypeError('arg should have been an Exponented, instead, got '
+                            + str(type(arg)))
 
     # --------------------------------------------------------------------------
     ##
@@ -1234,6 +1235,7 @@ class Equation(ComposedCalculable):
             log.debug('At left, one literal not reducible element; '
                       'at right, one Quotient|Function|SquareRoot and '
                       'decimal result is required.')
+            options.update({'force_evaluation': True})
             new_eq.set_hand_side("right",
                                  new_eq.right_hand_side.
                                  expand_and_reduce_next_step(**options))
