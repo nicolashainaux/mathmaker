@@ -2244,7 +2244,8 @@ class Quotient(Operation):
             return next_step.throw_away_the_neutrals()
 
         if 'decimal_result' in options:
-            return Item(self.evaluate(**options))
+            return Item(self.evaluate(**options))\
+                .round(options['decimal_result'])
 
         if self.numerator.calculate_next_step(**options) is not None:
             if self.denominator.calculate_next_step(**options) is not None:
@@ -5942,6 +5943,13 @@ class Sum(CommutativeOperation):
            or a_term_has_been_modified \
            or some_terms_have_been_moved:
             # __
+            log.debug('Exiting, returning ' + str(copy) + 'because\n'
+                      'a term has been modified: {a}\n'
+                      'fractions have been added: {f}\n'
+                      'some terms have been moved: {t}'
+                      .format(a=str(a_term_has_been_modified),
+                              f=str(fractions_have_been_added),
+                              t=str(some_terms_have_been_moved)))
             return copy
 
         # no term has been modified, no term has been moved,
@@ -5954,6 +5962,7 @@ class Sum(CommutativeOperation):
         if len(copy) == 1:
             # if this unique term has to be calculated, then it has been
             # done above
+            log.debug('Exiting, returning None')
             return None
 
         # 1. There are only numbers (e.g. numeric Items)

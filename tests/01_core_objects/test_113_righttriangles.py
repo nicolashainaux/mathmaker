@@ -281,3 +281,19 @@ def test_t6_trigo_equalities_autoresolution(t6):
         '\[tan(\\text{32})=\\frac{\\text{AD}}{\\text{3.5}}\]'\
         '\[\\text{AD}=tan(\\text{32})\\times \\text{3.5}\]'\
         '\[\\text{AD}\simeq\\text{2.19}\]'
+
+
+def test_t6_trigo_equalities_autoresolution2(t6):
+    """Check the autoresolution of a trigonometric equality created from t6."""
+    t6.setup_for_trigonometry(angle_nb=0, trigo_fct='cos',
+                              angle_val=Value(80, unit='\\textdegree'),
+                              up_length_val=Value(53, unit='km'),
+                              length_unit='km')
+    eq1 = t6.trigonometric_equality(autosetup=True)
+    assert eq1.auto_resolution(dont_display_equations_name=True,
+                               skip_fraction_simplification=True,
+                               decimal_result=1) == \
+        '\[cos(\widehat{\\text{DZA}})=\\frac{\\text{ZA}}{\\text{DZ}}\]'\
+        '\[cos(\\text{80})=\\frac{\\text{53}}{\\text{DZ}}\]'\
+        '\[\\text{DZ}=\\frac{\\text{53}}{cos(\\text{80})}\]'\
+        '\[\\text{DZ}\simeq\\text{305.2}\]'
