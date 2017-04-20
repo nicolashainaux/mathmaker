@@ -264,17 +264,17 @@ def cut_off_hint_from(sentence: str) -> tuple:
     if sentence is '':
         return ('', '')
     last_word = sentence.split()[-1:][0]
-    hint_block = ""
+    hint_block = ''
     if (is_wrapped(last_word, braces='||')
         and last_word[1:-1].startswith('hint:')):
         # __
         hint_block = last_word
     if len(hint_block):
-        new_s = " ".join(w for w in sentence.split() if w != hint_block)
+        new_s = ' '.join(w for w in sentence.split() if w != hint_block)
         hint = hint_block[1:-1].split(sep=':')[1]
         return (new_s, hint)
     else:
-        return (sentence, "")
+        return (sentence, '')
 
 
 def handle_valueless_names_tags(arg: object, sentence: str):
