@@ -1265,11 +1265,13 @@ class Function(Item):
             substituted = True
             self.num_val = var
             self.set_numeric_mode()
+            self._arguments['numeric'] = self.num_val
         elif self.var in subst_dict:
             log.debug('Case 2')
             substituted = True
             self.num_val = subst_dict[self.var]
             self.set_numeric_mode()
+            self._arguments['numeric'] = self.num_val
         if self.exponent.substitute(subst_dict):
             substituted = True
         return substituted
