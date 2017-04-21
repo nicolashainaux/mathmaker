@@ -108,9 +108,9 @@ def test_intercept_theorem_converse_alt2():
         str(S_Generic(XML_SHEETS['intercept_theorem_converse_alt2'])))
 
 
-def test_trigonometry_calculate_length_cosine():
+def test_trigonometry_cos_length():
     """
-    Check if 'trigonometry_calculate_length_cosine' is generated with no error.
+    Check if 'trigonometry_cos_length' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['intercept_theorem_converse_alt2'])))
+        str(S_Generic(XML_SHEETS['trigonometry_cos_length'])))
