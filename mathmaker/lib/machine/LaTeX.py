@@ -227,11 +227,10 @@ automatically increments the counter").format(cmd_name="exercise",
 
     ##
     #   @brief Writes to the output the new line command
-    def write_new_line(self, **options):
-        output_str = "\\newline " + "\n"
-        if 'check' in options:
-            if options['check'] == '\]':
-                output_str = ""
+    def write_new_line(self, check='', check2=''):
+        output_str = '\\newline \n'
+        if check == '\]' or 'addvspace' in check2:
+            output_str = ''
         if self.redirect_output_to_str:
             return output_str
         else:
