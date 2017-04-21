@@ -114,3 +114,27 @@ def test_trigonometry_cos_length():
     """
     shared.machine.write_out(
         str(S_Generic(XML_SHEETS['trigonometry_cos_length'])))
+
+
+def test_trigonometry_sin_length():
+    """
+    Check if 'trigonometry_sin_length' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_sin_length'])))
+
+
+def test_trigonometry_tan_length():
+    """
+    Check if 'trigonometry_tan_length' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_tan_length'])))
+
+
+def test_trigonometry_calculate_length():
+    """
+    Check if 'trigonometry_calculate_length' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_calculate_length'])))

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-04-21 15:55+0200\n"
-"PO-Revision-Date: 2017-04-21 15:56+0200\n"
+"POT-Creation-Date: 2017-04-21 16:19+0200\n"
+"PO-Revision-Date: 2017-04-21 16:20+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -1495,20 +1495,23 @@ msgstr "Développer et réduire les expressions suivantes :"
 msgid "Algebra: expand and reduce double brackets"
 msgstr "Calcul littéral: développement \"double\""
 
+#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
-#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:24
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
 msgid "Example of solutions:"
 msgstr "Exemple de solutions :"
 
@@ -1770,7 +1773,10 @@ msgstr ""
 "[{chunk0_length_name}] \\\\  & {main_vertex_name} {belongs_to} "
 "[{chunk1_length_name}] \\end{tabular}"
 
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
 #: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
 msgid "Trigonometry"
 msgstr "Trigonométrie"
 
@@ -1787,13 +1793,28 @@ msgstr ""
 "{triangle_name} est un triangle rectangle en {right_vertex_name}, donc : "
 "{newline} {resolution}"
 
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
 #: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
 msgid ""
 "Calculate the missing length in each triangle. Round the results to the "
 "tenth."
 msgstr ""
 "Calculer la longueur manquante dans chaque triangle. Arrondir les résultats "
 "au dixième."
+
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
+msgid "Calculate the length of a side using tangent"
+msgstr "Calculer la longueur d'un côté à l'aide de tangente"
+
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
+msgid "Calculate the length of a side using sine"
+msgstr "Calculer la longueur d'un côté à l'aide de sinus"
+
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
+msgid "Calculate the length of a side"
+msgstr "Calculer la longueur d'un côté"
 
 #~ msgid ""
 #~ "\\begin{multicols}{2} On one hand: {ratio1} and on the other hand: "

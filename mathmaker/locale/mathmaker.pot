@@ -1395,20 +1395,23 @@ msgstr ""
 msgid "Algebra: expand and reduce double brackets"
 msgstr ""
 
+#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
-#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:24
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
 msgid "Example of solutions:"
 msgstr ""
 
@@ -1618,7 +1621,10 @@ msgid ""
 "{chunk1_length_name} \\end{tabular}"
 msgstr ""
 
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
 #: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
 msgid "Trigonometry"
 msgstr ""
 
@@ -1633,8 +1639,23 @@ msgid ""
 "{newline} Hence: {resolution}"
 msgstr ""
 
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
 #: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
 msgid ""
 "Calculate the missing length in each triangle. Round the results to the "
 "tenth."
+msgstr ""
+
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
+msgid "Calculate the length of a side using tangent"
+msgstr ""
+
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
+msgid "Calculate the length of a side using sine"
+msgstr ""
+
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
+msgid "Calculate the length of a side"
 msgstr ""
