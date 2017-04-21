@@ -46,6 +46,7 @@ def init():
     global deci_10_100_1000_divi_source
     global deci_one_digit_multi_source
     global deci_one_digit_divi_source
+    global trigo_functions_source
     global mc_source
     global machine
     global number_of_the_question
@@ -78,6 +79,7 @@ def init():
 
     from mathmaker.lib import sources
     rank_words_source = sources.sub_source('rank_words')
+    trigo_functions_source = sources.sub_source('trigo_functions')
     int_fracs_source = sources.sub_source('int_irreducible_frac')
     deci_10_100_1000_multi_source = sources.sub_source(
         'decimal_and_10_100_1000_for_multi')
