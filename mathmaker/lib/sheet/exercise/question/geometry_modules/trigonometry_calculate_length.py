@@ -50,7 +50,8 @@ class sub_object(submodule.structure):
                                                'shoud contain one _')
             if self.variant in ['cos_opp', 'sin_adj', 'tan_hyp']:
                 raise error.XMLFileFormatError('Invalid variant: {v}, '
-                                               'It should be in: '
+                                               .format(v=variant)
+                                               + 'It should be in: '
                                                + str(valid_variants))
             variant = self.variant.split(sep='_')
 
