@@ -45,7 +45,7 @@ class structure(object):
         else:
             return ""
 
-    def setup(self, arg, shuffle_nbs=True, **options):
+    def setup(self, arg, shuffle_nbs=True, sort_nbs=False, **options):
         if arg == "minimal":
             self.newline = '\\newline'
             self.parallel_to = '$\parallel$'
@@ -80,6 +80,8 @@ class structure(object):
             nb_list = list(options['nb'])
             if shuffle_nbs:
                 random.shuffle(nb_list)
+            elif sort_nbs:
+                nb_list = sorted(nb_list)
             for i in range(len(nb_list)):
                 setattr(self, 'nb' + str(i + 1), nb_list[i])
             self.nb_nb = len(nb_list)
