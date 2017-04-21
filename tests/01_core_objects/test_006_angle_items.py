@@ -53,7 +53,7 @@ def test_wrong_init1():
 
 def test_30degrees_printed():
     """Is a angle of 30° correctly printed?"""
-    assert AngleItem(raw_value=30).printed == '\\SI{30}{\\textdegree}'
+    assert AngleItem(raw_value=30).printed == '\\text{30}'
 
 
 def test_ABC_printed(ABC):

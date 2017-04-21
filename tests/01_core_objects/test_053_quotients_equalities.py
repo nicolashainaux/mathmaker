@@ -56,7 +56,8 @@ def test_qe0_autoresolution0(qe0, ABC):
     """Is this Quotients' Equality correctly auto-resolved?"""
     assert qe0.auto_resolution(dont_display_equations_name=True,
                                skip_fraction_simplification=True,
-                               decimal_result=0) == \
+                               decimal_result=0,
+                               unit='\\textdegree') == \
         '\[cos(\widehat{\\text{ABC}})=\\frac{\\text{BC}}{\\text{BA}}\]'\
         '\[cos(\widehat{\\text{ABC}})=\\frac{\\text{10}}{\\text{15}}\]'\
-        '\[\widehat{\\text{ABC}}\simeq\SI{48}{\\textdegree}\]'
+        '\[\widehat{\\text{ABC}}\simeq\\text{48}\\text{ \\textdegree}\]'

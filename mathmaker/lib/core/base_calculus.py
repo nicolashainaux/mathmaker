@@ -1428,15 +1428,17 @@ class AngleItem(Item):
 
         If the AngleItem is literal, it will be displayed like a literal Item
         yet wrapped in a 'wide hat'.
-        If it is numeric, the unit will be automatically displayed."""
-        if 'display_SI_unit' in options:
+        If it is not numeric, the unit will be automatically discarded."""
+        if 'display_SI_unit' in options and self.is_literal():
             del options['display_SI_unit']
+        if 'display_unit' in options and self.is_literal():
+            del options['display_unit']
         if self.is_literal():
             return MARKUP['opening_widehat']\
-                + Item.into_str(self, display_SI_unit=False, **options)\
+                + Item.into_str(self, **options)\
                 + MARKUP['closing_widehat']
         else:
-            return Item.into_str(self, display_SI_unit=True, **options)
+            return Item.into_str(self, **options)
 
 
 # ------------------------------------------------------------------------------

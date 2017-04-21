@@ -135,6 +135,7 @@ def test_cpeq3_autoresolution(cpeq3):
     """Is this Equation correctly auto-resolved?"""
     assert cpeq3.auto_resolution(dont_display_equations_name=True,
                                  skip_fraction_simplification=True,
-                                 decimal_result=0) == \
+                                 decimal_result=0,
+                                 unit='\\textdegree') == \
         '\[cos(\widehat{\\text{ABC}})=\\frac{\\text{3}}{\\text{8}}\]'\
-        '\[\widehat{\\text{ABC}}\\simeq\\SI{68}{\\textdegree}\]'
+        '\[\widehat{\\text{ABC}}\\simeq\\text{68}\\text{ \\textdegree}\]'
