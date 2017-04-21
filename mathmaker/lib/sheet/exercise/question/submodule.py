@@ -56,6 +56,7 @@ class structure(object):
             self.variant = options.get('variant', "default")
             self.context = options.get('context', "default")
             self.picture = XML_BOOLEANS[options.get('picture', "false")]()
+            self.decimal_result = int(options.get('decimal_result', 2))
 
         elif arg == "length_units":
             if 'unit' in options:

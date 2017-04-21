@@ -18,6 +18,7 @@
 			<xs:attribute name="rank_matches_invisible_zero"	type="xs:string"	use="optional"/>
 			<xs:attribute name="generation_type"				type="xs:string"	use="optional"/>
 			<xs:attribute name="space_after"				type="xs:string"	use="optional"/>
+			<xs:attribute name="decimal_result"				type="xs:integer"	use="optional"/>
 		</xs:complexType>
 	</xs:element>
 
