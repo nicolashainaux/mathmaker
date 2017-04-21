@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-04-21 16:19+0200\n"
-"PO-Revision-Date: 2017-04-21 16:20+0200\n"
+"POT-Creation-Date: 2017-04-21 18:07+0200\n"
+"PO-Revision-Date: 2017-04-21 18:08+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -1495,23 +1495,27 @@ msgstr "Développer et réduire les expressions suivantes :"
 msgid "Algebra: expand and reduce double brackets"
 msgstr "Calcul littéral: développement \"double\""
 
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
-#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:6
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:24
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_angle.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_angle.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_angle.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_angle.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
 msgid "Example of solutions:"
 msgstr "Exemple de solutions :"
 
@@ -1773,10 +1777,14 @@ msgstr ""
 "[{chunk0_length_name}] \\\\  & {main_vertex_name} {belongs_to} "
 "[{chunk1_length_name}] \\end{tabular}"
 
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_angle.xml:6
 #: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_angle.xml:6
 #: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_angle.xml:6
 #: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_angle.xml:6
 msgid "Trigonometry"
 msgstr "Trigonométrie"
 
@@ -1784,7 +1792,8 @@ msgstr "Trigonométrie"
 msgid "Calculate the length of a side using cosine"
 msgstr "Calculer la longueur d'un côté à l'aide de cosinus"
 
-#: lib/sheet/exercise/question/geometry_modules/trigonometry_calculate_length.py:111
+#: lib/sheet/exercise/question/geometry_modules/trigonometry_calculate_length.py:109
+#: lib/sheet/exercise/question/geometry_modules/trigonometry_calculate_angle.py:78
 #, python-brace-format
 msgid ""
 "The triangle {triangle_name} has a right angle in {right_vertex_name}. "
@@ -1815,6 +1824,44 @@ msgstr "Calculer la longueur d'un côté à l'aide de sinus"
 #: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
 msgid "Calculate the length of a side"
 msgstr "Calculer la longueur d'un côté"
+
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_angle.xml:6
+msgid ""
+"Calculate the missing angle in each triangle, using sine. Round the results "
+"to the unit."
+msgstr ""
+"Calculer l'angle manquant dans chaque triangle, à l'aide de sinus. Arrondir "
+"les résultats à l'unité."
+
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_angle.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_angle.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_angle.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_angle.xml:6
+msgid "Calculate an angle"
+msgstr "Calculer un angle"
+
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_angle.xml:6
+msgid ""
+"Calculate the missing angle in each triangle, using cosine. Round the "
+"results to the unit."
+msgstr ""
+"Calculer l'angle manquant dans chaque triangle, à l'aide de cosinus. "
+"Arrondir les résultats à l'unité."
+
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_angle.xml:6
+msgid ""
+"Calculate the missing angle in each triangle, using tangent. Round the "
+"results to the unit."
+msgstr ""
+"Calculer l'angle manquant dans chaque triangle, à l'aide de tangente. "
+"Arrondir les résultats à l'unité."
+
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_angle.xml:6
+msgid ""
+"Calculate the missing angle in each triangle. Round the results to the unit."
+msgstr ""
+"Calculer l'angle manquant dans chaque triangle. Arrondir les résultats à "
+"l'unité."
 
 #~ msgid ""
 #~ "\\begin{multicols}{2} On one hand: {ratio1} and on the other hand: "
@@ -1933,9 +1980,6 @@ msgstr "Calculer la longueur d'un côté"
 
 #~ msgid "Calculate: {quotient}"
 #~ msgstr "Calculer : {quotient}"
-
-#~ msgid "Calculate:"
-#~ msgstr "Calculer :"
 
 #~ msgid "FOUR_LETTERS_WORD_295"
 #~ msgstr "FOLK"
