@@ -170,3 +170,35 @@ def test_trigonometry_calculate_angle():
     """
     shared.machine.write_out(
         str(S_Generic(XML_SHEETS['trigonometry_calculate_angle'])))
+
+
+def test_trigonometry_cos_formulae():
+    """
+    Check if 'trigonometry_cos_formulae' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_cos_formulae'])))
+
+
+def test_trigonometry_sin_formulae():
+    """
+    Check if 'trigonometry_sin_formulae' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_sin_formulae'])))
+
+
+def test_trigonometry_tan_formulae():
+    """
+    Check if 'trigonometry_tan_formulae' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_tan_formulae'])))
+
+
+def test_trigonometry_formulae():
+    """
+    Check if 'trigonometry_formulae' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_formulae'])))
