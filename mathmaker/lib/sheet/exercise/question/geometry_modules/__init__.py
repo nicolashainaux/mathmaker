@@ -33,7 +33,8 @@ from . import (intercept_theorem_triangle, intercept_theorem_triangle_formula,
                intercept_theorem_converse_triangle,
                intercept_theorem_converse_butterfly,
                trigonometry_calculate_length,
-               trigonometry_calculate_angle)
+               trigonometry_calculate_angle,
+               trigonometry_formula)
 
 __all__ = ['intercept_theorem_triangle', 'intercept_theorem_triangle_formula',
            'intercept_theorem_butterfly',
@@ -41,4 +42,5 @@ __all__ = ['intercept_theorem_triangle', 'intercept_theorem_triangle_formula',
            'intercept_theorem_converse_triangle',
            'intercept_theorem_converse_butterfly',
            'trigonometry_calculate_length',
-           'trigonometry_calculate_angle']
+           'trigonometry_calculate_angle',
+           'trigonometry_formula']
