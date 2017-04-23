@@ -252,13 +252,18 @@ class Q_Generic(Q_Structure):
             self.q_hint = m.h(**options)
         else:
             self.q_hint = ""
+        self.q_nb_included_in_wording = False
+        if hasattr(m, 'q_nb_included_in_wording'):
+            self.q_nb_included_in_wording = m.q_nb_included_in_wording
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
-        return str(self.displayable_number) + str(self.q_text) \
-            + self.add_new_line_to_text
+        text = str(self.q_text) + self.add_new_line_to_text
+        if not self.q_nb_included_in_wording:
+            text = str(self.displayable_number) + text
+        return text
 
     # --------------------------------------------------------------------------
     ##
