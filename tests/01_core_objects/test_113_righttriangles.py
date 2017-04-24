@@ -195,11 +195,11 @@ def test_t4_trigo_equalities(t4):
     eq2 = t4.trigonometric_equality(angle=t4.angle[0], trigo_fct='sin')
     eq3 = t4.trigonometric_equality(angle=t4.angle[0], trigo_fct='tan')
     assert eq1.printed == \
-        'cos(\widehat{\\text{PLO}})=\\frac{\\text{LO}}{\\text{PL}}'
+        'cos(\widehat{\\text{PLO}})=\\frac{\\text{LO}}{\\text{LP}}'
     assert eq2.printed == \
-        'sin(\widehat{\\text{PLO}})=\\frac{\\text{OP}}{\\text{PL}}'
+        'sin(\widehat{\\text{PLO}})=\\frac{\\text{PO}}{\\text{PL}}'
     assert eq3.printed == \
-        'tan(\widehat{\\text{PLO}})=\\frac{\\text{OP}}{\\text{LO}}'
+        'tan(\widehat{\\text{PLO}})=\\frac{\\text{OP}}{\\text{OL}}'
 
 
 def test_t4_trigo_equalities_autoresolution(t4):
@@ -207,13 +207,13 @@ def test_t4_trigo_equalities_autoresolution(t4):
     alpha_i = AngleItem(from_this_angle=t4.angle[0])
     eq1 = t4.trigonometric_equality(angle=t4.angle[0],
                                     trigo_fct='cos',
-                                    subst_dict={Value('PL'): Value(10),
+                                    subst_dict={Value('LP'): Value(10),
                                                 alpha_i: Value(40)
                                                 })
     assert eq1.auto_resolution(dont_display_equations_name=True,
                                skip_fraction_simplification=True,
                                decimal_result=2) == \
-        '\[cos(\widehat{\\text{PLO}})=\\frac{\\text{LO}}{\\text{PL}}\]'\
+        '\[cos(\widehat{\\text{PLO}})=\\frac{\\text{LO}}{\\text{LP}}\]'\
         '\[cos(\\text{40})=\\frac{\\text{LO}}{\\text{10}}\]'\
         '\[\\text{LO}=cos(\\text{40})\\times \\text{10}\]'\
         '\[\\text{LO}\simeq\\text{7.66}\]'
@@ -277,7 +277,7 @@ def test_t6_trigo_equalities_autoresolution(t6):
     assert eq1.auto_resolution(dont_display_equations_name=True,
                                skip_fraction_simplification=True,
                                decimal_result=2) == \
-        '\[tan(\widehat{\\text{DZA}})=\\frac{\\text{AD}}{\\text{ZA}}\]'\
+        '\[tan(\widehat{\\text{DZA}})=\\frac{\\text{AD}}{\\text{AZ}}\]'\
         '\[tan(\\text{32})=\\frac{\\text{AD}}{\\text{3.5}}\]'\
         '\[\\text{AD}=tan(\\text{32})\\times \\text{3.5}\]'\
         '\[\\text{AD}\simeq\\text{2.19}\]'
@@ -293,7 +293,7 @@ def test_t6_trigo_equalities_autoresolution2(t6):
     assert eq1.auto_resolution(dont_display_equations_name=True,
                                skip_fraction_simplification=True,
                                decimal_result=1) == \
-        '\[cos(\widehat{\\text{DZA}})=\\frac{\\text{ZA}}{\\text{DZ}}\]'\
-        '\[cos(\\text{80})=\\frac{\\text{53}}{\\text{DZ}}\]'\
-        '\[\\text{DZ}=\\frac{\\text{53}}{cos(\\text{80})}\]'\
-        '\[\\text{DZ}\simeq\\text{305.2}\]'
+        '\[cos(\widehat{\\text{DZA}})=\\frac{\\text{ZA}}{\\text{ZD}}\]'\
+        '\[cos(\\text{80})=\\frac{\\text{53}}{\\text{ZD}}\]'\
+        '\[\\text{ZD}=\\frac{\\text{53}}{cos(\\text{80})}\]'\
+        '\[\\text{ZD}\simeq\\text{305.2}\]'

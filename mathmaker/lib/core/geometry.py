@@ -938,16 +938,16 @@ class RightTriangle(Triangle):
     def trigonometric_ratios(self):
         """Definitions of the three standard trigonometric ratios."""
         return {'cos': {self.angle[0]: [self.side[0].length_name,
-                                        self.hypotenuse.length_name],
-                        self.angle[2]: [self.side[1].length_name,
+                                        self.hypotenuse.length_name[::-1]],
+                        self.angle[2]: [self.side[1].length_name[::-1],
                                         self.hypotenuse.length_name]},
-                'sin': {self.angle[0]: [self.side[1].length_name,
+                'sin': {self.angle[0]: [self.side[1].length_name[::-1],
                                         self.hypotenuse.length_name],
                         self.angle[2]: [self.side[0].length_name,
-                                        self.hypotenuse.length_name]},
+                                        self.hypotenuse.length_name[::-1]]},
                 'tan': {self.angle[0]: [self.side[1].length_name,
-                                        self.side[0].length_name],
-                        self.angle[2]: [self.side[0].length_name,
+                                        self.side[0].length_name[::-1]],
+                        self.angle[2]: [self.side[0].length_name[::-1],
                                         self.side[1].length_name]}
                 }
 
@@ -1013,15 +1013,21 @@ class RightTriangle(Triangle):
             self.side[upside_nb].label = Value('?')
         else:
             self.side[upside_nb].label = Value(up_length_val, unit=length_unit)
-            subst_dict[Value(self.side[upside_nb].length_name)] = \
-                Value(up_length_val)
+            length_name = self.side[upside_nb].length_name
+            if ((trigo_fct in ['cos', 'tan'] and angle_nb == 2)
+                or (trigo_fct == 'sin' and angle_nb == 0)):
+                length_name = length_name[::-1]
+            subst_dict[Value(length_name)] = Value(up_length_val)
         if down_length_val is None:
             self.side[downside_nb].label = Value('?')
         else:
             self.side[downside_nb].label = Value(down_length_val,
                                                  unit=length_unit)
-            subst_dict[Value(self.side[downside_nb].length_name)] = \
-                Value(down_length_val)
+            length_name = self.side[downside_nb].length_name
+            if ((trigo_fct in ['cos', 'tan'] and angle_nb == 0)
+                or (trigo_fct == 'sin' and angle_nb == 2)):
+                length_name = length_name[::-1]
+            subst_dict[Value(length_name)] = Value(down_length_val)
         self._subst_dict = subst_dict
         self._trigo_setup = str(trigo_fct) + '_' + str(angle_nb)
 
