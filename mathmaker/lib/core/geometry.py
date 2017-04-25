@@ -1070,6 +1070,38 @@ class RightTriangle(Triangle):
                                   [Item((1)), Item(tr[trigo_fct][angle][1])]],
                                  subst_dict=subst_dict)
 
+    def side_opposite_to(self, angle=None):
+        """
+        Return the side opposite to given angle.
+
+        :param angle: one of the acute angles
+        :type angle: must be self.angle[0] or self.angle[2]
+        """
+        if angle not in [self.angle[0], self.angle[2]]:
+            raise ValueError('Parameter "angle" must be defined as '
+                             'self.angle[0] or self.angle[2]')
+        else:
+            if angle is self.angle[0]:
+                return self.side[1]
+            else:
+                return self.side[0]
+
+    def side_adjacent_to(self, angle=None):
+        """
+        Return the side adjacent to given angle.
+
+        :param angle: one of the acute angles
+        :type angle: must be self.angle[0] or self.angle[2]
+        """
+        if angle not in [self.angle[0], self.angle[2]]:
+            raise ValueError('Parameter "angle" must be defined as '
+                             'self.angle[0] or self.angle[2]')
+        else:
+            if angle is self.angle[0]:
+                return self.side[0]
+            else:
+                return self.side[1]
+
 
 class InterceptTheoremConfiguration(Triangle):
 

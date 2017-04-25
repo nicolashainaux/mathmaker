@@ -348,3 +348,19 @@ def test_t6_trigo_equalities_autoresolution2(t6):
         '\[cos(\\text{80})=\\frac{\\text{53}}{\\text{ZD}}\]'\
         '\[\\text{ZD}=\\frac{\\text{53}}{cos(\\text{80})}\]'\
         '\[\\text{ZD}\simeq\\text{305.2}\]'
+
+
+def test_t6_sides(t6):
+    """Check side_adjacent_to() and side_opposite_to()"""
+    assert t6.side_adjacent_to(angle=t6.angle[0]).length_name == 'ZA'
+    assert t6.side_adjacent_to(angle=t6.angle[2]).length_name == 'AD'
+    assert t6.side_opposite_to(angle=t6.angle[0]).length_name == 'AD'
+    assert t6.side_opposite_to(angle=t6.angle[2]).length_name == 'ZA'
+    with pytest.raises(ValueError):
+        assert t6.side_adjacent_to().length_name == 'ZA'
+    with pytest.raises(ValueError):
+        assert t6.side_adjacent_to(angle=t6.angle[1]).length_name == 'ZA'
+    with pytest.raises(ValueError):
+        assert t6.side_opposite_to().length_name == 'ZA'
+    with pytest.raises(ValueError):
+        assert t6.side_opposite_to(angle=t6.angle[1]).length_name == 'ZA'
