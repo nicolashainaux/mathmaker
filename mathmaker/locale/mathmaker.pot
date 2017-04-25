@@ -1395,31 +1395,32 @@ msgstr ""
 msgid "Algebra: expand and reduce double brackets"
 msgstr ""
 
-#: data/frameworks/geometry/trigonometry/trigonometry_calculate_angle.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_cos_angle.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
-#: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:24
-#: data/frameworks/geometry/trigonometry/trigonometry_tan_angle.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_sin_formulae.xml:6
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
-#: data/frameworks/geometry/trigonometry/trigonometry_tan_formulae.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_formulae.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
-#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_angle.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_angle.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_vocabulary.xml:6
 #: data/frameworks/geometry/trigonometry/trigonometry_cos_formulae.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_sin_angle.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_formulae.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
+#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_formulae.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
+#: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:24
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
 #: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_formulae.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_angle.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_angle.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
 msgid "Example of solutions:"
 msgstr ""
 
@@ -1707,7 +1708,7 @@ msgid ""
 "Calculate the missing angle in each triangle. Round the results to the unit."
 msgstr ""
 
-#: lib/sheet/exercise/question/geometry_modules/trigonometry_formula.py:79
+#: lib/sheet/exercise/question/geometry_modules/trigonometry_formula.py:80
 #, python-brace-format
 msgid "The formula is: {formula}"
 msgstr ""
@@ -1728,14 +1729,38 @@ msgstr ""
 msgid "What is {the_formula_of_trigo_fct} of {acute_angle} ?"
 msgstr ""
 
-#: lib/sheet/exercise/question/geometry_modules/trigonometry_formula.py:62
+#: lib/sheet/exercise/question/geometry_modules/trigonometry_formula.py:63
 msgid "the formula of cosine"
 msgstr ""
 
-#: lib/sheet/exercise/question/geometry_modules/trigonometry_formula.py:63
+#: lib/sheet/exercise/question/geometry_modules/trigonometry_formula.py:64
 msgid "the formula of sine"
 msgstr ""
 
-#: lib/sheet/exercise/question/geometry_modules/trigonometry_formula.py:64
+#: lib/sheet/exercise/question/geometry_modules/trigonometry_formula.py:65
 msgid "the formula of tangent"
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/trigonometry_vocabulary.py:65
+#, python-brace-format
+msgid "Which side is adjacent to {acute_angle} ?"
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/trigonometry_vocabulary.py:66
+#, python-brace-format
+msgid "Which side is opposite to {acute_angle} ?"
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/trigonometry_vocabulary.py:76
+#, python-brace-format
+msgid "The side adjacent to {acute_angle} is: {correct_answer}"
+msgstr ""
+
+#: lib/sheet/exercise/question/geometry_modules/trigonometry_vocabulary.py:78
+#, python-brace-format
+msgid "The side opposite to {acute_angle} is: {correct_answer}"
+msgstr ""
+
+#: data/frameworks/geometry/trigonometry/trigonometry_vocabulary.xml:6
+msgid "Vocabulary for trigonometry"
 msgstr ""
