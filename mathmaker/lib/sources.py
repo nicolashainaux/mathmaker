@@ -46,6 +46,9 @@ def generate_values(source_id):
     elif source_id == 'trigo_functions':
         return ['cos', 'cos', 'sin', 'sin', 'tan', 'tan']
 
+    elif source_id == 'trigo_vocabulary':
+        return ['adjacent', 'adjacent', 'opposite', 'opposite']
+
     elif source_id == 'decimal_and_10_100_1000_for_multi':
         box_10_100_1000 = [10, 100, 1000]
         result = set()
