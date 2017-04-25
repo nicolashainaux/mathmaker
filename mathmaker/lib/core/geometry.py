@@ -955,7 +955,9 @@ class RightTriangle(Triangle):
                                angle_val=None,
                                up_length_val=None,
                                down_length_val=None,
-                               length_unit=None):
+                               length_unit=None,
+                               only_mark_unknown_angle=False,
+                               mark_angle='simple'):
         """
         Setup labels, determine subst_dict and stores configuration details.
 
@@ -1002,9 +1004,12 @@ class RightTriangle(Triangle):
         upside_nb = side_nb[trigo_fct][angle_nb]['up']
         downside_nb = side_nb[trigo_fct][angle_nb]['down']
         subst_dict = {}
-        self.angle[angle_nb].mark = 'simple'
+        self.angle[angle_nb].mark = mark_angle
         if angle_val is None:
-            self.angle[angle_nb].label = Value('?')
+            if not only_mark_unknown_angle:
+                self.angle[angle_nb].label = Value('?')
+            else:
+                self.angle[angle_nb].label = Value('')
         else:
             self.angle[angle_nb].label = Value(angle_val, unit='\\textdegree')
             subst_dict[AngleItem(from_this_angle=self.angle[angle_nb])] = \

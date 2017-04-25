@@ -55,7 +55,8 @@ class sub_object(submodule.structure):
             trigo_fct=variant,
             down_length_val=Value(''),
             up_length_val=Value(''),
-            length_unit=self.length_unit)
+            length_unit=self.length_unit,
+            only_mark_unknown_angle=True)
 
         self.trigo_fct = variant
         self.the_formula_of_trigo_fct = {
