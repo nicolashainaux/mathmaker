@@ -406,7 +406,7 @@ class Item(Exponented):
     ##
     #   @brief Returns the value of a numerically evaluable Item
     #   @warning Relays an exception if the exponent is not Exponented|Value
-    def evaluate(self):
+    def evaluate(self, **options):
         expon = self.exponent.evaluate()
 
         if self.is_numeric():
@@ -1359,7 +1359,7 @@ class Function(Item):
         log.debug('Leaving, returning ' + sign + resulting_string)
         return sign + resulting_string
 
-    def evaluate(self):
+    def evaluate(self, **options):
         """Return the value of f(number)."""
         num = Item((self.sign,
                     self.fct(self.num_val.evaluate()),

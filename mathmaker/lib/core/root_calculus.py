@@ -116,7 +116,7 @@ class Evaluable(Printable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the numeric value of the object
-    def evaluate(self):
+    def evaluate(self, **options):
         raise error.MethodShouldBeRedefined(self, 'evaluate')
 
     # --------------------------------------------------------------------------
@@ -670,7 +670,7 @@ class Value(Signed):
     ##
     #   @brief Returns the value of a numeric Value
     #   @warning Raise an exception if not numeric
-    def evaluate(self):
+    def evaluate(self, **options):
         if not self.is_numeric():
             raise error.UncompatibleType(self, "numeric Value")
         else:
