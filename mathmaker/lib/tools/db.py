@@ -201,7 +201,12 @@ class source(object):
     #   @brief  Handles the choice of the next value to return from the
     #           database
     def next(self, **kwargs):
-        t = self._query_result(self._cmd(**kwargs), **kwargs)[0]
+        sql_query = self._cmd(**kwargs)
+        query_result = self._query_result(sql_query, **kwargs)
+        if not len(query_result):
+            raise RuntimeError('No result from database query. Command was:\n'
+                               + str(sql_query))
+        t = query_result[0]
         self._timestamp(str(self.idcol), str(t[0]), **kwargs)
         self._lock(t[1:len(t)], **kwargs)
         if len(t) == 2:
