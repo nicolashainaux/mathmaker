@@ -1,6 +1,15 @@
 Changelog
 =========
 
+New in version 0.7.1dev4 (2017-05-03)
+-------------------------------------
+
+* New sheets about trigonometry:
+  - vocabulary in the right triangle
+  - write the correct formulae
+  - calculate a length
+  - calculate an angle
+
 New in version 0.7.1dev3 (2016-10-21)
 -------------------------------------
 
