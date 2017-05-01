@@ -20,8 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import os
 import pytest
+import sqlite3
 
+from mathmaker import settings
 from mathmaker.lib.tools import db as database
 
 
@@ -30,3 +33,23 @@ def test_empty_query_result():
     with pytest.raises(RuntimeError):
         next(database.source('w3l', ['id', 'word'],
                              language='non-existing-code'))
+
+
+def test_wnl():
+    """Check a request in all languages for wNl databases is never empty."""
+    for lang in next(os.walk(settings.localedir))[1]:
+        settings.language = lang
+        for i in [2, 3, 4, 5, 6, 7]:
+            try:
+                assert len(next(database.source('w' + str(i) + 'l',
+                                                ['id', 'word'],
+                                language=lang)))
+            except sqlite3.OperationalError as e:
+                # We ignore the non-existing tables among the ones that are
+                # tested here, because we know there are. Any other exception
+                # must be raised again.
+                if (len(e.args) == 1
+                    and e.args[0].startswith('no such table: ')):
+                    pass
+                else:
+                    raise
