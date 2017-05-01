@@ -106,3 +106,99 @@ def test_intercept_theorem_converse_alt2():
     """
     shared.machine.write_out(
         str(S_Generic(XML_SHEETS['intercept_theorem_converse_alt2'])))
+
+
+def test_trigonometry_cos_length():
+    """
+    Check if 'trigonometry_cos_length' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_cos_length'])))
+
+
+def test_trigonometry_sin_length():
+    """
+    Check if 'trigonometry_sin_length' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_sin_length'])))
+
+
+def test_trigonometry_tan_length():
+    """
+    Check if 'trigonometry_tan_length' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_tan_length'])))
+
+
+def test_trigonometry_calculate_length():
+    """
+    Check if 'trigonometry_calculate_length' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_calculate_length'])))
+
+
+def test_trigonometry_cos_angle():
+    """
+    Check if 'trigonometry_cos_angle' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_cos_angle'])))
+
+
+def test_trigonometry_sin_angle():
+    """
+    Check if 'trigonometry_sin_angle' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_sin_angle'])))
+
+
+def test_trigonometry_tan_angle():
+    """
+    Check if 'trigonometry_tan_angle' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_tan_angle'])))
+
+
+def test_trigonometry_calculate_angle():
+    """
+    Check if 'trigonometry_calculate_angle' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_calculate_angle'])))
+
+
+def test_trigonometry_cos_formulae():
+    """
+    Check if 'trigonometry_cos_formulae' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_cos_formulae'])))
+
+
+def test_trigonometry_sin_formulae():
+    """
+    Check if 'trigonometry_sin_formulae' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_sin_formulae'])))
+
+
+def test_trigonometry_tan_formulae():
+    """
+    Check if 'trigonometry_tan_formulae' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_tan_formulae'])))
+
+
+def test_trigonometry_formulae():
+    """
+    Check if 'trigonometry_formulae' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_formulae'])))

@@ -31,7 +31,7 @@ def test_wnl():
     """Checks w*l words are correct."""
     for lang in next(os.walk(settings.localedir))[1]:
         settings.language = lang
-        for n in [4, 5]:
+        for n in [3, 4, 5]:
             if os.path.isfile(settings.localedir + lang
                               + "/LC_MESSAGES/w{}l.po".format(str(n))):
                 words = po_file.get_list_of('words', lang, n)

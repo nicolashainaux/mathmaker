@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFAULT MENTAL CALCULATION SHEET -->
+
+
+<sheet header="" title="Trigonometry" subtitle="" text="Give the cosine formula for the acute angle in each triangle." answers_title="Example of solutions:">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="std" font_size_offset="-1">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default values: id='generic' kind='' subkind='default' -->
+	<exercise q_numbering="alphabetical">
+		<!-- variant can be sin|cos|tan|random
+				 Default values (if variant is not here) will be as if variant="random" -->
+		<!-- no source required for trigonometry_formula questions -->
+		<question kind="trigonometry" subkind="formula" variant="cos" space_after="40.0pt">
+			<nb source="nothing">5</nb>
+		</question>
+
+	</exercise>
+
+
+</sheet>

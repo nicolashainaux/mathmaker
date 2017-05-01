@@ -27,7 +27,7 @@ from mathmaker.lib import error
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.base_calculus import Item, Sum
-from mathmaker.lib.core.calculus import SubstitutableEquality, Equation
+from mathmaker.lib.core.calculus import Equality, Equation
 from .. import submodule
 
 ALL_LENGTHS_TO_CALCULATE = ['oneside', 'onechunk', 'twosides', 'twochunks',
@@ -367,15 +367,15 @@ class sub_object(submodule.structure):
         if variant_key.endswith('true'):
             self.pre_reso0 = self.pre_reso1 = ''
             if labels_conf[6] is True:
-                pre_equality0 = SubstitutableEquality(
+                pre_equality0 = Equality(
                     [Item(self.side0_length_name),
                      Sum([Item(self.small0_length_name),
                           Item(self.chunk0_length_name)
                           ])],
-                    {Value(self.small0_length_name):
-                        Value(self.figure.small[0].length),
-                     Value(self.chunk0_length_name):
-                        Value(self.figure.chunk[0].length)}
+                    subst_dict={Value(self.small0_length_name):
+                                Value(self.figure.small[0].length),
+                                Value(self.chunk0_length_name):
+                                Value(self.figure.chunk[0].length)}
                 )
                 pre_equality0_str = pre_equality0.into_str()
                 pre_equation0 = Equation(pre_equality0.substitute())
@@ -387,15 +387,15 @@ class sub_object(submodule.structure):
                         unit=self.length_unit,
                         underline_result=True)
             if labels_conf[7] is True:
-                pre_equality1 = SubstitutableEquality(
+                pre_equality1 = Equality(
                     [Item(self.side1_length_name),
                      Sum([Item(self.small1_length_name),
                           Item(self.chunk1_length_name)
                           ])],
-                    {Value(self.small1_length_name):
-                        Value(self.figure.small[2].length),
-                     Value(self.chunk1_length_name):
-                        Value(self.figure.chunk[1].length)}
+                    subst_dict={Value(self.small1_length_name):
+                                Value(self.figure.small[2].length),
+                                Value(self.chunk1_length_name):
+                                Value(self.figure.chunk[1].length)}
                 )
                 pre_equality1_str = pre_equality1.into_str()
                 pre_equation1 = Equation(pre_equality1.substitute())
@@ -415,11 +415,9 @@ class sub_object(submodule.structure):
                 preamble = _('Note: {pre_reso1} {newline} ')
 
         self.ratios = shared.machine.write_math_style1(
-            self.figure.ratios_equalities()
-            .into_str(as_a_quotients_equality=True))
+            self.figure.ratios_equalities().into_str())
         self.ratios_substituted = shared.machine.write_math_style1(
-            self.figure.ratios_equalities_substituted()
-            .into_str(as_a_quotients_equality=True))
+            self.figure.ratios_equalities_substituted().into_str())
 
         self.resolution0 = self.figure.ratios_equalities_substituted()\
             .into_crossproduct_equation(Item(lengths_to_calculate[0]))\
@@ -446,13 +444,15 @@ class sub_object(submodule.structure):
         chunks_part = ''
         if len(chunks_to_calculate):
             if chunks_to_calculate[0] is not None:
-                chunk_equality0 = SubstitutableEquality(
+                chunk_equality0 = Equality(
                     [Item(chunks_to_calculate[0]),
                      Sum([Item(chunks_infos[0][0]),
                           Item(('-', chunks_infos[0][1]))
                           ])],
-                    {Value(chunks_infos[0][0]): Value(chunks_infos[0][2]),
-                     Value(chunks_infos[0][1]): Value(chunks_infos[0][3])})
+                    subst_dict={Value(chunks_infos[0][0]):
+                                Value(chunks_infos[0][2]),
+                                Value(chunks_infos[0][1]):
+                                Value(chunks_infos[0][3])})
                 chunk_equality0_str = chunk_equality0.into_str()
                 chunk_equation0 = Equation(chunk_equality0.substitute())
                 self.chunk_reso0 = shared.machine.write_math_style1(
@@ -467,7 +467,7 @@ class sub_object(submodule.structure):
                 chunks_part += '~\n\n\\newline\\newline\\newline\\newline\n\n'
 
             if len(chunks_to_calculate) == 2:
-                chunk_equality1 = SubstitutableEquality(
+                chunk_equality1 = Equality(
                     [Item(chunks_to_calculate[1]),
                      Sum([Item(chunks_infos[1][0]),
                           Item(('-', chunks_infos[1][1]))

@@ -24,6 +24,7 @@ import pytest
 
 from mathmaker.lib.common.cst import HUNDREDTH
 from mathmaker.lib.core.root_calculus import Value
+from mathmaker.lib.core.base_calculus import AngleItem
 from mathmaker.lib.core.calculus import Equation
 from mathmaker.lib.core.geometry import RightTriangle
 from mathmaker.lib.common import pythagorean
@@ -42,6 +43,14 @@ def t4():
     t4.angle[2].mark = "dotted"
     t4.angle[0].label = Value(30, unit="\\textdegree")
     return t4
+
+
+@pytest.fixture
+def t6():
+    t6 = RightTriangle((('Z', 'A', 'D'),
+                        {'leg0': 3, 'leg1': 2.5}),
+                       rotate_around_isobarycenter=90)
+    return t6
 
 
 def test_t1_into_euk():
@@ -180,6 +189,45 @@ def test_t4_pyth_eq_autoresolution(t4):
                 '\[\\text{OP}\\simeq6.84\\text{ cm}\]')
 
 
+def test_t4_trigo_equalities(t4):
+    """Check the trigonometric equalities created from t4."""
+    eq1 = t4.trigonometric_equality(angle=t4.angle[0], trigo_fct='cos')
+    eq2 = t4.trigonometric_equality(angle=t4.angle[0], trigo_fct='sin')
+    eq3 = t4.trigonometric_equality(angle=t4.angle[0], trigo_fct='tan')
+    eq4 = t4.trigonometric_equality(angle=t4.angle[2], trigo_fct='cos')
+    eq5 = t4.trigonometric_equality(angle=t4.angle[2], trigo_fct='sin')
+    eq6 = t4.trigonometric_equality(angle=t4.angle[2], trigo_fct='tan')
+    assert eq1.printed == \
+        'cos(\widehat{\\text{PLO}})=\\frac{\\text{LO}}{\\text{LP}}'
+    assert eq2.printed == \
+        'sin(\widehat{\\text{PLO}})=\\frac{\\text{PO}}{\\text{PL}}'
+    assert eq3.printed == \
+        'tan(\widehat{\\text{PLO}})=\\frac{\\text{OP}}{\\text{OL}}'
+    assert eq4.printed == \
+        'cos(\widehat{\\text{OPL}})=\\frac{\\text{PO}}{\\text{PL}}'
+    assert eq5.printed == \
+        'sin(\widehat{\\text{OPL}})=\\frac{\\text{LO}}{\\text{LP}}'
+    assert eq6.printed == \
+        'tan(\widehat{\\text{OPL}})=\\frac{\\text{OL}}{\\text{OP}}'
+
+
+def test_t4_trigo_equalities_autoresolution(t4):
+    """Check the autoresolution of a trigonometric equality created from t4."""
+    alpha_i = AngleItem(from_this_angle=t4.angle[0])
+    eq1 = t4.trigonometric_equality(angle=t4.angle[0],
+                                    trigo_fct='cos',
+                                    subst_dict={Value('LP'): Value(10),
+                                                alpha_i: Value(40)
+                                                })
+    assert eq1.auto_resolution(dont_display_equations_name=True,
+                               skip_fraction_simplification=True,
+                               decimal_result=2) == \
+        '\[cos(\widehat{\\text{PLO}})=\\frac{\\text{LO}}{\\text{LP}}\]'\
+        '\[cos(\\text{40})=\\frac{\\text{LO}}{\\text{10}}\]'\
+        '\[\\text{LO}=cos(\\text{40})\\times \\text{10}\]'\
+        '\[\\text{LO}\simeq\\text{7.66}\]'
+
+
 def test_t5_into_euk():
     """Check RightTriangle's generated euk file."""
     t5 = RightTriangle((("P", "A", "X"),
@@ -226,3 +274,93 @@ def test_hypmatching_36():
     """Check if the hypotenuses matching a leg of 36 are correct."""
     assert pythagorean.get_legs_matching_given_leg(36) == \
         [15, 27, 48, 77, 105, 160]
+
+
+def test_t6_setup_for_trigonometry_errors(t6):
+    """Check errors raised by setup_for_trigonometry()."""
+    with pytest.raises(ValueError):
+        t6.setup_for_trigonometry(angle_nb=0, trigo_fct='tan',
+                                  angle_val=Value(32, unit='\\textdegree'),
+                                  down_length_val=Value(3.5, unit='cm'),
+                                  up_length_val=Value(3.5, unit='cm'),
+                                  length_unit='cm')
+    with pytest.raises(ValueError):
+        t6.setup_for_trigonometry(angle_nb=0, trigo_fct='tan',
+                                  angle_val=Value(32, unit='\\textdegree'),
+                                  length_unit='cm')
+    with pytest.raises(ValueError):
+        t6.setup_for_trigonometry(angle_nb=1, trigo_fct='tan',
+                                  angle_val=Value(32, unit='\\textdegree'),
+                                  up_length_val=Value(3.5, unit='cm'),
+                                  length_unit='cm')
+    with pytest.raises(ValueError):
+        t6.setup_for_trigonometry(angle_nb=0, trigo_fct='tas',
+                                  angle_val=Value(32, unit='\\textdegree'),
+                                  up_length_val=Value(3.5, unit='cm'),
+                                  length_unit='cm')
+    with pytest.raises(ValueError):
+        t6.setup_for_trigonometry(angle_nb=0, trigo_fct='tan',
+                                  angle_val=Value(32, unit='\\textdegree'),
+                                  up_length_val=Value(3.5, unit='cm'))
+
+
+def test_t6_trigonometric_equality_errors(t6):
+    """Check errors raised by trigonometric_equality()."""
+    with pytest.raises(ValueError):
+        t6.trigonometric_equality()
+    with pytest.raises(ValueError):
+        t6.trigonometric_equality(angle=t6.angle[0])
+    with pytest.raises(ValueError):
+        t6.trigonometric_equality(trigo_fct='cos')
+    with pytest.raises(ValueError):
+        t6.trigonometric_equality(angle=t6.angle[1], trigo_fct='cos')
+    with pytest.raises(ValueError):
+        t6.trigonometric_equality(angle=t6.angle[2], trigo_fct='sit')
+
+
+def test_t6_trigo_equalities_autoresolution(t6):
+    """Check the autoresolution of a trigonometric equality created from t6."""
+    t6.setup_for_trigonometry(angle_nb=0, trigo_fct='tan',
+                              angle_val=Value(32, unit='\\textdegree'),
+                              down_length_val=Value(3.5, unit='cm'),
+                              length_unit='cm')
+    eq1 = t6.trigonometric_equality(autosetup=True)
+    assert eq1.auto_resolution(dont_display_equations_name=True,
+                               skip_fraction_simplification=True,
+                               decimal_result=2) == \
+        '\[tan(\widehat{\\text{DZA}})=\\frac{\\text{AD}}{\\text{AZ}}\]'\
+        '\[tan(\\text{32})=\\frac{\\text{AD}}{\\text{3.5}}\]'\
+        '\[\\text{AD}=tan(\\text{32})\\times \\text{3.5}\]'\
+        '\[\\text{AD}\simeq\\text{2.19}\]'
+
+
+def test_t6_trigo_equalities_autoresolution2(t6):
+    """Check the autoresolution of a trigonometric equality created from t6."""
+    t6.setup_for_trigonometry(angle_nb=0, trigo_fct='cos',
+                              angle_val=Value(80, unit='\\textdegree'),
+                              up_length_val=Value(53, unit='km'),
+                              length_unit='km')
+    eq1 = t6.trigonometric_equality(autosetup=True)
+    assert eq1.auto_resolution(dont_display_equations_name=True,
+                               skip_fraction_simplification=True,
+                               decimal_result=1) == \
+        '\[cos(\widehat{\\text{DZA}})=\\frac{\\text{ZA}}{\\text{ZD}}\]'\
+        '\[cos(\\text{80})=\\frac{\\text{53}}{\\text{ZD}}\]'\
+        '\[\\text{ZD}=\\frac{\\text{53}}{cos(\\text{80})}\]'\
+        '\[\\text{ZD}\simeq\\text{305.2}\]'
+
+
+def test_t6_sides(t6):
+    """Check side_adjacent_to() and side_opposite_to()"""
+    assert t6.side_adjacent_to(angle=t6.angle[0]).length_name == 'ZA'
+    assert t6.side_adjacent_to(angle=t6.angle[2]).length_name == 'AD'
+    assert t6.side_opposite_to(angle=t6.angle[0]).length_name == 'AD'
+    assert t6.side_opposite_to(angle=t6.angle[2]).length_name == 'ZA'
+    with pytest.raises(ValueError):
+        assert t6.side_adjacent_to().length_name == 'ZA'
+    with pytest.raises(ValueError):
+        assert t6.side_adjacent_to(angle=t6.angle[1]).length_name == 'ZA'
+    with pytest.raises(ValueError):
+        assert t6.side_opposite_to().length_name == 'ZA'
+    with pytest.raises(ValueError):
+        assert t6.side_opposite_to(angle=t6.angle[1]).length_name == 'ZA'

@@ -13,6 +13,9 @@ dbg:
         into_str: INFO
         calculate_next_step: INFO
         eq: INFO
+    Function:
+        into_str: INFO
+        substitute: INFO
     Quotient:
         into_str: INFO
     Fraction:
@@ -26,6 +29,7 @@ dbg:
     Product:
         into_str: INFO
         requires_inner_brackets: INFO
+        calculate_next_step: INFO
         expand_and_reduce_next_step: INFO
         is_reducible: INFO
         get_factors_list: INFO
@@ -44,3 +48,5 @@ dbg:
         solve_next_step: INFO
     Table_UP:
         init: INFO
+    Utils:
+        check_lexicon_for_substitution: INFO

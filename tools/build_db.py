@@ -28,10 +28,12 @@ It actually erases the database and builds it entirely.
 It will add all entries:
 - from files mini_pb_addi_direct.xml,mini_pb_divi_direct.xml,
   mini_pb_subtr_direct.xml and mini_pb_multi_direct.xml from data/wordings/,
+- from all w3l.po files from locale/*/LC_MESSAGES/
 - from all w4l.po files from locale/*/LC_MESSAGES/
 - from all w5l.po files from locale/*/LC_MESSAGES/
 - from all *_names.po files from locale/*/LC_MESSAGES/
 - all single ints from 2 to 500
+- all single decimal numbers with one digit from 0.0 to 100.0
 - all integers pairs from 2 to 500
 - a list of "clever" couples of (integer, decimal) (for multiplications)
 - a list of angles' ranges (around 0, 90, 180, 270)
@@ -62,6 +64,9 @@ def __main__():
     db = sqlite3.connect(settings.path.db_dist)
 
     # Creation of the tables
+    db.execute('''CREATE TABLE w3l
+              (id INTEGER PRIMARY KEY,
+              language TEXT, word TEXT, drawDate INTEGER)''')
     db.execute('''CREATE TABLE w4l
               (id INTEGER PRIMARY KEY,
               language TEXT, word TEXT, drawDate INTEGER)''')
@@ -79,6 +84,8 @@ def __main__():
               q_id TEXT, drawDate INTEGER)''')
     db.execute('''CREATE TABLE single_ints
               (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
+    db.execute('''CREATE TABLE single_deci1
+              (id INTEGER PRIMARY KEY, nb1 DECIMAL(4, 1), drawDate INTEGER)''')
     db.execute('''CREATE TABLE angle_ranges
               (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
               drawDate INTEGER)''')
@@ -99,7 +106,7 @@ def __main__():
     # Extract data from po(t) files and insert them into the db
     for lang in next(os.walk(settings.localedir))[1]:
         settings.language = lang
-        for n in [4, 5]:
+        for n in [3, 4, 5]:
             if os.path.isfile(settings.localedir + lang
                               + "/LC_MESSAGES/w{}l.po".format(str(n))):
                 words = po_file.get_list_of('words', lang, n)
@@ -191,6 +198,13 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
+    # Single decimal numbers
+    db_rows = [(i / 10, 0) for i in range(1001)]
+    db.executemany("INSERT "
+                   "INTO single_deci1(nb1, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+
     # Angle ranges
     db_rows = [(i - 20, i + 20, 0) for i in [0, 90, 180, 270]]
     db.executemany("INSERT "
@@ -200,6 +214,7 @@ def __main__():
 
     db.commit()
     db.close()
+
 
 if __name__ == '__main__':
     __main__()

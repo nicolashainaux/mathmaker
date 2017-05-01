@@ -31,7 +31,7 @@ from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
 
 from mathmaker.lib import error, is_
 from mathmaker.lib.maths_lib import deg_to_rad, round
-from mathmaker.lib.core.base import Drawable
+from mathmaker.lib.core.base import Drawable, Printable
 from mathmaker.lib.core.base_calculus import Value
 from mathmaker.lib.common.latex import MARKUP
 
@@ -242,42 +242,31 @@ class Segment(Drawable):
     def points(self):
         return self._points
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the label of the Segment
     @property
     def label(self):
+        """Label of the Segment (the displayed information)."""
         return self._label
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the length of the Segment
     @property
     def real_length(self):
+        """Real length (build length) of the Segment."""
         x_delta = self.points[0].x - self.points[1].x
         y_delta = self.points[0].y - self.points[1].y
         return math.hypot(x_delta, y_delta)
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the "fake" length of the Segment (the one used in a
-    #          problem)
     @property
     def length(self):
+        """Fake length of the Segment (the one used in a problem)."""
         return self._length
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the length_has_been_set flag of the Segment
     @property
     def length_has_been_set(self):
+        """Whether the (fake) length has been set or not."""
         return self._length_has_been_set
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the length name of the Segment
     @property
     def length_name(self):
+        """Length's name of the Segment, like AB."""
         return self._length_name
 
     def invert_length_name(self):
@@ -519,6 +508,11 @@ class Ray(Drawable):
             self._name += arg[0].name + arg[1].name
             self._name += MARKUP['closing_bracket']
 
+        elif isinstance(arg, Ray):
+            self._point0 = arg._point0.clone()
+            self._point1 = arg._point1.clone()
+            self._name = arg._name
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -526,7 +520,7 @@ class Ray(Drawable):
 ##
 # @class Angle
 # @brief
-class Angle(Drawable):
+class Angle(Drawable, Printable):
 
     # --------------------------------------------------------------------------
     ##
@@ -575,13 +569,32 @@ class Angle(Drawable):
             self._name = MARKUP['opening_widehat']
             self._name += arg[0].name + arg[1].name + arg[2].name
             self._name += MARKUP['closing_widehat']
+            self._label_display_angle = round(Decimal(str(self._measure)),
+                                              Decimal('0.1'),
+                                              rounding=ROUND_HALF_UP) / 2
+        elif isinstance(arg, Angle):
+            self._ray0 = arg._ray0.clone()
+            self._ray1 = arg._ray1.clone()
+            self._points = [p.clone() for p in arg._points]
+            self._measure = arg._measure
+            self._mark = arg._mark
+            self._label = arg._label.clone()
+            self._name = arg._name
+            self._label_display_angle = arg._label_display_angle
         else:
             raise error.WrongArgument(' (Point, Point, Point) ',
                                       str(type(arg)))
 
-        self._label_display_angle = round(Decimal(str(self._measure)),
-                                          Decimal('0.1'),
-                                          rounding=ROUND_HALF_UP) / 2
+    def __repr__(self):
+        return ' ∡ ' + self._name + ' ∡ '
+
+    def __hash__(self):
+        return hash(self._name)
+
+    def __eq__(self, other_objct):
+        if not isinstance(other_objct, Angle):
+            return False
+        return self._name == other_objct._name
 
     # --------------------------------------------------------------------------
     ##
@@ -625,16 +638,14 @@ class Angle(Drawable):
     def vertex(self):
         return self._points[1]
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Sets the label of the angle
     @label.setter
     def label(self, arg):
+        """Properly set the Angle's label."""
         if type(arg) == str or isinstance(arg, Value):
             self._label = Value(arg)
-
         else:
-            raise error.WrongArgument(arg, 'str or Value')
+            raise TypeError('Expected a str or a Value. Got {t} instead.'
+                            .format(t=str(type(arg))))
 
     # --------------------------------------------------------------------------
     ##
@@ -662,3 +673,6 @@ class Angle(Drawable):
 
         else:
             raise error.WrongArgument(arg, 'str')
+
+    def into_str(self, **options):
+        return self._name

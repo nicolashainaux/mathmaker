@@ -27,7 +27,6 @@ import copy
 import re
 
 from mathmaker import settings
-from mathmaker.lib import error
 from mathmaker.lib import shared
 from mathmaker.lib.core.root_calculus import Unit, Value
 from mathmaker.lib.common.cst import (UNIT_KINDS, COMMON_LENGTH_UNITS,
@@ -261,18 +260,20 @@ def cut_off_hint_from(sentence: str) -> tuple:
     >>> cut_off_hint_from("Two hints: |hint:unit| |hint:something_else|")
     ('Two hints: |hint:unit|', 'something_else')
     """
+    if sentence is '':
+        return ('', '')
     last_word = sentence.split()[-1:][0]
-    hint_block = ""
+    hint_block = ''
     if (is_wrapped(last_word, braces='||')
         and last_word[1:-1].startswith('hint:')):
         # __
         hint_block = last_word
     if len(hint_block):
-        new_s = " ".join(w for w in sentence.split() if w != hint_block)
+        new_s = ' '.join(w for w in sentence.split() if w != hint_block)
         hint = hint_block[1:-1].split(sep=':')[1]
         return (new_s, hint)
     else:
-        return (sentence, "")
+        return (sentence, '')
 
 
 def handle_valueless_names_tags(arg: object, sentence: str):
@@ -370,7 +371,9 @@ def handle_valueless_unit_tags(arg: object, sentence: str):
             elif unit_kind in ['area', 'volume']:
                 area_or_volume_tags.append(vu)
             else:
-                raise error.OutOfRangeArgument(unit_kind, str(d.keys()))
+                raise ValueError('This kind of unit: ' + str(unit_kind)
+                                 + ' does not belong to the expected values: '
+                                 + str(d.keys()))
     for vu in area_or_volume_tags:
         unit_kind, unit_id = vu.split(sep="_")
         val = random.choice(d['length'])
@@ -516,7 +519,7 @@ def wrap_latex_keywords(s: str) -> str:
     Replace some {kw} by {{kw}}, to prevent format() from using them as keys.
     """
     # First, we replace the {numbers} by {{numbers}}
-    p = re.compile(r'{(\d{1,}\.?\,?\d*(?:pt|em|cm)*)}', re.LOCALE)
+    p = re.compile(r'{(\d{1,}\.?\,?\d*(?:pt|em|cm)*)}')
     s = p.sub(r'{{\1}}', s)
     for w in ['multicols', 'multicols*', 'tabular', 'tikzpicture',
               '\centering', 'll']:
@@ -532,12 +535,12 @@ def setup_wording_format_of(w_object: object, w_prefix=''):
     w_object.wording will also be modified in the process.
 
     For instance, if w_object.wording is:
-    "Here are one {name}, {nb1} {length_unit1} of roads, and a square of
+    "Here are one {name}, {nb1} {length_unit1} of roads, and a cube of
     {nb2} {volume_unit=cm}. What is the side's length of the
     cube? \|hint:length_unit\|"
 
     Then w_object.wording becomes:
-    "Here are one {name}, {nb1_length_unit1} of roads, and a square of
+    "Here are one {name}, {nb1_length_unit1} of roads, and a cube of
     {nb2_volume_unit}. What is the side's length of the
     cube?"
 
@@ -584,9 +587,10 @@ def setup_wording_format_of(w_object: object, w_prefix=''):
         if hasattr(w_object, 'length_' + unit_id):
             setattr(w_object, hint, getattr(w_object, 'length_' + unit_id))
         else:
-            raise error.ImpossibleAction("display " + hint + " as hint while "
-                                         "no length_" + unit_id + " has "
-                                         "been defined already.")
+            raise RuntimeError("Impossible to display " + hint
+                               + " as hint while "
+                               "no length_" + unit_id + " has "
+                               "been defined already.")
 
     merge_nb_unit_pairs(w_object)
     w_object_wording = getattr(w_object, w_prefix + 'wording')
@@ -639,7 +643,7 @@ def insert_nonbreaking_spaces(sentence: str):
     """
     logger = settings.dbg_logger.getChild('wording.insert_nonbreaking_spaces')
     nb_space = shared.markup['nonbreaking_space']
-    p = re.compile(r'(\d)(\s)(\w+)', re.LOCALE)
+    p = re.compile(r'(\d)(\s)(\w+)')
     logger.debug(sentence + "\n")
     sentence = p.sub(r'\1' + nb_space + r'\3', sentence)
     logger.debug("--> " + sentence + "\n")

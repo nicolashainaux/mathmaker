@@ -72,13 +72,15 @@ def check_dependency(name: str, goal: str, path_to: str,
                                             stdin=the_call.stdout,
                                             stdout=subprocess.PIPE)
                                      .communicate()[0].decode())[4]
-        v = temp.split(sep='-')[1]
+        if len(temp.split(sep='-')) >= 2:
+            v = temp.split(sep='-')[1]
+        else:
+            v = temp
     elif name in ['luaotfload-tool']:
-        temp = shlex.split(subprocess.Popen(["grep",
-                                             "luaotfload-tool version"],
-                                            stdin=the_call.stdout,
-                                            stdout=subprocess.PIPE)
-                                     .communicate()[0].decode())[-1]
+        temp = subprocess.Popen(["grep", "luaotfload-tool version"],
+                                stdin=the_call.stdout,
+                                stdout=subprocess.PIPE)\
+            .communicate()[0].decode().split()[-1]
         v = temp[1:-1]
     elif name in ['msgfmt']:
         v = shlex.split(subprocess.Popen(["grep", name],

@@ -31,6 +31,7 @@ import locale
 from decimal import Decimal, getcontext, Rounded, ROUND_HALF_UP, ROUND_DOWN
 
 from mathmaker.lib.maths_lib import round
+from mathmaker.lib.core.utils import check_lexicon_for_substitution
 from mathmaker.lib.common.cst import (UNIT, TENTH, HUNDREDTH, THOUSANDTH,
                                       TEN_THOUSANDTH, PRECISION,
                                       PRECISION_REVERSED,
@@ -39,6 +40,61 @@ from mathmaker.lib.common import alphabet
 from mathmaker.lib.core.base import Printable
 from mathmaker.lib import is_, error
 from mathmaker.lib.common.latex import MARKUP
+
+
+class Substitutable(object):
+    """
+    Any object whose (literal) value(s) can be substituted by numeric ones.
+
+    Any Substitutable must define a content property, should include an
+    optional subst_dict argument in its __init__() method and must ensure
+    that a _subst_dict is defined (an easy way to do this is calling
+    Substitutable.__init__(self, subst_dict=subst_dict).
+    The substitute() method is redefined by some Substitutable objects.
+    """
+    def __init__(self, subst_dict=None):
+        self._subst_dict = None
+        if subst_dict is not None:
+            self.subst_dict = subst_dict
+
+    @property
+    def content(self):
+        """The content to be substituted (list containing literal objects)."""
+        raise NotImplementedError('In order to be substitutable, this object '
+                                  'should define where is the content to be '
+                                  'substituted.')
+
+    @property
+    def subst_dict(self):
+        """Get the default dictionary to use for substitution."""
+        return self._subst_dict
+
+    @subst_dict.setter
+    def subst_dict(self, arg):
+        """Set the default dictionary to use for substitution."""
+        if not isinstance(arg, dict):
+            raise TypeError('arg should be a dictionnary')
+
+        if not check_lexicon_for_substitution(self.content, arg,
+                                              'at_least_one'):
+            raise ValueError('dictionary arg should match the literals '
+                             'of the objects list')
+        self._subst_dict = arg
+
+    def substitute(self, subst_dict=None):
+        """
+        If a subst_dict has been defined, it is used for literals substitution.
+        """
+        d = self.subst_dict
+        if subst_dict is not None:
+            d = subst_dict
+        if d is not None:
+            for elt in self.content:
+                elt.substitute(d)
+            return self
+        else:
+            raise RuntimeError('No dictionary has been provided '
+                               'to perform substitution')
 
 
 # ------------------------------------------------------------------------------
@@ -60,7 +116,7 @@ class Evaluable(Printable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the numeric value of the object
-    def evaluate(self):
+    def evaluate(self, **options):
         raise error.MethodShouldBeRedefined(self, 'evaluate')
 
     # --------------------------------------------------------------------------
@@ -110,7 +166,7 @@ class Evaluable(Printable):
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains numeric objects
-    def is_numeric(self):
+    def is_numeric(self, displ_as=False):
         raise error.MethodShouldBeRedefined(self, 'is_numeric')
 
     # --------------------------------------------------------------------------
@@ -205,8 +261,11 @@ class Calculable(Evaluable):
     ##
     #   @brief Uses the given lexicon to substitute literal Values in self
     def substitute(self, subst_dict):
+        substituted = False
         for elt in self:
-            elt.substitute(subst_dict)
+            if elt.substitute(subst_dict):
+                substituted = True
+        return substituted
 
     # --------------------------------------------------------------------------
     ##
@@ -362,12 +421,14 @@ class Value(Signed):
     #   If the argument is not of one of these kinds, an exception
     #   will be raised.
     #   @return One instance of Value
-    def __init__(self, arg, **options):
+    def __init__(self, arg, text_in_maths=True, **options):
         Signed.__init__(self)
 
         self._has_been_rounded = False
 
         self._unit = ""
+
+        self._text_in_maths = text_in_maths
 
         if 'unit' in options:
             self._unit = Unit(options['unit'])
@@ -436,11 +497,38 @@ class Value(Signed):
     def get_minus_signs_nb(self):
         raise error.MethodShouldBeRedefined(self, 'get_minus_signs_nb')
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the raw value contained in the Value
-    def get_raw_value(self):
+    @property
+    def raw_value(self):
         return self._raw_value
+
+    @raw_value.setter
+    def raw_value(self, arg):
+        if (type(arg) == float
+            or type(arg) == int
+            or type(arg) == Decimal):
+            # __
+            self._raw_value = Decimal(str(arg))
+            if arg >= 0:
+                self._sign = '+'
+            else:
+                self._sign = '-'
+
+        elif type(arg) == str:
+            if is_.a_numerical_string(arg):
+                self._raw_value = Decimal(arg)
+            else:
+                self._raw_value = arg
+
+            if len(arg) >= 1 and arg[0] == '-':
+                self._sign = '-'
+
+        if self._sign == '-':
+            if isinstance(self._raw_value, str):
+                self._abs_value = self._raw_value[1:]
+            else:
+                self._abs_value = - self._raw_value
+        else:
+            self._abs_value = self._raw_value
 
     # --------------------------------------------------------------------------
     ##
@@ -458,8 +546,6 @@ class Value(Signed):
     def abs_value(self):
         return self._abs_value
 
-    raw_value = property(get_raw_value,
-                         doc="Raw value of the object")
     has_been_rounded = property(get_has_been_rounded,
                                 doc="'has been rounded' state of the Value")
     sign = property(get_sign,
@@ -536,6 +622,14 @@ class Value(Signed):
         if self._sign == '-':
             sign = '-'
 
+        open_text_in_maths = MARKUP['open_text_in_maths'] \
+            if self._text_in_maths \
+            else ''
+
+        close_text_in_maths = MARKUP['close_text_in_maths'] \
+            if self._text_in_maths \
+            else ''
+
         if self.is_numeric():
             if 'display_unit' in options and options['display_unit']:
                 unit_str = self.unit.into_str(**options) \
@@ -549,9 +643,9 @@ class Value(Signed):
                 return sign + "\SI{" + locale.str(self.abs_value) + "}"\
                     "{" + unit_str + "}"
             else:
-                return sign + MARKUP['open_text_in_maths'] \
+                return sign + open_text_in_maths \
                     + locale.str(self.abs_value) \
-                    + MARKUP['close_text_in_maths']
+                    + close_text_in_maths
 
         elif (self.raw_value in ["", " "] and 'display_SI_unit' in options
               and options['display_SI_unit']):
@@ -566,9 +660,9 @@ class Value(Signed):
             if (len(self.get_first_letter()) >= 2
                 and not self.get_first_letter()[0] in ["-", "+"]):
                 # __
-                return sign + MARKUP['open_text_in_maths'] \
+                return sign + open_text_in_maths \
                     + str(self.abs_value) \
-                    + MARKUP['close_text_in_maths']
+                    + close_text_in_maths
             else:
                 return str(self.raw_value)
 
@@ -576,7 +670,7 @@ class Value(Signed):
     ##
     #   @brief Returns the value of a numeric Value
     #   @warning Raise an exception if not numeric
-    def evaluate(self):
+    def evaluate(self, **options):
         if not self.is_numeric():
             raise error.UncompatibleType(self, "numeric Value")
         else:
@@ -667,12 +761,15 @@ class Value(Signed):
     ##
     #   @brief Uses the given lexicon to substitute literal Values in self
     def substitute(self, subst_dict):
+        substituted = False
         if self.is_literal():
             for key in subst_dict:
                 if self == key:
                     self.__init__(subst_dict[key])
+                    substituted = True
         else:
             pass
+        return substituted
 
     # --------------------------------------------------------------------------
     ##
@@ -700,16 +797,16 @@ class Value(Signed):
                                                     + "TEN_THOUSANDTH, "
                                                     + "or 0, 1, 2, 3 or 4.")
         else:
-            result_value = None
+            result_value = self.clone()
 
             if type(precision) == int:
-                result_value = Value(round(self.raw_value,
-                                           Decimal(PRECISION[precision]),
-                                           rounding=ROUND_HALF_UP))
+                result_value.raw_value = round(self.raw_value,
+                                               Decimal(PRECISION[precision]),
+                                               rounding=ROUND_HALF_UP)
             else:
-                result_value = Value(round(self.raw_value,
-                                           Decimal(precision),
-                                           rounding=ROUND_HALF_UP))
+                result_value.raw_value = round(self.raw_value,
+                                               Decimal(precision),
+                                               rounding=ROUND_HALF_UP)
 
             if self.needs_to_get_rounded(precision):
                 result_value.set_has_been_rounded(True)
@@ -740,7 +837,7 @@ class Value(Signed):
     def needs_to_get_rounded(self, precision):
         if (not (precision in [UNIT, TENTH, HUNDREDTH, THOUSANDTH,
                                TEN_THOUSANDTH]
-            or (type(precision) == int and 0 <= precision <= 4))):
+                 or (type(precision) == int and 0 <= precision <= 4))):
             # __
             raise error.UncompatibleType(precision, "must be UNIT or"
                                                     + "TENTH, "
@@ -799,13 +896,18 @@ class Value(Signed):
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains numeric objects
-    def is_numeric(self):
+    def is_numeric(self, displ_as=False):
         return type(self.raw_value) in [float, int, Decimal]
 
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains literal objects
-    def is_literal(self):
+    def is_literal(self, displ_as=False) -> bool:
+        """
+        Return True if Value is to be considered literal.
+
+        :param displ_as: not applicable to Values
+        """
         if type(self.raw_value) == str:
             # __
             return True
@@ -975,3 +1077,10 @@ class Unit(Exponented):
 
         return separator + text_box_open + self.name \
             + text_box_close + exponent
+
+    def __repr__(self):
+        """Raw representation of a Unit object"""
+        expo_str = ''
+        if not self.exponent.is_displ_as_a_single_1():
+            expo_str = '^' + repr(self.exponent)
+        return self._name + expo_str

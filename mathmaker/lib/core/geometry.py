@@ -35,10 +35,18 @@ from mathmaker.lib import is_, error
 from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
                                      POLYGONS_NATURES, round)
 from .root_calculus import Evaluable, Value, Unit
-from .base_calculus import Item, Product, Sum
-from .calculus import Equality, SubstitutableEquality, Table, Table_UP
+from .base_calculus import Item, Product, Sum, Function, AngleItem
+from .calculus import Equality, Table, Table_UP, QuotientsEquality
 from .base import Drawable
 from .base_geometry import Point, Segment, Angle, Vector
+
+TRIGO_FCT = {'cos': lambda x: math.cos(math.radians(x)),
+             'sin': lambda x: math.sin(math.radians(x)),
+             'tan': lambda x: math.tan(math.radians(x)),
+             'acos': lambda x: math.degrees(math.acos(x)),
+             'asin': lambda x: math.degrees(math.asin(x)),
+             'atan': lambda x: math.degrees(math.atan(x))
+             }
 
 
 # ------------------------------------------------------------------------------
@@ -693,9 +701,9 @@ class Triangle(Polygon):
                 side1_length = Decimal(str(randomly.integer(35, 55))) / 10
                 angle1 = randomly.integer(20, 70)
             else:
-                side0_length = construction_data['side0']
-                side1_length = construction_data['side1']
-                angle1 = construction_data['angle1']
+                side0_length = Decimal(str(construction_data['side0']))
+                side1_length = Decimal(str(construction_data['side1']))
+                angle1 = Decimal(str(construction_data['angle1']))
 
             if rotate_around_isobarycenter == 'randomly':
                 self._rotation_angle = randomly.integer(0, 35) * 10
@@ -759,6 +767,8 @@ class RightTriangle(Triangle):
         self._rotation_angle = 0
         self._side = [None, None, None]
         self._name = ""
+        self._subst_dict = None
+        self._trigo_setup = ''
 
         if type(arg) == tuple:
             if not len(arg) == 2:
@@ -825,6 +835,8 @@ class RightTriangle(Triangle):
                               rotate_around_isobarycenter=rotation)
 
         elif isinstance(arg, RightTriangle):
+            self._trigo_setup = arg._trigo_setup
+            self._subst_dict = arg.subst_dict
             Polygon.__init__(self, arg, **options)
 
         self.right_angle.mark = "right"
@@ -868,7 +880,7 @@ class RightTriangle(Triangle):
     ##
     #   @brief Creates the correct (substitutable) pythagorean equality
     #   @brief Uses the labels to determine the result...
-    #   @return a SubstitutableEquality
+    #   @return a substitutable Equality
     def pythagorean_substequality(self, **options):
         # First, check the number of numeric data
         # and find the unknown side
@@ -892,7 +904,7 @@ class RightTriangle(Triangle):
                                          "when the number of known numeric "
                                          "values is different from 2.")
 
-        # Now create the SubstitutableEquality
+        # Now create the substitutable Equality
         # (so, also create the dictionnary)
         if unknown_side == 'leg0':
             subst_dict = {Value(self.leg[1].length_name): self.leg[1].label,
@@ -921,7 +933,179 @@ class RightTriangle(Triangle):
             raise error.ImpossibleAction("creation of a pythagorean equality "
                                          "because no unknown side was found")
 
-        return SubstitutableEquality(objcts, subst_dict)
+        return Equality(objcts, subst_dict=subst_dict)
+
+    def trigonometric_ratios(self):
+        """Definitions of the three standard trigonometric ratios."""
+        return {'cos': {self.angle[0]: [self.side[0].length_name,
+                                        self.hypotenuse.length_name[::-1]],
+                        self.angle[2]: [self.side[1].length_name[::-1],
+                                        self.hypotenuse.length_name]},
+                'sin': {self.angle[0]: [self.side[1].length_name[::-1],
+                                        self.hypotenuse.length_name],
+                        self.angle[2]: [self.side[0].length_name,
+                                        self.hypotenuse.length_name[::-1]]},
+                'tan': {self.angle[0]: [self.side[1].length_name,
+                                        self.side[0].length_name[::-1]],
+                        self.angle[2]: [self.side[0].length_name[::-1],
+                                        self.side[1].length_name]}
+                }
+
+    def setup_for_trigonometry(self, angle_nb=None, trigo_fct=None,
+                               angle_val=None,
+                               up_length_val=None,
+                               down_length_val=None,
+                               length_unit=None,
+                               only_mark_unknown_angle=False,
+                               mark_angle='simple'):
+        """
+        Setup labels, determine subst_dict and stores configuration details.
+
+        Exactly one parameter among the three *_val ones must be left to None.
+        According to the chosen trigo_fct and this parameter, this method will
+        create the correct subst_dict.
+
+        :param angle_nb: must be either 0 or 2 (index of an acute angle)
+        :type angle_nb: int
+        :param trigo_fct: must belong to ['cos', 'sin', 'tan']
+        :type trigo_fct: str
+        :param angle_val: the angle's Value
+        :type angle_val: Value (or leave it to None to use it as the unknown
+            value to calculate)
+        :param up_length_val: the length's Value of the side that's at the
+            numerator of the trigonometric formula
+        :type up_length_val: Value (or leave it to None to use it as the
+            unknown value to calculate)
+        :param down_length_val: the length's Value of the side that's at the
+            denominator of the trigonometric formula
+        :type down_length_val: Value (or leave it to None to use it as the
+            unknown value to calculate)
+        :param length_unit: the length's unit to use for lengths
+        :type length_unit: anything that can be used as argument for Units
+        """
+        if [angle_val, up_length_val, down_length_val].count(None) != 1:
+            raise ValueError('Exactly one of the optional arguments '
+                             '(angle_val, up_length_val, down_length_val)'
+                             ' must be None.')
+        if angle_nb not in [0, 2]:
+            raise ValueError('angle_nb must be 0 or 2 (got {n} instead)'
+                             .format(n=str(angle_nb)))
+        if trigo_fct not in ['cos', 'sin', 'tan']:
+            raise ValueError("trigo_fct must be either 'cos', 'sin' "
+                             "or 'tan'")
+        if length_unit is None:
+            raise ValueError('length_unit must be defined')
+        side_nb = {'cos': {0: {'up': 0, 'down': 2},
+                           2: {'up': 1, 'down': 2}},
+                   'sin': {0: {'up': 1, 'down': 2},
+                           2: {'up': 0, 'down': 2}},
+                   'tan': {0: {'up': 1, 'down': 0},
+                           2: {'up': 0, 'down': 1}}}
+        upside_nb = side_nb[trigo_fct][angle_nb]['up']
+        downside_nb = side_nb[trigo_fct][angle_nb]['down']
+        subst_dict = {}
+        self.angle[angle_nb].mark = mark_angle
+        if angle_val is None:
+            if not only_mark_unknown_angle:
+                self.angle[angle_nb].label = Value('?')
+            else:
+                self.angle[angle_nb].label = Value('')
+        else:
+            self.angle[angle_nb].label = Value(angle_val, unit='\\textdegree')
+            subst_dict[AngleItem(from_this_angle=self.angle[angle_nb])] = \
+                Value(angle_val, unit='\\textdegree')
+        if up_length_val is None:
+            self.side[upside_nb].label = Value('?')
+        else:
+            self.side[upside_nb].label = Value(up_length_val, unit=length_unit)
+            length_name = self.side[upside_nb].length_name
+            if ((trigo_fct in ['cos', 'tan'] and angle_nb == 2)
+                or (trigo_fct == 'sin' and angle_nb == 0)):
+                length_name = length_name[::-1]
+            subst_dict[Value(length_name)] = Value(up_length_val)
+        if down_length_val is None:
+            self.side[downside_nb].label = Value('?')
+        else:
+            self.side[downside_nb].label = Value(down_length_val,
+                                                 unit=length_unit)
+            length_name = self.side[downside_nb].length_name
+            if ((trigo_fct in ['cos', 'tan'] and angle_nb == 0)
+                or (trigo_fct == 'sin' and angle_nb == 2)):
+                length_name = length_name[::-1]
+            subst_dict[Value(length_name)] = Value(down_length_val)
+        self._subst_dict = subst_dict
+        self._trigo_setup = str(trigo_fct) + '_' + str(angle_nb)
+
+    def trigonometric_equality(self, angle=None, trigo_fct=None,
+                               subst_dict=None, autosetup=False):
+        """
+        Return the required trigonometric equality.
+
+        :param angle: the acute Angle to use
+        :type angle: Angle
+        :param trigo_fct: either 'cos', 'sin' or 'tan'
+        :type trigo_fct: str
+        :param subst_dict: a correct substitution dictionary
+        :type subst_dict: dict
+        :param autosetup: if enabled, will take the angle, trigo_fct and
+            subst_dict from preconfigured values (requires to have called
+            setup_for_trigonometry() previously).
+        :type autosetup: bool
+        """
+        if autosetup:
+            subst_dict = self._subst_dict
+            trigo_fct, angle_nb = self._trigo_setup.split(sep='_')
+            angle = self.angle[int(angle_nb)]
+        else:
+            if angle is None or trigo_fct is None:
+                raise ValueError('Both angle and trigo_fct must be set.')
+            if angle not in [self.angle[0], self.angle[2]]:
+                raise ValueError('angle should be one of the acute '
+                                 'angles of self')
+            if trigo_fct not in ['cos', 'sin', 'tan']:
+                raise ValueError("trigo_fct must be either 'cos', 'sin' "
+                                 "or 'tan'")
+        tr = self.trigonometric_ratios()
+        return QuotientsEquality([[Function(name=trigo_fct,
+                                            var=angle,
+                                            fct=TRIGO_FCT[trigo_fct],
+                                            inv_fct=TRIGO_FCT['a' + trigo_fct]
+                                            ),
+                                   Item(tr[trigo_fct][angle][0])],
+                                  [Item((1)), Item(tr[trigo_fct][angle][1])]],
+                                 subst_dict=subst_dict)
+
+    def side_opposite_to(self, angle=None):
+        """
+        Return the side opposite to given angle.
+
+        :param angle: one of the acute angles
+        :type angle: must be self.angle[0] or self.angle[2]
+        """
+        if angle not in [self.angle[0], self.angle[2]]:
+            raise ValueError('Parameter "angle" must be defined as '
+                             'self.angle[0] or self.angle[2]')
+        else:
+            if angle is self.angle[0]:
+                return self.side[1]
+            else:
+                return self.side[0]
+
+    def side_adjacent_to(self, angle=None):
+        """
+        Return the side adjacent to given angle.
+
+        :param angle: one of the acute angles
+        :type angle: must be self.angle[0] or self.angle[2]
+        """
+        if angle not in [self.angle[0], self.angle[2]]:
+            raise ValueError('Parameter "angle" must be defined as '
+                             'self.angle[0] or self.angle[2]')
+        else:
+            if angle is self.angle[0]:
+                return self.side[0]
+            else:
+                return self.side[1]
 
 
 class InterceptTheoremConfiguration(Triangle):
@@ -1154,14 +1338,16 @@ class InterceptTheoremConfiguration(Triangle):
     def ratios_equalities(self) -> Table:
         """Return a Table matching the ratios equalities."""
         return Table([[Item(v.length_name) for v in self.small],
-                      [Item(v.length_name) for v in self.side]])
+                      [Item(v.length_name) for v in self.side]],
+                     displ_as_qe=True)
 
     def ratios_for_converse(self) -> Table:
         """Return a Table matching the ratios equality for converse."""
         return Table([[Item(v.length_name) for v in [self.small[0],
                                                      self.small[2]]],
-                     [Item(v.length_name) for v in [self.side[0],
-                                                    self.side[2]]]])
+                      [Item(v.length_name) for v in [self.side[0],
+                                                     self.side[2]]]],
+                     displ_as_qe=True)
 
     def ratios_equalities_substituted(self) -> Table_UP:
         """
@@ -1175,7 +1361,8 @@ class InterceptTheoremConfiguration(Triangle):
                  for s, b in zip(self.small, self.side)]
         return Table_UP(self.enlargement_ratio,
                         [s.length for s in self.small],
-                        infos)
+                        infos,
+                        displ_as_qe=True)
 
     @property
     def butterfly(self):

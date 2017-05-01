@@ -24,19 +24,14 @@ from mathmaker import settings
 from mathmaker.lib import shared, error, is_, randomly, maths_lib
 from mathmaker.lib.common import alphabet
 from mathmaker.lib.common.cst import RANDOMLY
-from mathmaker.lib.core.utils import (gather_literals,
-                                      check_lexicon_for_substitution)
+from mathmaker.lib.core.utils import gather_literals
 from mathmaker.lib.core.base import Printable
-from mathmaker.lib.core.root_calculus import Exponented, Value, Calculable
+from mathmaker.lib.core.root_calculus import (Exponented, Value, Calculable,
+                                              Substitutable)
 from mathmaker.lib.core.base_calculus import (Monomial, Sum, Item, Polynomial,
                                               Fraction, Expandable, Product,
-                                              Quotient, SquareRoot)
-# from mathmaker.lib import *
-# from .base import *
-# from .base_calculus import *
-# from mathmaker.lib.maths_lib import *
-# from mathmaker.lib.common.cst import *
-# from .utils import *
+                                              Quotient, Function, SquareRoot,
+                                              AngleItem, CommutativeOperation)
 from mathmaker.lib.common.latex import MARKUP
 
 
@@ -218,7 +213,7 @@ class Expression(ComposedCalculable):
 ##
 # @class Equality
 # @brief These are object of the kind: Exponented = Exponented [= ...]
-class Equality(ComposedCalculable):
+class Equality(ComposedCalculable, Substitutable):
 
     # --------------------------------------------------------------------------
     ##
@@ -229,7 +224,7 @@ class Equality(ComposedCalculable):
     #   @option             as long as len(objcts) - 1. The signs are "=" or
     #                       "neq"
     #   @return One instance of Equality
-    def __init__(self, objcts, **options):
+    def __init__(self, objcts, subst_dict=None, **options):
         # just check if the given arguments are right
         if not (isinstance(objcts, list)):
             raise error.UncompatibleType(objcts, "should be a LIST "
@@ -282,6 +277,13 @@ class Equality(ComposedCalculable):
             else:
                 self._equal_signs.append('equal')
 
+        Substitutable.__init__(self, subst_dict=subst_dict)
+
+    @property
+    def content(self):
+        """The content to be substituted (list containing literal objects)."""
+        return self._elements
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the elements of the Equality
@@ -332,22 +334,18 @@ class Equality(ComposedCalculable):
 
         return result
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief It is possible to index an Equality
     def __getitem__(self, i):
+        """Make Equality indexable."""
         return self._elements[i]
 
     def __setitem__(self, i, data):
+        """Make Equality indexable."""
         if not isinstance(data, Exponented):
-            raise error.UncompatibleType(data, "should be a Exponented")
-
+            raise TypeError('data should be a Exponented')
         self._elements[i] = data.clone()
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the number of elements of the Equality
     def __len__(self):
+        """Return the number of elements of the Equality."""
         return len(self._elements)
 
 
@@ -363,8 +361,7 @@ class Equation(ComposedCalculable):
     ##
     #   @brief Constructor
     #   @warning Might raise an UncompatibleType exception.
-    #   @param arg Equation|(Exponented, Exponented)|(RANDOMLY, ...)
-    #              |SubstitutableEquality
+    #   @param arg Equation|(Exponented, Exponented)|(RANDOMLY, ...)|Equality
     #   @return One instance of Equation
     def __init__(self, arg, **options):
         self._name = settings.default.EQUATION_NAME
@@ -388,16 +385,16 @@ class Equation(ComposedCalculable):
 
         # Then determine its left & right hand sides
 
-        if type(arg) == SubstitutableEquality:
+        if isinstance(arg, Equality):
             if not len(arg) == 2:
-                raise error.ImpossibleAction("turn into an Equation a "
-                                             "SubstitutableEquality having "
-                                             "not exactly 2 members")
+                raise error.ImpossibleAction('turn into an Equation an '
+                                             'Equality having '
+                                             'not exactly 2 members')
             literals_list = list(set(gather_literals(arg[0])
                                      + gather_literals(arg[1])))
             if not len(literals_list) == 1:
-                raise error.ImpossibleAction("create an Equation from a "
-                                             "SubstitutableEquality "
+                raise error.ImpossibleAction("create an Equation from an "
+                                             "Equality "
                                              "containing more than ONE "
                                              "unknown literal. This one "
                                              "contains "
@@ -822,7 +819,7 @@ class Equation(ComposedCalculable):
 
         # Another Equation to copy
         elif isinstance(arg, Equation):
-            self._name = arg.name
+            self._name = arg._name
             self._number = arg.number
             self._left_hand_side = arg.left_hand_side.clone()
             self._right_hand_side = arg.right_hand_side.clone()
@@ -909,29 +906,22 @@ class Equation(ComposedCalculable):
     #   @return Nothing, just sets the given argument to the left hand side,
     #           turned into a Sum if necessary
     def set_hand_side(self, left_or_right, arg):
-
         if not (left_or_right == "left" or left_or_right == "right"):
             raise error.UncompatibleType(left_or_right,
                                          '"left" or "right"')
-
         if isinstance(arg, Exponented):
-            if isinstance(arg, Sum):
-                # TO FIX ?
-                # this could be secured by checking the given Sum
-                # is not containing only one term which would be also
-                # a Sum
-                if left_or_right == "left":
-                    self._left_hand_side = arg
-                else:
-                    self._right_hand_side = arg
+            if isinstance(arg, CommutativeOperation) and len(arg) == 1:
+                arg = arg.element[0]
+            if not isinstance(arg, Sum):
+                arg = Sum(arg)
+            if left_or_right == "left":
+                self._left_hand_side = arg
             else:
-                if left_or_right == "left":
-                    self._left_hand_side = Sum(arg)
-                else:
-                    self._right_hand_side = Sum(arg)
+                self._right_hand_side = arg
 
         else:
-            raise error.UncompatibleType(arg, "Equation|tuple")
+            raise TypeError('arg should have been an Exponented, instead, got '
+                            + str(type(arg)))
 
     # --------------------------------------------------------------------------
     ##
@@ -1185,6 +1175,7 @@ class Equation(ComposedCalculable):
                   "len(new_eq.left_hand_side): "
                   + str(len(new_eq.left_hand_side))
                   + "\nnext_left_X is: " + next_left_X_str
+                  + "\nnext_right_X is: " + repr(next_right_X)
                   + "\nnew_eq.left_hand_side.term[0].is_literal()? "
                   + str(new_eq.left_hand_side.term[0].is_literal()) + "; "
                   "len(new_eq.right_hand_side): "
@@ -1194,42 +1185,57 @@ class Equation(ComposedCalculable):
                   + str(isinstance(new_eq.right_hand_side.term[0],
                                    Fraction)))
 
-        if (('skip_fraction_simplification' in options
-             and 'decimal_result' not in options)
-            and len(new_eq.left_hand_side) == 1
-            and next_left_X is None
-            and not new_eq.left_hand_side.term[0].is_numeric()
-            and len(new_eq.right_hand_side) == 1
-            and isinstance(new_eq.right_hand_side.term[0], Fraction)
-            and new_eq.right_hand_side.term[0].is_reducible()):
-            # __
-            new_eq.set_hand_side("right",
-                                 new_eq.right_hand_side.term[0]
-                                 .completely_reduced())
+        at_left_one_literal_not_expandable_element = \
+            (len(new_eq.left_hand_side) == 1
+             and next_left_X is None
+             and not new_eq.left_hand_side.term[0].is_numeric()
+             and len(new_eq.right_hand_side) == 1)
 
-        elif (('skip_fraction_simplification' in options
-               and 'decimal_result' in options)
-              and len(new_eq.left_hand_side) == 1
-              and next_left_X is None
-              and not new_eq.left_hand_side.term[0].is_numeric()
-              and len(new_eq.right_hand_side) == 1
+        if (at_left_one_literal_not_expandable_element
+            and isinstance(new_eq.left_hand_side.term[0], Function)
+            and new_eq.right_hand_side.is_numeric()):
+            log.debug("A Function to invert")
+            item_class = Item
+            if isinstance(new_eq.left_hand_side.term[0].var, AngleItem):
+                item_class = AngleItem
+            new_eq.set_hand_side('right',
+                                 item_class(new_eq.left_hand_side
+                                            .term[0].inv_fct(
+                                                new_eq.right_hand_side.term[0]
+                                                .evaluate(**options)))
+                                 .round(options['decimal_result']))
+            new_eq.set_hand_side('left',
+                                 new_eq.left_hand_side.term[0].var)
+
+        elif (at_left_one_literal_not_expandable_element
               and isinstance(new_eq.right_hand_side.term[0], Fraction)
-              and new_eq.right_hand_side.term[0].is_reducible()):
+              and new_eq.right_hand_side.term[0].is_reducible()
+              and 'skip_fraction_simplification' in options):
             # __
-            new_eq.set_hand_side("right",
-                                 Item(new_eq
-                                      .right_hand_side.term[0]
-                                      .evaluate(**options)))
-
-        elif ('decimal_result' in options
-              and len(new_eq.left_hand_side) == 1
-              and next_left_X is None
-              and not new_eq.left_hand_side.term[0].is_numeric()
-              and len(new_eq.right_hand_side) == 1
+            log.debug('At left, one literal not reducible element; '
+                      'at right, one reducible Fraction, but Fraction '
+                      'simplification must be skipped.')
+            if 'decimal_result' in options:
+                log.debug('And decimal result is required')
+                new_eq.set_hand_side("right",
+                                     Item(new_eq
+                                          .right_hand_side.term[0]
+                                          .evaluate(**options)))
+            else:
+                log.debug('But no decimal result is required')
+                new_eq.set_hand_side("right",
+                                     new_eq.right_hand_side.term[0]
+                                     .completely_reduced())
+        elif (at_left_one_literal_not_expandable_element
+              and 'decimal_result' in options
               and (isinstance(new_eq.right_hand_side.term[0], Quotient)
+                   or isinstance(new_eq.right_hand_side.term[0], Function)
                    or isinstance(new_eq.right_hand_side.term[0], SquareRoot))):
             # __
-            log.debug("Decimal Result CASE")
+            log.debug('At left, one literal not reducible element; '
+                      'at right, one Quotient|Function|SquareRoot and '
+                      'decimal result is required.')
+            options.update({'force_evaluation': True})
             new_eq.set_hand_side("right",
                                  new_eq.right_hand_side.
                                  expand_and_reduce_next_step(**options))
@@ -1246,6 +1252,20 @@ class Equation(ComposedCalculable):
             if next_right_X is not None:
                 # __
                 new_eq.set_hand_side("right", next_right_X)
+                at_left_one_literal_not_expandable_element = \
+                    (len(new_eq.left_hand_side) == 1
+                     and next_left_X is None
+                     and not new_eq.left_hand_side.term[0].is_numeric()
+                     and len(new_eq.right_hand_side) == 1)
+                if (at_left_one_literal_not_expandable_element
+                    and 'decimal_result' in options
+                    and isinstance(new_eq.right_hand_side.term[0], Item)
+                    and new_eq.right_hand_side.term[0]
+                    .needs_to_get_rounded(options['decimal_result'])):
+                    # __
+                    new_eq.set_hand_side("right",
+                                         new_eq.right_hand_side.term[0]
+                                         .round(options['decimal_result']))
 
         # 2d CASE
         # Irreducible SUMS, like 3 + x = 5 or x - 2 = 3x + 7
@@ -1429,9 +1449,11 @@ class Equation(ComposedCalculable):
         elif (isinstance(new_eq.left_hand_side.term[0], Item)
               and new_eq.left_hand_side.term[0].is_literal()):
             # __
+            log.debug("5th CASE")
             if new_eq.left_hand_side.term[0].get_sign() == '-':
                 new_eq.left_hand_side.term[0].set_opposite_sign()
                 new_eq.right_hand_side.term[0].set_opposite_sign()
+                log.debug("Swapped signs")
             else:
                 # CASES x² = b
                 if new_eq.left_hand_side.term[0].exponent == Value(2):
@@ -1467,6 +1489,7 @@ class Equation(ComposedCalculable):
                 # Now the exponent must be equivalent to a single 1
                 # or the algorithm just doesn't know how to solve further.
                 else:
+                    log.debug("Returning None")
                     return None
 
         # log.debug(
@@ -1486,62 +1509,6 @@ class Equation(ComposedCalculable):
 
         log.debug("Leaving, with Equation: " + repr(new_eq))
         return new_eq
-
-
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
-# @class SubstitutableEquality
-# @brief Like an Equality with literals and the numeric values to replace them
-class SubstitutableEquality(Equality):
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
-    #   @param objcts is a [Exponented] of 2 elements at least
-    #   @param subst_dict is a {literal Value: numeric Value}
-    #   @option equal_signs Contains a list of equal/not equal signs. Must be
-    #   @option             as long as len(objcts) - 1. The signs are "=" or
-    #                       "neq"
-    #   @return One instance of SubstitutableEquality
-    def __init__(self, objcts, subst_dict, **options):
-        # This will check the objcts argument and take the possibly options
-        # into account
-        Equality.__init__(self, objcts, **options)
-
-        # Now, let's make the checks specific to SubstitutableEquality
-        if not (isinstance(subst_dict, dict)):
-            raise error.UncompatibleType(subst_dict, "should be a dictionnary")
-
-        if not check_lexicon_for_substitution(objcts,
-                                              subst_dict,
-                                              'at_least_one'):
-            # __
-            raise error.WrongArgument(subst_dict,
-                                      " a lexicon that matches the literals "
-                                      "of the objects list")
-
-        self._subst_dict = subst_dict
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Getter for the substitution dictionnary
-    def get_subst_dict(self):
-        return self._subst_dict
-
-    subst_dict = property(get_subst_dict,
-                          doc="Substitution dictionnary of the "
-                              "SubstitutableEquality")
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Executes the substitution of the literal Values by the numeric
-    def substitute(self):
-        for elt in self._elements:
-            elt.substitute(self.subst_dict)
-        return self
 
 
 # ------------------------------------------------------------------------------
@@ -1602,8 +1569,10 @@ class CrossProductEquation(Equation):
                                               + "and " + str(type(arg[3])),
                                               "a tuple of four Calculables")
                 else:
-                    self._left_hand_side = Quotient(('+', arg[0], arg[2]))
-                    self._right_hand_side = Quotient(('+', arg[1], arg[3]))
+                    self._left_hand_side = Quotient(('+', arg[0], arg[2]),
+                                                    ignore_1_denominator=True)
+                    self._right_hand_side = Quotient(('+', arg[1], arg[3]),
+                                                     ignore_1_denominator=True)
 
             # Let's find the variable
             # In the same time, we'll determine its position and the var obj
@@ -1666,9 +1635,14 @@ class CrossProductEquation(Equation):
                             [self.left_hand_side.denominator,
                              self.right_hand_side.denominator]])
 
+        r1d = options.get('remove_1_deno', True)
         new_eq = Equation((self.variable_obj,
                            temp_table.cross_product((0, 1),
-                                                    self.variable_position)))
+                                                    self.variable_position,
+                                                    remove_1_deno=r1d)))
+        if (self.left_hand_side.numerator.is_literal()
+            and self.left_hand_side.denominator.is_displ_as_a_single_1()):
+            new_eq = new_eq.solve_next_step(**options)
         return new_eq
 
 
@@ -1678,14 +1652,28 @@ class CrossProductEquation(Equation):
 ##
 # @class Table
 # @brief All objects that are displayable as Tables
-class Table(Printable):
+class Table(Printable, Substitutable):
+
+    class SubstitutableList(list, Substitutable):
+        """A list that can call substitute() on its elements."""
+        def __init__(self, *args, subst_dict=None):
+            list.__init__(self, *args)
+            Substitutable.__init__(self, subst_dict=subst_dict)
+
+        @property
+        def content(self):
+            """
+            The content to be substituted (list containing literal objects).
+            """
+            return self
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @param arg [[Calculable], [Calculable]]   (the Calculables' lists must
     #                                              have the same length)
-    def __init__(self, arg):
+    def __init__(self, arg, displ_as_qe=False, ignore_1_denos=None,
+                 subst_dict=None):
         if not type(arg) == list:
             raise error.WrongArgument(arg, "a list (of two lists)")
 
@@ -1716,8 +1704,33 @@ class Table(Printable):
                                               + " Calculable ; type: "
                                               + str(type(arg[j][i])),
                                               "a Calculable")
+
+        if not isinstance(displ_as_qe, bool):
+            raise TypeError('displ_as_qe should be a boolean')
+
+        if ignore_1_denos is not None and not isinstance(ignore_1_denos, bool):
+            raise TypeError('if set, ignore_1_denos should be a boolean')
+
         self._nb_of_cols = len(arg[0])
-        self._data = arg
+        self._data = [Table.SubstitutableList(arg[0], subst_dict=None),
+                      Table.SubstitutableList(arg[1], subst_dict=None)]
+        self._displ_as_qe = displ_as_qe
+        self._ignore_1_denos = displ_as_qe
+        if ignore_1_denos is not None:
+            self._ignore_1_denos = ignore_1_denos
+        Substitutable.__init__(self, subst_dict=subst_dict)
+
+    @property
+    def displ_as_qe(self):
+        return self._displ_as_qe
+
+    @property
+    def ignore_1_denos(self):
+        return self._ignore_1_denos
+
+    @property
+    def content(self):
+        return self._data
 
     # --------------------------------------------------------------------------
     ##
@@ -1735,16 +1748,24 @@ class Table(Printable):
     #   @param options Any options
     #   @return The formated string
     #   @todo Separate this from the LaTeX format (seems difficult to do)
-    def into_str(self, **options):
+    def into_str(self, as_a_quotients_equality=None, ignore_1_denos=None,
+                 **options):
+        if as_a_quotients_equality is None:
+            as_a_quotients_equality = self._displ_as_qe
+        elif not isinstance(as_a_quotients_equality, bool):
+            raise TypeError('as_a_quotients_equality should be a boolean.')
+        if ignore_1_denos is None:
+            ignore_1_denos = self._ignore_1_denos
+        elif not isinstance(ignore_1_denos, bool):
+            raise TypeError('ignore_1_denos should be a boolean.')
         result = ""
-        if ('as_a_quotients_equality' in options
-            and options['as_a_quotients_equality']):
-            # __
+        if as_a_quotients_equality:
             for i in range(len(self)):
+                options['ignore_1_denominator'] = ignore_1_denos
                 result += Quotient(('+',
                                     self.cell[0][i],
                                     self.cell[1][i]
-                                    )).printed
+                                    ), **options).printed
                 if i < len(self) - 1:
                     result += MARKUP['equal']
 
@@ -1776,7 +1797,7 @@ class Table(Printable):
     #                          b c        b c        c x       x c
     #   @param options Any options
     #   @return A Quotient or possibly a Fraction
-    def cross_product(self, col, x_position, **options):
+    def cross_product(self, col, x_position, remove_1_deno=True, **options):
         if col[0] >= len(self) or col[1] >= len(self):
             raise error.OutOfRangeArgument(str(col[0]) + " or " + str(col[1]),
                                            "should be < len(self) = "
@@ -1787,13 +1808,15 @@ class Table(Printable):
         num = None
         if x_position == 0 or x_position == 2:
             num = Product([self.cell[0][col[1]],
-                           self.cell[1][col[0]]])
+                           self.cell[1][col[0]]]).throw_away_the_neutrals()
         elif x_position == 1 or x_position == 3:
             num = Product([self.cell[0][col[0]],
-                           self.cell[1][col[1]]])
+                           self.cell[1][col[1]]]).throw_away_the_neutrals()
         deno = None
         if x_position == 0:
             deno = self.cell[1][col[1]]
+            if deno.is_displ_as_a_single_1() and remove_1_deno:
+                return num
             if (self.cell[0][col[1]].is_displ_as_a_single_int()
                 and self.cell[1][col[0]].is_displ_as_a_single_int()
                 and self.cell[1][col[1]].is_displ_as_a_single_int()):
@@ -1804,7 +1827,8 @@ class Table(Printable):
 
         elif x_position == 1:
             deno = self.cell[1][col[0]]
-
+            if deno.is_displ_as_a_single_1() and remove_1_deno:
+                return num
             if (self.cell[0][col[0]].is_displ_as_a_single_int()
                 and self.cell[1][col[1]].is_displ_as_a_single_int()
                 and self.cell[1][col[0]].is_displ_as_a_single_int()):
@@ -1815,7 +1839,8 @@ class Table(Printable):
 
         elif x_position == 2:
             deno = self.cell[0][col[0]]
-
+            if deno.is_displ_as_a_single_1() and remove_1_deno:
+                return num
             if (self.cell[0][col[1]].is_displ_as_a_single_int()
                 and self.cell[1][col[0]].is_displ_as_a_single_int()
                 and self.cell[0][col[0]].is_displ_as_a_single_int()):
@@ -1826,6 +1851,8 @@ class Table(Printable):
 
         elif x_position == 3:
             deno = self.cell[0][col[1]]
+            if deno.is_displ_as_a_single_1() and remove_1_deno:
+                return num
             if (self.cell[0][col[0]].is_displ_as_a_single_int()
                 and self.cell[1][col[1]].is_displ_as_a_single_int()
                 and self.cell[0][col[1]].is_displ_as_a_single_int()):
@@ -1837,13 +1864,36 @@ class Table(Printable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns True if the Table is entirely numeric
-    def is_numeric(self):
+    def is_numeric(self, displ_as=False):
         for i in range(2):
             for j in range(len(self)):
-                if not self.cell[i][j].is_numeric():
+                if not self.cell[i][j].is_numeric(displ_as=displ_as):
                     return False
 
         return True
+
+    def into_crossproduct_equation(self,
+                                   col0=0,
+                                   col1=1) -> CrossProductEquation:
+        """
+        Create a CrossProductEquation from two columns.
+
+        Ensure there is only one literal among the four cells before using it.
+
+        :param col0: the number of the first column to use
+        :param col1: the number of the second column to use
+        """
+        return CrossProductEquation((self.cell[0][col0],
+                                     self.cell[0][col1],
+                                     self.cell[1][col0],
+                                     self.cell[1][col1]))
+
+    def auto_resolution(self, col0=0, col1=1, subst_dict=None, **options):
+        result = MARKUP['opening_math_style1'] + self.printed\
+            + MARKUP['closing_math_style1']
+        self.substitute(subst_dict=subst_dict)
+        return result + self.into_crossproduct_equation(col0=col0, col1=col1)\
+            .auto_resolution(**options)
 
 
 # ------------------------------------------------------------------------------
@@ -1864,7 +1914,7 @@ class Table_UP(Table):
     #   info and first_line should have the same length
     #   info should contain at least one None|(None, None) element
     #   (means the column is completely numeric)
-    def __init__(self, coeff, first_line, info):
+    def __init__(self, coeff, first_line, info, displ_as_qe=False):
         log = settings.dbg_logger.getChild('Table_UP.init')
 
         if (not is_.a_number(coeff)
@@ -2011,7 +2061,7 @@ class Table_UP(Table):
         #    print "data[0][" + str(i) + "] = " + d0 + "\n"
         #    print "data[1][" + str(i) + "] = " + d1 + "\n"
 
-        Table.__init__(self, data)
+        Table.__init__(self, data, displ_as_qe=displ_as_qe)
 
         for elt in literals_positions:
             col_ref = literals_positions[elt]
@@ -2066,6 +2116,17 @@ class Table_UP(Table):
             col0 = col_temp
 
         return CrossProductEquation((self.cell[0][col0],
-                                    self.cell[0][col1],
-                                    self.cell[1][col0],
-                                    self.cell[1][col1]))
+                                     self.cell[0][col1],
+                                     self.cell[1][col0],
+                                     self.cell[1][col1]))
+
+
+class QuotientsEquality(Table):
+    """A shortcut to create Tables as quotients equalities."""
+
+    def __init__(self, arg, displ_as_qe=True, ignore_1_denos=True,
+                 subst_dict=None):
+        """Initialization of the Table as a Quotients equality."""
+        Table.__init__(self, arg, displ_as_qe=displ_as_qe,
+                       ignore_1_denos=ignore_1_denos,
+                       subst_dict=subst_dict)

@@ -12,7 +12,6 @@
         <xs:simpleContent>
             <xs:extension base="nonNullPositiveInteger">
 				<xs:attribute name="source"				type="xs:string"	    use="required"/>
-				<xs:attribute name="source2"				type="xs:string"	    use="optional"/>
 				<xs:attribute name="context"			type="xs:string"		use="optional"/>
 				<xs:attribute name="variant"			type="xs:string"		use="optional"/>
 				<xs:attribute name="generation_type"	type="xs:string"		use="optional"/>

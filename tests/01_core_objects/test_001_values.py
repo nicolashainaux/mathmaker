@@ -59,6 +59,10 @@ def perfect_square(): return Value(16)
 def perfect_decimal_square(): return Value(1.96)
 
 
+@pytest.fixture()
+def literal_value(): return Value('AB')
+
+
 def test_0_display(v0):
     """Is the value correctly displayed?"""
     assert str(v0) == wrap_nb('4')
@@ -337,3 +341,9 @@ def test_is_integer_v0(v0):
 def test_is_integer_v1(v1):
     """Is a one-digit Value not an integer?"""
     assert not v1.is_an_integer()
+
+
+def test_literal_value_substituted(literal_value):
+    """Is this Value correctly substituted?"""
+    literal_value.substitute({Value('AB'): 11, Value('CD'): 10})
+    assert literal_value.printed == wrap_nb('11')

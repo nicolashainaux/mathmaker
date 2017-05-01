@@ -235,19 +235,35 @@ class Q_Generic(Q_Structure):
                                                  for m in ALL_MODULES]))
         m = module.sub_object(numbers_to_use, **options)
 
+        if 'space_after' in options:
+            if options['space_after'] == 'new_line':
+                self.add_new_line_to_text = shared.machine.write_new_line()
+            elif options['space_after'] in ['new_line_twice', 'default']:
+                self.add_new_line_to_text = shared.machine.write_new_line() \
+                    + shared.machine.write_new_line()
+            else:
+                self.add_new_line_to_text = shared.machine.addvspace(
+                    height=options['space_after']
+                )
+
         self.q_text = m.q(**options)
         self.q_answer = m.a(**options)
         if hasattr(m, 'h'):
             self.q_hint = m.h(**options)
         else:
             self.q_hint = ""
+        self.q_nb_included_in_wording = False
+        if hasattr(m, 'q_nb_included_in_wording'):
+            self.q_nb_included_in_wording = m.q_nb_included_in_wording
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
-        return str(self.displayable_number) + str(self.q_text) \
-            + self.add_new_line_to_text
+        text = str(self.q_text) + self.add_new_line_to_text
+        if not self.q_nb_included_in_wording:
+            text = str(self.displayable_number) + text
+        return text
 
     # --------------------------------------------------------------------------
     ##

@@ -244,9 +244,7 @@ def get_q_kinds_from(exercise_node):
             for elt in child:
                 o = copy.deepcopy(child.attrib)
                 o.update(elt.attrib)
-                sources = [elt.attrib['source']]
-                if 'source2' in elt.attrib:
-                    sources += [elt.attrib['source2']]
+                sources = elt.attrib['source'].split(sep=';;')
                 check_q_consistency(o, sources)
                 questions += [[o, sources, int(elt.text)]]
 

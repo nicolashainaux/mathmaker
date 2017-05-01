@@ -80,8 +80,7 @@ class sub_object(submodule.structure):
         ).printed)
 
         self.equal_ratios = shared.machine.write_math_style1(
-            self.figure.ratios_for_converse()
-            .into_str(as_a_quotients_equality=True))
+            self.figure.ratios_for_converse().into_str())
 
         ans_variant = options.get('ans_variant', 'default')
         ans_texts = {

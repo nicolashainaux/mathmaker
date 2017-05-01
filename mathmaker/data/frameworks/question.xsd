@@ -11,12 +11,16 @@
 			<xs:attribute name="kind"							type="xs:string"	use="required"/>
 			<xs:attribute name="subkind"						type="xs:string"	use="required"/>
 			<xs:attribute name="context"						type="xs:string"	use="optional"/>
+			<xs:attribute name="text"	              type="xs:string"	use="optional"/>
+			<xs:attribute name="wording"				    type="xs:string"	use="optional"/>
 			<xs:attribute name="variant"						type="xs:string"	use="optional"/>
 			<xs:attribute name="ans_variant"			type="xs:string"	use="optional"	default="default"/>
 			<xs:attribute name="detailed"						type="xs:boolean"	use="optional" default="true"/>
 			<xs:attribute name="picture"						type="xs:boolean"	use="optional"/>
 			<xs:attribute name="rank_matches_invisible_zero"	type="xs:string"	use="optional"/>
 			<xs:attribute name="generation_type"				type="xs:string"	use="optional"/>
+			<xs:attribute name="space_after"				type="xs:string"	use="optional"/>
+			<xs:attribute name="decimal_result"				type="xs:integer"	use="optional"/>
 		</xs:complexType>
 	</xs:element>
 

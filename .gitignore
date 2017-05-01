@@ -19,3 +19,5 @@ htmlcov/
 tests/outfiles/
 outfiles/
 *.mo
+__pycache__/
+.idea/

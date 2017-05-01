@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFAULT MENTAL CALCULATION SHEET -->
+
+
+<sheet header="" title="Trigonometry" subtitle="Calculate an angle" text="Calculate the missing angle in each triangle. Round the results to the unit." answers_title="Example of solutions:">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="std" font_size_offset="-1">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default values: id='generic' kind='' subkind='default' -->
+	<exercise q_numbering="alphabetical">
+		<!-- variant can be sin|cos|tan|random
+				 Default values (if variant is not here) will be as if variant="random" -->
+		<!-- source for trigonometry_calculate_angle questions must be double:
+			   one for the length of one side, the other for the length of another side -->
+		<question kind="trigonometry" subkind="calculate_angle" variant="random" space_after="40.0pt" decimal_result="0">
+			<nb source="singledeci1_1to100;;singledeci1_1to100">5</nb>
+		</question>
+
+	</exercise>
+
+
+</sheet>

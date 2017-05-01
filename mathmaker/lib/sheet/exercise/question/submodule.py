@@ -27,7 +27,7 @@ from decimal import Decimal
 from mathmaker.lib.core.root_calculus import Unit, Value
 from mathmaker.lib.core.base_calculus import Product, Quotient, Item
 from mathmaker.lib.core.base_geometry import Point
-from mathmaker.lib.core.geometry import (Rectangle, Square,
+from mathmaker.lib.core.geometry import (Rectangle, Square, RightTriangle,
                                          InterceptTheoremConfiguration)
 from mathmaker.lib import error
 from mathmaker.lib import shared
@@ -45,7 +45,7 @@ class structure(object):
         else:
             return ""
 
-    def setup(self, arg, shuffle_nbs=True, **options):
+    def setup(self, arg, shuffle_nbs=True, sort_nbs=False, **options):
         if arg == "minimal":
             self.newline = '\\newline'
             self.parallel_to = '$\parallel$'
@@ -56,6 +56,7 @@ class structure(object):
             self.variant = options.get('variant', "default")
             self.context = options.get('context', "default")
             self.picture = XML_BOOLEANS[options.get('picture', "false")]()
+            self.decimal_result = int(options.get('decimal_result', 2))
 
         elif arg == "length_units":
             if 'unit' in options:
@@ -79,6 +80,8 @@ class structure(object):
             nb_list = list(options['nb'])
             if shuffle_nbs:
                 random.shuffle(nb_list)
+            elif sort_nbs:
+                nb_list = sorted(nb_list)
             for i in range(len(nb_list)):
                 setattr(self, 'nb' + str(i + 1), nb_list[i])
             self.nb_nb = len(nb_list)
@@ -177,6 +180,22 @@ class structure(object):
             self.square.setup_labels([False, False, True, False])
             self.square.set_marks(random.choice(["simple", "double",
                                                  "triple"]))
+
+        elif arg == 'right_triangle':
+            # Too many different possibilities for a Right Triangle,
+            # so the angles|lengths' labels must be set outside of this setup()
+            if (not hasattr(self, 'unit_length')
+                or not hasattr(self, 'unit_area')):
+                self.setup(self, "units", **options)
+
+            rt_name = next(shared.three_letters_words_source)
+            alpha, beta = next(shared.angle_ranges_source)
+            rotation_angle = alpha + random.choice(range(beta - alpha))
+            self.right_triangle = RightTriangle(
+                ((rt_name[0], rt_name[1], rt_name[2]),
+                 {'leg0': Decimal(str(random.choice(range(20, 40)) / 10)),
+                  'leg1': Decimal(str(random.choice(range(20, 40)) / 10))}),
+                rotate_around_isobarycenter=rotation_angle)
 
         elif arg == 'intercept_theorem_figure':
             butterfly = options.get('butterfly', False)

@@ -41,8 +41,7 @@ class sub_object(submodule.structure):
                                  segments_list=all_segments)
 
         self.ratios = shared.machine.write_math_style1(
-            self.figure.ratios_equalities()
-            .into_str(as_a_quotients_equality=True))
+            self.figure.ratios_equalities().into_str())
 
         self.wording = _(' {line1} {parallel_to} {line2}')
         self.line1 = self.figure.small[1].length_name

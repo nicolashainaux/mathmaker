@@ -30,6 +30,8 @@ def classify_tag(tag):
         return 'int_pairs'
     elif tag.startswith('singleint_'):
         return 'single_int'
+    elif tag.startswith('singledeci1_'):
+        return 'single_deci1'
     elif tag in ['int_deci_clever_pairs', 'rank_words',
                  'int_irreducible_frac', 'nothing',
                  'decimal_and_10_100_1000_for_multi',
@@ -83,8 +85,7 @@ def translate_int_pairs_tag(tag):
     return d
 
 
-def translate_single_int_tag(tag):
-    if tag.startswith('singleint_'):
-        n1, n2 = tag[10:].split(sep='to')
-        d = {'nb1_min': n1, 'nb1_max': n2}
-    return d
+def translate_single_nb_tag(tag):
+    """From single..._mintomax, get and return min and max in a dictionary."""
+    n1, n2 = tag.split(sep='_')[1].split(sep='to')
+    return {'nb1_min': n1, 'nb1_max': n2}

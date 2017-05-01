@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFAULT MENTAL CALCULATION SHEET -->
+
+
+<sheet header="" title="Trigonometry" subtitle="Calculate the length of a side using cosine" text="Calculate the missing length in each triangle. Round the results to the tenth." answers_title="Example of solutions:">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="std" font_size_offset="-1">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default values: id='generic' kind='' subkind='default' -->
+	<exercise q_numbering="alphabetical">
+		<!-- variant consists of 2 "flags" connected by '_' (underscore)
+			   1st flag is the function to use (sin|cos|tan|random)
+			   2d flag is which length must be calculated (up|down|adj|opp|hyp|random)
+				 Default values (if variant is not here) will be as if variant="random_random" -->
+		<!-- source for trigonometry_calculate_length questions must be double:
+			   the first part will be a length, the second part the (acute) angle -->
+		<question kind="trigonometry" subkind="calculate_length" variant="cos_up" space_after="40.0pt" decimal_result="1">
+			<nb source="singledeci1_1to100;;singleint_5to85">1</nb>
+		</question>
+
+		<question kind="trigonometry" subkind="calculate_length" variant="cos_down" space_after="40.0pt" decimal_result="1">
+			<nb source="singledeci1_1to100;;singleint_5to85">1</nb>
+		</question>
+
+		<question kind="trigonometry" subkind="calculate_length" variant="cos_random" space_after="40.0pt" decimal_result="1">
+			<nb source="singledeci1_1to100;;singleint_5to85">3</nb>
+		</question>
+
+	</exercise>
+
+
+</sheet>

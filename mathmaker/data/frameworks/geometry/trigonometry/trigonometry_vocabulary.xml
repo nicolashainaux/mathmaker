@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFAULT MENTAL CALCULATION SHEET -->
+
+
+<sheet header="" title="Vocabulary for trigonometry" subtitle="" text="" answers_title="Example of solutions:">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="std" font_size_offset="-1">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default values: id='generic' kind='' subkind='default' -->
+	<exercise q_numbering="alphabetical">
+		<!-- variant can be adjacent|opposite|random
+				 Default values (if variant is not here) will be as if variant="random" -->
+		<!-- no source required for trigonometry_vocabulary questions -->
+		<question kind="trigonometry" subkind="vocabulary" variant="random" space_after="40.0pt">
+			<nb source="nothing">5</nb>
+		</question>
+
+	</exercise>
+
+
+</sheet>

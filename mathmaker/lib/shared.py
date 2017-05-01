@@ -29,6 +29,7 @@ from mathmaker.lib.common import latex
 
 def init():
     global db
+    global three_letters_words_source
     global four_letters_words_source
     global five_letters_words_source
     global names_source
@@ -36,6 +37,7 @@ def init():
     global markup
     global int_pairs_source
     global single_ints_source
+    global single_deci1_source
     global angle_ranges_source
     global int_deci_clever_pairs_source
     global rank_words_source
@@ -44,6 +46,8 @@ def init():
     global deci_10_100_1000_divi_source
     global deci_one_digit_multi_source
     global deci_one_digit_divi_source
+    global trigo_functions_source
+    global trigo_vocabulary_source
     global mc_source
     global machine
     global number_of_the_question
@@ -53,6 +57,8 @@ def init():
     db = sqlite3.connect(settings.path.db)
 
     from mathmaker.lib.tools import db as database
+    three_letters_words_source = database.source("w3l", ["id", "word"],
+                                                 language=settings.language)
     four_letters_words_source = database.source("w4l", ["id", "word"],
                                                 language=settings.language)
 
@@ -65,6 +71,7 @@ def init():
                                                      "wording"])
     int_pairs_source = database.source("int_pairs", ["id", "nb1", "nb2"])
     single_ints_source = database.source("single_ints", ["id", "nb1"])
+    single_deci1_source = database.source("single_deci1", ["id", "nb1"])
     angle_ranges_source = database.source("angle_ranges", ["id", "nb1", "nb2"])
     int_deci_clever_pairs_source = database.source("int_deci_clever_pairs",
                                                    ["id", "nb1", "nb2"])
@@ -73,6 +80,8 @@ def init():
 
     from mathmaker.lib import sources
     rank_words_source = sources.sub_source('rank_words')
+    trigo_functions_source = sources.sub_source('trigo_functions')
+    trigo_vocabulary_source = sources.sub_source('trigo_vocabulary')
     int_fracs_source = sources.sub_source('int_irreducible_frac')
     deci_10_100_1000_multi_source = sources.sub_source(
         'decimal_and_10_100_1000_for_multi')

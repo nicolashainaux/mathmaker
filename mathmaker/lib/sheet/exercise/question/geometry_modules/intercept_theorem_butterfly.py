@@ -155,11 +155,9 @@ class sub_object(submodule.structure):
         setup_wording_format_of(self)
 
         self.ratios = shared.machine.write_math_style1(
-            self.figure.ratios_equalities()
-            .into_str(as_a_quotients_equality=True))
+            self.figure.ratios_equalities().into_str())
         self.ratios_substituted = shared.machine.write_math_style1(
-            self.figure.ratios_equalities_substituted()
-            .into_str(as_a_quotients_equality=True))
+            self.figure.ratios_equalities_substituted().into_str())
 
         self.resolution0 = self.figure.ratios_equalities_substituted()\
             .into_crossproduct_equation(Item(lengths_to_calculate[0]))\

@@ -39,5 +39,5 @@ def wrap_nb(s):
     >>> wrap_nb(' - (+7.2)')
     ' - (+\\text{7.2})'
     """
-    p = re.compile(r'((\d*\.\d+)|(\d+))', re.LOCALE)
+    p = re.compile(r'((\d*\.\d+)|(\d+))')
     return p.sub(r'\\text{' + r'\1' + r'}', s)

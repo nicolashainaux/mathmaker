@@ -23,7 +23,7 @@
 import pytest
 import decimal
 
-from mathmaker.lib.core.root_calculus import Exponented
+from mathmaker.lib.core.root_calculus import Exponented, Value
 from mathmaker.lib.core.base_calculus import Item, Sum, Product
 from tools import wrap_nb
 
@@ -58,6 +58,10 @@ def item_to_round(): return Item(6.548)
 
 @pytest.fixture()
 def item_with_unit(): return Item(19.5, unit='cm')
+
+
+@pytest.fixture()
+def literal_item(): return Item('AB')
 
 
 def test_isinstance_01():
@@ -348,3 +352,9 @@ def test_item_with_unit_printed(item_with_unit):
 def test_item_eval():
     """Is Item.evaluate() a decimal.Decimal instance?"""
     assert isinstance(Item(2.5).evaluate(), decimal.Decimal)
+
+
+def test_literal_item_substituted(literal_item):
+    """Is this Value correctly substituted?"""
+    literal_item.substitute({Value('AB'): 11, Value('CD'): 10})
+    assert literal_item.printed == wrap_nb('11')
