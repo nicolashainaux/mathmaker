@@ -27,7 +27,6 @@ import copy
 import re
 
 from mathmaker import settings
-from mathmaker.lib import error
 from mathmaker.lib import shared
 from mathmaker.lib.core.root_calculus import Unit, Value
 from mathmaker.lib.common.cst import (UNIT_KINDS, COMMON_LENGTH_UNITS,
@@ -372,7 +371,9 @@ def handle_valueless_unit_tags(arg: object, sentence: str):
             elif unit_kind in ['area', 'volume']:
                 area_or_volume_tags.append(vu)
             else:
-                raise error.OutOfRangeArgument(unit_kind, str(d.keys()))
+                raise ValueError('This kind of unit: ' + str(unit_kind)
+                                 + ' does not belong to the expected values: '
+                                 + str(d.keys()))
     for vu in area_or_volume_tags:
         unit_kind, unit_id = vu.split(sep="_")
         val = random.choice(d['length'])
@@ -586,9 +587,10 @@ def setup_wording_format_of(w_object: object, w_prefix=''):
         if hasattr(w_object, 'length_' + unit_id):
             setattr(w_object, hint, getattr(w_object, 'length_' + unit_id))
         else:
-            raise error.ImpossibleAction("display " + hint + " as hint while "
-                                         "no length_" + unit_id + " has "
-                                         "been defined already.")
+            raise RuntimeError("Impossible to display " + hint
+                               + " as hint while "
+                               "no length_" + unit_id + " has "
+                               "been defined already.")
 
     merge_nb_unit_pairs(w_object)
     w_object_wording = getattr(w_object, w_prefix + 'wording')
