@@ -50,6 +50,20 @@ def o1():
 
 
 @pytest.fixture
+def owbuggy():
+    o = raw_obj()
+    o.wording = 'A glas of {nb1} {capacity_unit}. |hint:volume_unit|'
+    return o
+
+
+@pytest.fixture
+def owbuggy2():
+    o = raw_obj()
+    o.wording = 'A glas of {nb1} {capacity_unit}. |hint:area_unit|'
+    return o
+
+
+@pytest.fixture
 def ow7():
     o = raw_obj()
     o.nb1 = 3
@@ -363,6 +377,12 @@ def test_handle_valueless_unit_tags_04(o1):
     assert hasattr(o1, 'length_unit2')
 
 
+def test_handle_valueless_unit_tags_exceptions(o1):
+    """Check if incorrect unit tags raise an exception."""
+    with pytest.raises(ValueError):
+        handle_valueless_unit_tags(o1, 'It weighs {nb1} {fancy_unit}.')
+
+
 def test_process_attr_values_01():
     """Checks if {such_tags=val} are correctly processed."""
     assert process_attr_values('He likes {animal=cat}. He has a garden '
@@ -467,6 +487,18 @@ def test_setup_wording_format_of_12(ow2qua):
     assert ow2qua.wording.format(**ow2qua.wording_format) == \
         '(AB) is parallel to (MN). '\
         'Calculate the length of segment [BC].'
+
+
+def test_setup_wording_format_of_exceptions(owbuggy):
+    """Check if a wrong hint correctly raises an exception."""
+    with pytest.raises(RuntimeError):
+        setup_wording_format_of(owbuggy)
+
+
+def test_setup_wording_format_of_exceptions2(owbuggy2):
+    """Check if a wrong hint correctly raises an exception."""
+    with pytest.raises(RuntimeError):
+        setup_wording_format_of(owbuggy2)
 
 
 def test_insert_nonbreaking_spaces():
