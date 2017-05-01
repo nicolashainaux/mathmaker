@@ -35,20 +35,6 @@ sdt_err_output = sys.stderr.fileno()
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
-# @exception UnreachableData
-# @brief Raised if a searched for data can't be found.
-class UnreachableData(Exception):
-    def __init__(self, data):
-        self.data = data
-
-    def __str__(self):
-        return "Can't find: " + str(self.data)
-
-
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
 # @exception MethodShouldBeRedefined
 # @brief Raised if one tries to use a method that should have been redefined.
 class MethodShouldBeRedefined(Exception):

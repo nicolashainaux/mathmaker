@@ -3592,7 +3592,9 @@ class CommutativeOperation(Operation):
 
         # Check if we really find the researched term
         if i == len(self):
-            raise error.UnreachableData(str(elt) + " in " + repr(self))
+            raise ValueError('CommutativeOperation.remove(elt): elt '
+                             + str(elt)
+                             + ' not in ' + repr(self))
 
         # Then pop the right one
         self._element.pop(i)
@@ -3787,9 +3789,9 @@ class Product(CommutativeOperation):
                             objct_was_found = True
                 return aux_list
             else:
-                raise error.UnreachableData("the object: " + repr(objct)
-                                            + " in this Product: "
-                                            + repr(self))
+                raise ValueError("the object: " + repr(objct)
+                                 + " is nowhere to find in this Product: "
+                                 + repr(self))
 
     # --------------------------------------------------------------------------
     ##
