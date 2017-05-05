@@ -1,6 +1,11 @@
 Changelog
 =========
 
+New in version 0.7.1dev5 (2017-05-04)
+-------------------------------------
+
+* Issue warnings instead of exceptions when the version of a dependency could not be determined.
+
 New in version 0.7.1dev4 (2017-05-03)
 -------------------------------------
 
