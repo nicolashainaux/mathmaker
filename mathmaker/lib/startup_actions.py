@@ -31,10 +31,33 @@ import os
 import subprocess
 import shlex
 import gettext
+import warnings
 from distutils.version import LooseVersion
 
 from mathmaker import __software_name__
 from mathmaker.lib.common import latex
+
+
+def warning_msg(name: str, path_to: str, c_out: str, c_err: str,
+                gkw: str, g_out: str, g_err: str):
+    """
+    Return the formatted warning message.
+
+    :param name: name of the software
+    :param path_to: the path to the software
+    :param c_out: output of the call to `software --version`
+    :param c_err: error output of the call to `software --version`
+    :param gkw: keyword used to grep the version from output
+    :param g_out: output of the call to `grep...`
+    :param g_err: error output of the call to `grep...`
+    """
+    return 'Could not check the version of ' + name + '.\n'\
+        '`' + str(path_to) + ' --version` returned:\n'\
+        '  > OUT: ' + str(c_out) + '\n'\
+        '  > ERR: ' + str(c_err) + '\n'\
+        'Trying to `grep ' + str(gkw) + '` on OUT returned:\n'\
+        '  > OUT: ' + str(g_out) + '\n'\
+        '  > ERR: ' + str(g_err) + '\n'
 
 
 def check_dependency(name: str, goal: str, path_to: str,
@@ -57,48 +80,89 @@ def check_dependency(name: str, goal: str, path_to: str,
     :rtype: bool
     """
     err_msg = "mathmaker requires {n} to {g}".format(n=name, g=goal)
-    the_call = None
+    the_call = the_call_out = the_call_err = None
     try:
-        the_call = subprocess.Popen([path_to, "--version"],
+        the_call = subprocess.Popen([path_to, '--version'],
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.STDOUT)
+        the_call_out, the_call_err = \
+            subprocess.Popen([path_to, '--version'],
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.STDOUT).communicate()
     except OSError:
         add_msg = " but the path to {n} written in mathmaker's "\
                   "config file doesn't seem to match anything.".format(n=name)
         raise EnvironmentError(err_msg + add_msg)
 
     if name in ['lualatex']:
-        temp = shlex.split(subprocess.Popen(["grep", "Version"],
-                                            stdin=the_call.stdout,
-                                            stdout=subprocess.PIPE)
-                                     .communicate()[0].decode())[4]
-        if len(temp.split(sep='-')) >= 2:
-            v = temp.split(sep='-')[1]
-        else:
-            v = temp
+        try:
+            grep_out, grep_err = subprocess.Popen(['grep', 'Version'],
+                                                  stdin=the_call.stdout,
+                                                  stdout=subprocess.PIPE)\
+                .communicate()
+            temp = shlex.split(grep_out.decode())[4]
+            if len(temp.split(sep='-')) >= 2:
+                v = temp.split(sep='-')[1]
+            else:
+                v = temp
+        except IndexError:
+            warnings.warn(warning_msg(name=name, path_to=path_to,
+                                      c_out=the_call_out, c_err=the_call_err,
+                                      gkw='Version',
+                                      g_out=grep_out, g_err=grep_err))
     elif name in ['luaotfload-tool']:
-        temp = subprocess.Popen(["grep", "luaotfload-tool version"],
-                                stdin=the_call.stdout,
-                                stdout=subprocess.PIPE)\
-            .communicate()[0].decode().split()[-1]
-        v = temp[1:-1]
+        try:
+            grep_out, grep_err = subprocess.Popen(['grep',
+                                                   'luaotfload-tool version'],
+                                                  stdin=the_call.stdout,
+                                                  stdout=subprocess.PIPE)\
+                .communicate()
+            temp = grep_out.decode().split()[-1]
+            v = temp[1:-1]
+        except IndexError:
+            warnings.warn(warning_msg(name=name, path_to=path_to,
+                                      c_out=the_call_out, c_err=the_call_err,
+                                      gkw='luaotfload-tool version',
+                                      g_out=grep_out, g_err=grep_err))
     elif name in ['msgfmt']:
-        v = shlex.split(subprocess.Popen(["grep", name],
-                                         stdin=the_call.stdout,
-                                         stdout=subprocess.PIPE)
-                                  .communicate()[0].decode())[-1]
+        try:
+            grep_out, grep_err = subprocess.Popen(['grep', name],
+                                                  stdin=the_call.stdout,
+                                                  stdout=subprocess.PIPE)\
+                .communicate()
+            v = shlex.split(grep_out.decode())[-1]
+        except IndexError:
+            warnings.warn(warning_msg(name=name, path_to=path_to,
+                                      c_out=the_call_out, c_err=the_call_err,
+                                      gkw=name,
+                                      g_out=grep_out, g_err=grep_err))
     else:
-        v = shlex.split(subprocess.Popen(["grep", "version"],
-                                         stdin=the_call.stdout,
-                                         stdout=subprocess.PIPE)
-                        .communicate()[0].decode())[-1]
-
+        try:
+            grep_out, grep_err = subprocess.Popen(['grep', 'version'],
+                                                  stdin=the_call.stdout,
+                                                  stdout=subprocess.PIPE)\
+                .communicate()
+            v = shlex.split(grep_out.decode())[-1]
+        except IndexError:
+            warnings.warn(warning_msg(name=name, path_to=path_to,
+                                      c_out=the_call_out, c_err=the_call_err,
+                                      gkw='version',
+                                      g_out=grep_out, g_err=grep_err))
     installed_version_nb = str(v)
 
-    if LooseVersion(installed_version_nb) < LooseVersion(required_version_nb):
-        add_msg = " but the installed version number {nb1} " \
-                  "is lower than expected (at least {nb2})."\
-                  .format(nb1=installed_version_nb, nb2=required_version_nb)
+    try:
+        if (LooseVersion(installed_version_nb)
+            < LooseVersion(required_version_nb)):
+            add_msg = ' but the installed version number {nb1} ' \
+                      'is lower than expected (at least {nb2}).'\
+                      .format(nb1=installed_version_nb,
+                              nb2=required_version_nb)
+            raise EnvironmentError(err_msg + add_msg)
+    except TypeError as e:
+        add_msg = ' but something went wrong while trying to determine ' \
+            'the installed version number. Likely, {n} is installed but ' \
+            'the version number could not be retrieved (got: {v}).'\
+            .format(n=name, v=installed_version_nb)
         raise EnvironmentError(err_msg + add_msg)
 
 
