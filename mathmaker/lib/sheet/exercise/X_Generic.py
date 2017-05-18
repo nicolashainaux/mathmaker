@@ -194,8 +194,12 @@ def get_nb_sources_from_question_info(q_i):
     questions_sources = q_i.nb_source
     if len(q_i.nb_source) == 1:
         if q_i.nb_source[0].startswith('inttriplets_'):
-            questions_sources = ['intpairs_' + q_i.nb_source[0][12:],
-                                 'intpairs_' + q_i.nb_source[0][12:]]
+            chunks = q_i.nb_source[0].split(sep='_')
+            if not len(chunks) >= 2:
+                raise ValueError('Incorrect numbers\' source value in xml '
+                                 'file: {}'.format(q_i.nb_source[0]))
+            bounds = chunks[1]
+            questions_sources = ['intpairs_' + bounds, 'intpairs_' + bounds]
             extra_infos.update({'merge_sources': True})
         elif q_i.nb_source[0].startswith('ext_'):
             chunks = q_i.nb_source[0][4:].split(sep='_')
