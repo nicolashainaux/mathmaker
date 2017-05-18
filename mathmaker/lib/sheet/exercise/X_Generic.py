@@ -55,7 +55,8 @@ LAYOUTS = {'default': [None, 'all'],
            }
 
 to_unpack = copy.deepcopy(question.SUBKINDS_TO_UNPACK)
-Q_info = namedtuple('Q_info', 'type,kind,subkind,nb_source,options')
+# In Q_Info below, id is actually kind_subkind
+Q_info = namedtuple('Q_info', 'id,kind,subkind,nb_source,options')
 
 MIN_ROW_HEIGHT = 0.8
 
@@ -213,7 +214,7 @@ def get_nb_sources_from_question_info(q_i):
             if nb_source in ['decimal_and_10_100_1000',
                              'decimal_and_one_digit']:
                 # __
-                s = stu[nb_source][q_i.type]
+                s = stu[nb_source][q_i.id]
             else:
                 s = stu[nb_source][q_i.subkind]
             s = list(s)
@@ -368,7 +369,7 @@ class X_Generic(X_Structure):
                     second_couple_drawn = shared.mc_source\
                         .next(nb_source,
                               either_nb1_nb2_in=last_draw,
-                              **question.get_modifier(q.type, nb_source))
+                              **question.get_modifier(q.id, nb_source))
                     common_nb = get_common_nb_from_pairs_pair(
                         (nb_to_use, second_couple_drawn))
                     nb_to_use = merge_pair_to_tuple(nb_to_use,
@@ -381,12 +382,12 @@ class X_Generic(X_Structure):
                         new_couple_drawn = shared.mc_source\
                             .next(nb_source,
                                   triangle_inequality=nb_to_use,
-                                  **question.get_modifier(q.type, nb_source))
+                                  **question.get_modifier(q.id, nb_source))
                     else:
                         new_couple_drawn = shared.mc_source\
                             .next(nb_source,
                                   either_nb1_nb2_in=[common_nb],
-                                  **question.get_modifier(q.type, nb_source))
+                                  **question.get_modifier(q.id, nb_source))
                     nb_to_use = merge_pair_to_tuple(nb_to_use,
                                                     new_couple_drawn,
                                                     common_nb)
@@ -395,8 +396,7 @@ class X_Generic(X_Structure):
                                                   not_in=last_draw,
                                                   **question
                                                   .get_modifier(
-                                                      q.type,
-                                                      nb_source))
+                                                      q.id, nb_source))
                     if isinstance(drawn, int):
                         nb_to_use += (drawn, )
                     else:
@@ -408,7 +408,7 @@ class X_Generic(X_Structure):
                     # __
                     q.options['10_100_1000'] = True
             self.questions_list += \
-                [Q_Generic(q.type,
+                [Q_Generic(q.id,
                            q.options,
                            numbers_to_use=nb_to_use,
                            number_of_the_question=next(numbering),)]
