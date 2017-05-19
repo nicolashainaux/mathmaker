@@ -51,6 +51,13 @@ def init():
     global mc_source
     global machine
     global number_of_the_question
+    global naturals_0to3
+    global naturals_4to7
+    global naturals_0to7
+    global naturals_8to15
+    global naturals_16to23
+    global naturals_8to23
+    global naturals_0to23
 
     log = settings.mainlogger
 
@@ -91,6 +98,13 @@ def init():
         'decimal_and_one_digit_for_multi')
     deci_one_digit_divi_source = sources.sub_source(
         'decimal_and_one_digit_for_divi')
+    naturals_0to3 = sources.sub_source('naturals_0to3')
+    naturals_4to7 = sources.sub_source('naturals_4to7')
+    naturals_0to7 = sources.sub_source('naturals_0to7')
+    naturals_8to15 = sources.sub_source('naturals_8to15')
+    naturals_16to23 = sources.sub_source('naturals_16to23')
+    naturals_8to23 = sources.sub_source('naturals_8to23')
+    naturals_0to23 = sources.sub_source('naturals_0to23')
     mc_source = sources.mc_source()
 
     try:
