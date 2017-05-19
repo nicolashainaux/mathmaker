@@ -185,7 +185,13 @@ def build_mixed_q_list(q_dict):
 
 
 def preprocess_variant(q_i):
-    # Preprocess variant (if necessary)
+    """
+    Preprocess question's variant (if necessary)
+
+    :param q_i: the Q_info object, whose fields are
+                'id,kind,subkind,nb_source,options'
+    :type q_i: Q_info (named tuple)
+    """
     if q_i.id == 'priorities_in_calculation_without_parentheses':
         if ('variant' not in q_i.options
             or ('variant' in q_i.options and q_i.options['variant'] == '')):
