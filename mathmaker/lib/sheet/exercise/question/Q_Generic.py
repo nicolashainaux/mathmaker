@@ -20,6 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import warnings
+
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
 from . import (algebra_modules, calculation_modules, mc_modules,
@@ -92,13 +94,18 @@ SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
                       'vocabulary_divi': {'decimal_and_one_digit_for_divi'}}}
 
 
-# --------------------------------------------------------------------------
-##
-#   @brief  Tells if the given question's type and source number do match
-#   @todo   The 'integer_3_10_decimal_3_10' may be later turned into
-#           'intpairs_3to10' with variant='decimal1', so this condition can
-#           certainly be removed.
-def match_qtype_sourcenb(q_type, source_nb):
+def match_qtype_sourcenb(q_type: str, source_nb: str):
+    """
+    Tell if the given question's type and source number do match.
+
+    This is used in mix sections only, yet.
+
+    :param q_type: the question's type (kind_subkind)
+    :param source_nb: the source of the numbers
+    """
+    #   @todo   The 'integer_3_10_decimal_3_10' may be later turned into
+    #           'intpairs_3to10' with variant='decimal1', so this condition can
+    #           certainly be removed.
     source_nb = source_nb[0]
     if q_type in ['multi_direct', 'area_rectangle', 'multi_hole',
                   'rectangle_length_or_width_from_area', 'divi_direct',
@@ -147,6 +154,10 @@ def match_qtype_sourcenb(q_type, source_nb):
                     source_nb == 'table_3',
                     source_nb == 'table_4',
                     source_nb == 'bypass'])
+    else:
+        warnings.warn('Could not check if the question\'s type and numbers\'s '
+                      'source do match or not: {} and {}'
+                      .format(q_type, source_nb))
 
 
 # --------------------------------------------------------------------------
