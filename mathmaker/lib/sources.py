@@ -49,10 +49,6 @@ def generate_values(source_id):
     elif source_id == 'trigo_vocabulary':
         return ['adjacent', 'adjacent', 'opposite', 'opposite']
 
-    elif source_id.startswith('naturals_'):
-        min_bound, max_bound = source_id.split(sep='_')[1].split(sep='to')
-        return [i + min_bound for i in range(max_bound + 1 - min_bound)]
-
     elif source_id == 'decimal_and_10_100_1000_for_multi':
         box_10_100_1000 = [10, 100, 1000]
         result = set()
