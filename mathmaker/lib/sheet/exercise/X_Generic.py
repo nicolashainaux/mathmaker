@@ -228,6 +228,40 @@ def preprocess_variant(q_i):
                              .format(q_i.options['variant']))
 
 
+def auto_adjust_nb_sources(nb_sources: list, q_i: namedtuple):
+    """
+    Automatically adjust nb_sources for certains questions.
+
+    :param nb_sources: the provided numbers sources
+    :param q_i: the Q_info object (namedtuple), whose fields are
+                'id,kind,subkind,nb_source,options'
+    """
+    if q_i.id == 'priorities_in_calculation_without_parentheses':
+        if not len(nb_sources) == 2:
+            raise ValueError('There must be two sources for '
+                             'priorities_in_calculation_without_parentheses '
+                             'questions.')
+        if nb_sources[0].startswith('single') and 'pairs' in nb_sources[1]:
+            single_nb_source, pairs_nb_source = nb_sources
+        elif nb_sources[1].startswith('single') and 'pairs' in nb_sources[0]:
+            pairs_nb_source, single_nb_source = nb_sources
+        else:
+            raise ValueError('One of the two sources for '
+                             'priorities_in_calculation_without_parentheses '
+                             'questions must be for single numbers, '
+                             'the other one for pairs.')
+        v = q_i.options['variant']
+        if 0 <= v <= 3:
+            nb_sources = [single_nb_source, pairs_nb_source]
+        elif 4 <= v <= 7:
+            nb_sources = [pairs_nb_source, single_nb_source]
+        elif 8 <= v <= 15:
+            nb_sources = [pairs_nb_source, pairs_nb_source]
+        elif 16 <= v <= 23:
+            nb_sources = [single_nb_source, pairs_nb_source, single_nb_source]
+    return nb_sources
+
+
 # --------------------------------------------------------------------------
 ##
 #   @brief  Determine the
@@ -254,6 +288,8 @@ def get_nb_sources_from_question_info(q_i):
                                          'intpairs_' + chunks[2]]
                     extra_infos.update({'merge_sources': True,
                                         'triangle_inequality': True})
+    if q_i.id == 'priorities_in_calculation_without_parentheses':
+        nb_sources = auto_adjust_nb_sources(nb_sources, q_i)
     for nb_sce in questions_sources:
         tag_to_unpack = nb_source = nb_sce
         if nb_source in question.SOURCES_TO_UNPACK:
