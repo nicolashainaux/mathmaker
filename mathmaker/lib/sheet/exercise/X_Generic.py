@@ -184,6 +184,43 @@ def build_mixed_q_list(q_dict):
     return mixed_q_list
 
 
+def preprocess_variant(q_i):
+    # Preprocess variant (if necessary)
+    if q_i.id == 'priorities_in_calculation_without_parentheses':
+        if 'variant' not in q_i.options:
+            q_i.options.update({'variant': '0-23'})
+        bounds = q_i.options['variant'].split(sep='-')
+        if len(bounds) == 1:
+            try:
+                q_i.options.update(
+                    {'variant': int(q_i.options['variant'])})
+            except ValueError:
+                raise ValueError('Incorrect variant in xml file: {}'
+                                 .format(q_i.options['variant']))
+        elif len(bounds) == 2:
+            try:
+                bound_min = int(bounds[0])
+                bound_max = int(bounds[1])
+            except ValueError:
+                raise ValueError('Incorrect variant in xml file: {}'
+                                 .format(q_i.options['variant']))
+            else:
+                if bound_min < 0 or bound_max > 23:
+                    raise ValueError('Incorrect bounds in variant '
+                                     'in xml file: {}'
+                                     .format(q_i.options['variant']))
+                query_kwargs = {'nb1_min': bound_min,
+                                'nb1_max': bound_max}
+                q_i.options.update(
+                    {'variant':
+                     int(shared
+                         .priorities_in_calculation_variants_source
+                         .next(**query_kwargs))})
+        else:
+            raise ValueError('Incorrect variant in xml file: {}'
+                             .format(q_i.options['variant']))
+
+
 # --------------------------------------------------------------------------
 ##
 #   @brief  Determine the
@@ -365,6 +402,7 @@ class X_Generic(X_Structure):
         last_draw = [0, 0]
         numbering = numbering_device(self.q_numbering)
         for q in mixed_q_list:
+            preprocess_variant(q)
             nb_sources, extra_infos = get_nb_sources_from_question_info(q)
             nb_to_use = tuple()
             common_nb = None
