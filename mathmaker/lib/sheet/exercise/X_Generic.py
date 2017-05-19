@@ -187,7 +187,8 @@ def build_mixed_q_list(q_dict):
 def preprocess_variant(q_i):
     # Preprocess variant (if necessary)
     if q_i.id == 'priorities_in_calculation_without_parentheses':
-        if 'variant' not in q_i.options:
+        if ('variant' not in q_i.options
+            or ('variant' in q_i.options and q_i.options['variant'] == '')):
             q_i.options.update({'variant': '0-23'})
         bounds = q_i.options['variant'].split(sep='-')
         if len(bounds) == 1:
