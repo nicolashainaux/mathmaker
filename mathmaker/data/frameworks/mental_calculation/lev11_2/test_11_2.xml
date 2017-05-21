@@ -49,7 +49,7 @@
 			<nb source="auto_vocabulary">1</nb>
 		</question>
 
-		<question kind="divi" subkind="direct" variant="decimal">
+		<question kind="divi" subkind="direct" nb_variant="decimal">
 			<nb source="intpairs_2to9">1</nb>
 		</question>
 
@@ -66,7 +66,7 @@
 		</question>
 
 		<question kind="vocabulary" subkind="subtr">
-			<nb source="intpairs_2to200" variant="decimal2">2</nb>
+			<nb source="intpairs_2to200" nb_variant="decimal2">2</nb>
 		</question>
 
 		<question kind="rank" subkind="numberof" generation_type="default">
@@ -84,8 +84,8 @@
 			<question kind="vocabulary" subkind="multi"></question>
 			<nb source="table_15">1</nb>
 			<nb source="table_11">1</nb>
-			<nb source="intpairs_2to9" variant="decimal1">1</nb>
-			<nb source="intpairs_2to9" variant="decimal2">1</nb>
+			<nb source="intpairs_2to9" nb_variant="decimal1">1</nb>
+			<nb source="intpairs_2to9" nb_variant="decimal2">1</nb>
 		</mix>
 
 	</exercise>

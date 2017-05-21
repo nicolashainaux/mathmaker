@@ -50,10 +50,11 @@ class structure(object):
             self.newline = '\\newline'
             self.parallel_to = '$\parallel$'
             self.belongs_to = '$\in$'
-            if 'variant' in options and options['variant'] == 'decimal':
-                options['variant'] = random.choice(['decimal1', 'decimal2'])
+            if 'nb_variant' in options and options['nb_variant'] == 'decimal':
+                options['nb_variant'] = random.choice(['decimal1', 'decimal2'])
 
             self.variant = options.get('variant', "default")
+            self.nb_variant = options.get('nb_variant', "default")
             self.context = options.get('context', "default")
             self.picture = XML_BOOLEANS[options.get('picture', "false")]()
             self.decimal_result = int(options.get('decimal_result', 2))
@@ -87,7 +88,7 @@ class structure(object):
             self.nb_nb = len(nb_list)
 
         elif arg == "nb_variants":
-            if self.variant.startswith('decimal'):
+            if self.nb_variant.startswith('decimal'):
                 deci_nb = int(self.variant[-1])  # so, from decimal1 up to 9
                 chosen_ones = random.sample([i for i in range(self.nb_nb)],
                                             deci_nb)

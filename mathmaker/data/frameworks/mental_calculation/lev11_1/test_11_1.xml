@@ -20,25 +20,25 @@
 		</ans>
 	</layout>
 
-	<!-- Default value: id='generic' 
+	<!-- Default value: id='generic'
 		 No default for kind and subkind, they must be given -->
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise id="mental_calculation" kind="tabular">
 
-		<!-- Default value (planned): context="none" 
+		<!-- Default value (planned): context="none"
 			 No default for kind and subkind, they must be given -->
 		<question kind="multi" subkind="direct">
 			<nb source="intpairs_2to9">1</nb>
 			<nb source="table_11">1</nb>
 			<nb source="decimal_and_one_digit">1</nb>
 		</question>
-		
+
 		<mix>
 			<question kind="multi" subkind="direct" context="mini_problem"></question>
 			<question kind="divi" subkind="direct" context="mini_problem"></question>
 			<nb source="intpairs_4to9">2</nb>
 		</mix>
-		
+
 		<mix>
 			<question kind="addi" subkind="direct" context="mini_problem"></question>
 			<question kind="subtr" subkind="direct" context="mini_problem"></question>
@@ -49,12 +49,12 @@
 			<nb source="intpairs_4to9">2</nb>
 		</question>
 
-		<question kind="multi" subkind="direct" variant="decimal1">
+		<question kind="multi" subkind="direct" nb_variant="decimal1">
 			<!-- One should be replaced by a problem, later -->
 			<nb source="intpairs_2to9">2</nb>
 		</question>
 
-		<question kind="multi" subkind="direct" variant="decimal2">
+		<question kind="multi" subkind="direct" nb_variant="decimal2">
 			<nb source="intpairs_2to9">2</nb>
 		</question>
 
@@ -79,7 +79,7 @@
 			<nb source="rank_words">1</nb>
 		</question>
 
-		
+
 
 	</exercise>
 

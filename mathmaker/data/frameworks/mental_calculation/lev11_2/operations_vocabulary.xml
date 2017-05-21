@@ -20,12 +20,12 @@
 		</ans>
 	</layout>
 
-	<!-- Default value: id='generic' 
+	<!-- Default value: id='generic'
 		 No default for kind and subkind, they must be given -->
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise id="mental_calculation" kind="tabular">
 
-		<!-- Default value (planned): context="none" 
+		<!-- Default value (planned): context="none"
 			 No default for kind and subkind, they must be given -->
 
 		<question kind="vocabulary" subkind="half">
@@ -70,7 +70,7 @@
 		<question kind="vocabulary" subkind="divi">
 			<nb source="intpairs_2to9">3</nb>
 		</question>
-		
+
 		<question kind="vocabulary" subkind="addi">
 			<!--<nb source="integers_10_100_for_sums_diffs">1</nb>
 			<nb source="table_2_9_for_sums_diffs">1</nb>-->
@@ -80,9 +80,9 @@
 
 		<question kind="vocabulary" subkind="subtr">
 			<nb source="intpairs_10to100">1</nb>
-			<nb source="intpairs_2to200" variant="decimal2">1</nb>
+			<nb source="intpairs_2to200" nb_variant="decimal2">1</nb>
 		</question>
-		
+
 		<question kind="vocabulary" subkind="operation">
 			<nb source="auto_vocabulary">1</nb>
 		</question>
