@@ -100,6 +100,7 @@ def create_mo_files(force=False):
         data_files.append((d, mo_files))
     return data_files
 
+
 missing_dependency = False
 infos = ""
 
@@ -130,7 +131,8 @@ setup(
     tests_require=['tox'],
     install_requires=['PyYAML>=3.11',
                       'polib>=1.0.7',
-                      'python-daemon>=2.1.1'],
+                      'python-daemon>=2.1.1',
+                      'intspan>=1.5.8'],
     cmdclass={'test': PyTest,
               'tox': Tox,
               'clean': CleanCommand},
@@ -152,6 +154,7 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Development Status :: 3 - Alpha',
         'Natural Language :: English',
         'License :: OSI Approved :: ' + mathmaker.__licence__,
