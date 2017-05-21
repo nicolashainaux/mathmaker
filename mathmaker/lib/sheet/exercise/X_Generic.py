@@ -24,6 +24,9 @@ import copy
 import random
 from collections import namedtuple
 
+from intspan import intspan
+from intspan.core import ParseError
+
 from mathmaker.lib import shared, error
 from mathmaker.lib.common import alphabet
 from .X_Structure import X_Structure
@@ -196,36 +199,26 @@ def preprocess_variant(q_i):
         if ('variant' not in q_i.options
             or ('variant' in q_i.options and q_i.options['variant'] == '')):
             q_i.options.update({'variant': '0-23'})
-        bounds = q_i.options['variant'].split(sep='-')
-        if len(bounds) == 1:
-            try:
-                q_i.options.update(
-                    {'variant': int(q_i.options['variant'])})
-            except ValueError:
-                raise ValueError('Incorrect variant in xml file: {}'
-                                 .format(q_i.options['variant']))
-        elif len(bounds) == 2:
-            try:
-                bound_min = int(bounds[0])
-                bound_max = int(bounds[1])
-            except ValueError:
-                raise ValueError('Incorrect variant in xml file: {}'
-                                 .format(q_i.options['variant']))
-            else:
-                if bound_min < 0 or bound_max > 23:
-                    raise ValueError('Incorrect bounds in variant '
-                                     'in xml file: {}'
-                                     .format(q_i.options['variant']))
-                query_kwargs = {'nb1_min': bound_min,
-                                'nb1_max': bound_max}
-                q_i.options.update(
-                    {'variant':
-                     int(shared
-                         .priorities_in_calculation_variants_source
-                         .next(**query_kwargs))})
-        else:
+        try:
+            variants_to_pick_from = intspan(q_i.options['variant'])
+        except ParseError:
             raise ValueError('Incorrect variant in xml file: {}'
                              .format(q_i.options['variant']))
+        raw_query = '('
+        last = len(variants_to_pick_from) - 1
+        for i, r in enumerate(variants_to_pick_from.ranges()):
+            if r[0] == r[1]:
+                raw_query += 'nb1 = ' + str(r[0])
+            else:
+                raw_query += '(nb1 >= {} AND nb1 <= {})'.format(r[0], r[1])
+            if i < last:
+                raw_query += ' OR '
+        raw_query += ')'
+        q_i.options.update(
+            {'variant':
+             int(shared
+                 .priorities_in_calculation_variants_source
+                 .next(**{'raw': raw_query}))})
 
 
 def auto_adjust_nb_sources(nb_sources: list, q_i: namedtuple):
