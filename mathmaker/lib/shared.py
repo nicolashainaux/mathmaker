@@ -77,7 +77,7 @@ def init():
     int_deci_clever_pairs_source = database.source("int_deci_clever_pairs",
                                                    ["id", "nb1", "nb2"])
     priorities_in_calculation_variants_source = database.source(
-        "priorities_in_calculation_variants", ["id", "variant_nb"])
+        'priorities_in_calculation_variants', ['id', 'nb1'])
 
     markup = latex.MARKUP
 

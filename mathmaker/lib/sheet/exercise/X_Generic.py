@@ -205,7 +205,7 @@ def preprocess_variant(q_i):
             raise ValueError('Incorrect variant in xml file: {}'
                              .format(q_i.options['variant']))
         raw_query = '('
-        last = len(variants_to_pick_from) - 1
+        last = len(variants_to_pick_from.ranges()) - 1
         for i, r in enumerate(variants_to_pick_from.ranges()):
             if r[0] == r[1]:
                 raw_query += 'nb1 = ' + str(r[0])
@@ -282,7 +282,7 @@ def get_nb_sources_from_question_info(q_i):
                     extra_infos.update({'merge_sources': True,
                                         'triangle_inequality': True})
     if q_i.id == 'priorities_in_calculation_without_parentheses':
-        nb_sources = auto_adjust_nb_sources(nb_sources, q_i)
+        nb_sources = auto_adjust_nb_sources(q_i.nb_source, q_i)
     for nb_sce in questions_sources:
         tag_to_unpack = nb_source = nb_sce
         if nb_source in question.SOURCES_TO_UNPACK:
