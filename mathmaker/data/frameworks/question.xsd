@@ -14,6 +14,7 @@
 			<xs:attribute name="text"	              type="xs:string"	use="optional"/>
 			<xs:attribute name="wording"				    type="xs:string"	use="optional"/>
 			<xs:attribute name="variant"						type="xs:string"	use="optional"/>
+			<xs:attribute name="subvariant"						type="xs:string"	use="optional"/>
 			<xs:attribute name="nb_variant"						type="xs:string"	use="optional"/>
 			<xs:attribute name="ans_variant"			type="xs:string"	use="optional"	default="default"/>
 			<xs:attribute name="detailed"						type="xs:boolean"	use="optional" default="true"/>

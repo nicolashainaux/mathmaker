@@ -54,6 +54,7 @@ class structure(object):
                 options['nb_variant'] = random.choice(['decimal1', 'decimal2'])
 
             self.variant = options.get('variant', "default")
+            self.subvariant = options.get('subvariant', "default")
             self.nb_variant = options.get('nb_variant', "default")
             self.context = options.get('context', "default")
             self.picture = XML_BOOLEANS[options.get('picture', "false")]()
