@@ -202,3 +202,11 @@ def test_trigonometry_formulae():
     """
     shared.machine.write_out(
         str(S_Generic(XML_SHEETS['trigonometry_formulae'])))
+
+
+def test_trigonometry_vocabulary():
+    """
+    Check if 'trigonometry_vocabulary' is generated with no error.
+    """
+    shared.machine.write_out(
+        str(S_Generic(XML_SHEETS['trigonometry_vocabulary'])))
