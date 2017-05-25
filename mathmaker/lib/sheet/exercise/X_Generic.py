@@ -422,12 +422,12 @@ class X_Generic(X_Structure):
         mixed_q_list = build_mixed_q_list(q_dict)
         # in case of mental calculation exercises we shuffle the questions
         if self.x_kind in ['tabular', 'slideshow']:
-            mixed_q_list = increase_alternation(mixed_q_list, 'type')
+            mixed_q_list = increase_alternation(mixed_q_list, 'id')
             mixed_q_list.reverse()
-            mixed_q_list = increase_alternation(mixed_q_list, 'type')
+            mixed_q_list = increase_alternation(mixed_q_list, 'id')
 
         # mixed_q_list is organized like this:
-        # [('type', 'kind', 'subkind', 'nb_source', 'options'),
+        # [('id', 'kind', 'subkind', 'nb_source', 'options'),
         #  ('q_id', 'q', 'id', 'table_15', {'nb':}),
         #  ('multi_direct', 'multi', 'direct', ['table_2_9'], {'nb':}),
         #  etc.

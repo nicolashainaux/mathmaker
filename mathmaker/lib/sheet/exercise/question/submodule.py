@@ -90,7 +90,7 @@ class structure(object):
 
         elif arg == "nb_variants":
             if self.nb_variant.startswith('decimal'):
-                deci_nb = int(self.variant[-1])  # so, from decimal1 up to 9
+                deci_nb = int(self.nb_variant[-1])  # so, from decimal1 up to 9
                 chosen_ones = random.sample([i for i in range(self.nb_nb)],
                                             deci_nb)
                 for i in chosen_ones:
