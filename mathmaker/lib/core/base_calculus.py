@@ -2287,9 +2287,12 @@ class Quotient(Operation):
                 return next_step
 
             else:
-                # We could evaluate it ? It isn't useful so far, but
-                # maybe it could become useful later... ?
-                return None
+                val = Item(self.evaluate(stop_recursion=True,
+                                         **options)).round(3)
+                if not val.contains_a_rounded_number():
+                    return val
+                else:
+                    return None
 
     def expand_and_reduce_next_step(self, **options):
         """If possible, expands Quotient's numerator and/or denominator."""

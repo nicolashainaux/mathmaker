@@ -23,8 +23,16 @@
 import pytest
 
 from mathmaker.lib.core.root_calculus import Value
-from mathmaker.lib.core.base_calculus import Quotient, Fraction
+from mathmaker.lib.core.base_calculus import Item, Quotient, Fraction
 from tools import wrap_nb
+
+
+@pytest.fixture
+def q0(): return Quotient(('+',
+                           Item(48),
+                           Item(6),
+                           1,
+                           'use_divide_symbol'))
 
 
 @pytest.fixture
@@ -48,6 +56,16 @@ def q3(): return Quotient(('+',
                            Value(8),
                            Value(1),
                            1), ignore_1_denominator=True)
+
+
+def test_q0_printed(q0):
+    """Is this Quotient correctly printed?"""
+    assert q0.printed == wrap_nb('48\div 6')
+
+
+def test_q0_next_step(q0):
+    """Is this Quotient's calculation's next step correct?"""
+    assert q0.calculate_next_step().printed == wrap_nb('8')
 
 
 def test_q1_printed(q1):
