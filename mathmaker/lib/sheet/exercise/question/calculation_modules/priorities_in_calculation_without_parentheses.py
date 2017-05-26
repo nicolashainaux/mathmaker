@@ -126,7 +126,7 @@ class sub_object(submodule.structure):
             if random.choice([True, False]):
                 self.nb3, self.nb4 = self.nb4, self.nb3
 
-        if self.subvariant == 'only_naturals':
+        if self.subvariant == 'only_positive':
             if self.variant in [2, 18]:
                 if (Item(Product([self.nb2, self.nb3]).evaluate())
                     > Item(self.nb1)):
@@ -145,12 +145,12 @@ class sub_object(submodule.structure):
                                                 self.nb3),
                                                use_divide_symbol=True)])
         elif self.variant == 2:  # a - b×c
-            if self.subvariant == 'only_naturals':
+            if self.subvariant == 'only_positive':
                 if self.nb1 < self.nb2:
                     self.nb1 += self.nb2
             self.obj = Sum([self.nb1, Product([-self.nb2, self.nb3])])
         elif self.variant == 3:  # a - b÷c
-            if self.subvariant == 'only_naturals':
+            if self.subvariant == 'only_positive':
                 if self.nb1 < self.nb2 * self.nb3:
                     self.nb1 += self.nb2 * self.nb3
             self.obj = Sum([self.nb1,
@@ -164,13 +164,13 @@ class sub_object(submodule.structure):
                                      use_divide_symbol=True),
                             self.nb3])
         elif self.variant == 6:  # a×b - c
-            if (self.subvariant == 'only_naturals'
+            if (self.subvariant == 'only_positive'
                 and self.nb1 * self.nb2 < self.nb3):
                 self.nb3 = self.nb3 % (self.nb1 * self.nb2)
             self.obj = Sum([Product([self.nb1, self.nb2]),
                             -self.nb3])
         elif self.variant == 7:  # a÷b - c
-            if self.subvariant == 'only_naturals' and self.nb1 < self.nb3:
+            if self.subvariant == 'only_positive' and self.nb1 < self.nb3:
                 self.nb3 = self.nb3 - 1 - (self.nb3 - min(self.nb1, self.nb2))
                 if self.nb3 <= 0:
                     self.nb3 = 1
@@ -181,7 +181,7 @@ class sub_object(submodule.structure):
             self.obj = Sum([Product([self.nb1, self.nb2]),
                             Product([self.nb3, self.nb4])])
         elif self.variant == 9:  # a×b - c×d
-            if (self.subvariant == 'only_naturals'
+            if (self.subvariant == 'only_positive'
                 and self.nb1 * self.nb2 < self.nb3 * self.nb4):
                 self.nb1, self.nb2, self.nb3, self.nb4 = \
                     self.nb3, self.nb4, self.nb1, self.nb2
@@ -192,7 +192,7 @@ class sub_object(submodule.structure):
                                      use_divide_symbol=True),
                             Product([self.nb3, self.nb4])])
         elif self.variant == 11:  # a÷b - c×d
-            if self.subvariant == 'only_naturals':
+            if self.subvariant == 'only_positive':
                 self.nb1, self.nb2, self.nb3, self.nb4 = \
                     adjust_nb_for_variant_11(self.nb1, self.nb2,
                                              self.nb3, self.nb4)
@@ -204,7 +204,7 @@ class sub_object(submodule.structure):
                             Quotient(('+', self.nb3 * self.nb4, self.nb4),
                                      use_divide_symbol=True)])
         elif self.variant == 13:  # a×b - c÷d
-            if self.subvariant == 'only_naturals':
+            if self.subvariant == 'only_positive':
                 self.nb1, self.nb2, self.nb3, self.nb4 = \
                     adjust_nb_for_variant_13(self.nb1, self.nb2,
                                              self.nb3, self.nb4)
@@ -217,7 +217,7 @@ class sub_object(submodule.structure):
                             Quotient(('+', self.nb3 * self.nb4, self.nb4),
                                      use_divide_symbol=True)])
         elif self.variant == 15:  # a÷b - c÷d
-            if self.subvariant == 'only_naturals':
+            if self.subvariant == 'only_positive':
                 self.nb1, self.nb2, self.nb3, self.nb4 = \
                     adjust_nb_for_variant_15(self.nb1, self.nb2,
                                              self.nb3, self.nb4)
@@ -239,14 +239,14 @@ class sub_object(submodule.structure):
                             Product([-self.nb2, self.nb3]),
                             self.nb4])
         elif self.variant == 19:  # a + b×c - d
-            if self.subvariant == 'only_naturals':
+            if self.subvariant == 'only_positive':
                 if self.nb1 + self.nb2 * self.nb3 < self.nb4:
                     self.nb1 = self.nb1 + self.nb4
             self.obj = Sum([self.nb1,
                             Product([self.nb2, self.nb3]),
                             -self.nb4])
         elif self.variant == 20:  # a - b×c - d
-            if self.subvariant == 'only_naturals':
+            if self.subvariant == 'only_positive':
                 if self.nb4 + self.nb2 * self.nb3 > self.nb1:
                     self.nb1 = self.nb1 + self.nb4 + self.nb2 * self.nb3
             self.obj = Sum([self.nb1,
@@ -257,7 +257,7 @@ class sub_object(submodule.structure):
                             Quotient(('-', self.nb2 * self.nb3, self.nb3),
                                      use_divide_symbol=True)])
         elif self.variant == 22:  # a + b÷c - d
-            if self.subvariant == 'only_naturals':
+            if self.subvariant == 'only_positive':
                 if self.nb1 + self.nb2 < self.nb4:
                     self.nb1 += self.nb4
             self.obj = Sum([self.nb1,
@@ -265,7 +265,7 @@ class sub_object(submodule.structure):
                                      use_divide_symbol=True),
                             -self.nb4])
         elif self.variant == 23:  # a - b÷c - d
-            if self.subvariant == 'only_naturals':
+            if self.subvariant == 'only_positive':
                 if self.nb1 < self.nb2:
                     self.nb1 += self.nb2
                     if self.nb1 < self.nb2 + self.nb4:
