@@ -37,8 +37,8 @@ It will add all entries:
 - all integers pairs from 2 to 500
 - a list of "clever" couples of (integer, decimal) (for multiplications)
 - a list of angles' ranges (around 0, 90, 180, 270)
-- the list of variants identification numbers (from 0 to 23, so far) for
-  priorities_in_calculation questions
+- the list of variants identification numbers (from 0 to 23 and 100 to 155,
+  so far) for priorities_in_calculation questions
 """
 
 import os
@@ -218,6 +218,11 @@ def __main__():
 
     # Variant numbers for priorities_in_calculation questions.
     db_rows = [(i, 0) for i in range(24)]
+    db.executemany("INSERT "
+                   "INTO priorities_in_calculation_variants(nb1, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+    db_rows = [(i + 100, 0) for i in range(56)]
     db.executemany("INSERT "
                    "INTO priorities_in_calculation_variants(nb1, drawDate) "
                    "VALUES(?, ?)",
