@@ -253,7 +253,8 @@ def get_q_kinds_from(exercise_node):
             n_temp_list = []
             for elt in child:
                 if elt.tag == 'question':
-                    q_temp_list += [elt.attrib]
+                    mix_nb = int(elt.attrib.pop('mix_nb', 1))
+                    q_temp_list += [elt.attrib for i in range(mix_nb)]
                 elif elt.tag == 'nb':
                     # We don't check that 'source' is in elt.attrib,
                     # this should have been checked by the xml schema,

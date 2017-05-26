@@ -42,12 +42,8 @@
 		   what kind of sources must be used both for single integers and for pairs
 		   of integers, so you must put TWO sources and not only one. -->
 		<mix>
-		  <question kind="priorities_in_calculation" subkind="without_parentheses" subvariant="only_naturals"></question>
-		  <question kind="priorities_in_calculation" subkind="without_parentheses" subvariant="only_naturals"></question>
-		  <question kind="priorities_in_calculation" subkind="without_parentheses" subvariant="only_naturals"></question>
-		  <question kind="priorities_in_calculation" subkind="without_parentheses" subvariant="only_naturals"></question>
-		  <question kind="priorities_in_calculation" subkind="without_parentheses" subvariant="only_naturals"></question>
-		  <question kind="priorities_in_calculation" subkind="without_parentheses" subvariant="only_naturals"></question>
+		  <question kind="priorities_in_calculation" subkind="without_parentheses"
+				        subvariant="only_naturals" mix_nb="6"></question>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="0-3">4</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="4-7">2</nb>
 		</mix>
