@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFAULT MENTAL CALCULATION SHEET -->
+
+
+<sheet header="" title="Calculation: order of precedence." subtitle="Integration test sheet" text="" answers_title="Answers">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="std">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default values: id='generic' kind='' subkind='default' -->
+	<exercise text_exc="Calculate" text_ans="Example of solutions:">
+		<!-- No default for kind and subkind, they must be given
+			 Possible variants:
+			 Identified using either a natural number between 0 and 23 (included),
+			 or a mix of natural numbers and ranges (compatible with intspan, see
+			 https://pypi.python.org/pypi/intspan).
+			 See in calculation_modules/priorities_in_calculation_*.py to know the
+			 different variants.
+			 If variant is not defined, it will be considered, by default, as the
+			 range 0-23.
+		   Possible subvariants:
+			 - only_naturals: even the results must be natural numbers
+		   - no variant given: numbers used will still only be positive, but the
+		                       results can be negative
+			 - allow_negative_numbers: random numbers will be negative
+		   Depending on the exact kind of question, the numbers source can require
+		   single numbers and/or pairs of numbers (for products etc.), mathmaker
+		   will use as many sources as required of each type, but you must provide
+		   what kind of sources must be used both for single integers and for pairs
+		   of integers, so you must put TWO sources and not only one. -->
+		<question kind="priorities_in_calculation" subkind="without_parentheses" subvariant="only_naturals">
+			<nb source="singleint_1to10;;intpairs_2to9" variant="0">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="1">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="2">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="3">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="4">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="5">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="6">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="7">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="8">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="9">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="10">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="11">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="12">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="13">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="14">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="15">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="16">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="17">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="18">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="19">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="20">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="21">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="22">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="23">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="0">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="8-7,9,17-21">1</nb>
+		</question>
+	</exercise>
+
+</sheet>
