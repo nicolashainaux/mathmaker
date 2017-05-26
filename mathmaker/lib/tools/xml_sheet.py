@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
+import sys
 import errno
 import subprocess
 import copy
@@ -299,9 +300,9 @@ def get_q_kinds_from(exercise_node):
             random.shuffle(n_temp_list)
 
             for (q, n) in zip(q_temp_list, n_temp_list):
-                q.update(n[1])
-                questions += [[q, n[0], 1]]
-
+                merged_q = copy.deepcopy(q)
+                merged_q.update(n[1])
+                questions += [[merged_q, n[0], 1]]
     return (x_kind, questions)
 
 
