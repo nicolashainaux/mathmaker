@@ -264,6 +264,8 @@ def get_q_kinds_from(exercise_node):
                     # in lib/tools/tags.py
                     # So far it's not possible to mix questions
                     # requiring several sources with other questions
+                    # yet multiple sources questions can be mixed together
+                    # if they are the same type.
                     n_temp_list += [[[elt.attrib['source']],
                                      elt.attrib,
                                      1] for i in range(int(elt.text))]

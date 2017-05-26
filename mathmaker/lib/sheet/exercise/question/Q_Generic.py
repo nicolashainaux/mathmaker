@@ -154,10 +154,14 @@ def match_qtype_sourcenb(q_type: str, source_nb: str):
                     source_nb == 'table_3',
                     source_nb == 'table_4',
                     source_nb == 'bypass'])
+    elif q_type == 'priorities_in_calculation_without_parentheses':
+        # We only check there are two sources
+        return len(source_nb.split(sep=';;')) == 2
     else:
         warnings.warn('Could not check if the question\'s type and numbers\'s '
                       'source do match or not: {} and {}'
                       .format(q_type, source_nb))
+        return True
 
 
 # --------------------------------------------------------------------------
