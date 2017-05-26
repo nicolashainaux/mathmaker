@@ -284,7 +284,7 @@ def get_nb_sources_from_question_info(q_i):
         elif ';;' in q_i.nb_source[0]:
             questions_sources = q_i.nb_source[0].split(sep=';;')
     if q_i.id == 'priorities_in_calculation_without_parentheses':
-        nb_sources = auto_adjust_nb_sources(questions_sources, q_i)
+        questions_sources = auto_adjust_nb_sources(questions_sources, q_i)
     for nb_sce in questions_sources:
         tag_to_unpack = nb_source = nb_sce
         if nb_source in question.SOURCES_TO_UNPACK:
