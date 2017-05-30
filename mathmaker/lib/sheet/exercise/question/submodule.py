@@ -92,8 +92,18 @@ class structure(object):
         elif arg == "nb_variants":
             if self.nb_variant.startswith('decimal'):
                 deci_nb = int(self.nb_variant[-1])  # so, from decimal1 up to 9
-                chosen_ones = random.sample([i for i in range(self.nb_nb)],
-                                            deci_nb)
+                # In order to ensure we'll have at least one decimal number,
+                # we should try to remove all multiples of 10 from our possible
+                # choices:
+                all_nb_ids = [i
+                              for i in range(self.nb_nb)
+                              if not str(getattr(
+                                  self, 'nb' + str(i + 1)))[-1] == "0"]
+                # But if this would lead to remove too many numbers, then
+                # we do not remove anything
+                if len(all_nb_ids) < deci_nb:
+                    all_nb_ids = [i for i in range(self.nb_nb)]
+                chosen_ones = random.sample(all_nb_ids, deci_nb)
                 for i in chosen_ones:
                     setattr(self, 'nb' + str(i + 1),
                             getattr(self, 'nb' + str(i + 1)) / 10)
