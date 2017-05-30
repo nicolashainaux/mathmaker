@@ -135,6 +135,10 @@ class sub_object(submodule.structure):
                 if self.nb2 > self.nb1:
                     self.nb1 += self.nb2
 
+        if self.variant in [1, 3, 5, 7, 10, 11, 13, 15, 17, 21, 22, 23]:
+            if Item(self.nb2).digits_number() >= 1:
+                self.nb1, self.nb2 = self.nb2, self.nb1
+
         self.expression = None
         self.obj = None
         if self.variant == 0:  # a + b×c
@@ -171,9 +175,23 @@ class sub_object(submodule.structure):
                             -self.nb3])
         elif self.variant == 7:  # a÷b - c
             if self.subvariant == 'only_positive' and self.nb1 < self.nb3:
-                self.nb3 = self.nb3 - 1 - (self.nb3 - min(self.nb1, self.nb2))
-                if self.nb3 <= 0:
-                    self.nb3 = 1
+                depth = int(self.nb_variant[-1]) + self.allow_extra_digits
+                if self.nb_variant.startswith('decimal'):
+                    for i in range(depth):
+                        self.nb3 = self.nb3 / 10
+                        if self.nb1 >= self.nb3:
+                            break
+                    else:  # no break:
+                        # We have divided self.nb3 by 10 as much as allowed
+                        # and yet self.nb1 < self.nb3, so no other choice than
+                        # randomly choose a new decimal value
+                        self.nb3 = random.choice(
+                            [i + 1
+                             for i in range(int(min(self.nb1, self.nb2)
+                                            * (10 ** depth)))]) / (10 ** depth)
+                else:  # no choice but to randomly choose a new natural
+                    self.nb3 = random.choice(
+                        [i + 1 for i in range(min(self.nb1, self.nb2) - 1)])
             self.obj = Sum([Quotient(('+', self.nb1 * self.nb2, self.nb2),
                                      use_divide_symbol=True),
                             -self.nb3])
