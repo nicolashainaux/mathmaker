@@ -61,6 +61,27 @@ from .. import submodule
 # 147: a - b÷(c - d)        # 155: (a - b)÷c - d
 
 
+def split_nb_into_sum(n, nb_variant, decimals_restricted_to, extra_digits):
+    """
+    Split n as a sum a + b = n
+
+    Take the different constraints into account.
+    """
+    depth = 0  # default value, to keep integers
+    if nb_variant.startswith('decimal'):
+        if '+' in decimals_restricted_to or type(n) is not int:
+            # e.g. 'decimal1_+-'
+            # or 'decimalN' (where 1 <= N <= 9) and nb1 is no int
+            depth = int(nb_variant[-1]) + extra_digits
+    start, end = 0, int((n) * 10 ** depth - 1)
+    if n < 0:
+        start, end = end, start
+    a = random.choice([(i + 1) / 10 ** depth
+                       for i in range(start, end)])
+    b = n - a
+    return (a, b)
+
+
 class sub_object(submodule.structure):
 
     def __init__(self, numbers_to_use, **options):
@@ -88,19 +109,9 @@ class sub_object(submodule.structure):
         self.obj = None
         if self.variant == 100:  # (a + b)×c
             c = self.nb2
-            depth = 0  # default value, to keep integers
-            if self.nb_variant.startswith('decimal'):
-                if ('+' in self.decimals_restricted_to
-                    or type(self.nb1) is not int):
-                    # e.g. 'decimal1_+-'
-                    # or 'decimalN' (where 1 <= N <= 9) and nb1 is no int
-                    depth = int(self.nb_variant[-1]) + self.allow_extra_digits
-            start, end = 0, int((self.nb1) * 10 ** depth - 1)
-            if self.nb1 < 0:
-                start, end = end, start
-            a = random.choice([(i + 1) / 10 ** depth
-                               for i in range(start, end)])
-            b = self.nb1 - a
+            a, b = split_nb_into_sum(self.nb1, self.nb_variant,
+                                     self.decimals_restricted_to,
+                                     self.allow_extra_digits)
             self.obj = Product([Sum([Item(a), Item(b)]),
                                Item(c)])
         # elif self.variant == 101:  # (a + b)÷c
