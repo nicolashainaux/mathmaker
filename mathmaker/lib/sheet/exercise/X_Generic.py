@@ -195,10 +195,17 @@ def preprocess_variant(q_i):
                 'id,kind,subkind,nb_source,options'
     :type q_i: Q_info (named tuple)
     """
-    if q_i.id == 'priorities_in_calculation_without_parentheses':
+    if q_i.id in ['priorities_in_calculation_without_parentheses',
+                  'priorities_in_calculation_with_parentheses']:
+        default_variant = {
+            'priorities_in_calculation_without_parentheses':
+                {'variant': '0-23'},
+            'priorities_in_calculation_with_parentheses':
+                {'variant': '100-155'}
+        }
         if ('variant' not in q_i.options
             or ('variant' in q_i.options and q_i.options['variant'] == '')):
-            q_i.options.update({'variant': '0-23'})
+            q_i.options.update(default_variant[q_i.id])
         try:
             variants_to_pick_from = intspan(q_i.options['variant'])
         except ParseError:
@@ -229,10 +236,11 @@ def auto_adjust_nb_sources(nb_sources: list, q_i: namedtuple):
     :param q_i: the Q_info object (namedtuple), whose fields are
                 'id,kind,subkind,nb_source,options'
     """
-    if q_i.id == 'priorities_in_calculation_without_parentheses':
+    if q_i.id in ['priorities_in_calculation_without_parentheses',
+                  'priorities_in_calculation_with_parentheses']:
         if not len(nb_sources) == 2:
             raise ValueError('There must be two sources for '
-                             'priorities_in_calculation_without_parentheses '
+                             'priorities_in_calculation_with(out)_parentheses '
                              'questions.')
         if nb_sources[0].startswith('single') and 'pairs' in nb_sources[1]:
             single_nb_source, pairs_nb_source = nb_sources
@@ -240,7 +248,7 @@ def auto_adjust_nb_sources(nb_sources: list, q_i: namedtuple):
             pairs_nb_source, single_nb_source = nb_sources
         else:
             raise ValueError('One of the two sources for '
-                             'priorities_in_calculation_without_parentheses '
+                             'priorities_in_calculation_with(out)_parentheses '
                              'questions must be for single numbers, '
                              'the other one for pairs.')
         v = q_i.options['variant']
@@ -252,6 +260,16 @@ def auto_adjust_nb_sources(nb_sources: list, q_i: namedtuple):
             nb_sources = [pairs_nb_source, pairs_nb_source]
         elif 16 <= v <= 23:
             nb_sources = [single_nb_source, pairs_nb_source, single_nb_source]
+        elif 100 <= v <= 107:
+            nb_sources = [pairs_nb_source]
+        elif 108 <= v <= 115:
+            nb_sources = [single_nb_source, pairs_nb_source]
+        elif 116 <= v <= 131:
+            nb_sources = [single_nb_source, single_nb_source, pairs_nb_source]
+        elif 132 <= v <= 139:
+            nb_sources = [pairs_nb_source]
+        elif 140 <= v <= 155:
+            nb_sources = [single_nb_source, pairs_nb_source]
     return nb_sources
 
 
@@ -283,8 +301,7 @@ def get_nb_sources_from_question_info(q_i):
                                         'triangle_inequality': True})
         elif ';;' in q_i.nb_source[0]:
             questions_sources = q_i.nb_source[0].split(sep=';;')
-    if q_i.id == 'priorities_in_calculation_without_parentheses':
-        questions_sources = auto_adjust_nb_sources(questions_sources, q_i)
+    questions_sources = auto_adjust_nb_sources(questions_sources, q_i)
     for nb_sce in questions_sources:
         tag_to_unpack = nb_source = nb_sce
         if nb_source in question.SOURCES_TO_UNPACK:

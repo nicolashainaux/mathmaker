@@ -27,6 +27,8 @@
 # @package mc_modules
 # @brief All question objects should be "declared" here.
 
-from . import (priorities_in_calculation_without_parentheses)
+from . import (priorities_in_calculation_without_parentheses,
+               priorities_in_calculation_with_parentheses)
 
-__all__ = ['priorities_in_calculation_without_parentheses', ]
+__all__ = ['priorities_in_calculation_without_parentheses',
+           'priorities_in_calculation_with_parentheses']
