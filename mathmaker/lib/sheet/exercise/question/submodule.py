@@ -63,6 +63,7 @@ class structure(object):
                     self.decimals_restricted_to += '+'
                 if '-' in nbv_chunks[1]:
                     self.decimals_restricted_to += '-'
+                self.nb_variant = nbv_chunks[0]
             self.context = options.get('context', "default")
             self.picture = XML_BOOLEANS[options.get('picture', "false")]()
             self.decimal_result = int(options.get('decimal_result', 2))

@@ -135,6 +135,10 @@ class sub_object(submodule.structure):
         # 145: a - b÷(c + d)        # 153: (a - b)×c - d
         # 146: a - b×(c - d)        # 154: (a - b)÷c + d
         # 147: a - b÷(c - d)        # 155: (a - b)÷c - d
+        else:
+            raise ValueError('Unknown variant identifier for priorities_in'
+                             '_calculation_without_parentheses: {}'
+                             .format(str(self.variant)))
 
         self.expression = Expression(shared.number_of_the_question,
                                      self.obj)

@@ -175,7 +175,10 @@ class sub_object(submodule.structure):
                             -self.nb3])
         elif self.variant == 7:  # a÷b - c
             if self.subvariant == 'only_positive' and self.nb1 < self.nb3:
-                depth = int(self.nb_variant[-1]) + self.allow_extra_digits
+                if self.nb_variant.startswith('decimal'):
+                    depth = int(self.nb_variant[-1]) + self.allow_extra_digits
+                else:
+                    depth = self.allow_extra_digits
                 if self.nb_variant.startswith('decimal'):
                     for i in range(depth):
                         self.nb3 = self.nb3 / 10
@@ -292,6 +295,10 @@ class sub_object(submodule.structure):
                             Quotient(('-', self.nb2 * self.nb3, self.nb3),
                                      use_divide_symbol=True),
                             -self.nb4])
+        else:
+            raise ValueError('Unknown variant identifier for priorities_in'
+                             '_calculation_without_parentheses: {}'
+                             .format(str(self.variant)))
 
         self.expression = Expression(shared.number_of_the_question,
                                      self.obj)
