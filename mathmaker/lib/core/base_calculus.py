@@ -4512,16 +4512,33 @@ class Product(CommutativeOperation):
         # general idea: check if the exponent is to calculate_next_step itself
         # if yes, replace it by self.exponent.calculate_next_step() in the
         # newly built object
+        # The above mentionned idea is yet to do!!!
+
         # then check if any of the factors is to be calculated_next_step itself
         # as well. if yes, rebuild the Product replacing any of these factors
         # by factor[i].calculate_next_step()  (maybe except Fractions which
         # can be simplified at a later step, which would be shorter and
-        # more efficient...) BUT don't forget to put the exponent on the
+        # more efficient...)
+        # The step above is implemented, but the rest not yet
+        # BUT don't forget to put the exponent on the
         # numes & denos to make the next steps easier (for instance, at this
         # step, (4×(3/4)²)³ should become (4×{9/16})³ (or maybe distribute
         # the Product's exponent on the factors ??)
         # if any of the preceding calculations has been done, then return a
         # newly rebuilt Product
+        elements = []
+        new_elt_found = False
+        for elt in self._element:
+            next_step = None
+            if not isinstance(elt, Fraction):
+                next_step = elt.calculate_next_step(**options)
+            if next_step is not None:
+                elements.append(next_step)
+                new_elt_found = True
+            else:
+                elements.append(elt)
+        if new_elt_found:
+            return Product(elements)
 
         # case of Products having several factors but None of them neither
         # its exponent is to be calculated
