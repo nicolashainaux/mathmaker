@@ -81,7 +81,8 @@ class sub_object(submodule.structure):
                 self.nb3, self.nb4 = self.nb4, self.nb3
 
         if self.subvariant == 'only_positive':
-            pass  # to do YET for many variants...
+            pass  # to do YET for many variants... (the ones containing ÷)
+            # see priorities_in_calculation_withOUT_parentheses
 
         self.expression = None
         self.obj = None
