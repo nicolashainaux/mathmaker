@@ -61,15 +61,21 @@ from .. import submodule
 # 147: a - b÷(c - d)        # 155: (a - b)÷c - d
 
 
-def split_nb_into_sum(n, nb_variant, decimals_restricted_to, extra_digits):
+def split_nb_into(operation, n, nb_variant,
+                  decimals_restricted_to, extra_digits):
     """
-    Split n as a sum a + b = n
+    Split n as a sum, like a + b = n; or a difference, like a - b = n
 
     Take the different constraints into account.
     """
+    if operation not in ['sum', 'difference']:
+        raise ValueError('Argument "operation" should be either \'sum\' or '
+                         '\'difference\'.')
     depth = 0  # default value, to keep integers
     if nb_variant.startswith('decimal'):
-        if '+' in decimals_restricted_to or type(n) is not int:
+        if (type(n) is not int
+            or ('+' in decimals_restricted_to and operation is 'sum')
+            or ('-' in decimals_restricted_to and operation is 'difference')):
             # e.g. decimals_restricted_to contains '+-'
             # or nb_variant is 'decimalN' (where 1 <= N <= 9) and nb1 is no int
             depth = int(nb_variant[-1]) + extra_digits
@@ -83,8 +89,12 @@ def split_nb_into_sum(n, nb_variant, decimals_restricted_to, extra_digits):
     else:  # default: integers
         seq = [(i + 1) / 10 ** depth
                for i in range(start, end)]
-    a = random.choice(seq)
-    b = n - a
+    if operation == 'sum':
+        a = random.choice(seq)
+        b = n - a
+    elif operation == 'difference':
+        b = random.choice(seq)
+        a = n + b
     return (a, b)
 
 
@@ -115,37 +125,32 @@ class sub_object(submodule.structure):
         self.obj = None
         if self.variant == 100:  # (a + b)×c
             c = self.nb2
-            a, b = split_nb_into_sum(self.nb1, self.nb_variant,
-                                     self.decimals_restricted_to,
-                                     self.allow_extra_digits)
+            a, b = split_nb_into('sum', self.nb1, self.nb_variant,
+                                 self.decimals_restricted_to,
+                                 self.allow_extra_digits)
             self.obj = Product([Sum([Item(a), Item(b)]),
                                 Item(c)])
         elif self.variant == 101:  # (a + b)÷c
             c = self.nb2
             self.nb1 = self.nb1 * self.nb2
-            a, b = split_nb_into_sum(self.nb1, self.nb_variant,
-                                     self.decimals_restricted_to,
-                                     self.allow_extra_digits)
+            a, b = split_nb_into('sum', self.nb1, self.nb_variant,
+                                 self.decimals_restricted_to,
+                                 self.allow_extra_digits)
             self.obj = Quotient(('+', Sum([a, b]), c), use_divide_symbol=True)
         elif self.variant == 102:  # a×(b + c)
             a = self.nb1
-            b, c = split_nb_into_sum(self.nb2, self.nb_variant,
-                                     self.decimals_restricted_to,
-                                     self.allow_extra_digits)
+            b, c = split_nb_into('sum', self.nb2, self.nb_variant,
+                                 self.decimals_restricted_to,
+                                 self.allow_extra_digits)
             self.obj = Product([Item(a),
                                 Sum([Item(b), Item(c)])],
                                compact_display=False)
         elif self.variant == 103:  # a÷(b + c)
             a = self.nb1 * self.nb2
-            b, c = split_nb_into_sum(self.nb2, self.nb_variant,
-                                     self.decimals_restricted_to,
-                                     self.allow_extra_digits)
+            b, c = split_nb_into('sum', self.nb2, self.nb_variant,
+                                 self.decimals_restricted_to,
+                                 self.allow_extra_digits)
             self.obj = Quotient(('+', a, Sum([b, c])), use_divide_symbol=True)
-
-        # 104: (a - b)×c
-        # 105: (a - b)÷c
-        # 106: a×(b - c)
-        # 107: a÷(b - c)
 
         # 108: a×(b + c)×d          # 116: a×(b + c×d)
         # 109: a×(b + c)÷d          # 117: a×(b + c÷d)
