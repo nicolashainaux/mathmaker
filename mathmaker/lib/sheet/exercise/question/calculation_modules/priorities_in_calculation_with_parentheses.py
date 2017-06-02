@@ -76,8 +76,14 @@ def split_nb_into_sum(n, nb_variant, decimals_restricted_to, extra_digits):
     start, end = 0, int((n) * 10 ** depth - 1)
     if n < 0:
         start, end = end, start
-    a = random.choice([(i + 1) / 10 ** depth
-                       for i in range(start, end)])
+    if nb_variant.startswith('decimal') and depth >= 1:
+        seq = [(i + 1) / 10 ** depth
+               for i in range(start, end)
+               if not ((i + 1) / 10 ** depth).is_integer()]
+    else:  # default: integers
+        seq = [(i + 1) / 10 ** depth
+               for i in range(start, end)]
+    a = random.choice(seq)
     b = n - a
     return (a, b)
 
