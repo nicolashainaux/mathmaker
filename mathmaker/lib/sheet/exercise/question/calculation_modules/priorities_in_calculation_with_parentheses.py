@@ -113,7 +113,7 @@ class sub_object(submodule.structure):
                                      self.decimals_restricted_to,
                                      self.allow_extra_digits)
             self.obj = Product([Sum([Item(a), Item(b)]),
-                               Item(c)])
+                                Item(c)])
         elif self.variant == 101:  # (a + b)÷c
             c = self.nb2
             self.nb1 = self.nb1 * self.nb2
@@ -121,10 +121,18 @@ class sub_object(submodule.structure):
                                      self.decimals_restricted_to,
                                      self.allow_extra_digits)
             self.obj = Quotient(('+', Sum([a, b]), c), use_divide_symbol=True)
+        elif self.variant == 102:  # a×(b + c)
+            a = self.nb1
+            b, c = split_nb_into_sum(self.nb2, self.nb_variant,
+                                     self.decimals_restricted_to,
+                                     self.allow_extra_digits)
+            self.obj = Product([Item(a),
+                                Sum([Item(b), Item(c)])],
+                               compact_display=False)
 
-        # 100: (a + b)×c            # 104: (a - b)×c
+        # 104: (a - b)×c
         # 105: (a - b)÷c
-        # 102: a×(b + c)            # 106: a×(b - c)
+        # 102:            # 106: a×(b - c)
         # 103: a÷(b + c)            # 107: a÷(b - c)
 
         # 108: a×(b + c)×d          # 116: a×(b + c×d)
