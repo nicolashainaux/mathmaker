@@ -70,8 +70,8 @@ def split_nb_into_sum(n, nb_variant, decimals_restricted_to, extra_digits):
     depth = 0  # default value, to keep integers
     if nb_variant.startswith('decimal'):
         if '+' in decimals_restricted_to or type(n) is not int:
-            # e.g. 'decimal1_+-'
-            # or 'decimalN' (where 1 <= N <= 9) and nb1 is no int
+            # e.g. decimals_restricted_to contains '+-'
+            # or nb_variant is 'decimalN' (where 1 <= N <= 9) and nb1 is no int
             depth = int(nb_variant[-1]) + extra_digits
     start, end = 0, int((n) * 10 ** depth - 1)
     if n < 0:

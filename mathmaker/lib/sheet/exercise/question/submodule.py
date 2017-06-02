@@ -99,7 +99,9 @@ class structure(object):
 
         elif arg == "nb_variants":
             if (self.nb_variant.startswith('decimal')
-                and '_' not in self.nb_variant):
+                and (self.decimals_restricted_to == ''
+                     or '*' in self.decimals_restricted_to
+                     or '÷' in self.decimals_restricted_to)):
                 deci_nb = int(self.nb_variant[-1])  # so, from decimal1 up to 9
                 # In order to ensure we'll have at least one decimal number,
                 # we should try to remove all multiples of 10 from our possible
