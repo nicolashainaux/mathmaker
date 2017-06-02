@@ -2295,7 +2295,7 @@ class Quotient(Operation):
         """If possible, expands Quotient's numerator and/or denominator."""
         next_nume = self.numerator.expand_and_reduce_next_step(**options)
         next_deno = self.denominator.expand_and_reduce_next_step(**options)
-        if (next_nume, next_deno) is not (None, None):
+        if (next_nume, next_deno) != (None, None):
             if next_nume is None:
                 next_nume = self.numerator.clone()
             if next_deno is None:
@@ -2305,7 +2305,7 @@ class Quotient(Operation):
             result.set_denominator(next_deno)
             return result
         else:
-            return None
+            return self.calculate_next_step(**options)
 
     # --------------------------------------------------------------------------
     ##

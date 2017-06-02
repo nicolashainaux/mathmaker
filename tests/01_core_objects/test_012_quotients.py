@@ -23,7 +23,7 @@
 import pytest
 
 from mathmaker.lib.core.root_calculus import Value
-from mathmaker.lib.core.base_calculus import Item, Quotient, Fraction
+from mathmaker.lib.core.base_calculus import Item, Quotient, Fraction, Sum
 from tools import wrap_nb
 
 
@@ -56,6 +56,13 @@ def q3(): return Quotient(('+',
                            Value(8),
                            Value(1),
                            1), ignore_1_denominator=True)
+
+
+@pytest.fixture
+def q4(): return Quotient(('+',
+                           Sum([Item(6), Item(36)]),
+                           Item(14),
+                           1), use_divide_symbol=True)
 
 
 def test_q0_printed(q0):
@@ -112,3 +119,12 @@ def test_q2_next_step3(q2):
 def test_q3_printed(q3):
     """Is this Quotient correctly printed?"""
     assert q3.printed == wrap_nb('8')
+
+
+def test_q4_printed(q4):
+    """Is this Quotient correctly printed?"""
+    assert q4.printed == wrap_nb('(6+36)\div 14')
+    q4_next = q4.expand_and_reduce_next_step()
+    assert q4_next.printed == wrap_nb('42\\div 14')
+    q4_next = q4_next.expand_and_reduce_next_step()
+    assert q4_next.printed == wrap_nb('3')
