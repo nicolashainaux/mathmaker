@@ -151,6 +151,34 @@ class sub_object(submodule.structure):
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
             self.obj = Quotient(('+', a, Sum([b, c])), use_divide_symbol=True)
+        elif self.variant == 104:  # (a - b)×c
+            c = self.nb2
+            a, b = split_nb_into('difference', self.nb1, self.nb_variant,
+                                 self.decimals_restricted_to,
+                                 self.allow_extra_digits)
+            self.obj = Product([Sum([Item(a), Item(-b)]),
+                                Item(c)])
+        elif self.variant == 105:  # (a - b)÷c
+            c = self.nb2
+            self.nb1 = self.nb1 * self.nb2
+            a, b = split_nb_into('difference', self.nb1, self.nb_variant,
+                                 self.decimals_restricted_to,
+                                 self.allow_extra_digits)
+            self.obj = Quotient(('+', Sum([a, -b]), c), use_divide_symbol=True)
+        elif self.variant == 106:  # a×(b - c)
+            a = self.nb1
+            b, c = split_nb_into('difference', self.nb2, self.nb_variant,
+                                 self.decimals_restricted_to,
+                                 self.allow_extra_digits)
+            self.obj = Product([Item(a),
+                                Sum([Item(b), Item(-c)])],
+                               compact_display=False)
+        elif self.variant == 107:  # a÷(b - c)
+            a = self.nb1 * self.nb2
+            b, c = split_nb_into('difference', self.nb2, self.nb_variant,
+                                 self.decimals_restricted_to,
+                                 self.allow_extra_digits)
+            self.obj = Quotient(('+', a, Sum([b, -c])), use_divide_symbol=True)
 
         # 108: a×(b + c)×d          # 116: a×(b + c×d)
         # 109: a×(b + c)÷d          # 117: a×(b + c÷d)
