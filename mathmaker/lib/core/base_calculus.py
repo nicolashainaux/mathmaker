@@ -3692,7 +3692,7 @@ class Product(CommutativeOperation):
     #   Giving None or an empty list is equivalent to giving 1.
     #   The exponent of a Product is 'outside' (like 3 in (4×5x)³)
     #   @return An instance of Product
-    def __init__(self, arg):
+    def __init__(self, arg, compact_display=True):
         CommutativeOperation.__init__(self)
         # The self.compact_display flag is let set to True
         # If it is set to False, the display_multiply_symbol (aka info)
@@ -3712,6 +3712,7 @@ class Product(CommutativeOperation):
         self.str_openmark = "<"
         self.str_closemark = ">"
 
+        self._compact_display = compact_display
         # 1st CASE: None or void list []
         if arg is None or (type(arg) == list and len(arg) == 0):
             self._element.append(Item(1))
