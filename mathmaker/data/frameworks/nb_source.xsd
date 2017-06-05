@@ -17,6 +17,7 @@
 				<xs:attribute name="nb_variant"			type="xs:string"		use="optional"/>
 				<xs:attribute name="generation_type"	type="xs:string"		use="optional"/>
 				<xs:attribute name="allow_extra_digits"	type="xs:integer"		use="optional" default="0"/>
+				<xs:attribute name="allow_division_by_decimal"	type="xs:boolean"		use="optional" default="false"/>
             </xs:extension>
         </xs:simpleContent>
 	</xs:complexType>

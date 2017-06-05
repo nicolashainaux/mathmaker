@@ -127,6 +127,31 @@ class sub_object(submodule.structure):
                 self.nb3, self.nb4 = self.nb4, self.nb3
 
         if self.subvariant == 'only_positive':
+            if self.variant == 11:
+                self.nb1, self.nb2, self.nb3, self.nb4 = \
+                    adjust_nb_for_variant_11(self.nb1, self.nb2,
+                                             self.nb3, self.nb4)
+            elif self.variant == 13:
+                self.nb1, self.nb2, self.nb3, self.nb4 = \
+                    adjust_nb_for_variant_13(self.nb1, self.nb2,
+                                             self.nb3, self.nb4)
+            elif self.variant == 15:
+                self.nb1, self.nb2, self.nb3, self.nb4 = \
+                    adjust_nb_for_variant_15(self.nb1, self.nb2,
+                                             self.nb3, self.nb4)
+
+        if not self.allow_division_by_decimal:
+            if self.variant in [5, 7, 10, 11, 14, 15, ]:
+                if Item(self.nb2).digits_number() >= 1:
+                    self.nb1, self.nb2 = self.nb2, self.nb1
+            if self.variant in [1, 3, 17, 21, 22, 23]:
+                if Item(self.nb3).digits_number() >= 1:
+                    self.nb2, self.nb3 = self.nb3, self.nb2
+            if self.variant in [12, 13, 14, 15, ]:
+                if Item(self.nb4).digits_number() >= 1:
+                    self.nb3, self.nb4 = self.nb4, self.nb3
+
+        if self.subvariant == 'only_positive':
             if self.variant in [2, 18]:
                 if (Item(Product([self.nb2, self.nb3]).evaluate())
                     > Item(self.nb1)):
@@ -134,10 +159,6 @@ class sub_object(submodule.structure):
             if self.variant in [3, 21]:
                 if self.nb2 > self.nb1:
                     self.nb1 += self.nb2
-
-        if self.variant in [1, 3, 5, 7, 10, 11, 13, 15, 17, 21, 22, 23]:
-            if Item(self.nb2).digits_number() >= 1:
-                self.nb1, self.nb2 = self.nb2, self.nb1
 
         self.expression = None
         self.obj = None
@@ -213,10 +234,6 @@ class sub_object(submodule.structure):
                                      use_divide_symbol=True),
                             Product([self.nb3, self.nb4])])
         elif self.variant == 11:  # a÷b - c×d
-            if self.subvariant == 'only_positive':
-                self.nb1, self.nb2, self.nb3, self.nb4 = \
-                    adjust_nb_for_variant_11(self.nb1, self.nb2,
-                                             self.nb3, self.nb4)
             self.obj = Sum([Quotient(('+', self.nb1 * self.nb2, self.nb2),
                                      use_divide_symbol=True),
                             Product([-self.nb3, self.nb4])])
@@ -225,10 +242,6 @@ class sub_object(submodule.structure):
                             Quotient(('+', self.nb3 * self.nb4, self.nb4),
                                      use_divide_symbol=True)])
         elif self.variant == 13:  # a×b - c÷d
-            if self.subvariant == 'only_positive':
-                self.nb1, self.nb2, self.nb3, self.nb4 = \
-                    adjust_nb_for_variant_13(self.nb1, self.nb2,
-                                             self.nb3, self.nb4)
             self.obj = Sum([Product([self.nb1, self.nb2]),
                             Quotient(('-', self.nb3 * self.nb4, self.nb4),
                                      use_divide_symbol=True)])
@@ -238,10 +251,6 @@ class sub_object(submodule.structure):
                             Quotient(('+', self.nb3 * self.nb4, self.nb4),
                                      use_divide_symbol=True)])
         elif self.variant == 15:  # a÷b - c÷d
-            if self.subvariant == 'only_positive':
-                self.nb1, self.nb2, self.nb3, self.nb4 = \
-                    adjust_nb_for_variant_15(self.nb1, self.nb2,
-                                             self.nb3, self.nb4)
             self.obj = Sum([Quotient(('+', self.nb1 * self.nb2, self.nb2),
                                      use_divide_symbol=True),
                             Quotient(('-', self.nb3 * self.nb4, self.nb4),
