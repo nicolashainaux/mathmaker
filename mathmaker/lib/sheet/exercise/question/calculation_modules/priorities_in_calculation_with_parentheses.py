@@ -110,7 +110,7 @@ class sub_object(submodule.structure):
         # the pairs can be either (self.nb1; self.nb2) or (self.nb2; self.nb3)
         # etc. depending on the exact variant, we have to do it here.
         if random.choice([True, False]):
-            if (100 <= self.variant <= 137) or (132 <= self.variant <= 139):
+            if (100 <= self.variant <= 107) or (132 <= self.variant <= 139):
                 self.nb1, self.nb2 = self.nb2, self.nb1
             elif (108 <= self.variant <= 115) or (140 <= self.variant <= 155):
                 self.nb2, self.nb3 = self.nb3, self.nb2
