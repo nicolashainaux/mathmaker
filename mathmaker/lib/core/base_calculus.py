@@ -4527,19 +4527,19 @@ class Product(CommutativeOperation):
         # the Product's exponent on the factors ??)
         # if any of the preceding calculations has been done, then return a
         # newly rebuilt Product
-        elements = []
+        result = self.clone()
         new_elt_found = False
-        for elt in self._element:
+        for i, elt in enumerate(self._element):
             next_step = None
             if not isinstance(elt, Fraction):
                 next_step = elt.calculate_next_step(**options)
             if next_step is not None:
-                elements.append(next_step)
+                result[i] = next_step
                 new_elt_found = True
             else:
-                elements.append(elt)
+                result[i] = elt
         if new_elt_found:
-            return Product(elements)
+            return result
 
         # case of Products having several factors but None of them neither
         # its exponent is to be calculated
