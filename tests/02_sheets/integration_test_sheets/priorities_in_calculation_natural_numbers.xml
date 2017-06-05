@@ -60,7 +60,7 @@
 			<nb source="singleint_1to10;;intpairs_2to9" variant="105">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="106">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="107">1</nb>
-			<!-- <nb source="singleint_1to10;;intpairs_2to9" variant="108">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="108">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="109">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="110">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="111">1</nb>
@@ -68,7 +68,7 @@
 			<nb source="singleint_1to10;;intpairs_2to9" variant="113">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="114">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="115">1</nb>
-			<nb source="singleint_1to10;;intpairs_2to9" variant="116">1</nb>
+			<!-- <nb source="singleint_1to10;;intpairs_2to9" variant="116">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="117">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="118">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="119">1</nb>
@@ -116,7 +116,7 @@
 			<nb source="singleint_1to10;;intpairs_2to9" variant="105" nb_variant="decimal1">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="106" nb_variant="decimal1">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="107" nb_variant="decimal1">1</nb>
-			<!--<nb source="singleint_1to10;;intpairs_2to9" variant="108" nb_variant="decimal1">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="108" nb_variant="decimal1">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="109" nb_variant="decimal1">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="110" nb_variant="decimal1">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="111" nb_variant="decimal1">1</nb>
@@ -124,7 +124,7 @@
 			<nb source="singleint_1to10;;intpairs_2to9" variant="113" nb_variant="decimal1">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="114" nb_variant="decimal1">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="115" nb_variant="decimal1">1</nb>
-			<nb source="singleint_1to10;;intpairs_2to9" variant="116" nb_variant="decimal1">1</nb>
+			<!--<nb source="singleint_1to10;;intpairs_2to9" variant="116" nb_variant="decimal1">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="117" nb_variant="decimal1">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="118" nb_variant="decimal1">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="119" nb_variant="decimal1">1</nb>
@@ -172,7 +172,7 @@
 			<nb source="singleint_1to10;;intpairs_2to9" variant="105" nb_variant="decimal1_+-">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="106" nb_variant="decimal1_+-">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="107" nb_variant="decimal1_+-">1</nb>
-			<!-- <nb source="singleint_1to10;;intpairs_2to9" variant="108" nb_variant="decimal1_+-">1</nb>
+			<nb source="singleint_1to10;;intpairs_2to9" variant="108" nb_variant="decimal1_+-">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="109" nb_variant="decimal1_+-">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="110" nb_variant="decimal1_+-">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="111" nb_variant="decimal1_+-">1</nb>
@@ -180,7 +180,7 @@
 			<nb source="singleint_1to10;;intpairs_2to9" variant="113" nb_variant="decimal1_+-">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="114" nb_variant="decimal1_+-">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="115" nb_variant="decimal1_+-">1</nb>
-			<nb source="singleint_1to10;;intpairs_2to9" variant="116" nb_variant="decimal1_+-">1</nb>
+			<!-- <nb source="singleint_1to10;;intpairs_2to9" variant="116" nb_variant="decimal1_+-">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="117" nb_variant="decimal1_+-">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="118" nb_variant="decimal1_+-">1</nb>
 			<nb source="singleint_1to10;;intpairs_2to9" variant="119" nb_variant="decimal1_+-">1</nb>

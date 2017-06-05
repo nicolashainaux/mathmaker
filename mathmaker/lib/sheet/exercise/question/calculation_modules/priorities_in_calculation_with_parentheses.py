@@ -61,6 +61,21 @@ from .. import submodule
 # 147: a - b÷(c - d)        # 155: (a - b)÷c - d
 
 
+def remove_division_by_decimal(n1, n2, n3):
+    """
+    Turn n1 into decimal instead of n2 and/or n3.
+
+    This is useful for the case division by a decimal is unwanted.
+    """
+    if type(n2) is int and type(n3) is int:
+        return (n1, n2, n3)
+    if type(n2) is float and not n2.is_integer():
+        return remove_division_by_decimal(n1 / 10, n2 * 10, n3)
+    if type(n3) is float and not n3.is_integer():
+        return remove_division_by_decimal(n1 / 10, n2, n3 * 10)
+    return (n1, n2, n3)
+
+
 def split_nb_into(operation, n, nb_variant,
                   decimals_restricted_to, extra_digits):
     """
@@ -117,8 +132,20 @@ class sub_object(submodule.structure):
             elif 116 <= self.variant <= 131:
                 self.nb3, self.nb4 = self.nb4, self.nb3
 
+        if not self.allow_division_by_decimal:
+            if self.variant in [101, 103, 105, 107, ]:
+                if Item(self.nb2).digits_number() >= 1:
+                    self.nb1, self.nb2 = self.nb2, self.nb1
+            elif self.variant in [109, 110, 113, 114]:
+                if Item(self.nb3).digits_number() >= 1:
+                    self.nb2, self.nb3 = self.nb3, self.nb2
+            elif self.variant in [111, 115]:
+                self.nb1, self.nb2, self.nb3 = \
+                    remove_division_by_decimal(self.nb1, self.nb2, self.nb3)
+
         if self.subvariant == 'only_positive':
-            pass  # to do YET for many variants... (the ones containing ÷)
+            pass  # to do YET for variants:
+            # 120->123; 128->131; 144->147 and 153 and 155
             # see priorities_in_calculation_withOUT_parentheses
 
         self.expression = None
@@ -179,15 +206,65 @@ class sub_object(submodule.structure):
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
             self.obj = Quotient(('+', a, Sum([b, -c])), use_divide_symbol=True)
+        elif self.variant in [108, 112]:  # a×(b ± c)×d
+            op = 'sum' if self.variant == 108 else 'difference'
+            opn = 1 if self.variant == 108 else -1
+            a = self.nb1
+            b, c = split_nb_into(op, self.nb2, self.nb_variant,
+                                 self.decimals_restricted_to,
+                                 self.allow_extra_digits)
+            d = self.nb3
+            self.obj = Product([Item(a),
+                                Sum([Item(b), Item(opn * c)]),
+                                Item(d)],
+                               compact_display=False)
+        elif self.variant in [109, 113]:  # a×(b ± c)÷d
+            op = 'sum' if self.variant == 109 else 'difference'
+            opn = 1 if self.variant == 109 else -1
+            a = self.nb1
+            self.nb2 = self.nb2 * self.nb3
+            b, c = split_nb_into(op, self.nb2, self.nb_variant,
+                                 self.decimals_restricted_to,
+                                 self.allow_extra_digits)
+            d = self.nb3
+            self.obj = Quotient(('+',
+                                 Product([a, Sum([b, opn * c])],
+                                         compact_display=False),
+                                 d),
+                                use_divide_symbol=True)
+        elif self.variant in [110, 114]:  # a÷(b ± c)×d
+            op = 'sum' if self.variant == 110 else 'difference'
+            opn = 1 if self.variant == 110 else -1
+            a = self.nb2 * self.nb3
+            b, c = split_nb_into(op, self.nb3, self.nb_variant,
+                                 self.decimals_restricted_to,
+                                 self.allow_extra_digits)
+            d = self.nb1
+            self.obj = Product([Quotient(('+', a, Sum([b, opn * c])),
+                                         use_divide_symbol=True),
+                                d],
+                               compact_display=False)
+        elif self.variant in [111, 115]:  # a÷(b ± c)÷d
+            op = 'sum' if self.variant == 111 else 'difference'
+            opn = 1 if self.variant == 111 else -1
+            a = self.nb1 * self.nb2 * self.nb3
+            b, c = split_nb_into(op, self.nb2, self.nb_variant,
+                                 self.decimals_restricted_to,
+                                 self.allow_extra_digits)
+            d = self.nb3
+            self.obj = Quotient(('+',
+                                 Quotient(('+', a, Sum([b, opn * c])),
+                                          use_divide_symbol=True),
+                                 d), use_divide_symbol=True)
 
-        # 108: a×(b + c)×d          # 116: a×(b + c×d)
-        # 109: a×(b + c)÷d          # 117: a×(b + c÷d)
-        # 110: a÷(b + c)×d          # 118: a÷(b + c×d)
-        # 111: a÷(b + c)÷d          # 119: a÷(b + c÷d)
-        # 112: a×(b - c)×d          # 120: a×(b - c×d)
-        # 113: a×(b - c)÷d          # 121: a×(b - c÷d)
-        # 114: a÷(b - c)×d          # 122: a÷(b - c×d)
-        # 115: a÷(b - c)÷d          # 123: a÷(b - c÷d)
+        # 116: a×(b + c×d)
+        # 117: a×(b + c÷d)
+        # 118: a÷(b + c×d)
+        # 119: a÷(b + c÷d)
+        # 120: a×(b - c×d)
+        # 121: a×(b - c÷d)
+        # 122: a÷(b - c×d)
+        # 123: a÷(b - c÷d)
 
         # 124: (a×b + c)×d          # 132: (a + b)×(c + d)
         # 125: (a÷b + c)×d          # 133: (a + b)÷(c + d)
