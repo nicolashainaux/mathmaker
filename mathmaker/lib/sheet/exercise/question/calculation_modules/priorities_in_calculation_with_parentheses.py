@@ -21,6 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import random
+import copy
+import sys
 
 from mathmaker.lib import shared
 from mathmaker.lib.core.base_calculus import Item, Sum, Product, Quotient
@@ -61,19 +63,23 @@ from .. import submodule
 # 147: a - b÷(c - d)        # 155: (a - b)÷c - d
 
 
-def remove_division_by_decimal(n1, n2, n3):
+def remove_division_by_decimal(N, numbers=None):
     """
-    Turn n1 into decimal instead of n2 and/or n3.
+    Turn N into decimal instead of the numbers of the list.
 
     This is useful for the case division by a decimal is unwanted.
     """
-    if type(n2) is int and type(n3) is int:
-        return (n1, n2, n3)
-    if type(n2) is float and not n2.is_integer():
-        return remove_division_by_decimal(n1 / 10, n2 * 10, n3)
-    if type(n3) is float and not n3.is_integer():
-        return remove_division_by_decimal(n1 / 10, n2, n3 * 10)
-    return (n1, n2, n3)
+    if numbers is None:
+        raise ValueError('A list of numbers must be given as argument '
+                         '\'numbers\'.')
+    if all([type(n) is int for n in numbers]):
+        return [N, ] + [n for n in numbers]
+    numbers_copy = copy.deepcopy(numbers)
+    for i, n in enumerate(numbers):
+        if type(n) is float and not n.is_integer():
+            numbers_copy[i] = n * 10
+            return remove_division_by_decimal(N / 10, numbers=numbers_copy)
+    return [N, ] + [n for n in numbers]
 
 
 def split_nb_into(operation, n, nb_variant,
@@ -121,6 +127,9 @@ class sub_object(submodule.structure):
                       **options)
         super().setup("nb_variants", nb=numbers_to_use, **options)
 
+        # print('numbers= {}, {}, {}, {}'
+        #       .format(self.nb1, self.nb2, self.nb3, self.nb4))
+
         # As the pairs for products and quotients should be shuffled, but as
         # the pairs can be either (self.nb1; self.nb2) or (self.nb2; self.nb3)
         # etc. depending on the exact variant, we have to do it here.
@@ -141,12 +150,77 @@ class sub_object(submodule.structure):
                     self.nb2, self.nb3 = self.nb3, self.nb2
             elif self.variant in [111, 115]:
                 self.nb1, self.nb2, self.nb3 = \
-                    remove_division_by_decimal(self.nb1, self.nb2, self.nb3)
+                    remove_division_by_decimal(self.nb1, numbers=[self.nb2,
+                                                                  self.nb3])
+            elif self.variant in [121, 123]:
+                self.nb3, self.nb4 = \
+                    remove_division_by_decimal(self.nb3, numbers=[self.nb4, ])
+            elif self.variant in [118, 119, 122, ]:
+                if not self.nb_variant.startswith('decimal'):
+                    self.nb1, self.nb2, self.nb3, self.nb4 = \
+                        remove_division_by_decimal(self.nb1,
+                                                   numbers=[self.nb2,
+                                                            self.nb3,
+                                                            self.nb4])
+                elif self.variant == 118:
+                    # allow_division_by_decimal is still False,
+                    # self.nb_variant does start with 'decimal'
+                    # The idea is to modify self.nb2 in order to have
+                    # self.nb2 + self.nb3 * self.nb4 being an integer
+                    if (not (type(self.nb2 + self.nb3 * self.nb4) is int)
+                        and not (self.nb2 + self.nb3 * self.nb4).is_integer()):
+                        self.nb2 += int(self.nb2 + self.nb3 * self.nb4) + 1 \
+                            - (self.nb2 + self.nb3 * self.nb4)
+                elif self.variant == 119:
+                    if (not (type(self.nb2 + self.nb3) is int)
+                        and not (self.nb2 + self.nb3).is_integer()):
+                        self.nb2 += int(self.nb2 + self.nb3) + 1 \
+                            - (self.nb2 + self.nb3)
 
         if self.subvariant == 'only_positive':
-            pass  # to do YET for variants:
-            # 120->123; 128->131; 144->147 and 153 and 155
-            # see priorities_in_calculation_withOUT_parentheses
+            if self.variant in [120, 122]:
+                if self.nb2 < self.nb3 * self.nb4:
+                    # print('self.nb2 < self.nb3 * self.nb4')
+                    if type(self.nb2) is float and not self.nb2.is_integer():
+                        if self.nb3 != 10:
+                            self.nb3, self.nb2 = remove_division_by_decimal(
+                                N=self.nb3, numbers=[self.nb2, ])
+                        else:
+                            self.nb4, self.nb2 = remove_division_by_decimal(
+                                N=self.nb4, numbers=[self.nb2, ])
+                        # print('self.nb2 turned into {}'.format(self.nb2))
+                    if self.nb2 < self.nb3 * self.nb4:
+                        self.nb2 += self.nb3 * self.nb4
+                        # print('self.nb2 still too small, turned into {}'
+                        #       .format(self.nb2))
+                if (self.nb_variant.startswith('decimal')
+                    and not self.allow_division_by_decimal):
+                    if (not (type(self.nb2 - self.nb3 * self.nb4) is int)
+                        and not (self.nb2 - self.nb3 * self.nb4).is_integer()):
+                        # Same idea as for variant 118 somewhat above
+                        # print('replace self.nb2 ({})...'.format(self.nb2))
+                        self.nb2 += int(self.nb2 - self.nb3 * self.nb4) + 1 \
+                            - (self.nb2 - self.nb3 * self.nb4)
+                        # print('...by {}'.format(self.nb2))
+                if self.nb2 - self.nb3 * self.nb4 == 0:
+                    self.nb2 += random.choice([i + 1 for i in range(9)])
+            elif self.variant in [121, 123]:
+                if self.nb2 < self.nb3:
+                    self.nb2 += self.nb3
+                if self.variant == 123:
+                    if (type(self.nb2 - self.nb3) is not int
+                        and not (self.nb2 - self.nb3).is_integer()
+                        and not self.allow_division_by_decimal):
+                        self.nb2 += int(self.nb2 - self.nb3) + 1 \
+                            - (self.nb2 - self.nb3)
+                        if self.nb2 - self.nb3 == 1:
+                            self.nb2 += \
+                                random.choice([i + 1 for i in range(8)])
+
+        # print('=> adjusted numbers= {}, {}, {}, {}'
+        #       .format(self.nb1, self.nb2, self.nb3, self.nb4))
+        # print('so, self.nb2 - self.nb3 * self.nb4 = '
+        #       + str(self.nb2 - self.nb3 * self.nb4))
 
         self.expression = None
         self.obj = None
@@ -256,15 +330,48 @@ class sub_object(submodule.structure):
                                  Quotient(('+', a, Sum([b, opn * c])),
                                           use_divide_symbol=True),
                                  d), use_divide_symbol=True)
-
-        # 116: a×(b + c×d)
-        # 117: a×(b + c÷d)
-        # 118: a÷(b + c×d)
-        # 119: a÷(b + c÷d)
-        # 120: a×(b - c×d)
-        # 121: a×(b - c÷d)
-        # 122: a÷(b - c×d)
-        # 123: a÷(b - c÷d)
+        elif self.variant in [116, 120]:  # a×(b ± c×d)
+            opn = 1 if self.variant == 116 else -1
+            a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+            self.obj = Product([a,
+                                Sum([b, Product([opn * c, d])])],
+                               compact_display=False)
+        elif self.variant in [117, 121]:  # a×(b ± c÷d)
+            ops = '+' if self.variant == 117 else '-'
+            opn = 1 if self.variant == 117 else -1
+            a, b, c, d = self.nb1, self.nb2, self.nb3 * self.nb4, self.nb4
+            self.obj = Product([a,
+                                Sum([b,
+                                     Quotient((ops, c, d),
+                                              use_divide_symbol=True)])],
+                               compact_display=False)
+        elif self.variant in [118, 122]:  # a÷(b ± c×d)
+            ops = '+' if self.variant == 118 else '-'
+            opn = 1 if self.variant == 118 else -1
+            sys.stderr.write('\nThere, self.nb2 = {}\n'.format(self.nb2))
+            if self.variant == 118 and self.nb2 == 1:
+                sys.stderr.write('\nThere, 1 got replaced by ')
+                self.nb2 += random.choice([i + 1 for i in range(10)])
+                sys.stderr.write('{}\n'.format(self.nb2))
+            a = self.nb1 * (self.nb2 + opn * self.nb3 * self.nb4)
+            b, c, d = self.nb2, self.nb3, self.nb4
+            self.obj = Quotient(('+',
+                                 a,
+                                 Sum([b, Product([opn * c, d])])),
+                                use_divide_symbol=True)
+        elif self.variant in [119, 123]:  # a÷(b ± c÷d)
+            ops = '+' if self.variant == 119 else '-'
+            opn = 1 if self.variant == 119 else -1
+            if self.variant == 119 and self.nb2 - self.nb3 == 1:
+                self.nb2 += random.choice([i + 1 for i in range(10)])
+            a = self.nb1 * (self.nb2 + opn * self.nb3)
+            b, c, d = self.nb2, self.nb3 * self.nb4, self.nb4
+            self.obj = Quotient(('+',
+                                 a,
+                                 Sum([b,
+                                      Quotient((ops, c, d),
+                                               use_divide_symbol=True)])),
+                                use_divide_symbol=True)
 
         # 124: (a×b + c)×d          # 132: (a + b)×(c + d)
         # 125: (a÷b + c)×d          # 133: (a + b)÷(c + d)
