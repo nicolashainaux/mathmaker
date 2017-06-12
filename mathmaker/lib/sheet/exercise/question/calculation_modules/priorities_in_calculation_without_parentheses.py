@@ -23,6 +23,7 @@
 import random
 
 from mathmaker.lib import shared
+from mathmaker.lib.tools.auxiliary_functions import is_integer
 from mathmaker.lib.core.base_calculus import Item, Sum, Product, Quotient
 from mathmaker.lib.core.calculus import Expression
 from .. import submodule
@@ -142,13 +143,13 @@ class sub_object(submodule.structure):
 
         if not self.allow_division_by_decimal:
             if self.variant in [5, 7, 10, 11, 14, 15, ]:
-                if Item(self.nb2).digits_number() >= 1:
+                if not is_integer(self.nb2):
                     self.nb1, self.nb2 = self.nb2, self.nb1
             if self.variant in [1, 3, 17, 21, 22, 23]:
-                if Item(self.nb3).digits_number() >= 1:
+                if not is_integer(self.nb3):
                     self.nb2, self.nb3 = self.nb3, self.nb2
             if self.variant in [12, 13, 14, 15, ]:
-                if Item(self.nb4).digits_number() >= 1:
+                if not is_integer(self.nb4):
                     self.nb3, self.nb4 = self.nb4, self.nb3
 
         if self.subvariant == 'only_positive':

@@ -22,9 +22,9 @@
 
 import random
 import copy
-import sys
 
 from mathmaker.lib import shared
+from mathmaker.lib.tools.auxiliary_functions import is_integer
 from mathmaker.lib.core.base_calculus import Item, Sum, Product, Quotient
 from mathmaker.lib.core.calculus import Expression
 from .. import submodule
@@ -72,11 +72,11 @@ def remove_division_by_decimal(N, numbers=None):
     if numbers is None:
         raise ValueError('A list of numbers must be given as argument '
                          '\'numbers\'.')
-    if all([type(n) is int for n in numbers]):
+    if all([is_integer(n) for n in numbers]):
         return [N, ] + [n for n in numbers]
     numbers_copy = copy.deepcopy(numbers)
     for i, n in enumerate(numbers):
-        if type(n) is float and not n.is_integer():
+        if not is_integer(n):
             numbers_copy[i] = n * 10
             return remove_division_by_decimal(N / 10, numbers=numbers_copy)
     return [N, ] + [n for n in numbers]
@@ -94,7 +94,7 @@ def split_nb_into(operation, n, nb_variant,
                          '\'difference\'.')
     depth = 0  # default value, to keep integers
     if nb_variant.startswith('decimal'):
-        if (type(n) is not int
+        if (not is_integer(n)
             or ('+' in decimals_restricted_to and operation is 'sum')
             or ('-' in decimals_restricted_to and operation is 'difference')):
             # e.g. decimals_restricted_to contains '+-'
@@ -127,9 +127,6 @@ class sub_object(submodule.structure):
                       **options)
         super().setup("nb_variants", nb=numbers_to_use, **options)
 
-        # print('numbers= {}, {}, {}, {}'
-        #       .format(self.nb1, self.nb2, self.nb3, self.nb4))
-
         # As the pairs for products and quotients should be shuffled, but as
         # the pairs can be either (self.nb1; self.nb2) or (self.nb2; self.nb3)
         # etc. depending on the exact variant, we have to do it here.
@@ -143,10 +140,10 @@ class sub_object(submodule.structure):
 
         if not self.allow_division_by_decimal:
             if self.variant in [101, 103, 105, 107, ]:
-                if Item(self.nb2).digits_number() >= 1:
+                if not is_integer(self.nb2):
                     self.nb1, self.nb2 = self.nb2, self.nb1
             elif self.variant in [109, 110, 113, 114]:
-                if Item(self.nb3).digits_number() >= 1:
+                if not is_integer(self.nb3):
                     self.nb2, self.nb3 = self.nb3, self.nb2
             elif self.variant in [111, 115]:
                 self.nb1, self.nb2, self.nb3 = \
@@ -167,61 +164,45 @@ class sub_object(submodule.structure):
                     # self.nb_variant does start with 'decimal'
                     # The idea is to modify self.nb2 in order to have
                     # self.nb2 + self.nb3 * self.nb4 being an integer
-                    if (not (type(self.nb2 + self.nb3 * self.nb4) is int)
-                        and not (self.nb2 + self.nb3 * self.nb4).is_integer()):
+                    if not is_integer(self.nb2 + self.nb3 * self.nb4):
                         self.nb2 += int(self.nb2 + self.nb3 * self.nb4) + 1 \
                             - (self.nb2 + self.nb3 * self.nb4)
                 elif self.variant == 119:
-                    if (not (type(self.nb2 + self.nb3) is int)
-                        and not (self.nb2 + self.nb3).is_integer()):
+                    if not is_integer(self.nb2 + self.nb3):
                         self.nb2 += int(self.nb2 + self.nb3) + 1 \
                             - (self.nb2 + self.nb3)
 
         if self.subvariant == 'only_positive':
             if self.variant in [120, 122]:
                 if self.nb2 < self.nb3 * self.nb4:
-                    # print('self.nb2 < self.nb3 * self.nb4')
-                    if type(self.nb2) is float and not self.nb2.is_integer():
+                    if not is_integer(self.nb2):
                         if self.nb3 != 10:
                             self.nb3, self.nb2 = remove_division_by_decimal(
                                 N=self.nb3, numbers=[self.nb2, ])
                         else:
                             self.nb4, self.nb2 = remove_division_by_decimal(
                                 N=self.nb4, numbers=[self.nb2, ])
-                        # print('self.nb2 turned into {}'.format(self.nb2))
                     if self.nb2 < self.nb3 * self.nb4:
                         self.nb2 += self.nb3 * self.nb4
-                        # print('self.nb2 still too small, turned into {}'
-                        #       .format(self.nb2))
                 if (self.nb_variant.startswith('decimal')
                     and not self.allow_division_by_decimal):
-                    if (not (type(self.nb2 - self.nb3 * self.nb4) is int)
-                        and not (self.nb2 - self.nb3 * self.nb4).is_integer()):
+                    if not is_integer(self.nb2 - self.nb3 * self.nb4):
                         # Same idea as for variant 118 somewhat above
-                        # print('replace self.nb2 ({})...'.format(self.nb2))
                         self.nb2 += int(self.nb2 - self.nb3 * self.nb4) + 1 \
                             - (self.nb2 - self.nb3 * self.nb4)
-                        # print('...by {}'.format(self.nb2))
                 if self.nb2 - self.nb3 * self.nb4 == 0:
                     self.nb2 += random.choice([i + 1 for i in range(9)])
             elif self.variant in [121, 123]:
                 if self.nb2 < self.nb3:
                     self.nb2 += self.nb3
                 if self.variant == 123:
-                    if (type(self.nb2 - self.nb3) is not int
-                        and not (self.nb2 - self.nb3).is_integer()
+                    if (not is_integer(self.nb2 - self.nb3)
                         and not self.allow_division_by_decimal):
                         self.nb2 += int(self.nb2 - self.nb3) + 1 \
                             - (self.nb2 - self.nb3)
                         if self.nb2 - self.nb3 == 1:
                             self.nb2 += \
                                 random.choice([i + 1 for i in range(8)])
-
-        # print('=> adjusted numbers= {}, {}, {}, {}'
-        #       .format(self.nb1, self.nb2, self.nb3, self.nb4))
-        # print('so, self.nb2 - self.nb3 * self.nb4 = '
-        #       + str(self.nb2 - self.nb3 * self.nb4))
-
         self.expression = None
         self.obj = None
         if self.variant == 100:  # (a + b)×c
@@ -348,11 +329,8 @@ class sub_object(submodule.structure):
         elif self.variant in [118, 122]:  # a÷(b ± c×d)
             ops = '+' if self.variant == 118 else '-'
             opn = 1 if self.variant == 118 else -1
-            sys.stderr.write('\nThere, self.nb2 = {}\n'.format(self.nb2))
             if self.variant == 118 and self.nb2 == 1:
-                sys.stderr.write('\nThere, 1 got replaced by ')
                 self.nb2 += random.choice([i + 1 for i in range(10)])
-                sys.stderr.write('{}\n'.format(self.nb2))
             a = self.nb1 * (self.nb2 + opn * self.nb3 * self.nb4)
             b, c, d = self.nb2, self.nb3, self.nb4
             self.obj = Quotient(('+',
