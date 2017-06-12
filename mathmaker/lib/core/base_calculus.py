@@ -111,7 +111,7 @@ class Item(Exponented):
         # Item's sign will be either '-' if given, or '+'
         # Item's value will be the next letters
         # Item's exponent will be 1
-        elif is_.a_string(arg) and len(arg) >= 1:
+        elif type(arg) is str and len(arg) >= 1:
             if is_.a_sign(arg[0]) and len(arg) >= 2:
                 self._sign = arg[0]
                 self._value_inside = Value(arg[1:len(arg)], **options)
@@ -131,7 +131,7 @@ class Item(Exponented):
 
         # 4th CASE: (sign, number|letter, <exponent as number|Exponented>)
         elif (type(arg) == tuple and len(arg) == 3 and is_.a_sign(arg[0])
-              and (is_.a_number(arg[1]) or is_.a_string(arg[1]))
+              and (is_.a_number(arg[1]) or type(arg[1]) is str)
               and (is_.a_number(arg[2]) or isinstance(arg[2], Exponented)
                    or isinstance(arg[2], Value))):
             # __
@@ -144,7 +144,7 @@ class Item(Exponented):
 
         # 5th CASE: (sign, number|letter)
         elif (type(arg) == tuple and len(arg) == 2 and is_.a_sign(arg[0])
-              and (is_.a_number(arg[1]) or is_.a_string(arg[1]))):
+              and (is_.a_number(arg[1]) or type(arg[1]) is str)):
             # __
             self._sign = arg[0]
             self._value_inside = Value(arg[1], **options)
@@ -1989,19 +1989,19 @@ class Quotient(Operation):
         # 1st CASE: (sign, Exponented num, Exponented deno)
         if (type(arg) == tuple and len(arg) >= 3 and is_.a_sign(arg[0])
             and (isinstance(arg[1], Calculable) or is_.a_number(arg[1])
-                 or is_.a_string(arg[1]))
+                 or type(arg[1]) is str)
             and (isinstance(arg[2], Calculable) or is_.a_number(arg[2]) or
-                 is_.a_string(arg[2]))):
+                 type(arg[2]) is str)):
             # __
             self._sign = arg[0]
-            if (is_.a_number(arg[1]) or is_.a_string(arg[1])
+            if (is_.a_number(arg[1]) or type(arg[1]) is str
                 or isinstance(arg[1], Value)):
                 # __
                 self._numerator = Item(arg[1])
             else:
                 self._numerator = arg[1].clone()
 
-            if (is_.a_number(arg[2]) or is_.a_string(arg[2])
+            if (is_.a_number(arg[2]) or type(arg[2]) is str
                 or isinstance(arg[2], Value)):
                 # __
                 self._denominator = Item(arg[2])
@@ -5303,7 +5303,7 @@ class Sum(CommutativeOperation):
                 self._info.append(arg.info[i])
 
         # 2d CASE: Number
-        elif is_.a_number(arg) or is_.a_string(arg):
+        elif is_.a_number(arg) or type(arg) is str:
             self._element.append(Item(arg))
             self._info.append(False)
 
@@ -5328,7 +5328,7 @@ class Sum(CommutativeOperation):
                     self._element.append(arg[i].clone())
                     self._info.append(False)
 
-                elif is_.a_number(arg[i]) or is_.a_string(arg[i]):
+                elif is_.a_number(arg[i]) or type(arg[i]) is str:
                     self._element.append(Item(arg[i]))
                     self._info.append(False)
 

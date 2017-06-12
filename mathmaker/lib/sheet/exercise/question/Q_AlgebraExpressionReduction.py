@@ -170,8 +170,10 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 elif 'use_the_entire_alphabet' in options:
                     letters_package = alphabet.lowercase
 
-                elif 'use_these_letters' in options                           \
-                     and is_.a_string_list(options['use_these_letters']):
+                elif ('use_these_letters' in options
+                      and type(options['use_these_letters']) is list
+                      and all([type(elt) is str
+                               for elt in options['use_these_letters']])):
                     # __
                     letters_package = options['use_these_letters']
 

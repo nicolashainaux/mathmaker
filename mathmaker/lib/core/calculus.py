@@ -116,7 +116,7 @@ class Expression(ComposedCalculable):
     #   @return One instance of Expression
     def __init__(self, integer_or_letter, objct):
         # just check if the given arguments are right
-        if not (is_.a_string(integer_or_letter)
+        if not (type(integer_or_letter) is str
                 or is_integer(integer_or_letter)):
             # __
             raise error.UncompatibleType(integer_or_letter,
@@ -173,7 +173,7 @@ class Expression(ComposedCalculable):
                     + MARKUP['close_text_in_maths'] \
                     + MARKUP['closing_subscript']
 
-        elif is_.a_string(self.name):
+        elif type(self.name) is str:
             final_name = MARKUP['open_text_in_maths'] \
                 + self.name \
                 + MARKUP['close_text_in_maths'] \
@@ -372,7 +372,7 @@ class Equation(ComposedCalculable):
         self._variable_letter = settings.default.MONOMIAL_LETTER
 
         # First determine name and number of the equation
-        if 'name' in options and is_.a_string(options['name']):
+        if 'name' in options and type(options['name']) is str:
             self._name = options['name']
 
         if 'number' in options and is_integer(options['number']):
@@ -380,7 +380,7 @@ class Equation(ComposedCalculable):
 
         # Then the letter
         if 'variable_letter_name' in options \
-           and is_.a_string(options['variable_letter_name']):
+           and type(options['variable_letter_name']) is str:
             # __
             self._variable_letter = options['variable_letter_name'][0]
 

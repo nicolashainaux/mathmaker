@@ -527,7 +527,7 @@ automatically increments the counter").format(cmd_name="exercise",
         if isinstance(objct, Printable):
             options.update({'force_expression_begins': True})
             return objct.into_str(**options)
-        elif is_.a_number(objct) or is_.a_string(objct):
+        elif is_.a_number(objct) or type(objct) is str:
             return str(objct)
         else:
             raise error.UncompatibleType(objct, "String|Number|Printable")

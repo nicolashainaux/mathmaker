@@ -25,18 +25,6 @@ import decimal
 
 # --------------------------------------------------------------------------
 ##
-#   @brief True if argument is a string
-#   @param objct The object to test
-#   @return True if argument is a string
-def a_string(objct):
-    if type(objct) == str:
-        return True
-    else:
-        return False
-
-
-# --------------------------------------------------------------------------
-##
 #   @brief True if argument is a string containing only numbers 0-9, -, + or .
 #   @param objct The object to test
 #   @return True if argument is a string
@@ -46,22 +34,6 @@ def a_numerical_string(objct):
                          '6', '7', '8', '9'] for o in objct)
     else:
         return False
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief True if argument is a list containing only strings
-#   @param objct The object to test
-#   @return True if argument is a list containing only strings
-def a_string_list(objct):
-    if type(objct) != list:
-        return False
-
-    for i in range(len(objct)):
-        if type(objct[i]) != str:
-            return False
-
-    return True
 
 
 # --------------------------------------------------------------------------
