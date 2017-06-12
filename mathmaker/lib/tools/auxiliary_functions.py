@@ -21,6 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """Various auxiliary functions."""
 
+from decimal import Decimal
+
 
 def rotate(l, n):
     """Rotate list l of n places, to the right if n > 0; else to the left."""
@@ -40,3 +42,21 @@ def check_unique_letters_words(words_list, n):
                              'shouldn\'t.'
                              .format(w))
     return True
+
+
+def is_integer(n):
+    """Check if number n is an integer."""
+    if type(n) is int:
+        return True
+    elif type(n) is float:
+        return n.is_integer()
+    elif type(n) is Decimal:
+        return n % 1 == 0
+    else:
+        raise TypeError('Expected a number, either float, int or Decimal,'
+                        'got {} instead.'.format(str(type(n))))
+
+
+def is_natural(n):
+    """Check if number n is a natural number."""
+    return is_integer(n) and n >= 0

@@ -22,6 +22,7 @@
 
 from mathmaker import settings
 from mathmaker.lib import shared, error, is_, randomly, maths_lib
+from mathmaker.lib.tools.auxiliary_functions import is_integer
 from mathmaker.lib.common import alphabet
 from mathmaker.lib.common.cst import RANDOMLY
 from mathmaker.lib.core.utils import gather_literals
@@ -116,7 +117,7 @@ class Expression(ComposedCalculable):
     def __init__(self, integer_or_letter, objct):
         # just check if the given arguments are right
         if not (is_.a_string(integer_or_letter)
-                or is_.an_integer(integer_or_letter)):
+                or is_integer(integer_or_letter)):
             # __
             raise error.UncompatibleType(integer_or_letter,
                                          "integer_or_letter")
@@ -154,7 +155,7 @@ class Expression(ComposedCalculable):
     def into_str(self, **options):
         global expression_begins
         # Expression objects displaying
-        if is_.an_integer(self.name):
+        if is_integer(self.name):
             i = self.name
             if i < len(alphabet.UPPERCASE):
                 final_name = MARKUP['open_text_in_maths'] \
@@ -374,7 +375,7 @@ class Equation(ComposedCalculable):
         if 'name' in options and is_.a_string(options['name']):
             self._name = options['name']
 
-        if 'number' in options and is_.an_integer(options['number']):
+        if 'number' in options and is_integer(options['number']):
             self._number = options['number']
 
         # Then the letter

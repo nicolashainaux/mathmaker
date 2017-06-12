@@ -129,11 +129,11 @@ def sign_of_product(signed_objctlist):
 ##
 #   @brief Returns the GCD of two integers
 def gcd(a, b):
-    if not is_.an_integer(a):
+    if not is_integer(a):
         raise TypeError('Expected an Integer, got a '
                         + str(type(a)) + ' instead')
 
-    if not is_.an_integer(b):
+    if not is_integer(b):
         raise TypeError('Expected an Integer, got a '
                         + str(type(b)) + ' instead')
 
@@ -152,11 +152,11 @@ def gcd(a, b):
 #   If the numbers are too high, the real gcd will be returned to avoid having
 #   reducible fractions found irreducible.
 def pupil_gcd(a, b):
-    if not is_.an_integer(a):
+    if not is_integer(a):
         raise TypeError('Expected an Integer, got a '
                         + str(type(a)) + ' instead')
 
-    if not is_.an_integer(b):
+    if not is_integer(b):
         raise TypeError('Expected an Integer, got a '
                         + str(type(b)) + ' instead')
 
@@ -204,11 +204,11 @@ def pupil_gcd(a, b):
 #   For instance, ten_power_gcd(20, 300) returns 10,
 #   ten_power_gcd(3000, 6000) returns 1000.
 def ten_power_gcd(a, b):
-    if not is_.an_integer(a):
+    if not is_integer(a):
         raise TypeError('Expected an Integer, got a '
                         + str(type(a)) + ' instead')
 
-    if not is_.an_integer(b):
+    if not is_integer(b):
         raise TypeError('Expected an Integer, got a '
                         + str(type(b)) + ' instead')
 
@@ -247,7 +247,7 @@ def is_even(objct):
     from mathmaker.lib.core.base_calculus import Item, Function
     from mathmaker.lib.core.root_calculus import Value
 
-    if is_.an_integer(objct) or isinstance(objct, Decimal):
+    if is_integer(objct):
         if objct % 2 == 0:
             return True
         else:
@@ -272,7 +272,7 @@ def is_even(objct):
 def is_uneven(objct):
     from mathmaker.lib.core.base_calculus import Item, Function
     from mathmaker.lib.core.root_calculus import Value
-    if is_.an_integer(objct):
+    if is_integer(objct):
         if objct % 2 == 0:
             return False
         else:

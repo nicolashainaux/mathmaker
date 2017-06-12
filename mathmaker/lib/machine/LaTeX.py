@@ -28,6 +28,7 @@ from tempfile import NamedTemporaryFile
 
 from mathmaker import settings
 from mathmaker.lib import is_, error
+from mathmaker.lib.tools.auxiliary_functions import is_integer
 from mathmaker.lib.common import latex
 from mathmaker.lib.common.cst import TEXT_SCALES, TEXT_RANKS
 from mathmaker.lib.tools import header_comment
@@ -589,11 +590,11 @@ automatically increments the counter").format(cmd_name="exercise",
     ##
     #   @brief Sets the font_size_offset field
     def set_font_size_offset(self, arg):
-        if not is_.an_integer(arg):
+        if not is_integer(arg):
             raise error.UncompatibleType(arg, "Integer")
 
         else:
-            self.font_size_offset = arg
+            self.font_size_offset = int(arg)
 
     # --------------------------------------------------------------------------
     ##

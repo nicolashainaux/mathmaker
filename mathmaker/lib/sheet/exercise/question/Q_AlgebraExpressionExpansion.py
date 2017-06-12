@@ -21,7 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
-from mathmaker.lib import randomly, is_
+from mathmaker.lib import randomly
+from mathmaker.lib.tools.auxiliary_functions import is_natural
 from mathmaker.lib.common.cst import RANDOMLY
 from .Q_Structure import Q_Structure
 from mathmaker.lib.core.base_calculus import (Expandable, BinomialIdentity,
@@ -300,7 +301,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
         # Creation of the expression:
         number = 0
         if 'expression_number' in options                                     \
-           and is_.a_natural_int(options['expression_number']):
+           and is_natural(options['expression_number']):
             # __
             number = options['expression_number']
         self.expression = Expression(number, self.expandable_objct)

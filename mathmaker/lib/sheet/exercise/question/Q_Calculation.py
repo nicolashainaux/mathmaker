@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import randomly, is_
+from mathmaker.lib.tools.auxiliary_functions import is_natural
 from mathmaker.lib.maths_lib import gcd
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
@@ -288,7 +289,7 @@ class Q_Calculation(Q_Structure):
         # Creation of the expression:
         number = 0
         if 'expression_number' in options                                     \
-           and is_.a_natural_int(options['expression_number']):
+           and is_natural(options['expression_number']):
             # __
             number = options['expression_number']
         self.expression = Expression(number, self.objct)

@@ -33,6 +33,7 @@ from decimal import Decimal
 from mathmaker import settings
 from mathmaker.lib.core.root_calculus import Calculable, Value, Exponented
 from mathmaker.lib import randomly, is_, error
+from mathmaker.lib.tools.auxiliary_functions import is_integer, is_natural
 from mathmaker.lib.common import alphabet
 from mathmaker.lib.maths_lib import (sign_of_product, gcd, pupil_gcd,
                                      lcm_of_the_list, is_even, is_uneven,
@@ -2119,7 +2120,7 @@ class Quotient(Operation):
             options['force_expression_begins'] = False
 
         if 'force_position' in options \
-           and is_.an_integer(options['force_position']):
+           and is_integer(options['force_position']):
             # __
             temp_options = dict()
             for key in options:
@@ -2583,8 +2584,8 @@ class Fraction(Quotient):
               and len(arg) == 6
               and arg[0] == RANDOMLY
               and (is_.a_sign(arg_sign) or arg_sign == RANDOMLY)
-              and is_.an_integer(arg_deno) and arg_deno >= 2
-              and is_.an_integer(arg_nume) and arg_nume >= 1
+              and is_integer(arg_deno) and arg_deno >= 2
+              and is_integer(arg_nume) and arg_nume >= 1
               and (is_.a_sign(arg[2]) or arg[2] == RANDOMLY)
               and (is_.a_sign(arg[4]) or arg[4] == RANDOMLY)):
             # __
@@ -3332,13 +3333,13 @@ class Fraction(Quotient):
 
         for i in range(len(self.numerator)):
             if not (isinstance(self.numerator.factor[i], Item)
-                    and is_.an_integer(self.numerator.factor[i].raw_value)
+                    and is_integer(self.numerator.factor[i].raw_value)
                     and self.numerator.factor[i].exponent == Value(1)):
                 return False
 
         for i in range(len(self.denominator)):
             if not (isinstance(self.denominator.factor[i], Item)
-                    and is_.an_integer(self.denominator.factor[i].raw_value)
+                    and is_integer(self.denominator.factor[i].raw_value)
                     and self.denominator.factor[i].exponent == Value(1)):
                 return False
 
@@ -4009,7 +4010,7 @@ class Product(CommutativeOperation):
         # It will be incremented everytime something is displayed.
         position = 0
         if 'force_position' in options \
-           and is_.an_integer(options['force_position']):
+           and is_integer(options['force_position']):
             # __
             position = options['force_position']
             # let's remove this option from the options
@@ -6634,7 +6635,7 @@ class Monomial(Product):
 
         # 3d CASE: tuple (sign, number, integer)
         elif (type(arg) == tuple and len(arg) == 3 and is_.a_sign(arg[0])
-              and (is_.a_number(arg[1]) and is_.an_integer(arg[2]))):
+              and (is_.a_number(arg[1]) and is_integer(arg[2]))):
             # __
             factor1 = Item((arg[0], arg[1]))
             factor2 = Item(('+', settings.default.MONOMIAL_LETTER, arg[2]))
@@ -6645,7 +6646,7 @@ class Monomial(Product):
         elif (type(arg) == tuple and len(arg) == 2
               and (is_.a_number(arg[0]) or (isinstance(arg[0], Exponented)
                                             and arg[0].is_numeric())
-              and is_.an_integer(arg[1]))):
+              and is_integer(arg[1]))):
             # __
             if is_.a_number(arg[0]):
                 if arg[0] >= 0:
@@ -6661,7 +6662,7 @@ class Monomial(Product):
 
         # 5th CASE: tuple (RANDOMLY, max_coeff, max_degree)
         elif (type(arg) == tuple and len(arg) == 3 and arg[0] == RANDOMLY
-              and is_.a_number(arg[1]) and is_.an_integer(arg[2])):
+              and is_.a_number(arg[1]) and is_integer(arg[2])):
             # __
             aux_ratio = 0.5
             if 'randomly_plus_signs_ratio' in options \
@@ -6771,7 +6772,7 @@ class Monomial(Product):
     ##
     #   @brief Set the degree of the Monomial
     def set_degree(self, arg):
-        if is_.a_natural_int(arg):
+        if is_natural(arg):
             self.factor[1].set_exponent(arg)
         else:
             raise error.UncompatibleType(arg, "natural integer")
@@ -6903,7 +6904,7 @@ class Polynomial(Sum):
 
             # ...either randomly
             if type(arg[3]) == tuple and len(arg[3]) == 2                     \
-               and is_.an_integer(arg[3][1]) and arg[3][0] == RANDOMLY:
+               and is_integer(arg[3][1]) and arg[3][0] == RANDOMLY:
                 # __
                 if arg[3][1] < 1:
                     raise error.OutOfRangeArgument(arg[3][1],
@@ -6913,7 +6914,7 @@ class Polynomial(Sum):
                     length = randomly.integer(1, arg[3][1])
 
             # ...or simply using the provided number
-            elif is_.an_integer(arg[3]) and arg[3] >= 1:
+            elif is_integer(arg[3]) and arg[3] >= 1:
                 length = arg[3]
             else:
                 raise error.UncompatibleType(arg,

@@ -20,7 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import randomly, is_
+from mathmaker.lib import randomly
+from mathmaker.lib.tools.auxiliary_functions import is_integer, is_natural
 from mathmaker.lib import shared
 
 from mathmaker.lib.core.root_calculus import Value, Exponented
@@ -427,7 +428,7 @@ class Q_Factorization(Q_Structure):
         # Creation of the expression:
         number = 0
         if ('expression_number' in options
-            and is_.a_natural_int(options['expression_number'])):
+            and is_natural(options['expression_number'])):
             # __
             number = options['expression_number']
         self.expression = Expression(number, steps[0])
@@ -663,7 +664,7 @@ def level_02(q_subkind, **options):
 
     max_coeff = 20
 
-    if 'max_coeff' in options and is_.an_integer(options['max_coeff']):
+    if 'max_coeff' in options and is_integer(options['max_coeff']):
         max_coeff = options['max_coeff']
 
     attribute_a_minus_sign = 'randomly'

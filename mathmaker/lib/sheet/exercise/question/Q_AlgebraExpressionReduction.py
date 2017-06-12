@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import randomly, is_
+from mathmaker.lib.tools.auxiliary_functions import is_integer, is_natural
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
 from mathmaker.lib.core.base_calculus import (Product, Monomial, Item, Sum,
@@ -138,7 +139,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                                   DEFAULT_MAXIMUM_LENGTH,
                                   weighted_table=[0.15, 0.25, 0.6])
 
-        if ('length' in options and is_.an_integer(options['length'])
+        if ('length' in options and is_integer(options['length'])
             and options['length'] >= 2):
             # __
             length = options['length']
@@ -300,7 +301,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
         # 2d CASE:
         # SUM OF PRODUCTS REDUCTION
         if q_kind == 'sum_of_products':
-            if (not ('length' in options and is_.an_integer(options['length'])
+            if (not ('length' in options and is_integer(options['length'])
                 and options['length'] >= 2)):
                 # __
                 length = randomly.integer(DEFAULT_MINIMUM_LENGTH,
@@ -327,7 +328,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
         if q_kind == 'sum':
             self.kind_of_answer = 'sum'
             # Let's determine the length of the Sum to create
-            if not ('length' in options and is_.an_integer(options['length'])
+            if not ('length' in options and is_integer(options['length'])
                     and options['length'] >= 1):
                 # __
                 length = randomly\
@@ -472,7 +473,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
         # Creation of the expression:
         number = 0
         if ('expression_number' in options
-            and is_.a_natural_int(options['expression_number'])):
+            and is_natural(options['expression_number'])):
             # __
             number = options['expression_number']
 

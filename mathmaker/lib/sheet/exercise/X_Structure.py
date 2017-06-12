@@ -21,7 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
-from mathmaker.lib import error, is_
+from mathmaker.lib import error
+from mathmaker.lib.tools.auxiliary_functions import is_integer
 
 MIN_ROW_HEIGHT = 0.8  # this is for mental calculation exercises
 
@@ -85,7 +86,7 @@ class X_Structure(object):
         # Start number
         self.start_number = 0
         if 'start_number' in options:
-            if not is_.an_integer(options['start_number']):
+            if not is_integer(options['start_number']):
                 raise error.UncompatibleType(options['start_number'],
                                              "integer")
             if not (options['start_number'] >= 1):
