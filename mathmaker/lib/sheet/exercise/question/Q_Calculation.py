@@ -20,8 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import randomly, is_
-from mathmaker.lib.tools.auxiliary_functions import is_natural
+from mathmaker.lib import randomly
+from mathmaker.lib.tools.auxiliary_functions import is_natural, is_number
 from mathmaker.lib.maths_lib import gcd
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
@@ -145,7 +145,7 @@ class Q_Calculation(Q_Structure):
             ten_power_factor2 = 1
 
             if 'with_ten_powers' in options \
-               and is_.a_number(options['with_ten_powers']) \
+               and is_number(options['with_ten_powers']) \
                and options['with_ten_powers'] <= 1 \
                and options['with_ten_powers'] >= 0:
                 # __

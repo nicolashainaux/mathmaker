@@ -32,8 +32,9 @@ from decimal import Decimal
 
 from mathmaker import settings
 from mathmaker.lib.core.root_calculus import Calculable, Value, Exponented
-from mathmaker.lib import randomly, is_, error
-from mathmaker.lib.tools.auxiliary_functions import is_integer, is_natural
+from mathmaker.lib import randomly, error
+from mathmaker.lib.tools.auxiliary_functions import (is_integer, is_natural,
+                                                     is_number)
 from mathmaker.lib.common import alphabet
 from mathmaker.lib.maths_lib import (sign_of_product, gcd, pupil_gcd,
                                      lcm_of_the_list, is_even, is_uneven,
@@ -100,7 +101,7 @@ class Item(Exponented):
         # Item's sign will be number's sign
         # Item's value will be abs(number)
         # Item's exponent will be 1
-        if is_.a_number(arg):
+        if is_number(arg):
             if arg > 0:
                 self._value_inside = Value(arg, **options)
             else:
@@ -112,7 +113,7 @@ class Item(Exponented):
         # Item's value will be the next letters
         # Item's exponent will be 1
         elif type(arg) is str and len(arg) >= 1:
-            if is_.a_sign(arg[0]) and len(arg) >= 2:
+            if arg[0] in ['+', '-'] and len(arg) >= 2:
                 self._sign = arg[0]
                 self._value_inside = Value(arg[1:len(arg)], **options)
             else:
@@ -130,9 +131,9 @@ class Item(Exponented):
                 self.set_unit(arg.get_unit())
 
         # 4th CASE: (sign, number|letter, <exponent as number|Exponented>)
-        elif (type(arg) == tuple and len(arg) == 3 and is_.a_sign(arg[0])
-              and (is_.a_number(arg[1]) or type(arg[1]) is str)
-              and (is_.a_number(arg[2]) or isinstance(arg[2], Exponented)
+        elif (type(arg) == tuple and len(arg) == 3 and arg[0] in ['+', '-']
+              and (is_number(arg[1]) or type(arg[1]) is str)
+              and (is_number(arg[2]) or isinstance(arg[2], Exponented)
                    or isinstance(arg[2], Value))):
             # __
             self._sign = arg[0]
@@ -143,8 +144,8 @@ class Item(Exponented):
                 self._exponent = Value(arg[2], **options)
 
         # 5th CASE: (sign, number|letter)
-        elif (type(arg) == tuple and len(arg) == 2 and is_.a_sign(arg[0])
-              and (is_.a_number(arg[1]) or type(arg[1]) is str)):
+        elif (type(arg) == tuple and len(arg) == 2 and arg[0] in ['+', '-']
+              and (is_number(arg[1]) or type(arg[1]) is str)):
             # __
             self._sign = arg[0]
             self._value_inside = Value(arg[1], **options)
@@ -1479,7 +1480,7 @@ class SquareRoot(Function):
         # 3d CASE: a tuple (sign, Exponented)
         elif (isinstance(arg, tuple)
               and len(arg) == 2
-              and is_.a_sign(arg[0])
+              and arg[0] in ['+', '-']
               and isinstance(arg[1], Exponented)):
             # __
             self._sign = arg[0]
@@ -1987,21 +1988,21 @@ class Quotient(Operation):
             self._symbol = 'use_divide_symbol'
 
         # 1st CASE: (sign, Exponented num, Exponented deno)
-        if (type(arg) == tuple and len(arg) >= 3 and is_.a_sign(arg[0])
-            and (isinstance(arg[1], Calculable) or is_.a_number(arg[1])
+        if (type(arg) == tuple and len(arg) >= 3 and arg[0] in ['+', '-']
+            and (isinstance(arg[1], Calculable) or is_number(arg[1])
                  or type(arg[1]) is str)
-            and (isinstance(arg[2], Calculable) or is_.a_number(arg[2]) or
+            and (isinstance(arg[2], Calculable) or is_number(arg[2]) or
                  type(arg[2]) is str)):
             # __
             self._sign = arg[0]
-            if (is_.a_number(arg[1]) or type(arg[1]) is str
+            if (is_number(arg[1]) or type(arg[1]) is str
                 or isinstance(arg[1], Value)):
                 # __
                 self._numerator = Item(arg[1])
             else:
                 self._numerator = arg[1].clone()
 
-            if (is_.a_number(arg[2]) or type(arg[2]) is str
+            if (is_number(arg[2]) or type(arg[2]) is str
                 or isinstance(arg[2], Value)):
                 # __
                 self._denominator = Item(arg[2])
@@ -2010,7 +2011,7 @@ class Quotient(Operation):
 
         # 2d CASE: imbricated in the 1st
             if len(arg) >= 4:
-                if is_.a_number(arg[3]):
+                if is_number(arg[3]):
                     self._exponent = Value(arg[3])
                 else:
                     self._exponent = arg[3].clone()
@@ -2540,19 +2541,19 @@ class Fraction(Quotient):
         # OR (num,den)[, copy_other_fields_from=<Fraction>]
         if (type(arg) == tuple and len(arg) >= 2 and arg[0] != RANDOMLY
             and ((isinstance(arg_nume, Exponented) and arg_nume.is_numeric())
-                 or is_.a_number(arg_nume))
+                 or is_number(arg_nume))
             and ((isinstance(arg_deno, Exponented) and arg_deno.is_numeric())
-                 or is_.a_number(arg_deno))):
+                 or is_number(arg_deno))):
             # __
 
-            if is_.a_number(arg_nume):
+            if is_number(arg_nume):
                 self._numerator = Product([Item(arg_nume)])
             elif not isinstance(arg_nume, Product):
                 self._numerator = Product(arg_nume.clone())
             else:
                 self._numerator = arg_nume.clone()
 
-            if is_.a_number(arg_deno):
+            if is_number(arg_deno):
                 self._denominator = Product([Item(arg_deno)])
             elif not isinstance(arg_deno, Product):
                 self._denominator = Product(arg_deno.clone())
@@ -2572,7 +2573,7 @@ class Fraction(Quotient):
                     options['copy_other_fields_from']\
                     .same_deno_reduction_in_progress
 
-            if len(arg) >= 3 and is_.a_sign(arg_sign):
+            if len(arg) >= 3 and arg_sign in ['+', '-']:
                 self._sign = arg[0]
 
             if len(arg) >= 4:
@@ -2583,11 +2584,11 @@ class Fraction(Quotient):
         elif (type(arg) == tuple
               and len(arg) == 6
               and arg[0] == RANDOMLY
-              and (is_.a_sign(arg_sign) or arg_sign == RANDOMLY)
+              and arg_sign in ['+', '-', RANDOMLY]
               and is_integer(arg_deno) and arg_deno >= 2
               and is_integer(arg_nume) and arg_nume >= 1
-              and (is_.a_sign(arg[2]) or arg[2] == RANDOMLY)
-              and (is_.a_sign(arg[4]) or arg[4] == RANDOMLY)):
+              and arg[2] in ['+', '-', RANDOMLY]
+              and arg[4] in ['+', '-', RANDOMLY]):
             # __
             numbers_box_nume = [j + 1 for j in range(arg_nume)]
             numbers_box_deno = [j + 1 for j in range(arg_deno)]
@@ -3728,7 +3729,7 @@ class Product(CommutativeOperation):
                 self._info.append(arg.info[i])
 
         # 3d CASE: Number
-        elif is_.a_number(arg):
+        elif is_number(arg):
             self._element.append(Item(arg))
 
         # 4th CASE: Exponented
@@ -3752,7 +3753,7 @@ class Product(CommutativeOperation):
                 if isinstance(arg[i], Exponented):
                     self._element.append(arg[i].clone())
 
-                elif is_.a_number(arg[i]) or isinstance(arg[i], Value):
+                elif is_number(arg[i]) or isinstance(arg[i], Value):
                     self._element.append(Item(arg[i]))
 
                 elif arg[i] is None:
@@ -5158,7 +5159,7 @@ class Product(CommutativeOperation):
         #   or that there was no other numeric factor & that it has been
         #   added to the list by get_factors_list() so we can't say
         #   anything in this case so far, so just don't !
-        # if len(numerics) == 1 and is_.equivalent_to_a_single_1(numerics[0]):
+        # if len(numerics) == 1 and numerics[0].is_equivalent_to_a_single_1():
         #  return False
 
         # - or another number. If its exponent is different from 1, then
@@ -5303,7 +5304,7 @@ class Sum(CommutativeOperation):
                 self._info.append(arg.info[i])
 
         # 2d CASE: Number
-        elif is_.a_number(arg) or type(arg) is str:
+        elif is_number(arg) or type(arg) is str:
             self._element.append(Item(arg))
             self._info.append(False)
 
@@ -5328,7 +5329,7 @@ class Sum(CommutativeOperation):
                     self._element.append(arg[i].clone())
                     self._info.append(False)
 
-                elif is_.a_number(arg[i]) or type(arg[i]) is str:
+                elif is_number(arg[i]) or type(arg[i]) is str:
                     self._element.append(Item(arg[i]))
                     self._info.append(False)
 
@@ -6634,8 +6635,8 @@ class Monomial(Product):
             self._exponent = arg.exponent.clone()
 
         # 3d CASE: tuple (sign, number, integer)
-        elif (type(arg) == tuple and len(arg) == 3 and is_.a_sign(arg[0])
-              and (is_.a_number(arg[1]) and is_integer(arg[2]))):
+        elif (type(arg) == tuple and len(arg) == 3 and arg[0] in ['+', '-']
+              and (is_number(arg[1]) and is_integer(arg[2]))):
             # __
             factor1 = Item((arg[0], arg[1]))
             factor2 = Item(('+', settings.default.MONOMIAL_LETTER, arg[2]))
@@ -6644,11 +6645,11 @@ class Monomial(Product):
 
         # 4th CASE: tuple (number|numeric Exponented, integer)
         elif (type(arg) == tuple and len(arg) == 2
-              and (is_.a_number(arg[0]) or (isinstance(arg[0], Exponented)
-                                            and arg[0].is_numeric())
+              and (is_number(arg[0]) or (isinstance(arg[0], Exponented)
+                                         and arg[0].is_numeric())
               and is_integer(arg[1]))):
             # __
-            if is_.a_number(arg[0]):
+            if is_number(arg[0]):
                 if arg[0] >= 0:
                     factor1 = Item(('+', arg[0]))
                 elif arg[0] < 0:
@@ -6662,11 +6663,11 @@ class Monomial(Product):
 
         # 5th CASE: tuple (RANDOMLY, max_coeff, max_degree)
         elif (type(arg) == tuple and len(arg) == 3 and arg[0] == RANDOMLY
-              and is_.a_number(arg[1]) and is_integer(arg[2])):
+              and is_number(arg[1]) and is_integer(arg[2])):
             # __
             aux_ratio = 0.5
             if 'randomly_plus_signs_ratio' in options \
-               and is_.a_number(options['randomly_plus_signs_ratio']):
+               and is_number(options['randomly_plus_signs_ratio']):
                 # __
                 aux_ratio = options['randomly_plus_signs_ratio']
             factor1 = Item((randomly.sign(plus_signs_ratio=aux_ratio),
@@ -7154,7 +7155,7 @@ class Expandable(Product):
 
             if ('reversed' in options
                 or ('randomly_reversed' in options
-                    and is_.a_number(options['randomly_reversed'])
+                    and is_number(options['randomly_reversed'])
                     and
                     randomly.decimal_0_1() <= options['randomly_reversed'])):
                 # __

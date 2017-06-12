@@ -20,7 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import randomly, is_
+from mathmaker.lib import randomly
 from mathmaker.lib.tools.auxiliary_functions import is_integer, is_natural
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
@@ -504,7 +504,9 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             result += M.write_math_style2(M.type_string(self.expression))
             result += M.write_new_line()
 
-            if not is_.an_ordered_calculable_objects_list(self.objct.factor):
+            if not all(self.objct.factor[i]
+                       .alphabetical_order_cmp(self.objct.factor[i + 1]) > 0
+                       for i in range(len(self.objct.factor) - 1)):
                 ordered_product = self.objct.order()
                 ordered_product.set_compact_display(False)
                 ordered_expression = Expression(self.expression.name,

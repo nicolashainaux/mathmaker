@@ -25,7 +25,7 @@ import math
 import random
 from decimal import Decimal
 
-from . import is_
+from mathmaker.lib.tools.auxiliary_functions import is_integer, is_number
 
 
 # DIVISORS frequently used by the children
@@ -102,9 +102,9 @@ def sign_of_product(signed_objctlist):
 
     for i in range(len(signed_objctlist)):
 
-        if (not (is_.a_sign(signed_objctlist[i])
-            or is_.a_number(signed_objctlist[i])
-            or isinstance(signed_objctlist[i], Exponented))):
+        if not (signed_objctlist[i] in ['+', '-']
+                or is_number(signed_objctlist[i])
+                or isinstance(signed_objctlist[i], Exponented)):
             # __
             raise TypeError('Expected a sign + or -, or a number, or an '
                             'Exponented. Got a '
@@ -113,7 +113,7 @@ def sign_of_product(signed_objctlist):
         elif signed_objctlist[i] == '-':
             minus_signs_nb += 1
 
-        elif is_.a_number(signed_objctlist[i]) and signed_objctlist[i] < 0:
+        elif is_number(signed_objctlist[i]) and signed_objctlist[i] < 0:
             minus_signs_nb += 1
 
         elif isinstance(signed_objctlist[i], Exponented):
@@ -293,7 +293,7 @@ def is_uneven(objct):
 ##
 #   @brief Conversions between degrees and radians
 def deg_to_rad(arg):
-    if not is_.a_number(arg):
+    if not is_number(arg):
         raise TypeError('Expected a number, got a ' + str(type(arg))
                         + ' instead.')
 
@@ -312,7 +312,7 @@ def mean(numberList, weights=None):
         raise ValueError('This list shouldn\'t be empty')
 
     for i in range(len(numberList)):
-        if not is_.a_number(numberList[i]):
+        if not is_number(numberList[i]):
             raise TypeError('Expected a number, got a '
                             + str(type(numberList[i])) + ' instead')
 

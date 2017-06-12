@@ -29,7 +29,8 @@
 import math
 from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
 
-from mathmaker.lib import error, is_
+from mathmaker.lib import error
+from mathmaker.lib.tools.auxiliary_functions import is_number
 from mathmaker.lib.maths_lib import deg_to_rad, round
 from mathmaker.lib.core.base import Drawable, Printable
 from mathmaker.lib.core.base_calculus import Value
@@ -76,8 +77,8 @@ class Point(Drawable):
 
             if not (type(arg[1]) == tuple
                     and len(arg[1]) == 2
-                    and is_.a_number(arg[1][0])
-                    and is_.a_number(arg[1][1])):
+                    and is_number(arg[1][0])
+                    and is_number(arg[1][1])):
                 # __
                 raise error.WrongArgument(str(arg), ' (x, y) ')
 
@@ -130,7 +131,7 @@ class Point(Drawable):
     #   @brief Sets the abscissa of the Point
     @x.setter
     def x(self, arg):
-        if not is_.a_number(arg):
+        if not is_number(arg):
             raise error.WrongArgument(' a number ', str(arg))
 
         self._x = arg
@@ -140,7 +141,7 @@ class Point(Drawable):
     #   @brief Sets the ordinate of the Point
     @y.setter
     def y(self, arg):
-        if not is_.a_number(arg):
+        if not is_number(arg):
             raise error.WrongArgument(' a number ', str(arg))
 
         self._y = arg
@@ -170,7 +171,7 @@ class Point(Drawable):
         if not isinstance(center, Point):
             raise error.WrongArgument(' a Point ', str(type(center)))
 
-        if not is_.a_number(angle):
+        if not is_number(angle):
             raise error.WrongArgument(' a number ', str(type(angle)))
 
         delta_x = self.x_exact - center.x_exact
@@ -414,7 +415,7 @@ class Vector(Point):
                 Point.__init__(self,
                                Point(["", (arg[1].x_exact - arg[0].x_exact,
                                            arg[1].y_exact - arg[0].y_exact)]))
-            elif all([is_.a_number(elt) for elt in arg]):
+            elif all([is_number(elt) for elt in arg]):
                 Point.__init__(self, Point(["", (arg[0], arg[1])]))
             else:
                 raise error.WrongArgument("a tuple not only of Points or"
@@ -652,7 +653,7 @@ class Angle(Drawable, Printable):
     #   @brief Sets the angle (for display) of label's angle
     @label_display_angle.setter
     def label_display_angle(self, arg):
-        if not is_.a_number(arg):
+        if not is_number(arg):
             raise error.WrongArgument(arg, ' a number ')
         else:
             self._label_display_angle = round(Decimal(str(arg)),

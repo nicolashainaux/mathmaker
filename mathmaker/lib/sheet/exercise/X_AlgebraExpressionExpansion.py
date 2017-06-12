@@ -20,7 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import randomly, is_, error
+from mathmaker.lib import randomly, error
+from mathmaker.lib.tools.auxiliary_functions import is_number
 from mathmaker.lib.core.base_calculus import Monomial
 from .X_Structure import X_Structure
 from . import question
@@ -294,7 +295,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
                 ratio = DEFAULT_RATIO_MIXED_MONOM_POLYN1
 
                 if 'ratio_mmp' in options \
-                   and is_.a_number(options['ratio_mmp']) \
+                   and is_number(options['ratio_mmp']) \
                    and options['ratio_mmp'] > 0 \
                    and options['ratio_mmp'] < 1:
                     # __

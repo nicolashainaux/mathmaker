@@ -44,6 +44,11 @@ def check_unique_letters_words(words_list, n):
     return True
 
 
+def is_number(n):
+    """Check if n is a number."""
+    return type(n) in [float, int, Decimal]
+
+
 def is_integer(n):
     """Check if number n is an integer."""
     if type(n) is int:

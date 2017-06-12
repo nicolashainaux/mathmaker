@@ -20,57 +20,5 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import decimal
 
-
-# --------------------------------------------------------------------------
-##
-#   @brief True if argument is a string containing only numbers 0-9, -, + or .
-#   @param objct The object to test
-#   @return True if argument is a string
-def a_numerical_string(objct):
-    if type(objct) == str and objct != "" and objct != '...':
-        return all(o in ['+', '-', '.', '0', '1', '2', '3', '4', '5',
-                         '6', '7', '8', '9'] for o in objct)
-    else:
-        return False
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief True if argument is an ordered Exponented objects list
-#   @param provided_list The list to check
-#   @return True if argument is an ordered Exponented objects list
-def an_ordered_calculable_objects_list(provided_list):
-    # Caution, the provided list must contain only Exponented objects that
-    # can be ordered with the Exponented.alphabetical_order_cmp() function
-    for i in range(len(provided_list)):
-        if i < len(provided_list) - 1:
-            if (provided_list[i].alphabetical_order_cmp(
-                provided_list[i + 1]) > 0):
-                # __
-                return False
-
-    return True
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief True if argument is a sign ('+' or '-')
-#   @param objct The object to test
-#   @return True if argument is a sign ('+' or '-')
-def a_sign(objct):
-    if (objct == '+') or (objct == '-'):
-        return True
-    else:
-        return False
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief True if the argument is a number
-#   @param objct The object to test
-#   @todo Maybe add other kind of objects like fractions ??...
-#   @return True if the argument is a number
-def a_number(objct):
-    return type(objct) in [float, int, decimal.Decimal]
+# Prepare to remove this file

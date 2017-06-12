@@ -21,8 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker import settings
-from mathmaker.lib import shared, error, is_, randomly, maths_lib
-from mathmaker.lib.tools.auxiliary_functions import is_integer
+from mathmaker.lib import shared, error, randomly, maths_lib
+from mathmaker.lib.tools.auxiliary_functions import is_integer, is_number
 from mathmaker.lib.common import alphabet
 from mathmaker.lib.common.cst import RANDOMLY
 from mathmaker.lib.core.utils import gather_literals
@@ -1918,7 +1918,7 @@ class Table_UP(Table):
     def __init__(self, coeff, first_line, info, displ_as_qe=False):
         log = settings.dbg_logger.getChild('Table_UP.init')
 
-        if (not is_.a_number(coeff)
+        if (not is_number(coeff)
             and not (isinstance(coeff, Calculable) and coeff.is_numeric())):
             # __
             raise error.WrongArgument(str(type(coeff)),
@@ -1938,7 +1938,7 @@ class Table_UP(Table):
                                       " two lists of the same length.")
 
         for elt in first_line:
-            if (elt is not None and not is_.a_number(elt)
+            if (elt is not None and not is_number(elt)
                 and not (isinstance(elt, Calculable) and elt.is_numeric())):
                 # __
                 raise error.WrongArgument(str(type(elt)) + " " + repr(elt),

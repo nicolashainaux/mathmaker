@@ -27,8 +27,8 @@ import subprocess
 from tempfile import NamedTemporaryFile
 
 from mathmaker import settings
-from mathmaker.lib import is_, error
-from mathmaker.lib.tools.auxiliary_functions import is_integer
+from mathmaker.lib import error
+from mathmaker.lib.tools.auxiliary_functions import is_integer, is_number
 from mathmaker.lib.common import latex
 from mathmaker.lib.common.cst import TEXT_SCALES, TEXT_RANKS
 from mathmaker.lib.tools import header_comment
@@ -483,7 +483,7 @@ automatically increments the counter").format(cmd_name="exercise",
 
         for i in range(len(col_fmt)):
             t = col_fmt[i]
-            if is_.a_number(col_fmt[i]):
+            if is_number(col_fmt[i]):
                 t = cell_fmt + str(col_fmt[i]) + " " + str(length_unit) + "}"
 
             vb = v_border
@@ -527,7 +527,7 @@ automatically increments the counter").format(cmd_name="exercise",
         if isinstance(objct, Printable):
             options.update({'force_expression_begins': True})
             return objct.into_str(**options)
-        elif is_.a_number(objct) or type(objct) is str:
+        elif is_number(objct) or type(objct) is str:
             return str(objct)
         else:
             raise error.UncompatibleType(objct, "String|Number|Printable")

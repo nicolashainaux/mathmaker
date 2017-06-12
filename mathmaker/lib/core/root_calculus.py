@@ -28,7 +28,8 @@
 
 import copy
 import locale
-from decimal import Decimal, getcontext, Rounded, ROUND_HALF_UP, ROUND_DOWN
+from decimal import (Decimal, getcontext, Rounded, ROUND_HALF_UP, ROUND_DOWN,
+                     InvalidOperation)
 
 from mathmaker.lib.maths_lib import round
 from mathmaker.lib.core.utils import check_lexicon_for_substitution
@@ -38,7 +39,7 @@ from mathmaker.lib.common.cst import (UNIT, TENTH, HUNDREDTH, THOUSANDTH,
                                       VALUE_AND_UNIT_SEPARATOR)
 from mathmaker.lib.common import alphabet
 from mathmaker.lib.core.base import Printable
-from mathmaker.lib import is_, error
+from mathmaker.lib import error
 from mathmaker.lib.common.latex import MARKUP
 
 
@@ -352,7 +353,7 @@ class Signed(Calculable):
     #   @param  arg String being '+' or '-' or number being +1 or -1
     #   @warning Relays an exception if arg is not of the types described
     def set_sign(self, arg):
-        if is_.a_sign(arg):
+        if arg in ['+', '-']:
             self._sign = arg
         elif arg == 1:
             self._sign = '+'
@@ -444,9 +445,9 @@ class Value(Signed):
                 self._sign = '-'
 
         elif type(arg) == str:
-            if is_.a_numerical_string(arg):
+            try:
                 self._raw_value = Decimal(arg)
-            else:
+            except InvalidOperation:
                 self._raw_value = arg
 
             if len(arg) >= 1 and arg[0] == '-':
@@ -514,9 +515,9 @@ class Value(Signed):
                 self._sign = '-'
 
         elif type(arg) == str:
-            if is_.a_numerical_string(arg):
+            try:
                 self._raw_value = Decimal(arg)
-            else:
+            except InvalidOperation:
                 self._raw_value = arg
 
             if len(arg) >= 1 and arg[0] == '-':
@@ -569,7 +570,7 @@ class Value(Signed):
     #   @param  arg String being '+' or '-' or number being +1 or -1
     #   @warning Relays an exception if arg is not of the types described
     def set_sign(self, arg):
-        if is_.a_sign(arg):
+        if arg in ['+', '-']:
             self._sign = arg
         elif arg == 1:
             self._sign = '+'

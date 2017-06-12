@@ -31,7 +31,8 @@ import copy
 from decimal import Decimal, ROUND_HALF_UP
 
 from mathmaker.lib import randomly
-from mathmaker.lib import is_, error
+from mathmaker.lib import error
+from mathmaker.lib.tools.auxiliary_functions import is_number
 from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
                                      POLYGONS_NATURES, round)
 from .root_calculus import Evaluable, Value, Unit
@@ -81,7 +82,7 @@ class Polygon(Drawable):
         if 'rotate_around_isobarycenter' in options:
             if options['rotate_around_isobarycenter'] == 'randomly':
                 self._rotation_angle = randomly.integer(0, 35) * 10
-            elif is_.a_number(options['rotate_around_isobarycenter']):
+            elif is_number(options['rotate_around_isobarycenter']):
                 self._rotation_angle = options['rotate_around_isobarycenter']
 
         if isinstance(arg, Polygon):
@@ -433,8 +434,8 @@ class Rectangle(Polygon):
             Polygon.__init__(self, (tuple(arg.points)))
         elif isinstance(arg, list):
             if (isinstance(arg[0], Point)
-                and is_.a_number(arg[1])
-                and is_.a_number(arg[2])
+                and is_number(arg[1])
+                and is_number(arg[2])
                 and all(isinstance(arg[i], str) for i in [3, 4, 5])):
                 # __
                 length = arg[1]
@@ -544,7 +545,7 @@ class Square(Polygon):
             Polygon.__init__((self, tuple(arg.points)))
         elif isinstance(arg, list):
             if (isinstance(arg[0], Point)
-                and is_.a_number(arg[1])
+                and is_number(arg[1])
                 and all(isinstance(arg[i], str) for i in [2, 3, 4])):
                 # __
                 Rectangle.__init__(self, [arg[0], arg[1], arg[1], arg[2],
@@ -678,12 +679,12 @@ class Triangle(Polygon):
             if not (construction_data == 'sketch'
                     or (type(construction_data) == dict
                         and 'side0' in construction_data
-                        and is_.a_number(construction_data['side0'])
+                        and is_number(construction_data['side0'])
                         and (('side1' in construction_data
-                              and is_.a_number(construction_data['side1']))
+                              and is_number(construction_data['side1']))
                              or
                              (('angle1' in construction_data
-                               and is_.a_number(
+                               and is_number(
                                    construction_data['angle1'])))))):
                 # __
                 raise error.WrongArgument(
@@ -707,7 +708,7 @@ class Triangle(Polygon):
 
             if rotate_around_isobarycenter == 'randomly':
                 self._rotation_angle = randomly.integer(0, 35) * 10
-            elif is_.a_number(rotate_around_isobarycenter):
+            elif is_number(rotate_around_isobarycenter):
                 self._rotation_angle = rotate_around_isobarycenter
 
             start_vertex[0] = Point([vertices_names[0], (0, 0)])
@@ -797,7 +798,7 @@ class RightTriangle(Triangle):
                 rotation = randomly.integer(0, 35) * 10
 
             elif ('rotate_around_isobarycenter' in options
-                  and is_.a_number(options['rotate_around_isobarycenter'])):
+                  and is_number(options['rotate_around_isobarycenter'])):
                 # __
                 rotation = options['rotate_around_isobarycenter']
 
@@ -812,9 +813,9 @@ class RightTriangle(Triangle):
 
             elif (type(construction_data) == dict
                   and 'leg0' in construction_data
-                  and is_.a_number(construction_data['leg0'])
+                  and is_number(construction_data['leg0'])
                   and 'leg1' in construction_data
-                  and is_.a_number(construction_data['leg1'])):
+                  and is_number(construction_data['leg1'])):
                 # __
                 leg0_length = construction_data['leg0']
                 leg1_length = construction_data['leg1']
