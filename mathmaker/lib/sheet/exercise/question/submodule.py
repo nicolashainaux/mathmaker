@@ -96,7 +96,7 @@ class structure(object):
             elif sort_nbs:
                 nb_list = sorted(nb_list)
             for i in range(len(nb_list)):
-                setattr(self, 'nb' + str(i + 1), nb_list[i])
+                setattr(self, 'nb' + str(i + 1), Decimal(str(nb_list[i])))
             self.nb_nb = len(nb_list)
 
         elif arg == "nb_variants":

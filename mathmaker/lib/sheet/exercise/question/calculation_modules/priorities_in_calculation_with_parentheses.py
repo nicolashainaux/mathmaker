@@ -202,7 +202,7 @@ class sub_object(submodule.structure):
                             - (self.nb2 - self.nb3)
                         if self.nb2 - self.nb3 == 1:
                             self.nb2 += \
-                                random.choice([i + 1 for i in range(8)])
+                                random.choice([i for i in range(10)])
         self.expression = None
         self.obj = None
         if self.variant == 100:  # (a + b)×c
@@ -326,7 +326,7 @@ class sub_object(submodule.structure):
             ops = '+' if self.variant == 118 else '-'
             opn = 1 if self.variant == 118 else -1
             if self.variant == 118 and self.nb2 == 1:
-                self.nb2 += random.choice([i + 1 for i in range(10)])
+                self.nb2 += random.choice([i for i in range(10)])
             a = self.nb1 * (self.nb2 + opn * self.nb3 * self.nb4)
             b, c, d = self.nb2, self.nb3, self.nb4
             self.obj = Division(('+',
@@ -335,8 +335,8 @@ class sub_object(submodule.structure):
         elif self.variant in [119, 123]:  # a÷(b ± c÷d)
             ops = '+' if self.variant == 119 else '-'
             opn = 1 if self.variant == 119 else -1
-            if self.variant == 119 and self.nb2 - self.nb3 == 1:
-                self.nb2 += random.choice([i + 1 for i in range(10)])
+            if self.variant == 119 and self.nb2 == 1:
+                self.nb2 += random.choice([i for i in range(10)])
             a = self.nb1 * (self.nb2 + opn * self.nb3)
             b, c, d = self.nb2, self.nb3 * self.nb4, self.nb4
             self.obj = Division(('+',
