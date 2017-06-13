@@ -247,7 +247,7 @@ def is_even(objct):
     from mathmaker.lib.core.base_calculus import Item, Function
     from mathmaker.lib.core.root_calculus import Value
 
-    if is_integer(objct):
+    if is_number(objct) and is_integer(objct):
         if objct % 2 == 0:
             return True
         else:
@@ -270,23 +270,7 @@ def is_even(objct):
 #   @param objct The object to test
 #   @return True if objct is an uneven number|numeric Item. Otherwise, False
 def is_uneven(objct):
-    from mathmaker.lib.core.base_calculus import Item, Function
-    from mathmaker.lib.core.root_calculus import Value
-    if is_integer(objct):
-        if objct % 2 == 0:
-            return False
-        else:
-            return True
-
-    elif (isinstance(objct, Item) and objct.is_numeric()
-          and not isinstance(objct, Function)):
-        return is_uneven(objct.raw_value)
-
-    elif (isinstance(objct, Value) and objct.is_numeric()):
-        return is_uneven(objct.raw_value)
-
-    else:
-        return False
+    return not is_even(objct)
 
 
 # --------------------------------------------------------------------------
