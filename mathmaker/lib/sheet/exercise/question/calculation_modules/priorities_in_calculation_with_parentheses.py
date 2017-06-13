@@ -22,6 +22,8 @@
 
 import random
 import copy
+from decimal import Decimal
+import sys
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools.auxiliary_functions import is_integer
@@ -142,35 +144,41 @@ class sub_object(submodule.structure):
             if self.variant in [101, 103, 105, 107, ]:
                 if not is_integer(self.nb2):
                     self.nb1, self.nb2 = self.nb2, self.nb1
-            elif self.variant in [109, 110, 113, 114]:
+            if self.variant in [109, 110, 113, 114]:
                 if not is_integer(self.nb3):
                     self.nb2, self.nb3 = self.nb3, self.nb2
-            elif self.variant in [111, 115]:
+            if self.variant in [111, 115]:
                 self.nb1, self.nb2, self.nb3 = \
                     remove_division_by_decimal(self.nb1, numbers=[self.nb2,
                                                                   self.nb3])
-            elif self.variant in [121, 123]:
+            if self.variant in [117, 119, 121, 123]:
                 self.nb3, self.nb4 = \
                     remove_division_by_decimal(self.nb3, numbers=[self.nb4, ])
-            elif self.variant in [118, 119, 122, ]:
-                if not self.nb_variant.startswith('decimal'):
-                    self.nb1, self.nb2, self.nb3, self.nb4 = \
-                        remove_division_by_decimal(self.nb1,
-                                                   numbers=[self.nb2,
-                                                            self.nb3,
-                                                            self.nb4])
-                elif self.variant == 118:
-                    # allow_division_by_decimal is still False,
-                    # self.nb_variant does start with 'decimal'
-                    # The idea is to modify self.nb2 in order to have
-                    # self.nb2 + self.nb3 * self.nb4 being an integer
-                    if not is_integer(self.nb2 + self.nb3 * self.nb4):
-                        self.nb2 += int(self.nb2 + self.nb3 * self.nb4) + 1 \
-                            - (self.nb2 + self.nb3 * self.nb4)
-                elif self.variant == 119:
-                    if not is_integer(self.nb2 + self.nb3):
-                        self.nb2 += int(self.nb2 + self.nb3) + 1 \
-                            - (self.nb2 + self.nb3)
+            if self.variant == 118:
+                # allow_division_by_decimal is still False,
+                # self.nb_variant does start with 'decimal'
+                # The idea is to modify self.nb2 in order to have
+                # self.nb2 + self.nb3 * self.nb4 being an integer
+                if not is_integer(self.nb2 + self.nb3 * self.nb4):
+                    self.nb2 += int(self.nb2 + self.nb3 * self.nb4) + 1 \
+                        - (self.nb2 + self.nb3 * self.nb4)
+            if self.variant == 119:
+                sys.stderr.write('\n{}, {}, {}, {} turned into: '
+                                 .format(self.nb1, self.nb2, self.nb3,
+                                         self.nb4))
+                if not is_integer(self.nb2) and is_integer(self.nb3):
+                    if self.nb3 % 10 == 0 or random.choice([True, False]):
+                        self.nb1, self.nb2 = remove_division_by_decimal(
+                            self.nb1, numbers=[self.nb2, ])
+                    else:
+                        self.nb3, self.nb2 = remove_division_by_decimal(
+                            self.nb3, numbers=[self.nb2, ])
+                if is_integer(self.nb2) and not is_integer(self.nb3):
+                    self.nb2 += int(self.nb2 + self.nb3 + 1) \
+                        - (self.nb2 + self.nb3)
+                sys.stderr.write('{}, {}, {}, {}\n'
+                                 .format(self.nb1, self.nb2, self.nb3,
+                                         self.nb4))
 
         if self.subvariant == 'only_positive':
             if self.variant in [120, 122]:
@@ -339,6 +347,16 @@ class sub_object(submodule.structure):
                 self.nb2 += random.choice([i for i in range(10)])
             a = self.nb1 * (self.nb2 + opn * self.nb3)
             b, c, d = self.nb2, self.nb3 * self.nb4, self.nb4
+            if self.variant == 119 and all(is_integer(n)
+                                           for n in [a, b, c, d]):
+                if (self.nb2 + self.nb3) % 10 == 0:
+                    if random.choice([True, False]):
+                        self.nb2 = b = b + Decimal('0.1')
+                    else:
+                        self.nb2 = b = b - Decimal('0.1')
+                else:
+                    self.nb1 += Decimal('0.1')
+                a = self.nb1 * (self.nb2 + opn * self.nb3)
             self.obj = Division(('+',
                                  a,
                                  Sum([b,
