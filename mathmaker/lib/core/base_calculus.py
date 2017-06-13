@@ -2487,6 +2487,14 @@ class Quotient(Operation):
                                               " Item(1) | Item(0).")
 
 
+class Division(Quotient):
+    """Same as Quotient, but using ÷ sign as default."""
+
+    def __init__(self, arg, ignore_1_denominator=False, **options):
+        options.update({'use_divide_symbol': True})
+        super().__init__(arg, ignore_1_denominator=False, **options)
+
+
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------

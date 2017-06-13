@@ -25,7 +25,7 @@ import copy
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools.auxiliary_functions import is_integer
-from mathmaker.lib.core.base_calculus import Item, Sum, Product, Quotient
+from mathmaker.lib.core.base_calculus import Item, Sum, Product, Division
 from mathmaker.lib.core.calculus import Expression
 from .. import submodule
 
@@ -218,7 +218,7 @@ class sub_object(submodule.structure):
             a, b = split_nb_into('sum', self.nb1, self.nb_variant,
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
-            self.obj = Quotient(('+', Sum([a, b]), c), use_divide_symbol=True)
+            self.obj = Division(('+', Sum([a, b]), c))
         elif self.variant == 102:  # a×(b + c)
             a = self.nb1
             b, c = split_nb_into('sum', self.nb2, self.nb_variant,
@@ -232,7 +232,7 @@ class sub_object(submodule.structure):
             b, c = split_nb_into('sum', self.nb2, self.nb_variant,
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
-            self.obj = Quotient(('+', a, Sum([b, c])), use_divide_symbol=True)
+            self.obj = Division(('+', a, Sum([b, c])))
         elif self.variant == 104:  # (a - b)×c
             c = self.nb2
             a, b = split_nb_into('difference', self.nb1, self.nb_variant,
@@ -246,7 +246,7 @@ class sub_object(submodule.structure):
             a, b = split_nb_into('difference', self.nb1, self.nb_variant,
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
-            self.obj = Quotient(('+', Sum([a, -b]), c), use_divide_symbol=True)
+            self.obj = Division(('+', Sum([a, -b]), c))
         elif self.variant == 106:  # a×(b - c)
             a = self.nb1
             b, c = split_nb_into('difference', self.nb2, self.nb_variant,
@@ -260,7 +260,7 @@ class sub_object(submodule.structure):
             b, c = split_nb_into('difference', self.nb2, self.nb_variant,
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
-            self.obj = Quotient(('+', a, Sum([b, -c])), use_divide_symbol=True)
+            self.obj = Division(('+', a, Sum([b, -c])))
         elif self.variant in [108, 112]:  # a×(b ± c)×d
             op = 'sum' if self.variant == 108 else 'difference'
             opn = 1 if self.variant == 108 else -1
@@ -282,11 +282,10 @@ class sub_object(submodule.structure):
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
             d = self.nb3
-            self.obj = Quotient(('+',
+            self.obj = Division(('+',
                                  Product([a, Sum([b, opn * c])],
                                          compact_display=False),
-                                 d),
-                                use_divide_symbol=True)
+                                 d))
         elif self.variant in [110, 114]:  # a÷(b ± c)×d
             op = 'sum' if self.variant == 110 else 'difference'
             opn = 1 if self.variant == 110 else -1
@@ -295,8 +294,7 @@ class sub_object(submodule.structure):
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
             d = self.nb1
-            self.obj = Product([Quotient(('+', a, Sum([b, opn * c])),
-                                         use_divide_symbol=True),
+            self.obj = Product([Division(('+', a, Sum([b, opn * c]))),
                                 d],
                                compact_display=False)
         elif self.variant in [111, 115]:  # a÷(b ± c)÷d
@@ -307,10 +305,9 @@ class sub_object(submodule.structure):
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
             d = self.nb3
-            self.obj = Quotient(('+',
-                                 Quotient(('+', a, Sum([b, opn * c])),
-                                          use_divide_symbol=True),
-                                 d), use_divide_symbol=True)
+            self.obj = Division(('+',
+                                 Division(('+', a, Sum([b, opn * c]))),
+                                 d))
         elif self.variant in [116, 120]:  # a×(b ± c×d)
             opn = 1 if self.variant == 116 else -1
             a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
@@ -323,8 +320,7 @@ class sub_object(submodule.structure):
             a, b, c, d = self.nb1, self.nb2, self.nb3 * self.nb4, self.nb4
             self.obj = Product([a,
                                 Sum([b,
-                                     Quotient((ops, c, d),
-                                              use_divide_symbol=True)])],
+                                     Division((ops, c, d))])],
                                compact_display=False)
         elif self.variant in [118, 122]:  # a÷(b ± c×d)
             ops = '+' if self.variant == 118 else '-'
@@ -333,10 +329,9 @@ class sub_object(submodule.structure):
                 self.nb2 += random.choice([i + 1 for i in range(10)])
             a = self.nb1 * (self.nb2 + opn * self.nb3 * self.nb4)
             b, c, d = self.nb2, self.nb3, self.nb4
-            self.obj = Quotient(('+',
+            self.obj = Division(('+',
                                  a,
-                                 Sum([b, Product([opn * c, d])])),
-                                use_divide_symbol=True)
+                                 Sum([b, Product([opn * c, d])])))
         elif self.variant in [119, 123]:  # a÷(b ± c÷d)
             ops = '+' if self.variant == 119 else '-'
             opn = 1 if self.variant == 119 else -1
@@ -344,12 +339,10 @@ class sub_object(submodule.structure):
                 self.nb2 += random.choice([i + 1 for i in range(10)])
             a = self.nb1 * (self.nb2 + opn * self.nb3)
             b, c, d = self.nb2, self.nb3 * self.nb4, self.nb4
-            self.obj = Quotient(('+',
+            self.obj = Division(('+',
                                  a,
                                  Sum([b,
-                                      Quotient((ops, c, d),
-                                               use_divide_symbol=True)])),
-                                use_divide_symbol=True)
+                                      Division((ops, c, d))])))
 
         # 124: (a×b + c)×d          # 132: (a + b)×(c + d)
         # 125: (a÷b + c)×d          # 133: (a + b)÷(c + d)

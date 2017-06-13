@@ -24,7 +24,7 @@ import random
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools.auxiliary_functions import is_integer
-from mathmaker.lib.core.base_calculus import Item, Sum, Product, Quotient
+from mathmaker.lib.core.base_calculus import Item, Sum, Product, Division
 from mathmaker.lib.core.calculus import Expression
 from .. import submodule
 
@@ -166,10 +166,9 @@ class sub_object(submodule.structure):
         if self.variant == 0:  # a + b×c
             self.obj = Sum([self.nb1, Product([self.nb2, self.nb3])])
         elif self.variant == 1:  # a + b÷c
-            self.obj = Sum([self.nb1, Quotient(('+',
+            self.obj = Sum([self.nb1, Division(('+',
                                                 self.nb2 * self.nb3,
-                                                self.nb3),
-                                               use_divide_symbol=True)])
+                                                self.nb3))])
         elif self.variant == 2:  # a - b×c
             if self.subvariant == 'only_positive':
                 if self.nb1 < self.nb2:
@@ -180,14 +179,12 @@ class sub_object(submodule.structure):
                 if self.nb1 < self.nb2 * self.nb3:
                     self.nb1 += self.nb2 * self.nb3
             self.obj = Sum([self.nb1,
-                            Quotient(('-', self.nb2 * self.nb3, self.nb3),
-                                     use_divide_symbol=True)])
+                            Division(('-', self.nb2 * self.nb3, self.nb3))])
         elif self.variant == 4:  # a×b + c
             self.obj = Sum([Product([self.nb1, self.nb2]),
                             self.nb3])
         elif self.variant == 5:  # a÷b + c
-            self.obj = Sum([Quotient(('+', self.nb1 * self.nb2, self.nb2),
-                                     use_divide_symbol=True),
+            self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
                             self.nb3])
         elif self.variant == 6:  # a×b - c
             if (self.subvariant == 'only_positive'
@@ -217,8 +214,7 @@ class sub_object(submodule.structure):
                 else:  # no choice but to randomly choose a new natural
                     self.nb3 = random.choice(
                         [i + 1 for i in range(min(self.nb1, self.nb2) - 1)])
-            self.obj = Sum([Quotient(('+', self.nb1 * self.nb2, self.nb2),
-                                     use_divide_symbol=True),
+            self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
                             -self.nb3])
         elif self.variant == 8:  # a×b + c×d
             self.obj = Sum([Product([self.nb1, self.nb2]),
@@ -231,39 +227,30 @@ class sub_object(submodule.structure):
             self.obj = Sum([Product([self.nb1, self.nb2]),
                             Product([-self.nb3, self.nb4])])
         elif self.variant == 10:  # a÷b + c×d
-            self.obj = Sum([Quotient(('+', self.nb1 * self.nb2, self.nb2),
-                                     use_divide_symbol=True),
+            self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
                             Product([self.nb3, self.nb4])])
         elif self.variant == 11:  # a÷b - c×d
-            self.obj = Sum([Quotient(('+', self.nb1 * self.nb2, self.nb2),
-                                     use_divide_symbol=True),
+            self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
                             Product([-self.nb3, self.nb4])])
         elif self.variant == 12:  # a×b + c÷d
             self.obj = Sum([Product([self.nb1, self.nb2]),
-                            Quotient(('+', self.nb3 * self.nb4, self.nb4),
-                                     use_divide_symbol=True)])
+                            Division(('+', self.nb3 * self.nb4, self.nb4))])
         elif self.variant == 13:  # a×b - c÷d
             self.obj = Sum([Product([self.nb1, self.nb2]),
-                            Quotient(('-', self.nb3 * self.nb4, self.nb4),
-                                     use_divide_symbol=True)])
+                            Division(('-', self.nb3 * self.nb4, self.nb4))])
         elif self.variant == 14:  # a÷b + c÷d
-            self.obj = Sum([Quotient(('+', self.nb1 * self.nb2, self.nb2),
-                                     use_divide_symbol=True),
-                            Quotient(('+', self.nb3 * self.nb4, self.nb4),
-                                     use_divide_symbol=True)])
+            self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
+                            Division(('+', self.nb3 * self.nb4, self.nb4))])
         elif self.variant == 15:  # a÷b - c÷d
-            self.obj = Sum([Quotient(('+', self.nb1 * self.nb2, self.nb2),
-                                     use_divide_symbol=True),
-                            Quotient(('-', self.nb3 * self.nb4, self.nb4),
-                                     use_divide_symbol=True)])
+            self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
+                            Division(('-', self.nb3 * self.nb4, self.nb4))])
         elif self.variant == 16:  # a + b×c + d
             self.obj = Sum([self.nb1,
                             Product([self.nb2, self.nb3]),
                             self.nb4])
         elif self.variant == 17:  # a + b÷c + d
             self.obj = Sum([self.nb1,
-                            Quotient(('+', self.nb2 * self.nb3, self.nb3),
-                                     use_divide_symbol=True),
+                            Division(('+', self.nb2 * self.nb3, self.nb3)),
                             self.nb4])
         elif self.variant == 18:  # a - b×c + d
             self.obj = Sum([self.nb1,
@@ -285,15 +272,13 @@ class sub_object(submodule.structure):
                             -self.nb4])
         elif self.variant == 21:  # a - b÷c + d
             self.obj = Sum([self.nb1,
-                            Quotient(('-', self.nb2 * self.nb3, self.nb3),
-                                     use_divide_symbol=True)])
+                            Division(('-', self.nb2 * self.nb3, self.nb3))])
         elif self.variant == 22:  # a + b÷c - d
             if self.subvariant == 'only_positive':
                 if self.nb1 + self.nb2 < self.nb4:
                     self.nb1 += self.nb4
             self.obj = Sum([self.nb1,
-                            Quotient(('+', self.nb2 * self.nb3, self.nb3),
-                                     use_divide_symbol=True),
+                            Division(('+', self.nb2 * self.nb3, self.nb3)),
                             -self.nb4])
         elif self.variant == 23:  # a - b÷c - d
             if self.subvariant == 'only_positive':
@@ -302,8 +287,7 @@ class sub_object(submodule.structure):
                     if self.nb1 < self.nb2 + self.nb4:
                         self.nb1 += self.nb4
             self.obj = Sum([self.nb1,
-                            Quotient(('-', self.nb2 * self.nb3, self.nb3),
-                                     use_divide_symbol=True),
+                            Division(('-', self.nb2 * self.nb3, self.nb3)),
                             -self.nb4])
         else:
             raise ValueError('Unknown variant identifier for priorities_in'
