@@ -23,7 +23,6 @@
 import random
 import copy
 from decimal import Decimal
-import sys
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools.auxiliary_functions import is_integer
@@ -163,9 +162,6 @@ class sub_object(submodule.structure):
                     self.nb2 += int(self.nb2 + self.nb3 * self.nb4) + 1 \
                         - (self.nb2 + self.nb3 * self.nb4)
             if self.variant == 119:
-                sys.stderr.write('\n{}, {}, {}, {} turned into: '
-                                 .format(self.nb1, self.nb2, self.nb3,
-                                         self.nb4))
                 if not is_integer(self.nb2) and is_integer(self.nb3):
                     if self.nb3 % 10 == 0 or random.choice([True, False]):
                         self.nb1, self.nb2 = remove_division_by_decimal(
@@ -176,9 +172,6 @@ class sub_object(submodule.structure):
                 if is_integer(self.nb2) and not is_integer(self.nb3):
                     self.nb2 += int(self.nb2 + self.nb3 + 1) \
                         - (self.nb2 + self.nb3)
-                sys.stderr.write('{}, {}, {}, {}\n'
-                                 .format(self.nb1, self.nb2, self.nb3,
-                                         self.nb4))
 
         if self.subvariant == 'only_positive':
             if self.variant in [120, 122]:
