@@ -319,6 +319,15 @@ class sub_object(submodule.structure):
             ops = '+' if self.variant == 117 else '-'
             opn = 1 if self.variant == 117 else -1
             a, b, c, d = self.nb1, self.nb2, self.nb3 * self.nb4, self.nb4
+            if (self.variant == 117
+                and self.nb_variant.startswith('decimal')
+                and all(is_integer(n) for n in [a, b, c, d])):
+                c = c * 10
+                if a % 10 == 0:
+                    a += Decimal('0.1') \
+                        * random.choice([i + 1 for i in range(-6, 5)])
+                else:
+                    a = a / 10
             self.obj = Product([a,
                                 Sum([b,
                                      Division((ops, c, d))])],
@@ -340,15 +349,15 @@ class sub_object(submodule.structure):
                 self.nb2 += random.choice([i for i in range(10)])
             a = self.nb1 * (self.nb2 + opn * self.nb3)
             b, c, d = self.nb2, self.nb3 * self.nb4, self.nb4
-            if self.variant == 119 and all(is_integer(n)
-                                           for n in [a, b, c, d]):
+            if (self.variant == 119
+                and self.nb_variant.startswith('decimal')
+                and all(is_integer(n) for n in [a, b, c, d])):
                 if (self.nb2 + self.nb3) % 10 == 0:
-                    if random.choice([True, False]):
-                        self.nb2 = b = b + Decimal('0.1')
-                    else:
-                        self.nb2 = b = b - Decimal('0.1')
+                    self.nb2 = b = b + Decimal('0.1') \
+                        * random.choice([i + 1 for i in range(-6, 5)])
                 else:
-                    self.nb1 += Decimal('0.1')
+                    self.nb1 += Decimal('0.1') \
+                        * random.choice([i + 1 for i in range(-6, 5)])
                 a = self.nb1 * (self.nb2 + opn * self.nb3)
             self.obj = Division(('+',
                                  a,
