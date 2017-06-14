@@ -220,6 +220,8 @@ class sub_object(submodule.structure):
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
             self.obj = Division(('+', Sum([a, b]), c))
+            if any([n < 0 for n in [a, b, c]]):
+                raise RuntimeError('Negative number detected!')
         elif self.variant == 102:  # a×(b + c)
             a = self.nb1
             b, c = split_nb_into('sum', self.nb2, self.nb_variant,
@@ -228,17 +230,23 @@ class sub_object(submodule.structure):
             self.obj = Product([Item(a),
                                 Sum([Item(b), Item(c)])],
                                compact_display=False)
+            if any([n < 0 for n in [a, b, c]]):
+                raise RuntimeError('Negative number detected!')
         elif self.variant == 103:  # a÷(b + c)
             a = self.nb1 * self.nb2
             b, c = split_nb_into('sum', self.nb2, self.nb_variant,
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
+            if any([n < 0 for n in [a, b, c]]):
+                raise RuntimeError('Negative number detected!')
             self.obj = Division(('+', a, Sum([b, c])))
         elif self.variant == 104:  # (a - b)×c
             c = self.nb2
             a, b = split_nb_into('difference', self.nb1, self.nb_variant,
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
+            if any([n < 0 for n in [a, b, c]]):
+                raise RuntimeError('Negative number detected!')
             self.obj = Product([Sum([Item(a), Item(-b)]),
                                 Item(c)])
         elif self.variant == 105:  # (a - b)÷c
@@ -247,12 +255,16 @@ class sub_object(submodule.structure):
             a, b = split_nb_into('difference', self.nb1, self.nb_variant,
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
+            if any([n < 0 for n in [a, b, c]]):
+                raise RuntimeError('Negative number detected!')
             self.obj = Division(('+', Sum([a, -b]), c))
         elif self.variant == 106:  # a×(b - c)
             a = self.nb1
             b, c = split_nb_into('difference', self.nb2, self.nb_variant,
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
+            if any([n < 0 for n in [a, b, c]]):
+                raise RuntimeError('Negative number detected!')
             self.obj = Product([Item(a),
                                 Sum([Item(b), Item(-c)])],
                                compact_display=False)
@@ -261,6 +273,8 @@ class sub_object(submodule.structure):
             b, c = split_nb_into('difference', self.nb2, self.nb_variant,
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
+            if any([n < 0 for n in [a, b, c]]):
+                raise RuntimeError('Negative number detected!')
             self.obj = Division(('+', a, Sum([b, -c])))
         elif self.variant in [108, 112]:  # a×(b ± c)×d
             op = 'sum' if self.variant == 108 else 'difference'
@@ -270,6 +284,8 @@ class sub_object(submodule.structure):
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
             d = self.nb3
+            if any([n < 0 for n in [a, b, c, d]]):
+                raise RuntimeError('Negative number detected!')
             self.obj = Product([Item(a),
                                 Sum([Item(b), Item(opn * c)]),
                                 Item(d)],
@@ -283,6 +299,8 @@ class sub_object(submodule.structure):
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
             d = self.nb3
+            if any([n < 0 for n in [a, b, c, d]]):
+                raise RuntimeError('Negative number detected!')
             self.obj = Division(('+',
                                  Product([a, Sum([b, opn * c])],
                                          compact_display=False),
@@ -295,6 +313,8 @@ class sub_object(submodule.structure):
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
             d = self.nb1
+            if any([n < 0 for n in [a, b, c, d]]):
+                raise RuntimeError('Negative number detected!')
             self.obj = Product([Division(('+', a, Sum([b, opn * c]))),
                                 d],
                                compact_display=False)
@@ -306,6 +326,8 @@ class sub_object(submodule.structure):
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
             d = self.nb3
+            if any([n < 0 for n in [a, b, c, d]]):
+                raise RuntimeError('Negative number detected!')
             self.obj = Division(('+',
                                  Division(('+', a, Sum([b, opn * c]))),
                                  d))
@@ -315,6 +337,8 @@ class sub_object(submodule.structure):
             self.obj = Product([a,
                                 Sum([b, Product([opn * c, d])])],
                                compact_display=False)
+            if any([n < 0 for n in [a, b, c, d]]):
+                raise RuntimeError('Negative number detected!')
         elif self.variant in [117, 121]:  # a×(b ± c÷d)
             ops = '+' if self.variant == 117 else '-'
             opn = 1 if self.variant == 117 else -1
@@ -328,6 +352,8 @@ class sub_object(submodule.structure):
                         * random.choice([i + 1 for i in range(-6, 5)])
                 else:
                     a = a / 10
+            if any([n < 0 for n in [a, b, c, d]]):
+                raise RuntimeError('Negative number detected!')
             self.obj = Product([a,
                                 Sum([b,
                                      Division((ops, c, d))])],
@@ -339,6 +365,8 @@ class sub_object(submodule.structure):
                 self.nb2 += random.choice([i for i in range(10)])
             a = self.nb1 * (self.nb2 + opn * self.nb3 * self.nb4)
             b, c, d = self.nb2, self.nb3, self.nb4
+            if any([n < 0 for n in [a, b, c, d]]):
+                raise RuntimeError('Negative number detected!')
             self.obj = Division(('+',
                                  a,
                                  Sum([b, Product([opn * c, d])])))
@@ -372,6 +400,8 @@ class sub_object(submodule.structure):
                             self.nb1 = new_nb1
                             break
                 a = self.nb1 * (self.nb2 + opn * self.nb3)
+            if any([n < 0 for n in [a, b, c, d]]):
+                raise RuntimeError('Negative number detected!')
             self.obj = Division(('+',
                                  a,
                                  Sum([b,
