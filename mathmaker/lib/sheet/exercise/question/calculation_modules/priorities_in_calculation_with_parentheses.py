@@ -352,12 +352,25 @@ class sub_object(submodule.structure):
             if (self.variant == 119
                 and self.nb_variant.startswith('decimal')
                 and all(is_integer(n) for n in [a, b, c, d])):
+                # if (self.nb2 + self.nb3) % 10 == 0,
+                # then adding 0.1 to self.nb1 won't introduce any decimal
+                # in a, b, c or d
+                ranks = [i + 1 for i in range(-6, 5)]
+                random.shuffle(ranks)
                 if (self.nb2 + self.nb3) % 10 == 0:
-                    self.nb2 = b = b + Decimal('0.1') \
-                        * random.choice([i + 1 for i in range(-6, 5)])
+                    for r in ranks:
+                        new_nb2 = b + Decimal('0.1') * r
+                        new_a = self.nb1 * (new_nb2 + opn * self.nb3)
+                        if new_a > 0 and not is_integer(new_a):
+                            self.nb2 = new_nb2
+                            break
                 else:
-                    self.nb1 += Decimal('0.1') \
-                        * random.choice([i + 1 for i in range(-6, 5)])
+                    for r in ranks:
+                        new_nb1 = self.nb1 + Decimal('0.1') * r
+                        new_a = new_nb1 * (self.nb2 + opn * self.nb3)
+                        if new_a > 0 and not is_integer(new_a):
+                            self.nb1 = new_nb1
+                            break
                 a = self.nb1 * (self.nb2 + opn * self.nb3)
             self.obj = Division(('+',
                                  a,
