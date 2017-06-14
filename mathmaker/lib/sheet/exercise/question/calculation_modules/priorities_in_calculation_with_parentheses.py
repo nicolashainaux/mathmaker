@@ -114,7 +114,8 @@ def split_nb_into(operation, n, nb_variant,
             # This case is impossible: write 1 as a sum of two natural
             # numbers bigger than 1, so we replace arbitrarily replace 1 by
             # a random number between 2 and 10
-            start, end = 0, int((10) * 10 ** depth - 1)
+            n = random.choice([i + 2 for i in range(8)])
+            start, end = 0, int((n) * 10 ** depth - 1)
         seq = [(Decimal(i) + 1) / Decimal(10) ** Decimal(depth)
                for i in range(start, end)]
     if operation == 'sum':
@@ -237,7 +238,8 @@ class sub_object(submodule.structure):
                                 Sum([Item(b), Item(c)])],
                                compact_display=False)
             if any([n < 0 for n in [a, b, c]]):
-                raise RuntimeError('Negative number detected!')
+                raise RuntimeError('Negative number detected: (a, b, c) = '
+                                   '({}, {}, {})'.format(a, b, c))
         elif self.variant == 103:  # a÷(b + c)
             a = self.nb1 * self.nb2
             b, c = split_nb_into('sum', self.nb2, self.nb_variant,
