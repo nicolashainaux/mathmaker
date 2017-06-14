@@ -105,11 +105,17 @@ def split_nb_into(operation, n, nb_variant,
     if n < 0:
         start, end = end, start
     if nb_variant.startswith('decimal') and depth >= 1:
-        seq = [(i + 1) / 10 ** depth
+        seq = [(Decimal(i) + 1) / Decimal(10) ** Decimal(depth)
                for i in range(start, end)
-               if not ((i + 1) / 10 ** depth).is_integer()]
+               if not is_integer((Decimal(i) + 1)
+                                 / Decimal(10) ** Decimal(depth))]
     else:  # default: integers
-        seq = [(i + 1) / 10 ** depth
+        if n == 1:
+            # This case is impossible: write 1 as a sum of two natural
+            # numbers bigger than 1, so we replace arbitrarily replace 1 by
+            # a random number between 2 and 10
+            start, end = 0, int((10) * 10 ** depth - 1)
+        seq = [(Decimal(i) + 1) / Decimal(10) ** Decimal(depth)
                for i in range(start, end)]
     if operation == 'sum':
         a = random.choice(seq)
