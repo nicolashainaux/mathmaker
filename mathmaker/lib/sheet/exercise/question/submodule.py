@@ -45,6 +45,10 @@ class structure(object):
         else:
             return ""
 
+    # @property
+    # def nb_list(self):
+    #     return [getattr(self, 'nb' + str(i + 1)) for i in range(self.nb_nb)]
+
     def setup(self, arg, shuffle_nbs=True, sort_nbs=False, **options):
         if arg == "minimal":
             self.newline = '\\newline'
@@ -108,18 +112,18 @@ class structure(object):
                 # In order to ensure we'll have at least one decimal number,
                 # we should try to remove all multiples of 10 from our possible
                 # choices:
-                all_nb_ids = [i
+                all_nb_ids = [i + 1
                               for i in range(self.nb_nb)
-                              if not str(getattr(
-                                  self, 'nb' + str(i + 1)))[-1] == "0"]
+                              if not getattr(self,
+                                             'nb' + str(i + 1)) % 10 == 0]
                 # But if this would lead to remove too many numbers, then
                 # we do not remove anything
                 if len(all_nb_ids) < deci_nb:
-                    all_nb_ids = [i for i in range(self.nb_nb)]
+                    all_nb_ids = [i + 1 for i in range(self.nb_nb)]
                 chosen_ones = random.sample(all_nb_ids, deci_nb)
                 for i in chosen_ones:
-                    setattr(self, 'nb' + str(i + 1),
-                            getattr(self, 'nb' + str(i + 1)) / 10)
+                    setattr(self, 'nb' + str(i),
+                            getattr(self, 'nb' + str(i)) / 10)
 
         elif arg == "division":
             nb_list = list(options['nb'])

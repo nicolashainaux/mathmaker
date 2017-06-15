@@ -279,6 +279,7 @@ def auto_adjust_nb_sources(nb_sources: list, q_i: namedtuple):
 #   @param  q_i     The Q_info object
 def get_nb_sources_from_question_info(q_i):
     nb_sources = []
+    extra_kwargs = {}
     extra_infos = {'merge_sources': False}
     questions_sources = q_i.nb_source
     if len(q_i.nb_source) == 1:
@@ -320,9 +321,12 @@ def get_nb_sources_from_question_info(q_i):
                 and q_i.subkind in ['addi', 'subtr']
                 and nb_source == 'intpairs_2to200'):
                 # __
-                q_i.options.update({'variant': 'decimal2'})
+                extra_kwargs.update({'nb_variant': 'decimal2'})
         nb_sources += [nb_source]
-    return nb_sources, extra_infos
+        if (nb_sce.startswith('intpairs')
+            and q_i.options.get('nb_variant', '').startswith('decimal')):
+            extra_kwargs.update({'suits_for_deci1': 1})
+    return nb_sources, extra_infos, extra_kwargs
 
 
 # --------------------------------------------------------------------------
@@ -458,7 +462,8 @@ class X_Generic(X_Structure):
         numbering = numbering_device(self.q_numbering)
         for q in mixed_q_list:
             preprocess_variant(q)
-            nb_sources, extra_infos = get_nb_sources_from_question_info(q)
+            nb_sources, extra_infos, extra_kwargs = \
+                get_nb_sources_from_question_info(q)
             nb_to_use = tuple()
             common_nb = None
             for i, nb_source in enumerate(nb_sources):
@@ -466,7 +471,8 @@ class X_Generic(X_Structure):
                     second_couple_drawn = shared.mc_source\
                         .next(nb_source,
                               either_nb1_nb2_in=last_draw,
-                              **question.get_modifier(q.id, nb_source))
+                              **question.get_modifier(q.id, nb_source),
+                              **extra_kwargs)
                     common_nb = get_common_nb_from_pairs_pair(
                         (nb_to_use, second_couple_drawn))
                     nb_to_use = merge_pair_to_tuple(nb_to_use,
@@ -479,12 +485,14 @@ class X_Generic(X_Structure):
                         new_couple_drawn = shared.mc_source\
                             .next(nb_source,
                                   triangle_inequality=nb_to_use,
-                                  **question.get_modifier(q.id, nb_source))
+                                  **question.get_modifier(q.id, nb_source),
+                                  **extra_kwargs)
                     else:
                         new_couple_drawn = shared.mc_source\
                             .next(nb_source,
                                   either_nb1_nb2_in=[common_nb],
-                                  **question.get_modifier(q.id, nb_source))
+                                  **question.get_modifier(q.id, nb_source),
+                                  **extra_kwargs)
                     nb_to_use = merge_pair_to_tuple(nb_to_use,
                                                     new_couple_drawn,
                                                     common_nb)
@@ -493,7 +501,8 @@ class X_Generic(X_Structure):
                                                   not_in=last_draw,
                                                   **question
                                                   .get_modifier(
-                                                      q.id, nb_source))
+                                                      q.id, nb_source),
+                                                  **extra_kwargs)
                     if isinstance(drawn, int):
                         nb_to_use += (drawn, )
                     else:
