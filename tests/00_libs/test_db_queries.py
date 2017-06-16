@@ -23,9 +23,13 @@
 import os
 import pytest
 import sqlite3
+from collections import namedtuple
 
 from mathmaker import settings
+from mathmaker.lib import shared
 from mathmaker.lib.tools import db as database
+from mathmaker.lib.sheet.exercise.X_Generic \
+    import get_nb_sources_from_question_info
 
 
 def test_empty_query_result():
@@ -53,3 +57,22 @@ def test_wnl():
                     pass
                 else:
                     raise
+
+
+def test_intpairs_for_deci():
+    """Check requests for intpairs suitable for decimal."""
+    collected_results = []
+    for i in range(4):
+        collected_results.append(shared.mc_source.next('intpairs_9to10',
+                                                       suits_for_deci1=1))
+    assert (10, 10) not in collected_results
+    Q_info = namedtuple('Q_info', 'id,kind,subkind,nb_source,options')
+    rq = Q_info('division_direct', 'division', 'direct', ['intpairs_9to10'],
+                {'nb_variant': 'decimal1'})
+    q_list = [rq for i in range(4)]
+    for q in q_list:
+        (nbsources_xkw_list, extra_infos) = \
+            get_nb_sources_from_question_info(q)
+        for (nb_source, xkw) in nbsources_xkw_list:
+            drawn = shared.mc_source.next(nb_source, **xkw)
+            assert drawn in [(9, 9), (9, 10)]
