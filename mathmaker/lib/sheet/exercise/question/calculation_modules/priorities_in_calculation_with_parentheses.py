@@ -22,6 +22,7 @@
 
 import random
 import copy
+import warnings
 from decimal import Decimal
 
 from mathmaker.lib import shared
@@ -101,8 +102,21 @@ def split_nb_into(operation, n, nb_variant,
             # e.g. decimals_restricted_to contains '+-'
             # or nb_variant is 'decimalN' (where 1 <= N <= 9) and nb1 is no int
             depth = int(nb_variant[-1]) + extra_digits
-    start, end = 0, int((n) * 10 ** depth - 1)
-    if n < 0:
+    if operation is 'sum':
+        if not (nb_variant.startswith('decimal') and depth >= 1) and n == 1:
+            # This case is impossible: write 1 as a sum of two natural
+            # numbers bigger than 1, so we replace arbitrarily replace 1 by
+            # a random number between 2 and 10
+            warnings.warn('mathmaker is asked to split 1 as a sum of two '
+                          'naturals bigger than 1. As this is impossible, '
+                          '1 will be replaced by a random natural between '
+                          '2 and 10.')
+            n = random.choice([i + 2 for i in range(8)])
+        amplitude = n
+    elif operation is 'difference':
+        amplitude = max(10, n)
+    start, end = 0, int((amplitude) * 10 ** depth - 1)
+    if start > end:
         start, end = end, start
     if nb_variant.startswith('decimal') and depth >= 1:
         seq = [(Decimal(i) + 1) / Decimal(10) ** Decimal(depth)
@@ -110,12 +124,6 @@ def split_nb_into(operation, n, nb_variant,
                if not is_integer((Decimal(i) + 1)
                                  / Decimal(10) ** Decimal(depth))]
     else:  # default: integers
-        if n == 1:
-            # This case is impossible: write 1 as a sum of two natural
-            # numbers bigger than 1, so we replace arbitrarily replace 1 by
-            # a random number between 2 and 10
-            n = random.choice([i + 2 for i in range(8)])
-            start, end = 0, int((n) * 10 ** depth - 1)
         seq = [(Decimal(i) + 1) / Decimal(10) ** Decimal(depth)
                for i in range(start, end)]
     if operation == 'sum':
@@ -218,6 +226,12 @@ class sub_object(submodule.structure):
             a, b = split_nb_into('sum', self.nb1, self.nb_variant,
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
+            if any([n < 0 for n in [a, b, c]]):
+                raise RuntimeError('100: Negative number detected!')
+            if all([is_integer(n) for n in [a, b, c]]):
+                raise RuntimeError('100: only integers!')
+            if c == 1:
+                raise RuntimeError('100: c == 1!')
             self.obj = Product([Sum([Item(a), Item(b)]),
                                 Item(c)])
         elif self.variant == 101:  # (a + b)÷c
@@ -227,8 +241,12 @@ class sub_object(submodule.structure):
                                  self.decimals_restricted_to,
                                  self.allow_extra_digits)
             self.obj = Division(('+', Sum([a, b]), c))
+            if all([is_integer(n) for n in [a, b, c]]):
+                raise RuntimeError('101: only integers!')
             if any([n < 0 for n in [a, b, c]]):
-                raise RuntimeError('Negative number detected!')
+                raise RuntimeError('101: Negative number detected!')
+            if c == 1:
+                raise RuntimeError('101: c == 1!')
         elif self.variant == 102:  # a×(b + c)
             a = self.nb1
             b, c = split_nb_into('sum', self.nb2, self.nb_variant,
@@ -238,8 +256,8 @@ class sub_object(submodule.structure):
                                 Sum([Item(b), Item(c)])],
                                compact_display=False)
             if any([n < 0 for n in [a, b, c]]):
-                raise RuntimeError('Negative number detected: (a, b, c) = '
-                                   '({}, {}, {})'.format(a, b, c))
+                raise RuntimeError('102: Negative number detected: (a, b, c) ='
+                                   ' ({}, {}, {})'.format(a, b, c))
         elif self.variant == 103:  # a÷(b + c)
             a = self.nb1 * self.nb2
             b, c = split_nb_into('sum', self.nb2, self.nb_variant,
