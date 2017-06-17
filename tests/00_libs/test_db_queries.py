@@ -59,8 +59,8 @@ def test_wnl():
                     raise
 
 
-def test_intpairs_for_deci():
-    """Check requests for intpairs suitable for decimal."""
+def test_intpairs_for_deci1():
+    """Check requests for intpairs suitable for decimal1."""
     collected_results = []
     for i in range(4):
         collected_results.append(shared.mc_source.next('intpairs_9to10',
@@ -76,3 +76,23 @@ def test_intpairs_for_deci():
         for (nb_source, xkw) in nbsources_xkw_list:
             drawn = shared.mc_source.next(nb_source, **xkw)
             assert drawn in [(9, 9), (9, 10)]
+
+
+def test_intpairs_for_deci2():
+    """Check requests for intpairs suitable for decimal2."""
+    collected_results = []
+    for i in range(4):
+        collected_results.append(shared.mc_source.next('intpairs_9to10',
+                                                       suits_for_deci2=1))
+    assert (10, 10) not in collected_results
+    assert (9, 10) not in collected_results
+    Q_info = namedtuple('Q_info', 'id,kind,subkind,nb_source,options')
+    rq = Q_info('division_direct', 'division', 'direct', ['intpairs_9to10'],
+                {'nb_variant': 'decimal2'})
+    q_list = [rq for i in range(4)]
+    for q in q_list:
+        (nbsources_xkw_list, extra_infos) = \
+            get_nb_sources_from_question_info(q)
+        for (nb_source, xkw) in nbsources_xkw_list:
+            drawn = shared.mc_source.next(nb_source, **xkw)
+            assert drawn == (9, 9)

@@ -95,7 +95,8 @@ def __main__():
               (id INTEGER PRIMARY KEY,
               nb1 INTEGER, nb2 INTEGER,
               multirev_locked INTEGER, drawDate INTEGER,
-              clever INTEGER, suits_for_deci1 INTEGER)''')
+              clever INTEGER, suits_for_deci1 INTEGER,
+              suits_for_deci2 INTEGER)''')
     # As int_deci_clever_pairs may be 'unioned' with int_pairs, its ids will be
     # determined starting from the max id of int_pairs, in order to have unique
     # ids over the two tables.
@@ -157,14 +158,14 @@ def __main__():
 
     # Insert integers pairs into the db
     # Tables of 2, 3... 500
-    db_rows = [(i + 2, j + 2, 0, 0, 0, 1)
+    db_rows = [(i + 2, j + 2, 0, 0, 0, 1, 1)
                for i in range(499)
                for j in range(499)
                if j >= i]
     db.executemany("INSERT "
                    "INTO int_pairs(nb1, nb2, multirev_locked, drawDate, "
-                   "clever, suits_for_deci1) "
-                   "VALUES(?, ?, ?, ?, ?, ?)",
+                   "clever, suits_for_deci1, suits_for_deci2) "
+                   "VALUES(?, ?, ?, ?, ?, ?, ?)",
                    db_rows)
 
     for couple in [(2, 5), (2, 50), (2, 500), (5, 20), (5, 200)]:
@@ -181,6 +182,13 @@ def __main__():
                    for i in range(499) for j in range(499)
                    if ((i + 2) % 10 == 0 and (j + 2) % 10 == 0)]:
         db.execute("UPDATE int_pairs SET suits_for_deci1 = 0"
+                   + " WHERE nb1 = '" + str(couple[0])
+                   + "' and nb2 = '" + str(couple[1]) + "';")
+
+    for couple in [(i + 2, j + 2)
+                   for i in range(499) for j in range(499)
+                   if ((i + 2) % 10 == 0 or (j + 2) % 10 == 0)]:
+        db.execute("UPDATE int_pairs SET suits_for_deci2 = 0"
                    + " WHERE nb1 = '" + str(couple[0])
                    + "' and nb2 = '" + str(couple[1]) + "';")
 

@@ -323,8 +323,11 @@ def get_nb_sources_from_question_info(q_i):
                 # __
                 extra_kwargs.update({'nb_variant': 'decimal2'})
         if (nb_source.startswith('intpairs')
-            and q_i.options.get('nb_variant', '').startswith('decimal')):
+            and q_i.options.get('nb_variant', '').startswith('decimal1')):
             extra_kwargs.update({'suits_for_deci1': 1})
+        if (nb_source.startswith('intpairs')
+            and q_i.options.get('nb_variant', '').startswith('decimal2')):
+            extra_kwargs.update({'suits_for_deci2': 1})
         nb_sources += [(nb_source, extra_kwargs)]
     return nb_sources, extra_infos
 
