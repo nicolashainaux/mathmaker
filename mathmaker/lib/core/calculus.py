@@ -117,7 +117,8 @@ class Expression(ComposedCalculable):
     def __init__(self, integer_or_letter, objct):
         # just check if the given arguments are right
         if not (type(integer_or_letter) is str
-                or is_integer(integer_or_letter)):
+                or (is_number(integer_or_letter)
+                    and is_integer(integer_or_letter))):
             # __
             raise error.UncompatibleType(integer_or_letter,
                                          "integer_or_letter")
@@ -155,7 +156,7 @@ class Expression(ComposedCalculable):
     def into_str(self, **options):
         global expression_begins
         # Expression objects displaying
-        if is_integer(self.name):
+        if is_number(self.name) and is_integer(self.name):
             i = self.name
             if i < len(alphabet.UPPERCASE):
                 final_name = MARKUP['open_text_in_maths'] \
@@ -176,7 +177,7 @@ class Expression(ComposedCalculable):
         elif type(self.name) is str:
             final_name = MARKUP['open_text_in_maths'] \
                 + self.name \
-                + MARKUP['close_text_in_maths'] \
+                + MARKUP['close_text_in_maths']
 
         expression_begins = True
 
