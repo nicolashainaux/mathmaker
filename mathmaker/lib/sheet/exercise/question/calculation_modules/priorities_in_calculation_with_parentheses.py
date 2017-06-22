@@ -21,12 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import random
-import copy
-import warnings
 from decimal import Decimal
 
 from mathmaker.lib import shared
-from mathmaker.lib.tools.auxiliary_functions import is_integer
+from mathmaker.lib.tools.auxiliary_functions \
+    import (is_integer, remove_division_by_decimal, split_nb_into)
 from mathmaker.lib.core.base_calculus import Item, Sum, Product, Division
 from mathmaker.lib.core.calculus import Expression
 from .. import submodule
@@ -63,76 +62,6 @@ from .. import submodule
 # 145: a - b÷(c + d)        # 153: (a - b)×c - d
 # 146: a - b×(c - d)        # 154: (a - b)÷c + d
 # 147: a - b÷(c - d)        # 155: (a - b)÷c - d
-
-
-def remove_division_by_decimal(N, numbers=None):
-    """
-    Turn N into decimal instead of the numbers of the list.
-
-    This is useful for the case division by a decimal is unwanted.
-    """
-    if numbers is None:
-        raise ValueError('A list of numbers must be given as argument '
-                         '\'numbers\'.')
-    if all([is_integer(n) for n in numbers]):
-        return [N, ] + [n for n in numbers]
-    numbers_copy = copy.deepcopy(numbers)
-    for i, n in enumerate(numbers):
-        if not is_integer(n):
-            numbers_copy[i] = n * 10
-            return remove_division_by_decimal(N / 10, numbers=numbers_copy)
-    return [N, ] + [n for n in numbers]
-
-
-def split_nb_into(operation, n, nb_variant,
-                  decimals_restricted_to, extra_digits):
-    """
-    Split n as a sum, like a + b = n; or a difference, like a - b = n
-
-    Take the different constraints into account.
-    """
-    if operation not in ['sum', 'difference']:
-        raise ValueError('Argument "operation" should be either \'sum\' or '
-                         '\'difference\'.')
-    depth = 0  # default value, to keep integers
-    if nb_variant.startswith('decimal'):
-        if (not is_integer(n)
-            or ('+' in decimals_restricted_to and operation is 'sum')
-            or ('-' in decimals_restricted_to and operation is 'difference')):
-            # e.g. decimals_restricted_to contains '+-'
-            # or nb_variant is 'decimalN' (where 1 <= N <= 9) and nb1 is no int
-            depth = int(nb_variant[-1]) + extra_digits
-    if operation is 'sum':
-        if not (nb_variant.startswith('decimal') and depth >= 1) and n == 1:
-            # This case is impossible: write 1 as a sum of two natural
-            # numbers bigger than 1, so we replace arbitrarily replace 1 by
-            # a random number between 2 and 10
-            warnings.warn('mathmaker is asked to split 1 as a sum of two '
-                          'naturals bigger than 1. As this is impossible, '
-                          '1 will be replaced by a random natural between '
-                          '2 and 10.')
-            n = random.choice([i + 2 for i in range(8)])
-        amplitude = n
-    elif operation is 'difference':
-        amplitude = max(10, n)
-    start, end = 0, int((amplitude) * 10 ** depth - 1)
-    if start > end:
-        start, end = end, start
-    if nb_variant.startswith('decimal') and depth >= 1:
-        seq = [(Decimal(i) + 1) / Decimal(10) ** Decimal(depth)
-               for i in range(start, end)
-               if not is_integer((Decimal(i) + 1)
-                                 / Decimal(10) ** Decimal(depth))]
-    else:  # default: integers
-        seq = [(Decimal(i) + 1) / Decimal(10) ** Decimal(depth)
-               for i in range(start, end)]
-    if operation == 'sum':
-        a = random.choice(seq)
-        b = n - a
-    elif operation == 'difference':
-        b = random.choice(seq)
-        a = n + b
-    return (a, b)
 
 
 class sub_object(submodule.structure):
@@ -223,9 +152,9 @@ class sub_object(submodule.structure):
         self.obj = None
         if self.variant == 100:  # (a + b)×c
             c = self.nb2
-            a, b = split_nb_into('sum', self.nb1, self.nb_variant,
-                                 self.decimals_restricted_to,
-                                 self.allow_extra_digits)
+            a, b = split_nb_into('sum', self.nb1, nb_variant=self.nb_variant,
+                                 deci_restriction=self.decimals_restricted_to,
+                                 extra_digits=self.allow_extra_digits)
             if any([n < 0 for n in [a, b, c]]):
                 raise RuntimeError('100: Negative number detected!')
             if all([is_integer(n) for n in [a, b, c]]):
@@ -237,9 +166,9 @@ class sub_object(submodule.structure):
         elif self.variant == 101:  # (a + b)÷c
             c = self.nb2
             self.nb1 = self.nb1 * self.nb2
-            a, b = split_nb_into('sum', self.nb1, self.nb_variant,
-                                 self.decimals_restricted_to,
-                                 self.allow_extra_digits)
+            a, b = split_nb_into('sum', self.nb1, nb_variant=self.nb_variant,
+                                 deci_restriction=self.decimals_restricted_to,
+                                 extra_digits=self.allow_extra_digits)
             self.obj = Division(('+', Sum([a, b]), c))
             if all([is_integer(n) for n in [a, b, c]]):
                 raise RuntimeError('101: only integers!')
@@ -249,9 +178,9 @@ class sub_object(submodule.structure):
                 raise RuntimeError('101: c == 1!')
         elif self.variant == 102:  # a×(b + c)
             a = self.nb1
-            b, c = split_nb_into('sum', self.nb2, self.nb_variant,
-                                 self.decimals_restricted_to,
-                                 self.allow_extra_digits)
+            b, c = split_nb_into('sum', self.nb2, nb_variant=self.nb_variant,
+                                 deci_restriction=self.decimals_restricted_to,
+                                 extra_digits=self.allow_extra_digits)
             self.obj = Product([Item(a),
                                 Sum([Item(b), Item(c)])],
                                compact_display=False)
@@ -260,17 +189,18 @@ class sub_object(submodule.structure):
                                    ' ({}, {}, {})'.format(a, b, c))
         elif self.variant == 103:  # a÷(b + c)
             a = self.nb1 * self.nb2
-            b, c = split_nb_into('sum', self.nb2, self.nb_variant,
-                                 self.decimals_restricted_to,
-                                 self.allow_extra_digits)
+            b, c = split_nb_into('sum', self.nb2, nb_variant=self.nb_variant,
+                                 deci_restriction=self.decimals_restricted_to,
+                                 extra_digits=self.allow_extra_digits)
             if any([n < 0 for n in [a, b, c]]):
                 raise RuntimeError('Negative number detected!')
             self.obj = Division(('+', a, Sum([b, c])))
         elif self.variant == 104:  # (a - b)×c
             c = self.nb2
-            a, b = split_nb_into('difference', self.nb1, self.nb_variant,
-                                 self.decimals_restricted_to,
-                                 self.allow_extra_digits)
+            a, b = split_nb_into('difference', self.nb1,
+                                 nb_variant=self.nb_variant,
+                                 deci_restriction=self.decimals_restricted_to,
+                                 extra_digits=self.allow_extra_digits)
             if any([n < 0 for n in [a, b, c]]):
                 raise RuntimeError('Negative number detected!')
             self.obj = Product([Sum([Item(a), Item(-b)]),
@@ -278,17 +208,19 @@ class sub_object(submodule.structure):
         elif self.variant == 105:  # (a - b)÷c
             c = self.nb2
             self.nb1 = self.nb1 * self.nb2
-            a, b = split_nb_into('difference', self.nb1, self.nb_variant,
-                                 self.decimals_restricted_to,
-                                 self.allow_extra_digits)
+            a, b = split_nb_into('difference', self.nb1,
+                                 nb_variant=self.nb_variant,
+                                 deci_restriction=self.decimals_restricted_to,
+                                 extra_digits=self.allow_extra_digits)
             if any([n < 0 for n in [a, b, c]]):
                 raise RuntimeError('Negative number detected!')
             self.obj = Division(('+', Sum([a, -b]), c))
         elif self.variant == 106:  # a×(b - c)
             a = self.nb1
-            b, c = split_nb_into('difference', self.nb2, self.nb_variant,
-                                 self.decimals_restricted_to,
-                                 self.allow_extra_digits)
+            b, c = split_nb_into('difference', self.nb2,
+                                 nb_variant=self.nb_variant,
+                                 deci_restriction=self.decimals_restricted_to,
+                                 extra_digits=self.allow_extra_digits)
             if any([n < 0 for n in [a, b, c]]):
                 raise RuntimeError('Negative number detected!')
             self.obj = Product([Item(a),
@@ -296,9 +228,10 @@ class sub_object(submodule.structure):
                                compact_display=False)
         elif self.variant == 107:  # a÷(b - c)
             a = self.nb1 * self.nb2
-            b, c = split_nb_into('difference', self.nb2, self.nb_variant,
-                                 self.decimals_restricted_to,
-                                 self.allow_extra_digits)
+            b, c = split_nb_into('difference', self.nb2,
+                                 nb_variant=self.nb_variant,
+                                 deci_restriction=self.decimals_restricted_to,
+                                 extra_digits=self.allow_extra_digits)
             if any([n < 0 for n in [a, b, c]]):
                 raise RuntimeError('Negative number detected!')
             self.obj = Division(('+', a, Sum([b, -c])))
@@ -306,9 +239,9 @@ class sub_object(submodule.structure):
             op = 'sum' if self.variant == 108 else 'difference'
             opn = 1 if self.variant == 108 else -1
             a = self.nb1
-            b, c = split_nb_into(op, self.nb2, self.nb_variant,
-                                 self.decimals_restricted_to,
-                                 self.allow_extra_digits)
+            b, c = split_nb_into(op, self.nb2, nb_variant=self.nb_variant,
+                                 deci_restriction=self.decimals_restricted_to,
+                                 extra_digits=self.allow_extra_digits)
             d = self.nb3
             if any([n < 0 for n in [a, b, c, d]]):
                 raise RuntimeError('Negative number detected!')
@@ -321,9 +254,9 @@ class sub_object(submodule.structure):
             opn = 1 if self.variant == 109 else -1
             a = self.nb1
             self.nb2 = self.nb2 * self.nb3
-            b, c = split_nb_into(op, self.nb2, self.nb_variant,
-                                 self.decimals_restricted_to,
-                                 self.allow_extra_digits)
+            b, c = split_nb_into(op, self.nb2, nb_variant=self.nb_variant,
+                                 deci_restriction=self.decimals_restricted_to,
+                                 extra_digits=self.allow_extra_digits)
             d = self.nb3
             if any([n < 0 for n in [a, b, c, d]]):
                 raise RuntimeError('Negative number detected!')
@@ -335,9 +268,9 @@ class sub_object(submodule.structure):
             op = 'sum' if self.variant == 110 else 'difference'
             opn = 1 if self.variant == 110 else -1
             a = self.nb2 * self.nb3
-            b, c = split_nb_into(op, self.nb3, self.nb_variant,
-                                 self.decimals_restricted_to,
-                                 self.allow_extra_digits)
+            b, c = split_nb_into(op, self.nb3, nb_variant=self.nb_variant,
+                                 deci_restriction=self.decimals_restricted_to,
+                                 extra_digits=self.allow_extra_digits)
             d = self.nb1
             if any([n < 0 for n in [a, b, c, d]]):
                 raise RuntimeError('Negative number detected!')
@@ -348,9 +281,9 @@ class sub_object(submodule.structure):
             op = 'sum' if self.variant == 111 else 'difference'
             opn = 1 if self.variant == 111 else -1
             a = self.nb1 * self.nb2 * self.nb3
-            b, c = split_nb_into(op, self.nb2, self.nb_variant,
-                                 self.decimals_restricted_to,
-                                 self.allow_extra_digits)
+            b, c = split_nb_into(op, self.nb2, nb_variant=self.nb_variant,
+                                 deci_restriction=self.decimals_restricted_to,
+                                 extra_digits=self.allow_extra_digits)
             d = self.nb3
             if any([n < 0 for n in [a, b, c, d]]):
                 raise RuntimeError('Negative number detected!')

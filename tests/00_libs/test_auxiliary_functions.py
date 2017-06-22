@@ -24,7 +24,8 @@ import pytest
 from decimal import Decimal
 
 from mathmaker.lib.tools.auxiliary_functions import \
-    (check_unique_letters_words, rotate, is_number, is_integer, is_natural)
+    (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
+     remove_division_by_decimal, split_nb_into)
 
 
 def test_check_unique_letters_words():
@@ -91,3 +92,54 @@ def test_is_natural():
         is_natural('1.0')
     with pytest.raises(TypeError):
         is_natural('-1.0')
+
+
+def test_remove_division_by_decimal():
+    """Check remove_division_by_decimal() in different cases."""
+    with pytest.raises(TypeError):
+        remove_division_by_decimal(14)
+    with pytest.raises(TypeError):
+        remove_division_by_decimal(14, (7, 5))
+    with pytest.raises(TypeError):
+        remove_division_by_decimal(14, {7: 'a', 6: 'b'})
+    with pytest.raises(TypeError):
+        remove_division_by_decimal(14, [7, '5'])
+    with pytest.raises(TypeError):
+        remove_division_by_decimal('14', [7, 5])
+    assert remove_division_by_decimal(14, [7, 5]) == [14, 7, 5]
+    assert remove_division_by_decimal(14, [Decimal('0.7'), 5]) \
+        == [Decimal('1.4'), Decimal(7), 5]
+    assert remove_division_by_decimal(14, [Decimal('0.7'), Decimal('0.5')]) \
+        == [Decimal('0.14'), Decimal(7), Decimal(5)]
+
+
+def test_split_nb_into():
+    """Check split_nb_into() in different cases."""
+    with pytest.raises(ValueError):
+        split_nb_into('+', 10)
+    with pytest.raises(ValueError):
+        split_nb_into('sum', Decimal('10.1'), nb_variant='decimal')
+    with pytest.warns(UserWarning):
+        split_nb_into('sum', 1)
+    result = split_nb_into('sum', 14)
+    assert type(result) is tuple
+    assert len(result) is 2
+    assert is_integer(result[0]) and is_integer(result[1])
+    assert 1 <= result[0] <= 13
+    assert 1 <= result[1] <= 13
+    for i in range(99):
+        result = split_nb_into('sum', 14)
+        assert 1 <= result[0] <= 13
+        assert 1 <= result[1] <= 13
+    result = split_nb_into('difference', 14)
+    assert all([is_integer(r) for r in result])
+    assert result[0] - result[1] == 14
+    result = split_nb_into('sum', 4, nb_variant='decimal1')
+    assert all([is_integer(r) for r in result])
+    result = split_nb_into('sum', Decimal('4.3'), nb_variant='decimal1')
+    assert any([not is_integer(r) for r in result])
+    result = split_nb_into('sum', 4, nb_variant='decimal1',
+                           deci_restriction='+', extra_digits=1)
+    assert all([len(str(r)) == 4 for r in result])
+    result = split_nb_into('sum', -7)
+    assert all(-6 <= r <= -1 for r in result)
