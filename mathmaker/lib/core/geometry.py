@@ -32,9 +32,9 @@ from decimal import Decimal, ROUND_HALF_UP
 
 from mathmaker.lib import randomly
 from mathmaker.lib import error
-from mathmaker.lib.tools.auxiliary_functions import is_number
+from mathmaker.lib.tools.auxiliary_functions import is_number, round_deci
 from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
-                                     POLYGONS_NATURES, round_deci)
+                                     POLYGONS_NATURES)
 from .root_calculus import Evaluable, Value, Unit
 from .base_calculus import Item, Product, Sum, Function, AngleItem
 from .calculus import Equality, Table, Table_UP, QuotientsEquality

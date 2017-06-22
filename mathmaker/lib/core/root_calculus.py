@@ -31,7 +31,7 @@ import locale
 from decimal import (Decimal, getcontext, Rounded, ROUND_HALF_UP, ROUND_DOWN,
                      InvalidOperation)
 
-from mathmaker.lib.maths_lib import round_deci
+from mathmaker.lib.tools.auxiliary_functions import round_deci
 from mathmaker.lib.core.utils import check_lexicon_for_substitution
 from mathmaker.lib.common.cst import (UNIT, TENTH, HUNDREDTH, THOUSANDTH,
                                       TEN_THOUSANDTH, PRECISION,
