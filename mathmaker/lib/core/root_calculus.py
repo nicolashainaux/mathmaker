@@ -31,7 +31,7 @@ import locale
 from decimal import (Decimal, getcontext, Rounded, ROUND_HALF_UP, ROUND_DOWN,
                      InvalidOperation)
 
-from mathmaker.lib.maths_lib import round
+from mathmaker.lib.maths_lib import round_deci
 from mathmaker.lib.core.utils import check_lexicon_for_substitution
 from mathmaker.lib.common.cst import (UNIT, TENTH, HUNDREDTH, THOUSANDTH,
                                       TEN_THOUSANDTH, PRECISION,
@@ -801,13 +801,15 @@ class Value(Signed):
             result_value = self.clone()
 
             if type(precision) == int:
-                result_value.raw_value = round(self.raw_value,
-                                               Decimal(PRECISION[precision]),
-                                               rounding=ROUND_HALF_UP)
+                result_value.raw_value = round_deci(
+                    self.raw_value,
+                    Decimal(PRECISION[precision]),
+                    rounding=ROUND_HALF_UP)
             else:
-                result_value.raw_value = round(self.raw_value,
-                                               Decimal(precision),
-                                               rounding=ROUND_HALF_UP)
+                result_value.raw_value = round_deci(
+                    self.raw_value,
+                    Decimal(precision),
+                    rounding=ROUND_HALF_UP)
 
             if self.needs_to_get_rounded(precision):
                 result_value.set_has_been_rounded(True)
@@ -822,9 +824,9 @@ class Value(Signed):
             raise error.UncompatibleType(self, "numeric Value")
         else:
             temp_result = len(str((self.raw_value
-                                   - round(self.raw_value,
-                                           Decimal(UNIT),
-                                           rounding=ROUND_DOWN)))) - 2
+                                   - round_deci(self.raw_value,
+                                                Decimal(UNIT),
+                                                rounding=ROUND_DOWN)))) - 2
             if temp_result < 0:
                 return 0
             else:

@@ -31,7 +31,7 @@ from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
 
 from mathmaker.lib import error
 from mathmaker.lib.tools.auxiliary_functions import is_number
-from mathmaker.lib.maths_lib import deg_to_rad, round
+from mathmaker.lib.maths_lib import deg_to_rad, round_deci
 from mathmaker.lib.core.base import Drawable, Printable
 from mathmaker.lib.core.base_calculus import Value
 from mathmaker.lib.common.latex import MARKUP
@@ -99,9 +99,9 @@ class Point(Drawable):
     #   @brief Returns the abscissa of the Point, rounded up to the tenth
     @property
     def x(self):
-        return round(Decimal(str(self._x)),
-                     Decimal('0.01'),
-                     rounding=ROUND_HALF_UP)
+        return round_deci(Decimal(str(self._x)),
+                          Decimal('0.01'),
+                          rounding=ROUND_HALF_UP)
 
     # --------------------------------------------------------------------------
     ##
@@ -115,9 +115,9 @@ class Point(Drawable):
     #   @brief Returns the ordinate of the Point, rounded up to the tenth
     @property
     def y(self):
-        return round(Decimal(str(self._y)),
-                     Decimal('0.01'),
-                     rounding=ROUND_HALF_UP)
+        return round_deci(Decimal(str(self._y)),
+                          Decimal('0.01'),
+                          rounding=ROUND_HALF_UP)
 
     # --------------------------------------------------------------------------
     ##
@@ -343,16 +343,16 @@ class Segment(Drawable):
         else:
             result = ''
             x = self.real_length
-            scale_factor = round(Decimal(str(1.6 * x)),
-                                 Decimal('0.1'),
-                                 rounding=ROUND_UP)
+            scale_factor = round_deci(Decimal(str(1.6 * x)),
+                                      Decimal('0.1'),
+                                      rounding=ROUND_UP)
             if x <= 3:
-                angle_correction = round(Decimal(str(-8 * x + 33)),
-                                         Decimal('0.1'),
-                                         rounding=ROUND_UP)
+                angle_correction = round_deci(Decimal(str(-8 * x + 33)),
+                                              Decimal('0.1'),
+                                              rounding=ROUND_UP)
             else:
                 angle_correction = \
-                    round(
+                    round_deci(
                         Decimal(
                             str(1.1 / (1 - 0.95 * math.exp(-0.027 * x)))),
                         Decimal('0.1'),
@@ -360,9 +360,9 @@ class Segment(Drawable):
 
             side_angle = Vector((self.points[0], self.points[1])).slope
 
-            label_position_angle = round(side_angle,
-                                         Decimal('1'),
-                                         rounding=ROUND_HALF_EVEN)
+            label_position_angle = round_deci(side_angle,
+                                              Decimal('1'),
+                                              rounding=ROUND_HALF_EVEN)
 
             label_position_angle %= Decimal("360")
 
@@ -443,10 +443,10 @@ class Vector(Point):
     @property
     def slope(self):
         """Return the slope of self."""
-        theta = round(Decimal(str(math.degrees(
-                                  math.acos(self._x_exact / self.norm)))),
-                      Decimal('0.1'),
-                      rounding=ROUND_HALF_UP)
+        theta = round_deci(Decimal(str(math.degrees(
+                                       math.acos(self._x_exact / self.norm)))),
+                           Decimal('0.1'),
+                           rounding=ROUND_HALF_UP)
         return theta if self._y_exact > 0 else Decimal("360") - theta
 
     def unit_vector(self):
@@ -570,9 +570,9 @@ class Angle(Drawable, Printable):
             self._name = MARKUP['opening_widehat']
             self._name += arg[0].name + arg[1].name + arg[2].name
             self._name += MARKUP['closing_widehat']
-            self._label_display_angle = round(Decimal(str(self._measure)),
-                                              Decimal('0.1'),
-                                              rounding=ROUND_HALF_UP) / 2
+            self._label_display_angle = round_deci(Decimal(str(self._measure)),
+                                                   Decimal('0.1'),
+                                                   rounding=ROUND_HALF_UP) / 2
         elif isinstance(arg, Angle):
             self._ray0 = arg._ray0.clone()
             self._ray1 = arg._ray1.clone()
@@ -656,9 +656,9 @@ class Angle(Drawable, Printable):
         if not is_number(arg):
             raise error.WrongArgument(arg, ' a number ')
         else:
-            self._label_display_angle = round(Decimal(str(arg)),
-                                              Decimal('0.1'),
-                                              rounding=ROUND_HALF_UP)
+            self._label_display_angle = round_deci(Decimal(str(arg)),
+                                                   Decimal('0.1'),
+                                                   rounding=ROUND_HALF_UP)
 
     # --------------------------------------------------------------------------
     ##

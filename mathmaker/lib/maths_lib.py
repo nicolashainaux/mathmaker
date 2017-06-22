@@ -402,7 +402,7 @@ def correct_normalize_results(d):
 ##
 #   @brief Rounds correctly a Decimal
 #   @options They are the same as the decimal's module quantize() method
-def round(d, precision, **options):
+def round_deci(d, precision, **options):
     if not isinstance(d, Decimal):
         raise TypeError('Expected a Decimal, got a '
                         + str(type(d)) + 'instead')

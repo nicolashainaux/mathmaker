@@ -34,7 +34,7 @@ from mathmaker.lib import randomly
 from mathmaker.lib import error
 from mathmaker.lib.tools.auxiliary_functions import is_number
 from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
-                                     POLYGONS_NATURES, round)
+                                     POLYGONS_NATURES, round_deci)
 from .root_calculus import Evaluable, Value, Unit
 from .base_calculus import Item, Product, Sum, Function, AngleItem
 from .calculus import Equality, Table, Table_UP, QuotientsEquality
@@ -345,7 +345,7 @@ class Polygon(Drawable):
             if a.label != Value(""):
                 scale_factor = Decimal('2.7')
                 if Decimal(str(a.measure)) < Decimal('28.5'):
-                    scale_factor = round(
+                    scale_factor = round_deci(
                         Decimal('38.1') * pow(Decimal(str(a.measure)),
                                               Decimal('-0.8')),
                         Decimal('0.01'),
