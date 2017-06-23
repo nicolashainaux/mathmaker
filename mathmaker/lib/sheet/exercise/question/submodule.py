@@ -60,13 +60,13 @@ class structure(object):
             self.variant = options.get('variant', "default")
             self.subvariant = options.get('subvariant', "default")
             self.nb_variant = options.get('nb_variant', "default")
-            self.decimals_restricted_to = ''
+            self.deci_restriction = ''
             nbv_chunks = self.nb_variant.split(sep='_')
             if len(nbv_chunks) == 2:
                 if '+' in nbv_chunks[1]:
-                    self.decimals_restricted_to += '+'
+                    self.deci_restriction += '+'
                 if '-' in nbv_chunks[1]:
-                    self.decimals_restricted_to += '-'
+                    self.deci_restriction += '-'
                 self.nb_variant = nbv_chunks[0]
             self.context = options.get('context', "default")
             self.picture = XML_BOOLEANS[options.get('picture', "false")]()
@@ -105,9 +105,9 @@ class structure(object):
 
         elif arg == "nb_variants":
             if (self.nb_variant.startswith('decimal')
-                and (self.decimals_restricted_to == ''
-                     or '*' in self.decimals_restricted_to
-                     or '÷' in self.decimals_restricted_to)):
+                and (self.deci_restriction == ''
+                     or '*' in self.deci_restriction
+                     or '÷' in self.deci_restriction)):
                 deci_nb = int(self.nb_variant[-1])  # so, from decimal1 up to 9
                 # In order to ensure we'll have at least one decimal number,
                 # we should try to remove all multiples of 10 from our possible
