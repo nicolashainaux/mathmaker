@@ -22,6 +22,7 @@
 
 import random
 import copy
+import warnings
 from decimal import Decimal
 
 from mathmaker.lib.core.root_calculus import Unit, Value
@@ -63,10 +64,11 @@ class structure(object):
             self.deci_restriction = ''
             nbv_chunks = self.nb_variant.split(sep='_')
             if len(nbv_chunks) == 2:
-                if '+' in nbv_chunks[1]:
-                    self.deci_restriction += '+'
-                if '-' in nbv_chunks[1]:
-                    self.deci_restriction += '-'
+                if nbv_chunks[1] in ['+-', '×÷']:
+                    self.deci_restriction += nbv_chunks[1]
+                else:
+                    warnings.warn('Ignored unrecognized option in nb_variant:'
+                                  ' {}'.format(nbv_chunks[1]))
                 self.nb_variant = nbv_chunks[0]
             self.context = options.get('context', "default")
             self.picture = XML_BOOLEANS[options.get('picture', "false")]()
@@ -105,9 +107,7 @@ class structure(object):
 
         elif arg == "nb_variants":
             if (self.nb_variant.startswith('decimal')
-                and (self.deci_restriction == ''
-                     or '*' in self.deci_restriction
-                     or '÷' in self.deci_restriction)):
+                and self.deci_restriction != '+-'):
                 deci_nb = int(self.nb_variant[-1])  # so, from decimal1 up to 9
                 # In order to ensure we'll have at least one decimal number,
                 # we should try to remove all multiples of 10 from our possible
