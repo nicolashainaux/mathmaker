@@ -24,7 +24,7 @@
 import copy
 import warnings
 import random
-from decimal import Decimal
+from decimal import Decimal, ROUND_DOWN
 
 
 def rotate(l, n):
@@ -70,6 +70,23 @@ def is_natural(n):
     return is_integer(n) and n >= 0
 
 
+def correct_normalize_results(d):
+    """Transform the xE+n results in decimal form (ex. 1E+1 -> 10)"""
+    if not isinstance(d, Decimal):
+        raise TypeError('Expected a Decimal, got a '
+                        + str(type(d)) + 'instead')
+    return d.quantize(Decimal(1)) if d == d.to_integral() else d.normalize()
+
+
+def round_deci(d, precision, **options):
+    """Correctly round a Decimal"""
+    if not isinstance(d, Decimal):
+        raise TypeError('Expected a Decimal, got a '
+                        + str(type(d)) + 'instead')
+
+    return correct_normalize_results(d.quantize(precision, **options))
+
+
 def remove_division_by_decimal(N, numbers=None):
     """
     Turn N into decimal instead of the numbers of the list.
@@ -103,58 +120,84 @@ def remove_division_by_decimal(N, numbers=None):
     return [N, ] + [n for n in numbers]
 
 
-def split_nb_into(operation, n, nb_variant='',
-                  deci_restriction='', extra_digits=0):
+def digits_nb(n):
+    """
+    Return the number of significant digits of an int or decimal.Decimal.
+
+    :param n: the number to test
+    :type n: int or decimal.Decimal
+    :rtype: int
+    """
+    if is_integer(n):
+        return 0
+    n = Decimal(n)
+    n = n.quantize(Decimal(1)) if n == n.to_integral() else n.normalize()
+    temp = len(str((n - round_deci(n, Decimal(1), rounding=ROUND_DOWN)))) - 2
+    return temp if temp >= 0 else 0
+
+
+def is_power_of_10(n):
+    """
+    Check if n is a power of ten.
+
+    :param n: the number to test
+    :type n: int or decimal.Decimal
+    :rtype: boolean
+    """
+    if not is_number(n) or type(n) is float:
+        raise TypeError('Argument n must be either int or decimal.Decimal.')
+    n = Decimal(abs(n))
+    if Decimal(10) <= n:
+        return is_power_of_10(n / 10)
+    if Decimal(1) < n < Decimal(10):
+        return False
+    elif n == Decimal(1):
+        return True
+    elif Decimal('0.1') < n < Decimal(1):
+        return False
+    elif 0 < n <= Decimal('0.1'):
+        return is_power_of_10(n * 10)
+    elif n == 0:
+        return False
+
+
+def split_nb(n, operation='sum', dig=0):
     """
     Split n as a sum, like a + b = n; or a difference, like a - b = n
 
-    By default, a and b are integers, or decimals with as many digits as
-    shown in nb_variant (if it is in the form of 'decimalN').
-    Extra_digits are useful when one want a and b to be "deeper" than planned.
-    For instance, with arguments 'sum', Decimal('2.5'), 'decimal1', '', 1
-    it's possible to decompose split 2.5 in 2.14 + 2.36.
+    By default, a and b have as many digits as n does.
+    The 'dig' keyword tell how many extra digits should have a and b
+    (compared to n).
+    For instance, if n=Decimal('2.5'), operation='sum', dig=1, then
+    n will be split into 2-digits numbers, like 2.14 + 2.36.
 
-    The variable 'depth' finally represents how many digits will have the
-    final numbers a and b.
-
-    :param operation: must be either 'sum' or 'difference'
-    :type operation: str
     :param n: the number to split
     :type n: a number (preferably an int or a Decimal, but can be a float too)
-    :param nb_variant: can be 'decimal1', 'decimal2' -> 'decimal9', or
-                       any other string that won't be taken into account
-    :type nb_variant: str
-    :param deci_restriction: can contain '+' or '-' or any other string
-                             that won't be taken into account
-    :type deci_restriction: str
-    :param extra_digits: extra depth level to use
-    :type extra_digits: int
+    :param operation: must be 'sum', 'difference', '+' or '-'
+    :type operation: str
+    :param dig: extra depth level to use
+    :type dig: int
     :rtype: tuple (of numbers)
     """
-    if operation not in ['sum', 'difference']:
+    if operation not in ['sum', 'difference', '+', '-']:
         raise ValueError('Argument "operation" should be either \'sum\' or '
                          '\'difference\'.')
-    depth = 0  # default value (matches integers)
-    if nb_variant.startswith('decimal'):
-        if (not is_integer(n)
-            or ('+' in deci_restriction and operation is 'sum')
-            or ('-' in deci_restriction and operation is 'difference')):
-            # e.g. decimals_restricted_to contains '+-'
-            # or nb_variant is 'decimalN' (where 1 <= N <= 9) and nb1 is no int
-            depth = int(nb_variant[-1]) + extra_digits
-    if operation is 'sum':
-        if not (nb_variant.startswith('decimal') and depth >= 1) and n == 1:
+    n_depth = digits_nb(n)
+    depth = dig + digits_nb(n)
+    if operation in ['sum', '+']:
+        if is_power_of_10(n) and abs(n) <= 1 and dig == 0:
             # This case is impossible: write 1 as a sum of two natural
-            # numbers bigger than 1, so we arbitrarily replace 1 by
-            # a random number between 2 and 10
-            warnings.warn('mathmaker is asked to split 1 as a sum of two '
-                          'naturals bigger than 1. As this is impossible, '
-                          '1 will be replaced by a random natural between '
-                          '2 and 10.')
-            n = random.choice([i + 2 for i in range(8)])
+            # numbers bigger than 1, or 0.1 as a sum of two positive decimals
+            # having 1 digit either, etc. so we arbitrarily replace n by
+            # a random number between 2 and 9
+            warnings.warn('mathmaker is asked something impossible (split {}'
+                          'as a sum of two numbers having as many digits)'
+                          .format(n))
+            n = random.choice([i + 2 for i in range(7)])
+            n = n * (10 ** (Decimal(- n_depth)))
         amplitude = n
-    elif operation is 'difference':
-        amplitude = max(10, n)
+    elif operation in ['difference', '-']:
+        amplitude = max(10 ** (n_depth + 1), n)
     start, end = 0, int((amplitude) * 10 ** depth - 1)
     if start > end:
         start, end = end + 1, -1
@@ -163,13 +206,13 @@ def split_nb_into(operation, n, nb_variant='',
            for i in range(start, end)]
     # then if decimals are wanted, we remove the results that do not match
     # the wanted "depth" (if depth == 2, we remove 0.4 for instance)
-    if nb_variant.startswith('decimal') and depth >= 1:
+    if depth >= 1:
             seq = [n for n in seq
                    if not is_integer(n * (10 ** (depth - 1)))]
-    if operation == 'sum':
+    if operation in ['sum', '+']:
         a = random.choice(seq)
         b = n - a
-    elif operation == 'difference':
+    elif operation in ['difference', '-']:
         b = random.choice(seq)
         a = n + b
     return (a, b)
