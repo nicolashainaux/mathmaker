@@ -165,9 +165,8 @@ def split_nb(n, operation='sum', dig=0):
     """
     Split n as a sum, like a + b = n; or a difference, like a - b = n
 
-    By default, a and b have as many digits as n does.
-    The 'dig' keyword tell how many extra digits should have a and b
-    (compared to n).
+    By default, a and b have as many digits as n does. The 'dig' keyword tells
+    how many extra digits must have a and b (compared to n).
     For instance, if n=Decimal('2.5'), operation='sum', dig=1, then
     n will be split into 2-digits numbers, like 2.14 + 2.36.
 
@@ -197,7 +196,7 @@ def split_nb(n, operation='sum', dig=0):
             n = n * (10 ** (Decimal(- n_depth)))
         amplitude = n
     elif operation in ['difference', '-']:
-        amplitude = max(10 ** (n_depth + 1), n)
+        amplitude = max(10 ** (n_depth), n)
     start, end = 0, int((amplitude) * 10 ** depth - 1)
     if start > end:
         start, end = end + 1, -1
