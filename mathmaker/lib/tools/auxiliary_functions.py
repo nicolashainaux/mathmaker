@@ -186,7 +186,6 @@ def force_shift_decimal(number, wishlist=None):
     try:
         i = wishlist.index(next(x for x in wishlist
                                 if not is_integer(x / 10 ** n)))
-        print('n = {}; i = {}'.format(n, i))
     except StopIteration:
         raise ValueError('None of the numbers of wishlist can be turned into '
                          'decimal.')
