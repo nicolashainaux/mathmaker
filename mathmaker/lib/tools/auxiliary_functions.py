@@ -87,7 +87,7 @@ def round_deci(d, precision, **options):
     return correct_normalize_results(d.quantize(precision, **options))
 
 
-def remove_division_by_decimal(N, numbers=None):
+def move_decimal(N, numbers=None):
     """
     Turn N into decimal instead of the numbers of the list.
 
@@ -116,7 +116,7 @@ def remove_division_by_decimal(N, numbers=None):
             raise TypeError('Each variable of the list must be a number.')
         if not is_integer(n):
             numbers_copy[i] = n * 10
-            return remove_division_by_decimal(N / 10, numbers=numbers_copy)
+            return move_decimal(N / 10, numbers=numbers_copy)
     return [N, ] + [n for n in numbers]
 
 

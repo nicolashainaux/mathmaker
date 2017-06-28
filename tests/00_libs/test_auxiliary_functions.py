@@ -25,7 +25,7 @@ from decimal import Decimal
 
 from mathmaker.lib.tools.auxiliary_functions import \
     (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
-     remove_division_by_decimal, split_nb, is_power_of_10, digits_nb)
+     move_decimal, split_nb, is_power_of_10, digits_nb)
 
 
 def test_check_unique_letters_words():
@@ -94,22 +94,22 @@ def test_is_natural():
         is_natural('-1.0')
 
 
-def test_remove_division_by_decimal():
-    """Check remove_division_by_decimal() in different cases."""
+def test_move_decimal():
+    """Check move_decimal() in different cases."""
     with pytest.raises(TypeError):
-        remove_division_by_decimal(14)
+        move_decimal(14)
     with pytest.raises(TypeError):
-        remove_division_by_decimal(14, (7, 5))
+        move_decimal(14, (7, 5))
     with pytest.raises(TypeError):
-        remove_division_by_decimal(14, {7: 'a', 6: 'b'})
+        move_decimal(14, {7: 'a', 6: 'b'})
     with pytest.raises(TypeError):
-        remove_division_by_decimal(14, [7, '5'])
+        move_decimal(14, [7, '5'])
     with pytest.raises(TypeError):
-        remove_division_by_decimal('14', [7, 5])
-    assert remove_division_by_decimal(14, [7, 5]) == [14, 7, 5]
-    assert remove_division_by_decimal(14, [Decimal('0.7'), 5]) \
+        move_decimal('14', [7, 5])
+    assert move_decimal(14, [7, 5]) == [14, 7, 5]
+    assert move_decimal(14, [Decimal('0.7'), 5]) \
         == [Decimal('1.4'), Decimal(7), 5]
-    assert remove_division_by_decimal(14, [Decimal('0.7'), Decimal('0.5')]) \
+    assert move_decimal(14, [Decimal('0.7'), Decimal('0.5')]) \
         == [Decimal('0.14'), Decimal(7), Decimal(5)]
 
 
