@@ -89,10 +89,11 @@ def round_deci(d, precision, **options):
 
 def move_decimal(N, numbers=None):
     """
-    Turn N into decimal instead of the numbers of the list.
+    Turn N into decimal instead of all decimal numbers found in the list.
 
-    Each decimal of the numbers' list will be recursively replaced by
-    10 times itself while N will be divided by 10.
+    Each decimal found in the numbers' list will be recursively replaced by
+    10 times itself (until it is no decimal anymore) while in the same time
+    N will be divided by 10.
 
     This is useful for the case division by a decimal is unwanted.
 
