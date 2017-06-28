@@ -162,6 +162,38 @@ def move_decimal(N, numbers=None):
     return [N, ] + [n for n in numbers]
 
 
+def force_shift_decimal(number, wishlist=None):
+    """
+    Turn a number of the wishlist into a decimal, instead of number.
+
+    In some cases this is not possible (for instance when all numbers of the
+    wishlist are multiples of 10), then a ValueError is raised.
+
+    :param number: the number that must be turned into integer
+    :type number: decimal.Decimal
+    :param wishlist: the list of numbers where to find an integer that must be
+                     turned into a decimal
+    :type wishlist: list
+    :rtype: a list (of numbers)
+    """
+    if type(number) is not Decimal:
+        raise TypeError('The first argument must be a Decimal number.')
+    if is_integer(number):
+        raise TypeError('The first argument must be a decimal number.')
+    if type(wishlist) is not list:
+        raise TypeError('Argument wishlist: must be a list.')
+    n = Decimal(digits_nb(number))
+    try:
+        i = wishlist.index(next(x for x in wishlist
+                                if not is_integer(x / 10 ** n)))
+        print('n = {}; i = {}'.format(n, i))
+    except StopIteration:
+        raise ValueError('None of the numbers of wishlist can be turned into '
+                         'decimal.')
+    wishlist[i] = wishlist[i] / 10 ** n
+    return [number * 10 ** n, ] + [x for x in wishlist]
+
+
 def split_nb(n, operation='sum', dig=0):
     """
     Split n as a sum, like a + b = n; or a difference, like a - b = n

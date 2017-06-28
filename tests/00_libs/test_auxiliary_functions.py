@@ -25,7 +25,7 @@ from decimal import Decimal
 
 from mathmaker.lib.tools.auxiliary_functions import \
     (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
-     move_decimal, split_nb, is_power_of_10, digits_nb)
+     move_decimal, split_nb, is_power_of_10, digits_nb, force_shift_decimal)
 
 
 def test_check_unique_letters_words():
@@ -113,6 +113,22 @@ def test_move_decimal():
         == [Decimal('0.14'), Decimal(7), Decimal(5)]
 
 
+def test_force_shift_decimal():
+    """Check force_shift_decimal() in different cases."""
+    with pytest.raises(TypeError):
+        force_shift_decimal('14', wishlist=[])
+    with pytest.raises(TypeError):
+        force_shift_decimal(14)
+    with pytest.raises(TypeError):
+        force_shift_decimal(1.4)
+    with pytest.raises(ValueError):
+        force_shift_decimal(Decimal('1.4'), wishlist=[])
+    with pytest.raises(ValueError):
+        force_shift_decimal(Decimal('1.4'), wishlist=[10, 20, 30])
+    assert force_shift_decimal(Decimal('1.4'), wishlist=[10, 20, 36]) ==\
+        [Decimal('14'), 10, 20, Decimal('3.6')]
+
+
 def test_is_power_of_10():
     """Check is_power_of_10() in different cases."""
     with pytest.raises(TypeError):
@@ -167,4 +183,3 @@ def test_split_nb():
     assert all([digits_nb(r) == 2 for r in result])
     result = split_nb(-7)
     assert all(-6 <= r <= -1 for r in result)
-    assert False
