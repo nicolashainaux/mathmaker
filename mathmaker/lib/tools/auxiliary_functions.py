@@ -87,40 +87,6 @@ def round_deci(d, precision, **options):
     return correct_normalize_results(d.quantize(precision, **options))
 
 
-def move_decimal(N, numbers=None):
-    """
-    Turn N into decimal instead of all decimal numbers found in the list.
-
-    Each decimal found in the numbers' list will be recursively replaced by
-    10 times itself (until it is no decimal anymore) while in the same time
-    N will be divided by 10.
-
-    This is useful for the case division by a decimal is unwanted.
-
-    :param N: the number who will be divided by 10 instead of the others
-    :type N: any number (int, Decimal, float though they're not advised)
-    :param numbers: an iterable containing the numbers that must be integers
-    :type numbers: a list (of numbers)
-    :rtype: a list (of numbers)
-    """
-    if type(numbers) is not list:
-        raise TypeError('A list of numbers must be given as argument '
-                        '\'numbers\'.')
-    if not is_number(N):
-        raise TypeError('The first argument must be a number.')
-    N = Decimal(str(N))
-    if all([is_integer(n) for n in numbers]):
-        return [N, ] + [n for n in numbers]
-    numbers_copy = copy.deepcopy(numbers)
-    for i, n in enumerate(numbers):
-        if not is_number(n):
-            raise TypeError('Each variable of the list must be a number.')
-        if not is_integer(n):
-            numbers_copy[i] = n * 10
-            return move_decimal(N / 10, numbers=numbers_copy)
-    return [N, ] + [n for n in numbers]
-
-
 def digits_nb(n):
     """
     Return the number of significant digits of an int or decimal.Decimal.
@@ -160,6 +126,40 @@ def is_power_of_10(n):
         return is_power_of_10(n * 10)
     elif n == 0:
         return False
+
+
+def move_decimal(N, numbers=None):
+    """
+    Turn N into decimal instead of all decimal numbers found in the list.
+
+    Each decimal found in the numbers' list will be recursively replaced by
+    10 times itself (until it is no decimal anymore) while in the same time
+    N will be divided by 10.
+
+    This is useful for the case division by a decimal is unwanted.
+
+    :param N: the number who will be divided by 10 instead of the others
+    :type N: any number (int, Decimal, float though they're not advised)
+    :param numbers: an iterable containing the numbers that must be integers
+    :type numbers: a list (of numbers)
+    :rtype: a list (of numbers)
+    """
+    if type(numbers) is not list:
+        raise TypeError('A list of numbers must be given as argument '
+                        '\'numbers\'.')
+    if not is_number(N):
+        raise TypeError('The first argument must be a number.')
+    N = Decimal(str(N))
+    if all([is_integer(n) for n in numbers]):
+        return [N, ] + [n for n in numbers]
+    numbers_copy = copy.deepcopy(numbers)
+    for i, n in enumerate(numbers):
+        if not is_number(n):
+            raise TypeError('Each variable of the list must be a number.')
+        if not is_integer(n):
+            numbers_copy[i] = n * 10
+            return move_decimal(N / 10, numbers=numbers_copy)
+    return [N, ] + [n for n in numbers]
 
 
 def split_nb(n, operation='sum', dig=0):
