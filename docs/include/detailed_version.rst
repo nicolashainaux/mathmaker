@@ -307,8 +307,10 @@ A summary of the conventions used to represent the different core objects (i.e. 
 System log configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Systems using ``rsyslog``, like Ubuntu
-""""""""""""""""""""""""""""""""""""""
+Systems using ``rsyslog``
+"""""""""""""""""""""""""
+
+It may be already enabled and running by default (Ubuntu) or you can install, enable and start it (in Manjaro, ``# systemctl enable rsyslog`` and ``# systemctl start rsyslog``).
 
 Ensure ``/etc/rsyslog.conf`` contains:
 ::
@@ -325,11 +327,10 @@ Then create (if not created yet) a 'local' configuration file, like: ``/etc/rsys
     local5.*                     /var/log/mathmaker.log
     local6.*                     /var/log/mathmakerd.log
 
-Then save it and:
+Then save it and restart:
 
-.. code-block:: console
-
-    # service rsyslog restart
+- in Ubuntu: ``# service rsyslog restart``
+- in Manjaro: ``# systemctl restart rsyslog``
 
 .. warning::
     Do not create ``/var/log/mathmaker.log`` yourself with the wrong rights, otherwise nothing will be logged.
