@@ -21,11 +21,12 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import random
+import sys
 from decimal import Decimal
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools.auxiliary_functions \
-    import (is_integer, remove_division_by_decimal, split_nb_into)
+    import (is_integer, move_decimal, split_nb, digits_nb, force_shift_decimal)
 from mathmaker.lib.core.base_calculus import Item, Sum, Product, Division
 from mathmaker.lib.core.calculus import Expression
 from .. import submodule
@@ -66,12 +67,50 @@ from .. import submodule
 
 class sub_object(submodule.structure):
 
-    def __init__(self, numbers_to_use, **options):
-        super().setup("minimal", **options)
-        super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
-                      **options)
-        super().setup("nb_variants", nb=numbers_to_use, **options)
+    def adjust_depth(self, depth, n=None, **kwargs):
+        """
+        Return depth to use to split a number, depending on variant etc.
 
+        This is to ensure a correct minimal value. For instance, if
+        self.deci_restriction is '+-', it certainly requires to be at least 1.
+
+        :param depth: current depth (for instance, the default one, or the one
+                      given by the user)
+        :type depth: int
+        :param n: the number to split
+        :type n: a number (int or Decimal)
+        :rtype: int
+        """
+        if (self.nb_variant.startswith('decimal')
+            and self.deci_restriction == '+-'):
+            return max(depth, digits_nb(n) + 1)
+        if self.variant in [100, 102, 104, 106]:
+            # (a + b)×c  a×(b + c)  (a - b)×c  a×(b - c)
+            if self.nb_variant == 'decimal1' and is_integer(n):
+                return depth + random.choice([0, 1])
+        elif self.variant in [101, 105]:  # (a + b)÷c
+            if (not self.allow_division_by_decimal
+                and self.nb_variant == 'decimal1'
+                and is_integer(n)):
+                return max(depth, digits_nb(n) + 1)
+        elif self.variant in [103, 107]:  # a÷(b + c) a÷(b + c)
+            N = kwargs['N']
+            if (self.nb_variant.startswith('decimal')
+                and is_integer(N)):
+                return max(depth, digits_nb(n) + 1)
+            elif self.nb_variant == 'decimal1' and is_integer(n):
+                return depth + random.choice([0, 1])
+        elif self.variant in [108, 112, 109, 113, 110, 114, 111, 115]:
+            # a×(b ± c)×d   a×(b ± c)÷d  a÷(b ± c)×d  a÷(b ± c)÷d
+            N, P = kwargs['N'], kwargs['P']
+            if (self.nb_variant.startswith('decimal')
+                and all(is_integer(x) for x in [n, N, P])):
+                return max(depth, digits_nb(n) + 1)
+            elif self.nb_variant == 'decimal1' and is_integer(n):
+                return depth + random.choice([0, 1])
+        return depth
+
+    def adjust_numbers(self):
         # As the pairs for products and quotients should be shuffled, but as
         # the pairs can be either (self.nb1; self.nb2) or (self.nb2; self.nb3)
         # etc. depending on the exact variant, we have to do it here.
@@ -92,279 +131,739 @@ class sub_object(submodule.structure):
                     self.nb2, self.nb3 = self.nb3, self.nb2
             if self.variant in [111, 115]:
                 self.nb1, self.nb2, self.nb3 = \
-                    remove_division_by_decimal(self.nb1, numbers=[self.nb2,
-                                                                  self.nb3])
-            if self.variant in [117, 119, 121, 123]:
-                self.nb3, self.nb4 = \
-                    remove_division_by_decimal(self.nb3, numbers=[self.nb4, ])
-            if self.variant == 118:
-                # allow_division_by_decimal is still False,
-                # self.nb_variant does start with 'decimal'
-                # The idea is to modify self.nb2 in order to have
-                # self.nb2 + self.nb3 * self.nb4 being an integer
-                if not is_integer(self.nb2 + self.nb3 * self.nb4):
-                    self.nb2 += int(self.nb2 + self.nb3 * self.nb4) + 1 \
-                        - (self.nb2 + self.nb3 * self.nb4)
+                    move_decimal(self.nb1, numbers=[self.nb2, self.nb3])
+            if self.variant in [117, 119, 121, 123, 125]:
+                # sys.stderr.write('\nnb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                #                  .format(self.nb1, self.nb2,
+                #                          self.nb3, self.nb4))
+                if not is_integer(self.nb4):
+                    try:
+                        self.nb4, self.nb3, self.nb1 = \
+                            force_shift_decimal(self.nb4, wishlist=[self.nb3,
+                                                                    self.nb1])
+                    except ValueError:
+                        # Impossible case. We give up, there won't be a
+                        # decimal :-/
+                        self.nb2, self.nb4 = \
+                            move_decimal(self.nb2, numbers=[self.nb4, ])
+            if self.variant == 122:
+                if not is_integer(self.nb2):
+                    try:
+                        if random.choice([True, False]):
+                            self.nb2, self.nb3, self.nb4 = \
+                                force_shift_decimal(self.nb2,
+                                                    wishlist=[self.nb3,
+                                                              self.nb4])
+                        else:
+                            self.nb2, self.nb4, self.nb3 = \
+                                force_shift_decimal(self.nb2,
+                                                    wishlist=[self.nb4,
+                                                              self.nb3])
+                    except ValueError:
+                        # Impossible case. We give up, there won't be a
+                        # decimal :-/
+                        if random.choice([True, False]):
+                            self.nb4, self.nb2 = \
+                                move_decimal(self.nb4, numbers=[self.nb2, ])
+                        else:
+                            self.nb3, self.nb2 = \
+                                move_decimal(self.nb4, numbers=[self.nb3, ])
+
+            # Processing for variant 118 is specific to 118, so it's not
+            # factorized here with others.
+            # 119 should be moved to 119, too
             if self.variant == 119:
                 if not is_integer(self.nb2) and is_integer(self.nb3):
                     if self.nb3 % 10 == 0 or random.choice([True, False]):
-                        self.nb1, self.nb2 = remove_division_by_decimal(
-                            self.nb1, numbers=[self.nb2, ])
+                        self.nb1, self.nb2 = move_decimal(self.nb1,
+                                                          numbers=[self.nb2, ])
                     else:
-                        self.nb3, self.nb2 = remove_division_by_decimal(
-                            self.nb3, numbers=[self.nb2, ])
+                        self.nb3, self.nb2 = move_decimal(self.nb3,
+                                                          numbers=[self.nb2, ])
                 if is_integer(self.nb2) and not is_integer(self.nb3):
                     self.nb2 += int(self.nb2 + self.nb3 + 1) \
                         - (self.nb2 + self.nb3)
+            if self.variant in [126, 130]:
+                if not is_integer(self.nb4):
+                    choice = random.choice([1, 2, 3])
+                    try:
+                        if choice is 1:
+                            self.nb4, self.nb1, self.nb2, self.nb3 = \
+                                force_shift_decimal(self.nb4,
+                                                    wishlist=[self.nb1,
+                                                              self.nb2,
+                                                              self.nb3])
+                        elif choice is 2:
+                            self.nb4, self.nb2, self.nb3, self.nb1 = \
+                                force_shift_decimal(self.nb4,
+                                                    wishlist=[self.nb2,
+                                                              self.nb3,
+                                                              self.nb1])
+                        elif choice is 3:
+                            self.nb4, self.nb3, self.nb1, self.nb2 = \
+                                force_shift_decimal(self.nb4,
+                                                    wishlist=[self.nb3,
+                                                              self.nb1,
+                                                              self.nb2])
+                    except ValueError:
+                        rnd = random.choice([i
+                                             for i in range(-5, 6)
+                                             if i != 0])
+                        if choice is 1:
+                            self.nb1 += rnd
+                            self.nb4, self.nb1 = \
+                                force_shift_decimal(self.nb4,
+                                                    wishlist=[self.nb1])
+                        elif choice is 2:
+                            self.nb2 += rnd
+                            self.nb4, self.nb2 = \
+                                force_shift_decimal(self.nb4,
+                                                    wishlist=[self.nb2])
+                        elif choice is 3:
+                            self.nb3 += rnd
+                            self.nb4, self.nb3 = \
+                                force_shift_decimal(self.nb4,
+                                                    wishlist=[self.nb3])
 
-        if self.subvariant == 'only_positive':
-            if self.variant in [120, 122]:
-                if self.nb2 < self.nb3 * self.nb4:
-                    if not is_integer(self.nb2):
-                        if self.nb3 != 10:
-                            self.nb3, self.nb2 = remove_division_by_decimal(
-                                N=self.nb3, numbers=[self.nb2, ])
-                        else:
-                            self.nb4, self.nb2 = remove_division_by_decimal(
-                                N=self.nb4, numbers=[self.nb2, ])
-                    if self.nb2 < self.nb3 * self.nb4:
-                        self.nb2 += self.nb3 * self.nb4
-                if (self.nb_variant.startswith('decimal')
-                    and not self.allow_division_by_decimal):
-                    if not is_integer(self.nb2 - self.nb3 * self.nb4):
-                        # Same idea as for variant 118 somewhat above
-                        self.nb2 += int(self.nb2 - self.nb3 * self.nb4) + 1 \
-                            - (self.nb2 - self.nb3 * self.nb4)
-                if self.nb2 - self.nb3 * self.nb4 == 0:
-                    self.nb2 += random.choice([i + 1 for i in range(9)])
-            elif self.variant in [121, 123]:
-                if self.nb2 < self.nb3:
-                    self.nb2 += self.nb3
-                if self.variant == 123:
-                    if (not is_integer(self.nb2 - self.nb3)
-                        and not self.allow_division_by_decimal):
-                        self.nb2 += int(self.nb2 - self.nb3) + 1 \
-                            - (self.nb2 - self.nb3)
-                        if self.nb2 - self.nb3 == 1:
-                            self.nb2 += \
-                                random.choice([i for i in range(10)])
-        self.expression = None
-        self.obj = None
-        if self.variant == 100:  # (a + b)×c
-            c = self.nb2
-            a, b = split_nb_into('sum', self.nb1, nb_variant=self.nb_variant,
-                                 deci_restriction=self.decimals_restricted_to,
-                                 extra_digits=self.allow_extra_digits)
-            if any([n < 0 for n in [a, b, c]]):
-                raise RuntimeError('100: Negative number detected!')
-            if all([is_integer(n) for n in [a, b, c]]):
-                raise RuntimeError('100: only integers!')
-            if c == 1:
-                raise RuntimeError('100: c == 1!')
-            self.obj = Product([Sum([Item(a), Item(b)]),
-                                Item(c)])
-        elif self.variant == 101:  # (a + b)÷c
-            c = self.nb2
-            self.nb1 = self.nb1 * self.nb2
-            a, b = split_nb_into('sum', self.nb1, nb_variant=self.nb_variant,
-                                 deci_restriction=self.decimals_restricted_to,
-                                 extra_digits=self.allow_extra_digits)
-            self.obj = Division(('+', Sum([a, b]), c))
-            if all([is_integer(n) for n in [a, b, c]]):
-                raise RuntimeError('101: only integers!')
-            if any([n < 0 for n in [a, b, c]]):
-                raise RuntimeError('101: Negative number detected!')
-            if c == 1:
-                raise RuntimeError('101: c == 1!')
-        elif self.variant == 102:  # a×(b + c)
-            a = self.nb1
-            b, c = split_nb_into('sum', self.nb2, nb_variant=self.nb_variant,
-                                 deci_restriction=self.decimals_restricted_to,
-                                 extra_digits=self.allow_extra_digits)
-            self.obj = Product([Item(a),
-                                Sum([Item(b), Item(c)])],
+    def create_100_104(self):
+        # (a + b)×c    (a - b)×c
+        ops = '+' if self.variant == 100 else '-'
+        opn = 1 if self.variant == 100 else -1
+        c = self.nb2
+        a, b = split_nb(self.nb1, operation=ops,
+                        dig=self.adjust_depth(self.allow_extra_digits,
+                                              n=self.nb1))
+        self.obj = Product([Sum([Item(a), Item(opn * b)]),
+                            Item(c)])
+        if any([n < 0 for n in [a, b, c]]):
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if c == 1:
+            raise RuntimeError('{}: c == 1!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c]):
+            raise RuntimeError('{}: a, b and c are all integers!'
+                               .format(self.variant))
+
+    def create_101_105(self):
+        # (a + b)÷c     (a - b)÷c
+        ops = '+' if self.variant == 101 else '-'
+        opn = 1 if self.variant == 101 else -1
+        c = self.nb2
+        self.nb1 = self.nb1 * self.nb2
+        a, b = split_nb(self.nb1, operation=ops,
+                        dig=self.adjust_depth(self.allow_extra_digits,
+                                              n=self.nb1))
+        self.obj = Division(('+', Sum([a, opn * b]), c))
+        if any([n < 0 for n in [a, b, c]]):
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if c == 1:
+            raise RuntimeError('{}: c == 1!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c]):
+            raise RuntimeError('{}: a, b and c are all integers!'
+                               .format(self.variant))
+
+    def create_102_106(self):
+        # a×(b + c)     a×(b - c)
+        ops = '+' if self.variant == 101 else '-'
+        opn = 1 if self.variant == 101 else -1
+        a = self.nb1
+        b, c = split_nb(self.nb2, operation=ops,
+                        dig=self.adjust_depth(self.allow_extra_digits,
+                                              n=self.nb2))
+        self.obj = Product([Item(a),
+                            Sum([Item(b), Item(opn * c)])],
+                           compact_display=False)
+        if any([n < 0 for n in [a, b, c]]):
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if a == 1:
+            raise RuntimeError('{}: a == 1!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c]):
+            raise RuntimeError('{}: a, b and c are all integers!'
+                               .format(self.variant))
+
+    def create_103_107(self):
+        # a÷(b + c)     a÷(b - c)
+        ops = '+' if self.variant == 101 else '-'
+        opn = 1 if self.variant == 101 else -1
+        # sys.stderr.write('\nnb1, nb2 = {}, {}'.format(self.nb1,self.nb2))
+        a = self.nb1 * self.nb2
+        b, c = split_nb(self.nb2, operation=ops,
+                        dig=self.adjust_depth(self.allow_extra_digits,
+                                              n=self.nb2, N=a))
+        self.obj = Division(('+', a, Sum([b, opn * c])))
+        # sys.stderr.write('\n{} × ({} + {})'.format(a, b, c))
+        if any([n < 0 for n in [a, b, c]]):
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if a == 1:
+            raise RuntimeError('{}: a == 1!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c]):
+            raise RuntimeError('{}: a, b and c are all integers!'
+                               .format(self.variant))
+
+    def create_108_112(self):
+        # a×(b ± c)×d
+        ops = '+' if self.variant == 108 else '-'
+        opn = 1 if self.variant == 108 else -1
+        a = self.nb1
+        d = self.nb3
+        b, c = split_nb(self.nb2, operation=ops,
+                        dig=self.adjust_depth(self.allow_extra_digits,
+                                              n=self.nb2, N=a, P=d))
+        self.obj = Product([Item(a),
+                            Sum([Item(b), Item(opn * c)]),
+                            Item(d)],
+                           compact_display=False)
+        if any([n < 0 for n in [a, b, c, d]]):
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if a == 1:
+            raise RuntimeError('{}: a == 1!'
+                               .format(self.variant))
+        if d == 1:
+            raise RuntimeError('{}: d == 1!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c, d]):
+            raise RuntimeError('{}: a, b, c and d are all integers!'
+                               .format(self.variant))
+
+    def create_109_113(self):
+        # a×(b ± c)÷d
+        ops = '+' if self.variant == 109 else '-'
+        opn = 1 if self.variant == 109 else -1
+        a = self.nb1
+        d = self.nb3
+        nb2 = self.nb2
+        self.nb2 = self.nb2 * self.nb3
+        b, c = split_nb(self.nb2, operation=ops,
+                        dig=self.adjust_depth(self.allow_extra_digits,
+                                              n=self.nb2, N=a, P=d))
+        if (all(is_integer(x) for x in [self.nb2, d, nb2])
+            or (not is_integer(self.nb2) and not a % 10 == 0)):
+            self.obj = Product([a, Division(('+', Sum([b, opn * c]), d))],
                                compact_display=False)
-            if any([n < 0 for n in [a, b, c]]):
-                raise RuntimeError('102: Negative number detected: (a, b, c) ='
-                                   ' ({}, {}, {})'.format(a, b, c))
-        elif self.variant == 103:  # a÷(b + c)
-            a = self.nb1 * self.nb2
-            b, c = split_nb_into('sum', self.nb2, nb_variant=self.nb_variant,
-                                 deci_restriction=self.decimals_restricted_to,
-                                 extra_digits=self.allow_extra_digits)
-            if any([n < 0 for n in [a, b, c]]):
-                raise RuntimeError('Negative number detected!')
-            self.obj = Division(('+', a, Sum([b, c])))
-        elif self.variant == 104:  # (a - b)×c
-            c = self.nb2
-            a, b = split_nb_into('difference', self.nb1,
-                                 nb_variant=self.nb_variant,
-                                 deci_restriction=self.decimals_restricted_to,
-                                 extra_digits=self.allow_extra_digits)
-            if any([n < 0 for n in [a, b, c]]):
-                raise RuntimeError('Negative number detected!')
-            self.obj = Product([Sum([Item(a), Item(-b)]),
-                                Item(c)])
-        elif self.variant == 105:  # (a - b)÷c
-            c = self.nb2
-            self.nb1 = self.nb1 * self.nb2
-            a, b = split_nb_into('difference', self.nb1,
-                                 nb_variant=self.nb_variant,
-                                 deci_restriction=self.decimals_restricted_to,
-                                 extra_digits=self.allow_extra_digits)
-            if any([n < 0 for n in [a, b, c]]):
-                raise RuntimeError('Negative number detected!')
-            self.obj = Division(('+', Sum([a, -b]), c))
-        elif self.variant == 106:  # a×(b - c)
-            a = self.nb1
-            b, c = split_nb_into('difference', self.nb2,
-                                 nb_variant=self.nb_variant,
-                                 deci_restriction=self.decimals_restricted_to,
-                                 extra_digits=self.allow_extra_digits)
-            if any([n < 0 for n in [a, b, c]]):
-                raise RuntimeError('Negative number detected!')
-            self.obj = Product([Item(a),
-                                Sum([Item(b), Item(-c)])],
-                               compact_display=False)
-        elif self.variant == 107:  # a÷(b - c)
-            a = self.nb1 * self.nb2
-            b, c = split_nb_into('difference', self.nb2,
-                                 nb_variant=self.nb_variant,
-                                 deci_restriction=self.decimals_restricted_to,
-                                 extra_digits=self.allow_extra_digits)
-            if any([n < 0 for n in [a, b, c]]):
-                raise RuntimeError('Negative number detected!')
-            self.obj = Division(('+', a, Sum([b, -c])))
-        elif self.variant in [108, 112]:  # a×(b ± c)×d
-            op = 'sum' if self.variant == 108 else 'difference'
-            opn = 1 if self.variant == 108 else -1
-            a = self.nb1
-            b, c = split_nb_into(op, self.nb2, nb_variant=self.nb_variant,
-                                 deci_restriction=self.decimals_restricted_to,
-                                 extra_digits=self.allow_extra_digits)
-            d = self.nb3
-            if any([n < 0 for n in [a, b, c, d]]):
-                raise RuntimeError('Negative number detected!')
-            self.obj = Product([Item(a),
-                                Sum([Item(b), Item(opn * c)]),
-                                Item(d)],
-                               compact_display=False)
-        elif self.variant in [109, 113]:  # a×(b ± c)÷d
-            op = 'sum' if self.variant == 109 else 'difference'
-            opn = 1 if self.variant == 109 else -1
-            a = self.nb1
-            self.nb2 = self.nb2 * self.nb3
-            b, c = split_nb_into(op, self.nb2, nb_variant=self.nb_variant,
-                                 deci_restriction=self.decimals_restricted_to,
-                                 extra_digits=self.allow_extra_digits)
-            d = self.nb3
-            if any([n < 0 for n in [a, b, c, d]]):
-                raise RuntimeError('Negative number detected!')
+        else:
             self.obj = Division(('+',
                                  Product([a, Sum([b, opn * c])],
                                          compact_display=False),
                                  d))
-        elif self.variant in [110, 114]:  # a÷(b ± c)×d
-            op = 'sum' if self.variant == 110 else 'difference'
-            opn = 1 if self.variant == 110 else -1
-            a = self.nb2 * self.nb3
-            b, c = split_nb_into(op, self.nb3, nb_variant=self.nb_variant,
-                                 deci_restriction=self.decimals_restricted_to,
-                                 extra_digits=self.allow_extra_digits)
-            d = self.nb1
-            if any([n < 0 for n in [a, b, c, d]]):
-                raise RuntimeError('Negative number detected!')
-            self.obj = Product([Division(('+', a, Sum([b, opn * c]))),
-                                d],
-                               compact_display=False)
-        elif self.variant in [111, 115]:  # a÷(b ± c)÷d
-            op = 'sum' if self.variant == 111 else 'difference'
-            opn = 1 if self.variant == 111 else -1
-            a = self.nb1 * self.nb2 * self.nb3
-            b, c = split_nb_into(op, self.nb2, nb_variant=self.nb_variant,
-                                 deci_restriction=self.decimals_restricted_to,
-                                 extra_digits=self.allow_extra_digits)
-            d = self.nb3
-            if any([n < 0 for n in [a, b, c, d]]):
-                raise RuntimeError('Negative number detected!')
-            self.obj = Division(('+',
-                                 Division(('+', a, Sum([b, opn * c]))),
-                                 d))
-        elif self.variant in [116, 120]:  # a×(b ± c×d)
-            opn = 1 if self.variant == 116 else -1
-            a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if any([n < 0 for n in [a, b, c, d]]):
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if a == 1:
+            raise RuntimeError('{}: a == 1!'
+                               .format(self.variant))
+        if d == 1:
+            raise RuntimeError('{}: d == 1!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c, d]):
+            raise RuntimeError('{}: a, b, c and d are all integers!'
+                               .format(self.variant))
+
+    def create_110_114(self):
+        # a÷(b ± c)×d
+        ops = '+' if self.variant == 110 else '-'
+        opn = 1 if self.variant == 110 else -1
+        a = self.nb2 * self.nb3
+        d = self.nb1
+        b, c = split_nb(self.nb3, operation=ops,
+                        dig=self.adjust_depth(self.allow_extra_digits,
+                                              n=self.nb3, N=a, P=d))
+        self.obj = Product([Division(('+', a, Sum([b, opn * c]))),
+                            d],
+                           compact_display=False)
+        if any([n < 0 for n in [a, b, c, d]]):
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if a == 1:
+            raise RuntimeError('{}: a == 1!'
+                               .format(self.variant))
+        if d == 1:
+            raise RuntimeError('{}: d == 1!'
+                               .format(self.variant))
+        if not is_integer(self.nb3):
+            raise RuntimeError('{}: self.nb3 is decimal!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c, d]):
+            raise RuntimeError('{}: a, b, c and d are all integers!'
+                               .format(self.variant))
+
+    def create_111_115(self):
+        # a÷(b ± c)÷d
+        ops = '+' if self.variant == 111 else '-'
+        opn = 1 if self.variant == 111 else -1
+        a = self.nb1 * self.nb2 * self.nb3
+        d = self.nb3
+        b, c = split_nb(self.nb2, operation=ops,
+                        dig=self.adjust_depth(self.allow_extra_digits,
+                                              n=self.nb2, N=a, P=d))
+        self.obj = Division(('+',
+                             Division(('+', a, Sum([b, opn * c]))),
+                             d))
+        if any([n < 0 for n in [a, b, c, d]]):
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if a == 1:
+            raise RuntimeError('{}: a == 1!'
+                               .format(self.variant))
+        if d == 1:
+            raise RuntimeError('{}: d == 1!'
+                               .format(self.variant))
+        if not is_integer(self.nb3):
+            raise RuntimeError('{}: self.nb3 is decimal!'
+                               .format(self.variant))
+        if not is_integer(self.nb2):
+            raise RuntimeError('{}: self.nb2 is decimal!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c, d]):
+            raise RuntimeError('{}: a, b, c and d are all integers!'
+                               .format(self.variant))
+
+    def create_116_120_124(self):
+        # a×(b ± c×d)   (a×b + c)×d
+        opn = 1 if self.variant in [116, 124] else -1
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if self.variant in [116, 124]:
+            if ((not self.subvariant == 'only_positive')
+                or (self.subvariant == 'only_positive' and b - c * d > 0)):
+                b = b - c * d
+        else:
+            b = b + c * d
+        if self.variant in [116, 120]:
             self.obj = Product([a,
                                 Sum([b, Product([opn * c, d])])],
                                compact_display=False)
-            if any([n < 0 for n in [a, b, c, d]]):
-                raise RuntimeError('Negative number detected!')
-        elif self.variant in [117, 121]:  # a×(b ± c÷d)
-            ops = '+' if self.variant == 117 else '-'
-            opn = 1 if self.variant == 117 else -1
-            a, b, c, d = self.nb1, self.nb2, self.nb3 * self.nb4, self.nb4
-            if (self.variant == 117
-                and self.nb_variant.startswith('decimal')
-                and all(is_integer(n) for n in [a, b, c, d])):
-                c = c * 10
-                if a % 10 == 0:
-                    a += Decimal('0.1') \
-                        * random.choice([i + 1 for i in range(-6, 5)])
-                else:
-                    a = a / 10
-            if any([n < 0 for n in [a, b, c, d]]):
-                raise RuntimeError('Negative number detected!')
+        elif self.variant == 124:
+            a, b, c, d = c, d, b, a
+            self.obj = Product([Sum([Product([a, b],
+                                     compact_display=False),
+                                     c]),
+                                d], compact_display=False)
+        if any([n < 0 for n in [a, b, c, d]]):
+            raise RuntimeError('Negative number detected!')
+        if all(is_integer(n) for n in [a, b, c, d]):
+            raise RuntimeError('{}: a, b, c and d are all integers!'
+                               .format(self.variant))
+
+    def create_117_121_125(self):
+        # a×(b ± c÷d)     (a÷b + c)×d
+        ops = '+' if self.variant in [117, 125] else '-'
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if self.variant in [117, 125]:
+            if ((not self.subvariant == 'only_positive')
+                or (self.subvariant == 'only_positive' and b - c > 0)):
+                b = b - c
+        else:
+            b = b + c
+        c = c * d
+        if self.variant in [117, 121]:
             self.obj = Product([a,
-                                Sum([b,
-                                     Division((ops, c, d))])],
+                                Sum([b, Division((ops, c, d))])],
                                compact_display=False)
-        elif self.variant in [118, 122]:  # a÷(b ± c×d)
-            ops = '+' if self.variant == 118 else '-'
-            opn = 1 if self.variant == 118 else -1
-            if self.variant == 118 and self.nb2 == 1:
-                self.nb2 += random.choice([i for i in range(10)])
-            a = self.nb1 * (self.nb2 + opn * self.nb3 * self.nb4)
-            b, c, d = self.nb2, self.nb3, self.nb4
-            if any([n < 0 for n in [a, b, c, d]]):
-                raise RuntimeError('Negative number detected!')
-            self.obj = Division(('+',
-                                 a,
-                                 Sum([b, Product([opn * c, d])])))
-        elif self.variant in [119, 123]:  # a÷(b ± c÷d)
-            ops = '+' if self.variant == 119 else '-'
-            opn = 1 if self.variant == 119 else -1
-            if self.variant == 119 and self.nb2 == 1:
-                self.nb2 += random.choice([i for i in range(10)])
-            a = self.nb1 * (self.nb2 + opn * self.nb3)
-            b, c, d = self.nb2, self.nb3 * self.nb4, self.nb4
-            if (self.variant == 119
-                and self.nb_variant.startswith('decimal')
-                and all(is_integer(n) for n in [a, b, c, d])):
-                # if (self.nb2 + self.nb3) % 10 == 0,
-                # then adding 0.1 to self.nb1 won't introduce any decimal
-                # in a, b, c or d
-                ranks = [i + 1 for i in range(-6, 5)]
-                random.shuffle(ranks)
-                if (self.nb2 + self.nb3) % 10 == 0:
-                    for r in ranks:
-                        new_nb2 = b + Decimal('0.1') * r
-                        new_a = self.nb1 * (new_nb2 + opn * self.nb3)
-                        if new_a > 0 and not is_integer(new_a):
-                            self.nb2 = new_nb2
-                            break
+        elif self.variant == 125:
+            a, b, c, d = c, d, b, a
+            if not is_integer(b):
+                raise RuntimeError('Division by decimal (b)!')
+            self.obj = Product([Sum([Division(('+', a, b)),
+                                     c]),
+                                d], compact_display=False)
+        if any([n < 0 for n in [a, b, c, d]]):
+            raise RuntimeError('Negative number detected!')
+        if all(is_integer(n) for n in [a, b, c, d]):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: a, b, c and d are all integers!'
+                               .format(self.variant))
+
+    def create_118(self):
+        # a÷(b + c×d)
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        # sys.stderr.write('\n\na; b; c; d = {}; {}; {}; {}'
+        #                  .format(a, b, c, d))
+        if (self.nb_variant.startswith('decimal')
+            and not is_integer(a)
+            and all(is_integer(x) for x in [b, c, d])
+            and is_integer(a * (b + c * d))):
+            try:
+                a, b, c, d = force_shift_decimal(a, wishlist=[b, c, d])
+                # sys.stderr.write('\n(I) a turned into = {}'.format(a))
+            except ValueError:
+                rnd = random.choice([i for i in range(-5, 6) if i != 0])
+                choice = random.choice([1, 2, 3])
+                if choice is 1:
+                    b += rnd
+                elif choice is 2:
+                    c += rnd
                 else:
-                    for r in ranks:
-                        new_nb1 = self.nb1 + Decimal('0.1') * r
-                        new_a = new_nb1 * (self.nb2 + opn * self.nb3)
-                        if new_a > 0 and not is_integer(new_a):
-                            self.nb1 = new_nb1
-                            break
-                a = self.nb1 * (self.nb2 + opn * self.nb3)
-            if any([n < 0 for n in [a, b, c, d]]):
-                raise RuntimeError('Negative number detected!')
-            self.obj = Division(('+',
-                                 a,
-                                 Sum([b,
-                                      Division((ops, c, d))])))
+                    d += rnd
+                a, b, c, d = force_shift_decimal(a, wishlist=[b, c, d])
+        if (not self.allow_division_by_decimal
+            and self.nb_variant.startswith('decimal')
+            and not is_integer(b + c * d)):
+            if not is_integer(b):
+                # For instance, b + c×d is 0.8 + 10×6
+                try:
+                    b, c, d = force_shift_decimal(b, wishlist=[c, d])
+                    # sys.stderr.write('\n(1) b turned to = {}'.format(b))
+                    # Now it is 8 + 10×0.6
+                except ValueError:
+                    # Bad luck, it was something like 0.8 + 50×10
+                    # (and a = 20). We have to change c or d in order to
+                    # ensure one of them at least can be turned into a
+                    # decimal
+                    rnd = random.choice([i
+                                         for i in range(-5, 6)
+                                         if i != 0])
+                    if random.choice([True, False]):
+                        c += rnd
+                    else:
+                        d += rnd
+                    b, c, d = force_shift_decimal(b, wishlist=[c, d])
+            # Now it's sure b is an integer
+            # this doesn't mean that b + c*d is
+            if not is_integer(b + c * d):
+                if ((not self.subvariant == 'only_positive')
+                    or (self.subvariant == 'only_positive'
+                        and b - c * d > 0)):
+                    b = b - c * d
+                else:
+                    x = c * d
+                    y = random.choice([n for n in range(int(b) + 1)])
+                    b = Decimal(y) + 1 - (x - int(x))
+        a = self.nb1 * (b + c * d)
+        self.obj = Division(('+', a, Sum([b, Product([c, d])])))
+        if any([n < 0 for n in [a, b, c, d]]):
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c, d]):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\n*a; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: a, b, c and d are all integers!'
+                               .format(self.variant))
+        if not is_integer(b + c * d):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: Division by a decimal!'
+                               .format(self.variant))
+
+    def create_119(self):
+        # a÷(b + c÷d)
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        # sys.stderr.write('\n\na; b; c; d = {}; {}; {}; {}'
+        #                  .format(a, b, c, d))
+        if (self.nb_variant.startswith('decimal')
+            and not is_integer(a)
+            and all(is_integer(x) for x in [b, c, d])
+            and is_integer(a * (b + c))):
+            try:
+                a, b, c = force_shift_decimal(a, wishlist=[b, c])
+                # sys.stderr.write('\n(I) a turned into = {}'.format(a))
+            except ValueError:
+                rnd = random.choice([i for i in range(-5, 6) if i != 0])
+                if random.choice([True, False]):
+                    b += rnd
+                else:
+                    c += rnd
+                a, b, c = force_shift_decimal(a, wishlist=[b, c])
+        if (not self.allow_division_by_decimal
+            and self.nb_variant.startswith('decimal')
+            and not is_integer(b + c)):
+            if not is_integer(b):
+                try:
+                    b, c = force_shift_decimal(b, wishlist=[c])
+                except ValueError:
+                    c += random.choice([i for i in range(-5, 6)])
+                    b, c = force_shift_decimal(b, wishlist=[c])
+            # Now it's sure b is an integer
+            # this doesn't mean that b + c is
+            if not is_integer(b + c):
+                if ((not self.subvariant == 'only_positive')
+                    or (self.subvariant == 'only_positive'
+                        and b - c > 0)):
+                    b = b - c
+                else:
+                    x = c
+                    y = random.choice([n for n in range(int(b) + 1)])
+                    b = Decimal(y) + 1 - (x - int(x))
+
+        a *= (b + c)
+        c *= d
+        self.obj = Division(('+', a, Sum([b, Division(('+', c, d))])))
+        if any([n < 0 for n in [a, b, c, d]]):
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c, d]):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\n*a; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: a, b, c and d are all integers!'
+                               .format(self.variant))
+        if not is_integer(b + c / d):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: Division by a decimal!'
+                               .format(self.variant))
+
+    def create_122(self):
+        # a÷(b - c×d)
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if (self.nb_variant.startswith('decimal')
+            and not is_integer(a)
+            and all(is_integer(x) for x in [b, c, d])
+            and is_integer(a * b)):
+            try:
+                a, c, d = force_shift_decimal(a, wishlist=[c, d])
+                # sys.stderr.write('\n(I) a turned into = {}'.format(a))
+            except ValueError:
+                rnd = random.choice([i for i in range(-5, 6)])
+                if random.choice([True, False]):
+                    c += rnd
+                else:
+                    d += rnd
+                a, c, d = force_shift_decimal(a, wishlist=[c, d])
+                # sys.stderr.write('\n(II) a turned into = {}'.format(a))
+        if (not self.allow_division_by_decimal
+            and self.nb_variant.startswith('decimal')
+            and not is_integer(b - c * d)):
+            if not is_integer(b):
+                try:
+                    b, c, d = force_shift_decimal(b, wishlist=[c, d])
+                    # sys.stderr.write('\n(1) b turned to = {}'.format(b))
+                except ValueError:
+                    rnd = random.choice([i for i in range(-5, 6)])
+                    if random.choice([True, False]):
+                        c += rnd
+                    else:
+                        d += rnd
+                    b, c, d = force_shift_decimal(b, wishlist=[c, d])
+                    # sys.stderr.write('\n(2) b turned to = {}'.format(b))
+        # Now it's sure b is an integer
+        # this doesn't mean that b - c*d is
+        b = b + c * d
+        # sys.stderr.write('\n(3) b turned to = {}'.format(b))
+
+        a = self.nb1 * (b - c * d)
+        self.obj = Division(('+', a, Sum([b, Product([-c, d])])))
+        # sys.stderr.write('\nFINAL a; b; c; d = {}; {}; {}; {}'
+        #                  .format(a, b, c, d))
+        if any([n < 0 for n in [a, b, c, d]]):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c, d]):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\n*a; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: a, b, c and d are all integers!'
+                               .format(self.variant))
+        if not is_integer(b - c * d):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: Division by a decimal!'
+                               .format(self.variant))
+
+    def create_123(self):
+        # a÷(b - c÷d)
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if (self.nb_variant.startswith('decimal')
+            and not is_integer(a)
+            and all(is_integer(x) for x in [b, c, d])
+            and is_integer(a * b)):
+            try:
+                a, c = force_shift_decimal(a, wishlist=[c])
+                # sys.stderr.write('\n(I) a turned into = {}'.format(a))
+            except ValueError:
+                # sys.stderr.write('\na & c = {} & {}'.format(a, c))
+                c += random.choice([i for i in range(-5, 6) if i != 0])
+                # sys.stderr.write('\nc = {}'.format(c))
+                a, c = force_shift_decimal(a, wishlist=[c])
+                # sys.stderr.write('\n(II) a turned into = {}'.format(a))
+        if (not self.allow_division_by_decimal
+            and self.nb_variant.startswith('decimal')
+            and not is_integer(b - c)):
+            if not is_integer(b):
+                try:
+                    b, c = force_shift_decimal(b, wishlist=[c])
+                    # sys.stderr.write('\n(1) b turned to = {}'.format(b))
+                except ValueError:
+                    # sys.stderr.write('\nb & c = {} & {}'.format(b, c))
+                    c += random.choice([i for i in range(-5, 6) if i != 0])
+                    # sys.stderr.write('\nc = {}'.format(c))
+                    b, c = force_shift_decimal(b, wishlist=[c])
+                    # sys.stderr.write('\n(2) b turned to = {}'.format(b))
+        a = a * b
+        b = b + c
+        c = c * d
+        self.obj = Division(('+', a, Sum([b, Division(('-', c, d))])))
+        if any([n < 0 for n in [a, b, c, d]]):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c, d]):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\n*a; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: a, b, c and d are all integers!'
+                               .format(self.variant))
+        if not is_integer(b - c / d):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: Division by a decimal!'
+                               .format(self.variant))
+
+    def create_126(self):
+        # (a×b + c)÷d
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if (self.nb_variant.startswith('decimal')
+            and is_integer(c * d)
+            and not is_integer(c)):
+            if (a * b >= c * d
+                or (a * b < c * d and self.subvariant != 'only_positive')):
+                # if a*b == c*d then it's still ok to swap them
+                # (this is in order to make the decimal visible)
+                # and if a and b are decimals to (e.g. subvariant is
+                # decimal2 or more), it doesn't hurt neither
+                a, b, c, d = c, d, a, b
+            else:
+                # subvariant is only_positive
+                # and it is not possible to swap a, b and c, d
+                # (in order to move the decimal to the product a×b)
+                try:
+                    c, a, b = force_shift_decimal(c, wishlist=[a, b])
+                except ValueError:
+                    rnd = random.choice([i for i in range(-5, 6) if i != 0])
+                    if random.choice([True, False]):
+                        a += rnd
+                    else:
+                        b += rnd
+                    c, a, b = force_shift_decimal(c, wishlist=[a, b])
+        else:
+            if (a * b > c * d and self.subvariant == 'only_positive'):
+                if (all(is_integer(x) for x in [a, b])
+                    or not is_integer(a * b)):
+                    a, b, c, d = c, d, a, b
+                else:
+                    if not is_integer(b):
+                        a, b = b, a
+                    # Now, the decimal is in a, for sure
+                    try:
+                        a, c = force_shift_decimal(a, wishlist=[c])
+                    except ValueError:
+                        c += random.choice([i + 1 for i in range(9)])
+                        a, c = force_shift_decimal(a, wishlist=[c])
+                    a, b, c, d = c, d, a, b
+        if not is_integer(d):
+            c, d = d, c
+        if a * b == c * d:
+            c = c * d
+        else:
+            c = c * d - a * b
+        self.obj = Division(('+',
+                             Sum([Product([a, b], compact_display=False), c]),
+                             d))
+        if any([n < 0 for n in [a, b, c, d]]):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: Negative number detected!'
+                               .format(self.variant))
+        if all(is_integer(n) for n in [a, b, c, d]):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\n*a; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: a, b, c and d are all integers!'
+                               .format(self.variant))
+        if not is_integer(d):
+            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
+                             .format(self.nb1, self.nb2,
+                                     self.nb3, self.nb4))
+            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
+                             .format(a, b, c, d))
+            raise RuntimeError('{}: Division by a decimal!'
+                               .format(self.variant))
+
+    def __init__(self, numbers_to_use, **options):
+        super().setup("minimal", **options)
+        super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
+                      **options)
+        super().setup("nb_variants", nb=numbers_to_use, **options)
+
+        self.adjust_numbers()
+        self.expression = None
+        self.obj = None
+
+        if self.variant in [100, 104]:
+            self.create_100_104()
+        elif self.variant in [101, 105]:
+            self.create_101_105()
+        elif self.variant in [102, 106]:
+            self.create_102_106()
+        elif self.variant in [103, 107]:
+            self.create_103_107()
+        elif self.variant in [108, 112]:
+            self.create_108_112()
+        elif self.variant in [109, 113]:
+            self.create_109_113()
+        elif self.variant in [110, 114]:
+            self.create_110_114()
+        elif self.variant in [111, 115]:
+            self.create_111_115()
+        elif self.variant in [116, 120, 124]:
+            self.create_116_120_124()
+        elif self.variant in [117, 121, 125]:
+            self.create_117_121_125()
+        elif self.variant == 118:
+            self.create_118()
+        elif self.variant == 119:
+            self.create_119()
+        elif self.variant == 122:
+            self.create_122()
+        elif self.variant == 123:
+            self.create_123()
+        elif self.variant == 126:
+            self.create_126()
 
         # 124: (a×b + c)×d          # 132: (a + b)×(c + d)
         # 125: (a÷b + c)×d          # 133: (a + b)÷(c + d)
