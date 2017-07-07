@@ -86,6 +86,7 @@ def init():
     global mainlogger
     global dbg_logger
     global daemon_logger
+    global output_watcher_logger
     global language
     global locale
     global currency
@@ -125,6 +126,7 @@ def init():
     dbg_logger = logging.getLogger("dbg")
     config_dbglogger(settingsdir)
     daemon_logger = logging.getLogger('__daemon__')
+    output_watcher_logger = logging.getLogger("__output_watcher__")
 
     CONFIG = load_config('user_config', settingsdir)
     xmllint = CONFIG["PATHS"]["XMLLINT"]

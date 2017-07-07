@@ -104,6 +104,7 @@ class structure(object):
             for i in range(len(nb_list)):
                 setattr(self, 'nb' + str(i + 1), Decimal(str(nb_list[i])))
             self.nb_nb = len(nb_list)
+            self.nb_list = nb_list
 
         elif arg == "nb_variants":
             if (self.nb_variant.startswith('decimal')

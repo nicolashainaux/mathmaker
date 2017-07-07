@@ -10,5 +10,7 @@ version: 1
 handlers:
     mainSysLogHandler:
         address: '/var/run/log'
+    outputWatcherHandler:
+        address: '/var/run/log'
     daemonSysLogHandler:
         address: '/var/run/log'

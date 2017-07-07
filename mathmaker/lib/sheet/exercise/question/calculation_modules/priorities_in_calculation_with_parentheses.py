@@ -23,7 +23,9 @@
 import random
 import sys
 from decimal import Decimal
+from string import ascii_lowercase as alphabet
 
+from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.tools.auxiliary_functions \
     import (is_integer, move_decimal, split_nb, digits_nb, force_shift_decimal)
@@ -66,6 +68,38 @@ from .. import submodule
 
 
 class sub_object(submodule.structure):
+
+    def dbg_info(self, msg, *letters):
+        figures = '123456789'
+        nb = 'nb' + '; nb'.join(figures[:len(self.nb_list)]) + " = " \
+            + '; '.join('{}' for _ in range(len(self.nb_list))) \
+            .format(*self.nb_list)
+        abcd = '; '.join(alphabet[0:len(letters)]) + " = " \
+            + '; '.join('{}' for _ in range(len(letters))) \
+            .format(*letters)
+        return ('(variant {}): \\n{} {}\\n'
+                + ''.join([' ' for _ in range(len(msg) + 1)]) + '{}') \
+            .format(self.variant, msg, nb, abcd)
+
+    def watch(self, rules, *letters):
+        for r in rules.split(sep='; '):
+            msg = ''
+            if r == 'no negative' and self.subvariant == 'only_positive':
+                if any([n < 0 for n in letters]):
+                    msg += 'Negative number detected!'
+            elif (r == 'not all integers'
+                  and self.nb_variant.startswith('decimal')):
+                if all(is_integer(n) for n in letters):
+                    msg += ', '.join(alphabet[0:len(letters) - 1]) + ' and ' \
+                        + alphabet[len(letters) - 1] + ' are all integers!'
+            elif r.endswith('isnt 1'):
+                if letters[alphabet.index(r[0])] == 1:
+                    msg += r[0] + ' == 1!'
+            elif r.endswith('isnt deci'):
+                if not is_integer(letters[alphabet.index(r[0])]):
+                    msg += r[0] + ' is decimal! (division by decimal?)'
+            if msg != '':
+                self.log(self.dbg_info(msg, *letters))
 
     def adjust_depth(self, depth, n=None, **kwargs):
         """
@@ -235,15 +269,8 @@ class sub_object(submodule.structure):
                                               n=self.nb1))
         self.obj = Product([Sum([Item(a), Item(opn * b)]),
                             Item(c)])
-        if any([n < 0 for n in [a, b, c]]):
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if c == 1:
-            raise RuntimeError('{}: c == 1!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c]):
-            raise RuntimeError('{}: a, b and c are all integers!'
-                               .format(self.variant))
+        a = b = c = 3
+        self.watch('no negative; c isnt 1; not all integers', a, b, c)
 
     def create_101_105(self):
         # (a + b)÷c     (a - b)÷c
@@ -255,15 +282,8 @@ class sub_object(submodule.structure):
                         dig=self.adjust_depth(self.allow_extra_digits,
                                               n=self.nb1))
         self.obj = Division(('+', Sum([a, opn * b]), c))
-        if any([n < 0 for n in [a, b, c]]):
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if c == 1:
-            raise RuntimeError('{}: c == 1!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c]):
-            raise RuntimeError('{}: a, b and c are all integers!'
-                               .format(self.variant))
+        self.watch('no negative; c isnt 1; c isnt deci; not all integers',
+                   a, b, c)
 
     def create_102_106(self):
         # a×(b + c)     a×(b - c)
@@ -276,36 +296,20 @@ class sub_object(submodule.structure):
         self.obj = Product([Item(a),
                             Sum([Item(b), Item(opn * c)])],
                            compact_display=False)
-        if any([n < 0 for n in [a, b, c]]):
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if a == 1:
-            raise RuntimeError('{}: a == 1!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c]):
-            raise RuntimeError('{}: a, b and c are all integers!'
-                               .format(self.variant))
+        self.watch('no negative; a isnt 1; not all integers', a, b, c)
 
     def create_103_107(self):
         # a÷(b + c)     a÷(b - c)
         ops = '+' if self.variant == 101 else '-'
         opn = 1 if self.variant == 101 else -1
-        # sys.stderr.write('\nnb1, nb2 = {}, {}'.format(self.nb1,self.nb2))
         a = self.nb1 * self.nb2
         b, c = split_nb(self.nb2, operation=ops,
                         dig=self.adjust_depth(self.allow_extra_digits,
                                               n=self.nb2, N=a))
         self.obj = Division(('+', a, Sum([b, opn * c])))
-        # sys.stderr.write('\n{} × ({} + {})'.format(a, b, c))
-        if any([n < 0 for n in [a, b, c]]):
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if a == 1:
-            raise RuntimeError('{}: a == 1!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c]):
-            raise RuntimeError('{}: a, b and c are all integers!'
-                               .format(self.variant))
+        d = b + opn * c
+        self.watch('no negative; a isnt 1; d isnt deci; not all integers',
+                   a, b, c, d)
 
     def create_108_112(self):
         # a×(b ± c)×d
@@ -320,18 +324,8 @@ class sub_object(submodule.structure):
                             Sum([Item(b), Item(opn * c)]),
                             Item(d)],
                            compact_display=False)
-        if any([n < 0 for n in [a, b, c, d]]):
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if a == 1:
-            raise RuntimeError('{}: a == 1!'
-                               .format(self.variant))
-        if d == 1:
-            raise RuntimeError('{}: d == 1!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c, d]):
-            raise RuntimeError('{}: a, b, c and d are all integers!'
-                               .format(self.variant))
+        self.watch('no negative; a isnt 1; d isnt 1; not all integers',
+                   a, b, c, d)
 
     def create_109_113(self):
         # a×(b ± c)÷d
@@ -353,18 +347,8 @@ class sub_object(submodule.structure):
                                  Product([a, Sum([b, opn * c])],
                                          compact_display=False),
                                  d))
-        if any([n < 0 for n in [a, b, c, d]]):
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if a == 1:
-            raise RuntimeError('{}: a == 1!'
-                               .format(self.variant))
-        if d == 1:
-            raise RuntimeError('{}: d == 1!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c, d]):
-            raise RuntimeError('{}: a, b, c and d are all integers!'
-                               .format(self.variant))
+        self.watch('no negative; a isnt 1; d isnt 1; d isnt deci; '
+                   'not all integers', a, b, c, d)
 
     def create_110_114(self):
         # a÷(b ± c)×d
@@ -378,21 +362,9 @@ class sub_object(submodule.structure):
         self.obj = Product([Division(('+', a, Sum([b, opn * c]))),
                             d],
                            compact_display=False)
-        if any([n < 0 for n in [a, b, c, d]]):
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if a == 1:
-            raise RuntimeError('{}: a == 1!'
-                               .format(self.variant))
-        if d == 1:
-            raise RuntimeError('{}: d == 1!'
-                               .format(self.variant))
-        if not is_integer(self.nb3):
-            raise RuntimeError('{}: self.nb3 is decimal!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c, d]):
-            raise RuntimeError('{}: a, b, c and d are all integers!'
-                               .format(self.variant))
+        e = self.nb3
+        self.watch('no negative; a isnt 1; d isnt 1; d isnt deci; '
+                   'e isnt deci; not all integers', a, b, c, d, e)
 
     def create_111_115(self):
         # a÷(b ± c)÷d
@@ -406,24 +378,9 @@ class sub_object(submodule.structure):
         self.obj = Division(('+',
                              Division(('+', a, Sum([b, opn * c]))),
                              d))
-        if any([n < 0 for n in [a, b, c, d]]):
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if a == 1:
-            raise RuntimeError('{}: a == 1!'
-                               .format(self.variant))
-        if d == 1:
-            raise RuntimeError('{}: d == 1!'
-                               .format(self.variant))
-        if not is_integer(self.nb3):
-            raise RuntimeError('{}: self.nb3 is decimal!'
-                               .format(self.variant))
-        if not is_integer(self.nb2):
-            raise RuntimeError('{}: self.nb2 is decimal!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c, d]):
-            raise RuntimeError('{}: a, b, c and d are all integers!'
-                               .format(self.variant))
+        e = self.nb2
+        self.watch('no negative; a isnt 1; d isnt 1; d isnt deci; '
+                   'e isnt deci; not all integers', a, b, c, d, e)
 
     def create_116_120_124(self):
         # a×(b ± c×d)   (a×b + c)×d
@@ -445,11 +402,7 @@ class sub_object(submodule.structure):
                                      compact_display=False),
                                      c]),
                                 d], compact_display=False)
-        if any([n < 0 for n in [a, b, c, d]]):
-            raise RuntimeError('Negative number detected!')
-        if all(is_integer(n) for n in [a, b, c, d]):
-            raise RuntimeError('{}: a, b, c and d are all integers!'
-                               .format(self.variant))
+        self.watch('no negative; not all integers', a, b, c, d)
 
     def create_117_121_125(self):
         # a×(b ± c÷d)     (a÷b + c)×d
@@ -468,34 +421,25 @@ class sub_object(submodule.structure):
                                compact_display=False)
         elif self.variant == 125:
             a, b, c, d = c, d, b, a
-            if not is_integer(b):
-                raise RuntimeError('Division by decimal (b)!')
             self.obj = Product([Sum([Division(('+', a, b)),
                                      c]),
                                 d], compact_display=False)
-        if any([n < 0 for n in [a, b, c, d]]):
-            raise RuntimeError('Negative number detected!')
-        if all(is_integer(n) for n in [a, b, c, d]):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: a, b, c and d are all integers!'
-                               .format(self.variant))
+        # a×(b ± c÷d)     (a÷b + c)×d
+        self.watch('no negative; not all integers; d isnt 1', a, b, c, d)
+        if self.variant in [117, 121]:
+            self.watch('a isnt 1; d isnt deci', a, b, c, d)
+        elif self.variant == 125:
+            self.watch('b isnt 1; b isnt deci', a, b, c, d)
 
     def create_118(self):
         # a÷(b + c×d)
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
-        # sys.stderr.write('\n\na; b; c; d = {}; {}; {}; {}'
-        #                  .format(a, b, c, d))
         if (self.nb_variant.startswith('decimal')
             and not is_integer(a)
             and all(is_integer(x) for x in [b, c, d])
             and is_integer(a * (b + c * d))):
             try:
                 a, b, c, d = force_shift_decimal(a, wishlist=[b, c, d])
-                # sys.stderr.write('\n(I) a turned into = {}'.format(a))
             except ValueError:
                 rnd = random.choice([i for i in range(-5, 6) if i != 0])
                 choice = random.choice([1, 2, 3])
@@ -513,7 +457,6 @@ class sub_object(submodule.structure):
                 # For instance, b + c×d is 0.8 + 10×6
                 try:
                     b, c, d = force_shift_decimal(b, wishlist=[c, d])
-                    # sys.stderr.write('\n(1) b turned to = {}'.format(b))
                     # Now it is 8 + 10×0.6
                 except ValueError:
                     # Bad luck, it was something like 0.8 + 50×10
@@ -541,38 +484,20 @@ class sub_object(submodule.structure):
                     b = Decimal(y) + 1 - (x - int(x))
         a = self.nb1 * (b + c * d)
         self.obj = Division(('+', a, Sum([b, Product([c, d])])))
-        if any([n < 0 for n in [a, b, c, d]]):
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c, d]):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\n*a; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: a, b, c and d are all integers!'
-                               .format(self.variant))
-        if not is_integer(b + c * d):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: Division by a decimal!'
-                               .format(self.variant))
+        # a÷(b + c×d)
+        e = b + c * d
+        self.watch('no negative; not all integers; c isnt 1; d isnt 1; '
+                   'e isnt deci', a, b, c, d, e)
 
     def create_119(self):
         # a÷(b + c÷d)
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
-        # sys.stderr.write('\n\na; b; c; d = {}; {}; {}; {}'
-        #                  .format(a, b, c, d))
         if (self.nb_variant.startswith('decimal')
             and not is_integer(a)
             and all(is_integer(x) for x in [b, c, d])
             and is_integer(a * (b + c))):
             try:
                 a, b, c = force_shift_decimal(a, wishlist=[b, c])
-                # sys.stderr.write('\n(I) a turned into = {}'.format(a))
             except ValueError:
                 rnd = random.choice([i for i in range(-5, 6) if i != 0])
                 if random.choice([True, False]):
@@ -604,25 +529,10 @@ class sub_object(submodule.structure):
         a *= (b + c)
         c *= d
         self.obj = Division(('+', a, Sum([b, Division(('+', c, d))])))
-        if any([n < 0 for n in [a, b, c, d]]):
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c, d]):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\n*a; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: a, b, c and d are all integers!'
-                               .format(self.variant))
-        if not is_integer(b + c / d):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: Division by a decimal!'
-                               .format(self.variant))
+        # a÷(b + c÷d)
+        e = b + c / d
+        self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
+                   'e isnt deci', a, b, c, d, e)
 
     def create_122(self):
         # a÷(b - c×d)
@@ -666,30 +576,10 @@ class sub_object(submodule.structure):
         self.obj = Division(('+', a, Sum([b, Product([-c, d])])))
         # sys.stderr.write('\nFINAL a; b; c; d = {}; {}; {}; {}'
         #                  .format(a, b, c, d))
-        if any([n < 0 for n in [a, b, c, d]]):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c, d]):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\n*a; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: a, b, c and d are all integers!'
-                               .format(self.variant))
-        if not is_integer(b - c * d):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: Division by a decimal!'
-                               .format(self.variant))
+        # a÷(b - c×d)
+        e = b - c * d
+        self.watch('no negative; not all integers; c isnt 1; d isnt 1; '
+                   'e isnt deci', a, b, c, d, e)
 
     def create_123(self):
         # a÷(b - c÷d)
@@ -700,54 +590,26 @@ class sub_object(submodule.structure):
             and is_integer(a * b)):
             try:
                 a, c = force_shift_decimal(a, wishlist=[c])
-                # sys.stderr.write('\n(I) a turned into = {}'.format(a))
             except ValueError:
-                # sys.stderr.write('\na & c = {} & {}'.format(a, c))
                 c += random.choice([i for i in range(-5, 6) if i != 0])
-                # sys.stderr.write('\nc = {}'.format(c))
                 a, c = force_shift_decimal(a, wishlist=[c])
-                # sys.stderr.write('\n(II) a turned into = {}'.format(a))
         if (not self.allow_division_by_decimal
             and self.nb_variant.startswith('decimal')
             and not is_integer(b - c)):
             if not is_integer(b):
                 try:
                     b, c = force_shift_decimal(b, wishlist=[c])
-                    # sys.stderr.write('\n(1) b turned to = {}'.format(b))
                 except ValueError:
-                    # sys.stderr.write('\nb & c = {} & {}'.format(b, c))
                     c += random.choice([i for i in range(-5, 6) if i != 0])
-                    # sys.stderr.write('\nc = {}'.format(c))
                     b, c = force_shift_decimal(b, wishlist=[c])
-                    # sys.stderr.write('\n(2) b turned to = {}'.format(b))
         a = a * b
         b = b + c
         c = c * d
         self.obj = Division(('+', a, Sum([b, Division(('-', c, d))])))
-        if any([n < 0 for n in [a, b, c, d]]):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c, d]):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\n*a; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: a, b, c and d are all integers!'
-                               .format(self.variant))
-        if not is_integer(b - c / d):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: Division by a decimal!'
-                               .format(self.variant))
+        # a÷(b - c÷d)
+        e = b - c / d
+        self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
+                   'e isnt deci', a, b, c, d, e)
 
     def create_126(self):
         # (a×b + c)÷d
@@ -799,36 +661,17 @@ class sub_object(submodule.structure):
         self.obj = Division(('+',
                              Sum([Product([a, b], compact_display=False), c]),
                              d))
-        if any([n < 0 for n in [a, b, c, d]]):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: Negative number detected!'
-                               .format(self.variant))
-        if all(is_integer(n) for n in [a, b, c, d]):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\n*a; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: a, b, c and d are all integers!'
-                               .format(self.variant))
-        if not is_integer(d):
-            sys.stderr.write('\n*nb1; nb2; nb3; nb4 = {}; {}; {}; {}'
-                             .format(self.nb1, self.nb2,
-                                     self.nb3, self.nb4))
-            sys.stderr.write('\na; b; c; d = {}; {}; {}; {}'
-                             .format(a, b, c, d))
-            raise RuntimeError('{}: Division by a decimal!'
-                               .format(self.variant))
+        # (a×b + c)÷d
+        self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
+                   'a isnt 1; b isnt 1', a, b, c, d)
 
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
                       **options)
         super().setup("nb_variants", nb=numbers_to_use, **options)
+
+        self.log = settings.output_watcher_logger.debug
 
         self.adjust_numbers()
         self.expression = None

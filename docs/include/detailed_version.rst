@@ -221,12 +221,10 @@ Be sure you have different versions of python installed correctly on your comput
 
 .. _logging_debugging:
 
-Loggers: main, daemon, debugging
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Loggers: main, daemon, debugging, output watcher
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 See :ref:`dev_settings` to know how to use the settings files and enable or disable logging and debugging.
-
-The two interesting loggers are ``__main__`` and ``dbg``.
 
 Main logger
 """""""""""
@@ -304,16 +302,29 @@ A summary of the conventions used to represent the different core objects (i.e. 
 
 .. image:: pics/dbg_all.png
 
+Output Watcher logger
+"""""""""""""""""""""
+This is another debugging logger. It can be used to check wether output is as expected, in order to detect bugs that do not crash mathmaker.
+Works the same way as the main logger. The log messages are sent to another facility (local4), in order to be recorded independently.
+
 System log configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Systems using ``rsyslog``
 """""""""""""""""""""""""
 
-It may be already enabled and running by default (Ubuntu) or you can install, enable and start it (in Manjaro, ``# systemctl enable rsyslog`` and ``# systemctl start rsyslog``).
+The communication with ``rsyslog`` goes through a local Unix socket (no need to load ``rsyslog`` TCP or UDP modules).
 
-Ensure ``/etc/rsyslog.conf`` contains:
+.. note::
+
+    The default socket is ``/dev/log`` for Linux systems, and ``/var/run/log`` for FreeBSD. These values are defined in the logging*.yaml settings files.
+
+``rsyslog`` may be already enabled and running by default (Ubuntu) or you can install, enable and start it (in Manjaro, ``# systemctl enable rsyslog`` and ``# systemctl start rsyslog``).
+
+Ensure ``/etc/rsyslog.conf`` contains these lines:
 ::
+
+    $ModLoad imuxsock
 
     $IncludeConfig /etc/rsyslog.d/*.conf
 
@@ -324,6 +335,7 @@ Then create (if not created yet) a 'local' configuration file, like: ``/etc/rsys
     #  Local user rules for rsyslog.
     #
     #
+    local4.*                     /var/log/mathmaker_output.log
     local5.*                     /var/log/mathmaker.log
     local6.*                     /var/log/mathmakerd.log
 
@@ -345,6 +357,7 @@ and then, modify /etc/rsyslog.d/40-local.conf like:
 
 .. code-block:: text
 
+    local4.*                        /var/log/mathmaker_output.log;MathmakerTpl
     local5.*                        /var/log/mathmaker.log;MathmakerTpl
     local6.*                        /var/log/mathmakerd.log;MathmakerTpl
 
@@ -373,6 +386,10 @@ should show something like (errorless):
     rsyslogd: End of config validation run. Bye.
 
 Once you've checked this works as expected, do not forget to configure your log rotation.
+
+.. note::
+
+    mathmaker does not support systemd journalisation (the default one in Manjaro). You may have to setup systemd too (enable ``ForwardToSyslog`` in its conf file) in order to get ``rsyslog`` recording messages. Also you may need to add ``$ModLoad imjournal`` in ``/etc/rsyslog.conf`` and to create the file ``/var/spool/rsyslog``.
 
 Documentation
 ^^^^^^^^^^^^^

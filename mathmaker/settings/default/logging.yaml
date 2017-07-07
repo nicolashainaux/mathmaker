@@ -29,6 +29,12 @@ handlers:
         formatter: rsyslogdFormatter
         address: '/dev/log'
         facility: 'local5'
+    outputWatcherHandler:
+        class: logging.handlers.SysLogHandler
+        level: DEBUG
+        formatter: rsyslogdFormatter
+        address: '/dev/log'
+        facility: 'local4'
     daemonSysLogHandler:
         class: logging.handlers.SysLogHandler
         level: INFO
@@ -58,6 +64,10 @@ loggers:
     __daemon__:
         level: WARNING
         handlers: [daemonSysLogHandler]
+    __output_watcher__:
+        # The 'INFO' level inhibits the debug messages.
+        level: INFO
+        handlers: [outputWatcherHandler]
     dbg:
         # The 'INFO' level inhibits the debug messages.
         level: INFO
@@ -65,7 +75,3 @@ loggers:
     raw:
         level: DEBUG
         handlers: [rawHandler]
-
-
-
-
