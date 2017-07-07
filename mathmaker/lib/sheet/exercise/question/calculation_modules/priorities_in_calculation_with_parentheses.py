@@ -70,6 +70,15 @@ from .. import submodule
 class sub_object(submodule.structure):
 
     def dbg_info(self, msg, *letters):
+        """
+        Create log message to record including self.nb* and a, b, c... values.
+
+        :param msg: the msg to join to the values' list
+        :type msg: str
+        :param letters: the values of the numbers a, b, c etc.
+        :type letters: numbers
+        :rtype: str
+        """
         figures = '123456789'
         nb = 'nb' + '; nb'.join(figures[:len(self.nb_list)]) + " = " \
             + '; '.join('{}' for _ in range(len(self.nb_list))) \
@@ -82,6 +91,27 @@ class sub_object(submodule.structure):
             .format(self.variant, msg, nb, abcd)
 
     def watch(self, rules, *letters):
+        """
+        Check the quality of numbers created, according to the rules.
+
+        If something is wrong, it will be logged.
+
+        Possible rules:
+        no negative: will check if there's any negative when only positive
+                     numbers were expected
+        not all integers: will check if there are only integers when one
+                          decimal number at least was expected.
+        <letter> isnt deci: check this letter does not contain a decimal
+                            under any circumstances
+        <letter> isnt 1: check this letter is different from 1
+                         under any circumstances
+
+        :param rules: a string containing rules separated by '; '. See above
+                      for possible rules
+        :type rules: str
+        :param letters: the values of the numbers a, b, c etc.
+        :type letters: numbers
+        """
         for r in rules.split(sep='; '):
             msg = ''
             if r == 'no negative' and self.subvariant == 'only_positive':
