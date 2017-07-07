@@ -102,7 +102,7 @@ class sub_object(submodule.structure):
         not all integers: will check if there are only integers when one
                           decimal number at least was expected.
         <letter> isnt deci: check this letter does not contain a decimal
-                            under any circumstances
+                            when division by a decimal is not allowed
         <letter> isnt 1: check this letter is different from 1
                          under any circumstances
 
@@ -125,9 +125,10 @@ class sub_object(submodule.structure):
             elif r.endswith('isnt 1'):
                 if letters[alphabet.index(r[0])] == 1:
                     msg += r[0] + ' == 1!'
-            elif r.endswith('isnt deci'):
+            elif (r.endswith('isnt deci')
+                  and not self.allow_division_by_decimal):
                 if not is_integer(letters[alphabet.index(r[0])]):
-                    msg += r[0] + ' is decimal! (division by decimal?)'
+                    msg += r[0] + ' is decimal! => Division by decimal!'
             if msg != '':
                 self.log(self.dbg_info(msg, *letters))
 
