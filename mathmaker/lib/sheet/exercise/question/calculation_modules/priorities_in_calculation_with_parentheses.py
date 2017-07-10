@@ -34,6 +34,10 @@ from mathmaker.lib.core.calculus import Expression
 from .. import submodule
 
 # Possible variants are identified with a number:
+# A partial symmetric of a variant is identified with a *
+# a symmetric of a variant is identified with a **
+# see 128 for instance.
+
 # 100: (a + b)×c            # 104: (a - b)×c
 # 101: (a + b)÷c            # 105: (a - b)÷c
 # 102: a×(b + c)            # 106: a×(b - c)
@@ -54,8 +58,10 @@ from .. import submodule
 # 127: (a÷b + c)÷d          # 135: (a + b)÷(c - d)
 # 128: (a×b - c)×d          # 136: (a - b)×(c + d)
 # 128*: (c - a×b)×d
+# 128**: d×(a×b - c)        128*** is 120
 # 129: (a÷b - c)×d          # 137: (a - b)÷(c + d)
 # 129*: (c - a÷b)×d
+# 129**: d×(a÷b - c)        129*** is 121
 # 130: (a×b - c)÷d          # 138: (a - b)×(c - d)
 # 131: (a÷b - c)÷d          # 139: (a - b)÷(c - d)
 
@@ -457,11 +463,12 @@ class sub_object(submodule.structure):
         self.watch('no negative; not all integers', a, b, c, d)
 
     def create_117_121_125_129(self):
-        # a×(b ± c÷d)     (a÷b ± c)×d
+        # 117, 121: a×(b ± c÷d)
+        # 125, 129, 129*: (a÷b ± c)×d   *(c ± a÷b)×d
         ops = '+' if self.variant in [117, 125] else '-'
         opn = 1 if self.variant in [117, 125] else -1
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
-        symm_129 = False
+        psymm_129 = False
         if self.variant in [117, 125]:
             if ((not self.subvariant == 'only_positive')
                 or (self.subvariant == 'only_positive' and b - c > 0)):
@@ -472,10 +479,10 @@ class sub_object(submodule.structure):
                 b = c - b
             elif self.subvariant == 'only_positive':
                 # Here we have c - b <= 0
-                symm_129 = True
+                psymm_129 = True
                 b = b + c
             if not self.subvariant == 'only_positive':
-                symm_129 = random.choice([True, False])
+                psymm_129 = random.choice([True, False])
         else:
             b = b + c
         c = c * d
@@ -485,7 +492,7 @@ class sub_object(submodule.structure):
                                compact_display=False)
         elif self.variant in [125, 129]:
             a, b, c, d = c, d, b, a
-            if symm_129:
+            if psymm_129:
                 self.obj = Product([Sum([c,
                                          Division(('-', a, b))]),
                                     d], compact_display=False)
@@ -779,14 +786,15 @@ class sub_object(submodule.structure):
                    'b isnt 1; b isnt deci', a, b, c, d)
 
     def create_128(self):
-        # (a×b - c)×d  |  (c - a×b)×d
-        symmetric = False
+        # (a×b - c)×d
+        # *(c - a×b)×d
+        psymm_128 = False
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
         if self.subvariant == 'only_positive' and a * b < c:
-            symmetric = True
+            psymm_128 = True
         elif self.subvariant != 'only_positive':
-            symmetric = random.choice([True, False])
-        if symmetric:
+            psymm_128 = random.choice([True, False])
+        if psymm_128:
             if a * b != c:
                 c = a * b + c
             self.obj = Product([Sum([c,
