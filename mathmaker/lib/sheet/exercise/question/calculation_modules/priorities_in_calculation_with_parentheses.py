@@ -745,9 +745,9 @@ class sub_object(submodule.structure):
                 b += random.choice([-1, 1])
                 if b == 1:
                     b = 3
-        if a * b > c * d:
+        if a * b > c * d and self.subvariant == 'only_positive':
             a, b, c, d = c, d, a, b
-        if c * d > a * b:
+        if c * d != a * b:
             c = c * d - a
         else:
             # Do not forget the case c * d == a * b:
