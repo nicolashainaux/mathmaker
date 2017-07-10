@@ -289,6 +289,25 @@ class sub_object(submodule.structure):
                             self.nb4, self.nb3 = \
                                 force_shift_decimal(self.nb4,
                                                     wishlist=[self.nb3])
+            if self.variant == 127:
+                rnd = random.choice([i for i in range(-5, 6) if i != 0])
+                if not is_integer(self.nb2):
+                    try:
+                        self.nb2, self.nb1, self.nb3 = force_shift_decimal(
+                            self.nb2, wishlist=[self.nb1, self.nb3])
+                    except ValueError:
+                        self.nb1 += rnd
+                        self.nb2, self.nb1 = force_shift_decimal(
+                            self.nb2, wishlist=[self.nb1])
+                if not is_integer(self.nb4):
+                    try:
+                        self.nb4, self.nb3, self.nb1 = force_shift_decimal(
+                            self.nb4, wishlist=[self.nb3, self.nb1])
+                    except ValueError:
+                        self.nb3 += rnd
+                        self.nb4, self.nb3 = force_shift_decimal(
+                            self.nb4, wishlist=[self.nb3])
+
 
     def create_100_104(self):
         # (a + b)×c    (a - b)×c
@@ -696,6 +715,50 @@ class sub_object(submodule.structure):
         self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
                    'a isnt 1; b isnt 1', a, b, c, d)
 
+    def create_127(self):
+        # (a÷b + c)÷d
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if (self.nb_variant == 'decimal1'
+            and is_integer(c * d)
+            and not is_integer(c)):
+            if not is_integer(a * b / 10):
+                try:
+                    c, a = force_shift_decimal(c, wishlist=[a])
+                except ValueError:
+                    a += random.choice([i for i in range(-5, 6) if i != 0])
+                    c, a = force_shift_decimal(c, wishlist=[a])
+            else:
+                d += random.choice([-1, 1])
+                if d == 1:
+                    d = 3
+        elif (self.nb_variant == 'decimal1'
+            and is_integer(a * b)
+            and not is_integer(a)):
+            if not is_integer(c * d / 10):
+                try:
+                    a, c = force_shift_decimal(a, wishlist=[c])
+                except ValueError:
+                    c += random.choice([i for i in range(-5, 6) if i != 0])
+                    a, c = force_shift_decimal(a, wishlist=[c])
+            else:
+                b += random.choice([-1, 1])
+                if b == 1:
+                    b = 3
+        if a * b > c * d:
+            a, b, c, d = c, d, a, b
+        if c * d > a * b:
+            c = c * d - a
+        else:
+            # Do not forget the case c * d == a * b:
+            c = c * d
+        a = a * b
+        self.obj = Division(('+',
+                             Sum([Division(('+', a, b)), c]),
+                             d))
+        # (a÷b + c)÷d
+        self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
+                   'b isnt 1; b isnt deci', a, b, c, d)
+
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
@@ -738,6 +801,8 @@ class sub_object(submodule.structure):
             self.create_123()
         elif self.variant == 126:
             self.create_126()
+        elif self.variant == 127:
+            self.create_127()
 
         # 124: (a×b + c)×d          # 132: (a + b)×(c + d)
         # 125: (a÷b + c)×d          # 133: (a + b)÷(c + d)
