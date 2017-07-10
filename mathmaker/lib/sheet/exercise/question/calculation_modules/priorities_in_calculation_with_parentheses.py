@@ -53,6 +53,7 @@ from .. import submodule
 # 126: (a×b + c)÷d          # 134: (a + b)×(c - d)
 # 127: (a÷b + c)÷d          # 135: (a + b)÷(c - d)
 # 128: (a×b - c)×d          # 136: (a - b)×(c + d)
+# 128*: (c - a×b)×d
 # 129: (a÷b - c)×d          # 137: (a - b)÷(c + d)
 # 130: (a×b - c)÷d          # 138: (a - b)×(c - d)
 # 131: (a÷b - c)÷d          # 139: (a - b)÷(c - d)
@@ -759,6 +760,30 @@ class sub_object(submodule.structure):
         self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
                    'b isnt 1; b isnt deci', a, b, c, d)
 
+    def create_128(self):
+        # (a×b - c)×d  |  (c - a×b)×d
+        symmetric = False
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if self.subvariant == 'only_positive' and a * b < c:
+            symmetric = True
+        elif self.subvariant != 'only_positive':
+            symmetric = random.choice([True, False])
+        if symmetric:
+            if a * b != c:
+                c = a * b + c
+            self.obj = Product([Sum([c,
+                                     Product([-a, b], compact_display=False)]),
+                                d],
+                               compact_display=False)
+        else:
+            if a * b != c:
+                c = a * b - c
+            self.obj = Product([Sum([Product([a, b], compact_display=False),
+                                     -c]),
+                                d],
+                               compact_display=False)
+        self.watch('no negative; not all integers', a, b, c, d)
+
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
@@ -803,11 +828,13 @@ class sub_object(submodule.structure):
             self.create_126()
         elif self.variant == 127:
             self.create_127()
+        elif self.variant == 128:
+            self.create_128()
 
-        # 124: (a×b + c)×d          # 132: (a + b)×(c + d)
-        # 125: (a÷b + c)×d          # 133: (a + b)÷(c + d)
-        # 126: (a×b + c)÷d          # 134: (a + b)×(c - d)
-        # 127: (a÷b + c)÷d          # 135: (a + b)÷(c - d)
+                                    # 132: (a + b)×(c + d)
+                                    # 133: (a + b)÷(c + d)
+                                    # 134: (a + b)×(c - d)
+                                    # 135: (a + b)÷(c - d)
         # 128: (a×b - c)×d          # 136: (a - b)×(c + d)
         # 129: (a÷b - c)×d          # 137: (a - b)÷(c + d)
         # 130: (a×b - c)÷d          # 138: (a - b)×(c - d)
