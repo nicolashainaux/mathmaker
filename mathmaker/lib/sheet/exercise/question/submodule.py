@@ -46,9 +46,9 @@ class structure(object):
         else:
             return ""
 
-    # @property
-    # def nb_list(self):
-    #     return [getattr(self, 'nb' + str(i + 1)) for i in range(self.nb_nb)]
+    @property
+    def nb_list(self):
+        return [getattr(self, 'nb' + str(i + 1)) for i in range(self.nb_nb)]
 
     def setup(self, arg, shuffle_nbs=True, sort_nbs=False, **options):
         if arg == "minimal":
@@ -104,7 +104,6 @@ class structure(object):
             for i in range(len(nb_list)):
                 setattr(self, 'nb' + str(i + 1), Decimal(str(nb_list[i])))
             self.nb_nb = len(nb_list)
-            self.nb_list = nb_list
 
         elif arg == "nb_variants":
             if (self.nb_variant.startswith('decimal')
