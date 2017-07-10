@@ -55,6 +55,7 @@ from .. import submodule
 # 128: (a×b - c)×d          # 136: (a - b)×(c + d)
 # 128*: (c - a×b)×d
 # 129: (a÷b - c)×d          # 137: (a - b)÷(c + d)
+# 129*: (c - a÷b)×d
 # 130: (a×b - c)÷d          # 138: (a - b)×(c - d)
 # 131: (a÷b - c)÷d          # 139: (a - b)÷(c - d)
 
@@ -198,7 +199,7 @@ class sub_object(submodule.structure):
             if self.variant in [111, 115]:
                 self.nb1, self.nb2, self.nb3 = \
                     move_decimal(self.nb1, numbers=[self.nb2, self.nb3])
-            if self.variant in [117, 119, 121, 123, 125]:
+            if self.variant in [117, 119, 121, 123, 125, 129]:
                 # sys.stderr.write('\nnb1; nb2; nb3; nb4 = {}; {}; {}; {}'
                 #                  .format(self.nb1, self.nb2,
                 #                          self.nb3, self.nb4))
@@ -455,14 +456,26 @@ class sub_object(submodule.structure):
                                 d], compact_display=False)
         self.watch('no negative; not all integers', a, b, c, d)
 
-    def create_117_121_125(self):
-        # a×(b ± c÷d)     (a÷b + c)×d
+    def create_117_121_125_129(self):
+        # a×(b ± c÷d)     (a÷b ± c)×d
         ops = '+' if self.variant in [117, 125] else '-'
+        opn = 1 if self.variant in [117, 125] else -1
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        symm_129 = False
         if self.variant in [117, 125]:
             if ((not self.subvariant == 'only_positive')
                 or (self.subvariant == 'only_positive' and b - c > 0)):
                 b = b - c
+        elif self.variant == 129:
+            if ((not self.subvariant == 'only_positive')
+                or (self.subvariant == 'only_positive' and c - b > 0)):
+                b = c - b
+            elif self.subvariant == 'only_positive':
+                # Here we have c - b <= 0
+                symm_129 = True
+                b = b + c
+            if not self.subvariant == 'only_positive':
+                symm_129 = random.choice([True, False])
         else:
             b = b + c
         c = c * d
@@ -470,16 +483,21 @@ class sub_object(submodule.structure):
             self.obj = Product([a,
                                 Sum([b, Division((ops, c, d))])],
                                compact_display=False)
-        elif self.variant == 125:
+        elif self.variant in [125, 129]:
             a, b, c, d = c, d, b, a
-            self.obj = Product([Sum([Division(('+', a, b)),
-                                     c]),
-                                d], compact_display=False)
+            if symm_129:
+                self.obj = Product([Sum([c,
+                                         Division(('-', a, b))]),
+                                    d], compact_display=False)
+            else:
+                self.obj = Product([Sum([Division(('+', a, b)),
+                                         opn * c]),
+                                    d], compact_display=False)
         # a×(b ± c÷d)     (a÷b + c)×d
         self.watch('no negative; not all integers; d isnt 1', a, b, c, d)
         if self.variant in [117, 121]:
             self.watch('a isnt 1; d isnt deci', a, b, c, d)
-        elif self.variant == 125:
+        elif self.variant in [125, 129]:
             self.watch('b isnt 1; b isnt deci', a, b, c, d)
 
     def create_118(self):
@@ -814,8 +832,8 @@ class sub_object(submodule.structure):
             self.create_111_115()
         elif self.variant in [116, 120, 124]:
             self.create_116_120_124()
-        elif self.variant in [117, 121, 125]:
-            self.create_117_121_125()
+        elif self.variant in [117, 121, 125, 129]:
+            self.create_117_121_125_129()
         elif self.variant == 118:
             self.create_118()
         elif self.variant == 119:
