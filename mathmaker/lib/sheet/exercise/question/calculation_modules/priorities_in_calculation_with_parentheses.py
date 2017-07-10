@@ -788,30 +788,44 @@ class sub_object(submodule.structure):
         self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
                    'b isnt 1; b isnt deci', a, b, c, d)
 
-    def create_128(self):
-        # (a×b - c)×d
-        # *(c - a×b)×d
-        psymm_128 = False
+    def create_128_130(self):
+        # 128, 128*: (a×b - c)×d   *(c - a×b)×d
+        # 130, 130*: (a×b - c)÷d   *(c - a×b)÷d
+        psymm = False
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if self.variant == 130:
+            if (self.nb_variant == 'decimal1'
+                and is_integer(c * d)
+                and not is_integer(c)):
+                # It is enough to swap a,b and c,d in all cases.
+                # If this would lead to a negative number, then it is possible
+                # to create the symmetric expression
+                a, b, c, d = c, d, a, b
+            c = c * d
         if self.subvariant == 'only_positive' and a * b < c:
-            psymm_128 = True
+            psymm = True
         elif self.subvariant != 'only_positive':
-            psymm_128 = random.choice([True, False])
-        if psymm_128:
+            psymm = random.choice([True, False])
+        if psymm:
             if a * b != c:
                 c = a * b + c
-            self.obj = Product([Sum([c,
-                                     Product([-a, b], compact_display=False)]),
-                                d],
-                               compact_display=False)
+            first_factor = Sum([c, Product([-a, b], compact_display=False)])
+            if self.variant == 128:
+                self.obj = Product([first_factor, d], compact_display=False)
+            elif self.variant == 130:
+                self.obj = Division(('+', first_factor, d))
         else:
             if a * b != c:
                 c = a * b - c
-            self.obj = Product([Sum([Product([a, b], compact_display=False),
-                                     -c]),
-                                d],
-                               compact_display=False)
-        self.watch('no negative; not all integers', a, b, c, d)
+            first_factor = Sum([Product([a, b], compact_display=False), -c])
+            if self.variant == 128:
+                self.obj = Product([first_factor, d], compact_display=False)
+            elif self.variant == 130:
+                self.obj = Division(('+', first_factor, d))
+        watch_rules = 'no negative; not all integers'
+        if self.variant == 130:
+            watch_rules += '; d isnt deci'
+        self.watch(watch_rules, a, b, c, d)
 
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
@@ -857,8 +871,8 @@ class sub_object(submodule.structure):
             self.create_126()
         elif self.variant == 127:
             self.create_127()
-        elif self.variant == 128:
-            self.create_128()
+        elif self.variant in [128, 130]:
+            self.create_128_130()
 
                                     # 132: (a + b)×(c + d)
                                     # 133: (a + b)÷(c + d)
