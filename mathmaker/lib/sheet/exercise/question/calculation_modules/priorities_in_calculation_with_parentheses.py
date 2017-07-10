@@ -465,6 +465,9 @@ class sub_object(submodule.structure):
     def create_117_121_125_129(self):
         # 117, 121: a×(b ± c÷d)
         # 125, 129, 129*: (a÷b ± c)×d   *(c ± a÷b)×d
+        # We won't deal with only integers problems because they cannot show up
+        # For instance if c÷d is 4÷5, then b being initially an integer, will
+        # become decimal after addition or subtraction of c÷d
         ops = '+' if self.variant in [117, 125] else '-'
         opn = 1 if self.variant in [117, 125] else -1
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
