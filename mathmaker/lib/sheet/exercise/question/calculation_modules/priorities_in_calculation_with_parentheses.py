@@ -866,40 +866,33 @@ class sub_object(submodule.structure):
         self.expression = None
         self.obj = None
 
-        if self.variant in [100, 104]:
-            self.create_100_104()
-        elif self.variant in [101, 105]:
-            self.create_101_105()
-        elif self.variant in [102, 106]:
-            self.create_102_106()
-        elif self.variant in [103, 107]:
-            self.create_103_107()
-        elif self.variant in [108, 112]:
-            self.create_108_112()
-        elif self.variant in [109, 113]:
-            self.create_109_113()
-        elif self.variant in [110, 114]:
-            self.create_110_114()
-        elif self.variant in [111, 115]:
-            self.create_111_115()
-        elif self.variant in [116, 120, 124]:
-            self.create_116_120_124()
-        elif self.variant in [117, 121, 125, 129]:
-            self.create_117_121_125_129()
-        elif self.variant == 118:
-            self.create_118()
-        elif self.variant == 119:
-            self.create_119()
-        elif self.variant == 122:
-            self.create_122()
-        elif self.variant == 123:
-            self.create_123()
-        elif self.variant == 126:
-            self.create_126()
-        elif self.variant in [127, 131]:
-            self.create_127_131()
-        elif self.variant in [128, 130]:
-            self.create_128_130()
+        catalog = dict.fromkeys([100, 104], self.create_100_104)
+        catalog.update(dict.fromkeys([101, 105], self.create_101_105))
+        catalog.update(dict.fromkeys([102, 106], self.create_102_106))
+        catalog.update(dict.fromkeys([103, 107], self.create_103_107))
+        catalog.update(dict.fromkeys([108, 112], self.create_108_112))
+        catalog.update(dict.fromkeys([109, 113], self.create_109_113))
+        catalog.update(dict.fromkeys([110, 114], self.create_110_114))
+        catalog.update(dict.fromkeys([111, 115], self.create_111_115))
+        catalog.update(dict.fromkeys([116, 120, 124], self.create_116_120_124))
+        catalog.update(dict.fromkeys([117, 121, 125, 129],
+                                     self.create_117_121_125_129))
+        catalog.update(dict.fromkeys([118], self.create_118))
+        catalog.update(dict.fromkeys([119], self.create_119))
+        catalog.update(dict.fromkeys([122], self.create_122))
+        catalog.update(dict.fromkeys([123], self.create_123))
+        catalog.update(dict.fromkeys([126], self.create_126))
+        catalog.update(dict.fromkeys([127, 131], self.create_127_131))
+        catalog.update(dict.fromkeys([128, 130], self.create_128_130))
+        # catalog.update(dict.fromkeys([132, 133, 134, 135, 136, 137, 138, 139],
+        #                              self.create_132to139))
+
+        try:
+            catalog[self.variant]()
+        except KeyError:
+            raise ValueError('Unknown variant identifier for priorities_in'
+                             '_calculation_without_parentheses: {}'
+                             .format(str(self.variant)))
 
                                     # 132: (a + b)×(c + d)
                                     # 133: (a + b)÷(c + d)
@@ -918,10 +911,6 @@ class sub_object(submodule.structure):
         # 145: a - b÷(c + d)        # 153: (a - b)×c - d
         # 146: a - b×(c - d)        # 154: (a - b)÷c + d
         # 147: a - b÷(c - d)        # 155: (a - b)÷c - d
-        else:
-            raise ValueError('Unknown variant identifier for priorities_in'
-                             '_calculation_without_parentheses: {}'
-                             .format(str(self.variant)))
 
         self.expression = Expression(shared.number_of_the_question,
                                      self.obj)
