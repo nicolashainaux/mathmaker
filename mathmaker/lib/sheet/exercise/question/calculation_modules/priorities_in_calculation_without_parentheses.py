@@ -213,7 +213,8 @@ class sub_object(submodule.structure):
                                             * (10 ** depth)))]) / (10 ** depth)
                 else:  # no choice but to randomly choose a new natural
                     self.nb3 = random.choice(
-                        [i + 1 for i in range(min(self.nb1, self.nb2) - 1)])
+                        [i + 1
+                         for i in range(int(min(self.nb1, self.nb2)) - 1)])
             self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
                             -self.nb3])
         elif self.variant == 8:  # a×b + c×d
