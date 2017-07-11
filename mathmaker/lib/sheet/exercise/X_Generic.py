@@ -321,7 +321,7 @@ def get_nb_sources_from_question_info(q_i):
                 and q_i.subkind in ['addi', 'subtr']
                 and nb_source == 'intpairs_2to200'):
                 # __
-                extra_kwargs.update({'nb_variant': 'decimal2'})
+                extra_kwargs.update({'suits_for_deci2': 1})
         if (nb_source.startswith('intpairs')
             and q_i.options.get('nb_variant', '').startswith('decimal1')):
             extra_kwargs.update({'suits_for_deci1': 1})
