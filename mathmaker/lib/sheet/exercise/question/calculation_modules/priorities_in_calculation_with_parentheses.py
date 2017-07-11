@@ -199,6 +199,10 @@ class sub_object(submodule.structure):
         return depth
 
     def adjust_numbers(self):
+        if (116 <= self.variant <= 131
+            and self.nb_variant.startswith('decimal')
+            and self.deci_restriction == '+-'):
+            super().setup('nb_variants', bypass=True)
         # As the pairs for products and quotients should be shuffled, but as
         # the pairs can be either (self.nb1; self.nb2) or (self.nb2; self.nb3)
         # etc. depending on the exact variant, we have to do it here.
@@ -908,7 +912,7 @@ class sub_object(submodule.structure):
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
                       **options)
-        super().setup("nb_variants", nb=numbers_to_use, **options)
+        super().setup("nb_variants", **options)
 
         self.log = settings.output_watcher_logger.debug
 

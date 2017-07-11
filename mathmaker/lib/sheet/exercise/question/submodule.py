@@ -106,8 +106,9 @@ class structure(object):
             self.nb_nb = len(nb_list)
 
         elif arg == "nb_variants":
-            if (self.nb_variant.startswith('decimal')
-                and self.deci_restriction != '+-'):
+            if ((self.nb_variant.startswith('decimal')
+                 and self.deci_restriction != '+-')
+                or options.get('bypass', False)):
                 deci_nb = int(self.nb_variant[-1])  # so, from decimal1 up to 9
                 # In order to ensure we'll have at least one decimal number,
                 # we should try to remove all multiples of 10 from our possible
