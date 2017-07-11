@@ -166,7 +166,7 @@ class sub_object(submodule.structure):
             # (a + b)×c  a×(b + c)  (a - b)×c  a×(b - c)
             if self.nb_variant == 'decimal1' and is_integer(n):
                 return depth + random.choice([0, 1])
-        elif self.variant in [101, 105]:  # (a + b)÷c
+        elif self.variant in [101, 105]:  # (a ± b)÷c
             if (not self.allow_division_by_decimal
                 and self.nb_variant == 'decimal1'
                 and is_integer(n)):
@@ -186,6 +186,17 @@ class sub_object(submodule.structure):
                 return max(depth, digits_nb(n) + 1)
             elif self.nb_variant == 'decimal1' and is_integer(n):
                 return depth + random.choice([0, 1])
+        elif 132 <= self.variant <= 139:
+            # (a±b)×(c±d) and (a±b)÷(c±d)
+            last = kwargs.get('last', False)
+            if (self.nb_variant.startswith('decimal')
+                and is_integer(n)):
+                if (n == 1 or
+                    (last
+                     and is_integer(kwargs['N']) and is_integer(kwargs['P']))):
+                    return max(depth, 1)
+                else:
+                    return depth + random.choice([0, 1])
         return depth
 
     def adjust_numbers(self):
@@ -320,7 +331,13 @@ class sub_object(submodule.structure):
                         self.nb3 += rnd
                         self.nb4, self.nb3 = force_shift_decimal(
                             self.nb4, wishlist=[self.nb3])
-
+            if self.variant in [133, 135, 137, 139]:
+                if not is_integer(self.nb2):
+                    if is_integer(self.nb1):
+                        self.nb1, self.nb2 = self.nb2, self.nb1
+                    else:
+                        self.nb2, self.nb1 = force_shift_decimal(
+                            self.nb2, wishlist=[self.nb1])
 
     def create_100_104(self):
         # (a + b)×c    (a - b)×c
@@ -854,6 +871,43 @@ class sub_object(submodule.structure):
             watch_rules += '; d isnt deci'
         self.watch(watch_rules, a, b, c, d)
 
+    def create_132to139(self):
+        ab_signs = dict.fromkeys([132, 133, 134, 135], '+')
+        ab_signs.update(dict.fromkeys([136, 137, 138, 139], '-'))
+        cd_signs = dict.fromkeys([132, 133, 136, 137], '+')
+        cd_signs.update(dict.fromkeys([134, 135, 138, 139], '-'))
+        opn_signs = {'+': 1, '-': -1}
+        if self.variant in [132, 134, 136, 138]:
+            a, b = split_nb(self.nb1, operation=ab_signs[self.variant],
+                            dig=self.adjust_depth(self.allow_extra_digits,
+                                                  n=self.nb1))
+        else:
+            a, b = split_nb(self.nb1 * self.nb2,
+                            operation=ab_signs[self.variant],
+                            dig=self.adjust_depth(self.allow_extra_digits,
+                                                  n=self.nb1 * self.nb2))
+        c, d = split_nb(self.nb2, operation=cd_signs[self.variant],
+                        dig=self.adjust_depth(self.allow_extra_digits,
+                                              n=self.nb2, last=True,
+                                              N=a, P=b))
+        nabs = opn_signs[ab_signs[self.variant]]
+        ncds = opn_signs[cd_signs[self.variant]]
+        if self.variant in [132, 134, 136, 138]:
+            self.obj = Product([Sum([a, nabs * b]),
+                                Sum([c, ncds * d])],
+                               compact_display=False)
+        else:
+            self.obj = Division(('+',
+                                 Sum([a, nabs * b]),
+                                 Sum([c, ncds * d])))
+        e = self.nb2
+        watch_rules = 'no negative; not all integers'
+        if self.variant in [133, 135, 137, 139]:
+            watch_rules += '; e isnt deci'
+        self.watch(watch_rules, a, b, c, d, e)
+
+
+
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
@@ -884,8 +938,8 @@ class sub_object(submodule.structure):
         catalog.update(dict.fromkeys([126], self.create_126))
         catalog.update(dict.fromkeys([127, 131], self.create_127_131))
         catalog.update(dict.fromkeys([128, 130], self.create_128_130))
-        # catalog.update(dict.fromkeys([132, 133, 134, 135, 136, 137, 138, 139],
-        #                              self.create_132to139))
+        catalog.update(dict.fromkeys([132, 133, 134, 135, 136, 137, 138, 139],
+                                     self.create_132to139))
 
         try:
             catalog[self.variant]()
