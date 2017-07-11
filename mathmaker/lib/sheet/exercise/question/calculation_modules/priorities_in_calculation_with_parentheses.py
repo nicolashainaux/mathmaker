@@ -348,7 +348,6 @@ class sub_object(submodule.structure):
                                               n=self.nb1))
         self.obj = Product([Sum([Item(a), Item(opn * b)]),
                             Item(c)])
-        a = b = c = 3
         self.watch('no negative; c isnt 1; not all integers', a, b, c)
 
     def _create_101_105(self):
