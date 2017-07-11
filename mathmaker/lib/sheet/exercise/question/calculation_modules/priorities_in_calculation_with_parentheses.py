@@ -56,6 +56,7 @@ from .. import submodule
 # 125: (a÷b + c)×d          # 133: (a + b)÷(c + d)
 # 126: (a×b + c)÷d          # 134: (a + b)×(c - d)
 # 127: (a÷b + c)÷d          # 135: (a + b)÷(c - d)
+# 127*: (c + a÷b)÷d
 # 128: (a×b - c)×d          # 136: (a - b)×(c + d)
 # 128*: (c - a×b)×d
 # 128**: d×(a×b - c)        128*** is 120
@@ -63,7 +64,9 @@ from .. import submodule
 # 129*: (c - a÷b)×d
 # 129**: d×(a÷b - c)        129*** is 121
 # 130: (a×b - c)÷d          # 138: (a - b)×(c - d)
+# 130*: (c - a×b)÷d
 # 131: (a÷b - c)÷d          # 139: (a - b)÷(c - d)
+# 131*: (c - a÷b)÷d
 
 # 140: a + b×(c + d)        # 148: (a + b)×c + d
 # 141: a + b÷(c + d)        # 149: (a + b)×c - d
@@ -297,7 +300,7 @@ class sub_object(submodule.structure):
                             self.nb4, self.nb3 = \
                                 force_shift_decimal(self.nb4,
                                                     wishlist=[self.nb3])
-            if self.variant == 127:
+            if self.variant in [127, 131]:
                 rnd = random.choice([i for i in range(-5, 6) if i != 0])
                 if not is_integer(self.nb2):
                     try:
@@ -744,8 +747,11 @@ class sub_object(submodule.structure):
         self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
                    'a isnt 1; b isnt 1', a, b, c, d)
 
-    def create_127(self):
+    def create_127_131(self):
         # (a÷b + c)÷d
+        # (a÷b - c)÷d    *(c - a÷b)÷d
+        ops = '+' if self.variant == 127 else '-'
+        opn = 1 if self.variant == 127 else -1
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
         if (self.nb_variant == 'decimal1'
             and is_integer(c * d)
@@ -773,17 +779,36 @@ class sub_object(submodule.structure):
                 b += random.choice([-1, 1])
                 if b == 1:
                     b = 3
-        if a * b > c * d and self.subvariant == 'only_positive':
-            a, b, c, d = c, d, a, b
-        if c * d != a * b:
-            c = c * d - a
-        else:
-            # Do not forget the case c * d == a * b:
-            c = c * d
+        psymm = False
+        if self.variant == 127:
+            if a > c * d and self.subvariant == 'only_positive':
+                a, b, c, d = c, d, a, b
+            if c * d != a:
+                c = c * d - a
+            else:
+                # Do not forget the case c * d == a:
+                c = c * d
+            psymm = random.choice([True, False])
+        elif self.variant == 131:
+            if a <= c * d and self.subvariant == 'only_positive':
+                psymm = True
+                c = c * d + a
+            else:
+                if self.subvariant != 'only_positive':
+                    psymm = random.choice([True, False])
+                if psymm:
+                    c = c * d + a
+                else:
+                    c = a - c * d
         a = a * b
-        self.obj = Division(('+',
-                             Sum([Division(('+', a, b)), c]),
-                             d))
+        if psymm:
+            self.obj = Division(('+',
+                                 Sum([c, Division((ops, a, b))]),
+                                 d))
+        else:
+            self.obj = Division(('+',
+                                 Sum([Division(('+', a, b)), opn * c]),
+                                 d))
         # (a÷b + c)÷d
         self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
                    'b isnt 1; b isnt deci', a, b, c, d)
@@ -869,8 +894,8 @@ class sub_object(submodule.structure):
             self.create_123()
         elif self.variant == 126:
             self.create_126()
-        elif self.variant == 127:
-            self.create_127()
+        elif self.variant in [127, 131]:
+            self.create_127_131()
         elif self.variant in [128, 130]:
             self.create_128_130()
 
