@@ -296,7 +296,7 @@ class sub_object(submodule.structure):
                                                               self.nb2])
                     except ValueError:
                         rnd = random.choice([i
-                                             for i in range(-5, 6)
+                                             for i in range(-4, 5)
                                              if i != 0])
                         if choice is 1:
                             self.nb1 += rnd
@@ -314,7 +314,7 @@ class sub_object(submodule.structure):
                                 force_shift_decimal(self.nb4,
                                                     wishlist=[self.nb3])
             if self.variant in [127, 131]:
-                rnd = random.choice([i for i in range(-5, 6) if i != 0])
+                rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 if not is_integer(self.nb2):
                     try:
                         self.nb2, self.nb1, self.nb3 = force_shift_decimal(
@@ -542,7 +542,7 @@ class sub_object(submodule.structure):
             try:
                 a, b, c, d = force_shift_decimal(a, wishlist=[b, c, d])
             except ValueError:
-                rnd = random.choice([i for i in range(-5, 6) if i != 0])
+                rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 choice = random.choice([1, 2, 3])
                 if choice is 1:
                     b += rnd
@@ -565,7 +565,7 @@ class sub_object(submodule.structure):
                     # ensure one of them at least can be turned into a
                     # decimal
                     rnd = random.choice([i
-                                         for i in range(-5, 6)
+                                         for i in range(-4, 5)
                                          if i != 0])
                     if random.choice([True, False]):
                         c += rnd
@@ -600,7 +600,7 @@ class sub_object(submodule.structure):
             try:
                 a, b, c = force_shift_decimal(a, wishlist=[b, c])
             except ValueError:
-                rnd = random.choice([i for i in range(-5, 6) if i != 0])
+                rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 if random.choice([True, False]):
                     b += rnd
                 else:
@@ -613,7 +613,7 @@ class sub_object(submodule.structure):
                 try:
                     b, c = force_shift_decimal(b, wishlist=[c])
                 except ValueError:
-                    c += random.choice([i for i in range(-5, 6)])
+                    c += random.choice([i for i in range(-4, 5)])
                     b, c = force_shift_decimal(b, wishlist=[c])
             # Now it's sure b is an integer
             # this doesn't mean that b + c is
@@ -646,7 +646,7 @@ class sub_object(submodule.structure):
                 a, c, d = force_shift_decimal(a, wishlist=[c, d])
                 # sys.stderr.write('\n(I) a turned into = {}'.format(a))
             except ValueError:
-                rnd = random.choice([i for i in range(-5, 6)])
+                rnd = random.choice([i for i in range(-4, 5)])
                 if random.choice([True, False]):
                     c += rnd
                 else:
@@ -661,7 +661,7 @@ class sub_object(submodule.structure):
                     b, c, d = force_shift_decimal(b, wishlist=[c, d])
                     # sys.stderr.write('\n(1) b turned to = {}'.format(b))
                 except ValueError:
-                    rnd = random.choice([i for i in range(-5, 6)])
+                    rnd = random.choice([i for i in range(-4, 5)])
                     if random.choice([True, False]):
                         c += rnd
                     else:
@@ -692,7 +692,7 @@ class sub_object(submodule.structure):
             try:
                 a, c = force_shift_decimal(a, wishlist=[c])
             except ValueError:
-                c += random.choice([i for i in range(-5, 6) if i != 0])
+                c += random.choice([i for i in range(-4, 5) if i != 0])
                 a, c = force_shift_decimal(a, wishlist=[c])
         if (not self.allow_division_by_decimal
             and self.nb_variant.startswith('decimal')
@@ -701,7 +701,7 @@ class sub_object(submodule.structure):
                 try:
                     b, c = force_shift_decimal(b, wishlist=[c])
                 except ValueError:
-                    c += random.choice([i for i in range(-5, 6) if i != 0])
+                    c += random.choice([i for i in range(-4, 5) if i != 0])
                     b, c = force_shift_decimal(b, wishlist=[c])
         a = a * b
         b = b + c
@@ -732,7 +732,7 @@ class sub_object(submodule.structure):
                 try:
                     c, a, b = force_shift_decimal(c, wishlist=[a, b])
                 except ValueError:
-                    rnd = random.choice([i for i in range(-5, 6) if i != 0])
+                    rnd = random.choice([i for i in range(-4, 5) if i != 0])
                     if random.choice([True, False]):
                         a += rnd
                     else:
@@ -779,7 +779,7 @@ class sub_object(submodule.structure):
                 try:
                     c, a = force_shift_decimal(c, wishlist=[a])
                 except ValueError:
-                    a += random.choice([i for i in range(-5, 6) if i != 0])
+                    a += random.choice([i for i in range(-4, 5) if i != 0])
                     c, a = force_shift_decimal(c, wishlist=[a])
             else:
                 d += random.choice([-1, 1])
@@ -792,7 +792,7 @@ class sub_object(submodule.structure):
                 try:
                     a, c = force_shift_decimal(a, wishlist=[c])
                 except ValueError:
-                    c += random.choice([i for i in range(-5, 6) if i != 0])
+                    c += random.choice([i for i in range(-4, 5) if i != 0])
                     a, c = force_shift_decimal(a, wishlist=[c])
             else:
                 b += random.choice([-1, 1])
