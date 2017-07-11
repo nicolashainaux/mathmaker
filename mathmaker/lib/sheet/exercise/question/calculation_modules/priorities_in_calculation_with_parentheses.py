@@ -441,8 +441,8 @@ class sub_object(submodule.structure):
                             d],
                            compact_display=False)
         e = self.nb3
-        self.watch('no negative; a isnt 1; d isnt 1; d isnt deci; '
-                   'e isnt deci; not all integers', a, b, c, d, e)
+        self.watch('no negative; a isnt 1; d isnt 1; e isnt deci; '
+                   'not all integers', a, b, c, d, e)
 
     def _create_111_115(self):
         # a÷(b ± c)÷d
