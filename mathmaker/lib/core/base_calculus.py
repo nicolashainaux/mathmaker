@@ -4539,6 +4539,7 @@ class Product(CommutativeOperation):
         # newly rebuilt Product
         result = self.clone()
         new_elt_found = False
+        unpacked = False
         for i, elt in enumerate(self._element):
             next_step = None
             if not isinstance(elt, Fraction):
@@ -4546,10 +4547,15 @@ class Product(CommutativeOperation):
             if next_step is not None:
                 result[i] = next_step
                 new_elt_found = True
+            elif isinstance(elt, CommutativeOperation) and len(elt) == 1:
+                result[i] = elt[0]
+                unpacked = True
             else:
                 result[i] = elt
         if new_elt_found:
             return result
+        elif unpacked:
+            return result.calculate_next_step(**options)
 
         # case of Products having several factors but None of them neither
         # its exponent is to be calculated
@@ -4611,7 +4617,10 @@ class Product(CommutativeOperation):
             # There are only Items:
             if nb_fractions == 0 and nb_items >= 1:
                 log.debug('Evaluating everything')
-                return Product([Item(self.evaluate(stop_recursion=True))])
+                return Item(self.evaluate(stop_recursion=True))
+                # NOTE: this Item used to be "packed" in Product([])
+                # NOTE: if something weird happens this might be the cause?
+                # NOTE: ref. tests on Products test_product_auto_calculation()
 
             # 2d
             # There is at least one Fraction & one Item (not equivalent to a

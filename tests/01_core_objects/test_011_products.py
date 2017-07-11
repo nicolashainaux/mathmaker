@@ -676,3 +676,9 @@ def test_big_product_ordered(big_product):
 def test_big_product_reduced(big_product):
     """Is this Product correctly reduced?"""
     assert big_product.reduce_().printed == wrap_nb('-8640x^{9}(x+3)^{3}')
+
+
+def test_product_auto_calculation():
+    """This is a bug check"""
+    p = Product([Sum([11, -7]), Sum([3, 5])], compact_display=False)
+    assert p.calculate_next_step().calculate_next_step() == Item(32)
