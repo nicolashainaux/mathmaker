@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import random
-import sys
 from decimal import Decimal
 from string import ascii_lowercase as alphabet
 
@@ -339,7 +338,7 @@ class sub_object(submodule.structure):
                         self.nb2, self.nb1 = force_shift_decimal(
                             self.nb2, wishlist=[self.nb1])
 
-    def create_100_104(self):
+    def _create_100_104(self):
         # (a + b)×c    (a - b)×c
         ops = '+' if self.variant == 100 else '-'
         opn = 1 if self.variant == 100 else -1
@@ -352,7 +351,7 @@ class sub_object(submodule.structure):
         a = b = c = 3
         self.watch('no negative; c isnt 1; not all integers', a, b, c)
 
-    def create_101_105(self):
+    def _create_101_105(self):
         # (a + b)÷c     (a - b)÷c
         ops = '+' if self.variant == 101 else '-'
         opn = 1 if self.variant == 101 else -1
@@ -365,7 +364,7 @@ class sub_object(submodule.structure):
         self.watch('no negative; c isnt 1; c isnt deci; not all integers',
                    a, b, c)
 
-    def create_102_106(self):
+    def _create_102_106(self):
         # a×(b + c)     a×(b - c)
         ops = '+' if self.variant == 101 else '-'
         opn = 1 if self.variant == 101 else -1
@@ -378,7 +377,7 @@ class sub_object(submodule.structure):
                            compact_display=False)
         self.watch('no negative; a isnt 1; not all integers', a, b, c)
 
-    def create_103_107(self):
+    def _create_103_107(self):
         # a÷(b + c)     a÷(b - c)
         ops = '+' if self.variant == 101 else '-'
         opn = 1 if self.variant == 101 else -1
@@ -391,7 +390,7 @@ class sub_object(submodule.structure):
         self.watch('no negative; a isnt 1; d isnt deci; not all integers',
                    a, b, c, d)
 
-    def create_108_112(self):
+    def _create_108_112(self):
         # a×(b ± c)×d
         ops = '+' if self.variant == 108 else '-'
         opn = 1 if self.variant == 108 else -1
@@ -407,7 +406,7 @@ class sub_object(submodule.structure):
         self.watch('no negative; a isnt 1; d isnt 1; not all integers',
                    a, b, c, d)
 
-    def create_109_113(self):
+    def _create_109_113(self):
         # a×(b ± c)÷d
         ops = '+' if self.variant == 109 else '-'
         opn = 1 if self.variant == 109 else -1
@@ -430,7 +429,7 @@ class sub_object(submodule.structure):
         self.watch('no negative; a isnt 1; d isnt 1; d isnt deci; '
                    'not all integers', a, b, c, d)
 
-    def create_110_114(self):
+    def _create_110_114(self):
         # a÷(b ± c)×d
         ops = '+' if self.variant == 110 else '-'
         opn = 1 if self.variant == 110 else -1
@@ -446,7 +445,7 @@ class sub_object(submodule.structure):
         self.watch('no negative; a isnt 1; d isnt 1; d isnt deci; '
                    'e isnt deci; not all integers', a, b, c, d, e)
 
-    def create_111_115(self):
+    def _create_111_115(self):
         # a÷(b ± c)÷d
         ops = '+' if self.variant == 111 else '-'
         opn = 1 if self.variant == 111 else -1
@@ -462,7 +461,7 @@ class sub_object(submodule.structure):
         self.watch('no negative; a isnt 1; d isnt 1; d isnt deci; '
                    'e isnt deci; not all integers', a, b, c, d, e)
 
-    def create_116_120_124(self):
+    def _create_116_120_124(self):
         # a×(b ± c×d)   (a×b + c)×d
         opn = 1 if self.variant in [116, 124] else -1
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
@@ -484,7 +483,7 @@ class sub_object(submodule.structure):
                                 d], compact_display=False)
         self.watch('no negative; not all integers', a, b, c, d)
 
-    def create_117_121_125_129(self):
+    def _create_117_121_125_129(self):
         # 117, 121: a×(b ± c÷d)
         # 125, 129, 129*: (a÷b ± c)×d   *(c ± a÷b)×d
         # We won't deal with only integers problems because they cannot show up
@@ -532,7 +531,7 @@ class sub_object(submodule.structure):
         elif self.variant in [125, 129]:
             self.watch('b isnt 1; b isnt deci', a, b, c, d)
 
-    def create_118(self):
+    def _create_118(self):
         # a÷(b + c×d)
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
         if (self.nb_variant.startswith('decimal')
@@ -590,7 +589,7 @@ class sub_object(submodule.structure):
         self.watch('no negative; not all integers; c isnt 1; d isnt 1; '
                    'e isnt deci', a, b, c, d, e)
 
-    def create_119(self):
+    def _create_119(self):
         # a÷(b + c÷d)
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
         if (self.nb_variant.startswith('decimal')
@@ -635,7 +634,7 @@ class sub_object(submodule.structure):
         self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
                    'e isnt deci', a, b, c, d, e)
 
-    def create_122(self):
+    def _create_122(self):
         # a÷(b - c×d)
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
         if (self.nb_variant.startswith('decimal')
@@ -682,7 +681,7 @@ class sub_object(submodule.structure):
         self.watch('no negative; not all integers; c isnt 1; d isnt 1; '
                    'e isnt deci', a, b, c, d, e)
 
-    def create_123(self):
+    def _create_123(self):
         # a÷(b - c÷d)
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
         if (self.nb_variant.startswith('decimal')
@@ -712,7 +711,7 @@ class sub_object(submodule.structure):
         self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
                    'e isnt deci', a, b, c, d, e)
 
-    def create_126(self):
+    def _create_126(self):
         # (a×b + c)÷d
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
         if (self.nb_variant.startswith('decimal')
@@ -766,7 +765,7 @@ class sub_object(submodule.structure):
         self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
                    'a isnt 1; b isnt 1', a, b, c, d)
 
-    def create_127_131(self):
+    def _create_127_131(self):
         # (a÷b + c)÷d
         # (a÷b - c)÷d    *(c - a÷b)÷d
         ops = '+' if self.variant == 127 else '-'
@@ -786,8 +785,8 @@ class sub_object(submodule.structure):
                 if d == 1:
                     d = 3
         elif (self.nb_variant == 'decimal1'
-            and is_integer(a * b)
-            and not is_integer(a)):
+              and is_integer(a * b)
+              and not is_integer(a)):
             if not is_integer(c * d / 10):
                 try:
                     a, c = force_shift_decimal(a, wishlist=[c])
@@ -832,7 +831,7 @@ class sub_object(submodule.structure):
         self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
                    'b isnt 1; b isnt deci', a, b, c, d)
 
-    def create_128_130(self):
+    def _create_128_130(self):
         # 128, 128*: (a×b - c)×d   *(c - a×b)×d
         # 130, 130*: (a×b - c)÷d   *(c - a×b)÷d
         psymm = False
@@ -871,7 +870,7 @@ class sub_object(submodule.structure):
             watch_rules += '; d isnt deci'
         self.watch(watch_rules, a, b, c, d)
 
-    def create_132to139(self):
+    def _create_132to139(self):
         ab_signs = dict.fromkeys([132, 133, 134, 135], '+')
         ab_signs.update(dict.fromkeys([136, 137, 138, 139], '-'))
         cd_signs = dict.fromkeys([132, 133, 136, 137], '+')
@@ -906,8 +905,6 @@ class sub_object(submodule.structure):
             watch_rules += '; e isnt deci'
         self.watch(watch_rules, a, b, c, d, e)
 
-
-
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
@@ -920,26 +917,27 @@ class sub_object(submodule.structure):
         self.expression = None
         self.obj = None
 
-        catalog = dict.fromkeys([100, 104], self.create_100_104)
-        catalog.update(dict.fromkeys([101, 105], self.create_101_105))
-        catalog.update(dict.fromkeys([102, 106], self.create_102_106))
-        catalog.update(dict.fromkeys([103, 107], self.create_103_107))
-        catalog.update(dict.fromkeys([108, 112], self.create_108_112))
-        catalog.update(dict.fromkeys([109, 113], self.create_109_113))
-        catalog.update(dict.fromkeys([110, 114], self.create_110_114))
-        catalog.update(dict.fromkeys([111, 115], self.create_111_115))
-        catalog.update(dict.fromkeys([116, 120, 124], self.create_116_120_124))
+        catalog = dict.fromkeys([100, 104], self._create_100_104)
+        catalog.update(dict.fromkeys([101, 105], self._create_101_105))
+        catalog.update(dict.fromkeys([102, 106], self._create_102_106))
+        catalog.update(dict.fromkeys([103, 107], self._create_103_107))
+        catalog.update(dict.fromkeys([108, 112], self._create_108_112))
+        catalog.update(dict.fromkeys([109, 113], self._create_109_113))
+        catalog.update(dict.fromkeys([110, 114], self._create_110_114))
+        catalog.update(dict.fromkeys([111, 115], self._create_111_115))
+        catalog.update(dict.fromkeys([116, 120, 124],
+                                     self._create_116_120_124))
         catalog.update(dict.fromkeys([117, 121, 125, 129],
-                                     self.create_117_121_125_129))
-        catalog.update(dict.fromkeys([118], self.create_118))
-        catalog.update(dict.fromkeys([119], self.create_119))
-        catalog.update(dict.fromkeys([122], self.create_122))
-        catalog.update(dict.fromkeys([123], self.create_123))
-        catalog.update(dict.fromkeys([126], self.create_126))
-        catalog.update(dict.fromkeys([127, 131], self.create_127_131))
-        catalog.update(dict.fromkeys([128, 130], self.create_128_130))
+                                     self._create_117_121_125_129))
+        catalog.update(dict.fromkeys([118], self._create_118))
+        catalog.update(dict.fromkeys([119], self._create_119))
+        catalog.update(dict.fromkeys([122], self._create_122))
+        catalog.update(dict.fromkeys([123], self._create_123))
+        catalog.update(dict.fromkeys([126], self._create_126))
+        catalog.update(dict.fromkeys([127, 131], self._create_127_131))
+        catalog.update(dict.fromkeys([128, 130], self._create_128_130))
         catalog.update(dict.fromkeys([132, 133, 134, 135, 136, 137, 138, 139],
-                                     self.create_132to139))
+                                     self._create_132to139))
 
         try:
             catalog[self.variant]()
@@ -948,14 +946,14 @@ class sub_object(submodule.structure):
                              '_calculation_without_parentheses: {}'
                              .format(str(self.variant)))
 
-                                    # 132: (a + b)×(c + d)
-                                    # 133: (a + b)÷(c + d)
-                                    # 134: (a + b)×(c - d)
-                                    # 135: (a + b)÷(c - d)
-        # 128: (a×b - c)×d          # 136: (a - b)×(c + d)
-        # 129: (a÷b - c)×d          # 137: (a - b)÷(c + d)
-        # 130: (a×b - c)÷d          # 138: (a - b)×(c - d)
-        # 131: (a÷b - c)÷d          # 139: (a - b)÷(c - d)
+        # 132: (a + b)×(c + d)
+        # 133: (a + b)÷(c + d)
+        # 134: (a + b)×(c - d)
+        # 135: (a + b)÷(c - d)
+        # 136: (a - b)×(c + d)
+        # 137: (a - b)÷(c + d)
+        # 138: (a - b)×(c - d)
+        # 139: (a - b)÷(c - d)
 
         # 140: a + b×(c + d)        # 148: (a + b)×c + d
         # 141: a + b÷(c + d)        # 149: (a + b)×c - d
