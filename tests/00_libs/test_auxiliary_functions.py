@@ -183,3 +183,5 @@ def test_split_nb():
     assert all([digits_nb(r) == 2 for r in result])
     result = split_nb(-7)
     assert all(-6 <= r <= -1 for r in result)
+    result = split_nb(Decimal('4.3'), dig=1)
+    assert all([digits_nb(r) == 2 for r in result])
