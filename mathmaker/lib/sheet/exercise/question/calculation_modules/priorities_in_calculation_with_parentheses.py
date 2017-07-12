@@ -159,7 +159,10 @@ class sub_object(submodule.structure):
         :rtype: int
         """
         # mad stands for maximum added depth
-        mad = int(self.nb_variant[-1]) - digits_nb(n)
+        if self.nb_variant.startswith('decimal'):
+            mad = int(self.nb_variant[-1]) - digits_nb(n)
+        else:
+            mad = 0
         mad = mad if mad > 0 else 0
         if (self.nb_variant.startswith('decimal')
             and self.deci_restriction == '+-'):
@@ -196,9 +199,11 @@ class sub_object(submodule.structure):
                 if (n == 1 or
                     (last
                      and is_integer(kwargs['N']) and is_integer(kwargs['P']))):
-                    return max(depth, 1)
+                    return max(depth, int(self.nb_variant[-1]))
                 else:
-                    return depth + random.choice([0, 1])
+                    return depth + random.choice([i for i in range(mad + 1)])
+            else:
+                return depth + random.choice([i for i in range(mad + 1)])
         elif 140 <= self.variant <= 147:
             # a ± b×(c ± d) and a ± b÷(c ± d)
             if (self.nb_variant.startswith('decimal')
