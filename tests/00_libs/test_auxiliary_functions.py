@@ -25,7 +25,7 @@ from decimal import Decimal
 
 from mathmaker.lib.tools.auxiliary_functions import \
     (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
-     move_decimal, split_nb, is_power_of_10, digits_nb, force_shift_decimal)
+     move_digits_to, split_nb, is_power_of_10, digits_nb, remove_digits_from)
 
 
 def test_check_unique_letters_words():
@@ -94,38 +94,38 @@ def test_is_natural():
         is_natural('-1.0')
 
 
-def test_move_decimal():
-    """Check move_decimal() in different cases."""
+def test_move_digits_to():
+    """Check move_digits_to() in different cases."""
     with pytest.raises(TypeError):
-        move_decimal(14)
+        move_digits_to(14)
     with pytest.raises(TypeError):
-        move_decimal(14, (7, 5))
+        move_digits_to(14, (7, 5))
     with pytest.raises(TypeError):
-        move_decimal(14, {7: 'a', 6: 'b'})
+        move_digits_to(14, {7: 'a', 6: 'b'})
     with pytest.raises(TypeError):
-        move_decimal(14, [7, '5'])
+        move_digits_to(14, [7, '5'])
     with pytest.raises(TypeError):
-        move_decimal('14', [7, 5])
-    assert move_decimal(14, [7, 5]) == [14, 7, 5]
-    assert move_decimal(14, [Decimal('0.7'), 5]) \
+        move_digits_to('14', [7, 5])
+    assert move_digits_to(14, [7, 5]) == [14, 7, 5]
+    assert move_digits_to(14, [Decimal('0.7'), 5]) \
         == [Decimal('1.4'), Decimal(7), 5]
-    assert move_decimal(14, [Decimal('0.7'), Decimal('0.5')]) \
+    assert move_digits_to(14, [Decimal('0.7'), Decimal('0.5')]) \
         == [Decimal('0.14'), Decimal(7), Decimal(5)]
 
 
-def test_force_shift_decimal():
-    """Check force_shift_decimal() in different cases."""
+def test_remove_digits_from():
+    """Check remove_digits_from() in different cases."""
     with pytest.raises(TypeError):
-        force_shift_decimal('14', wishlist=[])
+        remove_digits_from('14', to=[])
     with pytest.raises(TypeError):
-        force_shift_decimal(14)
+        remove_digits_from(14)
     with pytest.raises(TypeError):
-        force_shift_decimal(1.4)
+        remove_digits_from(1.4)
     with pytest.raises(ValueError):
-        force_shift_decimal(Decimal('1.4'), wishlist=[])
+        remove_digits_from(Decimal('1.4'), to=[])
     with pytest.raises(ValueError):
-        force_shift_decimal(Decimal('1.4'), wishlist=[10, 20, 30])
-    assert force_shift_decimal(Decimal('1.4'), wishlist=[10, 20, 36]) ==\
+        remove_digits_from(Decimal('1.4'), to=[10, 20, 30])
+    assert remove_digits_from(Decimal('1.4'), to=[10, 20, 36]) ==\
         [Decimal('14'), 10, 20, Decimal('3.6')]
 
 

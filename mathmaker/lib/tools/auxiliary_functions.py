@@ -128,9 +128,9 @@ def is_power_of_10(n):
         return False
 
 
-def move_decimal(N, numbers=None):
+def move_digits_to(N, from_nb=None):
     """
-    Turn N into decimal instead of all decimal numbers found in the list.
+    Turn N into decimal instead of all decimals found in the from_nb list.
 
     Each decimal found in the numbers' list will be recursively replaced by
     10 times itself (until it is no decimal anymore) while in the same time
@@ -140,57 +140,57 @@ def move_decimal(N, numbers=None):
 
     :param N: the number who will be divided by 10 instead of the others
     :type N: any number (int, Decimal, float though they're not advised)
-    :param numbers: an iterable containing the numbers that must be integers
-    :type numbers: a list (of numbers)
+    :param from_nb: an iterable containing the numbers that must be integers
+    :type from_nb: a list (of numbers)
     :rtype: a list (of numbers)
     """
-    if type(numbers) is not list:
+    if type(from_nb) is not list:
         raise TypeError('A list of numbers must be given as argument '
                         '\'numbers\'.')
     if not is_number(N):
         raise TypeError('The first argument must be a number.')
     N = Decimal(str(N))
-    if all([is_integer(n) for n in numbers]):
-        return [N, ] + [n for n in numbers]
-    numbers_copy = copy.deepcopy(numbers)
-    for i, n in enumerate(numbers):
+    if all([is_integer(n) for n in from_nb]):
+        return [N, ] + [n for n in from_nb]
+    numbers_copy = copy.deepcopy(from_nb)
+    for i, n in enumerate(from_nb):
         if not is_number(n):
             raise TypeError('Each variable of the list must be a number.')
         if not is_integer(n):
             numbers_copy[i] = n * 10
-            return move_decimal(N / 10, numbers=numbers_copy)
-    return [N, ] + [n for n in numbers]
+            return move_digits_to(N / 10, from_nb=numbers_copy)
+    return [N, ] + [n for n in from_nb]
 
 
-def force_shift_decimal(number, wishlist=None):
+def remove_digits_from(number, to=None):
     """
-    Turn a number of the wishlist into a decimal, instead of number.
+    Turn a number of the to list into a decimal, instead of number.
 
     In some cases this is not possible (for instance when all numbers of the
-    wishlist are multiples of 10), then a ValueError is raised.
+    to list are multiples of 10), then a ValueError is raised.
 
     :param number: the number that must be turned into integer
     :type number: decimal.Decimal
-    :param wishlist: the list of numbers where to find an integer that must be
-                     turned into a decimal
-    :type wishlist: list
+    :param to: the list of numbers where to find an integer that must be
+               turned into a decimal
+    :type to: list
     :rtype: a list (of numbers)
     """
     if type(number) is not Decimal:
         raise TypeError('The first argument must be a Decimal number.')
     if is_integer(number):
         raise TypeError('The first argument must be a decimal number.')
-    if type(wishlist) is not list:
-        raise TypeError('Argument wishlist: must be a list.')
+    if type(to) is not list:
+        raise TypeError('Argument to: must be a list.')
     n = Decimal(digits_nb(number))
     try:
-        i = wishlist.index(next(x for x in wishlist
-                                if not is_integer(x / 10 ** n)))
+        i = to.index(next(x for x in to
+                          if not is_integer(x / 10 ** n)))
     except StopIteration:
-        raise ValueError('None of the numbers of wishlist can be turned into '
+        raise ValueError('None of the numbers of to can be turned into '
                          'decimal.')
-    wishlist[i] = wishlist[i] / 10 ** n
-    return [number * 10 ** n, ] + [x for x in wishlist]
+    to[i] = to[i] / 10 ** n
+    return [number * 10 ** n, ] + [x for x in to]
 
 
 def split_nb(n, operation='sum', dig=0):

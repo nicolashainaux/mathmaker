@@ -27,7 +27,8 @@ from string import ascii_lowercase as alphabet
 from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.tools.auxiliary_functions \
-    import (is_integer, move_decimal, split_nb, digits_nb, force_shift_decimal)
+    import (is_integer, move_digits_to, split_nb, digits_nb,
+            remove_digits_from)
 from mathmaker.lib.core.base_calculus import Item, Sum, Product, Division
 from mathmaker.lib.core.calculus import Expression
 from .. import submodule
@@ -247,14 +248,14 @@ class sub_object(submodule.structure):
                     if self.variant == 'decimal1':
                         self.nb1, self.nb2 = self.nb2, self.nb1
                     else:
-                        self.nb1, self.nb2 = move_decimal(self.nb1,
-                                                          numbers=[self.nb2, ])
+                        self.nb1, self.nb2 = move_digits_to(self.nb1,
+                                                            from_nb=[self.nb2])
             if self.variant in [109, 110, 113, 114]:
                 if not is_integer(self.nb3):
                     self.nb2, self.nb3 = self.nb3, self.nb2
             if self.variant in [111, 115]:
                 self.nb1, self.nb2, self.nb3 = \
-                    move_decimal(self.nb1, numbers=[self.nb2, self.nb3])
+                    move_digits_to(self.nb1, from_nb=[self.nb2, self.nb3])
             if self.variant in [117, 119, 121, 123, 125, 129]:
                 # sys.stderr.write('\nnb1; nb2; nb3; nb4 = {}; {}; {}; {}'
                 #                  .format(self.nb1, self.nb2,
@@ -262,35 +263,33 @@ class sub_object(submodule.structure):
                 if not is_integer(self.nb4):
                     try:
                         self.nb4, self.nb3, self.nb1 = \
-                            force_shift_decimal(self.nb4, wishlist=[self.nb3,
-                                                                    self.nb1])
+                            remove_digits_from(self.nb4, to=[self.nb3,
+                                                             self.nb1])
                     except ValueError:
                         # Impossible case. We give up, there won't be a
                         # decimal :-/
                         self.nb2, self.nb4 = \
-                            move_decimal(self.nb2, numbers=[self.nb4, ])
+                            move_digits_to(self.nb2, from_nb=[self.nb4, ])
             if self.variant == 122:
                 if not is_integer(self.nb2):
                     try:
                         if random.choice([True, False]):
                             self.nb2, self.nb3, self.nb4 = \
-                                force_shift_decimal(self.nb2,
-                                                    wishlist=[self.nb3,
-                                                              self.nb4])
+                                remove_digits_from(self.nb2,
+                                                   to=[self.nb3, self.nb4])
                         else:
                             self.nb2, self.nb4, self.nb3 = \
-                                force_shift_decimal(self.nb2,
-                                                    wishlist=[self.nb4,
-                                                              self.nb3])
+                                remove_digits_from(self.nb2,
+                                                   to=[self.nb4, self.nb3])
                     except ValueError:
                         # Impossible case. We give up, there won't be a
                         # decimal :-/
                         if random.choice([True, False]):
                             self.nb4, self.nb2 = \
-                                move_decimal(self.nb4, numbers=[self.nb2, ])
+                                move_digits_to(self.nb4, from_nb=[self.nb2, ])
                         else:
                             self.nb3, self.nb2 = \
-                                move_decimal(self.nb4, numbers=[self.nb3, ])
+                                move_digits_to(self.nb4, from_nb=[self.nb3, ])
 
             # Processing for variant 118 is specific to 118, so it's not
             # factorized here with others.
@@ -298,11 +297,11 @@ class sub_object(submodule.structure):
             if self.variant == 119:
                 if not is_integer(self.nb2) and is_integer(self.nb3):
                     if self.nb3 % 10 == 0 or random.choice([True, False]):
-                        self.nb1, self.nb2 = move_decimal(self.nb1,
-                                                          numbers=[self.nb2, ])
+                        self.nb1, self.nb2 = move_digits_to(self.nb1,
+                                                            from_nb=[self.nb2])
                     else:
-                        self.nb3, self.nb2 = move_decimal(self.nb3,
-                                                          numbers=[self.nb2, ])
+                        self.nb3, self.nb2 = move_digits_to(self.nb3,
+                                                            from_nb=[self.nb2])
                 if is_integer(self.nb2) and not is_integer(self.nb3):
                     self.nb2 += int(self.nb2 + self.nb3 + 1) \
                         - (self.nb2 + self.nb3)
@@ -312,22 +311,19 @@ class sub_object(submodule.structure):
                     try:
                         if choice is 1:
                             self.nb4, self.nb1, self.nb2, self.nb3 = \
-                                force_shift_decimal(self.nb4,
-                                                    wishlist=[self.nb1,
-                                                              self.nb2,
-                                                              self.nb3])
+                                remove_digits_from(self.nb4,
+                                                   to=[self.nb1, self.nb2,
+                                                       self.nb3])
                         elif choice is 2:
                             self.nb4, self.nb2, self.nb3, self.nb1 = \
-                                force_shift_decimal(self.nb4,
-                                                    wishlist=[self.nb2,
-                                                              self.nb3,
-                                                              self.nb1])
+                                remove_digits_from(self.nb4,
+                                                   to=[self.nb2, self.nb3,
+                                                       self.nb1])
                         elif choice is 3:
                             self.nb4, self.nb3, self.nb1, self.nb2 = \
-                                force_shift_decimal(self.nb4,
-                                                    wishlist=[self.nb3,
-                                                              self.nb1,
-                                                              self.nb2])
+                                remove_digits_from(self.nb4,
+                                                   to=[self.nb3, self.nb1,
+                                                       self.nb2])
                     except ValueError:
                         rnd = random.choice([i
                                              for i in range(-4, 5)
@@ -335,50 +331,47 @@ class sub_object(submodule.structure):
                         if choice is 1:
                             self.nb1 += rnd
                             self.nb4, self.nb1 = \
-                                force_shift_decimal(self.nb4,
-                                                    wishlist=[self.nb1])
+                                remove_digits_from(self.nb4, to=[self.nb1])
                         elif choice is 2:
                             self.nb2 += rnd
                             self.nb4, self.nb2 = \
-                                force_shift_decimal(self.nb4,
-                                                    wishlist=[self.nb2])
+                                remove_digits_from(self.nb4, to=[self.nb2])
                         elif choice is 3:
                             self.nb3 += rnd
                             self.nb4, self.nb3 = \
-                                force_shift_decimal(self.nb4,
-                                                    wishlist=[self.nb3])
+                                remove_digits_from(self.nb4, to=[self.nb3])
             if self.variant in [127, 131]:
                 rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 if not is_integer(self.nb2):
                     try:
-                        self.nb2, self.nb1, self.nb3 = force_shift_decimal(
-                            self.nb2, wishlist=[self.nb1, self.nb3])
+                        self.nb2, self.nb1, self.nb3 = remove_digits_from(
+                            self.nb2, to=[self.nb1, self.nb3])
                     except ValueError:
                         self.nb1 += rnd
-                        self.nb2, self.nb1 = force_shift_decimal(
-                            self.nb2, wishlist=[self.nb1])
+                        self.nb2, self.nb1 = remove_digits_from(
+                            self.nb2, to=[self.nb1])
                 if not is_integer(self.nb4):
                     try:
-                        self.nb4, self.nb3, self.nb1 = force_shift_decimal(
-                            self.nb4, wishlist=[self.nb3, self.nb1])
+                        self.nb4, self.nb3, self.nb1 = remove_digits_from(
+                            self.nb4, to=[self.nb3, self.nb1])
                     except ValueError:
                         self.nb3 += rnd
-                        self.nb4, self.nb3 = force_shift_decimal(
-                            self.nb4, wishlist=[self.nb3])
+                        self.nb4, self.nb3 = remove_digits_from(
+                            self.nb4, to=[self.nb3])
             if self.variant in [133, 135, 137, 139]:
                 if not is_integer(self.nb2):
                     if is_integer(self.nb1):
                         self.nb1, self.nb2 = self.nb2, self.nb1
                     else:
-                        self.nb2, self.nb1 = force_shift_decimal(
-                            self.nb2, wishlist=[self.nb1])
+                        self.nb2, self.nb1 = remove_digits_from(
+                            self.nb2, to=[self.nb1])
             if self.variant in [141, 143, 145, 147]:
                 if not is_integer(self.nb3):
                     if is_integer(self.nb2):
                         self.nb2, self.nb3 = self.nb3, self.nb2
                     else:
-                        self.nb3, self.nb1, self.nb2 = force_shift_decimal(
-                            self.nb3, wishlist=[self.nb1, self.nb2])
+                        self.nb3, self.nb1, self.nb2 = remove_digits_from(
+                            self.nb3, to=[self.nb1, self.nb2])
 
     def _create_100_104(self):
         # (a + b)×c    (a - b)×c
@@ -580,7 +573,7 @@ class sub_object(submodule.structure):
             and all(is_integer(x) for x in [b, c, d])
             and is_integer(a * (b + c * d))):
             try:
-                a, b, c, d = force_shift_decimal(a, wishlist=[b, c, d])
+                a, b, c, d = remove_digits_from(a, to=[b, c, d])
             except ValueError:
                 rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 choice = random.choice([1, 2, 3])
@@ -590,14 +583,14 @@ class sub_object(submodule.structure):
                     c += rnd
                 else:
                     d += rnd
-                a, b, c, d = force_shift_decimal(a, wishlist=[b, c, d])
+                a, b, c, d = remove_digits_from(a, to=[b, c, d])
         if (not self.allow_division_by_decimal
             and self.nb_variant.startswith('decimal')
             and not is_integer(b + c * d)):
             if not is_integer(b):
                 # For instance, b + c×d is 0.8 + 10×6
                 try:
-                    b, c, d = force_shift_decimal(b, wishlist=[c, d])
+                    b, c, d = remove_digits_from(b, to=[c, d])
                     # Now it is 8 + 10×0.6
                 except ValueError:
                     # Bad luck, it was something like 0.8 + 50×10
@@ -611,7 +604,7 @@ class sub_object(submodule.structure):
                         c += rnd
                     else:
                         d += rnd
-                    b, c, d = force_shift_decimal(b, wishlist=[c, d])
+                    b, c, d = remove_digits_from(b, to=[c, d])
             # Now it's sure b is an integer
             # this doesn't mean that b + c*d is
             if not is_integer(b + c * d):
@@ -638,23 +631,23 @@ class sub_object(submodule.structure):
             and all(is_integer(x) for x in [b, c, d])
             and is_integer(a * (b + c))):
             try:
-                a, b, c = force_shift_decimal(a, wishlist=[b, c])
+                a, b, c = remove_digits_from(a, to=[b, c])
             except ValueError:
                 rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 if random.choice([True, False]):
                     b += rnd
                 else:
                     c += rnd
-                a, b, c = force_shift_decimal(a, wishlist=[b, c])
+                a, b, c = remove_digits_from(a, to=[b, c])
         if (not self.allow_division_by_decimal
             and self.nb_variant.startswith('decimal')
             and not is_integer(b + c)):
             if not is_integer(b):
                 try:
-                    b, c = force_shift_decimal(b, wishlist=[c])
+                    b, c = remove_digits_from(b, to=[c])
                 except ValueError:
                     c += random.choice([i for i in range(-4, 5)])
-                    b, c = force_shift_decimal(b, wishlist=[c])
+                    b, c = remove_digits_from(b, to=[c])
             # Now it's sure b is an integer
             # this doesn't mean that b + c is
             if not is_integer(b + c):
@@ -683,7 +676,7 @@ class sub_object(submodule.structure):
             and all(is_integer(x) for x in [b, c, d])
             and is_integer(a * b)):
             try:
-                a, c, d = force_shift_decimal(a, wishlist=[c, d])
+                a, c, d = remove_digits_from(a, to=[c, d])
                 # sys.stderr.write('\n(I) a turned into = {}'.format(a))
             except ValueError:
                 rnd = random.choice([i for i in range(-4, 5)])
@@ -691,14 +684,14 @@ class sub_object(submodule.structure):
                     c += rnd
                 else:
                     d += rnd
-                a, c, d = force_shift_decimal(a, wishlist=[c, d])
+                a, c, d = remove_digits_from(a, to=[c, d])
                 # sys.stderr.write('\n(II) a turned into = {}'.format(a))
         if (not self.allow_division_by_decimal
             and self.nb_variant.startswith('decimal')
             and not is_integer(b - c * d)):
             if not is_integer(b):
                 try:
-                    b, c, d = force_shift_decimal(b, wishlist=[c, d])
+                    b, c, d = remove_digits_from(b, to=[c, d])
                     # sys.stderr.write('\n(1) b turned to = {}'.format(b))
                 except ValueError:
                     rnd = random.choice([i for i in range(-4, 5)])
@@ -706,7 +699,7 @@ class sub_object(submodule.structure):
                         c += rnd
                     else:
                         d += rnd
-                    b, c, d = force_shift_decimal(b, wishlist=[c, d])
+                    b, c, d = remove_digits_from(b, to=[c, d])
                     # sys.stderr.write('\n(2) b turned to = {}'.format(b))
         # Now it's sure b is an integer
         # this doesn't mean that b - c*d is
@@ -730,19 +723,19 @@ class sub_object(submodule.structure):
             and all(is_integer(x) for x in [b, c, d])
             and is_integer(a * b)):
             try:
-                a, c = force_shift_decimal(a, wishlist=[c])
+                a, c = remove_digits_from(a, to=[c])
             except ValueError:
                 c += random.choice([i for i in range(-4, 5) if i != 0])
-                a, c = force_shift_decimal(a, wishlist=[c])
+                a, c = remove_digits_from(a, to=[c])
         if (not self.allow_division_by_decimal
             and self.nb_variant.startswith('decimal')
             and not is_integer(b - c)):
             if not is_integer(b):
                 try:
-                    b, c = force_shift_decimal(b, wishlist=[c])
+                    b, c = remove_digits_from(b, to=[c])
                 except ValueError:
                     c += random.choice([i for i in range(-4, 5) if i != 0])
-                    b, c = force_shift_decimal(b, wishlist=[c])
+                    b, c = remove_digits_from(b, to=[c])
         a = a * b
         b = b + c
         c = c * d
@@ -770,14 +763,14 @@ class sub_object(submodule.structure):
                 # and it is not possible to swap a, b and c, d
                 # (in order to move the decimal to the product a×b)
                 try:
-                    c, a, b = force_shift_decimal(c, wishlist=[a, b])
+                    c, a, b = remove_digits_from(c, to=[a, b])
                 except ValueError:
                     rnd = random.choice([i for i in range(-4, 5) if i != 0])
                     if random.choice([True, False]):
                         a += rnd
                     else:
                         b += rnd
-                    c, a, b = force_shift_decimal(c, wishlist=[a, b])
+                    c, a, b = remove_digits_from(c, to=[a, b])
         else:
             if (a * b > c * d and self.subvariant == 'only_positive'):
                 if (all(is_integer(x) for x in [a, b])
@@ -788,10 +781,10 @@ class sub_object(submodule.structure):
                         a, b = b, a
                     # Now, the decimal is in a, for sure
                     try:
-                        a, c = force_shift_decimal(a, wishlist=[c])
+                        a, c = remove_digits_from(a, to=[c])
                     except ValueError:
                         c += random.choice([i + 1 for i in range(9)])
-                        a, c = force_shift_decimal(a, wishlist=[c])
+                        a, c = remove_digits_from(a, to=[c])
                     a, b, c, d = c, d, a, b
         if not is_integer(d):
             c, d = d, c
@@ -817,10 +810,10 @@ class sub_object(submodule.structure):
             and not is_integer(c)):
             if not is_integer(a * b / 10):
                 try:
-                    c, a = force_shift_decimal(c, wishlist=[a])
+                    c, a = remove_digits_from(c, to=[a])
                 except ValueError:
                     a += random.choice([i for i in range(-4, 5) if i != 0])
-                    c, a = force_shift_decimal(c, wishlist=[a])
+                    c, a = remove_digits_from(c, to=[a])
             else:
                 d += random.choice([-1, 1])
                 if d == 1:
@@ -830,10 +823,10 @@ class sub_object(submodule.structure):
               and not is_integer(a)):
             if not is_integer(c * d / 10):
                 try:
-                    a, c = force_shift_decimal(a, wishlist=[c])
+                    a, c = remove_digits_from(a, to=[c])
                 except ValueError:
                     c += random.choice([i for i in range(-4, 5) if i != 0])
-                    a, c = force_shift_decimal(a, wishlist=[c])
+                    a, c = remove_digits_from(a, to=[c])
             else:
                 b += random.choice([-1, 1])
                 if b == 1:
