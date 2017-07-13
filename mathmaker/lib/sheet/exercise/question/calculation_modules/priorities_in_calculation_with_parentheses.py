@@ -1023,9 +1023,6 @@ class sub_object(submodule.structure):
                 symm = True
         else:
             symm = random.choice([True, False])
-        if a < 0:
-            import sys
-            sys.stderr.write('\nnegative a: ' + str(a))
         if self.variant in [148, 149, 152, 153]:
             if symm:
                 self.obj = Sum([d,

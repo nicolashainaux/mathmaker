@@ -4441,7 +4441,7 @@ class Product(CommutativeOperation):
                 else:
                     resulting_string += f
             else:
-                log.debug("[:n°4B]×: processing 1st factor: "
+                log.debug("[n°4B]×: processing 1st factor: "
                           + repr(self.factor[0]) + " with position "
                           "forced to " + str(position) + "; NO brackets")
                 resulting_string += self.factor[0]\
