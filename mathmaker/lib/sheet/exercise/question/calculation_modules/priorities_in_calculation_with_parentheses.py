@@ -111,8 +111,8 @@ class sub_object(submodule.structure):
         Possible rules:
         no negative: will check if there's any negative when only positive
                      numbers were expected
-        not all integers: will check if there are only integers when one
-                          decimal number at least was expected.
+        decimals distribution: will check if there are only integers when one
+                               decimal number at least was expected.
         <letter> isnt deci: check this letter does not contain a decimal
                             when division by a decimal is not allowed
         <letter> isnt 1: check this letter is different from 1
@@ -129,9 +129,18 @@ class sub_object(submodule.structure):
             if r == 'no negative' and self.subvariant == 'only_positive':
                 if any([n < 0 for n in letters]):
                     msg += 'Negative number detected!'
-            elif (r == 'not all integers'
-                  and self.nb_variant.startswith('decimal')):
-                if all(is_integer(n) for n in letters):
+            elif r == 'decimals distribution':
+                if not self.nb_variant.startswith('decimal'):
+                    max_dn = 0
+                else:
+                    max_dn = int(self.nb_variant[-1])
+                if any(digits_nb(n) > max_dn for n in letters):
+                    msg += 'At least a number among ' \
+                        + ', '.join(alphabet[0:len(letters) - 1]) + ' and ' \
+                        + alphabet[len(letters) - 1] \
+                        + ' has more digits than expected ({})'.format(max_dn)
+                if (self.nb_variant.startswith('decimal')
+                    and all(digits_nb(n) == 0 for n in letters)):
                     msg += ', '.join(alphabet[0:len(letters) - 1]) + ' and ' \
                         + alphabet[len(letters) - 1] + ' are all integers!'
             elif r.endswith('isnt 1'):
@@ -378,7 +387,7 @@ class sub_object(submodule.structure):
                                               n=self.nb1))
         self.obj = Product([Sum([Item(a), Item(opn * b)]),
                             Item(c)])
-        self.watch('no negative; c isnt 1; not all integers', a, b, c)
+        self.watch('no negative; c isnt 1; decimals distribution', a, b, c)
 
     def _create_101_105(self):
         # (a + b)÷c     (a - b)÷c
@@ -390,7 +399,7 @@ class sub_object(submodule.structure):
                         dig=self.adjust_depth(self.allow_extra_digits,
                                               n=self.nb1))
         self.obj = Division(('+', Sum([a, opn * b]), c))
-        self.watch('no negative; c isnt 1; c isnt deci; not all integers',
+        self.watch('no negative; c isnt 1; c isnt deci; decimals distribution',
                    a, b, c)
 
     def _create_102_106(self):
@@ -404,7 +413,7 @@ class sub_object(submodule.structure):
         self.obj = Product([Item(a),
                             Sum([Item(b), Item(opn * c)])],
                            compact_display=False)
-        self.watch('no negative; a isnt 1; not all integers', a, b, c)
+        self.watch('no negative; a isnt 1; decimals distribution', a, b, c)
 
     def _create_103_107(self):
         # a÷(b + c)     a÷(b - c)
@@ -416,7 +425,7 @@ class sub_object(submodule.structure):
                                               n=self.nb2, N=a))
         self.obj = Division(('+', a, Sum([b, opn * c])))
         d = b + opn * c
-        self.watch('no negative; a isnt 1; d isnt deci; not all integers',
+        self.watch('no negative; a isnt 1; d isnt deci; decimals distribution',
                    a, b, c, d)
 
     def _create_108_112(self):
@@ -432,7 +441,7 @@ class sub_object(submodule.structure):
                             Sum([Item(b), Item(opn * c)]),
                             Item(d)],
                            compact_display=False)
-        self.watch('no negative; a isnt 1; d isnt 1; not all integers',
+        self.watch('no negative; a isnt 1; d isnt 1; decimals distribution',
                    a, b, c, d)
 
     def _create_109_113(self):
@@ -456,7 +465,7 @@ class sub_object(submodule.structure):
                                          compact_display=False),
                                  d))
         self.watch('no negative; a isnt 1; d isnt 1; d isnt deci; '
-                   'not all integers', a, b, c, d)
+                   'decimals distribution', a, b, c, d)
 
     def _create_110_114(self):
         # a÷(b ± c)×d
@@ -472,7 +481,7 @@ class sub_object(submodule.structure):
                            compact_display=False)
         e = self.nb3
         self.watch('no negative; d isnt 1; e isnt deci; '
-                   'not all integers', a, b, c, d, e)
+                   'decimals distribution', a, b, c, d, e)
 
     def _create_111_115(self):
         # a÷(b ± c)÷d
@@ -488,7 +497,7 @@ class sub_object(submodule.structure):
                              d))
         e = self.nb2
         self.watch('no negative; d isnt 1; d isnt deci; '
-                   'e isnt deci; not all integers', a, b, c, d, e)
+                   'e isnt deci; decimals distribution', a, b, c, d, e)
 
     def _create_116_120_124(self):
         # a×(b ± c×d)   (a×b + c)×d
@@ -510,7 +519,7 @@ class sub_object(submodule.structure):
                                      compact_display=False),
                                      c]),
                                 d], compact_display=False)
-        self.watch('no negative; not all integers', a, b, c, d)
+        self.watch('no negative; decimals distribution', a, b, c, d)
 
     def _create_117_121_125_129(self):
         # 117, 121: a×(b ± c÷d)
@@ -554,7 +563,7 @@ class sub_object(submodule.structure):
                                          opn * c]),
                                     d], compact_display=False)
         # a×(b ± c÷d)     (a÷b + c)×d
-        self.watch('no negative; not all integers; d isnt 1', a, b, c, d)
+        self.watch('no negative; decimals distribution; d isnt 1', a, b, c, d)
         if self.variant in [117, 121]:
             self.watch('a isnt 1; d isnt deci', a, b, c, d)
         elif self.variant in [125, 129]:
@@ -615,7 +624,7 @@ class sub_object(submodule.structure):
         self.obj = Division(('+', a, Sum([b, Product([c, d])])))
         # a÷(b + c×d)
         e = b + c * d
-        self.watch('no negative; not all integers; c isnt 1; d isnt 1; '
+        self.watch('no negative; decimals distribution; c isnt 1; d isnt 1; '
                    'e isnt deci', a, b, c, d, e)
 
     def _create_119(self):
@@ -660,8 +669,8 @@ class sub_object(submodule.structure):
         self.obj = Division(('+', a, Sum([b, Division(('+', c, d))])))
         # a÷(b + c÷d)
         e = b + c / d
-        self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
-                   'e isnt deci', a, b, c, d, e)
+        self.watch('no negative; decimals distribution; d isnt 1; '
+                   'd isnt deci; e isnt deci', a, b, c, d, e)
 
     def _create_122(self):
         # a÷(b - c×d)
@@ -707,7 +716,7 @@ class sub_object(submodule.structure):
         #                  .format(a, b, c, d))
         # a÷(b - c×d)
         e = b - c * d
-        self.watch('no negative; not all integers; c isnt 1; d isnt 1; '
+        self.watch('no negative; decimals distribution; c isnt 1; d isnt 1; '
                    'e isnt deci', a, b, c, d, e)
 
     def _create_123(self):
@@ -737,8 +746,8 @@ class sub_object(submodule.structure):
         self.obj = Division(('+', a, Sum([b, Division(('-', c, d))])))
         # a÷(b - c÷d)
         e = b - c / d
-        self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
-                   'e isnt deci', a, b, c, d, e)
+        self.watch('no negative; decimals distribution; d isnt 1; '
+                   'd isnt deci; e isnt deci', a, b, c, d, e)
 
     def _create_126(self):
         # (a×b + c)÷d
@@ -791,8 +800,8 @@ class sub_object(submodule.structure):
                              Sum([Product([a, b], compact_display=False), c]),
                              d))
         # (a×b + c)÷d
-        self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
-                   'a isnt 1; b isnt 1', a, b, c, d)
+        self.watch('no negative; decimals distribution; d isnt 1; '
+                   'd isnt deci; a isnt 1; b isnt 1', a, b, c, d)
 
     def _create_127_131(self):
         # (a÷b + c)÷d
@@ -857,8 +866,8 @@ class sub_object(submodule.structure):
                                  Sum([Division(('+', a, b)), opn * c]),
                                  d))
         # (a÷b + c)÷d
-        self.watch('no negative; not all integers; d isnt 1; d isnt deci; '
-                   'b isnt 1; b isnt deci', a, b, c, d)
+        self.watch('no negative; decimals distribution; d isnt 1; '
+                   'd isnt deci; b isnt 1; b isnt deci', a, b, c, d)
 
     def _create_128_130(self):
         # 128, 128*: (a×b - c)×d   *(c - a×b)×d
@@ -894,7 +903,7 @@ class sub_object(submodule.structure):
                 self.obj = Product([first_factor, d], compact_display=False)
             elif self.variant == 130:
                 self.obj = Division(('+', first_factor, d))
-        watch_rules = 'no negative; not all integers'
+        watch_rules = 'no negative; decimals distribution'
         if self.variant == 130:
             watch_rules += '; d isnt deci'
         self.watch(watch_rules, a, b, c, d)
@@ -929,7 +938,7 @@ class sub_object(submodule.structure):
                                  Sum([a, nabs * b]),
                                  Sum([c, ncds * d])))
         e = self.nb2
-        watch_rules = 'no negative; not all integers'
+        watch_rules = 'no negative; decimals distribution'
         if self.variant in [133, 135, 137, 139]:
             watch_rules += '; e isnt deci'
         self.watch(watch_rules, a, b, c, d, e)
@@ -968,7 +977,7 @@ class sub_object(submodule.structure):
                                       b,
                                       Sum([c, ncds * d])))])
         e = self.nb3
-        watch_rules = 'no negative; not all integers'
+        watch_rules = 'no negative; decimals distribution'
         if self.variant in [141, 143, 145, 147]:
             watch_rules += '; e isnt deci'
         elif self.variant in [140, 142, 144, 146]:
