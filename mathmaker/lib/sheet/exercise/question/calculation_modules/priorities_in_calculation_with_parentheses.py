@@ -178,8 +178,7 @@ class sub_object(submodule.structure):
             return max(depth, digits_nb(n) + 1)
         if self.variant in [100, 102, 104, 106]:
             # (a + b)×c  a×(b + c)  (a - b)×c  a×(b - c)
-            if self.nb_variant == 'decimal1' and is_integer(n):
-                return depth + random.choice([0, 1])
+            return depth + random.choice([i for i in range(mad + 1)])
         elif self.variant in [101, 105]:  # (a ± b)÷c
             if (not self.allow_division_by_decimal
                 and self.nb_variant == 'decimal1'
