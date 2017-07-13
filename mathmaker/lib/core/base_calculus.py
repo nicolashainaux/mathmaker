@@ -4007,6 +4007,7 @@ class Product(CommutativeOperation):
     def into_str(self, **options):
         global expression_begins
         log = settings.dbg_logger.getChild('Product.into_str')
+        log.debug('Entering...')
 
         if ('force_expression_begins' in options
             and options['force_expression_begins']):
@@ -4433,10 +4434,12 @@ class Product(CommutativeOperation):
                           + repr(self.factor[0]) + " with position "
                           "NOT forced to " + str(position)
                           + "; WITH brackets")
-
-                resulting_string += MARKUP['opening_bracket']    \
-                    + self.factor[0].into_str(**options) \
-                    + MARKUP['closing_bracket']
+                f = self.factor[0].into_str(**options)
+                if not (f.startswith('(') and f.endswith(')')):
+                    resulting_string += MARKUP['opening_bracket']    \
+                        + f + MARKUP['closing_bracket']
+                else:
+                    resulting_string += f
             else:
                 log.debug("[:n°4B]×: processing 1st factor: "
                           + repr(self.factor[0]) + " with position "
@@ -4506,6 +4509,7 @@ class Product(CommutativeOperation):
                 + MARKUP['closing_exponent']
             expression_begins = False
 
+        log.debug('returning: ' + str(resulting_string))
         return resulting_string
 
     # --------------------------------------------------------------------------
@@ -4948,6 +4952,8 @@ class Product(CommutativeOperation):
     #   @param position The position of the object in the Product
     #   @return True if the object requires brackets in a Product
     def requires_brackets(self, position):
+        log = settings.dbg_logger.getChild('Product.requires_brackets')
+        log.debug('Entering on: ' + repr(self))
         # If the exponent is equal or equivalent to 1
         if self.exponent.is_displ_as_a_single_1():
             # Either there's only one displayable factor and then
@@ -4955,6 +4961,7 @@ class Product(CommutativeOperation):
             self_without_ones = self.throw_away_the_neutrals()
 
             if len(self_without_ones) == 1:
+                log.debug('result depends on first non-neutral factor')
                 return self_without_ones.factor[0].requires_brackets(position)
             # Or there are several factors and then it doesn't require
             # brackets: the exact positions of any brackets inside of a
@@ -4963,6 +4970,7 @@ class Product(CommutativeOperation):
             # Product, you need to put brackets INSIDE it (only wrapping to
             # factors, not the whole of it). No, not outside.
             else:
+                log.debug('returning False')
                 return False
 
         # If the exponent is different from one, then the brackets are
@@ -6328,8 +6336,8 @@ class Sum(CommutativeOperation):
     #   @param position The position of the object in the Product
     #   @return True if the object requires brackets in a Product
     def requires_brackets(self, position):
-        log = settings.dbg_logger.getChild(
-            'Sum.requires_brackets')
+        log = settings.dbg_logger.getChild('Sum.requires_brackets')
+        log.debug('Entering on: ' + repr(self))
         # A Sum having more than one term requires brackets
         tested_sum = None
         if self.compact_display:
@@ -6340,8 +6348,9 @@ class Sum(CommutativeOperation):
 
         if len(tested_sum) >= 2:
             # return True
-            log.debug("self.requires_inner_brackets = "
-                      + str(tested_sum.requires_inner_brackets()))
+            r = tested_sum.requires_inner_brackets()
+            log.debug("self.requires_inner_brackets = " + str(r))
+            log.debug("--> so, return  " + str(not r))
             return not tested_sum.requires_inner_brackets()
         # If the Sum has only one term, then it will depend on its
         # exponent and on its content

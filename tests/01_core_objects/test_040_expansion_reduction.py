@@ -316,3 +316,17 @@ def test_expQ_auto_er():
                 '$\\text{Q}=9-0.8\\times 5$\\newline \n'
                 '$\\text{Q}=9-4$\\newline \n'
                 '$\\text{Q}=5$\\newline \n')
+
+
+def test_expR_auto_er():
+    """No extraneous parentheses or lines in exp. and red. of 2+(7.5-6.7)×6?"""
+    temp = Sum([Item(2), Product([Expandable((Item(1),
+                                              Sum([Decimal('7.5'),
+                                                   -Decimal('6.7')]))),
+                                  Item(6)], compact_display=False)])
+    expR = Expression("R", temp)
+    assert expR.auto_expansion_and_reduction() == \
+        wrap_nb('$\\text{R}=2+(7.5-6.7)\\times 6$\\newline \n'
+                '$\\text{R}=2+0.8\\times 6$\\newline \n'
+                '$\\text{R}=2+4.8$\\newline \n'
+                '$\\text{R}=6.8$\\newline \n')

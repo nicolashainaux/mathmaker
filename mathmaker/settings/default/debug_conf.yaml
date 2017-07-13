@@ -28,6 +28,7 @@ dbg:
         throw_away_the_neutrals: INFO
     Product:
         into_str: INFO
+        requires_brackets: INFO
         requires_inner_brackets: INFO
         calculate_next_step: INFO
         expand_and_reduce_next_step: INFO
