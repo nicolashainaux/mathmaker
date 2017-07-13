@@ -185,21 +185,17 @@ class sub_object(submodule.structure):
                 and self.nb_variant == 'decimal1'
                 and is_integer(n)):
                 return max(depth, digits_nb(n) + 1)
-        elif self.variant in [103, 107]:  # a÷(b + c) a÷(b + c)
+        elif self.variant in [103, 107]:  # a÷(b + c) a÷(b - c)
             N = kwargs['N']
-            if (self.nb_variant.startswith('decimal')
-                and is_integer(N)):
-                return max(depth, digits_nb(n) + 1)
-            elif self.nb_variant == 'decimal1' and is_integer(n):
-                return depth + random.choice([0, 1])
+            return max(depth,
+                       mad - digits_nb(N),
+                       random.choice([i for i in range(mad + 1)]))
         elif self.variant in [108, 112, 109, 113, 110, 114, 111, 115]:
             # a×(b ± c)×d   a×(b ± c)÷d  a÷(b ± c)×d  a÷(b ± c)÷d
             N, P = kwargs['N'], kwargs['P']
-            if (self.nb_variant.startswith('decimal')
-                and all(is_integer(x) for x in [n, N, P])):
-                return max(depth, digits_nb(n) + 1)
-            elif self.nb_variant == 'decimal1' and is_integer(n):
-                return depth + random.choice([0, 1])
+            return max(depth,
+                       mad - digits_nb(N) - digits_nb(P),
+                       random.choice([i for i in range(mad + 1)]))
         elif 132 <= self.variant <= 139:
             # (a±b)×(c±d) and (a±b)÷(c±d)
             last = kwargs.get('last', False)
