@@ -29,7 +29,8 @@ from mathmaker.lib import shared
 from mathmaker.lib.tools.auxiliary_functions \
     import (is_integer, move_digits_to, split_nb, digits_nb,
             remove_digits_from)
-from mathmaker.lib.core.base_calculus import Item, Sum, Product, Division
+from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Division,
+                                              Expandable)
 from mathmaker.lib.core.calculus import Expression
 from .. import submodule
 
@@ -190,8 +191,11 @@ class sub_object(submodule.structure):
             return max(depth,
                        mad - digits_nb(N),
                        random.choice([i for i in range(mad + 1)]))
-        elif self.variant in [108, 112, 109, 113, 110, 114, 111, 115]:
+        elif self.variant in [108, 112, 109, 113, 110, 114, 111, 115,
+                              148, 149, 150, 151, 152, 153, 154, 155]:
             # a×(b ± c)×d   a×(b ± c)÷d  a÷(b ± c)×d  a÷(b ± c)÷d
+            # (a ± b)×c ± d;    (a ± b)÷c ± d
+            # and their symmetrics d ± (a ± b)×c;    d ± (a ± b)÷c
             N, P = kwargs['N'], kwargs['P']
             return max(depth,
                        mad - digits_nb(N) - digits_nb(P),
@@ -358,7 +362,7 @@ class sub_object(submodule.structure):
                         self.nb3 += rnd
                         self.nb4, self.nb3 = remove_digits_from(
                             self.nb4, to=[self.nb3])
-            if self.variant in [133, 135, 137, 139]:
+            if self.variant in [133, 135, 137, 139, 150, 151, 154, 155]:
                 if not is_integer(self.nb2):
                     if is_integer(self.nb1):
                         self.nb1, self.nb2 = self.nb2, self.nb1
@@ -980,6 +984,74 @@ class sub_object(submodule.structure):
             watch_rules += '; b isnt 1'
         self.watch(watch_rules, a, b, c, d, e)
 
+    def _create_148to155(self):
+        # (a ± b)×c ± d;    (a ± b)÷c ± d
+        # and their symmetrics d ± (a ± b)×c;    d ± (a ± b)÷c
+        b_signs = dict.fromkeys([148, 149, 150, 151], '+')
+        b_signs.update(dict.fromkeys([152, 153, 154, 155], '-'))
+        d_signs = dict.fromkeys([148, 150, 152, 154], '+')
+        d_signs.update(dict.fromkeys([149, 151, 153, 155], '-'))
+        opn_signs = {'+': 1, '-': -1}
+        nbs = opn_signs[b_signs[self.variant]]
+        nds = opn_signs[d_signs[self.variant]]
+        symm = False
+        if (self.nb_variant.startswith('decimal')
+            and self.variant in [150, 151, 154, 155]
+            and not is_integer(self.nb1)
+            and is_integer(self.nb1 * self.nb2)):
+            try:
+                remove_digits_from(self.nb1, to=[self.nb3])
+            except ValueError:
+                self.nb3 += random.choice([i for i in range(-4, 5) if i != 0])
+                remove_digits_from(self.nb1, to=[self.nb3])
+        c, d = self.nb2, self.nb3
+        if self.variant in [148, 149, 152, 153]:
+            a, b = split_nb(self.nb1, operation=b_signs[self.variant],
+                            dig=self.adjust_depth(self.allow_extra_digits,
+                                                  n=self.nb1, N=c, P=d))
+        else:
+            a, b = split_nb(self.nb1 * self.nb2,
+                            operation=b_signs[self.variant],
+                            dig=self.adjust_depth(self.allow_extra_digits,
+                                                  n=self.nb1 * self.nb2,
+                                                  N=c, P=d))
+        if self.subvariant == 'only_positive' and self.variant in [149, 153]:
+            if self.nb1 * self.nb2 < self.nb3:
+                symm = True
+        elif self.subvariant == 'only_positive' and self.variant in [151, 155]:
+            if self.nb1 < self.nb3:
+                symm = True
+        else:
+            symm = random.choice([True, False])
+        if a < 0:
+            import sys
+            sys.stderr.write('\nnegative a: ' + str(a))
+        if self.variant in [148, 149, 152, 153]:
+            if symm:
+                self.obj = Sum([d,
+                                Product([Expandable((Item(nds),
+                                                     Sum([a, nbs * b]))),
+                                         c], compact_display=False)])
+            else:
+                self.obj = Sum([Product([Sum([a, nbs * b]), c],
+                                        compact_display=False),
+                                nds * d])
+        elif self.variant in [150, 151, 154, 155]:
+            if symm:
+                self.obj = Sum([d,
+                                Division((d_signs[self.variant],
+                                          Sum([a, nbs * b]),
+                                          c))])
+            else:
+                self.obj = Sum([Division(('+',
+                                          Sum([a, nbs * b]),
+                                          c)),
+                                nds * d])
+        watch_rules = 'no negative; decimals distribution; c isnt 1'
+        if self.variant in [150, 151, 154, 155]:
+            watch_rules += '; c isnt deci'
+        self.watch(watch_rules, a, b, c, d)
+
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
@@ -1015,6 +1087,8 @@ class sub_object(submodule.structure):
                                      self._create_132to139))
         catalog.update(dict.fromkeys([140, 141, 142, 143, 144, 145, 146, 147],
                                      self._create_140to147))
+        catalog.update(dict.fromkeys([148, 149, 150, 151, 152, 153, 154, 155],
+                                     self._create_148to155))
 
         try:
             catalog[self.variant]()
