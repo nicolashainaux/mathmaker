@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import pytest
+from decimal import Decimal
 
 from mathmaker.lib.core.base_calculus import (Item, Sum, Monomial, Expandable,
                                               Product)
@@ -301,3 +302,17 @@ def test_expP_auto_er(expP):
                 '$\\text{P}=-42x+42+100x^{2}+60x+9$\\newline \n'
                 '$\\text{P}=(-42+60)x+42+9+100x^{2}$\\newline \n'
                 '$\\text{P}=18x+51+100x^{2}$\\newline \n')
+
+
+def test_expQ_auto_er():
+    """No redundant lines in expansion and reduction of 9-(0.4+0.4)×5?"""
+    temp = Sum([9, Product([Expandable((Item(-1),
+                                        Sum([Decimal('0.4'),
+                                             Decimal('0.4')]))),
+                            Item(5)], compact_display=False)])
+    expQ = Expression("Q", temp)
+    assert expQ.auto_expansion_and_reduction() == \
+        wrap_nb('$\\text{Q}=9-(0.4+0.4)\\times 5$\\newline \n'
+                '$\\text{Q}=9-0.8\\times 5$\\newline \n'
+                '$\\text{Q}=9-4$\\newline \n'
+                '$\\text{Q}=5$\\newline \n')

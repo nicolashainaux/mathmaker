@@ -4553,6 +4553,17 @@ class Product(CommutativeOperation):
             else:
                 result[i] = elt
         if new_elt_found:
+            if len(result) == 2:
+                if (result._element[0].is_displ_as_a_single_1()
+                    and result._element[1]
+                    .is_displ_as_a_single_numeric_Item()):
+                    return Item(result._element[1].evaluate())
+                elif (result._element[0].is_displ_as_a_single_minus_1()
+                      and result._element[1]
+                      .is_displ_as_a_single_numeric_Item()):
+                    return Item(-result._element[1].evaluate())
+                else:
+                    return result
             return result
         elif unpacked:
             return result.calculate_next_step(**options)
@@ -6008,7 +6019,7 @@ class Sum(CommutativeOperation):
 
         # 1. There are only numbers (e.g. numeric Items)
         if numeric_items_nb >= 1 and fractions_nb == 0:
-            return Sum([Item(copy.evaluate(stop_recursion=True))])
+            return Item(copy.evaluate(stop_recursion=True))
 
         # 2. There are only fractions
         if numeric_items_nb == 0 and fractions_nb >= 1:
@@ -7250,10 +7261,24 @@ class Expandable(Product):
 
         return Sum(terms_list)
 
+    def calculate_next_step(self, **options):
+        if not self.is_numeric():
+            return self.expand_and_reduce_next_step(**options)
+        numeric_product = Product(1)
+        numeric_product._compact_display = self.compact_display
+        numeric_product.reset_element()
+        for i in range(len(self.element)):
+            numeric_product._element.append(self.element[i].clone())
+        for i in range(len(self.info)):
+            numeric_product._info.append(self.info[i])
+        return numeric_product.calculate_next_step(**options)
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the expanded object as a Sum
     def expand_and_reduce_next_step(self, **options):
+        if self.is_numeric():
+            return self.calculate_next_step(**options)
         copy = Expandable(self)
 
         a_factor_at_least_has_been_modified = False
