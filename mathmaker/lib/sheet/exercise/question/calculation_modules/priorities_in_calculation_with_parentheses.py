@@ -425,7 +425,7 @@ class sub_object(submodule.structure):
                                               n=self.nb2, N=a))
         self.obj = Division(('+', a, Sum([b, opn * c])))
         d = b + opn * c
-        self.watch('no negative; a isnt 1; d isnt deci; decimals distribution',
+        self.watch('no negative; d isnt deci; decimals distribution',
                    a, b, c, d)
 
     def _create_108_112(self):
