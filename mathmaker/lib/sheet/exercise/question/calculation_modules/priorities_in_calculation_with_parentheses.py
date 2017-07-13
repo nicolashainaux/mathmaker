@@ -244,7 +244,11 @@ class sub_object(submodule.structure):
         if not self.allow_division_by_decimal:
             if self.variant in [101, 103, 105, 107, ]:
                 if not is_integer(self.nb2):
-                    self.nb1, self.nb2 = self.nb2, self.nb1
+                    if self.variant == 'decimal1':
+                        self.nb1, self.nb2 = self.nb2, self.nb1
+                    else:
+                        self.nb1, self.nb2 = move_decimal(self.nb1,
+                                                          numbers=[self.nb2, ])
             if self.variant in [109, 110, 113, 114]:
                 if not is_integer(self.nb3):
                     self.nb2, self.nb3 = self.nb3, self.nb2
