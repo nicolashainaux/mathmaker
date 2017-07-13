@@ -252,7 +252,11 @@ class sub_object(submodule.structure):
                                                             from_nb=[self.nb2])
             if self.variant in [109, 110, 113, 114]:
                 if not is_integer(self.nb3):
-                    self.nb2, self.nb3 = self.nb3, self.nb2
+                    if self.variant == 'decimal1':
+                        self.nb2, self.nb3 = self.nb3, self.nb2
+                    else:
+                        self.nb2, self.nb3 = move_digits_to(self.nb2,
+                                                            from_nb=[self.nb3])
             if self.variant in [111, 115]:
                 self.nb1, self.nb2, self.nb3 = \
                     move_digits_to(self.nb1, from_nb=[self.nb2, self.nb3])
