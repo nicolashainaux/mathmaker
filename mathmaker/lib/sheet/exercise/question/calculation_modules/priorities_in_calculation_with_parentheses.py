@@ -217,7 +217,8 @@ class sub_object(submodule.structure):
             return max(depth,
                        mad - digits_nb(N),
                        random.choice([i for i in range(mad + 1)]))
-        elif self.variant in [108, 112, 109, 113, 110, 114, 111, 115]:
+        elif (self.variant in [108, 112, 109, 113, 110, 114, 111, 115]
+              + [172 + i for i in range(16)]):
             # a×(b ± c)×d   a×(b ± c)÷d  a÷(b ± c)×d  a÷(b ± c)÷d
             # (a ± b)×c ± d;    (a ± b)÷c ± d
             # and their symmetrics d ± (a ± b)×c;    d ± (a ± b)÷c
@@ -227,6 +228,16 @@ class sub_object(submodule.structure):
                        random.choice([i for i in range(mad + 1)]))
 
     def adjust_numbers(self):
+        # As the pairs for products and quotients should be shuffled, but as
+        # the pairs can be either (self.nb1; self.nb2) or (self.nb2; self.nb3)
+        # etc. depending on the exact variant, we have to do it here.
+        if random.choice([True, False]):
+            if (100 <= self.variant <= 107) or (148 <= self.variant <= 155):
+                self.nb1, self.nb2 = self.nb2, self.nb1
+            elif (108 <= self.variant <= 115) or (156 <= self.variant <= 187):
+                self.nb2, self.nb3 = self.nb3, self.nb2
+            elif 116 <= self.variant <= 147:
+                self.nb3, self.nb4 = self.nb4, self.nb3
         if not self.allow_division_by_decimal:
             if self.variant in [101, 103, 105, 107, ]:
                 if not is_integer(self.nb2):
@@ -245,6 +256,13 @@ class sub_object(submodule.structure):
             if self.variant in [111, 115]:
                 self.nb1, self.nb2, self.nb3 = \
                     move_digits_to(self.nb1, from_nb=[self.nb2, self.nb3])
+            if self.variant in [174, 175, 178, 179, 181, 183, 185, 187]:
+                if not is_integer(self.nb2):
+                    if is_integer(self.nb1):
+                        self.nb1, self.nb2 = self.nb2, self.nb1
+                    else:
+                        self.nb2, self.nb1 = remove_digits_from(
+                            self.nb2, to=[self.nb1])
 
     def _create_100_104(self):
         # (a + b)×c    (a - b)×c
@@ -368,6 +386,73 @@ class sub_object(submodule.structure):
         self.watch('no negative; d isnt 1; d isnt deci; '
                    'e isnt deci; decimals distribution', a, b, c, d, e)
 
+    def _create_172to187(self):
+        # (a ± b)×c ± d;    (a ± b)÷c ± d
+        # and their symmetrics d ± (a ± b)×c;    d ± (a ± b)÷c
+        symmetric = {172: 180, 180: 172, 173: 184, 184: 173,
+                     174: 181, 181: 174, 175: 185, 185: 175,
+                     176: 182, 182: 176, 177: 186, 186: 177,
+                     178: 183, 183: 178, 179: 187, 187: 179}
+        b_signs = dict.fromkeys([172, 173, 174, 175, 180, 181, 184, 185], '+')
+        b_signs.update(
+            dict.fromkeys([176, 177, 178, 179, 182, 183, 186, 187], '-'))
+        d_signs = dict.fromkeys([172, 174, 176, 178, 180, 181, 182, 183], '+')
+        d_signs.update(
+            dict.fromkeys([173, 175, 177, 179, 184, 185, 186, 187], '-'))
+        opn_signs = {'+': 1, '-': -1}
+        nbs = opn_signs[b_signs[self.variant]]
+        nds = opn_signs[d_signs[self.variant]]
+        if (self.nb_variant.startswith('decimal')
+            and self.variant in [174, 175, 178, 179, 181, 183, 185, 187]
+            and not is_integer(self.nb1)
+            and is_integer(self.nb1 * self.nb2)):
+            try:
+                remove_digits_from(self.nb1, to=[self.nb3])
+            except ValueError:
+                self.nb3 += random.choice([i for i in range(-4, 5) if i != 0])
+                remove_digits_from(self.nb1, to=[self.nb3])
+        c, d = self.nb2, self.nb3
+        if self.variant in [172, 173, 176, 177, 180, 182, 184, 196]:
+            a, b = split_nb(self.nb1, operation=b_signs[self.variant],
+                            dig=self.adjust_depth(self.allow_extra_digits,
+                                                  n=self.nb1, N=c, P=d))
+        else:
+            a, b = split_nb(self.nb1 * self.nb2,
+                            operation=b_signs[self.variant],
+                            dig=self.adjust_depth(self.allow_extra_digits,
+                                                  n=self.nb1 * self.nb2,
+                                                  N=c, P=d))
+        if self.subvariant == 'only_positive':
+            if ((self.variant in [173, 177] and self.nb1 * self.nb2 < self.nb3)
+                or (self.variant in [175, 179] and self.nb1 < self.nb3)
+                or (self.variant in [184, 186]
+                    and self.nb1 * self.nb2 > self.nb3)
+                or (self.variant in [185, 187] and self.nb1 > self.nb3)):
+                self.variant = symmetric[self.variant]
+        if self.variant in [172, 173, 176, 177]:
+            self.obj = Sum([Product([Sum([a, nbs * b]), c],
+                                    compact_display=False),
+                            nds * d])
+        elif self.variant in [180, 182, 184, 186]:
+            self.obj = Sum([d,
+                            Product([Expandable((Item(nds),
+                                                 Sum([a, nbs * b]))),
+                                     c], compact_display=False)])
+        elif self.variant in [174, 175, 178, 179]:
+            self.obj = Sum([Division(('+',
+                                      Sum([a, nbs * b]),
+                                      c)),
+                            nds * d])
+        elif self.variant in [181, 183, 185, 187]:
+                self.obj = Sum([d,
+                                Division((d_signs[self.variant],
+                                          Sum([a, nbs * b]),
+                                          c))])
+        watch_rules = 'no negative; decimals distribution; c isnt 1'
+        if self.variant in [174, 175, 178, 179, 181, 183, 185, 187]:
+            watch_rules += '; c isnt deci'
+        self.watch(watch_rules, a, b, c, d)
+
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
@@ -388,6 +473,9 @@ class sub_object(submodule.structure):
         catalog.update(dict.fromkeys([109, 113], self._create_109_113))
         catalog.update(dict.fromkeys([110, 114], self._create_110_114))
         catalog.update(dict.fromkeys([111, 115], self._create_111_115))
+
+        catalog.update(dict.fromkeys([172 + i for i in range(16)],
+                                     self._create_172to187))
 
         try:
             catalog[self.variant]()
