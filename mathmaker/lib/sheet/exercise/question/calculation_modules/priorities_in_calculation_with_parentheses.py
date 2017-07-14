@@ -650,7 +650,7 @@ class sub_object(submodule.structure):
                 try:
                     b, c = remove_digits_from(b, to=[c])
                 except ValueError:
-                    c += random.choice([i for i in range(-4, 5)])
+                    c += random.choice([i for i in range(-4, 5) if i != 0])
                     b, c = remove_digits_from(b, to=[c])
             # Now it's sure b is an integer
             # this doesn't mean that b + c is
@@ -683,7 +683,7 @@ class sub_object(submodule.structure):
                 a, c, d = remove_digits_from(a, to=[c, d])
                 # sys.stderr.write('\n(I) a turned into = {}'.format(a))
             except ValueError:
-                rnd = random.choice([i for i in range(-4, 5)])
+                rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 if random.choice([True, False]):
                     c += rnd
                 else:
@@ -698,7 +698,7 @@ class sub_object(submodule.structure):
                     b, c, d = remove_digits_from(b, to=[c, d])
                     # sys.stderr.write('\n(1) b turned to = {}'.format(b))
                 except ValueError:
-                    rnd = random.choice([i for i in range(-4, 5)])
+                    rnd = random.choice([i for i in range(-4, 5) if i != 0])
                     if random.choice([True, False]):
                         c += rnd
                     else:
