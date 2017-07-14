@@ -237,7 +237,7 @@ def __main__():
                    "INTO priorities_in_calculation_variants(nb1, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)
-    db_rows = [(i + 100, 0) for i in range(56)]
+    db_rows = [(i + 100, 0) for i in range(88)]
     db.executemany("INSERT "
                    "INTO priorities_in_calculation_variants(nb1, drawDate) "
                    "VALUES(?, ?)",
