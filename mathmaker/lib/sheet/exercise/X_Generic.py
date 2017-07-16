@@ -264,11 +264,11 @@ def auto_adjust_nb_sources(nb_sources: list, q_i: namedtuple):
             nb_sources = [pairs_nb_source]
         elif 108 <= v <= 115:
             nb_sources = [single_nb_source, pairs_nb_source]
-        elif 116 <= v <= 131:
+        elif 116 <= v <= 147:
             nb_sources = [pairs_nb_source, pairs_nb_source]
-        elif 132 <= v <= 139:
+        elif 148 <= v <= 155:
             nb_sources = [pairs_nb_source]
-        elif 140 <= v <= 155:
+        elif 156 <= v <= 187:
             nb_sources = [single_nb_source, pairs_nb_source]
     return nb_sources
 
