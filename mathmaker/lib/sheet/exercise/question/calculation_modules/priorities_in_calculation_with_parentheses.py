@@ -162,6 +162,21 @@ class sub_object(submodule.structure):
                 return max(depth, int(self.nb_variant[-1]))
             else:
                 return depth + random.choice([i for i in range(mad + 1)])
+        elif 148 <= self.variant <= 155:
+            # (a±b)×(c±d) and (a±b)÷(c±d)
+            last = kwargs.get('last', False)
+            if (self.nb_variant.startswith('decimal')
+                and is_integer(n)):
+                if (n <= 1 or n <= 6
+                    or (7 <= n <= 20 and random.choice([True, True, False]))
+                    or
+                    (last
+                     and is_integer(kwargs['N']) and is_integer(kwargs['P']))):
+                    return max(depth, int(self.nb_variant[-1]))
+                else:
+                    return depth + random.choice([i for i in range(mad + 1)])
+            else:
+                return depth + random.choice([i for i in range(mad + 1)])
         return depth
 
     def adjust_numbers(self):
@@ -193,7 +208,8 @@ class sub_object(submodule.structure):
             if self.variant in [111, 115]:
                 self.nb1, self.nb2, self.nb3 = \
                     move_digits_to(self.nb1, from_nb=[self.nb2, self.nb3])
-            if self.variant in [174, 175, 178, 179, 181, 183, 185, 187]:
+            if self.variant in [149, 151, 153, 155, 174, 175, 178, 179, 181,
+                                183, 185, 187]:
                 if not is_integer(self.nb2):
                     if is_integer(self.nb1):
                         self.nb1, self.nb2 = self.nb2, self.nb1
@@ -329,6 +345,41 @@ class sub_object(submodule.structure):
         e = self.nb2
         self.watch('no negative; d isnt 1; d isnt deci; '
                    'e isnt deci; decimals distribution', a, b, c, d, e)
+
+    def _create_148to155(self):
+        ab_signs = dict.fromkeys([148, 149, 150, 151], '+')
+        ab_signs.update(dict.fromkeys([152, 153, 154, 155], '-'))
+        cd_signs = dict.fromkeys([148, 149, 152, 153], '+')
+        cd_signs.update(dict.fromkeys([150, 151, 154, 155], '-'))
+        opn_signs = {'+': 1, '-': -1}
+        if self.variant in [148, 150, 152, 154]:
+            a, b = split_nb(self.nb1, operation=ab_signs[self.variant],
+                            dig=self.adjust_depth(self.allow_extra_digits,
+                                                  n=self.nb1))
+        else:
+            a, b = split_nb(self.nb1 * self.nb2,
+                            operation=ab_signs[self.variant],
+                            dig=self.adjust_depth(self.allow_extra_digits,
+                                                  n=self.nb1 * self.nb2))
+        c, d = split_nb(self.nb2, operation=cd_signs[self.variant],
+                        dig=self.adjust_depth(self.allow_extra_digits,
+                                              n=self.nb2, last=True,
+                                              N=a, P=b))
+        nabs = opn_signs[ab_signs[self.variant]]
+        ncds = opn_signs[cd_signs[self.variant]]
+        if self.variant in [148, 150, 152, 154]:
+            self.obj = Product([Sum([a, nabs * b]),
+                                Sum([c, ncds * d])],
+                               compact_display=False)
+        else:
+            self.obj = Division(('+',
+                                 Sum([a, nabs * b]),
+                                 Sum([c, ncds * d])))
+        e = c + ncds * d
+        watch_rules = 'no negative; decimals distribution'
+        if self.variant in [149, 151, 153, 155]:
+            watch_rules += '; e isnt deci'
+        self.watch(watch_rules, a, b, c, d, e)
 
     def _create_156to171(self):
         symmetric = {156: 164, 164: 156, 157: 166, 166: 157,
@@ -498,6 +549,8 @@ class sub_object(submodule.structure):
         catalog.update(dict.fromkeys([110, 114], self._create_110_114))
         catalog.update(dict.fromkeys([111, 115], self._create_111_115))
 
+        catalog.update(dict.fromkeys([148 + i for i in range(8)],
+                                     self._create_148to155))
         catalog.update(dict.fromkeys([156 + i for i in range(16)],
                                      self._create_156to171))
         catalog.update(dict.fromkeys([172 + i for i in range(16)],
