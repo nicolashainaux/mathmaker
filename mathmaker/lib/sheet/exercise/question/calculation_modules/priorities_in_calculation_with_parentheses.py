@@ -109,28 +109,28 @@ from .. import submodule
 
 class sub_object(submodule.structure):
 
-    def dbg_info(self, msg, *letters):
+    def dbg_info(self, msg, *numbers, letters=alphabet):
         """
         Create log message to record including self.nb* and a, b, c... values.
 
         :param msg: the msg to join to the values' list
         :type msg: str
-        :param letters: the values of the numbers a, b, c etc.
-        :type letters: numbers
+        :param numbers: the values of the numbers a, b, c etc.
+        :type numbers: numbers
         :rtype: str
         """
         figures = '123456789'
         nb = 'nb' + '; nb'.join(figures[:len(self.nb_list)]) + " = " \
             + '; '.join('{}' for _ in range(len(self.nb_list))) \
             .format(*self.nb_list)
-        abcd = '; '.join(alphabet[0:len(letters)]) + " = " \
-            + '; '.join('{}' for _ in range(len(letters))) \
-            .format(*letters)
+        abcd = '; '.join(letters[0:len(numbers)]) + " = " \
+            + '; '.join('{}' for _ in range(len(numbers))) \
+            .format(*numbers)
         return ('(variant {}): \\n{} {}\\n'
                 + ''.join([' ' for _ in range(len(msg) + 1)]) + '{}') \
             .format(self.variant, msg, nb, abcd)
 
-    def watch(self, rules, *letters):
+    def watch(self, rules, *numbers, letters=alphabet):
         """
         Check the quality of numbers created, according to the rules.
 
@@ -149,37 +149,40 @@ class sub_object(submodule.structure):
         :param rules: a string containing rules separated by '; '. See above
                       for possible rules
         :type rules: str
-        :param letters: the values of the numbers a, b, c etc.
-        :type letters: numbers
+        :param numbers: the values of the numbers a, b, c etc.
+        :type numbers: numbers
+        :param letters: the names of the variables, in order of appearance.
+                        Default is the normal alphabet, low case.
+        :type letters: str
         """
         for r in rules.split(sep='; '):
             msg = ''
             if r == 'no negative' and self.subvariant == 'only_positive':
-                if any([n < 0 for n in letters]):
+                if any([n < 0 for n in numbers]):
                     msg += 'Negative number detected!'
             elif r == 'decimals distribution':
                 if not self.nb_variant.startswith('decimal'):
                     max_dn = 0
                 else:
                     max_dn = int(self.nb_variant[-1])
-                if any(digits_nb(n) > max_dn for n in letters):
+                if any(digits_nb(n) > max_dn for n in numbers):
                     msg += 'At least a number among ' \
-                        + ', '.join(alphabet[0:len(letters) - 1]) + ' and ' \
-                        + alphabet[len(letters) - 1] \
+                        + ', '.join(alphabet[0:len(numbers) - 1]) + ' and ' \
+                        + alphabet[len(numbers) - 1] \
                         + ' has more digits than expected ({})'.format(max_dn)
                 if (self.nb_variant.startswith('decimal')
-                    and all(digits_nb(n) == 0 for n in letters)):
-                    msg += ', '.join(alphabet[0:len(letters) - 1]) + ' and ' \
-                        + alphabet[len(letters) - 1] + ' are all integers!'
+                    and all(digits_nb(n) == 0 for n in numbers)):
+                    msg += ', '.join(alphabet[0:len(numbers) - 1]) + ' and ' \
+                        + alphabet[len(numbers) - 1] + ' are all integers!'
             elif r.endswith('isnt 1'):
-                if letters[alphabet.index(r[0])] == 1:
+                if numbers[alphabet.index(r[0])] == 1:
                     msg += r[0] + ' == 1!'
             elif (r.endswith('isnt deci')
                   and not self.allow_division_by_decimal):
-                if not is_integer(letters[alphabet.index(r[0])]):
+                if not is_integer(numbers[alphabet.index(r[0])]):
                     msg += r[0] + ' is decimal! => Division by decimal!'
             if msg != '':
-                self.log(self.dbg_info(msg, *letters))
+                self.log(self.dbg_info(msg, *numbers, letters=letters))
 
     def adjust_depth(self, depth, n=None, **kwargs):
         """
@@ -463,7 +466,7 @@ class sub_object(submodule.structure):
         self.watch(watch_rules, a, b, c, d)
         if self.variant in [157, 159, 161, 163, 166, 170, 167, 171]:
             e = self.nb3
-            self.watch('e isnt deci', 0, 0, 0, 0, 0, e)
+            self.watch('e isnt deci', e, letters='e')
         if 160 <= self.variant <= 163 or self.variant in [165, 167, 169, 171]:
             if self.variant in [161, 163]:
                 f = a - self.nb2
@@ -473,7 +476,7 @@ class sub_object(submodule.structure):
                 f = a - b * self.nb3
             elif self.variant in [165, 169]:
                 f = b * self.nb3 - a
-            self.watch('no negative', f)
+            self.watch('no negative', f, letters='f')
 
     def _create_172to187(self):
         # (a ± b)×c ± d;    (a ± b)÷c ± d
@@ -550,7 +553,7 @@ class sub_object(submodule.structure):
                 f = d - (a + nbs * b) * c
             elif self.variant in [185, 187]:
                 f = d - (a + nbs * b) / c
-            self.watch('no negative', f)
+            self.watch('no negative', f, letters='f')
 
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
