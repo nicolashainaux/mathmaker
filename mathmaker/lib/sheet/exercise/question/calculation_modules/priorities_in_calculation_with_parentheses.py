@@ -501,7 +501,7 @@ class sub_object(submodule.structure):
                 self.nb3 += random.choice([i for i in range(-4, 5) if i != 0])
                 remove_digits_from(self.nb1, to=[self.nb3])
         c, d = self.nb2, self.nb3
-        if self.variant in [172, 173, 176, 177, 180, 182, 184, 196]:
+        if self.variant in [172, 173, 176, 177, 180, 182, 184, 186]:
             a, b = split_nb(self.nb1, operation=b_signs[self.variant],
                             dig=self.adjust_depth(self.allow_extra_digits,
                                                   n=self.nb1, N=c, P=d))
@@ -541,6 +541,16 @@ class sub_object(submodule.structure):
         if self.variant in [174, 175, 178, 179, 181, 183, 185, 187]:
             watch_rules += '; c isnt deci'
         self.watch(watch_rules, a, b, c, d)
+        if self.variant in [173, 175, 177, 179, 184, 185, 186, 187]:
+            if self.variant in [173, 177]:
+                f = (a + nbs * b) * c - d
+            elif self.variant in [175, 179]:
+                f = (a + nbs * b) / c - d
+            elif self.variant in [184, 186]:
+                f = d - (a + nbs * b) * c
+            elif self.variant in [185, 187]:
+                f = d - (a + nbs * b) / c
+            self.watch('no negative', f)
 
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
