@@ -24,6 +24,7 @@ import random
 import copy
 import warnings
 from decimal import Decimal
+from string import ascii_lowercase as alphabet
 
 from mathmaker.lib.core.root_calculus import Unit, Value
 from mathmaker.lib.core.base_calculus import Product, Quotient, Item
@@ -34,7 +35,8 @@ from mathmaker.lib import error
 from mathmaker.lib import shared
 from mathmaker.lib.common.cst import COMMON_LENGTH_UNITS, XML_BOOLEANS
 from mathmaker.lib.tools.wording import setup_wording_format_of
-from mathmaker.lib.tools.auxiliary_functions import rotate
+from mathmaker.lib.tools.auxiliary_functions \
+    import (rotate, is_integer, digits_nb, )
 
 
 class structure(object):
@@ -51,7 +53,10 @@ class structure(object):
         return [getattr(self, 'nb' + str(i + 1)) for i in range(self.nb_nb)]
 
     def setup(self, arg, shuffle_nbs=True, sort_nbs=False, **options):
-        if arg == "minimal":
+        if arg == 'logging':
+            from mathmaker import settings
+            self.log = settings.output_watcher_logger.debug
+        elif arg == "minimal":
             self.newline = '\\newline'
             self.parallel_to = '$\parallel$'
             self.belongs_to = '$\in$'
@@ -297,3 +302,78 @@ class structure(object):
                                    nb1_to_check=self.nb1,
                                    nb2_to_check=self.nb2))
             setup_wording_format_of(self)
+
+    def dbg_info(self, msg, *numbers, letters=alphabet):
+        """
+        Create log message to record including self.nb* and a, b, c... values.
+
+        :param msg: the msg to join to the values' list
+        :type msg: str
+        :param numbers: the values of the numbers a, b, c etc.
+        :type numbers: numbers
+        :rtype: str
+        """
+        figures = '123456789'
+        nb = 'nb' + '; nb'.join(figures[:len(self.nb_list)]) + " = " \
+            + '; '.join('{}' for _ in range(len(self.nb_list))) \
+            .format(*self.nb_list)
+        abcd = '; '.join(letters[0:len(numbers)]) + " = " \
+            + '; '.join('{}' for _ in range(len(numbers))) \
+            .format(*numbers)
+        return ('(variant {}): \\n{} {}\\n'
+                + ''.join([' ' for _ in range(len(msg) + 1)]) + '{}') \
+            .format(self.variant, msg, nb, abcd)
+
+    def watch(self, rules, *numbers, letters=alphabet):
+        """
+        Check the quality of numbers created, according to the rules.
+
+        If something is wrong, it will be logged.
+
+        Possible rules:
+        no negative: will check if there's any negative when only positive
+                     numbers were expected
+        decimals distribution: will check if there are only integers when one
+                               decimal number at least was expected.
+        <letter> isnt deci: check this letter does not contain a decimal
+                            when division by a decimal is not allowed
+        <letter> isnt 1: check this letter is different from 1
+                         under any circumstances
+
+        :param rules: a string containing rules separated by '; '. See above
+                      for possible rules
+        :type rules: str
+        :param numbers: the values of the numbers a, b, c etc.
+        :type numbers: numbers
+        :param letters: the names of the variables, in order of appearance.
+                        Default is the normal alphabet, low case.
+        :type letters: str
+        """
+        for r in rules.split(sep='; '):
+            msg = ''
+            if r == 'no negative' and self.subvariant == 'only_positive':
+                if any([n < 0 for n in numbers]):
+                    msg += 'Negative number detected!'
+            elif r == 'decimals distribution':
+                if not self.nb_variant.startswith('decimal'):
+                    max_dn = 0
+                else:
+                    max_dn = int(self.nb_variant[-1])
+                if any(digits_nb(n) > max_dn for n in numbers):
+                    msg += 'At least a number among ' \
+                        + ', '.join(alphabet[0:len(numbers) - 1]) + ' and ' \
+                        + alphabet[len(numbers) - 1] \
+                        + ' has more digits than expected ({})'.format(max_dn)
+                if (self.nb_variant.startswith('decimal')
+                    and all(digits_nb(n) == 0 for n in numbers)):
+                    msg += ', '.join(alphabet[0:len(numbers) - 1]) + ' and ' \
+                        + alphabet[len(numbers) - 1] + ' are all integers!'
+            elif r.endswith('isnt 1'):
+                if numbers[alphabet.index(r[0])] == 1:
+                    msg += r[0] + ' == 1!'
+            elif (r.endswith('isnt deci')
+                  and not self.allow_division_by_decimal):
+                if not is_integer(numbers[alphabet.index(r[0])]):
+                    msg += r[0] + ' is decimal! => Division by decimal!'
+            if msg != '':
+                self.log(self.dbg_info(msg, *numbers, letters=letters))
