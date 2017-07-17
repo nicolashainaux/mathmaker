@@ -361,19 +361,19 @@ class structure(object):
                     max_dn = int(self.nb_variant[-1])
                 if any(digits_nb(n) > max_dn for n in numbers):
                     msg += 'At least a number among ' \
-                        + ', '.join(alphabet[0:len(numbers) - 1]) + ' and ' \
-                        + alphabet[len(numbers) - 1] \
+                        + ', '.join(letters[0:len(numbers) - 1]) + ' and ' \
+                        + letters[len(numbers) - 1] \
                         + ' has more digits than expected ({})'.format(max_dn)
                 if (self.nb_variant.startswith('decimal')
                     and all(digits_nb(n) == 0 for n in numbers)):
-                    msg += ', '.join(alphabet[0:len(numbers) - 1]) + ' and ' \
-                        + alphabet[len(numbers) - 1] + ' are all integers!'
+                    msg += ', '.join(letters[0:len(numbers) - 1]) + ' and ' \
+                        + letters[len(numbers) - 1] + ' are all integers!'
             elif r.endswith('isnt 1'):
-                if numbers[alphabet.index(r[0])] == 1:
+                if numbers[letters.index(r[0])] == 1:
                     msg += r[0] + ' == 1!'
             elif (r.endswith('isnt deci')
                   and not self.allow_division_by_decimal):
-                if not is_integer(numbers[alphabet.index(r[0])]):
+                if not is_integer(numbers[letters.index(r[0])]):
                     msg += r[0] + ' is decimal! => Division by decimal!'
             if msg != '':
                 self.log(self.dbg_info(msg, *numbers, letters=letters))
