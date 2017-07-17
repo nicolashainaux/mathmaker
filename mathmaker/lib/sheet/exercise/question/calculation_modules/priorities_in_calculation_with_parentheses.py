@@ -180,6 +180,10 @@ class sub_object(submodule.structure):
         return depth
 
     def adjust_numbers(self):
+        if (116 <= self.variant <= 147
+            and self.nb_variant.startswith('decimal')
+            and self.deci_restriction == '+-'):
+            super().setup('nb_variants', bypass=True)
         # As the pairs for products and quotients should be shuffled, but as
         # the pairs can be either (self.nb1; self.nb2) or (self.nb2; self.nb3)
         # etc. depending on the exact variant, we have to do it here.
@@ -223,6 +227,24 @@ class sub_object(submodule.structure):
                     else:
                         self.nb3, self.nb1, self.nb2 = remove_digits_from(
                             self.nb3, to=[self.nb1, self.nb2])
+            if 144 <= self.variant <= 147:
+                rnd = random.choice([i for i in range(-4, 5) if i != 0])
+                if not is_integer(self.nb2):
+                    try:
+                        self.nb2, self.nb1, self.nb3 = remove_digits_from(
+                            self.nb2, to=[self.nb1, self.nb3])
+                    except ValueError:
+                        self.nb1 += rnd
+                        self.nb2, self.nb1 = remove_digits_from(
+                            self.nb2, to=[self.nb1])
+                if not is_integer(self.nb4):
+                    try:
+                        self.nb4, self.nb3, self.nb1 = remove_digits_from(
+                            self.nb4, to=[self.nb3, self.nb1])
+                    except ValueError:
+                        self.nb3 += rnd
+                        self.nb4, self.nb3 = remove_digits_from(
+                            self.nb4, to=[self.nb3])
 
     def _create_100_104(self):
         # (a + b)×c    (a - b)×c
@@ -345,6 +367,71 @@ class sub_object(submodule.structure):
         e = self.nb2
         self.watch('no negative; d isnt 1; d isnt deci; '
                    'e isnt deci; decimals distribution', a, b, c, d, e)
+
+    def _create_144_145_146_147(self):
+        # (a÷b + c)÷d    (c + a÷b)÷d
+        # (a÷b - c)÷d    (c - a÷b)÷d
+        # symmetric = {144: 145, 145: 144, 146: 147, 147: 146}
+        ops = '+' if self.variant in [144, 145] else '-'
+        opn = 1 if self.variant in [144, 145] else -1
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if (self.nb_variant == 'decimal1'
+            and is_integer(c * d)
+            and not is_integer(c)):
+            if not is_integer(a * b / 10):
+                try:
+                    c, a = remove_digits_from(c, to=[a])
+                except ValueError:
+                    a += random.choice([i for i in range(-4, 5) if i != 0])
+                    c, a = remove_digits_from(c, to=[a])
+            else:
+                d += random.choice([-1, 1])
+                if d == 1:
+                    d = 3
+        elif (self.nb_variant == 'decimal1'
+              and is_integer(a * b)
+              and not is_integer(a)):
+            if not is_integer(c * d / 10):
+                try:
+                    a, c = remove_digits_from(a, to=[c])
+                except ValueError:
+                    c += random.choice([i for i in range(-4, 5) if i != 0])
+                    a, c = remove_digits_from(a, to=[c])
+            else:
+                b += random.choice([-1, 1])
+                if b == 1:
+                    b = 3
+        if self.variant in [144, 145]:
+            if a > c * d and self.subvariant == 'only_positive':
+                a, b, c, d = c, d, a, b
+            if c * d != a:
+                c = c * d - a
+            else:
+                # Do not forget the case c * d == a:
+                c = c * d
+        elif self.variant in [146, 147]:
+            if self.variant == 146:
+                if a <= c * d and self.subvariant == 'only_positive':
+                    self.variant = 147
+            elif self.variant == 147:
+                if c * d <= a and self.subvariant == 'only_positive':
+                    self.variant = 146
+            if self.variant == 146:
+                c = a - c * d
+            else:
+                c = c * d + a
+        a = a * b
+        if self.variant in [144, 146]:
+            self.obj = Division(('+',
+                                 Sum([Division(('+', a, b)), opn * c]),
+                                 d))
+        elif self.variant in [145, 147]:
+            self.obj = Division(('+',
+                                 Sum([c, Division((ops, a, b))]),
+                                 d))
+        # (a÷b + c)÷d
+        self.watch('no negative; decimals distribution; d isnt 1; '
+                   'd isnt deci; b isnt 1; b isnt deci', a, b, c, d)
 
     def _create_148to155(self):
         ab_signs = dict.fromkeys([148, 149, 150, 151], '+')
@@ -549,6 +636,8 @@ class sub_object(submodule.structure):
         catalog.update(dict.fromkeys([110, 114], self._create_110_114))
         catalog.update(dict.fromkeys([111, 115], self._create_111_115))
 
+        catalog.update(dict.fromkeys([144, 145, 146, 147],
+                                     self._create_144_145_146_147))
         catalog.update(dict.fromkeys([148 + i for i in range(8)],
                                      self._create_148to155))
         catalog.update(dict.fromkeys([156 + i for i in range(16)],
