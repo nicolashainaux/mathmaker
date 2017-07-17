@@ -217,15 +217,26 @@ class sub_object(submodule.structure):
             return max(depth,
                        mad - digits_nb(N),
                        random.choice([i for i in range(mad + 1)]))
-        elif (self.variant in [108, 112, 109, 113, 110, 114, 111, 115]
-              + [172 + i for i in range(16)]):
+        elif self.variant in [108, 112, 109, 113, 110, 114, 111, 115]:
             # a×(b ± c)×d   a×(b ± c)÷d  a÷(b ± c)×d  a÷(b ± c)÷d
-            # (a ± b)×c ± d;    (a ± b)÷c ± d
-            # and their symmetrics d ± (a ± b)×c;    d ± (a ± b)÷c
             N, P = kwargs['N'], kwargs['P']
             return max(depth,
                        mad - digits_nb(N) - digits_nb(P),
                        random.choice([i for i in range(mad + 1)]))
+        elif 156 <= self.variant <= 187:
+            # a ± b×(c ± d) and a ± b÷(c ± d) and symmetrics
+            # (a ± b)×c ± d;    (a ± b)÷c ± d
+            # and their symmetrics d ± (a ± b)×c;    d ± (a ± b)÷c
+            if (self.nb_variant.startswith('decimal')
+                and is_integer(n)
+                and ((is_integer(kwargs['N']) and is_integer(kwargs['P']))
+                     or n <= 6
+                     or (7 <= n <= 20
+                         and random.choice([True, True, False])))):
+                return max(depth, int(self.nb_variant[-1]))
+            else:
+                return depth + random.choice([i for i in range(mad + 1)])
+        return depth
 
     def adjust_numbers(self):
         # As the pairs for products and quotients should be shuffled, but as
@@ -263,6 +274,13 @@ class sub_object(submodule.structure):
                     else:
                         self.nb2, self.nb1 = remove_digits_from(
                             self.nb2, to=[self.nb1])
+            if self.variant in [157, 159, 161, 163, 166, 170, 167, 171]:
+                if not is_integer(self.nb3):
+                    if is_integer(self.nb2):
+                        self.nb2, self.nb3 = self.nb3, self.nb2
+                    else:
+                        self.nb3, self.nb1, self.nb2 = remove_digits_from(
+                            self.nb3, to=[self.nb1, self.nb2])
 
     def _create_100_104(self):
         # (a + b)×c    (a - b)×c
@@ -386,6 +404,77 @@ class sub_object(submodule.structure):
         self.watch('no negative; d isnt 1; d isnt deci; '
                    'e isnt deci; decimals distribution', a, b, c, d, e)
 
+    def _create_156to171(self):
+        symmetric = {156: 164, 164: 156, 157: 166, 166: 157,
+                     158: 168, 168: 158, 159: 170, 170: 159,
+                     160: 165, 165: 160, 161: 167, 167: 161,
+                     162: 169, 169: 162, 163: 171, 171: 163}
+        b_signs = dict.fromkeys([156, 157, 158, 159, 164, 166, 168, 170], '+')
+        b_signs.update(
+            dict.fromkeys([160, 161, 162, 163, 165, 167, 169, 171], '-'))
+        cd_signs = dict.fromkeys([156, 157, 160, 161, 164, 166, 165, 167], '+')
+        cd_signs.update(
+            dict.fromkeys([158, 159, 162, 163, 168, 170, 169, 171], '-'))
+        opn_signs = {'+': 1, '-': -1}
+        nbs = opn_signs[b_signs[self.variant]]
+        ncds = opn_signs[cd_signs[self.variant]]
+        a, b = self.nb1, self.nb2
+        if self.subvariant == 'only_positive':
+            if self.variant in [165, 169]:
+                if b * self.nb3 - a < 0:
+                    self.variant = symmetric[self.variant]
+            elif self.variant in [167, 171]:
+                if b - a < 0:
+                    self.variant = symmetric[self.variant]
+            if self.variant in [160, 162]:
+                if a - b * self.nb3 < 0:
+                    a += b * self.nb3
+            elif self.variant in [161, 163]:
+                if a - b < 0:
+                    a += b
+        if self.variant in [157, 159, 161, 163, 166, 170, 167, 171]:
+            b = self.nb2 * self.nb3
+        c, d = split_nb(self.nb3, operation=cd_signs[self.variant],
+                        dig=self.adjust_depth(self.allow_extra_digits,
+                                              n=self.nb3, N=a, P=b))
+        if self.variant in [156, 158, 160, 162]:
+            self.obj = Sum([a,
+                            Product([nbs * b,
+                                     Sum([c, ncds * d])],
+                                    compact_display=False)])
+        elif self.variant in [164, 168, 165, 169]:
+            self.obj = Sum([Product([b,
+                                     Sum([c, ncds * d])],
+                                    compact_display=False),
+                            nbs * a])
+        elif self.variant in [157, 159, 161, 163]:
+            self.obj = Sum([a,
+                            Division((b_signs[self.variant],
+                                      b,
+                                      Sum([c, ncds * d])))])
+        elif self.variant in [166, 167, 170, 171]:
+            self.obj = Sum([Division(('+',
+                                      b,
+                                      Sum([c, ncds * d]))),
+                            nbs * a])
+        watch_rules = 'no negative; decimals distribution'
+        if self.variant in [156, 158, 160, 162, 164, 168, 165, 169]:
+            watch_rules += '; b isnt 1'
+        self.watch(watch_rules, a, b, c, d)
+        if self.variant in [157, 159, 161, 163, 166, 170, 167, 171]:
+            e = self.nb3
+            self.watch('e isnt deci', 0, 0, 0, 0, 0, e)
+        if 160 <= self.variant <= 163 or self.variant in [165, 167, 169, 171]:
+            if self.variant in [161, 163]:
+                f = a - self.nb2
+            elif self.variant in [167, 171]:
+                f = self.nb2 - a
+            elif self.variant in [160, 162]:
+                f = a - b * self.nb3
+            elif self.variant in [165, 169]:
+                f = b * self.nb3 - a
+            self.watch('no negative', f)
+
     def _create_172to187(self):
         # (a ± b)×c ± d;    (a ± b)÷c ± d
         # and their symmetrics d ± (a ± b)×c;    d ± (a ± b)÷c
@@ -474,6 +563,8 @@ class sub_object(submodule.structure):
         catalog.update(dict.fromkeys([110, 114], self._create_110_114))
         catalog.update(dict.fromkeys([111, 115], self._create_111_115))
 
+        catalog.update(dict.fromkeys([156 + i for i in range(16)],
+                                     self._create_156to171))
         catalog.update(dict.fromkeys([172 + i for i in range(16)],
                                      self._create_172to187))
 
