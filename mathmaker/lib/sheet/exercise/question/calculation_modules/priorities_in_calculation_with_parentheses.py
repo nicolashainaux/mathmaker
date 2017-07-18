@@ -394,6 +394,69 @@ class sub_object(submodule.structure):
         self.watch('no negative; d isnt 1; d isnt deci; '
                    'e isnt deci; decimals distribution', a, b, c, d, e)
 
+    def _create_136_137(self):
+        # (a×b + c)÷d       (c + a×b)÷d
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if (self.nb_variant.startswith('decimal')
+            and is_integer(c * d)
+            and not is_integer(c)):
+            if (a * b >= c * d
+                or (a * b < c * d and self.subvariant != 'only_positive')):
+                # if a*b == c*d then it's still ok to swap them
+                # (this is in order to make the decimal visible)
+                # and if a and b are decimals to (e.g. subvariant is
+                # decimal2 or more), it doesn't hurt neither
+                a, b, c, d = c, d, a, b
+            else:
+                # subvariant is only_positive
+                # and it is not possible to swap a, b and c, d
+                # (in order to move the decimal to the product a×b)
+                try:
+                    c, a, b = remove_digits_from(c, to=[a, b])
+                except ValueError:
+                    rnd = random.choice([i for i in range(-4, 5) if i != 0])
+                    if random.choice([True, False]):
+                        a += rnd
+                    else:
+                        b += rnd
+                    c, a, b = remove_digits_from(c, to=[a, b])
+        else:
+            if (a * b > c * d and self.subvariant == 'only_positive'):
+                if (all(is_integer(x) for x in [a, b])
+                    or not is_integer(a * b)):
+                    a, b, c, d = c, d, a, b
+                else:
+                    if not is_integer(b):
+                        a, b = b, a
+                    # Now, the decimal is in a, for sure
+                    try:
+                        a, c = remove_digits_from(a, to=[c])
+                    except ValueError:
+                        c += random.choice([i + 1 for i in range(9)])
+                        a, c = remove_digits_from(a, to=[c])
+                    a, b, c, d = c, d, a, b
+        if not is_integer(d):
+            c, d = d, c
+        if a * b == c * d:
+            c = c * d
+        else:
+            c = c * d - a * b
+        if self.variant == 136:
+            self.obj = Division(('+',
+                                 Sum([Product([a, b],
+                                              compact_display=False),
+                                      c]),
+                                 d))
+        elif self.variant == 137:
+            self.obj = Division(('+',
+                                 Sum([c,
+                                      Product([a, b],
+                                              compact_display=False)]),
+                                 d))
+        # (a×b + c)÷d
+        self.watch('no negative; decimals distribution; d isnt 1; '
+                   'd isnt deci; a isnt 1; b isnt 1', a, b, c, d)
+
     def _create_138_139(self):
         # (a×b - c)÷d    (c - a×b)÷d
         symmetrics = {138: 139, 139: 138}
@@ -738,6 +801,7 @@ class sub_object(submodule.structure):
         catalog.update(dict.fromkeys([110, 114], self._create_110_114))
         catalog.update(dict.fromkeys([111, 115], self._create_111_115))
 
+        catalog.update(dict.fromkeys([136, 137], self._create_136_137))
         catalog.update(dict.fromkeys([138, 139], self._create_138_139))
         catalog.update(dict.fromkeys([140 + i for i in range(8)],
                                      self._create_140to147))
