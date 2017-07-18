@@ -396,18 +396,20 @@ class sub_object(submodule.structure):
 
     def _create_138_139(self):
         # (a×b - c)÷d    (c - a×b)÷d
+        symmetrics = {138: 139, 139: 138}
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
-        if self.variant == 138:
-            if (self.nb_variant == 'decimal1'
-                and is_integer(c * d)
-                and not is_integer(c)):
-                # It is enough to swap a,b and c,d in all cases.
-                # If this would lead to a negative number, then it is possible
-                # to create the symmetric expression (i.e. 139)
-                a, b, c, d = c, d, a, b
-            c = c * d
-            if self.subvariant == 'only_positive' and a * b < c:
-                self.variant = 139
+        if (self.nb_variant == 'decimal1'
+            and is_integer(c * d)
+            and not is_integer(c)):
+            # It is enough to swap a,b and c,d in all cases.
+            # If this would lead to a negative number, then it is possible
+            # to create the symmetric expression (i.e. 139)
+            a, b, c, d = c, d, a, b
+        c = c * d
+        if self.subvariant == 'only_positive':
+            if ((self.variant == 138 and a * b - c < 0)
+                or (self.variant == 139 and a * b - c > 0)):
+                self.variant = symmetrics[self.variant]
         if self.variant == 138:
             if a * b != c:
                 c = a * b - c
