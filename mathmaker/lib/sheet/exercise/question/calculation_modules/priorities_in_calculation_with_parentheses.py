@@ -212,6 +212,32 @@ class sub_object(submodule.structure):
             if self.variant in [111, 115]:
                 self.nb1, self.nb2, self.nb3 = \
                     move_digits_to(self.nb1, from_nb=[self.nb2, self.nb3])
+            if 132 <= self.variant <= 135:
+                if not is_integer(self.nb2):
+                    if self.variant == 'decimal1':
+                        self.nb1, self.nb2 = self.nb2, self.nb1
+                    else:
+                        try:
+                            self.nb2, self.nb1 = \
+                                remove_digits_from(self.nb2, to=[self.nb1])
+                        except ValueError:
+                            self.nb1 += random.choice([i for i in range(-4, 5)
+                                                       if i != 0])
+                            self.nb2, self.nb3 = \
+                                remove_digits_from(self.nb2, to=[self.nb1])
+            if 136 <= self.variant <= 139:
+                if not is_integer(self.nb4):
+                    if self.variant == 'decimal1':
+                        self.nb3, self.nb4 = self.nb4, self.nb3
+                    else:
+                        try:
+                            self.nb4, self.nb3 = \
+                                remove_digits_from(self.nb4, to=[self.nb3])
+                        except ValueError:
+                            self.nb3 += random.choice([i for i in range(-4, 5)
+                                                       if i != 0])
+                            self.nb4, self.nb3 = \
+                                remove_digits_from(self.nb4, to=[self.nb3])
             if 140 <= self.variant <= 147:
                 rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 if not is_integer(self.nb2):
@@ -368,6 +394,33 @@ class sub_object(submodule.structure):
         self.watch('no negative; d isnt 1; d isnt deci; '
                    'e isnt deci; decimals distribution', a, b, c, d, e)
 
+    def _create_138_139(self):
+        # (a×b - c)÷d    (c - a×b)÷d
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if self.variant == 138:
+            if (self.nb_variant == 'decimal1'
+                and is_integer(c * d)
+                and not is_integer(c)):
+                # It is enough to swap a,b and c,d in all cases.
+                # If this would lead to a negative number, then it is possible
+                # to create the symmetric expression (i.e. 139)
+                a, b, c, d = c, d, a, b
+            c = c * d
+            if self.subvariant == 'only_positive' and a * b < c:
+                self.variant = 139
+        if self.variant == 138:
+            if a * b != c:
+                c = a * b - c
+            first_factor = Sum([Product([a, b], compact_display=False), -c])
+            self.obj = Division(('+', first_factor, d))
+        elif self.variant == 139:
+            if a * b != c:
+                c = a * b + c
+            first_factor = Sum([c, Product([-a, b], compact_display=False)])
+            self.obj = Division(('+', first_factor, d))
+        self.watch('no negative; decimals distribution; d isnt deci',
+                   a, b, c, d)
+
     def _create_140to147(self):
         # a ÷ (b + c÷d)   a ÷ (c÷d + b)
         # a ÷ (b - c÷d)   a ÷ (c÷d - b)
@@ -376,7 +429,6 @@ class sub_object(submodule.structure):
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
         ops = '+' if self.variant in [140, 141, 144, 145] else '-'
         opn = 1 if self.variant in [140, 141, 144, 145] else -1
-        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
         if (self.nb_variant == 'decimal1'
             and is_integer(c * d)
             and not is_integer(c)):
@@ -684,6 +736,7 @@ class sub_object(submodule.structure):
         catalog.update(dict.fromkeys([110, 114], self._create_110_114))
         catalog.update(dict.fromkeys([111, 115], self._create_111_115))
 
+        catalog.update(dict.fromkeys([138, 139], self._create_138_139))
         catalog.update(dict.fromkeys([140 + i for i in range(8)],
                                      self._create_140to147))
         catalog.update(dict.fromkeys([148 + i for i in range(8)],
