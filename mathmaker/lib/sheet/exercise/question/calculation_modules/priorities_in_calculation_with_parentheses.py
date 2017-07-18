@@ -149,19 +149,6 @@ class sub_object(submodule.structure):
             return max(depth,
                        mad - digits_nb(N) - digits_nb(P),
                        random.choice([i for i in range(mad + 1)]))
-        elif 156 <= self.variant <= 187:
-            # a ± b×(c ± d) and a ± b÷(c ± d) and symmetrics
-            # (a ± b)×c ± d;    (a ± b)÷c ± d
-            # and their symmetrics d ± (a ± b)×c;    d ± (a ± b)÷c
-            if (self.nb_variant.startswith('decimal')
-                and is_integer(n)
-                and ((is_integer(kwargs['N']) and is_integer(kwargs['P']))
-                     or n <= 6
-                     or (7 <= n <= 20
-                         and random.choice([True, True, False])))):
-                return max(depth, int(self.nb_variant[-1]))
-            else:
-                return depth + random.choice([i for i in range(mad + 1)])
         elif 148 <= self.variant <= 155:
             # (a±b)×(c±d) and (a±b)÷(c±d)
             last = kwargs.get('last', False)
@@ -175,6 +162,19 @@ class sub_object(submodule.structure):
                     return max(depth, int(self.nb_variant[-1]))
                 else:
                     return depth + random.choice([i for i in range(mad + 1)])
+            else:
+                return depth + random.choice([i for i in range(mad + 1)])
+        elif 156 <= self.variant <= 187:
+            # a ± b×(c ± d) and a ± b÷(c ± d) and symmetrics
+            # (a ± b)×c ± d;    (a ± b)÷c ± d
+            # and their symmetrics d ± (a ± b)×c;    d ± (a ± b)÷c
+            if (self.nb_variant.startswith('decimal')
+                and is_integer(n)
+                and ((is_integer(kwargs['N']) and is_integer(kwargs['P']))
+                     or n <= 6
+                     or (7 <= n <= 20
+                         and random.choice([True, True, False])))):
+                return max(depth, int(self.nb_variant[-1]))
             else:
                 return depth + random.choice([i for i in range(mad + 1)])
         return depth
@@ -212,22 +212,7 @@ class sub_object(submodule.structure):
             if self.variant in [111, 115]:
                 self.nb1, self.nb2, self.nb3 = \
                     move_digits_to(self.nb1, from_nb=[self.nb2, self.nb3])
-            if self.variant in [149, 151, 153, 155, 174, 175, 178, 179, 181,
-                                183, 185, 187]:
-                if not is_integer(self.nb2):
-                    if is_integer(self.nb1):
-                        self.nb1, self.nb2 = self.nb2, self.nb1
-                    else:
-                        self.nb2, self.nb1 = remove_digits_from(
-                            self.nb2, to=[self.nb1])
-            if self.variant in [157, 159, 161, 163, 166, 170, 167, 171]:
-                if not is_integer(self.nb3):
-                    if is_integer(self.nb2):
-                        self.nb2, self.nb3 = self.nb3, self.nb2
-                    else:
-                        self.nb3, self.nb1, self.nb2 = remove_digits_from(
-                            self.nb3, to=[self.nb1, self.nb2])
-            if 144 <= self.variant <= 147:
+            if 140 <= self.variant <= 147:
                 rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 if not is_integer(self.nb2):
                     try:
@@ -245,6 +230,21 @@ class sub_object(submodule.structure):
                         self.nb3 += rnd
                         self.nb4, self.nb3 = remove_digits_from(
                             self.nb4, to=[self.nb3])
+            if self.variant in [149, 151, 153, 155, 174, 175, 178, 179, 181,
+                                183, 185, 187]:
+                if not is_integer(self.nb2):
+                    if is_integer(self.nb1):
+                        self.nb1, self.nb2 = self.nb2, self.nb1
+                    else:
+                        self.nb2, self.nb1 = remove_digits_from(
+                            self.nb2, to=[self.nb1])
+            if self.variant in [157, 159, 161, 163, 166, 170, 167, 171]:
+                if not is_integer(self.nb3):
+                    if is_integer(self.nb2):
+                        self.nb2, self.nb3 = self.nb3, self.nb2
+                    else:
+                        self.nb3, self.nb1, self.nb2 = remove_digits_from(
+                            self.nb3, to=[self.nb1, self.nb2])
 
     def _create_100_104(self):
         # (a + b)×c    (a - b)×c
@@ -367,6 +367,80 @@ class sub_object(submodule.structure):
         e = self.nb2
         self.watch('no negative; d isnt 1; d isnt deci; '
                    'e isnt deci; decimals distribution', a, b, c, d, e)
+
+    def _create_140_141_142_143(self):
+        # a ÷ (b + c÷d)   a ÷ (c÷d + b)
+        # a ÷ (b - c÷d)   a ÷ (c÷d - b)
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        ops = '+' if self.variant in [140, 141] else '-'
+        opn = 1 if self.variant in [140, 141] else -1
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if (self.nb_variant == 'decimal1'
+            and is_integer(c * d)
+            and not is_integer(c)):
+            if not is_integer(a * b / 10):
+                try:
+                    c, a = remove_digits_from(c, to=[a])
+                except ValueError:
+                    a += random.choice([i for i in range(-4, 5) if i != 0])
+                    c, a = remove_digits_from(c, to=[a])
+            else:
+                d += random.choice([-1, 1])
+                if d == 1:
+                    d = 3
+        elif (self.nb_variant == 'decimal1'
+              and is_integer(a * b)
+              and not is_integer(a)):
+            if not is_integer(c * d / 10):
+                try:
+                    a, c = remove_digits_from(a, to=[c])
+                except ValueError:
+                    c += random.choice([i for i in range(-4, 5) if i != 0])
+                    a, c = remove_digits_from(a, to=[c])
+            else:
+                b += random.choice([-1, 1])
+                if b == 1:
+                    b = 3
+        if self.variant in [140, 141]:
+            if b < c and self.subvariant == 'only_positive':
+                a, b, c, d = c, d, a, b
+            if c != b:
+                b = b - c
+            a = a * (b + c)
+        elif self.variant in [142, 143]:
+            if self.variant == 142:
+                if b < c and self.subvariant == 'only_positive':
+                    self.variant = 143
+            elif self.variant == 143:
+                if c < b and self.subvariant == 'only_positive':
+                    self.variant = 142
+            a = a * b
+            if b != c:
+                if self.variant == 142:
+                    b = b + c
+                else:
+                    b = c - b
+        c = c * d
+        if self.variant in [140, 142]:
+            self.obj = Division(('+',
+                                 a,
+                                 Sum([b,
+                                      Division((ops, c, d))])))
+        elif self.variant in [141, 143]:
+            self.obj = Division(('+',
+                                 a,
+                                 Sum([Division(('+', c, d)),
+                                      opn * b])))
+        # a ÷ (b + c÷d)   a ÷ (c÷d + b)
+        # a ÷ (b - c÷d)   a ÷ (c÷d - b)
+        if self.variant in [140, 141]:
+            e = b + c / d
+        elif self.variant == 142:
+            e = b - c / d
+        elif self.variant == 143:
+            e = c / d - b
+        self.watch('no negative; decimals distribution; d isnt 1; '
+                   'd isnt deci; e isnt deci', a, b, c, d, e)
 
     def _create_144_145_146_147(self):
         # (a÷b + c)÷d    (c + a÷b)÷d
@@ -636,6 +710,8 @@ class sub_object(submodule.structure):
         catalog.update(dict.fromkeys([110, 114], self._create_110_114))
         catalog.update(dict.fromkeys([111, 115], self._create_111_115))
 
+        catalog.update(dict.fromkeys([140, 141, 142, 143],
+                                     self._create_140_141_142_143))
         catalog.update(dict.fromkeys([144, 145, 146, 147],
                                      self._create_144_145_146_147))
         catalog.update(dict.fromkeys([148 + i for i in range(8)],
