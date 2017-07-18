@@ -394,8 +394,68 @@ class sub_object(submodule.structure):
         self.watch('no negative; d isnt 1; d isnt deci; '
                    'e isnt deci; decimals distribution', a, b, c, d, e)
 
+    def _create_132_133(self):
+        # a÷(b + c×d)           a÷(c×d + b)
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if (self.nb_variant.startswith('decimal')
+            and not is_integer(a)
+            and all(is_integer(x) for x in [b, c, d, a * (b + c * d)])):
+            try:
+                a, b, c, d = remove_digits_from(a, to=[b, c, d])
+            except ValueError:
+                rnd = random.choice([i for i in range(-4, 5) if i != 0])
+                choice = random.choice([1, 2, 3])
+                if choice is 1:
+                    b += rnd
+                elif choice is 2:
+                    c += rnd
+                else:
+                    d += rnd
+                a, b, c, d = remove_digits_from(a, to=[b, c, d])
+        if (not self.allow_division_by_decimal
+            and self.nb_variant.startswith('decimal')
+            and not is_integer(b + c * d)):
+            if not is_integer(b):
+                # For instance, b + c×d is 0.8 + 10×6
+                try:
+                    b, c, d = remove_digits_from(b, to=[c, d])
+                    # Now it is 8 + 10×0.6
+                except ValueError:
+                    # Bad luck, it was something like 0.8 + 50×10
+                    # (and a = 20). We have to change c or d in order to
+                    # ensure one of them at least can be turned into a
+                    # decimal
+                    rnd = random.choice([i
+                                         for i in range(-4, 5)
+                                         if i != 0])
+                    if random.choice([True, False]):
+                        c += rnd
+                    else:
+                        d += rnd
+                    b, c, d = remove_digits_from(b, to=[c, d])
+            # Now it's sure b is an integer
+            # this doesn't mean that b + c*d is
+            if not is_integer(b + c * d):
+                if ((not self.subvariant == 'only_positive')
+                    or (self.subvariant == 'only_positive'
+                        and b - c * d > 0)):
+                    b = b - c * d
+                else:
+                    x = c * d
+                    y = random.choice([n for n in range(int(b) + 1)])
+                    b = Decimal(y) + 1 - (x - int(x))
+        a = self.nb1 * (b + c * d)
+        if self.variant == 132:
+            self.obj = Division(('+', a, Sum([b, Product([c, d])])))
+        elif self.variant == 133:
+            self.obj = Division(('+', a, Sum([Product([c, d]), b])))
+        # a÷(b + c×d)
+        e = b + c * d
+        self.watch('no negative; decimals distribution; c isnt 1; d isnt 1; '
+                   'e isnt deci', a, b, c, d, e)
+
     def _create_134_135(self):
-        # a÷(b - c×d)
+        # a÷(b - c×d)         a÷(c×d - b)
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
         if (self.nb_variant.startswith('decimal')
             and not is_integer(a)
@@ -846,6 +906,7 @@ class sub_object(submodule.structure):
         catalog.update(dict.fromkeys([110, 114], self._create_110_114))
         catalog.update(dict.fromkeys([111, 115], self._create_111_115))
 
+        catalog.update(dict.fromkeys([132, 133], self._create_132_133))
         catalog.update(dict.fromkeys([134, 135], self._create_134_135))
         catalog.update(dict.fromkeys([136, 137], self._create_136_137))
         catalog.update(dict.fromkeys([138, 139], self._create_138_139))
