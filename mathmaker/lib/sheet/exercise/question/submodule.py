@@ -368,12 +368,13 @@ class structure(object):
                     and all(digits_nb(n) == 0 for n in numbers)):
                     msg += ', '.join(letters[0:len(numbers) - 1]) + ' and ' \
                         + letters[len(numbers) - 1] + ' are all integers!'
-            elif r.endswith('isnt 1'):
-                if numbers[letters.index(r[0])] == 1:
-                    msg += r[0] + ' == 1!'
             elif (r.endswith('isnt deci')
                   and not self.allow_division_by_decimal):
                 if not is_integer(numbers[letters.index(r[0])]):
                     msg += r[0] + ' is decimal! => Division by decimal!'
+            elif len(r.split(' isnt ')) == 2:
+                l, n = r.split(' isnt ')
+                if numbers[letters.index(l)] == int(n):
+                    msg += l + ' == {}!'.format(n)
             if msg != '':
                 self.log(self.dbg_info(msg, *numbers, letters=letters))
