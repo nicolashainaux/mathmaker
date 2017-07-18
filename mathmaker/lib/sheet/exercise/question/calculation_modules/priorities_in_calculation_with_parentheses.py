@@ -225,7 +225,7 @@ class sub_object(submodule.structure):
                                                        if i != 0])
                             self.nb2, self.nb3 = \
                                 remove_digits_from(self.nb2, to=[self.nb1])
-            if 136 <= self.variant <= 139:
+            if 124 <= self.variant <= 131 or 136 <= self.variant <= 139:
                 if not is_integer(self.nb4):
                     if self.variant == 'decimal1':
                         self.nb3, self.nb4 = self.nb4, self.nb3
@@ -393,6 +393,53 @@ class sub_object(submodule.structure):
         e = self.nb2
         self.watch('no negative; d isnt 1; d isnt deci; '
                    'e isnt deci; decimals distribution', a, b, c, d, e)
+
+    def _create_124to131(self):
+        # (117) 124: a×(b + c÷d)         125: (b + c÷d)×a
+        #       126: a×(c÷d + b)         127: (c÷d + b)×a (125)
+        # (121) 128: a×(b - c÷d)         129: (b - c÷d)×a (129*)
+        #       130: a×(c÷d - b)         131: (c÷d - b)×a (129)
+        # We won't deal with only integers problems because they cannot show up
+        # For instance if c÷d is 4÷5, then b being initially an integer, will
+        # become decimal after addition or subtraction of c÷d
+        symmetrics = {128: 130, 130: 128, 129: 131, 131: 129}
+        ops = '+' if 124 <= self.variant <= 127 else '-'
+        opn = 1 if 124 <= self.variant <= 127 else -1
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if 124 <= self.variant <= 127:
+            if ((not self.subvariant == 'only_positive')
+                or (self.subvariant == 'only_positive' and b - c > 0)):
+                b = b - c
+        elif self.variant in [130, 131]:
+            if ((not self.subvariant == 'only_positive')
+                or (self.subvariant == 'only_positive' and c - b > 0)):
+                b = c - b
+            elif self.subvariant == 'only_positive':
+                # Here we have c - b <= 0
+                self.variant = symmetrics[self.variant]
+        if self.variant in [128, 129]:
+            b = b + c
+        c = c * d
+        if self.variant in [124, 128]:
+            self.obj = Product([a,
+                                Sum([b, Division((ops, c, d))])],
+                               compact_display=False)
+        elif self.variant in [125, 129]:
+            self.obj = Product([Sum([b,
+                                     Division((ops, c, d))]),
+                                a], compact_display=False)
+        elif self.variant in [126, 130]:
+            self.obj = Product([a,
+                                Sum([Division(('+', c, d)),
+                                     opn * b])],
+                               compact_display=False)
+        elif self.variant in [127, 131]:
+            self.obj = Product([Sum([Division(('+', c, d)),
+                                     opn * b]),
+                                a], compact_display=False)
+        # a×(b ± c÷d)     (a÷b + c)×d
+        self.watch('no negative; decimals distribution; a isnt 1; d isnt 1; '
+                   'd isnt deci', a, b, c, d)
 
     def _create_132_133(self):
         # a÷(b + c×d)           a÷(c×d + b)
@@ -906,6 +953,8 @@ class sub_object(submodule.structure):
         catalog.update(dict.fromkeys([110, 114], self._create_110_114))
         catalog.update(dict.fromkeys([111, 115], self._create_111_115))
 
+        catalog.update(dict.fromkeys([124 + i for i in range(8)],
+                                     self._create_124to131))
         catalog.update(dict.fromkeys([132, 133], self._create_132_133))
         catalog.update(dict.fromkeys([134, 135], self._create_134_135))
         catalog.update(dict.fromkeys([136, 137], self._create_136_137))
