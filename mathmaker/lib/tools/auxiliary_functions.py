@@ -95,9 +95,9 @@ def digits_nb(n):
     :type n: int or decimal.Decimal
     :rtype: int
     """
-    if is_integer(n):
+    if is_integer(abs(n)):
         return 0
-    n = Decimal(n)
+    n = Decimal(abs(n))
     n = n.quantize(Decimal(1)) if n == n.to_integral() else n.normalize()
     temp = len(str((n - round_deci(n, Decimal(1), rounding=ROUND_DOWN)))) - 2
     return temp if temp >= 0 else 0

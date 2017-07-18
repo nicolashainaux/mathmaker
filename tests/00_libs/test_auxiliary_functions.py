@@ -151,6 +151,11 @@ def test_digits_nb():
                                            Decimal('4.00000000000000000000')])
     assert all(digits_nb(n) == 1 for n in [Decimal('0.4'),
                                            Decimal('10.000') / 4])
+    assert all(digits_nb(n) == 0 for n in [-0, -1, -8, Decimal(-4),
+                                           Decimal('-4.0'),
+                                           Decimal('-4.00000000000000000000')])
+    assert all(digits_nb(n) == 1 for n in [Decimal('-0.4'),
+                                           Decimal('-10.000') / 4])
 
 
 def test_split_nb():
