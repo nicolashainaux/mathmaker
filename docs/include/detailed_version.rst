@@ -389,7 +389,7 @@ Once you've checked this works as expected, do not forget to configure your log 
 
 .. note::
 
-    mathmaker does not support systemd journalisation (the default one in Manjaro). You may have to setup systemd too (enable ``ForwardToSyslog`` in its conf file) in order to get ``rsyslog`` recording messages. Also you may need to add ``$ModLoad imjournal`` in ``/etc/rsyslog.conf`` and to create the file ``/var/spool/rsyslog``.
+    mathmaker does not support systemd journalisation (the default one in Manjaro). You may have to setup systemd too (enable ``ForwardToSyslog`` in its conf file) in order to get ``rsyslog`` recording messages. Also you may need to add ``$ModLoad imjournal`` in ``/etc/rsyslog.conf`` and to create the file ``/var/spool/rsyslog``. For a better setup, see https://www.freedesktop.org/wiki/Software/systemd/syslog/. A workaround to prevent duplicate messages could be to discard the unwanted ones, like described here: http://www.rsyslog.com/discarding-unwanted-messages/.
 
 Documentation
 ^^^^^^^^^^^^^
