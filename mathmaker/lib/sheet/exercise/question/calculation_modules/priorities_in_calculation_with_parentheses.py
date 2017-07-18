@@ -394,6 +394,51 @@ class sub_object(submodule.structure):
         self.watch('no negative; d isnt 1; d isnt deci; '
                    'e isnt deci; decimals distribution', a, b, c, d, e)
 
+    def _create_134_135(self):
+        # a÷(b - c×d)
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if (self.nb_variant.startswith('decimal')
+            and not is_integer(a)
+            and all(is_integer(x) for x in [b, c, d, a * b])):
+            try:
+                a, c, d = remove_digits_from(a, to=[c, d])
+            except ValueError:
+                rnd = random.choice([i for i in range(-4, 5) if i != 0])
+                if random.choice([True, False]):
+                    c += rnd
+                else:
+                    d += rnd
+                a, c, d = remove_digits_from(a, to=[c, d])
+        if (not self.allow_division_by_decimal
+            and self.nb_variant.startswith('decimal')
+            and not is_integer(b)):
+            try:
+                b, c, d = remove_digits_from(b, to=[c, d])
+            except ValueError:
+                rnd = random.choice([i for i in range(-4, 5) if i != 0])
+                if random.choice([True, False]):
+                    c += rnd
+                else:
+                    d += rnd
+                b, c, d = remove_digits_from(b, to=[c, d])
+        if (self.variant == 135 and self.subvariant == 'only_positive'
+            and c * d - b < 0):
+                self.variant = 134
+        if self.variant == 134:
+            b = b + c * d
+        elif self.variant == 135:
+            b = c * d - b
+        a = self.nb1 * abs(b - c * d)
+        if self.variant == 134:
+            self.obj = Division(('+', a, Sum([b, Product([-c, d])])))
+            e = b - c * d
+        elif self.variant == 135:
+            self.obj = Division(('+', a, Sum([Product([c, d]), -b])))
+            e = c * d - b
+        # a÷(b - c×d)
+        self.watch('no negative; decimals distribution; c isnt 1; d isnt 1; '
+                   'e isnt deci', a, b, c, d, e)
+
     def _create_136_137(self):
         # (a×b + c)÷d       (c + a×b)÷d
         a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
@@ -801,6 +846,7 @@ class sub_object(submodule.structure):
         catalog.update(dict.fromkeys([110, 114], self._create_110_114))
         catalog.update(dict.fromkeys([111, 115], self._create_111_115))
 
+        catalog.update(dict.fromkeys([134, 135], self._create_134_135))
         catalog.update(dict.fromkeys([136, 137], self._create_136_137))
         catalog.update(dict.fromkeys([138, 139], self._create_138_139))
         catalog.update(dict.fromkeys([140 + i for i in range(8)],
