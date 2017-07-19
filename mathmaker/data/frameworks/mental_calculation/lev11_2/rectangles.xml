@@ -26,8 +26,8 @@
 	<exercise id="mental_calculation" kind="tabular">
 
     <mix>
-			<question kind="area" subkind="rectangle" picture="true" mix_nb="3"></question>
-			<question kind="area" subkind="rectangle" mix_nb="2"></question>
+			<question kind="area" subkind="rectangle" picture="true" pick="3"></question>
+			<question kind="area" subkind="rectangle" pick="2"></question>
 			<nb source="table_25">1</nb>
 			<nb source="intpairs_2to9">1</nb>
 			<nb source="table_15">1</nb>
@@ -36,7 +36,7 @@
 		</mix>
 
 		<mix>
-			<question kind="perimeter" subkind="rectangle" picture="true" mix_nb="2"></question>
+			<question kind="perimeter" subkind="rectangle" picture="true" pick="2"></question>
 			<question kind="perimeter" subkind="rectangle"></question>
 			<nb source="intpairs_2to9" nb_variant="decimal">1</nb>
 			<nb source="table_25">1</nb>
