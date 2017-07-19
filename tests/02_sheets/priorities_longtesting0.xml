@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFAULT MENTAL CALCULATION SHEET -->
+
+
+<sheet header="" title="Calculation: order of precedence." subtitle="" text="" answers_title="Answers">
+
+	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
+	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
+	<layout type="std">
+		<exc>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</exc>
+		<ans>
+			<line nb="None">
+				<exercises>all</exercises>
+			</line>
+		</ans>
+	</layout>
+
+	<!-- Default values: id='generic' kind='' subkind='default' -->
+	<exercise text_exc="Calculate:" text_ans="Example of solutions:">
+		<question kind="priorities_in_calculation" subkind="without_parentheses" subvariant="only_positive">
+			<nb source="singleint_2to10;;intpairs_2to9" variant="0">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="2">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="3">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="4">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="5">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="6">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="7">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="8">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="9">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="10">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="11">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="12">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="13">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="14">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="15">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="16">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="17">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="18">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="19">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="20">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="21">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="22">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="23">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="0">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="8-7,9,17-21">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="0" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="1" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="2" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="3" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="4" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="5" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="6" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="7" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="8" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="9" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="10" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="11" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="12" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="13" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="14" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="15" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="16" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="17" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="18" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="19" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="20" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="21" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="22" nb_variant="decimal1">1000</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="23" nb_variant="decimal1">1000</nb>
+		</question>
+	</exercise>
+
+</sheet>
