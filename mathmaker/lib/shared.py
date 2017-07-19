@@ -51,7 +51,7 @@ def init():
     global mc_source
     global machine
     global number_of_the_question
-    global priorities_in_calculation_variants_source
+    global order_of_operations_variants_source
 
     log = settings.mainlogger
 
@@ -76,8 +76,8 @@ def init():
     angle_ranges_source = database.source("angle_ranges", ["id", "nb1", "nb2"])
     int_deci_clever_pairs_source = database.source("int_deci_clever_pairs",
                                                    ["id", "nb1", "nb2"])
-    priorities_in_calculation_variants_source = database.source(
-        'priorities_in_calculation_variants', ['id', 'nb1'])
+    order_of_operations_variants_source = database.source(
+        'calculation_order_of_operations_variants', ['id', 'nb1'])
 
     markup = latex.MARKUP
 

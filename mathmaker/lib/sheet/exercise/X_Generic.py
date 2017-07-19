@@ -195,13 +195,9 @@ def preprocess_variant(q_i):
                 'id,kind,subkind,nb_source,options'
     :type q_i: Q_info (named tuple)
     """
-    if q_i.id in ['priorities_in_calculation_without_parentheses',
-                  'priorities_in_calculation_with_parentheses']:
+    if q_i.id == 'calculation_order_of_operations':
         default_variant = {
-            'priorities_in_calculation_without_parentheses':
-                {'variant': '0-23'},
-            'priorities_in_calculation_with_parentheses':
-                {'variant': '100-187'}
+            'calculation_order_of_operations': {'variant': '0-23,100-87'}
         }
         if ('variant' not in q_i.options
             or ('variant' in q_i.options and q_i.options['variant'] == '')):
@@ -224,7 +220,7 @@ def preprocess_variant(q_i):
         q_i.options.update(
             {'variant':
              int(shared
-                 .priorities_in_calculation_variants_source
+                 .order_of_operations_variants_source
                  .next(**{'raw': raw_query}))})
 
 
@@ -236,11 +232,10 @@ def auto_adjust_nb_sources(nb_sources: list, q_i: namedtuple):
     :param q_i: the Q_info object (namedtuple), whose fields are
                 'id,kind,subkind,nb_source,options'
     """
-    if q_i.id in ['priorities_in_calculation_without_parentheses',
-                  'priorities_in_calculation_with_parentheses']:
+    if q_i.id == 'calculation_order_of_operations':
         if not len(nb_sources) == 2:
             raise ValueError('There must be two sources for '
-                             'priorities_in_calculation_with(out)_parentheses '
+                             'calculation_order_of_operations '
                              'questions.')
         if nb_sources[0].startswith('single') and 'pairs' in nb_sources[1]:
             single_nb_source, pairs_nb_source = nb_sources
@@ -248,7 +243,7 @@ def auto_adjust_nb_sources(nb_sources: list, q_i: namedtuple):
             pairs_nb_source, single_nb_source = nb_sources
         else:
             raise ValueError('One of the two sources for '
-                             'priorities_in_calculation_with(out)_parentheses '
+                             'calculation_order_of_operations '
                              'questions must be for single numbers, '
                              'the other one for pairs.')
         v = q_i.options['variant']

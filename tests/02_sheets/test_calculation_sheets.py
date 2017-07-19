@@ -28,14 +28,14 @@ from mathmaker.lib.sheet import S_Generic
 XML_SHEETS = get_xml_sheets_paths()
 
 
-def test_priorities_in_calculation_natural_numbers():
-    """Check if 'priorities_in_calculation_...' is generated without errors."""
+def test_calculation_order_of_operations():
+    """Check if 'calculation_order_of_oper..' is generated without errors."""
     shared.machine.write_out(str(S_Generic(
-        XML_SHEETS['priorities_in_calculation_natural_numbers'])))
+        XML_SHEETS['order_of_operations_natural_numbers'])))
 
 
-def test_integration_priorities_in_calculation():
-    """Integration test for priorities_in_calculation."""
+def test_integration_calculation_order_of_operations():
+    """Integration test for calculation_order_of_operations."""
     shared.machine.write_out(str(
         S_Generic('./tests/02_sheets/integration_test_sheets/'
-                  'priorities_in_calculation.xml')))
+                  'calculation_order_of_operations.xml')))

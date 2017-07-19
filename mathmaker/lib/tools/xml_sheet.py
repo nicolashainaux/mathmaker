@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
-import sys
 import errno
 import subprocess
 import copy
@@ -288,8 +287,9 @@ def get_q_kinds_from(exercise_node):
             # to just distribute them all randomly.
             for n in n_temp_list:
                 for q in q_temp_list:
+                    v = n[1].get('variant', q.get('variant', ''))
                     if (not question.match_qtype_sourcenb(
-                        q['kind'] + "_" + q['subkind'], n[0])):
+                        q['kind'] + "_" + q['subkind'], n[0], v)):
                         # __
                         raise error.XMLFileFormatError(
                             "This source: " + str(n[0]) + " cannot "

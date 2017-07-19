@@ -94,7 +94,7 @@ SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
                       'vocabulary_divi': {'decimal_and_one_digit_for_divi'}}}
 
 
-def match_qtype_sourcenb(q_type: str, source_nb: str):
+def match_qtype_sourcenb(q_type: str, source_nb: str, variant: str):
     """
     Tell if the given question's type and source number do match.
 
@@ -102,6 +102,7 @@ def match_qtype_sourcenb(q_type: str, source_nb: str):
 
     :param q_type: the question's type (kind_subkind)
     :param source_nb: the source of the numbers
+    :param variant: the variant of the numbers' source / question, if available
     """
     #   @todo   The 'integer_3_10_decimal_3_10' may be later turned into
     #           'intpairs_3to10' with variant='decimal1', so this condition can
@@ -154,7 +155,7 @@ def match_qtype_sourcenb(q_type: str, source_nb: str):
                     source_nb == 'table_3',
                     source_nb == 'table_4',
                     source_nb == 'bypass'])
-    elif q_type == 'priorities_in_calculation_without_parentheses':
+    elif q_type == 'calculation_order_of_operations':
         # We only check there are two sources
         return len(source_nb.split(sep=';;')) == 2
     else:

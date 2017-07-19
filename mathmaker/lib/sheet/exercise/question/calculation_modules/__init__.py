@@ -27,8 +27,6 @@
 # @package mc_modules
 # @brief All question objects should be "declared" here.
 
-from . import (priorities_in_calculation_without_parentheses,
-               priorities_in_calculation_with_parentheses)
+from . import calculation_order_of_operations
 
-__all__ = ['priorities_in_calculation_without_parentheses',
-           'priorities_in_calculation_with_parentheses']
+__all__ = ['calculation_order_of_operations']

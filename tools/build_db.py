@@ -38,7 +38,7 @@ It will add all entries:
 - a list of "clever" couples of (integer, decimal) (for multiplications)
 - a list of angles' ranges (around 0, 90, 180, 270)
 - the list of variants identification numbers (from 0 to 23 and 100 to 155,
-  so far) for priorities_in_calculation questions
+  so far) for calculation_order_of_operations questions
 """
 
 import os
@@ -105,7 +105,7 @@ def __main__():
               nb1 FLOAT, nb2 FLOAT,
               drawDate INTEGER,
               clever INTEGER)''')
-    db.execute('''CREATE TABLE priorities_in_calculation_variants
+    db.execute('''CREATE TABLE calculation_order_of_operations_variants
               (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
 
     # Extract data from po(t) files and insert them into the db
@@ -231,15 +231,17 @@ def __main__():
                    "VALUES(?, ?, ?)",
                    db_rows)
 
-    # Variant numbers for priorities_in_calculation questions.
+    # Variant numbers for calculation_order_of_operations questions.
     db_rows = [(i, 0) for i in range(24)]
     db.executemany("INSERT "
-                   "INTO priorities_in_calculation_variants(nb1, drawDate) "
+                   "INTO calculation_order_of_operations_variants"
+                   "(nb1, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)
     db_rows = [(i + 100, 0) for i in range(88)]
     db.executemany("INSERT "
-                   "INTO priorities_in_calculation_variants(nb1, drawDate) "
+                   "INTO calculation_order_of_operations_variants"
+                   "(nb1, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)
 
