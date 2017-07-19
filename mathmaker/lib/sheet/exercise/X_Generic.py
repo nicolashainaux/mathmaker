@@ -201,7 +201,7 @@ def preprocess_variant(q_i):
             'priorities_in_calculation_without_parentheses':
                 {'variant': '0-23'},
             'priorities_in_calculation_with_parentheses':
-                {'variant': '100-155'}
+                {'variant': '100-187'}
         }
         if ('variant' not in q_i.options
             or ('variant' in q_i.options and q_i.options['variant'] == '')):
