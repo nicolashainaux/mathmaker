@@ -34,8 +34,8 @@ def test_priorities_in_calculation_natural_numbers():
         XML_SHEETS['priorities_in_calculation_natural_numbers'])))
 
 
-def test_integration_priorities_in_calculation_natural_numbers():
-    """Integration test for priorities_in_calculation_natural_numbers."""
+def test_integration_priorities_in_calculation():
+    """Integration test for priorities_in_calculation."""
     shared.machine.write_out(str(
         S_Generic('./tests/02_sheets/integration_test_sheets/'
-                  'priorities_in_calculation_natural_numbers.xml')))
+                  'priorities_in_calculation.xml')))
