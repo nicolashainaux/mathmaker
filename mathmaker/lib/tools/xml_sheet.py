@@ -275,11 +275,11 @@ def get_q_kinds_from(exercise_node):
                         "Unknown element found in the xml file: "
                         '' + elt.tag)
 
-            if len(q_temp_list) != len(n_temp_list):
+            if len(q_temp_list) > len(n_temp_list):
                 raise error.XMLFileFormatError(
                     "Incorrect mix section: the number of sources "
                     "of numbers (" + str(len(n_temp_list)) + ") "
-                    "does not match the number of questions "
+                    "must be at least equal to the number of questions "
                     "(" + str(len(q_temp_list)) + ").")
 
             # So far, we only check if all of the numbers' sources
