@@ -554,7 +554,7 @@ class sub_object(submodule.structure):
         # a÷(b + c×d)
         e = b + c * d
         self.watch('no negative; decimals distribution; c isnt 1; d isnt 1; '
-                   'e isnt deci; b isnt 0', a, b, c, d, e)
+                   'e isnt deci; e isnt 0; b isnt 0', a, b, c, d, e)
 
     def _create_134_135(self):
         # a÷(b - c×d)         a÷(c×d - b)
@@ -599,7 +599,7 @@ class sub_object(submodule.structure):
             e = c * d - b
         # a÷(b - c×d)
         self.watch('no negative; decimals distribution; c isnt 1; d isnt 1; '
-                   'e isnt deci; b isnt 0', a, b, c, d, e)
+                   'e isnt deci; b isnt 0; a isnt 0', a, b, c, d, e)
 
     def _create_136_137(self):
         # (a×b + c)÷d       (c + a×b)÷d
@@ -788,8 +788,8 @@ class sub_object(submodule.structure):
             self.obj = Division(('+',
                                  Sum([c, Division((ops, a, b))]),
                                  d))
-        # a ÷ (b + c÷d)   a ÷ (c÷d + b)
-        # a ÷ (b - c÷d)   a ÷ (c÷d - b)
+        # a ÷ (b ± c÷d)   a ÷ (c÷d ± b)
+        # (a÷b ± c)÷d    (c ± a÷b)÷d
         watch_rules = 'no negative; decimals distribution; d isnt 1; ' \
             + 'd isnt deci'
         if 140 <= self.variant <= 143:
@@ -799,7 +799,7 @@ class sub_object(submodule.structure):
                 e = b - c / d
             elif self.variant == 143:
                 e = c / d - b
-            watch_rules += '; e isnt deci; b isnt 0'
+            watch_rules += '; e isnt deci; e inst 0; b isnt 0'
             self.watch(watch_rules, a, b, c, d, e)
         # (a÷b + c)÷d
         else:
@@ -807,6 +807,10 @@ class sub_object(submodule.structure):
             self.watch(watch_rules, a, b, c, d)
 
     def _create_148to155(self):
+        # 148: (a + b)×(c + d)          # 152: (a - b)×(c + d)
+        # 149: (a + b)÷(c + d)          # 153: (a - b)÷(c + d)
+        # 150: (a + b)×(c - d)          # 154: (a - b)×(c - d)
+        # 151: (a + b)÷(c - d)          # 155: (a - b)÷(c - d)
         ab_signs = dict.fromkeys([148, 149, 150, 151], '+')
         ab_signs.update(dict.fromkeys([152, 153, 154, 155], '-'))
         cd_signs = dict.fromkeys([148, 149, 152, 153], '+')
@@ -835,13 +839,25 @@ class sub_object(submodule.structure):
             self.obj = Division(('+',
                                  Sum([a, nabs * b]),
                                  Sum([c, ncds * d])))
+        # 148: (a + b)×(c + d)          # 152: (a - b)×(c + d)
+        # 149: (a + b)÷(c + d)          # 153: (a - b)÷(c + d)
+        # 150: (a + b)×(c - d)          # 154: (a - b)×(c - d)
+        # 151: (a + b)÷(c - d)          # 155: (a - b)÷(c - d)
         e = c + ncds * d
         watch_rules = 'no negative; decimals distribution'
         if self.variant in [149, 151, 153, 155]:
-            watch_rules += '; e isnt deci'
+            watch_rules += '; e isnt deci; e isnt 0'
         self.watch(watch_rules, a, b, c, d, e)
 
     def _create_156to171(self):
+        # 156: a + b×(c + d)            # 160: a - b×(c + d)
+        # 157: a + b÷(c + d)            # 161: a - b÷(c + d)
+        # 158: a + b×(c - d)            # 162: a - b×(c - d)
+        # 159: a + b÷(c - d)            # 163: a - b÷(c - d)
+        # 164: a×(b + c) + d            # 168: a×(b - c) + d
+        # 165: a×(b + c) - d            # 169: a×(b - c) - d
+        # 166: a÷(b + c) + d            # 170: a÷(b - c) + d
+        # 167: a÷(b + c) - d            # 171: a÷(b - c) - d
         symmetric = {156: 164, 164: 156, 157: 166, 166: 157,
                      158: 168, 168: 158, 159: 170, 170: 159,
                      160: 165, 165: 160, 161: 167, 167: 161,
@@ -894,6 +910,14 @@ class sub_object(submodule.structure):
                                       b,
                                       Sum([c, ncds * d]))),
                             nbs * a])
+        # 156: a + b×(c + d)            # 160: a - b×(c + d)
+        # 157: a + b÷(c + d)            # 161: a - b÷(c + d)
+        # 158: a + b×(c - d)            # 162: a - b×(c - d)
+        # 159: a + b÷(c - d)            # 163: a - b÷(c - d)
+        # 164: a×(b + c) + d            # 168: a×(b - c) + d
+        # 165: a×(b + c) - d            # 169: a×(b - c) - d
+        # 166: a÷(b + c) + d            # 170: a÷(b - c) + d
+        # 167: a÷(b + c) - d            # 171: a÷(b - c) - d
         watch_rules = 'no negative; decimals distribution'
         if self.variant in [156, 158, 160, 162, 164, 168, 165, 169]:
             watch_rules += '; b isnt 1'
