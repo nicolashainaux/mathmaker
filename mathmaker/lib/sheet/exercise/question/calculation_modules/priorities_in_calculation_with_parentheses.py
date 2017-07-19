@@ -194,6 +194,19 @@ class sub_object(submodule.structure):
                 self.nb2, self.nb3 = self.nb3, self.nb2
             elif 116 <= self.variant <= 147:
                 self.nb3, self.nb4 = self.nb4, self.nb3
+        if 116 <= self.variant <= 123:
+            # In these cases, when self.nb2 is not integer, it gives quite
+            # often "big" calculation with small numbers already. So most of
+            # the time we try to avoid this.
+            if (self.nb_variant.startswith('decimal')
+                and not is_integer(self.nb2)
+                and random.choice([True, True, True, False])):
+                try:
+                    self.nb2, self.nb1, self.nb3, self.nb4 =\
+                        remove_digits_from(self.nb2,
+                                           to=[self.nb1, self.nb3, self.nb4])
+                except ValueError:
+                    pass
         if not self.allow_division_by_decimal:
             if self.variant in [101, 103, 105, 107, ]:
                 if not is_integer(self.nb2):
@@ -394,11 +407,53 @@ class sub_object(submodule.structure):
         self.watch('no negative; d isnt 1; d isnt deci; '
                    'e isnt deci; decimals distribution', a, b, c, d, e)
 
+    def _create_116to123(self):
+        # 116: a×(b + c×d)         117: (b + c×d)×a
+        # 118: a×(c×d + b)         119: (c×d + b)×a (124)
+        # 120: a×(b - c×d)         121: (b - c×d)×a
+        # 122: a×(c×d - b)         123: (c×d - b)×a ((128))
+        symmetrics = {120: 122, 122: 120, 121: 123, 123: 121}
+        opn = 1 if 116 <= self.variant <= 119 else -1
+        a, b, c, d = self.nb1, self.nb2, self.nb3, self.nb4
+        if 116 <= self.variant <= 119:
+            if ((not self.subvariant == 'only_positive')
+                or (self.subvariant == 'only_positive' and b - c * d > 0)):
+                b = b - c * d
+        if self.variant in [122, 123]:
+            if self.subvariant == 'only_positive' and c * d - b < 0:
+                self.variant = symmetrics[self.variant]
+            elif c * d - b != 0:
+                b = c * d - b
+        if self.variant in [120, 121]:
+            b = b + c * d
+        if self.variant in [116, 120]:
+            self.obj = Product([a,
+                                Sum([b, Product([opn * c, d])])],
+                               compact_display=False)
+        elif self.variant in [117, 121]:
+            self.obj = Product([Sum([b,
+                                     Product([opn * c, d],
+                                             compact_display=False)]),
+                                a], compact_display=False)
+        elif self.variant in [118, 122]:
+            self.obj = Product([a,
+                                Sum([Product([c, d],
+                                     compact_display=False),
+                                     opn * b])],
+                               compact_display=False)
+        elif self.variant in [119, 123]:
+            self.obj = Product([Sum([Product([c, d],
+                                     compact_display=False),
+                                     opn * b]),
+                                a], compact_display=False)
+        self.watch('no negative; decimals distribution; a isnt 1; '
+                   'c isnt 1; d isnt 1; b isnt 0', a, b, c, d)
+
     def _create_124to131(self):
-        # (117) 124: a×(b + c÷d)         125: (b + c÷d)×a
-        #       126: a×(c÷d + b)         127: (c÷d + b)×a (125)
-        # (121) 128: a×(b - c÷d)         129: (b - c÷d)×a (129*)
-        #       130: a×(c÷d - b)         131: (c÷d - b)×a (129)
+        # 124: a×(b + c÷d)         125: (b + c÷d)×a
+        # 126: a×(c÷d + b)         127: (c÷d + b)×a
+        # 128: a×(b - c÷d)         129: (b - c÷d)×a
+        # 130: a×(c÷d - b)         131: (c÷d - b)×a
         # We won't deal with only integers problems because they cannot show up
         # For instance if c÷d is 4÷5, then b being initially an integer, will
         # become decimal after addition or subtraction of c÷d
@@ -952,7 +1007,8 @@ class sub_object(submodule.structure):
         catalog.update(dict.fromkeys([109, 113], self._create_109_113))
         catalog.update(dict.fromkeys([110, 114], self._create_110_114))
         catalog.update(dict.fromkeys([111, 115], self._create_111_115))
-
+        catalog.update(dict.fromkeys([116 + i for i in range(8)],
+                                     self._create_116to123))
         catalog.update(dict.fromkeys([124 + i for i in range(8)],
                                      self._create_124to131))
         catalog.update(dict.fromkeys([132, 133], self._create_132_133))
