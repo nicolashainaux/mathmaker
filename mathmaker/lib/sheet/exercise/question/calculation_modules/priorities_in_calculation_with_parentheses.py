@@ -492,9 +492,9 @@ class sub_object(submodule.structure):
             self.obj = Product([Sum([Division(('+', c, d)),
                                      opn * b]),
                                 a], compact_display=False)
-        # a×(b ± c÷d)     (a÷b + c)×d
+        # a×(b ± c÷d) and variants
         self.watch('no negative; decimals distribution; a isnt 1; d isnt 1; '
-                   'd isnt deci', a, b, c, d)
+                   'd isnt deci; b isnt 0', a, b, c, d)
 
     def _create_132_133(self):
         # a÷(b + c×d)           a÷(c×d + b)
@@ -554,7 +554,7 @@ class sub_object(submodule.structure):
         # a÷(b + c×d)
         e = b + c * d
         self.watch('no negative; decimals distribution; c isnt 1; d isnt 1; '
-                   'e isnt deci', a, b, c, d, e)
+                   'e isnt deci; b isnt 0', a, b, c, d, e)
 
     def _create_134_135(self):
         # a÷(b - c×d)         a÷(c×d - b)
@@ -599,7 +599,7 @@ class sub_object(submodule.structure):
             e = c * d - b
         # a÷(b - c×d)
         self.watch('no negative; decimals distribution; c isnt 1; d isnt 1; '
-                   'e isnt deci', a, b, c, d, e)
+                   'e isnt deci; b isnt 0', a, b, c, d, e)
 
     def _create_136_137(self):
         # (a×b + c)÷d       (c + a×b)÷d
@@ -660,9 +660,9 @@ class sub_object(submodule.structure):
                                       Product([a, b],
                                               compact_display=False)]),
                                  d))
-        # (a×b + c)÷d
+        # (a×b + c)÷d       (c + a×b)÷d
         self.watch('no negative; decimals distribution; d isnt 1; '
-                   'd isnt deci; a isnt 1; b isnt 1', a, b, c, d)
+                   'd isnt deci; a isnt 1; b isnt 1; c isnt 0', a, b, c, d)
 
     def _create_138_139(self):
         # (a×b - c)÷d    (c - a×b)÷d
@@ -690,7 +690,8 @@ class sub_object(submodule.structure):
                 c = a * b + c
             first_factor = Sum([c, Product([-a, b], compact_display=False)])
             self.obj = Division(('+', first_factor, d))
-        self.watch('no negative; decimals distribution; d isnt deci',
+        # (a×b - c)÷d    (c - a×b)÷d
+        self.watch('no negative; decimals distribution; d isnt deci; c isnt 0',
                    a, b, c, d)
 
     def _create_140to147(self):
@@ -798,11 +799,11 @@ class sub_object(submodule.structure):
                 e = b - c / d
             elif self.variant == 143:
                 e = c / d - b
-            watch_rules += '; e isnt deci'
+            watch_rules += '; e isnt deci; b isnt 0'
             self.watch(watch_rules, a, b, c, d, e)
         # (a÷b + c)÷d
         else:
-            watch_rules += '; b isnt 1; b isnt deci'
+            watch_rules += '; b isnt 1; b isnt deci; c isnt 0'
             self.watch(watch_rules, a, b, c, d)
 
     def _create_148to155(self):
