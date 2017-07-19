@@ -18,6 +18,7 @@
 			<xs:attribute name="text_exc"			type="xs:string"	use="optional"	default=""/>
 			<xs:attribute name="text_ans"			type="xs:string"	use="optional"	default=""/>
 			<xs:attribute name="layout"			type="xs:string"	use="optional"	default="default"/>
+			<xs:attribute name="shuffle"			type="xs:boolean"	use="optional"	default="false"/>
 			<xs:attribute name="q_numbering"			type="xs:string"	use="optional"	default="disabled"/>
 		</xs:complexType>
 	</xs:element>

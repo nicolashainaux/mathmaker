@@ -32,6 +32,7 @@ from mathmaker.lib.common import alphabet
 from .X_Structure import X_Structure
 from . import question
 from .question import Q_Generic
+from mathmaker.lib.common.cst import XML_BOOLEANS
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
@@ -391,6 +392,7 @@ class X_Generic(X_Structure):
         (x_kind, q_list) = options.get('q_list')
         self.q_numbering = options.get('q_numbering', 'disabled')
         self.layout = options.get('layout', 'default')
+        self.shuffle = XML_BOOLEANS[options.get('shuffle', 'false')]()
         if self.layout != 'default':
             l = self.layout.split(sep='_')
             if not len(l) == 2:
@@ -437,11 +439,12 @@ class X_Generic(X_Structure):
         # list:
         q_dict, self.q_nb = build_q_dict(q_list)
         # in case of mental calculation exercises we shuffle the questions
-        if self.x_kind in ['tabular', 'slideshow']:
+        # (or if the user has set shuffle to 'true' in the <exercise> section)
+        if self.x_kind in ['tabular', 'slideshow'] or self.shuffle:
             for key in q_dict:
                 random.shuffle(q_dict[key])
         mixed_q_list = build_mixed_q_list(q_dict)
-        # in case of mental calculation exercises we shuffle the questions
+        # in case of mental calculation exercises we ensure alternation
         if self.x_kind in ['tabular', 'slideshow']:
             mixed_q_list = increase_alternation(mixed_q_list, 'id')
             mixed_q_list.reverse()
