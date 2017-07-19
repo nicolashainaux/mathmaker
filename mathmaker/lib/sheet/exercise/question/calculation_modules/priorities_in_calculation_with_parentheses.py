@@ -584,7 +584,7 @@ class sub_object(submodule.structure):
                     d += rnd
                 b, c, d = remove_digits_from(b, to=[c, d])
         if (self.variant == 135 and self.subvariant == 'only_positive'
-            and c * d - b < 0):
+            and c * d - b <= 0):
                 self.variant = 134
         if self.variant == 134:
             b = b + c * d
