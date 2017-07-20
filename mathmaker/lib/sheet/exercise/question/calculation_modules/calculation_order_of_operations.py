@@ -400,134 +400,180 @@ class sub_object(submodule.structure):
                     self.nb1 += self.nb2
 
     def _create_0to23(self):
+        a, b, c = self.nb1, self.nb2, self.nb3
+        if self.variant >= 8:
+            d = self.nb4
         if self.variant == 0:  # a + b×c
-            self.obj = Sum([self.nb1, Product([self.nb2, self.nb3])])
+            self.obj = Sum([a, Product([b, c])])
+            self.watch('no negative; decimals distribution; '
+                       'a isnt 0; b isnt 1; c isnt 1', a, b, c)
         elif self.variant == 1:  # a + b÷c
-            self.obj = Sum([self.nb1, Division(('+',
-                                                self.nb2 * self.nb3,
-                                                self.nb3))])
+            b = self.nb2 * self.nb3
+            self.obj = Sum([a, Division(('+', b, c))])
+            self.watch('no negative; decimals distribution; '
+                       'a isnt 0; c isnt 0; c isnt 1; c isnt deci', a, b, c)
         elif self.variant == 2:  # a - b×c
             if self.subvariant == 'only_positive':
-                if self.nb1 < self.nb2:
-                    self.nb1 += self.nb2
-            self.obj = Sum([self.nb1, Product([-self.nb2, self.nb3])])
+                if a < b:
+                    a += b
+            self.obj = Sum([a, Product([-b, c])])
+            self.watch('no negative; decimals distribution; '
+                       'a isnt 0; b isnt 1; c isnt 1', a, b, c)
         elif self.variant == 3:  # a - b÷c
+            b = b * c
             if self.subvariant == 'only_positive':
-                if self.nb1 < self.nb2 * self.nb3:
-                    self.nb1 += self.nb2 * self.nb3
-            self.obj = Sum([self.nb1,
-                            Division(('-', self.nb2 * self.nb3, self.nb3))])
+                if a < b:
+                    a += b
+            self.obj = Sum([a, Division(('-', b, c))])
+            self.watch('no negative; decimals distribution; '
+                       'a isnt 0; c isnt 0; c isnt 1; c isnt deci', a, b, c)
         elif self.variant == 4:  # a×b + c
-            self.obj = Sum([Product([self.nb1, self.nb2]),
-                            self.nb3])
+            self.obj = Sum([Product([a, b]), c])
+            self.watch('no negative; decimals distribution; '
+                       'c isnt 0; b isnt 1; a isnt 1', a, b, c)
         elif self.variant == 5:  # a÷b + c
-            self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
-                            self.nb3])
+            a = self.nb1 * self.nb2
+            self.obj = Sum([Division(('+', a, b)), c])
+            self.watch('no negative; decimals distribution; '
+                       'c isnt 0; b isnt 0; b isnt 1; b isnt deci', a, b, c)
         elif self.variant == 6:  # a×b - c
-            if (self.subvariant == 'only_positive'
-                and self.nb1 * self.nb2 < self.nb3):
-                self.nb3 = self.nb3 % (self.nb1 * self.nb2)
-            self.obj = Sum([Product([self.nb1, self.nb2]),
-                            -self.nb3])
+            if self.subvariant == 'only_positive' and a * b < c:
+                c = c % (a * b)
+            self.obj = Sum([Product([a, b]), -c])
+            self.watch('no negative; decimals distribution; '
+                       'c isnt 0; b isnt 1; a isnt 1', a, b, c)
         elif self.variant == 7:  # a÷b - c
-            if self.subvariant == 'only_positive' and self.nb1 < self.nb3:
+            if self.subvariant == 'only_positive' and a < c:
                 if self.nb_variant.startswith('decimal'):
                     depth = int(self.nb_variant[-1]) + self.allow_extra_digits
                 else:
                     depth = self.allow_extra_digits
                 if self.nb_variant.startswith('decimal'):
                     for i in range(depth):
-                        self.nb3 = self.nb3 / 10
-                        if self.nb1 >= self.nb3:
+                        c = c / 10
+                        if a >= c:
                             break
                     else:  # no break:
-                        # We have divided self.nb3 by 10 as much as allowed
-                        # and yet self.nb1 < self.nb3, so no other choice than
+                        # We have divided c by 10 as much as allowed
+                        # and yet a < c, so no other choice than
                         # randomly choose a new decimal value
-                        self.nb3 = random.choice(
+                        c = random.choice(
                             [i + 1
-                             for i in range(int(min(self.nb1, self.nb2)
-                                            * (10 ** depth)))]) / (10 ** depth)
+                             for i in range(int(min(a, b) * (10 ** depth)))]) \
+                            / (10 ** depth)
                 else:  # no choice but to randomly choose a new natural
-                    self.nb3 = random.choice(
-                        [i + 1
-                         for i in range(int(min(self.nb1, self.nb2)) - 1)])
-            self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
-                            -self.nb3])
+                    c = random.choice([i + 1
+                                       for i in range(int(min(a, b)) - 1)])
+            a = a * b
+            self.obj = Sum([Division(('+', a, b)), -c])
+            self.watch('no negative; decimals distribution; '
+                       'c isnt 0; b isnt 0; b isnt 1; b isnt deci', a, b, c)
         elif self.variant == 8:  # a×b + c×d
-            self.obj = Sum([Product([self.nb1, self.nb2]),
-                            Product([self.nb3, self.nb4])])
+            self.obj = Sum([Product([a, b]), Product([c, d])])
+            self.watch('no negative; decimals distribution; '
+                       'a isnt 1; b isnt 1; c isnt 1; d isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 9:  # a×b - c×d
-            if (self.subvariant == 'only_positive'
-                and self.nb1 * self.nb2 < self.nb3 * self.nb4):
-                self.nb1, self.nb2, self.nb3, self.nb4 = \
-                    self.nb3, self.nb4, self.nb1, self.nb2
-            self.obj = Sum([Product([self.nb1, self.nb2]),
-                            Product([-self.nb3, self.nb4])])
+            if self.subvariant == 'only_positive' and a * b < c * d:
+                a, b, c, d = c, d, a, d
+            self.obj = Sum([Product([a, b]), Product([-c, d])])
+            self.watch('no negative; decimals distribution; '
+                       'a isnt 1; b isnt 1; c isnt 1; d isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 10:  # a÷b + c×d
-            self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
-                            Product([self.nb3, self.nb4])])
+            a = a * b
+            self.obj = Sum([Division(('+', a, b)), Product([c, d])])
+            self.watch('no negative; decimals distribution; '
+                       'b isnt 1; c isnt 1; d isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 11:  # a÷b - c×d
-            self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
-                            Product([-self.nb3, self.nb4])])
+            a = a * b
+            self.obj = Sum([Division(('+', a, b)), Product([-c, d])])
+            self.watch('no negative; decimals distribution; '
+                       'b isnt 1; c isnt 1; d isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 12:  # a×b + c÷d
-            self.obj = Sum([Product([self.nb1, self.nb2]),
-                            Division(('+', self.nb3 * self.nb4, self.nb4))])
+            c = c * d
+            self.obj = Sum([Product([a, b]), Division(('+', c, d))])
+            self.watch('no negative; decimals distribution; '
+                       'a isnt 1; b isnt 1; d isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 13:  # a×b - c÷d
-            self.obj = Sum([Product([self.nb1, self.nb2]),
-                            Division(('-', self.nb3 * self.nb4, self.nb4))])
+            c = c * d
+            self.obj = Sum([Product([a, b]), Division(('-', c, d))])
+            self.watch('no negative; decimals distribution; '
+                       'a isnt 1; b isnt 1; d isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 14:  # a÷b + c÷d
-            self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
-                            Division(('+', self.nb3 * self.nb4, self.nb4))])
+            a, c = a * b, c * d
+            self.obj = Sum([Division(('+', a, b)), Division(('+', c, d))])
+            self.watch('no negative; decimals distribution; '
+                       'b isnt 1; d isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 15:  # a÷b - c÷d
-            self.obj = Sum([Division(('+', self.nb1 * self.nb2, self.nb2)),
-                            Division(('-', self.nb3 * self.nb4, self.nb4))])
+            a, c = a * b, c * d
+            self.obj = Sum([Division(('+', a, b)), Division(('-', c, d))])
+            self.watch('no negative; decimals distribution; '
+                       'b isnt 1; d isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 16:  # a + b×c + d
-            self.obj = Sum([self.nb1,
-                            Product([self.nb2, self.nb3]),
-                            self.nb4])
+            self.obj = Sum([a, Product([b, c]), d])
+            self.watch('no negative; decimals distribution; '
+                       'b isnt 1; c isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 17:  # a + b÷c + d
-            self.obj = Sum([self.nb1,
-                            Division(('+', self.nb2 * self.nb3, self.nb3)),
-                            self.nb4])
+            b = b * c
+            self.obj = Sum([a, Division(('+', b, c)), d])
+            self.watch('no negative; decimals distribution; '
+                       'c isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 18:  # a - b×c + d
-            self.obj = Sum([self.nb1,
-                            Product([-self.nb2, self.nb3]),
-                            self.nb4])
+            self.obj = Sum([a, Product([-b, c]), d])
+            self.watch('no negative; decimals distribution; '
+                       'b isnt 1; c isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 19:  # a + b×c - d
             if self.subvariant == 'only_positive':
-                if self.nb1 + self.nb2 * self.nb3 < self.nb4:
-                    self.nb1 = self.nb1 + self.nb4
-            self.obj = Sum([self.nb1,
-                            Product([self.nb2, self.nb3]),
-                            -self.nb4])
+                if a + b * c < d:
+                    a = a + d
+            self.obj = Sum([a, Product([b, c]), -d])
+            self.watch('no negative; decimals distribution; '
+                       'b isnt 1; c isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 20:  # a - b×c - d
             if self.subvariant == 'only_positive':
-                if self.nb4 + self.nb2 * self.nb3 > self.nb1:
-                    self.nb1 = self.nb1 + self.nb4 + self.nb2 * self.nb3
-            self.obj = Sum([self.nb1,
-                            Product([-self.nb2, self.nb3]),
-                            -self.nb4])
+                if d + b * c > a:
+                    a = a + d + b * c
+            self.obj = Sum([a, Product([-b, c]), -d])
+            self.watch('no negative; decimals distribution; '
+                       'b isnt 1; c isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 21:  # a - b÷c + d
-            self.obj = Sum([self.nb1,
-                            Division(('-', self.nb2 * self.nb3, self.nb3))])
+            b = b * c
+            self.obj = Sum([a, Division(('-', b, c)), d])
+            self.watch('no negative; decimals distribution; '
+                       'c isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 22:  # a + b÷c - d
             if self.subvariant == 'only_positive':
-                if self.nb1 + self.nb2 < self.nb4:
-                    self.nb1 += self.nb4
-            self.obj = Sum([self.nb1,
-                            Division(('+', self.nb2 * self.nb3, self.nb3)),
-                            -self.nb4])
+                if a + b < d:
+                    a += d
+                b = b * c
+            self.obj = Sum([a, Division(('+', b, c)), -d])
+            self.watch('no negative; decimals distribution; '
+                       'c isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 23:  # a - b÷c - d
             if self.subvariant == 'only_positive':
-                if self.nb1 < self.nb2:
-                    self.nb1 += self.nb2
-                    if self.nb1 < self.nb2 + self.nb4:
-                        self.nb1 += self.nb4
-            self.obj = Sum([self.nb1,
-                            Division(('-', self.nb2 * self.nb3, self.nb3)),
-                            -self.nb4])
-
+                if a < b:
+                    a += b
+                    if a < b + d:
+                        a += d
+            b = b * c
+            self.obj = Sum([a, Division(('-', b, c)), -d])
+            self.watch('no negative; decimals distribution; '
+                       'c isnt 1'
+                       'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
 
     def _create_100_104(self):
         # (a + b)×c    (a - b)×c
