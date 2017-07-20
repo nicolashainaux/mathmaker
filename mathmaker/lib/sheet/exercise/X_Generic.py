@@ -440,12 +440,12 @@ class X_Generic(X_Structure):
         q_dict, self.q_nb = build_q_dict(q_list)
         # in case of mental calculation exercises we shuffle the questions
         # (or if the user has set shuffle to 'true' in the <exercise> section)
-        if self.x_kind in ['tabular', 'slideshow'] or self.shuffle:
+        if self.shuffle:
             for key in q_dict:
                 random.shuffle(q_dict[key])
         mixed_q_list = build_mixed_q_list(q_dict)
-        # in case of mental calculation exercises we ensure alternation
-        if self.x_kind in ['tabular', 'slideshow']:
+        # in case of mental calculation exercises we increase alternation
+        if self.shuffle and self.x_id == 'mental_calculation':
             mixed_q_list = increase_alternation(mixed_q_list, 'id')
             mixed_q_list.reverse()
             mixed_q_list = increase_alternation(mixed_q_list, 'id')

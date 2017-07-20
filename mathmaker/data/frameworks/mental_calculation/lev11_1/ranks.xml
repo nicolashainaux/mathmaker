@@ -19,17 +19,17 @@
 		</ans>
 	</layout>
 
-	<!-- Default value: id='generic' 
+	<!-- Default value: id='generic'
 		 No default for kind and subkind, they must be given -->
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
-	<exercise id="mental_calculation" kind="tabular">
+	<exercise id="mental_calculation" kind="tabular" shuffle="true">
 
 		<!-- No default for kind and subkind, they must be given -->
 		<!-- Default values: width="random" generation_type="mixed" rank_matches_invisible_zero="False" -->
 		<!-- Possible values: width: integer between 1 and the number of possible ranks
 			 				  generation_type: "default" | "alternative" | "mixed"
 										(no effect in case of 'numberof' questions, will be default)
-							  rank_matches_invisible_zero: any string means True except "False" and "" 
+							  rank_matches_invisible_zero: any string means True except "False" and ""
 										(no effect in case of rank direct questions)  -->
 		<question kind="rank" subkind="numberof" generation_type="default">
 			<nb source="rank_words">5</nb>
@@ -46,7 +46,7 @@
 		<question kind="rank" subkind="reversed" rank_matches_invisible_zero="True">
 			<nb source="rank_words">2</nb>
 		</question>
-	
+
 		<question kind="rank" subkind="numberof" rank_matches_invisible_zero="True" generation_type="default">
 			<nb source="rank_words">1</nb>
 		</question>

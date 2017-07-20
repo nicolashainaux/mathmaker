@@ -20,12 +20,12 @@
 		</ans>
 	</layout>
 
-	<!-- Default value: id='generic' 
+	<!-- Default value: id='generic'
 		 No default for kind and subkind, they must be given -->
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
-	<exercise id="mental_calculation" kind="tabular">
+	<exercise id="mental_calculation" kind="tabular" shuffle="true">
 
-		<!-- Default value (planned): context="none" 
+		<!-- Default value (planned): context="none"
 			 No default for kind and subkind, they must be given -->
 		<question kind="divi" subkind="direct">
 			<nb source="intpairs_2to9">20</nb>

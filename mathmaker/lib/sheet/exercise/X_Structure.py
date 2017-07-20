@@ -112,6 +112,8 @@ class X_Structure(object):
         else:
             self.x_layout = X_LAYOUTS[self.layout]
 
+        self.x_id = options.get('id', 'generic')
+
         # The slideshow option (for MentalCalculation sheets)
         self.slideshow = options.get('slideshow', False)
 

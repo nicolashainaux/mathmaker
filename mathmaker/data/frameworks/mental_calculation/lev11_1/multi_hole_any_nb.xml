@@ -20,10 +20,10 @@
 		</ans>
 	</layout>
 
-	<!-- Default value: id='generic' 
+	<!-- Default value: id='generic'
 		 No default for kind and subkind, they must be given -->
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
-	<exercise id="mental_calculation" kind="tabular">
+	<exercise id="mental_calculation" kind="tabular" shuffle="true">
 
 		<question kind="multi" subkind="hole">
 			<nb source="intpairs_2to9">8</nb>

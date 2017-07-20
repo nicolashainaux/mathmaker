@@ -23,7 +23,7 @@
 	<!-- Default value: id='generic'
 		 No default for kind and subkind, they must be given -->
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
-	<exercise id="mental_calculation" kind="tabular">
+	<exercise id="mental_calculation" kind="tabular" shuffle="true">
 
 		<question kind="addi" subkind="direct" context="mini_problem">
 			<nb source="intpairs_5to20">5</nb>
