@@ -28,6 +28,7 @@ import logging
 import random
 
 from mathmaker import settings
+from mathmaker.lib.common.cst import XML_BOOLEANS
 import xml.etree.ElementTree as XML_PARSER
 from mathmaker.lib.sheet import exercise
 from mathmaker.lib.sheet.exercise import question
@@ -297,12 +298,27 @@ def get_q_kinds_from(exercise_node):
                             " " + str(q['kind'] + "_" + q['subkind']))
 
             random.shuffle(q_temp_list)
-            random.shuffle(n_temp_list)
+            if any(XML_BOOLEANS[n[1].get('required', 'false')]()
+                   for n in n_temp_list):
+                required_n_temp_list = [n for n in n_temp_list
+                                        if XML_BOOLEANS[n[1].get('required',
+                                                                 'false')]()]
+                rest_n_temp_list = [n for n in n_temp_list
+                                    if not XML_BOOLEANS[n[1].get('required',
+                                                                 'false')]()]
+                random.shuffle(required_n_temp_list)
+                random.shuffle(rest_n_temp_list)
+                n_temp_list = required_n_temp_list + rest_n_temp_list
+            else:
+                random.shuffle(n_temp_list)
 
             for (q, n) in zip(q_temp_list, n_temp_list):
                 merged_q = copy.deepcopy(q)
                 merged_q.update(n[1])
                 questions += [[merged_q, n[0], 1]]
+
+            random.shuffle(questions)
+
     return (x_kind, questions)
 
 
