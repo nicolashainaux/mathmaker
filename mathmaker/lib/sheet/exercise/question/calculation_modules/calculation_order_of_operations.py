@@ -390,14 +390,6 @@ class sub_object(submodule.structure):
                     else:
                         self.nb3, self.nb1, self.nb2 = remove_digits_from(
                             self.nb3, to=[self.nb1, self.nb2])
-        if self.subvariant == 'only_positive':
-            if self.variant in [2, 18]:
-                if (Item(Product([self.nb2, self.nb3]).evaluate())
-                    > Item(self.nb1)):
-                    self.nb1 = self.nb1 + self.nb2 * self.nb3
-            if self.variant in [3, 21]:
-                if self.nb2 > self.nb1:
-                    self.nb1 += self.nb2
 
     def _create_0to23(self):
         a, b, c = self.nb1, self.nb2, self.nb3
@@ -414,16 +406,16 @@ class sub_object(submodule.structure):
                        'a isnt 0; c isnt 0; c isnt 1; c isnt deci', a, b, c)
         elif self.variant == 2:  # a - b×c
             if self.subvariant == 'only_positive':
-                if a < b:
-                    a += b
+                if a < b * c:
+                    a += b * c
             self.obj = Sum([a, Product([-b, c])])
             self.watch('no negative; decimals distribution; '
                        'a isnt 0; b isnt 1; c isnt 1', a, b, c)
         elif self.variant == 3:  # a - b÷c
-            b = b * c
             if self.subvariant == 'only_positive':
                 if a < b:
                     a += b
+            b = b * c
             self.obj = Sum([a, Division(('-', b, c))])
             self.watch('no negative; decimals distribution; '
                        'a isnt 0; c isnt 0; c isnt 1; c isnt deci', a, b, c)
@@ -528,6 +520,9 @@ class sub_object(submodule.structure):
                        'c isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 18:  # a - b×c + d
+            if self.subvariant == 'only_positive':
+                if a < b * c:
+                    a += b * c
             self.obj = Sum([a, Product([-b, c]), d])
             self.watch('no negative; decimals distribution; '
                        'b isnt 1; c isnt 1'
@@ -549,6 +544,9 @@ class sub_object(submodule.structure):
                        'b isnt 1; c isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 21:  # a - b÷c + d
+            if self.subvariant == 'only_positive':
+                if a < b:
+                    a += b
             b = b * c
             self.obj = Sum([a, Division(('-', b, c)), d])
             self.watch('no negative; decimals distribution; '
