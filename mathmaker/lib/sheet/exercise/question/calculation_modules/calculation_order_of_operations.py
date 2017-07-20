@@ -438,7 +438,7 @@ class sub_object(submodule.structure):
                        'c isnt 0; b isnt 0; b isnt 1; b isnt deci', a, b, c)
         elif self.variant == 6:  # a×b - c
             if self.subvariant == 'only_positive' and a * b < c:
-                c = c % (a * b)
+                c = random.choice([i + 1 for i in range(int(a * b))])
             self.obj = Sum([Product([a, b]), -c])
             self.watch('no negative; decimals distribution; '
                        'c isnt 0; b isnt 1; a isnt 1', a, b, c)
