@@ -25,7 +25,8 @@ from decimal import Decimal
 
 from mathmaker.lib.tools.auxiliary_functions import \
     (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
-     move_digits_to, split_nb, is_power_of_10, digits_nb, remove_digits_from)
+     move_digits_to, split_nb, is_power_of_10, digits_nb, remove_digits_from,
+     fix_digits)
 
 
 def test_check_unique_letters_words():
@@ -127,6 +128,16 @@ def test_remove_digits_from():
         remove_digits_from(Decimal('1.4'), to=[10, 20, 30])
     assert remove_digits_from(Decimal('1.4'), to=[10, 20, 36]) ==\
         [Decimal('14'), 10, 20, Decimal('3.6')]
+
+
+def test_fix_digits():
+    """Check fix_digits() in different cases."""
+    n1, n2 = fix_digits(Decimal('0.6'), Decimal('2'))
+    assert n1 == Decimal('6')
+    assert n2 == Decimal('0.2')
+    n1, n2 = fix_digits(Decimal('0.6'), Decimal('10'))
+    assert n1 == Decimal('6')
+    assert not is_integer(n2)
 
 
 def test_is_power_of_10():

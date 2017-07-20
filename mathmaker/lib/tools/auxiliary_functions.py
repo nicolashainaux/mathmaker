@@ -193,6 +193,16 @@ def remove_digits_from(number, to=None):
     return [number * 10 ** n, ] + [x for x in to]
 
 
+def fix_digits(n1, n2):
+    """Ensure digits from n1 are removed. Change n2 if necessary."""
+    try:
+        n1, n2 = remove_digits_from(n1, to=[n2])
+    except ValueError:
+        n2 += random.choice([i for i in range(-4, 5) if i != 0])
+        n1, n2 = remove_digits_from(n1, to=[n2])
+    return (n1, n2)
+
+
 def split_nb(n, operation='sum', dig=0):
     """
     Split n as a sum, like a + b = n; or a difference, like a - b = n
