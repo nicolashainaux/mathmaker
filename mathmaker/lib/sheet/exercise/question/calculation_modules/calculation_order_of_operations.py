@@ -342,7 +342,7 @@ class sub_object(submodule.structure):
                         except ValueError:
                             self.nb1 += random.choice([i for i in range(-4, 5)
                                                        if i != 0])
-                            self.nb2, self.nb3 = \
+                            self.nb2, self.nb1 = \
                                 remove_digits_from(self.nb2, to=[self.nb1])
             if 124 <= self.variant <= 131 or 136 <= self.variant <= 139:
                 if not is_integer(self.nb4):
