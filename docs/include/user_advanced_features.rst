@@ -90,13 +90,14 @@ As a directive to mathmaker it is possible to give a path to an xml file.
 
 Creating a new xml file that can be used as a model by ``mathmaker`` is more for advanced users, though it's not that difficult.
 
-At the moment (version 0.7), it's only possible to create mental calculation sheets this way. So there's not much to change from a raw model.
-
 Let's have a look at ``mathmaker/data/frameworks/mental_calculation/lev11_1/divisions.xml``:
 
 .. code-block:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
+
+    <!-- DEFAULT MENTAL CALCULATION SHEET -->
+
 
     <sheet header="" title="Mental calculation" subtitle="Divisions" text="" answers_title="Answers">
 
@@ -118,9 +119,10 @@ Let's have a look at ``mathmaker/data/frameworks/mental_calculation/lev11_1/divi
     	<!-- Default value: id='generic'
     		 No default for kind and subkind, they must be given -->
     	<!-- Available kinds for mental calculation: tabular, slideshow -->
-    	<exercise id="mental_calculation" kind="tabular">
+    	<exercise id="mental_calculation" kind="tabular" shuffle="true">
 
-    		<!--No default for kind and subkind, they must be given -->
+    		<!-- Default value (planned): context="none"
+    			 No default for kind and subkind, they must be given -->
     		<question kind="divi" subkind="direct">
     			<nb source="intpairs_2to9">20</nb>
     		</question>
@@ -134,6 +136,8 @@ The ``<sheet>`` tag has attributes that let you easily change the title of the s
 The ``<layout>`` part can't be changed (yet) except the ``unit`` and ``font_size_offset`` attributes. The later one is especially practical to resize the whole sheet at once.
 
 The ``<exercise>`` part is the one you can change alot. Keep the ``id="mental_calculation"`` and ``kind="tabular"`` attributes though (they can't be changed yet) but you can put the questions you like inside.
+
+The questions will show up in the order you write them, unless you set the ``shuffle`` attribute of ``<exercise>`` to ``"true"``.
 
 Each question is defined this way:
 
@@ -165,38 +169,56 @@ Note that you can put several different numbers' sources inside one ``<question>
         <nb source="decimal_and_one_digit">1</nb>
     </question>
 
-This means there will be three questions, all being direct multiplications, but one pair of numbers will be integers between 2 and 9; one pair will be from the table of 11 (like 34 × 11), and one will be a decimal number and a one digit number (like 150,3 × 0.01).
+This means there will be three questions, all being direct multiplications, but one pair of numbers will be integers between 2 and 9; one pair will be from the table of 11 (like 34 × 11), and one will be a decimal number and a one digit number (like 150.3 × 0.01).
 
 Last explained feature: in some sheets you'll find ``<mix>`` sections, like this one, taken from ``mathmaker/data/frameworks/mental_calculation/lev11_2/test_11_2.xml``:
 
 .. code-block:: xml
 
-    <mix>
+      <mix>
         <question kind="area" subkind="rectangle" picture="true"></question>
-        <question kind="multi" subkind="direct"></question>
-        <question kind="multi" subkind="direct"></question>
+        <question kind="multi" subkind="direct" pick="2"></question>
         <question kind="vocabulary" subkind="multi"></question>
         <nb source="table_15">1</nb>
         <nb source="table_11">1</nb>
-        <nb source="intpairs_2to9" variant="decimal1">1</nb>
-        <nb source="intpairs_2to9" variant="decimal2">1</nb>
-    </mix>
+        <nb source="intpairs_2to9" nb_variant="decimal1">1</nb>
+        <nb source="intpairs_2to9" nb_variant="decimal2">1</nb>
+      </mix>
 
-It means the numbers' sources will be randomly attributed to the questions. Each time a new sheet is generated from this framework, the numbers from table of 15 will be attributed . The rules to follow for a ``<mix>`` section are:
+* The ``pick`` keyword tells how many times to create this question. If unspecified, default value is ``1``.
 
-* Put as many numbers' sources as there are questions. For instance in the example above we could have written this too:
+It means the numbers' sources will be randomly attributed to the questions. Each time a new sheet is generated from this framework, the numbers from table of 15 will be attributed randomly to one of the four questions of the sections, and the same will happen to the other numbers' sources.
+
+The rules to follow for a ``<mix>`` section are:
+
+* Any numbers' source must be assignable to any of the questions of the section.
+
+* Put at least as many numbers' sources as there are questions. For instance in the example above we could have written this too:
 
 .. code-block:: xml
 
     <mix>
         <question kind="area" subkind="rectangle" picture="true"></question>
-        <question kind="multi" subkind="direct"></question>
-        <question kind="multi" subkind="direct"></question>
+        <question kind="multi" subkind="direct" pick="2"></question>
         <question kind="vocabulary" subkind="multi"></question>
         <nb source="table_15">3</nb>
-        <nb source="intpairs_2to9" variant="decimal1">1</nb>
+        <nb source="intpairs_2to9" nb_variant="decimal1">1</nb>
     </mix>
 
-* Any numbers' source must be assignable to any of the questions.
+If you put more number's sources as there are questions, the extraneous ones will be ignored. This is useful when there are a lot of possibilities to pick from.
 
-Now the question is: how to know about the questions kinds and subkinds, and the possible contexts, variants or whatever other attributes? Well it is planned to add an easy way to know that (like a special directive) but there's nothing yet. The better, so far, may be to look at the provided sheets in ``mathmaker/data/framworks/mental_calculation/`` and see what's in there.
+If among the sources you want to have at least one of a certain type, you can set the ``required`` attribute of ``<nb>`` to ``"true"``. In the example below, 8 questions will be created. Among them, there will be at least 2 of variants 8 to 23, one of variant 116 to 155 and one of variant between 156 and 187. The 4 other ones will each match a variant between 8 and 23 or 100 and 187.
+
+.. code-block:: xml
+
+    <mix>
+		  <question kind="calculation" subkind="order_of_operations" subvariant="only_positive" pick="8"></question>
+		  <nb source="singleint_3to12;;intpairs_2to9" variant="8-23" required="true">2</nb>
+		  <nb source="singleint_3to12;;intpairs_2to9" variant="116-155" required="true">1</nb>
+		  <nb source="singleint_3to12;;intpairs_2to9" variant="156-187" required="true">1</nb>
+		  <nb source="singleint_3to12;;intpairs_2to9" variant="8-23,100-187">10</nb>
+		</mix>
+
+Also, note that the question's variant can be redefined as ``<nb>``'s attribute (it overrides the one defined in ``<question>``, if any).
+
+Now the question is: how to know about the questions kinds and subkinds, and the possible contexts, variants or whatever other attributes? Well it is planned to add an easy way to know that (like a special directive) but there's nothing yet. The better, so far, may be to look at the provided sheets in ``mathmaker/data/frameworks/`` and see what's in there.
