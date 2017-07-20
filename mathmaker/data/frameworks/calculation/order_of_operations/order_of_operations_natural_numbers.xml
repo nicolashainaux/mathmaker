@@ -43,21 +43,42 @@
 		   will use as many sources as required of each type, but you must provide
 		   what kind of sources must be used both for single integers and for pairs
 		   of integers, so you must put TWO sources and not only one. -->
-		<!--<mix>
-		  <question kind="calculation" subkind="order_of_operations"
-				        subvariant="only_positive" mix_nb="8"></question>
-			<nb source="singleint_1to10;;intpairs_3to10" variant="0-3">3</nb>
-			<nb source="singleint_1to10;;intpairs_3to10" variant="0-3" nb_variant="decimal1">1</nb>
-			<nb source="singleint_1to10;;intpairs_3to10" variant="4-7">1</nb>
-			<nb source="singleint_1to10;;intpairs_3to10" variant="4-7" nb_variant="decimal1" allow_extra_digits="1">1</nb>
-			<nb source="singleint_1to10;;intpairs_2to10" variant="8-23">2</nb>
-		</mix> -->
+    <mix>
+		  <question kind="calculation" subkind="order_of_operations" subvariant="only_positive" pick="6"></question>
+			<nb source="singleint_5to20;;intpairs_2to9" variant="0" required="true">1</nb>
+			<nb source="singleint_2to9;;intpairs_2to9" variant="1,3,5,7" required="true">1</nb>
+			<nb source="singleint_2to100;;intpairs_2to9" variant="2,3,6,7" required="true">1</nb>
+			<nb source="singleint_2to9;;intpairs_2to9" variant="0-7">8</nb>
+		</mix>
 
-		<question kind="calculation" subkind="order_of_operations" subvariant="only_positive">
+	</exercise>
 
-			<nb source="singleint_2to10;;intpairs_2to10" variant="0" nb_variant="decimal1">1</nb>
+	<exercise text_exc="Now the expressions may have parentheses. Calculate them:" text_ans="Example of solutions:">
+    <mix>
+		  <question kind="calculation" subkind="order_of_operations" subvariant="only_positive" pick="8"></question>
+			<nb source="singleint_3to12;;intpairs_2to9" variant="8-23" required="true">2</nb>
+			<nb source="singleint_3to12;;intpairs_2to9" variant="116-155" required="true">1</nb>
+			<nb source="singleint_3to12;;intpairs_2to9" variant="156-187" required="true">1</nb>
+			<nb source="singleint_3to12;;intpairs_2to9" variant="8-23,100-187">4</nb>
+		</mix>
 
-		</question>
+	</exercise>
+	<exercise text_exc="Same exercise, but with decimal numbers. Calculate:" text_ans="Example of solutions:">
+    <mix>
+		  <question kind="calculation" subkind="order_of_operations" subvariant="only_positive" pick="4" nb_variant="decimal1"></question>
+			<nb source="singleint_5to20;;intpairs_2to9" variant="0" required="true">1</nb>
+			<nb source="singleint_5to20;;intpairs_2to9" variant="1,3,5,7" required="true">1</nb>
+			<nb source="singleint_5to20;;intpairs_2to9" variant="2,3,6,7" required="true">1</nb>
+			<nb source="singleint_5to20;;intpairs_2to9" variant="0-7">1</nb>
+		</mix>
+
+    <mix>
+		  <question kind="calculation" subkind="order_of_operations" subvariant="only_positive" pick="6" nb_variant="decimal1"></question>
+			<nb source="singleint_3to12;;intpairs_2to9" variant="8-23" required="true">2</nb>
+			<nb source="singleint_3to12;;intpairs_2to9" variant="116-155" required="true">1</nb>
+			<nb source="singleint_3to12;;intpairs_2to9" variant="156-187" required="true">1</nb>
+			<nb source="singleint_3to12;;intpairs_2to9" variant="8-23,100-187">2</nb>
+		</mix>
 
 	</exercise>
 
