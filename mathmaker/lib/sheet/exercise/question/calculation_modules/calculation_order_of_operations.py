@@ -1021,7 +1021,15 @@ class sub_object(submodule.structure):
         if 140 <= self.variant <= 143:
             if self.variant in [140, 141]:
                 if b < c and self.subvariant == 'only_positive':
-                    a, b, c, d = c, d, a, b
+                    a, b, c, d = d, c, b, a
+                    if (not self.allow_division_by_decimal
+                        and not is_integer(d)):
+                        try:
+                            d, c = remove_digits_from(d, to=[c])
+                        except ValueError:
+                            c += random.choice([i for i in range(-4, 5)
+                                                if i != 0])
+                            d, c = remove_digits_from(d, to=[c])
                 a = a * b
                 if c != b:
                     b = b - c
