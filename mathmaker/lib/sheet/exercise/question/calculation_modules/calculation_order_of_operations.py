@@ -26,7 +26,7 @@ from decimal import Decimal
 from mathmaker.lib import shared
 from mathmaker.lib.tools.auxiliary_functions \
     import (is_integer, move_digits_to, split_nb, digits_nb,
-            remove_digits_from)
+            remove_digits_from, fix_digits)
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Division,
                                               Expandable)
 from mathmaker.lib.core.calculus import Expression
@@ -307,10 +307,16 @@ class sub_object(submodule.structure):
         if not self.allow_division_by_decimal:
             if self.variant in [5, 7, 10, 11, 14, 15, ]:
                 if not is_integer(self.nb2):
-                    self.nb1, self.nb2 = self.nb2, self.nb1
+                    if is_integer(self.nb1):
+                        self.nb1, self.nb2 = self.nb2, self.nb1
+                    else:
+                        self.nb2, self.nb1 = fix_digits(self.nb2, self.nb1)
             if self.variant in [1, 3, 17, 21, 22, 23]:
                 if not is_integer(self.nb3):
-                    self.nb2, self.nb3 = self.nb3, self.nb2
+                    if is_integer(self.nb2):
+                        self.nb2, self.nb3 = self.nb3, self.nb2
+                    else:
+                        self.nb3, self.nb2 = fix_digits(self.nb3, self.nb2)
             if self.variant in [12, 13, 14, 15, ]:
                 if not is_integer(self.nb4):
                     self.nb3, self.nb4 = self.nb4, self.nb3
@@ -430,7 +436,11 @@ class sub_object(submodule.structure):
                        'c isnt 0; b isnt 0; b isnt 1; b isnt deci', a, b, c)
         elif self.variant == 6:  # a×b - c
             if self.subvariant == 'only_positive' and a * b < c:
-                c = random.choice([i + 1 for i in range(int(a * b))])
+                depth = digits_nb(a * b)
+                c = random.choice(
+                    [i + 1
+                     for i in range(int(a * b * (10 ** depth)))]) \
+                    / (10 ** depth)
             self.obj = Sum([Product([a, b]), -c])
             self.watch('no negative; decimals distribution; '
                        'c isnt 0; b isnt 1; a isnt 1', a, b, c)
