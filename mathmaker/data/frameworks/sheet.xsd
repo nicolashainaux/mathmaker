@@ -7,7 +7,7 @@
 	<xs:element name="sheet">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="layout"/>
+				<xs:element ref="layout"	minOccurs="0"   maxOccurs="1"/>
 				<xs:element ref="exercise"	minOccurs="1"	maxOccurs="unbounded"/>
 			</xs:sequence>
 			<xs:attribute name="header"		type="xs:string"	use="optional"	default=""/>

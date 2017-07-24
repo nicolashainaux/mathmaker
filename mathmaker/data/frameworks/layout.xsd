@@ -4,7 +4,7 @@
 
 	<xs:simpleType name="layoutType">
 		<xs:restriction base="xs:string">
-		<xs:enumeration value="std"/>
+		<xs:enumeration value="default"/>
 		<xs:enumeration value="short_test"/>
 		<xs:enumeration value="mini_test"/>
 		<xs:enumeration value="equations"/>
@@ -29,24 +29,23 @@
 	</xs:element>
 
 	<xs:complexType name="partType">
-		<xs:sequence>
-			<xs:element ref="line"	minOccurs="1" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-	
+        <xs:attribute name="rowxcol" type="xs:string" use="optional"  default="none" />
+        <xs:attribute name="colwidths" type="xs:string" use="optional"  default="auto" />
+        <xs:attribute name="distribution" type="xs:string" use="optional"  default="auto" />
+    </xs:complexType>
+
 	<xs:element name="layout">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="exc"	type="partType"	minOccurs="1" maxOccurs="1">
+				<xs:element name="wordings"	type="partType"	minOccurs="0" maxOccurs="1">
 				</xs:element>
-				<xs:element name="ans" type="partType"	minOccurs="1" maxOccurs="1">
+				<xs:element name="answers" type="partType"	minOccurs="0" maxOccurs="1">
 				</xs:element>
 			</xs:sequence>
-			<xs:attribute name="type"				type="layoutType"	use="required"/>
+			<xs:attribute name="type"				type="layoutType"	use="optional"  default="default"/>
 			<xs:attribute name="unit" 				type="xs:string"	use="optional"	default="cm"/>
 			<xs:attribute name="font_size_offset"	type="xs:integer"	use="optional"	default="0"/>
 		</xs:complexType>
 	</xs:element>
 
 </xs:schema>
-

@@ -104,6 +104,65 @@ def get_attributes(filename, tag):
     return _get_attributes(XML_PARSER.parse(filename).getroot(), tag)
 
 
+def _read_layout(node, config, layout):
+    config.update(node.attrib)
+    for part in node:
+        # part is either wordings or answers
+        rowxcol = part.attrib.get('rowxcol', 'none')
+        if rowxcol != 'none':
+            delimiter = '×'
+            if 'x' in rowxcol:
+                delimiter = 'x'
+            nrow_ncol = rowxcol.split(sep=delimiter)
+            if not len(nrow_ncol) == 2:
+                raise error.XMLFileFormatError('Found an invalid '
+                                               'rowxcol value.')
+            nrow, ncol = nrow_ncol[0], int(nrow_ncol[1])
+            if nrow != '?':
+                nrow = int(nrow)
+            colwidths = part.attrib.get('colwidths', 'auto')
+            if colwidths == 'auto':
+                colwidths = [int(18 // ncol) for _ in range(ncol)]
+            else:
+                colwidths = [int(n) for n in colwidths.split(sep=' ')]
+                if not len(colwidths) == ncol:
+                    raise error.XMLFileFormatError(
+                        'In a <layout>, the number of columns '
+                        'widths does not match the number of cols in '
+                        'the rowxcol attribute.')
+            if part.tag == 'wordings':
+                layout['exc'][0] = [nrow, ] + colwidths
+            else:
+                layout['ans'][0] = [nrow, ] + colwidths
+            distri = part.attrib.get('distribution', 'auto')
+            if distri == 'auto':
+                distri = 'all'
+            else:
+                distri = distri.replace(',', ' ').replace(';', ' ')
+                distri = tuple(int(n) for n in distri.split())
+            if part.tag == 'wordings':
+                layout['exc'][1] = distri
+            else:
+                layout['ans'][1] = distri
+
+    return config, layout
+
+
+def _get_layout_from(node):
+    default_layout = {'exc': [None, 'all'],
+                      'ans': [None, 'all']}
+
+    config = {'type': 'default',
+              'unit': 'cm',
+              'font_size_offset': '0'}
+
+    for child in node:
+        if child.tag == 'layout':
+            return _read_layout(child, config, default_layout)
+
+    return config, default_layout
+
+
 def get_sheet_config(file_name):
     """
     Retrieves the sheet configuration values from *file_name*.
@@ -131,47 +190,16 @@ def get_sheet_config(file_name):
 
     xml_doc = XML_PARSER.parse(file_name).getroot()
 
-    sheet_layout = {'exc': [],
-                    'ans': []}
-
-    config = {'layout_type': 'std',
-              'layout_unit': 'cm',
-              'font_size_offset': '0'}
-
-    for child in xml_doc:
-        if child.tag == 'layout':
-            if 'type' in child.attrib:
-                config['layout_type'] = child.attrib['type']
-            if 'unit' in child.attrib:
-                config['layout_unit'] = child.attrib['unit']
-            if 'font_size_offset' in child.attrib:
-                config['font_size_offset'] = child.attrib['font_size_offset']
-
-            for exc_or_ans in child:
-                for line in exc_or_ans:
-                    if line.attrib['nb'] == 'None':
-                        sheet_layout[exc_or_ans.tag] += [None]
-                        for ex_nb in line:
-                            if ex_nb.text == 'all':
-                                sheet_layout[exc_or_ans.tag] += ['all']
-                            else:
-                                ##
-                                #   @todo   when we need to read a list of
-                                #           numbers
-                                pass
-                else:
-                    ##
-                    #   @todo   when we need to read the col_widths
-                    pass
+    config, sheet_layout = _get_layout_from(xml_doc)
 
     return (xml_doc.attrib["header"],
             xml_doc.attrib["title"],
             xml_doc.attrib["subtitle"],
             xml_doc.attrib["text"],
             xml_doc.attrib["answers_title"],
-            config["layout_type"],
+            config["type"],
             int(config["font_size_offset"]),
-            config["layout_unit"],
+            config["unit"],
             sheet_layout
             )
 
@@ -342,5 +370,6 @@ def get_exercises_list(file_name):
         if child.tag == 'exercise':
             exercises_list += [(exercise.X_Generic,
                                 child.attrib,
-                                get_q_kinds_from(child))]
+                                get_q_kinds_from(child),
+                                _get_layout_from(child)), ]
     return exercises_list

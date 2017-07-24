@@ -106,14 +106,25 @@ class X_Structure(object):
         self.layout = options.get('layout', 'default')
         self.x_layout_unit = X_LAYOUT_UNIT
 
-        if (self.x_kind, self.x_subkind) in X_LAYOUTS:
+        if 'user_defined' in X_LAYOUTS:
+            self.x_layout = X_LAYOUTS['user_defined']
+        elif (self.x_kind, self.x_subkind) in X_LAYOUTS:
             self.x_layout = X_LAYOUTS[(self.x_kind, self.x_subkind)]
-
         else:
             self.x_layout = X_LAYOUTS[self.layout]
 
         self.x_id = options.get('id', 'generic')
-
+        self.x_spacing = options.get('spacing', '')
+        if self.x_spacing == 'newline':
+            self.x_spacing = shared.machine.write_new_line()
+        elif self.x_spacing == 'newline_twice':
+            self.x_spacing = shared.machine.write_new_line() \
+                + shared.machine.write_new_line()
+        elif self.x_spacing == '':
+            # do not remove otherwise you'll get empty addvpsace instead
+            self.x_spacing = ''
+        else:
+            self.x_spacing = shared.machine.addvspace(height=self.x_spacing)
         # The slideshow option (for MentalCalculation sheets)
         self.slideshow = options.get('slideshow', False)
 
@@ -150,7 +161,9 @@ class X_Structure(object):
                     nb_of_cols = len(layout[2 * k]) - 1
                     col_widths = layout[2 * k][1:]
                     nb_of_lines = layout[2 * k][0]
+                    undefined_nb_of_lines = False
                     if nb_of_lines == '?':
+                        undefined_nb_of_lines = True
                         nb_of_lines = len(self.questions_list) // nb_of_cols \
                             + (0
                                if not len(self.questions_list) % nb_of_cols
@@ -161,8 +174,9 @@ class X_Structure(object):
                             if layout[2 * k + 1] == 'all':
                                 nb_of_q_in_this_cell = 1
                             else:
+                                I = 0 if undefined_nb_of_lines else i
                                 nb_of_q_in_this_cell = \
-                                    layout[2 * k + 1][i * nb_of_cols + j]
+                                    layout[2 * k + 1][I * nb_of_cols + j]
                             cell_content = ""
                             for n in range(nb_of_q_in_this_cell):
                                 empty_cell = False
@@ -179,9 +193,12 @@ class X_Structure(object):
                                 q_n += 1
                             content += [cell_content]
 
+                    options = {'unit': self.x_layout_unit}
                     result += M.write_layout((nb_of_lines, nb_of_cols),
                                              col_widths,
-                                             content)
+                                             content,
+                                             **options)
+                    result += self.x_spacing
 
             return result
         else:

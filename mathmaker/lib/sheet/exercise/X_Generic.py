@@ -40,7 +40,7 @@ from mathmaker.lib.common.cst import XML_BOOLEANS
 # the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
     {'': ['default'],
-     'std': ['default'],
+     'default': ['default'],
      'tabular': ['default'],  # reserved to mental calculation
      'slideshow': ['default'],  # reserved to mental calculation
      'bypass': ['']
@@ -391,9 +391,13 @@ class X_Generic(X_Structure):
         self.derived = True
         (x_kind, q_list) = options.get('q_list')
         self.q_numbering = options.get('q_numbering', 'disabled')
+        # self.layout is actually the name of the layout
         self.layout = options.get('layout', 'default')
         self.shuffle = XML_BOOLEANS[options.get('shuffle', 'false')]()
-        if self.layout != 'default':
+        user_layout = options.get('x_layout', None)
+        if user_layout is not None:
+            X_LAYOUTS.update({'user_defined': user_layout})
+        elif self.layout != 'default':
             l = self.layout.split(sep='_')
             if not len(l) == 2:
                 raise error.XMLFileFormatError('A \'layout\' attribute in an '

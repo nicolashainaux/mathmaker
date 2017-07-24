@@ -155,7 +155,7 @@ class S_Structure(object):
     #   @brief Writes the whole sheet's content to the output.
     def __str__(self):
         result = ""
-        if self.layout_type == 'std' or self.layout_type == 'equations':
+        if self.layout_type in ['default', 'std', 'equations']:
             result += shared.machine.write_document_header()
             result += shared.machine.write_document_begins()
             result += self.sheet_header_to_str()
@@ -365,7 +365,8 @@ class S_Structure(object):
 
                 result += M.write_layout((nb_of_lines, nb_of_cols),
                                          col_widths,
-                                         content)
+                                         content,
+                                         unit=self.sheet_layout_unit)
 
         return result
 

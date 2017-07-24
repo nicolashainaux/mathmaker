@@ -70,4 +70,5 @@ class S_Generic(S_Structure):
 
         for ex in get_exercises_list(filename):
             self.exercises_list.append(ex[0](q_list=ex[2],
+                                             x_layout=ex[3][1],
                                              **ex[1]))

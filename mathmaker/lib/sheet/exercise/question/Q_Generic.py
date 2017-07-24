@@ -231,35 +231,34 @@ class Q_Generic(Q_Structure):
             + shared.machine.write_new_line()
 
         # modules
-        if self.q_kind in ['vocabulary_half', 'vocabulary_third',
-                           'vocabulary_quarter', 'vocabulary_double',
-                           'vocabulary_triple', 'vocabulary_quadruple']:
+        mod_name = self.q_kind
+        if mod_name in ['vocabulary_half', 'vocabulary_third',
+                        'vocabulary_quarter', 'vocabulary_double',
+                        'vocabulary_triple', 'vocabulary_quadruple']:
             # __
-            module = getattr(mc_modules,
-                             'vocabulary_simple_multiple_of_a_number')
+            mod_name = 'vocabulary_simple_multiple_of_a_number'
             self.add_new_line_to_text = ''
 
+        for m in ALL_MODULES:
+            if hasattr(m, mod_name):
+                module = getattr(m, mod_name)
+                if m is mc_modules:
+                    self.add_new_line_to_text = ''
+                break
         else:
-            for m in ALL_MODULES:
-                if hasattr(m, self.q_kind):
-                    module = getattr(m, self.q_kind)
-                    if m is mc_modules:
-                        self.add_new_line_to_text = ''
-                    break
-            else:
-                raise AttributeError(self.q_kind + ' not found in '
-                                     'ALL_MODULES: '
-                                     + ', '.join([m.__name__
-                                                 for m in ALL_MODULES]))
+            raise AttributeError(mod_name + ' not found in '
+                                 'ALL_MODULES: '
+                                 + ', '.join([m.__name__
+                                             for m in ALL_MODULES]))
         m = module.sub_object(numbers_to_use, **options)
 
         if 'spacing' in options:
-            if options['spacing'] == 'new_line':
+            if options['spacing'] == 'newline':
                 self.add_new_line_to_text = shared.machine.write_new_line()
-            elif options['spacing'] in ['new_line_twice', 'default']:
+            elif options['spacing'] in ['newline_twice', 'default']:
                 self.add_new_line_to_text = shared.machine.write_new_line() \
                     + shared.machine.write_new_line()
-            elif options['spacing'] == 'nothing':
+            elif options['spacing'] == '':
                 self.add_new_line_to_text = ''
             else:
                 self.add_new_line_to_text = shared.machine.addvspace(

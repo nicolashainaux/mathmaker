@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- DEFAULT MENTAL CALCULATION SHEET -->
-
-
 <sheet header="" title="Mental calculation" subtitle="Multiplications and divisions by 10, 100 and 1000" text="" answers_title="Answers">
 
-	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
-	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
-	<layout type="mental" font_size_offset="-1">
-		<exc>
-			<line nb="None">
-				<exercises>all</exercises>
-			</line>
-		</exc>
-		<ans>
-			<line nb="None">
-				<exercises>all</exercises>
-			</line>
-		</ans>
-	</layout>
+	<layout type="mental" font_size_offset="-1" />
 
 	<!-- Default value: id='generic'
 		 No default for kind and subkind, they must be given -->
