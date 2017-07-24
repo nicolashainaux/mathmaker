@@ -32,6 +32,7 @@
         <xs:attribute name="rowxcol" type="xs:string" use="optional"  default="none" />
         <xs:attribute name="colwidths" type="xs:string" use="optional"  default="auto" />
         <xs:attribute name="distribution" type="xs:string" use="optional"  default="auto" />
+        <xs:attribute name="spacing" type="xs:string" use="optional"  default="undefined" />
     </xs:complexType>
 
 	<xs:element name="layout">

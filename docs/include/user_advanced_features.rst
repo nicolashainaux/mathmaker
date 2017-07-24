@@ -165,6 +165,8 @@ Attributes of ``<wordings />`` and ``<answers />``
 
 * ``distribution`` is the distribution of the questions (or exercises) per cell. It is also ignored if ``rowxcol`` contains ``"none"``. If ``rowxcol`` contains a ``"r×c"`` definition, then ``distribution`` defaults to ``"auto"``: each "cell" will contain one question. Otherwise, you can tell how many questions you want in each cell, row after row, as integers separated by spaces, like: ``"2 1 1 3 1 1"`` what would put (with ``rowxcol="2×3"``) 2 questions (or exercises) in the first cell, then 1 question in each other cell of the first row, then 3 questions in the first cell of the second row, and 1 question in each cell left. There must be as many numbers as cells. As a convenience, you can add a ``;`` or ``,`` to separate the rows, like: ``"2 1 1, 3 1 1"`` (These two punctuation signs will simply be ignored). Each row must contain as many numbers as defined in the ``"r×c"`` definition. If the number of rows is left undefined (``?``) then only the first row has to be defined (extra rows will be ignored) as a pattern for all rows (the default still being ``"auto"``, i.e. 1 question per cell).
 
+* ``spacing`` defaults to ``""``, it is the spacing to be introduced at the end of the exercise. You can set it at ``"`` (no spacing), ``"newline"``, ``"newline_twice"`` or a value that will be inserted in a LaTeX ``addvspace{}`` command, for instance ``spacing="40.0pt"`` will result in a ``addvspace{40.0pt}`` inserted at the end of the exercise. ``spacing`` can also be used in the parent ``<exercise>`` tag. The value defined as a ``<layout>``'s attribute will override it. This allows to set different spacings for the wordings and the answers.
+
 Examples:
 
 .. code-block:: xml
@@ -231,7 +233,7 @@ The ``<exercise>`` tags
 
 The ``<exercise>`` part is the one you can change alot. Keep the ``id="mental_calculation"`` and ``kind="tabular"`` attributes though (they can't be changed yet) but you can put the questions you like inside.
 
-For exercises, ``spacing`` defaults to ``""``, it is the spacing to be introduced at the end of the exercise. You can set it at ``"`` (no spacing), ``"newline"``, ``"newline_twice"`` or a value that will be inserted in a LaTeX ``addvspace{}`` command, for instance ``spacing="40.0pt"`` will result in a ``addvspace{40.0pt}`` inserted at the end of the exercise.
+For exercises, ``spacing`` defaults to ``""``, it is the spacing to be introduced at the end of the exercise. You can set it at ``"`` (no spacing), ``"newline"``, ``"newline_twice"`` or a value that will be inserted in a LaTeX ``addvspace{}`` command, for instance ``spacing="40.0pt"`` will result in a ``addvspace{40.0pt}`` inserted at the end of the exercise. ``spacing`` can also be used in the ``<exercise>`` children (``wordings`` or ``answers``). If so, the value defined as an ``<exercise>``'s attribute will be overriden. This allows to set different spacings for the wordings and the answers.
 
 The questions will show up in the order you write them, unless you set the ``shuffle`` attribute of ``<exercise>`` to ``"true"``.
 

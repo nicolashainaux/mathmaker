@@ -106,7 +106,12 @@ def get_attributes(filename, tag):
 
 def _read_layout(node, config, layout):
     config.update(node.attrib)
+    spacing = {'spacing_w': 'undefined', 'spacing_a': 'undefined'}
     for part in node:
+        if part.tag == 'wordings':
+            spacing['spacing_w'] = part.attrib.get('spacing', 'undefined')
+        if part.tag == 'answers':
+            spacing['spacing_a'] = part.attrib.get('spacing', 'undefined')
         # part is either wordings or answers
         rowxcol = part.attrib.get('rowxcol', 'none')
         if rowxcol != 'none':
@@ -144,17 +149,15 @@ def _read_layout(node, config, layout):
                 layout['exc'][1] = distri
             else:
                 layout['ans'][1] = distri
-
+    config.update(spacing)
     return config, layout
 
 
-def _get_layout_from(node):
+def _get_layout_from(node, default_config=None):
     default_layout = {'exc': [None, 'all'],
                       'ans': [None, 'all']}
 
-    config = {'type': 'default',
-              'unit': 'cm',
-              'font_size_offset': '0'}
+    config = default_config
 
     for child in node:
         if child.tag == 'layout':
@@ -190,7 +193,10 @@ def get_sheet_config(file_name):
 
     xml_doc = XML_PARSER.parse(file_name).getroot()
 
-    config, sheet_layout = _get_layout_from(xml_doc)
+    config, sheet_layout = \
+        _get_layout_from(xml_doc, default_config={'type': 'default',
+                                                  'unit': 'cm',
+                                                  'font_size_offset': '0'})
 
     return (xml_doc.attrib["header"],
             xml_doc.attrib["title"],
@@ -371,5 +377,5 @@ def get_exercises_list(file_name):
             exercises_list += [(exercise.X_Generic,
                                 child.attrib,
                                 get_q_kinds_from(child),
-                                _get_layout_from(child)), ]
+                                _get_layout_from(child, default_config={})), ]
     return exercises_list

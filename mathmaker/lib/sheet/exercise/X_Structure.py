@@ -114,17 +114,40 @@ class X_Structure(object):
             self.x_layout = X_LAYOUTS[self.layout]
 
         self.x_id = options.get('id', 'generic')
-        self.x_spacing = options.get('spacing', '')
-        if self.x_spacing == 'newline':
-            self.x_spacing = shared.machine.write_new_line()
-        elif self.x_spacing == 'newline_twice':
-            self.x_spacing = shared.machine.write_new_line() \
-                + shared.machine.write_new_line()
-        elif self.x_spacing == '':
+        x_spacing = options.get('spacing', '')
+        if x_spacing == 'newline':
+            self.x_spacing = {'exc': shared.machine.write_new_line(),
+                              'ans': shared.machine.write_new_line()}
+        elif x_spacing == 'newline_twice':
+            self.x_spacing = {'exc': shared.machine.write_new_line()
+                              + shared.machine.write_new_line(),
+                              'ans': shared.machine.write_new_line()
+                              + shared.machine.write_new_line()}
+        elif x_spacing == '':
             # do not remove otherwise you'll get empty addvpsace instead
-            self.x_spacing = ''
+            self.x_spacing = {'exc': '', 'ans': ''}
         else:
-            self.x_spacing = shared.machine.addvspace(height=self.x_spacing)
+            self.x_spacing = \
+                {'exc': shared.machine.addvspace(height=x_spacing),
+                 'ans': shared.machine.addvspace(height=x_spacing)}
+        spacing_w = options.get('x_config').get('spacing_w', 'undefined')
+        spacing_a = options.get('x_config').get('spacing_a', 'undefined')
+        for key, s in zip(['exc', 'ans'], [spacing_w, spacing_a]):
+            if s != 'undefined':
+                if s == 'newline':
+                    self.x_spacing.update(
+                        {key: shared.machine.write_new_line()})
+                elif s == 'newline_twice':
+                    self.x_spacing.update(
+                        {key: shared.machine.write_new_line()
+                            + shared.machine.write_new_line()})
+                elif s == '':
+                    # do not remove otherwise you'll get empty addvspace
+                    self.x_spacing.update({key: ''})
+                else:
+                    self.x_spacing.update(
+                        {key: shared.machine.addvspace(height=s)})
+
         # The slideshow option (for MentalCalculation sheets)
         self.slideshow = options.get('slideshow', False)
 
@@ -198,7 +221,7 @@ class X_Structure(object):
                                              col_widths,
                                              content,
                                              **options)
-                    result += self.x_spacing
+                    result += self.x_spacing[ex_or_answers]
 
             return result
         else:
