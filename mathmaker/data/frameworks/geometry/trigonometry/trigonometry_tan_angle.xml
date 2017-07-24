@@ -26,7 +26,7 @@
 				 Default values (if variant is not here) will be as if variant="random" -->
 		<!-- source for trigonometry_calculate_angle questions must be double:
 			   one for the length of one side, the other for the length of another side -->
-		<question kind="trigonometry" subkind="calculate_angle" variant="tan" space_after="40.0pt" decimal_result="0">
+		<question kind="trigonometry" subkind="calculate_angle" variant="tan" spacing="40.0pt" decimal_result="0">
 			<nb source="singledeci1_1to100;;singledeci1_1to100">5</nb>
 		</question>
 

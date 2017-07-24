@@ -28,15 +28,15 @@
 				 Default values (if variant is not here) will be as if variant="random_random" -->
 		<!-- source for trigonometry_calculate_length questions must be double:
 			   the first part will be a length, the second part the (acute) angle -->
-		<question kind="trigonometry" subkind="calculate_length" variant="cos_up" space_after="40.0pt" decimal_result="1">
+		<question kind="trigonometry" subkind="calculate_length" variant="cos_up" spacing="40.0pt" decimal_result="1">
 			<nb source="singledeci1_1to100;;singleint_5to85">1</nb>
 		</question>
 
-		<question kind="trigonometry" subkind="calculate_length" variant="cos_down" space_after="40.0pt" decimal_result="1">
+		<question kind="trigonometry" subkind="calculate_length" variant="cos_down" spacing="40.0pt" decimal_result="1">
 			<nb source="singledeci1_1to100;;singleint_5to85">1</nb>
 		</question>
 
-		<question kind="trigonometry" subkind="calculate_length" variant="cos_random" space_after="40.0pt" decimal_result="1">
+		<question kind="trigonometry" subkind="calculate_length" variant="cos_random" spacing="40.0pt" decimal_result="1">
 			<nb source="singledeci1_1to100;;singleint_5to85">3</nb>
 		</question>
 
