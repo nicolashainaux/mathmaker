@@ -25,7 +25,7 @@ from . import exercise
 from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = 0
-SHEET_LAYOUT_TYPE = 'std'
+SHEET_LAYOUT_TYPE = 'default'
 SHEET_LAYOUT_UNIT = "cm"
 # -----------------------  lines_nb    col_widths   exercises
 SHEET_LAYOUT = {'exc': [None, 'all'],

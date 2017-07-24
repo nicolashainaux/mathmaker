@@ -155,7 +155,7 @@ class S_Structure(object):
     #   @brief Writes the whole sheet's content to the output.
     def __str__(self):
         result = ""
-        if self.layout_type in ['default', 'std', 'equations']:
+        if self.layout_type in ['default', 'equations']:
             result += shared.machine.write_document_header()
             result += shared.machine.write_document_begins()
             result += self.sheet_header_to_str()
@@ -327,7 +327,8 @@ class S_Structure(object):
                     if not self.layout_type == 'mental':
                         result += M.write_exercise_number()
                     result += self.exercises_list[ex_n].to_str(ex_or_answers)
-                    if self.layout_type == 'std' and ex_or_answers == 'ans':
+                    if (self.layout_type == 'default'
+                        and ex_or_answers == 'ans'):
                         if i < how_many - 1:
                             result += M.addvspace(height='29.0pt')
                     else:
