@@ -228,9 +228,9 @@ automatically increments the counter").format(cmd_name="exercise",
 
     ##
     #   @brief Writes to the output the new line command
-    def write_new_line(self, check='', check2=''):
+    def write_new_line(self, check='', check2='', check3=''):
         output_str = '\\newline \n'
-        if check == '\]' or 'addvspace' in check2:
+        if check == '\]' or 'addvspace' in check2 or 'newpage' in check3:
             output_str = ''
         if self.redirect_output_to_str:
             return output_str

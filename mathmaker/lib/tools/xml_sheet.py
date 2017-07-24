@@ -106,12 +106,15 @@ def get_attributes(filename, tag):
 
 def _read_layout(node, config, layout):
     config.update(node.attrib)
+    keep_default_w, keep_default_a = True, True
     spacing = {'spacing_w': 'undefined', 'spacing_a': 'undefined'}
     for part in node:
-        if part.tag == 'wordings':
-            spacing['spacing_w'] = part.attrib.get('spacing', 'undefined')
-        if part.tag == 'answers':
-            spacing['spacing_a'] = part.attrib.get('spacing', 'undefined')
+        s = part.attrib.get('spacing', 'undefined')
+        if s != 'jump to next page':
+            if part.tag == 'wordings':
+                spacing['spacing_w'] = s
+            if part.tag == 'answers':
+                spacing['spacing_a'] = s
         # part is either wordings or answers
         rowxcol = part.attrib.get('rowxcol', 'none')
         if rowxcol != 'none':
@@ -136,9 +139,17 @@ def _read_layout(node, config, layout):
                         'widths does not match the number of cols in '
                         'the rowxcol attribute.')
             if part.tag == 'wordings':
-                layout['exc'][0] = [nrow, ] + colwidths
+                if keep_default_w:
+                    layout['exc'] = [[nrow, ] + colwidths]
+                    keep_default_w = False
+                else:
+                    layout['exc'].append([nrow, ] + colwidths)
             else:
-                layout['ans'][0] = [nrow, ] + colwidths
+                if keep_default_a:
+                    layout['ans'] = [[nrow, ] + colwidths]
+                    keep_default_a = False
+                else:
+                    layout['ans'].append([nrow, ] + colwidths)
             distri = part.attrib.get('distribution', 'auto')
             if distri == 'auto':
                 distri = 'all'
@@ -146,9 +157,22 @@ def _read_layout(node, config, layout):
                 distri = distri.replace(',', ' ').replace(';', ' ')
                 distri = tuple(int(n) for n in distri.split())
             if part.tag == 'wordings':
-                layout['exc'][1] = distri
+                layout['exc'].append(distri)
             else:
-                layout['ans'][1] = distri
+                layout['ans'].append(distri)
+            if s == 'jump to next page':
+                if part.tag == 'wordings':
+                    if keep_default_w:
+                        layout['exc'] = ['jump', 'next_page']
+                        keep_default_w = False
+                    else:
+                        layout['exc'] += ['jump', 'next_page']
+                if part.tag == 'answers':
+                    if keep_default_a:
+                        layout['ans'] = ['jump', 'next_page']
+                        keep_default_a = False
+                    else:
+                        layout['ans'] += ['jump', 'next_page']
     config.update(spacing)
     return config, layout
 

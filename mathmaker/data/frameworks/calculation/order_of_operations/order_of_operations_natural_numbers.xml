@@ -41,7 +41,7 @@
 	<exercise text_exc="Now the expressions may have parentheses. Calculate them:" text_ans="Example of solutions:">
 		<layout>
 			<wordings rowxcol="?×2"  distribution="4 4" spacing="25.0pt" />
-			<answers  rowxcol="?×2"  distribution="4 4" spacing="" />
+			<answers  rowxcol="?×2"  distribution="4 4" spacing="jump to next page" />
 		</layout>
     <mix>
 		  <question kind="calculation" subkind="order_of_operations" subvariant="only_positive" pick="8" spacing="15.0pt"></question>

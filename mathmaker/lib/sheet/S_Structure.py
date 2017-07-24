@@ -331,11 +331,11 @@ class S_Structure(object):
                         if i < how_many - 1:
                             result += M.addvspace(height='29.0pt')
                     else:
-                        vspace_check = ''
-                        if len(result) >= 25:
-                            vspace_check = result[-25:]
+                        vspace = '' if len(result) <= 25 else result[-25:]
+                        newpage = '' if len(result) <= 9 else result[-9:]
                         result += M.write_new_line(check=result[-2:],
-                                                   check2=vspace_check)
+                                                   check2=vspace,
+                                                   check3=newpage)
                     # if not (ex_or_answers == 'ans' \
                     #    and self.layout_type == 'equations'):
                     # __

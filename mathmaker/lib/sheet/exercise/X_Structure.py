@@ -180,6 +180,11 @@ class X_Structure(object):
                         if ex_or_answers == 'ans' and i < how_many - 1:
                             result += M.addvspace(height='20.0pt')
                         q_n += 1
+
+                elif (layout[2 * k] == 'jump'
+                      and layout[2 * k + 1] == 'next_page'):
+                    result += M.write_jump_to_next_page()
+
                 else:
                     nb_of_cols = len(layout[2 * k]) - 1
                     col_widths = layout[2 * k][1:]
