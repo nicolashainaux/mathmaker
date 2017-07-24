@@ -227,7 +227,7 @@ class Q_Generic(Q_Structure):
         numbers_to_use = options['numbers_to_use']
         del options['numbers_to_use']
 
-        self.add_new_line_to_text = shared.machine.write_new_line() \
+        self.q_spacing = shared.machine.write_new_line() \
             + shared.machine.write_new_line()
 
         # modules
@@ -237,13 +237,12 @@ class Q_Generic(Q_Structure):
                         'vocabulary_triple', 'vocabulary_quadruple']:
             # __
             mod_name = 'vocabulary_simple_multiple_of_a_number'
-            self.add_new_line_to_text = ''
 
         for m in ALL_MODULES:
             if hasattr(m, mod_name):
                 module = getattr(m, mod_name)
                 if m is mc_modules:
-                    self.add_new_line_to_text = ''
+                    self.q_spacing = ''
                 break
         else:
             raise AttributeError(mod_name + ' not found in '
@@ -254,16 +253,15 @@ class Q_Generic(Q_Structure):
 
         if 'spacing' in options:
             if options['spacing'] == 'newline':
-                self.add_new_line_to_text = shared.machine.write_new_line()
+                self.q_spacing = shared.machine.write_new_line()
             elif options['spacing'] in ['newline_twice', 'default']:
-                self.add_new_line_to_text = shared.machine.write_new_line() \
+                self.q_spacing = shared.machine.write_new_line() \
                     + shared.machine.write_new_line()
             elif options['spacing'] == '':
-                self.add_new_line_to_text = ''
+                self.q_spacing = ''
             else:
-                self.add_new_line_to_text = shared.machine.addvspace(
-                    height=options['spacing']
-                )
+                self.q_spacing = shared.machine.addvspace(
+                    height=options['spacing'])
 
         self.q_text = m.q(**options)
         self.q_answer = m.a(**options)
@@ -279,7 +277,7 @@ class Q_Generic(Q_Structure):
     ##
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
-        text = str(self.q_text) + self.add_new_line_to_text
+        text = str(self.q_text) + self.q_spacing
         if not self.q_nb_included_in_wording:
             text = str(self.displayable_number) + text
         return text
