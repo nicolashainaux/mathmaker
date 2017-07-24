@@ -187,9 +187,13 @@ class X_Structure(object):
                     undefined_nb_of_lines = False
                     if nb_of_lines == '?':
                         undefined_nb_of_lines = True
-                        nb_of_lines = len(self.questions_list) // nb_of_cols \
+                        nb_of_q_per_row = sum(layout[2 * k + 1][j]
+                                              for j in range(nb_of_cols))
+                        nb_of_lines = \
+                            len(self.questions_list) // nb_of_q_per_row \
                             + (0
-                               if not len(self.questions_list) % nb_of_cols
+                               if not len(self.questions_list)
+                               % nb_of_q_per_row
                                else 1)
                     content = []
                     for i in range(int(nb_of_lines)):
