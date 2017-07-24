@@ -12,10 +12,18 @@ Subpackages
 Submodules
 ----------
 
-mathmaker.cli module
---------------------
+mathmaker\.cli module
+---------------------
 
 .. automodule:: mathmaker.cli
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+mathmaker\.daemon module
+------------------------
+
+.. automodule:: mathmaker.daemon
     :members:
     :undoc-members:
     :show-inheritance:

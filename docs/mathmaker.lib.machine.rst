@@ -1,19 +1,19 @@
-mathmaker.lib.machine package
-=============================
+mathmaker\.lib\.machine package
+===============================
 
 Submodules
 ----------
 
-mathmaker.lib.machine.LaTeX module
-----------------------------------
+mathmaker\.lib\.machine\.LaTeX module
+-------------------------------------
 
 .. automodule:: mathmaker.lib.machine.LaTeX
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.machine.Structure module
---------------------------------------
+mathmaker\.lib\.machine\.Structure module
+-----------------------------------------
 
 .. automodule:: mathmaker.lib.machine.Structure
     :members:

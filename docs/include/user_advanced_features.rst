@@ -90,31 +90,18 @@ As a directive to mathmaker it is possible to give a path to an xml file.
 
 Creating a new xml file that can be used as a model by ``mathmaker`` is more for advanced users, though it's not that difficult.
 
+Example
+^^^^^^^
+
 Let's have a look at ``mathmaker/data/frameworks/mental_calculation/lev11_1/divisions.xml``:
 
 .. code-block:: xml
 
     <?xml version="1.0" encoding="UTF-8"?>
 
-    <!-- DEFAULT MENTAL CALCULATION SHEET -->
-
-
     <sheet header="" title="Mental calculation" subtitle="Divisions" text="" answers_title="Answers">
 
-    	<!-- Default values: type="std" unit="cm" font_size_offset="0" -->
-    	<!-- Available layout types: std|short_test|mini_test|equations|mental -->
-    	<layout type="mental" font_size_offset="-1">
-    		<exc>
-    			<line nb="None">
-    				<exercises>all</exercises>
-    			</line>
-    		</exc>
-    		<ans>
-    			<line nb="None">
-    				<exercises>all</exercises>
-    			</line>
-    		</ans>
-    	</layout>
+    	<layout type="mental" font_size_offset="-1" />
 
     	<!-- Default value: id='generic'
     		 No default for kind and subkind, they must be given -->
@@ -131,13 +118,125 @@ Let's have a look at ``mathmaker/data/frameworks/mental_calculation/lev11_1/divi
 
     </sheet>
 
-The ``<sheet>`` tag has attributes that let you easily change the title of the sheet, a subtitle etc.
+The ``<sheet>`` tags
+^^^^^^^^^^^^^^^^^^^^
 
-The ``<layout>`` part can't be changed (yet) except the ``unit`` and ``font_size_offset`` attributes. The later one is especially practical to resize the whole sheet at once.
+They have attributes that let you easily change the title of the sheet, a subtitle etc.
+
+The ``<layout>`` tags
+^^^^^^^^^^^^^^^^^^^^^
+
+They may show up as first child of a ``<sheet>`` or ``<exercise>``. They work about the same way in both cases but both have their own special features too.
+
+.. image:: pics/layouts.png
+
+If a ``<sheet>`` or ``<exercise>`` contains no ``<layout>``, it is assumed that the default layout will be used, i.e. no layout at all: all exercises and all questions will simply be printed one after the other. It would be equivalent to:
+
+.. code-block:: xml
+
+		<layout />
+
+what would be the same as:
+
+.. code-block:: xml
+
+		<layout>
+			<wordings />
+			<answers />
+		</layout>
+
+and also the same as:
+
+.. code-block:: xml
+
+		<layout>
+			<wordings rowxcol="none" />
+			<answers rowxcol="none" />
+		</layout>
+
+The ``<wordings>`` and ``<answers>`` tags contain the layout for wordings and for answers, respectively.
+
+Attributes of ``<wordings />`` and ``<answers />``
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+* ``rowxcol`` can contain ``"none"`` (default: no layout) or the number of rows and columns as a multiplication of two integers: ``"r×c"``, for instance: ``"2×3"``. This would mean to use 2 rows and 3 columns, what would define 6 "cells". As a convenience, you can use a x instead of a ×, like this: ``"2x3"``. The first number can be replaced by a ``?`` (exercises layouts only), in that case, the number of rows will be automatically calculated, depending on the number of questions and the number of columns.
+
+* ``colwidths`` is ignored if ``rowxcol`` contains ``"none"``. If ``rowxcol`` contains a ``"r×c"`` definition, then ``colwidths`` defaults to ``"auto"``: the width of all columns will be calculated automatically (all equal). Otherwise, you can set the values you like, separated by spaces, like: ``"4.5 4.5 9"`` what would make the two first columns 4.5 units wide and the last, 9 units wide. The length unit can be set in the ``<sheet>``'s ``<layout>``'s attribute ``unit``. It defaults to cm. There must be as many values as the number of columns defined in the ``"r×c"`` definition.
+
+* ``distribution`` is the distribution of the questions (or exercises) per cell. It is also ignored if ``rowxcol`` contains ``"none"``. If ``rowxcol`` contains a ``"r×c"`` definition, then ``distribution`` defaults to ``"auto"``: each "cell" will contain one question. Otherwise, you can tell how many questions you want in each cell, row after row, as integers separated by spaces, like: ``"2 1 1 3 1 1"`` what would put (with ``rowxcol="2×3"``) 2 questions (or exercises) in the first cell, then 1 question in each other cell of the first row, then 3 questions in the first cell of the second row, and 1 question in each cell left. There must be as many numbers as cells. As a convenience, you can add a ``;`` or ``,`` to separate the rows, like: ``"2 1 1, 3 1 1"`` (These two punctuation signs will simply be ignored). Each row must contain as many numbers as defined in the ``"r×c"`` definition. If the number of rows is left undefined (``?``) then only the first row has to be defined (extra rows will be ignored) as a pattern for all rows (the default still being ``"auto"``, i.e. 1 question per cell).
+
+Examples:
+
+.. code-block:: xml
+
+		<layout>
+			<wordings rowxcol="4×3" />
+			<answers rowxcol="4×3" />
+		</layout>
+
+will basically distribute the questions in 4 rows of 3 columns. Same for wordings and for answers.
+
+.. code-block:: xml
+
+		<layout>
+			<wordings rowxcol="?×3" colwidths="5 5 8" distribution="1 1 2" />
+		</layout>
+
+will distribute, only for wordings, the questions in 3 columns of widths 5 cm, 5 cm and 8 cm. There will be 1 question in the left cell of each row, 1 question in the middle cell of each row and 2 questions in the right cell of each row.
+
+If you have 6 expressions, say A, B, C, D, E and F to distribute:
+
+.. code-block:: xml
+
+    <layout>
+      <wordings  rowxcol="?×2" />
+    </layout>
+
+will distribute the questions in 2 columns of 3 rows, 1 question per row, i.e.:
+
+A = ....            B = ....
+
+C = ....            D = ....
+
+E = ....            F = ....
+
+whereas:
+
+.. code-block:: xml
+
+    <layout>
+      <wordings  rowxcol="?×2"  distribution="3, 3" />
+    </layout>
+
+will distribute the questions in 2 columns of 1 row, 3 questions per row, i.e.:
+
+A = ....            D = ....
+
+B = ....            E = ....
+
+C = ....            F = ....
+
+
+Special attributes of ``<sheet>``'s ``<layout>``
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+* ``type`` allows to use several different special preformatted layouts. Default value is ``"default"``. Other possible values are ``"short_test"``, ``"mini_test"``, ``"equations"`` and ``"mental"``.
+
+* ``unit`` defaults to cm (SI). It is used for lengths like in ``colwidths``.
+
+* The ``font_size_offset`` attribute is especially practical to resize the whole sheet at once (set it at ``+1`` or ``+2`` to enlarge all fonts, or ``-1`` or ``-2`` to reduce all fonts' size).
+
+The ``<exercise>`` tags
+^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``<exercise>`` part is the one you can change alot. Keep the ``id="mental_calculation"`` and ``kind="tabular"`` attributes though (they can't be changed yet) but you can put the questions you like inside.
 
+For exercises, ``spacing`` defaults to ``""``, it is the spacing to be introduced at the end of the exercise. You can set it at ``"`` (no spacing), ``"newline"``, ``"newline_twice"`` or a value that will be inserted in a LaTeX ``addvspace{}`` command, for instance ``spacing="40.0pt"`` will result in a ``addvspace{40.0pt}`` inserted at the end of the exercise.
+
 The questions will show up in the order you write them, unless you set the ``shuffle`` attribute of ``<exercise>`` to ``"true"``.
+
+The ``<question>`` tags
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Each question is defined this way:
 
@@ -171,7 +270,10 @@ Note that you can put several different numbers' sources inside one ``<question>
 
 This means there will be three questions, all being direct multiplications, but one pair of numbers will be integers between 2 and 9; one pair will be from the table of 11 (like 34 × 11), and one will be a decimal number and a one digit number (like 150.3 × 0.01).
 
-Last explained feature: in some sheets you'll find ``<mix>`` sections, like this one, taken from ``mathmaker/data/frameworks/mental_calculation/lev11_2/test_11_2.xml``:
+The ``<mix>`` tags
+^^^^^^^^^^^^^^^^^^
+
+In some sheets you'll find ``<mix>`` tags, like this one, taken from ``mathmaker/data/frameworks/mental_calculation/lev11_2/test_11_2.xml``:
 
 .. code-block:: xml
 
@@ -185,11 +287,13 @@ Last explained feature: in some sheets you'll find ``<mix>`` sections, like this
         <nb source="intpairs_2to9" nb_variant="decimal2">1</nb>
       </mix>
 
-* The ``pick`` keyword tells how many times to create this question. If unspecified, default value is ``1``.
-
 It means the numbers' sources will be randomly attributed to the questions. Each time a new sheet is generated from this framework, the numbers from table of 15 will be attributed randomly to one of the four questions of the sections, and the same will happen to the other numbers' sources.
 
-The rules to follow for a ``<mix>`` section are:
+.. note::
+
+    The ``<question>``'s ``pick`` attribute tells how many times to create such a question. If unspecified, default value is ``1``. This attribute has no effect outside ``<mix>`` tags.
+
+The rules to follow in a ``<mix>`` section are:
 
 * Any numbers' source must be assignable to any of the questions of the section.
 
@@ -205,7 +309,7 @@ The rules to follow for a ``<mix>`` section are:
         <nb source="intpairs_2to9" nb_variant="decimal1">1</nb>
     </mix>
 
-If you put more number's sources as there are questions, the extraneous ones will be ignored. This is useful when there are a lot of possibilities to pick from.
+If you put more number's sources as there are questions, the extraneous ones will be ignored. This is useful when there are a lot of possibilities to pick from and you want to define special features to each of them, if chosen (like different number sources depending on variant or subvariant).
 
 If among the sources you want to have at least one of a certain type, you can set the ``required`` attribute of ``<nb>`` to ``"true"``. In the example below, 8 questions will be created. Among them, there will be at least 2 of variants 8 to 23, one of variant 116 to 155 and one of variant between 156 and 187. The 4 other ones will each match a variant between 8 and 23 or 100 and 187.
 
@@ -220,5 +324,8 @@ If among the sources you want to have at least one of a certain type, you can se
 		</mix>
 
 Also, note that the question's variant can be redefined as ``<nb>``'s attribute (it overrides the one defined in ``<question>``, if any).
+
+Conclusion
+^^^^^^^^^^
 
 Now the question is: how to know about the questions kinds and subkinds, and the possible contexts, variants or whatever other attributes? Well it is planned to add an easy way to know that (like a special directive) but there's nothing yet. The better, so far, may be to look at the provided sheets in ``mathmaker/data/frameworks/`` and see what's in there.

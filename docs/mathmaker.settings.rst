@@ -1,5 +1,5 @@
-mathmaker.settings package
-==========================
+mathmaker\.settings package
+===========================
 
 Module contents
 ---------------

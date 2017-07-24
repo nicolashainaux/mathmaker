@@ -1,5 +1,5 @@
-mathmaker.lib.sheet.exercise package
-====================================
+mathmaker\.lib\.sheet\.exercise package
+=======================================
 
 Subpackages
 -----------
@@ -11,72 +11,72 @@ Subpackages
 Submodules
 ----------
 
-mathmaker.lib.sheet.exercise.X_AlgebraExpressionExpansion module
-----------------------------------------------------------------
+mathmaker\.lib\.sheet\.exercise\.X\_AlgebraExpressionExpansion module
+---------------------------------------------------------------------
 
 .. automodule:: mathmaker.lib.sheet.exercise.X_AlgebraExpressionExpansion
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.sheet.exercise.X_AlgebraExpressionReduction module
-----------------------------------------------------------------
+mathmaker\.lib\.sheet\.exercise\.X\_AlgebraExpressionReduction module
+---------------------------------------------------------------------
 
 .. automodule:: mathmaker.lib.sheet.exercise.X_AlgebraExpressionReduction
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.sheet.exercise.X_Calculation module
--------------------------------------------------
+mathmaker\.lib\.sheet\.exercise\.X\_Calculation module
+------------------------------------------------------
 
 .. automodule:: mathmaker.lib.sheet.exercise.X_Calculation
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.sheet.exercise.X_Equation module
-----------------------------------------------
+mathmaker\.lib\.sheet\.exercise\.X\_Equation module
+---------------------------------------------------
 
 .. automodule:: mathmaker.lib.sheet.exercise.X_Equation
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.sheet.exercise.X_Factorization module
----------------------------------------------------
+mathmaker\.lib\.sheet\.exercise\.X\_Factorization module
+--------------------------------------------------------
 
 .. automodule:: mathmaker.lib.sheet.exercise.X_Factorization
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.sheet.exercise.X_MentalCalculation module
--------------------------------------------------------
+mathmaker\.lib\.sheet\.exercise\.X\_Generic module
+--------------------------------------------------
 
-.. automodule:: mathmaker.lib.sheet.exercise.X_MentalCalculation
+.. automodule:: mathmaker.lib.sheet.exercise.X_Generic
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.sheet.exercise.X_Model module
--------------------------------------------
+mathmaker\.lib\.sheet\.exercise\.X\_Model module
+------------------------------------------------
 
 .. automodule:: mathmaker.lib.sheet.exercise.X_Model
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.sheet.exercise.X_RightTriangle module
----------------------------------------------------
+mathmaker\.lib\.sheet\.exercise\.X\_RightTriangle module
+--------------------------------------------------------
 
 .. automodule:: mathmaker.lib.sheet.exercise.X_RightTriangle
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.sheet.exercise.X_Structure module
------------------------------------------------
+mathmaker\.lib\.sheet\.exercise\.X\_Structure module
+----------------------------------------------------
 
 .. automodule:: mathmaker.lib.sheet.exercise.X_Structure
     :members:

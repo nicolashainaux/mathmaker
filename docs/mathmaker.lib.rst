@@ -1,5 +1,5 @@
-mathmaker.lib package
-=====================
+mathmaker\.lib package
+======================
 
 Subpackages
 -----------
@@ -15,64 +15,56 @@ Subpackages
 Submodules
 ----------
 
-mathmaker.lib.error module
---------------------------
+mathmaker\.lib\.error module
+----------------------------
 
 .. automodule:: mathmaker.lib.error
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.is_ module
-------------------------
-
-.. automodule:: mathmaker.lib.is_
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker.lib.list_sheets module
---------------------------------
+mathmaker\.lib\.list\_sheets module
+-----------------------------------
 
 .. automodule:: mathmaker.lib.list_sheets
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.maths_lib module
-------------------------------
+mathmaker\.lib\.maths\_lib module
+---------------------------------
 
 .. automodule:: mathmaker.lib.maths_lib
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.randomly module
------------------------------
+mathmaker\.lib\.randomly module
+-------------------------------
 
 .. automodule:: mathmaker.lib.randomly
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.shared module
----------------------------
+mathmaker\.lib\.shared module
+-----------------------------
 
 .. automodule:: mathmaker.lib.shared
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.sources module
-----------------------------
+mathmaker\.lib\.sources module
+------------------------------
 
 .. automodule:: mathmaker.lib.sources
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker.lib.startup_actions module
-------------------------------------
+mathmaker\.lib\.startup\_actions module
+---------------------------------------
 
 .. automodule:: mathmaker.lib.startup_actions
     :members:
