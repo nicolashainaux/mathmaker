@@ -124,8 +124,12 @@ class X_Structure(object):
                               'ans': shared.machine.write_new_line()
                               + shared.machine.write_new_line()}
         elif x_spacing == '':
-            # do not remove otherwise you'll get empty addvpsace instead
+            # do not remove otherwise you'll get empty addvspace instead
             self.x_spacing = {'exc': '', 'ans': ''}
+        elif x_spacing == 'jump to next page':
+            self.x_spacing = \
+                {'exc': shared.machine.write_jump_to_next_page(),
+                 'ans': shared.machine.write_jump_to_next_page()}
         else:
             self.x_spacing = \
                 {'exc': shared.machine.addvspace(height=x_spacing),
@@ -145,6 +149,9 @@ class X_Structure(object):
                     elif s == '':
                         # do not remove otherwise you'll get empty addvspace
                         self.x_spacing.update({key: ''})
+                    elif s == 'jump to next page':
+                        self.x_spacing.update(
+                            {key: shared.machine.write_jump_to_next_page()})
                     else:
                         self.x_spacing.update(
                             {key: shared.machine.addvspace(height=s)})
@@ -234,9 +241,7 @@ class X_Structure(object):
                                              col_widths,
                                              content,
                                              **options)
-                    result += self.x_spacing[ex_or_answers]
-
-            return result
+            return result + self.x_spacing[ex_or_answers]
         else:
             if self.slideshow:
                 result += M.write_frame("", frame='start_frame')

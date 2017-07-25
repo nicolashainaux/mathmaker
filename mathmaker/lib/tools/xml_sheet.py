@@ -117,7 +117,33 @@ def _read_layout(node, config, layout):
                 spacing['spacing_a'] = s
         # part is either wordings or answers
         rowxcol = part.attrib.get('rowxcol', 'none')
-        if rowxcol != 'none':
+        distri = part.attrib.get('distribution', 'auto')
+        if rowxcol == 'none':
+            if distri == 'auto':
+                distri = 'all'
+            else:
+                try:
+                    distri = int(distri)
+                except ValueError:
+                    raise error.XMLFileFormatError('A distribution '
+                                                   'attribute cannot be '
+                                                   'turned into int.')
+            if not (s == 'jump to next page'
+                    and 'rowxcol' not in part.attrib
+                    and 'distribution' not in part.attrib):
+                if part.tag == 'wordings':
+                    if keep_default_w:
+                        layout['exc'] = [None, distri]
+                        keep_default_w = False
+                    else:
+                        layout['exc'] += [None, distri]
+                else:
+                    if keep_default_a:
+                        layout['ans'] = [None, distri]
+                        keep_default_a = False
+                    else:
+                        layout['ans'] += [None, distri]
+        else:
             delimiter = '×'
             if 'x' in rowxcol:
                 delimiter = 'x'
@@ -150,29 +176,27 @@ def _read_layout(node, config, layout):
                     keep_default_a = False
                 else:
                     layout['ans'].append([nrow, ] + colwidths)
-            distri = part.attrib.get('distribution', 'auto')
             if distri == 'auto':
-                distri = 'all'
-            else:
-                distri = distri.replace(',', ' ').replace(';', ' ')
-                distri = tuple(int(n) for n in distri.split())
+                distri = ' '.join(['1' for i in range(ncol * nrow)])
+            distri = distri.replace(',', ' ').replace(';', ' ')
+            distri = tuple(int(n) for n in distri.split())
             if part.tag == 'wordings':
                 layout['exc'].append(distri)
             else:
                 layout['ans'].append(distri)
-            if s == 'jump to next page':
-                if part.tag == 'wordings':
-                    if keep_default_w:
-                        layout['exc'] = ['jump', 'next_page']
-                        keep_default_w = False
-                    else:
-                        layout['exc'] += ['jump', 'next_page']
-                if part.tag == 'answers':
-                    if keep_default_a:
-                        layout['ans'] = ['jump', 'next_page']
-                        keep_default_a = False
-                    else:
-                        layout['ans'] += ['jump', 'next_page']
+        if s == 'jump to next page':
+            if part.tag == 'wordings':
+                if keep_default_w:
+                    layout['exc'] = ['jump', 'next_page']
+                    keep_default_w = False
+                else:
+                    layout['exc'] += ['jump', 'next_page']
+            if part.tag == 'answers':
+                if keep_default_a:
+                    layout['ans'] = ['jump', 'next_page']
+                    keep_default_a = False
+                else:
+                    layout['ans'] += ['jump', 'next_page']
     config.update(spacing)
     return config, layout
 
