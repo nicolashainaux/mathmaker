@@ -227,9 +227,6 @@ class Q_Generic(Q_Structure):
         numbers_to_use = options['numbers_to_use']
         del options['numbers_to_use']
 
-        self.q_spacing = shared.machine.write_new_line() \
-            + shared.machine.write_new_line()
-
         # modules
         mod_name = self.q_kind
         if mod_name in ['vocabulary_half', 'vocabulary_third',
@@ -251,17 +248,16 @@ class Q_Generic(Q_Structure):
                                              for m in ALL_MODULES]))
         m = module.sub_object(numbers_to_use, **options)
 
-        if 'spacing' in options:
-            if options['spacing'] == 'newline':
-                self.q_spacing = shared.machine.write_new_line()
-            elif options['spacing'] in ['newline_twice', 'default']:
-                self.q_spacing = shared.machine.write_new_line() \
-                    + shared.machine.write_new_line()
-            elif options['spacing'] == '':
-                self.q_spacing = ''
-            else:
-                self.q_spacing = shared.machine.addvspace(
-                    height=options['spacing'])
+        sp = options.get('spacing', '30.0pt')
+        if sp == 'newline':
+            self.q_spacing = shared.machine.write_new_line()
+        elif sp == 'newline_twice':
+            self.q_spacing = shared.machine.write_new_line() \
+                + shared.machine.write_new_line()
+        elif sp == '':
+            self.q_spacing = ''
+        else:
+            self.q_spacing = shared.machine.addvspace(height=sp)
 
         self.q_text = m.q(**options)
         self.q_answer = m.a(**options)
