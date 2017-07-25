@@ -368,6 +368,8 @@ class S_Structure(object):
                                          col_widths,
                                          content,
                                          unit=self.sheet_layout_unit)
+                if ex_n < len(self.exercises_list):
+                    result += M.write_new_line()
 
         return result
 
