@@ -117,7 +117,7 @@ def _read_layout(node, config, layout):
                 spacing['spacing_a'] = s
         # part is either wordings or answers
         rowxcol = part.attrib.get('rowxcol', 'none')
-        distri = part.attrib.get('distribution', 'auto')
+        distri = part.attrib.get('print', 'auto')
         if rowxcol == 'none':
             if distri == 'auto':
                 distri = 'all'
@@ -125,12 +125,12 @@ def _read_layout(node, config, layout):
                 try:
                     distri = int(distri)
                 except ValueError:
-                    raise error.XMLFileFormatError('A distribution '
+                    raise error.XMLFileFormatError('A print '
                                                    'attribute cannot be '
                                                    'turned into int.')
             if not (s == 'jump to next page'
                     and 'rowxcol' not in part.attrib
-                    and 'distribution' not in part.attrib):
+                    and 'print' not in part.attrib):
                 if part.tag == 'wordings':
                     if keep_default_w:
                         layout['exc'] = [None, distri]

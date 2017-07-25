@@ -163,7 +163,7 @@ Attributes of ``<wordings />`` and ``<answers />``
 
 * ``colwidths`` is ignored if ``rowxcol`` contains ``"none"``. If ``rowxcol`` contains a ``"r×c"`` definition, then ``colwidths`` defaults to ``"auto"``: the width of all columns will be calculated automatically (all equal). Otherwise, you can set the values you like, separated by spaces, like: ``"4.5 4.5 9"`` what would make the two first columns 4.5 units wide and the last, 9 units wide. The length unit can be set in the ``<sheet>``'s ``<layout>``'s attribute ``unit``. It defaults to cm. There must be as many values as the number of columns defined in the ``"r×c"`` definition.
 
-* ``distribution`` is the distribution of the questions (or exercises) per cell. It defaults to ``"auto"``. If ``rowxcol`` contains ``"none"``, then ``distribution`` can either be a natural number (how many exercises/questions to print), or ``"auto"``, and then all exercises (left) will be printed, without distributing them among columns. If ``rowxcol`` contains a ``"r×c"`` definition, then an ``"auto"`` value would mean that each "cell" will contain one question. Otherwise, you can tell how many questions you want in each cell, row after row, as integers separated by spaces, like: ``"2 1 1 3 1 1"`` what would put (with ``rowxcol="2×3"``) 2 questions (or exercises) in the first cell, then 1 question in each other cell of the first row, then 3 questions in the first cell of the second row, and 1 question in each cell left. There must be as many numbers as cells. As a convenience, you can add a ``;`` or ``,`` to separate the rows, like: ``"2 1 1, 3 1 1"`` (These two punctuation signs will simply be ignored). Each row must contain as many numbers as defined in the ``"r×c"`` definition. If the number of rows is left undefined (``?``) then only the first row has to be defined (extra rows will be ignored) as a pattern for all rows (the default still being ``"auto"``, i.e. 1 question per cell).
+* ``print`` is the number of questions (or exercises) to print, either one after the other, or per cell. It defaults to ``"auto"``. If ``rowxcol`` contains ``"none"``, then ``print`` can either be a natural number (how many exercises/questions to print), or ``"auto"``, and then all exercises (left) will be printed, without distributing them among columns. If ``rowxcol`` contains a ``"r×c"`` definition, then an ``"auto"`` value would mean that each "cell" will contain one question. Otherwise, you can tell how many questions you want in each cell, row after row, as integers separated by spaces, like: ``"2 1 1 3 1 1"`` what would put (with ``rowxcol="2×3"``) 2 questions (or exercises) in the first cell, then 1 question in each other cell of the first row, then 3 questions in the first cell of the second row, and 1 question in each cell left. There must be as many numbers as cells. As a convenience, you can add a ``;`` or ``,`` to separate the rows, like: ``"2 1 1, 3 1 1"`` (These two punctuation signs will simply be ignored). Each row must contain as many numbers as defined in the ``"r×c"`` definition. If the number of rows is left undefined (``?``) then only the first row has to be defined (extra rows will be ignored) as a pattern for all rows (the default still being ``"auto"``, i.e. 1 question per cell).
 
 * ``spacing`` defaults to ``""``, it is the spacing to be introduced at the end of the exercise. You can set it at ``"`` (no spacing), ``"newline"``, ``"newline_twice"``, the special value ``"jump to next page"`` that will insert a ``\\newpage`` after the current exercise; or a value that will be inserted in a LaTeX ``addvspace{}`` command, for instance ``spacing="40.0pt"`` will result in a ``addvspace{40.0pt}`` inserted at the end of the exercise. ``spacing`` can also be used in the parent ``<exercise>`` tag. The value defined as a ``<layout>``'s attribute will override it. This allows to set different spacings for the wordings and the answers.
 
@@ -175,8 +175,8 @@ Say you have 4 exercises and you want to put the answers of the two first ones i
 .. code-block:: xml
 
   <layout >
-    <answers rowxcol="1×2" distribution="1 1"/>
-    <answers rowxcol="none" distribution="2" />
+    <answers rowxcol="1×2" print="1 1"/>
+    <answers print="2" />
   </layout>
 
 
@@ -191,9 +191,9 @@ If you have 3 exercises and you want to print 2 answers on a first page, then ju
 .. code-block:: xml
 
 	<layout>
-		<answers distribution="2" />
+		<answers print="2" />
 		<answers spacing="jump to next page" />
-		<answers distribution="1" />
+		<answers print="1" />
 	</layout>
 
 Examples of exercise's layouts:
@@ -211,7 +211,7 @@ will basically distribute the questions in 4 rows of 3 columns. Same for wording
 .. code-block:: xml
 
 		<layout>
-			<wordings rowxcol="?×3" colwidths="5 5 8" distribution="1 1 2" />
+			<wordings rowxcol="?×3" colwidths="5 5 8" print="1 1 2" />
 		</layout>
 
 will distribute, only for wordings, the questions in 3 columns of widths 5 cm, 5 cm and 8 cm. There will be 1 question in the left cell of each row, 1 question in the middle cell of each row and 2 questions in the right cell of each row.
@@ -237,7 +237,7 @@ whereas:
 .. code-block:: xml
 
     <layout>
-      <wordings  rowxcol="?×2"  distribution="3, 3" />
+      <wordings  rowxcol="?×2"  print="3, 3" />
     </layout>
 
 will distribute the questions in 2 columns of 1 row, 3 questions per row, i.e.:
