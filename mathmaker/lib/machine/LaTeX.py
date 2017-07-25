@@ -584,7 +584,7 @@ automatically increments the counter").format(cmd_name="exercise",
         else:
             return "\includegraphics[scale=" + s + "]{" \
                 + drawable_arg.eps_filename \
-                + "}" + "\\newline" + "\n"
+                + "}" + "\n"
 
     # --------------------------------------------------------------------------
     ##
