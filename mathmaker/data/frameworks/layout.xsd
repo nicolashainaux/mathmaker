@@ -38,9 +38,9 @@
 	<xs:element name="layout">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="wordings"	type="partType"	minOccurs="0" maxOccurs="1">
+				<xs:element name="wordings"	type="partType"	minOccurs="0" maxOccurs="unbounded">
 				</xs:element>
-				<xs:element name="answers" type="partType"	minOccurs="0" maxOccurs="1">
+				<xs:element name="answers" type="partType"	minOccurs="0" maxOccurs="unbounded">
 				</xs:element>
 			</xs:sequence>
 			<xs:attribute name="type"				type="layoutType"	use="optional"  default="default"/>
