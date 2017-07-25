@@ -22,6 +22,7 @@
 			<xs:attribute name="rank_matches_invisible_zero"	type="xs:string"	use="optional"/>
 			<xs:attribute name="generation_type"				type="xs:string"	use="optional"/>
 			<xs:attribute name="spacing"				type="xs:string"	use="optional"/>
+			<xs:attribute name="answers_spacing"				type="xs:string"	use="optional"/>
 			<xs:attribute name="decimal_result"				type="xs:integer"	use="optional"/>
 			<xs:attribute name="pick"				type="xs:integer"	use="optional"/>
 		</xs:complexType>

@@ -259,6 +259,17 @@ class Q_Generic(Q_Structure):
         else:
             self.q_spacing = shared.machine.addvspace(height=sp)
 
+        asp = options.get('answers_spacing', '')
+        if asp == 'newline':
+            self.a_spacing = shared.machine.write_new_line()
+        elif asp == 'newline_twice':
+            self.a_spacing = shared.machine.write_new_line() \
+                + shared.machine.write_new_line()
+        elif asp == '':
+            self.a_spacing = ''
+        else:
+            self.a_spacing = shared.machine.addvspace(height=asp)
+
         self.q_text = m.q(**options)
         self.q_answer = m.a(**options)
         if hasattr(m, 'h'):
@@ -282,7 +293,8 @@ class Q_Generic(Q_Structure):
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
-        return str(self.displayable_number) + str(self.q_answer)
+        return str(self.displayable_number) + str(self.q_answer) \
+            + str(self.a_spacing)
 
     # --------------------------------------------------------------------------
     ##

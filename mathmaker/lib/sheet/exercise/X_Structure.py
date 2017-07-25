@@ -231,8 +231,16 @@ class X_Structure(object):
                                         self.questions_list[q_n].\
                                         to_str(ex_or_answers)
                                 if ex_or_answers == 'ans' and not empty_cell:
+                                    vspace = '' \
+                                        if len(cell_content) <= 25 \
+                                        else cell_content[-25:]
+                                    newpage = '' \
+                                        if len(cell_content) <= 9 \
+                                        else cell_content[-9:]
                                     cell_content += M.write_new_line(
-                                        check=cell_content[-2:])
+                                        check=cell_content[-2:],
+                                        check2=vspace,
+                                        check3=newpage)
                                 q_n += 1
                             content += [cell_content]
 
