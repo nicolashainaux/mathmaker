@@ -2,10 +2,16 @@
 
 <sheet header="" title="Calculation: order of precedence." subtitle="" text="" answers_title="Answers">
 
+	<layout>
+		<answers print="2" />
+		<answers spacing="jump to next page" />
+		<answers print="1" />
+	</layout>
+
 	<exercise text_exc="Calculate:" text_ans="Example of solutions:">
 		<layout>
-			<wordings rowxcol="?×2"  distribution="3 3" spacing="25.0pt" />
-			<answers rowxcol="?×2"  distribution="3 3" spacing="" />
+			<wordings rowxcol="?×2"  print="3 3" spacing="25.0pt" />
+			<answers rowxcol="?×2"  print="3 3" spacing="" />
 		</layout>
 		<!-- No default for kind and subkind, they must be given
 			 Possible variants:
@@ -40,8 +46,8 @@
 
 	<exercise text_exc="Now the expressions may have parentheses. Calculate them:" text_ans="Example of solutions:">
 		<layout>
-			<wordings rowxcol="?×2"  distribution="4 4" spacing="25.0pt" />
-			<answers  rowxcol="?×2"  distribution="4 4" spacing="jump to next page" />
+			<wordings rowxcol="?×2"  print="4 4" spacing="25.0pt" />
+			<answers  rowxcol="?×2"  print="4 4" />
 		</layout>
     <mix>
 		  <question kind="calculation" subkind="order_of_operations" subvariant="only_positive" pick="8" spacing="15.0pt"></question>
@@ -54,8 +60,8 @@
 	</exercise>
 	<exercise text_exc="Same exercise, but with decimal numbers. Calculate:" text_ans="Example of solutions:">
 		<layout>
-			<wordings rowxcol="?×2" distribution="5 5"/>
-			<answers rowxcol="?×2" distribution="5 5" />
+			<wordings rowxcol="?×2" print="5 5"/>
+			<answers rowxcol="?×2" print="5 5" />
 		</layout>
     <mix>
 		  <question kind="calculation" subkind="order_of_operations" subvariant="only_positive" pick="4" nb_variant="decimal1" spacing="15.0pt"></question>

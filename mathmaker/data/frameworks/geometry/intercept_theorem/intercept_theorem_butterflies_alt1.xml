@@ -2,7 +2,10 @@
 
 <sheet header="" title="Intercept theorem" subtitle="" text="" answers_title="Example of solutions:">
 
-	<layout font_size_offset="-1" />
+	<layout font_size_offset="-1" >
+		<answers rowxcol="1×2" print="1 1"/>
+		<answers print="2" />
+	</layout>
 
 	<!-- Default values: id='generic' kind='' subkind='default' -->
 	<exercise>

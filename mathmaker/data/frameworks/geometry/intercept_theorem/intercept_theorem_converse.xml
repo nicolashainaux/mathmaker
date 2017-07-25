@@ -2,7 +2,11 @@
 
 <sheet header="" title="Converse of intercept theorem" subtitle="" text="" answers_title="Example of solutions:">
 
-	<layout font_size_offset="-1" />
+	<layout font_size_offset="-1">
+		<answers print="2" />
+		<answers spacing="jump to next page" />
+		<answers print="2" />
+	</layout>
 
 	<!-- Default values: id='generic' kind='' subkind='default' -->
 	<!-- ans_variant can be 'default' or 'alternative2' only -->

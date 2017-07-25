@@ -6,12 +6,16 @@
 
 	<!-- Default values: id='generic' kind='' subkind='default' -->
 	<exercise q_numbering="alphabetical">
+		<layout>
+			<wordings rowxcol="1×2" print="3 3" />
+			<answers rowxcol="1×2" print="3 3" />
+		</layout>
 		<!-- variant can be sin|cos|tan|random
 				 Default values (if variant is not here) will be as if variant="random" -->
 		<!-- source for trigonometry_calculate_angle questions must be double:
 			   one for the length of one side, the other for the length of another side -->
-		<question kind="trigonometry" subkind="calculate_angle" variant="cos" spacing="40.0pt" decimal_result="0">
-			<nb source="singledeci1_1to100;;singledeci1_1to100">5</nb>
+		<question kind="trigonometry" subkind="calculate_angle" variant="cos" decimal_result="0" spacing="40.0pt" answers_spacing="60.0pt">
+			<nb source="singledeci1_1to100;;singledeci1_1to100">6</nb>
 		</question>
 
 	</exercise>
