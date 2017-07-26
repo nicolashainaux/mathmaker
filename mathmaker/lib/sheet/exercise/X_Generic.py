@@ -518,6 +518,8 @@ class X_Generic(X_Structure):
                                  'decimal_and_10_100_1000_for_multi']:
                     # __
                     q.options['10_100_1000'] = True
+            if 'qspacing' in options and 'spacing' not in q.options:
+                q.options.update({'spacing': options['qspacing']})
             self.questions_list += \
                 [Q_Generic(q.id,
                            q.options,

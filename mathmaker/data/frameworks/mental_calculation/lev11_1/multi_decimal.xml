@@ -7,7 +7,7 @@
 	<!-- Default value: id='generic'
 		 No default for kind and subkind, they must be given -->
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
-	<exercise id="mental_calculation" kind="tabular" shuffle="true">
+	<exercise id="mental_calculation" kind="tabular" shuffle="true" qspacing="">
 
 		<question kind="multi" subkind="direct" nb_variant="decimal">
 			<nb source="intpairs_2to9">20</nb>

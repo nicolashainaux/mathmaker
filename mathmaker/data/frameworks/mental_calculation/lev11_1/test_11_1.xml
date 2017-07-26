@@ -7,7 +7,7 @@
 	<!-- Default value: id='generic'
 		 No default for kind and subkind, they must be given -->
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
-	<exercise id="mental_calculation" kind="tabular" shuffle="true">
+	<exercise id="mental_calculation" kind="tabular" shuffle="true" qspacing="">
 
 		<!-- Default value (planned): context="none"
 			 No default for kind and subkind, they must be given -->
@@ -62,8 +62,6 @@
 		<question kind="rank" subkind="numberof" generation_type="default">
 			<nb source="rank_words">1</nb>
 		</question>
-
-
 
 	</exercise>
 
