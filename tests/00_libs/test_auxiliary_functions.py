@@ -138,6 +138,9 @@ def test_fix_digits():
     n1, n2 = fix_digits(Decimal('0.6'), Decimal('10'))
     assert n1 == Decimal('6')
     assert not is_integer(n2)
+    n1, n2, n3 = fix_digits(Decimal('0.6'), Decimal('10'), Decimal('100'))
+    assert n1 == Decimal('6')
+    assert not is_integer(n2) or not is_integer(n3)
 
 
 def test_is_power_of_10():
