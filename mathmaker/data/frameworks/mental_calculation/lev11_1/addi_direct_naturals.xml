@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sheet header="" title="Mental calculation" subtitle="" text="" answers_title="Answers">
+
+	<layout type="mental" font_size_offset="-1" />
+
+	<!-- Default value: id='generic'
+		 No default for kind and subkind, they must be given -->
+	<!-- Available kinds for mental calculation: tabular, slideshow -->
+	<exercise id="mental_calculation" kind="tabular" shuffle="true">
+
+		<!-- Default value (planned): context="none"
+			 No default for kind and subkind, they must be given -->
+		<question kind="addi" subkind="direct">
+			<nb source="intpairs_9to50" spacing="">10</nb>
+			<nb source="intpairs_9to100" spacing="">10</nb>
+		</question>
+
+	</exercise>
+
+</sheet>
