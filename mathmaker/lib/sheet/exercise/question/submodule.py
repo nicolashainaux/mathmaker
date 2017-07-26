@@ -360,10 +360,13 @@ class structure(object):
                 else:
                     max_dn = int(self.nb_variant[-1])
                 if any(digits_nb(n) > max_dn for n in numbers):
+                    tests = [digits_nb(n) > max_dn for n in numbers]
                     msg += 'At least a number among ' \
                         + ', '.join(letters[0:len(numbers) - 1]) + ' and ' \
                         + letters[len(numbers) - 1] \
-                        + ' has more digits than expected ({})'.format(max_dn)
+                        + (' has more digits than expected: {m} ; '
+                           + 'tests = {t}; numbers = {n}') \
+                        .format(m=max_dn, t=tests, n=numbers)
                 if (self.nb_variant.startswith('decimal')
                     and all(digits_nb(n) == 0 for n in numbers)):
                     msg += ', '.join(letters[0:len(numbers) - 1]) + ' and ' \
