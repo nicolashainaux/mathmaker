@@ -118,68 +118,69 @@ from .. import submodule
 # 183: a + (b - c)÷d            # 187: a - (b - c)÷d
 
 
-def adjust_nb_for_variant_11(n1, n2, n3, n4):
-    """
-    Reorder the 4 numbers to ensure a÷b - c×d >= 0
-
-    May (recursively if needed) change some values by multiplying them
-    by 10 (if there's no other solution).
-    """
-    if n1 >= n3 * n4:
-        return (n1, n2, n3, n4)
-    if n2 >= n3 * n4:
-        return (n2, n1, n3, n4)
-    if 10 * n1 >= n3 * n4:
-        return (n1 * 10, n2, n3, n4)
-    if 10 * n2 >= n3 * n4:
-        return (n2 * 10, n1, n3, n4)
-    if 10 * n3 >= n1 * n2:
-        return (n3 * 10, n4, n1, n2)
-    if 10 * n4 >= n1 * n2:
-        return (n4 * 10, n3, n1, n2)
-    # No solution has been found, we'll recursively test with n1 * 10
-    # (what will actually lead to test n1 * 100, then if necessary n1 * 1000
-    # etc. but that shouldn't go too far with the intended numbers' range)
-    return adjust_nb_for_variant_11(10 * max(n1, n2), min(n1, n2), n3, n4)
-
-
-def adjust_nb_for_variant_13(n1, n2, n3, n4):
-    """
-    Reorder the 4 numbers to ensure a×b - c÷d >= 0
-
-    May (recursively if needed) change some values by multiplying them
-    by 10 (if there's no other solution).
-    """
-    if n1 * n2 >= n3:
-        return (n1, n2, n3, n4)
-    if n1 * n2 >= n4:
-        return (n1, n2, n4, n3)
-    if n3 * n4 >= n1:
-        return (n3, n4, n1, n2)
-    if n3 * n4 >= n1:
-        return (n3, n4, n2, n1)
-    return adjust_nb_for_variant_13(10 * max(n1, n2), min(n1, n2), n3, n4)
-
-
-def adjust_nb_for_variant_15(n1, n2, n3, n4):
-    """
-    Reorder the 4 numbers to ensure a÷b - c÷d >= 0
-
-    May (recursively if needed) change some values by multiplying them
-    by 10 (if there's no other solution).
-    """
-    if n1 >= n3:
-        return (n1, n2, n3, n4)
-    if n1 >= n4:
-        return (n1, n2, n4, n3)
-    if n2 >= n3:
-        return (n2, n1, n3, n4)
-    if n2 >= n4:
-        return (n2, n1, n4, n3)
-    return adjust_nb_for_variant_15(10 * max(n1, n2), min(n1, n2), n3, n4)
-
-
 class sub_object(submodule.structure):
+
+    def adjust_nb_for_variant_11(self, a, b, c, d):
+        """
+        Reorder the 4 numbers to ensure a÷b - c×d >= 0
+
+        May (recursively if needed) change some values by multiplying them
+        by 10 (if there's no other solution).
+        """
+        if a >= c * d:
+            return (a, b, c, d)
+        if b >= c * d:
+            return (b, a, c, d)
+        if 10 * a >= c * d:
+            return (a * 10, b, c, d)
+        if 10 * b >= c * d:
+            return (b * 10, a, c, d)
+        if 10 * c >= a * b:
+            return (c * 10, d, a, b)
+        if 10 * d >= a * b:
+            return (d * 10, c, a, b)
+        # No solution has been found, we'll recursively test with a * 10
+        # (what will actually lead to test a * 100, then if necessary
+        # a * 1000 etc. but that shouldn't go too far with the intended
+        # numbers' range)
+        return self.adjust_nb_for_variant_11(10 * max(a, b),
+                                             min(a, b), c, d)
+
+    def adjust_nb_for_variant_13(self, a, b, c, d):
+        """
+        Reorder the 4 numbers to ensure a×b - c÷d >= 0
+
+        May (recursively if needed) change some values by multiplying them
+        by 10 (if there's no other solution).
+        """
+        if a * b >= c:
+            return (a, b, c, d)
+        if a * b >= d:
+            return (a, b, d, c)
+        if c * d >= a:
+            return (c, d, a, b)
+        if c * d >= a:
+            return (c, d, b, a)
+        return self.adjust_nb_for_variant_13(10 * max(a, b),
+                                             min(a, b), c, d)
+
+    def adjust_nb_for_variant_15(self, a, b, c, d):
+        """
+        Reorder the 4 numbers to ensure a÷b - c÷d >= 0
+
+        May (recursively if needed) change some values by multiplying them
+        by 10 (if there's no other solution).
+        """
+        if a >= c:
+            return (a, b, c, d)
+        if a >= d:
+            return (a, b, d, c)
+        if b >= c:
+            return (b, a, c, d)
+        if b >= d:
+            return (b, a, d, c)
+        return self.adjust_nb_for_variant_15(10 * max(a, b), min(a, b),
+                                             c, d)
 
     def adjust_depth(self, depth, n=None, **kwargs):
         """
@@ -291,19 +292,6 @@ class sub_object(submodule.structure):
                                            to=[self.nb1, self.nb3, self.nb4])
                 except ValueError:
                     pass
-        if self.subvariant == 'only_positive' and self.variant in [11, 13, 15]:
-            if self.variant == 11:
-                self.nb1, self.nb2, self.nb3, self.nb4 = \
-                    adjust_nb_for_variant_11(self.nb1, self.nb2,
-                                             self.nb3, self.nb4)
-            elif self.variant == 13:
-                self.nb1, self.nb2, self.nb3, self.nb4 = \
-                    adjust_nb_for_variant_13(self.nb1, self.nb2,
-                                             self.nb3, self.nb4)
-            elif self.variant == 15:
-                self.nb1, self.nb2, self.nb3, self.nb4 = \
-                    adjust_nb_for_variant_15(self.nb1, self.nb2,
-                                             self.nb3, self.nb4)
         if not self.allow_division_by_decimal:
             if self.variant in [5, 7, 10, 11, 14, 15, ]:
                 if not is_integer(self.nb2):
@@ -322,14 +310,14 @@ class sub_object(submodule.structure):
                     self.nb3, self.nb4 = self.nb4, self.nb3
             if self.variant in [101, 103, 105, 107, ]:
                 if not is_integer(self.nb2):
-                    if self.variant == 'decimal1':
+                    if self.nb_variant == 'decimal1':
                         self.nb1, self.nb2 = self.nb2, self.nb1
                     else:
                         self.nb1, self.nb2 = move_digits_to(self.nb1,
                                                             from_nb=[self.nb2])
             if self.variant in [109, 110, 113, 114]:
                 if not is_integer(self.nb3):
-                    if self.variant == 'decimal1':
+                    if self.nb_variant == 'decimal1':
                         self.nb2, self.nb3 = self.nb3, self.nb2
                     else:
                         self.nb2, self.nb3 = move_digits_to(self.nb2,
@@ -339,7 +327,7 @@ class sub_object(submodule.structure):
                     move_digits_to(self.nb1, from_nb=[self.nb2, self.nb3])
             if 132 <= self.variant <= 135:
                 if not is_integer(self.nb2):
-                    if self.variant == 'decimal1':
+                    if self.nb_variant == 'decimal1':
                         self.nb1, self.nb2 = self.nb2, self.nb1
                     else:
                         try:
@@ -352,7 +340,7 @@ class sub_object(submodule.structure):
                                 remove_digits_from(self.nb2, to=[self.nb1])
             if 124 <= self.variant <= 131 or 136 <= self.variant <= 139:
                 if not is_integer(self.nb4):
-                    if self.variant == 'decimal1':
+                    if self.nb_variant == 'decimal1':
                         self.nb3, self.nb4 = self.nb4, self.nb3
                     else:
                         try:
@@ -396,17 +384,54 @@ class sub_object(submodule.structure):
                     else:
                         self.nb3, self.nb1, self.nb2 = remove_digits_from(
                             self.nb3, to=[self.nb1, self.nb2])
+        if self.subvariant == 'only_positive' and self.variant in [11, 13, 15]:
+            if self.variant == 11:
+                self.nb1, self.nb2, self.nb3, self.nb4 = \
+                    self.adjust_nb_for_variant_11(self.nb1, self.nb2,
+                                                  self.nb3, self.nb4)
+            elif self.variant == 13:
+                self.nb1, self.nb2, self.nb3, self.nb4 = \
+                    self.adjust_nb_for_variant_13(self.nb1, self.nb2,
+                                                  self.nb3, self.nb4)
+            elif self.variant == 15:
+                self.nb1, self.nb2, self.nb3, self.nb4 = \
+                    self.adjust_nb_for_variant_15(self.nb1, self.nb2,
+                                                  self.nb3, self.nb4)
 
     def _create_0to23(self):
         a, b, c = self.nb1, self.nb2, self.nb3
         if self.variant >= 8:
             d = self.nb4
+        # 11 and 13: a÷b - c×d and a×b - c÷d
+        if self.variant == 11:
+            if (self.nb_variant.startswith('decimal')
+                and not is_integer(a)
+                and all(is_integer(x) for x in [a * b, c, d])):
+                a, c, d = fix_digits(a, c, d)
+        elif self.variant == 13:
+            if (self.nb_variant.startswith('decimal')
+                and not is_integer(c)
+                and all(is_integer(x) for x in [a, b, c * d])):
+                c, a, b = fix_digits(c, a, b)
+        if (self.subvariant == 'only_positive'
+            and self.variant == 11 and a - c * d < 0
+            and self.nb_variant.startswith('decimal')):
+            self.variant = 13
+            a, b, c, d = c, d, a, b
+        elif (self.subvariant == 'only_positive'
+              and self.variant == 13 and a * b - c < 0
+              and self.nb_variant.startswith('decimal')):
+            self.variant = 11
+            a, b, c, d = c, d, a, b
         if self.variant == 0:  # a + b×c
             self.obj = Sum([a, Product([b, c])])
             self.watch('no negative; decimals distribution; '
                        'a isnt 0; b isnt 1; c isnt 1', a, b, c)
         elif self.variant == 1:  # a + b÷c
-            b = self.nb2 * self.nb3
+            if (self.nb_variant.startswith('decimal')
+                and all(is_integer(x) for x in [a, b * c, c])):
+                b, a = fix_digits(b, a)
+            b = b * c
             self.obj = Sum([a, Division(('+', b, c))])
             self.watch('no negative; decimals distribution; '
                        'a isnt 0; c isnt 0; c isnt 1; c isnt deci', a, b, c)
@@ -418,6 +443,9 @@ class sub_object(submodule.structure):
             self.watch('no negative; decimals distribution; '
                        'a isnt 0; b isnt 1; c isnt 1', a, b, c)
         elif self.variant == 3:  # a - b÷c
+            if (self.nb_variant.startswith('decimal')
+                and all(is_integer(x) for x in [a, b * c, c])):
+                b, a = fix_digits(b, a)
             if self.subvariant == 'only_positive':
                 if a < b:
                     a += b
@@ -430,17 +458,20 @@ class sub_object(submodule.structure):
             self.watch('no negative; decimals distribution; '
                        'c isnt 0; b isnt 1; a isnt 1', a, b, c)
         elif self.variant == 5:  # a÷b + c
-            a = self.nb1 * self.nb2
+            if (self.nb_variant.startswith('decimal')
+                and all(is_integer(x) for x in [a * b, b, c])):
+                a, c = fix_digits(a, c)
+            a = a * b
             self.obj = Sum([Division(('+', a, b)), c])
             self.watch('no negative; decimals distribution; '
                        'c isnt 0; b isnt 0; b isnt 1; b isnt deci', a, b, c)
         elif self.variant == 6:  # a×b - c
             if self.subvariant == 'only_positive' and a * b < c:
                 depth = digits_nb(a * b)
-                c = random.choice(
+                c = Decimal(str(random.choice(
                     [i + 1
-                     for i in range(int(a * b * (10 ** depth)))]) \
-                    / (10 ** depth)
+                     for i in range(int(a * b * (10 ** depth)))]))) \
+                    / Decimal((10 ** depth))
             self.obj = Sum([Product([a, b]), -c])
             self.watch('no negative; decimals distribution; '
                        'c isnt 0; b isnt 1; a isnt 1', a, b, c)
@@ -459,13 +490,14 @@ class sub_object(submodule.structure):
                         # We have divided c by 10 as much as allowed
                         # and yet a < c, so no other choice than
                         # randomly choose a new decimal value
-                        c = random.choice(
+                        c = Decimal(str(random.choice(
                             [i + 1
-                             for i in range(int(min(a, b) * (10 ** depth)))]) \
-                            / (10 ** depth)
+                             for i in range(int(min(a, b) * (10 ** depth)))]
+                        ))) / Decimal(str((10 ** depth)))
                 else:  # no choice but to randomly choose a new natural
-                    c = random.choice([i + 1
-                                       for i in range(int(min(a, b)) - 1)])
+                    c = Decimal(str(
+                        random.choice([i + 1
+                                       for i in range(int(min(a, b)) - 1)])))
             a = a * b
             self.obj = Sum([Division(('+', a, b)), -c])
             self.watch('no negative; decimals distribution; '
@@ -483,29 +515,47 @@ class sub_object(submodule.structure):
                        'a isnt 1; b isnt 1; c isnt 1; d isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 10:  # a÷b + c×d
+            if (self.nb_variant.startswith('decimal')
+                and all(is_integer(x) for x in [a * b, c, d])):
+                a, c, d = fix_digits(a, c, d)
             a = a * b
             self.obj = Sum([Division(('+', a, b)), Product([c, d])])
             self.watch('no negative; decimals distribution; '
                        'b isnt 1; c isnt 1; d isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 11:  # a÷b - c×d
+            # Special case already managed at start of _create_0to23()
+            if (self.subvariant == 'only_positive'
+                and not self.nb_variant.startswith('decimal')):
+                a, b, c, d = self.adjust_nb_for_variant_11(a, b, c, d)
             a = a * b
             self.obj = Sum([Division(('+', a, b)), Product([-c, d])])
+            e = a / b - c * d
             self.watch('no negative; decimals distribution; '
                        'b isnt 1; c isnt 1; d isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
+            self.watch('no negative', e, letters='e')
         elif self.variant == 12:  # a×b + c÷d
+            if (self.nb_variant.startswith('decimal')
+                and all(is_integer(x) for x in [a, b, c * d])):
+                c, a, b = fix_digits(c, a, b)
             c = c * d
             self.obj = Sum([Product([a, b]), Division(('+', c, d))])
             self.watch('no negative; decimals distribution; '
                        'a isnt 1; b isnt 1; d isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 13:  # a×b - c÷d
+            # Special case already managed at start of _create_0to23()
+            if (self.subvariant == 'only_positive'
+                and not self.nb_variant.startswith('decimal')):
+                a, b, c, d = self.adjust_nb_for_variant_13(a, b, c, d)
             c = c * d
             self.obj = Sum([Product([a, b]), Division(('-', c, d))])
             self.watch('no negative; decimals distribution; '
                        'a isnt 1; b isnt 1; d isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
+            e = a * b - c / d
+            self.watch('no negative', e, letters='e')
         elif self.variant == 14:  # a÷b + c÷d
             a, c = a * b, c * d
             self.obj = Sum([Division(('+', a, b)), Division(('+', c, d))])
@@ -513,6 +563,9 @@ class sub_object(submodule.structure):
                        'b isnt 1; d isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 15:  # a÷b - c÷d
+            if (self.subvariant == 'only_positive'
+                and not self.nb_variant.startswith('decimal')):
+                a, b, c, d = self.adjust_nb_for_variant_15(a, b, c, d)
             a, c = a * b, c * d
             self.obj = Sum([Division(('+', a, b)), Division(('-', c, d))])
             self.watch('no negative; decimals distribution; '
@@ -524,6 +577,9 @@ class sub_object(submodule.structure):
                        'b isnt 1; c isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 17:  # a + b÷c + d
+            if (self.nb_variant.startswith('decimal')
+                and all(is_integer(x) for x in [a, b * c, d])):
+                b, a, d = fix_digits(b, a, d)
             b = b * c
             self.obj = Sum([a, Division(('+', b, c)), d])
             self.watch('no negative; decimals distribution; '
@@ -554,6 +610,9 @@ class sub_object(submodule.structure):
                        'b isnt 1; c isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 21:  # a - b÷c + d
+            if (self.nb_variant.startswith('decimal')
+                and all(is_integer(x) for x in [a, b * c, d])):
+                b, a, d = fix_digits(b, a, d)
             if self.subvariant == 'only_positive':
                 if a < b:
                     a += b
@@ -563,6 +622,9 @@ class sub_object(submodule.structure):
                        'c isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 22:  # a + b÷c - d
+            if (self.nb_variant.startswith('decimal')
+                and all(is_integer(x) for x in [a, b * c, d])):
+                b, a, d = fix_digits(b, a, d)
             if self.subvariant == 'only_positive':
                 if a + b < d:
                     a += d
@@ -572,6 +634,9 @@ class sub_object(submodule.structure):
                        'c isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 23:  # a - b÷c - d
+            if (self.nb_variant.startswith('decimal')
+                and all(is_integer(x) for x in [a, b * c, d])):
+                b, a, d = fix_digits(b, a, d)
             if self.subvariant == 'only_positive':
                 if a < b:
                     a += b
