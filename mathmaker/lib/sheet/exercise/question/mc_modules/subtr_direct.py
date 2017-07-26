@@ -36,9 +36,9 @@ class sub_object(submodule.structure):
         super().setup("numbers", nb=numbers_to_use, **options)
         super().setup("nb_variants", nb=numbers_to_use, **options)
 
-        ##
-        #   @todo   Leave it possible to have negative results (relative nb)
-        self.nb1, self.nb2 = max(self.nb1, self.nb2), min(self.nb1, self.nb2)
+        if self.subvariant == 'only_positive':
+            self.nb1, self.nb2 = max(self.nb1, self.nb2), min(self.nb1,
+                                                              self.nb2)
         the_diff = Sum([self.nb1, -self.nb2])
         self.diff_str = the_diff.printed
         self.result = the_diff.evaluate()

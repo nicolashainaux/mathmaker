@@ -17,7 +17,7 @@
 			<nb source="intpairs_4to9">5</nb>
 		</question>
 
-		<question kind="subtr" subkind="direct" context="mini_problem">
+		<question kind="subtr" subkind="direct" context="mini_problem" subvariant="only_positive">
 			<nb source="intpairs_10to100">5</nb>
 		</question>
 

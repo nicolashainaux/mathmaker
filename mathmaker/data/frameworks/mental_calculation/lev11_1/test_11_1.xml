@@ -25,7 +25,7 @@
 
 		<mix>
 			<question kind="addi" subkind="direct" context="mini_problem"></question>
-			<question kind="subtr" subkind="direct" context="mini_problem"></question>
+			<question kind="subtr" subkind="direct" context="mini_problem" subvariant="only_positive"></question>
 			<nb source="intpairs_10to100">2</nb>
 		</mix>
 
