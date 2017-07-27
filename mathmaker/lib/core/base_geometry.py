@@ -64,7 +64,7 @@ class Point(Drawable):
         :type y: a number
         """
         if isinstance(name, Point):
-            self.__init__(name=name.name, x=name.x, y=name.y)
+            Point.__init__(self, name=name.name, x=name.x, y=name.y)
         else:
             if type(name) is not str:
                 raise TypeError('A Point\'s name must be a str')
