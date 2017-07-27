@@ -315,7 +315,7 @@ class Polygon(Drawable):
     #   @brief Creates the euk string to put in the file
     #   @param options Any options
     #   @return The string to put in the picture file
-    def into_euk(self, **options):
+    def into_euk(self, draw_points_names=True, **options):
         box_values = self.work_out_euk_box()
         result = "box {val0}, {val1}, {val2}, {val3}\n"\
                  .format(val0=str(box_values[0]),
@@ -380,9 +380,10 @@ class Polygon(Drawable):
                                                       a.points[1])))
                              .slope for a in self.angle]
 
-        for (i, v) in enumerate(self.vertex):
-            result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
-                      .format(n=v.name, a=str(names_angles_list[i]))
+        if draw_points_names:
+            for (i, v) in enumerate(self.vertex):
+                result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
+                          .format(n=v.name, a=str(names_angles_list[i]))
 
         result += "end\n"
 
@@ -493,6 +494,14 @@ class Rectangle(Polygon):
 
         return self.side[0].length
 
+    @property
+    def _build_width(self):
+        return self.side[1].real_length
+
+    @property
+    def _build_length(self):
+        return self.side[0].real_length
+
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the Rectangle's area
@@ -519,6 +528,70 @@ class Rectangle(Polygon):
 
         super(Rectangle, self).set_lengths([lengths_list[0], lengths_list[1],
                                             lengths_list[0], lengths_list[1]])
+
+
+class RectangleGrid(Rectangle):
+
+    def __init__(self, arg, layout='2×2', autofit=True, **options):
+        """
+        RectangleGrid initialization.
+
+        Same as for a Rectangle, except it will be divided to form a grid.
+
+        :param layout: a string describing the number of rows and columns, as
+                       a Product 'row×col'
+        :type layout: str
+        :param autofit: if True, the longest side of the Grid will be divided
+                     by the greatest number in layout and the shortest side by
+                     the lowest number.
+        :type autofit: bool
+        """
+        if type(layout) is not str:
+            raise TypeError('layout keyword argument must be a str')
+        if '×' not in layout:
+            raise ValueError('layout must be of the form \'row×col\', but no '
+                             'symbol × detected')
+        nrow, ncol = layout.split(sep='×')
+        try:
+            nrow, ncol = int(nrow), int(ncol)
+        except ValueError:
+            raise ValueError('layout must be of the form \'row×col\', where '
+                             'row and col are both integers')
+        if not nrow >= 1 and ncol >= 1:
+            raise ValueError('layout must be of the form \'row×col\', where '
+                             'row and col are both integers >= 1')
+        Rectangle.__init__(self, arg, **options)
+        for a in self._angle:
+            a.mark = ''
+        if autofit:
+            if self._build_length >= self._build_width:
+                ncol, nrow = max(ncol, nrow), min(ncol, nrow)
+            else:
+                ncol, nrow = min(ncol, nrow), max(ncol, nrow)
+        # Let's get the coordinates of all grid points
+        l_points0 = self.side[0].dividing_points(n=ncol, prefix='a')
+        l_points2 = self.side[2].dividing_points(n=ncol, prefix='b')
+        w_points1 = self.side[1].dividing_points(n=nrow, prefix='c')
+        w_points3 = self.side[3].dividing_points(n=nrow, prefix='d')
+        self.grid_couples = [z for z in zip(l_points0 + w_points1,
+                                            l_points2 + w_points3)]
+
+    def into_euk(self, draw_points_names=False, **options):
+        result = Polygon.into_euk(self, draw_points_names=False, **options)
+        result += '\n'
+        if self.grid_couples:
+            for p, q in self.grid_couples:
+                result += '{name} = point({x}, {y})\n'.format(name=p.name,
+                                                              x=p.x,
+                                                              y=p.y)
+                result += '{name} = point({x}, {y})\n'.format(name=q.name,
+                                                              x=q.x,
+                                                              y=q.y)
+            result += '\ndraw\n'
+            for p, q in self.grid_couples:
+                result += '  {}.{}\n'.format(p.name, q.name)
+            result += 'end\n'
+        return result
 
 
 # ------------------------------------------------------------------------------
