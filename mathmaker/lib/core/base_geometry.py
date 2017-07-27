@@ -53,16 +53,28 @@ AVAILABLE_SEGMENT_MARKS = ['', 'simple', 'double', 'triple', 'cross']
 class Point(Drawable):
 
     def __init__(self, name=None, x=None, y=None):
-        if type(name) is not str:
-            raise TypeError('A Point\'s name must be a str')
-        if any([not is_number(n) for n in [x, y]]):
-            raise TypeError('x and y must be numbers')
+        """
+        Initialize Point
 
-        self._name = name
-        self._x = Decimal(str(x))
-        self._y = Decimal(str(y))
-        self._x_exact = self._x
-        self._y_exact = self._y
+        :param name: the Point's name (e.g. 'A') or another Point to copy
+        :type name: str
+        :param x: the Point's abscissa
+        :type x: a number
+        :param y: the Point's ordinate
+        :type y: a number
+        """
+        if isinstance(name, Point):
+            self.__init__(name=name.name, x=name.x, y=name.y)
+        else:
+            if type(name) is not str:
+                raise TypeError('A Point\'s name must be a str')
+            if any([not is_number(n) for n in [x, y]]):
+                raise TypeError('x and y must be numbers')
+            self._name = name
+            self._x = Decimal(str(x))
+            self._y = Decimal(str(y))
+            self._x_exact = self._x
+            self._y_exact = self._y
 
     def __repr__(self):
         return '#{}({}; {})#'.format(self.name, self.x, self.y)
