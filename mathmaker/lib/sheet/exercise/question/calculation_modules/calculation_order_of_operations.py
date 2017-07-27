@@ -411,8 +411,11 @@ class sub_object(submodule.structure):
         if (self.subvariant == 'only_positive'
             and self.variant == 11 and a - c * d < 0
             and self.nb_variant.startswith('decimal')):
-            self.variant = 13
-            a, b, c, d = c, d, a, b
+            if not is_integer(a) and a * 10 - c * d / 10 >= 0:
+                a, c, d = fix_digits(a, c, d)
+            else:
+                self.variant = 13
+                a, b, c, d = c, d, a, b
         elif (self.subvariant == 'only_positive'
               and self.variant == 13 and a * b - c < 0
               and self.nb_variant.startswith('decimal')):
