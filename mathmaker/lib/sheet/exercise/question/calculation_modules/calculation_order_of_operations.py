@@ -388,19 +388,10 @@ class sub_object(submodule.structure):
                     else:
                         self.nb3, self.nb1, self.nb2 = remove_digits_from(
                             self.nb3, to=[self.nb1, self.nb2])
-        if self.subvariant == 'only_positive' and self.variant in [11, 13, 15]:
-            if self.variant == 11:
-                self.nb1, self.nb2, self.nb3, self.nb4 = \
-                    self.adjust_nb_for_variant_11(self.nb1, self.nb2,
-                                                  self.nb3, self.nb4)
-            elif self.variant == 13:
-                self.nb1, self.nb2, self.nb3, self.nb4 = \
-                    self.adjust_nb_for_variant_13(self.nb1, self.nb2,
-                                                  self.nb3, self.nb4)
-            elif self.variant == 15:
-                self.nb1, self.nb2, self.nb3, self.nb4 = \
-                    self.adjust_nb_for_variant_15(self.nb1, self.nb2,
-                                                  self.nb3, self.nb4)
+        if self.subvariant == 'only_positive' and self.variant == 15:
+            self.nb1, self.nb2, self.nb3, self.nb4 = \
+                self.adjust_nb_for_variant_15(self.nb1, self.nb2,
+                                              self.nb3, self.nb4)
 
     def _create_0to23(self):
         a, b, c = self.nb1, self.nb2, self.nb3
