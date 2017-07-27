@@ -123,9 +123,20 @@ class structure(object):
                               if not getattr(self,
                                              'nb' + str(i + 1)) % 10 == 0]
                 # But if this would lead to remove too many numbers, then
-                # we do not remove anything
+                # we have to change the extraneous multiples of 10
                 if len(all_nb_ids) < deci_nb:
-                    all_nb_ids = [i + 1 for i in range(self.nb_nb)]
+                    remaining = list(
+                        set(i + 1 for i in range(self.nb_nb))
+                        - set(all_nb_ids))
+                    while len(all_nb_ids) < min(deci_nb, self.nb_nb):
+                        random.shuffle(remaining)
+                        i = remaining.pop()
+                        setattr(self, 'nb' + str(i),
+                                getattr(self,
+                                        'nb' + str(i))
+                                + random.choice([i for i in range(-4, 5)
+                                                 if i != 0]))
+                        all_nb_ids += [i]
                 chosen_ones = random.sample(all_nb_ids, deci_nb)
                 for i in chosen_ones:
                     setattr(self, 'nb' + str(i),
@@ -349,35 +360,37 @@ class structure(object):
                         Default is the normal alphabet, low case.
         :type letters: str
         """
-        for r in rules.split(sep='; '):
-            msg = ''
-            if r == 'no negative' and self.subvariant == 'only_positive':
-                if any([n < 0 for n in numbers]):
-                    msg += 'Negative number detected!'
-            elif r == 'decimals distribution':
-                if not self.nb_variant.startswith('decimal'):
-                    max_dn = 0
-                else:
-                    max_dn = int(self.nb_variant[-1])
-                if any(digits_nb(n) > max_dn for n in numbers):
-                    tests = [digits_nb(n) > max_dn for n in numbers]
-                    msg += 'At least a number among ' \
-                        + ', '.join(letters[0:len(numbers) - 1]) + ' and ' \
-                        + letters[len(numbers) - 1] \
-                        + (' has more digits than expected: {m} ; '
-                           + 'tests = {t}; numbers = {n}') \
-                        .format(m=max_dn, t=tests, n=numbers)
-                if (self.nb_variant.startswith('decimal')
-                    and all(digits_nb(n) == 0 for n in numbers)):
-                    msg += ', '.join(letters[0:len(numbers) - 1]) + ' and ' \
-                        + letters[len(numbers) - 1] + ' are all integers!'
-            elif (r.endswith('isnt deci')
-                  and not self.allow_division_by_decimal):
-                if not is_integer(numbers[letters.index(r[0])]):
-                    msg += r[0] + ' is decimal! => Division by decimal!'
-            elif len(r.split(' isnt ')) == 2:
-                l, n = r.split(' isnt ')
-                if numbers[letters.index(l)] == int(n):
-                    msg += l + ' == {}!'.format(n)
-            if msg != '':
-                self.log(self.dbg_info(msg, *numbers, letters=letters))
+        if hasattr(self, 'log'):
+            for r in rules.split(sep='; '):
+                msg = ''
+                if r == 'no negative' and self.subvariant == 'only_positive':
+                    if any([n < 0 for n in numbers]):
+                        msg += 'Negative number detected!'
+                elif r == 'decimals distribution':
+                    if not self.nb_variant.startswith('decimal'):
+                        max_dn = 0
+                    else:
+                        max_dn = int(self.nb_variant[-1])
+                    if any(digits_nb(n) > max_dn for n in numbers):
+                        tests = [digits_nb(n) > max_dn for n in numbers]
+                        msg += 'At least a number among ' \
+                            + ', '.join(letters[0:len(numbers) - 1]) + ' and '\
+                            + letters[len(numbers) - 1] \
+                            + (' has more digits than expected: {m} ; '
+                               + 'tests = {t}; numbers = {n}') \
+                            .format(m=max_dn, t=tests, n=numbers)
+                    if (self.nb_variant.startswith('decimal')
+                        and all(digits_nb(n) == 0 for n in numbers)):
+                        msg += ', '.join(letters[0:len(numbers) - 1]) \
+                            + ' and ' \
+                            + letters[len(numbers) - 1] + ' are all integers!'
+                elif (r.endswith('isnt deci')
+                      and not self.allow_division_by_decimal):
+                    if not is_integer(numbers[letters.index(r[0])]):
+                        msg += r[0] + ' is decimal! => Division by decimal!'
+                elif len(r.split(' isnt ')) == 2:
+                    l, n = r.split(' isnt ')
+                    if numbers[letters.index(l)] == int(n):
+                        msg += l + ' == {}!'.format(n)
+                if msg != '':
+                    self.log(self.dbg_info(msg, *numbers, letters=letters))

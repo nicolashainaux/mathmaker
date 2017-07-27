@@ -495,9 +495,17 @@ class sub_object(submodule.structure):
                              for i in range(int(min(a, b) * (10 ** depth)))]
                         ))) / Decimal(str((10 ** depth)))
                 else:  # no choice but to randomly choose a new natural
-                    c = Decimal(str(
-                        random.choice([i + 1
-                                       for i in range(int(min(a, b)) - 1)])))
+                    if random.choice([True, True, False]):
+                        a, b = max(a, b), min(a, b)
+                        c = Decimal(str(
+                            random.choice([i + 1
+                                           for i in range(int(a) - 1)])))
+                    else:
+                        c = Decimal(str(
+                            random.choice([i + 1
+                                           for i in range(
+                                               int(min(a, b)) - 1)])))
+
             a = a * b
             self.obj = Sum([Division(('+', a, b)), -c])
             self.watch('no negative; decimals distribution; '
@@ -509,7 +517,7 @@ class sub_object(submodule.structure):
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 9:  # a×b - c×d
             if self.subvariant == 'only_positive' and a * b < c * d:
-                a, b, c, d = c, d, a, d
+                a, b, c, d = c, d, a, b
             self.obj = Sum([Product([a, b]), Product([-c, d])])
             self.watch('no negative; decimals distribution; '
                        'a isnt 1; b isnt 1; c isnt 1; d isnt 1'
@@ -647,6 +655,9 @@ class sub_object(submodule.structure):
             self.watch('no negative; decimals distribution; '
                        'c isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
+        self.abcd = [a, b, c]
+        if self.variant >= 8:
+            self.abcd.append(d)
 
     def _create_100_104(self):
         # (a + b)×c    (a - b)×c
@@ -1388,12 +1399,15 @@ class sub_object(submodule.structure):
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
                       **options)
-        super().setup("nb_variants", **options)
-        super().setup('logging', **options)
+        direct_test = options.get('direct_test', False)
+        if not direct_test:
+            super().setup("nb_variants", **options)
+            super().setup('logging', **options)
 
         self.adjust_numbers()
         self.expression = None
         self.obj = None
+        self.abcd = None
 
         catalog = dict.fromkeys([i for i in range(24)],
                                 self._create_0to23)
