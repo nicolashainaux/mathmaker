@@ -29,10 +29,10 @@ from mathmaker.lib.core.geometry import Polygon
 
 @pytest.fixture
 def p1():
-    p1 = Polygon([Point(["A", (0.5, 0.5)]),
-                  Point(["B", (3, 1)]),
-                  Point(["C", (3.2, 4)]),
-                  Point(["D", (0.8, 3)])
+    p1 = Polygon([Point('A', 0.5, 0.5),
+                  Point('B', 3, 1),
+                  Point('C', 3.2, 4),
+                  Point('D', 0.8, 3)
                   ])
     p1.side[0].label = Value(4, unit='cm')
     p1.side[1].label = Value(3, unit='cm')

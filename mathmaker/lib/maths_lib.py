@@ -341,9 +341,9 @@ def barycenter(points_list, barycenter_name, weights=None):
     abscissas_list = [P.x_exact for P in points_list]
     ordinates_list = [P.y_exact for P in points_list]
 
-    return Point([barycenter_name,
-                  (mean(abscissas_list, weights=weights),
-                   mean(ordinates_list, weights=weights))])
+    return Point(barycenter_name,
+                 mean(abscissas_list, weights=weights),
+                 mean(ordinates_list, weights=weights))
 
 
 # --------------------------------------------------------------------------

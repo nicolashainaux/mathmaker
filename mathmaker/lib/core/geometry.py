@@ -104,10 +104,9 @@ class Polygon(Drawable):
                 if self._rotation_angle != 0:
                     G = barycenter(start_vertices, "G")
 
-                    self._vertex = [
-                        Point(v.rotate(
-                            G, self._rotation_angle, keep_name=True))
-                        for v in start_vertices]
+                    self._vertex = [v.rotate(G, self._rotation_angle,
+                                             keep_name=True)
+                                    for v in start_vertices]
                 else:
                     self._vertex = [v.clone() for v in start_vertices]
 
@@ -442,19 +441,19 @@ class Rectangle(Polygon):
                 height = arg[2]
                 Polygon.__init__(self,
                                  [arg[0],
-                                  Point([arg[3],
-                                         (Decimal(str(arg[0].x_exact))
-                                          + Decimal(str(length)),
-                                          arg[0].y_exact)]),
-                                  Point([arg[4],
-                                         (Decimal(str(arg[0].x_exact))
-                                          + Decimal(str(length)),
-                                          Decimal(str(arg[0].y_exact))
-                                          + Decimal(str(height)))]),
-                                  Point([arg[5],
-                                         (arg[0].x_exact,
-                                          Decimal(str(arg[0].y_exact))
-                                          + Decimal(str(height)))])
+                                  Point(arg[3],
+                                        Decimal(str(arg[0].x_exact))
+                                        + Decimal(str(length)),
+                                        arg[0].y_exact),
+                                  Point(arg[4],
+                                        Decimal(str(arg[0].x_exact))
+                                        + Decimal(str(length)),
+                                        Decimal(str(arg[0].y_exact))
+                                        + Decimal(str(height))),
+                                  Point(arg[5],
+                                        arg[0].x_exact,
+                                        Decimal(str(arg[0].y_exact))
+                                        + Decimal(str(height)))
                                   ])
 
             else:
@@ -711,13 +710,13 @@ class Triangle(Polygon):
             elif is_number(rotate_around_isobarycenter):
                 self._rotation_angle = rotate_around_isobarycenter
 
-            start_vertex[0] = Point([vertices_names[0], (0, 0)])
-            start_vertex[1] = Point([vertices_names[1], (side0_length, 0)])
+            start_vertex[0] = Point(vertices_names[0], 0, 0)
+            start_vertex[1] = Point(vertices_names[1], side0_length, 0)
             cos1 = math.cos(deg_to_rad(angle1))
             sin1 = math.sin(deg_to_rad(angle1))
             x2 = side0_length - side1_length * Decimal(str(cos1))
             y2 = side1_length * Decimal(str(sin1))
-            start_vertex[2] = Point([vertices_names[2], (x2, y2)])
+            start_vertex[2] = Point(vertices_names[2], x2, y2)
 
             Polygon.__init__(self, start_vertex, **options)
 
@@ -1190,12 +1189,12 @@ class InterceptTheoremConfiguration(Triangle):
                          self.vertex[1].y_exact,
                          self.vertex[2].y_exact)
         k = Decimal(str(build_ratio))
-        self._point = [Point([points_names[1],
-                             (x_A + k * (x_B - x_A),
-                              y_A + k * (y_B - y_A))]),
-                       Point([points_names[4],
-                              (x_A + k * (x_C - x_A),
-                               y_A + k * (y_C - y_A))])]
+        self._point = [Point(points_names[1],
+                             x_A + k * (x_B - x_A),
+                             y_A + k * (y_B - y_A)),
+                       Point(points_names[4],
+                             x_A + k * (x_C - x_A),
+                             y_A + k * (y_C - y_A))]
         self._small = [Segment((self._vertex[0], self._point[0])),
                        Segment((self._point[0], self._point[1])),
                        Segment((self._point[1], self._vertex[0]))]
@@ -1207,10 +1206,10 @@ class InterceptTheoremConfiguration(Triangle):
         u = AB.orthogonal_unit_vector(clockwise=False)
         v = AC.orthogonal_unit_vector()
 
-        self._U0U1 = [Point(['U0', (x_A + u.x_exact, y_A + u.y_exact)]),
-                      Point(['U1', (x_B + u.x_exact, y_B + u.y_exact)])]
-        self._V0V1 = [Point(['V1', (x_C + v.x_exact, y_C + v.y_exact)]),
-                      Point(['V0', (x_A + v.x_exact, y_A + v.y_exact)])]
+        self._U0U1 = [Point('U0', x_A + u.x_exact, y_A + u.y_exact),
+                      Point('U1', x_B + u.x_exact, y_B + u.y_exact)]
+        self._V0V1 = [Point('V1', x_C + v.x_exact, y_C + v.y_exact),
+                      Point('V0', x_A + v.x_exact, y_A + v.y_exact)]
 
         self._u = Segment(tuple(self._U0U1))
         self._v = Segment(tuple(self._V0V1))

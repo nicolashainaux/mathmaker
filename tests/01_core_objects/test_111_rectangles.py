@@ -27,7 +27,7 @@ from mathmaker.lib.core.geometry import Rectangle
 
 def test_r1_into_euk():
     """Check Rectangle's generated euk file."""
-    r1 = Rectangle([Point(["A", (0.5, 0.5)]), 4, 3, "B", "C", "D"])
+    r1 = Rectangle([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'])
     r1.side[2].label = Value(4, unit='cm')
     r1.side[3].label = Value(3, unit='cm')
     assert r1.into_euk() == \

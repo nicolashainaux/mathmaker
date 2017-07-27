@@ -31,9 +31,9 @@ from mathmaker.lib.core.calculus import QuotientsEquality
 
 
 @pytest.fixture()
-def ABC(): return Angle((Point(['A', (1, 0)]),
-                         Point(['B', (0, 0)]),
-                         Point(['C', (0.5, 0.75)])))
+def ABC(): return Angle((Point('A', 1, 0),
+                         Point('B', 0, 0),
+                         Point('C', 0.5, 0.75)))
 
 
 @pytest.fixture()

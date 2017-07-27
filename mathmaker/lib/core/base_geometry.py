@@ -52,47 +52,26 @@ AVAILABLE_SEGMENT_MARKS = ['', 'simple', 'double', 'triple', 'cross']
 # @brief
 class Point(Drawable):
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Constructor.
-    #   @param arg: [String, (nb,nb)]|Point
-    #   Types details:
-    #   -
-    #   @param options
-    #   Options details:
-    #   -
-    #   @warning Might raise...
-    def __init__(self, arg, **options):
-        if not (type(arg) == list or isinstance(arg, Point)):
-            raise error.WrongArgument(' list|Point ', str(type(arg)))
+    def __init__(self, name=None, x=None, y=None):
+        if type(name) is not str:
+            raise TypeError('A Point\'s name must be a str')
+        if any([not is_number(n) for n in [x, y]]):
+            raise TypeError('x and y must be numbers')
 
-        elif type(arg) == list:
-            if not len(arg) == 2:
-                raise error.WrongArgument(' a list of length '
-                                          + str(len(arg)),
-                                          ' a list of length 2 ')
-
-            if not type(arg[0]) == str:
-                raise error.WrongArgument(str(type(arg[0])), ' a str ')
-
-            if not (type(arg[1]) == tuple
-                    and len(arg[1]) == 2
-                    and is_number(arg[1][0])
-                    and is_number(arg[1][1])):
-                # __
-                raise error.WrongArgument(str(arg), ' (x, y) ')
-
-            self._name = arg[0]
-            self._x = Decimal(arg[1][0])
-            self._y = Decimal(arg[1][1])
-
-        else:
-            self._name = arg.name
-            self._x = arg.x
-            self._y = arg.y
-
+        self._name = name
+        self._x = Decimal(str(x))
+        self._y = Decimal(str(y))
         self._x_exact = self._x
         self._y_exact = self._y
+
+    def __repr__(self):
+        return '#{}({}; {})#'.format(self.name, self.x, self.y)
+
+    def __eq__(self, other):
+        return all([self.x == other.x, self.y == other.y])
+
+    def __ne__(self, other):
+        return any([self.x != other.x, self.y != other.y])
 
     # --------------------------------------------------------------------------
     ##
@@ -192,7 +171,7 @@ class Point(Drawable):
         elif 'new_name' in options and type(options['new_name']) == str:
             new_name = options['new_name']
 
-        return Point([new_name, (rx, ry)])
+        return Point(new_name, rx, ry)
 
 
 # ------------------------------------------------------------------------------
@@ -406,17 +385,15 @@ class Vector(Point):
         self._x_exact = Decimal('1')
         self._y_exact = Decimal('1')
         if isinstance(arg, Point):
-            Point.__init__(self,
-                           Point(["", (arg.x_exact, arg.y_exact)]),
-                           **options)
+            Point.__init__(self, Point('', arg.x_exact, arg.y_exact))
 
         elif isinstance(arg, tuple) and len(arg) == 2:
             if all([isinstance(elt, Point) for elt in arg]):
-                Point.__init__(self,
-                               Point(["", (arg[1].x_exact - arg[0].x_exact,
-                                           arg[1].y_exact - arg[0].y_exact)]))
+                Point.__init__(self, Point('',
+                                           arg[1].x_exact - arg[0].x_exact,
+                                           arg[1].y_exact - arg[0].y_exact))
             elif all([is_number(elt) for elt in arg]):
-                Point.__init__(self, Point(["", (arg[0], arg[1])]))
+                Point.__init__(self, Point('', arg[0], arg[1]))
             else:
                 raise error.WrongArgument("a tuple not only of Points or"
                                           " numbers",

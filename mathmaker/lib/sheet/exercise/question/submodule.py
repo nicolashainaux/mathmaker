@@ -190,7 +190,7 @@ class structure(object):
             rectangle_name = "DCBA"
             if self.picture:
                 rectangle_name = next(shared.four_letters_words_source)
-            self.rectangle = Rectangle([Point([rectangle_name[3], (0, 0)]),
+            self.rectangle = Rectangle([Point(rectangle_name[3], 0, 0),
                                         3,
                                         1.5,
                                         rectangle_name[2],
@@ -217,7 +217,7 @@ class structure(object):
             square_name = "DCBA"
             if self.picture:
                 square_name = next(shared.four_letters_words_source)
-            self.square = Square([Point([square_name[3], (0, 0)]),
+            self.square = Square([Point(square_name[3], 0, 0),
                                  2,
                                  square_name[2],
                                  square_name[1],

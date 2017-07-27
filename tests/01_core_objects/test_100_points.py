@@ -25,4 +25,11 @@ from mathmaker.lib.core.base_geometry import Point
 
 def test_p0x():
     """Check Point's abscissa."""
-    assert Point(["A", (0, 0)]).x == 0
+    assert Point('A', 0, 0).x == 0
+
+
+def test_points_equalities():
+    """Check Points' equality."""
+    assert Point('A', 0, 0) == Point('A', 0, 0)
+    assert Point('A', 0, 0) == Point('B', 0, 0)
+    assert Point('A', 0, 0) is not Point('B', 0, 0)
