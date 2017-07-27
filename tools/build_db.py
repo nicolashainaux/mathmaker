@@ -94,7 +94,7 @@ def __main__():
     db.execute('''CREATE TABLE int_pairs
               (id INTEGER PRIMARY KEY,
               nb1 INTEGER, nb2 INTEGER,
-              multirev_locked INTEGER, drawDate INTEGER,
+              lock_equal_products INTEGER, drawDate INTEGER,
               clever INTEGER, suits_for_deci1 INTEGER,
               suits_for_deci2 INTEGER)''')
     # As int_deci_clever_pairs may be 'unioned' with int_pairs, its ids will be
@@ -163,7 +163,7 @@ def __main__():
                for j in range(499)
                if j >= i]
     db.executemany("INSERT "
-                   "INTO int_pairs(nb1, nb2, multirev_locked, drawDate, "
+                   "INTO int_pairs(nb1, nb2, lock_equal_products, drawDate, "
                    "clever, suits_for_deci1, suits_for_deci2) "
                    "VALUES(?, ?, ?, ?, ?, ?, ?)",
                    db_rows)

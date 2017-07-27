@@ -44,10 +44,10 @@ class source(object):
     #   @brief  Resets the drawDate of all table's entries (to 0)
     def _reset(self, **kwargs):
         shared.db.execute("UPDATE " + self.table_name + " SET drawDate = 0;")
-        if "multi_reversed" in kwargs:
+        if "lock_equal_products" in kwargs:
             shared.db.execute("UPDATE "
                               + self.table_name
-                              + " SET multirev_locked = 0;")
+                              + " SET lock_equal_products = 0;")
         if "union" in kwargs:
             shared.db.execute("UPDATE "
                               + kwargs['union']['table_name']
@@ -90,8 +90,8 @@ class source(object):
                   or kw == 'table_name' or kw == 'no_order_by_random'):
                 # __
                 pass
-            elif kw == "multi_reversed":
-                result += " AND multirev_locked = 0 "
+            elif kw == "lock_equal_products":
+                result += " AND lock_equal_products = 0 "
             elif kw.endswith("_to_check"):
                 k = kw[:-9]
                 result += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
@@ -183,12 +183,12 @@ class source(object):
     ##
     #   @brief  Will 'lock' some entries
     def _lock(self, t, **kwargs):
-        if 'multi_reversed' in kwargs:
-            if t in kwargs['info_multirev']:
-                for couple in kwargs['info_multirev'][t]:
+        if 'lock_equal_products' in kwargs:
+            if t in kwargs['info_lock']:
+                for couple in kwargs['info_lock'][t]:
                     shared.db.execute(
                         "UPDATE " + self.table_name
-                        + " SET multirev_locked = 1"
+                        + " SET lock_equal_products = 1"
                         + " WHERE nb1 = '" + str(couple[0])
                         + "' and nb2 = '" + str(couple[1]) + "';")
 

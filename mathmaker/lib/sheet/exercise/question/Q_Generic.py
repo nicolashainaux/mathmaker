@@ -148,9 +148,8 @@ def match_qtype_sourcenb(q_type: str, source_nb: str, variant: str):
         return any([source_nb.startswith('multiplesof4'),
                     source_nb == 'table_4',
                     source_nb == 'bypass'])
-    elif q_type == 'multi_reversed':
-        return any([(source_nb.startswith('intpairs_')
-                     and source_nb.endswith('to9')),
+    elif q_type in ['multi_reversed', 'fraction_of_rectangle']:
+        return any([source_nb.startswith('intpairs_'),
                     source_nb == 'table_2',
                     source_nb == 'table_3',
                     source_nb == 'table_4',
@@ -171,18 +170,18 @@ def match_qtype_sourcenb(q_type: str, source_nb: str, variant: str):
 #          certain questions.
 def get_modifier(q_type, nb_source):
     d = {}
-    if q_type == 'multi_reversed':
-        d.update({'multi_reversed': True,
-                  'info_multirev': {(2, 6): [(2, 6), (3, 4)],
-                                    (3, 4): [(2, 6), (3, 4)],
-                                    (2, 8): [(2, 8), (4, 4)],
-                                    (4, 4): [(2, 8), (4, 4)],
-                                    (3, 6): [(3, 6), (2, 9)],
-                                    (2, 9): [(3, 6), (2, 9)],
-                                    (3, 8): [(3, 8), (4, 6)],
-                                    (4, 6): [(3, 8), (4, 6)],
-                                    (4, 9): [(4, 9), (6, 6)],
-                                    (6, 6): [(4, 9), (6, 6)]}})
+    if q_type in ['multi_reversed', 'fraction_of_rectangle']:
+        d.update({'lock_equal_products': True,
+                  'info_lock': {(2, 6): [(2, 6), (3, 4)],
+                                (3, 4): [(2, 6), (3, 4)],
+                                (2, 8): [(2, 8), (4, 4)],
+                                (4, 4): [(2, 8), (4, 4)],
+                                (3, 6): [(3, 6), (2, 9)],
+                                (2, 9): [(3, 6), (2, 9)],
+                                (3, 8): [(3, 8), (4, 6)],
+                                (4, 6): [(3, 8), (4, 6)],
+                                (4, 9): [(4, 9), (6, 6)],
+                                (6, 6): [(4, 9), (6, 6)]}})
     elif q_type == 'subtr_direct' and nb_source.startswith('intpairs_10'):
         d.update({'diff7atleast': True})
     elif any(['rectangle' in q_type,
