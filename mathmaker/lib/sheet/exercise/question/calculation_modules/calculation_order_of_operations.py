@@ -131,6 +131,10 @@ class sub_object(submodule.structure):
             return (a, b, c, d)
         if b >= c * d:
             return (b, a, c, d)
+        if c >= a * b:
+            return (c, d, a, b)
+        if d >= a * b:
+            return (d, c, a, b)
         if 10 * a >= c * d:
             return (a * 10, b, c, d)
         if 10 * b >= c * d:
