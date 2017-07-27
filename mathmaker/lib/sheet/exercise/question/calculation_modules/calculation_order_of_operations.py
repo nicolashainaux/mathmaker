@@ -163,7 +163,7 @@ class sub_object(submodule.structure):
             return (a, b, d, c)
         if c * d >= a:
             return (c, d, a, b)
-        if c * d >= a:
+        if c * d >= b:
             return (c, d, b, a)
         return self.adjust_nb_for_variant_13(10 * max(a, b),
                                              min(a, b), c, d)
