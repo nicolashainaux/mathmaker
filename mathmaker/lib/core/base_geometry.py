@@ -327,6 +327,29 @@ class Segment(Drawable):
 
         self._mark = arg
 
+    def dividing_points(self, n=1, prefix='a'):
+        """
+        Create the list of Points that divide the Segment in n parts.
+
+        :param n: the number of parts (so it will create n - 1 points)
+                  n must be greater or equal to 1
+        :type n: int
+        """
+        if type(n) is not int:
+            raise TypeError('n must be an int')
+        if not n >= 1:
+            raise ValueError('n must be greater or equal to 1')
+        x0 = Decimal(str(self.points[0].x_exact))
+        x1 = Decimal(str(self.points[1].x_exact))
+        xstep = (x1 - x0) / n
+        x_list = [x0 + (i + 1) * xstep for i in range(n - 1)]
+        y0 = Decimal(str(self.points[0].y_exact))
+        y1 = Decimal(str(self.points[1].y_exact))
+        ystep = (y1 - y0) / n
+        y_list = [y0 + (i + 1) * ystep for i in range(n - 1)]
+        return [Point(prefix + str(i + 1), x, y)
+                for i, (x, y) in enumerate(zip(x_list, y_list))]
+
     def label_into_euk(self):
         """Return the label correctly positionned along the Segment."""
         if self.label in [Value(''), Value('hidden')]:
