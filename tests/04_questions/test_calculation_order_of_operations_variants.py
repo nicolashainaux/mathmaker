@@ -163,3 +163,95 @@ def test_variant10():
         subvariant='only_positive',
         direct_test=True)
     assert any(digits_nb(x) == 1 for x in [o.abcd[2], o.abcd[3]])
+
+
+def test_variant11():
+    """Check variant11 in several problematic cases."""
+    # a÷b - c×d
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 3, 8, 9],
+        variant=11,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd[0] / o.abcd[1] - o.abcd[2] * o.abcd[3] > 0
+    assert o.abcd[0] == 72
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 3, 9, 8],
+        variant=11,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd[0] / o.abcd[1] - o.abcd[2] * o.abcd[3] > 0
+    assert o.abcd[0] == 72
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[9, 8, 2, 3],
+        variant=11,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd[0] / o.abcd[1] - o.abcd[2] * o.abcd[3] > 0
+    assert o.abcd[0] == 72
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[4, 7, 2, 3],
+        variant=11,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd[0] / o.abcd[1] - o.abcd[2] * o.abcd[3] > 0
+    assert (o.abcd[0], o.abcd[1]) == (28, 4)
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[3, 3, 3, 3],
+        variant=11,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd[0] / o.abcd[1] - o.abcd[2] * o.abcd[3] > 0
+    assert (o.abcd[0], o.abcd[1]) == (90, 3)
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 3, 5, 5],
+        variant=11,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd == [Decimal('60'), Decimal('2'), Decimal('5'), Decimal('5')]
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 4, 6, 7],
+        variant=11,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd[0] == Decimal('420')
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 31, 6, 52],
+        variant=11,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd[:2] == [Decimal('3120'), Decimal('6')]
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[4, 66, 26, 26],
+        variant=11,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd == [Decimal('26400'), Decimal('4'),
+                      Decimal('26'), Decimal('26')]
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[Decimal('0.4'), 15, 3, 2],
+        variant=11,
+        nb_variant='decimal1',
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.variant == 11
+    assert is_integer(o.abcd[1])
+    assert o.abcd[0] / o.abcd[1] - o.abcd[2] * o.abcd[3] > 0
+    assert o.abcd[:2] == [Decimal('60'), Decimal('15')]
+    assert any([not is_integer(x) for x in o.abcd[-2:]])
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[Decimal('0.4'), 12, 3, 2],
+        variant=11,
+        nb_variant='decimal1',
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.variant == 11
+    assert o.abcd[:2] == [Decimal('48'), Decimal('12')]
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[Decimal('0.2'), 6, 7, 3],
+        variant=11,
+        nb_variant='decimal1',
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.variant == 13
+    assert o.abcd[-2:] == [Decimal('1.2'), Decimal('6')]
