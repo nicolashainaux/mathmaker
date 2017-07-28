@@ -32,7 +32,8 @@ from decimal import Decimal, ROUND_HALF_UP
 
 from mathmaker.lib import randomly
 from mathmaker.lib import error
-from mathmaker.lib.tools.auxiliary_functions import is_number, round_deci
+from mathmaker.lib.tools.auxiliary_functions \
+    import is_number, round_deci, parse_layout_descriptor
 from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
                                      POLYGONS_NATURES)
 from .root_calculus import Evaluable, Value, Unit
@@ -532,34 +533,31 @@ class Rectangle(Polygon):
 
 class RectangleGrid(Rectangle):
 
-    def __init__(self, arg, layout='2×2', autofit=False, **options):
+    def __init__(self, arg, layout='2×2', fill='0×0', autofit=False,
+                 **options):
         """
         RectangleGrid initialization.
 
         Same as for a Rectangle, except it will be divided to form a grid.
+        If the fill parameter exceeds the layout (e.g. layout='3×6' and
+        fill='4×5'), all cells will be colored.
+        If the fill rectangle fits into layout (e.g. layout='3×6' and
+        fill='2×5'), it will be reproduced.
+        If it does not (e.g. layout='3×6' and fill='4×4'), the cells will be
+        colored one after the other.
 
         :param layout: a string describing the number of rows and columns, as
                        a Product 'row×col'
         :type layout: str
+        :param fill: a string describing the number of cells to be filled, as
+                     a Product 'row×col'
+        :param fill: str
         :param autofit: if True, the longest side of the Grid will be divided
                      by the greatest number in layout and the shortest side by
                      the lowest number.
         :type autofit: bool
         """
-        if type(layout) is not str:
-            raise TypeError('layout keyword argument must be a str')
-        if '×' not in layout:
-            raise ValueError('layout must be of the form \'row×col\', but no '
-                             'symbol × detected')
-        nrow, ncol = layout.split(sep='×')
-        try:
-            nrow, ncol = int(nrow), int(ncol)
-        except ValueError:
-            raise ValueError('in a \'row×col\' layout, '
-                             'row and col must be both integers')
-        if not (nrow >= 1 and ncol >= 1):
-            raise ValueError('in a \'row×col\' layout, '
-                             'row and col must be both integers >= 1')
+        nrow, ncol = parse_layout_descriptor(layout, min_row=1, min_col=1)
         Rectangle.__init__(self, arg, **options)
         for a in self._angle:
             a.mark = ''
@@ -597,24 +595,11 @@ class RectangleGrid(Rectangle):
         self.grid += [[self.vertex[3], ]
                       + l_points2
                       + [self.vertex[2], ]]
-        # self.filled_cells = []
-        # self.fill(fill=fill)
-    #
-    # def fill(fill='0×0'):
-    #     if type(fill) is not str:
-    #         raise TypeError('fill keyword argument must be a str')
-    #     if '×' not in fill:
-    #         raise ValueError('fill must be of the form \'row×col\', but no '
-    #                          'symbol × detected')
-    #     nrow, ncol = fill.split(sep='×')
-    #     try:
-    #         nrow, ncol = int(nrow), int(ncol)
-    #     except ValueError:
-    #         raise ValueError('in a \'row×col\' fill layout, '
-    #                          'row and col must be both integers')
-    #     if not nrow >= 0 and ncol >= 0:
-    #         raise ValueError('in a \'row×col\' fill layout, '
-    #                          'row and col must be both positive integers')
+        self.filled_cells = []
+        self.fill(fill=fill)
+
+    def fill(self, fill='0×0'):
+        nrow, ncol = parse_layout_descriptor(fill)
 
 
     def into_euk(self, draw_points_names=False, **options):

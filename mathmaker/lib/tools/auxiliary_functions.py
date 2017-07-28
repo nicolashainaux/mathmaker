@@ -259,3 +259,80 @@ def split_nb(n, operation='sum', dig=0):
         b = random.choice(seq)
         a = n + b
     return (a, b)
+
+
+def parse_layout_descriptor(d, sep=None, special_row_chars=None,
+                            min_row=0, min_col=0):
+    """
+    Parse a "layout" string, e.g. '3×4'. Return number of rows, number of cols.
+
+    :param d: the "layout" string
+    :type d: str
+    :param sep: the separator's list. Default to '×'
+    :type sep: None or str or a list of str
+    :param special_row_chars: a list of special characters allowed instead of
+                              natural numbers. Defaults to []
+    :type special_row_chars: None or list
+    :param min_row: a minimal value that the number of rows must respect. It is
+                    not checked is nrow is a special char
+    :type min_row: positive int
+    :param min_col: a minimal value that the number of columns must respect
+    :type min_col: positive int
+    :rtype: tuple
+    """
+    if not type(d) is str:
+        raise TypeError('The layout descriptor must be str')
+    if sep is None:
+        sep = '×'
+    if type(sep) is str:
+        sep = [sep]
+    if type(sep) is list:
+        if any([type(s) is not str for s in sep]):
+            raise TypeError('All items of the sep list must be str')
+    else:
+        raise TypeError('sep must be a str or a list')
+    if special_row_chars is None:
+        special_row_chars = []
+    if type(special_row_chars) is list:
+        if any([type(c) is not str for c in special_row_chars]):
+            raise TypeError('All items of the special_row_chars list must be '
+                            'str')
+    else:
+        raise TypeError('special_row_char must be a list')
+    if type(min_row) is not int or type(min_col) is not int:
+        raise TypeError('min_row and min_col must both be int')
+    if min_row < 0 or min_col < 0:
+        raise TypeError('min_row and min_col must both be positive')
+    for s in sep:
+        if s in d:
+            nrow_ncol = d.split(sep=s)
+            nrow_ncol = [x for x in nrow_ncol if x != '']
+            if not len(nrow_ncol) == 2:
+                raise ValueError('The layout format must be a string like '
+                                 '\'row×col\', where × is your delimiter. '
+                                 'Cannot find a row and a col in \''
+                                 + d + '\' with '
+                                 + s + ' as delimiter ')
+            break
+    else:  # no break
+        raise ValueError('Cannot find a row and a col in \'' + d + '\' with '
+                         'any of the str from this list as delimiter: '
+                         + str(sep))
+    nrow, ncol = nrow_ncol
+    if nrow not in special_row_chars:
+        try:
+            nrow = int(nrow)
+        except ValueError:
+            raise ValueError('Number of rows: \'{}\' cannot be turned into int'
+                             .format(nrow))
+    try:
+        ncol = int(ncol)
+    except ValueError:
+        raise ValueError('Number of cols: \'{}\' cannot be turned into int'
+                         .format(ncol))
+    if type(nrow) is int:
+        if nrow < min_row:
+            raise ValueError('nrow must be greater than ' + str(min_row))
+    if ncol < min_col:
+        raise ValueError('ncol must be greater than ' + str(min_col))
+    return nrow, ncol

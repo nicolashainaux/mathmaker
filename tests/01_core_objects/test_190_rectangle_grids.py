@@ -20,40 +20,12 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import pytest
+# import pytest
 from decimal import Decimal
 
-from mathmaker.lib.core.root_calculus import Value
+# from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.base_geometry import Point
 from mathmaker.lib.core.geometry import RectangleGrid
-
-
-def test_exceptions():
-    """Check exceptions are raised with wrong initialization data."""
-    with pytest.raises(TypeError) as excinfo:
-        RectangleGrid([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'],
-                      layout=4)
-    assert 'layout keyword argument must be a str' in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        RectangleGrid([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'],
-                      layout='4x4')
-    assert 'no symbol × detected' in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        RectangleGrid([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'],
-                      layout='a×4')
-    assert 'row and col must be both integers' in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        RectangleGrid([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'],
-                      layout='0×4')
-    assert 'integers >= 1' in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        RectangleGrid([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'],
-                      layout='4×0')
-    assert 'integers >= 1' in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        RectangleGrid([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'],
-                      layout='0×0')
-    assert 'integers >= 1' in str(excinfo.value)
 
 
 def test_grids():

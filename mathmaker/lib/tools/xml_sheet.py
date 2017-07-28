@@ -33,6 +33,7 @@ import xml.etree.ElementTree as XML_PARSER
 from mathmaker.lib.sheet import exercise
 from mathmaker.lib.sheet.exercise import question
 from mathmaker.lib import error
+from mathmaker.lib.tools.auxiliary_functions import parse_layout_descriptor
 
 
 SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),
@@ -144,16 +145,8 @@ def _read_layout(node, config, layout):
                     else:
                         layout['ans'] += [None, distri]
         else:
-            delimiter = '×'
-            if 'x' in rowxcol:
-                delimiter = 'x'
-            nrow_ncol = rowxcol.split(sep=delimiter)
-            if not len(nrow_ncol) == 2:
-                raise error.XMLFileFormatError('Found an invalid '
-                                               'rowxcol value.')
-            nrow, ncol = nrow_ncol[0], int(nrow_ncol[1])
-            if nrow != '?':
-                nrow = int(nrow)
+            nrow, ncol = parse_layout_descriptor(rowxcol, sep=['×', 'x'],
+                                                 special_row_chars=['?'])
             colwidths = part.attrib.get('colwidths', 'auto')
             if colwidths == 'auto':
                 colwidths = [int(18 // ncol) for _ in range(ncol)]
