@@ -555,11 +555,11 @@ class RectangleGrid(Rectangle):
         try:
             nrow, ncol = int(nrow), int(ncol)
         except ValueError:
-            raise ValueError('layout must be of the form \'row×col\', where '
-                             'row and col are both integers')
+            raise ValueError('in a \'row×col\' layout, '
+                             'row and col must be both integers')
         if not (nrow >= 1 and ncol >= 1):
-            raise ValueError('layout must be of the form \'row×col\', where '
-                             'row and col are both integers >= 1')
+            raise ValueError('in a \'row×col\' layout, '
+                             'row and col must be both integers >= 1')
         Rectangle.__init__(self, arg, **options)
         for a in self._angle:
             a.mark = ''
@@ -573,14 +573,32 @@ class RectangleGrid(Rectangle):
         l_points2 = self.side[2].dividing_points(n=ncol, prefix='b')
         w_points1 = self.side[1].dividing_points(n=nrow, prefix='c')
         w_points3 = self.side[3].dividing_points(n=nrow, prefix='d')
-        self.grid_couples = [z for z in zip(l_points0 + w_points1,
+        self.grid_borders = [z for z in zip(l_points0 + w_points1,
                                             l_points2 + w_points3)]
+        inner_grid = []
+        if nrow >= 2 and ncol >= 2:
+            for i in range(nrow - 1):
+                inner_grid.append(
+                    [Point('i' + str(i) + str(j),
+                           l_points0[j].x,
+                           w_points3[i].y)
+                     for j in range(ncol - 1)])
+        self.grid = [[self.vertex[0], ]
+                     + l_points0
+                     + [self.vertex[1], ]]
+        for i in range(nrow - 1):
+            self.grid.append([w_points3[i], ]
+                             + inner_grid[i]
+                             + [w_points1[i], ])
+        self.grid += [[self.vertex[3], ]
+                      + l_points2
+                      + [self.vertex[2], ]]
 
     def into_euk(self, draw_points_names=False, **options):
         result = Polygon.into_euk(self, draw_points_names=False, **options)
         result += '\n'
-        if self.grid_couples:
-            for p, q in self.grid_couples:
+        if self.grid_borders:
+            for p, q in self.grid_borders:
                 result += '{name} = point({x}, {y})\n'.format(name=p.name,
                                                               x=p.x,
                                                               y=p.y)
@@ -588,7 +606,7 @@ class RectangleGrid(Rectangle):
                                                               x=q.x,
                                                               y=q.y)
             result += '\ndraw\n'
-            for p, q in self.grid_couples:
+            for p, q in self.grid_borders:
                 result += '  {}.{}\n'.format(p.name, q.name)
             result += 'end\n'
         return result
