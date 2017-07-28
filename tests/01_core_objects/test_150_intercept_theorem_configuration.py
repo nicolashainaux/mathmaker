@@ -165,8 +165,8 @@ def test_fig1_into_euk(fig1):
         'C = point(1.58, -0.76)\n'\
         'D = point(5.41, 2.45)\n'\
         'E = point(-1.48, 3.67)\n'\
-        'B = point(-1.29, -3.17)\n'\
-        'A = point(3.88, -4.08)\n\n'\
+        'B = point(-1.3, -3.17)\n'\
+        'A = point(3.87, -4.08)\n\n'\
         'draw\n'\
         '  (C.D.E)\n'\
         '  (C.B.A)\n\n'\
@@ -175,7 +175,7 @@ def test_fig1_into_euk(fig1):
         '  "E" E 147.4 deg, font("sffamily")\n'\
         '  "B" B 214.8 deg, font("sffamily")\n'\
         '  "A" A 309.7 deg, font("sffamily")\n'\
-        '  $\\rotatebox{40}{\sffamily 6}$ C 220 - 7.8 deg 6\n'\
+        '  $\\rotatebox{40}{\sffamily 6}$ C 220 - 7.8 deg 6.1\n'\
         '  $\\rotatebox{350}{\sffamily 12}$ B 350 - 6.3 deg 8.4\n'\
         '  $\\rotatebox{-55}{\sffamily 9}$ A 125 - 7.5 deg 6.5\n'\
         '  $\\rotatebox{40}{\sffamily 8}$ C 40 - 6.5 deg 8\n'\
