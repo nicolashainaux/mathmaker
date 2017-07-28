@@ -31,5 +31,5 @@ def test_p0x():
 def test_points_equalities():
     """Check Points' equality."""
     assert Point('A', 0, 0) == Point('A', 0, 0)
-    assert Point('A', 0, 0) == Point('B', 0, 0)
-    assert Point('A', 0, 0) is not Point('B', 0, 0)
+    assert Point('A', 0, 0) != Point('B', 0, 0)
+    assert Point('A', 0, 0).xy == Point('B', 0, 0).xy

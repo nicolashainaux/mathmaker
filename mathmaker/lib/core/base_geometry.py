@@ -80,10 +80,12 @@ class Point(Drawable):
         return '#{}({}; {})#'.format(self.name, self.x, self.y)
 
     def __eq__(self, other):
-        return all([self.x == other.x, self.y == other.y])
+        return all([self.x == other.x, self.y == other.y,
+                    self.name == other.name])
 
     def __ne__(self, other):
-        return any([self.x != other.x, self.y != other.y])
+        return any([self.x != other.x, self.y != other.y,
+                    self.name != other.name])
 
     # --------------------------------------------------------------------------
     ##
@@ -116,6 +118,10 @@ class Point(Drawable):
     @property
     def y_exact(self):
         return self._y
+
+    @property
+    def xy(self):
+        return str(self.x_exact) + str(self.y_exact)
 
     # --------------------------------------------------------------------------
     ##
