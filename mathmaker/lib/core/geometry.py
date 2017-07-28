@@ -557,7 +557,7 @@ class RectangleGrid(Rectangle):
         except ValueError:
             raise ValueError('layout must be of the form \'row×col\', where '
                              'row and col are both integers')
-        if not nrow >= 1 and ncol >= 1:
+        if not (nrow >= 1 and ncol >= 1):
             raise ValueError('layout must be of the form \'row×col\', where '
                              'row and col are both integers >= 1')
         Rectangle.__init__(self, arg, **options)

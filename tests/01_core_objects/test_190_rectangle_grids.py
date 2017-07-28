@@ -29,18 +29,30 @@ from mathmaker.lib.core.geometry import RectangleGrid
 
 def test_exceptions():
     """Check exceptions are raised with wrong initialization data."""
-    with pytest.raises(TypeError):
+    with pytest.raises(TypeError) as excinfo:
         RectangleGrid([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'],
                       layout=4)
-    with pytest.raises(ValueError):
+    assert 'layout keyword argument must be a str' in str(excinfo.value)
+    with pytest.raises(ValueError) as excinfo:
         RectangleGrid([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'],
                       layout='4x4')
-    with pytest.raises(ValueError):
+    assert 'no symbol × detected' in str(excinfo.value)
+    with pytest.raises(ValueError) as excinfo:
         RectangleGrid([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'],
                       layout='a×4')
-    with pytest.raises(ValueError):
+    assert 'layout must be of the form' in str(excinfo.value)
+    with pytest.raises(ValueError) as excinfo:
         RectangleGrid([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'],
                       layout='0×4')
+    assert 'integers >= 1' in str(excinfo.value)
+    with pytest.raises(ValueError) as excinfo:
+        RectangleGrid([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'],
+                      layout='4×0')
+    assert 'integers >= 1' in str(excinfo.value)
+    with pytest.raises(ValueError) as excinfo:
+        RectangleGrid([Point('A', 0.5, 0.5), 4, 3, 'B', 'C', 'D'],
+                      layout='0×0')
+    assert 'integers >= 1' in str(excinfo.value)
 
 
 def test_grid1_into_euk():
