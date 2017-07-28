@@ -532,7 +532,7 @@ class Rectangle(Polygon):
 
 class RectangleGrid(Rectangle):
 
-    def __init__(self, arg, layout='2×2', autofit=True, **options):
+    def __init__(self, arg, layout='2×2', autofit=False, **options):
         """
         RectangleGrid initialization.
 
@@ -570,9 +570,9 @@ class RectangleGrid(Rectangle):
                 ncol, nrow = min(ncol, nrow), max(ncol, nrow)
         # Let's get the coordinates of all grid points
         l_points0 = self.side[0].dividing_points(n=ncol, prefix='a')
-        l_points2 = self.side[2].dividing_points(n=ncol, prefix='b')
+        l_points2 = self.side[2].revert().dividing_points(n=ncol, prefix='b')
         w_points1 = self.side[1].dividing_points(n=nrow, prefix='c')
-        w_points3 = self.side[3].dividing_points(n=nrow, prefix='d')
+        w_points3 = self.side[3].revert().dividing_points(n=nrow, prefix='d')
         self.grid_borders = [z for z in zip(l_points0 + w_points1,
                                             l_points2 + w_points3)]
         inner_grid = []
@@ -587,12 +587,35 @@ class RectangleGrid(Rectangle):
                      + l_points0
                      + [self.vertex[1], ]]
         for i in range(nrow - 1):
+            if inner_grid:
+                inner_row = inner_grid[i]
+            else:
+                inner_row = []
             self.grid.append([w_points3[i], ]
-                             + inner_grid[i]
+                             + inner_row
                              + [w_points1[i], ])
         self.grid += [[self.vertex[3], ]
                       + l_points2
                       + [self.vertex[2], ]]
+        # self.filled_cells = []
+        # self.fill(fill=fill)
+    #
+    # def fill(fill='0×0'):
+    #     if type(fill) is not str:
+    #         raise TypeError('fill keyword argument must be a str')
+    #     if '×' not in fill:
+    #         raise ValueError('fill must be of the form \'row×col\', but no '
+    #                          'symbol × detected')
+    #     nrow, ncol = fill.split(sep='×')
+    #     try:
+    #         nrow, ncol = int(nrow), int(ncol)
+    #     except ValueError:
+    #         raise ValueError('in a \'row×col\' fill layout, '
+    #                          'row and col must be both integers')
+    #     if not nrow >= 0 and ncol >= 0:
+    #         raise ValueError('in a \'row×col\' fill layout, '
+    #                          'row and col must be both positive integers')
+
 
     def into_euk(self, draw_points_names=False, **options):
         result = Polygon.into_euk(self, draw_points_names=False, **options)

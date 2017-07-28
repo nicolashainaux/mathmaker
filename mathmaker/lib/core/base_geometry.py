@@ -240,6 +240,11 @@ class Segment(Drawable):
     def points(self):
         return self._points
 
+    def revert(self):
+        reverted = self.clone()
+        reverted._points = reverted._points[::-1]
+        return reverted
+
     @property
     def label(self):
         """Label of the Segment (the displayed information)."""
