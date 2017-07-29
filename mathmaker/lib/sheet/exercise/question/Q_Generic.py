@@ -23,6 +23,7 @@
 import warnings
 
 from mathmaker.lib import shared
+from mathmaker.lib.common.cst import EQUAL_PRODUCTS
 from .Q_Structure import Q_Structure
 from . import (algebra_modules, calculation_modules, mc_modules,
                geometry_modules)
@@ -172,16 +173,7 @@ def get_modifier(q_type, nb_source):
     d = {}
     if q_type in ['multi_reversed', 'fraction_of_rectangle']:
         d.update({'lock_equal_products': True,
-                  'info_lock': {(2, 6): [(2, 6), (3, 4)],
-                                (3, 4): [(2, 6), (3, 4)],
-                                (2, 8): [(2, 8), (4, 4)],
-                                (4, 4): [(2, 8), (4, 4)],
-                                (3, 6): [(3, 6), (2, 9)],
-                                (2, 9): [(3, 6), (2, 9)],
-                                (3, 8): [(3, 8), (4, 6)],
-                                (4, 6): [(3, 8), (4, 6)],
-                                (4, 9): [(4, 9), (6, 6)],
-                                (6, 6): [(4, 9), (6, 6)]}})
+                  'info_lock': EQUAL_PRODUCTS})
     elif q_type == 'subtr_direct' and nb_source.startswith('intpairs_10'):
         d.update({'diff7atleast': True})
     elif any(['rectangle' in q_type,

@@ -185,6 +185,11 @@ class source(object):
     def _lock(self, t, **kwargs):
         if 'lock_equal_products' in kwargs:
             if t in kwargs['info_lock']:
+                shared.db.execute(
+                    "UPDATE " + self.table_name
+                    + " SET lock_equal_products = 1"
+                    + " WHERE nb1 = '" + str(t[0])
+                    + "' and nb2 = '" + str(t[1]) + "';")
                 for couple in kwargs['info_lock'][t]:
                     shared.db.execute(
                         "UPDATE " + self.table_name
