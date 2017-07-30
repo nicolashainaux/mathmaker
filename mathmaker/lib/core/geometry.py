@@ -778,7 +778,7 @@ class RectangleGrid(Rectangle):
                 and len(self.grid[0]) >= 3):
                 for row in self.grid[1:-1]:
                     for p in row[1:-1]:
-                        if p.name in self.filled_polygon:
+                        if any(p.name in row for row in self.filled_polygon):
                             definitions += '{name} = point({x}, {y})\n'.format(
                                 name=p.name,
                                 x=p.x,
