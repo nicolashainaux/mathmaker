@@ -299,48 +299,68 @@ class Polygon(Drawable):
         for (s, f) in zip(segments_list, flags_list):
             s.setup_label(f)
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Works out the dimensions of the box
-    #   @param options Any options
-    #   @return (x1, y1, x2, y2)
-    def work_out_euk_box(self, vertices=None):
+    def _euk_box(self, vertices=None):
+        """
+        Work out the dimensions of the box.
+
+        Return the 'box' line for use at start of an euk file.
+
+        :param vertices: the vertices' list to proceed. Defaults to self.vertex
+        :type vertices: list (of Points)
+        :rtype: str
+        """
         if vertices is None:
             vertices = self.vertex
         x_list = [v.x for v in vertices]
         y_list = [v.y for v in vertices]
 
-        corners = (min(x_list) - Decimal("0.6"), min(y_list) - Decimal("0.6"),
-                   max(x_list) + Decimal("0.6"), max(y_list) + Decimal("0.6"))
-        return [str(c) for c in corners]
+        corners = (min(x_list) - Decimal('0.6'), min(y_list) - Decimal('0.6'),
+                   max(x_list) + Decimal('0.6'), max(y_list) + Decimal('0.6'))
+        return 'box {}, {}, {}, {}\n\n'.format(*[str(c) for c in corners])
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Creates the euk string to put in the file
-    #   @param options Any options
-    #   @return The string to put in the picture file
-    def into_euk(self, draw_points_names=True, draw_shape=True, **options):
-        result = 'box {}, {}, {}, {}\n\n'.format(*self.work_out_euk_box())
+    def _euk_definitions(self):
+        """
+        Build the definitions section content of the euk file.
 
+        :rtype: str
+        """
+        definitions = ''
         for v in self.vertex:
-            result += "{name} = point({x}, {y})\n".format(name=v.name,
-                                                          x=v.x,
-                                                          y=v.y)
+            definitions += '{name} = point({x}, {y})\n'.format(name=v.name,
+                                                               x=v.x,
+                                                               y=v.y)
+        return definitions
 
-        d_cntt = ''
+    def _euk_draw_shape(self):
+        """
+        Create the shape to insert in the draw section.
+
+        :rtype: str
+        """
         color = '' if self._shape_color == '' else ' ' + self._shape_color
+        return '  (' + '.'.join([v.name for v in self.vertex]) \
+            + '){}\n'.format(color)
 
-        if draw_shape:
-            d_cntt += '('
-            d_cntt += '.'.join([v.name for v in self.vertex])
-            d_cntt += '){}\n'.format(color)
+    def _euk_draw_sides_labels(self):
+        """
+        Return the sides' labels to insert in the draw section.
 
-        # Let's add the sides' labels, if any
+        :rtype: str
+        """
+        content = ''
         for s in self.side:
-            d_cntt += s.label_into_euk()
+            content += s.label_into_euk()
+        return content
 
+    def _euk_draw_angles_labels(self):
+        """
+        Return the angles' labels to insert in the draw section.
+
+        :rtype: str
+        """
+        content = ''
         for a in self.angle:
-            if a.label != Value(""):
+            if a.label != Value(''):
                 scale_factor = Decimal('2.7')
                 if Decimal(str(a.measure)) < Decimal('28.5'):
                     scale_factor = round_deci(
@@ -359,58 +379,102 @@ class Polygon(Drawable):
                 rotate_box_angle = Decimal(label_position_angle)
 
                 if (rotate_box_angle >= 90 and rotate_box_angle <= 270):
-                    rotate_box_angle -= Decimal("180")
+                    rotate_box_angle -= Decimal('180')
                 elif (rotate_box_angle <= -90 and rotate_box_angle >= -270):
-                    rotate_box_angle += Decimal("180")
+                    rotate_box_angle += Decimal('180')
 
-                d_cntt += "  $\\rotatebox{"
-                d_cntt += str(rotate_box_angle)
-                d_cntt += "}{\sffamily "
-                d_cntt += a.label.into_str(display_unit=True,
-                                           graphic_display=True)
-                d_cntt += "}$ "
-                d_cntt += a.vertex.name + " "
-                d_cntt += str(label_position_angle) + " deg "
-                d_cntt += str(scale_factor)
-                d_cntt += "\n"
+                content += '  $\\rotatebox{'
+                content += str(rotate_box_angle)
+                content += '}{\sffamily '
+                content += a.label.into_str(display_unit=True,
+                                            graphic_display=True)
+                content += '}$ '
+                content += a.vertex.name + ' '
+                content += str(label_position_angle) + ' deg '
+                content += str(scale_factor)
+                content += '\n'
+        return content
 
+    def _euk_draw_points_names(self):
+        """
+        Return the points' names to insert in the draw section.
+
+        :rtype: str
+        """
+        content = ''
         names_angles_list = [Vector((a.points[0], a.points[1]))
                              .bisector_vector(Vector((a.points[2],
                                                       a.points[1])))
                              .slope for a in self.angle]
+        for (i, v) in enumerate(self.vertex):
+            content += '  "{n}" {n} {a} deg, font("sffamily")\n'\
+                       .format(n=v.name, a=str(names_angles_list[i]))
+        return content
 
-        if draw_points_names:
-            for (i, v) in enumerate(self.vertex):
-                d_cntt += '  "{n}" {n} {a} deg, font("sffamily")\n'\
-                          .format(n=v.name, a=str(names_angles_list[i]))
+    def _euk_draw_section(self, dont_wrap=False):
+        """
+        Build the draw ... end section content of the euk file.
 
-        if len(d_cntt):
-            result += '\ndraw\n  '
-            result += d_cntt
-            result += 'end\n'
+        :param dont_wrap: if set True, return same content but not wrapped in
+                          draw ... end
+        :type dont_wrap: bool
+        :rtype: str
+        """
+        start, end = '\ndraw\n', 'end\n'
+        if dont_wrap:
+            start, end = '', ''
 
-        # To avoid empty label...end sections (what make euktoeps raise a
-        # syntax error), we first check whether there's anything to put in it.
-        all_marks = "".join([a.mark + s.mark
-                             for a, s in zip(self.angle, self.side)])
-        if all_marks != "":
-            result += "\nlabel\n"
-            for a in self.angle:
-                if a.mark != "":
-                    result += "  {p0}, {v}, {p2} {m}\n"\
-                              .format(p0=a.points[2].name,
-                                      v=a.vertex.name,
-                                      p2=a.points[0].name,
-                                      m=a.mark)
-            for s in self.side:
-                if s.mark != "":
-                    result += "  {p1}.{p2} {m}\n"\
-                              .format(p1=s.points[0].name,
-                                      p2=s.points[1].name,
-                                      m=s.mark)
-            result += "end"
+        content = self._euk_draw_shape() \
+            + self._euk_draw_sides_labels() \
+            + self._euk_draw_angles_labels() \
+            + self._euk_draw_points_names()
 
-        return result
+        if len(content):
+            return start + content + end
+        else:
+            return ''
+
+    def _euk_label_section(self, dont_wrap=False):
+        """
+        Build the label ... end section content of the euk file.
+
+        :param dont_wrap: if set True, return same content but not wrapped in
+                          label ... end
+        :type dont_wrap: bool
+        :rtype: str
+        """
+        start, end = '\nlabel\n', 'end\n'
+        if dont_wrap:
+            start, end = '', ''
+        content = ''
+        for a in self.angle:
+            if a.mark != '':
+                content += '  {p0}, {v}, {p2} {m}\n'\
+                    .format(p0=a.points[2].name,
+                            v=a.vertex.name,
+                            p2=a.points[0].name,
+                            m=a.mark)
+        for s in self.side:
+            if s.mark != '':
+                content += '  {p1}.{p2} {m}\n'\
+                    .format(p1=s.points[0].name,
+                            p2=s.points[1].name,
+                            m=s.mark)
+        if len(content):
+            return start + content + end
+        else:
+            return ''
+
+    def into_euk(self):
+        """
+        Build the euk file content.
+
+        :rtype: str
+        """
+        return self._euk_box() \
+            + self._euk_definitions() \
+            + self._euk_draw_section() \
+            + self._euk_label_section()
 
 
 # ------------------------------------------------------------------------------
@@ -694,38 +758,78 @@ class RectangleGrid(Rectangle):
                         self.grid[nrow - rest][ncol + 1].name,
                         self.grid[nrow][ncol + 1].name]]
 
-    def into_euk(self, draw_points_names=False, **options):
-        result = Polygon.into_euk(self, draw_points_names=False,
-                                  draw_shape=False, **options)
-        result += '\n'
+    def _euk_definitions(self):
+        """
+        Build the definitions section content of the euk file.
+
+        :rtype: str
+        """
+        definitions = Polygon._euk_definitions(self)
         if self.grid_borders:
+            definitions += '\n'
             for p, q in self.grid_borders:
-                result += '{name} = point({x}, {y})\n'.format(name=p.name,
-                                                              x=p.x,
-                                                              y=p.y)
-                result += '{name} = point({x}, {y})\n'.format(name=q.name,
-                                                              x=q.x,
-                                                              y=q.y)
+                definitions += '{name} = point({x}, {y})\n'.format(name=p.name,
+                                                                   x=p.x,
+                                                                   y=p.y)
+                definitions += '{name} = point({x}, {y})\n'.format(name=q.name,
+                                                                   x=q.x,
+                                                                   y=q.y)
             if (self.filled_polygon and len(self.grid) >= 3
                 and len(self.grid[0]) >= 3):
                 for row in self.grid[1:-1]:
                     for p in row[1:-1]:
-                        result += '{name} = point({x}, {y})\n'.format(
-                            name=p.name,
-                            x=p.x,
-                            y=p.y)
-            result += '\ndraw\n'
-            for c in self.filled_polygon:
-                polygon_set = '.'.join(['{}' for _ in range(len(c))])
-                result += ('  [' + polygon_set + '] {}\n') \
-                    .format(*c, self.fillcolor)
-            for p, q in self.grid_borders:
-                result += '  {}.{}\n'.format(p.name, q.name)
-            result += '  ('
-            result += '.'.join([v.name for v in self.vertex])
-            result += ')\n'
-            result += 'end\n'
-        return result
+                        if p.name in self.filled_polygon:
+                            definitions += '{name} = point({x}, {y})\n'.format(
+                                name=p.name,
+                                x=p.x,
+                                y=p.y)
+        return definitions
+
+    def _euk_draw_filled_polygon(self):
+        """
+        Build the filled polygon to insert in the the draw ... end section.
+
+        :rtype: str
+        """
+        content = ''
+        for c in self.filled_polygon:
+            polygon_set = '.'.join(['{}' for _ in range(len(c))])
+            content += ('  [' + polygon_set + '] {}\n') \
+                .format(*c, self.fillcolor)
+        return content
+
+    def _euk_draw_grid(self):
+        """
+        Build the grid to insert in the the draw ... end section.
+
+        :rtype: str
+        """
+        content = ''
+        for p, q in self.grid_borders:
+            content += '  {}.{}\n'.format(p.name, q.name)
+        return content
+
+    def _euk_draw_section(self, dont_wrap=False):
+        """
+        Build the draw ... end section content of the euk file.
+
+        :param dont_wrap: if set True, return same content but not wrapped in
+                          draw ... end
+        :type dont_wrap: bool
+        :rtype: str
+        """
+        start, end = '\ndraw\n', 'end\n'
+        if dont_wrap:
+            start, end = '', ''
+
+        content = self._euk_draw_filled_polygon() \
+            + self._euk_draw_grid() \
+            + self._euk_draw_shape()
+
+        if len(content):
+            return start + content + end
+        else:
+            return ''
 
 
 # ------------------------------------------------------------------------------
@@ -1434,8 +1538,7 @@ class InterceptTheoremConfiguration(Triangle):
                 points_list_for_the_box += self._V0V1
         else:
             points_list_for_the_box += self.point
-        result = 'box {}, {}, {}, {}\n\n'\
-            .format(*self.work_out_euk_box(vertices=points_list_for_the_box))
+        result = self._euk_box(vertices=points_list_for_the_box)
 
         points_list = [self.vertex, self._point]
         if not self.butterfly:
@@ -1497,7 +1600,7 @@ class InterceptTheoremConfiguration(Triangle):
         for s in label_segments[self.butterfly]:
             result += s.label_into_euk()
 
-        result += "end"
+        result += "end\n"
         return result
 
     def set_lengths(self, lengths_list, enlargement_ratio):
