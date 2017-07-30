@@ -125,9 +125,6 @@ def test_into_euk():
         'C = point(4.5, 3.5)\n'\
         'D = point(0.5, 3.5)\n'\
         '\n'\
-        'draw\n'\
-        '  (A.B.C.D)\n'\
-        'end\n\n' \
         'a1 = point(2.5, 0.5)\n' \
         'b1 = point(2.5, 3.5)\n' \
         'c1 = point(4.5, 2)\n' \
@@ -135,6 +132,7 @@ def test_into_euk():
         '\ndraw\n' \
         '  a1.b1\n' \
         '  c1.d1\n' \
+        '  (A.B.C.D)\n' \
         'end\n'
     rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
                         Decimal('10'), Decimal('3'), 'B', 'C', 'D'],
@@ -146,9 +144,6 @@ def test_into_euk():
         'C = point(10, 3)\n'\
         'D = point(0, 3)\n'\
         '\n'\
-        'draw\n'\
-        '  (A.B.C.D)\n'\
-        'end\n\n' \
         'a1 = point(2, 0)\n' \
         'b1 = point(2, 3)\n' \
         'a2 = point(4, 0)\n' \
@@ -168,7 +163,39 @@ def test_into_euk():
         '  a4.b4\n' \
         '  c1.d1\n' \
         '  c2.d2\n' \
+        '  (A.B.C.D)\n' \
         'end\n'
+    # rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+    #                     Decimal('5'), Decimal('4'), 'B', 'C', 'D'],
+    #                    layout='4×5', fill='3×6')
+    # assert rg.into_euk() == \
+    #     'box -0.6, -0.6, 10.6, 3.6\n\n'\
+    #     'A = point(0, 0)\n'\
+    #     'B = point(10, 0)\n'\
+    #     'C = point(10, 3)\n'\
+    #     'D = point(0, 3)\n'\
+    #     '\n'\
+    #     'a1 = point(2, 0)\n' \
+    #     'b1 = point(2, 3)\n' \
+    #     'a2 = point(4, 0)\n' \
+    #     'b2 = point(4, 3)\n' \
+    #     'a3 = point(6, 0)\n' \
+    #     'b3 = point(6, 3)\n' \
+    #     'a4 = point(8, 0)\n' \
+    #     'b4 = point(8, 3)\n' \
+    #     'c1 = point(10, 1)\n' \
+    #     'd1 = point(0, 1)\n' \
+    #     'c2 = point(10, 2)\n' \
+    #     'd2 = point(0, 2)\n' \
+    #     '\ndraw\n' \
+    #     '  a1.b1\n' \
+    #     '  a2.b2\n' \
+    #     '  a3.b3\n' \
+    #     '  a4.b4\n' \
+    #     '  c1.d1\n' \
+    #     '  c2.d2\n' \
+    #     '  (A.B.C.D)\n' \
+    #     'end\n'
 
 # def test_grid2_into_euk():
 #     """Check RectangleGrid's generated euk file."""

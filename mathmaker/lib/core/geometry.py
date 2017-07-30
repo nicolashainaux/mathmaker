@@ -32,6 +32,7 @@ from decimal import Decimal, ROUND_HALF_UP
 
 from mathmaker.lib import randomly
 from mathmaker.lib import error
+from mathmaker.lib.common.cst import EQUAL_PRODUCTS
 from mathmaker.lib.tools.auxiliary_functions \
     import is_number, round_deci, parse_layout_descriptor
 from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
@@ -70,12 +71,13 @@ class Polygon(Drawable):
     #   - rotate_around_gravity_center = 'no'|'any'|nb
     #                        (nb being the angle,
     #               defaulting to 'any' if sketch or 'no' if not a sketch)
-    def __init__(self, arg, **options):
+    def __init__(self, arg, shapecolor='', **options):
         self._vertex = []
         self._side = []
         self._angle = []
         self._rotation_angle = 0
         self._read_name_clockwise = False
+        self._shape_color = ''
 
         if 'read_name_clockwise' in options and options['read_name_clockwise']:
             self._read_name_clockwise = True
@@ -308,38 +310,34 @@ class Polygon(Drawable):
         x_list = [v.x for v in vertices]
         y_list = [v.y for v in vertices]
 
-        return (min(x_list) - Decimal("0.6"), min(y_list) - Decimal("0.6"),
-                max(x_list) + Decimal("0.6"), max(y_list) + Decimal("0.6"))
+        corners = (min(x_list) - Decimal("0.6"), min(y_list) - Decimal("0.6"),
+                   max(x_list) + Decimal("0.6"), max(y_list) + Decimal("0.6"))
+        return [str(c) for c in corners]
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Creates the euk string to put in the file
     #   @param options Any options
     #   @return The string to put in the picture file
-    def into_euk(self, draw_points_names=True, **options):
-        box_values = self.work_out_euk_box()
-        result = "box {val0}, {val1}, {val2}, {val3}\n"\
-                 .format(val0=str(box_values[0]),
-                         val1=str(box_values[1]),
-                         val2=str(box_values[2]),
-                         val3=str(box_values[3]))
-
-        result += "\n"
+    def into_euk(self, draw_points_names=True, draw_shape=True, **options):
+        result = 'box {}, {}, {}, {}\n\n'.format(*self.work_out_euk_box())
 
         for v in self.vertex:
             result += "{name} = point({x}, {y})\n".format(name=v.name,
                                                           x=v.x,
                                                           y=v.y)
 
-        result += "\ndraw\n  "
+        d_cntt = ''
+        color = '' if self._shape_color == '' else ' ' + self._shape_color
 
-        result += "("
-        result += '.'.join([v.name for v in self.vertex])
-        result += ")\n"
+        if draw_shape:
+            d_cntt += '('
+            d_cntt += '.'.join([v.name for v in self.vertex])
+            d_cntt += '){}\n'.format(color)
 
         # Let's add the sides' labels, if any
         for s in self.side:
-            result += s.label_into_euk()
+            d_cntt += s.label_into_euk()
 
         for a in self.angle:
             if a.label != Value(""):
@@ -365,16 +363,16 @@ class Polygon(Drawable):
                 elif (rotate_box_angle <= -90 and rotate_box_angle >= -270):
                     rotate_box_angle += Decimal("180")
 
-                result += "  $\\rotatebox{"
-                result += str(rotate_box_angle)
-                result += "}{\sffamily "
-                result += a.label.into_str(display_unit=True,
+                d_cntt += "  $\\rotatebox{"
+                d_cntt += str(rotate_box_angle)
+                d_cntt += "}{\sffamily "
+                d_cntt += a.label.into_str(display_unit=True,
                                            graphic_display=True)
-                result += "}$ "
-                result += a.vertex.name + " "
-                result += str(label_position_angle) + " deg "
-                result += str(scale_factor)
-                result += "\n"
+                d_cntt += "}$ "
+                d_cntt += a.vertex.name + " "
+                d_cntt += str(label_position_angle) + " deg "
+                d_cntt += str(scale_factor)
+                d_cntt += "\n"
 
         names_angles_list = [Vector((a.points[0], a.points[1]))
                              .bisector_vector(Vector((a.points[2],
@@ -383,10 +381,13 @@ class Polygon(Drawable):
 
         if draw_points_names:
             for (i, v) in enumerate(self.vertex):
-                result += '  "{n}" {n} {a} deg, font("sffamily")\n'\
+                d_cntt += '  "{n}" {n} {a} deg, font("sffamily")\n'\
                           .format(n=v.name, a=str(names_angles_list[i]))
 
-        result += "end\n"
+        if len(d_cntt):
+            result += '\ndraw\n  '
+            result += d_cntt
+            result += 'end\n'
 
         # To avoid empty label...end sections (what make euktoeps raise a
         # syntax error), we first check whether there's anything to put in it.
@@ -534,7 +535,7 @@ class Rectangle(Polygon):
 class RectangleGrid(Rectangle):
 
     def __init__(self, arg, layout='2×2', fill='0×0', autofit=False,
-                 **options):
+                 fillcolor='lightgray', **options):
         """
         RectangleGrid initialization.
 
@@ -595,15 +596,107 @@ class RectangleGrid(Rectangle):
         self.grid += [[self.vertex[3], ]
                       + l_points2
                       + [self.vertex[2], ]]
-        self.filled_cells = []
+        self.nrow, self.ncol = nrow, ncol
+        self.fillcolor = fillcolor
+        self.filled_polygon = []
         self.fill(fill=fill)
 
-    def fill(self, fill='0×0'):
+    def fill(self, fill='0×0', fillcolor=None, startvertex=0):
         nrow, ncol = parse_layout_descriptor(fill)
-
+        if fillcolor is not None:
+            self.fillcolor = fillcolor
+        if nrow * ncol >= self.nrow * self.ncol:
+            self.filled_polygon = [[v.name for v in self.vertex]]
+        elif nrow * ncol == 0:
+            self.filled_polygon = []
+        else:
+            if (not(nrow <= self.nrow and ncol <= self.ncol)
+                and (ncol <= self.nrow and nrow <= self.ncol)):
+                nrow, ncol = ncol, nrow
+            if not (nrow <= self.nrow and ncol <= self.ncol):
+                # check if another layout of same area can be used
+                r, c = min(nrow, ncol), max(nrow, ncol)
+                found = False
+                if (r, c) in EQUAL_PRODUCTS:
+                    for couple in EQUAL_PRODUCTS[(r, c)]:
+                        if couple[0] <= self.nrow and couple[1] <= self.ncol:
+                            nrow, ncol = couple
+                            found = True
+                        elif couple[1] <= self.nrow and couple[0] <= self.ncol:
+                            ncol, nrow = couple
+                            found = True
+                        if found:
+                            break
+            if nrow <= self.nrow and ncol <= self.ncol:
+                if startvertex == 0:
+                    self.filled_polygon = [[self.grid[0][0].name,
+                                            self.grid[0][ncol].name,
+                                            self.grid[nrow][ncol].name,
+                                            self.grid[nrow][0].name]]
+                elif startvertex == 1:
+                    self.filled_polygon = [[
+                        self.grid[0][self.ncol - ncol].name,
+                        self.grid[0][self.ncol].name,
+                        self.grid[nrow][self.ncol].name,
+                        self.grid[nrow][self.ncol - ncol].name]]
+                elif startvertex == 2:
+                    self.filled_polygon = [[
+                        self.grid[self.nrow - nrow][self.ncol - ncol].name,
+                        self.grid[self.nrow - nrow][self.ncol].name,
+                        self.grid[self.nrow][self.ncol].name,
+                        self.grid[self.nrow][self.ncol - ncol].name]]
+                elif startvertex == 3:
+                    self.filled_polygon = [[
+                        self.grid[self.nrow - nrow][0].name,
+                        self.grid[self.nrow - nrow][ncol].name,
+                        self.grid[self.nrow][ncol].name,
+                        self.grid[self.nrow][0].name]]
+            # no way to make a rectangle of this area fit into the
+            # RectangleGrid, so we fill "cell after cell"
+            else:
+                area = nrow * ncol
+                if startvertex in [0, 2]:
+                    ncol = self.ncol
+                    nrow = area // ncol
+                else:
+                    nrow = self.nrow
+                    ncol = area // nrow
+                rest = area - ncol * nrow
+                if startvertex == 0:
+                    self.filled_polygon = [[self.grid[0][0].name,
+                                            self.grid[0][ncol].name,
+                                            self.grid[nrow][ncol].name,
+                                            self.grid[nrow][rest].name,
+                                            self.grid[nrow + 1][rest].name,
+                                            self.grid[nrow + 1][0].name]]
+                elif startvertex == 1:
+                    self.filled_polygon = [[
+                        self.grid[0][self.ncol].name,
+                        self.grid[nrow][self.ncol].name,
+                        self.grid[nrow][self.ncol - ncol].name,
+                        self.grid[rest][self.ncol - ncol].name,
+                        self.grid[rest][self.ncol - ncol - 1].name,
+                        self.grid[0][self.ncol - ncol - 1].name]]
+                elif startvertex == 2:
+                    self.filled_polygon = [[
+                        self.grid[nrow][self.ncol].name,
+                        self.grid[0][self.ncol].name,
+                        self.grid[0][self.ncol - ncol].name,
+                        self.grid[nrow - rest][self.ncol - ncol].name,
+                        self.grid[nrow - rest][self.ncol - ncol - 1].name,
+                        self.grid[nrow][self.ncol - ncol - 1].name]]
+                elif startvertex == 3:
+                    self.filled_polygon = [[
+                        self.grid[nrow][0].name,
+                        self.grid[0][0].name,
+                        self.grid[0][ncol].name,
+                        self.grid[nrow - rest][ncol].name,
+                        self.grid[nrow - rest][ncol + 1].name,
+                        self.grid[nrow][ncol + 1].name]]
 
     def into_euk(self, draw_points_names=False, **options):
-        result = Polygon.into_euk(self, draw_points_names=False, **options)
+        result = Polygon.into_euk(self, draw_points_names=False,
+                                  draw_shape=False, **options)
         result += '\n'
         if self.grid_borders:
             for p, q in self.grid_borders:
@@ -613,9 +706,24 @@ class RectangleGrid(Rectangle):
                 result += '{name} = point({x}, {y})\n'.format(name=q.name,
                                                               x=q.x,
                                                               y=q.y)
+            if (self.filled_polygon and len(self.grid) >= 3
+                and len(self.grid[0]) >= 3):
+                for row in self.grid[1:-1]:
+                    for p in row[1:-1]:
+                        result += '{name} = point({x}, {y})\n'.format(
+                            name=p.name,
+                            x=p.x,
+                            y=p.y)
             result += '\ndraw\n'
+            for c in self.filled_polygon:
+                polygon_set = '.'.join(['{}' for _ in range(len(c))])
+                result += ('  [' + polygon_set + '] {}\n') \
+                    .format(*c, self.fillcolor)
             for p, q in self.grid_borders:
                 result += '  {}.{}\n'.format(p.name, q.name)
+            result += '  ('
+            result += '.'.join([v.name for v in self.vertex])
+            result += ')\n'
             result += 'end\n'
         return result
 
@@ -1326,14 +1434,8 @@ class InterceptTheoremConfiguration(Triangle):
                 points_list_for_the_box += self._V0V1
         else:
             points_list_for_the_box += self.point
-        box_values = self.work_out_euk_box(vertices=points_list_for_the_box)
-        result = "box {val0}, {val1}, {val2}, {val3}\n"\
-                 .format(val0=str(box_values[0]),
-                         val1=str(box_values[1]),
-                         val2=str(box_values[2]),
-                         val3=str(box_values[3]))
-
-        result += "\n"
+        result = 'box {}, {}, {}, {}\n\n'\
+            .format(*self.work_out_euk_box(vertices=points_list_for_the_box))
 
         points_list = [self.vertex, self._point]
         if not self.butterfly:
