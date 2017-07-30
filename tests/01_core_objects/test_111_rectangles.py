@@ -51,4 +51,4 @@ def test_r1_into_euk():
         '  C, B, A right\n'\
         '  D, C, B right\n'\
         '  A, D, C right\n'\
-        'end'
+        'end\n'

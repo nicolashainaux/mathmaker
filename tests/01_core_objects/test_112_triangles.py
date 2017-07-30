@@ -60,4 +60,4 @@ def test_t1_into_euk():
         '  E, Z, P simple\n'\
         '  P, E, Z double\n'\
         '  Z, P, E dotted\n'\
-        'end'
+        'end\n'

@@ -78,7 +78,7 @@ def test_p1_into_euk(p1):
         '  C, B, A simple\n'\
         '  D, C, B simple\n'\
         '  A, D, C simple\n'\
-        'end'
+        'end\n'
 
 
 def test_p1_rename_errors(p1):
@@ -119,4 +119,4 @@ def test_p1_renamed(p1):
         '  O, G, A simple\n'\
         '  Y, O, G simple\n'\
         '  A, Y, O simple\n'\
-        'end'
+        'end\n'

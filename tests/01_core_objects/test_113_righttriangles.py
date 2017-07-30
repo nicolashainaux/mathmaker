@@ -78,7 +78,7 @@ def test_t1_into_euk():
         'end\n\n'\
         'label\n'\
         '  C, B, A right\n'\
-        'end'
+        'end\n'
 
 
 def test_t2_into_euk():
@@ -106,7 +106,7 @@ def test_t2_into_euk():
         'end\n\n'\
         'label\n'\
         '  P, E, Y right\n'\
-        'end'
+        'end\n'
 
 
 def test_t3_into_euk():
@@ -133,7 +133,7 @@ def test_t3_into_euk():
         'end\n\n'\
         'label\n'\
         '  K, A, Z right\n'\
-        'end'
+        'end\n'
 
 
 def test_t4_into_euk(t4):
@@ -157,7 +157,7 @@ def test_t4_into_euk(t4):
         '  O, L, P back\n'\
         '  P, O, L right\n'\
         '  L, P, O dotted\n'\
-        'end'
+        'end\n'
 
 
 def test_t4_pyth_eq(t4):
@@ -261,7 +261,7 @@ def test_t5_into_euk():
         '  A, P, X simple\n'\
         '  X, A, P right\n'\
         '  P, X, A double\n'\
-        'end'
+        'end\n'
 
 
 def test_legmatching_65():
