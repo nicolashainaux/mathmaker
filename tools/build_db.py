@@ -157,10 +157,10 @@ def __main__():
                        db_rows)
 
     # Insert integers pairs into the db
-    # Tables of 2, 3... 500
-    db_rows = [(i + 2, j + 2, 0, 0, 0, 1, 1)
-               for i in range(499)
-               for j in range(499)
+    # Tables of 1, 2, 3... 500
+    db_rows = [(i + 1, j + 1, 0, 0, 0, 1, 1)
+               for i in range(500)
+               for j in range(500)
                if j >= i]
     db.executemany("INSERT "
                    "INTO int_pairs(nb1, nb2, lock_equal_products, drawDate, "
@@ -178,16 +178,16 @@ def __main__():
                    + " WHERE nb1 = '" + str(couple[0])
                    + "' and nb2 = '" + str(couple[1]) + "';")
 
-    for couple in [(i + 2, j + 2)
-                   for i in range(499) for j in range(499)
-                   if ((i + 2) % 10 == 0 and (j + 2) % 10 == 0)]:
+    for couple in [(i + 1, j + 1)
+                   for i in range(500) for j in range(500)
+                   if ((i + 1) % 10 == 0 and (j + 1) % 10 == 0)]:
         db.execute("UPDATE int_pairs SET suits_for_deci1 = 0"
                    + " WHERE nb1 = '" + str(couple[0])
                    + "' and nb2 = '" + str(couple[1]) + "';")
 
-    for couple in [(i + 2, j + 2)
-                   for i in range(499) for j in range(499)
-                   if ((i + 2) % 10 == 0 or (j + 2) % 10 == 0)]:
+    for couple in [(i + 1, j + 1)
+                   for i in range(500) for j in range(500)
+                   if ((i + 1) % 10 == 0 or (j + 1) % 10 == 0)]:
         db.execute("UPDATE int_pairs SET suits_for_deci2 = 0"
                    + " WHERE nb1 = '" + str(couple[0])
                    + "' and nb2 = '" + str(couple[1]) + "';")
