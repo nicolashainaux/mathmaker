@@ -28,6 +28,7 @@
 
 import math
 import copy
+import random
 from decimal import Decimal, ROUND_HALF_UP
 
 from mathmaker.lib import randomly
@@ -599,7 +600,7 @@ class Rectangle(Polygon):
 class RectangleGrid(Rectangle):
 
     def __init__(self, arg, layout='2×2', fill='0×0', autofit=False,
-                 fillcolor='lightgray', **options):
+                 fillcolor='lightgray', startvertex=None):
         """
         RectangleGrid initialization.
 
@@ -623,7 +624,7 @@ class RectangleGrid(Rectangle):
         :type autofit: bool
         """
         nrow, ncol = parse_layout_descriptor(layout, min_row=1, min_col=1)
-        Rectangle.__init__(self, arg, **options)
+        Rectangle.__init__(self, arg)
         for a in self._angle:
             a.mark = ''
         if autofit:
@@ -663,10 +664,16 @@ class RectangleGrid(Rectangle):
         self.nrow, self.ncol = nrow, ncol
         self.fillcolor = fillcolor
         self.filled_polygon = []
-        self.fill(fill=fill)
+        self.fill(fill=fill, startvertex=startvertex)
 
-    def fill(self, fill='0×0', fillcolor=None, startvertex=0):
+    def fill(self, fill='0×0', fillcolor=None, startvertex=None):
         nrow, ncol = parse_layout_descriptor(fill)
+        if startvertex is None:
+            startvertex = random.choice([0, 1, 2, 3])
+        elif type(startvertex) is not int:
+            raise TypeError('startvertex must be int')
+        elif startvertex not in [0, 1, 2, 3]:
+            raise ValueError('startvertex must be 0, 1, 2 or 3')
         if fillcolor is not None:
             self.fillcolor = fillcolor
         if nrow * ncol >= self.nrow * self.ncol:
@@ -743,12 +750,12 @@ class RectangleGrid(Rectangle):
                         self.grid[0][self.ncol - ncol - 1].name]]
                 elif startvertex == 2:
                     self.filled_polygon = [[
-                        self.grid[nrow][self.ncol].name,
-                        self.grid[0][self.ncol].name,
-                        self.grid[0][self.ncol - ncol].name,
-                        self.grid[nrow - rest][self.ncol - ncol].name,
-                        self.grid[nrow - rest][self.ncol - ncol - 1].name,
-                        self.grid[nrow][self.ncol - ncol - 1].name]]
+                        self.grid[self.nrow][0].name,
+                        self.grid[self.nrow][ncol].name,
+                        self.grid[self.nrow - nrow - 1][ncol].name,
+                        self.grid[self.nrow - nrow - 1][ncol - rest].name,
+                        self.grid[self.nrow - nrow][ncol - rest].name,
+                        self.grid[self.nrow - nrow][0].name]]
                 elif startvertex == 3:
                     self.filled_polygon = [[
                         self.grid[nrow][0].name,
