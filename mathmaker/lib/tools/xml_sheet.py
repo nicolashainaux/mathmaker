@@ -327,6 +327,7 @@ def get_q_kinds_from(exercise_node):
         elif child.tag == 'mix':
             q_temp_list = []
             n_temp_list = []
+            mix_questions = []
             for elt in child:
                 if elt.tag == 'question':
                     pick = int(elt.attrib.pop('pick', 1))
@@ -390,9 +391,10 @@ def get_q_kinds_from(exercise_node):
             for (q, n) in zip(q_temp_list, n_temp_list):
                 merged_q = copy.deepcopy(q)
                 merged_q.update(n[1])
-                questions += [[merged_q, n[0], 1]]
+                mix_questions += [[merged_q, n[0], 1]]
 
-            random.shuffle(questions)
+            random.shuffle(mix_questions)
+            questions += mix_questions
 
     return (x_kind, questions)
 

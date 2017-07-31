@@ -167,7 +167,7 @@ def build_q_dict(q_list):
 #   @brief Will create a complete and mixed questions' list from q_dict
 #   @param  q_dict  The questions' dictionary
 #   @return q_list  The new mixed questions' list
-def build_mixed_q_list(q_dict):
+def build_mixed_q_list(q_dict, shuffle=True):
     # q_dict is organized like this:
     # { 'multi_direct':   [(['table_2_9'], 'multi', 'direct', {'nb':'int'}),
     #                      (['table_2_9'], 'multi', 'direct', {'nb':'int'})],
@@ -181,7 +181,8 @@ def build_mixed_q_list(q_dict):
     mixed_q_list = []
     q_id_box = [key for key in q_dict.keys()
                 for i in range(len(q_dict[key]))]
-    random.shuffle(q_id_box)
+    if shuffle:
+        random.shuffle(q_id_box)
     for q_id in q_id_box:
         info = q_dict[q_id].pop(0)
         mixed_q_list += [Q_info(q_id, info[1], info[2], info[0], info[3])]
@@ -447,7 +448,7 @@ class X_Generic(X_Structure):
         if self.shuffle:
             for key in q_dict:
                 random.shuffle(q_dict[key])
-        mixed_q_list = build_mixed_q_list(q_dict)
+        mixed_q_list = build_mixed_q_list(q_dict, shuffle=self.shuffle)
         # in case of mental calculation exercises we increase alternation
         if self.shuffle and self.x_id == 'mental_calculation':
             mixed_q_list = increase_alternation(mixed_q_list, 'id')
