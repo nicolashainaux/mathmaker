@@ -177,7 +177,7 @@ def get_modifier(q_type, nb_source):
                   'info_lock': EQUAL_PRODUCTS})
     elif q_type == 'subtr_direct' and nb_source.startswith('intpairs_10'):
         d.update({'diff7atleast': True})
-    elif any(['rectangle' in q_type,
+    elif any(['rectangle' in q_type and q_type != 'fraction_of_a_rectangle',
               q_type.startswith('addi_'), q_type.endswith('_addi'),
               q_type.startswith('subtr_'), q_type.endswith('_subtr')]):
         # __
