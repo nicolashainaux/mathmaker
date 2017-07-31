@@ -41,7 +41,7 @@ from mathmaker.lib.tools.auxiliary_functions \
 
 class structure(object):
 
-    def h(self, **options):
+    def h(self, **kwargs):
         if hasattr(self, 'hint'):
             return "\hfill" + Value("", unit=self.hint)\
                 .into_str(display_SI_unit=True)
@@ -52,267 +52,275 @@ class structure(object):
     def nb_list(self):
         return [getattr(self, 'nb' + str(i + 1)) for i in range(self.nb_nb)]
 
-    def setup(self, arg, shuffle_nbs=True, sort_nbs=False, **options):
-        if arg == 'logging':
-            from mathmaker import settings
-            self.log = settings.output_watcher_logger.debug
-        elif arg == "minimal":
-            self.newline = '\\newline'
-            self.parallel_to = '$\parallel$'
-            self.belongs_to = '$\in$'
-            if 'nb_variant' in options and options['nb_variant'] == 'decimal':
-                options['nb_variant'] = random.choice(['decimal1', 'decimal2'])
+    def _setup_logging(self, **kwargs):
+        from mathmaker import settings
+        self.log = settings.output_watcher_logger.debug
 
-            self.variant = options.get('variant', "default")
-            self.subvariant = options.get('subvariant', "default")
-            self.nb_variant = options.get('nb_variant', "default")
-            self.deci_restriction = ''
-            nbv_chunks = self.nb_variant.split(sep='_')
-            if len(nbv_chunks) == 2:
-                if nbv_chunks[1] in ['+-', '×÷']:
-                    self.deci_restriction += nbv_chunks[1]
-                else:
-                    warnings.warn('Ignored unrecognized option in nb_variant:'
-                                  ' {}'.format(nbv_chunks[1]))
-                self.nb_variant = nbv_chunks[0]
-            self.context = options.get('context', "default")
-            self.picture = XML_BOOLEANS[options.get('picture', "false")]()
-            self.decimal_result = int(options.get('decimal_result', 2))
-            self.allow_extra_digits = int(options.get('allow_extra_digits', 0))
-            self.allow_division_by_decimal = XML_BOOLEANS[
-                options.get('allow_division_by_decimal', "false")]()
+    def _setup_minimal(self, **kwargs):
+        self.newline = '\\newline'
+        self.parallel_to = '$\parallel$'
+        self.belongs_to = '$\in$'
+        if 'nb_variant' in kwargs and kwargs['nb_variant'] == 'decimal':
+            kwargs['nb_variant'] = random.choice(['decimal1', 'decimal2'])
 
-        elif arg == "length_units":
-            if 'unit' in options:
-                self.unit_length = Unit(options['unit'])
+        self.variant = kwargs.get('variant', 'default')
+        self.subvariant = kwargs.get('subvariant', 'default')
+        self.nb_variant = kwargs.get('nb_variant', 'default')
+        self.deci_restriction = ''
+        nbv_chunks = self.nb_variant.split(sep='_')
+        if len(nbv_chunks) == 2:
+            if nbv_chunks[1] in ['+-', '×÷']:
+                self.deci_restriction += nbv_chunks[1]
+            else:
+                warnings.warn('Ignored unrecognized option in nb_variant:'
+                              ' {}'.format(nbv_chunks[1]))
+            self.nb_variant = nbv_chunks[0]
+        self.context = kwargs.get('context', 'default')
+        self.picture = XML_BOOLEANS[kwargs.get('picture', 'false')]()
+        self.decimal_result = int(kwargs.get('decimal_result', 2))
+        self.allow_extra_digits = int(kwargs.get('allow_extra_digits', 0))
+        self.allow_division_by_decimal = XML_BOOLEANS[
+            kwargs.get('allow_division_by_decimal', 'false')]()
+
+    def _setup_length_units(self, **kwargs):
+        if 'unit' in kwargs:
+            self.unit_length = Unit(kwargs['unit'])
+            self.unit_area = Unit(self.unit_length.name, exponent=2)
+            self.length_unit = self.unit_length.name
+        else:
+            if hasattr(self, 'length_unit'):
+                self.unit_length = Unit(self.length_unit)
+                self.unit_area = Unit(self.unit_length.name, exponent=2)
+            elif hasattr(self, 'unit_length'):
+                self.length_unit = self.unit_length.name
+                self.unit_area = Unit(self.unit_length.name, exponent=2)
+            else:
+                length_units_names = copy.deepcopy(COMMON_LENGTH_UNITS)
+                self.unit_length = Unit(random.choice(length_units_names))
                 self.unit_area = Unit(self.unit_length.name, exponent=2)
                 self.length_unit = self.unit_length.name
-            else:
-                if hasattr(self, 'length_unit'):
-                    self.unit_length = Unit(self.length_unit)
-                    self.unit_area = Unit(self.unit_length.name, exponent=2)
-                elif hasattr(self, 'unit_length'):
-                    self.length_unit = self.unit_length.name
-                    self.unit_area = Unit(self.unit_length.name, exponent=2)
-                else:
-                    length_units_names = copy.deepcopy(COMMON_LENGTH_UNITS)
-                    self.unit_length = Unit(random.choice(length_units_names))
-                    self.unit_area = Unit(self.unit_length.name, exponent=2)
-                    self.length_unit = self.unit_length.name
 
-        elif arg == "numbers":
-            nb_list = list(options['nb'])
-            if shuffle_nbs:
-                random.shuffle(nb_list)
-            elif sort_nbs:
-                nb_list = sorted(nb_list)
-            for i in range(len(nb_list)):
-                setattr(self, 'nb' + str(i + 1), Decimal(str(nb_list[i])))
-            self.nb_nb = len(nb_list)
+    def _setup_numbers(self, **kwargs):
+        nb_list = list(kwargs['nb'])
+        if kwargs.get('shuffle_nbs', True):
+            random.shuffle(nb_list)
+        elif kwargs.get('sort_nbs', False):
+            nb_list = sorted(nb_list)
+        for i in range(len(nb_list)):
+            setattr(self, 'nb' + str(i + 1), Decimal(str(nb_list[i])))
+        self.nb_nb = len(nb_list)
 
-        elif arg == "nb_variants":
-            if ((self.nb_variant.startswith('decimal')
-                 and self.deci_restriction != '+-')
-                or options.get('bypass', False)):
-                deci_nb = int(self.nb_variant[-1])  # so, from decimal1 up to 9
-                # In order to ensure we'll have at least one decimal number,
-                # we should try to remove all multiples of 10 from our possible
-                # choices:
-                all_nb_ids = [i + 1
-                              for i in range(self.nb_nb)
-                              if not getattr(self,
-                                             'nb' + str(i + 1)) % 10 == 0]
-                # But if this would lead to remove too many numbers, then
-                # we have to change the extraneous multiples of 10
-                if len(all_nb_ids) < deci_nb:
-                    remaining = list(
-                        set(i + 1 for i in range(self.nb_nb))
-                        - set(all_nb_ids))
-                    while len(all_nb_ids) < min(deci_nb, self.nb_nb):
-                        random.shuffle(remaining)
-                        i = remaining.pop()
-                        setattr(self, 'nb' + str(i),
-                                getattr(self,
-                                        'nb' + str(i))
-                                + random.choice([i for i in range(-4, 5)
-                                                 if i != 0]))
-                        all_nb_ids += [i]
-                chosen_ones = random.sample(all_nb_ids, deci_nb)
-                for i in chosen_ones:
+    def _setup_nb_variants(self, **kwargs):
+        if ((self.nb_variant.startswith('decimal')
+             and self.deci_restriction != '+-')
+            or kwargs.get('bypass', False)):
+            deci_nb = int(self.nb_variant[-1])  # so, from decimal1 up to 9
+            # In order to ensure we'll have at least one decimal number,
+            # we should try to remove all multiples of 10 from our possible
+            # choices:
+            all_nb_ids = [i + 1
+                          for i in range(self.nb_nb)
+                          if not getattr(self,
+                                         'nb' + str(i + 1)) % 10 == 0]
+            # But if this would lead to remove too many numbers, then
+            # we have to change the extraneous multiples of 10
+            if len(all_nb_ids) < deci_nb:
+                remaining = list(
+                    set(i + 1 for i in range(self.nb_nb))
+                    - set(all_nb_ids))
+                while len(all_nb_ids) < min(deci_nb, self.nb_nb):
+                    random.shuffle(remaining)
+                    i = remaining.pop()
                     setattr(self, 'nb' + str(i),
-                            getattr(self, 'nb' + str(i)) / 10)
+                            getattr(self,
+                                    'nb' + str(i))
+                            + random.choice([i for i in range(-4, 5)
+                                             if i != 0]))
+                    all_nb_ids += [i]
+            chosen_ones = random.sample(all_nb_ids, deci_nb)
+            for i in chosen_ones:
+                setattr(self, 'nb' + str(i),
+                        getattr(self, 'nb' + str(i)) / 10)
 
-        elif arg == "division":
-            nb_list = list(options['nb'])
-            self.divisor = self.result = self.dividend = 0
-            self.result_str = self.quotient_str = ""
+    def _setup_division(self, **kwargs):
+        nb_list = list(kwargs['nb'])
+        self.divisor = self.result = self.dividend = 0
+        self.result_str = self.quotient_str = ""
 
-            if '10_100_1000' in options and options['10_100_1000']:
-                self.divisor, self.dividend = nb_list[0], nb_list[1]
-                self.result = Quotient(('+', self.dividend, self.divisor))\
-                    .evaluate()
-            else:
-                self.divisor = nb_list.pop(random.choice([0, 1]))
-                self.result = nb_list.pop()
-                if self.variant[:-1] == 'decimal':
-                    self.result /= 10
-                self.dividend = Product([self.divisor, self.result]).evaluate()
+        if '10_100_1000' in kwargs and kwargs['10_100_1000']:
+            self.divisor, self.dividend = nb_list[0], nb_list[1]
+            self.result = Quotient(('+', self.dividend, self.divisor))\
+                .evaluate()
+        else:
+            self.divisor = nb_list.pop(random.choice([0, 1]))
+            self.result = nb_list.pop()
+            if self.variant[:-1] == 'decimal':
+                self.result /= 10
+            self.dividend = Product([self.divisor, self.result]).evaluate()
 
-            if self.context == "from_area":
-                self.subcontext = "w" if self.result < self.divisor else "l"
+        if self.context == "from_area":
+            self.subcontext = "w" if self.result < self.divisor else "l"
 
-            self.dividend_str = Item(self.dividend).printed
-            self.divisor_str = Item(self.divisor).printed
-            self.result_str = Item(self.result).printed
-            q = Quotient(('+', self.dividend, self.divisor),
-                         use_divide_symbol=True)
-            self.quotient_str = q.printed
+        self.dividend_str = Item(self.dividend).printed
+        self.divisor_str = Item(self.divisor).printed
+        self.result_str = Item(self.result).printed
+        q = Quotient(('+', self.dividend, self.divisor),
+                     use_divide_symbol=True)
+        self.quotient_str = q.printed
 
-        elif arg == "rectangle":
-            if hasattr(self, 'nb1') and hasattr(self, 'nb2'):
-                nb1, nb2 = self.nb1, self.nb2
-            elif 'nb' in options:
-                nb1, nb2 = options['nb'][0], options['nb'][1]
-            else:
-                raise error.ImpossibleAction("Setup a rectangle if no width "
-                                             "nor length have been provided"
-                                             " yet.")
-            if (not hasattr(self, 'unit_length')
-                or not hasattr(self, 'unit_area')):
-                self.setup(self, "units", **options)
+    def _setup_rectangle(self, **kwargs):
+        if hasattr(self, 'nb1') and hasattr(self, 'nb2'):
+            nb1, nb2 = self.nb1, self.nb2
+        elif 'nb' in kwargs:
+            nb1, nb2 = kwargs['nb'][0], kwargs['nb'][1]
+        else:
+            raise error.ImpossibleAction("Setup a rectangle if no width "
+                                         "nor length have been provided"
+                                         " yet.")
+        if (not hasattr(self, 'unit_length')
+            or not hasattr(self, 'unit_area')):
+            self.setup(self, "units", **kwargs)
 
-            # nb1 = Decimal(str(nb1))
-            # nb2 = Decimal(str(nb2))
+        # nb1 = Decimal(str(nb1))
+        # nb2 = Decimal(str(nb2))
 
-            w = Value(min([nb1, nb2]), unit=self.unit_length)
-            l = Value(max([nb1, nb2]), unit=self.unit_length)
+        w = Value(min([nb1, nb2]), unit=self.unit_length)
+        l = Value(max([nb1, nb2]), unit=self.unit_length)
 
-            rectangle_name = "DCBA"
-            if self.picture:
-                rectangle_name = next(shared.four_letters_words_source)
-            self.rectangle = Rectangle([Point(rectangle_name[3], 0, 0),
-                                        3,
-                                        1.5,
-                                        rectangle_name[2],
-                                        rectangle_name[1],
-                                        rectangle_name[0]],
-                                       read_name_clockwise=True)
-            self.rectangle.set_lengths([l, w])
-            self.rectangle.setup_labels([False, False, True, True])
+        rectangle_name = "DCBA"
+        if self.picture:
+            rectangle_name = next(shared.four_letters_words_source)
+        self.rectangle = Rectangle([Point(rectangle_name[3], 0, 0),
+                                    3,
+                                    1.5,
+                                    rectangle_name[2],
+                                    rectangle_name[1],
+                                    rectangle_name[0]],
+                                   read_name_clockwise=True)
+        self.rectangle.set_lengths([l, w])
+        self.rectangle.setup_labels([False, False, True, True])
 
-        elif arg == "square":
-            if hasattr(self, 'nb1'):
-                nb1 = self.nb1
-            elif 'nb' in options:
-                nb1 = options['nb'][0]
-            else:
-                raise error.ImpossibleAction("Setup a square if no side's "
-                                             "length have been provided "
-                                             "yet.")
-            if (not hasattr(self, 'unit_length')
-                or not hasattr(self, 'unit_area')):
+    def _setup_square(self, **kwargs):
+        if hasattr(self, 'nb1'):
+            nb1 = self.nb1
+        elif 'nb' in kwargs:
+            nb1 = kwargs['nb'][0]
+        else:
+            raise error.ImpossibleAction("Setup a square if no side's "
+                                         "length have been provided "
+                                         "yet.")
+        if (not hasattr(self, 'unit_length')
+            or not hasattr(self, 'unit_area')):
+            # __
+            self.setup(self, "units", **kwargs)
+
+        square_name = "DCBA"
+        if self.picture:
+            square_name = next(shared.four_letters_words_source)
+        self.square = Square([Point(square_name[3], 0, 0),
+                             2,
+                             square_name[2],
+                             square_name[1],
+                             square_name[0]],
+                             read_name_clockwise=True)
+        self.square.set_lengths([Value(nb1, unit=self.unit_length)])
+        self.square.setup_labels([False, False, True, False])
+        self.square.set_marks(random.choice(["simple", "double",
+                                             "triple"]))
+
+    def _setup_right_triangle(self, **kwargs):
+        # Too many different possibilities for a Right Triangle,
+        # so the angles|lengths' labels must be set outside of this setup()
+        if (not hasattr(self, 'unit_length')
+            or not hasattr(self, 'unit_area')):
+            self.setup(self, "units", **kwargs)
+
+        rt_name = next(shared.three_letters_words_source)
+        alpha, beta = next(shared.angle_ranges_source)
+        rotation_angle = alpha + random.choice(range(beta - alpha))
+        self.right_triangle = RightTriangle(
+            ((rt_name[0], rt_name[1], rt_name[2]),
+             {'leg0': Decimal(str(random.choice(range(20, 40)) / 10)),
+              'leg1': Decimal(str(random.choice(range(20, 40)) / 10))}),
+            rotate_around_isobarycenter=rotation_angle)
+
+    def _setup_intercept_theorem_figure(self, **kwargs):
+        butterfly = kwargs.get('butterfly', False)
+        set_lengths = kwargs.get('set_lengths', True)
+        if set_lengths:
+            if not all([hasattr(self, 'nb1'), hasattr(self, 'nb2'),
+                        hasattr(self, 'nb3'), hasattr(self, 'nb4')]):
                 # __
-                self.setup(self, "units", **options)
+                raise error.ImpossibleAction("Setup an intercept theorem "
+                                             "figure without a "
+                                             "coefficient and 3 other "
+                                             "lengths provided.")
+        points_names = next(shared.five_letters_words_source)
+        if butterfly:
+            points_names = list(rotate(points_names, -1))
+            (points_names[0], points_names[1]) = (points_names[1],
+                                                  points_names[0])
+            points_names = ''.join(points_names)
+        else:
+            points_names = rotate(points_names, random.choice(range(5)))
+        alpha, beta = next(shared.angle_ranges_source)
+        rotation_angle = alpha + random.choice(range(beta - alpha))
+        self.figure = InterceptTheoremConfiguration(
+            points_names=points_names,
+            build_ratio=random.choice(range(25, 75)) / 100,
+            sketch=False,
+            butterfly=butterfly,
+            build_dimensions={
+                False: {'side0': Decimal('5'),
+                        'angle1':
+                        Decimal(str(random.choice(range(45, 120)))),
+                        'side1':
+                        Decimal(str(random.choice(range(20, 60)) / 10))},
+                True: {'side0': Decimal('4'),
+                       'angle1':
+                       Decimal(str(random.choice(range(55, 110)))),
+                       'side1':
+                       Decimal(str(random.choice(range(15, 50)) / 10))}
+            }[butterfly],
+            rotate_around_isobarycenter=rotation_angle)
 
-            square_name = "DCBA"
-            if self.picture:
-                square_name = next(shared.four_letters_words_source)
-            self.square = Square([Point(square_name[3], 0, 0),
-                                 2,
-                                 square_name[2],
-                                 square_name[1],
-                                 square_name[0]],
-                                 read_name_clockwise=True)
-            self.square.set_lengths([Value(nb1, unit=self.unit_length)])
-            self.square.setup_labels([False, False, True, False])
-            self.square.set_marks(random.choice(["simple", "double",
-                                                 "triple"]))
+        if set_lengths:
+            self.figure.set_lengths([self.nb2, self.nb3, self.nb4],
+                                    Value(self.nb1))
+        self.figure.side[2].invert_length_name()
+        self.figure.small[2].invert_length_name()
+        self.point0_name = self.figure.point[0].name
+        self.point1_name = self.figure.point[1].name
+        self.main_vertex_name = self.figure.vertex[0].name
+        self.vertex1_name = self.figure.vertex[1].name
+        self.vertex2_name = self.figure.vertex[2].name
+        self.side0_length_name = self.figure.side[0].length_name
+        self.small0_length_name = self.figure.small[0].length_name
+        self.chunk0_length_name = self.figure.chunk[0].length_name
+        self.side0_length = str(self.figure.side[0].length)
+        self.small0_length = str(self.figure.small[0].length)
+        self.chunk0_length = str(self.figure.chunk[0].length)
+        self.side1_length_name = self.figure.side[2].length_name
+        self.small1_length_name = self.figure.small[2].length_name
+        self.chunk1_length_name = self.figure.chunk[1].length_name
+        self.side1_length = str(self.figure.side[2].length)
+        self.small1_length = str(self.figure.small[2].length)
+        self.chunk1_length = str(self.figure.chunk[1].length)
 
-        elif arg == 'right_triangle':
-            # Too many different possibilities for a Right Triangle,
-            # so the angles|lengths' labels must be set outside of this setup()
-            if (not hasattr(self, 'unit_length')
-                or not hasattr(self, 'unit_area')):
-                self.setup(self, "units", **options)
+    def _setup_mini_problem_wording(self, **kwargs):
+        self.wording = _(shared.mini_problems_wordings_source
+                         .next(q_id=kwargs['q_id'],
+                               nb1_to_check=self.nb1,
+                               nb2_to_check=self.nb2))
+        setup_wording_format_of(self)
 
-            rt_name = next(shared.three_letters_words_source)
-            alpha, beta = next(shared.angle_ranges_source)
-            rotation_angle = alpha + random.choice(range(beta - alpha))
-            self.right_triangle = RightTriangle(
-                ((rt_name[0], rt_name[1], rt_name[2]),
-                 {'leg0': Decimal(str(random.choice(range(20, 40)) / 10)),
-                  'leg1': Decimal(str(random.choice(range(20, 40)) / 10))}),
-                rotate_around_isobarycenter=rotation_angle)
-
-        elif arg == 'intercept_theorem_figure':
-            butterfly = options.get('butterfly', False)
-            set_lengths = options.get('set_lengths', True)
-            if set_lengths:
-                if not all([hasattr(self, 'nb1'), hasattr(self, 'nb2'),
-                            hasattr(self, 'nb3'), hasattr(self, 'nb4')]):
-                    # __
-                    raise error.ImpossibleAction("Setup an intercept theorem "
-                                                 "figure without a "
-                                                 "coefficient and 3 other "
-                                                 "lengths provided.")
-            points_names = next(shared.five_letters_words_source)
-            if butterfly:
-                points_names = list(rotate(points_names, -1))
-                (points_names[0], points_names[1]) = (points_names[1],
-                                                      points_names[0])
-                points_names = ''.join(points_names)
-            else:
-                points_names = rotate(points_names, random.choice(range(5)))
-            alpha, beta = next(shared.angle_ranges_source)
-            rotation_angle = alpha + random.choice(range(beta - alpha))
-            self.figure = InterceptTheoremConfiguration(
-                points_names=points_names,
-                build_ratio=random.choice(range(25, 75)) / 100,
-                sketch=False,
-                butterfly=butterfly,
-                build_dimensions={
-                    False: {'side0': Decimal('5'),
-                            'angle1':
-                            Decimal(str(random.choice(range(45, 120)))),
-                            'side1':
-                            Decimal(str(random.choice(range(20, 60)) / 10))},
-                    True: {'side0': Decimal('4'),
-                           'angle1':
-                           Decimal(str(random.choice(range(55, 110)))),
-                           'side1':
-                           Decimal(str(random.choice(range(15, 50)) / 10))}
-                }[butterfly],
-                rotate_around_isobarycenter=rotation_angle)
-
-            if set_lengths:
-                self.figure.set_lengths([self.nb2, self.nb3, self.nb4],
-                                        Value(self.nb1))
-            self.figure.side[2].invert_length_name()
-            self.figure.small[2].invert_length_name()
-            self.point0_name = self.figure.point[0].name
-            self.point1_name = self.figure.point[1].name
-            self.main_vertex_name = self.figure.vertex[0].name
-            self.vertex1_name = self.figure.vertex[1].name
-            self.vertex2_name = self.figure.vertex[2].name
-            self.side0_length_name = self.figure.side[0].length_name
-            self.small0_length_name = self.figure.small[0].length_name
-            self.chunk0_length_name = self.figure.chunk[0].length_name
-            self.side0_length = str(self.figure.side[0].length)
-            self.small0_length = str(self.figure.small[0].length)
-            self.chunk0_length = str(self.figure.chunk[0].length)
-            self.side1_length_name = self.figure.side[2].length_name
-            self.small1_length_name = self.figure.small[2].length_name
-            self.chunk1_length_name = self.figure.chunk[1].length_name
-            self.side1_length = str(self.figure.side[2].length)
-            self.small1_length = str(self.figure.small[2].length)
-            self.chunk1_length = str(self.figure.chunk[1].length)
-
-        elif arg == 'mini_problem_wording':
-            self.wording = _(shared.mini_problems_wordings_source
-                             .next(q_id=options['q_id'],
-                                   nb1_to_check=self.nb1,
-                                   nb2_to_check=self.nb2))
-            setup_wording_format_of(self)
+    def setup(self, arg, **kwargs):
+        if type(arg) is not str:
+            raise TypeError('arg must be a str')
+        try:
+            getattr(self, '_setup_' + arg)(**kwargs)
+        except AttributeError:
+            raise ValueError('Cannot setup \'{}\''.format(arg))
 
     def dbg_info(self, msg, *numbers, letters=alphabet):
         """

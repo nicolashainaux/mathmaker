@@ -29,3 +29,14 @@ def test_deci_restriction():
     o = submodule.structure()
     with pytest.warns(UserWarning):
         o.setup('minimal', nb_variant='decimal1_-')
+
+
+def test_setup_exceptions():
+    """Check if exceptions are raised with an incorrect setup argument."""
+    o = submodule.structure()
+    with pytest.raises(TypeError) as excinfo:
+        o.setup(8)
+    assert str(excinfo.value) == 'arg must be a str'
+    with pytest.raises(ValueError) as excinfo:
+        o.setup('inexistent_module')
+    assert str(excinfo.value) == 'Cannot setup \'inexistent_module\''
