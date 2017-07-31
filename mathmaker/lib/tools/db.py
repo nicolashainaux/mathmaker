@@ -20,6 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from decimal import Decimal
+
 from mathmaker import settings
 from mathmaker.lib import shared
 
@@ -52,6 +54,24 @@ class source(object):
             shared.db.execute("UPDATE "
                               + kwargs['union']['table_name']
                               + " SET drawDate = 0;")
+        if not len(tuple(shared.db.execute(self._cmd(**kwargs)))):
+            if 'nb1_min' in kwargs and 'nb1_max' in kwargs:
+                kwargs.update({'not_in': [str(n)
+                                          for n in kwargs['not_in']
+                                          if not (Decimal(kwargs['nb1_min'])
+                                                  <= Decimal(n)
+                                                  <= Decimal(kwargs['nb1_max'])
+                                                  )]
+                               })
+            if 'nb2_min' in kwargs and 'nb2_max' in kwargs:
+                kwargs.update({'not_in': [str(n)
+                                          for n in kwargs['not_in']
+                                          if not (Decimal(kwargs['nb2_min'])
+                                                  <= Decimal(n)
+                                                  <= Decimal(kwargs['nb2_max'])
+                                                  )]
+                               })
+        return kwargs
 
     ##
     #   @brief  Creates the "SELECT ...,...,... FROM ...." part of the query
@@ -162,8 +182,8 @@ class source(object):
         log.debug(cmd)
         qr = tuple(shared.db.execute(cmd))
         if not len(qr):
-            self._reset(**kwargs)
-            qr = tuple(shared.db.execute(cmd))
+            kwargs = self._reset(**kwargs)
+            qr = tuple(shared.db.execute(self._cmd(**kwargs)))
         return qr
 
     ##
