@@ -559,10 +559,7 @@ automatically increments the counter").format(cmd_name="exercise",
         if not isinstance(drawable_arg, Drawable):
             raise error.WrongArgument(str(drawable_arg), 'a Drawable')
 
-        if self.create_pic_files:
-            drawable_arg.into_pic(**options)
-        else:
-            drawable_arg.into_pic(create_pic_files=False, **options)
+        drawable_arg.into_pic(create_pic_file=self.create_pic_files)
 
         s = "1"
         if 'scale' in options:

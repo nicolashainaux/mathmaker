@@ -149,22 +149,20 @@ class Drawable(NamedObject):
     #   @brief Creates the euk string to put in the file
     #   @param options Any options
     #   @return The string to put in the picture file
-    def into_euk(self, **options):
+    def into_euk(self):
         raise error.MethodShouldBeRedefined(self, 'into_euk')
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Creates the picture of the drawable object
     #   @return Nothing, just creates the picture file
-    def into_pic(self, **options):
+    def into_pic(self, create_pic_file=True):
         hc = header_comment.generate('eukleides')
 
-        if 'create_pic_files' in options and not options['create_pic_files']:
-            pass
-        else:
+        if create_pic_file:
             euk_path = settings.outputdir + self.euk_filename
             with open(euk_path, 'w') as f:
-                f.write(hc + self.into_euk(**options))
+                f.write(hc + self.into_euk())
             # todo: remove the options when they are corrected in euktoeps
             subprocess.Popen([settings.euktoeps,
                               '-i',
