@@ -346,3 +346,681 @@ def test_into_euk5():
         '  c3.d3\n' \
         '  (A.B.C.D)\n' \
         'end\n'
+
+
+def test_into_euk6():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('5'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×5', fill='5×5')
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 5.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(5, 0)\n' \
+        'C = point(5, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 4)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 4)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 4)\n' \
+        'a4 = point(4, 0)\n' \
+        'b4 = point(4, 4)\n' \
+        'c1 = point(5, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(5, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(5, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        '\n' \
+        'draw\n' \
+        '  [A.B.C.D] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  a4.b4\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk7():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('5'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×5', fill='3×4', startvertex=0)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 5.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(5, 0)\n' \
+        'C = point(5, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 4)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 4)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 4)\n' \
+        'a4 = point(4, 0)\n' \
+        'b4 = point(4, 4)\n' \
+        'c1 = point(5, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(5, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(5, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        'i23 = point(4, 3)\n' \
+        '\n' \
+        'draw\n' \
+        '  [A.a4.i23.d3] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  a4.b4\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk8():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('5'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×5', fill='3×4', startvertex=1)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 5.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(5, 0)\n' \
+        'C = point(5, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 4)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 4)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 4)\n' \
+        'a4 = point(4, 0)\n' \
+        'b4 = point(4, 4)\n' \
+        'c1 = point(5, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(5, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(5, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        'i20 = point(1, 3)\n' \
+        '\n' \
+        'draw\n' \
+        '  [a1.B.c3.i20] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  a4.b4\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk9():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('5'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×5', fill='3×4', startvertex=2)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 5.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(5, 0)\n' \
+        'C = point(5, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 4)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 4)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 4)\n' \
+        'a4 = point(4, 0)\n' \
+        'b4 = point(4, 4)\n' \
+        'c1 = point(5, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(5, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(5, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        'i00 = point(1, 1)\n' \
+        '\n' \
+        'draw\n' \
+        '  [i00.c1.C.b1] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  a4.b4\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk10():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('5'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×5', fill='3×4', startvertex=3)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 5.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(5, 0)\n' \
+        'C = point(5, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 4)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 4)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 4)\n' \
+        'a4 = point(4, 0)\n' \
+        'b4 = point(4, 4)\n' \
+        'c1 = point(5, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(5, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(5, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        'i03 = point(4, 1)\n' \
+        '\n' \
+        'draw\n' \
+        '  [d1.i03.b4.D] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  a4.b4\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk11():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('5'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×5', fill='2×3', startvertex=0)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 5.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(5, 0)\n' \
+        'C = point(5, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 4)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 4)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 4)\n' \
+        'a4 = point(4, 0)\n' \
+        'b4 = point(4, 4)\n' \
+        'c1 = point(5, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(5, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(5, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        'i12 = point(3, 2)\n' \
+        '\n' \
+        'draw\n' \
+        '  [A.a3.i12.d2] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  a4.b4\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk12():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('5'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×5', fill='3×2', startvertex=0)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 5.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(5, 0)\n' \
+        'C = point(5, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 4)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 4)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 4)\n' \
+        'a4 = point(4, 0)\n' \
+        'b4 = point(4, 4)\n' \
+        'c1 = point(5, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(5, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(5, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        'i21 = point(2, 3)\n' \
+        '\n' \
+        'draw\n' \
+        '  [A.a2.i21.d3] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  a4.b4\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk13():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('5'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×5', fill='1×13', startvertex=0)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 5.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(5, 0)\n' \
+        'C = point(5, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 4)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 4)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 4)\n' \
+        'a4 = point(4, 0)\n' \
+        'b4 = point(4, 4)\n' \
+        'c1 = point(5, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(5, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(5, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        'i12 = point(3, 2)\n' \
+        'i22 = point(3, 3)\n' \
+        '\n' \
+        'draw\n' \
+        '  [A.B.c2.i12.i22.d3] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  a4.b4\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk14():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('5'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×5', fill='1×13', startvertex=1)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 5.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(5, 0)\n' \
+        'C = point(5, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 4)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 4)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 4)\n' \
+        'a4 = point(4, 0)\n' \
+        'b4 = point(4, 4)\n' \
+        'c1 = point(5, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(5, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(5, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        'i00 = point(1, 1)\n' \
+        'i01 = point(2, 1)\n' \
+        '\n' \
+        'draw\n' \
+        '  [B.C.b2.i01.i00.a1] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  a4.b4\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk15():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('5'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×5', fill='1×13', startvertex=2)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 5.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(5, 0)\n' \
+        'C = point(5, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 4)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 4)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 4)\n' \
+        'a4 = point(4, 0)\n' \
+        'b4 = point(4, 4)\n' \
+        'c1 = point(5, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(5, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(5, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        'i01 = point(2, 1)\n' \
+        'i11 = point(2, 2)\n' \
+        '\n' \
+        'draw\n' \
+        '  [D.C.c1.i01.i11.d2] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  a4.b4\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk16():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('5'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×5', fill='1×13', startvertex=3)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 5.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(5, 0)\n' \
+        'C = point(5, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 4)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 4)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 4)\n' \
+        'a4 = point(4, 0)\n' \
+        'b4 = point(4, 4)\n' \
+        'c1 = point(5, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(5, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(5, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        'i22 = point(3, 3)\n' \
+        'i23 = point(4, 3)\n' \
+        '\n' \
+        'draw\n' \
+        '  [D.A.a3.i22.i23.b4] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  a4.b4\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk17():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('4'), Decimal('1'), 'B', 'C', 'D'],
+                       layout='1×4', fill='1×3', startvertex=0)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 4.6, 1.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(4, 0)\n' \
+        'C = point(4, 1)\n' \
+        'D = point(0, 1)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 1)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 1)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 1)\n' \
+        '\n' \
+        'draw\n' \
+        '  [A.a3.b3.D] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk18():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('4'), Decimal('1'), 'B', 'C', 'D'],
+                       layout='1×4', fill='1×3', startvertex=1)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 4.6, 1.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(4, 0)\n' \
+        'C = point(4, 1)\n' \
+        'D = point(0, 1)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 1)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 1)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 1)\n' \
+        '\n' \
+        'draw\n' \
+        '  [a1.B.C.b1] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk19():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('4'), Decimal('1'), 'B', 'C', 'D'],
+                       layout='1×4', fill='1×3', startvertex=2)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 4.6, 1.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(4, 0)\n' \
+        'C = point(4, 1)\n' \
+        'D = point(0, 1)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 1)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 1)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 1)\n' \
+        '\n' \
+        'draw\n' \
+        '  [a1.B.C.b1] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk20():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('4'), Decimal('1'), 'B', 'C', 'D'],
+                       layout='1×4', fill='1×3', startvertex=3)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 4.6, 1.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(4, 0)\n' \
+        'C = point(4, 1)\n' \
+        'D = point(0, 1)\n' \
+        '\n' \
+        'a1 = point(1, 0)\n' \
+        'b1 = point(1, 1)\n' \
+        'a2 = point(2, 0)\n' \
+        'b2 = point(2, 1)\n' \
+        'a3 = point(3, 0)\n' \
+        'b3 = point(3, 1)\n' \
+        '\n' \
+        'draw\n' \
+        '  [A.a3.b3.D] lightgray\n' \
+        '  a1.b1\n' \
+        '  a2.b2\n' \
+        '  a3.b3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk21():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('1'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×1', fill='3×1', startvertex=0)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 1.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(1, 0)\n' \
+        'C = point(1, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'c1 = point(1, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(1, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(1, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        '\n' \
+        'draw\n' \
+        '  [A.B.c3.d3] lightgray\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk22():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('1'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×1', fill='3×1', startvertex=1)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 1.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(1, 0)\n' \
+        'C = point(1, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'c1 = point(1, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(1, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(1, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        '\n' \
+        'draw\n' \
+        '  [A.B.c3.d3] lightgray\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk23():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('1'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×1', fill='3×1', startvertex=2)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 1.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(1, 0)\n' \
+        'C = point(1, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'c1 = point(1, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(1, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(1, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        '\n' \
+        'draw\n' \
+        '  [d1.c1.C.D] lightgray\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
+
+
+def test_into_euk24():
+    rg = RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                        Decimal('1'), Decimal('4'), 'B', 'C', 'D'],
+                       layout='4×1', fill='3×1', startvertex=3)
+    assert rg.into_euk() == \
+        'box -0.6, -0.6, 1.6, 4.6\n' \
+        '\n' \
+        'A = point(0, 0)\n' \
+        'B = point(1, 0)\n' \
+        'C = point(1, 4)\n' \
+        'D = point(0, 4)\n' \
+        '\n' \
+        'c1 = point(1, 1)\n' \
+        'd1 = point(0, 1)\n' \
+        'c2 = point(1, 2)\n' \
+        'd2 = point(0, 2)\n' \
+        'c3 = point(1, 3)\n' \
+        'd3 = point(0, 3)\n' \
+        '\n' \
+        'draw\n' \
+        '  [d1.c1.C.D] lightgray\n' \
+        '  c1.d1\n' \
+        '  c2.d2\n' \
+        '  c3.d3\n' \
+        '  (A.B.C.D)\n' \
+        'end\n'
