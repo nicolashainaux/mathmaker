@@ -171,7 +171,8 @@ def match_qtype_sourcenb(q_type: str, source_nb: str, variant: str):
 #          certain questions.
 def get_modifier(q_type, nb_source):
     d = {}
-    if q_type in ['multi_reversed', 'fraction_of_rectangle']:
+    if (q_type in ['multi_reversed', 'fraction_of_a_rectangle']
+        and nb_source.startswith('intpairs')):
         d.update({'lock_equal_products': True,
                   'info_lock': EQUAL_PRODUCTS})
     elif q_type == 'subtr_direct' and nb_source.startswith('intpairs_10'):
