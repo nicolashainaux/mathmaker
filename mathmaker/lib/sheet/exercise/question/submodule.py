@@ -30,7 +30,8 @@ from mathmaker.lib.core.root_calculus import Unit, Value
 from mathmaker.lib.core.base_calculus import Product, Quotient, Item
 from mathmaker.lib.core.base_geometry import Point
 from mathmaker.lib.core.geometry import (Rectangle, Square, RightTriangle,
-                                         InterceptTheoremConfiguration)
+                                         InterceptTheoremConfiguration,
+                                         RectangleGrid)
 from mathmaker.lib import error
 from mathmaker.lib import shared
 from mathmaker.lib.common.cst import COMMON_LENGTH_UNITS, XML_BOOLEANS
@@ -313,6 +314,17 @@ class structure(object):
                                nb1_to_check=self.nb1,
                                nb2_to_check=self.nb2))
         setup_wording_format_of(self)
+
+    def _setup_rectangle_grid(self, **kwargs):
+        rows = str(min(self.nb3, self.nb4))
+        cols = str(max(self.nb3, self.nb4))
+        frows = str(min(self.nb1, self.nb2))
+        fcols = str(max(self.nb1, self.nb2))
+        self.rectangle_grid = \
+            RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
+                           Decimal(cols), Decimal(rows), 'B', 'C', 'D'],
+                          layout='×'.join([rows, cols]),
+                          fill='×'.join([frows, fcols]))
 
     def setup(self, arg, **kwargs):
         if type(arg) is not str:
