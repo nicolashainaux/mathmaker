@@ -393,12 +393,16 @@ def prime_factors(n):
 
     Taken from https://stackoverflow.com/a/412942/3926735.
     """
+    try:
+        n = int(n)
+    except ValueError:
+        raise TypeError('n must be an int')
     factors = []
     d = 2
     while n > 1:
         while n % d == 0:
             factors.append(d)
-            n /= d
+            n //= d
         d = d + 1
         if d * d > n:
             if n > 1:

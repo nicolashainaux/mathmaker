@@ -20,6 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import pytest
+
 from mathmaker.lib.maths_lib import ten_power_gcd, prime_factors
 
 
@@ -32,6 +34,13 @@ def test_ten_power_gcd():
     assert ten_power_gcd(21000, 400) == 100
 
 
+def test_prime_factors_exception():
+    """Checks prime_factors() raises exception on wrong argument."""
+    with pytest.raises(TypeError) as excinfo:
+        prime_factors('a')
+    assert str(excinfo.value) == 'n must be an int'
+
+
 def test_prime_factors():
     """Checks prime_factors() results."""
     assert prime_factors(1) == []
@@ -42,3 +51,4 @@ def test_prime_factors():
     assert prime_factors(16) == [2, 2, 2, 2]
     assert prime_factors(31) == [31]
     assert prime_factors(16065) == [3, 3, 3, 5, 7, 17]
+    assert all(type(n) is int for n in prime_factors(210))
