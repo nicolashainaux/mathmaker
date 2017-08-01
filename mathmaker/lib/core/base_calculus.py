@@ -38,6 +38,7 @@ from mathmaker.lib.tools.auxiliary_functions import (is_integer, is_natural,
 from mathmaker.lib.common import alphabet
 from mathmaker.lib.maths_lib import (sign_of_product, gcd, pupil_gcd,
                                      lcm_of_the_list, is_even, is_uneven,
+                                     prime_factors,
                                      ZERO_POLYNOMIAL_DEGREE)
 from mathmaker.lib.common.cst import (DEFAULT, RANDOMLY, NUMERIC, LITERALS,
                                       OTHERS, XML_BOOLEANS)
@@ -3300,6 +3301,32 @@ class Fraction(Quotient):
                     return final_numerator
         else:
             return Fraction((final_sign, final_numerator, final_denominator))
+
+    def reduced_by(self, n, ignore_1_denominator=False):
+        """Divide numerator and denominator by n."""
+        import sys
+        sys.stderr.write('\ntype(num eval()) is {}'
+                         '\ntype(deno eval()) is {}'
+                         '\ntype(n) is {}'
+                         .format(str(type(self.numerator.evaluate())),
+                                 str(type(self.denominator.evaluate())),
+                                 str(type(n))))
+        return Fraction((self.sign,
+                         Item(self.numerator.evaluate() / n),
+                         Item(self.denominator.evaluate() / n)),
+                        ignore_1_denominator=ignore_1_denominator)
+
+    def minimally_reduced(self, ignore_1_denominator=False):
+        """Return the simplest reduction step possible"""
+        temp = gcd(self.numerator.evaluate(), self.denominator.evaluate())
+        if temp == 1:
+            return None
+        # lowest prime common divisor
+        lpcd = prime_factors(temp)[0]
+        return Fraction((self.sign,
+                         Item(self.numerator.evaluate() / lpcd),
+                         Item(self.denominator.evaluate() / lpcd)),
+                        ignore_1_denominator=ignore_1_denominator)
 
     # --------------------------------------------------------------------------
     ##
