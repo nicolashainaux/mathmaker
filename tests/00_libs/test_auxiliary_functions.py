@@ -26,7 +26,7 @@ from decimal import Decimal
 from mathmaker.lib.tools.auxiliary_functions import \
     (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
      move_digits_to, split_nb, is_power_of_10, digits_nb, remove_digits_from,
-     fix_digits, parse_layout_descriptor)
+     fix_digits, parse_layout_descriptor, fix_math_style2_fontsize)
 
 
 def test_check_unique_letters_words():
@@ -276,3 +276,13 @@ def test_parse_layout_descriptor():
     assert parse_layout_descriptor('2×3', sep=['x', '×']) == (2, 3)
     assert parse_layout_descriptor('4×5') == (4, 5)
     assert parse_layout_descriptor('6×7', special_row_chars=['?']) == (6, 7)
+
+
+def test_fix_math_style2_fontsize():
+    """Test fix_math_style2_fontsize() in several cases."""
+    assert fix_math_style2_fontsize('$ \\frac{\\text{6}}{\\text{20}} $ '
+                                    '(or $ \\frac{\\text{3}}{\\text{10}} $) ')\
+        == '\Large{$ \\frac{\\text{6}}{\\text{20}} $}' \
+           '\\normalsize{ (or }' \
+           '\Large{$ \\frac{\\text{3}}{\\text{10}} $}' \
+           '\\normalsize{) }'

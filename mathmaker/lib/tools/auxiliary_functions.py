@@ -24,6 +24,7 @@
 import copy
 import warnings
 import random
+import re
 from decimal import Decimal, ROUND_DOWN
 
 
@@ -336,3 +337,26 @@ def parse_layout_descriptor(d, sep=None, special_row_chars=None,
     if ncol < min_col:
         raise ValueError('ncol must be greater than ' + str(min_col))
     return nrow, ncol
+
+
+def fix_math_style2_fontsize(text, mathsize='\Large',
+                             normalsize='\\normalsize'):
+    """
+    Wrap any $ LaTex math expression $ in another fontsize.
+
+    :param mathsize: the size the math expressions will be (same as LaTeX
+                     fontsizes, including \ at start)
+    :type mathsize: str
+
+    :param normalsize: the size the rest of the text will be (same as LaTeX
+                       fontsizes, including \ at start)
+    :type normalsize: str
+    :rtype: str
+    """
+    p = re.compile(r'(\$[^\$]+\$)')
+    for match in p.split(text):
+        if (match != '' and not match.startswith('$')
+            and not match.endswith('$')):
+            text = text.replace(match, normalsize + '{' + match + '}')
+    text = p.sub(mathsize + r'{\1}', text)
+    return text
