@@ -71,9 +71,16 @@ def translate_int_pairs_tag(tag):
         tag = 'multiplesof' + str(n) + r
 
     if tag.startswith('intpairs_'):
-        n1, n2 = tag[9:].split(sep='to')
-        d = {'nb1_min': n1, 'nb1_max': n2,
-             'nb2_min': n1, 'nb2_max': n2}
+        if '×' not in tag:
+            n1, n2 = tag[9:].split(sep='to')
+            d = {'nb1_min': n1, 'nb1_max': n2,
+                 'nb2_min': n1, 'nb2_max': n2}
+        else:
+            nb1_part, nb2_part = tag.replace('intpairs_', '').split(sep='×')
+            min1, max1 = nb1_part.split(sep='to')
+            min2, max2 = nb2_part.split(sep='to')
+            d = {'nb1_min': min1, 'nb1_max': max1,
+                 'nb2_min': min2, 'nb2_max': max2}
     elif tag.startswith('multiplesof'):
         N, r = tag[11:].split(sep='_')
         mini, maxi = r.split(sep='to')

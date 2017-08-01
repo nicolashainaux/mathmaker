@@ -29,6 +29,7 @@ from intspan.core import ParseError
 
 from mathmaker.lib import shared, error
 from mathmaker.lib.common import alphabet
+from mathmaker.lib.maths_lib import coprimes_to
 from .X_Structure import X_Structure
 from . import question
 from .question import Q_Generic
@@ -279,7 +280,16 @@ def get_nb_sources_from_question_info(q_i):
     extra_infos = {'merge_sources': False}
     questions_sources = q_i.nb_source
     if len(q_i.nb_source) == 1:
-        if q_i.nb_source[0].startswith('inttriplets_'):
+        if q_i.nb_source[0].startswith('properfraction'):
+            if '×' not in q_i.nb_source[0]:
+                # No multiplicative coefficient is equivalent to a 1
+                chunks = q_i.nb_source[0].split(sep='_')
+                q_i.nb_source[0] = '_'.join([chunks[0], '1to1×', chunks[1]])
+            bounds = q_i.nb_source[0].split(sep='_')[1]
+            questions_sources = ['intpairs_' + bounds, 'intpairs_' + bounds]
+            extra_infos.update({'merge_sources': True,
+                                'coprime': True})
+        elif q_i.nb_source[0].startswith('inttriplets_'):
             chunks = q_i.nb_source[0].split(sep='_')
             if not len(chunks) >= 2:
                 raise ValueError('Incorrect numbers\' source value in xml '
@@ -466,6 +476,7 @@ class X_Generic(X_Structure):
         self.questions_list = []
         last_draw = [0, 0]
         numbering = numbering_device(self.q_numbering)
+        import sys
         for q in mixed_q_list:
             preprocess_variant(q)
             (nbsources_xkw_list, extra_infos) = \
@@ -473,12 +484,32 @@ class X_Generic(X_Structure):
             nb_to_use = tuple()
             common_nb = None
             for (i, (nb_source, xkw)) in enumerate(nbsources_xkw_list):
+                # Handle all nb sources for ONE question
                 if i == 1 and extra_infos['merge_sources']:
-                    second_couple_drawn = shared.mc_source\
-                        .next(nb_source,
-                              either_nb1_nb2_in=last_draw,
-                              **question.get_modifier(q.id, nb_source),
-                              **xkw)
+                    if extra_infos.get('coprime', False):
+                        lb2, hb2 = nb_source.split(sep='×')[1].split(sep='to')
+                        lb2, hb2 = int(lb2), int(hb2)
+                        span = [i + lb2 for i in range(hb2 - lb2)]
+                        sys.stderr.write('\nspan: ' + str(span) + '\n')
+                        sys.stderr.write('\nlast_draw: ' + str(last_draw)
+                                         + '\n')
+                        coprimes = [str(n)
+                                    for n in coprimes_to(int(last_draw[-1]),
+                                                         span)]
+                        second_couple_drawn = shared.mc_source\
+                            .next(nb_source,
+                                  nb1=last_draw[0],
+                                  nb2_in=coprimes,
+                                  **question.get_modifier(q.id, nb_source),
+                                  **xkw)
+                        sys.stderr.write('\n2d drawn: '
+                                         + str(second_couple_drawn) + '\n')
+                    else:
+                        second_couple_drawn = shared.mc_source\
+                            .next(nb_source,
+                                  either_nb1_nb2_in=last_draw,
+                                  **question.get_modifier(q.id, nb_source),
+                                  **xkw)
                     common_nb = get_common_nb_from_pairs_pair(
                         (nb_to_use, second_couple_drawn))
                     nb_to_use = merge_pair_to_tuple(nb_to_use,
@@ -509,12 +540,22 @@ class X_Generic(X_Structure):
                                                   .get_modifier(
                                                       q.id, nb_source),
                                                   **xkw)
+                    sys.stderr.write('\n1st drawn: ' + str(drawn) + '\n')
                     if isinstance(drawn, int):
                         nb_to_use += (drawn, )
                     else:
                         nb_to_use += drawn
-                last_draw = [str(n) for n in set(nb_to_use)
+                sys.stderr.write('\nnb_to_use: ' + str(nb_to_use)
+                                 + '\n')
+                last_draw = [str(n)
+                             for n in set(nb_to_use)
                              if (isinstance(n, int) or isinstance(n, str))]
+                try:
+                    [int(elt) for elt in last_draw]
+                except ValueError:
+                    pass
+                else:
+                    last_draw = sorted(last_draw, key=int)
                 if nb_source in ['decimal_and_10_100_1000_for_divi',
                                  'decimal_and_10_100_1000_for_multi']:
                     # __
