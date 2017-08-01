@@ -54,7 +54,8 @@ class source(object):
             shared.db.execute("UPDATE "
                               + kwargs['union']['table_name']
                               + " SET drawDate = 0;")
-        if not len(tuple(shared.db.execute(self._cmd(**kwargs)))):
+        if (not len(tuple(shared.db.execute(self._cmd(**kwargs))))
+            and 'not_in' in kwargs):
             if 'nb1_min' in kwargs and 'nb1_max' in kwargs:
                 kwargs.update({'not_in': [str(n)
                                           for n in kwargs['not_in']
