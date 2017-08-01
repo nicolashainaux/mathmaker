@@ -409,3 +409,16 @@ def prime_factors(n):
                 factors.append(n)
             break
     return factors
+
+
+def coprimes_to(n, span):
+    """
+    List numbers coprime to n inside provided span.
+
+    :param n: integer number
+    :type n: int
+    :param span: a list of integer numbers
+    :type span: list
+    :rtype: list
+    """
+    return [x for x in span if gcd(n, x) == 1]

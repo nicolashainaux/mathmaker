@@ -22,7 +22,7 @@
 
 import pytest
 
-from mathmaker.lib.maths_lib import ten_power_gcd, prime_factors
+from mathmaker.lib.maths_lib import ten_power_gcd, prime_factors, coprimes_to
 
 
 def test_ten_power_gcd():
@@ -52,3 +52,12 @@ def test_prime_factors():
     assert prime_factors(31) == [31]
     assert prime_factors(16065) == [3, 3, 3, 5, 7, 17]
     assert all(type(n) is int for n in prime_factors(210))
+
+
+def test_coprimes_to():
+    """Checks coprimes_to() results."""
+    assert coprimes_to(9, [i + 1 for i in range(12)]) == [1, 2, 4, 5, 7, 8, 10,
+                                                          11]
+    assert coprimes_to(1, [i + 1 for i in range(12)]) == [1, 2, 3, 4, 5, 6, 7,
+                                                          8, 9, 10, 11, 12]
+    assert coprimes_to(3, [3, 6, 9]) == []
