@@ -20,29 +20,25 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib.maths_lib import ten_power_gcd
+from mathmaker.lib.maths_lib import ten_power_gcd, prime_factors
 
 
-def test_ten_power_gcd_1():
-    """Checks ten_power_gcd() on a couple of integers."""
+def test_ten_power_gcd():
+    """Checks ten_power_gcd() on couples of integers."""
     assert ten_power_gcd(3, 4) == 1
-
-
-def test_ten_power_gcd_2():
-    """Checks ten_power_gcd() on a couple of integers."""
     assert ten_power_gcd(10, 4) == 1
-
-
-def test_ten_power_gcd_3():
-    """Checks ten_power_gcd() on a couple of integers."""
     assert ten_power_gcd(10, 10) == 10
-
-
-def test_ten_power_gcd_4():
-    """Checks ten_power_gcd() on a couple of integers."""
     assert ten_power_gcd(200, 50) == 10
-
-
-def test_ten_power_gcd_5():
-    """Checks ten_power_gcd() on a couple of integers."""
     assert ten_power_gcd(21000, 400) == 100
+
+
+def test_prime_factors():
+    """Checks prime_factors() results."""
+    assert prime_factors(1) == []
+    assert prime_factors(2) == [2]
+    assert prime_factors(3) == [3]
+    assert prime_factors(4) == [2, 2]
+    assert prime_factors(10) == [2, 5]
+    assert prime_factors(16) == [2, 2, 2, 2]
+    assert prime_factors(31) == [31]
+    assert prime_factors(16065) == [3, 3, 3, 5, 7, 17]

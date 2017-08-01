@@ -385,3 +385,23 @@ def generate_decimal(width, ranks_scale, start_rank):
         figure = figures.pop()
         deci += Decimal(figure) * ranks_scale[r]
     return deci
+
+
+def prime_factors(n):
+    """
+    Return all the prime factors of a positive integer
+
+    Taken from https://stackoverflow.com/a/412942/3926735.
+    """
+    factors = []
+    d = 2
+    while n > 1:
+        while n % d == 0:
+            factors.append(d)
+            n /= d
+        d = d + 1
+        if d * d > n:
+            if n > 1:
+                factors.append(n)
+            break
+    return factors
