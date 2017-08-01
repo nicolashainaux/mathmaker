@@ -133,12 +133,12 @@ def heads_or_tails():
 ##
 #   @brief Returns a randomly integer which is coprime to the given argument
 #   @param n The given number
-#   @param range As a list, numbers where to pop one what will be coprime to n.
+#   @param int_range Numbers' list where to pop one what will be coprime to n.
 #   @return A randomly integer which is coprime to the given argument
-def coprime_to(n, range):
+def coprime_to(n, int_range):
     collected_numbers = []
 
-    for number in range:
+    for number in int_range:
         if gcd(n, number) == 1:
             collected_numbers.append(number)
 
@@ -156,19 +156,19 @@ def coprime_to(n, range):
 #          but possibly not to the second.
 #   @param n The given number, what the result should be coprime to
 #   @param p The given number, what the result should not be coprime to
-#   @param range As a list, numbers where to look for.
+#   @param int_range As a list, numbers where to look for.
 #   @return A randomly integer which is coprime to the given argument
 #          but possibly not to the second.
-def coprime_to_the_first(n, p, range):
+def coprime_to_the_first(n, p, int_range):
     collected_numbers_coprime_to_n = []
     collected_numbers_not_coprime_to_p = []
     collected_numbers = []
 
-    for number in range:
+    for number in int_range:
         if gcd(n, number) == 1:
             collected_numbers_coprime_to_n.append(number)
 
-    for number in range:
+    for number in int_range:
         if gcd(p, number) > 1:
             collected_numbers_not_coprime_to_p.append(number)
 
