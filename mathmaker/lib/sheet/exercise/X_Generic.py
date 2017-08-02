@@ -476,7 +476,6 @@ class X_Generic(X_Structure):
         self.questions_list = []
         last_draw = [0, 0]
         numbering = numbering_device(self.q_numbering)
-        import sys
         for q in mixed_q_list:
             preprocess_variant(q)
             (nbsources_xkw_list, extra_infos) = \
@@ -487,12 +486,13 @@ class X_Generic(X_Structure):
                 # Handle all nb sources for ONE question
                 if i == 1 and extra_infos['merge_sources']:
                     if extra_infos.get('coprime', False):
+                        # We need order in last_draw, that may have been lost
+                        # coprimes being about integers, we can rely on using
+                        # int() as sort key
+                        last_draw = sorted(last_draw, key=int)
                         lb2, hb2 = nb_source.split(sep='×')[1].split(sep='to')
                         lb2, hb2 = int(lb2), int(hb2)
                         span = [i + lb2 for i in range(hb2 - lb2)]
-                        sys.stderr.write('\nspan: ' + str(span) + '\n')
-                        sys.stderr.write('\nlast_draw: ' + str(last_draw)
-                                         + '\n')
                         coprimes = [str(n)
                                     for n in coprimes_to(int(last_draw[-1]),
                                                          span)]
@@ -502,8 +502,6 @@ class X_Generic(X_Structure):
                                   nb2_in=coprimes,
                                   **question.get_modifier(q.id, nb_source),
                                   **xkw)
-                        sys.stderr.write('\n2d drawn: '
-                                         + str(second_couple_drawn) + '\n')
                     else:
                         second_couple_drawn = shared.mc_source\
                             .next(nb_source,
@@ -540,22 +538,15 @@ class X_Generic(X_Structure):
                                                   .get_modifier(
                                                       q.id, nb_source),
                                                   **xkw)
-                    sys.stderr.write('\n1st drawn: ' + str(drawn) + '\n')
                     if isinstance(drawn, int):
                         nb_to_use += (drawn, )
                     else:
                         nb_to_use += drawn
-                sys.stderr.write('\nnb_to_use: ' + str(nb_to_use)
-                                 + '\n')
+                # Caution: because of set() (to remove possible doublons)
+                # the order of last_draw is lost.
                 last_draw = [str(n)
                              for n in set(nb_to_use)
                              if (isinstance(n, int) or isinstance(n, str))]
-                try:
-                    [int(elt) for elt in last_draw]
-                except ValueError:
-                    pass
-                else:
-                    last_draw = sorted(last_draw, key=int)
                 if nb_source in ['decimal_and_10_100_1000_for_divi',
                                  'decimal_and_10_100_1000_for_multi']:
                     # __
