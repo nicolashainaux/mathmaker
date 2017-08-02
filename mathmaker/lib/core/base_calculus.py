@@ -3304,13 +3304,6 @@ class Fraction(Quotient):
 
     def reduced_by(self, n, ignore_1_denominator=False):
         """Divide numerator and denominator by n."""
-        import sys
-        sys.stderr.write('\ntype(num eval()) is {}'
-                         '\ntype(deno eval()) is {}'
-                         '\ntype(n) is {}'
-                         .format(str(type(self.numerator.evaluate())),
-                                 str(type(self.denominator.evaluate())),
-                                 str(type(n))))
         return Fraction((self.sign,
                          Item(self.numerator.evaluate() / n),
                          Item(self.denominator.evaluate() / n)),
