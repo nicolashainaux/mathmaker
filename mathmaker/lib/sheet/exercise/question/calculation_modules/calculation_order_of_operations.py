@@ -375,6 +375,19 @@ class sub_object(submodule.structure):
                     self.nb3, self.nb1 = fix_digits(self.nb3, self.nb1)
                 else:
                     self.nb4 += random.choice([-1, 1])
+        if self.variant in [17, 21, 22, 23]:
+            if (self.nb_variant.startswith('decimal')
+                and all(is_integer(x) for x in [self.nb1,
+                                                self.nb2 * self.nb3,
+                                                self.nb4])):
+                if random.choice([True, False]):
+                    self.nb2, self.nb1, self.nb4 = fix_digits(self.nb2,
+                                                              self.nb1,
+                                                              self.nb4)
+                else:
+                    self.nb2, self.nb4, self.nb1 = fix_digits(self.nb2,
+                                                              self.nb4,
+                                                              self.nb1)
 
     def _create_0to23(self):
         a, b, c = self.nb1, self.nb2, self.nb3
@@ -565,9 +578,6 @@ class sub_object(submodule.structure):
                        'b isnt 1; c isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 17:  # a + b÷c + d
-            if (self.nb_variant.startswith('decimal')
-                and all(is_integer(x) for x in [a, b * c, d])):
-                b, a, d = fix_digits(b, a, d)
             b = b * c
             self.obj = Sum([a, Division(('+', b, c)), d])
             self.watch('no negative; decimals distribution; '
@@ -598,9 +608,6 @@ class sub_object(submodule.structure):
                        'b isnt 1; c isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 21:  # a - b÷c + d
-            if (self.nb_variant.startswith('decimal')
-                and all(is_integer(x) for x in [a, b * c, d])):
-                b, a, d = fix_digits(b, a, d)
             if self.subvariant == 'only_positive':
                 if a < b:
                     a += b
@@ -610,9 +617,6 @@ class sub_object(submodule.structure):
                        'c isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 22:  # a + b÷c - d
-            if (self.nb_variant.startswith('decimal')
-                and all(is_integer(x) for x in [a, b * c, d])):
-                b, a, d = fix_digits(b, a, d)
             if self.subvariant == 'only_positive':
                 if a + b < d:
                     a += d
@@ -622,9 +626,6 @@ class sub_object(submodule.structure):
                        'c isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 23:  # a - b÷c - d
-            if (self.nb_variant.startswith('decimal')
-                and all(is_integer(x) for x in [a, b * c, d])):
-                b, a, d = fix_digits(b, a, d)
             if self.subvariant == 'only_positive':
                 if a < b:
                     a += b
