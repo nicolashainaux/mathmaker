@@ -354,9 +354,11 @@ def fix_math_style2_fontsize(text, mathsize='\Large',
     :rtype: str
     """
     p = re.compile(r'(\$[^\$]+\$)')
+    remember = []
     for match in p.split(text):
         if (match != '' and not match.startswith('$')
-            and not match.endswith('$')):
+            and not match.endswith('$') and match not in remember):
             text = text.replace(match, normalsize + '{' + match + '}')
+            remember.append(match)
     text = p.sub(mathsize + r'{\1}', text)
     return text
