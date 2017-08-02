@@ -22,7 +22,6 @@
 
 import random
 import copy
-import warnings
 from decimal import Decimal
 from string import ascii_lowercase as alphabet
 
@@ -67,15 +66,6 @@ class structure(object):
         self.variant = kwargs.get('variant', 'default')
         self.subvariant = kwargs.get('subvariant', 'default')
         self.nb_variant = kwargs.get('nb_variant', 'default')
-        self.deci_restriction = ''
-        nbv_chunks = self.nb_variant.split(sep='_')
-        if len(nbv_chunks) == 2:
-            if nbv_chunks[1] in ['+-', '×÷']:
-                self.deci_restriction += nbv_chunks[1]
-            else:
-                warnings.warn('Ignored unrecognized option in nb_variant:'
-                              ' {}'.format(nbv_chunks[1]))
-            self.nb_variant = nbv_chunks[0]
         self.context = kwargs.get('context', 'default')
         self.picture = XML_BOOLEANS[kwargs.get('picture', 'false')]()
         self.decimal_result = int(kwargs.get('decimal_result', 2))
@@ -112,9 +102,7 @@ class structure(object):
         self.nb_nb = len(nb_list)
 
     def _setup_nb_variants(self, **kwargs):
-        if ((self.nb_variant.startswith('decimal')
-             and self.deci_restriction != '+-')
-            or kwargs.get('bypass', False)):
+        if self.nb_variant.startswith('decimal'):
             deci_nb = int(self.nb_variant[-1])  # so, from decimal1 up to 9
             # In order to ensure we'll have at least one decimal number,
             # we should try to remove all multiples of 10 from our possible

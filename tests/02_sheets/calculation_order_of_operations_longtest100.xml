@@ -94,50 +94,6 @@
 			<nb source="singleint_2to10;;intpairs_2to9" variant="141" nb_variant="decimal1">1000</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="142" nb_variant="decimal1">1000</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="143" nb_variant="decimal1">1000</nb>
-		  <nb source="singleint_2to10;;intpairs_2to9" variant="100" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="101" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="102" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="103" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="104" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="105" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="106" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="107" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="108" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="109" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="110" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="111" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="112" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="113" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="114" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="115" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="116" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="117" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="118" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="119" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="120" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="121" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="122" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="123" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="124" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="125" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="126" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="127" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="128" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="129" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="130" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="131" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="132" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="133" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="134" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="135" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="136" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="137" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="138" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="139" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="140" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="141" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="142" nb_variant="decimal1_+-">1000</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="143" nb_variant="decimal1_+-">1000</nb>
 		</question>
 	</exercise>
 

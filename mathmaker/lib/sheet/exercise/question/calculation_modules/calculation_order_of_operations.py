@@ -169,8 +169,7 @@ class sub_object(submodule.structure):
         """
         Return depth to use to split a number, depending on variant etc.
 
-        This is to ensure a correct minimal value. For instance, if
-        self.deci_restriction is '+-', it certainly requires to be at least 1.
+        This is to ensure a correct minimal value.
 
         :param depth: current depth (for instance, the default one, or the one
                       given by the user)
@@ -185,9 +184,6 @@ class sub_object(submodule.structure):
         else:
             mad = 0
         mad = mad if mad > 0 else 0
-        if (self.nb_variant.startswith('decimal')
-            and self.deci_restriction == '+-'):
-            return max(depth, digits_nb(n) + 1)
         if self.variant in [100, 102, 104, 106]:
             # (a + b)×c  a×(b + c)  (a - b)×c  a×(b - c)
             return depth + random.choice([i for i in range(mad + 1)])
@@ -238,10 +234,6 @@ class sub_object(submodule.structure):
         return depth
 
     def adjust_numbers(self):
-        if (116 <= self.variant <= 147
-            and self.nb_variant.startswith('decimal')
-            and self.deci_restriction == '+-'):
-            super().setup('nb_variants', bypass=True)
         # As the pairs for products and quotients should be shuffled, but as
         # the pairs can be either (self.nb1; self.nb2) or (self.nb2; self.nb3)
         # etc. depending on the exact variant, we have to do it here.

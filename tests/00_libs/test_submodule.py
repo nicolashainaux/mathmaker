@@ -24,13 +24,6 @@ import pytest
 from mathmaker.lib.sheet.exercise.question import submodule
 
 
-def test_deci_restriction():
-    """Check if deci_restriction is correctly handled."""
-    o = submodule.structure()
-    with pytest.warns(UserWarning):
-        o.setup('minimal', nb_variant='decimal1_-')
-
-
 def test_setup_exceptions():
     """Check if exceptions are raised with an incorrect setup argument."""
     o = submodule.structure()
