@@ -255,3 +255,65 @@ def test_variant11():
         direct_test=True)
     assert o.variant == 13
     assert o.abcd[-2:] == [Decimal('1.2'), Decimal('6')]
+
+
+def test_variant14():
+    """Check variant14 in some problematic cases."""
+    # a÷b + c÷d
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 9, 15, Decimal('0.4')],
+        variant=14,
+        nb_variant='decimal1',
+        subvariant='only_positive',
+        direct_test=True)
+    assert is_integer(o.abcd[1])
+    assert is_integer(o.abcd[3])
+    assert any(not is_integer(x) for x in [o.abcd[0], o.abcd[2]])
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[15, Decimal('0.4'), 2, 9],
+        variant=14,
+        nb_variant='decimal1',
+        subvariant='only_positive',
+        direct_test=True)
+    assert is_integer(o.abcd[1])
+    assert is_integer(o.abcd[3])
+    assert any(not is_integer(x) for x in [o.abcd[0], o.abcd[2]])
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 5, 15, Decimal('0.4')],
+        variant=14,
+        nb_variant='decimal1',
+        subvariant='only_positive',
+        direct_test=True)
+    assert is_integer(o.abcd[1])
+    assert is_integer(o.abcd[3])
+    assert any(not is_integer(x) for x in [o.abcd[0], o.abcd[2]])
+
+
+def test_variant15():
+    """Check variant15 in a problematic case."""
+    # a÷b - c÷d
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 9, Decimal('0.4'), 15],
+        variant=15,
+        nb_variant='decimal1',
+        subvariant='only_positive',
+        direct_test=True)
+    assert is_integer(o.abcd[1])
+    assert is_integer(o.abcd[3])
+    assert any(not is_integer(x) for x in [o.abcd[0], o.abcd[2]])
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[Decimal('0.4'), 15, 9, 2],
+        variant=15,
+        nb_variant='decimal1',
+        subvariant='only_positive',
+        direct_test=True)
+    assert any(not is_integer(x) for x in o.abcd)
+    assert o.abcd[0] / o.abcd[1] - o.abcd[2] / o.abcd[3] > 0
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[Decimal('0.3'), 15, 9, 2],
+        variant=15,
+        nb_variant='decimal1',
+        subvariant='only_positive',
+        direct_test=True)
+    assert any(not is_integer(x) for x in o.abcd)
+    assert o.abcd[0] / o.abcd[1] - o.abcd[2] / o.abcd[3] > 0

@@ -168,24 +168,6 @@ class sub_object(submodule.structure):
         return self.adjust_nb_for_variant_13(10 * max(a, b),
                                              min(a, b), c, d)
 
-    def adjust_nb_for_variant_15(self, a, b, c, d):
-        """
-        Reorder the 4 numbers to ensure a÷b - c÷d >= 0
-
-        May (recursively if needed) change some values by multiplying them
-        by 10 (if there's no other solution).
-        """
-        if a >= c:
-            return (a, b, c, d)
-        if a >= d:
-            return (a, b, d, c)
-        if b >= c:
-            return (b, a, c, d)
-        if b >= d:
-            return (b, a, d, c)
-        return self.adjust_nb_for_variant_15(10 * max(a, b), min(a, b),
-                                             c, d)
-
     def adjust_depth(self, depth, n=None, **kwargs):
         """
         Return depth to use to split a number, depending on variant etc.
@@ -388,10 +370,22 @@ class sub_object(submodule.structure):
                     else:
                         self.nb3, self.nb1, self.nb2 = remove_digits_from(
                             self.nb3, to=[self.nb1, self.nb2])
-        if self.subvariant == 'only_positive' and self.variant == 15:
-            self.nb1, self.nb2, self.nb3, self.nb4 = \
-                self.adjust_nb_for_variant_15(self.nb1, self.nb2,
-                                              self.nb3, self.nb4)
+        if (self.variant in [14, 15]
+            and self.nb_variant.startswith('decimal')
+            and all(is_integer(x) for x in [self.nb1 * self.nb2,
+                                            self.nb2,
+                                            self.nb3 * self.nb4,
+                                            self.nb4])):
+            if not is_integer(self.nb1) and is_integer(self.nb1 * self.nb2):
+                if not is_integer(self.nb3 * self.nb4 / 10):
+                    self.nb1, self.nb3 = fix_digits(self.nb1, self.nb3)
+                else:
+                    self.nb2 += random.choice([-1, 1])
+            if not is_integer(self.nb3) and is_integer(self.nb3 * self.nb4):
+                if not is_integer(self.nb1 * self.nb2 / 10):
+                    self.nb3, self.nb1 = fix_digits(self.nb3, self.nb1)
+                else:
+                    self.nb4 += random.choice([-1, 1])
 
     def _create_0to23(self):
         a, b, c = self.nb1, self.nb2, self.nb3
@@ -569,9 +563,8 @@ class sub_object(submodule.structure):
                        'b isnt 1; d isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
         elif self.variant == 15:  # a÷b - c÷d
-            if (self.subvariant == 'only_positive'
-                and not self.nb_variant.startswith('decimal')):
-                a, b, c, d = self.adjust_nb_for_variant_15(a, b, c, d)
+            if self.subvariant == 'only_positive' and a < c:
+                a, b, c, d = c, d, a, b
             a, c = a * b, c * d
             self.obj = Sum([Division(('+', a, b)), Division(('-', c, d))])
             self.watch('no negative; decimals distribution; '
