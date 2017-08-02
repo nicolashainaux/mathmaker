@@ -37,5 +37,5 @@ def test_calculation_order_of_operations():
 def test_integration_calculation_order_of_operations():
     """Integration test for calculation_order_of_operations."""
     shared.machine.write_out(str(
-        S_Generic('./tests/02_sheets/integration_test_sheets/'
+        S_Generic('./tests/04_sheets/integration_test_sheets/'
                   'calculation_order_of_operations.xml')))
