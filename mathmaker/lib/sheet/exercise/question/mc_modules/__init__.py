@@ -35,7 +35,8 @@ from . import (multi_direct, multi_reversed, multi_hole, divi_direct,
                vocabulary_multi, vocabulary_divi,
                vocabulary_addi, vocabulary_subtr, area_rectangle, area_square,
                perimeter_rectangle, perimeter_square,
-               rectangle_length_or_width)
+               rectangle_length_or_width,
+               fraction_of_a_rectangle)
 
 __all__ = ['multi_direct', 'multi_reversed', 'multi_hole', 'divi_direct',
            'multi_clever',
@@ -44,4 +45,5 @@ __all__ = ['multi_direct', 'multi_reversed', 'multi_hole', 'divi_direct',
            'vocabulary_simple_multiple_of_a_number', 'vocabulary_multi',
            'vocabulary_divi', 'vocabulary_addi', 'vocabulary_subtr',
            'area_rectangle', 'area_square', 'perimeter_rectangle',
-           'perimeter_square', 'rectangle_length_or_width', ]
+           'perimeter_square', 'rectangle_length_or_width',
+           'fraction_of_a_rectangle', ]

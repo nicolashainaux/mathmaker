@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sheet header="" title="Mental calculation: fraction of a rectangle" subtitle="" text="" answers_title="Answers">
+
+	<layout type="mental" font_size_offset="-1" />
+
+	<!-- Default value: id='generic'
+		 No default for kind and subkind, they must be given -->
+	<!-- Available kinds for mental calculation: tabular, slideshow -->
+	<exercise id="mental_calculation" kind="tabular" shuffle="false" qspacing="">
+
+		<mix>
+		  <question kind="fraction_of" subkind="a_rectangle" pick="2"></question>
+			<!-- Proper fractions are created already reduced. You can add a multiplicative coefficient before. -->
+				<nb source="properfraction_1to1×1to4">1</nb>
+				<nb source="properfraction_1to1×5to10">1</nb>
+		</mix>
+
+		<mix>
+		  <question kind="fraction_of" subkind="a_rectangle" pick="4"></question>
+				<nb source="properfraction_2to3×4to10">1</nb>
+				<nb source="properfraction_2to4×1to10">1</nb>
+			  <nb source="intpairs_2to5;;intpairs_2to5">2</nb>
+		</mix>
+
+		<mix>
+		  <question kind="fraction_of" subkind="a_rectangle" pick="2"></question>
+			<nb source="intpairs_3to6;;intpairs_3to6">1</nb>
+			<nb source="properfraction_3to6×3to6">1</nb>
+		</mix>
+
+		<mix>
+		  <question kind="fraction_of" subkind="a_rectangle" pick="2"></question>
+			<nb source="intpairs_4to9;;intpairs_4to9">1</nb>
+			<nb source="properfraction_4to9×4to9">1</nb>
+		</mix>
+
+	</exercise>
+
+</sheet>

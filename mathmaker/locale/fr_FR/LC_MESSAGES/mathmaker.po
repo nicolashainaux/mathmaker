@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-07-25 17:11+0200\n"
-"PO-Revision-Date: 2017-07-25 17:12+0200\n"
+"POT-Creation-Date: 2017-08-01 10:43+0200\n"
+"PO-Revision-Date: 2017-08-01 10:44+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -36,7 +36,7 @@ msgstr "Cette équation n'a pas de solution."
 
 #: lib/machine/LaTeX.py:101
 msgid "To strike out numbers "
-msgstr "Pour pouvoir rayer des nombres"
+msgstr "Pour pouvoir rayer des nombres "
 
 #: lib/machine/LaTeX.py:103
 msgid "To use the margin definition command"
@@ -69,7 +69,7 @@ msgstr "Pour dessiner"
 
 #: lib/machine/LaTeX.py:125
 msgid "Page layout "
-msgstr "Mise en page générale"
+msgstr "Mise en page générale "
 
 #: lib/machine/LaTeX.py:132
 msgid "If you wish to include a picture, please use this command:"
@@ -286,7 +286,7 @@ msgstr "Calculer et donner le résultat sous forme de fraction simplifiée :"
 
 #: lib/sheet/exercise/X_Factorization.py:148
 msgid "Factorise: "
-msgstr "Factoriser :"
+msgstr "Factoriser : "
 
 #: lib/sheet/exercise/X_Factorization.py:155
 msgid "Factorise:"
@@ -461,27 +461,28 @@ msgstr "Multiplications à trou"
 msgid "Vocabulary of operations"
 msgstr "Vocabulaire des opérations"
 
-#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:3
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:3
-#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
-#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
-#: data/frameworks/mental_calculation/lev11_1/divisions.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:3
-#: data/frameworks/mental_calculation/lev11_3/multi_clever.xml:3
-#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
-#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:3
 #: data/frameworks/mental_calculation/lev11_1/ranks.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:3
+#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: data/frameworks/mental_calculation/lev11_3/multi_clever.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
+#: data/frameworks/mental_calculation/lev11_1/addi_subtr_direct_naturals.xml:3
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:3
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:3
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:3
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
 msgid "Mental calculation"
 msgstr "Calcul mental"
 
@@ -510,42 +511,44 @@ msgstr "Calcul mental : aires et périmètres de rectangles"
 msgid "Reversed multiplications"
 msgstr "Multiplications à l'envers"
 
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-#: data/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
-#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
-#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
-#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:6
-#: data/frameworks/mental_calculation/lev11_1/divisions.xml:3
-#: data/frameworks/algebra/expand_and_reduce/double_expansion_detailed_solutions.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:3
-#: data/frameworks/calculation/order_of_operations/order_of_operations_positive_numbers.xml:3
-#: data/frameworks/mental_calculation/lev11_3/multi_clever.xml:3
-#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:3
-#: data/frameworks/algebra/expand_and_reduce/double_expansion_detailed_solutions.xml:6
-#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
-#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:3
-#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
-#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:3
-#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:3
-#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:3
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:3
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:3
-#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
-#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:6
 #: data/frameworks/mental_calculation/lev11_1/ranks.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion_detailed_solutions.xml:3
+#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+#: data/frameworks/mental_calculation/lev11_3/multi_clever.xml:3
+#: data/frameworks/calculation/order_of_operations/order_of_operations_positive_numbers.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
+#: data/frameworks/mental_calculation/lev11_1/addi_subtr_direct_naturals.xml:3
+#: data/frameworks/mental_calculation/lev11_2/polygons_perimeters.xml:6
+#: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
+#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:3
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:3
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
+#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:3
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
+#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:3
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:6
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
+#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:3
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion_detailed_solutions.xml:6
+#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:3
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:3
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
 msgid "Answers"
 msgstr "Réponses"
 
@@ -2064,6 +2067,30 @@ msgstr ""
 #: data/frameworks/calculation/order_of_operations/order_of_operations_positive_numbers.xml:61
 msgid "Same exercise, but with decimal numbers. Calculate:"
 msgstr "Même exercice, mais avec des nombres décimaux. Calculer :"
+
+#: lib/sheet/exercise/question/mc_modules/fraction_of_a_rectangle.py:81
+msgid "{} (or {})"
+msgstr "{} (ou {})"
+
+#: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
+msgid "Mental calculation: fraction of a rectangle"
+msgstr "Calcul mental : fraction d'un rectangle"
+
+#: lib/sheet/exercise/question/mc_modules/fraction_of_a_rectangle.py:45
+msgid "Which fraction of the figure matches the greyed part?"
+msgstr "À quelle fraction de la figure correspond la partie grisée ?"
+
+#: lib/sheet/exercise/question/mc_modules/fraction_of_a_rectangle.py:57
+msgid "{} (or {}, or {}...)"
+msgstr "{} (ou {}, ou {}...)"
+
+#: lib/sheet/exercise/question/mc_modules/fraction_of_a_rectangle.py:65
+msgid "{} (or {}, or {}, or {})"
+msgstr "{} (ou {}, ou {}, ou {})"
+
+#: lib/sheet/exercise/question/mc_modules/fraction_of_a_rectangle.py:74
+msgid "{} (or {}, or {})"
+msgstr "{} (ou {}, ou {})"
 
 #~ msgid "cosine"
 #~ msgstr "cosinus"
