@@ -159,14 +159,11 @@ class sub_object(submodule.structure):
         """
         if a * b >= c:
             return (a, b, c, d)
-        if a * b >= d:
+        elif a * b >= d:
             return (a, b, d, c)
-        if c * d >= a:
+        else:
+            # Necessarily, c * d >= a because a, b, c, d are all positive
             return (c, d, a, b)
-        if c * d >= b:
-            return (c, d, b, a)
-        return self.adjust_nb_for_variant_13(10 * max(a, b),
-                                             min(a, b), c, d)
 
     def adjust_depth(self, depth, n=None, **kwargs):
         """

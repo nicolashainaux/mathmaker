@@ -165,7 +165,7 @@ def test_variant10():
     assert any(digits_nb(x) == 1 for x in [o.abcd[2], o.abcd[3]])
 
 
-def test_variant11():
+def test_variant11_naturals():
     """Check variant11 in several problematic cases."""
     # a÷b - c×d
     o = calculation_order_of_operations.sub_object(
@@ -228,6 +228,11 @@ def test_variant11():
         direct_test=True)
     assert o.abcd == [Decimal('26400'), Decimal('4'),
                       Decimal('26'), Decimal('26')]
+
+
+def test_variant11_decimals():
+    """Check variant11 in several problematic cases."""
+    # a÷b - c×d
     o = calculation_order_of_operations.sub_object(
         numbers_to_use=[Decimal('0.4'), 15, 3, 2],
         variant=11,
@@ -255,6 +260,93 @@ def test_variant11():
         direct_test=True)
     assert o.variant == 13
     assert o.abcd[-2:] == [Decimal('1.2'), Decimal('6')]
+
+
+def test_variant13_naturals():
+    """Check variant13 in several problematic cases."""
+    # a×b - c÷d
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 3, 8, 9],
+        variant=13,
+        subvariant='only_positive',
+        direct_test=True)
+    assert set(o.abcd[0:2]) == {8, 9}
+    assert o.abcd[0] * o.abcd[1] - o.abcd[2] / o.abcd[3] > 0
+    assert o.abcd[2] == 6
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 3, 9, 8],
+        variant=13,
+        subvariant='only_positive',
+        direct_test=True)
+    assert set(o.abcd[0:2]) == {8, 9}
+    assert o.abcd[0] * o.abcd[1] - o.abcd[2] / o.abcd[3] > 0
+    assert o.abcd[2] == 6
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[9, 8, 2, 3],
+        variant=13,
+        subvariant='only_positive',
+        direct_test=True)
+    assert set(o.abcd[0:2]) == {8, 9}
+    assert o.abcd[0] * o.abcd[1] - o.abcd[2] / o.abcd[3] > 0
+    assert o.abcd[2] == 6
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 3, 7, 7],
+        variant=13,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd[0:3] == [Decimal('7'), Decimal('7'), Decimal('6')]
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[3, 3, 3, 3],
+        variant=13,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd == [Decimal('3'), Decimal('3'), Decimal('9'), Decimal('3')]
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 2, 5, 2],
+        variant=13,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd == [Decimal('2'), Decimal('2'), Decimal('10'), Decimal('5')]
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[2, 2, 5, 5],
+        variant=13,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd == [Decimal('5'), Decimal('5'), Decimal('4'), Decimal('2')]
+
+
+def test_variant13_decimals():
+    """Check variant13 in several problematic cases."""
+    # a×b - c÷d
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[3, 2, 15, Decimal('0.4')],
+        variant=13,
+        nb_variant='decimal1',
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.variant == 11
+    assert is_integer(o.abcd[1])
+    assert o.abcd[0] / o.abcd[1] - o.abcd[2] * o.abcd[3] > 0
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[7, 7, 15, Decimal('0.4')],
+        variant=13,
+        nb_variant='decimal1',
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.variant == 13
+    assert is_integer(o.abcd[3])
+    assert o.abcd[0] * o.abcd[1] - o.abcd[2] / o.abcd[3] > 0
+    assert any([not is_integer(x) for x in o.abcd])
+    o = calculation_order_of_operations.sub_object(
+        numbers_to_use=[10, 10, Decimal('0.4'), 15],
+        variant=13,
+        nb_variant='decimal1',
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.variant == 13
+    assert is_integer(o.abcd[3])
+    assert o.abcd[0] * o.abcd[1] - o.abcd[2] / o.abcd[3] > 0
+    assert any([not is_integer(x) for x in o.abcd])
 
 
 def test_variant14():
