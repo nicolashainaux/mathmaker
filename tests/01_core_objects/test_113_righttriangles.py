@@ -22,12 +22,12 @@
 
 import pytest
 
-from mathmaker.lib.common.cst import HUNDREDTH
+from mathmaker.lib.constants.numeration import HUNDREDTH
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.base_calculus import AngleItem
 from mathmaker.lib.core.calculus import Equation
 from mathmaker.lib.core.geometry import RightTriangle
-from mathmaker.lib.common import pythagorean
+from mathmaker.lib.constants import pythagorean
 from tools import wrap_nb
 
 

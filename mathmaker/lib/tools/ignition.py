@@ -35,7 +35,7 @@ import warnings
 from distutils.version import LooseVersion
 
 from mathmaker import __software_name__
-from mathmaker.lib.common import latex
+from mathmaker.lib.constants import latex
 
 
 def warning_msg(name: str, path_to: str, c_out: str, c_err: str,
@@ -258,7 +258,7 @@ def check_settings_consistency(language=None, od=None):
     package that mathmaker uses, the output directory (is it an existing
     directory?) and whether the chosen font is usable by lualatex.
     """
-    from mathmaker.lib.toolbox import retrieve_fonts
+    from mathmaker.lib.tools import retrieve_fonts
     from mathmaker import settings
     log = settings.mainlogger
     language = language if language is not None else settings.language

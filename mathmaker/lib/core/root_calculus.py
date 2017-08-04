@@ -32,15 +32,14 @@ from decimal import (Decimal, getcontext, Rounded, ROUND_HALF_UP, ROUND_DOWN,
                      InvalidOperation)
 from abc import ABCMeta, abstractmethod
 
-from mathmaker.lib.toolbox import round_deci
+from mathmaker.lib.tools import round_deci
 from mathmaker.lib.core.utils import check_lexicon_for_substitution
-from mathmaker.lib.common.cst import (UNIT, TENTH, HUNDREDTH, THOUSANDTH,
-                                      TEN_THOUSANDTH, PRECISION,
-                                      PRECISION_REVERSED,
-                                      VALUE_AND_UNIT_SEPARATOR)
-from mathmaker.lib.common import alphabet
+from mathmaker.lib.constants.numeration \
+    import (UNIT, TENTH, HUNDREDTH, THOUSANDTH, TEN_THOUSANDTH, PRECISION,
+            PRECISION_REVERSED)
+from mathmaker.lib.constants.units import VALUE_AND_UNIT_SEPARATOR
 from mathmaker.lib.core.base import Printable
-from mathmaker.lib.common.latex import MARKUP
+from mathmaker.lib.constants.latex import MARKUP
 
 
 class Substitutable(object, metaclass=ABCMeta):
@@ -158,7 +157,7 @@ class Evaluable(Printable):
             # let's compare
             if self_value == other_value:
                 return 0
-            elif alphabet.order[self_value] > alphabet.order[other_value]:
+            elif self_value > other_value:
                 return 1
             else:
                 return -1

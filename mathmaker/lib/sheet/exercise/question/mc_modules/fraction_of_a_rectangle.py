@@ -23,8 +23,8 @@
 # import random
 #
 from mathmaker.lib import shared
-from mathmaker.lib.toolbox import fix_math_style2_fontsize
-from mathmaker.lib.mathtools import gcd, prime_factors
+from mathmaker.lib.tools import fix_math_style2_fontsize
+from mathmaker.lib.tools.maths import gcd, prime_factors
 from mathmaker.lib.core.base_calculus import Item, Fraction
 from .. import submodule
 

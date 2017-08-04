@@ -31,10 +31,10 @@ import copy
 import random
 from decimal import Decimal, ROUND_HALF_UP
 
-from mathmaker.lib.common.cst import EQUAL_PRODUCTS
-from mathmaker.lib.toolbox \
+from mathmaker.lib.constants import EQUAL_PRODUCTS
+from mathmaker.lib.tools \
     import is_number, round_deci, parse_layout_descriptor
-from mathmaker.lib.mathtools import barycenter, POLYGONS_NATURES
+from mathmaker.lib.tools.maths import barycenter, POLYGONS_NATURES
 from .root_calculus import Evaluable, Value, Unit
 from .base_calculus import Item, Product, Sum, Function, AngleItem
 from .calculus import Equality, Table, Table_UP, QuotientsEquality

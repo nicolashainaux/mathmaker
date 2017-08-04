@@ -32,9 +32,10 @@ from mathmaker.lib.core.geometry import (Rectangle, Square, RightTriangle,
                                          InterceptTheoremConfiguration,
                                          RectangleGrid)
 from mathmaker.lib import shared
-from mathmaker.lib.common.cst import COMMON_LENGTH_UNITS, XML_BOOLEANS
-from mathmaker.lib.wording import setup_wording_format_of
-from mathmaker.lib.toolbox \
+from mathmaker.lib.constants import XML_BOOLEANS
+from mathmaker.lib.constants.units import COMMON_LENGTH_UNITS
+from mathmaker.lib.tools.wording import setup_wording_format_of
+from mathmaker.lib.tools \
     import (rotate, is_integer, digits_nb, )
 
 

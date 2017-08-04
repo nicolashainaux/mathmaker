@@ -28,11 +28,11 @@ import logging
 import random
 
 from mathmaker import settings
-from mathmaker.lib.common.cst import XML_BOOLEANS
+from mathmaker.lib.constants import XML_BOOLEANS
 import xml.etree.ElementTree as XML_PARSER
 from mathmaker.lib.sheet import exercise
 from mathmaker.lib.sheet.exercise import question
-from mathmaker.lib.toolbox import parse_layout_descriptor
+from mathmaker.lib.tools import parse_layout_descriptor
 
 
 SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),

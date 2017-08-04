@@ -23,7 +23,7 @@
 import warnings
 
 from mathmaker.lib import shared
-from mathmaker.lib.common.cst import EQUAL_PRODUCTS
+from mathmaker.lib.constants import EQUAL_PRODUCTS
 from .Q_Structure import Q_Structure
 from . import (algebra_modules, calculation_modules, mc_modules,
                geometry_modules)

@@ -22,8 +22,8 @@
 
 import random
 
-from mathmaker.lib.toolbox import is_integer, is_natural
-from mathmaker.lib.mathtools import coprimes_to
+from mathmaker.lib.tools import is_integer, is_natural
+from mathmaker.lib.tools.maths import coprimes_to
 from mathmaker.lib import shared
 
 from mathmaker.lib.core.root_calculus import Value, Exponented
@@ -31,7 +31,7 @@ from mathmaker.lib.core.base_calculus import (Item, Product, Expandable, Sum,
                                               Monomial, Polynomial)
 from mathmaker.lib.core.calculus import Equality, Expression
 from .Q_Structure import Q_Structure
-from mathmaker.lib.common.cst import RANDOMLY
+from mathmaker.lib.constants import RANDOMLY
 
 AVAILABLE_Q_KIND_VALUES = \
     {'level_01':

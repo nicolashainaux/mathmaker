@@ -26,7 +26,7 @@ from mathmaker.lib import shared
 from mathmaker.lib.core.base_calculus import Sum
 from mathmaker.lib.core.root_calculus import Value
 from .. import submodule
-from mathmaker.lib.wording import post_process
+from mathmaker.lib.tools.wording import post_process
 
 
 class sub_object(submodule.structure):

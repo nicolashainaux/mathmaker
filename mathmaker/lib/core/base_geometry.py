@@ -29,10 +29,10 @@
 import math
 from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
 
-from mathmaker.lib.toolbox import is_number, round_deci
+from mathmaker.lib.tools import is_number, round_deci
 from mathmaker.lib.core.base import Drawable, Printable
 from mathmaker.lib.core.base_calculus import Value
-from mathmaker.lib.common.latex import MARKUP
+from mathmaker.lib.constants.latex import MARKUP
 
 
 # the mark 'dashed' has been removed from the available list since it may

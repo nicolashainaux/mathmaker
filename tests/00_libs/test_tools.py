@@ -23,7 +23,7 @@
 import pytest
 from decimal import Decimal
 
-from mathmaker.lib.toolbox import \
+from mathmaker.lib.tools import \
     (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
      move_digits_to, split_nb, is_power_of_10, digits_nb, remove_digits_from,
      fix_digits, parse_layout_descriptor, fix_math_style2_fontsize, ext_dict)

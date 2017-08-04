@@ -22,13 +22,14 @@
 
 import random
 from decimal import Decimal
+from string import ascii_uppercase as alphabet
 
 from mathmaker.lib import shared
-from mathmaker.lib.common import alphabet
-from mathmaker.lib.common import pythagorean
-from mathmaker.lib.common.cst import (PRECISION, HUNDREDTH, TENTH,
-                                      LENGTH_UNITS, UNIT, THOUSANDTH,
-                                      TEN_THOUSANDTH)
+from mathmaker.lib.constants import pythagorean
+from mathmaker.lib.constants.numeration import (PRECISION, HUNDREDTH, TENTH,
+                                                UNIT, THOUSANDTH,
+                                                TEN_THOUSANDTH)
+from mathmaker.lib.constants.units import LENGTH_UNITS
 from .Q_Structure import Q_Structure
 from mathmaker.lib.core.base_calculus import Item, Sum
 from mathmaker.lib.core.root_calculus import Value
@@ -143,7 +144,7 @@ class Q_RightTriangle(Q_Structure):
         self.known_sides = []
 
         # Now set some randomly values
-        letters = [elt for elt in alphabet.UPPERCASE]
+        letters = [elt for elt in alphabet]
         random.shuffle(letters)
         vertices_names = (letters.pop(), letters.pop(), letters.pop())
 

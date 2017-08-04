@@ -23,7 +23,7 @@
 from mathmaker.lib import shared
 # from mathmaker.lib.core.base_calculus import *
 from .. import submodule
-from mathmaker.lib.wording import setup_wording_format_of
+from mathmaker.lib.tools.wording import setup_wording_format_of
 
 
 class sub_object(submodule.structure):

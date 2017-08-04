@@ -34,16 +34,15 @@ from abc import ABCMeta, abstractmethod
 
 from mathmaker import settings
 from mathmaker.lib.core.root_calculus import Calculable, Value, Exponented
-from mathmaker.lib.toolbox import is_integer, is_natural, is_number
-from mathmaker.lib.common import alphabet
-from mathmaker.lib.mathtools import (sign_of_product, gcd, pupil_gcd,
-                                     lcm_of_the_list, is_even, is_uneven,
-                                     prime_factors,
-                                     ZERO_POLYNOMIAL_DEGREE)
-from mathmaker.lib.common.cst import (DEFAULT, RANDOMLY, NUMERIC, LITERALS,
+from mathmaker.lib.tools import is_integer, is_natural, is_number
+from mathmaker.lib.tools.maths import (sign_of_product, gcd, pupil_gcd,
+                                       lcm_of_the_list, is_even, is_uneven,
+                                       prime_factors,
+                                       ZERO_POLYNOMIAL_DEGREE)
+from mathmaker.lib.constants import (DEFAULT, RANDOMLY, NUMERIC, LITERALS,
                                       OTHERS, XML_BOOLEANS)
 from .utils import reduce_literal_items_product, put_term_in_lexicon
-from mathmaker.lib.common.latex import MARKUP
+from mathmaker.lib.constants.latex import MARKUP
 
 
 # Maximum ratio of constant terms accepted during the creation of random
@@ -577,7 +576,7 @@ class Item(Exponented):
             # let's compare
             if self_value == other_value:
                 return False
-            elif alphabet.order[self_value] > alphabet.order[other_value]:
+            elif self_value > other_value:
                 return False
             else:
                 return True
@@ -604,7 +603,7 @@ class Item(Exponented):
             # let's compare
             if self_value == other_value:
                 return False
-            elif alphabet.order[self_value] > alphabet.order[other_value]:
+            elif self_value > other_value:
                 return True
             else:
                 return False

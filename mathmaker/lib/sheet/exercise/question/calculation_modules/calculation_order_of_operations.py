@@ -24,7 +24,7 @@ import random
 from decimal import Decimal
 
 from mathmaker.lib import shared
-from mathmaker.lib.toolbox \
+from mathmaker.lib.tools \
     import (is_integer, move_digits_to, split_nb, digits_nb,
             remove_digits_from, fix_digits)
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Division,

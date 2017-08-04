@@ -23,7 +23,7 @@
 import os
 
 from mathmaker import settings
-from mathmaker.lib.toolbox import (check_unique_letters_words,
+from mathmaker.lib.tools import (check_unique_letters_words,
                                    po_file_get_list_of)
 
 

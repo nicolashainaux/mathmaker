@@ -27,7 +27,8 @@ import random
 
 from decimal import Decimal
 from mathmaker.lib.core.base_calculus import Item
-from mathmaker.lib.common.cst import RANKS, RANKS_CONFUSING, RANKS_WORDS
+from mathmaker.lib.constants.numeration \
+    import RANKS, RANKS_CONFUSING, RANKS_WORDS
 
 DEFAULT_WIDTH = "random"
 DEFAULT_RANKS_SCALE = RANKS

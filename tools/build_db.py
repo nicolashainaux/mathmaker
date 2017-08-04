@@ -45,9 +45,8 @@ import os
 import sqlite3
 
 from mathmaker import settings
-from mathmaker.lib import xml_sheet
-from mathmaker.lib.toolbox import po_file_get_list_of
-from mathmaker.lib.toolbox import check_unique_letters_words
+from mathmaker.lib.tools import xml, po_file_get_list_of
+from mathmaker.lib.tools import check_unique_letters_words
 
 
 def __main__():
@@ -129,7 +128,7 @@ def __main__():
             if os.path.isfile(settings.localedir + lang
                               + "/LC_MESSAGES/" + gender + "_names.po"):
                 # __
-                names = po_file.get_list_of('names', lang, gender)
+                names = po_file_get_list_of('names', lang, gender)
                 db_rows = list(zip([lang for _ in range(len(names))],
                                    [gender for _ in range(len(names))],
                                    names,
@@ -141,7 +140,7 @@ def __main__():
 
     # Extract data from xml files and insert them into the db
     for f in WORDINGS_FILES:
-        wordings = xml_sheet.get_attributes(f, "wording")
+        wordings = xml.get_attributes(f, "wording")
         db_rows = list(zip([w['wording_context'] for w in wordings],
                            [w['wording'] for w in wordings],
                            [w['nb1_min'] for w in wordings],

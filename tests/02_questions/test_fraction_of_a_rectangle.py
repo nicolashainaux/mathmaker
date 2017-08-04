@@ -23,7 +23,7 @@
 # import pytest
 # from decimal import Decimal
 
-# from mathmaker.lib.toolbox import is_integer, digits_nb
+# from mathmaker.lib.tools import is_integer, digits_nb
 from mathmaker.lib.sheet.exercise.question.mc_modules \
     import fraction_of_a_rectangle
 

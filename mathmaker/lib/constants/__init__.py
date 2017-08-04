@@ -19,3 +19,27 @@
 # You should have received a copy of the GNU General Public License
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+import random
+
+XML_BOOLEANS = {'true': lambda: True,
+                'false': lambda: False,
+                'random': lambda: random.choice([True, False])}
+
+EQUAL_PRODUCTS = {(2, 6): [(3, 4)],
+                  (3, 4): [(2, 6)],
+                  (2, 8): [(4, 4)],
+                  (4, 4): [(2, 8)],
+                  (3, 6): [(2, 9)],
+                  (2, 9): [(3, 6)],
+                  (3, 8): [(4, 6)],
+                  (4, 6): [(3, 8)],
+                  (4, 9): [(6, 6), (3, 12)],
+                  (6, 6): [(4, 9), (3, 12)],
+                  (3, 12): [(4, 9), (6, 6)]}
+
+DEFAULT = "default"
+RANDOMLY = "randomly"
+NUMERIC = "numeric"
+LITERALS = "literals"
+OTHERS = "others"

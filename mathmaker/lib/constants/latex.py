@@ -102,3 +102,10 @@ MARKUP = {'LaTeX': "\LaTeX",
           'closing_square_bracket': "\]",
           'text_degree': "\\textdegree",
           'fct_cos': "\cos"}
+
+TEXT_SCALES = ['tiny', 'scriptsize', 'footnotesize', 'small', 'normal',
+               'large', 'Large', 'LARGE', 'huge', 'HUGE']
+
+TEXT_RANKS = {'tiny': 0, 'scriptsize': 1, 'footnotesize': 2, 'small': 3,
+              'normal': 4, 'large': 5, 'Large': 6, 'LARGE': 7, 'huge': 8,
+              'HUGE': 9}

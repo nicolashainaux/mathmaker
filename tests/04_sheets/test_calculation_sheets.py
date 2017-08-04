@@ -22,7 +22,7 @@
 
 
 from mathmaker.lib import shared
-from mathmaker.lib.xml_sheet import get_xml_sheets_paths
+from mathmaker.lib.tools.xml import get_xml_sheets_paths
 from mathmaker.lib.sheet import S_Generic
 
 XML_SHEETS = get_xml_sheets_paths()

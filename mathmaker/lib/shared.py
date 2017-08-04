@@ -24,7 +24,7 @@ import sqlite3
 
 from mathmaker import settings
 from mathmaker.lib.machine import LaTeX
-from mathmaker.lib.common import latex
+from mathmaker.lib.constants import latex
 
 
 def init():
@@ -57,7 +57,7 @@ def init():
 
     db = sqlite3.connect(settings.path.db)
 
-    from mathmaker.lib import database
+    from mathmaker.lib.tools import database
     three_letters_words_source = database.source("w3l", ["id", "word"],
                                                  language=settings.language)
     four_letters_words_source = database.source("w4l", ["id", "word"],
@@ -81,20 +81,20 @@ def init():
 
     markup = latex.MARKUP
 
-    from mathmaker.lib import sources
-    rank_words_source = sources.sub_source('rank_words')
-    trigo_functions_source = sources.sub_source('trigo_functions')
-    trigo_vocabulary_source = sources.sub_source('trigo_vocabulary')
-    int_fracs_source = sources.sub_source('int_irreducible_frac')
-    deci_10_100_1000_multi_source = sources.sub_source(
+    from mathmaker.lib.tools.database import sub_source, mc_source
+    rank_words_source = sub_source('rank_words')
+    trigo_functions_source = sub_source('trigo_functions')
+    trigo_vocabulary_source = sub_source('trigo_vocabulary')
+    int_fracs_source = sub_source('int_irreducible_frac')
+    deci_10_100_1000_multi_source = sub_source(
         'decimal_and_10_100_1000_for_multi')
-    deci_10_100_1000_divi_source = sources.sub_source(
+    deci_10_100_1000_divi_source = sub_source(
         'decimal_and_10_100_1000_for_divi')
-    deci_one_digit_multi_source = sources.sub_source(
+    deci_one_digit_multi_source = sub_source(
         'decimal_and_one_digit_for_multi')
-    deci_one_digit_divi_source = sources.sub_source(
+    deci_one_digit_divi_source = sub_source(
         'decimal_and_one_digit_for_divi')
-    mc_source = sources.mc_source()
+    mc_source = mc_source()
 
     try:
         machine = LaTeX(settings.language)

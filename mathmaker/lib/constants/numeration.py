@@ -20,30 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import random
 from decimal import Decimal
-
-XML_BOOLEANS = {'true': lambda: True,
-                'false': lambda: False,
-                'random': lambda: random.choice([True, False])}
-
-EQUAL_PRODUCTS = {(2, 6): [(3, 4)],
-                  (3, 4): [(2, 6)],
-                  (2, 8): [(4, 4)],
-                  (4, 4): [(2, 8)],
-                  (3, 6): [(2, 9)],
-                  (2, 9): [(3, 6)],
-                  (3, 8): [(4, 6)],
-                  (4, 6): [(3, 8)],
-                  (4, 9): [(6, 6), (3, 12)],
-                  (6, 6): [(4, 9), (3, 12)],
-                  (3, 12): [(4, 9), (6, 6)]}
-
-DEFAULT = "default"
-RANDOMLY = "randomly"
-NUMERIC = "numeric"
-LITERALS = "literals"
-OTHERS = "others"
 
 UNIT = "1"
 TENTH = "1.0"
@@ -115,43 +92,3 @@ RANKS_HOW_MANY = {BILLIONS: "How many billions",
                   TENTHS: "How many tenths",
                   HUNDREDTHS: "How many hundredths",
                   THOUSANDTHS: "How many thousandths"}
-
-LENGTH_UNITS = ['km', 'hm', 'dam', 'm', 'dm', 'cm', 'mm', 'µm', 'nm', 'pm']
-CAPACITY_UNITS = ['kL', 'hL', 'daL', 'L', 'dL', 'cL', 'mL', 'µL', 'nL', 'pL']
-MASS_UNITS = ['kg', 'hg', 'dag', 'g', 'dg', 'cg', 'mg', 'µg', 'ng', 'pg']
-COMMON_LENGTH_UNITS = LENGTH_UNITS[:-3]
-COMMON_CAPACITY_UNITS = CAPACITY_UNITS[1:-3]
-COMMON_MASS_UNITS = LENGTH_UNITS[:-3]
-ANGLE_UNITS = ['\\textdegree']
-CURRENCY_UNITS = ['€', '\officialeuro',
-                  '$', '\\textdollar',
-                  '£', '\\textsterling']
-CURRENCIES_DICT = {'euro': '\officialeuro',
-                   'dollar': '\\textdollar',
-                   'sterling': '\\textsterling'}
-AVAILABLE_UNITS = LENGTH_UNITS + CAPACITY_UNITS + MASS_UNITS + ANGLE_UNITS\
-    + CURRENCY_UNITS
-UNIT_KINDS = {'length': COMMON_LENGTH_UNITS,
-              'mass': COMMON_MASS_UNITS,
-              'capacity': COMMON_CAPACITY_UNITS,
-              'currency': CURRENCY_UNITS}
-VALUE_AND_UNIT_SEPARATOR = {'km': "~", 'hm': "~", 'dam': "~", 'm': "~",
-                            'dm': "~", 'cm': "~", 'mm': "~", 'µm': "~",
-                            'nm': "~", 'pm': "~",
-                            'kL': "~", 'hL': "~", 'daL': "~", 'L': "~",
-                            'dL': "~", 'cL': "~", 'mL': "~", 'µL': "~",
-                            'nL': "~", 'pL': "~",
-                            'kg': "~", 'hg': "~", 'dag': "~", 'g': "~",
-                            'dg': "~", 'cg': "~", 'mg': "~", 'µg': "~",
-                            'ng': "~", 'pg': "~",
-                            '\\textdegree': "",
-                            '\officialeuro': "~",
-                            '\\textdollar': "~",
-                            '\\textsterling': "~"}
-
-TEXT_SCALES = ['tiny', 'scriptsize', 'footnotesize', 'small', 'normal',
-               'large', 'Large', 'LARGE', 'huge', 'HUGE']
-
-TEXT_RANKS = {'tiny': 0, 'scriptsize': 1, 'footnotesize': 2, 'small': 3,
-              'normal': 4, 'large': 5, 'Large': 6, 'LARGE': 7, 'huge': 8,
-              'HUGE': 9}

@@ -21,14 +21,14 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import random
+from string import ascii_uppercase as alphabet
 from abc import ABCMeta, abstractmethod
 
 from mathmaker import settings
 from mathmaker.lib import shared
-from mathmaker.lib.mathtools import gcd, sign_of_product
-from mathmaker.lib.toolbox import is_integer, is_number
-from mathmaker.lib.common import alphabet
-from mathmaker.lib.common.cst import RANDOMLY
+from mathmaker.lib.tools.maths import gcd, sign_of_product
+from mathmaker.lib.tools import is_integer, is_number
+from mathmaker.lib.constants import RANDOMLY
 from mathmaker.lib.core.utils import gather_literals
 from mathmaker.lib.core.base import Printable
 from mathmaker.lib.core.root_calculus import (Exponented, Value, Calculable,
@@ -37,7 +37,7 @@ from mathmaker.lib.core.base_calculus import (Monomial, Sum, Item, Polynomial,
                                               Fraction, Expandable, Product,
                                               Quotient, Function, SquareRoot,
                                               AngleItem, CommutativeOperation)
-from mathmaker.lib.common.latex import MARKUP
+from mathmaker.lib.constants.latex import MARKUP
 
 
 MAX_VALUE = 20
@@ -164,15 +164,14 @@ class Expression(ComposedCalculable):
         # Expression objects displaying
         if is_number(self.name) and is_integer(self.name):
             i = self.name
-            if i < len(alphabet.UPPERCASE):
+            if i < len(alphabet):
                 final_name = MARKUP['open_text_in_maths'] \
-                    + alphabet.UPPERCASE[i] \
+                    + alphabet[i] \
                     + MARKUP['close_text_in_maths']
             else:
-                nb_letters = len(alphabet.UPPERCASE)
+                nb_letters = len(alphabet)
                 final_name = MARKUP['open_text_in_maths'] \
-                    + alphabet.UPPERCASE[
-                        i - nb_letters * int(i / nb_letters)] \
+                    + alphabet[i - nb_letters * int(i / nb_letters)] \
                     + MARKUP['close_text_in_maths'] \
                     + MARKUP['opening_subscript'] \
                     + MARKUP['open_text_in_maths'] \

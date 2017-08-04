@@ -20,7 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib.common.cst import RANDOMLY
+from mathmaker.lib.constants import RANDOMLY
 from mathmaker.lib import shared
 from mathmaker.lib.core.calculus import Equation
 from .Q_Structure import Q_Structure

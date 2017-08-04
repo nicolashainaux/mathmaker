@@ -29,11 +29,11 @@ from mathmaker import __info__, __software_name__
 from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib import sheet
-from mathmaker.lib.ignition \
+from mathmaker.lib.tools.ignition \
     import (check_dependencies, install_gettext_translations,
             check_settings_consistency)
-from mathmaker.lib.toolbox import list_all_sheets
-from mathmaker.lib.xml_sheet import get_xml_sheets_paths
+from mathmaker.lib.tools import list_all_sheets
+from mathmaker.lib.tools.xml import get_xml_sheets_paths
 
 
 def entry_point():

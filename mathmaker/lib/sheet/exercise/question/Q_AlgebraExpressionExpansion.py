@@ -23,8 +23,8 @@
 import random
 
 from mathmaker.lib import shared
-from mathmaker.lib.toolbox import is_natural
-from mathmaker.lib.common.cst import RANDOMLY
+from mathmaker.lib.tools import is_natural
+from mathmaker.lib.constants import RANDOMLY
 from .Q_Structure import Q_Structure
 from mathmaker.lib.core.base_calculus import (Expandable, BinomialIdentity,
                                               Sum, Product, Monomial,

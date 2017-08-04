@@ -23,17 +23,17 @@
 import copy
 import random
 from collections import namedtuple
+from string import ascii_lowercase as alphabet
 
 from intspan import intspan
 from intspan.core import ParseError
 
 from mathmaker.lib import shared
-from mathmaker.lib.common import alphabet
-from mathmaker.lib.mathtools import coprimes_to
+from mathmaker.lib.tools.maths import coprimes_to
 from .X_Structure import X_Structure
 from . import question
 from .question import Q_Generic
-from mathmaker.lib.common.cst import XML_BOOLEANS
+from mathmaker.lib.constants import XML_BOOLEANS
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
@@ -378,7 +378,7 @@ def numbering_device(numbering_kind='disabled'):
     elif numbering_kind in ['alphabet', 'alphabetical', 'default']:
         i = 0
         while True:
-            yield alphabet.lowercase[i % 26] * ((i // 26 + 1))
+            yield alphabet[i % 26] * ((i // 26 + 1))
             i += 1
 
 

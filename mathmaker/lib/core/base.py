@@ -24,7 +24,7 @@ import subprocess
 from abc import ABCMeta, abstractmethod
 
 from mathmaker import settings
-from mathmaker.lib.toolbox import generate_header_comment
+from mathmaker.lib.tools import generate_header_comment
 
 
 # ------------------------------------------------------------------------------

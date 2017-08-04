@@ -22,14 +22,13 @@
 
 import random
 
-from mathmaker.lib.toolbox import is_integer, is_natural
+from mathmaker.lib.tools import is_integer, is_natural
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
 from mathmaker.lib.core.base_calculus import (Product, Monomial, Item, Sum,
                                               Polynomial, Expandable)
 from mathmaker.lib.core.calculus import Expression
-from mathmaker.lib.common.cst import RANDOMLY, NUMERIC
-from mathmaker.lib.common import alphabet
+from mathmaker.lib.constants import RANDOMLY, NUMERIC
 
 # Shared constants
 AVAILABLE_Q_KIND_VALUES = {'product': ['default'],
@@ -150,7 +149,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             # First let's determine a pack of letters where to draw
             # The default one will be [a, b, c, x, y, z]
             # but the reduced or entire alphabets can be used as well
-            letters_package = alphabet.abc + alphabet.xyz
+            letters_package = ['a', 'b', 'c', 'x', 'y', 'z']
 
             if 'short_test' in options and options['short_test']:
                 # __
@@ -165,10 +164,9 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 # in a training sheet, the answers will be more detailed
                 self.kind_of_answer = 'product_detailed'
                 if 'use_reduced_alphabet' in options:
-                    letters_package = alphabet.reduced
-
-                elif 'use_the_entire_alphabet' in options:
-                    letters_package = alphabet.lowercase
+                    letters_package = ['a', 'b', 'c', 'd', 'g', 'h', 'k', 'p',
+                                       'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
+                                       'y', 'z']
 
                 elif ('use_these_letters' in options
                       and type(options['use_these_letters']) is list

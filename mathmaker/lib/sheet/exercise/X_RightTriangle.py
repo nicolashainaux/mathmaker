@@ -24,7 +24,7 @@ import random
 
 from .X_Structure import X_Structure
 from . import question
-from mathmaker.lib.common.cst import TENTH, HUNDREDTH
+from mathmaker.lib.constants.numeration import TENTH, HUNDREDTH
 
 # Here the list of available values for the parameter x_kind='' and the
 # matching x_subkind values
