@@ -23,10 +23,29 @@
 import pytest
 from decimal import Decimal
 
-from mathmaker.lib.tools.auxiliary_functions import \
+from mathmaker.lib.toolbox import \
     (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
      move_digits_to, split_nb, is_power_of_10, digits_nb, remove_digits_from,
-     fix_digits, parse_layout_descriptor, fix_math_style2_fontsize)
+     fix_digits, parse_layout_descriptor, fix_math_style2_fontsize, ext_dict)
+
+
+def test_recursive_update():
+    """Checks recursive_update()"""
+    d1 = ext_dict({'a': 1, 'b': 2,
+                   'c': {'z': 26, 'y': 25, 'x': {1: 'a', 2: 'b'}}})
+    d2 = ext_dict({'a': 11, 'c': {'y': 24, 'x': {2: 'f', 3: 'g'}, 'w': 23}})
+    d1.recursive_update(d2)
+    assert d1 == {'a': 11, 'b': 2,
+                  'c': {'z': 26, 'y': 24, 'w': 23,
+                        'x': {1: 'a', 2: 'f', 3: 'g'}}}
+
+
+def test_flat():
+    """Checks flat()"""
+    d = ext_dict({'a': 1, 'b': 2,
+                  'c': {'z': 26, 'y': 25, 'x': {1: 'a', 2: 64}}})
+    assert d.flat() == {'a': 1, 'b': 2,
+                        'c.z': 26, 'c.y': 25, 'c.x.1': 'a', 'c.x.2': 64}
 
 
 def test_check_unique_letters_words():

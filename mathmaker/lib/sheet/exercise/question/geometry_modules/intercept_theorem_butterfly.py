@@ -23,8 +23,7 @@
 import random
 
 from mathmaker.lib import shared
-from mathmaker.lib import error
-from mathmaker.lib.tools.wording import setup_wording_format_of
+from mathmaker.lib.wording import setup_wording_format_of
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.base_calculus import Item
 from .. import submodule
@@ -49,9 +48,9 @@ class sub_object(submodule.structure):
             variant = ['random', 'random']
         else:
             if self.variant.count('_') != 1:
-                raise error.XMLFileFormatError('The variant for '
-                                               'intercept_theorem_butterfly '
-                                               'shoud contain one _')
+                raise ValueError('XMLFileFormatError: the variant for '
+                                 'intercept_theorem_butterfly '
+                                 'shoud contain one _')
             variant = self.variant.split(sep='_')
 
         valid_variant = [['random', 'oneside', 'twosides'],
@@ -60,9 +59,9 @@ class sub_object(submodule.structure):
         for v, valid, n in zip(variant, valid_variant,
                                ['first', 'second', 'third']):
             if v not in valid:
-                raise error.XMLFileFormatError('Invalid {} part of the '
-                                               'variant. It should be in: {}'
-                                               .format(n, str(valid)))
+                raise ValueError('XMLFileFormatError: Invalid {} part of the '
+                                 'variant. It should be in: {}'
+                                 .format(n, str(valid)))
 
         if variant[0] == 'random':
             if variant[1] == 'twocouples':
@@ -76,8 +75,8 @@ class sub_object(submodule.structure):
                 variant[1] == random.choice(['all', 'twocouples'])
 
         if variant == ['twosides', 'twocouples']:
-            raise error.XMLFileFormatError('The twosides_twocouples '
-                                           'variant is impossible.')
+            raise ValueError('XMLFileFormatError: The twosides_twocouples '
+                             'variant is impossible.')
 
         # The order is:
         # small[0] small[1] small[2] side[0] side[1] side[2]

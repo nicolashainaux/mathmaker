@@ -20,24 +20,18 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import error
+from abc import ABCMeta, abstractmethod
 
 
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
-# @class Structure
-# @brief Not instanciable mother class of all machine objects.
-class Structure(object):
+class Structure(object, metaclass=ABCMeta):
+    """Abstract mother class of machine objects."""
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief /!\ Must be redefined. Constructor.
     #   @warning Will raise an exception if not redefined
-    #   @param **options Any options
+    @abstractmethod
     def __init__(self, language):
-        raise error.NotInstanciableObject(self)
+        pass
 
     # --------------------------------------------------------------------------
     ##
@@ -49,122 +43,102 @@ class Structure(object):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief /!\ Must be redefined.
     #   Write the complete header of the sheet to the output.
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def write_document_header(self):
-        raise error.MethodShouldBeRedefined(self, 'write_document_header')
+        pass
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief /!\ Must be redefined.
     #   Writes to the output the command to begin the document
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def write_document_begins(self):
-        raise error.MethodShouldBeRedefined(self, 'write_document_begins')
+        pass
 
     ##
-    #   @brief /!\ Must be redefined.
     #   Writes to the output the command displaying an exercise's title plus
     #   its number
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def write_exercise_number(self):
-        raise error.MethodShouldBeRedefined(self, 'write_exercise_number')
+        pass
 
     ##
-    #   @brief /!\ Must be redefined.
     #   Writes to the output the jump to next page command
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def write_jump_to_next_page(self):
-        raise error.MethodShouldBeRedefined(self, 'write_jump_to_next_page')
+        pass
 
     ##
-    #   @brief /!\ Must be redefined.
     #   Writes to the output the exercises counter reinitializing command
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def reset_exercises_counter(self):
-        raise error.MethodShouldBeRedefined(self, 'reset_exercises_counter')
+        pass
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the font_size_offset field
+    @abstractmethod
     def set_font_size_offset(self, arg):
-        raise error.MethodShouldBeRedefined(self, 'set_font_size_offset')
+        pass
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Sets the redirect_output_to_str field to True or False
+    @abstractmethod
     def set_redirect_output_to_str(self, arg):
-        raise error.MethodShouldBeRedefined(self, 'set_redirect_output_to_str')
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Gets the value of redirect_output_to_str field
-    def redirect_output_to_str(self):
-        raise error.MethodShouldBeRedefined(self, 'redirect_output_to_str')
+        pass
 
     ##
     #   @brief turn the size keyword in language matching keyword
     #   @warning if you chose a too low or too high value as font_size_offset,
     #   @warning then all the text will be either tiny or Huge.
+    @abstractmethod
     def translate_font_size(self, arg):
-        raise error.MethodShouldBeRedefined(self, 'translate_font_size')
+        pass
 
     ##
-    #   @brief /!\ Must be redefined.
     #   Writes to the output the end of document command
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def write_document_ends(self):
-        raise error.MethodShouldBeRedefined(self, 'write_document_ends')
+        pass
 
     ##
-    #   @brief /!\ Must be redefined.
     #   Writes to the output the new line command
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def write_new_line(self, **options):
-        raise error.MethodShouldBeRedefined(self, 'write_new_line')
+        pass
 
     ##
-    #   @brief /!\ Must be redefined.
     #   Writes to the output two commands writing two new lines
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def write_new_line_twice(self, **options):
-        raise error.MethodShouldBeRedefined(self, 'write_new_line_twice')
+        pass
 
     ##
-    #   @brief /!\ Must be redefined.
     #   Writes to the output the given string as a mathematical expression
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def write_math_style2(self, given_string):
-        raise error.MethodShouldBeRedefined(self, 'write_math_style2')
+        pass
 
     ##
-    #   @brief /!\ Must be redefined.
     #   Writes to the output the given string as a math. expression (2d option)
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def write_math_style1(self, given_string):
-        raise error.MethodShouldBeRedefined(self, 'write_math_style1')
+        pass
 
     ##
-    #   @brief /!\ Must be redefined.
     #   Writes to the output the given string
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def write(self, given_string, **options):
-        raise error.MethodShouldBeRedefined(self, 'write')
+        pass
 
-    ##
-    #   @brief /!\ Must be redefined.
-    #   Writes to the output the given string
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def write_out(self, given_string, **options):
-        raise error.MethodShouldBeRedefined(self, 'write_out')
+        pass
 
-    ##
-    #   @brief /!\ Must be redefined.
-    #   Writes to the output the command setting the text size
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def write_set_font_size_to(self, arg):
-        raise error.MethodShouldBeRedefined(self, 'write_set_font_size_to')
+        pass
 
     ##
     #   @brief Writes a table filled with the given [strings]
@@ -173,8 +147,9 @@ class Structure(object):
     #   @param content: [strings]
     #   @options: borders=0|1|2|3... (not implemented yet)
     #   @options: unit='inch' etc. (check the possibilities...)
-    def write_table(self, size, col_widths, content, **options):
-        raise error.MethodShouldBeRedefined(self, 'write_table')
+    @abstractmethod
+    def create_table(self, size, content, **options):
+        pass
 
     ##
     #   @brief Writes content arranged like in a table (but can be written
@@ -184,47 +159,26 @@ class Structure(object):
     #   @param content: [strings]
     #   @options: borders=0|1|2|3... (not implemented yet)
     #   @options: unit='inch' etc. (check the possibilities...)
+    @abstractmethod
     def write_layout(self, size, col_widths, content, **options):
-        raise error.MethodShouldBeRedefined(self, 'write_layout')
+        pass
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief /!\ Must be redefined.
-    #   Returns a string containing the object to be displayed, according to
-    #   the desired output format (LaTeX etc.)
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def type_string(self, objct, **options):
-        raise error.MethodShouldBeRedefined(self, 'type_string')
+        pass
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief /!\ Must be redefined.
-    #   Returns a string containing the object to be displayed, according to
-    #   the desired output format (LaTeX etc.)
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def insert_picture(self, drawable_arg, **options):
-        raise error.MethodShouldBeRedefined(self, 'insert_picture')
+        pass
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief /!\ Must be redefined.
-    #   Returns a string containing the object to be displayed, according to
-    #   the desired output format (LaTeX etc.)
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def insert_dashed_hline(self, **options):
-        raise error.MethodShouldBeRedefined(self, 'insert_dashed_hline')
+        pass
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief /!\ Must be redefined.
-    #   Returns a string containing the object to be displayed, according to
-    #   the desired output format (LaTeX etc.)
-    #   @warning Will raise an exception if not redefined
+    @abstractmethod
     def insert_vspace(self, **options):
-        raise error.MethodShouldBeRedefined(self, 'insert_vspace')
+        pass
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns a non-breaking space
+    @abstractmethod
     def insert_nonbreaking_space(self, **options):
-        raise error.MethodShouldBeRedefined(self, 'insert_nonbreaking_space')
+        pass

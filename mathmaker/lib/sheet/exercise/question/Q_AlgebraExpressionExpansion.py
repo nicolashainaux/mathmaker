@@ -20,9 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import random
+
 from mathmaker.lib import shared
-from mathmaker.lib import randomly
-from mathmaker.lib.tools.auxiliary_functions import is_natural
+from mathmaker.lib.toolbox import is_natural
 from mathmaker.lib.common.cst import RANDOMLY
 from .Q_Structure import Q_Structure
 from mathmaker.lib.core.base_calculus import (Expandable, BinomialIdentity,
@@ -102,7 +103,7 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
         self.numeric_aux = None
 
         if q_kind == 'any_basic_expd':
-            randomly_drawn = randomly.decimal_0_1()
+            randomly_drawn = random.random()
             if randomly_drawn <= 0.25:
                 self.expandable_objct = Expandable((RANDOMLY,
                                                     'monom0_polyn1'),
@@ -121,9 +122,9 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
                                                randomly_reversed=0.5)
         elif q_kind == 'monom01_polyn1':
             self.expandable_objct = Expandable((RANDOMLY,
-                                                randomly
-                                                .pop(['monom0_polyn1',
-                                                      'monom1_polyn1'])),
+                                                random.choice(['monom0_polyn1',
+                                                               'monom1_polyn1'
+                                                               ])),
                                                randomly_reversed=0.5)
 
         elif q_kind == 'polyn1_polyn1':
@@ -133,10 +134,8 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
         elif q_kind == 'sum_of_any_basic_expd':
             if self.q_subkind in ['harder', 'with_a_binomial']:
                 # __
-                choices = ['monom0_polyn1', 'monom1_polyn1']
-
-                drawn_types = list()
-                drawn_types.append(randomly.pop(choices))
+                drawn_types = [random.choice(['monom0_polyn1',
+                                              'monom1_polyn1'])]
 
                 if self.q_subkind == 'with_a_binomial':
                     drawn_types.append('any_binomial')
@@ -152,41 +151,30 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
                                                               **options))
                     else:
                         aux_expd_list.append(Expandable((RANDOMLY, t)))
-
-                final_list = list()
-                for i in range(len(aux_expd_list)):
-                    final_list.append(randomly.pop(aux_expd_list))
-
-                self.expandable_objct = Sum(final_list)
+                random.shuffle(aux_expd_list)
+                self.expandable_objct = Sum(aux_expd_list)
 
             elif self.q_subkind == 'easy':
-                choices = ['monom0_polyn1', 'monom1_polyn1']
-
                 aux_expd_list = list()
-                aux_expd_list.append(Expandable((RANDOMLY,
-                                                 randomly.pop(choices))))
-
-                if randomly.heads_or_tails():
+                aux_expd_list.append(
+                    Expandable((RANDOMLY,
+                                random.choice(['monom0_polyn1',
+                                               'monom1_polyn1']))))
+                if random.choice([True, False]):
                     aux_expd_list.append(Expandable((RANDOMLY, 'sign_exp')))
                 else:
                     aux_expd_list.append(Monomial((RANDOMLY, 15,
-                                                   randomly.integer(0, 2))))
-
-                final_list = list()
-                for i in range(len(aux_expd_list)):
-                    final_list.append(randomly.pop(aux_expd_list))
-
-                self.expandable_objct = Sum(final_list)
+                                                   random.randint(0, 2))))
+                random.shuffle(aux_expd_list)
+                self.expandable_objct = Sum(aux_expd_list)
 
             else:
                 choices = ['monom0_polyn1', 'monom0_polyn1',
                            'monom1_polyn1', 'monom1_polyn1',
                            'polyn1_polyn1',
                            'minus_polyn1_polyn1']
-
-                drawn_types = list()
-                drawn_types.append(randomly.pop(choices))
-                drawn_types.append(randomly.pop(choices))
+                random.shuffle(choices)
+                drawn_types = [choices.pop(), choices.pop()]
 
                 aux_expd_list = list()
 
@@ -195,11 +183,8 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
                 aux_expd_list.append(Monomial((RANDOMLY, 15, 2)))
 
-                final_list = list()
-                for i in range(len(aux_expd_list)):
-                    final_list.append(randomly.pop(aux_expd_list))
-
-                self.expandable_objct = Sum(final_list)
+                random.shuffle(aux_expd_list)
+                self.expandable_objct = Sum(aux_expd_list)
 
         elif q_kind in ['sign_expansion', 'sign_expansion_short_test']:
             sign_exp_kind = options.get('sign_exp_kind', 0)
@@ -208,21 +193,25 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
                 sign_exp_kind = 1
 
             if sign_exp_kind == 0:
-                sign_exp_kind = randomly.integer(1, 5)
+                sign_exp_kind = random.randint(1, 5)
 
             # Creation of the terms
             aux_terms_list = list()
 
-            aux_expd_1 = Expandable((Monomial((randomly.sign(), 1, 0)),
+            aux_expd_1 = Expandable((Monomial((random.choice(['+', '-']),
+                                               1, 0)),
                                      Polynomial((RANDOMLY, 15, 2, 2))))
 
-            aux_expd_2 = Expandable((Monomial((randomly.sign(), 1, 0)),
+            aux_expd_2 = Expandable((Monomial((random.choice(['+', '-']),
+                                               1, 0)),
                                      Polynomial((RANDOMLY, 15, 2, 2))))
 
-            aux_expd_3 = Expandable((Monomial((randomly.sign(), 1, 0)),
+            aux_expd_3 = Expandable((Monomial((random.choice(['+', '-']),
+                                               1, 0)),
                                      Polynomial((RANDOMLY, 15, 2, 2))))
 
-            long_aux_expd = Expandable((Monomial((randomly.sign(), 1, 0)),
+            long_aux_expd = Expandable((Monomial((random.choice(['+', '-']),
+                                                  1, 0)),
                                         Polynomial((RANDOMLY, 15, 2, 3))))
 
             if q_kind == 'sign_expansion_short_test':
@@ -262,14 +251,9 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
 
             # add as many possibilities as wanted,
             # don't forget to increase the last number here:
-            # sign_exp_kind = randomly.integer(1, 5) (what's a bit above)
-
-            # Now let's distribute the terms randomly
-            final_terms_list = list()
-            for i in range(len(aux_terms_list)):
-                final_terms_list.append(randomly.pop(aux_terms_list))
-
-            self.expandable_objct = Sum(final_terms_list)
+            # sign_exp_kind = random.randint(1, 5) (what's a bit above)
+            random.shuffle(aux_terms_list)
+            self.expandable_objct = Sum(aux_terms_list)
 
         elif q_kind in ['numeric_sum_square', 'numeric_difference_square',
                         'numeric_squares_difference']:

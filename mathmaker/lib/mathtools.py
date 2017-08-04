@@ -25,7 +25,7 @@ import math
 import random
 from decimal import Decimal
 
-from mathmaker.lib.tools.auxiliary_functions import is_integer, is_number
+from mathmaker.lib.toolbox import is_integer, is_number
 
 
 # DIVISORS frequently used by the children
@@ -74,13 +74,6 @@ POLYGONS_NATURES = {3: 'Triangle', 4: 'Quadrilatere', 5: 'Pentagon',
 
 # CONSTANTS CONCERNING MATH OBJECTS
 ZERO_POLYNOMIAL_DEGREE = -sys.maxsize
-
-
-def abs(nb):
-    if nb >= 0:
-        return nb
-    else:
-        return -nb
 
 
 # --------------------------------------------------------------------------
@@ -275,17 +268,6 @@ def is_uneven(objct):
 
 # --------------------------------------------------------------------------
 ##
-#   @brief Conversions between degrees and radians
-def deg_to_rad(arg):
-    if not is_number(arg):
-        raise TypeError('Expected a number, got a ' + str(type(arg))
-                        + ' instead.')
-
-    return Decimal(str(arg)) * Decimal(str(math.pi / 180))
-
-
-# --------------------------------------------------------------------------
-##
 #   @brief Mean of a list of numbers
 def mean(numberList, weights=None):
     if not type(numberList) == list:
@@ -422,3 +404,21 @@ def coprimes_to(n, span):
     :rtype: list
     """
     return [x for x in span if gcd(n, x) == 1]
+
+
+def not_coprimes_to(n, span, exclude=None):
+    """
+    List numbers NOT coprime to n inside provided span.
+
+    :param n: integer number
+    :type n: int
+    :param span: a list of integer numbers
+    :type span: list
+    :param exclude: a list of number to always exclude from the results
+    :type exclude: list
+    :rtype: list
+    """
+    if exclude is None:
+        exclude = []
+
+    return [x for x in span if (x not in exclude and gcd(n, x) != 1)]

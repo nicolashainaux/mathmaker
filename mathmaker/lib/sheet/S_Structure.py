@@ -20,7 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import shared, error
+from abc import ABCMeta, abstractmethod
+
+from mathmaker.lib import shared
 
 
 # ------------------------------------------------------------------------------
@@ -31,21 +33,12 @@ from mathmaker.lib import shared, error
 # @brief Abstract mother class of all sheets!
 # The constructor only has to be reimplemented, it is useless to reimplement
 # other methods
-class S_Structure(object):
+class S_Structure(object, metaclass=ABCMeta):
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief /!\ Must be redefined. Constructor.
-    #   @warning Exception NotInstanciableObject.
-    #   @param **options Any options
+    @abstractmethod
     def __init__(self, font_size_offset,
                  sheet_layout_unit, sheet_layout, layout_type,
                  **options):
-        try:
-            self.derived
-        except AttributeError:
-            raise error.NotInstanciableObject(self)
-
         self.exercises_list = list()
         shared.machine.set_font_size_offset(font_size_offset)
 
@@ -62,91 +55,89 @@ class S_Structure(object):
         # 'exc' key as in 'ans' key (which would be stupid) this
         # won't be checked here and so it won't work.
         if type(sheet_layout) != dict:
-            raise error.UncompatibleType(str(type(sheet_layout)),
-                                         'dict')
+            raise TypeError('Got: ' + str(type(type(sheet_layout)))
+                            + ' instead of a dict')
 
         if len(sheet_layout) != 2:
-            raise error.WrongArgument('SHEET_LAYOUT should have two keys',
-                                      'it has ' + str(len(sheet_layout))
-                                      + ' keys')
+            raise ValueError('SHEET_LAYOUT should have two keys '
+                             'but it has ' + str(len(sheet_layout)) + ' keys')
 
         for k in ['exc', 'ans']:
             if k not in sheet_layout:
-                raise error.WrongArgument('SHEET_LAYOUT should have a key '
-                                          + k,
-                                          'it has no such key')
+                raise ValueError('SHEET_LAYOUT should have a key '
+                                 + k + ' but it has no such key')
 
             if type(sheet_layout[k]) != list:
-                raise error.WrongArgument('SHEET_LAYOUT[' + k + '] should be'
-                                          + ' a list',
-                                          str(type(sheet_layout[k])))
+                raise ValueError('SHEET_LAYOUT[' + k + '] should be'
+                                 + ' a list, but it is '
+                                 + str(type(sheet_layout[k])))
 
             if len(sheet_layout[k]) % 2:
-                raise error.WrongArgument('SHEET_LAYOUT[' + k + '] should have'
-                                          + ' an even number of elements',
-                                          str(len(sheet_layout[k]))
-                                          + ' elements')
+                raise ValueError('SHEET_LAYOUT[' + k + '] should have'
+                                 + ' an even number of elements but it has '
+                                 + str(len(sheet_layout[k]))
+                                 + ' elements')
 
             for i in range(int(len(sheet_layout[k]) // 2)):
                 if (not (sheet_layout[k][2 * i] is None
                     or type(sheet_layout[k][2 * i]) == list
                     or sheet_layout[k][2 * i] == 'jump')):
                     # __
-                    raise error.WrongArgument('SHEET_LAYOUT[' + k + ']['
-                                              + str(2 * i) + '] should be '
-                                              'either a list '
-                                              'or None or "jump"',
-                                              str(type(
-                                                  sheet_layout[k][2 * i])))
+                    raise ValueError('SHEET_LAYOUT[' + k + ']['
+                                     + str(2 * i) + '] should be '
+                                     'either a list '
+                                     'or None or "jump", but it is a '
+                                     + str(type(sheet_layout[k][2 * i])))
                 elif sheet_layout[k][2 * i] is None:
                     if (not (type(sheet_layout[k][2 * i + 1]) == int
                         or sheet_layout[k][2 * i + 1]
                         in ['all', 'all_left', 'jump'])):
                         # __
-                        raise error.WrongArgument(
+                        raise ValueError(
                             'SHEET_LAYOUT[' + k + ']['
                             + str(2 * i + 1) + '] should be an '
                             + 'int since it follows the None'
-                            + 'keyword',
-                            type(sheet_layout[k][2 * i + 1]))
+                            + 'keyword, but it is '
+                            + str(type(sheet_layout[k][2 * i + 1])))
 
                 elif sheet_layout[k][2 * i] == 'jump':
                     if not sheet_layout[k][2 * i + 1] == 'next_page':
-                        raise error.WrongArgument(
+                        raise ValueError(
                             'SHEET_LAYOUT[' + k + ']['
                             + str(2 * i + 1) + '] should be: '
                             + 'next_page since it follows '
-                            + 'the jump keyword',
-                            type(sheet_layout[k][2 * i + 1]))
+                            + 'the jump keyword, but it is '
+                            + str(type(sheet_layout[k][2 * i + 1])))
 
                 elif type(sheet_layout[k][2 * i]) == list:
                     if not type(sheet_layout[k][2 * i + 1]) == tuple:
-                        raise error.WrongArgument(
+                        raise ValueError(
                             'SHEET_LAYOUT[' + k + ']['
-                            + str(2 * i + 1) + '] should be a tuple',
-                            type(sheet_layout[k][2 * i + 1]))
+                            + str(2 * i + 1) + '] should be a tuple, '
+                            'but it is '
+                            + str(type(sheet_layout[k][2 * i + 1])))
 
                     if (not len(sheet_layout[k][2 * i + 1])
                         == (len(sheet_layout[k][2 * i]) - 1)
                         * sheet_layout[k][2 * i][0]):
                         # __
-                        raise error.WrongArgument(
+                        raise ValueError(
                             'SHEET_LAYOUT[' + k + ']['
                             + str(2 * i + 1) + '] should have '
                             + ' as many elements as the '
                             + 'number of cols described in '
                             + 'SHEET_LAYOUT[' + k + ']['
-                            + str(2 * i) + ']',
-                            str(len(sheet_layout[k][2 * i + 1]))
+                            + str(2 * i) + '], but found '
+                            + str(len(sheet_layout[k][2 * i + 1]))
                             + ' instead of '
                             + str(len(sheet_layout[k][2 * i]) - 1))
                 else:
-                    raise error.WrongArgument(
+                    raise ValueError(
                         'SHEET_LAYOUT[' + k + ']['
                         + str(2 * i) + '] is not of any '
                         + ' of the expected types or '
-                        + 'values.',
-                        str(len(sheet_layout[k][2 * i])))
+                        + 'values, it is instead: '
+                        + str(len(sheet_layout[k][2 * i])))
 
         self.sheet_layout = sheet_layout
 
@@ -285,9 +276,8 @@ class S_Structure(object):
             result += shared.machine.write_document_ends()
 
         else:
-            raise error.OutOfRangeArgument(
-                self.layout_type,
-                "std|short_test|mini_test|equations|mental")
+            raise ValueError('Got ' + self.layout_type + 'instead of std|'
+                             'short_test|mini_test|equations|mental')
 
         return result
 

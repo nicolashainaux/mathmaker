@@ -20,7 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import error
 
 ALL_TRIPLES_5_100 = [
     [3, 4, 5],
@@ -284,7 +283,7 @@ ALL_TRIPLES_5_200 = [
 #   @brief Will return all [first_leg, second_leg] matching a given hypotenuse
 def get_legs_matching_given_hypotenuse(side_length):
     if not type(side_length) == int:
-        raise error.WrongArgument(str(side_length), "int")
+        raise ValueError('side_length must be int')
 
     result = []
 
@@ -300,7 +299,7 @@ def get_legs_matching_given_hypotenuse(side_length):
 #   @brief Will return all leg values matching a given one
 def get_legs_matching_given_leg(side_length):
     if not type(side_length) == int:
-        raise error.WrongArgument(str(side_length), "int")
+        raise ValueError('side_length must be int')
 
     result = []
 

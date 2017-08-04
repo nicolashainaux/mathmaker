@@ -27,7 +27,6 @@ import random
 
 from decimal import Decimal
 from mathmaker.lib.core.base_calculus import Item
-from mathmaker.lib import randomly
 from mathmaker.lib.common.cst import RANKS, RANKS_CONFUSING, RANKS_WORDS
 
 DEFAULT_WIDTH = "random"
@@ -39,8 +38,10 @@ class sub_object(object):
     def __init__(self, rank_to_use, **options):
         rank_to_use = rank_to_use[0]
         generation_type = options.get('generation_type',
-                                      randomly.pop(["default", "alternative"]))
+                                      random.choice(['default',
+                                                     'alternative']))
         figures = [str(i + 1) for i in range(9)]
+        random.shuffle(figures)
         ranks_scale = options.get('ranks_scale',
                                   copy.copy(DEFAULT_RANKS_SCALE))
         width = DEFAULT_WIDTH
@@ -54,13 +55,13 @@ class sub_object(object):
 
         if width == "random":
             if generation_type == "default":
-                width = randomly.pop([3, 4, 5, 6, 7])
+                width = random.choice([3, 4, 5, 6, 7])
             else:
-                width = randomly.pop([2, 3, 4, 5],
-                                     weighted_table=[0.1, 0.3, 0.35, 0.25])
+                width = random.choices([2, 3, 4, 5],
+                                       cum_weights=[0.1, 0.4, 0.75, 1])[0]
             if 'numberof' in options:
-                width = randomly.pop([2, 3, 4, 5],
-                                     weighted_table=[0.15, 0.4, 0.3, 0.15])
+                width = random.choices([2, 3, 4, 5],
+                                       cum_weights=[0.15, 0.55, 0.85, 1])[0]
         if 'numberof' in options:
             generation_type = "default"
 
@@ -96,7 +97,7 @@ class sub_object(object):
                                                 - lowest_start_rank
                                                 + 1)]
 
-                    start_rank = randomly.pop(possible_start_ranks)
+                    start_rank = random.choice(possible_start_ranks)
 
                     ranks = [start_rank + r for r in range(width)]
 
@@ -134,13 +135,13 @@ class sub_object(object):
 
             # Let's start the generation of the number:
             for r in ranks:
-                figure = randomly.pop(figures)
+                figure = figures.pop()
                 self.chosen_deci += Decimal(figure) * ranks_scale[r]
 
         # "Alternative" way of generating a number randomly:
         else:
             figure = "0" if rank_matches_invisible_zero \
-                else randomly.pop(figures)
+                else figures.pop()
 
             self.chosen_deci += Decimal(figure) * rank_to_use
             ranks_scale.remove(rank_to_use)
@@ -148,27 +149,28 @@ class sub_object(object):
             if rank_matches_invisible_zero:
                 if rank_to_use <= Decimal("0.1"):
                     next_rank = rank_to_use * Decimal("10")
-                    figure = randomly.pop(figures)
+                    figure = figures.pop()
                     self.chosen_deci += Decimal(figure) * next_rank
                     ranks_scale = [r for r in ranks_scale if r > next_rank]
                 elif rank_to_use >= Decimal("10"):
                     next_rank = rank_to_use * Decimal("0.1")
-                    figure = randomly.pop(figures)
+                    figure = figures.pop()
                     self.chosen_deci += Decimal(figure) * next_rank
                     ranks_scale = [r for r in ranks_scale if r < next_rank]
 
             width = min(width, len(ranks_scale))
 
             if rank_to_use != Decimal("1") and not rank_matches_invisible_zero:
-                figure = randomly.pop(figures)
+                figure = figures.pop()
                 r = RANKS_CONFUSING[-(RANKS_CONFUSING.index(rank_to_use) + 1)]
                 self.chosen_deci += Decimal(figure) * r
                 ranks_scale.remove(r)
                 width -= 1
 
             for i in range(width):
-                figure = randomly.pop(figures)
-                r = randomly.pop(ranks_scale)
+                figure = figures.pop()
+                r = random.choice(ranks_scale)
+                ranks_scale.remove(r)
                 self.chosen_deci += Decimal(figure) * r
 
         self.chosen_figure = (self.chosen_deci

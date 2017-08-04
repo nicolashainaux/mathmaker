@@ -23,8 +23,7 @@
 import random
 
 from mathmaker.lib import shared
-from mathmaker.lib import error
-from mathmaker.lib.tools.wording import setup_wording_format_of
+from mathmaker.lib.wording import setup_wording_format_of
 from mathmaker.lib.core.root_calculus import Value
 from .. import submodule
 
@@ -43,10 +42,10 @@ class sub_object(submodule.structure):
             variant = self.variant
 
         if variant not in ['adjacent', 'opposite']:
-            raise error.XMLFileFormatError('Invalid variant: {v}, '
-                                           .format(v=variant)
-                                           + 'It should be in: '
-                                           '[\'adjacent\', \'opposite\']')
+            raise ValueError('XMLFileFormatError: Invalid variant: {v}, '
+                             .format(v=variant)
+                             + 'It should be in: '
+                             '[\'adjacent\', \'opposite\']')
 
         angle_nb = random.choice([0, 2])
 

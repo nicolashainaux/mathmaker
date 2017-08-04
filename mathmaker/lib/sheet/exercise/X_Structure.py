@@ -20,9 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from abc import ABCMeta, abstractmethod
+
 from mathmaker.lib import shared
-from mathmaker.lib import error
-from mathmaker.lib.tools.auxiliary_functions import is_integer
+from mathmaker.lib.toolbox import is_integer
 
 MIN_ROW_HEIGHT = 0.8  # this is for mental calculation exercises
 
@@ -37,20 +38,11 @@ MIN_ROW_HEIGHT = 0.8  # this is for mental calculation exercises
 # class: write_text and write_answer. In a new exercise, they can either be
 # kept untouched (then it would be wise to delete them from the new exercise)
 # or rewritten.
-class X_Structure(object):
+class X_Structure(object, metaclass=ABCMeta):
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief /!\ Must be redefined. Constructor.
-    #   @warning Exception NotInstanciableObject.
-    #   @param **options Any options
+    @abstractmethod
     def __init__(self, x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
                  X_LAYOUT_UNIT, number_of_questions=6, **options):
-        try:
-            self.derived
-        except AttributeError:
-            raise error.NotInstanciableObject(self)
-
         self.questions_list = list()
 
         # OPTIONS -------------------------------------------------------------
@@ -61,8 +53,9 @@ class X_Structure(object):
         try:
             AVAILABLE_X_KIND_VALUES[x_kind]
         except KeyError:
-            raise error.OutOfRangeArgument(x_kind,
-                                           str(AVAILABLE_X_KIND_VALUES))
+            raise ValueError('Got ' + str(x_kind) + ' instead of one of the '
+                             'possible values: '
+                             + str(AVAILABLE_X_KIND_VALUES))
 
         x_subkind = 'default'
         if 'x_subkind' in options:
@@ -76,9 +69,9 @@ class X_Structure(object):
             self.options = temp_options
 
         if x_subkind not in AVAILABLE_X_KIND_VALUES[x_kind]:
-            raise error.OutOfRangeArgument(x_subkind,
-                                           str(AVAILABLE_X_KIND_VALUES[
-                                               x_kind]))
+            raise ValueError('Got ' + str(x_kind) + ' instead of one of the '
+                             'possible values: '
+                             + str(AVAILABLE_X_KIND_VALUES[x_kind]))
 
         self.x_kind = x_kind
         self.x_subkind = x_subkind
@@ -87,11 +80,11 @@ class X_Structure(object):
         self.start_number = 0
         if 'start_number' in options:
             if not is_integer(options['start_number']):
-                raise error.UncompatibleType(options['start_number'],
-                                             "integer")
+                raise TypeError('Got: ' + str(type(options['start_number']))
+                                + ' instead of an integer')
             if not (options['start_number'] >= 1):
-                raise error.OutOfRangeArgument(options['start_number'],
-                                               "should be >= 1")
+                raise ValueError(str(options['start_number'])
+                                 + 'should be >= 1')
 
             self.start_number = options['start_number']
 
@@ -99,8 +92,8 @@ class X_Structure(object):
         if (not isinstance(number_of_questions, int)
             and number_of_questions >= 1):
             # __
-            raise ValueError("The number_of_questions keyword argument should "
-                             "be an int and greater than 6.")
+            raise ValueError('The number_of_questions keyword argument should '
+                             'be an int and greater than 6.')
         self.q_nb = number_of_questions
 
         self.layout = options.get('layout', 'default')

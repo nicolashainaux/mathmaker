@@ -20,9 +20,13 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import random
+from abc import ABCMeta, abstractmethod
+
 from mathmaker import settings
-from mathmaker.lib import shared, error, randomly, maths_lib
-from mathmaker.lib.tools.auxiliary_functions import is_integer, is_number
+from mathmaker.lib import shared
+from mathmaker.lib.mathtools import gcd, sign_of_product
+from mathmaker.lib.toolbox import is_integer, is_number
 from mathmaker.lib.common import alphabet
 from mathmaker.lib.common.cst import RANDOMLY
 from mathmaker.lib.core.utils import gather_literals
@@ -89,14 +93,15 @@ FRACTIONS_SUMS_SCALE_TABLE = [0.02,  # (1, 2)
 ##
 # @class ComposedCalculable
 # @brief Abstract mother class of objects composed of Calculable=Calculable=...
-class ComposedCalculable(Printable):
+class ComposedCalculable(Printable, metaclass=ABCMeta):
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Must be redefined
+    @abstractmethod
     def __init__(self):
-        raise error.MethodShouldBeRedefined(self, "__init__")
+        pass
 
 
 # ------------------------------------------------------------------------------
@@ -110,7 +115,6 @@ class Expression(ComposedCalculable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
     #   @param integer_or_letter A string or an integer
     #   @param objct The Exponented that will be at the right hand side
     #   @return One instance of Expression
@@ -120,11 +124,12 @@ class Expression(ComposedCalculable):
                 or (is_number(integer_or_letter)
                     and is_integer(integer_or_letter))):
             # __
-            raise error.UncompatibleType(integer_or_letter,
-                                         "integer_or_letter")
+            raise TypeError('Got: ' + str(type(integer_or_letter))
+                            + ' instead of a str or integer number')
 
         if not (isinstance(objct, Exponented) or objct is None):
-            raise error.UncompatibleType(objct, "Exponented|None")
+            raise TypeError('Got: ' + str(type(integer_or_letter))
+                            + ' instead of Exponented|None')
 
         self._name = integer_or_letter
         self._right_hand_side = objct.clone()
@@ -144,7 +149,8 @@ class Expression(ComposedCalculable):
     #   @brief Sets the right hand side of the Expression
     def set_right_hand_side(self, arg):
         if not (isinstance(arg, Exponented)):
-            raise error.UncompatibleType(arg, "Exponented")
+            raise TypeError('Got: ' + str(type(arg)) + ' instead of '
+                            'Exponented')
 
         self._right_hand_side = arg.clone()
 
@@ -220,7 +226,6 @@ class Equality(ComposedCalculable, Substitutable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
     #   @param objcts is a [Exponented] of 2 elements at least
     #   @option equal_signs Contains a list of equal/not equal signs. Must be
     #   @option             as long as len(objcts) - 1. The signs are "=" or
@@ -229,34 +234,33 @@ class Equality(ComposedCalculable, Substitutable):
     def __init__(self, objcts, subst_dict=None, **options):
         # just check if the given arguments are right
         if not (isinstance(objcts, list)):
-            raise error.UncompatibleType(objcts, "should be a LIST "
-                                                 "(of two Exponenteds "
-                                                 "at least)")
+            raise TypeError('Got: ' + str(type(objcts)) + ' instead of '
+                            'a list (of two Exponenteds at least)')
         if not len(objcts) >= 2:
-            raise error.UncompatibleType(objcts, "should be a list of "
-                                                 "TWO Exponenteds AT LEAST")
+            raise TypeError('Got: ' + str(type(objcts)) + ' instead of '
+                            'a list of TWO Exponenteds AT LEAST')
 
         for i in range(len(objcts)):
             if not isinstance(objcts[i], Exponented):
-                raise error.UncompatibleType(objcts[i], "should be an "
-                                                        "Exponented")
+                raise TypeError('Got: ' + str(type(objcts[i])) + ' instead of '
+                                'an Exponented')
 
         if 'equal_signs' in options:
             if not type(options['equal_signs']) == list:
-                raise error.UncompatibleType(options['equal_signs'],
-                                             "should be a list")
+                raise TypeError('Got: ' + str(type(options['equal_signs']))
+                                + ' instead of a list')
             if not len(options['equal_signs']) == len(objcts) - 1:
-                raise error.UncompatibleType(options['equal_signs'],
-                                             "should contain "
-                                             + str(len(objcts) - 1)
-                                             + " elements.")
+                raise TypeError('Got a list of: '
+                                + str(len(options['equal_signs']))
+                                + ' elements instead of '
+                                + str(len(objcts) - 1))
 
             for i in range(len(options['equal_signs'])):
                 if not (options['equal_signs'][i] == '='
                         or options['equal_signs'][i] == 'neq'):
                     # __
-                    raise error.UncompatibleType(options['equal_signs'][i],
-                                                 " should be '=' or 'neq'")
+                    raise TypeError(options['equal_signs'][i]
+                                    + ' should be \'=\' or \'neq\'')
 
         self._elements = []
         self._equal_signs = []
@@ -362,7 +366,6 @@ class Equation(ComposedCalculable):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
     #   @param arg Equation|(Exponented, Exponented)|(RANDOMLY, ...)|Equality
     #   @return One instance of Equation
     def __init__(self, arg, **options):
@@ -389,27 +392,23 @@ class Equation(ComposedCalculable):
 
         if isinstance(arg, Equality):
             if not len(arg) == 2:
-                raise error.ImpossibleAction('turn into an Equation an '
-                                             'Equality having '
-                                             'not exactly 2 members')
+                raise RuntimeError('Impossible to turn into an Equation an '
+                                   'Equality having not exactly 2 members')
             literals_list = list(set(gather_literals(arg[0])
                                      + gather_literals(arg[1])))
             if not len(literals_list) == 1:
-                raise error.ImpossibleAction("create an Equation from an "
-                                             "Equality "
-                                             "containing more than ONE "
-                                             "unknown literal. This one "
-                                             "contains "
-                                             + str(len(literals_list))
-                                             + " literals which are "
-                                             + str([repr(elt)
-                                                    for elt in literals_list]))
+                raise RuntimeError('create an Equation from an Equality '
+                                   'containing more than ONE unknown literal. '
+                                   'This one contains '
+                                   + str(len(literals_list))
+                                   + ' literals which are '
+                                   + str([repr(elt) for elt in literals_list]))
 
             if (not isinstance(literals_list[0], Value)
                 and not literals_list[0].is_literal()):
                 # __
-                raise error.WrongArgument(repr(literals_list[0]),
-                                          "a literal Value")
+                raise ValueError('Expected a literal Value, instead of '
+                                 + repr(literals_list[0]))
 
             self.__init__((arg[0], arg[1]),
                           variable_letter_name=literals_list[0]
@@ -448,13 +447,13 @@ class Equation(ComposedCalculable):
                 if arg[1] == 'basic_addition':
                     self._left_hand_side = Polynomial([
                         Monomial(('+', 1, 1)),
-                        Monomial((randomly.sign(),
-                                  randomly.integer(1, MAX_VALUE),
+                        Monomial((random.choice(['+', '-']),
+                                  random.randint(1, MAX_VALUE),
                                   0))])
 
                     self._right_hand_side = Sum(
-                        Item((randomly.sign(),
-                              randomly.integer(1, MAX_VALUE))))
+                        Item((random.choice(['+', '-']),
+                              random.randint(1, MAX_VALUE))))
 
                     self._left_hand_side.term[0]\
                         .set_letter(self.variable_letter)
@@ -462,56 +461,64 @@ class Equation(ComposedCalculable):
                 elif arg[1] == 'basic_addition_r':
                     self._right_hand_side = Polynomial([
                         Monomial(('+', 1, 1)),
-                        Monomial((randomly.sign(),
-                                  randomly.integer(1, MAX_VALUE),
+                        Monomial((random.choice(['+', '-']),
+                                  random.randint(1, MAX_VALUE),
                                   0))])
 
                     self._left_hand_side = Sum(
-                        Item((randomly.sign(),
-                              randomly.integer(1, MAX_VALUE))))
+                        Item((random.choice(['+', '-']),
+                              random.randint(1, MAX_VALUE))))
 
                     self._right_hand_side.term[0]\
                         .set_letter(self.variable_letter)
 
                 elif arg[1] == 'any_basic_addition':
-                    cst_list = list()
-                    m1 = Monomial((randomly.sign(plus_signs_ratio=0.8), 1, 1))
+                    m1 = Monomial((random.choices(['+', '-'],
+                                                  cum_weights=[0.8, 1])[0],
+                                   1, 1))
                     m1.set_letter(self.variable_letter)
-                    m2 = Monomial((randomly.sign(),
-                                   randomly.integer(1, MAX_VALUE),
+                    m2 = Monomial((random.choice(['+', '-']),
+                                   random.randint(1, MAX_VALUE),
                                    0))
 
-                    m3 = Monomial((randomly.sign(),
-                                   randomly.integer(1, MAX_VALUE),
+                    m3 = Monomial((random.choice(['+', '-']),
+                                   random.randint(1, MAX_VALUE),
                                    0))
 
-                    cst_list.append(m2)
-                    cst_list.append(m3)
+                    if random.choice([True, False]):
+                        cst_list = [m2, m3]
+                    else:
+                        cst_list = [m3, m2]
 
-                    drawn_to_be_with_x = randomly.pop(cst_list)
+                    drawn_to_be_with_x = cst_list.pop()
 
-                    polyn_list = list()
-                    polyn_list.append(m1)
-                    polyn_list.append(drawn_to_be_with_x)
+                    if random.choice([True, False]):
+                        polyn_list = [m1, drawn_to_be_with_x]
+                    else:
+                        polyn_list = [drawn_to_be_with_x, m1]
 
-                    polyn = Polynomial([randomly.pop(polyn_list),
-                                        randomly.pop(polyn_list)])
-                    sides = list()
-                    sides.append(polyn)
-                    sides.append(Sum(randomly.pop(cst_list)))
+                    polyn = Polynomial([polyn_list.pop(),
+                                        polyn_list.pop()])
 
-                    self._left_hand_side = randomly.pop(sides)
-                    self._right_hand_side = randomly.pop(sides)
+                    if random.choice([True, False]):
+                        sides = [polyn, Sum(cst_list.pop())]
+                    else:
+                        sides = [Sum(cst_list.pop()), polyn]
+
+                    self._left_hand_side = sides.pop()
+                    self._right_hand_side = sides.pop()
 
                 elif arg[1] == 'basic_multiplication':
                     self._left_hand_side = Sum(
-                        Monomial((randomly.sign(plus_signs_ratio=0.75),
-                                  randomly.integer(2, MAX_VALUE),
+                        Monomial((random.choices(['+', '-'],
+                                                 cum_weights=[0.75, 1])[0],
+                                  random.randint(2, MAX_VALUE),
                                   1)))
 
                     self._right_hand_side = Sum(
-                        Item((randomly.sign(plus_signs_ratio=0.75),
-                              randomly.integer(1, MAX_VALUE),
+                        Item((random.choices(['+', '-'],
+                                             cum_weights=[0.75, 1])[0],
+                              random.randint(1, MAX_VALUE),
                               1)))
 
                     self._left_hand_side.term[0]\
@@ -519,82 +526,95 @@ class Equation(ComposedCalculable):
 
                 elif arg[1] == 'basic_multiplication_r':
                     self._right_hand_side = Sum(
-                        Monomial((randomly.sign(plus_signs_ratio=0.75),
-                                  randomly.integer(2, MAX_VALUE),
+                        Monomial((random.choices(['+', '-'],
+                                                 cum_weights=[0.75, 1])[0],
+                                  random.randint(2, MAX_VALUE),
                                   1)))
 
                     self._left_hand_side = Sum(
-                        Item((randomly.sign(plus_signs_ratio=0.75),
-                              randomly.integer(1, MAX_VALUE),
+                        Item((random.choices(['+', '-'],
+                                             cum_weights=[0.75, 1])[0],
+                              random.randint(1, MAX_VALUE),
                               1)))
 
                     self._right_hand_side.term[0]\
                         .set_letter(self.variable_letter)
 
                 elif arg[1] == 'any_basic_multiplication':
-                    m1 = Monomial((randomly.sign(plus_signs_ratio=0.75),
-                                   randomly.integer(2, MAX_VALUE),
+                    m1 = Monomial((random.choices(['+', '-'],
+                                                  cum_weights=[0.75, 1])[0],
+                                   random.randint(2, MAX_VALUE),
                                    1))
                     m1.set_letter(self.variable_letter)
 
-                    m2 = Item((randomly.sign(plus_signs_ratio=0.75),
-                               randomly.integer(1, MAX_VALUE),
+                    m2 = Item((random.choices(['+', '-'],
+                                              cum_weights=[0.75, 1])[0],
+                               random.randint(1, MAX_VALUE),
                                1))
 
-                    items_list = list()
-                    items_list.append(Sum(m1))
-                    items_list.append(Sum(m2))
+                    if random.choice([True, False]):
+                        items_list = [Sum(m1), Sum(m2)]
+                    else:
+                        items_list = [Sum(m2), Sum(m1)]
 
-                    self._left_hand_side = randomly.pop(items_list)
-                    self._right_hand_side = randomly.pop(items_list)
+                    self._left_hand_side = items_list.pop()
+                    self._right_hand_side = items_list.pop()
 
                 elif arg[1] == 'any_basic':  # code duplication... done quickly
-                    if randomly.heads_or_tails():
-                        m1 = Monomial((randomly.sign(plus_signs_ratio=0.75),
-                                       randomly.integer(2, MAX_VALUE),
+                    if random.choice([True, False]):
+                        m1 = Monomial((random.choices(['+', '-'],
+                                                      cum_weights=[0.75,
+                                                                   1])[0],
+                                       random.randint(2, MAX_VALUE),
                                        1))
                         m1.set_letter(self.variable_letter)
 
-                        m2 = Item((randomly.sign(plus_signs_ratio=0.75),
-                                   randomly.integer(1, MAX_VALUE),
+                        m2 = Item((random.choices(['+', '-'],
+                                                  cum_weights=[0.75, 1])[0],
+                                   random.randint(1, MAX_VALUE),
                                    1))
-
-                        items_list = list()
-                        items_list.append(Sum(m1))
-                        items_list.append(Sum(m2))
-
-                        self._left_hand_side = randomly.pop(items_list)
-                        self._right_hand_side = randomly.pop(items_list)
+                        if random.choice([True, False]):
+                            items_list = [Sum(m1), Sum(m2)]
+                        else:
+                            items_list = [Sum(m2), Sum(m1)]
+                        self._left_hand_side = items_list.pop()
+                        self._right_hand_side = items_list.pop()
                     else:
                         cst_list = list()
-                        m1 = Monomial((randomly.sign(plus_signs_ratio=0.8),
+                        m1 = Monomial((random.choices(['+', '-'],
+                                                      cum_weights=[0.8, 1])[0],
                                        1,
                                        1))
                         m1.set_letter(self.variable_letter)
-                        m2 = Monomial((randomly.sign(),
-                                       randomly.integer(1, MAX_VALUE),
+                        m2 = Monomial((random.choice(['+', '-']),
+                                       random.randint(1, MAX_VALUE),
                                        0))
-                        m3 = Monomial((randomly.sign(),
-                                       randomly.integer(1, MAX_VALUE),
+                        m3 = Monomial((random.choice(['+', '-']),
+                                       random.randint(1, MAX_VALUE),
                                        0))
 
-                        cst_list.append(m2)
-                        cst_list.append(m3)
+                        if random.choice([True, False]):
+                            cst_list = [m2, m3]
+                        else:
+                            cst_list = [m3, m2]
 
-                        drawn_to_be_with_x = randomly.pop(cst_list)
+                        drawn_to_be_with_x = cst_list.pop()
 
-                        polyn_list = list()
-                        polyn_list.append(m1)
-                        polyn_list.append(drawn_to_be_with_x)
+                        if random.choice([True, False]):
+                            polyn_list = [m1, drawn_to_be_with_x]
+                        else:
+                            polyn_list = [drawn_to_be_with_x, m1]
 
-                        polyn = Polynomial([randomly.pop(polyn_list),
-                                            randomly.pop(polyn_list)])
-                        sides = list()
-                        sides.append(polyn)
-                        sides.append(Sum(randomly.pop(cst_list)))
+                        polyn = Polynomial([polyn_list.pop(),
+                                            polyn_list.pop()])
 
-                        self._left_hand_side = randomly.pop(sides)
-                        self._right_hand_side = randomly.pop(sides)
+                        if random.choice([True, False]):
+                            sides = [polyn, Sum(cst_list.pop())]
+                        else:
+                            sides = [Sum(cst_list.pop()), polyn]
+
+                        self._left_hand_side = sides.pop()
+                        self._right_hand_side = sides.pop()
 
                 elif (arg[1] in ['classic', 'classic_r', 'classic_x_twice',
                       'any_classic']):
@@ -604,52 +624,50 @@ class Equation(ComposedCalculable):
                     # classic_r: d = ax + b | d = b + ax
                     # classic_x_twice: ax + b = cx + d | ax + b = cx |
                     #                   cx = ax + b | b + ax = cx + d etc.
-                    box = list()
-                    ax = Monomial((randomly.sign(plus_signs_ratio=0.65),
-                                   randomly.integer(1, MAX_VALUE),
+                    ax = Monomial((random.choices(['+', '-'],
+                                                  cum_weights=[0.65, 1])[0],
+                                   random.randint(1, MAX_VALUE),
                                    1))
                     ax.set_letter(self.variable_letter)
 
-                    b = Monomial((randomly.sign(),
-                                  randomly.integer(1, MAX_VALUE),
+                    b = Monomial((random.choice(['+', '-']),
+                                  random.randint(1, MAX_VALUE),
                                   0))
-                    cx = Monomial((randomly.sign(plus_signs_ratio=0.65),
-                                   randomly.integer(1, MAX_VALUE),
+                    cx = Monomial((random.choices(['+', '-'],
+                                                  cum_weights=[0.65, 1])[0],
+                                   random.randint(1, MAX_VALUE),
                                    1))
                     cx.set_letter(self.variable_letter)
 
-                    d = Monomial((randomly.sign(),
-                                  randomly.integer(1, MAX_VALUE),
+                    d = Monomial((random.choice(['+', '-']),
+                                  random.randint(1, MAX_VALUE),
                                   0))
 
-                    box.append(ax)
-                    box.append(b)
-
-                    polyn1 = Polynomial([randomly.pop(box), randomly.pop(box)])
+                    if random.choice([True, False]):
+                        polyn1 = Polynomial([ax, b])
+                    else:
+                        polyn1 = Polynomial([b, ax])
 
                     if arg[1] == 'classic' or arg[1] == 'classic_r':
                         polyn2 = Polynomial([d])
                     elif arg[1] == 'classic_x_twice':
-                        if randomly.decimal_0_1() > 0.3:
-                            box = list()
-                            box.append(cx)
-                            box.append(d)
-                            polyn2 = Polynomial([randomly.pop(box),
-                                                 randomly.pop(box)])
+                        if random.random() > 0.3:
+                            if random.choice([True, False]):
+                                polyn2 = Polynomial([cx, d])
+                            else:
+                                polyn2 = Polynomial([d, cx])
                         else:
                             polyn2 = Polynomial([cx])
 
                     elif arg[1] == 'any_classic':
-                        box = list()
-                        random_nb = randomly.decimal_0_1()
+                        random_nb = random.random()
                         if random_nb < 0.4:
-                            box.append(cx)
-                            box.append(d)
-                            polyn2 = Polynomial([randomly.pop(box),
-                                                 randomly.pop(box)])
+                            if random.choice([True, False]):
+                                polyn2 = Polynomial([cx, d])
+                            else:
+                                polyn2 = Polynomial([d, cx])
                         elif random_nb < 0.7:
                             polyn2 = Polynomial([d])
-
                         else:
                             polyn2 = Polynomial([cx])
 
@@ -660,23 +678,24 @@ class Equation(ComposedCalculable):
                         self._left_hand_side = polyn2
                         self._right_hand_side = polyn1
                     elif arg[1] in ['classic_x_twice', 'any_classic']:
-                        box = list()
-                        box.append(polyn1)
-                        box.append(polyn2)
-                        self._left_hand_side = randomly.pop(box)
-                        self._right_hand_side = randomly.pop(box)
+                        if random.choice([True, False]):
+                            box = [polyn1, polyn2]
+                        else:
+                            box = [polyn2, polyn1]
+                        self._left_hand_side = box.pop()
+                        self._right_hand_side = box.pop()
 
                 elif arg[1] == 'classic_with_fractions':
                     # the following code is copied from Calculation.py
                     # -> must be factorized
-                    randomly_position = randomly\
-                        .integer(0, 16,
-                                 weighted_table=FRACTIONS_SUMS_SCALE_TABLE)
+                    randomly_position = \
+                        random.choices([n for n in range(17)],
+                                       weights=FRACTIONS_SUMS_SCALE_TABLE)[0]
 
                     chosen_seed_and_generator = FRACTIONS_SUMS_TABLE[
                         randomly_position]
 
-                    seed = randomly.integer(2, chosen_seed_and_generator[1])
+                    seed = random.randint(2, chosen_seed_and_generator[1])
 
                     # The following test is only intended to avoid having
                     # "high" results too often. We just check if the common
@@ -688,8 +707,7 @@ class Equation(ComposedCalculable):
                     if seed * chosen_seed_and_generator[0][0] \
                             * chosen_seed_and_generator[0][1] >= 75:
                         # __
-                        seed = randomly.integer(2,
-                                                chosen_seed_and_generator[1])
+                        seed = random.randint(2, chosen_seed_and_generator[1])
 
                     lil_box = [0, 1]
                     gen1 = chosen_seed_and_generator[0][lil_box.pop()]
@@ -698,16 +716,18 @@ class Equation(ComposedCalculable):
                     den1 = Item(gen1 * seed)
                     den2 = Item(gen2 * seed)
 
-                    temp1 = randomly.integer(1, 20)
-                    temp2 = randomly.integer(1, 20)
+                    temp1 = random.randint(1, 20)
+                    temp2 = random.randint(1, 20)
 
-                    num1 = Item(temp1 // maths_lib.gcd(temp1, gen1 * seed))
-                    num2 = Item(temp2 // maths_lib.gcd(temp2, gen2 * seed))
+                    num1 = Item(temp1 // gcd(temp1, gen1 * seed))
+                    num2 = Item(temp2 // gcd(temp2, gen2 * seed))
 
-                    f1 = Fraction((randomly.sign(plus_signs_ratio=0.7),
+                    f1 = Fraction((random.choices(['+', '-'],
+                                                  cum_weights=[0.7, 1])[0],
                                   num1,
                                   den1))
-                    f2 = Fraction((randomly.sign(plus_signs_ratio=0.7),
+                    f2 = Fraction((random.choices(['+', '-'],
+                                                  cum_weights=[0.7, 1])[0],
                                   num2,
                                   den2))
 
@@ -715,21 +735,20 @@ class Equation(ComposedCalculable):
 
                     box = list()
                     ax = Monomial((Fraction((
-                        randomly.sign(plus_signs_ratio=0.7),
-                        Item(randomly.integer(1, 10)),
-                        Item(randomly.integer(2, 10))))
+                        random.choices(['+', '-'], cum_weights=[0.7, 1])[0],
+                        Item(random.randint(1, 10)),
+                        Item(random.randint(2, 10))))
                         .simplified(), 1))
                     ax.set_letter(self.variable_letter)
 
                     b = Monomial((f1.simplified(), 0))
                     d = Monomial((f2.simplified(), 0))
 
-                    box.append(ax)
-                    box.append(b)
-
-                    self._left_hand_side = Polynomial([randomly.pop(box),
-                                                       randomly.pop(box)])
-
+                    if random.choice([True, False]):
+                        box = [ax, b]
+                    else:
+                        box = [b, ax]
+                    self._left_hand_side = Polynomial(box)
                     self._right_hand_side = Sum([d])
 
                 elif arg[1] in ['any_simple_expandable',
@@ -743,14 +762,14 @@ class Equation(ComposedCalculable):
                     # The same plus another expandable.
 
                     # Creation of the expandables, to begin with...
-                    if randomly.decimal_0_1() <= 0.8:
+                    if random.random() <= 0.8:
                         aux_expd_1 = Expandable((RANDOMLY,
                                                  'monom0_polyn1'),
                                                 max_coeff=9)
                         expd_kind = 'monom0_polyn1'
 
                     else:
-                        sign = randomly.sign()
+                        sign = random.choice(['+', '-'])
                         aux_expd_1 = Expandable((
                             Monomial((sign, 1, 0)),
                             Polynomial((RANDOMLY, 9, 1, 2))))
@@ -771,53 +790,49 @@ class Equation(ComposedCalculable):
 
                     box_1.append(aux_expd_1)
 
-                    if expd_kind == '+(...)' or randomly.decimal_0_1() <= 0.5:
+                    if expd_kind == '+(...)' or random.random() <= 0.5:
                         box_1.append(additional_Monomial)
 
                     box_2.append(Monomial((RANDOMLY, 9, 1)))
 
-                    if randomly.decimal_0_1() <= 0.25:
+                    if random.random() <= 0.25:
                         # __
                         box_2.append(additional_Monomial2)
 
                     if arg[1] == 'any_double_expandable':
-                        if randomly.decimal_0_1() <= 0.8:
+                        if random.random() <= 0.8:
                             aux_expd_2 = Expandable((RANDOMLY,
                                                      'monom0_polyn1'),
                                                     max_coeff=9)
 
                         else:
-                            sign = randomly.sign()
+                            sign = random.choice(['+', '-'])
                             aux_expd_2 = Expandable((
                                 Monomial((sign, 1, 0)),
                                 Polynomial((RANDOMLY, 9, 1, 2))))
 
-                        if randomly.decimal_0_1() <= 0.5:
+                        if random.random() <= 0.5:
                             box_1.append(aux_expd_2)
                         else:
                             box_2.append(aux_expd_2)
 
                     boxes = [box_1, box_2]
-                    box_left = randomly.pop(boxes)
-                    box_right = randomly.pop(boxes)
+                    if random.choice([True, False]):
+                        box_left, box_right = boxes
+                    else:
+                        box_right, box_left = boxes
 
-                    left_list = list()
-                    right_list = list()
+                    random.shuffle(box_left)
+                    random.shuffle(box_right)
 
-                    for i in range(len(box_left)):
-                        left_list.append(randomly.pop(box_left))
-
-                    for i in range(len(box_right)):
-                        right_list.append(randomly.pop(box_right))
-
-                    self._left_hand_side = Sum(left_list)
-                    self._right_hand_side = Sum(right_list)
+                    self._left_hand_side = Sum(box_left)
+                    self._right_hand_side = Sum(box_right)
 
             # All other unforeseen cases: an exception is raised.
             else:
-                raise error.UncompatibleType(arg,
-                                             "(Exponented, Exponented)|"
-                                             "(RANDOMLY, <option>)")
+                raise TypeError('Got: ' + str(type(arg))
+                                + ' instead of (Exponented, Exponented)|'
+                                '(RANDOMLY, <option>)')
 
         # Another Equation to copy
         elif isinstance(arg, Equation):
@@ -828,7 +843,8 @@ class Equation(ComposedCalculable):
             self._variable_letter = arg.variable_letter
 
         else:
-            raise error.UncompatibleType(arg, "Equation|tuple")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of Equation|tuple')
 
     # --------------------------------------------------------------------------
     ##
@@ -897,20 +913,18 @@ class Equation(ComposedCalculable):
     #   @brief Sets the number of the Equation
     def set_number(self, arg):
         if not type(arg) == int:
-            raise error.WrongArgument(str(type(arg)), "int")
+            raise ValueError('arg should be an int')
 
         self._number = str(arg)
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Setter for hand sides
-    #   @warning Might raise an UncompatibleType exception.
     #   @return Nothing, just sets the given argument to the left hand side,
     #           turned into a Sum if necessary
     def set_hand_side(self, left_or_right, arg):
-        if not (left_or_right == "left" or left_or_right == "right"):
-            raise error.UncompatibleType(left_or_right,
-                                         '"left" or "right"')
+        if not (left_or_right == 'left' or left_or_right == 'right'):
+            raise ValueError('left_or_right should be \'left\' or \'right\'')
         if isinstance(arg, Exponented):
             if isinstance(arg, CommutativeOperation) and len(arg) == 1:
                 arg = arg.element[0]
@@ -1345,7 +1359,7 @@ class Equation(ComposedCalculable):
             for term in left_collected_terms:
                 # log.debug("(left)term: " + str(term))
                 new_eq.left_hand_side.remove(term)
-                term.set_sign(maths_lib.sign_of_product(['-', term.sign]))
+                term.set_sign(sign_of_product(['-', term.sign]))
                 new_eq.set_hand_side("right",
                                      Sum([new_eq.right_hand_side, term]))
                 log.debug("Now, right_hand_side looks like: "
@@ -1529,11 +1543,11 @@ class CrossProductEquation(Equation):
     #   @param arg      numx and denox are expected as Calculables
     def __init__(self, arg):
         if not (type(arg) == tuple or isinstance(arg, CrossProductEquation)):
-            raise error.WrongArgument(str(type(arg)),
-                                      "a tuple|CrossProductEquation")
+            raise ValueError('Got ' + str(type(arg))
+                             + 'instead of a tuple|CrossProductEquation')
         elif type(arg) == tuple and not (len(arg) == 2 or len(arg) == 4):
-            raise error.WrongArgument("a tuple of length " + str(len(arg)),
-                                      "a tuple of length 2 or 4")
+            raise ValueError('Got a tuple of length ' + str(len(arg))
+                             + 'instead of a tuple of length 2 or 4')
 
         if isinstance(arg, CrossProductEquation):
             self._name = arg.name
@@ -1552,9 +1566,9 @@ class CrossProductEquation(Equation):
                 if not(isinstance(arg[0], Quotient)
                        and isinstance(arg[1], Quotient)):
                     # __
-                    raise error.WrongArgument("a tuple of " + str(type(arg[0]))
-                                              + "and of " + str(type(arg[1]),
-                                              "a tuple of two Quotients"))
+                    raise ValueError('Got a a tuple of ' + str(type(arg[0]))
+                                     + ' and of ' + str(type(arg[1])
+                                     + ' instead of a tuple of two Quotients'))
                 else:
                     self._left_hand_side = arg[0].clone()
                     self._right_hand_side = arg[1].clone()
@@ -1565,11 +1579,12 @@ class CrossProductEquation(Equation):
                        and isinstance(arg[2], Calculable)
                        and isinstance(arg[3], Calculable)):
                     # __
-                    raise error.WrongArgument("a tuple of " + str(type(arg[0]))
-                                              + ", " + str(type(arg[1]))
-                                              + ", " + str(type(arg[2]))
-                                              + "and " + str(type(arg[3])),
-                                              "a tuple of four Calculables")
+                    raise ValueError('Got a tuple of ' + str(type(arg[0]))
+                                     + ', ' + str(type(arg[1]))
+                                     + ', ' + str(type(arg[2]))
+                                     + 'and ' + str(type(arg[3]))
+                                     + 'instead of a tuple of four '
+                                     'Calculables')
                 else:
                     self._left_hand_side = Quotient(('+', arg[0], arg[2]),
                                                     ignore_1_denominator=True)
@@ -1599,10 +1614,9 @@ class CrossProductEquation(Equation):
                     literal_position += 1
 
             if not literals == 1:
-                raise error.WrongArgument("found " + str(literals) +
-                                          "literal objects",
-                                          "exactly one literal object "
-                                          "among 4")
+                raise ValueError('Got ' + str(literals) + 'literal objects'
+                                 'instead of exactly one literal object '
+                                 'among 4')
 
             self._variable_letter = variable_letter
 
@@ -1677,35 +1691,32 @@ class Table(Printable, Substitutable):
     def __init__(self, arg, displ_as_qe=False, ignore_1_denos=None,
                  subst_dict=None):
         if not type(arg) == list:
-            raise error.WrongArgument(arg, "a list (of two lists)")
+            raise TypeError('arg must be a list (of two lists)')
 
         if not len(arg) == 2:
-            raise error.WrongArgument("a list of " + str(len(arg))
-                                      + "elements",
-                                      "a list of 2 elements")
+            raise ValueError('Got a list of ' + str(len(arg)) + 'elements'
+                             'instead of a list of 2 elements')
 
         if not type(arg[0]) == list:
-            raise error.WrongArgument(str(type(arg[0])),
-                                      "arg[0] should be a list")
+            raise ValueError('Got ' + str(type(arg[0]))
+                             + 'instead of a list')
 
         if not type(arg[1]) == list:
-            raise error.WrongArgument(str(type(arg[1])),
-                                      "arg[1] should be a list")
+            raise ValueError('Got ' + str(type(arg[1]))
+                             + 'instead of a list')
 
         if not len(arg[0]) == len(arg[1]):
-            raise error.WrongArgument("two lists of different lengths: "
-                                      + str(len(arg[0])) + " and "
-                                      + str(len(arg[1])),
-                                      "two lists of the same length")
+            raise ValueError('Got two lists of different lengths: '
+                             + str(len(arg[0])) + ' and ' + str(len(arg[1]))
+                             + 'instead of two lists of the same length')
 
         for j in range(2):
             for i in range(len(arg[j])):
                 if not isinstance(arg[j][i], Calculable):
-                    raise error.WrongArgument("arg[" + str(j) + "]["
-                                              + str(i) + "] is no instance of"
-                                              + " Calculable ; type: "
-                                              + str(type(arg[j][i])),
-                                              "a Calculable")
+                    raise ValueError('Got: arg[' + str(j) + ']['
+                                     + str(i) + '] being a: '
+                                     + str(type(arg[j][i]))
+                                     + ' instead of a Calculable')
 
         if not isinstance(displ_as_qe, bool):
             raise TypeError('displ_as_qe should be a boolean')
@@ -1801,12 +1812,10 @@ class Table(Printable, Substitutable):
     #   @return A Quotient or possibly a Fraction
     def cross_product(self, col, x_position, remove_1_deno=True, **options):
         if col[0] >= len(self) or col[1] >= len(self):
-            raise error.OutOfRangeArgument(str(col[0]) + " or " + str(col[1]),
-                                           "should be < len(self) = "
-                                           + str(len(self)))
+            raise ValueError(str(col[0]) + ' or ' + str(col[1])
+                             + 'should be < ' + str(len(self)))
         if x_position not in [0, 1, 2, 3]:
-            raise error.OutOfRangeArgument(str(x_position),
-                                           "should be in [0, 1, 2, 3]")
+            raise ValueError(str(x_position) + 'should be in [0, 1, 2, 3]')
         num = None
         if x_position == 0 or x_position == 2:
             num = Product([self.cell[0][col[1]],
@@ -1922,28 +1931,28 @@ class Table_UP(Table):
         if (not is_number(coeff)
             and not (isinstance(coeff, Calculable) and coeff.is_numeric())):
             # __
-            raise error.WrongArgument(str(type(coeff)),
-                                      " a number or a numeric Calculable ")
+            raise ValueError('Got:' + str(type(coeff))
+                             + ' instead of a number or a numeric Calculable')
 
         if not type(first_line) == list:
-            raise error.WrongArgument(str(type(first_line)),
-                                      " a list ")
+            raise ValueError('Got:' + str(type(first_line))
+                             + ' instead of a list ')
 
         if not type(info) == list:
-            raise error.WrongArgument(str(type(info)),
-                                      " a list ")
+            raise ValueError('Got:' + str(type(info))
+                             + ' instead of a list ')
 
         if not len(info) == len(first_line):
-            raise error.WrongArgument("two lists of lengths " + str(len(info))
-                                      + " and " + str(len(first_line)),
-                                      " two lists of the same length.")
+            raise ValueError('Got: two lists of lengths ' + str(len(info))
+                             + ' and ' + str(len(first_line))
+                             + ' instead of two lists of the same length.')
 
         for elt in first_line:
             if (elt is not None and not is_number(elt)
                 and not (isinstance(elt, Calculable) and elt.is_numeric())):
                 # __
-                raise error.WrongArgument(str(type(elt)) + " " + repr(elt),
-                                          "None | nb | numericCalculable ")
+                raise ValueError('Got:' + str(type(elt)) + ' ' + repr(elt)
+                                 + 'instead of None | nb | numericCalculable')
 
         complete_cols = []
         literals_positions = {}
@@ -1953,44 +1962,42 @@ class Table_UP(Table):
             if first_line[i] is None and (info[i] is None
                                           or info[i] == (None, None)):
                 # __
-                raise error.WrongArgument("first_line[i] and info[i] are"
-                                          + " both equal to None",
-                                          "only one of them can be None"
-                                          + " in the same time")
+                raise ValueError('Got first_line[i] and info[i] being'
+                                 ' both equal to None though only one of '
+                                 'them can be None in the same time')
             elt = info[i]
             log.debug('elt: ' + str(elt))
 
             if not (elt is None or type(elt) == tuple):
-                raise error.WrongArgument(str(type(elt)),
-                                          " either None or a tuple ")
+                raise ValueError('Got:' + str(type(elt))
+                                 + ' instead of either None or a tuple ')
 
             if elt is None or elt == (None, None):
                 complete_cols += [col_nb]
 
             if type(elt) == tuple:
                 if not len(elt) == 2:
-                    raise error.WrongArgument("a tuple of length "
-                                              + str(len(elt)),
-                                              "a tuple of length 2")
+                    raise ValueError('Got: a tuple of length ' + str(len(elt))
+                                     + 'instead of a tuple of length 2')
 
                 if not ((isinstance(elt[0], Calculable)
                          and elt[0].is_literal())
                         or elt[0] is None):
                     # __
-                    raise error.WrongArgument(str(elt[0]),
-                                              "None|literalCalculable")
+                    raise ValueError('Got:' + str(elt[0])
+                                     + ' instead of None|literalCalculable')
 
                 if not ((isinstance(elt[1], Calculable)
                          and elt[1].is_literal())
                         or elt[1] is None):
                     # __
-                    raise error.WrongArgument(str(type(elt[1])),
-                                              "None|literalCalculable")
+                    raise ValueError('Got:' + str(type(elt[1]))
+                                     + ' instead of None|literalCalculable')
 
                 if elt[0] in literals_positions:
-                    raise error.WrongArgument(elt[0].into_str() + " is already"
-                                              " in the Table.",
-                                              "it should be there only once")
+                    raise ValueError('Got:' + elt[0].into_str()
+                                     + ' being already in the Table,'
+                                     + ' but it should be there only once.')
                 else:
                     if (isinstance(elt[0], Calculable)
                         and not isinstance(elt[1], Calculable)):
@@ -1998,9 +2005,9 @@ class Table_UP(Table):
                         literals_positions[elt[0]] = col_nb
 
                 if elt[1] in literals_positions:
-                    raise error.WrongArgument(elt[1].into_str() + " is already"
-                                              " in the Table.",
-                                              "it should be there only once")
+                    raise ValueError('Got:' + elt[1].into_str()
+                                     + ' being already in the Table.'
+                                     + ' but it should be there only once')
                 else:
                     if (isinstance(elt[1], Calculable)
                         and not isinstance(elt[0], Calculable)):
@@ -2009,7 +2016,7 @@ class Table_UP(Table):
             col_nb += 1
 
         if len(complete_cols) == 0:
-            raise error.WrongArgument("no complete column found",
+            raise ValueError('Got:' + "no complete column found",
                                       "there should be at least one complete")
 
         # Now everything is clean, let's set the fields
@@ -2071,9 +2078,9 @@ class Table_UP(Table):
             final_col = None
 
             for i in range(len(complete_cols)):
-                if maths_lib.abs(complete_cols[i] - col_ref) <= distance:
+                if abs(complete_cols[i] - col_ref) <= distance:
                     final_col = complete_cols[i]
-                    distance = maths_lib.abs(complete_cols[i] - col_ref)
+                    distance = abs(complete_cols[i] - col_ref)
 
             literals_positions[elt] = (col_ref, final_col)
 
@@ -2105,8 +2112,9 @@ class Table_UP(Table):
     #   @brief Returns the CrossProductEquation matching the given arg
     def into_crossproduct_equation(self, arg):
         if arg not in self.crossproducts_info:
-            raise error.WrongArgument(str(arg), "an object expected to exist"
-                                                "in self.crossproducts_info")
+            raise ValueError('Got: ' + str(arg)
+                             + ' instead of an object expected to exist'
+                             'in self.crossproducts_info')
 
         col0 = self.crossproducts_info[arg][0]
         col1 = self.crossproducts_info[arg][1]

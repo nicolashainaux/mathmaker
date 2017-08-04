@@ -23,7 +23,7 @@
 # import pytest
 from decimal import Decimal
 
-from mathmaker.lib.tools.auxiliary_functions import is_integer, digits_nb
+from mathmaker.lib.toolbox import is_integer, digits_nb
 from mathmaker.lib.sheet.exercise.question.calculation_modules \
     import calculation_order_of_operations
 

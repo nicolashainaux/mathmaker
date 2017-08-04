@@ -22,10 +22,10 @@
 
 import pytest
 
-from mathmaker.lib.startup_actions import (check_dependency,
-                                           check_dependencies,
-                                           install_gettext_translations,
-                                           check_settings_consistency)
+from mathmaker.lib.ignition import (check_dependency,
+                                    check_dependencies,
+                                    install_gettext_translations,
+                                    check_settings_consistency)
 
 
 def test_check_dependency_01():

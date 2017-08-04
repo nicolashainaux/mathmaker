@@ -20,7 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import randomly
+import random
+
 from .X_Structure import X_Structure
 from . import question
 from mathmaker.lib.common.cst import TENTH, HUNDREDTH
@@ -106,90 +107,83 @@ class X_RightTriangle(X_Structure):
 
         # SHORT TEST & OTHER PREFORMATTED EXERCISES
         units = ['m', 'dm', 'cm', 'mm']
-        angles = randomly.pop([[0, 180], [90, 270]])
-        random_signs = [randomly.pop([-1, 1]),
-                        randomly.pop([-1, 1])]
+        angles = random.choice([[0, 180], [90, 270]])
+        random_signs = [random.choice([-1, 1]),
+                        random.choice([-1, 1])]
 
         if self.x_kind == 'short_test':
             if self.x_subkind == 'pythagorean_theorem_one_of_each':
                 q_subkinds = ['calculate_hypotenuse', 'calculate_one_leg']
-                if randomly.heads_or_tails():
+                if random.choice([True, False]):
                     self.questions_list.append(
-                        default_question(q_kind='pythagorean_theorem',
-                                         q_subkind=randomly.pop(q_subkinds),
-                                         use_pythagorean_triples=True,
-                                         use_decimals=True,
-                                         final_unit=randomly.pop(units),
-                                         number_of_the_question='a',
-                                         figure_in_the_text=False,
-                                         rotate_around_barycenter=randomly
-                                         .pop(angles)
-                                         + random_signs[0]
-                                         * randomly.integer(0, 20)))
+                        default_question(
+                            q_kind='pythagorean_theorem',
+                            q_subkind=random.choice(q_subkinds),
+                            use_pythagorean_triples=True,
+                            use_decimals=True,
+                            final_unit=random.choice(units),
+                            number_of_the_question='a',
+                            figure_in_the_text=False,
+                            rotate_around_barycenter=random.choice(angles)
+                            + random_signs[0] * random.randint(0, 20)))
                     self.questions_list.append(
-                        default_question(q_kind='pythagorean_theorem',
-                                         q_subkind=randomly.pop(q_subkinds),
-                                         use_pythagorean_triples=False,
-                                         round_to=randomly.pop([TENTH,
-                                                                HUNDREDTH]),
-                                         final_unit=randomly.pop(units),
-                                         number_of_the_question='b',
-                                         figure_in_the_text=False,
-                                         rotate_around_barycenter=randomly
-                                         .pop(angles)
-                                         + random_signs[1]
-                                         * randomly.integer(0, 20)))
+                        default_question(
+                            q_kind='pythagorean_theorem',
+                            q_subkind=random.choice(q_subkinds),
+                            use_pythagorean_triples=False,
+                            round_to=random.choice([TENTH,
+                                                    HUNDREDTH]),
+                            final_unit=random.choice(units),
+                            number_of_the_question='b',
+                            figure_in_the_text=False,
+                            rotate_around_barycenter=random.choice(angles)
+                            + random_signs[1] * random.randint(0, 20)))
                 else:
                     self.questions_list.append(
-                        default_question(q_kind='pythagorean_theorem',
-                                         q_subkind=randomly.pop(q_subkinds),
-                                         use_pythagorean_triples=False,
-                                         round_to=randomly.pop([TENTH,
-                                                                HUNDREDTH]),
-                                         final_unit=randomly.pop(units),
-                                         number_of_the_question='a',
-                                         figure_in_the_text=False,
-                                         rotate_around_barycenter=randomly
-                                         .pop(angles)
-                                         + random_signs[0]
-                                         * randomly.integer(0, 20)))
+                        default_question(
+                            q_kind='pythagorean_theorem',
+                            q_subkind=random.choice(q_subkinds),
+                            use_pythagorean_triples=False,
+                            round_to=random.choice([TENTH,
+                                                    HUNDREDTH]),
+                            final_unit=random.choice(units),
+                            number_of_the_question='a',
+                            figure_in_the_text=False,
+                            rotate_around_barycenter=random.choice(angles)
+                            + random_signs[0] * random.randint(0, 20)))
 
                     self.questions_list.append(
-                        default_question(q_kind='pythagorean_theorem',
-                                         q_subkind=randomly.pop(q_subkinds),
-                                         use_pythagorean_triples=True,
-                                         use_decimals=True,
-                                         final_unit=randomly.pop(units),
-                                         number_of_the_question='b',
-                                         figure_in_the_text=False,
-                                         rotate_around_barycenter=randomly
-                                         .pop(angles)
-                                         + random_signs[1]
-                                         * randomly.integer(0, 20)))
+                        default_question(
+                            q_kind='pythagorean_theorem',
+                            q_subkind=random.choice(q_subkinds),
+                            use_pythagorean_triples=True,
+                            use_decimals=True,
+                            final_unit=random.choice(units),
+                            number_of_the_question='b',
+                            figure_in_the_text=False,
+                            rotate_around_barycenter=random.choice(angles)
+                            + random_signs[1] * random.randint(0, 20)))
 
             elif self.x_subkind == 'converse_of_pythagorean_theorem':
 
                 self.questions_list.append(
-                    default_question(q_kind='converse_of_pythagorean_theorem',
-                                     q_subkind='default',
-                                     use_pythagorean_triples=True,
-                                     # use_decimals=randomly.heads_or_tails(),
-                                     final_unit=randomly.pop(units),
-                                     figure_in_the_text=False,
-                                     rotate_around_barycenter=randomly
-                                     .pop(angles)
-                                     + random_signs[0]
-                                     * randomly.integer(0, 20), **options))
+                    default_question(
+                        q_kind='converse_of_pythagorean_theorem',
+                        q_subkind='default',
+                        use_pythagorean_triples=True,
+                        final_unit=random.choice(units),
+                        figure_in_the_text=False,
+                        rotate_around_barycenter=random.choice(angles)
+                        + random_signs[0] * random.randint(0, 20),
+                        **options))
 
             elif self.x_subkind == 'contrapositive_of_pythagorean_theorem':
                 self.questions_list.append(
-                    default_question(q_kind='contrapositive_of_'
-                                            'pythagorean_theorem',
-                                     q_subkind='default',
-                                     # use_decimals=randomly.heads_or_tails(),
-                                     final_unit=randomly.pop(units),
-                                     figure_in_the_text=False,
-                                     rotate_around_barycenter=randomly
-                                     .pop(angles)
-                                     + random_signs[0]
-                                     * randomly.integer(0, 20), **options))
+                    default_question(
+                        q_kind='contrapositive_of_pythagorean_theorem',
+                        q_subkind='default',
+                        final_unit=random.choice(units),
+                        figure_in_the_text=False,
+                        rotate_around_barycenter=random.choice(angles)
+                        + random_signs[0] * random.randint(0, 20),
+                        **options))

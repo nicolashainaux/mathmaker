@@ -27,16 +27,16 @@
 # @brief Mathematical elementary arithmetic and algebraic objects.
 
 import math
+import random
 import types
 from decimal import Decimal
+from abc import ABCMeta, abstractmethod
 
 from mathmaker import settings
 from mathmaker.lib.core.root_calculus import Calculable, Value, Exponented
-from mathmaker.lib import randomly, error
-from mathmaker.lib.tools.auxiliary_functions import (is_integer, is_natural,
-                                                     is_number)
+from mathmaker.lib.toolbox import is_integer, is_natural, is_number
 from mathmaker.lib.common import alphabet
-from mathmaker.lib.maths_lib import (sign_of_product, gcd, pupil_gcd,
+from mathmaker.lib.mathtools import (sign_of_product, gcd, pupil_gcd,
                                      lcm_of_the_list, is_even, is_uneven,
                                      prime_factors,
                                      ZERO_POLYNOMIAL_DEGREE)
@@ -70,7 +70,6 @@ class Item(Exponented):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
     #   @param arg None|Number|String|Item|(sign,value,exponent)|
     #              (sign,number|letter|Value)|0-degree Monomial|Value
     #   Possible arguments can be:
@@ -179,10 +178,10 @@ class Item(Exponented):
 
         # All other unforeseen cases: an exception is raised.
         else:
-            raise error.UncompatibleType(arg,
-                                         "Number|String|Item|"
-                                         "(sign, Number|String, exponent)|"
-                                         "(sign, Number|String)")
+            raise TypeError('Got: ' + str(type(arg)) + ' instead of '
+                            'a Number|String|Item|'
+                            '(sign, Number|String, exponent)|'
+                            '(sign, Number|String)')
 
     # --------------------------------------------------------------------------
     ##
@@ -250,7 +249,7 @@ class Item(Exponented):
             return self.raw_value
 
         else:
-            raise error.UncompatibleType(self, "Litteral Item")
+            raise TypeError('Cannot get first letter of a non liteal Item')
 
     is_out_striked = property(get_is_out_striked,
                               doc="Item's is_out_striked field")
@@ -280,7 +279,7 @@ class Item(Exponented):
         if arg in [True, False]:
             self._is_out_striked = arg
         else:
-            raise error.WrongArgument(str(arg), "True|False")
+            raise ValueError("arg should be True|False")
 
     # --------------------------------------------------------------------------
     ##
@@ -289,7 +288,7 @@ class Item(Exponented):
         if arg in [True, False]:
             self._force_display_sign_once = arg
         else:
-            raise error.WrongArgument(str(arg), "True|False")
+            raise ValueError("arg should be True|False")
 
     # --------------------------------------------------------------------------
     ##
@@ -298,7 +297,7 @@ class Item(Exponented):
         if isinstance(arg, Value):
             self._value_inside = arg.clone()
         else:
-            raise error.WrongArgument(str(type(arg)), "a Value")
+            raise ValueError("arg should be a Value")
 
     # --------------------------------------------------------------------------
     ##
@@ -419,7 +418,7 @@ class Item(Exponented):
                 return -(self.raw_value)**expon
 
         else:
-            raise error.IncompatibleType(self, "Number|numeric Exponented")
+            raise TypeError('Cannot evaluate a non numeric Item')
 
     # --------------------------------------------------------------------------
     ##
@@ -434,7 +433,7 @@ class Item(Exponented):
         log = settings.dbg_logger.getChild(
             'Item.calculate_next_step')
         if not self.is_numeric():
-            raise error.UncompatibleType(self, "Number|numeric Exponented")
+            raise TypeError('Cannot calculate next step of a non numeric Item')
 
         log.debug("Entered; current Item is: " + repr(self))
 
@@ -799,8 +798,8 @@ class Item(Exponented):
     #   @brief Returns the (numeric) Item once rounded to the given precision
     def round(self, precision):
         if not self.exponent.is_displ_as_a_single_1():
-            raise error.UncompatibleType(self, "the exponent should be"
-                                               " equivalent to a single 1")
+            raise TypeError('In order to round an Item, its exponent should be'
+                            ' equivalent to a single 1')
         else:
             result = self.clone()
             result.set_value_inside(self.value_inside.round(precision))
@@ -811,8 +810,8 @@ class Item(Exponented):
     #   @brief Returns the number of digits of a numerical Item
     def digits_number(self):
         if not self.exponent.is_displ_as_a_single_1():
-            raise error.UncompatibleType(self, "the exponent should be"
-                                               " equivalent to a single 1")
+            raise TypeError('In order to get the number of digits of an Item, '
+                            'its exponent should be equivalent to a single 1')
         else:
             return self.value_inside.digits_number()
 
@@ -826,8 +825,8 @@ class Item(Exponented):
     #          will raise an exception.
     def needs_to_get_rounded(self, precision):
         if not self.exponent.is_displ_as_a_single_1():
-            raise error.UncompatibleType(self, "the exponent should be"
-                                               " equivalent to a single 1")
+            raise TypeError('In order to know if an Item needs to get rounded,'
+                            ' its exponent should be equivalent to a single 1')
 
         return self.value_inside.needs_to_get_rounded(precision)
 
@@ -928,11 +927,9 @@ class Item(Exponented):
         elif elt == Item(1):
             return self.is_displ_as_a_single_1()
         else:
-            print(repr(elt))
-            print(repr(Item(0)))
-            raise error.UncompatibleType(elt, "neutral element for addition"
-                                              " or multiplication, e.g."
-                                              " Item(1) | Item(0).")
+            raise TypeError('elt must be a neutral element for addition '
+                            'or multiplication, i.e. Item(1) | Item(0), '
+                            'yet it is {} '.format(repr(elt)))
 
     # --------------------------------------------------------------------------
     ##
@@ -1456,7 +1453,6 @@ class SquareRoot(Function):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
     #   @param arg Exponented|(sign, Exponented)
     #           The given Exponented will be "embedded" in the SquareRoot
     #   @return One instance of SquareRoot
@@ -1489,8 +1485,8 @@ class SquareRoot(Function):
 
         # All other unforeseen cases: an exception is raised.
         else:
-            raise error.UncompatibleType(arg,
-                                         "Exponented")
+            raise TypeError('arg must be an Exponented, yet it is a {}'
+                            .format(str(type(arg))))
 
     # --------------------------------------------------------------------------
     ##
@@ -1526,7 +1522,7 @@ class SquareRoot(Function):
         if arg in [True, False]:
             self._force_display_sign_once = arg
         else:
-            raise error.WrongArgument(str(arg), "True|False")
+            raise ValueError("arg should be True|False")
 
     # --------------------------------------------------------------------------
     ##
@@ -1649,7 +1645,7 @@ class SquareRoot(Function):
     #   @return 0 (i.e. they're equal) if sign, value & exponent are equal
     #   @obsolete ?
     def __eq__(self, other_item):
-        raise error.MethodShouldBeRedefined(self, '__eq__ in SquareRoot')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
@@ -1671,8 +1667,7 @@ class SquareRoot(Function):
     #   @param position The position (integer) of self in the Product
     #   @return True if the writing rules require × between self & obj
     def multiply_symbol_is_required(self, objct, position):
-        raise error.MethodShouldBeRedefined(self,
-                                            'multiply_symbol_is_required')
+        raise NotImplementedError
 
         # 1st CASE: Item × Item
 
@@ -1791,11 +1786,9 @@ class SquareRoot(Function):
         elif elt == Item(1):
             return self.is_displ_as_a_single_1()
         else:
-            print(repr(elt))
-            print(repr(Item(0)))
-            raise error.UncompatibleType(elt, "neutral element for addition"
-                                              " or multiplication, e.g."
-                                              " Item(1) | Item(0).")
+            raise TypeError('elt must be a neutral element for addition '
+                            'or multiplication, i.e. Item(1) | Item(0), '
+                            'yet it is {} '.format(repr(elt)))
 
     # --------------------------------------------------------------------------
     ##
@@ -1875,7 +1868,7 @@ class Operation(Exponented):
     #   @param arg: the object to put as n-th element
     def set_element(self, n, arg):
         if not isinstance(arg, Calculable):
-            raise error.WrongArgument(str(type(arg)), "a Calculable")
+            raise ValueError("arg should be a Calculable")
 
         self._element[n] = arg.clone()
 
@@ -1884,7 +1877,7 @@ class Operation(Exponented):
     #   @brief Resets the element field
     def set_symbol(self, arg):
         if not type(arg) == str:
-            raise error.WrongArgument(str(type(arg)), 'a str')
+            raise ValueError('arg should be a str')
 
         else:
             self._symbol = arg
@@ -1917,8 +1910,9 @@ class Operation(Exponented):
     # --------------------------------------------------------------------------
     ##
     #   @brief Defines the performed CommutativeOperation
+    @abstractmethod
     def operator(self, arg1, arg2):
-        raise error.MethodShouldBeRedefined(self, 'operator')
+        pass
 
     # --------------------------------------------------------------------------
     ##
@@ -1968,7 +1962,6 @@ class Quotient(Operation):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
     #   @param arg Quotient|(sign, num, deno [, exponent [, symbol]])
     #   If the argument isn't of the kinds listed above, an exception will be
     #   raised. num and deno are expected to be Exponented ; nevertheless if
@@ -2031,10 +2024,9 @@ class Quotient(Operation):
 
         # All other unforeseen cases: an exception is raised.
         else:
-            raise error.UncompatibleType(arg,
-                                         "(sign, numerator, denominator)|"
-                                         "(sign, numerator, denominator, "
-                                         "exponent)")
+            raise TypeError('Got: ' + str(type(arg))
+                            + 'instead of (sign, numerator, denominator)|'
+                            '(sign, numerator, denominator, exponent)')
 
     # --------------------------------------------------------------------------
     ##
@@ -2083,7 +2075,7 @@ class Quotient(Operation):
     #   @brief Sets the numerator of the object
     def set_numerator(self, arg):
         if not isinstance(arg, Exponented):
-            raise error.WrongArgument(str(type(arg)), "an Exponented")
+            raise ValueError("arg should be an Exponented")
 
         else:
             self._numerator = arg.clone()
@@ -2093,7 +2085,7 @@ class Quotient(Operation):
     #   @brief Sets the denominator of the object
     def set_denominator(self, arg):
         if not isinstance(arg, Exponented):
-            raise error.WrongArgument(str(type(arg)), "an Exponented")
+            raise ValueError("arg should be an Exponented")
 
         else:
             self._denominator = arg.clone()
@@ -2481,11 +2473,9 @@ class Quotient(Operation):
         elif elt == Item(1):
             return self.is_displ_as_a_single_1()
         else:
-            print(repr(elt))
-            print(repr(Item(0)))
-            raise error.UncompatibleType(elt, "neutral element for addition"
-                                              " or multiplication, e.g."
-                                              " Item(1) | Item(0).")
+            raise TypeError('Got: ' + str(type(elt))
+                            + ' instead of a neutral element for addition'
+                            ' or multiplication, e.g. Item(1) | Item(0).')
 
 
 class Division(Quotient):
@@ -2507,7 +2497,6 @@ class Fraction(Quotient):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @warning Can raise UncompatibleType.
     #   @param arg Fraction|(num,den)|(sign,num,den)|(sign,num,den,exponent)|
     #              (RANDOMLY, sign, num_sign, num_max, deno_sign, deno_max)|
     #              zero-degree-Monomial having a Fraction as coefficient
@@ -2588,51 +2577,7 @@ class Fraction(Quotient):
             if len(arg) >= 4:
                 self._exponent = arg[3].clone()
 
-        # 2d CASE:
-        # (RANDOMLY, sign, num_sign, num_max, deno_sign, deno_max)
-        elif (type(arg) == tuple
-              and len(arg) == 6
-              and arg[0] == RANDOMLY
-              and arg_sign in ['+', '-', RANDOMLY]
-              and is_integer(arg_deno) and arg_deno >= 2
-              and is_integer(arg_nume) and arg_nume >= 1
-              and arg[2] in ['+', '-', RANDOMLY]
-              and arg[4] in ['+', '-', RANDOMLY]):
-            # __
-            numbers_box_nume = [j + 1 for j in range(arg_nume)]
-            numbers_box_deno = [j + 1 for j in range(arg_deno)]
-
-            nume = randomly.pop(numbers_box_nume)
-            nume_sign = '+'
-            if arg[2] == RANDOMLY:
-                nume_sign = randomly.sign(plus_signs_ratio=0.75)
-                if nume_sign == '-':
-                    nume_sign = -1
-                else:
-                    nume_sign = 1
-            else:
-                nume_sign = arg[2]
-
-            if numbers_box_deno[0] == 1:
-                numbers_box_deno.pop(0)
-            deno = randomly.pop(numbers_box_deno)
-            deno_sign = '+'
-            if arg[4] == RANDOMLY:
-                deno_sign = randomly.sign(plus_signs_ratio=0.75)
-                if deno_sign == '-':
-                    deno_sign = -1
-                else:
-                    deno_sign = 1
-            else:
-                deno_sign = arg[4]
-
-            self._numerator = Product([nume_sign, nume]).reduce_()
-            self._denominator = Product([deno_sign, deno]).reduce_()
-
-            if arg_sign == RANDOMLY:
-                self._sign = randomly.sign(plus_signs_ratio=0.75)
-            else:
-                self._sign = arg_sign
+        # 2d CASE: removed (RANDOMLY unused)
 
         # 3d CASE:
         # The argument's a Fraction to copy
@@ -2665,7 +2610,8 @@ class Fraction(Quotient):
 
         # All unforeseen cases: an exception is raised
         else:
-            raise error.UncompatibleType(arg, "(sign, numerator, denominator)")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of (sign, numerator, denominator)')
 
         # Now it may be useful to de-embbed some Products or Sums...
         temp_objects = [self.numerator, self.denominator]
@@ -2719,6 +2665,9 @@ class Fraction(Quotient):
 
         return False
 
+    def get_first_letter(self):
+        return self._numerator.get_first_letter()
+
     status = property(get_status,
                       doc="Fraction's status")
 
@@ -2735,7 +2684,7 @@ class Fraction(Quotient):
     #   @brief Sets the Fraction's status
     def set_status(self, arg):
         if not type(arg) == str:
-            raise error.WrongArgument(str(type(arg)), "a str")
+            raise ValueError("arg should be a str")
 
         else:
             self._status = arg
@@ -2745,7 +2694,7 @@ class Fraction(Quotient):
     #   @brief Sets the Fraction's status
     def set_same_deno_reduction_in_progress(self, arg):
         if arg not in [True, False]:
-            raise error.WrongArgument(str(type(arg)), "True|False")
+            raise ValueError("arg should be True|False")
 
         else:
             self._same_deno_reduction_in_progress = arg
@@ -3398,7 +3347,7 @@ class Fraction(Quotient):
 ##
 # @class CommutativeOperation
 # @brief Abstract mother class of Product and Sum. Gathers common methods.
-class CommutativeOperation(Operation):
+class CommutativeOperation(Operation, metaclass=ABCMeta):
 
     # --------------------------------------------------------------------------
     ##
@@ -3440,7 +3389,8 @@ class CommutativeOperation(Operation):
             return self.element[0].get_first_letter()
 
         else:
-            raise error.UncompatibleType(self, "LitteralCommutativeOperation")
+            raise TypeError('Cannot get the first letter '
+                            'of a non literal object')
 
     # --------------------------------------------------------------------------
     ##
@@ -3460,13 +3410,13 @@ class CommutativeOperation(Operation):
     #   @brief Sets the info field of the CommutativeOperation
     def set_info(self, arg):
         if not type(arg) == list:
-            raise error.WrongArgument(str(type(arg)), "a list")
+            raise ValueError("arg should be a list")
         if len(arg) == 0:
             self._info = arg
         else:
             for elt in arg:
                 if elt not in [True, False]:
-                    raise error.WrongArgument(str(type(elt)), "True|False")
+                    raise ValueError("elt should be True|False")
             self._info = arg
 
     # --------------------------------------------------------------------------
@@ -3481,7 +3431,7 @@ class CommutativeOperation(Operation):
     #   @param arg Must be True or False
     def set_compact_display(self, arg):
         if not isinstance(arg, bool):
-            raise error.UncompatibleType(self, "Boolean (e;g. bool)")
+            raise TypeError('Expected a bool')
         self._compact_display = arg
 
     # --------------------------------------------------------------------------
@@ -3708,7 +3658,6 @@ class Product(CommutativeOperation):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
     #   @param arg None|Product|Number|Exponented|[Numbers|Exponenteds]
     #   In the case of the list, the Products having an exponant equal to 1
     #   won't be treated so that their factors are inserted in the current
@@ -3788,17 +3737,14 @@ class Product(CommutativeOperation):
                     self._element.append(Item(1))
 
                 else:
-                    raise error.UncompatibleType(arg[i],
-                                                 "This element of the"
-                                                 "provided list"
-                                                 "should have been either a"
-                                                 "a Exponented or a Number")
+                    raise TypeError('Got: ' + str(type(arg[i]))
+                                    + ' instead of a Exponented or a number')
 
         # All other unforeseen cases: an exception is raised.
         else:
-            raise error.UncompatibleType(arg,
-                                         "Product|Exponented|Number|"
-                                         "[Exponenteds|Numbers]")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of a Product|Exponented|Number|'
+                            '[Exponenteds|Numbers]')
 
     # --------------------------------------------------------------------------
     ##
@@ -5319,7 +5265,6 @@ class Sum(CommutativeOperation):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
     #   @param arg None|Sum|Number|String|Exponented|[Number|String|Exponented]
     #   In the case of the list, the Sums having an exponent equal to 1
     #   will be treated before the Exponenteds so that their terms are
@@ -5390,11 +5335,8 @@ class Sum(CommutativeOperation):
                     self._info.append(False)
 
                 else:
-                    raise error.UncompatibleType(arg[i],
-                                                 "This element from the "
-                                                 + "provided list should have"
-                                                 + "been: Number|String|"
-                                                 + "Exponented")
+                    raise TypeError('Got: ' + str(type(arg[i]))
+                                    + ' instead of a number|String|Exponented')
 
         # 5th CASE: None|[]
         elif arg is None or (type(arg) == list and len(arg) == 0):
@@ -5403,9 +5345,9 @@ class Sum(CommutativeOperation):
 
         # All other unforeseen cases: an exception is raised.
         else:
-            raise error.UncompatibleType(arg,
-                                         "Sum|Number|String|Exponented|"
-                                         "[Numbers|Strings|Exponenteds]")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of a Sum|Number|String|Exponented|'
+                            '[Numbers|Strings|Exponenteds]')
 
     # --------------------------------------------------------------------------
     ##
@@ -6648,7 +6590,6 @@ class Monomial(Product):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
     #   @param arg DEFAULT|Monomial|(sign, coeff, degree)|.......
     #   Possible arguments are:
     #   - DEFAULT, which is equivalent to ('+', 1, 0)
@@ -6727,23 +6668,22 @@ class Monomial(Product):
                and is_number(options['randomly_plus_signs_ratio']):
                 # __
                 aux_ratio = options['randomly_plus_signs_ratio']
-            factor1 = Item((randomly.sign(plus_signs_ratio=aux_ratio),
-                            randomly.integer(1, arg[1])))
+            factor1 = Item((random.choices(['+', '-'],
+                                           cum_weights=[aux_ratio, 1])[0],
+                            random.randint(1, arg[1])))
             factor2 = Item(('+',
                             settings.default.MONOMIAL_LETTER,
-                            randomly.integer(0, arg[2])))
+                            random.randint(0, arg[2])))
             self._element.append(factor1)
             self._element.append(factor2)
 
         # All other unforeseen cases: an exception is raised.
         else:
-            raise error.UncompatibleType(arg,
-                                         "DEFAULT|Monomial|"
-                                         + "(sign, coeff, degree)|"
-                                         + "(number|numeric Exponented, "
-                                         + "integer)|"
-                                         + "(RANDOMLY, max_coeff, "
-                                         + "max_degree)")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of a DEFAULT|Monomial|'
+                            '(sign, coeff, degree)|'
+                            '(number|numeric Exponented, integer)|'
+                            '(RANDOMLY, max_coeff, max_degree)')
 
         # We take care to set the exponent to ZERO_POLYNOMIAL_DEGREE
         # in the case the coefficient is null:
@@ -6833,7 +6773,8 @@ class Monomial(Product):
         if is_natural(arg):
             self.factor[1].set_exponent(arg)
         else:
-            raise error.UncompatibleType(arg, "natural integer")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of a natural integer')
 
     # --------------------------------------------------------------------------
     ##
@@ -6891,7 +6832,6 @@ class Polynomial(Sum):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception.
     #   @param arg DEFAULT|[Monomial|Polynomial]|Sum(...)|(RANDOMLY, ...)
     #   Possible arguments are:
     #   - DEFAULT:
@@ -6948,12 +6888,8 @@ class Polynomial(Sum):
                         self._element.append(arg[i].term[j].clone())
                         self._info.append(arg[i].info[j])
                 else:
-                    raise error.UncompatibleType(arg[i],
-                                                 " but in this list or Sum are"
-                                                 + " only Monomials & "
-                                                 + "Polynomials welcome. "
-                                                 "Given object: "
-                                                 + repr(arg[i]))
+                    raise TypeError('Got: ' + str(type(arg[i]))
+                                    + ' instead of a Monomial|Polynomial')
 
         # 3d CASE: (RANDOMLY, max_coeff, max_degree, length)
         elif type(arg) == tuple and len(arg) == 4 and arg[0] == RANDOMLY:
@@ -6965,20 +6901,18 @@ class Polynomial(Sum):
                and is_integer(arg[3][1]) and arg[3][0] == RANDOMLY:
                 # __
                 if arg[3][1] < 1:
-                    raise error.OutOfRangeArgument(arg[3][1],
-                                                   "This integer should be\
-                                                   greater or equal to 1.")
+                    raise ValueError('Expected an integer greater or equal '
+                                     'to 1, got {} instead'.format(arg[3][1]))
                 else:
-                    length = randomly.integer(1, arg[3][1])
+                    length = random.randint(1, arg[3][1])
 
             # ...or simply using the provided number
             elif is_integer(arg[3]) and arg[3] >= 1:
                 length = arg[3]
             else:
-                raise error.UncompatibleType(arg,
-                                             "(RANDOMLY, max_coeff,"
-                                             "max_degree,"
-                                             "length|(RANDOMLY, max_length))")
+                raise TypeError('Got: ' + str(type(arg))
+                                + ' instead of (RANDOMLY, max_coeff, '
+                                'max_degree, length|(RANDOMLY, max_length))')
 
             # Then create the Monomials randomly
             # Note that no null Monomial will be created (not interesting)
@@ -6993,44 +6927,26 @@ class Polynomial(Sum):
                                          CONSTANT_TERMS_MINIMUM_NUMBER])
 
             current_nb_constant_terms = 0
-            deg_to_put_in_again = None
-            the_last_drawing_has_to_be_put_in_again = False
             degrees_list = [i for i in range(arg[2] + 1)]
 
             for i in range(length):
-                # Let's determine the coefficient...
-                coeff = randomly.integer(1, arg[1])
-
-                # ...then the degree...
-                deg = randomly.pop(degrees_list)
-
-                if the_last_drawing_has_to_be_put_in_again:
-                    degrees_list.append(deg_to_put_in_again)
-
-                the_last_drawing_has_to_be_put_in_again = True
-
-                deg_to_put_in_again = deg
-
+                coeff = random.randint(1, arg[1])
+                deg = random.choice(degrees_list)
                 if deg == 0:
                     current_nb_constant_terms += 1
                     if current_nb_constant_terms == max_nb_constant_terms:
                         degrees_list = [i + 1 for i in range(arg[2])]
-                        the_last_drawing_has_to_be_put_in_again = False
 
-                # ...and finally append the new Monomial !
-                self.append(Monomial((randomly.sign(), coeff, deg)))
+                self.append(Monomial((random.choice(['+', '-']), coeff, deg)))
 
             log.debug("Randomly Created Polynomial is: \n" + repr(self)
                       + "\ninfo: " + str(self.info))
 
         else:
-            raise error.UncompatibleType(arg,
-                                         "DEFAULT |"
-                                         "[Monomial|Polynomial] |"
-                                         "Sum(Monomial|Polynomial) |"
-                                         "(RANDOMLY, max_coeff,"
-                                         "max_degree,"
-                                         "[length|(RANDOMLY, max_length)])")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of DEFAULT | [Monomial|Polynomial] |'
+                            'Sum(Monomial|Polynomial) | (RANDOMLY, max_coeff, '
+                            'max_degree, [length|(RANDOMLY, max_length)])')
 
     # --------------------------------------------------------------------------
     ##
@@ -7112,14 +7028,12 @@ class Expandable(Product):
     #   - reversed will change the sums' order. This is useless if the sums
     #     are the same kind of objects (like (2x+3)(3x-7))
     #   - randomly_reversed=0.3 will change the sums' order in a ratio of 0.3
-    #   @warning Might raise an UncompatibleType exception.
     def __init__(self, arg, **options):
         if not ((isinstance(arg, tuple) and len(arg) == 2)
                 or isinstance(arg, Expandable)):
             # __
-            raise error.UncompatibleType(arg,
-                                         "That should be a tuple of two"
-                                         " elements")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of a tuple of two elements')
 
         CommutativeOperation.__init__(self)
 
@@ -7172,7 +7086,7 @@ class Expandable(Product):
 
                     if sum1.element[0].factor[0].raw_value == 1:
                         sum1.element[0].factor[0].set_value_inside(Value(
-                            randomly.integer(2, max_coeff)))
+                            random.randint(2, max_coeff)))
 
                     sum2 = Polynomial((RANDOMLY, max_coeff, 1, 2))
 
@@ -7190,31 +7104,32 @@ class Expandable(Product):
                     sum2 = Sum(Expandable((RANDOMLY, 'polyn1_polyn1')))
 
                 elif arg[1] == 'sign_exp':
-                    sum1 = Sum(Monomial((randomly.sign(plus_signs_ratio=0.25),
+                    sum1 = Sum(Monomial((random.choices(['+', '-'],
+                                                        cum_weights=[0.25,
+                                                                     1])[0],
                                          1, 0)))
 
-                    if randomly.heads_or_tails():
+                    if random.choice([True, False]):
                         sum2 = Sum(Polynomial((RANDOMLY, 15, 2, 3)))
                     else:
                         sum2 = Sum(Polynomial((RANDOMLY, 15, 2, 2)))
 
                 else:
-                    raise error.UncompatibleType(arg[1],
-                                                 'monom0_polyn1|monom1_polyn1'
-                                                 '|polyn1_polyn1'
-                                                 'minus_polyn1_polyn1'
-                                                 'sign_exp')
+                    raise TypeError('Got: ' + str(type(arg[1]))
+                                    + ' instead of a monom0_polyn1|'
+                                    'monom1_polyn1|polyn1_polyn1'
+                                    '|minus_polyn1_polyn1|sign_exp')
 
             else:
-                raise error.UncompatibleType(arg,
-                                             "(Exponented, Exponented)|"
-                                             "(RANDOMLY, <type>)")
+                raise TypeError('Got: ' + str(type(arg))
+                                + ' instead of (Exponented, Exponented)|'
+                                '(RANDOMLY, <type>)')
 
             if ('reversed' in options
                 or ('randomly_reversed' in options
                     and is_number(options['randomly_reversed'])
                     and
-                    randomly.decimal_0_1() <= options['randomly_reversed'])):
+                    random.random() <= options['randomly_reversed'])):
                 # __
                 self._element.append(sum2)
                 self._element.append(sum1)
@@ -7372,15 +7287,14 @@ class BinomialIdentity(Expandable):
     #   - in the case of arg being (Exponented, Exponented),
     #     squares_difference let produce a (a+b)(a-b) from the given
     #     Exponenteds instead of a default (a+b)²
-    #   @warning Might raise an UncompatibleType exception.
     #   @todo fix the square_difference option (see source code)
     def __init__(self, arg, **options):
         if not (type(arg) == tuple and len(arg) == 2) \
            and not isinstance(arg, BinomialIdentity):
             # __
-            raise error.UncompatibleType(arg,
-                                         "That should be a tuple of two"
-                                         "elements or a BinomialIdentity")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of a  tuple of two elements or a '
+                            'BinomialIdentity')
 
         # The exponent (like 3 in ((3-x)(4+5x))³)
         CommutativeOperation.__init__(self)
@@ -7449,7 +7363,7 @@ class BinomialIdentity(Expandable):
 
                 b_list = [1, 2, 3]
 
-                a_choice = randomly.pop(a_list)
+                a_choice = random.choice(a_list)
 
                 if a_choice >= 200:
                     b_list = [1, 2]
@@ -7458,7 +7372,7 @@ class BinomialIdentity(Expandable):
                               a_choice,
                               0))
 
-                b_choice = randomly.pop(b_list)
+                b_choice = random.choice(b_list)
 
                 b = Monomial(('+',
                               b_choice,
@@ -7467,14 +7381,10 @@ class BinomialIdentity(Expandable):
             else:
                 degrees_list = [0, 1]
                 coeff_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-                a = Monomial(('+',
-                              randomly.pop(coeff_list),
-                              randomly.pop(degrees_list)))
-
-                b = Monomial(('+',
-                              randomly.pop(coeff_list),
-                              randomly.pop(degrees_list)))
+                random.shuffle(degrees_list)
+                random.shuffle(coeff_list)
+                a = Monomial(('+', coeff_list.pop(), degrees_list.pop()))
+                b = Monomial(('+', coeff_list.pop(), degrees_list.pop()))
 
             self._a = a
             self._b = b
@@ -7498,16 +7408,17 @@ class BinomialIdentity(Expandable):
                 minus_b = Monomial(b)
                 minus_b.set_sign('-')
                 sums_list.append(Sum([a, minus_b]))
-                self._element.append(randomly.pop(sums_list))
-                self._element.append(randomly.pop(sums_list))
+                random.shuffle(sums_list)
+                self._element.append(sums_list.pop())
+                self._element.append(sums_list.pop())
                 self._kind = 'squares_difference'
 
             elif arg[1] == 'any':
-                if randomly.heads_or_tails():
+                if random.choice([True, False]):
                     # doesn't make sense to have (-3 - 4x)² as a BI,
                     # it's uselessly complicated for the pupils
                     a.set_sign('+')
-                    b.set_sign(randomly.sign())
+                    b.set_sign(random.choice(['+', '-']))
                     self._a = a
                     self._b = b
                     self._element.append(Sum([a, b]))
@@ -7521,7 +7432,7 @@ class BinomialIdentity(Expandable):
                     # doesn't make sense to have (-3 - 4x)² as a BI,
                     # it's uselessly complicated for the pupils
                     a.set_sign('+')
-                    b.set_sign(randomly.sign())
+                    b.set_sign(random.choice(['+', '-']))
                     self._a = a
                     self._b = b
                     self._element.append(Sum([a, b]))
@@ -7531,16 +7442,14 @@ class BinomialIdentity(Expandable):
                     self._kind = 'squares_difference'
 
             else:
-                raise error.UncompatibleType(arg[1],
-                                             'sum_square|difference_square|'
-                                             + 'squares_difference|'
-                                             + 'numeric_{sum_square|differen'
-                                             + 'ce_square|'
-                                             + 'squares_difference}|any')
+                raise TypeError('Got: ' + str(arg[1])
+                                + ' instead of sum_square|difference_square|'
+                                'squares_difference|'
+                                'numeric_{sum_square|difference_square|'
+                                'squares_difference}|any')
         else:
-            raise error.UncompatibleType(arg,
-                                         "(Exponented, Exponented)|"
-                                         + "(RANDOMLY, <type>)")
+            raise TypeError('Got: ' + str(type(arg)) + ' instead of '
+                            '(Exponented, Exponented)|(RANDOMLY, <type>)')
 
     # --------------------------------------------------------------------------
     ##

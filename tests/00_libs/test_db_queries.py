@@ -27,7 +27,7 @@ from collections import namedtuple
 
 from mathmaker import settings
 from mathmaker.lib import shared
-from mathmaker.lib.tools import db as database
+from mathmaker.lib import database
 from mathmaker.lib.sheet.exercise.X_Generic \
     import get_nb_sources_from_question_info
 

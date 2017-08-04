@@ -20,9 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import random
 from decimal import Decimal
 
-from mathmaker.lib import randomly
 from mathmaker.lib import shared
 from mathmaker.lib.common import alphabet
 from mathmaker.lib.common import pythagorean
@@ -144,10 +144,8 @@ class Q_RightTriangle(Q_Structure):
 
         # Now set some randomly values
         letters = [elt for elt in alphabet.UPPERCASE]
-
-        vertices_names = (randomly.pop(letters),
-                          randomly.pop(letters),
-                          randomly.pop(letters))
+        random.shuffle(letters)
+        vertices_names = (letters.pop(), letters.pop(), letters.pop())
 
         # Here you can begin to write code for the different
         # q_kinds & q_subkinds
@@ -161,7 +159,7 @@ class Q_RightTriangle(Q_Structure):
                     triples = pythagorean.ALL_TRIPLES_5_100 \
                         + pythagorean.TRIPLES_101_200_WO_TEN_MULTIPLES
 
-                sides_values = randomly.pop(triples)
+                sides_values = random.choice(triples)
 
                 if use_decimals:
                     sides_values = \
@@ -175,7 +173,7 @@ class Q_RightTriangle(Q_Structure):
 
                 else:
                     # case: self.q_subkind == 'calculate_one_leg'
-                    leg0_or_1 = randomly.pop([0, 1])
+                    leg0_or_1 = random.choice([0, 1])
                     sides_values[leg0_or_1] = ""
                     sides_units[leg0_or_1] = ""
 
@@ -191,8 +189,7 @@ class Q_RightTriangle(Q_Structure):
                     max_side_value = 100
 
                 if self.q_subkind == 'calculate_hypotenuse':
-                    first_leg = randomly.integer(min_side_value,
-                                                 max_side_value)
+                    first_leg = random.randint(min_side_value, max_side_value)
 
                     # we will take the leg values between
                     # at least 25% and at most 150% of the length of first leg
@@ -211,16 +208,16 @@ class Q_RightTriangle(Q_Structure):
                         list(set(second_leg_values)
                              - set(second_leg_unauthorized_values))
 
-                    if randomly.heads_or_tails():
+                    if random.choice([True, False]):
                         sides_values = \
                             [first_leg,
-                             randomly.pop(second_leg_possible_values),
+                             random.choice(second_leg_possible_values),
                              ""]
                         sides_units[2] = ""
 
                     else:
                         sides_values = \
-                            [randomly.pop(second_leg_possible_values),
+                            [random.choice(second_leg_possible_values),
                              first_leg,
                              ""]
                         sides_units[2] = ""
@@ -228,8 +225,7 @@ class Q_RightTriangle(Q_Structure):
                 else:
                     # case: self.q_subkind == 'calculate_one_leg'
 
-                    hypotenuse = randomly.integer(min_side_value,
-                                                  max_side_value)
+                    hypotenuse = random.randint(min_side_value, max_side_value)
 
                     # we will take the leg values between
                     # at least 25% and at most 90% of the length of hypotenuse
@@ -247,14 +243,14 @@ class Q_RightTriangle(Q_Structure):
                     leg_possible_values = list(set(leg_values)
                                                - set(leg_unauthorized_values))
 
-                    if randomly.heads_or_tails():
+                    if random.choice([True, False]):
                         sides_values = ["",
-                                        randomly.pop(leg_possible_values),
+                                        random.choice(leg_possible_values),
                                         hypotenuse]
                         sides_units[0] = ""
 
                     else:
-                        sides_values = [randomly.pop(leg_possible_values),
+                        sides_values = [random.choice(leg_possible_values),
                                         "",
                                         hypotenuse]
                         sides_units[1] = ""
@@ -286,18 +282,18 @@ class Q_RightTriangle(Q_Structure):
             if use_decimals:
                 triples += list(pythagorean.TRIPLES_101_200_WO_TEN_MULTIPLES)
 
-            sides_values = randomly.pop(triples)
+            sides_values = random.choice(triples)
 
             if self.q_kind == 'contrapositive_of_pythagorean_theorem':
                 # We'll change exactly one value to be sure the triplet
                 # is NOT pythagorean
-                if randomly.heads_or_tails():
+                if random.choice([True, False]):
                     # We will decrease the lowest value
                     max_delta = int(0.1 * sides_values[0])
                     min_delta = 1
                     if min_delta > max_delta:
                         max_delta = min_delta
-                    chosen_delta = randomly.pop(
+                    chosen_delta = random.choice(
                         [i + min_delta
                          for i in range(max_delta - min_delta + 1)])
 
@@ -311,7 +307,7 @@ class Q_RightTriangle(Q_Structure):
                     min_delta = 1
                     if min_delta > max_delta:
                         max_delta = min_delta
-                    chosen_delta = randomly.pop(
+                    chosen_delta = random.choice(
                         [i + min_delta
                          for i in range(max_delta - min_delta + 1)])
 
@@ -391,9 +387,8 @@ angle in {right_vertex}.")\
                 sides_copy = [self.right_triangle.side[0].clone(),
                               self.right_triangle.side[1].clone(),
                               self.right_triangle.side[2].clone()]
-                side0 = randomly.pop(sides_copy)
-                side1 = randomly.pop(sides_copy)
-                side2 = randomly.pop(sides_copy)
+                random.shuffle(sides_copy)
+                side0, side1, side2 = sides_copy
 
                 result += _("{triangle_name} is a triangle such as "
                             "{side_length0} = {nb0}, {side_length1} = {nb1} "

@@ -30,8 +30,9 @@ import copy
 import locale
 from decimal import (Decimal, getcontext, Rounded, ROUND_HALF_UP, ROUND_DOWN,
                      InvalidOperation)
+from abc import ABCMeta, abstractmethod
 
-from mathmaker.lib.tools.auxiliary_functions import round_deci
+from mathmaker.lib.toolbox import round_deci
 from mathmaker.lib.core.utils import check_lexicon_for_substitution
 from mathmaker.lib.common.cst import (UNIT, TENTH, HUNDREDTH, THOUSANDTH,
                                       TEN_THOUSANDTH, PRECISION,
@@ -39,11 +40,10 @@ from mathmaker.lib.common.cst import (UNIT, TENTH, HUNDREDTH, THOUSANDTH,
                                       VALUE_AND_UNIT_SEPARATOR)
 from mathmaker.lib.common import alphabet
 from mathmaker.lib.core.base import Printable
-from mathmaker.lib import error
 from mathmaker.lib.common.latex import MARKUP
 
 
-class Substitutable(object):
+class Substitutable(object, metaclass=ABCMeta):
     """
     Any object whose (literal) value(s) can be substituted by numeric ones.
 
@@ -59,11 +59,10 @@ class Substitutable(object):
             self.subst_dict = subst_dict
 
     @property
+    @abstractmethod
     def content(self):
         """The content to be substituted (list containing literal objects)."""
-        raise NotImplementedError('In order to be substitutable, this object '
-                                  'should define where is the content to be '
-                                  'substituted.')
+        pass
 
     @property
     def subst_dict(self):
@@ -112,20 +111,20 @@ class Evaluable(Printable):
     #   @brief If the object is literal, returns the first letter
     # The first term of a Sum, the first factor of a Product etc.
     def get_first_letter(self):
-        raise error.MethodShouldBeRedefined(self, 'get_first_letter')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the numeric value of the object
     def evaluate(self, **options):
-        raise error.MethodShouldBeRedefined(self, 'evaluate')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
     #   @brief To check if this contains a rounded number...
     #   @return True or False
     def contains_a_rounded_number(self):
-        raise error.MethodShouldBeRedefined(self, 'contains_a_rounded_number')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
@@ -135,7 +134,7 @@ class Evaluable(Printable):
     #   @param objct The object to search for
     #   @return True if the object contains exactly the given objct
     def contains_exactly(self, objct):
-        raise error.MethodShouldBeRedefined(self, 'contains_exactly')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
@@ -168,19 +167,19 @@ class Evaluable(Printable):
     ##
     #   @brief True if the object only contains numeric objects
     def is_numeric(self, displ_as=False):
-        raise error.MethodShouldBeRedefined(self, 'is_numeric')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object only contains literal objects
     def is_literal(self):
-        raise error.MethodShouldBeRedefined(self, 'is_literal')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the evaluated value of an object is null
     def is_null(self):
-        raise error.MethodShouldBeRedefined(self, 'is_null')
+        raise NotImplementedError
 
 
 # ------------------------------------------------------------------------------
@@ -196,13 +195,13 @@ class Calculable(Evaluable):
     ##
     #   @brief Returns the list of elements to iter over
     def get_iteration_list(self):
-        raise error.MethodShouldBeRedefined(self, 'get_iteration_list')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the next Calculable object during a numeric calculation
     def calculate_next_step(self, **options):
-        raise error.MethodShouldBeRedefined(self, 'calculate_next_step')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
@@ -211,14 +210,13 @@ class Calculable(Evaluable):
     #   or the Sum itself reduced, or None
     #   @return Exponented
     def expand_and_reduce_next_step(self, **options):
-        raise error.MethodShouldBeRedefined(self,
-                                            'expand_and_reduce_next_step')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the number of elements of the Exponented
     def __len__(self):
-        raise error.MethodShouldBeRedefined(self, "__len__()")
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
@@ -236,8 +234,7 @@ class Calculable(Evaluable):
     #   @param position The position (integer) of self in the Product
     #   @return True if the writing rules require × between self & obj
     def multiply_symbol_is_required(self, objct, position):
-        raise error.MethodShouldBeRedefined(self,
-                                            'multiply_symbol_is_required')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
@@ -246,7 +243,7 @@ class Calculable(Evaluable):
     #   @param position The position of the object in the Product
     #   @return True if the object requires brackets in a Product
     def requires_brackets(self, position):
-        raise error.MethodShouldBeRedefined(self, 'requires_brackets')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
@@ -255,8 +252,7 @@ class Calculable(Evaluable):
     #   from 1 and several terms or factors (in the case of Products & Sums)
     #   @return True if the object requires inner brackets
     def requires_inner_brackets(self):
-        raise error.MethodShouldBeRedefined(self,
-                                            'requires_innner_brackets')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
@@ -273,23 +269,20 @@ class Calculable(Evaluable):
     #   @brief True if the object can be displayed as a single 1
     # For instance, the Product 1×1×1×1 or the Sum 0 + 0 + 1 + 0
     def is_displ_as_a_single_1(self):
-        raise error.MethodShouldBeRedefined(self,
-                                            'is_displ_as_a_single_1')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single int
     def is_displ_as_a_single_int(self):
-        raise error.MethodShouldBeRedefined(self,
-                                            'is_displ_as_a_single_1')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be displayed as a single -1
     # For instance, the Product 1×1×(-1)×1 or the Sum 0 + 0 - 1 + 0
     def is_displ_as_a_single_minus_1(self):
-        raise error.MethodShouldBeRedefined(self,
-                                            'is_displ_as_a_single_minus_1')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
@@ -297,22 +290,19 @@ class Calculable(Evaluable):
     # For instance, the Product 0×0×0×0 (but not 0×1)
     # or the Sum 0 + 0 + 0 (but not 0 + 1 - 1)
     def is_displ_as_a_single_0(self):
-        raise error.MethodShouldBeRedefined(self,
-                                            'is_displ_as_a_single_0')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object is or only contains one numeric Item
     def is_displ_as_a_single_numeric_Item(self):
-        raise error.MethodShouldBeRedefined(self, 'is_displ_as_a_single'
-                                                  '_numeric_Item')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
     #   @brief True if the object can be considered as a neutral element
     def is_displ_as_a_single_neutral(self, elt):
-        raise error.MethodShouldBeRedefined(self, 'is_displ_as_a_single'
-                                                  '_neutral')
+        raise NotImplementedError
 
 
 # ------------------------------------------------------------------------------
@@ -336,7 +326,7 @@ class Signed(Calculable):
     ##
     #   @brief Returns the number of minus signs in the object
     def get_minus_signs_nb(self):
-        raise error.MethodShouldBeRedefined(self, 'get_minus_signs_nb')
+        raise NotImplementedError
 
     # --------------------------------------------------------------------------
     ##
@@ -365,7 +355,8 @@ class Signed(Calculable):
             elif arg.is_displ_as_a_single_minus_1():
                 self._sign = '-'
         else:
-            raise error.UncompatibleType(self, "'+' or '-' or 1 or -1")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of \'+\' or \'-\' or 1 or -1')
 
     # --------------------------------------------------------------------------
     ##
@@ -377,11 +368,9 @@ class Signed(Calculable):
             self.set_sign('-')
         else:
             # this case should never happen, just to secure the code
-            raise error.WrongObject("The sign of the object "
-                                    + repr(self)
-                                    + " is "
-                                    + str(self.sign)
-                                    + " instead of '+' or '-'.")
+            raise ValueError('The sign of the object ' + repr(self)
+                             + ' is ' + str(self.sign)
+                             + " instead of '+' or '-'.")
 
     # --------------------------------------------------------------------------
     ##
@@ -416,8 +405,6 @@ class Value(Signed):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @warning Might raise an UncompatibleType exception
-    #            or InvalidOperation
     #   @param arg Number|String
     #   If the argument is not of one of these kinds, an exception
     #   will be raised.
@@ -461,7 +448,8 @@ class Value(Signed):
 
         # All other unforeseen cases: an exception is raised.
         else:
-            raise error.UncompatibleType(arg, "Number|String")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of Number|String')
 
         if self._sign == '-':
             if isinstance(self._raw_value, str):
@@ -478,7 +466,7 @@ class Value(Signed):
         if self.is_literal():
             return self.raw_value
         else:
-            raise error.UncompatibleType(self, "str, i.e. literal Value")
+            raise TypeError('Cannot get first letter of a non literal Value')
 
     # --------------------------------------------------------------------------
     ##
@@ -491,12 +479,6 @@ class Value(Signed):
     #   @brief Returns the list of elements to iter over
     def get_iteration_list(self):
         return [self.raw_value]
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns the number of minus signs in the object
-    def get_minus_signs_nb(self):
-        raise error.MethodShouldBeRedefined(self, 'get_minus_signs_nb')
 
     @property
     def raw_value(self):
@@ -560,7 +542,8 @@ class Value(Signed):
     #   @brief Sets the "has been rounded" state of the Value
     def set_has_been_rounded(self, arg):
         if arg not in [True, False]:
-            raise error.WrongArgument(str(type(arg)), "True|False")
+            raise ValueError('Got: ' + str(type(arg))
+                             + ' instead of True|False')
         else:
             self._has_been_rounded = arg
 
@@ -582,7 +565,8 @@ class Value(Signed):
             elif arg.is_displ_as_a_single_minus_1():
                 self._sign = '-'
         else:
-            raise error.UncompatibleType(self, "'+' or '-' or 1 or -1")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of \'+\' or \'-\' or 1 or -1')
 
     # --------------------------------------------------------------------------
     ##
@@ -601,11 +585,9 @@ class Value(Signed):
             self.set_sign('-')
         else:
             # this case should never happen, just to secure the code
-            raise error.WrongObject("The sign of the object "
-                                    + repr(self)
-                                    + " is "
-                                    + str(self.sign)
-                                    + " instead of '+' or '-'.")
+            raise ValueError('The sign of the object ' + repr(self)
+                             + ' is ' + str(self.sign)
+                             + " instead of '+' or '-'.")
 
     # --------------------------------------------------------------------------
     ##
@@ -673,7 +655,7 @@ class Value(Signed):
     #   @warning Raise an exception if not numeric
     def evaluate(self, **options):
         if not self.is_numeric():
-            raise error.UncompatibleType(self, "numeric Value")
+            raise TypeError('Cannot evaluate a non numeric Value')
         else:
             return self.raw_value
 
@@ -779,24 +761,22 @@ class Value(Signed):
         if self.is_numeric():
             return Value(self.raw_value.sqrt())
         else:
-            raise error.UncompatibleType(self, "numeric Value")
+            raise TypeError('Cannot calculate the square root of a non '
+                            'numeric Value')
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the value once rounded to the given precision
     def round(self, precision):
         if not self.is_numeric():
-            raise error.UncompatibleType(self, "numeric Value")
+            raise TypeError('Cannot round a non numeric Value')
         elif (not (precision in [UNIT, TENTH, HUNDREDTH, THOUSANDTH,
                                  TEN_THOUSANDTH]
               or (type(precision) == int and 0 <= precision <= 4))):
             # __
-            raise error.UncompatibleType(precision, "must be UNIT or"
-                                                    + "TENTH, "
-                                                    + "HUNDREDTH, "
-                                                    + "THOUSANDTH, "
-                                                    + "TEN_THOUSANDTH, "
-                                                    + "or 0, 1, 2, 3 or 4.")
+            raise TypeError('Got: ' + str(type(precision))
+                            + ' instead of UNIT or TENTH, HUNDREDTH, '
+                            'THOUSANDTH, TEN_THOUSANDTH, or 0, 1, 2, 3 or 4.')
         else:
             result_value = self.clone()
 
@@ -821,7 +801,8 @@ class Value(Signed):
     #   @brief Returns the number of digits of a numerical value
     def digits_number(self):
         if not self.is_numeric():
-            raise error.UncompatibleType(self, "numeric Value")
+            raise TypeError('Cannot get the number of digits of a non '
+                            'numeric Value')
         else:
             temp_result = len(str((self.raw_value
                                    - round_deci(self.raw_value,
@@ -842,12 +823,9 @@ class Value(Signed):
                                TEN_THOUSANDTH]
                  or (type(precision) == int and 0 <= precision <= 4))):
             # __
-            raise error.UncompatibleType(precision, "must be UNIT or"
-                                                    + "TENTH, "
-                                                    + "HUNDREDTH, "
-                                                    + "THOUSANDTH, "
-                                                    + "TEN_THOUSANDTH, "
-                                                    + "or 0, 1, 2, 3 or 4.")
+            raise TypeError('Got: ' + str(type(precision))
+                            + ' instead of UNIT or TENTH, HUNDREDTH, '
+                            'THOUSANDTH, TEN_THOUSANDTH, or 0, 1, 2, 3 or 4.')
 
         precision_to_test = 0
 
@@ -879,7 +857,8 @@ class Value(Signed):
     #           (integer or decimal)
     def is_a_perfect_square(self):
         if not self.is_numeric():
-            raise error.UncompatibleType(self, "numeric Value")
+            raise TypeError('Cannot tell if a non numeric Value is a perfect '
+                            'square')
 
         if self.is_an_integer():
             return not self.sqrt().needs_to_get_rounded(0)
@@ -891,7 +870,7 @@ class Value(Signed):
     #   @brief True if the object contains an integer (numeric)
     def is_an_integer(self):
         if not self.is_numeric():
-            raise error.UncompatibleType(self, "numeric Value")
+            raise TypeError('Cannot tell if a non numeric Value is an integer')
         getcontext().clear_flags()
         self.raw_value.to_integral_exact()
         return getcontext().flags[Rounded] == 0
@@ -975,7 +954,7 @@ class Value(Signed):
 #           Quotients...
 # Any Exponented must have a exponent field and should reimplement the
 # methods that are not already defined hereafter
-class Exponented(Signed):
+class Exponented(Signed, metaclass=ABCMeta):
 
     # --------------------------------------------------------------------------
     ##
@@ -1041,7 +1020,7 @@ class Unit(Exponented):
             self._exponent = copy.deepcopy(arg.exponent)
 
         else:
-            raise error.WrongArgument(arg, "a string or a Unit")
+            raise ValueError('arg should be a string or a Unit')
 
     @property
     def name(self):

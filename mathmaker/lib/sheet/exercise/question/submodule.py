@@ -31,11 +31,10 @@ from mathmaker.lib.core.base_geometry import Point
 from mathmaker.lib.core.geometry import (Rectangle, Square, RightTriangle,
                                          InterceptTheoremConfiguration,
                                          RectangleGrid)
-from mathmaker.lib import error
 from mathmaker.lib import shared
 from mathmaker.lib.common.cst import COMMON_LENGTH_UNITS, XML_BOOLEANS
-from mathmaker.lib.tools.wording import setup_wording_format_of
-from mathmaker.lib.tools.auxiliary_functions \
+from mathmaker.lib.wording import setup_wording_format_of
+from mathmaker.lib.toolbox \
     import (rotate, is_integer, digits_nb, )
 
 
@@ -163,9 +162,8 @@ class structure(object):
         elif 'nb' in kwargs:
             nb1, nb2 = kwargs['nb'][0], kwargs['nb'][1]
         else:
-            raise error.ImpossibleAction("Setup a rectangle if no width "
-                                         "nor length have been provided"
-                                         " yet.")
+            raise RuntimeError('Impossible to Setup a rectangle if no width '
+                               'nor length have been provided yet.')
         if (not hasattr(self, 'unit_length')
             or not hasattr(self, 'unit_area')):
             self.setup(self, "units", **kwargs)
@@ -195,9 +193,8 @@ class structure(object):
         elif 'nb' in kwargs:
             nb1 = kwargs['nb'][0]
         else:
-            raise error.ImpossibleAction("Setup a square if no side's "
-                                         "length have been provided "
-                                         "yet.")
+            raise RuntimeError('Impossible to Setup a square if no side\'s '
+                               'length have been provided yet.')
         if (not hasattr(self, 'unit_length')
             or not hasattr(self, 'unit_area')):
             # __
@@ -240,10 +237,9 @@ class structure(object):
             if not all([hasattr(self, 'nb1'), hasattr(self, 'nb2'),
                         hasattr(self, 'nb3'), hasattr(self, 'nb4')]):
                 # __
-                raise error.ImpossibleAction("Setup an intercept theorem "
-                                             "figure without a "
-                                             "coefficient and 3 other "
-                                             "lengths provided.")
+                raise RuntimeError('Impossible to Setup an intercept theorem '
+                                   'figure without a coefficient and 3 other '
+                                   'lengths provided.')
         points_names = next(shared.five_letters_words_source)
         if butterfly:
             points_names = list(rotate(points_names, -1))

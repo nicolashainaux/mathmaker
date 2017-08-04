@@ -33,7 +33,7 @@ import daemon
 from mathmaker import settings
 from mathmaker import DAEMON_PORT
 from mathmaker.lib import sheet
-from mathmaker.lib.tools.xml_sheet import get_xml_sheets_paths
+from mathmaker.lib.xml_sheet import get_xml_sheets_paths
 
 MINIMUM_TIME_INTERVAL = 10
 

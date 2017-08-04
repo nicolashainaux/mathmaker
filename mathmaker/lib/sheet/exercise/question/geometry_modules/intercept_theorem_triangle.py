@@ -23,8 +23,7 @@
 import random
 
 from mathmaker.lib import shared
-from mathmaker.lib import error
-from mathmaker.lib.tools.wording import setup_wording_format_of
+from mathmaker.lib.wording import setup_wording_format_of
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.base_calculus import Item, Sum
 from mathmaker.lib.core.calculus import Equality, Equation
@@ -51,9 +50,9 @@ class sub_object(submodule.structure):
             variant = ['oneside', 'random', 'false']
         else:
             if self.variant.count('_') != 2:
-                raise error.XMLFileFormatError('The variant for '
-                                               'intercept_theorem_triangle '
-                                               'shoud contain two _')
+                raise ValueError('XMLFileFormatError: the variant for '
+                                 'intercept_theorem_triangle '
+                                 'shoud contain two _')
             variant = self.variant.split(sep='_')
 
         valid_variant = [['onerandom', 'tworandom', 'random', 'oneside',
@@ -65,16 +64,17 @@ class sub_object(submodule.structure):
         for v, valid, n in zip(variant, valid_variant,
                                ['first', 'second', 'third']):
             if v not in valid:
-                raise error.XMLFileFormatError('Invalid {} part of the '
-                                               'variant. It should be in: {}'
-                                               .format(n, str(valid)))
+                raise ValueError('XMLFileFormatError: invalid {} part of the '
+                                 'variant. It should be in: {}'
+                                 .format(n, str(valid)))
 
         if variant[0] == 'onerandom':
             variant[0] = random.choice(['oneside', 'onechunk'])
         elif variant[0] == 'tworandom':
             if variant[1] == 'twocouples':
-                raise error.XMLFileFormatError('The tworandom_twocouples_* '
-                                               'variants are impossible.')
+                raise ValueError('XMLFileFormatError: the '
+                                 'tworandom_twocouples_* '
+                                 'variants are impossible.')
             if variant[2] == 'random':
                 variant[2] = random.choice(['true', 'false'])
 
@@ -84,8 +84,8 @@ class sub_object(submodule.structure):
             elif variant[2] == 'true':
                 variant[0] = random.choice(['twosides', 'onesideonechunk'])
             else:
-                raise error.XMLFilFormatError('The third part of the variant '
-                                              'should be "true" or "false".')
+                raise ValueError('XMLFileFormatError: the third part of the '
+                                 'variant should be "true" or "false".')
 
         # The order is:
         # small[0] small[1] small[2] side[0] side[1] side[2] chunk[0] chunk[1]
@@ -274,14 +274,14 @@ class sub_object(submodule.structure):
                     if variant[2] == 'false':
                         variant[1] = 'all'
                     else:
-                        raise error.XMLFileFormatError('Invalid variants: '
-                                                       '"twochunks_*_true".')
+                        raise ValueError('XMLFileFormatError: invalid'
+                                         'variants: "twochunks_*_true".')
             elif variant[2] == 'random':
                 if variant[0] in ['oneside', 'onechunk']:
                     variant[2] = random.choice(['true', 'false'])
                 elif variant[1] == 'twocouples':
-                    raise error.XMLFileFormatError('Invalid variants: '
-                                                   '"two..._twocouples_*".')
+                    raise ValueError('XMLFileFormatError: invalid variants: '
+                                     '"two..._twocouples_*".')
                 else:
                     if variant[0] == 'twochunks':
                         variant[2] = 'false'

@@ -23,8 +23,8 @@
 import os
 
 from mathmaker import settings
-from mathmaker.lib.tools.auxiliary_functions import check_unique_letters_words
-from mathmaker.lib.tools import po_file
+from mathmaker.lib.toolbox import (check_unique_letters_words,
+                                   po_file_get_list_of)
 
 
 def test_wnl():
@@ -34,5 +34,5 @@ def test_wnl():
         for n in [3, 4, 5]:
             if os.path.isfile(settings.localedir + lang
                               + "/LC_MESSAGES/w{}l.po".format(str(n))):
-                words = po_file.get_list_of('words', lang, n)
+                words = po_file_get_list_of('words', lang, n)
                 assert check_unique_letters_words(words, n)

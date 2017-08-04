@@ -20,7 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import randomly
+import random
+
 from .X_Structure import X_Structure
 from . import question
 
@@ -137,9 +138,8 @@ class X_AlgebraExpressionReduction(X_Structure):
                                                  'a_coeff_1',
                                           length=7,
                                           expression_number=5))
-
-                for i in range(len(q)):
-                    self.questions_list.append(randomly.pop(q))
+                random.shuffle(q)
+                self.questions_list = q
 
         # PREFORMATTED EXERCISES
         elif self.x_kind == 'preformatted':

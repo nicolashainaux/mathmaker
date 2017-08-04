@@ -22,7 +22,7 @@
 
 import pytest
 
-from mathmaker.lib.maths_lib import ten_power_gcd, prime_factors, coprimes_to
+from mathmaker.lib.mathtools import ten_power_gcd, prime_factors, coprimes_to
 
 
 def test_ten_power_gcd():

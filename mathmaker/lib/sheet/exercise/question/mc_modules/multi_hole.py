@@ -20,7 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import shared, randomly
+import random
+
+from mathmaker.lib import shared
 from mathmaker.lib.core.base_calculus import Product, Item, Fraction
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.calculus import Equality
@@ -39,15 +41,16 @@ class sub_object(object):
             self.hidden_one = nb_list[1]
             visible_one = nb_list[0]
         else:
-            nb1 = randomly.pop(nb_list)
-            nb2 = randomly.pop(nb_list)
+            random.shuffle(nb_list)
+            nb1 = nb_list.pop()
+            nb2 = nb_list.pop()
             nb_list = [nb1, nb2]
-            self.hidden_one = Item(randomly.pop(nb_list))
-            visible_one = randomly.pop(nb_list)
+            self.hidden_one = Item(nb_list.pop())
+            visible_one = nb_list.pop()
 
         factors = [visible_one, hole]
-        self.holed_product = Product([randomly.pop(factors),
-                                      randomly.pop(factors)])
+        random.shuffle(factors)
+        self.holed_product = Product([factors.pop(), factors.pop()])
         self.holed_product.set_compact_display(False)
 
     def q(self, **options):

@@ -20,9 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import randomly
-from mathmaker.lib.tools.auxiliary_functions import is_natural, is_number
-from mathmaker.lib.maths_lib import gcd
+import random
+
+from mathmaker.lib.toolbox import is_natural, is_number
+from mathmaker.lib.mathtools import gcd, coprimes_to, not_coprimes_to
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
 from mathmaker.lib.core.base_calculus import (Item, Fraction, Product,
@@ -132,14 +133,11 @@ class Q_Calculation(Q_Structure):
 
         # 1st OPTION
         if q_kind == 'fraction_simplification':
-            root = randomly.integer(2,
-                                    19,
-                                    weighted_table=[0.225, 0.225, 0, 0.2,
-                                                    0, 0.2, 0, 0, 0, 0.07,
-                                                    0, 0.0375, 0, 0, 0,
-                                                    0.0375, 0, 0.005])
-
-            factors_list = [j + 1 for j in range(10)]
+            root = random.choices([n + 2 for n in range(19 - 2 + 1)],
+                                  weights=[0.225, 0.225, 0, 0.2,
+                                           0, 0.2, 0, 0, 0, 0.07,
+                                           0, 0.0375, 0, 0, 0,
+                                           0.0375, 0, 0.005])[0]
 
             ten_power_factor1 = 1
             ten_power_factor2 = 1
@@ -149,15 +147,18 @@ class Q_Calculation(Q_Structure):
                and options['with_ten_powers'] <= 1 \
                and options['with_ten_powers'] >= 0:
                 # __
-                if randomly.decimal_0_1() < options['with_ten_powers']:
+                if random.random() < options['with_ten_powers']:
                     ten_powers_list = [10, 10, 100, 100]
-                    ten_power_factor1 = randomly.pop(ten_powers_list)
-                    ten_power_factor2 = randomly.pop(ten_powers_list)
+                    random.shuffle(ten_powers_list)
+                    ten_power_factor1 = ten_powers_list.pop()
+                    ten_power_factor2 = ten_powers_list.pop()
 
+            factors_list = [j + 1 for j in range(10)]
+            random.shuffle(factors_list)
             self.objct = Fraction(('+',
-                                   root * randomly.pop(factors_list)
+                                   root * factors_list.pop()
                                    * ten_power_factor1,
-                                   root * randomly.pop(factors_list)
+                                   root * factors_list.pop()
                                    * ten_power_factor2))
 
         # 2d & 3d OPTIONS
@@ -165,33 +166,39 @@ class Q_Calculation(Q_Structure):
         elif q_kind in ['fractions_product', 'fractions_quotient']:
             # In some cases, the fractions will be generated
             # totally randomly
-            if randomly.decimal_0_1() < 0:
+            if random.random() < 0:
                 lil_box = [n + 2 for n in range(18)]
-                a = randomly.pop(
+                a = random.choices(
                     lil_box,
-                    weighted_table=FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
-                b = randomly.pop(
+                    weights=FRACTION_PRODUCT_AND_QUOTIENT_TABLE)[0]
+                b = random.choices(
                     lil_box,
-                    weighted_table=FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
+                    weights=FRACTION_PRODUCT_AND_QUOTIENT_TABLE)[0]
 
                 lil_box = [n + 2 for n in range(18)]
-                c = randomly.pop(
+                c = random.choices(
                     lil_box,
-                    weighted_table=FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
-                d = randomly.pop(
+                    weights=FRACTION_PRODUCT_AND_QUOTIENT_TABLE)[0]
+                d = random.choices(
                     lil_box,
-                    weighted_table=FRACTION_PRODUCT_AND_QUOTIENT_TABLE)
+                    weights=FRACTION_PRODUCT_AND_QUOTIENT_TABLE)[0]
 
-                f1 = Fraction((randomly.sign(plus_signs_ratio=0.75),
-                               Item((randomly.sign(plus_signs_ratio=0.80),
+                f1 = Fraction((random.choices(['+', '-'],
+                                              cum_weights=[0.75, 1])[0],
+                               Item((random.choices(['+', '-'],
+                                                    cum_weights=[0.80, 1])[0],
                                      a)),
-                               Item((randomly.sign(plus_signs_ratio=0.80),
+                               Item((random.choices(['+', '-'],
+                                                    cum_weights=[0.80, 1])[0],
                                      b))))
 
-                f2 = Fraction((randomly.sign(plus_signs_ratio=0.75),
-                               Item((randomly.sign(plus_signs_ratio=0.80),
+                f2 = Fraction((random.choices(['+', '-'],
+                                              cum_weights=[0.75, 1])[0],
+                               Item((random.choices(['+', '-'],
+                                                    cum_weights=[0.80, 1])[0],
                                      c)),
-                               Item((randomly.sign(plus_signs_ratio=0.80),
+                               Item((random.choices(['+', '-'],
+                                                    cum_weights=[0.80, 1])[0],
                                      d))))
 
                 # f1 = f1.simplified()
@@ -203,29 +210,37 @@ class Q_Calculation(Q_Structure):
             # Where b is a randomly number coprime to a×i
             # and c is a randomly number coprime to a×j
             else:
-                a = randomly.integer(2, 8)
+                a = random.randint(2, 8)
                 lil_box = [i + 2 for i in range(7)]
-                i = randomly.pop(lil_box)
-                j = randomly.pop(lil_box)
+                random.shuffle(lil_box)
+                i = lil_box.pop()
+                j = lil_box.pop()
 
-                b = randomly.coprime_to(a * i, [n + 2 for n in range(15)])
-                c = randomly.not_coprime_to(b,
-                                            [n + 2 for n in range(30)],
-                                            excepted=a * j)
+                b = random.choice(coprimes_to(a * i,
+                                              [n + 2 for n in range(15)]))
+                c = random.choice(not_coprimes_to(b,
+                                                  [n + 2 for n in range(30)],
+                                                  exclude=[a * j]))
 
-                f1 = Fraction((randomly.sign(plus_signs_ratio=0.75),
-                               Item((randomly.sign(plus_signs_ratio=0.80),
+                f1 = Fraction((random.choices(['+', '-'],
+                                              cum_weights=[0.75, 1])[0],
+                               Item((random.choices(['+', '-'],
+                                                    cum_weights=[0.80, 1])[0],
                                      a * i)),
-                               Item((randomly.sign(plus_signs_ratio=0.80),
+                               Item((random.choices(['+', '-'],
+                                                    cum_weights=[0.80, 1])[0],
                                      b))))
 
-                f2 = Fraction((randomly.sign(plus_signs_ratio=0.75),
-                               Item((randomly.sign(plus_signs_ratio=0.80),
+                f2 = Fraction((random.choices(['+', '-'],
+                                              cum_weights=[0.75, 1])[0],
+                               Item((random.choices(['+', '-'],
+                                                    cum_weights=[0.80, 1])[0],
                                      c)),
-                               Item((randomly.sign(plus_signs_ratio=0.80),
+                               Item((random.choices(['+', '-'],
+                                                    cum_weights=[0.80, 1])[0],
                                      a * j))))
 
-                if randomly.heads_or_tails():
+                if random.choice([True, False]):
                     f3 = f1.clone()
                     f1 = f2.clone()
                     f2 = f3.clone()
@@ -243,12 +258,13 @@ class Q_Calculation(Q_Structure):
         # 4th OPTION
         # Fractions Sums
         elif q_kind == 'fractions_sum':
-            randomly_position = randomly\
-                .integer(0, 16, weighted_table=FRACTIONS_SUMS_SCALE_TABLE)
+            randomly_position = random\
+                .choices([n for n in range(17)],
+                         weights=FRACTIONS_SUMS_SCALE_TABLE)[0]
 
             chosen_seed_and_generator = FRACTIONS_SUMS_TABLE[randomly_position]
 
-            seed = randomly.integer(2, chosen_seed_and_generator[1])
+            seed = random.randint(2, chosen_seed_and_generator[1])
 
             # The following test is only intended to avoid having "high"
             # results too often. We just check if the common denominator
@@ -258,7 +274,7 @@ class Q_Calculation(Q_Structure):
             if seed * chosen_seed_and_generator[0][0] \
                     * chosen_seed_and_generator[0][1] >= 75:
                 # __
-                seed = randomly.integer(2, chosen_seed_and_generator[1])
+                seed = random.randint(2, chosen_seed_and_generator[1])
 
             lil_box = [0, 1]
             gen1 = chosen_seed_and_generator[0][lil_box.pop()]
@@ -267,16 +283,16 @@ class Q_Calculation(Q_Structure):
             den1 = Item(gen1 * seed)
             den2 = Item(gen2 * seed)
 
-            temp1 = randomly.integer(1, 20)
-            temp2 = randomly.integer(1, 20)
+            temp1 = random.randint(1, 20)
+            temp2 = random.randint(1, 20)
 
             num1 = Item(temp1 // gcd(temp1, gen1 * seed))
             num2 = Item(temp2 // gcd(temp2, gen2 * seed))
 
-            f1 = Fraction((randomly.sign(plus_signs_ratio=0.7),
+            f1 = Fraction((random.choices(['+', '-'], cum_weights=[0.7, 1])[0],
                           num1,
                           den1))
-            f2 = Fraction((randomly.sign(plus_signs_ratio=0.7),
+            f2 = Fraction((random.choices(['+', '-'], cum_weights=[0.7, 1])[0],
                           num2,
                           den2))
 

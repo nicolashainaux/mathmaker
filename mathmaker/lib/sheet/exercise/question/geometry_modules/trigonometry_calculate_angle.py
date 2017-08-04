@@ -23,8 +23,7 @@
 import random
 
 from mathmaker.lib import shared
-from mathmaker.lib import error
-from mathmaker.lib.tools.wording import setup_wording_format_of
+from mathmaker.lib.wording import setup_wording_format_of
 from .. import submodule
 
 
@@ -45,10 +44,9 @@ class sub_object(submodule.structure):
             variant = self.variant
 
         if variant not in ['cos', 'sin', 'tan']:
-            raise error.XMLFileFormatError('Invalid variant: {v}, '
-                                           .format(v=variant)
-                                           + 'It should be in: '
-                                           '[\'cos\', \'sin\', \'tan\']')
+            raise ValueError('XMLFileFormatError: invalid variant: {v}, '
+                             .format(v=variant) + 'It should be in: '
+                             '[\'cos\', \'sin\', \'tan\']')
 
         # nb2 being the greatest length (the numbers have been ordered at
         # setup), it must be used as hypotenuse's length in cosine and sine

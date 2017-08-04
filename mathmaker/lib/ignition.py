@@ -258,7 +258,7 @@ def check_settings_consistency(language=None, od=None):
     package that mathmaker uses, the output directory (is it an existing
     directory?) and whether the chosen font is usable by lualatex.
     """
-    from mathmaker.lib.tools import fonts
+    from mathmaker.lib.toolbox import retrieve_fonts
     from mathmaker import settings
     log = settings.mainlogger
     language = language if language is not None else settings.language
@@ -291,7 +291,7 @@ def check_settings_consistency(language=None, od=None):
         err_msg = 'Unable to find the chosen font (' + str(font) + ') after '\
             'the update of luatex available fonts. Check if it is installed '\
             'and if you have not misspelled it.'
-        fonts.create_list()
+        retrieve_fonts()
         if not check_font():
             log.critical(err_msg)
             raise ValueError(err_msg)

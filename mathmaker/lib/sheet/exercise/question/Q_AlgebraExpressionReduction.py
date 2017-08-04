@@ -20,8 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import randomly
-from mathmaker.lib.tools.auxiliary_functions import is_integer, is_natural
+import random
+
+from mathmaker.lib.toolbox import is_integer, is_natural
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
 from mathmaker.lib.core.base_calculus import (Product, Monomial, Item, Sum,
@@ -118,8 +119,9 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
         MAX_COEFF = MAX_COEFF_TABLE[q_kind]
         MAX_EXPONENT = MAX_EXPONENT_TABLE[q_kind]
-        DEFAULT_MINIMUM_LENGTH = DEFAULT_MINIMUM_LENGTH_TABLE[q_kind]
-        DEFAULT_MAXIMUM_LENGTH = DEFAULT_MAXIMUM_LENGTH_TABLE[q_kind]
+        MIN_LENGTH = DEFAULT_MINIMUM_LENGTH_TABLE[q_kind]
+        MAX_LENGTH = DEFAULT_MAXIMUM_LENGTH_TABLE[q_kind]
+        LENGTH_SPAN = MAX_LENGTH - MIN_LENGTH + 1
 
         # This field is to be used in the answer_to_strs() method
         # to determine a possibly different algorithm for particular cases
@@ -135,9 +137,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
         if 'max_expon' in options and options['max_expon'] >= 1:
             max_expon = options['max_expon']
 
-        length = randomly.integer(DEFAULT_MINIMUM_LENGTH,
-                                  DEFAULT_MAXIMUM_LENGTH,
-                                  weighted_table=[0.15, 0.25, 0.6])
+        length = random.choice([n + MIN_LENGTH for n in range(LENGTH_SPAN)])
 
         if ('length' in options and is_integer(options['length'])
             and options['length'] >= 2):
@@ -206,13 +206,13 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 # in the expression
                 current_letters_package = list(letters_package)
 
-                nb_of_letters_to_draw = randomly.integer(1,
-                                                         max_literal_items_nb)
+                nb_of_letters_to_draw = random.randint(1, max_literal_items_nb)
 
                 drawn_letters = list()
 
                 for j in range(nb_of_letters_to_draw):
-                    drawn_letters.append(randomly.pop(current_letters_package))
+                    drawn_letters.append(
+                        random.choice(current_letters_package))
 
                 # Let's determine how many times will appear each letter
                 # and then create a list containing each of these letters
@@ -231,21 +231,23 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                         # simply giving:
                         # nb_occurences_of_the_same_letter=<enough_high_nb>
                         # as an argument.
-                        if randomly.decimal_0_1() < 0.5:
+                        if random.random() < 0.5:
                             occurences_nb = 2
                         else:
-                            occurences_nb = randomly\
-                                .integer(2, same_letter_max_occurences)
+                            occurences_nb = \
+                                random.randint(
+                                    min(2, same_letter_max_occurences),
+                                    same_letter_max_occurences)
                     else:
-                        occurences_nb = randomly\
-                            .integer(1, same_letter_max_occurences)
+                        occurences_nb = \
+                            random.randint(1, same_letter_max_occurences)
 
                     if occurences_nb >= 1:
                         for k in range(occurences_nb):
                             pre_items_list.append(drawn_letters[j])
 
                 # draw the number of numeric Items
-                nb_item_num = randomly.integer(1, PR_NUMERIC_ITEMS_MAX_NB)
+                nb_item_num = random.randint(1, PR_NUMERIC_ITEMS_MAX_NB)
 
                 # put them in the pre items' list
                 for j in range(nb_item_num):
@@ -256,7 +258,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 loop_nb = len(pre_items_list)
 
                 for j in range(loop_nb):
-                    next_item_kind = randomly.pop(pre_items_list)
+                    next_item_kind = random.choice(pre_items_list)
 
                     # It's not really useful nor really possible to limit the
                     # number
@@ -267,19 +269,23 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                     # if j >= 1 and next_item_kind == items_list[j - 1]
                     # .raw_value:
                     #    pre_items_list.append(next_item_kind)
-                    #    next_item_kind = randomly.pop(pre_items_list)
+                    #    next_item_kind = random.choice(pre_items_list)
 
                     if next_item_kind == NUMERIC:
-                        temp_item = Item((randomly.sign(plus_signs_ratio=0.75),
-                                          randomly.integer(1, max_coeff),
+                        temp_item = Item((random.choices(['+', '-'],
+                                                         cum_weights=[0.75,
+                                                                      1])[0],
+                                          random.randint(1, max_coeff),
                                           1))
                         items_list.append(temp_item)
 
                     else:
                         item_value = next_item_kind
-                        temp_item = Item((randomly.sign(plus_signs_ratio=0.9),
+                        temp_item = Item((random.choices(['+', '-'],
+                                                         cum_weights=[0.9,
+                                                                      1])[0],
                                           item_value,
-                                          randomly.integer(1, max_expon)))
+                                          random.randint(1, max_expon)))
                         items_list.append(temp_item)
 
                 # so now that the items_list is complete,
@@ -296,7 +302,7 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                             and self.objct.factor[i + 1].is_literal()
                             and self.objct.factor[i].raw_value
                             != self.objct.factor[i + 1].raw_value
-                        and randomly.decimal_0_1() > 0.5)):
+                        and random.random() > 0.5)):
                         # __
                         self.objct.info[i] = False
 
@@ -306,9 +312,9 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             if (not ('length' in options and is_integer(options['length'])
                 and options['length'] >= 2)):
                 # __
-                length = randomly.integer(DEFAULT_MINIMUM_LENGTH,
-                                          DEFAULT_MAXIMUM_LENGTH,
-                                          weighted_table=[0.15, 0.25, 0.6])
+                length = random.choices(
+                    [n + MIN_LENGTH for n in range(LENGTH_SPAN)],
+                    weights=[n for n in range(LENGTH_SPAN)])[0]
 
             # Creation of the list to give later to the Sum constructor
             products_list = list()
@@ -333,10 +339,8 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             if not ('length' in options and is_integer(options['length'])
                     and options['length'] >= 1):
                 # __
-                length = randomly\
-                    .integer(DEFAULT_MINIMUM_LENGTH,
-                             DEFAULT_MAXIMUM_LENGTH,
-                             weighted_table=[0.1, 0.25, 0.5, 0.1, 0.05])
+                length = random.choice([n + MIN_LENGTH
+                                        for n in range(LENGTH_SPAN)])
 
             else:
                 length = options['length']
@@ -356,17 +360,19 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                         degree_1_monomial_here = True
 
                 if degree_1_monomial_here == 1:
-                    temp_sum.append(Monomial((randomly.sign(),
+                    temp_sum.append(Monomial((random.choice(['+', '-']),
                                               1,
                                               1)))
                 else:
                     # this should be 2d deg Polynomial w/out any 1st deg term
-                    temp_sum.append(Monomial((randomly.sign(), 1, 2)))
+                    temp_sum.append(Monomial((random.choice(['+', '-']),
+                                              1, 2)))
 
                 self.objct.reset_element()
 
+                random.shuffle(temp_sum)
                 for i in range(length):
-                    self.objct.term.append(randomly.pop(temp_sum))
+                    self.objct.term.append(temp_sum.pop())
                     self.objct.info.append(False)
 
             else:
@@ -399,8 +405,9 @@ class Q_AlgebraExpressionReduction(Q_Structure):
 
             terms_list = []
 
+            random.shuffle(m)
             for i in range(len(m)):
-                terms_list.append(randomly.pop(m))
+                terms_list.append(m.pop())
 
             self.objct = Polynomial(terms_list)
 
@@ -412,11 +419,12 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             m3 = Monomial((RANDOMLY, max_coeff, 2))
 
             lil_box = [m1, m2, m3]
+            random.shuffle(lil_box)
 
-            self.objct = Polynomial([randomly.pop(lil_box)])
+            self.objct = Polynomial([lil_box.pop()])
 
             for i in range(len(lil_box) - 1):
-                self.objct.append(randomly.pop(lil_box))
+                self.objct.append(lil_box.pop())
 
         if q_kind == 'sum_with_minus-brackets':
             minus_brackets = []
@@ -425,15 +433,13 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 minus_brackets.append(Expandable((Monomial(('-', 1, 0)),
                                                   Polynomial((RANDOMLY,
                                                               15, 2,
-                                                              randomly
-                                                              .integer(2,
-                                                                       3))))))
+                                                              random
+                                                              .randint(2, 3)))
+                                                  )))
             m1 = Monomial((RANDOMLY, max_coeff, 0))
             m2 = Monomial((RANDOMLY, max_coeff, 1))
             m3 = Monomial((RANDOMLY, max_coeff, 2))
-            m4 = Monomial((RANDOMLY, max_coeff, randomly.integer(0, 2)))
-
-            lil_box = [m1, m2, m3, m4]
+            m4 = Monomial((RANDOMLY, max_coeff, random.randint(0, 2)))
 
             plus_brackets = []
 
@@ -441,9 +447,9 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 plus_brackets.append(Expandable((Monomial(('+', 1, 0)),
                                                  Polynomial((RANDOMLY,
                                                              15, 2,
-                                                             randomly
-                                                             .integer(2,
-                                                                      3))))))
+                                                             random
+                                                             .randint(2, 3)))
+                                                 )))
 
             big_box = []
             big_box.append(minus_brackets[0])
@@ -456,8 +462,10 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 if options['minus_brackets_nb'] == 3:
                     big_box.append(minus_brackets[2])
 
-            for i in range(randomly.integer(1, 4)):
-                big_box.append(randomly.pop(lil_box))
+            lil_box = [m1, m2, m3, m4]
+            random.shuffle(lil_box)
+            for i in range(random.randint(1, 4)):
+                big_box.append(lil_box.pop())
 
             if ('plus_brackets_nb' in options
                 and 1 <= options['plus_brackets_nb'] <= 3):
@@ -465,12 +473,8 @@ class Q_AlgebraExpressionReduction(Q_Structure):
                 for i in range(options['plus_brackets_nb']):
                     big_box.append(plus_brackets[i])
 
-            final_terms = []
-
-            for i in range(len(big_box)):
-                final_terms.append(randomly.pop(big_box))
-
-            self.objct = Sum(final_terms)
+            random.shuffle(big_box)
+            self.objct = Sum(big_box)
 
         # Creation of the expression:
         number = 0

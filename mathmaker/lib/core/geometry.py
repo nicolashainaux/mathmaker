@@ -31,13 +31,10 @@ import copy
 import random
 from decimal import Decimal, ROUND_HALF_UP
 
-from mathmaker.lib import randomly
-from mathmaker.lib import error
 from mathmaker.lib.common.cst import EQUAL_PRODUCTS
-from mathmaker.lib.tools.auxiliary_functions \
+from mathmaker.lib.toolbox \
     import is_number, round_deci, parse_layout_descriptor
-from mathmaker.lib.maths_lib import (deg_to_rad, barycenter,
-                                     POLYGONS_NATURES)
+from mathmaker.lib.mathtools import barycenter, POLYGONS_NATURES
 from .root_calculus import Evaluable, Value, Unit
 from .base_calculus import Item, Product, Sum, Function, AngleItem
 from .calculus import Equality, Table, Table_UP, QuotientsEquality
@@ -85,7 +82,7 @@ class Polygon(Drawable):
 
         if 'rotate_around_isobarycenter' in options:
             if options['rotate_around_isobarycenter'] == 'randomly':
-                self._rotation_angle = randomly.integer(0, 35) * 10
+                self._rotation_angle = random.randint(0, 35) * 10
             elif is_number(options['rotate_around_isobarycenter']):
                 self._rotation_angle = options['rotate_around_isobarycenter']
 
@@ -97,8 +94,8 @@ class Polygon(Drawable):
 
         elif type(arg) == list:
             if len(arg) <= 2:
-                raise error.WrongArgument("A list of length " + str(len(arg)),
-                                          "a list of length >= 3")
+                raise ValueError('Got: a list of length ' + str(len(arg))
+                                 + ' instead of a list of length >= 3')
             if all([type(elt) == str for elt in arg]):
                 raise NotImplementedError(
                     'Using a list of str is not implemented yet')
@@ -128,13 +125,11 @@ class Polygon(Drawable):
                                         shifted_vertices):
                     self._angle += [Angle((p0, p1, p2))]
             else:
-                raise error.WrongArgument("A list of Points or str "
-                                          + str(len(arg)),
-                                          "a list containing something else")
+                raise ValueError('arg should be a list of Points or str')
 
         else:
-            raise error.WrongArgument(str(type(arg)),
-                                      "Polygon|[Point]|[str]")
+            raise ValueError('Got: ' + str(type(arg))
+                             + ' instead of Polygon|[Point]|[str]')
 
         self._name = ''.join([v.name for v in self._vertex])
 
@@ -145,7 +140,7 @@ class Polygon(Drawable):
                 "Polygon_of_{n}_sides".format(n=str(len(self._side)))
 
         self._random_id = \
-            ''.join([str(randomly.integer(0, 9)) for i in range(8)])
+            ''.join([str(random.randint(0, 9)) for i in range(8)])
 
     # --------------------------------------------------------------------------
     ##
@@ -240,10 +235,10 @@ class Polygon(Drawable):
     @property
     def perimeter(self):
         if not self.lengths_have_been_set:
-            raise error.ImpossibleAction("calculate the perimeter while "
-                                         + "ignoring the lengths of several "
-                                         + "sides (fake lengths have not been"
-                                         + " set yet).")
+            raise RuntimeError('Impossible to calculate the perimeter while '
+                               'ignoring the lengths of several '
+                               'sides (fake lengths have not been'
+                               ' set yet).')
         else:
             return Value(sum([s.length.raw_value for s in self.side]),
                          unit=self.side[0].length.unit)
@@ -255,10 +250,11 @@ class Polygon(Drawable):
     #   @param lengths_list A list of Values, being as long as len(self.side)
     def set_lengths(self, lengths_list):
         if len(lengths_list) != len(self.side):
-            raise error.WrongArgument("A list of length "
-                                      + str(len(lengths_list)),
-                                      "A list of length the number of sides ("
-                                      + str(len(self.side)) + ")")
+            raise ValueError('Got a list of length '
+                             + str(len(lengths_list))
+                             + ' instead of a list of length the '
+                             'number of sides ('
+                             + str(len(self.side)) + ')')
 
         for s in self.side:
             s.length = lengths_list[self.side.index(s)]
@@ -327,9 +323,7 @@ class Polygon(Drawable):
         """
         definitions = ''
         for v in self.vertex:
-            definitions += '{name} = point({x}, {y})\n'.format(name=v.name,
-                                                               x=v.x,
-                                                               y=v.y)
+            definitions += v.into_euk()
         return definitions
 
     def _euk_draw_shape(self):
@@ -525,14 +519,15 @@ class Rectangle(Polygon):
                                   ])
 
             else:
-                raise error.WrongArgument(
-                    "One of the elements is not of the expected type",
-                    "[Point, nb1, nb2, str1, str2, str3]")
+                raise ValueError(
+                    'One of the elements is not of the expected type '
+                    '([Point, nb1, nb2, str1, str2, str3])')
 
         else:
-            raise error.WrongArgument(
-                str(type(arg)),
-                "Rectangle|[Point, length, height, str1, str2, str3]")
+            raise ValueError(
+                'Got: ' + str(type(arg))
+                + 'instead of (Rectangle|[Point, length, height, '
+                'str1, str2, str3])')
 
         for a in self._angle:
             a.mark = 'right'
@@ -545,8 +540,8 @@ class Rectangle(Polygon):
     @property
     def width(self):
         if not self.lengths_have_been_set:
-            raise error.ImpossibleAction("Return the width of a Rectangle "
-                                         + "before is has been set.")
+            raise RuntimeError('Impossible to Return the width of a Rectangle '
+                               'before is has been set.')
 
         return self.side[1].length
 
@@ -556,8 +551,8 @@ class Rectangle(Polygon):
     @property
     def length(self):
         if not self.lengths_have_been_set:
-            raise error.ImpossibleAction("Return the length of a Rectangle "
-                                         + "before is has been set.")
+            raise RuntimeError('Impossible to Return the length of a '
+                               'Rectangle before is has been set.')
 
         return self.side[0].length
 
@@ -589,9 +584,8 @@ class Rectangle(Polygon):
     #   @param lengths_list A list of 2 Values
     def set_lengths(self, lengths_list):
         if len(lengths_list) != 2:
-            raise error.WrongArgument("A list of length "
-                                      + str(len(lengths_list)),
-                                      "A list of length 2.")
+            raise ValueError('Got a list of length ' + str(len(lengths_list))
+                             + 'instead of a list of length 2.')
 
         super(Rectangle, self).set_lengths([lengths_list[0], lengths_list[1],
                                             lengths_list[0], lengths_list[1]])
@@ -882,8 +876,8 @@ class Square(Polygon):
     @property
     def side_length(self):
         if not self.lengths_have_been_set:
-            raise error.ImpossibleAction("Return the side's length of a "
-                                         "Square before is has been set.")
+            raise RuntimeError('Impossible to Return the side\'s length of a '
+                               'Square before is has been set.')
         return self.side[0].length
 
     # --------------------------------------------------------------------------
@@ -964,8 +958,7 @@ class Triangle(Polygon):
     #   @warning Might raise...
     def __init__(self, arg, **options):
         if not (isinstance(arg, Triangle) or type(arg) == tuple):
-            raise error.WrongArgument(' Triangle|tuple ',
-                                      str(type(arg)))
+            raise ValueError('arg should be Triangle|tuple')
 
         self._vertex = []
         self._side = []
@@ -975,23 +968,23 @@ class Triangle(Polygon):
 
         if type(arg) == tuple:
             if not len(arg) == 2:
-                raise error.WrongArgument(' tuple of length 2 ',
-                                          ' tuple of length '
-                                          + str(len(arg)))
+                raise ValueError('Expected tuple of length 2 '
+                                 ' instead of a tuple of length '
+                                 + str(len(arg)))
 
             vertices_names = arg[0]
             construction_data = arg[1]
 
             if not type(vertices_names) == tuple:
-                raise error.WrongArgument(' a tuple ', str(vertices_names))
+                raise ValueError('Expected a tuple instead of '
+                                 + str(vertices_names))
 
             if (not type(vertices_names[0]) == str
                 and type(vertices_names[1]) == str
                 and type(vertices_names[2]) == str):
                 # __
-                raise error.WrongArgument(' three strings ',
-                                          ' one of them at least is not '
-                                          'a string')
+                raise ValueError('Expected three strings '
+                                 'but one of them at least is not a string')
 
             if not (construction_data == 'sketch'
                     or (type(construction_data) == dict
@@ -1004,10 +997,10 @@ class Triangle(Polygon):
                                and is_number(
                                    construction_data['angle1'])))))):
                 # __
-                raise error.WrongArgument(
-                    " 'sketch' | "
-                    + "{'side0':nb0, 'angle1':nb1, 'side1':nb2} | ",
-                    str(construction_data))
+                raise ValueError(
+                    'Expected \'sketch\' | '
+                    + '{\'side0\':nb0, \'angle1\':nb1, \'side1\':nb2}  '
+                    'instead of ' + str(construction_data))
 
             start_vertex = [None, None, None]
 
@@ -1015,23 +1008,23 @@ class Triangle(Polygon):
                 options.get('rotate_around_isobarycenter', 'no')
             if construction_data == 'sketch':
                 rotate_around_isobarycenter = 'randomly'
-                side0_length = Decimal(str(randomly.integer(35, 55))) / 10
-                side1_length = Decimal(str(randomly.integer(35, 55))) / 10
-                angle1 = randomly.integer(20, 70)
+                side0_length = Decimal(str(random.randint(35, 55))) / 10
+                side1_length = Decimal(str(random.randint(35, 55))) / 10
+                angle1 = random.randint(20, 70)
             else:
                 side0_length = Decimal(str(construction_data['side0']))
                 side1_length = Decimal(str(construction_data['side1']))
                 angle1 = Decimal(str(construction_data['angle1']))
 
             if rotate_around_isobarycenter == 'randomly':
-                self._rotation_angle = randomly.integer(0, 35) * 10
+                self._rotation_angle = random.randint(0, 35) * 10
             elif is_number(rotate_around_isobarycenter):
                 self._rotation_angle = rotate_around_isobarycenter
 
             start_vertex[0] = Point(vertices_names[0], 0, 0)
             start_vertex[1] = Point(vertices_names[1], side0_length, 0)
-            cos1 = math.cos(deg_to_rad(angle1))
-            sin1 = math.sin(deg_to_rad(angle1))
+            cos1 = math.cos(math.radians(angle1))
+            sin1 = math.sin(math.radians(angle1))
             x2 = side0_length - side1_length * Decimal(str(cos1))
             y2 = side1_length * Decimal(str(sin1))
             start_vertex[2] = Point(vertices_names[2], x2, y2)
@@ -1042,10 +1035,10 @@ class Triangle(Polygon):
             Polygon.__init__(self, arg, **options)
 
         else:
-            raise error.WrongArgument(str(type(arg)),
-                                      "Triangle|((str, str, str),"
-                                      " {'side0': nb0, 'angle1': nb1, "
-                                      "'side1': nb2})")
+            raise ValueError('Got: ' + str(type(arg))
+                             + 'instead of Triangle|((str, str, str),'
+                             ' {\'side0\': nb0, \'angle1\': nb1, '
+                             '\'side1\': nb2})')
 
 
 # ------------------------------------------------------------------------------
@@ -1078,8 +1071,8 @@ class RightTriangle(Triangle):
     #   @warning Might raise...
     def __init__(self, arg, **options):
         if not (isinstance(arg, RightTriangle) or type(arg) == tuple):
-            raise error.WrongArgument(' RightTriangle|tuple ',
-                                      str(type(arg)))
+            raise ValueError('Expected RightTriangle|tuple '
+                             + ' instead of ' + str(type(arg)))
 
         self._vertex = [None, None, None]
         self._rotation_angle = 0
@@ -1090,29 +1083,29 @@ class RightTriangle(Triangle):
 
         if type(arg) == tuple:
             if not len(arg) == 2:
-                raise error.WrongArgument(' tuple of length 2 ',
-                                          ' tuple of length '
-                                          + str(len(arg)))
+                raise ValueError('Expected a tuple of length 2 '
+                                 ' instead of a tuple of length '
+                                 + str(len(arg)))
             vertices_names = arg[0]
             construction_data = arg[1]
 
             if not type(vertices_names) == tuple:
-                raise error.WrongArgument(' a tuple ', str(vertices_names))
+                raise ValueError('Expected a tuple, got: '
+                                 + str(vertices_names))
 
             if (not type(vertices_names[0]) == str
                 and type(vertices_names[1]) == str
                 and type(vertices_names[2]) == str):
                 # __
-                raise error.WrongArgument(' three strings ',
-                                          ' one of them at least is '
-                                          'not a string')
+                raise ValueError('Expected three strings '
+                                 'but one of them at least is not a string')
 
             rotation = 0
 
             if ('rotate_around_isobarycenter' in options
                 and options['rotate_around_isobarycenter'] == 'randomly'):
                 # __
-                rotation = randomly.integer(0, 35) * 10
+                rotation = random.randint(0, 35) * 10
 
             elif ('rotate_around_isobarycenter' in options
                   and is_number(options['rotate_around_isobarycenter'])):
@@ -1123,9 +1116,9 @@ class RightTriangle(Triangle):
             leg1_length = 0
 
             if construction_data == 'sketch':
-                leg0_length = Decimal(str(randomly.integer(35, 55))) / 10
+                leg0_length = Decimal(str(random.randint(35, 55))) / 10
                 leg1_length = \
-                    Decimal(str(randomly.integer(7, 17))) \
+                    Decimal(str(random.randint(7, 17))) \
                     / Decimal("20") * leg0_length
 
             elif (type(construction_data) == dict
@@ -1138,9 +1131,9 @@ class RightTriangle(Triangle):
                 leg1_length = construction_data['leg1']
 
             else:
-                raise error.WrongArgument(" 'sketch' | "
-                                          + "{'leg0': nb0, 'leg1': nb1}",
-                                          str(construction_data))
+                raise ValueError('Expected \'sketch\' | '
+                                 '{\'leg0\': nb0, \'leg1\': nb1} '
+                                 'instead of ' + str(construction_data))
 
             Triangle.__init__(self,
                               ((vertices_names[0],
@@ -1218,9 +1211,9 @@ class RightTriangle(Triangle):
             unknown_side = 'hypotenuse'
 
         if n_numeric_data != 2:
-            raise error.ImpossibleAction("creation of a pythagorean equality "
-                                         "when the number of known numeric "
-                                         "values is different from 2.")
+            raise RuntimeError('Impossible to creation of a pythagorean '
+                               'equality when the number of known numeric '
+                               'values is different from 2.')
 
         # Now create the substitutable Equality
         # (so, also create the dictionnary)
@@ -1248,8 +1241,8 @@ class RightTriangle(Triangle):
                            Item(('+', self.leg[1].length_name, 2))])]
 
         else:
-            raise error.ImpossibleAction("creation of a pythagorean equality "
-                                         "because no unknown side was found")
+            raise RuntimeError('Impossible to creation of a pythagorean '
+                               'equality because no unknown side was found')
 
         return Equality(objcts, subst_dict=subst_dict)
 

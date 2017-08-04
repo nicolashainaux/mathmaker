@@ -57,7 +57,7 @@ def init():
 
     db = sqlite3.connect(settings.path.db)
 
-    from mathmaker.lib.tools import db as database
+    from mathmaker.lib import database
     three_letters_words_source = database.source("w3l", ["id", "word"],
                                                  language=settings.language)
     four_letters_words_source = database.source("w4l", ["id", "word"],
@@ -98,8 +98,10 @@ def init():
 
     try:
         machine = LaTeX(settings.language)
-    except Exception:
-        log.error("An exception occured while creating the LaTeX machine.",
+    except TypeError:
+        log.error('An exception occured while creating the LaTeX machine.',
                   exc_info=True)
+        raise RuntimeError('Could not create the machine object! '
+                           'Check logfile')
 
     number_of_the_question = 0

@@ -21,10 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import subprocess
+from abc import ABCMeta, abstractmethod
 
 from mathmaker import settings
-from mathmaker.lib import error
-from mathmaker.lib.tools import header_comment
+from mathmaker.lib.toolbox import generate_header_comment
 
 
 # ------------------------------------------------------------------------------
@@ -51,14 +51,15 @@ class Clonable(object):
 ##
 # @class NamedObject
 # @brief Abstract mother class of objects having a name
-class NamedObject(Clonable):
+class NamedObject(Clonable, metaclass=ABCMeta):
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
     #   @warning Must be redefined
+    @abstractmethod
     def __init__(self):
-        raise error.MethodShouldBeRedefined(self, "__init__")
+        pass
 
     # --------------------------------------------------------------------------
     ##
@@ -73,7 +74,7 @@ class NamedObject(Clonable):
     @name.setter
     def name(self, arg):
         if not (type(arg) == str or type(arg) == int):
-            raise error.WrongArgument(str(type(arg)), "str|int")
+            raise ValueError('Got: ' + str(type(arg)) + 'instead of str|int')
 
         self._name = str(arg)
 
@@ -85,15 +86,16 @@ class NamedObject(Clonable):
 # @class Printable
 # @brief All Printable objects: Exponenteds & others (Equations...)
 # Any Printable must reimplement the into_str() method
-class Printable(NamedObject):
+class Printable(NamedObject, metaclass=ABCMeta):
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
     #   @return The formated string
+    @abstractmethod
     def into_str(self, **options):
-        raise error.MethodShouldBeRedefined(self, 'into_str')
+        pass
 
     @property
     def printed(self):
@@ -113,7 +115,7 @@ class Printable(NamedObject):
 # @class Drawable
 # @brief All Drawable objects. Any Drawable must reimplement into_euk()
 # Drawable are not renamable
-class Drawable(NamedObject):
+class Drawable(NamedObject, metaclass=ABCMeta):
 
     # --------------------------------------------------------------------------
     ##
@@ -142,22 +144,23 @@ class Drawable(NamedObject):
     #          their name from other properties inside them.
     @name.setter
     def name(self, arg):
-        raise error.ImpossibleAction("rename this object")
+        raise RuntimeError('Impossible to rename this object')
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Creates the euk string to put in the file
     #   @param options Any options
     #   @return The string to put in the picture file
+    @abstractmethod
     def into_euk(self):
-        raise error.MethodShouldBeRedefined(self, 'into_euk')
+        pass
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Creates the picture of the drawable object
     #   @return Nothing, just creates the picture file
     def into_pic(self, create_pic_file=True):
-        hc = header_comment.generate('eukleides')
+        hc = generate_header_comment('eukleides')
 
         if create_pic_file:
             euk_path = settings.outputdir + self.euk_filename

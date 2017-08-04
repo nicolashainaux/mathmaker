@@ -84,15 +84,14 @@ At the root can be found:
 * ``core/`` contains all mathematical objects, numeric or geometric
 * ``machine/`` contains the "typewriter"
 * ``sheet/`` contains all sheets, exercices and questions. A big part of it is obsolete (should be replaced by generic objects that take their data from xml files)
-* ``tools/`` contains modules relating to a special feature (configuration, database handling, etc.)
-* ``error.py`` contains mathmaker's own errors (actually still contains a lot of useless Exceptions, needs to be reduced and reorganized)
-* ``is_.py`` contains special functions to determine the type of certain objects (this should be removed)
-* ``list_sheets.py`` contains the functions used to build the complete list of the sheets that mathmaker provides
-* ``maths_lib.py`` contains some extra mathematical functions
-* ``randomly.py`` contains some functions dealing with randomness (should be heavily reduced because the standard random module already provides almost everything)
+* ``database.py`` contains all functions required to interact with mathmaker's database
+* ``ignition.py`` contains several functions called at startup
+* ``mathtools.py`` contains some extra mathematical functions
 * ``shared.py`` contains objects and variables that need to be shared (except settings), like the database connection
 * ``sources.py`` contains the functions to interact with numbers' or wordings' sources
-* ``startup_actions.py`` contains several functions called at startup
+* ``toolbox.py`` contains a collection of useful functions
+* ``wording.py`` contains a collection of useful functions to handle wordings
+* ``xml_sheet.py`` contains a collection of useful functions to handle xml sheet files
 
 Overview of the main classes
 ----------------------------

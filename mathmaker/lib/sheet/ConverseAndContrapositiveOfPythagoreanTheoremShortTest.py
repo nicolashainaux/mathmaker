@@ -20,8 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import random
+
 from . import exercise
-from mathmaker.lib import randomly
 
 from .S_Structure import S_Structure
 
@@ -64,31 +65,31 @@ class ConverseAndContrapositiveOfPythagoreanTheoremShortTest(S_Structure):
         self.text = ""
         self.answers_title = _("Examples of answers")
 
-        boolean_list = [True, False]
+        bool_list = [True, False]
 
         ex1 = exercise.X_RightTriangle(x_kind='short_test',
                                        x_subkind='contrapositive_of_'
                                                  'pythagorean_theorem',
-                                       use_decimals=randomly.pop(boolean_list))
+                                       use_decimals=random.choice(bool_list))
 
         ex2 = exercise.X_RightTriangle(x_kind='short_test',
                                        x_subkind='converse_of_pythagorean'
                                                  '_theorem',
-                                       use_decimals=randomly.pop(boolean_list))
+                                       use_decimals=random.choice(bool_list))
 
-        boolean_list = [True, False]
+        bool_list = [True, False]
 
         ex3 = exercise.X_RightTriangle(x_kind='short_test',
                                        x_subkind='converse_of_'
                                                  'pythagorean_theorem',
-                                       use_decimals=randomly.pop(boolean_list))
+                                       use_decimals=random.choice(bool_list))
 
         ex4 = exercise.X_RightTriangle(x_kind='short_test',
                                        x_subkind='contrapositive_of_'
                                                  'pythagorean_theorem',
-                                       use_decimals=randomly.pop(boolean_list))
+                                       use_decimals=random.choice(bool_list))
 
-        if randomly.heads_or_tails():
+        if random.choice([True, False]):
             x_list = [ex1, ex2, ex3, ex4]
         else:
             x_list = [ex3, ex4, ex1, ex2]

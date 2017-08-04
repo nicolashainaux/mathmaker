@@ -27,9 +27,9 @@ from collections import namedtuple
 from intspan import intspan
 from intspan.core import ParseError
 
-from mathmaker.lib import shared, error
+from mathmaker.lib import shared
 from mathmaker.lib.common import alphabet
-from mathmaker.lib.maths_lib import coprimes_to
+from mathmaker.lib.mathtools import coprimes_to
 from .X_Structure import X_Structure
 from . import question
 from .question import Q_Generic
@@ -399,7 +399,6 @@ class X_Generic(X_Structure):
     #                         x_subkind options
     #   @return One instance of exercise.Generic
     def __init__(self, **options):
-        self.derived = True
         (x_kind, q_list) = options.get('q_list')
         self.q_numbering = options.get('q_numbering', 'disabled')
         # self.layout is actually the name of the layout
@@ -411,26 +410,24 @@ class X_Generic(X_Structure):
         elif self.layout != 'default':
             l = self.layout.split(sep='_')
             if not len(l) == 2:
-                raise error.XMLFileFormatError('A \'layout\' attribute in an '
-                                               'exercise should have two '
-                                               'parts linked with a _. This '
-                                               'is not the case of \'{}\'.'
-                                               .format(str(self.layout)))
+                raise ValueError('XMLFileFormatError: a \'layout\' attribute '
+                                 'in an exercise should have two '
+                                 'parts linked with a _. This '
+                                 'is not the case of \'{}\'.'
+                                 .format(str(self.layout)))
             exc_l, ans_l = l
             if exc_l not in LAYOUTS:
-                raise error.XMLFileFormatError('The first part of the layout '
-                                               'value (\'{}\') is not correct.'
-                                               ' It should belong to: {}. '
-                                               .format(str(exc_l),
-                                                       str(
-                                                       list(LAYOUTS.keys()))))
+                raise ValueError('XMLFileFormatError: the first part of the '
+                                 'layout value (\'{}\') is not correct.'
+                                 ' It should belong to: {}. '
+                                 .format(str(exc_l),
+                                         str(list(LAYOUTS.keys()))))
             if ans_l not in LAYOUTS:
-                raise error.XMLFileFormatError('The second part of the layout '
-                                               'value (\'{}\') is not correct.'
-                                               ' It should belong to: {}. '
-                                               .format(str(ans_l),
-                                                       str(
-                                                       list(LAYOUTS.keys()))))
+                raise ValueError('XMLFileFormatError: the second part of the '
+                                 'layout value (\'{}\') is not correct.'
+                                 ' It should belong to: {}. '
+                                 .format(str(ans_l),
+                                         str(list(LAYOUTS.keys()))))
             X_LAYOUTS.update({self.layout: {'exc': LAYOUTS[exc_l],
                                             'ans': LAYOUTS[ans_l]}})
         X_Structure.__init__(self,

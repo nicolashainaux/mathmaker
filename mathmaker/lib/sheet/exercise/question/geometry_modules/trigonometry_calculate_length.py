@@ -23,8 +23,7 @@
 import random
 
 from mathmaker.lib import shared
-from mathmaker.lib import error
-from mathmaker.lib.tools.wording import setup_wording_format_of
+from mathmaker.lib.wording import setup_wording_format_of
 from .. import submodule
 
 
@@ -45,14 +44,13 @@ class sub_object(submodule.structure):
             variant = ['random', 'random']
         else:
             if self.variant.count('_') != 1:
-                raise error.XMLFileFormatError('The variant for '
-                                               'trigonometry_calculate_length '
-                                               'shoud contain one _')
+                raise ValueError('XMLFileFormatError: the variant for '
+                                 'trigonometry_calculate_length '
+                                 'shoud contain one _')
             if self.variant in ['cos_opp', 'sin_adj', 'tan_hyp']:
-                raise error.XMLFileFormatError('Invalid variant: {v}, '
-                                               .format(v=variant)
-                                               + 'It should be in: '
-                                               + str(valid_variants))
+                raise ValueError('XMLFileFormatError: invalid variant: {v}, '
+                                 .format(v=variant) + 'It should be in: '
+                                 + str(valid_variants))
             variant = self.variant.split(sep='_')
 
         if variant[0] == 'random':

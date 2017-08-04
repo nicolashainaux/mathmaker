@@ -28,21 +28,23 @@ import locale
 from mathmaker import __info__, __software_name__
 from mathmaker import settings
 from mathmaker.lib import shared
-from mathmaker.lib import startup_actions
 from mathmaker.lib import sheet
-from mathmaker.lib import list_sheets
-from mathmaker.lib.tools.xml_sheet import get_xml_sheets_paths
+from mathmaker.lib.ignition \
+    import (check_dependencies, install_gettext_translations,
+            check_settings_consistency)
+from mathmaker.lib.toolbox import list_all_sheets
+from mathmaker.lib.xml_sheet import get_xml_sheets_paths
 
 
 def entry_point():
     settings.init()
     XML_SHEETS = get_xml_sheets_paths()
     log = settings.mainlogger
-    startup_actions.check_dependencies(euktoeps=settings.euktoeps,
-                                       xmllint=settings.xmllint,
-                                       lualatex=settings.lualatex,
-                                       luaotfload_tool=settings
-                                       .luaotfload_tool)
+    check_dependencies(euktoeps=settings.euktoeps,
+                       xmllint=settings.xmllint,
+                       lualatex=settings.lualatex,
+                       luaotfload_tool=settings
+                       .luaotfload_tool)
     parser = argparse.ArgumentParser(description='Creates maths exercices '
                                                  'sheets and their solutions.')
     parser.add_argument('-l', '--language', action='store', dest='lang',
@@ -87,18 +89,18 @@ def entry_point():
                         action='version',
                         version=__info__)
     args = parser.parse_args()
-    startup_actions.install_gettext_translations(language=args.lang)
+    install_gettext_translations(language=args.lang)
     # From now on, settings.language has its definitive value
     settings.outputdir = args.outputdir
     settings.font = args.font
     settings.encoding = args.encoding
     settings.locale = settings.language + '.' + settings.encoding
     locale.setlocale(locale.LC_ALL, settings.locale)
-    startup_actions.check_settings_consistency()
+    check_settings_consistency()
     shared.init()
 
     if args.main_directive == 'list':
-        sys.stdout.write(list_sheets.list_all_sheets())
+        sys.stdout.write(list_all_sheets())
         shared.db.close()
         sys.exit(0)
     elif args.main_directive in sheet.AVAILABLE:

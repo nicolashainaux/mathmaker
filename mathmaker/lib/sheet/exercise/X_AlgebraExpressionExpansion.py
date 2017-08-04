@@ -20,8 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmaker.lib import randomly, error
-from mathmaker.lib.tools.auxiliary_functions import is_number
+import random
+
+from mathmaker.lib.toolbox import is_number
 from mathmaker.lib.core.base_calculus import Monomial
 from .X_Structure import X_Structure
 from . import question
@@ -146,9 +147,9 @@ class X_AlgebraExpressionExpansion(X_Structure):
                 kinds_list = ['sum_square',
                               'difference_square',
                               'squares_difference']
-
+                random.shuffle(kinds_list)
                 for i in range(3):
-                    q = default_question(q_kind=randomly.pop(kinds_list),
+                    q = default_question(q_kind=kinds_list.pop(),
                                          expression_number=i,
                                          **options)
                     self.questions_list.append(q)
@@ -157,12 +158,14 @@ class X_AlgebraExpressionExpansion(X_Structure):
                 a_list1 = [20, 30, 40, 50, 60, 70, 80, 90, 100]
                 a_list2 = [200, 300, 400, 500, 600, 700, 800, 1000]
                 b_list = [1, 2, 3]
-                a1_choice = randomly.pop(a_list2)
-                b1_choice = randomly.pop(b_list)
-                a2_choice = randomly.pop(a_list1)
-                b2_choice = randomly.pop(b_list)
-                a3_choice = randomly.pop(a_list1)
-                b3_choice = randomly.pop(b_list)
+                random.shuffle(b_list)
+                random.shuffle(a_list1)
+                a1_choice = random.choice(a_list2)
+                b1_choice = b_list.pop()
+                a2_choice = a_list1.pop()
+                b2_choice = b_list.pop()
+                a3_choice = a_list1.pop()
+                b3_choice = b_list.pop()
 
                 a1 = Monomial(('+', a1_choice, 0))
                 b1 = Monomial(('+', b1_choice, 0))
@@ -174,14 +177,14 @@ class X_AlgebraExpressionExpansion(X_Structure):
                 kinds_list = ['numeric_sum_square',
                               'numeric_difference_square',
                               'numeric_squares_difference']
-
+                random.shuffle(kinds_list)
                 monomials_to_use = [(a1, b1), (a2, b2), (a3, b3)]
 
                 ordered_kinds_list = []
                 squares_differences_option = [0, 0, 0]
 
                 for i in range(3):
-                    ordered_kinds_list.append(randomly.pop(kinds_list))
+                    ordered_kinds_list.append(kinds_list.pop())
                     if ordered_kinds_list[i] == 'numeric_difference_square':
                         monomials_to_use[i][1].set_sign('-')
                     elif ordered_kinds_list[i] == 'numeric_squares_difference':
@@ -202,7 +205,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
                     self.questions_list.append(q)
 
             else:  # default short_test option
-                if randomly.heads_or_tails():
+                if random.choice([True, False]):
                     q1 = default_question(
                         q_kind='monom0_polyn1',
                         expression_number=0 + self.start_number)
@@ -231,7 +234,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
 
         elif self.x_kind == 'mini_test':
             if self.x_subkind == 'two_expansions_hard':
-                if randomly.heads_or_tails():
+                if random.choice([True, False]):
                     q1 = default_question(
                         q_kind='sum_of_any_basic_expd',
                         q_subkind='harder',
@@ -254,7 +257,7 @@ class X_AlgebraExpressionExpansion(X_Structure):
                 self.questions_list.append(q2)
 
             elif self.x_subkind == 'two_randomly':
-                if randomly.heads_or_tails():
+                if random.choice([True, False]):
                     q = default_question(q_kind='sign_expansion_short_test',
                                          expression_number=self.start_number,
                                          **options)
@@ -291,7 +294,6 @@ class X_AlgebraExpressionExpansion(X_Structure):
             # if the option 'reversed' has been given in
             # argument in this method
             if self.x_subkind == 'mixed_monom_polyn1':
-                choices_list = list()
                 ratio = DEFAULT_RATIO_MIXED_MONOM_POLYN1
 
                 if 'ratio_mmp' in options \
@@ -300,33 +302,20 @@ class X_AlgebraExpressionExpansion(X_Structure):
                    and options['ratio_mmp'] < 1:
                     # __
                     ratio = options['ratio_mmp']
-                else:
-                    raise error.ArgumentNeeded("the ratio_mmp option "
-                                               "because the "
-                                               "mixed_monom_polyn1 option "
-                                               "has been specified.")
 
+                choices_list = []
                 for i in range(int(self.q_nb * ratio) + 1):
                     choices_list.append('monom0_polyn1')
                 for i in range(int(self.q_nb - self.q_nb * ratio)):
                     choices_list.append('monom1_polyn1')
 
-                temp_nb = len(choices_list)
-
-                for i in range(temp_nb):
-                    choice = randomly.pop(choices_list)
-                    if choice == 'monom0_polyn1':
-                        q = default_question(
-                            q_kind='monom0_polyn1',
-                            expression_number=i + self.start_number,
-                            **options)
-                        self.questions_list.append(q)
-                    else:
-                        q = default_question(
-                            q_kind='monom1_polyn1',
-                            expression_number=i + self.start_number,
-                            **options)
-                        self.questions_list.append(q)
+                random.shuffle(choices_list)
+                for i in range(len(choices_list)):
+                    q = default_question(
+                        q_kind=choices_list.pop(),
+                        expression_number=i + self.start_number,
+                        **options)
+                    self.questions_list.append(q)
 
         # OTHER EXERCISES
         else:

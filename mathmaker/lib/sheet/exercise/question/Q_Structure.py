@@ -20,8 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from abc import ABCMeta, abstractmethod
+
 from mathmaker.lib import shared
-from mathmaker.lib import error
 
 
 # ------------------------------------------------------------------------------
@@ -30,20 +31,15 @@ from mathmaker.lib import error
 ##
 # @class Q_Structure
 # @brief Contains the method to be reimplemented by any question.*
-class Q_Structure(object):
+class Q_Structure(object, metaclass=ABCMeta):
 
     # --------------------------------------------------------------------------
     ##
     #   @brief /!\ Must be redefined. Constructor.
-    #   @warning Exception NotInstanciableObject.
     #   @param **options Any options
+    @abstractmethod
     def __init__(self, q_kind, AVAILABLE_Q_KIND_VALUES,
                  **options):
-        try:
-            self.derived
-        except AttributeError:
-            raise error.NotInstanciableObject(self)
-
         # OPTIONS -------------------------------------------------------------
         # It is necessary to define an options field to pass the
         # possibly modified value to the child class
@@ -123,23 +119,22 @@ class Q_Structure(object):
             return self.hint_to_str()
 
         else:
-            raise error.OutOfRangeArgument(ex_or_answers, 'exc|ans')
+            raise ValueError('Got ' + str(ex_or_answers)
+                             + ' instead of \'exc\'|\'ans\'|\'hint\'')
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief /!\ Must be redefined.
     #   Returns a str
-    #   @warning Exception NotInstanciableObject.
+    @abstractmethod
     def text_to_str(self, **options):
-        raise error.MethodShouldBeRedefined(self, 'text_to_str')
+        pass
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief /!\ Must be redefined.
     #   Writes the answers of the questions to the output.
-    #   @warning Exception NotInstanciableObject.
+    @abstractmethod
     def answer_to_str(self, **options):
-        raise error.MethodShouldBeRedefined(self, 'answer_to_str')
+        pass
 
     # --------------------------------------------------------------------------
     ##

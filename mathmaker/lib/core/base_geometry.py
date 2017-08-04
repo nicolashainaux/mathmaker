@@ -29,9 +29,7 @@
 import math
 from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
 
-from mathmaker.lib import error
-from mathmaker.lib.tools.auxiliary_functions import is_number, round_deci
-from mathmaker.lib.maths_lib import deg_to_rad
+from mathmaker.lib.toolbox import is_number, round_deci
 from mathmaker.lib.core.base import Drawable, Printable
 from mathmaker.lib.core.base_calculus import Value
 from mathmaker.lib.common.latex import MARKUP
@@ -129,7 +127,7 @@ class Point(Drawable):
     @x.setter
     def x(self, arg):
         if not is_number(arg):
-            raise error.WrongArgument(' a number ', str(arg))
+            raise ValueError('Instead of a number, got: ' + str(arg))
 
         self._x = arg
 
@@ -139,7 +137,7 @@ class Point(Drawable):
     @y.setter
     def y(self, arg):
         if not is_number(arg):
-            raise error.WrongArgument(' a number ', str(arg))
+            raise ValueError('Instead of a number, got: ' + str(arg))
 
         self._y = arg
 
@@ -166,19 +164,19 @@ class Point(Drawable):
     #   @brief Returns a new Point after rotation of self
     def rotate(self, center, angle, **options):
         if not isinstance(center, Point):
-            raise error.WrongArgument(' a Point ', str(type(center)))
+            raise ValueError('Instead of a Point, got: ' + str(type(center)))
 
         if not is_number(angle):
-            raise error.WrongArgument(' a number ', str(type(angle)))
+            raise ValueError('Instead of a number, got: ' + str(type(angle)))
 
         delta_x = self.x_exact - center.x_exact
         delta_y = self.y_exact - center.y_exact
 
-        rx = delta_x * Decimal(str(math.cos(deg_to_rad(angle)))) \
-            - delta_y * Decimal(str(math.sin(deg_to_rad(angle)))) \
+        rx = delta_x * Decimal(str(math.cos(math.radians(angle)))) \
+            - delta_y * Decimal(str(math.sin(math.radians(angle)))) \
             + center.x_exact
-        ry = delta_x * Decimal(str(math.sin(deg_to_rad(angle)))) \
-            + delta_y * Decimal(str(math.cos(deg_to_rad(angle)))) \
+        ry = delta_x * Decimal(str(math.sin(math.radians(angle)))) \
+            + delta_y * Decimal(str(math.cos(math.radians(angle)))) \
             + center.y_exact
 
         new_name = self.name + "'"
@@ -190,6 +188,10 @@ class Point(Drawable):
             new_name = options['new_name']
 
         return Point(new_name, rx, ry)
+
+    def into_euk(self):
+        return '{name} = point({x}, {y})\n'.format(name=self.name,
+                                                   x=self.x, y=self.y)
 
 
 # ------------------------------------------------------------------------------
@@ -213,11 +215,12 @@ class Segment(Drawable):
     def __init__(self, arg, **options):
         self._label = Value("")
         if not (type(arg) == tuple or isinstance(arg, Segment)):
-            raise error.WrongArgument(' tuple|Segment ', str(type(arg)))
+            raise ValueError('Instead of tuple|Segment, got: '
+                             + str(type(arg)))
         elif type(arg) == tuple:
             if not (isinstance(arg[0], Point) and isinstance(arg[1], Point)):
                 # __
-                raise error.WrongArgument(' (Point, Point) ', str(arg))
+                raise ValueError('Instead of (Point, Point) got: ' + str(arg))
 
             self._points = (arg[0].clone(), arg[1].clone())
 
@@ -305,7 +308,7 @@ class Segment(Drawable):
     @label.setter
     def label(self, arg):
         if not type(arg) == Value:
-            raise error.WrongArgument(' Value ', str(type(arg)))
+            raise ValueError('Instead of Value, got: ' + str(type(arg)))
 
         self._label = arg
 
@@ -318,9 +321,9 @@ class Segment(Drawable):
             raise TypeError('Expected a Value, got ' + str(type(arg)) + " "
                             'instead.')
         if not arg.is_numeric():
-            raise error.WrongArgument('numeric Value',
-                                      'a Value but not numeric, it contains '
-                                      + str(arg.raw_value))
+            raise ValueError('Instead of numeric Value, got: '
+                             'a Value but not numeric, it contains '
+                             + str(arg.raw_value))
         self._length = arg
         self._length_has_been_set = True
 
@@ -330,11 +333,12 @@ class Segment(Drawable):
     @mark.setter
     def mark(self, arg):
         if not type(arg) == str:
-            raise error.WrongArgument(' str ', str(type(arg)))
+            raise ValueError('Instead of str, got: ' + str(type(arg)))
 
         if arg not in AVAILABLE_SEGMENT_MARKS:
-            raise error.WrongArgument(arg, 'a string from this list: '
-                                      + str(AVAILABLE_SEGMENT_MARKS))
+            raise ValueError('Got: ' + str(arg)
+                             + ' instead of a string from this list: '
+                             + str(AVAILABLE_SEGMENT_MARKS))
 
         self._mark = arg
 
@@ -414,6 +418,9 @@ class Segment(Drawable):
             result += "\n"
             return result
 
+    def into_euk(self):
+        return self.points[0].name + '.' + self.points[1].name
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -441,11 +448,11 @@ class Vector(Point):
             elif all([is_number(elt) for elt in arg]):
                 Point.__init__(self, Point('', arg[0], arg[1]))
             else:
-                raise error.WrongArgument("a tuple not only of Points or"
-                                          " numbers",
-                                          "(Point,Point)|(x,y)")
+                raise ValueError('Got a tuple not only of Points or numbers, '
+                                 'instead of (Point,Point)|(x,y)')
         else:
-            raise error.WrongArgument(str(type(arg)), "Point|(,)")
+            raise ValueError('Got: ' + str(type(arg))
+                             + ' instead of Point|(,)')
 
     # --------------------------------------------------------------------------
     ##
@@ -453,7 +460,7 @@ class Vector(Point):
     #   @param arg Vector
     def __add__(self, arg):
         if not isinstance(arg, Vector):
-            raise error.WrongArgument(str(type(arg)), "a Vector")
+            raise ValueError('Got: ' + str(type(arg)) + ' instead of a Vector')
 
         return Vector((self.x_exact + arg.x_exact,
                        self.y_exact + arg.y_exact))
@@ -485,7 +492,7 @@ class Vector(Point):
         :type arg: Vector
         """
         if not isinstance(arg, Vector):
-            raise error.WrongArgument(str(type(arg)), "a Vector")
+            raise ValueError('Got: ' + str(type(arg)) + ' instead of a Vector')
         return self.unit_vector() + arg.unit_vector()
 
     def orthogonal_unit_vector(self, clockwise=True):
@@ -500,6 +507,9 @@ class Vector(Point):
             return Vector((u._y_exact, -u._x_exact))
         else:
             return Vector((-u._y_exact, u._x_exact))
+
+    def into_euk(self):
+        raise NotImplementedError
 
 
 # ------------------------------------------------------------------------------
@@ -536,6 +546,9 @@ class Ray(Drawable):
             self._point0 = arg._point0.clone()
             self._point1 = arg._point1.clone()
             self._name = arg._name
+
+    def into_euk(self):
+        raise NotImplementedError
 
 
 # ------------------------------------------------------------------------------
@@ -606,8 +619,8 @@ class Angle(Drawable, Printable):
             self._name = arg._name
             self._label_display_angle = arg._label_display_angle
         else:
-            raise error.WrongArgument(' (Point, Point, Point) ',
-                                      str(type(arg)))
+            raise ValueError('Expected (Point, Point, Point) '
+                             + ' instead of: ' + str(type(arg)))
 
     def __repr__(self):
         return ' ∡ ' + self._name + ' ∡ '
@@ -677,7 +690,7 @@ class Angle(Drawable, Printable):
     @label_display_angle.setter
     def label_display_angle(self, arg):
         if not is_number(arg):
-            raise error.WrongArgument(arg, ' a number ')
+            raise ValueError('arg should be a number ')
         else:
             self._label_display_angle = round_deci(Decimal(str(arg)),
                                                    Decimal('0.1'),
@@ -692,11 +705,15 @@ class Angle(Drawable, Printable):
             if arg in AVAILABLE_ANGLE_MARKS:
                 self._mark = arg
             else:
-                raise error.WrongArgument(arg, 'a string from this list: '
-                                               + str(AVAILABLE_ANGLE_MARKS))
+                raise ValueError('Got: ' + arg
+                                 + ' instead of a string from this list: '
+                                 + str(AVAILABLE_ANGLE_MARKS))
 
         else:
-            raise error.WrongArgument(arg, 'str')
+            raise ValueError('arg should be a str')
 
     def into_str(self, **options):
         return self._name
+
+    def into_euk(self):
+        return ''

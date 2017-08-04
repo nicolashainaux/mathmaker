@@ -22,10 +22,10 @@
 
 import random
 
-from mathmaker.lib import shared, error
+from mathmaker.lib import shared
 from mathmaker.lib.core.root_calculus import Value
 from .. import submodule
-from mathmaker.lib.tools.wording import setup_wording_format_of
+from mathmaker.lib.wording import setup_wording_format_of
 
 
 class sub_object(submodule.structure):
@@ -72,8 +72,8 @@ class sub_object(submodule.structure):
             setup_wording_format_of(self)
 
         else:
-            raise error.ImpossibleAction("Create this question without any "
-                                         "context.")
+            raise RuntimeError('Impossible to create this question without '
+                               'any context.')
 
         if self.subcontext == "w":
             self.rectangle.setup_labels([False, False, True, "?"])

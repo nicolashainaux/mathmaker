@@ -27,13 +27,11 @@ import subprocess
 from tempfile import NamedTemporaryFile
 
 from mathmaker import settings
-from mathmaker.lib import error
-from mathmaker.lib.tools.auxiliary_functions import is_integer, is_number
+from mathmaker.lib.toolbox import is_integer, is_number
 from mathmaker.lib.common import latex
 from mathmaker.lib.common.cst import TEXT_SCALES, TEXT_RANKS
-from mathmaker.lib.tools import header_comment
+from mathmaker.lib.toolbox import generate_header_comment
 from mathmaker.lib.core.base import Printable, Drawable
-
 from . import Structure
 
 
@@ -71,7 +69,7 @@ class LaTeX(Structure.Structure):
     ##
     #   @brief Write the complete LaTeX header of the sheet to the output.
     def write_document_header(self):
-        result = header_comment.generate(latex.FORMAT_NAME_PRINT)
+        result = generate_header_comment(latex.FORMAT_NAME_PRINT)
         result += "\documentclass[a4paper,fleqn,12pt]{article}" + "\n"
         result += r"\usepackage{fontspec}" + "\n"
         if settings.font is not None:
@@ -359,9 +357,10 @@ automatically increments the counter").format(cmd_name="exercise",
     #   @warning then all the text will be either tiny or Huge.
     def translate_font_size(self, arg):
         if not type(arg) == str:
-            raise error.UncompatibleType(arg, "String")
+            raise TypeError('Got: ' + str(type(arg)) + ' instead of str')
         elif arg not in TEXT_SCALES:
-            raise error.UncompatibleType(arg, "a text size (see TEXT_SCALES)")
+            raise ValueError('expected a text size (see TEXT_SCALES) '
+                             'instead of ' + arg)
 
         arg_num = TEXT_RANKS[arg]
 
@@ -530,7 +529,8 @@ automatically increments the counter").format(cmd_name="exercise",
         elif is_number(objct) or type(objct) is str:
             return str(objct)
         else:
-            raise error.UncompatibleType(objct, "String|Number|Printable")
+            raise TypeError('Got: ' + str(type(objct))
+                            + ' instead of String|Number|Printable')
 
     # --------------------------------------------------------------------------
     ##
@@ -557,7 +557,8 @@ automatically increments the counter").format(cmd_name="exercise",
     #   @brief Draws and inserts the picture of the drawable_arg
     def insert_picture(self, drawable_arg, **options):
         if not isinstance(drawable_arg, Drawable):
-            raise error.WrongArgument(str(drawable_arg), 'a Drawable')
+            raise ValueError('Got: ' + str(drawable_arg)
+                             + ' instead of a Drawable')
 
         drawable_arg.into_pic(create_pic_file=self.create_pic_files)
 
@@ -588,7 +589,8 @@ automatically increments the counter").format(cmd_name="exercise",
     #   @brief Sets the font_size_offset field
     def set_font_size_offset(self, arg):
         if not is_integer(arg):
-            raise error.UncompatibleType(arg, "Integer")
+            raise TypeError('Got: ' + str(type(arg))
+                            + ' instead of an integer')
 
         else:
             self.font_size_offset = int(arg)
@@ -600,4 +602,4 @@ automatically increments the counter").format(cmd_name="exercise",
         if type(arg) == bool:
             self.redirect_output_to_str = arg
         else:
-            raise error.OutOfRangeArgument(arg, " boolean ")
+            raise TypeError('Got: ' + str(type(arg)) + ' instead of boolean ')

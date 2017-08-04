@@ -45,8 +45,9 @@ import os
 import sqlite3
 
 from mathmaker import settings
-from mathmaker.lib.tools import po_file, xml_sheet
-from mathmaker.lib.tools.auxiliary_functions import check_unique_letters_words
+from mathmaker.lib import xml_sheet
+from mathmaker.lib.toolbox import po_file_get_list_of
+from mathmaker.lib.toolbox import check_unique_letters_words
 
 
 def __main__():
@@ -114,7 +115,7 @@ def __main__():
         for n in [3, 4, 5]:
             if os.path.isfile(settings.localedir + lang
                               + "/LC_MESSAGES/w{}l.po".format(str(n))):
-                words = po_file.get_list_of('words', lang, n)
+                words = po_file_get_list_of('words', lang, n)
                 check_unique_letters_words(words, n)
                 db_rows = list(zip([lang for _ in range(len(words))],
                                    words,

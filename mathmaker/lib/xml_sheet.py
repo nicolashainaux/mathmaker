@@ -32,8 +32,7 @@ from mathmaker.lib.common.cst import XML_BOOLEANS
 import xml.etree.ElementTree as XML_PARSER
 from mathmaker.lib.sheet import exercise
 from mathmaker.lib.sheet.exercise import question
-from mathmaker.lib import error
-from mathmaker.lib.tools.auxiliary_functions import parse_layout_descriptor
+from mathmaker.lib.toolbox import parse_layout_descriptor
 
 
 SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),
@@ -126,9 +125,8 @@ def _read_layout(node, config, layout):
                 try:
                     distri = int(distri)
                 except ValueError:
-                    raise error.XMLFileFormatError('A print '
-                                                   'attribute cannot be '
-                                                   'turned into int.')
+                    raise ValueError('XMLFileFormatError: a print '
+                                     'attribute cannot be turned into int.')
             if not (s == 'jump to next page'
                     and 'rowxcol' not in part.attrib
                     and 'print' not in part.attrib):
@@ -153,8 +151,9 @@ def _read_layout(node, config, layout):
             else:
                 colwidths = [int(n) for n in colwidths.split(sep=' ')]
                 if not len(colwidths) == ncol:
-                    raise error.XMLFileFormatError(
-                        'In a <layout>, the number of columns '
+                    raise ValueError(
+                        'XMLFileFormatError: in a <layout>, the number of'
+                        'columns '
                         'widths does not match the number of cols in '
                         'the rowxcol attribute.')
             if part.tag == 'wordings':
@@ -226,11 +225,11 @@ def get_sheet_config(file_name):
                                         stderr=subprocess.PIPE)
         returncode = call_xmllint.wait()
         if returncode != 0:
-            raise error.XMLFileFormatError(
-                "\nxmllint exited with a return code "
-                "of " + str(returncode) + "\n"
-                "xmllint error message is:\n"
-                "" + str(call_xmllint.stderr.read().decode(encoding='UTF-8')))
+            raise ValueError(
+                '\nXMLFileFormatError: xmllint exited with a return code '
+                'of ' + str(returncode) + '\n'
+                'xmllint error message is:\n'
+                '' + str(call_xmllint.stderr.read().decode(encoding='UTF-8')))
 
     xml_doc = XML_PARSER.parse(file_name).getroot()
 
@@ -261,23 +260,23 @@ def check_q_consistency(q_attrib, sources):
         # __
         mini, maxi = sources[0].split(sep='_')[3].split(sep='to')
         if int(mini) < 11:
-            raise error.XMLFileFormatError('For intercept_theorem_triangle '
-                                           'questions, the minimum number '
-                                           'should be 11. Here it is only {}.'
-                                           .format(mini))
+            raise ValueError('XMLFileFormatError: for intercept_theorem'
+                             '_triangle questions, the minimum number '
+                             'should be 11. Here it is only {}.'
+                             .format(mini))
         if int(maxi) - int(mini) < 19:
-            raise error.XMLFileFormatError('For intercept_theorem_triangle '
-                                           'questions, the range between '
-                                           'minimum and maximum should be at '
-                                           'least 19. Here it is only {}.'
-                                           .format(str(int(maxi) - int(mini))))
+            raise ValueError('XMLFileFormatError: for intercept_theorem'
+                             '_triangle questions, the range between '
+                             'minimum and maximum should be at '
+                             'least 19. Here it is only {}.'
+                             .format(str(int(maxi) - int(mini))))
     if (q_kind_subkind == 'intercept_theorem_triangle_formula'
         and not sources[0] == 'nothing'):
         # __
-        raise error.XMLFileFormatError('For intercept_theorem_triangle_formula'
-                                       ' questions, the only possible source '
-                                       'is \'nothing\'. \'{}\' is not correct.'
-                                       .format(sources[0]))
+        raise ValueError('XMLFileFormatError: for intercept_theorem'
+                         '_triangle_formula questions, the only possible '
+                         'source is \'nothing\'. \'{}\' is not correct.'
+                         .format(sources[0]))
 
 
 def get_q_kinds_from(exercise_node):
@@ -339,7 +338,7 @@ def get_q_kinds_from(exercise_node):
                     # This would be best done by the xml schema
                     # (requires to use xsd1.1 but lxml validates only
                     # xsd1.0). So far, it is done partially and later,
-                    # in lib/tools/tags.py
+                    # in lib/tools.py (the tag functions)
                     # So far it's not possible to mix questions
                     # requiring several sources with other questions
                     # yet multiple sources questions can be mixed together
@@ -348,16 +347,16 @@ def get_q_kinds_from(exercise_node):
                                      elt.attrib,
                                      1] for i in range(int(elt.text))]
                 else:
-                    raise error.XMLFileFormatError(
-                        "Unknown element found in the xml file: "
-                        '' + elt.tag)
+                    raise ValueError(
+                        'XMLFileFormatError: unknown element found in '
+                        'the xml file: ' + elt.tag)
 
             if len(q_temp_list) > len(n_temp_list):
-                raise error.XMLFileFormatError(
-                    "Incorrect mix section: the number of sources "
-                    "of numbers (" + str(len(n_temp_list)) + ") "
-                    "must be at least equal to the number of questions "
-                    "(" + str(len(q_temp_list)) + ").")
+                raise ValueError(
+                    'XMLFileFormatError: incorrect mix section: the number '
+                    'of sources of numbers (' + str(len(n_temp_list)) + ') '
+                    'must be at least equal to the number of questions '
+                    '(' + str(len(q_temp_list)) + ').')
 
             # So far, we only check if all of the numbers' sources
             # may be attributed to any of the questions, in order
@@ -368,10 +367,11 @@ def get_q_kinds_from(exercise_node):
                     if (not question.match_qtype_sourcenb(
                         q['kind'] + "_" + q['subkind'], n[0], v)):
                         # __
-                        raise error.XMLFileFormatError(
-                            "This source: " + str(n[0]) + " cannot "
-                            "be attributed to this question:"
-                            " " + str(q['kind'] + "_" + q['subkind']))
+                        raise ValueError(
+                            'XMLFileFormatError: this source: '
+                            + str(n[0]) + ' cannot '
+                            'be attributed to this question:'
+                            ' ' + str(q['kind'] + '_' + q['subkind']))
 
             random.shuffle(q_temp_list)
             if any(XML_BOOLEANS[n[1].get('required', 'false')]()
