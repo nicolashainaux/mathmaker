@@ -20,37 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
-# @package question
-# @brief All question objects should be "declared" here.
-
-from . import Q_Structure
 from . import Q_Generic
 
-from . import Q_AlgebraExpressionReduction
-from . import Q_AlgebraExpressionExpansion
-from . import Q_Equation
-from . import Q_Calculation
-from . import Q_Factorization
-from . import Q_RightTriangle
-
-
-Q_Structure = Q_Structure.Q_Structure
-
-Q_AlgebraExpressionReduction = \
-    Q_AlgebraExpressionReduction.Q_AlgebraExpressionReduction
-Q_AlgebraExpressionExpansion = \
-    Q_AlgebraExpressionExpansion.Q_AlgebraExpressionExpansion
-Q_Calculation = Q_Calculation.Q_Calculation
-Q_Equation = Q_Equation.Q_Equation
-Q_Factorization = Q_Factorization.Q_Factorization
 get_modifier = Q_Generic.get_modifier
 match_qtype_sourcenb = Q_Generic.match_qtype_sourcenb
 SUBKINDS_TO_UNPACK = Q_Generic.SUBKINDS_TO_UNPACK
 UNPACKABLE_SUBKINDS = Q_Generic.UNPACKABLE_SUBKINDS
 SOURCES_TO_UNPACK = Q_Generic.SOURCES_TO_UNPACK
 Q_Generic = Q_Generic.Q_Generic
-Q_RightTriangle = Q_RightTriangle.Q_RightTriangle

@@ -20,31 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
-# @package exercise
-# @brief A exercise consists of a questions list plus output methods.
+from .X_Generic import X_Generic
 
-from . import X_Structure
-from . import X_Generic
 
-from . import X_AlgebraExpressionExpansion
-from . import X_AlgebraExpressionReduction
-from . import X_Calculation
-from . import X_Equation
-from . import X_Factorization
-from . import X_RightTriangle
-
-X_Structure = X_Structure.X_Structure
-X_Generic = X_Generic.X_Generic
-
-X_AlgebraExpressionExpansion = \
-    X_AlgebraExpressionExpansion.X_AlgebraExpressionExpansion
-X_AlgebraExpressionReduction = \
-    X_AlgebraExpressionReduction.X_AlgebraExpressionReduction
-X_Calculation = X_Calculation.X_Calculation
-X_Equation = X_Equation.X_Equation
-X_Factorization = X_Factorization.X_Factorization
-X_RightTriangle = X_RightTriangle.X_RightTriangle
+__all__ = ['X_Generic']

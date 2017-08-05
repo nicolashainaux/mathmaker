@@ -144,9 +144,9 @@ def po_file_get_list_of(what, language, arg):
 
 def _gather_old_style_sheets_info():
     """Returns a list of {'theme': ..., 'subtheme': ..., 'name': ...}"""
-    from mathmaker.lib import sheet
+    from mathmaker.lib import old_style_sheet
     infos = []
-    for s in sheet.AVAILABLE:
+    for s in old_style_sheet.AVAILABLE:
         # s in actually the complete name
         theme, subtheme = '', ''
         if s.startswith('algebra'):

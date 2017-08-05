@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
-from mathmaker.lib.sheet import AVAILABLE
+from mathmaker.lib.old_style_sheet import AVAILABLE
 
 
 def test_basic():

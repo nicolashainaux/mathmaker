@@ -28,7 +28,7 @@ import locale
 from mathmaker import __info__, __software_name__
 from mathmaker import settings
 from mathmaker.lib import shared
-from mathmaker.lib import sheet
+from mathmaker.lib import sheet, old_style_sheet
 from mathmaker.lib.tools.ignition \
     import (check_dependencies, install_gettext_translations,
             check_settings_consistency)
@@ -103,8 +103,8 @@ def entry_point():
         sys.stdout.write(list_all_sheets())
         shared.db.close()
         sys.exit(0)
-    elif args.main_directive in sheet.AVAILABLE:
-        sh = sheet.AVAILABLE[args.main_directive][0]()
+    elif args.main_directive in old_style_sheet.AVAILABLE:
+        sh = old_style_sheet.AVAILABLE[args.main_directive][0]()
     elif args.main_directive in XML_SHEETS:
         sh = sheet.S_Generic(filename=XML_SHEETS[args.main_directive])
     elif os.path.isfile(args.main_directive):
