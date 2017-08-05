@@ -29,7 +29,7 @@ from mathmaker import __info__, __software_name__
 from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib import old_style_sheet
-from mathmaker.lib.sheet import Sheet
+from mathmaker.lib.document.frames import Sheet
 from mathmaker.lib.tools.ignition \
     import (check_dependencies, install_gettext_translations,
             check_settings_consistency)

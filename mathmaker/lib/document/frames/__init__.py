@@ -20,22 +20,15 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-
-from mathmaker.lib import shared
-from mathmaker.lib.tools.xml import get_xml_sheets_paths
-from mathmaker.lib.document.frames import Sheet
-
-XML_SHEETS = get_xml_sheets_paths()
-
-
-def test_calculation_order_of_operations():
-    """Check if 'calculation_order_of_oper..' is generated without errors."""
-    shared.machine.write_out(str(Sheet(
-        XML_SHEETS['order_of_operations_positive_numbers'])))
+from .sheet import Sheet
+from .exercise import Exercise, get_nb_sources_from_question_info
+from .question import (Question, get_modifier, match_qtype_sourcenb,
+                       SUBKINDS_TO_UNPACK, UNPACKABLE_SUBKINDS,
+                       SOURCES_TO_UNPACK)
 
 
-def test_integration_calculation_order_of_operations():
-    """Integration test for calculation_order_of_operations."""
-    shared.machine.write_out(str(
-        Sheet('./tests/04_sheets/integration_test_sheets/'
-                  'calculation_order_of_operations.xml')))
+__all__ = ['Sheet', 'Exercise', 'Question',
+           'get_nb_sources_from_question_info',
+           'get_modifier', 'match_qtype_sourcenb',
+           'SUBKINDS_TO_UNPACK', 'UNPACKABLE_SUBKINDS',
+           'SOURCES_TO_UNPACK']

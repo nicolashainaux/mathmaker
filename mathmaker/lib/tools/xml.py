@@ -30,7 +30,7 @@ import random
 from mathmaker import settings
 from mathmaker.lib.constants import XML_BOOLEANS
 import xml.etree.ElementTree as XML_PARSER
-from mathmaker.lib.sheet.exercise import Exercise, question
+from mathmaker.lib.document.frames import Exercise, match_qtype_sourcenb
 from mathmaker.lib.tools import parse_layout_descriptor
 
 
@@ -363,7 +363,7 @@ def get_q_kinds_from(exercise_node):
             for n in n_temp_list:
                 for q in q_temp_list:
                     v = n[1].get('variant', q.get('variant', ''))
-                    if (not question.match_qtype_sourcenb(
+                    if (not match_qtype_sourcenb(
                         q['kind'] + "_" + q['subkind'], n[0], v)):
                         # __
                         raise ValueError(

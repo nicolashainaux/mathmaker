@@ -20,22 +20,16 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-
-from mathmaker.lib import shared
-from mathmaker.lib.tools.xml import get_xml_sheets_paths
-from mathmaker.lib.document.frames import Sheet
-
-XML_SHEETS = get_xml_sheets_paths()
+import pytest
+from mathmaker.lib.document.content import component
 
 
-def test_calculation_order_of_operations():
-    """Check if 'calculation_order_of_oper..' is generated without errors."""
-    shared.machine.write_out(str(Sheet(
-        XML_SHEETS['order_of_operations_positive_numbers'])))
-
-
-def test_integration_calculation_order_of_operations():
-    """Integration test for calculation_order_of_operations."""
-    shared.machine.write_out(str(
-        Sheet('./tests/04_sheets/integration_test_sheets/'
-                  'calculation_order_of_operations.xml')))
+def test_setup_exceptions():
+    """Check if exceptions are raised with an incorrect setup argument."""
+    o = component.structure()
+    with pytest.raises(TypeError) as excinfo:
+        o.setup(8)
+    assert str(excinfo.value) == 'arg must be a str'
+    with pytest.raises(ValueError) as excinfo:
+        o.setup('inexistent_module')
+    assert str(excinfo.value) == 'Cannot setup \'inexistent_module\''

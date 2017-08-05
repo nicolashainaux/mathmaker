@@ -32,7 +32,7 @@ import daemon
 
 from mathmaker import settings
 from mathmaker import DAEMON_PORT
-from mathmaker.lib import sheet
+from mathmaker.lib import old_style_sheet
 from mathmaker.lib.tools.xml import get_xml_sheets_paths
 
 MINIMUM_TIME_INTERVAL = 10
@@ -69,7 +69,7 @@ class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
 
         XML_SHEETS = get_xml_sheets_paths()
         all_sheets = {}
-        all_sheets.update(sheet.AVAILABLE)
+        all_sheets.update(old_style_sheet.AVAILABLE)
         all_sheets.update(XML_SHEETS)
         query = parse_qs(self.path[2:])
         if not (1 <= len(query) <= 2):
