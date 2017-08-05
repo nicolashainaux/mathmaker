@@ -53,7 +53,7 @@ The sources manage this randomness. Anytime we need to use a source, we can use 
 
 So we have sources for names, for words having a limited number of letters, for different kinds of numbers but also for mini-problems wordings.
 
-So far, there are two kinds of sources: the ones that are provided by the database, and the ones that are provided by the python function ``generate_values()`` from ``mathmaker/lib/sources.py``.
+So far, there are two kinds of sources: the ones that are provided by the database, and the ones that are provided by the python function ``generate_values()``. They both reside in ``mathmaker/lib/tools/database.py``.
 
 All sources are initialized in ``mathmaker/lib/shared.py``. There you can see which one has its values provided by the database, which are the other ones.
 
@@ -79,9 +79,10 @@ A translator only needs to provide a number of entries (at least 10) in each of 
 
 The sheets, exercises and questions
 -----------------------------------
-I won't describe thoroughly all objects under ``lib/sheet``, ``lib/sheet/exercise`` and ``lib/sheet/exercise/question`` because most of them are the old-style way of implementing this all.
 
-Now the sheets should be frameworks stored as xml files (under ``data/frameworks/``). Under ``lib/sheet``, The classes ``S_Structure`` and ``S_Generic`` will be kept. ``S_Structure`` handles the layout of the sheet depending on the ``SHEET_LAYOUT`` dict you can find at the top of any sheet module, and that is built by ``S_Generic`` from the ``<layout>`` section of any xml framework.
+There is still a bunch of "old-style" written sheets, that were not generated from xml documents. I won't describe them thoroughly. They will disappear in the future, when they're replaced by their xml counterparts.
+
+All new sheets are frameworks stored as xml files (under ``data/frameworks/``). Under ``lib/sheet``, The classes ``S_Structure`` and ``S_Generic`` will be kept. ``S_Structure`` handles the layout of the sheet depending on the ``SHEET_LAYOUT`` dict you can find at the top of any sheet module, and that is built by ``S_Generic`` from the ``<layout>`` section of any xml framework.
 
 There are no ``X_Generic`` nor ``Q_Generic`` classes yet, but there will be. They will replace the old-style ``X_*`` and ``Q_*`` classes. The way ``X_MentalCalculation`` and ``Q_MentalCalculation`` classes are written is a prefiguration of the future ``X_Generic`` and ``Q_Generic`` classes.
 
@@ -110,5 +111,3 @@ Objects at left; associated ``__repr()`` at right:
 Core objects' details
 ^^^^^^^^^^^^^^^^^^^^^
 The "old" doc for 0.6 version is available `here <https://sourceforge.net/p/mathmaker/doc4dev/Core%20Objects/>`_ and mainly still correct for 0.7 version. When things will have settled down to something more stable, an updated documentation will be published chunk by chunk.
-
-

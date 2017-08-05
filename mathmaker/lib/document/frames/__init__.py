@@ -22,13 +22,9 @@
 
 from .sheet import Sheet
 from .exercise import Exercise, get_nb_sources_from_question_info
-from .question import (Question, get_modifier, match_qtype_sourcenb,
-                       SUBKINDS_TO_UNPACK, UNPACKABLE_SUBKINDS,
-                       SOURCES_TO_UNPACK)
+from .question import (Question, get_modifier, match_qtype_sourcenb)
 
 
 __all__ = ['Sheet', 'Exercise', 'Question',
            'get_nb_sources_from_question_info',
-           'get_modifier', 'match_qtype_sourcenb',
-           'SUBKINDS_TO_UNPACK', 'UNPACKABLE_SUBKINDS',
-           'SOURCES_TO_UNPACK']
+           'get_modifier', 'match_qtype_sourcenb']

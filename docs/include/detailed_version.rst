@@ -78,7 +78,7 @@ You can also run the tools:
 ::
 
     (dev0) $ cd path/to/mathmaker/
-    (dev0) $ cd tools/
+    (dev0) $ cd toolbox/
     (dev0) $ ./build_db.py
     (dev0) $ ./update_pot_files
 
@@ -431,9 +431,9 @@ If modules have changed (new ones, deleted ones), it is necessary to rebuild the
 Auxiliary tools
 ^^^^^^^^^^^^^^^
 
-Several standalone scripts live in the ``tools/`` directory under root. They can be useful for several tasks that automate the handling of data.
+Several standalone scripts live in the ``toolbox/`` directory under root. They can be useful for several tasks that automate the handling of data.
 
-The two most useful ones are both meant to be run from the ``tools/`` directory. They are:
+The two most useful ones are both meant to be run from the ``toolbox/`` directory. They are:
 
 * ``build_db.py``, what is used to update the database when there are new entries to add in it. If new words of 4 letters are added to any po file, ``build_db.py`` should be run, it will add them to the database. If new wordings are entered in ``mathmaker/data/wordings/*.xml``, then it should be run too. See details in the docstring. And if a new table is required, it should be added in this script. For instance, the pythagorean triples should live in the database and will be added to this list soon or later.
 

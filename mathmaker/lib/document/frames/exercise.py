@@ -32,8 +32,9 @@ from intspan.core import ParseError
 from mathmaker.lib import shared
 from mathmaker.lib.tools import is_integer
 from mathmaker.lib.tools.maths import coprimes_to
-from .question import (Question, SUBKINDS_TO_UNPACK, UNPACKABLE_SUBKINDS,
-                       SOURCES_TO_UNPACK, get_modifier)
+from .question import (Question, get_modifier)
+from mathmaker.lib.constants.content \
+    import SUBKINDS_TO_UNPACK, UNPACKABLE_SUBKINDS, SOURCES_TO_UNPACK
 from mathmaker.lib.constants import XML_BOOLEANS
 
 MIN_ROW_HEIGHT = 0.8  # this is for mental calculation exercises

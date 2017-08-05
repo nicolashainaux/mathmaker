@@ -66,12 +66,33 @@ The directories
 
 At the root can be found:
 
+.. code-block::
+
+  .
+  ├── docs
+  ├── mathmaker
+  ├── outfiles
+  ├── tests
+  └── toolbox
+
+(listing only ``outfiles`` among the ones that are not relevant to git)
+
 * The usual ``docs/`` and ``tests/`` directories
 * ``mathmaker/`` contains the actual python source code
-* ``tools/`` contains several standalone scripts that are useful for developers only (not users)
+* ``toolbox/`` contains several standalone scripts that are useful for developers only (not users)
 * Several usual files (``.flake8`` etc.)
+* ``outfiles/`` is where the garbage is put (figures created when testing, etc.). It is ignored by git. Sometimes it is useful to remove all garbage files it contains.
 
 ``mathmaker/``'s content:
+
+.. code-block::
+
+  $ tree -d -L 1 mathmaker -I __pycache__
+  mathmaker
+  ├── data
+  ├── lib
+  ├── locale
+  └── settings
 
 * ``data/`` this is where the database is stored, but also xml files containing additional wordings, translations etc.
 * ``lib/`` contains all useful classes and submodules (see below).
@@ -80,13 +101,35 @@ At the root can be found:
 
 ``lib/``'s content:
 
+.. code-block::
+
+  $ tree -d -L 3 mathmaker/lib -I __pycache__
+  mathmaker/lib
+  ├── constants
+  ├── core
+  ├── document
+  │   ├── content
+  │   │   ├── algebra
+  │   │   ├── calculation
+  │   │   ├── geometry
+  │   │   └── ... (maybe some others)
+  │   └── frames
+  ├── machine
+  ├── old_style_sheet
+  │   └── exercise
+  │       └── question
+  └── tools
+
 * ``constants/`` contains several constants (``pythagorean.py`` must be replaced by requests to the database)
 * ``core/`` contains all mathematical objects, numeric or geometric
+* ``document/`` contains the frames for sheets, exercises in questions, under ``document/frames/``, and the questions' content, under ``document/content/``.
 * ``machine/`` contains the "typewriter"
-* ``sheet/`` contains all sheets, exercices and questions. A big part of it is obsolete (should be replaced by generic objects that take their data from xml files)
+* ``old_style_sheet/`` contains all old style sheets, exercices and questions. All of this is obsolete (will be replaced by generic objects that take their data from xml files and created by the objects defined in ``document/frames/``)
 * ``tools/`` contains collections of useful functions
 
   - ``__init__.py`` contains various functions
+
+  - ``content.py`` contains functions related to the questions, exercises or sheets.
 
   - ``database.py`` contains all functions required to interact with mathmaker's database
 

@@ -28,69 +28,6 @@ from mathmaker.lib.document.content import algebra, calculation, mc, geometry
 
 ALL_MODULES = (algebra, calculation, mc, geometry)
 
-SUBKINDS_TO_UNPACK = {'simple_parts_of_a_number': {'half', 'third', 'quarter'},
-                      'simple_multiples_of_a_number': {'double', 'triple',
-                                                       'quadruple'},
-                      'simple_parts_or_multiples_of_a_number': {'half',
-                                                                'third',
-                                                                'quarter',
-                                                                'double',
-                                                                'triple',
-                                                                'quadruple'},
-                      'operation': {'multi', 'divi', 'addi', 'subtr'}}
-
-UNPACKABLE_SUBKINDS = {'half', 'third', 'quarter',
-                       'double', 'triple', 'quadruple',
-                       'multi', 'divi', 'addi', 'subtr'}
-
-SOURCES_TO_UNPACK = {'auto_table': {'half': {'table_2'},
-                                    'third': {'table_3'},
-                                    'quarter': {'table_4'},
-                                    'double': {'table_2'},
-                                    'triple': {'table_3'},
-                                    'quadruple': {'table_4'},
-                                    'multi': {'intpairs_2to9'},
-                                    'divi': {'intpairs_2to9'},
-                                    'addi': {'intpairs_2to9'},
-                                    'subtr': {'intpairs_2to9'}},
-                     'auto_11_50': {'half': {'multiplesof2_11to50'},
-                                    'third': {'multiplesof3_11to50'},
-                                    'quarter': {'multiplesof4_11to50'},
-                                    'double': {'multiplesof2_11to50'},
-                                    'triple': {'multiplesof3_11to50'},
-                                    'quadruple': {'multiplesof4_11to50'}},
-                     'auto_vocabulary':
-                     {'half': {'table_2', 'multiplesof2_11to50'},
-                      'third': {'table_3', 'multiplesof3_11to50'},
-                      'quarter': {'table_4', 'multiplesof4_11to50'},
-                      'double': {'table_2', 'multiplesof2_11to50'},
-                      'triple': {'table_3', 'multiplesof3_11to50'},
-                      'quadruple': {'table_4', 'multiplesof4_11to50'},
-                      'multi': {'intpairs_2to9'},
-                      'divi': {'intpairs_2to9'},
-                      # The 'intpairs_2to200' below will get divided
-                      # by 10 to produce two decimals between 0.2
-                      # and 20.
-                      'addi': {'intpairs_10to100', 'intpairs_2to200'},
-                      'subtr': {'intpairs_10to100', 'intpairs_2to200'}},
-                     'decimal_and_10_100_1000':
-                     {'multi_direct': {'decimal_and_10_100_1000_for_multi'},
-                      'divi_direct': {'decimal_and_10_100_1000_for_divi'},
-                      'area_rectangle': {'decimal_and_10_100_1000_for_multi'},
-                      'perimeter_rectangle': {'decimal_and_10_100_1000_for'
-                                              '_multi'},
-                      'multi_hole': {'decimal_and_10_100_1000_for_multi'},
-                      'vocabulary_multi': {'decimal_and_10_100_1000_for'
-                                           '_multi'},
-                      'vocabulary_divi': {'decimal_and_10_100_1000_for_divi'}},
-                     'decimal_and_one_digit': \
-                     {'multi_direct': {'decimal_and_one_digit_for_multi'},
-                      'divi_direct': {'decimal_and_one_digit_for_divi'},
-                      'area_rectangle': {'decimal_and_one_digit_for_multi'},
-                      'multi_hole': {'decimal_and_one_digit_for_multi'},
-                      'vocabulary_multi': {'decimal_and_one_digit_for_multi'},
-                      'vocabulary_divi': {'decimal_and_one_digit_for_divi'}}}
-
 
 def match_qtype_sourcenb(q_type: str, source_nb: str, variant: str):
     """
