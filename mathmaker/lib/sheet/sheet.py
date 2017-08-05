@@ -20,30 +20,36 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from abc import ABCMeta, abstractmethod
-
 from mathmaker.lib import shared
 
 
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
-# @class S_Structure
-# @brief Abstract mother class of all sheets!
-# The constructor only has to be reimplemented, it is useless to reimplement
-# other methods
-class S_Structure(object, metaclass=ABCMeta):
+# @brief Create a sheet matching the given xml file.
+class Sheet(object):
 
-    @abstractmethod
-    def __init__(self, font_size_offset,
-                 sheet_layout_unit, sheet_layout, layout_type,
-                 **options):
+    # --------------------------------------------------------------------------
+    ##
+    #   @brief Constructor
+    #   @param **options Any options
+    #   @return One instance of sheet.Generic
+    def __init__(self, filename, **options):
+        from mathmaker.lib.tools.xml import get_sheet_config
+        from mathmaker.lib.tools.xml import get_exercises_list
+
+        (header,
+         title,
+         subtitle,
+         text,
+         answers_title,
+         sheet_layout_type,
+         font_size_offset,
+         sheet_layout_unit,
+         sheet_layout) = get_sheet_config(filename)
+
         self.exercises_list = list()
         shared.machine.set_font_size_offset(font_size_offset)
 
         self.sheet_layout_unit = sheet_layout_unit
-        self.layout_type = layout_type
+        self.layout_type = sheet_layout_type
         self.write_texts_twice = False
 
         if 'write_texts_twice' in options and options['write_texts_twice']:
@@ -141,8 +147,18 @@ class S_Structure(object, metaclass=ABCMeta):
 
         self.sheet_layout = sheet_layout
 
-    # --------------------------------------------------------------------------
-    ##
+        self.header = _(header) if header != "" else ""
+        self.title = _(title) if title != "" else ""
+        self.subtitle = _(subtitle) if subtitle != "" else ""
+        self.text = _(text) if text != "" else ""
+        self.answers_title = _(answers_title) if answers_title != "" else ""
+
+        for ex in get_exercises_list(filename):
+            self.exercises_list.append(ex[0](q_list=ex[2],
+                                             x_layout=ex[3][1],
+                                             x_config=ex[3][0],
+                                             **ex[1]))
+
     #   @brief Writes the whole sheet's content to the output.
     def __str__(self):
         result = ""

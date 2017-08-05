@@ -20,11 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from . import Q_Generic
+from .question import (Question, get_modifier, match_qtype_sourcenb,
+                       SUBKINDS_TO_UNPACK, UNPACKABLE_SUBKINDS,
+                       SOURCES_TO_UNPACK)
 
-get_modifier = Q_Generic.get_modifier
-match_qtype_sourcenb = Q_Generic.match_qtype_sourcenb
-SUBKINDS_TO_UNPACK = Q_Generic.SUBKINDS_TO_UNPACK
-UNPACKABLE_SUBKINDS = Q_Generic.UNPACKABLE_SUBKINDS
-SOURCES_TO_UNPACK = Q_Generic.SOURCES_TO_UNPACK
-Q_Generic = Q_Generic.Q_Generic
+__all__ = ['Question', 'get_modifier', 'match_qtype_sourcenb',
+           'SUBKINDS_TO_UNPACK', 'UNPACKABLE_SUBKINDS',
+           'SOURCES_TO_UNPACK']

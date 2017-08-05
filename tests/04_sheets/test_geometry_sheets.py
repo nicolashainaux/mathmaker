@@ -23,7 +23,7 @@
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools.xml import get_xml_sheets_paths
-from mathmaker.lib.sheet import S_Generic
+from mathmaker.lib.sheet import Sheet
 
 XML_SHEETS = get_xml_sheets_paths()
 
@@ -33,7 +33,7 @@ def test_intercept_theorem_triangles():
     Checks if 'intercept_theorem_triangles' is generated without any error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['intercept_theorem_triangles'])))
+        str(Sheet(XML_SHEETS['intercept_theorem_triangles'])))
 
 
 def test_intercept_theorem_triangles_alt1():
@@ -41,7 +41,7 @@ def test_intercept_theorem_triangles_alt1():
     Checks if 'intercept_theorem_triangles_alt1' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['intercept_theorem_triangles_alt1'])))
+        str(Sheet(XML_SHEETS['intercept_theorem_triangles_alt1'])))
 
 
 def test_intercept_theorem_triangles_alt2():
@@ -49,7 +49,7 @@ def test_intercept_theorem_triangles_alt2():
     Checks if 'intercept_theorem_triangles_alt2' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['intercept_theorem_triangles_alt2'])))
+        str(Sheet(XML_SHEETS['intercept_theorem_triangles_alt2'])))
 
 
 def test_intercept_theorem_triangles_formulae():
@@ -57,7 +57,7 @@ def test_intercept_theorem_triangles_formulae():
     Is 'intercept_theorem_triangles_formulae' generated with no error?
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['intercept_theorem_triangles_formulae'])))
+        str(Sheet(XML_SHEETS['intercept_theorem_triangles_formulae'])))
 
 
 def test_intercept_theorem_butterflies():
@@ -65,7 +65,7 @@ def test_intercept_theorem_butterflies():
     Checks if 'intercept_theorem_butterflies' is generated without any error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['intercept_theorem_butterflies'])))
+        str(Sheet(XML_SHEETS['intercept_theorem_butterflies'])))
 
 
 def test_intercept_theorem_butterflies_alt1():
@@ -73,7 +73,7 @@ def test_intercept_theorem_butterflies_alt1():
     Checks if 'intercept_theorem_butterflies_alt1' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['intercept_theorem_butterflies_alt1'])))
+        str(Sheet(XML_SHEETS['intercept_theorem_butterflies_alt1'])))
 
 
 def test_intercept_theorem_butterflies_alt2():
@@ -81,7 +81,7 @@ def test_intercept_theorem_butterflies_alt2():
     Checks if 'intercept_theorem_butterflies_alt2' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['intercept_theorem_butterflies_alt2'])))
+        str(Sheet(XML_SHEETS['intercept_theorem_butterflies_alt2'])))
 
 
 def test_intercept_theorem_butterflies_formulae():
@@ -89,7 +89,7 @@ def test_intercept_theorem_butterflies_formulae():
     Is 'intercept_theorem_butterflies_formulae' generated with no error?
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['intercept_theorem_butterflies_formulae'])))
+        str(Sheet(XML_SHEETS['intercept_theorem_butterflies_formulae'])))
 
 
 def test_intercept_theorem_converse():
@@ -97,7 +97,7 @@ def test_intercept_theorem_converse():
     Checks if 'intercept_theorem_converse' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['intercept_theorem_converse'])))
+        str(Sheet(XML_SHEETS['intercept_theorem_converse'])))
 
 
 def test_intercept_theorem_converse_alt2():
@@ -105,7 +105,7 @@ def test_intercept_theorem_converse_alt2():
     Checks if 'intercept_theorem_converse_alt2' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['intercept_theorem_converse_alt2'])))
+        str(Sheet(XML_SHEETS['intercept_theorem_converse_alt2'])))
 
 
 def test_trigonometry_cos_length():
@@ -113,7 +113,7 @@ def test_trigonometry_cos_length():
     Check if 'trigonometry_cos_length' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_cos_length'])))
+        str(Sheet(XML_SHEETS['trigonometry_cos_length'])))
 
 
 def test_trigonometry_sin_length():
@@ -121,7 +121,7 @@ def test_trigonometry_sin_length():
     Check if 'trigonometry_sin_length' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_sin_length'])))
+        str(Sheet(XML_SHEETS['trigonometry_sin_length'])))
 
 
 def test_trigonometry_tan_length():
@@ -129,7 +129,7 @@ def test_trigonometry_tan_length():
     Check if 'trigonometry_tan_length' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_tan_length'])))
+        str(Sheet(XML_SHEETS['trigonometry_tan_length'])))
 
 
 def test_trigonometry_calculate_length():
@@ -137,7 +137,7 @@ def test_trigonometry_calculate_length():
     Check if 'trigonometry_calculate_length' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_calculate_length'])))
+        str(Sheet(XML_SHEETS['trigonometry_calculate_length'])))
 
 
 def test_trigonometry_cos_angle():
@@ -145,7 +145,7 @@ def test_trigonometry_cos_angle():
     Check if 'trigonometry_cos_angle' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_cos_angle'])))
+        str(Sheet(XML_SHEETS['trigonometry_cos_angle'])))
 
 
 def test_trigonometry_sin_angle():
@@ -153,7 +153,7 @@ def test_trigonometry_sin_angle():
     Check if 'trigonometry_sin_angle' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_sin_angle'])))
+        str(Sheet(XML_SHEETS['trigonometry_sin_angle'])))
 
 
 def test_trigonometry_tan_angle():
@@ -161,7 +161,7 @@ def test_trigonometry_tan_angle():
     Check if 'trigonometry_tan_angle' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_tan_angle'])))
+        str(Sheet(XML_SHEETS['trigonometry_tan_angle'])))
 
 
 def test_trigonometry_calculate_angle():
@@ -169,7 +169,7 @@ def test_trigonometry_calculate_angle():
     Check if 'trigonometry_calculate_angle' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_calculate_angle'])))
+        str(Sheet(XML_SHEETS['trigonometry_calculate_angle'])))
 
 
 def test_trigonometry_cos_formulae():
@@ -177,7 +177,7 @@ def test_trigonometry_cos_formulae():
     Check if 'trigonometry_cos_formulae' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_cos_formulae'])))
+        str(Sheet(XML_SHEETS['trigonometry_cos_formulae'])))
 
 
 def test_trigonometry_sin_formulae():
@@ -185,7 +185,7 @@ def test_trigonometry_sin_formulae():
     Check if 'trigonometry_sin_formulae' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_sin_formulae'])))
+        str(Sheet(XML_SHEETS['trigonometry_sin_formulae'])))
 
 
 def test_trigonometry_tan_formulae():
@@ -193,7 +193,7 @@ def test_trigonometry_tan_formulae():
     Check if 'trigonometry_tan_formulae' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_tan_formulae'])))
+        str(Sheet(XML_SHEETS['trigonometry_tan_formulae'])))
 
 
 def test_trigonometry_formulae():
@@ -201,7 +201,7 @@ def test_trigonometry_formulae():
     Check if 'trigonometry_formulae' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_formulae'])))
+        str(Sheet(XML_SHEETS['trigonometry_formulae'])))
 
 
 def test_trigonometry_vocabulary():
@@ -209,4 +209,4 @@ def test_trigonometry_vocabulary():
     Check if 'trigonometry_vocabulary' is generated with no error.
     """
     shared.machine.write_out(
-        str(S_Generic(XML_SHEETS['trigonometry_vocabulary'])))
+        str(Sheet(XML_SHEETS['trigonometry_vocabulary'])))

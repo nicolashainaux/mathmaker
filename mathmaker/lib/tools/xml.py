@@ -30,8 +30,7 @@ import random
 from mathmaker import settings
 from mathmaker.lib.constants import XML_BOOLEANS
 import xml.etree.ElementTree as XML_PARSER
-from mathmaker.lib.sheet import exercise
-from mathmaker.lib.sheet.exercise import question
+from mathmaker.lib.sheet.exercise import Exercise, question
 from mathmaker.lib.tools import parse_layout_descriptor
 
 
@@ -295,7 +294,7 @@ def get_q_kinds_from(exercise_node):
     #  4]
 
     # if no kind is defined, x_kind will still contain the default '', what
-    # will lead to use X_Generic
+    # will lead to use the generic Exercise
     x_kind = exercise_node.attrib.get('kind', '')
     for child in exercise_node:
         if child.tag == 'question':
@@ -417,7 +416,7 @@ def get_exercises_list(file_name):
     exercises_list = []
     for child in xml_doc:
         if child.tag == 'exercise':
-            exercises_list += [(exercise.X_Generic,
+            exercises_list += [(Exercise,
                                 child.attrib,
                                 get_q_kinds_from(child),
                                 _get_layout_from(child, default_config={})), ]

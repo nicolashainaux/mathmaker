@@ -20,7 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from .X_Generic import X_Generic
+from .exercise import Exercise, get_nb_sources_from_question_info
 
 
-__all__ = ['X_Generic']
+__all__ = ['Exercise', 'get_nb_sources_from_question_info']

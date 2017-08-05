@@ -23,19 +23,19 @@
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools.xml import get_xml_sheets_paths
-from mathmaker.lib.sheet import S_Generic
+from mathmaker.lib.sheet import Sheet
 
 XML_SHEETS = get_xml_sheets_paths()
 
 
 def test_calculation_order_of_operations():
     """Check if 'calculation_order_of_oper..' is generated without errors."""
-    shared.machine.write_out(str(S_Generic(
+    shared.machine.write_out(str(Sheet(
         XML_SHEETS['order_of_operations_positive_numbers'])))
 
 
 def test_integration_calculation_order_of_operations():
     """Integration test for calculation_order_of_operations."""
     shared.machine.write_out(str(
-        S_Generic('./tests/04_sheets/integration_test_sheets/'
+        Sheet('./tests/04_sheets/integration_test_sheets/'
                   'calculation_order_of_operations.xml')))

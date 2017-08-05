@@ -24,7 +24,6 @@ import warnings
 
 from mathmaker.lib import shared
 from mathmaker.lib.constants import EQUAL_PRODUCTS
-from .Q_Structure import Q_Structure
 from . import (algebra_modules, calculation_modules, mc_modules,
                geometry_modules)
 
@@ -191,30 +190,43 @@ def get_modifier(q_type, nb_source):
 # --------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 ##
-# @class Q_Generic
 # @brief Creates one 'generic' question
-class Q_Generic(Q_Structure):
+class Question(object):
 
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor.
     #   @param **options Any options
-    #   @return One instance of question.Q_Generic
     def __init__(self, q_kind, q_options, **options):
-
-        self.derived = True
-
         options.update(q_options)
 
-        # The call to the mother class __init__() method will set the
-        # fields matching optional arguments which are so far:
-        # self.q_kind, self.q_subkind
-        # plus self.options (modified)
-        Q_Structure.__init__(self, q_kind, None,
-                             q_subkind='bypass', **options)
-        # The purpose of this next line is to get the possibly modified
-        # value of **options
-        options = self.options
+        # That's the number of the question, not of the expressions it might
+        # contain!
+        self.number = ""
+        if 'number_of_the_question' in options:
+            self.number = options['number_of_the_question']
+
+        self.displayable_number = ""
+
+        if self.number != "":
+            self.displayable_number = \
+                shared.machine.write(str(self.number) + ". ", emphasize='bold')
+
+        q_subkind = 'default'
+        if 'q_subkind' in options:
+            q_subkind = options['q_subkind']
+            # let's remove this option from the options
+            # since we re-use it recursively
+            temp_options = dict()
+            for key in options:
+                if key != 'q_subkind':
+                    temp_options[key] = options[key]
+            options = temp_options
+
+        # these two fields for the case of needing to know the them in the
+        # answer_to_str() especially
+        self.q_kind = q_kind
+        self.q_subkind = q_subkind
 
         numbers_to_use = options['numbers_to_use']
         del options['numbers_to_use']
@@ -271,6 +283,23 @@ class Q_Generic(Q_Structure):
         self.q_nb_included_in_wording = False
         if hasattr(m, 'q_nb_included_in_wording'):
             self.q_nb_included_in_wording = m.q_nb_included_in_wording
+
+    # --------------------------------------------------------------------------
+    ##
+    #   Redirects to text_to_str() or answer_to_str()
+    def to_str(self, ex_or_answers):
+        if ex_or_answers == 'exc':
+            return self.text_to_str()
+
+        elif ex_or_answers == 'ans':
+            return self.answer_to_str()
+
+        elif ex_or_answers == 'hint':
+            return self.hint_to_str()
+
+        else:
+            raise ValueError('Got ' + str(ex_or_answers)
+                             + ' instead of \'exc\'|\'ans\'|\'hint\'')
 
     # --------------------------------------------------------------------------
     ##
