@@ -40,7 +40,7 @@ from mathmaker.lib.tools.maths import (sign_of_product, gcd, pupil_gcd,
                                        prime_factors,
                                        ZERO_POLYNOMIAL_DEGREE)
 from mathmaker.lib.constants import (DEFAULT, RANDOMLY, NUMERIC, LITERALS,
-                                      OTHERS, XML_BOOLEANS)
+                                     OTHERS, XML_BOOLEANS)
 from .utils import reduce_literal_items_product, put_term_in_lexicon
 from mathmaker.lib.constants.latex import MARKUP
 
