@@ -270,27 +270,6 @@ class Sheet(object):
 
             result += shared.machine.write_document_ends()
 
-        elif self.layout_type == 'mental':
-            # if self.slideshow:
-            #    result += shared.machine.write_document_header(slideshow=True)
-            #    result += shared.machine.write_document_begins()
-            #    result += self.sheet_header_to_str()
-            #    result += self.sheet_title_to_str()
-            #    result += self.sheet_text_to_str()
-            #    result += self.texts_to_str('exc', 0)
-            #    result += shared.machine.write_document_ends()
-            # else:
-            result += shared.machine.write_document_header()
-            result += shared.machine.write_document_begins()
-            result += self.sheet_header_to_str()
-            result += self.sheet_title_to_str()
-            result += self.sheet_text_to_str()
-            result += self.texts_to_str('exc', 0)
-            result += shared.machine.write_jump_to_next_page()
-            result += self.answers_title_to_str()
-            result += self.texts_to_str('ans', 0)
-            result += shared.machine.write_document_ends()
-
         else:
             raise ValueError('Got ' + self.layout_type + 'instead of std|'
                              'short_test|mini_test|equations|mental')

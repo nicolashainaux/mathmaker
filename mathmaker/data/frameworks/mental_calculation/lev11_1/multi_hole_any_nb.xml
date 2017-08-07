@@ -2,7 +2,7 @@
 
 <sheet header="" title="Mental calculation" subtitle="Multiplications with a hole" text="" answers_title="Answers">
 
-	<layout type="mental" font_size_offset="-1" />
+	<layout font_size_offset="-1" />
 
 	<!-- Default value: id='generic'
 		 No default for kind and subkind, they must be given -->
