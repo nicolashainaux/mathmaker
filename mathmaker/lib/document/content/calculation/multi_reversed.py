@@ -40,6 +40,7 @@ class sub_object(object):
             .format(n=Value(self.product).into_str())
 
     def a(self, **options):
+        # This is actually meant for self.preset == 'mental calculation'
         if self.product == 12:
             return _("{product1} or {product2}")\
                 .format(product1=shared.machine.write_math_style2(

@@ -59,4 +59,5 @@ class sub_object(object):
             .format(math_expr=shared.machine.write_math_style2(m_expr))
 
     def a(self, **options):
+        # This is actually meant for self.preset == 'mental calculation'
         return shared.machine.write_math_style2(self.hidden_one.printed)

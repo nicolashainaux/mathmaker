@@ -37,4 +37,5 @@ class sub_object(object):
                            figure=self.chosen_figure)
 
     def a(self, **options):
+        # This is actually meant for self.preset == 'mental calculation'
         return _(str(RANKS_WORDS[self.chosen_rank]))

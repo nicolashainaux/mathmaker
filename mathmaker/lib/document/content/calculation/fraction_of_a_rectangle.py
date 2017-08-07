@@ -90,4 +90,5 @@ class sub_object(component.structure):
              self.wording])
 
     def a(self, **options):
+        # This is actually meant for self.preset == 'mental calculation'
         return self.answer_wording

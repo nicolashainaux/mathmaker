@@ -50,6 +50,7 @@ class sub_object(component.structure):
                 math_expr=shared.machine.write_math_style2(self.quotient_str))
 
     def a(self, **options):
+        # This is actually meant for self.preset == 'mental calculation'
         v = None
         if hasattr(self, 'hint'):
             v = Value(self.result, unit=self.hint)\

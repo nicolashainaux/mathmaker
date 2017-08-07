@@ -52,4 +52,5 @@ class structure(component.structure):
         return self.wording.format(**self.wording_format)
 
     def a(self, **kwargs):
+        # This is actually meant for self.preset == 'mental calculation'
         return str(self.result)

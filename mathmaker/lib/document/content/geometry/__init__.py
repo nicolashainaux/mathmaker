@@ -36,8 +36,13 @@ from . import (intercept_theorem_triangle, intercept_theorem_triangle_formula,
                trigonometry_calculate_angle,
                trigonometry_formula,
                trigonometry_vocabulary)
+from . import (area_rectangle, area_square,
+               perimeter_rectangle, perimeter_square,
+               rectangle_length_or_width)
 
-__all__ = ['intercept_theorem_triangle', 'intercept_theorem_triangle_formula',
+__all__ = ['area_rectangle', 'area_square', 'perimeter_rectangle',
+           'perimeter_square', 'rectangle_length_or_width',
+           'intercept_theorem_triangle', 'intercept_theorem_triangle_formula',
            'intercept_theorem_butterfly',
            'intercept_theorem_butterfly_formula',
            'intercept_theorem_converse_triangle',

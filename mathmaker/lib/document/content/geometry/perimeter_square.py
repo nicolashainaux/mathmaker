@@ -20,13 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import os
-
 from mathmaker.lib import shared
-from mathmaker.lib.core.base_calculus import Sum
-from mathmaker.lib.core.root_calculus import Value
 from .. import component
-from mathmaker.lib.tools.wording import post_process
+from mathmaker.lib.tools.wording import setup_wording_format_of
 
 
 class sub_object(component.structure):
@@ -35,32 +31,31 @@ class sub_object(component.structure):
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, **options)
         super().setup("nb_variants", nb=numbers_to_use, **options)
+        super().setup("length_units", **options)
+        super().setup("square", **options)
 
-        if self.subvariant == 'only_positive':
-            self.nb1, self.nb2 = max(self.nb1, self.nb2), min(self.nb1,
-                                                              self.nb2)
-        the_diff = Sum([self.nb1, -self.nb2])
-        self.diff_str = the_diff.printed
-        self.result = the_diff.evaluate()
-
-        if self.context == 'mini_problem':
-            super().setup("mini_problem_wording",
-                          q_id=os.path.splitext(os.path.basename(__file__))[0],
-                          **options)
+        if self.picture:
+            self.wording = _("Perimeter of this square? |hint:length_unit|")
+            setup_wording_format_of(self)
+        else:
+            self.nb1 = self.square.side_length
+            self.wording = _("Perimeter of a square whose side's length \
+is {nb1} {length_unit}? |hint:length_unit|")
+            setup_wording_format_of(self)
 
     def q(self, **options):
-        if self.context == 'mini_problem':
-            return post_process(self.wording.format(**self.wording_format))
+        if self.picture:
+            return shared.machine.write_layout(
+                (1, 2),
+                [5, 8],
+                [shared.machine.insert_picture(
+                 self.square,
+                 scale=0.75,
+                 vertical_alignment_in_a_tabular=True),
+                 self.wording.format(**self.wording_format)])
         else:
-            return _("Calculate: {math_expr}")\
-                .format(
-                math_expr=shared.machine.write_math_style2(self.diff_str))
+            return self.wording.format(**self.wording_format)
 
     def a(self, **options):
-        v = None
-        if hasattr(self, 'hint'):
-            v = Value(self.result, unit=self.hint)\
-                .into_str(display_SI_unit=True)
-        else:
-            v = Value(self.result).into_str()
-        return v
+        # This is actually meant for self.preset == 'mental calculation'
+        return self.square.perimeter.into_str(display_SI_unit=True)

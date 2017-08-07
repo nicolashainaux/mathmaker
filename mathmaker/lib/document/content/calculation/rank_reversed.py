@@ -187,4 +187,5 @@ class sub_object(object):
                            rank=_(str(RANKS_WORDS[self.chosen_rank])))
 
     def a(self, **options):
+        # This is actually meant for self.preset == 'mental calculation'
         return self.chosen_figure

@@ -28,5 +28,18 @@
 # @brief All question objects should be "declared" here.
 
 from . import calculation_order_of_operations
+from . import (multi_direct, multi_reversed, multi_hole, divi_direct,
+               multi_clever,
+               addi_direct, subtr_direct, rank_direct, rank_reversed,
+               rank_numberof, vocabulary_simple_part_of_a_number,
+               vocabulary_simple_multiple_of_a_number,
+               vocabulary_multi, vocabulary_divi,
+               vocabulary_addi, vocabulary_subtr, fraction_of_a_rectangle)
 
-__all__ = ['calculation_order_of_operations']
+__all__ = ['multi_direct', 'multi_reversed', 'multi_hole', 'divi_direct',
+           'multi_clever',
+           'addi_direct', 'subtr_direct', 'rank_direct', 'rank_reversed',
+           'rank_numberof', 'vocabulary_simple_part_of_a_number',
+           'vocabulary_simple_multiple_of_a_number', 'vocabulary_multi',
+           'vocabulary_divi', 'vocabulary_addi', 'vocabulary_subtr',
+           'fraction_of_a_rectangle', 'calculation_order_of_operations']

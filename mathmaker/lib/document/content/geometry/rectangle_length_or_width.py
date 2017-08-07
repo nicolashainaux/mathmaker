@@ -94,5 +94,6 @@ class sub_object(component.structure):
             return self.wording.format(**self.wording_format)
 
     def a(self, **options):
+        # This is actually meant for self.preset == 'mental calculation'
         v = Value(self.result, unit=self.hint).into_str(display_SI_unit=True)
         return v

@@ -106,4 +106,5 @@ class sub_object(component.structure):
             math_expr=shared.machine.write_math_style2(self.product_str))
 
     def a(self, **options):
+        # This is actually meant for self.preset == 'mental calculation'
         return Value(self.result).into_str()

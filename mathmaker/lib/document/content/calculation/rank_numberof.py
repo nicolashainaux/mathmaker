@@ -38,6 +38,7 @@ class sub_object(object):
                     how_many_rank=_(str(RANKS_HOW_MANY[self.chosen_rank])))
 
     def a(self, **options):
+        # This is actually meant for self.preset == 'mental calculation'
         n = self.chosen_deci
         r = self.chosen_rank
         return Item(((n - n % r) / r)).printed

@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
+# from mathmaker.lib.core.base_calculus import *
 from .. import component
 from mathmaker.lib.tools.wording import setup_wording_format_of
 
@@ -35,13 +36,12 @@ class sub_object(component.structure):
         super().setup("rectangle", **options)
 
         if self.picture:
-            self.wording = _("Perimeter of this rectangle? |hint:length_unit|")
+            self.wording = _("Area of this rectangle? |hint:area_unit|")
             setup_wording_format_of(self)
         else:
             self.nb1, self.nb2 = self.rectangle.width, self.rectangle.length
-            self.wording = _("Perimeter of a rectangle whose width "
-                             "is {nb1} {length_unit} and length is "
-                             "{nb2} {length_unit}? |hint:length_unit|")
+            self.wording = _("Area of a rectangle whose width is {nb1} \
+{length_unit} and length is {nb2} {length_unit}? |hint:area_unit|")
             setup_wording_format_of(self)
 
     def q(self, **options):
@@ -58,4 +58,5 @@ class sub_object(component.structure):
             return self.wording.format(**self.wording_format)
 
     def a(self, **options):
-        return self.rectangle.perimeter.into_str(display_SI_unit=True)
+        # This is actually meant for self.preset == 'mental calculation'
+        return self.rectangle.area.into_str(display_SI_unit=True)

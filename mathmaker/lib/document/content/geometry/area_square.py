@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
-# from mathmaker.lib.core.base_calculus import *
 from .. import component
 from mathmaker.lib.tools.wording import setup_wording_format_of
 
@@ -33,15 +32,15 @@ class sub_object(component.structure):
         super().setup("numbers", nb=numbers_to_use, **options)
         super().setup("nb_variants", nb=numbers_to_use, **options)
         super().setup("length_units", **options)
-        super().setup("rectangle", **options)
+        super().setup("square", **options)
 
         if self.picture:
-            self.wording = _("Area of this rectangle? |hint:area_unit|")
+            self.wording = _("Area of this square? |hint:area_unit|")
             setup_wording_format_of(self)
         else:
-            self.nb1, self.nb2 = self.rectangle.width, self.rectangle.length
-            self.wording = _("Area of a rectangle whose width is {nb1} \
-{length_unit} and length is {nb2} {length_unit}? |hint:area_unit|")
+            self.nb1 = self.square.width
+            self.wording = _("Area of a square whose side's length is {nb1} "
+                             "{length_unit}? |hint:area_unit|")
             setup_wording_format_of(self)
 
     def q(self, **options):
@@ -50,7 +49,7 @@ class sub_object(component.structure):
                 (1, 2),
                 [5, 8],
                 [shared.machine.insert_picture(
-                 self.rectangle,
+                 self.square,
                  scale=0.75,
                  vertical_alignment_in_a_tabular=True),
                  self.wording.format(**self.wording_format)])
@@ -58,4 +57,5 @@ class sub_object(component.structure):
             return self.wording.format(**self.wording_format)
 
     def a(self, **options):
-        return self.rectangle.area.into_str(display_SI_unit=True)
+        # This is actually meant for self.preset == 'mental calculation'
+        return self.square.area.into_str(display_SI_unit=True)

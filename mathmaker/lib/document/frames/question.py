@@ -24,9 +24,9 @@ import warnings
 
 from mathmaker.lib import shared
 from mathmaker.lib.constants import EQUAL_PRODUCTS
-from mathmaker.lib.document.content import algebra, calculation, mc, geometry
+from mathmaker.lib.document.content import algebra, calculation, geometry
 
-ALL_MODULES = (algebra, calculation, mc, geometry)
+ALL_MODULES = (algebra, calculation, geometry)
 
 
 def match_qtype_sourcenb(q_type: str, source_nb: str, variant: str):

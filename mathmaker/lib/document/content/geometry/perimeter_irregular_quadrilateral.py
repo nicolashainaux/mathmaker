@@ -32,15 +32,16 @@ class sub_object(component.structure):
         super().setup("numbers", nb=numbers_to_use, **options)
         super().setup("nb_variants", nb=numbers_to_use, **options)
         super().setup("length_units", **options)
-        super().setup("square", **options)
+        super().setup("rectangle", **options)
 
         if self.picture:
-            self.wording = _("Perimeter of this square? |hint:length_unit|")
+            self.wording = _("Perimeter of this rectangle? |hint:length_unit|")
             setup_wording_format_of(self)
         else:
-            self.nb1 = self.square.side_length
-            self.wording = _("Perimeter of a square whose side's length \
-is {nb1} {length_unit}? |hint:length_unit|")
+            self.nb1, self.nb2 = self.rectangle.width, self.rectangle.length
+            self.wording = _("Perimeter of a rectangle whose width "
+                             "is {nb1} {length_unit} and length is "
+                             "{nb2} {length_unit}? |hint:length_unit|")
             setup_wording_format_of(self)
 
     def q(self, **options):
@@ -49,7 +50,7 @@ is {nb1} {length_unit}? |hint:length_unit|")
                 (1, 2),
                 [5, 8],
                 [shared.machine.insert_picture(
-                 self.square,
+                 self.rectangle,
                  scale=0.75,
                  vertical_alignment_in_a_tabular=True),
                  self.wording.format(**self.wording_format)])
@@ -57,4 +58,5 @@ is {nb1} {length_unit}? |hint:length_unit|")
             return self.wording.format(**self.wording_format)
 
     def a(self, **options):
-        return self.square.perimeter.into_str(display_SI_unit=True)
+        # This is actually meant for self.preset == 'mental calculation'
+        return self.rectangle.perimeter.into_str(display_SI_unit=True)
