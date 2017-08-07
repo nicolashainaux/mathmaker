@@ -22,8 +22,8 @@
 
 import copy
 import random
+import warnings
 from collections import namedtuple
-from abc import ABCMeta, abstractmethod
 from string import ascii_lowercase as alphabet
 
 from intspan import intspan
@@ -32,42 +32,23 @@ from intspan.core import ParseError
 from mathmaker.lib import shared
 from mathmaker.lib.tools import is_integer
 from mathmaker.lib.tools.maths import coprimes_to
-from .question import (Question, get_modifier)
+from .question import Question, get_modifier
+from mathmaker.lib.constants import XML_BOOLEANS
 from mathmaker.lib.constants.content \
     import SUBKINDS_TO_UNPACK, UNPACKABLE_SUBKINDS, SOURCES_TO_UNPACK
-from mathmaker.lib.constants import XML_BOOLEANS
+
+AVAILABLE_PRESETS = ['default', 'mental calculation']
+
+AVAILABLE_DETAILS_LEVELS = ['maximum', 'medium', 'none']
+
+AVAILABLE_LAYOUT_VARIANTS = ['default', 'tabular', 'slideshow']
+DEFAULT_LAYOUT = {'exc': [None, 'all'], 'ans': [None, 'all']}
 
 MIN_ROW_HEIGHT = 0.8  # this is for mental calculation exercises
-
-# Here the list of available values for the parameter x_kind='' and the
-# matching x_subkind values
-# Note: the bypass value allows to give the value of *x_subkind* directly to
-# the matching question Constructor, bypassing the action of the present class
-AVAILABLE_X_KIND_VALUES = \
-    {'': ['default'],
-     'default': ['default'],
-     'tabular': ['default'],  # reserved to mental calculation
-     'slideshow': ['default'],  # reserved to mental calculation
-     'bypass': ['']
-     }
-
-X_LAYOUT_UNIT = "cm"
-# ----------------------  lines_nb    col_widths   questions
-X_LAYOUTS = {'default':
-             {'exc': [None, 'all'],
-              'ans': [None, 'all']
-              }
-             }
-
-LAYOUTS = {'default': [None, 'all'],
-           '2cols': [['?', 9, 9], 'all'],
-           }
 
 to_unpack = copy.deepcopy(SUBKINDS_TO_UNPACK)
 # In Q_Info below, id is actually kind_subkind
 Q_info = namedtuple('Q_info', 'id,kind,subkind,nb_source,options')
-
-MIN_ROW_HEIGHT = 0.8
 
 
 def get_common_nb_from_pairs_pair(pair):
@@ -386,85 +367,55 @@ def numbering_device(numbering_kind='disabled'):
             i += 1
 
 
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
-# @class _Structure
-# @brief Mother class of all exercises objects. Not instanciable.
-# This class suggests two default methods which are also in the exercise.Model
-# class: write_text and write_answer. In a new exercise, they can either be
-# kept untouched (then it would be wise to delete them from the new exercise)
-# or rewritten.
-class _Structure(object, metaclass=ABCMeta):
+class Exercise(object):
 
-    @abstractmethod
-    def __init__(self, x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
-                 X_LAYOUT_UNIT, number_of_questions=6, **options):
-        self.questions_list = list()
+    def setup(self, **options):
+        self.preset = options.get('preset', 'default')
+        if self.preset not in AVAILABLE_PRESETS:
+            warnings.warn('XML Format error: incorrect preset value {}. '
+                          'Defaulting to \'default\'.'.format(self.preset))
+            self.preset = 'default'
+        if self.preset == 'default':
+            presets = {'layout_variant': 'default',
+                       'shuffle': 'false',
+                       'q_spacing': 'undefined',
+                       'details_level': 'maximum'}
+        elif self.preset == 'mental calculation':
+            presets = {'layout_variant': 'tabular',
+                       'shuffle': 'true',
+                       'q_spacing': '',
+                       'details_level': 'none'}
 
-        # OPTIONS -------------------------------------------------------------
-        # It is necessary to define an options field to pass the
-        # possibly modified value to the child class
-        self.options = options
+        self.layout_variant = options.get('layout_variant',
+                                          presets.get('layout_variant'))
+        if self.layout_variant not in AVAILABLE_LAYOUT_VARIANTS:
+            warnings.warn('XML Format error: incorrect layout_variant {}. '
+                          'Defaulting to \'default\'.'
+                          .format(self.layout_variant))
+            self.layout_variant = 'default'
+        self.x_layout_unit = options.get('layout_unit', 'cm')
+        self.x_layout = options.get('x_layout', DEFAULT_LAYOUT)
 
-        try:
-            AVAILABLE_X_KIND_VALUES[x_kind]
-        except KeyError:
-            raise ValueError('Got ' + str(x_kind) + ' instead of one of the '
-                             'possible values: '
-                             + str(AVAILABLE_X_KIND_VALUES))
+        self.q_spacing = options.get('q_spacing', presets.get('q_spacing'))
+        self.q_numbering = options.get('q_numbering', 'disabled')
+        self.shuffle = XML_BOOLEANS[options.get('shuffle',
+                                                presets.get('shuffle'))]()
 
-        x_subkind = 'default'
-        if 'x_subkind' in options:
-            x_subkind = options['x_subkind']
-            # let's remove this option from the options
-            # since we re-use it recursively
-            temp_options = dict()
-            for key in options:
-                if key != 'x_subkind':
-                    temp_options[key] = options[key]
-            self.options = temp_options
+        self.details_level = options.get('details_level',
+                                         presets.get('details_level'))
+        if self.details_level not in AVAILABLE_DETAILS_LEVELS:
+            warnings.warn('XML Format error: incorrect details_level {}. '
+                          'Defaulting to \'maximum\'.'
+                          .format(self.details_level))
+            self.details_level = 'maximum'
 
-        if x_subkind not in AVAILABLE_X_KIND_VALUES[x_kind]:
-            raise ValueError('Got ' + str(x_kind) + ' instead of one of the '
-                             'possible values: '
-                             + str(AVAILABLE_X_KIND_VALUES[x_kind]))
+        self.start_number = options.get('start_number', 1)
+        if not is_integer(self.start_number):
+            raise TypeError('Got: ' + str(type(self.start_number))
+                            + ' instead of an integer')
+        if self.start_number < 1:
+            raise ValueError(str(self.start_number) + 'should be >= 1')
 
-        self.x_kind = x_kind
-        self.x_subkind = x_subkind
-
-        # Start number
-        self.start_number = 0
-        if 'start_number' in options:
-            if not is_integer(options['start_number']):
-                raise TypeError('Got: ' + str(type(options['start_number']))
-                                + ' instead of an integer')
-            if not (options['start_number'] >= 1):
-                raise ValueError(str(options['start_number'])
-                                 + 'should be >= 1')
-
-            self.start_number = options['start_number']
-
-        # Number of questions
-        if (not isinstance(number_of_questions, int)
-            and number_of_questions >= 1):
-            # __
-            raise ValueError('The number_of_questions keyword argument should '
-                             'be an int and greater than 6.')
-        self.q_nb = number_of_questions
-
-        self.layout = options.get('layout', 'default')
-        self.x_layout_unit = X_LAYOUT_UNIT
-
-        if 'user_defined' in X_LAYOUTS:
-            self.x_layout = X_LAYOUTS['user_defined']
-        elif (self.x_kind, self.x_subkind) in X_LAYOUTS:
-            self.x_layout = X_LAYOUTS[(self.x_kind, self.x_subkind)]
-        else:
-            self.x_layout = X_LAYOUTS[self.layout]
-
-        self.x_id = options.get('id', 'generic')
         x_spacing = options.get('spacing', '')
         if x_spacing == 'newline':
             self.x_spacing = {'exc': shared.machine.write_new_line(),
@@ -507,210 +458,18 @@ class _Structure(object, metaclass=ABCMeta):
                         self.x_spacing.update(
                             {key: shared.machine.addvspace(height=s)})
 
-        # The slideshow option (for MentalCalculation sheets)
-        self.slideshow = options.get('slideshow', False)
-
-        # END OF OPTIONS ------------------------------------------------------
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Writes the text of the exercise|answer to the output.
-    def to_str(self, ex_or_answers):
-        M = shared.machine
-        result = ""
-
-        if self.x_kind not in ['tabular', 'slideshow']:
-            layout = self.x_layout[ex_or_answers]
-
-            if self.text[ex_or_answers] != "":
-                result += self.text[ex_or_answers]
-                result += M.addvspace(height='10.0pt')
-
-            q_n = 0
-
-            for k in range(int(len(layout) // 2)):
-                if layout[2 * k] is None:
-                    how_many = layout[2 * k + 1]
-                    if layout[2 * k + 1] in ['all_left', 'all']:
-                        how_many = len(self.questions_list) - q_n
-                    for i in range(how_many):
-                        result += self.questions_list[q_n]\
-                            .to_str(ex_or_answers)
-                        if ex_or_answers == 'ans' and i < how_many - 1:
-                            result += M.addvspace(height='20.0pt')
-                        q_n += 1
-
-                elif (layout[2 * k] == 'jump'
-                      and layout[2 * k + 1] == 'next_page'):
-                    result += M.write_jump_to_next_page()
-
-                else:
-                    nb_of_cols = len(layout[2 * k]) - 1
-                    col_widths = layout[2 * k][1:]
-                    nb_of_lines = layout[2 * k][0]
-                    undefined_nb_of_lines = False
-                    if nb_of_lines == '?':
-                        undefined_nb_of_lines = True
-                        if layout[2 * k + 1] == 'all':
-                            nb_of_q_per_row = nb_of_cols
-                        else:
-                            nb_of_q_per_row = sum(layout[2 * k + 1][j]
-                                                  for j in range(nb_of_cols))
-                        nb_of_lines = \
-                            len(self.questions_list) // nb_of_q_per_row \
-                            + (0
-                               if not len(self.questions_list)
-                               % nb_of_q_per_row
-                               else 1)
-                    content = []
-                    for i in range(int(nb_of_lines)):
-                        for j in range(nb_of_cols):
-                            if layout[2 * k + 1] == 'all':
-                                nb_of_q_in_this_cell = 1
-                            else:
-                                I = 0 if undefined_nb_of_lines else i
-                                nb_of_q_in_this_cell = \
-                                    layout[2 * k + 1][I * nb_of_cols + j]
-                            cell_content = ""
-                            for n in range(nb_of_q_in_this_cell):
-                                empty_cell = False
-                                if q_n >= len(self.questions_list):
-                                    cell_content += " "
-                                    empty_cell = True
-                                else:
-                                    cell_content += \
-                                        self.questions_list[q_n].\
-                                        to_str(ex_or_answers)
-                                if ex_or_answers == 'ans' and not empty_cell:
-                                    vspace = '' \
-                                        if len(cell_content) <= 25 \
-                                        else cell_content[-25:]
-                                    newpage = '' \
-                                        if len(cell_content) <= 9 \
-                                        else cell_content[-9:]
-                                    cell_content += M.write_new_line(
-                                        check=cell_content[-2:],
-                                        check2=vspace,
-                                        check3=newpage)
-                                q_n += 1
-                            content += [cell_content]
-
-                    options = {'unit': self.x_layout_unit}
-                    result += M.write_layout((nb_of_lines, nb_of_cols),
-                                             col_widths,
-                                             content,
-                                             **options)
-            return result + self.x_spacing[ex_or_answers]
-        else:
-            if self.slideshow:
-                result += M.write_frame("", frame='start_frame')
-                for i in range(self.q_nb):
-                    result += M.write_frame(
-                        self.questions_list[i].to_str('exc'),
-                        timing=self.questions_list[i].transduration)
-
-                result += M.write_frame("", frame='middle_frame')
-
-                for i in range(self.q_nb):
-                    result += M.write_frame(_("Question:")
-                                            + self.questions_list[i]
-                                            .to_str('exc')
-                                            + _("Answer:")
-                                            + self.questions_list[i]
-                                            .to_str('ans'),
-                                            timing=0)
-
-            # default tabular option:
-            else:
-                q = [self.questions_list[i].to_str('exc')
-                     for i in range(self.q_nb)]
-                a = [self.questions_list[i].to_str('ans')
-                     for i in range(self.q_nb)]\
-                    if ex_or_answers == 'ans' \
-                    else [self.questions_list[i].to_str('hint')
-                          for i in range(self.q_nb)]
-
-                n = [M.write(str(i + 1) + ".", emphasize='bold')
-                     for i in range(self.q_nb)]
-
-                content = [elt for triplet in zip(n, q, a) for elt in triplet]
-
-                result += M.write_layout((self.q_nb, 3),
-                                         [0.5, 14.25, 3.75],
-                                         content,
-                                         borders='penultimate',
-                                         justify=['left', 'left', 'center'],
-                                         center_vertically=True,
-                                         min_row_height=MIN_ROW_HEIGHT)
-
-            return result
-
-
-# ------------------------------------------------------------------------------
-# --------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-##
-# @class Exercise
-# @brief A default 'void' exercise (will get its questions from...)
-class Exercise(_Structure):
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Constructor.
-    #          - x_kind=<string>
-    #                         see AVAILABLE_X_KIND_VALUES to check the
-    #                         possible values to use and their matching
-    #                         x_subkind options
-    #   @return One instance of exercise.Generic
-    def __init__(self, **options):
-        (x_kind, q_list) = options.get('q_list')
-        self.q_numbering = options.get('q_numbering', 'disabled')
-        # self.layout is actually the name of the layout
-        self.layout = options.get('layout', 'default')
-        self.shuffle = XML_BOOLEANS[options.get('shuffle', 'false')]()
-        user_layout = options.get('x_layout', None)
-        if user_layout is not None:
-            X_LAYOUTS.update({'user_defined': user_layout})
-        elif self.layout != 'default':
-            l = self.layout.split(sep='_')
-            if not len(l) == 2:
-                raise ValueError('XMLFileFormatError: a \'layout\' attribute '
-                                 'in an exercise should have two '
-                                 'parts linked with a _. This '
-                                 'is not the case of \'{}\'.'
-                                 .format(str(self.layout)))
-            exc_l, ans_l = l
-            if exc_l not in LAYOUTS:
-                raise ValueError('XMLFileFormatError: the first part of the '
-                                 'layout value (\'{}\') is not correct.'
-                                 ' It should belong to: {}. '
-                                 .format(str(exc_l),
-                                         str(list(LAYOUTS.keys()))))
-            if ans_l not in LAYOUTS:
-                raise ValueError('XMLFileFormatError: the second part of the '
-                                 'layout value (\'{}\') is not correct.'
-                                 ' It should belong to: {}. '
-                                 .format(str(ans_l),
-                                         str(list(LAYOUTS.keys()))))
-            X_LAYOUTS.update({self.layout: {'exc': LAYOUTS[exc_l],
-                                            'ans': LAYOUTS[ans_l]}})
-        _Structure.__init__(self,
-                            x_kind, AVAILABLE_X_KIND_VALUES, X_LAYOUTS,
-                            X_LAYOUT_UNIT, **options)
-        # The purpose of this next line is to get the possibly modified
-        # value of **options
-        options = self.options
-
-        # TEXTS OF THE EXERCISE
         self.text = {'exc': options.get('text_exc', ''),
                      'ans': options.get('text_ans', '')}
-
         if self.text['exc'] != '':
             self.text['exc'] = _(self.text['exc'])
-
         if self.text['ans'] != '':
             self.text['ans'] = _(self.text['ans'])
 
+    def __init__(self, **options):
+        # Setup self attributes according to options
+        self.setup(**options)
+
+        q_list = options.get('q_list')
         # From q_list, we build a dictionary and then a complete questions'
         # list:
         q_dict, self.q_nb = build_q_dict(q_list)
@@ -721,7 +480,7 @@ class Exercise(_Structure):
                 random.shuffle(q_dict[key])
         mixed_q_list = build_mixed_q_list(q_dict, shuffle=self.shuffle)
         # in case of mental calculation exercises we increase alternation
-        if self.shuffle and self.x_id == 'mental_calculation':
+        if self.shuffle and self.preset == 'mental_calculation':
             mixed_q_list = increase_alternation(mixed_q_list, 'id')
             mixed_q_list.reverse()
             mixed_q_list = increase_alternation(mixed_q_list, 'id')
@@ -811,10 +570,140 @@ class Exercise(_Structure):
                                  'decimal_and_10_100_1000_for_multi']:
                     # __
                     q.options['10_100_1000'] = True
-            if 'qspacing' in options and 'spacing' not in q.options:
-                q.options.update({'spacing': options['qspacing']})
+            if self.q_spacing != 'undefined' and 'spacing' not in q.options:
+                q.options.update({'spacing': self.q_spacing})
+            q.options.update({'details_level': self.details_level,
+                              'preset': self.preset})
             self.questions_list += \
                 [Question(q.id, **q.options, numbers_to_use=nb_to_use,
-                          number_of_the_question=next(numbering),)]
-
+                          number_of_the_question=next(numbering), )]
         shared.number_of_the_question = 0
+
+    def to_str(self, ex_or_answers):
+        M = shared.machine
+        result = ''
+
+        if self.layout_variant == 'default':
+            layout = self.x_layout[ex_or_answers]
+
+            if self.text[ex_or_answers] != "":
+                result += self.text[ex_or_answers]
+                result += M.addvspace(height='10.0pt')
+
+            q_n = 0
+
+            for k in range(int(len(layout) // 2)):
+                if layout[2 * k] is None:
+                    how_many = layout[2 * k + 1]
+                    if layout[2 * k + 1] in ['all_left', 'all']:
+                        how_many = len(self.questions_list) - q_n
+                    for i in range(how_many):
+                        result += self.questions_list[q_n]\
+                            .to_str(ex_or_answers)
+                        if ex_or_answers == 'ans' and i < how_many - 1:
+                            result += M.addvspace(height='20.0pt')
+                        q_n += 1
+
+                elif (layout[2 * k] == 'jump'
+                      and layout[2 * k + 1] == 'next_page'):
+                    result += M.write_jump_to_next_page()
+
+                else:
+                    nb_of_cols = len(layout[2 * k]) - 1
+                    col_widths = layout[2 * k][1:]
+                    nb_of_lines = layout[2 * k][0]
+                    undefined_nb_of_lines = False
+                    if nb_of_lines == '?':
+                        undefined_nb_of_lines = True
+                        if layout[2 * k + 1] == 'all':
+                            nb_of_q_per_row = nb_of_cols
+                        else:
+                            nb_of_q_per_row = sum(layout[2 * k + 1][j]
+                                                  for j in range(nb_of_cols))
+                        nb_of_lines = \
+                            len(self.questions_list) // nb_of_q_per_row \
+                            + (0
+                               if not len(self.questions_list)
+                               % nb_of_q_per_row
+                               else 1)
+                    content = []
+                    for i in range(int(nb_of_lines)):
+                        for j in range(nb_of_cols):
+                            if layout[2 * k + 1] == 'all':
+                                nb_of_q_in_this_cell = 1
+                            else:
+                                I = 0 if undefined_nb_of_lines else i
+                                nb_of_q_in_this_cell = \
+                                    layout[2 * k + 1][I * nb_of_cols + j]
+                            cell_content = ""
+                            for n in range(nb_of_q_in_this_cell):
+                                empty_cell = False
+                                if q_n >= len(self.questions_list):
+                                    cell_content += " "
+                                    empty_cell = True
+                                else:
+                                    cell_content += \
+                                        self.questions_list[q_n].\
+                                        to_str(ex_or_answers)
+                                if ex_or_answers == 'ans' and not empty_cell:
+                                    vspace = '' \
+                                        if len(cell_content) <= 25 \
+                                        else cell_content[-25:]
+                                    newpage = '' \
+                                        if len(cell_content) <= 9 \
+                                        else cell_content[-9:]
+                                    cell_content += M.write_new_line(
+                                        check=cell_content[-2:],
+                                        check2=vspace,
+                                        check3=newpage)
+                                q_n += 1
+                            content += [cell_content]
+
+                    options = {'unit': self.x_layout_unit}
+                    result += M.write_layout((nb_of_lines, nb_of_cols),
+                                             col_widths,
+                                             content,
+                                             **options)
+            return result + self.x_spacing[ex_or_answers]
+        elif self.layout_variant == 'slideshow':
+            result += M.write_frame("", frame='start_frame')
+            for i in range(self.q_nb):
+                result += M.write_frame(
+                    self.questions_list[i].to_str('exc'),
+                    timing=self.questions_list[i].transduration)
+
+            result += M.write_frame("", frame='middle_frame')
+
+            for i in range(self.q_nb):
+                result += M.write_frame(_("Question:")
+                                        + self.questions_list[i]
+                                        .to_str('exc')
+                                        + _("Answer:")
+                                        + self.questions_list[i]
+                                        .to_str('ans'),
+                                        timing=0)
+
+            # default tabular option:
+        elif self.layout_variant == 'tabular':
+            q = [self.questions_list[i].to_str('exc')
+                 for i in range(self.q_nb)]
+            a = [self.questions_list[i].to_str('ans')
+                 for i in range(self.q_nb)]\
+                if ex_or_answers == 'ans' \
+                else [self.questions_list[i].to_str('hint')
+                      for i in range(self.q_nb)]
+
+            n = [M.write(str(i + 1) + ".", emphasize='bold')
+                 for i in range(self.q_nb)]
+
+            content = [elt for triplet in zip(n, q, a) for elt in triplet]
+
+            result += M.write_layout((self.q_nb, 3),
+                                     [0.5, 14.25, 3.75],
+                                     content,
+                                     borders='penultimate',
+                                     justify=['left', 'left', 'center'],
+                                     center_vertically=True,
+                                     min_row_height=MIN_ROW_HEIGHT)
+
+            return result

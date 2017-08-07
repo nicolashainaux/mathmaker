@@ -36,8 +36,8 @@ DEFAULT_RANKS_SCALE = RANKS
 
 class sub_object(object):
 
-    def __init__(self, rank_to_use, **options):
-        rank_to_use = rank_to_use[0]
+    def __init__(self, **options):
+        rank_to_use = options.get('numbers_to_use')[0]
         generation_type = options.get('generation_type',
                                       random.choice(['default',
                                                      'alternative']))

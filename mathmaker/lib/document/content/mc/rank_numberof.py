@@ -29,9 +29,8 @@ from . import rank_reversed
 
 class sub_object(object):
 
-    def __init__(self, rank_to_use, **options):
-        rank_reversed.sub_object.__init__(self, rank_to_use, numberof=True,
-                                          **options)
+    def __init__(self, **options):
+        rank_reversed.sub_object.__init__(self, numberof=True, **options)
 
     def q(self, **options):
         return _("{how_many_rank} are there in {decimal_number}?")\

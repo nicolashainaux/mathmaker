@@ -10,10 +10,11 @@
 				<xs:element ref="layout"	minOccurs="0"   maxOccurs="1"/>
 				<xs:element ref="exercise"	minOccurs="1"	maxOccurs="unbounded"/>
 			</xs:sequence>
-			<xs:attribute name="header"		type="xs:string"	use="optional"	default=""/>
-			<xs:attribute name="title"			type="xs:string"	use="required"/>
-			<xs:attribute name="subtitle"		type="xs:string"	use="optional"	default=""/>
-			<xs:attribute name="text"			type="xs:string"	use="optional"	default=""/>
+			<xs:attribute name="preset"		  		type="xs:string"	use="optional"	default="default"/>
+			<xs:attribute name="header"		      type="xs:string"	use="optional"	default=""/>
+			<xs:attribute name="title"			    type="xs:string"	use="required"/>
+			<xs:attribute name="subtitle"		    type="xs:string"	use="optional"	default=""/>
+			<xs:attribute name="text"			      type="xs:string"	use="optional"	default=""/>
 			<xs:attribute name="answers_title"	type="xs:string"	use="optional"	default="Answers"/>
 		</xs:complexType>
 	</xs:element>

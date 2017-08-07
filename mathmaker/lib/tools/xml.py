@@ -30,7 +30,7 @@ import random
 from mathmaker import settings
 from mathmaker.lib.constants import XML_BOOLEANS
 import xml.etree.ElementTree as XML_PARSER
-from mathmaker.lib.document.frames import Exercise, match_qtype_sourcenb
+from mathmaker.lib.document.frames import match_qtype_sourcenb
 from mathmaker.lib.tools import parse_layout_descriptor
 
 
@@ -245,7 +245,8 @@ def get_sheet_config(file_name):
             config["type"],
             int(config["font_size_offset"]),
             config["unit"],
-            sheet_layout
+            sheet_layout,
+            xml_doc.attrib.get('preset', 'default')
             )
 
 
@@ -278,7 +279,7 @@ def check_q_consistency(q_attrib, sources):
                          .format(sources[0]))
 
 
-def get_q_kinds_from(exercise_node):
+def _get_q_list_from(exercise_node):
     """
     Retrieves the exercise kind and the questions from one exercise section.
 
@@ -293,9 +294,6 @@ def get_q_kinds_from(exercise_node):
     #  'table_2_9',
     #  4]
 
-    # if no kind is defined, x_kind will still contain the default '', what
-    # will lead to use the generic Exercise
-    x_kind = exercise_node.attrib.get('kind', '')
     for child in exercise_node:
         if child.tag == 'question':
             if ((child.attrib['kind'], child.attrib['subkind'])
@@ -395,7 +393,7 @@ def get_q_kinds_from(exercise_node):
             random.shuffle(mix_questions)
             questions += mix_questions
 
-    return (x_kind, questions)
+    return questions
 
 
 def get_exercises_list(file_name):
@@ -416,8 +414,7 @@ def get_exercises_list(file_name):
     exercises_list = []
     for child in xml_doc:
         if child.tag == 'exercise':
-            exercises_list += [(Exercise,
-                                child.attrib,
-                                get_q_kinds_from(child),
-                                _get_layout_from(child, default_config={})), ]
+            exercises_list += [(_get_q_list_from(child),
+                                _get_layout_from(child, default_config={}),
+                                child.attrib, )]
     return exercises_list

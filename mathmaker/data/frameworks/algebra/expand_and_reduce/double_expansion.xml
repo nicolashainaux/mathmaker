@@ -3,10 +3,10 @@
 <sheet header="" title="Algebra: expand and reduce double brackets" subtitle="" text="" answers_title="Answers">
 
 	<!-- Default values: id='generic' kind='' subkind='default' -->
-	<exercise text_exc="Expand and reduce the following expressions:" text_ans="Example of solutions:">
+	<exercise text_exc="Expand and reduce the following expressions:" text_ans="Example of solutions:" details_level="medium">
 		<!-- Default value (planned): context="none"
 			 No default for kind and subkind, they must be given -->
-		<question kind="expand_and_reduce" subkind="double" detailed="false">
+		<question kind="expand_and_reduce" subkind="double">
 			<nb source="intpairs_2to9;;intpairs_2to9">5</nb>
 		</question>
 

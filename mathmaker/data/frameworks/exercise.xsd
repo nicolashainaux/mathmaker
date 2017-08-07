@@ -13,16 +13,16 @@
 					<xs:element ref="question"/>
 				</xs:choice>
 			</xs:sequence>
-			<xs:attribute name="id"				type="xs:string"	use="optional"	default="generic"/>
-			<xs:attribute name="kind"			type="xs:string"	use="optional"/>
-			<xs:attribute name="subkind"		type="xs:string"	use="optional"	default=""/>
+			<xs:attribute name="preset"				type="xs:string"	use="optional"	default="default"/>
+			<xs:attribute name="layout_variant"			type="xs:string"	use="optional"	default="default"/>
+			<xs:attribute name="layout_unit"			type="xs:string"	use="optional"	default="cm"/>
 			<xs:attribute name="text_exc"			type="xs:string"	use="optional"	default=""/>
 			<xs:attribute name="text_ans"			type="xs:string"	use="optional"	default=""/>
-			<xs:attribute name="layout"			type="xs:string"	use="optional"	default="default"/>
 			<xs:attribute name="spacing"				type="xs:string"	use="optional" default=""/>
-			<xs:attribute name="qspacing"				type="xs:string"	use="optional" default=""/>
-			<xs:attribute name="shuffle"			type="xs:boolean"	use="optional"	default="false"/>
+			<xs:attribute name="q_spacing"				type="xs:string"	use="optional" default=""/>
 			<xs:attribute name="q_numbering"			type="xs:string"	use="optional"	default="disabled"/>
+			<xs:attribute name="shuffle"			type="xs:boolean"	use="optional"	default="false"/>
+			<xs:attribute name="details_level"			type="xs:string"	use="optional"	default="maximum"/>
 		</xs:complexType>
 	</xs:element>
 

@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib import shared
+from mathmaker.lib.document.frames import Exercise
 
 
 # @brief Create a sheet matching the given xml file.
@@ -43,8 +44,14 @@ class Sheet(object):
          sheet_layout_type,
          font_size_offset,
          sheet_layout_unit,
-         sheet_layout) = get_sheet_config(filename)
+         sheet_layout,
+         self.preset) = get_sheet_config(filename)
 
+        if self.preset == 'mental calculation':
+            presets = {'write_ex_titles': False}
+        else:  # if self.preset == 'default':
+            presets = {'write_ex_titles': True}
+        self.write_ex_titles = presets.get('write_ex_titles')
         self.exercises_list = list()
         shared.machine.set_font_size_offset(font_size_offset)
 
@@ -154,10 +161,13 @@ class Sheet(object):
         self.answers_title = _(answers_title) if answers_title != "" else ""
 
         for ex in get_exercises_list(filename):
-            self.exercises_list.append(ex[0](q_list=ex[2],
-                                             x_layout=ex[3][1],
-                                             x_config=ex[3][0],
-                                             **ex[1]))
+            ex_kwargs = ex[2]
+            if self.preset != 'default':
+                ex_kwargs.update({'preset': self.preset})
+            self.exercises_list.append(Exercise(q_list=ex[0],
+                                                x_layout=ex[1][1],
+                                                x_config=ex[1][0],
+                                                **ex_kwargs))
 
     #   @brief Writes the whole sheet's content to the output.
     def __str__(self):
@@ -272,7 +282,7 @@ class Sheet(object):
 
         else:
             raise ValueError('Got ' + self.layout_type + 'instead of std|'
-                             'short_test|mini_test|equations|mental')
+                             'short_test|mini_test|equations')
 
         return result
 
@@ -309,7 +319,7 @@ class Sheet(object):
                     #        how_many = 3*len(self.exercises_list) / 4 - ex_n
 
                 for i in range(how_many):
-                    if not self.layout_type == 'mental':
+                    if self.write_ex_titles:
                         result += M.write_exercise_number()
                     result += self.exercises_list[ex_n].to_str(ex_or_answers)
                     if (self.layout_type == 'default'
@@ -342,7 +352,7 @@ class Sheet(object):
                             layout[2 * k + 1][i * nb_of_cols + j]
                         cell_content = ""
                         for n in range(nb_of_ex_in_this_cell):
-                            if not self.layout_type == 'mental':
+                            if self.write_ex_titles:
                                 cell_content += M.write_exercise_number()
                             cell_content += \
                                 self.exercises_list[ex_n].to_str(ex_or_answers)

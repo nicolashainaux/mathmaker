@@ -40,7 +40,7 @@ from mathmaker.lib.tools.maths import (sign_of_product, gcd, pupil_gcd,
                                        prime_factors,
                                        ZERO_POLYNOMIAL_DEGREE)
 from mathmaker.lib.constants import (DEFAULT, RANDOMLY, NUMERIC, LITERALS,
-                                     OTHERS, XML_BOOLEANS)
+                                     OTHERS)
 from .utils import reduce_literal_items_product, put_term_in_lexicon
 from mathmaker.lib.constants.latex import MARKUP
 
@@ -6197,10 +6197,10 @@ class Sum(CommutativeOperation):
                           "so, returning the intermediate line generated "
                           "from it.")
 
-                detailed = XML_BOOLEANS[options.get('detailed', 'true')]()
-                if detailed:
+                details_level = options.get('details_level', 'maximum')
+                if details_level == 'maximum':
                     return copy.intermediate_reduction_line()
-                else:
+                else:  # 'medium' or 'none', so far, produce the same result
                     return copy.intermediate_reduction_line()\
                         .expand_and_reduce_next_step()
 
@@ -7179,11 +7179,11 @@ class Expandable(Product):
             for i in range(len(terms_list)):
                 terms_list[i] = terms_list[i].reduce_()
 
-        detailed = XML_BOOLEANS[options.get('detailed', 'true')]()
+        details_level = options.get('details_level', 'maximum')
 
-        if detailed:
+        if details_level == 'maximum':
             return Sum(terms_list)
-        else:
+        else:  # 'medium' or 'none' produce the same result, so far
             return Sum(terms_list).expand_and_reduce_next_step(**options)
 
     # --------------------------------------------------------------------------

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<sheet header="" title="Mental calculation" subtitle="Simple decimal multiplications" text="" answers_title="Answers">
+<sheet preset="mental calculation" header="" title="Mental calculation" subtitle="Simple decimal multiplications" text="" answers_title="Answers">
 
 	<layout font_size_offset="-1" />
 
 	<!-- Default value: id='generic'
 		 No default for kind and subkind, they must be given -->
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
-	<exercise id="mental_calculation" kind="tabular" shuffle="true" qspacing="">
+	<exercise>
 
 		<question kind="multi" subkind="direct" nb_variant="decimal">
 			<nb source="intpairs_2to9">20</nb>
