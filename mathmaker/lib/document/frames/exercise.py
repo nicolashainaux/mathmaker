@@ -814,7 +814,7 @@ class Exercise(_Structure):
             if 'qspacing' in options and 'spacing' not in q.options:
                 q.options.update({'spacing': options['qspacing']})
             self.questions_list += \
-                [Question(q.id, q.options, numbers_to_use=nb_to_use,
+                [Question(q.id, **q.options, numbers_to_use=nb_to_use,
                           number_of_the_question=next(numbering),)]
 
         shared.number_of_the_question = 0

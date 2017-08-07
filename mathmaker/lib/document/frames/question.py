@@ -132,39 +132,17 @@ class Question(object):
     ##
     #   @brief Constructor.
     #   @param **options Any options
-    def __init__(self, q_kind, q_options, **options):
-        options.update(q_options)
-
+    def __init__(self, q_kind, **options):
         # That's the number of the question, not of the expressions it might
         # contain!
-        self.number = ""
-        if 'number_of_the_question' in options:
-            self.number = options['number_of_the_question']
-
-        self.displayable_number = ""
-
-        if self.number != "":
+        self.number = options.get('number_of_the_question', '')
+        self.displayable_number = ''
+        if self.number != '':
             self.displayable_number = \
                 shared.machine.write(str(self.number) + ". ", emphasize='bold')
 
-        q_subkind = 'default'
-        if 'q_subkind' in options:
-            q_subkind = options['q_subkind']
-            # let's remove this option from the options
-            # since we re-use it recursively
-            temp_options = dict()
-            for key in options:
-                if key != 'q_subkind':
-                    temp_options[key] = options[key]
-            options = temp_options
-
-        # these two fields for the case of needing to know the them in the
-        # answer_to_str() especially
         self.q_kind = q_kind
-        self.q_subkind = q_subkind
-
-        numbers_to_use = options['numbers_to_use']
-        del options['numbers_to_use']
+        self.q_subkind = options.get('q_subkind', 'default')
 
         # modules
         mod_name = self.q_kind
@@ -177,15 +155,12 @@ class Question(object):
         for m in ALL_MODULES:
             if hasattr(m, mod_name):
                 module = getattr(m, mod_name)
-                if m is mc:
-                    self.q_spacing = ''
                 break
         else:
-            raise AttributeError(mod_name + ' not found in '
-                                 'ALL_MODULES: '
+            raise AttributeError(mod_name + ' not found in ALL_MODULES: '
                                  + ', '.join([m.__name__
                                              for m in ALL_MODULES]))
-        m = module.sub_object(numbers_to_use, **options)
+        m = module.sub_object(**options)
 
         sp = options.get('spacing', '30.0pt')
         if sp == 'newline':
@@ -214,7 +189,7 @@ class Question(object):
         if hasattr(m, 'h'):
             self.q_hint = m.h(**options)
         else:
-            self.q_hint = ""
+            self.q_hint = ''
         self.q_nb_included_in_wording = False
         if hasattr(m, 'q_nb_included_in_wording'):
             self.q_nb_included_in_wording = m.q_nb_included_in_wording
