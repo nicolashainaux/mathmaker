@@ -4,24 +4,21 @@
 
 	<layout font_size_offset="-1" />
 
-	<!-- Default value: id='generic'
-		 No default for kind and subkind, they must be given -->
-	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise>
 
-		<question kind="addi" subkind="direct" context="mini_problem">
+		<question id="addi direct" context="mini_problem">
 			<nb source="intpairs_5to20">5</nb>
 		</question>
 
-		<question kind="multi" subkind="direct" context="mini_problem">
+		<question id="multi direct" context="mini_problem">
 			<nb source="intpairs_4to9">5</nb>
 		</question>
 
-		<question kind="subtr" subkind="direct" context="mini_problem" subvariant="only_positive">
+		<question id="subtr direct" context="mini_problem" subvariant="only_positive">
 			<nb source="intpairs_10to100">5</nb>
 		</question>
 
-		<question kind="divi" subkind="direct" context="mini_problem">
+		<question id="divi direct" context="mini_problem">
 			<nb source="intpairs_4to9">5</nb>
 		</question>
 

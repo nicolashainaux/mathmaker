@@ -20,11 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from .question import (Question, get_modifier, match_qtype_sourcenb)
+from .question import (Question, get_modifier, match_qid_sourcenb)
 from .exercise import Exercise, get_nb_sources_from_question_info
 from .sheet import Sheet
 
 
 __all__ = ['Sheet', 'Exercise', 'Question',
            'get_nb_sources_from_question_info',
-           'get_modifier', 'match_qtype_sourcenb']
+           'get_modifier', 'match_qid_sourcenb']

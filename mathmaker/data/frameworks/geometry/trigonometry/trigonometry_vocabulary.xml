@@ -4,12 +4,11 @@
 
 	<layout font_size_offset="-1" />
 
-	<!-- Default values: id='generic' kind='' subkind='default' -->
 	<exercise q_numbering="alphabetical">
 		<!-- variant can be adjacent|opposite|random
 				 Default values (if variant is not here) will be as if variant="random" -->
 		<!-- no source required for trigonometry_vocabulary questions -->
-		<question kind="trigonometry" subkind="vocabulary" variant="random" spacing="40.0pt">
+		<question id="trigonometry vocabulary" variant="random" spacing="40.0pt">
 			<nb source="nothing">5</nb>
 		</question>
 

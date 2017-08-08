@@ -5,7 +5,7 @@
 	<!-- Default values: id='generic' kind='' subkind='default' -->
 	<exercise text_exc="Calculate:" text_ans="Example of solutions:">
 
-		<question kind="calculation" subkind="order_of_operations" subvariant="only_positive">
+		<question id="calculation order_of_operations" subvariant="only_positive">
 			<nb source="singleint_2to10;;intpairs_2to9" variant="144">1000</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="145">1000</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="146">1000</nb>

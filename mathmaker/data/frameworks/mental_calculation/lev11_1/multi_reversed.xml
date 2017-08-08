@@ -4,12 +4,9 @@
 
 	<layout font_size_offset="-1" />
 
-	<!-- Default value: id='generic'
-		 No default for kind and subkind, they must be given -->
-	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise>
 
-		<question kind="multi" subkind="reversed">
+		<question id="multi reversed">
 			<nb source="intpairs_2to9">20</nb>
 		</question>
 

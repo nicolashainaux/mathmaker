@@ -8,8 +8,7 @@
 			<xs:sequence>
 				<xs:element ref="nb" minOccurs="0"	maxOccurs="unbounded"/>
 			</xs:sequence>
-			<xs:attribute name="kind"							type="xs:string"	use="required"/>
-			<xs:attribute name="subkind"						type="xs:string"	use="required"/>
+			<xs:attribute name="id"							type="xs:string"	use="required"/>
 			<xs:attribute name="context"						type="xs:string"	use="optional"/>
 			<xs:attribute name="text"	              type="xs:string"	use="optional"/>
 			<xs:attribute name="wording"				    type="xs:string"	use="optional"/>

@@ -32,6 +32,7 @@ from intspan.core import ParseError
 from mathmaker.lib import shared
 from mathmaker.lib.tools import is_integer
 from mathmaker.lib.tools.maths import coprimes_to
+from mathmaker.lib.tools.xml import parse_qid
 from .question import Question, get_modifier
 from mathmaker.lib.constants import XML_BOOLEANS
 from mathmaker.lib.constants.content \
@@ -109,8 +110,8 @@ def merge_pair_to_tuple(n_tuple, pair, common_nb):
 #                           questions
 def build_q_dict(q_list):
     # In q_list, each element is like this:
-    # [{'kind':'multi', 'subkind':'direct', 'nb':'int'}, ['table_2_9'], 4]
-    # [q[0],                                             q[1],          q[2]]
+    # [{'id': 'multi direct', 'nb':'int'}, ['table_2_9'], 4]
+    # [q[0],                               q[1],          q[2]]
     q_dict = {}
     already_unpacked = set()
     q_nb = 0
@@ -118,32 +119,29 @@ def build_q_dict(q_list):
         q_nb += q[2]
 
         for n in range(q[2]):
-            q_id = q[0]['kind']
-            q_id += "_"
+            q_kind, q_subkind = parse_qid(q[0]['id'])
 
             # Here we 'unpack' some special subkinds.
-            subk = q[0]['subkind']
-            if subk in UNPACKABLE_SUBKINDS:
-                already_unpacked |= {subk}
-            elif subk in to_unpack:
-                subk_left = to_unpack[subk] - already_unpacked
+            if q_subkind in UNPACKABLE_SUBKINDS:
+                already_unpacked |= {q_subkind}
+            elif q_subkind in to_unpack:
+                subk_left = to_unpack[q_subkind] - already_unpacked
                 if not subk_left:
                     already_unpacked -= copy.deepcopy(
-                        SUBKINDS_TO_UNPACK[subk])
-                    to_unpack[subk] = copy.deepcopy(
-                        SUBKINDS_TO_UNPACK[subk])
-                    subk_left = to_unpack[subk] - already_unpacked
+                        SUBKINDS_TO_UNPACK[q_subkind])
+                    to_unpack[q_subkind] = copy.deepcopy(
+                        SUBKINDS_TO_UNPACK[q_subkind])
+                    subk_left = to_unpack[q_subkind] - already_unpacked
                 s = list(subk_left)
                 random.shuffle(s)
-                subk = s.pop()
-                already_unpacked |= {subk}
+                q_subkind = s.pop()
+                already_unpacked |= {q_subkind}
 
-            q_id += subk
+            q_id = '_'.join([q_kind, q_subkind])
             q_options = copy.deepcopy(q[0])
             q_dict.setdefault(q_id, [])
-            q_dict[q_id] += [(q[1], q_options['kind'], subk, q_options)]
-            del q_options['kind']
-            del q_options['subkind']
+            q_dict[q_id] += [(q[1], q_kind, q_subkind, q_options)]
+            del q_options['id']
 
     return q_dict, q_nb
 

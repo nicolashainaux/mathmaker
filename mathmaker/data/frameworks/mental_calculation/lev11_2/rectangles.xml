@@ -4,14 +4,11 @@
 
 	<layout font_size_offset="-1" />
 
-	<!-- Default value: id='generic'
-		 No default for kind and subkind, they must be given -->
-	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise>
 
     <mix>
-			<question kind="area" subkind="rectangle" picture="true" pick="3"></question>
-			<question kind="area" subkind="rectangle" pick="2"></question>
+			<question id="area rectangle" picture="true" pick="3"></question>
+			<question id="area rectangle" pick="2"></question>
 			<nb source="table_25">1</nb>
 			<nb source="intpairs_2to9">1</nb>
 			<nb source="table_15">1</nb>
@@ -20,18 +17,18 @@
 		</mix>
 
 		<mix>
-			<question kind="perimeter" subkind="rectangle" picture="true" pick="2"></question>
-			<question kind="perimeter" subkind="rectangle"></question>
+			<question id="perimeter rectangle" picture="true" pick="2"></question>
+			<question id="perimeter rectangle"></question>
 			<nb source="intpairs_2to9" nb_variant="decimal">1</nb>
 			<nb source="table_25">1</nb>
 			<nb source="intpairs_5to20" nb_variant="decimal1">1</nb>
 		</mix>
 
-		<question kind="rectangle" subkind="length_or_width" context="from_area">
+		<question id="rectangle length_or_width" context="from_area">
 			<nb source="intpairs_2to9">1</nb>
 		</question>
 
-		<question kind="rectangle" subkind="length_or_width" context="from_perimeter" picture="true">
+		<question id="rectangle length_or_width" context="from_perimeter" picture="true">
 			<nb source="intpairs_5to20">1</nb>
 		</question>
 

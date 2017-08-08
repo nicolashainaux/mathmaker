@@ -9,7 +9,6 @@
 		<answers print="1" />
 	</layout>
 
-	<!-- Default values: id='generic' kind='' subkind='default' -->
 	<exercise>
 		<!-- variant consists of 3 "flags" connected by '_' (underscore)
 			   1st flag is whether a side should be computed or a chunk of a side, or (oneside/onechunk/onerandom/twosides/twochunks/onesideonechunk/tworandom/random)
@@ -20,37 +19,37 @@
 			   It's also impossible to ask to calculate the two chunks (so display all lengths available)
 			   and in the same time to require an "additive" version of the exercise (1st flag true),
 			   so this case will be automatically removed. -->
-		<question kind="intercept_theorem" subkind="triangle" variant="oneside_all_false">
+		<question id="intercept_theorem triangle" variant="oneside_all_false">
 			<nb source="ext_proportionality_quadruplet_11to30">1</nb>
 		</question>
 	</exercise>
 
 	<exercise>
-		<question kind="intercept_theorem" subkind="triangle" variant="oneside_twocouples_true">
+		<question id="intercept_theorem triangle" variant="oneside_twocouples_true">
 			<nb source="ext_proportionality_quadruplet_11to50">1</nb>
 		</question>
 	</exercise>
 
 	<exercise>
-		<question kind="intercept_theorem" subkind="triangle" variant="twosides_all_false">
+		<question id="intercept_theorem triangle" variant="twosides_all_false">
 			<nb source="ext_proportionality_quadruplet_21to40">1</nb>
 		</question>
 	</exercise>
 
 	<exercise>
-		<question kind="intercept_theorem" subkind="triangle" variant="onesideonechunk_all_true">
+		<question id="intercept_theorem triangle" variant="onesideonechunk_all_true">
 			<nb source="ext_proportionality_quadruplet_31to50">1</nb>
 		</question>
 	</exercise>
 
 	<!-- <exercise>
-		<question kind="intercept_theorem" subkind="triangle">
+		<question id="intercept_theorem triangle">
 			<nb source="ext_proportionality_quadruplet_2to100">1</nb>
 		</question>
 	</exercise>
 
 	<exercise>
-		<question kind="intercept_theorem" subkind="triangle">
+		<question id="intercept_theorem triangle">
 			<nb source="ext_proportionality_quadruplet_2to100">1</nb>
 		</question>
 	</exercise> -->

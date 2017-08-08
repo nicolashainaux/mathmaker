@@ -4,16 +4,13 @@
 
 	<layout font_size_offset="-1" />
 
-	<!-- Default value: id='generic'
-		 No default for kind and subkind, they must be given -->
-	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise>
 
-		<question kind="multi" subkind="direct">
+		<question id="multi direct">
 			<nb source="decimal_and_10_100_1000">10</nb>
 		</question>
 
-		<question kind="divi" subkind="direct">
+		<question id="divi direct">
 			<nb source="decimal_and_10_100_1000">10</nb>
 		</question>
 

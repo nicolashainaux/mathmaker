@@ -8,28 +8,27 @@
 		<answers print="2" />
 	</layout>
 
-	<!-- Default values: id='generic' kind='' subkind='default' -->
 	<!-- ans_variant can be 'default' or 'alternative2' only -->
 	<exercise>
-		<question kind="intercept_theorem_converse" subkind="triangle" ans_variant="alternative2">
+		<question id="intercept_theorem_converse triangle" ans_variant="alternative2">
 			<nb source="ext_proportionality_quadruplet_11to30">1</nb>
 		</question>
 	</exercise>
 
 	<exercise>
-		<question kind="intercept_theorem_converse" subkind="butterfly" ans_variant="alternative2">
+		<question id="intercept_theorem_converse butterfly" ans_variant="alternative2">
 			<nb source="ext_proportionality_quadruplet_11to50">1</nb>
 		</question>
 	</exercise>
 
 	<exercise>
-		<question kind="intercept_theorem_converse" subkind="triangle" ans_variant="alternative2">
+		<question id="intercept_theorem_converse triangle" ans_variant="alternative2">
 			<nb source="ext_proportionality_quadruplet_21to40">1</nb>
 		</question>
 	</exercise>
 
 	<exercise>
-		<question kind="intercept_theorem_converse" subkind="butterfly" ans_variant="alternative2">
+		<question id="intercept_theorem_converse butterfly" ans_variant="alternative2">
 			<nb source="ext_proportionality_quadruplet_31to50">1</nb>
 		</question>
 	</exercise>

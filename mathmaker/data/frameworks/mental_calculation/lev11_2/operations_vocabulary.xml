@@ -4,70 +4,64 @@
 
 	<layout font_size_offset="-1" />
 
-	<!-- Default value: id='generic'
-		 No default for kind and subkind, they must be given -->
-	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise>
 
-		<!-- Default value (planned): context="none"
-			 No default for kind and subkind, they must be given -->
-
-		<question kind="vocabulary" subkind="half">
+		<question id="vocabulary half">
 			<nb source="table_2">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="third">
+		<question id="vocabulary third">
 			<nb source="table_3">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="quarter">
+		<question id="vocabulary quarter">
 			<nb source="table_4">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="double">
+		<question id="vocabulary double">
 			<nb source="table_2">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="triple">
+		<question id="vocabulary triple">
 			<nb source="table_3">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="quadruple">
+		<question id="vocabulary quadruple">
 			<nb source="table_4">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="simple_parts_of_a_number">
+		<question id="vocabulary simple_parts_of_a_number">
 			<nb source="auto_11_50">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="simple_multiples_of_a_number">
+		<question id="vocabulary simple_multiples_of_a_number">
 			<nb source="auto_11_50">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="multi">
+		<question id="vocabulary multi">
 			<nb source="intpairs_2to9">1</nb>
 			<nb source="table_15">1</nb>
 			<nb source="table_25">1</nb>
 			<nb source="table_11">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="divi">
+		<question id="vocabulary divi">
 			<nb source="intpairs_2to9">3</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="addi">
+		<question id="vocabulary addi">
 			<!--<nb source="integers_10_100_for_sums_diffs">1</nb>
 			<nb source="table_2_9_for_sums_diffs">1</nb>-->
 			<nb source="intpairs_10to100">1</nb>
 			<nb source="intpairs_2to9">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="subtr">
+		<question id="vocabulary subtr">
 			<nb source="intpairs_10to100">1</nb>
 			<nb source="intpairs_2to200" nb_variant="decimal2">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="operation">
+		<question id="vocabulary operation">
 			<nb source="auto_vocabulary">1</nb>
 		</question>
 

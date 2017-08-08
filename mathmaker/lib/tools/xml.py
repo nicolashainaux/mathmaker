@@ -30,7 +30,7 @@ import random
 from mathmaker import settings
 from mathmaker.lib.constants import XML_BOOLEANS
 import xml.etree.ElementTree as XML_PARSER
-from mathmaker.lib.document.frames import match_qtype_sourcenb
+from mathmaker.lib.document.frames import match_qid_sourcenb
 from mathmaker.lib.tools import parse_layout_descriptor
 
 
@@ -43,6 +43,17 @@ from mathmaker.lib.tools import parse_layout_descriptor
 # KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE = {
 #     ('divi', 'direct', 'area_width_length_rectangle'):
 #     ('rectangle', 'length_or_width', 'from_area')}
+
+def parse_qid(qid):
+    """
+    Return question's kind and subkind from question's attribute "id".
+    """
+    if qid.count(' ') != 1:
+        raise ValueError('XMLFormatError: a question id must consist '
+                         'of two parts separated by one space '
+                         'character. There cannot be several space '
+                         'characters in the id, neither.')
+    return qid.split()
 
 
 def get_xml_schema_path():
@@ -255,7 +266,7 @@ def check_q_consistency(q_attrib, sources):
     """
     (Unfinished) Check the consistency of question's kind, subkind and source.
     """
-    q_kind_subkind = '_'.join([q_attrib['kind'], q_attrib['subkind']])
+    q_kind_subkind = '_'.join(parse_qid(q_attrib['id']))
     if (q_kind_subkind == 'intercept_theorem_triangle'
         and sources[0].startswith('ext_proportionality_quadruplet')):
         # __
@@ -290,14 +301,16 @@ def _get_q_list_from(exercise_node):
     """
     questions = []
     # For instance we will get a list of this kind of elements:
-    # [{'kind': 'multi', 'subkind': 'direct', 'nb': 'int'}, 'table_2_9', 4]
-    # [{'kind': 'expand_and_reduce', 'subkind': 'double_expansion'},
+    # [{'id': 'multi direct', 'nb': 'int'}, 'table_2_9', 4]
+    # [{'id': 'expand_and_reduce double_expansion'},
     #  'table_2_9',
     #  4]
 
     for child in exercise_node:
         if child.tag == 'question':
             # Useless features, so far, hence disabled on august 8th, 2017
+            # If this would be to re-enable, take care attrib has no kind and
+            # subkind attributes any more.
             # if ((child.attrib['kind'], child.attrib['subkind'])
             #         in SWAPPABLE_QKINDS_QSUBKINDS):
             #     (child.attrib['kind'], child.attrib['subkind'])\
@@ -363,14 +376,14 @@ def _get_q_list_from(exercise_node):
             for n in n_temp_list:
                 for q in q_temp_list:
                     v = n[1].get('variant', q.get('variant', ''))
-                    if (not match_qtype_sourcenb(
-                        q['kind'] + "_" + q['subkind'], n[0], v)):
+                    if (not match_qid_sourcenb(q['id'].replace(' ', '_'),
+                                               n[0], v)):
                         # __
                         raise ValueError(
                             'XMLFileFormatError: this source: '
                             + str(n[0]) + ' cannot '
                             'be attributed to this question:'
-                            ' ' + str(q['kind'] + '_' + q['subkind']))
+                            ' ' + str(q['id'].replace(' ', '_')))
 
             random.shuffle(q_temp_list)
             if any(XML_BOOLEANS[n[1].get('required', 'false')]()

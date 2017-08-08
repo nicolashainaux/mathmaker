@@ -4,18 +4,15 @@
 
 	<layout font_size_offset="-1" />
 
-	<!-- Default value: id='generic'
-		 No default for kind and subkind, they must be given -->
-	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise>
 
-		<question kind="multi" subkind="direct">
+		<question id="multi direct">
 			<nb source="table_11">6</nb>
 			<nb source="table_15">3</nb>
 			<nb source="table_25">3</nb>
 		</question>
 
-		<question kind="multi" subkind="hole">
+		<question id="multi hole">
 			<nb source="table_15">4</nb>
 			<nb source="table_25">4</nb>
 		</question>

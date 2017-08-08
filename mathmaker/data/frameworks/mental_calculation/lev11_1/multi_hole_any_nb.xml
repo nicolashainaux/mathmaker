@@ -4,12 +4,9 @@
 
 	<layout font_size_offset="-1" />
 
-	<!-- Default value: id='generic'
-		 No default for kind and subkind, they must be given -->
-	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise>
 
-		<question kind="multi" subkind="hole">
+		<question id="multi hole">
 			<nb source="intpairs_2to9">8</nb>
 			<nb source="int_irreducible_frac">7</nb>
 			<nb source="table_15">2</nb>

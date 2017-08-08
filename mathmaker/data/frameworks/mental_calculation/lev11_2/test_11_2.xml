@@ -9,65 +9,65 @@
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise>
 
-		<question kind="rectangle" subkind="length_or_width" context="from_area">
+		<question id="rectangle length_or_width" context="from_area">
 			<nb source="intpairs_2to9">1</nb>
 		</question>
 
-		<question kind="divi" subkind="direct" context="mini_problem">
+		<question id="divi direct" context="mini_problem">
 			<nb source="table_25">1</nb>
 		</question>
 
-		<question kind="multi" subkind="direct">
+		<question id="multi direct">
 			<nb source="decimal_and_10_100_1000">1</nb>
 			<nb source="decimal_and_one_digit">1</nb>
 		</question>
 
-		<question kind="divi" subkind="direct">
+		<question id="divi direct">
 			<nb source="decimal_and_10_100_1000">1</nb>
 			<nb source="intpairs_2to9">1</nb>
 		</question>
 
 		<!-- The two next ones should be replaced by a calculus of a perimeter of a polygon; and by a "complément à 100" -->
-		<question kind="vocabulary" subkind="simple_parts_or_multiples_of_a_number">
+		<question id="vocabulary simple_parts_or_multiples_of_a_number">
 			<nb source="auto_11_50">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="operation">
+		<question id="vocabulary operation">
 			<nb source="auto_vocabulary">1</nb>
 		</question>
 
-		<question kind="divi" subkind="direct" nb_variant="decimal">
+		<question id="divi direct" nb_variant="decimal">
 			<nb source="intpairs_2to9">1</nb>
 		</question>
 
-		<question kind="multi" subkind="hole">
+		<question id="multi hole">
 			<nb source="int_irreducible_frac">1</nb>
 		</question>
 
-		<question kind="multi" subkind="reversed">
+		<question id="multi reversed">
 			<nb source="intpairs_2to9">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="simple_parts_of_a_number">
+		<question id="vocabulary simple_parts_of_a_number">
 			<nb source="auto_table">1</nb>
 		</question>
 
-		<question kind="vocabulary" subkind="subtr">
+		<question id="vocabulary subtr">
 			<nb source="intpairs_2to200" nb_variant="decimal2">2</nb>
 		</question>
 
-		<question kind="rank" subkind="numberof" generation_type="default">
+		<question id="rank numberof" generation_type="default">
 			<nb source="rank_words">1</nb>
 		</question>
 
-		<question kind="rank" subkind="reversed">
+		<question id="rank reversed">
 			<nb source="rank_words">1</nb>
 		</question>
 
 		<mix>
-			<question kind="area" subkind="rectangle" picture="true"></question>
-			<question kind="multi" subkind="direct" pick="2"></question>
-			<question kind="vocabulary" subkind="multi"></question>
+			<question id="area rectangle" picture="true"></question>
+			<question id="multi direct" pick="2"></question>
+			<question id="vocabulary multi"></question>
 			<nb source="table_15">1</nb>
 			<nb source="table_11">1</nb>
 			<nb source="intpairs_2to9" nb_variant="decimal1">1</nb>
