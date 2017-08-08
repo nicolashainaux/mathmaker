@@ -9,7 +9,7 @@
 	<!-- Available kinds for mental calculation: tabular, slideshow -->
 	<exercise>
 
-		<question kind="divi" subkind="direct" context="area_width_length_rectangle">
+		<question kind="rectangle" subkind="length_or_width" context="from_area">
 			<nb source="intpairs_2to9">1</nb>
 		</question>
 

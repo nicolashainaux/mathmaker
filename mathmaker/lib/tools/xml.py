@@ -34,14 +34,15 @@ from mathmaker.lib.document.frames import match_qtype_sourcenb
 from mathmaker.lib.tools import parse_layout_descriptor
 
 
-SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),
-                              ("rectangle", "perimeter"),
-                              ("square", "area"),
-                              ("square", "perimeter")}
-
-KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE = {
-    ('divi', 'direct', 'area_width_length_rectangle'):
-    ('rectangle', 'length_or_width', 'from_area')}
+# So far, quite useless features, so disabled on august 8th, 2017
+# SWAPPABLE_QKINDS_QSUBKINDS = {("rectangle", "area"),
+#                               ("rectangle", "perimeter"),
+#                               ("square", "area"),
+#                               ("square", "perimeter")}
+#
+# KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE = {
+#     ('divi', 'direct', 'area_width_length_rectangle'):
+#     ('rectangle', 'length_or_width', 'from_area')}
 
 
 def get_xml_schema_path():
@@ -296,23 +297,24 @@ def _get_q_list_from(exercise_node):
 
     for child in exercise_node:
         if child.tag == 'question':
-            if ((child.attrib['kind'], child.attrib['subkind'])
-                    in SWAPPABLE_QKINDS_QSUBKINDS):
-                (child.attrib['kind'], child.attrib['subkind'])\
-                    = (child.attrib['subkind'], child.attrib['kind'])
-
-            if 'context' in child.attrib:
-                if ((child.attrib['kind'],
-                    child.attrib['subkind'],
-                    child.attrib['context'])
-                        in KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE):
-                    (child.attrib['kind'],
-                     child.attrib['subkind'],
-                     child.attrib['context']) = \
-                        KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE[
-                        (child.attrib['kind'],
-                         child.attrib['subkind'],
-                         child.attrib['context'])]
+            # Useless features, so far, hence disabled on august 8th, 2017
+            # if ((child.attrib['kind'], child.attrib['subkind'])
+            #         in SWAPPABLE_QKINDS_QSUBKINDS):
+            #     (child.attrib['kind'], child.attrib['subkind'])\
+            #         = (child.attrib['subkind'], child.attrib['kind'])
+            #
+            # if 'context' in child.attrib:
+            #     if ((child.attrib['kind'],
+            #         child.attrib['subkind'],
+            #         child.attrib['context'])
+            #             in KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE):
+            #         (child.attrib['kind'],
+            #          child.attrib['subkind'],
+            #          child.attrib['context']) = \
+            #             KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE[
+            #             (child.attrib['kind'],
+            #              child.attrib['subkind'],
+            #              child.attrib['context'])]
             for elt in child:
                 o = copy.deepcopy(child.attrib)
                 o.update(elt.attrib)
