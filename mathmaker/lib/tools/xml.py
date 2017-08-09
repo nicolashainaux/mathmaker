@@ -26,10 +26,10 @@ import subprocess
 import copy
 import logging
 import random
+import xml.etree.ElementTree as XML_PARSER
 
 from mathmaker import settings
 from mathmaker.lib.constants import XML_BOOLEANS
-import xml.etree.ElementTree as XML_PARSER
 from mathmaker.lib.document.frames import match_qid_sourcenb
 from mathmaker.lib.tools import parse_layout_descriptor
 
