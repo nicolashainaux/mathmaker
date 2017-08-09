@@ -25,16 +25,57 @@ import os
 import sys
 import logging
 import errno
-import yaml
+import json
 import copy
 import warnings
 import random
 import re
 import subprocess
+from glob import glob
 from decimal import Decimal, ROUND_DOWN
 from tempfile import TemporaryFile
 from operator import itemgetter
+from collections import OrderedDict
 import polib
+
+
+def read_index():
+    from mathmaker import settings
+    with open(settings.index_path) as f:
+        return json.load(f)
+
+
+def build_index():
+    from mathmaker import settings
+    import yaml
+    # Below snippet from https://stackoverflow.com/a/21048064/3926735
+    # to load roadmap.yaml using OrderedDict instead of dict
+    _mapping_tag = yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG
+
+    def dict_representer(dumper, data):
+        return dumper.represent_dict(data.items())
+
+    def dict_constructor(loader, node):
+        return OrderedDict(loader.construct_pairs(node))
+
+    yaml.add_representer(OrderedDict, dict_representer)
+    yaml.add_constructor(_mapping_tag, dict_constructor)
+    index = dict()
+    themes_dirs = [x
+                   for x in os.listdir(settings.frameworksdir)
+                   if os.path.isdir(settings.frameworksdir + x)]
+    for theme in themes_dirs:
+        folder_path = os.path.join(settings.frameworksdir, theme)
+        folder_files = glob(folder_path + '/*.yaml')
+        for folder_path in folder_files:
+            subtheme = os.path.splitext(os.path.basename(folder_path))[0]
+            with open(folder_path) as f:
+                folder = OrderedDict(yaml.load(f))
+            for sheet_name in folder:
+                directive = '_'.join([subtheme, sheet_name])
+                index[directive] = (theme, subtheme, sheet_name)
+    with open(settings.index_path, 'w') as f:
+        json.dump(index, f, indent=4)
 
 
 def load_config(file_tag, settingsdir):
@@ -47,6 +88,7 @@ def load_config(file_tag, settingsdir):
     /etc/mathmaker/*.yaml, then in ~/.config/mathmaker/*.yaml,
     finally in mathmaker/settings/dev/*.yaml.
     """
+    import yaml
     # As one wants to log anything as soon as possible, but at least the
     # default values from ``logging.yaml`` must be read before anything
     # can be logged, the logger is only set and used if the filename is
@@ -184,6 +226,17 @@ def _gather_xml_sheets_info():
     return infos
 
 
+def _gather_yaml_sheets_info():
+    """Returns a list of {'theme': ..., 'subtheme': ..., 'name': ...}"""
+    infos = []
+    index = read_index()
+    for directive in index:
+        infos.append({'theme': index[directive][0],
+                      'subtheme': index[directive][1],
+                      'name': directive})
+    return infos
+
+
 def _hfill(word, total_length, charfill=' '):
     """
     Add spaces after word to get to the given total length.
@@ -201,6 +254,7 @@ def list_all_sheets():
     """
     all_sheets_info = _gather_old_style_sheets_info()
     all_sheets_info += _gather_xml_sheets_info()
+    all_sheets_info += _gather_yaml_sheets_info()
 
     len_t, len_s, len_n = 0, 0, 0
     for s in all_sheets_info:

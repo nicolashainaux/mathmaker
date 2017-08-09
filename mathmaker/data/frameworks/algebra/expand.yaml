@@ -1,0 +1,16 @@
+double:
+  title: "Algebra: expand and reduce double brackets"
+  answers_title: "Answers"
+  exercise:
+    - details_level: medium
+    - text_exc: "Expand and reduce the following expressions:"
+    - text_ans: "Example of detailed solutions:"
+    - expand double -> intpairs_2to9;;intpairs_2to9 (5)
+
+double_detailed_solutions:
+  title: "Algebra: expand and reduce double brackets"
+  answers_title: "Answers"
+  exercise:
+    - text_exc: "Expand and reduce the following expressions:"
+    - text_ans: "Example of detailed solutions:"
+    - expand double -> intpairs_2to9;;intpairs_2to9 (5)

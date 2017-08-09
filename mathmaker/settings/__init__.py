@@ -81,6 +81,7 @@ def init():
     global outputdir
     global toolsdir
     global frameworksdir
+    global index_path
     global default, path
     global mainlogger
     global dbg_logger
@@ -113,6 +114,7 @@ def init():
     fonts_list_file = datadir + 'fonts_list.txt'
     toolsdir = rootdir + 'tools/'
     frameworksdir = datadir + 'frameworks/'
+    index_path = frameworksdir + 'index.json'
     settingsdir = rootdir + settings_dirname
     projectdir = rootdir[:-len('mathmaker/')]
 
