@@ -25,7 +25,7 @@ import os
 import sys
 import logging
 import errno
-from collections import OrderedDict
+# from collections import OrderedDict
 # # from abc import ABCMeta, abstractmethod
 #
 # import yaml
@@ -100,7 +100,7 @@ def load_config(file_tag, settingsdir):
     return configuration
 
 
-def get_sheet(theme, subtheme, sheet_name):
+def load_sheet(theme, subtheme, sheet_name):
     """
     Retrieve sheet data from yaml file.
 
@@ -110,21 +110,11 @@ def get_sheet(theme, subtheme, sheet_name):
     :type subtheme: str
     :param sheet_name: the name of the sheet
     :type sheet_name: str
-    :rtype: dict
+    :rtype: OrderedDict
     """
-    import yaml
-    # Below snippet from https://stackoverflow.com/a/21048064/3926735
-    # to load roadmap.yaml using OrderedDict instead of dict
-    _mapping_tag = yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG
-
-    def dict_representer(dumper, data):
-        return dumper.represent_dict(data.items())
-
-    def dict_constructor(loader, node):
-        return OrderedDict(loader.construct_pairs(node))
-
-    yaml.add_representer(OrderedDict, dict_representer)
-    yaml.add_constructor(_mapping_tag, dict_constructor)
+    from ruamel import yaml
+    # from ruamel.yaml import YAML
+    # yaml = YAML(typ='safe')
 
     theme_dir = os.path.join(settings.frameworksdir, theme)
     subtheme_file = os.path.join(settings.frameworksdir, theme,
@@ -132,7 +122,7 @@ def get_sheet(theme, subtheme, sheet_name):
     if os.path.isdir(theme_dir):
         if os.path.isfile(subtheme_file):
             with open(subtheme_file) as file_path:
-                file_data = OrderedDict(yaml.load(file_path))
+                file_data = yaml.round_trip_load(file_path)
                 if sheet_name in file_data:
                     return file_data[sheet_name]
                 else:

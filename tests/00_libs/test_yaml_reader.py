@@ -25,37 +25,45 @@
 import pytest
 from collections import OrderedDict
 
-from mathmaker.lib.tools.yaml_reader import get_sheet
+from ruamel.yaml.compat import ordereddict
+from ruamel.yaml.comments import CommentedOrderedMap
+
+from mathmaker.lib.tools.yaml_reader import load_sheet
 
 
-def test_get_sheet_exceptions():
+def test_load_sheet_exceptions():
     """Test wrong theme, subtheme, sheet name do raise an exception."""
     with pytest.raises(IOError) as excinfo:
-        get_sheet('dumbtheme', '', '')
+        load_sheet('dumbtheme', '', '')
     assert str(excinfo.value) == 'Could not find the provided theme ' \
         '(dumbtheme) among the frameworks.'
     with pytest.raises(IOError) as excinfo:
-        get_sheet('algebra', 'dumbsubtheme', '')
+        load_sheet('algebra', 'dumbsubtheme', '')
     assert str(excinfo.value) == 'Could not find the provided subtheme ' \
         '(dumbsubtheme) in the provided theme (algebra).'
     with pytest.raises(ValueError) as excinfo:
-        get_sheet('algebra', 'expand', 'dumbsheetname')
+        load_sheet('algebra', 'expand', 'dumbsheetname')
     assert str(excinfo.value) == 'No sheet of this name (dumbsheetname) in ' \
         'the provided theme and subtheme (algebra, expand).'
 
 
-def test_get_sheet():
+def test_load_sheet():
     """Test right theme, subtheme, sheet name return the right data."""
-    d = get_sheet('algebra', 'expand', 'double')
+    d = load_sheet('algebra', 'expand', 'double')
     assert isinstance(d, OrderedDict)
-    assert d == \
-        OrderedDict([('title', 'Algebra: expand and reduce double brackets'),
-                     ('answers_title', 'Answers'),
-                     ('exercise',
-                      [OrderedDict([('details_level', 'medium')]),
-                       OrderedDict([('text_exc',
-                                     'Expand and reduce the following '
-                                     'expressions:')]),
-                       OrderedDict([('text_ans',
-                                     'Example of detailed solutions:')]),
-                       'expand double -> intpairs_2to9;;intpairs_2to9 (5)'])])
+    assert isinstance(d, ordereddict)
+    assert isinstance(d, CommentedOrderedMap)
+    assert d == ordereddict([
+        ('title',
+         'Algebra: expand and reduce double brackets'),
+        ('answers_title', 'Answers'),
+        ('exercise',
+         ordereddict([('details_level', 'medium'),
+                      ('text_exc',
+                       'Expand and reduce the following '
+                       'expressions:'),
+                      ('text_ans',
+                       'Example of detailed solutions:'),
+                      ('questions',
+                       'expand double -> intpairs_2to9;;intpairs_2to9 (5)')
+                      ]))])
