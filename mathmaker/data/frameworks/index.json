@@ -1,4 +1,19 @@
 {
+    "01_white_multiplications": [
+        "mental_calculation",
+        "01_white",
+        "multiplications"
+    ],
+    "01_white_positional notation": [
+        "mental_calculation",
+        "01_white",
+        "positional notation"
+    ],
+    "01_white_exam": [
+        "mental_calculation",
+        "01_white",
+        "exam"
+    ],
     "expand_double": [
         "algebra",
         "expand",

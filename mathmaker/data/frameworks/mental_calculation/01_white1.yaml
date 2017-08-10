@@ -1,0 +1,17 @@
+multiplications:
+  - preset: "mental calculation"
+  - exercise:
+    - questions: multi direct -> intpairs_2to9 (20)
+
+positional notation:
+  - preset: "mental calculation"
+  - exercise:
+    - questions: rank direct -> rank_words (10)
+                 rank reversed -> rank_words (10)
+
+exam:
+  - preset: "mental calculation"
+  - exercise:
+    - questions: multi direct -> intpairs_2to9 (10)
+                 rank direct -> rank_words (5)
+                 rank reversed -> rank_words (5)
