@@ -25,12 +25,12 @@ import os
 import sys
 import logging
 import errno
-# from collections import OrderedDict
+from collections import OrderedDict
 # # from abc import ABCMeta, abstractmethod
 #
 # import yaml
 #
-# from mathmaker import settings
+from mathmaker import settings
 from mathmaker.lib.tools import ext_dict
 
 
@@ -98,3 +98,50 @@ def load_config(file_tag, settingsdir):
             except IOError:
                 pass
     return configuration
+
+
+def get_sheet(theme, subtheme, sheet_name):
+    """
+    Retrieve sheet data from yaml file.
+
+    :param theme: the theme where to find the sheet
+    :type theme: str
+    :param subtheme: the subtheme where to find the sheet
+    :type subtheme: str
+    :param sheet_name: the name of the sheet
+    :type sheet_name: str
+    :rtype: dict
+    """
+    import yaml
+    # Below snippet from https://stackoverflow.com/a/21048064/3926735
+    # to load roadmap.yaml using OrderedDict instead of dict
+    _mapping_tag = yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG
+
+    def dict_representer(dumper, data):
+        return dumper.represent_dict(data.items())
+
+    def dict_constructor(loader, node):
+        return OrderedDict(loader.construct_pairs(node))
+
+    yaml.add_representer(OrderedDict, dict_representer)
+    yaml.add_constructor(_mapping_tag, dict_constructor)
+
+    theme_dir = os.path.join(settings.frameworksdir, theme)
+    subtheme_file = os.path.join(settings.frameworksdir, theme,
+                                 subtheme + '.yaml')
+    if os.path.isdir(theme_dir):
+        if os.path.isfile(subtheme_file):
+            with open(subtheme_file) as file_path:
+                file_data = OrderedDict(yaml.load(file_path))
+                if sheet_name in file_data:
+                    return file_data[sheet_name]
+                else:
+                    raise ValueError('No sheet of this name ({}) in the '
+                                     'provided theme and subtheme ({}, {}).'
+                                     .format(sheet_name, theme, subtheme))
+        else:
+            raise IOError('Could not find the provided subtheme ({}) in the '
+                          'provided theme ({}).'.format(subtheme, theme))
+    else:
+        raise IOError('Could not find the provided theme ({}) among the '
+                      'frameworks.'.format(theme))
