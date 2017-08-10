@@ -26,11 +26,59 @@ from decimal import Decimal
 from mathmaker.lib.tools import \
     (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
      move_digits_to, split_nb, is_power_of_10, digits_nb, remove_digits_from,
-     fix_digits, parse_layout_descriptor, fix_math_style2_fontsize, ext_dict)
+     fix_digits, parse_layout_descriptor, fix_math_style2_fontsize, ext_dict,
+     parse_attr_string, expand_key, load_layout)
+from mathmaker.lib.constants import DEFAULT_LAYOUT
+
+
+def test_parse_attr_string():
+    """Check parse_attr_string() in various cases."""
+    assert parse_attr_string('rowxcol=?×2') == {'rowxcol': '?×2'}
+    assert parse_attr_string('spacing=') == {'spacing': ''}
+    assert parse_attr_string('rowxcol=?×2,  print=3 3, spacing=') \
+        == {'rowxcol': '?×2', 'print': '3 3', 'spacing': ''}
+    assert parse_attr_string('source=singleint_2to100;;intpairs_2to9, '
+                             'variant=2,3,6,7, required=true, ') \
+        == {'source': 'singleint_2to100;;intpairs_2to9', 'variant': '2,3,6,7',
+            'required': 'true'}
+
+
+def test_expand_key():
+    """Check expand_key() in various cases."""
+    assert expand_key('wordings', 'rowxcol=?×2,  print=3 3, spacing=') \
+        == [{'wordings': 'rowxcol=?×2'},
+            {'wordings': 'print=3 3'},
+            {'wordings': 'spacing='}]
+    assert expand_key('answers',
+                      'print=2, spacing=jump to next page, print=1') \
+        == [{'answers': 'print=2'},
+            {'answers': 'spacing=jump to next page'},
+            {'answers': 'print=1'}]
+
+
+def test_load_layout():
+    """Check layout is correctly loaded from formatted strings in dict."""
+    assert load_layout({}) == DEFAULT_LAYOUT
+    assert load_layout({'any attribute': 'any value'}) == DEFAULT_LAYOUT
+    layout_data = {'wordings': 'rowxcol=?×2,  print=5 5, spacing=25.0pt',
+                   'answers': 'rowxcol=?×2,  print=5 5'}
+    assert load_layout(layout_data) == \
+        {'exc': [['?', 9, 9], (5, 5)], 'ans': [['?', 9, 9], (5, 5)],
+         'spacing_w': '25.0pt', 'spacing_a': 'undefined'}
+    layout_data = {'wordings': 'rowxcol=?×2,  print=3 3, spacing=25.0pt',
+                   'answers': 'rowxcol=?×2,  print=3 3, spacing='}
+    assert load_layout(layout_data) == \
+        {'exc': [['?', 9, 9], (3, 3)], 'ans': [['?', 9, 9], (3, 3)],
+         'spacing_w': '25.0pt', 'spacing_a': ''}
+    layout_data = {'answers': 'print=2, spacing=jump to next page, print=1'}
+    assert load_layout(layout_data) == \
+        {'exc': [None, 'all'],
+         'ans': [None, 2, 'jump', 'next_page', None, 1],
+         'spacing_w': 'undefined', 'spacing_a': 'undefined'}
 
 
 def test_recursive_update():
-    """Checks recursive_update()"""
+    """Check recursive_update()"""
     d1 = ext_dict({'a': 1, 'b': 2,
                    'c': {'z': 26, 'y': 25, 'x': {1: 'a', 2: 'b'}}})
     d2 = ext_dict({'a': 11, 'c': {'y': 24, 'x': {2: 'f', 3: 'g'}, 'w': 23}})
@@ -41,7 +89,7 @@ def test_recursive_update():
 
 
 def test_flat():
-    """Checks flat()"""
+    """Check flat()"""
     d = ext_dict({'a': 1, 'b': 2,
                   'c': {'z': 26, 'y': 25, 'x': {1: 'a', 2: 64}}})
     assert d.flat() == {'a': 1, 'b': 2,

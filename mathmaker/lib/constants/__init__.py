@@ -38,6 +38,9 @@ EQUAL_PRODUCTS = {(2, 6): [(3, 4)],
                   (6, 6): [(4, 9), (3, 12)],
                   (3, 12): [(4, 9), (6, 6)]}
 
+DEFAULT_LAYOUT = {'exc': [None, 'all'], 'ans': [None, 'all'],
+                  'spacing_w': 'undefined', 'spacing_a': 'undefined'}
+
 DEFAULT = "default"
 RANDOMLY = "randomly"
 NUMERIC = "numeric"

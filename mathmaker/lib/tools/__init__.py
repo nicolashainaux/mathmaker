@@ -35,6 +35,8 @@ from operator import itemgetter
 from collections import OrderedDict
 import polib
 
+from mathmaker.lib.constants import DEFAULT_LAYOUT
+
 
 def read_index():
     from mathmaker import settings
@@ -212,6 +214,169 @@ def list_all_sheets():
             + '\n'
 
     return header + sheets_list
+
+
+def parse_attr_string(attr_string):
+    """
+    Turn an attribute string into a dictionary.
+
+
+    For instance, this string:  'rowxcol=?×2,  print=3 3, spacing='
+    will be turned into        {'rowxcol': '?×2',
+                                'print': '3 3',
+                                'spacing': ''}
+
+    this one:
+    'source=singleint_2to100;;intpairs_2to9, variant=2,3,6,7, required=true, '
+    into:    {'source': 'singleint_2to100;;intpairs_2to9',
+              'variant': '2,3,6,7',
+              'required': 'true'}
+
+    :param attr_string: the attributes formatted string
+    :type attr_string: str
+    :rtype: dict
+    """
+    attr_list = attr_string.strip(', ').split(sep=', ')
+    return {k: v
+            for couple in attr_list
+            for (k, v) in [couple.strip().split(sep='=')]}
+
+
+def expand_key(key, attr_string):
+    """
+    Will pair each attribute in the attr_string to the given key.
+
+    For instance, with
+    key = 'wordings' and attr_string = 'rowxcol=?×2,  print=3 3, spacing=',
+    will return [{'wordings': 'rowxcol=?×2'},
+                 {'wordings': 'print=3 3'},
+                 {'wordings': 'spacing='}]
+
+    and with
+    key = 'answers'
+    and attr_string = 'print=2, spacing=jump to next page, print=1'
+    will return [{'answers': 'print=2'},
+                 {'answers': 'spacing=jump to next page'},
+                 {'answers': 'print=1'}]
+
+    In this second case, a dictionary wouldn't have been enough to keep the
+    two different values of 'print' (the second one would have erased the
+    first one) nor would it have kept the order.
+
+    :param key: the key to expand
+    :type key: str
+    :param attr_string: the attributes formatted string
+    :type attr_string: str
+    :rtype: dict
+    """
+    attr_list = attr_string.strip(', ').split(sep=', ')
+    return [{key: v.strip()} for v in attr_list]
+
+
+def load_layout(data):
+    """
+    Create the layout dictionary from the raw data.
+
+    :param data: the dictionary loaded from YAML file
+    :type data: dict
+    :rtype: dict
+    """
+    layout = copy.deepcopy(DEFAULT_LAYOUT)
+    keep_default_w, keep_default_a = True, True
+    parts = []
+    for part in ['wordings', 'answers']:
+        if part in data:
+            if data[part].count('print') >= 2:
+                parts += expand_key(part, data[part])
+            else:
+                parts += [{part: data[part]}]
+    for chunk in parts:
+        if 'wordings' in chunk:
+            part = 'wordings'
+        elif 'answers' in chunk:
+            part = 'answers'
+        attributes = parse_attr_string(chunk[part])
+        s = attributes.get('spacing', 'undefined')
+        if s != 'jump to next page':
+            if part == 'wordings':
+                layout['spacing_w'] = s
+            if part == 'answers':
+                layout['spacing_a'] = s
+        # part is either wordings or answers
+        rowxcol = attributes.get('rowxcol', 'none')
+        distri = attributes.get('print', 'auto')
+        if rowxcol == 'none':
+            if distri == 'auto':
+                distri = 'all'
+            else:
+                try:
+                    distri = int(distri)
+                except ValueError:
+                    raise ValueError('XMLFileFormatError: a print '
+                                     'attribute cannot be turned into int.')
+            if not (s == 'jump to next page'
+                    and 'rowxcol' not in attributes
+                    and 'print' not in attributes):
+                if part == 'wordings':
+                    if keep_default_w:
+                        layout['exc'] = [None, distri]
+                        keep_default_w = False
+                    else:
+                        layout['exc'] += [None, distri]
+                else:
+                    if keep_default_a:
+                        layout['ans'] = [None, distri]
+                        keep_default_a = False
+                    else:
+                        layout['ans'] += [None, distri]
+        else:
+            nrow, ncol = parse_layout_descriptor(rowxcol, sep=['×', 'x'],
+                                                 special_row_chars=['?'])
+            colwidths = attributes.get('colwidths', 'auto')
+            if colwidths == 'auto':
+                colwidths = [int(18 // ncol) for _ in range(ncol)]
+            else:
+                colwidths = [int(n) for n in colwidths.split(sep=' ')]
+                if not len(colwidths) == ncol:
+                    raise ValueError(
+                        'XMLFileFormatError: in a <layout>, the number of'
+                        'columns '
+                        'widths does not match the number of cols in '
+                        'the rowxcol attribute.')
+            if part == 'wordings':
+                if keep_default_w:
+                    layout['exc'] = [[nrow, ] + colwidths]
+                    keep_default_w = False
+                else:
+                    layout['exc'].append([nrow, ] + colwidths)
+            else:
+                if keep_default_a:
+                    layout['ans'] = [[nrow, ] + colwidths]
+                    keep_default_a = False
+                else:
+                    layout['ans'].append([nrow, ] + colwidths)
+            if distri == 'auto':
+                distri = ' '.join(['1' for i in range(ncol * nrow)])
+            distri = distri.replace(',', ' ').replace(';', ' ')
+            distri = tuple(int(n) for n in distri.split())
+            if part == 'wordings':
+                layout['exc'].append(distri)
+            else:
+                layout['ans'].append(distri)
+        if s == 'jump to next page':
+            if part == 'wordings':
+                if keep_default_w:
+                    layout['exc'] = ['jump', 'next_page']
+                    keep_default_w = False
+                else:
+                    layout['exc'] += ['jump', 'next_page']
+            if part == 'answers':
+                if keep_default_a:
+                    layout['ans'] = ['jump', 'next_page']
+                    keep_default_a = False
+                else:
+                    layout['ans'] += ['jump', 'next_page']
+    return layout
 
 
 def is_number(n):

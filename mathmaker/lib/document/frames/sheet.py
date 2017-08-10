@@ -20,11 +20,18 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import copy
+
 from mathmaker.lib import shared
+from mathmaker.lib.tools.yaml_reader import load_sheet
 from mathmaker.lib.document.frames import Exercise
+from mathmaker.lib.document.frames.utils import load_layout
+
+DEFAULT_SHEET_LAYOUT = {'type': 'default', 'unit': 'cm',
+                        'font_size_offset': '0',
+                        'wordings': '', 'answers': ''}
 
 
-# @brief Create a sheet matching the given xml file.
 class Sheet(object):
 
     # --------------------------------------------------------------------------
@@ -35,17 +42,34 @@ class Sheet(object):
     def __init__(self, filename, **options):
         from mathmaker.lib.tools.xml import get_sheet_config
         from mathmaker.lib.tools.xml import get_exercises_list
+        # from mathmaker.lib.tools.yaml_reader import load_sheet
 
-        (header,
-         title,
-         subtitle,
-         text,
-         answers_title,
-         sheet_layout_type,
-         font_size_offset,
-         sheet_layout_unit,
-         sheet_layout,
-         self.preset) = get_sheet_config(filename)
+        if 'key' in options:
+            data = load_sheet(*options['key'])
+            header = data.get('header', '')
+            title = data.get('title', '')
+            subtitle = data.get('subtitle', '')
+            text = data.get('text', '')
+            answers_title = data.get('answers_title', '')
+            self.preset = data.get('preset', 'default')
+            loaded_layout_data = data.get('layout', DEFAULT_SHEET_LAYOUT)
+            layout_data = copy.deepcopy(DEFAULT_SHEET_LAYOUT)
+            layout_data.update(loaded_layout_data)
+            self.sheet_layout_type = layout_data['type']
+            self.sheet_layout_unit = layout_data['unit']
+            font_size_offset = layout_data['font_size_offset']
+            sheet_layout = load_layout(layout_data)
+        else:
+            (header,
+             title,
+             subtitle,
+             text,
+             answers_title,
+             self.sheet_layout_type,
+             font_size_offset,
+             self.sheet_layout_unit,
+             sheet_layout,
+             self.preset) = get_sheet_config(filename)
 
         if self.preset == 'mental calculation':
             presets = {'write_ex_titles': False}
@@ -55,8 +79,6 @@ class Sheet(object):
         self.exercises_list = list()
         shared.machine.set_font_size_offset(font_size_offset)
 
-        self.sheet_layout_unit = sheet_layout_unit
-        self.layout_type = sheet_layout_type
         self.write_texts_twice = False
 
         if 'write_texts_twice' in options and options['write_texts_twice']:
