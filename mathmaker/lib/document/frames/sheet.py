@@ -23,7 +23,7 @@
 import copy
 
 from mathmaker.lib import shared
-from mathmaker.lib.tools.frameworks import load_sheet, load_layout
+from mathmaker.lib.tools.frameworks import load_sheet, read_layout
 from mathmaker.lib.document.frames import Exercise
 
 DEFAULT_SHEET_LAYOUT = {'type': 'default', 'unit': 'cm',
@@ -57,7 +57,7 @@ class Sheet(object):
             self.layout_type = layout_data['type']
             self.sheet_layout_unit = layout_data['unit']
             font_size_offset = layout_data['font_size_offset']
-            sheet_layout = load_layout(layout_data)
+            sheet_layout = read_layout(layout_data)
         else:
             (header,
              title,

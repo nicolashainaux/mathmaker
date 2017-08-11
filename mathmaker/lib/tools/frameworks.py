@@ -268,7 +268,7 @@ def split_attr_in_pages(key, attr_string):
     return [{key: p} for p in pages]
 
 
-def load_layout(data):
+def read_layout(data):
     """
     Create the layout dictionary from the raw data.
 

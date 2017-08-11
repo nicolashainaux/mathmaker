@@ -29,7 +29,7 @@ from ruamel.yaml.compat import ordereddict
 from ruamel.yaml.comments import CommentedOrderedMap
 
 from mathmaker.lib.tools.frameworks import load_sheet, parse_attr_string
-from mathmaker.lib.tools.frameworks import split_attr_in_pages, load_layout
+from mathmaker.lib.tools.frameworks import split_attr_in_pages, read_layout
 from mathmaker.lib.constants import DEFAULT_LAYOUT
 
 
@@ -57,22 +57,22 @@ def test_split_attr_in_pages():
             {'answers': 'print=1'}]
 
 
-def test_load_layout():
+def test_read_layout():
     """Check layout is correctly loaded from formatted strings in dict."""
-    assert load_layout({}) == DEFAULT_LAYOUT
-    assert load_layout({'any attribute': 'any value'}) == DEFAULT_LAYOUT
+    assert read_layout({}) == DEFAULT_LAYOUT
+    assert read_layout({'any attribute': 'any value'}) == DEFAULT_LAYOUT
     layout_data = {'wordings': 'rowxcol=?×2,  print=5 5, spacing=25.0pt',
                    'answers': 'rowxcol=?×2,  print=5 5'}
-    assert load_layout(layout_data) == \
+    assert read_layout(layout_data) == \
         {'exc': [['?', 9, 9], (5, 5)], 'ans': [['?', 9, 9], (5, 5)],
          'spacing_w': '25.0pt', 'spacing_a': 'undefined'}
     layout_data = {'wordings': 'rowxcol=?×2,  print=3 3, spacing=25.0pt',
                    'answers': 'rowxcol=?×2,  print=3 3, spacing='}
-    assert load_layout(layout_data) == \
+    assert read_layout(layout_data) == \
         {'exc': [['?', 9, 9], (3, 3)], 'ans': [['?', 9, 9], (3, 3)],
          'spacing_w': '25.0pt', 'spacing_a': ''}
     layout_data = {'answers': 'print=2, spacing=jump to next page, print=1'}
-    assert load_layout(layout_data) == \
+    assert read_layout(layout_data) == \
         {'exc': [None, 'all'],
          'ans': [None, 2, 'jump', 'next_page', None, 1],
          'spacing_w': 'undefined', 'spacing_a': 'undefined'}
