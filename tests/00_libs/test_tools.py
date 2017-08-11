@@ -46,7 +46,7 @@ def test_parse_attr_string():
 def test_split_attr_in_pages():
     """Check split_attr_in_pages() in various cases."""
     assert split_attr_in_pages(
-        'wordings', 'rowxcol=?×2,  print=3 3, spacing=') \
+        'wordings', 'rowxcol=?×2, print=3 3, spacing=') \
         == [{'wordings': 'rowxcol=?×2, print=3 3, spacing='}]
     assert split_attr_in_pages('answers',
                                'print=2, spacing=jump to next page, '

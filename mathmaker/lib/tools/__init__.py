@@ -247,7 +247,7 @@ def split_attr_in_pages(key, attr_string):
     Split attr_string and expand key for each new page found in attr_string.
 
     For instance, with
-    key = 'wordings' and attr_string = 'rowxcol=?×2,  print=3 3, spacing=',
+    key = 'wordings' and attr_string = 'rowxcol=?×2, print=3 3, spacing=',
     will return [{'wordings': 'rowxcol=?×2, print=3 3, spacing='}]
 
     while with
@@ -266,27 +266,11 @@ def split_attr_in_pages(key, attr_string):
     :type attr_string: str
     :rtype: dict
     """
-    attr_list = attr_string.strip(', ').split(sep=', ')
-    attr_list = [a.strip() for a in attr_list]
-    result = []
-    current = ''
-    found_jump = False
-    for a in attr_list:
-        print(a)
-        if found_jump:
-            found_jump = False
-            current = a
-        else:
-            if current == '':
-                current = a
-            else:
-                current = ', '.join([current, a])
-        if 'jump to next page' in a:
-            found_jump = True
-            result += [{key: current}]
-        elif a == attr_list[-1]:
-            result += [{key: current}]
-    return result
+    pages = attr_string.strip(', ').split(sep='spacing=jump to next page')
+    pages = [p.strip(', ') for p in pages]
+    pages = [p + ', spacing=jump to next page' for p in pages[:-1]] \
+        + [pages[-1]]
+    return [{key: p} for p in pages]
 
 
 def load_layout(data):
