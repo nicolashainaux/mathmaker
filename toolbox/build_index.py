@@ -26,7 +26,7 @@ This script forces the rebuild of the index.json file.
 """
 
 from mathmaker import settings
-from mathmaker.lib.tools import build_index
+from mathmaker.lib.tools.frameworks import build_index
 
 settings.init()
 

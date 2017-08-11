@@ -23,9 +23,8 @@
 import copy
 
 from mathmaker.lib import shared
-from mathmaker.lib.tools.yaml_reader import load_sheet
+from mathmaker.lib.tools.frameworks import load_sheet, load_layout
 from mathmaker.lib.document.frames import Exercise
-from mathmaker.lib.document.frames.utils import load_layout
 
 DEFAULT_SHEET_LAYOUT = {'type': 'default', 'unit': 'cm',
                         'font_size_offset': '0',
@@ -42,7 +41,7 @@ class Sheet(object):
     def __init__(self, filename, **options):
         from mathmaker.lib.tools.xml import get_sheet_config
         from mathmaker.lib.tools.xml import get_exercises_list
-        # from mathmaker.lib.tools.yaml_reader import load_sheet
+        # from mathmaker.lib.tools.frameworks import load_sheet
 
         if 'key' in options:
             data = load_sheet(*options['key'])
@@ -55,7 +54,7 @@ class Sheet(object):
             loaded_layout_data = data.get('layout', DEFAULT_SHEET_LAYOUT)
             layout_data = copy.deepcopy(DEFAULT_SHEET_LAYOUT)
             layout_data.update(loaded_layout_data)
-            self.sheet_layout_type = layout_data['type']
+            self.layout_type = layout_data['type']
             self.sheet_layout_unit = layout_data['unit']
             font_size_offset = layout_data['font_size_offset']
             sheet_layout = load_layout(layout_data)
@@ -65,7 +64,7 @@ class Sheet(object):
              subtitle,
              text,
              answers_title,
-             self.sheet_layout_type,
+             self.layout_type,
              font_size_offset,
              self.sheet_layout_unit,
              sheet_layout,
@@ -182,14 +181,17 @@ class Sheet(object):
         self.text = _(text) if text != "" else ""
         self.answers_title = _(answers_title) if answers_title != "" else ""
 
-        for ex in get_exercises_list(filename):
-            ex_kwargs = ex[2]
-            if self.preset != 'default':
-                ex_kwargs.update({'preset': self.preset})
-            self.exercises_list.append(Exercise(q_list=ex[0],
-                                                x_layout=ex[1][1],
-                                                x_config=ex[1][0],
-                                                **ex_kwargs))
+        if 'key' in options:
+            pass
+        else:
+            for ex in get_exercises_list(filename):
+                ex_kwargs = ex[2]
+                if self.preset != 'default':
+                    ex_kwargs.update({'preset': self.preset})
+                self.exercises_list.append(Exercise(q_list=ex[0],
+                                                    x_layout=ex[1][1],
+                                                    x_config=ex[1][0],
+                                                    **ex_kwargs))
 
     #   @brief Writes the whole sheet's content to the output.
     def __str__(self):
