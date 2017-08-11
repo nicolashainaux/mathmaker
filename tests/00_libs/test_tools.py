@@ -27,7 +27,7 @@ from mathmaker.lib.tools import \
     (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
      move_digits_to, split_nb, is_power_of_10, digits_nb, remove_digits_from,
      fix_digits, parse_layout_descriptor, fix_math_style2_fontsize, ext_dict,
-     parse_attr_string, expand_key, load_layout)
+     parse_attr_string, split_attr_in_pages, load_layout)
 from mathmaker.lib.constants import DEFAULT_LAYOUT
 
 
@@ -43,16 +43,15 @@ def test_parse_attr_string():
             'required': 'true'}
 
 
-def test_expand_key():
-    """Check expand_key() in various cases."""
-    assert expand_key('wordings', 'rowxcol=?×2,  print=3 3, spacing=') \
-        == [{'wordings': 'rowxcol=?×2'},
-            {'wordings': 'print=3 3'},
-            {'wordings': 'spacing='}]
-    assert expand_key('answers',
-                      'print=2, spacing=jump to next page, print=1') \
-        == [{'answers': 'print=2'},
-            {'answers': 'spacing=jump to next page'},
+def test_split_attr_in_pages():
+    """Check split_attr_in_pages() in various cases."""
+    assert split_attr_in_pages(
+        'wordings', 'rowxcol=?×2,  print=3 3, spacing=') \
+        == [{'wordings': 'rowxcol=?×2, print=3 3, spacing='}]
+    assert split_attr_in_pages('answers',
+                               'print=2, spacing=jump to next page, '
+                               'print=1') \
+        == [{'answers': 'print=2, spacing=jump to next page'},
             {'answers': 'print=1'}]
 
 

@@ -242,21 +242,18 @@ def parse_attr_string(attr_string):
             for (k, v) in [couple.strip().split(sep='=')]}
 
 
-def expand_key(key, attr_string):
+def split_attr_in_pages(key, attr_string):
     """
-    Will pair each attribute in the attr_string to the given key.
+    Split attr_string and expand key for each new page found in attr_string.
 
     For instance, with
     key = 'wordings' and attr_string = 'rowxcol=?×2,  print=3 3, spacing=',
-    will return [{'wordings': 'rowxcol=?×2'},
-                 {'wordings': 'print=3 3'},
-                 {'wordings': 'spacing='}]
+    will return [{'wordings': 'rowxcol=?×2, print=3 3, spacing='}]
 
-    and with
+    while with
     key = 'answers'
     and attr_string = 'print=2, spacing=jump to next page, print=1'
-    will return [{'answers': 'print=2'},
-                 {'answers': 'spacing=jump to next page'},
+    will return [{'answers': 'print=2, spacing=jump to next page'},
                  {'answers': 'print=1'}]
 
     In this second case, a dictionary wouldn't have been enough to keep the
@@ -270,7 +267,26 @@ def expand_key(key, attr_string):
     :rtype: dict
     """
     attr_list = attr_string.strip(', ').split(sep=', ')
-    return [{key: v.strip()} for v in attr_list]
+    attr_list = [a.strip() for a in attr_list]
+    result = []
+    current = ''
+    found_jump = False
+    for a in attr_list:
+        print(a)
+        if found_jump:
+            found_jump = False
+            current = a
+        else:
+            if current == '':
+                current = a
+            else:
+                current = ', '.join([current, a])
+        if 'jump to next page' in a:
+            found_jump = True
+            result += [{key: current}]
+        elif a == attr_list[-1]:
+            result += [{key: current}]
+    return result
 
 
 def load_layout(data):
@@ -286,22 +302,22 @@ def load_layout(data):
     parts = []
     for part in ['wordings', 'answers']:
         if part in data:
-            if data[part].count('print') >= 2:
-                parts += expand_key(part, data[part])
-            else:
-                parts += [{part: data[part]}]
+            parts += split_attr_in_pages(part, data[part])
     for chunk in parts:
         if 'wordings' in chunk:
             part = 'wordings'
         elif 'answers' in chunk:
             part = 'answers'
         attributes = parse_attr_string(chunk[part])
-        s = attributes.get('spacing', 'undefined')
-        if s != 'jump to next page':
-            if part == 'wordings':
-                layout['spacing_w'] = s
-            if part == 'answers':
-                layout['spacing_a'] = s
+        s = None
+        if 'spacing' in attributes:
+            # if it is not, it's already set to 'undefined', by default
+            s = attributes.get('spacing')
+            if s != 'jump to next page':
+                if part == 'wordings':
+                    layout['spacing_w'] = s
+                if part == 'answers':
+                    layout['spacing_a'] = s
         # part is either wordings or answers
         rowxcol = attributes.get('rowxcol', 'none')
         distri = attributes.get('print', 'auto')
@@ -363,7 +379,7 @@ def load_layout(data):
                 layout['exc'].append(distri)
             else:
                 layout['ans'].append(distri)
-        if s == 'jump to next page':
+        if 'spacing' in attributes and s == 'jump to next page':
             if part == 'wordings':
                 if keep_default_w:
                     layout['exc'] = ['jump', 'next_page']
