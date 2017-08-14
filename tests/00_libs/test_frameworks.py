@@ -35,8 +35,24 @@ from mathmaker.lib.tools.frameworks import _read_mix_question, _read_mix_nb
 from mathmaker.lib.constants import DEFAULT_LAYOUT
 
 
+def test_AttrStr_parse_warnings():
+    """Check parse() raises proper warnings in proper cases."""
+    with pytest.warns(None) as record:
+        _AttrStr('').parse()
+    assert len(record) == 0
+    with pytest.warns(UserWarning) as record:
+        _AttrStr('rowxcol=?×2,  , spacing=').parse()
+    assert len(record) == 1
+    assert str(record[0].message) == "Ignoring malformed attributes' string" \
+        " (missing =, or empty space between two commas) " \
+        "in 'rowxcol=?×2,  , spacing='."
+
+
 def test_AttrStr_parse():
     """Check parse() in various cases."""
+    assert _AttrStr('').parse() == {}
+    assert _AttrStr('rowxcol=?×2,  , spacing=').parse() \
+        == {'rowxcol': '?×2', 'spacing': ''}
     assert _AttrStr('rowxcol=?×2').parse() == {'rowxcol': '?×2'}
     assert _AttrStr('spacing=').parse() == {'spacing': ''}
     assert _AttrStr('rowxcol=?×2,  print=3 3, spacing=').parse() \

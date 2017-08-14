@@ -250,8 +250,12 @@ class _AttrStr(str):
         :rtype: dict
         """
         attr_list = self.strip(', ').split(sep=', ')
+        if not all(('=' in couple or couple == '') for couple in attr_list):
+            warnings.warn('Ignoring malformed attributes\' string '
+                          '(missing =, or empty space between two commas) '
+                          'in \'{}\'.'.format(self))
         return {k: v
-                for couple in attr_list
+                for couple in attr_list if '=' in couple
                 for (k, v) in [couple.strip().split(sep='=')]}
 
     def split_in_pages(self, key):
