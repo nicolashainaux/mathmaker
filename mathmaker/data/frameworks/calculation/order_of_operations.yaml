@@ -1,0 +1,66 @@
+# Possible variants:
+#    Identified using either a natural number:
+#    - between 0 and 23 (included) for calculation without parentheses,
+#    - between 100 and 187 (included) for calculation with parentheses
+#    or a mix of natural numbers and ranges (compatible with intspan, see
+#    https://pypi.python.org/pypi/intspan).
+#    See in calculation_modules/calculation_order_of_operations_*.py to
+#    know the different variants.
+#    If variant is not defined, it will be considered, by default, as the
+#    range 0-23,100-187.
+#    Possible subvariants:
+#    - only_positive: even the results must be natural numbers
+#    - no variant given: numbers used will still only be positive, but the
+#                        results can be negative
+#    - allow_negative_numbers: random numbers will be negative
+#    Depending on the exact kind of question, the numbers source can require
+#    single numbers and/or pairs of numbers (for products etc.), mathmaker
+#    will use as many sources as required of each type, but you must provide
+#    what kind of sources must be used both for single integers and for pairs
+#    of integers, so you must put TWO sources and not only one.
+
+positive_numbers: !!omap
+  - title: "Calculation: order of precedence."
+  - layout:
+    - answers: print=2,
+               spacing=jump to next page,
+               print=1
+  - exercise1: !!omap
+    - layout:
+      - wordings: rowxcol=?×2, print=3 3, spacing=25.0pt
+      - answers: rowxcol=?×2, print=3 3, spacing=
+    - text_exc: "Calculate:"
+    - mix:
+      - question: calculation order_of_operations, subvariant=only_positive, pick=6, spacing=15.0pt
+      - nb: singleint_5to20;;intpairs_2to9, variant=0, required=true (1)
+            singleint_2to9;;intpairs_2to9, variant=1,3,5,7, required=true (1)
+            singleint_2to100;;intpairs_2to9, variant=2,3,6,7, required=true (1)
+            singleint_2to9;;intpairs_2to9, variant=0-7, (8)
+  - exercise2: !!omap
+    - layout:
+      - wordings: rowxcol=?×2, print=4 4, spacing=25.0pt
+      - answers: rowxcol=?×2, print=4 4
+    - text_exc: "Now the expressions may have parentheses. Calculate them:"
+    - mix:
+      - question: calculation order_of_operations, subvariant=only_positive, pick=8, spacing=15.0pt
+      - nb: singleint_3to12;;intpairs_2to9, variant=8-23, required=true (2)
+            singleint_3to12;;intpairs_2to9, variant=116-155, required=true (1)
+            singleint_3to12;;intpairs_2to9, variant=156-187, required=true (1)
+            singleint_3to12;;intpairs_2to9, variant=8-23,100-187, (4)
+  - exercise3: !!omap
+    - layout:
+      - wordings: rowxcol=?×2, print=5 5, spacing=25.0pt
+      - answers: rowxcol=?×2, print=5 5
+    - text_exc: "Same exercise, but with decimal numbers. Calculate:"
+    - mix0:
+      - question: calculation order_of_operations, subvariant=only_positive, pick=4, nb_variant=decimal1, spacing=15.0pt
+      - nb: singleint_5to20;;intpairs_2to9, variant=0, required=true (1)
+            singleint_5to20;;intpairs_2to9, variant=1,3,5,7, required=true (1)
+            singleint_5to20;;intpairs_2to9, variant=2,3,6,7, required=true (1)
+            singleint_5to20;;intpairs_2to9, variant=0-7, required=true (1)
+    - mix1:
+      - question: calculation order_of_operations, subvariant=only_positive, pick=6, nb_variant=decimal1, spacing=15.0pt
+      - nb: singleint_3to12;;intpairs_2to9, variant=8-23, required=true (2)
+            singleint_3to12;;intpairs_2to9, variant=116-155, required=true (1)
+            singleint_3to12;;intpairs_2to9, variant=156-187, required=true (1)
+            singleint_3to12;;intpairs_2to9, variant=8-23,100-187 (2)
