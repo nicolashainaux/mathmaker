@@ -59,6 +59,12 @@ class Sheet(object):
             self.sheet_layout_unit = layout_data['unit']
             font_size_offset = layout_data['font_size_offset']
             sheet_layout = read_layout(layout_data)
+            try:
+                font_size_offset = int(font_size_offset)
+            except ValueError:
+                raise ValueError('YAML file format error: expected an integer'
+                                 'as font_size_offset value, got {} instead.'
+                                 .format(str(type(font_size_offset))))
         else:
             (header,
              title,

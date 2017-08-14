@@ -588,7 +588,7 @@ automatically increments the counter").format(cmd_name="exercise",
     ##
     #   @brief Sets the font_size_offset field
     def set_font_size_offset(self, arg):
-        if not is_integer(arg):
+        if not (is_number(arg) and is_integer(arg)):
             raise TypeError('Got: ' + str(type(arg))
                             + ' instead of an integer')
 
