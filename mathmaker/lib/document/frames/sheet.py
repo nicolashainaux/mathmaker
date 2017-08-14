@@ -44,15 +44,32 @@ class Sheet(object):
         from mathmaker.lib.tools.xml import get_exercises_list
         # from mathmaker.lib.tools.frameworks import load_sheet
         filename = options.get('filename', None)
+        self.preset = 'default'
+        # default presets
+        presets = {'default':
+                   {'write_ex_titles': True,
+                    'header': '',
+                    'title': '',
+                    'subtitle': '',
+                    'text': '',
+                    'answers_title': _('Answers')},
+                   'mental calculation':
+                   {'write_ex_titles': False,
+                    'header': '',
+                    'title': '',
+                    'subtitle': '',
+                    'text': '',
+                    'answers_title': _('Answers')}}
 
         if filename is None:
             data = load_sheet(theme, subtheme, sheet_name)
-            header = data.get('header', '')
-            title = data.get('title', '')
-            subtitle = data.get('subtitle', '')
-            text = data.get('text', '')
-            answers_title = data.get('answers_title', '')
             self.preset = data.get('preset', 'default')
+            header = data.get('header', presets[self.preset]['header'])
+            title = data.get('title', presets[self.preset]['title'])
+            subtitle = data.get('subtitle', presets[self.preset]['subtitle'])
+            text = data.get('text', presets[self.preset]['text'])
+            answers_title = data.get('answers_title',
+                                     presets[self.preset]['answers_title'])
             loaded_layout_data = data.get('layout', DEFAULT_SHEET_LAYOUT)
             layout_data = copy.deepcopy(DEFAULT_SHEET_LAYOUT)
             layout_data.update(loaded_layout_data)
@@ -78,11 +95,7 @@ class Sheet(object):
              sheet_layout,
              self.preset) = get_sheet_config(filename)
 
-        if self.preset == 'mental calculation':
-            presets = {'write_ex_titles': False}
-        else:  # if self.preset == 'default':
-            presets = {'write_ex_titles': True}
-        self.write_ex_titles = presets.get('write_ex_titles')
+        self.write_ex_titles = presets[self.preset].get('write_ex_titles')
         self.exercises_list = list()
         shared.machine.set_font_size_offset(font_size_offset)
 

@@ -143,14 +143,11 @@ def test_load_sheet():
     assert d == ordereddict([
         ('title',
          'Algebra: expand and reduce double brackets'),
-        ('answers_title', 'Answers'),
         ('exercise',
          ordereddict([('details_level', 'medium'),
                       ('text_exc',
                        'Expand and reduce the following '
                        'expressions:'),
-                      ('text_ans',
-                       'Example of detailed solutions:'),
                       ('questions',
                        'expand double -> intpairs_2to9;;intpairs_2to9 (5)')
                       ]))])

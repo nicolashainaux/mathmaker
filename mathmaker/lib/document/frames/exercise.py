@@ -379,12 +379,14 @@ class Exercise(object):
             presets = {'layout_variant': 'default',
                        'shuffle': 'false',
                        'q_spacing': 'undefined',
-                       'details_level': 'maximum'}
+                       'details_level': 'maximum',
+                       'text_ans': 'Example of detailed solutions:'}
         elif self.preset == 'mental calculation':
             presets = {'layout_variant': 'tabular',
                        'shuffle': 'true',
                        'q_spacing': '',
-                       'details_level': 'none'}
+                       'details_level': 'none',
+                       'text_ans': ''}
 
         self.layout_variant = options.get('layout_variant',
                                           presets.get('layout_variant'))
@@ -459,7 +461,7 @@ class Exercise(object):
                             {key: shared.machine.addvspace(height=s)})
 
         self.text = {'exc': options.get('text_exc', ''),
-                     'ans': options.get('text_ans', '')}
+                     'ans': options.get('text_ans', presets['text_ans'])}
         if self.text['exc'] != '':
             self.text['exc'] = _(self.text['exc'])
         if self.text['ans'] != '':
