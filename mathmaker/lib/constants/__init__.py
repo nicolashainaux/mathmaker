@@ -22,7 +22,7 @@
 
 import random
 
-XML_BOOLEANS = {'true': lambda: True,
+STR_BOOLEANS = {'true': lambda: True,
                 'false': lambda: False,
                 'random': lambda: random.choice([True, False])}
 

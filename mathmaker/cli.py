@@ -33,13 +33,14 @@ from mathmaker.lib.document.frames import Sheet
 from mathmaker.lib.tools.ignition \
     import (check_dependencies, install_gettext_translations,
             check_settings_consistency)
-from mathmaker.lib.tools import list_all_sheets
+from mathmaker.lib.tools.frameworks import list_all_sheets, read_index
 from mathmaker.lib.tools.xml import get_xml_sheets_paths
 
 
 def entry_point():
     settings.init()
     XML_SHEETS = get_xml_sheets_paths()
+    YAML_SHEETS = read_index()
     log = settings.mainlogger
     check_dependencies(euktoeps=settings.euktoeps,
                        xmllint=settings.xmllint,
@@ -107,10 +108,14 @@ def entry_point():
     elif args.main_directive in old_style_sheet.AVAILABLE:
         sh = old_style_sheet.AVAILABLE[args.main_directive][0]()
     else:
+        build_from_yaml = False
         if args.main_directive in XML_SHEETS:
             fn = XML_SHEETS[args.main_directive]
         elif os.path.isfile(args.main_directive):
             fn = args.main_directive
+        elif args.main_directive in YAML_SHEETS:
+            fn = YAML_SHEETS[args.main_directive]
+            build_from_yaml = True
         else:
             log.error(args.main_directive
                       + " is not a correct directive for " + __software_name__
@@ -120,7 +125,10 @@ def entry_point():
             #      .format(sec=round(time.time() - start_time, 3)))
             shared.db.close()
             sys.exit(1)
-        sh = Sheet(filename=fn)
+        if build_from_yaml:
+            sh = Sheet(filename=fn, key=fn)
+        else:
+            sh = Sheet(filename=fn)
 
     try:
         shared.machine.write_out(str(sh), pdf_output=args.pdf_output)

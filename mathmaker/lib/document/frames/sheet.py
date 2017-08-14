@@ -24,6 +24,7 @@ import copy
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools.frameworks import load_sheet, read_layout
+from mathmaker.lib.tools.frameworks import build_exercises_list
 from mathmaker.lib.document.frames import Exercise
 
 DEFAULT_SHEET_LAYOUT = {'type': 'default', 'unit': 'cm',
@@ -182,7 +183,10 @@ class Sheet(object):
         self.answers_title = _(answers_title) if answers_title != "" else ""
 
         if 'key' in options:
-            pass
+            for e_data in build_exercises_list(data):
+                if self.preset != 'default' and 'preset' not in e_data:
+                    e_data.update({'preset': self.preset})
+                self.exercises_list.append(Exercise(data=e_data))
         else:
             for ex in get_exercises_list(filename):
                 ex_kwargs = ex[2]

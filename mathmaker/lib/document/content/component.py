@@ -32,7 +32,7 @@ from mathmaker.lib.core.geometry import (Rectangle, Square, RightTriangle,
                                          InterceptTheoremConfiguration,
                                          RectangleGrid)
 from mathmaker.lib import shared
-from mathmaker.lib.constants import XML_BOOLEANS
+from mathmaker.lib.constants import STR_BOOLEANS
 from mathmaker.lib.constants.units import COMMON_LENGTH_UNITS
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.tools \
@@ -68,10 +68,10 @@ class structure(object):
         self.subvariant = kwargs.get('subvariant', 'default')
         self.nb_variant = kwargs.get('nb_variant', 'default')
         self.context = kwargs.get('context', 'default')
-        self.picture = XML_BOOLEANS[kwargs.get('picture', 'false')]()
+        self.picture = STR_BOOLEANS[kwargs.get('picture', 'false')]()
         self.decimal_result = int(kwargs.get('decimal_result', 2))
         self.allow_extra_digits = int(kwargs.get('allow_extra_digits', 0))
-        self.allow_division_by_decimal = XML_BOOLEANS[
+        self.allow_division_by_decimal = STR_BOOLEANS[
             kwargs.get('allow_division_by_decimal', 'false')]()
 
     def _setup_length_units(self, **kwargs):

@@ -33,8 +33,10 @@ from mathmaker.lib import shared
 from mathmaker.lib.tools import is_integer
 from mathmaker.lib.tools.maths import coprimes_to
 from mathmaker.lib.tools.xml import parse_qid
-from .question import Question, get_modifier
-from mathmaker.lib.constants import XML_BOOLEANS
+from mathmaker.lib.tools.frameworks import read_layout, build_questions_list
+from mathmaker.lib.tools.frameworks import get_q_modifier
+from .question import Question
+from mathmaker.lib.constants import STR_BOOLEANS
 from mathmaker.lib.constants.content \
     import SUBKINDS_TO_UNPACK, UNPACKABLE_SUBKINDS, SOURCES_TO_UNPACK
 
@@ -396,7 +398,7 @@ class Exercise(object):
 
         self.q_spacing = options.get('q_spacing', presets.get('q_spacing'))
         self.q_numbering = options.get('q_numbering', 'disabled')
-        self.shuffle = XML_BOOLEANS[options.get('shuffle',
+        self.shuffle = STR_BOOLEANS[options.get('shuffle',
                                                 presets.get('shuffle'))]()
 
         self.details_level = options.get('details_level',
@@ -464,10 +466,28 @@ class Exercise(object):
             self.text['ans'] = _(self.text['ans'])
 
     def __init__(self, **options):
-        # Setup self attributes according to options
-        self.setup(**options)
+        if 'data' in options:
+            # TODO: all these options for setup may be simplified once
+            # reading a xml sheet is not required anymore: self.x_layout
+            # may be directly set in setup(), via the same instruction than
+            # below and the spacing_w and spacing_a attributes, inside setup(),
+            # may be checked from self.x_layout directlyn there's no need for
+            # x_config anymore.
+            x_layout = read_layout(options['data'].get('layout', {}))
+            x_config = {'spacing_w': x_layout.get('spacing_w', 'undefined'),
+                        'spacing_a': x_layout.get('spacing_a', 'undefined')}
+            self.setup(x_layout=x_layout,
+                       x_config=x_config,
+                       **{k: options['data'][k]
+                          for k in options['data']
+                          if (not k.startswith('question')
+                              and not k.startswith('mix'))})
+            q_list = build_questions_list(options['data'])
+        else:
+            # Setup self attributes according to options
+            self.setup(**options)
+            q_list = options.get('q_list')
 
-        q_list = options.get('q_list')
         # From q_list, we build a dictionary and then a complete questions'
         # list:
         q_dict, self.q_nb = build_q_dict(q_list)
@@ -518,13 +538,13 @@ class Exercise(object):
                             .next(nb_source,
                                   nb1=last_draw[0],
                                   nb2_in=coprimes,
-                                  **get_modifier(q.id, nb_source),
+                                  **get_q_modifier(q.id, nb_source),
                                   **xkw)
                     else:
                         second_couple_drawn = shared.mc_source\
                             .next(nb_source,
                                   either_nb1_nb2_in=last_draw,
-                                  **get_modifier(q.id, nb_source),
+                                  **get_q_modifier(q.id, nb_source),
                                   **xkw)
                     common_nb = get_common_nb_from_pairs_pair(
                         (nb_to_use, second_couple_drawn))
@@ -538,13 +558,13 @@ class Exercise(object):
                         new_couple_drawn = shared.mc_source\
                             .next(nb_source,
                                   triangle_inequality=nb_to_use,
-                                  **get_modifier(q.id, nb_source),
+                                  **get_q_modifier(q.id, nb_source),
                                   **xkw)
                     else:
                         new_couple_drawn = shared.mc_source\
                             .next(nb_source,
                                   either_nb1_nb2_in=[common_nb],
-                                  **get_modifier(q.id, nb_source),
+                                  **get_q_modifier(q.id, nb_source),
                                   **xkw)
                     nb_to_use = merge_pair_to_tuple(nb_to_use,
                                                     new_couple_drawn,
@@ -552,7 +572,7 @@ class Exercise(object):
                 else:
                     drawn = shared.mc_source.next(nb_source,
                                                   not_in=last_draw,
-                                                  **get_modifier(
+                                                  **get_q_modifier(
                                                       q.id, nb_source),
                                                   **xkw)
                     if isinstance(drawn, int):

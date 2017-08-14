@@ -20,105 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import warnings
-
 from mathmaker.lib import shared
-from mathmaker.lib.constants import EQUAL_PRODUCTS
 from mathmaker.lib.document.content import algebra, calculation, geometry
 
 ALL_MODULES = (algebra, calculation, geometry)
-
-
-def match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
-    """
-    Tell if the given question's id and source number do match.
-
-    This is used in mix sections only, yet.
-
-    :param q_id: the question's id (kind_subkind)
-    :param source_nb: the source of the numbers
-    :param variant: the variant of the numbers' source / question, if available
-    """
-    #   @todo   The 'integer_3_10_decimal_3_10' may be later turned into
-    #           'intpairs_3to10' with variant='decimal1', so this condition can
-    #           certainly be removed.
-    source_nb = source_nb[0]
-    if q_id in ['multi_direct', 'area_rectangle', 'multi_hole',
-                'rectangle_length_or_width_from_area', 'divi_direct',
-                'vocabulary_multi', 'vocabulary_divi']:
-        # __
-        return any([source_nb.startswith('intpairs_'),
-                    source_nb.startswith('multiplesof'),
-                    source_nb.startswith('table_'),
-                    source_nb == 'decimal_and_10_100_1000',
-                    source_nb == 'decimal_and_one_digit',
-                    source_nb == 'bypass'])
-    elif q_id in ['addi_direct', 'subtr_direct', 'perimeter_rectangle',
-                  'rectangle_length_or_width_from_perimeter',
-                  'vocabulary_addi', 'vocabulary_subtr']:
-        # __
-        return any([source_nb.startswith('intpairs_'),
-                    source_nb.startswith('multiplesof'),
-                    source_nb.startswith('table_'),
-                    source_nb == 'decimal_and_10_100_1000',
-                    source_nb == 'integer_3_10_decimal_3_10',
-                    source_nb == 'decimals_0_20_1',
-                    source_nb == 'bypass'])
-    elif q_id.startswith('rank_'):
-        return any([source_nb == 'rank_words', source_nb == 'bypass'])
-    elif q_id in ['perimeter_square', 'area_square']:
-        return any([source_nb.startswith('intpairs_'),
-                    source_nb.startswith('multiplesof'),
-                    source_nb.startswith('table_'),
-                    source_nb == 'bypass'])
-    elif q_id in ['vocabulary_half', 'vocabulary_double']:
-        return any([source_nb.startswith('multiplesof2'),
-                    source_nb == 'table_2',
-                    source_nb == 'bypass'])
-    elif q_id in ['vocabulary_third', 'vocabulary_triple']:
-        return any([source_nb.startswith('multiplesof3'),
-                    source_nb == 'table_3',
-                    source_nb == 'bypass'])
-    elif q_id in ['vocabulary_quarter', 'vocabulary_quadruple']:
-        return any([source_nb.startswith('multiplesof4'),
-                    source_nb == 'table_4',
-                    source_nb == 'bypass'])
-    elif q_id in ['multi_reversed', 'fraction_of_rectangle']:
-        return any([source_nb.startswith('intpairs_'),
-                    source_nb == 'table_2',
-                    source_nb == 'table_3',
-                    source_nb == 'table_4',
-                    source_nb == 'bypass'])
-    elif q_id == 'calculation_order_of_operations':
-        # We only check there are two sources
-        return len(source_nb.split(sep=';;')) == 2
-    else:
-        warnings.warn('Could not check if the question\'s type and numbers\'s '
-                      'source do match or not: {} and {}'
-                      .format(q_id, source_nb))
-        return True
-
-
-# --------------------------------------------------------------------------
-##
-#   @brief Returns a dictionary to give some special informations needed for
-#          certain questions.
-def get_modifier(q_type, nb_source):
-    d = {}
-    if (q_type in ['multi_reversed', 'fraction_of_a_rectangle']
-        and nb_source.startswith('intpairs')):
-        d.update({'lock_equal_products': True,
-                  'info_lock': EQUAL_PRODUCTS})
-    elif q_type == 'subtr_direct' and nb_source.startswith('intpairs_10'):
-        d.update({'diff7atleast': True})
-    elif any(['rectangle' in q_type and q_type != 'fraction_of_a_rectangle',
-              q_type.startswith('addi_'), q_type.endswith('_addi'),
-              q_type.startswith('subtr_'), q_type.endswith('_subtr')]):
-        # __
-        d.update({'rectangle': True})
-    elif 'square' in q_type:
-        d.update({'square': True})
-    return d
 
 
 # ------------------------------------------------------------------------------

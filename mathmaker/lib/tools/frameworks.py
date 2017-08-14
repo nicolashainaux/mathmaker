@@ -22,8 +22,11 @@
 
 # TODO: add yaml schema validation (per json?)
 import os
+import re
 import json
 import copy
+import random
+import warnings
 from glob import glob
 from collections import OrderedDict
 from operator import itemgetter
@@ -32,17 +35,25 @@ from operator import itemgetter
 # import yaml
 #
 from mathmaker import settings
-from mathmaker.lib.constants import DEFAULT_LAYOUT
+from mathmaker.lib.constants import DEFAULT_LAYOUT, EQUAL_PRODUCTS
+from mathmaker.lib.constants import STR_BOOLEANS
 from mathmaker.lib.tools import parse_layout_descriptor
+
+SIMPLE_QUESTION = re.compile(r'([a-zA-Z0-9_,=;\-> ]+\([0-9]+\))')
+MIX_QUESTION = re.compile(
+    r'([a-zA-Z0-9_ ]+[,]?)(([a-zA-Z0-9_ ]+=[a-zA-Z0-9_ ]+[,]?)*)')
+NB_SOURCE = re.compile(r'([a-zA-Z0-9_,=;\- ]+)\(([0-9]+)\)')
 
 
 def read_index():
+    """Read the index of all (YAML) sheets available."""
     from mathmaker import settings
     with open(settings.index_path) as f:
         return json.load(f)
 
 
 def build_index():
+    """Create the index of all (YAML) sheets available."""
     from mathmaker import settings
     import yaml
     # Below snippet from https://stackoverflow.com/a/21048064/3926735
@@ -75,7 +86,7 @@ def build_index():
         json.dump(index, f, indent=4)
 
 
-def frameworks_info():
+def _frameworks_info():
     """Returns a list of {'theme': ..., 'subtheme': ..., 'name': ...}"""
     infos = []
     index = read_index()
@@ -145,7 +156,7 @@ def list_all_sheets():
     """
     all_sheets_info = _gather_old_style_sheets_info()
     all_sheets_info += _gather_xml_sheets_info()
-    all_sheets_info += frameworks_info()
+    all_sheets_info += _frameworks_info()
 
     len_t, len_s, len_n = 0, 0, 0
     for s in all_sheets_info:
@@ -211,61 +222,100 @@ def load_sheet(theme, subtheme, sheet_name):
                       'frameworks.'.format(theme))
 
 
-def parse_attr_string(attr_string):
+class _AttrStr(str):
     """
-    Turn an attribute string into a dictionary.
+    Attributes formatted string: a series of attributes represented as a str.
 
-
-    For instance, this string:  'rowxcol=?×2,  print=3 3, spacing='
-    will be turned into        {'rowxcol': '?×2',
-                                'print': '3 3',
-                                'spacing': ''}
-
-    this one:
-    'source=singleint_2to100;;intpairs_2to9, variant=2,3,6,7, required=true, '
-    into:    {'source': 'singleint_2to100;;intpairs_2to9',
-              'variant': '2,3,6,7',
-              'required': 'true'}
-
-    :param attr_string: the attributes formatted string
-    :type attr_string: str
-    :rtype: dict
+    Each attribute attr and its value val are represented by 'attr=val'.
+    All pairs (attr, val) are joined with ', '.
+    For instance: 'attr1=val1, attribute 2=value 2, attr3=val3'
     """
-    attr_list = attr_string.strip(', ').split(sep=', ')
-    return {k: v
-            for couple in attr_list
-            for (k, v) in [couple.strip().split(sep='=')]}
 
+    def parse(self):
+        """
+        Turn an attribute string into a dictionary.
 
-def split_attr_in_pages(key, attr_string):
-    """
-    Split attr_string and expand key for each new page found in attr_string.
+        For instance, this string:  'rowxcol=?×2,  print=3 3, spacing='
+        will be turned into        {'rowxcol': '?×2',
+                                    'print': '3 3',
+                                    'spacing': ''}
 
-    For instance, with
-    key = 'wordings' and attr_string = 'rowxcol=?×2, print=3 3, spacing=',
-    will return [{'wordings': 'rowxcol=?×2, print=3 3, spacing='}]
+        this one:
+        'source=singleint_2to100;;intpairs_2to9, variant=2,3,6,7,
+         required=true, '
+        into:    {'source': 'singleint_2to100;;intpairs_2to9',
+                  'variant': '2,3,6,7',
+                  'required': 'true'}
 
-    while with
-    key = 'answers'
-    and attr_string = 'print=2, spacing=jump to next page, print=1'
-    will return [{'answers': 'print=2, spacing=jump to next page'},
-                 {'answers': 'print=1'}]
+        :rtype: dict
+        """
+        attr_list = self.strip(', ').split(sep=', ')
+        return {k: v
+                for couple in attr_list
+                for (k, v) in [couple.strip().split(sep='=')]}
 
-    In this second case, a dictionary wouldn't have been enough to keep the
-    two different values of 'print' (the second one would have erased the
-    first one) nor would it have kept the order.
+    def split_in_pages(self, key):
+        """
+        Split self and expand key for each new page found in self.
 
-    :param key: the key to expand
-    :type key: str
-    :param attr_string: the attributes formatted string
-    :type attr_string: str
-    :rtype: dict
-    """
-    pages = attr_string.strip(', ').split(sep='spacing=jump to next page')
-    pages = [p.strip(', ') for p in pages]
-    pages = [p + ', spacing=jump to next page' for p in pages[:-1]] \
-        + [pages[-1]]
-    return [{key: p} for p in pages]
+        For instance, with
+        key = 'wordings' and self = 'rowxcol=?×2, print=3 3, spacing=',
+        will return [{'wordings': 'rowxcol=?×2, print=3 3, spacing='}]
+
+        while with
+        key = 'answers'
+        and self = 'print=2, spacing=jump to next page, print=1'
+        will return [{'answers': 'print=2, spacing=jump to next page'},
+                     {'answers': 'print=1'}]
+
+        In this second case, a dictionary wouldn't have been enough to keep the
+        two different values of 'print' (the second one would have erased the
+        first one) nor would it have kept the order.
+
+        :param key: the key to expand
+        :type key: str
+        :rtype: dict
+        """
+        pages = self.strip(', ').split(sep='spacing=jump to next page')
+        pages = [p.strip(', ') for p in pages]
+        pages = [p + ', spacing=jump to next page' for p in pages[:-1]] \
+            + [pages[-1]]
+        return [{key: p} for p in pages]
+
+    def fetch(self, attr):
+        """
+        Return the value of first attr in self.
+
+        For instance, if a = 'pick' and s = 'attr1=value 1, pick=7, attr3=valZ'
+        then we'll get: '7'
+
+        :param attr: the attribute to find
+        :type attr: str
+        :rtype: str
+        """
+        chunks = self.split(sep=', ')
+        for c in chunks:
+            a, v = c.split(sep='=')
+            if a == attr:
+                return v.strip(', ')
+        raise KeyError('Cannot find the attribute \'{}\' in string \'{}\'.'
+                       .format(attr, self))
+
+    def remove(self, attr):
+        """
+        Return self, without attribute attr in it.
+
+        For instance, if attr = 'pick'
+        and self = 'attr1=value 1, pick=7, attr3=valZ'
+        then we'll get: 'attr1=value 1, attr3=valZ'
+
+        :param attr: the attribute to remove
+        :type attr: str
+        :rtype: str
+        """
+        return _AttrStr(', '.join([c
+                                   for c in self.split(sep=', ')
+                                   if not c.startswith(attr + '=')]))
 
 
 def read_layout(data):
@@ -281,13 +331,13 @@ def read_layout(data):
     parts = []
     for part in ['wordings', 'answers']:
         if part in data:
-            parts += split_attr_in_pages(part, data[part])
+            parts += _AttrStr(data[part]).split_in_pages(part)
     for chunk in parts:
         if 'wordings' in chunk:
             part = 'wordings'
         elif 'answers' in chunk:
             part = 'answers'
-        attributes = parse_attr_string(chunk[part])
+        attributes = _AttrStr(chunk[part]).parse()
         s = None
         if 'spacing' in attributes:
             # if it is not, it's already set to 'undefined', by default
@@ -372,3 +422,395 @@ def read_layout(data):
                 else:
                     layout['ans'] += ['jump', 'next_page']
     return layout
+
+
+def build_exercises_list(data):
+    """
+    Return the list of exercises from a sheet.
+
+    :param data: the sheet's data, as read from YAML file
+    :type data: dict
+    :rtype: list
+    """
+    return [data[x]
+            for x in data
+            if (type(x) is str and x.startswith('exercise'))]
+
+
+def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
+    """
+    Tell if the given question's id and source number do match.
+
+    This is used in mix sections only, yet.
+
+    :param q_id: the question's id (kind_subkind)
+    :param source_nb: the source of the numbers
+    :param variant: the variant of the numbers' source / question, if available
+    """
+    # TODO:   The 'integer_3_10_decimal_3_10' may be later turned into
+    #         'intpairs_3to10' with variant='decimal1', so this condition can
+    #         certainly be removed.
+    source_nb = source_nb[0]
+    if q_id in ['multi_direct', 'area_rectangle', 'multi_hole',
+                'rectangle_length_or_width_from_area', 'divi_direct',
+                'vocabulary_multi', 'vocabulary_divi']:
+        # __
+        return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('multiplesof'),
+                    source_nb.startswith('table_'),
+                    source_nb == 'decimal_and_10_100_1000',
+                    source_nb == 'decimal_and_one_digit',
+                    source_nb == 'bypass'])
+    elif q_id in ['addi_direct', 'subtr_direct', 'perimeter_rectangle',
+                  'rectangle_length_or_width_from_perimeter',
+                  'vocabulary_addi', 'vocabulary_subtr']:
+        # __
+        return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('multiplesof'),
+                    source_nb.startswith('table_'),
+                    source_nb == 'decimal_and_10_100_1000',
+                    source_nb == 'integer_3_10_decimal_3_10',
+                    source_nb == 'decimals_0_20_1',
+                    source_nb == 'bypass'])
+    elif q_id.startswith('rank_'):
+        return any([source_nb == 'rank_words', source_nb == 'bypass'])
+    elif q_id in ['perimeter_square', 'area_square']:
+        return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('multiplesof'),
+                    source_nb.startswith('table_'),
+                    source_nb == 'bypass'])
+    elif q_id in ['vocabulary_half', 'vocabulary_double']:
+        return any([source_nb.startswith('multiplesof2'),
+                    source_nb == 'table_2',
+                    source_nb == 'bypass'])
+    elif q_id in ['vocabulary_third', 'vocabulary_triple']:
+        return any([source_nb.startswith('multiplesof3'),
+                    source_nb == 'table_3',
+                    source_nb == 'bypass'])
+    elif q_id in ['vocabulary_quarter', 'vocabulary_quadruple']:
+        return any([source_nb.startswith('multiplesof4'),
+                    source_nb == 'table_4',
+                    source_nb == 'bypass'])
+    elif q_id in ['multi_reversed', 'fraction_of_rectangle']:
+        return any([source_nb.startswith('intpairs_'),
+                    source_nb == 'table_2',
+                    source_nb == 'table_3',
+                    source_nb == 'table_4',
+                    source_nb == 'bypass'])
+    elif q_id == 'calculation_order_of_operations':
+        # We only check there are two sources
+        return len(source_nb.split(sep=';;')) == 2
+    else:
+        warnings.warn('Could not check if the question\'s type and numbers\'s '
+                      'source do match or not: {} and {}'
+                      .format(q_id, source_nb))
+        return True
+
+
+# --------------------------------------------------------------------------
+##
+#   @brief Returns a dictionary to give some special informations needed for
+#          certain questions.
+def get_q_modifier(q_type, nb_source):
+    d = {}
+    if (q_type in ['multi_reversed', 'fraction_of_a_rectangle']
+        and nb_source.startswith('intpairs')):
+        d.update({'lock_equal_products': True,
+                  'info_lock': EQUAL_PRODUCTS})
+    elif q_type == 'subtr_direct' and nb_source.startswith('intpairs_10'):
+        d.update({'diff7atleast': True})
+    elif any(['rectangle' in q_type and q_type != 'fraction_of_a_rectangle',
+              q_type.startswith('addi_'), q_type.endswith('_addi'),
+              q_type.startswith('subtr_'), q_type.endswith('_subtr')]):
+        # __
+        d.update({'rectangle': True})
+    elif 'square' in q_type:
+        d.update({'square': True})
+    return d
+
+
+def _read_simple_question(s):
+    """
+    Build the questions' attributes from the raw string read from YAML file.
+
+    For instance, from:
+    expand double -> intpairs_2to9;;intpairs_2to9 (5)
+    we'll build:
+    [[{'id': 'expand double'}, ['intpairs_2to9', 'intpairs_2to9'], 5]]
+
+    From:
+    expand double -> intpairs_2to9;;intpairs_2to9 (3)
+    expand double -> intpairs_10to20;;intpairs_2to9 (7)
+    as well as from:
+    expand double -> intpairs_2to9;;intpairs_2to9 (3)
+                  -> intpairs_10to20;;intpairs_2to9 (7)
+    we'll build:
+    [[{'id': 'expand double'}, ['intpairs_2to9', 'intpairs_2to9'], 3],
+     [{'id': 'expand double'}, ['intpairs_10to20', 'intpairs_2to9'], 7]]
+
+    and from:
+    expand double -> intpairs_2to9;;intpairs_2to9 (3)
+                  -> intpairs_10to20;;intpairs_2to9 (7)
+    expand simple -> intpairs_2to9;;intpairs_2to9 (10)
+    we'll build:
+    [[{'id': 'expand double'}, ['intpairs_2to9', 'intpairs_2to9'], 3],
+     [{'id': 'expand double'}, ['intpairs_10to20', 'intpairs_2to9'], 7],
+     [{'id': 'expand simple'}, ['intpairs_2to9', 'intpairs_2to9'], 10]]
+
+    :param s: the raw string read from YAML file.
+    :type s: str
+    :rtype: list
+    """
+    result = []
+    pairs = SIMPLE_QUESTION.findall(s)
+    if not len(pairs):
+        raise ValueError('YAML file format error: the simple question: \n'
+                         '{}\nis not built in pairs around the \'->\' symbol '
+                         'and ending with a number between braces.'.format(s))
+    pairs = [p.split('->') for p in pairs]
+    last_id = None
+    for p in pairs:
+        q_attr = _AttrStr('id=' + p[0]).parse()
+        if q_attr['id'] == '':
+            if last_id is None:
+                raise ValueError('YAML file format error: missing question\'s '
+                                 'name.')
+            else:
+                q_attr['id'] = last_id
+        else:
+            last_id = q_attr['id']
+        q_attr = {k: q_attr[k].strip() for k in q_attr}
+        try:
+            parts = NB_SOURCE.match(p[1]).group
+        except AttributeError:
+            raise ValueError('YAML file format error: incorrect numbers\' '
+                             'source:\n{}'.format(p[1]))
+        n_attr = _AttrStr('source=' + parts(1)).parse()
+        sources = n_attr.pop('source').strip().split(sep=';;')
+        q_attr.update(n_attr)
+        n_text = parts(2)
+        result += [[q_attr, sources, int(n_text)]]
+    return result
+
+
+def _read_mix_question(s):
+    """
+    Build mix question from the raw string from YAML file.
+
+    For instance, from:
+    q id1, attr1=val1, attr2=value 2, q id2, attr1=val1, attr3=val3, pick=3,
+    q id3
+    we'll build:
+    [{'id': 'q id1', 'attr1': 'val1', 'attr2': 'value 2'},
+     {'id': 'q id2', 'attr1': 'val1', 'attr3': 'val3'},
+     {'id': 'q id2', 'attr1': 'val1', 'attr3': 'val3'},
+     {'id': 'q id2', 'attr1': 'val1', 'attr3': 'val3'},
+     {'id': 'q id3'}]
+
+    :param s: the raw string read from YAML file.
+    :type s: str
+    :rtype: list (of dict)
+    """
+    questions = MIX_QUESTION.findall(s)
+    result = []
+    for q in questions:
+        repeat_it = 1
+        q_attributes = _AttrStr(q[1])
+        if 'pick' in q_attributes:
+            repeat_it = int(q_attributes.fetch('pick'))
+            q_attributes = q_attributes.remove('pick')
+        for i in range(repeat_it):
+            result.append(
+                _AttrStr('id=' + q[0].strip() + ' ' + q_attributes.strip())
+                .parse())
+    return result
+
+
+def _read_mix_nb(s):
+    """
+    Build mix numbers' sources from the raw string from YAML file.
+
+    For instance, from:
+    'singleint_2to100;;intpairs_2to9, variant=2,3,6,7, required=true (1)'
+    we'll build:
+    [[['singleint_2to100;;intpairs_2to9'],
+      {'source': 'singleint_2to100;;intpairs_2to9',
+       'variant': '2,3,6,7',
+       'required': 'true'},
+      1]]
+
+    From:
+    'singleint_2to100;;intpairs_2to9, variant=2,3,6,7, required=true (3)'
+    we'll build:
+    [[['singleint_2to100;;intpairs_2to9'],
+      {'source': 'singleint_2to100;;intpairs_2to9',
+       'variant': '2,3,6,7',
+       'required': 'true'},
+      1],
+     [['singleint_2to100;;intpairs_2to9'],
+       {'source': 'singleint_2to100;;intpairs_2to9',
+        'variant': '2,3,6,7',
+        'required': 'true'},
+       1],
+     [['singleint_2to100;;intpairs_2to9'],
+       {'source': 'singleint_2to100;;intpairs_2to9',
+        'variant': '2,3,6,7',
+        'required': 'true'},
+       1]]
+
+    and from:
+    'singleint_2to100;;intpairs_2to9, variant=2,3,6,7, required=true (1)
+     singleint_3to12;;intpairs_2to9, variant=8-23,100-187, (2)'
+    we'll build:
+    [[['singleint_2to100;;intpairs_2to9'],
+      {'source': 'singleint_2to100;;intpairs_2to9',
+       'variant': '2,3,6,7',
+       'required': 'true'},
+      1],
+     [['singleint_2to100;;intpairs_2to9'],
+      {'source': 'singleint_3to12;;intpairs_2to9',
+       'variant': '8-23,100-187'},
+      1],
+     [['singleint_2to100;;intpairs_2to9'],
+      {'source': 'singleint_3to12;;intpairs_2to9',
+       'variant': '8-23,100-187'},
+      1]]
+
+    :param s: the raw string read from YAML file.
+    :type s: str
+    :rtype: list
+    """
+    result = []
+    for nb in NB_SOURCE.findall(s):
+        # nb should be, for instance: ('intpairs_2to9, variant=90', '1')
+        parsed = _AttrStr('source=' + nb[0]).parse()
+        for i in range(int(nb[1])):
+            result += [[[parsed['source']],
+                        parsed,
+                        1]]
+    return result
+
+
+def _read_mix(data):
+    """
+    Build questions and numbers' sources from the raw strings from YAML file.
+
+    For instance, from:
+    {'mix': {'question': 'q id, subvariant=someth',
+             'nb': 'singleint_5to20;;intpairs_2to9, variant=0, (1)'}
+    }
+    we'll build:
+    ([{'id': 'q id', 'subvariant': 'someth'}],
+     [['singleint_5to20;;intpairs_2to9'],
+      {'source': 'singleint_5to20;;intpairs_2to9',
+       'variant': '0'},
+      1])
+
+    and from:
+    {'mix': {'question': 'q id, subvariant=someth, pick=2',
+             'nb': 'singleint_5to20;;intpairs_2to9, variant=0, (3)'}
+    }
+    we'll build:
+    ([{'id': 'q id', 'subvariant': 'someth'},
+      {'id': 'q id', 'subvariant': 'someth'}],
+     [[['singleint_5to20;;intpairs_2to9'],
+       {'source': 'singleint_5to20;;intpairs_2to9',
+        'variant': '0'},
+       1],
+       ['singleint_5to20;;intpairs_2to9'],
+         {'source': 'singleint_5to20;;intpairs_2to9',
+          'variant': '0'},
+         1]],
+      )
+
+    So far it's not possible to mix questions requiring several sources with
+    other questions yet multiple sources questions can be mixed together
+    if they are the same type.
+
+    :param data: the raw string read from YAML file.
+    :type data: dict
+    :rtype: list
+    """
+    q_temp_list = []
+    n_temp_list = []
+    for key in data:
+        if key.startswith('question'):
+            q_temp_list += _read_mix_question(data[key])
+        elif key.startswith('nb'):
+            n_temp_list += _read_mix_nb(data[key])
+        else:
+            raise ValueError('YAML file format error: invalid entry under '
+                             'a mix section: {}.'.format(key))
+
+    # Check and then Mix the questions and numbers retrieved
+    if len(q_temp_list) > len(n_temp_list):
+        raise ValueError(
+            'YAML file format error: incorrect mix section: the number '
+            'of sources of numbers (' + str(len(n_temp_list)) + ') '
+            'must be at least equal to the number of questions '
+            '(' + str(len(q_temp_list)) + ').')
+
+    # TODO: A YAML validation will necessary to ensure all data are correct.
+
+    # So far, we only check if all of the numbers' sources
+    # may be attributed to any of the questions, in order
+    # to just distribute them all randomly.
+    for n in n_temp_list:
+        for q in q_temp_list:
+            v = n[1].get('variant', q.get('variant', ''))
+            if (not _match_qid_sourcenb(q['id'].replace(' ', '_'),
+                                        n[0], v)):
+                # __
+                raise ValueError(
+                    'XMLFileFormatError: this source: '
+                    + str(n[0]) + ' cannot '
+                    'be attributed to this question:'
+                    ' ' + str(q['id'].replace(' ', '_')))
+
+    random.shuffle(q_temp_list)
+    if any(STR_BOOLEANS[n[1].get('required', 'false')]()
+           for n in n_temp_list):
+        required_n_temp_list = [n for n in n_temp_list
+                                if STR_BOOLEANS[n[1].get('required',
+                                                         'false')]()]
+        rest_n_temp_list = [n for n in n_temp_list
+                            if not STR_BOOLEANS[n[1].get('required',
+                                                         'false')]()]
+        random.shuffle(required_n_temp_list)
+        random.shuffle(rest_n_temp_list)
+        n_temp_list = required_n_temp_list + rest_n_temp_list
+    else:
+        random.shuffle(n_temp_list)
+
+    mix_questions = []
+    for (q, n) in zip(q_temp_list, n_temp_list):
+        merged_q = copy.deepcopy(q)
+        merged_q.update(n[1])
+        mix_questions += [[merged_q, n[0], 1]]
+
+    random.shuffle(mix_questions)
+
+    return mix_questions
+
+
+def build_questions_list(data):
+    """
+    Return the list of questions from an exercise.
+
+    :param data: the exercise's data, as read from YAML file (extract from
+                 the complete sheet's data)
+    :type data: dict
+    :rtype: list
+    """
+    questions = []
+    # For instance we will get a list of this kind of elements:
+    # [{'id': 'multi direct', 'nb': 'int'}, 'table_2_9', 4]
+    # [{'id': 'expand_and_reduce double_expansion'},
+    #  'table_2_9',
+    #  4]
+    for entry in data:
+        if entry.startswith('question'):
+            questions += [_read_simple_question(data[entry])]
+        elif entry.startswith('mix'):
+            questions += [_read_mix(data[entry])]
+    return questions

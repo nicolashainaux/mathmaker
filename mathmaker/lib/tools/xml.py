@@ -29,9 +29,9 @@ import random
 import xml.etree.ElementTree as XML_PARSER
 
 from mathmaker import settings
-from mathmaker.lib.constants import XML_BOOLEANS
-from mathmaker.lib.document.frames import match_qid_sourcenb
+from mathmaker.lib.constants import STR_BOOLEANS
 from mathmaker.lib.tools import parse_layout_descriptor
+from mathmaker.lib.tools.frameworks import _match_qid_sourcenb
 
 
 # So far, quite useless features, so disabled on august 8th, 2017
@@ -301,9 +301,9 @@ def _get_q_list_from(exercise_node):
     """
     questions = []
     # For instance we will get a list of this kind of elements:
-    # [{'id': 'multi direct', 'nb': 'int'}, 'table_2_9', 4]
+    # [{'id': 'multi direct', 'nb': 'int'}, ['table_2_9'], 4]
     # [{'id': 'expand_and_reduce double_expansion'},
-    #  'table_2_9',
+    #  ['table_2_9'],
     #  4]
 
     for child in exercise_node:
@@ -376,8 +376,8 @@ def _get_q_list_from(exercise_node):
             for n in n_temp_list:
                 for q in q_temp_list:
                     v = n[1].get('variant', q.get('variant', ''))
-                    if (not match_qid_sourcenb(q['id'].replace(' ', '_'),
-                                               n[0], v)):
+                    if (not _match_qid_sourcenb(q['id'].replace(' ', '_'),
+                                                n[0], v)):
                         # __
                         raise ValueError(
                             'XMLFileFormatError: this source: '
@@ -386,13 +386,13 @@ def _get_q_list_from(exercise_node):
                             ' ' + str(q['id'].replace(' ', '_')))
 
             random.shuffle(q_temp_list)
-            if any(XML_BOOLEANS[n[1].get('required', 'false')]()
+            if any(STR_BOOLEANS[n[1].get('required', 'false')]()
                    for n in n_temp_list):
                 required_n_temp_list = [n for n in n_temp_list
-                                        if XML_BOOLEANS[n[1].get('required',
+                                        if STR_BOOLEANS[n[1].get('required',
                                                                  'false')]()]
                 rest_n_temp_list = [n for n in n_temp_list
-                                    if not XML_BOOLEANS[n[1].get('required',
+                                    if not STR_BOOLEANS[n[1].get('required',
                                                                  'false')]()]
                 random.shuffle(required_n_temp_list)
                 random.shuffle(rest_n_temp_list)
