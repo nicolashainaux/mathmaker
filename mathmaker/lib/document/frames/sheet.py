@@ -71,8 +71,11 @@ class Sheet(object):
             answers_title = data.get('answers_title',
                                      presets[self.preset]['answers_title'])
             loaded_layout_data = data.get('layout', DEFAULT_SHEET_LAYOUT)
+            if not isinstance(loaded_layout_data, list):
+                loaded_layout_data = [loaded_layout_data]
             layout_data = copy.deepcopy(DEFAULT_SHEET_LAYOUT)
-            layout_data.update(loaded_layout_data)
+            for d in loaded_layout_data:
+                layout_data.update(d)
             self.layout_type = layout_data['type']
             self.sheet_layout_unit = layout_data['unit']
             font_size_offset = layout_data['font_size_offset']

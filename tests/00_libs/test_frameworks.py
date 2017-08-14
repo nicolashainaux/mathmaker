@@ -51,6 +51,8 @@ def test_AttrStr_parse_warnings():
 def test_AttrStr_parse():
     """Check parse() in various cases."""
     assert _AttrStr('').parse() == {}
+    assert _AttrStr('rowxcol=?×2,  , spacing=25.0pt').parse() \
+        == {'rowxcol': '?×2', 'spacing': '25.0pt'}
     assert _AttrStr('rowxcol=?×2,  , spacing=').parse() \
         == {'rowxcol': '?×2', 'spacing': ''}
     assert _AttrStr('rowxcol=?×2').parse() == {'rowxcol': '?×2'}
@@ -190,6 +192,10 @@ def test__read_simple_question():
         [[{'id': 'expand double'}, ['intpairs_2to9', 'intpairs_2to9'], 3],
          [{'id': 'expand double'}, ['intpairs_10to20', 'intpairs_2to9'], 7],
          [{'id': 'expand simple'}, ['intpairs_2to9', 'intpairs_2to9'], 10]]
+    assert _read_simple_question(
+        'expand double, spacing=10.0pt -> intpairs_2to9;;intpairs_2to9 (1)') \
+        == [[{'id': 'expand double', 'spacing': '10.0pt'},
+             ['intpairs_2to9', 'intpairs_2to9'], 1]]
 
 
 def test__read_mix_question():
@@ -202,6 +208,11 @@ def test__read_mix_question():
          {'id': 'q id2', 'attr1': 'val1', 'attr3': 'val3'},
          {'id': 'q id2', 'attr1': 'val1', 'attr3': 'val3'},
          {'id': 'q id3'}]
+    assert _read_mix_question(
+        'calculation order_of_operations, subvariant=only_positive, '
+        'spacing=15.0pt') == \
+        [{'id': 'calculation order_of_operations',
+          'subvariant': 'only_positive', 'spacing': '15.0pt'}]
 
 
 def test__read_mix_nb():

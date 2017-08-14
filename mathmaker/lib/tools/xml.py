@@ -31,7 +31,7 @@ import xml.etree.ElementTree as XML_PARSER
 from mathmaker import settings
 from mathmaker.lib.constants import STR_BOOLEANS, DEFAULT_LAYOUT
 from mathmaker.lib.tools import parse_layout_descriptor
-from mathmaker.lib.tools.frameworks import _match_qid_sourcenb
+from mathmaker.lib.tools.frameworks import _match_qid_sourcenb, parse_qid
 
 
 # So far, quite useless features, so disabled on august 8th, 2017
@@ -43,17 +43,6 @@ from mathmaker.lib.tools.frameworks import _match_qid_sourcenb
 # KINDS_SUBKINDS_CONTEXTS_TO_TRANSLATE = {
 #     ('divi', 'direct', 'area_width_length_rectangle'):
 #     ('rectangle', 'length_or_width', 'from_area')}
-
-def parse_qid(qid):
-    """
-    Return question's kind and subkind from question's attribute "id".
-    """
-    if qid.count(' ') != 1:
-        raise ValueError('XMLFormatError: a question id must consist '
-                         'of two parts separated by one space '
-                         'character. There cannot be several space '
-                         'characters in the id, neither.')
-    return qid.split()
 
 
 def get_xml_schema_path():

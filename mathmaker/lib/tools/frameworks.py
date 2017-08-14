@@ -39,9 +39,9 @@ from mathmaker.lib.constants import DEFAULT_LAYOUT, EQUAL_PRODUCTS
 from mathmaker.lib.constants import STR_BOOLEANS
 from mathmaker.lib.tools import parse_layout_descriptor
 
-SIMPLE_QUESTION = re.compile(r'([a-zA-Z0-9_,=;\-> ]+\([0-9]+\))')
+SIMPLE_QUESTION = re.compile(r'([a-zA-Z0-9_,=;\->\. ]+\([0-9\.]+\))')
 MIX_QUESTION = re.compile(
-    r'([a-zA-Z0-9_ ]+[,]?)(([a-zA-Z0-9_ ]+=[a-zA-Z0-9_ ]+[,]?)*)')
+    r'([a-zA-Z0-9_\. ]+[,]?)(([a-zA-Z0-9_ ]+=[a-zA-Z0-9_\. ]+[,]?)*)')
 NB_SOURCE = re.compile(r'([a-zA-Z0-9_,=;\- ]+)\(([0-9]+)\)')
 
 
@@ -220,6 +220,18 @@ def load_sheet(theme, subtheme, sheet_name):
     else:
         raise IOError('Could not find the provided theme ({}) among the '
                       'frameworks.'.format(theme))
+
+
+def parse_qid(qid):
+    """
+    Return question's kind and subkind from question's attribute "id".
+    """
+    if qid.count(' ') != 1:
+        raise ValueError('YAML file format error: got "{}", but a question id '
+                         'must consist of two parts separated by one space '
+                         'character. There cannot be several space '
+                         'characters in the id, neither.'.format(qid))
+    return qid.split()
 
 
 class _AttrStr(str):
@@ -687,7 +699,7 @@ def _read_mix_nb(s):
     result = []
     for nb in NB_SOURCE.findall(s):
         # nb should be, for instance: ('intpairs_2to9, variant=90', '1')
-        parsed = _AttrStr('source=' + nb[0]).parse()
+        parsed = _AttrStr('source=' + nb[0].strip()).parse()
         for i in range(int(nb[1])):
             result += [[[parsed['source']],
                         parsed,
@@ -737,14 +749,17 @@ def _read_mix(data):
     """
     q_temp_list = []
     n_temp_list = []
-    for key in data:
-        if key.startswith('question'):
-            q_temp_list += _read_mix_question(data[key])
-        elif key.startswith('nb'):
-            n_temp_list += _read_mix_nb(data[key])
-        else:
-            raise ValueError('YAML file format error: invalid entry under '
-                             'a mix section: {}.'.format(key))
+    if not isinstance(data, list):
+        data = [data]
+    for entry in data:
+        for key in entry:
+            if key.startswith('question'):
+                q_temp_list += _read_mix_question(entry[key])
+            elif key.startswith('nb'):
+                n_temp_list += _read_mix_nb(entry[key])
+            else:
+                raise ValueError('YAML file format error: invalid entry under '
+                                 'a mix section: {}.'.format(key))
 
     # Check and then Mix the questions and numbers retrieved
     if len(q_temp_list) > len(n_temp_list):
@@ -816,5 +831,5 @@ def build_questions_list(data):
         if entry.startswith('question'):
             questions += _read_simple_question(data[entry])
         elif entry.startswith('mix'):
-            questions += [_read_mix(data[entry])]
+            questions += _read_mix(data[entry])
     return questions

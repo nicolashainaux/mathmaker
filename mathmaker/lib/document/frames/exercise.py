@@ -32,9 +32,8 @@ from intspan.core import ParseError
 from mathmaker.lib import shared
 from mathmaker.lib.tools import is_integer
 from mathmaker.lib.tools.maths import coprimes_to
-from mathmaker.lib.tools.xml import parse_qid
 from mathmaker.lib.tools.frameworks import read_layout, build_questions_list
-from mathmaker.lib.tools.frameworks import get_q_modifier
+from mathmaker.lib.tools.frameworks import get_q_modifier, parse_qid
 from .question import Question
 from mathmaker.lib.constants import STR_BOOLEANS
 from mathmaker.lib.constants.content \
