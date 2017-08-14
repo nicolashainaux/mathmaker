@@ -338,16 +338,19 @@ def read_layout(data):
     """
     Create the layout dictionary from the raw data.
 
-    :param data: the dictionary loaded from YAML file
-    :type data: dict
+    :param data: the dictionary loaded from YAML file (might be list of dict)
+    :type data: dict or list
     :rtype: dict
     """
     layout = copy.deepcopy(DEFAULT_LAYOUT)
     keep_default_w, keep_default_a = True, True
+    if not isinstance(data, list):
+        data = [data]
     parts = []
-    for part in ['wordings', 'answers']:
-        if part in data:
-            parts += _AttrStr(data[part]).split_in_pages(part)
+    for data_elt in data:
+        for part in ['wordings', 'answers']:
+            if part in data_elt:
+                parts += _AttrStr(data_elt[part]).split_in_pages(part)
     for chunk in parts:
         if 'wordings' in chunk:
             part = 'wordings'
