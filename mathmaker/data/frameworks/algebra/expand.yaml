@@ -1,3 +1,20 @@
+simple: !!omap
+  - title: "Algebra: expand simple brackets"
+  - answers_title: "Answers"
+  - exercise: !!omap
+    - details_level: medium
+    - text_exc: "Expand and reduce the following expressions:"
+    - text_ans: "Example of detailed solutions:"
+    - questions: expand simple -> inttriplets_2to9 (5)
+
+simple_detailed_solutions: !!omap
+  - title: "Algebra: expand simple brackets"
+  - answers_title: "Answers"
+  - exercise: !!omap
+    - text_exc: "Expand and reduce the following expressions:"
+    - text_ans: "Example of detailed solutions:"
+    - questions: expand simple -> inttriplets_2to9 (5)
+
 double: !!omap
   - title: "Algebra: expand and reduce double brackets"
   - answers_title: "Answers"

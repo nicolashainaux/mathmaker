@@ -126,9 +126,9 @@ def entry_point():
             shared.db.close()
             sys.exit(1)
         if build_from_yaml:
-            sh = Sheet(filename=fn, key=fn)
+            sh = Sheet(*fn, filename=None)
         else:
-            sh = Sheet(filename=fn)
+            sh = Sheet('', '', '', filename=fn)
 
     try:
         shared.machine.write_out(str(sh), pdf_output=args.pdf_output)

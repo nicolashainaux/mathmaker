@@ -29,7 +29,7 @@ import random
 import xml.etree.ElementTree as XML_PARSER
 
 from mathmaker import settings
-from mathmaker.lib.constants import STR_BOOLEANS
+from mathmaker.lib.constants import STR_BOOLEANS, DEFAULT_LAYOUT
 from mathmaker.lib.tools import parse_layout_descriptor
 from mathmaker.lib.tools.frameworks import _match_qid_sourcenb
 
@@ -205,8 +205,7 @@ def _read_layout(node, config, layout):
 
 
 def _get_layout_from(node, default_config=None):
-    default_layout = {'exc': [None, 'all'],
-                      'ans': [None, 'all']}
+    default_layout = copy.deepcopy(DEFAULT_LAYOUT)
 
     config = default_config
 

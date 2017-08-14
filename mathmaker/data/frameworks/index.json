@@ -1,18 +1,33 @@
 {
-    "01_white_multiplications": [
+    "order_of_operations_positive numbers": [
+        "calculation",
+        "order_of_operations",
+        "positive numbers"
+    ],
+    "01_white1_multiplications": [
         "mental_calculation",
-        "01_white",
+        "01_white1",
         "multiplications"
     ],
-    "01_white_positional notation": [
+    "01_white1_positional notation": [
         "mental_calculation",
-        "01_white",
+        "01_white1",
         "positional notation"
     ],
-    "01_white_exam": [
+    "01_white1_exam": [
         "mental_calculation",
-        "01_white",
+        "01_white1",
         "exam"
+    ],
+    "expand_simple": [
+        "algebra",
+        "expand",
+        "simple"
+    ],
+    "expand_simple_detailed_solutions": [
+        "algebra",
+        "expand",
+        "simple_detailed_solutions"
     ],
     "expand_double": [
         "algebra",

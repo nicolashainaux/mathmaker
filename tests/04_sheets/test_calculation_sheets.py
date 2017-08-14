@@ -30,12 +30,14 @@ XML_SHEETS = get_xml_sheets_paths()
 
 def test_calculation_order_of_operations():
     """Check if 'calculation_order_of_oper..' is generated without errors."""
-    shared.machine.write_out(str(Sheet(
-        XML_SHEETS['order_of_operations_positive_numbers'])))
+    shared.machine.write_out(str(
+        Sheet('', '', '',
+              filename=XML_SHEETS['order_of_operations_positive_numbers'])))
 
 
 def test_integration_calculation_order_of_operations():
     """Integration test for calculation_order_of_operations."""
     shared.machine.write_out(str(
-        Sheet('./tests/04_sheets/integration_test_sheets/'
+        Sheet('', '', '',
+              filename='./tests/04_sheets/integration_test_sheets/'
                   'calculation_order_of_operations.xml')))

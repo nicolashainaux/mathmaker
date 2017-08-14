@@ -39,13 +39,14 @@ class Sheet(object):
     #   @brief Constructor
     #   @param **options Any options
     #   @return One instance of sheet.Generic
-    def __init__(self, filename, **options):
+    def __init__(self, theme, subtheme, sheet_name, **options):
         from mathmaker.lib.tools.xml import get_sheet_config
         from mathmaker.lib.tools.xml import get_exercises_list
         # from mathmaker.lib.tools.frameworks import load_sheet
+        filename = options.get('filename', None)
 
-        if 'key' in options:
-            data = load_sheet(*options['key'])
+        if filename is None:
+            data = load_sheet(theme, subtheme, sheet_name)
             header = data.get('header', '')
             title = data.get('title', '')
             subtitle = data.get('subtitle', '')
@@ -188,7 +189,7 @@ class Sheet(object):
         self.text = _(text) if text != "" else ""
         self.answers_title = _(answers_title) if answers_title != "" else ""
 
-        if 'key' in options:
+        if filename is None:
             for e_data in build_exercises_list(data):
                 if self.preset != 'default' and 'preset' not in e_data:
                     e_data.update({'preset': self.preset})

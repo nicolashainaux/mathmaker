@@ -22,29 +22,26 @@
 
 
 from mathmaker.lib import shared
-from mathmaker.lib.tools.xml import get_xml_sheets_paths
 from mathmaker.lib.document.frames import Sheet
-
-XML_SHEETS = get_xml_sheets_paths()
 
 
 def test_double_expansion():
     """Checks if 'double_expansion' is generated without any error."""
-    shared.machine.write_out(str(Sheet(XML_SHEETS['double_expansion'])))
+    shared.machine.write_out(str(Sheet('algebra', 'expand', 'double')))
 
 
 def test_double_expansion_detailed_solutions():
     """Checks generation of 'double_expansion_detailed_solutions'."""
-    shared.machine.write_out(
-        str(Sheet(XML_SHEETS['double_expansion_detailed_solutions'])))
+    shared.machine.write_out(str(
+        Sheet('algebra', 'expand', 'double_detailed_solutions')))
 
 
 def test_simple_expansion():
     """Checks if 'simple_expansion' is generated without any error."""
-    shared.machine.write_out(str(Sheet(XML_SHEETS['simple_expansion'])))
+    shared.machine.write_out(str(Sheet('algebra', 'expand', 'simple')))
 
 
 def test_simple_expansion_detailed_solutions():
     """Checks generation of 'simple_expansion_detailed_solutions'."""
-    shared.machine.write_out(
-        str(Sheet(XML_SHEETS['simple_expansion_detailed_solutions'])))
+    shared.machine.write_out(str(
+        Sheet('algebra', 'expand', 'simple_detailed_solutions')))
