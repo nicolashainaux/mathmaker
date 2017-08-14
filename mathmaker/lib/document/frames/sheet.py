@@ -99,8 +99,8 @@ class Sheet(object):
             raise TypeError('Got: ' + str(type(type(sheet_layout)))
                             + ' instead of a dict')
 
-        if len(sheet_layout) != 2:
-            raise ValueError('SHEET_LAYOUT should have two keys '
+        if len(sheet_layout) != 4:
+            raise ValueError('SHEET_LAYOUT should have four keys '
                              'but it has ' + str(len(sheet_layout)) + ' keys')
 
         for k in ['exc', 'ans']:
