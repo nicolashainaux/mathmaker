@@ -814,7 +814,7 @@ def build_questions_list(data):
     #  4]
     for entry in data:
         if entry.startswith('question'):
-            questions += [_read_simple_question(data[entry])]
+            questions += _read_simple_question(data[entry])
         elif entry.startswith('mix'):
             questions += [_read_mix(data[entry])]
     return questions
