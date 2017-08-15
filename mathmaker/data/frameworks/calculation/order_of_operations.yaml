@@ -23,7 +23,7 @@ positive_numbers: !!omap
   - title: "Calculation: order of precedence."
   - layout:
     - answers: print=2,
-               spacing=jump to next page,
+               newpage=true,
                print=1
   - exercise1: !!omap
     - layout:

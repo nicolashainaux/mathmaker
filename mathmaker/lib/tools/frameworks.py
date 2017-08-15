@@ -280,8 +280,8 @@ class _AttrStr(str):
 
         while with
         key = 'answers'
-        and self = 'print=2, spacing=jump to next page, print=1'
-        will return [{'answers': 'print=2, spacing=jump to next page'},
+        and self = 'print=2, newpage=true, print=1'
+        will return [{'answers': 'print=2, newpage=true'},
                      {'answers': 'print=1'}]
 
         In this second case, a dictionary wouldn't have been enough to keep the
@@ -292,10 +292,9 @@ class _AttrStr(str):
         :type key: str
         :rtype: dict
         """
-        pages = self.strip(', ').split(sep='spacing=jump to next page')
+        pages = self.strip(', ').split(sep='newpage=true')
         pages = [p.strip(', ') for p in pages]
-        pages = [p + ', spacing=jump to next page' for p in pages[:-1]] \
-            + [pages[-1]]
+        pages = [p + ', newpage=true' for p in pages[:-1]] + [pages[-1]]
         return [{key: p} for p in pages]
 
     def fetch(self, attr):
@@ -357,15 +356,15 @@ def read_layout(data):
         elif 'answers' in chunk:
             part = 'answers'
         attributes = _AttrStr(chunk[part]).parse()
+        jump = STR_BOOLEANS[attributes.get('newpage', 'false')]()
         s = None
         if 'spacing' in attributes:
             # if it is not, it's already set to 'undefined', by default
             s = attributes.get('spacing')
-            if s != 'jump to next page':
-                if part == 'wordings':
-                    layout['spacing_w'] = s
-                if part == 'answers':
-                    layout['spacing_a'] = s
+            if part == 'wordings':
+                layout['spacing_w'] = s
+            if part == 'answers':
+                layout['spacing_a'] = s
         # part is either wordings or answers
         rowxcol = attributes.get('rowxcol', 'none')
         distri = attributes.get('print', 'auto')
@@ -378,7 +377,7 @@ def read_layout(data):
                 except ValueError:
                     raise ValueError('XMLFileFormatError: a print '
                                      'attribute cannot be turned into int.')
-            if not (s == 'jump to next page'
+            if not (jump
                     and 'rowxcol' not in attributes
                     and 'print' not in attributes):
                 if part == 'wordings':
@@ -426,7 +425,7 @@ def read_layout(data):
                 layout['exc'].append(distri)
             else:
                 layout['ans'].append(distri)
-        if 'spacing' in attributes and s == 'jump to next page':
+        if jump:
             if part == 'wordings':
                 if keep_default_w:
                     layout['exc'] = ['jump', 'next_page']

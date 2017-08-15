@@ -70,9 +70,9 @@ def test_AttrStr__split_in_pages():
     assert _AttrStr('rowxcol=?×2, print=3 3, spacing=') \
         ._split_in_pages('wordings') \
         == [{'wordings': 'rowxcol=?×2, print=3 3, spacing='}]
-    assert _AttrStr('print=2, spacing=jump to next page, print=1') \
+    assert _AttrStr('print=2, newpage=true, print=1') \
         ._split_in_pages('answers') \
-        == [{'answers': 'print=2, spacing=jump to next page'},
+        == [{'answers': 'print=2, newpage=true'},
             {'answers': 'print=1'}]
 
 
@@ -117,7 +117,7 @@ def test_read_layout():
     assert read_layout(layout_data) == \
         {'exc': [['?', 9, 9], (3, 3)], 'ans': [['?', 9, 9], (3, 3)],
          'spacing_w': '25.0pt', 'spacing_a': ''}
-    layout_data = {'answers': 'print=2, spacing=jump to next page, print=1'}
+    layout_data = {'answers': 'print=2, newpage=true, print=1'}
     assert read_layout(layout_data) == \
         {'exc': [None, 'all'],
          'ans': [None, 2, 'jump', 'next_page', None, 1],

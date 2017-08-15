@@ -150,7 +150,7 @@ The ``layout`` key can list a ``unit`` key, whose value will be used for columns
 
 The ``layout`` key can list a ``font_size_offset`` key, whose value is a relatively small integer allowing to change the font size (for instance, set it at ``+1`` or ``+2`` to enlarge all fonts, or ``-1`` or ``-2`` to reduce all fonts' size)
 
-So far, no ``spacing`` key is available for sheets' ``layout``, but the spacing between exercises can be set in the properties
+So far, no ``spacing`` key is available for sheets' ``layout``, but the spacing between exercises can be set in the properties.
 
 Finally, the ``layout`` key can list one ``wordings`` key and/or one ``answers`` key. They allow to define different settings for wordings and answers, but both work the same way.
 
@@ -161,6 +161,8 @@ The properties are defined as key=value pairs separated by commas (actually a co
 * ``colwidths`` is ignored if ``rowxcol`` contains ``none``. If ``rowxcol`` contains a ``r×c`` definition, then ``colwidths`` defaults to ``auto``: the width of all columns will be calculated automatically (all equal). Otherwise, you can set the values you like, separated by spaces, like: ``4.5 4.5 9`` what would make the two first columns 4.5 units wide and the last, 9 units wide (See ``unit`` key description above). Note that there must be as many values as the number of columns defined in the ``"r×c"`` definition.
 
 * ``print`` is the number of exercises to print, either one after the other, or per "cell". It defaults to ``auto``. If ``rowxcol`` contains ``none``, then ``print`` can either be a natural number (how many exercises/questions to print), or ``auto``, and then all exercises (left) will be printed, without distributing them among columns. If ``rowxcol`` contains a ``r×c`` definition, then an ``auto`` value would mean that each "cell" will contain one question. Otherwise, you can tell how many questions you want in each cell, row after row, as integers separated by spaces, like: ``2 1 1 3 1 1`` what would put (with ``rowxcol=2×3``) 2 questions (or exercises) in the first cell, then 1 question in each other cell of the first row, then 3 questions in the first cell of the second row, and 1 question in each cell left. There must be as many numbers as cells. As a convenience, you can add a ``.`` or a ``/`` to separate the rows, like: ``2 1 1 / 3 1 1`` (These two signs will simply be ignored). Each row must contain as many numbers as defined in the ``r×c`` definition. If the number of rows is left undefined (``?``) then only the first row has to be defined (extra rows will be ignored) as a pattern for all rows (the default still being ``auto``, i.e. 1 question per cell).
+
+* ``newpage`` can be turned to true in order to insert a jump to next page.
 
 
 Examples of sheet's layouts:
@@ -191,7 +193,7 @@ If you have 3 exercises and you want to print 2 answers on a first page, then ju
 
   layout:
     answers: print=2,
-             spacing=jump to next page,
+             newpage=true,
              print=1
 
 
@@ -199,7 +201,6 @@ The !!omap label
 ^^^^^^^^^^^^^^^^
 
 The sheets' names keys as well as the ``exercise`` keys are labeled ``!!omap``. This is required in order to ensure the order of the created sheets will be the same as the one defined in the sheet. Forgetting these labels won't prevent ``mathmaker`` from running, but the final order may be changed (what does not mean it will be randomly reorganized at each run). In this example, this wouldn't have any consequence as there's only one ``exercise`` key in each sheet and only one ``question`` key in each exercise.
-* ``spacing`` can be set to ``jump to next page`` (for sheets, this is the only possible value, so far).
 
 Exercise's keys
 ^^^^^^^^^^^^^^^
@@ -219,7 +220,9 @@ Possible keys for sheets, at the moment, are:
 
 * ``start_number`` defines the first number, when numbering the questions. Must be an integer greater or equal to ``1``.
 
-* ``spacing`` defines the spacing between two consecutive exercises. It defaults to ``''`` (i.e. nothing). Otherwise, you can set it at  ``newline``, ``newline_twice``, or a value that will be inserted in a LaTeX ``addvspace{}`` command, for instance ``spacing=40.0pt`` will result in a ``addvspace{40.0pt}`` inserted at the end of each exercise. ``spacing`` can be overriden in the ``layout`` key (in either or both ``wordings`` and ``answers`` keys) of the exercise, in order to set different spacings for the wordings and the answers. It can also be ``jump to next page``.
+* ``spacing`` defines the spacing between two consecutive exercises. It defaults to ``''`` (i.e. nothing). Otherwise, you can set it at  ``newline``, ``newline_twice``, or a value that will be inserted in a LaTeX ``addvspace{}`` command, for instance ``spacing=40.0pt`` will result in a ``addvspace{40.0pt}`` inserted at the end of each exercise. ``spacing`` can be overriden in the ``layout`` key (in either or both ``wordings`` and ``answers`` keys) of the exercise, in order to set different spacings for the wordings and the answers.
+
+* ``newpage`` can be turned to true in order to insert a jump to next page.
 
 * ``q_spacing`` can be used to set a default value for the spacing between two consecutive questions.
 
