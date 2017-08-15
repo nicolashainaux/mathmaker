@@ -270,7 +270,7 @@ class _AttrStr(str):
                 for couple in attr_list if '=' in couple
                 for (k, v) in [couple.strip().split(sep='=')]}
 
-    def split_in_pages(self, key):
+    def _split_in_pages(self, key):
         """
         Split self and expand key for each new page found in self.
 
@@ -350,7 +350,7 @@ def read_layout(data):
     for data_elt in data:
         for part in ['wordings', 'answers']:
             if part in data_elt:
-                parts += _AttrStr(data_elt[part]).split_in_pages(part)
+                parts += _AttrStr(data_elt[part])._split_in_pages(part)
     for chunk in parts:
         if 'wordings' in chunk:
             part = 'wordings'

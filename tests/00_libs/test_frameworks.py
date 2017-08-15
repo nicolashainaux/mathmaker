@@ -65,13 +65,13 @@ def test_AttrStr_parse():
             'required': 'true'}
 
 
-def test_AttrStr_split_in_pages():
-    """Check split_in_pages() in various cases."""
+def test_AttrStr__split_in_pages():
+    """Check _split_in_pages() in various cases."""
     assert _AttrStr('rowxcol=?×2, print=3 3, spacing=') \
-        .split_in_pages('wordings') \
+        ._split_in_pages('wordings') \
         == [{'wordings': 'rowxcol=?×2, print=3 3, spacing='}]
     assert _AttrStr('print=2, spacing=jump to next page, print=1') \
-        .split_in_pages('answers') \
+        ._split_in_pages('answers') \
         == [{'answers': 'print=2, spacing=jump to next page'},
             {'answers': 'print=1'}]
 
