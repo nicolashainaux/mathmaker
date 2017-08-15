@@ -403,9 +403,8 @@ def read_layout(data):
                 colwidths = [int(n) for n in colwidths.split(sep=' ')]
                 if not len(colwidths) == ncol:
                     raise ValueError(
-                        'XMLFileFormatError: in a <layout>, the number of'
-                        'columns '
-                        'widths does not match the number of cols in '
+                        'YAML File Format Error: in a layout, the number of'
+                        'columns widths does not match the number of cols in '
                         'the rowxcol attribute.')
             if part == 'wordings':
                 if keep_default_w:
@@ -421,7 +420,7 @@ def read_layout(data):
                     layout['ans'].append([nrow, ] + colwidths)
             if distri == 'auto':
                 distri = ' '.join(['1' for i in range(ncol * nrow)])
-            distri = distri.replace(',', ' ').replace(';', ' ')
+            distri = distri.replace('.', ' ').replace('/', ' ')
             distri = tuple(int(n) for n in distri.split())
             if part == 'wordings':
                 layout['exc'].append(distri)

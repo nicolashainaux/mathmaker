@@ -122,6 +122,14 @@ def test_read_layout():
         {'exc': [None, 'all'],
          'ans': [None, 2, 'jump', 'next_page', None, 1],
          'spacing_w': 'undefined', 'spacing_a': 'undefined'}
+    layout_data = {'wordings': 'rowxcol=3×2,  print=1 1 . 2 2 . 1 1, spacing='}
+    assert read_layout(layout_data) == \
+        {'exc': [[3, 9, 9], (1, 1, 2, 2, 1, 1)], 'ans': [None, 'all'],
+         'spacing_w': '', 'spacing_a': 'undefined'}
+    layout_data = {'wordings': 'rowxcol=3×2,  print=1 1 / 2 2 / 1 1, spacing='}
+    assert read_layout(layout_data) == \
+        {'exc': [[3, 9, 9], (1, 1, 2, 2, 1, 1)], 'ans': [None, 'all'],
+         'spacing_w': '', 'spacing_a': 'undefined'}
 
 
 def test_load_sheet_exceptions():
