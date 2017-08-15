@@ -65,15 +65,32 @@ def test_AttrStr_parse():
             'required': 'true'}
 
 
-def test_AttrStr__split_in_pages():
-    """Check _split_in_pages() in various cases."""
+def test_AttrStr_split_clever_exceptions():
+    """Check split_clever() raises proper exceptions."""
+    with pytest.raises(ValueError) as excinfo:
+        _AttrStr('newpage=true, rowxcol=?×2, print=3 3, spacing=') \
+            .split_clever('wordings')
+    assert 'cannot start with a newpage' in str(excinfo.value)
+    with pytest.raises(ValueError) as excinfo:
+        _AttrStr('print=2, print=1, newpage=true,') \
+            .split_clever('answers')
+    assert 'same keyword cannot show up several times' in str(excinfo.value)
+
+
+def test_AttrStr_split_clever():
+    """Check split_clever() in various cases."""
+    assert _AttrStr('').split_clever('wordings') == [{}]
     assert _AttrStr('rowxcol=?×2, print=3 3, spacing=') \
-        ._split_in_pages('wordings') \
+        .split_clever('wordings') \
         == [{'wordings': 'rowxcol=?×2, print=3 3, spacing='}]
     assert _AttrStr('print=2, newpage=true, print=1') \
-        ._split_in_pages('answers') \
+        .split_clever('answers') \
         == [{'answers': 'print=2, newpage=true'},
             {'answers': 'print=1'}]
+    assert _AttrStr('print=2, rowxcol=?×2, print=3 3') \
+        .split_clever('answers') \
+        == [{'answers': 'print=2'},
+            {'answers': 'rowxcol=?×2, print=3 3'}]
 
 
 def test_AttrStr_fetch_exception():

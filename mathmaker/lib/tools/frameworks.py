@@ -270,9 +270,11 @@ class _AttrStr(str):
                 for couple in attr_list if '=' in couple
                 for (k, v) in [couple.strip().split(sep='=')]}
 
-    def _split_in_pages(self, key):
+    def split_clever(self, key):
         """
-        Split self and expand key for each new page found in self.
+        Split self in pieces to gather (rowxcol, colwidths, print) series.
+
+        Also split on each newpage occurence.
 
         For instance, with
         key = 'wordings' and self = 'rowxcol=?×2, print=3 3, spacing=',
@@ -288,14 +290,50 @@ class _AttrStr(str):
         two different values of 'print' (the second one would have erased the
         first one) nor would it have kept the order.
 
+        If self is: 'print=2, rowxcol=?×2, print=3 3'
+        will return: [{'answers': 'print=2'},
+                      {'answers': 'rowxcol=?×2, print=3 3'}]
+
         :param key: the key to expand
         :type key: str
-        :rtype: dict
+        :rtype: list
         """
-        pages = self.strip(', ').split(sep='newpage=true')
-        pages = [p.strip(', ') for p in pages]
-        pages = [p + ', newpage=true' for p in pages[:-1]] + [pages[-1]]
-        return [{key: p} for p in pages]
+        if self == '':
+            return [{}]
+        order = {'rowxcol': 0, 'colwidths': 1, 'print': 2, 'newpage': -1000}
+        chunks = self.strip(', ').split(sep=', ')
+        result = []
+        bit = {}
+        last_rank = -1
+        for c in chunks:
+            k, v = c.strip(', ').split(sep='=')
+            if k in order and order[k] < last_rank:
+                if k == 'newpage':
+                    if key not in bit:
+                        raise ValueError('YAML File Format Error: '
+                                         'a layout cannot start with a '
+                                         'newpage (at least, not yet).')
+                    result.append({key: ', '.join([bit[key], c])})
+                    bit = {}
+                else:
+                    result.append(bit)
+                    bit = {key: c}
+                last_rank = -1
+            elif k in order and order[k] == last_rank:
+                raise ValueError('YAML File Format Error: same keyword cannot '
+                                 'show up several times in a row.')
+            else:
+                # either k is not in order, like 'spacing', or k is in order
+                # and order[k] > last_rank
+                if key in bit:
+                    bit = {key: ', '.join([bit[key], c])}
+                else:
+                    bit = {key: c}
+                if k in order:
+                    last_rank = order[k]
+        if bit != {}:
+            result.append(bit)
+        return result
 
     def fetch(self, attr):
         """
@@ -348,8 +386,8 @@ def read_layout(data):
     parts = []
     for data_elt in data:
         for part in ['wordings', 'answers']:
-            if part in data_elt:
-                parts += _AttrStr(data_elt[part])._split_in_pages(part)
+            if part in data_elt and _AttrStr(data_elt[part]) != '':
+                parts += _AttrStr(data_elt[part]).split_clever(part)
     for chunk in parts:
         if 'wordings' in chunk:
             part = 'wordings'
