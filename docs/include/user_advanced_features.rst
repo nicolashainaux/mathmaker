@@ -84,100 +84,95 @@ It's possible to pass an IP address in an extra parameter named ``ip``, like:
 In this case, ``mathmakerd`` will check if the last request is older than 10 seconds (this is hardcoded, so far) and if not, then a http status 429 will be returned. In order to do that, ``mathmakerd`` uses a small database that it erases when the last request is older than one hour (also hardcoded, so far).
 
 
-xml sheets
-----------
-As a directive to mathmaker it is possible to give a path to an xml file.
+YAML sheets
+-----------
 
-Creating a new xml file that can be used as a model by ``mathmaker`` is more for advanced users, though it's not that difficult.
+As a directive to mathmaker it is possible to give a path to yaml file.
+
+Creating a new yaml file that can be used as a model by ``mathmaker`` is more for advanced users, though it's not that difficult.
 
 Example
 ^^^^^^^
 
-Let's have a look at ``mathmaker/data/frameworks/mental_calculation/lev11_1/divisions.xml``:
+Let's have a look at ``mathmaker/data/frameworks/algebra/expand.yaml``, where four sheets are defined:
 
-.. code-block:: xml
+.. code-block:: yaml
 
-    <?xml version="1.0" encoding="UTF-8"?>
+  simple: !!omap
+    - title: "Algebra: expand simple brackets"
+    - exercise: !!omap
+      - details_level: medium
+      - text_exc: "Expand and reduce the following expressions:"
+      - questions: expand simple -> inttriplets_2to9 (5)
 
-    <sheet header="" title="Mental calculation" subtitle="Divisions" text="" answers_title="Answers">
+  simple_detailed_solutions: !!omap
+    - title: "Algebra: expand simple brackets"
+    - exercise: !!omap
+      - text_exc: "Expand and reduce the following expressions:"
+      - questions: expand simple -> inttriplets_2to9 (5)
 
-    	<layout type="mental" font_size_offset="-1" />
+  double: !!omap
+    - title: "Algebra: expand and reduce double brackets"
+    - exercise: !!omap
+      - details_level: medium
+      - text_exc: "Expand and reduce the following expressions:"
+      - questions: expand double -> intpairs_2to9;;intpairs_2to9 (5)
 
-    	<!-- Default value: id='generic'
-    		 No default for kind and subkind, they must be given -->
-    	<!-- Available kinds for mental calculation: tabular, slideshow -->
-    	<exercise id="mental_calculation" kind="tabular" shuffle="true">
+  double_detailed_solutions: !!omap
+    - title: "Algebra: expand and reduce double brackets"
+    - exercise: !!omap
+      - text_exc: "Expand and reduce the following expressions:"
+      - question: expand double -> intpairs_2to9;;intpairs_2to9 (5)
 
-    		<!-- Default value (planned): context="none"
-    			 No default for kind and subkind, they must be given -->
-    		<question kind="divi" subkind="direct">
-    			<nb source="intpairs_2to9">20</nb>
-    		</question>
+The four top-level keys are the sheets' names. These names must not contain spaces (not supported).
 
-    	</exercise>
+A list of keys is defined below each sheet's name. No one is mandatory. If you do not define the ``title``, then the default value will be used (for titles, this is an empty string).
 
-    </sheet>
+Sheet's keys
+^^^^^^^^^^^^
 
-The ``<sheet>`` tags
-^^^^^^^^^^^^^^^^^^^^
+Possible keys for sheets, at the moment, are:
 
-They have attributes that let you easily change the title of the sheet, a subtitle etc.
+- ``preset`` allows to preset a number of other keys. Possible values: ``default``, ``mental_calculation``. Default is ``default``. The ``mental_calculation`` value will remove the exercise's titles and the exercises layout.
+- ``header``, ``title``, ``subtitle``, ``text`` allow to customize the header, title, subtitle and text of the sheet. Default value is an empty string for each of them.
+- ``answers_title`` allows to customize the title for the answers' sheet. It defaults to ``Answers``.
+- ``layout`` contains the layout description of the sheet, if necessary (see below).
+- Any key starting with ``exercise`` will contain the list of questions of one exercise. It is not possible to use the same key several times (YAML forbids it), so if you want to define several exercises, say two, for instance, you'll have to use ``exercise`` and ``exercise2``, for instance (if you use numbers, it will have no effect on the order of exercises in the output).
 
-The ``<layout>`` tags
-^^^^^^^^^^^^^^^^^^^^^
+Sheet's layout
+^^^^^^^^^^^^^^
 
-They may show up as first child of a ``<sheet>`` or ``<exercise>``. They work about the same way in both cases but both have their own special features too.
+.. image:: pics/layout_sheet.png
 
-.. image:: pics/layouts.png
+If a sheet contains no ``layout`` key (or if its value is left empty), then the default layout will be used (all exercises printed one after the other, unlike the 3×2 grid in the figure above).
 
-If a ``<sheet>`` or ``<exercise>`` contains no ``<layout>``, it is assumed that the default layout will be used, i.e. no layout at all: all exercises and all questions will simply be printed one after the other. It would be equivalent to:
+The ``layout`` key can list a ``unit`` key, whose value will be used for columns widths (see below). ``unit`` defaults to ``cm``.
 
-.. code-block:: xml
+The ``layout`` key can list a ``font_size_offset`` key, whose value is a relatively small integer allowing to change the font size (for instance, set it at ``+1`` or ``+2`` to enlarge all fonts, or ``-1`` or ``-2`` to reduce all fonts' size)
 
-		<layout />
+So far, no ``spacing`` key is available for sheets' ``layout``, but the spacing between exercises can be set in the properties
 
-what would be the same as:
+Finally, the ``layout`` key can list one ``wordings`` key and/or one ``answers`` key. They allow to define different settings for wordings and answers, but both work the same way.
 
-.. code-block:: xml
+The properties are defined as key=value pairs separated by commas (actually a comma and a space). For instance: ``rowxcol=?×2, print=3 3``
 
-		<layout>
-			<wordings />
-			<answers />
-		</layout>
+* ``rowxcol`` can contain ``none`` (default: no layout) or the number of rows and columns as a multiplication of two integers: ``r×c``, for instance: ``3×2``. This would mean 3 rows and 2 columns, what would define 6 "cells", like in the figure above. As a convenience, you can use a x instead of a ×, like this: ``3x2``.
 
-and also the same as:
+* ``colwidths`` is ignored if ``rowxcol`` contains ``none``. If ``rowxcol`` contains a ``r×c`` definition, then ``colwidths`` defaults to ``auto``: the width of all columns will be calculated automatically (all equal). Otherwise, you can set the values you like, separated by spaces, like: ``4.5 4.5 9`` what would make the two first columns 4.5 units wide and the last, 9 units wide (See ``unit`` key description above). Note that there must be as many values as the number of columns defined in the ``"r×c"`` definition.
 
-.. code-block:: xml
+* ``print`` is the number of exercises to print, either one after the other, or per "cell". It defaults to ``auto``. If ``rowxcol`` contains ``none``, then ``print`` can either be a natural number (how many exercises/questions to print), or ``auto``, and then all exercises (left) will be printed, without distributing them among columns. If ``rowxcol`` contains a ``r×c`` definition, then an ``auto`` value would mean that each "cell" will contain one question. Otherwise, you can tell how many questions you want in each cell, row after row, as integers separated by spaces, like: ``2 1 1 3 1 1`` what would put (with ``rowxcol=2×3``) 2 questions (or exercises) in the first cell, then 1 question in each other cell of the first row, then 3 questions in the first cell of the second row, and 1 question in each cell left. There must be as many numbers as cells. As a convenience, you can add a ``.`` or a ``/`` to separate the rows, like: ``2 1 1 / 3 1 1`` (These two signs will simply be ignored). Each row must contain as many numbers as defined in the ``r×c`` definition. If the number of rows is left undefined (``?``) then only the first row has to be defined (extra rows will be ignored) as a pattern for all rows (the default still being ``auto``, i.e. 1 question per cell).
 
-		<layout>
-			<wordings rowxcol="none" />
-			<answers rowxcol="none" />
-		</layout>
-
-The ``<wordings>`` and ``<answers>`` tags contain the layout for wordings and for answers, respectively. It's possible to use several of each of them, when one want some special layout.
-
-Attributes of ``<wordings />`` and ``<answers />``
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-* ``rowxcol`` can contain ``"none"`` (default: no layout) or the number of rows and columns as a multiplication of two integers: ``"r×c"``, for instance: ``"2×3"``. This would mean to use 2 rows and 3 columns, what would define 6 "cells". As a convenience, you can use a x instead of a ×, like this: ``"2x3"``. The first number can be replaced by a ``?`` (exercises layouts only), in that case, the number of rows will be automatically calculated, depending on the number of questions and the number of columns.
-
-* ``colwidths`` is ignored if ``rowxcol`` contains ``"none"``. If ``rowxcol`` contains a ``"r×c"`` definition, then ``colwidths`` defaults to ``"auto"``: the width of all columns will be calculated automatically (all equal). Otherwise, you can set the values you like, separated by spaces, like: ``"4.5 4.5 9"`` what would make the two first columns 4.5 units wide and the last, 9 units wide. The length unit can be set in the ``<sheet>``'s ``<layout>``'s attribute ``unit``. It defaults to cm. There must be as many values as the number of columns defined in the ``"r×c"`` definition.
-
-* ``print`` is the number of questions (or exercises) to print, either one after the other, or per cell. It defaults to ``"auto"``. If ``rowxcol`` contains ``"none"``, then ``print`` can either be a natural number (how many exercises/questions to print), or ``"auto"``, and then all exercises (left) will be printed, without distributing them among columns. If ``rowxcol`` contains a ``"r×c"`` definition, then an ``"auto"`` value would mean that each "cell" will contain one question. Otherwise, you can tell how many questions you want in each cell, row after row, as integers separated by spaces, like: ``"2 1 1 3 1 1"`` what would put (with ``rowxcol="2×3"``) 2 questions (or exercises) in the first cell, then 1 question in each other cell of the first row, then 3 questions in the first cell of the second row, and 1 question in each cell left. There must be as many numbers as cells. As a convenience, you can add a ``;`` or ``,`` to separate the rows, like: ``"2 1 1, 3 1 1"`` (These two punctuation signs will simply be ignored). Each row must contain as many numbers as defined in the ``"r×c"`` definition. If the number of rows is left undefined (``?``) then only the first row has to be defined (extra rows will be ignored) as a pattern for all rows (the default still being ``"auto"``, i.e. 1 question per cell).
-
-* ``spacing`` defaults to ``""``, it is the spacing to be introduced at the end of the exercise. You can set it at ``"`` (no spacing), ``"newline"``, ``"newline_twice"``, the special value ``"jump to next page"`` that will insert a ``\\newpage`` after the current exercise; or a value that will be inserted in a LaTeX ``addvspace{}`` command, for instance ``spacing="40.0pt"`` will result in a ``addvspace{40.0pt}`` inserted at the end of the exercise. ``spacing`` can also be used in the parent ``<exercise>`` tag. The value defined as a ``<layout>``'s attribute will override it. This allows to set different spacings for the wordings and the answers.
 
 Examples of sheet's layouts:
 """"""""""""""""""""""""""""
 
 Say you have 4 exercises and you want to put the answers of the two first ones in 2 two columns, and then print the left ones one after another:
 
-.. code-block:: xml
+.. code-block:: yaml
 
-  <layout >
-    <answers rowxcol="1×2" print="1 1"/>
-    <answers print="2" />
-  </layout>
+  layout:
+    answers: rowxcol=1×2, print=1 1,
+             print=2
 
 
 ex 1            ex 2
@@ -186,43 +181,83 @@ ex 3
 
 ex 4
 
-If you have 3 exercises and you want to print 2 answers on a first page, then jump to next page and print the answer of the third one, then ``<sheet>``'s layout may be:
+.. note::
 
-.. code-block:: xml
+    YAML allows to write the same string ("scalar") on several lines. This is practical for readability. In the example above, we could have written ``rowxcol=1×2, print=1 1, print=2`` all on the same line.
 
-	<layout>
-		<answers print="2" />
-		<answers spacing="jump to next page" />
-		<answers print="1" />
-	</layout>
+If you have 3 exercises and you want to print 2 answers on a first page, then jump to next page and print the answer of the third one, then your sheet's layout may be:
+
+.. code-block:: yaml
+
+  layout:
+    answers: print=2,
+             spacing=jump to next page,
+             print=1
+
+
+The !!omap label
+^^^^^^^^^^^^^^^^
+
+The sheets' names keys as well as the ``exercise`` keys are labeled ``!!omap``. This is required in order to ensure the order of the created sheets will be the same as the one defined in the sheet. Forgetting these labels won't prevent ``mathmaker`` from running, but the final order may be changed (what does not mean it will be randomly reorganized at each run). In this example, this wouldn't have any consequence as there's only one ``exercise`` key in each sheet and only one ``question`` key in each exercise.
+* ``spacing`` can be set to ``jump to next page`` (for sheets, this is the only possible value, so far).
+
+Exercise's keys
+^^^^^^^^^^^^^^^
+Possible keys for sheets, at the moment, are:
+
+* ``preset`` (same as for sheets)
+
+* ``layout_variant`` can be ``default``, ``tabular`` or ``slideshow``.
+
+* ``layout_unit`` defaults to ``cm``.
+
+* ``shuffle`` can be ``true`` or ``false``. It defaults to ``false``, except for ``mental_calculation`` preset. If set to true, then the questions will be shuffled.
+
+* ``details_level`` can be ``maximum`` (default), ``medium`` or ``none`` (default for ``mental_calculation`` preset). Some types of questions can be configured to output the answer with different levels of details.
+
+* ``q_numbering`` defines the numbering of the questions of the exercise. It can be ``default``, ``alphabet``, ``alphabetical``, ``numeric`` or ``disabled``. The three first values are synonyms.
+
+* ``start_number`` defines the first number, when numbering the questions. Must be an integer greater or equal to ``1``.
+
+* ``spacing`` defines the spacing between two consecutive exercises. It defaults to ``''`` (i.e. nothing). Otherwise, you can set it at  ``newline``, ``newline_twice``, or a value that will be inserted in a LaTeX ``addvspace{}`` command, for instance ``spacing=40.0pt`` will result in a ``addvspace{40.0pt}`` inserted at the end of each exercise. ``spacing`` can be overriden in the ``layout`` key (in either or both ``wordings`` and ``answers`` keys) of the exercise, in order to set different spacings for the wordings and the answers. It can also be ``jump to next page``.
+
+* ``q_spacing`` can be used to set a default value for the spacing between two consecutive questions.
+
+* ``text_exc`` and ``text_ans`` allow to customize the wording of the exercise and of its answer. ``text_exc`` defaults to nothing (empty string). ``text_ans`` defaults to ``"Example of detailed solutions:"`` with ``default`` preset, but also to an empty string with ``mental_calculation`` preset.
+
+* The ``question`` and ``mix`` keys allow to define the exercise's questions. As YAML does not allow to use the same key, if you want to define several ``question`` keys, nor several ``mix`` keys, you'll have to use the same trick for them as for the ``exercise`` key: ``question1``, ``question2`` etc. or ``mix1``, ``mix2``, etc. See below the paragraphs about ``question`` and ``mix``.
+
+Exercise's layout
+^^^^^^^^^^^^^^^^^
+
+It works the same way as a Sheet's layout, with some differences:
+
+* In ``rowxcol``, the first number can be replaced by a ``?``. In that case, the number of rows will be automatically calculated, depending on the number of questions and the number of columns.
 
 Examples of exercise's layouts:
 """""""""""""""""""""""""""""""
 
-.. code-block:: xml
+.. code-block:: yaml
 
-		<layout>
-			<wordings rowxcol="4×3" />
-			<answers rowxcol="4×3" />
-		</layout>
+  layout:
+    wordings: rowxcol=4×3
+    answers: rowxcol=4×3
 
 will basically distribute the questions in 4 rows of 3 columns. Same for wordings and for answers.
 
-.. code-block:: xml
+.. code-block:: yaml
 
-		<layout>
-			<wordings rowxcol="?×3" colwidths="5 5 8" print="1 1 2" />
-		</layout>
+  layout:
+    wordings: rowxcol=?×3, colwidths=5 5 8, print=1 1 2
 
 will distribute, only for wordings, the questions in 3 columns of widths 5 cm, 5 cm and 8 cm. There will be 1 question in the left cell of each row, 1 question in the middle cell of each row and 2 questions in the right cell of each row.
 
 If you have 6 expressions, say A, B, C, D, E and F to distribute:
 
-.. code-block:: xml
+.. code-block:: yaml
 
-    <layout>
-      <wordings  rowxcol="?×2" />
-    </layout>
+  layout:
+    wordings: rowxcol=?×2
 
 will distribute the questions in 2 columns of 3 rows, 1 question per row, i.e.:
 
@@ -234,11 +269,10 @@ E = ....            F = ....
 
 whereas:
 
-.. code-block:: xml
+.. code-block:: yaml
 
-    <layout>
-      <wordings  rowxcol="?×2"  print="3, 3" />
-    </layout>
+  layout:
+    wordings: rowxcol=?×2,  print=3 / 3
 
 will distribute the questions in 2 columns of 1 row, 3 questions per row, i.e.:
 
@@ -248,113 +282,94 @@ B = ....            E = ....
 
 C = ....            F = ....
 
-Special attributes of ``<sheet>``'s ``<layout>``
-""""""""""""""""""""""""""""""""""""""""""""""""
+The ``question`` key
+^^^^^^^^^^^^^^^^^^^^
 
-* ``type`` allows to use several different special preformatted layouts. Default value is ``"default"``. Other possible values are ``"short_test"``, ``"mini_test"``, ``"equations"`` and ``"mental"``.
+Example of a simple question:
 
-* ``unit`` defaults to cm (SI). It is used for lengths like in ``colwidths``.
+.. code-block:: yaml
 
-* The ``font_size_offset`` attribute is especially practical to resize the whole sheet at once (set it at ``+1`` or ``+2`` to enlarge all fonts, or ``-1`` or ``-2`` to reduce all fonts' size).
+    question: expand simple -> inttriplets_2to9 (5)
 
-The ``<exercise>`` tags
-^^^^^^^^^^^^^^^^^^^^^^^
+This question says: "I want 5 questions about expand a simple braces expression, the numbers being integers between 2 and 9".
 
-The ``<exercise>`` part is the one you can change alot. Keep the ``id="mental_calculation"`` and ``kind="tabular"`` attributes though (they can't be changed yet) but you can put the questions you like inside.
+It is actually divided in two parts, separated by this arrow ``->``. The first part concerns the kind of question and possibly its specific attributes, the second part concerns the numbers' source to be used to create the question.
 
-For exercises, ``spacing`` can be used exactly the same way as in its children (``wordings`` or ``answers``). If one of both of its children redefine spacing, the value defined as an ``<exercise>``'s attribute will be overriden for each concerned child. This allows to set different spacings for the wordings and the answers.
+The question's ``id`` and attributes
+""""""""""""""""""""""""""""""""""""
 
-The questions will show up in the order you write them, unless you set the ``shuffle`` attribute of ``<exercise>`` to ``"true"``.
+The left part of the scalar (string) matching a ``question`` key **must start** with two parts (words or several_words) separated by a space. This is the ``id`` of the question. Possible extra attributes can follow it, separated by commas (actually a comma and a space). Each extra attribute will be written as a pair ``key=value``.
 
-The ``<question>`` tags
-^^^^^^^^^^^^^^^^^^^^^^^
+For instance:
 
-Each question is defined this way:
+.. code:: yaml
 
-.. code-block:: xml
+  question: calculation order_of_operations, subvariant=only_positive, spacing=15.0pt -> singleint_5to20;;intpairs_2to9, variant=5 (1)
 
-    <question kind="divi" subkind="direct">
-        <nb source="intpairs_2to9">20</nb>
-    </question>
+In this example, a question of kind "calculation order_of_operations" will be created, with only positive numbers, spaced of 15.0pt.
 
-You must set at least a ``kind`` and a ``subkind`` attributes. Then inside the question, you set at least one numbers' source. This question says: "I want 20 questions about direct division (i.e. each one will be of the form a ÷ b = ?) the numbers being integers between 2 and 9". (For divisions the pair of integers will be b and the solution; mathmaker will compute a automatically).
+The question's ``nb`` and its attributes
+""""""""""""""""""""""""""""""""""""""""
 
-Another example, taken from ``mathmaker/data/frameworks/mental_calculation/lev11_1/mini_problems.xml``:
+The right part (after ``->``) starts with the name of the numbers' source (``intpairs_*to*``, ``singleint_*to*`` etc. see the already existing questions to know what to use, so far there's no doc about them. Some questions require multiple sources, like the one in the example above, they're written in row, joined by ``;;``). It may be followed by attributes, just like the left part, and **must end** with an integer between braces, what is the number of questions to create with this numbers' source.
 
-.. code-block:: xml
+The example above will create 1 question, variant number ``5``, and use the sources ``singleint_5to20`` and ``intpairs_2to9``.
 
-    <question kind="addi" subkind="direct" context="mini_problem">
-        <nb source="intpairs_5to20">5</nb>
-    </question>
+Note that you can put several different numbers' sources inside one ``question``. For instance:
 
-You see you can set the lower and upper values as you like. Just respect the syntax (if you write ``intpairs_5_to_20`` this won't work). And this time a context is added to the question. So it means "I want 5 simple additive problems, the numbers being integers between 5 and 20".
+.. code:: yaml
 
-Note that you can put several different numbers' sources inside one ``<question>``. For instance:
+  questions: calculation order_of_operations, subvariant=only_positive, spacing=15.0pt -> singleint_5to20;;intpairs_2to9, variant=5 (1)
+                                                                                       -> singleint_5to20;;intpairs_2to9, variant=7 (1)
 
-.. code-block:: xml
+or:
 
-    <question kind="multi" subkind="direct">
-        <nb source="intpairs_2to9">1</nb>
-        <nb source="table_11">1</nb>
-        <nb source="decimal_and_one_digit">1</nb>
-    </question>
+.. code-block:: yaml
 
-This means there will be three questions, all being direct multiplications, but one pair of numbers will be integers between 2 and 9; one pair will be from the table of 11 (like 34 × 11), and one will be a decimal number and a one digit number (like 150.3 × 0.01).
+    questions: expand simple -> inttriplets_2to9 (3)
+                             -> inttriplets_5to15 (3)
 
-The ``<mix>`` tags
-^^^^^^^^^^^^^^^^^^
+This means there will be six questions, all being of "expand simple" kind, but the three first ones will use integers between 2 and 9; and the three last ones will use integers between 5 and 15.
 
-In some sheets you'll find ``<mix>`` tags, like this one, taken from ``mathmaker/data/frameworks/mental_calculation/lev11_2/test_11_2.xml``:
+The ``mix`` key
+^^^^^^^^^^^^^^^
 
-.. code-block:: xml
+"Mixes" are primarily meant to allow to distribute numbers' sources randomly on several questions types. This will only work if all numbers' sources match all the questions of the same ``mix``.
 
-      <mix>
-        <question kind="area" subkind="rectangle" picture="true"></question>
-        <question kind="multi" subkind="direct" pick="2"></question>
-        <question kind="vocabulary" subkind="multi"></question>
-        <nb source="table_15">1</nb>
-        <nb source="table_11">1</nb>
-        <nb source="intpairs_2to9" nb_variant="decimal1">1</nb>
-        <nb source="intpairs_2to9" nb_variant="decimal2">1</nb>
-      </mix>
+They can also be used to control the randomness of questions in an exercise. For instance, you want that the 3 first questions of an exercise are in random order, and then the 3 next ones too, but not all the 6 questions in random order. Then you can set two ``mix`` keys, say ``mix1`` and ``mix2`` and put 3 questions inside each mix.
 
-It means the numbers' sources will be randomly attributed to the questions. Each time a new sheet is generated from this framework, the numbers from table of 15 will be attributed randomly to one of the four questions of the sections, and the same will happen to the other numbers' sources.
+The questions and numbers' sources inside ``mix`` are not displayed as in simple ``question``, but under different keys, the ones starting by ``question``, the others by ``nb``.
+
+.. code-block:: yaml
+
+  - mix0:
+    - question: calculation order_of_operations, subvariant=only_positive, pick=4, nb_variant=decimal1, spacing=15.0pt
+    - nb: singleint_5to20;;intpairs_2to9, variant=0, required=true (1)
+          singleint_5to20;;intpairs_2to9, variant=1,3,5,7, required=true (1)
+          singleint_5to20;;intpairs_2to9, variant=2,3,6,7, required=true (1)
+          singleint_5to20;;intpairs_2to9, variant=0-7, required=true (1)
+  - mix1:
+    - question: calculation order_of_operations, subvariant=only_positive, pick=6, nb_variant=decimal1, spacing=15.0pt
+    - nb: singleint_3to12;;intpairs_2to9, variant=8-23, required=true (2)
+          singleint_3to12;;intpairs_2to9, variant=116-155, required=true (1)
+          singleint_3to12;;intpairs_2to9, variant=156-187, required=true (1)
+          singleint_3to12;;intpairs_2to9, variant=8-23,100-187 (2)
 
 .. note::
 
-    The ``<question>``'s ``pick`` attribute tells how many times to create such a question. If unspecified, default value is ``1``. This attribute has no effect outside ``<mix>`` tags.
+    Inside a ``mix``, the ``<question>``'s ``pick`` attribute tells how many times to create such a question. If unspecified, default value is ``1``. This attribute has no effect outside ``mix`` keys.
 
-The rules to follow in a ``<mix>`` section are:
+The rules to follow in a ``mix`` list are:
 
 * Any numbers' source must be assignable to any of the questions of the section.
 
-* Put at least as many numbers' sources as there are questions. For instance in the example above we could have written this too:
-
-.. code-block:: xml
-
-    <mix>
-        <question kind="area" subkind="rectangle" picture="true"></question>
-        <question kind="multi" subkind="direct" pick="2"></question>
-        <question kind="vocabulary" subkind="multi"></question>
-        <nb source="table_15">3</nb>
-        <nb source="intpairs_2to9" nb_variant="decimal1">1</nb>
-    </mix>
+* Put at least as many numbers' sources as there are questions.
 
 If you put more number's sources as there are questions, the extraneous ones will be ignored. This is useful when there are a lot of possibilities to pick from and you want to define special features to each of them, if chosen (like different number sources depending on variant or subvariant).
 
-If among the sources you want to have at least one of a certain type, you can set the ``required`` attribute of ``<nb>`` to ``"true"``. In the example below, 8 questions will be created. Among them, there will be at least 2 of variants 8 to 23, one of variant 116 to 155 and one of variant between 156 and 187. The 4 other ones will each match a variant between 8 and 23 or 100 and 187.
+If among the sources you want to ensure there will be at least one of a certain type, you can set the ``required`` attribute of ``nb`` to ``true``.
 
-.. code-block:: xml
-
-    <mix>
-		  <question kind="calculation" subkind="order_of_operations" subvariant="only_positive" pick="8"></question>
-		  <nb source="singleint_3to12;;intpairs_2to9" variant="8-23" required="true">2</nb>
-		  <nb source="singleint_3to12;;intpairs_2to9" variant="116-155" required="true">1</nb>
-		  <nb source="singleint_3to12;;intpairs_2to9" variant="156-187" required="true">1</nb>
-		  <nb source="singleint_3to12;;intpairs_2to9" variant="8-23,100-187">10</nb>
-		</mix>
-
-Also, note that the question's variant can be redefined as ``<nb>``'s attribute (it overrides the one defined in ``<question>``, if any).
+Also, note that the question's variant can be redefined as ``nb``'s attribute (it overrides the one defined in ``question``, if any).
 
 Conclusion
 ^^^^^^^^^^

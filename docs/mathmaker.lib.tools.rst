@@ -4,66 +4,34 @@ mathmaker\.lib\.tools package
 Submodules
 ----------
 
-mathmaker\.lib\.tools\.auxiliary\_functions module
---------------------------------------------------
-
-.. automodule:: mathmaker.lib.tools.auxiliary_functions
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.tools\.config module
-------------------------------------
-
-.. automodule:: mathmaker.lib.tools.config
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.tools\.db module
---------------------------------
-
-.. automodule:: mathmaker.lib.tools.db
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.tools\.ext\_dict module
----------------------------------------
-
-.. automodule:: mathmaker.lib.tools.ext_dict
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.tools\.fonts module
------------------------------------
-
-.. automodule:: mathmaker.lib.tools.fonts
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.tools\.header\_comment module
----------------------------------------------
-
-.. automodule:: mathmaker.lib.tools.header_comment
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.tools\.po\_file module
+mathmaker\.lib\.tools\.database module
 --------------------------------------
 
-.. automodule:: mathmaker.lib.tools.po_file
+.. automodule:: mathmaker.lib.tools.database
     :members:
     :undoc-members:
     :show-inheritance:
 
-mathmaker\.lib\.tools\.tag module
----------------------------------
+mathmaker\.lib\.tools\.frameworks module
+----------------------------------------
 
-.. automodule:: mathmaker.lib.tools.tag
+.. automodule:: mathmaker.lib.tools.frameworks
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+mathmaker\.lib\.tools\.ignition module
+--------------------------------------
+
+.. automodule:: mathmaker.lib.tools.ignition
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+mathmaker\.lib\.tools\.maths module
+-----------------------------------
+
+.. automodule:: mathmaker.lib.tools.maths
     :members:
     :undoc-members:
     :show-inheritance:
@@ -76,10 +44,10 @@ mathmaker\.lib\.tools\.wording module
     :undoc-members:
     :show-inheritance:
 
-mathmaker\.lib\.tools\.xml\_sheet module
-----------------------------------------
+mathmaker\.lib\.tools\.xml module
+---------------------------------
 
-.. automodule:: mathmaker.lib.tools.xml_sheet
+.. automodule:: mathmaker.lib.tools.xml
     :members:
     :undoc-members:
     :show-inheritance:

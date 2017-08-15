@@ -80,13 +80,13 @@ A translator only needs to provide a number of entries (at least 10) in each of 
 The sheets, exercises and questions
 -----------------------------------
 
-There is still a bunch of "old-style" written sheets, that were not generated from xml documents. I won't describe them thoroughly. They will disappear in the future, when they're replaced by their xml counterparts.
+There is still a bunch of "old-style" written sheets, that were not generated from yaml documents. I won't describe them thoroughly. They will disappear in the future, when they're replaced by their yaml counterparts. They are kept in ``lib/old_style_sheet/``, so far. They use the classes ``S_Structure`` and ``S_Generic``. ``S_Structure`` handles the layout of the sheet depending on the ``SHEET_LAYOUT`` dict you can find at the top of any sheet module.
 
-All new sheets are frameworks stored as xml files (under ``data/frameworks/``). Under ``lib/sheet``, The classes ``S_Structure`` and ``S_Generic`` will be kept. ``S_Structure`` handles the layout of the sheet depending on the ``SHEET_LAYOUT`` dict you can find at the top of any sheet module, and that is built by ``S_Generic`` from the ``<layout>`` section of any xml framework.
+Another bunch have been written in XML. They will disappear. So far, ``mathmaker`` can read the sheets data from a xml or a yaml document, but the xml format will be dropped later, so don't bother with it now.
 
-There are no ``X_Generic`` nor ``Q_Generic`` classes yet, but there will be. They will replace the old-style ``X_*`` and ``Q_*`` classes. The way ``X_MentalCalculation`` and ``Q_MentalCalculation`` classes are written is a prefiguration of the future ``X_Generic`` and ``Q_Generic`` classes.
+So, all new sheets are stored in yaml files (under ``data/frameworks/theme/subtheme.yaml``, for instance ``data/frameworks/algebra/expand.yaml``).
 
-The ``Q_MentalCalculation`` class actually leaves the work to a ``sub_object`` that is written in one of the mental calculation modules (under ``mc_modules/``). This allow a great variety of questions distributed in many files instead of one long file for all questions. These ``sub_object``s also have a mother class (defined in ``mc_modules/mc_module.py``) and can be organized in subclasses (like vocabulary questions what all inherit from ``vocabulary_questions.structure``).
+They are handled by ``sheet.py``, ``exercise.py`` and ``question.py`` in ``lib/document/frames/``.
 
 .. _the_core:
 

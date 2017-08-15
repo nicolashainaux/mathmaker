@@ -64,9 +64,9 @@ The main executable (``entry_point()`` in ``mathmaker/cli.py``) performs followi
 The directories
 ---------------
 
-At the root can be found:
+Directories that are relevant to git, at the root:
 
-.. code-block::
+.. code::
 
   .
   ├── docs
@@ -75,17 +75,15 @@ At the root can be found:
   ├── tests
   └── toolbox
 
-(listing only ``outfiles`` among the ones that are not relevant to git)
-
 * The usual ``docs/`` and ``tests/`` directories
 * ``mathmaker/`` contains the actual python source code
 * ``toolbox/`` contains several standalone scripts that are useful for developers only (not users)
 * Several usual files (``.flake8`` etc.)
-* ``outfiles/`` is where the garbage is put (figures created when testing, etc.). It is ignored by git. Sometimes it is useful to remove all garbage files it contains.
+* ``outfiles/`` (not listed here, because it is not relevant to git) is where the garbage is put (figures created when testing, etc.). Sometimes it is useful to remove all garbage files it contains.
 
 ``mathmaker/``'s content:
 
-.. code-block::
+.. code::
 
   $ tree -d -L 1 mathmaker -I __pycache__
   mathmaker
@@ -94,14 +92,14 @@ At the root can be found:
   ├── locale
   └── settings
 
-* ``data/`` this is where the database is stored, but also xml files containing additional wordings, translations etc.
+* ``data/`` is where the database is stored, but also yaml files containing additional wordings, translations etc.
 * ``lib/`` contains all useful classes and submodules (see below).
 * ``locale/`` contains all translation files.
 * ``settings/`` contains the functions dedicated to setup the settings and also the default settings files themselves.
 
 ``lib/``'s content:
 
-.. code-block::
+.. code::
 
   $ tree -d -L 3 mathmaker/lib -I __pycache__
   mathmaker/lib
@@ -112,7 +110,7 @@ At the root can be found:
   │   │   ├── algebra
   │   │   ├── calculation
   │   │   ├── geometry
-  │   │   └── ... (maybe some others)
+  │   │   └── ... (maybe some others in the future)
   │   └── frames
   ├── machine
   ├── old_style_sheet
@@ -120,18 +118,18 @@ At the root can be found:
   │       └── question
   └── tools
 
-* ``constants/`` contains several constants (``pythagorean.py`` must be replaced by requests to the database)
+* ``constants/`` contains several constants (but ``pythagorean.py`` must be replaced by requests to the database)
 * ``core/`` contains all mathematical objects, numeric or geometric
 * ``document/`` contains the frames for sheets, exercises in questions, under ``document/frames/``, and the questions' content, under ``document/content/``.
 * ``machine/`` contains the "typewriter"
-* ``old_style_sheet/`` contains all old style sheets, exercices and questions. All of this is obsolete (will be replaced by generic objects that take their data from xml files and created by the objects defined in ``document/frames/``)
+* ``old_style_sheet/`` contains all old style sheets, exercices and questions. All of this is obsolete (will be replaced by generic objects that take their data from yaml files and created by the objects defined in ``document/frames/``)
 * ``tools/`` contains collections of useful functions
 
   - ``__init__.py`` contains various functions
 
-  - ``content.py`` contains functions related to the questions, exercises or sheets.
-
   - ``database.py`` contains all functions required to interact with mathmaker's database
+
+  - ``frameworks.py`` contains a collection of useful functions to handle the collection of yaml sheet files
 
   - ``ignition.py`` contains several functions called at startup
 
@@ -139,7 +137,7 @@ At the root can be found:
 
   - ``wording.py`` contains a collection of useful functions to handle wordings
 
-  - ``xml.py`` contains a collection of useful functions to handle xml sheet files
+  - ``xml.py`` contains a collection of useful functions to handle the xml files (obsolete, will disappear)
 
 * ``shared.py`` contains objects and variables that need to be shared (except settings), like the database connection
 
@@ -150,9 +148,9 @@ A Machine is like a typewriter: it turns all printable objects (Sheets, and ever
 
 The Sheet objects given to a Machine contain guidelines for the Machine: the layout of the Sheet and what Exercises it contains.
 
-The Exercise objects contains Questions and also layout informations that might be specific to the exercise (for instance, display the equations' resolutions in two columns).
+The Exercise objects contain Questions and also layout informations that might be specific to the exercise (for instance, display the equations' resolutions in two columns).
 
-The Question objects contains the mathematical objects from the core and uses them to compute texts and answers.
+The Question objects contain the mathematical objects from the core and uses them to compute texts and answers.
 
 The objects from the core are all different kinds of mathematical objects, like Sums, Products, Equations or Triangles, Tables... For instance, a Question about Pythagora's theorem would embed a RightTriangle (which itself embeds information on its sides, vertices, angles; and enough methods to create a picture of it) but also fields telling if the figure should be drawn in the Question's text or if only a description of the figure should be given; if the hypotenuse should be calculated or another side; if the result should be a rounded decimal and how precise it should be etc.
 
