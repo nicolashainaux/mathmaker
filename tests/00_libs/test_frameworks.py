@@ -108,6 +108,10 @@ def test_read_layout():
     assert read_layout(layout_data) == \
         {'exc': [['?', 9, 9], (5, 5)], 'ans': [['?', 9, 9], (5, 5)],
          'spacing_w': '25.0pt', 'spacing_a': 'undefined'}
+    layout_data = [layout_data]
+    assert read_layout(layout_data) == \
+        {'exc': [['?', 9, 9], (5, 5)], 'ans': [['?', 9, 9], (5, 5)],
+         'spacing_w': '25.0pt', 'spacing_a': 'undefined'}
     layout_data = {'wordings': 'rowxcol=?×2,  print=3 3, spacing=25.0pt',
                    'answers': 'rowxcol=?×2,  print=3 3, spacing='}
     assert read_layout(layout_data) == \
@@ -219,6 +223,13 @@ def test__read_mix_nb():
     """Test mix numbers' sources are read correctly."""
     assert _read_mix_nb('singleint_2to100;;intpairs_2to9, variant=2,3,6,7,'
                         ' required=true (1)') == \
+        [[['singleint_2to100;;intpairs_2to9'],
+          {'source': 'singleint_2to100;;intpairs_2to9',
+           'variant': '2,3,6,7',
+           'required': 'true'},
+          1]]
+    assert _read_mix_nb(' singleint_2to100;;intpairs_2to9 , variant=2,3,6,7,'
+                        ' required=true (1) ') == \
         [[['singleint_2to100;;intpairs_2to9'],
           {'source': 'singleint_2to100;;intpairs_2to9',
            'variant': '2,3,6,7',
