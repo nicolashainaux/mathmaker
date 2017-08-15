@@ -586,7 +586,7 @@ def _read_simple_question(s):
                          '{}\nis not built in pairs around the \'->\' symbol '
                          'and ending with a number between braces.'.format(s))
     pairs = [p.split('->') for p in pairs]
-    last_id = None
+    last_id = last_attr = None
     for p in pairs:
         q_attr = _AttrStr('id=' + p[0]).parse()
         if q_attr['id'] == '':
@@ -595,8 +595,10 @@ def _read_simple_question(s):
                                  'name.')
             else:
                 q_attr['id'] = last_id
+                q_attr.update(last_attr)
         else:
             last_id = q_attr['id']
+            last_attr = q_attr
         q_attr = {k: q_attr[k].strip() for k in q_attr}
         try:
             parts = NB_SOURCE.match(p[1]).group

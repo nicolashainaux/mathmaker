@@ -208,6 +208,13 @@ def test__read_simple_question():
         'expand double, spacing=10.0pt -> intpairs_2to9;;intpairs_2to9 (1)') \
         == [[{'id': 'expand double', 'spacing': '10.0pt'},
              ['intpairs_2to9', 'intpairs_2to9'], 1]]
+    assert _read_simple_question(
+        'expand double, variant=anything -> intpairs_2to9;;intpairs_2to9 (3) '
+        '              -> intpairs_10to20;;intpairs_2to9 (7)') == \
+        [[{'id': 'expand double', 'variant': 'anything'},
+          ['intpairs_2to9', 'intpairs_2to9'], 3],
+         [{'id': 'expand double', 'variant': 'anything'},
+          ['intpairs_10to20', 'intpairs_2to9'], 7]]
 
 
 def test__read_mix_question():
