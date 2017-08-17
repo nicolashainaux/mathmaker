@@ -30,7 +30,7 @@ from mathmaker.lib.tools \
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Division,
                                               Expandable)
 from mathmaker.lib.core.calculus import Expression
-from .. import component
+from mathmaker.lib.document.content import component
 
 # Possible variants are identified with a number:
 # 0: a + b×c            # 4: a×b + c

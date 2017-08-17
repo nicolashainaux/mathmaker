@@ -26,7 +26,7 @@ from mathmaker.lib import shared
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.base_calculus import Item
-from .. import component
+from mathmaker.lib.document.content import component
 
 ALL_LENGTHS_TO_CALCULATE = ['oneside', 'twosides']
 

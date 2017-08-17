@@ -24,7 +24,7 @@ from mathmaker.lib import shared
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.core.base_calculus import Item, Product, Quotient
 from mathmaker.lib.core.calculus import Equality
-from .. import component
+from mathmaker.lib.document.content import component
 
 
 class sub_object(component.structure):

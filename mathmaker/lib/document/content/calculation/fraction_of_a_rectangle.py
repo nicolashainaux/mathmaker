@@ -26,7 +26,7 @@ from mathmaker.lib import shared
 from mathmaker.lib.tools import fix_math_style2_fontsize
 from mathmaker.lib.tools.maths import gcd, prime_factors
 from mathmaker.lib.core.base_calculus import Item, Fraction
-from .. import component
+from mathmaker.lib.document.content import component
 
 
 class sub_object(component.structure):

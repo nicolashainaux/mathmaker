@@ -23,7 +23,7 @@
 # This module will add a question about the sum of two numbers
 
 from mathmaker.lib.core.root_calculus import Value
-from .. import component
+from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import setup_wording_format_of
 
 

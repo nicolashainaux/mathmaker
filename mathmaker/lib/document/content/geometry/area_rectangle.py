@@ -22,7 +22,7 @@
 
 from mathmaker.lib import shared
 # from mathmaker.lib.core.base_calculus import *
-from .. import component
+from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import setup_wording_format_of
 
 

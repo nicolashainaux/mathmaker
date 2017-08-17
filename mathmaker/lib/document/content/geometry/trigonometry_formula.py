@@ -25,7 +25,7 @@ import random
 from mathmaker.lib import shared
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.core.root_calculus import Value
-from .. import component
+from mathmaker.lib.document.content import component
 
 
 class sub_object(component.structure):

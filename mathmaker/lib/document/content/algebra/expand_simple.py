@@ -25,7 +25,7 @@ import random
 from mathmaker.lib import shared
 from mathmaker.lib.core.base_calculus import Monomial, Polynomial, Expandable
 from mathmaker.lib.core.calculus import Expression
-from .. import component
+from mathmaker.lib.document.content import component
 
 
 class sub_object(component.structure):

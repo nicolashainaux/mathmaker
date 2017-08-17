@@ -25,7 +25,7 @@ import random
 from mathmaker.lib import shared
 from mathmaker.lib.core.base_calculus import Product
 from mathmaker.lib.core.root_calculus import Value
-from .. import component
+from mathmaker.lib.document.content import component
 
 
 class sub_object(component.structure):
