@@ -49,6 +49,8 @@ class source(object):
     ##
     #   @brief  Resets the drawDate of all table's entries (to 0)
     def _reset(self, **kwargs):
+        import sys
+        sys.stderr.write('reset\n')
         shared.db.execute("UPDATE " + self.table_name + " SET drawDate = 0;")
         if "lock_equal_products" in kwargs:
             shared.db.execute("UPDATE "
@@ -188,7 +190,19 @@ class source(object):
         qr = tuple(shared.db.execute(cmd))
         if not len(qr):
             kwargs = self._reset(**kwargs)
-            qr = tuple(shared.db.execute(self._cmd(**kwargs)))
+            cmd1 = self._cmd(**kwargs)
+            qr = tuple(shared.db.execute(cmd1))
+            if not len(qr):
+                if ' nb1 ' in cmd1 and ' nb2 ' in cmd1:
+                    cmd2 = cmd1.replace(' nb1 ', 'TEMP') \
+                        .replace(' nb2 ', ' nb1 ') \
+                        .replace('TEMP', ' nb2 ')
+                    qr = tuple(shared.db.execute(cmd2))
+                    if not len(qr):
+                        logm = settings.mainlogger
+                        logm.error('Empty result is empty:\nQUERY1\n{}\n'
+                                   'QUERY2\n{}\nQUERY3\n{}\n'
+                                   .format(cmd, cmd1, cmd2))
         return qr
 
     ##

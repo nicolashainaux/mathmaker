@@ -525,9 +525,9 @@ class Exercise(object):
                 # Handle all nb sources for ONE question
                 if i == 1 and extra_infos['merge_sources']:
                     if extra_infos.get('coprime', False):
-                        # We need order in last_draw, that may have been lost
-                        # coprimes being about integers, we can rely on using
-                        # int() as sort key
+                        # We need order in last_draw, that may have been lost.
+                        # Coprimes being about integers, we can rely on using
+                        # int() as sort key.
                         last_draw = sorted(last_draw, key=int)
                         lb2, hb2 = nb_source.split(sep='×')[1].split(sep='to')
                         lb2, hb2 = int(lb2), int(hb2)
