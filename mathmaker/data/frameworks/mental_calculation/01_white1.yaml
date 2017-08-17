@@ -3,7 +3,7 @@ multiplications:
   - exercise:
     - questions: multi direct -> intpairs_2to9 (20)
 
-positional notation:
+positional_notation:
   - preset: "mental calculation"
   - exercise:
     - questions: rank direct -> rank_words (10)
