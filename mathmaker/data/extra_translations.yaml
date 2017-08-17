@@ -1,0 +1,5 @@
+# This file is only intended to provide additional strings for translation
+
+text1: "{software_ref} is free software. Its license is {software_license}."
+text2: "Further details on {software_website}"
+text3: "{software_name} {v}\nLicense: {l}\n{c} {contact}"

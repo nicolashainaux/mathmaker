@@ -241,27 +241,27 @@ msgid "Short Test: pythagorean theorem"
 msgstr ""
 
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:342
-#: data/vocabulary.xml:42
+#: data/vocabulary.yaml:39
 msgid "to the unit"
 msgstr ""
 
-#: data/vocabulary.xml:43
+#: data/vocabulary.yaml:40
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:343
 msgid "to the tenth"
 msgstr ""
 
-#: data/vocabulary.xml:44
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:344
+#: data/vocabulary.yaml:41
 msgid "to the hundreth"
 msgstr ""
 
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:345
-#: data/vocabulary.xml:45
+#: data/vocabulary.yaml:42
 msgid "to the thousandth"
 msgstr ""
 
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:346
-#: data/vocabulary.xml:46
+#: data/vocabulary.yaml:43
 msgid "to the ten thousandth"
 msgstr ""
 
@@ -306,12 +306,12 @@ msgstr ""
 msgid "Factorise, if possible:"
 msgstr ""
 
-#: lib/document/frames/exercise.py:706
+#: lib/document/frames/exercise.py:699
 #: lib/old_style_sheet/exercise/X_Structure.py:257
 msgid "Question:"
 msgstr ""
 
-#: lib/document/frames/exercise.py:709
+#: lib/document/frames/exercise.py:702
 #: lib/old_style_sheet/exercise/X_Structure.py:260
 msgid "Answer:"
 msgstr ""
@@ -915,134 +915,6 @@ msgid ""
 "How many eggs has she laid today?"
 msgstr ""
 
-#: data/vocabulary.xml:29
-msgid "How many thousands"
-msgstr ""
-
-#: data/vocabulary.xml:22
-msgid "thousandths"
-msgstr ""
-
-#: data/vocabulary.xml:23
-msgid "How many billions"
-msgstr ""
-
-#: data/vocabulary.xml:12
-msgid "tens of millions"
-msgstr ""
-
-#: data/vocabulary.xml:16
-msgid "thousands"
-msgstr ""
-
-#: data/vocabulary.xml:41
-msgid "What is the quadruple of {number}?"
-msgstr ""
-
-#: data/vocabulary.xml:36
-msgid "What is the half of {number}?"
-msgstr ""
-
-#: data/vocabulary.xml:38
-msgid "What is the quarter of {number}?"
-msgstr ""
-
-#: data/vocabulary.xml:28
-msgid "How many tens of thousands"
-msgstr ""
-
-#: data/vocabulary.xml:37
-msgid "What is the third of {number}?"
-msgstr ""
-
-#: data/vocabulary.xml:40
-msgid "What is the triple of {number}?"
-msgstr ""
-
-#: data/vocabulary.xml:30
-msgid "How many hundreds"
-msgstr ""
-
-#: data/vocabulary.xml:34
-msgid "How many hundredths"
-msgstr ""
-
-#: data/vocabulary.xml:31
-msgid "How many tens"
-msgstr ""
-
-#: data/vocabulary.xml:10
-msgid "billions"
-msgstr ""
-
-#: data/vocabulary.xml:25
-msgid "How many tens of millions"
-msgstr ""
-
-#: data/vocabulary.xml:39
-msgid "What is the double of {number}?"
-msgstr ""
-
-#: data/vocabulary.xml:18
-msgid "tens"
-msgstr ""
-
-#: data/vocabulary.xml:24
-msgid "How many hundreds of millions"
-msgstr ""
-
-#: data/vocabulary.xml:11
-msgid "hundreds of millions"
-msgstr ""
-
-#: data/vocabulary.xml:19
-msgid "units"
-msgstr ""
-
-#: data/vocabulary.xml:20
-msgid "tenths"
-msgstr ""
-
-#: data/vocabulary.xml:32
-msgid "How many units"
-msgstr ""
-
-#: data/vocabulary.xml:13
-msgid "millions"
-msgstr ""
-
-#: data/vocabulary.xml:14
-msgid "hundreds of thousands"
-msgstr ""
-
-#: data/vocabulary.xml:27
-msgid "How many hundreds of thousands"
-msgstr ""
-
-#: data/vocabulary.xml:35
-msgid "How many thousandths"
-msgstr ""
-
-#: data/vocabulary.xml:26
-msgid "How many millions"
-msgstr ""
-
-#: data/vocabulary.xml:33
-msgid "How many tenths"
-msgstr ""
-
-#: data/vocabulary.xml:21
-msgid "hundredths"
-msgstr ""
-
-#: data/vocabulary.xml:17
-msgid "hundreds"
-msgstr ""
-
-#: data/vocabulary.xml:15
-msgid "tens of thousands"
-msgstr ""
-
 #: data/wordings/mini_pb_divi_direct.xml:24
 #: data/wordings/mini_pb_divi_direct.xml:24
 msgid ""
@@ -1352,34 +1224,6 @@ msgstr ""
 #: lib/document/content/calculation/vocabulary_subtr.py:35
 #, python-brace-format
 msgid "How much is the difference between {nb1} and {nb2}?"
-msgstr ""
-
-#: data/extra_translations.xml:8
-msgid "{software_name} {v}\\nLicense: {l}\\n{c} {contact}"
-msgstr ""
-
-#: data/extra_translations.xml:6
-msgid "{software_ref} is free software. Its license is {software_license}."
-msgstr ""
-
-#: data/extra_translations.xml:7
-msgid "Further details on {software_website}"
-msgstr ""
-
-#: data/vocabulary.xml:7
-msgid "Rectangle"
-msgstr ""
-
-#: data/vocabulary.xml:9
-msgid "RightTriangle"
-msgstr ""
-
-#: data/vocabulary.xml:8
-msgid "Square"
-msgstr ""
-
-#: data/vocabulary.xml:6
-msgid "Polygon_of_{n}_sides"
 msgstr ""
 
 #: lib/core/calculus.py:1498
@@ -1881,45 +1725,193 @@ msgstr ""
 msgid "{} (or {}, or {})"
 msgstr ""
 
-#: data/frameworks/calculation/order_of_operations.yaml:23
+#: data/extra_translations.yaml:3
+msgid "{software_ref} is free software. Its license is {software_license}."
+msgstr ""
+
+#: data/extra_translations.yaml:4
+msgid "Further details on {software_website}"
+msgstr ""
+
+#: data/extra_translations.yaml:5
+msgid ""
+"{software_name} {v}\n"
+"License: {l}\n"
+"{c} {contact}"
+msgstr ""
+
+#: data/vocabulary.yaml:3
+msgid "Polygon_of_{n}_sides"
+msgstr ""
+
+#: data/vocabulary.yaml:4
+msgid "Rectangle"
+msgstr ""
+
+#: data/vocabulary.yaml:5
+msgid "Square"
+msgstr ""
+
+#: data/vocabulary.yaml:6
+msgid "RightTriangle"
+msgstr ""
+
+#: data/vocabulary.yaml:7
+msgid "billions"
+msgstr ""
+
+#: data/vocabulary.yaml:8
+msgid "hundreds of millions"
+msgstr ""
+
+#: data/vocabulary.yaml:9
+msgid "tens of millions"
+msgstr ""
+
+#: data/vocabulary.yaml:10
+msgid "millions"
+msgstr ""
+
+#: data/vocabulary.yaml:11
+msgid "hundreds of thousands"
+msgstr ""
+
+#: data/vocabulary.yaml:12
+msgid "tens of thousands"
+msgstr ""
+
+#: data/vocabulary.yaml:13
+msgid "thousands"
+msgstr ""
+
+#: data/vocabulary.yaml:14
+msgid "hundreds"
+msgstr ""
+
+#: data/vocabulary.yaml:15
+msgid "tens"
+msgstr ""
+
+#: data/vocabulary.yaml:16
+msgid "units"
+msgstr ""
+
+#: data/vocabulary.yaml:17
+msgid "tenths"
+msgstr ""
+
+#: data/vocabulary.yaml:18
+msgid "hundredths"
+msgstr ""
+
+#: data/vocabulary.yaml:19
+msgid "thousandths"
+msgstr ""
+
+#: data/vocabulary.yaml:20
+msgid "How many billions"
+msgstr ""
+
+#: data/vocabulary.yaml:21
+msgid "How many hundreds of millions"
+msgstr ""
+
+#: data/vocabulary.yaml:22
+msgid "How many tens of millions"
+msgstr ""
+
+#: data/vocabulary.yaml:23
+msgid "How many millions"
+msgstr ""
+
+#: data/vocabulary.yaml:24
+msgid "How many hundreds of thousands"
+msgstr ""
+
+#: data/vocabulary.yaml:25
+msgid "How many tens of thousands"
+msgstr ""
+
+#: data/vocabulary.yaml:26
+msgid "How many thousands"
+msgstr ""
+
+#: data/vocabulary.yaml:27
+msgid "How many hundreds"
+msgstr ""
+
+#: data/vocabulary.yaml:28
+msgid "How many tens"
+msgstr ""
+
+#: data/vocabulary.yaml:29
+msgid "How many units"
+msgstr ""
+
+#: data/vocabulary.yaml:30
+msgid "How many tenths"
+msgstr ""
+
+#: data/vocabulary.yaml:31
+msgid "How many hundredths"
+msgstr ""
+
+#: data/vocabulary.yaml:32
+msgid "How many thousandths"
+msgstr ""
+
+#: data/vocabulary.yaml:33
+msgid "What is the half of {number}?"
+msgstr ""
+
+#: data/vocabulary.yaml:34
+msgid "What is the third of {number}?"
+msgstr ""
+
+#: data/vocabulary.yaml:35
+msgid "What is the quarter of {number}?"
+msgstr ""
+
+#: data/vocabulary.yaml:36
+msgid "What is the double of {number}?"
+msgstr ""
+
+#: data/vocabulary.yaml:37
+msgid "What is the triple of {number}?"
+msgstr ""
+
+#: data/vocabulary.yaml:38
+msgid "What is the quadruple of {number}?"
+msgstr ""
+
 #: data/frameworks/calculation/order_of_operations.yaml:23
 msgid "Calculation: order of precedence."
 msgstr ""
 
 #: data/frameworks/calculation/order_of_operations.yaml:32
-#: data/frameworks/calculation/order_of_operations.yaml:32
 msgid "Calculate:"
 msgstr ""
 
-#: data/frameworks/calculation/order_of_operations.yaml:43
 #: data/frameworks/calculation/order_of_operations.yaml:43
 msgid "Now the expressions may have parentheses. Calculate them:"
 msgstr ""
 
 #: data/frameworks/calculation/order_of_operations.yaml:54
-#: data/frameworks/calculation/order_of_operations.yaml:54
 msgid "Same exercise, but with decimal numbers. Calculate:"
 msgstr ""
 
-#: data/frameworks/algebra/expand.yaml:2
-#: data/frameworks/algebra/expand.yaml:11
-#: data/frameworks/algebra/expand.yaml:9
+#: data/frameworks/algebra/expand.yaml:2 data/frameworks/algebra/expand.yaml:9
 msgid "Algebra: expand simple brackets"
 msgstr ""
 
-#: data/frameworks/algebra/expand.yaml:26
-#: data/frameworks/algebra/expand.yaml:24
-#: data/frameworks/algebra/expand.yaml:13
-#: data/frameworks/algebra/expand.yaml:18
-#: data/frameworks/algebra/expand.yaml:11
 #: data/frameworks/algebra/expand.yaml:5
-#: data/frameworks/algebra/expand.yaml:20
+#: data/frameworks/algebra/expand.yaml:11
+#: data/frameworks/algebra/expand.yaml:18
+#: data/frameworks/algebra/expand.yaml:24
 msgid "Expand and reduce the following expressions:"
 msgstr ""
 
 #: data/frameworks/algebra/expand.yaml:15
-#: data/frameworks/algebra/expand.yaml:17
-#: data/frameworks/algebra/expand.yaml:24
 #: data/frameworks/algebra/expand.yaml:22
 msgid "Algebra: expand and reduce double brackets"
 msgstr ""
