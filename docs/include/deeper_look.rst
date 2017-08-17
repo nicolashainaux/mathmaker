@@ -82,7 +82,7 @@ The sheets, exercises and questions
 
 There is still a bunch of "old-style" written sheets, that were not generated from yaml documents. I won't describe them thoroughly. They will disappear in the future, when they're replaced by their yaml counterparts. They are kept in ``lib/old_style_sheet/``, so far. They use the classes ``S_Structure`` and ``S_Generic``. ``S_Structure`` handles the layout of the sheet depending on the ``SHEET_LAYOUT`` dict you can find at the top of any sheet module.
 
-Another bunch have been written in XML. They will disappear. So far, ``mathmaker`` can read the sheets data from a xml or a yaml document, but the xml format will be dropped later, so don't bother with it now.
+Another bunch have been written in XML. They will disappear. So far, ``mathmaker`` can read the sheets data from a xml or a yaml document, but the xml format will be dropped in 0.7.2, so don't bother with it now.
 
 So, all new sheets are stored in yaml files (under ``data/frameworks/theme/subtheme.yaml``, for instance ``data/frameworks/algebra/expand.yaml``).
 

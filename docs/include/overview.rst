@@ -95,7 +95,7 @@ documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#user-sett
 Advanced use
 ------------
 
-It's possible to create your own sheets in xml (only for the mental calculation theme yet). Read `the complete documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#xml-sheets>`__ for more information.
+It's possible to create your own sheets in yaml. Read `the complete documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#YAML-sheets>`__ for more information.
 
 Contribute
 ==========
@@ -269,4 +269,3 @@ Any question can be sent to nh dot techn (hosted at gmail dot com).
 +-----------------------+------------------+-----------------------------------------------------------------+
 | numeric calculation   | fractions        | fractions-sum                                                   |
 +-----------------------+------------------+-----------------------------------------------------------------+
-

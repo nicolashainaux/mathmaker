@@ -59,7 +59,7 @@ The main executable (``entry_point()`` in ``mathmaker/cli.py``) performs followi
 
 * If the main directive is ``list``, it just write the directives list to stdout
 
-* Otherwise, it checks that the directive matches a known sheet (either a xml file or a sheet's name that mathmaker provides) and writes the result to the output (``stdout`` or a file)
+* Otherwise, it checks that the directive matches a known sheet (either a yaml or xml file or a sheet's name that mathmaker provides) and writes the result to the output (``stdout`` or a file) (xml will be dropped in 0.7.2)
 
 The directories
 ---------------
@@ -137,7 +137,7 @@ Directories that are relevant to git, at the root:
 
   - ``wording.py`` contains a collection of useful functions to handle wordings
 
-  - ``xml.py`` contains a collection of useful functions to handle the xml files (obsolete, will disappear)
+  - ``xml.py`` contains a collection of useful functions to handle the xml files (obsolete, will disappear in 0.7.2)
 
 * ``shared.py`` contains objects and variables that need to be shared (except settings), like the database connection
 
