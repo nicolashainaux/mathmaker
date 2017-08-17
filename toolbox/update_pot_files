@@ -20,14 +20,15 @@ ROOT_DIR=$PROJ_DIR"/mathmaker"
 echo $ROOT_DIR
 
 cd mathmaker/
-xgettext --package-name="mathmaker" --package-version="0.7" --copyright-holder="Nicolas Hainaux" --msgid-bugs-address="nh.techn@gmail.com" --keyword=_ --output=locale/mathmaker_updates.pot *.py */*.py */*/*.py */*/*/*.py */*/*/*/*.py */*/*/*/*/*.py
+xgettext --package-name="mathmaker" --package-version="0.7" --copyright-holder="Nicolas Hainaux" --msgid-bugs-address="nh.techn@gmail.com" --keyword=_ --output=locale/mathmaker_updates.pot *.py */*.py */*/*.py */*/*/*.py */*/*/*/*.py
 
-../tools/merge_py_updates_to_main_pot_file
+../toolbox/merge_py_updates_to_main_pot_file
 
 echo
 
 # Merging mathmaker entries to main pot file:
-../tools/merge_xml_updates_to_pot_file --dirs "$ROOT_DIR""/data/"
+../toolbox/merge_xml_updates_to_pot_file --dirs "$ROOT_DIR""/data/"
+../toolbox/merge_yaml_updates_to_pot_file --dirs "$ROOT_DIR""/data/"
 
 # Merging updates from other xml files to other pot files
 # In order to create a new pot file, first `touch` it, then comment out one of the lines below
