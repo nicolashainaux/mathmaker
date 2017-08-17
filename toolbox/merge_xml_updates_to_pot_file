@@ -188,13 +188,21 @@ def main():
 
     to_delete = []
     for main_entry in main_pot_file:
-        ext_list = [o[0][-4:] for o in main_entry.occurrences]
-        if all(ext == ".xml" for ext in ext_list):
-            if main_entry.msgid not in msgids_from_xml_pot_file:
-                to_delete.append(main_entry)
-                sys.stderr.write("Will remove this obsolete entry: \n"
-                                 + str(main_entry) + "\n")
+        o_to_delete = []
+        for o in main_entry.occurrences:
+            if (o[0][-4:] == '.xml'
+                and main_entry.msgid not in msgids_from_xml_pot_file):
+                o_to_delete.append(o)
                 something_changed = True
+        for o in o_to_delete:
+            del main_entry.occurrences[main_entry.occurrences.index(o)]
+            sys.stderr.write('Removed this obsolete occurrence: {} '
+                             'from entry:\n{}\n'.format(o, main_entry))
+        if not len(main_entry.occurrences):
+            to_delete.append(main_entry)
+            something_changed = True
+            sys.stderr.write("Will remove this obsolete entry: \n"
+                             + str(main_entry) + "\n")
 
     for entry in to_delete:
         del main_pot_file[main_pot_file.index(entry)]

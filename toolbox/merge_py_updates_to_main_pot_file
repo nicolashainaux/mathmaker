@@ -57,7 +57,8 @@ def main():
                     o_to_delete = []
                     for o in main_entry.occurrences:
                         if (o not in updates_entry.occurrences
-                            and not o[0].endswith('.xml')):
+                            and not o[0].endswith('.xml')
+                            and not o[0].endswith('.yaml')):
                             o_to_delete.append(o)
                             something_changed = True
                     for o in o_to_delete:

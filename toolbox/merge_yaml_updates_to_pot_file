@@ -23,7 +23,7 @@
 # This script is meant to be run from the locale/ directory of the project.
 
 import os
-import re
+# import re
 import sys
 import errno
 import argparse
@@ -45,7 +45,7 @@ settings.init()
 #     r'(^[ ]+\- ([\w]+): \")([\w\d \-\+\'\(\)°\[\]\{\}€<>/:,;!\.\?\n]+)\"')
 
 DEFAULT_KEYWORDS = ['header', 'title', 'text', 'subtitle', 'answers_title',
-                    'wording', 'text_exc', 'text_ans']
+                    'wording']
 MAIN_POT_FILE_PATH = settings.localedir + 'mathmaker.pot'
 PROJECT_ROOT = DIR_TO_BROWSE = settings.rootdir
 
@@ -118,11 +118,11 @@ def collect_strings(data, rel_file_name, keywords_list):
         elif isinstance(data[key], dict):
             collect_strings(data[key], rel_file_name, keywords_list)
         else:
-            if (key in keywords_list
+            if (any([key.startswith(k) for k in keywords_list])
                 and not data[key] in COLLECTED_STRINGS
                 and data[key] != ''):
                 COLLECTED_STRINGS[data[key]] = []
-            if key in keywords_list:
+            if any([key.startswith(k) for k in keywords_list]):
                 if data[key] != '':
                     COLLECTED_STRINGS[data[key]] += \
                         [(rel_file_name, str(data[key].lc.line + 1))]
@@ -275,13 +275,21 @@ def main():
 
     to_delete = []
     for main_entry in main_pot_file:
-        ext_list = [o[0][-4:] for o in main_entry.occurrences]
-        if all(ext == '.yaml' for ext in ext_list):
-            if main_entry.msgid not in msgids_from_yaml_pot_file:
-                to_delete.append(main_entry)
-                sys.stderr.write('Will remove this obsolete entry: \n'
-                                 + str(main_entry) + '\n')
+        o_to_delete = []
+        for o in main_entry.occurrences:
+            if (o[0][-5:] == '.yaml'
+                and main_entry.msgid not in msgids_from_yaml_pot_file):
+                o_to_delete.append(o)
                 something_changed = True
+        for o in o_to_delete:
+            del main_entry.occurrences[main_entry.occurrences.index(o)]
+            sys.stderr.write('Removed this obsolete occurrence: {} '
+                             'from entry:\n{}\n'.format(o, main_entry))
+        if not len(main_entry.occurrences):
+            to_delete.append(main_entry)
+            something_changed = True
+            sys.stderr.write("Will remove this obsolete entry: \n"
+                             + str(main_entry) + "\n")
 
     for entry in to_delete:
         del main_pot_file[main_pot_file.index(entry)]
