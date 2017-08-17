@@ -4,13 +4,17 @@
 
 	<layout font_size_offset="-1" />
 
-	<exercise>
+	<exercise shuffle="false">
 
 		<mix>
 		  <question id="fraction_of a_rectangle" pick="2"></question>
-			<!-- Proper fractions are created already reduced. You can add a multiplicative coefficient before. -->
-				<nb source="properfraction_1to1×1to4">1</nb>
-				<nb source="properfraction_1to1×5to10">1</nb>
+			<!-- Proper fractions are created already reduced.
+				Provided range is for denominator, and numerator will follow.
+				You can add a multiplicative coefficient before, also given as a range,
+			  and separated by a '×'. No coefficient is equivalent to 1, so
+			  properfraction_1to4 is equivalent to properfraction_1to1×1to4 -->
+				<nb source="properfraction_1to4">1</nb>
+				<nb source="properfraction_5to10">1</nb>
 		</mix>
 
 		<mix>

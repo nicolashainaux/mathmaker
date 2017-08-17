@@ -268,7 +268,9 @@ def get_nb_sources_from_question_info(q_i):
             if '×' not in q_i.nb_source[0]:
                 # No multiplicative coefficient is equivalent to a 1
                 chunks = q_i.nb_source[0].split(sep='_')
-                q_i.nb_source[0] = '_'.join([chunks[0], '1to1×', chunks[1]])
+                q_i.nb_source[0] = '{}_{}{}'.format(chunks[0],
+                                                    '1to1×',
+                                                    chunks[1])
             bounds = q_i.nb_source[0].split(sep='_')[1]
             questions_sources = ['intpairs_' + bounds, 'intpairs_' + bounds]
             extra_infos.update({'merge_sources': True,
