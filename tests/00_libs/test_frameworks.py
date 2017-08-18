@@ -27,11 +27,13 @@ from collections import OrderedDict
 
 from ruamel.yaml.compat import ordereddict
 from ruamel.yaml.comments import CommentedOrderedMap
+from ruamel import yaml
 
 from mathmaker.lib.tools.frameworks import _AttrStr
 from mathmaker.lib.tools.frameworks import load_sheet, read_layout
 from mathmaker.lib.tools.frameworks import _read_simple_question
 from mathmaker.lib.tools.frameworks import _read_mix_question, _read_mix_nb
+from mathmaker.lib.tools.frameworks import _get_attributes
 from mathmaker.lib.constants import DEFAULT_LAYOUT
 
 
@@ -301,3 +303,42 @@ def test__read_mix_nb():
           {'source': 'singleint_3to12;;intpairs_2to9',
            'variant': '8-23,100-187'},
           1]]
+
+
+def test_get_attributes():
+    data = """
+wording1:
+  - wording_context: marbles
+  - wording: "{name1} has {nb1} marbles... ?"
+  - nb1_min: 2
+  - nb1_max: 1000
+  - nb2_min: 2
+  - nb2_max: 1000
+  - q_id: "addi_direct"
+
+wording2:
+  - wording_context: "golden goose"
+  - wording: "Yesterday, my golden goose laid ...?"
+  - nb1_min: 2
+  - nb1_max: 100
+  - nb2_min: 2
+  - nb2_max: 100
+  - q_id: "addi_direct"
+"""
+    assert _get_attributes(yaml.safe_load(data), 'wording') == \
+        [{'wording_context': 'marbles',
+          'wording': '{name1} has {nb1} marbles... ?',
+          'nb1_min': 2,
+          'nb1_max': 1000,
+          'nb2_min': 2,
+          'nb2_max': 1000,
+          'q_id': 'addi_direct',
+          },
+         {'wording_context': 'golden goose',
+          'wording': 'Yesterday, my golden goose laid ...?',
+          'nb1_min': 2,
+          'nb1_max': 100,
+          'nb2_min': 2,
+          'nb2_max': 100,
+          'q_id': 'addi_direct',
+          }]

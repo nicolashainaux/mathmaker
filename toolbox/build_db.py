@@ -26,8 +26,8 @@ This script adds new entries to the database.
 
 It actually erases the database and builds it entirely.
 It will add all entries:
-- from files mini_pb_addi_direct.xml,mini_pb_divi_direct.xml,
-  mini_pb_subtr_direct.xml and mini_pb_multi_direct.xml from data/wordings/,
+- from files mini_pb_addi_direct.yaml, mini_pb_divi_direct.yaml,
+  mini_pb_subtr_direct.yaml and mini_pb_multi_direct.yaml from data/wordings/,
 - from all w3l.po files from locale/*/LC_MESSAGES/
 - from all w4l.po files from locale/*/LC_MESSAGES/
 - from all w5l.po files from locale/*/LC_MESSAGES/
@@ -42,18 +42,19 @@ It will add all entries:
 """
 
 import os
+import sys
 import sqlite3
 
 from mathmaker import settings
-from mathmaker.lib.tools import xml, po_file_get_list_of
-from mathmaker.lib.tools import check_unique_letters_words
+from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words
+from mathmaker.lib.tools.frameworks import get_attributes
 
 
 def __main__():
     settings.init()
 
     WORDINGS_DIR = settings.datadir + "wordings/"
-    WORDINGS_FILES = [WORDINGS_DIR + n + ".xml"
+    WORDINGS_FILES = [WORDINGS_DIR + n + ".yaml"
                       for n in ["mini_pb_addi_direct",
                                 "mini_pb_divi_direct",
                                 "mini_pb_subtr_direct",
@@ -61,10 +62,14 @@ def __main__():
 
     # Existent db is deleted. A brand new empty db is created.
     if os.path.isfile(settings.path.db_dist):
+        sys.stderr.write('Remove previous database...\n')
         os.remove(settings.path.db_dist)
+    sys.stderr.write('Create new database...\n')
     open(settings.path.db_dist, 'a').close()
+    sys.stderr.write('Connect to database...\n')
     db = sqlite3.connect(settings.path.db_dist)
 
+    sys.stderr.write('Create tables...\n')
     # Creation of the tables
     db.execute('''CREATE TABLE w3l
               (id INTEGER PRIMARY KEY,
@@ -108,6 +113,7 @@ def __main__():
     db.execute('''CREATE TABLE calculation_order_of_operations_variants
               (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
 
+    sys.stderr.write('Insert data from locale/*/LC_MESSAGES/*.pot files...\n')
     # Extract data from po(t) files and insert them into the db
     for lang in next(os.walk(settings.localedir))[1]:
         settings.language = lang
@@ -138,9 +144,11 @@ def __main__():
                                "VALUES(?, ?, ?, ?)",
                                db_rows)
 
-    # Extract data from xml files and insert them into the db
+    sys.stderr.write(
+        'Insert data from data/frameworks/wordings/*.yaml files...\n')
+    # Extract data from yaml files and insert them into the db
     for f in WORDINGS_FILES:
-        wordings = xml.get_attributes(f, "wording")
+        wordings = get_attributes(f, "wording")
         db_rows = list(zip([w['wording_context'] for w in wordings],
                            [w['wording'] for w in wordings],
                            [w['nb1_min'] for w in wordings],
@@ -156,6 +164,7 @@ def __main__():
                        "VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
                        db_rows)
 
+    sys.stderr.write('Insert integers pairs...\n')
     # Insert integers pairs into the db
     # Tables of 1, 2, 3... 500
     db_rows = [(i + 1, j + 1, 0, 0, 0, 1, 1)
@@ -168,16 +177,20 @@ def __main__():
                    "VALUES(?, ?, ?, ?, ?, ?, ?)",
                    db_rows)
 
+    sys.stderr.write('Setup integers pairs: clever (5)...\n')
     for couple in [(2, 5), (2, 50), (2, 500), (5, 20), (5, 200)]:
         db.execute("UPDATE int_pairs SET clever = 5"
                    + " WHERE nb1 = '" + str(couple[0])
                    + "' and nb2 = '" + str(couple[1]) + "';")
 
+    sys.stderr.write('Setup integers pairs: clever (4)...\n')
     for couple in [(4, 25), (4, 250)]:
         db.execute("UPDATE int_pairs SET clever = 4"
                    + " WHERE nb1 = '" + str(couple[0])
                    + "' and nb2 = '" + str(couple[1]) + "';")
 
+    sys.stderr.write(
+        'Setup integers pairs: suitable for one-digit decimals...\n')
     for couple in [(i + 1, j + 1)
                    for i in range(500) for j in range(500)
                    if ((i + 1) % 10 == 0 and (j + 1) % 10 == 0)]:
@@ -185,6 +198,8 @@ def __main__():
                    + " WHERE nb1 = '" + str(couple[0])
                    + "' and nb2 = '" + str(couple[1]) + "';")
 
+    sys.stderr.write(
+        'Setup integers pairs: suitable for two-digits decimals...\n')
     for couple in [(i + 1, j + 1)
                    for i in range(500) for j in range(500)
                    if ((i + 1) % 10 == 0 or (j + 1) % 10 == 0)]:
@@ -192,12 +207,12 @@ def __main__():
                    + " WHERE nb1 = '" + str(couple[0])
                    + "' and nb2 = '" + str(couple[1]) + "';")
 
+    sys.stderr.write('Insert integer×decimal "clever" pairs...\n')
     # Insert integer/decimal "clever" pairs into the db
     # The tenths series (only one yet) is identified by a 10
     # the quarters series by a 4
     # the halfs/fifths series by a 5
     start_id = tuple(db.execute("SELECT MAX(id) FROM int_pairs "))[0][0] + 1
-
     db_rows = list(zip([i + start_id for i in range(5)],
                        [0.2, 2, 4, 4, 0.1],
                        [5, 0.5, 0.25, 2.5, 10],
@@ -210,6 +225,7 @@ def __main__():
                    "VALUES(?, ?, ?, ?, ?)",
                    db_rows)
 
+    sys.stderr.write('Insert single integers...\n')
     # Single ints
     db_rows = [(i + 1, 0) for i in range(500)]
     db.executemany("INSERT "
@@ -217,6 +233,7 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
+    sys.stderr.write('Insert single decimals...\n')
     # Single decimal numbers
     db_rows = [(i / 10, 0) for i in range(1001)]
     db.executemany("INSERT "
@@ -224,6 +241,7 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
+    sys.stderr.write('Insert angle ranges...\n')
     # Angle ranges
     db_rows = [(i - 20, i + 20, 0) for i in [0, 90, 180, 270]]
     db.executemany("INSERT "
@@ -231,6 +249,7 @@ def __main__():
                    "VALUES(?, ?, ?)",
                    db_rows)
 
+    sys.stderr.write('Insert variants of calculation_order_of_operations...\n')
     # Variant numbers for calculation_order_of_operations questions.
     db_rows = [(i, 0) for i in range(24)]
     db.executemany("INSERT "
@@ -245,8 +264,11 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
+    sys.stderr.write('Commit changes to database...\n')
     db.commit()
+    sys.stderr.write('Close database...\n')
     db.close()
+    sys.stderr.write('Done!\n')
 
 
 if __name__ == '__main__':

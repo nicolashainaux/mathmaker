@@ -1,0 +1,163 @@
+# This file is only intended to provide additional strings for translation
+
+wording1:
+  - wording_context: "marbles"
+  - wording: "{name1} has {nb1} marbles. {name2} has {nb2} times more marbles than {name1}. How many marbles has {name2}?"
+  - nb1_min: 2
+  - nb1_max: 25
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "multi_direct"
+
+wording2:
+  - wording_context: "golden goose"
+  - wording: "My golden goose laid {nb1} eggs each day during {nb2} days. How  many eggs has she laid?"
+  - nb1_min: 2
+  - nb1_max: 25
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "multi_direct"
+
+wording3:
+  - wording_context: "gardener"
+  - wording: "The gardener has planted {nb1} rows of {nb2} salads. How many salads did he plant altogether?"
+  - nb1_min: 2
+  - nb1_max: 9
+  - nb2_min: 2
+  - nb2_max: 9
+  - q_id: "multi_direct"
+
+wording4:
+  - wording_context: "gardener"
+  - wording: "The gardener has planted {nb1} rows of {nb2} cabbages. How many cabbages did he plant altogether?"
+  - nb1_min: 2
+  - nb1_max: 9
+  - nb2_min: 2
+  - nb2_max: 9
+  - q_id: "multi_direct"
+
+wording5:
+  - wording_context: "market gardener"
+  - wording: "A market gardener has planted {nb1} rows of {nb2} salads. How many salads did he plant altogether?"
+  - nb1_min: 10
+  - nb1_max: 100
+  - nb2_min: 10
+  - nb2_max: 100
+  - q_id: "multi_direct"
+
+wording6:
+  - wording_context: "market gardener"
+  - wording: "A market gardener has planted {nb1} rows of {nb2} cabbages. How many cabbages did he plant altogether?"
+  - nb1_min: 10
+  - nb1_max: 100
+  - nb2_min: 10
+  - nb2_max: 100
+  - q_id: "multi_direct"
+
+wording7:
+  - wording_context: "candies"
+  - wording: "I invited {nb1} friends at my birthday's party and want to give {nb2} candies to each of them. How many candies should I buy?"
+  - nb1_min: 2
+  - nb1_max: 25
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "multi_direct"
+
+wording8:
+  - wording_context: "pencils boxes"
+  - wording: "{masculine_name} bought {nb1} boxes of {nb2} pencils. How many pens did he buy?"
+  - nb1_min: 2
+  - nb1_max: 9
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "multi_direct"
+
+wording9:
+  - wording_context: "pencils boxes"
+  - wording: "{feminine_name} bought {nb1} boxes of {nb2} pencils. How many pens did she buy?"
+  - nb1_min: 2
+  - nb1_max: 9
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "multi_direct"
+
+wording10:
+  - wording_context: "pens purchase"
+  - wording: "{masculine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did he pay? |hint:currency_unit|"
+  - nb1_min: 2
+  - nb1_max: 9
+  - nb2_min: 2
+  - nb2_max: 9
+  - q_id: "multi_direct"
+
+wording11:
+  - wording_context: "pens purchase"
+  - wording: "{feminine_name} bought {nb1} pens at {nb2} {currency_unit}. How much did she pay? |hint:currency_unit|"
+  - nb1_min: 2
+  - nb1_max: 9
+  - nb2_min: 2
+  - nb2_max: 9
+  - q_id: "multi_direct"
+
+wording12:
+  - wording_context: "pocket money"
+  - wording: "{masculine_name} gets {nb1} {currency_unit} pocket money every month. If he doesn't spend it during {nb2} months, how much will he spare? |hint:currency_unit|"
+  - nb1_min: 2
+  - nb1_max: 30
+  - nb2_min: 2
+  - nb2_max: 36
+  - q_id: "multi_direct"
+
+wording13:
+  - wording_context: "pocket money"
+  - wording: "{feminine_name} gets {nb1} {currency_unit} pocket money every month. If she doesn't spend it during {nb2} months, how much will she spare? |hint:currency_unit|"
+  - nb1_min: 2
+  - nb1_max: 30
+  - nb2_min: 2
+  - nb2_max: 36
+  - q_id: "multi_direct"
+
+wording14:
+  - wording_context: "livestock farming"
+  - wording: "We have {nb1} sheep. Our neighbours have {nb2} times more sheep than us. How many sheep do they have?"
+  - nb1_min: 2
+  - nb1_max: 25
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "multi_direct"
+
+wording15:
+  - wording_context: "sweets packets"
+  - wording: "{masculine_name} has prepared {nb1} packets of {nb2} truffles. How many truffles has he prepared?"
+  - nb1_min: 2
+  - nb1_max: 25
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "multi_direct"
+
+wording16:
+  - wording_context: "sweets packets"
+  - wording: "{feminine_name} has prepared {nb1} packets of {nb2} truffles. How many truffles has she prepared?"
+  - nb1_min: 2
+  - nb1_max: 25
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "multi_direct"
+
+wording17:
+  - wording_context: "starchy foods packets"
+  - wording: "We have loaded {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How heavy are they altogether? |hint:mass_unit|"
+  - nb1_min: 2
+  - nb1_max: 25
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "multi_direct"
+
+wording18:
+  - wording_context: "starchy foods packets"
+  - wording: "We have bought {nb1} flour packets, each weighting {nb2} {mass_unit=kg}. How heavy are they altogether? |hint:mass_unit|"
+  - nb1_min: 2
+  - nb1_max: 4
+  - nb2_min: 2
+  - nb2_max: 5
+  - q_id: "multi_direct"

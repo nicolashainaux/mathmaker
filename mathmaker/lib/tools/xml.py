@@ -70,40 +70,6 @@ def get_xml_sheets_paths():
             if os.path.splitext(f)[1] == '.xml'}
 
 
-def _get_attributes(node, tag, output=[]):
-    """
-    Gathers the attributes of all *node*'s children matching *tag*.
-
-    All attributes that match *tag* are recursively added to the output list.
-    :param node: The XML Tree node where to start from.
-    :type node: :class:`xml.etree.ElementTree.Element` instance
-    :param tag: The tag we're looking for.
-    :type tag: str
-    :param output: The attributes' list.
-    :type output: list
-    :rtype: list
-    """
-    for child in node:
-        if child.tag == tag:
-            output.append(child.attrib)
-        for grandchild in child:
-            output += _get_attributes(grandchild, tag)
-    return output
-
-
-def get_attributes(filename, tag):
-    """
-    Gathers the attributes of all *filename*'s '*node*'s matching *tag*.
-
-    :param filename: The XML file name.
-    :type filename: str
-    :param tag: The tag we're looking for.
-    :type tag: str
-    :rtype: list
-    """
-    return _get_attributes(XML_PARSER.parse(filename).getroot(), tag)
-
-
 def _read_layout(node, config, layout):
     config.update(node.attrib)
     keep_default_w, keep_default_a = True, True

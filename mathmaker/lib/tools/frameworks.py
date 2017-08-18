@@ -874,3 +874,36 @@ def build_questions_list(data):
         elif entry.startswith('mix'):
             questions += _read_mix(data[entry])
     return questions
+
+
+def _get_attributes(data, tag):
+    """
+    Return the list of "attributes" matching tag. Not recursive.
+
+    :param data: the data read from YAML file
+    :type data: dict
+    :rtype: list
+    """
+    result = []
+    for key in data:
+        if key.startswith(tag):
+            attr = {}
+            for a in data[key]:
+                attr.update(a)
+            result.append(attr)
+    return result
+
+
+def get_attributes(filename, tag):
+    """
+    Gathers the "attributes" of all *filename*'s keys matching *tag*.
+
+    :param filename: The YAML file name.
+    :type filename: str
+    :param tag: The tag we're looking for.
+    :type tag: str
+    :rtype: list
+    """
+    from ruamel import yaml
+    with open(filename) as f:
+        return _get_attributes(yaml.safe_load(f), tag)

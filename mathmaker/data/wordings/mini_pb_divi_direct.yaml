@@ -1,0 +1,145 @@
+# This file is only intended to provide additional strings for translation
+
+wording1:
+  - wording_context: marbles
+  - wording: "{masculine_name} has {nb1} marbles. He gives them out to {nb2} friends. How many marbles will get each friend?"
+  - nb1_min: 2
+  - nb1_max: 500
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "divi_direct"
+
+wording2:
+  - wording_context: "marbles"
+  - wording: "{feminine_name} has {nb1} marbles. She gives them out to {nb2} friends. How many marbles will get each friend?"
+  - nb1_min: 2
+  - nb1_max: 500
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "divi_direct"
+
+wording3:
+  - wording_context: "golden goose"
+  - wording: "It took {nb2} days to my golden goose to lay {nb1} eggs. How many eggs did she lay everyday?"
+  - nb1_min: 2
+  - nb1_max: 100
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "divi_direct"
+
+wording4:
+  - wording_context: "gardener"
+  - wording: "The gardener has planted {nb1} salads, splitted in {nb2} rows. How many salads is there in a row?"
+  - nb1_min: 2
+  - nb1_max: 81
+  - nb2_min: 2
+  - nb2_max: 9
+  - q_id: "divi_direct"
+
+wording5:
+  - wording_context: "gardener"
+  - wording: "The gardener has planted {nb1} cabbages, splitted in {nb2} rows. How many cabbages is there in a row?"
+  - nb1_min: 2
+  - nb1_max: 81
+  - nb2_min: 2
+  - nb2_max: 9
+  - q_id: "divi_direct"
+
+wording6:
+  - wording_context: "market gardener"
+  - wording: "A market gardener has planted {nb1} salads, splitted in {nb2} rows. How many salads is there in a row?"
+  - nb1_min: 10
+  - nb1_max: 10000
+  - nb2_min: 10
+  - nb2_max: 100
+  - q_id: "divi_direct"
+
+wording7:
+  - wording_context: "market gardener"
+  - wording: "A market gardener has planted {nb1} cabbages, splitted in {nb2} rows. How many cabbages is there in a row?"
+  - nb1_min: 10
+  - nb1_max: 10000
+  - nb2_min: 10
+  - nb2_max: 100
+  - q_id: "divi_direct"
+
+wording8:
+  - wording_context: "candies"
+  - wording: "I will give out {nb1} candies to the {nb2} friends that I invited at my birthday's party. How many candies will receive each of my friends?"
+  - nb1_min: 2
+  - nb1_max: 625
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "divi_direct"
+
+wording9:
+  - wording_context: "pencils boxes"
+  - wording: "{name} put {nb1} pencils away in {nb2} boxes. How many pencils are there in each box?"
+  - nb1_min: 2
+  - nb1_max: 250
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "divi_direct"
+
+wording10:
+  - wording_context: "pens purchase"
+  - wording: "{name} paid {nb1} {currency_unit} for {nb2} pens. How much does cost one pen? |hint:currency_unit|"
+  - nb1_min: 2
+  - nb1_max: 81
+  - nb2_min: 2
+  - nb2_max: 9
+  - q_id: "divi_direct"
+
+wording11:
+  - wording_context: "pocket money"
+  - wording: "{masculine_name} has received altogether {nb1} {currency_unit} pocket money in {nb2} months. How much did he receive every month? |hint:currency_unit|"
+  - nb1_min: 2
+  - nb1_max: 10800
+  - nb2_min: 2
+  - nb2_max: 36
+  - q_id: "divi_direct"
+
+wording12:
+  - wording_context: "pocket money"
+  - wording: "{feminine_name} has received altogether {nb1} {currency_unit} pocket money in {nb2} months. How much did she receive every month? |hint:currency_unit|"
+  - nb1_min: 2
+  - nb1_max: 10800
+  - nb2_min: 2
+  - nb2_max: 36
+  - q_id: "divi_direct"
+
+wording13:
+  - wording_context: "livestock farming"
+  - wording: "Our neighbours have {nb1} sheep. That's {nb2} times more than us. How many sheep do we have?"
+  - nb1_min: 2
+  - nb1_max: 625
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "divi_direct"
+
+wording14:
+  - wording_context: "sweets packets"
+  - wording: "{name} has prepared {nb1} truffles splitted in {nb2} packets. How many truffles is there in one packet?"
+  - nb1_min: 2
+  - nb1_max: 625
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "divi_direct"
+
+wording15:
+  - wording_context: "starchy foods packets"
+  - wording: "We have loaded {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How heavy is one packet? |hint:mass_unit|"
+  - nb1_min: 2
+  - nb1_max: 625
+  - nb2_min: 2
+  - nb2_max: 25
+  - q_id: "divi_direct"
+
+wording16:
+  - wording_context: "starchy foods packets"
+  - wording: "We have bought {nb1} {mass_unit=kg} of flour, shared in {nb2} packets. How heavy is one packet? |hint:mass_unit|"
+  - nb1_min: 2
+  - nb1_max: 20
+  - nb2_min: 2
+  - nb2_max: 5
+  - q_id: "divi_direct"
