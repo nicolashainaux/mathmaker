@@ -23,8 +23,7 @@
 import os
 
 from mathmaker import settings
-from mathmaker.lib.tools import (check_unique_letters_words,
-                                   po_file_get_list_of)
+from mathmaker.lib.tools import check_unique_letters_words, po_file_get_list_of
 
 
 def test_wnl():
