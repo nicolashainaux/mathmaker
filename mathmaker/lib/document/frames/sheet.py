@@ -74,6 +74,8 @@ class Sheet(object):
             if not isinstance(loaded_layout_data, list):
                 loaded_layout_data = [loaded_layout_data]
             layout_data = copy.deepcopy(DEFAULT_SHEET_LAYOUT)
+            if self.preset == 'mental calculation':
+                layout_data['font_size_offset'] = '-1'
             for d in loaded_layout_data:
                 layout_data.update(d)
             self.layout_type = layout_data['type']
