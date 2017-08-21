@@ -132,6 +132,16 @@ def ow2qua():
     return o
 
 
+@pytest.fixture
+def ow_units1():
+    o = raw_obj()
+    o.nb1 = 7
+    o.wording = 'The first weighs {nb1} {mass_unit=kg} and the second\'s ' \
+        '{mass_unit}.'
+    setup_wording_format_of(o)
+    return o
+
+
 def test_wrap_01():
     """Checks wrap('s') gives out '{s}'."""
     assert wrap('Something like this.') == '{Something like this.}'
@@ -496,6 +506,12 @@ def test_setup_wording_format_of_12(ow2qua):
     assert ow2qua.wording.format(**ow2qua.wording_format) == \
         '(AB) is parallel to (MN). '\
         'Calculate the length of segment [BC].'
+
+
+def test_setup_wording_format_of_13(ow_units1):
+    """Checks if obj.wording is correctly setup."""
+    assert hasattr(ow_units1, 'mass_unit')
+    assert getattr(ow_units1, 'mass_unit') == 'kg'
 
 
 def test_setup_wording_format_of_exceptions(owbuggy):
