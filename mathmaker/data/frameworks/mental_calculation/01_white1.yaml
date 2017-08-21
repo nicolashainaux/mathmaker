@@ -1,16 +1,19 @@
 multiplications: !!omap
   - preset: "mental calculation"
+  - title: "Mental calculation: multiplications"
   - exercise: !!omap
     - questions: multi direct -> intpairs_2to9 (20)
 
 positional_notation: !!omap
   - preset: "mental calculation"
+  - title: "Mental calculation: positional notation"
   - exercise: !!omap
     - questions: rank direct -> rank_words (10)
                  rank reversed -> rank_words (10)
 
 exam: !!omap
   - preset: "mental calculation"
+  - title: "Mental calculation: final test for white belt, first stripe"
   - exercise: !!omap
     - questions: multi direct -> intpairs_2to9 (10)
                  rank direct -> rank_words (5)
