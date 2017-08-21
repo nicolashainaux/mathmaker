@@ -49,8 +49,6 @@ class source(object):
     ##
     #   @brief  Resets the drawDate of all table's entries (to 0)
     def _reset(self, **kwargs):
-        import sys
-        sys.stderr.write('reset\n')
         shared.db.execute("UPDATE " + self.table_name + " SET drawDate = 0;")
         if "lock_equal_products" in kwargs:
             shared.db.execute("UPDATE "
