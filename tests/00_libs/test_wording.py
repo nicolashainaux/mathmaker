@@ -23,6 +23,7 @@
 import pytest
 
 from mathmaker.lib import shared
+from mathmaker.lib.constants.units import MASS_UNITS
 from mathmaker.lib.tools.wording import (wrap, unwrapped, is_wrapped,
                                          is_wrapped_P,
                                          is_wrapped_p, is_unit, is_unitN,
@@ -375,6 +376,14 @@ def test_handle_valueless_unit_tags_04(o1):
                                    'and the second\'s area is {nb2} '
                                    '{area_unit2}.')
     assert hasattr(o1, 'length_unit2')
+
+
+def test_handle_valueless_unit_tags_05(o1):
+    """Checks if only valueless (yet) units tags are handled (correctly)."""
+    handle_valueless_unit_tags(o1, 'The first weighs {nb1} {mass_unit} '
+                                   'and the second\'s.')
+    assert hasattr(o1, 'mass_unit')
+    assert getattr(o1, 'mass_unit') in MASS_UNITS
 
 
 def test_handle_valueless_unit_tags_exceptions(o1):
