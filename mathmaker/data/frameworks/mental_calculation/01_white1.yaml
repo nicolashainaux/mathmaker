@@ -1,17 +1,17 @@
-multiplications:
+multiplications: !!omap
   - preset: "mental calculation"
-  - exercise:
+  - exercise: !!omap
     - questions: multi direct -> intpairs_2to9 (20)
 
-positional_notation:
+positional_notation: !!omap
   - preset: "mental calculation"
-  - exercise:
+  - exercise: !!omap
     - questions: rank direct -> rank_words (10)
                  rank reversed -> rank_words (10)
 
-exam:
+exam: !!omap
   - preset: "mental calculation"
-  - exercise:
+  - exercise: !!omap
     - questions: multi direct -> intpairs_2to9 (10)
                  rank direct -> rank_words (5)
                  rank reversed -> rank_words (5)
