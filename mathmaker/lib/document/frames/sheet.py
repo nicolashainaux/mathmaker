@@ -70,12 +70,12 @@ class Sheet(object):
             text = data.get('text', presets[self.preset]['text'])
             answers_title = data.get('answers_title',
                                      presets[self.preset]['answers_title'])
-            loaded_layout_data = data.get('layout', DEFAULT_SHEET_LAYOUT)
-            if not isinstance(loaded_layout_data, list):
-                loaded_layout_data = [loaded_layout_data]
             layout_data = copy.deepcopy(DEFAULT_SHEET_LAYOUT)
             if self.preset == 'mental calculation':
                 layout_data['font_size_offset'] = '-1'
+            loaded_layout_data = data.get('layout', layout_data)
+            if not isinstance(loaded_layout_data, list):
+                loaded_layout_data = [loaded_layout_data]
             for d in loaded_layout_data:
                 layout_data.update(d)
             self.layout_type = layout_data['type']
