@@ -35,7 +35,7 @@ from mathmaker.lib.tools.maths import coprimes_to
 from mathmaker.lib.tools.frameworks import read_layout, build_questions_list
 from mathmaker.lib.tools.frameworks import get_q_modifier, parse_qid
 from .question import Question
-from mathmaker.lib.constants import STR_BOOLEANS
+from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.constants.content \
     import SUBKINDS_TO_UNPACK, UNPACKABLE_SUBKINDS, SOURCES_TO_UNPACK
 
@@ -401,8 +401,8 @@ class Exercise(object):
 
         self.q_spacing = options.get('q_spacing', presets.get('q_spacing'))
         self.q_numbering = options.get('q_numbering', 'disabled')
-        self.shuffle = STR_BOOLEANS[options.get('shuffle',
-                                                presets.get('shuffle'))]()
+        self.shuffle = BOOLEAN[options.get('shuffle',
+                                           presets.get('shuffle'))]()
 
         self.details_level = options.get('details_level',
                                          presets.get('details_level'))

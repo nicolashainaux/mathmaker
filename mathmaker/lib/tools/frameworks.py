@@ -36,7 +36,7 @@ from operator import itemgetter
 #
 from mathmaker import settings
 from mathmaker.lib.constants import DEFAULT_LAYOUT, EQUAL_PRODUCTS
-from mathmaker.lib.constants import STR_BOOLEANS
+from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.tools import parse_layout_descriptor
 
 SIMPLE_QUESTION = re.compile(r'([a-zA-Z0-9_,=;\->\. ]+\([0-9\.]+\))')
@@ -397,7 +397,7 @@ def read_layout(data):
         elif 'answers' in chunk:
             part = 'answers'
         attributes = _AttrStr(chunk[part]).parse()
-        jump = STR_BOOLEANS[attributes.get('newpage', 'false')]()
+        jump = BOOLEAN[attributes.get('newpage', 'false')]()
         s = None
         if 'spacing' in attributes:
             # if it is not, it's already set to 'undefined', by default
@@ -835,14 +835,12 @@ def _read_mix(data):
                     ' ' + str(q['id'].replace(' ', '_')))
 
     random.shuffle(q_temp_list)
-    if any(STR_BOOLEANS[n[1].get('required', 'false')]()
+    if any(BOOLEAN[n[1].get('required', 'false')]()
            for n in n_temp_list):
         required_n_temp_list = [n for n in n_temp_list
-                                if STR_BOOLEANS[n[1].get('required',
-                                                         'false')]()]
+                                if BOOLEAN[n[1].get('required', 'false')]()]
         rest_n_temp_list = [n for n in n_temp_list
-                            if not STR_BOOLEANS[n[1].get('required',
-                                                         'false')]()]
+                            if not BOOLEAN[n[1].get('required', 'false')]()]
         random.shuffle(required_n_temp_list)
         random.shuffle(rest_n_temp_list)
         n_temp_list = required_n_temp_list + rest_n_temp_list

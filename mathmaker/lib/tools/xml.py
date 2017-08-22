@@ -29,7 +29,7 @@ import random
 import xml.etree.ElementTree as XML_PARSER
 
 from mathmaker import settings
-from mathmaker.lib.constants import STR_BOOLEANS, DEFAULT_LAYOUT
+from mathmaker.lib.constants import BOOLEAN, DEFAULT_LAYOUT
 from mathmaker.lib.tools import parse_layout_descriptor
 from mathmaker.lib.tools.frameworks import _match_qid_sourcenb, parse_qid
 
@@ -340,14 +340,14 @@ def _get_q_list_from(exercise_node):
                             ' ' + str(q['id'].replace(' ', '_')))
 
             random.shuffle(q_temp_list)
-            if any(STR_BOOLEANS[n[1].get('required', 'false')]()
+            if any(BOOLEAN[n[1].get('required', 'false')]()
                    for n in n_temp_list):
                 required_n_temp_list = [n for n in n_temp_list
-                                        if STR_BOOLEANS[n[1].get('required',
-                                                                 'false')]()]
+                                        if BOOLEAN[n[1].get('required',
+                                                            'false')]()]
                 rest_n_temp_list = [n for n in n_temp_list
-                                    if not STR_BOOLEANS[n[1].get('required',
-                                                                 'false')]()]
+                                    if not BOOLEAN[n[1].get('required',
+                                                            'false')]()]
                 random.shuffle(required_n_temp_list)
                 random.shuffle(rest_n_temp_list)
                 n_temp_list = required_n_temp_list + rest_n_temp_list

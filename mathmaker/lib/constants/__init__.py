@@ -22,9 +22,9 @@
 
 import random
 
-STR_BOOLEANS = {'true': lambda: True,
-                'false': lambda: False,
-                'random': lambda: random.choice([True, False])}
+BOOLEAN = {'true': lambda: True, 'false': lambda: False,
+           'random': lambda: random.choice([True, False]),
+           True: lambda: True, False: lambda: False, }
 
 EQUAL_PRODUCTS = {(2, 6): [(3, 4)],
                   (3, 4): [(2, 6)],
