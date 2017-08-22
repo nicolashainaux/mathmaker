@@ -42,7 +42,7 @@ from mathmaker.lib.tools import parse_layout_descriptor
 SIMPLE_QUESTION = re.compile(r'([a-zA-Z0-9_,=;\->\. ]+\([0-9\.]+\))')
 MIX_QUESTION = re.compile(
     r'([a-zA-Z0-9_\. ]+[,]?)(([a-zA-Z0-9_ ]+=[a-zA-Z0-9_\. ]+[,]?)*)')
-NB_SOURCE = re.compile(r'([a-zA-Z0-9_,=;\- ]+)\(([0-9]+)\)')
+NB_SOURCE = re.compile(r'([a-zA-Z0-9_,=;×\- ]+)\(([0-9]+)\)')
 
 
 def read_index():
@@ -558,6 +558,10 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
     elif q_id == 'calculation_order_of_operations':
         # We only check there are two sources
         return len(source_nb.split(sep=';;')) == 2
+    elif q_id == 'fraction_of_a_rectangle':
+        return any([(source_nb.startswith('intpairs_') and ';;' in source_nb),
+                    source_nb.startswith('properfraction'),
+                    source_nb == 'bypass'])
     else:
         warnings.warn('Could not check if the question\'s type and numbers\'s '
                       'source do match or not: {} and {}'
@@ -825,7 +829,7 @@ def _read_mix(data):
                                         n[0], v)):
                 # __
                 raise ValueError(
-                    'XMLFileFormatError: this source: '
+                    'YAML File Format Error: this source: '
                     + str(n[0]) + ' cannot '
                     'be attributed to this question:'
                     ' ' + str(q['id'].replace(' ', '_')))
