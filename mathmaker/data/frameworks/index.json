@@ -14,6 +14,21 @@
         "02_white2",
         "positional_notation"
     ],
+    "02_white2_addi_subtr": [
+        "mental_calculation",
+        "02_white2",
+        "addi_subtr"
+    ],
+    "02_white2_divisions": [
+        "mental_calculation",
+        "02_white2",
+        "divisions"
+    ],
+    "02_white2_fraction_of_a_rectangle": [
+        "mental_calculation",
+        "02_white2",
+        "fraction_of_a_rectangle"
+    ],
     "02_white2_mini_problems": [
         "mental_calculation",
         "02_white2",

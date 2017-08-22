@@ -532,10 +532,11 @@ msgstr ""
 msgid "Answers"
 msgstr ""
 
+#: data/frameworks/mental_calculation/02_white2.yaml:56
 #: data/frameworks/mental_calculation/02_white2.yaml:20
+#: data/frameworks/mental_calculation/02_white2.yaml:3
 #: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
 #: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
-#: data/frameworks/mental_calculation/02_white2.yaml:3
 msgid "Mental calculation: mini-problems"
 msgstr ""
 
@@ -1181,6 +1182,7 @@ msgid "{} (or {})"
 msgstr ""
 
 #: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
+#: data/frameworks/mental_calculation/02_white2.yaml:33
 msgid "Mental calculation: fraction of a rectangle"
 msgstr ""
 
@@ -1396,6 +1398,7 @@ msgstr ""
 msgid "Mental calculation: multiplications"
 msgstr ""
 
+#: data/frameworks/mental_calculation/02_white2.yaml:11
 #: data/frameworks/mental_calculation/01_white1.yaml:9
 #: data/frameworks/mental_calculation/02_white2.yaml:13
 msgid "Mental calculation: positional notation"
@@ -1868,4 +1871,12 @@ msgstr ""
 msgid ""
 "Our neighbours have {nb1} sheep. That's {nb2} less than us. How many sheep "
 "do we have?"
+msgstr ""
+
+#: data/frameworks/mental_calculation/02_white2.yaml:18
+msgid "Mental calculation: additions and subtractions"
+msgstr ""
+
+#: data/frameworks/mental_calculation/02_white2.yaml:27
+msgid "Mental calculation: divisions"
 msgstr ""

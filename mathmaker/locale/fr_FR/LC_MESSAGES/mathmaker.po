@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-08-22 10:39+0200\n"
-"PO-Revision-Date: 2017-08-22 10:39+0200\n"
+"POT-Creation-Date: 2017-08-22 12:33+0200\n"
+"PO-Revision-Date: 2017-08-22 12:33+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -550,10 +550,11 @@ msgstr "Multiplications à l'envers"
 msgid "Answers"
 msgstr "Réponses"
 
+#: data/frameworks/mental_calculation/02_white2.yaml:56
 #: data/frameworks/mental_calculation/02_white2.yaml:20
+#: data/frameworks/mental_calculation/02_white2.yaml:3
 #: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
 #: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
-#: data/frameworks/mental_calculation/02_white2.yaml:3
 msgid "Mental calculation: mini-problems"
 msgstr "Calcul mental : mini-problèmes"
 
@@ -1273,6 +1274,7 @@ msgid "{} (or {})"
 msgstr "{} (ou {})"
 
 #: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
+#: data/frameworks/mental_calculation/02_white2.yaml:33
 msgid "Mental calculation: fraction of a rectangle"
 msgstr "Calcul mental : fraction d'un rectangle"
 
@@ -1488,6 +1490,7 @@ msgstr "Calcul littéral: développement \"double\""
 msgid "Mental calculation: multiplications"
 msgstr "Calcul mental : multiplications"
 
+#: data/frameworks/mental_calculation/02_white2.yaml:11
 #: data/frameworks/mental_calculation/01_white1.yaml:9
 #: data/frameworks/mental_calculation/02_white2.yaml:13
 msgid "Mental calculation: positional notation"
@@ -2121,6 +2124,14 @@ msgid ""
 msgstr ""
 "Nos voisins ont {nb1} moutons. C'est {nb2} de moins que nous. Combien de "
 "moutons avons-nous ?"
+
+#: data/frameworks/mental_calculation/02_white2.yaml:18
+msgid "Mental calculation: additions and subtractions"
+msgstr "Calcul mental : additions et soustractions"
+
+#: data/frameworks/mental_calculation/02_white2.yaml:27
+msgid "Mental calculation: divisions"
+msgstr "Calcul mental : divisions"
 
 #~ msgid "Example of detailed solutions:"
 #~ msgstr "Exemple de solutions détaillées :"

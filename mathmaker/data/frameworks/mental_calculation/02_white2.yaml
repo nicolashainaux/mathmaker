@@ -1,8 +1,6 @@
 multiplications: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: multiplications"
-  - layout:
-    - fontsize_offset: -2
   - exercise: !!omap
     - questions: multi reversed -> intpairs_2to9 (8)
                  multi hole -> intpairs_2to9 (8)
@@ -15,11 +13,47 @@ positional_notation: !!omap
     - questions: rank direct -> rank_words (10)
                  rank reversed -> rank_words (10)
 
+addi_subtr: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: additions and subtractions"
+  - exercise: !!omap
+    - questions: addi direct -> intpairs_9to50 (5)
+                 addi direct -> intpairs_9to100 (5)
+                 subtr direct, subvariant=only_positive -> intpairs_9to50 (5)
+                 subtr direct, subvariant=only_positive -> intpairs_9to100 (5)
+
+divisions: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: divisions"
+  - exercise: !!omap
+    - questions: divi direct -> intpairs_2to9 (20)
+
+fraction_of_a_rectangle: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: fraction of a rectangle"
+  - exercise: !!omap
+    - shuffle: false
+    - mix0:
+      - question: fraction_of a_rectangle, pick=2
+      - nb: properfraction_1to4 (1)
+            properfraction_5to10 (1)
+    - mix1:
+      - question: fraction_of a_rectangle, pick=4
+      - nb: properfraction_2to3×4to10 (1)
+            properfraction_2to4×1to10 (1)
+            intpairs_2to5;;intpairs_2to5 (2)
+    - mix2:
+      - question: fraction_of a_rectangle, pick=2
+      - nb: intpairs_3to6;;intpairs_3to6 (1)
+            properfraction_3to6×3to6 (1)
+    - mix3:
+      - question: fraction_of a_rectangle, pick=2
+      - nb: intpairs_4to9;;intpairs_4to9 (1)
+            properfraction_4to9×4to9 (1)
+
 mini_problems: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: mini-problems"
-  - layout:
-    - fontsize_offset: -2
   - exercise: !!omap
     - questions: addi direct, context=mini_problem -> intpairs_5to20 (5)
                  multi direct, context=mini_problem -> intpairs_4to9 (5)
