@@ -78,12 +78,15 @@ def build_index():
         for folder_path in folder_files:
             subtheme = os.path.splitext(os.path.basename(folder_path))[0]
             with open(folder_path) as f:
-                folder = OrderedDict(yaml.load(f))
-            for sheet_name in folder:
-                directive = '_'.join([subtheme, sheet_name])
-                index[directive] = (theme, subtheme, sheet_name)
+                loaded_data = yaml.load(f)
+                if loaded_data is not None:
+                    folder = OrderedDict(loaded_data)
+                for sheet_name in folder:
+                    directive = '_'.join([subtheme, sheet_name])
+                    index[directive] = (theme, subtheme, sheet_name)
     with open(settings.index_path, 'w') as f:
         json.dump(index, f, indent=4)
+        f.write('\n')
 
 
 def _frameworks_info():
