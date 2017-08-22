@@ -532,8 +532,9 @@ msgstr ""
 msgid "Answers"
 msgstr ""
 
-#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/02_white2.yaml:20
 #: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
 #: data/frameworks/mental_calculation/02_white2.yaml:3
 msgid "Mental calculation: mini-problems"
 msgstr ""
@@ -1391,10 +1392,12 @@ msgid "Algebra: expand and reduce double brackets"
 msgstr ""
 
 #: data/frameworks/mental_calculation/01_white1.yaml:3
+#: data/frameworks/mental_calculation/02_white2.yaml:3
 msgid "Mental calculation: multiplications"
 msgstr ""
 
 #: data/frameworks/mental_calculation/01_white1.yaml:9
+#: data/frameworks/mental_calculation/02_white2.yaml:13
 msgid "Mental calculation: positional notation"
 msgstr ""
 

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-08-22 10:10+0200\n"
-"PO-Revision-Date: 2017-08-22 10:11+0200\n"
+"POT-Creation-Date: 2017-08-22 10:39+0200\n"
+"PO-Revision-Date: 2017-08-22 10:39+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -550,8 +550,9 @@ msgstr "Multiplications à l'envers"
 msgid "Answers"
 msgstr "Réponses"
 
-#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/02_white2.yaml:20
 #: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
 #: data/frameworks/mental_calculation/02_white2.yaml:3
 msgid "Mental calculation: mini-problems"
 msgstr "Calcul mental : mini-problèmes"
@@ -1483,10 +1484,12 @@ msgid "Algebra: expand and reduce double brackets"
 msgstr "Calcul littéral: développement \"double\""
 
 #: data/frameworks/mental_calculation/01_white1.yaml:3
+#: data/frameworks/mental_calculation/02_white2.yaml:3
 msgid "Mental calculation: multiplications"
 msgstr "Calcul mental : multiplications"
 
 #: data/frameworks/mental_calculation/01_white1.yaml:9
+#: data/frameworks/mental_calculation/02_white2.yaml:13
 msgid "Mental calculation: positional notation"
 msgstr "Calcul mental : rangs des chiffres dans un nombre décimal"
 

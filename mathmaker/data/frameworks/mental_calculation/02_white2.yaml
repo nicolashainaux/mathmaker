@@ -1,3 +1,20 @@
+multiplications: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: multiplications"
+  - layout:
+    - fontsize_offset: -2
+  - exercise: !!omap
+    - questions: multi reversed -> intpairs_2to9 (8)
+                 multi hole -> intpairs_2to9 (8)
+                 multi direct -> intpairs_2to9 (4)
+
+positional_notation: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: positional notation"
+  - exercise: !!omap
+    - questions: rank direct -> rank_words (10)
+                 rank reversed -> rank_words (10)
+
 mini_problems: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: mini-problems"
