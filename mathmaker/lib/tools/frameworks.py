@@ -352,7 +352,7 @@ class _AttrStr(str):
         chunks = self.split(sep=', ')
         for c in chunks:
             a, v = c.split(sep='=')
-            if a == attr:
+            if a.strip() == attr:
                 return v.strip(', ')
         raise KeyError('Cannot find the attribute \'{}\' in string \'{}\'.'
                        .format(attr, self))
