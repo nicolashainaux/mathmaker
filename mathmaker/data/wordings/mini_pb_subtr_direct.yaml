@@ -7,6 +7,7 @@ wording1:
   - nb1_max: 100
   - nb2_min: 2
   - nb2_max: 100
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording2:
@@ -16,6 +17,7 @@ wording2:
   - nb1_max: 100
   - nb2_min: 2
   - nb2_max: 100
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording3:
@@ -25,6 +27,7 @@ wording3:
   - nb1_max: 100
   - nb2_min: 2
   - nb2_max: 12
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording4:
@@ -34,6 +37,7 @@ wording4:
   - nb1_max: 20
   - nb2_min: 2
   - nb2_max: 20
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording5:
@@ -43,6 +47,7 @@ wording5:
   - nb1_max: 20
   - nb2_min: 2
   - nb2_max: 20
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording6:
@@ -52,6 +57,7 @@ wording6:
   - nb1_max: 100
   - nb2_min: 21
   - nb2_max: 100
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording7:
@@ -61,6 +67,7 @@ wording7:
   - nb1_max: 100
   - nb2_min: 21
   - nb2_max: 100
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording8:
@@ -70,6 +77,7 @@ wording8:
   - nb1_max: 10
   - nb2_min: 2
   - nb2_max: 10
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording9:
@@ -79,6 +87,7 @@ wording9:
   - nb1_max: 30
   - nb2_min: 2
   - nb2_max: 30
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording10:
@@ -88,6 +97,7 @@ wording10:
   - nb1_max: 30
   - nb2_min: 2
   - nb2_max: 30
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording11:
@@ -97,6 +107,7 @@ wording11:
   - nb1_max: 30
   - nb2_min: 2
   - nb2_max: 30
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording12:
@@ -106,6 +117,7 @@ wording12:
   - nb1_max: 30
   - nb2_min: 2
   - nb2_max: 30
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording13:
@@ -115,6 +127,7 @@ wording13:
   - nb1_max: 50
   - nb2_min: 9
   - nb2_max: 50
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording14:
@@ -124,6 +137,7 @@ wording14:
   - nb1_max: 50
   - nb2_min: 9
   - nb2_max: 50
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording15:
@@ -133,6 +147,7 @@ wording15:
   - nb1_max: 50
   - nb2_min: 9
   - nb2_max: 50
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording16:
@@ -142,6 +157,7 @@ wording16:
   - nb1_max: 50
   - nb2_min: 9
   - nb2_max: 50
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording17:
@@ -151,6 +167,7 @@ wording17:
   - nb1_max: 100
   - nb2_min: 2
   - nb2_max: 100
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording18:
@@ -160,6 +177,7 @@ wording18:
   - nb1_max: 100
   - nb2_min: 2
   - nb2_max: 100
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording19:
@@ -169,6 +187,7 @@ wording19:
   - nb1_max: 20
   - nb2_min: 2
   - nb2_max: 20
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording20:
@@ -178,6 +197,7 @@ wording20:
   - nb1_max: 20
   - nb2_min: 2
   - nb2_max: 20
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording21:
@@ -187,6 +207,7 @@ wording21:
   - nb1_max: 200
   - nb2_min: 2
   - nb2_max: 200
+  - back_to_unit: false
   - q_id: subtr_direct
 
 wording22:
@@ -196,4 +217,5 @@ wording22:
   - nb1_max: 200
   - nb2_min: 2
   - nb2_max: 200
+  - back_to_unit: false
   - q_id: subtr_direct

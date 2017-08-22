@@ -88,6 +88,7 @@ def __main__():
               wording_context TEXT, wording TEXT,
               nb1_min INTEGER, nb1_max INTEGER,
               nb2_min INTEGER, nb2_max INTEGER,
+              back_to_unit TEXT,
               q_id TEXT, drawDate INTEGER)''')
     db.execute('''CREATE TABLE single_ints
               (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
@@ -155,13 +156,14 @@ def __main__():
                            [w['nb1_max'] for w in wordings],
                            [w['nb2_min'] for w in wordings],
                            [w['nb2_max'] for w in wordings],
+                           [w['back_to_unit'] for w in wordings],
                            [w['q_id'] for w in wordings],
                            [0 for _ in range(len(wordings))]))
         db.executemany("INSERT "
                        "INTO mini_pb_wordings(wording_context, wording, "
-                       "nb1_min, nb1_max, nb2_min, nb2_max, "
+                       "nb1_min, nb1_max, nb2_min, nb2_max, back_to_unit, "
                        "q_id, drawDate) "
-                       "VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+                       "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                        db_rows)
 
     sys.stderr.write('Insert integers pairs...\n')

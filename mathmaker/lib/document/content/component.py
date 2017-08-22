@@ -295,10 +295,14 @@ class structure(object):
         self.chunk1_length = str(self.figure.chunk[1].length)
 
     def _setup_mini_problem_wording(self, **kwargs):
+        wording_kwargs = {'q_id': kwargs['q_id'],
+                          'nb1_to_check': self.nb1,
+                          'nb2_to_check': self.nb2}
+        if 'back_to_unit' in kwargs:
+            val = 1 if STR_BOOLEANS[kwargs['back_to_unit']]() else 0
+            wording_kwargs.update({'back_to_unit': val})
         self.wording = _(shared.mini_problems_wordings_source
-                         .next(q_id=kwargs['q_id'],
-                               nb1_to_check=self.nb1,
-                               nb2_to_check=self.nb2))
+                         .next(**wording_kwargs))
         setup_wording_format_of(self)
 
     def _setup_rectangle_grid(self, **kwargs):
