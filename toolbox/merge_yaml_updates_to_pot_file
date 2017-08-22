@@ -44,8 +44,9 @@ settings.init()
 # PARSER_MULTILINE = re.compile(
 #     r'(^[ ]+\- ([\w]+): \")([\w\d \-\+\'\(\)°\[\]\{\}€<>/:,;!\.\?\n]+)\"')
 
-DEFAULT_KEYWORDS = ['header', 'title', 'text', 'subtitle', 'answers_title',
-                    'wording']
+DEFAULT_KEYWORD_STARTS = ['header', 'title', 'text', 'subtitle',
+                          'answers_title']
+DEFAULT_KEYWORDS = ['wording']
 MAIN_POT_FILE_PATH = settings.localedir + 'mathmaker.pot'
 PROJECT_ROOT = DIR_TO_BROWSE = settings.rootdir
 
@@ -109,25 +110,31 @@ yaml = ruamel.yaml.YAML()
 yaml.Constructor = _Constructor
 
 
-def collect_strings(data, rel_file_name, keywords_list):
-    # sys.stderr.write('data={}\n'.format(data))
+def collect_strings(data, rel_file_name, keywords_starts, keywords):
+    # sys.stderr.write('data={}\ntype={}\n'.format(data, type(data)))
     for key in data:
         # sys.stderr.write('key={}; type={}\n'.format(key, type(key)))
         if isinstance(data, list):
-            collect_strings(key, rel_file_name, keywords_list)
+            collect_strings(key, rel_file_name, keywords_starts, keywords)
         elif isinstance(data[key], dict):
-            collect_strings(data[key], rel_file_name, keywords_list)
+            collect_strings(data[key], rel_file_name,
+                            keywords_starts, keywords)
+        elif isinstance(data[key], list):
+            collect_strings(data[key], rel_file_name,
+                            keywords_starts, keywords)
         else:
-            if (any([key.startswith(k) for k in keywords_list])
-                and not data[key] in COLLECTED_STRINGS
+            # sys.stderr.write('data={}\ntype={}\n'.format(data, type(data)))
+            # sys.stderr.write('key={}; type={}\n'.format(key, type(key)))
+            # sys.stderr.write('data[key]={}\n'.format(data[key]))
+            if ((any([key.startswith(k) for k in keywords_starts])
+                 or key in keywords)
                 and data[key] != ''):
-                COLLECTED_STRINGS[data[key]] = []
-            if any([key.startswith(k) for k in keywords_list]):
-                if data[key] != '':
-                    COLLECTED_STRINGS[data[key]] += \
-                        [(rel_file_name, str(data[key].lc.line + 1))]
-                    # print('{}|{} found in line {}\n'
-                    #       .format(key, data[key], data[key].lc.line + 1))
+                if not data[key] in COLLECTED_STRINGS:
+                    COLLECTED_STRINGS[data[key]] = []
+                COLLECTED_STRINGS[data[key]] += \
+                    [(rel_file_name, str(data[key].lc.line + 1))]
+                # print('{}|{} found in line {}\n'
+                #       .format(key, data[key], data[key].lc.line + 1))
 
     # COLLECTED_STRINGS looks like:
     # {'Something to translate': [("this_file.yaml", 76),
@@ -179,7 +186,7 @@ def collect_strings(data, rel_file_name, keywords_list):
     # sys.stderr.write('\nCOLLECTED STRINGS: {}\n'.format(COLLECTED_STRINGS))
 
 
-def browse_files(path, keywords_list):
+def browse_files(path, keyword_starts, keywords_list):
     os.chdir(path)
     file_names = next(os.walk('.'))[2]
 
@@ -194,11 +201,12 @@ def browse_files(path, keywords_list):
             with open(file_name + extension) as file_path:
                 collect_strings(yaml.load(file_path),
                                 relpath,
+                                keyword_starts,
                                 keywords_list)
 
     for dir_name in next(os.walk('.'))[1]:
         if dir_name != '.git':
-            browse_files(dir_name, keywords_list)
+            browse_files(dir_name, keyword_starts, keywords_list)
 
     os.chdir('..')
 
@@ -218,6 +226,10 @@ def main():
     parser.add_argument('--keywords', action='store', dest='keywords_list',
                         nargs='*', default=DEFAULT_KEYWORDS,
                         help='to provide other keywords.')
+    parser.add_argument('--keyword-starts', action='store',
+                        dest='keyword_starts',
+                        nargs='*', default=DEFAULT_KEYWORD_STARTS,
+                        help='to provide other keywords.')
     args = parser.parse_args()
 
     if not os.path.isfile(args.filename):
@@ -233,10 +245,13 @@ def main():
                                      os.strerror(errno.ENOTDIR),
                                      d)
 
-    sys.stdout.write('Will look for labels: ' + str(args.keywords_list) + '\n')
+    sys.stdout.write('Will look for labels starting with: {}'
+                     ' and for labels: {}\n'
+                     .format(args.keyword_starts,
+                             args.keywords_list))
 
     for d in args.dir_to_browse:
-        browse_files(d, args.keywords_list)
+        browse_files(d, args.keyword_starts, args.keywords_list)
 
     yaml_pot_file = polib.POFile()
     for sentence in COLLECTED_STRINGS:
