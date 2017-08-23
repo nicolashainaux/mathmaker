@@ -60,3 +60,10 @@ mini_problems: !!omap
                  subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100(5)
                  divi direct, context=mini_problem -> intpairs_4to9 (4)
                  divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
+
+multiplication_by_11: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: multiplication by 11"
+  - exercise: !!omap
+    - questions: multi direct -> table_11_tens_easy (16)
+                 multi direct -> table_11_ones (4)

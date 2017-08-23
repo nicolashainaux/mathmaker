@@ -34,6 +34,11 @@
         "02_white2",
         "mini_problems"
     ],
+    "02_white2_multiplication_by_11": [
+        "mental_calculation",
+        "02_white2",
+        "multiplication_by_11"
+    ],
     "01_white1_multiplications": [
         "mental_calculation",
         "01_white1",

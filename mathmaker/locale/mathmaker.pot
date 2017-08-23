@@ -1880,3 +1880,7 @@ msgstr ""
 #: data/frameworks/mental_calculation/02_white2.yaml:27
 msgid "Mental calculation: divisions"
 msgstr ""
+
+#: data/frameworks/mental_calculation/02_white2.yaml:66
+msgid "Mental calculation: multiplication by 11"
+msgstr ""

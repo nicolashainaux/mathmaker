@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-08-22 12:33+0200\n"
-"PO-Revision-Date: 2017-08-22 12:33+0200\n"
+"POT-Creation-Date: 2017-08-23 09:08+0200\n"
+"PO-Revision-Date: 2017-08-23 09:09+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -2132,6 +2132,10 @@ msgstr "Calcul mental : additions et soustractions"
 #: data/frameworks/mental_calculation/02_white2.yaml:27
 msgid "Mental calculation: divisions"
 msgstr "Calcul mental : divisions"
+
+#: data/frameworks/mental_calculation/02_white2.yaml:66
+msgid "Mental calculation: multiplication by 11"
+msgstr "Calcul mental : multiplications par 11"
 
 #~ msgid "Example of detailed solutions:"
 #~ msgstr "Exemple de solutions détaillées :"
