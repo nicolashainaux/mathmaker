@@ -100,9 +100,9 @@ def __main__():
     db.execute('''CREATE TABLE int_pairs
               (id INTEGER PRIMARY KEY,
               nb1 INTEGER, nb2 INTEGER,
-              lock_equal_products INTEGER, drawDate INTEGER,
-              clever INTEGER, suits_for_deci1 INTEGER,
-              suits_for_deci2 INTEGER)''')
+              lock_equal_products INTEGER, drawDate INTEGER, clever INTEGER,
+              suits_for_deci1 INTEGER, suits_for_deci2 INTEGER,
+              complement_to_10 INTEGER, complement_to_100 INTEGER)''')
     # As int_deci_clever_pairs may be 'unioned' with int_pairs, its ids will be
     # determined starting from the max id of int_pairs, in order to have unique
     # ids over the two tables.
@@ -169,14 +169,15 @@ def __main__():
     sys.stderr.write('Insert integers pairs...\n')
     # Insert integers pairs into the db
     # Tables of 1, 2, 3... 500
-    db_rows = [(i + 1, j + 1, 0, 0, 0, 1, 1)
+    db_rows = [(i + 1, j + 1, 0, 0, 0, 1, 1, 0, 0)
                for i in range(500)
                for j in range(500)
                if j >= i]
     db.executemany("INSERT "
                    "INTO int_pairs(nb1, nb2, lock_equal_products, drawDate, "
-                   "clever, suits_for_deci1, suits_for_deci2) "
-                   "VALUES(?, ?, ?, ?, ?, ?, ?)",
+                   "clever, suits_for_deci1, suits_for_deci2,"
+                   "complement_to_10, complement_to_100) "
+                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Setup integers pairs: clever (5)...\n')
@@ -205,6 +206,22 @@ def __main__():
               for i in range(500) for j in range(500)
               if ((i + 1) % 10 == 0 or (j + 1) % 10 == 0)]
     db.executemany("UPDATE int_pairs SET suits_for_deci2 = 0"
+                   " WHERE nb1 = ? AND nb2 = ?;", values)
+
+    sys.stderr.write(
+        'Setup integers pairs: complements to 10...\n')
+    values = [(i + 1, j + 1)
+              for i in range(9) for j in range(9)
+              if (i <= j and i + j + 2 == 10)]
+    db.executemany("UPDATE int_pairs SET complement_to_10 = 1"
+                   " WHERE nb1 = ? AND nb2 = ?;", values)
+
+    sys.stderr.write(
+        'Setup integers pairs: complements to 100...\n')
+    values = [(i + 1, j + 1)
+              for i in range(99) for j in range(99)
+              if (i <= j and i + j + 2 == 100)]
+    db.executemany("UPDATE int_pairs SET complement_to_100 = 1"
                    " WHERE nb1 = ? AND nb2 = ?;", values)
 
     sys.stderr.write('Insert integer×decimal "clever" pairs...\n')
