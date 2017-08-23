@@ -234,6 +234,13 @@ def test__read_simple_question():
           ['intpairs_2to9', 'intpairs_2to9'], 3],
          [{'id': 'expand double', 'variant': 'anything'},
           ['intpairs_10to20', 'intpairs_2to9'], 7]]
+    assert _read_simple_question(
+        'subtr direct, subvariant=only_positive'
+        ' -> intpairs_2to9, complement=10 (2)') == \
+        [[{'id': 'subtr direct', 'subvariant': 'only_positive',
+           'complement': '10', },
+          ['intpairs_2to9'], 2]
+         ]
 
 
 def test__read_mix_question():
