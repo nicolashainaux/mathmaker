@@ -293,11 +293,24 @@ def classify_tag(tag):
 def translate_int_pairs_tag(tag):
     d = {}
     # 'table_11' is a shortcut for a special range
-    if tag == 'table_11':
+    if tag == 'table_11_ones':
+        d = {'nb1_in': ['2', '3', '4', '5', '6', '7', '8', '9'],
+             'nb2': '11'}
+    elif tag == 'table_11_tens_easy':
         d = {'nb2_in': ['11', '12', '13', '14', '15', '16', '17', '18', '21',
                         '22', '23', '24', '25', '26', '27', '31', '32', '33',
                         '34', '35', '36', '41', '42', '43', '44', '45', '51',
                         '52', '53', '54', '61', '62', '63', '71', '72', '81'],
+             'nb1': '11'}
+    elif tag == 'table_11_tens_hard':
+        d = {'nb2_in': ['19', '28', '29', '37', '37', '39', '46', '47', '48',
+                        '49', '55', '56', '57', '58', '59', '64', '65', '66',
+                        '67', '68', '69', '73', '74', '75', '76', '77', '78',
+                        '79', '82', '83', '84', '85', '86', '87', '88', '89',
+                        '91', '92', '93', '94', '95', '96', '97', '98', '99'],
+             'nb1': '11'}
+    elif tag == 'table_11_tens':
+        d = {'nb2_in': [str(n + 11) for n in range(89)],
              'nb1': '11'}
     # 'table_N' is a shortcut for 'multiplesofN_2to9' if N <= 10
     # and for 'multiplesofN_2to6' if N >= 12 (11 is managed separately)
