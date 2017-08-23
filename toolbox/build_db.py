@@ -196,7 +196,7 @@ def __main__():
         'Setup integers pairs: suitable for one-digit decimals...\n')
     values = [(i + 1, j + 1)
               for i in range(500) for j in range(500)
-              if ((i + 1) % 10 == 0 and (j + 1) % 10 == 0)]
+              if (i <= j and (i + 1) % 10 == 0 and (j + 1) % 10 == 0)]
     db.executemany("UPDATE int_pairs SET suits_for_deci1 = 0"
                    " WHERE nb1 = ? AND nb2 = ?;", values)
 
@@ -204,7 +204,7 @@ def __main__():
         'Setup integers pairs: suitable for two-digits decimals...\n')
     values = [(i + 1, j + 1)
               for i in range(500) for j in range(500)
-              if ((i + 1) % 10 == 0 or (j + 1) % 10 == 0)]
+              if (i <= j and (i + 1) % 10 == 0 or (j + 1) % 10 == 0)]
     db.executemany("UPDATE int_pairs SET suits_for_deci2 = 0"
                    " WHERE nb1 = ? AND nb2 = ?;", values)
 
