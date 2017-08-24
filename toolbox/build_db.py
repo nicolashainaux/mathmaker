@@ -112,8 +112,7 @@ def __main__():
               (id INTEGER PRIMARY KEY,
               nb1 INTEGER, nb2 INTEGER,
               lock_equal_products INTEGER, drawDate INTEGER, clever INTEGER,
-              suits_for_deci1 INTEGER, suits_for_deci2 INTEGER,
-              complement_to_10 INTEGER, complement_to_100 INTEGER)''')
+              suits_for_deci1 INTEGER, suits_for_deci2 INTEGER)''')
     # As int_deci_clever_pairs may be 'unioned' with int_pairs, its ids will be
     # determined starting from the max id of int_pairs, in order to have unique
     # ids over the two tables.
@@ -182,7 +181,7 @@ def __main__():
     # Tables of 1, 2, 3... INTPAIRS_MAX
     db_rows = [(i + 1, j + 1, 0, 0, 0,
                 _suits_for_deci1(i + 1, j + 1),
-                _suits_for_deci2(i + 1, j + 1), 0, 0)
+                _suits_for_deci2(i + 1, j + 1))
                for i in range(INTPAIRS_MAX)
                for j in range(INTPAIRS_MAX)
                if j >= i]
@@ -190,9 +189,8 @@ def __main__():
         sys.stderr.write('\rInsert integers pairs... {} %'.format(i))
         db.executemany("INSERT "
                        "INTO int_pairs(nb1, nb2, lock_equal_products, "
-                       "drawDate, clever, suits_for_deci1, suits_for_deci2,"
-                       "complement_to_10, complement_to_100) "
-                       "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                       "drawDate, clever, suits_for_deci1, suits_for_deci2) "
+                       "VALUES(?, ?, ?, ?, ?, ?, ?)",
                        db_rows[i * len(db_rows) // 100:
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers pairs... 100 %\n')
