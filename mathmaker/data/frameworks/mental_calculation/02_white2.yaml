@@ -82,3 +82,31 @@ complements: !!omap
                  subtr direct, subvariant=only_positive -> complements_to_100 (2)
                  subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (4)
                  subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_100 (4)
+
+exam: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: final test for white belt, second stripe"
+  - exercise: !!omap
+    - layout:
+      - min_row_height: 0.7
+    - questions: multi reversed -> intpairs_2to9 (1)
+                 multi hole -> intpairs_2to9 (1)
+                 multi direct -> intpairs_2to9 (1)
+                 rank direct -> rank_words (1)
+                 rank reversed -> rank_words (1)
+                 addi direct -> intpairs_9to50 (1)
+                 addi direct -> intpairs_9to100 (1)
+                 subtr direct, subvariant=only_positive -> intpairs_9to50 (1)
+                 subtr direct, subvariant=only_positive -> intpairs_9to100 (1)
+                 divi direct -> intpairs_2to9 (1)
+                 fraction_of a_rectangle -> intpairs_4to9;;intpairs_4to9 (1)
+                 [3][addi direct, context=mini_problem -> intpairs_5to20 (1)
+                     multi direct, context=mini_problem -> intpairs_4to9 (1)
+                     subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100(1)
+                     divi direct, context=mini_problem -> intpairs_4to9 (1)]
+                 divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
+                 multi direct -> table_11_tens_easy (1)
+                 addi direct, subvariant=complement -> complements_to_300...1000 (1)
+                 subtr direct, subvariant=only_positive -> complements_to_100 (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_100 (1)

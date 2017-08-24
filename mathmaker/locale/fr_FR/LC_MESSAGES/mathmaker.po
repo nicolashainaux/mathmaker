@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-08-23 17:32+0200\n"
-"PO-Revision-Date: 2017-08-23 17:34+0200\n"
+"POT-Creation-Date: 2017-08-24 15:46+0200\n"
+"PO-Revision-Date: 2017-08-24 15:46+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -2160,6 +2160,10 @@ msgstr "Quel est le complément à {number1} de {number2} ?"
 #: data/frameworks/mental_calculation/02_white2.yaml:73
 msgid "Mental calculation: complements to 10 and to 100"
 msgstr "Calcul mental : compléments à 10 et à 100"
+
+#: data/frameworks/mental_calculation/02_white2.yaml:88
+msgid "Mental calculation: final test for white belt, second stripe"
+msgstr "Calcul mental : ceinture blanche, deuxième trait"
 
 #~ msgid "Example of detailed solutions:"
 #~ msgstr "Exemple de solutions détaillées :"

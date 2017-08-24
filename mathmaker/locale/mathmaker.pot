@@ -1908,3 +1908,7 @@ msgstr ""
 #: data/frameworks/mental_calculation/02_white2.yaml:73
 msgid "Mental calculation: complements to 10 and to 100"
 msgstr ""
+
+#: data/frameworks/mental_calculation/02_white2.yaml:88
+msgid "Mental calculation: final test for white belt, second stripe"
+msgstr ""

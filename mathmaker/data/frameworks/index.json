@@ -44,6 +44,11 @@
         "02_white2",
         "complements"
     ],
+    "02_white2_exam": [
+        "mental_calculation",
+        "02_white2",
+        "exam"
+    ],
     "01_white1_multiplications": [
         "mental_calculation",
         "01_white1",
