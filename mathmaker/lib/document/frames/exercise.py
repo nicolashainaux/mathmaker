@@ -46,8 +46,6 @@ AVAILABLE_DETAILS_LEVELS = ['maximum', 'medium', 'none']
 AVAILABLE_LAYOUT_VARIANTS = ['default', 'tabular', 'slideshow']
 DEFAULT_LAYOUT = {'exc': [None, 'all'], 'ans': [None, 'all']}
 
-MIN_ROW_HEIGHT = 0.8  # this is for mental calculation exercises
-
 to_unpack = copy.deepcopy(SUBKINDS_TO_UNPACK)
 # In Q_Info below, id is actually kind_subkind
 Q_info = namedtuple('Q_info', 'id,kind,subkind,nb_source,options')
@@ -460,6 +458,7 @@ class Exercise(object):
                     else:
                         self.x_spacing.update(
                             {key: shared.machine.addvspace(height=s)})
+            self.min_row_height = options.get('x_config').get('min_row_height')
 
         self.text = {'exc': options.get('text_exc', ''),
                      'ans': options.get('text_ans', presets['text_ans'])}
@@ -478,7 +477,8 @@ class Exercise(object):
             # x_config anymore.
             x_layout = read_layout(options['data'].get('layout', {}))
             x_config = {'spacing_w': x_layout.get('spacing_w', 'undefined'),
-                        'spacing_a': x_layout.get('spacing_a', 'undefined')}
+                        'spacing_a': x_layout.get('spacing_a', 'undefined'),
+                        'min_row_height': x_layout.get('min_row_height')}
             self.setup(x_layout=x_layout,
                        x_config=x_config,
                        **{k: options['data'][k]
@@ -725,6 +725,6 @@ class Exercise(object):
                                      borders='penultimate',
                                      justify=['left', 'left', 'center'],
                                      center_vertically=True,
-                                     min_row_height=MIN_ROW_HEIGHT)
+                                     min_row_height=self.min_row_height)
 
             return result

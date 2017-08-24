@@ -395,6 +395,10 @@ def read_layout(data):
         for part in ['wordings', 'answers']:
             if part in data_elt and _AttrStr(data_elt[part]) != '':
                 parts += _AttrStr(data_elt[part]).split_clever(part)
+    for data_elt in data:
+        for elt in data_elt:
+            if elt not in ['wordings', 'answers']:
+                layout.update({elt: data_elt[elt]})
     for chunk in parts:
         if 'wordings' in chunk:
             part = 'wordings'
