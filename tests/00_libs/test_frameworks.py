@@ -195,6 +195,18 @@ def test_load_sheet():
                       ]))])
 
 
+def test__dissolve_block_exceptions():
+    """Test _dissolve_block() raises an exception when appropriate."""
+    q_block = ['7', 'fourth id, attr4=some value, attr4=yet another value '
+                    '-> label_4 (1)\n'
+                    'fifth id -> label_5, attr=7.5pt (1)\n'
+                    'sixth id, attr5=random value -> label_6 (1)']
+    with pytest.raises(ValueError) as excinfo:
+        _dissolve_block(q_block)
+    assert str(excinfo.value) == 'YAML File Format error: there are more ' \
+        'questions to create (7) than available (3).'
+
+
 def test__dissolve_block():
     """Test a block is correctly dissolved into a list of questions"""
     q_block = ['3', 'fourth id, attr4=some value, attr4=yet another value '

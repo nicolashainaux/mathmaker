@@ -620,7 +620,12 @@ def _dissolve_block(block):
         new_q = SUB_NB.sub(r'\1(1)', q)
         for i in range(repeat_it):
             q_list.append(new_q)
-    return random.sample(q_list, nb_of_q)
+    try:
+        return random.sample(q_list, nb_of_q)
+    except ValueError:
+        raise ValueError('YAML File Format error: there are more questions '
+                         'to create ({}) than available ({}).'
+                         .format(nb_of_q, len(q_list)))
 
 
 def _read_simple_question(s):
