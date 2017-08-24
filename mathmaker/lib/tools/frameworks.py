@@ -40,9 +40,13 @@ from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.tools import parse_layout_descriptor
 
 SIMPLE_QUESTION = re.compile(r'([a-zA-Z0-9_,=;\->\. ]+\([0-9\.]+\))')
+Q_BLOCKS = re.compile(r'\[(\d+)\]\[([a-zA-Z0-9 ,=_;\->\.\n\(\)]+)\]'
+                      r'|([a-zA-Z0-9_,=;\->\. ]+\([0-9\.]+\))')
 MIX_QUESTION = re.compile(
     r'([a-zA-Z0-9_\. ]+[,]?)(([a-zA-Z0-9_ ]+=[a-zA-Z0-9_\. ]+[,]?)*)')
 NB_SOURCE = re.compile(r'([a-zA-Z0-9_,=;×\-\. ]+)\(([0-9]+)\)')
+FETCH_NB = re.compile(r'\((\d+)\)$')
+SUB_NB = re.compile(r'([a-zA-Z0-9_,=;\->\. ]+)\((\d+)\)$')
 
 
 def read_index():
@@ -592,6 +596,29 @@ def get_q_modifier(q_type, nb_source):
     return d
 
 
+def _dissolve_block(block):
+    """
+    Turn a choice block into simple question attributes' strings.
+
+    For instance, will turn ('2', 'q1 (2)\n q2 (1)\n q3 (1)') into a list of
+    two questions taken from q1, q2 and q3.
+
+    :param block: the number of questions to create and the questions' list to
+                  pick from
+    :type block: tuple (of str)
+    :rtype: list
+    """
+    nb_of_q = int(block[0])
+    raw_q_list = SIMPLE_QUESTION.findall(block[1])
+    q_list = []
+    for q in raw_q_list:
+        repeat_it = int(FETCH_NB.findall(q)[0])
+        new_q = SUB_NB.sub(r'\1(1)', q)
+        for i in range(repeat_it):
+            q_list.append(new_q)
+    return random.sample(q_list, nb_of_q)
+
+
 def _read_simple_question(s):
     """
     Build the questions' attributes from the raw string read from YAML file.
@@ -625,11 +652,16 @@ def _read_simple_question(s):
     :rtype: list
     """
     result = []
-    pairs = SIMPLE_QUESTION.findall(s)
+    parsed = Q_BLOCKS.findall(s)
+    pairs = []
+    for p in parsed:
+        if p[0] == '':
+            pairs.append(p[2])
+        else:  # block
+            pairs += _dissolve_block(p[:2])
     if not len(pairs):
-        raise ValueError('YAML file format error: the simple question: \n'
-                         '{}\nis not built in pairs around the \'->\' symbol '
-                         'and ending with a number between braces.'.format(s))
+        raise ValueError('YAML file format error: the simple questions or \n'
+                         'blocks: {}\nare not built correctly.'.format(s))
     pairs = [p.split('->') for p in pairs]
     last_id = last_attr = None
     for p in pairs:

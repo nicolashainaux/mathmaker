@@ -33,7 +33,7 @@ from mathmaker.lib.tools.frameworks import _AttrStr
 from mathmaker.lib.tools.frameworks import load_sheet, read_layout
 from mathmaker.lib.tools.frameworks import _read_simple_question
 from mathmaker.lib.tools.frameworks import _read_mix_question, _read_mix_nb
-from mathmaker.lib.tools.frameworks import _get_attributes
+from mathmaker.lib.tools.frameworks import _get_attributes, _dissolve_block
 from mathmaker.lib.constants import DEFAULT_LAYOUT
 
 
@@ -186,6 +186,23 @@ def test_load_sheet():
                       ]))])
 
 
+def test__dissolve_block():
+    """Test a block is correctly dissolved into a list of questions"""
+    q_block = ['3', 'fourth id, attr4=some value, attr4=yet another value '
+                    '-> label_4 (2)\n'
+                    'fifth id -> label_5, attr=7.5pt (4)\n'
+                    'sixth id, attr5=random value -> label_6 (7)']
+    result = _dissolve_block(q_block)
+    assert type(result) == list
+    assert len(result) == 3
+    # assert result == []
+    assert all([r in ['fourth id, attr4=some value, attr4=yet another value '
+                      '-> label_4 (1)',
+                      'fifth id -> label_5, attr=7.5pt (1)',
+                      'sixth id, attr5=random value -> label_6 (1)']
+                for r in result])
+
+
 def test__read_simple_question_exceptions():
     """Test malformed simple questions raise the right exceptions."""
     with pytest.raises(ValueError) as excinfo:
@@ -194,8 +211,7 @@ def test__read_simple_question_exceptions():
     with pytest.raises(ValueError) as excinfo:
         _read_simple_question('expand double -> '
                               'intpairs_2to9;;intpairs_2to9 5)')
-    assert 'is not built in pairs around the \'->\' symbol' \
-        in str(excinfo.value)
+    assert 'are not built correctly' in str(excinfo.value)
     with pytest.raises(ValueError) as excinfo:
         _read_simple_question('expand double ->> (5)')
     assert 'incorrect numbers\' source:' in str(excinfo.value)
@@ -240,6 +256,36 @@ def test__read_simple_question():
         [[{'id': 'subtr direct', 'subvariant': 'only_positive',
            'complement': '10', },
           ['intpairs_2to9'], 2]
+         ]
+    example_with_block = _read_simple_question(
+        """first id, attr1=a value, attr2=value 2 -> label_1 (5)
+        second id -> label_2, attr=5.0pt (12)
+        third id, attr3=random value -> label_3 (1)
+        [3][fourth id, attr4=some value, attr4=yet another value -> label_4 (2)
+            fifth id -> label_5, attr=7.5pt (4)
+            sixth id, attr5=random value -> label_6 (7)]
+        seventh id, attr4=some value, attr4=yet another value -> label_4 (2)
+        eighth id -> label_5, attr=7.5pt (4)
+        yet another id, attr5=random value -> label_6 (7)"""
+    )
+    assert example_with_block[:3] == \
+        [[{'attr1': 'a value', 'attr2': 'value 2', 'id': 'first id'},
+          ['label_1'], 5],
+         [{'attr': '5.0pt', 'id': 'second id'}, ['label_2'], 12],
+         [{'attr3': 'random value', 'id': 'third id'}, ['label_3'], 1],
+         ]
+    # assert example_with_block == []
+    assert \
+        all([q in [[{'attr5': 'random value', 'id': 'sixth id'},
+                    ['label_6'], 1],
+                   [{'attr': '7.5pt', 'id': 'fifth id'}, ['label_5'], 1],
+                   [{'attr4': 'yet another value', 'id': 'fourth id'},
+                    ['label_4'], 1]]
+             for q in example_with_block[3:-3]])
+    assert example_with_block[-3:] == \
+        [[{'attr4': 'yet another value', 'id': 'seventh id'}, ['label_4'], 2],
+         [{'attr': '7.5pt', 'id': 'eighth id'}, ['label_5'], 4],
+         [{'attr5': 'random value', 'id': 'yet another id'}, ['label_6'], 7],
          ]
 
 
