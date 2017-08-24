@@ -22,6 +22,7 @@
 
 # TODO: add yaml validation tests (per json schema?)
 
+import copy
 import pytest
 from collections import OrderedDict
 
@@ -34,7 +35,7 @@ from mathmaker.lib.tools.frameworks import load_sheet, read_layout
 from mathmaker.lib.tools.frameworks import _read_simple_question
 from mathmaker.lib.tools.frameworks import _read_mix_question, _read_mix_nb
 from mathmaker.lib.tools.frameworks import _get_attributes, _dissolve_block
-from mathmaker.lib.constants import DEFAULT_LAYOUT
+from mathmaker.lib.constants import MIN_ROW_HEIGHT, DEFAULT_LAYOUT
 
 
 def test_AttrStr_parse_warnings():
@@ -121,34 +122,42 @@ def test_AttrStr_remove():
 def test_read_layout():
     """Check layout is correctly loaded from formatted strings in dict."""
     assert read_layout({}) == DEFAULT_LAYOUT
-    assert read_layout({'any attribute': 'any value'}) == DEFAULT_LAYOUT
+    default = copy.deepcopy(DEFAULT_LAYOUT)
+    default.update({'any attribute': 'any value'})
+    assert read_layout({'any attribute': 'any value'}) == default
     layout_data = {'wordings': 'rowxcol=?×2,  print=5 5, spacing=25.0pt',
                    'answers': 'rowxcol=?×2,  print=5 5'}
     assert read_layout(layout_data) == \
         {'exc': [['?', 9, 9], (5, 5)], 'ans': [['?', 9, 9], (5, 5)],
-         'spacing_w': '25.0pt', 'spacing_a': 'undefined'}
+         'spacing_w': '25.0pt', 'spacing_a': 'undefined',
+         'min_row_height': MIN_ROW_HEIGHT}
     layout_data = [layout_data]
     assert read_layout(layout_data) == \
         {'exc': [['?', 9, 9], (5, 5)], 'ans': [['?', 9, 9], (5, 5)],
-         'spacing_w': '25.0pt', 'spacing_a': 'undefined'}
+         'spacing_w': '25.0pt', 'spacing_a': 'undefined',
+         'min_row_height': MIN_ROW_HEIGHT}
     layout_data = {'wordings': 'rowxcol=?×2,  print=3 3, spacing=25.0pt',
                    'answers': 'rowxcol=?×2,  print=3 3, spacing='}
     assert read_layout(layout_data) == \
         {'exc': [['?', 9, 9], (3, 3)], 'ans': [['?', 9, 9], (3, 3)],
-         'spacing_w': '25.0pt', 'spacing_a': ''}
+         'spacing_w': '25.0pt', 'spacing_a': '',
+         'min_row_height': MIN_ROW_HEIGHT}
     layout_data = {'answers': 'print=2, newpage=true, print=1'}
     assert read_layout(layout_data) == \
         {'exc': [None, 'all'],
          'ans': [None, 2, 'jump', 'next_page', None, 1],
-         'spacing_w': 'undefined', 'spacing_a': 'undefined'}
+         'spacing_w': 'undefined', 'spacing_a': 'undefined',
+         'min_row_height': MIN_ROW_HEIGHT}
     layout_data = {'wordings': 'rowxcol=3×2,  print=1 1 . 2 2 . 1 1, spacing='}
     assert read_layout(layout_data) == \
         {'exc': [[3, 9, 9], (1, 1, 2, 2, 1, 1)], 'ans': [None, 'all'],
-         'spacing_w': '', 'spacing_a': 'undefined'}
+         'spacing_w': '', 'spacing_a': 'undefined',
+         'min_row_height': MIN_ROW_HEIGHT}
     layout_data = {'wordings': 'rowxcol=3×2,  print=1 1 / 2 2 / 1 1, spacing='}
     assert read_layout(layout_data) == \
         {'exc': [[3, 9, 9], (1, 1, 2, 2, 1, 1)], 'ans': [None, 'all'],
-         'spacing_w': '', 'spacing_a': 'undefined'}
+         'spacing_w': '', 'spacing_a': 'undefined',
+         'min_row_height': MIN_ROW_HEIGHT}
 
 
 def test_load_sheet_exceptions():

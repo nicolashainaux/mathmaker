@@ -38,9 +38,11 @@ EQUAL_PRODUCTS = {(2, 6): [(3, 4)],
                   (6, 6): [(4, 9), (3, 12)],
                   (3, 12): [(4, 9), (6, 6)]}
 
+MIN_ROW_HEIGHT = 0.8
+
 DEFAULT_LAYOUT = {'exc': [None, 'all'], 'ans': [None, 'all'],
                   'spacing_w': 'undefined', 'spacing_a': 'undefined',
-                  'min_row_height': 0.8}
+                  'min_row_height': MIN_ROW_HEIGHT}
 
 DEFAULT = "default"
 RANDOMLY = "randomly"
