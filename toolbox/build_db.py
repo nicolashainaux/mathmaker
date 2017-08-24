@@ -32,9 +32,9 @@ It will add all entries:
 - from all w4l.po files from locale/*/LC_MESSAGES/
 - from all w5l.po files from locale/*/LC_MESSAGES/
 - from all *_names.po files from locale/*/LC_MESSAGES/
-- all single ints from 2 to 500
+- all single ints from 2 to SINGLEINTS_MAX
 - all single decimal numbers with one digit from 0.0 to 100.0
-- all integers pairs from 2 to 500
+- all integers pairs from 2 to INTPAIRS_MAX
 - a list of "clever" couples of (integer, decimal) (for multiplications)
 - a list of angles' ranges (around 0, 90, 180, 270)
 - the list of variants identification numbers (from 0 to 23 and 100 to 155,
@@ -48,6 +48,17 @@ import sqlite3
 from mathmaker import settings
 from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words
 from mathmaker.lib.tools.frameworks import get_attributes
+
+INTPAIRS_MAX = 1000
+SINGLEINTS_MAX = 1000
+
+
+def _suits_for_deci1(i, j):
+    return not(i % 10 == 0 and j % 10 == 0)
+
+
+def _suits_for_deci2(i, j):
+    return not(i % 10 == 0 or j % 10 == 0)
 
 
 def __main__():
@@ -166,19 +177,26 @@ def __main__():
                        "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                        db_rows)
 
-    sys.stderr.write('Insert integers pairs...\n')
+    sys.stderr.write('Insert integers pairs...')
     # Insert integers pairs into the db
-    # Tables of 1, 2, 3... 500
-    db_rows = [(i + 1, j + 1, 0, 0, 0, 1, 1, 0, 0)
-               for i in range(500)
-               for j in range(500)
+    # Tables of 1, 2, 3... INTPAIRS_MAX
+    db_rows = [(i + 1, j + 1, 0, 0, 0,
+                _suits_for_deci1(i + 1, j + 1),
+                _suits_for_deci2(i + 1, j + 1), 0, 0)
+               for i in range(INTPAIRS_MAX)
+               for j in range(INTPAIRS_MAX)
                if j >= i]
-    db.executemany("INSERT "
-                   "INTO int_pairs(nb1, nb2, lock_equal_products, drawDate, "
-                   "clever, suits_for_deci1, suits_for_deci2,"
-                   "complement_to_10, complement_to_100) "
-                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                   db_rows)
+    for i in range(100):
+        sys.stderr.write('\rInsert integers pairs... {} %'.format(i))
+        db.executemany("INSERT "
+                       "INTO int_pairs(nb1, nb2, lock_equal_products, "
+                       "drawDate, clever, suits_for_deci1, suits_for_deci2,"
+                       "complement_to_10, complement_to_100) "
+                       "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                       db_rows[i * len(db_rows) // 100:
+                               (i + 1) * len(db_rows) // 100])
+    sys.stderr.write('\rInsert integers pairs... 100 %\n')
+    # sys.stderr.flush()
 
     sys.stderr.write('Setup integers pairs: clever (5)...\n')
     for couple in [(2, 5), (2, 50), (2, 500), (5, 20), (5, 200)]:
@@ -191,38 +209,6 @@ def __main__():
         db.execute("UPDATE int_pairs SET clever = 4"
                    + " WHERE nb1 = '" + str(couple[0])
                    + "' and nb2 = '" + str(couple[1]) + "';")
-
-    sys.stderr.write(
-        'Setup integers pairs: suitable for one-digit decimals...\n')
-    values = [(i + 1, j + 1)
-              for i in range(500) for j in range(500)
-              if (i <= j and (i + 1) % 10 == 0 and (j + 1) % 10 == 0)]
-    db.executemany("UPDATE int_pairs SET suits_for_deci1 = 0"
-                   " WHERE nb1 = ? AND nb2 = ?;", values)
-
-    sys.stderr.write(
-        'Setup integers pairs: suitable for two-digits decimals...\n')
-    values = [(i + 1, j + 1)
-              for i in range(500) for j in range(500)
-              if (i <= j and (i + 1) % 10 == 0 or (j + 1) % 10 == 0)]
-    db.executemany("UPDATE int_pairs SET suits_for_deci2 = 0"
-                   " WHERE nb1 = ? AND nb2 = ?;", values)
-
-    sys.stderr.write(
-        'Setup integers pairs: complements to 10...\n')
-    values = [(i + 1, j + 1)
-              for i in range(9) for j in range(9)
-              if (i <= j and i + j + 2 == 10)]
-    db.executemany("UPDATE int_pairs SET complement_to_10 = 1"
-                   " WHERE nb1 = ? AND nb2 = ?;", values)
-
-    sys.stderr.write(
-        'Setup integers pairs: complements to 100...\n')
-    values = [(i + 1, j + 1)
-              for i in range(99) for j in range(99)
-              if (i <= j and i + j + 2 == 100)]
-    db.executemany("UPDATE int_pairs SET complement_to_100 = 1"
-                   " WHERE nb1 = ? AND nb2 = ?;", values)
 
     sys.stderr.write('Insert integer×decimal "clever" pairs...\n')
     # Insert integer/decimal "clever" pairs into the db
@@ -244,7 +230,7 @@ def __main__():
 
     sys.stderr.write('Insert single integers...\n')
     # Single ints
-    db_rows = [(i + 1, 0) for i in range(500)]
+    db_rows = [(i + 1, 0) for i in range(SINGLEINTS_MAX)]
     db.executemany("INSERT "
                    "INTO single_ints(nb1, drawDate) "
                    "VALUES(?, ?)",
