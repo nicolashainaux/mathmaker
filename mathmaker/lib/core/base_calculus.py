@@ -2225,6 +2225,7 @@ class Quotient(Operation):
     #   @brief Returns the Quotient in the next step of simplification
     #   @todo The case where exponent has to be calculated as well.
     def calculate_next_step(self, **options):
+        details_level = options.get('details_level', 'maximum')
         # First, check if any of numerator | denominator needs to be
         # calculated. If so, return the Quotient one step further.
         if isinstance(self.denominator, Fraction):
@@ -2268,15 +2269,47 @@ class Quotient(Operation):
 
         # Now, neither the numerator nor the denominator can be calculated
         else:
+            if self.sign == '+':
+                sign_item = Item(1)
+            else:
+                sign_item = Item(-1)
             if isinstance(self.denominator, Quotient):
-                if self.sign == '+':
-                    sign_item = Item(1)
-                else:
-                    sign_item = Item(-1)
 
                 next_step = Product([sign_item,
                                      self.numerator,
                                      self.denominator.invert()])
+                next_step.set_exponent(self.exponent)
+                return next_step
+
+            elif isinstance(self.numerator, Quotient):
+                if details_level == 'maximum':
+                    c = Quotient
+                    if isinstance(self.denominator, Item):
+                        c = Fraction
+                    next_step = Product([sign_item,
+                                         self.numerator,
+                                         c(('+', Item(1), self.denominator))])
+                elif details_level == 'medium':
+                    c = Quotient
+                    if all([(isinstance(x, Item) or isinstance(x, Product))
+                            for x in [self.numerator.numerator,
+                                      self.numerator.denominator,
+                                      self.denominator]]):
+                        c = Fraction
+                    next_step = c((self.sign, self.numerator.numerator,
+                                   Product([self.numerator.denominator,
+                                            self.denominator])))
+                elif details_level == 'none':
+                    c = Quotient
+                    if all([(isinstance(x, Item) or isinstance(x, Product))
+                            for x in [self.numerator.numerator,
+                                      self.numerator.denominator,
+                                      self.denominator]]):
+                        c = Fraction
+                    next_step = c((self.sign, self.numerator.numerator,
+                                   Product([self.numerator.denominator,
+                                            self.denominator]))) \
+                        .calculate_next_step(**options)
                 next_step.set_exponent(self.exponent)
                 return next_step
 

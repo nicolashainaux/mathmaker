@@ -1174,8 +1174,15 @@ class Equation(ComposedCalculable):
                                  Sum(new_eq.right_hand_side.term[0].factor[0]))
             return new_eq.solve_next_step(**options)
 
-        next_left_X = new_eq.left_hand_side.expand_and_reduce_next_step()
-        next_right_X = new_eq.right_hand_side.expand_and_reduce_next_step()
+        reduced_options = {
+            'details_level': options.get('details_level', 'maximum')
+        }
+        next_left_X = new_eq.left_hand_side.expand_and_reduce_next_step(
+            **reduced_options
+        )
+        next_right_X = new_eq.right_hand_side.expand_and_reduce_next_step(
+            **reduced_options
+        )
         # next_left_C = new_eq.left_hand_side.calculate_next_step()
         # next_right_C = new_eq.right_hand_side.calculate_next_step()
 
@@ -1340,7 +1347,8 @@ class Equation(ComposedCalculable):
                     log.debug("Special Case [part 2]")
 
                     return Equation((new_eq.right_hand_side,
-                                     new_eq.left_hand_side)).solve_next_step()
+                                     new_eq.left_hand_side))\
+                        .solve_next_step(**options)
 
             # Special Case 2:
             # of Equations like 9 = 3x which should become x = 9/3
@@ -1353,7 +1361,8 @@ class Equation(ComposedCalculable):
                 log.debug("Special Case [part 3]")
 
                 return Equation((new_eq.right_hand_side,
-                                 new_eq.left_hand_side)).solve_next_step()
+                                 new_eq.left_hand_side)) \
+                    .solve_next_step(**options)
 
             for term in left_collected_terms:
                 # log.debug("(left)term: " + str(term))

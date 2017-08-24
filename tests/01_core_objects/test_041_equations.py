@@ -65,6 +65,12 @@ def eq41():
     return Equation((Item('CU'), f_1))
 
 
+@pytest.fixture
+def eq42():
+    return Equation((Monomial(('+', 4, 1)),
+                     Fraction(('+', Item(11), Item(60)))), number=1)
+
+
 def test_eq0_autoresolution():
     """Is this Equation correctly auto-resolved?"""
     eq = Equation((Polynomial([Monomial(('+', 1, 1)), Monomial(('+', 7, 0))]),
@@ -684,3 +690,32 @@ def test_eq41_autoresolution(eq41):
                                 decimal_result=2) == \
         wrap_nb('\[\\text{CU}=f(1)\]'
                 '\[\\text{CU}=1\]')
+
+
+def test_eq42_autoresolution(eq42):
+    """Is 4x = 11/60 correctly auto-resolved?"""
+    assert eq42.auto_resolution(dont_display_equations_name=True) == wrap_nb(
+        '\[4x=\\frac{11}{60}\]'
+        '\[x=\\frac{11}{60}\div 4\]'
+        '\[x=\\frac{11}{60}\\times \\frac{1}{4}\]'
+        '\[x=\\frac{11\\times 1}{60\\times 4}\]'
+        '\[x=\\frac{11}{240}\]')
+
+
+def test_eq42_autoresolution2(eq42):
+    """Is 4x = 11/60 correctly auto-resolved?"""
+    assert eq42.auto_resolution(dont_display_equations_name=True,
+                                details_level='medium') == wrap_nb(
+        '\[4x=\\frac{11}{60}\]'
+        '\[x=\\frac{11}{60}\div 4\]'
+        '\[x=\\frac{11}{60\\times 4}\]'
+        '\[x=\\frac{11}{240}\]')
+
+
+def test_eq42_autoresolution3(eq42):
+    """Is 4x = 11/60 correctly auto-resolved?"""
+    assert eq42.auto_resolution(dont_display_equations_name=True,
+                                details_level='none') == wrap_nb(
+        '\[4x=\\frac{11}{60}\]'
+        '\[x=\\frac{11}{60}\div 4\]'
+        '\[x=\\frac{11}{240}\]')
