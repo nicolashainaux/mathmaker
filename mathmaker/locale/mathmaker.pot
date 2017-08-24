@@ -553,11 +553,11 @@ msgstr ""
 msgid "Mental calculation: test 2"
 msgstr ""
 
-#: lib/document/content/calculation/multi_clever.py:105
 #: lib/document/content/calculation/divi_direct.py:48
-#: lib/document/content/calculation/subtr_direct.py:55
-#: lib/document/content/calculation/addi_direct.py:52
+#: lib/document/content/calculation/multi_clever.py:105
+#: lib/document/content/calculation/addi_direct.py:55
 #: lib/document/content/calculation/multi_direct.py:52
+#: lib/document/content/calculation/subtr_direct.py:59
 #, python-brace-format
 msgid "Calculate: {math_expr}"
 msgstr ""
@@ -1883,4 +1883,28 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/02_white2.yaml:66
 msgid "Mental calculation: multiplication by 11"
+msgstr ""
+
+#: lib/document/content/component.py:313
+#, python-brace-format
+msgid "What number must be added to {number1} to make {number2}?"
+msgstr ""
+
+#: lib/document/content/component.py:318
+#, python-brace-format
+msgid "What is the tens complement of {number}?"
+msgstr ""
+
+#: lib/document/content/component.py:321
+#, python-brace-format
+msgid "What is the hundreds complement of {number}?"
+msgstr ""
+
+#: lib/document/content/component.py:324
+#, python-brace-format
+msgid "What is the complement to {number1} of {number2}?"
+msgstr ""
+
+#: data/frameworks/mental_calculation/02_white2.yaml:73
+msgid "Mental calculation: complements to 10 and to 100"
 msgstr ""

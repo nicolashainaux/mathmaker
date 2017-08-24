@@ -305,6 +305,30 @@ class structure(object):
                          .next(**wording_kwargs))
         setup_wording_format_of(self)
 
+    def _setup_complement_wording(self, **kwargs):
+        upper_bound = self.nb1
+        if self.context == 'complement_wording':
+            self.context += str(random.choice([1, 2]))
+        if self.context == 'complement_wording1':
+            self.wording = _('What number must be added to'
+                             ' {number1} to make {number2}?')\
+                .format(number1=self.nb2, number2=self.nb1)
+        elif self.context == 'complement_wording2':
+            if upper_bound == 10:
+                self.wording = _('What is the tens complement '
+                                 'of {number}?').format(number=self.nb2)
+            elif upper_bound == 100:
+                self.wording = _('What is the hundreds complement '
+                                 'of {number}?').format(number=self.nb2)
+            else:
+                self.wording = _('What is the complement to {number1} '
+                                 'of {number2}?').format(number1=self.nb2,
+                                                         number2=self.nb1)
+        else:
+            raise ValueError('Cannot recognize context: {}\n'
+                             .format(self.context))
+        setup_wording_format_of(self)
+
     def _setup_rectangle_grid(self, **kwargs):
         rows = str(min(self.nb3, self.nb4))
         cols = str(max(self.nb3, self.nb4))

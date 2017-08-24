@@ -42,7 +42,7 @@ from mathmaker.lib.tools import parse_layout_descriptor
 SIMPLE_QUESTION = re.compile(r'([a-zA-Z0-9_,=;\->\. ]+\([0-9\.]+\))')
 MIX_QUESTION = re.compile(
     r'([a-zA-Z0-9_\. ]+[,]?)(([a-zA-Z0-9_ ]+=[a-zA-Z0-9_\. ]+[,]?)*)')
-NB_SOURCE = re.compile(r'([a-zA-Z0-9_,=;×\- ]+)\(([0-9]+)\)')
+NB_SOURCE = re.compile(r'([a-zA-Z0-9_,=;×\-\. ]+)\(([0-9]+)\)')
 
 
 def read_index():
@@ -526,6 +526,7 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
         return any([source_nb.startswith('intpairs_'),
                     source_nb.startswith('multiplesof'),
                     source_nb.startswith('table_'),
+                    source_nb.startswith('complements_to_'),
                     source_nb == 'decimal_and_10_100_1000',
                     source_nb == 'integer_3_10_decimal_3_10',
                     source_nb == 'decimals_0_20_1',

@@ -100,6 +100,12 @@ class source(object):
         for kw in kwargs:
             if kw == "raw":
                 result += " AND " + kwargs[kw] + " "
+            elif kw .endswith('_notmod'):
+                k = kw[:-7]
+                result += " AND " + k + " % " + str(kwargs[kw]) + " != 0 "
+            elif kw .endswith('_lt'):
+                k = kw[:-3]
+                result += " AND " + k + " < " + str(kwargs[kw]) + " "
             elif kw == "triangle_inequality":
                 common_nb, t1, t2 = kwargs[kw]
                 mini = str(abs(t1 - t2) + 1)  # we avoid "too flat" triangles
@@ -132,6 +138,10 @@ class source(object):
                 for c in self.valcols:
                     if c in kwargs and kwargs[c] in updated_notin_list:
                         updated_notin_list.remove(kwargs[c])
+                # prevails is used to not prevent numbers to be drawn twice in
+                # a row, like when drawing multiples of the same number, or
+                # drawing complements to the same number (e.g. 100)
+                # Take care it must contain a list of str (e.g. ['100'])
                 if "prevails" in kwargs:
                     for n in kwargs["prevails"]:
                         if n in updated_notin_list:
@@ -198,7 +208,7 @@ class source(object):
                     qr = tuple(shared.db.execute(cmd2))
                     if not len(qr):
                         logm = settings.mainlogger
-                        logm.error('Empty result is empty:\nQUERY1\n{}\n'
+                        logm.error('Query result is empty:\nQUERY1\n{}\n'
                                    'QUERY2\n{}\nQUERY3\n{}\n'
                                    .format(cmd, cmd1, cmd2))
         return qr
@@ -261,7 +271,7 @@ class source(object):
 #   @brief  Will tell if the tag belongs to int pairs, decimal numbers etc.
 def classify_tag(tag):
     if (tag.startswith('intpairs_') or tag.startswith('table_')
-        or tag.startswith('multiplesof')):
+        or tag.startswith('multiplesof') or tag.startswith('complements_to_')):
         # __
         return 'int_pairs'
     elif tag.startswith('singleint_'):
@@ -292,8 +302,26 @@ def classify_tag(tag):
 #   @return A dictionary
 def translate_int_pairs_tag(tag):
     d = {}
+    if tag.startswith('complements_to_'):
+        step = 1
+        upper_bounds = tag[15:]
+        if '...' in upper_bounds:
+            mini, maxi = [int(n) for n in upper_bounds.split('...')]
+            if mini % 10 == 0 and maxi % 10 == 0:
+                step = 10
+            if mini % 100 == 0 and maxi % 100 == 0:
+                step = 100
+            upper_bound = random.choice([n * step + mini
+                                         for n in range(maxi // step
+                                                        - mini // step + 1)])
+        else:
+            upper_bound = int(upper_bounds)
+        d = {'nb2': upper_bound, 'nb1_lt': upper_bound,
+             'prevails': [str(upper_bound)]}
+        if step != 1:
+            d.update({'nb1_notmod': step})
     # 'table_11' is a shortcut for a special range
-    if tag == 'table_11_ones':
+    elif tag == 'table_11_ones':
         d = {'nb1_in': ['2', '3', '4', '5', '6', '7', '8', '9'],
              'nb2': '11'}
     elif tag == 'table_11_tens_easy':

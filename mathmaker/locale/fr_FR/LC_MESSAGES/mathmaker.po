@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-08-23 09:08+0200\n"
-"PO-Revision-Date: 2017-08-23 09:09+0200\n"
+"POT-Creation-Date: 2017-08-23 17:32+0200\n"
+"PO-Revision-Date: 2017-08-23 17:34+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -570,11 +570,11 @@ msgstr "Pour afficher correctement les unités"
 msgid "Mental calculation: test 2"
 msgstr "Calcul mental : test 2"
 
-#: lib/document/content/calculation/multi_clever.py:105
 #: lib/document/content/calculation/divi_direct.py:48
-#: lib/document/content/calculation/subtr_direct.py:55
-#: lib/document/content/calculation/addi_direct.py:52
+#: lib/document/content/calculation/multi_clever.py:105
+#: lib/document/content/calculation/addi_direct.py:55
 #: lib/document/content/calculation/multi_direct.py:52
+#: lib/document/content/calculation/subtr_direct.py:59
 #, python-brace-format
 msgid "Calculate: {math_expr}"
 msgstr "Calculer : {math_expr}"
@@ -2136,6 +2136,30 @@ msgstr "Calcul mental : divisions"
 #: data/frameworks/mental_calculation/02_white2.yaml:66
 msgid "Mental calculation: multiplication by 11"
 msgstr "Calcul mental : multiplications par 11"
+
+#: lib/document/content/component.py:313
+#, python-brace-format
+msgid "What number must be added to {number1} to make {number2}?"
+msgstr "Combien faut-il ajouter à {number1} pour obtenir {number2} ?"
+
+#: lib/document/content/component.py:318
+#, python-brace-format
+msgid "What is the tens complement of {number}?"
+msgstr "Quel est le complément à 10 de {number} ?"
+
+#: lib/document/content/component.py:321
+#, python-brace-format
+msgid "What is the hundreds complement of {number}?"
+msgstr "Quel est le complément à 100 de {number} ?"
+
+#: lib/document/content/component.py:324
+#, python-brace-format
+msgid "What is the complement to {number1} of {number2}?"
+msgstr "Quel est le complément à {number1} de {number2} ?"
+
+#: data/frameworks/mental_calculation/02_white2.yaml:73
+msgid "Mental calculation: complements to 10 and to 100"
+msgstr "Calcul mental : compléments à 10 et à 100"
 
 #~ msgid "Example of detailed solutions:"
 #~ msgstr "Exemple de solutions détaillées :"

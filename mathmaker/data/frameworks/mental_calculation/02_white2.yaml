@@ -67,3 +67,18 @@ multiplication_by_11: !!omap
   - exercise: !!omap
     - questions: multi direct -> table_11_tens_easy (16)
                  multi direct -> table_11_ones (4)
+
+complements: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: complements to 10 and to 100"
+  - exercise: !!omap
+    - questions: addi direct, subvariant=complement -> complements_to_10 (1)
+                 addi direct, subvariant=complement -> complements_to_100 (1)
+                 addi direct, subvariant=complement -> complements_to_110...250 (2)
+                 addi direct, subvariant=complement -> complements_to_300...1000 (1)
+                 subtr direct, subvariant=only_positive -> complements_to_10 (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_10 (2)
+                 subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_10 (2)
+                 subtr direct, subvariant=only_positive -> complements_to_100 (2)
+                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (4)
+                 subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_100 (4)

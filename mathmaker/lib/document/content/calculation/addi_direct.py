@@ -33,6 +33,9 @@ class sub_object(component.structure):
 
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
+        if options.get('subvariant', 'default') == 'complement':
+            maxi, mini = max(numbers_to_use), min(numbers_to_use)
+            numbers_to_use = [mini, maxi - mini]
         super().setup("numbers", nb=numbers_to_use, **options)
         super().setup("nb_variants", nb=numbers_to_use, **options)
 

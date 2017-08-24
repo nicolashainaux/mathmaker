@@ -44,15 +44,19 @@ class sub_object(component.structure):
         self.result = the_diff.evaluate()
 
         if self.context == 'mini_problem':
-            super().setup("mini_problem_wording",
+            super().setup('mini_problem_wording',
+                          q_id=os.path.splitext(os.path.basename(__file__))[0],
+                          **options)
+        elif self.context.startswith('complement_wording'):
+            super().setup('complement_wording',
                           q_id=os.path.splitext(os.path.basename(__file__))[0],
                           **options)
 
     def q(self, **options):
-        if self.context == 'mini_problem':
+        if hasattr(self, 'wording'):
             return post_process(self.wording.format(**self.wording_format))
         else:
-            return _("Calculate: {math_expr}")\
+            return _('Calculate: {math_expr}')\
                 .format(
                 math_expr=shared.machine.write_math_style2(self.diff_str))
 

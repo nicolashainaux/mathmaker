@@ -39,6 +39,11 @@
         "02_white2",
         "multiplication_by_11"
     ],
+    "02_white2_complements": [
+        "mental_calculation",
+        "02_white2",
+        "complements"
+    ],
     "01_white1_multiplications": [
         "mental_calculation",
         "01_white1",
