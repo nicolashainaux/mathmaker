@@ -702,7 +702,9 @@ class Exercise(object):
                                          text='{' + q.to_str('ans') + '}'))
                     else:
                         content = q.to_str('exc') + '|' + q.to_str('exc') \
-                            + '\n\n' + _('Answer:') + '\n\n' + q.to_str('ans')
+                            + '\n\n' + _('Answer:') + '\n\n' \
+                            + COLORED_ANSWER.format(
+                                text='{' + q.to_str('ans') + '}')
                     result += M.write_frame(content, only=True)
             return result
 
