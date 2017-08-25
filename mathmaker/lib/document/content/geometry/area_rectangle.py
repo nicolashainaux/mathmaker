@@ -34,11 +34,13 @@ class sub_object(component.structure):
         super().setup("nb_variants", nb=numbers_to_use, **options)
         super().setup("length_units", **options)
         super().setup("rectangle", **options)
+        self.transduration = 8
 
         if self.picture:
             self.wording = _("Area of this rectangle? |hint:area_unit|")
             setup_wording_format_of(self)
         else:
+            self.transduration = 12
             self.nb1, self.nb2 = self.rectangle.width, self.rectangle.length
             self.wording = _("Area of a rectangle whose width is {nb1} \
 {length_unit} and length is {nb2} {length_unit}? |hint:area_unit|")

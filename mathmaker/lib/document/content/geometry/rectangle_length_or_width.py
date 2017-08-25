@@ -33,6 +33,9 @@ class sub_object(component.structure):
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
         super().setup("length_units", **options)
+        self.transduration = 16
+        if self.picture:
+            self.transduration = 12
 
         if self.context == "from_area":
             super().setup("division", nb=numbers_to_use, **options)

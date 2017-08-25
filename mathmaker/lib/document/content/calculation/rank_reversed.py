@@ -180,6 +180,7 @@ class sub_object(object):
         self.chosen_deci_str = Item((self.chosen_deci)).printed
 
         self.chosen_rank = rank_to_use
+        self.transduration = 8
 
     def q(self, **options):
         return _("Which figure matches the {rank} in the number \

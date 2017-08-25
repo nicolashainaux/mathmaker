@@ -31,6 +31,7 @@ class sub_object(object):
 
     def __init__(self, **options):
         rank_reversed.sub_object.__init__(self, numberof=True, **options)
+        self.transduration = 12
 
     def q(self, **options):
         return _("{how_many_rank} are there in {decimal_number}?")\

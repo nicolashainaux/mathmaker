@@ -23,6 +23,7 @@
 import random
 
 from mathmaker.lib import shared
+from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.core.base_calculus import Product
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.document.content import component
@@ -94,6 +95,7 @@ class sub_object(component.structure):
             all_nb += remaining
 
         super().setup("numbers", nb=all_nb, shuffle_nbs=False, **options)
+        self.transduration = 12
 
         product = Product([getattr(self,
                                    'nb' + str(i + 1))
@@ -102,8 +104,10 @@ class sub_object(component.structure):
         self.result = product.evaluate()
 
     def q(self, **options):
-        return _("Calculate: {math_expr}").format(
-            math_expr=shared.machine.write_math_style2(self.product_str))
+        self.substitutable_question_mark = True
+        return _('{math_expr} = {q_mark}').format(
+            math_expr=shared.machine.write_math_style2(self.product_str),
+            q_mark=COLORED_QUESTION_MARK)
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'

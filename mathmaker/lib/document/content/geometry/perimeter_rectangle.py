@@ -33,11 +33,13 @@ class sub_object(component.structure):
         super().setup("nb_variants", nb=numbers_to_use, **options)
         super().setup("length_units", **options)
         super().setup("rectangle", **options)
+        self.transduration = 12
 
         if self.picture:
             self.wording = _("Perimeter of this rectangle? |hint:length_unit|")
             setup_wording_format_of(self)
         else:
+            self.transduration = 16
             self.nb1, self.nb2 = self.rectangle.width, self.rectangle.length
             self.wording = _("Perimeter of a rectangle whose width "
                              "is {nb1} {length_unit} and length is "

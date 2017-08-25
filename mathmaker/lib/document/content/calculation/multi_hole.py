@@ -23,6 +23,7 @@
 import random
 
 from mathmaker.lib import shared
+from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.core.base_calculus import Product, Item, Fraction
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.calculus import Equality
@@ -32,10 +33,11 @@ class sub_object(object):
 
     def __init__(self, numbers_to_use, **options):
         nb_list = list(numbers_to_use)
-        hole = Item(Value('...'))
+        hole = Item(Value(COLORED_QUESTION_MARK))
         self.hidden_one = None
         visible_one = None
         self.product = Item(Product([nb_list[0], nb_list[1]]).evaluate())
+        self.transduration = 9
 
         if isinstance(nb_list[1], Fraction):
             self.hidden_one = nb_list[1]
@@ -54,8 +56,9 @@ class sub_object(object):
         self.holed_product.set_compact_display(False)
 
     def q(self, **options):
+        self.substitutable_question_mark = True
         m_expr = Equality([self.holed_product, self.product]).printed
-        return _("Which number can fill the hole in: {math_expr}?")\
+        return _('{math_expr}') \
             .format(math_expr=shared.machine.write_math_style2(m_expr))
 
     def a(self, **options):

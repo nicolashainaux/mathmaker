@@ -33,11 +33,13 @@ class sub_object(component.structure):
         super().setup("nb_variants", nb=numbers_to_use, **options)
         super().setup("length_units", **options)
         super().setup("square", **options)
+        self.transduration = 8
 
         if self.picture:
             self.wording = _("Perimeter of this square? |hint:length_unit|")
             setup_wording_format_of(self)
         else:
+            self.transduration = 12
             self.nb1 = self.square.side_length
             self.wording = _("Perimeter of a square whose side's length \
 is {nb1} {length_unit}? |hint:length_unit|")

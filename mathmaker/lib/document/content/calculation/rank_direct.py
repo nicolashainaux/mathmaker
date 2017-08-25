@@ -30,6 +30,7 @@ class sub_object(object):
 
     def __init__(self, **options):
         rank_reversed.sub_object.__init__(self, direct=True, **options)
+        self.transduration = 16
 
     def q(self, **options):
         return _("What is the rank of the figure {figure} in the number \

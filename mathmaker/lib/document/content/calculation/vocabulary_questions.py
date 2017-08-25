@@ -47,6 +47,7 @@ class structure(component.structure):
         self.nb2 = Value(self.nb2)
         self.wording = wording
         setup_wording_format_of(self)
+        self.transduration = 9
 
     def q(self, **kwargs):
         return self.wording.format(**self.wording_format)

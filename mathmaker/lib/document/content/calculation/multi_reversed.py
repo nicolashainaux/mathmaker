@@ -23,6 +23,7 @@
 import random
 
 from mathmaker.lib import shared
+from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.base_calculus import Product
 
@@ -33,11 +34,14 @@ class sub_object(object):
         nb_list = list(numbers_to_use)
         self.nb1, self.nb2 = random.sample(nb_list, 2)
         self.product = Product([self.nb1, self.nb2]).evaluate()
+        self.transduration = 9
 
     def q(self, **options):
-        return _("In the multiplication tables (from 2 to 9), "
-                 "which product is equal to {n}?")\
-            .format(n=Value(self.product).into_str())
+        self.substitutable_question_mark = True
+        return _('{q_mark} × {q_mark} = {n}\n\n'
+                 '(in the multiplication tables, from 2 to 9)')\
+            .format(n=Value(self.product).into_str(),
+                    q_mark=COLORED_QUESTION_MARK)
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'

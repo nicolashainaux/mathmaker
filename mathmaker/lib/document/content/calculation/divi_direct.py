@@ -23,6 +23,7 @@
 import os
 
 from mathmaker.lib import shared
+from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import post_process
@@ -33,11 +34,15 @@ class sub_object(component.structure):
     def __init__(self, numbers_to_use, **options):
         super().setup("minimal", **options)
         super().setup("division", nb=numbers_to_use, **options)
+        self.transduration = 9
+        if self.divisor > 9 and self.divisor % 10 != 0:
+            self.transduration = 12
 
         if self.context == 'mini_problem':
+            self.transduration = 20
             self.nb1 = self.dividend
             self.nb2 = self.divisor
-            super().setup("mini_problem_wording",
+            super().setup('mini_problem_wording',
                           q_id=os.path.splitext(os.path.basename(__file__))[0],
                           **options)
 
@@ -45,9 +50,11 @@ class sub_object(component.structure):
         if self.context == 'mini_problem':
             return post_process(self.wording.format(**self.wording_format))
         else:
-            return _("Calculate: {math_expr}")\
+            self.substitutable_question_mark = True
+            return _('{math_expr} = {q_mark}')\
                 .format(
-                math_expr=shared.machine.write_math_style2(self.quotient_str))
+                math_expr=shared.machine.write_math_style2(self.quotient_str),
+                q_mark=COLORED_QUESTION_MARK)
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
