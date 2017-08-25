@@ -294,9 +294,9 @@ class LaTeX(Structure.Structure):
                 result += r'\only<{n}>{c}'\
                     .format(n=i + 1, c='{' + chunk + '}') + '\n'
         else:
-            result += content
-        result += r'\end{center}'
-        result += r'\end{frame}'
+            result += content + '\n'
+        result += r'\end{center}' + '\n'
+        result += r'\end{frame}' + '\n' + '\n'
         return result
 
     ##
