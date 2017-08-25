@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import copy
+import warnings
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools.frameworks import load_sheet, read_layout
@@ -59,7 +60,14 @@ class Sheet(object):
                     'title': '',
                     'subtitle': '',
                     'text': '',
-                    'answers_title': _('Answers')}}
+                    'answers_title': _('Answers')},
+                   'mental calculation slideshow':
+                   {'write_ex_titles': False,
+                    'header': '',
+                    'title': _('Ready,|Steady,|Go!'),
+                    'subtitle': '',
+                    'text': '',
+                    'answers_title': _('Answers!')}}
 
         if filename is None:
             data = load_sheet(theme, subtheme, sheet_name)
@@ -74,11 +82,19 @@ class Sheet(object):
             if self.preset == 'mental calculation':
                 layout_data['font_size_offset'] = '-1'
             loaded_layout_data = data.get('layout', layout_data)
+            if self.preset == 'mental calculation slideshow':
+                layout_data['type'] = 'slideshow'
             if not isinstance(loaded_layout_data, list):
                 loaded_layout_data = [loaded_layout_data]
             for d in loaded_layout_data:
                 layout_data.update(d)
             self.layout_type = layout_data['type']
+            if (self.preset == 'mental calculation slideshow'
+                and self.layout_type != 'slideshow'):
+                self.layout_type = 'slideshow'
+                warnings.warn('For mental calculation slideshows, the '
+                              'layout type cannot be redefined to another '
+                              'value than \'slideshow\'.')
             self.sheet_layout_unit = layout_data['unit']
             font_size_offset = layout_data['font_size_offset']
             sheet_layout = read_layout(layout_data)
@@ -210,7 +226,13 @@ class Sheet(object):
         if filename is None:
             for e_data in build_exercises_list(data):
                 if self.preset != 'default' and 'preset' not in e_data:
-                    e_data.update({'preset': self.preset})
+                    if self.preset == 'mental calculation slideshow':
+                        e_preset = 'mental calculation'
+                    else:
+                        e_preset = self.preset
+                    e_data.update({'preset': e_preset})
+                    if self.preset == 'mental calculation slideshow':
+                        e_data.update({'layout_variant': 'slideshow'})
                 self.exercises_list.append(Exercise(data=e_data))
         else:
             for ex in get_exercises_list(filename):
@@ -224,16 +246,21 @@ class Sheet(object):
 
     #   @brief Writes the whole sheet's content to the output.
     def __str__(self):
-        result = ""
-        if self.layout_type in ['default', 'equations']:
-            result += shared.machine.write_document_header()
-            result += shared.machine.write_document_begins()
+        result = ''
+        if self.layout_type in ['default', 'equations', 'slideshow']:
+            result += shared.machine.write_document_header(
+                variant=self.layout_type)
+            result += shared.machine.write_document_begins(
+                variant=self.layout_type)
             result += self.sheet_header_to_str()
-            result += self.sheet_title_to_str()
+            result += self.sheet_title_to_str(
+                variant=self.layout_type)
             result += self.sheet_text_to_str()
             result += self.texts_to_str('exc', 0)
-            result += shared.machine.write_jump_to_next_page()
-            result += self.answers_title_to_str()
+            if self.layout_type != 'slideshow':
+                result += shared.machine.write_jump_to_next_page()
+            result += self.answers_title_to_str(
+                variant=self.layout_type)
             result += self.texts_to_str('ans', 0)
             result += shared.machine.write_document_ends()
 
@@ -345,7 +372,11 @@ class Sheet(object):
     def texts_to_str(self, ex_or_answers, n_of_first_ex):
         M = shared.machine
 
-        result = ""
+        result = ''
+
+        if self.layout_type == 'slideshow':
+            result += self.exercises_list[0].to_str(ex_or_answers)
+            return result
 
         result += M.reset_exercises_counter()
         result += M.write_set_font_size_to('large')
@@ -438,15 +469,20 @@ class Sheet(object):
     # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output the title of the sheet to be generated
-    def sheet_title_to_str(self):
-        result = ""
-        result += shared.machine.write_set_font_size_to('large')
-        result += shared.machine.write(self.title, emphasize='bold')
-        if self.subtitle != "":
-            result += shared.machine.write_new_line()
-            result += shared.machine.write_set_font_size_to('normal')
-            result += shared.machine.write(self.subtitle, emphasize='bold')
-        result += shared.machine.write_new_line_twice()
+    def sheet_title_to_str(self, variant='default'):
+        result = ''
+        if variant == 'slideshow' and self.title != '':
+            result += shared.machine.write_frame(self.title,
+                                                 uncovered=True,
+                                                 duration=0.75)
+        else:
+            result += shared.machine.write_set_font_size_to('large')
+            result += shared.machine.write(self.title, emphasize='bold')
+            if self.subtitle != '':
+                result += shared.machine.write_new_line()
+                result += shared.machine.write_set_font_size_to('normal')
+                result += shared.machine.write(self.subtitle, emphasize='bold')
+            result += shared.machine.write_new_line_twice()
 
         return result
 
@@ -464,11 +500,14 @@ class Sheet(object):
     # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output title of the answers' sheet to be generated
-    def answers_title_to_str(self):
-        result = ""
-
-        result += shared.machine.write_set_font_size_to('Large')
-        result += shared.machine.write(self.answers_title, emphasize='bold')
-        result += shared.machine.write_new_line_twice()
+    def answers_title_to_str(self, variant='default'):
+        result = ''
+        if variant == 'slideshow' and self.answers_title != '':
+            result += shared.machine.write_frame(self.answers_title)
+        else:
+            result += shared.machine.write_set_font_size_to('Large')
+            result += shared.machine.write(self.answers_title,
+                                           emphasize='bold')
+            result += shared.machine.write_new_line_twice()
 
         return result

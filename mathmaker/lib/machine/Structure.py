@@ -102,6 +102,11 @@ class Structure(object, metaclass=ABCMeta):
     def write_document_ends(self):
         pass
 
+    @abstractmethod
+    def write_frame(self, content, uncovered=False, only=False, duration=None):
+        """Write frame to the output"""
+        pass
+
     ##
     #   Writes to the output the new line command
     @abstractmethod

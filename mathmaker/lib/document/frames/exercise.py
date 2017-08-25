@@ -686,23 +686,20 @@ class Exercise(object):
                                              content,
                                              **options)
             return result + self.x_spacing[ex_or_answers]
+
         elif self.layout_variant == 'slideshow':
-            result += M.write_frame("", frame='start_frame')
-            for i in range(self.q_nb):
-                result += M.write_frame(
-                    self.questions_list[i].to_str('exc'),
-                    timing=self.questions_list[i].transduration)
-
-            result += M.write_frame("", frame='middle_frame')
-
-            for i in range(self.q_nb):
-                result += M.write_frame(_("Question:")
-                                        + self.questions_list[i]
-                                        .to_str('exc')
-                                        + _("Answer:")
-                                        + self.questions_list[i]
-                                        .to_str('ans'),
-                                        timing=0)
+            if ex_or_answers == 'exc':
+                for q in self.questions_list:
+                    result += M.write_frame(q.to_str('exc'),
+                                            duration=q.transduration)
+            elif ex_or_answers == 'ans':
+                for q in self.questions_list:
+                    result += M.write_frame(q.to_str('exc') + '|'
+                                            + q.to_str('exc')
+                                            + '\n\n' + _('Answer:') + '\n\n'
+                                            + q.to_str('ans'),
+                                            only=True)
+            return result
 
             # default tabular option:
         elif self.layout_variant == 'tabular':

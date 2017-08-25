@@ -68,96 +68,128 @@ class LaTeX(Structure.Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Write the complete LaTeX header of the sheet to the output.
-    def write_document_header(self):
+    def write_document_header(self, variant='default'):
         result = generate_header_comment(latex.FORMAT_NAME_PRINT)
-        result += "\documentclass[a4paper,fleqn,12pt]{article}" + "\n"
-        result += r"\usepackage{fontspec}" + "\n"
-        if settings.font is not None:
-            result += r"\setmainfont{" + settings.font + "}" + "\n"
-            result += r"\newfontfamily\configfont{" + settings.font + "}\n"
-        result += r"\usepackage{polyglossia}" + "\n"
-        result += "\setmainlanguage{" + self.language + "}" + "\n"
-        if self.language_code in latex.LANGUAGE_OPTIONS:
-            lod = latex.LANGUAGE_OPTIONS[self.language_code]
-            lang_options = ",".join([str(o) + "=" + str(lod[o])
-                                     for o in lod])
-            result += "".join(["\setkeys{", self.language, "}"
-                               "{", lang_options, "}\n"])
-        result += "% " + _("To display units correctly") + "\n"
-        result += r"\usepackage[detect-all]{siunitx}" + "\n"
-        sisetup_dict = {}
-        if settings.language == "fr_FR":
-            sisetup_dict.update({'locale': 'FR'})
-        if settings.font is not None:
-            sisetup_dict.update({'text-rm': r'\configfont'})
-        if len(sisetup_dict):
-            sisetup_str = ", ".join([k + " = " + sisetup_dict[k]
-                                     for k in sisetup_dict])
-            result += "\AtBeginDocument{\n"
-            result += "\sisetup{" + sisetup_str + "}\n"
-            result += "}\n"
-        result += "% " + _("To strike out numbers ") + "\n"
-        result += r"\usepackage{cancel}" + "\n"
-        result += "% " + _("To use the margin definition command") + "\n"
-        result += r"\usepackage{geometry}" + "\n"
-        result += "% " + _("To use the commands from {pkg_name} ")\
-            .format(pkg_name="theorem") + "\n"
-        result += r"%\usepackage{theorem}" + "\n"
-        result += "% " + _("To use multicol environment") + "\n"
-        result += r"\usepackage{multicol}" + "\n"
-        result += "% " + _("To use extra commands to handle tabulars") + "\n"
-        result += r"\usepackage{array}" + "\n"
-        result += "% " + _("For pretty underlining") + "\n"
-        result += r"\usepackage{ulem}" + "\n"
-        result += "% " + _("To include .eps pictures (loads graphicx)") + "\n"
-        # result += r"\usepackage{graphbox}" + "\n"
-        result += r"\usepackage{graphicx}" + "\n"
-        result += "% " + _("To use some symbols like currency units") + "\n"
-        result += r"\usepackage{textcomp}" + "\n"
-        result += r"\usepackage{eurosym}" + "\n"
-        result += "% " + _("To use other mathematical symbols") + "\n"
-        result += r"\usepackage{amssymb}" + "\n"
-        result += r"\usepackage{amsmath}" + "\n"
-        result += "% " + _("To draw") + "\n"
-        result += r"\usepackage{tikz}" + "\n"
-        result += "% " + _("Page layout ") + "\n"
-        result += "\geometry{hmargin=0.75cm, vmargin=0.75cm}" + "\n"
-        result += "\setlength{\parindent}{0cm}" + "\n"
-        result += r"\setlength{\arrayrulewidth}{0.02pt}" + "\n"
-        result += "\pagestyle{empty}" + "\n"
-        result += " " + "\n"
-        result += r"\usepackage{epstopdf}" + "\n"
-        result += "%%% " + _("If you wish to include a picture, \
-please use this command:") + "\n"
-        result += "%%% \includegraphics[height=6cm]{"
-        result += _("file_name")
-        result += ".eps} \n"
-        result += " " + "\n"
-        result += "% " + _("Exercises counter") + "\n"
-        result += "\\newcounter{n}" + "\n"
-        result += "% " + _("Definition of the {cmd_name} command, \
-which will insert the word {word} in bold, with its number and \
-automatically increments the counter").format(cmd_name="exercise",
-                                              word=_("Exercise")) + "\n"
-        result += "\\newcommand{\exercise}{\\noindent \hspace{-.25cm}" \
-            + " \stepcounter{n} " + self.translate_font_size('large') \
-            + " \\textbf{" \
-            + _("Exercise") \
-            + " \\arabic{n}} " \
-            + "\\newline " + self.translate_font_size('large') + " }" + " \n"
-        result += "% " + _('Definition of the command resetting the '
-                           'exercises counter (which is useful when begining '
-                           'to write the answers sheet)') + '\n'
-        result += "\\newcommand{\\razcompteur}{\setcounter{n}{0}}" + "\n"
-        result += " " + "\n"
-        result += r"\usetikzlibrary{calc}" + "\n"
-        result += r"\epstopdfsetup{outdir=./}" + "\n"
-        if settings.round_letters_in_math_expr:
-            result += r"\usepackage{lxfonts}" + "\n"
+        if variant == 'slideshow':
+            setfont = '% no font set'
+            if settings.font is not None:
+                setfont = r'\setmainfont{font}'\
+                    .format(font='{' + settings.font + '}')
+            fr_parallel = ''
+            if settings.language == 'fr_FR':
+                fr_parallel += '\n\n' + r'\renewcommand{\parallel}{' \
+                    r'\mathbin{/\negthickspace/}}' + '\n\n'
 
-        if settings.language == "fr_FR":
-            result += r"\renewcommand{\parallel}{\mathbin{/\negthickspace/}}" \
-                + "\n"
+            header = r"""
+\documentclass[20pt]{{beamer}}
+\RequirePackage{{luatex85}}
+\usepackage{{fontspec}}
+\usepackage{{polyglossia}}
+\setmainlanguage{language}
+\usefonttheme{{professionalfonts}}
+\usepackage{{lxfonts}}
+\usepackage{{multimedia}}
+\usepackage{{tikz}}
+\usepackage{{verbatim}}
+
+{setfont}
+{fr_parallel}
+\addtolength{{\headsep}}{{-1cm}}
+
+"""
+            result += header.format(language='{' + self.language + '}',
+                                    setfont=setfont, fr_parallel=fr_parallel)
+
+        else:
+            result += r'\documentclass[a4paper,fleqn,12pt]{article}' + '\n'
+            result += r'\usepackage{fontspec}' + '\n'
+            if settings.font is not None:
+                result += r'\setmainfont{' + settings.font + '}\n'
+                result += r'\newfontfamily\configfont{' + settings.font + '}\n'
+            result += r'\usepackage{polyglossia}' + '\n'
+            result += r'\setmainlanguage{' + self.language + '}\n'
+            if self.language_code in latex.LANGUAGE_OPTIONS:
+                lod = latex.LANGUAGE_OPTIONS[self.language_code]
+                lang_options = ','.join([str(o) + '=' + str(lod[o])
+                                         for o in lod])
+                result += ''.join(['\setkeys{', self.language, '}'
+                                   '{', lang_options, '}\n'])
+            result += '% ' + _('To display units correctly') + '\n'
+            result += r'\usepackage[detect-all]{siunitx}' + '\n'
+            sisetup_dict = {}
+            if settings.language == 'fr_FR':
+                sisetup_dict.update({'locale': 'FR'})
+            if settings.font is not None:
+                sisetup_dict.update({'text-rm': r'\configfont'})
+            if len(sisetup_dict):
+                sisetup_str = ', '.join([k + ' = ' + sisetup_dict[k]
+                                         for k in sisetup_dict])
+                result += '\AtBeginDocument{\n'
+                result += '\sisetup{' + sisetup_str + '}\n'
+                result += '}\n'
+            result += '% ' + _('To strike out numbers ') + '\n'
+            result += r'\usepackage{cancel}' + '\n'
+            result += '% ' + _('To use the margin definition command') + '\n'
+            result += r'\usepackage{geometry}' + '\n'
+            result += '% ' + _('To use the commands from {pkg_name} ')\
+                .format(pkg_name='theorem') + '\n'
+            result += r'%\usepackage{theorem}' + '\n'
+            result += '% ' + _('To use multicol environment') + '\n'
+            result += r'\usepackage{multicol}' + '\n'
+            result += '% {}\n'.format(
+                _('To use extra commands to handle tabulars'))
+            result += r'\usepackage{array}' + '\n'
+            result += '% ' + _('For pretty underlining') + '\n'
+            result += r'\usepackage{ulem}' + '\n'
+            result += '% {}\n'.format(
+                _('To include .eps pictures (loads graphicx)'))
+            # result += r'\usepackage{graphbox}' + '\n'
+            result += r'\usepackage{graphicx}' + '\n'
+            result += '% {}\n'.format(
+                _('To use some symbols like currency units'))
+            result += r'\usepackage{textcomp}' + '\n'
+            result += r'\usepackage{eurosym}' + '\n'
+            result += '% ' + _('To use other mathematical symbols') + '\n'
+            result += r'\usepackage{amssymb}' + '\n'
+            result += r'\usepackage{amsmath}' + '\n'
+            result += '% ' + _('To draw') + '\n'
+            result += r'\usepackage{tikz}' + '\n'
+            result += '% ' + _('Page layout ') + '\n'
+            result += '\geometry{hmargin=0.75cm, vmargin=0.75cm}\n'
+            result += '\setlength{\parindent}{0cm}\n'
+            result += r'\setlength{\arrayrulewidth}{0.02pt}' + '\n'
+            result += '\pagestyle{empty}\n\n'
+            result += r'\usepackage{epstopdf}' + '\n'
+            result += '%%% ' + _('If you wish to include a picture, '
+                                 'please use this command:') + '\n'
+            result += '%%% \includegraphics[height=6cm]{'
+            result += _('file_name')
+            result += '.eps} \n\n'
+            result += '% ' + _('Exercises counter') + '\n'
+            result += '\\newcounter{n}\n'
+            result += '% ' + _('Definition of the {cmd_name} command, which '
+                               'will insert the word {word} in bold, with its '
+                               'number and automatically increments the '
+                               'counter').format(cmd_name='exercise',
+                                                 word=_('Exercise')) + '\n'
+            result += '\\newcommand{\exercise}{\\noindent \hspace{-.25cm}' \
+                + ' \stepcounter{n} ' + self.translate_font_size('large') \
+                + ' \\textbf{' \
+                + _('Exercise') \
+                + ' \\arabic{n}} ' \
+                + '\\newline ' + self.translate_font_size('large') + ' } \n'
+            result += '% ' + _('Definition of the command resetting the '
+                               'exercises counter (which is useful when '
+                               'begining to write the answers sheet)') + '\n'
+            result += '\\newcommand{\\razcompteur}{\setcounter{n}{0}}\n\n'
+            result += r'\usetikzlibrary{calc}' + '\n'
+            result += r'\epstopdfsetup{outdir=./}' + '\n'
+            if settings.round_letters_in_math_expr:
+                result += r'\usepackage{lxfonts}' + '\n'
+
+            if settings.language == 'fr_FR':
+                result += r'\renewcommand{\parallel}{' \
+                    r'\mathbin{/\negthickspace/}}' + '\n'
 
         if self.redirect_output_to_str:
             return result
@@ -168,9 +200,9 @@ automatically increments the counter").format(cmd_name="exercise",
     # --------------------------------------------------------------------------
     ##
     #   @brief Writes to the output the command to begin the document
-    def write_document_begins(self):
+    def write_document_begins(self, variant='default'):
         output_str = "\\begin{document}\n"
-        if settings.font is not None:
+        if settings.font is not None and variant != 'slideshow':
             output_str += "\\fontspec{" + settings.font + "}\n"
         if self.redirect_output_to_str:
             return output_str
@@ -223,6 +255,43 @@ automatically increments the counter").format(cmd_name="exercise",
             return output_str
         else:
             self.out.write(output_str)
+
+    def write_frame(self, content, uncovered=False, only=False, duration=None):
+        """
+        Write a slideshow's frame to the output
+
+        :param content: the frame's content
+        :type content: str
+        :param uncovered: whether to split the content in several slides that
+                          will show one after the other. Mostly useful for
+                          title. The content's parts must be delimited by '|'.
+        :type uncovered: bool
+        :param duration: the duration of the frame. If it's None, then no
+                         duration will be set.
+        :type duration: number (int or float)
+        :rtype: str
+        """
+        result = '\n' + r'\begin{frame}' + '\n'
+        if duration is not None:
+            result += r'\transduration{t}'\
+                .format(t='{' + str(duration) + '}') + '\n'
+        result += r'\begin{center}' + '\n'
+        if settings.font is not None:
+            result += r'\fontspec{font}'\
+                .format(font='{' + settings.font + '}') + '\n'
+        if uncovered:
+            for i, chunk in enumerate(content.split(sep='|')):
+                result += r'\uncover<{n}>{c}'\
+                    .format(n=i + 1, c='{' + chunk + '}') + '\n'
+        elif only:
+            for i, chunk in enumerate(content.split(sep='|')):
+                result += r'\only<{n}>{c}'\
+                    .format(n=i + 1, c='{' + chunk + '}') + '\n'
+        else:
+            result += content
+        result += r'\end{center}'
+        result += r'\end{frame}'
+        return result
 
     ##
     #   @brief Writes to the output the new line command

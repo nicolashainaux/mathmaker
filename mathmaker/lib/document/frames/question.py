@@ -98,6 +98,9 @@ class Question(object):
         self.q_nb_included_in_wording = False
         if hasattr(m, 'q_nb_included_in_wording'):
             self.q_nb_included_in_wording = m.q_nb_included_in_wording
+        self.transduration = None
+        if hasattr(m, 'transduration'):
+            self.transduration = m.transduration
 
     # --------------------------------------------------------------------------
     ##
