@@ -131,6 +131,8 @@ class LaTeX(Structure.Structure):
             result += r'\usepackage{cancel}' + '\n'
             result += '% ' + _('To use the margin definition command') + '\n'
             result += r'\usepackage{geometry}' + '\n'
+            result += '% ' + _('To be able to color the documents') + '\n'
+            result += r'\usepackage[usenames, dvipsnames]{xcolor}' + '\n'
             result += '% ' + _('To use the commands from {pkg_name} ')\
                 .format(pkg_name='theorem') + '\n'
             result += r'%\usepackage{theorem}' + '\n'
