@@ -81,7 +81,7 @@ class LaTeX(Structure.Structure):
                     r'\mathbin{/\negthickspace/}}' + '\n\n'
 
             header = r"""
-\documentclass[20pt]{{beamer}}
+\documentclass[20pt, xcolor={{usenames, dvipsnames}}]{{beamer}}
 \RequirePackage{{luatex85}}
 \usepackage{{fontspec}}
 \usepackage{{polyglossia}}

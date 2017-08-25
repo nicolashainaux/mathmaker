@@ -30,6 +30,7 @@ from intspan import intspan
 from intspan.core import ParseError
 
 from mathmaker.lib import shared
+from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK, COLORED_ANSWER
 from mathmaker.lib.tools import is_integer
 from mathmaker.lib.tools.maths import coprimes_to
 from mathmaker.lib.tools.frameworks import read_layout, build_questions_list
@@ -695,8 +696,10 @@ class Exercise(object):
             elif ex_or_answers == 'ans':
                 for q in self.questions_list:
                     if q.substitutable_question_mark:
-                        content = q.to_str('exc') + '|' \
-                            + q.to_str('exc').replace('?', q.to_str('ans'))
+                        content = q.to_str('exc') + '|' + q.to_str('exc')\
+                            .replace(COLORED_QUESTION_MARK,
+                                     COLORED_ANSWER.format(
+                                         text='{' + q.to_str('ans') + '}'))
                     else:
                         content = q.to_str('exc') + '|' + q.to_str('exc') \
                             + '\n\n' + _('Answer:') + '\n\n' + q.to_str('ans')

@@ -23,6 +23,7 @@
 import os
 
 from mathmaker.lib import shared
+from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.core.base_calculus import Product
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.document.content import component
@@ -52,8 +53,9 @@ class sub_object(component.structure):
             return post_process(self.wording.format(**self.wording_format))
         else:
             self.substitutable_question_mark = True
-            return _('{math_expr} = ?').format(
-                math_expr=shared.machine.write_math_style2(self.product_str))
+            return _('{math_expr} = {q_mark}').format(
+                math_expr=shared.machine.write_math_style2(self.product_str),
+                q_mark=COLORED_QUESTION_MARK)
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
