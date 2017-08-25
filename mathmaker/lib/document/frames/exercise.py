@@ -491,6 +491,8 @@ class Exercise(object):
             # Setup self attributes according to options
             self.setup(**options)
             q_list = options.get('q_list')
+            self.min_row_height = 0.8  # default value for xml files, whose
+            # support will be removed later on
 
         # From q_list, we build a dictionary and then a complete questions'
         # list:
