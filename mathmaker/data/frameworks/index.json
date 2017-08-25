@@ -64,6 +64,11 @@
         "01_white1",
         "exam"
     ],
+    "01_white1_S01a": [
+        "mental_calculation",
+        "01_white1",
+        "S01a"
+    ],
     "expand_simple": [
         "algebra",
         "expand",

@@ -35,12 +35,14 @@ class sub_object(component.structure):
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, **options)
         super().setup("nb_variants", nb=numbers_to_use, **options)
+        self.transduration = 10
 
         product = Product([self.nb1, self.nb2])
         self.product_str = product.printed
         self.result = product.evaluate()
 
         if self.context == 'mini_problem':
+            self.transduration = 20
             super().setup("mini_problem_wording",
                           q_id=os.path.splitext(os.path.basename(__file__))[0],
                           **options)

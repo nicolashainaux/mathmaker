@@ -18,3 +18,8 @@ exam: !!omap
     - questions: multi direct -> intpairs_2to9 (10)
                  rank direct -> rank_words (5)
                  rank reversed -> rank_words (5)
+
+S01a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: multi direct -> intpairs_2to9 (5)
