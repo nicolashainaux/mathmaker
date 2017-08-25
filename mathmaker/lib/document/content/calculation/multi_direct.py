@@ -51,7 +51,8 @@ class sub_object(component.structure):
         if self.context == 'mini_problem':
             return post_process(self.wording.format(**self.wording_format))
         else:
-            return _("Calculate: {math_expr}").format(
+            self.substitutable_question_mark = True
+            return _('{math_expr} = ?').format(
                 math_expr=shared.machine.write_math_style2(self.product_str))
 
     def a(self, **options):

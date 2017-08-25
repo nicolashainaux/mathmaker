@@ -694,11 +694,13 @@ class Exercise(object):
                                             duration=q.transduration)
             elif ex_or_answers == 'ans':
                 for q in self.questions_list:
-                    result += M.write_frame(q.to_str('exc') + '|'
-                                            + q.to_str('exc')
-                                            + '\n\n' + _('Answer:') + '\n\n'
-                                            + q.to_str('ans'),
-                                            only=True)
+                    if q.substitutable_question_mark:
+                        content = q.to_str('exc') + '|' \
+                            + q.to_str('exc').replace('?', q.to_str('ans'))
+                    else:
+                        content = q.to_str('exc') + '|' + q.to_str('exc') \
+                            + '\n\n' + _('Answer:') + '\n\n' + q.to_str('ans')
+                    result += M.write_frame(content, only=True)
             return result
 
             # default tabular option:

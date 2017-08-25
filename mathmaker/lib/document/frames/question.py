@@ -101,6 +101,9 @@ class Question(object):
         self.transduration = None
         if hasattr(m, 'transduration'):
             self.transduration = m.transduration
+        self.substitutable_question_mark = False
+        if hasattr(m, 'substitutable_question_mark'):
+            self.substitutable_question_mark = m.substitutable_question_mark
 
     # --------------------------------------------------------------------------
     ##
