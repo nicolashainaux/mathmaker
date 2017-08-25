@@ -714,7 +714,8 @@ class Exercise(object):
         elif self.layout_variant == 'tabular':
             q = [self.questions_list[i].to_str('exc')
                  for i in range(self.q_nb)]
-            a = [self.questions_list[i].to_str('ans')
+            a = [COLORED_ANSWER.format(
+                 text='{' + self.questions_list[i].to_str('ans') + '}')
                  for i in range(self.q_nb)]\
                 if ex_or_answers == 'ans' \
                 else [self.questions_list[i].to_str('hint')
