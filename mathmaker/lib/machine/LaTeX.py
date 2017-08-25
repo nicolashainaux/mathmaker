@@ -266,6 +266,12 @@ class LaTeX(Structure.Structure):
                           will show one after the other. Mostly useful for
                           title. The content's parts must be delimited by '|'.
         :type uncovered: bool
+        :param only: whether to split the content in several slides that
+                     will show one after the other. Mostly useful for
+                     answers. The content's parts must be delimited by '|'.
+                     Difference with uncovered is the text will be replaced,
+                     not only made invisible.
+        :type only: bool
         :param duration: the duration of the frame. If it's None, then no
                          duration will be set.
         :type duration: number (int or float)
