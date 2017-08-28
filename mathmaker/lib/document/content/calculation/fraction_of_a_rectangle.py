@@ -82,17 +82,23 @@ class sub_object(component.structure):
                             shared.machine.write_math_style2(f1.printed))
             self.answer_wording = fix_math_style2_fontsize(self.answer_wording)
         else:
-            self.answer_wording = shared.machine.write_math_style1(f.printed)
+            self.answer_wording = shared.machine.write_math_style2(f.printed)
+            self.answer_wording = fix_math_style2_fontsize(self.answer_wording)
 
     def q(self, **options):
-        return shared.machine.write_layout(
-            (1, 2),
-            [5, 8],
-            [shared.machine.insert_picture(
-             self.rectangle_grid,
-             scale=0.4,
-             vertical_alignment_in_a_tabular=True),
-             self.wording])
+        if options.get('x_layout_variant', 'default') == 'slideshow':
+            return shared.machine.insert_picture(self.rectangle_grid,
+                                                 scale=0.4) \
+                + '\n' + self.wording
+        else:
+            return shared.machine.write_layout(
+                (1, 2),
+                [5, 8],
+                [shared.machine.insert_picture(
+                 self.rectangle_grid,
+                 scale=0.4,
+                 vertical_alignment_in_a_tabular=True),
+                 self.wording])
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
