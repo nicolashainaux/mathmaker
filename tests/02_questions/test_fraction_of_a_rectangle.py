@@ -53,7 +53,7 @@ def test_fraction_equal_to_1():
 def test_fractions_reductions():
     """Check all normal cases are correctly handled."""
     o = fraction_of_a_rectangle.sub_object(numbers_to_use=[1, 2, 1, 3])
-    assert o.answer_wording == '\\[ \\frac{\\text{2}}{\\text{3}} \\]'
+    assert o.answer_wording == '\Large{$ \\frac{\\text{2}}{\\text{3}} $}'
     o = fraction_of_a_rectangle.sub_object(numbers_to_use=[3, 5, 9, 4])
     assert o.answer_wording == \
         '\Large{$ \\frac{\\text{15}}{\\text{36}} $}' \
