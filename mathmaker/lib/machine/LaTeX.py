@@ -71,14 +71,26 @@ class LaTeX(Structure.Structure):
     def write_document_header(self, variant='default'):
         result = generate_header_comment(latex.FORMAT_NAME_PRINT)
         if variant == 'slideshow':
+            sisetup_dict = {}
             setfont = '% no font set'
             if settings.font is not None:
-                setfont = r'\setmainfont{font}'\
+                sisetup_dict.update({'text-rm': r'\configfont'})
+                setfont = (r'\setmainfont{font}' + '\n'
+                           + r'\newfontfamily\configfont{font}' + '\n')\
                     .format(font='{' + settings.font + '}')
             fr_parallel = ''
             if settings.language == 'fr_FR':
-                fr_parallel += '\n\n' + r'\renewcommand{\parallel}{' \
-                    r'\mathbin{/\negthickspace/}}' + '\n\n'
+                sisetup_dict.update({'locale': 'FR'})
+                fr_parallel += r'\renewcommand{\parallel}{' \
+                    r'\mathbin{/\negthickspace/}}' + '\n'
+
+            sisetup = ''
+            if len(sisetup_dict):
+                sisetup_str = ', '.join([k + ' = ' + sisetup_dict[k]
+                                         for k in sisetup_dict])
+                sisetup += '\AtBeginDocument{\n'
+                sisetup += '\sisetup{' + sisetup_str + '}\n'
+                sisetup += '}\n'
 
             header = r"""
 \documentclass[20pt, xcolor={{usenames, dvipsnames, svgnames}}]{{beamer}}
@@ -91,15 +103,19 @@ class LaTeX(Structure.Structure):
 \usepackage{{multimedia}}
 \usepackage{{tikz}}
 \usepackage{{verbatim}}
+\usepackage{{eurosym}}
 \usepackage[overlay,absolute]{{textpos}}
+\usepackage[detect-all]{{siunitx}}
 
 {setfont}
+{sisetup}
 {fr_parallel}
 \addtolength{{\headsep}}{{-1cm}}
 
 """
             result += header.format(language='{' + self.language + '}',
-                                    setfont=setfont, fr_parallel=fr_parallel)
+                                    setfont=setfont, fr_parallel=fr_parallel,
+                                    sisetup=sisetup)
 
         else:
             result += r'\documentclass[a4paper,fleqn,12pt]{article}' + '\n'
