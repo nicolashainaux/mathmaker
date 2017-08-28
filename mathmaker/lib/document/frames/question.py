@@ -56,7 +56,7 @@ class Question(object):
                                      emphasize=tpl_weight)
 
         self.external_numbering = False
-        if self.x_layout_variant == 'slideshow':
+        if self.x_layout_variant in ['slideshow', 'tabular']:
             self.external_numbering = True
 
         self.q_kind = q_kind
