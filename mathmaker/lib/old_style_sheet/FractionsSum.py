@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2016 Nicolas Hainaux <nh.techn@gmail.com>
+# Copyright 2006-2017 Nicolas Hainaux <nh.techn@gmail.com>
 
 # This file is part of Mathmaker.
 

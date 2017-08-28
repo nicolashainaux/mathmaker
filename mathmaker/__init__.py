@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2016 Nicolas Hainaux <nh.techn@gmail.com>
+# Copyright 2006-2017 Nicolas Hainaux <nh.techn@gmail.com>
 
 # This file is part of Mathmaker.
 
@@ -37,7 +37,7 @@ __author__ = 'Nicolas Hainaux'
 __author_email__ = 'nh.techn@gmail.com'
 __licence__ = 'GNU General Public License v3 or later (GPLv3+)'
 __url__ = 'https://github.com/nicolashainaux/mathmaker/'
-__copyright__ = 'Copyright 2006-2016'
+__copyright__ = 'Copyright 2006-2017'
 __contact__ = '{author} <{author_email}>'\
               .format(author=__author__, author_email=__author_email__)
 __licence_info__ = '{software_ref} is free software. Its license is '\
