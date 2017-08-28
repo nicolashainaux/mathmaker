@@ -103,7 +103,8 @@ class Structure(object, metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def write_frame(self, content, uncovered=False, only=False, duration=None):
+    def write_frame(self, content, uncovered=False, only=False,
+                    duration=None, numbering=''):
         """Write frame to the output"""
         pass
 
