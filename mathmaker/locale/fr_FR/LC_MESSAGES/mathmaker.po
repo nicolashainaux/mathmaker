@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-08-24 15:46+0200\n"
-"PO-Revision-Date: 2017-08-24 15:46+0200\n"
+"POT-Creation-Date: 2017-08-28 10:38+0200\n"
+"PO-Revision-Date: 2017-08-28 10:38+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -25,67 +25,67 @@ msgstr "Document {document_format} généré par {software_ref}"
 msgid "or"
 msgstr "ou"
 
-#: lib/core/calculus.py:1392
+#: lib/core/calculus.py:1401
 #, python-brace-format
 msgid "Any value of {variable_name} is solution of the equation."
 msgstr "N'importe quelle valeur de {variable_name} est solution de l'équation."
 
-#: lib/core/calculus.py:1397 lib/core/calculus.py:1477
+#: lib/core/calculus.py:1406 lib/core/calculus.py:1486
 msgid "This equation has no solution."
 msgstr "Cette équation n'a pas de solution."
 
-#: lib/machine/LaTeX.py:99
+#: lib/machine/LaTeX.py:147
 msgid "To strike out numbers "
 msgstr "Pour pouvoir rayer des nombres "
 
-#: lib/machine/LaTeX.py:101
+#: lib/machine/LaTeX.py:149
 msgid "To use the margin definition command"
 msgstr "Pour utiliser la commande de définition des marges"
 
-#: lib/machine/LaTeX.py:103
+#: lib/machine/LaTeX.py:153
 #, python-brace-format
 msgid "To use the commands from {pkg_name} "
 msgstr "Pour utiliser les commandes de {pkg_name} "
 
-#: lib/machine/LaTeX.py:106
+#: lib/machine/LaTeX.py:156
 msgid "To use multicol environment"
 msgstr "Pour faire une présentation multicolonnes"
 
-#: lib/machine/LaTeX.py:108
+#: lib/machine/LaTeX.py:159
 msgid "To use extra commands to handle tabulars"
 msgstr "Pour utiliser des commandes supplémentaires pour les tableaux"
 
-#: lib/machine/LaTeX.py:110
+#: lib/machine/LaTeX.py:161
 msgid "For pretty underlining"
 msgstr "Pour de jolis soulignages"
 
-#: lib/machine/LaTeX.py:118
+#: lib/machine/LaTeX.py:171
 msgid "To use other mathematical symbols"
 msgstr "Pour utiliser d'autres symboles mathématiques"
 
-#: lib/machine/LaTeX.py:121
+#: lib/machine/LaTeX.py:174
 msgid "To draw"
 msgstr "Pour dessiner"
 
-#: lib/machine/LaTeX.py:123
+#: lib/machine/LaTeX.py:176
 msgid "Page layout "
 msgstr "Mise en page générale "
 
-#: lib/machine/LaTeX.py:130
+#: lib/machine/LaTeX.py:182
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 "Si vous souhaitez inclure une image, utilisez s'il vous plaît cette "
 "commande :"
 
-#: lib/machine/LaTeX.py:133
+#: lib/machine/LaTeX.py:185
 msgid "file_name"
 msgstr "nom_du_fichier"
 
-#: lib/machine/LaTeX.py:136
+#: lib/machine/LaTeX.py:187
 msgid "Exercises counter"
 msgstr "Compteur d'exercices"
 
-#: lib/machine/LaTeX.py:138
+#: lib/machine/LaTeX.py:189
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
@@ -94,11 +94,11 @@ msgstr ""
 "Définition de la commande {cmd_name}, qui va insérer le mot {word} en gras, "
 "accompagné de son numéro et qui va incrémenter automatiquement le compteur"
 
-#: lib/machine/LaTeX.py:141 lib/machine/LaTeX.py:145
+#: lib/machine/LaTeX.py:197 lib/machine/LaTeX.py:193
 msgid "Exercise"
 msgstr "Exercice"
 
-#: lib/machine/LaTeX.py:148
+#: lib/machine/LaTeX.py:200
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -319,12 +319,11 @@ msgstr "Factoriser :"
 msgid "Factorise, if possible:"
 msgstr "Factoriser, si possible :"
 
-#: lib/document/frames/exercise.py:699
 #: lib/old_style_sheet/exercise/X_Structure.py:257
 msgid "Question:"
 msgstr "Question :"
 
-#: lib/document/frames/exercise.py:702
+#: lib/document/frames/exercise.py:714
 #: lib/old_style_sheet/exercise/X_Structure.py:260
 msgid "Answer:"
 msgstr "Réponse :"
@@ -528,25 +527,25 @@ msgstr "Calcul mental : aires et périmètres de rectangles"
 msgid "Reversed multiplications"
 msgstr "Multiplications à l'envers"
 
-#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:3
-#: data/frameworks/mental_calculation/lev11_3/multi_clever.xml:3
-#: data/frameworks/mental_calculation/lev11_1/divisions.xml:3
-#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:3
 #: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: lib/document/frames/sheet.py:63
 #: data/frameworks/mental_calculation/lev11_1/ranks.xml:3
-#: lib/document/frames/sheet.py:62
+#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:3
+#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: data/frameworks/mental_calculation/lev11_3/multi_clever.xml:3
+#: lib/document/frames/sheet.py:56
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:3
+#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:3
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:3
 #: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
 #: data/frameworks/mental_calculation/lev11_1/addi_subtr_direct_naturals.xml:3
-#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:3
-#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:3
-#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:3
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:3
 #: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:3
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:3
-#: lib/document/frames/sheet.py:55
-#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:3
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:3
 msgid "Answers"
 msgstr "Réponses"
 
@@ -558,11 +557,11 @@ msgstr "Réponses"
 msgid "Mental calculation: mini-problems"
 msgstr "Calcul mental : mini-problèmes"
 
-#: lib/machine/LaTeX.py:115
+#: lib/machine/LaTeX.py:168
 msgid "To use some symbols like currency units"
 msgstr "Pour utiliser des symboles (par exemple des unités de monétaires)"
 
-#: lib/machine/LaTeX.py:86
+#: lib/machine/LaTeX.py:134
 msgid "To display units correctly"
 msgstr "Pour afficher correctement les unités"
 
@@ -570,20 +569,11 @@ msgstr "Pour afficher correctement les unités"
 msgid "Mental calculation: test 2"
 msgstr "Calcul mental : test 2"
 
-#: lib/document/content/calculation/divi_direct.py:48
-#: lib/document/content/calculation/multi_clever.py:105
-#: lib/document/content/calculation/addi_direct.py:55
-#: lib/document/content/calculation/multi_direct.py:52
-#: lib/document/content/calculation/subtr_direct.py:59
-#, python-brace-format
-msgid "Calculate: {math_expr}"
-msgstr "Calculer : {math_expr}"
-
-#: lib/document/content/geometry/area_rectangle.py:39
+#: lib/document/content/geometry/area_rectangle.py:40
 msgid "Area of this rectangle? |hint:area_unit|"
 msgstr "Aire de ce rectangle ? |hint:area_unit|"
 
-#: lib/document/content/geometry/area_rectangle.py:43
+#: lib/document/content/geometry/area_rectangle.py:45
 #, python-brace-format
 msgid ""
 "Area of a rectangle whose width is {nb1} {length_unit} and length is {nb2} "
@@ -592,23 +582,23 @@ msgstr ""
 "Aire d'un rectangle de largeur {nb1} {length_unit} et de longueur {nb2} "
 "{length_unit}? |hint:area_unit|"
 
-#: lib/document/content/geometry/area_square.py:38
+#: lib/document/content/geometry/area_square.py:39
 msgid "Area of this square? |hint:area_unit|"
 msgstr "Aire de ce carré ? |hint:area_unit|"
 
-#: lib/document/content/geometry/area_square.py:42
+#: lib/document/content/geometry/area_square.py:44
 #, python-brace-format
 msgid ""
 "Area of a square whose side's length is {nb1} {length_unit}? |hint:area_unit|"
 msgstr "Aire d'un carré de côté {nb1} {length_unit} ? |hint:area_unit|"
 
 #: lib/document/content/geometry/perimeter_irregular_quadrilateral.py:38
-#: lib/document/content/geometry/perimeter_rectangle.py:38
+#: lib/document/content/geometry/perimeter_rectangle.py:39
 msgid "Perimeter of this rectangle? |hint:length_unit|"
 msgstr "Périmètre de ce rectangle ? |hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_rectangle.py:42
 #: lib/document/content/geometry/perimeter_irregular_quadrilateral.py:42
+#: lib/document/content/geometry/perimeter_rectangle.py:44
 #, python-brace-format
 msgid ""
 "Perimeter of a rectangle whose width is {nb1} {length_unit} and length is "
@@ -617,33 +607,33 @@ msgstr ""
 "Périmètre d'un rectangle de largeur {nb1} {length_unit} et de longueur {nb2} "
 "{length_unit} ? |hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_square.py:38
+#: lib/document/content/geometry/perimeter_square.py:39
 msgid "Perimeter of this square? |hint:length_unit|"
 msgstr "Périmètre de ce carré ? |hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_square.py:42
+#: lib/document/content/geometry/perimeter_square.py:44
 #, python-brace-format
 msgid ""
 "Perimeter of a square whose side's length is {nb1} {length_unit}? |hint:"
 "length_unit|"
 msgstr "Périmètre d'un carré de côté {nb1} {length_unit} ? |hint:length_unit|"
 
-#: lib/document/content/calculation/rank_direct.py:35
+#: lib/document/content/calculation/rank_direct.py:36
 #, python-brace-format
 msgid "What is the rank of the figure {figure} in the number {decimal_number}?"
 msgstr "Rang du chiffre {figure} dans le nombre  {decimal_number} ?"
 
-#: lib/document/content/calculation/rank_numberof.py:36
+#: lib/document/content/calculation/rank_numberof.py:37
 #, python-brace-format
 msgid "{how_many_rank} are there in {decimal_number}?"
 msgstr "{how_many_rank} dans {decimal_number} ?"
 
-#: lib/document/content/calculation/rank_reversed.py:185
+#: lib/document/content/calculation/rank_reversed.py:186
 #, python-brace-format
 msgid "Which figure matches the {rank} in the number {decimal_number}?"
 msgstr "Chiffre des {rank} dans le nombre {decimal_number} ?"
 
-#: lib/document/content/geometry/rectangle_length_or_width.py:41
+#: lib/document/content/geometry/rectangle_length_or_width.py:44
 #, python-brace-format
 msgid ""
 "A rectangle has an area of {nb1} {area_unit} and a length of {nb2} "
@@ -652,7 +642,7 @@ msgstr ""
 "Un rectangle a une aire de {nb1} {area_unit} et une longueur de {nb2} "
 "{length_unit}. Quelle est sa largeur ? |hint:length_unit|"
 
-#: lib/document/content/geometry/rectangle_length_or_width.py:44
+#: lib/document/content/geometry/rectangle_length_or_width.py:47
 #, python-brace-format
 msgid ""
 "A rectangle has an area of {nb1} {area_unit} and a width of {nb2} "
@@ -661,7 +651,7 @@ msgstr ""
 "Un rectangle a une aire de {nb1} {area_unit} et une largeur de {nb2} "
 "{length_unit}. Quelle est sa longueur ? |hint:length_unit|"
 
-#: lib/document/content/geometry/rectangle_length_or_width.py:64
+#: lib/document/content/geometry/rectangle_length_or_width.py:67
 #, python-brace-format
 msgid ""
 "What is the width of a rectangle whose perimeter is {nb1} {length_unit} and "
@@ -670,7 +660,7 @@ msgstr ""
 "Largeur d'un rectangle de périmètre {nb1} {length_unit} et de longueur {nb2} "
 "{length_unit} ? |hint:length_unit|"
 
-#: lib/document/content/geometry/rectangle_length_or_width.py:67
+#: lib/document/content/geometry/rectangle_length_or_width.py:70
 #, python-brace-format
 msgid ""
 "What is the length of a rectangle whose perimeter is {nb1} {length_unit} and "
@@ -729,7 +719,7 @@ msgstr "Quel est le quart de {nb1} ?"
 msgid "How much is the difference between {nb1} and {nb2}?"
 msgstr "Combien vaut la différence entre {nb1} et {nb2} ?"
 
-#: lib/core/calculus.py:1498
+#: lib/core/calculus.py:1507
 #, python-brace-format
 msgid "because {L} is positive."
 msgstr "car {L} est positif."
@@ -738,26 +728,14 @@ msgstr "car {L} est positif."
 msgid "Calculate thanks to a binomial identity:"
 msgstr "Calculer à l'aide d'une identité remarquable :"
 
-#: lib/document/content/calculation/multi_hole.py:58
-#, python-brace-format
-msgid "Which number can fill the hole in: {math_expr}?"
-msgstr "Quel nombre permet de compléter le trou dans: {math_expr} ?"
-
-#: lib/document/content/calculation/multi_reversed.py:66
-#: lib/document/content/calculation/multi_reversed.py:59
-#: lib/document/content/calculation/multi_reversed.py:45
-#: lib/document/content/calculation/multi_reversed.py:73
-#: lib/document/content/calculation/multi_reversed.py:52
+#: lib/document/content/calculation/multi_reversed.py:49
+#: lib/document/content/calculation/multi_reversed.py:56
+#: lib/document/content/calculation/multi_reversed.py:77
+#: lib/document/content/calculation/multi_reversed.py:63
+#: lib/document/content/calculation/multi_reversed.py:70
 #, python-brace-format
 msgid "{product1} or {product2}"
 msgstr "{product1} ou {product2}"
-
-#: lib/document/content/calculation/multi_reversed.py:38
-#, python-brace-format
-msgid ""
-"In the multiplication tables (from 2 to 9), which product is equal to {n}?"
-msgstr ""
-"Dans les tables de multiplication (de 2 à 9), quel produit est égal à {n} ?"
 
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:3
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:3
@@ -832,7 +810,7 @@ msgstr "Exemple de solutions :"
 msgid "Intercept theorem"
 msgstr "Théorème de Thalès"
 
-#: lib/machine/LaTeX.py:112
+#: lib/machine/LaTeX.py:164
 msgid "To include .eps pictures (loads graphicx)"
 msgstr "Pour inclure des images .eps (charge aussi graphicx)"
 
@@ -1269,7 +1247,7 @@ msgstr "Le côté opposé à {acute_angle} est : [{correct_answer}]"
 msgid "Vocabulary for trigonometry"
 msgstr "Vocabulaire pour la trigonométrie"
 
-#: lib/document/content/calculation/fraction_of_a_rectangle.py:75
+#: lib/document/content/calculation/fraction_of_a_rectangle.py:80
 msgid "{} (or {})"
 msgstr "{} (ou {})"
 
@@ -1278,19 +1256,19 @@ msgstr "{} (ou {})"
 msgid "Mental calculation: fraction of a rectangle"
 msgstr "Calcul mental : fraction d'un rectangle"
 
-#: lib/document/content/calculation/fraction_of_a_rectangle.py:46
+#: lib/document/content/calculation/fraction_of_a_rectangle.py:51
 msgid "Which fraction of the figure matches the greyed part?"
 msgstr "À quelle fraction de la figure correspond la partie grisée ?"
 
-#: lib/document/content/calculation/fraction_of_a_rectangle.py:58
+#: lib/document/content/calculation/fraction_of_a_rectangle.py:63
 msgid "{} (or {}, or {}...)"
 msgstr "{} (ou {}, ou {}...)"
 
-#: lib/document/content/calculation/fraction_of_a_rectangle.py:64
+#: lib/document/content/calculation/fraction_of_a_rectangle.py:69
 msgid "{} (or {}, or {}, or {})"
 msgstr "{} (ou {}, ou {}, ou {})"
 
-#: lib/document/content/calculation/fraction_of_a_rectangle.py:70
+#: lib/document/content/calculation/fraction_of_a_rectangle.py:75
 msgid "{} (or {}, or {})"
 msgstr "{} (ou {}, ou {})"
 
@@ -2164,6 +2142,52 @@ msgstr "Calcul mental : compléments à 10 et à 100"
 #: data/frameworks/mental_calculation/02_white2.yaml:88
 msgid "Mental calculation: final test for white belt, second stripe"
 msgstr "Calcul mental : ceinture blanche, deuxième trait"
+
+#: lib/machine/LaTeX.py:151
+msgid "To be able to color the documents"
+msgstr "Pour pouvoir mettre les documents en couleur"
+
+#: lib/document/frames/sheet.py:67
+msgid "Ready,|Steady,|Go!"
+msgstr "Prêt ?|Feu !|Partez !"
+
+#: lib/document/frames/sheet.py:70
+msgid "Answers!"
+msgstr "Allez, on corrige !"
+
+#: lib/document/content/calculation/addi_direct.py:62
+#: lib/document/content/calculation/divi_direct.py:54
+#: lib/document/content/calculation/multi_clever.py:108
+#: lib/document/content/calculation/multi_direct.py:56
+#: lib/document/content/calculation/subtr_direct.py:67
+#, python-brace-format
+msgid "{math_expr} = {q_mark}"
+msgstr "{math_expr} = {q_mark}"
+
+#: lib/document/content/calculation/multi_hole.py:61
+#, python-brace-format
+msgid "{math_expr}"
+msgstr "{math_expr}"
+
+#: lib/document/content/calculation/multi_reversed.py:41
+#, python-brace-format
+msgid ""
+"{q_mark} × {q_mark} = {n}\n"
+"\n"
+"(in the multiplication tables, from 2 to 9)"
+msgstr ""
+"{q_mark} × {q_mark} = {n}\n"
+"\n"
+"(dans les tables de multiplication, de 2 à 9)"
+
+#~ msgid "Which number can fill the hole in: {math_expr}?"
+#~ msgstr "Quel nombre permet de compléter le trou dans: {math_expr} ?"
+
+#~ msgid ""
+#~ "In the multiplication tables (from 2 to 9), which product is equal to {n}?"
+#~ msgstr ""
+#~ "Dans les tables de multiplication (de 2 à 9), quel produit est égal à "
+#~ "{n} ?"
 
 #~ msgid "Example of detailed solutions:"
 #~ msgstr "Exemple de solutions détaillées :"
