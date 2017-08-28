@@ -3,6 +3,7 @@ simple: !!omap
   - exercise: !!omap
     - details_level: medium
     - text_exc: "Expand and reduce the following expressions:"
+    - text_ans: "Example of solutions:"
     - questions: expand simple -> inttriplets_2to9 (5)
 
 simple_detailed_solutions: !!omap
@@ -16,6 +17,7 @@ double: !!omap
   - exercise: !!omap
     - details_level: medium
     - text_exc: "Expand and reduce the following expressions:"
+    - text_ans: "Example of solutions:"
     - questions: expand double -> intpairs_2to9;;intpairs_2to9 (5)
 
 double_detailed_solutions: !!omap

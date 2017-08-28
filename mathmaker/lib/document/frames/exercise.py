@@ -380,7 +380,7 @@ class Exercise(object):
                        'shuffle': 'false',
                        'q_spacing': 'undefined',
                        'details_level': 'maximum',
-                       'text_ans': 'Example of detailed solutions:',
+                       'text_ans': _('Example of detailed solutions:'),
                        'q_numbering': 'disabled'}
         elif self.preset == 'mental calculation':
             # /!\ q_numbering for tabular is indeed what happens, but the

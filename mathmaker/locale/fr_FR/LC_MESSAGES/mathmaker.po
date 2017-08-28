@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-08-28 10:38+0200\n"
-"PO-Revision-Date: 2017-08-28 10:38+0200\n"
+"POT-Creation-Date: 2017-08-28 16:13+0200\n"
+"PO-Revision-Date: 2017-08-28 16:13+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -38,54 +38,54 @@ msgstr "Cette équation n'a pas de solution."
 msgid "To strike out numbers "
 msgstr "Pour pouvoir rayer des nombres "
 
-#: lib/machine/LaTeX.py:149
+#: lib/machine/LaTeX.py:152
 msgid "To use the margin definition command"
 msgstr "Pour utiliser la commande de définition des marges"
 
-#: lib/machine/LaTeX.py:153
+#: lib/machine/LaTeX.py:156
 #, python-brace-format
 msgid "To use the commands from {pkg_name} "
 msgstr "Pour utiliser les commandes de {pkg_name} "
 
-#: lib/machine/LaTeX.py:156
+#: lib/machine/LaTeX.py:159
 msgid "To use multicol environment"
 msgstr "Pour faire une présentation multicolonnes"
 
-#: lib/machine/LaTeX.py:159
+#: lib/machine/LaTeX.py:162
 msgid "To use extra commands to handle tabulars"
 msgstr "Pour utiliser des commandes supplémentaires pour les tableaux"
 
-#: lib/machine/LaTeX.py:161
+#: lib/machine/LaTeX.py:164
 msgid "For pretty underlining"
 msgstr "Pour de jolis soulignages"
 
-#: lib/machine/LaTeX.py:171
+#: lib/machine/LaTeX.py:174
 msgid "To use other mathematical symbols"
 msgstr "Pour utiliser d'autres symboles mathématiques"
 
-#: lib/machine/LaTeX.py:174
+#: lib/machine/LaTeX.py:177
 msgid "To draw"
 msgstr "Pour dessiner"
 
-#: lib/machine/LaTeX.py:176
+#: lib/machine/LaTeX.py:179
 msgid "Page layout "
 msgstr "Mise en page générale "
 
-#: lib/machine/LaTeX.py:182
+#: lib/machine/LaTeX.py:185
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 "Si vous souhaitez inclure une image, utilisez s'il vous plaît cette "
 "commande :"
 
-#: lib/machine/LaTeX.py:185
+#: lib/machine/LaTeX.py:188
 msgid "file_name"
 msgstr "nom_du_fichier"
 
-#: lib/machine/LaTeX.py:187
+#: lib/machine/LaTeX.py:190
 msgid "Exercises counter"
 msgstr "Compteur d'exercices"
 
-#: lib/machine/LaTeX.py:189
+#: lib/machine/LaTeX.py:192
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
@@ -94,11 +94,11 @@ msgstr ""
 "Définition de la commande {cmd_name}, qui va insérer le mot {word} en gras, "
 "accompagné de son numéro et qui va incrémenter automatiquement le compteur"
 
-#: lib/machine/LaTeX.py:197 lib/machine/LaTeX.py:193
+#: lib/machine/LaTeX.py:196 lib/machine/LaTeX.py:200
 msgid "Exercise"
 msgstr "Exercice"
 
-#: lib/machine/LaTeX.py:200
+#: lib/machine/LaTeX.py:203
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -319,12 +319,12 @@ msgstr "Factoriser :"
 msgid "Factorise, if possible:"
 msgstr "Factoriser, si possible :"
 
-#: lib/old_style_sheet/exercise/X_Structure.py:257
+#: lib/old_style_sheet/exercise/X_Structure.py:261
 msgid "Question:"
 msgstr "Question :"
 
+#: lib/old_style_sheet/exercise/X_Structure.py:264
 #: lib/document/frames/exercise.py:714
-#: lib/old_style_sheet/exercise/X_Structure.py:260
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -557,7 +557,7 @@ msgstr "Réponses"
 msgid "Mental calculation: mini-problems"
 msgstr "Calcul mental : mini-problèmes"
 
-#: lib/machine/LaTeX.py:168
+#: lib/machine/LaTeX.py:171
 msgid "To use some symbols like currency units"
 msgstr "Pour utiliser des symboles (par exemple des unités de monétaires)"
 
@@ -737,61 +737,63 @@ msgstr "Calculer à l'aide d'une identité remarquable :"
 msgid "{product1} or {product2}"
 msgstr "{product1} ou {product2}"
 
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:3
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:3
-#: data/frameworks/calculation/order_of_operations/order_of_operations_positive_numbers.xml:61
-#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
-#: data/frameworks/geometry/trigonometry/trigonometry_sin_formulae.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:3
-#: data/frameworks/geometry/trigonometry/trigonometry_sin_angle.xml:6
-#: data/frameworks/calculation/order_of_operations/order_of_operations_positive_numbers.xml:11
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
-#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
 #: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:24
-#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_formulae.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:6
 #: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_cos_angle.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_calculate_angle.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_tan_angle.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:3
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:3
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:3
-#: data/frameworks/geometry/trigonometry/trigonometry_tan_angle.xml:3
-#: data/frameworks/geometry/trigonometry/trigonometry_calculate_angle.xml:3
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:3
-#: data/frameworks/geometry/trigonometry/trigonometry_cos_angle.xml:3
-#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:3
-#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:3
 #: data/frameworks/geometry/trigonometry/trigonometry_formulae.xml:3
-#: data/frameworks/geometry/trigonometry/trigonometry_sin_angle.xml:3
-#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:3
-#: data/frameworks/geometry/trigonometry/trigonometry_sin_formulae.xml:3
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_tan_formulae.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:6
+#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:24
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_angle.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:3
+#: data/frameworks/algebra/expand.yaml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:3
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_formulae.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_formulae.xml:3
+#: data/frameworks/geometry/trigonometry/trigonometry_vocabulary.xml:3
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_angle.xml:6
+#: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_angle.xml:3
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:3
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:3
 #: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:6
 #: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:3
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:3
-#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_cos_formulae.xml:3
-#: data/frameworks/calculation/order_of_operations/order_of_operations_positive_numbers.xml:47
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_formulae.xml:6
+#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:24
+#: data/frameworks/algebra/expand.yaml:20
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_angle.xml:3
+#: data/frameworks/geometry/trigonometry/trigonometry_formulae.xml:6
 #: data/frameworks/geometry/trigonometry/trigonometry_vocabulary.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_vocabulary.xml:3
-#: data/frameworks/algebra/expand_and_reduce/double_expansion.xml:6
-#: data/frameworks/geometry/trigonometry/trigonometry_calculate_length.xml:3
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_angle.xml:3
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_formulae.xml:3
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse.xml:3
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt2.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_alt1.xml:3
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt1.xml:3
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_formulae.xml:3
+#: data/frameworks/algebra/expand_and_reduce/simple_expansion.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:3
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_angle.xml:6
 #: data/frameworks/geometry/trigonometry/trigonometry_cos_formulae.xml:6
-#: data/frameworks/algebra/expand_and_reduce/simple_expansion_detailed_solutions.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_length.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_tan_angle.xml:6
+#: data/frameworks/geometry/trigonometry/trigonometry_sin_length.xml:3
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:3
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_converse_alt2.xml:3
 #: data/frameworks/geometry/trigonometry/trigonometry_tan_formulae.xml:3
+#: data/frameworks/geometry/trigonometry/trigonometry_calculate_angle.xml:3
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies.xml:6
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles_alt2.xml:6
+#: data/frameworks/calculation/order_of_operations/order_of_operations_positive_numbers.xml:11
+#: data/frameworks/calculation/order_of_operations/order_of_operations_positive_numbers.xml:47
+#: data/frameworks/geometry/trigonometry/trigonometry_cos_length.xml:3
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_triangles.xml:6
+#: data/frameworks/calculation/order_of_operations/order_of_operations_positive_numbers.xml:61
+#: data/frameworks/geometry/intercept_theorem/intercept_theorem_butterflies_formulae.xml:3
 msgid "Example of solutions:"
 msgstr "Exemple de solutions :"
 
@@ -810,7 +812,7 @@ msgstr "Exemple de solutions :"
 msgid "Intercept theorem"
 msgstr "Théorème de Thalès"
 
-#: lib/machine/LaTeX.py:164
+#: lib/machine/LaTeX.py:167
 msgid "To include .eps pictures (loads graphicx)"
 msgstr "Pour inclure des images .eps (charge aussi graphicx)"
 
@@ -1448,18 +1450,24 @@ msgstr ""
 msgid "Same exercise, but with decimal numbers. Calculate:"
 msgstr "Même exercice, mais avec des nombres décimaux. Calculer :"
 
-#: data/frameworks/algebra/expand.yaml:2 data/frameworks/algebra/expand.yaml:9
+#: data/frameworks/algebra/expand.yaml:10 data/frameworks/algebra/expand.yaml:9
+#: data/frameworks/algebra/expand.yaml:2
 msgid "Algebra: expand simple brackets"
 msgstr "Calcul littéral: développement \"simple\""
 
-#: data/frameworks/algebra/expand.yaml:5 data/frameworks/algebra/expand.yaml:11
+#: data/frameworks/algebra/expand.yaml:11
+#: data/frameworks/algebra/expand.yaml:19
 #: data/frameworks/algebra/expand.yaml:18
 #: data/frameworks/algebra/expand.yaml:24
+#: data/frameworks/algebra/expand.yaml:26 data/frameworks/algebra/expand.yaml:5
+#: data/frameworks/algebra/expand.yaml:12
 msgid "Expand and reduce the following expressions:"
 msgstr "Développer et réduire les expressions suivantes :"
 
-#: data/frameworks/algebra/expand.yaml:15
 #: data/frameworks/algebra/expand.yaml:22
+#: data/frameworks/algebra/expand.yaml:16
+#: data/frameworks/algebra/expand.yaml:24
+#: data/frameworks/algebra/expand.yaml:15
 msgid "Algebra: expand and reduce double brackets"
 msgstr "Calcul littéral: développement \"double\""
 
@@ -2143,7 +2151,7 @@ msgstr "Calcul mental : compléments à 10 et à 100"
 msgid "Mental calculation: final test for white belt, second stripe"
 msgstr "Calcul mental : ceinture blanche, deuxième trait"
 
-#: lib/machine/LaTeX.py:151
+#: lib/machine/LaTeX.py:154
 msgid "To be able to color the documents"
 msgstr "Pour pouvoir mettre les documents en couleur"
 
@@ -2180,6 +2188,16 @@ msgstr ""
 "\n"
 "(dans les tables de multiplication, de 2 à 9)"
 
+#: lib/machine/LaTeX.py:149
+msgid "To get a better control on floats positioning (e.g. tabulars) "
+msgstr ""
+"Pour avoir un meilleur contrôle sur le positionnement des \"flottants\" (par "
+"exemple les tabulars)"
+
+#: lib/document/frames/exercise.py:383
+msgid "Example of detailed solutions:"
+msgstr "Exemple de solutions détaillées :"
+
 #~ msgid "Which number can fill the hole in: {math_expr}?"
 #~ msgstr "Quel nombre permet de compléter le trou dans: {math_expr} ?"
 
@@ -2188,9 +2206,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Dans les tables de multiplication (de 2 à 9), quel produit est égal à "
 #~ "{n} ?"
-
-#~ msgid "Example of detailed solutions:"
-#~ msgstr "Exemple de solutions détaillées :"
 
 #~ msgid "cosine"
 #~ msgstr "cosinus"
