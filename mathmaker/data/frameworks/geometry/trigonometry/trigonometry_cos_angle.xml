@@ -4,7 +4,7 @@
 
 	<layout font_size_offset="-1" />
 
-	<exercise q_numbering="alphabetical">
+	<exercise q_numbering="alphabetical" text_ans="">
 		<layout>
 			<wordings rowxcol="1×2" print="3 3" />
 			<answers rowxcol="1×2" print="3 3" />

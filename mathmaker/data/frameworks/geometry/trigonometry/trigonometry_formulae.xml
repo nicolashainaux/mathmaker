@@ -4,7 +4,7 @@
 
 	<layout font_size_offset="-1" />
 
-	<exercise q_numbering="alphabetical">
+	<exercise q_numbering="alphabetical" text_ans="">
 		<!-- variant can be sin|cos|tan|random
 				 Default values (if variant is not here) will be as if variant="random" -->
 		<!-- no source required for trigonometry_formula questions -->

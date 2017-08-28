@@ -8,7 +8,7 @@
 		<answers print="2" />
 	</layout>
 
-	<exercise>
+	<exercise text_ans="">
 		<!-- variant consists of 3 "flags" connected by '_' (underscore)
 			   1st flag is whether a side should be computed or a chunk of a side, or (oneside/onechunk/onerandom/twosides/twochunks/onesideonechunk/tworandom/random)
 			   2d flag is whether all lengths values will be displayed or only two couples of values (random/all/twocouples)
@@ -23,19 +23,19 @@
 		</question>
 	</exercise>
 
-	<exercise>
+	<exercise text_ans="">
 		<question id="intercept_theorem triangle" variant="oneside_twocouples_true" ans_variant="alternative2">
 			<nb source="ext_proportionality_quadruplet_11to50">1</nb>
 		</question>
 	</exercise>
 
-	<exercise>
+	<exercise text_ans="">
 		<question id="intercept_theorem triangle" variant="twosides_all_false" ans_variant="alternative2">
 			<nb source="ext_proportionality_quadruplet_21to40">1</nb>
 		</question>
 	</exercise>
 
-	<exercise>
+	<exercise text_ans="">
 		<question id="intercept_theorem triangle" variant="onesideonechunk_all_true" ans_variant="alternative2">
 			<nb source="ext_proportionality_quadruplet_31to50">1</nb>
 		</question>
