@@ -43,7 +43,7 @@ class sub_object(component.structure):
         self.result = product.evaluate()
 
         if self.context == 'mini_problem':
-            self.transduration = 20
+            self.transduration = 25
             super().setup('mini_problem_wording',
                           q_id=os.path.splitext(os.path.basename(__file__))[0],
                           **options)

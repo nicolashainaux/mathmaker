@@ -50,11 +50,12 @@ class sub_object(component.structure):
         self.result = the_diff.evaluate()
 
         if self.context == 'mini_problem':
-            self.transduration = 20
+            self.transduration = 25
             super().setup('mini_problem_wording',
                           q_id=os.path.splitext(os.path.basename(__file__))[0],
                           **options)
         elif self.context.startswith('complement_wording'):
+            self.transduration = 12
             super().setup('complement_wording',
                           q_id=os.path.splitext(os.path.basename(__file__))[0],
                           **options)

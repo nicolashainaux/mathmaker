@@ -44,9 +44,9 @@ class sub_object(component.structure):
                 self.nb3, self.nb4, self.nb1, self.nb2
         self.transduration = 12
         if self.nb3 * self.nb4 > 25:
-            self.transduration = 15
+            self.transduration = 20
         if self.nb3 * self.nb4 > 40:
-            self.transduration = 18
+            self.transduration = 30
         super().setup('rectangle_grid', **options)
         self.wording = _('Which fraction of the figure matches '
                          'the greyed part?')

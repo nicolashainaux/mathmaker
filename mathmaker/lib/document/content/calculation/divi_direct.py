@@ -39,7 +39,7 @@ class sub_object(component.structure):
             self.transduration = 12
 
         if self.context == 'mini_problem':
-            self.transduration = 20
+            self.transduration = 25
             self.nb1 = self.dividend
             self.nb2 = self.divisor
             super().setup('mini_problem_wording',
