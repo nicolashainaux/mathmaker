@@ -37,6 +37,7 @@ DEFAULT_RANKS_SCALE = RANKS
 class sub_object(object):
 
     def __init__(self, **options):
+        self.preset = options.get('preset', 'default')
         rank_to_use = options.get('numbers_to_use')[0]
         generation_type = options.get('generation_type',
                                       random.choice(['default',
@@ -183,9 +184,14 @@ class sub_object(object):
         self.transduration = 8
 
     def q(self, **options):
-        return _("Which figure matches the {rank} in the number \
-{decimal_number}?").format(decimal_number=self.chosen_deci_str,
-                           rank=_(str(RANKS_WORDS[self.chosen_rank])))
+        if self.preset == 'mental calculation':
+            result = _('Digit of {position} in {decimal_number}?')
+        else:
+            result = _('Which figure matches the {position} in the number \
+    {decimal_number}?')
+
+        return result.format(decimal_number=self.chosen_deci_str,
+                             position=_(str(RANKS_WORDS[self.chosen_rank])))
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'

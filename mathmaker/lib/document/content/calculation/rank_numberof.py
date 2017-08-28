@@ -34,7 +34,7 @@ class sub_object(object):
         self.transduration = 12
 
     def q(self, **options):
-        return _("{how_many_rank} are there in {decimal_number}?")\
+        return _('{how_many_rank} are there in {decimal_number}?')\
             .format(decimal_number=self.chosen_deci_str,
                     how_many_rank=_(str(RANKS_HOW_MANY[self.chosen_rank])))
 

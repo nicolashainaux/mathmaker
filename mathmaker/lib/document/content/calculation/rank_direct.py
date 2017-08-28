@@ -33,9 +33,14 @@ class sub_object(object):
         self.transduration = 16
 
     def q(self, **options):
-        return _("What is the rank of the figure {figure} in the number \
-{decimal_number}?").format(decimal_number=self.chosen_deci_str,
-                           figure=self.chosen_figure)
+        if self.preset == 'mental calculation':
+            result = _('Position of the digit {figure}'
+                       ' in: {decimal_number}?')
+        else:
+            result = _('What is the position of the figure {figure}'
+                       ' in the number {decimal_number}?')
+        return result.format(decimal_number=self.chosen_deci_str,
+                             figure=self.chosen_figure)
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'

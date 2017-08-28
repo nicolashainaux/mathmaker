@@ -598,20 +598,9 @@ msgid ""
 "|hint:length_unit|"
 msgstr ""
 
-#: lib/document/content/calculation/rank_direct.py:36
-#, python-brace-format
-msgid ""
-"What is the rank of the figure {figure} in the number {decimal_number}?"
-msgstr ""
-
 #: lib/document/content/calculation/rank_numberof.py:37
 #, python-brace-format
 msgid "{how_many_rank} are there in {decimal_number}?"
-msgstr ""
-
-#: lib/document/content/calculation/rank_reversed.py:186
-#, python-brace-format
-msgid "Which figure matches the {rank} in the number {decimal_number}?"
 msgstr ""
 
 #: lib/document/content/geometry/rectangle_length_or_width.py:44
@@ -1912,11 +1901,11 @@ msgstr ""
 msgid "Answers!"
 msgstr ""
 
-#: lib/document/content/calculation/addi_direct.py:62
 #: lib/document/content/calculation/divi_direct.py:54
-#: lib/document/content/calculation/multi_clever.py:108
 #: lib/document/content/calculation/multi_direct.py:56
-#: lib/document/content/calculation/subtr_direct.py:67
+#: lib/document/content/calculation/subtr_direct.py:68
+#: lib/document/content/calculation/multi_clever.py:108
+#: lib/document/content/calculation/addi_direct.py:62
 #, python-brace-format
 msgid "{math_expr} = {q_mark}"
 msgstr ""
@@ -1940,4 +1929,26 @@ msgstr ""
 
 #: lib/document/frames/exercise.py:383
 msgid "Example of detailed solutions:"
+msgstr ""
+
+#: lib/document/content/calculation/rank_direct.py:37
+#, python-brace-format
+msgid "Position of the digit {figure} in: {decimal_number}?"
+msgstr ""
+
+#: lib/document/content/calculation/rank_direct.py:40
+#, python-brace-format
+msgid ""
+"What is the position of the figure {figure} in the number {decimal_number}?"
+msgstr ""
+
+#: lib/document/content/calculation/rank_reversed.py:188
+#, python-brace-format
+msgid "Digit of {position} in {decimal_number}?"
+msgstr ""
+
+#: lib/document/content/calculation/rank_reversed.py:190
+#, python-brace-format
+msgid ""
+"Which figure matches the {position} in the number     {decimal_number}?"
 msgstr ""

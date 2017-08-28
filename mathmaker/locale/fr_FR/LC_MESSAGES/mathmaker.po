@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-08-28 16:13+0200\n"
-"PO-Revision-Date: 2017-08-28 16:13+0200\n"
+"POT-Creation-Date: 2017-08-28 17:10+0200\n"
+"PO-Revision-Date: 2017-08-28 17:12+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -618,20 +618,10 @@ msgid ""
 "length_unit|"
 msgstr "Périmètre d'un carré de côté {nb1} {length_unit} ? |hint:length_unit|"
 
-#: lib/document/content/calculation/rank_direct.py:36
-#, python-brace-format
-msgid "What is the rank of the figure {figure} in the number {decimal_number}?"
-msgstr "Rang du chiffre {figure} dans le nombre  {decimal_number} ?"
-
 #: lib/document/content/calculation/rank_numberof.py:37
 #, python-brace-format
 msgid "{how_many_rank} are there in {decimal_number}?"
 msgstr "{how_many_rank} dans {decimal_number} ?"
-
-#: lib/document/content/calculation/rank_reversed.py:186
-#, python-brace-format
-msgid "Which figure matches the {rank} in the number {decimal_number}?"
-msgstr "Chiffre des {rank} dans le nombre {decimal_number} ?"
 
 #: lib/document/content/geometry/rectangle_length_or_width.py:44
 #, python-brace-format
@@ -2163,11 +2153,11 @@ msgstr "Prêt ?|Feu !|Partez !"
 msgid "Answers!"
 msgstr "Allez, on corrige !"
 
-#: lib/document/content/calculation/addi_direct.py:62
 #: lib/document/content/calculation/divi_direct.py:54
-#: lib/document/content/calculation/multi_clever.py:108
 #: lib/document/content/calculation/multi_direct.py:56
-#: lib/document/content/calculation/subtr_direct.py:67
+#: lib/document/content/calculation/subtr_direct.py:68
+#: lib/document/content/calculation/multi_clever.py:108
+#: lib/document/content/calculation/addi_direct.py:62
 #, python-brace-format
 msgid "{math_expr} = {q_mark}"
 msgstr "{math_expr} = {q_mark}"
@@ -2197,6 +2187,28 @@ msgstr ""
 #: lib/document/frames/exercise.py:383
 msgid "Example of detailed solutions:"
 msgstr "Exemple de solutions détaillées :"
+
+#: lib/document/content/calculation/rank_direct.py:37
+#, python-brace-format
+msgid "Position of the digit {figure} in: {decimal_number}?"
+msgstr "Rang du chiffre {figure} dans :  {decimal_number} ?"
+
+#: lib/document/content/calculation/rank_direct.py:40
+#, python-brace-format
+msgid ""
+"What is the position of the figure {figure} in the number {decimal_number}?"
+msgstr ""
+"Quel est le rang du chiffre {figure} dans le nombre  {decimal_number} ?"
+
+#: lib/document/content/calculation/rank_reversed.py:188
+#, python-brace-format
+msgid "Digit of {position} in {decimal_number}?"
+msgstr "Chiffre des {position} dans {decimal_number} ?"
+
+#: lib/document/content/calculation/rank_reversed.py:190
+#, python-brace-format
+msgid "Which figure matches the {position} in the number     {decimal_number}?"
+msgstr "Quel est le chiffre des {position} dans le nombre {decimal_number} ?"
 
 #~ msgid "Which number can fill the hole in: {math_expr}?"
 #~ msgstr "Quel nombre permet de compléter le trou dans: {math_expr} ?"
