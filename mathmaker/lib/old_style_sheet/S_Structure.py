@@ -324,9 +324,11 @@ class S_Structure(object, metaclass=ABCMeta):
                     else:
                         vspace = '' if len(result) <= 25 else result[-25:]
                         newpage = '' if len(result) <= 9 else result[-9:]
+                        fb = '' if len(result) <= 13 else result[-13:]
                         result += M.write_new_line(check=result[-2:],
                                                    check2=vspace,
-                                                   check3=newpage)
+                                                   check3=newpage,
+                                                   check4=fb)
                     # if not (ex_or_answers == 'ans' \
                     #    and self.layout_type == 'equations'):
                     # __

@@ -242,6 +242,10 @@ class X_Structure(object, metaclass=ABCMeta):
                                              col_widths,
                                              content,
                                              **options)
+                    if (self.x_kind,
+                        self.x_subkind) == ('bypass', 'any_simple_expandable'):
+                        result += '\n' + r'\FloatBarrier' + '\n'
+
             return result + self.x_spacing[ex_or_answers]
         else:
             if self.slideshow:

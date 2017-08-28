@@ -146,6 +146,9 @@ class LaTeX(Structure.Structure):
                 result += '}\n'
             result += '% ' + _('To strike out numbers ') + '\n'
             result += r'\usepackage{cancel}' + '\n'
+            result += '% ' + _('To get a better control on floats '
+                               'positioning (e.g. tabulars) ') + '\n'
+            result += r'\usepackage{placeins}' + '\n'
             result += '% ' + _('To use the margin definition command') + '\n'
             result += r'\usepackage{geometry}' + '\n'
             result += '% ' + _('To be able to color the documents') + '\n'
@@ -326,9 +329,10 @@ class LaTeX(Structure.Structure):
 
     ##
     #   @brief Writes to the output the new line command
-    def write_new_line(self, check='', check2='', check3=''):
+    def write_new_line(self, check='', check2='', check3='', check4=''):
         output_str = '\\newline \n'
-        if check == '\]' or 'addvspace' in check2 or 'newpage' in check3:
+        if (check == '\]' or 'addvspace' in check2 or 'newpage' in check3
+            or 'FloatBarrier' in check4):
             output_str = ''
         if self.redirect_output_to_str:
             return output_str
