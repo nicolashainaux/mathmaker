@@ -1,6 +1,10 @@
 Short version
 -------------
 
+.. warning::
+
+  The work is currently (0.7.2) done with python 3.6.
+
 Install dependencies:
 
 * Ubuntu::

@@ -18,9 +18,9 @@ None of these values is meant to be changed after it has been set by the main sc
 
 Configuration
 -------------
-This is handled by ``mathmaker/lib/tools/config.py``. It works the same way for any of the ``*.yaml`` files. It first loads the default values from ``mathmaker/settings/default/filename.yaml``. Then it updates any value found redefined in any of these files: ``/etc/mathmaker/filename.yaml``, ``~/.config/mathmaker/filename.yaml`` and ``mathmaker/settings/dev/filename.yaml``. Any missing file is skipped (except the first one: the default settings are part of the code, are shipped with it and must be present).
+``load_config()`` handles this and is defined in ``mathmaker/lib/tools/__init__.py``. It works the same way for any of the ``*.yaml`` files. It first loads the default values from ``mathmaker/settings/default/filename.yaml``. Then it updates any value found redefined in any of these files: ``/etc/mathmaker/filename.yaml``, ``~/.config/mathmaker/filename.yaml`` and ``mathmaker/settings/dev/filename.yaml``. Any missing file is skipped (except the first one: the default settings are part of the code, are shipped with it and must be present).
 
-An extended dict class is used to deal easier with dicts created from yaml files. See ``mathmaker/lib/tools/ext_dict.py``.
+An extended dict class is used to deal easier with dicts created from yaml files. See in ``mathmaker/lib/tools/__init__.py``.
 
 The daemon
 ----------
@@ -45,7 +45,11 @@ It is considered as a source among others.
 The sources
 -----------
 
-They concern as well numbers as words or letters or anything one can think of. So far, they are used only for mental calculation, but they should be used for any kind of question.
+They concern as well numbers as words or letters or anything one can think of.
+
+.. note::
+
+  Old style sheets don't use sources.
 
 When random numbers are required, most of the time, we don't need complete random. For instance if we want a pair of integers for the multiplication tables between 2 and 9, we don't want to ask the same question twice in a row.
 

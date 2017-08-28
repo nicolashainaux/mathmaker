@@ -6,22 +6,22 @@ Guided tour
 Foreword
 --------
 
-This code has been developed chunk by chunk over more than 10 years now, starting with python2.3 or 4. Now it is a python3.4 software and my python skills have fortunately improved over the years. Problem is that several old parts, even after big efforts to correct the worst pieces, are not very idiomatic, especially the core.
+This code has been developed chunk by chunk over more than 10 years now, starting with python2.3 or 4. Now it is a python3.6 software and my python skills have fortunately improved over the years. Problem is that several old parts, even after big efforts to correct the worst pieces, are not very idiomatic, especially the core.
 
 Luckily there are unit tests, and whatever one might think about them, it's not difficult to admit that they're extremely useful to check nothing got broken when the core parts are written anew or debugged.
 
 The documentation has been originately written using `doxygen <http://www.stack.nl/~dimitri/doxygen/>`_. Despite the fact it is an excellent documentation software, I have decided to move to `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ because it corresponds closer to python best practices. So, all doxygen-style comments will be turned into docstrings so mathmaker can use Sphinx to build the documentation. At the moment this work is just started, so the auto-generated Sphinx documentation is quite uncomplete now.
 
-So, a part of the work to do is surely to bring new features, but another part, more annoying, is to turn ugly old parts into the right pythonic idioms. That's why at places you'll see that this or this module is deprecated and should be "reduced", or rewritten. A list of such things to do is available on `sourceforge <https://sourceforge.net/p/mathmaker/tickets/>`_. The 1.0 milestone inventories many things.
+So, a part of the work to do is surely to bring new features, but another part, more annoying, is to turn ugly old parts into the right pythonic idioms. That's why at places you'll see that this or this other module is deprecated and should be "reduced", or rewritten. A list of such things to do is available on `sourceforge <https://sourceforge.net/p/mathmaker/tickets/>`_.
 
 The issue
 ---------
 
-It is utmost important to understand that mathmaker is not a software intended to compute mathematical stuff, but to display it. For instance, resolving a first-degree equation is not in itself a goal of mathmaker, because other softwares do that already (and we don't even need any software to do it). Instead, mathmaker will determine and display the steps of this resolution. Sometimes, mathmaker solutions will even try to mimic the pupils' way of doing things.
+It is utmost important to understand that mathmaker is not a software intended to *compute* mathematical stuff, but to *display* it. For instance, resolving a first-degree equation is not in itself a goal of mathmaker, because other softwares do that already (and we don't even need any software to do it). Instead, mathmaker will determine and display the steps of this resolution. Whenever possible, mathmaker solutions will try to mimic the pupils' way of doing things.
 
 For instance, it won't automatically simplify a fraction to make it irreducible in one step, but will try to reproduce the steps that pupils usually need to simplify the fraction. So the GCD is only used to check when the fraction is irreducible and for the cases where there's no other choice, but not as the mean to simplify a fraction directly (not before pupils learn how to use it, at least).
 
-Another example is the need of mathmaker to control the displaying of decimal and integer numbers perfectly. Of course, most of the time, it doesn't matter if a computer tells that 5.2×5.2 = 27.040000000000003 or 3.9×3.9 = 15.209999999999999 because everyone knows that the correct results are 27.04 and 15.21 and because the difference is not so important, so in many situations, this precision will be sufficient. But, can mathmaker display to pupils that the result of 5.2×5.2 is 27.040000000000003 ?
+Another example is the need of mathmaker to control the displaying of decimal and integer numbers perfectly. Of course, most of the time, it doesn't matter if a computer tells that 5.2×5.2 = 27.040000000000003 or 3.9×3.9 = 15.209999999999999 because everyone knows that the correct results are 27.04 and 15.21 and because the difference is not so important, so in many situations, this precision will be sufficient. But, mathmaker can't display to pupils that the result of 5.2×5.2 is 27.040000000000003.
 
 Also, the human rules we use to write maths are full of exceptions and odd details we don't notice usually because we're familiar to them. We would never write
 
@@ -71,7 +71,6 @@ Directories that are relevant to git, at the root:
   .
   ├── docs
   ├── mathmaker
-  ├── outfiles
   ├── tests
   └── toolbox
 
@@ -150,7 +149,7 @@ The Sheet objects given to a Machine contain guidelines for the Machine: the lay
 
 The Exercise objects contain Questions and also layout informations that might be specific to the exercise (for instance, display the equations' resolutions in two columns).
 
-The Question objects contain the mathematical objects from the core and uses them to compute texts and answers.
+The Question objects contain the mathematical objects from the core and uses them to compute texts and answers. The real content is in ``lib/document/content/*/*.py``. The appropriate module is used by the Question object (defined in ``lib/document/frames/question.py``) to create the question's mathematical objects, wording and answer.
 
 The objects from the core are all different kinds of mathematical objects, like Sums, Products, Equations or Triangles, Tables... For instance, a Question about Pythagora's theorem would embed a RightTriangle (which itself embeds information on its sides, vertices, angles; and enough methods to create a picture of it) but also fields telling if the figure should be drawn in the Question's text or if only a description of the figure should be given; if the hypotenuse should be calculated or another side; if the result should be a rounded decimal and how precise it should be etc.
 

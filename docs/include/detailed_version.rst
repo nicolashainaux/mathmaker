@@ -4,6 +4,10 @@ Detailed version
 Dev environment
 ^^^^^^^^^^^^^^^
 
+.. warning::
+
+  The work is currently (0.7.2) done with python 3.6.
+
 Install external dependencies
 """""""""""""""""""""""""""""
 You'll need to install the same dependencies as users do (see :ref:`install`). In addition, ``xgettext`` is required to extract the gettext messages from py files. In Ubuntu 14.04 it's in the ``gettext`` package.
@@ -19,6 +23,10 @@ In the folder of your choice:
 
 Setup a python virtual environment
 """"""""""""""""""""""""""""""""""
+
+.. warning::
+
+  The work is currently (0.7.2) done with python 3.6.
 
 It is strongly advised to install mathmaker in develop mode inside of a python virtual environment. This allows to install the required libraries without conflicting with other projects or python software on the same computer. So, in addition to the packages required for mathmaker to work (see Quickstart), you'd better install ``python3.4-venv`` and work in a virtual environment dedicated to mathmaker. So, just get to the directory of your choice, and to create a virtual environment named ``dev0``, you type:
 
@@ -165,7 +173,7 @@ For instance, my ``settings/dev/user_config.yaml`` contains this:
     # SOFTWARE'S CONFIGURATION FILE
 
     PATHS:
-        OUTPUT_DIR: /home/nico/dev/mathmaker/essais/poubelle/dev2/
+        OUTPUT_DIR: /home/nico/dev/mathmaker/poubelle/
 
     LOCALES:
         LANGUAGE: fr_FR
@@ -174,6 +182,9 @@ For instance, my ``settings/dev/user_config.yaml`` contains this:
     LATEX:
         FONT: Ubuntu
         ROUND_LETTERS_IN_MATH_EXPR: True
+
+    DOCUMENT:
+        QUESTION_NUMBERING_TEMPLATE_SLIDESHOWS: "n°{n}"
 
 See :ref:`settings` to learn more about the way settings are handled by ``mathmaker``.
 
@@ -438,6 +449,8 @@ The two most useful ones are both meant to be run from the ``toolbox/`` director
 * ``build_db.py``, used to update the database when there are new entries to add in it. If new words of 4 letters are added to any po file, ``build_db.py`` should be run, it will add them to the database. If new wordings are entered in ``mathmaker/data/wordings/*.xml`` (obsolete: xml files will be replaced by yaml files up from 0.7.2), then it should be run too. See details in the docstring. And if a new table is required, it should be added in this script. For instance, the pythagorean triples should live in the database and will be added to this list soon or later.
 
 * ``update_pot_files``, a shell script making use of ``xgettext`` and of the scripts ``merge_py_updates_to_main_pot_file``, ``merge_yaml_updates_to_pot_file`` and ``merge_xml_updates_to_pot_file`` (this last one will be removed in 0.7.2). Run ``update_pot_files`` to update ``locale/mathmaker.pot`` when new strings to translate have been added to python code (i.e. inside a call to ``_()``) or new entries have been added to any yaml or xml (xml files will be turned to yaml files in 0.7.2) file from ``mathmaker/data`` (only entries matching a number of identifiers are taken into account, see DEFAULT_KEYWORDS in the source code to know which ones exactly).
+
+* ``build_index.py`` will build the index of available sheets. Run it when you need to test a new sheet.
 
 ``import_msgstr`` and ``retrieve_po_entries`` are useful on some rare occasions. See their docstrings for more explanations. They both have a ``--help`` option.
 
