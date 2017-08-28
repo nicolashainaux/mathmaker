@@ -110,5 +110,5 @@ TEXT_RANKS = {'tiny': 0, 'scriptsize': 1, 'footnotesize': 2, 'small': 3,
               'normal': 4, 'large': 5, 'Large': 6, 'LARGE': 7, 'huge': 8,
               'HUGE': 9}
 
-COLORED_QUESTION_MARK = '\color{BrickRed}{?}'
-COLORED_ANSWER = '\color{{OliveGreen}}{text}'
+COLORED_QUESTION_MARK = r'\textcolor{BrickRed}{?}'
+COLORED_ANSWER = r'\textcolor{{OliveGreen}}{text}'

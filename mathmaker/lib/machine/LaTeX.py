@@ -307,7 +307,7 @@ class LaTeX(Structure.Structure):
                 .format(font='{' + settings.font + '}') + '\n'
         if numbering != '':
             result += (r'\begin{{textblock}}{{1}}(0.5,0)'
-                       + r'\color{{Silver!90!Black}}{{\small{displ_nb}}}'
+                       + r'\textcolor{{Silver!90!Black}}{{\small{displ_nb}}}'
                        + r'\end{{textblock}}') \
                 .format(displ_nb='{' + numbering + '}') + '\n'
         if uncovered:
