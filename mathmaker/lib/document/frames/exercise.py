@@ -380,13 +380,18 @@ class Exercise(object):
                        'shuffle': 'false',
                        'q_spacing': 'undefined',
                        'details_level': 'maximum',
-                       'text_ans': 'Example of detailed solutions:'}
+                       'text_ans': 'Example of detailed solutions:',
+                       'q_numbering': 'disabled'}
         elif self.preset == 'mental calculation':
+            # /!\ q_numbering for tabular is indeed what happens, but the
+            # value defined below is NOT used, it is hardcoded instead.
+            # TODO: see how to fix this
             presets = {'layout_variant': 'tabular',
                        'shuffle': 'true',
                        'q_spacing': '',
                        'details_level': 'none',
-                       'text_ans': ''}
+                       'text_ans': '',
+                       'q_numbering': 'numeric'}
 
         self.layout_variant = options.get('layout_variant',
                                           presets.get('layout_variant'))
@@ -399,7 +404,7 @@ class Exercise(object):
         self.x_layout = options.get('x_layout', DEFAULT_LAYOUT)
 
         self.q_spacing = options.get('q_spacing', presets.get('q_spacing'))
-        self.q_numbering = options.get('q_numbering', 'disabled')
+        self.q_numbering = options.get('q_numbering', presets['q_numbering'])
         self.shuffle = BOOLEAN[options.get('shuffle',
                                            presets.get('shuffle'))]()
 
@@ -597,7 +602,8 @@ class Exercise(object):
             if self.q_spacing != 'undefined' and 'spacing' not in q.options:
                 q.options.update({'spacing': self.q_spacing})
             q.options.update({'details_level': self.details_level,
-                              'preset': self.preset})
+                              'preset': self.preset,
+                              'x_layout_variant': self.layout_variant})
             self.questions_list += \
                 [Question(q.id, **q.options, numbers_to_use=nb_to_use,
                           number_of_the_question=next(numbering), )]
@@ -694,7 +700,8 @@ class Exercise(object):
             if ex_or_answers == 'exc':
                 for q in self.questions_list:
                     result += M.write_frame(q.to_str('exc'),
-                                            duration=q.transduration)
+                                            duration=q.transduration,
+                                            numbering=q.displayable_number)
             elif ex_or_answers == 'ans':
                 for q in self.questions_list:
                     if q.substitutable_question_mark:
@@ -707,7 +714,8 @@ class Exercise(object):
                             + '\n\n' + _('Answer:') + '\n\n' \
                             + COLORED_ANSWER.format(
                                 text='{' + q.to_str('ans') + '}')
-                    result += M.write_frame(content, only=True)
+                    result += M.write_frame(content, only=True,
+                                            numbering=q.displayable_number)
             return result
 
             # default tabular option:

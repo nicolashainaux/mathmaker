@@ -20,6 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.document.content import algebra, calculation, geometry
 
@@ -40,11 +41,23 @@ class Question(object):
     def __init__(self, q_kind, **options):
         # That's the number of the question, not of the expressions it might
         # contain!
+        self.x_layout_variant = options.get('x_layout_variant', 'default')
         self.number = options.get('number_of_the_question', '')
         self.displayable_number = ''
         if self.number != '':
+            if self.x_layout_variant == 'slideshow':
+                tpl = settings.q_numbering_tpl_slideshows
+                tpl_weight = settings.q_numbering_tpl_weight_slideshows
+            else:
+                tpl = settings.q_numbering_tpl
+                tpl_weight = settings.q_numbering_tpl_weight
             self.displayable_number = \
-                shared.machine.write(str(self.number) + ". ", emphasize='bold')
+                shared.machine.write(tpl.format(n=self.number),
+                                     emphasize=tpl_weight)
+
+        self.external_numbering = False
+        if self.x_layout_variant == 'slideshow':
+            self.external_numbering = True
 
         self.q_kind = q_kind
         self.q_subkind = options.get('q_subkind', 'default')
@@ -129,7 +142,7 @@ class Question(object):
     #   @brief Returns the text of the question as a str
     def text_to_str(self):
         text = str(self.q_text) + self.q_spacing
-        if not self.q_nb_included_in_wording:
+        if not self.q_nb_included_in_wording and not self.external_numbering:
             text = str(self.displayable_number) + text
         return text
 
@@ -137,8 +150,10 @@ class Question(object):
     ##
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
-        return str(self.displayable_number) + str(self.q_answer) \
-            + str(self.a_spacing)
+        answer = str(self.q_answer) + str(self.a_spacing)
+        if not self.external_numbering:
+            answer = str(self.displayable_number) + answer
+        return answer
 
     # --------------------------------------------------------------------------
     ##

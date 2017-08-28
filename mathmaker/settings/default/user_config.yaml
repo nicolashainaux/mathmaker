@@ -30,5 +30,15 @@ LATEX:
     FONT:
     ROUND_LETTERS_IN_MATH_EXPR: False
 
+DOCUMENT:
+    # Double quotes around the template strings are mandatory.
+    # {n} will be replaced by the successive numbering items (1, 2, 3... or
+    # a, b, c... etc.)
+    QUESTION_NUMBERING_TEMPLATE: "{n}."
+    # nothing; bold; italics; underlined
+    QUESTION_NUMBERING_TEMPLATE_WEIGHT: bold
+    QUESTION_NUMBERING_TEMPLATE_SLIDESHOWS: "{n}."
+    QUESTION_NUMBERING_TEMPLATE_SLIDESHOWS_WEIGHT: regular
+
 DAEMON:
     MATHMAKER_EXECUTABLE: mathmaker

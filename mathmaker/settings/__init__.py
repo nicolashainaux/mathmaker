@@ -91,6 +91,10 @@ def init():
     global locale
     global currency
     global font
+    global q_numbering_tpl
+    global q_numbering_tpl_weight
+    global q_numbering_tpl_slideshows
+    global q_numbering_tpl_weight_slideshows
     global fonts_list_file
     global encoding
     global xmllint
@@ -154,6 +158,13 @@ def init():
     if currency not in iter(AVAILABLE['CURRENCY'].values()):
         currency = AVAILABLE['CURRENCY'][language]
     font = CONFIG['LATEX'].get('FONT')  # defaults to None in all cases
+    q_numbering_tpl = CONFIG['DOCUMENT'].get('QUESTION_NUMBERING_TEMPLATE')
+    q_numbering_tpl_weight = CONFIG['DOCUMENT']\
+        .get('QUESTION_NUMBERING_TEMPLATE_WEIGHT')
+    q_numbering_tpl_slideshows = CONFIG['DOCUMENT']\
+        .get('QUESTION_NUMBERING_TEMPLATE_SLIDESHOWS')
+    q_numbering_tpl_weight_slideshows = CONFIG['DOCUMENT']\
+        .get('QUESTION_NUMBERING_TEMPLATE_WEIGHT_SLIDESHOWS')
     # The locale must be redefined after command line options are known
     locale = language + '.' + encoding
     outputdir = CONFIG['PATHS'].get('OUTPUT_DIR')

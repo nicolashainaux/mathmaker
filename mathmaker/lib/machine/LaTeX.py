@@ -81,7 +81,7 @@ class LaTeX(Structure.Structure):
                     r'\mathbin{/\negthickspace/}}' + '\n\n'
 
             header = r"""
-\documentclass[20pt, xcolor={{usenames, dvipsnames}}]{{beamer}}
+\documentclass[20pt, xcolor={{usenames, dvipsnames, svgnames}}]{{beamer}}
 \RequirePackage{{luatex85}}
 \usepackage{{fontspec}}
 \usepackage{{polyglossia}}
@@ -91,6 +91,7 @@ class LaTeX(Structure.Structure):
 \usepackage{{multimedia}}
 \usepackage{{tikz}}
 \usepackage{{verbatim}}
+\usepackage[overlay,absolute]{{textpos}}
 
 {setfont}
 {fr_parallel}
@@ -258,7 +259,8 @@ class LaTeX(Structure.Structure):
         else:
             self.out.write(output_str)
 
-    def write_frame(self, content, uncovered=False, only=False, duration=None):
+    def write_frame(self, content, uncovered=False, only=False, duration=None,
+                    numbering=''):
         """
         Write a slideshow's frame to the output
 
@@ -287,6 +289,11 @@ class LaTeX(Structure.Structure):
         if settings.font is not None:
             result += r'\fontspec{font}'\
                 .format(font='{' + settings.font + '}') + '\n'
+        if numbering != '':
+            result += (r'\begin{{textblock}}{{1}}(0.5,0.5)'
+                       + r'\color{{Silver!90!Black}}{displ_nb}'
+                       + r'\end{{textblock}}') \
+                .format(displ_nb='{' + numbering + '}') + '\n'
         if uncovered:
             for i, chunk in enumerate(content.split(sep='|')):
                 result += r'\uncover<{n}>{c}'\
