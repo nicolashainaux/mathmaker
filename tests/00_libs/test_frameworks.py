@@ -54,10 +54,11 @@ def test_AttrStr_parse_warnings():
 def test_AttrStr_parse():
     """Check parse() in various cases."""
     assert _AttrStr('').parse() == {}
-    assert _AttrStr('rowxcol=?×2,  , spacing=25.0pt').parse() \
-        == {'rowxcol': '?×2', 'spacing': '25.0pt'}
-    assert _AttrStr('rowxcol=?×2,  , spacing=').parse() \
-        == {'rowxcol': '?×2', 'spacing': ''}
+    with pytest.warns(UserWarning):
+        assert _AttrStr('rowxcol=?×2,  , spacing=25.0pt').parse() \
+            == {'rowxcol': '?×2', 'spacing': '25.0pt'}
+        assert _AttrStr('rowxcol=?×2,  , spacing=').parse() \
+            == {'rowxcol': '?×2', 'spacing': ''}
     assert _AttrStr('rowxcol=?×2').parse() == {'rowxcol': '?×2'}
     assert _AttrStr('spacing=').parse() == {'spacing': ''}
     assert _AttrStr('rowxcol=?×2,  print=3 3, spacing=').parse() \
