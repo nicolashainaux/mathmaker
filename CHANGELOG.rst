@@ -12,18 +12,24 @@ New in version 0.7.1 (2017-08-29)
 * Fair bunch of bug fixes.
 * Issue warnings instead of exceptions when the version of a dependency could not be determined. [0.7.1dev5 (2017-05-04)]
 * New sheets about trigonometry: [0.7.1dev4 (2017-05-03)]
+
   - vocabulary in the right triangle
   - write the correct formulae
   - calculate a length
   - calculate an angle
+
 * New sheets: [0.7.1dev3 (2016-10-21)]
+
   - intercept theorem: "butterfly" configuration
   - intercept theorem: converse
+
 * New sheets: [0.7.1dev2 (2016-10-13)]
+
   - expansion of simple brackets (declined in two versions)
   - clever multiplications (mental calculation)
   - intercept theorem: write the correct quotients' equalities
   - intercept theorem: solve simple exercises
+
 * A new sheet (declined in two versions): expansion of double brackets. Defined in an xml sheet as for mental calculation sheets. [0.7.1dev1 (2016-09-14)]
 
 New in version 0.7.0-6 (2016-08-19)
