@@ -4,6 +4,7 @@ Changelog
 New in version 0.7.1 (2017-08-29)
 -------------------------------------
 
+* Support for python3.6 only, drop support for older python versions.
 * Mental calculation sheets can now be created as slideshows. Add a default slideshows series for white belt, 1st and 2d stripes.
 * Reorganization of mental calculation in belts: White belt, 1st stripe and 2d stripe have been added (including new sheets: addition/subtraction, fraction of a rectangle, complements)
 * New sheet: order of precedence in operations.

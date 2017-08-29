@@ -3,7 +3,7 @@ Short version
 
 .. warning::
 
-  The work is currently (0.7.2) done with python 3.6.
+  The work is currently (0.7.1) done with python 3.6.
 
 Install dependencies:
 
@@ -13,16 +13,16 @@ Install dependencies:
 
 * FreeBSD::
 
-   $ sudo pkg install python34 py34-sqlite3 gettext eukleides libxml2 texlive-full
+   $ sudo pkg install python36 py36-sqlite3 gettext eukleides libxml2 texlive-full
    $ rehash
 
 And FreeBSD users should check the :ref:`eukleides_patch_for_freebsd`
 
-To install mathmaker in dev mode in a venv, get to the directory where you want to work, and (assuming git and python3.4 are installed):
+To install mathmaker in dev mode in a venv, get to the directory where you want to work, and (assuming git and python3.6 are installed):
 
 * Ubuntu::
 
-    $ pyvenv-3.4 dev0
+    $ python3 -m venv dev0
     $ source dev0/bin/activate
     (dev0) $ pip3 install pytest tox flake8 pydocstyle sphinx sphinx-autodoc-annotation sphinx-rtd-theme
     (dev0) $ mkdir mathmaker
@@ -33,7 +33,7 @@ To install mathmaker in dev mode in a venv, get to the directory where you want 
 
 * FreeBSD::
 
-    $ pyvenv-3.4 dev0
+    $ python3 -m venv dev0
     $ source dev0/bin/activate.csh
     [dev0] $ sudo pip3 install pytest tox flake8 pydocstyle sphinx sphinx-autodoc-annotation sphinx-rtd-theme
     [dev0] $ mkdir mathmaker

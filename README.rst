@@ -29,6 +29,10 @@ Complete install
 
    External dependencies:
 
+.. note::
+
+  python3.6 is mandatory for mathmaker to work, so check is installed on your system
+
    ::
 
        $ sudo apt-get install eukleides libxml2-utils gettext texlive-full
@@ -48,7 +52,7 @@ Complete install
 
    ::
 
-       $ sudo pkg install python34 py34-sqlite3 gettext eukleides libxml2 texlive-full
+       $ sudo pkg install python36 py36-sqlite3 gettext eukleides libxml2 texlive-full
        $ rehash
 
        **note**

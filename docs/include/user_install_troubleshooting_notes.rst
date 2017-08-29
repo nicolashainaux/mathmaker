@@ -1,12 +1,12 @@
-.. _freebsd_notes:
+.. _install_notes:
 
-FreeBSD notes
+Install notes
 =============
 
 .. _eukleides_patch_for_freebsd:
 
-eukleides fix
--------------
+eukleides install fix for FreeBSD
+---------------------------------
 
 ``eukleides`` currently does not work out of the box. The pkg-installed version has a functional euktoeps script, it is required, so keep it somewhere. Then do ``pkg remove eukleides`` and re-install it from source:
 
@@ -33,14 +33,21 @@ You might get an error before the end of ``mathmaker``'s installation:
 
 .. code-block:: console
 
-    /usr/local/venv/mm0/lib/python3.4/site-packages/setuptools/dist.py:294: UserWarning: The version specified ('UNKNOWN') is an invalid version, this may not work as expected with newer versions of setuptools, pip, and PyPI. Please see PEP 440 for more details.
-      "details." % self.metadata.version
-    creating /usr/local/venv/mm0/lib/python3.4/site-packages/python_daemon-UNKNOWN-py3.4.egg
-    Extracting python_daemon-UNKNOWN-py3.4.egg to /usr/local/venv/mm0/lib/python3.4/site-packages
-    Adding python-daemon UNKNOWN to easy-install.pth file
-    Installed /usr/local/venv/mm0/lib/python3.4/site-packages/python_daemon-UNKNOWN-py3.4.egg
     error: The 'python-daemon>=2.1.1' distribution was not found and is required by mathmaker
-    [mm0] root@testmm0:/usr/local/src/mathmaker #
+
+or:
+
+.. code-block:: console
+
+      File "/home/nico/dev/mathmaker/venv/test071_bis/lib/python3.6/site-packages/setuptools/command/easy_install.py", line 250, in finalize_options
+        'dist_version': self.distribution.get_version(),
+      File "/tmp/easy_install-myl7eaei/python-daemon-2.1.2/version.py", line 656, in get_version
+      File "/tmp/easy_install-myl7eaei/python-daemon-2.1.2/version.py", line 651, in get_version_info
+      File "/tmp/easy_install-myl7eaei/python-daemon-2.1.2/version.py", line 552, in get_changelog_path
+      File "/usr/lib/python3.6/posixpath.py", line 154, in dirname
+        p = os.fspath(p)
+      TypeError: expected str, bytes or os.PathLike object, not NoneType
+
 
 Fix it this way:
 

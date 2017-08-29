@@ -22,11 +22,11 @@ Quickstart
 Install
 -------
 
-Required (non python) dependencies are python >=3.4, euktoeps >=1.5.4, xmllint, msgfmt, lualatex, luaotfload-tool and a bunch of LaTeX packages(1)
+Required (non python) dependencies are python >=3.6, euktoeps >=1.5.4, xmllint, msgfmt, lualatex, luaotfload-tool and a bunch of LaTeX packages(1)
 
 To install them:
 
--  on Ubuntu, python3.4 is already installed, so:
+-  on Ubuntu, install python3.6 if it is not already installed, then:
 
    ::
 
@@ -45,7 +45,7 @@ To install them:
 
    ::
 
-       $ sudo pkg install python34 py34-sqlite3 gettext eukleides libxml2 texlive-full
+       $ sudo pkg install python36 py36-sqlite3 gettext eukleides libxml2 texlive-full
        $ rehash
 
    .. note::
@@ -61,7 +61,7 @@ Once you're done, you can proceed installing mathmaker:
 polib, PyYAML and python-daemon).
 
 .. note::
-    FreeBSD users, check how to fix mathmaker install if it stops with an error in python-daemon install, in `the complete documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#python-daemon-error-at-install>`__
+    Check how to fix install if it stops with an error in python-daemon install, in `the complete documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#python-daemon-error-at-install>`__
 
 Basic use
 ---------

@@ -4,9 +4,9 @@ Detailed version
 Dev environment
 ^^^^^^^^^^^^^^^
 
-.. warning::
+.. note::
 
-  The work is currently (0.7.2) done with python 3.6.
+  python3.6 is mandatory for mathmaker development
 
 Install external dependencies
 """""""""""""""""""""""""""""
@@ -24,15 +24,11 @@ In the folder of your choice:
 Setup a python virtual environment
 """"""""""""""""""""""""""""""""""
 
-.. warning::
-
-  The work is currently (0.7.2) done with python 3.6.
-
-It is strongly advised to install mathmaker in develop mode inside of a python virtual environment. This allows to install the required libraries without conflicting with other projects or python software on the same computer. So, in addition to the packages required for mathmaker to work (see Quickstart), you'd better install ``python3.4-venv`` and work in a virtual environment dedicated to mathmaker. So, just get to the directory of your choice, and to create a virtual environment named ``dev0``, you type:
+It is strongly advised to install mathmaker in develop mode inside of a python virtual environment. This allows to install the required libraries without conflicting with other projects or python software on the same computer. Just get to the directory of your choice, and to create a virtual environment named ``dev0``, you type:
 
 ::
 
-    $ pyvenv-3.4 dev0
+    $ python3 -m venv dev0
 
 From there, you can activate it:
 

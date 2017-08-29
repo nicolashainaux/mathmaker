@@ -57,7 +57,7 @@ The sources manage this randomness. Anytime we need to use a source, we can use 
 
 So we have sources for names, for words having a limited number of letters, for different kinds of numbers but also for mini-problems wordings.
 
-So far, there are two kinds of sources: the ones that are provided by the database, and the ones that are provided by the python function ``generate_values()``. They both reside in ``mathmaker/lib/tools/database.py``.
+So far, there are two kinds of sources: the ones that are provided by the database, and the ones that are provided by the function ``generate_values()``. They both reside in ``mathmaker/lib/tools/database.py``.
 
 All sources are initialized in ``mathmaker/lib/shared.py``. There you can see which one has its values provided by the database, which are the other ones.
 
