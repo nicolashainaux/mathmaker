@@ -1,8 +1,13 @@
 Changelog
 =========
 
+New in version 0.7.1-1 (2017-08-29)
+-----------------------------------
+
+* Patch the daemon to let it accept the new YAML sheet names.
+
 New in version 0.7.1 (2017-08-29)
--------------------------------------
+---------------------------------
 
 * Support for python3.6 only, drop support for older python versions.
 * Mental calculation sheets can now be created as slideshows. Add a default slideshows series for white belt, 1st and 2d stripes.
