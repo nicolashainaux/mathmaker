@@ -190,6 +190,7 @@ def test_load_sheet():
                       ('text_exc',
                        'Expand and reduce the following '
                        'expressions:'),
+                      ('text_ans', 'Example of solutions:'),
                       ('questions',
                        'expand double -> intpairs_2to9;;intpairs_2to9 (5)')
                       ]))])
