@@ -8,8 +8,8 @@ from setuptools import setup, find_packages, Command
 from setuptools.command.test import test as TestCommand
 
 import mathmaker
-from mathmaker.lib.startup_actions import check_dependency, check_dependencies
-from mathmaker.lib.tools import fonts
+from mathmaker.lib.tools import retrieve_fonts
+from mathmaker.lib.tools.ignition import check_dependency, check_dependencies
 
 
 def read(*filenames, **kwargs):
@@ -132,7 +132,8 @@ setup(
     install_requires=['PyYAML>=3.11',
                       'polib>=1.0.7',
                       'python-daemon>=2.1.1',
-                      'intspan>=1.5.8'],
+                      'intspan>=1.5.8',
+                      'ruamel.yaml>=0.15.25'],
     cmdclass={'test': PyTest,
               'tox': Tox,
               'clean': CleanCommand},
@@ -146,7 +147,7 @@ setup(
                             'mathmakerd = mathmaker.daemon:run'],
     },
     data_files=create_mo_files(force='--force' in sys.argv)
-    + fonts.create_list(force='--force' in sys.argv),
+    + retrieve_fonts(force='--force' in sys.argv),
     include_package_data=True,
     platforms='any',
     test_suite='tests',

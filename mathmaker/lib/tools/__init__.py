@@ -32,7 +32,6 @@ import re
 import subprocess
 from decimal import Decimal, ROUND_DOWN
 from tempfile import TemporaryFile
-import polib
 
 
 def load_config(file_tag, settingsdir):
@@ -124,6 +123,7 @@ def retrieve_fonts(fonts_list_file='mathmaker/data/fonts_list.txt',
 
 def _retrieve_po_file_content(language, po_filename):
     from mathmaker import settings
+    import polib
     po = polib.pofile(settings.localedir
                       + settings.language
                       + "/LC_MESSAGES/"
