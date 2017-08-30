@@ -1,10 +1,12 @@
 Changelog
 =========
 
-New in version 0.7.1-1 (2017-08-29)
+New in version 0.7.1-2 (2017-08-30)
 -----------------------------------
 
 * Patch the daemon to let it accept the new YAML sheet names.
+* The output dir will always be in user's home.
+* Fix several bugs.
 
 New in version 0.7.1 (2017-08-29)
 ---------------------------------
