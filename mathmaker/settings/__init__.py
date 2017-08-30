@@ -23,6 +23,7 @@
 import os
 import logging
 import logging.config
+from pathlib import Path
 from shutil import copyfile
 
 from mathmaker.lib.tools import ext_dict, load_config
@@ -167,9 +168,25 @@ def init():
         .get('QUESTION_NUMBERING_TEMPLATE_WEIGHT_SLIDESHOWS')
     # The locale must be redefined after command line options are known
     locale = language + '.' + encoding
-    outputdir = CONFIG['PATHS'].get('OUTPUT_DIR')
+    config_path = CONFIG['PATHS'].get('OUTPUT_DIR')
+    if os.path.isabs(config_path):
+        msg = 'The path to outfiles read from the configuration ({}) is ' \
+            'absolute. It must be a relative path.'.format(config_path)
+        mainlogger.error(msg)
+        raise ValueError(msg)
+    outputdir = os.path.join(Path.home(), config_path)
     if not os.path.isdir(outputdir):
         mainlogger.warning('The output directory read from the '
-                           'configuration is not a valid directory.')
+                           'configuration ({}) does not exist.'
+                           .format(outputdir))
+        try:
+            Path(outputdir).mkdir(parents=True)
+        except Exception as e:
+            mainlogger.exception('Impossible to create the missing output '
+                                 'directory')
+            raise
+        mainlogger.warning('Created the output directory read from the '
+                           'configuration.')
+
     round_letters_in_math_expr = CONFIG['LATEX']\
         .get('ROUND_LETTERS_IN_MATH_EXPR', False)

@@ -17,7 +17,8 @@ PATHS:
     LUALATEX: lualatex
     LUAOTFLOAD_TOOL: luaotfload-tool
     MSGFMT: msgfmt
-    OUTPUT_DIR: ./
+    # OUTPUT_DIR *must* be relative (to user's home)
+    OUTPUT_DIR: .mathmaker/outfiles/
 
 LOCALES:
     # Available values can be checked in the locale directory.
