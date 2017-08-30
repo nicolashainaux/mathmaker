@@ -23,6 +23,7 @@
 import os
 import sys
 import time
+import glob
 import subprocess
 from tempfile import NamedTemporaryFile
 
@@ -390,31 +391,37 @@ class LaTeX(Structure.Structure):
         document = latex_document
         if pdf_output:
             with NamedTemporaryFile(mode='r+t') as tmp_file:
-                tmp_file_name = os.path.basename(tmp_file.name)
-                tmp_log_name = settings.outputdir + tmp_file_name + '.log'
-                pdf_file_name = settings.outputdir + tmp_file_name + '.pdf'
+                tmp_dir_name = os.path.dirname(tmp_file.name)
                 tmp_file.write(latex_document)
                 tmp_file.seek(0)
                 p = subprocess.Popen(['lualatex',
                                       '-interaction',
                                       'nonstopmode',
                                       tmp_file.name],
-                                     cwd=settings.outputdir,
+                                     cwd=tmp_dir_name,
                                      stdout=sys.stderr)
-                returncode = p.wait()
-                if returncode:
-                    saved_log_name = 'lualatex_' \
-                        + time.strftime("%Y%m%d-%H%M%S") + '.log'
+                errorcode = p.wait()
+                if errorcode:
+                    saved_log_name = os.path.join(
+                        settings.outputdir,
+                        'lualatex_' + time.strftime("%Y%m%d-%H%M%S") + '.log')
+                    tmp_log_name = tmp_file.name + '.log'
                     with open(tmp_log_name, mode='rt') as tmplog,\
                         open(saved_log_name, mode='wt') as savedlog:  # noqa
-                        # __
                         savedlog.write(tmplog.read())
-                        raise RuntimeError('lualatex had a problem while '
-                                           'compiling. See ' + saved_log_name)
-                with open(pdf_file_name, mode='rb') as pdf_file:
+                    saved_tex_name = os.path.join(
+                        settings.outputdir,
+                        'lualatex_' + time.strftime("%Y%m%d-%H%M%S") + '.tex')
+                    with open(saved_tex_name, mode='wt') as savedtex:
+                        savedtex.write(document)
+                    raise RuntimeError('lualatex had a problem while '
+                                       'compiling. See {} and {}.'
+                                       .format(saved_tex_name, saved_log_name))
+                with open(tmp_file.name + '.pdf', mode='rb') as pdf_file:
                     document = pdf_file.read()
                 self.out = sys.stdout.buffer
-                os.remove(pdf_file_name)
+                for f in glob.glob(tmp_file.name + '.*'):
+                    os.remove(f)
         self.out.write(document)
 
     ##
