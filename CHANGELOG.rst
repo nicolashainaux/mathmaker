@@ -1,7 +1,7 @@
 Changelog
 =========
 
-New in version 0.7.1-2 (2017-08-30)
+New in version 0.7.1-3 (2017-08-30)
 -----------------------------------
 
 * Patch the daemon to let it accept the new YAML sheet names.

@@ -391,21 +391,22 @@ class LaTeX(Structure.Structure):
         document = latex_document
         if pdf_output:
             with NamedTemporaryFile(mode='r+t') as tmp_file:
-                tmp_dir_name = os.path.dirname(tmp_file.name)
+                tmp_filename = os.path.basename(tmp_file.name)
                 tmp_file.write(latex_document)
                 tmp_file.seek(0)
                 p = subprocess.Popen(['lualatex',
                                       '-interaction',
                                       'nonstopmode',
                                       tmp_file.name],
-                                     cwd=tmp_dir_name,
+                                     cwd=settings.outputdir,
                                      stdout=sys.stderr)
                 errorcode = p.wait()
                 if errorcode:
                     saved_log_name = os.path.join(
                         settings.outputdir,
                         'lualatex_' + time.strftime("%Y%m%d-%H%M%S") + '.log')
-                    tmp_log_name = tmp_file.name + '.log'
+                    tmp_log_name = os.path.join(settings.outputdir,
+                                                tmp_filename + '.log')
                     with open(tmp_log_name, mode='rt') as tmplog,\
                         open(saved_log_name, mode='wt') as savedlog:  # noqa
                         savedlog.write(tmplog.read())
@@ -417,10 +418,13 @@ class LaTeX(Structure.Structure):
                     raise RuntimeError('lualatex had a problem while '
                                        'compiling. See {} and {}.'
                                        .format(saved_tex_name, saved_log_name))
-                with open(tmp_file.name + '.pdf', mode='rb') as pdf_file:
+                pdf_filename = os.path.join(settings.outputdir,
+                                            tmp_filename + '.pdf')
+                with open(pdf_filename, mode='rb') as pdf_file:
                     document = pdf_file.read()
                 self.out = sys.stdout.buffer
-                for f in glob.glob(tmp_file.name + '.*'):
+                for f in glob.glob(os.path.join(settings.outputdir,
+                                                tmp_filename + '.*')):
                     os.remove(f)
         self.out.write(document)
 
