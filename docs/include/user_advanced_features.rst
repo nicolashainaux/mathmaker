@@ -10,34 +10,51 @@ The default settings are following:
 
 .. code-block:: yaml
 
-    PATHS:
-        EUKTOEPS: euktoeps
-        XMLLINT: xmllint
-        LUALATEX: lualatex
-        LUAOTFLOAD_TOOL: luaotfload-tool
-        MSGFMT: msgfmt
-        OUTPUT_DIR: ./
+  PATHS:
+      EUKTOEPS: euktoeps
+      XMLLINT: xmllint
+      LUALATEX: lualatex
+      LUAOTFLOAD_TOOL: luaotfload-tool
+      MSGFMT: msgfmt
+      # OUTPUT_DIR *must* be relative (to user's home)
+      OUTPUT_DIR: .mathmaker/outfiles/
 
-    LOCALES:
-        # Available values can be checked in the locale directory.
-        LANGUAGE: en_US
-        ENCODING: UTF-8
-        # Values can be 'euro', 'sterling', 'dollar'
-        CURRENCY: dollar
+  LOCALES:
+      # Available values can be checked in the locale directory.
+      LANGUAGE: en_US
+      ENCODING: UTF-8
+      # Values can be 'euro', 'sterling', 'dollar'
+      CURRENCY: dollar
 
-    LATEX:
-        FONT:
-        ROUND_LETTERS_IN_MATH_EXPR: False
+  LATEX:
+      FONT:
+      ROUND_LETTERS_IN_MATH_EXPR: False
+
+  DOCUMENT:
+      # Double quotes around the template strings are mandatory.
+      # {n} will be replaced by the successive numbering items (1, 2, 3... or
+      # a, b, c... etc.)
+      QUESTION_NUMBERING_TEMPLATE: "{n}."
+      # nothing; bold; italics; underlined
+      QUESTION_NUMBERING_TEMPLATE_WEIGHT: bold
+      QUESTION_NUMBERING_TEMPLATE_SLIDESHOWS: "{n}."
+      QUESTION_NUMBERING_TEMPLATE_SLIDESHOWS_WEIGHT: regular
+
+  DAEMON:
+      MATHMAKER_EXECUTABLE: mathmaker
+
 
 Some explanations:
 
 * The ``PATHS:`` section is here to provide a mean to change the paths to ``euktoeps``, ``lualatex`` and ``xmllint`` mainly. In case one of them is not reachable the way it is set in this section, you can change that easily.
 
-* The ``PATHS:`` section contains also an ``OUTPUT_DIR:`` entry. This is the directory where ``mathmaker`` will store the possible picture files (.euk and .eps). Default value is "current directory". You can set another value, at your liking.
+* The ``PATHS:`` section contains also an ``OUTPUT_DIR:`` entry. This is the directory where ``mathmaker`` will store the possible picture files (.euk and .eps). Change it at your liking, but as it must be a subdirectory of user's own directory, it must be a relative path.
 
 * The entries under ``LOCALES:`` allow to change the language, encoding, and default currency used.
 
 * The ``LATEX:`` section contains an entry to set the font to use (be sure it is available on your system). The ``ROUND_LETTERS_IN_MATH_EXPR:`` entry is disabled by default (set to False). If you set it to True, a special font will be used in math expressions, that will turn all letters (especially the 'x') into a rounded version. This is actually the ``lxfonts`` LaTeX package. It doesn't fit well with any font. Using "Ubuntu" as font and setting ``ROUND_LETTERS_IN_MATH_EXPR:`` to True gives a nice result though.
+
+* The entries under ``DOCUMENT:`` allow to change some values to format the output documents.
 
 Your settings file must be ``~/.config/mathmaker/user_config.yaml``.
 
