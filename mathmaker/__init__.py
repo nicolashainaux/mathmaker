@@ -24,7 +24,7 @@ from . import lib
 
 __version_info__ = (0, 7, 1)
 __dev__ = 0
-__patch_nb__ = 1
+__patch_nb__ = 2
 __version__ = '.'.join(str(c) for c in __version_info__)
 if __dev__ != 0:
     __version__ += 'dev' + str(__dev__)
