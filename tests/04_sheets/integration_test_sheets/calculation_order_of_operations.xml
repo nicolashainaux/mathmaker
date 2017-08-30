@@ -30,7 +30,7 @@
 			<nb source="singleint_2to10;;intpairs_2to9" variant="22">1</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="23">1</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="0">1</nb>
-			<nb source="singleint_2to10;;intpairs_2to9" variant="8-7,9,17-21">1</nb>
+			<nb source="singleint_2to10;;intpairs_2to9" variant="7-8,9,17-21">1</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="0" nb_variant="decimal1">1</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="1" nb_variant="decimal1">1</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="2" nb_variant="decimal1">1</nb>
