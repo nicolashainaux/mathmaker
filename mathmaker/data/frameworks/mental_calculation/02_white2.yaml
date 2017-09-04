@@ -72,10 +72,10 @@ complements: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: complements to 10 and to 100"
   - exercise: !!omap
-    - questions: addi direct, subvariant=complement -> complements_to_10 (1)
-                 addi direct, subvariant=complement -> complements_to_100 (1)
-                 addi direct, subvariant=complement -> complements_to_110...250 (2)
-                 addi direct, subvariant=complement -> complements_to_300...1000 (1)
+    - questions: addi direct -> complements_to_10 (1)
+                 addi direct -> complements_to_100 (1)
+                 addi direct -> complements_to_110...250 (2)
+                 addi direct -> complements_to_300...1000 (1)
                  subtr direct, subvariant=only_positive -> complements_to_10 (1)
                  subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_10 (2)
                  subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_10 (2)
@@ -106,7 +106,7 @@ exam: !!omap
                      divi direct, context=mini_problem -> intpairs_4to9 (1)]
                  divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
                  multi direct -> table_11_tens_easy (1)
-                 addi direct, subvariant=complement -> complements_to_300...1000 (1)
+                 addi direct -> complements_to_300...1000 (1)
                  subtr direct, subvariant=only_positive -> complements_to_100 (1)
                  subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
                  subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_100 (1)
@@ -212,7 +212,7 @@ W04a: !!omap
     - questions: fraction_of a_rectangle -> intpairs_3to6;;intpairs_3to6 (1)
                  multi direct, context=mini_problem -> intpairs_4to9 (1)
                  subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_10 (1)
-                 addi direct, subvariant=complement -> complements_to_110...250 (1)
+                 addi direct -> complements_to_110...250 (1)
                  subtr direct, subvariant=only_positive -> complements_to_100 (1)
 
 W04b: !!omap
@@ -240,4 +240,4 @@ W04d: !!omap
                  rank reversed -> rank_words (1)
                  fraction_of a_rectangle -> intpairs_4to9;;intpairs_4to9 (1)
                  subtr direct, context=mini_problem, subvariant=only_positive ->  complements_to_100 (1)
-                 addi direct, subvariant=complement -> complements_to_300...1000 (1)
+                 addi direct -> complements_to_300...1000 (1)

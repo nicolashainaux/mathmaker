@@ -605,7 +605,8 @@ class Exercise(object):
                               'preset': self.preset,
                               'x_layout_variant': self.layout_variant})
             self.questions_list += \
-                [Question(q.id, **q.options, numbers_to_use=nb_to_use,
+                [Question(q.id, **q.options, nb_source=nb_source,
+                          numbers_to_use=nb_to_use,
                           number_of_the_question=next(numbering), )]
         shared.number_of_the_question = 0
 
