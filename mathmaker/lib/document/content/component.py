@@ -312,18 +312,18 @@ class structure(object):
         if self.context == 'complement_wording1':
             self.wording = _('What number must be added to'
                              ' {number1} to make {number2}?')\
-                .format(number1=self.nb2, number2=self.nb1)
+                .format(number1=Value(self.nb2), number2=Value(self.nb1))
         elif self.context == 'complement_wording2':
             if upper_bound == 10:
                 self.wording = _('What is the tens complement '
-                                 'of {number}?').format(number=self.nb2)
+                                 'of {number}?').format(number=Value(self.nb2))
             elif upper_bound == 100:
                 self.wording = _('What is the hundreds complement '
-                                 'of {number}?').format(number=self.nb2)
+                                 'of {number}?').format(number=Value(self.nb2))
             else:
                 self.wording = _('What is the complement to {number1} '
-                                 'of {number2}?').format(number1=self.nb2,
-                                                         number2=self.nb1)
+                                 'of {number2}?')\
+                    .format(number1=Value(self.nb2), number2=Value(self.nb1))
         else:
             raise ValueError('Cannot recognize context: {}\n'
                              .format(self.context))

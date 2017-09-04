@@ -197,6 +197,7 @@ class source(object):
         log.debug(cmd)
         qr = tuple(shared.db.execute(cmd))
         if not len(qr):
+            log.debug('RESET\n')
             kwargs = self._reset(**kwargs)
             cmd1 = self._cmd(**kwargs)
             qr = tuple(shared.db.execute(cmd1))
@@ -211,6 +212,7 @@ class source(object):
                         logm.error('Query result is empty:\nQUERY1\n{}\n'
                                    'QUERY2\n{}\nQUERY3\n{}\n'
                                    .format(cmd, cmd1, cmd2))
+        log.debug('Query result = {}\n'.format(qr))
         return qr
 
     ##
@@ -300,7 +302,9 @@ def classify_tag(tag):
 #           to allow this very same behaviour (as directly adding a
 #           'nbN': 'value' may change the query).
 #   @return A dictionary
-def translate_int_pairs_tag(tag):
+def translate_int_pairs_tag(tag, qkw=None):
+    if qkw is None:
+        qkw = {}
     d = {}
     if tag.startswith('complements_to_'):
         step = 1
@@ -316,7 +320,10 @@ def translate_int_pairs_tag(tag):
                                                         - mini // step + 1)])
         else:
             upper_bound = int(upper_bounds)
-        d = {'nb2': upper_bound, 'nb1_lt': upper_bound,
+        if qkw.get('nb_variant', 'default').startswith('decimal'):
+            upper_bound *= 10
+            step = 10
+        d = {'nb2': upper_bound, 'nb1_lt': upper_bound // 2 + 1,
              'prevails': [str(upper_bound)]}
         if step != 1:
             d.update({'nb1_notmod': step})
@@ -490,7 +497,7 @@ class sub_source(object):
 
     ##
     #   @brief  Handles the choice of the next value to return
-    def next(self, **kwargs):
+    def next(self, qkw=None, **kwargs):
         if self.current == self.max:
             self._reset()
         self.current += 1
@@ -500,10 +507,12 @@ class sub_source(object):
 class mc_source(object):
     ##
     #   @brief  Handles the choice of the next value to return
-    def next(self, source_id, **kwargs):
+    def next(self, source_id, qkw=None, **kwargs):
+        if qkw is None:
+            qkw = {}
         tag_classification = classify_tag(source_id)
         if tag_classification == 'int_pairs':
-            kwargs.update(translate_int_pairs_tag(source_id))
+            kwargs.update(translate_int_pairs_tag(source_id, qkw=qkw))
             return shared.int_pairs_source.next(**kwargs)
         elif tag_classification.startswith('single'):
             kwargs.update(translate_single_nb_tag(source_id))

@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
+import random
 
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
@@ -45,6 +46,13 @@ class sub_object(component.structure):
         if self.subvariant == 'only_positive':
             self.nb1, self.nb2 = max(self.nb1, self.nb2), min(self.nb1,
                                                               self.nb2)
+        if (options.get('nb_source').startswith('complement')
+            and self.nb_variant.startswith('decimal')):
+            self.nb1 //= 10
+        if (options.get('nb_source').startswith('complement')
+            and random.choice([True, False])):
+            self.nb2 = self.nb1 - self.nb2
+
         the_diff = Sum([self.nb1, -self.nb2])
         self.diff_str = the_diff.printed
         self.result = the_diff.evaluate()

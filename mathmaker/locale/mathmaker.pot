@@ -35,67 +35,67 @@ msgstr ""
 msgid "This equation has no solution."
 msgstr ""
 
-#: lib/machine/LaTeX.py:147
+#: lib/machine/LaTeX.py:148
 msgid "To strike out numbers "
 msgstr ""
 
-#: lib/machine/LaTeX.py:152
+#: lib/machine/LaTeX.py:153
 msgid "To use the margin definition command"
 msgstr ""
 
-#: lib/machine/LaTeX.py:156
+#: lib/machine/LaTeX.py:157
 #, python-brace-format
 msgid "To use the commands from {pkg_name} "
 msgstr ""
 
-#: lib/machine/LaTeX.py:159
+#: lib/machine/LaTeX.py:160
 msgid "To use multicol environment"
 msgstr ""
 
-#: lib/machine/LaTeX.py:162
+#: lib/machine/LaTeX.py:163
 msgid "To use extra commands to handle tabulars"
 msgstr ""
 
-#: lib/machine/LaTeX.py:164
+#: lib/machine/LaTeX.py:165
 msgid "For pretty underlining"
 msgstr ""
 
-#: lib/machine/LaTeX.py:174
+#: lib/machine/LaTeX.py:175
 msgid "To use other mathematical symbols"
 msgstr ""
 
-#: lib/machine/LaTeX.py:177
+#: lib/machine/LaTeX.py:178
 msgid "To draw"
 msgstr ""
 
-#: lib/machine/LaTeX.py:179
+#: lib/machine/LaTeX.py:180
 msgid "Page layout "
 msgstr ""
 
-#: lib/machine/LaTeX.py:185
+#: lib/machine/LaTeX.py:186
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 
-#: lib/machine/LaTeX.py:188
+#: lib/machine/LaTeX.py:189
 msgid "file_name"
 msgstr ""
 
-#: lib/machine/LaTeX.py:190
+#: lib/machine/LaTeX.py:191
 msgid "Exercises counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:192
+#: lib/machine/LaTeX.py:193
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
 "bold, with its number and automatically increments the counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:196 lib/machine/LaTeX.py:200
+#: lib/machine/LaTeX.py:197 lib/machine/LaTeX.py:201
 msgid "Exercise"
 msgstr ""
 
-#: lib/machine/LaTeX.py:203
+#: lib/machine/LaTeX.py:204
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -310,8 +310,8 @@ msgstr ""
 msgid "Question:"
 msgstr ""
 
+#: lib/document/frames/exercise.py:720
 #: lib/old_style_sheet/exercise/X_Structure.py:264
-#: lib/document/frames/exercise.py:714
 msgid "Answer:"
 msgstr ""
 
@@ -539,11 +539,11 @@ msgstr ""
 msgid "Mental calculation: mini-problems"
 msgstr ""
 
-#: lib/machine/LaTeX.py:171
+#: lib/machine/LaTeX.py:172
 msgid "To use some symbols like currency units"
 msgstr ""
 
-#: lib/machine/LaTeX.py:134
+#: lib/machine/LaTeX.py:135
 msgid "To display units correctly"
 msgstr ""
 
@@ -774,7 +774,7 @@ msgstr ""
 msgid "Intercept theorem"
 msgstr ""
 
-#: lib/machine/LaTeX.py:167
+#: lib/machine/LaTeX.py:168
 msgid "To include .eps pictures (loads graphicx)"
 msgstr ""
 
@@ -1889,7 +1889,7 @@ msgstr ""
 msgid "Mental calculation: final test for white belt, second stripe"
 msgstr ""
 
-#: lib/machine/LaTeX.py:154
+#: lib/machine/LaTeX.py:155
 msgid "To be able to color the documents"
 msgstr ""
 
@@ -1901,11 +1901,11 @@ msgstr ""
 msgid "Answers!"
 msgstr ""
 
-#: lib/document/content/calculation/divi_direct.py:54
-#: lib/document/content/calculation/multi_direct.py:56
-#: lib/document/content/calculation/subtr_direct.py:68
-#: lib/document/content/calculation/multi_clever.py:108
 #: lib/document/content/calculation/addi_direct.py:62
+#: lib/document/content/calculation/multi_direct.py:56
+#: lib/document/content/calculation/divi_direct.py:54
+#: lib/document/content/calculation/multi_clever.py:108
+#: lib/document/content/calculation/subtr_direct.py:76
 #, python-brace-format
 msgid "{math_expr} = {q_mark}"
 msgstr ""
@@ -1923,7 +1923,7 @@ msgid ""
 "(in the multiplication tables, from 2 to 9)"
 msgstr ""
 
-#: lib/machine/LaTeX.py:149
+#: lib/machine/LaTeX.py:150
 msgid "To get a better control on floats positioning (e.g. tabulars) "
 msgstr ""
 
@@ -1951,4 +1951,8 @@ msgstr ""
 #, python-brace-format
 msgid ""
 "Which figure matches the {position} in the number     {decimal_number}?"
+msgstr ""
+
+#: data/frameworks/mental_calculation/03_yellow.yaml:3
+msgid "Mental calculation: decimal complements to 1, to 10 and to 100"
 msgstr ""

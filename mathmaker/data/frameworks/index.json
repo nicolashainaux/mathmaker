@@ -184,6 +184,11 @@
         "01_white1",
         "W02d"
     ],
+    "03_yellow_complements": [
+        "mental_calculation",
+        "03_yellow",
+        "complements"
+    ],
     "expand_simple": [
         "algebra",
         "expand",

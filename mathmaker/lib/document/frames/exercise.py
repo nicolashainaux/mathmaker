@@ -549,12 +549,14 @@ class Exercise(object):
                             .next(nb_source,
                                   nb1=last_draw[0],
                                   nb2_in=coprimes,
+                                  qkw=q.options,
                                   **get_q_modifier(q.id, nb_source),
                                   **xkw)
                     else:
                         second_couple_drawn = shared.mc_source\
                             .next(nb_source,
                                   either_nb1_nb2_in=last_draw,
+                                  qkw=q.options,
                                   **get_q_modifier(q.id, nb_source),
                                   **xkw)
                     common_nb = get_common_nb_from_pairs_pair(
@@ -569,12 +571,14 @@ class Exercise(object):
                         new_couple_drawn = shared.mc_source\
                             .next(nb_source,
                                   triangle_inequality=nb_to_use,
+                                  qkw=q.options,
                                   **get_q_modifier(q.id, nb_source),
                                   **xkw)
                     else:
                         new_couple_drawn = shared.mc_source\
                             .next(nb_source,
                                   either_nb1_nb2_in=[common_nb],
+                                  qkw=q.options,
                                   **get_q_modifier(q.id, nb_source),
                                   **xkw)
                     nb_to_use = merge_pair_to_tuple(nb_to_use,
@@ -583,6 +587,7 @@ class Exercise(object):
                 else:
                     drawn = shared.mc_source.next(nb_source,
                                                   not_in=last_draw,
+                                                  qkw=q.options,
                                                   **get_q_modifier(
                                                       q.id, nb_source),
                                                   **xkw)

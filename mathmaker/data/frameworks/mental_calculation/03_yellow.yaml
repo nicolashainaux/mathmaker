@@ -1,0 +1,13 @@
+complements: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: decimal complements to 1, to 10 and to 100"
+  - exercise: !!omap
+    - questions: addi direct -> complements_to_10, nb_variant=decimal2 (5)
+                 subtr direct, subvariant=only_positive, context=complement_wording -> complements_to_10, nb_variant=decimal1 (5)
+                 addi direct -> complements_to_100 (2)
+                 addi direct -> complements_to_110...990 (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_1, nb_variant=decimal1 (2)
+                 subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_1, nb_variant=decimal1 (2)
+                 subtr direct, subvariant=only_positive -> complements_to_100 (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_100 (1)
