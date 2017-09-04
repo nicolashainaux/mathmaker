@@ -22,12 +22,12 @@ exam: !!omap
 W01a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi direct -> intpairs_2to5 (5)
+    - questions: multi direct -> intpairs_2to5×4to7 (5)
 
 W01b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi direct -> intpairs_3to7 (5)
+    - questions: multi direct -> intpairs_4to7×4to8 (5)
 
 W01c: !!omap
   - preset: "mental calculation slideshow"

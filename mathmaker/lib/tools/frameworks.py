@@ -41,7 +41,7 @@ from mathmaker.lib.tools import parse_layout_descriptor
 
 SIMPLE_QUESTION = re.compile(r'([a-zA-Z0-9_,=;\->\. ]+\([0-9\.]+\))')
 Q_BLOCKS = re.compile(r'\[(\d+)\]\[([a-zA-Z0-9 ,=_;\->\.\n\(\)]+)\]'
-                      r'|([a-zA-Z0-9_,=;\->\. ]+\([0-9\.]+\))')
+                      r'|([a-zA-Z0-9_,=×;\->\. ]+\([0-9\.]+\))')
 MIX_QUESTION = re.compile(
     r'([a-zA-Z0-9_\. ]+[,]?)(([a-zA-Z0-9_ ]+=[a-zA-Z0-9_\. ]+[,]?)*)')
 NB_SOURCE = re.compile(r'([a-zA-Z0-9_,=;×\-\. ]+)\(([0-9]+)\)')
