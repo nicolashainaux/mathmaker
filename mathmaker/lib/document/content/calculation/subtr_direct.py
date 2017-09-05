@@ -46,10 +46,10 @@ class sub_object(component.structure):
         if self.subvariant == 'only_positive':
             self.nb1, self.nb2 = max(self.nb1, self.nb2), min(self.nb1,
                                                               self.nb2)
-        if (options.get('nb_source').startswith('complement')
+        if (options.get('nb_source', 'default').startswith('complement')
             and self.nb_variant.startswith('decimal')):
             self.nb1 //= 10
-        if (options.get('nb_source').startswith('complement')
+        if (options.get('nb_source', 'default').startswith('complement')
             and random.choice([True, False])):
             self.nb2 = self.nb1 - self.nb2
 
