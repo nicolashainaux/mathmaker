@@ -161,9 +161,11 @@ class source(object):
                 result += " AND " + k + " IN (" + ", "\
                     .join(str(x) for x in kwargs[kw]) + ") "
             elif kw == 'rectangle':
-                result += " AND nb1 != nb2 "
+                if any([kw.startswith('nb2') for kw in kwargs]):
+                    result += " AND nb1 != nb2 "
             elif kw == 'square':
-                result += " AND nb1 = nb2 "
+                if any([kw.startswith('nb2') for kw in kwargs]):
+                    result += " AND nb1 = nb2 "
             elif kw == 'diff7atleast':
                 result += " AND nb2 - nb1 >= 7 "
             else:
