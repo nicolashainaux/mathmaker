@@ -21,9 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import copy
+import random
 import warnings
 
 from mathmaker.lib import shared
+from mathmaker.lib.tools import rotate
 from mathmaker.lib.tools.frameworks import load_sheet, read_layout
 from mathmaker.lib.tools.frameworks import build_exercises_list
 from mathmaker.lib.document.frames import Exercise
@@ -223,6 +225,8 @@ class Sheet(object):
         self.text = _(text) if text != "" else ""
         self.answers_title = _(answers_title) if answers_title != "" else ""
 
+        self.shift = options.get('shift', False)
+
         if filename is None:
             for e_data in build_exercises_list(data):
                 if self.preset != 'default' and 'preset' not in e_data:
@@ -233,7 +237,16 @@ class Sheet(object):
                     e_data.update({'preset': e_preset})
                     if self.preset == 'mental calculation slideshow':
                         e_data.update({'layout_variant': 'slideshow'})
-                self.exercises_list.append(Exercise(data=e_data))
+                exc = Exercise(data=e_data)
+                self.exercises_list.append(exc)
+                if self.shift:
+                    excbis = copy.deepcopy(exc)
+                    offset = random.choice([i - 9
+                                            for i in range(19)
+                                            if abs(i) >= 5])
+                    excbis.questions_list = rotate(excbis.questions_list,
+                                                   offset)
+                    self.exercises_list.append(excbis)
         else:
             for ex in get_exercises_list(filename):
                 ex_kwargs = ex[2]
@@ -253,8 +266,7 @@ class Sheet(object):
             result += shared.machine.write_document_begins(
                 variant=self.layout_type)
             result += self.sheet_header_to_str()
-            result += self.sheet_title_to_str(
-                variant=self.layout_type)
+            result += self.sheet_title_to_str(variant=self.layout_type)
             result += self.sheet_text_to_str()
             result += self.texts_to_str('exc', 0)
             if self.layout_type != 'slideshow':
@@ -403,6 +415,16 @@ class Sheet(object):
                     #        how_many = 3*len(self.exercises_list) / 4 - ex_n
 
                 for i in range(how_many):
+                    if self.shift and i != 0:
+                        result += shared.machine.write_jump_to_next_page()
+                        if ex_or_answers == 'exc':
+                            result += self.sheet_title_to_str(
+                                variant=self.layout_type)
+                        else:
+                            result += self.answers_title_to_str()
+                            result += \
+                                shared.machine.write_set_font_size_to(
+                                    'large')
                     if self.write_ex_titles:
                         result += M.write_exercise_number()
                     result += self.exercises_list[ex_n].to_str(ex_or_answers)

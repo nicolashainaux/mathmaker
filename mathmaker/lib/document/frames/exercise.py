@@ -522,7 +522,7 @@ class Exercise(object):
         # ]
 
         # Now, we generate the numbers & questions, by type of question first
-        self.questions_list = []
+        self._questions_list = []
         last_draw = [0, 0]
         numbering = numbering_device(self.q_numbering)
         for q in mixed_q_list:
@@ -609,11 +609,19 @@ class Exercise(object):
             q.options.update({'details_level': self.details_level,
                               'preset': self.preset,
                               'x_layout_variant': self.layout_variant})
-            self.questions_list += \
+            self._questions_list += \
                 [Question(q.id, **q.options, nb_source=nb_source,
                           numbers_to_use=nb_to_use,
                           number_of_the_question=next(numbering), )]
         shared.number_of_the_question = 0
+
+    @property
+    def questions_list(self):
+        return self._questions_list
+
+    @questions_list.setter
+    def questions_list(self, o):
+        self._questions_list = o
 
     def to_str(self, ex_or_answers):
         M = shared.machine

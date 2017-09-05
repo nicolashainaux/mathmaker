@@ -66,6 +66,12 @@ def entry_point():
                              '~/.config/mathmaker/user_config.yaml. '
                              'Left undefined, the default will be current '
                              'directory.')
+    parser.add_argument('--shift', action='store_true',
+                        dest='shift',
+                        help='When this option is enabled, the mental '
+                             'calculation tabular will be created twice, with '
+                             'questions shifted by a random offset the second '
+                             'time. ')
     parser.add_argument('-f', '--font', action='store',
                         dest='font',
                         default=settings.font,
@@ -126,7 +132,7 @@ def entry_point():
             shared.db.close()
             sys.exit(1)
         if build_from_yaml:
-            sh = Sheet(*fn, filename=None)
+            sh = Sheet(*fn, filename=None, shift=args.shift)
         else:
             sh = Sheet('', '', '', filename=fn)
 
