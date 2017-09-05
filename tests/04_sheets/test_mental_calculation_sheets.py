@@ -275,3 +275,10 @@ def test_02_white2_W04d():
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '02_white2',
                                        'W04d')))
+
+
+def test_03_yellow():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'complements')))
