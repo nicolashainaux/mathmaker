@@ -189,6 +189,11 @@
         "03_yellow",
         "complements"
     ],
+    "03_yellow_addi_subtr_hole": [
+        "mental_calculation",
+        "03_yellow",
+        "addi_subtr_hole"
+    ],
     "expand_simple": [
         "algebra",
         "expand",

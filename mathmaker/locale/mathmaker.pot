@@ -310,8 +310,8 @@ msgstr ""
 msgid "Question:"
 msgstr ""
 
-#: lib/document/frames/exercise.py:720
 #: lib/old_style_sheet/exercise/X_Structure.py:264
+#: lib/document/frames/exercise.py:728
 msgid "Answer:"
 msgstr ""
 
@@ -509,25 +509,25 @@ msgstr ""
 msgid "Reversed multiplications"
 msgstr ""
 
-#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-#: lib/document/frames/sheet.py:63
+#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:3
+#: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
+#: lib/document/frames/sheet.py:58
+#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:3
+#: data/frameworks/mental_calculation/lev11_1/divisions.xml:3
 #: data/frameworks/mental_calculation/lev11_1/ranks.xml:3
+#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:3
+#: lib/document/frames/sheet.py:65
+#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:3
 #: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:3
 #: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:3
-#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
-#: data/frameworks/mental_calculation/lev11_3/multi_clever.xml:3
-#: lib/document/frames/sheet.py:56
-#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:3
-#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:3
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:3
-#: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
-#: data/frameworks/mental_calculation/lev11_1/addi_subtr_direct_naturals.xml:3
-#: data/frameworks/mental_calculation/lev11_1/divisions.xml:3
-#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:3
 #: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
-#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:3
+#: data/frameworks/mental_calculation/lev11_1/addi_subtr_direct_naturals.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:3
+#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
+#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:3
+#: data/frameworks/mental_calculation/lev11_3/multi_clever.xml:3
+#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
+#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:3
 msgid "Answers"
 msgstr ""
 
@@ -1893,11 +1893,11 @@ msgstr ""
 msgid "To be able to color the documents"
 msgstr ""
 
-#: lib/document/frames/sheet.py:67
+#: lib/document/frames/sheet.py:69
 msgid "Ready,|Steady,|Go!"
 msgstr ""
 
-#: lib/document/frames/sheet.py:70
+#: lib/document/frames/sheet.py:72
 msgid "Answers!"
 msgstr ""
 
@@ -1955,4 +1955,8 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/03_yellow.yaml:3
 msgid "Mental calculation: decimal complements to 1, to 10 and to 100"
+msgstr ""
+
+#: data/frameworks/mental_calculation/03_yellow.yaml:17
+msgid "Mental calculation: additions and subtractions with a hole"
 msgstr ""
