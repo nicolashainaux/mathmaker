@@ -20,14 +20,18 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import copy
 import random
+import warnings
 from decimal import Decimal
 
 from mathmaker import settings
 from mathmaker.lib import shared
-from mathmaker.lib.constants.numeration import RANKS
+from mathmaker.lib.constants.numeration import RANKS, RANKS_CONFUSING
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
 from mathmaker.lib.core.base_calculus import Fraction
+
+DEFAULT_RANKS_SCALE = RANKS
 
 
 class source(object):
@@ -475,6 +479,146 @@ def generate_values(source_id):
 
     elif source_id in ['nothing', 'bypass']:
         return []
+
+
+def generate_random_decimal_nb(rank_to_use, width='random',
+                               generation_type=None,
+                               rank_matches_invisible_zero=False,
+                               **options):
+    if generation_type is None:
+        if 'numberof' in options:
+            generation_type = 'default'
+        else:
+            generation_type = random.choice(['default', 'alternative'])
+    chosen_deci = Decimal('0')
+    figures = [str(i + 1) for i in range(9)]
+    random.shuffle(figures)
+    ranks_scale = options.get('ranks_scale',
+                              copy.copy(DEFAULT_RANKS_SCALE))
+
+    if width != 'random':
+        try:
+            width = int(options['width'])
+            if not (1 <= width <= len(ranks_scale)):
+                width = 'random'
+                warnings.warn('The chosen width ({}) is not greater than 1 '
+                              'and lower than the length of ranks scale ({}).'
+                              .format(width, len(ranks_scale)))
+        except ValueError:
+            raise ValueError('As width you can specify either \'random\' or '
+                             'an int.')
+    if width == 'random':
+        if generation_type == 'default':
+            width = random.choice([3, 4, 5, 6, 7])
+        else:
+            width = random.choices([2, 3, 4, 5],
+                                   cum_weights=[0.1, 0.4, 0.75, 1])[0]
+        if 'numberof' in options:
+            width = random.choices([2, 3, 4, 5],
+                                   cum_weights=[0.15, 0.55, 0.85, 1])[0]
+
+    if 'direct' in options:
+        rank_matches_invisible_zero = False
+
+    # Two different ways to generate a number. Here is the "default" one:
+    if generation_type == 'default':
+        ranks = []
+
+        if not rank_matches_invisible_zero:
+            if 'numberof' not in options:
+                lr = ranks_scale.index(rank_to_use) - width + 1
+                lowest_start_rank = lr if lr >= 0 else 0
+
+                hr = ranks_scale.index(rank_to_use)
+                highest_start_rank = hr if hr + width < len(ranks_scale) \
+                    else len(ranks_scale) - 1 - width
+                highest_start_rank = highest_start_rank \
+                    if highest_start_rank >= lowest_start_rank \
+                    else lowest_start_rank
+
+                possible_start_ranks = [lowest_start_rank + r
+                                        for r in range(
+                                            highest_start_rank
+                                            - lowest_start_rank
+                                            + 1)]
+
+                start_rank = random.choice(possible_start_ranks)
+
+                ranks = [start_rank + r for r in range(width)]
+
+            else:
+                ranks += [ranks_scale.index(rank_to_use)]
+                # Probability to fill a higher rank rather than a lower one
+                phr = 0.5
+                hr = lr = ranks_scale.index(rank_to_use)
+                for i in range(width - 1):
+                    if lr == 0:
+                        phr = 1
+                    elif hr == len(ranks_scale) - 1:
+                        phr = 0
+
+                    if random.random() < phr:
+                        hr += 1
+                        ranks += [hr]
+                        phr *= 0.4
+                    else:
+                        lr -= 1
+                        ranks += [lr]
+                        phr *= 2.5
+
+        else:
+            if rank_to_use <= Decimal('0.1'):
+                ranks = [ranks_scale.index(r) for r in ranks_scale
+                         if r > rank_to_use]
+                width = min(width, len(ranks))
+                ranks = ranks[-width:]
+            elif rank_to_use >= Decimal('10'):
+                ranks = [ranks_scale.index(r) for r in ranks_scale
+                         if r < rank_to_use]
+                width = min(width, len(ranks))
+                ranks = ranks[:width]
+
+        # Let's start the generation of the number:
+        for r in ranks:
+            figure = figures.pop()
+            chosen_deci += Decimal(figure) * ranks_scale[r]
+
+    # "Alternative" way of generating a number randomly:
+    else:
+        figure = '0' if rank_matches_invisible_zero \
+            else figures.pop()
+
+        chosen_deci += Decimal(figure) * rank_to_use
+        ranks_scale.remove(rank_to_use)
+
+        if rank_matches_invisible_zero:
+            if rank_to_use <= Decimal('0.1'):
+                next_rank = rank_to_use * Decimal('10')
+                figure = figures.pop()
+                chosen_deci += Decimal(figure) * next_rank
+                ranks_scale = [r for r in ranks_scale if r > next_rank]
+            elif rank_to_use >= Decimal('10'):
+                next_rank = rank_to_use * Decimal('0.1')
+                figure = figures.pop()
+                chosen_deci += Decimal(figure) * next_rank
+                ranks_scale = [r for r in ranks_scale if r < next_rank]
+
+        width = min(width, len(ranks_scale))
+
+        if rank_to_use != Decimal('1') and not rank_matches_invisible_zero:
+            figure = figures.pop()
+            r = RANKS_CONFUSING[-(RANKS_CONFUSING.index(rank_to_use) + 1)]
+            chosen_deci += Decimal(figure) * r
+            ranks_scale.remove(r)
+            width -= 1
+
+        for i in range(width):
+            figure = figures.pop()
+            r = random.choice(ranks_scale)
+            ranks_scale.remove(r)
+            chosen_deci += Decimal(figure) * r
+
+    return chosen_deci
 
 
 class sub_source(object):
