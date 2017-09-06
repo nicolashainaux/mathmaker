@@ -30,7 +30,7 @@ from .calculation import vocabulary_simple_multiple_of_a_number
 from .calculation import vocabulary_multi, vocabulary_divi
 from .calculation import vocabulary_addi, vocabulary_subtr
 from .calculation import fraction_of_a_rectangle
-from .calculation import addi_hole
+from .calculation import addi_hole, subtr_hole
 from .geometry import intercept_theorem_triangle
 from .geometry import intercept_theorem_triangle_formula
 from .geometry import intercept_theorem_butterfly
@@ -52,7 +52,7 @@ __all__ = ['expand_simple', 'expand_double',
            'vocabulary_simple_multiple_of_a_number', 'vocabulary_multi',
            'vocabulary_divi', 'vocabulary_addi', 'vocabulary_subtr',
            'fraction_of_a_rectangle', 'calculation_order_of_operations',
-           'addi_hole',
+           'addi_hole', 'subtr_hole',
            'area_rectangle', 'area_square', 'perimeter_rectangle',
            'perimeter_square', 'rectangle_length_or_width',
            'intercept_theorem_triangle', 'intercept_theorem_triangle_formula',
