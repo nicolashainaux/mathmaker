@@ -502,7 +502,8 @@ def generate_random_decimal_nb(rank_to_use, width='random',
             if not (1 <= width <= len(ranks_scale)):
                 width = 'random'
                 warnings.warn('The chosen width ({}) is not greater than 1 '
-                              'and lower than the length of ranks scale ({}).'
+                              'and lower than the length of ranks scale ({}). '
+                              'A random value will be chosen instead.'
                               .format(width, len(ranks_scale)))
         except ValueError:
             raise ValueError('As width you can specify either \'random\' or '
