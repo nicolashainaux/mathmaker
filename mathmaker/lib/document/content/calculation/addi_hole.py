@@ -31,8 +31,9 @@ from mathmaker.lib.document.content import component
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, hidden=random.choice([1, 2]),
-                 **options):
+    def __init__(self, numbers_to_use, hidden=None, **options):
+        if hidden is None:
+            hidden = random.choice([1, 2])
         super().setup("minimal", **options)
         if options.get('nb_source', 'default').startswith('complement'):
             maxi, mini = max(numbers_to_use), min(numbers_to_use)
