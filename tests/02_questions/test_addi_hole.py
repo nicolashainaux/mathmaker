@@ -40,4 +40,5 @@ def test_addi_hole():
     assert '?' in o.nb2.printed
     o = addi_hole.sub_object(numbers_to_use=[10, 20], nb_variant='decimal1')
     assert ((is_number(o.nb1) and not is_integer(o.nb1))
-            or (is_number(o.nb2) and not is_integer(o.nb2)))
+            or (is_number(o.nb2) and not is_integer(o.nb2))
+            or (is_number(o.result_nb) and not is_integer(o.result_nb)))

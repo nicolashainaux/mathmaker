@@ -44,6 +44,7 @@ class sub_object(component.structure):
         if (self.nb1 > 20 and self.nb2 > 20
             and not self.nb1 % 10 == 0 and not self.nb2 % 10 == 0):
             self.transduration = 12
+        self.result_nb = self.nb1 + self.nb2
         self.result = Item(self.nb1 + self.nb2).printed
         if hidden == 1:
             self.hidden_one = Item(self.nb1)
