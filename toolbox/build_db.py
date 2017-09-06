@@ -39,6 +39,7 @@ It will add all entries:
 - a list of angles' ranges (around 0, 90, 180, 270)
 - the list of variants identification numbers (from 0 to 23 and 100 to 155,
   so far) for calculation_order_of_operations questions
+- all unit conversions, sorted in categories and levels
 """
 
 import os
@@ -107,6 +108,10 @@ def __main__():
               (id INTEGER PRIMARY KEY, nb1 DECIMAL(4, 1), drawDate INTEGER)''')
     db.execute('''CREATE TABLE angle_ranges
               (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
+              drawDate INTEGER)''')
+    db.execute('''CREATE TABLE units_conversions
+              (id INTEGER PRIMARY KEY, unit1 TEXT, unit2 TEXT, direction TEXT,
+              category TEXT, level INTEGER,
               drawDate INTEGER)''')
     db.execute('''CREATE TABLE int_pairs
               (id INTEGER PRIMARY KEY,
@@ -263,6 +268,55 @@ def __main__():
                    "INTO calculation_order_of_operations_variants"
                    "(nb1, drawDate) "
                    "VALUES(?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert unit conversions...\n')
+    db_rows = [('km', 'hm', 'right', 'length', 1, 0),
+               ('hm', 'dam', 'right', 'length', 1, 0),
+               ('dam', 'm', 'right', 'length', 1, 0),
+               ('m', 'dm', 'right', 'length', 1, 0),
+               ('dm', 'cm', 'right', 'length', 1, 0),
+               ('cm', 'mm', 'right', 'length', 1, 0),
+               ('km', 'm', 'right', 'length', 1, 0),
+               ('m', 'cm', 'right', 'length', 1, 0),
+               ('hL', 'daL', 'right', 'capacity', 1, 0),
+               ('daL', 'L', 'right', 'capacity', 1, 0),
+               ('L', 'dL', 'right', 'capacity', 1, 0),
+               ('dL', 'cL', 'right', 'capacity', 1, 0),
+               ('cL', 'mL', 'right', 'capacity', 1, 0),
+               ('hL', 'L', 'right', 'capacity', 1, 0),
+               ('kg', 'hg', 'right', 'mass', 1, 0),
+               ('hg', 'dag', 'right', 'mass', 1, 0),
+               ('dag', 'g', 'right', 'mass', 1, 0),
+               ('g', 'dg', 'right', 'mass', 1, 0),
+               ('dg', 'cg', 'right', 'mass', 1, 0),
+               ('cg', 'mg', 'right', 'mass', 1, 0),
+               ('kg', 'g', 'right', 'mass', 1, 0),
+               ('hm', 'km', 'left', 'length', 1, 0),
+               ('dam', 'hm', 'left', 'length', 1, 0),
+               ('m', 'dam', 'left', 'length', 1, 0),
+               ('dm', 'm', 'left', 'length', 1, 0),
+               ('cm', 'dm', 'left', 'length', 1, 0),
+               ('mm', 'cm', 'left', 'length', 1, 0),
+               ('m', 'km', 'left', 'length', 1, 0),
+               ('cm', 'm', 'left', 'length', 1, 0),
+               ('daL', 'hL', 'left', 'capacity', 1, 0),
+               ('L', 'daL', 'left', 'capacity', 1, 0),
+               ('dL', 'L', 'left', 'capacity', 1, 0),
+               ('cL', 'dL', 'left', 'capacity', 1, 0),
+               ('mL', 'cL', 'left', 'capacity', 1, 0),
+               ('L', 'hL', 'left', 'capacity', 1, 0),
+               ('hg', 'kg', 'left', 'mass', 1, 0),
+               ('dag', 'hg', 'left', 'mass', 1, 0),
+               ('g', 'dag', 'left', 'mass', 1, 0),
+               ('dg', 'g', 'left', 'mass', 1, 0),
+               ('cg', 'dg', 'left', 'mass', 1, 0),
+               ('mg', 'cg', 'left', 'mass', 1, 0),
+               ('g', 'kg', 'left', 'mass', 1, 0)]
+    db.executemany("INSERT "
+                   "INTO units_conversions"
+                   "(unit1, unit2, direction, category, level, drawDate) "
+                   "VALUES(?, ?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Commit changes to database...\n')
