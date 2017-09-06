@@ -498,7 +498,7 @@ def generate_random_decimal_nb(rank_to_use, width='random',
 
     if width != 'random':
         try:
-            width = int(options['width'])
+            width = int(width)
             if not (1 <= width <= len(ranks_scale)):
                 width = 'random'
                 warnings.warn('The chosen width ({}) is not greater than 1 '
