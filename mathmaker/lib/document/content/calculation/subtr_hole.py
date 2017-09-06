@@ -37,8 +37,6 @@ class sub_object(component.structure):
             hidden = random.choice([1, 2])
         if swap_complement is None:
             swap_complement = random.choice([True, False])
-        import sys
-        sys.stderr.write('\n{} is hidden\n'.format(hidden))
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, **options)
         super().setup("nb_variants", nb=numbers_to_use, **options)
