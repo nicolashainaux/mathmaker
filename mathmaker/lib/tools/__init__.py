@@ -34,6 +34,10 @@ from decimal import Decimal, ROUND_DOWN
 from tempfile import TemporaryFile
 
 
+from mathmaker.lib.constants.units import (LENGTH_UNITS, MASS_UNITS,
+                                           CAPACITY_UNITS, PHYSICAL_QUANTITIES)
+
+
 def load_config(file_tag, settingsdir):
     """
     Will load the values from the yaml config file, named file_tag.yaml.
@@ -551,3 +555,43 @@ def split_nb(n, operation='sum', dig=0):
         b = random.choice(seq)
         a = n + b
     return (a, b)
+
+
+def physical_quantity(unit):
+    """
+    Return the name of the physical quantity the unit belongs to.
+
+    :param unit: the unit
+    :type unit: str
+    :rtype: str
+    """
+    import sys
+    sys.stderr.write('\ntype(unit)={}\n'.format(type(unit)))
+    if unit in LENGTH_UNITS:
+        return 'length'
+    elif unit in MASS_UNITS:
+        return 'mass'
+    elif unit in CAPACITY_UNITS:
+        return 'capacity'
+    raise ValueError('Cannot determine the physical quantity of provided unit'
+                     ' ({}).'.format(unit))
+
+
+def difference_of_orders_of_magnitude(unit1, unit2):
+    """
+    Return the required power of 10 to multiply unit1 by, to get unit2.
+
+    :param unit1: the first unit
+    :type unit1: str
+    :param unit2: the second unit (to get from unit1)
+    :type unit2: str
+    :rtype: decimal.Decimal
+    """
+    phq = physical_quantity(unit1)
+    if phq != physical_quantity(unit2):
+        raise TypeError('Cannot give the difference of orders of magnitude '
+                        'between two units that do not belong to the same '
+                        'physical quantity ({} and {}).'
+                        .format(unit1, unit2))
+    return 10 ** Decimal(str(PHYSICAL_QUANTITIES[phq].index(unit2)
+                             - PHYSICAL_QUANTITIES[phq].index(unit1)))
