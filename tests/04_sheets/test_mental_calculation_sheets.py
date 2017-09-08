@@ -277,8 +277,22 @@ def test_02_white2_W04d():
                                        'W04d')))
 
 
-def test_03_yellow():
+def test_03_yellow_complements():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
                                        'complements')))
+
+
+def test_03_yellow_addi_subtr_hole():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'addi_subtr_hole')))
+
+
+def test_03_yellow_units_conversions():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'units_conversions')))
