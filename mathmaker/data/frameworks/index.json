@@ -194,10 +194,10 @@
         "03_yellow",
         "addi_subtr_hole"
     ],
-    "03_yellow_unit_conversions": [
+    "03_yellow_units_conversions": [
         "mental_calculation",
         "03_yellow",
-        "unit_conversions"
+        "units_conversions"
     ],
     "expand_simple": [
         "algebra",
