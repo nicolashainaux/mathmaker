@@ -565,8 +565,6 @@ def physical_quantity(unit):
     :type unit: str
     :rtype: str
     """
-    import sys
-    sys.stderr.write('\ntype(unit)={}\n'.format(type(unit)))
     if unit in LENGTH_UNITS:
         return 'length'
     elif unit in MASS_UNITS:
