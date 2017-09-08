@@ -362,7 +362,7 @@ def fix_math_style2_fontsize(text, mathsize='\Large',
             and not match.endswith('$') and match not in remember):
             text = text.replace(match, normalsize + '{' + match + '}')
             remember.append(match)
-    text = p.sub(mathsize + r'{\1}', text)
+    text = p.sub('{' + mathsize + r'{\1}' + '}', text)
     return text
 
 
