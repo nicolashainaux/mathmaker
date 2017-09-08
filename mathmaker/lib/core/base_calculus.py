@@ -34,7 +34,7 @@ from abc import ABCMeta, abstractmethod
 
 from mathmaker import settings
 from mathmaker.lib.core.root_calculus import Calculable, Value, Exponented
-from mathmaker.lib.tools import is_integer, is_natural, is_number
+from mathmaker.lib.tools import is_integer, is_natural, is_number, digits_nb
 from mathmaker.lib.tools import difference_of_orders_of_magnitude
 from mathmaker.lib.tools.maths import (sign_of_product, gcd, pupil_gcd,
                                        lcm_of_the_list, is_even, is_uneven,
@@ -2537,8 +2537,8 @@ class Fraction(Quotient):
     # --------------------------------------------------------------------------
     ##
     #   @brief Constructor
-    #   @param arg Fraction|(num,den)|(sign,num,den)|(sign,num,den,exponent)|
-    #              (RANDOMLY, sign, num_sign, num_max, deno_sign, deno_max)|
+    #   @param arg Fraction|decimal.Decimal|(num,den)|(sign,num,den)
+    #              |(sign,num,den,exponent)|
     #              zero-degree-Monomial having a Fraction as coefficient
     #   @param **options copy_other_fields_from=<Fraction>
     #                    -> can be used with (num, den) to get all the
@@ -2566,10 +2566,6 @@ class Fraction(Quotient):
                 arg_sign = arg[0]
                 arg_nume = arg[1]
                 arg_deno = arg[2]
-            elif len(arg) == 6 and arg[0] == RANDOMLY:
-                arg_sign = arg[1]
-                arg_nume = arg[3]
-                arg_deno = arg[5]
             elif len(arg) == 2:
                 arg_nume = arg[0]
                 arg_deno = arg[1]
@@ -2632,21 +2628,23 @@ class Fraction(Quotient):
             self._ignore_1_denominator = arg._ignore_1_denominator
 
         # 4th CASE:
-        elif arg == "default":
-            # Just keep the default values (see begining of this method)
-            pass
+        elif isinstance(arg, Decimal):
+            f = 10 ** max(1, digits_nb(arg))
+            self._numerator = Product([Item(f * arg)])
+            self._denominator = Product([Item(f)])
 
-        # 5th CASE: A zero-degree Monomial having a Fraction as coefficient
-        elif (isinstance(arg, Monomial) and arg.is_numeric()
-              and isinstance(arg.factor[0], Fraction)):
-            # __
-            self._exponent = Value(1)
-            self._numerator = arg.factor[0].numerator.clone()
-            self._denominator = arg.factor[0].denominator.clone()
-            self._sign = arg.factor[0].sign
-            self._status = arg.factor[0].status
-            self._same_deno_reduction_in_progress = \
-                arg.factor[0].same_deno_reduction_in_progress
+        # 5th CASE: COMMENTED OUT SINCE IT SEEMS UNUSED: A zero-degree
+        # Monomial having a Fraction as coefficient
+        # elif (isinstance(arg, Monomial) and arg.is_numeric()
+        #       and isinstance(arg.factor[0], Fraction)):
+        #     # __
+        #     self._exponent = Value(1)
+        #     self._numerator = arg.factor[0].numerator.clone()
+        #     self._denominator = arg.factor[0].denominator.clone()
+        #     self._sign = arg.factor[0].sign
+        #     self._status = arg.factor[0].status
+        #     self._same_deno_reduction_in_progress = \
+        #         arg.factor[0].same_deno_reduction_in_progress
 
         # All unforeseen cases: an exception is raised
         else:

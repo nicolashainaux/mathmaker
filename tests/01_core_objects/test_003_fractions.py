@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import pytest
-import decimal
+from decimal import Decimal
 
 from mathmaker.lib.core.base_calculus import Item, Product, Fraction
 from tools import wrap_nb
@@ -142,13 +142,13 @@ def test_f10_is_decimal():
 
 def test_f11_eval():
     """Is this Fraction correctly evaluated?"""
-    assert Fraction((Item(3), Item(8))).evaluate() == decimal.Decimal('0.375')
+    assert Fraction((Item(3), Item(8))).evaluate() == Decimal('0.375')
 
 
 def test_f12_eval():
     """Is this Fraction correctly evaluated?"""
     assert Fraction((Item(3), Item(7))).evaluate() == \
-        decimal.Decimal('0.4285714285714285714285714286')
+        Decimal('0.4285714285714285714285714286')
 
 
 def test_f12_eval2():
@@ -156,3 +156,12 @@ def test_f12_eval2():
     assert Fraction((Item(3), Item(7)))\
         .evaluate(keep_not_decimal_nb_as_fractions=True).printed == \
         wrap_nb('\\frac{3}{7}')
+
+
+def test_fraction_from_decimal():
+    """Are decimal fractions created correctly from decimals?"""
+    assert Fraction(Decimal('0.56')).printed == wrap_nb('\\frac{56}{100}')
+    assert Fraction(Decimal('0.938')).printed == wrap_nb('\\frac{938}{1000}')
+    assert Fraction(Decimal('0.4')).printed == wrap_nb('\\frac{4}{10}')
+    assert Fraction(Decimal('2.17')).printed == wrap_nb('\\frac{217}{100}')
+    assert Fraction(Decimal('4')).printed == wrap_nb('\\frac{40}{10}')
