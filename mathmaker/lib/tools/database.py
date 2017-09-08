@@ -28,6 +28,7 @@ from decimal import Decimal
 from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.constants.numeration import RANKS, RANKS_CONFUSING
+from mathmaker.lib.constants.numeration import RANKS_DECIMAL
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
 from mathmaker.lib.core.base_calculus import Fraction
 
@@ -307,7 +308,7 @@ def classify_tag(tag):
                  'decimal_and_10_100_1000_for_divi',
                  'decimal_and_one_digit_for_multi',
                  'decimal_and_one_digit_for_divi',
-                 'unitspairs']:
+                 'unitspairs', 'decimal_digits']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -439,6 +440,14 @@ def generate_values(source_id):
     elif source_id == 'rank_words':
         return [(elt,) for elt in RANKS]
 
+    elif source_id == 'decimal_digits':
+        return [(elt,) for elt in RANKS_DECIMAL]
+
+    elif source_id == 'alternate':
+        l = [('left', ), ('right', )]
+        random.shuffle(l)
+        return l * 20
+
     elif source_id == 'trigo_functions':
         return ['cos', 'cos', 'sin', 'sin', 'tan', 'tan']
 
@@ -525,6 +534,7 @@ def generate_random_decimal_nb(rank_to_use, width='random',
                                generation_type=None,
                                rank_matches_invisible_zero=False,
                                unique_figures=True,
+                               grow_left=False,
                                **options):
     if generation_type is None:
         if 'numberof' in options:
@@ -569,7 +579,12 @@ def generate_random_decimal_nb(rank_to_use, width='random',
         ranks = []
 
         if not rank_matches_invisible_zero:
-            if 'numberof' not in options:
+            if grow_left:
+                ranks = [ranks_scale.index(rank_to_use) - r
+                         for r in range(width)]
+            elif 'numberof' not in options:
+                # High ranks are to the right of the numeral, while low ranks
+                # are to the left
                 lr = ranks_scale.index(rank_to_use) - width + 1
                 lowest_start_rank = lr if lr >= 0 else 0
 
@@ -591,6 +606,8 @@ def generate_random_decimal_nb(rank_to_use, width='random',
                 ranks = [start_rank + r for r in range(width)]
 
             else:
+                # High ranks are to the right of the numeral, while low ranks
+                # are to the left
                 ranks += [ranks_scale.index(rank_to_use)]
                 # Probability to fill a higher rank rather than a lower one
                 phr = 0.5
@@ -711,6 +728,8 @@ class mc_source(object):
             return shared.int_deci_clever_pairs_source.next(**kwargs)
         elif tag_classification == 'rank_words':
             return shared.rank_words_source.next(**kwargs)
+        elif tag_classification == 'decimal_digits':
+            return shared.decimal_digits_source.next(**kwargs)
         elif tag_classification == 'int_irreducible_frac':
             return shared.int_fracs_source.next(**kwargs)
         elif tag_classification == 'decimal_and_10_100_1000_for_multi':

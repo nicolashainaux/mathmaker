@@ -41,6 +41,7 @@ def init():
     global angle_ranges_source
     global int_deci_clever_pairs_source
     global rank_words_source
+    global decimal_digits_source
     global int_fracs_source
     global deci_10_100_1000_multi_source
     global deci_10_100_1000_divi_source
@@ -53,6 +54,7 @@ def init():
     global number_of_the_question
     global order_of_operations_variants_source
     global unitspairs_source
+    global alternate_source
 
     log = settings.mainlogger
 
@@ -87,7 +89,9 @@ def init():
     markup = latex.MARKUP
 
     from mathmaker.lib.tools.database import sub_source, mc_source
+    alternate_source = sub_source('alternate')
     rank_words_source = sub_source('rank_words')
+    decimal_digits_source = sub_source('decimal_digits')
     trigo_functions_source = sub_source('trigo_functions')
     trigo_vocabulary_source = sub_source('trigo_vocabulary')
     int_fracs_source = sub_source('int_irreducible_frac')

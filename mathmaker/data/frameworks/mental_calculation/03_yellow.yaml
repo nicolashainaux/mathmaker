@@ -29,6 +29,13 @@ units_conversions: !!omap
   - exercise: !!omap
     - questions: units conversion -> unitspairs (20)
 
+decimal_fraction_and_decimal_representation: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: transform a decimal fraction into its decimal representation and conversely"
+  - exercise: !!omap
+    - shuffle: false
+    - questions: decimal numerals -> decimal_digits (20)
+
 
 # COPY OF THE FIRST VERSION OF addi_subtr_hole WITH DECIMAL NUMBERS (TO BE REUSED OR INSPIRED OF LATER)
 # addi_subtr_hole: !!omap
