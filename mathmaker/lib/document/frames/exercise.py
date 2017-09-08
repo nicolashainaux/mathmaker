@@ -535,9 +535,10 @@ class Exercise(object):
                 # Handle all nb sources for ONE question
                 if i == 1 and extra_infos['merge_sources']:
                     if extra_infos.get('coprime', False):
-                        # We need order in last_draw, that may have been lost.
-                        # Coprimes being about integers, we can rely on using
-                        # int() as sort key.
+                        # Now last_draw shouldn't need to get reordered, maybe
+                        # remove the sorted() call.
+                        # Coprimes being about integers, int() is used as sort
+                        # key.
                         last_draw = sorted(last_draw, key=int)
                         lb2, hb2 = nb_source.split(sep='×')[1].split(sep='to')
                         lb2, hb2 = int(lb2), int(hb2)
@@ -595,11 +596,15 @@ class Exercise(object):
                         nb_to_use += (drawn, )
                     else:
                         nb_to_use += drawn
-                # Caution: because of set() (to remove possible doublons)
-                # the order of last_draw is lost.
-                last_draw = [str(n)
-                             for n in set(nb_to_use)
-                             if (isinstance(n, int) or isinstance(n, str))]
+
+                known_elts = set()
+                last_draw = []
+                for n in nb_to_use:
+                    if (n in known_elts
+                        or not (isinstance(n, int) or isinstance(n, str))):
+                        continue
+                    last_draw.append(str(n))
+                    known_elts.add(n)
                 if nb_source in ['decimal_and_10_100_1000_for_divi',
                                  'decimal_and_10_100_1000_for_multi']:
                     # __
