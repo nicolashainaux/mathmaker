@@ -25,3 +25,9 @@ addi_subtr_hole: !!omap
                  subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (3)
                  subtr hole, subvariant=only_positive, hidden=2 -> complements_to_10, nb_variant=decimal1 (2)
                  subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (2)
+
+unit_conversions: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: additions and subtractions with a hole"
+  - exercise: !!omap
+    - questions: units conversion -> unitspairs (20)

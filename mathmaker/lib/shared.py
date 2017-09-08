@@ -52,6 +52,7 @@ def init():
     global machine
     global number_of_the_question
     global order_of_operations_variants_source
+    global unitspairs_source
 
     log = settings.mainlogger
 
@@ -78,6 +79,10 @@ def init():
                                                    ["id", "nb1", "nb2"])
     order_of_operations_variants_source = database.source(
         'calculation_order_of_operations_variants', ['id', 'nb1'])
+    unitspairs_source = database.source('units_conversions',
+                                        ['id', 'unit1', 'unit2',
+                                         'direction', 'category',
+                                         'level'])
 
     markup = latex.MARKUP
 

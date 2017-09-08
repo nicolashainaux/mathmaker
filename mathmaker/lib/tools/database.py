@@ -104,12 +104,9 @@ class source(object):
         for kw in kwargs:
             if kw == "raw":
                 result += " AND " + kwargs[kw] + " "
-            elif kw .endswith('_notmod'):
+            elif kw.endswith('_notmod'):
                 k = kw[:-7]
                 result += " AND " + k + " % " + str(kwargs[kw]) + " != 0 "
-            elif kw .endswith('_lt'):
-                k = kw[:-3]
-                result += " AND " + k + " < " + str(kwargs[kw]) + " "
             elif kw == "triangle_inequality":
                 common_nb, t1, t2 = kwargs[kw]
                 mini = str(abs(t1 - t2) + 1)  # we avoid "too flat" triangles
@@ -172,8 +169,26 @@ class source(object):
                     result += " AND nb1 = nb2 "
             elif kw == 'diff7atleast':
                 result += " AND nb2 - nb1 >= 7 "
-            else:
-                result += " AND " + kw + " = '" + str(kwargs[kw]) + "' "
+            else:  # default interpretation is " AND key = value "
+                key = kw
+                rel_sign = " = "
+                if kw.endswith('_lt'):
+                    rel_sign = " < "
+                    key = kw[:-3]
+                elif kw.endswith('_neq'):
+                    rel_sign = " != "
+                    key = kw[:-4]
+                simple_quote = ""
+                try:  # automatic detection of integers
+                    int(kwargs[kw])
+                except ValueError as excinfo:
+                    if ('invalid literal for int() with base 10'
+                        in str(excinfo)):
+                        simple_quote = "'"
+                    else:
+                        raise
+                result += " AND " + key + rel_sign + simple_quote \
+                    + str(kwargs[kw]) + simple_quote + " "
         return result
 
     ##
@@ -291,7 +306,8 @@ def classify_tag(tag):
                  'decimal_and_10_100_1000_for_multi',
                  'decimal_and_10_100_1000_for_divi',
                  'decimal_and_one_digit_for_multi',
-                 'decimal_and_one_digit_for_divi']:
+                 'decimal_and_one_digit_for_divi',
+                 'unitspairs']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -386,6 +402,30 @@ def translate_single_nb_tag(tag):
     """From single..._mintomax, get and return min and max in a dictionary."""
     n1, n2 = tag.split(sep='_')[1].split(sep='to')
     return {'nb1_min': n1, 'nb1_max': n2}
+
+
+def translate_units_pairs_tag(tag, last_draw=None, qkw=None):
+    """
+    Create the SQL query according to last_draw content and possible qkw.
+    """
+    d = {}
+    if qkw is None:
+        qkw = {}
+    if last_draw is None:
+        last_draw = {}
+    if 'level' in qkw:
+        d.update({'level': qkw['level']})
+    else:
+        d.update({'level': 1})
+    if 'category' in qkw:
+        d.update({'category': qkw['category']})
+    elif len(last_draw) >= 5:
+        d.update({'category_neq': last_draw[3]})
+    if 'direction' in qkw:
+        d.update({'direction': qkw['direction']})
+    elif len(last_draw) >= 5:
+        d.update({'direction_neq': last_draw[2]})
+    return d
 
 
 ##
@@ -484,6 +524,7 @@ def generate_values(source_id):
 def generate_random_decimal_nb(rank_to_use, width='random',
                                generation_type=None,
                                rank_matches_invisible_zero=False,
+                               unique_figures=True,
                                **options):
     if generation_type is None:
         if 'numberof' in options:
@@ -492,6 +533,8 @@ def generate_random_decimal_nb(rank_to_use, width='random',
             generation_type = random.choice(['default', 'alternative'])
     chosen_deci = Decimal('0')
     figures = [str(i + 1) for i in range(9)]
+    if not unique_figures:
+        figures = figures * 3
     random.shuffle(figures)
     ranks_scale = options.get('ranks_scale',
                               copy.copy(DEFAULT_RANKS_SCALE))
@@ -678,5 +721,11 @@ class mc_source(object):
             return shared.deci_one_digit_multi_source.next(**kwargs)
         elif tag_classification == 'decimal_and_one_digit_for_divi':
             return shared.deci_one_digit_divi_source.next(**kwargs)
+        elif tag_classification == 'unitspairs':
+            kwargs.update(translate_units_pairs_tag(source_id, qkw=qkw,
+                                                    last_draw=kwargs.get(
+                                                        'not_in', None)))
+            kwargs.pop('not_in', None)
+            return shared.unitspairs_source.next(**kwargs)
         elif tag_classification == 'nothing':
             return ()
