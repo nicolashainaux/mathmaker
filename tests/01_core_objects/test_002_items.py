@@ -61,6 +61,10 @@ def item_with_unit(): return Item(19.5, unit='cm')
 
 
 @pytest.fixture()
+def literal_item_with_unit(): return Item('?', unit='cm')
+
+
+@pytest.fixture()
 def literal_item(): return Item('AB')
 
 
@@ -342,11 +346,17 @@ def test_item_to_round_round_to_thousandth(item_to_round):
     assert item_to_round.round(3) == Item(6.548)
 
 
-def test_item_with_unit_printed(item_with_unit):
-    """Is Item(19.5, unit='cm') correctly printed?"""
+def test_items_with_unit_printed(item_with_unit, literal_item_with_unit):
+    """Are Items with units correctly printed?"""
     assert item_with_unit.into_str(display_unit=True,
                                    graphic_display=True,
                                    force_expression_begins=True) == '19.5~cm'
+    assert literal_item_with_unit.into_str(
+        display_unit=True, graphic_display=True,
+        force_expression_begins=True) == '?~cm'
+    assert literal_item_with_unit.into_str(
+        display_unit=True, force_expression_begins=True) \
+        == '\\text{?}~\\text{cm}'
 
 
 def test_item_eval():

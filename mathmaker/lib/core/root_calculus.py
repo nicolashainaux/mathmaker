@@ -612,12 +612,16 @@ class Value(Signed):
             if self._text_in_maths \
             else ''
 
+        if 'graphic_display' in options:
+            open_text_in_maths = close_text_in_maths = ''
+
         if self.is_numeric():
             if 'display_unit' in options and options['display_unit']:
                 unit_str = self.unit.into_str(**options) \
                     if isinstance(self.unit, Unit) \
                     else str(self.unit)
-                return sign + locale.str(self.abs_value) + unit_str
+                return sign + open_text_in_maths + locale.str(self.abs_value) \
+                    + close_text_in_maths + unit_str
             elif 'display_SI_unit' in options and options['display_SI_unit']:
                 unit_str = self.unit.into_str(**options) \
                     if isinstance(self.unit, Unit) \
@@ -637,6 +641,15 @@ class Value(Signed):
                 else str(self.unit)
             return sign + "\SI{" + self.abs_value + "}"\
                 "{" + unit_str + "}"
+
+        elif ('?' in self.raw_value and 'display_unit' in options
+              and options['display_unit']):
+            # __
+            unit_str = self.unit.into_str(**options) \
+                if isinstance(self.unit, Unit) \
+                else str(self.unit)
+            return sign + open_text_in_maths + self.abs_value \
+                + close_text_in_maths + unit_str
 
         else:  # self.is_literal()
             if (len(self.get_first_letter()) >= 2
