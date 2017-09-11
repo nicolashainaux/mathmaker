@@ -507,7 +507,7 @@ def split_nb(n, operation='sum', dig=0):
 
     By default, a and b have as many digits as n does. The 'dig' keyword tells
     how many extra digits must have a and b (compared to n).
-    For instance, if n=Decimal('2.5'), operation='sum', dig=1, then
+    For instance, if n=Decimal('4.5'), operation='sum', dig=1, then
     n will be split into 2-digits numbers, like 2.14 + 2.36.
 
     :param n: the number to split
