@@ -39,7 +39,8 @@ It will add all entries:
 - a list of angles' ranges (around 0, 90, 180, 270)
 - the list of variants identification numbers (from 0 to 23 and 100 to 155,
   so far) for calculation_order_of_operations questions
-- all unit conversions, sorted in categories and levels
+- all unit conversions, sorted in categories and levels,
+- decimals from 0.001 to 9.999
 """
 
 import os
@@ -128,6 +129,8 @@ def __main__():
               clever INTEGER)''')
     db.execute('''CREATE TABLE calculation_order_of_operations_variants
               (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
+    db.execute('''CREATE TABLE decimals
+              (id INTEGER PRIMARY KEY, nb1 DECIMAL(4, 1), drawDate INTEGER)''')
 
     sys.stderr.write('Insert data from locale/*/LC_MESSAGES/*.pot files...\n')
     # Extract data from po(t) files and insert them into the db
@@ -239,11 +242,19 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
-    sys.stderr.write('Insert single decimals...\n')
+    sys.stderr.write('Insert single decimals from 0.0 to 100.0...\n')
     # Single decimal numbers
     db_rows = [(i / 10, 0) for i in range(1001)]
     db.executemany("INSERT "
                    "INTO single_deci1(nb1, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert single decimals from 0.001 to 9.999...\n')
+    # Single decimal numbers
+    db_rows = [((i + 1) / 1000, 0) for i in range(9999)]
+    db.executemany("INSERT "
+                   "INTO decimals(nb1, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)
 

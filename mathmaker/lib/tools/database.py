@@ -308,7 +308,8 @@ def classify_tag(tag):
                  'decimal_and_10_100_1000_for_divi',
                  'decimal_and_one_digit_for_multi',
                  'decimal_and_one_digit_for_divi',
-                 'unitspairs', 'decimal_digits']:
+                 'unitspairs', 'decimal_digits',
+                 'decimals']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -746,5 +747,7 @@ class mc_source(object):
                                                         'not_in', None)))
             kwargs.pop('not_in', None)
             return shared.unitspairs_source.next(**kwargs)
+        elif tag_classification == 'decimals':
+            return shared.decimals_source.next(**kwargs)
         elif tag_classification == 'nothing':
             return ()
