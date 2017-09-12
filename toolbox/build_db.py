@@ -46,9 +46,11 @@ It will add all entries:
 import os
 import sys
 import sqlite3
+from decimal import Decimal
 
 from mathmaker import settings
 from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words
+from mathmaker.lib.tools import nonzero_digits_nb
 from mathmaker.lib.tools.frameworks import get_attributes
 
 INTPAIRS_MAX = 1000
@@ -130,7 +132,8 @@ def __main__():
     db.execute('''CREATE TABLE calculation_order_of_operations_variants
               (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
     db.execute('''CREATE TABLE decimals
-              (id INTEGER PRIMARY KEY, nb1 DECIMAL(4, 1), drawDate INTEGER)''')
+              (id INTEGER PRIMARY KEY, nb1 DECIMAL(4, 1), nz INTEGER,
+              drawDate INTEGER)''')
 
     sys.stderr.write('Insert data from locale/*/LC_MESSAGES/*.pot files...\n')
     # Extract data from po(t) files and insert them into the db
@@ -252,10 +255,13 @@ def __main__():
 
     sys.stderr.write('Insert single decimals from 0.001 to 9.999...\n')
     # Single decimal numbers
-    db_rows = [((i + 1) / 1000, 0) for i in range(9999)]
+    db_rows = [((i + 1) / 1000,
+                nonzero_digits_nb((Decimal(i + 1)) / Decimal(1000)),
+                0)
+               for i in range(9999)]
     db.executemany("INSERT "
-                   "INTO decimals(nb1, drawDate) "
-                   "VALUES(?, ?)",
+                   "INTO decimals(nb1, nz, drawDate) "
+                   "VALUES(?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert angle ranges...\n')
