@@ -383,6 +383,19 @@ def round_deci(d, precision, **options):
     return correct_normalize_results(d.quantize(precision, **options))
 
 
+def nonzero_digits_nb(n):
+    """
+    Return the number of nonzero digits of an int or decimal.Decimal.
+
+    :param n: the number to test
+    :type n: int or decimal.Decimal
+    :rtype: int
+    """
+    n = Decimal(abs(n))
+    z = str(n.quantize(Decimal(1)) if n == n.to_integral() else n.normalize())
+    return len(z) - z.count('0') - z.count('.')
+
+
 def decimal_places_nb(n):
     """
     Return the number of decimal places of an int or decimal.Decimal.

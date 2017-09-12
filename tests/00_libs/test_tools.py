@@ -28,7 +28,7 @@ from mathmaker.lib.tools import \
      move_digits_to, split_nb, is_power_of_10, decimal_places_nb,
      remove_digits_from, fix_digits, parse_layout_descriptor,
      fix_math_style2_fontsize, ext_dict, physical_quantity,
-     difference_of_orders_of_magnitude)
+     difference_of_orders_of_magnitude, nonzero_digits_nb)
 
 
 def test_recursive_update():
@@ -178,6 +178,15 @@ def test_is_power_of_10():
     for n in [0, 2, Decimal('0.5'), Decimal('-0.02'), Decimal('10.09'),
               1001, -999]:
         assert not is_power_of_10(n)
+
+
+def test_nonzero_digits_nb():
+    """Check nonzero_digits_nb() in different cases."""
+    assert nonzero_digits_nb(Decimal('0')) == 0
+    assert nonzero_digits_nb(Decimal('2.0')) == 1
+    assert nonzero_digits_nb(Decimal('0.2')) == 1
+    assert nonzero_digits_nb(Decimal('0.104')) == 2
+    assert nonzero_digits_nb(Decimal('30.506')) == 3
 
 
 def test_decimal_places_nb():
