@@ -25,9 +25,10 @@ from decimal import Decimal
 
 from mathmaker.lib.tools import \
     (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
-     move_digits_to, split_nb, is_power_of_10, digits_nb, remove_digits_from,
-     fix_digits, parse_layout_descriptor, fix_math_style2_fontsize, ext_dict,
-     physical_quantity, difference_of_orders_of_magnitude)
+     move_digits_to, split_nb, is_power_of_10, decimal_places_nb,
+     remove_digits_from, fix_digits, parse_layout_descriptor,
+     fix_math_style2_fontsize, ext_dict, physical_quantity,
+     difference_of_orders_of_magnitude)
 
 
 def test_recursive_update():
@@ -179,17 +180,20 @@ def test_is_power_of_10():
         assert not is_power_of_10(n)
 
 
-def test_digits_nb():
-    """Check digits_nb() in different cases."""
-    assert all(digits_nb(n) == 0 for n in [0, 1, 8, Decimal(4), Decimal('4.0'),
-                                           Decimal('4.00000000000000000000')])
-    assert all(digits_nb(n) == 1 for n in [Decimal('0.4'),
-                                           Decimal('10.000') / 4])
-    assert all(digits_nb(n) == 0 for n in [-0, -1, -8, Decimal(-4),
-                                           Decimal('-4.0'),
-                                           Decimal('-4.00000000000000000000')])
-    assert all(digits_nb(n) == 1 for n in [Decimal('-0.4'),
-                                           Decimal('-10.000') / 4])
+def test_decimal_places_nb():
+    """Check decimal_places_nb() in different cases."""
+    assert all(decimal_places_nb(n) == 0 for n in [0, 1, 8, Decimal(4),
+                                                   Decimal('4.0'),
+                                                   Decimal('4.0000000000000000'
+                                                           '0000')])
+    assert all(decimal_places_nb(n) == 1 for n in [Decimal('0.4'),
+                                                   Decimal('10.000') / 4])
+    assert all(decimal_places_nb(n) == 0 for n in [-0, -1, -8, Decimal(-4),
+                                                   Decimal('-4.0'),
+                                                   Decimal('-4.000000000000000'
+                                                           '00000')])
+    assert all(decimal_places_nb(n) == 1 for n in [Decimal('-0.4'),
+                                                   Decimal('-10.000') / 4])
 
 
 def test_split_nb():
@@ -217,13 +221,13 @@ def test_split_nb():
     assert result[0] - result[1] == 14
     result = split_nb(Decimal('4.3'))
     # Can not say 'all' will be decimals, because we could have: 3 + 1.3
-    assert any([digits_nb(r) == 1 for r in result])
+    assert any([decimal_places_nb(r) == 1 for r in result])
     result = split_nb(4, dig=2)
-    assert all([digits_nb(r) == 2 for r in result])
+    assert all([decimal_places_nb(r) == 2 for r in result])
     result = split_nb(-7)
     assert all(-6 <= r <= -1 for r in result)
     result = split_nb(Decimal('4.3'), dig=1)
-    assert all([digits_nb(r) == 2 for r in result])
+    assert all([decimal_places_nb(r) == 2 for r in result])
 
 
 def test_parse_layout_descriptor():

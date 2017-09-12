@@ -36,7 +36,7 @@ from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.constants.units import COMMON_LENGTH_UNITS
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.tools \
-    import (rotate, is_integer, digits_nb, )
+    import (rotate, is_integer, decimal_places_nb, )
 
 
 class structure(object):
@@ -405,8 +405,9 @@ class structure(object):
                         max_dn = 0
                     else:
                         max_dn = int(self.nb_variant[-1])
-                    if any(digits_nb(n) > max_dn for n in numbers):
-                        tests = [digits_nb(n) > max_dn for n in numbers]
+                    if any(decimal_places_nb(n) > max_dn for n in numbers):
+                        tests = [decimal_places_nb(n) > max_dn
+                                 for n in numbers]
                         msg += 'At least a number among ' \
                             + ', '.join(letters[0:len(numbers) - 1]) + ' and '\
                             + letters[len(numbers) - 1] \
@@ -414,7 +415,7 @@ class structure(object):
                                + 'tests = {t}; numbers = {n}') \
                             .format(m=max_dn, t=tests, n=numbers)
                     if (self.nb_variant.startswith('decimal')
-                        and all(digits_nb(n) == 0 for n in numbers)):
+                        and all(decimal_places_nb(n) == 0 for n in numbers)):
                         msg += ', '.join(letters[0:len(numbers) - 1]) \
                             + ' and ' \
                             + letters[len(numbers) - 1] + ' are all integers!'

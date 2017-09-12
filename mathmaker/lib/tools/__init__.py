@@ -383,9 +383,9 @@ def round_deci(d, precision, **options):
     return correct_normalize_results(d.quantize(precision, **options))
 
 
-def digits_nb(n):
+def decimal_places_nb(n):
     """
-    Return the number of significant digits of an int or decimal.Decimal.
+    Return the number of decimal places of an int or decimal.Decimal.
 
     :param n: the number to test
     :type n: int or decimal.Decimal
@@ -478,7 +478,7 @@ def remove_digits_from(number, to=None):
         raise TypeError('The first argument must be a decimal number.')
     if type(to) is not list:
         raise TypeError('Argument to: must be a list.')
-    n = Decimal(digits_nb(number))
+    n = Decimal(decimal_places_nb(number))
     try:
         i = to.index(next(x for x in to
                           if not is_integer(x / 10 ** n)))
@@ -521,8 +521,8 @@ def split_nb(n, operation='sum', dig=0):
     if operation not in ['sum', 'difference', '+', '-']:
         raise ValueError('Argument "operation" should be either \'sum\' or '
                          '\'difference\'.')
-    n_depth = digits_nb(n)
-    depth = dig + digits_nb(n)
+    n_depth = decimal_places_nb(n)
+    depth = dig + decimal_places_nb(n)
     if operation in ['sum', '+']:
         if is_power_of_10(n) and abs(n) <= 1 and dig == 0:
             # This case is impossible: write 1 as a sum of two natural

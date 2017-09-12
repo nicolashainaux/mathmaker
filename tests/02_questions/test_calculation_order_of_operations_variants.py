@@ -23,7 +23,7 @@
 # import pytest
 from decimal import Decimal
 
-from mathmaker.lib.tools import is_integer, digits_nb
+from mathmaker.lib.tools import is_integer, decimal_places_nb
 from mathmaker.lib.document.content.calculation \
     import calculation_order_of_operations
 
@@ -77,7 +77,7 @@ def test_variant3():
         subvariant='only_positive',
         direct_test=True)
     assert o.abcd[0] - o.abcd[1] / o.abcd[2] > 0
-    assert any(digits_nb(x) == 1 for x in [o.abcd[0], o.abcd[1]])
+    assert any(decimal_places_nb(x) == 1 for x in [o.abcd[0], o.abcd[1]])
 
 
 def test_variant5():
@@ -90,7 +90,7 @@ def test_variant5():
         subvariant='only_positive',
         direct_test=True)
     assert is_integer(o.abcd[1])
-    assert any(digits_nb(x) == 1 for x in [o.abcd[0], o.abcd[2]])
+    assert any(decimal_places_nb(x) == 1 for x in [o.abcd[0], o.abcd[2]])
 
 
 def test_variant6():
@@ -162,7 +162,7 @@ def test_variant10():
         nb_variant='decimal1',
         subvariant='only_positive',
         direct_test=True)
-    assert any(digits_nb(x) == 1 for x in [o.abcd[2], o.abcd[3]])
+    assert any(decimal_places_nb(x) == 1 for x in [o.abcd[2], o.abcd[3]])
 
 
 def test_variant11_naturals():

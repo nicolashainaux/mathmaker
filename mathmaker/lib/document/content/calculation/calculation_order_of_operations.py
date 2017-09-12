@@ -25,7 +25,7 @@ from decimal import Decimal
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools \
-    import (is_integer, move_digits_to, split_nb, digits_nb,
+    import (is_integer, move_digits_to, split_nb, decimal_places_nb,
             remove_digits_from, fix_digits)
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Division,
                                               Expandable)
@@ -180,7 +180,7 @@ class sub_object(component.structure):
         """
         # mad stands for maximum added depth
         if self.nb_variant.startswith('decimal'):
-            mad = int(self.nb_variant[-1]) - digits_nb(n)
+            mad = int(self.nb_variant[-1]) - decimal_places_nb(n)
         else:
             mad = 0
         mad = mad if mad > 0 else 0
@@ -191,17 +191,17 @@ class sub_object(component.structure):
             if (not self.allow_division_by_decimal
                 and self.nb_variant == 'decimal1'
                 and is_integer(n)):
-                return max(depth, digits_nb(n) + 1)
+                return max(depth, decimal_places_nb(n) + 1)
         elif self.variant in [103, 107]:  # a÷(b + c) a÷(b - c)
             N = kwargs['N']
             return max(depth,
-                       mad - digits_nb(N),
+                       mad - decimal_places_nb(N),
                        random.choice([i for i in range(mad + 1)]))
         elif self.variant in [108, 112, 109, 113, 110, 114, 111, 115]:
             # a×(b ± c)×d   a×(b ± c)÷d  a÷(b ± c)×d  a÷(b ± c)÷d
             N, P = kwargs['N'], kwargs['P']
             return max(depth,
-                       mad - digits_nb(N) - digits_nb(P),
+                       mad - decimal_places_nb(N) - decimal_places_nb(P),
                        random.choice([i for i in range(mad + 1)]))
         elif 148 <= self.variant <= 155:
             # (a±b)×(c±d) and (a±b)÷(c±d)
@@ -461,7 +461,7 @@ class sub_object(component.structure):
                        'c isnt 0; b isnt 0; b isnt 1; b isnt deci', a, b, c)
         elif self.variant == 6:  # a×b - c
             if self.subvariant == 'only_positive' and a * b < c:
-                depth = digits_nb(a * b)
+                depth = decimal_places_nb(a * b)
                 c = Decimal(str(random.choice(
                     [i + 1
                      for i in range(int(a * b * (10 ** depth)))]))) \
