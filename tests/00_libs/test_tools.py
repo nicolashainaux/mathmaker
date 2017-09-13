@@ -25,10 +25,10 @@ from decimal import Decimal
 
 from mathmaker.lib.tools import \
     (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
-     move_digits_to, split_nb, is_power_of_10, decimal_places_nb,
+     move_digits_to,
      remove_digits_from, fix_digits, parse_layout_descriptor,
      fix_math_style2_fontsize, ext_dict, physical_quantity,
-     difference_of_orders_of_magnitude, nonzero_digits_nb)
+     difference_of_orders_of_magnitude)
 
 
 def test_recursive_update():
@@ -162,81 +162,6 @@ def test_fix_digits():
     n1, n2, n3 = fix_digits(Decimal('0.6'), Decimal('10'), Decimal('100'))
     assert n1 == Decimal('6')
     assert not is_integer(n2) or not is_integer(n3)
-
-
-def test_is_power_of_10():
-    """Check is_power_of_10() in different cases."""
-    with pytest.raises(TypeError):
-        is_power_of_10(0.01)
-    with pytest.raises(TypeError):
-        is_power_of_10('10')
-    for n in [1, 10, 100, 1000, 10000, -1, -10, -100]:
-        assert is_power_of_10(n)
-    for n in [Decimal('0.1'), Decimal('0.01'), Decimal('0.001'),
-              Decimal('-0.1'), Decimal('-0.01'), Decimal('-0.001')]:
-        assert is_power_of_10(n)
-    for n in [0, 2, Decimal('0.5'), Decimal('-0.02'), Decimal('10.09'),
-              1001, -999]:
-        assert not is_power_of_10(n)
-
-
-def test_nonzero_digits_nb():
-    """Check nonzero_digits_nb() in different cases."""
-    assert nonzero_digits_nb(Decimal('0')) == 0
-    assert nonzero_digits_nb(Decimal('2.0')) == 1
-    assert nonzero_digits_nb(Decimal('0.2')) == 1
-    assert nonzero_digits_nb(Decimal('0.104')) == 2
-    assert nonzero_digits_nb(Decimal('30.506')) == 3
-
-
-def test_decimal_places_nb():
-    """Check decimal_places_nb() in different cases."""
-    assert all(decimal_places_nb(n) == 0 for n in [0, 1, 8, Decimal(4),
-                                                   Decimal('4.0'),
-                                                   Decimal('4.0000000000000000'
-                                                           '0000')])
-    assert all(decimal_places_nb(n) == 1 for n in [Decimal('0.4'),
-                                                   Decimal('10.000') / 4])
-    assert all(decimal_places_nb(n) == 0 for n in [-0, -1, -8, Decimal(-4),
-                                                   Decimal('-4.0'),
-                                                   Decimal('-4.000000000000000'
-                                                           '00000')])
-    assert all(decimal_places_nb(n) == 1 for n in [Decimal('-0.4'),
-                                                   Decimal('-10.000') / 4])
-
-
-def test_split_nb():
-    """Check split_nb() in different cases."""
-    with pytest.raises(ValueError):
-        split_nb(10, operation='*')
-    with pytest.warns(UserWarning):
-        split_nb(1)
-    with pytest.warns(UserWarning):
-        split_nb(Decimal('0.1'))
-    with pytest.warns(UserWarning):
-        split_nb(Decimal('0.01'))
-    result = split_nb(14)
-    assert type(result) is tuple
-    assert len(result) is 2
-    assert is_integer(result[0]) and is_integer(result[1])
-    assert 1 <= result[0] <= 13
-    assert 1 <= result[1] <= 13
-    for i in range(99):
-        result = split_nb(14)
-        assert 1 <= result[0] <= 13
-        assert 1 <= result[1] <= 13
-    result = split_nb(14, operation='-')
-    assert all([is_integer(r) for r in result])
-    assert result[0] - result[1] == 14
-    result = split_nb(Decimal('4.3'))
-    # Can not say 'all' will be decimals, because we could have: 3 + 1.3
-    assert any([decimal_places_nb(r) == 1 for r in result])
-    result = split_nb(4, dig=2)
-    assert all([decimal_places_nb(r) == 2 for r in result])
-    result = split_nb(-7)
-    assert all(-6 <= r <= -1 for r in result)
-    result = split_nb(Decimal('4.3'), dig=1)
-    assert all([decimal_places_nb(r) == 2 for r in result])
 
 
 def test_parse_layout_descriptor():

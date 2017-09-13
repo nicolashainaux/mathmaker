@@ -35,8 +35,8 @@ from abc import ABCMeta, abstractmethod
 from mathmaker import settings
 from mathmaker.lib.core.root_calculus import Calculable, Value, Exponented
 from mathmaker.lib.tools import is_integer, is_natural, is_number
-from mathmaker.lib.tools import decimal_places_nb
 from mathmaker.lib.tools import difference_of_orders_of_magnitude
+from mathmaker.lib.tools.number import Number
 from mathmaker.lib.tools.maths import (sign_of_product, gcd, pupil_gcd,
                                        lcm_of_the_list, is_even, is_uneven,
                                        prime_factors,
@@ -2630,7 +2630,7 @@ class Fraction(Quotient):
 
         # 4th CASE:
         elif isinstance(arg, Decimal):
-            f = 10 ** max(1, decimal_places_nb(arg))
+            f = 10 ** max(1, Number(arg).decimal_places_nb())
             self._numerator = Product([Item(f * arg)])
             self._denominator = Product([Item(f)])
 

@@ -26,14 +26,14 @@ import sys
 import logging
 import errno
 import copy
-import warnings
 import random
 import re
 import subprocess
-from decimal import Decimal, ROUND_DOWN
+from decimal import Decimal
 from tempfile import TemporaryFile
 
 
+from mathmaker.lib.tools.number import Number
 from mathmaker.lib.constants.units import (LENGTH_UNITS, MASS_UNITS,
                                            CAPACITY_UNITS, PHYSICAL_QUANTITIES)
 
@@ -147,16 +147,16 @@ def po_file_get_list_of(what, language, arg):
 
 def is_number(n):
     """Check if n is a number."""
-    return type(n) in [float, int, Decimal]
+    return any(isinstance(n, c) for c in [float, int, Decimal])
 
 
 def is_integer(n):
     """Check if number n is an integer."""
-    if type(n) is int:
+    if isinstance(n, int):
         return True
-    elif type(n) is float:
+    elif isinstance(n, float):
         return n.is_integer()
-    elif type(n) is Decimal:
+    elif isinstance(n, Decimal):
         return n % 1 == 0
     else:
         raise TypeError('Expected a number, either float, int or Decimal,'
@@ -366,86 +366,18 @@ def fix_math_style2_fontsize(text, mathsize='\Large',
     return text
 
 
-def standardize_decimal(d):
-    """Transform the xE+n results in decimal form (ex. 1E+1 -> 10)"""
-    if not isinstance(d, Decimal):
-        raise TypeError('Expected a Decimal, got a '
-                        + str(type(d)) + 'instead')
-    return d.quantize(Decimal(1)) if d == d.to_integral() else d.normalize()
-
-
-def round_deci(d, precision, **options):
-    """Correctly round a Decimal"""
-    if not isinstance(d, Decimal):
-        raise TypeError('Expected a Decimal, got a '
-                        + str(type(d)) + 'instead')
-    return standardize_decimal(d.quantize(precision, **options))
-
-
-def nonzero_digits_nb(n):
+def move_digits_to(n, from_nb=None):
     """
-    Return the number of nonzero digits of an int or decimal.Decimal.
-
-    :param n: the number to test
-    :type n: int or decimal.Decimal
-    :rtype: int
-    """
-    n = str(standardize_decimal(Decimal(abs(n))))
-    return len(n) - n.count('0') - n.count('.')
-
-
-def decimal_places_nb(n):
-    """
-    Return the number of decimal places of an int or decimal.Decimal.
-
-    :param n: the number to test
-    :type n: int or decimal.Decimal
-    :rtype: int
-    """
-    if is_integer(abs(n)):
-        return 0
-    n = standardize_decimal(Decimal(abs(n)))
-    temp = len(str((n - round_deci(n, Decimal(1), rounding=ROUND_DOWN)))) - 2
-    return temp if temp >= 0 else 0
-
-
-def is_power_of_10(n):
-    """
-    Check if n is a power of ten.
-
-    :param n: the number to test
-    :type n: int or decimal.Decimal
-    :rtype: boolean
-    """
-    if not is_number(n) or type(n) is float:
-        raise TypeError('Argument n must be either int or decimal.Decimal.')
-    n = Decimal(abs(n))
-    if Decimal(10) <= n:
-        return is_power_of_10(n / 10)
-    if Decimal(1) < n < Decimal(10):
-        return False
-    elif n == Decimal(1):
-        return True
-    elif Decimal('0.1') < n < Decimal(1):
-        return False
-    elif 0 < n <= Decimal('0.1'):
-        return is_power_of_10(n * 10)
-    elif n == 0:
-        return False
-
-
-def move_digits_to(N, from_nb=None):
-    """
-    Turn N into decimal instead of all decimals found in the from_nb list.
+    Turn n into decimal instead of all decimals found in the from_nb list.
 
     Each decimal found in the numbers' list will be recursively replaced by
     10 times itself (until it is no decimal anymore) while in the same time
-    N will be divided by 10.
+    n will be divided by 10.
 
     This is useful for the case division by a decimal is unwanted.
 
-    :param N: the number who will be divided by 10 instead of the others
-    :type N: any number (int, Decimal, float though they're not advised)
+    :param n: the number who will be divided by 10 instead of the others
+    :type n: any number (int, Decimal, float though they're not advised)
     :param from_nb: an iterable containing the numbers that must be integers
     :type from_nb: a list (of numbers)
     :rtype: a list (of numbers)
@@ -453,19 +385,19 @@ def move_digits_to(N, from_nb=None):
     if type(from_nb) is not list:
         raise TypeError('A list of numbers must be given as argument '
                         '\'numbers\'.')
-    if not is_number(N):
+    if not is_number(n):
         raise TypeError('The first argument must be a number.')
-    N = Decimal(str(N))
-    if all([is_integer(n) for n in from_nb]):
-        return [N, ] + [n for n in from_nb]
+    n = Decimal(str(n))
+    if all([is_integer(i) for i in from_nb]):
+        return [n, ] + [i for i in from_nb]
     numbers_copy = copy.deepcopy(from_nb)
-    for i, n in enumerate(from_nb):
-        if not is_number(n):
+    for i, j in enumerate(from_nb):
+        if not is_number(j):
             raise TypeError('Each variable of the list must be a number.')
-        if not is_integer(n):
-            numbers_copy[i] = n * 10
-            return move_digits_to(N / 10, from_nb=numbers_copy)
-    return [N, ] + [n for n in from_nb]
+        if not is_integer(j):
+            numbers_copy[i] = j * 10
+            return move_digits_to(n / 10, from_nb=numbers_copy)
+    return [n, ] + [i for i in from_nb]
 
 
 def remove_digits_from(number, to=None):
@@ -482,21 +414,21 @@ def remove_digits_from(number, to=None):
     :type to: list
     :rtype: a list (of numbers)
     """
-    if type(number) is not Decimal:
+    if not isinstance(number, Decimal):
         raise TypeError('The first argument must be a Decimal number.')
     if is_integer(number):
         raise TypeError('The first argument must be a decimal number.')
     if type(to) is not list:
         raise TypeError('Argument to: must be a list.')
-    n = Decimal(decimal_places_nb(number))
+    n = Number(number).decimal_places_nb()
     try:
         i = to.index(next(x for x in to
                           if not is_integer(x / 10 ** n)))
     except StopIteration:
         raise ValueError('None of the numbers of to can be turned into '
                          'decimal.')
-    to[i] = to[i] / 10 ** n
-    return [number * 10 ** n, ] + [x for x in to]
+    to[i] = Number(to[i]) / Number(10) ** n
+    return [Number(number * 10 ** n).standardized(), ] + [x for x in to]
 
 
 def fix_digits(n1, *n2):
@@ -509,62 +441,6 @@ def fix_digits(n1, *n2):
         n2[j] += random.choice([i for i in range(-4, 5) if i != 0])
         n1, *n2 = remove_digits_from(n1, to=n2)
     return (n1, *n2)
-
-
-def split_nb(n, operation='sum', dig=0):
-    """
-    Split n as a sum, like a + b = n; or a difference, like a - b = n
-
-    By default, a and b have as many digits as n does. The 'dig' keyword tells
-    how many extra digits must have a and b (compared to n).
-    For instance, if n=Decimal('4.5'), operation='sum', dig=1, then
-    n will be split into 2-digits numbers, like 2.14 + 2.36.
-
-    :param n: the number to split
-    :type n: a number (preferably an int or a Decimal, but can be a float too)
-    :param operation: must be 'sum', 'difference', '+' or '-'
-    :type operation: str
-    :param dig: extra depth level to use
-    :type dig: int
-    :rtype: tuple (of numbers)
-    """
-    if operation not in ['sum', 'difference', '+', '-']:
-        raise ValueError('Argument "operation" should be either \'sum\' or '
-                         '\'difference\'.')
-    n_depth = decimal_places_nb(n)
-    depth = dig + decimal_places_nb(n)
-    if operation in ['sum', '+']:
-        if is_power_of_10(n) and abs(n) <= 1 and dig == 0:
-            # This case is impossible: write 1 as a sum of two natural
-            # numbers bigger than 1, or 0.1 as a sum of two positive decimals
-            # having 1 digit either, etc. so we arbitrarily replace n by
-            # a random number between 2 and 9
-            warnings.warn('mathmaker is asked something impossible (split {}'
-                          'as a sum of two numbers having as many digits)'
-                          .format(n))
-            n = random.choice([i + 2 for i in range(7)])
-            n = n * (10 ** (Decimal(- n_depth)))
-        amplitude = n
-    elif operation in ['difference', '-']:
-        amplitude = max(10 ** (n_depth), n)
-    start, end = 0, int((amplitude) * 10 ** depth - 1)
-    if start > end:
-        start, end = end + 1, -1
-    # default: all numbers, including integers
-    seq = [(Decimal(i) + 1) / Decimal(10) ** Decimal(depth)
-           for i in range(start, end)]
-    # then if decimals are wanted, we remove the results that do not match
-    # the wanted "depth" (if depth == 2, we remove 0.4 for instance)
-    if depth >= 1:
-            seq = [n for n in seq
-                   if not is_integer(n * (10 ** (depth - 1)))]
-    if operation in ['sum', '+']:
-        a = random.choice(seq)
-        b = n - a
-    elif operation in ['difference', '-']:
-        b = random.choice(seq)
-        a = n + b
-    return (a, b)
 
 
 def physical_quantity(unit):

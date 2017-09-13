@@ -50,7 +50,7 @@ from decimal import Decimal
 
 from mathmaker import settings
 from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words
-from mathmaker.lib.tools import nonzero_digits_nb
+from mathmaker.lib.tools.number import Number
 from mathmaker.lib.tools.frameworks import get_attributes
 
 INTPAIRS_MAX = 1000
@@ -256,7 +256,7 @@ def __main__():
     sys.stderr.write('Insert single decimals from 0.001 to 9.999...\n')
     # Single decimal numbers
     db_rows = [((i + 1) / 1000,
-                nonzero_digits_nb((Decimal(i + 1)) / Decimal(1000)),
+                Number((Decimal(i + 1)) / Decimal(1000)).nonzero_digits_nb(),
                 0)
                for i in range(9999)]
     db.executemany("INSERT "

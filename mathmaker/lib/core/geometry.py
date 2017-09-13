@@ -32,8 +32,8 @@ import random
 from decimal import Decimal, ROUND_HALF_UP
 
 from mathmaker.lib.constants import EQUAL_PRODUCTS
-from mathmaker.lib.tools \
-    import is_number, round_deci, parse_layout_descriptor
+from mathmaker.lib.tools import is_number, parse_layout_descriptor
+from mathmaker.lib.tools.number import Number
 from mathmaker.lib.tools.maths import barycenter, POLYGONS_NATURES
 from .root_calculus import Evaluable, Value, Unit
 from .base_calculus import Item, Product, Sum, Function, AngleItem
@@ -358,11 +358,10 @@ class Polygon(Drawable):
             if a.label != Value(''):
                 scale_factor = Decimal('2.7')
                 if Decimal(str(a.measure)) < Decimal('28.5'):
-                    scale_factor = round_deci(
+                    scale_factor = Number(
                         Decimal('38.1') * pow(Decimal(str(a.measure)),
-                                              Decimal('-0.8')),
-                        Decimal('0.01'),
-                        rounding=ROUND_HALF_UP)
+                                              Decimal('-0.8')))\
+                        .round(Decimal('0.01'), rounding=ROUND_HALF_UP)
 
                 label_display_angle = \
                     Vector((a.points[1], a.points[0]))\

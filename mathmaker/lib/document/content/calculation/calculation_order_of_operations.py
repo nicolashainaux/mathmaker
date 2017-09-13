@@ -25,10 +25,10 @@ from decimal import Decimal
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools \
-    import (is_integer, move_digits_to, split_nb, decimal_places_nb,
-            remove_digits_from, fix_digits)
+    import is_integer, move_digits_to, remove_digits_from, fix_digits
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Division,
                                               Expandable)
+from mathmaker.lib.tools.number import Number
 from mathmaker.lib.core.calculus import Expression
 from mathmaker.lib.document.content import component
 
@@ -180,7 +180,7 @@ class sub_object(component.structure):
         """
         # mad stands for maximum added depth
         if self.nb_variant.startswith('decimal'):
-            mad = int(self.nb_variant[-1]) - decimal_places_nb(n)
+            mad = int(self.nb_variant[-1]) - Number(n).decimal_places_nb()
         else:
             mad = 0
         mad = mad if mad > 0 else 0
@@ -191,17 +191,18 @@ class sub_object(component.structure):
             if (not self.allow_division_by_decimal
                 and self.nb_variant == 'decimal1'
                 and is_integer(n)):
-                return max(depth, decimal_places_nb(n) + 1)
+                return max(depth, Number(n).decimal_places_nb() + 1)
         elif self.variant in [103, 107]:  # a÷(b + c) a÷(b - c)
             N = kwargs['N']
             return max(depth,
-                       mad - decimal_places_nb(N),
+                       mad - Number(N).decimal_places_nb(),
                        random.choice([i for i in range(mad + 1)]))
         elif self.variant in [108, 112, 109, 113, 110, 114, 111, 115]:
             # a×(b ± c)×d   a×(b ± c)÷d  a÷(b ± c)×d  a÷(b ± c)÷d
             N, P = kwargs['N'], kwargs['P']
             return max(depth,
-                       mad - decimal_places_nb(N) - decimal_places_nb(P),
+                       mad - Number(N).decimal_places_nb()
+                       - Number(P).decimal_places_nb(),
                        random.choice([i for i in range(mad + 1)]))
         elif 148 <= self.variant <= 155:
             # (a±b)×(c±d) and (a±b)÷(c±d)
@@ -461,7 +462,7 @@ class sub_object(component.structure):
                        'c isnt 0; b isnt 0; b isnt 1; b isnt deci', a, b, c)
         elif self.variant == 6:  # a×b - c
             if self.subvariant == 'only_positive' and a * b < c:
-                depth = decimal_places_nb(a * b)
+                depth = Number(a * b).decimal_places_nb()
                 c = Decimal(str(random.choice(
                     [i + 1
                      for i in range(int(a * b * (10 ** depth)))]))) \
@@ -645,9 +646,9 @@ class sub_object(component.structure):
         ops = '+' if self.variant == 100 else '-'
         opn = 1 if self.variant == 100 else -1
         c = self.nb2
-        a, b = split_nb(self.nb1, operation=ops,
-                        dig=self.adjust_depth(self.allow_extra_digits,
-                                              n=self.nb1))
+        a, b = Number(self.nb1) \
+            .split(operation=ops,
+                   dig=self.adjust_depth(self.allow_extra_digits, n=self.nb1))
         self.obj = Product([Sum([Item(a), Item(opn * b)]),
                             Item(c)])
         self.watch('no negative; c isnt 1; decimals distribution', a, b, c)
@@ -658,9 +659,9 @@ class sub_object(component.structure):
         opn = 1 if self.variant == 101 else -1
         c = self.nb2
         self.nb1 = self.nb1 * self.nb2
-        a, b = split_nb(self.nb1, operation=ops,
-                        dig=self.adjust_depth(self.allow_extra_digits,
-                                              n=self.nb1))
+        a, b = Number(self.nb1) \
+            .split(operation=ops,
+                   dig=self.adjust_depth(self.allow_extra_digits, n=self.nb1))
         self.obj = Division(('+', Sum([a, opn * b]), c))
         self.watch('no negative; c isnt 1; c isnt deci; decimals distribution',
                    a, b, c)
@@ -670,9 +671,9 @@ class sub_object(component.structure):
         ops = '+' if self.variant == 101 else '-'
         opn = 1 if self.variant == 101 else -1
         a = self.nb1
-        b, c = split_nb(self.nb2, operation=ops,
-                        dig=self.adjust_depth(self.allow_extra_digits,
-                                              n=self.nb2))
+        b, c = Number(self.nb2) \
+            .split(operation=ops,
+                   dig=self.adjust_depth(self.allow_extra_digits, n=self.nb2))
         self.obj = Product([Item(a),
                             Sum([Item(b), Item(opn * c)])],
                            compact_display=False)
@@ -683,9 +684,10 @@ class sub_object(component.structure):
         ops = '+' if self.variant == 101 else '-'
         opn = 1 if self.variant == 101 else -1
         a = self.nb1 * self.nb2
-        b, c = split_nb(self.nb2, operation=ops,
-                        dig=self.adjust_depth(self.allow_extra_digits,
-                                              n=self.nb2, N=a))
+        b, c = Number(self.nb2) \
+            .split(operation=ops,
+                   dig=self.adjust_depth(self.allow_extra_digits,
+                                         n=self.nb2, N=a))
         self.obj = Division(('+', a, Sum([b, opn * c])))
         d = b + opn * c
         self.watch('no negative; d isnt deci; decimals distribution',
@@ -697,9 +699,10 @@ class sub_object(component.structure):
         opn = 1 if self.variant == 108 else -1
         a = self.nb1
         d = self.nb3
-        b, c = split_nb(self.nb2, operation=ops,
-                        dig=self.adjust_depth(self.allow_extra_digits,
-                                              n=self.nb2, N=a, P=d))
+        b, c = Number(self.nb2) \
+            .split(operation=ops,
+                   dig=self.adjust_depth(self.allow_extra_digits,
+                                         n=self.nb2, N=a, P=d))
         self.obj = Product([Item(a),
                             Sum([Item(b), Item(opn * c)]),
                             Item(d)],
@@ -715,9 +718,10 @@ class sub_object(component.structure):
         d = self.nb3
         nb2 = self.nb2
         self.nb2 = self.nb2 * self.nb3
-        b, c = split_nb(self.nb2, operation=ops,
-                        dig=self.adjust_depth(self.allow_extra_digits,
-                                              n=self.nb2, N=a, P=d))
+        b, c = Number(self.nb2) \
+            .split(operation=ops,
+                   dig=self.adjust_depth(self.allow_extra_digits,
+                                         n=self.nb2, N=a, P=d))
         if (all(is_integer(x) for x in [self.nb2, d, nb2])
             or (not is_integer(self.nb2) and not a % 10 == 0)):
             self.obj = Product([a, Division(('+', Sum([b, opn * c]), d))],
@@ -736,9 +740,10 @@ class sub_object(component.structure):
         opn = 1 if self.variant == 110 else -1
         a = self.nb2 * self.nb3
         d = self.nb1
-        b, c = split_nb(self.nb3, operation=ops,
-                        dig=self.adjust_depth(self.allow_extra_digits,
-                                              n=self.nb3, N=a, P=d))
+        b, c = Number(self.nb3) \
+            .split(operation=ops,
+                   dig=self.adjust_depth(self.allow_extra_digits,
+                                         n=self.nb3, N=a, P=d))
         self.obj = Product([Division(('+', a, Sum([b, opn * c]))),
                             d],
                            compact_display=False)
@@ -752,9 +757,10 @@ class sub_object(component.structure):
         opn = 1 if self.variant == 111 else -1
         a = self.nb1 * self.nb2 * self.nb3
         d = self.nb3
-        b, c = split_nb(self.nb2, operation=ops,
-                        dig=self.adjust_depth(self.allow_extra_digits,
-                                              n=self.nb2, N=a, P=d))
+        b, c = Number(self.nb2) \
+            .split(operation=ops,
+                   dig=self.adjust_depth(self.allow_extra_digits,
+                                         n=self.nb2, N=a, P=d))
         self.obj = Division(('+',
                              Division(('+', a, Sum([b, opn * c]))),
                              d))
@@ -1180,18 +1186,19 @@ class sub_object(component.structure):
         cd_signs.update(dict.fromkeys([150, 151, 154, 155], '-'))
         opn_signs = {'+': 1, '-': -1}
         if self.variant in [148, 150, 152, 154]:
-            a, b = split_nb(self.nb1, operation=ab_signs[self.variant],
-                            dig=self.adjust_depth(self.allow_extra_digits,
-                                                  n=self.nb1))
+            a, b = Number(self.nb1) \
+                .split(operation=ab_signs[self.variant],
+                       dig=self.adjust_depth(self.allow_extra_digits,
+                                             n=self.nb1))
         else:
-            a, b = split_nb(self.nb1 * self.nb2,
-                            operation=ab_signs[self.variant],
-                            dig=self.adjust_depth(self.allow_extra_digits,
-                                                  n=self.nb1 * self.nb2))
-        c, d = split_nb(self.nb2, operation=cd_signs[self.variant],
-                        dig=self.adjust_depth(self.allow_extra_digits,
-                                              n=self.nb2, last=True,
-                                              N=a, P=b))
+            a, b = Number(self.nb1 * self.nb2) \
+                .split(operation=ab_signs[self.variant],
+                       dig=self.adjust_depth(self.allow_extra_digits,
+                                             n=self.nb1 * self.nb2))
+        c, d = Number(self.nb2) \
+            .split(operation=cd_signs[self.variant],
+                   dig=self.adjust_depth(self.allow_extra_digits,
+                                         n=self.nb2, last=True, N=a, P=b))
         nabs = opn_signs[ab_signs[self.variant]]
         ncds = opn_signs[cd_signs[self.variant]]
         if self.variant in [148, 150, 152, 154]:
@@ -1250,9 +1257,10 @@ class sub_object(component.structure):
                     a += b
         if self.variant in [157, 159, 161, 163, 166, 170, 167, 171]:
             b = self.nb2 * self.nb3
-        c, d = split_nb(self.nb3, operation=cd_signs[self.variant],
-                        dig=self.adjust_depth(self.allow_extra_digits,
-                                              n=self.nb3, N=a, P=b))
+        c, d = Number(self.nb3) \
+            .split(operation=cd_signs[self.variant],
+                   dig=self.adjust_depth(self.allow_extra_digits,
+                                         n=self.nb3, N=a, P=b))
         if self.variant in [156, 158, 160, 162]:
             self.obj = Sum([a,
                             Product([nbs * b,
@@ -1326,15 +1334,15 @@ class sub_object(component.structure):
                 remove_digits_from(self.nb1, to=[self.nb3])
         c, d = self.nb2, self.nb3
         if self.variant in [172, 173, 176, 177, 180, 182, 184, 186]:
-            a, b = split_nb(self.nb1, operation=b_signs[self.variant],
-                            dig=self.adjust_depth(self.allow_extra_digits,
-                                                  n=self.nb1, N=c, P=d))
+            a, b = Number(self.nb1) \
+                .split(operation=b_signs[self.variant],
+                       dig=self.adjust_depth(self.allow_extra_digits,
+                                             n=self.nb1, N=c, P=d))
         else:
-            a, b = split_nb(self.nb1 * self.nb2,
-                            operation=b_signs[self.variant],
-                            dig=self.adjust_depth(self.allow_extra_digits,
-                                                  n=self.nb1 * self.nb2,
-                                                  N=c, P=d))
+            a, b = Number(self.nb1 * self.nb2) \
+                .split(operation=b_signs[self.variant],
+                       dig=self.adjust_depth(self.allow_extra_digits,
+                                             n=self.nb1 * self.nb2, N=c, P=d))
         if self.subvariant == 'only_positive':
             if ((self.variant in [173, 177] and self.nb1 * self.nb2 < self.nb3)
                 or (self.variant in [175, 179] and self.nb1 < self.nb3)

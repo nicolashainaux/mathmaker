@@ -32,7 +32,7 @@ from decimal import (Decimal, getcontext, Rounded, ROUND_HALF_UP, ROUND_DOWN,
                      InvalidOperation)
 from abc import ABCMeta, abstractmethod
 
-from mathmaker.lib.tools import round_deci
+from mathmaker.lib.tools.number import Number
 from mathmaker.lib.core.utils import check_lexicon_for_substitution
 from mathmaker.lib.constants.numeration \
     import (UNIT, TENTH, HUNDREDTH, THOUSANDTH, TEN_THOUSANDTH, PRECISION,
@@ -420,10 +420,7 @@ class Value(Signed):
         if 'unit' in options:
             self._unit = Unit(options['unit'])
 
-        if (type(arg) == float
-            or type(arg) == int
-            or type(arg) == Decimal):
-            # __
+        if any([isinstance(arg, c) for c in [float, int, Decimal]]):
             self._raw_value = Decimal(str(arg))
             if arg >= 0:
                 self._sign = '+'
@@ -485,9 +482,7 @@ class Value(Signed):
 
     @raw_value.setter
     def raw_value(self, arg):
-        if (type(arg) == float
-            or type(arg) == int
-            or type(arg) == Decimal):
+        if any([isinstance(arg, c) for c in [float, int, Decimal]]):
             # __
             self._raw_value = Decimal(str(arg))
             if arg >= 0:
@@ -495,7 +490,7 @@ class Value(Signed):
             else:
                 self._sign = '-'
 
-        elif type(arg) == str:
+        elif isinstance(arg, str):
             try:
                 self._raw_value = Decimal(arg)
             except InvalidOperation:
@@ -791,17 +786,13 @@ class Value(Signed):
                             'THOUSANDTH, TEN_THOUSANDTH, or 0, 1, 2, 3 or 4.')
         else:
             result_value = self.clone()
-
             if type(precision) == int:
-                result_value.raw_value = round_deci(
-                    self.raw_value,
-                    Decimal(PRECISION[precision]),
-                    rounding=ROUND_HALF_UP)
+                result_value.raw_value = Number(self.raw_value)\
+                    .round(Decimal(PRECISION[precision]),
+                           rounding=ROUND_HALF_UP)
             else:
-                result_value.raw_value = round_deci(
-                    self.raw_value,
-                    Decimal(precision),
-                    rounding=ROUND_HALF_UP)
+                result_value.raw_value = Number(self.raw_value)\
+                    .round(Decimal(precision), rounding=ROUND_HALF_UP)
 
             if self.needs_to_get_rounded(precision):
                 result_value.set_has_been_rounded(True)
@@ -817,9 +808,9 @@ class Value(Signed):
                             'numeric Value')
         else:
             temp_result = len(str((self.raw_value
-                                   - round_deci(self.raw_value,
-                                                Decimal(UNIT),
-                                                rounding=ROUND_DOWN)))) - 2
+                                   - Number(self.raw_value)
+                                   .round(Decimal(UNIT),
+                                          rounding=ROUND_DOWN)))) - 2
             if temp_result < 0:
                 return 0
             else:
@@ -891,7 +882,8 @@ class Value(Signed):
     ##
     #   @brief True if the object only contains numeric objects
     def is_numeric(self, displ_as=False):
-        return type(self.raw_value) in [float, int, Decimal]
+        return any([isinstance(self.raw_value, c)
+                    for c in [float, int, Decimal]])
 
     # --------------------------------------------------------------------------
     ##

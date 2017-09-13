@@ -23,7 +23,6 @@
 import pytest
 # from decimal import Decimal
 
-# from mathmaker.lib.tools import is_integer, decimal_places_nb
 from mathmaker.lib.document.content.calculation import subtr_direct
 
 
