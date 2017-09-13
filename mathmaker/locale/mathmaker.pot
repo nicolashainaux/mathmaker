@@ -1962,20 +1962,18 @@ msgstr ""
 msgid "Mental calculation: additions and subtractions with a hole"
 msgstr ""
 
+#: lib/document/content/calculation/decimal_numerals.py:78
+msgid "{} (or {} etc.)"
+msgstr ""
+
 #: lib/document/content/calculation/decimal_numerals.py:63
-msgid "Decimal representation of {}?"
+msgid "What is {} as a decimal?"
 msgstr ""
 
 #: lib/document/content/calculation/decimal_numerals.py:68
-msgid "Decimal fraction equal to {}?"
+msgid "What is {} as a decimal fraction?"
 msgstr ""
 
 #: data/frameworks/mental_calculation/03_yellow.yaml:34
-msgid ""
-"Mental calculation: transform a decimal fraction into its decimal "
-"representation and conversely"
-msgstr ""
-
-#: lib/document/content/calculation/decimal_numerals.py:78
-msgid "{} (or {} etc.)"
+msgid "Mental calculation: decimal fractions"
 msgstr ""

@@ -60,12 +60,12 @@ class sub_object(object):
     def q(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
         if self.direction == 'to_decimal':
-            result = _('Decimal representation of {}?') \
+            result = _('What is {} as a decimal?') \
                 .format(fix_math_style2_fontsize(
                     shared.machine.write_math_style2(
                         self.fraction.printed)))
         else:
-            result = _('Decimal fraction equal to {}?') \
+            result = _('What is {} as a decimal fraction?') \
                 .format(shared.machine.write_math_style2(
                     Item(self.decimal_representation).printed))
         return result

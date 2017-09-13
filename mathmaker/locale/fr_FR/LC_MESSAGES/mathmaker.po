@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-09-08 17:22+0200\n"
-"PO-Revision-Date: 2017-09-08 17:26+0200\n"
+"POT-Creation-Date: 2017-09-13 16:18+0200\n"
+"PO-Revision-Date: 2017-09-13 16:19+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -2219,25 +2219,34 @@ msgstr "Calcul mental : compléments à 1, à 10 et à 100"
 msgid "Mental calculation: additions and subtractions with a hole"
 msgstr "Calcul mental : additions et soustractions à trou"
 
-#: lib/document/content/calculation/decimal_numerals.py:63
-msgid "Decimal representation of {}?"
-msgstr "Écriture décimale de {} ?"
-
-#: lib/document/content/calculation/decimal_numerals.py:68
-msgid "Decimal fraction equal to {}?"
-msgstr "Fraction décimale égale à {} ?"
-
-#: data/frameworks/mental_calculation/03_yellow.yaml:34
-msgid ""
-"Mental calculation: transform a decimal fraction into its decimal "
-"representation and conversely"
-msgstr ""
-"Calcul mental : passer de l'écriture décimale à une écriture fractionnaire "
-"et réciproquement"
-
 #: lib/document/content/calculation/decimal_numerals.py:78
 msgid "{} (or {} etc.)"
 msgstr "{} (ou {} etc.)"
+
+#: lib/document/content/calculation/decimal_numerals.py:63
+msgid "What is {} as a decimal?"
+msgstr "Écriture décimale de {} ?"
+
+#: lib/document/content/calculation/decimal_numerals.py:68
+msgid "What is {} as a decimal fraction?"
+msgstr "Fraction décimale égale à {} ?"
+
+#: data/frameworks/mental_calculation/03_yellow.yaml:34
+msgid "Mental calculation: decimal fractions"
+msgstr "Calcul mental : fractions décimales"
+
+#~ msgid "Decimal representation of {}?"
+#~ msgstr "Écriture décimale de {} ?"
+
+#~ msgid "Decimal fraction equal to {}?"
+#~ msgstr "Fraction décimale égale à {} ?"
+
+#~ msgid ""
+#~ "Mental calculation: transform a decimal fraction into its decimal "
+#~ "representation and conversely"
+#~ msgstr ""
+#~ "Calcul mental : passer de l'écriture décimale à une écriture "
+#~ "fractionnaire et réciproquement"
 
 #~ msgid "Which number can fill the hole in: {math_expr}?"
 #~ msgstr "Quel nombre permet de compléter le trou dans: {math_expr} ?"
