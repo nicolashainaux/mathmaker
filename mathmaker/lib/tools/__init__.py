@@ -366,7 +366,7 @@ def fix_math_style2_fontsize(text, mathsize='\Large',
     return text
 
 
-def correct_normalize_results(d):
+def standardize_decimal(d):
     """Transform the xE+n results in decimal form (ex. 1E+1 -> 10)"""
     if not isinstance(d, Decimal):
         raise TypeError('Expected a Decimal, got a '
@@ -379,8 +379,7 @@ def round_deci(d, precision, **options):
     if not isinstance(d, Decimal):
         raise TypeError('Expected a Decimal, got a '
                         + str(type(d)) + 'instead')
-
-    return correct_normalize_results(d.quantize(precision, **options))
+    return standardize_decimal(d.quantize(precision, **options))
 
 
 def nonzero_digits_nb(n):
@@ -391,9 +390,8 @@ def nonzero_digits_nb(n):
     :type n: int or decimal.Decimal
     :rtype: int
     """
-    n = Decimal(abs(n))
-    z = str(n.quantize(Decimal(1)) if n == n.to_integral() else n.normalize())
-    return len(z) - z.count('0') - z.count('.')
+    n = str(standardize_decimal(Decimal(abs(n))))
+    return len(n) - n.count('0') - n.count('.')
 
 
 def decimal_places_nb(n):
@@ -406,8 +404,7 @@ def decimal_places_nb(n):
     """
     if is_integer(abs(n)):
         return 0
-    n = Decimal(abs(n))
-    n = n.quantize(Decimal(1)) if n == n.to_integral() else n.normalize()
+    n = standardize_decimal(Decimal(abs(n)))
     temp = len(str((n - round_deci(n, Decimal(1), rounding=ROUND_DOWN)))) - 2
     return temp if temp >= 0 else 0
 
