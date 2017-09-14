@@ -133,7 +133,7 @@ def __main__():
               (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
     db.execute('''CREATE TABLE decimals
               (id INTEGER PRIMARY KEY, nb1 DECIMAL(4, 1), nz INTEGER,
-              drawDate INTEGER)''')
+              overlap INTEGER, drawDate INTEGER)''')
 
     sys.stderr.write('Insert data from locale/*/LC_MESSAGES/*.pot files...\n')
     # Extract data from po(t) files and insert them into the db
@@ -257,11 +257,12 @@ def __main__():
     # Single decimal numbers
     db_rows = [((i + 1) / 1000,
                 Number((Decimal(i + 1)) / Decimal(1000)).nonzero_digits_nb(),
+                Number((Decimal(i + 1)) / Decimal(1000)).overlap_level(),
                 0)
                for i in range(9999)]
     db.executemany("INSERT "
-                   "INTO decimals(nb1, nz, drawDate) "
-                   "VALUES(?, ?, ?)",
+                   "INTO decimals(nb1, nz, overlap, drawDate) "
+                   "VALUES(?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert angle ranges...\n')
