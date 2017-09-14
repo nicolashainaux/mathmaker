@@ -65,6 +65,18 @@ class Number(Decimal):
         elif n == 0:
             return False
 
+    def atomized(self, keep_zeros=False):
+        """Split abs(self) in as many Numbers as digits."""
+        _, digits, e = self.standardized().as_tuple()
+        digits = list(digits)
+        result = []
+        for i, d in enumerate(digits):
+            if d != 0 or keep_zeros:
+                result += [Number(d) * Number(10) ** (e + len(digits) - 1 - i)]
+        if not len(result):
+            return [Number(0)]
+        return result
+
     def split(self, operation='sum', dig=0):
         """
         Split self as a sum or difference, e.g. self = a + b or self = a - b

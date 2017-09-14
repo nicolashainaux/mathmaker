@@ -68,6 +68,18 @@ def test_decimal_places_nb():
                for n in [Decimal('-0.4'), Decimal('-10.000') / 4])
 
 
+def test_atomized():
+    """Check atomized()."""
+    assert Number('0').atomized() == [Number('0')]
+    assert Number('0.683').atomized() == [Number('0.6'), Number('0.08'),
+                                          Number('0.003')]
+    assert Number('25.104').atomized() == [Number('20'), Number('5'),
+                                           Number('0.1'), Number('0.004')]
+    assert Number('25.104').atomized(keep_zeros=True) == \
+        [Number('20'), Number('5'), Number('0.1'), Number('0.0'),
+         Number('0.004')]
+
+
 def test_split():
     """Check split() in different cases."""
     with pytest.raises(ValueError):
