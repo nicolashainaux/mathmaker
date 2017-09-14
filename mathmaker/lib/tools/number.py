@@ -91,6 +91,47 @@ class Number(Decimal):
         level = base_level - digits[1:-1].count(1)
         return level
 
+    def cut(self, overlap=0, return_all=False):
+        """
+        Cut self as a + b, a and b having only 0, 1... positions in common.
+
+        For instance:
+        Number('5.6').cut() == (Number('5'), Number('0.6'))
+        Number('5.36').cut(return_all=True) == \
+            [(Number('5'), Number('0.36')),
+             (Number('5.3'), Number('0.06'))]
+        Number('5.36').cut(overlap=1, return_all=True) == \
+            [(Number('5.1'), Number('0.26')),
+             (Number('5.2'), Number('0.16'))]
+
+        :param overlap: tells how many decimal places in common the terms a
+                        and b should have when splitting as a sum.
+                        Values of overlap >= 1 are not handled yet
+        :type overlap: int (only 0 is handled yet)
+        :param return_all: if True, then all possibilities are returned, as a
+                           list.
+        :type return_all: bool
+        :rtype: tuple (or a list of tuples)
+        """
+        if not isinstance(overlap, int):
+            raise TypeError('When overlap is used, it must be an int. Got '
+                            'a {} instead.'.format(type(overlap)))
+        if overlap < 0:
+            raise ValueError('overlap must be a positive int. Got a '
+                             'negative int instead.')
+        if self.overlap_level() < overlap:
+            raise ValueError('Given overlap is too high.')
+        if overlap != 0:
+            raise ValueError('Only overlap=0 is implemented yet.')
+        results = []
+        digits = self.atomized()
+        for n in range(len(digits) - 1):
+            results += [(sum(digits[0:n + 1]), sum(digits[n + 1:]))]
+        if return_all:
+            return results
+        else:
+            return random.choice(results)
+
     def split(self, operation='sum', dig=0):
         """
         Split self as a sum or difference, e.g. self = a + b or self = a - b

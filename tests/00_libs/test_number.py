@@ -97,8 +97,44 @@ def test_overlap_level():
     assert Number('0.17').overlap_level() == 0
 
 
-def test_split():
-    """Check split() in different cases."""
+def test_cut_exceptions():
+    """Check cut() raises exceptions in expected cases."""
+    with pytest.raises(ValueError) as excinfo:
+        Number(10).cut(overlap=-1)
+    assert str(excinfo.value) == 'overlap must be a positive int. Got a ' \
+        'negative int instead.'
+    with pytest.raises(TypeError) as excinfo:
+        Number(10).cut(overlap='a')
+    assert str(excinfo.value) == 'When overlap is used, it must be an int. ' \
+        'Got a <class \'str\'> instead.'
+    with pytest.raises(ValueError) as excinfo:
+        Number('4.3').cut(overlap=1)
+    assert str(excinfo.value) == 'Given overlap is too high.'
+    with pytest.raises(ValueError) as excinfo:
+        Number('4.63').cut(overlap=1)
+    assert str(excinfo.value) == 'Only overlap=0 is implemented yet.'
+
+
+def test_cut():
+    """Check cut() in various cases."""
+    assert Number('4.3').cut() == (Number('4'), Number('0.3'))
+    assert Number('4.03').cut() == (Decimal('4'), Decimal('0.03'))
+    assert Number('4.63').cut(return_all=True) == \
+        [(Decimal('4'), Decimal('0.63')), (Decimal('4.6'), Decimal('0.03'))]
+    assert Number('5.836').cut(return_all=True) == \
+        [(Number('5'), Number('0.836')),
+         (Number('5.8'), Number('0.036')),
+         (Number('5.83'), Number('0.006'))]
+    assert Number('5.806').cut(return_all=True) == \
+        [(Number('5'), Number('0.806')),
+         (Number('5.8'), Number('0.006'))]
+    # assert Number('5.36').cut(overlap=1, return_all=True) == \
+    #     [(Number('5.1'), Number('0.26')),
+    #      (Number('5.2'), Number('0.16'))]
+
+
+def test_split_exceptions():
+    """Check split() raises exceptions in expected cases."""
     with pytest.raises(ValueError):
         Number(10).split(operation='*')
     with pytest.warns(UserWarning):
@@ -107,6 +143,10 @@ def test_split():
         Number('0.1').split()
     with pytest.warns(UserWarning):
         Number('0.01').split()
+
+
+def test_split():
+    """Check split() in different cases."""
     result = Number(14).split()
     assert type(result) is tuple
     assert len(result) is 2
