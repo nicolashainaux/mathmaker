@@ -1975,5 +1975,5 @@ msgid "What is {} as a decimal fraction?"
 msgstr ""
 
 #: data/frameworks/mental_calculation/03_yellow.yaml:34
-msgid "Mental calculation: decimal fractions"
+msgid "Mental calculation: decimal numerals"
 msgstr ""

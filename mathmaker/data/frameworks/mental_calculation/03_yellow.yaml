@@ -29,9 +29,9 @@ units_conversions: !!omap
   - exercise: !!omap
     - questions: units conversion -> unitspairs (20)
 
-decimal_fraction_and_decimal_representation: !!omap
+decimal_numerals: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: transform a decimal fraction into its decimal representation and conversely"
+  - title: "Mental calculation: decimal numerals"
   - exercise: !!omap
     - shuffle: false
     - questions: decimal numerals -> decimal_digits (20)

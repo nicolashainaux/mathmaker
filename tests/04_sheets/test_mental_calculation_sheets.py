@@ -298,9 +298,8 @@ def test_03_yellow_units_conversions():
                                        'units_conversions')))
 
 
-def test_03_yellow_decimal_fraction_and_decimal_representation():
+def test_03_yellow_decimal_numerals():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
-                                       'decimal_fraction_and_decimal_'
-                                       'representation')))
+                                       'decimal_numerals')))
