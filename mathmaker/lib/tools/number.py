@@ -77,6 +77,20 @@ class Number(Decimal):
             return [Number(0)]
         return result
 
+    def overlap_level(self):
+        """
+        Calculate the maximum overlap possible.
+
+        For instance, 0.724 has an overlap level of 1 (can be split as
+        0.71 + 0.14) but 0.714 has an overlap level of only 0 (can be split as
+        0.7 + 0.014 or 0.71 + 0.004, but not as two decimals having a nonzero
+        digits at tenths' position.)
+        """
+        base_level = self.standardized().nonzero_digits_nb() - 2
+        digits = list(self.as_tuple().digits)
+        level = base_level - digits[1:-1].count(1)
+        return level
+
     def split(self, operation='sum', dig=0):
         """
         Split self as a sum or difference, e.g. self = a + b or self = a - b

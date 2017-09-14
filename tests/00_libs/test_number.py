@@ -80,6 +80,23 @@ def test_atomized():
          Number('0.004')]
 
 
+def test_overlap_level():
+    """Check overlap_level()."""
+    assert Number('0.724').overlap_level() == 1
+    assert Number('0.714').overlap_level() == 0
+    assert Number('0.704').overlap_level() == 0
+    assert Number('0.74').overlap_level() == 0
+    assert Number('0.7').overlap_level() == -1
+    assert Number('0.7224').overlap_level() == 2
+    assert Number('0.7124').overlap_level() == 1
+    assert Number('0.7214').overlap_level() == 1
+    assert Number('0.7024').overlap_level() == 1
+    assert Number('0.7204').overlap_level() == 1
+    assert Number('0.7114').overlap_level() == 0
+    assert Number('0.7104').overlap_level() == 0
+    assert Number('0.17').overlap_level() == 0
+
+
 def test_split():
     """Check split() in different cases."""
     with pytest.raises(ValueError):
