@@ -452,7 +452,7 @@ def preprocess_decimalfractions_pairs_tag(qkw=None, **kwargs):
             'overlap_noqr': qkw.get('overlap', 0)}
 
 
-def postprocess_decimalfractionssums_query(qr, **kwargs):
+def postprocess_decimalfractionssums_query(qr, qkw=None, **kwargs):
     """
     Create two decimal fractions from the drawn decimal number.
 
@@ -460,7 +460,10 @@ def postprocess_decimalfractionssums_query(qr, **kwargs):
     :type qr: tuple
     :rtype: tuple
     """
-    if random.choice([True, False]):
+    variant = qkw.get('variant', 'random')
+    if variant == 'random':
+        variant = random.choice(['atomize', 'cut'])
+    if variant == 'atomize':
         decimals = Number(str(qr)).atomized()
     else:
         decimals = Number(str(qr)).cut(overlap=kwargs['overlap_noqr'])
@@ -796,6 +799,6 @@ class mc_source(object):
             kwargs.update(preprocess_decimalfractions_pairs_tag(qkw=qkw,
                                                                 **kwargs))
             return postprocess_decimalfractionssums_query(
-                shared.decimals_source.next(**kwargs), **kwargs)
+                shared.decimals_source.next(**kwargs), qkw=qkw, **kwargs)
         elif tag_classification == 'nothing':
             return ()
