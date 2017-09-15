@@ -31,6 +31,7 @@ from mathmaker.lib.constants.numeration import RANKS, RANKS_CONFUSING
 from mathmaker.lib.constants.numeration import RANKS_DECIMAL
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
 from mathmaker.lib.tools.number import Number
+from mathmaker.lib.tools import is_integer
 from mathmaker.lib.core.base_calculus import Fraction
 
 DEFAULT_RANKS_SCALE = RANKS
@@ -171,6 +172,8 @@ class source(object):
                     result += " AND nb1 = nb2 "
             elif kw == 'diff7atleast':
                 result += " AND nb2 - nb1 >= 7 "
+            elif kw.endswith('_noqr'):
+                pass
             else:  # default interpretation is " AND key = value "
                 key = kw
                 rel_sign = " = "
@@ -180,9 +183,9 @@ class source(object):
                 # if kw.endswith('_gt'):
                 #     rel_sign = " > "
                 #     key = kw[:-3]
-                # if kw.endswith('_ge'):
-                #     rel_sign = " >= "
-                #     key = kw[:-3]
+                if kw.endswith('_ge'):
+                    rel_sign = " >= "
+                    key = kw[:-3]
                 elif kw.endswith('_neq'):
                     rel_sign = " != "
                     key = kw[:-4]
@@ -445,7 +448,8 @@ def preprocess_decimalfractions_pairs_tag(qkw=None, **kwargs):
     :type qkw: dict
     :rtype: dict
     """
-    return {'overlap': qkw.get('overlap', 0)}
+    return {'overlap_level_ge': qkw.get('overlap', 0),
+            'overlap_noqr': qkw.get('overlap', 0)}
 
 
 def postprocess_decimalfractionspairs_query(qr, **kwargs):
@@ -456,8 +460,17 @@ def postprocess_decimalfractionspairs_query(qr, **kwargs):
     :type qr: tuple
     :rtype: tuple
     """
-    decimals = Number(str(qr)).cut(overlap=kwargs['overlap'])
-    return (Fraction(decimals[0]), Fraction(decimals[1]))
+    if random.choice([True, False]):
+        decimals = Number(str(qr)).atomized()
+    else:
+        decimals = Number(str(qr)).cut(overlap=kwargs['overlap_noqr'])
+    if is_integer(decimals[0]) and (len(decimals) >= 3
+                                    or random.choice([True, False])):
+        first = decimals[0]
+    else:
+        first = Fraction(decimals[0])
+    return (first, *[Fraction(decimals[i + 1])
+                     for i in range(len(decimals) - 1)])
 
 
 ##

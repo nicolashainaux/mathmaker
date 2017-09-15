@@ -138,7 +138,7 @@ def __main__():
     # but these values may have no effect (purpose is only documentation)
     db.execute('''CREATE TABLE decimals
               (id INTEGER PRIMARY KEY, nb1 DECIMAL(2, 3), nz INTEGER,
-              overlap INTEGER, drawDate INTEGER)''')
+              overlap_level INTEGER, drawDate INTEGER)''')
 
     sys.stderr.write('Insert data from locale/*/LC_MESSAGES/*.pot files...\n')
     # Extract data from po(t) files and insert them into the db
@@ -266,7 +266,7 @@ def __main__():
                 0)
                for i in range(9999)]
     db.executemany("INSERT "
-                   "INTO decimals(nb1, nz, overlap, drawDate) "
+                   "INTO decimals(nb1, nz, overlap_level, drawDate) "
                    "VALUES(?, ?, ?, ?)",
                    db_rows)
 
