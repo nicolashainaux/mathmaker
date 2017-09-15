@@ -50,7 +50,7 @@ class sub_object(component.structure):
 
         the_sum = Sum(self.nb_list)
         self.sum_str = the_sum.printed
-        self.result = the_sum.evaluate()
+        self.result = the_sum.evaluate(stop_recursion=True)
 
         if self.context == 'mini_problem':
             self.transduration = 25
