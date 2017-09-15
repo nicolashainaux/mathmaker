@@ -2917,7 +2917,7 @@ class Fraction(Quotient):
         return hash(repr(self._numerator) + str(self.sign)
                     + self._status + self._symbol + repr(self._denominator))
 
-        # --------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     ##
     #   @brief Compares two Fractions
     #   @return True if they're equal
@@ -2935,6 +2935,30 @@ class Fraction(Quotient):
             # it is difficult to tell whether a Fraction is greater or
             # lower than another... needs same denominator reduction etc.
             return False
+
+    def __lt__(self, obj):
+        if isinstance(obj, Fraction):
+            return self.evaluate() < obj.evaluate()
+        elif is_number(obj):
+            return self < Fraction(Decimal(obj))
+
+    def __gt__(self, obj):
+        if isinstance(obj, Fraction):
+            return self.evaluate() > obj.evaluate()
+        elif is_number(obj):
+            return self > Fraction(Decimal(obj))
+
+    def __le__(self, obj):
+        if isinstance(obj, Fraction):
+            return self.evaluate() <= obj.evaluate()
+        elif is_number(obj):
+            return self <= Fraction(Decimal(obj))
+
+    def __ge__(self, obj):
+        if isinstance(obj, Fraction):
+            return self.evaluate() >= obj.evaluate()
+        elif is_number(obj):
+            return self >= Fraction(Decimal(obj))
 
     # --------------------------------------------------------------------------
     ##

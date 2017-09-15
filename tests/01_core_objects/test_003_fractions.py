@@ -165,3 +165,21 @@ def test_fraction_from_decimal():
     assert Fraction(Decimal('0.4')).printed == wrap_nb('\\frac{4}{10}')
     assert Fraction(Decimal('2.17')).printed == wrap_nb('\\frac{217}{100}')
     assert Fraction(Decimal('4')).printed == wrap_nb('\\frac{40}{10}')
+
+
+def test_fractions_comparisons():
+    """Check fractions compare correctly to other numbers."""
+    assert Fraction(Decimal('0.56')) > Fraction(Decimal('0.31'))
+    assert Fraction(Decimal('0.31')) < Fraction(Decimal('0.56'))
+    assert Fraction(Decimal('0.56')) >= Fraction(Decimal('0.31'))
+    assert Fraction(Decimal('0.31')) <= Fraction(Decimal('0.56'))
+    assert Fraction(Decimal('0.56')) > Decimal('0.31')
+    assert Fraction(Decimal('0.31')) < Decimal('0.56')
+    assert Fraction(Decimal('0.56')) >= Decimal('0.31')
+    assert Fraction(Decimal('0.31')) <= Decimal('0.56')
+    assert Decimal('0.56') > Fraction(Decimal('0.31'))
+    assert Decimal('0.31') < Fraction(Decimal('0.56'))
+    assert Decimal('0.56') >= Fraction(Decimal('0.31'))
+    assert Decimal('0.31') <= Fraction(Decimal('0.56'))
+    assert 2 <= Fraction(Decimal('4.56'))
+    assert 2.9 < Fraction(Decimal('4.56'))
