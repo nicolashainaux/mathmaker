@@ -3507,7 +3507,7 @@ class CommutativeOperation(Operation, metaclass=ABCMeta):
             'CommutativeOperation.evaluate')
         log.debug("Entered with: " + repr(self))
 
-        if not('stop_recursion' in options and options['stop_recursion']):
+        if options.get('stop_recursion', False):
             next_step = self.calculate_next_step()
 
             if next_step is not None:
