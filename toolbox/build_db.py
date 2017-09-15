@@ -107,6 +107,8 @@ def __main__():
               q_id TEXT, drawDate INTEGER)''')
     db.execute('''CREATE TABLE single_ints
               (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
+    # DECIMAL(4, 1) stands for up to 4 integer digits, up to 1 fractional digit
+    # but these values may have no effect (purpose is only documentation)
     db.execute('''CREATE TABLE single_deci1
               (id INTEGER PRIMARY KEY, nb1 DECIMAL(4, 1), drawDate INTEGER)''')
     db.execute('''CREATE TABLE angle_ranges
@@ -131,8 +133,11 @@ def __main__():
               clever INTEGER)''')
     db.execute('''CREATE TABLE calculation_order_of_operations_variants
               (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
+    # DECIMAL(2, 3) stands for up to 2 integer digits,
+    # up to 3 fractional digits
+    # but these values may have no effect (purpose is only documentation)
     db.execute('''CREATE TABLE decimals
-              (id INTEGER PRIMARY KEY, nb1 DECIMAL(4, 1), nz INTEGER,
+              (id INTEGER PRIMARY KEY, nb1 DECIMAL(2, 3), nz INTEGER,
               overlap INTEGER, drawDate INTEGER)''')
 
     sys.stderr.write('Insert data from locale/*/LC_MESSAGES/*.pot files...\n')
