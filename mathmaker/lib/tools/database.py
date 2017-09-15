@@ -319,7 +319,7 @@ def classify_tag(tag):
                  'decimal_and_one_digit_for_multi',
                  'decimal_and_one_digit_for_divi',
                  'unitspairs', 'decimal_digits',
-                 'decimals', 'decimalfractionspairs']:
+                 'decimals', 'decimalfractionssums']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -452,7 +452,7 @@ def preprocess_decimalfractions_pairs_tag(qkw=None, **kwargs):
             'overlap_noqr': qkw.get('overlap', 0)}
 
 
-def postprocess_decimalfractionspairs_query(qr, **kwargs):
+def postprocess_decimalfractionssums_query(qr, **kwargs):
     """
     Create two decimal fractions from the drawn decimal number.
 
@@ -792,10 +792,10 @@ class mc_source(object):
             return shared.unitspairs_source.next(**kwargs)
         elif tag_classification == 'decimals':
             return shared.decimals_source.next(**kwargs)
-        elif tag_classification == 'decimalfractionspairs':
+        elif tag_classification == 'decimalfractionssums':
             kwargs.update(preprocess_decimalfractions_pairs_tag(qkw=qkw,
                                                                 **kwargs))
-            return postprocess_decimalfractionspairs_query(
+            return postprocess_decimalfractionssums_query(
                 shared.decimals_source.next(**kwargs), **kwargs)
         elif tag_classification == 'nothing':
             return ()

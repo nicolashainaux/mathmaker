@@ -37,12 +37,16 @@ class sub_object(component.structure):
         if self.nb_source.startswith('complement'):
             maxi, mini = max(numbers_to_use), min(numbers_to_use)
             numbers_to_use = [mini, maxi - mini]
-        super().setup("numbers", nb=numbers_to_use, **options)
+        super().setup("numbers", nb=numbers_to_use,
+                      shuffle_nbs=(self.nb_source != 'decimalfractionssums'),
+                      **options)
         super().setup("nb_variants", nb=numbers_to_use, **options)
         self.transduration = 8
         if (self.nb1 > 20 and self.nb2 > 20
             and not self.nb1 % 10 == 0 and not self.nb2 % 10 == 0):
             self.transduration = 12
+        if self.nb_source.startswith('decimalfractionssums'):
+            self.transduration = 15
 
         the_sum = Sum([self.nb1, self.nb2])
         self.sum_str = the_sum.printed
