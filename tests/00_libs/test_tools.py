@@ -240,23 +240,21 @@ def test_fix_math_style2_fontsize():
     """Test fix_math_style2_fontsize() in several cases."""
     assert fix_math_style2_fontsize('$ \\frac{\\text{6}}{\\text{20}} $ '
                                     '(or $ \\frac{\\text{3}}{\\text{10}} $) ')\
-        == '{\Large{$ \\frac{\\text{6}}{\\text{20}} $}}' \
-           '\\normalsize{ (or }' \
-           '{\Large{$ \\frac{\\text{3}}{\\text{10}} $}}' \
-           '\\normalsize{) }'
+        == '$ \\dfrac{\\text{6}}{\\text{20}} $' \
+           ' (or $ \\dfrac{\\text{3}}{\\text{10}} $) '
     assert fix_math_style2_fontsize(
         '$ \\frac{\\text{18}}{\\text{24}} $ '
         '(or $ \\frac{\\text{9}}{\\text{12}} $, '
         'or $ \\frac{\\text{6}}{\\text{8}} $, '
         'or $ \\frac{\\text{3}}{\\text{4}} $)') == \
-        '{\Large{$ \\frac{\\text{18}}{\\text{24}} $}}' \
-        '\\normalsize{ (or }' \
-        '{\Large{$ \\frac{\\text{9}}{\\text{12}} $}}' \
-        '\\normalsize{, or }' \
-        '{\Large{$ \\frac{\\text{6}}{\\text{8}} $}}' \
-        '\\normalsize{, or }' \
-        '{\Large{$ \\frac{\\text{3}}{\\text{4}} $}}' \
-        '\\normalsize{)}'
+        '$ \\dfrac{\\text{18}}{\\text{24}} $' \
+        ' (or ' \
+        '$ \\dfrac{\\text{9}}{\\text{12}} $' \
+        ', or ' \
+        '$ \\dfrac{\\text{6}}{\\text{8}} $' \
+        ', or ' \
+        '$ \\dfrac{\\text{3}}{\\text{4}} $' \
+        ')'
 
 
 def test_physical_quantity_exceptions():

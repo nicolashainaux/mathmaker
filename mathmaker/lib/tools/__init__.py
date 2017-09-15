@@ -340,29 +340,14 @@ def generate_header_comment(document_format, comment_symbol="% "):
     return hc
 
 
-def fix_math_style2_fontsize(text, mathsize='\Large',
-                             normalsize='\\normalsize'):
+def fix_math_style2_fontsize(text):
     """
-    Wrap any $ LaTex math expression $ in another fontsize.
+    Turn all \\frac to \\dfrac.
 
-    :param mathsize: the size the math expressions will be (same as LaTeX
-                     fontsizes, including \ at start)
-    :type mathsize: str
-
-    :param normalsize: the size the rest of the text will be (same as LaTeX
-                       fontsizes, including \ at start)
-    :type normalsize: str
     :rtype: str
     """
-    p = re.compile(r'(\$[^\$]+\$)')
-    remember = []
-    for match in p.split(text):
-        if (match != '' and not match.startswith('$')
-            and not match.endswith('$') and match not in remember):
-            text = text.replace(match, normalsize + '{' + match + '}')
-            remember.append(match)
-    text = p.sub('{' + mathsize + r'{\1}' + '}', text)
-    return text
+    r = re.compile(r'(frac{)')
+    return r.sub(r'dfrac{', text)
 
 
 def move_digits_to(n, from_nb=None):
