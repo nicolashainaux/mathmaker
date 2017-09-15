@@ -36,10 +36,17 @@ from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.constants.units import COMMON_LENGTH_UNITS
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.tools import rotate, is_integer
+from mathmaker.lib.tools import fix_math_style2_fontsize
 from mathmaker.lib.tools.number import Number
 
 
 class structure(object):
+
+    @property
+    def q_wordings_collection(self):
+        return {'turn_to_decimal_repr': _('What is {} as a decimal?'),
+                'turn_to_decimal_fraction':
+                    _('What is {} as a decimal fraction?')}
 
     def h(self, **kwargs):
         if hasattr(self, 'hint'):
@@ -331,6 +338,14 @@ class structure(object):
         else:
             raise ValueError('Cannot recognize context: {}\n'
                              .format(self.context))
+        setup_wording_format_of(self)
+
+    def _setup_ask_question(self, **kwargs):
+        values = kwargs.get('values')
+        self.wording = self.q_wordings_collection[kwargs['q_key']]\
+            .format(*values)
+        if kwargs.get('fix_math_style2_fontsize', False):
+            self.wording = fix_math_style2_fontsize(self.wording)
         setup_wording_format_of(self)
 
     def _setup_rectangle_grid(self, **kwargs):

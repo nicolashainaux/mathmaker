@@ -57,10 +57,18 @@ class sub_object(component.structure):
             super().setup('mini_problem_wording',
                           q_id=os.path.splitext(os.path.basename(__file__))[0],
                           **options)
+        elif self.context.startswith('ask:'):
+            super().setup('ask_question',
+                          q_key=self.context.split(sep=':')[1],
+                          values=[
+                              shared.machine.write_math_style2(self.sum_str)],
+                          fix_math_style2_fontsize=True)
 
     def q(self, **options):
         if self.context == 'mini_problem':
             return post_process(self.wording.format(**self.wording_format))
+        elif self.context.startswith('ask:'):
+            return self.wording
         else:
             self.substitutable_question_mark = True
             return _('{math_expr} = {q_mark}').format(
