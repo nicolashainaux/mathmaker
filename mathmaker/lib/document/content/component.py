@@ -99,7 +99,10 @@ class structure(object):
         elif kwargs.get('sort_nbs', False):
             nb_list = sorted(nb_list)
         for i in range(len(nb_list)):
-            setattr(self, 'nb' + str(i + 1), Decimal(str(nb_list[i])))
+            if isinstance(nb_list[i], Quotient):
+                setattr(self, 'nb' + str(i + 1), nb_list[i])
+            else:
+                setattr(self, 'nb' + str(i + 1), Decimal(str(nb_list[i])))
         self.nb_nb = len(nb_list)
 
     def _setup_nb_variants(self, **kwargs):
