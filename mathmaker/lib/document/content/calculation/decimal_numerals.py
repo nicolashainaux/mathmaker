@@ -77,5 +77,4 @@ class sub_object(object):
         else:
             return fix_math_style2_fontsize(_('{} (or {} etc.)').format(
                 shared.machine.write_math_style2(self.fraction.printed),
-                shared.machine.write_math_style2(self.fraction10.printed)),
-                mathsize='\large')
+                shared.machine.write_math_style2(self.fraction10.printed)))
