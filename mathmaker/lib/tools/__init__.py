@@ -33,7 +33,6 @@ from decimal import Decimal
 from tempfile import TemporaryFile
 
 
-from mathmaker.lib.tools.number import Number
 from mathmaker.lib.constants.units import (LENGTH_UNITS, MASS_UNITS,
                                            CAPACITY_UNITS, PHYSICAL_QUANTITIES)
 
@@ -414,6 +413,7 @@ def remove_digits_from(number, to=None):
     :type to: list
     :rtype: a list (of numbers)
     """
+    from mathmaker.lib.tools.number import Number
     if not isinstance(number, Decimal):
         raise TypeError('The first argument must be a Decimal number.')
     if is_integer(number):

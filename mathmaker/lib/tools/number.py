@@ -24,6 +24,8 @@ import random
 import warnings
 from decimal import Decimal, ROUND_DOWN
 
+from . import is_integer
+
 
 class Number(Decimal):
     """Extend Decimal with a bunch of useful methods."""
@@ -177,7 +179,6 @@ class Number(Decimal):
         # then if decimals are wanted, we remove the results that do not match
         # the wanted "depth" (if depth == 2, we remove 0.4 for instance)
         if depth >= 1:
-            from mathmaker.lib.tools import is_integer
             seq = [i for i in seq
                    if not is_integer(i * (10 ** (depth - 1)))]
         if operation in ['sum', '+']:
