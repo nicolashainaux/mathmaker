@@ -30,6 +30,7 @@ from mathmaker.lib import shared
 from mathmaker.lib.constants.numeration import RANKS, RANKS_CONFUSING
 from mathmaker.lib.constants.numeration import RANKS_DECIMAL
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
+from mathmaker.lib.tools.number import Number
 from mathmaker.lib.core.base_calculus import Fraction
 
 DEFAULT_RANKS_SCALE = RANKS
@@ -176,6 +177,12 @@ class source(object):
                 if kw.endswith('_lt'):
                     rel_sign = " < "
                     key = kw[:-3]
+                # if kw.endswith('_gt'):
+                #     rel_sign = " > "
+                #     key = kw[:-3]
+                # if kw.endswith('_ge'):
+                #     rel_sign = " >= "
+                #     key = kw[:-3]
                 elif kw.endswith('_neq'):
                     rel_sign = " != "
                     key = kw[:-4]
@@ -309,7 +316,7 @@ def classify_tag(tag):
                  'decimal_and_one_digit_for_multi',
                  'decimal_and_one_digit_for_divi',
                  'unitspairs', 'decimal_digits',
-                 'decimals']:
+                 'decimals', 'decimalfractionspairs']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -326,7 +333,7 @@ def classify_tag(tag):
 #           to allow this very same behaviour (as directly adding a
 #           'nbN': 'value' may change the query).
 #   @return A dictionary
-def translate_int_pairs_tag(tag, qkw=None):
+def preprocess_int_pairs_tag(tag, qkw=None):
     if qkw is None:
         qkw = {}
     d = {}
@@ -400,13 +407,13 @@ def translate_int_pairs_tag(tag, qkw=None):
     return d
 
 
-def translate_single_nb_tag(tag):
+def preprocess_single_nb_tag(tag):
     """From single..._mintomax, get and return min and max in a dictionary."""
     n1, n2 = tag.split(sep='_')[1].split(sep='to')
     return {'nb1_min': n1, 'nb1_max': n2}
 
 
-def translate_units_pairs_tag(tag, last_draw=None, qkw=None):
+def preprocess_units_pairs_tag(tag, last_draw=None, qkw=None):
     """
     Create the SQL query according to last_draw content and possible qkw.
     """
@@ -428,6 +435,29 @@ def translate_units_pairs_tag(tag, last_draw=None, qkw=None):
     elif len(last_draw) >= 5:
         d.update({'direction_neq': last_draw[2]})
     return d
+
+
+def preprocess_decimalfractions_pairs_tag(qkw=None, **kwargs):
+    """
+    Create the SQL query according to possible qkw's overlap value.
+
+    :param qkw: keywords provided by the question
+    :type qkw: dict
+    :rtype: dict
+    """
+    return {'overlap': qkw.get('overlap', 0)}
+
+
+def postprocess_decimalfractionspairs_query(qr, **kwargs):
+    """
+    Create two decimal fractions from the drawn decimal number.
+
+    :param qr: the result of the query (containing the decimal number)
+    :type qr: tuple
+    :rtype: tuple
+    """
+    decimals = Number(str(qr)).cut(overlap=kwargs['overlap'])
+    return (Fraction(decimals[0]), Fraction(decimals[1]))
 
 
 ##
@@ -720,10 +750,10 @@ class mc_source(object):
             qkw = {}
         tag_classification = classify_tag(source_id)
         if tag_classification == 'int_pairs':
-            kwargs.update(translate_int_pairs_tag(source_id, qkw=qkw))
+            kwargs.update(preprocess_int_pairs_tag(source_id, qkw=qkw))
             return shared.int_pairs_source.next(**kwargs)
         elif tag_classification.startswith('single'):
-            kwargs.update(translate_single_nb_tag(source_id))
+            kwargs.update(preprocess_single_nb_tag(source_id))
             return shared.single_ints_source.next(**kwargs)
         elif tag_classification == 'int_deci_clever_pairs':
             return shared.int_deci_clever_pairs_source.next(**kwargs)
@@ -742,12 +772,17 @@ class mc_source(object):
         elif tag_classification == 'decimal_and_one_digit_for_divi':
             return shared.deci_one_digit_divi_source.next(**kwargs)
         elif tag_classification == 'unitspairs':
-            kwargs.update(translate_units_pairs_tag(source_id, qkw=qkw,
-                                                    last_draw=kwargs.get(
-                                                        'not_in', None)))
+            kwargs.update(preprocess_units_pairs_tag(source_id, qkw=qkw,
+                                                     last_draw=kwargs.get(
+                                                         'not_in', None)))
             kwargs.pop('not_in', None)
             return shared.unitspairs_source.next(**kwargs)
         elif tag_classification == 'decimals':
             return shared.decimals_source.next(**kwargs)
+        elif tag_classification == 'decimalfractionspairs':
+            kwargs.update(preprocess_decimalfractions_pairs_tag(qkw=qkw,
+                                                                **kwargs))
+            return postprocess_decimalfractionspairs_query(
+                shared.decimals_source.next(**kwargs), **kwargs)
         elif tag_classification == 'nothing':
             return ()

@@ -56,7 +56,6 @@ def init():
     global unitspairs_source
     global alternate_source
     global decimals_source
-    # global decimalfractionspairs_source
 
     log = settings.mainlogger
 
@@ -93,7 +92,6 @@ def init():
 
     from mathmaker.lib.tools.database import sub_source, mc_source
     alternate_source = sub_source('alternate')
-    # decimalfractionspairs_source = sub_source('decimalfractionspairs')
     rank_words_source = sub_source('rank_words')
     decimal_digits_source = sub_source('decimal_digits')
     trigo_functions_source = sub_source('trigo_functions')
