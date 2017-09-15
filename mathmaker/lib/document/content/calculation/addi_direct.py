@@ -48,7 +48,7 @@ class sub_object(component.structure):
         if self.nb_source.startswith('decimalfractionssums'):
             self.transduration = 15
 
-        the_sum = Sum([self.nb1, self.nb2])
+        the_sum = Sum(self.nb_list)
         self.sum_str = the_sum.printed
         self.result = the_sum.evaluate()
 
