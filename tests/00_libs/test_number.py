@@ -118,9 +118,9 @@ def test_cut_exceptions():
 def test_cut():
     """Check cut() in various cases."""
     assert Number('4.3').cut() == (Number('4'), Number('0.3'))
-    assert Number('4.03').cut() == (Decimal('4'), Decimal('0.03'))
+    assert Number('4.03').cut() == (Number('4'), Number('0.03'))
     assert Number('4.63').cut(return_all=True) == \
-        [(Decimal('4'), Decimal('0.63')), (Decimal('4.6'), Decimal('0.03'))]
+        [(Number('4'), Number('0.63')), (Number('4.6'), Number('0.03'))]
     assert Number('5.836').cut(return_all=True) == \
         [(Number('5'), Number('0.836')),
          (Number('5.8'), Number('0.036')),
