@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import pytest
+from decimal import Decimal
 
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Monomial,
                                               Polynomial)
@@ -157,3 +158,9 @@ def test_rubbish_polynomial_inter_line(rubbish_polynomial):
 def test_rubbish_polynomial_reduced(rubbish_polynomial):
     """Is this Polynomial reduced as -2x?"""
     assert rubbish_polynomial.reduce_().printed == wrap_nb('-2x')
+
+
+def test_sum_evaluation():
+    """Check sums of integers and decimal numbers are correctly evaluated."""
+    assert Sum([6, Decimal('0.4'), Decimal('0.06'), Decimal('0.005')])\
+        .evaluate() == Decimal('6.465')

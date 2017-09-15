@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import pytest
+from decimal import Decimal
 
 from mathmaker.lib.core.base_calculus import Item, Sum, Fraction
 from tools import wrap_nb
@@ -512,3 +513,12 @@ def test_fs7_step6(fs7_step6):
 def test_fs7_step7(fs7_step7):
     """Is this Sum's calculation's 7th step correct?"""
     assert fs7_step7.printed == wrap_nb('-\\frac{15}{5}+\\frac{13}{5}')
+
+
+def test_fractions_sum_evaluation():
+    """Check fractions sums are correctly calculated."""
+    assert Sum([Item(6),
+                Fraction(Decimal('0.4')),
+                Fraction(Decimal('0.06')),
+                Fraction(Decimal('0.005'))
+                ]).evaluate(stop_recursion=True) == Decimal('6.465')

@@ -3507,7 +3507,7 @@ class CommutativeOperation(Operation, metaclass=ABCMeta):
             'CommutativeOperation.evaluate')
         log.debug("Entered with: " + repr(self))
 
-        if options.get('stop_recursion', False):
+        if not('stop_recursion' in options and options['stop_recursion']):
             next_step = self.calculate_next_step()
 
             if next_step is not None:
@@ -3546,6 +3546,10 @@ class CommutativeOperation(Operation, metaclass=ABCMeta):
             elif isinstance(elt, CommutativeOperation):
                 answer = self.operator(answer, elt.evaluate())
                 log.debug("b- current answer is: " + str(answer))
+
+            elif isinstance(elt, Quotient):
+                answer = self.operator(answer, elt.evaluate())
+                log.debug("c- current answer is: " + str(answer))
 
         external_expon = self.exponent.evaluate()
 

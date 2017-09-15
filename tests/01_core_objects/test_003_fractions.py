@@ -158,6 +158,11 @@ def test_f12_eval2():
         wrap_nb('\\frac{3}{7}')
 
 
+def test_fraction_evaluation():
+    """Check fractions are correctly evaluated."""
+    assert Fraction(Decimal('0.4')).evaluate() == Decimal('0.4')
+
+
 def test_fraction_from_decimal():
     """Are decimal fractions created correctly from decimals?"""
     assert Fraction(Decimal('0.56')).printed == wrap_nb('\\frac{56}{100}')
