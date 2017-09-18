@@ -13,23 +13,23 @@
 							  rank_matches_invisible_zero: any string means True except "False" and ""
 										(no effect in case of rank direct questions)  -->
 		<question id="rank numberof" generation_type="default">
-			<nb source="rank_words">5</nb>
+			<nb source="digits_places">5</nb>
 		</question>
 
 		<question id="rank reversed">
-			<nb source="rank_words">6</nb>
+			<nb source="digits_places">6</nb>
 		</question>
 
 		<question id="rank direct">
-			<nb source="rank_words">6</nb>
+			<nb source="digits_places">6</nb>
 		</question>
 
 		<question id="rank reversed" rank_matches_invisible_zero="True">
-			<nb source="rank_words">2</nb>
+			<nb source="digits_places">2</nb>
 		</question>
 
 		<question id="rank numberof" rank_matches_invisible_zero="True" generation_type="default">
-			<nb source="rank_words">1</nb>
+			<nb source="digits_places">1</nb>
 		</question>
 
 	</exercise>

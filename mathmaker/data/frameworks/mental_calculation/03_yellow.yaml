@@ -35,7 +35,7 @@ decimal_numerals: !!omap
   - exercise: !!omap
     - questions: addi direct, context=ask:turn_to_decimal_repr, variant=atomize -> decimalfractionssums (2)
                  addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (5)
-                 decimal numerals -> decimal_digits (13)
+                 decimal numerals -> fracdigits_places (13)
 
 
 # COPY OF THE FIRST VERSION OF addi_subtr_hole WITH DECIMAL NUMBERS (TO BE REUSED OR INSPIRED OF LATER)

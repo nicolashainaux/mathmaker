@@ -28,7 +28,6 @@ from decimal import Decimal
 from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.constants.numeration import RANKS, RANKS_CONFUSING
-from mathmaker.lib.constants.numeration import RANKS_DECIMAL
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
 from mathmaker.lib.tools.numbers import is_integer, Number
 from mathmaker.lib.core.base_calculus import Fraction
@@ -311,13 +310,13 @@ def classify_tag(tag):
         return 'single_int'
     elif tag.startswith('singledeci1_'):
         return 'single_deci1'
-    elif tag in ['int_deci_clever_pairs', 'rank_words',
+    elif tag in ['int_deci_clever_pairs',
                  'int_irreducible_frac', 'nothing',
                  'decimal_and_10_100_1000_for_multi',
                  'decimal_and_10_100_1000_for_divi',
                  'decimal_and_one_digit_for_multi',
                  'decimal_and_one_digit_for_divi',
-                 'unitspairs', 'decimal_digits',
+                 'unitspairs', 'digits_places', 'fracdigits_places',
                  'decimals', 'decimalfractionssums']:
         # __
         return tag
@@ -482,12 +481,6 @@ def generate_values(source_id):
     if source_id == 'int_irreducible_frac':
         return [(k, Fraction((n, k))) for k in [i + 2 for i in range(18)]
                 for n in coprime_generator(k)]
-
-    elif source_id == 'rank_words':
-        return [(elt,) for elt in RANKS]
-
-    elif source_id == 'decimal_digits':
-        return [(elt,) for elt in RANKS_DECIMAL]
 
     elif source_id == 'alternate':
         l = [('left', ), ('right', )]
@@ -772,10 +765,10 @@ class mc_source(object):
             return shared.single_ints_source.next(**kwargs)
         elif tag_classification == 'int_deci_clever_pairs':
             return shared.int_deci_clever_pairs_source.next(**kwargs)
-        elif tag_classification == 'rank_words':
-            return shared.rank_words_source.next(**kwargs)
-        elif tag_classification == 'decimal_digits':
-            return shared.decimal_digits_source.next(**kwargs)
+        elif tag_classification == 'digits_places':
+            return Decimal(str(shared.digits_places_source.next(**kwargs)))
+        elif tag_classification == 'fracdigits_places':
+            return Decimal(str(shared.fracdigits_places_source.next(**kwargs)))
         elif tag_classification == 'int_irreducible_frac':
             return shared.int_fracs_source.next(**kwargs)
         elif tag_classification == 'decimal_and_10_100_1000_for_multi':

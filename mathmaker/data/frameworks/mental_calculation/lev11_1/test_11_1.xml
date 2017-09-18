@@ -47,15 +47,15 @@
 		</question>
 
 		<question id="rank reversed">
-			<nb source="rank_words">1</nb>
+			<nb source="digits_places">1</nb>
 		</question>
 
 		<question id="rank direct">
-			<nb source="rank_words">1</nb>
+			<nb source="digits_places">1</nb>
 		</question>
 
 		<question id="rank numberof" generation_type="default">
-			<nb source="rank_words">1</nb>
+			<nb source="digits_places">1</nb>
 		</question>
 
 	</exercise>

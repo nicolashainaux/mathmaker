@@ -41,6 +41,8 @@ It will add all entries:
   so far) for calculation_order_of_operations questions
 - all unit conversions, sorted in categories and levels,
 - decimals from 0.001 to 9.999
+- digits positions: one table for thousands to thousandths, another for
+  tenths to thousandths.
 """
 
 import os
@@ -52,6 +54,7 @@ from mathmaker import settings
 from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words
 from mathmaker.lib.tools.numbers import Number
 from mathmaker.lib.tools.frameworks import get_attributes
+from mathmaker.lib.constants.numeration import RANKS, RANKS_DECIMAL
 
 INTPAIRS_MAX = 1000
 SINGLEINTS_MAX = 1000
@@ -139,6 +142,12 @@ def __main__():
     db.execute('''CREATE TABLE decimals
               (id INTEGER PRIMARY KEY, nb1 DECIMAL(2, 3), nz INTEGER,
               overlap_level INTEGER, drawDate INTEGER)''')
+    db.execute('''CREATE TABLE digits_places
+              (id INTEGER PRIMARY KEY, place DECIMAL(4, 3),
+              drawDate INTEGER)''')
+    db.execute('''CREATE TABLE fracdigits_places
+              (id INTEGER PRIMARY KEY, place DECIMAL(4, 3),
+              drawDate INTEGER)''')
 
     sys.stderr.write('Insert data from locale/*/LC_MESSAGES/*.pot files...\n')
     # Extract data from po(t) files and insert them into the db
@@ -340,6 +349,22 @@ def __main__():
                    "INTO units_conversions"
                    "(unit1, unit2, direction, category, level, drawDate) "
                    "VALUES(?, ?, ?, ?, ?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert digits places...\n')
+    db_rows = [(str(elt), 0) for elt in RANKS]
+    db.executemany("INSERT "
+                   "INTO digits_places"
+                   "(place, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert fractional digits places...\n')
+    db_rows = [(str(elt), 0) for elt in RANKS_DECIMAL]
+    db.executemany("INSERT "
+                   "INTO fracdigits_places"
+                   "(place, drawDate) "
+                   "VALUES(?, ?)",
                    db_rows)
 
     sys.stderr.write('Commit changes to database...\n')

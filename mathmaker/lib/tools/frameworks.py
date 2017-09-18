@@ -540,7 +540,9 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
                     source_nb == 'decimals_0_20_1',
                     source_nb == 'bypass'])
     elif q_id.startswith('rank_'):
-        return any([source_nb == 'rank_words', source_nb == 'bypass'])
+        return any([source_nb == 'digits_places',
+                    source_nb == 'fracdigits_places',
+                    source_nb == 'bypass'])
     elif q_id in ['perimeter_square', 'area_square']:
         return any([source_nb.startswith('intpairs_'),
                     source_nb.startswith('multiplesof'),

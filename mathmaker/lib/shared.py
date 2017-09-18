@@ -40,8 +40,8 @@ def init():
     global single_deci1_source
     global angle_ranges_source
     global int_deci_clever_pairs_source
-    global rank_words_source
-    global decimal_digits_source
+    global digits_places_source
+    global fracdigits_places_source
     global int_fracs_source
     global deci_10_100_1000_multi_source
     global deci_10_100_1000_divi_source
@@ -87,13 +87,14 @@ def init():
                                          'direction', 'category',
                                          'level'])
     decimals_source = database.source('decimals', ['id', 'nb1'])
+    digits_places_source = database.source('digits_places', ['id', 'place'])
+    fracdigits_places_source = database.source('fracdigits_places',
+                                               ['id', 'place'])
 
     markup = latex.MARKUP
 
     from mathmaker.lib.tools.database import sub_source, mc_source
     alternate_source = sub_source('alternate')
-    rank_words_source = sub_source('rank_words')
-    decimal_digits_source = sub_source('decimal_digits')
     trigo_functions_source = sub_source('trigo_functions')
     trigo_vocabulary_source = sub_source('trigo_vocabulary')
     int_fracs_source = sub_source('int_irreducible_frac')

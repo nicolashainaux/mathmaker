@@ -592,10 +592,10 @@ class Exercise(object):
                                                   **get_q_modifier(
                                                       q.id, nb_source),
                                                   **xkw)
-                    if isinstance(drawn, int):
-                        nb_to_use += (drawn, )
-                    else:
+                    if isinstance(drawn, tuple):
                         nb_to_use += drawn
+                    else:
+                        nb_to_use += (drawn, )
 
                 known_elts = set()
                 last_draw = []
