@@ -23,12 +23,13 @@
 import pytest
 from decimal import Decimal
 
-from mathmaker.lib.tools import \
-    (check_unique_letters_words, rotate, is_number, is_integer, is_natural,
-     move_digits_to,
-     remove_digits_from, fix_digits, parse_layout_descriptor,
-     fix_math_style2_fontsize, ext_dict, physical_quantity,
-     difference_of_orders_of_magnitude)
+from mathmaker.lib.tools import check_unique_letters_words, rotate
+from mathmaker.lib.tools import parse_layout_descriptor, ext_dict
+from mathmaker.lib.tools import fix_math_style2_fontsize, physical_quantity
+from mathmaker.lib.tools import difference_of_orders_of_magnitude
+from mathmaker.lib.tools.numbers import is_number, is_integer, is_natural
+from mathmaker.lib.tools.numbers import move_digits_to, remove_digits_from
+from mathmaker.lib.tools.numbers import fix_digits
 
 
 def test_recursive_update():

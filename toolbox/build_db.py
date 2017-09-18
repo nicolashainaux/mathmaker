@@ -50,7 +50,7 @@ from decimal import Decimal
 
 from mathmaker import settings
 from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words
-from mathmaker.lib.tools.number import Number
+from mathmaker.lib.tools.numbers import Number
 from mathmaker.lib.tools.frameworks import get_attributes
 
 INTPAIRS_MAX = 1000

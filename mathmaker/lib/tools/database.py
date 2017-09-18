@@ -30,8 +30,7 @@ from mathmaker.lib import shared
 from mathmaker.lib.constants.numeration import RANKS, RANKS_CONFUSING
 from mathmaker.lib.constants.numeration import RANKS_DECIMAL
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
-from mathmaker.lib.tools.number import Number
-from mathmaker.lib.tools import is_integer
+from mathmaker.lib.tools.numbers import is_integer, Number
 from mathmaker.lib.core.base_calculus import Fraction
 
 DEFAULT_RANKS_SCALE = RANKS

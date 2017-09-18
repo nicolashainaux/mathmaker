@@ -29,8 +29,7 @@
 import math
 from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN, ROUND_HALF_UP
 
-from mathmaker.lib.tools import is_number
-from mathmaker.lib.tools.number import Number
+from mathmaker.lib.tools.numbers import is_number, Number
 from mathmaker.lib.core.base import Drawable, Printable
 from mathmaker.lib.core.base_calculus import Value
 from mathmaker.lib.constants.latex import MARKUP

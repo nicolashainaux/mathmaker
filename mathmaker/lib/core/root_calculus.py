@@ -32,7 +32,7 @@ from decimal import (Decimal, getcontext, Rounded, ROUND_HALF_UP, ROUND_DOWN,
                      InvalidOperation)
 from abc import ABCMeta, abstractmethod
 
-from mathmaker.lib.tools.number import Number
+from mathmaker.lib.tools.numbers import Number
 from mathmaker.lib.core.utils import check_lexicon_for_substitution
 from mathmaker.lib.constants.numeration \
     import (UNIT, TENTH, HUNDREDTH, THOUSANDTH, TEN_THOUSANDTH, PRECISION,

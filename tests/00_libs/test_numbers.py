@@ -23,8 +23,7 @@
 import pytest
 from decimal import Decimal, ROUND_HALF_UP
 
-from mathmaker.lib.tools import is_integer
-from mathmaker.lib.tools.number import Number
+from mathmaker.lib.tools.numbers import is_integer, Number
 
 
 def test_round():

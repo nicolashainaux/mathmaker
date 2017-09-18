@@ -22,7 +22,7 @@
 
 import random
 
-from mathmaker.lib.tools import is_natural, is_number
+from mathmaker.lib.tools.numbers import is_natural, is_number
 from mathmaker.lib.tools.maths import gcd, coprimes_to, not_coprimes_to
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure

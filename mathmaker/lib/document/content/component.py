@@ -34,10 +34,9 @@ from mathmaker.lib.core.geometry import (Rectangle, Square, RightTriangle,
 from mathmaker.lib import shared
 from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.constants.units import COMMON_LENGTH_UNITS
+from mathmaker.lib.tools import rotate, fix_math_style2_fontsize
 from mathmaker.lib.tools.wording import setup_wording_format_of
-from mathmaker.lib.tools import rotate, is_integer
-from mathmaker.lib.tools import fix_math_style2_fontsize
-from mathmaker.lib.tools.number import Number
+from mathmaker.lib.tools.numbers import Number, is_integer
 
 
 class structure(object):

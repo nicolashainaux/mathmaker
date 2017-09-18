@@ -22,7 +22,7 @@
 
 import random
 
-from mathmaker.lib.tools import is_integer, is_natural
+from mathmaker.lib.tools.numbers import is_integer, is_natural
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
 from mathmaker.lib.core.base_calculus import (Product, Monomial, Item, Sum,

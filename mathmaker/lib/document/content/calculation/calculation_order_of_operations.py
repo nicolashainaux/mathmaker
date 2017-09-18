@@ -24,11 +24,11 @@ import random
 from decimal import Decimal
 
 from mathmaker.lib import shared
-from mathmaker.lib.tools \
-    import is_integer, move_digits_to, remove_digits_from, fix_digits
+from mathmaker.lib.tools.numbers import is_integer, move_digits_to
+from mathmaker.lib.tools.numbers import remove_digits_from, fix_digits
+from mathmaker.lib.tools.numbers import Number
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Division,
                                               Expandable)
-from mathmaker.lib.tools.number import Number
 from mathmaker.lib.core.calculus import Expression
 from mathmaker.lib.document.content import component
 

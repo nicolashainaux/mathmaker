@@ -23,7 +23,7 @@
 from abc import ABCMeta, abstractmethod
 
 from mathmaker.lib import shared
-from mathmaker.lib.tools import is_integer
+from mathmaker.lib.tools.numbers import is_integer
 
 MIN_ROW_HEIGHT = 0.8  # this is for mental calculation exercises
 

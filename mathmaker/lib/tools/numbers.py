@@ -20,11 +20,33 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import copy
 import random
 import warnings
 from decimal import Decimal, ROUND_DOWN
 
-from . import is_integer
+
+def is_number(n):
+    """Check if n is a number."""
+    return any(isinstance(n, c) for c in [float, int, Decimal])
+
+
+def is_integer(n):
+    """Check if number n is an integer."""
+    if isinstance(n, int):
+        return True
+    elif isinstance(n, float):
+        return n.is_integer()
+    elif isinstance(n, Decimal):
+        return n % 1 == 0
+    else:
+        raise TypeError('Expected a number, either float, int or Decimal,'
+                        'got {} instead.'.format(str(type(n))))
+
+
+def is_natural(n):
+    """Check if number n is a natural number."""
+    return is_integer(n) and n >= 0
 
 
 class Number(Decimal):
@@ -188,3 +210,80 @@ class Number(Decimal):
             b = random.choice(seq)
             a = n + b
         return (a, b)
+
+
+def move_digits_to(n, from_nb=None):
+    """
+    Turn n into decimal instead of all decimals found in the from_nb list.
+
+    Each decimal found in the numbers' list will be recursively replaced by
+    10 times itself (until it is no decimal anymore) while in the same time
+    n will be divided by 10.
+
+    This is useful for the case division by a decimal is unwanted.
+
+    :param n: the number who will be divided by 10 instead of the others
+    :type n: any number (int, Decimal, float though they're not advised)
+    :param from_nb: an iterable containing the numbers that must be integers
+    :type from_nb: a list (of numbers)
+    :rtype: a list (of numbers)
+    """
+    if type(from_nb) is not list:
+        raise TypeError('A list of numbers must be given as argument '
+                        '\'numbers\'.')
+    if not is_number(n):
+        raise TypeError('The first argument must be a number.')
+    n = Decimal(str(n))
+    if all([is_integer(i) for i in from_nb]):
+        return [n, ] + [i for i in from_nb]
+    numbers_copy = copy.deepcopy(from_nb)
+    for i, j in enumerate(from_nb):
+        if not is_number(j):
+            raise TypeError('Each variable of the list must be a number.')
+        if not is_integer(j):
+            numbers_copy[i] = j * 10
+            return move_digits_to(n / 10, from_nb=numbers_copy)
+    return [n, ] + [i for i in from_nb]
+
+
+def remove_digits_from(number, to=None):
+    """
+    Turn a number of the to list into a decimal, instead of number.
+
+    In some cases this is not possible (for instance when all numbers of the
+    to list are multiples of 10), then a ValueError is raised.
+
+    :param number: the number that must be turned into integer
+    :type number: decimal.Decimal
+    :param to: the list of numbers where to find an integer that must be
+               turned into a decimal
+    :type to: list
+    :rtype: a list (of numbers)
+    """
+    if not isinstance(number, Decimal):
+        raise TypeError('The first argument must be a Decimal number.')
+    if is_integer(number):
+        raise TypeError('The first argument must be a decimal number.')
+    if type(to) is not list:
+        raise TypeError('Argument to: must be a list.')
+    n = Number(number).decimal_places_nb()
+    try:
+        i = to.index(next(x for x in to
+                          if not is_integer(x / 10 ** n)))
+    except StopIteration:
+        raise ValueError('None of the numbers of to can be turned into '
+                         'decimal.')
+    to[i] = Number(to[i]) / Number(10) ** n
+    return [Number(number * 10 ** n).standardized(), ] + [x for x in to]
+
+
+def fix_digits(n1, *n2):
+    """Ensure digits from n1 are removed. Change n2 if necessary."""
+    n2 = list(n2)
+    try:
+        n1, *n2 = remove_digits_from(n1, to=n2)
+    except ValueError:
+        j = random.choice([j for j in range(len(n2))])
+        n2[j] += random.choice([i for i in range(-4, 5) if i != 0])
+        n1, *n2 = remove_digits_from(n1, to=n2)
+    return (n1, *n2)

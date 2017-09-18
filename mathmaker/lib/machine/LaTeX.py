@@ -28,7 +28,7 @@ import subprocess
 from tempfile import NamedTemporaryFile
 
 from mathmaker import settings
-from mathmaker.lib.tools import is_integer, is_number
+from mathmaker.lib.tools.numbers import is_integer, is_number
 from mathmaker.lib.constants import latex
 from mathmaker.lib.constants.latex import TEXT_SCALES, TEXT_RANKS
 from mathmaker.lib.tools import generate_header_comment

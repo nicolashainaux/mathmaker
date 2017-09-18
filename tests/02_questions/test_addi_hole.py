@@ -22,7 +22,7 @@
 
 # import pytest
 
-from mathmaker.lib.tools import is_number, is_integer
+from mathmaker.lib.tools.numbers import is_number, is_integer
 from mathmaker.lib.document.content.calculation import addi_hole
 from tools import wrap_nb
 
