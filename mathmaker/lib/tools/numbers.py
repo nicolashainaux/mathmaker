@@ -212,7 +212,7 @@ class Number(Decimal):
         return (a, b)
 
 
-def move_digits_to(n, from_nb=None):
+def move_fracdigits_to(n, from_nb=None):
     """
     Turn n into decimal instead of all decimals found in the from_nb list.
 
@@ -242,11 +242,11 @@ def move_digits_to(n, from_nb=None):
             raise TypeError('Each variable of the list must be a number.')
         if not is_integer(j):
             numbers_copy[i] = j * 10
-            return move_digits_to(n / 10, from_nb=numbers_copy)
+            return move_fracdigits_to(n / 10, from_nb=numbers_copy)
     return [n, ] + [i for i in from_nb]
 
 
-def remove_digits_from(number, to=None):
+def remove_fracdigits_from(number, to=None):
     """
     Turn a number of the to list into a decimal, instead of number.
 
@@ -277,13 +277,13 @@ def remove_digits_from(number, to=None):
     return [Number(number * 10 ** n).standardized(), ] + [x for x in to]
 
 
-def fix_digits(n1, *n2):
+def fix_fracdigits(n1, *n2):
     """Ensure digits from n1 are removed. Change n2 if necessary."""
     n2 = list(n2)
     try:
-        n1, *n2 = remove_digits_from(n1, to=n2)
+        n1, *n2 = remove_fracdigits_from(n1, to=n2)
     except ValueError:
         j = random.choice([j for j in range(len(n2))])
         n2[j] += random.choice([i for i in range(-4, 5) if i != 0])
-        n1, *n2 = remove_digits_from(n1, to=n2)
+        n1, *n2 = remove_fracdigits_from(n1, to=n2)
     return (n1, *n2)

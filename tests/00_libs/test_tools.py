@@ -27,9 +27,6 @@ from mathmaker.lib.tools import check_unique_letters_words, rotate
 from mathmaker.lib.tools import parse_layout_descriptor, ext_dict
 from mathmaker.lib.tools import fix_math_style2_fontsize, physical_quantity
 from mathmaker.lib.tools import difference_of_orders_of_magnitude
-from mathmaker.lib.tools.numbers import is_number, is_integer, is_natural
-from mathmaker.lib.tools.numbers import move_digits_to, remove_digits_from
-from mathmaker.lib.tools.numbers import fix_digits
 
 
 def test_recursive_update():
@@ -69,100 +66,6 @@ def test_rotate():
     assert rotate([1, 2, 3, 4, 5], -3) == [4, 5, 1, 2, 3]
     assert rotate([1, 2, 3], 3) == [1, 2, 3]
     assert rotate([1, 2, 3], -9) == [1, 2, 3]
-
-
-def test_is_number():
-    """Check numbers are correctly identified."""
-    assert is_number(104)
-    assert is_number(1.0)
-    assert is_number(4 + 9.0 ** 3)
-    assert is_number(Decimal('4'))
-    assert not is_number('4')
-    assert not is_number([1])
-
-
-def test_is_integer():
-    """Check integers are correctly identified."""
-    assert is_integer(9)
-    assert is_integer(-9)
-    assert is_integer(10 + 59 // 7)
-    assert is_integer(1.0)
-    assert is_integer(-1.0)
-    assert is_integer(Decimal('1.0'))
-    assert is_integer(Decimal('-1.0'))
-    assert not is_integer(Decimal('1.01'))
-    assert not is_integer(Decimal('-1.01'))
-    with pytest.raises(TypeError):
-        is_integer('1.0')
-    with pytest.raises(TypeError):
-        is_integer('-1.0')
-
-
-def test_is_natural():
-    """Check naturals are correctly identified."""
-    assert is_natural(0)
-    assert is_natural(-0)
-    assert is_natural(9)
-    assert not is_natural(-9)
-    assert is_natural(10 + 59 // 7)
-    assert is_natural(1.0)
-    assert not is_natural(-1.0)
-    assert is_natural(Decimal('1.0'))
-    assert not is_natural(Decimal('-1.0'))
-    assert not is_natural(Decimal('1.01'))
-    assert not is_natural(Decimal('-1.01'))
-    with pytest.raises(TypeError):
-        is_natural('1.0')
-    with pytest.raises(TypeError):
-        is_natural('-1.0')
-
-
-def test_move_digits_to():
-    """Check move_digits_to() in different cases."""
-    with pytest.raises(TypeError):
-        move_digits_to(14)
-    with pytest.raises(TypeError):
-        move_digits_to(14, (7, 5))
-    with pytest.raises(TypeError):
-        move_digits_to(14, {7: 'a', 6: 'b'})
-    with pytest.raises(TypeError):
-        move_digits_to(14, [7, '5'])
-    with pytest.raises(TypeError):
-        move_digits_to('14', [7, 5])
-    assert move_digits_to(14, [7, 5]) == [14, 7, 5]
-    assert move_digits_to(14, [Decimal('0.7'), 5]) \
-        == [Decimal('1.4'), Decimal(7), 5]
-    assert move_digits_to(14, [Decimal('0.7'), Decimal('0.5')]) \
-        == [Decimal('0.14'), Decimal(7), Decimal(5)]
-
-
-def test_remove_digits_from():
-    """Check remove_digits_from() in different cases."""
-    with pytest.raises(TypeError):
-        remove_digits_from('14', to=[])
-    with pytest.raises(TypeError):
-        remove_digits_from(14)
-    with pytest.raises(TypeError):
-        remove_digits_from(1.4)
-    with pytest.raises(ValueError):
-        remove_digits_from(Decimal('1.4'), to=[])
-    with pytest.raises(ValueError):
-        remove_digits_from(Decimal('1.4'), to=[10, 20, 30])
-    assert remove_digits_from(Decimal('1.4'), to=[10, 20, 36]) ==\
-        [Decimal('14'), 10, 20, Decimal('3.6')]
-
-
-def test_fix_digits():
-    """Check fix_digits() in different cases."""
-    n1, n2 = fix_digits(Decimal('0.6'), Decimal('2'))
-    assert n1 == Decimal('6')
-    assert n2 == Decimal('0.2')
-    n1, n2 = fix_digits(Decimal('0.6'), Decimal('10'))
-    assert n1 == Decimal('6')
-    assert not is_integer(n2)
-    n1, n2, n3 = fix_digits(Decimal('0.6'), Decimal('10'), Decimal('100'))
-    assert n1 == Decimal('6')
-    assert not is_integer(n2) or not is_integer(n3)
 
 
 def test_parse_layout_descriptor():

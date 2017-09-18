@@ -24,8 +24,8 @@ import random
 from decimal import Decimal
 
 from mathmaker.lib import shared
-from mathmaker.lib.tools.numbers import is_integer, move_digits_to
-from mathmaker.lib.tools.numbers import remove_digits_from, fix_digits
+from mathmaker.lib.tools.numbers import is_integer, move_fracdigits_to
+from mathmaker.lib.tools.numbers import remove_fracdigits_from, fix_fracdigits
 from mathmaker.lib.tools.numbers import Number
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Division,
                                               Expandable)
@@ -264,8 +264,9 @@ class sub_object(component.structure):
                 and random.choice([True, True, True, False])):
                 try:
                     self.nb2, self.nb1, self.nb3, self.nb4 =\
-                        remove_digits_from(self.nb2,
-                                           to=[self.nb1, self.nb3, self.nb4])
+                        remove_fracdigits_from(self.nb2,
+                                               to=[self.nb1, self.nb3,
+                                                   self.nb4])
                 except ValueError:
                     pass
         if not self.allow_division_by_decimal:
@@ -274,13 +275,13 @@ class sub_object(component.structure):
                     if is_integer(self.nb1):
                         self.nb1, self.nb2 = self.nb2, self.nb1
                     else:
-                        self.nb2, self.nb1 = fix_digits(self.nb2, self.nb1)
+                        self.nb2, self.nb1 = fix_fracdigits(self.nb2, self.nb1)
             if self.variant in [1, 3, 17, 21, 22, 23]:
                 if not is_integer(self.nb3):
                     if is_integer(self.nb2):
                         self.nb2, self.nb3 = self.nb3, self.nb2
                     else:
-                        self.nb3, self.nb2 = fix_digits(self.nb3, self.nb2)
+                        self.nb3, self.nb2 = fix_fracdigits(self.nb3, self.nb2)
             if self.variant in [12, 13, 14, 15, ]:
                 if not is_integer(self.nb4):
                     self.nb3, self.nb4 = self.nb4, self.nb3
@@ -289,18 +290,18 @@ class sub_object(component.structure):
                     if self.nb_variant == 'decimal1':
                         self.nb1, self.nb2 = self.nb2, self.nb1
                     else:
-                        self.nb1, self.nb2 = move_digits_to(self.nb1,
-                                                            from_nb=[self.nb2])
+                        self.nb1, self.nb2 = \
+                            move_fracdigits_to(self.nb1, from_nb=[self.nb2])
             if self.variant in [109, 110, 113, 114]:
                 if not is_integer(self.nb3):
                     if self.nb_variant == 'decimal1':
                         self.nb2, self.nb3 = self.nb3, self.nb2
                     else:
-                        self.nb2, self.nb3 = move_digits_to(self.nb2,
-                                                            from_nb=[self.nb3])
+                        self.nb2, self.nb3 = \
+                            move_fracdigits_to(self.nb2, from_nb=[self.nb3])
             if self.variant in [111, 115]:
                 self.nb1, self.nb2, self.nb3 = \
-                    move_digits_to(self.nb1, from_nb=[self.nb2, self.nb3])
+                    move_fracdigits_to(self.nb1, from_nb=[self.nb2, self.nb3])
             if 132 <= self.variant <= 135:
                 if not is_integer(self.nb2):
                     if self.nb_variant == 'decimal1':
@@ -308,12 +309,12 @@ class sub_object(component.structure):
                     else:
                         try:
                             self.nb2, self.nb1 = \
-                                remove_digits_from(self.nb2, to=[self.nb1])
+                                remove_fracdigits_from(self.nb2, to=[self.nb1])
                         except ValueError:
                             self.nb1 += random.choice([i for i in range(-4, 5)
                                                        if i != 0])
                             self.nb2, self.nb1 = \
-                                remove_digits_from(self.nb2, to=[self.nb1])
+                                remove_fracdigits_from(self.nb2, to=[self.nb1])
             if 124 <= self.variant <= 131 or 136 <= self.variant <= 139:
                 if not is_integer(self.nb4):
                     if self.nb_variant == 'decimal1':
@@ -321,29 +322,29 @@ class sub_object(component.structure):
                     else:
                         try:
                             self.nb4, self.nb3 = \
-                                remove_digits_from(self.nb4, to=[self.nb3])
+                                remove_fracdigits_from(self.nb4, to=[self.nb3])
                         except ValueError:
                             self.nb3 += random.choice([i for i in range(-4, 5)
                                                        if i != 0])
                             self.nb4, self.nb3 = \
-                                remove_digits_from(self.nb4, to=[self.nb3])
+                                remove_fracdigits_from(self.nb4, to=[self.nb3])
             if 140 <= self.variant <= 147:
                 rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 if not is_integer(self.nb2):
                     try:
-                        self.nb2, self.nb1, self.nb3 = remove_digits_from(
+                        self.nb2, self.nb1, self.nb3 = remove_fracdigits_from(
                             self.nb2, to=[self.nb1, self.nb3])
                     except ValueError:
                         self.nb1 += rnd
-                        self.nb2, self.nb1 = remove_digits_from(
+                        self.nb2, self.nb1 = remove_fracdigits_from(
                             self.nb2, to=[self.nb1])
                 if not is_integer(self.nb4):
                     try:
-                        self.nb4, self.nb3, self.nb1 = remove_digits_from(
+                        self.nb4, self.nb3, self.nb1 = remove_fracdigits_from(
                             self.nb4, to=[self.nb3, self.nb1])
                     except ValueError:
                         self.nb3 += rnd
-                        self.nb4, self.nb3 = remove_digits_from(
+                        self.nb4, self.nb3 = remove_fracdigits_from(
                             self.nb4, to=[self.nb3])
             if self.variant in [149, 151, 153, 155, 174, 175, 178, 179, 181,
                                 183, 185, 187]:
@@ -351,14 +352,14 @@ class sub_object(component.structure):
                     if is_integer(self.nb1):
                         self.nb1, self.nb2 = self.nb2, self.nb1
                     else:
-                        self.nb2, self.nb1 = remove_digits_from(
+                        self.nb2, self.nb1 = remove_fracdigits_from(
                             self.nb2, to=[self.nb1])
             if self.variant in [157, 159, 161, 163, 166, 170, 167, 171]:
                 if not is_integer(self.nb3):
                     if is_integer(self.nb2):
                         self.nb2, self.nb3 = self.nb3, self.nb2
                     else:
-                        self.nb3, self.nb1, self.nb2 = remove_digits_from(
+                        self.nb3, self.nb1, self.nb2 = remove_fracdigits_from(
                             self.nb3, to=[self.nb1, self.nb2])
         if (self.variant in [14, 15]
             and self.nb_variant.startswith('decimal')
@@ -368,12 +369,12 @@ class sub_object(component.structure):
                                             self.nb4])):
             if not is_integer(self.nb1) and is_integer(self.nb1 * self.nb2):
                 if not is_integer(self.nb3 * self.nb4 / 10):
-                    self.nb1, self.nb3 = fix_digits(self.nb1, self.nb3)
+                    self.nb1, self.nb3 = fix_fracdigits(self.nb1, self.nb3)
                 else:
                     self.nb2 += random.choice([-1, 1])
             if not is_integer(self.nb3) and is_integer(self.nb3 * self.nb4):
                 if not is_integer(self.nb1 * self.nb2 / 10):
-                    self.nb3, self.nb1 = fix_digits(self.nb3, self.nb1)
+                    self.nb3, self.nb1 = fix_fracdigits(self.nb3, self.nb1)
                 else:
                     self.nb4 += random.choice([-1, 1])
         if self.variant in [17, 21, 22, 23]:
@@ -382,13 +383,13 @@ class sub_object(component.structure):
                                                 self.nb2 * self.nb3,
                                                 self.nb4])):
                 if random.choice([True, False]):
-                    self.nb2, self.nb1, self.nb4 = fix_digits(self.nb2,
-                                                              self.nb1,
-                                                              self.nb4)
+                    self.nb2, self.nb1, self.nb4 = fix_fracdigits(self.nb2,
+                                                                  self.nb1,
+                                                                  self.nb4)
                 else:
-                    self.nb2, self.nb4, self.nb1 = fix_digits(self.nb2,
-                                                              self.nb4,
-                                                              self.nb1)
+                    self.nb2, self.nb4, self.nb1 = fix_fracdigits(self.nb2,
+                                                                  self.nb4,
+                                                                  self.nb1)
 
     def _create_0to23(self):
         a, b, c = self.nb1, self.nb2, self.nb3
@@ -399,17 +400,17 @@ class sub_object(component.structure):
             if (self.nb_variant.startswith('decimal')
                 and not is_integer(a)
                 and all(is_integer(x) for x in [a * b, c, d])):
-                a, c, d = fix_digits(a, c, d)
+                a, c, d = fix_fracdigits(a, c, d)
         elif self.variant == 13:
             if (self.nb_variant.startswith('decimal')
                 and not is_integer(c)
                 and all(is_integer(x) for x in [a, b, c * d])):
-                c, a, b = fix_digits(c, a, b)
+                c, a, b = fix_fracdigits(c, a, b)
         if (self.subvariant == 'only_positive'
             and self.variant == 11 and a - c * d < 0
             and self.nb_variant.startswith('decimal')):
             if not is_integer(a) and a * 10 - c * d / 10 >= 0:
-                a, c, d = fix_digits(a, c, d)
+                a, c, d = fix_fracdigits(a, c, d)
             else:
                 self.variant = 13
                 a, b, c, d = c, d, a, b
@@ -425,7 +426,7 @@ class sub_object(component.structure):
         elif self.variant == 1:  # a + b÷c
             if (self.nb_variant.startswith('decimal')
                 and all(is_integer(x) for x in [a, b * c, c])):
-                b, a = fix_digits(b, a)
+                b, a = fix_fracdigits(b, a)
             b = b * c
             self.obj = Sum([a, Division(('+', b, c))])
             self.watch('no negative; decimals distribution; '
@@ -440,7 +441,7 @@ class sub_object(component.structure):
         elif self.variant == 3:  # a - b÷c
             if (self.nb_variant.startswith('decimal')
                 and all(is_integer(x) for x in [a, b * c, c])):
-                b, a = fix_digits(b, a)
+                b, a = fix_fracdigits(b, a)
             if self.subvariant == 'only_positive':
                 if a < b:
                     a += b
@@ -455,7 +456,7 @@ class sub_object(component.structure):
         elif self.variant == 5:  # a÷b + c
             if (self.nb_variant.startswith('decimal')
                 and all(is_integer(x) for x in [a * b, b, c])):
-                a, c = fix_digits(a, c)
+                a, c = fix_fracdigits(a, c)
             a = a * b
             self.obj = Sum([Division(('+', a, b)), c])
             self.watch('no negative; decimals distribution; '
@@ -520,7 +521,7 @@ class sub_object(component.structure):
         elif self.variant == 10:  # a÷b + c×d
             if (self.nb_variant.startswith('decimal')
                 and all(is_integer(x) for x in [a * b, c, d])):
-                a, c, d = fix_digits(a, c, d)
+                a, c, d = fix_fracdigits(a, c, d)
             a = a * b
             self.obj = Sum([Division(('+', a, b)), Product([c, d])])
             self.watch('no negative; decimals distribution; '
@@ -541,7 +542,7 @@ class sub_object(component.structure):
         elif self.variant == 12:  # a×b + c÷d
             if (self.nb_variant.startswith('decimal')
                 and all(is_integer(x) for x in [a, b, c * d])):
-                c, a, b = fix_digits(c, a, b)
+                c, a, b = fix_fracdigits(c, a, b)
             c = c * d
             self.obj = Sum([Product([a, b]), Division(('+', c, d))])
             self.watch('no negative; decimals distribution; '
@@ -864,7 +865,7 @@ class sub_object(component.structure):
             and not is_integer(a)
             and all(is_integer(x) for x in [b, c, d, a * (b + c * d)])):
             try:
-                a, b, c, d = remove_digits_from(a, to=[b, c, d])
+                a, b, c, d = remove_fracdigits_from(a, to=[b, c, d])
             except ValueError:
                 rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 choice = random.choice([1, 2, 3])
@@ -874,14 +875,14 @@ class sub_object(component.structure):
                     c += rnd
                 else:
                     d += rnd
-                a, b, c, d = remove_digits_from(a, to=[b, c, d])
+                a, b, c, d = remove_fracdigits_from(a, to=[b, c, d])
         if (not self.allow_division_by_decimal
             and self.nb_variant.startswith('decimal')
             and not is_integer(b + c * d)):
             if not is_integer(b):
                 # For instance, b + c×d is 0.8 + 10×6
                 try:
-                    b, c, d = remove_digits_from(b, to=[c, d])
+                    b, c, d = remove_fracdigits_from(b, to=[c, d])
                     # Now it is 8 + 10×0.6
                 except ValueError:
                     # Bad luck, it was something like 0.8 + 50×10
@@ -895,7 +896,7 @@ class sub_object(component.structure):
                         c += rnd
                     else:
                         d += rnd
-                    b, c, d = remove_digits_from(b, to=[c, d])
+                    b, c, d = remove_fracdigits_from(b, to=[c, d])
             # Now it's sure b is an integer
             # this doesn't mean that b + c*d is
             if not is_integer(b + c * d):
@@ -924,26 +925,26 @@ class sub_object(component.structure):
             and not is_integer(a)
             and all(is_integer(x) for x in [b, c, d, a * b])):
             try:
-                a, c, d = remove_digits_from(a, to=[c, d])
+                a, c, d = remove_fracdigits_from(a, to=[c, d])
             except ValueError:
                 rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 if random.choice([True, False]):
                     c += rnd
                 else:
                     d += rnd
-                a, c, d = remove_digits_from(a, to=[c, d])
+                a, c, d = remove_fracdigits_from(a, to=[c, d])
         if (not self.allow_division_by_decimal
             and self.nb_variant.startswith('decimal')
             and not is_integer(b)):
             try:
-                b, c, d = remove_digits_from(b, to=[c, d])
+                b, c, d = remove_fracdigits_from(b, to=[c, d])
             except ValueError:
                 rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 if random.choice([True, False]):
                     c += rnd
                 else:
                     d += rnd
-                b, c, d = remove_digits_from(b, to=[c, d])
+                b, c, d = remove_fracdigits_from(b, to=[c, d])
         if (self.variant == 135 and self.subvariant == 'only_positive'
             and c * d - b <= 0):
                 self.variant = 134
@@ -980,14 +981,14 @@ class sub_object(component.structure):
                 # and it is not possible to swap a, b and c, d
                 # (in order to move the decimal to the product a×b)
                 try:
-                    c, a, b = remove_digits_from(c, to=[a, b])
+                    c, a, b = remove_fracdigits_from(c, to=[a, b])
                 except ValueError:
                     rnd = random.choice([i for i in range(-4, 5) if i != 0])
                     if random.choice([True, False]):
                         a += rnd
                     else:
                         b += rnd
-                    c, a, b = remove_digits_from(c, to=[a, b])
+                    c, a, b = remove_fracdigits_from(c, to=[a, b])
         else:
             if (a * b > c * d and self.subvariant == 'only_positive'):
                 if (all(is_integer(x) for x in [a, b])
@@ -998,10 +999,10 @@ class sub_object(component.structure):
                         a, b = b, a
                     # Now, the decimal is in a, for sure
                     try:
-                        a, c = remove_digits_from(a, to=[c])
+                        a, c = remove_fracdigits_from(a, to=[c])
                     except ValueError:
                         c += random.choice([i + 1 for i in range(9)])
-                        a, c = remove_digits_from(a, to=[c])
+                        a, c = remove_fracdigits_from(a, to=[c])
                     a, b, c, d = c, d, a, b
         if not is_integer(d):
             c, d = d, c
@@ -1068,10 +1069,10 @@ class sub_object(component.structure):
             and not is_integer(c)):
             if not is_integer(a * b / 10):
                 try:
-                    c, a = remove_digits_from(c, to=[a])
+                    c, a = remove_fracdigits_from(c, to=[a])
                 except ValueError:
                     a += random.choice([i for i in range(-4, 5) if i != 0])
-                    c, a = remove_digits_from(c, to=[a])
+                    c, a = remove_fracdigits_from(c, to=[a])
             else:
                 d += random.choice([-1, 1])
                 if d == 1:
@@ -1081,10 +1082,10 @@ class sub_object(component.structure):
               and not is_integer(a)):
             if not is_integer(c * d / 10):
                 try:
-                    a, c = remove_digits_from(a, to=[c])
+                    a, c = remove_fracdigits_from(a, to=[c])
                 except ValueError:
                     c += random.choice([i for i in range(-4, 5) if i != 0])
-                    a, c = remove_digits_from(a, to=[c])
+                    a, c = remove_fracdigits_from(a, to=[c])
             else:
                 b += random.choice([-1, 1])
                 if b == 1:
@@ -1096,11 +1097,11 @@ class sub_object(component.structure):
                     if (not self.allow_division_by_decimal
                         and not is_integer(d)):
                         try:
-                            d, c = remove_digits_from(d, to=[c])
+                            d, c = remove_fracdigits_from(d, to=[c])
                         except ValueError:
                             c += random.choice([i for i in range(-4, 5)
                                                 if i != 0])
-                            d, c = remove_digits_from(d, to=[c])
+                            d, c = remove_fracdigits_from(d, to=[c])
                 a = a * b
                 if c != b:
                     b = b - c
@@ -1328,10 +1329,10 @@ class sub_object(component.structure):
             and not is_integer(self.nb1)
             and is_integer(self.nb1 * self.nb2)):
             try:
-                remove_digits_from(self.nb1, to=[self.nb3])
+                remove_fracdigits_from(self.nb1, to=[self.nb3])
             except ValueError:
                 self.nb3 += random.choice([i for i in range(-4, 5) if i != 0])
-                remove_digits_from(self.nb1, to=[self.nb3])
+                remove_fracdigits_from(self.nb1, to=[self.nb3])
         c, d = self.nb2, self.nb3
         if self.variant in [172, 173, 176, 177, 180, 182, 184, 186]:
             a, b = Number(self.nb1) \
