@@ -102,39 +102,58 @@ class source(object):
     #           and nb1_max >= ...
     def _kw_conditions(self, **kwargs):
         result = ""
+
+        def hook(i):
+            """Return ' AND ' if i != 0, else ''"""
+            yield ' AND ' if i else ''
+
+        # kn stands for keyword number
+        # It must be updated (+=1) ONLY if a keyword has led to add a condition
+        # indeed. Hence it - alas - CANNOT be handled by enumerate(kwargs).
+        kn = 0
         for kw in kwargs:
             if kw == "raw":
-                result += " AND " + kwargs[kw] + " "
+                result += next(hook(kn)) + kwargs[kw] + " "
+                kn += 1
             elif kw.endswith('_notmod'):
                 k = kw[:-7]
-                result += " AND " + k + " % " + str(kwargs[kw]) + " != 0 "
+                result += next(hook(kn)) + k + " % " + str(kwargs[kw]) \
+                    + " != 0 "
+                kn += 1
             elif kw == "triangle_inequality":
                 common_nb, t1, t2 = kwargs[kw]
                 mini = str(abs(t1 - t2) + 1)  # we avoid "too flat" triangles
                 maxi = str(t1 + t2 - 1)
-                result += 'AND ('\
+                result += next(hook(kn)) + '('\
                     '(nb1 = ' + str(common_nb) + ' '\
                     'AND (nb2 >= ' + mini + ' AND nb2 <= ' + maxi + ') '\
                     ') OR '\
                     '(nb2 = ' + str(common_nb) + ' '\
                     'AND (nb1 >= ' + mini + ' AND nb1 <= ' + maxi + ') '\
                     '))'
+                kn += 1
             elif (kw == "prevails" or kw.startswith("info_") or kw == "union"
                   or kw == 'table_name' or kw == 'no_order_by_random'):
                 # __
                 pass
             elif kw == "lock_equal_products":
-                result += " AND lock_equal_products = 0 "
+                result += next(hook(kn)) + " lock_equal_products = 0 "
+                kn += 1
             elif kw.endswith("_to_check"):
                 k = kw[:-9]
-                result += " AND " + k + "_min" + " <= " + str(kwargs[kw]) + " "
-                result += " AND " + k + "_max" + " >= " + str(kwargs[kw]) + " "
+                result += next(hook(kn)) + k + "_min" + " <= " \
+                    + str(kwargs[kw]) + " "
+                result += ' AND ' + k + "_max" + " >= " \
+                    + str(kwargs[kw]) + " "
+                kn += 1
             elif kw.endswith("_min"):
                 k = kw[:-4]
-                result += " AND " + k + " >= " + str(kwargs[kw]) + " "
+                result += next(hook(kn)) + k + " >= " + str(kwargs[kw]) + " "
+                kn += 1
             elif kw.endswith("_max"):
                 k = kw[:-4]
-                result += " AND " + k + " <= " + str(kwargs[kw]) + " "
+                result += next(hook(kn)) + k + " <= " + str(kwargs[kw]) + " "
+                kn += 1
             elif kw == "not_in":
                 updated_notin_list = list(kwargs[kw])
                 for c in self.valcols:
@@ -149,27 +168,33 @@ class source(object):
                         if n in updated_notin_list:
                             updated_notin_list.remove(n)
                 if len(updated_notin_list):
-                    for c in self.valcols:
-                        result += " AND " + c + " NOT IN (" + ", "\
+                    for i, c in enumerate(self.valcols):
+                        result += next(hook(kn + i)) + c + " NOT IN (" + ", "\
                             .join(str(x) for x in updated_notin_list) + ") "
+                        kn += 1
             elif kw.startswith("either_") and kw.endswith("_in"):
                 k = kw.split(sep='_')[1:-1]
-                result += " AND ( " + k[0] + " IN (" + ", "\
+                result += next(hook(kn)) + "( " + k[0] + " IN (" + ", "\
                     .join(str(x) for x in kwargs[kw]) + ") OR "\
                     + k[1] + " IN (" + ", "\
                     .join(str(x) for x in kwargs[kw]) + ") )"
+                kn += 1
             elif kw.endswith("_in"):
                 k = kw[:-3]
-                result += " AND " + k + " IN (" + ", "\
+                result += next(hook(kn)) + k + " IN (" + ", "\
                     .join(str(x) for x in kwargs[kw]) + ") "
+                kn += 1
             elif kw == 'rectangle':
                 if any([kw.startswith('nb2') for kw in kwargs]):
-                    result += " AND nb1 != nb2 "
+                    result += next(hook(kn)) + "nb1 != nb2 "
+                    kn += 1
             elif kw == 'square':
                 if any([kw.startswith('nb2') for kw in kwargs]):
-                    result += " AND nb1 = nb2 "
+                    result += next(hook(kn)) + "nb1 = nb2 "
+                    kn += 1
             elif kw == 'diff7atleast':
-                result += " AND nb2 - nb1 >= 7 "
+                result += next(hook(kn)) + "nb2 - nb1 >= 7 "
+                kn += 1
             elif kw.endswith('_noqr'):
                 pass
             else:  # default interpretation is " AND key = value "
@@ -196,9 +221,10 @@ class source(object):
                         simple_quote = "'"
                     else:
                         raise
-                result += " AND " + key + rel_sign + simple_quote \
+                result += next(hook(kn)) + key + rel_sign + simple_quote \
                     + str(kwargs[kw]) + simple_quote + " "
-        return result
+                kn += 1
+        return 'AND ({})'.format(result)
 
     ##
     #   @brief  Concatenates the different parts of the query
@@ -211,7 +237,7 @@ class source(object):
                 + self._cmd(no_order_by_random=True, **kwargs2) \
                 + ") ORDER BY random() LIMIT 1;"
         else:
-            order_by_random = "ORDER BY random() LIMIT 1;"
+            order_by_random = " ORDER BY random() LIMIT 1;"
             if 'no_order_by_random' in kwargs:
                 order_by_random = ""
             return self._select_part(**kwargs) + " WHERE drawDate = 0 " \
