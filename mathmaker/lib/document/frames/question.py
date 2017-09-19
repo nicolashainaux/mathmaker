@@ -65,9 +65,10 @@ class Question(object):
         # modules
         mod_name = self.q_kind
         if mod_name in ['vocabulary_half', 'vocabulary_third',
-                        'vocabulary_quarter', 'vocabulary_double',
-                        'vocabulary_triple', 'vocabulary_quadruple']:
-            # __
+                        'vocabulary_quarter']:
+            mod_name = 'vocabulary_simple_part_of_a_number'
+        elif mod_name in ['vocabulary_double', 'vocabulary_triple',
+                          'vocabulary_quadruple']:
             mod_name = 'vocabulary_simple_multiple_of_a_number'
 
         for m in ALL_MODULES:
