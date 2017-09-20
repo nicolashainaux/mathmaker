@@ -37,8 +37,6 @@ class structure(component.structure):
         super().setup("nb_variants", nb=nbs_to_use, **kwargs)
         self.result = Value(result_fct(self.nb1, self.nb2)
                             .evaluate()).into_str()
-        if 'swap_nb1_nb2' in kwargs and kwargs['swap_nb1_nb2']:
-            self.nb1, self.nb2 = self.nb2, self.nb1
         if ('permute_nb1_nb2_result' in kwargs
             and kwargs['permute_nb1_nb2_result']):
             # __
@@ -48,10 +46,15 @@ class structure(component.structure):
         self.wording = wording
         setup_wording_format_of(self)
         self.transduration = 9
+        self.answer_wording = kwargs.get('answer', self.result)
+        if isinstance(self.answer_wording, str):
+            setup_wording_format_of(self, w_prefix='answer_')
+            self.answer_wording = self.answer_wording\
+                .format(**self.answer_wording_format)
 
     def q(self, **kwargs):
         return self.wording.format(**self.wording_format)
 
     def a(self, **kwargs):
         # This is actually meant for self.preset == 'mental calculation'
-        return str(self.result)
+        return str(self.answer_wording)

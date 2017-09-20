@@ -303,3 +303,10 @@ def test_03_yellow_decimal_numerals():
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
                                        'decimal_numerals')))
+
+
+def test_03_yellow_operations_vocabulary():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'operations_vocabulary')))

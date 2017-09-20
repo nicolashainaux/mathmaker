@@ -37,6 +37,26 @@ decimal_numerals: !!omap
                  addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (5)
                  decimal numerals -> fracdigits_places (13)
 
+operations_vocabulary: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: operations' vocabulary"
+  - exercise: !!omap
+    - questions: vocabulary half -> table_2 (1)
+                 vocabulary third -> table_3 (1)
+                 vocabulary quarter -> table_4 (1)
+                 vocabulary double -> table_2 (1)
+                 vocabulary triple -> table_3 (1)
+                 vocabulary quadruple -> table_4 (1)
+                 vocabulary simple_parts_of_a_number -> auto_multiples (2)
+                 vocabulary simple_multiples_of_a_number -> auto_multiples (1)
+                 vocabulary multi -> intpairs_2to9 (1)
+                                  -> table_11_tens_easy (1)
+                 vocabulary divi -> intpairs_4to9 (2)
+                 vocabulary addi -> singleint_10to100;;singleint_10to100 (1)
+                                 -> intpairs_7to15 (1)
+                 vocabulary subtr -> singleint_10to100;;singleint_10to100 (1)
+                                  -> intpairs_2to200, nb_variant=decimal2 (1)
+                 vocabulary operation -> auto_vocabulary (3)
 
 # COPY OF THE FIRST VERSION OF addi_subtr_hole WITH DECIMAL NUMBERS (TO BE REUSED OR INSPIRED OF LATER)
 # addi_subtr_hole: !!omap

@@ -31,7 +31,7 @@ class sub_object(vocabulary_questions.structure):
     def __init__(self, numbers_to_use, **options):
         super().__init__(numbers_to_use,
                          result_fct=lambda x, y: Product([x, y]),
-                         wording=_("How much is the quotient of {nb1} by "
-                                   "{nb2}?"),
-                         permute_nb1_nb2_result=True,
+                         wording=_('How much is the quotient of {result} by '
+                                   '{nb1}?'),
+                         answer='{nb2}',
                          **options)

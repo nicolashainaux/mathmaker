@@ -204,6 +204,11 @@
         "03_yellow",
         "decimal_numerals"
     ],
+    "03_yellow_operations_vocabulary": [
+        "mental_calculation",
+        "03_yellow",
+        "operations_vocabulary"
+    ],
     "expand_simple": [
         "algebra",
         "expand",
