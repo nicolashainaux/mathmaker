@@ -224,7 +224,7 @@ class source(object):
                 result += next(hook(kn)) + key + rel_sign + simple_quote \
                     + str(kwargs[kw]) + simple_quote + " "
                 kn += 1
-        return 'AND ({})'.format(result)
+        return 'AND ({})'.format(result) if result else ''
 
     ##
     #   @brief  Concatenates the different parts of the query
