@@ -124,13 +124,13 @@ class source(object):
                 common_nb, t1, t2 = kwargs[kw]
                 mini = str(abs(t1 - t2) + 1)  # we avoid "too flat" triangles
                 maxi = str(t1 + t2 - 1)
-                result += next(hook(kn)) + '('\
-                    '(nb1 = ' + str(common_nb) + ' '\
-                    'AND (nb2 >= ' + mini + ' AND nb2 <= ' + maxi + ') '\
+                result += next(hook(kn)) + ' ( '\
+                    '( nb1 = ' + str(common_nb) + ' '\
+                    'AND ( nb2 >= ' + mini + ' AND nb2 <= ' + maxi + ' ) '\
                     ') OR '\
-                    '(nb2 = ' + str(common_nb) + ' '\
-                    'AND (nb1 >= ' + mini + ' AND nb1 <= ' + maxi + ') '\
-                    '))'
+                    '( nb2 = ' + str(common_nb) + ' '\
+                    'AND ( nb1 >= ' + mini + ' AND nb1 <= ' + maxi + ' ) '\
+                    ')) '
                 kn += 1
             elif (kw == "prevails" or kw.startswith("info_") or kw == "union"
                   or kw == 'table_name' or kw == 'no_order_by_random'):
@@ -169,20 +169,20 @@ class source(object):
                             updated_notin_list.remove(n)
                 if len(updated_notin_list):
                     for i, c in enumerate(self.valcols):
-                        result += next(hook(kn + i)) + c + " NOT IN (" + ", "\
-                            .join(str(x) for x in updated_notin_list) + ") "
+                        result += next(hook(kn + i)) + c + " NOT IN ( " + ", "\
+                            .join(str(x) for x in updated_notin_list) + " ) "
                         kn += 1
             elif kw.startswith("either_") and kw.endswith("_in"):
                 k = kw.split(sep='_')[1:-1]
-                result += next(hook(kn)) + "( " + k[0] + " IN (" + ", "\
-                    .join(str(x) for x in kwargs[kw]) + ") OR "\
-                    + k[1] + " IN (" + ", "\
-                    .join(str(x) for x in kwargs[kw]) + ") )"
+                result += next(hook(kn)) + " ( " + k[0] + " IN ( " + ", "\
+                    .join(str(x) for x in kwargs[kw]) + " ) OR "\
+                    + k[1] + " IN ( " + ", "\
+                    .join(str(x) for x in kwargs[kw]) + " ) ) "
                 kn += 1
             elif kw.endswith("_in"):
                 k = kw[:-3]
-                result += next(hook(kn)) + k + " IN (" + ", "\
-                    .join(str(x) for x in kwargs[kw]) + ") "
+                result += next(hook(kn)) + k + " IN ( " + ", "\
+                    .join(str(x) for x in kwargs[kw]) + " ) "
                 kn += 1
             elif kw == 'rectangle':
                 if any([kw.startswith('nb2') for kw in kwargs]):
@@ -190,10 +190,10 @@ class source(object):
                     kn += 1
             elif kw == 'square':
                 if any([kw.startswith('nb2') for kw in kwargs]):
-                    result += next(hook(kn)) + "nb1 = nb2 "
+                    result += next(hook(kn)) + " nb1 = nb2 "
                     kn += 1
             elif kw == 'diff7atleast':
-                result += next(hook(kn)) + "nb2 - nb1 >= 7 "
+                result += next(hook(kn)) + " nb2 - nb1 >= 7 "
                 kn += 1
             elif kw.endswith('_noqr'):
                 pass
@@ -224,7 +224,7 @@ class source(object):
                 result += next(hook(kn)) + key + rel_sign + simple_quote \
                     + str(kwargs[kw]) + simple_quote + " "
                 kn += 1
-        return 'AND ({})'.format(result) if result else ''
+        return 'AND ( {} ) '.format(result) if result else ''
 
     ##
     #   @brief  Concatenates the different parts of the query
@@ -262,6 +262,9 @@ class source(object):
                     cmd2 = cmd1.replace(' nb1 ', 'TEMP') \
                         .replace(' nb2 ', ' nb1 ') \
                         .replace('TEMP', ' nb2 ')
+                    cmd2 = cmd2.replace(' nb1_', 'TEMP') \
+                        .replace(' nb2_', ' nb1_') \
+                        .replace('TEMP', ' nb2_')
                     qr = tuple(shared.db.execute(cmd2))
                     if not len(qr):
                         logm = settings.mainlogger
