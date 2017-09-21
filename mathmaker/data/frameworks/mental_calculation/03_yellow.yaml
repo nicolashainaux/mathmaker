@@ -58,6 +58,18 @@ operations_vocabulary: !!omap
                                   -> intpairs_2to200, nb_variant=decimal2 (1)
                  vocabulary operation -> auto_vocabulary (3)
 
+positional_notation: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: positional notation"
+  - exercise: !!omap
+    - questions: rank direct -> digits_places (6)
+                 rank reversed -> digits_places (4)
+                 rank numberof -> digits_places, generation_type=default (6)
+                 rank reversed -> digits_places, rank_matches_invisible_zero=True (2)
+                 rank numberof -> digits_places, generation_type=default, rank_matches_invisible_zero=True (2)
+
+
+
 # COPY OF THE FIRST VERSION OF addi_subtr_hole WITH DECIMAL NUMBERS (TO BE REUSED OR INSPIRED OF LATER)
 # addi_subtr_hole: !!omap
 #   - preset: "mental calculation"

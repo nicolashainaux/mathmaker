@@ -6,13 +6,6 @@ multiplications: !!omap
                  multi hole -> intpairs_2to9 (8)
                  multi direct -> intpairs_2to9 (4)
 
-positional_notation: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: positional notation"
-  - exercise: !!omap
-    - questions: rank direct -> digits_places (10)
-                 rank reversed -> digits_places (10)
-
 addi_subtr: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: additions and subtractions"

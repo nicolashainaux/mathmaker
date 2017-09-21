@@ -123,13 +123,6 @@ def test_02_white2_divisions():
                                        'divisions')))
 
 
-def test_02_white2_positional_notation():
-    """Check this sheet is generated without any error."""
-    shared.machine.write_out(str(Sheet('mental_calculation',
-                                       '02_white2',
-                                       'positional_notation')))
-
-
 def test_02_white2_fraction_of_a_rectangle():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',

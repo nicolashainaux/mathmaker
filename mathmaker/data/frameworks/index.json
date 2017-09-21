@@ -9,11 +9,6 @@
         "02_white2",
         "multiplications"
     ],
-    "02_white2_positional_notation": [
-        "mental_calculation",
-        "02_white2",
-        "positional_notation"
-    ],
     "02_white2_addi_subtr": [
         "mental_calculation",
         "02_white2",
@@ -208,6 +203,11 @@
         "mental_calculation",
         "03_yellow",
         "operations_vocabulary"
+    ],
+    "03_yellow_positional_notation": [
+        "mental_calculation",
+        "03_yellow",
+        "positional_notation"
     ],
     "expand_simple": [
         "algebra",
