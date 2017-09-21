@@ -29,7 +29,7 @@ from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.constants.numeration import RANKS, RANKS_CONFUSING
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
-from mathmaker.lib.tools.numbers import is_integer, Number
+from mathmaker.lib.tools.numbers import is_integer, is_number, Number
 from mathmaker.lib.core.base_calculus import Fraction
 
 DEFAULT_RANKS_SCALE = RANKS
@@ -170,7 +170,9 @@ class source(object):
                 if len(updated_notin_list):
                     for i, c in enumerate(self.valcols):
                         result += next(hook(kn + i)) + c + " NOT IN ( " + ", "\
-                            .join(str(x) for x in updated_notin_list) + " ) "
+                            .join(str(x) if is_number(x)
+                                  else "'{}'".format(x)
+                                  for x in updated_notin_list) + " ) "
                         kn += 1
             elif kw.startswith("either_") and kw.endswith("_in"):
                 k = kw.split(sep='_')[1:-1]
