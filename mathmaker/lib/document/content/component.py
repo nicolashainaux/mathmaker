@@ -333,7 +333,7 @@ class structure(object):
             else:
                 self.wording = _('What is the complement to {number1} '
                                  'of {number2}?')\
-                    .format(number1=Value(self.nb2), number2=Value(self.nb1))
+                    .format(number1=Value(self.nb1), number2=Value(self.nb2))
         else:
             raise ValueError('Cannot recognize context: {}\n'
                              .format(self.context))
