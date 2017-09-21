@@ -65,9 +65,28 @@ positional_notation: !!omap
     - questions: rank direct -> digits_places (6)
                  rank reversed -> digits_places (4)
                  rank numberof -> digits_places, generation_type=default (6)
-                 rank reversed -> digits_places, rank_matches_invisible_zero=True (2)
-                 rank numberof -> digits_places, generation_type=default, rank_matches_invisible_zero=True (2)
+                 rank reversed -> digits_places, rank_matches_invisible_zero=true (2)
+                 rank numberof -> digits_places, generation_type=default, rank_matches_invisible_zero=true (2)
 
+rectangles: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: area and perimeter of a rectangle"
+  - exercise: !!omap
+    - questions: area rectangle, picture=true -> table_25 (1)
+                                              -> intpairs_2to9 (2)
+                                              -> table_15 (2)
+                                              -> table_11_tens_easy (2)
+                 perimeter rectangle, picture=true -> table_25 (1)
+                                                   -> intpairs_2to9 (2)
+                                                   -> table_15 (1)
+                                                   -> table_11_tens_easy (1)
+
+multi_15_25: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: multiplications by 15 and 25"
+  - exercise: !!omap
+    - questions: multi direct -> table_15 (10)
+                              -> table_25 (10)
 
 
 # COPY OF THE FIRST VERSION OF addi_subtr_hole WITH DECIMAL NUMBERS (TO BE REUSED OR INSPIRED OF LATER)

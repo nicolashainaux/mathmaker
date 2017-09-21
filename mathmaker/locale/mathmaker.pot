@@ -531,11 +531,12 @@ msgstr ""
 msgid "Answers"
 msgstr ""
 
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
 #: data/frameworks/mental_calculation/02_white2.yaml:56
 #: data/frameworks/mental_calculation/02_white2.yaml:20
 #: data/frameworks/mental_calculation/02_white2.yaml:3
 #: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
-#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/02_white2.yaml:49
 msgid "Mental calculation: mini-problems"
 msgstr ""
 
@@ -1118,6 +1119,7 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
 #: data/frameworks/mental_calculation/02_white2.yaml:33
+#: data/frameworks/mental_calculation/02_white2.yaml:26
 msgid "Mental calculation: fraction of a rectangle"
 msgstr ""
 
@@ -1339,9 +1341,10 @@ msgstr ""
 msgid "Mental calculation: multiplications"
 msgstr ""
 
+#: data/frameworks/mental_calculation/03_yellow.yaml:63
 #: data/frameworks/mental_calculation/02_white2.yaml:11
-#: data/frameworks/mental_calculation/01_white1.yaml:9
 #: data/frameworks/mental_calculation/02_white2.yaml:13
+#: data/frameworks/mental_calculation/01_white1.yaml:9
 msgid "Mental calculation: positional notation"
 msgstr ""
 
@@ -1815,13 +1818,16 @@ msgid ""
 msgstr ""
 
 #: data/frameworks/mental_calculation/02_white2.yaml:18
+#: data/frameworks/mental_calculation/02_white2.yaml:11
 msgid "Mental calculation: additions and subtractions"
 msgstr ""
 
+#: data/frameworks/mental_calculation/02_white2.yaml:20
 #: data/frameworks/mental_calculation/02_white2.yaml:27
 msgid "Mental calculation: divisions"
 msgstr ""
 
+#: data/frameworks/mental_calculation/02_white2.yaml:59
 #: data/frameworks/mental_calculation/02_white2.yaml:66
 msgid "Mental calculation: multiplication by 11"
 msgstr ""
@@ -1847,9 +1853,11 @@ msgid "What is the complement to {number1} of {number2}?"
 msgstr ""
 
 #: data/frameworks/mental_calculation/02_white2.yaml:73
+#: data/frameworks/mental_calculation/02_white2.yaml:66
 msgid "Mental calculation: complements to 10 and to 100"
 msgstr ""
 
+#: data/frameworks/mental_calculation/02_white2.yaml:81
 #: data/frameworks/mental_calculation/02_white2.yaml:88
 msgid "Mental calculation: final test for white belt, second stripe"
 msgstr ""
@@ -1982,4 +1990,12 @@ msgstr ""
 #: lib/document/content/calculation/vocabulary_simple_part_of_a_number.py:34
 #, python-brace-format
 msgid "What is the quarter of {result}?"
+msgstr ""
+
+#: data/frameworks/mental_calculation/03_yellow.yaml:73
+msgid "Mental calculation: area and perimeter of a rectangle"
+msgstr ""
+
+#: data/frameworks/mental_calculation/03_yellow.yaml:86
+msgid "Mental calculation: multiplications by 15 and 25"
 msgstr ""

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
-"POT-Creation-Date: 2017-09-20 17:07+0200\n"
-"PO-Revision-Date: 2017-09-20 17:08+0200\n"
+"POT-Creation-Date: 2017-09-21 16:39+0200\n"
+"PO-Revision-Date: 2017-09-21 16:40+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -549,11 +549,12 @@ msgstr "Multiplications à l'envers"
 msgid "Answers"
 msgstr "Réponses"
 
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
 #: data/frameworks/mental_calculation/02_white2.yaml:56
 #: data/frameworks/mental_calculation/02_white2.yaml:20
 #: data/frameworks/mental_calculation/02_white2.yaml:3
 #: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
-#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
+#: data/frameworks/mental_calculation/02_white2.yaml:49
 msgid "Mental calculation: mini-problems"
 msgstr "Calcul mental : mini-problèmes"
 
@@ -1210,6 +1211,7 @@ msgstr "{} (ou {})"
 
 #: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
 #: data/frameworks/mental_calculation/02_white2.yaml:33
+#: data/frameworks/mental_calculation/02_white2.yaml:26
 msgid "Mental calculation: fraction of a rectangle"
 msgstr "Calcul mental : fraction d'un rectangle"
 
@@ -1431,9 +1433,10 @@ msgstr "Calcul littéral: développement \"double\""
 msgid "Mental calculation: multiplications"
 msgstr "Calcul mental : multiplications"
 
+#: data/frameworks/mental_calculation/03_yellow.yaml:63
 #: data/frameworks/mental_calculation/02_white2.yaml:11
-#: data/frameworks/mental_calculation/01_white1.yaml:9
 #: data/frameworks/mental_calculation/02_white2.yaml:13
+#: data/frameworks/mental_calculation/01_white1.yaml:9
 msgid "Mental calculation: positional notation"
 msgstr "Calcul mental : rangs des chiffres dans un nombre décimal"
 
@@ -2067,13 +2070,16 @@ msgstr ""
 "moutons avons-nous ?"
 
 #: data/frameworks/mental_calculation/02_white2.yaml:18
+#: data/frameworks/mental_calculation/02_white2.yaml:11
 msgid "Mental calculation: additions and subtractions"
 msgstr "Calcul mental : additions et soustractions"
 
+#: data/frameworks/mental_calculation/02_white2.yaml:20
 #: data/frameworks/mental_calculation/02_white2.yaml:27
 msgid "Mental calculation: divisions"
 msgstr "Calcul mental : divisions"
 
+#: data/frameworks/mental_calculation/02_white2.yaml:59
 #: data/frameworks/mental_calculation/02_white2.yaml:66
 msgid "Mental calculation: multiplication by 11"
 msgstr "Calcul mental : multiplications par 11"
@@ -2099,9 +2105,11 @@ msgid "What is the complement to {number1} of {number2}?"
 msgstr "Quel est le complément à {number1} de {number2} ?"
 
 #: data/frameworks/mental_calculation/02_white2.yaml:73
+#: data/frameworks/mental_calculation/02_white2.yaml:66
 msgid "Mental calculation: complements to 10 and to 100"
 msgstr "Calcul mental : compléments à 10 et à 100"
 
+#: data/frameworks/mental_calculation/02_white2.yaml:81
 #: data/frameworks/mental_calculation/02_white2.yaml:88
 msgid "Mental calculation: final test for white belt, second stripe"
 msgstr "Calcul mental : ceinture blanche, deuxième trait"
@@ -2240,6 +2248,14 @@ msgstr "Quel est le tiers de {result} ?"
 #, python-brace-format
 msgid "What is the quarter of {result}?"
 msgstr "Quel est le quart de {result} ?"
+
+#: data/frameworks/mental_calculation/03_yellow.yaml:73
+msgid "Mental calculation: area and perimeter of a rectangle"
+msgstr "Calcul mental : aires et périmètres de rectangles"
+
+#: data/frameworks/mental_calculation/03_yellow.yaml:86
+msgid "Mental calculation: multiplications by 15 and 25"
+msgstr "Calcul mental : multiplications par 15 et par 25"
 
 #~ msgid "Mental calculation: final test for yellow belt"
 #~ msgstr "Calcul mental : ceinture jaune"
