@@ -81,12 +81,16 @@ rectangles: !!omap
                                                    -> table_15 (1)
                                                    -> table_11_tens_easy (1)
 
-multi_15_25: !!omap
+tables_15_25: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: multiplications by 15 and 25"
+  - title: "Mental calculation: tables of 15 and 25"
   - exercise: !!omap
-    - questions: multi direct -> table_15 (10)
-                              -> table_25 (10)
+    - questions: multi direct -> table_15 (4)
+                              -> table_25 (4)
+                 divi direct -> table_15 (4)
+                             -> table_25 (4)
+                 multi hole -> table_15 (2)
+                            -> table_25 (2)
 
 
 # COPY OF THE FIRST VERSION OF addi_subtr_hole WITH DECIMAL NUMBERS (TO BE REUSED OR INSPIRED OF LATER)

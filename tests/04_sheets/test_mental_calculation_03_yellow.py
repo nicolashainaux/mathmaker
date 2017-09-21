@@ -74,8 +74,8 @@ def test_03_yellow_rectangles():
                                        'rectangles')))
 
 
-def test_03_yellow_multi_15_25():
+def test_03_yellow_tables_15_25():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
-                                       'multi_15_25')))
+                                       'tables_15_25')))

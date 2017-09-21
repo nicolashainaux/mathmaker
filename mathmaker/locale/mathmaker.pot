@@ -1997,5 +1997,5 @@ msgid "Mental calculation: area and perimeter of a rectangle"
 msgstr ""
 
 #: data/frameworks/mental_calculation/03_yellow.yaml:86
-msgid "Mental calculation: multiplications by 15 and 25"
+msgid "Mental calculation: tables of 15 and 25"
 msgstr ""
