@@ -1999,3 +1999,7 @@ msgstr ""
 #: data/frameworks/mental_calculation/03_yellow.yaml:86
 msgid "Mental calculation: tables of 15 and 25"
 msgstr ""
+
+#: data/frameworks/mental_calculation/03_yellow.yaml:97
+msgid "Mental calculation:  final test for yellow belt"
+msgstr ""

@@ -219,6 +219,11 @@
         "03_yellow",
         "tables_15_25"
     ],
+    "03_yellow_exam": [
+        "mental_calculation",
+        "03_yellow",
+        "exam"
+    ],
     "expand_simple": [
         "algebra",
         "expand",

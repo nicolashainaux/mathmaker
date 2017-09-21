@@ -79,3 +79,10 @@ def test_03_yellow_tables_15_25():
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
                                        'tables_15_25')))
+
+
+def test_03_yellow_exam():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'exam')))
