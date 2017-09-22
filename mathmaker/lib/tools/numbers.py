@@ -63,6 +63,15 @@ class Number(Decimal):
         n = str(abs(self.standardized()))
         return len(n) - n.count('0') - n.count('.')
 
+    def isolated_zeros(self):
+        """Return the number of zeros inside other digits."""
+        if self == 0:
+            return 0
+        elif self % 10 == 0:
+            return Number(self // 10).isolated_zeros()
+        else:
+            return self.standardized().as_tuple().digits.count(0)
+
     def round(self, precision, **options):
         """Round the number. Return a standardized result."""
         return Number(self.quantize(precision, **options)).standardized()

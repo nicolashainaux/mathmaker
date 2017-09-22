@@ -150,6 +150,22 @@ def test_nonzero_digits_nb():
     assert Number('30.506').nonzero_digits_nb() == 3
 
 
+def test_isolated_zeros():
+    """Check isolated_zeros() in different cases."""
+    assert Number('0').isolated_zeros() == 0
+    assert Number('10').isolated_zeros() == 0
+    assert Number('100').isolated_zeros() == 0
+    assert Number('1010').isolated_zeros() == 1
+    assert Number('3.871').isolated_zeros() == 0
+    assert Number('3.801').isolated_zeros() == 1
+    assert Number('3.001').isolated_zeros() == 2
+    assert Number('3.0001').isolated_zeros() == 3
+    assert Number('10.04').isolated_zeros() == 2
+    assert Number('0.04').isolated_zeros() == 0
+    assert Number('0.0409').isolated_zeros() == 1
+    assert Number('0.3006').isolated_zeros() == 2
+
+
 def test_decimal_places_nb():
     """Check decimal_places_nb() in different cases."""
     assert all(Number(n).decimal_places_nb() == 0
