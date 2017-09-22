@@ -141,7 +141,7 @@ def __main__():
     # but these values may have no effect (purpose is only documentation)
     db.execute('''CREATE TABLE decimals
               (id INTEGER PRIMARY KEY, nb1 DECIMAL(2, 3), nz INTEGER,
-              overlap_level INTEGER, drawDate INTEGER)''')
+              iz INTEGER, overlap_level INTEGER, drawDate INTEGER)''')
     db.execute('''CREATE TABLE digits_places
               (id INTEGER PRIMARY KEY, place DECIMAL(4, 3),
               drawDate INTEGER)''')
@@ -271,12 +271,13 @@ def __main__():
     # Single decimal numbers
     db_rows = [((i + 1) / 1000,
                 Number((Decimal(i + 1)) / Decimal(1000)).nonzero_digits_nb(),
+                Number((Decimal(i + 1)) / Decimal(1000)).isolated_zeros(),
                 Number((Decimal(i + 1)) / Decimal(1000)).overlap_level(),
                 0)
                for i in range(9999)]
     db.executemany("INSERT "
-                   "INTO decimals(nb1, nz, overlap_level, drawDate) "
-                   "VALUES(?, ?, ?, ?)",
+                   "INTO decimals(nb1, nz, iz, overlap_level, drawDate) "
+                   "VALUES(?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert angle ranges...\n')
