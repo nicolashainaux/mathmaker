@@ -24,6 +24,26 @@ import pytest
 from decimal import Decimal
 
 from mathmaker.lib.tools.database import generate_random_decimal_nb
+from mathmaker.lib.tools.database import parse_sql_creation_query
+
+
+def test_parse_sql_creation_query():
+    """Check if parse_sql_creation_query parses correctly."""
+    assert parse_sql_creation_query('''CREATE TABLE w3l
+            (id INTEGER PRIMARY KEY, language TEXT, word TEXT,
+             drawDate INTEGER)''') == \
+        ('w3l', ['id', 'language', 'word', 'drawDate'])
+    assert parse_sql_creation_query('''CREATE TABLE int_pairs
+            (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
+             lock_equal_products INTEGER, drawDate INTEGER, clever INTEGER,
+             suits_for_deci1 INTEGER, suits_for_deci2 INTEGER)''') == \
+        ('int_pairs', ['id', 'nb1', 'nb2', 'lock_equal_products',
+                       'drawDate', 'clever', 'suits_for_deci1',
+                       'suits_for_deci2'])
+    assert parse_sql_creation_query('''CREATE TABLE digits_places
+            (id INTEGER PRIMARY KEY, place DECIMAL(4, 3),
+             drawDate INTEGER)''') == \
+        ('digits_places', ['id', 'place', 'drawDate'])
 
 
 def test_generate_random_decimal_nb_exceptions():

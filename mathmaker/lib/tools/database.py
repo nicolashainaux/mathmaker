@@ -20,6 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import re
 import copy
 import random
 import warnings
@@ -33,6 +34,18 @@ from mathmaker.lib.tools.numbers import is_integer, is_number, Number
 from mathmaker.lib.core.base_calculus import Fraction
 
 DEFAULT_RANKS_SCALE = RANKS
+
+FETCH_TABLE_NAME = re.compile(r'CREATE TABLE (\w+)')
+FETCH_TABLE_COLS = re.compile(r', (\w\w+)|\n[ ]+(\w\w+)|\((\w\w+)')
+
+
+def parse_sql_creation_query(qr):
+    """Retrieve table's name and columns' names from sql query."""
+    return (FETCH_TABLE_NAME.findall(qr)[0],
+            [elt
+             for t in FETCH_TABLE_COLS.findall(qr)
+             for elt in t
+             if elt != ''])
 
 
 class source(object):
