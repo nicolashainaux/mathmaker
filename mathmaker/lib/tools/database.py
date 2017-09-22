@@ -746,17 +746,26 @@ def generate_random_decimal_nb(rank_to_use, width='random',
                         ranks += [lr]
                         phr *= 2.5
 
-        else:
+        else:  # position matches invisible zero
             if rank_to_use <= Decimal('0.1'):
                 ranks = [ranks_scale.index(r) for r in ranks_scale
                          if r > rank_to_use]
                 width = min(width, len(ranks))
                 ranks = ranks[-width:]
-            elif rank_to_use >= Decimal('10'):
+            elif (rank_to_use >= Decimal('10')
+                  or (rank_to_use == Decimal('1')
+                      and random.choice([True, False]))):
                 ranks = [ranks_scale.index(r) for r in ranks_scale
                          if r < rank_to_use]
                 width = min(width, len(ranks))
                 ranks = ranks[:width]
+            else:  # units, second possibility
+                ranks = [ranks_scale.index(r) for r in ranks_scale
+                         if r != rank_to_use]
+                width = min(width, len(ranks))
+                maxi_start = len(ranks) - width
+                slice_start = random.choice([i for i in range(maxi_start)])
+                ranks = ranks[slice_start:slice_start + width]
 
         # Let's start the generation of the number:
         for r in ranks:
