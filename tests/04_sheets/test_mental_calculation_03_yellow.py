@@ -86,3 +86,115 @@ def test_03_yellow_exam():
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
                                        'exam')))
+
+
+def test_03_yellow_W01a():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W01a')))
+
+
+def test_03_yellow_W01b():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W01b')))
+
+
+def test_03_yellow_W01c():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W01c')))
+
+
+def test_03_yellow_W01d():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W01d')))
+
+
+def test_03_yellow_W02a():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W02a')))
+
+
+def test_03_yellow_W02b():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W02b')))
+
+
+def test_03_yellow_W02c():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W02c')))
+
+
+def test_03_yellow_W02d():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W02d')))
+
+
+def test_03_yellow_W03a():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W03a')))
+
+
+def test_03_yellow_W03b():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W03b')))
+
+
+def test_03_yellow_W03c():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W03c')))
+
+
+def test_03_yellow_W03d():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W03d')))
+
+
+def test_03_yellow_W04a():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W04a')))
+
+
+def test_03_yellow_W04b():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W04b')))
+
+
+def test_03_yellow_W04c():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W04c')))
+
+
+def test_03_yellow_W04d():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '03_yellow',
+                                       'W04d')))

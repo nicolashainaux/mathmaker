@@ -224,6 +224,86 @@
         "03_yellow",
         "exam"
     ],
+    "03_yellow_W01a": [
+        "mental_calculation",
+        "03_yellow",
+        "W01a"
+    ],
+    "03_yellow_W01b": [
+        "mental_calculation",
+        "03_yellow",
+        "W01b"
+    ],
+    "03_yellow_W01c": [
+        "mental_calculation",
+        "03_yellow",
+        "W01c"
+    ],
+    "03_yellow_W01d": [
+        "mental_calculation",
+        "03_yellow",
+        "W01d"
+    ],
+    "03_yellow_W02a": [
+        "mental_calculation",
+        "03_yellow",
+        "W02a"
+    ],
+    "03_yellow_W02b": [
+        "mental_calculation",
+        "03_yellow",
+        "W02b"
+    ],
+    "03_yellow_W02c": [
+        "mental_calculation",
+        "03_yellow",
+        "W02c"
+    ],
+    "03_yellow_W02d": [
+        "mental_calculation",
+        "03_yellow",
+        "W02d"
+    ],
+    "03_yellow_W03a": [
+        "mental_calculation",
+        "03_yellow",
+        "W03a"
+    ],
+    "03_yellow_W03b": [
+        "mental_calculation",
+        "03_yellow",
+        "W03b"
+    ],
+    "03_yellow_W03c": [
+        "mental_calculation",
+        "03_yellow",
+        "W03c"
+    ],
+    "03_yellow_W03d": [
+        "mental_calculation",
+        "03_yellow",
+        "W03d"
+    ],
+    "03_yellow_W04a": [
+        "mental_calculation",
+        "03_yellow",
+        "W04a"
+    ],
+    "03_yellow_W04b": [
+        "mental_calculation",
+        "03_yellow",
+        "W04b"
+    ],
+    "03_yellow_W04c": [
+        "mental_calculation",
+        "03_yellow",
+        "W04c"
+    ],
+    "03_yellow_W04d": [
+        "mental_calculation",
+        "03_yellow",
+        "W04d"
+    ],
     "expand_simple": [
         "algebra",
         "expand",
