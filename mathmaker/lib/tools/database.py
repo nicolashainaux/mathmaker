@@ -22,6 +22,7 @@
 
 import re
 import copy
+import json
 import random
 import warnings
 from decimal import Decimal
@@ -343,6 +344,25 @@ class source(object):
             return t[1:len(t)]
 
 
+def db_table(tag):
+    """Table's name possibly associated to tag."""
+    if (tag.startswith('intpairs_') or tag.startswith('table_')
+        or tag.startswith('multiplesof') or tag.startswith('complements_to_')):
+        return 'int_pairs'
+    elif tag.startswith('singleint_'):
+        return 'single_ints'
+    elif tag.startswith('singledeci1_'):
+        return 'single_deci1'
+    elif tag == 'unitspairs':
+        return 'units_conversions'
+    elif tag == 'decimalfractionssums':
+        return 'decimals'
+    elif tag in ['int_deci_clever_pairs', 'digits_places', 'fracdigits_places',
+                 'decimals']:
+        return tag
+    return ''
+
+
 ##
 #   @brief  Will tell if the tag belongs to int pairs, decimal numbers etc.
 def classify_tag(tag):
@@ -366,6 +386,22 @@ def classify_tag(tag):
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
                      "used in a mathmaker xml file.")
+
+
+def preprocess_qkw(table_name, qkw=None):
+    """Add relevant questions keywords to build the query."""
+    with open(settings.db_index_path) as f:
+        db_index = json.load(f)
+    if table_name not in db_index:
+        return {}
+    d = {}
+    if qkw is None:
+        qkw = {}
+    for kw in qkw:
+        if any([kw.startswith(ref)
+                for ref in db_index[table_name]]):
+            d.update({kw: qkw[kw]})
+    return d
 
 
 ##
@@ -801,6 +837,7 @@ class mc_source(object):
         if qkw is None:
             qkw = {}
         tag_classification = classify_tag(source_id)
+        kwargs.update(preprocess_qkw(db_table(source_id), qkw=qkw))
         if tag_classification == 'int_pairs':
             kwargs.update(preprocess_int_pairs_tag(source_id, qkw=qkw))
             return shared.int_pairs_source.next(**kwargs)
