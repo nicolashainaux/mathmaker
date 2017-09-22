@@ -24,6 +24,7 @@
 
 import copy
 import random
+from decimal import Decimal
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools import fix_math_style2_fontsize
@@ -35,16 +36,22 @@ class sub_object(object):
 
     def __init__(self, **options):
         self.preset = options.get('preset', 'default')
-        rank_to_use = options.get('numbers_to_use')[0]
-
-        self.decimal_representation = \
-            generate_random_decimal_nb(rank_to_use,
-                                       width=random.choice([1, 2, 3]),
-                                       generation_type='default',
-                                       unique_figures=options.get(
-                                           'unique_figures', False),
-                                       grow_left=True,
-                                       **options)
+        # The rank to use must be provided as first value in numbers_to_use;
+        # a decimal number may be provided as second value. If not, it will be
+        # generated automatically.
+        data_to_use = options.get('numbers_to_use')
+        rank_to_use = data_to_use[0]
+        if len(data_to_use) >= 2:
+            self.decimal_representation = Decimal(str(data_to_use[1]))
+        else:
+            self.decimal_representation = \
+                generate_random_decimal_nb(rank_to_use,
+                                           width=random.choice([1, 2, 3]),
+                                           generation_type='default',
+                                           unique_figures=options.get(
+                                               'unique_figures', False),
+                                           grow_left=True,
+                                           **options)
         self.fraction = Fraction(self.decimal_representation)
         self.fraction10 = copy.deepcopy(self.fraction)
         self.fraction10.set_numerator(
