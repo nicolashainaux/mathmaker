@@ -243,7 +243,7 @@ class Sheet(object):
                     excbis = copy.deepcopy(exc)
                     offset = random.choice([i - 9
                                             for i in range(19)
-                                            if abs(i) >= 5])
+                                            if abs(i - 9) >= 5])
                     excbis.questions_list = rotate(excbis.questions_list,
                                                    offset)
                     self.exercises_list.append(excbis)
