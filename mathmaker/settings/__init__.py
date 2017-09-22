@@ -83,6 +83,7 @@ def init():
     global toolsdir
     global frameworksdir
     global index_path
+    global db_index_path
     global default, path
     global mainlogger
     global dbg_logger
@@ -120,6 +121,7 @@ def init():
     toolsdir = rootdir + 'tools/'
     frameworksdir = datadir + 'frameworks/'
     index_path = frameworksdir + 'index.json'
+    db_index_path = datadir + 'db_index.json'
     settingsdir = rootdir + settings_dirname
     projectdir = rootdir[:-len('mathmaker/')]
 

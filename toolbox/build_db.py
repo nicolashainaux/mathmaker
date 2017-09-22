@@ -47,6 +47,7 @@ It will add all entries:
 
 import os
 import sys
+import json
 import sqlite3
 from decimal import Decimal
 
@@ -54,6 +55,7 @@ from mathmaker import settings
 from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words
 from mathmaker.lib.tools.numbers import Number
 from mathmaker.lib.tools.frameworks import get_attributes
+from mathmaker.lib.tools.database import parse_sql_creation_query
 from mathmaker.lib.constants.numeration import RANKS, RANKS_DECIMAL
 
 INTPAIRS_MAX = 1000
@@ -89,65 +91,63 @@ def __main__():
 
     sys.stderr.write('Create tables...\n')
     # Creation of the tables
-    db.execute('''CREATE TABLE w3l
-              (id INTEGER PRIMARY KEY,
-              language TEXT, word TEXT, drawDate INTEGER)''')
-    db.execute('''CREATE TABLE w4l
-              (id INTEGER PRIMARY KEY,
-              language TEXT, word TEXT, drawDate INTEGER)''')
-    db.execute('''CREATE TABLE w5l
-              (id INTEGER PRIMARY KEY,
-              language TEXT, word TEXT, drawDate INTEGER)''')
-    db.execute('''CREATE TABLE names
-              (id INTEGER PRIMARY KEY,
-              language TEXT, gender TEXT, name TEXT, drawDate INTEGER)''')
-    db.execute('''CREATE TABLE mini_pb_wordings
-              (id INTEGER PRIMARY KEY,
-              wording_context TEXT, wording TEXT,
-              nb1_min INTEGER, nb1_max INTEGER,
-              nb2_min INTEGER, nb2_max INTEGER,
-              back_to_unit TEXT,
-              q_id TEXT, drawDate INTEGER)''')
-    db.execute('''CREATE TABLE single_ints
-              (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
-    # DECIMAL(4, 1) stands for up to 4 integer digits, up to 1 fractional digit
-    # but these values may have no effect (purpose is only documentation)
-    db.execute('''CREATE TABLE single_deci1
-              (id INTEGER PRIMARY KEY, nb1 DECIMAL(4, 1), drawDate INTEGER)''')
-    db.execute('''CREATE TABLE angle_ranges
-              (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
-              drawDate INTEGER)''')
-    db.execute('''CREATE TABLE units_conversions
-              (id INTEGER PRIMARY KEY, unit1 TEXT, unit2 TEXT, direction TEXT,
-              category TEXT, level INTEGER,
-              drawDate INTEGER)''')
-    db.execute('''CREATE TABLE int_pairs
-              (id INTEGER PRIMARY KEY,
-              nb1 INTEGER, nb2 INTEGER,
-              lock_equal_products INTEGER, drawDate INTEGER, clever INTEGER,
-              suits_for_deci1 INTEGER, suits_for_deci2 INTEGER)''')
-    # As int_deci_clever_pairs may be 'unioned' with int_pairs, its ids will be
-    # determined starting from the max id of int_pairs, in order to have unique
-    # ids over the two tables.
-    db.execute('''CREATE TABLE int_deci_clever_pairs
-              (id INTEGER,
-              nb1 FLOAT, nb2 FLOAT,
-              drawDate INTEGER,
-              clever INTEGER)''')
-    db.execute('''CREATE TABLE calculation_order_of_operations_variants
-              (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''')
-    # DECIMAL(2, 3) stands for up to 2 integer digits,
-    # up to 3 fractional digits
-    # but these values may have no effect (purpose is only documentation)
-    db.execute('''CREATE TABLE decimals
-              (id INTEGER PRIMARY KEY, nb1 DECIMAL(2, 3), nz INTEGER,
-              iz INTEGER, overlap_level INTEGER, drawDate INTEGER)''')
-    db.execute('''CREATE TABLE digits_places
-              (id INTEGER PRIMARY KEY, place DECIMAL(4, 3),
-              drawDate INTEGER)''')
-    db.execute('''CREATE TABLE fracdigits_places
-              (id INTEGER PRIMARY KEY, place DECIMAL(4, 3),
-              drawDate INTEGER)''')
+    db_creation_queries = \
+        ['''CREATE TABLE w3l
+            (id INTEGER PRIMARY KEY, language TEXT, word TEXT,
+             drawDate INTEGER)''',
+         '''CREATE TABLE w4l
+            (id INTEGER PRIMARY KEY, language TEXT, word TEXT,
+             drawDate INTEGER)''',
+         '''CREATE TABLE w5l
+            (id INTEGER PRIMARY KEY, language TEXT, word TEXT,
+             drawDate INTEGER)''',
+         '''CREATE TABLE names
+            (id INTEGER PRIMARY KEY, language TEXT, gender TEXT, name TEXT,
+             drawDate INTEGER)''',
+         '''CREATE TABLE mini_pb_wordings
+            (id INTEGER PRIMARY KEY, wording_context TEXT, wording TEXT,
+             nb1_min INTEGER, nb1_max INTEGER,
+             nb2_min INTEGER, nb2_max INTEGER,
+             back_to_unit TEXT, q_id TEXT, drawDate INTEGER)''',
+         '''CREATE TABLE single_ints
+            (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
+         # DECIMAL(4, 1) stands for up to 4 integer digits, up to 1 fractional
+         # digit but these values may have no effect (purpose is only
+         # documentation)
+         '''CREATE TABLE single_deci1
+            (id INTEGER PRIMARY KEY, nb1 DECIMAL(4, 1), drawDate INTEGER)''',
+         '''CREATE TABLE angle_ranges
+            (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
+             drawDate INTEGER)''',
+         '''CREATE TABLE units_conversions
+            (id INTEGER PRIMARY KEY, unit1 TEXT, unit2 TEXT, direction TEXT,
+             category TEXT, level INTEGER, drawDate INTEGER)''',
+         '''CREATE TABLE int_pairs
+            (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
+             lock_equal_products INTEGER, drawDate INTEGER, clever INTEGER,
+             suits_for_deci1 INTEGER, suits_for_deci2 INTEGER)''',
+         # As int_deci_clever_pairs may be 'unioned' with int_pairs, its ids
+         # will be determined starting from the max id of int_pairs, in order
+         # to have unique ids over the two tables.
+         '''CREATE TABLE int_deci_clever_pairs
+            (id INTEGER, nb1 FLOAT, nb2 FLOAT, drawDate INTEGER,
+             clever INTEGER)''',
+         '''CREATE TABLE calculation_order_of_operations_variants
+            (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
+         # DECIMAL(2, 3) stands for up to 2 integer digits,
+         # up to 3 fractional digits
+         # but these values may have no effect (purpose is only documentation)
+         '''CREATE TABLE decimals
+            (id INTEGER PRIMARY KEY, nb1 DECIMAL(2, 3), nz INTEGER,
+             iz INTEGER, overlap_level INTEGER, drawDate INTEGER)''',
+         '''CREATE TABLE digits_places
+            (id INTEGER PRIMARY KEY, place DECIMAL(4, 3), drawDate INTEGER)''',
+         '''CREATE TABLE fracdigits_places
+            (id INTEGER PRIMARY KEY, place DECIMAL(4, 3), drawDate INTEGER)'''
+         ]
+
+    for qr in db_creation_queries:
+        db.execute(qr)
 
     sys.stderr.write('Insert data from locale/*/LC_MESSAGES/*.pot files...\n')
     # Extract data from po(t) files and insert them into the db
@@ -372,6 +372,14 @@ def __main__():
     db.commit()
     sys.stderr.write('Close database...\n')
     db.close()
+    sys.stderr.write('Create database\'s index...\n')
+    db_index = {}
+    for qr in db_creation_queries:
+        key, value = parse_sql_creation_query(qr)
+        db_index.update({key: value})
+    with open(settings.db_index_path, 'w') as f:
+        json.dump(db_index, f, indent=4)
+        f.write('\n')
     sys.stderr.write('Done!\n')
 
 

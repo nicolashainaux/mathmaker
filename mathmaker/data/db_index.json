@@ -1,0 +1,104 @@
+{
+    "w3l": [
+        "id",
+        "language",
+        "word",
+        "drawDate"
+    ],
+    "w4l": [
+        "id",
+        "language",
+        "word",
+        "drawDate"
+    ],
+    "w5l": [
+        "id",
+        "language",
+        "word",
+        "drawDate"
+    ],
+    "names": [
+        "id",
+        "language",
+        "gender",
+        "name",
+        "drawDate"
+    ],
+    "mini_pb_wordings": [
+        "id",
+        "wording_context",
+        "wording",
+        "nb1_min",
+        "nb1_max",
+        "nb2_min",
+        "nb2_max",
+        "back_to_unit",
+        "q_id",
+        "drawDate"
+    ],
+    "single_ints": [
+        "id",
+        "nb1",
+        "drawDate"
+    ],
+    "single_deci1": [
+        "id",
+        "nb1",
+        "drawDate"
+    ],
+    "angle_ranges": [
+        "id",
+        "nb1",
+        "nb2",
+        "drawDate"
+    ],
+    "units_conversions": [
+        "id",
+        "unit1",
+        "unit2",
+        "direction",
+        "category",
+        "level",
+        "drawDate"
+    ],
+    "int_pairs": [
+        "id",
+        "nb1",
+        "nb2",
+        "lock_equal_products",
+        "drawDate",
+        "clever",
+        "suits_for_deci1",
+        "suits_for_deci2"
+    ],
+    "int_deci_clever_pairs": [
+        "id",
+        "nb1",
+        "nb2",
+        "drawDate",
+        "clever"
+    ],
+    "calculation_order_of_operations_variants": [
+        "id",
+        "nb1",
+        "drawDate"
+    ],
+    "decimals": [
+        "id",
+        "nb1",
+        "nz",
+        "iz",
+        "overlap_level",
+        "drawDate"
+    ],
+    "digits_places": [
+        "id",
+        "place",
+        "drawDate"
+    ],
+    "fracdigits_places": [
+        "id",
+        "place",
+        "drawDate"
+    ]
+}
