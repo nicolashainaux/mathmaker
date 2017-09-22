@@ -37,7 +37,7 @@ class sub_object(object):
         self.transduration = 9
 
     def q(self, **options):
-        self.substitutable_question_mark = True
+        # self.substitutable_question_mark = True
         return _('{q_mark} × {q_mark} = {n}\n\n'
                  '(in the multiplication tables, from 2 to 9)')\
             .format(n=Value(self.product).into_str(),
