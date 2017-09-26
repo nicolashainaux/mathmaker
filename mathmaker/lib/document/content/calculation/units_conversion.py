@@ -36,7 +36,7 @@ class sub_object(component.structure):
 
     def __init__(self, numbers_to_use, **options):
         super().setup('minimal', **options)
-        self.transduration = 8
+        self.transduration = 10
         # if (self.nb1 > 20 and self.nb2 > 20
         #     and not self.nb1 % 10 == 0 and not self.nb2 % 10 == 0):
         #     self.transduration = 12

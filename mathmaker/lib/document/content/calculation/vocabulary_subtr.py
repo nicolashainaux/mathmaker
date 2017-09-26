@@ -22,6 +22,7 @@
 
 # This module will add a question about the sum of two numbers
 
+# from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.base_calculus import Sum
 from . import vocabulary_questions
 
@@ -34,3 +35,10 @@ class sub_object(vocabulary_questions.structure):
             result_fct=lambda x, y: Sum([max(x, y), -min(x, y)]),
             wording=_("How much is the difference between {nb1} and {nb2}?"),
             **options)
+
+        # Caution, so far these are Values, so...
+        if ((self.nb1.raw_value > 20 and self.nb2.raw_value > 20
+             and abs(self.nb1.raw_value - self.nb2.raw_value) > 10
+             and abs(self.nb1.raw_value - self.nb2.raw_value) % 10 != 0)
+            or abs(self.nb1.raw_value - self.nb2.raw_value) % 1 != 0):
+            self.transduration = 12

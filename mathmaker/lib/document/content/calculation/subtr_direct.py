@@ -42,6 +42,8 @@ class sub_object(component.structure):
             and abs(self.nb1 - self.nb2) > 10
             and abs(self.nb1 - self.nb2) % 10 != 0):
             self.transduration = 12
+        elif abs(self.nb1 - self.nb2) % 1 != 0:
+            self.transduration = 10
 
         if self.subvariant == 'only_positive':
             self.nb1, self.nb2 = max(self.nb1, self.nb2), min(self.nb1,
