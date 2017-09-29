@@ -4041,6 +4041,10 @@ class Product(CommutativeOperation):
     #   @return The formated string
     def into_str(self, **options):
         global expression_begins
+        if options.get('js_repr', False):
+            multiply_symbol = '*'
+        else:
+            multiply_symbol = MARKUP['times']
         log = settings.dbg_logger.getChild('Product.into_str')
         log.debug('Entering...')
 
@@ -4362,11 +4366,11 @@ class Product(CommutativeOperation):
                                             MARKUP['closing_bracket']
                                         unclosed_bracket -= 1
 
-                                        resulting_string += MARKUP['times']
+                                        resulting_string += multiply_symbol
                                     else:
                                         pass
                                 else:
-                                    resulting_string += MARKUP['times']
+                                    resulting_string += multiply_symbol
 
                             else:
                                 log.debug("... no")
@@ -4495,7 +4499,7 @@ class Product(CommutativeOperation):
                         .multiply_symbol_is_required(self.factor[i + 1], i)
                         or self.info[i + 1]):
                         # __
-                        resulting_string += MARKUP['times']
+                        resulting_string += multiply_symbol
                     else:
                         pass
 

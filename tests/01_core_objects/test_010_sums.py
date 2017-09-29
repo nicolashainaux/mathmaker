@@ -164,3 +164,8 @@ def test_sum_evaluation():
     """Check sums of integers and decimal numbers are correctly evaluated."""
     assert Sum([6, Decimal('0.4'), Decimal('0.06'), Decimal('0.005')])\
         .evaluate() == Decimal('6.465')
+
+
+def test_js_repr():
+    """Is the "js" representation correct?"""
+    assert Sum([Item(3), Item(4)]).jsprinted == '3+4'

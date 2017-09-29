@@ -682,3 +682,8 @@ def test_product_auto_calculation():
     """This is a bug check"""
     p = Product([Sum([11, -7]), Sum([3, 5])], compact_display=False)
     assert p.calculate_next_step().calculate_next_step() == Item(32)
+
+
+def test_js_repr():
+    """Is the "js" representation correct?"""
+    assert Product([Item(5), Item(9)]).jsprinted == '5*9'
