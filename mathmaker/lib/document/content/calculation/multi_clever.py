@@ -112,3 +112,6 @@ class sub_object(component.structure):
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
         return Value(self.result).into_str()
+
+    def js_a(self, **kwargs):
+        return [Value(self.result).jsprinted]

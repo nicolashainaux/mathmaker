@@ -57,6 +57,7 @@ class sub_object(component.structure):
         self.hidden_nb = Item(Value(COLORED_QUESTION_MARK), unit=unit2)
         self.answer = self.start_nb.convert_to(unit2)\
             .into_str(display_unit=True, force_expression_begins=True)
+        self.js_answer = self.start_nb.convert_to(unit2).jsprinted
         self.wording = '{} = {}'.format(
             self.start_nb.into_str(display_unit=True,
                                    force_expression_begins=True),
@@ -68,3 +69,6 @@ class sub_object(component.structure):
 
     def a(self, **options):
         return shared.machine.write_math_style2(self.answer)
+
+    def js_a(self, **kwargs):
+        return [self.js_answer]

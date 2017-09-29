@@ -57,3 +57,6 @@ class sub_object(object):
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
         return self.chosen_figure
+
+    def js_a(self, **kwargs):
+        return [str(self.chosen_figure)]

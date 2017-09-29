@@ -32,6 +32,9 @@ class sub_object(object):
     def __init__(self, **options):
         rank_reversed.sub_object.__init__(self, numberof=True, **options)
         self.transduration = 12
+        n = self.chosen_deci
+        r = self.chosen_rank
+        self.result = Item(((n - n % r) / r))
 
     def q(self, **options):
         return _('{how_many_rank} are there in {decimal_number}?')\
@@ -40,6 +43,7 @@ class sub_object(object):
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        n = self.chosen_deci
-        r = self.chosen_rank
-        return Item(((n - n % r) / r)).printed
+        return self.result.printed
+
+    def js_a(self, **kwargs):
+        return [self.result.jsprinted]

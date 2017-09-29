@@ -84,3 +84,23 @@ class sub_object(object):
             return shared.machine.write_math_style2(Product([self.nb1,
                                                              self.nb2])
                                                     .printed)
+
+    def js_a(self, **kwargs):
+        if self.product == 12:
+            return [Product([2, 6]).jsprinted, Product([6, 2]).jsprinted,
+                    Product([3, 4]).jsprinted, Product([4, 3]).jsprinted]
+        elif self.product == 16:
+            return [Product([2, 8]).jsprinted, Product([8, 2]).jsprinted,
+                    Product([4, 4]).jsprinted]
+        elif self.product == 18:
+            return [Product([2, 9]).jsprinted, Product([9, 2]).jsprinted,
+                    Product([3, 6]).jsprinted, Product([6, 3]).jsprinted]
+        elif self.product == 24:
+            return [Product([3, 8]).jsprinted, Product([8, 3]).jsprinted,
+                    Product([4, 6]).jsprinted, Product([6, 4]).jsprinted]
+        elif self.product == 36:
+            return [Product([4, 9]).jsprinted, Product([9, 4]).jsprinted,
+                    Product([6, 6]).jsprinted]
+        else:
+            return [Product([self.nb1, self.nb2]).jsprinted,
+                    Product([self.nb2, self.nb1]).jsprinted]

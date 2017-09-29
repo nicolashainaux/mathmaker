@@ -74,3 +74,6 @@ class sub_object(component.structure):
 
     def a(self, **options):
         return shared.machine.write_math_style2(self.hidden_one.printed)
+
+    def js_a(self, **kwargs):
+        return [self.hidden_one.jsprinted]

@@ -58,3 +58,6 @@ class structure(component.structure):
     def a(self, **kwargs):
         # This is actually meant for self.preset == 'mental calculation'
         return str(self.answer_wording)
+
+    def js_a(self, **kwargs):
+        return [str(self.answer_wording)]

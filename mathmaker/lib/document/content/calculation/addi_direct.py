@@ -83,3 +83,6 @@ class sub_object(component.structure):
         else:
             v = Value(self.result).into_str()
         return v
+
+    def js_a(self, **kwargs):
+        return [Value(self.result).jsprinted]
