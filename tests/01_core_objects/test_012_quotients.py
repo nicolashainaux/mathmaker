@@ -128,3 +128,8 @@ def test_q4_printed(q4):
     assert q4_next.printed == wrap_nb('42\\div 14')
     q4_next = q4_next.expand_and_reduce_next_step()
     assert q4_next.printed == wrap_nb('3')
+
+
+def test_js_repr():
+    """Is the "js" representation correct?"""
+    assert Quotient(('+', Item(3), Item(4), 1)).jsprinted == '3/4'

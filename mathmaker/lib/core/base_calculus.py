@@ -2197,6 +2197,8 @@ class Quotient(Operation):
                             + MARKUP['closing_exponent']
 
         else:
+            if options.get('js_repr', False):
+                return '{}{}/{}'.format(sign, nume, deno)
             if self.symbol == 'like_a_fraction':
                 return sign + MARKUP['opening_fraction']                      \
                             + nume                                            \
