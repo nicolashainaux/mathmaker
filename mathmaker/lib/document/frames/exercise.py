@@ -737,7 +737,7 @@ class Exercise(object):
                                             numbering=q.displayable_number)
             return result
 
-            # default tabular option:
+        # default tabular option:
         elif self.layout_variant == 'tabular':
             q = [self.questions_list[i].to_str('exc')
                  for i in range(self.q_nb)]
@@ -747,6 +747,11 @@ class Exercise(object):
                 if ex_or_answers == 'ans' \
                 else [self.questions_list[i].to_str('hint')
                       for i in range(self.q_nb)]
+
+            if shared.enable_js_form and ex_or_answers == 'exc':
+                for i in range(len(a)):
+                    a[i] = r"""\TextField[name=ans""" + str(i + 1) \
+                        + r""",bordercolor=,value=,width=10em]{} """ + a[i]
 
             n = [M.write(str(i + 1) + ".", emphasize='bold')
                  for i in range(self.q_nb)]
@@ -760,5 +765,69 @@ class Exercise(object):
                                      justify=['left', 'left', 'center'],
                                      center_vertically=True,
                                      min_row_height=self.min_row_height)
+            if shared.enable_js_form and ex_or_answers == 'exc':
+                result += (r"""
+\PushButton[name=clearbutton,bordercolor={{0.5 0.5 0.5}},
+            onclick={{var qNumber = {q_number};
+                     for (var i = 1; i <= qNumber; i++) {{
+                       this.getField("ans" + i.toString()).value="";
+                       this.removeField("c" + i.toString());
+                     }}
+                     this.getField("mark").value="{empty_score_line}";
+                    }}
+              ]{{ {clearbutton_caption} }}
+\text{{ }}
+\hfill
+\PushButton[name=checkbutton,bordercolor={{0 0 0}},
+            onclick={{var qNumber = {q_number};
+                     var answers = {list_of_answers};
+                     var count = 0;
+                     var color_green = ["RGB", 0.2265625, 0.49609375, """
+                           r"""0.195315];
+                     var color_red = ["RGB", 0.7109375, 0.1875, 0.109375];
+                     for (var i = 1; i <= qNumber; i++) {{
+                       var istr = i.toString();
+                       var ansfield = this.getField("ans" + istr);
+                       var ansbox = ansfield.rect;
+                       var crect = [ansbox[2] - 13, ansbox[3] + 20, """
+                           r"""ansbox[2] - 3, ansbox[3]];
+                       this.addField("c" + istr, "text", 0, crect);
+                       var checkfield = this.getField("c" + istr);
+                       checkfield.readonly = true;
+                       var found = false;
+                       for (var j = 0; j < answers[i - 1].length; ++j) {{
+                         if (ansfield.value == answers[i - 1][j]) {{
+                           found = true;
+                         }}
+                       }}
+                       if (found) {{
+                         checkfield.textColor = color_green;
+                         checkfield.value = "{good_answer}";
+                         count = count + 1;
+                       }} else {{
+                         checkfield.textColor = color_red;
+                         checkfield.value = "{wrong_answer}";
+                       }}
+                     }}
+                     this.getField("mark").value = {score_line};
+                   }}
+              ]{{ {checkbutton_caption} }}""")\
+                    .format(q_number=self.q_nb,
+                            clearbutton_caption=_('Clear everything'),
+                            checkbutton_caption=_('Validate'),
+                            list_of_answers=[self.questions_list[i].to_str(
+                                             'js_ans')
+                                             for i in range(self.q_nb)],
+                            good_answer=_('Please translate this into only one'
+                                          ' letter to mean "correct answer"'),
+                            wrong_answer=_('Please translate this into only '
+                                           'one letter to mean "wrong '
+                                           'answer"'),
+                            empty_score_line=_('Score: ... / {q_number}')
+                            .format(q_number=self.q_nb),
+                            score_line=_('"Score: " + count.toString() + " '
+                                         '/ {q_number}"')
+                            .format(q_number=self.q_nb)
+                            )
 
             return result

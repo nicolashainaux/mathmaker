@@ -74,6 +74,8 @@ class Sheet(object):
         if filename is None:
             data = load_sheet(theme, subtheme, sheet_name)
             self.preset = data.get('preset', 'default')
+            shared.enable_js_form = (options.get('enable_js_form', False)
+                                     and self.preset == 'mental calculation')
             header = data.get('header', presets[self.preset]['header'])
             title = data.get('title', presets[self.preset]['title'])
             subtitle = data.get('subtitle', presets[self.preset]['subtitle'])
@@ -499,7 +501,17 @@ class Sheet(object):
                                                  duration=0.75)
         else:
             result += shared.machine.write_set_font_size_to('large')
+            if shared.enable_js_form:
+                result += r'\begin{Form}' + '\n'
             result += shared.machine.write(self.title, emphasize='bold')
+            if shared.enable_js_form:
+                result += r"""\hfill
+\TextField[name=mark,width=3cm,height=0.2cm,value=Score :,
+           format={var f = this.getField('mark');
+                   f.strokeColor = ['T'];
+                   f.fillColor = ['T'];
+                   f.textFont = 'Ubuntu'},
+           width=10em]{}"""
             if self.subtitle != '':
                 result += shared.machine.write_new_line()
                 result += shared.machine.write_set_font_size_to('normal')

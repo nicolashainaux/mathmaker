@@ -105,6 +105,7 @@ class Question(object):
 
         self.q_text = m.q(**options)
         self.q_answer = m.a(**options)
+        self.q_js_answer = m.js_a(**options)
         if hasattr(m, 'h'):
             self.q_hint = m.h(**options)
         else:
@@ -127,6 +128,9 @@ class Question(object):
     def to_str(self, ex_or_answers):
         if ex_or_answers == 'exc':
             return self.text_to_str()
+
+        elif ex_or_answers == 'js_ans':
+            return self.q_js_answer
 
         elif ex_or_answers == 'ans':
             return self.answer_to_str()

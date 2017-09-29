@@ -54,6 +54,21 @@ class structure(object):
         else:
             return ""
 
+    def js_a(self, **kwargs):
+        """
+        Return the object as a list of user quickly writable strings.
+
+        The elements of this list will be used in embedded javascript of pdf
+        files to compare to user's answer. Most of the time, only one answer
+        is possible (like answer of '7×8 = ?' is equal to '56') but sometimes
+        it is useful to have several different answers to accept, like for
+        fractions of a figure: '6/12' should lead to also accept, at least,
+        '3/6', '2/4' and '1/2'.
+
+        Must be reimplemented in each question.
+        """
+        raise NotImplementedError
+
     @property
     def nb_list(self):
         return [getattr(self, 'nb' + str(i + 1)) for i in range(self.nb_nb)]

@@ -57,6 +57,10 @@ def init():
     global alternate_source
     global decimals_source
 
+    global enable_js_form
+
+    enable_js_form = False
+
     log = settings.mainlogger
 
     db = sqlite3.connect(settings.path.db)

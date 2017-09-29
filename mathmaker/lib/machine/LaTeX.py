@@ -70,6 +70,7 @@ class LaTeX(Structure.Structure):
     ##
     #   @brief Write the complete LaTeX header of the sheet to the output.
     def write_document_header(self, variant='default'):
+        from mathmaker.lib import shared
         result = generate_header_comment(latex.FORMAT_NAME_PRINT)
         if variant == 'slideshow':
             sisetup_dict = {}
@@ -177,6 +178,10 @@ class LaTeX(Structure.Structure):
             result += r'\usepackage{amsmath}' + '\n'
             result += '% ' + _('To draw') + '\n'
             result += r'\usepackage{tikz}' + '\n'
+            if shared.enable_js_form:
+                result += '% {}\n'\
+                    .format(_('To insert pdf formular and javascript'))
+                result += r'\usepackage{hyperref}' + '\n'
             result += '% ' + _('Page layout ') + '\n'
             result += '\geometry{hmargin=0.75cm, vmargin=0.75cm}\n'
             result += '\setlength{\parindent}{0cm}\n'
@@ -235,7 +240,10 @@ class LaTeX(Structure.Structure):
     ##
     #   @brief Writes to the output the end of document command
     def write_document_ends(self):
-        output_str = "\end{document} " + "\n"
+        from mathmaker.lib import shared
+        output_str = '\end{document}\n'
+        if shared.enable_js_form:
+            output_str = '\n\end{Form}\n' + output_str
         if self.redirect_output_to_str:
             return output_str
         else:

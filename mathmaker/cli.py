@@ -72,6 +72,12 @@ def entry_point():
                              'calculation tabular will be created twice, with '
                              'questions shifted by a random offset the second '
                              'time. ')
+    parser.add_argument('--interactive', action='store_true',
+                        dest='enable_js_form',
+                        help='When this option is enabled, the mental '
+                             'calculation tabular questions\' sheet will be '
+                             'added fields and buttons to enter answers and '
+                             'validate them. ')
     parser.add_argument('-f', '--font', action='store',
                         dest='font',
                         default=settings.font,
@@ -132,7 +138,8 @@ def entry_point():
             shared.db.close()
             sys.exit(1)
         if build_from_yaml:
-            sh = Sheet(*fn, filename=None, shift=args.shift)
+            sh = Sheet(*fn, filename=None, shift=args.shift,
+                       enable_js_form=args.enable_js_form)
         else:
             sh = Sheet('', '', '', filename=fn)
 
