@@ -594,7 +594,7 @@ class Value(Signed):
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
     #   @return The formated string
-    def into_str(self, **options):
+    def into_str(self, textwrap=True, **options):
         sign = ''
         if self._sign == '-':
             sign = '-'
@@ -607,7 +607,7 @@ class Value(Signed):
             if self._text_in_maths \
             else ''
 
-        if 'graphic_display' in options:
+        if not textwrap:
             open_text_in_maths = close_text_in_maths = ''
 
         if self.is_numeric():
@@ -1039,18 +1039,15 @@ class Unit(Exponented):
     #   @brief Creates a string of the given object in the given ML
     #   @param options Any options
     #   @return The formated string
-    def into_str(self, **options):
+    def into_str(self, textwrap=True, **options):
 
         text_box_open = MARKUP['open_text_in_maths']
         text_box_close = MARKUP['close_text_in_maths']
 
-        if ('graphic_display' in options and options['graphic_display']
-            or 'display_SI_unit' in options):
-            # __
-            text_box_open = ""
-            text_box_close = ""
+        if (not textwrap) or ('display_SI_unit' in options):
+            text_box_open = text_box_close = ''
 
-        exponent = ""
+        exponent = ''
 
         if self.exponent != Value(1):
             exponent = MARKUP['opening_exponent'] \

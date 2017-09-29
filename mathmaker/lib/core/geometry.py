@@ -380,8 +380,7 @@ class Polygon(Drawable):
                 content += '  $\\rotatebox{'
                 content += str(rotate_box_angle)
                 content += '}{\sffamily '
-                content += a.label.into_str(display_unit=True,
-                                            graphic_display=True)
+                content += a.label.into_str(display_unit=True, textwrap=False)
                 content += '}$ '
                 content += a.vertex.name + ' '
                 content += str(label_position_angle) + ' deg '

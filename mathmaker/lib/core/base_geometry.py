@@ -399,8 +399,7 @@ class Segment(Drawable):
             result += "  $\\rotatebox{"
             result += str(rotate_box_angle)
             result += "}{\sffamily "
-            result += self.label.into_str(display_unit=True,
-                                          graphic_display=True)
+            result += self.label.into_str(display_unit=True, textwrap=False)
             result += "}$ "
             result += self.points[0].name + " "
             result += str(label_position_angle)
