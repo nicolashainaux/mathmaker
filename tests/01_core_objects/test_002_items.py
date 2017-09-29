@@ -349,10 +349,10 @@ def test_item_to_round_round_to_thousandth(item_to_round):
 def test_items_with_unit_printed(item_with_unit, literal_item_with_unit):
     """Are Items with units correctly printed?"""
     assert item_with_unit.into_str(display_unit=True,
-                                   graphic_display=True,
+                                   textwrap=False,
                                    force_expression_begins=True) == '19.5~cm'
     assert literal_item_with_unit.into_str(
-        display_unit=True, graphic_display=True,
+        display_unit=True, textwrap=False,
         force_expression_begins=True) == '?~cm'
     assert literal_item_with_unit.into_str(
         display_unit=True, force_expression_begins=True) \
@@ -402,3 +402,9 @@ def test_unit_conversions():
     j = i.convert_to('hL')
     assert str(j.unit) == 'hL'
     assert j.printed == wrap_nb('0.01096')
+
+
+def test_js_repr():
+    """Is the "js" representation correct?"""
+    assert Item(('+', 6, 1)).jsprinted == '6'
+    assert Item(('-', 42, 1)).jsprinted == '-42'

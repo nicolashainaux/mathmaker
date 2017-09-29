@@ -347,3 +347,11 @@ def test_literal_value_substituted(literal_value):
     """Is this Value correctly substituted?"""
     literal_value.substitute({Value('AB'): 11, Value('CD'): 10})
     assert literal_value.printed == wrap_nb('11')
+
+
+def test_js_repr():
+    """Is the "js" representation correct?"""
+    assert Value(4).into_str(js_repr=True) == '4'
+    assert Value('a').into_str(js_repr=True) == 'a'
+    assert Value('units').into_str(js_repr=True) == 'units'
+    assert Value(-4).into_str(js_repr=True) == '-4'

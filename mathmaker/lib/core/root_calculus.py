@@ -610,6 +610,8 @@ class Value(Signed):
         if js_repr or not textwrap:
             open_text_in_maths = close_text_in_maths = ''
 
+        options.update({'textwrap': textwrap, 'js_repr': js_repr})
+
         if self.is_numeric():
             if 'display_unit' in options and options['display_unit']:
                 unit_str = self.unit.into_str(**options) \

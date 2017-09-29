@@ -107,6 +107,16 @@ class Printable(NamedObject, metaclass=ABCMeta):
         """
         return self.into_str(force_expression_begins=True)
 
+    @property
+    def jsprinted(self):
+        """
+        Shortcut for self.into_str(force_expression_begins=True, js_repr=True)
+
+        This returns the string of the Printable object, assuming it starts
+        the expression.
+        """
+        return self.into_str(force_expression_begins=True, js_repr=True)
+
 
 # ------------------------------------------------------------------------------
 # --------------------------------------------------------------------------
