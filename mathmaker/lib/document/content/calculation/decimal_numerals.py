@@ -85,3 +85,10 @@ class sub_object(object):
             return fix_math_style2_fontsize(_('{} (or {} etc.)').format(
                 shared.machine.write_math_style2(self.fraction.printed),
                 shared.machine.write_math_style2(self.fraction10.printed)))
+
+    def js_a(self, **kwargs):
+        if self.direction == 'to_decimal':
+            return [Item(self.decimal_representation).jsprinted]
+        else:
+            f = self.fraction.jsprinted
+            return [f, 'any_decimal_fraction == ' + f]

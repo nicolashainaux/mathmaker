@@ -794,6 +794,18 @@ class Exercise(object):
                               parseInt(Number(value)) == value &&
                               !isNaN(parseInt(value, 10));
                      }};
+                     function isPowerOf10 (value) {{
+                       if (value < 0) return isPowerOf10(-value);
+                       if (value == 1 || value == 10) {{
+                         return true;
+                       }} else if (value < 1) {{
+                         return isPowerOf10(value * 10);
+                       }} else if (value > 10) {{
+                         return isPowerOf10(value / 10);
+                       }} else {{
+                         return false;
+                       }}
+                     }}
                      var qNumber = {q_number};
                      var answers = {list_of_answers};
                      var count = 0;
@@ -817,17 +829,21 @@ class Exercise(object):
                          if ((!found) &&
                              (answers[i - 1][j].indexOf(" == ") !== -1)) {{
                            var chunks = answers[i - 1][j].split(" == ");
-                           if ((chunks[0] == "any_fraction")  &&
+                           if ((chunks[0] == "any_fraction" """
+                           r"""|| chunks[0] == "any_decimal_fraction")  &&
                                (ansfield.value.indexOf("/") !== -1)) {{
                              var nd = ansfield.value.split("/");
                              if ((nd.length == 2) &&
                                  isInt(nd[0]) && isInt(nd[1])) {{
                                var n = Number(nd[0]);
                                var d = Number(nd[1]);
-                               var r = reduce(n, d);
-                               var N = r[0].toString();
-                               var D = r[1].toString();
-                               if (chunks[1] === N + "/" + D) found = true;
+                               if (!(chunks[0] == "any_decimal_fraction" """
+                           r""" && !(isPowerOf10(d)))) {{
+                                 var r = reduce(n, d);
+                                 var N = r[0].toString();
+                                 var D = r[1].toString();
+                                 if (chunks[1] === N + "/" + D) found = true;
+                               }}
                              }}
                            }}
                          }}
