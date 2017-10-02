@@ -779,7 +779,22 @@ class Exercise(object):
 \text{{ }}
 \hfill
 \PushButton[name=checkbutton,bordercolor={{0 0 0}},
-            onclick={{var qNumber = {q_number};
+            onclick={{function modulo (a, b) {{
+                       return a - b * Math.floor(a / b);
+                     }};
+                     function reduce (numerator, denominator) {{
+                       var gcd = function gcd (a, b) {{
+                         return b ? gcd(b, modulo(a, b)) : a;
+                       }};
+                       gcd = gcd(numerator, denominator);
+                       return [numerator / gcd, denominator / gcd];
+                     }};
+                     function isInt (value) {{
+                       return !isNaN(value) &&
+                              parseInt(Number(value)) == value &&
+                              !isNaN(parseInt(value, 10));
+                     }};
+                     var qNumber = {q_number};
                      var answers = {list_of_answers};
                      var count = 0;
                      var color_green = ["RGB", 0.2265625, 0.49609375, """
@@ -798,6 +813,23 @@ class Exercise(object):
                        for (var j = 0; j < answers[i - 1].length; ++j) {{
                          if (ansfield.value == answers[i - 1][j]) {{
                            found = true;
+                         }}
+                         if ((!found) &&
+                             (answers[i - 1][j].indexOf(" == ") !== -1)) {{
+                           var chunks = answers[i - 1][j].split(" == ");
+                           if ((chunks[0] == "any_fraction")  &&
+                               (ansfield.value.indexOf("/") !== -1)) {{
+                             var nd = ansfield.value.split("/");
+                             if ((nd.length == 2) &&
+                                 isInt(nd[0]) && isInt(nd[1])) {{
+                               var n = Number(nd[0]);
+                               var d = Number(nd[1]);
+                               var r = reduce(n, d);
+                               var N = r[0].toString();
+                               var D = r[1].toString();
+                               if (chunks[1] === N + "/" + D) found = true;
+                             }}
+                           }}
                          }}
                        }}
                        if (found) {{

@@ -50,9 +50,9 @@ class sub_object(component.structure):
         super().setup('rectangle_grid', **options)
         self.wording = _('Which fraction of the figure matches '
                          'the greyed part?')
-        f = Fraction(('+',
-                      Item(self.nb1 * self.nb2),
-                      Item(self.nb3 * self.nb4)))
+        self.fraction = f = Fraction(('+',
+                                      Item(self.nb1 * self.nb2),
+                                      Item(self.nb3 * self.nb4)))
         if f.is_reducible():
             f1 = f.minimally_reduced(ignore_1_denominator=True)
             if f1.is_reducible():
@@ -103,3 +103,7 @@ class sub_object(component.structure):
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
         return self.answer_wording
+
+    def js_a(self, **kwargs):
+        f = self.fraction.completely_reduced().jsprinted
+        return [f, 'any_fraction == ' + f]

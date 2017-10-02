@@ -64,3 +64,10 @@ class sub_object(object):
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
         return shared.machine.write_math_style2(self.hidden_one.printed)
+
+    def js_a(self, **kwargs):
+        if isinstance(self.hidden_one, Fraction):
+            f = self.hidden_one.completely_reduced().jsprinted
+            return [f, 'any_fraction == ' + f]
+        else:
+            return [self.hidden_one.jsprinted]
