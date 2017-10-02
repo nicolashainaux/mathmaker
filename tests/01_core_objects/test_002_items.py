@@ -20,6 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import locale
 import pytest
 import decimal
 
@@ -408,3 +409,6 @@ def test_js_repr():
     """Is the "js" representation correct?"""
     assert Item(('+', 6, 1)).jsprinted == '6'
     assert Item(('-', 42, 1)).jsprinted == '-42'
+    locale.setlocale(locale.LC_NUMERIC, locale='fr_FR.UTF8')
+    assert Item(decimal.Decimal('4.5')).jsprinted == '4.5'
+    locale.setlocale(locale.LC_NUMERIC, locale='en_US.UTF8')

@@ -613,22 +613,22 @@ class Value(Signed):
         options.update({'textwrap': textwrap, 'js_repr': js_repr})
 
         if self.is_numeric():
+            lvalue = locale.str(self.abs_value)
+            if options.get('js_repr'):
+                lvalue = str(self.abs_value)
             if 'display_unit' in options and options['display_unit']:
                 unit_str = self.unit.into_str(**options) \
                     if isinstance(self.unit, Unit) \
                     else str(self.unit)
-                return sign + open_text_in_maths + locale.str(self.abs_value) \
+                return sign + open_text_in_maths + lvalue \
                     + close_text_in_maths + unit_str
             elif 'display_SI_unit' in options and options['display_SI_unit']:
                 unit_str = self.unit.into_str(**options) \
                     if isinstance(self.unit, Unit) \
                     else str(self.unit)
-                return sign + "\SI{" + locale.str(self.abs_value) + "}"\
-                    "{" + unit_str + "}"
+                return sign + "\SI{" + lvalue + "}{" + unit_str + "}"
             else:
-                return sign + open_text_in_maths \
-                    + locale.str(self.abs_value) \
-                    + close_text_in_maths
+                return sign + open_text_in_maths + lvalue + close_text_in_maths
 
         elif (self.raw_value in ["", " "] and 'display_SI_unit' in options
               and options['display_SI_unit']):

@@ -20,6 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import locale
 import pytest
 from decimal import Decimal
 
@@ -355,3 +356,6 @@ def test_js_repr():
     assert Value('a').into_str(js_repr=True) == 'a'
     assert Value('units').into_str(js_repr=True) == 'units'
     assert Value(-4).into_str(js_repr=True) == '-4'
+    locale.setlocale(locale.LC_NUMERIC, locale='fr_FR.UTF8')
+    assert Value(Decimal('4.5')).into_str(js_repr=True) == '4.5'
+    locale.setlocale(locale.LC_NUMERIC, locale='en_US.UTF8')
