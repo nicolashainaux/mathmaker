@@ -233,5 +233,5 @@ W04d: !!omap
     - questions: multi hole -> table_11_tens_easy (1)
                  rank reversed -> digits_places (1)
                  fraction_of a_rectangle -> intpairs_4to9;;intpairs_4to9 (1)
-                 subtr direct, context=mini_problem, subvariant=only_positive ->  complements_to_100 (1)
+                 subtr direct, context=mini_problem, subvariant=only_positive -> complements_to_100, nb1_ge=7 (10)
                  addi direct -> complements_to_300...1000 (1)
