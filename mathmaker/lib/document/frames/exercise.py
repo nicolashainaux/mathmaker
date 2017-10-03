@@ -523,7 +523,7 @@ class Exercise(object):
 
         # Now, we generate the numbers & questions, by type of question first
         self._questions_list = []
-        last_draw = [0, 0]
+        last_draw = {}
         numbering = numbering_device(self.q_numbering)
         for q in mixed_q_list:
             preprocess_variant(q)
@@ -532,6 +532,8 @@ class Exercise(object):
             nb_to_use = tuple()
             common_nb = None
             for (i, (nb_source, xkw)) in enumerate(nbsources_xkw_list):
+                if last_draw.get(nb_source) is None:
+                    last_draw[nb_source] = [0, 0]
                 # Handle all nb sources for ONE question
                 if i == 1 and extra_infos['merge_sources']:
                     if extra_infos.get('coprime', False):
@@ -539,16 +541,17 @@ class Exercise(object):
                         # remove the sorted() call.
                         # Coprimes being about integers, int() is used as sort
                         # key.
-                        last_draw = sorted(last_draw, key=int)
+                        last_draw[nb_source] = sorted(last_draw[nb_source],
+                                                      key=int)
                         lb2, hb2 = nb_source.split(sep='×')[1].split(sep='to')
                         lb2, hb2 = int(lb2), int(hb2)
                         span = [i + lb2 for i in range(hb2 - lb2)]
                         coprimes = [str(n)
-                                    for n in coprimes_to(int(last_draw[-1]),
-                                                         span)]
+                                    for n in coprimes_to(
+                                    int(last_draw[nb_source][-1]), span)]
                         second_couple_drawn = shared.mc_source\
                             .next(nb_source,
-                                  nb1=last_draw[0],
+                                  nb1=last_draw[nb_source][0],
                                   nb2_in=coprimes,
                                   qkw=q.options,
                                   **get_q_modifier(q.id, nb_source),
@@ -556,7 +559,7 @@ class Exercise(object):
                     else:
                         second_couple_drawn = shared.mc_source\
                             .next(nb_source,
-                                  either_nb1_nb2_in=last_draw,
+                                  either_nb1_nb2_in=last_draw[nb_source],
                                   qkw=q.options,
                                   **get_q_modifier(q.id, nb_source),
                                   **xkw)
@@ -587,7 +590,7 @@ class Exercise(object):
                                                     common_nb)
                 else:
                     drawn = shared.mc_source.next(nb_source,
-                                                  not_in=last_draw,
+                                                  not_in=last_draw[nb_source],
                                                   qkw=q.options,
                                                   **get_q_modifier(
                                                       q.id, nb_source),
@@ -598,12 +601,12 @@ class Exercise(object):
                         nb_to_use += (drawn, )
 
                 known_elts = set()
-                last_draw = []
+                last_draw[nb_source] = []
                 for n in nb_to_use:
                     if (n in known_elts
                         or not (isinstance(n, int) or isinstance(n, str))):
                         continue
-                    last_draw.append(str(n))
+                    last_draw[nb_source].append(str(n))
                     known_elts.add(n)
                 if nb_source in ['decimal_and_10_100_1000_for_divi',
                                  'decimal_and_10_100_1000_for_multi']:
