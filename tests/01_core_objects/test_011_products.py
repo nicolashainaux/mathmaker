@@ -687,3 +687,4 @@ def test_product_auto_calculation():
 def test_js_repr():
     """Is the "js" representation correct?"""
     assert Product([Item(5), Item(9)]).jsprinted == '5*9'
+    assert Product([Item(1)]).jsprinted == '1'

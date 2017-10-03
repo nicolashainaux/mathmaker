@@ -4433,10 +4433,13 @@ class Product(CommutativeOperation):
                     resulting_string += MARKUP['plus'] + MARKUP['one']
                     # expression_begins = False (useless !)
                 else:
-                    resulting_string += MARKUP['one']
-                    # If expression begins is not reset to False here,
-                    # it is then possible to display something and still
-                    # have it True !
+                    if options.get('js_repr', False):
+                        resulting_string += '1'
+                    else:
+                        resulting_string += MARKUP['one']
+                        # If expression begins is not reset to False here,
+                        # it is then possible to display something and still
+                        # have it True !
                     expression_begins = False
 
             # Before leaving, maybe close a possibly left unclosed bracket
