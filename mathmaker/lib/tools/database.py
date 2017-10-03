@@ -296,12 +296,12 @@ class source(object):
     def _timestamp(self, col_name, col_match, **kwargs):
         shared.db.execute(
             "UPDATE " + self.table_name
-            + " SET drawDate = datetime()"
+            + " SET drawDate = strftime('%Y-%m-%d %H:%M:%f')"
             + " WHERE " + col_name + " = '" + str(col_match) + "';")
         if 'union' in kwargs:
             shared.db.execute(
                 "UPDATE " + kwargs['union']['table_name']
-                + " SET drawDate = datetime()"
+                + " SET drawDate = strftime('%Y-%m-%d %H:%M:%f')"
                 + " WHERE " + col_name + " = '" + str(col_match) + "';")
 
     ##
