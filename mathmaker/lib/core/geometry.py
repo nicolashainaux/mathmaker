@@ -361,7 +361,7 @@ class Polygon(Drawable):
                     scale_factor = Number(
                         Decimal('38.1') * pow(Decimal(str(a.measure)),
                                               Decimal('-0.8')))\
-                        .round(Decimal('0.01'), rounding=ROUND_HALF_UP)
+                        .rounded(Decimal('0.01'))
 
                 label_display_angle = \
                     Vector((a.points[1], a.points[0]))\

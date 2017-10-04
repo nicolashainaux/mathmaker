@@ -23,7 +23,7 @@
 import copy
 import random
 import warnings
-from decimal import Decimal, ROUND_DOWN
+from decimal import Decimal, ROUND_DOWN, ROUND_HALF_UP
 
 
 def is_number(n):
@@ -72,14 +72,20 @@ class Number(Decimal):
         else:
             return self.standardized().as_tuple().digits.count(0)
 
-    def round(self, precision, **options):
-        """Round the number. Return a standardized result."""
-        return Number(self.quantize(precision, **options)).standardized()
+    def rounded(self, precision, rounding=ROUND_HALF_UP):
+        """
+        Round the number. Return a standardized result.
+
+        :param precision: a Decimal (same as decimal.Decimal().quantize()).
+                          For instance, Decimal('1'), Decimal('1.0') etc.
+        """
+        return Number(self.quantize(precision,
+                                    rounding=rounding)).standardized()
 
     def decimal_places_nb(self):
         """Return the number of decimal places."""
         n = Number(abs(self)).standardized()
-        temp = len(str((n - n.round(Decimal(1), rounding=ROUND_DOWN)))) - 2
+        temp = len(str((n - n.rounded(Decimal(1), rounding=ROUND_DOWN)))) - 2
         return temp if temp >= 0 else 0
 
     def is_power_of_10(self):

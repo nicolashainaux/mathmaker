@@ -28,7 +28,7 @@
 
 import copy
 import locale
-from decimal import (Decimal, getcontext, Rounded, ROUND_HALF_UP, ROUND_DOWN,
+from decimal import (Decimal, getcontext, Rounded, ROUND_DOWN,
                      InvalidOperation)
 from abc import ABCMeta, abstractmethod
 
@@ -776,7 +776,7 @@ class Value(Signed):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the value once rounded to the given precision
-    def round(self, precision):
+    def rounded(self, precision):
         if not self.is_numeric():
             raise TypeError('Cannot round a non numeric Value')
         elif (not (precision in [UNIT, TENTH, HUNDREDTH, THOUSANDTH,
@@ -790,11 +790,10 @@ class Value(Signed):
             result_value = self.clone()
             if type(precision) == int:
                 result_value.raw_value = Number(self.raw_value)\
-                    .round(Decimal(PRECISION[precision]),
-                           rounding=ROUND_HALF_UP)
+                    .rounded(Decimal(PRECISION[precision]))
             else:
                 result_value.raw_value = Number(self.raw_value)\
-                    .round(Decimal(precision), rounding=ROUND_HALF_UP)
+                    .rounded(Decimal(precision))
 
             if self.needs_to_get_rounded(precision):
                 result_value.set_has_been_rounded(True)
@@ -811,8 +810,8 @@ class Value(Signed):
         else:
             temp_result = len(str((self.raw_value
                                    - Number(self.raw_value)
-                                   .round(Decimal(UNIT),
-                                          rounding=ROUND_DOWN)))) - 2
+                                   .rounded(Decimal(UNIT),
+                                            rounding=ROUND_DOWN)))) - 2
             if temp_result < 0:
                 return 0
             else:

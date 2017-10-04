@@ -1225,7 +1225,7 @@ class Equation(ComposedCalculable):
                                             .term[0].inv_fct(
                                                 new_eq.right_hand_side.term[0]
                                                 .evaluate(**options)))
-                                 .round(options['decimal_result']))
+                                 .rounded(options['decimal_result']))
             new_eq.set_hand_side('left',
                                  new_eq.left_hand_side.term[0].var)
 
@@ -1287,7 +1287,7 @@ class Equation(ComposedCalculable):
                     # __
                     new_eq.set_hand_side("right",
                                          new_eq.right_hand_side.term[0]
-                                         .round(options['decimal_result']))
+                                         .rounded(options['decimal_result']))
 
         # 2d CASE
         # Irreducible SUMS, like 3 + x = 5 or x - 2 = 3x + 7

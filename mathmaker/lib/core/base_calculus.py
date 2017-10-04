@@ -804,13 +804,13 @@ class Item(Exponented):
     # --------------------------------------------------------------------------
     ##
     #   @brief Returns the (numeric) Item once rounded to the given precision
-    def round(self, precision):
+    def rounded(self, precision):
         if not self.exponent.is_displ_as_a_single_1():
             raise TypeError('In order to round an Item, its exponent should be'
                             ' equivalent to a single 1')
         else:
             result = self.clone()
-            result.set_value_inside(self.value_inside.round(precision))
+            result.set_value_inside(self.value_inside.rounded(precision))
             return result
 
     # --------------------------------------------------------------------------
@@ -1600,7 +1600,7 @@ class SquareRoot(Function):
            and self.radicand.calculate_next_step() is None:
             # __
             result = Item(Value(self.radicand.evaluate()).sqrt()
-                          .round(options['decimal_result']))
+                          .rounded(options['decimal_result']))
             result.set_sign(self.sign)
             return result
 
@@ -2253,7 +2253,7 @@ class Quotient(Operation):
 
         if 'decimal_result' in options:
             return Item(self.evaluate(**options))\
-                .round(options['decimal_result'])
+                .rounded(options['decimal_result'])
 
         if self.numerator.calculate_next_step(**options) is not None:
             if self.denominator.calculate_next_step(**options) is not None:
@@ -2326,7 +2326,7 @@ class Quotient(Operation):
 
             else:
                 val = Item(self.evaluate(stop_recursion=True,
-                                         **options)).round(3)
+                                         **options)).rounded(3)
                 return val
 
     def expand_and_reduce_next_step(self, **options):
@@ -2795,7 +2795,7 @@ class Fraction(Quotient):
                 result_sign = -1
             result = Item(Value(result_sign * self.numerator.evaluate()
                                 / self.denominator.evaluate())
-                          .round(options['decimal_result']))
+                          .rounded(options['decimal_result']))
             log.debug("Decimal calculation has been done. Result: \n"
                       + repr(result) + " which _has_been_rounded: "
                       + str(result.contains_a_rounded_number()))
