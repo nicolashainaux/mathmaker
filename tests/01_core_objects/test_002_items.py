@@ -329,22 +329,22 @@ def test_item_to_round_needs_to_get_rounded_4(item_to_round):
 
 def test_item_to_round_round_to_unit(item_to_round):
     """Is Item(6.548) correctly rounded (to unit) to Item(7)?"""
-    assert item_to_round.round(0) == Item(7)
+    assert item_to_round.rounded(0) == Item(7)
 
 
 def test_item_to_round_round_to_tenth(item_to_round):
     """Is Item(6.548) correctly rounded (to tenth) to Item(6.5)?"""
-    assert item_to_round.round(1) == Item(6.5)
+    assert item_to_round.rounded(1) == Item(6.5)
 
 
 def test_item_to_round_round_to_hundredth(item_to_round):
     """Is Item(6.548) correctly rounded (to hundredth) to Item(6.55)?"""
-    assert item_to_round.round(2) == Item(6.55)
+    assert item_to_round.rounded(2) == Item(6.55)
 
 
 def test_item_to_round_round_to_thousandth(item_to_round):
     """Is Item(6.548) correctly rounded (to thousandth) to Item(6.548)?"""
-    assert item_to_round.round(3) == Item(6.548)
+    assert item_to_round.rounded(3) == Item(6.548)
 
 
 def test_items_with_unit_printed(item_with_unit, literal_item_with_unit):

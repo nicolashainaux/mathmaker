@@ -123,10 +123,10 @@ def test_fix_digits():
     assert not is_integer(n2) or not is_integer(n3)
 
 
-def test_round():
+def test_rounded():
     """Check rounding is good."""
-    assert Number(4.2).round(0) == 4
-    assert Number(4.2).round(Decimal('1'), rounding=ROUND_HALF_UP) == 4
+    assert Number(4.2).rounded(0) == 4
+    assert Number(4.2).rounded(Decimal('1'), rounding=ROUND_HALF_UP) == 4
 
 
 def test_is_power_of_10():

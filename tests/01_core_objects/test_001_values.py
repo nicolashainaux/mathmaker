@@ -106,127 +106,127 @@ def test_4digit_numbers(v4):
 
 def test_round_0digit_to_unit(v0):
     """Is the number correctly rounded?"""
-    assert v0.round(0).raw_value == 4
+    assert v0.rounded(0).raw_value == 4
 
 
 def test_round_1digit_to_unit(v1):
     """Is the number correctly rounded?"""
-    assert v1.round(0).raw_value == 4
+    assert v1.rounded(0).raw_value == 4
 
 
 def test_round_2digit_to_unit(v2):
     """Is the number correctly rounded?"""
-    assert v2.round(0).raw_value == 4
+    assert v2.rounded(0).raw_value == 4
 
 
 def test_round_3digit_to_unit(v3):
     """Is the number correctly rounded?"""
-    assert v3.round(0).raw_value == 4
+    assert v3.rounded(0).raw_value == 4
 
 
 def test_round_4digit_to_unit(v4):
     """Is the number correctly rounded?"""
-    assert v4.round(0).raw_value == 4
+    assert v4.rounded(0).raw_value == 4
 
 
 def test_round_0digit_to_tenth(v0):
     """Is the number correctly rounded?"""
-    assert v0.round(1).raw_value == 4
+    assert v0.rounded(1).raw_value == 4
 
 
 def test_round_1digit_to_tenth(v1):
     """Is the number correctly rounded?"""
-    assert v1.round(1).raw_value == Decimal('4.2')
+    assert v1.rounded(1).raw_value == Decimal('4.2')
 
 
 def test_round_2digit_to_tenth(v2):
     """Is the number correctly rounded?"""
-    assert v2.round(1).raw_value == Decimal('4.3')
+    assert v2.rounded(1).raw_value == Decimal('4.3')
 
 
 def test_round_3digit_to_tenth(v3):
     """Is the number correctly rounded?"""
-    assert v3.round(1).raw_value == Decimal('4.3')
+    assert v3.rounded(1).raw_value == Decimal('4.3')
 
 
 def test_round_4digit_to_tenth(v4):
     """Is the number correctly rounded?"""
-    assert v4.round(1).raw_value == Decimal('4.3')
+    assert v4.rounded(1).raw_value == Decimal('4.3')
 
 
 def test_round_0digit_to_hundredth(v0):
     """Is the number correctly rounded?"""
-    assert v0.round(2).raw_value == 4
+    assert v0.rounded(2).raw_value == 4
 
 
 def test_round_1digit_to_hundredth(v1):
     """Is the number correctly rounded?"""
-    assert v1.round(2).raw_value == Decimal('4.2')
+    assert v1.rounded(2).raw_value == Decimal('4.2')
 
 
 def test_round_2digit_to_hundredth(v2):
     """Is the number correctly rounded?"""
-    assert v2.round(2).raw_value == Decimal('4.25')
+    assert v2.rounded(2).raw_value == Decimal('4.25')
 
 
 def test_round_3digit_to_hundredth(v3):
     """Is the number correctly rounded?"""
-    assert v3.round(2).raw_value == Decimal('4.26')
+    assert v3.rounded(2).raw_value == Decimal('4.26')
 
 
 def test_round_4digit_to_hundredth(v4):
     """Is the number correctly rounded?"""
-    assert v4.round(2).raw_value == Decimal('4.26')
+    assert v4.rounded(2).raw_value == Decimal('4.26')
 
 
 def test_round_0digit_to_thousandth(v0):
     """Is the number correctly rounded?"""
-    assert v0.round(3).raw_value == 4
+    assert v0.rounded(3).raw_value == 4
 
 
 def test_round_1digit_to_thousandth(v1):
     """Is the number correctly rounded?"""
-    assert v1.round(3).raw_value == Decimal('4.2')
+    assert v1.rounded(3).raw_value == Decimal('4.2')
 
 
 def test_round_2digit_to_thousandth(v2):
     """Is the number correctly rounded?"""
-    assert v2.round(3).raw_value == Decimal('4.25')
+    assert v2.rounded(3).raw_value == Decimal('4.25')
 
 
 def test_round_3digit_to_thousandth(v3):
     """Is the number correctly rounded?"""
-    assert v3.round(3).raw_value == Decimal('4.257')
+    assert v3.rounded(3).raw_value == Decimal('4.257')
 
 
 def test_round_4digit_to_thousandth(v4):
     """Is the number correctly rounded?"""
-    assert v4.round(3).raw_value == Decimal('4.257')
+    assert v4.rounded(3).raw_value == Decimal('4.257')
 
 
 def test_round_0digit_to_tenthousandth(v0):
     """Is the number correctly rounded?"""
-    assert v0.round(4).raw_value == 4
+    assert v0.rounded(4).raw_value == 4
 
 
 def test_round_1digit_to_tenthousandth(v1):
     """Is the number correctly rounded?"""
-    assert v1.round(4).raw_value == Decimal('4.2')
+    assert v1.rounded(4).raw_value == Decimal('4.2')
 
 
 def test_round_2digit_to_tenthousandth(v2):
     """Is the number correctly rounded?"""
-    assert v2.round(4).raw_value == Decimal('4.25')
+    assert v2.rounded(4).raw_value == Decimal('4.25')
 
 
 def test_round_3digit_to_tenthousandth(v3):
     """Is the number correctly rounded?"""
-    assert v3.round(4).raw_value == Decimal('4.257')
+    assert v3.rounded(4).raw_value == Decimal('4.257')
 
 
 def test_round_4digit_to_tenthousandth(v4):
     """Is the number correctly rounded?"""
-    assert v4.round(4).raw_value == Decimal('4.2571')
+    assert v4.rounded(4).raw_value == Decimal('4.2571')
 
 
 def test_needs_to_get_rounded_0digit_to_unit(v0):

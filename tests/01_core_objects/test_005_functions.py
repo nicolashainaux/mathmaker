@@ -114,7 +114,7 @@ def test_cos_x_evaluated0(cos_x):
     cos_x.num_val = Value(60)
     cos_x.set_numeric_mode()
     assert cos_x.printed == wrap_nb('cos(60)')
-    assert Value(cos_x.evaluate()).round(4) == Value('0.5')
+    assert Value(cos_x.evaluate()).rounded(4) == Value('0.5')
 
 
 def test_cos_ABC_printed(cos_ABC):
