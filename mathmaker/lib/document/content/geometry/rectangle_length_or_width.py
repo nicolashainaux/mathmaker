@@ -85,14 +85,19 @@ class sub_object(component.structure):
 
     def q(self, **options):
         if self.picture:
-            return shared.machine.write_layout(
-                (1, 2),
-                [3.5, 9.5],
-                [shared.machine.insert_picture(
-                    self.rectangle,
-                    scale=0.75,
-                    vertical_alignment_in_a_tabular=True),
-                 self.wording.format(**self.wording_format)])
+            if options.get('x_layout_variant', 'default') == 'slideshow':
+                return shared.machine.insert_picture(self.rectangle,
+                                                     scale=1.1) \
+                    + '\n' + self.wording
+            else:
+                return shared.machine.write_layout(
+                    (1, 2),
+                    [3.5, 9.5],
+                    [shared.machine.insert_picture(
+                        self.rectangle,
+                        scale=0.75,
+                        vertical_alignment_in_a_tabular=True),
+                     self.wording.format(**self.wording_format)])
         else:
             return self.wording.format(**self.wording_format)
 
