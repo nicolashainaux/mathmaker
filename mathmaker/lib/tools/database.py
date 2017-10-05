@@ -781,7 +781,7 @@ def generate_random_decimal_nb(rank_to_use, width='random',
                 ranks = [ranks_scale.index(r) for r in ranks_scale
                          if r != rank_to_use]
                 width = min(width, len(ranks))
-                maxi_start = len(ranks) - width
+                maxi_start = len(ranks) - width + 1
                 slice_start = random.choice([i for i in range(maxi_start)])
                 ranks = ranks[slice_start:slice_start + width]
 

@@ -69,3 +69,9 @@ def test_generate_random_decimal_nb():
                                    generation_type='default')
     assert len(str(d)) == 5
     assert str(d).startswith('0.0')
+    d = generate_random_decimal_nb(Decimal('1'), width=7,
+                                   generation_type='default',
+                                   rank_matches_invisible_zero=True)
+    d = generate_random_decimal_nb(Decimal('1'), width=1,
+                                   generation_type='default',
+                                   rank_matches_invisible_zero=True)
