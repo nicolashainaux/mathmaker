@@ -67,7 +67,7 @@ class structure(object):
 
         Must be reimplemented in each question.
         """
-        return 'undefined'
+        return _('undefined')
 
     @property
     def nb_list(self):

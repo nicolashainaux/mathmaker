@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2017-09-29 11:02+0200\n"
+"PO-Revision-Date: 2017-10-05 17:30+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -324,7 +324,7 @@ msgid "Question:"
 msgstr "Question :"
 
 #: lib/old_style_sheet/exercise/X_Structure.py:264
-#: lib/document/frames/exercise.py:733
+#: lib/document/frames/exercise.py:736
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -593,13 +593,13 @@ msgid ""
 "Area of a square whose side's length is {nb1} {length_unit}? |hint:area_unit|"
 msgstr "Aire d'un carré de côté {nb1} {length_unit} ? |hint:area_unit|"
 
+#: lib/document/content/geometry/perimeter_rectangle.py:42
 #: lib/document/content/geometry/perimeter_irregular_quadrilateral.py:38
-#: lib/document/content/geometry/perimeter_rectangle.py:39
 msgid "Perimeter of this rectangle? |hint:length_unit|"
 msgstr "Périmètre de ce rectangle ? |hint:length_unit|"
 
+#: lib/document/content/geometry/perimeter_rectangle.py:47
 #: lib/document/content/geometry/perimeter_irregular_quadrilateral.py:42
-#: lib/document/content/geometry/perimeter_rectangle.py:44
 #, python-brace-format
 msgid ""
 "Perimeter of a rectangle whose width is {nb1} {length_unit} and length is "
@@ -619,7 +619,7 @@ msgid ""
 "length_unit|"
 msgstr "Périmètre d'un carré de côté {nb1} {length_unit} ? |hint:length_unit|"
 
-#: lib/document/content/calculation/rank_numberof.py:37
+#: lib/document/content/calculation/rank_numberof.py:40
 #, python-brace-format
 msgid "{how_many_rank} are there in {decimal_number}?"
 msgstr "{how_many_rank} dans {decimal_number} ?"
@@ -2270,31 +2270,35 @@ msgstr "Calcul mental : ceinture jaune"
 msgid "To insert pdf formular and javascript"
 msgstr "Pour insérer un formulaire pdf et du javascript"
 
-#: lib/document/frames/exercise.py:816
+#: lib/document/frames/exercise.py:867
 msgid "Clear everything"
 msgstr "Tout effacer"
 
-#: lib/document/frames/exercise.py:817
+#: lib/document/frames/exercise.py:868
 msgid "Validate"
 msgstr "Valider"
 
-#: lib/document/frames/exercise.py:824
+#: lib/document/frames/exercise.py:877
 #, python-brace-format
 msgid "Score: ... / {q_number}"
 msgstr "Score : ... / {q_number}"
 
-#: lib/document/frames/exercise.py:826
+#: lib/document/frames/exercise.py:879
 #, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr "\"Score : \" + count.toString() + \" / {q_number}\""
 
-#: lib/document/frames/exercise.py:820
+#: lib/document/frames/exercise.py:872
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr "J"
 
-#: lib/document/frames/exercise.py:822
+#: lib/document/frames/exercise.py:874
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr "F"
+
+#: lib/document/content/component.py:70
+msgid "undefined"
+msgstr "indéfini"
 
 #~ msgid "Decimal representation of {}?"
 #~ msgstr "Écriture décimale de {} ?"

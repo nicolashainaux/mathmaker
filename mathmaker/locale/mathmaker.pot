@@ -311,7 +311,7 @@ msgid "Question:"
 msgstr ""
 
 #: lib/old_style_sheet/exercise/X_Structure.py:264
-#: lib/document/frames/exercise.py:733
+#: lib/document/frames/exercise.py:736
 msgid "Answer:"
 msgstr ""
 
@@ -575,13 +575,13 @@ msgid ""
 "|hint:area_unit|"
 msgstr ""
 
+#: lib/document/content/geometry/perimeter_rectangle.py:42
 #: lib/document/content/geometry/perimeter_irregular_quadrilateral.py:38
-#: lib/document/content/geometry/perimeter_rectangle.py:39
 msgid "Perimeter of this rectangle? |hint:length_unit|"
 msgstr ""
 
+#: lib/document/content/geometry/perimeter_rectangle.py:47
 #: lib/document/content/geometry/perimeter_irregular_quadrilateral.py:42
-#: lib/document/content/geometry/perimeter_rectangle.py:44
 #, python-brace-format
 msgid ""
 "Perimeter of a rectangle whose width is {nb1} {length_unit} and length is "
@@ -599,7 +599,7 @@ msgid ""
 "|hint:length_unit|"
 msgstr ""
 
-#: lib/document/content/calculation/rank_numberof.py:37
+#: lib/document/content/calculation/rank_numberof.py:40
 #, python-brace-format
 msgid "{how_many_rank} are there in {decimal_number}?"
 msgstr ""
@@ -2013,28 +2013,32 @@ msgstr ""
 msgid "To insert pdf formular and javascript"
 msgstr ""
 
-#: lib/document/frames/exercise.py:816
+#: lib/document/frames/exercise.py:867
 msgid "Clear everything"
 msgstr ""
 
-#: lib/document/frames/exercise.py:817
+#: lib/document/frames/exercise.py:868
 msgid "Validate"
 msgstr ""
 
-#: lib/document/frames/exercise.py:824
+#: lib/document/frames/exercise.py:877
 #, python-brace-format
 msgid "Score: ... / {q_number}"
 msgstr ""
 
-#: lib/document/frames/exercise.py:826
+#: lib/document/frames/exercise.py:879
 #, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:820
+#: lib/document/frames/exercise.py:872
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:822
+#: lib/document/frames/exercise.py:874
 msgid "Please translate this into only one letter to mean \"wrong answer\""
+msgstr ""
+
+#: lib/document/content/component.py:70
+msgid "undefined"
 msgstr ""
