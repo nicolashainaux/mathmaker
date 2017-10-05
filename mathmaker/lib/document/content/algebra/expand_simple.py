@@ -70,3 +70,7 @@ class sub_object(component.structure):
     def a(self, **options):
         return shared.machine.write(
             self.expression.auto_expansion_and_reduction(**options))
+
+    # TODO: create the "js" answer (for interactive pdf)
+    # def js_a(self, **kwargs):
+    #     return [self......jsprinted]

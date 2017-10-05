@@ -120,3 +120,7 @@ class sub_object(component.structure):
 
     def a(self, **options):
         return self.answer_wording.format(**self.answer_wording_format)
+
+    # TODO: create the "js" answer (for interactive pdf)
+    # def js_a(self, **kwargs):
+    #     return [self......jsprinted]
