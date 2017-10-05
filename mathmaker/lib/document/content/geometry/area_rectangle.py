@@ -67,3 +67,6 @@ class sub_object(component.structure):
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
         return self.rectangle.area.into_str(display_SI_unit=True)
+
+    def js_a(self, **kwargs):
+        return [self.rectangle.area.jsprinted]

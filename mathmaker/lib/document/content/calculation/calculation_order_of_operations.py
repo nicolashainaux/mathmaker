@@ -28,7 +28,7 @@ from mathmaker.lib.tools.numbers import is_integer, move_fracdigits_to
 from mathmaker.lib.tools.numbers import remove_fracdigits_from, fix_fracdigits
 from mathmaker.lib.tools.numbers import Number
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Division,
-                                              Expandable)
+                                              Expandable, Value)
 from mathmaker.lib.core.calculus import Expression
 from mathmaker.lib.document.content import component
 
@@ -1444,3 +1444,6 @@ class sub_object(component.structure):
     def a(self, **options):
         return shared.machine.write(
             self.expression.auto_expansion_and_reduction(**options))
+
+    def js_a(self, **kwargs):
+        return [Value(self.expression.right_hand_side.evaluate()).jsprinted]

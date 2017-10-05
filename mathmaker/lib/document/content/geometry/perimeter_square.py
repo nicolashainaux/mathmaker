@@ -65,3 +65,6 @@ is {nb1} {length_unit}? |hint:length_unit|")
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
         return self.square.perimeter.into_str(display_SI_unit=True)
+
+    def js_a(self, **kwargs):
+        return [self.square.perimeter.jsprinted]

@@ -105,3 +105,6 @@ class sub_object(component.structure):
         # This is actually meant for self.preset == 'mental calculation'
         v = Value(self.result, unit=self.hint).into_str(display_SI_unit=True)
         return v
+
+    def js_a(self, **kwargs):
+        return [Value(self.result).jsprinted]
