@@ -25,6 +25,20 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
+def test_02_white2_multiplications_hole():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '02_white2',
+                                       'multiplications_hole')))
+
+
+def test_02_white2_multiplications_reversed():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '02_white2',
+                                       'multiplications_reversed')))
+
+
 def test_02_white2_multiplications():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
