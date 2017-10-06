@@ -826,7 +826,8 @@ class Exercise(object):
                        checkfield.readonly = true;
                        var found = false;
                        for (var j = 0; j < answers[i - 1].length; ++j) {{
-                         if (ansfield.value == answers[i - 1][j]) {{
+                         if (ansfield.value == decodeURIComponent("""
+                           r"""escape(answers[i - 1][j]))) {{
                            found = true;
                          }}
                          if ((!found) &&
