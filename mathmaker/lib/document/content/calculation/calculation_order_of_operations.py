@@ -180,7 +180,7 @@ class sub_object(component.structure):
         """
         # mad stands for maximum added depth
         if self.nb_variant.startswith('decimal'):
-            mad = int(self.nb_variant[-1]) - Number(n).decimal_places_nb()
+            mad = int(self.nb_variant[-1]) - Number(n).fracdigits_nb()
         else:
             mad = 0
         mad = mad if mad > 0 else 0
@@ -191,18 +191,18 @@ class sub_object(component.structure):
             if (not self.allow_division_by_decimal
                 and self.nb_variant == 'decimal1'
                 and is_integer(n)):
-                return max(depth, Number(n).decimal_places_nb() + 1)
+                return max(depth, Number(n).fracdigits_nb() + 1)
         elif self.variant in [103, 107]:  # a÷(b + c) a÷(b - c)
             N = kwargs['N']
             return max(depth,
-                       mad - Number(N).decimal_places_nb(),
+                       mad - Number(N).fracdigits_nb(),
                        random.choice([i for i in range(mad + 1)]))
         elif self.variant in [108, 112, 109, 113, 110, 114, 111, 115]:
             # a×(b ± c)×d   a×(b ± c)÷d  a÷(b ± c)×d  a÷(b ± c)÷d
             N, P = kwargs['N'], kwargs['P']
             return max(depth,
-                       mad - Number(N).decimal_places_nb()
-                       - Number(P).decimal_places_nb(),
+                       mad - Number(N).fracdigits_nb()
+                       - Number(P).fracdigits_nb(),
                        random.choice([i for i in range(mad + 1)]))
         elif 148 <= self.variant <= 155:
             # (a±b)×(c±d) and (a±b)÷(c±d)
@@ -463,7 +463,7 @@ class sub_object(component.structure):
                        'c isnt 0; b isnt 0; b isnt 1; b isnt deci', a, b, c)
         elif self.variant == 6:  # a×b - c
             if self.subvariant == 'only_positive' and a * b < c:
-                depth = Number(a * b).decimal_places_nb()
+                depth = Number(a * b).fracdigits_nb()
                 c = Decimal(str(random.choice(
                     [i + 1
                      for i in range(int(a * b * (10 ** depth)))]))) \

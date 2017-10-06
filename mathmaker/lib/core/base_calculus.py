@@ -2632,7 +2632,7 @@ class Fraction(Quotient):
 
         # 4th CASE:
         elif isinstance(arg, Decimal):
-            f = Number(10) ** max(1, Number(arg).decimal_places_nb())
+            f = Number(10) ** max(1, Number(arg).fracdigits_nb())
             self._numerator = Product([Item(Number(Number(f) * Number(arg))
                                             .standardized())])
             self._denominator = Product([Item(f)])

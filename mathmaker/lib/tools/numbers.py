@@ -82,8 +82,8 @@ class Number(Decimal):
         return Number(self.quantize(precision,
                                     rounding=rounding)).standardized()
 
-    def decimal_places_nb(self):
-        """Return the number of decimal places."""
+    def fracdigits_nb(self):
+        """Return the number of fractional digits."""
         n = Number(abs(self)).standardized()
         temp = len(str((n - n.rounded(Decimal(1), rounding=ROUND_DOWN)))) - 2
         return temp if temp >= 0 else 0
@@ -190,8 +190,8 @@ class Number(Decimal):
         if operation not in ['sum', 'difference', '+', '-']:
             raise ValueError('Argument "operation" should be either \'sum\' '
                              'or \'difference\'.')
-        n_depth = self.decimal_places_nb()
-        depth = dig + self.decimal_places_nb()
+        n_depth = self.fracdigits_nb()
+        depth = dig + self.fracdigits_nb()
         n = self
         if operation in ['sum', '+']:
             if self.is_power_of_10() and abs(self) <= 1 and dig == 0:
@@ -281,7 +281,7 @@ def remove_fracdigits_from(number, to=None):
         raise TypeError('The first argument must be a decimal number.')
     if type(to) is not list:
         raise TypeError('Argument to: must be a list.')
-    n = Number(number).decimal_places_nb()
+    n = Number(number).fracdigits_nb()
     try:
         i = to.index(next(x for x in to
                           if not is_integer(x / 10 ** n)))

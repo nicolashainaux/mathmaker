@@ -166,17 +166,17 @@ def test_isolated_zeros():
     assert Number('0.3006').isolated_zeros() == 2
 
 
-def test_decimal_places_nb():
-    """Check decimal_places_nb() in different cases."""
-    assert all(Number(n).decimal_places_nb() == 0
+def test_fracdigits_nb():
+    """Check fracdigits_nb() in different cases."""
+    assert all(Number(n).fracdigits_nb() == 0
                for n in [0, 1, 8, Decimal(4), Decimal('4.0'),
                          Decimal('4.00000000000000000000')])
-    assert all(Number(n).decimal_places_nb() == 1
+    assert all(Number(n).fracdigits_nb() == 1
                for n in [Decimal('0.4'), Decimal('10.000') / 4])
-    assert all(Number(n).decimal_places_nb() == 0
+    assert all(Number(n).fracdigits_nb() == 0
                for n in [-0, -1, -8, Decimal(-4), Decimal('-4.0'),
                          Decimal('-4.00000000000000000000')])
-    assert all(Number(n).decimal_places_nb() == 1
+    assert all(Number(n).fracdigits_nb() == 1
                for n in [Decimal('-0.4'), Decimal('-10.000') / 4])
 
 
@@ -274,10 +274,10 @@ def test_split():
     assert result[0] - result[1] == 14
     result = Number('4.3').split()
     # Can not say 'all' will be decimals, because we could have: 3 + 1.3
-    assert any([Number(r).decimal_places_nb() == 1 for r in result])
+    assert any([Number(r).fracdigits_nb() == 1 for r in result])
     result = Number(4).split(dig=2)
-    assert all([Number(r).decimal_places_nb() == 2 for r in result])
+    assert all([Number(r).fracdigits_nb() == 2 for r in result])
     result = Number(-7).split()
     assert all(-6 <= r <= -1 for r in result)
     result = Number('4.3').split(dig=1)
-    assert all([Number(r).decimal_places_nb() == 2 for r in result])
+    assert all([Number(r).fracdigits_nb() == 2 for r in result])
