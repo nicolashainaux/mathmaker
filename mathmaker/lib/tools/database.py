@@ -67,17 +67,19 @@ class source(object):
 
     def _twothirds_reset(self):
         """Will reset only two thirds of the already timestamped entries."""
+        log = settings.dbg_logger.getChild('db')
         n = tuple(shared.db.execute('SELECT COUNT(*) from {} '
                                     'WHERE drawDate != 0;'
                                     .format(self.table_name)))[0][0]
-        n = Number(Number('0.67') * Number(n)).rounded(Decimal('1'))
+        lim = Number(Number('0.67') * Number(n)).rounded(Decimal('1'))
+        log.debug(' 2/3 RESET: {}/{}\n'.format(lim, n))
         shared.db.execute('UPDATE {table_name} SET drawDate=0 '
                           'WHERE id IN '
                           '(SELECT id FROM {table_name}'
                           ' WHERE drawDate != 0'
                           ' ORDER BY drawDate LIMIT {nb});'
                           .format(table_name=self.table_name,
-                                  nb=n))
+                                  nb=lim))
 
     ##
     #   @brief  Resets the drawDate of all table's entries (to 0)
@@ -233,6 +235,8 @@ class source(object):
                 if kw.endswith('_lt'):
                     rel_sign = " < "
                     key = kw[:-3]
+                # If following lines become useful, don't forget to update
+                # other places (search for '_gt')
                 # if kw.endswith('_gt'):
                 #     rel_sign = " > "
                 #     key = kw[:-3]
@@ -283,7 +287,6 @@ class source(object):
         log.debug(cmd)
         qr = tuple(shared.db.execute(cmd))
         if not len(qr):
-            log.debug(' 2/3 RESET\n')
             self._twothirds_reset()
             qr = tuple(shared.db.execute(cmd))
             if not len(qr):
@@ -533,6 +536,28 @@ def preprocess_units_pairs_tag(tag, last_draw=None, qkw=None):
         d.update({'direction': qkw['direction']})
     elif len(last_draw) >= 5:
         d.update({'direction_neq': last_draw[2]})
+    return d
+
+
+def preprocess_decimals_query(qkw=None):
+    """
+    Create the SQL query according to possible qkw.
+    """
+    d = {}
+    if qkw is None:
+        qkw = {}
+    if 'fd' not in qkw:
+        d.update(
+            {'fd': Number(str(shared.fracdigits_places_source
+                              .next())).fracdigits_nb()})
+        if 'iz' in qkw and int(qkw['iz']) >= d['fd']:
+            d['fd'] = int(qkw['iz']) + 1
+        if 'iz_ge' in qkw and int(qkw['iz_ge']) >= d['fd']:
+            d['fd'] = int(qkw['iz_ge']) + 1
+        # if 'iz_gt' in qkw and qkw['iz_gt'] >= d['fd']:
+        #     d['fd'] = qkw['iz_gt'] + 1
+    else:
+        d.update({'fd': qkw['fd']})
     return d
 
 
@@ -894,8 +919,10 @@ class mc_source(object):
             kwargs.pop('not_in', None)
             return shared.unitspairs_source.next(**kwargs)
         elif tag_classification == 'decimals':
+            kwargs.update(preprocess_decimals_query(qkw=qkw))
             return shared.decimals_source.next(**kwargs)
         elif tag_classification == 'decimalfractionssums':
+            kwargs.update(preprocess_decimals_query(qkw=qkw))
             kwargs.update(preprocess_decimalfractions_pairs_tag(qkw=qkw,
                                                                 **kwargs))
             return postprocess_decimalfractionssums_query(
