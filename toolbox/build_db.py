@@ -137,9 +137,13 @@ def __main__():
          # DECIMAL(2, 3) stands for up to 2 integer digits,
          # up to 3 fractional digits
          # but these values may have no effect (purpose is only documentation)
+         # nz stands for "Non Zero digits (number)"
+         # iz stands for "Isolated Zeros (number)"
+         # fd stands for "Fractional Digits (number)"
          '''CREATE TABLE decimals
             (id INTEGER PRIMARY KEY, nb1 DECIMAL(2, 3), nz INTEGER,
-             iz INTEGER, overlap_level INTEGER, drawDate INTEGER)''',
+             iz INTEGER, fd INTEGER, overlap_level INTEGER,
+             drawDate INTEGER)''',
          '''CREATE TABLE digits_places
             (id INTEGER PRIMARY KEY, place DECIMAL(4, 3), drawDate INTEGER)''',
          '''CREATE TABLE fracdigits_places
@@ -272,12 +276,13 @@ def __main__():
     db_rows = [((i + 1) / 1000,
                 Number((Decimal(i + 1)) / Decimal(1000)).nonzero_digits_nb(),
                 Number((Decimal(i + 1)) / Decimal(1000)).isolated_zeros(),
+                Number((Decimal(i + 1)) / Decimal(1000)).fracdigits_nb(),
                 Number((Decimal(i + 1)) / Decimal(1000)).overlap_level(),
                 0)
                for i in range(9999)]
     db.executemany("INSERT "
-                   "INTO decimals(nb1, nz, iz, overlap_level, drawDate) "
-                   "VALUES(?, ?, ?, ?, ?)",
+                   "INTO decimals(nb1, nz, iz, fd, overlap_level, drawDate) "
+                   "VALUES(?, ?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert angle ranges...\n')
