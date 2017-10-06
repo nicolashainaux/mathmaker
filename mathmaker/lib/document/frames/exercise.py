@@ -754,7 +754,7 @@ class Exercise(object):
             if shared.enable_js_form and ex_or_answers == 'exc':
                 for i in range(len(a)):
                     a[i] = r"""\TextField[name=ans""" + str(i + 1) \
-                        + r""",bordercolor=,value=,width=3cm]{} """ + a[i]
+                        + r""",bordercolor=,value=,width=2.6cm]{} """ + a[i]
 
             n = [M.write(str(i + 1) + ".", emphasize='bold')
                  for i in range(self.q_nb)]
