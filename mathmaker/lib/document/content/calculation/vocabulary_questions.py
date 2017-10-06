@@ -35,8 +35,8 @@ class structure(component.structure):
         super().setup("minimal", **kwargs)
         super().setup("numbers", nb=nbs_to_use, **kwargs)
         super().setup("nb_variants", nb=nbs_to_use, **kwargs)
-        self.result = Value(result_fct(self.nb1, self.nb2)
-                            .evaluate()).into_str()
+        resultv = Value(result_fct(self.nb1, self.nb2).evaluate())
+        self.result = resultv.into_str()
         if ('permute_nb1_nb2_result' in kwargs
             and kwargs['permute_nb1_nb2_result']):
             # __
@@ -46,6 +46,12 @@ class structure(component.structure):
         self.wording = wording
         setup_wording_format_of(self)
         self.transduration = 9
+        if kwargs.get('answer') is None:
+            self.js_answer = resultv.jsprinted
+        else:
+            self.js_answer = kwargs.get('answer')\
+                .format(nb1=self.nb1.jsprinted,
+                        nb2=self.nb2.jsprinted)
         self.answer_wording = kwargs.get('answer', self.result)
         if isinstance(self.answer_wording, str):
             setup_wording_format_of(self, w_prefix='answer_')
@@ -60,4 +66,4 @@ class structure(component.structure):
         return str(self.answer_wording)
 
     def js_a(self, **kwargs):
-        return [str(self.answer_wording)]
+        return [str(self.js_answer)]
