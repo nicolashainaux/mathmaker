@@ -1,3 +1,15 @@
+multiplications_reversed: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: reversed multiplications"
+  - exercise: !!omap
+    - questions: multi reversed -> intpairs_2to9 (20)
+
+multiplications_hole: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: multiplications with a hole"
+  - exercise: !!omap
+    - questions: multi hole -> intpairs_2to9 (20)
+
 multiplications: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: multiplications"

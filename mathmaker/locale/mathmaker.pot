@@ -531,12 +531,13 @@ msgstr ""
 msgid "Answers"
 msgstr ""
 
-#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
 #: data/frameworks/mental_calculation/02_white2.yaml:56
-#: data/frameworks/mental_calculation/02_white2.yaml:20
 #: data/frameworks/mental_calculation/02_white2.yaml:3
 #: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
 #: data/frameworks/mental_calculation/02_white2.yaml:49
+#: data/frameworks/mental_calculation/02_white2.yaml:20
+#: data/frameworks/mental_calculation/02_white2.yaml:61
 msgid "Mental calculation: mini-problems"
 msgstr ""
 
@@ -1117,9 +1118,10 @@ msgstr ""
 msgid "{} (or {})"
 msgstr ""
 
-#: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
-#: data/frameworks/mental_calculation/02_white2.yaml:33
 #: data/frameworks/mental_calculation/02_white2.yaml:26
+#: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
+#: data/frameworks/mental_calculation/02_white2.yaml:38
+#: data/frameworks/mental_calculation/02_white2.yaml:33
 msgid "Mental calculation: fraction of a rectangle"
 msgstr ""
 
@@ -1336,8 +1338,9 @@ msgstr ""
 msgid "Algebra: expand and reduce double brackets"
 msgstr ""
 
-#: data/frameworks/mental_calculation/01_white1.yaml:3
 #: data/frameworks/mental_calculation/02_white2.yaml:3
+#: data/frameworks/mental_calculation/01_white1.yaml:3
+#: data/frameworks/mental_calculation/02_white2.yaml:15
 msgid "Mental calculation: multiplications"
 msgstr ""
 
@@ -1820,16 +1823,19 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/02_white2.yaml:18
 #: data/frameworks/mental_calculation/02_white2.yaml:11
+#: data/frameworks/mental_calculation/02_white2.yaml:23
 msgid "Mental calculation: additions and subtractions"
 msgstr ""
 
-#: data/frameworks/mental_calculation/02_white2.yaml:20
+#: data/frameworks/mental_calculation/02_white2.yaml:32
 #: data/frameworks/mental_calculation/02_white2.yaml:27
+#: data/frameworks/mental_calculation/02_white2.yaml:20
 msgid "Mental calculation: divisions"
 msgstr ""
 
 #: data/frameworks/mental_calculation/02_white2.yaml:59
 #: data/frameworks/mental_calculation/02_white2.yaml:66
+#: data/frameworks/mental_calculation/02_white2.yaml:71
 msgid "Mental calculation: multiplication by 11"
 msgstr ""
 
@@ -1855,11 +1861,13 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/02_white2.yaml:73
 #: data/frameworks/mental_calculation/02_white2.yaml:66
+#: data/frameworks/mental_calculation/02_white2.yaml:78
 msgid "Mental calculation: complements to 10 and to 100"
 msgstr ""
 
-#: data/frameworks/mental_calculation/02_white2.yaml:81
 #: data/frameworks/mental_calculation/02_white2.yaml:88
+#: data/frameworks/mental_calculation/02_white2.yaml:81
+#: data/frameworks/mental_calculation/02_white2.yaml:93
 msgid "Mental calculation: final test for white belt, second stripe"
 msgstr ""
 
@@ -2013,32 +2021,40 @@ msgstr ""
 msgid "To insert pdf formular and javascript"
 msgstr ""
 
-#: lib/document/frames/exercise.py:867
+#: lib/document/frames/exercise.py:868
 msgid "Clear everything"
 msgstr ""
 
-#: lib/document/frames/exercise.py:868
+#: lib/document/frames/exercise.py:869
 msgid "Validate"
 msgstr ""
 
-#: lib/document/frames/exercise.py:877
+#: lib/document/frames/exercise.py:878
 #, python-brace-format
 msgid "Score: ... / {q_number}"
 msgstr ""
 
-#: lib/document/frames/exercise.py:879
+#: lib/document/frames/exercise.py:880
 #, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:872
+#: lib/document/frames/exercise.py:873
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:874
+#: lib/document/frames/exercise.py:875
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr ""
 
 #: lib/document/content/component.py:70
 msgid "undefined"
+msgstr ""
+
+#: data/frameworks/mental_calculation/02_white2.yaml:3
+msgid "Mental calculation: reversed multiplications"
+msgstr ""
+
+#: data/frameworks/mental_calculation/02_white2.yaml:9
+msgid "Mental calculation: multiplications with a hole"
 msgstr ""

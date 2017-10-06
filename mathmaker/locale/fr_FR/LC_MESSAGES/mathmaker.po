@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2017-10-05 17:30+0200\n"
+"PO-Revision-Date: 2017-10-06 14:37+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -549,12 +549,13 @@ msgstr "Multiplications à l'envers"
 msgid "Answers"
 msgstr "Réponses"
 
-#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
 #: data/frameworks/mental_calculation/02_white2.yaml:56
-#: data/frameworks/mental_calculation/02_white2.yaml:20
 #: data/frameworks/mental_calculation/02_white2.yaml:3
 #: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
+#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:6
 #: data/frameworks/mental_calculation/02_white2.yaml:49
+#: data/frameworks/mental_calculation/02_white2.yaml:20
+#: data/frameworks/mental_calculation/02_white2.yaml:61
 msgid "Mental calculation: mini-problems"
 msgstr "Calcul mental : mini-problèmes"
 
@@ -1209,9 +1210,10 @@ msgstr "Vocabulaire pour la trigonométrie"
 msgid "{} (or {})"
 msgstr "{} (ou {})"
 
-#: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
-#: data/frameworks/mental_calculation/02_white2.yaml:33
 #: data/frameworks/mental_calculation/02_white2.yaml:26
+#: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
+#: data/frameworks/mental_calculation/02_white2.yaml:38
+#: data/frameworks/mental_calculation/02_white2.yaml:33
 msgid "Mental calculation: fraction of a rectangle"
 msgstr "Calcul mental : fraction d'un rectangle"
 
@@ -1428,8 +1430,9 @@ msgstr "Développer et réduire les expressions suivantes :"
 msgid "Algebra: expand and reduce double brackets"
 msgstr "Calcul littéral: développement \"double\""
 
-#: data/frameworks/mental_calculation/01_white1.yaml:3
 #: data/frameworks/mental_calculation/02_white2.yaml:3
+#: data/frameworks/mental_calculation/01_white1.yaml:3
+#: data/frameworks/mental_calculation/02_white2.yaml:15
 msgid "Mental calculation: multiplications"
 msgstr "Calcul mental : multiplications"
 
@@ -2072,16 +2075,19 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/02_white2.yaml:18
 #: data/frameworks/mental_calculation/02_white2.yaml:11
+#: data/frameworks/mental_calculation/02_white2.yaml:23
 msgid "Mental calculation: additions and subtractions"
 msgstr "Calcul mental : additions et soustractions"
 
-#: data/frameworks/mental_calculation/02_white2.yaml:20
+#: data/frameworks/mental_calculation/02_white2.yaml:32
 #: data/frameworks/mental_calculation/02_white2.yaml:27
+#: data/frameworks/mental_calculation/02_white2.yaml:20
 msgid "Mental calculation: divisions"
 msgstr "Calcul mental : divisions"
 
 #: data/frameworks/mental_calculation/02_white2.yaml:59
 #: data/frameworks/mental_calculation/02_white2.yaml:66
+#: data/frameworks/mental_calculation/02_white2.yaml:71
 msgid "Mental calculation: multiplication by 11"
 msgstr "Calcul mental : multiplications par 11"
 
@@ -2107,11 +2113,13 @@ msgstr "Quel est le complément à {number1} de {number2} ?"
 
 #: data/frameworks/mental_calculation/02_white2.yaml:73
 #: data/frameworks/mental_calculation/02_white2.yaml:66
+#: data/frameworks/mental_calculation/02_white2.yaml:78
 msgid "Mental calculation: complements to 10 and to 100"
 msgstr "Calcul mental : compléments à 10 et à 100"
 
-#: data/frameworks/mental_calculation/02_white2.yaml:81
 #: data/frameworks/mental_calculation/02_white2.yaml:88
+#: data/frameworks/mental_calculation/02_white2.yaml:81
+#: data/frameworks/mental_calculation/02_white2.yaml:93
 msgid "Mental calculation: final test for white belt, second stripe"
 msgstr "Calcul mental : ceinture blanche, deuxième trait"
 
@@ -2270,35 +2278,43 @@ msgstr "Calcul mental : ceinture jaune"
 msgid "To insert pdf formular and javascript"
 msgstr "Pour insérer un formulaire pdf et du javascript"
 
-#: lib/document/frames/exercise.py:867
+#: lib/document/frames/exercise.py:868
 msgid "Clear everything"
 msgstr "Tout effacer"
 
-#: lib/document/frames/exercise.py:868
+#: lib/document/frames/exercise.py:869
 msgid "Validate"
 msgstr "Valider"
 
-#: lib/document/frames/exercise.py:877
+#: lib/document/frames/exercise.py:878
 #, python-brace-format
 msgid "Score: ... / {q_number}"
 msgstr "Score : ... / {q_number}"
 
-#: lib/document/frames/exercise.py:879
+#: lib/document/frames/exercise.py:880
 #, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr "\"Score : \" + count.toString() + \" / {q_number}\""
 
-#: lib/document/frames/exercise.py:872
+#: lib/document/frames/exercise.py:873
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr "J"
 
-#: lib/document/frames/exercise.py:874
+#: lib/document/frames/exercise.py:875
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr "F"
 
 #: lib/document/content/component.py:70
 msgid "undefined"
 msgstr "indéfini"
+
+#: data/frameworks/mental_calculation/02_white2.yaml:3
+msgid "Mental calculation: reversed multiplications"
+msgstr "Calcul mental : multiplications à l'envers"
+
+#: data/frameworks/mental_calculation/02_white2.yaml:9
+msgid "Mental calculation: multiplications with a hole"
+msgstr "Calcul mental : multiplications à trou"
 
 #~ msgid "Decimal representation of {}?"
 #~ msgstr "Écriture décimale de {} ?"
