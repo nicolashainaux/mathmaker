@@ -280,20 +280,3 @@ W04d: !!omap
                  units conversion -> unitspairs (1)
                  vocabulary double -> auto_multiples (1)
                  divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
-
-
-
-# COPY OF THE FIRST VERSION OF addi_subtr_hole WITH DECIMAL NUMBERS (TO BE REUSED OR INSPIRED OF LATER)
-# addi_subtr_hole: !!omap
-#   - preset: "mental calculation"
-#   - title: "Mental calculation: additions and subtractions with a hole"
-#   - exercise: !!omap
-#     - questions: addi hole -> singleint_5to20;;singleint_5to20 (2)
-#                  addi hole -> singleint_5to20;;singleint_5to20, nb_variant=decimal1 (1)
-#                  addi hole -> singleint_21to100;;singleint_21to100 (3)
-#                  addi hole -> complements_to_110...990 (2)
-#                  addi hole -> complements_to_10, nb_variant=decimal2 (2)
-#                  subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (3)
-#                  subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (3)
-#                  subtr hole, subvariant=only_positive, hidden=2 -> complements_to_10, nb_variant=decimal1 (2)
-#                  subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (2)
