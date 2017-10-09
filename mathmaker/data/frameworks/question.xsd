@@ -17,7 +17,7 @@
 			<xs:attribute name="nb_variant"						type="xs:string"	use="optional"/>
 			<xs:attribute name="ans_variant"			type="xs:string"	use="optional"	default="default"/>
 			<xs:attribute name="picture"						type="xs:boolean"	use="optional"/>
-			<xs:attribute name="rank_matches_invisible_zero"	type="xs:string"	use="optional"/>
+			<xs:attribute name="pos_matches_invisible_zero"	type="xs:string"	use="optional"/>
 			<xs:attribute name="generation_type"				type="xs:string"	use="optional"/>
 			<xs:attribute name="spacing"				type="xs:string"	use="optional"/>
 			<xs:attribute name="answers_spacing"				type="xs:string"	use="optional"/>

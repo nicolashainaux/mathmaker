@@ -34,7 +34,7 @@ from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
 from mathmaker.lib.tools.numbers import is_integer, is_number, Number
 from mathmaker.lib.core.base_calculus import Fraction
 
-DEFAULT_RANKS_SCALE = RANKS
+DIGITS_POSITIONS = RANKS
 
 FETCH_TABLE_NAME = re.compile(r'CREATE TABLE (\w+)')
 FETCH_TABLE_COLS = re.compile(r', (\w\w+)|\n[ ]+(\w\w+)|\((\w\w+)')
@@ -402,7 +402,7 @@ def classify_tag(tag):
                  'decimal_and_one_digit_for_multi',
                  'decimal_and_one_digit_for_divi',
                  'unitspairs', 'digits_places', 'fracdigits_places',
-                 'decimals', 'decimalfractionssums']:
+                 'decimals', 'decimalfractionssums', 'extdecimals']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -561,6 +561,25 @@ def preprocess_decimals_query(qkw=None):
     return d
 
 
+def preprocess_extdecimals_query(qkw=None):
+    """
+    Create the SQL query according to possible qkw.
+    """
+    if qkw is None:
+        qkw = {}
+    d = {}
+    d.update({'position': qkw.get('position', None)})
+    d.update({'width': qkw.get('width', 'random')})
+    d.update({'generation_type': qkw.get('generation_type', 'default')})
+    d.update({'pos_matches_invisible_zero':
+              qkw.get('pos_matches_invisible_zero', False)})
+    d.update({'unique_figures': qkw.get('unique_figures', True)})
+    d.update({'grow_left': qkw.get('grow_left', False)})
+    d.update({'numberof': qkw.get('numberof', False)})
+    d.update({'digits_positions': qkw.get('digits_positions', None)})
+    return d
+
+
 def preprocess_decimalfractions_pairs_tag(qkw=None, **kwargs):
     """
     Create the SQL query according to possible qkw's overlap value.
@@ -623,11 +642,12 @@ def generate_values(source_id):
             if not box_10_100_1000:
                 box_10_100_1000 = [10, 100, 1000]
             chosen_10_100_1000 = box_10_100_1000.pop()
-            ranks_scale = list(RANKS[2:])
+            digits_positions = list(RANKS[2:])
             width = random.choices([1, 2, 3], weights=[0.14, 0.63, 0.33])[0]
-            start_rank = random.choice([n for n in range(len(ranks_scale))])
+            start_pos = random.choice([n
+                                       for n in range(len(digits_positions))])
             result |= {(chosen_10_100_1000,
-                        generate_decimal(width, ranks_scale, start_rank))}
+                        generate_decimal(width, digits_positions, start_pos))}
         return list(result)
 
     elif source_id == 'decimal_and_10_100_1000_for_divi':
@@ -637,15 +657,17 @@ def generate_values(source_id):
             if not box_10_100_1000:
                 box_10_100_1000 = [10, 100, 1000]
             chosen_10_100_1000 = box_10_100_1000.pop()
-            ranks_scale = list(RANKS[2:])
+            digits_positions = list(RANKS[2:])
             width = random.choices([1, 2, 3], weights=[0.14, 0.63, 0.33])[0]
             wt = {10: [0.2, 0.2, 0.2, 0.2, 0.2],
                   100: [0.25, 0.25, 0.25, 0.25, 0],
                   1000: [0.34, 0.33, 0.33, 0, 0]}
-            start_rank = random.choices([n for n in range(len(ranks_scale))],
-                                        weights=wt[chosen_10_100_1000])[0]
+            start_pos = random.choices([n
+                                        for n
+                                        in range(len(digits_positions))],
+                                       weights=wt[chosen_10_100_1000])[0]
             result |= {(chosen_10_100_1000,
-                        generate_decimal(width, ranks_scale, start_rank))}
+                        generate_decimal(width, digits_positions, start_pos))}
         return list(result)
 
     elif source_id == 'decimal_and_one_digit_for_multi':
@@ -655,18 +677,19 @@ def generate_values(source_id):
             if not box:
                 box = [Decimal('0.1'), Decimal('0.01'), Decimal('0.001')]
             chosen = box.pop()
-            ranks_scale = list()
+            digits_positions = list()
             if chosen == Decimal('0.1'):
-                ranks_scale = list(RANKS[:-1])
+                digits_positions = list(RANKS[:-1])
             elif chosen == Decimal('0.01'):
-                ranks_scale = list(RANKS[:-2])
+                digits_positions = list(RANKS[:-2])
             elif chosen == Decimal('0.001'):
-                ranks_scale = list(RANKS[:-3])
+                digits_positions = list(RANKS[:-3])
             width = random.choices([1, 2, 3, 4],
                                    weights=[0.14, 0.43, 0.33, 0.2])[0]
-            start_rank = random.choice([n for n in range(len(ranks_scale))])
+            start_pos = random.choice([n
+                                       for n in range(len(digits_positions))])
             result |= {(chosen,
-                        generate_decimal(width, ranks_scale, start_rank))}
+                        generate_decimal(width, digits_positions, start_pos))}
         return list(result)
 
     elif source_id == 'decimal_and_one_digit_for_divi':
@@ -676,30 +699,34 @@ def generate_values(source_id):
             if not box:
                 box = [Decimal('0.1'), Decimal('0.01'), Decimal('0.001')]
             chosen = box.pop()
-            ranks_scale = list()
+            digits_positions = list()
             if chosen == Decimal('0.1') or chosen == Decimal('0.01'):
-                ranks_scale = list(RANKS)
+                digits_positions = list(RANKS)
             elif chosen == Decimal('0.001'):
-                ranks_scale = list(RANKS[1:])
+                digits_positions = list(RANKS[1:])
             width = random.choices([1, 2, 3, 4],
                                    weights=[0.14, 0.43, 0.33, 0.2])[0]
-            start_rank = random.choice([n for n in range(len(ranks_scale))])
+            start_pos = random.choice([n
+                                       for n in range(len(digits_positions))])
             result |= {(chosen,
-                        generate_decimal(width, ranks_scale, start_rank))}
+                        generate_decimal(width, digits_positions, start_pos))}
         return list(result)
 
     elif source_id in ['nothing', 'bypass']:
         return []
 
 
-def generate_random_decimal_nb(rank_to_use, width='random',
+def generate_random_decimal_nb(position=None, width='random',
                                generation_type=None,
-                               rank_matches_invisible_zero=False,
+                               pos_matches_invisible_zero=False,
                                unique_figures=True,
                                grow_left=False,
-                               **options):
+                               numberof=False,
+                               digits_positions=None, **unused):
+    if position is None:
+        position = Decimal(str(shared.fracdigits_places_source.next()))
     if generation_type is None:
-        if 'numberof' in options:
+        if numberof:
             generation_type = 'default'
         else:
             generation_type = random.choice(['default', 'alternative'])
@@ -708,146 +735,178 @@ def generate_random_decimal_nb(rank_to_use, width='random',
     if not unique_figures:
         figures = figures * 3
     random.shuffle(figures)
-    ranks_scale = options.get('ranks_scale',
-                              copy.copy(DEFAULT_RANKS_SCALE))
+    if digits_positions is None:
+        digits_positions = copy.copy(DIGITS_POSITIONS)
 
-    if width != 'random':
+    if (isinstance(width, str)
+        and width.startswith('random') and width != 'random'):
+        if len(width.split('_')) != 2:
+            width = 'random'
+            warnings.warn('Malformed random width. '
+                          'A random value will be chosen instead.'
+                          .format(width, len(digits_positions)))
+        else:
+            _, span = width.split('_')
+            if not len(span.split('to')) == 2:
+                width = 'random'
+                warnings.warn('Malformed random width\'s span. '
+                              'A random value will be chosen instead.'
+                              .format(width, len(digits_positions)))
+            else:
+                mini, maxi = span.split('to')
+                try:
+                    mini, maxi = int(mini), int(maxi)
+                except ValueError:
+                    width = 'random'
+                    warnings.warn('Malformed random width\'s span bounds '
+                                  '(both should be int). '
+                                  'A random value will be chosen instead.'
+                                  .format(width, len(digits_positions)))
+                else:
+                    width = random.choice([i + 1
+                                           for i
+                                           in range(max(maxi - mini + 1, 1))])
+    elif width != 'random':
         try:
             width = int(width)
-            if not (1 <= width <= len(ranks_scale)):
+            if not (1 <= width <= len(digits_positions)):
                 width = 'random'
                 warnings.warn('The chosen width ({}) is not greater than 1 '
-                              'and lower than the length of ranks scale ({}). '
+                              'and lower than the length of digits positions'
+                              ' ({}). '
                               'A random value will be chosen instead.'
-                              .format(width, len(ranks_scale)))
+                              .format(width, len(digits_positions)))
         except ValueError:
-            raise ValueError('As width you can specify either \'random\' or '
-                             'an int.')
+            raise ValueError('As width you can specify either \'random\', '
+                             '\'random_xtoy\' or an int.')
     if width == 'random':
         if generation_type == 'default':
             width = random.choice([3, 4, 5, 6, 7])
         else:
             width = random.choices([2, 3, 4, 5],
                                    cum_weights=[0.1, 0.4, 0.75, 1])[0]
-        if 'numberof' in options:
+        if numberof:
             width = random.choices([2, 3, 4, 5],
                                    cum_weights=[0.15, 0.55, 0.85, 1])[0]
 
-    if 'direct' in options:
-        rank_matches_invisible_zero = False
-
     # Two different ways to generate a number. Here is the "default" one:
     if generation_type == 'default':
-        ranks = []
+        positions = []
 
-        if not rank_matches_invisible_zero:
+        if not pos_matches_invisible_zero:
             if grow_left:
-                ranks = [ranks_scale.index(rank_to_use) - r
-                         for r in range(width)]
-            elif 'numberof' not in options:
-                # High ranks are to the right of the numeral, while low ranks
-                # are to the left
-                lr = ranks_scale.index(rank_to_use) - width + 1
-                lowest_start_rank = lr if lr >= 0 else 0
+                positions = [digits_positions.index(position) - p
+                             for p in range(width)]
+            elif not numberof:
+                # High positions are to the right of the numeral,
+                # while low positions are to the left
+                lr = digits_positions.index(position) - width + 1
+                lowest_start_pos = lr if lr >= 0 else 0
 
-                hr = ranks_scale.index(rank_to_use)
-                highest_start_rank = hr if hr + width < len(ranks_scale) \
-                    else len(ranks_scale) - 1 - width
-                highest_start_rank = highest_start_rank \
-                    if highest_start_rank >= lowest_start_rank \
-                    else lowest_start_rank
+                hr = digits_positions.index(position)
+                highest_start_pos = hr if hr + width < len(digits_positions) \
+                    else len(digits_positions) - 1 - width
+                highest_start_pos = highest_start_pos \
+                    if highest_start_pos >= lowest_start_pos \
+                    else lowest_start_pos
 
-                possible_start_ranks = [lowest_start_rank + r
-                                        for r in range(
-                                            highest_start_rank
-                                            - lowest_start_rank
-                                            + 1)]
+                possible_start_positions = [lowest_start_pos + p
+                                            for p in range(
+                                                highest_start_pos
+                                                - lowest_start_pos + 1)]
 
-                start_rank = random.choice(possible_start_ranks)
+                start_pos = random.choice(possible_start_positions)
 
-                ranks = [start_rank + r for r in range(width)]
+                positions = [start_pos + p for p in range(width)]
 
             else:
-                # High ranks are to the right of the numeral, while low ranks
-                # are to the left
-                ranks += [ranks_scale.index(rank_to_use)]
-                # Probability to fill a higher rank rather than a lower one
+                # High positions are to the right of the numeral,
+                # while low positions are to the left
+                positions += [digits_positions.index(position)]
+                # Probability to fill a higher position rather than a lower one
                 phr = 0.5
-                hr = lr = ranks_scale.index(rank_to_use)
+                hr = lr = digits_positions.index(position)
                 for i in range(width - 1):
                     if lr == 0:
                         phr = 1
-                    elif hr == len(ranks_scale) - 1:
+                    elif hr == len(digits_positions) - 1:
                         phr = 0
 
                     if random.random() < phr:
                         hr += 1
-                        ranks += [hr]
+                        positions += [hr]
                         phr *= 0.4
                     else:
                         lr -= 1
-                        ranks += [lr]
+                        positions += [lr]
                         phr *= 2.5
 
         else:  # position matches invisible zero
-            if rank_to_use <= Decimal('0.1'):
-                ranks = [ranks_scale.index(r) for r in ranks_scale
-                         if r > rank_to_use]
-                width = min(width, len(ranks))
-                ranks = ranks[-width:]
-            elif (rank_to_use >= Decimal('10')
-                  or (rank_to_use == Decimal('1')
+            if position <= Decimal('0.1'):
+                positions = [digits_positions.index(p)
+                             for p in digits_positions
+                             if p > position]
+                width = min(width, len(positions))
+                positions = positions[-width:]
+            elif (position >= Decimal('10')
+                  or (position == Decimal('1')
                       and random.choice([True, False]))):
-                ranks = [ranks_scale.index(r) for r in ranks_scale
-                         if r < rank_to_use]
-                width = min(width, len(ranks))
-                ranks = ranks[:width]
+                positions = [digits_positions.index(p)
+                             for p in digits_positions
+                             if p < position]
+                width = min(width, len(positions))
+                positions = positions[:width]
             else:  # units, second possibility
-                ranks = [ranks_scale.index(r) for r in ranks_scale
-                         if r != rank_to_use]
-                width = min(width, len(ranks))
-                maxi_start = len(ranks) - width + 1
+                positions = [digits_positions.index(p)
+                             for p in digits_positions
+                             if p != position]
+                width = min(width, len(positions))
+                maxi_start = len(positions) - width + 1
                 slice_start = random.choice([i for i in range(maxi_start)])
-                ranks = ranks[slice_start:slice_start + width]
+                positions = positions[slice_start:slice_start + width]
 
         # Let's start the generation of the number:
-        for r in ranks:
+        for p in positions:
             figure = figures.pop()
-            chosen_deci += Decimal(figure) * ranks_scale[r]
+            chosen_deci += Decimal(figure) * digits_positions[p]
 
     # "Alternative" way of generating a number randomly:
     else:
-        figure = '0' if rank_matches_invisible_zero \
+        figure = '0' if pos_matches_invisible_zero \
             else figures.pop()
 
-        chosen_deci += Decimal(figure) * rank_to_use
-        ranks_scale.remove(rank_to_use)
+        chosen_deci += Decimal(figure) * position
+        digits_positions.remove(position)
 
-        if rank_matches_invisible_zero:
-            if rank_to_use <= Decimal('0.1'):
-                next_rank = rank_to_use * Decimal('10')
+        if pos_matches_invisible_zero:
+            if position <= Decimal('0.1'):
+                next_pos = position * Decimal('10')
                 figure = figures.pop()
-                chosen_deci += Decimal(figure) * next_rank
-                ranks_scale = [r for r in ranks_scale if r > next_rank]
-            elif rank_to_use >= Decimal('10'):
-                next_rank = rank_to_use * Decimal('0.1')
+                chosen_deci += Decimal(figure) * next_pos
+                digits_positions = [p
+                                    for p in digits_positions
+                                    if p > next_pos]
+            elif position >= Decimal('10'):
+                next_pos = position * Decimal('0.1')
                 figure = figures.pop()
-                chosen_deci += Decimal(figure) * next_rank
-                ranks_scale = [r for r in ranks_scale if r < next_rank]
+                chosen_deci += Decimal(figure) * next_pos
+                digits_positions = [p
+                                    for p in digits_positions
+                                    if p < next_pos]
 
-        width = min(width, len(ranks_scale))
+        width = min(width, len(digits_positions))
 
-        if rank_to_use != Decimal('1') and not rank_matches_invisible_zero:
+        if position != Decimal('1') and not pos_matches_invisible_zero:
             figure = figures.pop()
-            r = RANKS_CONFUSING[-(RANKS_CONFUSING.index(rank_to_use) + 1)]
+            r = RANKS_CONFUSING[-(RANKS_CONFUSING.index(position) + 1)]
             chosen_deci += Decimal(figure) * r
-            ranks_scale.remove(r)
+            digits_positions.remove(r)
             width -= 1
 
         for i in range(width):
             figure = figures.pop()
-            r = random.choice(ranks_scale)
-            ranks_scale.remove(r)
+            r = random.choice(digits_positions)
+            digits_positions.remove(r)
             chosen_deci += Decimal(figure) * r
 
     return chosen_deci
@@ -856,8 +915,13 @@ def generate_random_decimal_nb(rank_to_use, width='random',
 class sub_source(object):
     ##
     #   @brief  Initializer
-    def __init__(self, source_id):
-        self.values = generate_values(source_id)
+    def __init__(self, source_id, **kwargs):
+        self.ondemand = kwargs.get('ondemand', False)
+        if self.ondemand:
+            self.values = []
+            self.generator_fct = kwargs.get('generator_fct')
+        else:
+            self.values = generate_values(source_id)
         random.shuffle(self.values)
         self.current = 0
         self.max = len(self.values)
@@ -876,10 +940,15 @@ class sub_source(object):
     ##
     #   @brief  Handles the choice of the next value to return
     def next(self, qkw=None, **kwargs):
-        if self.current == self.max:
-            self._reset()
-        self.current += 1
-        return self.values[self.current - 1]
+        # qkw is only here for compatibility with source class
+        # it must be "merged" with kwargs during preprocessing
+        if self.ondemand:
+            return self.generator_fct(**kwargs)
+        else:
+            if self.current == self.max:
+                self._reset()
+            self.current += 1
+            return self.values[self.current - 1]
 
 
 class mc_source(object):
@@ -921,6 +990,9 @@ class mc_source(object):
         elif tag_classification == 'decimals':
             kwargs.update(preprocess_decimals_query(qkw=qkw))
             return shared.decimals_source.next(**kwargs)
+        elif tag_classification == 'extdecimals':
+            kwargs.update(preprocess_extdecimals_query(qkw=qkw))
+            return shared.extdecimals_source.next(**kwargs)
         elif tag_classification == 'decimalfractionssums':
             kwargs.update(preprocess_decimals_query(qkw=qkw))
             kwargs.update(preprocess_decimalfractions_pairs_tag(qkw=qkw,

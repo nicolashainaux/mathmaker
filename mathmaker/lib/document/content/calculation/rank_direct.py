@@ -29,7 +29,7 @@ from . import rank_reversed
 class sub_object(object):
 
     def __init__(self, **options):
-        rank_reversed.sub_object.__init__(self, direct=True, **options)
+        rank_reversed.sub_object.__init__(self, **options)
         self.transduration = 16
 
     def q(self, **options):

@@ -41,14 +41,14 @@ class sub_object(component.structure):
         #     and not self.nb1 % 10 == 0 and not self.nb2 % 10 == 0):
         #     self.transduration = 12
         unit1, unit2, direction, physical_quantity, level = numbers_to_use
-        start_ranks = [Decimal('10'), Decimal('1'), Decimal('0.1')]
+        start_position = [Decimal('10'), Decimal('1'), Decimal('0.1')]
         if difference_of_orders_of_magnitude(unit1, unit2) >= Decimal('100'):
-            start_ranks = [Decimal('1'), Decimal('0.1'), Decimal('0.01')]
+            start_position = [Decimal('1'), Decimal('0.1'), Decimal('0.01')]
         if difference_of_orders_of_magnitude(unit1, unit2) <= Decimal('0.01'):
-            start_ranks = [Decimal('100'), Decimal('10'), Decimal('1')]
-        start_rank = random.choice(start_ranks)
+            start_position = [Decimal('100'), Decimal('10'), Decimal('1')]
+        sp = random.choice(start_position)
         chosen_deci = \
-            generate_random_decimal_nb(start_rank,
+            generate_random_decimal_nb(position=sp,
                                        width=random.choice([1, 2, 3]),
                                        unique_figures=options.get(
                                            'unique_figures', False),

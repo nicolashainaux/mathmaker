@@ -35,8 +35,8 @@ decimal_numerals: !!omap
   - exercise: !!omap
     - questions: addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (2)
                  addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (5)
-                 decimal numerals, direction=to_decimal -> fracdigits_places;;decimals (6)
-                 decimal numerals, direction=to_fraction -> fracdigits_places;;decimals (7)
+                 decimal numerals, direction=to_decimal -> decimals (6)
+                 decimal numerals, direction=to_fraction -> decimals (7)
 
 operations_vocabulary: !!omap
   - preset: "mental calculation"
@@ -66,8 +66,8 @@ positional_notation: !!omap
     - questions: rank direct -> digits_places (6)
                  rank reversed -> digits_places (4)
                  rank numberof -> digits_places, generation_type=default (6)
-                 rank reversed -> digits_places, rank_matches_invisible_zero=true (2)
-                 rank numberof -> digits_places, generation_type=default, rank_matches_invisible_zero=true (2)
+                 rank reversed -> digits_places, pos_matches_invisible_zero=true (2)
+                 rank numberof -> digits_places, generation_type=default, pos_matches_invisible_zero=true (2)
 
 rectangles: !!omap
   - preset: "mental calculation"
@@ -104,7 +104,7 @@ exam: !!omap
                  [1][rank direct -> digits_places (1)
                      rank reversed -> digits_places (1)]
                  rank numberof, generation_type=default -> digits_places (1)
-                 rank numberof, generation_type=default -> digits_places, rank_matches_invisible_zero=true (1)
+                 rank numberof, generation_type=default -> digits_places, pos_matches_invisible_zero=true (1)
                  multi reversed -> intpairs_4to9 (1)
                  multi hole -> intpairs_4to9 (1)
                  divi direct -> intpairs_4to9 (1)
@@ -123,8 +123,8 @@ exam: !!omap
                  [1][vocabulary operation -> auto_vocabulary (1)
                      vocabulary simple_parts_or_multiples_of_a_number -> auto_vocabulary (1)]
                  units conversion -> unitspairs (1)
-                 decimal numerals, direction=to_decimal -> fracdigits_places;;decimals (1)
-                 decimal numerals, direction=to_fraction -> fracdigits_places (1)
+                 decimal numerals, direction=to_decimal -> decimals (1)
+                 decimal numerals, direction=to_fraction -> extdecimals, width=random_1to3, unique_figures=false, generation_type=default, grow_left=true (1)
                  [1][addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
                      addi direct, context=ask:turn_to_decimal_repr, variant=cut, iz_ge=1 -> decimalfractionssums (1)]
                  [1][multi direct -> table_15 (1)
@@ -154,7 +154,7 @@ W01a: !!omap
 W01b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: rank reversed -> digits_places, rank_matches_invisible_zero=true (1)
+    - questions: rank reversed -> digits_places, pos_matches_invisible_zero=true (1)
                  subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_10, nb_variant=decimal1 (1)
                  divi direct -> intpairs_4to9 (1)
                  multi direct, context=mini_problem -> table_11_tens_easy (1)
@@ -190,7 +190,7 @@ W02a: !!omap
 W02b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: rank reversed -> digits_places, rank_matches_invisible_zero=true (1)
+    - questions: rank reversed -> digits_places, pos_matches_invisible_zero=true (1)
                  vocabulary quadruple -> table_4 (1)
                  vocabulary half -> table_2 (1)
                  vocabulary quarter -> table_4 (1)
@@ -223,7 +223,7 @@ W03b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: units conversion -> unitspairs (2)
-                 rank reversed -> digits_places, rank_matches_invisible_zero=true (1)
+                 rank reversed -> digits_places, pos_matches_invisible_zero=true (1)
                  vocabulary addi -> singleint_10to100;;singleint_10to100 (1)
                  divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
 
@@ -242,7 +242,7 @@ W03d: !!omap
     - questions: units conversion -> unitspairs (1)
                  rank numberof -> digits_places, generation_type=default (1)
                  vocabulary divi -> intpairs_4to9 (1)
-                 decimal numerals, direction=to_decimal -> fracdigits_places;;decimals (1)
+                 decimal numerals, direction=to_decimal -> decimals (1)
                  addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (1)
 
 W04a: !!omap
@@ -261,7 +261,7 @@ W04b: !!omap
                  divi direct -> table_25 (1)
                  units conversion -> unitspairs (1)
                  rank reversed -> digits_places (1)
-                 decimal numerals, direction=to_fraction -> fracdigits_places;;decimals (1)
+                 decimal numerals, direction=to_fraction -> decimals (1)
 
 W04c: !!omap
   - preset: "mental calculation slideshow"

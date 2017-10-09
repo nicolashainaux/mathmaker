@@ -6,11 +6,11 @@
 
 	<exercise>
 
-		<!-- Default values: width="random" generation_type="mixed" rank_matches_invisible_zero="False" -->
+		<!-- Default values: width="random" generation_type="mixed" pos_matches_invisible_zero="False" -->
 		<!-- Possible values: width: integer between 1 and the number of possible ranks
 			 				  generation_type: "default" | "alternative" | "mixed"
 										(no effect in case of 'numberof' questions, will be default)
-							  rank_matches_invisible_zero: any string means True except "False" and ""
+							  pos_matches_invisible_zero: any string means True except "False" and ""
 										(no effect in case of rank direct questions)  -->
 		<question id="rank numberof" generation_type="default">
 			<nb source="digits_places">5</nb>
@@ -24,11 +24,11 @@
 			<nb source="digits_places">6</nb>
 		</question>
 
-		<question id="rank reversed" rank_matches_invisible_zero="True">
+		<question id="rank reversed" pos_matches_invisible_zero="True">
 			<nb source="digits_places">2</nb>
 		</question>
 
-		<question id="rank numberof" rank_matches_invisible_zero="True" generation_type="default">
+		<question id="rank numberof" pos_matches_invisible_zero="True" generation_type="default">
 			<nb source="digits_places">1</nb>
 		</question>
 

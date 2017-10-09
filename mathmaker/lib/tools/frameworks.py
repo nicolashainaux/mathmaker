@@ -599,6 +599,8 @@ def get_q_modifier(q_type, nb_source):
         d.update({'rectangle': True})
     elif 'square' in q_type:
         d.update({'square': True})
+    elif q_type == 'rank_numberof' and nb_source.startswith('extdecimals'):
+        d.update({'numberof': True})
     return d
 
 

@@ -56,6 +56,7 @@ def init():
     global unitspairs_source
     global alternate_source
     global decimals_source
+    global extdecimals_source
 
     global enable_js_form
 
@@ -98,6 +99,9 @@ def init():
     markup = latex.MARKUP
 
     from mathmaker.lib.tools.database import sub_source, mc_source
+    from mathmaker.lib.tools.database import generate_random_decimal_nb
+    extdecimals_source = sub_source('extdecimals', ondemand=True,
+                                    generator_fct=generate_random_decimal_nb)
     alternate_source = sub_source('alternate')
     trigo_functions_source = sub_source('trigo_functions')
     trigo_vocabulary_source = sub_source('trigo_vocabulary')

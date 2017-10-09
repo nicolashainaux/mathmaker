@@ -34,14 +34,14 @@ class sub_object(object):
 
     def __init__(self, **options):
         self.preset = options.get('preset', 'default')
-        rank_to_use = options.get('numbers_to_use')[0]
+        pos = options.get('numbers_to_use')[0]
 
         self.chosen_deci = \
-            generate_random_decimal_nb(rank_to_use, **options)
+            generate_random_decimal_nb(position=pos, **options)
         self.chosen_figure = (self.chosen_deci
-                              % (rank_to_use * Decimal('10'))) // rank_to_use
+                              % (pos * Decimal('10'))) // pos
         self.chosen_deci_str = Item((self.chosen_deci)).printed
-        self.chosen_rank = rank_to_use
+        self.chosen_rank = pos
         self.transduration = 8
 
     def q(self, **options):
