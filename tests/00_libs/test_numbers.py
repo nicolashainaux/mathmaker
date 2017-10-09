@@ -223,8 +223,11 @@ def test_cut_exceptions():
         Number('4.3').cut(overlap=1)
     assert str(excinfo.value) == 'Given overlap is too high.'
     with pytest.raises(ValueError) as excinfo:
-        Number('4.63').cut(overlap=1)
-    assert str(excinfo.value) == 'Only overlap=0 is implemented yet.'
+        Number('4.15').cut(overlap=1)
+    assert str(excinfo.value) == 'Given overlap is too high.'
+    with pytest.raises(ValueError) as excinfo:
+        Number('4.683').cut(overlap=2)
+    assert str(excinfo.value) == 'Only 0 <= overlap <= 1 is implemented yet.'
 
 
 def test_cut():
@@ -240,9 +243,24 @@ def test_cut():
     assert Number('5.806').cut(return_all=True) == \
         [(Number('5'), Number('0.806')),
          (Number('5.8'), Number('0.006'))]
-    # assert Number('5.36').cut(overlap=1, return_all=True) == \
-    #     [(Number('5.1'), Number('0.26')),
-    #      (Number('5.2'), Number('0.16'))]
+    assert Number('5.36').cut(overlap=1, return_all=True) == \
+        [(Number('5.1'), Number('0.26')),
+         (Number('5.2'), Number('0.16'))]
+    assert Number('5.476').cut(overlap=1, return_all=True) == \
+        [(Number('5.1'), Number('0.376')),
+         (Number('5.2'), Number('0.276')),
+         (Number('5.3'), Number('0.176')),
+         (Number('5.41'), Number('0.066')),
+         (Number('5.42'), Number('0.056')),
+         (Number('5.43'), Number('0.046')),
+         (Number('5.44'), Number('0.036')),
+         (Number('5.45'), Number('0.026')),
+         (Number('5.46'), Number('0.016'))]
+    assert Number('25.104').cut(overlap=1, return_all=True) == \
+        [(Number('21'), Number('4.104')),
+         (Number('22'), Number('3.104')),
+         (Number('23'), Number('2.104')),
+         (Number('24'), Number('1.104'))]
 
 
 def test_split_exceptions():
@@ -265,10 +283,10 @@ def test_split():
     assert is_integer(result[0]) and is_integer(result[1])
     assert 1 <= result[0] <= 13
     assert 1 <= result[1] <= 13
-    for i in range(99):
-        result = Number(14).split()
-        assert 1 <= result[0] <= 13
-        assert 1 <= result[1] <= 13
+    assert sum(result) == 14
+    assert Number(14).split(return_all=True) \
+        == [(1, 13), (2, 12), (3, 11), (4, 10), (5, 9), (6, 8), (7, 7),
+            (8, 6), (9, 5), (10, 4), (11, 3), (12, 2), (13, 1)]
     result = Number(14).split(operation='-')
     assert all([is_integer(r) for r in result])
     assert result[0] - result[1] == 14

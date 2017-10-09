@@ -114,7 +114,7 @@ class Number(Decimal):
                 result += [Number(d) * Number(10) ** (e + len(digits) - 1 - i)]
         if not len(result):
             return [Number(0)]
-        return result
+        return [Number(n) for n in result]
 
     def overlap_level(self):
         """
@@ -145,7 +145,7 @@ class Number(Decimal):
 
         :param overlap: tells how many decimal places in common the terms a
                         and b should have when splitting as a sum.
-                        Values of overlap >= 1 are not handled yet
+                        Values of overlap >= 2 are not handled yet
         :type overlap: int (only 0 is handled yet)
         :param return_all: if True, then all possibilities are returned, as a
                            list.
@@ -160,18 +160,25 @@ class Number(Decimal):
                              'negative int instead.')
         if self.overlap_level() < overlap:
             raise ValueError('Given overlap is too high.')
-        if overlap != 0:
-            raise ValueError('Only overlap=0 is implemented yet.')
+        if overlap not in [0, 1]:
+            raise ValueError('Only 0 <= overlap <= 1 is implemented yet.')
         results = []
         digits = self.atomized()
-        for n in range(len(digits) - 1):
-            results += [(sum(digits[0:n + 1]), sum(digits[n + 1:]))]
+        if overlap == 0:
+            for n in range(len(digits) - 1):
+                results += [(sum(digits[0:n + 1]), sum(digits[n + 1:]))]
+        elif overlap == 1:
+            for i in range(self.overlap_level()):
+                results += [(sum(digits[0:i + 1] + [d[0]]),
+                             sum(digits[i + 2:]) + d[1])
+                            for d
+                            in digits[i + 1].split(return_all=True)]
         if return_all:
             return results
         else:
             return random.choice(results)
 
-    def split(self, operation='sum', dig=0):
+    def split(self, operation='sum', dig=0, return_all=False):
         """
         Split self as a sum or difference, e.g. self = a + b or self = a - b
 
@@ -218,13 +225,19 @@ class Number(Decimal):
         if depth >= 1:
             seq = [i for i in seq
                    if not is_integer(i * (10 ** (depth - 1)))]
-        if operation in ['sum', '+']:
-            a = random.choice(seq)
-            b = n - a
-        elif operation in ['difference', '-']:
-            b = random.choice(seq)
-            a = n + b
-        return (a, b)
+        if return_all:
+            if operation in ['sum', '+']:
+                return [(Number(a), Number(n - a)) for a in seq]
+            elif operation in ['difference', '-']:
+                return [(Number(n + b), Number(b)) for b in seq]
+        else:
+            if operation in ['sum', '+']:
+                a = random.choice(seq)
+                b = n - a
+            elif operation in ['difference', '-']:
+                b = random.choice(seq)
+                a = n + b
+            return (Number(a), Number(b))
 
 
 def move_fracdigits_to(n, from_nb=None):
