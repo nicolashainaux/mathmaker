@@ -149,7 +149,9 @@ setup(
     data_files=create_mo_files(force='--force' in sys.argv)
     + retrieve_fonts(force='--force' in sys.argv)
     + [('mathmaker/data/frameworks/',
-       ['mathmaker/data/frameworks/index.json'])],
+       ['mathmaker/data/frameworks/index.json'])]
+    + [('mathmaker/data/',
+       ['mathmaker/data/db_index.json'])],
     include_package_data=True,
     platforms='any',
     test_suite='tests',
