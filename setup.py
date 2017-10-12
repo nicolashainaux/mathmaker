@@ -3,13 +3,44 @@
 
 import sys
 import os
+import atexit
 import subprocess
 from setuptools import setup, find_packages, Command
 from setuptools.command.test import test as TestCommand
+from setuptools.command.install import install
 
 import mathmaker
 from mathmaker.lib.tools import retrieve_fonts
 from mathmaker.lib.tools.ignition import check_dependency, check_dependencies
+
+
+class CustomInstallCommand(install):
+    def _post_install(self):
+        sys.stdout.write('\nRunning post-install script')
+        if self.install_platlib is not None:
+            install_lib = self.install_platlib
+        elif self.install_purelib is not None:
+            install_lib = self.install_purelib
+        else:
+            sys.stderr.write('\nCould not check whether a previous '
+                             'mathmaker.db is still here. You have to check '
+                             'yourself and possibly delete mathmaker.db '
+                             'before the first run.')
+            sys.exit(0)
+
+        db_path = os.path.join(install_lib, mathmaker.__software_name__,
+                               'data', mathmaker.__software_name__ + '.db')
+        if os.path.isfile(db_path):
+            sys.stdout.write('\nRemoving a previous mathmaker.db file.')
+            os.remove(db_path)
+        else:
+            sys.stdout.write('\nFound no previous mathmaker.db file to '
+                             'remove.')
+        sys.stdout.write('\nFinished post-install script tasks.\n')
+
+    def __init__(self, *args, **kwargs):
+        super(CustomInstallCommand, self).__init__(*args, **kwargs)
+        atexit.register(self._post_install)
 
 
 def read(*filenames, **kwargs):
@@ -136,7 +167,8 @@ setup(
                       'ruamel.yaml>=0.15.25'],
     cmdclass={'test': PyTest,
               'tox': Tox,
-              'clean': CleanCommand},
+              'clean': CleanCommand,
+              'install': CustomInstallCommand},
     author_email=mathmaker.__author_email__,
     description='Mathmaker creates automatically elementary maths exercises '
                 'and their (detailed) answers.',
