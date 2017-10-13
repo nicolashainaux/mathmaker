@@ -5,11 +5,13 @@ import sys
 import os
 import atexit
 import subprocess
+from glob import glob
 from setuptools import setup, find_packages, Command
 from setuptools.command.test import test as TestCommand
 from setuptools.command.install import install
 
-import mathmaker
+from mathmaker import __version__, __software_name__, __licence__, __author__
+from mathmaker import __author_email__
 from mathmaker.lib.tools import retrieve_fonts
 from mathmaker.lib.tools.ignition import check_dependency, check_dependencies
 
@@ -28,11 +30,16 @@ class CustomInstallCommand(install):
                              'before the first run.')
             sys.exit(0)
 
-        db_path = os.path.join(install_lib, mathmaker.__software_name__,
-                               'data', mathmaker.__software_name__ + '.db')
-        if os.path.isfile(db_path):
-            sys.stdout.write('\nRemoving a previous mathmaker.db file.')
-            os.remove(db_path)
+        db_path = [os.path.join(install_lib, __software_name__, 'data', f)
+                   for f in glob(os.path.join(install_lib, __software_name__,
+                                              'data', 'mathmaker*.db'))]
+        if len(db_path):
+            for f in db_path:
+                if os.path.isfile(f):
+                    sys.stdout.write('\nRemoving a previous local database '
+                                     'file (likely deprecated version): '
+                                     '{}.'.format(f))
+                    os.remove(f)
         else:
             sys.stdout.write('\nFound no previous mathmaker.db file to '
                              'remove.')
@@ -154,11 +161,11 @@ if missing_dependency and '--force' not in sys.argv:
                            'mathmaker/ to find instructions on install.')
 
 setup(
-    name=mathmaker.__software_name__,
-    version=mathmaker.__version__,
+    name=__software_name__,
+    version=__version__,
     url='http://github.com/nicolas.hainaux/mathmaker/',
-    license=mathmaker.__licence__,
-    author=mathmaker.__author__,
+    license=__licence__,
+    author=__author__,
     tests_require=['tox'],
     install_requires=['PyYAML>=3.12',
                       'polib>=1.0.8',
@@ -169,7 +176,7 @@ setup(
               'tox': Tox,
               'clean': CleanCommand,
               'install': CustomInstallCommand},
-    author_email=mathmaker.__author_email__,
+    author_email=__author_email__,
     description='Mathmaker creates automatically elementary maths exercises '
                 'and their (detailed) answers.',
     long_description=read('README.md', 'CHANGELOG.rst'),
@@ -192,7 +199,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Development Status :: 3 - Alpha',
         'Natural Language :: English',
-        'License :: OSI Approved :: ' + mathmaker.__licence__,
+        'License :: OSI Approved :: ' + __licence__,
         'Topic :: Education :: Computer Aided Instruction (CAI)',
         'Environment :: Web Environment',
         'Environment :: Console',

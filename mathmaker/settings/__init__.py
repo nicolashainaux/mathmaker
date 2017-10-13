@@ -26,6 +26,7 @@ import logging.config
 from pathlib import Path
 from shutil import copyfile
 
+from mathmaker import __version__, __software_name__
 from mathmaker.lib.tools import ext_dict, load_config
 
 AVAILABLE = {'LANGUAGES': ['fr', 'fr_FR', 'en', 'en_US', 'en_GB'],
@@ -66,10 +67,12 @@ class default_object(object):
 
 class path_object(object):
     def __init__(self, **dirs):
+        import sys
         dd = dirs.get('dd')
-        self.db = dd + "mathmaker.db"
-        self.db_dist = dd + "mathmaker.db-dist"
-        self.daemon_db = dd + "mathmakerd.db"
+        self.db = dd + '{}-{}.db'.format(__software_name__, __version__)
+        self.db_dist = dd + '{}.db-dist'.format(__software_name__)
+        self.daemon_db = dd + '{}d.db'.format(__software_name__)
+        sys.stderr.write('\ndb={}\n'.format(self.db))
         if (not os.path.isfile(self.db)
             or os.path.getmtime(self.db) < os.path.getmtime(self.db_dist)):
             # __
