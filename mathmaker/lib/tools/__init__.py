@@ -25,8 +25,6 @@ import os
 import sys
 import logging
 import errno
-import copy
-import random
 import re
 import subprocess
 from decimal import Decimal
