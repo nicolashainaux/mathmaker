@@ -23,9 +23,12 @@ recursive-include docs *.png
 recursive-include docs *.py
 recursive-include docs *.rst
 recursive-include docs Makefile
-prune tools/*
-prune tools
+recursive-include docs *.dia
+recursive-include tests *.xml
+prune toolbox/*
+prune toolbox
 prune mathmaker/lib/core/triangles_architecture.png
 prune mathmaker/settings/dev
 prune tests/01_core_objects/YET_TO_ADD*.py
 prune docs/_build
+prune mathmaker/data/fonts_list.txt
