@@ -8,6 +8,7 @@ dist/
 *.egg-info/
 *~
 mathmaker/data/mathmaker.db
+mathmaker/data/mathmaker-*.db
 mathmaker/data/mathmakerd.db
 mathmaker/log/*
 *.bak
