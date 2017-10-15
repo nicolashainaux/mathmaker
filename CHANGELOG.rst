@@ -1,7 +1,7 @@
 Changelog
 =========
 
-New in version 0.7.2 (2017-10-...)
+New in version 0.7.2 (2017-10-15)
 ---------------------------------
 
 * Add mental calculation sheets for third level ("yellow belt")
