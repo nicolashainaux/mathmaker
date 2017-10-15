@@ -1,6 +1,12 @@
 Changelog
 =========
 
+New in version 0.7.2 (2017-10-...)
+---------------------------------
+
+* Add mental calculation sheets for third level ("yellow belt")
+* The mental calculation pdf may now be "interactive" (answers can be written in text fields, they can be validated pushing a button; this validation is done by some javascript)
+
 New in version 0.7.1-3 (2017-08-30)
 -----------------------------------
 
