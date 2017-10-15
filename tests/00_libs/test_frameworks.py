@@ -30,6 +30,7 @@ from ruamel.yaml.compat import ordereddict
 from ruamel.yaml.comments import CommentedOrderedMap
 from ruamel import yaml
 
+from mathmaker.lib.tools.frameworks import list_all_sheets
 from mathmaker.lib.tools.frameworks import _AttrStr
 from mathmaker.lib.tools.frameworks import load_sheet, read_layout
 from mathmaker.lib.tools.frameworks import _read_simple_question
@@ -118,6 +119,11 @@ def test_AttrStr_remove():
     """Test removing attribute from a string."""
     assert _AttrStr('attr1=value 1, pick=7, attr3=valZ').remove('pick') \
         == 'attr1=value 1, attr3=valZ'
+
+
+def test_list_all_sheets():
+    """Check listing of sheets happens without errors."""
+    assert isinstance(list_all_sheets(), str)
 
 
 def test_read_layout():
