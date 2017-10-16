@@ -1,11 +1,12 @@
 Changelog
 =========
 
-New in version 0.7.2 (2017-10-15)
+New in version 0.7.2 (2017-10-16)
 ---------------------------------
 
 * Add mental calculation sheets for third level ("yellow belt")
 * The mental calculation pdf may now be "interactive" (answers can be written in text fields, they can be validated pushing a button; this validation is done by some javascript)
+* The daemon now accepts an optional argument in the request (written right after sheet's name, separated with a '|'. Only interactive is allowed, so far)
 
 New in version 0.7.1-3 (2017-08-30)
 -----------------------------------
