@@ -136,41 +136,61 @@ class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
                                     'from ip ' + query['ip'][0])
 
                 if not block_ip:
-                    if query['sheetname'][0] in all_sheets:
-                        document = ''
-                        try:
-                            p = Popen([settings.mm_executable,
-                                       '--pdf',
-                                       query['sheetname'][0]],
-                                      stdout=PIPE)
-                            document = p.stdout.read()
-                        except Exception:
-                            self.send_response(500)
+                    sheet_name = query['sheetname'][0]
+                    optional_args = []
+                    wrong_arg = False
+                    if '|' in query['sheetname'][0]:
+                        sheet_name, arg = sheet_name.split('|')
+                        if arg == 'interactive':
+                            optional_args.append('--interactive')
+                        else:
+                            self.send_response(400)
                             self.send_header('Content-Type', 'text/html')
                             self.end_headers()
-                            self.wfile.write(bytes('Error 500: something '
-                                                   'failed',
+                            self.wfile.write(bytes('Error 400: unknown '
+                                                   'parameter.',
                                                    'UTF-8'))
-                            log.error(self.address_string() + ' '
-                                      + self.requestline + ' 500',
-                                      exc_info=True)
+                            log.warning(self.address_string()
+                                        + ' ' + self.requestline
+                                        + ' 400 (unknown parameter)')
+                            wrong_arg = True
+                    if not wrong_arg:
+                        if sheet_name in all_sheets:
+                            document = ''
+                            try:
+                                p = Popen([settings.mm_executable, '--pdf']
+                                          + optional_args + [sheet_name],
+                                          stdout=PIPE)
+                                document = p.stdout.read()
+                            except Exception:
+                                self.send_response(500)
+                                self.send_header('Content-Type', 'text/html')
+                                self.end_headers()
+                                self.wfile.write(bytes('Error 500: something '
+                                                       'failed',
+                                                       'UTF-8'))
+                                log.error(self.address_string() + ' '
+                                          + self.requestline + ' 500',
+                                          exc_info=True)
+                            else:
+                                self.send_response(200)
+                                self.send_header('Content-Type',
+                                                 'application/pdf')
+                                self.end_headers()
+                                self.wfile.write(document)
+                                log.info(self.address_string() + ' '
+                                         + self.requestline + ' 200')
                         else:
-                            self.send_response(200)
-                            self.send_header('Content-Type', 'application/pdf')
+                            self.send_response(404)
+                            self.send_header('Content-Type', 'text/html')
                             self.end_headers()
-                            self.wfile.write(document)
-                            log.info(self.address_string() + ' '
-                                     + self.requestline + ' 200')
-                    else:
-                        self.send_response(404)
-                        self.send_header('Content-Type', 'text/html')
-                        self.end_headers()
-                        self.wfile.write(bytes('Error 404: No such sheetname',
-                                               'UTF-8'))
+                            self.wfile.write(bytes('Error 404: '
+                                                   'No such sheetname',
+                                                   'UTF-8'))
 
-                        log.warning(self.address_string() + ' '
-                                    + self.requestline
-                                    + ' 404 (no such sheetname)')
+                            log.warning(self.address_string() + ' '
+                                        + self.requestline
+                                        + ' 404 (no such sheetname)')
 
 
 def run():
