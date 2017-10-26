@@ -178,7 +178,7 @@ setup(
     author_email=__author_email__,
     description='Mathmaker creates automatically elementary maths exercises '
                 'and their (detailed) answers.',
-    long_description=read('README.md', 'CHANGELOG.rst'),
+    long_description=read('README.rst', 'CONTRIBUTORS.rst', 'CHANGELOG.rst'),
     packages=find_packages(exclude=['tests', 'docs']),
     entry_points={
         'console_scripts': ['mathmaker = mathmaker.cli:entry_point',
