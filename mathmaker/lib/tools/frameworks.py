@@ -30,10 +30,7 @@ import warnings
 from glob import glob
 from collections import OrderedDict
 from operator import itemgetter
-# # from abc import ABCMeta, abstractmethod
-#
-# import yaml
-#
+
 from mathmaker import settings
 from mathmaker.lib.constants import DEFAULT_LAYOUT, EQUAL_PRODUCTS
 from mathmaker.lib.constants import BOOLEAN
@@ -59,7 +56,7 @@ def read_index():
 def build_index():
     """Create the index of all (YAML) sheets available."""
     from mathmaker import settings
-    import yaml
+    from ruamel import yaml
     # Below snippet from https://stackoverflow.com/a/21048064/3926735
     # to load roadmap.yaml using OrderedDict instead of dict
     _mapping_tag = yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG
@@ -82,7 +79,7 @@ def build_index():
         for folder_path in folder_files:
             subtheme = os.path.splitext(os.path.basename(folder_path))[0]
             with open(folder_path) as f:
-                loaded_data = yaml.load(f)
+                loaded_data = yaml.safe_load(f)
                 if loaded_data is not None:
                     folder = OrderedDict(loaded_data)
                 for sheet_name in folder:
