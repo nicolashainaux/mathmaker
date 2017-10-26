@@ -24,10 +24,11 @@ import random
 from string import ascii_uppercase as alphabet
 from abc import ABCMeta, abstractmethod
 
+from mathmakerlib.calculus.number import is_integer, is_number
+
 from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.tools.maths import gcd, sign_of_product
-from mathmaker.lib.tools.numbers import is_integer, is_number
 from mathmaker.lib.constants import RANDOMLY
 from mathmaker.lib.core.utils import gather_literals
 from mathmaker.lib.core.base import Printable

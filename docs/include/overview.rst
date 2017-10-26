@@ -58,7 +58,7 @@ Once you're done, you can proceed installing mathmaker:
     $ pip3 install mathmaker
 
 (this will automatically install some extra python3 libraries too:
-polib, ruamel.yaml, intspan and python-daemon).
+mathmakerlib, polib, ruamel.yaml, intspan and python-daemon).
 
 .. note::
     Check how to fix install if it stops with an error in python-daemon install, in `the complete documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#python-daemon-error-at-install>`__

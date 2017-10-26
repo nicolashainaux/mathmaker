@@ -23,10 +23,11 @@
 import random
 from decimal import Decimal
 
+from mathmakerlib.calculus.number import is_integer, move_fracdigits_to
+from mathmakerlib.calculus.number import remove_fracdigits_from, fix_fracdigits
+from mathmakerlib.calculus.number import Number
+
 from mathmaker.lib import shared
-from mathmaker.lib.tools.numbers import is_integer, move_fracdigits_to
-from mathmaker.lib.tools.numbers import remove_fracdigits_from, fix_fracdigits
-from mathmaker.lib.tools.numbers import Number
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Division,
                                               Expandable, Value)
 from mathmaker.lib.core.calculus import Expression

@@ -23,7 +23,8 @@
 # import pytest
 from decimal import Decimal
 
-from mathmaker.lib.tools.numbers import is_integer, Number
+from mathmakerlib.calculus.number import is_integer, Number
+
 from mathmaker.lib.document.content.calculation \
     import calculation_order_of_operations
 

@@ -29,11 +29,12 @@
 import math
 import copy
 import random
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal
+
+from mathmakerlib.calculus.number import Number, is_number
 
 from mathmaker.lib.constants import EQUAL_PRODUCTS
 from mathmaker.lib.tools import parse_layout_descriptor
-from mathmaker.lib.tools.numbers import Number, is_number
 from mathmaker.lib.tools.maths import barycenter, POLYGONS_NATURES
 from .root_calculus import Evaluable, Value, Unit
 from .base_calculus import Item, Product, Sum, Function, AngleItem

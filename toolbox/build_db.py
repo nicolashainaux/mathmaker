@@ -51,9 +51,10 @@ import json
 import sqlite3
 from decimal import Decimal
 
+from mathmakerlib.calculus.number import Number
+
 from mathmaker import settings
 from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words
-from mathmaker.lib.tools.numbers import Number
 from mathmaker.lib.tools.frameworks import get_attributes
 from mathmaker.lib.tools.database import parse_sql_creation_query
 from mathmaker.lib.constants.numeration import RANKS, RANKS_DECIMAL

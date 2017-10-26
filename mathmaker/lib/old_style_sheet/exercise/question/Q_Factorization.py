@@ -22,10 +22,10 @@
 
 import random
 
-from mathmaker.lib.tools.numbers import is_integer, is_natural
+from mathmakerlib.calculus.number import is_integer, is_natural
+
 from mathmaker.lib.tools.maths import coprimes_to
 from mathmaker.lib import shared
-
 from mathmaker.lib.core.root_calculus import Value, Exponented
 from mathmaker.lib.core.base_calculus import (Item, Product, Expandable, Sum,
                                               Monomial, Polynomial)

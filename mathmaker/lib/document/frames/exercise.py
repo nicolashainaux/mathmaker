@@ -28,10 +28,10 @@ from string import ascii_lowercase as alphabet
 
 from intspan import intspan
 from intspan.core import ParseError
+from mathmakerlib.calculus.number import is_integer
 
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK, COLORED_ANSWER
-from mathmaker.lib.tools.numbers import is_integer
 from mathmaker.lib.tools.maths import coprimes_to
 from mathmaker.lib.tools.frameworks import read_layout, build_questions_list
 from mathmaker.lib.tools.frameworks import get_q_modifier, parse_qid

@@ -27,11 +27,12 @@ import random
 import warnings
 from decimal import Decimal
 
+from mathmakerlib.calculus.number import is_integer, is_number, Number
+
 from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.constants.numeration import RANKS, RANKS_CONFUSING
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
-from mathmaker.lib.tools.numbers import is_integer, is_number, Number
 from mathmaker.lib.core.base_calculus import Fraction
 
 DIGITS_POSITIONS = RANKS
