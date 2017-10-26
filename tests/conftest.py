@@ -27,9 +27,10 @@ import locale
 from mathmaker import __software_name__
 from mathmaker import settings
 from mathmaker.lib import shared
+from mathmaker.lib.constants import LOCALE_US
 settings.init()
 settings.language = 'en'
-settings.locale = 'en_US.UTF-8'
+settings.locale = LOCALE_US
 locale.setlocale(locale.LC_ALL, settings.locale)
 gettext.translation(__software_name__, settings.localedir, ['en']).install()
 settings.outputdir = settings.projectdir + 'outfiles/'

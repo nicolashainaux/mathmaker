@@ -25,6 +25,7 @@ import pytest
 from decimal import Decimal
 
 from mathmaker.lib.core.root_calculus import Value
+from mathmaker.lib.constants import LOCALE_US, LOCALE_FR
 from tools import wrap_nb
 
 
@@ -356,6 +357,6 @@ def test_js_repr():
     assert Value('a').into_str(js_repr=True) == 'a'
     assert Value('units').into_str(js_repr=True) == 'units'
     assert Value(-4).into_str(js_repr=True) == '-4'
-    locale.setlocale(locale.LC_NUMERIC, locale='fr_FR.UTF8')
+    locale.setlocale(locale.LC_NUMERIC, locale=LOCALE_FR)
     assert Value(Decimal('4.5')).into_str(js_repr=True) == '4.5'
-    locale.setlocale(locale.LC_NUMERIC, locale='en_US.UTF8')
+    locale.setlocale(locale.LC_NUMERIC, locale=LOCALE_US)

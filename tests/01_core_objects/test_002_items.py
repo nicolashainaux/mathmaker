@@ -26,6 +26,7 @@ import decimal
 
 from mathmaker.lib.core.root_calculus import Exponented, Value
 from mathmaker.lib.core.base_calculus import Item, Sum, Product
+from mathmaker.lib.constants import LOCALE_US, LOCALE_FR
 from tools import wrap_nb
 
 
@@ -409,6 +410,6 @@ def test_js_repr():
     """Is the "js" representation correct?"""
     assert Item(('+', 6, 1)).jsprinted == '6'
     assert Item(('-', 42, 1)).jsprinted == '-42'
-    locale.setlocale(locale.LC_NUMERIC, locale='fr_FR.UTF8')
+    locale.setlocale(locale.LC_NUMERIC, locale=LOCALE_FR)
     assert Item(decimal.Decimal('4.5')).jsprinted == '4.5'
-    locale.setlocale(locale.LC_NUMERIC, locale='en_US.UTF8')
+    locale.setlocale(locale.LC_NUMERIC, locale=LOCALE_US)

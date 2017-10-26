@@ -81,7 +81,7 @@ class LaTeX(Structure.Structure):
                            + r'\newfontfamily\configfont{font}' + '\n')\
                     .format(font='{' + settings.font + '}')
             fr_parallel = ''
-            if settings.language == 'fr_FR':
+            if settings.language.startswith('fr'):
                 sisetup_dict.update({'locale': 'FR'})
                 fr_parallel += r'\renewcommand{\parallel}{' \
                     r'\mathbin{/\negthickspace/}}' + '\n'
@@ -136,7 +136,7 @@ class LaTeX(Structure.Structure):
             result += '% ' + _('To display units correctly') + '\n'
             result += r'\usepackage[detect-all]{siunitx}' + '\n'
             sisetup_dict = {}
-            if settings.language == 'fr_FR':
+            if settings.language.startswith('fr'):
                 sisetup_dict.update({'locale': 'FR'})
             if settings.font is not None:
                 sisetup_dict.update({'text-rm': r'\configfont'})
@@ -215,7 +215,7 @@ class LaTeX(Structure.Structure):
             if settings.round_letters_in_math_expr:
                 result += r'\usepackage{lxfonts}' + '\n'
 
-            if settings.language == 'fr_FR':
+            if settings.language.startswith('fr'):
                 result += r'\renewcommand{\parallel}{' \
                     r'\mathbin{/\negthickspace/}}' + '\n'
 

@@ -51,7 +51,7 @@ def load_config(file_tag, settingsdir):
     # can be logged, the logger is only set and used if the filename is
     # not 'logging.yaml'.
     if file_tag != 'logging':
-        mainlogger = logging.getLogger("__main__")
+        mainlogger = logging.getLogger('__main__')
     configuration = ext_dict()
     try:
         with open(os.path.join(settingsdir, 'default/', file_tag + '.yaml'))\
@@ -77,9 +77,19 @@ def load_config(file_tag, settingsdir):
         except IOError:
             raise FileNotFoundError(errno.ENOENT,
                                     os.strerror(errno.ENOENT),
-                                    file_tag + "_freebsd.yaml")
+                                    file_tag + '_freebsd.yaml')
+    if file_tag == 'user_config' and sys.platform.startswith('win'):
+        try:
+            with open(os.path.join(settingsdir, 'default/',
+                                   file_tag + '_windows.yaml')) as file_path:
+                # __
+                configuration.recursive_update(yaml.load(file_path))
+        except IOError:
+            raise FileNotFoundError(errno.ENOENT,
+                                    os.strerror(errno.ENOENT),
+                                    file_tag + '_windows.yaml')
     for d in ['/etc/mathmaker',
-              os.path.join(os.path.expanduser("~"), '.config', 'mathmaker'),
+              os.path.join(os.path.expanduser('~'), '.config', 'mathmaker'),
               settingsdir + 'dev']:
         try:
             with open(os.path.join(d, file_tag + '.yaml')) as file_path:
@@ -94,6 +104,15 @@ def load_config(file_tag, settingsdir):
                 with open(os.path.join(d,
                                        file_tag
                                        + '_freebsd.yaml')) as file_path:
+                    # __
+                    configuration.recursive_update(yaml.load(file_path))
+            except IOError:
+                pass
+        if file_tag == 'user_config' and sys.platform.startswith('win'):
+            try:
+                with open(os.path.join(d,
+                                       file_tag
+                                       + '_windows.yaml')) as file_path:
                     # __
                     configuration.recursive_update(yaml.load(file_path))
             except IOError:

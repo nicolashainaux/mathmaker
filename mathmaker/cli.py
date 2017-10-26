@@ -108,7 +108,9 @@ def entry_point():
     settings.outputdir = args.outputdir
     settings.font = args.font
     settings.encoding = args.encoding
-    settings.locale = settings.language + '.' + settings.encoding
+    settings.locale = settings.language + '.' + settings.encoding \
+        if not sys.platform.startswith('win') \
+        else settings.language
     locale.setlocale(locale.LC_ALL, settings.locale)
     check_settings_consistency()
     shared.init()

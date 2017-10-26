@@ -20,7 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import sys
 import random
+
+LOCALE_US = 'en-US' if sys.platform.startswith('win') else 'en_US.UTF-8'
+LOCALE_FR = 'fr-FR' if sys.platform.startswith('win') else 'fr_FR.UTF-8'
 
 BOOLEAN = {'true': lambda: True, 'false': lambda: False,
            'random': lambda: random.choice([True, False]),
