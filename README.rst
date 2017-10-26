@@ -14,6 +14,7 @@ theorem, fractions calculation...
 It can run from command line, but can be controlled via http requests
 too.
 
+`Licence <https://github.com/nicolashainaux/mathmaker/blob/master/LICENSE>`__
 `Documentation (master
 release) <http://mathmaker.readthedocs.io/en/master/index.html>`__
 `Documentation (latest development
@@ -25,13 +26,13 @@ Quickstart
 Complete install
 ----------------
 
--  on Ubuntu 14.04 or later:
-
-   External dependencies:
-
 .. note::
 
   python3.6 is mandatory for mathmaker to work, so check is installed on your system
+
+-  on Ubuntu 14.04 or later:
+
+   External dependencies:
 
    ::
 
@@ -103,9 +104,8 @@ for more information.
 Advanced use
 ------------
 
-It's possible to create your own sheets in xml (only for the mental
-calculation theme yet). Read `the complete
-documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#xml-sheets>`__
+It's possible to create your own sheets in yaml. Read from `the complete
+documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#yaml-sheets>`__
 for more information.
 
 Contribute
