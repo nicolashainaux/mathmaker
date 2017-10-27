@@ -28,30 +28,6 @@ from mathmaker.lib.document.frames import Sheet
 XML_SHEETS = get_xml_sheets_paths()
 
 
-def test_tables2_9():
-    """Checks if 'table_2_9' is generated without any error."""
-    shared.machine.write_out(str(Sheet('', '', '',
-                                       filename=XML_SHEETS['tables2_9'])))
-
-
-def test_divisions():
-    """Checks if 'divisions' is generated without any error."""
-    shared.machine.write_out(str(Sheet('', '', '',
-                                       filename=XML_SHEETS['divisions'])))
-
-
-def test_mini_problems():
-    """Checks if 'mini_problems' is generated without any error."""
-    shared.machine.write_out(str(Sheet('', '', '',
-                                       filename=XML_SHEETS['mini_problems'])))
-
-
-def test_multi_11_15_25():
-    """Checks if 'multi_11_15_25' is generated without any error."""
-    shared.machine.write_out(str(Sheet('', '', '',
-                                       filename=XML_SHEETS['multi_11_15_25'])))
-
-
 def test_multi_decimal():
     """Checks if 'multi_decimal' is generated without any error."""
     shared.machine.write_out(str(Sheet('', '', '',
@@ -70,24 +46,6 @@ def test_multi_hole_any_nb():
         Sheet('', '', '', filename=XML_SHEETS['multi_hole_any_nb'])))
 
 
-def test_multi_hole_tables2_9():
-    """Checks if 'multi_hole_tables2_9' is generated without any error."""
-    shared.machine.write_out(
-        str(Sheet('', '', '', filename=XML_SHEETS['multi_hole_tables2_9'])))
-
-
-def test_multi_reversed():
-    """Checks if 'multi_reversed' is generated without any error."""
-    shared.machine.write_out(str(Sheet('', '', '',
-                                       filename=XML_SHEETS['multi_reversed'])))
-
-
-def test_operations_vocabulary():
-    """Checks if 'operations_vocabulary' is generated without any error."""
-    shared.machine.write_out(
-        str(Sheet('', '', '', filename=XML_SHEETS['operations_vocabulary'])))
-
-
 def test_ranks():
     """Checks if 'ranks' is generated without any error."""
     shared.machine.write_out(str(Sheet('', '', '',
@@ -98,18 +56,6 @@ def test_rectangles():
     """Checks if 'rectangles' is generated without any error."""
     shared.machine.write_out(str(Sheet('', '', '',
                                        filename=XML_SHEETS['rectangles'])))
-
-
-def test_test_11_1():
-    """Checks if 'test_11_1' is generated without any error."""
-    shared.machine.write_out(str(Sheet('', '', '',
-                                       filename=XML_SHEETS['test_11_1'])))
-
-
-def test_test_11_2():
-    """Checks if 'test_11_2' is generated without any error."""
-    shared.machine.write_out(str(Sheet('', '', '',
-                                       filename=XML_SHEETS['test_11_2'])))
 
 
 def test_test_multi_clever():
