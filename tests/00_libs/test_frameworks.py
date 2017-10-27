@@ -286,6 +286,10 @@ def test__read_simple_question():
            'complement': '10', },
           ['intpairs_2to9'], 2]
          ]
+    assert _read_simple_question('multi direct -> intpairs_2to9×4to9 (6)') == \
+        [[{'id': 'multi direct'},
+          ['intpairs_2to9×4to9'], 6]
+         ]
     example_with_block = _read_simple_question(
         """first id, attr1=a value, attr2=value 2 -> label_1 (5)
         second id -> label_2, attr=5.0pt (12)

@@ -36,14 +36,31 @@ from mathmaker.lib.constants import DEFAULT_LAYOUT, EQUAL_PRODUCTS
 from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.tools import parse_layout_descriptor
 
-SIMPLE_QUESTION = re.compile(r'([a-zA-Z0-9_,=;:\->\. ]+\([0-9\.]+\))')
-Q_BLOCKS = re.compile(r'\[(\d+)\]\[([a-zA-Z0-9 ,=_;:\->\.\n\(\)]+)\]'
-                      r'|([a-zA-Z0-9_,=×;:\->\. ]+\([0-9\.]+\))')
+# Characters allowed inside questions, numbers' sources and attributes
+# (including =)
+_QA_ICHARS = r'a-zA-Z0-9_×;:\. ='
+# Separator between attributes (and question's id)
+_ATTR_SEP = r','
+# All characters forming a complete question or a complete numbers' source.
+_QCHARS = _QA_ICHARS + _ATTR_SEP
+# Separator between question and number source
+_MAIN_SEP = r'\->'
+# Characters of a complete line, without number in parentheses:
+# "question -> number source"
+_LINE = _QCHARS + _MAIN_SEP
+_INT = r'\d+'
+_FETCH_NB = r'\((' + _INT + r')\)'
+# _DECI = r'[\d\.]+'
+
+SIMPLE_QUESTION = re.compile(r'([' + _LINE + r']+\(' + _INT + r'\))')
+Q_BLOCKS = re.compile(r'\[(' + _INT + r')\]\[([' + _LINE + r'\n\(\)]+)\]'
+                      r'|([' + _LINE + r']+\(' + _INT + r'\))')
 MIX_QUESTION = re.compile(
-    r'([a-zA-Z0-9_\. ]+[,]?)(([a-zA-Z0-9_ ]+=[a-zA-Z0-9_\. ]+[,]?)*)')
-NB_SOURCE = re.compile(r'([a-zA-Z0-9_,=:;×\-\. ]+)\(([0-9]+)\)')
-FETCH_NB = re.compile(r'\((\d+)\)$')
-SUB_NB = re.compile(r'([a-zA-Z0-9_,=;:\->\. ]+)\((\d+)\)$')
+    r'([' + _QA_ICHARS + r']+[,]?)(([' + _QA_ICHARS + r']+'
+    r'=[' + _QA_ICHARS + r']+[,]?)*)')
+NB_SOURCE = re.compile(r'([' + _QCHARS + r'\-]+)' + _FETCH_NB)
+FETCH_NB = re.compile(_FETCH_NB + r'$')
+SUB_NB = re.compile(r'([' + _LINE + r']+)' + _FETCH_NB + r'$')
 
 
 def read_index():
