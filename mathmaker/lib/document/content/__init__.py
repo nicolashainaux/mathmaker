@@ -24,8 +24,10 @@
 from .algebra import expand_simple, expand_double
 from .calculation import order_of_operations, multi_direct
 from .calculation import multi_reversed, multi_hole, divi_direct, multi_clever
-from .calculation import addi_direct, subtr_direct, rank_direct, rank_reversed
-from .calculation import rank_numberof, vocabulary_simple_part_of_a_number
+from .calculation import addi_direct, subtr_direct, digitplace_direct
+from .calculation import digitplace_reversed
+from .calculation import digitplace_numberof
+from .calculation import vocabulary_simple_part_of_a_number
 from .calculation import vocabulary_simple_multiple_of_a_number
 from .calculation import vocabulary_multi, vocabulary_divi
 from .calculation import vocabulary_addi, vocabulary_subtr
@@ -48,8 +50,9 @@ from .geometry import perimeter_square, rectangle_length_or_width
 __all__ = ['expand_simple', 'expand_double',
            'multi_direct', 'multi_reversed', 'multi_hole', 'divi_direct',
            'multi_clever',
-           'addi_direct', 'subtr_direct', 'rank_direct', 'rank_reversed',
-           'rank_numberof', 'vocabulary_simple_part_of_a_number',
+           'addi_direct', 'subtr_direct', 'digitplace_direct',
+           'digitplace_reversed',
+           'digitplace_numberof', 'vocabulary_simple_part_of_a_number',
            'vocabulary_simple_multiple_of_a_number', 'vocabulary_multi',
            'vocabulary_divi', 'vocabulary_addi', 'vocabulary_subtr',
            'fraction_of_a_rectangle', 'order_of_operations',

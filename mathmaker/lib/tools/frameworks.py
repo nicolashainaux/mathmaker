@@ -327,10 +327,10 @@ class _AttrStr(str):
         chunks = self.strip(', ').split(sep=', ')
         result = []
         bit = {}
-        last_rank = -1
+        last_place = -1
         for c in chunks:
             k, v = c.strip(', ').split(sep='=')
-            if k in order and order[k] < last_rank:
+            if k in order and order[k] < last_place:
                 if k == 'newpage':
                     if key not in bit:
                         raise ValueError('YAML File Format Error: '
@@ -341,19 +341,19 @@ class _AttrStr(str):
                 else:
                     result.append(bit)
                     bit = {key: c}
-                last_rank = -1
-            elif k in order and order[k] == last_rank:
+                last_place = -1
+            elif k in order and order[k] == last_place:
                 raise ValueError('YAML File Format Error: same keyword cannot '
                                  'show up several times in a row.')
             else:
                 # either k is not in order, like 'spacing', or k is in order
-                # and order[k] > last_rank
+                # and order[k] > last_place
                 if key in bit:
                     bit = {key: ', '.join([bit[key], c])}
                 else:
                     bit = {key: c}
                 if k in order:
-                    last_rank = order[k]
+                    last_place = order[k]
         if bit != {}:
             result.append(bit)
         return result
@@ -555,7 +555,7 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
                     source_nb == 'integer_3_10_decimal_3_10',
                     source_nb == 'decimals_0_20_1',
                     source_nb == 'bypass'])
-    elif q_id.startswith('rank_'):
+    elif q_id.startswith('place_'):
         return any([source_nb == 'digits_places',
                     source_nb == 'fracdigits_places',
                     source_nb == 'bypass'])
@@ -615,7 +615,8 @@ def get_q_modifier(q_type, nb_source):
         d.update({'rectangle': True})
     elif 'square' in q_type:
         d.update({'square': True})
-    elif q_type == 'rank_numberof' and nb_source.startswith('extdecimals'):
+    elif (q_type == 'digitplaces_numberof'
+          and nb_source.startswith('extdecimals')):
         d.update({'numberof': True})
     return d
 

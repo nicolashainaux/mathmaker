@@ -31,11 +31,10 @@ from mathmakerlib.calculus.number import is_integer, is_number, Number
 
 from mathmaker import settings
 from mathmaker.lib import shared
-from mathmaker.lib.constants.numeration import RANKS, RANKS_CONFUSING
+from mathmaker.lib.constants.numeration import DIGITSPLACES
+from mathmaker.lib.constants.numeration import DIGITSPLACES_CONFUSING
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
 from mathmaker.lib.core.base_calculus import Fraction
-
-DIGITS_POSITIONS = RANKS
 
 FETCH_TABLE_NAME = re.compile(r'CREATE TABLE (\w+)')
 FETCH_TABLE_COLS = re.compile(r', (\w\w+)|\n[ ]+(\w\w+)|\((\w\w+)')
@@ -643,7 +642,7 @@ def generate_values(source_id):
             if not box_10_100_1000:
                 box_10_100_1000 = [10, 100, 1000]
             chosen_10_100_1000 = box_10_100_1000.pop()
-            digits_positions = list(RANKS[2:])
+            digits_positions = list(DIGITSPLACES[2:])
             width = random.choices([1, 2, 3], weights=[0.14, 0.63, 0.33])[0]
             start_pos = random.choice([n
                                        for n in range(len(digits_positions))])
@@ -658,7 +657,7 @@ def generate_values(source_id):
             if not box_10_100_1000:
                 box_10_100_1000 = [10, 100, 1000]
             chosen_10_100_1000 = box_10_100_1000.pop()
-            digits_positions = list(RANKS[2:])
+            digits_positions = list(DIGITSPLACES[2:])
             width = random.choices([1, 2, 3], weights=[0.14, 0.63, 0.33])[0]
             wt = {10: [0.2, 0.2, 0.2, 0.2, 0.2],
                   100: [0.25, 0.25, 0.25, 0.25, 0],
@@ -680,11 +679,11 @@ def generate_values(source_id):
             chosen = box.pop()
             digits_positions = list()
             if chosen == Decimal('0.1'):
-                digits_positions = list(RANKS[:-1])
+                digits_positions = list(DIGITSPLACES[:-1])
             elif chosen == Decimal('0.01'):
-                digits_positions = list(RANKS[:-2])
+                digits_positions = list(DIGITSPLACES[:-2])
             elif chosen == Decimal('0.001'):
-                digits_positions = list(RANKS[:-3])
+                digits_positions = list(DIGITSPLACES[:-3])
             width = random.choices([1, 2, 3, 4],
                                    weights=[0.14, 0.43, 0.33, 0.2])[0]
             start_pos = random.choice([n
@@ -702,9 +701,9 @@ def generate_values(source_id):
             chosen = box.pop()
             digits_positions = list()
             if chosen == Decimal('0.1') or chosen == Decimal('0.01'):
-                digits_positions = list(RANKS)
+                digits_positions = list(DIGITSPLACES)
             elif chosen == Decimal('0.001'):
-                digits_positions = list(RANKS[1:])
+                digits_positions = list(DIGITSPLACES[1:])
             width = random.choices([1, 2, 3, 4],
                                    weights=[0.14, 0.43, 0.33, 0.2])[0]
             start_pos = random.choice([n
@@ -737,7 +736,7 @@ def generate_random_decimal_nb(position=None, width='random',
         figures = figures * 3
     random.shuffle(figures)
     if digits_positions is None:
-        digits_positions = copy.copy(DIGITS_POSITIONS)
+        digits_positions = copy.copy(DIGITSPLACES)
 
     if (isinstance(width, str)
         and width.startswith('random') and width != 'random'):
@@ -899,7 +898,8 @@ def generate_random_decimal_nb(position=None, width='random',
 
         if position != Decimal('1') and not pos_matches_invisible_zero:
             figure = figures.pop()
-            r = RANKS_CONFUSING[-(RANKS_CONFUSING.index(position) + 1)]
+            r = DIGITSPLACES_CONFUSING[
+                -(DIGITSPLACES_CONFUSING.index(position) + 1)]
             chosen_deci += Decimal(figure) * r
             digits_positions.remove(r)
             width -= 1

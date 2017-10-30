@@ -20,30 +20,31 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# This module will ask to tell the rank of a figure in a given number.
+# This module will ask to tell the place of a digit in a given number.
 
-from mathmaker.lib.constants.numeration import RANKS_HOW_MANY
-from mathmaker.lib.core.base_calculus import Item
-from . import rank_reversed
+from mathmaker.lib.constants.numeration import DIGITSPLACES_WORDS
+from . import digitplace_reversed
 
 
 class sub_object(object):
 
     def __init__(self, **options):
-        rank_reversed.sub_object.__init__(self, numberof=True, **options)
-        self.transduration = 12
-        n = self.chosen_deci
-        r = self.chosen_rank
-        self.result = Item(((n - n % r) / r))
+        digitplace_reversed.sub_object.__init__(self, **options)
+        self.transduration = 16
 
     def q(self, **options):
-        return _('{how_many_rank} are there in {decimal_number}?')\
-            .format(decimal_number=self.chosen_deci_str,
-                    how_many_rank=_(str(RANKS_HOW_MANY[self.chosen_rank])))
+        if self.preset == 'mental calculation':
+            result = _('Position of the digit {figure}'
+                       ' in: {decimal_number}?')
+        else:
+            result = _('What is the position of the figure {figure}'
+                       ' in the number {decimal_number}?')
+        return result.format(decimal_number=self.chosen_deci_str,
+                             figure=self.chosen_figure)
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        return self.result.printed
+        return _(str(DIGITSPLACES_WORDS[self.chosen_digitplace]))
 
     def js_a(self, **kwargs):
-        return [self.result.jsprinted]
+        return [self.a(**kwargs)]

@@ -6322,9 +6322,9 @@ class Sum(CommutativeOperation):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Returns the rank of next non-equivalent to 0 term...
+    #   @brief Returns the position of next non-equivalent to 0 term...
     #   @param position The point where to start from to search
-    #   @return The rank of next non-equivalent to 0 term (or None)
+    #   @return The position of next non-equivalent to 0 term (or None)
     def next_displayable_term_nb(self, position):
         for i in range(len(self) - 1 - position):
             if not self.term[i + 1 + position].is_displ_as_a_single_0():

@@ -101,8 +101,8 @@ exam: !!omap
       - nb: intpairs_4to9 (1)
             intpairs_6to9 (1)
             intpairs_7to9 (1)
-    - questions: rank direct -> digits_places (1)
-                 rank reversed -> digits_places (1)
+    - questions: digitplace direct -> digits_places (1)
+                 digitplace reversed -> digits_places (1)
                  addi direct -> intpairs_9to50 (1)
                  addi direct -> intpairs_9to100 (1)
                  subtr direct, subvariant=only_positive -> intpairs_9to50 (1)
@@ -139,7 +139,7 @@ W01c: !!omap
                  multi reversed -> intpairs_3to9 (1)
                  multi direct -> table_11_tens_easy (1)
                  addi direct -> intpairs_9to100 (1)
-                 rank reversed -> digits_places (1)
+                 digitplace reversed -> digits_places (1)
 
 W01d: !!omap
   - preset: "mental calculation slideshow"
@@ -148,7 +148,7 @@ W01d: !!omap
                  multi reversed -> intpairs_3to9 (1)
                  multi direct -> table_11_tens_easy (1)
                  subtr direct, subvariant=only_positive -> intpairs_9to100 (1)
-                 rank direct -> digits_places (1)
+                 digitplace direct -> digits_places (1)
 
 W02a: !!omap
   - preset: "mental calculation slideshow"
@@ -162,7 +162,7 @@ W02b: !!omap
   - exercise: !!omap
     - questions: multi direct -> table_11_tens_easy (1)
                  subtr direct, subvariant=only_positive -> intpairs_9to100 (1)
-                 rank direct -> digits_places (1)
+                 digitplace direct -> digits_places (1)
                  multi hole -> intpairs_4to9 (1)
                  divi direct -> intpairs_3to9 (1)
 
@@ -171,7 +171,7 @@ W02c: !!omap
   - exercise: !!omap
     - questions: multi direct -> table_11_tens_easy (1)
                  addi direct -> intpairs_9to100 (1)
-                 rank reversed -> digits_places (1)
+                 digitplace reversed -> digits_places (1)
                  divi direct -> intpairs_3to9 (2)
 
 W02d: !!omap
@@ -179,7 +179,7 @@ W02d: !!omap
   - exercise: !!omap
     - questions: multi direct -> table_11_tens_easy (1)
                  subtr direct, subvariant=only_positive -> intpairs_9to100 (1)
-                 rank direct -> digits_places (1)
+                 digitplace direct -> digits_places (1)
                  divi direct -> intpairs_3to9 (1)
                  multi hole -> intpairs_4to9 (1)
 
@@ -187,7 +187,7 @@ W03a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> table_11_tens_easy (1)
-                 rank reversed -> digits_places (1)
+                 digitplace reversed -> digits_places (1)
                  divi direct -> intpairs_3to9 (1)
                  addi direct -> intpairs_9to100 (1)
                  subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100(1)
@@ -196,7 +196,7 @@ W03b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> table_11_tens_easy (1)
-                 rank direct -> digits_places (1)
+                 digitplace direct -> digits_places (1)
                  divi direct -> intpairs_3to9 (1)
                  subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100(1)
                  multi direct, context=mini_problem -> intpairs_4to9 (1)
@@ -205,7 +205,7 @@ W03c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> table_11_tens_easy (1)
-                 rank reversed -> digits_places (1)
+                 digitplace reversed -> digits_places (1)
                  fraction_of a_rectangle -> properfraction_3to5 (1)
                  addi direct, context=mini_problem -> intpairs_5to20 (1)
                  divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
@@ -214,7 +214,7 @@ W03d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi reversed -> intpairs_2to9 (1)
-                 rank direct -> digits_places (1)
+                 digitplace direct -> digits_places (1)
                  fraction_of a_rectangle -> properfraction_3to5 (1)
                  multi direct, context=mini_problem -> intpairs_4to9 (1)
                  subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100(1)
@@ -232,7 +232,7 @@ W04b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> table_11_tens_easy (1)
-                 rank reversed -> digits_places (1)
+                 digitplace reversed -> digits_places (1)
                  addi direct, context=mini_problem -> intpairs_5to20 (1)
                  fraction_of a_rectangle -> intpairs_4to9;;intpairs_4to9 (1)
                  subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
@@ -241,7 +241,7 @@ W04c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi reversed -> intpairs_6to9 (1)
-                 rank direct -> digits_places (1)
+                 digitplace direct -> digits_places (1)
                  fraction_of a_rectangle -> intpairs_4to9;;intpairs_4to9 (1)
                  divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
                  subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_100 (1)
@@ -250,7 +250,7 @@ W04d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi hole -> table_11_tens_easy (1)
-                 rank reversed -> digits_places (1)
+                 digitplace reversed -> digits_places (1)
                  fraction_of a_rectangle -> intpairs_4to9;;intpairs_4to9 (1)
                  subtr direct, context=mini_problem, subvariant=only_positive -> complements_to_100, nb1_ge=7 (10)
                  addi direct -> complements_to_300...1000 (1)

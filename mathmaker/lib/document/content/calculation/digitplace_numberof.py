@@ -20,43 +20,30 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# This module will ask the figure of a given rank in a given decimal number.
 
-
-from decimal import Decimal
-
-from mathmaker.lib.tools.database import generate_random_decimal_nb
+from mathmaker.lib.constants.numeration import DIGITSPLACES_HOW_MANY
 from mathmaker.lib.core.base_calculus import Item
-from mathmaker.lib.constants.numeration import RANKS_WORDS
+from . import digitplace_reversed
 
 
 class sub_object(object):
 
     def __init__(self, **options):
-        self.preset = options.get('preset', 'default')
-        pos = options.get('numbers_to_use')[0]
-
-        self.chosen_deci = \
-            generate_random_decimal_nb(position=pos, **options)
-        self.chosen_figure = (self.chosen_deci
-                              % (pos * Decimal('10'))) // pos
-        self.chosen_deci_str = Item((self.chosen_deci)).printed
-        self.chosen_rank = pos
-        self.transduration = 8
+        digitplace_reversed.sub_object.__init__(self, numberof=True, **options)
+        self.transduration = 12
+        n = self.chosen_deci
+        r = self.chosen_digitplace
+        self.result = Item(((n - n % r) / r))
 
     def q(self, **options):
-        if self.preset == 'mental calculation':
-            result = _('Digit of {position} in {decimal_number}?')
-        else:
-            result = _('Which figure matches the {position} in the number \
-    {decimal_number}?')
-
-        return result.format(decimal_number=self.chosen_deci_str,
-                             position=_(str(RANKS_WORDS[self.chosen_rank])))
+        return _('{how_many_digitplace} are there in {decimal_number}?')\
+            .format(decimal_number=self.chosen_deci_str,
+                    how_many_digitplace=_(str(
+                        DIGITSPLACES_HOW_MANY[self.chosen_digitplace])))
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        return self.chosen_figure
+        return self.result.printed
 
     def js_a(self, **kwargs):
-        return [str(self.chosen_figure)]
+        return [self.result.jsprinted]

@@ -46,10 +46,10 @@ def test_multi_hole_any_nb():
         Sheet('', '', '', filename=XML_SHEETS['multi_hole_any_nb'])))
 
 
-def test_ranks():
-    """Checks if 'ranks' is generated without any error."""
+def test_digitsplaces():
+    """Checks if 'digitsplaces' is generated without any error."""
     shared.machine.write_out(str(Sheet('', '', '',
-                                       filename=XML_SHEETS['ranks'])))
+                                       filename=XML_SHEETS['digitsplaces'])))
 
 
 def test_rectangles():

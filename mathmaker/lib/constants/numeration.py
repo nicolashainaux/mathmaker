@@ -55,40 +55,45 @@ TENTHS = Decimal("0.1")
 HUNDREDTHS = Decimal("0.01")
 THOUSANDTHS = Decimal("0.001")
 
-RANKS_HIGHER = [BILLIONS, HUNDREDS_OF_MILLIONS, TENS_OF_MILLIONS, MILLIONS,
-                HUNDREDS_OF_THOUSANDS, TENS_OF_THOUSANDS]
+DIGITSPLACES_HIGHER = [BILLIONS, HUNDREDS_OF_MILLIONS, TENS_OF_MILLIONS,
+                       MILLIONS, HUNDREDS_OF_THOUSANDS, TENS_OF_THOUSANDS]
 
-RANKS_LOWER = [THOUSANDS, HUNDREDS, TENS, UNITS]
+DIGITSPLACES_LOWER = [THOUSANDS, HUNDREDS, TENS, UNITS]
 
-RANKS_INTEGER = RANKS_HIGHER + RANKS_LOWER
+DIGITSPLACES_INTEGER = DIGITSPLACES_HIGHER + DIGITSPLACES_LOWER
 
-RANKS_DECIMAL = [TENTHS, HUNDREDTHS, THOUSANDTHS]
+DIGITSPLACES_DECIMAL = [TENTHS, HUNDREDTHS, THOUSANDTHS]
 
-RANKS_CONFUSING = [THOUSANDS, HUNDREDS, TENS, TENTHS, HUNDREDTHS, THOUSANDTHS]
+DIGITSPLACES_CONFUSING = [THOUSANDS, HUNDREDS, TENS, TENTHS, HUNDREDTHS,
+                          THOUSANDTHS]
 
-RANKS = RANKS_LOWER + RANKS_DECIMAL
+DIGITSPLACES = DIGITSPLACES_LOWER + DIGITSPLACES_DECIMAL
 
-RANKS_EXTENDED = RANKS_INTEGER + RANKS_DECIMAL
+DIGITSPLACES_EXTENDED = DIGITSPLACES_INTEGER + DIGITSPLACES_DECIMAL
 
-RANKS_WORDS = {BILLIONS: "billions",
-               HUNDREDS_OF_MILLIONS: "hundreds of millions",
-               TENS_OF_MILLIONS: "tens of millions", MILLIONS: "millions",
-               HUNDREDS_OF_THOUSANDS: "hundreds of thousands",
-               TENS_OF_THOUSANDS: "tens of thousands",
-               THOUSANDS: "thousands", HUNDREDS: "hundreds", TENS: "tens",
-               UNITS: "units", TENTHS: "tenths", HUNDREDTHS: "hundredths",
-               THOUSANDTHS: "thousandths"}
+DIGITSPLACES_WORDS = {BILLIONS: 'billions',
+                      HUNDREDS_OF_MILLIONS: 'hundreds of millions',
+                      TENS_OF_MILLIONS: 'tens of millions',
+                      MILLIONS: 'millions',
+                      HUNDREDS_OF_THOUSANDS: 'hundreds of thousands',
+                      TENS_OF_THOUSANDS: 'tens of thousands',
+                      THOUSANDS: 'thousands', HUNDREDS: 'hundreds',
+                      TENS: 'tens',
+                      UNITS: 'units', TENTHS: 'tenths',
+                      HUNDREDTHS: 'hundredths',
+                      THOUSANDTHS: 'thousandths'}
 
-RANKS_HOW_MANY = {BILLIONS: "How many billions",
-                  HUNDREDS_OF_MILLIONS: "How many hundreds of millions",
-                  TENS_OF_MILLIONS: "How many tens of millions",
-                  MILLIONS: "How many millions",
-                  HUNDREDS_OF_THOUSANDS: "How many hundreds of thousands",
-                  TENS_OF_THOUSANDS: "How many tens of thousands",
-                  THOUSANDS: "How many thousands",
-                  HUNDREDS: "How many hundreds",
-                  TENS: "How many tens",
-                  UNITS: "How many units",
-                  TENTHS: "How many tenths",
-                  HUNDREDTHS: "How many hundredths",
-                  THOUSANDTHS: "How many thousandths"}
+DIGITSPLACES_HOW_MANY = {BILLIONS: 'How many billions',
+                         HUNDREDS_OF_MILLIONS: 'How many hundreds of millions',
+                         TENS_OF_MILLIONS: 'How many tens of millions',
+                         MILLIONS: 'How many millions',
+                         HUNDREDS_OF_THOUSANDS: 'How many hundreds of '
+                         'thousands',
+                         TENS_OF_THOUSANDS: 'How many tens of thousands',
+                         THOUSANDS: 'How many thousands',
+                         HUNDREDS: 'How many hundreds',
+                         TENS: 'How many tens',
+                         UNITS: 'How many units',
+                         TENTHS: 'How many tenths',
+                         HUNDREDTHS: 'How many hundredths',
+                         THOUSANDTHS: 'How many thousandths'}

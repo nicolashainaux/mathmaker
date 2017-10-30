@@ -8,8 +8,8 @@ positional_notation: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: positional notation"
   - exercise: !!omap
-    - questions: rank direct -> digits_places (10)
-                 rank reversed -> digits_places (10)
+    - questions: digitplace direct -> digits_places (10)
+                 digitplace reversed -> digits_places (10)
 
 exam: !!omap
   - preset: "mental calculation"
@@ -19,8 +19,8 @@ exam: !!omap
                  multi direct -> intpairs_6to9×6to9 (2)
                  multi direct -> intpairs_6to6×9to9 (1)
                  multi direct -> intpairs_7to7×8to8 (1)
-                 rank direct -> digits_places (5)
-                 rank reversed -> digits_places (5)
+                 digitplace direct -> digits_places (5)
+                 digitplace reversed -> digits_places (5)
 
 W01a: !!omap
   - preset: "mental calculation slideshow"
@@ -46,26 +46,26 @@ W02a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> intpairs_6to9 (2)
-                 [3][rank direct -> digits_places (2)
-                     rank reversed -> digits_places (2)]
+                 [3][digitplace direct -> digits_places (2)
+                     digitplace reversed -> digits_places (2)]
 
 W02b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> intpairs_3to9 (3)
-                 rank direct -> digits_places (1)
-                 rank reversed -> digits_places (1)
+                 digitplace direct -> digits_places (1)
+                 digitplace reversed -> digits_places (1)
 
 W02c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> intpairs_6to9 (2)
-                 [3][rank direct -> digits_places (2)
-                     rank reversed -> digits_places (2)]
+                 [3][digitplace direct -> digits_places (2)
+                     digitplace reversed -> digits_places (2)]
 
 W02d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> intpairs_3to9 (3)
-                 rank direct -> digits_places (1)
-                 rank reversed -> digits_places (1)
+                 digitplace direct -> digits_places (1)
+                 digitplace reversed -> digits_places (1)
