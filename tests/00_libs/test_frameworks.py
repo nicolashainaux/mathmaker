@@ -343,6 +343,35 @@ def test__read_simple_question():
          [{'attr': '7.5pt', 'id': 'eighth id'}, ['label_5'], 4],
          [{'attr5': 'random value', 'id': 'yet another id'}, ['label_6'], 7],
          ]
+    assert _read_simple_question(
+        'percent direct '
+        '-> percents_{quarters|tenths|twentieths|ntenths} (20)')[0][1][0] \
+        in ['percents_quarters', 'percents_tenths', 'percents_twentieths',
+            'percents_ntenths']
+    example_with_block = _read_simple_question(
+        """[2][q id1, attr1={val1|val2} -> source1 (2)
+            q id2 -> source2 (1)]"""
+    )
+    assert ([{'attr1': 'val1', 'id': 'q id1'}, ['source1'], 1]
+            in example_with_block
+            or [{'attr1': 'val2', 'id': 'q id1'}, ['source1'], 1]
+            in example_with_block)
+    example_with_block = _read_simple_question(
+        """[2][{q id1|q id3} -> source1 (2)
+            q id2 -> source2 (1)]"""
+    )
+    assert ([{'id': 'q id1'}, ['source1'], 1]
+            in example_with_block
+            or [{'id': 'q id3'}, ['source1'], 1]
+            in example_with_block)
+    example_with_block = _read_simple_question(
+        """[2][{q id1} -> {source1|source2} (2)
+            q id2 -> source2 (1)]"""
+    )
+    assert ([{'id': 'q id1'}, ['source1'], 1]
+            in example_with_block
+            or [{'id': 'q id1'}, ['source2'], 1]
+            in example_with_block)
 
 
 def test__read_mix_question():

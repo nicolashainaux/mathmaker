@@ -654,6 +654,8 @@ def _dissolve_block(block):
     nb_of_q = int(block[0])
     raw_q_list = SIMPLE_QUESTION.findall(block[1])
     q_list = []
+    for i in range(len(raw_q_list)):
+        raw_q_list[i] = random.choice(_expand_alternatives(raw_q_list[i]))
     for q in raw_q_list:
         repeat_it = int(FETCH_NB.findall(q)[0])
         new_q = SUB_NB.sub(r'\1(1)', q)
@@ -704,7 +706,7 @@ def _read_simple_question(s):
     pairs = []
     for p in parsed:
         if p[0] == '':
-            pairs.append(p[2])
+            pairs.append(random.choice(_expand_alternatives(p[2])))
         else:  # block
             pairs += _dissolve_block(p[:2])
     if not len(pairs):
