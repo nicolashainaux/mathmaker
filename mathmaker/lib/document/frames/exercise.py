@@ -684,9 +684,9 @@ class Exercise(object):
                             if layout[2 * k + 1] == 'all':
                                 nb_of_q_in_this_cell = 1
                             else:
-                                I = 0 if undefined_nb_of_lines else i
+                                k = 0 if undefined_nb_of_lines else i
                                 nb_of_q_in_this_cell = \
-                                    layout[2 * k + 1][I * nb_of_cols + j]
+                                    layout[2 * k + 1][k * nb_of_cols + j]
                             cell_content = ""
                             for n in range(nb_of_q_in_this_cell):
                                 empty_cell = False

@@ -214,7 +214,7 @@ def install_gettext_translations(**kwargs):
     log = settings.mainlogger
     language = kwargs.get('language', settings.language)
     err_msg = 'gettext returned the following message:"{gettext_msg}"'\
-              '. It means the desired language ({l}) isn\'t available yet '\
+              '. It means the desired language ({L}) isn\'t available yet '\
               'in mathmaker. Can\'t continue. Stopping mathmaker.'
     try:
         gettext.translation(__software_name__,
@@ -222,8 +222,8 @@ def install_gettext_translations(**kwargs):
                             [language]).install()
         settings.language = language
     except IOError as msg:
-        log.critical(err_msg.format(gettext_msg=msg, l=language))
-        raise EnvironmentError(err_msg.format(gettext_msg=msg, l=language))
+        log.critical(err_msg.format(gettext_msg=msg, L=language))
+        raise EnvironmentError(err_msg.format(gettext_msg=msg, L=language))
     return True
 
 

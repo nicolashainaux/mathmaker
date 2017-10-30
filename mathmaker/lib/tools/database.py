@@ -625,9 +625,9 @@ def generate_values(source_id):
                 for n in coprime_generator(k)]
 
     elif source_id == 'alternate':
-        l = [('left', ), ('right', )]
-        random.shuffle(l)
-        return l * 20
+        lr = [('left', ), ('right', )]
+        random.shuffle(lr)
+        return lr * 20
 
     elif source_id == 'trigo_functions':
         return ['cos', 'cos', 'sin', 'sin', 'tan', 'tan']

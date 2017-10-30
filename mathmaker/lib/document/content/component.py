@@ -199,8 +199,8 @@ class structure(object):
         # nb1 = Decimal(str(nb1))
         # nb2 = Decimal(str(nb2))
 
-        w = Value(min([nb1, nb2]), unit=self.unit_length)
-        l = Value(max([nb1, nb2]), unit=self.unit_length)
+        W = Value(min([nb1, nb2]), unit=self.unit_length)
+        L = Value(max([nb1, nb2]), unit=self.unit_length)
 
         rectangle_name = "DCBA"
         if self.picture:
@@ -212,7 +212,7 @@ class structure(object):
                                     rectangle_name[1],
                                     rectangle_name[0]],
                                    read_name_clockwise=True)
-        self.rectangle.set_lengths([l, w])
+        self.rectangle.set_lengths([L, W])
         self.rectangle.setup_labels([False, False, True, True])
 
     def _setup_square(self, **kwargs):

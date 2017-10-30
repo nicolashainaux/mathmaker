@@ -374,9 +374,9 @@ def test_literal_item_substituted(literal_item):
 
 def test_unit_conversions_exceptions():
     """Check impossible conversions raise exceptions."""
-    l = Item(('+', 'y', 1), unit='m')
+    L = Item(('+', 'y', 1), unit='m')
     with pytest.raises(TypeError) as excinfo:
-        l.convert_to('cm')
+        L.convert_to('cm')
     assert str(excinfo.value) == 'Cannot convert a literal Item.'
     i = Item(('+', 6, 1), unit='m')
     with pytest.raises(TypeError) as excinfo:

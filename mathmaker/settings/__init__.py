@@ -50,13 +50,13 @@ def config_dbglogger(sd):
     """
     d = ext_dict(load_config('debug_conf', sd)).flat()
     for loggername, level in d.items():
-        l = logging.getLogger(loggername)
-        l.setLevel(getattr(logging, level))
-        l.addFilter(ContextFilter())
+        lg = logging.getLogger(loggername)
+        lg.setLevel(getattr(logging, level))
+        lg.addFilter(ContextFilter())
         if loggername in ['dbg.db']:
             raw_logger = logging.getLogger('raw')
-            l.addHandler(raw_logger.handlers[0])
-            l.propagate = False
+            lg.addHandler(raw_logger.handlers[0])
+            lg.propagate = False
 
 
 class default_object(object):

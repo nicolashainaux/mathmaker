@@ -3198,18 +3198,18 @@ class Fraction(Quotient):
                     position_of_the_last_minus_sign = ('f', 0)
             if len(final_numerator) >= 2 or len(final_denominator) >= 2:
                 log.debug("Entering minus signs simplification")
-                for I in [final_numerator, final_denominator]:
-                    for i in range(len(I)):
-                        if I[i].get_sign() == '-':
+                for K in [final_numerator, final_denominator]:
+                    for i in range(len(K)):
+                        if K[i].get_sign() == '-':
                             if position_of_the_last_minus_sign is None:
-                                if I == final_numerator:
+                                if K == final_numerator:
                                     position_of_the_last_minus_sign = ('n', i)
                                 else:
                                     position_of_the_last_minus_sign = ('d', i)
                             elif position_of_the_last_minus_sign[0] == 'f':
                                 self.set_sign('+')
-                                I[i].set_sign('+')
-                                I[i].set_force_display_sign_once(True)
+                                K[i].set_sign('+')
+                                K[i].set_force_display_sign_once(True)
                                 position_of_the_last_minus_sign = None
                                 log.debug(" [A] 2 signs set to '+' ")
                             elif position_of_the_last_minus_sign[0] == 'n':
@@ -3219,8 +3219,8 @@ class Fraction(Quotient):
                                 final_numerator[
                                     position_of_the_last_minus_sign[1]]\
                                     .set_force_display_sign_once(True)
-                                I[i].set_sign('+')
-                                I[i].set_force_display_sign_once(True)
+                                K[i].set_sign('+')
+                                K[i].set_force_display_sign_once(True)
                                 position_of_the_last_minus_sign = None
                                 log.debug(" [B] 2 signs set to '+' ")
                             elif position_of_the_last_minus_sign[0] == 'd':
@@ -3230,8 +3230,8 @@ class Fraction(Quotient):
                                 final_denominator[
                                     position_of_the_last_minus_sign[1]].\
                                     set_force_display_sign_once(True)
-                                I[i].set_sign('+')
-                                I[i].set_force_display_sign_once(True)
+                                K[i].set_sign('+')
+                                K[i].set_force_display_sign_once(True)
                                 position_of_the_last_minus_sign = None
                                 log.debug(" [C] 2 signs set to '+' ")
 

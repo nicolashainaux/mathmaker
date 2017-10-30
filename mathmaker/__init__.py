@@ -43,9 +43,9 @@ __contact__ = '{author} <{author_email}>'\
 __licence_info__ = '{software_ref} is free software. Its license is '\
                    '{software_license}.'
 __url_info__ = 'Further details on {software_website}'
-__info__ = '{software_name} {r}\nLicense: {l}\n{c} {contact}'\
+__info__ = '{software_name} {r}\nLicense: {li}\n{c} {contact}'\
            .format(software_name=__software_name__,
-                   r=__release__, l=__licence__, c=__copyright__,
+                   r=__release__, li=__licence__, c=__copyright__,
                    contact=__contact__)
 
 DAEMON_PORT = 9999
