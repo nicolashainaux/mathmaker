@@ -57,7 +57,8 @@ from mathmaker import settings
 from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words
 from mathmaker.lib.tools.frameworks import get_attributes
 from mathmaker.lib.tools.database import parse_sql_creation_query
-from mathmaker.lib.constants.numeration import DIGITSPLACES, DIGITSPLACES_DECIMAL
+from mathmaker.lib.constants.numeration import DIGITSPLACES
+from mathmaker.lib.constants.numeration import DIGITSPLACES_DECIMAL
 
 INTPAIRS_MAX = 1000
 SINGLEINTS_MAX = 1000
