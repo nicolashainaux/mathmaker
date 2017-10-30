@@ -38,7 +38,7 @@ It will add all entries:
 - a list of "clever" couples of (integer, decimal) (for multiplications)
 - a list of angles' ranges (around 0, 90, 180, 270)
 - the list of variants identification numbers (from 0 to 23 and 100 to 155,
-  so far) for calculation_order_of_operations questions
+  so far) for order_of_operations questions
 - all unit conversions, sorted in categories and levels,
 - decimals from 0.001 to 9.999
 - digits positions: one table for thousands to thousandths, another for
@@ -133,7 +133,7 @@ def __main__():
          '''CREATE TABLE int_deci_clever_pairs
             (id INTEGER, nb1 FLOAT, nb2 FLOAT, drawDate INTEGER,
              clever INTEGER)''',
-         '''CREATE TABLE calculation_order_of_operations_variants
+         '''CREATE TABLE order_of_operations_variants
             (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
          # DECIMAL(2, 3) stands for up to 2 integer digits,
          # up to 3 fractional digits
@@ -294,17 +294,17 @@ def __main__():
                    "VALUES(?, ?, ?)",
                    db_rows)
 
-    sys.stderr.write('Insert variants of calculation_order_of_operations...\n')
-    # Variant numbers for calculation_order_of_operations questions.
+    sys.stderr.write('Insert variants of order_of_operations...\n')
+    # Variant numbers for order_of_operations questions.
     db_rows = [(i, 0) for i in range(24)]
     db.executemany("INSERT "
-                   "INTO calculation_order_of_operations_variants"
+                   "INTO order_of_operations_variants"
                    "(nb1, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)
     db_rows = [(i + 100, 0) for i in range(88)]
     db.executemany("INSERT "
-                   "INTO calculation_order_of_operations_variants"
+                   "INTO order_of_operations_variants"
                    "(nb1, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)

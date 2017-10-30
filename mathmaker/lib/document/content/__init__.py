@@ -22,7 +22,7 @@
 
 """All possible questions."""
 from .algebra import expand_simple, expand_double
-from .calculation import calculation_order_of_operations, multi_direct
+from .calculation import order_of_operations, multi_direct
 from .calculation import multi_reversed, multi_hole, divi_direct, multi_clever
 from .calculation import addi_direct, subtr_direct, rank_direct, rank_reversed
 from .calculation import rank_numberof, vocabulary_simple_part_of_a_number
@@ -52,7 +52,7 @@ __all__ = ['expand_simple', 'expand_double',
            'rank_numberof', 'vocabulary_simple_part_of_a_number',
            'vocabulary_simple_multiple_of_a_number', 'vocabulary_multi',
            'vocabulary_divi', 'vocabulary_addi', 'vocabulary_subtr',
-           'fraction_of_a_rectangle', 'calculation_order_of_operations',
+           'fraction_of_a_rectangle', 'order_of_operations',
            'addi_hole', 'subtr_hole',
            'units_conversion', 'decimal_numerals',
            'area_rectangle', 'area_square', 'perimeter_rectangle',

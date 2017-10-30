@@ -78,7 +78,7 @@
         "drawDate",
         "clever"
     ],
-    "calculation_order_of_operations_variants": [
+    "order_of_operations_variants": [
         "id",
         "nb1",
         "drawDate"

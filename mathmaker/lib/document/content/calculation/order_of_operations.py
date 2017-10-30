@@ -1431,7 +1431,7 @@ class sub_object(component.structure):
             catalog[self.variant]()
         except KeyError:
             raise ValueError('Unknown variant identifier for '
-                             'calculation_order_of_operations: {}'
+                             'order_of_operations: {}'
                              .format(str(self.variant)))
 
         self.expression = Expression(shared.number_of_the_question,

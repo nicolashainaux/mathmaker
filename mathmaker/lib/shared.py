@@ -86,7 +86,7 @@ def init():
     int_deci_clever_pairs_source = database.source("int_deci_clever_pairs",
                                                    ["id", "nb1", "nb2"])
     order_of_operations_variants_source = database.source(
-        'calculation_order_of_operations_variants', ['id', 'nb1'])
+        'order_of_operations_variants', ['id', 'nb1'])
     unitspairs_source = database.source('units_conversions',
                                         ['id', 'unit1', 'unit2',
                                          'direction', 'category',

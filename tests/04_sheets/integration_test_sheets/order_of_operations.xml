@@ -4,7 +4,7 @@
 
 	<!-- Default values: id='generic' kind='' subkind='default' -->
 	<exercise text_exc="Calculate" text_ans="Example of solutions:">
-		<question id="calculation order_of_operations" subvariant="only_positive">
+		<question id="order of_operations" subvariant="only_positive">
 			<nb source="singleint_2to10;;intpairs_2to9" variant="0">1</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="1">1</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="2">1</nb>
@@ -57,7 +57,7 @@
 			<nb source="singleint_2to10;;intpairs_2to9" variant="23" nb_variant="decimal1">1</nb>
 		</question>
 
-		<question id="calculation order_of_operations" subvariant="only_positive">
+		<question id="order of_operations" subvariant="only_positive">
 		  <nb source="singleint_2to10;;intpairs_2to9" variant="100">1</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="101">1</nb>
 			<nb source="singleint_2to10;;intpairs_2to9" variant="102">1</nb>

@@ -582,7 +582,7 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
                     source_nb == 'table_3',
                     source_nb == 'table_4',
                     source_nb == 'bypass'])
-    elif q_id == 'calculation_order_of_operations':
+    elif q_id == 'order_of_operations':
         # We only check there are two sources
         return len(source_nb.split(sep=';;')) == 2
     elif q_id == 'fraction_of_a_rectangle':
