@@ -38,7 +38,8 @@ from mathmaker.lib.tools import parse_layout_descriptor
 
 # Characters allowed inside questions, numbers' sources and attributes
 # (including =)
-_QA_ICHARS = r'a-zA-Z0-9_×;:\.{}| ='
+_CHARS = r'a-zA-Z0-9_×;:\. =|'
+_QA_ICHARS = _CHARS + r'{}'
 # Separator between attributes (and question's id)
 _ATTR_SEP = r','
 # All characters forming a complete question or a complete numbers' source.
@@ -61,6 +62,7 @@ MIX_QUESTION = re.compile(
 NB_SOURCE = re.compile(r'([' + _QCHARS + r'\-]+)' + _FETCH_NB)
 FETCH_NB = re.compile(_FETCH_NB + r'$')
 SUB_NB = re.compile(r'([' + _LINE + r']+)' + _FETCH_NB + r'$')
+CURLY_BRACES_CONTENT = re.compile(r'{([' + _CHARS + r']+)}')
 
 
 def read_index():
@@ -616,6 +618,25 @@ def get_q_modifier(q_type, nb_source):
     elif q_type == 'rank_numberof' and nb_source.startswith('extdecimals'):
         d.update({'numberof': True})
     return d
+
+
+def _expand_alternatives(s):
+    """
+    Return all alternatives, like 'a_{b|c}' will return ['a_b', 'a_c'].
+
+    :param s: the string to parse
+    :type s: str
+    :rtype: list
+    """
+    alternatives = []
+    if '{' in s and '|' in s and '}' in s:
+        content = CURLY_BRACES_CONTENT.findall(s)[0]
+        p = '{' + content.replace('|', '\|') + '}'
+        for alt in content.split('|'):
+            alternatives += _expand_alternatives(re.sub(p, alt, s))
+    else:
+        alternatives.append(s)
+    return alternatives
 
 
 def _dissolve_block(block):

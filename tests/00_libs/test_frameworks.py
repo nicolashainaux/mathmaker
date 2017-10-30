@@ -36,6 +36,7 @@ from mathmaker.lib.tools.frameworks import load_sheet, read_layout
 from mathmaker.lib.tools.frameworks import _read_simple_question
 from mathmaker.lib.tools.frameworks import _read_mix_question, _read_mix_nb
 from mathmaker.lib.tools.frameworks import _get_attributes, _dissolve_block
+from mathmaker.lib.tools.frameworks import _expand_alternatives
 from mathmaker.lib.constants import MIN_ROW_HEIGHT, DEFAULT_LAYOUT
 
 
@@ -201,6 +202,28 @@ def test_load_sheet():
                       ('questions',
                        'expand double -> intpairs_2to9;;intpairs_2to9 (5)')
                       ]))])
+
+
+def test__expand_alternatives():
+    """Test alternatives are correctly replaced by one value."""
+    assert _expand_alternatives(
+        'percent direct '
+        '-> percents_{quarters|tenths|twentieths|ntenths} (20)') \
+        == ['percent direct -> percents_quarters (20)',
+            'percent direct -> percents_tenths (20)',
+            'percent direct -> percents_twentieths (20)',
+            'percent direct -> percents_ntenths (20)']
+    assert _expand_alternatives(
+        'percent {direct|reversed} '
+        '-> percents_{quarters|tenths|twentieths|ntenths} (20)') \
+        == ['percent direct -> percents_quarters (20)',
+            'percent direct -> percents_tenths (20)',
+            'percent direct -> percents_twentieths (20)',
+            'percent direct -> percents_ntenths (20)',
+            'percent reversed -> percents_quarters (20)',
+            'percent reversed -> percents_tenths (20)',
+            'percent reversed -> percents_twentieths (20)',
+            'percent reversed -> percents_ntenths (20)']
 
 
 def test__dissolve_block_exceptions():
