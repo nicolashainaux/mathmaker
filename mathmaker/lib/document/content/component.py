@@ -82,6 +82,7 @@ class structure(object):
         self.newline = '\\newline'
         self.parallel_to = '$\parallel$'
         self.belongs_to = '$\in$'
+        self.percent_symbol = '\%'
         self.nb_source = kwargs.get('nb_source')
         self.preset = kwargs.get('preset', 'default')
         if 'nb_variant' in kwargs and kwargs['nb_variant'] == 'decimal':
