@@ -24,12 +24,13 @@ import random
 from decimal import Decimal
 from string import ascii_uppercase as alphabet
 
+from mathmakerlib.calculus.unit import LENGTH_UNITS
+
 from mathmaker.lib import shared
 from mathmaker.lib.constants import pythagorean
 from mathmaker.lib.constants.numeration import (PRECISION, HUNDREDTH, TENTH,
                                                 UNIT, THOUSANDTH,
                                                 TEN_THOUSANDTH)
-from mathmaker.lib.constants.units import LENGTH_UNITS
 from .Q_Structure import Q_Structure
 from mathmaker.lib.core.base_calculus import Item, Sum
 from mathmaker.lib.core.root_calculus import Value

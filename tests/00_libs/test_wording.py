@@ -22,8 +22,9 @@
 
 import pytest
 
+from mathmakerlib.calculus.unit import MASS_UNITS
+
 from mathmaker.lib import shared
-from mathmaker.lib.constants.units import MASS_UNITS
 from mathmaker.lib.tools.wording import (wrap, unwrapped, is_wrapped,
                                          is_wrapped_P,
                                          is_wrapped_p, is_unit, is_unitN,

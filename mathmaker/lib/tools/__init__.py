@@ -31,8 +31,8 @@ from decimal import Decimal
 from tempfile import TemporaryFile
 
 
-from mathmaker.lib.constants.units import (LENGTH_UNITS, MASS_UNITS,
-                                           CAPACITY_UNITS, PHYSICAL_QUANTITIES)
+from mathmakerlib.calculus.unit import LENGTH_UNITS, MASS_UNITS
+from mathmakerlib.calculus.unit import CAPACITY_UNITS, PHYSICAL_QUANTITIES
 
 
 def load_config(file_tag, settingsdir):

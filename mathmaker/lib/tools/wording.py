@@ -26,11 +26,12 @@ import random
 import copy
 import re
 
+from mathmakerlib.calculus.unit import UNIT_KINDS, COMMON_LENGTH_UNITS
+from mathmakerlib.calculus.unit import CURRENCIES_DICT
+
 from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.core.root_calculus import Unit, Value
-from mathmaker.lib.constants.units import (UNIT_KINDS, COMMON_LENGTH_UNITS,
-                                           CURRENCIES_DICT)
 
 
 def wrap(word: str, braces='{}', o_str=None, e_str=None) -> str:

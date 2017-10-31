@@ -26,6 +26,7 @@ from decimal import Decimal
 from string import ascii_lowercase as alphabet
 
 from mathmakerlib.calculus.number import Number, is_integer
+from mathmakerlib.calculus.unit import COMMON_LENGTH_UNITS
 
 from mathmaker.lib.core.root_calculus import Unit, Value
 from mathmaker.lib.core.base_calculus import Product, Quotient, Item
@@ -35,7 +36,6 @@ from mathmaker.lib.core.geometry import (Rectangle, Square, RightTriangle,
                                          RectangleGrid)
 from mathmaker.lib import shared
 from mathmaker.lib.constants import BOOLEAN
-from mathmaker.lib.constants.units import COMMON_LENGTH_UNITS
 from mathmaker.lib.tools import rotate, fix_math_style2_fontsize
 from mathmaker.lib.tools.wording import setup_wording_format_of
 

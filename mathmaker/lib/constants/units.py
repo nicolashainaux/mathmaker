@@ -20,28 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-LENGTH_UNITS = ['km', 'hm', 'dam', 'm', 'dm', 'cm', 'mm', 'µm', 'nm', 'pm']
-CAPACITY_UNITS = ['kL', 'hL', 'daL', 'L', 'dL', 'cL', 'mL', 'µL', 'nL', 'pL']
-MASS_UNITS = ['kg', 'hg', 'dag', 'g', 'dg', 'cg', 'mg', 'µg', 'ng', 'pg']
-PHYSICAL_QUANTITIES = {'length': LENGTH_UNITS,
-                       'capacity': CAPACITY_UNITS,
-                       'mass': MASS_UNITS}
-COMMON_LENGTH_UNITS = LENGTH_UNITS[:-3]
-COMMON_CAPACITY_UNITS = CAPACITY_UNITS[1:-3]
-COMMON_MASS_UNITS = MASS_UNITS[:-3]
-ANGLE_UNITS = ['\\textdegree']
-CURRENCY_UNITS = ['€', '\officialeuro',
-                  '$', '\\textdollar',
-                  '£', '\\textsterling']
-CURRENCIES_DICT = {'euro': '\officialeuro',
-                   'dollar': '\\textdollar',
-                   'sterling': '\\textsterling'}
-AVAILABLE_UNITS = LENGTH_UNITS + CAPACITY_UNITS + MASS_UNITS + ANGLE_UNITS\
-    + CURRENCY_UNITS
-UNIT_KINDS = {'length': COMMON_LENGTH_UNITS,
-              'mass': COMMON_MASS_UNITS,
-              'capacity': COMMON_CAPACITY_UNITS,
-              'currency': CURRENCY_UNITS}
 VALUE_AND_UNIT_SEPARATOR = {'km': "~", 'hm': "~", 'dam': "~", 'm': "~",
                             'dm': "~", 'cm': "~", 'mm': "~", 'µm': "~",
                             'nm': "~", 'pm': "~",
