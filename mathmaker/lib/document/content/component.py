@@ -125,7 +125,7 @@ class structure(object):
             if isinstance(nb_list[i], Quotient):
                 setattr(self, 'nb' + str(i + 1), nb_list[i])
             else:
-                setattr(self, 'nb' + str(i + 1), Decimal(str(nb_list[i])))
+                setattr(self, 'nb' + str(i + 1), Number(str(nb_list[i])))
         self.nb_nb = len(nb_list)
 
     def _setup_nb_variants(self, **kwargs):
