@@ -121,11 +121,31 @@ class LaTeX(Structure.Structure):
                                     sisetup=sisetup)
 
         else:
-            result += r'\documentclass[a4paper,fleqn,12pt]{article}' + '\n'
-            result += r'\usepackage{fontspec}' + '\n'
+            result += r'\documentclass[a4paper,fleqn,12pt]{article}' + '\n\n'
+            if settings.round_letters_in_math_expr:
+                result += r'\usepackage{lxfonts}' + '\n'
             if settings.font is not None:
-                result += r'\setmainfont{' + settings.font + '}\n'
-                result += r'\newfontfamily\configfont{' + settings.font + '}\n'
+                result += r"""
+\usepackage[no-math]{{fontspec}}
+
+\AtEndPreamble{{\setmainfont{font_name}[NFSSFamily=fontid]}}
+
+\DeclareSymbolFont{{mynumbers}}      {{TU}}{{fontid}}{{m}}{{n}}
+\SetSymbolFont    {{mynumbers}}{{bold}}{{TU}}{{fontid}}{{bx}}{{n}}
+
+\AtBeginDocument{{
+\DeclareMathSymbol{{0}}{{\mathalpha}}{{mynumbers}}{{`0}}
+\DeclareMathSymbol{{1}}{{\mathalpha}}{{mynumbers}}{{`1}}
+\DeclareMathSymbol{{2}}{{\mathalpha}}{{mynumbers}}{{`2}}
+\DeclareMathSymbol{{3}}{{\mathalpha}}{{mynumbers}}{{`3}}
+\DeclareMathSymbol{{4}}{{\mathalpha}}{{mynumbers}}{{`4}}
+\DeclareMathSymbol{{5}}{{\mathalpha}}{{mynumbers}}{{`5}}
+\DeclareMathSymbol{{6}}{{\mathalpha}}{{mynumbers}}{{`6}}
+\DeclareMathSymbol{{7}}{{\mathalpha}}{{mynumbers}}{{`7}}
+\DeclareMathSymbol{{8}}{{\mathalpha}}{{mynumbers}}{{`8}}
+\DeclareMathSymbol{{9}}{{\mathalpha}}{{mynumbers}}{{`9}}
+}}
+""".format(font_name='{' + settings.font + '}')
             result += r'\usepackage{polyglossia}' + '\n'
             result += r'\setmainlanguage{' + self.language + '}\n'
             if self.language_code in latex.LANGUAGE_OPTIONS:
@@ -135,18 +155,16 @@ class LaTeX(Structure.Structure):
                 result += ''.join(['\setkeys{', self.language, '}'
                                    '{', lang_options, '}\n'])
             result += '% ' + _('To display units correctly') + '\n'
-            result += r'\usepackage[detect-all]{siunitx}' + '\n'
+            result += r'\usepackage{siunitx}' + '\n'
             sisetup_dict = {}
             if settings.language.startswith('fr'):
                 sisetup_dict.update({'locale': 'FR'})
-            if settings.font is not None:
-                sisetup_dict.update({'text-rm': r'\configfont'})
-            if len(sisetup_dict):
-                sisetup_str = ', '.join([k + ' = ' + sisetup_dict[k]
-                                         for k in sisetup_dict])
-                result += '\AtBeginDocument{\n'
-                result += '\sisetup{' + sisetup_str + '}\n'
-                result += '}\n'
+            sisetup_dict.update({'mode': 'text'})
+            sisetup_str = ', '.join([k + ' = ' + sisetup_dict[k]
+                                     for k in sisetup_dict])
+            result += '\AtBeginDocument{\n'
+            result += '\sisetup{' + sisetup_str + '}\n'
+            result += '}\n'
             result += '% ' + _('To strike out numbers ') + '\n'
             result += r'\usepackage{cancel}' + '\n'
             result += '% ' + _('To get a better control on floats '
@@ -213,8 +231,6 @@ class LaTeX(Structure.Structure):
             result += '\\newcommand{\\razcompteur}{\setcounter{n}{0}}\n\n'
             result += r'\usetikzlibrary{calc}' + '\n'
             result += r'\epstopdfsetup{outdir=./}' + '\n'
-            if settings.round_letters_in_math_expr:
-                result += r'\usepackage{lxfonts}' + '\n'
 
             if settings.language.startswith('fr'):
                 result += r'\renewcommand{\parallel}{' \
@@ -231,8 +247,8 @@ class LaTeX(Structure.Structure):
     #   @brief Writes to the output the command to begin the document
     def write_document_begins(self, variant='default'):
         output_str = "\\begin{document}\n"
-        if settings.font is not None and variant != 'slideshow':
-            output_str += "\\fontspec{" + settings.font + "}\n"
+        # if settings.font is not None and variant != 'slideshow':
+        #     output_str += "\\fontspec{" + settings.font + "}\n"
         if self.redirect_output_to_str:
             return output_str
         else:
