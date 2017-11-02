@@ -38,7 +38,7 @@ from mathmaker.lib.tools import parse_layout_descriptor
 
 # Characters allowed inside questions, numbers' sources and attributes
 # (including =)
-_CHARS = r'a-zA-Z0-9_×;:\. =|'
+_CHARS = r'a-zA-Z0-9_×;:%\. =|'
 _QA_ICHARS = _CHARS + r'{}'
 # Separator between attributes (and question's id)
 _ATTR_SEP = r','

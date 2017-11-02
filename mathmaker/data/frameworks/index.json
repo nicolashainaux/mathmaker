@@ -189,60 +189,10 @@
         "01_white1",
         "W02d"
     ],
-    "04_yellow1_multiplications": [
+    "04_yellow1_percentages": [
         "mental_calculation",
         "04_yellow1",
-        "multiplications"
-    ],
-    "04_yellow1_positional_notation": [
-        "mental_calculation",
-        "04_yellow1",
-        "positional_notation"
-    ],
-    "04_yellow1_exam": [
-        "mental_calculation",
-        "04_yellow1",
-        "exam"
-    ],
-    "04_yellow1_W01a": [
-        "mental_calculation",
-        "04_yellow1",
-        "W01a"
-    ],
-    "04_yellow1_W01b": [
-        "mental_calculation",
-        "04_yellow1",
-        "W01b"
-    ],
-    "04_yellow1_W01c": [
-        "mental_calculation",
-        "04_yellow1",
-        "W01c"
-    ],
-    "04_yellow1_W01d": [
-        "mental_calculation",
-        "04_yellow1",
-        "W01d"
-    ],
-    "04_yellow1_W02a": [
-        "mental_calculation",
-        "04_yellow1",
-        "W02a"
-    ],
-    "04_yellow1_W02b": [
-        "mental_calculation",
-        "04_yellow1",
-        "W02b"
-    ],
-    "04_yellow1_W02c": [
-        "mental_calculation",
-        "04_yellow1",
-        "W02c"
-    ],
-    "04_yellow1_W02d": [
-        "mental_calculation",
-        "04_yellow1",
-        "W02d"
+        "percentages"
     ],
     "03_yellow_complements": [
         "mental_calculation",

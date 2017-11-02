@@ -395,6 +395,8 @@ def classify_tag(tag):
         return 'single_int'
     elif tag.startswith('singledeci1_'):
         return 'single_deci1'
+    elif tag.endswith(r'%of...'):
+        return 'percentage'
     elif tag in ['int_deci_clever_pairs',
                  'int_irreducible_frac', 'nothing',
                  'decimal_and_10_100_1000_for_multi',
@@ -515,6 +517,108 @@ def preprocess_single_nb_tag(tag):
     return {'nb1_min': n1, 'nb1_max': n2}
 
 
+def preprocess_percentage_tag(tag, qkw=None):
+    """
+    Deal with quarters, halves... numbers' sources.
+
+    As the initial tag (source_id) may be modified, it is returned along the
+    tag to use, in first position, so all return statements are of the form
+    return tag, ...
+    """
+    if qkw is None:
+        qkw = {}
+    if '|' in tag:
+        possible_values = tag[:-len('%of...')].split('|')
+        value = shared.single_ints_source.next(nb1_in=possible_values)
+        tag = str(value) + '%of...'
+    if tag in [r'25%of...', r'75%of...']:
+        if qkw.get('level', 'normal') == 'easy':
+            return tag, 'multiplesof4_2to9'
+        else:
+            return tag, 'multiplesof2_2to100'
+    elif tag == r'50%of...':
+        if qkw.get('level', 'normal') == 'easy':
+            return tag, 'multiplesof2_2to100'
+        else:
+            return tag, 'singleint_12to200'
+    elif tag == r'10%of...':
+        if qkw.get('nb_variant', 'default').startswith('decimal'):
+            return tag, random.choice(['singleint_1to9',
+                                       'singleint_11to19',
+                                       'singleint_21to29',
+                                       'singleint_31to39',
+                                       'singleint_41to49',
+                                       'singleint_51to59',
+                                       'singleint_61to69',
+                                       'singleint_71to79',
+                                       'singleint_81to89',
+                                       'singleint_91to99',
+                                       'singleint_101to109',
+                                       'singleint_111to119',
+                                       'singleint_121to129',
+                                       'singleint_131to139',
+                                       'singleint_141to149',
+                                       'singleint_151to159',
+                                       'singleint_161to169',
+                                       'singleint_171to179',
+                                       'singleint_181to189',
+                                       'singleint_191to199'])
+        if qkw.get('level', 'normal') == 'easy':
+            choice = random.choice([1, 1, 1, 1, 1, 1, 1, 2, 2, 3])
+            if choice == 1:
+                return tag, 'singleint_12to200'
+            elif choice == 2:
+                return tag, random.choice(['multiplesof10_2to9',
+                                           'multiplesof10_11to19',
+                                           'multiplesof10_21to29',
+                                           'multiplesof10_31to39',
+                                           'multiplesof10_41to49',
+                                           'multiplesof10_51to59',
+                                           'multiplesof10_61to69',
+                                           'multiplesof10_71to79',
+                                           'multiplesof10_81to89',
+                                           'multiplesof10_91to99'])
+            else:
+                return tag, 'multiplesof100_2to10'
+        else:
+            choice = random.choice([1, 1, 1, 1, 2, 2, 2, 2, 3, 4])
+            if choice == 1:
+                return tag, 'singleint_1to9'
+            elif choice == 2:
+                return tag, random.choice(['singleint_11to19',
+                                           'singleint_21to29',
+                                           'singleint_31to39',
+                                           'singleint_41to49',
+                                           'singleint_51to59',
+                                           'singleint_61to69',
+                                           'singleint_71to79',
+                                           'singleint_81to89',
+                                           'singleint_91to99'])
+            elif choice == 3:
+                return tag, random.choice(['multiplesof10_2to9',
+                                           'multiplesof10_11to19',
+                                           'multiplesof10_21to29',
+                                           'multiplesof10_31to39',
+                                           'multiplesof10_41to49',
+                                           'multiplesof10_51to59',
+                                           'multiplesof10_61to69',
+                                           'multiplesof10_71to79',
+                                           'multiplesof10_81to89',
+                                           'multiplesof10_91to99'])
+            else:
+                return tag, 'multiplesof100_2to10'
+    elif tag == r'5%of...':
+        if qkw.get('level', 'normal') == 'easy':
+            return tag, 'multiplesof2_2to100'
+        else:
+            return tag, 'singleint_12to200'
+    elif tag in [r'20%of...', r'30%of...', r'40%of...', r'60%of...',
+                 r'70%of...', r'80%of...', r'90%of...']:
+        return tag, 'multiplesof{}_2to9'.format(tag[0])
+    else:  # any other percent value: 1%, 2%,... 7%,... 12%,... 15% etc.
+        raise NotImplementedError
+
+
 def preprocess_units_pairs_tag(tag, last_draw=None, qkw=None):
     """
     Create the SQL query according to last_draw content and possible qkw.
@@ -616,6 +720,58 @@ def postprocess_decimalfractionssums_query(qr, qkw=None, **kwargs):
                      for i in range(len(decimals) - 1)])
 
 
+def postprocess_percentage_query(qr, source_id, qkw=None, **kwargs):
+    """
+    Create the two numbers from the query result, depending on source_id.
+
+    :param qr: the result of the query (containing the number(s))
+    :type qr: tuple
+    :param source_id: the original source id
+    :type source_id: str
+    :param qkw: the question's keywords (attributes)
+    :type qkw: dict
+    :rtype: tuple
+    """
+    if source_id in [r'25%of...', r'75%of...', r'50%of...', r'10%of...',
+                     r'5%of...']:
+        if isinstance(qr, tuple) and len(qr) == 2:
+            n2 = Number(str(qr[0])) * Number(str(qr[1]))
+        else:  # qr should be a single number
+            n2 = Number(str(qr))
+        if source_id == r'25%of...':
+            n1 = Number(25)
+        elif source_id == r'75%of...':
+            n1 = Number(75)
+        elif source_id == r'50%of...':
+            n1 = Number(50)
+        elif source_id == r'10%of...':
+            n1 = Number(10)
+        elif source_id == r'5%of...':
+            n1 = Number(5)
+        return (n1, n2)
+    elif source_id in [r'20%of...', r'30%of...', r'40%of...', r'60%of...',
+                       r'70%of...', r'80%of...', r'90%of...']:
+        # In such cases, we get a pair of int, so it's always a tuple
+        if int(source_id[0]) == qr[0]:
+            n1, n2 = qr
+        else:
+            n2, n1 = qr
+        n1, n2 = Number(n1), Number(n2)
+        if qkw.get('level', 'normal') == 'easy':
+            n2 *= 10
+        elif (qkw.get('level', 'normal') == 'normal'
+              and not qkw.get('nb_variant', 'default').startswith('decimal')
+              and random.choice([True, False])):
+            if random.choice([True, False]):
+                n2 *= 10
+            else:
+                n2 *= 100
+        n1 *= 10
+        return (n1, n2)
+    else:  # any other source
+        raise NotImplementedError
+
+
 ##
 #   @brief  Generates a list of values to be used
 #   @todo   Several cases should be factorized or maybe later moved to the db
@@ -624,7 +780,7 @@ def generate_values(source_id):
         return [(k, Fraction((n, k))) for k in [i + 2 for i in range(18)]
                 for n in coprime_generator(k)]
 
-    elif source_id == 'alternate':
+    elif source_id.startswith('alternate'):
         lr = [('left', ), ('right', )]
         random.shuffle(lr)
         return lr * 20
@@ -1000,5 +1156,19 @@ class mc_source(object):
                                                                 **kwargs))
             return postprocess_decimalfractionssums_query(
                 shared.decimals_source.next(**kwargs), qkw=qkw, **kwargs)
+        elif tag_classification == 'percentage':
+            source_id, t = preprocess_percentage_tag(source_id, qkw=qkw)
+            tc = classify_tag(t)
+            if tc == 'int_pairs':
+                kwargs.update(preprocess_int_pairs_tag(t, qkw=qkw))
+                return postprocess_percentage_query(
+                    shared.int_pairs_source.next(**kwargs), source_id,
+                    qkw=qkw, **kwargs)
+            elif tc == 'single_int':
+                kwargs.update(preprocess_single_nb_tag(t))
+                return postprocess_percentage_query(
+                    shared.single_ints_source.next(**kwargs), source_id,
+                    qkw=qkw, **kwargs)
+
         elif tag_classification == 'nothing':
             return ()
