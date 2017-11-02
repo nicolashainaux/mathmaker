@@ -54,7 +54,7 @@ def init():
     global number_of_the_question
     global order_of_operations_variants_source
     global unitspairs_source
-    global alternate_source
+    global alternate_source  # , alternate_source2
     global decimals_source
     global extdecimals_source
 
@@ -103,6 +103,7 @@ def init():
     extdecimals_source = sub_source('extdecimals', ondemand=True,
                                     generator_fct=generate_random_decimal_nb)
     alternate_source = sub_source('alternate')
+    # alternate_source2 = sub_source('alternate2')
     trigo_functions_source = sub_source('trigo_functions')
     trigo_vocabulary_source = sub_source('trigo_vocabulary')
     int_fracs_source = sub_source('int_irreducible_frac')
