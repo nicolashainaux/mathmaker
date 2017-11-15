@@ -460,6 +460,8 @@ def preprocess_int_pairs_tag(tag, qkw=None):
             step = 10
         d = {'nb2': upper_bound, 'nb1_lt': upper_bound // 2 + 1,
              'prevails': [str(upper_bound)]}
+        if upper_bound > 10:
+            d.update({'diff7atleast': True})
         if step != 1:
             d.update({'nb1_notmod': step})
     # 'table_11' is a shortcut for a special range
