@@ -264,8 +264,13 @@ def get_nb_sources_from_question_info(q_i):
     questions_sources = q_i.nb_source
     if len(q_i.nb_source) == 1:
         if q_i.nb_source[0].startswith('properfraction'):
+            # properfraction_2to3×3to10 means a fraction of numerator and
+            # denominator from 3 to 10 (though numerator will be maximum 1 less
+            # the denominator), both multiplied by a coefficient between 2 and
+            # 3.
             if '×' not in q_i.nb_source[0]:
                 # No multiplicative coefficient is equivalent to a 1
+                # properfraction_3to10 is same as properfraction_1to1×3to10
                 chunks = q_i.nb_source[0].split(sep='_')
                 q_i.nb_source[0] = '{}_{}{}'.format(chunks[0],
                                                     '1to1×',
