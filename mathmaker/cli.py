@@ -25,6 +25,8 @@ import os
 import argparse
 import locale
 
+from mathmakerlib import pkg_required
+
 from mathmaker import __info__, __software_name__
 from mathmaker import settings
 from mathmaker.lib import shared
@@ -38,6 +40,7 @@ from mathmaker.lib.tools.xml import get_xml_sheets_paths
 
 
 def entry_point():
+    pkg_required.init()
     settings.init()
     XML_SHEETS = get_xml_sheets_paths()
     YAML_SHEETS = read_index()
