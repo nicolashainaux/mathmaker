@@ -24,7 +24,7 @@ import random
 from string import ascii_uppercase as alphabet
 from abc import ABCMeta, abstractmethod
 
-from mathmakerlib.calculus.number import is_integer, is_number
+from mathmakerlib import is_integer, is_number
 
 from mathmaker import settings
 from mathmaker.lib import shared

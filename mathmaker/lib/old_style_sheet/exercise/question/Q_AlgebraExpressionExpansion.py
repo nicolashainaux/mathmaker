@@ -22,7 +22,7 @@
 
 import random
 
-from mathmakerlib.calculus.number import is_natural
+from mathmakerlib import is_natural
 
 from mathmaker.lib import shared
 from mathmaker.lib.constants import RANDOMLY

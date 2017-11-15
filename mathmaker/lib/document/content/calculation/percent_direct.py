@@ -20,8 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmakerlib.calculus.unit import Unit, physical_quantity
-from mathmakerlib.calculus.number import Number
+from mathmakerlib import Number, Unit, physical_quantity
 
 from mathmaker.lib import shared
 from mathmaker.lib.document.content import component

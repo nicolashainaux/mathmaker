@@ -28,7 +28,7 @@ from string import ascii_lowercase as alphabet
 
 from intspan import intspan
 from intspan.core import ParseError
-from mathmakerlib.calculus.number import is_integer
+from mathmakerlib import is_integer
 
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK, COLORED_ANSWER

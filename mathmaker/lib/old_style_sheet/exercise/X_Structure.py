@@ -22,7 +22,7 @@
 
 from abc import ABCMeta, abstractmethod
 
-from mathmakerlib.calculus.number import is_integer
+from mathmakerlib import is_integer
 
 from mathmaker.lib import shared
 

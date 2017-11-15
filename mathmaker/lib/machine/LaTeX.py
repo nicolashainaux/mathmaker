@@ -27,7 +27,7 @@ import glob
 import subprocess
 from tempfile import NamedTemporaryFile
 
-from mathmakerlib.calculus.number import is_integer, is_number
+from mathmakerlib import is_integer, is_number
 
 from mathmaker import settings
 from mathmaker.lib.constants import latex
