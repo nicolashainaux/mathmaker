@@ -25,7 +25,7 @@ import math
 import random
 from decimal import Decimal
 
-from mathmakerlib import is_integer, is_number
+from mathmakerlib.calculus import is_integer, is_number
 
 
 # DIVISORS frequently used by the children

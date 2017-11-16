@@ -29,7 +29,7 @@
 import math
 from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN
 
-from mathmakerlib import is_number, Number
+from mathmakerlib.calculus import is_number, Number
 
 from mathmaker.lib.core.base import Drawable, Printable
 from mathmaker.lib.core.base_calculus import Value

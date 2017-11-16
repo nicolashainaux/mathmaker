@@ -22,7 +22,7 @@
 
 import random
 
-from mathmakerlib import is_number
+from mathmakerlib.calculus import is_number
 
 from mathmaker.lib.core.base_calculus import Monomial
 from .X_Structure import X_Structure

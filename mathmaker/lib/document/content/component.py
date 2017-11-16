@@ -25,7 +25,7 @@ import copy
 from decimal import Decimal
 from string import ascii_lowercase as alphabet
 
-from mathmakerlib import Number, is_integer
+from mathmakerlib.calculus import Number, is_integer
 from mathmakerlib.calculus.unit import COMMON_LENGTH_UNITS
 
 from mathmaker.lib.core.root_calculus import Unit, Value

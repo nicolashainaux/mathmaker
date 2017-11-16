@@ -23,9 +23,9 @@
 import random
 from decimal import Decimal
 
-from mathmakerlib import is_integer, move_fracdigits_to
-from mathmakerlib import remove_fracdigits_from, fix_fracdigits
-from mathmakerlib import Number
+from mathmakerlib.calculus import is_integer, move_fracdigits_to
+from mathmakerlib.calculus import remove_fracdigits_from, fix_fracdigits
+from mathmakerlib.calculus import Number
 
 from mathmaker.lib import shared
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Division,

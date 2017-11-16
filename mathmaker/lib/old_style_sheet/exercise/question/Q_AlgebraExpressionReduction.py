@@ -22,7 +22,7 @@
 
 import random
 
-from mathmakerlib import is_integer, is_natural
+from mathmakerlib.calculus import is_integer, is_natural
 
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure

@@ -31,7 +31,7 @@ import copy
 import random
 from decimal import Decimal
 
-from mathmakerlib import Number, is_number
+from mathmakerlib.calculus import Number, is_number
 
 from mathmaker.lib.constants import EQUAL_PRODUCTS
 from mathmaker.lib.tools import parse_layout_descriptor

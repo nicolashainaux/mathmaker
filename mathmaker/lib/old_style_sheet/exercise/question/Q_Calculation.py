@@ -22,7 +22,7 @@
 
 import random
 
-from mathmakerlib import is_natural, is_number
+from mathmakerlib.calculus import is_natural, is_number
 
 from mathmaker.lib.tools.maths import gcd, coprimes_to, not_coprimes_to
 from mathmaker.lib import shared

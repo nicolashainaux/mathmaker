@@ -27,7 +27,7 @@ import random
 import warnings
 from decimal import Decimal
 
-from mathmakerlib import is_integer, is_number, Number
+from mathmakerlib.calculus import is_integer, is_number, Number
 
 from mathmaker import settings
 from mathmaker.lib import shared
