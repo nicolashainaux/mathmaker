@@ -36,6 +36,7 @@ def init():
     global mini_problems_wordings_source
     global markup
     global int_pairs_source
+    global simple_fractions_source
     global single_ints_source
     global single_deci1_source
     global angle_ranges_source
@@ -80,6 +81,8 @@ def init():
                                                     ["wording_context",
                                                      "wording"])
     int_pairs_source = database.source("int_pairs", ["id", "nb1", "nb2"])
+    simple_fractions_source = database.source('simple_fractions',
+                                              ['id', 'nb1', 'nb2'])
     single_ints_source = database.source("single_ints", ["id", "nb1"])
     single_deci1_source = database.source("single_deci1", ["id", "nb1"])
     angle_ranges_source = database.source("angle_ranges", ["id", "nb1", "nb2"])

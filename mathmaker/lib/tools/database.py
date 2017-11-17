@@ -404,7 +404,8 @@ def classify_tag(tag):
                  'decimal_and_one_digit_for_multi',
                  'decimal_and_one_digit_for_divi',
                  'unitspairs', 'digits_places', 'fracdigits_places',
-                 'decimals', 'decimalfractionssums', 'extdecimals']:
+                 'decimals', 'decimalfractionssums', 'extdecimals',
+                 'simple_fractions']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -1121,6 +1122,8 @@ class mc_source(object):
         if tag_classification == 'int_pairs':
             kwargs.update(preprocess_int_pairs_tag(source_id, qkw=qkw))
             return shared.int_pairs_source.next(**kwargs)
+        if tag_classification == 'simple_fractions':
+            return shared.simple_fractions_source.next(**kwargs)
         elif tag_classification.startswith('single'):
             kwargs.update(preprocess_single_nb_tag(source_id))
             return shared.single_ints_source.next(**kwargs)
