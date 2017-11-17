@@ -24,6 +24,8 @@ import os
 import gettext
 import locale
 
+from mathmakerlib import pkg_required
+
 from mathmaker import __software_name__
 from mathmaker import settings
 from mathmaker.lib import shared
@@ -37,3 +39,4 @@ settings.outputdir = settings.projectdir + 'outfiles/'
 if not os.path.isdir(settings.outputdir):
     os.mkdir(settings.outputdir, mode=0o777)
 shared.init()
+pkg_required.init()
