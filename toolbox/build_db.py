@@ -51,9 +51,10 @@ import os
 import sys
 import json
 import sqlite3
+from math import gcd
 from decimal import Decimal
 
-from mathmakerlib.calculus import Number, gcd
+from mathmakerlib.calculus import Number
 
 from mathmaker import settings
 from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words

@@ -38,7 +38,7 @@ from mathmakerlib.calculus import is_integer, is_natural, is_number
 from mathmaker import settings
 from mathmaker.lib.core.root_calculus import Calculable, Value, Exponented
 from mathmaker.lib.tools import difference_of_orders_of_magnitude
-from mathmaker.lib.tools.maths import (sign_of_product, gcd, pupil_gcd,
+from mathmaker.lib.tools.maths import (sign_of_product, pupil_gcd,
                                        lcm_of_the_list, is_even, is_uneven,
                                        prime_factors,
                                        ZERO_POLYNOMIAL_DEGREE)
@@ -3052,10 +3052,10 @@ class Fraction(Quotient):
                     if not this_denominators_factor_has_been_processed[j] \
                        and not this_numerators_factor_has_been_processed[i]:
                         # __
-                        gcd = pupil_gcd(self.numerator.factor[i].raw_value,
-                                        self.denominator.factor[j].raw_value)
-                        if gcd != 1:
-                            if gcd == self.numerator.factor[i].raw_value:
+                        g = pupil_gcd(self.numerator.factor[i].raw_value,
+                                      self.denominator.factor[j].raw_value)
+                        if g != 1:
+                            if g == self.numerator.factor[i].raw_value:
                                 new_numerator.set_element(i,
                                                           self.numerator
                                                           .factor[i].clone())
@@ -3069,9 +3069,9 @@ class Fraction(Quotient):
                                 this_numerators_factor_has_been_processed[i] =\
                                     True
 
-                                factor1 = gcd
+                                factor1 = g
                                 factor2 = self.denominator.factor[j]\
-                                    .raw_value / gcd
+                                    .raw_value / g
 
                                 if self.denominator.factor[j].sign == '-':
                                     factor1 *= -1
@@ -3088,16 +3088,16 @@ class Fraction(Quotient):
                                 this_denominators_factor_has_been_processed[j]\
                                     = True
 
-                            elif gcd == self.denominator.factor[j].raw_value:
+                            elif g == self.denominator.factor[j].raw_value:
                                 new_denominator.factor[j] = self.denominator\
                                     .factor[j].clone()
                                 new_denominator.factor[j].set_is_out_striked(
                                     True)
                                 this_denominators_factor_has_been_processed[j]\
                                     = True
-                                factor1 = gcd
+                                factor1 = g
                                 factor2 = self.numerator.factor[i]\
-                                    .raw_value / gcd
+                                    .raw_value / g
                                 if self.numerator.factor[i].sign == '-':
                                     factor1 *= -1
                                 item1 = Item(factor1)
@@ -3109,9 +3109,9 @@ class Fraction(Quotient):
                                 this_numerators_factor_has_been_processed[i] =\
                                     True
                             else:
-                                factor1 = gcd
+                                factor1 = g
                                 factor2 = self.numerator.factor[i]\
-                                    .raw_value / gcd
+                                    .raw_value / g
                                 if self.numerator.factor[i].sign == '-':
                                     factor1 *= -1
                                 item1 = Item(factor1)
@@ -3122,9 +3122,9 @@ class Fraction(Quotient):
                                                                   item2])
                                 this_numerators_factor_has_been_processed[i] =\
                                     True
-                                factor1 = gcd
+                                factor1 = g
                                 factor2 = \
-                                    self.denominator.factor[j].raw_value / gcd
+                                    self.denominator.factor[j].raw_value / g
                                 if self.denominator.factor[j].sign == '-':
                                     factor1 *= -1
                                 item1 = Item(factor1)
@@ -3327,7 +3327,8 @@ class Fraction(Quotient):
 
     def minimally_reduced(self, ignore_1_denominator=False):
         """Return the simplest reduction step possible"""
-        temp = gcd(self.numerator.evaluate(), self.denominator.evaluate())
+        temp = math.gcd(int(self.numerator.evaluate()),
+                        int(self.denominator.evaluate()))
         if temp == 1:
             return None
         # lowest prime common divisor
@@ -3341,7 +3342,8 @@ class Fraction(Quotient):
     ##
     #   @brief Returns the fraction after all simplification steps
     def completely_reduced(self):
-        temp = gcd(self.numerator.evaluate(), self.denominator.evaluate())
+        temp = math.gcd(int(self.numerator.evaluate()),
+                        int(self.denominator.evaluate()))
         if temp == 1:
             return self
         else:
@@ -3388,7 +3390,8 @@ class Fraction(Quotient):
                     and self.denominator.factor[i].exponent == Value(1)):
                 return False
 
-        if gcd(self.numerator.evaluate(), self.denominator.evaluate()) > 1:
+        if math.gcd(int(self.numerator.evaluate()),
+                    int(self.denominator.evaluate())) > 1:
             return True
         else:
             return False

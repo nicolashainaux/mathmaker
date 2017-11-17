@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import random
+from math import gcd
 from string import ascii_uppercase as alphabet
 from abc import ABCMeta, abstractmethod
 
@@ -28,7 +29,7 @@ from mathmakerlib.calculus import is_integer, is_number
 
 from mathmaker import settings
 from mathmaker.lib import shared
-from mathmaker.lib.tools.maths import gcd, sign_of_product
+from mathmaker.lib.tools.maths import sign_of_product
 from mathmaker.lib.constants import RANDOMLY
 from mathmaker.lib.core.utils import gather_literals
 from mathmaker.lib.core.base import Printable

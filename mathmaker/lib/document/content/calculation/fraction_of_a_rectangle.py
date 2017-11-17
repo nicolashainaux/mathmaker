@@ -20,11 +20,11 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-# import random
+from math import gcd
 #
 from mathmaker.lib import shared
 from mathmaker.lib.tools import fix_math_style2_fontsize
-from mathmaker.lib.tools.maths import gcd, prime_factors
+from mathmaker.lib.tools.maths import prime_factors
 from mathmaker.lib.core.base_calculus import Item, Fraction
 from mathmaker.lib.document.content import component
 
@@ -57,8 +57,8 @@ class sub_object(component.structure):
             f1 = f.minimally_reduced(ignore_1_denominator=True)
             if f1.is_reducible():
                 f2 = f1.minimally_reduced(ignore_1_denominator=True)
-                lpcd = prime_factors(gcd(f.numerator.evaluate(),
-                                         f.denominator.evaluate()))
+                lpcd = prime_factors(gcd(int(f.numerator.evaluate()),
+                                         int(f.denominator.evaluate())))
                 if f2.is_reducible():
                     self.answer_wording = _('{} (or {}, or {}...)') \
                         .format(shared.machine.write_math_style2(f.printed),

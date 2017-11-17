@@ -21,10 +21,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import random
+from math import gcd
 
 from mathmakerlib.calculus import is_natural, is_number
 
-from mathmaker.lib.tools.maths import gcd, coprimes_to, not_coprimes_to
+from mathmaker.lib.tools.maths import coprimes_to, not_coprimes_to
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
 from mathmaker.lib.core.base_calculus import (Item, Fraction, Product,

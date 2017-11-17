@@ -20,7 +20,9 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmakerlib.calculus import Number, Fraction, gcd, prime_factors
+from math import gcd
+
+from mathmakerlib.calculus import Number, Fraction, prime_factors
 from mathmakerlib.geometry import Point, DividedLineSegment
 
 from mathmaker.lib import shared
@@ -67,7 +69,7 @@ class sub_object(component.structure):
             f1 = f.reduce()
             if isinstance(f1, Fraction) and f1.is_reducible():
                 f2 = f1.reduce()
-                lpcd = prime_factors(gcd(f.numerator, f.denominator))
+                lpcd = prime_factors(gcd(int(f.numerator), int(f.denominator)))
                 if isinstance(f2, Fraction) and f2.is_reducible():
                     self.answer_wording = _('{} (or {}, or {}...)') \
                         .format(shared.machine.write_math_style2(f.printed),
