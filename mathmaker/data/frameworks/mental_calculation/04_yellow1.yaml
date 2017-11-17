@@ -6,6 +6,12 @@
 
 # fraction of a segment
 
+fraction_of_a_linesegment: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: fraction of a line segment"
+  - exercise: !!omap
+    - questions: fraction_of a_linesegment -> simple_fractions (20)
+
 percentages: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: simple percentages calculations"

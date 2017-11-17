@@ -589,6 +589,14 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
         return any([(source_nb.startswith('intpairs_') and ';;' in source_nb),
                     source_nb.startswith('properfraction'),
                     source_nb == 'bypass'])
+    elif q_id == 'fraction_of_a_linesegment':
+        return any([source_nb.startswith('properfraction'),
+                    source_nb.startswith('simple_fractions'),
+                    source_nb.startswith('intpairs'),
+                    (len(source_nb.split(sep=';;')) == 2
+                     and source_nb.split(sep=';;')[0].startswith('singleint')
+                     and source_nb.split(sep=';;')[1].startswith('singleint')),
+                    source_nb == 'bypass'])
     else:
         warnings.warn('Could not check if the question\'s type and numbers\'s '
                       'source do match or not: {} and {}'

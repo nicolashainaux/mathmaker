@@ -189,6 +189,11 @@
         "01_white1",
         "W02d"
     ],
+    "04_yellow1_fraction_of_a_linesegment": [
+        "mental_calculation",
+        "04_yellow1",
+        "fraction_of_a_linesegment"
+    ],
     "04_yellow1_percentages": [
         "mental_calculation",
         "04_yellow1",

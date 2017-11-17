@@ -31,7 +31,7 @@ from .calculation import vocabulary_simple_part_of_a_number
 from .calculation import vocabulary_simple_multiple_of_a_number
 from .calculation import vocabulary_multi, vocabulary_divi
 from .calculation import vocabulary_addi, vocabulary_subtr
-from .calculation import fraction_of_a_rectangle
+from .calculation import fraction_of_a_rectangle, fraction_of_a_linesegment
 from .calculation import addi_hole, subtr_hole
 from .calculation import units_conversion, decimal_numerals
 from .calculation import percent_direct
@@ -56,7 +56,8 @@ __all__ = ['expand_simple', 'expand_double',
            'digitplace_numberof', 'vocabulary_simple_part_of_a_number',
            'vocabulary_simple_multiple_of_a_number', 'vocabulary_multi',
            'vocabulary_divi', 'vocabulary_addi', 'vocabulary_subtr',
-           'fraction_of_a_rectangle', 'order_of_operations',
+           'fraction_of_a_rectangle', 'fraction_of_a_linesegment',
+           'order_of_operations',
            'addi_hole', 'subtr_hole',
            'units_conversion', 'decimal_numerals', 'percent_direct',
            'area_rectangle', 'area_square', 'perimeter_rectangle',

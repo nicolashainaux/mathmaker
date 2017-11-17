@@ -35,67 +35,67 @@ msgstr ""
 msgid "This equation has no solution."
 msgstr ""
 
-#: lib/machine/LaTeX.py:150
+#: lib/machine/LaTeX.py:168
 msgid "To strike out numbers "
 msgstr ""
 
-#: lib/machine/LaTeX.py:155
+#: lib/machine/LaTeX.py:173
 msgid "To use the margin definition command"
 msgstr ""
 
-#: lib/machine/LaTeX.py:159
+#: lib/machine/LaTeX.py:177
 #, python-brace-format
 msgid "To use the commands from {pkg_name} "
 msgstr ""
 
-#: lib/machine/LaTeX.py:162
+#: lib/machine/LaTeX.py:180
 msgid "To use multicol environment"
 msgstr ""
 
-#: lib/machine/LaTeX.py:165
+#: lib/machine/LaTeX.py:183
 msgid "To use extra commands to handle tabulars"
 msgstr ""
 
-#: lib/machine/LaTeX.py:167
+#: lib/machine/LaTeX.py:185
 msgid "For pretty underlining"
 msgstr ""
 
-#: lib/machine/LaTeX.py:177
+#: lib/machine/LaTeX.py:195
 msgid "To use other mathematical symbols"
 msgstr ""
 
-#: lib/machine/LaTeX.py:180
+#: lib/machine/LaTeX.py:198
 msgid "To draw"
 msgstr ""
 
-#: lib/machine/LaTeX.py:186
+#: lib/machine/LaTeX.py:204
 msgid "Page layout "
 msgstr ""
 
-#: lib/machine/LaTeX.py:192
+#: lib/machine/LaTeX.py:210
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 
-#: lib/machine/LaTeX.py:195
+#: lib/machine/LaTeX.py:213
 msgid "file_name"
 msgstr ""
 
-#: lib/machine/LaTeX.py:197
+#: lib/machine/LaTeX.py:215
 msgid "Exercises counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:199
+#: lib/machine/LaTeX.py:217
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
 "bold, with its number and automatically increments the counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:207 lib/machine/LaTeX.py:203
+#: lib/machine/LaTeX.py:221 lib/machine/LaTeX.py:225
 msgid "Exercise"
 msgstr ""
 
-#: lib/machine/LaTeX.py:210
+#: lib/machine/LaTeX.py:228
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -309,7 +309,7 @@ msgid "Question:"
 msgstr ""
 
 #: lib/old_style_sheet/exercise/X_Structure.py:265
-#: lib/document/frames/exercise.py:736
+#: lib/document/frames/exercise.py:741
 msgid "Answer:"
 msgstr ""
 
@@ -525,11 +525,11 @@ msgstr ""
 msgid "Mental calculation: mini-problems"
 msgstr ""
 
-#: lib/machine/LaTeX.py:174
+#: lib/machine/LaTeX.py:192
 msgid "To use some symbols like currency units"
 msgstr ""
 
-#: lib/machine/LaTeX.py:137
+#: lib/machine/LaTeX.py:157
 msgid "To display units correctly"
 msgstr ""
 
@@ -715,7 +715,7 @@ msgstr ""
 msgid "Intercept theorem"
 msgstr ""
 
-#: lib/machine/LaTeX.py:170
+#: lib/machine/LaTeX.py:188
 msgid "To include .eps pictures (loads graphicx)"
 msgstr ""
 
@@ -1089,6 +1089,7 @@ msgid "Vocabulary for trigonometry"
 msgstr ""
 
 #: lib/document/content/calculation/fraction_of_a_rectangle.py:80
+#: lib/document/content/calculation/fraction_of_a_linesegment.py:89
 msgid "{} (or {})"
 msgstr ""
 
@@ -1102,15 +1103,18 @@ msgstr ""
 msgid "Which fraction of the figure matches the greyed part?"
 msgstr ""
 
+#: lib/document/content/calculation/fraction_of_a_linesegment.py:72
 #: lib/document/content/calculation/fraction_of_a_rectangle.py:63
 msgid "{} (or {}, or {}...)"
 msgstr ""
 
 #: lib/document/content/calculation/fraction_of_a_rectangle.py:69
+#: lib/document/content/calculation/fraction_of_a_linesegment.py:78
 msgid "{} (or {}, or {}, or {})"
 msgstr ""
 
 #: lib/document/content/calculation/fraction_of_a_rectangle.py:75
+#: lib/document/content/calculation/fraction_of_a_linesegment.py:84
 msgid "{} (or {}, or {})"
 msgstr ""
 
@@ -1844,7 +1848,7 @@ msgstr ""
 msgid "Mental calculation: final test for white belt, second stripe"
 msgstr ""
 
-#: lib/machine/LaTeX.py:157
+#: lib/machine/LaTeX.py:175
 msgid "To be able to color the documents"
 msgstr ""
 
@@ -1878,11 +1882,11 @@ msgid ""
 "(in the multiplication tables, from 2 to 9)"
 msgstr ""
 
-#: lib/machine/LaTeX.py:152
+#: lib/machine/LaTeX.py:170
 msgid "To get a better control on floats positioning (e.g. tabulars) "
 msgstr ""
 
-#: lib/document/frames/exercise.py:383
+#: lib/document/frames/exercise.py:388
 msgid "Example of detailed solutions:"
 msgstr ""
 
@@ -1990,33 +1994,33 @@ msgstr ""
 msgid "Mental calculation:  final test for yellow belt"
 msgstr ""
 
-#: lib/machine/LaTeX.py:184
+#: lib/machine/LaTeX.py:202
 msgid "To insert pdf formular and javascript"
 msgstr ""
 
-#: lib/document/frames/exercise.py:868
+#: lib/document/frames/exercise.py:873
 msgid "Clear everything"
 msgstr ""
 
-#: lib/document/frames/exercise.py:869
+#: lib/document/frames/exercise.py:874
 msgid "Validate"
 msgstr ""
 
-#: lib/document/frames/exercise.py:878
+#: lib/document/frames/exercise.py:883
 #, python-brace-format
 msgid "Score: ... / {q_number}"
 msgstr ""
 
-#: lib/document/frames/exercise.py:880
+#: lib/document/frames/exercise.py:885
 #, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:873
+#: lib/document/frames/exercise.py:878
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:875
+#: lib/document/frames/exercise.py:880
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr ""
 
@@ -2037,12 +2041,21 @@ msgstr ""
 msgid "{how_many_digitplace} are there in {decimal_number}?"
 msgstr ""
 
+#: data/frameworks/mental_calculation/04_yellow1.yaml:17
 #: data/frameworks/mental_calculation/04_yellow1.yaml:11
 #: data/frameworks/mental_calculation/04_yellow1.yaml:18
 msgid "Mental calculation: simple percentages calculations"
 msgstr ""
 
-#: lib/document/content/calculation/percent_direct.py:58
+#: lib/document/content/calculation/percent_direct.py:57
 #, python-brace-format
 msgid "{n1} {percent_symbol} of {n2}?"
+msgstr ""
+
+#: lib/document/content/calculation/fraction_of_a_linesegment.py:63
+msgid "Which fraction of the line segment represents the colored part?"
+msgstr ""
+
+#: data/frameworks/mental_calculation/04_yellow1.yaml:11
+msgid "Mental calculation: fraction of a line segment"
 msgstr ""
