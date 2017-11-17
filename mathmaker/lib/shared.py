@@ -58,6 +58,7 @@ def init():
     global alternate_source  # , alternate_source2
     global decimals_source
     global extdecimals_source
+    global dvipsnames_selection_source
 
     global enable_js_form
 
@@ -98,6 +99,8 @@ def init():
     digits_places_source = database.source('digits_places', ['id', 'place'])
     fracdigits_places_source = database.source('fracdigits_places',
                                                ['id', 'place'])
+    dvipsnames_selection_source = database.source('dvipsnames_selection',
+                                                  ['id', 'color_name'])
 
     markup = latex.MARKUP
 

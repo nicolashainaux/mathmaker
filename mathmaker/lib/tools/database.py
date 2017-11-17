@@ -405,7 +405,7 @@ def classify_tag(tag):
                  'decimal_and_one_digit_for_divi',
                  'unitspairs', 'digits_places', 'fracdigits_places',
                  'decimals', 'decimalfractionssums', 'extdecimals',
-                 'simple_fractions']:
+                 'simple_fractions', 'dvipsnames_selection']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -1174,6 +1174,8 @@ class mc_source(object):
                 return postprocess_percentage_query(
                     shared.single_ints_source.next(**kwargs), source_id,
                     qkw=qkw, **kwargs)
+        elif tag_classification == 'dvipsnames_selection':
+            return shared.dvipsnames_selection_source.next(**kwargs)
 
         elif tag_classification == 'nothing':
             return ()
