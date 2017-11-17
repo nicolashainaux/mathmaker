@@ -395,7 +395,7 @@ def __main__():
     sys.stderr.write('Insert dvipsnames selection...\n')
     db_rows = [('Apricot', 0), ('BurntOrange', 0), ('Dandelion', 0),
                ('Goldenrod', 0), ('Lavender', 0), ('LimeGreen', 0),
-               ('NavyBlue', 0), ('Red', 0), ('SkyBlue', 0), ('Violet', 0)]
+               ('NavyBlue', 0), ('Red', 0), ('SkyBlue', 0), ('Periwinkle', 0)]
     db.executemany("INSERT "
                    "INTO dvipsnames_selection(color_name, drawDate) "
                    "VALUES(?, ?)",
