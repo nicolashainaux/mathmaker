@@ -44,6 +44,7 @@ It will add all entries:
 - digits positions: one table for thousands to thousandths, another for
   tenths to thousandths.
 - simple fractions: 1/2 to 1/10, 2/3 to 2/10 etc. until 9/10
+- dvipsnames_selection for LaTeX package 'xcolor'
 """
 
 import os
@@ -153,7 +154,9 @@ def __main__():
          '''CREATE TABLE digits_places
             (id INTEGER PRIMARY KEY, place DECIMAL(4, 3), drawDate INTEGER)''',
          '''CREATE TABLE fracdigits_places
-            (id INTEGER PRIMARY KEY, place DECIMAL(4, 3), drawDate INTEGER)'''
+            (id INTEGER PRIMARY KEY, place DECIMAL(4, 3), drawDate INTEGER)''',
+         '''CREATE TABLE dvipsnames_selection
+            (id INTEGER PRIMARY KEY, color_name TEXT, drawDate INTEGER)''',
          ]
 
     for qr in db_creation_queries:
@@ -386,6 +389,15 @@ def __main__():
     db.executemany("INSERT "
                    "INTO fracdigits_places"
                    "(place, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert dvipsnames selection...\n')
+    db_rows = [('Apricot', 0), ('BurntOrange', 0), ('Dandelion', 0),
+               ('Goldenrod', 0), ('Lavender', 0), ('LimeGreen', 0),
+               ('NavyBlue', 0), ('Red', 0), ('SkyBlue', 0), ('Violet', 0)]
+    db.executemany("INSERT "
+                   "INTO dvipsnames_selection(color_name, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)
 
