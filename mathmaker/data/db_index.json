@@ -71,6 +71,13 @@
         "suits_for_deci1",
         "suits_for_deci2"
     ],
+    "simple_fractions": [
+        "id",
+        "nb1",
+        "nb2",
+        "reducible",
+        "drawDate"
+    ],
     "int_deci_clever_pairs": [
         "id",
         "nb1",

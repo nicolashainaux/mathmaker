@@ -43,6 +43,7 @@ It will add all entries:
 - decimals from 0.001 to 9.999
 - digits positions: one table for thousands to thousandths, another for
   tenths to thousandths.
+- simple fractions: 1/2 to 1/10, 2/3 to 2/10 etc. until 9/10
 """
 
 import os
@@ -51,7 +52,7 @@ import json
 import sqlite3
 from decimal import Decimal
 
-from mathmakerlib.calculus.number import Number
+from mathmakerlib.calculus import Number, gcd
 
 from mathmaker import settings
 from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words
@@ -128,6 +129,9 @@ def __main__():
             (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
              lock_equal_products INTEGER, drawDate INTEGER, clever INTEGER,
              suits_for_deci1 INTEGER, suits_for_deci2 INTEGER)''',
+         '''CREATE TABLE simple_fractions
+            (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
+             reducible INTEGER, drawDate INTEGER)''',
          # As int_deci_clever_pairs may be 'unioned' with int_pairs, its ids
          # will be determined starting from the max id of int_pairs, in order
          # to have unique ids over the two tables.
@@ -263,6 +267,16 @@ def __main__():
     db.executemany("INSERT "
                    "INTO single_ints(nb1, drawDate) "
                    "VALUES(?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert simple fractions...\n')
+    db_rows = [(i + 1, j + 1, 0 if gcd(i + 1, j + 1) == 1 else 1, 0)
+               for i in range(10)
+               for j in range(10)
+               if j > i]
+    db.executemany("INSERT "
+                   "INTO simple_fractions(nb1, nb2, reducible, drawDate) "
+                   "VALUES(?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert single decimals from 0.0 to 100.0...\n')
