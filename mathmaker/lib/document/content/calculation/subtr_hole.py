@@ -40,11 +40,11 @@ class sub_object(component.structure):
         super().setup("minimal", **options)
         super().setup("numbers", nb=numbers_to_use, **options)
         super().setup("nb_variants", nb=numbers_to_use, **options)
-        self.transduration = 8
+        self.transduration = 12
         if (self.nb1 > 20 and self.nb2 > 20
             and abs(self.nb1 - self.nb2) > 10
             and abs(self.nb1 - self.nb2) % 10 != 0):
-            self.transduration = 12
+            self.transduration = 16
 
         if self.subvariant == 'only_positive':
             self.nb1, self.nb2 = (max(self.nb1, self.nb2),

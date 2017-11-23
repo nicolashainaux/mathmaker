@@ -33,9 +33,9 @@ def test_subtr_hole():
     o = subtr_hole.sub_object(numbers_to_use=[5, 7], hidden=2)
     assert '?' in o.nb2.printed
     o = subtr_hole.sub_object(numbers_to_use=[21, 71])
-    assert o.transduration == 8
-    o = subtr_hole.sub_object(numbers_to_use=[21, 70])
     assert o.transduration == 12
+    o = subtr_hole.sub_object(numbers_to_use=[21, 70])
+    assert o.transduration == 16
     o = subtr_hole.sub_object(numbers_to_use=[10, 2],
                               nb_source='complements_to_10',
                               swap_complement=False,
