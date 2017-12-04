@@ -22,7 +22,6 @@
 
 # This module will add a question about the double|triple|quadruple of a number
 
-from mathmaker.lib.core.base_calculus import Product
 from . import vocabulary_questions
 
 
@@ -36,6 +35,6 @@ class sub_object(vocabulary_questions.structure):
             numbers_to_use = sorted(numbers_to_use)[::-1]
             numbers_to_use = [numbers_to_use[0] // 10, numbers_to_use[1] * 10]
         super().__init__(numbers_to_use,
-                         result_fct=lambda x, y: Product([x, y]),
+                         result_fct=lambda x, y: x * y,
                          wording=MULTIPLE_QUESTIONS[numbers_to_use[0]],
                          shuffle_nbs=False)
