@@ -22,7 +22,7 @@
 
 # This module will add a question about the sum of two numbers
 
-from mathmaker.lib.core.root_calculus import Value
+from mathmakerlib.calculus import Number
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import setup_wording_format_of
 
@@ -35,23 +35,27 @@ class structure(component.structure):
         super().setup("minimal", **kwargs)
         super().setup("numbers", nb=nbs_to_use, **kwargs)
         super().setup("nb_variants", nb=nbs_to_use, **kwargs)
-        resultv = Value(result_fct(self.nb1, self.nb2).evaluate())
-        self.result = resultv.into_str()
+        result = Number(result_fct(self.nb1, self.nb2))
+        self.result = str(result)
         if ('permute_nb1_nb2_result' in kwargs
             and kwargs['permute_nb1_nb2_result']):
             # __
             self.nb1, self.nb2, self.result = self.result, self.nb1, self.nb2
-        self.nb1 = Value(self.nb1)
-        self.nb2 = Value(self.nb2)
         self.wording = wording
         setup_wording_format_of(self)
-        self.transduration = 9
+        self.transduration = 10
+        if result >= 20 or self.nb1 >= 20 or self.nb2 >= 20:
+            self.transduration = 14
+        elif result >= 81 or self.nb1 >= 81 or self.nb2 >= 81:
+            self.transduration = 18
+        elif result >= 100 or self.nb1 >= 100 or self.nb2 >= 100:
+            self.transduration = 20
         if kwargs.get('answer') is None:
-            self.js_answer = resultv.jsprinted
+            self.js_answer = result.uiprinted
         else:
             self.js_answer = kwargs.get('answer')\
-                .format(nb1=self.nb1.jsprinted,
-                        nb2=self.nb2.jsprinted)
+                .format(nb1=self.nb1.uiprinted,
+                        nb2=self.nb2.uiprinted)
         self.answer_wording = kwargs.get('answer', self.result)
         if isinstance(self.answer_wording, str):
             setup_wording_format_of(self, w_prefix='answer_')

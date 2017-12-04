@@ -34,8 +34,9 @@ class sub_object(vocabulary_questions.structure):
             wording=_("How much is the difference between {nb1} and {nb2}?"),
             **options)
 
+        self.transduration = 10
         if ((self.nb1 > 20 and self.nb2 > 20
              and abs(self.nb1 - self.nb2) > 10
              and abs(self.nb1 - self.nb2) % 10 != 0)
             or abs(self.nb1 - self.nb2) % 1 != 0):
-            self.transduration = 12
+            self.transduration = 14
