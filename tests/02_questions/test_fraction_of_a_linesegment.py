@@ -44,7 +44,7 @@ def test_use_cases():
 
     o = fraction_of_a_linesegment.sub_object(numbers_to_use=[1, 10])
     assert o.answer_wording == r'$ \dfrac{1}{10} $'
-    assert o.transduration == 10
+    assert o.transduration == 14
 
     o = fraction_of_a_linesegment.sub_object(numbers_to_use=[2, 2, 3])
     assert o.answer_wording == r'$ \dfrac{4}{6} $ (or $ \dfrac{2}{3} $)'
