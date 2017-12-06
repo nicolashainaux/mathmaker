@@ -45,8 +45,8 @@ from .geometry import trigonometry_calculate_length
 from .geometry import trigonometry_calculate_angle
 from .geometry import trigonometry_formula
 from .geometry import trigonometry_vocabulary
-from .geometry import area_rectangle, area_square, perimeter_rectangle
-from .geometry import perimeter_square, rectangle_length_or_width
+from .geometry import area_rectangle, perimeter_rectangle
+from .geometry import rectangle_length_or_width
 
 __all__ = ['expand_simple', 'expand_double',
            'multi_direct', 'multi_reversed', 'multi_hole', 'divi_direct',
@@ -60,8 +60,8 @@ __all__ = ['expand_simple', 'expand_double',
            'order_of_operations',
            'addi_hole', 'subtr_hole',
            'units_conversion', 'decimal_numerals', 'percent_direct',
-           'area_rectangle', 'area_square', 'perimeter_rectangle',
-           'perimeter_square', 'rectangle_length_or_width',
+           'area_rectangle', 'perimeter_rectangle',
+           'rectangle_length_or_width',
            'intercept_theorem_triangle', 'intercept_theorem_triangle_formula',
            'intercept_theorem_butterfly',
            'intercept_theorem_butterfly_formula',
