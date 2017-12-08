@@ -79,15 +79,15 @@ def test_generate_random_decimal_nb_exceptions():
 def test_generate_random_decimal_nb():
     """Check the two ways of generating a random decimal number."""
     d = generate_random_decimal_nb(position=Decimal('0.1'), width=2,
-                                   generation_type='default')
+                                   generation_type='default')[0]
     assert len(str(d)) in [3, 4]
     d = generate_random_decimal_nb(position=Decimal('0.001'), width=2,
-                                   generation_type='default')
+                                   generation_type='default')[0]
     assert len(str(d)) == 5
     assert str(d).startswith('0.0')
     d = generate_random_decimal_nb(width=7,
                                    generation_type='default',
-                                   pos_matches_invisible_zero=True)
+                                   pos_matches_invisible_zero=True)[0]
     d = generate_random_decimal_nb(width=1,
                                    generation_type='default',
-                                   pos_matches_invisible_zero=True)
+                                   pos_matches_invisible_zero=True)[0]

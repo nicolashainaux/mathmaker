@@ -316,11 +316,11 @@ def handle_valueless_names_tags(arg: object, sentence: str):
         if not hasattr(arg, vn):
             val = ""
             if vn.startswith('name'):
-                val = next(shared.names_source)
+                val = next(shared.names_source)[0]
             elif vn.startswith('masculine_name'):
-                val = shared.names_source.next(gender="masculine")
+                val = shared.names_source.next(gender='masculine')[0]
             elif vn.startswith('feminine_name'):
-                val = shared.names_source.next(gender="feminine")
+                val = shared.names_source.next(gender='feminine')[0]
             setattr(arg, vn, val)
 
 

@@ -55,7 +55,7 @@ class sub_object(component.structure):
 
         if variant[0] == 'random':
             if variant[1] == 'random':
-                variant[0] = shared.trigo_functions_source.next()
+                variant[0] = shared.trigo_functions_source.next()[0]
                 variant[1] = random.choice(['up', 'down'])
             elif variant[1] == 'adj':
                 variant[0] = random.choice(['cos', 'tan'])
@@ -64,7 +64,7 @@ class sub_object(component.structure):
             elif variant[1] == 'hyp':
                 variant[0] = random.choice(['sin', 'cos'])
             elif variant[1] in ['up', 'down']:
-                variant[0] = shared.trigo_functions_source.next()
+                variant[0] = shared.trigo_functions_source.next()[0]
         elif variant[0] in ['sin', 'cos', 'tan'] and variant[1] == 'random':
             variant[1] = random.choice(['up', 'down'])
 

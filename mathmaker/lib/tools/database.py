@@ -362,10 +362,7 @@ class source(object):
         t = query_result[0]
         self._timestamp(str(self.idcol), str(t[0]), **kwargs)
         self._lock(t[1:len(t)], **kwargs)
-        if len(t) == 2:
-            return t[1]
-        else:
-            return t[1:len(t)]
+        return t[1:len(t)]
 
 
 def db_table(tag):
@@ -535,7 +532,7 @@ def preprocess_percentage_tag(tag, qkw=None):
         qkw = {}
     if '|' in tag:
         possible_values = tag[:-len('%of...')].split('|')
-        value = shared.single_ints_source.next(nb1_in=possible_values)
+        value = shared.single_ints_source.next(nb1_in=possible_values)[0]
         tag = str(value) + '%of...'
     if tag in [r'25%of...', r'75%of...']:
         if qkw.get('level', 'normal') == 'easy':
@@ -659,7 +656,7 @@ def preprocess_decimals_query(qkw=None):
     if 'fd' not in qkw:
         d.update(
             {'fd': Number(str(shared.fracdigits_places_source
-                              .next())).fracdigits_nb()})
+                              .next()[0])).fracdigits_nb()})
         if 'iz' in qkw and int(qkw['iz']) >= d['fd']:
             d['fd'] = int(qkw['iz']) + 1
         if 'iz_ge' in qkw and int(qkw['iz_ge']) >= d['fd']:
@@ -787,7 +784,7 @@ def generate_values(source_id):
                 for n in coprime_generator(k)]
 
     elif source_id.startswith('alternate'):
-        lr = [('left', ), ('right', )]
+        lr = ['left', 'right']
         random.shuffle(lr)
         return lr * 20
 
@@ -886,7 +883,7 @@ def generate_random_decimal_nb(position=None, width='random',
                                numberof=False,
                                digits_positions=None, **unused):
     if position is None:
-        position = Decimal(str(shared.fracdigits_places_source.next()))
+        position = Decimal(str(shared.fracdigits_places_source.next()[0]))
     if generation_type is None:
         if numberof:
             generation_type = 'default'
@@ -1072,7 +1069,7 @@ def generate_random_decimal_nb(position=None, width='random',
             digits_positions.remove(r)
             chosen_deci += Decimal(figure) * r
 
-    return chosen_deci
+    return (chosen_deci, )
 
 
 class sub_source(object):
@@ -1111,7 +1108,9 @@ class sub_source(object):
             if self.current == self.max:
                 self._reset()
             self.current += 1
-            return self.values[self.current - 1]
+            if isinstance(self.values[self.current - 1], tuple):
+                return self.values[self.current - 1]
+            return (self.values[self.current - 1], )
 
 
 class mc_source(object):
@@ -1133,9 +1132,11 @@ class mc_source(object):
         elif tag_classification == 'int_deci_clever_pairs':
             return shared.int_deci_clever_pairs_source.next(**kwargs)
         elif tag_classification == 'digits_places':
-            return Decimal(str(shared.digits_places_source.next(**kwargs)))
+            return (Decimal(str(
+                shared.digits_places_source.next(**kwargs)[0])), )
         elif tag_classification == 'fracdigits_places':
-            return Decimal(str(shared.fracdigits_places_source.next(**kwargs)))
+            return (Decimal(
+                str(shared.fracdigits_places_source.next(**kwargs)[0])), )
         elif tag_classification == 'int_irreducible_frac':
             return shared.int_fracs_source.next(**kwargs)
         elif tag_classification == 'decimal_and_10_100_1000_for_multi':
@@ -1163,19 +1164,19 @@ class mc_source(object):
             kwargs.update(preprocess_decimalfractions_pairs_tag(qkw=qkw,
                                                                 **kwargs))
             return postprocess_decimalfractionssums_query(
-                shared.decimals_source.next(**kwargs), qkw=qkw, **kwargs)
+                shared.decimals_source.next(**kwargs)[0], qkw=qkw, **kwargs)
         elif tag_classification == 'percentage':
             source_id, t = preprocess_percentage_tag(source_id, qkw=qkw)
             tc = classify_tag(t)
             if tc == 'int_pairs':
                 kwargs.update(preprocess_int_pairs_tag(t, qkw=qkw))
                 return postprocess_percentage_query(
-                    shared.int_pairs_source.next(**kwargs), source_id,
+                    shared.int_pairs_source.next(**kwargs)[0], source_id,
                     qkw=qkw, **kwargs)
             elif tc == 'single_int':
                 kwargs.update(preprocess_single_nb_tag(t))
                 return postprocess_percentage_query(
-                    shared.single_ints_source.next(**kwargs), source_id,
+                    shared.single_ints_source.next(**kwargs)[0], source_id,
                     qkw=qkw, **kwargs)
         elif tag_classification == 'dvipsnames_selection':
             return shared.dvipsnames_selection_source.next(**kwargs)

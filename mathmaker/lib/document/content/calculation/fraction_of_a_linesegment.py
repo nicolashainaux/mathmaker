@@ -55,7 +55,7 @@ class sub_object(component.structure):
         self.transduration = 10
         if self.nb2 >= 7:
             self.transduration += self.nb2 - 6
-        fc = next(shared.dvipsnames_selection_source)
+        fc = next(shared.dvipsnames_selection_source)[0]
         self.dividedlinesegment = DividedLineSegment(Point(0, 0, 'A'),
                                                      Point(10, 0, 'B'),
                                                      n=self.nb2, fill=self.nb1,

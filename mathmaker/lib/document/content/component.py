@@ -205,7 +205,7 @@ class structure(object):
 
         rectangle_name = "DCBA"
         if self.picture:
-            rectangle_name = next(shared.four_letters_words_source)
+            rectangle_name = next(shared.four_letters_words_source)[0]
         self.rectangle = Rectangle([Point(rectangle_name[3], 0, 0),
                                     3,
                                     1.5,
@@ -231,7 +231,7 @@ class structure(object):
 
         square_name = "DCBA"
         if self.picture:
-            square_name = next(shared.four_letters_words_source)
+            square_name = next(shared.four_letters_words_source)[0]
         self.square = Square([Point(square_name[3], 0, 0),
                              2,
                              square_name[2],
@@ -250,7 +250,7 @@ class structure(object):
             or not hasattr(self, 'unit_area')):
             self.setup(self, "units", **kwargs)
 
-        rt_name = next(shared.three_letters_words_source)
+        rt_name = next(shared.three_letters_words_source)[0]
         alpha, beta = next(shared.angle_ranges_source)
         rotation_angle = alpha + random.choice(range(beta - alpha))
         self.right_triangle = RightTriangle(
@@ -269,7 +269,7 @@ class structure(object):
                 raise RuntimeError('Impossible to Setup an intercept theorem '
                                    'figure without a coefficient and 3 other '
                                    'lengths provided.')
-        points_names = next(shared.five_letters_words_source)
+        points_names = next(shared.five_letters_words_source)[0]
         if butterfly:
             points_names = list(rotate(points_names, -1))
             (points_names[0], points_names[1]) = (points_names[1],
@@ -329,7 +329,7 @@ class structure(object):
             val = 1 if BOOLEAN[kwargs['back_to_unit']]() else 0
             wording_kwargs.update({'back_to_unit': val})
         self.wording = _(shared.mini_problems_wordings_source
-                         .next(**wording_kwargs))
+                         .next(**wording_kwargs)[0])
         setup_wording_format_of(self)
 
     def _setup_complement_wording(self, **kwargs):

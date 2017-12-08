@@ -37,7 +37,7 @@ class sub_object(component.structure):
         # There's no need to setup numbers for this question.
 
         if self.variant in ['default', 'random']:
-            variant = shared.trigo_functions_source.next()
+            variant = shared.trigo_functions_source.next()[0]
         else:
             variant = self.variant
 

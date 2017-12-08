@@ -38,7 +38,7 @@ class sub_object(object):
         pos = options.get('numbers_to_use')[0]
 
         self.chosen_deci = \
-            generate_random_decimal_nb(position=pos, **options)
+            generate_random_decimal_nb(position=pos, **options)[0]
         self.chosen_figure = (self.chosen_deci
                               % (pos * Decimal('10'))) // pos
         self.chosen_deci_str = Item((self.chosen_deci)).printed

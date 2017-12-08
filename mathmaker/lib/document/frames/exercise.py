@@ -207,7 +207,7 @@ def preprocess_variant(q_i):
             {'variant':
              int(shared
                  .order_of_operations_variants_source
-                 .next(**{'raw': raw_query}))})
+                 .next(**{'raw': raw_query})[0])})
 
 
 def auto_adjust_nb_sources(nb_sources: list, q_i: namedtuple):
@@ -600,10 +600,7 @@ class Exercise(object):
                                                   **get_q_modifier(
                                                       q.id, nb_source),
                                                   **xkw)
-                    if isinstance(drawn, tuple):
-                        nb_to_use += drawn
-                    else:
-                        nb_to_use += (drawn, )
+                    nb_to_use += drawn
 
                 known_elts = set()
                 last_draw[nb_source] = []

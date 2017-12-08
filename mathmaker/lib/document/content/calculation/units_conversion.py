@@ -52,7 +52,7 @@ class sub_object(component.structure):
                                        width=random.choice([1, 2, 3]),
                                        unique_figures=options.get(
                                            'unique_figures', False),
-                                       generation_type='default')
+                                       generation_type='default')[0]
         self.start_nb = Item(Value(chosen_deci), unit=unit1)
         self.hidden_nb = Item(Value(COLORED_QUESTION_MARK), unit=unit2)
         self.answer = self.start_nb.convert_to(unit2)\

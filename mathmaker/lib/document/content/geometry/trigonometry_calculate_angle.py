@@ -39,7 +39,7 @@ class sub_object(component.structure):
                       shuffle_nbs=False, sort_nbs=True, **options)
 
         if self.variant in ['default', 'random']:
-            variant = shared.trigo_functions_source.next()
+            variant = shared.trigo_functions_source.next()[0]
         else:
             variant = self.variant
 
