@@ -538,7 +538,7 @@ class Exercise(object):
             common_nb = None
             for (i, (nb_source, xkw)) in enumerate(nbsources_xkw_list):
                 if last_draw.get(nb_source) is None:
-                    last_draw[nb_source] = [0, 0]
+                    last_draw[nb_source] = None
                 # Handle all nb sources for ONE question
                 if i == 1 and extra_infos['merge_sources']:
                     if extra_infos.get('coprime', False):

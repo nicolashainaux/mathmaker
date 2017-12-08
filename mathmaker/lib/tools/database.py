@@ -185,25 +185,28 @@ class source(object):
                 result += next(hook(kn)) + k + " <= " + str(kwargs[kw]) + " "
                 kn += 1
             elif kw == "not_in":
-                updated_notin_list = list(kwargs[kw])
-                for c in self.valcols:
-                    if c in kwargs and kwargs[c] in updated_notin_list:
-                        updated_notin_list.remove(kwargs[c])
-                # prevails is used to not prevent numbers to be drawn twice in
-                # a row, like when drawing multiples of the same number, or
-                # drawing complements to the same number (e.g. 100)
-                # Take care it must contain a list of str (e.g. ['100'])
-                if "prevails" in kwargs:
-                    for n in kwargs["prevails"]:
-                        if n in updated_notin_list:
-                            updated_notin_list.remove(n)
-                if len(updated_notin_list):
-                    for i, c in enumerate(self.valcols):
-                        result += next(hook(kn + i)) + c + " NOT IN ( " + ", "\
-                            .join(str(x) if is_number(x)
-                                  else "'{}'".format(x)
-                                  for x in updated_notin_list) + " ) "
-                        kn += 1
+                if kwargs["not_in"] is not None:
+                    updated_notin_list = list(kwargs[kw])
+                    for c in self.valcols:
+                        if c in kwargs and kwargs[c] in updated_notin_list:
+                            updated_notin_list.remove(kwargs[c])
+                    # prevails is used to not prevent numbers to be drawn
+                    # twice in a row, like when drawing multiples of the same
+                    # number, or drawing complements to the same number
+                    # (e.g. 100)
+                    # Take care it must contain a list of str (e.g. ['100'])
+                    if "prevails" in kwargs:
+                        for n in kwargs["prevails"]:
+                            if n in updated_notin_list:
+                                updated_notin_list.remove(n)
+                    if len(updated_notin_list):
+                        for i, c in enumerate(self.valcols):
+                            result += next(hook(kn + i)) + c + " NOT IN ( " \
+                                + ", "\
+                                .join(str(x) if is_number(x)
+                                      else "'{}'".format(x)
+                                      for x in updated_notin_list) + " ) "
+                            kn += 1
             elif kw.startswith("either_") and kw.endswith("_in"):
                 k = kw.split(sep='_')[1:-1]
                 result += next(hook(kn)) + " ( " + k[0] + " IN ( " + ", "\
