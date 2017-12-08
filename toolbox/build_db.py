@@ -158,6 +158,12 @@ def __main__():
             (id INTEGER PRIMARY KEY, place DECIMAL(4, 3), drawDate INTEGER)''',
          '''CREATE TABLE dvipsnames_selection
             (id INTEGER PRIMARY KEY, color_name TEXT, drawDate INTEGER)''',
+         '''CREATE TABLE polygons
+            (id INTEGER PRIMARY KEY,
+             sides_nb INTEGER, name TEXT, specific_name TEXT,
+             sides_particularity,
+             level INTEGER, variant INTEGER,
+             table2, table3, table4, table5, table6, drawDate INTEGER)''',
          ]
 
     for qr in db_creation_queries:
@@ -402,6 +408,83 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
+    sys.stderr.write('Insert polygons...\n')
+    db_rows = [(3, 'triangle_1_1_1', '', 'all_different',
+                2, 0, 0, 0, 0, 0, 0, 0),
+               (3, 'triangle_1_1_1', 'right_triangle', 'none',
+                2, 0, 0, 0, 0, 0, 0, 0),
+               (3, 'triangle_2_1', 'isosceles_triangle', 'none',
+                2, 0, 1, 0, 0, 0, 0, 0),
+               (3, 'triangle_3', 'equilateral_triangle', 'equilateral',
+                1, 0, 0, 1, 0, 0, 0, 0),
+               (4, 'quadrilateral_1_1_1_1', '', 'all_different',
+                3, 0, 0, 0, 0, 0, 0, 0),
+               (4, 'quadrilateral_2_1_1', '', 'none', 3, 0, 1, 0, 0, 0, 0, 0),
+               (4, 'quadrilateral_2_1_1', '', 'none', 3, 1, 1, 0, 0, 0, 0, 0),
+               (4, 'quadrilateral_2_2', '', 'none', 3, 0, 1, 0, 0, 0, 0, 0),
+               (4, 'quadrilateral_2_2', '', 'none', 3, 1, 1, 0, 0, 0, 0, 0),
+               (4, 'quadrilateral_2_2', 'rectangle', 'none',
+                2, 2, 1, 0, 0, 0, 0, 0),
+               (4, 'quadrilateral_3_1', '', 'none', 2, 0, 0, 1, 0, 0, 0, 0),
+               (4, 'quadrilateral_4', 'rhombus', 'equilateral',
+                1, 0, 0, 0, 1, 0, 0, 0),
+               (4, 'quadrilateral_4', 'square', 'equilateral',
+                1, 1, 0, 0, 1, 0, 0, 0),
+               (5, 'pentagon_1_1_1_1_1', '', 'all_different',
+                4, 0, 0, 0, 0, 0, 0, 0),
+               (5, 'pentagon_2_1_1_1', '', 'none', 4, 0, 1, 0, 0, 0, 0, 0),
+               (5, 'pentagon_2_1_1_1', '', 'none', 4, 1, 1, 0, 0, 0, 0, 0),
+               (5, 'pentagon_2_2_1', '', 'none', 4, 0, 1, 0, 0, 0, 0, 0),
+               (5, 'pentagon_2_2_1', '', 'none', 4, 1, 1, 0, 0, 0, 0, 0),
+               (5, 'pentagon_2_2_1', '', 'none', 4, 2, 1, 0, 0, 0, 0, 0),
+               (5, 'pentagon_3_1_1', '', 'none', 3, 0, 0, 1, 0, 0, 0, 0),
+               (5, 'pentagon_3_1_1', '', 'none', 3, 1, 0, 1, 0, 0, 0, 0),
+               (5, 'pentagon_3_2', '', 'none', 3, 0, 1, 1, 0, 0, 0, 0),
+               (5, 'pentagon_3_2', '', 'none', 3, 1, 1, 1, 0, 0, 0, 0),
+               (5, 'pentagon_4_1', '', 'none', 2, 0, 0, 0, 1, 0, 0, 0),
+               (5, 'pentagon_5', '', 'equilateral', 1, 0, 0, 0, 0, 1, 0, 0),
+               (6, 'hexagon_1_1_1_1_1_1', '', 'all_different',
+                5, 0, 0, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_1_1_1_1', '', 'none', 5, 0, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_1_1_1_1', '', 'none', 5, 1, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_1_1_1_1', '', 'none', 5, 2, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_2_1_1', '', 'none', 5, 0, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_2_1_1', '', 'none', 5, 1, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_2_1_1', '', 'none', 5, 2, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_2_1_1', '', 'none', 5, 3, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_2_1_1', '', 'none', 5, 4, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_2_1_1', '', 'none', 5, 5, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_2_2', '', 'none', 3, 0, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_2_2', '', 'none', 3, 1, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_2_2', '', 'none', 3, 2, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_2_2_2', '', 'none', 3, 3, 1, 0, 0, 0, 0, 0),
+               (6, 'hexagon_3_1_1_1', '', 'none', 4, 0, 0, 1, 0, 0, 0, 0),
+               (6, 'hexagon_3_1_1_1', '', 'none', 4, 1, 0, 1, 0, 0, 0, 0),
+               (6, 'hexagon_3_1_1_1', '', 'none', 4, 2, 0, 1, 0, 0, 0, 0),
+               (6, 'hexagon_3_2_1', '', 'none', 4, 0, 1, 1, 0, 0, 0, 0),
+               (6, 'hexagon_3_2_1', '', 'none', 4, 1, 1, 1, 0, 0, 0, 0),
+               (6, 'hexagon_3_2_1', '', 'none', 4, 2, 1, 1, 0, 0, 0, 0),
+               (6, 'hexagon_3_2_1', '', 'none', 4, 2, 1, 1, 0, 0, 0, 0),
+               (6, 'hexagon_3_3', '', 'none', 3, 0, 0, 1, 0, 0, 0, 0),
+               (6, 'hexagon_3_3', '', 'none', 3, 1, 0, 1, 0, 0, 0, 0),
+               (6, 'hexagon_3_3', '', 'none', 3, 2, 0, 1, 0, 0, 0, 0),
+               (6, 'hexagon_4_1_1', '', 'none', 3, 0, 0, 0, 1, 0, 0, 0),
+               (6, 'hexagon_4_1_1', '', 'none', 3, 1, 0, 0, 1, 0, 0, 0),
+               (6, 'hexagon_4_1_1', '', 'none', 3, 2, 0, 0, 1, 0, 0, 0),
+               (6, 'hexagon_4_2', '', 'none', 3, 0, 1, 0, 1, 0, 0, 0),
+               (6, 'hexagon_4_2', '', 'none', 3, 1, 1, 0, 1, 0, 0, 0),
+               (6, 'hexagon_4_2', '', 'none', 3, 2, 1, 0, 1, 0, 0, 0),
+               (6, 'hexagon_5_1', '', 'none', 2, 2, 0, 0, 0, 1, 0, 0),
+               (6, 'hexagon_6', '', 'equilateral', 1, 0, 0, 0, 0, 0, 1, 0)]
+    for e in db_rows:
+        if len(e) != 12:
+            print(e)
+    db.executemany("INSERT "
+                   "INTO polygons(sides_nb, name, specific_name, "
+                   "sides_particularity, level, variant, table2, table3, "
+                   "table4, table5, table6, drawDate) "
+                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                   db_rows)
     sys.stderr.write('Commit changes to database...\n')
     db.commit()
     sys.stderr.write('Close database...\n')
