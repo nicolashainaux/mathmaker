@@ -59,6 +59,7 @@ def init():
     global decimals_source
     global extdecimals_source
     global dvipsnames_selection_source
+    global polygons_source
 
     global enable_js_form
 
@@ -101,6 +102,11 @@ def init():
                                                ['id', 'place'])
     dvipsnames_selection_source = database.source('dvipsnames_selection',
                                                   ['id', 'color_name'])
+    polygons_source = database.source('polygons',
+                                      ['id', 'sides_nb', 'name',
+                                       'specific_name', 'sides_particularity',
+                                       'level', 'variant', 'table2', 'table3',
+                                       'table4', 'table5', 'table6'])
 
     markup = latex.MARKUP
 
