@@ -97,6 +97,8 @@
         "iz",
         "fd",
         "overlap_level",
+        "pure_half",
+        "pure_quarter",
         "drawDate"
     ],
     "digits_places": [

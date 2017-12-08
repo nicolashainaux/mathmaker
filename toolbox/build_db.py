@@ -151,7 +151,7 @@ def __main__():
          '''CREATE TABLE decimals
             (id INTEGER PRIMARY KEY, nb1 DECIMAL(2, 3), nz INTEGER,
              iz INTEGER, fd INTEGER, overlap_level INTEGER,
-             drawDate INTEGER)''',
+             pure_half INTEGER, pure_quarter INTEGER, drawDate INTEGER)''',
          '''CREATE TABLE digits_places
             (id INTEGER PRIMARY KEY, place DECIMAL(4, 3), drawDate INTEGER)''',
          '''CREATE TABLE fracdigits_places
@@ -297,18 +297,35 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
-    sys.stderr.write('Insert single decimals from 0.001 to 9.999...\n')
+    sys.stderr.write('Generate single decimals from 0.001 to 10.000...')
     # Single decimal numbers
-    db_rows = [((i + 1) / 1000,
-                Number((Decimal(i + 1)) / Decimal(1000)).nonzero_digits_nb(),
-                Number((Decimal(i + 1)) / Decimal(1000)).isolated_zeros(),
-                Number((Decimal(i + 1)) / Decimal(1000)).fracdigits_nb(),
-                Number((Decimal(i + 1)) / Decimal(1000)).overlap_level(),
-                0)
-               for i in range(9999)]
+    db_rows = []
+    for j in range(100):
+        sys.stderr.write(
+            '\rGenerate single decimals from 0.001 to 10.000... {} %'
+            .format(j))
+        db_rows += [((100 * j + i + 1) / 1000,
+                    Number((Decimal(100 * j + i + 1)) / Decimal(1000))
+                    .nonzero_digits_nb(),
+                    Number((Decimal(100 * j + i + 1)) / Decimal(1000))
+                    .isolated_zeros(),
+                    Number((Decimal(100 * j + i + 1)) / Decimal(1000))
+                    .fracdigits_nb(),
+                    Number((Decimal(100 * j + i + 1)) / Decimal(1000))
+                    .overlap_level(),
+                    Number((Decimal(100 * j + i + 1)) / Decimal(1000))
+                    .is_pure_half(),
+                    Number((Decimal(100 * j + i + 1)) / Decimal(1000))
+                    .is_pure_quarter(),
+                    0)
+                    for i in range(100)]
+    sys.stderr.write('\rGenerate single decimals from 0.001 to 10.000...'
+                     ' 100 %\n')
+    sys.stderr.write('Insert single decimals from 0.001 to 10.000...\n')
     db.executemany("INSERT "
-                   "INTO decimals(nb1, nz, iz, fd, overlap_level, drawDate) "
-                   "VALUES(?, ?, ?, ?, ?, ?)",
+                   "INTO decimals(nb1, nz, iz, fd, overlap_level, "
+                   "pure_half, pure_quarter, drawDate) "
+                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert angle ranges...\n')
