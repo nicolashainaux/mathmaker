@@ -160,7 +160,7 @@ def __main__():
             (id INTEGER PRIMARY KEY, color_name TEXT, drawDate INTEGER)''',
          '''CREATE TABLE polygons
             (id INTEGER PRIMARY KEY,
-             sides_nb INTEGER, name TEXT, specific_name TEXT,
+             sides_nb INTEGER, codename TEXT, specific_name TEXT,
              sides_particularity,
              level INTEGER, variant INTEGER,
              table2, table3, table4, table5, table6, drawDate INTEGER)''',
@@ -497,7 +497,7 @@ def __main__():
         if len(e) != 12:
             print(e)
     db.executemany("INSERT "
-                   "INTO polygons(sides_nb, name, specific_name, "
+                   "INTO polygons(sides_nb, codename, specific_name, "
                    "sides_particularity, level, variant, table2, table3, "
                    "table4, table5, table6, drawDate) "
                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",

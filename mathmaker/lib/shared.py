@@ -103,7 +103,7 @@ def init():
     dvipsnames_selection_source = database.source('dvipsnames_selection',
                                                   ['id', 'color_name'])
     polygons_source = database.source('polygons',
-                                      ['id', 'sides_nb', 'name',
+                                      ['id', 'sides_nb', 'codename',
                                        'specific_name', 'sides_particularity',
                                        'level', 'variant', 'table2', 'table3',
                                        'table4', 'table5', 'table6'])

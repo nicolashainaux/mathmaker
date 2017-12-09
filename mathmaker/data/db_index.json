@@ -119,7 +119,7 @@
     "polygons": [
         "id",
         "sides_nb",
-        "name",
+        "codename",
         "specific_name",
         "sides_particularity",
         "level",
