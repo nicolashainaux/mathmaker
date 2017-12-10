@@ -76,6 +76,18 @@ def _suits_for_deci2(i, j):
     return not(i % 10 == 0 or j % 10 == 0)
 
 
+def _code(*numbers):
+    """Identifies a tuple of numbers depending on its composition."""
+    already_found = []
+    code = []
+    for n in numbers:
+        if n not in already_found:
+            already_found.append(n)
+            code.append(numbers.count(n))
+    code.sort(reverse=True)
+    return '_'.join([str(_) for _ in code])
+
+
 def __main__():
     settings.init()
 
@@ -134,8 +146,9 @@ def __main__():
              suits_for_deci1 INTEGER, suits_for_deci2 INTEGER)''',
          '''CREATE TABLE int_triplets
             (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
-             triangle INTEGER, isosceles INTEGER, equilateral INTEGER,
-             pythagorean INTEGER, equal_sides INTEGER, drawDate INTEGER)''',
+             code TEXT, triangle INTEGER, isosceles INTEGER,
+             equilateral INTEGER, pythagorean INTEGER, equal_sides INTEGER,
+             drawDate INTEGER)''',
          '''CREATE TABLE simple_fractions
             (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
              reducible INTEGER, drawDate INTEGER)''',
@@ -247,6 +260,7 @@ def __main__():
     sys.stderr.write('Create integers triplets...\n')
     # Tables of 1, 2, 3... INTTRIPLETS_MAX
     db_rows = [(i + 1, j + 1, k + 1,  # nb1, nb2, nb3
+                _code(i + 1, j + 1, k + 1),  # code
                 k + 1 < i + j + 2,  # triangle?
                 (i == j and j != k) or (i == k and i != j)
                 or (j == k and i != j),  # isosceles? (but not equilateral)
@@ -263,9 +277,10 @@ def __main__():
     for i in range(100):
         sys.stderr.write('\rInsert integers triplets... {} %'.format(i))
         db.executemany("INSERT "
-                       "INTO int_triplets(nb1, nb2, nb3, triangle, isosceles, "
-                       "equilateral, pythagorean, equal_sides, drawDate) "
-                       "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                       "INTO int_triplets(nb1, nb2, nb3, code, triangle, "
+                       "isosceles, equilateral, pythagorean, equal_sides, "
+                       "drawDate) "
+                       "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                        db_rows[i * len(db_rows) // 100:
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers triplets... 100 %\n')
