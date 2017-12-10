@@ -83,7 +83,13 @@ class structure(object):
         self.preset = kwargs.get('preset', 'default')
         if 'nb_variant' in kwargs and kwargs['nb_variant'] == 'decimal':
             kwargs['nb_variant'] = random.choice(['decimal1', 'decimal2'])
-
+        self.x_layout_variant = kwargs.get('x_layout_variant', 'default')
+        self.slideshow = (self.x_layout_variant == 'slideshow')
+        self.tikz_picture_scale = 1
+        self.tikz_linesegments_thickness = 'thin'
+        if self.slideshow:
+            self.tikz_picture_scale = 3
+            self.tikz_linesegments_thickness = 'thick'
         self.variant = kwargs.get('variant', 'default')
         self.subvariant = kwargs.get('subvariant', 'default')
         self.nb_variant = kwargs.get('nb_variant', 'default')
