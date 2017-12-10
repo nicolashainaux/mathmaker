@@ -30,10 +30,6 @@ from mathmakerlib.calculus.unit import COMMON_LENGTH_UNITS
 
 from mathmaker.lib.core.root_calculus import Unit, Value
 from mathmaker.lib.core.base_calculus import Product, Quotient, Item
-from mathmaker.lib.core.base_geometry import Point
-from mathmaker.lib.core.geometry import (Rectangle, Square, RightTriangle,
-                                         InterceptTheoremConfiguration,
-                                         RectangleGrid)
 from mathmaker.lib import shared
 from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.tools import rotate, fix_math_style2_fontsize
@@ -186,6 +182,8 @@ class structure(object):
         self.quotient_str = q.printed
 
     def _setup_rectangle(self, **kwargs):
+        from mathmaker.lib.core.base_geometry import Point
+        from mathmaker.lib.core.geometry import Rectangle
         if hasattr(self, 'nb1') and hasattr(self, 'nb2'):
             nb1, nb2 = self.nb1, self.nb2
         elif 'nb' in kwargs:
@@ -217,6 +215,8 @@ class structure(object):
         self.rectangle.setup_labels([False, False, True, True])
 
     def _setup_square(self, **kwargs):
+        from mathmaker.lib.core.base_geometry import Point
+        from mathmaker.lib.core.geometry import Square
         if hasattr(self, 'nb1'):
             nb1 = self.nb1
         elif 'nb' in kwargs:
@@ -244,6 +244,7 @@ class structure(object):
                                              "triple"]))
 
     def _setup_right_triangle(self, **kwargs):
+        from mathmaker.lib.core.geometry import RightTriangle
         # Too many different possibilities for a Right Triangle,
         # so the angles|lengths' labels must be set outside of this setup()
         if (not hasattr(self, 'unit_length')
@@ -260,6 +261,7 @@ class structure(object):
             rotate_around_isobarycenter=rotation_angle)
 
     def _setup_intercept_theorem_figure(self, **kwargs):
+        from mathmaker.lib.core.geometry import InterceptTheoremConfiguration
         butterfly = kwargs.get('butterfly', False)
         set_lengths = kwargs.get('set_lengths', True)
         if set_lengths:
@@ -365,6 +367,8 @@ class structure(object):
         setup_wording_format_of(self)
 
     def _setup_rectangle_grid(self, **kwargs):
+        from mathmaker.lib.core.base_geometry import Point
+        from mathmaker.lib.core.geometry import RectangleGrid
         rows = str(min(self.nb3, self.nb4))
         cols = str(max(self.nb3, self.nb4))
         frows = str(min(self.nb1, self.nb2))
