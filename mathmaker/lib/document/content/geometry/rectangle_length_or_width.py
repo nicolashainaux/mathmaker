@@ -30,7 +30,7 @@ from mathmaker.lib.tools.wording import setup_wording_format_of
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, build_data, **options):
         super().setup("minimal", **options)
         super().setup("length_units", **options)
         self.transduration = 16
@@ -38,7 +38,7 @@ class sub_object(component.structure):
             self.transduration = 12
 
         if self.context == "from_area":
-            super().setup("division", nb=numbers_to_use, **options)
+            super().setup("division", nb=build_data, **options)
             self.nb1, self.nb2 = self.dividend, self.divisor
             super().setup("rectangle", **options)
             wordings = {'w': _("A rectangle has an area of {nb1} {area_unit} "
@@ -52,8 +52,8 @@ class sub_object(component.structure):
             setup_wording_format_of(self)
 
         elif self.context == "from_perimeter":
-            super().setup("numbers", nb=numbers_to_use, **options)
-            super().setup("nb_variants", nb=numbers_to_use, **options)
+            super().setup("numbers", nb=build_data, **options)
+            super().setup("nb_variants", nb=build_data, **options)
             super().setup("rectangle", **options)
             self.subcontext = random.choice(['w', 'l'])
             self.nb1 = self.rectangle.perimeter

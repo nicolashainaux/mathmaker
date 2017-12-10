@@ -29,7 +29,7 @@ from mathmaker.lib.document.content.calculation \
 
 def test_fraction_equal_to_1():
     """Check a Fraction equal to 1 is correctly handled."""
-    o = fraction_of_a_rectangle.sub_object(numbers_to_use=[2, 2, 2, 2])
+    o = fraction_of_a_rectangle.sub_object(build_data=[2, 2, 2, 2])
     assert o.answer_wording == \
         '$ \\dfrac{\\text{4}}{\\text{4}} $' \
         ' (or ' \
@@ -37,7 +37,7 @@ def test_fraction_equal_to_1():
         ', or ' \
         '$ \\text{1} $' \
         ')'
-    o = fraction_of_a_rectangle.sub_object(numbers_to_use=[2, 3, 2, 3])
+    o = fraction_of_a_rectangle.sub_object(build_data=[2, 3, 2, 3])
     assert o.answer_wording == \
         '$ \\dfrac{\\text{6}}{\\text{6}} $' \
         ' (or ' \
@@ -51,15 +51,15 @@ def test_fraction_equal_to_1():
 
 def test_fractions_reductions():
     """Check all normal cases are correctly handled."""
-    o = fraction_of_a_rectangle.sub_object(numbers_to_use=[1, 2, 1, 3])
+    o = fraction_of_a_rectangle.sub_object(build_data=[1, 2, 1, 3])
     assert o.answer_wording == '$ \\dfrac{\\text{2}}{\\text{3}} $'
-    o = fraction_of_a_rectangle.sub_object(numbers_to_use=[3, 5, 9, 4])
+    o = fraction_of_a_rectangle.sub_object(build_data=[3, 5, 9, 4])
     assert o.answer_wording == \
         '$ \\dfrac{\\text{15}}{\\text{36}} $' \
         ' (or ' \
         '$ \\dfrac{\\text{5}}{\\text{12}} $' \
         ')'
-    o = fraction_of_a_rectangle.sub_object(numbers_to_use=[9, 4, 7, 8])
+    o = fraction_of_a_rectangle.sub_object(build_data=[9, 4, 7, 8])
     assert o.answer_wording == \
         '$ \\dfrac{\\text{36}}{\\text{56}} $' \
         ' (or ' \
@@ -67,7 +67,7 @@ def test_fractions_reductions():
         ', or ' \
         '$ \\dfrac{\\text{9}}{\\text{14}} $' \
         ')'
-    o = fraction_of_a_rectangle.sub_object(numbers_to_use=[3, 6, 4, 6])
+    o = fraction_of_a_rectangle.sub_object(build_data=[3, 6, 4, 6])
     assert o.answer_wording == \
         '$ \\dfrac{\\text{18}}{\\text{24}} $' \
         ' (or ' \
@@ -77,7 +77,7 @@ def test_fractions_reductions():
         ', or ' \
         '$ \\dfrac{\\text{3}}{\\text{4}} $' \
         ')'
-    o = fraction_of_a_rectangle.sub_object(numbers_to_use=[4, 8, 5, 8])
+    o = fraction_of_a_rectangle.sub_object(build_data=[4, 8, 5, 8])
     assert o.answer_wording == \
         '$ \\dfrac{\\text{32}}{\\text{40}} $' \
         ' (or ' \

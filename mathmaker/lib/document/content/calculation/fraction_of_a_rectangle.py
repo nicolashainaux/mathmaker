@@ -31,12 +31,12 @@ from mathmaker.lib.document.content import component
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, **options):
-        if len(numbers_to_use) == 3:
-            numbers_to_use = numbers_to_use[0:2] \
-                + (numbers_to_use[0], ) + (numbers_to_use[2], )
+    def __init__(self, build_data, **options):
+        if len(build_data) == 3:
+            build_data = build_data[0:2] \
+                + (build_data[0], ) + (build_data[2], )
         super().setup('minimal', **options)
-        super().setup('numbers', nb=numbers_to_use, shuffle_nbs=False,
+        super().setup('numbers', nb=build_data, shuffle_nbs=False,
                       **options)
         # nb3 * nb4 will be the greatest product
         if self.nb1 * self.nb2 > self.nb3 * self.nb4:

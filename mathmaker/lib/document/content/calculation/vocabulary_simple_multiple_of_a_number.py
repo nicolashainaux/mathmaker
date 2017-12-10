@@ -27,14 +27,14 @@ from . import vocabulary_questions
 
 class sub_object(vocabulary_questions.structure):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, build_data, **options):
         MULTIPLE_QUESTIONS = {2: _('What is the double of {nb2}?'),
                               3: _('What is the triple of {nb2}?'),
                               4: _('What is the quadruple of {nb2}?')}
-        if numbers_to_use[0] not in MULTIPLE_QUESTIONS:
-            numbers_to_use = sorted(numbers_to_use)[::-1]
-            numbers_to_use = [numbers_to_use[0] // 10, numbers_to_use[1] * 10]
-        super().__init__(numbers_to_use,
+        if build_data[0] not in MULTIPLE_QUESTIONS:
+            build_data = sorted(build_data)[::-1]
+            build_data = [build_data[0] // 10, build_data[1] * 10]
+        super().__init__(build_data,
                          result_fct=lambda x, y: x * y,
-                         wording=MULTIPLE_QUESTIONS[numbers_to_use[0]],
+                         wording=MULTIPLE_QUESTIONS[build_data[0]],
                          shuffle_nbs=False)

@@ -35,13 +35,13 @@ ALL_LENGTHS_TO_CALCULATE = ['oneside', 'onechunk', 'twosides', 'twochunks',
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, picture='true', **options):
+    def __init__(self, build_data, picture='true', **options):
         super().setup("minimal", **options)
-        if numbers_to_use[0] < 11:
-            raise ValueError('numbers_to_use[0] == {} whereas it should be '
-                             '>= 11'.format(str(numbers_to_use[0])))
-        numbers_to_use = (numbers_to_use[0] / 10, ) + numbers_to_use[1:]
-        super().setup("numbers", nb=numbers_to_use,
+        if build_data[0] < 11:
+            raise ValueError('build_data[0] == {} whereas it should be '
+                             '>= 11'.format(str(build_data[0])))
+        build_data = (build_data[0] / 10, ) + build_data[1:]
+        super().setup("numbers", nb=build_data,
                       shuffle_nbs=False, **options)
         super().setup("length_units", **options)
         super().setup("intercept_theorem_figure", **options)

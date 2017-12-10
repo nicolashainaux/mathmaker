@@ -27,15 +27,15 @@ from . import vocabulary_questions
 
 class sub_object(vocabulary_questions.structure):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, build_data, **options):
         PARTS_QUESTIONS = {2: _('What is the half of {result}?'),
                            3: _('What is the third of {result}?'),
                            4: _('What is the quarter of {result}?')}
-        if numbers_to_use[0] not in PARTS_QUESTIONS:
-            numbers_to_use = sorted(numbers_to_use)[::-1]
-            numbers_to_use = [numbers_to_use[0] // 10, numbers_to_use[1] * 10]
-        super().__init__(numbers_to_use,
+        if build_data[0] not in PARTS_QUESTIONS:
+            build_data = sorted(build_data)[::-1]
+            build_data = [build_data[0] // 10, build_data[1] * 10]
+        super().__init__(build_data,
                          result_fct=lambda x, y: x * y,
-                         wording=PARTS_QUESTIONS[numbers_to_use[0]],
+                         wording=PARTS_QUESTIONS[build_data[0]],
                          shuffle_nbs=False,
                          answer='{nb2}')

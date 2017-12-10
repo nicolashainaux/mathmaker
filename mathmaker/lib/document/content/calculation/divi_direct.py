@@ -31,9 +31,9 @@ from mathmaker.lib.tools.wording import post_process
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, build_data, **options):
         super().setup("minimal", **options)
-        super().setup("division", nb=numbers_to_use, **options)
+        super().setup("division", nb=build_data, **options)
         self.transduration = 9
         if self.divisor > 9 and self.divisor % 10 != 0:
             self.transduration = 12

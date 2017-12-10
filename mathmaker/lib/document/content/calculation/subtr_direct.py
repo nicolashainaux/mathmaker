@@ -33,10 +33,10 @@ from mathmaker.lib.tools.wording import post_process
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, build_data, **options):
         super().setup("minimal", **options)
-        super().setup("numbers", nb=numbers_to_use, **options)
-        super().setup("nb_variants", nb=numbers_to_use, **options)
+        super().setup("numbers", nb=build_data, **options)
+        super().setup("nb_variants", nb=build_data, **options)
         self.transduration = 8
         if (self.nb1 > 20 and self.nb2 > 20
             and abs(self.nb1 - self.nb2) > 10

@@ -30,7 +30,7 @@ from mathmaker.lib.document.content import component
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, picture='true', **options):
+    def __init__(self, build_data, picture='true', **options):
         super().setup("minimal", **options)
         super().setup("length_units", **options)
         super().setup("right_triangle", **options)

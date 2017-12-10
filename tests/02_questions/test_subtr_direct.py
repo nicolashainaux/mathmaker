@@ -29,13 +29,13 @@ from mathmaker.lib.document.content.calculation import subtr_direct
 def test_subtr_direct_exceptions():
     """Check a wrong context raises an exception."""
     with pytest.raises(ValueError) as excinfo:
-        subtr_direct.sub_object(numbers_to_use=[10, 2],
+        subtr_direct.sub_object(build_data=[10, 2],
                                 context='complement_wordingnuts1')
     assert str(excinfo.value).startswith('Cannot recognize context: ')
 
 
 def test_subtr_direct():
     """Check all normal cases are correctly handled."""
-    o = subtr_direct.sub_object(numbers_to_use=[10, 2],
+    o = subtr_direct.sub_object(build_data=[10, 2],
                                 context='complement_wording')
     assert o.context in ['complement_wording1', 'complement_wording2']

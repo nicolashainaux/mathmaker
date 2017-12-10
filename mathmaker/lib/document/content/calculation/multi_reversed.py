@@ -30,8 +30,8 @@ from mathmaker.lib.core.base_calculus import Product
 
 class sub_object(object):
 
-    def __init__(self, numbers_to_use, **options):
-        nb_list = list(numbers_to_use)
+    def __init__(self, build_data, **options):
+        nb_list = list(build_data)
         self.nb1, self.nb2 = random.sample(nb_list, 2)
         self.product = Product([self.nb1, self.nb2]).evaluate()
         self.transduration = 9

@@ -31,15 +31,15 @@ from mathmaker.lib.document.content import component
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, hidden=None,
+    def __init__(self, build_data, hidden=None,
                  swap_complement=None, **options):
         if hidden is None:
             hidden = random.choice([1, 2])
         if swap_complement is None:
             swap_complement = random.choice([True, False])
         super().setup("minimal", **options)
-        super().setup("numbers", nb=numbers_to_use, **options)
-        super().setup("nb_variants", nb=numbers_to_use, **options)
+        super().setup("numbers", nb=build_data, **options)
+        super().setup("nb_variants", nb=build_data, **options)
         self.transduration = 12
         if (self.nb1 > 20 and self.nb2 > 20
             and abs(self.nb1 - self.nb2) > 10

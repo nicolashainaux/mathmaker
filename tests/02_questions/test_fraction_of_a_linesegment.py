@@ -29,35 +29,35 @@ from mathmaker.lib.document.content.calculation \
 def test_instanciation_errors():
     """Check errors are raised as expected."""
     with pytest.raises(ValueError) as excinfo:
-        fraction_of_a_linesegment.sub_object(numbers_to_use=[1, 1, 2, 2])
+        fraction_of_a_linesegment.sub_object(build_data=[1, 1, 2, 2])
     assert str(excinfo.value) == 'Need either 2, or 3 numbers to build this ' \
         'question.'
 
 
 def test_use_cases():
     """Check usage cases are correctly handled."""
-    o = fraction_of_a_linesegment.sub_object(numbers_to_use=[2, 3])
+    o = fraction_of_a_linesegment.sub_object(build_data=[2, 3])
     assert o.answer_wording == r'$ \dfrac{2}{3} $'
 
-    o = fraction_of_a_linesegment.sub_object(numbers_to_use=[3, 2])
+    o = fraction_of_a_linesegment.sub_object(build_data=[3, 2])
     assert o.answer_wording == r'$ \dfrac{2}{3} $'
 
-    o = fraction_of_a_linesegment.sub_object(numbers_to_use=[1, 10])
+    o = fraction_of_a_linesegment.sub_object(build_data=[1, 10])
     assert o.answer_wording == r'$ \dfrac{1}{10} $'
     assert o.transduration == 14
 
-    o = fraction_of_a_linesegment.sub_object(numbers_to_use=[2, 2, 3])
+    o = fraction_of_a_linesegment.sub_object(build_data=[2, 2, 3])
     assert o.answer_wording == r'$ \dfrac{4}{6} $ (or $ \dfrac{2}{3} $)'
 
-    o = fraction_of_a_linesegment.sub_object(numbers_to_use=[36, 56])
+    o = fraction_of_a_linesegment.sub_object(build_data=[36, 56])
     assert o.answer_wording == r'$ \dfrac{36}{56} $ (or $ \dfrac{18}{28} $, ' \
         r'or $ \dfrac{9}{14} $)'
 
-    o = fraction_of_a_linesegment.sub_object(numbers_to_use=[18, 24])
+    o = fraction_of_a_linesegment.sub_object(build_data=[18, 24])
     assert o.answer_wording == r'$ \dfrac{18}{24} $ (or $ \dfrac{9}{12} $, ' \
         r'or $ \dfrac{6}{8} $, or $ \dfrac{3}{4} $)'
 
-    o = fraction_of_a_linesegment.sub_object(numbers_to_use=[32, 40])
+    o = fraction_of_a_linesegment.sub_object(build_data=[32, 40])
     assert o.answer_wording == r'$ \dfrac{32}{40} $ (or $ \dfrac{16}{20} $, ' \
         r'or $ \dfrac{8}{10} $...)'
     assert o.js_a() == ['4/5', 'any_fraction == 4/5']

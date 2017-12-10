@@ -28,10 +28,10 @@ from mathmaker.lib.tools.wording import setup_wording_format_of
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, build_data, **options):
         super().setup("minimal", **options)
-        super().setup("numbers", nb=numbers_to_use, **options)
-        super().setup("nb_variants", nb=numbers_to_use, **options)
+        super().setup("numbers", nb=build_data, **options)
+        super().setup("nb_variants", nb=build_data, **options)
         super().setup("length_units", **options)
         super().setup("rectangle", **options)
         self.transduration = 8

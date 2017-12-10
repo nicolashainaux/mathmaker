@@ -34,7 +34,7 @@ class sub_object(object):
     def __init__(self, **options):
         self.preset = options.get('preset', 'default')
         self.decimal_representation = \
-            Decimal(str(options.get('numbers_to_use')[0]))
+            Decimal(str(options.get('build_data')[0]))
         # self.decimal_representation = \
         #     generate_random_decimal_nb(position=start_pos,
         #                                width=random.choice([1, 2, 3]),

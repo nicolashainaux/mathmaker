@@ -34,13 +34,13 @@ from mathmaker.lib.tools.database import generate_random_decimal_nb
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, build_data, **options):
         super().setup('minimal', **options)
         self.transduration = 10
         # if (self.nb1 > 20 and self.nb2 > 20
         #     and not self.nb1 % 10 == 0 and not self.nb2 % 10 == 0):
         #     self.transduration = 12
-        unit1, unit2, direction, physical_quantity, level = numbers_to_use
+        unit1, unit2, direction, physical_quantity, level = build_data
         start_position = [Decimal('10'), Decimal('1'), Decimal('0.1')]
         if difference_of_orders_of_magnitude(unit1, unit2) >= Decimal('100'):
             start_position = [Decimal('1'), Decimal('0.1'), Decimal('0.01')]

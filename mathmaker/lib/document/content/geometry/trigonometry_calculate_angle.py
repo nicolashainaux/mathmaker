@@ -29,13 +29,13 @@ from mathmaker.lib.document.content import component
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, picture='true', **options):
+    def __init__(self, build_data, picture='true', **options):
         super().setup("minimal", **options)
         super().setup("length_units", **options)
         super().setup("right_triangle", **options)
         # nb1 and nb2 are sides' lengths,
         # they may require to be ordered, later on...
-        super().setup("numbers", nb=numbers_to_use,
+        super().setup("numbers", nb=build_data,
                       shuffle_nbs=False, sort_nbs=True, **options)
 
         if self.variant in ['default', 'random']:

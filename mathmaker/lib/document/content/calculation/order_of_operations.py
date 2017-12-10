@@ -1386,9 +1386,9 @@ class sub_object(component.structure):
                 f = d - (a + nbs * b) / c
             self.watch('no negative', f, letters='f')
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, build_data, **options):
         super().setup("minimal", **options)
-        super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
+        super().setup("numbers", nb=build_data, shuffle_nbs=False,
                       **options)
         direct_test = options.get('direct_test', False)
         if not direct_test:

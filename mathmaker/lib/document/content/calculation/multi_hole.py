@@ -31,8 +31,8 @@ from mathmaker.lib.core.calculus import Equality
 
 class sub_object(object):
 
-    def __init__(self, numbers_to_use, **options):
-        nb_list = list(numbers_to_use)
+    def __init__(self, build_data, **options):
+        nb_list = list(build_data)
         hole = Item(Value(COLORED_QUESTION_MARK))
         self.hidden_one = None
         visible_one = None

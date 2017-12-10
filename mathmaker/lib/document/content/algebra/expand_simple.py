@@ -30,11 +30,11 @@ from mathmaker.lib.document.content import component
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, build_data, **options):
         super().setup("minimal", **options)
-        super().setup("numbers", nb=numbers_to_use, shuffle_nbs=False,
+        super().setup("numbers", nb=build_data, shuffle_nbs=False,
                       **options)
-        super().setup("nb_variants", nb=numbers_to_use, **options)
+        super().setup("nb_variants", nb=build_data, **options)
 
         degrees1 = [0, 1]
         degrees2 = [0, 1]

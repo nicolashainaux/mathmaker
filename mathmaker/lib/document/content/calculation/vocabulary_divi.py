@@ -27,8 +27,8 @@ from . import vocabulary_questions
 
 class sub_object(vocabulary_questions.structure):
 
-    def __init__(self, numbers_to_use, **options):
-        super().__init__(numbers_to_use,
+    def __init__(self, build_data, **options):
+        super().__init__(build_data,
                          result_fct=lambda x, y: x * y,
                          wording=_('How much is the quotient of {result} by '
                                    '{nb1}?'),

@@ -31,23 +31,21 @@ from mathmaker.lib.document.content import component
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, build_data, **options):
         """
 
-        :param numbers_to_use: either two numbers (will be numerator and
+        :param build_data: either two numbers (will be numerator and
         denominator of the fraction) or three numbers, the first being then a
         coefficient to multiply both others by.
         """
-        if len(numbers_to_use) == 3:
-            numbers_to_use = (Number(numbers_to_use[0])
-                              * Number(numbers_to_use[1]),
-                              Number(numbers_to_use[0])
-                              * Number(numbers_to_use[2]))
-        elif len(numbers_to_use) != 2:
+        if len(build_data) == 3:
+            build_data = (Number(build_data[0]) * Number(build_data[1]),
+                          Number(build_data[0]) * Number(build_data[2]))
+        elif len(build_data) != 2:
             raise ValueError('Need either 2, or 3 numbers to build this '
                              'question.')
         super().setup('minimal', **options)
-        super().setup('numbers', nb=numbers_to_use, shuffle_nbs=False,
+        super().setup('numbers', nb=build_data, shuffle_nbs=False,
                       **options)
         # We must have nb1 < nb2 in order to build the DividedLineSegment:
         if self.nb1 > self.nb2:

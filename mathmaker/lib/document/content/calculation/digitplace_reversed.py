@@ -35,7 +35,7 @@ class sub_object(object):
 
     def __init__(self, **options):
         self.preset = options.get('preset', 'default')
-        pos = options.get('numbers_to_use')[0]
+        pos = options.get('build_data')[0]
 
         self.chosen_deci = \
             generate_random_decimal_nb(position=pos, **options)[0]

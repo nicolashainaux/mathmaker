@@ -30,9 +30,9 @@ from mathmaker.lib.tools.wording import setup_wording_format_of
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, **options):
+    def __init__(self, build_data, **options):
         super().setup('minimal', **options)
-        super().setup('numbers', nb=numbers_to_use, shuffle_nbs=False,
+        super().setup('numbers', nb=build_data, shuffle_nbs=False,
                       **options)
         if self.nb_variant.startswith('decimal'):
             deci_nb = int(self.nb_variant[-1])

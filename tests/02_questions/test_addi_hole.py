@@ -30,16 +30,16 @@ from tools import wrap_nb
 
 def test_addi_hole():
     """Check all normal cases are correctly handled."""
-    o = addi_hole.sub_object(numbers_to_use=[10, 2],
+    o = addi_hole.sub_object(build_data=[10, 2],
                              nb_source='complements_to_10')
     assert o.result == wrap_nb('10')
-    o = addi_hole.sub_object(numbers_to_use=[21, 21])
+    o = addi_hole.sub_object(build_data=[21, 21])
     assert o.transduration == 16
-    o = addi_hole.sub_object(numbers_to_use=[5, 7], hidden=1)
+    o = addi_hole.sub_object(build_data=[5, 7], hidden=1)
     assert '?' in o.nb1.printed
-    o = addi_hole.sub_object(numbers_to_use=[5, 7], hidden=2)
+    o = addi_hole.sub_object(build_data=[5, 7], hidden=2)
     assert '?' in o.nb2.printed
-    o = addi_hole.sub_object(numbers_to_use=[10, 20], nb_variant='decimal1')
+    o = addi_hole.sub_object(build_data=[10, 20], nb_variant='decimal1')
     assert ((is_number(o.nb1) and not is_integer(o.nb1))
             or (is_number(o.nb2) and not is_integer(o.nb2))
             or (is_number(o.result_nb) and not is_integer(o.result_nb)))
