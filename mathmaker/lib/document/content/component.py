@@ -34,6 +34,7 @@ from mathmaker.lib import shared
 from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.tools import rotate, fix_math_style2_fontsize
 from mathmaker.lib.tools.wording import setup_wording_format_of
+from mathmaker.lib.tools.shapes import ShapeGenerator
 
 
 class structure(object):
@@ -384,6 +385,47 @@ class structure(object):
                            Decimal(cols), Decimal(rows), 'B', 'C', 'D'],
                           layout='×'.join([rows, cols]),
                           fill='×'.join([frows, fcols]))
+
+    def _generate_polygon(self, codename, labels):
+        # codename: see database, table polygons
+        # labels: come as [(1, nb), (2, nb), (2, nb)]
+        # (see _setup_polygon below)
+        self.polygon = ShapeGenerator()\
+            .generate(codename, labels=labels, name=self.polygon_name,
+                      label_vertices=self.label_polygon_vertices,
+                      thickness=self.tikz_linesegments_thickness,
+                      length_unit=self.length_unit)
+        self.polygon.scale = self.tikz_picture_scale
+        for s in self.polygon.sides:
+            s.label_scale = Number('0.85') * self.tikz_picture_scale
+
+    def _setup_polygon(self, polygon_data=None):
+        # polygon_data is of the form:
+        # (sides_nb, codename, specificname, sides_particularity, level,
+        #  variant, table2, table3, table4, table5, table6, ...)
+        # where ... are the available numbers to use for sides labeling.
+        polygon_data = list(polygon_data)
+        self.polygon_sides_nb = polygon_data[0]
+        self.polygon_codename = polygon_data[1]
+        self.polygon_name = None
+        self.label_polygon_vertices = False
+        # We'll browse the multiples in reversed order
+        multiples = [int(_)
+                     for _ in self.polygon_codename.split('_')[1:]][::-1]
+        labels = []
+        for m in multiples:
+            if m == 1:
+                labels.append((1, polygon_data.pop()))
+            elif m >= 2:
+                other = polygon_data.pop()
+                if m == other:
+                    other = polygon_data.pop()
+                else:
+                    polygon_data.pop()
+                labels.append((m, other))
+        # Now, we have lengths stored in labels as, for example:
+        # [(1, nb), (2, nb), (2, nb)]
+        self._generate_polygon(self.polygon_codename, labels)
 
     def setup(self, arg, **kwargs):
         if type(arg) is not str:

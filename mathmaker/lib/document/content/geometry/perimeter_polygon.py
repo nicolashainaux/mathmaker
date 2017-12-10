@@ -27,44 +27,35 @@ from mathmaker.lib.tools.wording import setup_wording_format_of
 
 class sub_object(component.structure):
 
-    def __init__(self, numbers_to_use, **options):
-        super().setup("minimal", **options)
-        super().setup("numbers", nb=numbers_to_use, **options)
-        super().setup("nb_variants", nb=numbers_to_use, **options)
-        super().setup("length_units", **options)
-        super().setup("rectangle", **options)
+    def __init__(self, build_data, **options):
+        super().setup('minimal', **options)
+        # super().setup('numbers', nb=, **options)
+        # super().setup('nb_variant', **options)
+        super().setup('length_units', **options)
+        super().setup('polygon', polygon_data=build_data)
 
-        if self.picture:
-            self.wording = _("Perimeter of this rectangle? |hint:length_unit|")
-            setup_wording_format_of(self)
-        else:
-            self.nb1, self.nb2 = self.rectangle.width, self.rectangle.length
-            self.wording = _("Perimeter of a rectangle whose width "
-                             "is {nb1} {length_unit} and length is "
-                             "{nb2} {length_unit}? |hint:length_unit|")
-            setup_wording_format_of(self)
+        self.wording = {
+            3: _('Perimeter of this triangle? |hint:length_unit|'),
+            4: _('Perimeter of this quadrilateral? |hint:length_unit|'),
+            5: _('Perimeter of this pentagon? |hint:length_unit|'),
+            6: _('Perimeter of this hexagon? |hint:length_unit|')
+        }[len(self.polygon.sides)]
+
+        setup_wording_format_of(self)
+        self.wording = self.wording.format(**self.wording_format)
 
     def q(self, **options):
-        if self.picture:
-            if options.get('x_layout_variant', 'default') == 'slideshow':
-                return shared.machine.insert_picture(self.rectangle,
-                                                     scale=1.1) \
-                    + '\n' + self.wording
-            else:
-                return shared.machine.write_layout(
-                    (1, 2),
-                    [5, 8],
-                    [shared.machine.insert_picture(
-                     self.rectangle,
-                     scale=0.75,
-                     vertical_alignment_in_a_tabular=True),
-                     self.wording.format(**self.wording_format)])
+        if self.slideshow:
+            return '{}\n{}'.format(self.polygon.drawn, self.wording)
         else:
-            return self.wording.format(**self.wording_format)
+            # 6pt for default triangle shape is fine
+            self.polygon.baseline = '6pt'
+            return shared.machine.write_layout(
+                (1, 2), [5, 8], [self.polygon.drawn, self.wording])
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        return self.rectangle.perimeter.into_str(display_SI_unit=True)
+        return self.polygon.lbl_perimeter.printed
 
     def js_a(self, **kwargs):
-        return [self.rectangle.perimeter.jsprinted]
+        return [self.polygon.lbl_perimeter.uiprinted]

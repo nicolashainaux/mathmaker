@@ -379,7 +379,7 @@ def db_table(tag):
     elif tag == 'decimalfractionssums':
         return 'decimals'
     elif tag in ['int_deci_clever_pairs', 'digits_places', 'fracdigits_places',
-                 'decimals']:
+                 'decimals', 'polygons']:
         return tag
     return ''
 
@@ -405,7 +405,7 @@ def classify_tag(tag):
                  'decimal_and_one_digit_for_divi',
                  'unitspairs', 'digits_places', 'fracdigits_places',
                  'decimals', 'decimalfractionssums', 'extdecimals',
-                 'simple_fractions', 'dvipsnames_selection']:
+                 'simple_fractions', 'dvipsnames_selection', 'polygons']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -666,6 +666,27 @@ def preprocess_decimals_query(qkw=None):
     else:
         d.update({'fd': qkw['fd']})
     return d
+
+
+def preprocess_polygons_sides_lengths_query(polygon_data=None, qkw=None):
+    """
+    Create correct number of sources, depending on what has been asked.
+    """
+    codename = polygon_data[1]
+    # How many different kinds of numbers do we need?
+    # Can be found in polygon's "codename",
+    # e.g. pentagon_3_2 requires 2 numbers
+    different_nb_nb = len(codename.split('_')) - 1
+    sum_ingredients = qkw.get('sum_ingredients', 'int_2to10')
+    possible_nb_sources = sum_ingredients.split('/')
+    random.shuffle(possible_nb_sources)
+    nb_sources = []
+    nb_sources_box = copy.deepcopy(possible_nb_sources)
+    for i in range(different_nb_nb):
+        if not nb_sources_box:
+            nb_sources_box = copy.deepcopy(possible_nb_sources)
+        nb_sources.append(nb_sources_box.pop())
+    return nb_sources
 
 
 def preprocess_extdecimals_query(qkw=None):
@@ -1180,6 +1201,26 @@ class mc_source(object):
                     qkw=qkw, **kwargs)
         elif tag_classification == 'dvipsnames_selection':
             return shared.dvipsnames_selection_source.next(**kwargs)
-
+        elif tag_classification == 'polygons':
+            result = shared.polygons_source.next(**kwargs)
+            import sys
+            nb_sources = preprocess_polygons_sides_lengths_query(
+                polygon_data=result, qkw=qkw)
+            codename = result[1]
+            multiples = [int(_) for _ in codename.split('_')[1:]]
+            for nb_source, m in zip(nb_sources, multiples):
+                all_kw = {}
+                all_kw.update(kwargs)
+                all_kw.update(qkw)
+                adj_qkw = preprocess_qkw(db_table(nb_source), qkw=all_kw)
+                if m >= 2 and nb_source.startswith('singleint'):
+                    nb_source = 'multiplesof{}_{}'\
+                        .format(m, nb_source.split('_')[1])
+                if m >= 2 and not nb_source.startswith('multiplesof'):
+                    result += (m, mc_source().next(nb_source, qkw=adj_qkw)[0])
+                else:
+                    result += mc_source().next(nb_source, qkw=adj_qkw)
+            sys.stderr.write('\npolygon query result={}\n'.format(result))
+            return result
         elif tag_classification == 'nothing':
             return ()
