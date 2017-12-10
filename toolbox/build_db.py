@@ -258,7 +258,7 @@ def __main__():
                for i in range(INTTRIPLETS_MAX)
                for j in range(INTTRIPLETS_MAX)
                for k in range(INTTRIPLETS_MAX)
-               if k >= j >= i]
+               if k >= j >= i and k - i <= 60]
     sys.stderr.write('Insert integers triplets...')
     for i in range(100):
         sys.stderr.write('\rInsert integers triplets... {} %'.format(i))
