@@ -71,6 +71,18 @@
         "suits_for_deci1",
         "suits_for_deci2"
     ],
+    "int_triplets": [
+        "id",
+        "nb1",
+        "nb2",
+        "nb3",
+        "triangle",
+        "isosceles",
+        "equilateral",
+        "pythagorean",
+        "equal_sides",
+        "drawDate"
+    ],
     "simple_fractions": [
         "id",
         "nb1",

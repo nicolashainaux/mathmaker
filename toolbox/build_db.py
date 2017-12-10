@@ -64,6 +64,7 @@ from mathmaker.lib.constants.numeration import DIGITSPLACES
 from mathmaker.lib.constants.numeration import DIGITSPLACES_DECIMAL
 
 INTPAIRS_MAX = 1000
+INTTRIPLETS_MAX = 200
 SINGLEINTS_MAX = 1000
 
 
@@ -131,6 +132,10 @@ def __main__():
             (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
              lock_equal_products INTEGER, drawDate INTEGER, clever INTEGER,
              suits_for_deci1 INTEGER, suits_for_deci2 INTEGER)''',
+         '''CREATE TABLE int_triplets
+            (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
+             triangle INTEGER, isosceles INTEGER, equilateral INTEGER,
+             pythagorean INTEGER, equal_sides INTEGER, drawDate INTEGER)''',
          '''CREATE TABLE simple_fractions
             (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
              reducible INTEGER, drawDate INTEGER)''',
@@ -222,7 +227,6 @@ def __main__():
                        db_rows)
 
     sys.stderr.write('Insert integers pairs...')
-    # Insert integers pairs into the db
     # Tables of 1, 2, 3... INTPAIRS_MAX
     db_rows = [(i + 1, j + 1, 0, 0, 0,
                 _suits_for_deci1(i + 1, j + 1),
@@ -239,6 +243,32 @@ def __main__():
                        db_rows[i * len(db_rows) // 100:
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers pairs... 100 %\n')
+
+    sys.stderr.write('Create integers triplets...\n')
+    # Tables of 1, 2, 3... INTTRIPLETS_MAX
+    db_rows = [(i + 1, j + 1, k + 1,  # nb1, nb2, nb3
+                k + 1 < i + j + 2,  # triangle?
+                (i == j and j != k) or (i == k and i != j)
+                or (j == k and i != j),  # isosceles? (but not equilateral)
+                i == j == k,  # equilateral?
+                (k + 1) ** 2 == (i + 1) ** 2 + (j + 1) ** 2,  # pythagorean?
+                (i == j or j == k or k == i),  # at least 2 equal sides?
+                0  # drawDate
+                )
+               for i in range(INTTRIPLETS_MAX)
+               for j in range(INTTRIPLETS_MAX)
+               for k in range(INTTRIPLETS_MAX)
+               if k >= j >= i]
+    sys.stderr.write('Insert integers triplets...')
+    for i in range(100):
+        sys.stderr.write('\rInsert integers triplets... {} %'.format(i))
+        db.executemany("INSERT "
+                       "INTO int_triplets(nb1, nb2, nb3, triangle, isosceles, "
+                       "equilateral, pythagorean, equal_sides, drawDate) "
+                       "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                       db_rows[i * len(db_rows) // 100:
+                               (i + 1) * len(db_rows) // 100])
+    sys.stderr.write('\rInsert integers triplets... 100 %\n')
     # sys.stderr.flush()
 
     sys.stderr.write('Setup integers pairs: clever (5)...\n')
