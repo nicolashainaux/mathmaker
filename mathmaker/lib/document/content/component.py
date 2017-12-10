@@ -384,8 +384,12 @@ class structure(object):
             raise TypeError('arg must be a str')
         try:
             getattr(self, '_setup_' + arg)(**kwargs)
-        except AttributeError:
-            raise ValueError('Cannot setup \'{}\''.format(arg))
+        except AttributeError as excinfo:
+            if str(excinfo).endswith('has no attribute \'_setup_{}\''
+                                     .format(arg)):
+                raise ValueError('There is no private method _setup_{}() '
+                                 'to handle setup of \'{}\'.'
+                                 .format(arg, arg))
 
     def dbg_info(self, msg, *numbers, letters=alphabet):
         """
