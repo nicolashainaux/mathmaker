@@ -279,7 +279,7 @@ def get_nb_sources_from_question_info(q_i):
             questions_sources = ['intpairs_' + bounds, 'intpairs_' + bounds]
             extra_infos.update({'merge_sources': True,
                                 'coprime': True})
-        elif q_i.nb_source[0].startswith('inttriplets_'):
+        elif q_i.nb_source[0].startswith('mergedinttriplets_'):
             chunks = q_i.nb_source[0].split(sep='_')
             if not len(chunks) >= 2:
                 raise ValueError('Incorrect numbers\' source value in xml '
