@@ -391,7 +391,8 @@ class structure(object):
         # labels: come as [(1, nb), (2, nb), (2, nb)]
         # (see _setup_polygon below)
         self.polygon = ShapeGenerator()\
-            .generate(codename, labels=labels, name=self.polygon_name,
+            .generate(codename, variant=variant, labels=labels,
+                      name=self.polygon_name,
                       label_vertices=self.label_polygon_vertices,
                       thickness=self.tikz_linesegments_thickness,
                       length_unit=self.length_unit)
