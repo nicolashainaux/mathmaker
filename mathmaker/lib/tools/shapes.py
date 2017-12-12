@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmakerlib.calculus import Number
-from mathmakerlib.geometry import Point, Triangle
+from mathmakerlib.geometry import Point, Triangle, AngleMark
 
 from mathmaker.lib import shared
 
@@ -46,25 +46,46 @@ class ShapeGenerator(object):
     def _triangle_1_1_1(self, variant=None, labels=None, name=None,
                         label_vertices=None, thickness=None, length_unit=None,
                         shape_variant_nb=None):
-        shape_variants = {1: [(0, 0),
-                              (2, 0),
-                              (Number('0.582'), Number('0.924')),
-                              '6pt'],
-                          2: [(0, 0),
-                              (2, 0),
-                              (Number('1.418'), Number('0.924')),
-                              '6pt'],
-                          3: [(2, Number('0.924')),
-                              (0, Number('0.924')),
-                              (Number('1.418'), 0),
-                              '13pt'],
-                          4: [(2, Number('0.924')),
-                              (0, Number('0.924')),
-                              (Number('0.582'), 0),
-                              '13pt']
-                          }
-        if shape_variant_nb is None:
-            shape_variant_nb = next(shared.scalene_triangle_shapes_source)[0]
+        if variant == 0:  # scalene triangle shapes
+            shape_variants = {1: [(0, 0),
+                                  (2, 0),
+                                  (Number('0.582'), Number('0.924')),
+                                  '6pt'],
+                              2: [(0, 0),
+                                  (2, 0),
+                                  (Number('1.418'), Number('0.924')),
+                                  '6pt'],
+                              3: [(2, Number('0.924')),
+                                  (0, Number('0.924')),
+                                  (Number('1.418'), 0),
+                                  '13pt'],
+                              4: [(2, Number('0.924')),
+                                  (0, Number('0.924')),
+                                  (Number('0.582'), 0),
+                                  '13pt']
+                              }
+            if shape_variant_nb is None:
+                shape_variant_nb = \
+                    next(shared.scalene_triangle_shapes_source)[0]
+        elif variant == 1:  # right triangle shapes
+            shape_variants = {1: [(0, 0), (2, 0), (2, 1), '8pt'],
+                              2: [(2, 0), (2, 1), (0, 1), '17pt'],
+                              3: [(2, 1), (0, 1), (0, 0), '17pt'],
+                              4: [(0, 1), (0, 0), (2, 0), '8pt'],
+                              5: [('2.236', 0), ('0.582', '0.981'), (0, 0),
+                                  '8pt'],
+                              6: [('2.1', 0), ('1.418', '0.981'), (0, 0),
+                                  '8pt'],
+                              7: [(0, '0.981'), ('0.582', 0),
+                                  ('2.236', '0.981'),
+                                  '17pt'],
+                              8: [(0, '0.981'), ('1.418', 0),
+                                  ('2.1', '0.981'),
+                                  '17pt']
+                              }
+            if shape_variant_nb is None:
+                shape_variant_nb = \
+                    next(shared.right_triangle_shapes_source)[0]
         p = shape_variants[shape_variant_nb]
         polygon = Triangle(Point(*p[0]), Point(*p[1]), Point(*p[2]),
                            name=name, label_vertices=label_vertices,
@@ -73,5 +94,8 @@ class ShapeGenerator(object):
             labels=[Number(labels[0][1], unit=length_unit),
                     Number(labels[1][1], unit=length_unit),
                     Number(labels[2][1], unit=length_unit)])
+        if variant == 1:  # right triangle shapes
+            polygon.angles[1].mark = AngleMark(thickness=thickness)
+            polygon.angles[1].mark_right = True
         polygon.baseline = p[3]
         return polygon
