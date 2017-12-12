@@ -71,7 +71,7 @@
         "suits_for_deci1",
         "suits_for_deci2"
     ],
-    "int_triplets": [
+    "int_triples": [
         "id",
         "nb1",
         "nb2",
