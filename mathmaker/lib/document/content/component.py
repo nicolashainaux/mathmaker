@@ -386,7 +386,7 @@ class structure(object):
                           layout='×'.join([rows, cols]),
                           fill='×'.join([frows, fcols]))
 
-    def _generate_polygon(self, codename, labels):
+    def _generate_polygon(self, codename, variant, labels):
         # codename: see database, table polygons
         # labels: come as [(1, nb), (2, nb), (2, nb)]
         # (see _setup_polygon below)
@@ -407,6 +407,7 @@ class structure(object):
         polygon_data = list(polygon_data)
         self.polygon_sides_nb = polygon_data[0]
         self.polygon_codename = polygon_data[1]
+        variant = polygon_data[5]
         self.polygon_name = None
         self.label_polygon_vertices = False
         # We'll browse the multiples in reversed order
@@ -425,7 +426,7 @@ class structure(object):
                 labels.append((m, other))
         # Now, we have lengths stored in labels as, for example:
         # [(1, nb), (2, nb), (2, nb)]
-        self._generate_polygon(self.polygon_codename, labels)
+        self._generate_polygon(self.polygon_codename, variant, labels)
 
     def setup(self, arg, **kwargs):
         if type(arg) is not str:

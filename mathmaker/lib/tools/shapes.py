@@ -23,34 +23,55 @@
 from mathmakerlib.calculus import Number
 from mathmakerlib.geometry import Point, Triangle
 
+from mathmaker.lib import shared
+
 
 class ShapeGenerator(object):
 
-    def generate(self, codename=None, labels=None,
+    def generate(self, codename=None, variant=None, labels=None,
                  name=None, label_vertices=None, thickness=None,
                  length_unit=None):
         if type(codename) is not str:
             raise TypeError('codename must be a str')
         try:
             return getattr(self,
-                           '_generate_'
-                           + codename)(labels=labels,
-                                       name=name,
-                                       label_vertices=label_vertices,
-                                       thickness=thickness,
-                                       length_unit=length_unit)
+                           '_' + codename)(variant=variant, labels=labels,
+                                           name=name,
+                                           label_vertices=label_vertices,
+                                           thickness=thickness,
+                                           length_unit=length_unit)
         except AttributeError:
             raise ValueError('Cannot generate \'{}\''.format(codename))
 
-    def _generate_triangle_1_1_1(self, labels=None, name=None,
-                                 label_vertices=None,
-                                 thickness=None, length_unit=None):
-        polygon = Triangle(Point(0, 0), Point(2, 0),
-                           Point(Number('0.582'), Number('0.924')),
+    def _triangle_1_1_1(self, variant=None, labels=None, name=None,
+                        label_vertices=None, thickness=None, length_unit=None,
+                        shape_variant_nb=None):
+        shape_variants = {1: [(0, 0),
+                              (2, 0),
+                              (Number('0.582'), Number('0.924')),
+                              '6pt'],
+                          2: [(0, 0),
+                              (2, 0),
+                              (Number('1.418'), Number('0.924')),
+                              '6pt'],
+                          3: [(2, Number('0.924')),
+                              (0, Number('0.924')),
+                              (Number('1.418'), 0),
+                              '13pt'],
+                          4: [(2, Number('0.924')),
+                              (0, Number('0.924')),
+                              (Number('0.582'), 0),
+                              '13pt']
+                          }
+        if shape_variant_nb is None:
+            shape_variant_nb = next(shared.scalene_triangle_shapes_source)[0]
+        p = shape_variants[shape_variant_nb]
+        polygon = Triangle(Point(*p[0]), Point(*p[1]), Point(*p[2]),
                            name=name, label_vertices=label_vertices,
                            thickness=thickness)
         polygon.setup_labels(
             labels=[Number(labels[0][1], unit=length_unit),
                     Number(labels[1][1], unit=length_unit),
                     Number(labels[2][1], unit=length_unit)])
+        polygon.baseline = p[3]
         return polygon

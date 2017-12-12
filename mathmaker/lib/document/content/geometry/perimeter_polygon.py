@@ -48,8 +48,6 @@ class sub_object(component.structure):
         if self.slideshow:
             return '{}\n{}'.format(self.polygon.drawn, self.wording)
         else:
-            # 6pt for default triangle shape is fine
-            self.polygon.baseline = '6pt'
             return shared.machine.write_layout(
                 (1, 2), [5, 8], [self.polygon.drawn, self.wording])
 
