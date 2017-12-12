@@ -594,8 +594,11 @@ class Exercise(object):
                                                     new_couple_drawn,
                                                     common_nb)
                 else:
+                    not_in = last_draw[nb_source]
+                    if nb_source == 'polygons':
+                        not_in = None
                     drawn = shared.mc_source.next(nb_source,
-                                                  not_in=last_draw[nb_source],
+                                                  not_in=not_in,
                                                   qkw=q.options,
                                                   **get_q_modifier(
                                                       q.id, nb_source),
