@@ -547,12 +547,21 @@ def __main__():
                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                    db_rows)
 
-    sys.stderr.write('Insert shapes variants...\n')
+    sys.stderr.write('Insert shapes variants: scalene triangles...')
     db.execute('''CREATE TABLE scalene_triangle_shapes
                   (id INTEGER PRIMARY KEY, shape_nb, drawDate INTEGER)''')
     db_rows = [(1, 0), (2, 0), (3, 0), (4, 0)]
     db.executemany("INSERT "
                    "INTO scalene_triangle_shapes(shape_nb, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+    sys.stderr.write('\rInsert shapes variants: scalene triangles, '
+                     'right triangles...\n')
+    db.execute('''CREATE TABLE right_triangle_shapes
+                  (id INTEGER PRIMARY KEY, shape_nb, drawDate INTEGER)''')
+    db_rows = [(1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0)]
+    db.executemany("INSERT "
+                   "INTO right_triangle_shapes(shape_nb, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)
 
