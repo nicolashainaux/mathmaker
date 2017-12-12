@@ -258,6 +258,10 @@ class source(object):
                         simple_quote = "'"
                     else:
                         raise
+                # This automatic detection in not enough, since int('1_1_1')
+                # does not raise an error.
+                if any([c not in '0123456789.' for c in str(kwargs[kw])]):
+                        simple_quote = "'"
                 result += next(hook(kn)) + key + rel_sign + simple_quote \
                     + str(kwargs[kw]) + simple_quote + " "
                 kn += 1
@@ -379,7 +383,7 @@ def db_table(tag):
     elif tag == 'decimalfractionssums':
         return 'decimals'
     elif tag in ['int_deci_clever_pairs', 'digits_places', 'fracdigits_places',
-                 'decimals', 'polygons']:
+                 'decimals', 'polygons', 'int_triplets']:
         return tag
     return ''
 
@@ -405,7 +409,8 @@ def classify_tag(tag):
                  'decimal_and_one_digit_for_divi',
                  'unitspairs', 'digits_places', 'fracdigits_places',
                  'decimals', 'decimalfractionssums', 'extdecimals',
-                 'simple_fractions', 'dvipsnames_selection', 'polygons']:
+                 'simple_fractions', 'dvipsnames_selection', 'polygons',
+                 'int_triplets']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -670,23 +675,23 @@ def preprocess_decimals_query(qkw=None):
 
 def preprocess_polygons_sides_lengths_query(polygon_data=None, qkw=None):
     """
-    Create correct number of sources, depending on what has been asked.
+    Query's keywords depending on polygon's type and expected kind of numbers.
     """
-    codename = polygon_data[1]
-    # How many different kinds of numbers do we need?
-    # Can be found in polygon's "codename",
-    # e.g. pentagon_3_2 requires 2 numbers
-    different_nb_nb = len(codename.split('_')) - 1
+    if qkw is None:
+        qkw = {}
+    d = {}
+    sides_nb, codename = polygon_data[0], polygon_data[1]
+    d.update({'code': '_'.join(codename.split('_')[1:])})
     sum_ingredients = qkw.get('sum_ingredients', 'int_2to10')
-    possible_nb_sources = sum_ingredients.split('/')
-    random.shuffle(possible_nb_sources)
-    nb_sources = []
-    nb_sources_box = copy.deepcopy(possible_nb_sources)
-    for i in range(different_nb_nb):
-        if not nb_sources_box:
-            nb_sources_box = copy.deepcopy(possible_nb_sources)
-        nb_sources.append(nb_sources_box.pop())
-    return nb_sources
+    if sides_nb == 3:
+        tuple_name = 'triplets'
+        d.update({'triangle': 1})
+    nb_source = '{}_{}'.format(sum_ingredients.split('_')[0], tuple_name)
+    mini, maxi = sum_ingredients.split('_')[1].split('to')
+    for n in range(sides_nb):
+        d.update({'nb{}_min'.format(n + 1): mini,
+                  'nb{}_max'.format(n + 1): maxi})
+    return nb_source, d
 
 
 def preprocess_extdecimals_query(qkw=None):
@@ -1145,6 +1150,14 @@ class mc_source(object):
         if tag_classification == 'int_pairs':
             kwargs.update(preprocess_int_pairs_tag(source_id, qkw=qkw))
             return shared.int_pairs_source.next(**kwargs)
+        if tag_classification == 'int_triplets':
+            correct_kw = preprocess_qkw(db_table('int_triplets'), qkw=qkw)
+            # Ugly hack: as code and codename start with the same letters,
+            # codename cannot be detected as requiring to be removed from the
+            # query. So, we manually deleted it here, if necessary.
+            if 'codename' in correct_kw:
+                del correct_kw['codename']
+            return shared.int_triplets_source.next(**correct_kw)
         if tag_classification == 'simple_fractions':
             return shared.simple_fractions_source.next(**kwargs)
         elif tag_classification.startswith('single'):
@@ -1203,24 +1216,14 @@ class mc_source(object):
             return shared.dvipsnames_selection_source.next(**kwargs)
         elif tag_classification == 'polygons':
             result = shared.polygons_source.next(**kwargs)
-            import sys
-            nb_sources = preprocess_polygons_sides_lengths_query(
+            nb_source, kwords = preprocess_polygons_sides_lengths_query(
                 polygon_data=result, qkw=qkw)
-            codename = result[1]
-            multiples = [int(_) for _ in codename.split('_')[1:]]
-            for nb_source, m in zip(nb_sources, multiples):
-                all_kw = {}
-                all_kw.update(kwargs)
-                all_kw.update(qkw)
-                adj_qkw = preprocess_qkw(db_table(nb_source), qkw=all_kw)
-                if m >= 2 and nb_source.startswith('singleint'):
-                    nb_source = 'multiplesof{}_{}'\
-                        .format(m, nb_source.split('_')[1])
-                if m >= 2 and not nb_source.startswith('multiplesof'):
-                    result += (m, mc_source().next(nb_source, qkw=adj_qkw)[0])
-                else:
-                    result += mc_source().next(nb_source, qkw=adj_qkw)
-            sys.stderr.write('\npolygon query result={}\n'.format(result))
-            return result
+            all_kw = {}
+            all_kw.update(kwargs)
+            all_kw.update(qkw)
+            all_kw.update(kwords)
+            adj_qkw = preprocess_qkw(db_table(nb_source), qkw=all_kw)
+            nb_result = mc_source().next(nb_source, qkw=adj_qkw)
+            return result + nb_result
         elif tag_classification == 'nothing':
             return ()
