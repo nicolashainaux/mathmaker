@@ -476,7 +476,7 @@ def __main__():
     db_rows = [(3, 'triangle_1_1_1', '', 'all_different',
                 2, 0, 0, 0, 0, 0, 0, 0),
                (3, 'triangle_1_1_1', 'right_triangle', 'none',
-                2, 0, 0, 0, 0, 0, 0, 0),
+                2, 1, 0, 0, 0, 0, 0, 0),
                (3, 'triangle_2_1', 'isosceles_triangle', 'none',
                 2, 0, 1, 0, 0, 0, 0, 0),
                (3, 'triangle_3', 'equilateral_triangle', 'equilateral',
@@ -528,7 +528,7 @@ def __main__():
                (6, 'hexagon_3_2_1', '', 'none', 4, 0, 1, 1, 0, 0, 0, 0),
                (6, 'hexagon_3_2_1', '', 'none', 4, 1, 1, 1, 0, 0, 0, 0),
                (6, 'hexagon_3_2_1', '', 'none', 4, 2, 1, 1, 0, 0, 0, 0),
-               (6, 'hexagon_3_2_1', '', 'none', 4, 2, 1, 1, 0, 0, 0, 0),
+               (6, 'hexagon_3_2_1', '', 'none', 4, 3, 1, 1, 0, 0, 0, 0),
                (6, 'hexagon_3_3', '', 'none', 3, 0, 0, 1, 0, 0, 0, 0),
                (6, 'hexagon_3_3', '', 'none', 3, 1, 0, 1, 0, 0, 0, 0),
                (6, 'hexagon_3_3', '', 'none', 3, 2, 0, 1, 0, 0, 0, 0),
@@ -538,7 +538,7 @@ def __main__():
                (6, 'hexagon_4_2', '', 'none', 3, 0, 1, 0, 1, 0, 0, 0),
                (6, 'hexagon_4_2', '', 'none', 3, 1, 1, 0, 1, 0, 0, 0),
                (6, 'hexagon_4_2', '', 'none', 3, 2, 1, 0, 1, 0, 0, 0),
-               (6, 'hexagon_5_1', '', 'none', 2, 2, 0, 0, 0, 1, 0, 0),
+               (6, 'hexagon_5_1', '', 'none', 2, 0, 0, 0, 0, 1, 0, 0),
                (6, 'hexagon_6', '', 'equilateral', 1, 0, 0, 0, 0, 0, 1, 0)]
     db.executemany("INSERT "
                    "INTO polygons(sides_nb, codename, specific_name, "
