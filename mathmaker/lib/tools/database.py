@@ -383,7 +383,7 @@ def db_table(tag):
     elif tag == 'decimalfractionssums':
         return 'decimals'
     elif tag in ['int_deci_clever_pairs', 'digits_places', 'fracdigits_places',
-                 'decimals', 'polygons', 'int_triplets']:
+                 'decimals', 'polygons', 'int_triples']:
         return tag
     return ''
 
@@ -410,7 +410,7 @@ def classify_tag(tag):
                  'unitspairs', 'digits_places', 'fracdigits_places',
                  'decimals', 'decimalfractionssums', 'extdecimals',
                  'simple_fractions', 'dvipsnames_selection', 'polygons',
-                 'int_triplets']:
+                 'int_triples']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -684,7 +684,7 @@ def preprocess_polygons_sides_lengths_query(polygon_data=None, qkw=None):
     d.update({'code': '_'.join(codename.split('_')[1:])})
     sum_ingredients = qkw.get('sum_ingredients', 'int_2to10')
     if sides_nb == 3:
-        tuple_name = 'triplets'
+        tuple_name = 'triples'
         d.update({'triangle': 1})
     nb_source = '{}_{}'.format(sum_ingredients.split('_')[0], tuple_name)
     mini, maxi = sum_ingredients.split('_')[1].split('to')
@@ -1150,14 +1150,14 @@ class mc_source(object):
         if tag_classification == 'int_pairs':
             kwargs.update(preprocess_int_pairs_tag(source_id, qkw=qkw))
             return shared.int_pairs_source.next(**kwargs)
-        if tag_classification == 'int_triplets':
-            correct_kw = preprocess_qkw(db_table('int_triplets'), qkw=qkw)
+        if tag_classification == 'int_triples':
+            correct_kw = preprocess_qkw(db_table('int_triples'), qkw=qkw)
             # Ugly hack: as code and codename start with the same letters,
             # codename cannot be detected as requiring to be removed from the
             # query. So, we manually deleted it here, if necessary.
             if 'codename' in correct_kw:
                 del correct_kw['codename']
-            return shared.int_triplets_source.next(**correct_kw)
+            return shared.int_triples_source.next(**correct_kw)
         if tag_classification == 'simple_fractions':
             return shared.simple_fractions_source.next(**kwargs)
         elif tag_classification.startswith('single'):
