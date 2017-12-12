@@ -46,6 +46,7 @@ It will add all entries:
   tenths to thousandths.
 - simple fractions: 1/2 to 1/10, 2/3 to 2/10 etc. until 9/10
 - dvipsnames_selection for LaTeX package 'xcolor'
+- polygons shapes
 """
 
 import os
@@ -539,15 +540,22 @@ def __main__():
                (6, 'hexagon_4_2', '', 'none', 3, 2, 1, 0, 1, 0, 0, 0),
                (6, 'hexagon_5_1', '', 'none', 2, 2, 0, 0, 0, 1, 0, 0),
                (6, 'hexagon_6', '', 'equilateral', 1, 0, 0, 0, 0, 0, 1, 0)]
-    for e in db_rows:
-        if len(e) != 12:
-            print(e)
     db.executemany("INSERT "
                    "INTO polygons(sides_nb, codename, specific_name, "
                    "sides_particularity, level, variant, table2, table3, "
                    "table4, table5, table6, drawDate) "
                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                    db_rows)
+
+    sys.stderr.write('Insert shapes variants...\n')
+    db.execute('''CREATE TABLE scalene_triangle_shapes
+                  (id INTEGER PRIMARY KEY, shape_nb, drawDate INTEGER)''')
+    db_rows = [(1, 0), (2, 0), (3, 0), (4, 0)]
+    db.executemany("INSERT "
+                   "INTO scalene_triangle_shapes(shape_nb, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+
     sys.stderr.write('Commit changes to database...\n')
     db.commit()
     sys.stderr.write('Close database...\n')

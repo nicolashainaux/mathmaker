@@ -61,6 +61,7 @@ def init():
     global extdecimals_source
     global dvipsnames_selection_source
     global polygons_source
+    global scalene_triangle_shapes_source
 
     global enable_js_form
 
@@ -110,6 +111,8 @@ def init():
                                        'specific_name', 'sides_particularity',
                                        'level', 'variant', 'table2', 'table3',
                                        'table4', 'table5', 'table6'])
+    scalene_triangle_shapes_source = database.source('scalene_triangle_shapes',
+                                                     ['id', 'shape_nb'])
 
     markup = latex.MARKUP
 
