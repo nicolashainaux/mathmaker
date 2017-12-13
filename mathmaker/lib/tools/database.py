@@ -680,8 +680,8 @@ def preprocess_polygons_sides_lengths_query(polygon_data=None, qkw=None):
     if qkw is None:
         qkw = {}
     d = {}
-    sides_nb, codename = polygon_data[0], polygon_data[1]
-    variant = polygon_data[5]
+    sides_nb, codename = polygon_data[0], polygon_data[3]
+    variant = polygon_data[6]
     d.update({'code': '_'.join(codename.split('_')[1:])})
     sum_ingredients = qkw.get('sum_ingredients', 'int_2to10')
     if sides_nb == 3:

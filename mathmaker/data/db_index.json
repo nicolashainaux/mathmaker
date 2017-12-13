@@ -132,8 +132,9 @@
     "polygons": [
         "id",
         "sides_nb",
+        "type",
+        "special",
         "codename",
-        "specific_name",
         "sides_particularity",
         "level",
         "variant",
@@ -142,6 +143,16 @@
         "table4",
         "table5",
         "table6",
+        "drawDate"
+    ],
+    "scalene_triangle_shapes": [
+        "id",
+        "shape_nb",
+        "drawDate"
+    ],
+    "right_triangle_shapes": [
+        "id",
+        "shape_nb",
         "drawDate"
     ]
 }

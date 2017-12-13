@@ -407,8 +407,8 @@ class structure(object):
         # where ... are the available numbers to use for sides labeling.
         polygon_data = list(polygon_data)
         self.polygon_sides_nb = polygon_data[0]
-        self.polygon_codename = polygon_data[1]
-        variant = polygon_data[5]
+        self.polygon_codename = polygon_data[3]
+        variant = polygon_data[6]
         self.polygon_name = None
         self.label_polygon_vertices = False
         # We'll browse the multiples in reversed order
