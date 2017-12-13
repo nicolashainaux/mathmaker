@@ -681,11 +681,14 @@ def preprocess_polygons_sides_lengths_query(polygon_data=None, qkw=None):
         qkw = {}
     d = {}
     sides_nb, codename = polygon_data[0], polygon_data[1]
+    variant = polygon_data[5]
     d.update({'code': '_'.join(codename.split('_')[1:])})
     sum_ingredients = qkw.get('sum_ingredients', 'int_2to10')
     if sides_nb == 3:
         tuple_name = 'triples'
         d.update({'triangle': 1})
+        if variant == 1:
+            d.update({'pythagorean': 1})
     nb_source = '{}_{}'.format(sum_ingredients.split('_')[0], tuple_name)
     mini, maxi = sum_ingredients.split('_')[1].split('to')
     for n in range(sides_nb):
