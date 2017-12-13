@@ -90,10 +90,12 @@ class ShapeGenerator(object):
         polygon = Triangle(Point(*p[0]), Point(*p[1]), Point(*p[2]),
                            name=name, label_vertices=label_vertices,
                            thickness=thickness)
-        polygon.setup_labels(
-            labels=[Number(labels[2][1], unit=length_unit),
-                    Number(labels[1][1], unit=length_unit),
-                    Number(labels[0][1], unit=length_unit)])
+        lbls = [Number(labels[0][1], unit=length_unit),
+                Number(labels[1][1], unit=length_unit),
+                Number(labels[2][1], unit=length_unit)]
+        if variant == 1:
+            lbls[0], lbls[2] = lbls[2], lbls[0]
+        polygon.setup_labels(labels=lbls)
         if variant == 1:  # right triangle shapes
             polygon.angles[1].mark = AngleMark(thickness=thickness)
             polygon.angles[1].mark_right = True
