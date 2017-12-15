@@ -412,19 +412,10 @@ class structure(object):
         self.polygon_name = None
         self.label_polygon_vertices = False
         # We'll browse the multiples in reversed order
-        multiples = [int(_)
-                     for _ in self.polygon_codename.split('_')[1:]][::-1]
+        nb_to_use = polygon_data[-self.polygon_sides_nb:]
         labels = []
-        for m in multiples:
-            if m == 1:
-                labels.append((1, polygon_data.pop()))
-            elif m >= 2:
-                other = polygon_data.pop()
-                if m == other:
-                    other = polygon_data.pop()
-                else:
-                    polygon_data.pop()
-                labels.append((m, other))
+        labels = [(nb_to_use.count(n), n) for n in nb_to_use]
+        labels = list(set(labels))
         # Now, we have lengths stored in labels as, for example:
         # [(1, nb), (2, nb), (2, nb)]
         self._generate_polygon(self.polygon_codename, variant, labels)
