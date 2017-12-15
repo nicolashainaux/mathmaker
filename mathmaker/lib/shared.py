@@ -63,7 +63,8 @@ def init():
     global polygons_source
     global scalene_triangle_shapes_source
     global right_triangle_shapes_source
-
+    global isosceles_triangle_shapes_source
+    global ls_marks_source
     global enable_js_form
 
     enable_js_form = False
@@ -116,6 +117,9 @@ def init():
                                                      ['id', 'shape_nb'])
     right_triangle_shapes_source = database.source('right_triangle_shapes',
                                                    ['id', 'shape_nb'])
+    isosceles_triangle_shapes_source = database.source(
+        'isosceles_triangle_shapes', ['id', 'shape_nb'])
+    ls_marks_source = database.source('ls_marks', ['id', 'mark'])
 
     markup = latex.MARKUP
 

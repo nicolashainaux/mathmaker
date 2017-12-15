@@ -154,5 +154,15 @@
         "id",
         "shape_nb",
         "drawDate"
+    ],
+    "isosceles_triangle_shapes": [
+        "id",
+        "shape_nb",
+        "drawDate"
+    ],
+    "ls_marks": [
+        "id",
+        "mark",
+        "drawDate"
     ]
 }
