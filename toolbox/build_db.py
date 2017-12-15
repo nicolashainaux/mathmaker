@@ -104,10 +104,15 @@ def __main__():
     if os.path.isfile(settings.path.db_dist):
         sys.stderr.write('Remove previous database...\n')
         os.remove(settings.path.db_dist)
-    sys.stderr.write('Create new database...\n')
+    if os.path.isfile(settings.path.shapes_db_dist):
+        sys.stderr.write('Remove previous shapes database...\n')
+        os.remove(settings.path.shapes_db_dist)
+    sys.stderr.write('Create new databases...\n')
     open(settings.path.db_dist, 'a').close()
-    sys.stderr.write('Connect to database...\n')
+    open(settings.path.shapes_db_dist, 'a').close()
+    sys.stderr.write('Connect to databases...\n')
     db = sqlite3.connect(settings.path.db_dist)
+    shapes_db = sqlite3.connect(settings.path.shapes_db_dist)
 
     sys.stderr.write('Create tables...\n')
     # Creation of the tables
@@ -466,7 +471,21 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
-    sys.stderr.write('Insert polygons...\n')
+    sys.stderr.write('Insert line segments\' marks...\n')
+    creation_query = '''CREATE TABLE ls_marks
+                        (id INTEGER PRIMARY KEY, mark TEXT,
+                         drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    db_rows = [('|', 0), ('||', 0), ('|||', 0), ('O', 0), (r'\triangle', 0),
+               (r'\square', 0), (r'\lozenge', 0), (r'\bigstar', 0)]
+    db.executemany("INSERT "
+                   "INTO ls_marks(mark, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+
+    shapes_db_creation_queries = []
+    sys.stderr.write('Shapes db: insert polygons...\n')
     creation_query = '''CREATE TABLE polygons
                         (id INTEGER PRIMARY KEY,
                          sides_nb INTEGER, type TEXT, special TEXT,
@@ -475,8 +494,8 @@ def __main__():
                          table2 INTEGER, table3 INTEGER, table4 INTEGER,
                          table5 INTEGER, table6 INTEGER,
                          drawDate INTEGER)'''
-    db_creation_queries.append(creation_query)
-    db.execute(creation_query)
+    shapes_db_creation_queries.append(creation_query)
+    shapes_db.execute(creation_query)
     db_rows = [(3, 'triangle', 'scalene_triangle', 'triangle_1_1_1',
                 'all_different', 2, 0, 0, 0, 0, 0, 0, 0),
                (3, 'triangle', 'right_triangle', 'triangle_1_1_1',
@@ -591,85 +610,81 @@ def __main__():
                 2, 0, 0, 0, 0, 1, 0, 0),
                (6, 'hexagon', '', 'hexagon_6', 'equilateral',
                 1, 0, 0, 0, 0, 0, 1, 0)]
-    db.executemany("INSERT "
-                   "INTO polygons(sides_nb, type, special, codename, "
-                   "sides_particularity, level, variant, table2, table3, "
-                   "table4, table5, table6, drawDate) "
-                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                   db_rows)
+    shapes_db.executemany(
+        "INSERT INTO polygons("
+        "sides_nb, type, special, codename, sides_particularity, level, "
+        "variant, table2, table3, table4, table5, table6, drawDate) "
+        "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        db_rows)
 
-    sys.stderr.write('Insert shapes variants: scalene triangles...')
+    sys.stderr.write('Shapes db: insert shapes variants: scalene triangles...')
     creation_query = '''CREATE TABLE scalene_triangle_shapes
                         (id INTEGER PRIMARY KEY, shape_nb, drawDate INTEGER)'''
-    db_creation_queries.append(creation_query)
-    db.execute(creation_query)
+    shapes_db_creation_queries.append(creation_query)
+    shapes_db.execute(creation_query)
     db_rows = [(1, 0), (2, 0), (3, 0), (4, 0)]
-    db.executemany("INSERT "
-                   "INTO scalene_triangle_shapes(shape_nb, drawDate) "
-                   "VALUES(?, ?)",
-                   db_rows)
+    shapes_db.executemany(
+        "INSERT INTO scalene_triangle_shapes(shape_nb, drawDate) "
+        "VALUES(?, ?)",
+        db_rows)
 
-    sys.stderr.write('\rInsert shapes variants: scalene triangles, '
+    sys.stderr.write('\rShapes db: insert shapes variants: scalene triangles, '
                      'right triangles...')
     creation_query = '''CREATE TABLE right_triangle_shapes
                         (id INTEGER PRIMARY KEY, shape_nb, drawDate INTEGER)'''
-    db_creation_queries.append(creation_query)
-    db.execute(creation_query)
+    shapes_db_creation_queries.append(creation_query)
+    shapes_db.execute(creation_query)
     db_rows = [(1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0)]
-    db.executemany("INSERT "
-                   "INTO right_triangle_shapes(shape_nb, drawDate) "
-                   "VALUES(?, ?)",
-                   db_rows)
+    shapes_db.executemany(
+        "INSERT INTO right_triangle_shapes(shape_nb, drawDate) "
+        "VALUES(?, ?)",
+        db_rows)
 
-    sys.stderr.write('\rInsert shapes variants: scalene triangles, '
+    sys.stderr.write('\rShapes db: insert shapes variants: scalene triangles, '
                      'right triangles, isosceles triangles...')
     creation_query = '''CREATE TABLE isosceles_triangle_shapes
                         (id INTEGER PRIMARY KEY, shape_nb, drawDate INTEGER)'''
-    db_creation_queries.append(creation_query)
-    db.execute(creation_query)
+    shapes_db_creation_queries.append(creation_query)
+    shapes_db.execute(creation_query)
     db_rows = [(1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0)]
-    db.executemany("INSERT "
-                   "INTO isosceles_triangle_shapes(shape_nb, drawDate) "
-                   "VALUES(?, ?)",
-                   db_rows)
+    shapes_db.executemany(
+        "INSERT INTO isosceles_triangle_shapes(shape_nb, drawDate) "
+        "VALUES(?, ?)",
+        db_rows)
 
-    sys.stderr.write('\rInsert shapes variants: scalene triangles, '
+    sys.stderr.write('\rShapes db: insert shapes variants: scalene triangles, '
                      'right triangles, isosceles triangles, equilateral '
                      'triangles...\n')
     creation_query = '''CREATE TABLE equilateral_triangle_shapes
                         (id INTEGER PRIMARY KEY, shape_nb, drawDate INTEGER)'''
-    db_creation_queries.append(creation_query)
-    db.execute(creation_query)
+    shapes_db_creation_queries.append(creation_query)
+    shapes_db.execute(creation_query)
     db_rows = [(1, 0), (2, 0), (3, 0), (4, 0)]
-    db.executemany("INSERT "
-                   "INTO equilateral_triangle_shapes(shape_nb, drawDate) "
-                   "VALUES(?, ?)",
-                   db_rows)
+    shapes_db.executemany(
+        "INSERT INTO equilateral_triangle_shapes(shape_nb, drawDate) "
+        "VALUES(?, ?)",
+        db_rows)
 
-    sys.stderr.write('Insert line segments\' marks...\n')
-    creation_query = '''CREATE TABLE ls_marks
-                        (id INTEGER PRIMARY KEY, mark TEXT,
-                         drawDate INTEGER)'''
-    db_creation_queries.append(creation_query)
-    db.execute(creation_query)
-    db_rows = [('|', 0), ('||', 0), ('|||', 0), ('O', 0), (r'\triangle', 0),
-               (r'\square', 0), (r'\lozenge', 0), (r'\bigstar', 0)]
-    db.executemany("INSERT "
-                   "INTO ls_marks(mark, drawDate) "
-                   "VALUES(?, ?)",
-                   db_rows)
-
-    sys.stderr.write('Commit changes to database...\n')
+    sys.stderr.write('Commit changes to databases...\n')
     db.commit()
-    sys.stderr.write('Close database...\n')
+    shapes_db.commit()
+    sys.stderr.write('Close databases...\n')
     db.close()
-    sys.stderr.write('Create database\'s index...\n')
+    shapes_db.close()
+    sys.stderr.write('Create databases\' indices...\n')
     db_index = {}
     for qr in db_creation_queries:
         key, value = parse_sql_creation_query(qr)
         db_index.update({key: value})
     with open(settings.db_index_path, 'w') as f:
         json.dump(db_index, f, indent=4)
+        f.write('\n')
+    shapes_db_index = {}
+    for qr in shapes_db_creation_queries:
+        key, value = parse_sql_creation_query(qr)
+        shapes_db_index.update({key: value})
+    with open(settings.shapes_db_index_path, 'w') as f:
+        json.dump(shapes_db_index, f, indent=4)
         f.write('\n')
     sys.stderr.write('Done!\n')
 

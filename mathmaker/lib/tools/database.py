@@ -63,37 +63,35 @@ class source(object):
         self.allcols = cols
         self.idcol = cols[0]
         self.valcols = cols[1:]
-        self.language = kwargs['language'] if 'language' in kwargs else ""
+        self.language = kwargs.get('language', '')
+        self.db = kwargs.get('db', shared.db)
 
     def _twothirds_reset(self):
         """Will reset only two thirds of the already timestamped entries."""
         log = settings.dbg_logger.getChild('db')
-        n = tuple(shared.db.execute('SELECT COUNT(*) from {} '
-                                    'WHERE drawDate != 0;'
-                                    .format(self.table_name)))[0][0]
+        n = tuple(self.db.execute('SELECT COUNT(*) from {} '
+                                  'WHERE drawDate != 0;'
+                                  .format(self.table_name)))[0][0]
         lim = Number(Number('0.67') * Number(n)).rounded(Decimal('1'))
         log.debug(' 2/3 RESET: {}/{}\n'.format(lim, n))
-        shared.db.execute('UPDATE {table_name} SET drawDate=0 '
-                          'WHERE id IN '
-                          '(SELECT id FROM {table_name}'
-                          ' WHERE drawDate != 0'
-                          ' ORDER BY drawDate LIMIT {nb});'
-                          .format(table_name=self.table_name,
-                                  nb=lim))
+        self.db.execute('UPDATE {table_name} SET drawDate=0 '
+                        'WHERE id IN '
+                        '(SELECT id FROM {table_name}'
+                        ' WHERE drawDate != 0'
+                        ' ORDER BY drawDate LIMIT {nb});'
+                        .format(table_name=self.table_name, nb=lim))
 
     ##
     #   @brief  Resets the drawDate of all table's entries (to 0)
     def _reset(self, **kwargs):
-        shared.db.execute("UPDATE " + self.table_name + " SET drawDate = 0;")
+        self.db.execute("UPDATE " + self.table_name + " SET drawDate = 0;")
         if "lock_equal_products" in kwargs:
-            shared.db.execute("UPDATE "
-                              + self.table_name
-                              + " SET lock_equal_products = 0;")
+            self.db.execute("UPDATE {} SET lock_equal_products = 0;"
+                            .format(self.table_name))
         if "union" in kwargs:
-            shared.db.execute("UPDATE "
-                              + kwargs['union']['table_name']
-                              + " SET drawDate = 0;")
-        if (not len(tuple(shared.db.execute(self._cmd(**kwargs))))
+            self.db.execute("UPDATE {} SET drawDate = 0;"
+                            .format(kwargs['union']['table_name']))
+        if (not len(tuple(self.db.execute(self._cmd(**kwargs))))
             and 'not_in' in kwargs):
             if 'nb1_min' in kwargs and 'nb1_max' in kwargs:
                 kwargs.update({'not_in': [str(n)
@@ -292,15 +290,15 @@ class source(object):
     def _query_result(self, cmd, **kwargs):
         log = settings.dbg_logger.getChild('db')
         log.debug(cmd)
-        qr = tuple(shared.db.execute(cmd))
+        qr = tuple(self.db.execute(cmd))
         if not len(qr):
             self._twothirds_reset()
-            qr = tuple(shared.db.execute(cmd))
+            qr = tuple(self.db.execute(cmd))
             if not len(qr):
                 log.debug('FULL RESET\n')
                 kwargs = self._reset(**kwargs)
                 cmd1 = self._cmd(**kwargs)
-                qr = tuple(shared.db.execute(cmd1))
+                qr = tuple(self.db.execute(cmd1))
                 if not len(qr):
                     if ' nb1 ' in cmd1 and ' nb2 ' in cmd1:
                         cmd2 = cmd1.replace(' nb1 ', 'TEMP') \
@@ -309,7 +307,7 @@ class source(object):
                         cmd2 = cmd2.replace(' nb1_', 'TEMP') \
                             .replace(' nb2_', ' nb1_') \
                             .replace('TEMP', ' nb2_')
-                        qr = tuple(shared.db.execute(cmd2))
+                        qr = tuple(self.db.execute(cmd2))
                         if not len(qr):
                             logm = settings.mainlogger
                             logm.error('Query result is empty:\nQUERY1\n{}\n'
@@ -322,12 +320,12 @@ class source(object):
     #   @brief  Set the drawDate to datetime() in all entries where col_name
     #           has a value of col_match.
     def _timestamp(self, col_name, col_match, **kwargs):
-        shared.db.execute(
+        self.db.execute(
             "UPDATE " + self.table_name
             + " SET drawDate = strftime('%Y-%m-%d %H:%M:%f')"
             + " WHERE " + col_name + " = '" + str(col_match) + "';")
         if 'union' in kwargs:
-            shared.db.execute(
+            self.db.execute(
                 "UPDATE " + kwargs['union']['table_name']
                 + " SET drawDate = strftime('%Y-%m-%d %H:%M:%f')"
                 + " WHERE " + col_name + " = '" + str(col_match) + "';")
@@ -337,13 +335,13 @@ class source(object):
     def _lock(self, t, **kwargs):
         if 'lock_equal_products' in kwargs:
             if t in kwargs['info_lock']:
-                shared.db.execute(
+                self.db.execute(
                     "UPDATE " + self.table_name
                     + " SET lock_equal_products = 1"
                     + " WHERE nb1 = '" + str(t[0])
                     + "' and nb2 = '" + str(t[1]) + "';")
                 for couple in kwargs['info_lock'][t]:
-                    shared.db.execute(
+                    self.db.execute(
                         "UPDATE " + self.table_name
                         + " SET lock_equal_products = 1"
                         + " WHERE nb1 = '" + str(couple[0])
@@ -421,6 +419,8 @@ def preprocess_qkw(table_name, qkw=None):
     """Add relevant questions keywords to build the query."""
     with open(settings.db_index_path) as f:
         db_index = json.load(f)
+    with open(settings.shapes_db_index_path) as f:
+        db_index.update(json.load(f))
     if table_name not in db_index:
         return {}
     d = {}

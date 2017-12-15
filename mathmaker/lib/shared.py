@@ -29,6 +29,7 @@ from mathmaker.lib.constants import latex
 
 def init():
     global db
+    global shapes_db
     global three_letters_words_source
     global four_letters_words_source
     global five_letters_words_source
@@ -73,6 +74,7 @@ def init():
     log = settings.mainlogger
 
     db = sqlite3.connect(settings.path.db)
+    shapes_db = sqlite3.connect(settings.path.shapes_db)
 
     from mathmaker.lib.tools import database
     three_letters_words_source = database.source("w3l", ["id", "word"],
@@ -109,20 +111,23 @@ def init():
                                                ['id', 'place'])
     dvipsnames_selection_source = database.source('dvipsnames_selection',
                                                   ['id', 'color_name'])
+    ls_marks_source = database.source('ls_marks', ['id', 'mark'])
     polygons_source = database.source('polygons',
                                       ['id', 'sides_nb', 'type', 'special',
                                        'codename', 'sides_particularity',
                                        'level', 'variant', 'table2', 'table3',
-                                       'table4', 'table5', 'table6'])
+                                       'table4', 'table5', 'table6'],
+                                      db=shapes_db)
     scalene_triangle_shapes_source = database.source('scalene_triangle_shapes',
-                                                     ['id', 'shape_nb'])
+                                                     ['id', 'shape_nb'],
+                                                     db=shapes_db)
     right_triangle_shapes_source = database.source('right_triangle_shapes',
-                                                   ['id', 'shape_nb'])
+                                                   ['id', 'shape_nb'],
+                                                   db=shapes_db)
     isosceles_triangle_shapes_source = database.source(
-        'isosceles_triangle_shapes', ['id', 'shape_nb'])
+        'isosceles_triangle_shapes', ['id', 'shape_nb'], db=shapes_db)
     equilateral_triangle_shapes_source = database.source(
-        'equilateral_triangle_shapes', ['id', 'shape_nb'])
-    ls_marks_source = database.source('ls_marks', ['id', 'mark'])
+        'equilateral_triangle_shapes', ['id', 'shape_nb'], db=shapes_db)
 
     markup = latex.MARKUP
 

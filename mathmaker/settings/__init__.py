@@ -66,17 +66,24 @@ class default_object(object):
 
 
 class path_object(object):
-    def __init__(self, **dirs):
-        import sys
-        dd = dirs.get('dd')
+    def __init__(self, dd=None, logger=None):
         self.db = dd + '{}-{}.db'.format(__software_name__, __version__)
         self.db_dist = dd + '{}.db-dist'.format(__software_name__)
         self.daemon_db = dd + '{}d.db'.format(__software_name__)
-        sys.stderr.write('\ndb={}\n'.format(self.db))
+        self.shapes_db = dd + 'shapes-{}.db'.format(__version__)
+        self.shapes_db_dist = dd + 'shapes.db-dist'
+        logger.info('db={}'.format(self.db))
+        logger.info('shapes db={}'.format(self.shapes_db))
         if (not os.path.isfile(self.db)
             or os.path.getmtime(self.db) < os.path.getmtime(self.db_dist)):
-            # __
+            logger.info('Copy main db from {}\n'.format(self.db_dist))
             copyfile(self.db_dist, self.db)
+        if (not os.path.isfile(self.shapes_db)
+            or os.path.getmtime(self.shapes_db)
+            < os.path.getmtime(self.shapes_db_dist)):
+            logger.info('Copy shapes db from {}\n'
+                        .format(self.shapes_db_dist))
+            copyfile(self.shapes_db_dist, self.shapes_db)
 
 
 def init():
@@ -87,6 +94,7 @@ def init():
     global frameworksdir
     global index_path
     global db_index_path
+    global shapes_db_index_path
     global default, path
     global mainlogger
     global dbg_logger
@@ -125,11 +133,11 @@ def init():
     frameworksdir = datadir + 'frameworks/'
     index_path = frameworksdir + 'index.json'
     db_index_path = datadir + 'db_index.json'
+    shapes_db_index_path = datadir + 'shapes_db_index.json'
     settingsdir = rootdir + settings_dirname
     projectdir = rootdir[:-len('mathmaker/')]
 
     default = default_object()
-    path = path_object(dd=datadir)
 
     logging.config.dictConfig(load_config('logging', settingsdir))
     mainlogger = logging.getLogger("__main__")
@@ -138,6 +146,8 @@ def init():
     config_dbglogger(settingsdir)
     daemon_logger = logging.getLogger('__daemon__')
     output_watcher_logger = logging.getLogger("__output_watcher__")
+
+    path = path_object(dd=datadir, logger=mainlogger)
 
     CONFIG = load_config('user_config', settingsdir)
     xmllint = CONFIG["PATHS"]["XMLLINT"]

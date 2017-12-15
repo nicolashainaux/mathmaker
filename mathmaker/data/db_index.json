@@ -129,42 +129,6 @@
         "color_name",
         "drawDate"
     ],
-    "polygons": [
-        "id",
-        "sides_nb",
-        "type",
-        "special",
-        "codename",
-        "sides_particularity",
-        "level",
-        "variant",
-        "table2",
-        "table3",
-        "table4",
-        "table5",
-        "table6",
-        "drawDate"
-    ],
-    "scalene_triangle_shapes": [
-        "id",
-        "shape_nb",
-        "drawDate"
-    ],
-    "right_triangle_shapes": [
-        "id",
-        "shape_nb",
-        "drawDate"
-    ],
-    "isosceles_triangle_shapes": [
-        "id",
-        "shape_nb",
-        "drawDate"
-    ],
-    "equilateral_triangle_shapes": [
-        "id",
-        "shape_nb",
-        "drawDate"
-    ],
     "ls_marks": [
         "id",
         "mark",
