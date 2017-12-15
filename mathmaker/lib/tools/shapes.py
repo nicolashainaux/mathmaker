@@ -21,7 +21,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmakerlib.calculus import Number
-from mathmakerlib.geometry import Point, Triangle, AngleMark, IsoscelesTriangle
+from mathmakerlib.geometry import Point, AngleMark, Triangle
+from mathmakerlib.geometry import IsoscelesTriangle, EquilateralTriangle
 
 from mathmaker.lib import shared
 
@@ -133,4 +134,28 @@ class ShapeGenerator(object):
         polygon.setup_labels(Number(baselbl, unit=length_unit),
                              Number(eqlbl, unit=length_unit))
         polygon.baseline = build_data[3]
+        return polygon
+
+    def _triangle_3(self, variant=None, labels=None, name=None,
+                    label_vertices=None, thickness=None, length_unit=None,
+                    shape_variant_nb=None):
+        shape_variants = {1: [Number('1.1'), 0, '12pt', None],
+                          2: [Number('1.1'), 60, '0pt', None],
+                          3: [Number('1.1'), Number('29.9'), '6pt', None],
+                          4: [Number('1.1'), 90, '0pt',
+                              ('-0.2', '-0.24', '0.97', '0.97')],
+                          }
+        if shape_variant_nb is None:
+            shape_variant_nb = \
+                next(shared.equilateral_triangle_shapes_source)[0]
+        build_data = shape_variants[shape_variant_nb]
+        polygon = EquilateralTriangle(
+            side_length=build_data[0],
+            rotation_angle=build_data[1],
+            use_mark=next(shared.ls_marks_source)[0],
+            name=name, label_vertices=label_vertices, thickness=thickness)
+        sidelbl = labels[0][1]
+        polygon.setup_labels(Number(sidelbl, unit=length_unit))
+        polygon.baseline = build_data[2]
+        polygon.boundingbox = build_data[3]
         return polygon
