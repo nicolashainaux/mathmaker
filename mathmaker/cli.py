@@ -25,7 +25,7 @@ import os
 import argparse
 import locale
 
-from mathmakerlib import required
+from mathmakerlib import required, mmlib_setup
 
 from mathmaker import __info__, __software_name__
 from mathmaker import settings
@@ -41,6 +41,8 @@ from mathmaker.lib.tools.xml import get_xml_sheets_paths
 
 def entry_point():
     required.init()
+    mmlib_setup.init()
+    mmlib_setup.polygons.DEFAULT_WINDING = 'clockwise'
     settings.init()
     XML_SHEETS = get_xml_sheets_paths()
     YAML_SHEETS = read_index()
