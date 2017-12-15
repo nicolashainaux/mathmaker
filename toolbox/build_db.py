@@ -622,7 +622,7 @@ def __main__():
                    db_rows)
 
     sys.stderr.write('\rInsert shapes variants: scalene triangles, '
-                     'right triangles, isosceles triangles...\n')
+                     'right triangles, isosceles triangles...')
     creation_query = '''CREATE TABLE isosceles_triangle_shapes
                         (id INTEGER PRIMARY KEY, shape_nb, drawDate INTEGER)'''
     db_creation_queries.append(creation_query)
@@ -630,6 +630,19 @@ def __main__():
     db_rows = [(1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0)]
     db.executemany("INSERT "
                    "INTO isosceles_triangle_shapes(shape_nb, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+
+    sys.stderr.write('\rInsert shapes variants: scalene triangles, '
+                     'right triangles, isosceles triangles, equilateral '
+                     'triangles...\n')
+    creation_query = '''CREATE TABLE equilateral_triangle_shapes
+                        (id INTEGER PRIMARY KEY, shape_nb, drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    db_rows = [(1, 0), (2, 0), (3, 0), (4, 0)]
+    db.executemany("INSERT "
+                   "INTO equilateral_triangle_shapes(shape_nb, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)
 
