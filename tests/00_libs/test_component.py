@@ -32,4 +32,5 @@ def test_setup_exceptions():
     assert str(excinfo.value) == 'arg must be a str'
     with pytest.raises(ValueError) as excinfo:
         o.setup('inexistent_module')
-    assert str(excinfo.value) == 'Cannot setup \'inexistent_module\''
+    assert str(excinfo.value) == 'There is no private method '\
+        '_setup_inexistent_module() to handle setup of \'inexistent_module\'.'
