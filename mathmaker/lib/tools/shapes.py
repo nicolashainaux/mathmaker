@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmakerlib.calculus import Number
-from mathmakerlib.geometry import Point, Triangle, AngleMark
+from mathmakerlib.geometry import Point, Triangle, AngleMark, IsoscelesTriangle
 
 from mathmaker.lib import shared
 
@@ -100,4 +100,37 @@ class ShapeGenerator(object):
             polygon.angles[1].mark = AngleMark(thickness=thickness)
             polygon.angles[1].mark_right = True
         polygon.baseline = p[3]
+        return polygon
+
+    def _triangle_2_1(self, variant=None, labels=None, name=None,
+                      label_vertices=None, thickness=None, length_unit=None,
+                      shape_variant_nb=None):
+        shape_variants = {1: [Number('2.8'), Number('1.52'), 0, '4pt'],
+                          2: [Number('2.8'), Number('1.52'), 180, '2pt'],
+                          3: [Number('0.8'), Number('2.4'), 90, '15pt'],
+                          4: [Number('0.8'), Number('2.4'), -90, '23pt'],
+                          5: [Number('0.8'), Number('2.4'), Number('-99.6'),
+                              '25pt'],
+                          6: [Number('0.8'), Number('2.4'), Number('-80.4'),
+                              '18pt'],
+                          7: [Number('0.8'), Number('2.4'), Number('99.6'),
+                              '18pt'],
+                          8: [Number('0.8'), Number('2.4'), Number('80.4'),
+                              '15pt'],
+                          }
+        if shape_variant_nb is None:
+            shape_variant_nb = \
+                next(shared.isosceles_triangle_shapes_source)[0]
+        build_data = shape_variants[shape_variant_nb]
+        polygon = IsoscelesTriangle(
+            base_length=build_data[0], equal_legs_length=build_data[1],
+            rotation_angle=build_data[2],
+            use_mark=next(shared.ls_marks_source)[0],
+            name=name, label_vertices=label_vertices, thickness=thickness)
+        baselbl, eqlbl = labels[0][1], labels[1][1]
+        if labels[0][0] == 2:
+            baselbl, eqlbl = eqlbl, baselbl
+        polygon.setup_labels(Number(baselbl, unit=length_unit),
+                             Number(eqlbl, unit=length_unit))
+        polygon.baseline = build_data[3]
         return polygon
