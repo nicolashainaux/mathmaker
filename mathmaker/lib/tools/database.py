@@ -128,7 +128,7 @@ class source(object):
     #   @brief  Creates the conditions of the query, from the given kwargs
     #           Some special checks are allowed, like nb1_min <= ...
     #           and nb1_max >= ...
-    def _kw_conditions(self, **kwargs):
+    def _kw_conditions(self, wrap_in_AND=True, **kwargs):
         result = ""
 
         def hook(i):
@@ -263,7 +263,12 @@ class source(object):
                 result += next(hook(kn)) + key + rel_sign + simple_quote \
                     + str(kwargs[kw]) + simple_quote + " "
                 kn += 1
-        return 'AND ( {} ) '.format(result) if result else ''
+
+        if wrap_in_AND:
+            fmt = 'AND ( {} ) '
+        else:
+            fmt = ' {} '
+        return fmt.format(result) if result else ''
 
     ##
     #   @brief  Concatenates the different parts of the query
@@ -319,16 +324,19 @@ class source(object):
     ##
     #   @brief  Set the drawDate to datetime() in all entries where col_name
     #           has a value of col_match.
-    def _timestamp(self, col_name, col_match, **kwargs):
+    def _timestamp(self, kwconditions, **kwargs):
+        cond = self._kw_conditions(wrap_in_AND=False, **kwconditions)
+        import sys
+        sys.stderr.write('TIMESTAMP condition={}\n'.format(cond))
         self.db.execute(
             "UPDATE " + self.table_name
             + " SET drawDate = strftime('%Y-%m-%d %H:%M:%f')"
-            + " WHERE " + col_name + " = '" + str(col_match) + "';")
+            + " WHERE " + cond + ";")
         if 'union' in kwargs:
             self.db.execute(
                 "UPDATE " + kwargs['union']['table_name']
                 + " SET drawDate = strftime('%Y-%m-%d %H:%M:%f')"
-                + " WHERE " + col_name + " = '" + str(col_match) + "';")
+                + " WHERE " + cond + ";")
 
     ##
     #   @brief  Will 'lock' some entries
@@ -362,7 +370,7 @@ class source(object):
             raise RuntimeError('No result from database query. Command was:\n'
                                + str(sql_query))
         t = query_result[0]
-        self._timestamp(str(self.idcol), str(t[0]), **kwargs)
+        self._timestamp({str(self.idcol): str(t[0])}, **kwargs)
         self._lock(t[1:len(t)], **kwargs)
         return t[1:len(t)]
 
