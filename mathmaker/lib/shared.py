@@ -67,6 +67,7 @@ def init():
     global right_triangle_shapes_source
     global isosceles_triangle_shapes_source
     global equilateral_triangle_shapes_source
+    global quadrilateral_1_1_1_1_shapes_source
     global ls_marks_source
     global enable_js_form
 
@@ -131,6 +132,8 @@ def init():
         'isosceles_triangle_shapes', ['id', 'shape_nb'], db=shapes_db)
     equilateral_triangle_shapes_source = database.source(
         'equilateral_triangle_shapes', ['id', 'shape_nb'], db=shapes_db)
+    quadrilateral_1_1_1_1_shapes_source = database.source(
+        'quadrilateral_1_1_1_1_shapes', ['id', 'shape_nb'], db=shapes_db)
 
     markup = latex.MARKUP
 

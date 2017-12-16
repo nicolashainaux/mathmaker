@@ -703,13 +703,13 @@ def __main__():
     sys.stderr.write('\rShapes db: insert shapes variants: scalene triangles, '
                      'right triangles, isosceles triangles, equilateral '
                      'triangles, quadrilaterals...\n')
-    creation_query = '''CREATE TABLE quadrilateral_shapes
+    creation_query = '''CREATE TABLE quadrilateral_1_1_1_1_shapes
                         (id INTEGER PRIMARY KEY, shape_nb, drawDate INTEGER)'''
     shapes_db_creation_queries.append(creation_query)
     shapes_db.execute(creation_query)
-    db_rows = [(1, 0), (2, 0), (3, 0), (4, 0)]
+    db_rows = [(1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0)]
     shapes_db.executemany(
-        "INSERT INTO quadrilateral_shapes(shape_nb, drawDate) "
+        "INSERT INTO quadrilateral_1_1_1_1_shapes(shape_nb, drawDate) "
         "VALUES(?, ?)",
         db_rows)
 
