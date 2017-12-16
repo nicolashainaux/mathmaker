@@ -34,5 +34,10 @@
         "id",
         "shape_nb",
         "drawDate"
+    ],
+    "quadrilateral_shapes": [
+        "id",
+        "shape_nb",
+        "drawDate"
     ]
 }
