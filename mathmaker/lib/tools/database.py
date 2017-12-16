@@ -33,6 +33,7 @@ from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.constants.numeration import DIGITSPLACES
 from mathmaker.lib.constants.numeration import DIGITSPLACES_CONFUSING
+from mathmaker.lib.tools import lined_up
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
 from mathmaker.lib.core.base_calculus import Fraction
 
@@ -1235,6 +1236,15 @@ class mc_source(object):
             all_kw.update(kwords)
             adj_qkw = preprocess_qkw(db_table(nb_source), qkw=all_kw)
             nb_result = mc_source().next(nb_source, qkw=adj_qkw)
+            if all([isinstance(n, int) for n in nb_result]):
+                matching_pairs = lined_up(nb_result)
+                for p in matching_pairs:
+                    sp = sorted(p)
+                    # We won't timestamp the (1, ...) pairs as it does not
+                    # seem to make sense (and causes a lot of timestamps).
+                    if sp[0] != 1:
+                        shared.int_pairs_source._timestamp({'nb1': sp[0],
+                                                            'nb2': sp[1]})
             return result + nb_result
         elif tag_classification == 'nothing':
             return ()
