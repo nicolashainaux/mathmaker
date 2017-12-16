@@ -67,6 +67,7 @@ from mathmaker.lib.constants.numeration import DIGITSPLACES_DECIMAL
 
 INTPAIRS_MAX = 1000
 INTTRIPLES_MAX = 200
+INTQUADRUPLES_MAX = 50
 SINGLEINTS_MAX = 1000
 
 
@@ -285,6 +286,40 @@ def __main__():
                        db_rows[i * len(db_rows) // 100:
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers triples... 100 %\n')
+
+    creation_query = '''CREATE TABLE int_quadruples
+       (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
+        nb4 INTEGER, code TEXT, quadrilateral INTEGER, equilateral INTEGER,
+        equal_sides INTEGER, drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    sys.stderr.write('Create integers quadruples...\n')
+    # Tables of 1, 2, 3... INTQUADRUPLES_MAX
+    db_rows = [(i + 1, j + 1, k + 1, n + 1,  # nb1, nb2, nb3, nb4
+                _code(i + 1, j + 1, k + 1, n + 1),  # code
+                n + 1 < i + j + k + 3,  # quadrilateral?
+                i == j == k == n,  # equilateral?
+                (i == j or j == k or k == i or i == n or j == n or k == n),
+                # at least 2 equal sides?
+                0  # drawDate
+                )
+               for i in range(INTQUADRUPLES_MAX)
+               for j in range(INTQUADRUPLES_MAX)
+               for k in range(INTQUADRUPLES_MAX)
+               for n in range(INTQUADRUPLES_MAX)
+               if n >= k >= j >= i and k - i <= 20]
+
+    sys.stderr.write('Insert integers quadruples...')
+    for i in range(100):
+        sys.stderr.write('\rInsert integers quadruples... {} %'.format(i))
+        db.executemany("INSERT "
+                       "INTO int_quadruples(nb1, nb2, nb3, nb4, code, "
+                       "quadrilateral, equilateral, equal_sides, "
+                       "drawDate) "
+                       "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                       db_rows[i * len(db_rows) // 100:
+                               (i + 1) * len(db_rows) // 100])
+    sys.stderr.write('\rInsert integers quadruples... 100 %\n')
     # sys.stderr.flush()
 
     sys.stderr.write('Setup integers pairs: clever (5)...\n')

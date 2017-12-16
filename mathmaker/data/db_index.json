@@ -129,6 +129,18 @@
         "color_name",
         "drawDate"
     ],
+    "int_quadruples": [
+        "id",
+        "nb1",
+        "nb2",
+        "nb3",
+        "nb4",
+        "code",
+        "quadrilateral",
+        "equilateral",
+        "equal_sides",
+        "drawDate"
+    ],
     "ls_marks": [
         "id",
         "mark",
