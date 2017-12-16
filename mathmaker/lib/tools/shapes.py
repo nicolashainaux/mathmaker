@@ -23,6 +23,7 @@
 from mathmakerlib.calculus import Number
 from mathmakerlib.geometry import Point, AngleMark, Triangle
 from mathmakerlib.geometry import IsoscelesTriangle, EquilateralTriangle
+from mathmakerlib.geometry import Quadrilateral
 
 from mathmaker.lib import shared
 
@@ -159,3 +160,59 @@ class ShapeGenerator(object):
         polygon.baseline = build_data[2]
         polygon.boundingbox = build_data[3]
         return polygon
+
+    def _polygon(self, shapes_source, shape_variants, shape_builder, labels,
+                 masks=None, length_unit=None, shape_variant_nb=None,
+                 name=None, label_vertices=None, thickness=None):
+        if shape_variant_nb is None:
+            shape_variant_nb = next(shapes_source)[0]
+        build_data = shape_variants[shape_variant_nb]
+        build_data.update({'name': name, 'label_vertices': label_vertices,
+                           'thickness': thickness})
+        baseline = build_data.pop('baseline', None)
+        boundingbox = build_data.pop('boundingbox', None)
+        args = build_data.pop('args', [])
+        polygon = shape_builder(*args, **build_data)
+        polygon.setup_labels([Number(lbl, unit=length_unit)
+                              for lbl in labels], masks=masks)
+        polygon.baseline = baseline
+        polygon.boundingbox = boundingbox
+        return polygon
+
+    def _quadrilateral_1_1_1_1(self, variant=None, labels=None, name=None,
+                               label_vertices=None, thickness=None,
+                               length_unit=None, shape_variant_nb=None):
+        quadrilateral_shape1 = [Point(0, 0), Point('0.6', '-0.3'),
+                                Point('1.6', '0.2'), Point('0.4', 1)]
+        quadrilateral_shape2 = [Point(0, 0), Point(1, '-0.2'),
+                                Point('1.2', '0.9'), Point('-0.2', '0.8')]
+        shape_variants = {
+            1: {'args': quadrilateral_shape1, 'rotation_angle': 0,
+                'baseline': '4pt',
+                # 'boundingbox': None,
+                # 'use_mark': next(shared.ls_marks_source)[0]
+                },
+            2: {'args': quadrilateral_shape1, 'rotation_angle': 90,
+                'baseline': '4pt'
+                },
+            3: {'args': quadrilateral_shape1, 'rotation_angle': -90,
+                'baseline': '4pt'
+                },
+            4: {'args': quadrilateral_shape1, 'rotation_angle': 180,
+                'baseline': '4pt'
+                },
+            5: {'args': quadrilateral_shape2, 'rotation_angle': 0,
+                'baseline': '9pt'
+                },
+            6: {'args': quadrilateral_shape2, 'rotation_angle': 180,
+                'baseline': '9pt'
+                }
+        }
+        return self._polygon(
+            shared.quadrilateral_1_1_1_1_shapes_source,
+            shape_variants,
+            Quadrilateral,
+            labels=[lbl[1] for lbl in labels],
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+        )
