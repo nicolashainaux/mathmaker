@@ -131,8 +131,8 @@ class ShapeGenerator(object):
         baselbl, eqlbl = labels[0][1], labels[1][1]
         if labels[0][0] == 2:
             baselbl, eqlbl = eqlbl, baselbl
-        polygon.setup_labels(Number(baselbl, unit=length_unit),
-                             Number(eqlbl, unit=length_unit))
+        polygon.setup_labels([Number(baselbl, unit=length_unit),
+                              Number(eqlbl, unit=length_unit)])
         polygon.baseline = build_data[3]
         return polygon
 
@@ -155,7 +155,7 @@ class ShapeGenerator(object):
             use_mark=next(shared.ls_marks_source)[0],
             name=name, label_vertices=label_vertices, thickness=thickness)
         sidelbl = labels[0][1]
-        polygon.setup_labels(Number(sidelbl, unit=length_unit))
+        polygon.setup_labels([Number(sidelbl, unit=length_unit)])
         polygon.baseline = build_data[2]
         polygon.boundingbox = build_data[3]
         return polygon
