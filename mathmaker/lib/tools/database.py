@@ -829,6 +829,11 @@ def generate_values(source_id):
         random.shuffle(lr)
         return lr * 20
 
+    elif source_id == 'alternate_3masks':
+        lr = [1, 2, 3]
+        random.shuffle(lr)
+        return lr * 20
+
     elif source_id.startswith('alternate'):
         lr = ['left', 'right']
         random.shuffle(lr)
