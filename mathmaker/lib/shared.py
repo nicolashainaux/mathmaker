@@ -69,6 +69,7 @@ def init():
     global equilateral_triangle_shapes_source
     global quadrilateral_1_1_1_1_shapes_source
     global quadrilateral_2_1_1_shapes_source
+    global quadrilateral_2_2_shapes_source
     global ls_marks_source
     global enable_js_form
 
@@ -137,6 +138,8 @@ def init():
         'quadrilateral_1_1_1_1_shapes', ['id', 'shape_nb'], db=shapes_db)
     quadrilateral_2_1_1_shapes_source = database.source(
         'quadrilateral_2_1_1_shapes', ['id', 'shape_nb'], db=shapes_db)
+    quadrilateral_2_2_shapes_source = database.source(
+        'quadrilateral_2_2_shapes', ['id', 'shape_nb'], db=shapes_db)
 
     markup = latex.MARKUP
 
