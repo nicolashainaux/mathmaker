@@ -160,7 +160,7 @@ def init():
         'pentagon_1_1_1_1_1_shapes', ['id', 'shape_nb'], db=shapes_db)
     pentagon_2_1_1_1_shapes_source = database.source(
         'pentagon_2_1_1_1_shapes', ['id', 'shape_nb'], db=shapes_db)
-    pentagon_2_1_1_1_shapes_source = database.source(
+    pentagon_2_2_1_shapes_source = database.source(
         'pentagon_2_2_1_shapes', ['id', 'shape_nb'], db=shapes_db)
 
     markup = latex.MARKUP
