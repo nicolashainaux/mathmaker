@@ -141,6 +141,19 @@
         "equal_sides",
         "drawDate"
     ],
+    "int_quintuples": [
+        "id",
+        "nb1",
+        "nb2",
+        "nb3",
+        "nb4",
+        "nb5",
+        "code",
+        "pentagon",
+        "equilateral",
+        "equal_sides",
+        "drawDate"
+    ],
     "ls_marks": [
         "id",
         "mark",

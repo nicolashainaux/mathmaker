@@ -68,6 +68,7 @@ from mathmaker.lib.constants.numeration import DIGITSPLACES_DECIMAL
 INTPAIRS_MAX = 1000
 INTTRIPLES_MAX = 200
 INTQUADRUPLES_MAX = 50
+INTQUINTUPLES_MAX = 36
 SINGLEINTS_MAX = 1000
 
 
@@ -274,7 +275,7 @@ def __main__():
                for i in range(INTTRIPLES_MAX)
                for j in range(INTTRIPLES_MAX)
                for k in range(INTTRIPLES_MAX)
-               if k >= j >= i and k - i <= 60]
+               if k >= j >= i and k - i <= 30]
     sys.stderr.write('Insert integers triples...')
     for i in range(100):
         sys.stderr.write('\rInsert integers triples... {} %'.format(i))
@@ -307,7 +308,7 @@ def __main__():
                for j in range(INTQUADRUPLES_MAX)
                for k in range(INTQUADRUPLES_MAX)
                for n in range(INTQUADRUPLES_MAX)
-               if n >= k >= j >= i and k - i <= 20]
+               if n >= k >= j >= i and n - i <= 18]
 
     sys.stderr.write('Insert integers quadruples...')
     for i in range(100):
@@ -320,6 +321,42 @@ def __main__():
                        db_rows[i * len(db_rows) // 100:
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers quadruples... 100 %\n')
+
+    creation_query = '''CREATE TABLE int_quintuples
+       (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
+        nb4 INTEGER, nb5 INTEGER, code TEXT, pentagon INTEGER,
+        equilateral INTEGER, equal_sides INTEGER, drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    sys.stderr.write('Create integers quintuples...\n')
+    # Tables of 1, 2, 3... INTQUINTUPLES_MAX
+    db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1,  # nb1, nb2, nb3, nb4, nb5
+                _code(i + 1, j + 1, k + 1, n + 1, p + 1),  # code
+                p + 1 < i + j + k + p + 4,  # pentagon?
+                i == j == k == n == p,  # equilateral?
+                (i == j or j == k or k == i or i == n or j == n or k == n
+                 or i == p or j == p or k == p or n == p),
+                # at least 2 equal sides?
+                0  # drawDate
+                )
+               for i in range(INTQUINTUPLES_MAX)
+               for j in range(INTQUINTUPLES_MAX)
+               for k in range(INTQUINTUPLES_MAX)
+               for n in range(INTQUINTUPLES_MAX)
+               for p in range(INTQUINTUPLES_MAX)
+               if p >= n >= k >= j >= i and p - i <= 16]
+
+    sys.stderr.write('Insert integers quintuples...')
+    for i in range(100):
+        sys.stderr.write('\rInsert integers quintuples... {} %'.format(i))
+        db.executemany("INSERT "
+                       "INTO int_quintuples(nb1, nb2, nb3, nb4, nb5, code, "
+                       "pentagon, equilateral, equal_sides, "
+                       "drawDate) "
+                       "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                       db_rows[i * len(db_rows) // 100:
+                               (i + 1) * len(db_rows) // 100])
+    sys.stderr.write('\rInsert integers quintuples... 100 %\n')
     # sys.stderr.flush()
 
     sys.stderr.write('Setup integers pairs: clever (5)...\n')
