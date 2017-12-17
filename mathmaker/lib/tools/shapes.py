@@ -23,7 +23,7 @@
 import random
 
 from mathmakerlib.calculus import Number
-from mathmakerlib.geometry import Point, AngleMark, Triangle
+from mathmakerlib.geometry import Point, AngleMark, Polygon, Triangle
 from mathmakerlib.geometry import IsoscelesTriangle, EquilateralTriangle
 from mathmakerlib.geometry import Quadrilateral, Rectangle, Rhombus, Square
 
@@ -467,4 +467,31 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks
+        )
+
+    def _pentagon_1_1_1_1_1(self, variant=None, labels=None, name=None,
+                            label_vertices=None, thickness=None,
+                            length_unit=None, shape_variant_nb=None):
+        pentagon_shape1 = [Point('0.6', 0), Point(0, '0.4'),
+                           Point('1.2', '0.8'), Point('2.4', '0.4'),
+                           Point('1.8', 0)]
+        shape_variants = {
+            1: {'args': pentagon_shape1, 'rotation_angle': 0,
+                'baseline': '8pt',
+                # 'boundingbox': None,
+                # 'use_mark': next(shared.ls_marks_source)[0]
+                },
+            2: {'args': pentagon_shape1, 'rotation_angle': 180,
+                'baseline': '6pt',
+                # 'boundingbox': None,
+                # 'use_mark': next(shared.ls_marks_source)[0]
+                },
+        }
+        return self._polygon(
+            shared.pentagon_1_1_1_1_1_shapes_source,
+            shape_variants,
+            Polygon,
+            labels=[lbl[1] for lbl in labels],
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
         )
