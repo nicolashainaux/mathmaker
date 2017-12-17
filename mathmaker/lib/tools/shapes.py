@@ -235,32 +235,24 @@ class ShapeGenerator(object):
         if variant == 0:
             shape_variants = {
                 1: {'args': quadrilateralv0_shape1, 'rotation_angle': 0,
-                    'baseline': '-1pt'
-                    },
+                    'baseline': '-1pt'},
                 2: {'args': quadrilateralv0_shape1, 'rotation_angle': 180,
-                    'baseline': '-1pt'
-                    },
+                    'baseline': '-1pt'},
                 3: {'args': quadrilateralv0_shape2, 'rotation_angle': 0,
-                    'baseline': '-3pt'
-                    },
+                    'baseline': '-3pt'},
                 4: {'args': quadrilateralv0_shape2, 'rotation_angle': 180,
-                    'baseline': '-3pt'
-                    }
+                    'baseline': '-3pt'}
             }
         elif variant == 1:
             shape_variants = {
                 1: {'args': quadrilateralv1_shape1, 'rotation_angle': 0,
-                    'baseline': '4pt',
-                    },
+                    'baseline': '4pt'},
                 2: {'args': quadrilateralv1_shape1, 'rotation_angle': 180,
-                    'baseline': '5pt',
-                    },
+                    'baseline': '5pt'},
                 3: {'args': quadrilateralv1_shape2, 'rotation_angle': 0,
-                    'baseline': '3pt',
-                    },
+                    'baseline': '3pt'},
                 4: {'args': quadrilateralv1_shape2, 'rotation_angle': 180,
-                    'baseline': '8pt',
-                    },
+                    'baseline': '8pt'},
             }
         singles = []
         doubled = []
