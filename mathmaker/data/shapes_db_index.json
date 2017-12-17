@@ -84,5 +84,10 @@
         "id",
         "shape_nb",
         "drawDate"
+    ],
+    "pentagon_4_1_shapes": [
+        "id",
+        "shape_nb",
+        "drawDate"
     ]
 }
