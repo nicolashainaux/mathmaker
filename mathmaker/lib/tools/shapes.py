@@ -25,7 +25,7 @@ import random
 from mathmakerlib.calculus import Number
 from mathmakerlib.geometry import Point, AngleMark, Triangle
 from mathmakerlib.geometry import IsoscelesTriangle, EquilateralTriangle
-from mathmakerlib.geometry import Quadrilateral, Rectangle
+from mathmakerlib.geometry import Quadrilateral, Rectangle, Rhombus, Square
 
 from mathmaker.lib import shared
 
@@ -415,11 +415,56 @@ class ShapeGenerator(object):
                  3: [' ', ' ', None, None]}[masks_disposition]
         marks = [mark, mark, mark, None]
         return self._polygon(
-            shared.quadrilateral_2_2_shapes_source,
+            shared.quadrilateral_3_1_shapes_source,
             shape_variants,
             Quadrilateral,
             labels=lbls,
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks
+        )
+
+    def _quadrilateral_4(self, variant=None, labels=None, name=None,
+                         label_vertices=None, thickness=None,
+                         length_unit=None, shape_variant_nb=None):
+        mark = next(shared.ls_marks_source)[0]
+        masks_disposition = next(shared.alternate_4masks_source)[0]
+        if variant == 0:  # rhombuses
+            shape_builder = Rhombus
+            shape_variants = {
+                1: {'side_length': Number('1.2'), 'build_angle': 45,
+                    'rotation_angle': 0,
+                    'use_mark': mark,
+                    # 1: above right, 2: bottom right,
+                    # 3: bottom left, 4: above left
+                    'baseline':
+                    {1: '0pt', 2: '-6pt', 3: '-6pt', 4: '0pt'}
+                    [masks_disposition],
+                    'boundingbox': (0, '-0.65', '2.3', '0.65')},
+            }
+        elif variant == 1:  # squares
+            shape_builder = Square
+            shape_variants = {
+                1: {'side_length': 1,
+                    'rotation_angle': 0,
+                    'use_mark': mark,
+                    'right_angle_radius': Number('0.15'),
+                    # 1: above, 2: right, 3: below, 4: left
+                    'baseline':
+                    {1: '16pt', 2: '12pt', 3: '7pt', 4: '12pt'}
+                    [masks_disposition]},
+            }
+        lbls = [labels[0][1]]
+        masks = {1: [None, ' ', ' ', ' '],
+                 2: [' ', None, ' ', ' '],
+                 3: [' ', ' ', None, ' '],
+                 4: [' ', ' ', ' ', None]}[masks_disposition]
+        return self._polygon(
+            shared.quadrilateral_4_shapes_source,
+            shape_variants,
+            shape_builder,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks
         )
