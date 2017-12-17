@@ -824,6 +824,11 @@ def generate_values(source_id):
         return [(k, Fraction((n, k))) for k in [i + 2 for i in range(18)]
                 for n in coprime_generator(k)]
 
+    elif source_id == 'alternate_2masks':
+        lr = ['left', 'right']
+        random.shuffle(lr)
+        return lr * 20
+
     elif source_id.startswith('alternate'):
         lr = ['left', 'right']
         random.shuffle(lr)

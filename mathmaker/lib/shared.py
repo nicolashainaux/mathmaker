@@ -59,6 +59,7 @@ def init():
     global order_of_operations_variants_source
     global unitspairs_source
     global alternate_source  # , alternate_source2
+    global alternate_2masks_source
     global decimals_source
     global extdecimals_source
     global dvipsnames_selection_source
@@ -148,6 +149,7 @@ def init():
     extdecimals_source = sub_source('extdecimals', ondemand=True,
                                     generator_fct=generate_random_decimal_nb)
     alternate_source = sub_source('alternate')
+    alternate_2masks_source = sub_source('alternate_2masks')
     # alternate_source2 = sub_source('alternate2')
     trigo_functions_source = sub_source('trigo_functions')
     trigo_vocabulary_source = sub_source('trigo_vocabulary')
