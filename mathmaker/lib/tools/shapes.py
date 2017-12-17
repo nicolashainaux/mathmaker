@@ -738,3 +738,41 @@ class ShapeGenerator(object):
             masks=masks, marks=marks,
             shape_variant_nb=shape_variant_nb
         )
+
+    def _pentagon_4_1(self, variant=None, labels=None, name=None,
+                      label_vertices=None, thickness=None,
+                      length_unit=None, shape_variant_nb=None):
+        pentagonv0_shape1 = [Point('0.21', '0.73'), Point('1.11', '0.8'),
+                             Point('1.78', '0.2'), Point('0.9', 0),
+                             Point(0, 0)]
+        mark = next(shared.ls_marks_source)[0]
+        shape_variants = {
+            1: {'args': pentagonv0_shape1, 'rotation_angle': 0,
+                'baseline': '13pt'},
+            2: {'args': pentagonv0_shape1, 'rotation_angle': 180,
+                'baseline': '1pt'},
+        }
+        singles = []
+        quadrupled = []
+        for lbl in labels:
+            if lbl[0] == 4:
+                quadrupled.append(lbl[1])
+                quadrupled.append(lbl[1])
+                quadrupled.append(lbl[1])
+                quadrupled.append(lbl[1])
+            else:
+                singles.append(lbl[1])
+        lbls = [quadrupled.pop(), quadrupled.pop(), quadrupled.pop(),
+                quadrupled.pop(), singles.pop()]
+        masks = [None, ' ', ' ', ' ', None]
+        marks = [mark, mark, mark, mark, None]
+        return self._polygon(
+            shared.pentagon_4_1_shapes_source,
+            shape_variants,
+            Polygon,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks,
+            shape_variant_nb=shape_variant_nb
+        )
