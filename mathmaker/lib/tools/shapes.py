@@ -495,3 +495,57 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
         )
+
+    def _pentagon_2_1_1_1(self, variant=None, labels=None, name=None,
+                          label_vertices=None, thickness=None,
+                          length_unit=None, shape_variant_nb=None):
+        pentagonv0_shape1 = [Point('1.05', '-0.2'), Point('0.3', '-0.1'),
+                             Point(0, '0.6'), Point('1.4', '0.6'),
+                             Point('2.4', '0.1')]
+        pentagonv1_shape1 = [Point('0.2', 0), Point(0, '0.57'),
+                             Point('1.2', '0.8'), Point('1.95', '0.4'),
+                             Point('1.5', 0)]
+        mark = next(shared.ls_marks_source)[0]
+        if variant == 0:
+            shape_variants = {
+                1: {'args': pentagonv0_shape1, 'rotation_angle': 0,
+                    'baseline': '3pt'},
+                2: {'args': pentagonv0_shape1, 'rotation_angle': 180,
+                    'baseline': '3pt'},
+            }
+        elif variant == 1:
+            shape_variants = {
+                1: {'args': pentagonv1_shape1, 'rotation_angle': 0,
+                    'baseline': '9pt'},
+                2: {'args': pentagonv1_shape1, 'rotation_angle': 180,
+                    'baseline': '6pt'},
+            }
+        singles = []
+        doubled = []
+        for lbl in labels:
+            if lbl[0] == 1:
+                singles.append(lbl[1])
+            else:
+                doubled.append(lbl[1])
+                doubled.append(lbl[1])
+        random.shuffle(singles)
+        if variant == 0:
+            lbls = [doubled.pop(), doubled.pop(), singles.pop(), singles.pop(),
+                    singles.pop()]
+            masks = [None, ' ', None, None, None]
+            marks = [mark, mark, None, None, None]
+        elif variant == 1:
+            lbls = [doubled.pop(), singles.pop(), singles.pop(), doubled.pop(),
+                    singles.pop()]
+            masks = [None, None, None, ' ', None]
+            marks = [mark, None, None, mark, None]
+        return self._polygon(
+            shared.pentagon_2_1_1_1_shapes_source,
+            shape_variants,
+            Polygon,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks,
+            shape_variant_nb=shape_variant_nb
+        )
