@@ -25,7 +25,7 @@ import random
 from mathmakerlib.calculus import Number
 from mathmakerlib.geometry import Point, AngleMark, Triangle
 from mathmakerlib.geometry import IsoscelesTriangle, EquilateralTriangle
-from mathmakerlib.geometry import Quadrilateral
+from mathmakerlib.geometry import Quadrilateral, Rectangle
 
 from mathmaker.lib import shared
 
@@ -173,13 +173,22 @@ class ShapeGenerator(object):
                            'thickness': thickness})
         baseline = build_data.pop('baseline', None)
         boundingbox = build_data.pop('boundingbox', None)
+        if masks is None:
+            masks = build_data.pop('masks', None)
+        elif 'masks' in build_data:
+            del build_data['masks']
         args = build_data.pop('args', [])
+        right_angle_radius = build_data.pop('right_angle_radius', None)
         polygon = shape_builder(*args, **build_data)
         polygon.setup_labels([Number(lbl, unit=length_unit)
                               for lbl in labels], masks=masks)
         polygon.baseline = baseline
         polygon.boundingbox = boundingbox
         polygon.setup_marks(marks)
+        if right_angle_radius is not None:
+            for a in polygon.angles:
+                if isinstance(a.mark, AngleMark) and a.mark_right:
+                    a.mark.radius = right_angle_radius
         return polygon
 
     def _quadrilateral_1_1_1_1(self, variant=None, labels=None, name=None,
@@ -275,6 +284,100 @@ class ShapeGenerator(object):
             shared.quadrilateral_2_1_1_shapes_source,
             shape_variants,
             Quadrilateral,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks
+        )
+
+    def _quadrilateral_2_2(self, variant=None, labels=None, name=None,
+                           label_vertices=None, thickness=None,
+                           length_unit=None, shape_variant_nb=None):
+        shape_builder = Quadrilateral
+        kite_shape1 = [Point(0, 0), Point('1.2', '0.2'),
+                       Point('2.4', 0), Point('1.2', '-0.8')]
+        kite_shape2 = [Point('0.7', '-0.5'), Point(0, 0),
+                       Point('0.7', '0.5'), Point('2.4', 0)]
+        parallelogram_shape1 = [Point(0, 0), Point('0.6', '0.8'),
+                                Point('2.6', '0.8'), Point(2, 0)]
+        parallelogram_shape2 = [Point(0, 0), Point('-0.6', '0.8'),
+                                Point('1.4', '0.8'), Point(2, 0)]
+        parallelogram_shape3 = [Point(0, 0), Point('0.2', '0.65'),
+                                Point('2.1', '0.8'), Point('1.9', '0.15')]
+        parallelogram_shape4 = [Point(0, '0.8'), Point('1.9', '0.65'),
+                                Point('2.1', 0), Point('0.2', '0.15')]
+        mark1 = next(shared.ls_marks_source)[0]
+        mark2 = next(shared.ls_marks_source)[0]
+        lbls = masks = marks = None
+        masks_disposition = next(shared.alternate_2masks_source)[0]
+        if variant == 0:  # kites
+            shape_variants = {
+                1: {'args': kite_shape1, 'rotation_angle': 0,
+                    'baseline': '-9pt'},
+                2: {'args': kite_shape1, 'rotation_angle': 180,
+                    'baseline': '-5pt'},
+                3: {'args': kite_shape2, 'rotation_angle': 0,
+                    'baseline': '-4pt',
+                    'boundingbox': (0, '-0.5', '2.4', '0.7')},
+                4: {'args': kite_shape2, 'rotation_angle': 180,
+                    'baseline': '0pt',
+                    'boundingbox': (0, '-0.7', '2.4', '0.5')}
+            }
+            lbls = [labels[0][1], labels[0][1], labels[1][1], labels[1][1]]
+            masks = {'left': [None, ' ', None, ' '],
+                     'right': [None, ' ', ' ', None]}[masks_disposition]
+            marks = [mark1, mark1, mark2, mark2]
+        elif variant == 1:  # parallelograms
+            shape_variants = {
+                1: {'args': parallelogram_shape1, 'rotation_angle': 0,
+                    'baseline': {'left': '12pt',
+                                 'right': '3pt'}[masks_disposition]},
+                2: {'args': parallelogram_shape2, 'rotation_angle': 0,
+                    'baseline': {'left': '10pt',
+                                 'right': '5pt'}[masks_disposition]},
+                3: {'args': parallelogram_shape3, 'rotation_angle': 0,
+                    'baseline': {'left': '12pt',
+                                 'right': '4pt'}[masks_disposition]},
+                4: {'args': parallelogram_shape4, 'rotation_angle': 0,
+                    'baseline': {'left': '12pt',
+                                 'right': '4pt'}[masks_disposition]},
+            }
+            shortest = min(labels[0][1], labels[1][1])
+            longest = max(labels[0][1], labels[1][1])
+            lbls = [shortest, longest, shortest, longest]
+            marks = [mark1, mark2, mark1, mark2]
+        elif variant == 2:  # rectangles
+            shape_builder = Rectangle
+            shape_variants = {
+                1: {'width': Number('0.5'), 'length': Number('2.6'),
+                    'rotation_angle': 0, 'right_angle_radius': Number('0.15'),
+                    'baseline': {'left': '8pt',
+                                 'right': '1pt'}[masks_disposition]},
+                2: {'width': Number('0.7'), 'length': 2,
+                    'rotation_angle': 0, 'right_angle_radius': Number('0.15'),
+                    'baseline': {'left': '8pt',
+                                 'right': '1pt'}[masks_disposition]},
+                3: {'width': Number('0.6'), 'length': Number('2.4'),
+                    'rotation_angle': 0, 'right_angle_radius': Number('0.15'),
+                    'baseline': {'left': '9pt',
+                                 'right': '2pt'}[masks_disposition]},
+                4: {'width': Number('0.8'), 'length': Number('1.6'),
+                    'rotation_angle': 0, 'right_angle_radius': Number('0.15'),
+                    'baseline': {'left': '8pt',
+                                 'right': '1pt'}[masks_disposition],
+                    'boundingbox': (0, '-0.2', '1.6', 1)},
+            }
+            shortest = min(labels[0][1], labels[1][1])
+            longest = max(labels[0][1], labels[1][1])
+            lbls = [longest, shortest, longest, shortest]
+        if variant in [1, 2]:
+            # common masking for rectangles and parallelogram
+            masks = {'left': [None, None, ' ', ' '],
+                     'right': [' ', ' ', None, None]}[masks_disposition]
+        return self._polygon(
+            shared.quadrilateral_2_2_shapes_source,
+            shape_variants,
+            shape_builder,
             labels=lbls,
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
