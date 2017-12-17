@@ -39,6 +39,7 @@ def init():
     global int_pairs_source
     global int_triples_source
     global int_quadruples_source
+    global int_quintuples_source
     global simple_fractions_source
     global single_ints_source
     global single_deci1_source
@@ -103,6 +104,9 @@ def init():
                                          ["id", "nb1", "nb2", "nb3"])
     int_quadruples_source = database.source("int_quadruples",
                                             ["id", "nb1", "nb2", "nb3", "nb4"])
+    int_quintuples_source = database.source("int_quintuples",
+                                            ["id", "nb1", "nb2", "nb3", "nb4",
+                                             "nb5"])
     simple_fractions_source = database.source('simple_fractions',
                                               ['id', 'nb1', 'nb2'])
     single_ints_source = database.source("single_ints", ["id", "nb1"])
