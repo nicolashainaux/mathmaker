@@ -776,3 +776,29 @@ class ShapeGenerator(object):
             masks=masks, marks=marks,
             shape_variant_nb=shape_variant_nb
         )
+
+    def _pentagon_5(self, variant=None, labels=None, name=None,
+                    label_vertices=None, thickness=None,
+                    length_unit=None, shape_variant_nb=None):
+        pentagonv0_shape1 = [Point('-0.22', '0.67'), Point('0.35', '1.08'),
+                             Point('0.92', '0.67'), Point('0.7', 0),
+                             Point(0, 0)]
+        mark = next(shared.ls_marks_source)[0]
+        shape_variants = {
+            1: {'args': pentagonv0_shape1, 'rotation_angle': 0,
+                'baseline': '16pt'},
+            2: {'args': pentagonv0_shape1, 'rotation_angle': 180,
+                'baseline': '4pt'},
+        }
+        masks = [None, ' ', ' ', ' ', ' ']
+        marks = [mark, mark, mark, mark, mark]
+        return self._polygon(
+            shared.pentagon_5_shapes_source,
+            shape_variants,
+            Polygon,
+            labels=[labels[0][1] for _ in range(5)],
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks,
+            shape_variant_nb=shape_variant_nb
+        )
