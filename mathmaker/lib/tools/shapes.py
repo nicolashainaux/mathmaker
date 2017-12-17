@@ -383,3 +383,43 @@ class ShapeGenerator(object):
             length_unit=length_unit,
             masks=masks, marks=marks
         )
+
+    def _quadrilateral_3_1(self, variant=None, labels=None, name=None,
+                           label_vertices=None, thickness=None,
+                           length_unit=None, shape_variant_nb=None):
+        shape1 = [Point(0, 0), Point('0.46', '0.8'),
+                  Point('1.38', '0.8'), Point('1.84', 0)]
+        shape2 = [Point('0.02', '0.5'), Point('0.9', '0.7'),
+                  Point('0.9', '-0.2'), Point('0.02', 0)]
+        mark = next(shared.ls_marks_source)[0]
+        masks_disposition = next(shared.alternate_3masks_source)[0]
+        shape_variants = {
+            1: {'args': shape1, 'rotation_angle': 0,
+                'baseline':
+                {1: '5pt', 2: '8pt', 3: '6pt'}[masks_disposition]},
+            2: {'args': shape1, 'rotation_angle': 180,
+                'baseline':
+                {1: '10pt', 2: '8pt', 3: '11pt'}[masks_disposition]},
+            3: {'args': shape2, 'rotation_angle': 0,
+                'baseline':
+                {1: '10pt', 2: '5pt', 3: '-1pt'}[masks_disposition],
+                'boundingbox': (0, '-0.3', '0.9', '0.9')},
+            4: {'args': shape2, 'rotation_angle': 180,
+                'baseline':
+                {1: '-1pt', 2: '5pt', 3: '10pt'}[masks_disposition],
+                'boundingbox': (0, '-0.3', '0.9', '0.9')},
+        }
+        lbls = [labels[1][1], labels[1][1], labels[1][1], labels[0][1]]
+        masks = {1: [None, ' ', ' ', None],
+                 2: [' ', None, ' ', None],
+                 3: [' ', ' ', None, None]}[masks_disposition]
+        marks = [mark, mark, mark, None]
+        return self._polygon(
+            shared.quadrilateral_2_2_shapes_source,
+            shape_variants,
+            Quadrilateral,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks
+        )
