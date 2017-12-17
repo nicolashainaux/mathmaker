@@ -20,6 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import random
+
 from mathmakerlib.calculus import Number
 from mathmakerlib.geometry import Point, AngleMark, Triangle
 from mathmakerlib.geometry import IsoscelesTriangle, EquilateralTriangle
@@ -162,8 +164,8 @@ class ShapeGenerator(object):
         return polygon
 
     def _polygon(self, shapes_source, shape_variants, shape_builder, labels,
-                 masks=None, length_unit=None, shape_variant_nb=None,
-                 name=None, label_vertices=None, thickness=None):
+                 masks=None, marks=None, length_unit=None, name=None,
+                 shape_variant_nb=None, label_vertices=None, thickness=None):
         if shape_variant_nb is None:
             shape_variant_nb = next(shapes_source)[0]
         build_data = shape_variants[shape_variant_nb]
@@ -177,6 +179,7 @@ class ShapeGenerator(object):
                               for lbl in labels], masks=masks)
         polygon.baseline = baseline
         polygon.boundingbox = boundingbox
+        polygon.setup_marks(marks)
         return polygon
 
     def _quadrilateral_1_1_1_1(self, variant=None, labels=None, name=None,
@@ -215,4 +218,73 @@ class ShapeGenerator(object):
             labels=[lbl[1] for lbl in labels],
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
+        )
+
+    def _quadrilateral_2_1_1(self, variant=None, labels=None, name=None,
+                             label_vertices=None, thickness=None,
+                             length_unit=None, shape_variant_nb=None):
+        quadrilateralv0_shape1 = [Point(0, 0), Point('1.2', '0.7'),
+                                  Point('2.4', 0), Point('0.8', '-0.4')]
+        quadrilateralv0_shape2 = [Point('1.2', '-0.6'), Point(0, 0),
+                                  Point('1.2', '0.5'), Point('2.4', '0.2')]
+        quadrilateralv1_shape1 = [Point(0, 0), Point('0.8', '0.6'),
+                                  Point('1.8', '0.6'), Point('1.2', '-0.2')]
+        quadrilateralv1_shape2 = [Point('0.2', '-0.4'), Point(0, '0.6'),
+                                  Point('1.2', '0.6'), Point('2.2', '0.4')]
+        mark = next(shared.ls_marks_source)[0]
+        if variant == 0:
+            shape_variants = {
+                1: {'args': quadrilateralv0_shape1, 'rotation_angle': 0,
+                    'baseline': '-1pt'
+                    },
+                2: {'args': quadrilateralv0_shape1, 'rotation_angle': 180,
+                    'baseline': '-1pt'
+                    },
+                3: {'args': quadrilateralv0_shape2, 'rotation_angle': 0,
+                    'baseline': '-3pt'
+                    },
+                4: {'args': quadrilateralv0_shape2, 'rotation_angle': 180,
+                    'baseline': '-3pt'
+                    }
+            }
+        elif variant == 1:
+            shape_variants = {
+                1: {'args': quadrilateralv1_shape1, 'rotation_angle': 0,
+                    'baseline': '4pt',
+                    },
+                2: {'args': quadrilateralv1_shape1, 'rotation_angle': 180,
+                    'baseline': '5pt',
+                    },
+                3: {'args': quadrilateralv1_shape2, 'rotation_angle': 0,
+                    'baseline': '3pt',
+                    },
+                4: {'args': quadrilateralv1_shape2, 'rotation_angle': 180,
+                    'baseline': '8pt',
+                    },
+            }
+        singles = []
+        doubled = []
+        for lbl in labels:
+            if lbl[0] == 1:
+                singles.append(lbl[1])
+            else:
+                doubled.append(lbl[1])
+                doubled.append(lbl[1])
+        random.shuffle(singles)
+        if variant == 0:
+            lbls = [doubled.pop(), doubled.pop(), singles.pop(), singles.pop()]
+            masks = [None, ' ', None, None]
+            marks = [mark, mark, None, None]
+        elif variant == 1:
+            lbls = [doubled.pop(), singles.pop(), doubled.pop(), singles.pop()]
+            masks = [None, None, ' ', None]
+            marks = [mark, None, mark, None]
+        return self._polygon(
+            shared.quadrilateral_2_1_1_shapes_source,
+            shape_variants,
+            Quadrilateral,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks
         )
