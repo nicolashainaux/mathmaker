@@ -227,6 +227,7 @@ class ShapeGenerator(object):
             labels=[lbl[1] for lbl in labels],
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
+            shape_variant_nb=shape_variant_nb
         )
 
     def _quadrilateral_2_1_1(self, variant=None, labels=None, name=None,
@@ -287,7 +288,8 @@ class ShapeGenerator(object):
             labels=lbls,
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
-            masks=masks, marks=marks
+            masks=masks, marks=marks,
+            shape_variant_nb=shape_variant_nb
         )
 
     def _quadrilateral_2_2(self, variant=None, labels=None, name=None,
@@ -381,7 +383,8 @@ class ShapeGenerator(object):
             labels=lbls,
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
-            masks=masks, marks=marks
+            masks=masks, marks=marks,
+            shape_variant_nb=shape_variant_nb
         )
 
     def _quadrilateral_3_1(self, variant=None, labels=None, name=None,
@@ -421,7 +424,8 @@ class ShapeGenerator(object):
             labels=lbls,
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
-            masks=masks, marks=marks
+            masks=masks, marks=marks,
+            shape_variant_nb=shape_variant_nb
         )
 
     def _quadrilateral_4(self, variant=None, labels=None, name=None,
@@ -466,7 +470,8 @@ class ShapeGenerator(object):
             labels=lbls,
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
-            masks=masks
+            masks=masks,
+            shape_variant_nb=shape_variant_nb
         )
 
     def _pentagon_1_1_1_1_1(self, variant=None, labels=None, name=None,
@@ -494,6 +499,7 @@ class ShapeGenerator(object):
             labels=[lbl[1] for lbl in labels],
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
+            shape_variant_nb=shape_variant_nb
         )
 
     def _pentagon_2_1_1_1(self, variant=None, labels=None, name=None,
