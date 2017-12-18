@@ -911,6 +911,15 @@ def __main__():
         "INSERT INTO hexagon_2_1_1_1_1_shapes(shape_nb, drawDate) "
         "VALUES(?, ?)",
         db_rows)
+    creation_query = '''CREATE TABLE hexagon_2_2_1_1_shapes
+                        (id INTEGER PRIMARY KEY, shape_nb, drawDate INTEGER)'''
+    shapes_db_creation_queries.append(creation_query)
+    shapes_db.execute(creation_query)
+    db_rows = [(1, 0), ]
+    shapes_db.executemany(
+        "INSERT INTO hexagon_2_2_1_1_shapes(shape_nb, drawDate) "
+        "VALUES(?, ?)",
+        db_rows)
 
     sys.stderr.write('Commit changes to databases...\n')
     db.commit()
