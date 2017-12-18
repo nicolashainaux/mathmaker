@@ -69,6 +69,7 @@ INTPAIRS_MAX = 1000
 INTTRIPLES_MAX = 200
 INTQUADRUPLES_MAX = 50
 INTQUINTUPLES_MAX = 36
+INTSEXTUPLES_MAX = 25
 SINGLEINTS_MAX = 1000
 
 
@@ -332,7 +333,7 @@ def __main__():
     # Tables of 1, 2, 3... INTQUINTUPLES_MAX
     db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1,  # nb1, nb2, nb3, nb4, nb5
                 _code(i + 1, j + 1, k + 1, n + 1, p + 1),  # code
-                p + 1 < i + j + k + p + 4,  # pentagon?
+                p + 1 < i + j + k + n + 4,  # pentagon?
                 i == j == k == n == p,  # equilateral?
                 (i == j or j == k or k == i or i == n or j == n or k == n
                  or i == p or j == p or k == p or n == p),
@@ -357,6 +358,46 @@ def __main__():
                        db_rows[i * len(db_rows) // 100:
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers quintuples... 100 %\n')
+    # sys.stderr.flush()
+
+    creation_query = '''CREATE TABLE int_sextuples
+       (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
+        nb4 INTEGER, nb5 INTEGER, nb6 INTEGER, code TEXT, hexagon INTEGER,
+        equilateral INTEGER, equal_sides INTEGER, drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    sys.stderr.write('Create integers sextuples...\n')
+    # Tables of 1, 2, 3... INTSEXTUPLES_MAX
+    db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1, q + 1,
+                # nb1, nb2, nb3, nb4, nb5, nb6
+                _code(i + 1, j + 1, k + 1, n + 1, p + 1, q + 1),  # code
+                q + 1 < i + j + k + n + p + 5,  # hexagon?
+                i == j == k == n == p == q,  # equilateral?
+                (i == j or j == k or k == i or i == n or j == n or k == n
+                 or i == p or j == p or k == p or n == p or i == q or j == q
+                 or k == q or n == q or p == q),
+                # at least 2 equal sides?
+                0  # drawDate
+                )
+               for i in range(INTSEXTUPLES_MAX)
+               for j in range(INTSEXTUPLES_MAX)
+               for k in range(INTSEXTUPLES_MAX)
+               for n in range(INTSEXTUPLES_MAX)
+               for p in range(INTSEXTUPLES_MAX)
+               for q in range(INTSEXTUPLES_MAX)
+               if q >= p >= n >= k >= j >= i and q - i <= 16]
+
+    sys.stderr.write('Insert integers sextuples...')
+    for i in range(100):
+        sys.stderr.write('\rInsert integers sextuples... {} %'.format(i))
+        db.executemany("INSERT "
+                       "INTO int_sextuples(nb1, nb2, nb3, nb4, nb5, nb6, "
+                       "code, hexagon, equilateral, equal_sides, "
+                       "drawDate) "
+                       "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                       db_rows[i * len(db_rows) // 100:
+                               (i + 1) * len(db_rows) // 100])
+    sys.stderr.write('\rInsert integers sextuples... 100 %\n')
     # sys.stderr.flush()
 
     sys.stderr.write('Setup integers pairs: clever (5)...\n')

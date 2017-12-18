@@ -154,6 +154,20 @@
         "equal_sides",
         "drawDate"
     ],
+    "int_sextuples": [
+        "id",
+        "nb1",
+        "nb2",
+        "nb3",
+        "nb4",
+        "nb5",
+        "nb6",
+        "code",
+        "hexagon",
+        "equilateral",
+        "equal_sides",
+        "drawDate"
+    ],
     "ls_marks": [
         "id",
         "mark",
