@@ -391,7 +391,7 @@ def db_table(tag):
         return 'decimals'
     elif tag in ['int_deci_clever_pairs', 'digits_places', 'fracdigits_places',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
-                 'int_quintuples']:
+                 'int_quintuples', 'int_sextuples']:
         return tag
     return ''
 
@@ -418,7 +418,8 @@ def classify_tag(tag):
                  'unitspairs', 'digits_places', 'fracdigits_places',
                  'decimals', 'decimalfractionssums', 'extdecimals',
                  'simple_fractions', 'dvipsnames_selection', 'polygons',
-                 'int_triples', 'int_quadruples', 'int_quintuples']:
+                 'int_triples', 'int_quadruples', 'int_quintuples',
+                 'int_sextuples']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -705,6 +706,9 @@ def preprocess_polygons_sides_lengths_query(polygon_data=None, qkw=None):
     elif sides_nb == 5:
         tuple_name = 'quintuples'
         d.update({'pentagon': 1})
+    elif sides_nb == 6:
+        tuple_name = 'sextuples'
+        d.update({'hexagon': 1})
     nb_source = '{}_{}'.format(sum_ingredients.split('_')[0], tuple_name)
     mini, maxi = sum_ingredients.split('_')[1].split('to')
     for n in range(sides_nb):
@@ -1208,6 +1212,14 @@ class mc_source(object):
             if 'codename' in correct_kw:
                 del correct_kw['codename']
             return shared.int_quintuples_source.next(**correct_kw)
+        if tag_classification == 'int_sextuples':
+            correct_kw = preprocess_qkw(db_table('int_sextuples'), qkw=qkw)
+            # Ugly hack: as code and codename start with the same letters,
+            # codename cannot be detected as requiring to be removed from the
+            # query. So, we manually deleted it here, if necessary.
+            if 'codename' in correct_kw:
+                del correct_kw['codename']
+            return shared.int_sextuples_source.next(**correct_kw)
         if tag_classification == 'simple_fractions':
             return shared.simple_fractions_source.next(**kwargs)
         elif tag_classification.startswith('single'):
