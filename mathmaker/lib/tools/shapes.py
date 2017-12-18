@@ -1050,3 +1050,89 @@ class ShapeGenerator(object):
             masks=masks, marks=marks,
             shape_variant_nb=shape_variant_nb
         )
+
+    def _hexagon_2_2_2(self, variant=None, labels=None, name=None,
+                       label_vertices=None, thickness=None,
+                       length_unit=None, shape_variant_nb=None):
+        hexagonv0_shape1 = [Point(0, '0.9'), Point('0.77', '1.1'),
+                            Point('1.57', 1), Point('2.26', '0.42'),
+                            Point('1.46', 0), Point('0.46', '0.01')]
+        hexagonv1_shape1 = [Point(0, '0.5'), Point('0.92', '1.1'),
+                            Point('1.72', '1.1'), Point('2.55', '0.63'),
+                            Point('1.61', '0.05'), Point('0.66', '0.05')]
+        hexagonv2_shape1 = [Point(0, '0.56'), Point('0.66', '1.02'),
+                            Point('1.61', '1.07'), Point('2.4', '0.96'),
+                            Point('1.87', 0), Point('0.77', 0)]
+        hexagonv3_shape1 = [Point(0, '0.15'), Point(0, '.95'),
+                            Point('0.94', '1.05'), Point('2.04', '0.95'),
+                            Point('2.03', '0.15'), Point('1.09', 0)]
+        mark1 = next(shared.ls_marks_source)[0]
+        mark2 = next(shared.ls_marks_source)[0]
+        mark3 = next(shared.ls_marks_source)[0]
+        if variant == 0:
+            shape_variants = {
+                1: {'args': hexagonv0_shape1, 'rotation_angle': 0,
+                    'baseline': '13pt'},
+            }
+        elif variant == 1:
+            shape_variants = {
+                1: {'args': hexagonv1_shape1, 'rotation_angle': 0,
+                    'baseline': '18pt'},
+            }
+        elif variant == 2:
+            shape_variants = {
+                1: {'args': hexagonv2_shape1, 'rotation_angle': 0,
+                    'baseline': '13pt'},
+            }
+        elif variant == 3:
+            shape_variants = {
+                1: {'args': hexagonv3_shape1, 'rotation_angle': 0,
+                    'baseline': '18pt'},
+            }
+        doubled1 = []
+        doubled2 = []
+        doubled3 = []
+        for lbl in labels:
+            if not doubled1:
+                doubled1.append(lbl[1])
+                doubled1.append(lbl[1])
+            elif not doubled2:
+                doubled2.append(lbl[1])
+                doubled2.append(lbl[1])
+            elif not doubled3:
+                doubled3.append(lbl[1])
+                doubled3.append(lbl[1])
+        if variant == 0:
+            lbls = [doubled1.pop(), doubled1.pop(),
+                    doubled2.pop(), doubled2.pop(),
+                    doubled3.pop(), doubled3.pop()]
+            masks = [None, ' ', None, ' ', None, ' ']
+            marks = [mark1, mark1, mark2, mark2, mark3, mark3]
+        elif variant == 1:
+            lbls = [doubled1.pop(), doubled2.pop(),
+                    doubled3.pop(), doubled1.pop(),
+                    doubled3.pop(), doubled2.pop()]
+            masks = [None, None, None, ' ', ' ', ' ']
+            marks = [mark1, mark2, mark3, mark1, mark3, mark2]
+        elif variant == 2:
+            lbls = [doubled1.pop(), doubled2.pop(),
+                    doubled1.pop(), doubled3.pop(),
+                    doubled3.pop(), doubled2.pop()]
+            masks = [None, ' ', ' ', None, ' ', None]
+            marks = [mark1, mark2, mark1, mark3, mark3, mark2]
+        elif variant == 3:
+            lbls = [doubled1.pop(), doubled2.pop(),
+                    doubled3.pop(), doubled1.pop(),
+                    doubled2.pop(), doubled3.pop()]
+            masks = [None, None, None, ' ', ' ', ' ']
+            marks = [mark1, mark2, mark3, mark1, mark2, mark3]
+        return self._polygon(
+            shared.hexagon_2_2_2_shapes_source,
+            shape_variants,
+            Polygon,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks,
+            shape_variant_nb=shape_variant_nb
+        )
