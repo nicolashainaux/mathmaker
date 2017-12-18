@@ -908,3 +908,145 @@ class ShapeGenerator(object):
             masks=masks, marks=marks,
             shape_variant_nb=shape_variant_nb
         )
+
+    def _hexagon_2_2_1_1(self, variant=None, labels=None, name=None,
+                         label_vertices=None, thickness=None,
+                         length_unit=None, shape_variant_nb=None):
+        hexagonv0_shape1 = [Point('1.6', 0), Point('0.7', 0),
+                            Point(0, '0.56'), Point('0.9', 1),
+                            Point('1.9', 1), Point('2.8', '0.5')]
+        hexagonv1_shape1 = [Point(0, '0.4'), Point('0.53', 1),
+                            Point('1.63', '1.1'), Point('2.4', '0.9'),
+                            Point('1.76', 0), Point('0.8', 0)]
+        hexagonv2_shape1 = [Point('0.4', 0), Point(0, '0.81'),
+                            Point('1.03', '1.1'), Point('2.14', '0.9'),
+                            Point('2.7', '0.2'), Point('1.5', '0.2')]
+        hexagonv3_shape1 = [Point(0, '0.6'), Point('0.69', '1.1'),
+                            Point('1.69', '1.1'), Point('2.32', '0.54'),
+                            Point('1.64', 0), Point('0.64', 0)]
+        hexagonv4_shape1 = [Point('2.7', '0.8'), Point('2.41', 0),
+                            Point('1.41', 0), Point('0.45', '0.27'),
+                            Point('0.9', '1.1'), Point('1.75', '1.1')]
+        hexagonv5_shape1 = [Point('0.39', '0.22'), Point(0, '0.8'),
+                            Point('0.63', '1.1'), Point('1.88', '0.86'),
+                            Point('2.44', '0.15'), Point('1.55', 0), ]
+        hexagonv6_shape1 = [Point('0.22', '0.8'), Point('1.2', 1),
+                            Point('1.99', '0.9'), Point('2.2', '0.1'),
+                            Point('1.2', 0), Point('0.41', '0.1'), ]
+        hexagonv7_shape1 = [Point('0.34', '0.9'), Point('1.11', '1.1'),
+                            Point('2.09', '0.9'), Point('1.6', '0.09'),
+                            Point('0.6', 0), Point('-0.18', '0.19'), ]
+        mark1 = next(shared.ls_marks_source)[0]
+        mark2 = next(shared.ls_marks_source)[0]
+        if variant == 0:
+            shape_variants = {
+                1: {'args': hexagonv0_shape1, 'rotation_angle': 0,
+                    'baseline': '11pt'},
+            }
+        elif variant == 1:
+            shape_variants = {
+                1: {'args': hexagonv1_shape1, 'rotation_angle': 0,
+                    'baseline': '13pt'},
+            }
+        elif variant == 2:
+            shape_variants = {
+                1: {'args': hexagonv2_shape1, 'rotation_angle': 0,
+                    'baseline': '13pt'},
+            }
+        elif variant == 3:
+            shape_variants = {
+                1: {'args': hexagonv3_shape1, 'rotation_angle': 0,
+                    'baseline': '13pt'},
+            }
+        elif variant == 4:
+            shape_variants = {
+                1: {'args': hexagonv4_shape1, 'rotation_angle': 0,
+                    'baseline': '13pt'},
+            }
+        elif variant == 5:
+            shape_variants = {
+                1: {'args': hexagonv5_shape1, 'rotation_angle': 0,
+                    'baseline': '13pt'},
+            }
+        elif variant == 6:
+            shape_variants = {
+                1: {'args': hexagonv6_shape1, 'rotation_angle': 0,
+                    'baseline': '15pt'},
+            }
+        elif variant == 7:
+            shape_variants = {
+                1: {'args': hexagonv7_shape1, 'rotation_angle': 0,
+                    'baseline': '17pt'},
+            }
+        singles = []
+        doubled1 = []
+        doubled2 = []
+        for lbl in labels:
+            if lbl[0] == 1:
+                singles.append(lbl[1])
+            else:
+                if not doubled1:
+                    doubled1.append(lbl[1])
+                    doubled1.append(lbl[1])
+                else:
+                    doubled2.append(lbl[1])
+                    doubled2.append(lbl[1])
+        random.shuffle(singles)
+        if variant == 0:
+            lbls = [doubled1.pop(), doubled1.pop(),
+                    doubled2.pop(), doubled2.pop(),
+                    singles.pop(), singles.pop()]
+            masks = [None, ' ', None, ' ', None, None]
+            marks = [mark1, mark1, mark2, mark2, None, None]
+        elif variant == 1:
+            lbls = [doubled1.pop(), doubled2.pop(),
+                    doubled1.pop(), doubled2.pop(),
+                    singles.pop(), singles.pop()]
+            masks = [None, None, ' ', ' ', None, None]
+            marks = [mark1, mark2, mark1, mark2, None, None]
+        elif variant == 2:
+            lbls = [doubled1.pop(), doubled2.pop(),
+                    doubled2.pop(), doubled1.pop(),
+                    singles.pop(), singles.pop()]
+            masks = [None, None, ' ', ' ', None, None]
+            marks = [mark1, mark2, mark2, mark1, None, None]
+        elif variant == 3:
+            lbls = [doubled1.pop(), doubled2.pop(),
+                    doubled1.pop(), singles.pop(),
+                    doubled2.pop(), singles.pop()]
+            masks = [None, None, ' ', None, ' ', None]
+            marks = [mark1, mark2, mark1, None, mark2, None]
+        elif variant == 4:
+            lbls = [doubled1.pop(), doubled2.pop(),
+                    doubled2.pop(), singles.pop(),
+                    doubled1.pop(), singles.pop()]
+            masks = [None, None, ' ', None, ' ', None]
+            marks = [mark1, mark2, mark2, None, mark1, None]
+        elif variant == 5:
+            lbls = [doubled1.pop(), doubled1.pop(),
+                    singles.pop(), doubled2.pop(),
+                    doubled2.pop(), singles.pop()]
+            masks = [None, ' ', None, None, ' ', None]
+            marks = [mark1, mark1, None, mark2, mark2, None]
+        elif variant == 6:
+            lbls = [doubled1.pop(), doubled2.pop(),
+                    singles.pop(), doubled1.pop(),
+                    doubled2.pop(), singles.pop()]
+            masks = [None, None, None, ' ', ' ', None]
+            marks = [mark1, mark2, None, mark1, mark2, None]
+        elif variant == 7:
+            lbls = [doubled1.pop(), doubled2.pop(),
+                    singles.pop(), doubled2.pop(),
+                    doubled1.pop(), singles.pop()]
+            masks = [None, None, None, ' ', ' ', None]
+            marks = [mark1, mark2, None, mark2, mark1, None]
+        return self._polygon(
+            shared.hexagon_2_2_1_1_shapes_source,
+            shape_variants,
+            Polygon,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks,
+            shape_variant_nb=shape_variant_nb
+        )
