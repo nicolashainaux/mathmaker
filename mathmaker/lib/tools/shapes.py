@@ -812,7 +812,6 @@ class ShapeGenerator(object):
     def _hexagon_1_1_1_1_1_1(self, variant=None, labels=None, name=None,
                              label_vertices=None, thickness=None,
                              length_unit=None, shape_variant_nb=None):
-        shape_variant_nb = 2
         hexagon_shape1 = [Point(0, '0.4'), Point('0.7', '0.8'),
                           Point('1.7', '0.8'), Point('2.8', '0.5'),
                           Point(2, 0), Point('0.8', 0)]
@@ -835,5 +834,77 @@ class ShapeGenerator(object):
             labels=[lbl[1] for lbl in labels],
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
+            shape_variant_nb=shape_variant_nb
+        )
+
+    def _hexagon_2_1_1_1_1(self, variant=None, labels=None, name=None,
+                           label_vertices=None, thickness=None,
+                           length_unit=None, shape_variant_nb=None):
+        hexagonv0_shape1 = [Point('0.17', '0.47'), Point('0.9', '0.8'),
+                            Point('1.7', '0.8'), Point('2.8', '0.4'),
+                            Point(2, 0), Point('0.7', 0)]
+        hexagonv1_shape1 = [Point(0, '0.3'), Point('0.87', '0.8'),
+                            Point('1.7', '0.8'), Point('2.68', '0.6'),
+                            Point('2.2', '0.1'), Point(1, 0)]
+        hexagonv2_shape1 = [Point(0, '0.7'), Point('0.83', '0.9'),
+                            Point('2.2', '0.8'), Point('2.44', '0.15'),
+                            Point('1.6', 0), Point('0.2', 0)]
+        hexagonv2_shape2 = [Point('0.93', 0), Point('0.1', '0.2'),
+                            Point('0.3', '0.9'), Point('1.3', '1'),
+                            Point('2.14', '0.9'), Point('1.9', '0.1')]
+        mark = next(shared.ls_marks_source)[0]
+        if variant == 0:
+            shape_variants = {
+                1: {'args': hexagonv0_shape1, 'rotation_angle': 0,
+                    'baseline': '9pt'},
+                2: {'args': hexagonv0_shape1, 'rotation_angle': 180,
+                    'baseline': '9.5pt'},
+            }
+        elif variant == 1:
+            shape_variants = {
+                1: {'args': hexagonv1_shape1, 'rotation_angle': 0,
+                    'baseline': '9pt'},
+                2: {'args': hexagonv1_shape1, 'rotation_angle': 180,
+                    'baseline': '10pt'},
+            }
+        elif variant == 2:
+            shape_variants = {
+                1: {'args': hexagonv2_shape1, 'rotation_angle': 0,
+                    'baseline': '10pt'},
+                2: {'args': hexagonv2_shape2, 'rotation_angle': 0,
+                    'baseline': '10pt'},
+            }
+        singles = []
+        doubled = []
+        for lbl in labels:
+            if lbl[0] == 1:
+                singles.append(lbl[1])
+            else:
+                doubled.append(lbl[1])
+                doubled.append(lbl[1])
+        random.shuffle(singles)
+        if variant == 0:
+            lbls = [doubled.pop(), doubled.pop(), singles.pop(), singles.pop(),
+                    singles.pop(), singles.pop()]
+            masks = [None, ' ', None, None, None, None]
+            marks = [mark, mark, None, None, None, None]
+        elif variant == 1:
+            lbls = [doubled.pop(), singles.pop(), doubled.pop(), singles.pop(),
+                    singles.pop(), singles.pop()]
+            masks = [None, None, ' ', None, None, None]
+            marks = [mark, None, mark, None, None, None]
+        elif variant == 2:
+            lbls = [doubled.pop(), singles.pop(), singles.pop(), doubled.pop(),
+                    singles.pop(), singles.pop()]
+            masks = [None, None, None, ' ', None, None]
+            marks = [mark, None, None, mark, None, None]
+        return self._polygon(
+            shared.hexagon_2_1_1_1_1_shapes_source,
+            shape_variants,
+            Polygon,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks,
             shape_variant_nb=shape_variant_nb
         )
