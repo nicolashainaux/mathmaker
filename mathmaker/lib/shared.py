@@ -85,6 +85,7 @@ def init():
     global pentagon_4_1_shapes_source
     global pentagon_5_shapes_source
     global hexagon_1_1_1_1_1_1_shapes_source
+    global hexagon_2_1_1_1_1_shapes_source
     global ls_marks_source
     global enable_js_form
 
@@ -181,6 +182,8 @@ def init():
         'pentagon_5_shapes', ['id', 'shape_nb'], db=shapes_db)
     hexagon_1_1_1_1_1_1_shapes_source = database.source(
         'hexagon_1_1_1_1_1_1_shapes', ['id', 'shape_nb'], db=shapes_db)
+    hexagon_2_1_1_1_1_shapes_source = database.source(
+        'hexagon_2_1_1_1_1_shapes', ['id', 'shape_nb'], db=shapes_db)
 
     markup = latex.MARKUP
 
