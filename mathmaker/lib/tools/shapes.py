@@ -1334,3 +1334,68 @@ class ShapeGenerator(object):
             masks=masks, marks=marks,
             shape_variant_nb=shape_variant_nb
         )
+
+    def _hexagon_4_1_1(self, variant=None, labels=None, name=None,
+                       label_vertices=None, thickness=None,
+                       length_unit=None, shape_variant_nb=None):
+        hexagonv0_shape1 = [Point(1, '1.1'), Point('1.84', '0.99'),
+                            Point('1.84', '0.14'), Point(1, 0),
+                            Point('0.15', '0.07'), Point('-0.2', '0.9')]
+        hexagonv1_shape1 = [Point(1, 0), Point('0.16', '0.15'),
+                            Point('-0.2', '0.92'), Point('0.63', '1.1'),
+                            Point('2.3', 1), Point('2.01', '0.2')]
+        hexagonv2_shape1 = [Point(1, 0), Point('0.16', '0.1'),
+                            Point('0.11', '0.95'), Point('1.1', '1.1'),
+                            Point('1.94', '0.96'), Point('2.24', '0.17')]
+        mark = next(shared.ls_marks_source)[0]
+        if variant == 0:
+            shape_variants = {
+                1: {'args': hexagonv0_shape1, 'rotation_angle': 0,
+                    'baseline': '17pt'},
+            }
+        elif variant == 1:
+            shape_variants = {
+                1: {'args': hexagonv1_shape1, 'rotation_angle': 0,
+                    'baseline': '13pt'},
+            }
+        elif variant == 2:
+            shape_variants = {
+                1: {'args': hexagonv2_shape1, 'rotation_angle': 0,
+                    'baseline': '13pt'},
+            }
+        singles = []
+        quadrupled = []
+        for lbl in labels:
+            if lbl[0] == 1:
+                singles.append(lbl[1])
+            else:
+                quadrupled.append(lbl[1])
+                quadrupled.append(lbl[1])
+                quadrupled.append(lbl[1])
+                quadrupled.append(lbl[1])
+        random.shuffle(singles)
+        if variant == 0:
+            lbls = [quadrupled.pop(), quadrupled.pop(), quadrupled.pop(),
+                    quadrupled.pop(), singles.pop(), singles.pop()]
+            masks = [None, ' ', ' ', ' ', None, None]
+            marks = [mark, mark, mark, mark, None, None]
+        elif variant == 1:
+            lbls = [quadrupled.pop(), quadrupled.pop(), quadrupled.pop(),
+                    singles.pop(), quadrupled.pop(), singles.pop()]
+            masks = [' ', None, ' ', None, ' ', None]
+            marks = [mark, mark, mark, None, mark, None]
+        elif variant == 2:
+            lbls = [quadrupled.pop(), quadrupled.pop(), singles.pop(),
+                    quadrupled.pop(), quadrupled.pop(), singles.pop()]
+            masks = [' ', ' ', None, ' ', None, None]
+            marks = [mark, mark, None, mark, mark, None]
+        return self._polygon(
+            shared.hexagon_4_1_1_shapes_source,
+            shape_variants,
+            Polygon,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks,
+            shape_variant_nb=shape_variant_nb
+        )
