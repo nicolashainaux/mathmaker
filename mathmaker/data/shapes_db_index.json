@@ -119,5 +119,10 @@
         "id",
         "shape_nb",
         "drawDate"
+    ],
+    "hexagon_3_2_1_shapes": [
+        "id",
+        "shape_nb",
+        "drawDate"
     ]
 }
