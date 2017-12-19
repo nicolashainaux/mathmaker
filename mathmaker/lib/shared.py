@@ -91,6 +91,10 @@ def init():
     global hexagon_3_1_1_1_shapes_source
     global hexagon_3_2_1_shapes_source
     global hexagon_3_3_shapes_source
+    global hexagon_4_1_1_shapes_source
+    global hexagon_4_2_shapes_source
+    global hexagon_5_1_shapes_source
+    global hexagon_6_shapes_source
     global ls_marks_source
     global enable_js_form
 
@@ -199,6 +203,14 @@ def init():
         'hexagon_3_2_1_shapes', ['id', 'shape_nb'], db=shapes_db)
     hexagon_3_3_shapes_source = database.source(
         'hexagon_3_3_shapes', ['id', 'shape_nb'], db=shapes_db)
+    hexagon_4_1_1_shapes_source = database.source(
+        'hexagon_4_1_1_shapes', ['id', 'shape_nb'], db=shapes_db)
+    hexagon_4_2_shapes_source = database.source(
+        'hexagon_4_2_shapes', ['id', 'shape_nb'], db=shapes_db)
+    hexagon_5_1_shapes_source = database.source(
+        'hexagon_5_1_shapes', ['id', 'shape_nb'], db=shapes_db)
+    hexagon_6_shapes_source = database.source(
+        'hexagon_6_shapes', ['id', 'shape_nb'], db=shapes_db)
 
     markup = latex.MARKUP
 

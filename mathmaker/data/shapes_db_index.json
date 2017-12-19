@@ -129,5 +129,25 @@
         "id",
         "shape_nb",
         "drawDate"
+    ],
+    "hexagon_4_1_1_shapes": [
+        "id",
+        "shape_nb",
+        "drawDate"
+    ],
+    "hexagon_4_2_shapes": [
+        "id",
+        "shape_nb",
+        "drawDate"
+    ],
+    "hexagon_5_1_shapes": [
+        "id",
+        "shape_nb",
+        "drawDate"
+    ],
+    "hexagon_6_shapes": [
+        "id",
+        "shape_nb",
+        "drawDate"
     ]
 }
