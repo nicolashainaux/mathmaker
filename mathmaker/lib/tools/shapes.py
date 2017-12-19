@@ -1465,3 +1465,42 @@ class ShapeGenerator(object):
             masks=masks, marks=marks,
             shape_variant_nb=shape_variant_nb
         )
+
+    def _hexagon_5_1(self, variant=None, labels=None, name=None,
+                     label_vertices=None, thickness=None,
+                     length_unit=None, shape_variant_nb=None):
+        hexagon_shape1 = [Point(0, '0.8'), Point('0.8', '1.1'),
+                          Point('1.65', '1.1'), Point('2.38', '0.68'),
+                          Point('1.88', 0), Point('1.03', 0)]
+        mark = next(shared.ls_marks_source)[0]
+        shape_variants = {
+            1: {'args': hexagon_shape1, 'rotation_angle': 0,
+                'baseline': '10pt'},
+            2: {'args': hexagon_shape1, 'rotation_angle': 180,
+                'baseline': '19.5pt'},
+        }
+        singles = []
+        quintupled = []
+        for lbl in labels:
+            if lbl[0] == 1:
+                singles.append(lbl[1])
+            else:
+                quintupled.append(lbl[1])
+                quintupled.append(lbl[1])
+                quintupled.append(lbl[1])
+                quintupled.append(lbl[1])
+                quintupled.append(lbl[1])
+        lbls = [quintupled.pop(), quintupled.pop(), quintupled.pop(),
+                quintupled.pop(), quintupled.pop(), singles.pop()]
+        masks = [' ', ' ', ' ', None, ' ', None]
+        marks = [mark, mark, mark, mark, mark, None]
+        return self._polygon(
+            shared.hexagon_5_1_shapes_source,
+            shape_variants,
+            Polygon,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks,
+            shape_variant_nb=shape_variant_nb
+        )
