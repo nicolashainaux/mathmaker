@@ -1504,3 +1504,30 @@ class ShapeGenerator(object):
             masks=masks, marks=marks,
             shape_variant_nb=shape_variant_nb
         )
+
+    def _hexagon_6(self, variant=None, labels=None, name=None,
+                   label_vertices=None, thickness=None,
+                   length_unit=None, shape_variant_nb=None):
+        shape_variant_nb = 2
+        hexagon_shape1 = [Point('0.48', '0.55'), Point('0.8', '1.1'),
+                          Point('1.43', '1.1'), Point('1.75', '0.55'),
+                          Point('1.43', 0), Point('0.8', 0)]
+        mark = next(shared.ls_marks_source)[0]
+        shape_variants = {
+            1: {'args': hexagon_shape1, 'rotation_angle': 0,
+                'baseline': '16pt'},
+            2: {'args': hexagon_shape1, 'rotation_angle': 30,
+                'baseline': '13pt'},
+        }
+        masks = [None, ' ', ' ', ' ', ' ', ' ']
+        marks = [mark, mark, mark, mark, mark, mark]
+        return self._polygon(
+            shared.hexagon_6_shapes_source,
+            shape_variants,
+            Polygon,
+            labels=[labels[0][1] for _ in range(6)],
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks,
+            shape_variant_nb=shape_variant_nb
+        )
