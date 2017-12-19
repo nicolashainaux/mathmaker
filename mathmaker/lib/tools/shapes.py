@@ -1268,3 +1268,69 @@ class ShapeGenerator(object):
             masks=masks, marks=marks,
             shape_variant_nb=shape_variant_nb
         )
+
+    def _hexagon_3_3(self, variant=None, labels=None, name=None,
+                     label_vertices=None, thickness=None,
+                     length_unit=None, shape_variant_nb=None):
+        hexagonv0_shape1 = [Point(0, '0.57'), Point('0.72', '1.02'),
+                            Point('1.57', '1.02'), Point('2.29', '0.57'),
+                            Point('1.59', 0), Point('0.69', 0)]
+        hexagonv1_shape1 = [Point(0, '0.49'), Point('0.66', '1.02'),
+                            Point('1.51', '1.02'), Point('2.29', '0.57'),
+                            Point('1.65', 0), Point('0.75', 0)]
+        hexagonv2_shape1 = [Point(0, '0.4'), Point('0.55', '1.04'),
+                            Point('1.45', '1.04'), Point('2.23', '0.7'),
+                            Point('1.66', 0), Point('0.81', 0)]
+        mark1 = next(shared.ls_marks_source)[0]
+        mark2 = next(shared.ls_marks_source)[0]
+        if variant == 0:
+            shape_variants = {
+                1: {'args': hexagonv0_shape1, 'rotation_angle': 0,
+                    'baseline': '12pt'},
+            }
+        elif variant == 1:
+            shape_variants = {
+                1: {'args': hexagonv1_shape1, 'rotation_angle': 0,
+                    'baseline': '15pt'},
+            }
+        elif variant == 2:
+            shape_variants = {
+                1: {'args': hexagonv2_shape1, 'rotation_angle': 0,
+                    'baseline': '17pt'},
+            }
+        tripled1 = []
+        tripled2 = []
+        for lbl in labels:
+            if not tripled1:
+                tripled1.append(lbl[1])
+                tripled1.append(lbl[1])
+                tripled1.append(lbl[1])
+            elif not tripled2:
+                tripled2.append(lbl[1])
+                tripled2.append(lbl[1])
+                tripled2.append(lbl[1])
+        if variant == 0:
+            lbls = [tripled1.pop(), tripled1.pop(), tripled1.pop(),
+                    tripled2.pop(), tripled2.pop(), tripled2.pop()]
+            masks = [None, ' ', ' ', None, ' ', ' ']
+            marks = [mark1, mark1, mark1, mark2, mark2, mark2]
+        elif variant == 1:
+            lbls = [tripled1.pop(), tripled1.pop(), tripled2.pop(),
+                    tripled1.pop(), tripled2.pop(), tripled2.pop()]
+            masks = [None, ' ', None, ' ', ' ', ' ']
+            marks = [mark1, mark1, mark2, mark1, mark2, mark2]
+        elif variant == 2:
+            lbls = [tripled1.pop(), tripled2.pop(), tripled1.pop(),
+                    tripled2.pop(), tripled1.pop(), tripled2.pop()]
+            masks = [None, None, ' ', ' ', ' ', ' ']
+            marks = [mark1, mark2, mark1, mark2, mark1, mark2]
+        return self._polygon(
+            shared.hexagon_3_3_shapes_source,
+            shape_variants,
+            Polygon,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            masks=masks, marks=marks,
+            shape_variant_nb=shape_variant_nb
+        )
