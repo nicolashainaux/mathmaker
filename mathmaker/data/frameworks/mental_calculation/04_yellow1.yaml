@@ -1,8 +1,14 @@
 # ×÷ 10, 100 1000
 
-# perimeter any polygon
-
 # divisions (including tables of 15 and 25)
+
+perimeter_of_a_polygon: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: perimeter of a polygon"
+  - exercise: !!omap
+    - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, level=1 (4)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=2 (4)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=3 (4)
 
 fraction_of_a_linesegment: !!omap
   - preset: "mental calculation"
