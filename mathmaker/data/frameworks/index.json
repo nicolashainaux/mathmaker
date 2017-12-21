@@ -189,6 +189,11 @@
         "01_white1",
         "W02d"
     ],
+    "04_yellow1_euclidean_divisions": [
+        "mental_calculation",
+        "04_yellow1",
+        "euclidean_divisions"
+    ],
     "04_yellow1_perimeter_of_a_polygon": [
         "mental_calculation",
         "04_yellow1",

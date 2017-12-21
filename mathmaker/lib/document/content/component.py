@@ -162,6 +162,26 @@ class structure(object):
                 setattr(self, 'nb' + str(i),
                         getattr(self, 'nb' + str(i)) / 10)
 
+    def _setup_euclidean_division(self, **kwargs):
+        nb_list = list(kwargs['nb'])
+        # For couples like (3, 15) or (4, 25) we want to ensure the divisor
+        # will be 15 (or 25), in order to ask a not too hard question.
+        # Using 11 or more as divisor makes it already quite a more
+        # difficult question.
+        if not (15 in nb_list or 25 in nb_list):
+            random.shuffle(nb_list)
+        self.divisor = Number(nb_list.pop())
+        self.quotient = Number(nb_list.pop())
+        allow_null_remainder = kwargs.get('allow_null_remainder', False)
+        force_null_remainder = kwargs.get('force_null_remainder', False)
+        if force_null_remainder:
+            self.remainder = Number(0)
+        else:
+            mini = 0 if allow_null_remainder else 1
+            self.remainder = \
+                Number(random.choice(range(mini, int(self.divisor))))
+        self.dividend = self.quotient * self.divisor + self.remainder
+
     def _setup_division(self, **kwargs):
         nb_list = list(kwargs['nb'])
         self.divisor = self.result = self.dividend = 0

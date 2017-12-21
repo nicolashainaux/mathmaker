@@ -2,6 +2,14 @@
 
 # divisions (including tables of 15 and 25)
 
+euclidean_divisions: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: euclidean divisions"
+  - exercise: !!omap
+    - questions: divi euclidean -> intpairs_2to10 (12)
+                 divi euclidean -> table_15 (4)
+                 divi euclidean -> table_25 (4)
+
 perimeter_of_a_polygon: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: perimeter of a polygon"
