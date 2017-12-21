@@ -50,6 +50,8 @@ class sub_object(component.structure):
         return self.answer
 
     def js_a(self, **kwargs):
-        alt_answer = 'q {quotient} r {remainder}'\
+        alt_answer1 = 'q {quotient} r {remainder}'\
             .format(quotient=self.quotient, remainder=self.remainder)
-        return [self.answer, alt_answer]
+        alt_answer2 = '{quotient} R {remainder}'\
+            .format(quotient=self.quotient, remainder=self.remainder)
+        return [self.answer, alt_answer1, alt_answer2]
