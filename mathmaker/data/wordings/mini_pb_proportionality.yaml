@@ -1,0 +1,21 @@
+# This file is only intended to provide additional strings for translation
+
+wording1:
+  - wording_context: price
+  - wording: "A pack of {nb1} books cost {nb3} {currency_unit}. How much do cost {nb2} books? |hint:currency_unit|"
+
+wording2:
+  - wording_context: weight
+  - wording: "{nb1} boxes weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} boxes? |hint:mass_unit|"
+
+wording3:
+  - wording_context: price
+  - wording: "A pack of {nb1} CDs cost {nb3} {currency_unit}. How much do cost {nb2} CDs? |hint:currency_unit|"
+
+wording4:
+  - wording_context: recipe
+  - wording: "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How much flour should be used for {nb2} people? |hint:mass_unit|"
+  - nb1_max: 12
+  - nb2_max: 50
+  - coeff_max: 10
+  - nb3_coeff: 10

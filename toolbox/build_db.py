@@ -243,6 +243,36 @@ def __main__():
                        "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                        db_rows)
 
+    creation_query = '''CREATE TABLE mini_pb_prop_wordings
+                        (id INTEGER PRIMARY KEY, wording_context TEXT,
+                         wording TEXT, nb1_min INTEGER, nb1_max INTEGER,
+                         nb2_min INTEGER, nb2_max INTEGER,
+                         coeff_min INTEGER, coeff_max INTEGER,
+                         nb1_coeff INTEGER, nb2_coeff INTEGER,
+                         nb3_coeff INTEGER, drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    PROP_WORDINGS_FILE = WORDINGS_DIR + 'mini_pb_proportionality' + '.yaml'
+    wordings = get_attributes(PROP_WORDINGS_FILE, "wording")
+    db_rows = list(zip([w.get('wording_context') for w in wordings],
+                       [w.get('wording') for w in wordings],
+                       [w.get('nb1_min', 2) for w in wordings],
+                       [w.get('nb1_max', 100) for w in wordings],
+                       [w.get('nb2_min', 2) for w in wordings],
+                       [w.get('nb2_max', 100) for w in wordings],
+                       [w.get('coeff_min', 0.125) for w in wordings],
+                       [w.get('coeff_max', 100) for w in wordings],
+                       [w.get('nb1_coeff', 1) for w in wordings],
+                       [w.get('nb2_coeff', 1) for w in wordings],
+                       [w.get('nb3_coeff', 1) for w in wordings],
+                       [0 for _ in range(len(wordings))]))
+    db.executemany("INSERT "
+                   "INTO mini_pb_prop_wordings(wording_context, wording, "
+                   "nb1_min, nb1_max, nb2_min, nb2_max, coeff_min, "
+                   "coeff_max, nb1_coeff, nb2_coeff, nb3_coeff, drawDate) "
+                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                   db_rows)
+
     sys.stderr.write('Insert integers pairs...')
     # Tables of 1, 2, 3... INTPAIRS_MAX
     db_rows = [(i + 1, j + 1, 0, 0, 0,

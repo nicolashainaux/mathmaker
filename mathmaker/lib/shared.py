@@ -35,6 +35,7 @@ def init():
     global five_letters_words_source
     global names_source
     global mini_problems_wordings_source
+    global mini_problems_prop_wordings_source
     global markup
     global int_pairs_source
     global int_triples_source
@@ -118,6 +119,9 @@ def init():
     mini_problems_wordings_source = database.source("mini_pb_wordings",
                                                     ["wording_context",
                                                      "wording"])
+    mini_problems_prop_wordings_source = database.source(
+        "mini_pb_prop_wordings", ["wording_context", "wording",
+                                  "nb1_coeff", "nb2_coeff", "nb3_coeff"])
     int_pairs_source = database.source("int_pairs", ["id", "nb1", "nb2"])
     int_triples_source = database.source("int_triples",
                                          ["id", "nb1", "nb2", "nb3"])

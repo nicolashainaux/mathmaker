@@ -129,6 +129,21 @@
         "color_name",
         "drawDate"
     ],
+    "mini_pb_prop_wordings": [
+        "id",
+        "wording_context",
+        "wording",
+        "nb1_min",
+        "nb1_max",
+        "nb2_min",
+        "nb2_max",
+        "coeff_min",
+        "coeff_max",
+        "nb1_coeff",
+        "nb2_coeff",
+        "nb3_coeff",
+        "drawDate"
+    ],
     "int_quadruples": [
         "id",
         "nb1",
