@@ -2,15 +2,15 @@
 
 wording1:
   - wording_context: price
-  - wording: "A pack of {nb1} books cost {nb3} {currency_unit}. How much do cost {nb2} books? |hint:currency_unit|"
+  - wording: "A pack of {nb1} books cost {nb2} {currency_unit}. How much do cost {nb3} books? |hint:currency_unit|"
 
 wording2:
   - wording_context: weight
-  - wording: "{nb1} boxes weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} boxes? |hint:mass_unit|"
+  - wording: "{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much do weigh {nb3} boxes? |hint:mass_unit|"
 
 wording3:
   - wording_context: price
-  - wording: "A pack of {nb1} CDs cost {nb3} {currency_unit}. How much do cost {nb2} CDs? |hint:currency_unit|"
+  - wording: "A pack of {nb1} CDs cost {nb2} {currency_unit}. How much do cost {nb3} CDs? |hint:currency_unit|"
 
 wording4:
   - wording_context: recipe
@@ -19,3 +19,5 @@ wording4:
   - nb2_max: 50
   - coeff_max: 10
   - nb3_coeff: 10
+  - ifintcoeff_nb2nb3swappable: false
+  - ifdecicoeff_forceswapnb2nb3: true
