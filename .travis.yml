@@ -5,6 +5,10 @@ python:
     - "3.6"
 cache:
     - pip3
+# blocklist
+branches:
+  except:
+  - broken
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y eukleides libxml2-utils gettext texlive-latex-base texlive-luatex texlive-latex-recommended texlive-xetex texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
