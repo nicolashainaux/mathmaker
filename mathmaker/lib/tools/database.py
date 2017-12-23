@@ -389,6 +389,8 @@ def db_table(tag):
         return 'units_conversions'
     elif tag == 'decimalfractionssums':
         return 'decimals'
+    elif tag.startswith('deciintinttriplesforprop'):
+        return 'deci_int_int_triples_for_prop'
     elif tag in ['int_deci_clever_pairs', 'digits_places', 'fracdigits_places',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
                  'int_quintuples', 'int_sextuples']:
@@ -407,6 +409,8 @@ def classify_tag(tag):
         return 'single_int'
     elif tag.startswith('singledeci1_'):
         return 'single_deci1'
+    elif tag.startswith('deciintinttriplesforprop'):
+        return 'deciintinttriplesforprop'
     elif tag.endswith(r'%of...'):
         return 'percentage'
     elif tag in ['int_deci_clever_pairs',
@@ -441,6 +445,16 @@ def preprocess_qkw(table_name, qkw=None):
         if any([kw.startswith(ref)
                 for ref in db_index[table_name]]):
             d.update({kw: qkw[kw]})
+    return d
+
+
+def preprocess_deci_int_int_triplesforprop_tag(tag, qkw=None):
+    d = {}
+    parts = tag.split('_')
+    if len(parts) == 2:
+        n1, n2 = parts[1].split(sep='to')
+        d = {'nb2_min': n1, 'nb2_max': n2,
+             'nb3_min': n1, 'nb3_max': n2}
     return d
 
 
@@ -844,6 +858,11 @@ def generate_values(source_id):
 
     elif source_id == 'alternate_4masks':
         lr = [1, 2, 3, 4]
+        random.shuffle(lr)
+        return lr * 20
+
+    elif source_id == 'alternate_nb2nb3_in_mini_pb_prop':
+        lr = [True, False]
         random.shuffle(lr)
         return lr * 20
 
@@ -1296,5 +1315,9 @@ class mc_source(object):
                         shared.int_pairs_source._timestamp({'nb1': sp[0],
                                                             'nb2': sp[1]})
             return result + nb_result
+        elif tag_classification == 'deciintinttriplesforprop':
+            kwargs.update(
+                preprocess_deci_int_int_triplesforprop_tag(source_id, qkw=qkw))
+            return shared.deci_int_int_triples_for_prop_source.next(**kwargs)
         elif tag_classification == 'nothing':
             return ()

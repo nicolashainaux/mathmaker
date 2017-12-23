@@ -37,6 +37,7 @@ def init():
     global mini_problems_wordings_source
     global mini_problems_prop_wordings_source
     global markup
+    global deci_int_int_triples_for_prop_source
     global int_pairs_source
     global int_triples_source
     global int_quadruples_source
@@ -65,6 +66,7 @@ def init():
     global alternate_2masks_source
     global alternate_3masks_source
     global alternate_4masks_source
+    global alternate_nb2nb3_in_mini_pb_prop_source
     global decimals_source
     global extdecimals_source
     global dvipsnames_selection_source
@@ -120,8 +122,13 @@ def init():
                                                     ["wording_context",
                                                      "wording"])
     mini_problems_prop_wordings_source = database.source(
-        "mini_pb_prop_wordings", ["wording_context", "wording",
-                                  "nb1_coeff", "nb2_coeff", "nb3_coeff"])
+        "mini_pb_prop_wordings", ["id", "wording_context", "wording",
+                                  "nb1_coeff", "nb2_coeff", "nb3_coeff",
+                                  "ifintcoeff_nb2nb3swappable",
+                                  "ifdecicoeff_forceswapnb2nb3"])
+    deci_int_int_triples_for_prop_source = database.source(
+        "deci_int_int_triples_for_prop", ["id", "nb1", "nb2", "nb3"])
+
     int_pairs_source = database.source("int_pairs", ["id", "nb1", "nb2"])
     int_triples_source = database.source("int_triples",
                                          ["id", "nb1", "nb2", "nb3"])
@@ -226,6 +233,8 @@ def init():
     alternate_2masks_source = sub_source('alternate_2masks')
     alternate_3masks_source = sub_source('alternate_3masks')
     alternate_4masks_source = sub_source('alternate_4masks')
+    alternate_nb2nb3_in_mini_pb_prop_source = \
+        sub_source('alternate_nb2nb3_in_mini_pb_prop')
     # alternate_source2 = sub_source('alternate2')
     trigo_functions_source = sub_source('trigo_functions')
     trigo_vocabulary_source = sub_source('trigo_vocabulary')
