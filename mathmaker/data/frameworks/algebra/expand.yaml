@@ -4,13 +4,13 @@ simple: !!omap
     - details_level: medium
     - text_exc: "Expand and reduce the following expressions:"
     - text_ans: "Example of solutions:"
-    - questions: expand simple -> mergedinttriplets_2to9 (5)
+    - questions: expand simple -> mergedinttriples_2to9 (5)
 
 simple_detailed_solutions: !!omap
   - title: "Algebra: expand simple brackets"
   - exercise: !!omap
     - text_exc: "Expand and reduce the following expressions:"
-    - questions: expand simple -> mergedinttriplets_2to9 (5)
+    - questions: expand simple -> mergedinttriples_2to9 (5)
 
 double: !!omap
   - title: "Algebra: expand and reduce double brackets"
