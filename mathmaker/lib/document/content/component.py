@@ -351,14 +351,38 @@ class structure(object):
         self.chunk1_length = str(self.figure.chunk[1].length)
 
     def _setup_mini_problem_wording(self, **kwargs):
-        wording_kwargs = {'q_id': kwargs['q_id'],
-                          'nb1_to_check': self.nb1,
-                          'nb2_to_check': self.nb2}
-        if 'back_to_unit' in kwargs:
-            val = 1 if BOOLEAN[kwargs['back_to_unit']]() else 0
-            wording_kwargs.update({'back_to_unit': val})
-        self.wording = _(shared.mini_problems_wordings_source
-                         .next(**wording_kwargs)[0])
+        import sys
+        wording_kwargs = {'nb1_to_check': self.nb1, 'nb2_to_check': self.nb2}
+        if kwargs.get('proportionality', False):
+            source = shared.mini_problems_prop_wordings_source
+            wording_kwargs.update({'coeff_to_check': self.coeff})
+        else:
+            source = shared.mini_problems_wordings_source
+            wording_kwargs.update({'q_id': kwargs['q_id']})
+            if 'back_to_unit' in kwargs:
+                val = 1 if BOOLEAN[kwargs['back_to_unit']]() else 0
+                wording_kwargs.update({'back_to_unit': val})
+        drawn_wording = source.next(**wording_kwargs)
+        sys.stderr.write('\nSTEP 1\n')
+        self.wording = _(drawn_wording[1])
+        self.ifintcoeff_nb2nb3swappable = drawn_wording[5]
+        self.ifdecicoeff_forceswapnb2nb3 = drawn_wording[6]
+        sys.stderr.write('\nSTEP 2\n')
+        if kwargs.get('proportionality', False):
+            if self.ifintcoeff_nb2nb3swappable and is_integer(self.coeff):
+                if next(shared.alternate_nb2nb3_in_mini_pb_prop_source)[0]:
+                    self.nb2, self.nb3 = self.nb3, self.nb2
+            if self.ifdecicoeff_forceswapnb2nb3 and not is_integer(self.coeff):
+                self.nb2, self.nb3 = self.nb3, self.nb2
+            nb1_coeff, nb2_coeff, nb3_coeff = drawn_wording[2:5]
+            # if nb1_coeff != 1:
+            #     self.nb1 *= nb1_coeff
+            # if nb2_coeff != 1:
+            #     self.nb2 *= nb2_coeff
+            if nb3_coeff != 1:
+                self.nb3 *= nb3_coeff
+            self.solution = self.nb2 * self.nb3 / self.nb1
+        sys.stderr.write('\nSTEP 3\n')
         setup_wording_format_of(self)
 
     def _setup_complement_wording(self, **kwargs):
