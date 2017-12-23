@@ -142,6 +142,15 @@
         "nb1_coeff",
         "nb2_coeff",
         "nb3_coeff",
+        "ifintcoeff_nb2nb3swappable",
+        "ifdecicoeff_forceswapnb2nb3",
+        "drawDate"
+    ],
+    "deci_int_int_triples_for_prop": [
+        "id",
+        "nb1",
+        "nb2",
+        "nb3",
         "drawDate"
     ],
     "int_quadruples": [

@@ -249,7 +249,10 @@ def __main__():
                          nb2_min INTEGER, nb2_max INTEGER,
                          coeff_min INTEGER, coeff_max INTEGER,
                          nb1_coeff INTEGER, nb2_coeff INTEGER,
-                         nb3_coeff INTEGER, drawDate INTEGER)'''
+                         nb3_coeff INTEGER,
+                         ifintcoeff_nb2nb3swappable INTEGER,
+                         ifdecicoeff_forceswapnb2nb3 INTEGER,
+                         drawDate INTEGER)'''
     db_creation_queries.append(creation_query)
     db.execute(creation_query)
     PROP_WORDINGS_FILE = WORDINGS_DIR + 'mini_pb_proportionality' + '.yaml'
@@ -265,12 +268,46 @@ def __main__():
                        [w.get('nb1_coeff', 1) for w in wordings],
                        [w.get('nb2_coeff', 1) for w in wordings],
                        [w.get('nb3_coeff', 1) for w in wordings],
+                       [w.get('ifintcoeff_nb2nb3swappable', True)
+                        for w in wordings],
+                       [w.get('ifdecicoeff_forceswapnb2nb3', False)
+                        for w in wordings],
                        [0 for _ in range(len(wordings))]))
     db.executemany("INSERT "
                    "INTO mini_pb_prop_wordings(wording_context, wording, "
                    "nb1_min, nb1_max, nb2_min, nb2_max, coeff_min, "
-                   "coeff_max, nb1_coeff, nb2_coeff, nb3_coeff, drawDate) "
-                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                   "coeff_max, nb1_coeff, nb2_coeff, nb3_coeff, "
+                   "ifintcoeff_nb2nb3swappable, "
+                   "ifdecicoeff_forceswapnb2nb3 ,"
+                   "drawDate) "
+                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert decimal/int/int triples for proportionality...\n')
+    integers = [_ for _ in range(1, 26)]
+    integers.append(50)
+    integers.append(100)
+    db_rows = [(1.25, n1, n2, 0)
+               for n1 in integers if n1 % 4 == 0
+               for n2 in integers
+               if n2 > n1 / 2 and n2 % 4 != 0 and n2 % 2 == 0]
+    db_rows += [(1.5, n1, n2, 0)
+                for n1 in integers if n1 % 2 == 0
+                for n2 in integers
+                if n2 > n1 / 2 and n2 % 2 != 0]
+    db_rows += [(2.5, n1, n2, 0)
+                for n1 in integers if n1 % 2 == 0
+                for n2 in integers
+                if n2 > n1 / 2 and n2 % 2 != 0]
+    creation_query = '''CREATE TABLE deci_int_int_triples_for_prop
+                        (id INTEGER PRIMARY KEY, nb1 DECIMAL(1, 2),
+                         nb2 INTEGER, nb3 INTEGER, drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    db.executemany("INSERT "
+                   "INTO deci_int_int_triples_for_prop(nb1, nb2, "
+                   "nb3, drawDate) "
+                   "VALUES(?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert integers pairs...')
