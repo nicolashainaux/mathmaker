@@ -41,6 +41,8 @@ class sub_object(component.structure):
             6: _('Perimeter of this hexagon? |hint:length_unit|')
         }[len(self.polygon.sides)]
 
+        self.transduration = 20
+
         setup_wording_format_of(self)
         self.wording = self.wording.format(**self.wording_format)
 

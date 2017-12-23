@@ -37,10 +37,11 @@ class sub_object(component.structure):
         if self.nb_variant.startswith('decimal'):
             deci_nb = int(self.nb_variant[-1])
             self.nb2 = self.nb2 / Number(10) ** Number(deci_nb)
-        self.transduration = 10
-        source_id = options.get('nb_source')
-        if source_id not in [r'25%of...', r'50%of...', r'10%of...']:
-            self.transduration = 14
+        self.transduration = 16
+        # source_id = options.get('nb_source')
+        # self.transduration = 10
+        # if source_id not in [r'25%of...', r'50%of...', r'10%of...']:
+        #     self.transduration = 14
 
         self.result = self.nb1 * self.nb2 / Number(100)
         self.n1 = self.nb1.printed
