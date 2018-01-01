@@ -89,7 +89,7 @@ class source(object):
         if "lock_equal_products" in kwargs:
             self.db.execute("UPDATE {} SET lock_equal_products = 0;"
                             .format(self.table_name))
-        if "lock_equal_coeffs" in kwargs:
+        if "lock_equal_coeffs" in kwargs or "lock_equal_contexts" in kwargs:
             self.db.execute("UPDATE {} SET locked = 0;"
                             .format(self.table_name))
         if "union" in kwargs:
@@ -171,9 +171,10 @@ class source(object):
             elif kw == "lock_equal_products":
                 result += next(hook(kn)) + " lock_equal_products = 0 "
                 kn += 1
-            elif kw == "lock_equal_coeffs":
-                result += next(hook(kn)) + " locked = 0 "
-                kn += 1
+            elif kw in ["lock_equal_coeffs", "lock_equal_contexts"]:
+                if "locked = " not in result:
+                    result += next(hook(kn)) + " locked = 0 "
+                    kn += 1
             elif kw.endswith("_to_check"):
                 k = kw[:-9]
                 result += next(hook(kn)) + k + "_min" + " <= " \
@@ -348,7 +349,9 @@ class source(object):
     ##
     #   @brief  Will 'lock' some entries
     def _lock(self, t, **kwargs):
+        log = settings.dbg_logger.getChild('db')
         if 'lock_equal_products' in kwargs:
+            log.debug('LOCK: equal_products\n')
             if t in kwargs['info_lock']:
                 self.db.execute(
                     "UPDATE " + self.table_name
@@ -361,10 +364,19 @@ class source(object):
                         + " SET lock_equal_products = 1"
                         + " WHERE nb1 = '" + str(couple[0])
                         + "' and nb2 = '" + str(couple[1]) + "';")
-        if 'lock_equal_coeffs' in kwargs:
+        if ('lock_equal_coeffs' in kwargs
+            and self.table_name == 'deci_int_int_triples_for_prop'):
+            log.debug('LOCK: equal_coeffs\n')
             self.db.execute(
                 "UPDATE {table_name} SET locked = 1 WHERE nb1 = '{coeff}';"
                 .format(table_name=self.table_name, coeff=str(t[0])))
+        if ('lock_equal_contexts' in kwargs
+            and self.table_name == 'mini_pb_prop_wordings'):
+            log.debug('LOCK: equal_contexts\n')
+            self.db.execute(
+                "UPDATE {table_name} SET locked = 1 "
+                "WHERE wording_context = '{wcontext}';"
+                .format(table_name=self.table_name, wcontext=str(t[0])))
 
     ##
     #   @brief  Synonym of self.next(), but makes the source an Iterator.

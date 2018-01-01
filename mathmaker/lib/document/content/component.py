@@ -355,6 +355,7 @@ class structure(object):
         if kwargs.get('proportionality', False):
             source = shared.mini_problems_prop_wordings_source
             wording_kwargs.update({'coeff_to_check': self.coeff})
+            wording_kwargs.update({'lock_equal_contexts': True})
         else:
             source = shared.mini_problems_wordings_source
             wording_kwargs.update({'q_id': kwargs['q_id']})
