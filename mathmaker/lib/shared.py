@@ -119,7 +119,7 @@ def init():
     names_source = database.source("names", ["id", "name"],
                                    language=settings.language)
     mini_problems_wordings_source = database.source("mini_pb_wordings",
-                                                    ["wording_context",
+                                                    ["id", "wording_context",
                                                      "wording"])
     mini_problems_prop_wordings_source = database.source(
         "mini_pb_prop_wordings", ["id", "wording_context", "wording",

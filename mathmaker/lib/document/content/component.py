@@ -365,10 +365,10 @@ class structure(object):
         drawn_wording = source.next(**wording_kwargs)
         sys.stderr.write('\nSTEP 1\n')
         self.wording = _(drawn_wording[1])
-        self.ifintcoeff_nb2nb3swappable = drawn_wording[5]
-        self.ifdecicoeff_forceswapnb2nb3 = drawn_wording[6]
         sys.stderr.write('\nSTEP 2\n')
         if kwargs.get('proportionality', False):
+            self.ifintcoeff_nb2nb3swappable = drawn_wording[5]
+            self.ifdecicoeff_forceswapnb2nb3 = drawn_wording[6]
             if self.ifintcoeff_nb2nb3swappable and is_integer(self.coeff):
                 if next(shared.alternate_nb2nb3_in_mini_pb_prop_source)[0]:
                     self.nb2, self.nb3 = self.nb3, self.nb2
