@@ -292,17 +292,25 @@ def __main__():
     integers.append(50)
     integers.append(100)
     db_rows = [(0.125, n1, n2, 0)
-               for n1 in integers if n1 % 8 == 0
+               for n1 in integers if n1 % 8 == 0 and n1 > 8
                for n2 in integers
                if n2 > n1 / 2 and n2 % 8 != 0 and n2 % 4 == 0]
+    db_rows += [(1.2, n1, n2, 0)
+                for n1 in integers if n1 % 5 == 0
+                for n2 in integers
+                if n2 % n1 != 0 and n2 > n1 / 2 and n2 % 5 == 0]
     db_rows += [(1.25, n1, n2, 0)
                 for n1 in integers if n1 % 4 == 0
                 for n2 in integers
                 if n2 > n1 / 2 and n2 % 4 != 0 and n2 % 2 == 0]
+    db_rows += [(1.333333, n1, n2, 0)
+                for n1 in integers if n1 % 3 == 0
+                for n2 in integers
+                if n2 % n1 != 0 and n2 > n1 / 2 and n2 % 3 == 0]
     db_rows += [(1.5, n1, n2, 0)
                 for n1 in integers if n1 % 2 == 0
                 for n2 in integers
-                if n2 > n1 / 2 and n2 % 2 != 0]
+                if n2 > n1 / 2]
     db_rows += [(2.5, n1, n2, 0)
                 for n1 in integers
                 if n1 % 2 == 0 and n1 not in [12, 14, 16, 18, 22, 24, 26, 28,
