@@ -351,7 +351,6 @@ class structure(object):
         self.chunk1_length = str(self.figure.chunk[1].length)
 
     def _setup_mini_problem_wording(self, **kwargs):
-        import sys
         wording_kwargs = {'nb1_to_check': self.nb1, 'nb2_to_check': self.nb2}
         if kwargs.get('proportionality', False):
             source = shared.mini_problems_prop_wordings_source
@@ -363,9 +362,7 @@ class structure(object):
                 val = 1 if BOOLEAN[kwargs['back_to_unit']]() else 0
                 wording_kwargs.update({'back_to_unit': val})
         drawn_wording = source.next(**wording_kwargs)
-        sys.stderr.write('\nSTEP 1\n')
         self.wording = _(drawn_wording[1])
-        sys.stderr.write('\nSTEP 2\n')
         if kwargs.get('proportionality', False):
             self.ifintcoeff_nb2nb3swappable = drawn_wording[5]
             self.ifdecicoeff_forceswapnb2nb3 = drawn_wording[6]
@@ -382,7 +379,6 @@ class structure(object):
             if nb3_coeff != 1:
                 self.nb3 *= nb3_coeff
             self.solution = self.nb2 * self.nb3 / self.nb1
-        sys.stderr.write('\nSTEP 3\n')
         setup_wording_format_of(self)
 
     def _setup_complement_wording(self, **kwargs):
