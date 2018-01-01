@@ -287,7 +287,7 @@ def __main__():
     integers = [_ for _ in range(1, 32)]
     integers.append(50)
     integers.append(100)
-    db_rows = [(0.125, n1, n2, 0)
+    db_rows = [(1.125, n1, n2, 0)
                for n1 in integers if n1 % 8 == 0 and n1 > 8
                for n2 in integers
                if n2 > n1 / 2 and n2 % 8 != 0 and n2 % 4 == 0]
