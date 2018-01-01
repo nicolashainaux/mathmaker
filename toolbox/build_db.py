@@ -252,7 +252,6 @@ def __main__():
                          nb3_coeff INTEGER,
                          ifintcoeff_nb2nb3swappable INTEGER,
                          ifdecicoeff_forceswapnb2nb3 INTEGER,
-                         wording_singular TEXT,
                          drawDate INTEGER)'''
     db_creation_queries.append(creation_query)
     db.execute(creation_query)
@@ -273,8 +272,6 @@ def __main__():
                         for w in wordings],
                        [w.get('ifdecicoeff_forceswapnb2nb3', False)
                         for w in wordings],
-                       [w.get('wording_singular', False)
-                        for w in wordings],
                        [0 for _ in range(len(wordings))]))
     db.executemany("INSERT "
                    "INTO mini_pb_prop_wordings(wording_context, wording, "
@@ -282,9 +279,8 @@ def __main__():
                    "coeff_max, nb1_coeff, nb2_coeff, nb3_coeff, "
                    "ifintcoeff_nb2nb3swappable, "
                    "ifdecicoeff_forceswapnb2nb3, "
-                   "wording_singular, "
                    "drawDate) "
-                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert decimal/int/int triples for proportionality...\n')

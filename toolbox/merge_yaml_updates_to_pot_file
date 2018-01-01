@@ -46,7 +46,7 @@ settings.init()
 
 DEFAULT_KEYWORD_STARTS = ['header', 'title', 'text', 'subtitle',
                           'answers_title']
-DEFAULT_KEYWORDS = ['wording', 'wording_singular']
+DEFAULT_KEYWORDS = ['wording']
 MAIN_POT_FILE_PATH = settings.localedir + 'mathmaker.pot'
 PROJECT_ROOT = DIR_TO_BROWSE = settings.rootdir
 

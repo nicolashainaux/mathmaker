@@ -125,8 +125,7 @@ def init():
         "mini_pb_prop_wordings", ["id", "wording_context", "wording",
                                   "nb1_coeff", "nb2_coeff", "nb3_coeff",
                                   "ifintcoeff_nb2nb3swappable",
-                                  "ifdecicoeff_forceswapnb2nb3",
-                                  "wording_singular"])
+                                  "ifdecicoeff_forceswapnb2nb3"])
     deci_int_int_triples_for_prop_source = database.source(
         "deci_int_int_triples_for_prop", ["id", "nb1", "nb2", "nb3"])
 
