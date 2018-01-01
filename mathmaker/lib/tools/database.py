@@ -89,6 +89,9 @@ class source(object):
         if "lock_equal_products" in kwargs:
             self.db.execute("UPDATE {} SET lock_equal_products = 0;"
                             .format(self.table_name))
+        if "lock_equal_coeffs" in kwargs:
+            self.db.execute("UPDATE {} SET locked = 0;"
+                            .format(self.table_name))
         if "union" in kwargs:
             self.db.execute("UPDATE {} SET drawDate = 0;"
                             .format(kwargs['union']['table_name']))
@@ -167,6 +170,9 @@ class source(object):
                 pass
             elif kw == "lock_equal_products":
                 result += next(hook(kn)) + " lock_equal_products = 0 "
+                kn += 1
+            elif kw == "lock_equal_coeffs":
+                result += next(hook(kn)) + " locked = 0 "
                 kn += 1
             elif kw.endswith("_to_check"):
                 k = kw[:-9]
@@ -355,6 +361,10 @@ class source(object):
                         + " SET lock_equal_products = 1"
                         + " WHERE nb1 = '" + str(couple[0])
                         + "' and nb2 = '" + str(couple[1]) + "';")
+        if 'lock_equal_coeffs' in kwargs:
+            self.db.execute(
+                "UPDATE {table_name} SET locked = 1 WHERE nb1 = '{coeff}';"
+                .format(table_name=self.table_name, coeff=str(t[0])))
 
     ##
     #   @brief  Synonym of self.next(), but makes the source an Iterator.

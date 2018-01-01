@@ -151,6 +151,7 @@
         "nb1",
         "nb2",
         "nb3",
+        "locked",
         "drawDate"
     ],
     "int_quadruples": [

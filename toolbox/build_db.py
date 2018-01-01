@@ -287,27 +287,27 @@ def __main__():
     integers = [_ for _ in range(1, 32)]
     integers.append(50)
     integers.append(100)
-    db_rows = [(1.125, n1, n2, 0)
+    db_rows = [(1.125, n1, n2, 0, 0)
                for n1 in integers if n1 % 8 == 0 and n1 > 8
                for n2 in integers
                if n2 > n1 / 2 and n2 % 8 != 0 and n2 % 4 == 0]
-    db_rows += [(1.2, n1, n2, 0)
+    db_rows += [(1.2, n1, n2, 0, 0)
                 for n1 in integers if n1 % 5 == 0
                 for n2 in integers
                 if n2 % n1 != 0 and n2 > n1 / 2 and n2 % 5 == 0]
-    db_rows += [(1.25, n1, n2, 0)
+    db_rows += [(1.25, n1, n2, 0, 0)
                 for n1 in integers if n1 % 4 == 0
                 for n2 in integers
                 if n2 > n1 / 2 and n2 % 4 != 0 and n2 % 2 == 0]
-    db_rows += [(1.333333, n1, n2, 0)
+    db_rows += [(1.333333, n1, n2, 0, 0)
                 for n1 in integers if n1 % 3 == 0
                 for n2 in integers
                 if n2 % n1 != 0 and n2 > n1 / 2 and n2 % 3 == 0]
-    db_rows += [(1.5, n1, n2, 0)
+    db_rows += [(1.5, n1, n2, 0, 0)
                 for n1 in integers if n1 % 2 == 0
                 for n2 in integers
                 if n2 > n1 / 2]
-    db_rows += [(2.5, n1, n2, 0)
+    db_rows += [(2.5, n1, n2, 0, 0)
                 for n1 in integers
                 if n1 % 2 == 0 and n1 not in [12, 14, 16, 18, 22, 24, 26, 28,
                                               32]
@@ -315,13 +315,14 @@ def __main__():
                 if n2 > n1 / 2 and n2 % 2 != 0]
     creation_query = '''CREATE TABLE deci_int_int_triples_for_prop
                         (id INTEGER PRIMARY KEY, nb1 DECIMAL(1, 2),
-                         nb2 INTEGER, nb3 INTEGER, drawDate INTEGER)'''
+                         nb2 INTEGER, nb3 INTEGER, locked INTEGER,
+                         drawDate INTEGER)'''
     db_creation_queries.append(creation_query)
     db.execute(creation_query)
     db.executemany("INSERT "
-                   "INTO deci_int_int_triples_for_prop(nb1, nb2, "
-                   "nb3, drawDate) "
-                   "VALUES(?, ?, ?, ?)",
+                   "INTO deci_int_int_triples_for_prop(nb1, nb2, nb3, locked, "
+                   "drawDate) "
+                   "VALUES(?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert integers pairs...')

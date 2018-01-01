@@ -614,6 +614,9 @@ def get_q_modifier(q_type, nb_source):
         and nb_source.startswith('intpairs')):
         d.update({'lock_equal_products': True,
                   'info_lock': EQUAL_PRODUCTS})
+    elif (q_type == 'mini_pb_proportionality'
+          and nb_source.startswith('deciintinttriplesforprop')):
+        d.update({'lock_equal_coeffs': True})
     elif q_type == 'subtr_direct' and nb_source.startswith('intpairs_10'):
         d.update({'diff7atleast': True})
     elif any(['rectangle' in q_type and q_type != 'fraction_of_a_rectangle',
