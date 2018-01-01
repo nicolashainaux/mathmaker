@@ -31,10 +31,14 @@ class sub_object(component.structure):
         super().setup("minimal", **options)
         import sys
         sys.stderr.write('\nbuild_data={}\n'.format(build_data))
-        self.coeff = Number(build_data[0])
+        self.coeff = Number(str(build_data[0]))
+        nb1 = Number(build_data[1])
+        nb2 = Number(build_data[2])
+        nb3 = (self.coeff * Number(build_data[1])).standardized()
+        if self.coeff == Number('1.333333'):
+            nb3 = nb3.rounded(Number('0.1'))
         super().setup("numbers",
-                      nb=[Number(build_data[1]), Number(build_data[2]),
-                          (self.coeff * Number(build_data[1])).standardized()],
+                      nb=[nb1, nb2, nb3],
                       shuffle_nbs=False,
                       **options)
         self.transduration = 25
