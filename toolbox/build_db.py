@@ -252,6 +252,7 @@ def __main__():
                          nb3_coeff INTEGER,
                          ifintcoeff_nb2nb3swappable INTEGER,
                          ifdecicoeff_forceswapnb2nb3 INTEGER,
+                         wording_singular TEXT,
                          drawDate INTEGER)'''
     db_creation_queries.append(creation_query)
     db.execute(creation_query)
@@ -272,31 +273,40 @@ def __main__():
                         for w in wordings],
                        [w.get('ifdecicoeff_forceswapnb2nb3', False)
                         for w in wordings],
+                       [w.get('wording_singular', False)
+                        for w in wordings],
                        [0 for _ in range(len(wordings))]))
     db.executemany("INSERT "
                    "INTO mini_pb_prop_wordings(wording_context, wording, "
                    "nb1_min, nb1_max, nb2_min, nb2_max, coeff_min, "
                    "coeff_max, nb1_coeff, nb2_coeff, nb3_coeff, "
                    "ifintcoeff_nb2nb3swappable, "
-                   "ifdecicoeff_forceswapnb2nb3 ,"
+                   "ifdecicoeff_forceswapnb2nb3, "
+                   "wording_singular, "
                    "drawDate) "
-                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert decimal/int/int triples for proportionality...\n')
-    integers = [_ for _ in range(1, 26)]
+    integers = [_ for _ in range(1, 32)]
     integers.append(50)
     integers.append(100)
-    db_rows = [(1.25, n1, n2, 0)
-               for n1 in integers if n1 % 4 == 0
+    db_rows = [(0.125, n1, n2, 0)
+               for n1 in integers if n1 % 8 == 0
                for n2 in integers
-               if n2 > n1 / 2 and n2 % 4 != 0 and n2 % 2 == 0]
+               if n2 > n1 / 2 and n2 % 8 != 0 and n2 % 4 == 0]
+    db_rows += [(1.25, n1, n2, 0)
+                for n1 in integers if n1 % 4 == 0
+                for n2 in integers
+                if n2 > n1 / 2 and n2 % 4 != 0 and n2 % 2 == 0]
     db_rows += [(1.5, n1, n2, 0)
                 for n1 in integers if n1 % 2 == 0
                 for n2 in integers
                 if n2 > n1 / 2 and n2 % 2 != 0]
     db_rows += [(2.5, n1, n2, 0)
-                for n1 in integers if n1 % 2 == 0
+                for n1 in integers
+                if n1 % 2 == 0 and n1 not in [12, 14, 16, 18, 22, 24, 26, 28,
+                                              32]
                 for n2 in integers
                 if n2 > n1 / 2 and n2 % 2 != 0]
     creation_query = '''CREATE TABLE deci_int_int_triples_for_prop
@@ -851,7 +861,7 @@ def __main__():
 
     sys.stderr.write('\rShapes db: insert shapes variants: scalene triangles, '
                      'right triangles, isosceles triangles, equilateral '
-                     'triangles, quadrilaterals...\n')
+                     'triangles, quadrilaterals...')
     creation_query = '''CREATE TABLE quadrilateral_1_1_1_1_shapes
                         (id INTEGER PRIMARY KEY, shape_nb, drawDate INTEGER)'''
     shapes_db_creation_queries.append(creation_query)

@@ -378,6 +378,9 @@ class structure(object):
             #     self.nb2 *= nb2_coeff
             if nb3_coeff != 1:
                 self.nb3 *= nb3_coeff
+            if self.nb3 == 1:
+                # We fetch the singular version of this wording.
+                self.wording = _(drawn_wording[7])
             self.solution = self.nb2 * self.nb3 / self.nb1
         setup_wording_format_of(self)
 

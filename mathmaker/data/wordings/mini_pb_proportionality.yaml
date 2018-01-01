@@ -3,20 +3,24 @@
 wording1:
   - wording_context: price
   - wording: "A pack of {nb1} books cost {nb2} {currency_unit}. How much do cost {nb3} books? |hint:currency_unit|"
+  - wording_singular: "A pack of {nb1} books cost {nb2} {currency_unit}. How much does cost one book? |hint:currency_unit|"
 
 wording2:
   - wording_context: weight
   - wording: "{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much do weigh {nb3} boxes? |hint:mass_unit|"
+  - wording_singular: "{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much does weigh one box? |hint:mass_unit|"
 
 wording3:
   - wording_context: price
   - wording: "A pack of {nb1} CDs cost {nb2} {currency_unit}. How much do cost {nb3} CDs? |hint:currency_unit|"
+  - wording_singular: "A pack of {nb1} CDs cost {nb2} {currency_unit}. How much does cost one CD? |hint:currency_unit|"
 
 wording4:
   - wording_context: recipe
   - wording: "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How much flour should be used for {nb2} people? |hint:mass_unit|"
+  - wording_singular: "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How much flour should be used for one person? |hint:mass_unit|"
   - nb1_max: 12
-  - nb2_max: 50
+  - nb2_max: 36
   - coeff_max: 10
   - nb3_coeff: 10
   - ifintcoeff_nb2nb3swappable: false
