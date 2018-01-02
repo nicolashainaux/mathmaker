@@ -12,5 +12,4 @@
 # below.
 
 LOCALES:
-    # Available values can be checked in the locale directory.
-    LANGUAGE: en-US
+    LANGUAGE: en
