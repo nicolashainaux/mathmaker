@@ -26,12 +26,12 @@ import random
 import copy
 import re
 
+from mathmakerlib.calculus import Number, Unit
 from mathmakerlib.calculus.unit import UNIT_KINDS, COMMON_LENGTH_UNITS
 from mathmakerlib.calculus.unit import CURRENCIES_DICT
 
 from mathmaker import settings
 from mathmaker.lib import shared
-from mathmaker.lib.core.root_calculus import Unit, Value
 
 
 def wrap(word: str, braces='{}', o_str=None, e_str=None) -> str:
@@ -431,8 +431,8 @@ def merge_nb_unit_pairs(arg: object, w_prefix=''):
     r"""
     Merge all occurences of {nbN} {\*_unit} in arg.wording into {nbN\_\*_unit}.
 
-    In the same time, the matching attribute arg.nbN\_\*_unit is set with
-    Value(nbN, unit=Unit(arg.\*_unit)).into_str(display_SI_unit=True)
+    In the same time, the matching attribute arg.nbN\_\*_unit is set to
+    Number(nbN, unit=Unit(arg.\*_unit))
     (the possible exponent is taken into account too).
 
     :param arg: the object whose attribute wording will be processed. It must
@@ -477,15 +477,14 @@ def merge_nb_unit_pairs(arg: object, w_prefix=''):
                 u = next_w[1:-2]
                 p = next_w[-1]
             new_attr_name = n + "_" + u
-            expnt = 1
+            expnt = None
             if u.startswith('area'):
-                expnt = 2
+                expnt = Number(2)
             elif u.startswith('volume'):
-                expnt = 3
-            new_val = Value(getattr(arg, n),
-                            unit=Unit(getattr(arg, u),
-                                      exponent=Value(expnt)))\
-                .into_str(display_SI_unit=True)
+                expnt = Number(3)
+            new_val = Number(getattr(arg, n),
+                             unit=Unit(getattr(arg, u),
+                                       exponent=expnt)).printed
             new_words_list += ["{" + new_attr_name + "}" + p]
             logger.debug(" setattr: name=" + str(new_attr_name) + "; val= "
                          + str(new_val) + "\n")
@@ -597,19 +596,18 @@ def setup_wording_format_of(w_object: object, w_prefix=''):
     w_object_wording = getattr(w_object, w_prefix + 'wording')
 
     for attr in vars(w_object):
-        logger.debug("attr: " + str(attr) + "\n")
+        # logger.debug("attr: " + str(attr) + "\n")
         if ((attr.endswith('_unit') or attr[:-1].endswith('_unit'))
             and not (attr.startswith('nb') or attr.startswith('currency'))):
             # __
             logger.debug("(re)defining: " + attr + "\n")
-            n = 1
+            n = None
             if attr.startswith('area'):
-                n = 2
+                n = Number(2)
             elif attr.startswith('volume'):
-                n = 3
+                n = Number(3)
             setattr(w_object, attr,
-                    Unit(getattr(w_object, attr), exponent=n)
-                    .into_str(display_SI_unit=True))
+                    Unit(getattr(w_object, attr), exponent=n).printed)
 
     w_object_wording_format = {}
     for attr in extract_formatting_tags_from(w_object_wording):

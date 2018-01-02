@@ -437,7 +437,7 @@ def test_merge_nb_unit_pairs_03(ow7):
 def test_merge_nb_unit_pairs_04(ow7):
     """Checks if {nb} {*unit} pairs are correctly processed in obj.wording."""
     merge_nb_unit_pairs(ow7)
-    assert ow7.nb3_volume_unit3 == '\\SI{9}{mm^{\\text{3}}}'
+    assert ow7.nb3_volume_unit3 == '\\SI{9}{mm^{3}}'
 
 
 def test_setup_wording_format_of_01(ow2):
@@ -457,7 +457,7 @@ def test_setup_wording_format_of_02(ow2):
 def test_setup_wording_format_of_03(ow2):
     """Checks if obj.wording is correctly setup."""
     setup_wording_format_of(ow2)
-    assert ow2.nb3_volume_unit3 == '\\SI{11}{cm^{\\text{3}}}'
+    assert ow2.nb3_volume_unit3 == '\\SI{11}{cm^{3}}'
 
 
 def test_setup_wording_format_of_04(ow2):
@@ -479,7 +479,7 @@ def test_setup_wording_format_of_06(ow1):
 
 def test_setup_wording_format_of_07(ow1):
     """Checks if obj.wording is correctly setup."""
-    assert ow1.volume_unit == 'cm^{\\text{3}}'
+    assert ow1.volume_unit == 'cm^{3}'
 
 
 def test_setup_wording_format_of_08(ow2bis):
@@ -494,12 +494,12 @@ def test_setup_wording_format_of_09(ow2bis):
 
 def test_setup_wording_format_of_10(ow2ter):
     """Checks if obj.wording is correctly setup."""
-    assert ow2ter.volume_unit == 'cm^{\\text{3}}'
+    assert ow2ter.volume_unit == 'cm^{3}'
 
 
 def test_setup_wording_format_of_11(ow2ter):
     """Checks if obj.wording is correctly setup."""
-    assert ow2ter.area_unit == 'cm^{\\text{2}}'
+    assert ow2ter.area_unit == 'cm^{2}'
 
 
 def test_setup_wording_format_of_12(ow2qua):
