@@ -27,7 +27,7 @@ import random
 import warnings
 from decimal import Decimal
 
-from mathmakerlib.calculus import is_integer, is_number, Number
+from mathmakerlib.calculus import is_integer, is_number, Number, Fraction
 
 from mathmaker import settings
 from mathmaker.lib import shared
@@ -35,7 +35,6 @@ from mathmaker.lib.constants.numeration import DIGITSPLACES
 from mathmaker.lib.constants.numeration import DIGITSPLACES_CONFUSING
 from mathmaker.lib.tools import lined_up
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
-from mathmaker.lib.core.base_calculus import Fraction
 
 FETCH_TABLE_NAME = re.compile(r'CREATE TABLE (\w+)')
 FETCH_TABLE_COLS = re.compile(r', (\w\w+)|\n[ ]+(\w\w+)|\((\w\w+)')
@@ -806,8 +805,8 @@ def postprocess_decimalfractionssums_query(qr, qkw=None, **kwargs):
                                     or random.choice([True, False])):
         first = decimals[0]
     else:
-        first = Fraction(decimals[0])
-    return (first, *[Fraction(decimals[i + 1])
+        first = Fraction(from_decimal=decimals[0])
+    return (first, *[Fraction(from_decimal=decimals[i + 1])
                      for i in range(len(decimals) - 1)])
 
 
@@ -868,7 +867,7 @@ def postprocess_percentage_query(qr, source_id, qkw=None, **kwargs):
 #   @todo   Several cases should be factorized or maybe later moved to the db
 def generate_values(source_id):
     if source_id == 'int_irreducible_frac':
-        return [(k, Fraction((n, k))) for k in [i + 2 for i in range(18)]
+        return [(k, Fraction(n, k)) for k in [i + 2 for i in range(18)]
                 for n in coprime_generator(k)]
 
     elif source_id == 'alternate_2masks':
