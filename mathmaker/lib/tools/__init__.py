@@ -354,8 +354,8 @@ def fix_math_style2_fontsize(text):
 
     :rtype: str
     """
-    r = re.compile(r'(frac{)')
-    return r.sub(r'dfrac{', text)
+    r = re.compile(r'(\\frac{)')
+    return r.sub(r'\\dfrac{', text)
 
 
 def physical_quantity(unit):
