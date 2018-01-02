@@ -53,7 +53,8 @@ def config_dbglogger(sd):
         lg = logging.getLogger(loggername)
         lg.setLevel(getattr(logging, level))
         lg.addFilter(ContextFilter())
-        if loggername in ['dbg.db']:
+        if loggername in ['dbg.db', 'dbg.db_lock', 'dbg.db_timestamp',
+                          'dbg.questions_separator']:
             raw_logger = logging.getLogger('raw')
             lg.addHandler(raw_logger.handlers[0])
             lg.propagate = False

@@ -5,6 +5,9 @@
 # make sure you also set dbg (and raw, if any) logger level to DEBUG too ).
 dbg:
     db: INFO
+    db_lock: INFO
+    db_timestamp: INFO
+    questions_separator: INFO
     wording:
         merge_nb_unit_pairs: INFO
         setup_wording_format_of: INFO

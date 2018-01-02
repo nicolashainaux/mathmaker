@@ -31,6 +31,7 @@ from intspan.core import ParseError
 from mathmakerlib.calculus import is_integer
 
 from mathmaker.lib import shared
+from mathmaker import settings
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK, COLORED_ANSWER
 from mathmaker.lib.tools.maths import coprimes_to
 from mathmaker.lib.tools.frameworks import read_layout, build_questions_list
@@ -530,7 +531,11 @@ class Exercise(object):
         self._questions_list = []
         last_draw = {}
         numbering = numbering_device(self.q_numbering)
+        log = settings.dbg_logger.getChild('questions_separator')
         for q in mixed_q_list:
+            q_number = next(numbering)
+            log.debug('QUESTION # {} -----------------------------------'
+                      '------------------------------'.format(q_number))
             preprocess_variant(q)
             (nbsources_xkw_list, extra_infos) = \
                 get_nb_sources_from_question_info(q)
@@ -625,7 +630,7 @@ class Exercise(object):
             self._questions_list += \
                 [Question(q.id, **q.options, nb_source=nb_source,
                           build_data=nb_to_use,
-                          number_of_the_question=next(numbering), )]
+                          number_of_the_question=q_number, )]
         shared.number_of_the_question = 0
 
     @property

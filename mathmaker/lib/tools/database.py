@@ -308,7 +308,7 @@ class source(object):
             self._twothirds_reset()
             qr = tuple(self.db.execute(cmd))
             if not len(qr):
-                log.debug('FULL RESET\n')
+                log.debug('FULL RESET of {}\n'.format(self.table_name))
                 kwargs = self._reset(**kwargs)
                 cmd1 = self._cmd(**kwargs)
                 qr = tuple(self.db.execute(cmd1))
@@ -334,8 +334,8 @@ class source(object):
     #           has a value of col_match.
     def _timestamp(self, kwconditions, **kwargs):
         cond = self._kw_conditions(wrap_in_AND=False, **kwconditions)
-        import sys
-        sys.stderr.write('TIMESTAMP condition={}\n'.format(cond))
+        log = settings.dbg_logger.getChild('db_timestamp')
+        log.debug('TIMESTAMP condition={}\n'.format(cond))
         self.db.execute(
             "UPDATE " + self.table_name
             + " SET drawDate = strftime('%Y-%m-%d %H:%M:%f')"
@@ -349,10 +349,11 @@ class source(object):
     ##
     #   @brief  Will 'lock' some entries
     def _lock(self, t, **kwargs):
-        log = settings.dbg_logger.getChild('db')
+        log = settings.dbg_logger.getChild('db_lock')
         if 'lock_equal_products' in kwargs:
-            log.debug('LOCK: equal_products\n')
             if t in kwargs['info_lock']:
+                log.debug('LOCK: products equal to {} in {}\n'
+                          .format(str(t[0] * t[1]), self.table_name))
                 self.db.execute(
                     "UPDATE " + self.table_name
                     + " SET lock_equal_products = 1"
@@ -366,13 +367,15 @@ class source(object):
                         + "' and nb2 = '" + str(couple[1]) + "';")
         if ('lock_equal_coeffs' in kwargs
             and self.table_name == 'deci_int_int_triples_for_prop'):
-            log.debug('LOCK: equal_coeffs\n')
+            log.debug('LOCK: coeff {} in {}\n'
+                      .format(str(t[0]), self.table_name))
             self.db.execute(
                 "UPDATE {table_name} SET locked = 1 WHERE nb1 = '{coeff}';"
                 .format(table_name=self.table_name, coeff=str(t[0])))
         if ('lock_equal_contexts' in kwargs
             and self.table_name == 'mini_pb_prop_wordings'):
-            log.debug('LOCK: equal_contexts\n')
+            log.debug('LOCK: context "{}" in {}\n'
+                      .format(str(t[0]), self.table_name))
             self.db.execute(
                 "UPDATE {table_name} SET locked = 1 "
                 "WHERE wording_context = '{wcontext}';"
