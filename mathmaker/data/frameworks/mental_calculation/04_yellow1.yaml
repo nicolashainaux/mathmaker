@@ -39,6 +39,7 @@ proportionality_problems: !!omap
   - exercise: !!omap
     - questions: mini_pb proportionality -> deciintinttriplesforprop_3to16 (20)
 #                 mini_pb proportionality -> mergedinttriples_3to10 (10)
+                 # mini_pb proportionality -> mergedinttriples_15_3to6 (10)
 
 
 

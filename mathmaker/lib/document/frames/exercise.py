@@ -286,7 +286,14 @@ def get_nb_sources_from_question_info(q_i):
                 raise ValueError('Incorrect numbers\' source value in xml '
                                  'file: {}'.format(q_i.nb_source[0]))
             bounds = chunks[1]
-            questions_sources = ['intpairs_' + bounds, 'intpairs_' + bounds]
+            if 'to' in bounds:
+                questions_sources = ['intpairs_' + bounds,
+                                     'intpairs_' + bounds]
+            else:
+                # We assume bounds consists of a single number, requiring
+                # multiples from the same table.
+                questions_sources = ['multiplesof' + bounds + '_' + chunks[2],
+                                     'multiplesof' + bounds + '_' + chunks[2]]
             extra_infos.update({'merge_sources': True})
         elif q_i.nb_source[0].startswith('ext_'):
             chunks = q_i.nb_source[0][4:].split(sep='_')
