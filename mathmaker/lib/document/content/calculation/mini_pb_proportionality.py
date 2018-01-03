@@ -29,8 +29,6 @@ class sub_object(component.structure):
 
     def __init__(self, build_data, **options):
         super().setup("minimal", **options)
-        import sys
-        sys.stderr.write('\nbuild_data={}\n'.format(build_data))
         self.coeff = Number(str(build_data[0]))
         nb1 = Number(build_data[1])
         nb2 = Number(build_data[2])
@@ -41,7 +39,7 @@ class sub_object(component.structure):
                       nb=[nb1, nb2, nb3],
                       shuffle_nbs=False,
                       **options)
-        self.transduration = 25
+        self.transduration = 24
         super().setup('mini_problem_wording', proportionality=True, **options)
 
     def q(self, **options):
@@ -50,7 +48,7 @@ class sub_object(component.structure):
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
         u = self.hint if hasattr(self, 'hint') else None
-        return Number(Number(self.solution).standardized(), unit=u).printed
+        return Number(Number(self.solution), unit=u).printed
 
     def js_a(self, **kwargs):
         return [Number(self.solution).uiprinted]
