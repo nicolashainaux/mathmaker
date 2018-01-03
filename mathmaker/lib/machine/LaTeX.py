@@ -144,6 +144,8 @@ class LaTeX(Structure.Structure):
 \DeclareMathSymbol{{7}}{{\mathalpha}}{{mynumbers}}{{`7}}
 \DeclareMathSymbol{{8}}{{\mathalpha}}{{mynumbers}}{{`8}}
 \DeclareMathSymbol{{9}}{{\mathalpha}}{{mynumbers}}{{`9}}
+\DeclareMathSymbol{{.}}{{\mathalpha}}{{mynumbers}}{{`.}}
+\DeclareMathSymbol{{,}}{{\mathalpha}}{{mynumbers}}{{`,}}
 }}
 """.format(font_name='{' + settings.font + '}')
             result += r'\usepackage{polyglossia}' + '\n'
