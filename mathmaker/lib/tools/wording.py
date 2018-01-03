@@ -598,7 +598,7 @@ def setup_wording_format_of(w_object: object, w_prefix=''):
     for attr in vars(w_object):
         # logger.debug("attr: " + str(attr) + "\n")
         if ((attr.endswith('_unit') or attr[:-1].endswith('_unit'))
-            and not (attr.startswith('nb') or attr.startswith('currency'))):
+            and not (attr.startswith('nb'))):
             # __
             logger.debug("(re)defining: " + attr + "\n")
             n = None
