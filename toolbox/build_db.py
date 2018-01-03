@@ -56,7 +56,7 @@ import sqlite3
 from math import gcd
 from decimal import Decimal
 
-from mathmakerlib.calculus import Number
+from mathmakerlib.calculus import Number, is_integer
 
 from mathmaker import settings
 from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words
@@ -252,6 +252,8 @@ def __main__():
                          nb3_coeff INTEGER,
                          ifintcoeff_nb2nb3swappable INTEGER,
                          ifdecicoeff_forceswapnb2nb3 INTEGER,
+                         nb3_may_be_deci INTEGER,
+                         solution_may_be_deci INTEGER,
                          locked INTEGER, drawDate INTEGER)'''
     db_creation_queries.append(creation_query)
     db.execute(creation_query)
@@ -272,6 +274,10 @@ def __main__():
                         for w in wordings],
                        [w.get('ifdecicoeff_forceswapnb2nb3', False)
                         for w in wordings],
+                       [w.get('nb3_may_be_deci', True)
+                        for w in wordings],
+                       [w.get('solution_may_be_deci', True)
+                        for w in wordings],
                        [0 for _ in range(len(wordings))],
                        [0 for _ in range(len(wordings))]))
     db.executemany("INSERT "
@@ -280,8 +286,9 @@ def __main__():
                    "coeff_max, nb1_coeff, nb2_coeff, nb3_coeff, "
                    "ifintcoeff_nb2nb3swappable, "
                    "ifdecicoeff_forceswapnb2nb3, "
+                   "nb3_may_be_deci, solution_may_be_deci, "
                    "locked, drawDate) "
-                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert decimal/int/int triples for proportionality...\n')
@@ -290,49 +297,51 @@ def __main__():
     integers.append(60)
     integers.append(80)
     integers.append(100)
-    db_rows = [(1.1, n1, n2, 0, 0)
+    db_rows = [(1.1, n1, n2, not is_integer(Number('1.1') * n2), 0, 0)
                for n1 in integers if n1 <= 10
-               for n2 in integers]
-    db_rows = [(1.125, n1, n2, 0, 0)
+               for n2 in integers if n2 != n1]
+    db_rows = [(1.125, n1, n2, not is_integer(Number('1.125') * n2), 0, 0)
                for n1 in integers if n1 % 8 == 0 and n1 > 8
                for n2 in integers
-               if n2 > n1 / 2 and n2 % 8 != 0 and n2 % 4 == 0]
-    db_rows += [(1.2, n1, n2, 0, 0)
+               if n2 != n1 and n2 > n1 / 2 and n2 % 8 != 0 and n2 % 4 == 0]
+    db_rows += [(1.2, n1, n2, not is_integer(Number('1.2') * n2), 0, 0)
                 for n1 in integers if n1 % 5 == 0
                 for n2 in integers
-                if n2 % n1 != 0 and n2 > n1 / 2 and n2 % 5 == 0]
-    db_rows += [(1.25, n1, n2, 0, 0)
+                if n2 != n1 and n2 % n1 != 0 and n2 > n1 / 2 and n2 % 5 == 0]
+    db_rows += [(1.25, n1, n2, not is_integer(Number('1.25') * n2), 0, 0)
                 for n1 in integers if n1 % 4 == 0
                 for n2 in integers
-                if n2 > n1 / 2 and n2 % 4 != 0 and n2 % 2 == 0]
-    db_rows += [(1.25, n1, n2, 0, 0)
+                if n2 != n1 and n2 > n1 / 2 and n2 % 4 != 0 and n2 % 2 == 0]
+    db_rows += [(1.25, n1, n2, not is_integer(Number('1.25') * n2), 0, 0)
                 for n1 in integers if n1 % 4 == 0
                 for n2 in integers
-                if n2 > n1 / 2 and n2 % 4 == 0 and n2 >= 41]
-    db_rows += [(1.333333, n1, n2, 0, 0)
+                if n2 != n1 and n2 > n1 / 2 and n2 % 4 == 0 and n2 >= 41]
+    db_rows += [(1.333333, n1, n2,
+                 not is_integer((Number('1.333333') * n2)
+                                .rounded(Number('0.01'))), 0, 0)
                 for n1 in integers if n1 % 3 == 0
                 for n2 in integers
-                if n2 % n1 != 0 and n2 > n1 / 2 and n2 % 3 == 0]
-    db_rows += [(1.5, n1, n2, 0, 0)
+                if n2 != n1 and n2 % n1 != 0 and n2 > n1 / 2 and n2 % 3 == 0]
+    db_rows += [(1.5, n1, n2, not is_integer(Number('1.5') * n2), 0, 0)
                 for n1 in integers if n1 % 2 == 0
                 for n2 in integers
-                if n2 > n1 / 2]
-    db_rows += [(2.5, n1, n2, 0, 0)
+                if n2 != n1 and n2 > n1 / 2]
+    db_rows += [(2.5, n1, n2, not is_integer(Number('2.5') * n2), 0, 0)
                 for n1 in integers
                 if n1 % 2 == 0 and n1 not in [12, 14, 16, 18, 22, 24, 26, 28,
                                               32]
                 for n2 in integers
-                if n2 > n1 / 2 and n2 % 2 != 0]
+                if n2 != n1 and n2 > n1 / 2 and n2 % 2 != 0]
     creation_query = '''CREATE TABLE deci_int_int_triples_for_prop
                         (id INTEGER PRIMARY KEY, coeff DECIMAL(1, 2),
-                         nb1 INTEGER, nb2 INTEGER, locked INTEGER,
-                         drawDate INTEGER)'''
+                         nb1 INTEGER, nb2 INTEGER, solution_is_deci INTEGER,
+                         locked INTEGER, drawDate INTEGER)'''
     db_creation_queries.append(creation_query)
     db.execute(creation_query)
     db.executemany("INSERT "
                    "INTO deci_int_int_triples_for_prop(coeff, nb1, nb2, "
-                   "locked, drawDate) "
-                   "VALUES(?, ?, ?, ?, ?)",
+                   "solution_is_deci, locked, drawDate) "
+                   "VALUES(?, ?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert integers pairs...')

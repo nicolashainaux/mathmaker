@@ -103,3 +103,14 @@ wording14:
   - wording: "A bundle of {nb1} DVDs cost {nb3} {currency_unit}. How much do cost {nb2} DVDs? |hint:currency_unit|"
   - coeff_min: 15
   - ifintcoeff_nb2nb3swappable: false
+
+wording15:
+  - wording_context: recipe
+  - wording: "A recipe for {nb1} people requires to use {nb3} eggs. How many eggs should be used for {nb2} people?"
+  - nb1_max: 12
+  - nb2_max: 36
+  - coeff_min: 0.2
+  - coeff_max: 3
+  - ifintcoeff_nb2nb3swappable: false
+  - nb3_may_be_deci: false
+  - solution_may_be_deci: false

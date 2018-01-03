@@ -144,6 +144,8 @@
         "nb3_coeff",
         "ifintcoeff_nb2nb3swappable",
         "ifdecicoeff_forceswapnb2nb3",
+        "nb3_may_be_deci",
+        "solution_may_be_deci",
         "locked",
         "drawDate"
     ],
@@ -152,6 +154,7 @@
         "coeff",
         "nb1",
         "nb2",
+        "solution_is_deci",
         "locked",
         "drawDate"
     ],

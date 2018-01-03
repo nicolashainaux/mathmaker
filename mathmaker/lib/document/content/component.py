@@ -313,6 +313,10 @@ class structure(object):
             source = shared.mini_problems_prop_wordings_source
             wording_kwargs.update({'coeff_to_check': self.coeff})
             wording_kwargs.update({'lock_equal_contexts': True})
+            if not is_integer(self.nb3):
+                wording_kwargs.update({'nb3_may_be_deci': True})
+            if self.solution_is_deci:
+                wording_kwargs.update({'solution_may_be_deci': 1})
         else:
             source = shared.mini_problems_wordings_source
             wording_kwargs.update({'q_id': kwargs['q_id']})

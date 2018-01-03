@@ -29,6 +29,7 @@ class sub_object(component.structure):
 
     def __init__(self, build_data, **options):
         super().setup("minimal", **options)
+        self.solution_is_deci = build_data[3]
         self.coeff = Number(str(build_data[0]))
         nb1 = Number(build_data[1])
         nb2 = Number(build_data[2])
