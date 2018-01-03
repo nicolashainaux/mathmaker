@@ -149,9 +149,9 @@
     ],
     "deci_int_int_triples_for_prop": [
         "id",
+        "coeff",
         "nb1",
         "nb2",
-        "nb3",
         "locked",
         "drawDate"
     ],

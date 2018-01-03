@@ -2,7 +2,7 @@
 
 wording1:
   - wording_context: price
-  - wording: "A pack of {nb1} books cost {nb2} {currency_unit}. How much do cost {nb3} books? |hint:currency_unit|"
+  - wording: "A bundle of {nb1} books cost {nb2} {currency_unit}. How much do cost {nb3} books? |hint:currency_unit|"
 
 wording2:
   - wording_context: weight
@@ -10,7 +10,9 @@ wording2:
 
 wording3:
   - wording_context: price
-  - wording: "A pack of {nb1} CDs cost {nb2} {currency_unit}. How much do cost {nb3} CDs? |hint:currency_unit|"
+  - wording: "A bundle of {nb1} CDs cost {nb3} {currency_unit}. How much do cost {nb2} CDs? |hint:currency_unit|"
+  - coeff_max: 15
+  - ifintcoeff_nb2nb3swappable: false
 
 wording4:
   - wording_context: recipe
@@ -21,3 +23,83 @@ wording4:
   - nb3_coeff: 10
   - ifintcoeff_nb2nb3swappable: false
   - ifdecicoeff_forceswapnb2nb3: true
+
+wording5:
+  - wording_context: weight
+  - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
+  - nb1_max: 10
+  - coeff_max: 5
+  - nb3_coeff: 10
+  - ifintcoeff_nb2nb3swappable: false
+  - ifdecicoeff_forceswapnb2nb3: true
+
+wording6:
+  - wording_context: recipe
+  - wording: "A recipe for {nb1} people requires to use {nb3} {capacity_unit=mL} of milk. How much milk should be used for {nb2} people? |hint:capacity_unit|"
+  - nb1_max: 12
+  - nb2_max: 36
+  - coeff_max: 10
+  - nb3_coeff: 10
+  - ifintcoeff_nb2nb3swappable: false
+  - ifdecicoeff_forceswapnb2nb3: true
+
+wording7:
+  - wording_context: price
+  - wording: "A pack of {nb1} pens cost {nb3} {currency_unit}. How much do cost {nb2} pens? |hint:currency_unit|"
+  - nb1_max: 10
+  - nb3_coeff: 0.1
+  - ifintcoeff_nb2nb3swappable: false
+  - ifdecicoeff_forceswapnb2nb3: true
+
+wording8:
+  - wording_context: price
+  - wording: "Special offer: {nb1} pens for {nb3} {currency_unit}. How much would cost {nb2} pens? |hint:currency_unit|"
+  - nb1_min: 8
+  - coeff_max: 5
+  - nb3_coeff: 0.1
+  - ifintcoeff_nb2nb3swappable: false
+  - ifdecicoeff_forceswapnb2nb3: true
+
+wording9:
+  - wording_context: price
+  - wording: "A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost {nb2} candies? |hint:currency_unit|"
+  - nb1_min: 8
+  - nb3_coeff: 0.1
+  - ifintcoeff_nb2nb3swappable: false
+  - ifdecicoeff_forceswapnb2nb3: true
+
+wording10:
+  - wording_context: weight
+  - wording: "{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} buckets? |hint:mass_unit|"
+  - coeff_min: 1.2
+  - coeff_max: 1.5
+  - ifintcoeff_nb2nb3swappable: false
+
+wording11:
+  - wording_context: capacity
+  - wording: "{nb1} bottles contain, together, {nb3} {capacity_unit=L}. How much do contain {nb2} bottles? |hint:capacity_unit|"
+  - nb1_max: 8
+  - coeff_min: 1.1
+  - coeff_max: 1.5
+  - ifintcoeff_nb2nb3swappable: false
+
+wording12:
+  - wording_context: capacity
+  - wording: "{nb1} vials contain, together, {nb3} {capacity_unit=mL} of perfume. How much contain {nb2} vials? |hint:capacity_unit|"
+  - nb1_max: 8
+  - nb3_coeff: 10
+  - ifintcoeff_nb2nb3swappable: false
+
+wording13:
+  - wording_context: price
+  - wording: "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost {nb2} bottles? |hint:currency_unit|"
+  - nb1_min: 4
+  - coeff_min: 1.1
+  - coeff_max: 1.5
+  - ifintcoeff_nb2nb3swappable: false
+
+wording14:
+  - wording_context: price
+  - wording: "A bundle of {nb1} DVDs cost {nb3} {currency_unit}. How much do cost {nb2} DVDs? |hint:currency_unit|"
+  - coeff_min: 15
+  - ifintcoeff_nb2nb3swappable: false

@@ -127,7 +127,7 @@ def init():
                                   "ifintcoeff_nb2nb3swappable",
                                   "ifdecicoeff_forceswapnb2nb3"])
     deci_int_int_triples_for_prop_source = database.source(
-        "deci_int_int_triples_for_prop", ["id", "nb1", "nb2", "nb3"])
+        "deci_int_int_triples_for_prop", ["id", "coeff", "nb1", "nb2"])
 
     int_pairs_source = database.source("int_pairs", ["id", "nb1", "nb2"])
     int_triples_source = database.source("int_triples",

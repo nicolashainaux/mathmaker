@@ -287,7 +287,12 @@ def __main__():
     sys.stderr.write('Insert decimal/int/int triples for proportionality...\n')
     integers = [_ for _ in range(1, 32)]
     integers.append(50)
+    integers.append(60)
+    integers.append(80)
     integers.append(100)
+    db_rows = [(1.1, n1, n2, 0, 0)
+               for n1 in integers if n1 <= 10
+               for n2 in integers]
     db_rows = [(1.125, n1, n2, 0, 0)
                for n1 in integers if n1 % 8 == 0 and n1 > 8
                for n2 in integers
@@ -300,6 +305,10 @@ def __main__():
                 for n1 in integers if n1 % 4 == 0
                 for n2 in integers
                 if n2 > n1 / 2 and n2 % 4 != 0 and n2 % 2 == 0]
+    db_rows += [(1.25, n1, n2, 0, 0)
+                for n1 in integers if n1 % 4 == 0
+                for n2 in integers
+                if n2 > n1 / 2 and n2 % 4 == 0 and n2 >= 41]
     db_rows += [(1.333333, n1, n2, 0, 0)
                 for n1 in integers if n1 % 3 == 0
                 for n2 in integers
@@ -315,14 +324,14 @@ def __main__():
                 for n2 in integers
                 if n2 > n1 / 2 and n2 % 2 != 0]
     creation_query = '''CREATE TABLE deci_int_int_triples_for_prop
-                        (id INTEGER PRIMARY KEY, nb1 DECIMAL(1, 2),
-                         nb2 INTEGER, nb3 INTEGER, locked INTEGER,
+                        (id INTEGER PRIMARY KEY, coeff DECIMAL(1, 2),
+                         nb1 INTEGER, nb2 INTEGER, locked INTEGER,
                          drawDate INTEGER)'''
     db_creation_queries.append(creation_query)
     db.execute(creation_query)
     db.executemany("INSERT "
-                   "INTO deci_int_int_triples_for_prop(nb1, nb2, nb3, locked, "
-                   "drawDate) "
+                   "INTO deci_int_int_triples_for_prop(coeff, nb1, nb2, "
+                   "locked, drawDate) "
                    "VALUES(?, ?, ?, ?, ?)",
                    db_rows)
 
