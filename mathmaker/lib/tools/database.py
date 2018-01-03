@@ -485,8 +485,8 @@ def preprocess_deci_int_int_triplesforprop_tag(tag, qkw=None):
     parts = tag.split('_')
     if len(parts) == 2:
         n1, n2 = parts[1].split(sep='to')
-        d = {'nb2_min': n1, 'nb2_max': n2,
-             'nb3_min': n1, 'nb3_max': n2}
+        d = {'nb1_min': n1, 'nb1_max': n2,
+             'nb2_min': n1, 'nb2_max': n2}
     return d
 
 
