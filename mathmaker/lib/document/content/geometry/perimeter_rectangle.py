@@ -20,6 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from mathmakerlib.calculus import Number
+
 from mathmaker.lib import shared
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import setup_wording_format_of
@@ -43,7 +45,8 @@ class sub_object(component.structure):
             setup_wording_format_of(self)
         else:
             self.transduration = 16
-            self.nb1, self.nb2 = self.rectangle.width, self.rectangle.length
+            self.nb1, self.nb2 = \
+                self.rectangle.lbl_width, self.rectangle.lbl_length
             self.wording = _("Perimeter of a rectangle whose width "
                              "is {nb1} {length_unit} and length is "
                              "{nb2} {length_unit}? |hint:length_unit|")
@@ -51,25 +54,21 @@ class sub_object(component.structure):
 
     def q(self, **options):
         if self.picture:
-            if options.get('x_layout_variant', 'default') == 'slideshow':
-                return shared.machine.insert_picture(self.rectangle,
-                                                     scale=1.1) \
-                    + '\n' + self.wording
+            if self.slideshow:
+                return '{}\n{}'\
+                    .format(self.rectangle.drawn,
+                            self.wording.format(**self.wording_format))
             else:
                 return shared.machine.write_layout(
-                    (1, 2),
-                    [5, 8],
-                    [shared.machine.insert_picture(
-                     self.rectangle,
-                     scale=0.75,
-                     vertical_alignment_in_a_tabular=True),
+                    (1, 2), [5, 8],
+                    [self.rectangle.drawn,
                      self.wording.format(**self.wording_format)])
         else:
             return self.wording.format(**self.wording_format)
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        return self.rectangle.perimeter.into_str(display_SI_unit=True)
+        return self.rectangle.lbl_perimeter.printed
 
     def js_a(self, **kwargs):
-        return [self.rectangle.perimeter.jsprinted]
+        return [Number(self.rectangle.lbl_perimeter, unit=None).uiprinted]

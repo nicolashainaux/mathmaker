@@ -22,42 +22,44 @@
 
 import random
 
+from mathmakerlib.calculus import Fraction
+
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
-from mathmaker.lib.core.base_calculus import Product, Item, Fraction
+from mathmaker.lib.core.base_calculus import Item
 from mathmaker.lib.core.root_calculus import Value
-from mathmaker.lib.core.calculus import Equality
+from mathmaker.lib.document.content import component
 
 
-class sub_object(object):
+class sub_object(component.structure):
 
     def __init__(self, build_data, **options):
-        nb_list = list(build_data)
+        super().setup('numbers', nb=build_data, shuffle_nbs=False, **options)
         hole = Item(Value(COLORED_QUESTION_MARK))
         self.hidden_one = None
         visible_one = None
-        self.product = Item(Product([nb_list[0], nb_list[1]]).evaluate())
+        self.product = (self.nb1.evaluate() * self.nb2.evaluate()).printed
         self.transduration = 9
 
-        if isinstance(nb_list[1], Fraction):
-            self.hidden_one = nb_list[1]
-            visible_one = nb_list[0]
+        if isinstance(self.nb2, Fraction):
+            self.hidden_one = self.nb2
+            visible_one = self.nb1
         else:
-            random.shuffle(nb_list)
-            nb1 = nb_list.pop()
-            nb2 = nb_list.pop()
-            nb_list = [nb1, nb2]
-            self.hidden_one = Item(nb_list.pop())
-            visible_one = nb_list.pop()
+            L = [self.nb1, self.nb2]
+            random.shuffle(L)
+            self.hidden_one = L.pop()
+            visible_one = L.pop()
 
         factors = [visible_one, hole]
         random.shuffle(factors)
-        self.holed_product = Product([factors.pop(), factors.pop()])
-        self.holed_product.set_compact_display(False)
+        # TODO: better use a Product (when it's available in mathmakerlib)
+        self.holed_product = r' \times '.join([factors.pop().printed,
+                                               factors.pop().printed])
+        # self.holed_product.set_compact_display(False)
 
     def q(self, **options):
         self.substitutable_question_mark = True
-        m_expr = Equality([self.holed_product, self.product]).printed
+        m_expr = '{} = {}'.format(self.holed_product, self.product)
         return _('{math_expr}') \
             .format(math_expr=shared.machine.write_math_style2(m_expr))
 
@@ -67,7 +69,7 @@ class sub_object(object):
 
     def js_a(self, **kwargs):
         if isinstance(self.hidden_one, Fraction):
-            f = self.hidden_one.completely_reduced().jsprinted
+            f = self.hidden_one.reduced().uiprinted
             return [f, 'any_fraction == ' + f]
         else:
-            return [self.hidden_one.jsprinted]
+            return [self.hidden_one.uiprinted]

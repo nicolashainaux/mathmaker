@@ -1327,7 +1327,8 @@ class RightTriangle(Triangle):
         if up_length_val is None:
             self.side[upside_nb].label = Value('?')
         else:
-            self.side[upside_nb].label = Value(up_length_val, unit=length_unit)
+            self.side[upside_nb].label = Value(up_length_val,
+                                               unit=str(length_unit))
             length_name = self.side[upside_nb].length_name
             if ((trigo_fct in ['cos', 'tan'] and angle_nb == 2)
                 or (trigo_fct == 'sin' and angle_nb == 0)):
@@ -1337,7 +1338,7 @@ class RightTriangle(Triangle):
             self.side[downside_nb].label = Value('?')
         else:
             self.side[downside_nb].label = Value(down_length_val,
-                                                 unit=length_unit)
+                                                 unit=str(length_unit))
             length_name = self.side[downside_nb].length_name
             if ((trigo_fct in ['cos', 'tan'] and angle_nb == 0)
                 or (trigo_fct == 'sin' and angle_nb == 2)):

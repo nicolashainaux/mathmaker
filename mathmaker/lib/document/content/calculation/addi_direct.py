@@ -24,8 +24,6 @@ import os
 
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
-from mathmaker.lib.core.base_calculus import Sum
-from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import post_process
 
@@ -48,9 +46,9 @@ class sub_object(component.structure):
         if self.nb_source.startswith('decimalfractionssums'):
             self.transduration = 15
 
-        the_sum = Sum(self.nb_list)
-        self.sum_str = the_sum.printed
-        self.result = the_sum.evaluate(stop_recursion=True)
+        # TODO: better use a Sum object (when it's available in mathmakerlib)
+        self.sum_str = ' + '.join([_.printed for _ in self.nb_list])
+        self.result = sum([_.evaluate() for _ in self.nb_list])
 
         if self.context == 'mini_problem':
             self.transduration = 25
@@ -71,18 +69,12 @@ class sub_object(component.structure):
             return self.wording
         else:
             self.substitutable_question_mark = True
-            return _('{math_expr} = {q_mark}').format(
-                math_expr=shared.machine.write_math_style2(self.sum_str),
-                q_mark=COLORED_QUESTION_MARK)
+            return shared.machine.write_math_style2(
+                _('{math_expr} = {q_mark}')
+                .format(math_expr=self.sum_str, q_mark=COLORED_QUESTION_MARK))
 
     def a(self, **options):
-        v = None
-        if hasattr(self, 'hint'):
-            v = Value(self.result, unit=self.hint)\
-                .into_str(display_SI_unit=True)
-        else:
-            v = Value(self.result).into_str()
-        return v
+        return self.result.printed
 
     def js_a(self, **kwargs):
-        return [Value(self.result).jsprinted]
+        return [self.result.uiprinted]

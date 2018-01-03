@@ -25,11 +25,10 @@ import copy
 from decimal import Decimal
 from string import ascii_lowercase as alphabet
 
-from mathmakerlib.calculus import Number, is_integer
+from mathmakerlib.calculus import Number, Unit, Fraction, is_integer
 from mathmakerlib.calculus.unit import COMMON_LENGTH_UNITS
 
-from mathmaker.lib.core.root_calculus import Unit, Value
-from mathmaker.lib.core.base_calculus import Product, Quotient, Item
+from mathmaker.lib.core.base_calculus import Division
 from mathmaker.lib import shared
 from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.tools import rotate, lined_up, fix_math_style2_fontsize
@@ -47,8 +46,7 @@ class structure(object):
 
     def h(self, **kwargs):
         if hasattr(self, 'hint'):
-            return "\hfill" + Value("", unit=self.hint)\
-                .into_str(display_SI_unit=True)
+            return '\hfill ${}$'.format(self.hint)
         else:
             return ""
 
@@ -104,20 +102,20 @@ class structure(object):
     def _setup_length_units(self, **kwargs):
         if 'unit' in kwargs:
             self.unit_length = Unit(kwargs['unit'])
-            self.unit_area = Unit(self.unit_length.name, exponent=2)
-            self.length_unit = self.unit_length.name
+            self.unit_area = Unit(self.unit_length.content, exponent=2)
+            self.length_unit = self.unit_length.content
         else:
             if hasattr(self, 'length_unit'):
                 self.unit_length = Unit(self.length_unit)
-                self.unit_area = Unit(self.unit_length.name, exponent=2)
+                self.unit_area = Unit(self.unit_length.content, exponent=2)
             elif hasattr(self, 'unit_length'):
-                self.length_unit = self.unit_length.name
-                self.unit_area = Unit(self.unit_length.name, exponent=2)
+                self.length_unit = self.unit_length.content
+                self.unit_area = Unit(self.unit_length.content, exponent=2)
             else:
                 length_units_names = copy.deepcopy(COMMON_LENGTH_UNITS)
                 self.unit_length = Unit(random.choice(length_units_names))
-                self.unit_area = Unit(self.unit_length.name, exponent=2)
-                self.length_unit = self.unit_length.name
+                self.unit_area = Unit(self.unit_length.content, exponent=2)
+                self.length_unit = self.unit_length.content
 
     def _setup_numbers(self, **kwargs):
         nb_list = list(kwargs['nb'])
@@ -126,7 +124,7 @@ class structure(object):
         elif kwargs.get('sort_nbs', False):
             nb_list = sorted(nb_list)
         for i in range(len(nb_list)):
-            if isinstance(nb_list[i], Quotient):
+            if isinstance(nb_list[i], Fraction):
                 setattr(self, 'nb' + str(i + 1), nb_list[i])
             else:
                 setattr(self, 'nb' + str(i + 1), Number(str(nb_list[i])))
@@ -189,28 +187,24 @@ class structure(object):
 
         if '10_100_1000' in kwargs and kwargs['10_100_1000']:
             self.divisor, self.dividend = nb_list[0], nb_list[1]
-            self.result = Quotient(('+', self.dividend, self.divisor))\
-                .evaluate()
+            self.result = self.dividend / self.divisor
         else:
-            self.divisor = nb_list.pop(random.choice([0, 1]))
-            self.result = nb_list.pop()
+            self.divisor = Number(nb_list.pop(random.choice([0, 1])))
+            self.result = Number(nb_list.pop())
             if self.variant[:-1] == 'decimal':
                 self.result /= 10
-            self.dividend = Product([self.divisor, self.result]).evaluate()
+            self.dividend = self.divisor * self.result
 
         if self.context == "from_area":
             self.subcontext = "w" if self.result < self.divisor else "l"
 
-        self.dividend_str = Item(self.dividend).printed
-        self.divisor_str = Item(self.divisor).printed
-        self.result_str = Item(self.result).printed
-        q = Quotient(('+', self.dividend, self.divisor),
-                     use_divide_symbol=True)
+        self.dividend_str = Number(self.dividend).printed
+        self.divisor_str = Number(self.divisor).printed
+        self.result_str = Number(self.result).printed
+        q = Division(('+', self.dividend, self.divisor))
         self.quotient_str = q.printed
 
     def _setup_rectangle(self, **kwargs):
-        from mathmaker.lib.core.base_geometry import Point
-        from mathmaker.lib.core.geometry import Rectangle
         if hasattr(self, 'nb1') and hasattr(self, 'nb2'):
             nb1, nb2 = self.nb1, self.nb2
         elif 'nb' in kwargs:
@@ -220,55 +214,17 @@ class structure(object):
                                'nor length have been provided yet.')
         if (not hasattr(self, 'unit_length')
             or not hasattr(self, 'unit_area')):
-            self.setup(self, "units", **kwargs)
+            self.setup('length_units', **kwargs)
 
-        # nb1 = Decimal(str(nb1))
-        # nb2 = Decimal(str(nb2))
-
-        W = Value(min([nb1, nb2]), unit=self.unit_length)
-        L = Value(max([nb1, nb2]), unit=self.unit_length)
-
-        rectangle_name = "DCBA"
+        W = Number(min([nb1, nb2]), unit=self.unit_length)
+        L = Number(max([nb1, nb2]), unit=self.unit_length)
+        self.label_polygon_vertices = False
+        self.polygon_name = None
         if self.picture:
-            rectangle_name = next(shared.four_letters_words_source)[0]
-        self.rectangle = Rectangle([Point(rectangle_name[3], 0, 0),
-                                    3,
-                                    1.5,
-                                    rectangle_name[2],
-                                    rectangle_name[1],
-                                    rectangle_name[0]],
-                                   read_name_clockwise=True)
-        self.rectangle.set_lengths([L, W])
-        self.rectangle.setup_labels([False, False, True, True])
+            self.polygon_name = next(shared.four_letters_words_source)[0]
 
-    def _setup_square(self, **kwargs):
-        from mathmaker.lib.core.base_geometry import Point
-        from mathmaker.lib.core.geometry import Square
-        if hasattr(self, 'nb1'):
-            nb1 = self.nb1
-        elif 'nb' in kwargs:
-            nb1 = kwargs['nb'][0]
-        else:
-            raise RuntimeError('Impossible to Setup a square if no side\'s '
-                               'length have been provided yet.')
-        if (not hasattr(self, 'unit_length')
-            or not hasattr(self, 'unit_area')):
-            # __
-            self.setup(self, "units", **kwargs)
-
-        square_name = "DCBA"
-        if self.picture:
-            square_name = next(shared.four_letters_words_source)[0]
-        self.square = Square([Point(square_name[3], 0, 0),
-                             2,
-                             square_name[2],
-                             square_name[1],
-                             square_name[0]],
-                             read_name_clockwise=True)
-        self.square.set_lengths([Value(nb1, unit=self.unit_length)])
-        self.square.setup_labels([False, False, True, False])
-        self.square.set_marks(random.choice(["simple", "double",
-                                             "triple"]))
+        self._generate_polygon('quadrilateral_2_2', 2, [(2, W), (2, L)])
+        self.rectangle = self.polygon
 
     def _setup_right_triangle(self, **kwargs):
         from mathmaker.lib.core.geometry import RightTriangle
@@ -276,7 +232,7 @@ class structure(object):
         # so the angles|lengths' labels must be set outside of this setup()
         if (not hasattr(self, 'unit_length')
             or not hasattr(self, 'unit_area')):
-            self.setup(self, "units", **kwargs)
+            self.setup('length_units', **kwargs)
 
         rt_name = next(shared.three_letters_words_source)[0]
         alpha, beta = next(shared.angle_ranges_source)
@@ -328,6 +284,7 @@ class structure(object):
             rotate_around_isobarycenter=rotation_angle)
 
         if set_lengths:
+            from mathmaker.lib.core.root_calculus import Value
             self.figure.set_lengths([self.nb2, self.nb3, self.nb4],
                                     Value(self.nb1))
         self.figure.side[2].invert_length_name()
@@ -364,6 +321,7 @@ class structure(object):
                 wording_kwargs.update({'back_to_unit': val})
         drawn_wording = source.next(**wording_kwargs)
         self.wording = _(drawn_wording[1])
+        self.wording_context = drawn_wording[0]
         if kwargs.get('proportionality', False):
             self.ifintcoeff_nb2nb3swappable = drawn_wording[5]
             self.ifdecicoeff_forceswapnb2nb3 = drawn_wording[6]
@@ -372,7 +330,9 @@ class structure(object):
                     self.nb2, self.nb3 = self.nb3, self.nb2
             if self.ifdecicoeff_forceswapnb2nb3 and not is_integer(self.coeff):
                 self.nb2, self.nb3 = self.nb3, self.nb2
-            nb1_coeff, nb2_coeff, nb3_coeff = drawn_wording[2:5]
+            # nb1_coeff = Number(str(drawn_wording[2]))
+            # nb2_coeff = Number(str(drawn_wording[3]))
+            nb3_coeff = Number(str(drawn_wording[4]))
             # if nb1_coeff != 1:
             #     self.nb1 *= nb1_coeff
             # if nb2_coeff != 1:
@@ -380,6 +340,9 @@ class structure(object):
             if nb3_coeff != 1:
                 self.nb3 *= nb3_coeff
             self.solution = self.nb2 * self.nb3 / self.nb1
+            if (self.wording_context == 'price'
+                and self.nb3.fracdigits_nb(ignore_trailing_zeros=False) == 1):
+                self.solution = self.solution.quantize(Number('0.01'))
         setup_wording_format_of(self)
 
     def _setup_complement_wording(self, **kwargs):
@@ -389,18 +352,20 @@ class structure(object):
         if self.context == 'complement_wording1':
             self.wording = _('What number must be added to'
                              ' {number1} to make {number2}?')\
-                .format(number1=Value(self.nb2), number2=Value(self.nb1))
+                .format(number1=self.nb2.printed, number2=self.nb1.printed)
         elif self.context == 'complement_wording2':
             if upper_bound == 10:
                 self.wording = _('What is the tens complement '
-                                 'of {number}?').format(number=Value(self.nb2))
+                                 'of {number}?')\
+                    .format(number=self.nb2.printed)
             elif upper_bound == 100:
                 self.wording = _('What is the hundreds complement '
-                                 'of {number}?').format(number=Value(self.nb2))
+                                 'of {number}?')\
+                    .format(number=self.nb2.printed)
             else:
                 self.wording = _('What is the complement to {number1} '
                                  'of {number2}?')\
-                    .format(number1=Value(self.nb1), number2=Value(self.nb2))
+                    .format(number1=self.nb1.printed, number2=self.nb2.printed)
         else:
             raise ValueError('Cannot recognize context: {}\n'
                              .format(self.context))

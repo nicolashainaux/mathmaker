@@ -22,8 +22,9 @@
 
 import random
 
+from mathmakerlib.calculus import Number
+
 from mathmaker.lib import shared
-from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import setup_wording_format_of
 
@@ -56,13 +57,13 @@ class sub_object(component.structure):
             super().setup("nb_variants", nb=build_data, **options)
             super().setup("rectangle", **options)
             self.subcontext = random.choice(['w', 'l'])
-            self.nb1 = self.rectangle.perimeter
+            self.nb1 = self.rectangle.lbl_perimeter
             if self.subcontext == 'l':
-                self.nb2, self.nb3 = (self.rectangle.width,
-                                      self.rectangle.length)
+                self.nb2, self.nb3 = (self.rectangle.lbl_width,
+                                      self.rectangle.lbl_width)
             else:
-                self.nb2, self.nb3 = (self.rectangle.length,
-                                      self.rectangle.width)
+                self.nb2, self.nb3 = (self.rectangle.lbl_length,
+                                      self.rectangle.lbl_width)
             self.result = self.nb3
             wordings = {'w': _("What is the width of a rectangle whose "
                                "perimeter is {nb1} {length_unit} and length "
@@ -78,33 +79,32 @@ class sub_object(component.structure):
             raise RuntimeError('Impossible to create this question without '
                                'any context.')
 
-        if self.subcontext == "w":
-            self.rectangle.setup_labels([False, False, True, "?"])
-        elif self.subcontext == "l":
-            self.rectangle.setup_labels([False, False, "?", True])
+        if self.subcontext == 'w':
+            self.rectangle.setup_labels(labels=[self.rectangle.lbl_width,
+                                                self.rectangle.lbl_length],
+                                        masks=[' ', ' ', None, '?'])
+        elif self.subcontext == 'l':
+            self.rectangle.setup_labels(labels=[self.rectangle.lbl_width,
+                                                self.rectangle.lbl_length],
+                                        masks=[' ', ' ', '?', None])
 
     def q(self, **options):
         if self.picture:
-            if options.get('x_layout_variant', 'default') == 'slideshow':
-                return shared.machine.insert_picture(self.rectangle,
-                                                     scale=1.1) \
-                    + '\n' + self.wording
+            if self.slideshow:
+                return '{}\n{}'\
+                    .format(self.rectangle.drawn,
+                            self.wording.format(**self.wording_format))
             else:
                 return shared.machine.write_layout(
-                    (1, 2),
-                    [3.5, 9.5],
-                    [shared.machine.insert_picture(
-                        self.rectangle,
-                        scale=0.75,
-                        vertical_alignment_in_a_tabular=True),
+                    (1, 2), [3.5, 9.5],
+                    [self.rectangle.drawn,
                      self.wording.format(**self.wording_format)])
         else:
             return self.wording.format(**self.wording_format)
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        v = Value(self.result, unit=self.hint).into_str(display_SI_unit=True)
-        return v
+        return Number(self.result, unit=self.hint).printed
 
     def js_a(self, **kwargs):
-        return [Value(self.result).jsprinted]
+        return [Number(self.result).uiprinted]
