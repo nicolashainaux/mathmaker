@@ -26,7 +26,7 @@ import random
 import copy
 import re
 
-from mathmakerlib.calculus import Number, Unit
+from mathmakerlib.calculus import Number, Unit, is_integer, physical_quantity
 from mathmakerlib.calculus.unit import UNIT_KINDS, COMMON_LENGTH_UNITS
 from mathmakerlib.calculus.unit import CURRENCIES_DICT
 
@@ -482,9 +482,14 @@ def merge_nb_unit_pairs(arg: object, w_prefix=''):
                 expnt = Number(2)
             elif u.startswith('volume'):
                 expnt = Number(3)
-            new_val = Number(getattr(arg, n),
-                             unit=Unit(getattr(arg, u),
-                                       exponent=expnt)).printed
+            U = Unit(getattr(arg, u), exponent=expnt)
+            N = Number(getattr(arg, n), unit=U)
+            if physical_quantity(U) == 'currency':
+                if is_integer(N):
+                    N = N.quantize(Number('1'))
+                else:
+                    N = N.quantize(Number('0.01'))
+            new_val = N.printed
             new_words_list += ["{" + new_attr_name + "}" + p]
             logger.debug(" setattr: name=" + str(new_attr_name) + "; val= "
                          + str(new_val) + "\n")
@@ -571,7 +576,7 @@ def setup_wording_format_of(w_object: object, w_prefix=''):
     setattr(w_object, w_prefix + 'wording', w_object_wording)
     logger.debug("---- same wording, but hintless:\n"
                  + str(w_object_wording) + "\n")
-    logger.debug("---- the hint is:\n" + str(hint) + "\n")
+    logger.debug("---- the hint is: " + str(hint) + "\n")
     w_object_wording, attr_dict = process_attr_values(w_object_wording)
     setattr(w_object, w_prefix + 'wording', w_object_wording)
     logger.debug("---- same wording, but {k=v} have been processed:\n"
