@@ -66,6 +66,12 @@ class source(object):
         self.language = kwargs.get('language', '')
         self.db = kwargs.get('db', shared.db)
 
+    def _unlock(self):
+        """Reset locked column of current table."""
+        log = settings.dbg_logger.getChild('db_lock')
+        log.debug('UNLOCK table: {}\n'.format(self.table_name))
+        self.db.execute("UPDATE {} SET locked = 0;".format(self.table_name))
+
     def _twothirds_reset(self):
         """Will reset only two thirds of the already timestamped entries."""
         log = settings.dbg_logger.getChild('db')
@@ -87,9 +93,6 @@ class source(object):
         self.db.execute("UPDATE " + self.table_name + " SET drawDate = 0;")
         if "lock_equal_products" in kwargs:
             self.db.execute("UPDATE {} SET lock_equal_products = 0;"
-                            .format(self.table_name))
-        if "lock_equal_coeffs" in kwargs or "lock_equal_contexts" in kwargs:
-            self.db.execute("UPDATE {} SET locked = 0;"
                             .format(self.table_name))
         if "union" in kwargs:
             self.db.execute("UPDATE {} SET drawDate = 0;"
@@ -303,6 +306,11 @@ class source(object):
         log = settings.dbg_logger.getChild('db')
         log.debug(cmd)
         qr = tuple(self.db.execute(cmd))
+        if (not len(qr)
+            and self.table_name in ['deci_int_int_triples_for_prop',
+                                    'mini_pb_prop_wordings']):
+            self._unlock()
+            qr = tuple(self.db.execute(cmd))
         if not len(qr):
             self._twothirds_reset()
             qr = tuple(self.db.execute(cmd))
