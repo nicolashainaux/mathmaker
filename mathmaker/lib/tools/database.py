@@ -27,6 +27,7 @@ import random
 import warnings
 from decimal import Decimal
 
+from intspan import intspan
 from mathmakerlib.calculus import is_integer, is_number, Number, Fraction
 
 from mathmaker import settings
@@ -482,13 +483,22 @@ def preprocess_qkw(table_name, qkw=None):
     return d
 
 
-def preprocess_int_triplesforprop_tag(tag, qkw=None):
+def preprocess_int_triplesforprop_tag(tag, not_in=None):
     d = {'equal_sides': 0, 'nb3_notmod': 'nb2'}
     parts = tag.split('_')
     if len(parts) == 2:
-        n1, n2 = parts[1].split(sep='to')
-        d.update({'nb2_min': n1, 'nb2_max': n2,
-                  'nb3_min': n1, 'nb3_max': n2})
+        L0 = list(intspan(parts[1]))
+        # Make use of 'not_in' to remove numbers from last draw from the ones
+        # we add here.
+        if not_in is not None:
+            not_in = [int(_) for _ in not_in]
+            for elt in not_in:
+                if elt in L0:
+                    L0.remove(elt)
+        L = [str(_) for _ in L0]
+        # For nb2 and nb3, usually we don't want to use 15 and 25
+        L1 = [str(_) for _ in L0 if _ <= 14]
+        d.update({'nb1_in': L, 'nb2_in': L1, 'nb3_in': L1})
     return d
 
 
@@ -1246,6 +1256,7 @@ class mc_source(object):
     def next(self, source_id, qkw=None, **kwargs):
         if qkw is None:
             qkw = {}
+        not_in = kwargs.get('not_in', None)
         tag_classification = classify_tag(source_id)
         kwargs.update(preprocess_qkw(db_table(source_id), qkw=qkw))
         if tag_classification == 'int_pairs':
@@ -1254,7 +1265,8 @@ class mc_source(object):
         if tag_classification == 'int_triples':
             correct_kw = preprocess_qkw(db_table('int_triples'), qkw=qkw)
             if 'forprop' in source_id:
-                correct_kw.update(preprocess_int_triplesforprop_tag(source_id))
+                correct_kw.update(preprocess_int_triplesforprop_tag(source_id,
+                                  not_in=not_in))
             # Ugly hack: as code and codename start with the same letters,
             # codename cannot be detected as requiring to be removed from the
             # query. So, we manually deleted it here, if necessary.
