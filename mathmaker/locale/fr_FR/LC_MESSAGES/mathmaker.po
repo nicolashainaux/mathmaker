@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2017-12-21 11:40+0100\n"
+"PO-Revision-Date: 2018-01-04 07:19+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -34,58 +34,58 @@ msgstr "N'importe quelle valeur de {variable_name} est solution de l'équation."
 msgid "This equation has no solution."
 msgstr "Cette équation n'a pas de solution."
 
-#: lib/machine/LaTeX.py:168
+#: lib/machine/LaTeX.py:170
 msgid "To strike out numbers "
 msgstr "Pour pouvoir rayer des nombres "
 
-#: lib/machine/LaTeX.py:173
+#: lib/machine/LaTeX.py:175
 msgid "To use the margin definition command"
 msgstr "Pour utiliser la commande de définition des marges"
 
-#: lib/machine/LaTeX.py:177
+#: lib/machine/LaTeX.py:179
 #, python-brace-format
 msgid "To use the commands from {pkg_name} "
 msgstr "Pour utiliser les commandes de {pkg_name} "
 
-#: lib/machine/LaTeX.py:180
+#: lib/machine/LaTeX.py:182
 msgid "To use multicol environment"
 msgstr "Pour faire une présentation multicolonnes"
 
-#: lib/machine/LaTeX.py:183
+#: lib/machine/LaTeX.py:185
 msgid "To use extra commands to handle tabulars"
 msgstr "Pour utiliser des commandes supplémentaires pour les tableaux"
 
-#: lib/machine/LaTeX.py:185
+#: lib/machine/LaTeX.py:187
 msgid "For pretty underlining"
 msgstr "Pour de jolis soulignages"
 
-#: lib/machine/LaTeX.py:195
+#: lib/machine/LaTeX.py:197
 msgid "To use other mathematical symbols"
 msgstr "Pour utiliser d'autres symboles mathématiques"
 
-#: lib/machine/LaTeX.py:198
+#: lib/machine/LaTeX.py:200
 msgid "To draw"
 msgstr "Pour dessiner"
 
-#: lib/machine/LaTeX.py:204
+#: lib/machine/LaTeX.py:206
 msgid "Page layout "
 msgstr "Mise en page générale "
 
-#: lib/machine/LaTeX.py:210
+#: lib/machine/LaTeX.py:212
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 "Si vous souhaitez inclure une image, utilisez s'il vous plaît cette "
 "commande :"
 
-#: lib/machine/LaTeX.py:213
+#: lib/machine/LaTeX.py:215
 msgid "file_name"
 msgstr "nom_du_fichier"
 
-#: lib/machine/LaTeX.py:215
+#: lib/machine/LaTeX.py:217
 msgid "Exercises counter"
 msgstr "Compteur d'exercices"
 
-#: lib/machine/LaTeX.py:217
+#: lib/machine/LaTeX.py:219
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
@@ -94,11 +94,11 @@ msgstr ""
 "Définition de la commande {cmd_name}, qui va insérer le mot {word} en gras, "
 "accompagné de son numéro et qui va incrémenter automatiquement le compteur"
 
-#: lib/machine/LaTeX.py:221 lib/machine/LaTeX.py:225
+#: lib/machine/LaTeX.py:227 lib/machine/LaTeX.py:223
 msgid "Exercise"
 msgstr "Exercice"
 
-#: lib/machine/LaTeX.py:228
+#: lib/machine/LaTeX.py:230
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -322,7 +322,7 @@ msgid "Question:"
 msgstr "Question :"
 
 #: lib/old_style_sheet/exercise/X_Structure.py:265
-#: lib/document/frames/exercise.py:741
+#: lib/document/frames/exercise.py:753
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -543,19 +543,19 @@ msgstr "Réponses"
 msgid "Mental calculation: mini-problems"
 msgstr "Calcul mental : mini-problèmes"
 
-#: lib/machine/LaTeX.py:192
+#: lib/machine/LaTeX.py:194
 msgid "To use some symbols like currency units"
 msgstr "Pour utiliser des symboles (par exemple des unités de monétaires)"
 
-#: lib/machine/LaTeX.py:157
+#: lib/machine/LaTeX.py:159
 msgid "To display units correctly"
 msgstr "Pour afficher correctement les unités"
 
-#: lib/document/content/geometry/area_rectangle.py:40
+#: lib/document/content/geometry/area_rectangle.py:42
 msgid "Area of this rectangle? |hint:area_unit|"
 msgstr "Aire de ce rectangle ? |hint:area_unit|"
 
-#: lib/document/content/geometry/area_rectangle.py:45
+#: lib/document/content/geometry/area_rectangle.py:48
 #, python-brace-format
 msgid ""
 "Area of a rectangle whose width is {nb1} {length_unit} and length is {nb2} "
@@ -564,11 +564,11 @@ msgstr ""
 "Aire d'un rectangle de largeur {nb1} {length_unit} et de longueur {nb2} "
 "{length_unit}? |hint:area_unit|"
 
-#: lib/document/content/geometry/perimeter_rectangle.py:42
+#: lib/document/content/geometry/perimeter_rectangle.py:44
 msgid "Perimeter of this rectangle? |hint:length_unit|"
 msgstr "Périmètre de ce rectangle ? |hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_rectangle.py:47
+#: lib/document/content/geometry/perimeter_rectangle.py:50
 #, python-brace-format
 msgid ""
 "Perimeter of a rectangle whose width is {nb1} {length_unit} and length is "
@@ -577,7 +577,7 @@ msgstr ""
 "Périmètre d'un rectangle de largeur {nb1} {length_unit} et de longueur {nb2} "
 "{length_unit} ? |hint:length_unit|"
 
-#: lib/document/content/geometry/rectangle_length_or_width.py:44
+#: lib/document/content/geometry/rectangle_length_or_width.py:45
 #, python-brace-format
 msgid ""
 "A rectangle has an area of {nb1} {area_unit} and a length of {nb2} "
@@ -586,7 +586,7 @@ msgstr ""
 "Un rectangle a une aire de {nb1} {area_unit} et une longueur de {nb2} "
 "{length_unit}. Quelle est sa largeur ? |hint:length_unit|"
 
-#: lib/document/content/geometry/rectangle_length_or_width.py:47
+#: lib/document/content/geometry/rectangle_length_or_width.py:48
 #, python-brace-format
 msgid ""
 "A rectangle has an area of {nb1} {area_unit} and a width of {nb2} "
@@ -595,7 +595,7 @@ msgstr ""
 "Un rectangle a une aire de {nb1} {area_unit} et une largeur de {nb2} "
 "{length_unit}. Quelle est sa longueur ? |hint:length_unit|"
 
-#: lib/document/content/geometry/rectangle_length_or_width.py:67
+#: lib/document/content/geometry/rectangle_length_or_width.py:68
 #, python-brace-format
 msgid ""
 "What is the width of a rectangle whose perimeter is {nb1} {length_unit} and "
@@ -604,7 +604,7 @@ msgstr ""
 "Largeur d'un rectangle de périmètre {nb1} {length_unit} et de longueur {nb2} "
 "{length_unit} ? |hint:length_unit|"
 
-#: lib/document/content/geometry/rectangle_length_or_width.py:70
+#: lib/document/content/geometry/rectangle_length_or_width.py:71
 #, python-brace-format
 msgid ""
 "What is the length of a rectangle whose perimeter is {nb1} {length_unit} and "
@@ -721,7 +721,7 @@ msgstr "Exemple de solutions :"
 msgid "Intercept theorem"
 msgstr "Théorème de Thalès"
 
-#: lib/machine/LaTeX.py:188
+#: lib/machine/LaTeX.py:190
 msgid "To include .eps pictures (loads graphicx)"
 msgstr "Pour inclure des images .eps (charge aussi graphicx)"
 
@@ -2046,22 +2046,22 @@ msgstr "Calcul mental : divisions"
 msgid "Mental calculation: multiplication by 11"
 msgstr "Calcul mental : multiplications par 11"
 
-#: lib/document/content/component.py:369
+#: lib/document/content/component.py:357
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr "Combien faut-il ajouter à {number1} pour obtenir {number2} ?"
 
-#: lib/document/content/component.py:374
+#: lib/document/content/component.py:362
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr "Quel est le complément à 10 de {number} ?"
 
-#: lib/document/content/component.py:377
+#: lib/document/content/component.py:366
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr "Quel est le complément à 100 de {number} ?"
 
-#: lib/document/content/component.py:380
+#: lib/document/content/component.py:370
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr "Quel est le complément à {number1} de {number2} ?"
@@ -2078,7 +2078,7 @@ msgstr "Calcul mental : compléments à 10 et à 100"
 msgid "Mental calculation: final test for white belt, second stripe"
 msgstr "Calcul mental : ceinture blanche, deuxième trait"
 
-#: lib/machine/LaTeX.py:175
+#: lib/machine/LaTeX.py:177
 msgid "To be able to color the documents"
 msgstr "Pour pouvoir mettre les documents en couleur"
 
@@ -2091,15 +2091,15 @@ msgid "Answers!"
 msgstr "Allez, on corrige !"
 
 #: lib/document/content/calculation/subtr_direct.py:78
+#: lib/document/content/calculation/addi_direct.py:73
+#: lib/document/content/calculation/multi_direct.py:56
 #: lib/document/content/calculation/divi_direct.py:54
 #: lib/document/content/calculation/multi_clever.py:108
-#: lib/document/content/calculation/multi_direct.py:56
-#: lib/document/content/calculation/addi_direct.py:74
 #, python-brace-format
 msgid "{math_expr} = {q_mark}"
 msgstr "{math_expr} = {q_mark}"
 
-#: lib/document/content/calculation/multi_hole.py:61
+#: lib/document/content/calculation/multi_hole.py:63
 #, python-brace-format
 msgid "{math_expr}"
 msgstr "{math_expr}"
@@ -2115,13 +2115,13 @@ msgstr ""
 "\n"
 "(dans les tables de multiplication, de 2 à 9)"
 
-#: lib/machine/LaTeX.py:170
+#: lib/machine/LaTeX.py:172
 msgid "To get a better control on floats positioning (e.g. tabulars) "
 msgstr ""
 "Pour avoir un meilleur contrôle sur le positionnement des \"flottants\" (par "
 "exemple les tabulars)"
 
-#: lib/document/frames/exercise.py:388
+#: lib/document/frames/exercise.py:396
 msgid "Example of detailed solutions:"
 msgstr "Exemple de solutions détaillées :"
 
@@ -2161,12 +2161,12 @@ msgid "{} (or {} etc.)"
 msgstr "{} (ou {} etc.)"
 
 #: lib/document/content/calculation/decimal_numerals.py:61
-#: lib/document/content/component.py:44
+#: lib/document/content/component.py:43
 msgid "What is {} as a decimal?"
 msgstr "Écriture décimale de {} ?"
 
 #: lib/document/content/calculation/decimal_numerals.py:66
-#: lib/document/content/component.py:46
+#: lib/document/content/component.py:45
 msgid "What is {} as a decimal fraction?"
 msgstr "Fraction décimale égale à {} ?"
 
@@ -2229,37 +2229,37 @@ msgstr "Calcul mental : tables de 15 et de 25"
 msgid "Mental calculation:  final test for yellow belt"
 msgstr "Calcul mental : ceinture jaune"
 
-#: lib/machine/LaTeX.py:202
+#: lib/machine/LaTeX.py:204
 msgid "To insert pdf formular and javascript"
 msgstr "Pour insérer un formulaire pdf et du javascript"
 
-#: lib/document/frames/exercise.py:873
+#: lib/document/frames/exercise.py:885
 msgid "Clear everything"
 msgstr "Tout effacer"
 
-#: lib/document/frames/exercise.py:874
+#: lib/document/frames/exercise.py:886
 msgid "Validate"
 msgstr "Valider"
 
-#: lib/document/frames/exercise.py:883
+#: lib/document/frames/exercise.py:895
 #, python-brace-format
 msgid "Score: ... / {q_number}"
 msgstr "Score : ... / {q_number}"
 
-#: lib/document/frames/exercise.py:885
+#: lib/document/frames/exercise.py:897
 #, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr "\"Score : \" + count.toString() + \" / {q_number}\""
 
-#: lib/document/frames/exercise.py:878
+#: lib/document/frames/exercise.py:890
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr "J"
 
-#: lib/document/frames/exercise.py:880
+#: lib/document/frames/exercise.py:892
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr "F"
 
-#: lib/document/content/component.py:68
+#: lib/document/content/component.py:66
 msgid "undefined"
 msgstr "indéfini"
 
@@ -2284,7 +2284,7 @@ msgstr "{how_many_digitplace} dans {decimal_number} ?"
 msgid "Mental calculation: simple percentages calculations"
 msgstr "Calcul mental : pourcentages simples"
 
-#: lib/document/content/calculation/percent_direct.py:60
+#: lib/document/content/calculation/percent_direct.py:61
 #, python-brace-format
 msgid "{n1} {percent_symbol} of {n2}?"
 msgstr "{n1} {percent_symbol} de {n2} ?"
@@ -2320,7 +2320,7 @@ msgstr "Périmètre de cet hexagone ? |hint:length_unit|"
 msgid "Mental calculation: perimeter of a polygon"
 msgstr "Calcul mental : périmètres de polygones"
 
-#: lib/document/content/calculation/divi_euclidean.py:38
+#: lib/document/content/calculation/divi_euclidean.py:40
 #, python-brace-format
 msgid "Euclidean division of {dividend} by {divisor}?"
 msgstr "Division euclidienne de {dividend} par {divisor} ?"
@@ -2328,6 +2328,161 @@ msgstr "Division euclidienne de {dividend} par {divisor} ?"
 #: data/frameworks/mental_calculation/04_yellow1.yaml:7
 msgid "Mental calculation: euclidean divisions"
 msgstr "Calcul mental : divisions euclidiennes"
+
+#: data/frameworks/mental_calculation/04_yellow1.yaml:38
+msgid "Mental calculation: mini proportionality problems"
+msgstr "Calcul mental : mini-problèmes (proportionnalité)"
+
+#: data/wordings/mini_pb_proportionality.yaml:5
+#: data/wordings/mini_pb_proportionality.yaml:6
+msgid ""
+"A bundle of {nb1} books cost {nb2} {currency_unit}. How much do cost {nb3} "
+"books? |hint:currency_unit|"
+msgstr ""
+"Un lot de {nb1} livres coûte {nb2} {currency_unit}. Combien coûtent {nb3} "
+"livres ? |hint:currency_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:12
+msgid ""
+"A bundle of {nb1} books cost {nb3} {currency_unit}. How much do cost {nb2} "
+"books? |hint:currency_unit|"
+msgstr ""
+"Un lot de {nb1} livres coûte {nb3} {currency_unit}. Combien coûtent {nb2} "
+"livres ? |hint:currency_unit|"
+
+#~ msgid ""
+#~ "{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much do weigh "
+#~ "{nb3} boxes? |hint:mass_unit|"
+#~ msgstr ""
+#~ "{nb1} cartons pèsent, ensemble, {nb2} {mass_unit=kg}. Combien pèsent "
+#~ "{nb3} cartons? |hint:mass_unit|"
+
+#~ msgid ""
+#~ "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. "
+#~ "How much flour should be used for {nb2} people? |hint:mass_unit|"
+#~ msgstr ""
+#~ "Une recette pour {nb1} personnes nécessite {nb3} {mass_unit=g} de farine. "
+#~ "Quelle quantité de farine faut-il pour {nb2} personnes? |hint:mass_unit|"
+
+#~ msgid ""
+#~ "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do "
+#~ "weigh {nb2} packs? |hint:mass_unit|"
+#~ msgstr ""
+#~ "{nb1} paquets de céréales pèsent, ensemble, {nb3} {mass_unit=g}. Combien "
+#~ "pèsent {nb2} paquets? |hint:mass_unit|"
+
+#~ msgid ""
+#~ "A recipe for {nb1} people requires to use {nb3} {capacity_unit=mL} of "
+#~ "milk. How much milk should be used for {nb2} people? |hint:capacity_unit|"
+#~ msgstr ""
+#~ "Une recette pour {nb1} personnes nécessite {nb3} {capacity_unit=mL} de "
+#~ "lait. Quelle quantité de lait faut-il pour {nb2} personnes? |hint:"
+#~ "capacity_unit|"
+
+#~ msgid ""
+#~ "Special offer: {nb1} pens for {nb3} {currency_unit}. How much would cost "
+#~ "{nb2} pens? |hint:currency_unit|"
+#~ msgstr ""
+#~ "Offre spéciale : {nb1} stylos pour {nb3} {currency_unit}. À combien "
+#~ "reviennent {nb2} stylos? |hint:currency_unit|"
+
+#~ msgid ""
+#~ "A pack of {nb1} pens cost {nb3} {currency_unit}. How much do cost {nb2} "
+#~ "pens? |hint:currency_unit|"
+#~ msgstr ""
+#~ "Un paquet de {nb1} stylos coûte {nb3} {currency_unit}. Combien coûtent "
+#~ "{nb2} stylos? |hint:currency_unit|"
+
+#~ msgid ""
+#~ "A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost "
+#~ "{nb2} candies? |hint:currency_unit|"
+#~ msgstr ""
+#~ "Un paquet de {nb1} bonbons coûte {nb3} {currency_unit}. Combien coûtent "
+#~ "{nb2} bonbons? |hint:currency_unit|"
+
+#~ msgid ""
+#~ "{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do "
+#~ "weigh {nb2} buckets? |hint:mass_unit|"
+#~ msgstr ""
+#~ "{nb1} seaux de terre pèsent, ensemble, {nb3} {mass_unit=kg}. Combien "
+#~ "pèsent {nb2} seaux? |hint:mass_unit|"
+
+#~ msgid ""
+#~ "{nb1} bottles contain, together, {nb3} {capacity_unit=L}. How much do "
+#~ "contain {nb2} bottles? |hint:capacity_unit|"
+#~ msgstr ""
+#~ "{nb1} bouteilles contiennent, ensemble, {nb2} {capacity_unit=L}. Combien "
+#~ "vont contenir {nb3} bouteilles ? |hint:capacity_unit|"
+
+#~ msgid ""
+#~ "{nb1} vials contain, together, {nb3} {capacity_unit=mL} of perfume. How "
+#~ "much contain {nb2} vials? |hint:capacity_unit|"
+#~ msgstr ""
+#~ "{nb1} flacons contiennent, ensemble, {nb3} {capacity_unit=mL} de parfum. "
+#~ "Combien contiennent {nb2} flacons ? |hint:capacity_unit|"
+
+#~ msgid ""
+#~ "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost "
+#~ "{nb2} bottles? |hint:currency_unit|"
+#~ msgstr ""
+#~ "{nb1} bouteilles de jus de fruit coûtent {nb3} {currency_unit}. Combien "
+#~ "coûtent {nb2} bouteilles ? |hint:currency_unit|"
+
+#~ msgid ""
+#~ "A bundle of {nb1} CDs cost {nb3} {currency_unit}. How much do cost {nb2} "
+#~ "CDs? |hint:currency_unit|"
+#~ msgstr ""
+#~ "Un lot de {nb1} CD coûte {nb3} {currency_unit}. Combien coûtent {nb2} CD? "
+#~ "|hint:currency_unit|"
+
+#~ msgid ""
+#~ "A bundle of {nb1} DVDs cost {nb3} {currency_unit}. How much do cost {nb2} "
+#~ "DVDs? |hint:currency_unit|"
+#~ msgstr ""
+#~ "Un lot de {nb1} DVD coûte {nb3} {currency_unit}. Combien coûtent {nb2} "
+#~ "DVD? |hint:currency_unit|"
+
+#~ msgid ""
+#~ "A recipe for {nb1} people requires to use {nb3} eggs. How many eggs "
+#~ "should be used for {nb2} people?"
+#~ msgstr ""
+#~ "Une recette pour {nb1} personnes nécessite {nb3} œufs. Combien d'œufs "
+#~ "faut-il pour {nb2} personnes?"
+
+#~ msgid ""
+#~ "{nb1} {volume_unit=dm} of dry sand weigh {nb2} {mass_unit=kg}. How much "
+#~ "do weigh {nb3} {volume_unit=dm} of dry sand? |hint:mass_unit|"
+#~ msgstr ""
+#~ "{nb1} {volume_unit=dm} de sable sec pèsent {nb2} {mass_unit=kg}. Combien "
+#~ "pèsent {nb3} {volume_unit=dm} de sable sec ? |hint:mass_unit|"
+
+#~ msgid ""
+#~ "A pack of {nb1} books cost {nb2} {currency_unit}. How much does cost one "
+#~ "book? |hint:currency_unit|"
+#~ msgstr ""
+#~ "Un lot de {nb1} livres coûte {nb2} {currency_unit}. Combien coûtent un "
+#~ "livre ? |hint:currency_unit|"
+
+#~ msgid ""
+#~ "{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much does weigh "
+#~ "one box? |hint:mass_unit|"
+#~ msgstr ""
+#~ "{nb1} cartons pèsent, ensemble, {nb2} {mass_unit=kg}. Combien pèse un "
+#~ "carton? |hint:mass_unit|"
+
+#~ msgid ""
+#~ "A pack of {nb1} CDs cost {nb2} {currency_unit}. How much does cost one "
+#~ "CD? |hint:currency_unit|"
+#~ msgstr ""
+#~ "Un lot de {nb1} CD coûte {nb2} {currency_unit}. Combien coûte un CD? |"
+#~ "hint:currency_unit|"
+
+#~ msgid ""
+#~ "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. "
+#~ "How much flour should be used for one person? |hint:mass_unit|"
+#~ msgstr ""
+#~ "Une recette pour {nb1} personnes nécessite {nb3} {mass_unit=g} de farine. "
+#~ "Quelle quantité de farine faut-il pour une personne? |hint:mass_unit|"
 
 #~ msgid "Area of this square? |hint:area_unit|"
 #~ msgstr "Aire de ce carré ? |hint:area_unit|"
