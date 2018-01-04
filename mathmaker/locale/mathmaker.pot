@@ -2092,14 +2092,9 @@ msgid ""
 "{nb2} DVD discs? |hint:currency_unit|"
 msgstr ""
 
-#: data/wordings/mini_pb_proportionality.yaml:70
+#: data/wordings/mini_pb_proportionality.yaml:89
+#: data/wordings/mini_pb_proportionality.yaml:96
 msgid ""
-"A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost {nb2} "
-"candies? |hint:currency_unit|"
-msgstr ""
-
-#: data/wordings/mini_pb_proportionality.yaml:79
-msgid ""
-"A pack of {nb1} big candies cost {nb3} {currency_unit}. How much do cost "
-"{nb2} candies? |hint:currency_unit|"
+"{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost "
+"{nb2} bottles? |hint:currency_unit|"
 msgstr ""

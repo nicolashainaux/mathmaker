@@ -65,32 +65,42 @@ wording5:
 #   - nb3_may_be_deci: true
 #   - solution_may_be_deci: true
 
-wording9:
-  - wording_context: price
-  - wording: "A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost {nb2} candies? |hint:currency_unit|"
-  - nb1_min: 5
-  - coeff_max: 5
-  - nb3_xcoeff: 0.1
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
-
-wording10:
-  - wording_context: price
-  - wording: "A pack of {nb1} big candies cost {nb3} {currency_unit}. How much do cost {nb2} candies? |hint:currency_unit|"
-  - nb1_min: 3
-  - coeff_min: 6
-  - nb3_xcoeff: 0.1
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
-
-#
-# wording13:
+# wording9:
 #   - wording_context: price
-#   - wording: "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost {nb2} bottles? |hint:currency_unit|"
-#   - nb1_min: 4
-#   - coeff_min: 1.1
-#   - coeff_max: 1.5
-#   - ifintcoeff_nb2nb3swappable: false
+#   - wording: "A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost {nb2} candies? |hint:currency_unit|"
+#   - nb1_min: 5
+#   - coeff_max: 5
+#   - nb3_xcoeff: 0.1
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
+#
+# wording10:
+#   - wording_context: price
+#   - wording: "A pack of {nb1} big candies cost {nb3} {currency_unit}. How much do cost {nb2} candies? |hint:currency_unit|"
+#   - nb1_min: 3
+#   - coeff_min: 6
+#   - nb3_xcoeff: 0.1
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
+
+wording11:
+  - wording_context: price
+  - wording: "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost {nb2} bottles? |hint:currency_unit|"
+  - nb1_min: 3
+  - coeff_min: 0.5
+  - coeff_max: 1.5
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording12:
+  - wording_context: price
+  - wording: "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost {nb2} bottles? |hint:currency_unit|"
+  - nb1_min: 3
+  - nb1_max: 12
+  - coeff_min: 0.5
+  - coeff_max: 4
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
 
 
 
