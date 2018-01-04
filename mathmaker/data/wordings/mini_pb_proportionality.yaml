@@ -102,31 +102,35 @@
 #   - nb3_may_be_deci: true
 #   - solution_may_be_deci: true
 
-wording101:
-  - wording_context: weight
-  - wording: "{nb1} boxes weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} boxes? |hint:mass_unit|"
-  - nb1_min: 3
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
-
-wording102:
-  - wording_context: weight
-  - wording: "{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much do weigh {nb3} boxes? |hint:mass_unit|"
-  - nb1_min: 3
-  - nb2_may_be_deci: true
-  - solution_may_be_deci: true
-
-#
-# wording5:
+# wording101:
 #   - wording_context: weight
-#   - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
-#   - nb1_max: 10
-#   - coeff_max: 5
-#   - nb3_xcoeff: 10
-#   - nb3_may_be_deci: false
-#   - ifintcoeff_nb2nb3swappable: false
-#   - ifdecicoeff_forceswapnb2nb3: true
+#   - wording: "{nb1} boxes weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} boxes? |hint:mass_unit|"
+#   - nb1_min: 3
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
 #
+# wording102:
+#   - wording_context: weight
+#   - wording: "{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much do weigh {nb3} boxes? |hint:mass_unit|"
+#   - nb1_min: 3
+#   - nb2_may_be_deci: true
+#   - solution_may_be_deci: true
+
+wording103:
+  - wording_context: weight
+  - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_max: 9
+  - nb3_xcoeff: 100
+
+wording104:
+  - wording_context: weight
+  - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 10
+  - nb3_xcoeff: 10
+
+
 # wording10:
 #   - wording_context: weight
 #   - wording: "{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} buckets? |hint:mass_unit|"

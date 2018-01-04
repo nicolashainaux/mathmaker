@@ -2085,3 +2085,10 @@ msgid ""
 "{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much do weigh {nb3} "
 "boxes? |hint:mass_unit|"
 msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:121
+#: data/wordings/mini_pb_proportionality.yaml:128
+msgid ""
+"{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do "
+"weigh {nb2} packs? |hint:mass_unit|"
+msgstr ""
