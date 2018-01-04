@@ -334,13 +334,15 @@ class structure(object):
         self.wording_context = drawn_wording[0]
         if kwargs.get('proportionality', False):
             self.solution = self.nb4
-            # nb1_xcoeff = Number(str(drawn_wording[2]))
-            # nb2_xcoeff = Number(str(drawn_wording[3]))
+            nb1_xcoeff = Number(str(drawn_wording[2]))
+            nb2_xcoeff = Number(str(drawn_wording[3]))
             nb3_xcoeff = Number(str(drawn_wording[4]))
-            # if nb1_xcoeff != 1:
-            #     self.nb1 *= nb1_xcoeff
-            # if nb2_xcoeff != 1:
-            #     self.nb2 *= nb2_xcoeff
+            if nb1_xcoeff != 1:
+                self.nb1 *= nb1_xcoeff
+                self.solution /= nb1_xcoeff
+            if nb2_xcoeff != 1:
+                self.nb2 *= nb2_xcoeff
+                self.solution *= nb2_xcoeff
             if nb3_xcoeff != 1:
                 self.nb3 *= nb3_xcoeff
                 self.solution *= nb3_xcoeff
