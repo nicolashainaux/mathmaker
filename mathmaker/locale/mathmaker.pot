@@ -2074,27 +2074,14 @@ msgstr ""
 msgid "Mental calculation: mini proportionality problems"
 msgstr ""
 
-#: data/wordings/mini_pb_proportionality.yaml:18
+#: data/wordings/mini_pb_proportionality.yaml:107
 msgid ""
-"A bundle of {nb1} blank CD discs cost {nb3} {currency_unit}. How much do "
-"cost {nb2} CD discs? |hint:currency_unit|"
+"{nb1} boxes weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} "
+"boxes? |hint:mass_unit|"
 msgstr ""
 
-#: data/wordings/mini_pb_proportionality.yaml:26
+#: data/wordings/mini_pb_proportionality.yaml:114
 msgid ""
-"A bundle of {nb1} CD discs cost {nb3} {currency_unit}. How much do cost "
-"{nb2} CD discs? |hint:currency_unit|"
-msgstr ""
-
-#: data/wordings/mini_pb_proportionality.yaml:35
-msgid ""
-"A bundle of {nb1} DVD discs cost {nb3} {currency_unit}. How much do cost "
-"{nb2} DVD discs? |hint:currency_unit|"
-msgstr ""
-
-#: data/wordings/mini_pb_proportionality.yaml:89
-#: data/wordings/mini_pb_proportionality.yaml:96
-msgid ""
-"{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost "
-"{nb2} bottles? |hint:currency_unit|"
+"{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much do weigh {nb3} "
+"boxes? |hint:mass_unit|"
 msgstr ""

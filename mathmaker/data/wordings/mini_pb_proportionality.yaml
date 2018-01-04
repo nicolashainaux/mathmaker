@@ -13,30 +13,30 @@
 #   - nb3_may_be_deci: true
 #   - solution_may_be_deci: true
 
-wording3:
-  - wording_context: price
-  - wording: "A bundle of {nb1} blank CD discs cost {nb3} {currency_unit}. How much do cost {nb2} CD discs? |hint:currency_unit|"
-  - coeff_max: 9
-  - nb3_xcoeff: 0.1
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
-
-wording4:
-  - wording_context: price
-  - wording: "A bundle of {nb1} CD discs cost {nb3} {currency_unit}. How much do cost {nb2} CD discs? |hint:currency_unit|"
-  - coeff_min: 5
-  - coeff_max: 15
-  - nb1_max: 50
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
-
-wording5:
-  - wording_context: price
-  - wording: "A bundle of {nb1} DVD discs cost {nb3} {currency_unit}. How much do cost {nb2} DVD discs? |hint:currency_unit|"
-  - coeff_min: 15
-  - nb1_max: 50
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
+# wording3:
+#   - wording_context: price
+#   - wording: "A bundle of {nb1} blank CD discs cost {nb3} {currency_unit}. How much do cost {nb2} CD discs? |hint:currency_unit|"
+#   - coeff_max: 9
+#   - nb3_xcoeff: 0.1
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
+#
+# wording4:
+#   - wording_context: price
+#   - wording: "A bundle of {nb1} CD discs cost {nb3} {currency_unit}. How much do cost {nb2} CD discs? |hint:currency_unit|"
+#   - coeff_min: 5
+#   - coeff_max: 15
+#   - nb1_max: 50
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
+#
+# wording5:
+#   - wording_context: price
+#   - wording: "A bundle of {nb1} DVD discs cost {nb3} {currency_unit}. How much do cost {nb2} DVD discs? |hint:currency_unit|"
+#   - coeff_min: 15
+#   - nb1_max: 50
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
 
 # wording6:
 #   - wording_context: price
@@ -83,48 +83,76 @@ wording5:
 #   - nb3_may_be_deci: true
 #   - solution_may_be_deci: true
 
-wording11:
-  - wording_context: price
-  - wording: "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost {nb2} bottles? |hint:currency_unit|"
-  - nb1_min: 3
-  - coeff_min: 0.5
-  - coeff_max: 1.5
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
-
-wording12:
-  - wording_context: price
-  - wording: "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost {nb2} bottles? |hint:currency_unit|"
-  - nb1_min: 3
-  - nb1_max: 12
-  - coeff_min: 0.5
-  - coeff_max: 4
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
-
-
-
-# wording4:
-#   - wording_context: weight
-#   - wording: "{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much do weigh {nb3} boxes? |hint:mass_unit|"
+# wording11:
+#   - wording_context: price
+#   - wording: "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost {nb2} bottles? |hint:currency_unit|"
+#   - nb1_min: 3
+#   - coeff_min: 0.5
+#   - coeff_max: 1.5
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
 #
-#
-# wording4:
-#   - wording_context: recipe
-#   - wording: "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How much flour should be used for {nb2} people? |hint:mass_unit|"
+# wording12:
+#   - wording_context: price
+#   - wording: "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost {nb2} bottles? |hint:currency_unit|"
+#   - nb1_min: 3
 #   - nb1_max: 12
-#   - nb2_max: 36
-#   - coeff_max: 10
-#   - nb3_xcoeff: 10
-#   - nb3_may_be_deci: false
-#   - ifintcoeff_nb2nb3swappable: false
-#   - ifdecicoeff_forceswapnb2nb3: true
+#   - coeff_min: 0.5
+#   - coeff_max: 4
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
+
+wording101:
+  - wording_context: weight
+  - wording: "{nb1} boxes weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} boxes? |hint:mass_unit|"
+  - nb1_min: 3
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording102:
+  - wording_context: weight
+  - wording: "{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much do weigh {nb3} boxes? |hint:mass_unit|"
+  - nb1_min: 3
+  - nb2_may_be_deci: true
+  - solution_may_be_deci: true
+
 #
 # wording5:
 #   - wording_context: weight
 #   - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
 #   - nb1_max: 10
 #   - coeff_max: 5
+#   - nb3_xcoeff: 10
+#   - nb3_may_be_deci: false
+#   - ifintcoeff_nb2nb3swappable: false
+#   - ifdecicoeff_forceswapnb2nb3: true
+#
+# wording10:
+#   - wording_context: weight
+#   - wording: "{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} buckets? |hint:mass_unit|"
+#   - coeff_min: 1.2
+#   - coeff_max: 1.5
+#   - ifintcoeff_nb2nb3swappable: false
+#
+# wording16:
+#   - wording_context: weight
+#   - wording: "{nb1} {volume_unit=dm} of dry sand weigh {nb2} {mass_unit=kg}. How much do weigh {nb3} {volume_unit=dm} of dry sand? |hint:mass_unit|"
+#   - nb1_max: 12
+#   - nb2_max: 100
+#   - coeff_min: 1.5
+#   - coeff_max: 1.5
+#   - ifintcoeff_nb2nb3swappable: false
+#   - nb3_may_be_deci: false
+#   - solution_may_be_deci: false
+
+
+
+# wording4:
+#   - wording_context: recipe
+#   - wording: "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How much flour should be used for {nb2} people? |hint:mass_unit|"
+#   - nb1_max: 12
+#   - nb2_max: 36
+#   - coeff_max: 10
 #   - nb3_xcoeff: 10
 #   - nb3_may_be_deci: false
 #   - ifintcoeff_nb2nb3swappable: false
@@ -140,13 +168,19 @@ wording12:
 #   - nb3_may_be_deci: false
 #   - ifintcoeff_nb2nb3swappable: false
 #   - ifdecicoeff_forceswapnb2nb3: true
+
 #
-# wording10:
-#   - wording_context: weight
-#   - wording: "{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} buckets? |hint:mass_unit|"
-#   - coeff_min: 1.2
-#   - coeff_max: 1.5
+# wording15:
+#   - wording_context: recipe
+#   - wording: "A recipe for {nb1} people requires to use {nb3} eggs. How many eggs should be used for {nb2} people?"
+#   - nb1_max: 12
+#   - nb2_max: 36
+#   - coeff_min: 0.2
+#   - coeff_max: 3
 #   - ifintcoeff_nb2nb3swappable: false
+#   - nb3_may_be_deci: false
+#   - solution_may_be_deci: false
+
 #
 # wording11:
 #   - wording_context: capacity
@@ -164,25 +198,3 @@ wording12:
 #   - nb3_xcoeff: 10
 #   - nb3_may_be_deci: false
 #   - ifintcoeff_nb2nb3swappable: false
-#
-# wording15:
-#   - wording_context: recipe
-#   - wording: "A recipe for {nb1} people requires to use {nb3} eggs. How many eggs should be used for {nb2} people?"
-#   - nb1_max: 12
-#   - nb2_max: 36
-#   - coeff_min: 0.2
-#   - coeff_max: 3
-#   - ifintcoeff_nb2nb3swappable: false
-#   - nb3_may_be_deci: false
-#   - solution_may_be_deci: false
-#
-# wording16:
-#   - wording_context: weight
-#   - wording: "{nb1} {volume_unit=dm} of dry sand weigh {nb2} {mass_unit=kg}. How much do weigh {nb3} {volume_unit=dm} of dry sand? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - nb2_max: 100
-#   - coeff_min: 1.5
-#   - coeff_max: 1.5
-#   - ifintcoeff_nb2nb3swappable: false
-#   - nb3_may_be_deci: false
-#   - solution_may_be_deci: false
