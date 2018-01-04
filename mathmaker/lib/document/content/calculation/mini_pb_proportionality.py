@@ -32,8 +32,12 @@ class sub_object(component.structure):
         self.coeff = Number(str(build_data[0]))
         nb1 = Number(build_data[1])
         nb2 = Number(build_data[2])
-        nb3 = Number(build_data[3])
-        solution = Number(build_data[4])
+        try:
+            nb3 = Number(build_data[3])
+            solution = Number(build_data[4])
+        except IndexError:
+            nb3 = self.coeff * nb1
+            solution = self.coeff * nb2
         super().setup("numbers",
                       nb=[nb1, nb2, nb3, solution],
                       shuffle_nbs=False,
