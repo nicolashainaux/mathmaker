@@ -37,7 +37,7 @@ def init():
     global mini_problems_wordings_source
     global mini_problems_prop_wordings_source
     global markup
-    global deci_int_int_triples_for_prop_source
+    global deci_int_triples_for_prop_source
     global int_pairs_source
     global int_triples_source
     global int_quadruples_source
@@ -126,9 +126,9 @@ def init():
                                   "nb1_coeff", "nb2_coeff", "nb3_coeff",
                                   "ifintcoeff_nb2nb3swappable",
                                   "ifdecicoeff_forceswapnb2nb3"])
-    deci_int_int_triples_for_prop_source = database.source(
-        "deci_int_int_triples_for_prop", ["id", "coeff", "nb1", "nb2",
-                                          "solution_is_deci"])
+    deci_int_triples_for_prop_source = database.source(
+        "deci_int_triples_for_prop", ["id", "coeff", "nb1", "nb2",
+                                      "solution_is_deci"])
 
     int_pairs_source = database.source("int_pairs", ["id", "nb1", "nb2"])
     int_triples_source = database.source("int_triples",

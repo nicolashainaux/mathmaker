@@ -615,7 +615,7 @@ def get_q_modifier(q_type, nb_source):
         d.update({'lock_equal_products': True,
                   'info_lock': EQUAL_PRODUCTS})
     elif (q_type == 'mini_pb_proportionality'
-          and nb_source.startswith('deciintinttriplesforprop')):
+          and nb_source.startswith('deciinttriplesforprop')):
         d.update({'lock_equal_coeffs': True})
     elif q_type == 'subtr_direct' and nb_source.startswith('intpairs_10'):
         d.update({'diff7atleast': True})

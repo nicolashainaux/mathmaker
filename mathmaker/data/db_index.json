@@ -149,12 +149,13 @@
         "locked",
         "drawDate"
     ],
-    "deci_int_int_triples_for_prop": [
+    "deci_int_triples_for_prop": [
         "id",
         "coeff",
         "nb1",
         "nb2",
-        "solution_is_deci",
+        "nb3",
+        "solution",
         "locked",
         "drawDate"
     ],

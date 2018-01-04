@@ -307,7 +307,7 @@ class source(object):
         log.debug(cmd)
         qr = tuple(self.db.execute(cmd))
         if (not len(qr)
-            and self.table_name in ['deci_int_int_triples_for_prop',
+            and self.table_name in ['deci_int_triples_for_prop',
                                     'mini_pb_prop_wordings']):
             self._unlock()
             qr = tuple(self.db.execute(cmd))
@@ -373,7 +373,7 @@ class source(object):
                         + " WHERE nb1 = '" + str(couple[0])
                         + "' and nb2 = '" + str(couple[1]) + "';")
         if ('lock_equal_coeffs' in kwargs
-            and self.table_name == 'deci_int_int_triples_for_prop'):
+            and self.table_name == 'deci_int_triples_for_prop'):
             log.debug('LOCK: coeff {} in {}\n'
                       .format(str(t[0]), self.table_name))
             self.db.execute(
@@ -421,8 +421,8 @@ def db_table(tag):
         return 'units_conversions'
     elif tag == 'decimalfractionssums':
         return 'decimals'
-    elif tag.startswith('deciintinttriplesforprop'):
-        return 'deci_int_int_triples_for_prop'
+    elif tag.startswith('deciinttriplesforprop'):
+        return 'deci_int_triples_for_prop'
     elif tag in ['int_deci_clever_pairs', 'digits_places', 'fracdigits_places',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
                  'int_quintuples', 'int_sextuples']:
@@ -441,8 +441,8 @@ def classify_tag(tag):
         return 'single_int'
     elif tag.startswith('singledeci1_'):
         return 'single_deci1'
-    elif tag.startswith('deciintinttriplesforprop'):
-        return 'deciintinttriplesforprop'
+    elif tag.startswith('deciinttriplesforprop'):
+        return 'deciinttriplesforprop'
     elif tag.endswith(r'%of...'):
         return 'percentage'
     elif tag in ['int_deci_clever_pairs',
@@ -480,7 +480,7 @@ def preprocess_qkw(table_name, qkw=None):
     return d
 
 
-def preprocess_deci_int_int_triplesforprop_tag(tag, qkw=None):
+def preprocess_deci_int_triplesforprop_tag(tag, qkw=None):
     d = {}
     parts = tag.split('_')
     if len(parts) == 2:
@@ -1347,9 +1347,9 @@ class mc_source(object):
                         shared.int_pairs_source._timestamp({'nb1': sp[0],
                                                             'nb2': sp[1]})
             return result + nb_result
-        elif tag_classification == 'deciintinttriplesforprop':
+        elif tag_classification == 'deciinttriplesforprop':
             kwargs.update(
-                preprocess_deci_int_int_triplesforprop_tag(source_id, qkw=qkw))
-            return shared.deci_int_int_triples_for_prop_source.next(**kwargs)
+                preprocess_deci_int_triplesforprop_tag(source_id, qkw=qkw))
+            return shared.deci_int_triples_for_prop_source.next(**kwargs)
         elif tag_classification == 'nothing':
             return ()
