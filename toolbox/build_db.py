@@ -310,16 +310,16 @@ def __main__():
                  float(Number('0.75') * n2), 0, 0)
                 for n1 in integers if n1 % 4 == 0
                 for n2 in integers
-                if n2 != n1 and n2 > n1 / 2 and n2 % 4 == 0]
+                if n2 != n1 and n2 % n1 and n2 > n1 / 2 and n2 % 4 == 0]
     db_rows += [(1.1, n1, n2, float(Number('1.1') * n1),
                  float(Number('1.1') * n2), 0, 0)
                 for n1 in integers if n1 <= 10
-                for n2 in integers if n2 != n1]
+                for n2 in integers if n2 != n1 and n2 % n1]
     db_rows += [(1.125, n1, n2, float(Number('1.125') * n1),
                  float(Number('1.125') * n2), 0, 0)
                 for n1 in integers if n1 % 8 == 0 and n1 > 8
-                for n2 in integers
-                if n2 != n1 and n2 > n1 / 2 and n2 % 8 != 0 and n2 % 4 == 0]
+                for n2 in integers if n2 != n1 and n2 % n1 and n2 > n1 / 2
+                and n2 % 8 != 0 and n2 % 4 == 0]
     db_rows += [(1.2, n1, n2, float(Number('1.2') * n1),
                  float(Number('1.2') * n2), 0, 0)
                 for n1 in integers if n1 % 5 == 0
@@ -328,13 +328,13 @@ def __main__():
     db_rows += [(1.25, n1, n2, float(Number('1.25') * n1),
                  float(Number('1.25') * n2), 0, 0)
                 for n1 in integers if n1 % 4 == 0
-                for n2 in integers
-                if n2 != n1 and n2 > n1 / 2 and n2 % 4 != 0 and n2 % 2 == 0]
+                for n2 in integers if n2 != n1 and n2 > n1 / 2 and n2 % 4 != 0
+                and n2 % 2 == 0 and n2 % n1]
     db_rows += [(1.25, n1, n2, float(Number('1.25') * n1),
                  float(Number('1.25') * n2), 0, 0)
                 for n1 in integers if n1 % 4 == 0
-                for n2 in integers
-                if n2 != n1 and n2 > n1 / 2 and n2 % 4 == 0 and n2 >= 41]
+                for n2 in integers if n2 != n1 and n2 > n1 / 2 and n2 % 4 == 0
+                and n2 >= 41 and n2 % n1]
     db_rows += [(1.333333, n1, n2,
                 float((Number('1.333333') * n1).rounded(Number('0.01'))),
                 float((Number('1.333333') * n2).rounded(Number('0.01'))), 0, 0)
@@ -347,7 +347,7 @@ def __main__():
                 if n1 < 7 or (8 <= n1 <= 24 and n1 % 2 == 0)
                 or (n1 >= 30 and n1 % 10 == 0)
                 for n2 in integers
-                if n2 != n1 and n2 > n1 / 2]
+                if n2 != n1 and n2 % n1 and n2 > n1 / 2]
     db_rows += [(c, 1.5, n2, float(c * Number('1.5')), float(c * n2), 0, 0)
                 for c in [2, 3, 4, 5, 6, 8, 10, 12, 14, 16, 18, 20, 30, 40,
                           50, 60, 80, 100]
@@ -358,7 +358,7 @@ def __main__():
                 for n1 in integers if n1 <= 10 or (n1 > 10 and n1 % 10 == 0)
                 if not ((n1 >= 12 and n1 % 10 != 0) or n1 in [7, 9])
                 for n2 in integers
-                if n2 != n1 and n2 > n1 / 2 and n2 % 2 != 0]
+                if n2 != n1 and n2 % n1 and n2 > n1 / 2 and n2 % 2 != 0]
     db_rows += [(c, 2.5, n2, float(c * Number('2.5')), float(c * n2), 0, 0)
                 for c in [2, 3, 4, 5, 6, 8, 10, 20, 30, 40, 50, 60, 80, 100]
                 for n2 in integers
