@@ -311,10 +311,6 @@ def __main__():
                 for n1 in integers if n1 % 4 == 0
                 for n2 in integers
                 if n2 != n1 and n2 % n1 and n2 > n1 / 2 and n2 % 4 == 0]
-    db_rows += [(1.1, n1, n2, float(Number('1.1') * n1),
-                 float(Number('1.1') * n2), 0, 0)
-                for n1 in integers if n1 <= 10
-                for n2 in integers if n2 != n1 and n2 % n1]
     db_rows += [(1.125, n1, n2, float(Number('1.125') * n1),
                  float(Number('1.125') * n2), 0, 0)
                 for n1 in integers if n1 % 8 == 0 and n1 > 8
