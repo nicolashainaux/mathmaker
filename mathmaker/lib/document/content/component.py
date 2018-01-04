@@ -348,6 +348,12 @@ class structure(object):
                 self.solution = self.solution.rounded(Number('0.01'))
                 if self.solution.fracdigits_nb() > 0:
                     self.solution = self.solution.quantize(Number('0.01'))
+            else:
+                if self.solution.fracdigits_nb() == 0:
+                    self.solution = self.solution.quantize(Number('1'))
+                if self.nb3.fracdigits_nb() == 0:
+                    self.nb3 = self.nb3.quantize(Number('1'))
+
         setup_wording_format_of(self)
 
     def _setup_complement_wording(self, **kwargs):
