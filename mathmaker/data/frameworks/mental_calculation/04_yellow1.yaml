@@ -37,8 +37,8 @@ proportionality_problems: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: mini proportionality problems"
   - exercise: !!omap
-    - questions: mini_pb proportionality -> deciinttriplesforprop_3to16 (20)
-                 # mini_pb proportionality -> mergedinttriples_3to10 (20)
+    - questions: mini_pb proportionality -> deciinttriplesforprop_3to16 (10)
+                 mini_pb proportionality -> mergedinttriples_3to10 (10)
                  # mini_pb proportionality -> mergedinttriples_15_3to6 (10)
                  # mini_pb proportionality -> mergedinttriples_25_3to6 (10)
 
