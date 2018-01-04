@@ -314,7 +314,7 @@ class structure(object):
             wording_kwargs.update({'coeff_to_check': self.coeff})
             wording_kwargs.update({'lock_equal_contexts': True})
             if not is_integer(self.nb3):
-                wording_kwargs.update({'nb3_may_be_deci': True})
+                wording_kwargs.update({'nb3_may_be_deci': 1})
             if self.solution_is_deci:
                 wording_kwargs.update({'solution_may_be_deci': 1})
         else:
