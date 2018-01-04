@@ -30,11 +30,11 @@ class sub_object(component.structure):
     def __init__(self, build_data, **options):
         super().setup("minimal", **options)
         self.coeff = Number(str(build_data[0]))
-        nb1 = Number(build_data[1])
-        nb2 = Number(build_data[2])
+        nb1 = Number(build_data[1]).rounded(Number('0.01'))
+        nb2 = Number(build_data[2]).rounded(Number('0.01'))
         try:
-            nb3 = Number(build_data[3])
-            solution = Number(build_data[4])
+            nb3 = Number(build_data[3]).rounded(Number('0.01'))
+            solution = Number(build_data[4]).rounded(Number('0.01'))
         except IndexError:
             nb3 = self.coeff * nb1
             solution = self.coeff * nb2
