@@ -138,47 +138,45 @@ wording102:
 #   - nb3_may_be_deci: true
 #   - solution_may_be_deci: true
 
-wording201:
-  - wording_context: recipe
-  - wording: "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How much flour should be used for {nb2} people? |hint:mass_unit|"
-  - nb1_max: 12
-  - nb2_max: 36
-  - coeff_max: 10
-  - nb3_xcoeff: 10
-
-wording202:
-  - wording_context: recipe
-  - wording: "A recipe for {nb1} people requires to use {nb3} {capacity_unit=mL} of milk. How much milk should be used for {nb2} people? |hint:capacity_unit|"
-  - nb1_max: 12
-  - nb2_max: 36
-  - coeff_max: 10
-  - nb3_xcoeff: 10
-
-wording203:
-  - wording_context: recipe
-  - wording: "A recipe for {nb1} people requires to use {nb3} eggs. How many eggs should be used for {nb2} people?"
-  - nb1_max: 12
-  - nb2_max: 36
-  - coeff_min: 0.2
-  - coeff_max: 3
-
-#
-# wording11:
-#   - wording_context: capacity
-#   - wording: "{nb1} bottles contain, together, {nb3} {capacity_unit=L}. How much do contain {nb2} bottles? |hint:capacity_unit|"
-#   - nb1_max: 8
-#   - coeff_min: 1.1
-#   - coeff_max: 1.5
-#   - nb3_may_be_deci: false
-#   - ifintcoeff_nb2nb3swappable: false
-#
-# wording12:
-#   - wording_context: capacity
-#   - wording: "{nb1} vials contain, together, {nb3} {capacity_unit=mL} of perfume. How much contain {nb2} vials? |hint:capacity_unit|"
-#   - nb1_max: 8
+# wording201:
+#   - wording_context: recipe
+#   - wording: "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How much flour should be used for {nb2} people? |hint:mass_unit|"
+#   - nb1_max: 12
+#   - nb2_max: 36
+#   - coeff_max: 10
 #   - nb3_xcoeff: 10
-#   - nb3_may_be_deci: false
-#   - ifintcoeff_nb2nb3swappable: false
+#
+# wording202:
+#   - wording_context: recipe
+#   - wording: "A recipe for {nb1} people requires to use {nb3} {capacity_unit=mL} of milk. How much milk should be used for {nb2} people? |hint:capacity_unit|"
+#   - nb1_max: 12
+#   - nb2_max: 36
+#   - coeff_max: 10
+#   - nb3_xcoeff: 10
+#
+# wording203:
+#   - wording_context: recipe
+#   - wording: "A recipe for {nb1} people requires to use {nb3} eggs. How many eggs should be used for {nb2} people?"
+#   - nb1_max: 12
+#   - nb2_max: 36
+#   - coeff_min: 0.2
+#   - coeff_max: 3
+
+
+wording301:
+  - wording_context: capacity
+  - wording: "{nb1} bottles contain, together, {nb3} {capacity_unit=L}. How much do contain {nb2} bottles? |hint:capacity_unit|"
+  - nb1_max: 12
+  - coeff_min: 0.5
+  - coeff_max: 1.5
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording302:
+  - wording_context: capacity
+  - wording: "{nb1} vials contain, together, {nb3} {capacity_unit=mL} of perfume. How much contain {nb2} vials? |hint:capacity_unit|"
+  - nb1_max: 8
+  - nb3_xcoeff: 10
 
 
 #
