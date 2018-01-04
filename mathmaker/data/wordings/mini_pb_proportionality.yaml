@@ -102,19 +102,19 @@
 #   - nb3_may_be_deci: true
 #   - solution_may_be_deci: true
 
-# wording101:
-#   - wording_context: weight
-#   - wording: "{nb1} boxes weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} boxes? |hint:mass_unit|"
-#   - nb1_min: 3
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording102:
-#   - wording_context: weight
-#   - wording: "{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much do weigh {nb3} boxes? |hint:mass_unit|"
-#   - nb1_min: 3
-#   - nb2_may_be_deci: true
-#   - solution_may_be_deci: true
+wording101:
+  - wording_context: weight
+  - wording: "{nb1} boxes weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} boxes? |hint:mass_unit|"
+  - nb1_min: 3
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording102:
+  - wording_context: weight
+  - wording: "{nb1} boxes weigh, together, {nb2} {mass_unit=kg}. How much do weigh {nb3} boxes? |hint:mass_unit|"
+  - nb1_min: 3
+  - nb2_may_be_deci: true
+  - solution_may_be_deci: true
 
 wording103:
   - wording_context: weight
@@ -130,16 +130,17 @@ wording104:
   - coeff_min: 10
   - nb3_xcoeff: 10
 
+wording105:
+  - wording_context: weight
+  - wording: "{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} buckets? |hint:mass_unit|"
+  - coeff_min: 1.2
+  - coeff_max: 1.5
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
 
-# wording10:
-#   - wording_context: weight
-#   - wording: "{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} buckets? |hint:mass_unit|"
-#   - coeff_min: 1.2
-#   - coeff_max: 1.5
-#   - ifintcoeff_nb2nb3swappable: false
 #
 # wording16:
-#   - wording_context: weight
+#   - wording_context: density
 #   - wording: "{nb1} {volume_unit=dm} of dry sand weigh {nb2} {mass_unit=kg}. How much do weigh {nb3} {volume_unit=dm} of dry sand? |hint:mass_unit|"
 #   - nb1_max: 12
 #   - nb2_max: 100
