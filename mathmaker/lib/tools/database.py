@@ -892,6 +892,12 @@ def postprocess_percentage_query(qr, source_id, qkw=None, **kwargs):
         raise NotImplementedError
 
 
+def postprocess_int_triplesforprop_query(qr):
+    shuffled_qr = list(qr)
+    random.shuffle(shuffled_qr)
+    return tuple(shuffled_qr)
+
+
 ##
 #   @brief  Generates a list of values to be used
 #   @todo   Several cases should be factorized or maybe later moved to the db
@@ -1272,6 +1278,9 @@ class mc_source(object):
             # query. So, we manually deleted it here, if necessary.
             if 'codename' in correct_kw:
                 del correct_kw['codename']
+            if 'forprop' in source_id:
+                return postprocess_int_triplesforprop_query(
+                    shared.int_triples_source.next(**correct_kw))
             return shared.int_triples_source.next(**correct_kw)
         if tag_classification == 'int_quadruples':
             correct_kw = preprocess_qkw(db_table('int_quadruples'), qkw=qkw)
