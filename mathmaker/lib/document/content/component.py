@@ -346,7 +346,7 @@ class structure(object):
             if nb3_xcoeff != 1:
                 self.nb3 *= nb3_xcoeff
                 self.solution *= nb3_xcoeff
-            if self.wording_context == 'price':
+            if self.wording_context in ['price', 'groceries']:
                 self.solution = self.solution.rounded(Number('0.01'))
                 if self.solution.fracdigits_nb() > 0:
                     self.solution = self.solution.quantize(Number('0.01'))
