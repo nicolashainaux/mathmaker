@@ -377,7 +377,7 @@ class source(object):
             log.debug('LOCK: coeff {} in {}\n'
                       .format(str(t[0]), self.table_name))
             self.db.execute(
-                "UPDATE {table_name} SET locked = 1 WHERE nb1 = '{coeff}';"
+                "UPDATE {table_name} SET locked = 1 WHERE coeff = '{coeff}';"
                 .format(table_name=self.table_name, coeff=str(t[0])))
         if ('lock_equal_contexts' in kwargs
             and self.table_name == 'mini_pb_prop_wordings'):
