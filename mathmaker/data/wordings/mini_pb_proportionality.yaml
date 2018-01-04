@@ -162,40 +162,176 @@ wording102:
 #   - coeff_min: 0.2
 #   - coeff_max: 3
 
-
-wording301:
-  - wording_context: capacity
-  - wording: "{nb1} bottles contain, together, {nb3} {capacity_unit=L}. How much do contain {nb2} bottles? |hint:capacity_unit|"
-  - nb1_max: 12
-  - coeff_min: 0.5
-  - coeff_max: 1.5
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
-
-wording302:
-  - wording_context: capacity
-  - wording: "{nb1} vials contain, together, {nb3} {capacity_unit=mL} of perfume. How much contain {nb2} vials? |hint:capacity_unit|"
-  - nb1_max: 8
-  - nb3_xcoeff: 10
-
-wording303:
-  - wording_context: capacity
-  - wording: "{nb1} cans contain, together, {nb3} {capacity_unit=L}. How much do contain {nb2} cans? |hint:capacity_unit|"
-  - nb1_max: 12
-  - coeff_min: 3
-  - coeff_max: 10
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
-
-
-#
-# wording16:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=dm} of dry sand weigh {nb2} {mass_unit=kg}. How much do weigh {nb3} {volume_unit=dm} of dry sand? |hint:mass_unit|"
+# wording301:
+#   - wording_context: capacity
+#   - wording: "{nb1} bottles contain, together, {nb3} {capacity_unit=L}. How much do contain {nb2} bottles? |hint:capacity_unit|"
 #   - nb1_max: 12
-#   - nb2_max: 100
-#   - coeff_min: 1.5
+#   - coeff_min: 0.5
 #   - coeff_max: 1.5
-#   - ifintcoeff_nb2nb3swappable: false
-#   - nb3_may_be_deci: false
-#   - solution_may_be_deci: false
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
+#
+# wording302:
+#   - wording_context: capacity
+#   - wording: "{nb1} vials contain, together, {nb3} {capacity_unit=mL} of perfume. How much contain {nb2} vials? |hint:capacity_unit|"
+#   - nb1_max: 8
+#   - nb3_xcoeff: 10
+#
+# wording303:
+#   - wording_context: capacity
+#   - wording: "{nb1} cans contain, together, {nb3} {capacity_unit=L}. How much do contain {nb2} cans? |hint:capacity_unit|"
+#   - nb1_max: 12
+#   - coeff_min: 3
+#   - coeff_max: 10
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
+
+wording401:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=dm} of dry sand weigh about {nb3} {mass_unit=kg}. How much do weigh {nb2} {volume_unit=dm} of dry sand? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 1.5
+  - coeff_max: 1.6
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording402:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=m} of reinforced concrete weigh {nb3} {mass_unit=t}. How much do weigh {nb2} {volume_unit=m} of reinforced concrete? |hint:mass_unit|"
+  - coeff_min: 2.5
+  - coeff_max: 2.5
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording403:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=m} of topsoil weigh {nb3} {mass_unit=t}. How much do weigh {nb2} {volume_unit=m} of topsoil? |hint:mass_unit|"
+  - coeff_min: 1.25
+  - coeff_max: 1.25
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording404:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=dm} of glass weigh {nb3} {mass_unit=kg}. How much do weigh {nb2} {volume_unit=dm} of glass? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 2.5
+  - coeff_max: 2.5
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording405:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=dm} of porcelain weigh {nb3} {mass_unit=kg}. How much do weigh {nb2} {volume_unit=dm} of porcelain? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 2.5
+  - coeff_max: 2.5
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording406:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of zinc weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of zinc? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 7
+  - coeff_max: 7
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording407:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of cast iron weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of cast iron? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 7
+  - coeff_max: 7
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording408:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of iron weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of iron? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 8
+  - coeff_max: 8
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording409:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of steel weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of steel? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 8
+  - coeff_max: 8
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording410:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of copper weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of copper? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 9
+  - coeff_max: 9
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording411:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of nickel weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of nickel? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 9
+  - coeff_max: 9
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording412:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of vanadium (a metal) weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of vanadium? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 6
+  - coeff_max: 6
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording413:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of gallium (a metal) weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of gallium? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 6
+  - coeff_max: 6
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording414:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of lead weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of lead? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 11
+  - coeff_max: 11
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
