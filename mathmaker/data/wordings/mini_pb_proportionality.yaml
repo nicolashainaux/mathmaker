@@ -336,13 +336,76 @@ wording102:
 #   - nb3_may_be_deci: true
 #   - solution_may_be_deci: true
 
-wording415:
-  - wording_context: density
-  - wording: "{nb1} {volume_unit=cm} of diamond weigh about {nb3} {mass_unit=ct} (carats). How much do weigh {nb2} {volume_unit=cm} of diamond? |hint:mass_unit|"
+# wording415:
+#   - wording_context: density
+#   - wording: "{nb1} {volume_unit=cm} of diamond weigh about {nb3} {mass_unit=ct} (carats). How much do weigh {nb2} {volume_unit=cm} of diamond? |hint:mass_unit|"
+#   - nb1_max: 10
+#   - coeff_min: 7
+#   - coeff_max: 7
+#   - nb1_xcoeff: 10
+#   - nb2_xcoeff: 10
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
+
+wording501:
+  - wording_context: groceries
+  - wording: "I bought {nb1} {mass_unit=kg} of tomatoes for {nb3} {currency_unit}. How much would cost {nb2} {mass_unit}? |hint:currency_unit|"
+  - nb1_max: 5
+  - nb2_max: 5
+  - coeff_min: 1.5
+  - coeff_max: 3
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording502:
+  - wording_context: groceries
+  - wording: "I bought {nb1} {mass_unit=kg} of rice for {nb3} {currency_unit}. How much would cost {nb2} {mass_unit}? |hint:currency_unit|"
+  - nb1_max: 5
+  - nb2_max: 5
+  - coeff_min: 1.1
+  - coeff_max: 2.5
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording503:
+  - wording_context: groceries
+  - wording: "I bought {nb1} {mass_unit=kg} of apples for {nb3} {currency_unit}. How much would cost {nb2} {mass_unit}? |hint:currency_unit|"
   - nb1_max: 10
-  - coeff_min: 7
-  - coeff_max: 7
-  - nb1_xcoeff: 10
-  - nb2_xcoeff: 10
+  - nb2_max: 10
+  - coeff_min: 1.5
+  - coeff_max: 3
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording504:
+  - wording_context: groceries
+  - wording: "I bought {nb1} {mass_unit=kg} of oranges for {nb3} {currency_unit}. How much would cost {nb2} {mass_unit}? |hint:currency_unit|"
+  - nb1_max: 4
+  - nb2_max: 4
+  - coeff_min: 1.5
+  - coeff_max: 3
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording505:
+  - wording_context: groceries
+  - wording: "I bought {nb1} {mass_unit=kg} of potatoes for {nb3} {currency_unit}. How much would cost {nb2} {mass_unit}? |hint:currency_unit|"
+  - nb1_max: 10
+  - nb2_max: 10
+  - coeff_min: 1.1
+  - coeff_max: 2.5
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording506:
+  - wording_context: groceries
+  - wording: "I bought {nb1} {mass_unit=g} of cheese for {nb3} {currency_unit}. How much would cost {nb2} {mass_unit}? |hint:currency_unit|"
+  - nb1_max: 9
+  - nb2_max: 12
+  - nb1_xcoeff: 100
+  - nb2_xcoeff: 100
+  - nb3_xcoeff: 0.1
+  - coeff_min: 6
+  - coeff_max: 15
   - nb3_may_be_deci: true
   - solution_may_be_deci: true
