@@ -244,16 +244,17 @@ def __main__():
                        db_rows)
 
     creation_query = '''CREATE TABLE mini_pb_prop_wordings
-                        (id INTEGER PRIMARY KEY, wording_context TEXT,
-                         wording TEXT, nb1_min INTEGER, nb1_max INTEGER,
-                         nb2_min INTEGER, nb2_max INTEGER,
+                        (id INTEGER PRIMARY KEY,
+                         wording_context TEXT, wording TEXT,
                          coeff_min INTEGER, coeff_max INTEGER,
-                         nb1_coeff INTEGER, nb2_coeff INTEGER,
-                         nb3_coeff INTEGER,
-                         ifintcoeff_nb2nb3swappable INTEGER,
-                         ifdecicoeff_forceswapnb2nb3 INTEGER,
-                         nb3_may_be_deci INTEGER,
-                         solution_may_be_deci INTEGER,
+                         nb1_min INTEGER, nb1_max INTEGER,
+                         nb2_min INTEGER, nb2_max INTEGER,
+                         nb3_min INTEGER, nb3_max INTEGER,
+                         solution_min INTEGER, solution_max INTEGER,
+                         nb1_xcoeff INTEGER, nb2_xcoeff INTEGER,
+                         nb3_xcoeff INTEGER,
+                         nb1_may_be_deci INTEGER, nb2_may_be_deci INTEGER,
+                         nb3_may_be_deci INTEGER, solution_may_be_deci INTEGER,
                          locked INTEGER, drawDate INTEGER)'''
     db_creation_queries.append(creation_query)
     db.execute(creation_query)
@@ -261,34 +262,35 @@ def __main__():
     wordings = get_attributes(PROP_WORDINGS_FILE, "wording")
     db_rows = list(zip([w.get('wording_context') for w in wordings],
                        [w.get('wording') for w in wordings],
-                       [w.get('nb1_min', 2) for w in wordings],
-                       [w.get('nb1_max', 100) for w in wordings],
-                       [w.get('nb2_min', 2) for w in wordings],
-                       [w.get('nb2_max', 100) for w in wordings],
-                       [w.get('coeff_min', 0.125) for w in wordings],
-                       [w.get('coeff_max', 100) for w in wordings],
-                       [w.get('nb1_coeff', 1) for w in wordings],
-                       [w.get('nb2_coeff', 1) for w in wordings],
-                       [w.get('nb3_coeff', 1) for w in wordings],
-                       [w.get('ifintcoeff_nb2nb3swappable', True)
-                        for w in wordings],
-                       [w.get('ifdecicoeff_forceswapnb2nb3', False)
-                        for w in wordings],
-                       [w.get('nb3_may_be_deci', True)
-                        for w in wordings],
-                       [w.get('solution_may_be_deci', True)
-                        for w in wordings],
+                       [w.get('coeff_min', 0) for w in wordings],
+                       [w.get('coeff_max', 10000) for w in wordings],
+                       [w.get('nb1_min', 0) for w in wordings],
+                       [w.get('nb1_max', 1000) for w in wordings],
+                       [w.get('nb2_min', 0) for w in wordings],
+                       [w.get('nb2_max', 1000) for w in wordings],
+                       [w.get('nb3_min', 0) for w in wordings],
+                       [w.get('nb3_max', 10000) for w in wordings],
+                       [w.get('solution_min', 0) for w in wordings],
+                       [w.get('solution_max', 10000) for w in wordings],
+                       [w.get('nb1_xcoeff', 1) for w in wordings],
+                       [w.get('nb2_xcoeff', 1) for w in wordings],
+                       [w.get('nb3_xcoeff', 1) for w in wordings],
+                       [w.get('nb1_may_be_deci', 0) for w in wordings],
+                       [w.get('nb2_may_be_deci', 0) for w in wordings],
+                       [w.get('nb3_may_be_deci', 0) for w in wordings],
+                       [w.get('solution_may_be_deci', 0) for w in wordings],
                        [0 for _ in range(len(wordings))],
                        [0 for _ in range(len(wordings))]))
     db.executemany("INSERT "
                    "INTO mini_pb_prop_wordings(wording_context, wording, "
-                   "nb1_min, nb1_max, nb2_min, nb2_max, coeff_min, "
-                   "coeff_max, nb1_coeff, nb2_coeff, nb3_coeff, "
-                   "ifintcoeff_nb2nb3swappable, "
-                   "ifdecicoeff_forceswapnb2nb3, "
+                   "coeff_min, coeff_max, nb1_min, nb1_max, nb2_min, nb2_max, "
+                   "nb3_min, nb3_max, solution_min, solution_max, "
+                   "nb1_xcoeff, nb2_xcoeff, nb3_xcoeff, "
+                   "nb1_may_be_deci, nb2_may_be_deci, "
                    "nb3_may_be_deci, solution_may_be_deci, "
                    "locked, drawDate) "
-                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
+                   "?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert mixed decimals and ints triples for '

@@ -29,15 +29,13 @@ class sub_object(component.structure):
 
     def __init__(self, build_data, **options):
         super().setup("minimal", **options)
-        self.solution_is_deci = build_data[3]
         self.coeff = Number(str(build_data[0]))
         nb1 = Number(build_data[1])
         nb2 = Number(build_data[2])
-        nb3 = (self.coeff * Number(build_data[1])).standardized()
-        if self.coeff == Number('1.333333'):
-            nb3 = nb3.rounded(Number('0.1'))
+        nb3 = Number(build_data[3])
+        solution = Number(build_data[4])
         super().setup("numbers",
-                      nb=[nb1, nb2, nb3],
+                      nb=[nb1, nb2, nb3, solution],
                       shuffle_nbs=False,
                       **options)
         self.transduration = 24

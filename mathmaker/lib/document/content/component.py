@@ -311,11 +311,17 @@ class structure(object):
         wording_kwargs = {'nb1_to_check': self.nb1, 'nb2_to_check': self.nb2}
         if kwargs.get('proportionality', False):
             source = shared.mini_problems_prop_wordings_source
-            wording_kwargs.update({'coeff_to_check': self.coeff})
-            wording_kwargs.update({'lock_equal_contexts': True})
+            wording_kwargs.update({'coeff_to_check': self.coeff,
+                                   'nb3_to_check': self.nb3,
+                                   'solution_to_check': self.nb4,
+                                   'lock_equal_contexts': True})
+            if not is_integer(self.nb1):
+                wording_kwargs.update({'nb1_may_be_deci': 1})
+            if not is_integer(self.nb2):
+                wording_kwargs.update({'nb2_may_be_deci': 1})
             if not is_integer(self.nb3):
                 wording_kwargs.update({'nb3_may_be_deci': 1})
-            if self.solution_is_deci:
+            if not is_integer(self.nb4):
                 wording_kwargs.update({'solution_may_be_deci': 1})
         else:
             source = shared.mini_problems_wordings_source
@@ -327,23 +333,17 @@ class structure(object):
         self.wording = _(drawn_wording[1])
         self.wording_context = drawn_wording[0]
         if kwargs.get('proportionality', False):
-            self.ifintcoeff_nb2nb3swappable = drawn_wording[5]
-            self.ifdecicoeff_forceswapnb2nb3 = drawn_wording[6]
-            if self.ifintcoeff_nb2nb3swappable and is_integer(self.coeff):
-                if next(shared.alternate_nb2nb3_in_mini_pb_prop_source)[0]:
-                    self.nb2, self.nb3 = self.nb3, self.nb2
-            if self.ifdecicoeff_forceswapnb2nb3 and not is_integer(self.coeff):
-                self.nb2, self.nb3 = self.nb3, self.nb2
-            # nb1_coeff = Number(str(drawn_wording[2]))
-            # nb2_coeff = Number(str(drawn_wording[3]))
-            nb3_coeff = Number(str(drawn_wording[4]))
-            # if nb1_coeff != 1:
-            #     self.nb1 *= nb1_coeff
-            # if nb2_coeff != 1:
-            #     self.nb2 *= nb2_coeff
-            if nb3_coeff != 1:
-                self.nb3 *= nb3_coeff
-            self.solution = self.nb2 * self.nb3 / self.nb1
+            self.solution = self.nb4
+            # nb1_xcoeff = Number(str(drawn_wording[2]))
+            # nb2_xcoeff = Number(str(drawn_wording[3]))
+            nb3_xcoeff = Number(str(drawn_wording[4]))
+            # if nb1_xcoeff != 1:
+            #     self.nb1 *= nb1_xcoeff
+            # if nb2_xcoeff != 1:
+            #     self.nb2 *= nb2_xcoeff
+            if nb3_xcoeff != 1:
+                self.nb3 *= nb3_xcoeff
+                self.solution *= nb3_xcoeff
             if (self.wording_context == 'price'
                 and self.nb3.fracdigits_nb(ignore_trailing_zeros=False) == 1):
                 self.solution = self.solution.quantize(Number('0.01'))
