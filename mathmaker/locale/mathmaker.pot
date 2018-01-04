@@ -1792,22 +1792,22 @@ msgstr ""
 msgid "Mental calculation: multiplication by 11"
 msgstr ""
 
-#: lib/document/content/component.py:357
+#: lib/document/content/component.py:358
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr ""
 
-#: lib/document/content/component.py:362
+#: lib/document/content/component.py:363
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:366
+#: lib/document/content/component.py:367
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:370
+#: lib/document/content/component.py:371
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr ""
@@ -2074,15 +2074,20 @@ msgstr ""
 msgid "Mental calculation: mini proportionality problems"
 msgstr ""
 
-#: data/wordings/mini_pb_proportionality.yaml:5
-#: data/wordings/mini_pb_proportionality.yaml:6
+#: data/wordings/mini_pb_proportionality.yaml:18
 msgid ""
-"A bundle of {nb1} books cost {nb2} {currency_unit}. How much do cost {nb3} "
-"books? |hint:currency_unit|"
+"A bundle of {nb1} blank CD discs cost {nb3} {currency_unit}. How much do "
+"cost {nb2} CD discs? |hint:currency_unit|"
 msgstr ""
 
-#: data/wordings/mini_pb_proportionality.yaml:12
+#: data/wordings/mini_pb_proportionality.yaml:25
 msgid ""
-"A bundle of {nb1} books cost {nb3} {currency_unit}. How much do cost {nb2} "
-"books? |hint:currency_unit|"
+"A bundle of {nb1} CD discs cost {nb3} {currency_unit}. How much do cost "
+"{nb2} CD discs? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:33
+msgid ""
+"A bundle of {nb1} DVD discs cost {nb3} {currency_unit}. How much do cost "
+"{nb2} DVD discs? |hint:currency_unit|"
 msgstr ""
