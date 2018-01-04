@@ -125,8 +125,8 @@ def init():
         "mini_pb_prop_wordings", ["id", "wording_context", "wording",
                                   "nb1_xcoeff", "nb2_xcoeff", "nb3_xcoeff"])
     deci_int_triples_for_prop_source = database.source(
-        "deci_int_triples_for_prop", ["id", "coeff", "nb1", "nb2",
-                                      "solution_is_deci"])
+        "deci_int_triples_for_prop", ["id", "coeff", "nb1", "nb2", "nb3",
+                                      "solution"])
 
     int_pairs_source = database.source("int_pairs", ["id", "nb1", "nb2"])
     int_triples_source = database.source("int_triples",
