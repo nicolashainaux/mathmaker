@@ -344,9 +344,10 @@ class structure(object):
             if nb3_xcoeff != 1:
                 self.nb3 *= nb3_xcoeff
                 self.solution *= nb3_xcoeff
-            if (self.wording_context == 'price'
-                and self.nb3.fracdigits_nb(ignore_trailing_zeros=False) == 1):
-                self.solution = self.solution.quantize(Number('0.01'))
+            if self.wording_context == 'price':
+                self.solution = self.solution.rounded(Number('0.01'))
+                if self.solution.fracdigits_nb() > 0:
+                    self.solution = self.solution.quantize(Number('0.01'))
         setup_wording_format_of(self)
 
     def _setup_complement_wording(self, **kwargs):
