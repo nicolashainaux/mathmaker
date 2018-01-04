@@ -396,20 +396,36 @@ def __main__():
 
     sys.stderr.write('Create integers triples...\n')
     # Tables of 1, 2, 3... INTTRIPLES_MAX
-    db_rows = [(i + 1, j + 1, k + 1,  # nb1, nb2, nb3
-                _code(i + 1, j + 1, k + 1),  # code
-                k + 1 < i + j + 2,  # triangle?
-                (i == j and j != k) or (i == k and i != j)
-                or (j == k and i != j),  # isosceles? (but not equilateral)
-                i == j == k,  # equilateral?
-                (k + 1) ** 2 == (i + 1) ** 2 + (j + 1) ** 2,  # pythagorean?
-                (i == j or j == k or k == i),  # at least 2 equal sides?
-                0  # drawDate
-                )
-               for i in range(INTTRIPLES_MAX)
-               for j in range(INTTRIPLES_MAX)
-               for k in range(INTTRIPLES_MAX)
-               if k >= j >= i and k - i <= 30]
+    db_rows = [(15, 2, 3, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 2, 5, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 2, 6, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 3, 4, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 3, 5, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 4, 5, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 4, 6, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 5, 6, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 2, 3, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 2, 5, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 2, 6, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 3, 4, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 3, 5, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 4, 5, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 4, 6, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 5, 6, 'none', 0, 0, 0, 0, 0, 0)]
+    db_rows += [(i + 1, j + 1, k + 1,  # nb1, nb2, nb3
+                 _code(i + 1, j + 1, k + 1),  # code
+                 k + 1 < i + j + 2,  # triangle?
+                 (i == j and j != k) or (i == k and i != j)
+                 or (j == k and i != j),  # isosceles? (but not equilateral)
+                 i == j == k,  # equilateral?
+                 (k + 1) ** 2 == (i + 1) ** 2 + (j + 1) ** 2,  # pythagorean?
+                 (i == j or j == k or k == i),  # at least 2 equal sides?
+                 0  # drawDate
+                 )
+                for i in range(INTTRIPLES_MAX)
+                for j in range(INTTRIPLES_MAX)
+                for k in range(INTTRIPLES_MAX)
+                if k >= j >= i and k - i <= 30]
     sys.stderr.write('Insert integers triples...')
     for i in range(100):
         sys.stderr.write('\rInsert integers triples... {} %'.format(i))
