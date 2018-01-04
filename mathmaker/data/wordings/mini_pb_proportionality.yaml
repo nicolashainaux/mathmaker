@@ -116,75 +116,51 @@ wording102:
   - nb2_may_be_deci: true
   - solution_may_be_deci: true
 
-wording103:
-  - wording_context: weight
-  - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
-  - nb1_max: 12
-  - coeff_max: 9
-  - nb3_xcoeff: 100
+# wording103:
+#   - wording_context: weight
+#   - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
+#   - nb1_max: 12
+#   - coeff_max: 9
+#   - nb3_xcoeff: 100
+#
+# wording104:
+#   - wording_context: weight
+#   - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
+#   - nb1_max: 12
+#   - coeff_min: 10
+#   - nb3_xcoeff: 10
+#
+# wording105:
+#   - wording_context: weight
+#   - wording: "{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} buckets? |hint:mass_unit|"
+#   - coeff_min: 1.2
+#   - coeff_max: 1.5
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
 
-wording104:
-  - wording_context: weight
-  - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
+wording201:
+  - wording_context: recipe
+  - wording: "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How much flour should be used for {nb2} people? |hint:mass_unit|"
   - nb1_max: 12
-  - coeff_min: 10
+  - nb2_max: 36
+  - coeff_max: 10
   - nb3_xcoeff: 10
 
-wording105:
-  - wording_context: weight
-  - wording: "{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} buckets? |hint:mass_unit|"
-  - coeff_min: 1.2
-  - coeff_max: 1.5
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
+wording202:
+  - wording_context: recipe
+  - wording: "A recipe for {nb1} people requires to use {nb3} {capacity_unit=mL} of milk. How much milk should be used for {nb2} people? |hint:capacity_unit|"
+  - nb1_max: 12
+  - nb2_max: 36
+  - coeff_max: 10
+  - nb3_xcoeff: 10
 
-#
-# wording16:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=dm} of dry sand weigh {nb2} {mass_unit=kg}. How much do weigh {nb3} {volume_unit=dm} of dry sand? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - nb2_max: 100
-#   - coeff_min: 1.5
-#   - coeff_max: 1.5
-#   - ifintcoeff_nb2nb3swappable: false
-#   - nb3_may_be_deci: false
-#   - solution_may_be_deci: false
-
-
-
-# wording4:
-#   - wording_context: recipe
-#   - wording: "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How much flour should be used for {nb2} people? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - nb2_max: 36
-#   - coeff_max: 10
-#   - nb3_xcoeff: 10
-#   - nb3_may_be_deci: false
-#   - ifintcoeff_nb2nb3swappable: false
-#   - ifdecicoeff_forceswapnb2nb3: true
-#
-# wording6:
-#   - wording_context: recipe
-#   - wording: "A recipe for {nb1} people requires to use {nb3} {capacity_unit=mL} of milk. How much milk should be used for {nb2} people? |hint:capacity_unit|"
-#   - nb1_max: 12
-#   - nb2_max: 36
-#   - coeff_max: 10
-#   - nb3_xcoeff: 10
-#   - nb3_may_be_deci: false
-#   - ifintcoeff_nb2nb3swappable: false
-#   - ifdecicoeff_forceswapnb2nb3: true
-
-#
-# wording15:
-#   - wording_context: recipe
-#   - wording: "A recipe for {nb1} people requires to use {nb3} eggs. How many eggs should be used for {nb2} people?"
-#   - nb1_max: 12
-#   - nb2_max: 36
-#   - coeff_min: 0.2
-#   - coeff_max: 3
-#   - ifintcoeff_nb2nb3swappable: false
-#   - nb3_may_be_deci: false
-#   - solution_may_be_deci: false
+wording203:
+  - wording_context: recipe
+  - wording: "A recipe for {nb1} people requires to use {nb3} eggs. How many eggs should be used for {nb2} people?"
+  - nb1_max: 12
+  - nb2_max: 36
+  - coeff_min: 0.2
+  - coeff_max: 3
 
 #
 # wording11:
@@ -203,3 +179,16 @@ wording105:
 #   - nb3_xcoeff: 10
 #   - nb3_may_be_deci: false
 #   - ifintcoeff_nb2nb3swappable: false
+
+
+#
+# wording16:
+#   - wording_context: density
+#   - wording: "{nb1} {volume_unit=dm} of dry sand weigh {nb2} {mass_unit=kg}. How much do weigh {nb3} {volume_unit=dm} of dry sand? |hint:mass_unit|"
+#   - nb1_max: 12
+#   - nb2_max: 100
+#   - coeff_min: 1.5
+#   - coeff_max: 1.5
+#   - ifintcoeff_nb2nb3swappable: false
+#   - nb3_may_be_deci: false
+#   - solution_may_be_deci: false
