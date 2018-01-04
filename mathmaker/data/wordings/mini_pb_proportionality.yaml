@@ -178,6 +178,15 @@ wording302:
   - nb1_max: 8
   - nb3_xcoeff: 10
 
+wording303:
+  - wording_context: capacity
+  - wording: "{nb1} cans contain, together, {nb3} {capacity_unit=L}. How much do contain {nb2} cans? |hint:capacity_unit|"
+  - nb1_max: 12
+  - coeff_min: 3
+  - coeff_max: 10
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
 
 #
 # wording16:
