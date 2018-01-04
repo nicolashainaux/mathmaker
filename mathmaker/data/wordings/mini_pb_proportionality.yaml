@@ -1,106 +1,106 @@
 # By default, nb1, nb2, nb3 and solution may not be decimals, only integers.
 # Explicitely allow any of them to be decimal.
 
-# wording1:
-#   - wording_context: price
-#   - wording: "A bundle of {nb1} books cost {nb2} {currency_unit}. How much do cost {nb3} books? |hint:currency_unit|"
-#   - nb2_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording2:
-#   - wording_context: price
-#   - wording: "A bundle of {nb1} books cost {nb3} {currency_unit}. How much do cost {nb2} books? |hint:currency_unit|"
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
+wording1:
+  - wording_context: price
+  - wording: "A bundle of {nb1} books cost {nb2} {currency_unit}. How much do cost {nb3} books? |hint:currency_unit|"
+  - nb2_may_be_deci: true
+  - solution_may_be_deci: true
 
-# wording3:
-#   - wording_context: price
-#   - wording: "A bundle of {nb1} blank CD discs cost {nb3} {currency_unit}. How much do cost {nb2} CD discs? |hint:currency_unit|"
-#   - coeff_max: 9
-#   - nb3_xcoeff: 0.1
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording4:
-#   - wording_context: price
-#   - wording: "A bundle of {nb1} CD discs cost {nb3} {currency_unit}. How much do cost {nb2} CD discs? |hint:currency_unit|"
-#   - coeff_min: 5
-#   - coeff_max: 15
-#   - nb1_max: 50
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording5:
-#   - wording_context: price
-#   - wording: "A bundle of {nb1} DVD discs cost {nb3} {currency_unit}. How much do cost {nb2} DVD discs? |hint:currency_unit|"
-#   - coeff_min: 15
-#   - nb1_max: 50
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
+wording2:
+  - wording_context: price
+  - wording: "A bundle of {nb1} books cost {nb3} {currency_unit}. How much do cost {nb2} books? |hint:currency_unit|"
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
 
-# wording6:
-#   - wording_context: price
-#   - wording: "A pack of {nb1} pens cost {nb3} {currency_unit}. How much do cost {nb2} pens? |hint:currency_unit|"
-#   - nb1_max: 30
-#   - coeff_min: 5
-#   - coeff_max: 30
-#   - nb3_xcoeff: 0.1
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording7:
-#   - wording_context: price
-#   - wording: "A pack of {nb1} beautiful pens cost {nb3} {currency_unit}. How much do cost {nb2} pens? |hint:currency_unit|"
-#   - nb1_max: 10
-#   - coeff_min: 5
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording8:
-#   - wording_context: price
-#   - wording: "Special offer: {nb1} pens for {nb3} {currency_unit}. How much would cost {nb2} pens? |hint:currency_unit|"
-#   - nb1_min: 8
-#   - coeff_max: 5
-#   - nb3_xcoeff: 0.1
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
+wording3:
+  - wording_context: price
+  - wording: "A bundle of {nb1} blank CD discs cost {nb3} {currency_unit}. How much do cost {nb2} CD discs? |hint:currency_unit|"
+  - coeff_max: 9
+  - nb3_xcoeff: 0.1
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
 
-# wording9:
-#   - wording_context: price
-#   - wording: "A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost {nb2} candies? |hint:currency_unit|"
-#   - nb1_min: 5
-#   - coeff_max: 5
-#   - nb3_xcoeff: 0.1
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording10:
-#   - wording_context: price
-#   - wording: "A pack of {nb1} big candies cost {nb3} {currency_unit}. How much do cost {nb2} candies? |hint:currency_unit|"
-#   - nb1_min: 3
-#   - coeff_min: 6
-#   - nb3_xcoeff: 0.1
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
+wording4:
+  - wording_context: price
+  - wording: "A bundle of {nb1} CD discs cost {nb3} {currency_unit}. How much do cost {nb2} CD discs? |hint:currency_unit|"
+  - coeff_min: 5
+  - coeff_max: 15
+  - nb1_max: 50
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
 
-# wording11:
-#   - wording_context: price
-#   - wording: "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost {nb2} bottles? |hint:currency_unit|"
-#   - nb1_min: 3
-#   - coeff_min: 0.5
-#   - coeff_max: 1.5
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording12:
-#   - wording_context: price
-#   - wording: "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost {nb2} bottles? |hint:currency_unit|"
-#   - nb1_min: 3
-#   - nb1_max: 12
-#   - coeff_min: 0.5
-#   - coeff_max: 4
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
+wording5:
+  - wording_context: price
+  - wording: "A bundle of {nb1} DVD discs cost {nb3} {currency_unit}. How much do cost {nb2} DVD discs? |hint:currency_unit|"
+  - coeff_min: 15
+  - nb1_max: 50
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording6:
+  - wording_context: price
+  - wording: "A pack of {nb1} pens cost {nb3} {currency_unit}. How much do cost {nb2} pens? |hint:currency_unit|"
+  - nb1_max: 30
+  - coeff_min: 5
+  - coeff_max: 30
+  - nb3_xcoeff: 0.1
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording7:
+  - wording_context: price
+  - wording: "A pack of {nb1} beautiful pens cost {nb3} {currency_unit}. How much do cost {nb2} pens? |hint:currency_unit|"
+  - nb1_max: 10
+  - coeff_min: 5
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording8:
+  - wording_context: price
+  - wording: "Special offer: {nb1} pens for {nb3} {currency_unit}. How much would cost {nb2} pens? |hint:currency_unit|"
+  - nb1_min: 8
+  - coeff_max: 5
+  - nb3_xcoeff: 0.1
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording9:
+  - wording_context: price
+  - wording: "A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost {nb2} candies? |hint:currency_unit|"
+  - nb1_min: 5
+  - coeff_max: 5
+  - nb3_xcoeff: 0.1
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording10:
+  - wording_context: price
+  - wording: "A pack of {nb1} big candies cost {nb3} {currency_unit}. How much do cost {nb2} candies? |hint:currency_unit|"
+  - nb1_min: 3
+  - coeff_min: 6
+  - nb3_xcoeff: 0.1
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording11:
+  - wording_context: price
+  - wording: "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost {nb2} bottles? |hint:currency_unit|"
+  - nb1_min: 3
+  - coeff_min: 0.5
+  - coeff_max: 1.5
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording12:
+  - wording_context: price
+  - wording: "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost {nb2} bottles? |hint:currency_unit|"
+  - nb1_min: 3
+  - nb1_max: 12
+  - coeff_min: 0.5
+  - coeff_max: 4
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
 
 wording101:
   - wording_context: weight
@@ -116,236 +116,236 @@ wording102:
   - nb2_may_be_deci: true
   - solution_may_be_deci: true
 
-# wording103:
-#   - wording_context: weight
-#   - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_max: 9
-#   - nb3_xcoeff: 100
-#
-# wording104:
-#   - wording_context: weight
-#   - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 10
-#   - nb3_xcoeff: 10
-#
-# wording105:
-#   - wording_context: weight
-#   - wording: "{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} buckets? |hint:mass_unit|"
-#   - coeff_min: 1.2
-#   - coeff_max: 1.5
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
+wording103:
+  - wording_context: weight
+  - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_max: 9
+  - nb3_xcoeff: 100
 
-# wording201:
-#   - wording_context: recipe
-#   - wording: "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How much flour should be used for {nb2} people? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - nb2_max: 36
-#   - coeff_max: 10
-#   - nb3_xcoeff: 10
-#
-# wording202:
-#   - wording_context: recipe
-#   - wording: "A recipe for {nb1} people requires to use {nb3} {capacity_unit=mL} of milk. How much milk should be used for {nb2} people? |hint:capacity_unit|"
-#   - nb1_max: 12
-#   - nb2_max: 36
-#   - coeff_max: 10
-#   - nb3_xcoeff: 10
-#
-# wording203:
-#   - wording_context: recipe
-#   - wording: "A recipe for {nb1} people requires to use {nb3} eggs. How many eggs should be used for {nb2} people?"
-#   - nb1_max: 12
-#   - nb2_max: 36
-#   - coeff_min: 0.2
-#   - coeff_max: 3
+wording104:
+  - wording_context: weight
+  - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 10
+  - nb3_xcoeff: 10
 
-# wording301:
-#   - wording_context: capacity
-#   - wording: "{nb1} bottles contain, together, {nb3} {capacity_unit=L}. How much do contain {nb2} bottles? |hint:capacity_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 0.5
-#   - coeff_max: 1.5
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording302:
-#   - wording_context: capacity
-#   - wording: "{nb1} vials contain, together, {nb3} {capacity_unit=mL} of perfume. How much contain {nb2} vials? |hint:capacity_unit|"
-#   - nb1_max: 8
-#   - nb3_xcoeff: 10
-#
-# wording303:
-#   - wording_context: capacity
-#   - wording: "{nb1} cans contain, together, {nb3} {capacity_unit=L}. How much do contain {nb2} cans? |hint:capacity_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 3
-#   - coeff_max: 10
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
+wording105:
+  - wording_context: weight
+  - wording: "{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do weigh {nb2} buckets? |hint:mass_unit|"
+  - coeff_min: 1.2
+  - coeff_max: 1.5
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
 
-# wording401:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=dm} of dry sand weigh about {nb3} {mass_unit=kg}. How much do weigh {nb2} {volume_unit=dm} of dry sand? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 1.5
-#   - coeff_max: 1.6
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording402:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=m} of reinforced concrete weigh {nb3} {mass_unit=t}. How much do weigh {nb2} {volume_unit=m} of reinforced concrete? |hint:mass_unit|"
-#   - coeff_min: 2.5
-#   - coeff_max: 2.5
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording403:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=m} of topsoil weigh {nb3} {mass_unit=t}. How much do weigh {nb2} {volume_unit=m} of topsoil? |hint:mass_unit|"
-#   - coeff_min: 1.25
-#   - coeff_max: 1.25
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording404:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=dm} of glass weigh {nb3} {mass_unit=kg}. How much do weigh {nb2} {volume_unit=dm} of glass? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 2.5
-#   - coeff_max: 2.5
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording405:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=dm} of porcelain weigh {nb3} {mass_unit=kg}. How much do weigh {nb2} {volume_unit=dm} of porcelain? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 2.5
-#   - coeff_max: 2.5
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording406:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=cm} of zinc weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of zinc? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 7
-#   - coeff_max: 7
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording407:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=cm} of cast iron weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of cast iron? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 7
-#   - coeff_max: 7
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording408:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=cm} of iron weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of iron? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 8
-#   - coeff_max: 8
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording409:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=cm} of steel weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of steel? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 8
-#   - coeff_max: 8
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording410:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=cm} of copper weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of copper? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 9
-#   - coeff_max: 9
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording411:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=cm} of nickel weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of nickel? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 9
-#   - coeff_max: 9
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording412:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=cm} of vanadium (a metal) weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of vanadium? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 6
-#   - coeff_max: 6
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording413:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=cm} of gallium (a metal) weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of gallium? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 6
-#   - coeff_max: 6
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
-#
-# wording414:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=cm} of lead weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of lead? |hint:mass_unit|"
-#   - nb1_max: 12
-#   - coeff_min: 11
-#   - coeff_max: 11
-#   - nb1_may_be_deci: true
-#   - nb2_may_be_deci: true
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
+wording201:
+  - wording_context: recipe
+  - wording: "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How much flour should be used for {nb2} people? |hint:mass_unit|"
+  - nb1_max: 12
+  - nb2_max: 36
+  - coeff_max: 10
+  - nb3_xcoeff: 10
 
-# wording415:
-#   - wording_context: density
-#   - wording: "{nb1} {volume_unit=cm} of diamond weigh about {nb3} {mass_unit=ct} (carats). How much do weigh {nb2} {volume_unit=cm} of diamond? |hint:mass_unit|"
-#   - nb1_max: 10
-#   - coeff_min: 7
-#   - coeff_max: 7
-#   - nb1_xcoeff: 10
-#   - nb2_xcoeff: 10
-#   - nb3_may_be_deci: true
-#   - solution_may_be_deci: true
+wording202:
+  - wording_context: recipe
+  - wording: "A recipe for {nb1} people requires to use {nb3} {capacity_unit=mL} of milk. How much milk should be used for {nb2} people? |hint:capacity_unit|"
+  - nb1_max: 12
+  - nb2_max: 36
+  - coeff_max: 10
+  - nb3_xcoeff: 10
+
+wording203:
+  - wording_context: recipe
+  - wording: "A recipe for {nb1} people requires to use {nb3} eggs. How many eggs should be used for {nb2} people?"
+  - nb1_max: 12
+  - nb2_max: 36
+  - coeff_min: 0.2
+  - coeff_max: 3
+
+wording301:
+  - wording_context: capacity
+  - wording: "{nb1} bottles contain, together, {nb3} {capacity_unit=L}. How much do contain {nb2} bottles? |hint:capacity_unit|"
+  - nb1_max: 12
+  - coeff_min: 0.5
+  - coeff_max: 1.5
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording302:
+  - wording_context: capacity
+  - wording: "{nb1} vials contain, together, {nb3} {capacity_unit=mL} of perfume. How much contain {nb2} vials? |hint:capacity_unit|"
+  - nb1_max: 8
+  - nb3_xcoeff: 10
+
+wording303:
+  - wording_context: capacity
+  - wording: "{nb1} cans contain, together, {nb3} {capacity_unit=L}. How much do contain {nb2} cans? |hint:capacity_unit|"
+  - nb1_max: 12
+  - coeff_min: 3
+  - coeff_max: 10
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording401:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=dm} of dry sand weigh about {nb3} {mass_unit=kg}. How much do weigh {nb2} {volume_unit=dm} of dry sand? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 1.5
+  - coeff_max: 1.6
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording402:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=m} of reinforced concrete weigh {nb3} {mass_unit=t}. How much do weigh {nb2} {volume_unit=m} of reinforced concrete? |hint:mass_unit|"
+  - coeff_min: 2.5
+  - coeff_max: 2.5
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording403:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=m} of topsoil weigh {nb3} {mass_unit=t}. How much do weigh {nb2} {volume_unit=m} of topsoil? |hint:mass_unit|"
+  - coeff_min: 1.25
+  - coeff_max: 1.25
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording404:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=dm} of glass weigh {nb3} {mass_unit=kg}. How much do weigh {nb2} {volume_unit=dm} of glass? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 2.5
+  - coeff_max: 2.5
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording405:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=dm} of porcelain weigh {nb3} {mass_unit=kg}. How much do weigh {nb2} {volume_unit=dm} of porcelain? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 2.5
+  - coeff_max: 2.5
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording406:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of zinc weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of zinc? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 7
+  - coeff_max: 7
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording407:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of cast iron weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of cast iron? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 7
+  - coeff_max: 7
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording408:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of iron weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of iron? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 8
+  - coeff_max: 8
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording409:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of steel weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of steel? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 8
+  - coeff_max: 8
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording410:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of copper weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of copper? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 9
+  - coeff_max: 9
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording411:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of nickel weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of nickel? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 9
+  - coeff_max: 9
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording412:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of vanadium (a metal) weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of vanadium? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 6
+  - coeff_max: 6
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording413:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of gallium (a metal) weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of gallium? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 6
+  - coeff_max: 6
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording414:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of lead weigh about {nb3} {mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of lead? |hint:mass_unit|"
+  - nb1_max: 12
+  - coeff_min: 11
+  - coeff_max: 11
+  - nb1_may_be_deci: true
+  - nb2_may_be_deci: true
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording415:
+  - wording_context: density
+  - wording: "{nb1} {volume_unit=cm} of diamond weigh about {nb3} {mass_unit=ct} (carats). How much do weigh {nb2} {volume_unit=cm} of diamond? |hint:mass_unit|"
+  - nb1_max: 10
+  - coeff_min: 7
+  - coeff_max: 7
+  - nb1_xcoeff: 10
+  - nb2_xcoeff: 10
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
 
 wording501:
   - wording_context: groceries

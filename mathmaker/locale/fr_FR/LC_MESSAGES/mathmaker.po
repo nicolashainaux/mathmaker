@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2018-01-04 15:27+0100\n"
+"PO-Revision-Date: 2018-01-04 19:03+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -2046,22 +2046,22 @@ msgstr "Calcul mental : divisions"
 msgid "Mental calculation: multiplication by 11"
 msgstr "Calcul mental : multiplications par 11"
 
-#: lib/document/content/component.py:358
+#: lib/document/content/component.py:366
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr "Combien faut-il ajouter à {number1} pour obtenir {number2} ?"
 
-#: lib/document/content/component.py:363
+#: lib/document/content/component.py:371
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr "Quel est le complément à 10 de {number} ?"
 
-#: lib/document/content/component.py:367
+#: lib/document/content/component.py:375
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr "Quel est le complément à 100 de {number} ?"
 
-#: lib/document/content/component.py:371
+#: lib/document/content/component.py:379
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr "Quel est le complément à {number1} de {number2} ?"
@@ -2358,132 +2358,319 @@ msgstr ""
 "{nb1} paquets de céréales pèsent, ensemble, {nb3} {mass_unit=g}. Combien "
 "pèsent {nb2} paquets? |hint:mass_unit|"
 
-#~ msgid ""
-#~ "A bundle of {nb1} blank CD discs cost {nb3} {currency_unit}. How much do "
-#~ "cost {nb2} CD discs? |hint:currency_unit|"
-#~ msgstr ""
-#~ "Un lot de {nb1} CD vierges coûte {nb3} {currency_unit}. Combien coûtent "
-#~ "{nb2} CD? |hint:currency_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:6
+msgid ""
+"A bundle of {nb1} books cost {nb2} {currency_unit}. How much do cost {nb3} "
+"books? |hint:currency_unit|"
+msgstr ""
+"Un lot de {nb1} livres coûte {nb2} {currency_unit}. Combien coûtent {nb3} "
+"livres ? |hint:currency_unit|"
 
-#~ msgid ""
-#~ "A bundle of {nb1} CD discs cost {nb3} {currency_unit}. How much do cost "
-#~ "{nb2} CD discs? |hint:currency_unit|"
-#~ msgstr ""
-#~ "Un lot de {nb1} CD coûte {nb3} {currency_unit}. Combien coûtent {nb2} CD? "
-#~ "|hint:currency_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:12
+msgid ""
+"A bundle of {nb1} books cost {nb3} {currency_unit}. How much do cost {nb2} "
+"books? |hint:currency_unit|"
+msgstr ""
+"Un lot de {nb1} livres coûte {nb3} {currency_unit}. Combien coûtent {nb2} "
+"livres ? |hint:currency_unit|"
 
-#~ msgid ""
-#~ "A bundle of {nb1} DVD discs cost {nb3} {currency_unit}. How much do cost "
-#~ "{nb2} DVD discs? |hint:currency_unit|"
-#~ msgstr ""
-#~ "Un lot de {nb1} DVD coûte {nb3} {currency_unit}. Combien coûtent {nb2} "
-#~ "DVD? |hint:currency_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:18
+msgid ""
+"A bundle of {nb1} blank CD discs cost {nb3} {currency_unit}. How much do "
+"cost {nb2} CD discs? |hint:currency_unit|"
+msgstr ""
+"Un lot de {nb1} CD vierges coûte {nb3} {currency_unit}. Combien coûtent "
+"{nb2} CD? |hint:currency_unit|"
 
-#~ msgid ""
-#~ "{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost "
-#~ "{nb2} bottles? |hint:currency_unit|"
-#~ msgstr ""
-#~ "{nb1} bouteilles de jus de fruit coûtent {nb3} {currency_unit}. Combien "
-#~ "coûtent {nb2} bouteilles ? |hint:currency_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:26
+msgid ""
+"A bundle of {nb1} CD discs cost {nb3} {currency_unit}. How much do cost "
+"{nb2} CD discs? |hint:currency_unit|"
+msgstr ""
+"Un lot de {nb1} CD coûte {nb3} {currency_unit}. Combien coûtent {nb2} CD? |"
+"hint:currency_unit|"
 
-#~ msgid ""
-#~ "A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost "
-#~ "{nb2} candies? |hint:currency_unit|"
-#~ msgstr ""
-#~ "Un paquet de {nb1} bonbons coûte {nb3} {currency_unit}. Combien coûtent "
-#~ "{nb2} bonbons? |hint:currency_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:35
+msgid ""
+"A bundle of {nb1} DVD discs cost {nb3} {currency_unit}. How much do cost "
+"{nb2} DVD discs? |hint:currency_unit|"
+msgstr ""
+"Un lot de {nb1} DVD coûte {nb3} {currency_unit}. Combien coûtent {nb2} DVD? |"
+"hint:currency_unit|"
 
-#~ msgid ""
-#~ "A pack of {nb1} big candies cost {nb3} {currency_unit}. How much do cost "
-#~ "{nb2} candies? |hint:currency_unit|"
-#~ msgstr ""
-#~ "Un paquet de {nb1} gros bonbons coûte {nb3} {currency_unit}. Combien "
-#~ "coûtent {nb2} bonbons? |hint:currency_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:43
+msgid ""
+"A pack of {nb1} pens cost {nb3} {currency_unit}. How much do cost {nb2} "
+"pens? |hint:currency_unit|"
+msgstr ""
+"Un paquet de {nb1} stylos coûte {nb3} {currency_unit}. Combien coûtent {nb2} "
+"stylos? |hint:currency_unit|"
 
-#~ msgid ""
-#~ "A pack of {nb1} pens cost {nb3} {currency_unit}. How much do cost {nb2} "
-#~ "pens? |hint:currency_unit|"
-#~ msgstr ""
-#~ "Un paquet de {nb1} stylos coûte {nb3} {currency_unit}. Combien coûtent "
-#~ "{nb2} stylos? |hint:currency_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:53
+msgid ""
+"A pack of {nb1} beautiful pens cost {nb3} {currency_unit}. How much do cost "
+"{nb2} pens? |hint:currency_unit|"
+msgstr ""
+"Un paquet de {nb1} beaux stylos coûte {nb3} {currency_unit}. Combien coûtent "
+"{nb2} stylos? |hint:currency_unit|"
 
-#~ msgid ""
-#~ "Special offer: {nb1} pens for {nb3} {currency_unit}. How much would cost "
-#~ "{nb2} pens? |hint:currency_unit|"
-#~ msgstr ""
-#~ "Offre spéciale : {nb1} stylos pour {nb3} {currency_unit}. À combien "
-#~ "reviennent {nb2} stylos? |hint:currency_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:61
+msgid ""
+"Special offer: {nb1} pens for {nb3} {currency_unit}. How much would cost "
+"{nb2} pens? |hint:currency_unit|"
+msgstr ""
+"Offre spéciale : {nb1} stylos pour {nb3} {currency_unit}. À combien "
+"reviennent {nb2} stylos? |hint:currency_unit|"
 
-#~ msgid ""
-#~ "A pack of {nb1} beautiful pens cost {nb3} {currency_unit}. How much do "
-#~ "cost {nb2} pens? |hint:currency_unit|"
-#~ msgstr ""
-#~ "Un paquet de {nb1} beaux stylos coûte {nb3} {currency_unit}. Combien "
-#~ "coûtent {nb2} stylos? |hint:currency_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:70
+msgid ""
+"A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost {nb2} "
+"candies? |hint:currency_unit|"
+msgstr ""
+"Un paquet de {nb1} bonbons coûte {nb3} {currency_unit}. Combien coûtent "
+"{nb2} bonbons? |hint:currency_unit|"
 
-#~ msgid ""
-#~ "A bundle of {nb1} books cost {nb2} {currency_unit}. How much do cost "
-#~ "{nb3} books? |hint:currency_unit|"
-#~ msgstr ""
-#~ "Un lot de {nb1} livres coûte {nb2} {currency_unit}. Combien coûtent {nb3} "
-#~ "livres ? |hint:currency_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:79
+msgid ""
+"A pack of {nb1} big candies cost {nb3} {currency_unit}. How much do cost "
+"{nb2} candies? |hint:currency_unit|"
+msgstr ""
+"Un paquet de {nb1} gros bonbons coûte {nb3} {currency_unit}. Combien coûtent "
+"{nb2} bonbons? |hint:currency_unit|"
 
-#~ msgid ""
-#~ "A bundle of {nb1} books cost {nb3} {currency_unit}. How much do cost "
-#~ "{nb2} books? |hint:currency_unit|"
-#~ msgstr ""
-#~ "Un lot de {nb1} livres coûte {nb3} {currency_unit}. Combien coûtent {nb2} "
-#~ "livres ? |hint:currency_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:88
+#: data/wordings/mini_pb_proportionality.yaml:97
+msgid ""
+"{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost "
+"{nb2} bottles? |hint:currency_unit|"
+msgstr ""
+"{nb1} bouteilles de jus de fruit coûtent {nb3} {currency_unit}. Combien "
+"coûtent {nb2} bouteilles ? |hint:currency_unit|"
 
-#~ msgid ""
-#~ "A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. "
-#~ "How much flour should be used for {nb2} people? |hint:mass_unit|"
-#~ msgstr ""
-#~ "Une recette pour {nb1} personnes nécessite {nb3} {mass_unit=g} de farine. "
-#~ "Quelle quantité de farine faut-il pour {nb2} personnes? |hint:mass_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:135
+msgid ""
+"{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do "
+"weigh {nb2} buckets? |hint:mass_unit|"
+msgstr ""
+"{nb1} seaux de terre pèsent, ensemble, {nb3} {mass_unit=kg}. Combien pèsent "
+"{nb2} seaux? |hint:mass_unit|"
 
-#~ msgid ""
-#~ "A recipe for {nb1} people requires to use {nb3} {capacity_unit=mL} of "
-#~ "milk. How much milk should be used for {nb2} people? |hint:capacity_unit|"
-#~ msgstr ""
-#~ "Une recette pour {nb1} personnes nécessite {nb3} {capacity_unit=mL} de "
-#~ "lait. Quelle quantité de lait faut-il pour {nb2} personnes? |hint:"
-#~ "capacity_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:143
+msgid ""
+"A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How "
+"much flour should be used for {nb2} people? |hint:mass_unit|"
+msgstr ""
+"Une recette pour {nb1} personnes nécessite {nb3} {mass_unit=g} de farine. "
+"Quelle quantité de farine faut-il pour {nb2} personnes? |hint:mass_unit|"
 
-#~ msgid ""
-#~ "{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do "
-#~ "weigh {nb2} buckets? |hint:mass_unit|"
-#~ msgstr ""
-#~ "{nb1} seaux de terre pèsent, ensemble, {nb3} {mass_unit=kg}. Combien "
-#~ "pèsent {nb2} seaux? |hint:mass_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:151
+msgid ""
+"A recipe for {nb1} people requires to use {nb3} {capacity_unit=mL} of milk. "
+"How much milk should be used for {nb2} people? |hint:capacity_unit|"
+msgstr ""
+"Une recette pour {nb1} personnes nécessite {nb3} {capacity_unit=mL} de lait. "
+"Quelle quantité de lait faut-il pour {nb2} personnes? |hint:capacity_unit|"
 
-#~ msgid ""
-#~ "{nb1} bottles contain, together, {nb3} {capacity_unit=L}. How much do "
-#~ "contain {nb2} bottles? |hint:capacity_unit|"
-#~ msgstr ""
-#~ "{nb1} bouteilles contiennent, ensemble, {nb2} {capacity_unit=L}. Combien "
-#~ "vont contenir {nb3} bouteilles ? |hint:capacity_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:159
+msgid ""
+"A recipe for {nb1} people requires to use {nb3} eggs. How many eggs should "
+"be used for {nb2} people?"
+msgstr ""
+"Une recette pour {nb1} personnes nécessite {nb3} œufs. Combien d'œufs faut-"
+"il pour {nb2} personnes?"
 
-#~ msgid ""
-#~ "{nb1} vials contain, together, {nb3} {capacity_unit=mL} of perfume. How "
-#~ "much contain {nb2} vials? |hint:capacity_unit|"
-#~ msgstr ""
-#~ "{nb1} flacons contiennent, ensemble, {nb3} {capacity_unit=mL} de parfum. "
-#~ "Combien contiennent {nb2} flacons ? |hint:capacity_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:167
+msgid ""
+"{nb1} bottles contain, together, {nb3} {capacity_unit=L}. How much do "
+"contain {nb2} bottles? |hint:capacity_unit|"
+msgstr ""
+"{nb1} bouteilles contiennent, ensemble, {nb2} {capacity_unit=L}. Combien "
+"vont contenir {nb3} bouteilles ? |hint:capacity_unit|"
 
-#~ msgid ""
-#~ "A recipe for {nb1} people requires to use {nb3} eggs. How many eggs "
-#~ "should be used for {nb2} people?"
-#~ msgstr ""
-#~ "Une recette pour {nb1} personnes nécessite {nb3} œufs. Combien d'œufs "
-#~ "faut-il pour {nb2} personnes?"
+#: data/wordings/mini_pb_proportionality.yaml:176
+msgid ""
+"{nb1} vials contain, together, {nb3} {capacity_unit=mL} of perfume. How much "
+"contain {nb2} vials? |hint:capacity_unit|"
+msgstr ""
+"{nb1} flacons contiennent, ensemble, {nb3} {capacity_unit=mL} de parfum. "
+"Combien contiennent {nb2} flacons ? |hint:capacity_unit|"
 
-#~ msgid ""
-#~ "{nb1} {volume_unit=dm} of dry sand weigh {nb2} {mass_unit=kg}. How much "
-#~ "do weigh {nb3} {volume_unit=dm} of dry sand? |hint:mass_unit|"
-#~ msgstr ""
-#~ "{nb1} {volume_unit=dm} de sable sec pèsent {nb2} {mass_unit=kg}. Combien "
-#~ "pèsent {nb3} {volume_unit=dm} de sable sec ? |hint:mass_unit|"
+#: data/wordings/mini_pb_proportionality.yaml:182
+msgid ""
+"{nb1} cans contain, together, {nb3} {capacity_unit=L}. How much do contain "
+"{nb2} cans? |hint:capacity_unit|"
+msgstr ""
+"{nb1} bidons contiennent, ensemble, {nb3} {capacity_unit=L}. Combien vont "
+"contenir {nb2} bidons ? |hint:capacity_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:191
+msgid ""
+"{nb1} {volume_unit=dm} of dry sand weigh about {nb3} {mass_unit=kg}. How "
+"much do weigh {nb2} {volume_unit=dm} of dry sand? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=dm} de sable sec pèsent {nb3} {mass_unit=kg}. Combien "
+"pèsent {nb2} {volume_unit=dm} de sable sec ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:200
+msgid ""
+"{nb1} {volume_unit=m} of reinforced concrete weigh {nb3} {mass_unit=t}. How "
+"much do weigh {nb2} {volume_unit=m} of reinforced concrete? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=m} de béton armé pèsent {nb3} {mass_unit=t}. Combien "
+"pèsent {nb2} {volume_unit=m} de béton armé ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:210
+msgid ""
+"{nb1} {volume_unit=m} of topsoil weigh {nb3} {mass_unit=t}. How much do "
+"weigh {nb2} {volume_unit=m} of topsoil? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=m} de terre végétale pèsent {nb3} {mass_unit=t}. Combien "
+"pèsent {nb2} {volume_unit=m} de terre végétale ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:220
+msgid ""
+"{nb1} {volume_unit=dm} of glass weigh {nb3} {mass_unit=kg}. How much do "
+"weigh {nb2} {volume_unit=dm} of glass? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=dm} de verre pèsent {nb3} {mass_unit=kg}. Combien pèsent "
+"{nb2} {volume_unit=dm} de verre ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:231
+msgid ""
+"{nb1} {volume_unit=dm} of porcelain weigh {nb3} {mass_unit=kg}. How much do "
+"weigh {nb2} {volume_unit=dm} of porcelain? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=dm} de porcelaine pèsent {nb3} {mass_unit=kg}. Combien "
+"pèsent {nb2} {volume_unit=dm} de porcelaine ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:242
+msgid ""
+"{nb1} {volume_unit=cm} of zinc weigh about {nb3} {mass_unit=g}. How much do "
+"weigh {nb2} {volume_unit=cm} of zinc? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=cm} de zinc pèsent {nb3} {mass_unit=g}. Combien pèsent "
+"{nb2} {volume_unit=cm} de zinc ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:253
+msgid ""
+"{nb1} {volume_unit=cm} of cast iron weigh about {nb3} {mass_unit=g}. How "
+"much do weigh {nb2} {volume_unit=cm} of cast iron? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=cm} de fonte pèsent {nb3} {mass_unit=g}. Combien pèsent "
+"{nb2} {volume_unit=cm} de fonte ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:264
+msgid ""
+"{nb1} {volume_unit=cm} of iron weigh about {nb3} {mass_unit=g}. How much do "
+"weigh {nb2} {volume_unit=cm} of iron? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=cm} de fer pèsent {nb3} {mass_unit=g}. Combien pèsent "
+"{nb2} {volume_unit=cm} de fer ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:275
+msgid ""
+"{nb1} {volume_unit=cm} of steel weigh about {nb3} {mass_unit=g}. How much do "
+"weigh {nb2} {volume_unit=cm} of steel? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=cm} d'acier pèsent {nb3} {mass_unit=g}. Combien pèsent "
+"{nb2} {volume_unit=cm} d'acier ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:286
+msgid ""
+"{nb1} {volume_unit=cm} of copper weigh about {nb3} {mass_unit=g}. How much "
+"do weigh {nb2} {volume_unit=cm} of copper? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=cm} de cuivre pèsent {nb3} {mass_unit=g}. Combien pèsent "
+"{nb2} {volume_unit=cm} de cuivre ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:297
+msgid ""
+"{nb1} {volume_unit=cm} of nickel weigh about {nb3} {mass_unit=g}. How much "
+"do weigh {nb2} {volume_unit=cm} of nickel? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=cm} de nickel pèsent {nb3} {mass_unit=g}. Combien pèsent "
+"{nb2} {volume_unit=cm} de nickel ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:308
+msgid ""
+"{nb1} {volume_unit=cm} of vanadium (a metal) weigh about {nb3} "
+"{mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of vanadium? |hint:"
+"mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=cm} de vanadium (un métal) pèsent {nb3} {mass_unit=g}. "
+"Combien pèsent {nb2} {volume_unit=cm} de vanadium ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:319
+msgid ""
+"{nb1} {volume_unit=cm} of gallium (a metal) weigh about {nb3} {mass_unit=g}. "
+"How much do weigh {nb2} {volume_unit=cm} of gallium? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=cm} de gallium (un métal) pèsent {nb3} {mass_unit=g}. "
+"Combien pèsent {nb2} {volume_unit=cm} de gallium ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:330
+msgid ""
+"{nb1} {volume_unit=cm} of lead weigh about {nb3} {mass_unit=g}. How much do "
+"weigh {nb2} {volume_unit=cm} of lead? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=cm} de plomb pèsent {nb3} {mass_unit=g}. Combien pèsent "
+"{nb2} {volume_unit=cm} de plomb ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:341
+msgid ""
+"{nb1} {volume_unit=cm} of diamond weigh about {nb3} {mass_unit=ct} (carats). "
+"How much do weigh {nb2} {volume_unit=cm} of diamond? |hint:mass_unit|"
+msgstr ""
+"{nb1} {volume_unit=cm} de diamant pèsent {nb3} {mass_unit=ct} (carats). "
+"Combien pèsent {nb2} {volume_unit=cm} de diamant ? |hint:mass_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:352
+msgid ""
+"I bought {nb1} {mass_unit=kg} of tomatoes for {nb3} {currency_unit}. How "
+"much would cost {nb2} {mass_unit}? |hint:currency_unit|"
+msgstr ""
+"J'ai acheté {nb1} {mass_unit=kg} de tomates pour {nb3} {currency_unit}. "
+"Combien coûteraient {nb2} {mass_unit} ? |hint:currency_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:362
+msgid ""
+"I bought {nb1} {mass_unit=kg} of rice for {nb3} {currency_unit}. How much "
+"would cost {nb2} {mass_unit}? |hint:currency_unit|"
+msgstr ""
+"J'ai acheté {nb1} {mass_unit=kg} de riz pour {nb3} {currency_unit}. Combien "
+"coûteraient {nb2} {mass_unit} ? |hint:currency_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:372
+msgid ""
+"I bought {nb1} {mass_unit=kg} of apples for {nb3} {currency_unit}. How much "
+"would cost {nb2} {mass_unit}? |hint:currency_unit|"
+msgstr ""
+"J'ai acheté {nb1} {mass_unit=kg} de pommes pour {nb3} {currency_unit}. "
+"Combien coûteraient {nb2} {mass_unit} ? |hint:currency_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:382
+msgid ""
+"I bought {nb1} {mass_unit=kg} of oranges for {nb3} {currency_unit}. How much "
+"would cost {nb2} {mass_unit}? |hint:currency_unit|"
+msgstr ""
+"J'ai acheté {nb1} {mass_unit=kg} d'oranges pour {nb3} {currency_unit}. "
+"Combien coûteraient {nb2} {mass_unit} ? |hint:currency_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:392
+msgid ""
+"I bought {nb1} {mass_unit=kg} of potatoes for {nb3} {currency_unit}. How "
+"much would cost {nb2} {mass_unit}? |hint:currency_unit|"
+msgstr ""
+"J'ai acheté {nb1} {mass_unit=kg} de pommes de terre pour {nb3} "
+"{currency_unit}. Combien coûteraient {nb2} {mass_unit} ? |hint:currency_unit|"
+
+#: data/wordings/mini_pb_proportionality.yaml:402
+msgid ""
+"I bought {nb1} {mass_unit=g} of cheese for {nb3} {currency_unit}. How much "
+"would cost {nb2} {mass_unit}? |hint:currency_unit|"
+msgstr ""
+"J'ai acheté {nb1} {mass_unit=g} de fromage pour {nb3} {currency_unit}. "
+"Combien coûteraient {nb2} {mass_unit} ? |hint:currency_unit|"
 
 #~ msgid ""
 #~ "A pack of {nb1} books cost {nb2} {currency_unit}. How much does cost one "

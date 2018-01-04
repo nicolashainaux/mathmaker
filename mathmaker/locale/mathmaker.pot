@@ -1792,22 +1792,22 @@ msgstr ""
 msgid "Mental calculation: multiplication by 11"
 msgstr ""
 
-#: lib/document/content/component.py:358
+#: lib/document/content/component.py:366
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr ""
 
-#: lib/document/content/component.py:363
+#: lib/document/content/component.py:371
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:367
+#: lib/document/content/component.py:375
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:371
+#: lib/document/content/component.py:379
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr ""
@@ -2091,4 +2091,240 @@ msgstr ""
 msgid ""
 "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do "
 "weigh {nb2} packs? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:6
+msgid ""
+"A bundle of {nb1} books cost {nb2} {currency_unit}. How much do cost {nb3} "
+"books? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:12
+msgid ""
+"A bundle of {nb1} books cost {nb3} {currency_unit}. How much do cost {nb2} "
+"books? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:18
+msgid ""
+"A bundle of {nb1} blank CD discs cost {nb3} {currency_unit}. How much do "
+"cost {nb2} CD discs? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:26
+msgid ""
+"A bundle of {nb1} CD discs cost {nb3} {currency_unit}. How much do cost "
+"{nb2} CD discs? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:35
+msgid ""
+"A bundle of {nb1} DVD discs cost {nb3} {currency_unit}. How much do cost "
+"{nb2} DVD discs? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:43
+msgid ""
+"A pack of {nb1} pens cost {nb3} {currency_unit}. How much do cost {nb2} "
+"pens? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:53
+msgid ""
+"A pack of {nb1} beautiful pens cost {nb3} {currency_unit}. How much do cost "
+"{nb2} pens? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:61
+msgid ""
+"Special offer: {nb1} pens for {nb3} {currency_unit}. How much would cost "
+"{nb2} pens? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:70
+msgid ""
+"A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost {nb2} "
+"candies? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:79
+msgid ""
+"A pack of {nb1} big candies cost {nb3} {currency_unit}. How much do cost "
+"{nb2} candies? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:88
+#: data/wordings/mini_pb_proportionality.yaml:97
+msgid ""
+"{nb1} bottles of fruit juice cost {nb3} {currency_unit}. How much do cost "
+"{nb2} bottles? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:135
+msgid ""
+"{nb1} buckets of soil weigh, together, {nb3} {mass_unit=kg}. How much do "
+"weigh {nb2} buckets? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:143
+msgid ""
+"A recipe for {nb1} people requires to use {nb3} {mass_unit=g} of flour. How "
+"much flour should be used for {nb2} people? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:151
+msgid ""
+"A recipe for {nb1} people requires to use {nb3} {capacity_unit=mL} of milk. "
+"How much milk should be used for {nb2} people? |hint:capacity_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:159
+msgid ""
+"A recipe for {nb1} people requires to use {nb3} eggs. How many eggs should "
+"be used for {nb2} people?"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:167
+msgid ""
+"{nb1} bottles contain, together, {nb3} {capacity_unit=L}. How much do "
+"contain {nb2} bottles? |hint:capacity_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:176
+msgid ""
+"{nb1} vials contain, together, {nb3} {capacity_unit=mL} of perfume. How much"
+" contain {nb2} vials? |hint:capacity_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:182
+msgid ""
+"{nb1} cans contain, together, {nb3} {capacity_unit=L}. How much do contain "
+"{nb2} cans? |hint:capacity_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:191
+msgid ""
+"{nb1} {volume_unit=dm} of dry sand weigh about {nb3} {mass_unit=kg}. How "
+"much do weigh {nb2} {volume_unit=dm} of dry sand? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:200
+msgid ""
+"{nb1} {volume_unit=m} of reinforced concrete weigh {nb3} {mass_unit=t}. How "
+"much do weigh {nb2} {volume_unit=m} of reinforced concrete? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:210
+msgid ""
+"{nb1} {volume_unit=m} of topsoil weigh {nb3} {mass_unit=t}. How much do "
+"weigh {nb2} {volume_unit=m} of topsoil? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:220
+msgid ""
+"{nb1} {volume_unit=dm} of glass weigh {nb3} {mass_unit=kg}. How much do "
+"weigh {nb2} {volume_unit=dm} of glass? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:231
+msgid ""
+"{nb1} {volume_unit=dm} of porcelain weigh {nb3} {mass_unit=kg}. How much do "
+"weigh {nb2} {volume_unit=dm} of porcelain? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:242
+msgid ""
+"{nb1} {volume_unit=cm} of zinc weigh about {nb3} {mass_unit=g}. How much do "
+"weigh {nb2} {volume_unit=cm} of zinc? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:253
+msgid ""
+"{nb1} {volume_unit=cm} of cast iron weigh about {nb3} {mass_unit=g}. How "
+"much do weigh {nb2} {volume_unit=cm} of cast iron? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:264
+msgid ""
+"{nb1} {volume_unit=cm} of iron weigh about {nb3} {mass_unit=g}. How much do "
+"weigh {nb2} {volume_unit=cm} of iron? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:275
+msgid ""
+"{nb1} {volume_unit=cm} of steel weigh about {nb3} {mass_unit=g}. How much do"
+" weigh {nb2} {volume_unit=cm} of steel? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:286
+msgid ""
+"{nb1} {volume_unit=cm} of copper weigh about {nb3} {mass_unit=g}. How much "
+"do weigh {nb2} {volume_unit=cm} of copper? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:297
+msgid ""
+"{nb1} {volume_unit=cm} of nickel weigh about {nb3} {mass_unit=g}. How much "
+"do weigh {nb2} {volume_unit=cm} of nickel? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:308
+msgid ""
+"{nb1} {volume_unit=cm} of vanadium (a metal) weigh about {nb3} "
+"{mass_unit=g}. How much do weigh {nb2} {volume_unit=cm} of vanadium? "
+"|hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:319
+msgid ""
+"{nb1} {volume_unit=cm} of gallium (a metal) weigh about {nb3} {mass_unit=g}."
+" How much do weigh {nb2} {volume_unit=cm} of gallium? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:330
+msgid ""
+"{nb1} {volume_unit=cm} of lead weigh about {nb3} {mass_unit=g}. How much do "
+"weigh {nb2} {volume_unit=cm} of lead? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:341
+msgid ""
+"{nb1} {volume_unit=cm} of diamond weigh about {nb3} {mass_unit=ct} (carats)."
+" How much do weigh {nb2} {volume_unit=cm} of diamond? |hint:mass_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:352
+msgid ""
+"I bought {nb1} {mass_unit=kg} of tomatoes for {nb3} {currency_unit}. How "
+"much would cost {nb2} {mass_unit}? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:362
+msgid ""
+"I bought {nb1} {mass_unit=kg} of rice for {nb3} {currency_unit}. How much "
+"would cost {nb2} {mass_unit}? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:372
+msgid ""
+"I bought {nb1} {mass_unit=kg} of apples for {nb3} {currency_unit}. How much "
+"would cost {nb2} {mass_unit}? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:382
+msgid ""
+"I bought {nb1} {mass_unit=kg} of oranges for {nb3} {currency_unit}. How much"
+" would cost {nb2} {mass_unit}? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:392
+msgid ""
+"I bought {nb1} {mass_unit=kg} of potatoes for {nb3} {currency_unit}. How "
+"much would cost {nb2} {mass_unit}? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:402
+msgid ""
+"I bought {nb1} {mass_unit=g} of cheese for {nb3} {currency_unit}. How much "
+"would cost {nb2} {mass_unit}? |hint:currency_unit|"
 msgstr ""
