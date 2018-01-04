@@ -38,25 +38,33 @@ wording5:
   - nb3_may_be_deci: true
   - solution_may_be_deci: true
 
+wording6:
+  - wording_context: price
+  - wording: "A pack of {nb1} pens cost {nb3} {currency_unit}. How much do cost {nb2} pens? |hint:currency_unit|"
+  - nb1_max: 30
+  - coeff_min: 5
+  - coeff_max: 30
+  - nb3_xcoeff: 0.1
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
 
-# wording7:
-#   - wording_context: price
-#   - wording: "A pack of {nb1} pens cost {nb3} {currency_unit}. How much do cost {nb2} pens? |hint:currency_unit|"
-#   - nb1_max: 10
-#   - nb3_coeff: 0.1
-#   - nb3_may_be_deci: false
-#   - ifintcoeff_nb2nb3swappable: false
-#   - ifdecicoeff_forceswapnb2nb3: true
-#
-# wording8:
-#   - wording_context: price
-#   - wording: "Special offer: {nb1} pens for {nb3} {currency_unit}. How much would cost {nb2} pens? |hint:currency_unit|"
-#   - nb1_min: 8
-#   - coeff_max: 5
-#   - nb3_coeff: 0.1
-#   - nb3_may_be_deci: false
-#   - ifintcoeff_nb2nb3swappable: false
-#   - ifdecicoeff_forceswapnb2nb3: true
+wording7:
+  - wording_context: price
+  - wording: "A pack of {nb1} beautiful pens cost {nb3} {currency_unit}. How much do cost {nb2} pens? |hint:currency_unit|"
+  - nb1_max: 10
+  - coeff_min: 5
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
+wording8:
+  - wording_context: price
+  - wording: "Special offer: {nb1} pens for {nb3} {currency_unit}. How much would cost {nb2} pens? |hint:currency_unit|"
+  - nb1_min: 8
+  - coeff_max: 5
+  - nb3_xcoeff: 0.1
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
+
 #
 # wording9:
 #   - wording_context: price
