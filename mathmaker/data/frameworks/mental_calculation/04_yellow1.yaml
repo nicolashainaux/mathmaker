@@ -38,7 +38,7 @@ proportionality_problems: !!omap
   - title: "Mental calculation: mini proportionality problems"
   - exercise: !!omap
     - questions: mini_pb proportionality -> deciinttriplesforprop_3to16 (10)
-                 mini_pb proportionality -> mergedinttriples_3to10 (10)
+                 mini_pb proportionality -> inttriplesforprop_3to10, nb1_ge=3 (10)
                  # mini_pb proportionality -> mergedinttriples_15_3to6 (10)
                  # mini_pb proportionality -> mergedinttriples_25_3to6 (10)
 

@@ -443,6 +443,8 @@ def classify_tag(tag):
         return 'single_deci1'
     elif tag.startswith('deciinttriplesforprop'):
         return 'deciinttriplesforprop'
+    elif tag.startswith('inttriplesforprop'):
+        return 'int_triples'
     elif tag.endswith(r'%of...'):
         return 'percentage'
     elif tag in ['int_deci_clever_pairs',
@@ -477,6 +479,16 @@ def preprocess_qkw(table_name, qkw=None):
         if any([kw.startswith(ref)
                 for ref in db_index[table_name]]):
             d.update({kw: qkw[kw]})
+    return d
+
+
+def preprocess_int_triplesforprop_tag(tag, qkw=None):
+    d = {'equal_sides': 0, 'nb3_notmod': 'nb2'}
+    parts = tag.split('_')
+    if len(parts) == 2:
+        n1, n2 = parts[1].split(sep='to')
+        d.update({'nb2_min': n1, 'nb2_max': n2,
+                  'nb3_min': n1, 'nb3_max': n2})
     return d
 
 
@@ -1241,6 +1253,8 @@ class mc_source(object):
             return shared.int_pairs_source.next(**kwargs)
         if tag_classification == 'int_triples':
             correct_kw = preprocess_qkw(db_table('int_triples'), qkw=qkw)
+            if 'forprop' in source_id:
+                correct_kw.update(preprocess_int_triplesforprop_tag(source_id))
             # Ugly hack: as code and codename start with the same letters,
             # codename cannot be detected as requiring to be removed from the
             # query. So, we manually deleted it here, if necessary.
