@@ -38,42 +38,50 @@ wording5:
   - nb3_may_be_deci: true
   - solution_may_be_deci: true
 
-wording6:
-  - wording_context: price
-  - wording: "A pack of {nb1} pens cost {nb3} {currency_unit}. How much do cost {nb2} pens? |hint:currency_unit|"
-  - nb1_max: 30
-  - coeff_min: 5
-  - coeff_max: 30
-  - nb3_xcoeff: 0.1
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
+# wording6:
+#   - wording_context: price
+#   - wording: "A pack of {nb1} pens cost {nb3} {currency_unit}. How much do cost {nb2} pens? |hint:currency_unit|"
+#   - nb1_max: 30
+#   - coeff_min: 5
+#   - coeff_max: 30
+#   - nb3_xcoeff: 0.1
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
+#
+# wording7:
+#   - wording_context: price
+#   - wording: "A pack of {nb1} beautiful pens cost {nb3} {currency_unit}. How much do cost {nb2} pens? |hint:currency_unit|"
+#   - nb1_max: 10
+#   - coeff_min: 5
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
+#
+# wording8:
+#   - wording_context: price
+#   - wording: "Special offer: {nb1} pens for {nb3} {currency_unit}. How much would cost {nb2} pens? |hint:currency_unit|"
+#   - nb1_min: 8
+#   - coeff_max: 5
+#   - nb3_xcoeff: 0.1
+#   - nb3_may_be_deci: true
+#   - solution_may_be_deci: true
 
-wording7:
+wording9:
   - wording_context: price
-  - wording: "A pack of {nb1} beautiful pens cost {nb3} {currency_unit}. How much do cost {nb2} pens? |hint:currency_unit|"
-  - nb1_max: 10
-  - coeff_min: 5
-  - nb3_may_be_deci: true
-  - solution_may_be_deci: true
-
-wording8:
-  - wording_context: price
-  - wording: "Special offer: {nb1} pens for {nb3} {currency_unit}. How much would cost {nb2} pens? |hint:currency_unit|"
-  - nb1_min: 8
+  - wording: "A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost {nb2} candies? |hint:currency_unit|"
+  - nb1_min: 5
   - coeff_max: 5
   - nb3_xcoeff: 0.1
   - nb3_may_be_deci: true
   - solution_may_be_deci: true
 
-#
-# wording9:
-#   - wording_context: price
-#   - wording: "A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost {nb2} candies? |hint:currency_unit|"
-#   - nb1_min: 8
-#   - nb3_coeff: 0.1
-#   - ifintcoeff_nb2nb3swappable: false
-#   - ifdecicoeff_forceswapnb2nb3: true
-#
+wording10:
+  - wording_context: price
+  - wording: "A pack of {nb1} big candies cost {nb3} {currency_unit}. How much do cost {nb2} candies? |hint:currency_unit|"
+  - nb1_min: 3
+  - coeff_min: 6
+  - nb3_xcoeff: 0.1
+  - nb3_may_be_deci: true
+  - solution_may_be_deci: true
 
 #
 # wording13:
@@ -83,10 +91,6 @@ wording8:
 #   - coeff_min: 1.1
 #   - coeff_max: 1.5
 #   - ifintcoeff_nb2nb3swappable: false
-
-
-
-
 
 
 
@@ -101,7 +105,7 @@ wording8:
 #   - nb1_max: 12
 #   - nb2_max: 36
 #   - coeff_max: 10
-#   - nb3_coeff: 10
+#   - nb3_xcoeff: 10
 #   - nb3_may_be_deci: false
 #   - ifintcoeff_nb2nb3swappable: false
 #   - ifdecicoeff_forceswapnb2nb3: true
@@ -111,7 +115,7 @@ wording8:
 #   - wording: "{nb1} packs of cereals weigh, together, {nb3} {mass_unit=g}. How much do weigh {nb2} packs? |hint:mass_unit|"
 #   - nb1_max: 10
 #   - coeff_max: 5
-#   - nb3_coeff: 10
+#   - nb3_xcoeff: 10
 #   - nb3_may_be_deci: false
 #   - ifintcoeff_nb2nb3swappable: false
 #   - ifdecicoeff_forceswapnb2nb3: true
@@ -122,7 +126,7 @@ wording8:
 #   - nb1_max: 12
 #   - nb2_max: 36
 #   - coeff_max: 10
-#   - nb3_coeff: 10
+#   - nb3_xcoeff: 10
 #   - nb3_may_be_deci: false
 #   - ifintcoeff_nb2nb3swappable: false
 #   - ifdecicoeff_forceswapnb2nb3: true
@@ -147,7 +151,7 @@ wording8:
 #   - wording_context: capacity
 #   - wording: "{nb1} vials contain, together, {nb3} {capacity_unit=mL} of perfume. How much contain {nb2} vials? |hint:capacity_unit|"
 #   - nb1_max: 8
-#   - nb3_coeff: 10
+#   - nb3_xcoeff: 10
 #   - nb3_may_be_deci: false
 #   - ifintcoeff_nb2nb3swappable: false
 #

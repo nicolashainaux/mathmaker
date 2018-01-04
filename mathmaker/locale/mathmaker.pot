@@ -2074,19 +2074,6 @@ msgstr ""
 msgid "Mental calculation: mini proportionality problems"
 msgstr ""
 
-#: data/wordings/mini_pb_proportionality.yaml:43
-msgid ""
-"A pack of {nb1} pens cost {nb3} {currency_unit}. How much do cost {nb2} "
-"pens? |hint:currency_unit|"
-msgstr ""
-
-#: data/wordings/mini_pb_proportionality.yaml:61
-#: data/wordings/mini_pb_proportionality.yaml:52
-msgid ""
-"Special offer: {nb1} pens for {nb3} {currency_unit}. How much would cost "
-"{nb2} pens? |hint:currency_unit|"
-msgstr ""
-
 #: data/wordings/mini_pb_proportionality.yaml:18
 msgid ""
 "A bundle of {nb1} blank CD discs cost {nb3} {currency_unit}. How much do "
@@ -2105,8 +2092,14 @@ msgid ""
 "{nb2} DVD discs? |hint:currency_unit|"
 msgstr ""
 
-#: data/wordings/mini_pb_proportionality.yaml:53
+#: data/wordings/mini_pb_proportionality.yaml:70
 msgid ""
-"A pack of {nb1} beautiful pens cost {nb3} {currency_unit}. How much do cost "
-"{nb2} pens? |hint:currency_unit|"
+"A pack of {nb1} candies cost {nb3} {currency_unit}. How much do cost {nb2} "
+"candies? |hint:currency_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_proportionality.yaml:79
+msgid ""
+"A pack of {nb1} big candies cost {nb3} {currency_unit}. How much do cost "
+"{nb2} candies? |hint:currency_unit|"
 msgstr ""
