@@ -527,7 +527,7 @@ class Exercise(object):
             mixed_q_list.reverse()
             mixed_q_list = increase_alternation(mixed_q_list, 'id')
 
-        # mixed_q_list is organized like this:
+        # mixed_q_list contains Q_info objects:
         # [('id', 'kind', 'subkind', 'nb_source', 'options'),
         #  ('q_id', 'q', 'id', 'table_15', {'nb':}),
         #  ('multi_direct', 'multi', 'direct', ['table_2_9'], {'nb':}),
@@ -552,7 +552,11 @@ class Exercise(object):
                 if last_draw.get(nb_source) is None:
                     last_draw[nb_source] = None
                 # Handle all nb sources for ONE question
+                # So, i is the number of the source for the SAME question
+                # and it gets reset (to 0) at each new question.
                 if i == 1 and extra_infos['merge_sources']:
+                    # i == 1 hence we are on the *second* source for the same
+                    # question.
                     if extra_infos.get('coprime', False):
                         # Now last_draw shouldn't need to get reordered, maybe
                         # remove the sorted() call.
@@ -605,7 +609,7 @@ class Exercise(object):
                     nb_to_use = merge_pair_to_tuple(nb_to_use,
                                                     new_couple_drawn,
                                                     common_nb)
-                else:
+                else:  # i == 0 (i.e. first source for this question)
                     not_in = last_draw[nb_source]
                     if nb_source == 'polygons':
                         not_in = None
