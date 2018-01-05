@@ -35,6 +35,8 @@ class sub_object(component.structure):
                  swap_complement=None, **options):
         if hidden is None:
             hidden = random.choice([1, 2])
+        else:
+            hidden = int(hidden)
         if swap_complement is None:
             swap_complement = random.choice([True, False])
         super().setup("minimal", **options)
@@ -55,6 +57,9 @@ class sub_object(component.structure):
         if (options.get('nb_source', 'default').startswith('complement')
             and swap_complement):
             self.nb2 = self.nb1 - self.nb2
+        if self.subvariant == 'only_positive':
+            self.nb1, self.nb2 = (max(self.nb1, self.nb2),
+                                  min(self.nb1, self.nb2))
         self.result = Item(self.nb1 - self.nb2).printed
         if hidden == 1:
             self.hidden_one = Item(self.nb1)

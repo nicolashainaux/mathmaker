@@ -34,6 +34,8 @@ class sub_object(component.structure):
     def __init__(self, build_data, hidden=None, **options):
         if hidden is None:
             hidden = random.choice([1, 2])
+        else:
+            hidden = int(hidden)
         super().setup("minimal", **options)
         if options.get('nb_source', 'default').startswith('complement'):
             maxi, mini = max(build_data), min(build_data)
