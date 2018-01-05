@@ -199,6 +199,11 @@
         "04_yellow1",
         "multi_hole"
     ],
+    "04_yellow1_addi_subtr_hole": [
+        "mental_calculation",
+        "04_yellow1",
+        "addi_subtr_hole"
+    ],
     "04_yellow1_euclidean_divisions": [
         "mental_calculation",
         "04_yellow1",

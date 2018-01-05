@@ -14,6 +14,21 @@ multi_hole: !!omap
                             -> table_25 (2)
                             -> table_11_tens_easy (1)
 
+addi_subtr_hole: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: additions and subtractions with a hole"
+  - exercise: !!omap
+    - questions: addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±half (3)
+                 addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±quarter (3)
+                 addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±halforquarter (2)
+                 addi hole -> singleint_70to200;;singleint_70to200, nb_variant=decimal2 (2)
+                 subtr hole, subvariant=only_positive -> singleint_70to200;;singleint_70to200, nb_variant=decimal2 (2)
+                 subtr hole, subvariant=only_positive, hidden=1 -> complements_to_1, nb_variant=decimal1 (1)
+                 subtr hole, subvariant=only_positive, hidden=2 -> complements_to_1, nb_variant=decimal1 (2)
+                 subtr hole, subvariant=only_positive, hidden=1 -> complements_to_10, nb_variant=decimal1 (1)
+                 subtr hole, subvariant=only_positive, hidden=2 -> complements_to_10, nb_variant=decimal1 (2)
+                 addi hole -> complements_to_10, nb_variant=decimal2 (2)
+
 euclidean_divisions: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: euclidean divisions"

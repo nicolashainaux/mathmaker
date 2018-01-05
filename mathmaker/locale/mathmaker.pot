@@ -308,8 +308,8 @@ msgstr ""
 msgid "Question:"
 msgstr ""
 
+#: lib/document/frames/exercise.py:765
 #: lib/old_style_sheet/exercise/X_Structure.py:265
-#: lib/document/frames/exercise.py:753
 msgid "Answer:"
 msgstr ""
 
@@ -441,79 +441,7 @@ msgstr ""
 msgid "{triangle_name} has no right angle."
 msgstr ""
 
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-msgid "Multiplications with a hole"
-msgstr ""
-
-#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:6
-#: data/frameworks/mental_calculation/lev11_1/digitsplaces.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-#: data/frameworks/mental_calculation/lev11_1/divisions.xml:6
-#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:6
-#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:3
-#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:6
-#: data/frameworks/mental_calculation/lev11_1/divisions.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:6
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:3
-#: data/frameworks/mental_calculation/lev11_1/ranks.xml:3
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-#: data/frameworks/mental_calculation/lev11_3/multi_clever.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:3
-#: data/frameworks/mental_calculation/lev11_1/addi_subtr_direct_naturals.xml:3
-#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
-#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:6
-#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:3
-msgid "Mental calculation"
-msgstr ""
-
-#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:6
-msgid "Simple decimal multiplications"
-msgstr ""
-
-#: data/frameworks/mental_calculation/lev11_1/ranks.xml:5
-#: data/frameworks/mental_calculation/lev11_1/digitsplaces.xml:3
-#: data/frameworks/mental_calculation/lev11_1/ranks.xml:3
-msgid "Ranks of figures in a number"
-msgstr ""
-
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:6
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:3
-msgid "Multiplications and divisions by 10, 100 and 1000"
-msgstr ""
-
-#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:6
-#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:3
-msgid "Mental calculation: areas and perimeters of rectangles"
-msgstr ""
-
-#: data/frameworks/mental_calculation/lev11_1/digitsplaces.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_tables2_9.xml:6
-#: data/frameworks/mental_calculation/lev11_1/test_11_1.xml:3
-#: data/frameworks/mental_calculation/lev11_2/operations_vocabulary.xml:3
-#: data/frameworks/mental_calculation/lev11_1/divisions.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_hole_any_nb.xml:3
-#: data/frameworks/mental_calculation/lev11_2/multi_divi_10_100_1000.xml:3
-#: data/frameworks/mental_calculation/lev11_2/test_11_2.xml:3
-#: data/frameworks/mental_calculation/lev11_1/ranks.xml:3
-#: data/frameworks/mental_calculation/lev11_2/rectangles.xml:3
-#: data/frameworks/mental_calculation/lev11_3/multi_clever.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_decimal.xml:3
-#: data/frameworks/mental_calculation/lev11_1/mini_problems.xml:3
-#: lib/document/frames/sheet.py:65
-#: data/frameworks/mental_calculation/lev11_1/addi_subtr_direct_naturals.xml:3
-#: lib/document/frames/sheet.py:58
-#: data/frameworks/mental_calculation/lev11_1/multi_11_15_25.xml:3
-#: data/frameworks/mental_calculation/lev11_1/tables2_9.xml:3
-#: data/frameworks/mental_calculation/lev11_1/multi_reversed.xml:3
-#: data/frameworks/mental_calculation/lev11_1/fraction_of_a_rectangle.xml:3
+#: lib/document/frames/sheet.py:65 lib/document/frames/sheet.py:58
 msgid "Answers"
 msgstr ""
 
@@ -1792,22 +1720,22 @@ msgstr ""
 msgid "Mental calculation: multiplication by 11"
 msgstr ""
 
-#: lib/document/content/component.py:366
+#: lib/document/content/component.py:403
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr ""
 
-#: lib/document/content/component.py:371
+#: lib/document/content/component.py:408
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:375
+#: lib/document/content/component.py:412
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:379
+#: lib/document/content/component.py:416
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr ""
@@ -1845,7 +1773,7 @@ msgstr ""
 msgid "{math_expr} = {q_mark}"
 msgstr ""
 
-#: lib/document/content/calculation/multi_hole.py:63
+#: lib/document/content/calculation/multi_hole.py:68
 #, python-brace-format
 msgid "{math_expr}"
 msgstr ""
@@ -1892,6 +1820,7 @@ msgstr ""
 msgid "Mental calculation: decimal complements to 1, to 10 and to 100"
 msgstr ""
 
+#: data/frameworks/mental_calculation/04_yellow1.yaml:19
 #: data/frameworks/mental_calculation/03_yellow.yaml:17
 #: data/frameworks/mental_calculation/03_yellow.yaml:28
 msgid "Mental calculation: additions and subtractions with a hole"
@@ -1902,12 +1831,12 @@ msgid "{} (or {} etc.)"
 msgstr ""
 
 #: lib/document/content/calculation/decimal_numerals.py:61
-#: lib/document/content/component.py:43
+#: lib/document/content/component.py:44
 msgid "What is {} as a decimal?"
 msgstr ""
 
 #: lib/document/content/calculation/decimal_numerals.py:66
-#: lib/document/content/component.py:45
+#: lib/document/content/component.py:46
 msgid "What is {} as a decimal fraction?"
 msgstr ""
 
@@ -1974,33 +1903,33 @@ msgstr ""
 msgid "To insert pdf formular and javascript"
 msgstr ""
 
-#: lib/document/frames/exercise.py:885
+#: lib/document/frames/exercise.py:897
 msgid "Clear everything"
 msgstr ""
 
-#: lib/document/frames/exercise.py:886
+#: lib/document/frames/exercise.py:898
 msgid "Validate"
 msgstr ""
 
-#: lib/document/frames/exercise.py:895
+#: lib/document/frames/exercise.py:907
 #, python-brace-format
 msgid "Score: ... / {q_number}"
 msgstr ""
 
-#: lib/document/frames/exercise.py:897
+#: lib/document/frames/exercise.py:909
 #, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:890
+#: lib/document/frames/exercise.py:902
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:892
+#: lib/document/frames/exercise.py:904
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr ""
 
-#: lib/document/content/component.py:66
+#: lib/document/content/component.py:67
 msgid "undefined"
 msgstr ""
 
@@ -2009,6 +1938,7 @@ msgid "Mental calculation: reversed multiplications"
 msgstr ""
 
 #: data/frameworks/mental_calculation/02_white2.yaml:9
+#: data/frameworks/mental_calculation/04_yellow1.yaml:9
 msgid "Mental calculation: multiplications with a hole"
 msgstr ""
 
@@ -2018,10 +1948,12 @@ msgid "{how_many_digitplace} are there in {decimal_number}?"
 msgstr ""
 
 #: data/frameworks/mental_calculation/04_yellow1.yaml:29
+#: data/frameworks/mental_calculation/04_yellow1.yaml:78
 #: data/frameworks/mental_calculation/04_yellow1.yaml:18
 #: data/frameworks/mental_calculation/04_yellow1.yaml:19
 #: data/frameworks/mental_calculation/04_yellow1.yaml:11
 #: data/frameworks/mental_calculation/04_yellow1.yaml:17
+#: data/frameworks/mental_calculation/04_yellow1.yaml:74
 msgid "Mental calculation: simple percentages calculations"
 msgstr ""
 
@@ -2034,9 +1966,10 @@ msgstr ""
 msgid "Which fraction of the line segment represents the colored part?"
 msgstr ""
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:13
-#: data/frameworks/mental_calculation/04_yellow1.yaml:23
 #: data/frameworks/mental_calculation/04_yellow1.yaml:11
+#: data/frameworks/mental_calculation/04_yellow1.yaml:13
+#: data/frameworks/mental_calculation/04_yellow1.yaml:3
+#: data/frameworks/mental_calculation/04_yellow1.yaml:23
 msgid "Mental calculation: fraction of a line segment"
 msgstr ""
 
@@ -2056,8 +1989,10 @@ msgstr ""
 msgid "Perimeter of this hexagon? |hint:length_unit|"
 msgstr ""
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:15
 #: data/frameworks/mental_calculation/04_yellow1.yaml:7
+#: data/frameworks/mental_calculation/04_yellow1.yaml:59
+#: data/frameworks/mental_calculation/04_yellow1.yaml:63
+#: data/frameworks/mental_calculation/04_yellow1.yaml:15
 msgid "Mental calculation: perimeter of a polygon"
 msgstr ""
 
@@ -2066,11 +2001,15 @@ msgstr ""
 msgid "Euclidean division of {dividend} by {divisor}?"
 msgstr ""
 
+#: data/frameworks/mental_calculation/04_yellow1.yaml:34
 #: data/frameworks/mental_calculation/04_yellow1.yaml:7
+#: data/frameworks/mental_calculation/04_yellow1.yaml:30
 msgid "Mental calculation: euclidean divisions"
 msgstr ""
 
+#: data/frameworks/mental_calculation/04_yellow1.yaml:99
 #: data/frameworks/mental_calculation/04_yellow1.yaml:38
+#: data/frameworks/mental_calculation/04_yellow1.yaml:103
 msgid "Mental calculation: mini proportionality problems"
 msgstr ""
 
@@ -2327,4 +2266,24 @@ msgstr ""
 msgid ""
 "I bought {nb1} {mass_unit=g} of cheese for {nb3} {currency_unit}. How much "
 "would cost {nb2} {mass_unit}? |hint:currency_unit|"
+msgstr ""
+
+#: data/frameworks/mental_calculation/04_yellow1.yaml:38
+#: data/frameworks/mental_calculation/04_yellow1.yaml:42
+msgid "Mental calculation: areas and perimeters of rectangles"
+msgstr ""
+
+#: data/frameworks/mental_calculation/04_yellow1.yaml:71
+#: data/frameworks/mental_calculation/04_yellow1.yaml:67
+msgid "Mental calculation: multiplications and divisions by 10, 100 and 1000"
+msgstr ""
+
+#: data/frameworks/mental_calculation/04_yellow1.yaml:87
+#: data/frameworks/mental_calculation/04_yellow1.yaml:83
+msgid "Mental calculation: clever multiplications"
+msgstr ""
+
+#: data/frameworks/mental_calculation/04_yellow1.yaml:93
+#: data/frameworks/mental_calculation/04_yellow1.yaml:97
+msgid "Mental calculation: multiplications with decimal numbers"
 msgstr ""
