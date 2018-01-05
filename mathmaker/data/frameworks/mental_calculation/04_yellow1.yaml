@@ -1,3 +1,17 @@
+fraction_of_a_linesegment: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: fraction of a line segment"
+  - exercise: !!omap
+    - questions: fraction_of a_linesegment -> simple_fractions (20)
+
+euclidean_divisions: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: euclidean divisions"
+  - exercise: !!omap
+    - questions: divi euclidean -> intpairs_2to10 (12)
+                 divi euclidean -> table_15 (4)
+                 divi euclidean -> table_25 (4)
+
 rectangles: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: areas and perimeters of rectangles"
@@ -33,22 +47,6 @@ multi_divi_10_100_1000: !!omap
   - exercise: !!omap
     - questions: multi direct -> decimal_and_10_100_1000 (10)
                  divi direct -> decimal_and_10_100_1000 (10)
-
-# divisions (including tables of 15 and 25)
-
-euclidean_divisions: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: euclidean divisions"
-  - exercise: !!omap
-    - questions: divi euclidean -> intpairs_2to10 (12)
-                 divi euclidean -> table_15 (4)
-                 divi euclidean -> table_25 (4)
-
-fraction_of_a_linesegment: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: fraction of a line segment"
-  - exercise: !!omap
-    - questions: fraction_of a_linesegment -> simple_fractions (20)
 
 percentages: !!omap
   - preset: "mental calculation"
