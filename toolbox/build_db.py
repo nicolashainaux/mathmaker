@@ -244,7 +244,7 @@ def __main__():
                        db_rows)
 
     creation_query = '''CREATE TABLE mini_pb_prop_wordings
-                        (id INTEGER PRIMARY KEY,
+                        (id INTEGER PRIMARY KEY, wid INTEGER,
                          wording_context TEXT, wording TEXT,
                          coeff_min INTEGER, coeff_max INTEGER,
                          nb1_min INTEGER, nb1_max INTEGER,
@@ -260,7 +260,8 @@ def __main__():
     db.execute(creation_query)
     PROP_WORDINGS_FILE = WORDINGS_DIR + 'mini_pb_proportionality' + '.yaml'
     wordings = get_attributes(PROP_WORDINGS_FILE, "wording")
-    db_rows = list(zip([w.get('wording_context') for w in wordings],
+    db_rows = list(zip([i + 1 for i in range(len(wordings))],
+                       [w.get('wording_context') for w in wordings],
                        [w.get('wording') for w in wordings],
                        [w.get('coeff_min', 0) for w in wordings],
                        [w.get('coeff_max', 10000) for w in wordings],
@@ -282,14 +283,14 @@ def __main__():
                        [0 for _ in range(len(wordings))],
                        [0 for _ in range(len(wordings))]))
     db.executemany("INSERT "
-                   "INTO mini_pb_prop_wordings(wording_context, wording, "
+                   "INTO mini_pb_prop_wordings(wid, wording_context, wording, "
                    "coeff_min, coeff_max, nb1_min, nb1_max, nb2_min, nb2_max, "
                    "nb3_min, nb3_max, solution_min, solution_max, "
                    "nb1_xcoeff, nb2_xcoeff, nb3_xcoeff, "
                    "nb1_may_be_deci, nb2_may_be_deci, "
                    "nb3_may_be_deci, solution_may_be_deci, "
                    "locked, drawDate) "
-                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
+                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
                    "?, ?, ?, ?, ?)",
                    db_rows)
 

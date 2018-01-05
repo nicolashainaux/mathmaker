@@ -131,6 +131,7 @@
     ],
     "mini_pb_prop_wordings": [
         "id",
+        "wid",
         "wording_context",
         "wording",
         "coeff_min",
