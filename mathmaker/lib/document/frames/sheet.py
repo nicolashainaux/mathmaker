@@ -25,6 +25,7 @@ import random
 import warnings
 
 from mathmaker.lib import shared
+from mathmaker.lib.constants import SLIDE_CONTENT_SEP
 from mathmaker.lib.tools import rotate
 from mathmaker.lib.tools.frameworks import load_sheet, read_layout
 from mathmaker.lib.tools.frameworks import build_exercises_list
@@ -66,7 +67,8 @@ class Sheet(object):
                    'mental calculation slideshow':
                    {'write_ex_titles': False,
                     'header': '',
-                    'title': _('Ready,|Steady,|Go!'),
+                    'title': _('Ready,{sep}Steady,{sep}Go!')
+                    .format(sep=SLIDE_CONTENT_SEP),
                     'subtitle': '',
                     'text': '',
                     'answers_title': _('Answers!')}}

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2018-01-05 16:56+0100\n"
+"PO-Revision-Date: 2018-01-05 19:34+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -321,8 +321,8 @@ msgstr "Factoriser, si possible :"
 msgid "Question:"
 msgstr "Question :"
 
-#: lib/document/frames/exercise.py:765
 #: lib/old_style_sheet/exercise/X_Structure.py:265
+#: lib/document/frames/exercise.py:767
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -459,7 +459,7 @@ msgstr "Donc, d'après la contraposée du théorème de Pythagore,"
 msgid "{triangle_name} has no right angle."
 msgstr "{triangle_name} n'est pas rectangle."
 
-#: lib/document/frames/sheet.py:65 lib/document/frames/sheet.py:58
+#: lib/document/frames/sheet.py:59 lib/document/frames/sheet.py:66
 msgid "Answers"
 msgstr "Réponses"
 
@@ -2010,11 +2010,7 @@ msgstr "Calcul mental : ceinture blanche, deuxième trait"
 msgid "To be able to color the documents"
 msgstr "Pour pouvoir mettre les documents en couleur"
 
-#: lib/document/frames/sheet.py:69
-msgid "Ready,|Steady,|Go!"
-msgstr "Prêt ?|Feu !|Partez !"
-
-#: lib/document/frames/sheet.py:72
+#: lib/document/frames/sheet.py:74
 msgid "Answers!"
 msgstr "Allez, on corrige !"
 
@@ -2162,29 +2158,29 @@ msgstr "Calcul mental : ceinture jaune"
 msgid "To insert pdf formular and javascript"
 msgstr "Pour insérer un formulaire pdf et du javascript"
 
-#: lib/document/frames/exercise.py:897
+#: lib/document/frames/exercise.py:899
 msgid "Clear everything"
 msgstr "Tout effacer"
 
-#: lib/document/frames/exercise.py:898
+#: lib/document/frames/exercise.py:900
 msgid "Validate"
 msgstr "Valider"
 
-#: lib/document/frames/exercise.py:907
+#: lib/document/frames/exercise.py:909
 #, python-brace-format
 msgid "Score: ... / {q_number}"
 msgstr "Score : ... / {q_number}"
 
-#: lib/document/frames/exercise.py:909
+#: lib/document/frames/exercise.py:911
 #, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr "\"Score : \" + count.toString() + \" / {q_number}\""
 
-#: lib/document/frames/exercise.py:902
+#: lib/document/frames/exercise.py:904
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr "J"
 
-#: lib/document/frames/exercise.py:904
+#: lib/document/frames/exercise.py:906
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr "F"
 
@@ -2630,6 +2626,11 @@ msgstr "Calcul mental : multiplications astucieuses"
 #: data/frameworks/mental_calculation/04_yellow1.yaml:97
 msgid "Mental calculation: multiplications with decimal numbers"
 msgstr "Calcul mental : multiplications décimales"
+
+#: lib/document/frames/sheet.py:70
+#, python-brace-format
+msgid "Ready,{sep}Steady,{sep}Go!"
+msgstr "Prêt ?{sep}Feu !{sep}Partez !"
 
 #~ msgid "Multiplications with a hole"
 #~ msgstr "Multiplications à trou"

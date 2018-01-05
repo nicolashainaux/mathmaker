@@ -53,3 +53,5 @@ RANDOMLY = "randomly"
 NUMERIC = "numeric"
 LITERALS = "literals"
 OTHERS = "others"
+
+SLIDE_CONTENT_SEP = '|<SLIDE_CONTENT_SEPARATOR>|'

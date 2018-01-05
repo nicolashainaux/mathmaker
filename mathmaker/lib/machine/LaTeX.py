@@ -30,7 +30,7 @@ from tempfile import NamedTemporaryFile
 from mathmakerlib.calculus import is_integer, is_number
 
 from mathmaker import settings
-from mathmaker.lib.constants import latex
+from mathmaker.lib.constants import latex, SLIDE_CONTENT_SEP
 from mathmaker.lib.constants.latex import TEXT_SCALES, TEXT_RANKS
 from mathmaker.lib.tools import generate_header_comment
 from mathmaker.lib.core.base import Printable, Drawable
@@ -315,11 +315,13 @@ class LaTeX(Structure.Structure):
         :type content: str
         :param uncovered: whether to split the content in several slides that
                           will show one after the other. Mostly useful for
-                          title. The content's parts must be delimited by '|'.
+                          title. The content's parts must be delimited by
+                          SLIDE_CONTENT_SEP (from lib.constants).
         :type uncovered: bool
         :param only: whether to split the content in several slides that
                      will show one after the other. Mostly useful for
-                     answers. The content's parts must be delimited by '|'.
+                     answers. The content's parts must be delimited by
+                     SLIDE_CONTENT_SEP (from lib.constants).
                      Difference with uncovered is the text will be replaced,
                      not only made invisible.
         :type only: bool
@@ -342,11 +344,11 @@ class LaTeX(Structure.Structure):
                        + r'\end{{textblock}}') \
                 .format(displ_nb='{' + numbering + '}') + '\n'
         if uncovered:
-            for i, chunk in enumerate(content.split(sep='|')):
+            for i, chunk in enumerate(content.split(sep=SLIDE_CONTENT_SEP)):
                 result += r'\uncover<{n}>{c}'\
                     .format(n=i + 1, c='{' + chunk + '}') + '\n'
         elif only:
-            for i, chunk in enumerate(content.split(sep='|')):
+            for i, chunk in enumerate(content.split(sep=SLIDE_CONTENT_SEP)):
                 result += r'\only<{n}>{c}'\
                     .format(n=i + 1, c='{' + chunk + '}') + '\n'
         else:

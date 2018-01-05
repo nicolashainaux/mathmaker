@@ -37,7 +37,7 @@ from mathmaker.lib.tools.maths import coprimes_to
 from mathmaker.lib.tools.frameworks import read_layout, build_questions_list
 from mathmaker.lib.tools.frameworks import get_q_modifier, parse_qid
 from .question import Question
-from mathmaker.lib.constants import BOOLEAN
+from mathmaker.lib.constants import BOOLEAN, SLIDE_CONTENT_SEP
 from mathmaker.lib.constants.content \
     import SUBKINDS_TO_UNPACK, UNPACKABLE_SUBKINDS, SOURCES_TO_UNPACK
 
@@ -756,12 +756,14 @@ class Exercise(object):
             elif ex_or_answers == 'ans':
                 for q in self.questions_list:
                     if q.substitutable_question_mark:
-                        content = q.to_str('exc') + '|' + q.to_str('exc')\
+                        content = q.to_str('exc') + SLIDE_CONTENT_SEP \
+                            + q.to_str('exc')\
                             .replace(COLORED_QUESTION_MARK,
                                      COLORED_ANSWER.format(
                                          text='{' + q.to_str('ans') + '}'))
                     else:
-                        content = q.to_str('exc') + '|' + q.to_str('exc') \
+                        content = q.to_str('exc') + SLIDE_CONTENT_SEP \
+                            + q.to_str('exc') \
                             + '\n\n' + _('Answer:') + '\n\n' \
                             + COLORED_ANSWER.format(
                                 text='{' + q.to_str('ans') + '}')

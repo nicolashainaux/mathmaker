@@ -308,8 +308,8 @@ msgstr ""
 msgid "Question:"
 msgstr ""
 
-#: lib/document/frames/exercise.py:765
 #: lib/old_style_sheet/exercise/X_Structure.py:265
+#: lib/document/frames/exercise.py:767
 msgid "Answer:"
 msgstr ""
 
@@ -441,7 +441,7 @@ msgstr ""
 msgid "{triangle_name} has no right angle."
 msgstr ""
 
-#: lib/document/frames/sheet.py:65 lib/document/frames/sheet.py:58
+#: lib/document/frames/sheet.py:59 lib/document/frames/sheet.py:66
 msgid "Answers"
 msgstr ""
 
@@ -1756,11 +1756,7 @@ msgstr ""
 msgid "To be able to color the documents"
 msgstr ""
 
-#: lib/document/frames/sheet.py:69
-msgid "Ready,|Steady,|Go!"
-msgstr ""
-
-#: lib/document/frames/sheet.py:72
+#: lib/document/frames/sheet.py:74
 msgid "Answers!"
 msgstr ""
 
@@ -1903,29 +1899,29 @@ msgstr ""
 msgid "To insert pdf formular and javascript"
 msgstr ""
 
-#: lib/document/frames/exercise.py:897
+#: lib/document/frames/exercise.py:899
 msgid "Clear everything"
 msgstr ""
 
-#: lib/document/frames/exercise.py:898
+#: lib/document/frames/exercise.py:900
 msgid "Validate"
-msgstr ""
-
-#: lib/document/frames/exercise.py:907
-#, python-brace-format
-msgid "Score: ... / {q_number}"
 msgstr ""
 
 #: lib/document/frames/exercise.py:909
 #, python-brace-format
+msgid "Score: ... / {q_number}"
+msgstr ""
+
+#: lib/document/frames/exercise.py:911
+#, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:902
+#: lib/document/frames/exercise.py:904
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:904
+#: lib/document/frames/exercise.py:906
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr ""
 
@@ -2286,4 +2282,9 @@ msgstr ""
 #: data/frameworks/mental_calculation/04_yellow1.yaml:93
 #: data/frameworks/mental_calculation/04_yellow1.yaml:97
 msgid "Mental calculation: multiplications with decimal numbers"
+msgstr ""
+
+#: lib/document/frames/sheet.py:70
+#, python-brace-format
+msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr ""
