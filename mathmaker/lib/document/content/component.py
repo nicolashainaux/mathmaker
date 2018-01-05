@@ -89,7 +89,7 @@ class structure(object):
         self.tikz_linesegments_thickness = 'thin'
         if self.slideshow:
             self.tikz_picture_scale = 3
-            self.tikz_linesegments_thickness = 'thick'
+            self.tikz_linesegments_thickness = 'very thick'
         self.variant = kwargs.get('variant', 'default')
         self.subvariant = kwargs.get('subvariant', 'default')
         self.nb_variant = kwargs.get('nb_variant', 'default')
@@ -457,7 +457,7 @@ class structure(object):
         self.polygon.do_cycle = False
         self.polygon.scale = self.tikz_picture_scale
         for s in self.polygon.sides:
-            s.label_scale = Number('0.85') * self.tikz_picture_scale
+            s.label_scale = Number('0.85')
 
     def _setup_polygon(self, polygon_data=None):
         # polygon_data is of the form:
