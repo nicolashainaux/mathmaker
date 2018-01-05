@@ -111,26 +111,36 @@ proportionality_problems: !!omap
                  # To select exclusively from table of 15 or from table of 25,
                  # use mergedinttriples_*_3to6
 
+# TODO: exam
 
+W01a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, level=1 (1)
+                 multi direct -> decimal_and_10_100_1000 (2)
+                 divi direct -> decimal_and_10_100_1000 (2)
 
+W01b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, level=2 (1)
+                 multi direct -> decimal_and_10_100_1000 (2)
+                 divi direct -> decimal_and_10_100_1000 (2)
 
-# finish to add questions for 1st stripe
+W01c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, level=3 (1)
+                 multi direct -> decimal_and_10_100_1000 (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
+                 percent direct -> 50%of..., level=easy (1)
+                 percent direct -> 25%of..., level=easy, context=simple_unit (1)
 
-
-
-
-
-# COPY OF THE FIRST VERSION OF addi_subtr_hole WITH DECIMAL NUMBERS (TO BE REUSED OR INSPIRED OF LATER)
-# addi_subtr_hole: !!omap
-#   - preset: "mental calculation"
-#   - title: "Mental calculation: additions and subtractions with a hole"
-#   - exercise: !!omap
-#     - questions: addi hole -> singleint_5to20;;singleint_5to20 (2)
-#                  addi hole -> singleint_5to20;;singleint_5to20, nb_variant=decimal1 (1)
-#                  addi hole -> singleint_21to100;;singleint_21to100 (3)
-#                  addi hole -> complements_to_110...990 (2)
-#                  addi hole -> complements_to_10, nb_variant=decimal2 (2)
-#                  subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (3)
-#                  subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (3)
-#                  subtr hole, subvariant=only_positive, hidden=2 -> complements_to_10, nb_variant=decimal1 (2)
-#                  subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (2)
+W01d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, level=3 (1)
+                 multi direct -> decimal_and_10_100_1000 (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
+                 percent direct -> 75%of..., level=easy, context=simple_unit (1)
+                 percent direct -> 25%of..., level=easy, context=simple_unit (1)

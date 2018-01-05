@@ -244,6 +244,26 @@
         "04_yellow1",
         "proportionality_problems"
     ],
+    "04_yellow1_W01a": [
+        "mental_calculation",
+        "04_yellow1",
+        "W01a"
+    ],
+    "04_yellow1_W01b": [
+        "mental_calculation",
+        "04_yellow1",
+        "W01b"
+    ],
+    "04_yellow1_W01c": [
+        "mental_calculation",
+        "04_yellow1",
+        "W01c"
+    ],
+    "04_yellow1_W01d": [
+        "mental_calculation",
+        "04_yellow1",
+        "W01d"
+    ],
     "03_yellow_complements": [
         "mental_calculation",
         "03_yellow",
