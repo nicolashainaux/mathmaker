@@ -99,7 +99,7 @@ class source(object):
             self.db.execute("UPDATE {} SET drawDate = 0;"
                             .format(kwargs['union']['table_name']))
         if (not len(tuple(self.db.execute(self._cmd(**kwargs))))
-            and 'not_in' in kwargs):
+            and kwargs.get('not_in', None) is not None):
             if 'nb1_min' in kwargs and 'nb1_max' in kwargs:
                 kwargs.update({'not_in': [str(n)
                                           for n in kwargs['not_in']
