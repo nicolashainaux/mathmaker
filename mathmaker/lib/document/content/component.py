@@ -452,6 +452,9 @@ class structure(object):
                       label_vertices=self.label_polygon_vertices,
                       thickness=self.tikz_linesegments_thickness,
                       length_unit=self.length_unit)
+        # Without patching polygons to NOT cycle when drawn, the scaling of
+        # tikzpicture will produce a displaying bug (not nice)
+        self.polygon.do_cycle = False
         self.polygon.scale = self.tikz_picture_scale
         for s in self.polygon.sides:
             s.label_scale = Number('0.85') * self.tikz_picture_scale
