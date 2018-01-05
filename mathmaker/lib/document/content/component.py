@@ -129,6 +129,11 @@ class structure(object):
                 setattr(self, 'nb' + str(i + 1), nb_list[i])
             else:
                 setattr(self, 'nb' + str(i + 1), Number(str(nb_list[i])))
+        if kwargs.get('standardize_decimal_numbers', False):
+            for i in range(len(nb_list)):
+                nb = getattr(self, 'nb{}'.format(i + 1))
+                if isinstance(nb, Number):
+                    setattr(self, 'nb' + str(i + 1), nb.standardized())
         self.nb_nb = len(nb_list)
 
     def _setup_nb_variants(self, **kwargs):

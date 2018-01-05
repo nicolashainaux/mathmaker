@@ -22,7 +22,7 @@
 
 import random
 
-from mathmakerlib.calculus import Fraction
+from mathmakerlib.calculus import Fraction, Number
 
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
@@ -34,11 +34,16 @@ from mathmaker.lib.document.content import component
 class sub_object(component.structure):
 
     def __init__(self, build_data, **options):
-        super().setup('numbers', nb=build_data, shuffle_nbs=False, **options)
+        super().setup('numbers', nb=build_data, shuffle_nbs=False,
+                      standardize_decimal_numbers=True, **options)
         hole = Item(Value(COLORED_QUESTION_MARK))
         self.hidden_one = None
         visible_one = None
-        self.product = (self.nb1.evaluate() * self.nb2.evaluate()).printed
+        # We know we'll get an integer as "result" (in ?×...=result)
+        # so we round to integer to avoid trailing zeros (there are still some
+        # though seldom)
+        self.product = (self.nb1.evaluate() * self.nb2.evaluate())\
+            .rounded(Number('1')).printed
         self.transduration = 9
 
         if isinstance(self.nb2, Fraction):
