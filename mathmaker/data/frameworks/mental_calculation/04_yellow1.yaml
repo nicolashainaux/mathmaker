@@ -1,4 +1,9 @@
-# ×÷ 10, 100 1000
+multi_divi_10_100_1000: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: multiplications and divisions by 10, 100 and 1000"
+  - exercise: !!omap
+    - questions: multi direct -> decimal_and_10_100_1000 (10)
+                 divi direct -> decimal_and_10_100_1000 (10)
 
 # divisions (including tables of 15 and 25)
 
