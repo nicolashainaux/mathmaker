@@ -48,7 +48,9 @@ class sub_object(component.structure):
 
     def q(self, **options):
         if self.slideshow:
-            return '{}\n{}'.format(self.polygon.drawn, self.wording)
+            return '{}{}{}'.format(self.wording,
+                                   shared.machine.addvspace(height='10pt'),
+                                   self.polygon.drawn)
         else:
             return shared.machine.write_layout(
                 (1, 2), [5, 8], [self.polygon.drawn, self.wording])
