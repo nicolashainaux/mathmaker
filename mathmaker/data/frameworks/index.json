@@ -194,6 +194,11 @@
         "04_yellow1",
         "fraction_of_a_linesegment"
     ],
+    "04_yellow1_multi_hole": [
+        "mental_calculation",
+        "04_yellow1",
+        "multi_hole"
+    ],
     "04_yellow1_euclidean_divisions": [
         "mental_calculation",
         "04_yellow1",

@@ -4,6 +4,16 @@ fraction_of_a_linesegment: !!omap
   - exercise: !!omap
     - questions: fraction_of a_linesegment -> simple_fractions (20)
 
+multi_hole: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: multiplications with a hole"
+  - exercise: !!omap
+    - questions: multi hole -> intpairs_2to9 (7)
+                            -> int_irreducible_frac (8)
+                            -> table_15 (2)
+                            -> table_25 (2)
+                            -> table_11_tens_easy (1)
+
 euclidean_divisions: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: euclidean divisions"
