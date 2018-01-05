@@ -34,6 +34,7 @@ from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.tools import rotate, lined_up, fix_math_style2_fontsize
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.tools.shapes import ShapeGenerator
+from mathmaker.lib.tools.database import preprocess_qkw
 
 
 class structure(object):
@@ -323,6 +324,8 @@ class structure(object):
                 wording_kwargs.update({'nb3_may_be_deci': 1})
             if not is_integer(self.nb4):
                 wording_kwargs.update({'solution_may_be_deci': 1})
+            wording_kwargs.update(preprocess_qkw('mini_pb_prop_wordings',
+                                                 qkw=kwargs))
         else:
             source = shared.mini_problems_wordings_source
             wording_kwargs.update({'q_id': kwargs['q_id']})
