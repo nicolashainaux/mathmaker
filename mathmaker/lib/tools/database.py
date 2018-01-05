@@ -217,12 +217,13 @@ class source(object):
                                       for x in updated_notin_list) + " ) "
                             kn += 1
             elif kw.startswith("either_") and kw.endswith("_in"):
-                k = kw.split(sep='_')[1:-1]
-                result += next(hook(kn)) + " ( " + k[0] + " IN ( " + ", "\
-                    .join(str(x) for x in kwargs[kw]) + " ) OR "\
-                    + k[1] + " IN ( " + ", "\
-                    .join(str(x) for x in kwargs[kw]) + " ) ) "
-                kn += 1
+                if kwargs[kw] is not None:
+                    k = kw.split(sep='_')[1:-1]
+                    result += next(hook(kn)) + " ( " + k[0] + " IN ( " + ", "\
+                        .join(str(x) for x in kwargs[kw]) + " ) OR "\
+                        + k[1] + " IN ( " + ", "\
+                        .join(str(x) for x in kwargs[kw]) + " ) ) "
+                    kn += 1
             elif kw.endswith("_in"):
                 k = kw[:-3]
                 result += next(hook(kn)) + k + " IN ( " + ", "\

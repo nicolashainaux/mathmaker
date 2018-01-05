@@ -578,9 +578,12 @@ class Exercise(object):
                                   **get_q_modifier(q.id, nb_source),
                                   **xkw)
                     else:
+                        either = last_draw[nb_source]
+                        if q.options.get('force_table', None) is not None:
+                            either = [q.options.get('force_table')]
                         second_couple_drawn = shared.mc_source\
                             .next(nb_source,
-                                  either_nb1_nb2_in=last_draw[nb_source],
+                                  either_nb1_nb2_in=either,
                                   qkw=q.options,
                                   **get_q_modifier(q.id, nb_source),
                                   **xkw)
@@ -611,10 +614,15 @@ class Exercise(object):
                                                     common_nb)
                 else:  # i == 0 (i.e. first source for this question)
                     not_in = last_draw[nb_source]
+                    either = None  # default value, no effect
                     if nb_source == 'polygons':
                         not_in = None
+                    if q.options.get('force_table', None) is not None:
+                        not_in = None
+                        either = [q.options.get('force_table')]
                     drawn = shared.mc_source.next(nb_source,
                                                   not_in=not_in,
+                                                  either_nb1_nb2_in=either,
                                                   qkw=q.options,
                                                   **get_q_modifier(
                                                       q.id, nb_source),
