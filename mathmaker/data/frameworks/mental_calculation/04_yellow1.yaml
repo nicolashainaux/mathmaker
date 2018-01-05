@@ -67,6 +67,12 @@ multi_clever: !!omap
                  multi clever -> table_15 (1)
                  multi clever -> int_deci_clever_pairs (1)
 
+multi_decimal: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: multiplications with decimal numbers"
+  - exercise: !!omap
+    - questions: multi direct, nb_variant=decimal -> intpairs_2to9 (20)
+
 proportionality_problems: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: mini proportionality problems"
