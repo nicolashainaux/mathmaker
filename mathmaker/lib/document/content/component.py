@@ -165,6 +165,35 @@ class structure(object):
             for i in chosen_ones:
                 setattr(self, 'nb' + str(i),
                         getattr(self, 'nb' + str(i)) / 10)
+        elif (self.nb_variant in ['±half', '±quarter', '±halforquarter']
+              and self.nb_nb >= 2):
+            # Depending on the case we randomly add or substract 0.5 or 0.25
+            # (or randomly a mix of them) to a random sample of numbers
+            # (self.nb*)
+            if self.nb_variant == '±half':
+                g_xnb = (Number('0.5') for _ in range(self.nb_nb))
+            if self.nb_variant == '±quarter':
+                g_xnb = (Number('0.25') for _ in range(self.nb_nb))
+            if self.nb_variant == '±halforquarter':
+                def g_xnb():
+                    first_couple = [Number('0.5'), Number('0.25')]
+                    random.shuffle(first_couple)
+                    yield first_couple.pop()
+                    yield first_couple.pop()
+                    while True:
+                        yield random.choice([Number('0.5'), Number('0.25')])
+                g_xnb = g_xnb()
+            all_nb_ids = [i + 1 for i in range(self.nb_nb)]
+            random.shuffle(all_nb_ids)
+            how_many = random.choice([i + 1 for i in range(self.nb_nb)])
+            chosen_ones = random.sample(all_nb_ids, how_many)
+            signs = [1, -1]
+            random.shuffle(signs)
+            signs = signs * 2
+            for i in range(len(chosen_ones)):
+                setattr(self, 'nb' + str(chosen_ones[i]),
+                        getattr(self, 'nb' + str(chosen_ones[i]))
+                        + next(g_xnb) * signs[i])
 
     def _setup_euclidean_division(self, **kwargs):
         nb_list = list(kwargs['nb'])
