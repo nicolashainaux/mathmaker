@@ -1,3 +1,32 @@
+rectangles: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: areas and perimeters of rectangles"
+  - exercise: !!omap
+    - mix0:
+      - questions: area rectangle, picture=true, pick=3,
+                   area rectangle, pick=2
+      - nb: intpairs_2to9 (1)
+            intpairs_2to9, nb_variant=decimal (1)
+            table_11_tens_easy (1)
+            table_15 (1)
+            table_25 (1)
+    - mix1:
+      - questions: perimeter rectangle, picture=true, pick=2,
+                   perimeter rectangle
+      - nb: intpairs_2to9, nb_variant=decimal (1)
+            table_25 (1)
+            intpairs_5to20, nb_variant=decimal1 (1)
+    - questions: rectangle length_or_width, context=from_area -> intpairs_2to9 (1)
+                 rectangle length_or_width, context=from_perimeter, picture=true -> intpairs_5to20 (1)
+
+perimeter_of_a_polygon: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: perimeter of a polygon"
+  - exercise: !!omap
+    - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, level=1 (4)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=2 (4)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=3 (4)
+
 multi_divi_10_100_1000: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: multiplications and divisions by 10, 100 and 1000"
@@ -14,14 +43,6 @@ euclidean_divisions: !!omap
     - questions: divi euclidean -> intpairs_2to10 (12)
                  divi euclidean -> table_15 (4)
                  divi euclidean -> table_25 (4)
-
-perimeter_of_a_polygon: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: perimeter of a polygon"
-  - exercise: !!omap
-    - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, level=1 (4)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=2 (4)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=3 (4)
 
 fraction_of_a_linesegment: !!omap
   - preset: "mental calculation"

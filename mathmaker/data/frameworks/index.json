@@ -189,6 +189,16 @@
         "01_white1",
         "W02d"
     ],
+    "04_yellow1_rectangles": [
+        "mental_calculation",
+        "04_yellow1",
+        "rectangles"
+    ],
+    "04_yellow1_perimeter_of_a_polygon": [
+        "mental_calculation",
+        "04_yellow1",
+        "perimeter_of_a_polygon"
+    ],
     "04_yellow1_multi_divi_10_100_1000": [
         "mental_calculation",
         "04_yellow1",
@@ -198,11 +208,6 @@
         "mental_calculation",
         "04_yellow1",
         "euclidean_divisions"
-    ],
-    "04_yellow1_perimeter_of_a_polygon": [
-        "mental_calculation",
-        "04_yellow1",
-        "perimeter_of_a_polygon"
     ],
     "04_yellow1_fraction_of_a_linesegment": [
         "mental_calculation",
