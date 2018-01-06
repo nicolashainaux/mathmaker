@@ -22,6 +22,8 @@
 
 import os
 
+from mathmakerlib.calculus import is_integer
+
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.core.base_calculus import Product
@@ -37,6 +39,8 @@ class sub_object(component.structure):
         super().setup("numbers", nb=build_data, **options)
         super().setup("nb_variants", nb=build_data, **options)
         self.transduration = 8
+        if not is_integer(self.nb1) or not is_integer(self.nb2):
+            self.transduration = 15
 
         product = Product([self.nb1, self.nb2])
         self.product_str = product.printed

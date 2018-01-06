@@ -22,6 +22,8 @@
 
 import os
 
+from mathmakerlib.calculus import is_integer
+
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.core.root_calculus import Value
@@ -34,9 +36,14 @@ class sub_object(component.structure):
     def __init__(self, build_data, **options):
         super().setup("minimal", **options)
         super().setup("division", nb=build_data, **options)
-        self.transduration = 9
+        self.transduration = 12
         if self.divisor > 9 and self.divisor % 10 != 0:
-            self.transduration = 12
+            self.transduration = 15
+        elif not is_integer(self.dividend):
+            if self.divisor == 10:
+                self.transduration = 15
+            else:
+                self.transduration = 18
 
         if self.context == 'mini_problem':
             self.transduration = 25

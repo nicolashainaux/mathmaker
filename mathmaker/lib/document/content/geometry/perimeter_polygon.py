@@ -29,6 +29,7 @@ class sub_object(component.structure):
 
     def __init__(self, build_data, **options):
         super().setup('minimal', **options)
+        level = int(build_data[5])
         # super().setup('numbers', nb=, **options)
         # super().setup('nb_variant', **options)
         super().setup('length_units', **options)
@@ -41,7 +42,7 @@ class sub_object(component.structure):
             6: _('Perimeter of this hexagon? |hint:length_unit|')
         }[len(self.polygon.sides)]
 
-        self.transduration = 20
+        self.transduration = 12 + 3 * (level - 1)
 
         setup_wording_format_of(self)
         self.wording = self.wording.format(**self.wording_format)

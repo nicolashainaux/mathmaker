@@ -32,11 +32,11 @@ class sub_object(component.structure):
         # Possible options: allow_null_remainder (defaults to False)
         #                   force_null_remainder (defaults to False)
         super().setup("euclidean_division", nb=build_data, **options)
-        self.transduration = 16
+        self.transduration = 15
         if self.divisor > 5 and self.divisor % 10 != 0:
-            self.transduration += 4
+            self.transduration += 3
         if self.divisor > 10 and self.divisor % 10 != 0:
-            self.transduration += 4
+            self.transduration += 3
         self.wording = _('Euclidean division of {dividend} by {divisor}?')
         setup_wording_format_of(self)
         # This is actually meant for self.preset == 'mental calculation'

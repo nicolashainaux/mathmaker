@@ -50,9 +50,9 @@ class sub_object(component.structure):
         # We must have nb1 < nb2 in order to build the DividedLineSegment:
         if self.nb1 > self.nb2:
             self.nb1, self.nb2 = self.nb2, self.nb1
-        self.transduration = 10
-        if self.nb2 >= 7:
-            self.transduration += self.nb2 - 6
+        self.transduration = 8
+        if self.nb2 >= 5:
+            self.transduration += 2 * (self.nb2 - 5)
         fc = next(shared.dvipsnames_selection_source)[0]
         self.dividedlinesegment = DividedLineSegment(Point(0, 0, 'A'),
                                                      Point(10, 0, 'B'),
