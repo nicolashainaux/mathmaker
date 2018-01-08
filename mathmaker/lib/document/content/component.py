@@ -461,7 +461,8 @@ class structure(object):
 
     def _setup_polygon(self, polygon_data=None):
         # polygon_data is of the form:
-        # (sides_nb, codename, specificname, sides_particularity, level,
+        # (check the tables' columns in shapes.db-dist)
+        # (sides_nb, type, special, codename, sides_particularity, level,
         #  variant, table2, table3, table4, table5, table6, ...)
         # where ... are the available numbers to use for sides labeling.
         polygon_data = list(polygon_data)
