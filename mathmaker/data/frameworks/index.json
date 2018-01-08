@@ -264,6 +264,26 @@
         "04_yellow1",
         "W01d"
     ],
+    "04_yellow1_W02a": [
+        "mental_calculation",
+        "04_yellow1",
+        "W02a"
+    ],
+    "04_yellow1_W02b": [
+        "mental_calculation",
+        "04_yellow1",
+        "W02b"
+    ],
+    "04_yellow1_W02c": [
+        "mental_calculation",
+        "04_yellow1",
+        "W02c"
+    ],
+    "04_yellow1_W02d": [
+        "mental_calculation",
+        "04_yellow1",
+        "W02d"
+    ],
     "03_yellow_complements": [
         "mental_calculation",
         "03_yellow",

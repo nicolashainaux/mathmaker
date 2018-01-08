@@ -124,13 +124,14 @@ W01b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, level=2 (1)
-                 multi direct -> decimal_and_10_100_1000 (2)
+                 multi direct -> decimal_and_10_100_1000 (1)
                  divi direct -> decimal_and_10_100_1000 (2)
+                 fraction_of a_linesegment -> simple_fractions, nb2=3 (1)
 
 W01c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, level=3 (1)
+    - questions: divi euclidean -> intpairs_5to9 (1)
                  multi direct -> decimal_and_10_100_1000 (1)
                  divi direct -> decimal_and_10_100_1000 (1)
                  percent direct -> 50%of..., level=easy (1)
@@ -144,3 +145,39 @@ W01d: !!omap
                  divi direct -> decimal_and_10_100_1000 (1)
                  percent direct -> 75%of..., level=easy, context=simple_unit (1)
                  percent direct -> 25%of..., level=easy, context=simple_unit (1)
+
+W02a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: multi clever, variant=fifths_series -> singleint_2to99 (1)
+                 multi clever, variant=quarters_series -> intpairs_2to9 (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
+                 percent direct -> 25%of..., context=simple_unit (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=3 (1)
+
+W02b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: multi clever, variant=fifths_series -> singleint_2to99 (1)
+                 multi clever, variant=quarters_series -> intpairs_2to9 (1)
+                 multi direct -> decimal_and_10_100_1000 (1)
+                 percent direct -> 75%of..., context=simple_unit (1)
+                 fraction_of a_linesegment -> simple_fractions, nb2=7 (1)
+
+W02c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: multi clever, variant=fifths_series -> table_15 (1)
+                 multi clever, variant=quarters_series -> table_11_tens_easy (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=3 (1)
+                 multi direct, nb_variant=decimal -> intpairs_2to9 (1)
+
+W02d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: multi clever, variant=quarters_series -> table_11_tens_easy (1)
+                 multi direct -> decimal_and_10_100_1000 (1)
+                 fraction_of a_linesegment -> simple_fractions, nb2=7 (1)
+                 multi direct, nb_variant=decimal -> intpairs_2to9 (1)
+                 multi clever, variant=with_a_decimal -> intpairs_2to9 (1)
