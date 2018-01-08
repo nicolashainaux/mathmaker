@@ -95,7 +95,7 @@ class sub_object(component.structure):
             all_nb += remaining
 
         super().setup("numbers", nb=all_nb, shuffle_nbs=False, **options)
-        self.transduration = 12
+        self.transduration = 15
 
         product = Product([getattr(self,
                                    'nb' + str(i + 1))

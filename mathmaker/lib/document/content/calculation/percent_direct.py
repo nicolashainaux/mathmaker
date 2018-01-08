@@ -34,13 +34,16 @@ class sub_object(component.structure):
         super().setup('minimal', **options)
         super().setup('numbers', nb=build_data, shuffle_nbs=False,
                       **options)
+        source_id = options.get('nb_source')
+        if source_id == r'10%of...':
+            self.transduration = 12
+        elif source_id in [r'25%of...', r'50%of...'] and self.nb2 < 40:
+            self.transduration = 12
+        else:
+            self.transduration = 16
         if self.nb_variant.startswith('decimal'):
             deci_nb = int(self.nb_variant[-1])
             self.nb2 = self.nb2 / Number(10) ** Number(deci_nb)
-        self.transduration = 12
-        source_id = options.get('nb_source')
-        if source_id not in [r'25%of...', r'50%of...', r'10%of...']:
-            self.transduration = 16
 
         self.result = self.nb1 * self.nb2 / Number(100)
         self.n1 = self.nb1.printed
@@ -48,8 +51,7 @@ class sub_object(component.structure):
         if self.context == 'simple_unit':
             u = shared.unitspairs_source.next(direction='left')[0]
             pq = physical_quantity(u)
-            self.n2 = shared.machine.write_math_style2(
-                Number(self.nb2, unit=Unit(u)).printed)
+            self.n2 = Number(self.nb2, unit=Unit(u)).printed
             hint = ' |hint:{}_unit|'.format(pq)
             setattr(self, pq + '_unit', u)
             self.result = Number(self.result, unit=u)
