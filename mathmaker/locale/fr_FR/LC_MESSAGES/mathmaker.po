@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2018-01-05 19:34+0100\n"
+"PO-Revision-Date: 2018-01-09 18:59+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -34,58 +34,58 @@ msgstr "N'importe quelle valeur de {variable_name} est solution de l'équation."
 msgid "This equation has no solution."
 msgstr "Cette équation n'a pas de solution."
 
-#: lib/machine/LaTeX.py:170
+#: lib/machine/LaTeX.py:196
 msgid "To strike out numbers "
 msgstr "Pour pouvoir rayer des nombres "
 
-#: lib/machine/LaTeX.py:175
+#: lib/machine/LaTeX.py:201
 msgid "To use the margin definition command"
 msgstr "Pour utiliser la commande de définition des marges"
 
-#: lib/machine/LaTeX.py:179
+#: lib/machine/LaTeX.py:205
 #, python-brace-format
 msgid "To use the commands from {pkg_name} "
 msgstr "Pour utiliser les commandes de {pkg_name} "
 
-#: lib/machine/LaTeX.py:182
+#: lib/machine/LaTeX.py:208
 msgid "To use multicol environment"
 msgstr "Pour faire une présentation multicolonnes"
 
-#: lib/machine/LaTeX.py:185
+#: lib/machine/LaTeX.py:211
 msgid "To use extra commands to handle tabulars"
 msgstr "Pour utiliser des commandes supplémentaires pour les tableaux"
 
-#: lib/machine/LaTeX.py:187
+#: lib/machine/LaTeX.py:213
 msgid "For pretty underlining"
 msgstr "Pour de jolis soulignages"
 
-#: lib/machine/LaTeX.py:197
+#: lib/machine/LaTeX.py:223
 msgid "To use other mathematical symbols"
 msgstr "Pour utiliser d'autres symboles mathématiques"
 
-#: lib/machine/LaTeX.py:200
+#: lib/machine/LaTeX.py:226
 msgid "To draw"
 msgstr "Pour dessiner"
 
-#: lib/machine/LaTeX.py:206
+#: lib/machine/LaTeX.py:232
 msgid "Page layout "
 msgstr "Mise en page générale "
 
-#: lib/machine/LaTeX.py:212
+#: lib/machine/LaTeX.py:238
 msgid "If you wish to include a picture, please use this command:"
 msgstr ""
 "Si vous souhaitez inclure une image, utilisez s'il vous plaît cette "
 "commande :"
 
-#: lib/machine/LaTeX.py:215
+#: lib/machine/LaTeX.py:241
 msgid "file_name"
 msgstr "nom_du_fichier"
 
-#: lib/machine/LaTeX.py:217
+#: lib/machine/LaTeX.py:243
 msgid "Exercises counter"
 msgstr "Compteur d'exercices"
 
-#: lib/machine/LaTeX.py:219
+#: lib/machine/LaTeX.py:245
 #, python-brace-format
 msgid ""
 "Definition of the {cmd_name} command, which will insert the word {word} in "
@@ -94,11 +94,11 @@ msgstr ""
 "Définition de la commande {cmd_name}, qui va insérer le mot {word} en gras, "
 "accompagné de son numéro et qui va incrémenter automatiquement le compteur"
 
-#: lib/machine/LaTeX.py:227 lib/machine/LaTeX.py:223
+#: lib/machine/LaTeX.py:249 lib/machine/LaTeX.py:253
 msgid "Exercise"
 msgstr "Exercice"
 
-#: lib/machine/LaTeX.py:230
+#: lib/machine/LaTeX.py:256
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -321,8 +321,8 @@ msgstr "Factoriser, si possible :"
 msgid "Question:"
 msgstr "Question :"
 
+#: lib/document/frames/exercise.py:771
 #: lib/old_style_sheet/exercise/X_Structure.py:265
-#: lib/document/frames/exercise.py:767
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -471,11 +471,11 @@ msgstr "Réponses"
 msgid "Mental calculation: mini-problems"
 msgstr "Calcul mental : mini-problèmes"
 
-#: lib/machine/LaTeX.py:194
+#: lib/machine/LaTeX.py:220
 msgid "To use some symbols like currency units"
 msgstr "Pour utiliser des symboles (par exemple des unités de monétaires)"
 
-#: lib/machine/LaTeX.py:159
+#: lib/machine/LaTeX.py:185
 msgid "To display units correctly"
 msgstr "Pour afficher correctement les unités"
 
@@ -649,7 +649,7 @@ msgstr "Exemple de solutions :"
 msgid "Intercept theorem"
 msgstr "Théorème de Thalès"
 
-#: lib/machine/LaTeX.py:190
+#: lib/machine/LaTeX.py:216
 msgid "To include .eps pictures (loads graphicx)"
 msgstr "Pour inclure des images .eps (charge aussi graphicx)"
 
@@ -1974,22 +1974,22 @@ msgstr "Calcul mental : divisions"
 msgid "Mental calculation: multiplication by 11"
 msgstr "Calcul mental : multiplications par 11"
 
-#: lib/document/content/component.py:403
+#: lib/document/content/component.py:409
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr "Combien faut-il ajouter à {number1} pour obtenir {number2} ?"
 
-#: lib/document/content/component.py:408
+#: lib/document/content/component.py:414
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr "Quel est le complément à 10 de {number} ?"
 
-#: lib/document/content/component.py:412
+#: lib/document/content/component.py:418
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr "Quel est le complément à 100 de {number} ?"
 
-#: lib/document/content/component.py:416
+#: lib/document/content/component.py:422
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr "Quel est le complément à {number1} de {number2} ?"
@@ -2006,7 +2006,7 @@ msgstr "Calcul mental : compléments à 10 et à 100"
 msgid "Mental calculation: final test for white belt, second stripe"
 msgstr "Calcul mental : ceinture blanche, deuxième trait"
 
-#: lib/machine/LaTeX.py:177
+#: lib/machine/LaTeX.py:203
 msgid "To be able to color the documents"
 msgstr "Pour pouvoir mettre les documents en couleur"
 
@@ -2016,14 +2016,15 @@ msgstr "Allez, on corrige !"
 
 #: lib/document/content/calculation/subtr_direct.py:78
 #: lib/document/content/calculation/addi_direct.py:73
-#: lib/document/content/calculation/multi_direct.py:56
-#: lib/document/content/calculation/divi_direct.py:54
+#: lib/document/content/calculation/multi_direct.py:60
 #: lib/document/content/calculation/multi_clever.py:108
+#: lib/document/content/calculation/order_of_operations.py:1446
+#: lib/document/content/calculation/divi_direct.py:54
 #, python-brace-format
 msgid "{math_expr} = {q_mark}"
 msgstr "{math_expr} = {q_mark}"
 
-#: lib/document/content/calculation/multi_hole.py:68
+#: lib/document/content/calculation/multi_hole.py:76
 #, python-brace-format
 msgid "{math_expr}"
 msgstr "{math_expr}"
@@ -2039,13 +2040,13 @@ msgstr ""
 "\n"
 "(dans les tables de multiplication, de 2 à 9)"
 
-#: lib/machine/LaTeX.py:172
+#: lib/machine/LaTeX.py:198
 msgid "To get a better control on floats positioning (e.g. tabulars) "
 msgstr ""
 "Pour avoir un meilleur contrôle sur le positionnement des \"flottants\" (par "
 "exemple les tabulars)"
 
-#: lib/document/frames/exercise.py:396
+#: lib/document/frames/exercise.py:397
 msgid "Example of detailed solutions:"
 msgstr "Exemple de solutions détaillées :"
 
@@ -2154,33 +2155,33 @@ msgstr "Calcul mental : tables de 15 et de 25"
 msgid "Mental calculation:  final test for yellow belt"
 msgstr "Calcul mental : ceinture jaune"
 
-#: lib/machine/LaTeX.py:204
+#: lib/machine/LaTeX.py:230
 msgid "To insert pdf formular and javascript"
 msgstr "Pour insérer un formulaire pdf et du javascript"
 
-#: lib/document/frames/exercise.py:899
+#: lib/document/frames/exercise.py:917
 msgid "Clear everything"
 msgstr "Tout effacer"
 
-#: lib/document/frames/exercise.py:900
+#: lib/document/frames/exercise.py:918
 msgid "Validate"
 msgstr "Valider"
 
-#: lib/document/frames/exercise.py:909
+#: lib/document/frames/exercise.py:928
 #, python-brace-format
 msgid "Score: ... / {q_number}"
 msgstr "Score : ... / {q_number}"
 
-#: lib/document/frames/exercise.py:911
+#: lib/document/frames/exercise.py:930
 #, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr "\"Score : \" + count.toString() + \" / {q_number}\""
 
-#: lib/document/frames/exercise.py:904
+#: lib/document/frames/exercise.py:922
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr "J"
 
-#: lib/document/frames/exercise.py:906
+#: lib/document/frames/exercise.py:925
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr "F"
 
@@ -2212,7 +2213,7 @@ msgstr "{how_many_digitplace} dans {decimal_number} ?"
 msgid "Mental calculation: simple percentages calculations"
 msgstr "Calcul mental : pourcentages simples"
 
-#: lib/document/content/calculation/percent_direct.py:61
+#: lib/document/content/calculation/percent_direct.py:62
 #, python-brace-format
 msgid "{n1} {percent_symbol} of {n2}?"
 msgstr "{n1} {percent_symbol} de {n2} ?"
@@ -2228,19 +2229,19 @@ msgstr "À quelle fraction du segment correspond la partie colorée ?"
 msgid "Mental calculation: fraction of a line segment"
 msgstr "Calcul mental : fraction d'un segment"
 
-#: lib/document/content/geometry/perimeter_polygon.py:38
+#: lib/document/content/geometry/perimeter_polygon.py:39
 msgid "Perimeter of this triangle? |hint:length_unit|"
 msgstr "Périmètre de ce triangle ? |hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_polygon.py:39
+#: lib/document/content/geometry/perimeter_polygon.py:40
 msgid "Perimeter of this quadrilateral? |hint:length_unit|"
 msgstr "Périmètre de ce quadrilatère ? |hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_polygon.py:40
+#: lib/document/content/geometry/perimeter_polygon.py:41
 msgid "Perimeter of this pentagon? |hint:length_unit|"
 msgstr "Périmètre de ce pentagone ? |hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_polygon.py:41
+#: lib/document/content/geometry/perimeter_polygon.py:42
 msgid "Perimeter of this hexagon? |hint:length_unit|"
 msgstr "Périmètre de cet hexagone ? |hint:length_unit|"
 
@@ -2262,9 +2263,10 @@ msgstr "Division euclidienne de {dividend} par {divisor} ?"
 msgid "Mental calculation: euclidean divisions"
 msgstr "Calcul mental : divisions euclidiennes"
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:99
 #: data/frameworks/mental_calculation/04_yellow1.yaml:38
+#: data/frameworks/mental_calculation/04_yellow1.yaml:105
 #: data/frameworks/mental_calculation/04_yellow1.yaml:103
+#: data/frameworks/mental_calculation/04_yellow1.yaml:99
 msgid "Mental calculation: mini proportionality problems"
 msgstr "Calcul mental : mini-problèmes (proportionnalité)"
 
@@ -2618,12 +2620,14 @@ msgid "Mental calculation: multiplications and divisions by 10, 100 and 1000"
 msgstr "Calcul mental : multiplications et divisions par 10, 100 et 1000"
 
 #: data/frameworks/mental_calculation/04_yellow1.yaml:87
+#: data/frameworks/mental_calculation/04_yellow1.yaml:89
 #: data/frameworks/mental_calculation/04_yellow1.yaml:83
 msgid "Mental calculation: clever multiplications"
 msgstr "Calcul mental : multiplications astucieuses"
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:93
 #: data/frameworks/mental_calculation/04_yellow1.yaml:97
+#: data/frameworks/mental_calculation/04_yellow1.yaml:93
+#: data/frameworks/mental_calculation/04_yellow1.yaml:99
 msgid "Mental calculation: multiplications with decimal numbers"
 msgstr "Calcul mental : multiplications décimales"
 
@@ -2631,6 +2635,14 @@ msgstr "Calcul mental : multiplications décimales"
 #, python-brace-format
 msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr "Prêt ?{sep}Feu !{sep}Partez !"
+
+#: data/frameworks/mental_calculation/04_yellow1.yaml:181
+msgid "Challenge, first part"
+msgstr "Première épreuve du Tournoi"
+
+#: data/frameworks/mental_calculation/04_yellow1.yaml:118
+msgid "Mental calculation:  final test for yellow belt, first stripe"
+msgstr "Calcul mental : ceinture jaune, premier trait"
 
 #~ msgid "Multiplications with a hole"
 #~ msgstr "Multiplications à trou"
