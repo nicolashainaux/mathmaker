@@ -28,6 +28,7 @@ from mathmakerlib.calculus import remove_fracdigits_from, fix_fracdigits
 from mathmakerlib.calculus import Number
 
 from mathmaker.lib import shared
+from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Division,
                                               Expandable, Value)
 from mathmaker.lib.core.calculus import Expression
@@ -1440,7 +1441,13 @@ class sub_object(component.structure):
         shared.number_of_the_question += 1
 
     def q(self, **options):
-        return shared.machine.write_math_style2(self.expression_str)
+        if self.x_layout_variant == 'tabular':
+            self.substitutable_question_mark = True
+            return _('{math_expr} = {q_mark}').format(
+                math_expr=shared.machine.write_math_style2(self.obj.printed),
+                q_mark=COLORED_QUESTION_MARK)
+        else:
+            return shared.machine.write_math_style2(self.expression_str)
 
     def a(self, **options):
         if self.x_layout_variant == 'tabular':
