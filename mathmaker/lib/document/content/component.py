@@ -224,8 +224,14 @@ class structure(object):
             self.divisor, self.dividend = nb_list[0], nb_list[1]
             self.result = self.dividend / self.divisor
         else:
-            self.divisor = Number(nb_list.pop(random.choice([0, 1])))
-            self.result = Number(nb_list.pop())
+            order = kwargs.get('order', 'random')
+            if order == 'divisor,quotient':
+                self.divisor, self.result = nb_list[0], nb_list[1]
+            elif order == 'quotient,divisor':
+                self.divisor, self.result = nb_list[1], nb_list[0]
+            else:
+                self.divisor = Number(nb_list.pop(random.choice([0, 1])))
+                self.result = Number(nb_list.pop())
             if self.variant[:-1] == 'decimal':
                 self.result /= 10
             self.dividend = self.divisor * self.result
