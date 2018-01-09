@@ -33,9 +33,13 @@ from mathmaker.lib.document.content import component
 
 class sub_object(component.structure):
 
-    def __init__(self, build_data, **options):
+    def __init__(self, build_data, hidden=None, **options):
         super().setup('numbers', nb=build_data, shuffle_nbs=False,
                       standardize_decimal_numbers=True, **options)
+        if hidden is None:
+            hidden = random.choice([1, 2])
+        else:
+            hidden = int(hidden)
         hole = Item(Value(COLORED_QUESTION_MARK))
         self.hidden_one = None
         visible_one = None
@@ -56,10 +60,14 @@ class sub_object(component.structure):
             visible_one = L.pop()
 
         factors = [visible_one, hole]
-        random.shuffle(factors)
-        # TODO: better use a Product (when it's available in mathmakerlib)
-        self.holed_product = r' \times '.join([factors.pop().printed,
-                                               factors.pop().printed])
+        if hidden == 1:
+            # TODO: better use a Product (when it's available in mathmakerlib)
+            self.holed_product = r' \times '.join([factors[1].printed,
+                                                   factors[0].printed])
+        elif hidden == 2:
+            # TODO: better use a Product (when it's available in mathmakerlib)
+            self.holed_product = r' \times '.join([factors[0].printed,
+                                                   factors[1].printed])
         # self.holed_product.set_compact_display(False)
 
     def q(self, **options):
