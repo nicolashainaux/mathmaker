@@ -217,3 +217,75 @@ W02d: !!omap
                  fraction_of a_linesegment -> simple_fractions, nb2=7 (1)
                  multi direct, nb_variant=decimal -> intpairs_2to9 (1)
                  multi clever, variant=with_a_decimal -> intpairs_2to9 (1)
+
+W03a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: mini_pb proportionality -> deciinttriplesforprop_3to9 (1)
+                 multi clever -> intpairs_2to9 (1)
+                 percent direct -> 25%of..., context=simple_unit (1)
+                 divi euclidean -> intpairs_5to9 (1)
+                 addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±halforquarter (1)
+
+W03b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: mini_pb proportionality -> mergedinttriples_3to9 (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
+                 multi hole -> int_irreducible_frac (1)
+                 area rectangle -> intpairs_2to9, nb_variant=decimal1 (1)
+                 units conversion -> unitspairs (1)
+
+W03c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: mini_pb proportionality -> mergedinttriples_3to9, force_table=7, wid=38 (1)
+                 multi direct -> decimal_and_10_100_1000 (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=4 (1)
+                 vocabulary third -> multiplesof3_12to19 (1)
+                 decimal numerals, direction=to_decimal -> decimals (1)
+
+W03d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: mini_pb proportionality -> mergedinttriples_15_3to6 (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
+                 fraction_of a_linesegment -> simple_fractions (1)
+                 percent direct -> 75%of..., context=simple_unit (1)
+                 addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±quarter (1)
+
+W04a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: mini_pb proportionality -> mergedinttriples_25_3to6 (1)
+                 multi direct -> decimal_and_10_100_1000 (1)
+                 perimeter rectangle -> intpairs_2to9 (1)
+                 multi clever -> intpairs_2to9, nb_variant=decimal2 (1)
+                 divi euclidean -> intpairs_5to9 (1)
+
+W04b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: mini_pb proportionality -> deciinttriplesforprop_3to9 (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=4 (1)
+                 multi hole -> int_irreducible_frac (1)
+                 units conversion -> unitspairs (1)
+
+W04c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: mini_pb proportionality -> mergedinttriples_3to9 (1)
+                 multi direct -> decimal_and_10_100_1000 (1)
+                 area rectangle -> intpairs_2to9, nb_variant=decimal2 (1)
+                 multi clever -> table_15 (1)
+                 vocabulary multi -> table_25 (1)
+
+W04d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: mini_pb proportionality -> mergedinttriples_15_3to6 (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
+                 perimeter rectangle -> intpairs_2to9, nb_variant=decimal2 (1)
+                 addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
+                 addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±quarter (1)
