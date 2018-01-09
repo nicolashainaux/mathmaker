@@ -1443,8 +1443,11 @@ class sub_object(component.structure):
         return shared.machine.write_math_style2(self.expression_str)
 
     def a(self, **options):
-        return shared.machine.write(
-            self.expression.auto_expansion_and_reduction(**options))
+        if self.x_layout_variant == 'tabular':
+            return Value(self.expression.right_hand_side.evaluate()).printed
+        else:
+            return shared.machine.write(
+                self.expression.auto_expansion_and_reduction(**options))
 
     def js_a(self, **kwargs):
         return [Value(self.expression.right_hand_side.evaluate()).jsprinted]
