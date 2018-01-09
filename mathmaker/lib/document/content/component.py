@@ -189,7 +189,7 @@ class structure(object):
             chosen_ones = random.sample(all_nb_ids, how_many)
             signs = [1, -1]
             random.shuffle(signs)
-            signs = signs * 2
+            signs = signs * len(chosen_ones)
             for i in range(len(chosen_ones)):
                 setattr(self, 'nb' + str(chosen_ones[i]),
                         getattr(self, 'nb' + str(chosen_ones[i]))
