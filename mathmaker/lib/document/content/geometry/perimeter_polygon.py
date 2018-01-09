@@ -31,7 +31,7 @@ class sub_object(component.structure):
         super().setup('minimal', **options)
         level = int(build_data[5])
         # super().setup('numbers', nb=, **options)
-        # super().setup('nb_variant', **options)
+        # super().setup('nb_variants', **options)
         super().setup('length_units', **options)
         super().setup('polygon', polygon_data=build_data)
 
