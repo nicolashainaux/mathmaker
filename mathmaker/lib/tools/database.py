@@ -1409,3 +1409,7 @@ class mc_source(object):
             return shared.deci_int_triples_for_prop_source.next(**kwargs)
         elif tag_classification == 'nothing':
             return ()
+        else:
+            raise RuntimeError('Could not build a query to the database, '
+                               'because tag\'s classification did not match '
+                               'any known case.')
