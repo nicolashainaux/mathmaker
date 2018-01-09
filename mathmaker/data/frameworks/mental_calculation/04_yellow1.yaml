@@ -111,7 +111,68 @@ proportionality_problems: !!omap
                  # To select exclusively from table of 15 or from table of 25,
                  # use mergedinttriples_*_3to6
 
-# TODO: exam
+exam: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation:  final test for yellow belt, first stripe."
+  - exercise: !!omap
+    - layout:
+      - min_row_height: 0.6
+    - mix0:
+      - questions: area rectangle, picture=true, pick=1
+      - nb: intpairs_2to9 (1)
+            intpairs_2to9, nb_variant=decimal (1)
+            table_11_tens_easy (1)
+            table_15 (1)
+    - mix1:
+      - questions: perimeter rectangle, picture=true, pick=1
+      - nb: intpairs_2to9, nb_variant=decimal (1)
+            table_25 (1)
+            intpairs_5to20, nb_variant=decimal1 (1)
+    - questions: fraction_of a_linesegment -> simple_fractions (1)
+                 multi hole -> int_irreducible_frac (1)
+                 [1][addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±halforquarter (1)
+                     addi hole -> complements_to_10, nb_variant=decimal2 (1)
+                     addi hole -> singleint_70to200;;singleint_70to200, nb_variant=decimal2 (1)]
+                 [1][subtr hole, subvariant=only_positive -> singleint_70to200;;singleint_70to200, nb_variant=decimal2 (1)
+                     subtr hole, subvariant=only_positive, hidden=1 -> complements_to_1, nb_variant=decimal1 (1)
+                     subtr hole, subvariant=only_positive, hidden=2 -> complements_to_1, nb_variant=decimal1 (1)
+                     subtr hole, subvariant=only_positive, hidden=1 -> complements_to_10, nb_variant=decimal1 (1)
+                     subtr hole, subvariant=only_positive, hidden=2 -> complements_to_10, nb_variant=decimal1 (1)]
+                 [1][divi euclidean -> intpairs_2to10 (1)
+                     divi euclidean -> table_15 (1)
+                     divi euclidean -> table_25 (1)]
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=3 (1)
+                 multi direct -> decimal_and_10_100_1000 (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
+                 percent direct -> 75%of..., level=easy, context=simple_unit (1)
+                 percent direct -> 25%of..., context=simple_unit (1)
+                 [1][multi clever -> singleint_2to99 (1)
+                     multi clever, variant=with_a_decimal -> intpairs_2to9 (1)
+                     multi clever -> table_11_tens_easy (1)
+                     multi clever -> table_15 (1)
+                     multi clever -> int_deci_clever_pairs (1)]
+                 multi direct, nb_variant=decimal1 -> intpairs_2to9 (1)
+                 multi direct, nb_variant=decimal2 -> intpairs_2to9 (1)
+                 [1][mini_pb proportionality -> deciinttriplesforprop_3to9 (1)
+                     mini_pb proportionality -> mergedinttriples_3to9 (1)
+                     mini_pb proportionality -> mergedinttriples_3to9, force_table=7, wid=38 (1)
+                     mini_pb proportionality -> mergedinttriples_15_3to6 (1)
+                     mini_pb proportionality -> mergedinttriples_25_3to6 (1)]
+                 [1][multi hole -> intpairs_2to9 (1)
+                     multi hole -> table_15 (1)
+                     multi hole -> table_25 (1)]
+                 [1][multi direct, context=mini_problem -> intpairs_4to9 (1)
+                     subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100(1)
+                     divi direct, context=mini_problem -> intpairs_4to9 (1)
+                     divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
+                     vocabulary simple_parts_of_a_number -> auto_multiples (1)
+                     vocabulary simple_multiples_of_a_number -> auto_multiples (1)
+                     vocabulary operation -> auto_vocabulary (6)]
+                 units conversion -> unitspairs (1)
+                 [1][addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
+                     addi direct, context=ask:turn_to_decimal_repr, variant=cut, iz_ge=1 -> decimalfractionssums (1)
+                     decimal numerals, direction=to_decimal -> decimals (1)
+                     decimal numerals, direction=to_fraction -> decimals (1)]
 
 challenge: !!omap
   - preset: "mental calculation"
