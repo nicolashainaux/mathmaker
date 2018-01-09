@@ -449,6 +449,8 @@ def classify_tag(tag):
         return 'int_triples'
     elif tag.endswith(r'%of...'):
         return 'percentage'
+    elif tag.startswith('int_quintuples'):
+        return 'int_quintuples'
     elif tag in ['int_deci_clever_pairs',
                  'int_irreducible_frac', 'nothing',
                  'decimal_and_10_100_1000_for_multi',
@@ -596,6 +598,23 @@ def preprocess_int_pairs_tag(tag, qkw=None):
                     + ' and (nb1 >= ' + mini + ' and nb1 <= ' + maxi + '))',
              'prevails': [N]}
 
+    return d
+
+
+def preprocess_int_quintuples_tag(tag, qkw=None):
+    d = {}
+    if 'to' in tag:
+        if '×' not in tag:
+            n1, n2 = tag[len('int_quintuples_'):].split(sep='to')
+            d = {'nb1_min': n1, 'nb1_max': n2,
+                 'nb2_min': n1, 'nb2_max': n2}
+        else:
+            nb1_part, nb2_part = tag.replace('int_quintuples_', '')\
+                .split(sep='×')
+            min1, max1 = nb1_part.split(sep='to')
+            min2, max2 = nb2_part.split(sep='to')
+            d = {'nb1_min': min1, 'nb1_max': max1,
+                 'nb2_min': min2, 'nb2_max': max2}
     return d
 
 
@@ -1298,6 +1317,7 @@ class mc_source(object):
             # query. So, we manually deleted it here, if necessary.
             if 'codename' in correct_kw:
                 del correct_kw['codename']
+            correct_kw.update(preprocess_int_quintuples_tag(source_id))
             return shared.int_quintuples_source.next(**correct_kw)
         if tag_classification == 'int_sextuples':
             correct_kw = preprocess_qkw(db_table('int_sextuples'), qkw=qkw)
