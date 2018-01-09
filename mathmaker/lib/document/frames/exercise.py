@@ -384,6 +384,7 @@ class Exercise(object):
 
     def setup(self, **options):
         self.preset = options.get('preset', 'default')
+        presets = {}
         if self.preset not in AVAILABLE_PRESETS:
             warnings.warn('XML Format error: incorrect preset value {}. '
                           'Defaulting to \'default\'.'.format(self.preset))
@@ -394,7 +395,8 @@ class Exercise(object):
                        'q_spacing': 'undefined',
                        'details_level': 'maximum',
                        'text_ans': _('Example of detailed solutions:'),
-                       'q_numbering': 'disabled'}
+                       'q_numbering': 'disabled',
+                       'tabular_batch': 0}
         elif self.preset == 'mental calculation':
             # /!\ q_numbering for tabular is indeed what happens, but the
             # value defined below is NOT used, it is hardcoded instead.
@@ -404,8 +406,9 @@ class Exercise(object):
                        'q_spacing': '',
                        'details_level': 'none',
                        'text_ans': '',
-                       'q_numbering': 'numeric'}
-
+                       'q_numbering': 'numeric',
+                       'tabular_batch': 20}
+        self.tabular_batch = presets.get('tabular_batch', 0)
         self.layout_variant = options.get('layout_variant',
                                           presets.get('layout_variant'))
         if self.layout_variant not in AVAILABLE_LAYOUT_VARIANTS:
@@ -615,7 +618,8 @@ class Exercise(object):
                 else:  # i == 0 (i.e. first source for this question)
                     not_in = last_draw[nb_source]
                     either = None  # default value, no effect
-                    if nb_source == 'polygons':
+                    if (nb_source == 'polygons'
+                        or nb_source.startswith('int_quintuples')):
                         not_in = None
                     if q.options.get('force_table', None) is not None:
                         not_in = None
@@ -773,34 +777,48 @@ class Exercise(object):
 
         # default tabular option:
         elif self.layout_variant == 'tabular':
-            q = [self.questions_list[i].to_str('exc')
-                 for i in range(self.q_nb)]
-            a = [COLORED_ANSWER.format(
-                 text='{' + self.questions_list[i].to_str('ans') + '}')
-                 for i in range(self.q_nb)]\
-                if ex_or_answers == 'ans' \
-                else [self.questions_list[i].to_str('hint')
-                      for i in range(self.q_nb)]
+            # tabular_batch can be used to define how many questions will be
+            # printed in one table on one page. If it is set to 0, then all
+            # questions will be put in the same tabular. Otherwise, questions
+            # will be grouped by the number defined as tabular_batch.
+            if self.tabular_batch:
+                batches_nb = (self.q_nb - 1) // self.tabular_batch + 1
+            else:
+                batches_nb = 1
+                self.tabular_batch = self.q_nb
+            for bn in range(batches_nb):
+                qn_bounds = [bn * self.tabular_batch,
+                             min((bn + 1) * self.tabular_batch, self.q_nb)]
+                q = [self.questions_list[i].to_str('exc')
+                     for i in range(*qn_bounds)]
+                a = [COLORED_ANSWER.format(
+                     text='{' + self.questions_list[i].to_str('ans') + '}')
+                     for i in range(*qn_bounds)]\
+                    if ex_or_answers == 'ans' \
+                    else [self.questions_list[i].to_str('hint')
+                          for i in range(*qn_bounds)]
 
-            if shared.enable_js_form and ex_or_answers == 'exc':
-                for i in range(len(a)):
-                    a[i] = r"""\TextField[name=ans""" + str(i + 1) \
-                        + r""",bordercolor=,value=,width=2.6cm]{} """ + a[i]
+                if shared.enable_js_form and ex_or_answers == 'exc':
+                    for i in range(len(a)):
+                        a[i] = r"""\TextField[name=ans""" + str(i + 1) \
+                            + r""",bordercolor=,value=,width=2.6cm]{} """ \
+                            + a[i]
 
-            n = [M.write(str(i + 1) + ".", emphasize='bold')
-                 for i in range(self.q_nb)]
+                n = [M.write(str(i + 1) + ".", emphasize='bold')
+                     for i in range(*qn_bounds)]
 
-            content = [elt for triple in zip(n, q, a) for elt in triple]
-
-            result += M.write_layout((self.q_nb, 3),
-                                     [0.5, 14.25, 3.75],
-                                     content,
-                                     borders='penultimate',
-                                     justify=['left', 'left', 'center'],
-                                     center_vertically=True,
-                                     min_row_height=self.min_row_height)
-            if shared.enable_js_form and ex_or_answers == 'exc':
-                result += (r"""
+                content = [elt for triple in zip(n, q, a) for elt in triple]
+                lines_nb = min(self.tabular_batch,
+                               self.q_nb - bn * self.tabular_batch)
+                result += M.write_layout((lines_nb, 3),
+                                         [0.5, 14.25, 3.75],
+                                         content,
+                                         borders='penultimate',
+                                         justify=['left', 'left', 'center'],
+                                         center_vertically=True,
+                                         min_row_height=self.min_row_height)
+                if shared.enable_js_form and ex_or_answers == 'exc':
+                    result += (r"""
 \PushButton[name=clearbutton,bordercolor={{0.5 0.5 0.5}},
             onclick={{var qNumber = {q_number};
                      for (var i = 1; i <= qNumber; i++) {{
@@ -844,28 +862,28 @@ class Exercise(object):
                      var answers = {list_of_answers};
                      var count = 0;
                      var color_green = ["RGB", 0.2265625, 0.49609375, """
-                           r"""0.195315];
+                               r"""0.195315];
                      var color_red = ["RGB", 0.7109375, 0.1875, 0.109375];
                      for (var i = 1; i <= qNumber; i++) {{
                        var istr = i.toString();
                        var ansfield = this.getField("ans" + istr);
                        var ansbox = ansfield.rect;
                        var crect = [ansbox[2] - 13, ansbox[3] + 20, """
-                           r"""ansbox[2] - 3, ansbox[3]];
+                               r"""ansbox[2] - 3, ansbox[3]];
                        this.addField("c" + istr, "text", 0, crect);
                        var checkfield = this.getField("c" + istr);
                        checkfield.readonly = true;
                        var found = false;
                        for (var j = 0; j < answers[i - 1].length; ++j) {{
                          if (ansfield.value == decodeURIComponent("""
-                           r"""escape(answers[i - 1][j]))) {{
+                               r"""escape(answers[i - 1][j]))) {{
                            found = true;
                          }}
                          if ((!found) &&
                              (answers[i - 1][j].indexOf(" == ") !== -1)) {{
                            var chunks = answers[i - 1][j].split(" == ");
                            if ((chunks[0] == "any_fraction" """
-                           r"""|| chunks[0] == "any_decimal_fraction")  &&
+                               r"""|| chunks[0] == "any_decimal_fraction")  &&
                                (ansfield.value.indexOf("/") !== -1)) {{
                              var nd = ansfield.value.split("/");
                              if ((nd.length == 2) &&
@@ -873,7 +891,7 @@ class Exercise(object):
                                var n = Number(nd[0]);
                                var d = Number(nd[1]);
                                if (!(chunks[0] == "any_decimal_fraction" """
-                           r""" && !(isPowerOf10(d)))) {{
+                               r""" && !(isPowerOf10(d)))) {{
                                  var r = reduce(n, d);
                                  var N = r[0].toString();
                                  var D = r[1].toString();
@@ -895,22 +913,23 @@ class Exercise(object):
                      this.getField("mark").value = {score_line};
                    }}
               ]{{ {checkbutton_caption} }}""")\
-                    .format(q_number=self.q_nb,
-                            clearbutton_caption=_('Clear everything'),
-                            checkbutton_caption=_('Validate'),
-                            list_of_answers=[self.questions_list[i].to_str(
-                                             'js_ans')
-                                             for i in range(self.q_nb)],
-                            good_answer=_('Please translate this into only one'
-                                          ' letter to mean "correct answer"'),
-                            wrong_answer=_('Please translate this into only '
-                                           'one letter to mean "wrong '
-                                           'answer"'),
-                            empty_score_line=_('Score: ... / {q_number}')
-                            .format(q_number=self.q_nb),
-                            score_line=_('"Score: " + count.toString() + " '
-                                         '/ {q_number}"')
-                            .format(q_number=self.q_nb)
-                            )
+                        .format(q_number=self.q_nb,
+                                clearbutton_caption=_('Clear everything'),
+                                checkbutton_caption=_('Validate'),
+                                list_of_answers=[self.questions_list[i].to_str(
+                                                 'js_ans')
+                                                 for i in range(*qn_bounds)],
+                                good_answer=_('Please translate this into '
+                                              'only one letter to mean '
+                                              '"correct answer"'),
+                                wrong_answer=_('Please translate this into '
+                                               'only one letter to mean '
+                                               '"wrong answer"'),
+                                empty_score_line=_('Score: ... / {q_number}')
+                                .format(q_number=self.q_nb),
+                                score_line=_('"Score: " + count.toString() '
+                                             '+ " / {q_number}"')
+                                .format(q_number=self.q_nb)
+                                )
 
             return result
