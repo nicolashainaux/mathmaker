@@ -98,7 +98,32 @@ class LaTeX(Structure.Structure):
             header = r"""
 \documentclass[20pt, xcolor={{usenames, dvipsnames, svgnames}}]{{beamer}}
 \RequirePackage{{luatex85}}
-\usepackage{{fontspec}}
+
+\usepackage[no-math]{{fontspec}}
+
+\AtEndPreamble{{\setmainfont{font_name}[NFSSFamily=fontid]}}
+
+\usepackage{{amssymb}}
+\usepackage{{amsmath}}
+
+\DeclareSymbolFont{{mynumbers}}      {{TU}}{{fontid}}{{m}}{{n}}
+\SetSymbolFont    {{mynumbers}}{{bold}}{{TU}}{{fontid}}{{bx}}{{n}}
+
+\AtBeginDocument{{
+\DeclareMathSymbol{{0}}{{\mathalpha}}{{mynumbers}}{{`0}}
+\DeclareMathSymbol{{1}}{{\mathalpha}}{{mynumbers}}{{`1}}
+\DeclareMathSymbol{{2}}{{\mathalpha}}{{mynumbers}}{{`2}}
+\DeclareMathSymbol{{3}}{{\mathalpha}}{{mynumbers}}{{`3}}
+\DeclareMathSymbol{{4}}{{\mathalpha}}{{mynumbers}}{{`4}}
+\DeclareMathSymbol{{5}}{{\mathalpha}}{{mynumbers}}{{`5}}
+\DeclareMathSymbol{{6}}{{\mathalpha}}{{mynumbers}}{{`6}}
+\DeclareMathSymbol{{7}}{{\mathalpha}}{{mynumbers}}{{`7}}
+\DeclareMathSymbol{{8}}{{\mathalpha}}{{mynumbers}}{{`8}}
+\DeclareMathSymbol{{9}}{{\mathalpha}}{{mynumbers}}{{`9}}
+\DeclareMathSymbol{{.}}{{\mathalpha}}{{mynumbers}}{{`.}}
+\DeclareMathSymbol{{,}}{{\mathalpha}}{{mynumbers}}{{`,}}
+}}
+
 \usepackage{{polyglossia}}
 \setmainlanguage{language}
 \usefonttheme{{professionalfonts}}
@@ -115,7 +140,7 @@ class LaTeX(Structure.Structure):
 {fr_parallel}
 \addtolength{{\headsep}}{{-1cm}}
 
-"""
+""".format(font_name='{' + settings.font + '}')
             result += header.format(language='{' + self.language + '}',
                                     setfont=setfont, fr_parallel=fr_parallel,
                                     sisetup=sisetup)
