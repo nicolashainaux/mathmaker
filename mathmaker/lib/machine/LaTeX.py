@@ -140,8 +140,9 @@ class LaTeX(Structure.Structure):
 {fr_parallel}
 \addtolength{{\headsep}}{{-1cm}}
 
-""".format(font_name='{' + settings.font + '}')
-            result += header.format(language='{' + self.language + '}',
+"""
+            result += header.format(font_name='{' + settings.font + '}',
+                                    language='{' + self.language + '}',
                                     setfont=setfont, fr_parallel=fr_parallel,
                                     sisetup=sisetup)
 
