@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
+from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
@@ -30,6 +31,12 @@ def test_01_white1_multiplications():
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '01_white1',
                                        'multiplications')))
+    restore = settings.font
+    settings.font = None
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '01_white1',
+                                       'multiplications')))
+    settings.font = restore
 
 
 def test_01_white1_positional_notation():

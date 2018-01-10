@@ -76,29 +76,13 @@ class LaTeX(Structure.Structure):
         if variant == 'slideshow':
             sisetup_dict = {}
             setfont = '% no font set'
+            font_patch = ''
             if settings.font is not None:
                 sisetup_dict.update({'text-rm': r'\configfont'})
                 setfont = (r'\setmainfont{font}' + '\n'
                            + r'\newfontfamily\configfont{font}' + '\n')\
                     .format(font='{' + settings.font + '}')
-            fr_parallel = ''
-            if settings.language.startswith('fr'):
-                sisetup_dict.update({'locale': 'FR'})
-                fr_parallel += r'\renewcommand{\parallel}{' \
-                    r'\mathbin{/\negthickspace/}}' + '\n'
-
-            sisetup = ''
-            if len(sisetup_dict):
-                sisetup_str = ', '.join([k + ' = ' + sisetup_dict[k]
-                                         for k in sisetup_dict])
-                sisetup += '\AtBeginDocument{\n'
-                sisetup += '\sisetup{' + sisetup_str + '}\n'
-                sisetup += '}\n'
-
-            header = r"""
-\documentclass[20pt, xcolor={{usenames, dvipsnames, svgnames}}]{{beamer}}
-\RequirePackage{{luatex85}}
-
+                font_patch = r"""
 \usepackage[no-math]{{fontspec}}
 
 \AtEndPreamble{{\setmainfont{font_name}[NFSSFamily=fontid]}}
@@ -122,7 +106,26 @@ class LaTeX(Structure.Structure):
 \DeclareMathSymbol{{9}}{{\mathalpha}}{{mynumbers}}{{`9}}
 \DeclareMathSymbol{{.}}{{\mathalpha}}{{mynumbers}}{{`.}}
 \DeclareMathSymbol{{,}}{{\mathalpha}}{{mynumbers}}{{`,}}
-}}
+}}""".format(font_name='{' + settings.font + '}')
+            fr_parallel = ''
+            if settings.language.startswith('fr'):
+                sisetup_dict.update({'locale': 'FR'})
+                fr_parallel += r'\renewcommand{\parallel}{' \
+                    r'\mathbin{/\negthickspace/}}' + '\n'
+
+            sisetup = ''
+            if len(sisetup_dict):
+                sisetup_str = ', '.join([k + ' = ' + sisetup_dict[k]
+                                         for k in sisetup_dict])
+                sisetup += '\AtBeginDocument{\n'
+                sisetup += '\sisetup{' + sisetup_str + '}\n'
+                sisetup += '}\n'
+
+            header = r"""
+\documentclass[20pt, xcolor={{usenames, dvipsnames, svgnames}}]{{beamer}}
+\RequirePackage{{luatex85}}
+
+{font_patch}
 
 \usepackage{{polyglossia}}
 \setmainlanguage{language}
@@ -141,7 +144,7 @@ class LaTeX(Structure.Structure):
 \addtolength{{\headsep}}{{-1cm}}
 
 """
-            result += header.format(font_name='{' + settings.font + '}',
+            result += header.format(font_patch=font_patch,
                                     language='{' + self.language + '}',
                                     setfont=setfont, fr_parallel=fr_parallel,
                                     sisetup=sisetup)
