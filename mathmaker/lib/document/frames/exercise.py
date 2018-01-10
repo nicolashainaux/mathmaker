@@ -541,17 +541,18 @@ class Exercise(object):
         self._questions_list = []
         last_draw = {}
         numbering = numbering_device(self.q_numbering)
-        log = settings.dbg_logger.getChild('questions_separator')
+        log = settings.dbg_logger.getChild('Exercise.init')
         for q in mixed_q_list:
             q_number = next(numbering)
-            log.debug('QUESTION # {} -----------------------------------'
-                      '------------------------------'.format(q_number))
+            log.debug('QUESTION # {} -------------------------------- {} ---'
+                      '-----------------------------'.format(q_number, q.id))
             preprocess_variant(q)
             (nbsources_xkw_list, extra_infos) = \
                 get_nb_sources_from_question_info(q)
             nb_to_use = tuple()
             common_nb = None
             for (i, (nb_source, xkw)) in enumerate(nbsources_xkw_list):
+                log.debug('nb_source = {}'.format(nb_source))
                 if last_draw.get(nb_source) is None:
                     last_draw[nb_source] = None
                 # Handle all nb sources for ONE question
