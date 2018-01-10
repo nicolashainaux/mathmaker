@@ -877,7 +877,7 @@ def postprocess_percentage_query(qr, source_id, qkw=None, **kwargs):
         if isinstance(qr, tuple) and len(qr) == 2:
             n2 = Number(str(qr[0])) * Number(str(qr[1]))
         else:  # qr should be a single number
-            n2 = Number(str(qr))
+            n2 = Number(str(qr[0]))
         if source_id == r'25%of...':
             n1 = Number(25)
         elif source_id == r'75%of...':
@@ -1374,12 +1374,12 @@ class mc_source(object):
             if tc == 'int_pairs':
                 kwargs.update(preprocess_int_pairs_tag(t, qkw=qkw))
                 return postprocess_percentage_query(
-                    shared.int_pairs_source.next(**kwargs)[0], source_id,
+                    shared.int_pairs_source.next(**kwargs), source_id,
                     qkw=qkw, **kwargs)
             elif tc == 'single_int':
                 kwargs.update(preprocess_single_nb_tag(t))
                 return postprocess_percentage_query(
-                    shared.single_ints_source.next(**kwargs)[0], source_id,
+                    shared.single_ints_source.next(**kwargs), source_id,
                     qkw=qkw, **kwargs)
         elif tag_classification == 'dvipsnames_selection':
             return shared.dvipsnames_selection_source.next(**kwargs)
