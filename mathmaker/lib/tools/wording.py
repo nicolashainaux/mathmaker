@@ -559,7 +559,7 @@ def setup_wording_format_of(w_object: object, w_prefix=''):
     w_object.nb2_volume_unit will be set with:
     '\\SI{<value of nb2>}{cm^{3}}'
 
-    w_object.hint will be set with: 'cm'
+    w_object.hint will be set with: '\\si{cm}'
 
     If w_prefix is set, the "wording" processed attributes will be
     w_object.<prefix>wording and w_object.<prefix>wording_format. This allows

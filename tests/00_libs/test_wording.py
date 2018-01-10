@@ -479,12 +479,12 @@ def test_setup_wording_format_of_06(ow1):
 
 def test_setup_wording_format_of_07(ow1):
     """Checks if obj.wording is correctly setup."""
-    assert ow1.volume_unit == 'cm^{3}'
+    assert ow1.volume_unit == '\\si{cm^{3}}'
 
 
 def test_setup_wording_format_of_08(ow2bis):
     """Checks if obj.wording is correctly setup."""
-    assert ow2bis.hint == 'dm'
+    assert ow2bis.hint == '\\si{dm}'
 
 
 def test_setup_wording_format_of_09(ow2bis):
@@ -494,12 +494,12 @@ def test_setup_wording_format_of_09(ow2bis):
 
 def test_setup_wording_format_of_10(ow2ter):
     """Checks if obj.wording is correctly setup."""
-    assert ow2ter.volume_unit == 'cm^{3}'
+    assert ow2ter.volume_unit == '\\si{cm^{3}}'
 
 
 def test_setup_wording_format_of_11(ow2ter):
     """Checks if obj.wording is correctly setup."""
-    assert ow2ter.area_unit == 'cm^{2}'
+    assert ow2ter.area_unit == '\\si{cm^{2}}'
 
 
 def test_setup_wording_format_of_12(ow2qua):
@@ -512,7 +512,7 @@ def test_setup_wording_format_of_12(ow2qua):
 def test_setup_wording_format_of_13(ow_units1):
     """Checks if obj.wording is correctly setup."""
     assert hasattr(ow_units1, 'mass_unit')
-    assert getattr(ow_units1, 'mass_unit') == 'kg'
+    assert getattr(ow_units1, 'mass_unit') == '\\si{kg}'
 
 
 def test_setup_wording_format_of_exceptions(owbuggy):
