@@ -24,7 +24,7 @@ import random
 from decimal import Decimal
 
 from mathmakerlib.calculus import difference_of_orders_of_magnitude
-from mathmakerlib.calculus import Number
+from mathmakerlib.calculus import Number, Unit
 
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
@@ -41,6 +41,8 @@ class sub_object(component.structure):
         #     and not self.nb1 % 10 == 0 and not self.nb2 % 10 == 0):
         #     self.transduration = 12
         unit1, unit2, direction, physical_quantity, level = build_data
+        unit1 = Unit(unit1)
+        unit2 = Unit(unit2)
         start_position = [Decimal('10'), Decimal('1'), Decimal('0.1')]
         if difference_of_orders_of_magnitude(unit1, unit2) >= Decimal('100'):
             start_position = [Decimal('1'), Decimal('0.1'), Decimal('0.01')]
