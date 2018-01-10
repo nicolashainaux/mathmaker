@@ -23,12 +23,12 @@
 import random
 from decimal import Decimal
 
+from mathmakerlib.calculus import difference_of_orders_of_magnitude
+from mathmakerlib.calculus import Number
+
 from mathmaker.lib import shared
-from mathmaker.lib.core.root_calculus import Value
-from mathmaker.lib.core.base_calculus import Item
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.document.content import component
-from mathmaker.lib.tools import difference_of_orders_of_magnitude
 from mathmaker.lib.tools.database import generate_random_decimal_nb
 
 
@@ -53,16 +53,12 @@ class sub_object(component.structure):
                                        unique_figures=options.get(
                                            'unique_figures', False),
                                        generation_type='default')[0]
-        self.start_nb = Item(Value(chosen_deci), unit=unit1)
-        self.hidden_nb = Item(Value(COLORED_QUESTION_MARK), unit=unit2)
-        self.answer = self.start_nb.convert_to(unit2)\
-            .into_str(display_unit=True, force_expression_begins=True)
-        self.js_answer = self.start_nb.convert_to(unit2).jsprinted
-        self.wording = '{} = {}'.format(
-            self.start_nb.into_str(display_unit=True,
-                                   force_expression_begins=True),
-            self.hidden_nb.into_str(display_unit=True,
-                                    force_expression_begins=True))
+        self.start_nb = Number(chosen_deci, unit=unit1)
+        self.answer = self.start_nb.converted_to(unit2).printed
+        self.js_answer = self.start_nb.converted_to(unit2).uiprinted
+        self.wording = '{} = {}~{}'.format(self.start_nb.printed,
+                                           COLORED_QUESTION_MARK,
+                                           unit2.printed)
 
     def q(self, **options):
         return shared.machine.write_math_style2(self.wording)

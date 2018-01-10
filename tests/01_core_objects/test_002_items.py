@@ -372,40 +372,6 @@ def test_literal_item_substituted(literal_item):
     assert literal_item.printed == wrap_nb('11')
 
 
-def test_unit_conversions_exceptions():
-    """Check impossible conversions raise exceptions."""
-    L = Item(('+', 'y', 1), unit='m')
-    with pytest.raises(TypeError) as excinfo:
-        L.convert_to('cm')
-    assert str(excinfo.value) == 'Cannot convert a literal Item.'
-    i = Item(('+', 6, 1), unit='m')
-    with pytest.raises(TypeError) as excinfo:
-        i.convert_to()
-    assert str(excinfo.value) == 'convert_to() missing 1 required positional '\
-        'argument: \'unit\''
-    with pytest.raises(TypeError) as excinfo:
-        i.convert_to('L')
-    assert str(excinfo.value) == 'Cannot give the difference of orders of ' \
-        'magnitude between two units that do not belong to the same physical '\
-        'quantity (m and L).'
-
-
-def test_unit_conversions():
-    """Check unit conversions are correct."""
-    i = Item(('+', 6, 1), unit='m')
-    j = i.convert_to('cm')
-    assert str(j.unit) == 'cm'
-    assert j.printed == wrap_nb('600')
-    i = Item(('+', decimal.Decimal('0.25'), 1), unit='kg')
-    j = i.convert_to('kg')
-    assert str(j.unit) == 'kg'
-    assert j.printed == wrap_nb('0.25')
-    i = Item(('+', decimal.Decimal('1.096'), 1), unit='L')
-    j = i.convert_to('hL')
-    assert str(j.unit) == 'hL'
-    assert j.printed == wrap_nb('0.01096')
-
-
 def test_js_repr():
     """Is the "js" representation correct?"""
     assert Item(('+', 6, 1)).jsprinted == '6'

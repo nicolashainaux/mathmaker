@@ -37,7 +37,6 @@ from mathmakerlib.calculus import is_integer, is_natural, is_number
 
 from mathmaker import settings
 from mathmaker.lib.core.root_calculus import Calculable, Value, Exponented
-from mathmaker.lib.tools import difference_of_orders_of_magnitude
 from mathmaker.lib.tools.maths import (sign_of_product, pupil_gcd,
                                        lcm_of_the_list, is_even, is_uneven,
                                        prime_factors,
@@ -421,13 +420,6 @@ class Item(Exponented):
 
         else:
             raise TypeError('Cannot evaluate a non numeric Item')
-
-    def convert_to(self, unit):
-        if not self.is_numeric():
-            raise TypeError('Cannot convert a literal Item.')
-        factor = difference_of_orders_of_magnitude(str(self.unit), unit)
-        return Item((self.sign, self.raw_value * factor, self.exponent),
-                    unit=unit)
 
     # --------------------------------------------------------------------------
     ##

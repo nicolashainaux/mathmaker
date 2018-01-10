@@ -21,12 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import pytest
-from decimal import Decimal
 
 from mathmaker.lib.tools import check_unique_letters_words, rotate
 from mathmaker.lib.tools import parse_layout_descriptor, ext_dict
-from mathmaker.lib.tools import fix_math_style2_fontsize, physical_quantity
-from mathmaker.lib.tools import difference_of_orders_of_magnitude
+from mathmaker.lib.tools import fix_math_style2_fontsize
 
 
 def test_recursive_update():
@@ -159,34 +157,3 @@ def test_fix_math_style2_fontsize():
         ', or ' \
         '$ \\dfrac{\\text{3}}{\\text{4}} $' \
         ')'
-
-
-def test_physical_quantity_exceptions():
-    """Check unknown units raise an error."""
-    with pytest.raises(ValueError) as excinfo:
-        physical_quantity('unknown')
-    assert str(excinfo.value) == 'Cannot determine the physical quantity ' \
-        'of provided unit (unknown).'
-
-
-def test_physical_quantity():
-    """Check units are recognized correctly."""
-    assert physical_quantity('L') == 'capacity'
-    assert physical_quantity('m') == 'length'
-    assert physical_quantity('g') == 'mass'
-
-
-def test_difference_of_orders_of_magnitude_exceptions():
-    """Check wrong units trigger an error."""
-    with pytest.raises(TypeError) as excinfo:
-        difference_of_orders_of_magnitude('cm', 'hL')
-    assert str(excinfo.value) == 'Cannot give the difference of orders of ' \
-        'magnitude between two units that do not belong to the same physical '\
-        'quantity (cm and hL).'
-
-
-def test_difference_of_orders_of_magnitude():
-    """Check the difference of orders of magnitude is calculated correctly."""
-    assert difference_of_orders_of_magnitude('L', 'mL') == Decimal('1000')
-    assert difference_of_orders_of_magnitude('cm', 'm') == Decimal('0.01')
-    assert difference_of_orders_of_magnitude('kg', 'mg') == Decimal('1000000')
