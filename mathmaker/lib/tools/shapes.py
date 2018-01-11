@@ -56,19 +56,34 @@ class ShapeGenerator(object):
         :type length_unit: None or correct str unit name, or a
         mathmakerlib.calculus.Unit instance
         """
+        if not isinstance(label_vertices, bool):
+            raise TypeError('keyword argument label_vertices must be set to '
+                            'True or False')
         if type(codename) is not str:
             raise TypeError('codename must be a str, found {} instead.'
                             .format(type(codename)))
-
-        try:
-            return getattr(self,
-                           '_' + codename)(variant=variant, labels=labels,
-                                           name=name,
-                                           label_vertices=label_vertices,
-                                           thickness=thickness,
-                                           length_unit=length_unit)
-        except AttributeError:
+        if not hasattr(self, '_' + codename):
             raise ValueError('Cannot generate \'{}\'.'.format(codename))
+        if not isinstance(labels, list):
+            raise TypeError('labels must be a list, found {} instead.'
+                            .format(type(labels)))
+        if not all([isinstance(t, tuple) and len(t) == 2
+                    and isinstance(t[0], int)
+                    for t in labels]):
+            raise TypeError('All elements of the labels list must be tuples '
+                            'of two elements, first being an int.')
+        codename_sides = [int(_) for _ in codename.split('_')[1:]]
+        labels_sides = [t[0] for t in labels]
+        if sorted(codename_sides) != sorted(labels_sides):
+            raise ValueError('The given labels list does not match the '
+                             'codename: labels\' numbers {} != {}'
+                             .format(labels_sides, codename_sides))
+        return getattr(self,
+                       '_' + codename)(variant=variant, labels=labels,
+                                       name=name,
+                                       label_vertices=label_vertices,
+                                       thickness=thickness,
+                                       length_unit=length_unit)
 
     def _triangle_1_1_1(self, variant=None, labels=None, name=None,
                         label_vertices=None, thickness=None, length_unit=None,
