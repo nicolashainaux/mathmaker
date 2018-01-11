@@ -36,7 +36,9 @@ class ShapeGenerator(object):
                  name=None, label_vertices=None, thickness=None,
                  length_unit=None):
         if type(codename) is not str:
-            raise TypeError('codename must be a str')
+            raise TypeError('codename must be a str, found {} instead.'
+                            .format(type(codename)))
+
         try:
             return getattr(self,
                            '_' + codename)(variant=variant, labels=labels,
@@ -45,11 +47,14 @@ class ShapeGenerator(object):
                                            thickness=thickness,
                                            length_unit=length_unit)
         except AttributeError:
-            raise ValueError('Cannot generate \'{}\''.format(codename))
+            raise ValueError('Cannot generate \'{}\'.'.format(codename))
 
     def _triangle_1_1_1(self, variant=None, labels=None, name=None,
                         label_vertices=None, thickness=None, length_unit=None,
                         shape_variant_nb=None):
+        if variant not in [0, 1]:
+            raise ValueError('variant must be 0 or 1 (not \'{}\')'
+                             .format(variant))
         if variant == 0:  # scalene triangle shapes
             shape_variants = {1: [(0, 0),
                                   (2, 0),
@@ -233,6 +238,9 @@ class ShapeGenerator(object):
     def _quadrilateral_2_1_1(self, variant=None, labels=None, name=None,
                              label_vertices=None, thickness=None,
                              length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1]:
+            raise ValueError('variant must be 0 or 1 (not \'{}\')'
+                             .format(variant))
         quadrilateralv0_shape1 = [Point(0, 0), Point('1.2', '0.7'),
                                   Point('2.4', 0), Point('0.8', '-0.4')]
         quadrilateralv0_shape2 = [Point('1.2', '-0.6'), Point(0, 0),
@@ -295,6 +303,9 @@ class ShapeGenerator(object):
     def _quadrilateral_2_2(self, variant=None, labels=None, name=None,
                            label_vertices=None, thickness=None,
                            length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1, 2]:
+            raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
+                             .format(variant))
         shape_builder = Quadrilateral
         kite_shape1 = [Point(0, 0), Point('1.2', '0.2'),
                        Point('2.4', 0), Point('1.2', '-0.8')]
@@ -431,6 +442,9 @@ class ShapeGenerator(object):
     def _quadrilateral_4(self, variant=None, labels=None, name=None,
                          label_vertices=None, thickness=None,
                          length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1]:
+            raise ValueError('variant must be 0 or 1 (not \'{}\')'
+                             .format(variant))
         mark = next(shared.ls_marks_source)[0]
         masks_disposition = next(shared.alternate_4masks_source)[0]
         if variant == 0:  # rhombuses
@@ -505,6 +519,9 @@ class ShapeGenerator(object):
     def _pentagon_2_1_1_1(self, variant=None, labels=None, name=None,
                           label_vertices=None, thickness=None,
                           length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1]:
+            raise ValueError('variant must be 0 or 1 (not \'{}\')'
+                             .format(variant))
         pentagonv0_shape1 = [Point('1.05', '-0.2'), Point('0.3', '-0.1'),
                              Point(0, '0.6'), Point('1.4', '0.6'),
                              Point('2.4', '0.1')]
@@ -559,6 +576,9 @@ class ShapeGenerator(object):
     def _pentagon_2_2_1(self, variant=None, labels=None, name=None,
                         label_vertices=None, thickness=None,
                         length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1, 2]:
+            raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
+                             .format(variant))
         pentagonv0_shape1 = [Point(1, 0), Point('0.08', '0.4'),
                              Point('0.77', '0.8'), Point('1.57', '0.7'),
                              Point(2, '0.1')]
@@ -637,6 +657,9 @@ class ShapeGenerator(object):
     def _pentagon_3_1_1(self, variant=None, labels=None, name=None,
                         label_vertices=None, thickness=None,
                         length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1]:
+            raise ValueError('variant must be 0 or 1 (not \'{}\')'
+                             .format(variant))
         pentagonv0_shape1 = [Point(0, '0.3'), Point('0.62', '0.8'),
                              Point('1.42', '0.8'), Point('1.81', '0.1'),
                              Point('0.7', 0)]
@@ -692,6 +715,9 @@ class ShapeGenerator(object):
     def _pentagon_3_2(self, variant=None, labels=None, name=None,
                       label_vertices=None, thickness=None,
                       length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1]:
+            raise ValueError('variant must be 0 or 1 (not \'{}\')'
+                             .format(variant))
         pentagonv0_shape1 = [Point(0, 0), Point('0.33', '0.73'),
                              Point('1.12', '0.8'), Point('1.86', '0.5'),
                              Point(1, 0)]
@@ -840,6 +866,9 @@ class ShapeGenerator(object):
     def _hexagon_2_1_1_1_1(self, variant=None, labels=None, name=None,
                            label_vertices=None, thickness=None,
                            length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1, 2]:
+            raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
+                             .format(variant))
         hexagonv0_shape1 = [Point('0.17', '0.47'), Point('0.9', '0.8'),
                             Point('1.7', '0.8'), Point('2.8', '0.4'),
                             Point(2, 0), Point('0.7', 0)]
@@ -912,6 +941,9 @@ class ShapeGenerator(object):
     def _hexagon_2_2_1_1(self, variant=None, labels=None, name=None,
                          label_vertices=None, thickness=None,
                          length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1, 2, 3, 4, 5, 6, 7]:
+            raise ValueError('variant must be 0, 1, 2, 3, 4, 5, 6, or 7 '
+                             '(not \'{}\')'.format(variant))
         hexagonv0_shape1 = [Point('1.6', 0), Point('0.7', 0),
                             Point(0, '0.56'), Point('0.9', 1),
                             Point('1.9', 1), Point('2.8', '0.5')]
@@ -1054,6 +1086,9 @@ class ShapeGenerator(object):
     def _hexagon_2_2_2(self, variant=None, labels=None, name=None,
                        label_vertices=None, thickness=None,
                        length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1, 2, 3]:
+            raise ValueError('variant must be 0, 1, 2 or 3 '
+                             '(not \'{}\')'.format(variant))
         hexagonv0_shape1 = [Point(0, '0.9'), Point('0.77', '1.1'),
                             Point('1.57', 1), Point('2.26', '0.42'),
                             Point('1.46', 0), Point('0.46', '0.01')]
@@ -1140,6 +1175,9 @@ class ShapeGenerator(object):
     def _hexagon_3_1_1_1(self, variant=None, labels=None, name=None,
                          label_vertices=None, thickness=None,
                          length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1, 2]:
+            raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
+                             .format(variant))
         hexagonv0_shape1 = [Point('0.9', '1.1'), Point('1.9', '1.1'),
                             Point('2.7', '0.5'), Point('1.84', 0),
                             Point('0.39', '0.2'), Point(0, '0.9')]
@@ -1204,6 +1242,9 @@ class ShapeGenerator(object):
     def _hexagon_3_2_1(self, variant=None, labels=None, name=None,
                        label_vertices=None, thickness=None,
                        length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1, 2]:
+            raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
+                             .format(variant))
         hexagonv0_shape1 = [Point('0.9', '1.1'), Point('1.75', '1.1'),
                             Point('2.4', '0.56'), Point('1.76', 0),
                             Point('0.76', 0), Point('0.04', '0.7')]
@@ -1272,6 +1313,9 @@ class ShapeGenerator(object):
     def _hexagon_3_3(self, variant=None, labels=None, name=None,
                      label_vertices=None, thickness=None,
                      length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1, 2]:
+            raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
+                             .format(variant))
         hexagonv0_shape1 = [Point(0, '0.57'), Point('0.72', '1.02'),
                             Point('1.57', '1.02'), Point('2.29', '0.57'),
                             Point('1.59', 0), Point('0.69', 0)]
@@ -1338,6 +1382,9 @@ class ShapeGenerator(object):
     def _hexagon_4_1_1(self, variant=None, labels=None, name=None,
                        label_vertices=None, thickness=None,
                        length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1, 2]:
+            raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
+                             .format(variant))
         hexagonv0_shape1 = [Point(1, '1.1'), Point('1.84', '0.99'),
                             Point('1.84', '0.14'), Point(1, 0),
                             Point('0.15', '0.07'), Point('-0.2', '0.9')]
@@ -1403,6 +1450,9 @@ class ShapeGenerator(object):
     def _hexagon_4_2(self, variant=None, labels=None, name=None,
                      label_vertices=None, thickness=None,
                      length_unit=None, shape_variant_nb=None):
+        if variant not in [0, 1, 2]:
+            raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
+                             .format(variant))
         hexagonv0_shape1 = [Point('1.2', 0), Point('0.36', '0.09'),
                             Point('0.01', '0.87'), Point('0.83', '1.1'),
                             Point('1.67', '0.97'), Point('2.19', '0.12')]
