@@ -117,7 +117,7 @@ def test_04_yellow1_exam():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '04_yellow1',
-                                       'proportionality_exam',
+                                       'exam',
                                        enable_js_form=True)))
 
 
@@ -125,5 +125,5 @@ def test_04_yellow1_challenge():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '04_yellow1',
-                                       'proportionality_exam',
+                                       'challenge',
                                        enable_js_form=True)))
