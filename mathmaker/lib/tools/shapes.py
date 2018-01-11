@@ -35,6 +35,27 @@ class ShapeGenerator(object):
     def generate(self, codename=None, variant=None, labels=None,
                  name=None, label_vertices=None, thickness=None,
                  length_unit=None):
+        """
+        :param codename: a str describing the type of polygon and the sides
+        lengths, grouped by equal sides batches, like triangle_1_1_1,
+        pentagon_3_2 etc.
+        :type codename: str
+        :param variant: the variant number
+        :type variant: int
+        :param labels: the labels to set, in the form of a list of couples
+        (nb_of_sides, length). This list will be checked at start.
+        :type labels: list (of couples)
+        :param name: the name of the Polygon
+        :type name: str (or None, then it will be set automatically)
+        :param label_vertices: whether or not label the Polygon's vertices
+        :type label_vertices: bool
+        :param thickness: the thickness of the Polygon's sides
+        :type thickness: any correct thickness value (None, or see tikz
+        possible values)
+        :param length_unit: the length unit of the sides labels
+        :type length_unit: None or correct str unit name, or a
+        mathmakerlib.calculus.Unit instance
+        """
         if type(codename) is not str:
             raise TypeError('codename must be a str, found {} instead.'
                             .format(type(codename)))
