@@ -39,3 +39,91 @@ def test_04_yellow1_percentages():
                                        '04_yellow1',
                                        'percentages',
                                        enable_js_form=True)))
+
+
+def test_04_yellow1_multi_hole():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '04_yellow1',
+                                       'multi_hole',
+                                       enable_js_form=True)))
+
+
+def test_04_yellow1_addi_subtr_hole():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '04_yellow1',
+                                       'addi_subtr_hole',
+                                       enable_js_form=True)))
+
+
+def test_04_yellow1_euclidean_divisions():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '04_yellow1',
+                                       'euclidean_divisions',
+                                       enable_js_form=True)))
+
+
+def test_04_yellow1_rectangles():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '04_yellow1',
+                                       'rectangles',
+                                       enable_js_form=True)))
+
+
+def test_04_yellow1_perimeter_of_a_polygon():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '04_yellow1',
+                                       'perimeter_of_a_polygon',
+                                       enable_js_form=True)))
+
+
+def test_04_yellow1_multi_divi_10_100_1000():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '04_yellow1',
+                                       'multi_divi_10_100_1000',
+                                       enable_js_form=True)))
+
+
+def test_04_yellow1_multi_clever():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '04_yellow1',
+                                       'multi_clever',
+                                       enable_js_form=True)))
+
+
+def test_04_yellow1_multi_decimal():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '04_yellow1',
+                                       'multi_decimal',
+                                       enable_js_form=True)))
+
+
+def test_04_yellow1_proportionality_problems():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '04_yellow1',
+                                       'proportionality_problems',
+                                       enable_js_form=True)))
+
+
+def test_04_yellow1_exam():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '04_yellow1',
+                                       'proportionality_exam',
+                                       enable_js_form=True)))
+
+
+def test_04_yellow1_challenge():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '04_yellow1',
+                                       'proportionality_exam',
+                                       enable_js_form=True)))
