@@ -849,8 +849,6 @@ def __main__():
                 4, 1, 1, 1, 0, 0, 0, 0),
                (6, 'hexagon', '', 'hexagon_3_2_1', 'none',
                 4, 2, 1, 1, 0, 0, 0, 0),
-               (6, 'hexagon', '', 'hexagon_3_2_1', 'none',
-                4, 3, 1, 1, 0, 0, 0, 0),
                (6, 'hexagon', '', 'hexagon_3_3', 'none',
                 3, 0, 0, 1, 0, 0, 0, 0),
                (6, 'hexagon', '', 'hexagon_3_3', 'none',
