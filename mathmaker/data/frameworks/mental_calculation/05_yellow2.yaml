@@ -1,0 +1,5 @@
+numeric_expansions_factorizations: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: numeric expansions and factorizations"
+  - exercise: !!omap
+    - questions: numeric expansion -> mergedinttriples_3to9 (10)
