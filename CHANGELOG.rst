@@ -1,6 +1,11 @@
 Changelog
 =========
 
+New in version 0.7.3 (2018-01-15)
+---------------------------------
+
+* Add mental calculation sheets for fourth level ("yellow belt, 1st stripe")
+
 New in version 0.7.2 (2017-10-18)
 ---------------------------------
 
