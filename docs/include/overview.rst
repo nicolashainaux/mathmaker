@@ -49,6 +49,9 @@ To install them:
        $ rehash
 
    .. note::
+       As of 2018 (mathmaker version 0.7.3) it is necessary to install texlive directly using `texlive instructions <https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#x1-50001.3>`__. Do not forget to setup the fonts for lualatex if you intend to use them (as described in the same link).
+
+   .. note::
        Check how to fix eukleides install in `the complete documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#eukleides-fix>`__
 
 Once you're done, you can proceed installing mathmaker:
