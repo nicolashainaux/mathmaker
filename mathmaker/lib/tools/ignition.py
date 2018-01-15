@@ -28,14 +28,36 @@ language for gettext translations.
 """
 
 import os
-import subprocess
 import shlex
 import gettext
 import warnings
+import subprocess
+from tempfile import TemporaryFile
 from distutils.version import LooseVersion
 
 from mathmaker import __software_name__
 from mathmaker.lib.constants import latex
+
+
+def retrieve_fonts(fonts_list_file='mathmaker/data/fonts_list.txt',
+                   datadir='mathmaker/data',
+                   force=False) -> tuple:
+    """
+    Store in a file the list of the fonts available for lualatex.
+    """
+    if force:
+        return []
+    with TemporaryFile() as tmp_file:
+        p = subprocess.Popen('luaotfload-tool --list "*"',
+                             shell=True,
+                             stdout=tmp_file)
+        p.wait()
+        tmp_file.seek(0)
+        with open(fonts_list_file, mode='wt') as f:
+            for line in tmp_file.readlines():
+                if not line.startswith(b'luaotfload') and line[:-1]:
+                    f.write(line.decode('utf-8').lower())
+    return [(datadir, [fonts_list_file])]
 
 
 def warning_msg(name: str, path_to: str, c_out: str, c_err: str,
@@ -258,7 +280,6 @@ def check_settings_consistency(language=None, od=None):
     package that mathmaker uses, the output directory (is it an existing
     directory?) and whether the chosen font is usable by lualatex.
     """
-    from mathmaker.lib.tools import retrieve_fonts
     from mathmaker import settings
     log = settings.mainlogger
     language = language if language is not None else settings.language

@@ -12,7 +12,7 @@ from setuptools.command.install import install
 
 from mathmaker import __version__, __software_name__, __licence__, __author__
 from mathmaker import __author_email__
-from mathmaker.lib.tools import retrieve_fonts
+from mathmaker.lib.tools.ignition import retrieve_fonts
 from mathmaker.lib.tools.ignition import check_dependency, check_dependencies
 
 

@@ -26,13 +26,6 @@ import sys
 import logging
 import errno
 import re
-import subprocess
-from decimal import Decimal
-from tempfile import TemporaryFile
-
-
-from mathmakerlib.calculus.unit import LENGTH_UNITS, MASS_UNITS
-from mathmakerlib.calculus.unit import CAPACITY_UNITS, PHYSICAL_QUANTITIES
 
 
 def load_config(file_tag, settingsdir):
@@ -118,27 +111,6 @@ def load_config(file_tag, settingsdir):
             except IOError:
                 pass
     return configuration
-
-
-def retrieve_fonts(fonts_list_file='mathmaker/data/fonts_list.txt',
-                   datadir='mathmaker/data',
-                   force=False) -> tuple:
-    """
-    Store in a file the list of the fonts available for lualatex.
-    """
-    if force:
-        return []
-    with TemporaryFile() as tmp_file:
-        p = subprocess.Popen('luaotfload-tool --list "*"',
-                             shell=True,
-                             stdout=tmp_file)
-        p.wait()
-        tmp_file.seek(0)
-        with open(fonts_list_file, mode='wt') as f:
-            for line in tmp_file.readlines():
-                if not line.startswith(b'luaotfload') and line[:-1]:
-                    f.write(line.decode('utf-8').lower())
-    return [(datadir, [fonts_list_file])]
 
 
 def _retrieve_po_file_content(language, po_filename):
