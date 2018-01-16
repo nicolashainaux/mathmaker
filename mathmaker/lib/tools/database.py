@@ -1271,9 +1271,14 @@ class sub_source(object):
             if self.current == self.max:
                 self._reset()
             self.current += 1
+            log = settings.dbg_logger.getChild('db')
             if isinstance(self.values[self.current - 1], tuple):
-                return self.values[self.current - 1]
-            return (self.values[self.current - 1], )
+                qr = self.values[self.current - 1]
+                log.debug('Query result = {}\n'.format(qr))
+                return qr
+            qr = (self.values[self.current - 1], )
+            log.debug('Query result = {}\n'.format(qr))
+            return qr
 
 
 class mc_source(object):
