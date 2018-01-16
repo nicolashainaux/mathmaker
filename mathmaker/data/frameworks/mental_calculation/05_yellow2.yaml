@@ -3,3 +3,8 @@ numeric_expansions_factorizations: !!omap
   - title: "Mental calculation: numeric expansions and factorizations"
   - exercise: !!omap
     - questions: numeric expansion -> mergedinttriples_3to9 (10)
+                 # numeric factorization -> decimal_and_10_100_1000_for_multi (10)
+                 # numeric factorization -> intpairs_2to9 (10)
+                 # numeric factorization -> intpairs_2to9, split_as=quarters (10)
+                 # numeric factorization -> intpairs_2to9, split_as=halves (10)
+                 # numeric factorization -> decimal_and_10_100_1000_for_multi, split_as=quarters (1)

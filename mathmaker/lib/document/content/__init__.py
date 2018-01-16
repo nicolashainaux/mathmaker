@@ -36,7 +36,7 @@ from .calculation import addi_hole, subtr_hole
 from .calculation import units_conversion, decimal_numerals
 from .calculation import percent_direct, divi_euclidean
 from .calculation import mini_pb_proportionality
-from .calculation import numeric_expansion
+from .calculation import numeric_expansion, numeric_factorization
 from .geometry import intercept_theorem_triangle
 from .geometry import intercept_theorem_triangle_formula
 from .geometry import intercept_theorem_butterfly
@@ -63,7 +63,7 @@ __all__ = ['expand_simple', 'expand_double',
            'addi_hole', 'subtr_hole',
            'units_conversion', 'decimal_numerals', 'percent_direct',
            'divi_euclidean', 'mini_pb_proportionality',
-           'numeric_expansion',
+           'numeric_expansion', 'numeric_factorization',
            'area_rectangle', 'perimeter_rectangle', 'perimeter_polygon',
            'rectangle_length_or_width',
            'intercept_theorem_triangle', 'intercept_theorem_triangle_formula',
