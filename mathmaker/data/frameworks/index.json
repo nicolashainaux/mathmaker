@@ -384,6 +384,11 @@
         "03_yellow",
         "exam"
     ],
+    "03_yellow_exam_with_distinction": [
+        "mental_calculation",
+        "03_yellow",
+        "exam_with_distinction"
+    ],
     "03_yellow_W01a": [
         "mental_calculation",
         "03_yellow",
