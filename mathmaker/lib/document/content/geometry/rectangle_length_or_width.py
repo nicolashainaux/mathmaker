@@ -40,12 +40,13 @@ class sub_object(component.structure):
 
         if self.context == "from_area":
             super().setup("division", nb=build_data, **options)
-            self.nb1, self.nb2 = self.dividend, self.divisor
+            self.nb1, self.nb2, self.nb3 = (self.result, self.divisor,
+                                            self.dividend)
             super().setup("rectangle", **options)
-            wordings = {'w': _("A rectangle has an area of {nb1} {area_unit} "
+            wordings = {'w': _("A rectangle has an area of {nb3} {area_unit} "
                                "and a length of {nb2} {length_unit}. What is "
                                "its width? |hint:length_unit|"),
-                        'l': _("A rectangle has an area of {nb1} {area_unit} "
+                        'l': _("A rectangle has an area of {nb3} {area_unit} "
                                "and a width of {nb2} {length_unit}. What is "
                                "its length? |hint:length_unit|")
                         }
