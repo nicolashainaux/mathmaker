@@ -28,6 +28,7 @@ from string import ascii_lowercase as alphabet
 
 from intspan import intspan
 from intspan.core import ParseError
+from mathmakerlib import required
 from mathmakerlib.calculus import is_integer
 
 from mathmaker.lib import shared
@@ -772,6 +773,8 @@ class Exercise(object):
                             + '\n\n' + _('Answer:') + '\n\n' \
                             + COLORED_ANSWER.format(
                                 text='{' + q.to_str('ans') + '}')
+                    required.package['xcolor'] = True
+                    required.options['xcolor'].add('dvipsnames')
                     result += M.write_frame(content, only=True,
                                             numbering=q.displayable_number)
             return result
@@ -798,7 +801,8 @@ class Exercise(object):
                     if ex_or_answers == 'ans' \
                     else [self.questions_list[i].to_str('hint')
                           for i in range(*qn_bounds)]
-
+                required.package['xcolor'] = True
+                required.options['xcolor'].add('dvipsnames')
                 if shared.enable_js_form and ex_or_answers == 'exc':
                     for i in range(len(a)):
                         a[i] = r"""\TextField[name=ans""" + str(i + 1) \
