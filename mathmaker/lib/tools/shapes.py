@@ -23,7 +23,7 @@
 import random
 
 from mathmakerlib.calculus import Number
-from mathmakerlib.geometry import Point, AngleMark, Polygon, Triangle
+from mathmakerlib.geometry import Point, AngleDecoration, Polygon, Triangle
 from mathmakerlib.geometry import IsoscelesTriangle, EquilateralTriangle
 from mathmakerlib.geometry import Quadrilateral, Rectangle, Rhombus, Square
 
@@ -142,7 +142,7 @@ class ShapeGenerator(object):
             lbls[0], lbls[2] = lbls[2], lbls[0]
         polygon.setup_labels(labels=lbls)
         if variant == 1:  # right triangle shapes
-            polygon.angles[1].mark = AngleMark(thickness=thickness)
+            polygon.angles[1].mark = AngleDecoration(thickness=thickness)
             polygon.angles[1].mark_right = True
         polygon.baseline = p[3]
         return polygon
@@ -228,7 +228,7 @@ class ShapeGenerator(object):
         polygon.setup_marks(marks)
         if right_angle_radius is not None:
             for a in polygon.angles:
-                if isinstance(a.mark, AngleMark) and a.mark_right:
+                if isinstance(a.mark, AngleDecoration) and a.mark_right:
                     a.mark.radius = right_angle_radius
         return polygon
 
