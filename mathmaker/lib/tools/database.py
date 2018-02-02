@@ -150,6 +150,11 @@ class source(object):
             if kw == "raw":
                 result += next(hook(kn)) + kwargs[kw] + " "
                 kn += 1
+            elif kw.endswith('_mod'):
+                k = kw[:-len('_mod')]
+                result += next(hook(kn)) + k + " % " + str(kwargs[kw]) \
+                    + " = 0 "
+                kn += 1
             elif kw.endswith('_notmod'):
                 k = kw[:-7]
                 result += next(hook(kn)) + k + " % " + str(kwargs[kw]) \
