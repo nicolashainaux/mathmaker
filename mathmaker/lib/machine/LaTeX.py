@@ -27,12 +27,16 @@ import glob
 import subprocess
 from tempfile import NamedTemporaryFile
 
+from mathmakerlib import required
 from mathmakerlib.calculus import is_integer, is_number
+from mathmakerlib.constants import TIKZSET
+from mathmakerlib.LaTeX import AttrList, Command, DocumentClass, UsePackage
+from mathmakerlib.LaTeX import UseTikzLibrary
 
 from mathmaker import settings
 from mathmaker.lib.constants import latex, SLIDE_CONTENT_SEP
 from mathmaker.lib.constants.latex import TEXT_SCALES, TEXT_RANKS
-from mathmaker.lib.tools import generate_header_comment
+from mathmaker.lib.tools import generate_preamble_comment
 from mathmaker.lib.core.base import Printable, Drawable
 from . import Structure
 
@@ -69,26 +73,53 @@ class LaTeX(Structure.Structure):
 
     # --------------------------------------------------------------------------
     ##
-    #   @brief Write the complete LaTeX header of the sheet to the output.
-    def write_document_header(self, variant='default'):
+    #   @brief Write the complete LaTeX preamble of the sheet to the output.
+    def write_preamble(self, variant='default'):
         from mathmaker.lib import shared
-        result = generate_header_comment(latex.FORMAT_NAME_PRINT)
+        luatex85patch = str(Command('RequirePackage', 'luatex85')) + '\n '
+        # xcolor is handled first, because it may require to be loaded as an
+        # option (if using 'beamer' document class)
+        xcolor = ''
+        xcolor_attr = []
+        if required.package['xcolor']:
+            xcolor_attr = [o for o in required.options['xcolor']]
+            if variant != 'slideshow':
+                xcolor = '% {}\n{}\n'.format(
+                    _('To be able to color the documents'),
+                    str(UsePackage('xcolor', options=xcolor_attr)))
+        # \documentclass
         if variant == 'slideshow':
-            sisetup_dict = {}
-            setfont = '% no font set'
-            font_patch = ''
-            if settings.font is not None:
-                sisetup_dict.update({'text-rm': r'\configfont'})
-                setfont = (r'\setmainfont{font}' + '\n'
-                           + r'\newfontfamily\configfont{font}' + '\n')\
-                    .format(font='{' + settings.font + '}')
-                font_patch = r"""
+            dc = DocumentClass('beamer', options='20pt')
+            if required.package['xcolor']:
+                if xcolor_attr:
+                    dc.options.append({'xcolor': AttrList(xcolor_attr)})
+                else:
+                    dc.options.append('xcolor')
+        else:
+            dc = DocumentClass('article', options=['a4paper', 'fleqn', '12pt'])
+        dc = str(dc)
+        # various fonts, symbols and maths packages
+        lxfonts = str(UsePackage('lxfonts')) \
+            if settings.round_letters_in_math_expr else ''
+        # amssymb = str(UsePackage('amssymb'))
+        # amsmath = str(UsePackage('amsmath'))
+        amssymb = ''
+        amsmath = ''
+        eurosym = str(UsePackage('eurosym')) \
+            if required.package['eurosym'] else ''
+        symbolspkg = [p
+                      for p in [lxfonts, amssymb, amsmath, eurosym]
+                      if p != '']
+        symbolspkg = '\n'.join(symbolspkg)
+        if symbolspkg != '':
+            symbolspkg = '\n\n' + symbolspkg
+        # font patch
+        font_patch = ''
+        if settings.font is not None:
+            font_patch = r"""
 \usepackage[no-math]{{fontspec}}
 
 \AtEndPreamble{{\setmainfont{font_name}[NFSSFamily=fontid]}}
-
-\usepackage{{amssymb}}
-\usepackage{{amsmath}}
 
 \DeclareSymbolFont{{mynumbers}}      {{TU}}{{fontid}}{{m}}{{n}}
 \SetSymbolFont    {{mynumbers}}{{bold}}{{TU}}{{fontid}}{{bx}}{{n}}
@@ -107,169 +138,144 @@ class LaTeX(Structure.Structure):
 \DeclareMathSymbol{{.}}{{\mathalpha}}{{mynumbers}}{{`.}}
 \DeclareMathSymbol{{,}}{{\mathalpha}}{{mynumbers}}{{`,}}
 }}""".format(font_name='{' + settings.font + '}')
-            fr_parallel = ''
+        # language
+        polyglossia = str(UsePackage('polyglossia'))
+        language_setup = str(Command('setmainlanguage', self.language))
+        if self.language_code in latex.LANGUAGE_OPTIONS:
+            lod = latex.LANGUAGE_OPTIONS[self.language_code]
+            language_setup += '\n' + str(Command('setkeys',
+                                                 options=AttrList(lod),
+                                                 content=self.language))
+        # siunitx
+        siunitx = ''
+        if required.package['siunitx']:
+            siunitx = '% {}\n{}\n'.format(_('To display units correctly'),
+                                          str(UsePackage('siunitx')))
+            sisetup_attr = {'mode': 'text'}
             if settings.language.startswith('fr'):
-                sisetup_dict.update({'locale': 'FR'})
-                fr_parallel += r'\renewcommand{\parallel}{' \
-                    r'\mathbin{/\negthickspace/}}' + '\n'
+                sisetup_attr.update({'locale': 'FR'})
+            siunitx += r"""\AtBeginDocument{{
+{sisetup}
+}}
+""".format(sisetup=str(Command('sisetup', content=sisetup_attr)))
+        # TikZ setup
+        tikz_setup = ''
+        if required.package['tikz']:
+            tikz = '% {}\n{}'.format(_('To draw TikZ pictures'),
+                                     str(UsePackage('tikz')))
+            tikzlibraries = '\n'.join([str(UseTikzLibrary(k))
+                                       for k in required.tikz_library
+                                       if required.tikz_library[k]])
+            tikzset = '\n'.join([TIKZSET[k]
+                                 for k in required.tikzset
+                                 if required.tikzset[k]])
+            tikz_setup = '\n'.join(_ for _ in [tikz, tikzlibraries, tikzset])
+            tikz_setup += '\n'
+        # hyperref
+        hyperref = ''
+        if shared.enable_js_form:
+            hyperref = '\n' + '% {}\n{}\n\n'\
+                .format(_('To insert pdf formular and javascript'),
+                        str(UsePackage('hyperref')))
+        # Specific packages
+        if variant == 'slideshow':
+            specificpkg = r"""
+\usepackage[overlay, absolute]{textpos}
+% Useless? \usefonttheme{professionalfonts}
+"""
+        else:
+            specificpkg = r"""
+% {cancelpkg_comment}
+\usepackage{{cancel}}
+% {placeinspkg_comment}
+\usepackage{{placeins}}
+% {multicolpkg_comment}
+\usepackage{{multicol}}
+% {arraypkg_comment}
+\usepackage{{array}}
+% {ulempkg_comment}
+\usepackage{{ulem}}
+% {textcomppkg_comment}
+\usepackage{{textcomp}}
 
-            sisetup = ''
-            if len(sisetup_dict):
-                sisetup_str = ', '.join([k + ' = ' + sisetup_dict[k]
-                                         for k in sisetup_dict])
-                sisetup += '\AtBeginDocument{\n'
-                sisetup += '\sisetup{' + sisetup_str + '}\n'
-                sisetup += '}\n'
+% {graphicxpkg_comment}
+\usepackage{{graphicx}}
+\usepackage{{epstopdf}}
+\epstopdfsetup{{outdir=./}}
 
-            header = r"""
-\documentclass[20pt, xcolor={{usenames, dvipsnames, svgnames}}]{{beamer}}
-\RequirePackage{{luatex85}}
+% {layout_comment}
+\usepackage{{geometry}}
+\geometry{{hmargin=0.75cm, vmargin=0.75cm}}
+\setlength{{\parindent}}{{0cm}}
+\setlength{{\arrayrulewidth}}{{0.02pt}}
+\pagestyle{{empty}}
+"""\
+.format(cancelpkg_comment=_('To strike out numbers '),
+        placeinspkg_comment=_('To get a better control on floats positioning '
+                              '(e.g. tabulars) '),
+        multicolpkg_comment=_('To use multicol environment'),
+        arraypkg_comment=_('To use extra commands to handle tabulars'),
+        ulempkg_comment=_('For pretty underlining'),
+        textcomppkg_comment=_('To use some symbols like currency units'),
+        graphicxpkg_comment=_('To include .eps pictures'),
+        layout_comment=_('General layout of the page'))  # noqa
+        # Specific commands
+        if variant == 'slideshow':
+            specificcmd = r"""
+\addtolength{\headsep}{-1cm}
+"""
+        else:
+            specificcmd = r"""
+% {counter_comment}
+\newcounter{{n}}
+% {exercisecmd_comment}
+\newcommand{{\exercise}}{{\noindent \hspace{{-.25cm}} """\
+r"""\stepcounter{{n}} \normalsize \textbf{{Exercice \arabic{{n}}}} """\
+r"""\newline \normalsize }}
+% {resetcounter_comment}
+\newcommand{{\razcompteur}}{{\setcounter{{n}}{{0}}}}
+""".format(counter_comment=_('Exercises counter'),
+           exercisecmd_comment=_('Definition of the "exercise" command, which '
+                                 'will insert the word "Exercise" in bold, '
+                                 'with its number and automatically '
+                                 'increments the counter'),
+           resetcounter_comment=_('Definition of the command resetting the '
+                                  'exercises counter (which is useful when '
+                                  'begining to write the answers sheet)'))  # noqa
+        # Common commands
+        commoncmd = ''
+        if settings.language.startswith('fr'):
+            commoncmd = r'\renewcommand{\parallel}{\mathbin{/\negthickspace/}}'
+        if commoncmd != '':
+            commoncmd = '\n\n' + commoncmd
+
+        # Complete preamble generation
+        preamble = r"""
+{luatex85patch}{documentclass}{symbols}
 
 {font_patch}
 
-\usepackage{{polyglossia}}
-\setmainlanguage{language}
-\usefonttheme{{professionalfonts}}
-\usepackage{{lxfonts}}
-\usepackage{{multimedia}}
-\usepackage{{tikz}}
-\usepackage{{verbatim}}
-\usepackage{{eurosym}}
-\usepackage[overlay,absolute]{{textpos}}
-\usepackage[detect-all]{{siunitx}}
+{polyglossia}
+{language_setup}
 
-{setfont}
-{sisetup}
-{fr_parallel}
-\addtolength{{\headsep}}{{-1cm}}
+{siunitx}
 
-"""
-            result += header.format(font_patch=font_patch,
-                                    language='{' + self.language + '}',
-                                    setfont=setfont, fr_parallel=fr_parallel,
-                                    sisetup=sisetup)
+{xcolor}{tikz_setup}
 
-        else:
-            result += r'\documentclass[a4paper,fleqn,12pt]{article}' + '\n\n'
-            if settings.round_letters_in_math_expr:
-                result += r'\usepackage{lxfonts}' + '\n'
-            if settings.font is not None:
-                result += r"""
-\usepackage[no-math]{{fontspec}}
+{hyperref}{specificpackages}
 
-\AtEndPreamble{{\setmainfont{font_name}[NFSSFamily=fontid]}}
+{specificcommands}{commoncommands}
+""".format(luatex85patch=luatex85patch, documentclass=dc, symbols=symbolspkg,
+           polyglossia=polyglossia, language_setup=language_setup,
+           font_patch=font_patch, siunitx=siunitx,
+           xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
+           specificpackages=specificpkg, specificcommands=specificcmd,
+           commoncommands=commoncmd)
 
-\DeclareSymbolFont{{mynumbers}}      {{TU}}{{fontid}}{{m}}{{n}}
-\SetSymbolFont    {{mynumbers}}{{bold}}{{TU}}{{fontid}}{{bx}}{{n}}
-
-\AtBeginDocument{{
-\DeclareMathSymbol{{0}}{{\mathalpha}}{{mynumbers}}{{`0}}
-\DeclareMathSymbol{{1}}{{\mathalpha}}{{mynumbers}}{{`1}}
-\DeclareMathSymbol{{2}}{{\mathalpha}}{{mynumbers}}{{`2}}
-\DeclareMathSymbol{{3}}{{\mathalpha}}{{mynumbers}}{{`3}}
-\DeclareMathSymbol{{4}}{{\mathalpha}}{{mynumbers}}{{`4}}
-\DeclareMathSymbol{{5}}{{\mathalpha}}{{mynumbers}}{{`5}}
-\DeclareMathSymbol{{6}}{{\mathalpha}}{{mynumbers}}{{`6}}
-\DeclareMathSymbol{{7}}{{\mathalpha}}{{mynumbers}}{{`7}}
-\DeclareMathSymbol{{8}}{{\mathalpha}}{{mynumbers}}{{`8}}
-\DeclareMathSymbol{{9}}{{\mathalpha}}{{mynumbers}}{{`9}}
-\DeclareMathSymbol{{.}}{{\mathalpha}}{{mynumbers}}{{`.}}
-\DeclareMathSymbol{{,}}{{\mathalpha}}{{mynumbers}}{{`,}}
-}}
-""".format(font_name='{' + settings.font + '}')
-            result += r'\usepackage{polyglossia}' + '\n'
-            result += r'\setmainlanguage{' + self.language + '}\n'
-            if self.language_code in latex.LANGUAGE_OPTIONS:
-                lod = latex.LANGUAGE_OPTIONS[self.language_code]
-                lang_options = ','.join([str(o) + '=' + str(lod[o])
-                                         for o in lod])
-                result += ''.join(['\setkeys{', self.language, '}'
-                                   '{', lang_options, '}\n'])
-            result += '% ' + _('To display units correctly') + '\n'
-            result += r'\usepackage{siunitx}' + '\n'
-            sisetup_dict = {}
-            if settings.language.startswith('fr'):
-                sisetup_dict.update({'locale': 'FR'})
-            sisetup_dict.update({'mode': 'text'})
-            sisetup_str = ', '.join([k + ' = ' + sisetup_dict[k]
-                                     for k in sisetup_dict])
-            result += '\AtBeginDocument{\n'
-            result += '\sisetup{' + sisetup_str + '}\n'
-            result += '}\n'
-            result += '% ' + _('To strike out numbers ') + '\n'
-            result += r'\usepackage{cancel}' + '\n'
-            result += '% ' + _('To get a better control on floats '
-                               'positioning (e.g. tabulars) ') + '\n'
-            result += r'\usepackage{placeins}' + '\n'
-            result += '% ' + _('To use the margin definition command') + '\n'
-            result += r'\usepackage{geometry}' + '\n'
-            result += '% ' + _('To be able to color the documents') + '\n'
-            result += r'\usepackage[usenames, dvipsnames]{xcolor}' + '\n'
-            result += '% ' + _('To use the commands from {pkg_name} ')\
-                .format(pkg_name='theorem') + '\n'
-            result += r'%\usepackage{theorem}' + '\n'
-            result += '% ' + _('To use multicol environment') + '\n'
-            result += r'\usepackage{multicol}' + '\n'
-            result += '% {}\n'.format(
-                _('To use extra commands to handle tabulars'))
-            result += r'\usepackage{array}' + '\n'
-            result += '% ' + _('For pretty underlining') + '\n'
-            result += r'\usepackage{ulem}' + '\n'
-            result += '% {}\n'.format(
-                _('To include .eps pictures (loads graphicx)'))
-            # result += r'\usepackage{graphbox}' + '\n'
-            result += r'\usepackage{graphicx}' + '\n'
-            result += '% {}\n'.format(
-                _('To use some symbols like currency units'))
-            result += r'\usepackage{textcomp}' + '\n'
-            result += r'\usepackage{eurosym}' + '\n'
-            result += '% ' + _('To use other mathematical symbols') + '\n'
-            result += r'\usepackage{amssymb}' + '\n'
-            result += r'\usepackage{amsmath}' + '\n'
-            result += '% ' + _('To draw') + '\n'
-            result += r'\usepackage{tikz}' + '\n'
-            if shared.enable_js_form:
-                result += '% {}\n'\
-                    .format(_('To insert pdf formular and javascript'))
-                result += r'\usepackage{hyperref}' + '\n'
-            result += '% ' + _('Page layout ') + '\n'
-            result += '\geometry{hmargin=0.75cm, vmargin=0.75cm}\n'
-            result += '\setlength{\parindent}{0cm}\n'
-            result += r'\setlength{\arrayrulewidth}{0.02pt}' + '\n'
-            result += '\pagestyle{empty}\n\n'
-            result += r'\usepackage{epstopdf}' + '\n'
-            result += '%%% ' + _('If you wish to include a picture, '
-                                 'please use this command:') + '\n'
-            result += '%%% \includegraphics[height=6cm]{'
-            result += _('file_name')
-            result += '.eps} \n\n'
-            result += '% ' + _('Exercises counter') + '\n'
-            result += '\\newcounter{n}\n'
-            result += '% ' + _('Definition of the {cmd_name} command, which '
-                               'will insert the word {word} in bold, with its '
-                               'number and automatically increments the '
-                               'counter').format(cmd_name='exercise',
-                                                 word=_('Exercise')) + '\n'
-            result += '\\newcommand{\exercise}{\\noindent \hspace{-.25cm}' \
-                + ' \stepcounter{n} ' + self.translate_font_size('large') \
-                + ' \\textbf{' \
-                + _('Exercise') \
-                + ' \\arabic{n}} ' \
-                + '\\newline ' + self.translate_font_size('large') + ' } \n'
-            result += '% ' + _('Definition of the command resetting the '
-                               'exercises counter (which is useful when '
-                               'begining to write the answers sheet)') + '\n'
-            result += '\\newcommand{\\razcompteur}{\setcounter{n}{0}}\n\n'
-            result += r'\usetikzlibrary{calc}' + '\n'
-            result += r'\epstopdfsetup{outdir=./}' + '\n'
-
-            if settings.language.startswith('fr'):
-                result += r'\renewcommand{\parallel}{' \
-                    r'\mathbin{/\negthickspace/}}' + '\n'
+        result = generate_preamble_comment(latex.FORMAT_NAME_PRINT) + preamble
 
         if self.redirect_output_to_str:
             return result
-
         else:
             self.out.write(result)
 

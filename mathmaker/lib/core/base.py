@@ -24,7 +24,7 @@ import subprocess
 from abc import ABCMeta, abstractmethod
 
 from mathmaker import settings
-from mathmaker.lib.tools import generate_header_comment
+from mathmaker.lib.tools import generate_preamble_comment
 
 
 # ------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ class Drawable(NamedObject, metaclass=ABCMeta):
     #   @brief Creates the picture of the drawable object
     #   @return Nothing, just creates the picture file
     def into_pic(self, create_pic_file=True):
-        hc = generate_header_comment('eukleides')
+        hc = generate_preamble_comment('eukleides')
 
         if create_pic_file:
             euk_path = settings.outputdir + self.euk_filename

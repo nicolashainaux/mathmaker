@@ -265,8 +265,6 @@ class Sheet(object):
     def __str__(self):
         result = ''
         if self.layout_type in ['default', 'equations', 'slideshow']:
-            result += shared.machine.write_document_header(
-                variant=self.layout_type)
             result += shared.machine.write_document_begins(
                 variant=self.layout_type)
             result += self.sheet_header_to_str()
@@ -279,9 +277,10 @@ class Sheet(object):
                 variant=self.layout_type)
             result += self.texts_to_str('ans', 0)
             result += shared.machine.write_document_ends()
+            result = shared.machine.write_preamble(variant=self.layout_type)\
+                + result
 
         elif self.layout_type == 'short_test':
-            result += shared.machine.write_document_header()
             result += shared.machine.write_document_begins()
 
             n = 1
@@ -316,9 +315,9 @@ class Sheet(object):
             result += self.answers_title_to_str()
             result += self.texts_to_str('ans', len(self.exercises_list) // 2)
             result += shared.machine.write_document_ends()
+            result = shared.machine.write_preamble() + result
 
         elif self.layout_type == 'mini_test':
-            result += shared.machine.write_document_header()
             result += shared.machine.write_document_begins()
 
             for i in range(3):
@@ -360,9 +359,9 @@ class Sheet(object):
             # result += self.texts_to_str('ans', 3*len(self.exercises_list)/4)
 
             result += shared.machine.write_document_ends()
+            result = shared.machine.write_preamble() + result
 
         elif self.layout_type == 'mini_training':
-            result += shared.machine.write_document_header()
             result += shared.machine.write_document_begins()
 
             for i in range(6):
@@ -375,6 +374,7 @@ class Sheet(object):
             result += self.texts_to_str('ans', 0)
 
             result += shared.machine.write_document_ends()
+            result = shared.machine.write_preamble() + result
 
         else:
             raise ValueError('Got ' + self.layout_type + 'instead of std|'

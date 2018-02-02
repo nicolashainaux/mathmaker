@@ -43,9 +43,9 @@ class Structure(object, metaclass=ABCMeta):
 
     # --------------------------------------------------------------------------
     ##
-    #   Write the complete header of the sheet to the output.
+    #   Write the complete preamble of the sheet to the output.
     @abstractmethod
-    def write_document_header(self):
+    def write_preamble(self):
         pass
 
     # --------------------------------------------------------------------------

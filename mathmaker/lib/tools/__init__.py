@@ -301,8 +301,8 @@ def check_unique_letters_words(words_list, n):
     return True
 
 
-def generate_header_comment(document_format, comment_symbol="% "):
-    """Return the header comment for output text files."""
+def generate_preamble_comment(document_format, comment_symbol="% "):
+    """Return the preamble comment for output text files."""
     from mathmaker import (__software_name__, __release__,
                            __licence_info__, __contact__)
     from mathmaker import __licence__, __url_info__, __url__, __copyright__
