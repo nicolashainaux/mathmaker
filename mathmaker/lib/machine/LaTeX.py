@@ -76,7 +76,7 @@ class LaTeX(Structure.Structure):
     #   @brief Write the complete LaTeX preamble of the sheet to the output.
     def write_preamble(self, variant='default'):
         from mathmaker.lib import shared
-        luatex85patch = str(Command('RequirePackage', 'luatex85')) + '\n '
+        luatex85patch = str(Command('RequirePackage', 'luatex85')) + '\n'
         # xcolor is handled first, because it may require to be loaded as an
         # option (if using 'beamer' document class)
         xcolor = ''
@@ -84,7 +84,7 @@ class LaTeX(Structure.Structure):
         if required.package['xcolor']:
             xcolor_attr = [o for o in required.options['xcolor']]
             if variant != 'slideshow':
-                xcolor = '% {}\n{}\n'.format(
+                xcolor = '% {}\n{}\n\n'.format(
                     _('To be able to color the documents'),
                     str(UsePackage('xcolor', options=xcolor_attr)))
         # \documentclass
@@ -116,8 +116,7 @@ class LaTeX(Structure.Structure):
         # font patch
         font_patch = ''
         if settings.font is not None:
-            font_patch = r"""
-\usepackage[no-math]{{fontspec}}
+            font_patch = r"""\usepackage[no-math]{{fontspec}}
 
 \AtEndPreamble{{\setmainfont{font_name}[NFSSFamily=fontid]}}
 
@@ -149,15 +148,16 @@ class LaTeX(Structure.Structure):
         # siunitx
         siunitx = ''
         if required.package['siunitx']:
-            siunitx = '% {}\n{}\n'.format(_('To display units correctly'),
-                                          str(UsePackage('siunitx')))
+            siunitx = '% {}\n{}'.format(_('To display units correctly'),
+                                        str(UsePackage('siunitx')))
             sisetup_attr = {'mode': 'text'}
             if settings.language.startswith('fr'):
                 sisetup_attr.update({'locale': 'FR'})
-            siunitx += r"""\AtBeginDocument{{
+            siunitx += r"""
+\AtBeginDocument{{
 {sisetup}
-}}
-""".format(sisetup=str(Command('sisetup', content=sisetup_attr)))
+}}""".format(sisetup=str(Command('sisetup', content=sisetup_attr)))
+            siunitx += '\n\n'
         # TikZ setup
         tikz_setup = ''
         if required.package['tikz']:
@@ -179,13 +179,11 @@ class LaTeX(Structure.Structure):
                         str(UsePackage('hyperref')))
         # Specific packages
         if variant == 'slideshow':
-            specificpkg = r"""
-\usepackage[overlay, absolute]{textpos}
+            specificpkg = r"""\usepackage[overlay, absolute]{textpos}
 % Useless? \usefonttheme{professionalfonts}
 """
         else:
-            specificpkg = r"""
-% {cancelpkg_comment}
+            specificpkg = r"""% {cancelpkg_comment}
 \usepackage{{cancel}}
 % {placeinspkg_comment}
 \usepackage{{placeins}}
@@ -208,8 +206,7 @@ class LaTeX(Structure.Structure):
 \geometry{{hmargin=0.75cm, vmargin=0.75cm}}
 \setlength{{\parindent}}{{0cm}}
 \setlength{{\arrayrulewidth}}{{0.02pt}}
-\pagestyle{{empty}}
-"""\
+\pagestyle{{empty}}"""\
 .format(cancelpkg_comment=_('To strike out numbers '),
         placeinspkg_comment=_('To get a better control on floats positioning '
                               '(e.g. tabulars) '),
@@ -225,8 +222,7 @@ class LaTeX(Structure.Structure):
 \addtolength{\headsep}{-1cm}
 """
         else:
-            specificcmd = r"""
-% {counter_comment}
+            specificcmd = r"""% {counter_comment}
 \newcounter{{n}}
 % {exercisecmd_comment}
 \newcommand{{\exercise}}{{\noindent \hspace{{-.25cm}} """\
@@ -245,9 +241,13 @@ r"""\newline \normalsize }}
         # Common commands
         commoncmd = ''
         if settings.language.startswith('fr'):
-            commoncmd = r'\renewcommand{\parallel}{\mathbin{/\negthickspace/}}'
-        if commoncmd != '':
-            commoncmd = '\n\n' + commoncmd
+            commoncmd = r'''
+% {french_parallel_sign_comment}
+\renewcommand{{\parallel}}{{\mathbin{{/\negthickspace/}}}}
+'''.format(french_parallel_sign_comment=_('Redefinition of "\parallel" '
+                                          'command to draw the parallel '
+                                          'symbol slanted as usual in french '
+                                          'notations'))
 
         # Complete preamble generation
         preamble = r"""
@@ -258,11 +258,7 @@ r"""\newline \normalsize }}
 {polyglossia}
 {language_setup}
 
-{siunitx}
-
-{xcolor}{tikz_setup}
-
-{hyperref}{specificpackages}
+{siunitx}{xcolor}{tikz_setup}{hyperref}{specificpackages}
 
 {specificcommands}{commoncommands}
 """.format(luatex85patch=luatex85patch, documentclass=dc, symbols=symbolspkg,
