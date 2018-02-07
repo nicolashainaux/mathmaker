@@ -30,9 +30,7 @@ from mathmaker.lib.constants import latex
 def init():
     global db
     global shapes_db
-    global three_letters_words_source
-    global four_letters_words_source
-    global five_letters_words_source
+    global unique_letters_words_source
     global names_source
     global mini_problems_wordings_source
     global mini_problems_prop_wordings_source
@@ -109,13 +107,12 @@ def init():
     shapes_db = sqlite3.connect(settings.path.shapes_db)
 
     from mathmaker.lib.tools import database
-    three_letters_words_source = database.source("w3l", ["id", "word"],
-                                                 language=settings.language)
-    four_letters_words_source = database.source("w4l", ["id", "word"],
-                                                language=settings.language)
-
-    five_letters_words_source = database.source("w5l", ["id", "word"],
-                                                language=settings.language)
+    unique_letters_words_source = {}
+    for n in settings.available_wNl:
+        source_name = 'w{}l'.format(n)
+        unique_letters_words_source.update(
+            {n: database.source(source_name, ['id', 'word'],
+                                language=settings.language)})
     names_source = database.source("names", ["id", "name"],
                                    language=settings.language)
     mini_problems_wordings_source = database.source("mini_pb_wordings",

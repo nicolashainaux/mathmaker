@@ -119,17 +119,11 @@ def __main__():
 
     sys.stderr.write('Create tables...\n')
     # Creation of the tables
-    db_creation_queries = \
-        ['''CREATE TABLE w3l
-            (id INTEGER PRIMARY KEY, language TEXT, word TEXT,
-             drawDate INTEGER)''',
-         '''CREATE TABLE w4l
-            (id INTEGER PRIMARY KEY, language TEXT, word TEXT,
-             drawDate INTEGER)''',
-         '''CREATE TABLE w5l
-            (id INTEGER PRIMARY KEY, language TEXT, word TEXT,
-             drawDate INTEGER)''',
-         '''CREATE TABLE names
+    db_creation_queries = ['''CREATE TABLE w{}l
+        (id INTEGER PRIMARY KEY, language TEXT, word TEXT,
+         drawDate INTEGER)'''.format(n) for n in settings.available_wNl]
+    db_creation_queries += \
+        ['''CREATE TABLE names
             (id INTEGER PRIMARY KEY, language TEXT, gender TEXT, name TEXT,
              drawDate INTEGER)''',
          '''CREATE TABLE mini_pb_wordings
@@ -195,7 +189,7 @@ def __main__():
     # Extract data from po(t) files and insert them into the db
     for lang in next(os.walk(settings.localedir))[1]:
         settings.language = lang
-        for n in [3, 4, 5]:
+        for n in settings.available_wNl:
             if os.path.isfile(settings.localedir + lang
                               + "/LC_MESSAGES/w{}l.po".format(str(n))):
                 words = po_file_get_list_of('words', lang, n)

@@ -23,6 +23,7 @@
 import os
 import logging
 import logging.config
+from glob import glob
 from pathlib import Path
 from shutil import copyfile
 
@@ -118,6 +119,7 @@ def init():
     global msgfmt
     global round_letters_in_math_expr
     global mm_executable
+    global available_wNl
 
     settings_dirname = "settings/"
 
@@ -137,6 +139,9 @@ def init():
     shapes_db_index_path = datadir + 'shapes_db_index.json'
     settingsdir = rootdir + settings_dirname
     projectdir = rootdir[:-len('mathmaker/')]
+
+    available_wNl = sorted([int(os.path.basename(dirname)[1])
+                            for dirname in glob(datadir + 'w*l')])
 
     default = default_object()
 

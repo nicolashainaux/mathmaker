@@ -262,7 +262,7 @@ class structure(object):
         self.label_polygon_vertices = False
         self.polygon_name = None
         if self.picture:
-            self.polygon_name = next(shared.four_letters_words_source)[0]
+            self.polygon_name = next(shared.unique_letters_words_source[4])[0]
 
         self._generate_polygon('quadrilateral_2_2', 2, [(2, W), (2, L)])
         self.rectangle = self.polygon
@@ -275,7 +275,7 @@ class structure(object):
             or not hasattr(self, 'unit_area')):
             self.setup('length_units', **kwargs)
 
-        rt_name = next(shared.three_letters_words_source)[0]
+        rt_name = next(shared.unique_letters_words_source[3])[0]
         alpha, beta = next(shared.angle_ranges_source)
         rotation_angle = alpha + random.choice(range(beta - alpha))
         self.right_triangle = RightTriangle(
@@ -295,7 +295,7 @@ class structure(object):
                 raise RuntimeError('Impossible to Setup an intercept theorem '
                                    'figure without a coefficient and 3 other '
                                    'lengths provided.')
-        points_names = next(shared.five_letters_words_source)[0]
+        points_names = next(shared.unique_letters_words_source[5])[0]
         if butterfly:
             points_names = list(rotate(points_names, -1))
             (points_names[0], points_names[1]) = (points_names[1],
