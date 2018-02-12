@@ -24,9 +24,11 @@ import random
 import copy
 from decimal import Decimal
 from string import ascii_lowercase as alphabet
+from string import ascii_uppercase as ALPHABET
 
 from mathmakerlib.calculus import Number, Unit, Fraction, is_integer
 from mathmakerlib.calculus.unit import COMMON_LENGTH_UNITS
+from mathmakerlib.geometry import Angle, AnglesSet
 
 from mathmaker.lib.core.base_calculus import Division
 from mathmaker.lib import shared
@@ -244,6 +246,72 @@ class structure(object):
         self.result_str = Number(self.result).printed
         q = Division(('+', self.dividend, self.divisor))
         self.quotient_str = q.printed
+
+    def _setup_angles_bunch(self, measures=None, decorations=None,
+                            orientation=0):
+        from mathmakerlib.geometry import Point
+        from mathmaker import settings
+        angles = []
+        layers = {}
+        L = 0
+        for key in decorations:
+            i, j = key.split(':')
+            i, j = int(i), int(j)
+            if abs(j - i) not in layers:
+                layers.update({abs(j - i): L})
+                L += 1
+        sublayer = layer = 0
+        offset = Number('0.5', unit='cm')
+        if min(measures) < 35:
+            offset = Number('0.7', unit='cm')
+        if min(measures) < 30:
+            offset = Number('0.8', unit='cm')
+        if min(measures) < 25:
+            offset = Number('0.9', unit='cm')
+        if min(measures) < 20:
+            offset = Number(1, unit='cm')
+        layer_thickness = Number(1, unit='cm')
+        if len(measures) >= 3:
+            layer_thickness += Number('0.1', unit='cm') \
+                * abs(len(measures) - 2)
+        arm_length = Number(offset + layers[max(layers)] * layer_thickness
+                            + Number('0.8', unit='cm'), unit=None)
+        required_nb_of_points_names = len(measures) + 2
+        if required_nb_of_points_names in settings.available_wNl:
+            names = next(shared.unique_letters_words_source[
+                required_nb_of_points_names])[0]
+        else:
+            names = copy.deepcopy(ALPHABET)[0:required_nb_of_points_names]
+        Ω = Point(0, 0, names[0])  # vertex of all angles from the bunch
+        P1 = Point(arm_length, 0).rotate(Ω, orientation, rename=names[1])
+        endpoints = [P1]
+        θ = 0
+        for i, ω in enumerate(measures):
+            θ += ω
+            endpoints.append(P1.rotate(Ω, θ, rename=names[i + 2]))
+        for p in endpoints:
+            p.name += '1'
+        for kn, key in enumerate(decorations):
+            i, j = key.split(':')
+            i, j = int(i), int(j)
+            previous_layer = layer
+            layer = layers[abs(j - i)]
+            # color = next(shared.dvipsnames_selection_source)[0]
+            deco = decorations[key]
+            if layer != previous_layer:  # reset layer
+                sublayer = 0
+            armspoints = [(names[i + 1], ), (names[j + 1], )]
+            deco.radius = offset \
+                + sublayer * Number('0.1', unit='cm') \
+                + layer * layer_thickness
+            sublayer += 1
+            α = Angle(endpoints[i], Ω, endpoints[j],
+                      label_vertex=True, draw_vertex=True,
+                      label_armspoints=True, draw_armspoints=True,
+                      decoration=deco, armspoints=armspoints,
+                      naming_mode='from_armspoints')
+            angles.append(α)
+        self.angles_bunch = AnglesSet(*angles)
 
     def _setup_rectangle(self, **kwargs):
         if hasattr(self, 'nb1') and hasattr(self, 'nb2'):
