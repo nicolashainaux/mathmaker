@@ -119,6 +119,7 @@ def entry_point():
     locale.setlocale(locale.LC_ALL, settings.locale)
     check_settings_consistency()
     shared.init()
+    mmlib_setup.language = settings.language
 
     if args.main_directive == 'list':
         sys.stdout.write(list_all_sheets())
