@@ -26,8 +26,9 @@
 
 from decimal import Decimal
 
+from mathmakerlib.calculus import Number
+
 from mathmaker.lib.tools.database import generate_random_decimal_nb
-from mathmaker.lib.core.base_calculus import Item
 from mathmaker.lib.constants.numeration import DIGITSPLACES_WORDS
 
 
@@ -41,7 +42,7 @@ class sub_object(object):
             generate_random_decimal_nb(position=pos, **options)[0]
         self.chosen_figure = (self.chosen_deci
                               % (pos * Decimal('10'))) // pos
-        self.chosen_deci_str = Item((self.chosen_deci)).printed
+        self.chosen_deci_str = Number((self.chosen_deci)).printed
         self.chosen_digitplace = pos
         self.transduration = 8
 
