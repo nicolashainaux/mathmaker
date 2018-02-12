@@ -108,12 +108,17 @@ class LaTeX(Structure.Structure):
             amsmath = str(UsePackage('amsmath'))
         eurosym = str(UsePackage('eurosym')) \
             if required.package['eurosym'] else ''
-        symbolspkg = [p
-                      for p in [lxfonts, amssymb, amsmath, eurosym]
+        stackengine = str(UsePackage('stackengine')) \
+            if required.package['stackengine'] else ''
+        scalerel = str(UsePackage('scalerel')) \
+            if required.package['scalerel'] else ''
+        variouspkg = [p
+                      for p in [lxfonts, amssymb, amsmath, eurosym,
+                                stackengine, scalerel]
                       if p != '']
-        symbolspkg = '\n'.join(symbolspkg)
-        if symbolspkg != '':
-            symbolspkg = '\n\n' + symbolspkg
+        variouspkg = '\n'.join(variouspkg)
+        if variouspkg != '':
+            variouspkg = '\n\n' + variouspkg
         # font patch
         font_patch = ''
         if settings.font is not None:
@@ -262,7 +267,7 @@ r"""\newline \normalsize }}
 {siunitx}{xcolor}{tikz_setup}{hyperref}{specificpackages}
 
 {specificcommands}{commoncommands}
-""".format(luatex85patch=luatex85patch, documentclass=dc, symbols=symbolspkg,
+""".format(luatex85patch=luatex85patch, documentclass=dc, symbols=variouspkg,
            polyglossia=polyglossia, language_setup=language_setup,
            font_patch=font_patch, siunitx=siunitx,
            xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
