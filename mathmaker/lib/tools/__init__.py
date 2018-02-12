@@ -315,7 +315,7 @@ def generate_preamble_comment(document_format, comment_symbol="% "):
                 software_license=__licence__) + "\n"
     hc += comment_symbol + _(__url_info__)\
         .format(software_website=__url__) + "\n"
-    hc += comment_symbol + "{copyright} {contact}\n\n"\
+    hc += comment_symbol + "{copyright} {contact}\n"\
         .format(copyright=__copyright__, contact=__contact__)
     return hc
 
