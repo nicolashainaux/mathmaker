@@ -180,6 +180,6 @@ Contact: nh dot techn (hosted by gmail dot com)
    :target: http://mathmaker.readthedocs.io/en/master/
 .. |Documentation Status2| image:: https://readthedocs.org/projects/mathmaker/badge/?version=dev
    :target: http://mathmaker.readthedocs.io/en/dev/
-.. |Maintenance| image:: https://img.shields.io/maintenance/yes/2017.svg?maxAge=2592000
+.. |Maintenance| image:: https://img.shields.io/maintenance/yes/2018.svg?maxAge=2592000
 .. |PyPI4| image:: https://img.shields.io/pypi/l/mathmaker.svg?maxAge=2592000
    :target: https://github.com/nicolashainaux/mathmaker/blob/master/LICENSE
