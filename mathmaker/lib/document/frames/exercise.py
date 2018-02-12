@@ -823,6 +823,8 @@ class Exercise(object):
                                          center_vertically=True,
                                          min_row_height=self.min_row_height)
                 if shared.enable_js_form and ex_or_answers == 'exc':
+                    # Requiring amsmath because of the \text{{ }} below
+                    required.package['amsmath'] = True
                     result += (r"""
 \PushButton[name=clearbutton,bordercolor={{0.5 0.5 0.5}},
             onclick={{var qNumber = {q_number};

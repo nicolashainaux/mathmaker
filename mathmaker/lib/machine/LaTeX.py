@@ -102,9 +102,10 @@ class LaTeX(Structure.Structure):
         lxfonts = str(UsePackage('lxfonts')) \
             if settings.round_letters_in_math_expr else ''
         # amssymb = str(UsePackage('amssymb'))
-        # amsmath = str(UsePackage('amsmath'))
         amssymb = ''
         amsmath = ''
+        if required.package['amsmath']:
+            amsmath = str(UsePackage('amsmath'))
         eurosym = str(UsePackage('eurosym')) \
             if required.package['eurosym'] else ''
         symbolspkg = [p

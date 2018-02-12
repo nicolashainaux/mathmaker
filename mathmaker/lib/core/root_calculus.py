@@ -32,6 +32,7 @@ from decimal import (Decimal, getcontext, Rounded, ROUND_DOWN,
                      InvalidOperation)
 from abc import ABCMeta, abstractmethod
 
+from mathmakerlib import required
 from mathmakerlib.calculus import Number
 
 from mathmaker.lib.core.utils import check_lexicon_for_substitution
@@ -611,6 +612,9 @@ class Value(Signed):
         if js_repr or not textwrap:
             open_text_in_maths = close_text_in_maths = ''
 
+        if open_text_in_maths:
+            required.package['amsmath'] = True
+
         options.update({'textwrap': textwrap, 'js_repr': js_repr})
 
         if self.is_numeric():
@@ -1050,6 +1054,9 @@ class Unit(Exponented):
             text_box_open = text_box_close = ''
 
         exponent = ''
+
+        if text_box_open:
+            required.package['amsmath'] = True
 
         if self.exponent != Value(1):
             exponent = MARKUP['opening_exponent'] \

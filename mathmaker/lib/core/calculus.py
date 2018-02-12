@@ -25,6 +25,7 @@ from math import gcd
 from string import ascii_uppercase as alphabet
 from abc import ABCMeta, abstractmethod
 
+from mathmakerlib import required
 from mathmakerlib.calculus import is_integer, is_number
 
 from mathmaker import settings
@@ -163,6 +164,7 @@ class Expression(ComposedCalculable):
     #   @return The formated string
     def into_str(self, **options):
         global expression_begins
+        required.package['amsmath'] = True
         # Expression objects displaying
         if is_number(self.name) and is_integer(self.name):
             i = self.name
