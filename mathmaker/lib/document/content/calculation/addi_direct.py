@@ -21,6 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
+import random
+
+from mathmakerlib import required
+from mathmakerlib.calculus import Number
 
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
@@ -61,12 +65,44 @@ class sub_object(component.structure):
                           values=[
                               shared.machine.write_math_style2(self.sum_str)],
                           fix_math_style2_fontsize=True)
+        elif self.context == 'angles':
+            deg = r'\textdegree'
+            orientation = int(options.get('orientation', 'random'))
+            if orientation == 'random':
+                orientation = 10 * random.randint(0, 35)
+            from mathmakerlib.geometry import AngleDecoration
+            self.result = Number(self.result, unit=deg)
+            required.package['xcolor'] = True
+            required.options['xcolor'].add('dvipsnames')
+            decorations = {}
+            for i in range(self.nb_nb):
+                decorations.update({'{}:{}'.format(i, i + 1):
+                                    AngleDecoration(label=Number(
+                                                    getattr(self, 'nb{}'
+                                                            .format(i + 1)),
+                                                    unit=deg))})
+            decorations.update({'0:{}'.format(self.nb_nb):
+                                AngleDecoration(label=None,
+                                                thickness='ultra thick',
+                                                color='BrickRed')})
+            super().setup('angles_bunch', measures=self.nb_list,
+                          decorations=decorations, orientation=orientation)
+            self.angles_bunch.baseline = '29pt'
 
     def q(self, **options):
         if self.context == 'mini_problem':
             return post_process(self.wording.format(**self.wording_format))
         elif self.context.startswith('ask:'):
             return self.wording
+        elif self.context == 'angles':
+            self.substitutable_question_mark = True
+            return shared.machine.write_layout(
+                (1, 2),
+                [6.25, 6.75],
+                [self.angles_bunch.drawn,
+                 _('${math_expr}$ = {q_mark}')
+                 .format(math_expr=self.angles_bunch.angles[-1].name,
+                         q_mark=COLORED_QUESTION_MARK)])
         else:
             self.substitutable_question_mark = True
             return shared.machine.write_math_style2(
