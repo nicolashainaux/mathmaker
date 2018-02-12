@@ -1,4 +1,4 @@
-mathmakerlib==0.5
+mathmakerlib==0.6
 polib==1.0.8
 python-daemon==2.1.2
 intspan==1.5.8
