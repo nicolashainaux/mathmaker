@@ -29,7 +29,7 @@ from tempfile import NamedTemporaryFile
 
 from mathmakerlib import required
 from mathmakerlib.calculus import is_integer, is_number
-from mathmakerlib.constants import TIKZSET
+from mathmakerlib.LaTeX import TIKZSET
 from mathmakerlib.LaTeX import AttrList, Command, DocumentClass, UsePackage
 from mathmakerlib.LaTeX import UseTikzLibrary
 
