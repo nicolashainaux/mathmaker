@@ -111,7 +111,7 @@ exam: !!omap
                  fraction_of a_rectangle -> intpairs_4to7;;intpairs_4to7 (1)
                  [1][addi direct, context=mini_problem -> intpairs_5to20 (1)
                      multi direct, context=mini_problem -> intpairs_4to9 (1)
-                     subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100(1)
+                     subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100 (1)
                      divi direct, context=mini_problem -> intpairs_4to9 (1)
                      divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)]
                  multi direct -> table_11_tens_easy (1)
@@ -158,7 +158,7 @@ exam_with_distinction: !!omap
                  fraction_of a_linesegment -> simple_fractions (1)
                  [1][addi direct, context=mini_problem -> intpairs_5to20 (1)
                      multi direct, context=mini_problem -> intpairs_4to9 (1)
-                     subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100(1)
+                     subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100 (1)
                      divi direct, context=mini_problem -> intpairs_4to9 (1)
                      divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)]
                  [1][addi hole -> singleint_21to100;;singleint_21to100 (1)

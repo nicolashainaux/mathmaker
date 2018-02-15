@@ -166,7 +166,7 @@ exam: !!omap
                      multi hole -> table_15 (1)
                      multi hole -> table_25 (1)]
                  [1][multi direct, context=mini_problem -> intpairs_4to9 (1)
-                     subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100(1)
+                     subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100 (1)
                      divi direct, context=mini_problem -> intpairs_4to9 (1)
                      divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
                      vocabulary simple_parts_of_a_number -> auto_multiples (1)
