@@ -89,9 +89,11 @@ class structure(object):
         self.slideshow = (self.x_layout_variant == 'slideshow')
         self.tikz_picture_scale = 1
         self.tikz_linesegments_thickness = 'thin'
+        self.tikz_fontsize = r'\scriptsize'
         if self.slideshow:
             self.tikz_picture_scale = 3
             self.tikz_linesegments_thickness = 'very thick'
+            self.tikz_fontsize = None
         self.variant = kwargs.get('variant', 'default')
         self.subvariant = kwargs.get('subvariant', 'default')
         self.nb_variant = kwargs.get('nb_variant', 'default')
@@ -276,6 +278,8 @@ class structure(object):
                 * abs(len(measures) - 2)
         arm_length = Number(offset + layers[max(layers)] * layer_thickness
                             + Number('0.8', unit='cm'), unit=None)
+        if not self.slideshow:
+            arm_length *= Number('0.7')
         required_nb_of_points_names = len(measures) + 2
         if required_nb_of_points_names in settings.available_wNl:
             names = next(shared.unique_letters_words_source[
@@ -304,6 +308,10 @@ class structure(object):
             deco.radius = offset \
                 + sublayer * Number('0.1', unit='cm') \
                 + layer * layer_thickness
+            if not self.slideshow:
+                deco.radius *= Number('0.7')
+                deco.gap *= Number('0.7')
+                deco.eccentricity = 'automatic'  # re-adjust the eccentricity
             sublayer += 1
             α = Angle(endpoints[i], Ω, endpoints[j],
                       label_vertex=True, draw_vertex=True,
@@ -312,6 +320,7 @@ class structure(object):
                       naming_mode='from_armspoints')
             angles.append(α)
         self.angles_bunch = AnglesSet(*angles)
+        self.angles_bunch.fontsize = self.tikz_fontsize
 
     def _setup_rectangle(self, **kwargs):
         if hasattr(self, 'nb1') and hasattr(self, 'nb2'):

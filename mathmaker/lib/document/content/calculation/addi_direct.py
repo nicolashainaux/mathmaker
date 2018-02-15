@@ -87,7 +87,8 @@ class sub_object(component.structure):
                                                 color='BrickRed')})
             super().setup('angles_bunch', measures=self.nb_list,
                           decorations=decorations, orientation=orientation)
-            self.angles_bunch.baseline = '29pt'
+            if not self.slideshow:
+                self.angles_bunch.baseline = '20pt'
 
     def q(self, **options):
         if self.context == 'mini_problem':
