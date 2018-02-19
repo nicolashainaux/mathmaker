@@ -121,7 +121,7 @@ def __main__():
     sys.stderr.write('Connect to databases...\n')
     db = sqlite3.connect(settings.path.db_dist)
     shapes_db = sqlite3.connect(settings.path.shapes_db_dist)
-    inttuples_db = sqlite3.connect(settings.path.inttuples_db)
+    inttuples_db = sqlite3.connect(settings.path.inttuples_db_dist)
 
     inttuples_db_creation_queries = []
 
@@ -476,9 +476,7 @@ def __main__():
         nb4 INTEGER, nb5 INTEGER, code TEXT, pentagon INTEGER,
         equilateral INTEGER, equal_sides INTEGER, drawDate INTEGER)'''
     db_creation_queries.append(creation_query)
-    inttuples_db_creation_queries.append(creation_query)
     db.execute(creation_query)
-    inttuples_db.execute(creation_query)
     sys.stderr.write('Create integers quintuples...\n')
     # Tables of 1, 2, 3... INTQUINTUPLES_MAX
     db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1,  # nb1, nb2, nb3, nb4, nb5
@@ -510,6 +508,12 @@ def __main__():
     sys.stderr.write('\rInsert integers quintuples... 100 %\n')
 
     sys.stderr.write('Create integers quintuples (2)...\n')
+    creation_query = '''CREATE TABLE quintuples
+       (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
+        nb4 INTEGER, nb5 INTEGER, code TEXT, pentagon INTEGER,
+        equilateral INTEGER, equal_sides INTEGER, drawDate INTEGER)'''
+    inttuples_db_creation_queries.append(creation_query)
+    inttuples_db.execute(creation_query)
     # Tables of 1, 2, 3... INTQUINTUPLES_MAX2
     db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1,  # nb1, nb2, nb3, nb4, nb5
                 _code(i + 1, j + 1, k + 1, n + 1, p + 1),  # code
@@ -532,7 +536,7 @@ def __main__():
         sys.stderr.write('\rInsert integers quintuples (2)... {} %'.format(i))
         inttuples_db\
             .executemany("INSERT "
-                         "INTO int_quintuples(nb1, nb2, nb3, nb4, nb5, code, "
+                         "INTO quintuples(nb1, nb2, nb3, nb4, nb5, code, "
                          "pentagon, equilateral, equal_sides, "
                          "drawDate) "
                          "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
