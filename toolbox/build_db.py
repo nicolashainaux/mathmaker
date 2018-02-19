@@ -69,6 +69,7 @@ INTPAIRS_MAX = 1000
 INTTRIPLES_MAX = 200
 INTQUADRUPLES_MAX = 50
 INTQUINTUPLES_MAX = 36
+INTQUINTUPLES_MAX2 = 10
 INTSEXTUPLES_MAX = 25
 SINGLEINTS_MAX = 1000
 
@@ -110,12 +111,19 @@ def __main__():
     if os.path.isfile(settings.path.shapes_db_dist):
         sys.stderr.write('Remove previous shapes database...\n')
         os.remove(settings.path.shapes_db_dist)
+    if os.path.isfile(settings.path.inttuples_db_dist):
+        sys.stderr.write('Remove previous inttuples database...\n')
+        os.remove(settings.path.inttuples_db_dist)
     sys.stderr.write('Create new databases...\n')
     open(settings.path.db_dist, 'a').close()
     open(settings.path.shapes_db_dist, 'a').close()
+    open(settings.path.inttuples_db_dist, 'a').close()
     sys.stderr.write('Connect to databases...\n')
     db = sqlite3.connect(settings.path.db_dist)
     shapes_db = sqlite3.connect(settings.path.shapes_db_dist)
+    inttuples_db = sqlite3.connect(settings.path.inttuples_db)
+
+    inttuples_db_creation_queries = []
 
     sys.stderr.write('Create tables...\n')
     # Creation of the tables
@@ -468,7 +476,9 @@ def __main__():
         nb4 INTEGER, nb5 INTEGER, code TEXT, pentagon INTEGER,
         equilateral INTEGER, equal_sides INTEGER, drawDate INTEGER)'''
     db_creation_queries.append(creation_query)
+    inttuples_db_creation_queries.append(creation_query)
     db.execute(creation_query)
+    inttuples_db.execute(creation_query)
     sys.stderr.write('Create integers quintuples...\n')
     # Tables of 1, 2, 3... INTQUINTUPLES_MAX
     db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1,  # nb1, nb2, nb3, nb4, nb5
@@ -498,6 +508,37 @@ def __main__():
                        db_rows[i * len(db_rows) // 100:
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers quintuples... 100 %\n')
+
+    sys.stderr.write('Create integers quintuples (2)...\n')
+    # Tables of 1, 2, 3... INTQUINTUPLES_MAX2
+    db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1,  # nb1, nb2, nb3, nb4, nb5
+                _code(i + 1, j + 1, k + 1, n + 1, p + 1),  # code
+                p + 1 < i + j + k + n + 4,  # pentagon?
+                i == j == k == n == p,  # equilateral?
+                (i == j or j == k or k == i or i == n or j == n or k == n
+                 or i == p or j == p or k == p or n == p),
+                # at least 2 equal sides?
+                0  # drawDate
+                )
+               for i in range(INTQUINTUPLES_MAX2)
+               for j in range(INTQUINTUPLES_MAX2)
+               for k in range(INTQUINTUPLES_MAX2)
+               for n in range(INTQUINTUPLES_MAX2)
+               for p in range(INTQUINTUPLES_MAX2)
+               if p >= n >= k >= j >= i]
+
+    sys.stderr.write('Insert integers quintuples (2)...')
+    for i in range(100):
+        sys.stderr.write('\rInsert integers quintuples (2)... {} %'.format(i))
+        inttuples_db\
+            .executemany("INSERT "
+                         "INTO int_quintuples(nb1, nb2, nb3, nb4, nb5, code, "
+                         "pentagon, equilateral, equal_sides, "
+                         "drawDate) "
+                         "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                         db_rows[i * len(db_rows) // 100:
+                                 (i + 1) * len(db_rows) // 100])
+    sys.stderr.write('\rInsert integers quintuples (2)... 100 %\n')
     # sys.stderr.flush()
 
     creation_query = '''CREATE TABLE int_sextuples
@@ -1155,6 +1196,13 @@ def __main__():
         shapes_db_index.update({key: value})
     with open(settings.shapes_db_index_path, 'w') as f:
         json.dump(shapes_db_index, f, indent=4)
+        f.write('\n')
+    inttuples_db_index = {}
+    for qr in inttuples_db_creation_queries:
+        key, value = parse_sql_creation_query(qr)
+        inttuples_db_index.update({key: value})
+    with open(settings.inttuples_db_index_path, 'w') as f:
+        json.dump(inttuples_db_index, f, indent=4)
         f.write('\n')
     sys.stderr.write('Done!\n')
 

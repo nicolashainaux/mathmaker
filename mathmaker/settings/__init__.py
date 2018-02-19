@@ -71,11 +71,14 @@ class path_object(object):
     def __init__(self, dd=None, logger=None):
         self.db = dd + '{}-{}.db'.format(__software_name__, __version__)
         self.db_dist = dd + '{}.db-dist'.format(__software_name__)
+        self.inttuples_db = dd + 'inttuples-{}.db'.format(__version__)
+        self.inttuples_db_dist = dd + 'inttuples.db-dist'
         self.daemon_db = dd + '{}d.db'.format(__software_name__)
         self.shapes_db = dd + 'shapes-{}.db'.format(__version__)
         self.shapes_db_dist = dd + 'shapes.db-dist'
         logger.info('db={}'.format(self.db))
         logger.info('shapes db={}'.format(self.shapes_db))
+        logger.info('inttuples db={}'.format(self.inttuples_db))
         if (not os.path.isfile(self.db)
             or os.path.getmtime(self.db) < os.path.getmtime(self.db_dist)):
             logger.info('Copy main db from {}\n'.format(self.db_dist))
@@ -86,6 +89,12 @@ class path_object(object):
             logger.info('Copy shapes db from {}\n'
                         .format(self.shapes_db_dist))
             copyfile(self.shapes_db_dist, self.shapes_db)
+        if (not os.path.isfile(self.inttuples_db)
+            or os.path.getmtime(self.inttuples_db)
+            < os.path.getmtime(self.inttuples_db_dist)):
+            logger.info('Copy inttuples db from {}\n'
+                        .format(self.inttuples_db_dist))
+            copyfile(self.inttuples_db_dist, self.inttuples_db)
 
 
 def init():
@@ -97,6 +106,7 @@ def init():
     global index_path
     global db_index_path
     global shapes_db_index_path
+    global inttuples_db_index_path
     global default, path
     global mainlogger
     global dbg_logger
@@ -137,6 +147,7 @@ def init():
     index_path = frameworksdir + 'index.json'
     db_index_path = datadir + 'db_index.json'
     shapes_db_index_path = datadir + 'shapes_db_index.json'
+    inttuples_db_index_path = datadir + 'inttuples_db_index.json'
     settingsdir = rootdir + settings_dirname
     projectdir = rootdir[:-len('mathmaker/')]
 
