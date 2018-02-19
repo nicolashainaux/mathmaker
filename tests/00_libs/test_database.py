@@ -25,6 +25,47 @@ from decimal import Decimal
 
 from mathmaker.lib.tools.database import generate_random_decimal_nb
 from mathmaker.lib.tools.database import parse_sql_creation_query
+from mathmaker.lib.tools.database import RangeOfIntTuple
+
+
+def test_rangeofinttuple_errors():
+    """Check instanciation errors of RangeOfIntTuple."""
+    with pytest.raises(TypeError) as excinfo:
+        RangeOfIntTuple('4-9,10', 'a')
+    assert str(excinfo.value) == 'elt_nb must be an int, found '\
+        '<class \'str\'> instead.'
+    with pytest.raises(TypeError) as excinfo:
+        RangeOfIntTuple(10, 3)
+    assert str(excinfo.value) == 'cartesianpower_spans must be a str, found '\
+        '<class \'int\'> instead.'
+    with pytest.raises(RuntimeError) as excinfo:
+        RangeOfIntTuple('1×2×3', 4)
+    assert str(excinfo.value) == 'Found 3 elements in this spans product: '\
+        '1×2×3, but 4 were expected.'
+    with pytest.raises(ValueError) as excinfo:
+        RangeOfIntTuple('1×2×a')
+    assert str(excinfo.value) == 'Syntax error found in this integers\' '\
+        'span: a, what should complain with intspan syntax. See '\
+        'http://intspan.readthedocs.io/en/latest/index.html'
+
+
+def test_rangeofinttuple():
+    """Check RangeOfIntTuple."""
+    assert RangeOfIntTuple('').turn_to_query_conditions() == {}
+    assert RangeOfIntTuple('4,9').turn_to_query_conditions() \
+        == {'raw': "(nb1 IN ('4', '9'))"}
+    assert RangeOfIntTuple('4-9').turn_to_query_conditions() \
+        == {'raw': '(nb1 BETWEEN 4 AND 9)'}
+    assert RangeOfIntTuple('2-9,15,25').turn_to_query_conditions() \
+        == {'raw': "(nb1 IN ('15', '25') OR (nb1 BETWEEN 2 AND 9))"}
+    assert RangeOfIntTuple('2-9', elt_nb=2).turn_to_query_conditions() \
+        == {'raw': '((nb1 BETWEEN 2 AND 9) AND (nb2 BETWEEN 2 AND 9))'}
+    assert RangeOfIntTuple('2-9,15,25×10-100').turn_to_query_conditions() \
+        == {'raw': "((nb1 IN ('15', '25') OR (nb1 BETWEEN 2 AND 9)) "
+                   'AND (nb2 BETWEEN 10 AND 100))'}
+    assert RangeOfIntTuple('2-9,15,25', elt_nb=2).turn_to_query_conditions() \
+        == {'raw': "((nb1 IN ('15', '25') OR (nb1 BETWEEN 2 AND 9)) "
+                   "AND (nb2 IN ('15', '25') OR (nb2 BETWEEN 2 AND 9)))"}
 
 
 def test_parse_sql_creation_query():

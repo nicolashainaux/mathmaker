@@ -28,6 +28,7 @@ import warnings
 from decimal import Decimal
 
 from intspan import intspan
+from intspan.core import ParseError
 from mathmakerlib.calculus import is_integer, is_number, Number, Fraction
 
 from mathmaker import settings
@@ -48,6 +49,80 @@ def parse_sql_creation_query(qr):
              for t in FETCH_TABLE_COLS.findall(qr)
              for elt in t
              if elt != ''])
+
+
+class RangeOfIntTuple(object):
+    """Handle intspan-like ranges, possibly concatenated by ×"""
+
+    def __init__(self, cartesianpower_spans, elt_nb=None):
+        """
+        :param cartesianpower_spans: intspan ranges, possibly concatenated by
+        a ×
+        :type cartesianpower_spans: str
+        :param elt_nb: number of elements of the tuple. Must be None or set to
+        an int value. If elt_nb is None, then its value will be deduced from
+        the provided cartesianpower_spans.
+        :type elt_nb: int
+        """
+        if not (elt_nb is None or isinstance(elt_nb, int)):
+            raise TypeError('elt_nb must be an int, found {} instead.'
+                            .format(str(type(elt_nb))))
+        if not isinstance(cartesianpower_spans, str):
+            raise TypeError('cartesianpower_spans must be a str, found {} '
+                            'instead.'.format(str(type(cartesianpower_spans))))
+        spans = cartesianpower_spans.split('×')
+        if elt_nb is None:
+            elt_nb = len(spans)
+        if elt_nb != 1 and len(spans) == 1:
+            spans *= elt_nb
+        if len(spans) != elt_nb:
+            raise RuntimeError('Found {} elements in this spans product: {}, '
+                               'but {} were expected.'
+                               .format(len(spans), cartesianpower_spans,
+                                       elt_nb))
+        for span in spans:
+            try:
+                intspan(span)
+            except ParseError:
+                raise ValueError('Syntax error found in this integers\' span: '
+                                 '{}, what should complain with intspan '
+                                 'syntax. See http://intspan.readthedocs.io/'
+                                 'en/latest/index.html'.format(span))
+        self.spans = spans
+
+    def turn_to_query_conditions(self):
+        query = ''
+        for i, span in enumerate(self.spans):
+            ranges = []
+            single_values = []
+            s = span.split(',')
+            for r in s:
+                if '-' in r:
+                    mini, maxi = r.split('-')
+                    ranges.append('nb{} BETWEEN {} AND {}'
+                                  .format(i + 1, mini, maxi))
+                elif r != '':  # only handle really provided values, not ''
+                    single_values.append(r)
+            ranges = ' OR '.join(ranges)
+            single_values = ', '.join(["'{}'".format(v)
+                                       for v in single_values])
+            q = ''
+            if single_values:
+                q += 'nb{} IN ({})'.format(i + 1, single_values)
+            if ranges:
+                hook = ' OR ' if q else ''
+                parenthesis1 = '(' if q else ''
+                parenthesis2 = ')' if q else ''
+                q += hook + parenthesis1 + ranges + parenthesis2
+            hook = ' AND ' if query else ''
+            parenthesis1 = '(' if len(self.spans) >= 2 else ''
+            parenthesis2 = ')' if len(self.spans) >= 2 else ''
+            query += hook + parenthesis1 + q + parenthesis2
+        if query:
+            query = '({})'.format(query)
+            return {'raw': query}
+        else:
+            return {}
 
 
 class source(object):
