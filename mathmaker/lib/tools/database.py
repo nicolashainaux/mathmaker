@@ -1381,7 +1381,7 @@ class mc_source(object):
         if tag_classification == 'int_pairs':
             kwargs.update(preprocess_int_pairs_tag(source_id, qkw=qkw))
             return shared.int_pairs_source.next(**kwargs)
-        if tag_classification == 'int_triples':
+        elif tag_classification == 'int_triples':
             correct_kw = preprocess_qkw(db_table('int_triples'), qkw=qkw)
             if 'forprop' in source_id:
                 correct_kw.update(preprocess_int_triplesforprop_tag(source_id,
@@ -1395,7 +1395,7 @@ class mc_source(object):
                 return postprocess_int_triplesforprop_query(
                     shared.int_triples_source.next(**correct_kw))
             return shared.int_triples_source.next(**correct_kw)
-        if tag_classification == 'int_quadruples':
+        elif tag_classification == 'int_quadruples':
             correct_kw = preprocess_qkw(db_table('int_quadruples'), qkw=qkw)
             # Ugly hack: as code and codename start with the same letters,
             # codename cannot be detected as requiring to be removed from the
@@ -1403,7 +1403,7 @@ class mc_source(object):
             if 'codename' in correct_kw:
                 del correct_kw['codename']
             return shared.int_quadruples_source.next(**correct_kw)
-        if tag_classification == 'int_quintuples':
+        elif tag_classification == 'int_quintuples':
             correct_kw = preprocess_qkw(db_table('int_quintuples'), qkw=qkw)
             # Ugly hack: as code and codename start with the same letters,
             # codename cannot be detected as requiring to be removed from the
@@ -1412,7 +1412,7 @@ class mc_source(object):
                 del correct_kw['codename']
             correct_kw.update(preprocess_int_quintuples_tag(source_id))
             return shared.int_quintuples_source.next(**correct_kw)
-        if tag_classification == 'int_sextuples':
+        elif tag_classification == 'int_sextuples':
             correct_kw = preprocess_qkw(db_table('int_sextuples'), qkw=qkw)
             # Ugly hack: as code and codename start with the same letters,
             # codename cannot be detected as requiring to be removed from the
@@ -1420,7 +1420,7 @@ class mc_source(object):
             if 'codename' in correct_kw:
                 del correct_kw['codename']
             return shared.int_sextuples_source.next(**correct_kw)
-        if tag_classification == 'simple_fractions':
+        elif tag_classification == 'simple_fractions':
             return shared.simple_fractions_source.next(**kwargs)
         elif tag_classification.startswith('single'):
             kwargs.update(preprocess_single_nb_tag(source_id))
