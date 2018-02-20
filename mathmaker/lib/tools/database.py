@@ -536,7 +536,7 @@ def classify_tag(tag):
     elif tag.startswith('int_quintuples'):
         return 'int_quintuples'
     elif any([tag.startswith(t) for t in ['intquintuples']]):
-        return tag.split(':')[0]
+        return 'inttuples'
     elif tag in ['int_deci_clever_pairs',
                  'int_irreducible_frac', 'nothing',
                  'decimal_and_10_100_1000_for_multi',
