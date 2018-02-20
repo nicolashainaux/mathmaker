@@ -509,6 +509,10 @@ def db_table(tag):
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
                  'int_quintuples', 'int_sextuples']:
         return tag
+    elif any(tag.startswith(t) for t in ['intquintuples']):
+        # This is in inttuples database.
+        # Table name is the same as tag after 'int' prefix is removed
+        return tag[len('int'):]
     return ''
 
 
@@ -531,6 +535,8 @@ def classify_tag(tag):
         return 'percentage'
     elif tag.startswith('int_quintuples'):
         return 'int_quintuples'
+    elif any([tag.startswith(t) for t in ['intquintuples']]):
+        return tag.split(':')[0]
     elif tag in ['int_deci_clever_pairs',
                  'int_irreducible_frac', 'nothing',
                  'decimal_and_10_100_1000_for_multi',
@@ -553,6 +559,8 @@ def preprocess_qkw(table_name, qkw=None):
     with open(settings.db_index_path) as f:
         db_index = json.load(f)
     with open(settings.shapes_db_index_path) as f:
+        db_index.update(json.load(f))
+    with open(settings.inttuples_db_index_path) as f:
         db_index.update(json.load(f))
     if table_name not in db_index:
         return {}
