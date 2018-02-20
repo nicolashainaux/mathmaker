@@ -91,6 +91,7 @@ class RangeOfIntTuple(object):
         self.spans = spans
 
     def turn_to_query_conditions(self):
+        """Turn self to a SQLite query condition."""
         query = ''
         for i, span in enumerate(self.spans):
             ranges = []
