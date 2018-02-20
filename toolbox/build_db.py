@@ -510,14 +510,14 @@ def __main__():
     sys.stderr.write('Create integers quintuples (2)...\n')
     creation_query = '''CREATE TABLE quintuples
        (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
-        nb4 INTEGER, nb5 INTEGER, code TEXT, pentagon INTEGER,
+        nb4 INTEGER, nb5 INTEGER, code TEXT, constructible INTEGER,
         equilateral INTEGER, equal_sides INTEGER, drawDate INTEGER)'''
     inttuples_db_creation_queries.append(creation_query)
     inttuples_db.execute(creation_query)
     # Tables of 1, 2, 3... INTQUINTUPLES_MAX2
     db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1,  # nb1, nb2, nb3, nb4, nb5
                 _code(i + 1, j + 1, k + 1, n + 1, p + 1),  # code
-                p + 1 < i + j + k + n + 4,  # pentagon?
+                p + 1 < i + j + k + n + 4,  # constructible?
                 i == j == k == n == p,  # equilateral?
                 (i == j or j == k or k == i or i == n or j == n or k == n
                  or i == p or j == p or k == p or n == p),
@@ -537,7 +537,7 @@ def __main__():
         inttuples_db\
             .executemany("INSERT "
                          "INTO quintuples(nb1, nb2, nb3, nb4, nb5, code, "
-                         "pentagon, equilateral, equal_sides, "
+                         "constructible, equilateral, equal_sides, "
                          "drawDate) "
                          "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                          db_rows[i * len(db_rows) // 100:
