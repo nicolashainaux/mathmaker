@@ -25,7 +25,9 @@ import copy
 import json
 import random
 import warnings
+import operator
 from decimal import Decimal
+from functools import reduce
 
 from intspan import intspan
 from intspan.core import ParseError
@@ -124,6 +126,125 @@ class RangeOfIntTuple(object):
             return {'raw': query}
         else:
             return {}
+
+    def __filter_possibilities(self, possibilities, i, span, len_spans, result,
+                               **kwargs):
+        constructible = kwargs.get('constructible', None)
+        # note: some conditions for a query do not apply to tuples
+        # in particular: nb*_to_check, lock_equal_products
+        # first, tests on str versions
+        possibilities = [str(p) for p in possibilities]
+        applied_conditions = []
+        excluded = kwargs.get('not_in', None)
+        if excluded is not None:
+            possibilities = [p for p in possibilities if p not in excluded]
+            applied_conditions.append('not_in={}'.format(excluded))
+        included = kwargs.get('nb{}_in'.format(i + 1), None)
+        if included is not None:
+            possibilities = [p for p in possibilities if p in included]
+            applied_conditions.append('nb{}_in={}'.format(i + 1, included))
+        # back to tests on ints
+        possibilities = [int(p) for p in possibilities]
+        if i == len_spans - 1 and constructible is not None:
+            applied_conditions.append('constructible={}; '
+                                      'previous numbers: {}'
+                                      .format(constructible, result))
+            previous_max = max(result)
+            all_previous_but_max = [_ for _ in result if _ != previous_max]
+            if constructible:
+                possibilities = [p for p in possibilities
+                                 if previous_max + 1
+                                 - sum(all_previous_but_max)
+                                 <= p <= sum(result) - 1]
+            else:
+                possibilities = [p for p in possibilities
+                                 if p < previous_max + 1
+                                 - sum(all_previous_but_max)
+                                 or p > sum(result) - 1]
+        mini = kwargs.get('nb{}_min'.format(i + 1), None)
+        if mini is not None:
+            possibilities = [p for p in possibilities if p >= mini]
+            applied_conditions.append('nb{}_min={}'.format(i + 1, mini))
+        maxi = kwargs.get('nb{}_max'.format(i + 1), None)
+        if maxi is not None:
+            possibilities = [p for p in possibilities if p <= maxi]
+            applied_conditions.append('nb{}_max={}'.format(i + 1, maxi))
+        notmod = kwargs.get('nb{}_notmod'.format(i + 1), None)
+        if notmod is not None:
+            possibilities = [p for p in possibilities if p % notmod]
+            applied_conditions.append('nb{}_notmod={}'
+                                      .format(i + 1, notmod))
+        mod = kwargs.get('nb{}_mod'.format(i + 1), None)
+        if mod is not None:
+            possibilities = [p for p in possibilities if not (p % mod)]
+            applied_conditions.append('nb{}_mod={}'.format(i + 1, mod))
+        lt = kwargs.get('nb{}_lt'.format(i + 1), None)
+        if lt is not None:
+            possibilities = [p for p in possibilities if p < lt]
+            applied_conditions.append('nb{}_lt={}'.format(i + 1, lt))
+        ge = kwargs.get('nb{}_ge'.format(i + 1), None)
+        if ge is not None:
+            possibilities = [p for p in possibilities if p >= ge]
+            applied_conditions.append('nb{}_ge={}'.format(i + 1, ge))
+        neq = kwargs.get('nb{}_neq'.format(i + 1), None)
+        if neq is not None:
+            possibilities = [p for p in possibilities if p != neq]
+            applied_conditions.append('nb{}_neq={}'.format(i + 1, neq))
+        return possibilities, applied_conditions, result
+
+    def _random_draw_attempt(self, spans, failed_attempts, return_all=False,
+                             **kwargs):
+        result = []
+        all_possibilities = []
+        import sys
+        sys.stderr.write('failed_attempts={}\n'.format(failed_attempts))
+        for i, span in enumerate(spans):
+            possibilities = list(intspan(span))
+            possibilities, applied_conditions, result = \
+                self.__filter_possibilities(possibilities, i, span, len(spans),
+                                            result, **kwargs)
+            if not possibilities:
+                if len(result) >= 1:
+                    if tuple(result[:-1]) in failed_attempts:
+                        failed_attempts[tuple(result[:-1])]\
+                            .add(intspan(result[-1]))
+                    else:
+                        failed_attempts.update({tuple(result[:-1]):
+                                                intspan(result[-1])})
+                else:
+                    raise RuntimeError('The conditions to draw a random int '
+                                       'tuple of {} elements lead to '
+                                       'something impossible.\nInitial range '
+                                       'for nb{}: {}. '
+                                       'Conditions: {}.\n'
+                                       .format(len(spans), i + 1, str(span),
+                                               '; '.join(applied_conditions)))
+            all_possibilities.append(possibilities)
+            result.append(random.choice(possibilities))
+        if return_all:
+            return (True, all_possibilities)
+        return (True, tuple(sorted(result)))
+
+    def random_draw(self, return_all=False, **kwargs):
+        spans = sorted([s for s in self.spans], key=lambda x: len(list(x)))
+        spans_lengths = [len(list(s)) for s in spans]
+        max_tries = min(1000, reduce(operator.mul, spans_lengths, 1))
+        failed_attempts = {}
+        # each key: value of failed_attempts will be in the form:
+        # tuple_that_leads_to_impossible_result: intspan(values)
+        for _ in range(max_tries):
+            made_it, result = self._random_draw_attempt(spans, failed_attempts,
+                                                        return_all=return_all,
+                                                        **kwargs)
+            if made_it:
+                return result
+            else:
+                failed_attempts = result
+        raise RuntimeError('The conditions to draw a random int tuple lead to '
+                           'no result after {} attempts.\n'
+                           'Initial spans were: {}.\n'
+                           'Conditions: {}.\n'
+                           .format(max_tries, spans, kwargs))
 
 
 class source(object):

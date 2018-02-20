@@ -49,7 +49,7 @@ def test_rangeofinttuple_errors():
         'http://intspan.readthedocs.io/en/latest/index.html'
 
 
-def test_rangeofinttuple():
+def test_rangeofinttuple_turn_to_query_conditions():
     """Check RangeOfIntTuple."""
     assert RangeOfIntTuple('').turn_to_query_conditions() == {}
     assert RangeOfIntTuple('4,9').turn_to_query_conditions() \
@@ -66,6 +66,61 @@ def test_rangeofinttuple():
     assert RangeOfIntTuple('2-9,15,25', elt_nb=2).turn_to_query_conditions() \
         == {'raw': "((nb1 IN ('15', '25') OR (nb1 BETWEEN 2 AND 9)) "
                    "AND (nb2 IN ('15', '25') OR (nb2 BETWEEN 2 AND 9)))"}
+
+
+def test_rangeofinttuple_random_draw():
+    """Check RangeOfIntTuple."""
+    r = RangeOfIntTuple('2-9', elt_nb=2)
+    d = r.random_draw()
+    assert len(d) == 2
+    assert 2 <= d[0] <= d[1] <= 9
+    r = RangeOfIntTuple('2-9')
+    d = r.random_draw(return_all=True)
+    assert d == [[2, 3, 4, 5, 6, 7, 8, 9]]
+    d = r.random_draw(return_all=True, nb1_notmod=2)
+    assert d == [[3, 5, 7, 9]]
+    d = r.random_draw(return_all=True, nb1_mod=2)
+    assert d == [[2, 4, 6, 8]]
+    d = r.random_draw(return_all=True, not_in=['4', '5', '7'])
+    assert d == [[2, 3, 6, 8, 9]]
+    r = RangeOfIntTuple('6-9×6-9')
+    d = r.random_draw(return_all=True)
+    assert d == [[6, 7, 8, 9], [6, 7, 8, 9]]
+    d = r.random_draw(return_all=True, nb1_mod=3, nb2_notmod=3)
+    assert d == [[6, 9], [7, 8]]
+    d = r.random_draw(return_all=True, nb2_in=['4', '5', '7'])
+    assert d == [[6, 7, 8, 9], [7]]
+    d = r.random_draw(return_all=True, nb1_max=8, nb2_min=7)
+    assert d == [[6, 7, 8], [7, 8, 9]]
+    d = r.random_draw(return_all=True, nb1_lt=9, nb2_ge=7)
+    assert d == [[6, 7, 8], [7, 8, 9]]
+    d = r.random_draw(return_all=True, nb1_neq=6, nb2_neq=8)
+    assert d == [[7, 8, 9], [6, 7, 9]]
+    with pytest.raises(RuntimeError) as excinfo:
+        r.random_draw(nb1_max=5)
+    assert str(excinfo.value) == 'The conditions to draw a random int '\
+        'tuple of 2 elements lead to something impossible.\nInitial range '\
+        'for nb1: 6-9. Conditions: nb1_max=5.\n'
+    r = RangeOfIntTuple('3×4×6,7')
+    d = r.random_draw(constructible=True)
+    assert d == (3, 4, 6)
+    d = r.random_draw(constructible=False)
+    assert d == (3, 4, 7)
+    r = RangeOfIntTuple('3×4×7-10')
+    with pytest.raises(RuntimeError) as excinfo:
+        r.random_draw(constructible=True)
+    assert str(excinfo.value) == 'The conditions to draw a random int '\
+        'tuple of 3 elements lead to something impossible.\nInitial range '\
+        'for nb3: 7-10. Conditions: constructible=True; previous numbers: '\
+        '[3, 4].\n'
+    r = RangeOfIntTuple('4-5×8×12')
+    d = r.random_draw(constructible=True)
+    assert d == (5, 8, 12)
+    d = r.random_draw(constructible=False)
+    assert d == (4, 8, 12)
+    r = RangeOfIntTuple('4×8-9×12-16')
+    d = r.random_draw(constructible=True)
+    assert d[0:2] == (4, 9)
 
 
 def test_parse_sql_creation_query():
