@@ -1183,9 +1183,11 @@ def __main__():
     sys.stderr.write('Commit changes to databases...\n')
     db.commit()
     shapes_db.commit()
+    inttuples_db.commit()
     sys.stderr.write('Close databases...\n')
     db.close()
     shapes_db.close()
+    inttuples_db.close()
     sys.stderr.write('Create databases\' indices...\n')
     db_index = {}
     for qr in db_creation_queries:
