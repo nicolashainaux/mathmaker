@@ -135,13 +135,17 @@ def test_intspansproduct_random_draw():
     assert d == (4, 4, 4)
     r = IntspansProduct('3-5×3-5×3-5')
     with pytest.raises(RuntimeError) as excinfo:
-        d = r.random_draw(constructible=False)
-        import sys
-        sys.stderr.write('d={}\n'.format(d))
-    assert str(excinfo.value) == 'Impossible to draw an int tuple from '\
-        "['3-5', '3-5', '3-5'] under these conditions: constructible=False.\n"
-    # 'Impossible to draw a not constructible int '\
-    #     "tuple from ['3-5', '3-5', '3-5'].\n"
+        r.random_draw(constructible=False)
+    assert str(excinfo.value) == 'Impossible to draw a not constructible int '\
+        "tuple from ['3-5', '3-5', '3-5'].\n"
+    r = IntspansProduct('5-6×3-5×3-5')
+    d = r.random_draw(constructible=False)
+    assert d == (3, 3, 6)
+    r = IntspansProduct('2-7×5×4-5')
+    with pytest.raises(RuntimeError) as excinfo:
+        r.random_draw(constructible=False)
+    assert str(excinfo.value) == 'Impossible to draw a not constructible int '\
+        "tuple from ['5', '2-7', '4-5'].\n"
 
 
 def test_parse_sql_creation_query():

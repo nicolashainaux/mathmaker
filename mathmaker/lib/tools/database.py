@@ -240,15 +240,26 @@ class IntspansProduct(object):
         # sys.stderr.write('\nspans_lengths={}\n'.format(spans_lengths))
         constructible = kwargs.get('constructible', None)
         if constructible is not None:
+            spansL = [list(intspan(s)) for s in spans]
             if constructible:
-                spansL = [list(intspan(s)) for s in spans]
-                max_of_mins = max([min(s) for s in spansL])
                 max_of_maxs = max([max(s) for s in spansL])
+                max_of_mins = max([min(s) for s in spansL])
                 all_max_except_greatest = [max(s) for s in spansL]
                 all_max_except_greatest.remove(max_of_maxs)
                 if sum(all_max_except_greatest) <= max_of_mins:
                     raise RuntimeError('Impossible to draw a constructible '
                                        'int tuple from {}.\n'.format(spans))
+            else:
+                found = False
+                for s in spansL:
+                    others = [_ for _ in spansL]
+                    others.remove(s)
+                    if max(s) >= sum([min(_) for _ in others]):
+                        found = True
+                if not found:
+                    raise RuntimeError('Impossible to draw a not '
+                                       'constructible int tuple from {}.\n'
+                                       .format(spans))
         for _ in range(max_tries):
             made_it, result = self._random_draw_attempt(spans, failed_attempts,
                                                         return_all=return_all,
