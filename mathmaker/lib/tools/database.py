@@ -244,8 +244,8 @@ class IntspansProduct(object):
                 spansL = [list(intspan(s)) for s in spans]
                 max_of_mins = max([min(s) for s in spansL])
                 max_of_maxs = max([max(s) for s in spansL])
-                all_max_except_greatest = [max(s) for s in spansL
-                                           if max(s) != max_of_maxs]
+                all_max_except_greatest = [max(s) for s in spansL]
+                all_max_except_greatest.remove(max_of_maxs)
                 if sum(all_max_except_greatest) <= max_of_mins:
                     raise RuntimeError('Impossible to draw a constructible '
                                        'int tuple from {}.\n'.format(spans))
