@@ -28,7 +28,7 @@ from mathmaker.lib.tools.database import parse_sql_creation_query
 from mathmaker.lib.tools.database import IntspansProduct
 
 
-def test_rangeofinttuple_errors():
+def test_intspansproduct_errors():
     """Check instanciation errors of IntspansProduct."""
     with pytest.raises(TypeError) as excinfo:
         IntspansProduct('4-9,10', 'a')
@@ -49,7 +49,7 @@ def test_rangeofinttuple_errors():
         'http://intspan.readthedocs.io/en/latest/index.html'
 
 
-def test_rangeofinttuple_turn_to_query_conditions():
+def test_intspansproduct_turn_to_query_conditions():
     """Check IntspansProduct."""
     assert IntspansProduct('').turn_to_query_conditions() == {}
     assert IntspansProduct('4,9').turn_to_query_conditions() \
@@ -68,7 +68,7 @@ def test_rangeofinttuple_turn_to_query_conditions():
                    "AND (nb2 IN ('15', '25') OR (nb2 BETWEEN 2 AND 9)))"}
 
 
-def test_rangeofinttuple_random_draw():
+def test_intspansproduct_random_draw():
     """Check IntspansProduct."""
     r = IntspansProduct('2-9', elt_nb=2)
     d = r.random_draw()
@@ -98,9 +98,12 @@ def test_rangeofinttuple_random_draw():
     assert d == [[7, 8, 9], [6, 7, 9]]
     with pytest.raises(RuntimeError) as excinfo:
         r.random_draw(nb1_max=5)
-    assert str(excinfo.value) == 'The conditions to draw a random int '\
-        'tuple of 2 elements lead to something impossible.\nInitial range '\
-        'for nb1: 6-9. Conditions: nb1_max=5.\n'
+    assert str(excinfo.value) == 'Impossible to draw an int tuple from '\
+        "['6-9', '6-9'] under these conditions: nb1_max=5.\n"
+    with pytest.raises(RuntimeError) as excinfo:
+        r.random_draw(nb2_mod=5)
+    assert str(excinfo.value) == 'Impossible to draw an int tuple from '\
+        "['6-9', '6-9'] under these conditions: nb2_mod=5.\n"
     r = IntspansProduct('3×4×6,7')
     d = r.random_draw(constructible=True)
     assert d == (3, 4, 6)
@@ -109,10 +112,8 @@ def test_rangeofinttuple_random_draw():
     r = IntspansProduct('3×4×7-10')
     with pytest.raises(RuntimeError) as excinfo:
         r.random_draw(constructible=True)
-    assert str(excinfo.value) == 'The conditions to draw a random int '\
-        'tuple of 3 elements lead to something impossible.\nInitial range '\
-        'for nb3: 7-10. Conditions: constructible=True; previous numbers: '\
-        '[3, 4].\n'
+    assert str(excinfo.value) == 'Impossible to draw a constructible int '\
+        "tuple from ['3', '4', '7-10'].\n"
     r = IntspansProduct('4-5×8×12')
     d = r.random_draw(constructible=True)
     assert d == (5, 8, 12)
@@ -121,6 +122,14 @@ def test_rangeofinttuple_random_draw():
     r = IntspansProduct('4×8-9×12-16')
     d = r.random_draw(constructible=True)
     assert d[0:2] == (4, 9)
+    r = IntspansProduct('4×12-16×8-9')
+    d = r.random_draw(constructible=True)
+    assert d[0:2] == (4, 9)
+    r = IntspansProduct('4×1-1002×1006-2006')
+    with pytest.raises(RuntimeError) as excinfo:
+        r.random_draw(constructible=True)
+    assert str(excinfo.value) == 'Impossible to draw a constructible int '\
+        "tuple from ['4', '1-1002', '1006-2006'].\n"
 
 
 def test_parse_sql_creation_query():

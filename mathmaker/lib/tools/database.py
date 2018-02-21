@@ -28,7 +28,7 @@ import warnings
 import operator
 from decimal import Decimal
 from functools import reduce
-
+from collections import defaultdict
 from intspan import intspan
 from intspan.core import ParseError
 from mathmakerlib.calculus import is_integer, is_number, Number, Fraction
@@ -146,9 +146,8 @@ class IntspansProduct(object):
         # back to tests on ints
         possibilities = [int(p) for p in possibilities]
         if i == len_spans - 1 and constructible is not None:
-            applied_conditions.append('constructible={}; '
-                                      'previous numbers: {}'
-                                      .format(constructible, result))
+            applied_conditions.append('constructible={}'
+                                      .format(constructible))
             previous_max = max(result)
             all_previous_but_max = [_ for _ in result if _ != previous_max]
             if constructible:
@@ -196,29 +195,31 @@ class IntspansProduct(object):
                              **kwargs):
         result = []
         all_possibilities = []
-        import sys
-        sys.stderr.write('failed_attempts={}\n'.format(failed_attempts))
+        # import sys
+        # sys.stderr.write('failed_attempts={}\n'.format(failed_attempts))
         for i, span in enumerate(spans):
-            possibilities = list(intspan(span))
+            possibilities = intspan(span)
+            if tuple(result) in failed_attempts:
+                possibilities -= failed_attempts[tuple(result)]
+            possibilities = list(possibilities)
+            if not possibilities:
+                if len(result) >= 1:
+                    failed_attempts[tuple(result[:-1])]\
+                        .add(intspan(result[-1]))
+                    return False, failed_attempts
+                else:
+                    return False, 'impossible'
             possibilities, applied_conditions, result = \
                 self.__filter_possibilities(possibilities, i, span, len(spans),
                                             result, **kwargs)
             if not possibilities:
                 if len(result) >= 1:
-                    if tuple(result[:-1]) in failed_attempts:
-                        failed_attempts[tuple(result[:-1])]\
-                            .add(intspan(result[-1]))
-                    else:
-                        failed_attempts.update({tuple(result[:-1]):
-                                                intspan(result[-1])})
+                    failed_attempts[tuple(result[:-1])]\
+                        .add(intspan(result[-1]))
+                    return False, (failed_attempts, applied_conditions)
                 else:
-                    raise RuntimeError('The conditions to draw a random int '
-                                       'tuple of {} elements lead to '
-                                       'something impossible.\nInitial range '
-                                       'for nb{}: {}. '
-                                       'Conditions: {}.\n'
-                                       .format(len(spans), i + 1, str(span),
-                                               '; '.join(applied_conditions)))
+                    failed_attempts[tuple()].add(intspan(span))
+                    return False, (failed_attempts, applied_conditions)
             all_possibilities.append(possibilities)
             result.append(random.choice(possibilities))
         if return_all:
@@ -226,12 +227,27 @@ class IntspansProduct(object):
         return (True, tuple(sorted(result)))
 
     def random_draw(self, return_all=False, **kwargs):
+        # import sys
         spans = sorted([s for s in self.spans], key=lambda x: len(list(x)))
-        spans_lengths = [len(list(s)) for s in spans]
+        spans_lengths = [len(list(intspan(s))) for s in spans]
         max_tries = min(1000, reduce(operator.mul, spans_lengths, 1))
-        failed_attempts = {}
+        failed_attempts = defaultdict(intspan)
+        applied_conditions = []
         # each key: value of failed_attempts will be in the form:
         # tuple_that_leads_to_impossible_result: intspan(values)
+        # sys.stderr.write('\nNEW spans={}\n'.format(spans))
+        # sys.stderr.write('\nspans_lengths={}\n'.format(spans_lengths))
+        constructible = kwargs.get('constructible', None)
+        if constructible is not None:
+            if constructible:
+                spansL = [list(intspan(s)) for s in spans]
+                max_of_mins = max([min(s) for s in spansL])
+                max_of_maxs = max([max(s) for s in spansL])
+                all_max_except_greatest = [max(s) for s in spansL
+                                           if max(s) != max_of_maxs]
+                if sum(all_max_except_greatest) <= max_of_mins:
+                    raise RuntimeError('Impossible to draw a constructible '
+                                       'int tuple from {}.\n'.format(spans))
         for _ in range(max_tries):
             made_it, result = self._random_draw_attempt(spans, failed_attempts,
                                                         return_all=return_all,
@@ -239,12 +255,26 @@ class IntspansProduct(object):
             if made_it:
                 return result
             else:
-                failed_attempts = result
+                # sys.stderr.write('applied_conditions\n={}\n'
+                #                  .format(applied_conditions))
+                if result == 'impossible':
+                    raise RuntimeError('Impossible to draw an int tuple from '
+                                       '{} under these conditions: {}.\n'
+                                       .format(spans,
+                                               '; '.join(applied_conditions)))
+                elif isinstance(result, tuple):
+                    failed_attempts, applied_conditions = result
+                else:
+                    failed_attempts = result
+        # Cannot yet figure out a case where this could happen,
+        # so it is not tested,
+        # but I leave this here in case this may be useful someday.
         raise RuntimeError('The conditions to draw a random int tuple lead to '
                            'no result after {} attempts.\n'
                            'Initial spans were: {}.\n'
                            'Conditions: {}.\n'
-                           .format(max_tries, spans, kwargs))
+                           .format(max_tries, spans,
+                                   '; '.join(applied_conditions)))
 
 
 class source(object):
