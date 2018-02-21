@@ -231,13 +231,16 @@ class IntspansProduct(object):
         # import sys
         spans = sorted([s for s in self.spans], key=lambda x: len(list(x)))
         spans_lengths = [len(list(intspan(s))) for s in spans]
-        max_tries = min(1000, reduce(operator.mul, spans_lengths, 1))
-        failed_attempts = defaultdict(intspan)
-        applied_conditions = []
-        # each key: value of failed_attempts will be in the form:
-        # tuple_that_leads_to_impossible_result: intspan(values)
         # sys.stderr.write('\nNEW spans={}\n'.format(spans))
         # sys.stderr.write('\nspans_lengths={}\n'.format(spans_lengths))
+        max_tries = min(1000, reduce(operator.mul, spans_lengths, 1))
+        # each key: value of failed_attempts will be in the form:
+        # tuple_that_leads_to_impossible_result: intspan(values)
+        failed_attempts = defaultdict(intspan)
+        applied_conditions = []
+        # early detection of impossible cases related to constructibility
+        # (i.e. whether a (not) constructible tuple is required while the
+        # int span does not allow such tuple)
         constructible = kwargs.get('constructible', None)
         if constructible is not None:
             spansL = [list(intspan(s)) for s in spans]
