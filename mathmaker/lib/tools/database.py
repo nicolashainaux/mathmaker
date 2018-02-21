@@ -241,16 +241,21 @@ class IntspansProduct(object):
         constructible = kwargs.get('constructible', None)
         if constructible is not None:
             spansL = [list(intspan(s)) for s in spans]
+            found = False
             if constructible:
-                max_of_maxs = max([max(s) for s in spansL])
-                max_of_mins = max([min(s) for s in spansL])
-                all_max_except_greatest = [max(s) for s in spansL]
-                all_max_except_greatest.remove(max_of_maxs)
-                if sum(all_max_except_greatest) <= max_of_mins:
+                for s in spansL:
+                    others = [_ for _ in spansL]
+                    others.remove(s)
+                    values_to_test = [max(_) for _ in others]
+                    values_to_test.append(min(s))
+                    m = max(values_to_test)
+                    values_to_test.remove(m)
+                    if m < sum(values_to_test):
+                        found = True
+                if not found:
                     raise RuntimeError('Impossible to draw a constructible '
                                        'int tuple from {}.\n'.format(spans))
             else:
-                found = False
                 for s in spansL:
                     others = [_ for _ in spansL]
                     others.remove(s)
