@@ -129,7 +129,6 @@ class IntspansProduct(object):
 
     def __filter_possibilities(self, possibilities, i, span, len_spans, result,
                                **kwargs):
-        constructible = kwargs.get('constructible', None)
         # note: some conditions for a query do not apply to tuples
         # in particular: nb*_to_check, lock_equal_products
         # first, tests on str versions
@@ -145,11 +144,13 @@ class IntspansProduct(object):
             applied_conditions.append('nb{}_in={}'.format(i + 1, included))
         # back to tests on ints
         possibilities = [int(p) for p in possibilities]
+        constructible = kwargs.get('constructible', None)
         if i == len_spans - 1 and constructible is not None:
             applied_conditions.append('constructible={}'
                                       .format(constructible))
             previous_max = max(result)
-            all_previous_but_max = [_ for _ in result if _ != previous_max]
+            all_previous_but_max = [_ for _ in result]
+            all_previous_but_max.remove(previous_max)
             if constructible:
                 possibilities = [p for p in possibilities
                                  if previous_max + 1
