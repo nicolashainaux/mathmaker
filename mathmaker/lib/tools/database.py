@@ -53,7 +53,7 @@ def parse_sql_creation_query(qr):
              if elt != ''])
 
 
-class RangeOfIntTuple(object):
+class IntspansProduct(object):
     """Handle intspan-like ranges, possibly concatenated by ×"""
 
     def __init__(self, cartesianpower_spans, elt_nb=None):

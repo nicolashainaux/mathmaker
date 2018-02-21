@@ -25,56 +25,56 @@ from decimal import Decimal
 
 from mathmaker.lib.tools.database import generate_random_decimal_nb
 from mathmaker.lib.tools.database import parse_sql_creation_query
-from mathmaker.lib.tools.database import RangeOfIntTuple
+from mathmaker.lib.tools.database import IntspansProduct
 
 
 def test_rangeofinttuple_errors():
-    """Check instanciation errors of RangeOfIntTuple."""
+    """Check instanciation errors of IntspansProduct."""
     with pytest.raises(TypeError) as excinfo:
-        RangeOfIntTuple('4-9,10', 'a')
+        IntspansProduct('4-9,10', 'a')
     assert str(excinfo.value) == 'elt_nb must be an int, found '\
         '<class \'str\'> instead.'
     with pytest.raises(TypeError) as excinfo:
-        RangeOfIntTuple(10, 3)
+        IntspansProduct(10, 3)
     assert str(excinfo.value) == 'cartesianpower_spans must be a str, found '\
         '<class \'int\'> instead.'
     with pytest.raises(RuntimeError) as excinfo:
-        RangeOfIntTuple('1×2×3', 4)
+        IntspansProduct('1×2×3', 4)
     assert str(excinfo.value) == 'Found 3 elements in this spans product: '\
         '1×2×3, but 4 were expected.'
     with pytest.raises(ValueError) as excinfo:
-        RangeOfIntTuple('1×2×a')
+        IntspansProduct('1×2×a')
     assert str(excinfo.value) == 'Syntax error found in this integers\' '\
         'span: a, what should complain with intspan syntax. See '\
         'http://intspan.readthedocs.io/en/latest/index.html'
 
 
 def test_rangeofinttuple_turn_to_query_conditions():
-    """Check RangeOfIntTuple."""
-    assert RangeOfIntTuple('').turn_to_query_conditions() == {}
-    assert RangeOfIntTuple('4,9').turn_to_query_conditions() \
+    """Check IntspansProduct."""
+    assert IntspansProduct('').turn_to_query_conditions() == {}
+    assert IntspansProduct('4,9').turn_to_query_conditions() \
         == {'raw': "(nb1 IN ('4', '9'))"}
-    assert RangeOfIntTuple('4-9').turn_to_query_conditions() \
+    assert IntspansProduct('4-9').turn_to_query_conditions() \
         == {'raw': '(nb1 BETWEEN 4 AND 9)'}
-    assert RangeOfIntTuple('2-9,15,25').turn_to_query_conditions() \
+    assert IntspansProduct('2-9,15,25').turn_to_query_conditions() \
         == {'raw': "(nb1 IN ('15', '25') OR (nb1 BETWEEN 2 AND 9))"}
-    assert RangeOfIntTuple('2-9', elt_nb=2).turn_to_query_conditions() \
+    assert IntspansProduct('2-9', elt_nb=2).turn_to_query_conditions() \
         == {'raw': '((nb1 BETWEEN 2 AND 9) AND (nb2 BETWEEN 2 AND 9))'}
-    assert RangeOfIntTuple('2-9,15,25×10-100').turn_to_query_conditions() \
+    assert IntspansProduct('2-9,15,25×10-100').turn_to_query_conditions() \
         == {'raw': "((nb1 IN ('15', '25') OR (nb1 BETWEEN 2 AND 9)) "
                    'AND (nb2 BETWEEN 10 AND 100))'}
-    assert RangeOfIntTuple('2-9,15,25', elt_nb=2).turn_to_query_conditions() \
+    assert IntspansProduct('2-9,15,25', elt_nb=2).turn_to_query_conditions() \
         == {'raw': "((nb1 IN ('15', '25') OR (nb1 BETWEEN 2 AND 9)) "
                    "AND (nb2 IN ('15', '25') OR (nb2 BETWEEN 2 AND 9)))"}
 
 
 def test_rangeofinttuple_random_draw():
-    """Check RangeOfIntTuple."""
-    r = RangeOfIntTuple('2-9', elt_nb=2)
+    """Check IntspansProduct."""
+    r = IntspansProduct('2-9', elt_nb=2)
     d = r.random_draw()
     assert len(d) == 2
     assert 2 <= d[0] <= d[1] <= 9
-    r = RangeOfIntTuple('2-9')
+    r = IntspansProduct('2-9')
     d = r.random_draw(return_all=True)
     assert d == [[2, 3, 4, 5, 6, 7, 8, 9]]
     d = r.random_draw(return_all=True, nb1_notmod=2)
@@ -83,7 +83,7 @@ def test_rangeofinttuple_random_draw():
     assert d == [[2, 4, 6, 8]]
     d = r.random_draw(return_all=True, not_in=['4', '5', '7'])
     assert d == [[2, 3, 6, 8, 9]]
-    r = RangeOfIntTuple('6-9×6-9')
+    r = IntspansProduct('6-9×6-9')
     d = r.random_draw(return_all=True)
     assert d == [[6, 7, 8, 9], [6, 7, 8, 9]]
     d = r.random_draw(return_all=True, nb1_mod=3, nb2_notmod=3)
@@ -101,24 +101,24 @@ def test_rangeofinttuple_random_draw():
     assert str(excinfo.value) == 'The conditions to draw a random int '\
         'tuple of 2 elements lead to something impossible.\nInitial range '\
         'for nb1: 6-9. Conditions: nb1_max=5.\n'
-    r = RangeOfIntTuple('3×4×6,7')
+    r = IntspansProduct('3×4×6,7')
     d = r.random_draw(constructible=True)
     assert d == (3, 4, 6)
     d = r.random_draw(constructible=False)
     assert d == (3, 4, 7)
-    r = RangeOfIntTuple('3×4×7-10')
+    r = IntspansProduct('3×4×7-10')
     with pytest.raises(RuntimeError) as excinfo:
         r.random_draw(constructible=True)
     assert str(excinfo.value) == 'The conditions to draw a random int '\
         'tuple of 3 elements lead to something impossible.\nInitial range '\
         'for nb3: 7-10. Conditions: constructible=True; previous numbers: '\
         '[3, 4].\n'
-    r = RangeOfIntTuple('4-5×8×12')
+    r = IntspansProduct('4-5×8×12')
     d = r.random_draw(constructible=True)
     assert d == (5, 8, 12)
     d = r.random_draw(constructible=False)
     assert d == (4, 8, 12)
-    r = RangeOfIntTuple('4×8-9×12-16')
+    r = IntspansProduct('4×8-9×12-16')
     d = r.random_draw(constructible=True)
     assert d[0:2] == (4, 9)
 
