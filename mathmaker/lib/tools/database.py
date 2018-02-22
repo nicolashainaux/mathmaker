@@ -28,7 +28,9 @@ import warnings
 import operator
 from decimal import Decimal
 from functools import reduce
+from itertools import combinations
 from collections import defaultdict
+
 from intspan import intspan
 from intspan.core import ParseError
 from mathmakerlib.calculus import is_integer, is_number, Number, Fraction
@@ -126,6 +128,69 @@ class IntspansProduct(object):
             return {'raw': query}
         else:
             return {}
+
+    def _group_by_packs(self, dist_code):
+        """
+        All possibilities to gather IntspansProduct factors in packs.
+
+        :param dist_code: tells what kind of packs should be made. For
+        instance, for a product of 4 intspans, it can be 2_1_1, 2_2, 3_1, 4,
+        or 1_1_1_1.
+        :type dist_code: str
+        """
+        intspans_list = [intspan(_) for _ in self.spans]
+        packs_lengths = [int(_) for _ in dist_code.split('_')]
+        if sum(packs_lengths) != len(self.spans):
+            raise ValueError("dist_code '{}' cannot be used for a list of "
+                             '{} intspans.'.format(dist_code, len(self.spans)))
+        first_length = packs_lengths.pop(0)
+        if first_length == 1:
+            packs_list = [[[intspan(intspans_list[0])]]]
+        else:
+            # packs_list = list(combinations(intspans_list, first_length))
+            packs_list = [[list(_)]
+                          for _ in list(combinations(intspans_list,
+                                                     first_length))]
+        for p in packs_lengths:
+            new_list = []
+            for line in packs_list:
+                remainings = [_ for _ in intspans_list]
+                for elt in line:
+                    for _ in elt:
+                        if _ in remainings:
+                            remainings.remove(_)
+                if p == 1:
+                    new_elts = [[intspan(remainings.pop(0))]]
+                else:
+                    new_elts = [list(_)
+                                for _ in list(combinations(remainings, p))]
+                for elt in new_elts:
+                    new_line = [_ for _ in line]
+                    new_line.append(elt)
+                    new_list.append(new_line)
+            packs_list = [_ for _ in new_list]
+        # Let's remove possible duplicates
+        packs = []
+        for line in packs_list:
+            new_line = []
+            for elt in line:
+                new_line.append(sorted(elt,
+                                       key=lambda x: (min(list(x)),
+                                                      max(list(x)))
+                                       ))
+            packs.append(sorted(new_line,
+                                key=lambda x: (-len(x),
+                                               min(x[0]),
+                                               max(x[0]))
+                                ))
+        final_packs_list = []
+        for line in packs:
+            if line not in final_packs_list:
+                final_packs_list.append(line)
+        return sorted(final_packs_list,
+                      key=lambda x: (min(x[0][0]),
+                                     max(x[0][0]))
+                      )
 
     def __filter_possibilities(self, possibilities, i, span, len_spans, result,
                                **kwargs):

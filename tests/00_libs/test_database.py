@@ -23,6 +23,8 @@
 import pytest
 from decimal import Decimal
 
+from intspan import intspan
+
 from mathmaker.lib.tools.database import generate_random_decimal_nb
 from mathmaker.lib.tools.database import parse_sql_creation_query
 from mathmaker.lib.tools.database import IntspansProduct
@@ -68,7 +70,65 @@ def test_intspansproduct_turn_to_query_conditions():
                    "AND (nb2 IN ('15', '25') OR (nb2 BETWEEN 2 AND 9)))"}
 
 
-def test_intspansproduct_random_draw():
+def test_intspansproduct_group_by_packs():
+    r = IntspansProduct('1,2×1,2×3,4×5,6')
+    assert r._group_by_packs('2_2') == \
+        [[[intspan('1-2'), intspan('1-2')], [intspan('3-4'), intspan('5-6')]],
+         [[intspan('1-2'), intspan('3-4')], [intspan('1-2'), intspan('5-6')]],
+         [[intspan('1-2'), intspan('5-6')], [intspan('1-2'), intspan('3-4')]]]
+    assert r._group_by_packs('3_1') == \
+        [[[intspan('1-2'), intspan('1-2'), intspan('3-4')], [intspan('5-6')]],
+         [[intspan('1-2'), intspan('1-2'), intspan('5-6')], [intspan('3-4')]],
+         [[intspan('1-2'), intspan('3-4'), intspan('5-6')], [intspan('1-2')]]]
+    r = IntspansProduct('1,5×1,2×1,3×3,4')
+    assert r._group_by_packs('2_2') == \
+        [[[intspan('1-2'), intspan('1,5')], [intspan('1,3'), intspan('3-4')]],
+         [[intspan('1-2'), intspan('3-4')], [intspan('1,3'), intspan('1,5')]],
+         [[intspan('1-2'), intspan('1,3')], [intspan('1,5'), intspan('3-4')]]]
+    assert r._group_by_packs('3_1') == \
+        [[[intspan('1-2'), intspan('1,3'), intspan('1,5')], [intspan('3-4')]],
+         [[intspan('1-2'), intspan('1,5'), intspan('3-4')], [intspan('1,3')]],
+         [[intspan('1-2'), intspan('1,3'), intspan('3-4')], [intspan('1,5')]],
+         [[intspan('1,3'), intspan('1,5'), intspan('3-4')], [intspan('1-2')]]]
+    assert r._group_by_packs('1_1_1_1') == \
+        [[[intspan('1-2')], [intspan('1,3')], [intspan('1,5')],
+          [intspan('3-4')]]]
+    assert r._group_by_packs('4') == \
+        [[[intspan('1-2'), intspan('1,3'), intspan('1,5'), intspan('3-4')]]]
+    r = IntspansProduct('1×2,3×2,4')
+    with pytest.raises(ValueError) as excinfo:
+        r._group_by_packs('3_2_1')
+    assert str(excinfo.value) == "dist_code '3_2_1' cannot be used for a "\
+        'list of 3 intspans.'
+    assert r._group_by_packs('2_1') == \
+        [[[intspan('1'), intspan('2-3')], [intspan('2,4')]],
+         [[intspan('1'), intspan('2,4')], [intspan('2-3')]],
+         [[intspan('2-3'), intspan('2,4')], [intspan('1')]]]
+    r = IntspansProduct('20-30×20-40×20-50×20-60×20-90')
+    assert r._group_by_packs('3_2') == \
+        [[[intspan('20-30'), intspan('20-40'), intspan('20-50')],
+          [intspan('20-60'), intspan('20-90')]],
+         [[intspan('20-30'), intspan('20-40'), intspan('20-60')],
+          [intspan('20-50'), intspan('20-90')]],
+         [[intspan('20-30'), intspan('20-40'), intspan('20-90')],
+          [intspan('20-50'), intspan('20-60')]],
+         [[intspan('20-30'), intspan('20-50'), intspan('20-60')],
+          [intspan('20-40'), intspan('20-90')]],
+         [[intspan('20-30'), intspan('20-50'), intspan('20-90')],
+          [intspan('20-40'), intspan('20-60')]],
+         [[intspan('20-30'), intspan('20-60'), intspan('20-90')],
+          [intspan('20-40'), intspan('20-50')]],
+         [[intspan('20-40'), intspan('20-50'), intspan('20-60')],
+          [intspan('20-30'), intspan('20-90')]],
+         [[intspan('20-40'), intspan('20-50'), intspan('20-90')],
+          [intspan('20-30'), intspan('20-60')]],
+         [[intspan('20-40'), intspan('20-60'), intspan('20-90')],
+          [intspan('20-30'), intspan('20-50')]],
+         [[intspan('20-50'), intspan('20-60'), intspan('20-90')],
+          [intspan('20-30'), intspan('20-40')]]]
+
+
+def test_intspansproduct_random_draw_filtered():
     """Check IntspansProduct."""
     r = IntspansProduct('2-9', elt_nb=2)
     d = r.random_draw()
@@ -104,6 +164,9 @@ def test_intspansproduct_random_draw():
         r.random_draw(nb2_mod=5)
     assert str(excinfo.value) == 'Impossible to draw an int tuple from '\
         "['6-9', '6-9'] under these conditions: nb2_mod=5.\n"
+
+
+def test_intspansproduct_random_draw_constructible():
     r = IntspansProduct('3×4×6,7')
     d = r.random_draw(constructible=True)
     assert d == (3, 4, 6)
@@ -146,6 +209,9 @@ def test_intspansproduct_random_draw():
         r.random_draw(constructible=False)
     assert str(excinfo.value) == 'Impossible to draw a not constructible int '\
         "tuple from ['5', '2-7', '4-5'].\n"
+    # r = IntspansProduct('1×2,3×2,4')
+    # d = r.random_draw(code='2_1')
+    # assert d == (1, 2, 2)
 
 
 def test_parse_sql_creation_query():
