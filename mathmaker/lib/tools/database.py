@@ -25,7 +25,6 @@ import copy
 import json
 import random
 import warnings
-import operator
 from decimal import Decimal
 from functools import reduce
 from itertools import combinations
@@ -309,12 +308,6 @@ class IntspansProduct(object):
 
     def random_draw(self, return_all=False, **kwargs):
         spans = sorted([s for s in self.spans], key=lambda x: len(list(x)))
-        spans_lengths = [len(list(intspan(s))) for s in spans]
-        max_tries = min(1000, reduce(operator.mul, spans_lengths, 1))
-        # each key: value of failed_attempts will be in the form:
-        # tuple_that_leads_to_impossible_result: intspan(values)
-        failed_attempts = defaultdict(intspan)
-        applied_conditions = []
         # CONSTRUCTIBILITY: early detection of impossible cases
         # (if the provided intspan does not allow to create a (not)
         # constructible tuple although it is required)
@@ -345,7 +338,13 @@ class IntspansProduct(object):
                     raise RuntimeError('Impossible to draw a not '
                                        'constructible int tuple from {}.\n'
                                        .format(spans))
-        # Here is the series of attempts to draw a random tuple
+        # ATTEMPTS TO DRAW A RANDOM TUPLE
+        spans_lengths = [len(list(intspan(s))) for s in spans]
+        max_tries = min(1000, reduce(lambda x, y: x * y, spans_lengths))
+        # each key: value of failed_attempts will be in the form:
+        # tuple_that_leads_to_impossible_result: intspan(values)
+        failed_attempts = defaultdict(intspan)
+        applied_conditions = []
         for _ in range(max_tries):
             made_it, result = self._random_draw_attempt(spans, failed_attempts,
                                                         return_all=return_all,
