@@ -250,7 +250,7 @@ def test_intspansproduct_random_draw_constructible():
     with pytest.raises(RuntimeError) as excinfo:
         r.random_draw(constructible=True)
     assert str(excinfo.value) == 'Impossible to draw a constructible int '\
-        "tuple from ['4', '1-1002', '1006-2006'].\n"
+        "tuple from ['4', '1006-2006', '1-1002'].\n"
     r = IntspansProduct('4×4×4')
     d = r.random_draw(constructible=True)
     assert d == (4, 4, 4)
@@ -266,7 +266,7 @@ def test_intspansproduct_random_draw_constructible():
     with pytest.raises(RuntimeError) as excinfo:
         r.random_draw(constructible=False)
     assert str(excinfo.value) == 'Impossible to draw a not constructible int '\
-        "tuple from ['5', '2-7', '4-5'].\n"
+        "tuple from ['5', '4-5', '2-7'].\n"
     # r = IntspansProduct('1×2,3×2,4')
     # d = r.random_draw(code='2_1')
     # assert d == (1, 2, 2)

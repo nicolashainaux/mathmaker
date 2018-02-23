@@ -91,12 +91,13 @@ class IntspansProduct(object):
                                  '{}, what should complain with intspan '
                                  'syntax. See http://intspan.readthedocs.io/'
                                  'en/latest/index.html'.format(span))
-        self.spans = spans
+        self.spans_str = spans
+        self.spans = [intspan(_) for _ in spans]
 
     def turn_to_query_conditions(self):
         """Turn self to a SQLite query condition."""
         query = ''
-        for i, span in enumerate(self.spans):
+        for i, span in enumerate(self.spans_str):
             ranges = []
             single_values = []
             s = span.split(',')
@@ -332,7 +333,8 @@ class IntspansProduct(object):
                         found = True
                 if not found:
                     raise RuntimeError('Impossible to draw a constructible '
-                                       'int tuple from {}.\n'.format(spans))
+                                       'int tuple from {}.\n'
+                                       .format([str(s) for s in spans]))
             else:
                 for s in spansL:
                     others = [_ for _ in spansL]
@@ -342,7 +344,7 @@ class IntspansProduct(object):
                 if not found:
                     raise RuntimeError('Impossible to draw a not '
                                        'constructible int tuple from {}.\n'
-                                       .format(spans))
+                                       .format([str(s) for s in spans]))
         # ATTEMPTS TO DRAW A RANDOM TUPLE
         spans_lengths = [len(list(intspan(s))) for s in spans]
         max_tries = min(1000, reduce(lambda x, y: x * y, spans_lengths))
@@ -359,7 +361,7 @@ class IntspansProduct(object):
                 if result == 'impossible':
                     raise RuntimeError('Impossible to draw an int tuple from '
                                        '{} under these conditions: {}.\n'
-                                       .format(spans,
+                                       .format([str(s) for s in spans],
                                                '; '.join(applied_conditions)))
                 elif isinstance(result, tuple):
                     failed_attempts, applied_conditions = result
