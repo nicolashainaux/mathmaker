@@ -271,7 +271,8 @@ class IntspansProduct(object):
             applied_conditions.append('nb{}_neq={}'.format(i + 1, neq))
         return possibilities, applied_conditions, result
 
-    def _random_draw_attempt(self, spans, failed_attempts, return_all=False,
+    @staticmethod
+    def _random_draw_attempt(spans, failed_attempts, return_all=False,
                              **kwargs):
         result = []
         all_possibilities = []
@@ -294,8 +295,8 @@ class IntspansProduct(object):
                 else:
                     return False, 'impossible'
             possibilities, applied_conditions, result = \
-                self.__filter_possibilities(possibilities, i, span, len(spans),
-                                            result, **kwargs)
+                IntspansProduct.__filter_possibilities(
+                    possibilities, i, span, len(spans), result, **kwargs)
             if not possibilities:
                 if len(result) >= 1:
                     failed_attempts[tuple(result[:-1])]\
