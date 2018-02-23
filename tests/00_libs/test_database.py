@@ -332,6 +332,10 @@ def test_intspansproduct_random_draw_distcode():
         r.random_draw(equal_sides=True, code='3')
     assert str(excinfo.value) == 'Only one keyword between code and '\
         'equal_sides can be used in a query.'
+    r = IntspansProduct('20-30×20-30×20-30×20-60×90')
+    for i in range(10):
+        d = r.random_draw(code='2_1_1_1')
+        assert len(set(d)) == len(d) - 1
 
 
 def test_parse_sql_creation_query():
