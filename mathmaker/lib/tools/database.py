@@ -292,8 +292,29 @@ class IntspansProduct(object):
         # e.g. if spans are '2-7', '2-9', '10-100', one number will be drawn
         # from span 2-7, then one number from span 2-9 and the last from span
         # 10-100.
+
+        # DISTCODE
+        # Before looping over the spans, setup auxiliary variables to handle
+        # a possible distcode
+        stick_to = None
+        stick_on = [True for _ in range(len(spans))]
+        distcodes = kwargs.get('code', None)
+        dc_garbage = intspan('')  # get filled only if a distcode is being used
+        if distcodes is not None:
+            stick_on = []
+            distcodes = [int(_) for _ in distcodes.split('_')]
+            for p in distcodes:
+                stick_on += [False] + [True for _ in range(p - 1)]
+
+        # LOOP OVER THE SPANS
         for i, span in enumerate(spans):
             possibilities = intspan(span)
+            if stick_to is not None:  # only if a distcode is being used
+                if stick_on[i]:
+                    possibilities = intspan(stick_to)
+                else:
+                    dc_garbage |= intspan(stick_to)
+                    possibilities -= dc_garbage
             # Previous failed attempts, if any, are removed from possibilities
             if tuple(result) in failed_attempts:
                 possibilities -= failed_attempts[tuple(result)]
@@ -318,7 +339,11 @@ class IntspansProduct(object):
                     failed_attempts[tuple()].add(intspan(span))
                     return False, (failed_attempts, applied_conditions)
             all_possibilities.append(possibilities)
-            result.append(random.choice(possibilities))
+            drawn_nb = random.choice(possibilities)
+            result.append(drawn_nb)
+            if distcodes is not None:  # only if a distcode is being used
+                if not stick_on[i]:
+                    stick_to = drawn_nb
         if return_all:
             return (True, all_possibilities)
         return (True, tuple(sorted(result)))
@@ -394,7 +419,7 @@ class IntspansProduct(object):
         if dist_code is not None:
             spans_list = self._filter_packs(self._group_by_packs(spans,
                                                                  dist_code))
-            spans_list = self._rebuild_spans_from_packs(spans_list)
+            spans_list = self._rebuild_spans_from_packs(spans_list, dist_code)
             if do_shuffle:
                 random.shuffle(spans_list)
             for spans in spans_list:

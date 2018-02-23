@@ -284,9 +284,34 @@ def test_intspansproduct_random_draw_constructible():
         r.random_draw(constructible=False)
     assert str(excinfo.value) == 'Impossible to draw a not constructible int '\
         "tuple from ['5', '4-5', '2-7'].\n"
-    # r = IntspansProduct('1×2,3×2,4')
-    # d = r.random_draw(code='2_1')
-    # assert d == (1, 2, 2)
+
+
+def test_intspansproduct_random_draw_distcode():
+    # Following intspan products / codes have been chosen to give only one
+    # solution
+    r = IntspansProduct('1×2,3×2,4')
+    d = r.random_draw(code='2_1')
+    assert d == (1, 2, 2)
+    r = IntspansProduct('1,5×1,2×1,3×3,4')
+    d = r.random_draw(code='2_2')
+    assert d == (1, 1, 3, 3)
+    r = IntspansProduct('1,5×1,2×1,3×3,4')
+    # Trigger error
+    with pytest.raises(RuntimeError) as excinfo:
+        r.random_draw(code='4')
+    assert str(excinfo.value) == 'The conditions to draw a random int tuple '\
+        "lead to no result.\nInitial spans were: [intspan('1,5'), "\
+        "intspan('1-2'), intspan('1,3'), intspan('3-4')].\n"\
+        "Conditions: {'code': '4'}.\n"
+    # Test regular use
+    r = IntspansProduct('2-9×2-9×2-9')
+    d = r.random_draw(code='3')
+    assert d[0] == d[1] == d[2]
+    d = r.random_draw(code='2_1')
+    assert ((d[0] == d[1] and d[1] != d[2]) or (d[0] != d[1] and d[1] == d[2])
+            or (d[0] != d[1] and d[0] == d[2]))
+    d = r.random_draw(code='1_1_1')
+    assert d[0] != d[1] and d[1] != d[2] and d[2] != d[0]
 
 
 def test_parse_sql_creation_query():
