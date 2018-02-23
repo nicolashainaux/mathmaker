@@ -186,6 +186,23 @@ def test_intspansproduct_filter_packs():
                                                          ]
 
 
+def test_intspansproduct_rebuild_spans_from_packs():
+    filtered_packs = [[intspan('1'), intspan('3')]]
+    assert IntspansProduct._rebuild_spans_from_packs(filtered_packs, '3_2') \
+        == [[intspan('1'), intspan('1'), intspan('1'),
+             intspan('3'), intspan('3')]]
+    assert IntspansProduct._rebuild_spans_from_packs(filtered_packs, '2_2') \
+        == [[intspan('1'), intspan('1'),
+             intspan('3'), intspan('3')]]
+    assert IntspansProduct._rebuild_spans_from_packs(filtered_packs, '1_1') \
+        == [[intspan('1'), intspan('3')]]
+    filtered_packs = [[intspan('1'), intspan('3')],
+                      [intspan('4'), intspan('5-6')]]
+    assert IntspansProduct._rebuild_spans_from_packs(filtered_packs, '3_1') \
+        == [[intspan('1'), intspan('1'), intspan('1'), intspan('3')],
+            [intspan('4'), intspan('4'), intspan('4'), intspan('5-6')]]
+
+
 def test_intspansproduct_random_draw_filtered():
     """Check IntspansProduct."""
     r = IntspansProduct('2-9', elt_nb=2)

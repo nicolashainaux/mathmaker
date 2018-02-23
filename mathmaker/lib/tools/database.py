@@ -207,6 +207,17 @@ class IntspansProduct(object):
         return filtered_packs
 
     @staticmethod
+    def _rebuild_spans_from_packs(filtered_packs, dist_code):
+        coeffs = [int(_) for _ in dist_code.split('_')]
+        unpacked_spans = []
+        for line in filtered_packs:
+            new_line = []
+            for p, c in zip(line, coeffs):
+                new_line += [p] * c
+            unpacked_spans.append(new_line)
+        return unpacked_spans
+
+    @staticmethod
     def __filter_possibilities(possibilities, i, span, len_spans, result,
                                **kwargs):
         # note: some conditions for a query do not apply to tuples
@@ -383,6 +394,7 @@ class IntspansProduct(object):
         if dist_code is not None:
             spans_list = self._filter_packs(self._group_by_packs(spans,
                                                                  dist_code))
+            spans_list = self._rebuild_spans_from_packs(spans_list)
             if do_shuffle:
                 random.shuffle(spans_list)
             for spans in spans_list:
