@@ -416,7 +416,36 @@ class IntspansProduct(object):
     def random_draw(self, return_all=False, do_shuffle=True, **kwargs):
         spans = sorted([s for s in self.spans], key=lambda x: len(list(x)))
         dist_code = kwargs.get('code', None)
+        equilateral = kwargs.get('equilateral', None)
+        equal_sides = kwargs.get('equal_sides', None)
+        if [dist_code, equilateral].count(None) == 0:
+            raise ValueError('Only one keyword between code and equilateral '
+                             'can be used in a query.')
+        if [dist_code, equal_sides].count(None) == 0:
+            raise ValueError('Only one keyword between code and equal_sides '
+                             'can be used in a query.')
+        if equilateral and equal_sides is not None and not equal_sides:
+            raise ValueError('Impossible to draw with equilateral set to '
+                             'True and equal_sides set to False.')
+        if equilateral is not None and equilateral:
+            dist_code = str(len(spans))
+        if equal_sides:
+            if equilateral:
+                dist_code = str(len(spans))
+            else:
+                # TODO: implement a DistCode class that will handle this codes'
+                # generation
+                choices = {3: ['3', '2_1'],
+                           4: ['4', '3_1', '2_2', '2_1_1'],
+                           5: ['5', '4_1', '3_2', '3_1_1', '2_2_1', '2_1_1_1'],
+                           6: ['6', '5_1', '4_2', '4_1_1', '3_3', '3_2_1',
+                               '3_1_1_1', '2_2_2', '2_2_1_1', '2_1_1_1_1_1']
+                           }[len(spans)]
+                if (equilateral is not None) and (not equilateral):
+                    choices.remove(str(len(spans)))
+                dist_code = random.choice(choices)
         if dist_code is not None:
+            kwargs.update({'code': dist_code})
             spans_list = self._filter_packs(self._group_by_packs(spans,
                                                                  dist_code))
             spans_list = self._rebuild_spans_from_packs(spans_list, dist_code)

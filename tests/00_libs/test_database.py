@@ -312,6 +312,26 @@ def test_intspansproduct_random_draw_distcode():
             or (d[0] != d[1] and d[0] == d[2]))
     d = r.random_draw(code='1_1_1')
     assert d[0] != d[1] and d[1] != d[2] and d[2] != d[0]
+    # Tests with equilateral and equal_sides keywords
+    d = r.random_draw(equilateral=True)
+    assert d[0] == d[1] == d[2]
+    d = r.random_draw(equilateral=True, equal_sides=True)
+    assert d[0] == d[1] == d[2]
+    with pytest.raises(ValueError) as excinfo:
+        r.random_draw(equilateral=True, equal_sides=False)
+    assert str(excinfo.value) == 'Impossible to draw with equilateral set to '\
+        'True and equal_sides set to False.'
+    d = r.random_draw(equal_sides=True)
+    assert ((d[0] == d[1] and d[1] != d[2]) or (d[0] != d[1] and d[1] == d[2])
+            or (d[0] != d[1] and d[0] == d[2])) or (d[0] == d[1] == d[2])
+    with pytest.raises(ValueError) as excinfo:
+        r.random_draw(equilateral=True, code='3')
+    assert str(excinfo.value) == 'Only one keyword between code and '\
+        'equilateral can be used in a query.'
+    with pytest.raises(ValueError) as excinfo:
+        r.random_draw(equal_sides=True, code='3')
+    assert str(excinfo.value) == 'Only one keyword between code and '\
+        'equal_sides can be used in a query.'
 
 
 def test_parse_sql_creation_query():
