@@ -591,7 +591,8 @@ class source(object):
                     ')) '
                 kn += 1
             elif (kw == "prevails" or kw.startswith("info_") or kw == "union"
-                  or kw == 'table_name' or kw == 'no_order_by_random'):
+                  or kw == 'table_name' or kw == 'no_order_by_random'
+                  or kw == 'enablereset'):
                 # __
                 pass
             elif kw == "lock_equal_products":
@@ -730,13 +731,14 @@ class source(object):
     def _query_result(self, cmd, **kwargs):
         log = settings.dbg_logger.getChild('db')
         log.debug(cmd)
+        enablereset = kwargs.get('enablereset', True)
         qr = tuple(self.db.execute(cmd))
         if (not len(qr)
             and self.table_name in ['deci_int_triples_for_prop',
                                     'mini_pb_prop_wordings']):
             self._unlock()
             qr = tuple(self.db.execute(cmd))
-        if not len(qr):
+        if not len(qr) and enablereset:
             self._twothirds_reset()
             qr = tuple(self.db.execute(cmd))
             if not len(qr):
@@ -1721,7 +1723,28 @@ class mc_source(object):
         not_in = kwargs.get('not_in', None)
         tag_classification = classify_tag(source_id)
         kwargs.update(preprocess_qkw(db_table(source_id), qkw=qkw))
-        if tag_classification == 'int_pairs':
+        if tag_classification == 'inttuples':
+            log = settings.dbg_logger.getChild('db')
+            nb_of_elts = \
+                {'quintuples': 5}[source_id.split(':')[0][len('int'):]]
+            spans = IntspansProduct(source_id.split(':')[1], nb_of_elts)
+            random_result = sorted(spans.random_draw(**kwargs))
+            log.debug('Random draw output = {}\n'.format(random_result))
+            db_source = {5: shared.int_quintuples_source2}[nb_of_elts]
+            L = list(random_result)
+            nb_args = {'nb{}'.format(i + 1): L[i] for i in range(nb_of_elts)}
+            try:
+                db_source.next(enablereset=False, **nb_args)
+            except RuntimeError as excinfo:
+                if str(excinfo).startswith('No result from database query. '
+                                           'Command was:'):
+                    log.debug('No result from db query, return random result')
+                    return tuple(random_result)
+                else:
+                    raise
+            log.debug('Got a result from db, so redrawing from db')
+            return db_source.next(**kwargs)
+        elif tag_classification == 'int_pairs':
             kwargs.update(preprocess_int_pairs_tag(source_id, qkw=qkw))
             return shared.int_pairs_source.next(**kwargs)
         elif tag_classification == 'int_triples':
