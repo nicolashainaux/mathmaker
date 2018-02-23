@@ -311,8 +311,8 @@ class IntspansProduct(object):
             return (True, all_possibilities)
         return (True, tuple(sorted(result)))
 
-    def random_draw(self, return_all=False, **kwargs):
-        spans = sorted([s for s in self.spans], key=lambda x: len(list(x)))
+    @staticmethod
+    def _random_draw_from_spans(spans, return_all=False, **kwargs):
         # CONSTRUCTIBILITY: early detection of impossible cases
         # (if the provided intspan does not allow to create a (not)
         # constructible tuple although it is required)
@@ -351,9 +351,8 @@ class IntspansProduct(object):
         failed_attempts = defaultdict(intspan)
         applied_conditions = []
         for _ in range(max_tries):
-            made_it, result = self._random_draw_attempt(spans, failed_attempts,
-                                                        return_all=return_all,
-                                                        **kwargs)
+            made_it, result = IntspansProduct._random_draw_attempt(
+                spans, failed_attempts, return_all=return_all, **kwargs)
             if made_it:
                 return result
             else:
@@ -375,6 +374,11 @@ class IntspansProduct(object):
                            'Conditions: {}.\n'
                            .format(max_tries, spans,
                                    '; '.join(applied_conditions)))
+
+    def random_draw(self, return_all=False, **kwargs):
+        spans = sorted([s for s in self.spans], key=lambda x: len(list(x)))
+        return self._random_draw_from_spans(spans, return_all=return_all,
+                                            **kwargs)
 
 
 class source(object):
