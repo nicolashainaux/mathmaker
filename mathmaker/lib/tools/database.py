@@ -129,7 +129,8 @@ class IntspansProduct(object):
         else:
             return {}
 
-    def _group_by_packs(self, dist_code):
+    @staticmethod
+    def _group_by_packs(spans, dist_code):
         """
         All possibilities to gather IntspansProduct factors in packs.
 
@@ -138,11 +139,11 @@ class IntspansProduct(object):
         or 1_1_1_1.
         :type dist_code: str
         """
-        intspans_list = [intspan(_) for _ in self.spans]
+        intspans_list = [intspan(_) for _ in spans]
         packs_lengths = [int(_) for _ in dist_code.split('_')]
-        if sum(packs_lengths) != len(self.spans):
+        if sum(packs_lengths) != len(spans):
             raise ValueError("dist_code '{}' cannot be used for a list of "
-                             '{} intspans.'.format(dist_code, len(self.spans)))
+                             '{} intspans.'.format(dist_code, len(spans)))
         first_length = packs_lengths.pop(0)
         if first_length == 1:
             packs_list = [[[intspan(intspans_list[0])]]]
@@ -192,7 +193,8 @@ class IntspansProduct(object):
                                      max(x[0][0]))
                       )
 
-    def __filter_possibilities(self, possibilities, i, span, len_spans, result,
+    @staticmethod
+    def __filter_possibilities(possibilities, i, span, len_spans, result,
                                **kwargs):
         # note: some conditions for a query do not apply to tuples
         # in particular: nb*_to_check, lock_equal_products
