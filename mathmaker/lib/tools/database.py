@@ -194,6 +194,19 @@ class IntspansProduct(object):
                       )
 
     @staticmethod
+    def _filter_packs(packs_list):
+        filtered_packs = []
+        for line in packs_list:
+            filtered_line = []
+            for pack in line:
+                filtered_pack = reduce(lambda x, y: x & y, pack)
+                filtered_line.append(filtered_pack)
+            if ((filtered_line not in filtered_packs)
+                and all([p != intspan('') for p in filtered_line])):
+                filtered_packs.append(filtered_line)
+        return filtered_packs
+
+    @staticmethod
     def __filter_possibilities(possibilities, i, span, len_spans, result,
                                **kwargs):
         # note: some conditions for a query do not apply to tuples

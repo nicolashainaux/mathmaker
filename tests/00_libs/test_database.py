@@ -128,6 +128,64 @@ def test_intspansproduct_group_by_packs():
           [intspan('20-30'), intspan('20-40')]]]
 
 
+def test_intspansproduct_filter_packs():
+    packs_list = \
+        [[[intspan('1-2'), intspan('1-2')], [intspan('3-4'), intspan('5-6')]],
+         [[intspan('1-2'), intspan('3-4')], [intspan('1-2'), intspan('5-6')]],
+         [[intspan('1-2'), intspan('5-6')], [intspan('1-2'), intspan('3-4')]]]
+    assert IntspansProduct._filter_packs(packs_list) == []
+    packs_list = \
+        [[[intspan('1-2'), intspan('1-2'), intspan('3-4')], [intspan('5-6')]],
+         [[intspan('1-2'), intspan('1-2'), intspan('5-6')], [intspan('3-4')]],
+         [[intspan('1-2'), intspan('3-4'), intspan('5-6')], [intspan('1-2')]]]
+    assert IntspansProduct._filter_packs(packs_list) == []
+    packs_list = \
+        [[[intspan('1-2'), intspan('1,5')], [intspan('1,3'), intspan('3-4')]],
+         [[intspan('1-2'), intspan('3-4')], [intspan('1,3'), intspan('1,5')]],
+         [[intspan('1-2'), intspan('1,3')], [intspan('1,5'), intspan('3-4')]]]
+    assert IntspansProduct._filter_packs(packs_list) == [[intspan('1'),
+                                                          intspan('3')]]
+    packs_list = \
+        [[[intspan('1-2'), intspan('1,3'), intspan('1,5')], [intspan('3-4')]],
+         [[intspan('1-2'), intspan('1,5'), intspan('3-4')], [intspan('1,3')]],
+         [[intspan('1-2'), intspan('1,3'), intspan('3-4')], [intspan('1,5')]],
+         [[intspan('1,3'), intspan('1,5'), intspan('3-4')], [intspan('1-2')]]]
+    assert IntspansProduct._filter_packs(packs_list) == [[intspan('1'),
+                                                          intspan('3-4')]]
+    packs_list = \
+        [[[intspan('20-30'), intspan('20-40'), intspan('20-50')],
+          [intspan('20-60'), intspan('20-90')]],
+         [[intspan('20-30'), intspan('20-40'), intspan('20-60')],
+          [intspan('20-50'), intspan('20-90')]],
+         [[intspan('20-30'), intspan('20-40'), intspan('20-90')],
+          [intspan('20-50'), intspan('20-60')]],
+         [[intspan('20-30'), intspan('20-50'), intspan('20-60')],
+          [intspan('20-40'), intspan('20-90')]],
+         [[intspan('20-30'), intspan('20-50'), intspan('20-90')],
+          [intspan('20-40'), intspan('20-60')]],
+         [[intspan('20-30'), intspan('20-60'), intspan('20-90')],
+          [intspan('20-40'), intspan('20-50')]],
+         [[intspan('20-40'), intspan('20-50'), intspan('20-60')],
+          [intspan('20-30'), intspan('20-90')]],
+         [[intspan('20-40'), intspan('20-50'), intspan('20-90')],
+          [intspan('20-30'), intspan('20-60')]],
+         [[intspan('20-40'), intspan('20-60'), intspan('20-90')],
+          [intspan('20-30'), intspan('20-50')]],
+         [[intspan('20-50'), intspan('20-60'), intspan('20-90')],
+          [intspan('20-30'), intspan('20-40')]]]
+    assert IntspansProduct._filter_packs(packs_list) == [[intspan('20-30'),
+                                                          intspan('20-60')],
+                                                         [intspan('20-30'),
+                                                          intspan('20-50')],
+                                                         [intspan('20-30'),
+                                                          intspan('20-40')],
+                                                         [intspan('20-40'),
+                                                          intspan('20-30')],
+                                                         [intspan('20-50'),
+                                                          intspan('20-30')],
+                                                         ]
+
+
 def test_intspansproduct_random_draw_filtered():
     """Check IntspansProduct."""
     r = IntspansProduct('2-9', elt_nb=2)
