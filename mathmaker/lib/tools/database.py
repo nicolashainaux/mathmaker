@@ -275,14 +275,18 @@ class IntspansProduct(object):
                              **kwargs):
         result = []
         all_possibilities = []
-        # import sys
-        # sys.stderr.write('failed_attempts={}\n'.format(failed_attempts))
+        # Spans will be processed one after the other.
+        # e.g. if spans are '2-7', '2-9', '10-100', one number will be drawn
+        # from span 2-7, then one number from span 2-9 and the last from span
+        # 10-100.
         for i, span in enumerate(spans):
             possibilities = intspan(span)
+            # Previous failed attempts, if any, are removed from possibilities
             if tuple(result) in failed_attempts:
                 possibilities -= failed_attempts[tuple(result)]
             possibilities = list(possibilities)
             if not possibilities:
+                # From previous failed attempts, we know this is a dead end
                 if len(result) >= 1:
                     failed_attempts[tuple(result[:-1])]\
                         .add(intspan(result[-1]))
