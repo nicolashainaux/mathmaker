@@ -375,10 +375,29 @@ class IntspansProduct(object):
                            .format(max_tries, spans,
                                    '; '.join(applied_conditions)))
 
-    def random_draw(self, return_all=False, **kwargs):
+    def random_draw(self, return_all=False, do_shuffle=True, **kwargs):
         spans = sorted([s for s in self.spans], key=lambda x: len(list(x)))
-        return self._random_draw_from_spans(spans, return_all=return_all,
-                                            **kwargs)
+        dist_code = kwargs.get('code', None)
+        if dist_code is not None:
+            spans_list = self._filter_packs(self._group_by_packs(spans,
+                                                                 dist_code))
+            if do_shuffle:
+                random.shuffle(spans_list)
+            for spans in spans_list:
+                try:
+                    return self._random_draw_from_spans(spans,
+                                                        return_all=return_all,
+                                                        **kwargs)
+                except RuntimeError:
+                    pass
+            raise RuntimeError('The conditions to draw a random int tuple '
+                               'lead to no result.\n'
+                               'Initial spans were: {}.\n'
+                               'Conditions: {}.\n'
+                               .format(spans, kwargs))
+        else:
+            return self._random_draw_from_spans(spans, return_all=return_all,
+                                                **kwargs)
 
 
 class source(object):
