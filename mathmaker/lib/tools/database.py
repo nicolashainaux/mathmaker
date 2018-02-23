@@ -308,19 +308,16 @@ class IntspansProduct(object):
         return (True, tuple(sorted(result)))
 
     def random_draw(self, return_all=False, **kwargs):
-        # import sys
         spans = sorted([s for s in self.spans], key=lambda x: len(list(x)))
         spans_lengths = [len(list(intspan(s))) for s in spans]
-        # sys.stderr.write('\nNEW spans={}\n'.format(spans))
-        # sys.stderr.write('\nspans_lengths={}\n'.format(spans_lengths))
         max_tries = min(1000, reduce(operator.mul, spans_lengths, 1))
         # each key: value of failed_attempts will be in the form:
         # tuple_that_leads_to_impossible_result: intspan(values)
         failed_attempts = defaultdict(intspan)
         applied_conditions = []
-        # early detection of impossible cases related to constructibility
-        # (i.e. whether a (not) constructible tuple is required while the
-        # int span does not allow such tuple)
+        # CONSTRUCTIBILITY: early detection of impossible cases
+        # (if the provided intspan does not allow to create a (not)
+        # constructible tuple although it is required)
         constructible = kwargs.get('constructible', None)
         if constructible is not None:
             spansL = [list(intspan(s)) for s in spans]
@@ -348,6 +345,7 @@ class IntspansProduct(object):
                     raise RuntimeError('Impossible to draw a not '
                                        'constructible int tuple from {}.\n'
                                        .format(spans))
+        # Here is the series of attempts to draw a random tuple
         for _ in range(max_tries):
             made_it, result = self._random_draw_attempt(spans, failed_attempts,
                                                         return_all=return_all,
@@ -355,8 +353,6 @@ class IntspansProduct(object):
             if made_it:
                 return result
             else:
-                # sys.stderr.write('applied_conditions\n={}\n'
-                #                  .format(applied_conditions))
                 if result == 'impossible':
                     raise RuntimeError('Impossible to draw an int tuple from '
                                        '{} under these conditions: {}.\n'
