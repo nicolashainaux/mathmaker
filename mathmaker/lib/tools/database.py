@@ -857,7 +857,7 @@ def db_table(tag):
     elif any(tag.startswith(t) for t in ['intquintuples']):
         # This is in inttuples database.
         # Table name is the same as tag after 'int' prefix is removed
-        return tag[len('int'):]
+        return tag.split(':')[0][len('int'):]
     return ''
 
 
