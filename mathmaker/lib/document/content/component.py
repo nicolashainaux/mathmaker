@@ -251,7 +251,7 @@ class structure(object):
 
     def _setup_angles_bunch(self, measures=None, decorations=None,
                             orientation=0):
-        from mathmakerlib.geometry import Point
+        from mathmakerlib.geometry import Point, AngleDecoration
         from mathmaker import settings
         angles = []
         layers = {}
@@ -313,11 +313,18 @@ class structure(object):
                 deco.gap *= Number('0.7')
                 deco.eccentricity = 'automatic'  # re-adjust the eccentricity
             sublayer += 1
+            mark_right = False
+            if deco.label_value == Number(90, unit=r'\textdegree'):
+                mark_right = True
+                r = Number('0.3', unit='cm')
+                deco = AngleDecoration(color=deco.color,
+                                       thickness=deco.thickness,
+                                       radius=r)
             α = Angle(endpoints[i], Ω, endpoints[j],
                       label_vertex=True, draw_vertex=True,
                       label_armspoints=True, draw_armspoints=True,
                       decoration=deco, armspoints=armspoints,
-                      naming_mode='from_armspoints')
+                      naming_mode='from_armspoints', mark_right=mark_right)
             angles.append(α)
         self.angles_bunch = AnglesSet(*angles)
         self.angles_bunch.fontsize = self.tikz_fontsize
