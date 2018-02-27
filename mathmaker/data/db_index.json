@@ -17,6 +17,12 @@
         "word",
         "drawDate"
     ],
+    "angle_decorations": [
+        "id",
+        "variety",
+        "hatchmark",
+        "drawDate"
+    ],
     "names": [
         "id",
         "language",

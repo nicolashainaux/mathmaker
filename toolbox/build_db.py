@@ -131,7 +131,10 @@ def __main__():
         (id INTEGER PRIMARY KEY, language TEXT, word TEXT,
          drawDate INTEGER)'''.format(n) for n in settings.available_wNl]
     db_creation_queries += \
-        ['''CREATE TABLE names
+        ['''CREATE TABLE angle_decorations
+            (id INTEGER PRIMARY KEY, variety TEXT, hatchmark TEXT,
+             drawDate INTEGER)''',
+         '''CREATE TABLE names
             (id INTEGER PRIMARY KEY, language TEXT, gender TEXT, name TEXT,
              drawDate INTEGER)''',
          '''CREATE TABLE mini_pb_wordings
@@ -223,6 +226,21 @@ def __main__():
                                "INTO names(language, gender, name, drawDate) "
                                "VALUES(?, ?, ?, ?)",
                                db_rows)
+
+    sys.stderr.write('Insert angles\'s decorations...\n')
+    db_rows = [('single', 'singledash', 0),
+               ('single', 'doubledash', 0),
+               ('single', 'tripledash', 0),
+               ('double', None, 0),
+               ('double', 'singledash', 0),
+               ('triple', None, 0),
+               ('triple', 'singledash', 0),
+               ]
+    db.executemany("INSERT "
+                   "INTO angle_decorations"
+                   "(variety, hatchmark, drawDate) "
+                   "VALUES(?, ?, ?)",
+                   db_rows)
 
     sys.stderr.write(
         'Insert data from data/frameworks/wordings/*.yaml files...\n')

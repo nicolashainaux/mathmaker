@@ -46,6 +46,7 @@ def init():
     global simple_fractions_source
     global single_ints_source
     global single_deci1_source
+    global angle_decorations_source
     global angle_ranges_source
     global int_deci_clever_pairs_source
     global digits_places_source
@@ -147,6 +148,8 @@ def init():
     single_ints_source = database.source("single_ints", ["id", "nb1"])
     single_deci1_source = database.source("single_deci1", ["id", "nb1"])
     angle_ranges_source = database.source("angle_ranges", ["id", "nb1", "nb2"])
+    angle_decorations_source = database.source(
+        'angle_decorations', ['id', 'variety', 'hatchmark'])
     int_deci_clever_pairs_source = database.source("int_deci_clever_pairs",
                                                    ["id", "nb1", "nb2"])
     order_of_operations_variants_source = database.source(
