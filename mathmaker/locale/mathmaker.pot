@@ -2250,10 +2250,6 @@ msgstr ""
 msgid "Mental calculation:  final test for yellow belt, first stripe"
 msgstr ""
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:3
-msgid "Mental calculation: numeric expansions and factorizations"
-msgstr ""
-
 #: data/frameworks/mental_calculation/03_yellow.yaml:147
 msgid "Mental calculation:  final test for yellow belt with distinction"
 msgstr ""
@@ -2308,4 +2304,8 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:20
 msgid "Mental calculation: order of operations"
+msgstr ""
+
+#: data/frameworks/mental_calculation/05_yellow2.yaml:3
+msgid "Mental calculation: numeric expansion"
 msgstr ""

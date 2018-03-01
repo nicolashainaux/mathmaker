@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2018-03-01 07:39+0100\n"
+"PO-Revision-Date: 2018-03-01 07:46+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -2585,10 +2585,6 @@ msgstr "Première épreuve du Tournoi"
 msgid "Mental calculation:  final test for yellow belt, first stripe"
 msgstr "Calcul mental : ceinture jaune, premier trait"
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:3
-msgid "Mental calculation: numeric expansions and factorizations"
-msgstr "Calcul mental : développement et factorisation numériques"
-
 #: data/frameworks/mental_calculation/03_yellow.yaml:147
 msgid "Mental calculation:  final test for yellow belt with distinction"
 msgstr "Calcul mental : ceinture jaune avec mention"
@@ -2650,6 +2646,10 @@ msgstr "Calcul mental : sommes et différences d'angles"
 #: data/frameworks/mental_calculation/05_yellow2.yaml:20
 msgid "Mental calculation: order of operations"
 msgstr "Calcul mental : priorités opératoires"
+
+#: data/frameworks/mental_calculation/05_yellow2.yaml:3
+msgid "Mental calculation: numeric expansion"
+msgstr "Calcul mental : développement numérique"
 
 #~ msgid "To use the margin definition command"
 #~ msgstr "Pour utiliser la commande de définition des marges"
