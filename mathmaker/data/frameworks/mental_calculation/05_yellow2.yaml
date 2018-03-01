@@ -8,3 +8,9 @@ numeric_expansions_factorizations: !!omap
                  # numeric factorization -> intpairs_2to9, split_as=quarters (10)
                  # numeric factorization -> intpairs_2to9, split_as=halves (10)
                  # numeric factorization -> decimal_and_10_100_1000_for_multi, split_as=quarters (1)
+
+angles: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: angles sums and differences"
+  - exercise: !!omap
+    - questions: addi direct, context=angles -> intquintuples:20-30×20-30×20-30×20-60×90, code=2_2_1, orientation=0 (5)
