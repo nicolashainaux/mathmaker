@@ -89,7 +89,7 @@ class structure(object):
         self.slideshow = (self.x_layout_variant == 'slideshow')
         self.tikz_picture_scale = 1
         self.tikz_linesegments_thickness = 'thin'
-        self.tikz_fontsize = r'\scriptsize'
+        self.tikz_fontsize = r'\footnotesize'
         if self.slideshow:
             self.tikz_picture_scale = 3
             self.tikz_linesegments_thickness = 'very thick'
@@ -277,7 +277,7 @@ class structure(object):
             layer_thickness += Number('0.1', unit='cm') \
                 * abs(len(measures) - 2)
         arm_length = Number(offset + layers[max(layers)] * layer_thickness
-                            + Number('0.8', unit='cm'), unit=None)
+                            + Number(2, unit='cm'), unit=None)
         if not self.slideshow:
             arm_length *= Number('0.7')
         required_nb_of_points_names = len(measures) + 2
@@ -295,6 +295,16 @@ class structure(object):
             endpoints.append(P1.rotate(Ω, θ, rename=names[i + 2]))
         for p in endpoints:
             p.name += '1'
+        duplicate_labels = {}
+        found_labels = []
+        for kn, key in enumerate(decorations):
+            val = decorations[key].label_value
+            if val not in found_labels:
+                found_labels.append(val)
+            else:
+                _variety_hatchmark = next(shared.angle_decorations_source)[0:2]
+                duplicate_labels.update({val: _variety_hatchmark})
+        found_labels = {}
         for kn, key in enumerate(decorations):
             i, j = key.split(':')
             i, j = int(i), int(j)
@@ -308,18 +318,36 @@ class structure(object):
             deco.radius = offset \
                 + sublayer * Number('0.1', unit='cm') \
                 + layer * layer_thickness
-            if not self.slideshow:
-                deco.radius *= Number('0.7')
-                deco.gap *= Number('0.7')
-                deco.eccentricity = 'automatic'  # re-adjust the eccentricity
+            # if not self.slideshow:
+            #     deco.radius *= Number('0.7')
+            #     deco.gap *= Number('0.7')
             sublayer += 1
             mark_right = False
+            if deco.radius is not None and deco.radius.fracdigits_nb() >= 3:
+                deco.radius = deco.radius.rounded(Number('0.01'))
             if deco.label_value == Number(90, unit=r'\textdegree'):
                 mark_right = True
                 r = Number('0.3', unit='cm')
                 deco = AngleDecoration(color=deco.color,
                                        thickness=deco.thickness,
                                        radius=r)
+            else:
+                if deco.label_value in duplicate_labels:
+                    deco = AngleDecoration(
+                        color=deco.color, thickness=deco.thickness,
+                        label=deco.label,
+                        radius=deco.radius, gap=deco.gap,
+                        eccentricity=deco.eccentricity,
+                        variety=duplicate_labels[deco.label_value][0],
+                        hatchmark=duplicate_labels[deco.label_value][1])
+                    if deco.label_value in found_labels:
+                        deco.radius = found_labels[deco.label_value]  \
+                            + Number('0.01', unit=deco.radius.unit)
+                        found_labels[deco.label_value] = deco.radius
+                        deco.label = None
+                    else:
+                        found_labels.update({deco.label_value: deco.radius})
+            deco.eccentricity = 'automatic'  # re-adjust the eccentricity
             α = Angle(endpoints[i], Ω, endpoints[j],
                       label_vertex=True, draw_vertex=True,
                       label_armspoints=True, draw_armspoints=True,

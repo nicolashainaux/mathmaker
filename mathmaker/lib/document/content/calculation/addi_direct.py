@@ -99,7 +99,7 @@ class sub_object(component.structure):
             self.substitutable_question_mark = True
             return shared.machine.write_layout(
                 (1, 2),
-                [6.25, 6.75],
+                [8.25, 4.75],
                 [self.angles_bunch.drawn,
                  _('${math_expr}$ = {q_mark}')
                  .format(math_expr=self.angles_bunch.angles[-1].name,
