@@ -32,6 +32,7 @@ import types
 from decimal import Decimal
 from abc import ABCMeta, abstractmethod
 
+from mathmakerlib import required
 from mathmakerlib.calculus import Number
 from mathmakerlib.calculus import is_integer, is_natural, is_number
 
@@ -396,6 +397,7 @@ class Item(Exponented):
         if self.is_out_striked:
             resulting_string = MARKUP['opening_out_striked']\
                 + resulting_string + MARKUP['closing_out_striked']
+            required.package['cancel'] = True
 
         # if self.unit is not None and 'display_unit' in options \
         #    and options['display_unit']:

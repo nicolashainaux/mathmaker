@@ -186,15 +186,18 @@ class LaTeX(Structure.Structure):
             hyperref = '\n' + '% {}\n{}\n\n'\
                 .format(_('To insert pdf formular and javascript'),
                         str(UsePackage('hyperref')))
+        # cancel
+        cancel = ''
+        if required.package['cancel']:
+            cancel = '\n' + '% {}\n{}\n\n'\
+                .format(_('To strike out numbers '), str(UsePackage('cancel')))
         # Specific packages
         if variant == 'slideshow':
             specificpkg = r"""\usepackage[overlay, absolute]{textpos}
 % Useless? \usefonttheme{professionalfonts}
 """
         else:
-            specificpkg = r"""% {cancelpkg_comment}
-\usepackage{{cancel}}
-% {placeinspkg_comment}
+            specificpkg = r"""% {placeinspkg_comment}
 \usepackage{{placeins}}
 % {multicolpkg_comment}
 \usepackage{{multicol}}
@@ -216,8 +219,7 @@ class LaTeX(Structure.Structure):
 \setlength{{\parindent}}{{0cm}}
 \setlength{{\arrayrulewidth}}{{0.02pt}}
 \pagestyle{{empty}}"""\
-.format(cancelpkg_comment=_('To strike out numbers '),
-        placeinspkg_comment=_('To get a better control on floats positioning '
+.format(placeinspkg_comment=_('To get a better control on floats positioning '
                               '(e.g. tabulars) '),
         multicolpkg_comment=_('To use multicol environment'),
         arraypkg_comment=_('To use extra commands to handle tabulars'),
@@ -267,13 +269,14 @@ r"""\newline \normalsize }}
 {polyglossia}
 {language_setup}
 
-{siunitx}{xcolor}{tikz_setup}{hyperref}{specificpackages}
+{siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{specificpackages}
 
 {specificcommands}{commoncommands}
 """.format(luatex85patch=luatex85patch, documentclass=dc, symbols=variouspkg,
            polyglossia=polyglossia, language_setup=language_setup,
            font_patch=font_patch, siunitx=siunitx,
            xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
+           cancel=cancel,
            specificpackages=specificpkg, specificcommands=specificcmd,
            commoncommands=commoncmd)
 
