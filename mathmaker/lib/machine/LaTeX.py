@@ -74,7 +74,9 @@ class LaTeX(Structure.Structure):
     # --------------------------------------------------------------------------
     ##
     #   @brief Write the complete LaTeX preamble of the sheet to the output.
-    def write_preamble(self, variant='default'):
+    def write_preamble(self, variant='default', required_pkg=None):
+        if required_pkg is None:
+            required_pkg = []
         from mathmaker.lib import shared
         luatex85patch = str(Command('RequirePackage', 'luatex85')) + '\n'
         # xcolor is handled first, because it may require to be loaded as an
@@ -101,8 +103,9 @@ class LaTeX(Structure.Structure):
         # various fonts, symbols and maths packages
         lxfonts = str(UsePackage('lxfonts')) \
             if settings.round_letters_in_math_expr else ''
-        # amssymb = str(UsePackage('amssymb'))
         amssymb = ''
+        if 'amssymb' in required_pkg:
+            amssymb = str(UsePackage('amssymb'))
         amsmath = ''
         if required.package['amsmath']:
             amsmath = str(UsePackage('amsmath'))

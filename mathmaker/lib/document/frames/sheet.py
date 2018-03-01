@@ -24,6 +24,8 @@ import copy
 import random
 import warnings
 
+from mathmakerlib.LaTeX import KNOWN_AMSSYMB_SYMBOLS
+
 from mathmaker.lib import shared
 from mathmaker.lib.constants import SLIDE_CONTENT_SEP
 from mathmaker.lib.tools import rotate
@@ -277,7 +279,11 @@ class Sheet(object):
                 variant=self.layout_type)
             result += self.texts_to_str('ans', 0)
             result += shared.machine.write_document_ends()
-            result = shared.machine.write_preamble(variant=self.layout_type)\
+            pkg = []
+            if any([s in result for s in KNOWN_AMSSYMB_SYMBOLS]):
+                pkg.append('amssymb')
+            result = shared.machine.write_preamble(variant=self.layout_type,
+                                                   required_pkg=pkg)\
                 + result
 
         elif self.layout_type == 'short_test':
