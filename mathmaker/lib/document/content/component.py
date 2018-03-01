@@ -170,7 +170,7 @@ class structure(object):
                 setattr(self, 'nb' + str(i),
                         getattr(self, 'nb' + str(i)) / 10)
         elif (self.nb_variant in ['±half', '±quarter', '±halforquarter']
-              and self.nb_nb >= 2):
+              and self.nb_nb >= 1):
             # Depending on the case we randomly add or substract 0.5 or 0.25
             # (or randomly a mix of them) to a random sample of numbers
             # (self.nb*)
@@ -189,15 +189,20 @@ class structure(object):
                 g_xnb = g_xnb()
             all_nb_ids = [i + 1 for i in range(self.nb_nb)]
             random.shuffle(all_nb_ids)
-            how_many = random.choice([i + 1 for i in range(self.nb_nb)])
+            how_many = kwargs.get('how_many', None)
+            if how_many is None or how_many > self.nb_nb:
+                how_many = random.choice([i + 1 for i in range(self.nb_nb)])
             chosen_ones = random.sample(all_nb_ids, how_many)
             signs = [1, -1]
             random.shuffle(signs)
             signs = signs * len(chosen_ones)
+            avoid_duplicates = kwargs.get('avoid_duplicates', True)
             for i in range(len(chosen_ones)):
-                setattr(self, 'nb' + str(chosen_ones[i]),
-                        getattr(self, 'nb' + str(chosen_ones[i]))
-                        + next(g_xnb) * signs[i])
+                new_value = getattr(self, 'nb' + str(chosen_ones[i])) \
+                    + next(g_xnb) * signs[i]
+                if ((new_value in self.nb_list and not avoid_duplicates)
+                    or new_value not in self.nb_list):
+                    setattr(self, 'nb' + str(chosen_ones[i]), new_value)
 
     def _setup_euclidean_division(self, **kwargs):
         nb_list = list(kwargs['nb'])
@@ -594,6 +599,12 @@ class structure(object):
         labels = lined_up(nb_to_use)
         # Now, we have lengths stored in labels as, for example:
         # [(1, nb), (2, nb), (2, nb)]
+        self._setup_numbers(nb=[lbl[1] for lbl in labels], shuffle=False)
+        if polygon_data[2] != 'right_triangle':
+            self._setup_nb_variants(how_many=random.choice([1, 2]))
+        labels = [(occ, n)
+                  for occ, n in zip([lbl[0] for lbl in labels],
+                                    self.nb_list)]
         self._generate_polygon(self.polygon_codename, variant, labels)
 
     def setup(self, arg, **kwargs):

@@ -33,3 +33,13 @@ percentages: !!omap
                  percent direct -> 10%of..., context=simple_unit (3)
                  percent direct -> 10%of..., nb_variant=decimal1, context=simple_unit (2)
                  percent direct -> 50%of..., context=simple_unit (1)
+
+perimeter_of_a_polygon: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: perimeter of a polygon"
+  - exercise: !!omap
+    - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=1 (2)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_nb=4, sides_particularity=equilateral (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (4)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (4)
