@@ -14,6 +14,11 @@
         "05_yellow2",
         "angles"
     ],
+    "05_yellow2_operator_precedence": [
+        "mental_calculation",
+        "05_yellow2",
+        "operator_precedence"
+    ],
     "02_white2_multiplications_reversed": [
         "mental_calculation",
         "02_white2",

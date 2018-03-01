@@ -2305,3 +2305,7 @@ msgstr ""
 #: data/frameworks/mental_calculation/05_yellow2.yaml:14
 msgid "Mental calculation: angles sums and differences"
 msgstr ""
+
+#: data/frameworks/mental_calculation/05_yellow2.yaml:20
+msgid "Mental calculation: order of operations"
+msgstr ""

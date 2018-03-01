@@ -14,3 +14,12 @@ angles: !!omap
   - title: "Mental calculation: angles sums and differences"
   - exercise: !!omap
     - questions: addi direct, context=angles -> intquintuples:20-30×20-30×20-30×20-60×90, code=2_2_1, orientation=0 (5)
+
+operator_precedence: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: order of operations"
+  - exercise: !!omap
+    - questions: order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (3)
+                                                               -> singleint_5to100;;intpairs_3to9, variant=1-3 (2)
+                                                               -> singleint_3to9;;intpairs_3to9, variant=4-7 (3)
+                                                               -> singleint_3to12;;intpairs_3to9, variant=100-107 (2)
