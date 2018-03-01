@@ -35,27 +35,27 @@ msgstr ""
 msgid "This equation has no solution."
 msgstr ""
 
-#: lib/machine/LaTeX.py:216
+#: lib/machine/LaTeX.py:193
 msgid "To strike out numbers "
 msgstr ""
 
-#: lib/machine/LaTeX.py:219
+#: lib/machine/LaTeX.py:224
 msgid "To use multicol environment"
 msgstr ""
 
-#: lib/machine/LaTeX.py:220
+#: lib/machine/LaTeX.py:225
 msgid "To use extra commands to handle tabulars"
 msgstr ""
 
-#: lib/machine/LaTeX.py:221
+#: lib/machine/LaTeX.py:226
 msgid "For pretty underlining"
 msgstr ""
 
-#: lib/machine/LaTeX.py:239
+#: lib/machine/LaTeX.py:244
 msgid "Exercises counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:244
+#: lib/machine/LaTeX.py:249
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -401,7 +401,7 @@ msgstr ""
 msgid "{triangle_name} has no right angle."
 msgstr ""
 
-#: lib/document/frames/sheet.py:59 lib/document/frames/sheet.py:66
+#: lib/document/frames/sheet.py:68 lib/document/frames/sheet.py:61
 msgid "Answers"
 msgstr ""
 
@@ -413,11 +413,11 @@ msgstr ""
 msgid "Mental calculation: mini-problems"
 msgstr ""
 
-#: lib/machine/LaTeX.py:222
+#: lib/machine/LaTeX.py:227
 msgid "To use some symbols like currency units"
 msgstr ""
 
-#: lib/machine/LaTeX.py:157
+#: lib/machine/LaTeX.py:160
 msgid "To display units correctly"
 msgstr ""
 
@@ -1662,22 +1662,22 @@ msgstr ""
 msgid "Mental calculation: multiplication by 11"
 msgstr ""
 
-#: lib/document/content/component.py:521
+#: lib/document/content/component.py:526
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr ""
 
-#: lib/document/content/component.py:526
+#: lib/document/content/component.py:531
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:530
+#: lib/document/content/component.py:535
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:534
+#: lib/document/content/component.py:539
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr ""
@@ -1694,11 +1694,11 @@ msgstr ""
 msgid "Mental calculation: final test for white belt, second stripe"
 msgstr ""
 
-#: lib/machine/LaTeX.py:88
+#: lib/machine/LaTeX.py:90
 msgid "To be able to color the documents"
 msgstr ""
 
-#: lib/document/frames/sheet.py:74
+#: lib/document/frames/sheet.py:76
 msgid "Answers!"
 msgstr ""
 
@@ -1727,7 +1727,7 @@ msgid ""
 "(in the multiplication tables, from 2 to 9)"
 msgstr ""
 
-#: lib/machine/LaTeX.py:217
+#: lib/machine/LaTeX.py:222
 msgid "To get a better control on floats positioning (e.g. tabulars) "
 msgstr ""
 
@@ -1840,7 +1840,7 @@ msgstr ""
 msgid "Mental calculation:  final test for yellow belt"
 msgstr ""
 
-#: lib/machine/LaTeX.py:184
+#: lib/machine/LaTeX.py:187
 msgid "To insert pdf formular and javascript"
 msgstr ""
 
@@ -1889,12 +1889,13 @@ msgid "{how_many_digitplace} are there in {decimal_number}?"
 msgstr ""
 
 #: data/frameworks/mental_calculation/04_yellow1.yaml:29
-#: data/frameworks/mental_calculation/04_yellow1.yaml:78
-#: data/frameworks/mental_calculation/04_yellow1.yaml:18
-#: data/frameworks/mental_calculation/04_yellow1.yaml:19
-#: data/frameworks/mental_calculation/04_yellow1.yaml:11
-#: data/frameworks/mental_calculation/04_yellow1.yaml:17
+#: data/frameworks/mental_calculation/05_yellow2.yaml:29
 #: data/frameworks/mental_calculation/04_yellow1.yaml:74
+#: data/frameworks/mental_calculation/04_yellow1.yaml:19
+#: data/frameworks/mental_calculation/04_yellow1.yaml:78
+#: data/frameworks/mental_calculation/04_yellow1.yaml:11
+#: data/frameworks/mental_calculation/04_yellow1.yaml:18
+#: data/frameworks/mental_calculation/04_yellow1.yaml:17
 msgid "Mental calculation: simple percentages calculations"
 msgstr ""
 
@@ -1930,10 +1931,11 @@ msgstr ""
 msgid "Perimeter of this hexagon? |hint:length_unit|"
 msgstr ""
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:7
 #: data/frameworks/mental_calculation/04_yellow1.yaml:59
 #: data/frameworks/mental_calculation/04_yellow1.yaml:63
+#: data/frameworks/mental_calculation/04_yellow1.yaml:7
 #: data/frameworks/mental_calculation/04_yellow1.yaml:15
+#: data/frameworks/mental_calculation/05_yellow2.yaml:39
 msgid "Mental calculation: perimeter of a polygon"
 msgstr ""
 
@@ -2235,7 +2237,7 @@ msgstr ""
 msgid "Mental calculation: multiplications with decimal numbers"
 msgstr ""
 
-#: lib/document/frames/sheet.py:70
+#: lib/document/frames/sheet.py:72
 #, python-brace-format
 msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr ""
@@ -2268,26 +2270,26 @@ msgid ""
 "{length_unit}. What is its length? |hint:length_unit|"
 msgstr ""
 
-#: lib/machine/LaTeX.py:170
+#: lib/machine/LaTeX.py:173
 msgid "To draw TikZ pictures"
 msgstr ""
 
-#: lib/machine/LaTeX.py:223
+#: lib/machine/LaTeX.py:228
 msgid "To include .eps pictures"
 msgstr ""
 
-#: lib/machine/LaTeX.py:224
+#: lib/machine/LaTeX.py:229
 msgid "General layout of the page"
 msgstr ""
 
-#: lib/machine/LaTeX.py:240
+#: lib/machine/LaTeX.py:245
 msgid ""
 "Definition of the \"exercise\" command, which will insert the word "
 "\"Exercise\" in bold, with its number and automatically increments the "
 "counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:253
+#: lib/machine/LaTeX.py:258
 msgid ""
 "Redefinition of \"\\parallel\" command to draw the parallel symbol slanted "
 "as usual in french notations"
