@@ -19,6 +19,11 @@
         "05_yellow2",
         "operator_precedence"
     ],
+    "05_yellow2_percentages": [
+        "mental_calculation",
+        "05_yellow2",
+        "percentages"
+    ],
     "02_white2_multiplications_reversed": [
         "mental_calculation",
         "02_white2",
