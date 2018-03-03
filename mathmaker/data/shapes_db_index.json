@@ -25,12 +25,12 @@
         "shape_nb",
         "drawDate"
     ],
-    "isosceles_triangle_shapes": [
+    "triangle_2_1_shapes": [
         "id",
         "shape_nb",
         "drawDate"
     ],
-    "equilateral_triangle_shapes": [
+    "triangle_3_shapes": [
         "id",
         "shape_nb",
         "drawDate"

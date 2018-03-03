@@ -164,8 +164,7 @@ class ShapeGenerator(object):
                               '15pt'],
                           }
         if shape_variant_nb is None:
-            shape_variant_nb = \
-                next(shared.isosceles_triangle_shapes_source)[0]
+            shape_variant_nb = next(shared.triangle_2_1_shapes_source)[0]
         build_data = shape_variants[shape_variant_nb]
         polygon = IsoscelesTriangle(
             base_length=build_data[0], equal_legs_length=build_data[1],
@@ -190,8 +189,7 @@ class ShapeGenerator(object):
                               ('-0.2', '-0.24', '0.97', '0.97')],
                           }
         if shape_variant_nb is None:
-            shape_variant_nb = \
-                next(shared.equilateral_triangle_shapes_source)[0]
+            shape_variant_nb = next(shared.triangle_3_shapes_source)[0]
         build_data = shape_variants[shape_variant_nb]
         polygon = EquilateralTriangle(
             side_length=build_data[0],

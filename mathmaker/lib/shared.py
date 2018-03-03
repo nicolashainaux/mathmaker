@@ -74,8 +74,8 @@ def init():
     global polygons_source
     global scalene_triangle_shapes_source
     global right_triangle_shapes_source
-    global isosceles_triangle_shapes_source
-    global equilateral_triangle_shapes_source
+    global triangle_2_1_shapes_source
+    global triangle_3_shapes_source
     global quadrilateral_1_1_1_1_shapes_source
     global quadrilateral_2_1_1_shapes_source
     global quadrilateral_2_2_shapes_source
@@ -177,10 +177,10 @@ def init():
     right_triangle_shapes_source = database.source('right_triangle_shapes',
                                                    ['id', 'shape_nb'],
                                                    db=shapes_db)
-    isosceles_triangle_shapes_source = database.source(
-        'isosceles_triangle_shapes', ['id', 'shape_nb'], db=shapes_db)
-    equilateral_triangle_shapes_source = database.source(
-        'equilateral_triangle_shapes', ['id', 'shape_nb'], db=shapes_db)
+    triangle_2_1_shapes_source = database.source(
+        'triangle_2_1_shapes', ['id', 'shape_nb'], db=shapes_db)
+    triangle_3_shapes_source = database.source(
+        'triangle_3_shapes', ['id', 'shape_nb'], db=shapes_db)
     quadrilateral_1_1_1_1_shapes_source = database.source(
         'quadrilateral_1_1_1_1_shapes', ['id', 'shape_nb'], db=shapes_db)
     quadrilateral_2_1_1_shapes_source = database.source(
