@@ -20,6 +20,10 @@ htmlcov/
 .coverage
 .cache/
 tests/outfiles/
+toolbox/shapes_catalog.aux
+toolbox/shapes_catalog.log
+toolbox/shapes_catalog.pdf
+toolbox/stderr.log
 outfiles/
 *.mo
 __pycache__/
