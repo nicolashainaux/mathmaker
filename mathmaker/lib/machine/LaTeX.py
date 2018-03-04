@@ -94,7 +94,7 @@ class LaTeX(Structure.Structure):
             dc = DocumentClass('beamer', options='20pt')
             if required.package['xcolor']:
                 if xcolor_attr:
-                    dc.options.append({'xcolor': AttrList(xcolor_attr)})
+                    dc.options.append({'xcolor': AttrList(*xcolor_attr)})
                 else:
                     dc.options.append('xcolor')
         else:
