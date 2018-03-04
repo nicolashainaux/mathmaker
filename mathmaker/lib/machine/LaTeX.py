@@ -162,6 +162,11 @@ class LaTeX(Structure.Structure):
             sisetup_attr = {'mode': 'text'}
             if settings.language.startswith('fr'):
                 sisetup_attr.update({'locale': 'FR'})
+            if settings.font is not None:
+                siunitx += r"""
+\newfontfamily\configfont{{{font_name}}}
+""".format(font_name=settings.font)
+                sisetup_attr.update({'text-rm': r'\configfont'})
             siunitx += r"""
 \AtBeginDocument{{
 {sisetup}
