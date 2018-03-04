@@ -386,6 +386,7 @@ r"""\newline \normalsize }}
                        + r'\textcolor{{Silver!90!Black}}{{\small{displ_nb}}}'
                        + r'\end{{textblock}}') \
                 .format(displ_nb='{' + numbering + '}') + '\n'
+            required.options['xcolor'].add('svgnames')
         if uncovered:
             for i, chunk in enumerate(content.split(sep=SLIDE_CONTENT_SEP)):
                 result += r'\uncover<{n}>{c}'\
