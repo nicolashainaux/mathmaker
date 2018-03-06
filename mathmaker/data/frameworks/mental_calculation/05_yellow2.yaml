@@ -43,3 +43,34 @@ perimeter_of_a_polygon: !!omap
                  perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_nb=4, sides_particularity=equilateral (1)
                  perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (4)
                  perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (4)
+
+W01a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=1-7 (3)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=100-107 (1)
+
+W01b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: mini_pb proportionality -> mergedinttriples_3to9 (1)
+                 multi hole -> int_irreducible_frac (1)
+                 area rectangle -> intpairs_2to9, nb_variant=decimal1 (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=1-7,100-107 (1)
+                 multi clever -> intpairs_2to9 (1)
+
+W01c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: percent direct -> 10%of..., context=simple_unit (3)
+                 percent direct -> 10%of..., nb_variant=decimal1, context=simple_unit (2)
+
+W01d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: percent direct -> 10%of..., context=simple_unit (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
+                 mini_pb proportionality -> mergedinttriples_3to9 (1)
+                 area rectangle -> intpairs_2to9, nb_variant=decimal2 (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=4 (1)
