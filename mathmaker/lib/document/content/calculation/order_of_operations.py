@@ -1439,6 +1439,7 @@ class sub_object(component.structure):
                                      self.obj)
         self.expression_str = self.expression.printed
         shared.number_of_the_question += 1
+        self.transduration = 18
 
     def q(self, **options):
         if self.x_layout_variant == 'tabular':
@@ -1450,7 +1451,7 @@ class sub_object(component.structure):
             return shared.machine.write_math_style2(self.expression_str)
 
     def a(self, **options):
-        if self.x_layout_variant == 'tabular':
+        if self.x_layout_variant == 'tabular' or self.slideshow:
             return Value(self.expression.right_hand_side.evaluate()).printed
         else:
             return shared.machine.write(
