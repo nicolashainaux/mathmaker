@@ -44,6 +44,42 @@ perimeter_of_a_polygon: !!omap
                  perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (4)
                  perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (4)
 
+challenge: !!omap
+    - preset: "mental calculation"
+    - title: "Challenge, first part"
+    - exercise: !!omap
+        - shuffle: false
+        - batch: 20
+        - layout:
+          - min_row_height: 0.6
+        - questions: multi direct -> intpairs_3to9×6to9 (4)
+                     multi hole -> intpairs_6to9×6to9 (1)
+                     addi direct -> intpairs_20to100 (1)
+                     addi direct -> int_quintuples_4to20, nb_variant=±halforquarter (1)
+                     multi hole -> int_irreducible_frac (1)
+                     order of_operations, subvariant=only_positive -> singleint_2to9;;intpairs_2to9, variant=8-23 (1)
+                     subtr direct, subvariant=only_positive, context=complement_wording -> complements_to_10, nb_variant=decimal1 (1)
+                     numeric expansion -> mergedinttriples_3to9 (1)
+                     order of_operations, subvariant=only_positive -> singleint_2to9;;intpairs_2to9, variant=116-163 (1)
+                     multi hole -> int_irreducible_frac (1)
+                     addi direct, context=angles -> intquintuples:20-30×20-30×20-30×20-60×90, code=2_2_1, orientation=0 (1)
+                     divi euclidean -> table_15 (1)
+                     percent direct -> 10%of..., context=simple_unit (1)
+                     divi direct -> intpairs_4to4×12to24, order=divisor,quotient (1)
+                     multi clever ->  intpairs_6to9×6to9 (1)
+                     [1] [multi direct -> decimal_and_10_100_1000 (1)
+                          divi direct -> decimal_and_10_100_1000 (1)]
+                     vocabulary third -> multiplesof3_10to20 (1)
+                     units conversion -> unitspairs (1)
+                     multi hole -> int_irreducible_frac (1)
+                     decimal numerals, direction=to_decimal -> decimals (1)
+                     percent direct -> 75%of..., context=simple_unit (1)
+                     subtr hole -> singleint_5to20;;singleint_5to20, nb_variant=±halforquarter (1)
+                     area rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
+                     mini_pb proportionality -> mergedinttriples_25_3to6 (1)
+                     rectangle length_or_width, context=from_area, picture=true -> intpairs_2to9, nb_variant=decimal1 (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
+
 W01a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
