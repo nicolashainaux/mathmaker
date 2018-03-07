@@ -516,23 +516,17 @@ class Exercise(object):
             q_list = options.get('q_list')
             self.min_row_height = 0.8  # default value for xml files, whose
             # support will be removed later on
-        import sys
-        sys.stderr.write('q_list={}\n'.format(q_list))
         # From q_list, we build a dictionary and then a complete questions'
         # list:
         q_dict, self.q_nb = build_q_dict(q_list)
-        sys.stderr.write('q_dict={}\n'.format(q_dict))
         # in case of mental calculation exercises we shuffle the questions
         # (or if the user has set shuffle to 'true' in the <exercise> section)
-        sys.stderr.write('self.shuffle={}\n'.format(self.shuffle))
         if self.shuffle:
             for key in q_dict:
                 random.shuffle(q_dict[key])
         mixed_q_list = build_mixed_q_list(q_dict, shuffle=self.shuffle)
-        sys.stderr.write('mixed_q_list={}\n'.format(mixed_q_list))
         # in case of mental calculation exercises we increase alternation
         if self.shuffle and self.preset == 'mental_calculation':
-            sys.stderr.write('DO INCREASE ALTERNATION\n')
             mixed_q_list = increase_alternation(mixed_q_list, 'id')
             mixed_q_list.reverse()
             mixed_q_list = increase_alternation(mixed_q_list, 'id')
