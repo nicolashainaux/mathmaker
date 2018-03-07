@@ -29,6 +29,26 @@
         "05_yellow2",
         "perimeter_of_a_polygon"
     ],
+    "05_yellow2_W01a": [
+        "mental_calculation",
+        "05_yellow2",
+        "W01a"
+    ],
+    "05_yellow2_W01b": [
+        "mental_calculation",
+        "05_yellow2",
+        "W01b"
+    ],
+    "05_yellow2_W01c": [
+        "mental_calculation",
+        "05_yellow2",
+        "W01c"
+    ],
+    "05_yellow2_W01d": [
+        "mental_calculation",
+        "05_yellow2",
+        "W01d"
+    ],
     "02_white2_multiplications_reversed": [
         "mental_calculation",
         "02_white2",
