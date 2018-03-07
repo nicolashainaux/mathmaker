@@ -1,6 +1,12 @@
 Changelog
 =========
 
+New in version 0.7.4 (2018-03-..)
+---------------------------------
+
+* Add mental calculation sheets for fifth level ("yellow belt, 2d stripe")
+* Partially automatically adapt LaTeX preamble, depending on packages really required to compile the document
+
 New in version 0.7.3 (2018-01-15)
 ---------------------------------
 
