@@ -71,27 +71,6 @@ def wrap(word: str, braces='{}', o_str=None, e_str=None) -> str:
     return opening_str + word + ending_str
 
 
-def unwrapped(word: str) -> str:
-    """
-    Remove first and last char plus possible punctuation of word.
-
-    :Examples:
-
-    >>> unwrapped('{word}')
-    'word'
-    >>> unwrapped('{word},')
-    'word'
-    >>> unwrapped('{word}:')
-    'word'
-    """
-    if (word.endswith('.') or word.endswith(',')
-        or word.endswith(':') or word.endswith(';')
-        or word.endswith('?') or word.endswith('!')):
-        return word[1:-2]
-    else:
-        return word[1:-1]
-
-
 def is_wrapped(word: str, braces='{}', extra_braces='') -> bool:
     """
     Return True if word is wrapped between braces.
@@ -395,14 +374,9 @@ def process_attr_values(sentence: str) -> tuple:
     :return: this couple: (transformed_sentence, {key:val, ...})
     """
     attr_values = {}
-    key_val_blocks = [w for w in sentence.split()
-                      if ((is_wrapped_p(w)
-                           or is_wrapped_p(w, braces='<>')
-                           or is_wrapped_p(w, extra_braces='()')
-                           or is_wrapped_p(w, extra_braces='[]'))
-                          and '=' in w)]
+    key_val_blocks = re.findall(r'{(\w+=\w+)}', sentence)
     for kv in key_val_blocks:
-        [key, val] = unwrapped(kv).split(sep='=')
+        [key, val] = kv.split(sep='=')
         attr_values.update({key: val})
     pairs_to_add = {}
     for key in attr_values:
@@ -511,12 +485,7 @@ def extract_formatting_tags_from(s: str):
 
     :param s: the sentence where to look for {tags}.
     """
-    return [w[1:-1] for w in s.split() if is_wrapped(w)] \
-        + [w[1:-2] for w in s.split() if is_wrapped_P(w)] \
-        + [w[2:-2] for w in s.split() if is_wrapped(w, extra_braces='()')] \
-        + [w[2:-3] for w in s.split() if is_wrapped_P(w, extra_braces='()')] \
-        + [w[2:-2] for w in s.split() if is_wrapped(w, extra_braces='[]')] \
-        + [w[2:-3] for w in s.split() if is_wrapped_P(w, extra_braces='[]')]
+    return re.findall(r'{(\w+)}', s)
 
 
 def wrap_latex_keywords(s: str) -> str:
@@ -613,6 +582,8 @@ def setup_wording_format_of(w_object: object, w_prefix=''):
                 n = Number(3)
             setattr(w_object, attr,
                     Unit(getattr(w_object, attr), exponent=n).printed)
+    import sys
+    sys.stderr.write('w_object_wording={}\n'.format(w_object_wording))
 
     w_object_wording_format = {}
     for attr in extract_formatting_tags_from(w_object_wording):

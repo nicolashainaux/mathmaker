@@ -25,7 +25,7 @@ import pytest
 from mathmakerlib.calculus.unit import MASS_UNITS
 
 from mathmaker.lib import shared
-from mathmaker.lib.tools.wording import (wrap, unwrapped, is_wrapped,
+from mathmaker.lib.tools.wording import (wrap, is_wrapped,
                                          is_wrapped_P,
                                          is_wrapped_p, is_unit, is_unitN,
                                          extract_formatting_tags_from,
@@ -151,41 +151,6 @@ def test_wrap_01():
 def test_wrap_02():
     """Checks wrap('s', e_str='},') gives out '{s},'."""
     assert wrap('One word', e_str='},') == '{One word},'
-
-
-def test_unwrapped_01():
-    """Checks unwrapped('{Anything}') gives out 'Anything'."""
-    assert unwrapped('{Anything}') == 'Anything'
-
-
-def test_unwrapped_02():
-    """Checks unwrapped('{Anything},') gives out 'Anything'."""
-    assert unwrapped('{Anything},') == 'Anything'
-
-
-def test_unwrapped_03():
-    """Checks unwrapped('{Anything}.') gives out 'Anything'."""
-    assert unwrapped('{Anything}.') == 'Anything'
-
-
-def test_unwrapped_04():
-    """Checks unwrapped('{Anything};') gives out 'Anything'."""
-    assert unwrapped('{Anything};') == 'Anything'
-
-
-def test_unwrapped_05():
-    """Checks unwrapped('{Anything}?') gives out 'Anything'."""
-    assert unwrapped('{Anything}?') == 'Anything'
-
-
-def test_unwrapped_06():
-    """Checks unwrapped('{Anything}!') gives out 'Anything'."""
-    assert unwrapped('{Anything}!') == 'Anything'
-
-
-def test_unwrapped_07():
-    """Checks unwrapped('{Anything}:') gives out 'Anything'."""
-    assert unwrapped('{Anything}:') == 'Anything'
 
 
 def test_is_wrapped_01():
