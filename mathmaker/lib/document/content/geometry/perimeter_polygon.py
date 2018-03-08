@@ -36,10 +36,14 @@ class sub_object(component.structure):
         super().setup('polygon', polygon_data=build_data)
 
         self.wording = {
-            3: _('Perimeter of this triangle? |hint:length_unit|'),
-            4: _('Perimeter of this quadrilateral? |hint:length_unit|'),
-            5: _('Perimeter of this pentagon? |hint:length_unit|'),
-            6: _('Perimeter of this hexagon? |hint:length_unit|')
+            3: _(r'Perimeter of this triangle?\newline '
+                 r'(lengths are given in {length_unit}) |hint:length_unit|'),
+            4: _(r'Perimeter of this quadrilateral?\newline '
+                 r'(lengths are given in {length_unit}) |hint:length_unit|'),
+            5: _(r'Perimeter of this pentagon?\newline '
+                 r'(lengths are given in {length_unit}) |hint:length_unit|'),
+            6: _(r'Perimeter of this hexagon?\newline '
+                 r'(lengths are given in {length_unit}) |hint:length_unit|')
         }[len(self.polygon.sides)]
 
         self.transduration = 12 + 3 * (level - 1)

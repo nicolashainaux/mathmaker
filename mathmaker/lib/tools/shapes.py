@@ -209,7 +209,8 @@ class ShapeGenerator(object):
             shape_variant_nb = next(shapes_source)[0]
         build_data = shape_variants[shape_variant_nb]
         build_data.update({'name': name, 'label_vertices': label_vertices,
-                           'thickness': thickness})
+                           'thickness': thickness,
+                           'sloped_sides_labels': False})
         baseline = build_data.pop('baseline', None)
         boundingbox = build_data.pop('boundingbox', None)
         if masks is None:

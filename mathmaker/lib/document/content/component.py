@@ -574,7 +574,7 @@ class structure(object):
                       name=self.polygon_name,
                       label_vertices=self.label_polygon_vertices,
                       thickness=self.tikz_linesegments_thickness,
-                      length_unit=self.length_unit)
+                      length_unit=None)
         # Without patching polygons to NOT cycle when drawn, the scaling of
         # tikzpicture will produce a displaying bug (not nice)
         self.polygon.do_cycle = False
