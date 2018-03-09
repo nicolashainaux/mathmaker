@@ -88,9 +88,12 @@ class ShapeGenerator(object):
 
     def _polygon(self, shapes_source, shape_variants, shape_builder, labels,
                  masks=None, marks=None, length_unit=None, name=None,
-                 shape_variant_nb=None, label_vertices=None, thickness=None):
+                 shape_variant_nb=None, label_vertices=None, thickness=None,
+                 rt_extra_info=None):
         if shape_variant_nb is None:
             shape_variant_nb = next(shapes_source)[0]
+        if rt_extra_info is not None and shape_variant_nb in rt_extra_info:
+            labels[0], labels[1] = labels[1], labels[0]
         build_data = shape_variants[shape_variant_nb]
         build_data.update({'name': name, 'label_vertices': label_vertices,
                            'thickness': thickness,
@@ -177,8 +180,10 @@ class ShapeGenerator(object):
             shapes_source = shared.right_triangle_shapes_source
             shape_builder = RightTriangle
         lbls = [labels[i][1] for i in range(len(labels))]
+        rt_extra_info = None
         if variant == 1:
-            lbls[0], lbls[2] = lbls[2], lbls[0]
+            lbls = sorted(lbls)
+            rt_extra_info = [1, 3, 5, 8]
         return self._polygon(
             shapes_source,
             shape_variants,
@@ -186,7 +191,8 @@ class ShapeGenerator(object):
             labels=lbls,
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            rt_extra_info=rt_extra_info
         )
 
     def _triangle_2_1(self, variant=None, labels=None, name=None,
