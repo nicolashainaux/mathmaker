@@ -182,25 +182,34 @@ class ShapeGenerator(object):
     def _triangle_3(self, variant=None, labels=None, name=None,
                     label_vertices=None, thickness=None, length_unit=None,
                     shape_variant_nb=None):
-        shape_variants = {1: [Number('1.1'), 0, '12pt', None],
-                          2: [Number('1.1'), 60, '0pt', None],
-                          3: [Number('1.1'), Number('29.9'), '6pt', None],
-                          4: [Number('1.1'), 90, '0pt',
-                              ('-0.2', '-0.24', '0.97', '0.97')],
+        mark = next(shared.ls_marks_source)[0]
+        shape_variants = {1: {'side_length': Number('1.1'),
+                              'rotation_angle': 0,
+                              'use_mark': mark,
+                              'baseline': '12pt'},
+                          2: {'side_length': Number('1.1'),
+                              'rotation_angle': 60,
+                              'use_mark': mark,
+                              'baseline': '0pt'},
+                          3: {'side_length': Number('1.1'),
+                              'rotation_angle': Number('29.9'),
+                              'use_mark': mark,
+                              'baseline': '6pt'},
+                          4: {'side_length': Number('1.1'),
+                              'rotation_angle': 90,
+                              'use_mark': mark,
+                              'baseline': '0pt',
+                              'boundingbox': ('-0.2', '-0.24', '0.97', '0.97')}
                           }
-        if shape_variant_nb is None:
-            shape_variant_nb = next(shared.triangle_3_shapes_source)[0]
-        build_data = shape_variants[shape_variant_nb]
-        polygon = EquilateralTriangle(
-            side_length=build_data[0],
-            rotation_angle=build_data[1],
-            use_mark=next(shared.ls_marks_source)[0],
-            name=name, label_vertices=label_vertices, thickness=thickness)
-        sidelbl = labels[0][1]
-        polygon.setup_labels([Number(sidelbl, unit=length_unit)])
-        polygon.baseline = build_data[2]
-        polygon.boundingbox = build_data[3]
-        return polygon
+        return self._polygon(
+            shared.triangle_3_shapes_source,
+            shape_variants,
+            EquilateralTriangle,
+            labels=[labels[0][1]],
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            shape_variant_nb=shape_variant_nb
+        )
 
     def _polygon(self, shapes_source, shape_variants, shape_builder, labels,
                  masks=None, marks=None, length_unit=None, name=None,
