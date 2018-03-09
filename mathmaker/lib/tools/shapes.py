@@ -159,16 +159,20 @@ class ShapeGenerator(object):
                                   'rotation_angle': -90, 'baseline': '8pt'},
                               5: {'start_vertex': Point('2.236', 0),
                                   'leg1_length': 2, 'leg2_length': 1,
-                                  'rotation_angle': 150, 'baseline': '8pt'},
+                                  'rotation_angle': Number('153.4'),
+                                  'baseline': '8pt'},
                               6: {'start_vertex': Point('2.236', 0),
                                   'leg1_length': 1, 'leg2_length': 2,
-                                  'rotation_angle': 120, 'baseline': '8pt'},
+                                  'rotation_angle': Number('116.6'),
+                                  'baseline': '8pt'},
                               7: {'start_vertex': Point(0, '0.981'),
                                   'leg1_length': 1, 'leg2_length': 2,
-                                  'rotation_angle': -60, 'baseline': '17pt'},
+                                  'rotation_angle': Number('-63.4'),
+                                  'baseline': '17pt'},
                               8: {'start_vertex': Point(0, '0.981'),
                                   'leg1_length': 2, 'leg2_length': 1,
-                                  'rotation_angle': -30, 'baseline': '17pt'}
+                                  'rotation_angle': Number('-26.6'),
+                                  'baseline': '17pt'}
                               }
             shapes_source = shared.right_triangle_shapes_source
             shape_builder = RightTriangle
