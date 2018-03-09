@@ -86,6 +86,38 @@ class ShapeGenerator(object):
                                        thickness=thickness,
                                        length_unit=length_unit)
 
+    def _polygon(self, shapes_source, shape_variants, shape_builder, labels,
+                 masks=None, marks=None, length_unit=None, name=None,
+                 shape_variant_nb=None, label_vertices=None, thickness=None):
+        if shape_variant_nb is None:
+            shape_variant_nb = next(shapes_source)[0]
+        build_data = shape_variants[shape_variant_nb]
+        build_data.update({'name': name, 'label_vertices': label_vertices,
+                           'thickness': thickness,
+                           'sloped_sides_labels': False})
+        baseline = build_data.pop('baseline', None)
+        boundingbox = build_data.pop('boundingbox', None)
+        if masks is None:
+            masks = build_data.pop('masks', None)
+        elif 'masks' in build_data:
+            del build_data['masks']
+        args = build_data.pop('args', [])
+        right_angle_radius = build_data.pop('right_angle_radius', None)
+        polygon = shape_builder(*args, **build_data)
+        polygon.setup_labels([Number(lbl, unit=length_unit)
+                              for lbl in labels], masks=masks)
+        polygon.baseline = baseline
+        polygon.boundingbox = boundingbox
+        polygon.setup_marks(marks)
+        if right_angle_radius is not None:
+            for a in polygon.angles:
+                if isinstance(a.decoration, AngleDecoration) and a.mark_right:
+                    u = None
+                    if a.decoration.radius is not None:
+                        u = a.decoration.radius.unit
+                    a.decoration.radius = Number(right_angle_radius, unit=u)
+        return polygon
+
     def _triangle_1_1_1(self, variant=None, labels=None, name=None,
                         label_vertices=None, thickness=None, length_unit=None,
                         shape_variant_nb=None):
@@ -238,38 +270,6 @@ class ShapeGenerator(object):
             length_unit=length_unit,
             shape_variant_nb=shape_variant_nb
         )
-
-    def _polygon(self, shapes_source, shape_variants, shape_builder, labels,
-                 masks=None, marks=None, length_unit=None, name=None,
-                 shape_variant_nb=None, label_vertices=None, thickness=None):
-        if shape_variant_nb is None:
-            shape_variant_nb = next(shapes_source)[0]
-        build_data = shape_variants[shape_variant_nb]
-        build_data.update({'name': name, 'label_vertices': label_vertices,
-                           'thickness': thickness,
-                           'sloped_sides_labels': False})
-        baseline = build_data.pop('baseline', None)
-        boundingbox = build_data.pop('boundingbox', None)
-        if masks is None:
-            masks = build_data.pop('masks', None)
-        elif 'masks' in build_data:
-            del build_data['masks']
-        args = build_data.pop('args', [])
-        right_angle_radius = build_data.pop('right_angle_radius', None)
-        polygon = shape_builder(*args, **build_data)
-        polygon.setup_labels([Number(lbl, unit=length_unit)
-                              for lbl in labels], masks=masks)
-        polygon.baseline = baseline
-        polygon.boundingbox = boundingbox
-        polygon.setup_marks(marks)
-        if right_angle_radius is not None:
-            for a in polygon.angles:
-                if isinstance(a.decoration, AngleDecoration) and a.mark_right:
-                    u = None
-                    if a.decoration.radius is not None:
-                        u = a.decoration.radius.unit
-                    a.decoration.radius = Number(right_angle_radius, unit=u)
-        return polygon
 
     def _quadrilateral_1_1_1_1(self, variant=None, labels=None, name=None,
                                label_vertices=None, thickness=None,
