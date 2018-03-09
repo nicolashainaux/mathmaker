@@ -38,7 +38,7 @@ from mathmaker.lib.constants import LOCALE_US
 SHAPES_CATALOG_PATH = './shapes_catalog.tex'
 SG = ShapeGenerator()
 MAX_ROWS_PER_PAGE = 11
-COL_NB = 3
+COL_NB = 2
 
 
 def __main__():

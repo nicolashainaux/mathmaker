@@ -36,8 +36,10 @@
 
 % To display units correctly
 \usepackage{siunitx}
+\newfontfamily\configfont{Ubuntu}
+
 \AtBeginDocument{
-\sisetup{mode=text}
+\sisetup{mode=text, text-rm=\configfont}
 }
 
 % To draw TikZ pictures
@@ -81,7 +83,7 @@
 \begin{tabular}{cc}
 triangle\_1\_1\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=6pt]
 % Declare Points
@@ -91,9 +93,9 @@ triangle\_1\_1\_1, variant: 0
 
 % Draw Triangle
 \draw (A)
--- (B) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (C) node[midway, above, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{3.5}{dam}};
+-- (B) node[midway, below] {\SI{1.5}{dam}}
+-- (C) node[midway, above right] {\SI{2.5}{dam}}
+-- cycle node[midway, above left] {\SI{3.5}{dam}};
 
 % Label Points
 
@@ -102,32 +104,15 @@ triangle\_1\_1\_1, variant: 0
 
 \begin{tikzpicture}[baseline=6pt]
 % Declare Points
-\coordinate (M) at (0,0);
-\coordinate (N) at (2,0);
-\coordinate (O) at (1.418,0.924);
-
-% Draw Triangle
-\draw (M)
--- (N) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (O) node[midway, above, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{3.5}{dam}};
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=13pt]
-% Declare Points
-\coordinate (Y) at (2,0.924);
-\coordinate (Z) at (0,0.924);
-\coordinate (A$_1$) at (1.418,0);
+\coordinate (Y) at (0,0);
+\coordinate (Z) at (2,0);
+\coordinate (A$_1$) at (1.418,0.924);
 
 % Draw Triangle
 \draw (Y)
--- (Z) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (A$_1$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{3.5}{dam}};
+-- (Z) node[midway, below] {\SI{1.5}{dam}}
+-- (A$_1$) node[midway, above right] {\SI{2.5}{dam}}
+-- cycle node[midway, above left] {\SI{3.5}{dam}};
 
 % Label Points
 
@@ -136,21 +121,36 @@ triangle\_1\_1\_1, variant: 0
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (K$_1$) at (2,0.924);
-\coordinate (L$_1$) at (0,0.924);
-\coordinate (M$_1$) at (0.582,0);
+\coordinate (W$_1$) at (2,0.924);
+\coordinate (X$_1$) at (0,0.924);
+\coordinate (Y$_1$) at (1.418,0);
 
 % Draw Triangle
-\draw (K$_1$)
--- (L$_1$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (M$_1$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{3.5}{dam}};
+\draw (W$_1$)
+-- (X$_1$) node[midway, above] {\SI{1.5}{dam}}
+-- (Y$_1$) node[midway, below left] {\SI{2.5}{dam}}
+-- cycle node[midway, below right] {\SI{3.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
 &
-&
+
+\begin{tikzpicture}[baseline=13pt]
+% Declare Points
+\coordinate (U$_2$) at (2,0.924);
+\coordinate (V$_2$) at (0,0.924);
+\coordinate (W$_2$) at (0.582,0);
+
+% Draw Triangle
+\draw (U$_2$)
+-- (V$_2$) node[midway, above] {\SI{1.5}{dam}}
+-- (W$_2$) node[midway, below left] {\SI{2.5}{dam}}
+-- cycle node[midway, below right] {\SI{3.5}{dam}};
+
+% Label Points
+
+\end{tikzpicture}
 \\
 \end{tabular}
 \\
@@ -161,122 +161,42 @@ triangle\_1\_1\_1, variant: 0
 \begin{tabular}{cc}
 triangle\_1\_1\_1, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=8pt]
 % Declare Points
-\coordinate (W$_1$) at (0,0);
-\coordinate (X$_1$) at (2,0);
-\coordinate (Y$_1$) at (2,1);
+\coordinate (G$_3$) at (0,0);
+\coordinate (O$_3$) at (2,0);
+\coordinate (P$_3$) at (2,1);
 
-% Draw Triangle
-\draw (W$_1$)
--- (X$_1$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- (Y$_1$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
-
-% Mark right angles
-\draw[cm={cos(90), sin(90), -sin(90), cos(90), (X$_1$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=17pt]
-% Declare Points
-\coordinate (I$_2$) at (2,0);
-\coordinate (J$_2$) at (2,1);
-\coordinate (K$_2$) at (0,1);
-
-% Draw Triangle
-\draw (I$_2$)
--- (J$_2$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- (K$_2$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
-
-% Mark right angles
-\draw[cm={cos(180), sin(180), -sin(180), cos(180), (J$_2$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=17pt]
-% Declare Points
-\coordinate (U$_2$) at (2,1);
-\coordinate (V$_2$) at (0,1);
-\coordinate (W$_2$) at (0,0);
-
-% Draw Triangle
-\draw (U$_2$)
--- (V$_2$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- (W$_2$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
-
-% Mark right angles
-\draw[cm={cos(-90), sin(-90), -sin(-90), cos(-90), (V$_2$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
-
-% Label Points
-
-\end{tikzpicture}
-\\
-
-\begin{tikzpicture}[baseline=8pt]
-% Declare Points
-\coordinate (G$_3$) at (0,1);
-\coordinate (H$_3$) at (0,0);
-\coordinate (I$_3$) at (2,0);
-
-% Draw Triangle
+% Draw RightTriangle
 \draw (G$_3$)
--- (H$_3$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- (I$_3$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+-- (O$_3$) node[midway, below] {\SI{2.5}{dam}}
+-- (P$_3$) node[midway, right] {\SI{1.5}{dam}}
+-- cycle node[midway, above left] {\SI{3.5}{dam}};
 
 % Mark right angles
-\draw[cm={cos(0), sin(0), -sin(0), cos(0), (H$_3$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
+\draw[cm={cos(90), sin(90), -sin(90), cos(90), (O$_3$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
 
 % Label Points
 
 \end{tikzpicture}
 &
 
-\begin{tikzpicture}[baseline=8pt]
+\begin{tikzpicture}[baseline=17pt]
 % Declare Points
-\coordinate (S$_3$) at (2.236,0);
-\coordinate (T$_3$) at (0.582,0.981);
-\coordinate (U$_3$) at (0,0);
+\coordinate (A$_4$) at (3.333,-0);
+\coordinate (H$_4$) at (3.333,1);
+\coordinate (I$_4$) at (1.333,1);
 
-% Draw Triangle
-\draw (S$_3$)
--- (T$_3$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- (U$_3$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+% Draw RightTriangle
+\draw (A$_4$)
+-- (H$_4$) node[midway, right] {\SI{1.5}{dam}}
+-- (I$_4$) node[midway, above] {\SI{2.5}{dam}}
+-- cycle node[midway, below left] {\SI{3.5}{dam}};
 
 % Mark right angles
-\draw[cm={cos(-120.68), sin(-120.68), -sin(-120.68), cos(-120.68), (T$_3$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=8pt]
-% Declare Points
-\coordinate (E$_4$) at (2.1,0);
-\coordinate (F$_4$) at (1.418,0.981);
-\coordinate (G$_4$) at (0,0);
-
-% Draw Triangle
-\draw (E$_4$)
--- (F$_4$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- (G$_4$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
-
-% Mark right angles
-\draw[cm={cos(-145.32), sin(-145.32), -sin(-145.32), cos(-145.32), (F$_4$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
+\draw[cm={cos(180), sin(180), -sin(180), cos(180), (H$_4$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
 
 % Label Points
 
@@ -285,18 +205,98 @@ triangle\_1\_1\_1, variant: 1
 
 \begin{tikzpicture}[baseline=17pt]
 % Declare Points
-\coordinate (Q$_4$) at (0,0.981);
-\coordinate (R$_4$) at (0.582,0);
-\coordinate (S$_4$) at (2.236,0.981);
+\coordinate (V$_4$) at (4.667,1.667);
+\coordinate (B$_5$) at (2.667,1.667);
+\coordinate (C$_5$) at (2.667,0.667);
 
-% Draw Triangle
-\draw (Q$_4$)
--- (R$_4$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- (S$_4$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+% Draw RightTriangle
+\draw (V$_4$)
+-- (B$_5$) node[midway, above] {\SI{2.5}{dam}}
+-- (C$_5$) node[midway, left] {\SI{1.5}{dam}}
+-- cycle node[midway, below right] {\SI{3.5}{dam}};
 
 % Mark right angles
-\draw[cm={cos(30.67), sin(30.67), -sin(30.67), cos(30.67), (R$_4$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
+\draw[cm={cos(-90), sin(-90), -sin(-90), cos(-90), (B$_5$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
+
+% Label Points
+
+\end{tikzpicture}
+&
+
+\begin{tikzpicture}[baseline=8pt]
+% Declare Points
+\coordinate (Q$_5$) at (-0,2.333);
+\coordinate (V$_5$) at (0,1.333);
+\coordinate (W$_5$) at (2,1.333);
+
+% Draw RightTriangle
+\draw (Q$_5$)
+-- (V$_5$) node[midway, left] {\SI{1.5}{dam}}
+-- (W$_5$) node[midway, below] {\SI{2.5}{dam}}
+-- cycle node[midway, above right] {\SI{3.5}{dam}};
+
+% Mark right angles
+\draw[cm={cos(0), sin(0), -sin(0), cos(0), (V$_5$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
+
+% Label Points
+
+\end{tikzpicture}
+\\
+
+\begin{tikzpicture}[baseline=8pt]
+% Declare Points
+\coordinate (L$_6$) at (4.911,0.034);
+\coordinate (P$_6$) at (3.122,0.93);
+\coordinate (Q$_6$) at (2.675,0.036);
+
+% Draw RightTriangle
+\draw (L$_6$)
+-- (P$_6$) node[midway, above right] {\SI{2.5}{dam}}
+-- (Q$_6$) node[midway, above left] {\SI{1.5}{dam}}
+-- cycle node[midway, below] {\SI{3.5}{dam}};
+
+% Mark right angles
+\draw[cm={cos(-116.57), sin(-116.57), -sin(-116.57), cos(-116.57), (P$_6$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
+
+% Label Points
+
+\end{tikzpicture}
+&
+
+\begin{tikzpicture}[baseline=8pt]
+% Declare Points
+\coordinate (G$_7$) at (3.797,0.369);
+\coordinate (J$_7$) at (3.35,1.263);
+\coordinate (K$_7$) at (1.561,0.368);
+
+% Draw RightTriangle
+\draw (G$_7$)
+-- (J$_7$) node[midway, above right] {\SI{1.5}{dam}}
+-- (K$_7$) node[midway, above left] {\SI{2.5}{dam}}
+-- cycle node[midway, below] {\SI{3.5}{dam}};
+
+% Mark right angles
+\draw[cm={cos(-153.42), sin(-153.42), -sin(-153.42), cos(-153.42), (J$_7$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
+
+% Label Points
+
+\end{tikzpicture}
+\\
+
+\begin{tikzpicture}[baseline=17pt]
+% Declare Points
+\coordinate (B$_8$) at (-0.228,1.945);
+\coordinate (D$_8$) at (0.22,1.051);
+\coordinate (E$_8$) at (2.008,1.947);
+
+% Draw RightTriangle
+\draw (B$_8$)
+-- (D$_8$) node[midway, below left] {\SI{1.5}{dam}}
+-- (E$_8$) node[midway, below right] {\SI{2.5}{dam}}
+-- cycle node[midway, above] {\SI{3.5}{dam}};
+
+% Mark right angles
+\draw[cm={cos(26.62), sin(26.62), -sin(26.62), cos(26.62), (D$_8$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
 
 % Label Points
 
@@ -305,23 +305,22 @@ triangle\_1\_1\_1, variant: 1
 
 \begin{tikzpicture}[baseline=17pt]
 % Declare Points
-\coordinate (C$_5$) at (0,0.981);
-\coordinate (D$_5$) at (1.418,0);
-\coordinate (E$_5$) at (2.1,0.981);
+\coordinate (W$_8$) at (-0.008,1.613);
+\coordinate (X$_8$) at (1.78,0.718);
+\coordinate (Y$_8$) at (2.228,1.612);
 
-% Draw Triangle
-\draw (C$_5$)
--- (D$_5$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- (E$_5$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+% Draw RightTriangle
+\draw (W$_8$)
+-- (X$_8$) node[midway, below left] {\SI{2.5}{dam}}
+-- (Y$_8$) node[midway, below right] {\SI{1.5}{dam}}
+-- cycle node[midway, above] {\SI{3.5}{dam}};
 
 % Mark right angles
-\draw[cm={cos(55.19), sin(55.19), -sin(55.19), cos(55.19), (D$_5$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
+\draw[cm={cos(63.38), sin(63.38), -sin(63.38), cos(63.38), (X$_8$)}] (0.25 cm, 0) -- (0.25 cm, 0.25 cm) -- (0, 0.25 cm);
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -332,19 +331,19 @@ triangle\_1\_1\_1, variant: 1
 \begin{tabular}{cc}
 triangle\_2\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=4pt]
 % Declare Points
-\coordinate (O$_5$) at (0,0);
-\coordinate (P$_5$) at (2.8,0);
-\coordinate (Q$_5$) at (1.4,0.592);
+\coordinate (J$_9$) at (0,0);
+\coordinate (K$_9$) at (2.8,0);
+\coordinate (L$_9$) at (1.4,0.592);
 
 % Draw IsoscelesTriangle
-\draw (O$_5$)
--- (P$_5$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (Q$_5$) node[midway, sloped, scale=0.5] {|||}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||};
+\draw (J$_9$)
+-- (K$_9$) node[midway, below] {\SI{1.5}{dam}}
+-- (L$_9$) node[midway, sloped, scale=0.5] {O}
+-- cycle node[midway, above left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {O};
 
 % Label Points
 
@@ -353,66 +352,66 @@ triangle\_2\_1, variant: 0
 
 \begin{tikzpicture}[baseline=2pt]
 % Declare Points
-\coordinate (A$_6$) at (2.8,0.395);
-\coordinate (B$_6$) at (0,0.395);
-\coordinate (C$_6$) at (1.4,-0.197);
+\coordinate (V$_9$) at (2.8,0.395);
+\coordinate (W$_9$) at (0,0.395);
+\coordinate (X$_9$) at (1.4,-0.197);
 
 % Draw IsoscelesTriangle
-\draw (A$_6$)
--- (B$_6$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (C$_6$) node[midway, sloped, scale=0.5] {\bigstar}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar};
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=15pt]
-% Declare Points
-\coordinate (N$_6$) at (1.189,0.389);
-\coordinate (O$_6$) at (1.189,1.189);
-\coordinate (P$_6$) at (-1.177,0.789);
-
-% Draw IsoscelesTriangle
-\draw (N$_6$)
--- (O$_6$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (P$_6$) node[midway, sloped, scale=0.5] {O}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {O};
+\draw (V$_9$)
+-- (W$_9$) node[midway, above] {\SI{1.5}{dam}}
+-- (X$_9$) node[midway, sloped, scale=0.5] {|}
+-- cycle node[midway, below right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|};
 
 % Label Points
 
 \end{tikzpicture}
 \\
+
+\begin{tikzpicture}[baseline=15pt]
+% Declare Points
+\coordinate (I$_10$) at (1.189,0.389);
+\coordinate (J$_10$) at (1.189,1.189);
+\coordinate (K$_10$) at (-1.177,0.789);
+
+% Draw IsoscelesTriangle
+\draw (I$_10$)
+-- (J$_10$) node[midway, right] {\SI{1.5}{dam}}
+-- (K$_10$) node[midway, sloped, scale=0.5] {\square}
+-- cycle node[midway, below] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\square};
+
+% Label Points
+
+\end{tikzpicture}
+&
 
 \begin{tikzpicture}[baseline=23pt]
 % Declare Points
-\coordinate (A$_7$) at (-0.389,1.189);
-\coordinate (B$_7$) at (-0.389,0.389);
-\coordinate (C$_7$) at (1.977,0.789);
+\coordinate (V$_10$) at (-0.389,1.189);
+\coordinate (W$_10$) at (-0.389,0.389);
+\coordinate (X$_10$) at (1.977,0.789);
 
 % Draw IsoscelesTriangle
-\draw (A$_7$)
--- (B$_7$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (C$_7$) node[midway, sloped, scale=0.5] {|}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|};
+\draw (V$_10$)
+-- (W$_10$) node[midway, left] {\SI{1.5}{dam}}
+-- (X$_10$) node[midway, sloped, scale=0.5] {||}
+-- cycle node[midway, above] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||};
 
 % Label Points
 
 \end{tikzpicture}
-&
+\\
 
 \begin{tikzpicture}[baseline=25pt]
 % Declare Points
-\coordinate (N$_7$) at (-0.311,1.315);
-\coordinate (O$_7$) at (-0.444,0.526);
-\coordinate (P$_7$) at (1.955,0.526);
+\coordinate (I$_11$) at (-0.311,1.315);
+\coordinate (J$_11$) at (-0.444,0.526);
+\coordinate (K$_11$) at (1.955,0.526);
 
 % Draw IsoscelesTriangle
-\draw (N$_7$)
--- (O$_7$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (P$_7$) node[midway, sloped, scale=0.5] {||}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||};
+\draw (I$_11$)
+-- (J$_11$) node[midway, left] {\SI{1.5}{dam}}
+-- (K$_11$) node[midway, sloped, scale=0.5] {O}
+-- cycle node[midway, above] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {O};
 
 % Label Points
 
@@ -421,15 +420,15 @@ triangle\_2\_1, variant: 0
 
 \begin{tikzpicture}[baseline=18pt]
 % Declare Points
-\coordinate (A$_8$) at (-0.444,1.052);
-\coordinate (B$_8$) at (-0.311,0.263);
-\coordinate (C$_8$) at (1.955,1.052);
+\coordinate (V$_11$) at (-0.444,1.052);
+\coordinate (W$_11$) at (-0.311,0.263);
+\coordinate (X$_11$) at (1.955,1.052);
 
 % Draw IsoscelesTriangle
-\draw (A$_8$)
--- (B$_8$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (C$_8$) node[midway, sloped, scale=0.5] {\square}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\square};
+\draw (V$_11$)
+-- (W$_11$) node[midway, left] {\SI{1.5}{dam}}
+-- (X$_11$) node[midway, sloped, scale=0.5] {\triangle}
+-- cycle node[midway, above] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\triangle};
 
 % Label Points
 
@@ -438,15 +437,15 @@ triangle\_2\_1, variant: 0
 
 \begin{tikzpicture}[baseline=18pt]
 % Declare Points
-\coordinate (N$_8$) at (1.244,0.526);
-\coordinate (O$_8$) at (1.111,1.315);
-\coordinate (P$_8$) at (-1.155,0.526);
+\coordinate (I$_12$) at (1.244,0.526);
+\coordinate (J$_12$) at (1.111,1.315);
+\coordinate (K$_12$) at (-1.155,0.526);
 
 % Draw IsoscelesTriangle
-\draw (N$_8$)
--- (O$_8$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (P$_8$) node[midway, sloped, scale=0.5] {\triangle}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\triangle};
+\draw (I$_12$)
+-- (J$_12$) node[midway, right] {\SI{1.5}{dam}}
+-- (K$_12$) node[midway, sloped, scale=0.5] {|||}
+-- cycle node[midway, below] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||};
 
 % Label Points
 
@@ -455,20 +454,98 @@ triangle\_2\_1, variant: 0
 
 \begin{tikzpicture}[baseline=15pt]
 % Declare Points
-\coordinate (A$_9$) at (1.111,0.263);
-\coordinate (B$_9$) at (1.244,1.052);
-\coordinate (C$_9$) at (-1.155,1.052);
+\coordinate (V$_12$) at (1.111,0.263);
+\coordinate (W$_12$) at (1.244,1.052);
+\coordinate (X$_12$) at (-1.155,1.052);
 
 % Draw IsoscelesTriangle
-\draw (A$_9$)
--- (B$_9$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (C$_9$) node[midway, sloped, scale=0.5] {\bigstar}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar};
+\draw (V$_12$)
+-- (W$_12$) node[midway, right] {\SI{1.5}{dam}}
+-- (X$_12$) node[midway, sloped, scale=0.5] {\lozenge}
+-- cycle node[midway, below] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge};
+
+% Label Points
+
+\end{tikzpicture}
+\\
+\end{tabular}
+\\
+\end{tabular}
+\newline
+\newpage
+\begin{tabular}{cc}
+triangle\_3, variant: 0
+ \newline &
+\begin{tabular}{cc}
+
+\begin{tikzpicture}[baseline=12pt]
+% Declare Points
+\coordinate (I$_13$) at (0,0);
+\coordinate (J$_13$) at (1.1,0);
+\coordinate (K$_13$) at (0.55,0.953);
+
+% Draw EquilateralTriangle
+\draw (I$_13$)
+-- (J$_13$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (K$_13$) node[midway, sloped, scale=0.5] {\bigstar}
+-- cycle node[midway, above left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar};
 
 % Label Points
 
 \end{tikzpicture}
 &
+
+\begin{tikzpicture}[baseline=0pt]
+% Declare Points
+\coordinate (U$_13$) at (0.55,-0.317);
+\coordinate (V$_13$) at (1.1,0.635);
+\coordinate (W$_13$) at (-0,0.635);
+
+% Draw EquilateralTriangle
+\draw (U$_13$)
+-- (V$_13$) node[midway, sloped, scale=0.5] {||}
+-- (W$_13$) node[midway, sloped, scale=0.5] {||}
+-- cycle node[midway, below left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {||};
+
+% Label Points
+
+\end{tikzpicture}
+\\
+
+\begin{tikzpicture}[baseline=6pt]
+% Declare Points
+\coordinate (H$_14$) at (0.232,-0.232);
+\coordinate (I$_14$) at (1.185,0.316);
+\coordinate (J$_14$) at (0.233,0.868);
+
+% Draw EquilateralTriangle
+\draw (H$_14$)
+-- (I$_14$) node[midway, sloped, scale=0.5] {\square}
+-- (J$_14$) node[midway, sloped, scale=0.5] {\square}
+-- cycle node[midway, left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\square};
+
+% Label Points
+
+\end{tikzpicture}
+&
+
+\begin{tikzpicture}[baseline=0pt]
+% Declare Points
+\coordinate (U$_14$) at (0.868,-0.232);
+\coordinate (V$_14$) at (0.868,0.868);
+\coordinate (W$_14$) at (-0.085,0.318);
+
+% Draw EquilateralTriangle
+\draw (U$_14$)
+-- (V$_14$) node[midway, sloped, scale=0.5] {\triangle}
+-- (W$_14$) node[midway, sloped, scale=0.5] {\triangle}
+-- cycle node[midway, below left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\triangle};
+
+% Label Points
+
+
+\useasboundingbox (-0.2,-0.24) rectangle (0.97,0.97);
+\end{tikzpicture}
 \\
 \end{tabular}
 \\
@@ -477,104 +554,23 @@ triangle\_2\_1, variant: 0
 \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
 \newline
 \begin{tabular}{cc}
-triangle\_3, variant: 0
- \newline &
-\begin{tabular}{ccc}
-
-\begin{tikzpicture}[baseline=12pt]
-% Declare Points
-\coordinate (N$_9$) at (0,0);
-\coordinate (O$_9$) at (1.1,0);
-\coordinate (P$_9$) at (0.55,0.953);
-
-% Draw EquilateralTriangle
-\draw (N$_9$)
--- (O$_9$) node[midway, sloped, scale=0.5] {O}
--- (P$_9$) node[midway, sloped, scale=0.5] {O}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {O};
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=0pt]
-% Declare Points
-\coordinate (Z$_9$) at (0.55,-0.317);
-\coordinate (A$_10$) at (1.1,0.635);
-\coordinate (B$_10$) at (-0,0.635);
-
-% Draw EquilateralTriangle
-\draw (Z$_9$)
--- (A$_10$) node[midway, sloped, scale=0.5] {\lozenge}
--- (B$_10$) node[midway, sloped, scale=0.5] {\lozenge}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge};
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=6pt]
-% Declare Points
-\coordinate (M$_10$) at (0.232,-0.232);
-\coordinate (N$_10$) at (1.185,0.316);
-\coordinate (O$_10$) at (0.233,0.868);
-
-% Draw EquilateralTriangle
-\draw (M$_10$)
--- (N$_10$) node[midway, sloped, scale=0.5] {|||}
--- (O$_10$) node[midway, sloped, scale=0.5] {|||}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|||};
-
-% Label Points
-
-\end{tikzpicture}
-\\
-
-\begin{tikzpicture}[baseline=0pt]
-% Declare Points
-\coordinate (Z$_10$) at (0.868,-0.232);
-\coordinate (A$_11$) at (0.868,0.868);
-\coordinate (B$_11$) at (-0.085,0.318);
-
-% Draw EquilateralTriangle
-\draw (Z$_10$)
--- (A$_11$) node[midway, sloped, scale=0.5] {|}
--- (B$_11$) node[midway, sloped, scale=0.5] {|}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|};
-
-% Label Points
-
-
-\useasboundingbox (-0.2,-0.24) rectangle (0.97,0.97);
-\end{tikzpicture}
-&
-&
-\\
-\end{tabular}
-\\
-\end{tabular}
-\newline
-\newpage
-\begin{tabular}{cc}
 quadrilateral\_1\_1\_1\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=4pt]
 % Declare Points
-\coordinate (M$_11$) at (0,0);
-\coordinate (N$_11$) at (0.6,-0.3);
-\coordinate (O$_11$) at (1.6,0.2);
-\coordinate (P$_11$) at (0.4,1);
+\coordinate (H$_15$) at (0,0);
+\coordinate (I$_15$) at (0.6,-0.3);
+\coordinate (J$_15$) at (1.6,0.2);
+\coordinate (K$_15$) at (0.4,1);
 
 % Draw Quadrilateral
-\draw (M$_11$)
--- (N$_11$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (O$_11$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- (P$_11$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{4.5}{dam}};
+\draw (H$_15$)
+-- (I$_15$) node[midway, below left] {\SI{1.5}{dam}}
+-- (J$_15$) node[midway, below right] {\SI{2.5}{dam}}
+-- (K$_15$) node[midway, above right] {\SI{3.5}{dam}}
+-- cycle node[midway, left] {\SI{4.5}{dam}};
 
 % Label Points
 
@@ -583,36 +579,17 @@ quadrilateral\_1\_1\_1\_1, variant: 0
 
 \begin{tikzpicture}[baseline=4pt]
 % Declare Points
-\coordinate (G$_12$) at (0.875,-0.425);
-\coordinate (H$_12$) at (1.175,0.175);
-\coordinate (I$_12$) at (0.675,1.175);
-\coordinate (J$_12$) at (-0.125,-0.025);
+\coordinate (B$_16$) at (0.875,-0.425);
+\coordinate (C$_16$) at (1.175,0.175);
+\coordinate (D$_16$) at (0.675,1.175);
+\coordinate (E$_16$) at (-0.125,-0.025);
 
 % Draw Quadrilateral
-\draw (G$_12$)
--- (H$_12$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (I$_12$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- (J$_12$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{4.5}{dam}};
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=4pt]
-% Declare Points
-\coordinate (B$_13$) at (0.425,0.875);
-\coordinate (C$_13$) at (0.125,0.275);
-\coordinate (D$_13$) at (0.625,-0.725);
-\coordinate (E$_13$) at (1.425,0.475);
-
-% Draw Quadrilateral
-\draw (B$_13$)
--- (C$_13$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (D$_13$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- (E$_13$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{4.5}{dam}};
+\draw (B$_16$)
+-- (C$_16$) node[midway, below right] {\SI{1.5}{dam}}
+-- (D$_16$) node[midway, above right] {\SI{2.5}{dam}}
+-- (E$_16$) node[midway, above left] {\SI{3.5}{dam}}
+-- cycle node[midway, below] {\SI{4.5}{dam}};
 
 % Label Points
 
@@ -621,17 +598,55 @@ quadrilateral\_1\_1\_1\_1, variant: 0
 
 \begin{tikzpicture}[baseline=4pt]
 % Declare Points
-\coordinate (W$_13$) at (1.3,0.45);
-\coordinate (X$_13$) at (0.7,0.75);
-\coordinate (Y$_13$) at (-0.3,0.25);
-\coordinate (Z$_13$) at (0.9,-0.55);
+\coordinate (W$_16$) at (0.425,0.875);
+\coordinate (X$_16$) at (0.125,0.275);
+\coordinate (Y$_16$) at (0.625,-0.725);
+\coordinate (Z$_16$) at (1.425,0.475);
 
 % Draw Quadrilateral
-\draw (W$_13$)
--- (X$_13$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (Y$_13$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- (Z$_13$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{4.5}{dam}};
+\draw (W$_16$)
+-- (X$_16$) node[midway, above left] {\SI{1.5}{dam}}
+-- (Y$_16$) node[midway, below left] {\SI{2.5}{dam}}
+-- (Z$_16$) node[midway, below right] {\SI{3.5}{dam}}
+-- cycle node[midway, above] {\SI{4.5}{dam}};
+
+% Label Points
+
+\end{tikzpicture}
+&
+
+\begin{tikzpicture}[baseline=4pt]
+% Declare Points
+\coordinate (R$_17$) at (1.3,0.45);
+\coordinate (S$_17$) at (0.7,0.75);
+\coordinate (T$_17$) at (-0.3,0.25);
+\coordinate (U$_17$) at (0.9,-0.55);
+
+% Draw Quadrilateral
+\draw (R$_17$)
+-- (S$_17$) node[midway, above right] {\SI{1.5}{dam}}
+-- (T$_17$) node[midway, above left] {\SI{2.5}{dam}}
+-- (U$_17$) node[midway, below left] {\SI{3.5}{dam}}
+-- cycle node[midway, right] {\SI{4.5}{dam}};
+
+% Label Points
+
+\end{tikzpicture}
+\\
+
+\begin{tikzpicture}[baseline=9pt]
+% Declare Points
+\coordinate (Q$_18$) at (0,0);
+\coordinate (R$_18$) at (1,-0.2);
+\coordinate (S$_18$) at (1.2,0.9);
+\coordinate (T$_18$) at (-0.2,0.8);
+
+% Draw Quadrilateral
+\draw (Q$_18$)
+-- (R$_18$) node[midway, below] {\SI{1.5}{dam}}
+-- (S$_18$) node[midway, right] {\SI{2.5}{dam}}
+-- (T$_18$) node[midway, above] {\SI{3.5}{dam}}
+-- cycle node[midway, left] {\SI{4.5}{dam}};
 
 % Label Points
 
@@ -640,36 +655,17 @@ quadrilateral\_1\_1\_1\_1, variant: 0
 
 \begin{tikzpicture}[baseline=9pt]
 % Declare Points
-\coordinate (V$_14$) at (0,0);
-\coordinate (W$_14$) at (1,-0.2);
-\coordinate (X$_14$) at (1.2,0.9);
-\coordinate (Y$_14$) at (-0.2,0.8);
+\coordinate (K$_19$) at (1,0.75);
+\coordinate (L$_19$) at (0,0.95);
+\coordinate (M$_19$) at (-0.2,-0.15);
+\coordinate (N$_19$) at (1.2,-0.05);
 
 % Draw Quadrilateral
-\draw (V$_14$)
--- (W$_14$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (X$_14$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- (Y$_14$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{4.5}{dam}};
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=9pt]
-% Declare Points
-\coordinate (P$_15$) at (1,0.75);
-\coordinate (Q$_15$) at (0,0.95);
-\coordinate (R$_15$) at (-0.2,-0.15);
-\coordinate (S$_15$) at (1.2,-0.05);
-
-% Draw Quadrilateral
-\draw (P$_15$)
--- (Q$_15$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (R$_15$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- (S$_15$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{4.5}{dam}};
+\draw (K$_19$)
+-- (L$_19$) node[midway, above] {\SI{1.5}{dam}}
+-- (M$_19$) node[midway, left] {\SI{2.5}{dam}}
+-- (N$_19$) node[midway, below] {\SI{3.5}{dam}}
+-- cycle node[midway, right] {\SI{4.5}{dam}};
 
 % Label Points
 
@@ -684,21 +680,21 @@ quadrilateral\_1\_1\_1\_1, variant: 0
 \begin{tabular}{cc}
 quadrilateral\_2\_1\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=-1pt]
 % Declare Points
-\coordinate (G$_16$) at (0,0);
-\coordinate (H$_16$) at (1.2,0.7);
-\coordinate (I$_16$) at (2.4,0);
-\coordinate (J$_16$) at (0.8,-0.4);
+\coordinate (B$_20$) at (0,0);
+\coordinate (C$_20$) at (1.2,0.7);
+\coordinate (D$_20$) at (2.4,0);
+\coordinate (E$_20$) at (0.8,-0.4);
 
 % Draw Quadrilateral
-\draw (G$_16$)
--- (H$_16$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- (I$_16$) node[midway, sloped, scale=0.5] {\square}
--- (J$_16$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}};
+\draw (B$_20$)
+-- (C$_20$) node[midway, above left] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (D$_20$) node[midway, sloped, scale=0.5] {O}
+-- (E$_20$) node[midway, below] {\SI{2.5}{dam}}
+-- cycle node[midway, below left] {\SI{1.5}{dam}};
 
 % Label Points
 
@@ -707,36 +703,17 @@ quadrilateral\_2\_1\_1, variant: 0
 
 \begin{tikzpicture}[baseline=-1pt]
 % Declare Points
-\coordinate (I$_17$) at (2.2,0.15);
-\coordinate (J$_17$) at (1,-0.55);
-\coordinate (K$_17$) at (-0.2,0.15);
-\coordinate (L$_17$) at (1.4,0.55);
+\coordinate (D$_21$) at (2.2,0.15);
+\coordinate (E$_21$) at (1,-0.55);
+\coordinate (F$_21$) at (-0.2,0.15);
+\coordinate (G$_21$) at (1.4,0.55);
 
 % Draw Quadrilateral
-\draw (I$_17$)
--- (J$_17$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (K$_17$) node[midway, sloped, scale=0.5] {\bigstar}
--- (L$_17$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=-3pt]
-% Declare Points
-\coordinate (P$_18$) at (1.2,-0.6);
-\coordinate (Q$_18$) at (0,0);
-\coordinate (R$_18$) at (1.2,0.5);
-\coordinate (S$_18$) at (2.4,0.2);
-
-% Draw Quadrilateral
-\draw (P$_18$)
--- (Q$_18$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (R$_18$) node[midway, sloped, scale=0.5] {||}
--- (S$_18$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}};
+\draw (D$_21$)
+-- (E$_21$) node[midway, below right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- (F$_21$) node[midway, sloped, scale=0.5] {|}
+-- (G$_21$) node[midway, above] {\SI{2.5}{dam}}
+-- cycle node[midway, above right] {\SI{1.5}{dam}};
 
 % Label Points
 
@@ -745,23 +722,40 @@ quadrilateral\_2\_1\_1, variant: 0
 
 \begin{tikzpicture}[baseline=-3pt]
 % Declare Points
-\coordinate (R$_19$) at (1.2,0.65);
-\coordinate (S$_19$) at (2.4,0.05);
-\coordinate (T$_19$) at (1.2,-0.45);
-\coordinate (U$_19$) at (-0,-0.15);
+\coordinate (K$_22$) at (1.2,-0.6);
+\coordinate (L$_22$) at (0,0);
+\coordinate (M$_22$) at (1.2,0.5);
+\coordinate (N$_22$) at (2.4,0.2);
 
 % Draw Quadrilateral
-\draw (R$_19$)
--- (S$_19$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (T$_19$) node[midway, sloped, scale=0.5] {\triangle}
--- (U$_19$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}};
+\draw (K$_22$)
+-- (L$_22$) node[midway, below left] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- (M$_22$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (N$_22$) node[midway, above] {\SI{1.5}{dam}}
+-- cycle node[midway, below right] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
 &
-&
+
+\begin{tikzpicture}[baseline=-3pt]
+% Declare Points
+\coordinate (M$_23$) at (1.2,0.65);
+\coordinate (N$_23$) at (2.4,0.05);
+\coordinate (O$_23$) at (1.2,-0.45);
+\coordinate (P$_23$) at (-0,-0.15);
+
+% Draw Quadrilateral
+\draw (M$_23$)
+-- (N$_23$) node[midway, above right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- (O$_23$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (P$_23$) node[midway, below] {\SI{1.5}{dam}}
+-- cycle node[midway, above left] {\SI{2.5}{dam}};
+
+% Label Points
+
+\end{tikzpicture}
 \\
 \end{tabular}
 \\
@@ -772,21 +766,21 @@ quadrilateral\_2\_1\_1, variant: 0
 \begin{tabular}{cc}
 quadrilateral\_2\_1\_1, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=4pt]
 % Declare Points
-\coordinate (Y$_20$) at (0,0);
-\coordinate (Z$_20$) at (0.8,0.6);
-\coordinate (A$_21$) at (1.8,0.6);
-\coordinate (B$_21$) at (1.2,-0.2);
+\coordinate (T$_24$) at (0,0);
+\coordinate (U$_24$) at (0.8,0.6);
+\coordinate (V$_24$) at (1.8,0.6);
+\coordinate (W$_24$) at (1.2,-0.2);
 
 % Draw Quadrilateral
-\draw (Y$_20$)
--- (Z$_20$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- (A$_21$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (B$_21$) node[midway, sloped, scale=0.5] {O}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}};
+\draw (T$_24$)
+-- (U$_24$) node[midway, above left] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (V$_24$) node[midway, above] {\SI{2.5}{dam}}
+-- (W$_24$) node[midway, sloped, scale=0.5] {|||}
+-- cycle node[midway, below] {\SI{1.5}{dam}};
 
 % Label Points
 
@@ -795,61 +789,59 @@ quadrilateral\_2\_1\_1, variant: 1
 
 \begin{tikzpicture}[baseline=5pt]
 % Declare Points
-\coordinate (A$_22$) at (1.9,0.5);
-\coordinate (B$_22$) at (1.1,-0.1);
-\coordinate (C$_22$) at (0.1,-0.1);
-\coordinate (D$_22$) at (0.7,0.7);
+\coordinate (V$_25$) at (1.9,0.5);
+\coordinate (W$_25$) at (1.1,-0.1);
+\coordinate (X$_25$) at (0.1,-0.1);
+\coordinate (Y$_25$) at (0.7,0.7);
 
 % Draw Quadrilateral
-\draw (A$_22$)
--- (B$_22$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- (C$_22$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- (D$_22$) node[midway, sloped, scale=0.5] {|}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=3pt]
-% Declare Points
-\coordinate (H$_23$) at (0.2,-0.4);
-\coordinate (I$_23$) at (0,0.6);
-\coordinate (J$_23$) at (1.2,0.6);
-\coordinate (K$_23$) at (2.2,0.4);
-
-% Draw Quadrilateral
-\draw (H$_23$)
--- (I$_23$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (J$_23$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (K$_23$) node[midway, sloped, scale=0.5] {|||}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}};
+\draw (V$_25$)
+-- (W$_25$) node[midway, below right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- (X$_25$) node[midway, below] {\SI{1.5}{dam}}
+-- (Y$_25$) node[midway, sloped, scale=0.5] {\square}
+-- cycle node[midway, above] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
 \\
 
-\begin{tikzpicture}[baseline=8pt]
+\begin{tikzpicture}[baseline=3pt]
 % Declare Points
-\coordinate (J$_24$) at (1.6,1);
-\coordinate (K$_24$) at (1.8,-0);
-\coordinate (L$_24$) at (0.6,0);
-\coordinate (M$_24$) at (-0.4,0.2);
+\coordinate (C$_27$) at (0.2,-0.4);
+\coordinate (D$_27$) at (0,0.6);
+\coordinate (E$_27$) at (1.2,0.6);
+\coordinate (F$_27$) at (2.2,0.4);
 
 % Draw Quadrilateral
-\draw (J$_24$)
--- (K$_24$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- (L$_24$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- (M$_24$) node[midway, sloped, scale=0.5] {\square}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+\draw (C$_27$)
+-- (D$_27$) node[midway, left] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (E$_27$) node[midway, above] {\SI{2.5}{dam}}
+-- (F$_27$) node[midway, sloped, scale=0.5] {||}
+-- cycle node[midway, below] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
 &
-&
+
+\begin{tikzpicture}[baseline=8pt]
+% Declare Points
+\coordinate (E$_28$) at (1.6,1);
+\coordinate (F$_28$) at (1.8,-0);
+\coordinate (G$_28$) at (0.6,0);
+\coordinate (H$_28$) at (-0.4,0.2);
+
+% Draw Quadrilateral
+\draw (E$_28$)
+-- (F$_28$) node[midway, right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (G$_28$) node[midway, below] {\SI{2.5}{dam}}
+-- (H$_28$) node[midway, sloped, scale=0.5] {O}
+-- cycle node[midway, above] {\SI{1.5}{dam}};
+
+% Label Points
+
+\end{tikzpicture}
 \\
 \end{tabular}
 \\
@@ -860,21 +852,21 @@ quadrilateral\_2\_1\_1, variant: 1
 \begin{tabular}{cc}
 quadrilateral\_2\_2, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=-9pt]
 % Declare Points
-\coordinate (A$_25$) at (0,0);
-\coordinate (B$_25$) at (1.2,0.2);
-\coordinate (C$_25$) at (2.4,0);
-\coordinate (D$_25$) at (1.2,-0.8);
+\coordinate (V$_28$) at (0,0);
+\coordinate (W$_28$) at (1.2,0.2);
+\coordinate (X$_28$) at (2.4,0);
+\coordinate (Y$_28$) at (1.2,-0.8);
 
 % Draw Quadrilateral
-\draw (A$_25$)
--- (B$_25$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (C$_25$) node[midway, sloped, scale=0.5] {\bigstar}
--- (D$_25$) node[midway, sloped, scale=0.5] {\lozenge}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge};
+\draw (V$_28$)
+-- (W$_28$) node[midway, above] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (X$_28$) node[midway, sloped, scale=0.5] {\triangle}
+-- (Y$_28$) node[midway, sloped, scale=0.5] {\bigstar}
+-- cycle node[midway, below left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar};
 
 % Label Points
 
@@ -883,89 +875,86 @@ quadrilateral\_2\_2, variant: 0
 
 \begin{tikzpicture}[baseline=-5pt]
 % Declare Points
-\coordinate (K$_26$) at (2.4,-0.3);
-\coordinate (L$_26$) at (1.2,-0.5);
-\coordinate (M$_26$) at (-0,-0.3);
-\coordinate (N$_26$) at (1.2,0.5);
+\coordinate (F$_30$) at (2.4,-0.3);
+\coordinate (G$_30$) at (1.2,-0.5);
+\coordinate (H$_30$) at (-0,-0.3);
+\coordinate (I$_30$) at (1.2,0.5);
 
 % Draw Quadrilateral
-\draw (K$_26$)
--- (L$_26$) node[midway, below, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (M$_26$) node[midway, sloped, scale=0.5] {||}
--- (N$_26$) node[midway, sloped, scale=0.5] {\triangle}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\triangle};
+\draw (F$_30$)
+-- (G$_30$) node[midway, below] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- (H$_30$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (I$_30$) node[midway, sloped, scale=0.5] {|}
+-- cycle node[midway, above right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|};
 
 % Label Points
 
 \end{tikzpicture}
-&
+\\
 
 \begin{tikzpicture}[baseline=-4pt]
 % Declare Points
-\coordinate (Z$_27$) at (0.7,-0.5);
-\coordinate (A$_28$) at (0,0);
-\coordinate (B$_28$) at (0.7,0.5);
-\coordinate (C$_28$) at (2.4,0);
+\coordinate (U$_31$) at (0.7,-0.5);
+\coordinate (V$_31$) at (0,0);
+\coordinate (W$_31$) at (0.7,0.5);
+\coordinate (X$_31$) at (2.4,0);
 
 % Draw Quadrilateral
-\draw (Z$_27$)
--- (A$_28$) node[midway, below, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (B$_28$) node[midway, sloped, scale=0.5] {|||}
--- (C$_28$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- cycle node[midway, sloped, scale=0.5] {|};
+\draw (U$_31$)
+-- (V$_31$) node[midway, below left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (W$_31$) node[midway, sloped, scale=0.5] {O}
+-- (X$_31$) node[midway, sloped, scale=0.5] {||}
+-- cycle node[midway, below] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||};
 
 % Label Points
 
 
 \useasboundingbox (0,-0.5) rectangle (2.4,0.7);
 \end{tikzpicture}
-\\
+&
 
 \begin{tikzpicture}[baseline=0pt]
 % Declare Points
-\coordinate (J$_29$) at (1.2,0.5);
-\coordinate (K$_29$) at (1.9,-0);
-\coordinate (L$_29$) at (1.2,-0.5);
-\coordinate (M$_29$) at (-0.5,0);
+\coordinate (E$_33$) at (1.2,0.5);
+\coordinate (F$_33$) at (1.9,-0);
+\coordinate (G$_33$) at (1.2,-0.5);
+\coordinate (H$_33$) at (-0.5,0);
 
 % Draw Quadrilateral
-\draw (J$_29$)
--- (K$_29$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- (L$_29$) node[midway, sloped, scale=0.5] {O}
--- (M$_29$) node[midway, sloped, scale=0.5] {\lozenge}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge};
+\draw (E$_33$)
+-- (F$_33$) node[midway, above right] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (G$_33$) node[midway, sloped, scale=0.5] {\triangle}
+-- (H$_33$) node[midway, below] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- cycle node[midway, sloped, scale=0.5] {\square};
 
 % Label Points
 
 
 \useasboundingbox (0,-0.7) rectangle (2.4,0.5);
 \end{tikzpicture}
-&
-&
 \\
 \end{tabular}
 \\
 \end{tabular}
 \newline
-\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
-\newline
+\newpage
 \begin{tabular}{cc}
 quadrilateral\_2\_2, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=12pt]
 % Declare Points
-\coordinate (Y$_30$) at (0,0);
-\coordinate (Z$_30$) at (0.6,0.8);
-\coordinate (A$_31$) at (2.6,0.8);
-\coordinate (B$_31$) at (2,0);
+\coordinate (T$_34$) at (0,0);
+\coordinate (U$_34$) at (0.6,0.8);
+\coordinate (V$_34$) at (2.6,0.8);
+\coordinate (W$_34$) at (2,0);
 
 % Draw Quadrilateral
-\draw (Y$_30$)
--- (Z$_30$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (A$_31$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (B$_31$) node[midway, sloped, scale=0.5] {\triangle}
+\draw (T$_34$)
+-- (U$_34$) node[midway, above left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (V$_34$) node[midway, above] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (W$_34$) node[midway, sloped, scale=0.5] {|||}
 -- cycle node[midway, sloped, scale=0.5] {||};
 
 % Label Points
@@ -975,36 +964,17 @@ quadrilateral\_2\_2, variant: 1
 
 \begin{tikzpicture}[baseline=5pt]
 % Declare Points
-\coordinate (M$_32$) at (0,0);
-\coordinate (N$_32$) at (-0.6,0.8);
-\coordinate (O$_32$) at (1.4,0.8);
-\coordinate (P$_32$) at (2,0);
+\coordinate (H$_36$) at (0,0);
+\coordinate (I$_36$) at (-0.6,0.8);
+\coordinate (J$_36$) at (1.4,0.8);
+\coordinate (K$_36$) at (2,0);
 
 % Draw Quadrilateral
-\draw (M$_32$)
--- (N$_32$) node[midway, sloped, scale=0.5] {\square}
--- (O$_32$) node[midway, sloped, scale=0.5] {\bigstar}
--- (P$_32$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar};
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=4pt]
-% Declare Points
-\coordinate (A$_34$) at (0,0);
-\coordinate (B$_34$) at (0.2,0.65);
-\coordinate (C$_34$) at (2.1,0.8);
-\coordinate (D$_34$) at (1.9,0.15);
-
-% Draw Quadrilateral
-\draw (A$_34$)
--- (B$_34$) node[midway, sloped, scale=0.5] {O}
--- (C$_34$) node[midway, sloped, scale=0.5] {||}
--- (D$_34$) node[midway, below, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||};
+\draw (H$_36$)
+-- (I$_36$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (J$_36$) node[midway, sloped, scale=0.5] {O}
+-- (K$_36$) node[midway, above right] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- cycle node[midway, below] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {O};
 
 % Label Points
 
@@ -1013,53 +983,71 @@ quadrilateral\_2\_2, variant: 1
 
 \begin{tikzpicture}[baseline=4pt]
 % Declare Points
-\coordinate (O$_35$) at (0,0.8);
-\coordinate (P$_35$) at (1.9,0.65);
-\coordinate (Q$_35$) at (2.1,0);
-\coordinate (R$_35$) at (0.2,0.15);
+\coordinate (V$_37$) at (0,0);
+\coordinate (W$_37$) at (0.2,0.65);
+\coordinate (X$_37$) at (2.1,0.8);
+\coordinate (Y$_37$) at (1.9,0.15);
 
 % Draw Quadrilateral
-\draw (O$_35$)
--- (P$_35$) node[midway, sloped, scale=0.5] {\lozenge}
--- (Q$_35$) node[midway, sloped, scale=0.5] {|}
--- (R$_35$) node[midway, below, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|};
+\draw (V$_37$)
+-- (W$_37$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (X$_37$) node[midway, sloped, scale=0.5] {|}
+-- (Y$_37$) node[midway, right] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- cycle node[midway, below] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|};
 
 % Label Points
 
 \end{tikzpicture}
 &
-&
+
+\begin{tikzpicture}[baseline=4pt]
+% Declare Points
+\coordinate (J$_39$) at (0,0.8);
+\coordinate (K$_39$) at (1.9,0.65);
+\coordinate (L$_39$) at (2.1,0);
+\coordinate (M$_39$) at (0.2,0.15);
+
+% Draw Quadrilateral
+\draw (J$_39$)
+-- (K$_39$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (L$_39$) node[midway, sloped, scale=0.5] {|||}
+-- (M$_39$) node[midway, below] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- cycle node[midway, left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||};
+
+% Label Points
+
+\end{tikzpicture}
 \\
 \end{tabular}
 \\
 \end{tabular}
 \newline
-\newpage
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\newline
 \begin{tabular}{cc}
 quadrilateral\_2\_2, variant: 2
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=1pt]
 % Declare Points
-\coordinate (C$_37$) at (0,0);
-\coordinate (D$_37$) at (2.6,0);
-\coordinate (E$_37$) at (2.6,0.5);
-\coordinate (F$_37$) at (0,0.5);
+\coordinate (X$_40$) at (0,0);
+\coordinate (Y$_40$) at (2.6,0);
+\coordinate (Z$_40$) at (2.6,0.5);
+\coordinate (A$_41$) at (0,0.5);
 
 % Draw Rectangle
-\draw (C$_37$)
--- (D$_37$)
--- (E$_37$)
--- (F$_37$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (X$_40$)
+-- (Y$_40$)
+-- (Z$_40$)
+-- (A$_41$) node[midway, above] {\SI{2.5}{dam}}
+-- cycle node[midway, left] {\SI{1.5}{dam}};
 
 % Mark right angles
-\draw[cm={cos(0), sin(0), -sin(0), cos(0), (C$_37$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(90), sin(90), -sin(90), cos(90), (D$_37$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(180), sin(180), -sin(180), cos(180), (E$_37$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(-90), sin(-90), -sin(-90), cos(-90), (F$_37$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(0), sin(0), -sin(0), cos(0), (X$_40$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(90), sin(90), -sin(90), cos(90), (Y$_40$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(180), sin(180), -sin(180), cos(180), (Z$_40$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(-90), sin(-90), -sin(-90), cos(-90), (A$_41$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
 
 % Label Points
 
@@ -1068,81 +1056,79 @@ quadrilateral\_2\_2, variant: 2
 
 \begin{tikzpicture}[baseline=8pt]
 % Declare Points
-\coordinate (Q$_38$) at (0,0);
-\coordinate (R$_38$) at (2,0);
-\coordinate (S$_38$) at (2,0.7);
-\coordinate (T$_38$) at (0,0.7);
+\coordinate (L$_42$) at (0,0);
+\coordinate (M$_42$) at (2,0);
+\coordinate (N$_42$) at (2,0.7);
+\coordinate (O$_42$) at (0,0.7);
 
 % Draw Rectangle
-\draw (Q$_38$)
--- (R$_38$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- (S$_38$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (T$_38$)
+\draw (L$_42$)
+-- (M$_42$) node[midway, below] {\SI{2.5}{dam}}
+-- (N$_42$) node[midway, right] {\SI{1.5}{dam}}
+-- (O$_42$)
 -- cycle;
 
 % Mark right angles
-\draw[cm={cos(0), sin(0), -sin(0), cos(0), (Q$_38$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(90), sin(90), -sin(90), cos(90), (R$_38$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(180), sin(180), -sin(180), cos(180), (S$_38$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(-90), sin(-90), -sin(-90), cos(-90), (T$_38$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-
-% Label Points
-
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=2pt]
-% Declare Points
-\coordinate (E$_40$) at (0,0);
-\coordinate (F$_40$) at (2.4,0);
-\coordinate (G$_40$) at (2.4,0.6);
-\coordinate (H$_40$) at (0,0.6);
-
-% Draw Rectangle
-\draw (E$_40$)
--- (F$_40$)
--- (G$_40$)
--- (H$_40$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
-
-% Mark right angles
-\draw[cm={cos(0), sin(0), -sin(0), cos(0), (E$_40$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(90), sin(90), -sin(90), cos(90), (F$_40$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(180), sin(180), -sin(180), cos(180), (G$_40$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(-90), sin(-90), -sin(-90), cos(-90), (H$_40$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(0), sin(0), -sin(0), cos(0), (L$_42$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(90), sin(90), -sin(90), cos(90), (M$_42$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(180), sin(180), -sin(180), cos(180), (N$_42$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(-90), sin(-90), -sin(-90), cos(-90), (O$_42$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
 
 % Label Points
 
 \end{tikzpicture}
 \\
 
-\begin{tikzpicture}[baseline=8pt]
+\begin{tikzpicture}[baseline=2pt]
 % Declare Points
-\coordinate (S$_41$) at (0,0);
-\coordinate (T$_41$) at (1.6,0);
-\coordinate (U$_41$) at (1.6,0.8);
-\coordinate (V$_41$) at (0,0.8);
+\coordinate (Z$_43$) at (0,0);
+\coordinate (A$_44$) at (2.4,0);
+\coordinate (B$_44$) at (2.4,0.6);
+\coordinate (C$_44$) at (0,0.6);
 
 % Draw Rectangle
-\draw (S$_41$)
--- (T$_41$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- (U$_41$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (V$_41$)
+\draw (Z$_43$)
+-- (A$_44$)
+-- (B$_44$)
+-- (C$_44$) node[midway, above] {\SI{2.5}{dam}}
+-- cycle node[midway, left] {\SI{1.5}{dam}};
+
+% Mark right angles
+\draw[cm={cos(0), sin(0), -sin(0), cos(0), (Z$_43$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(90), sin(90), -sin(90), cos(90), (A$_44$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(180), sin(180), -sin(180), cos(180), (B$_44$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(-90), sin(-90), -sin(-90), cos(-90), (C$_44$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+
+% Label Points
+
+\end{tikzpicture}
+&
+
+\begin{tikzpicture}[baseline=8pt]
+% Declare Points
+\coordinate (N$_45$) at (0,0);
+\coordinate (O$_45$) at (1.6,0);
+\coordinate (P$_45$) at (1.6,0.8);
+\coordinate (Q$_45$) at (0,0.8);
+
+% Draw Rectangle
+\draw (N$_45$)
+-- (O$_45$) node[midway, below] {\SI{2.5}{dam}}
+-- (P$_45$) node[midway, right] {\SI{1.5}{dam}}
+-- (Q$_45$)
 -- cycle;
 
 % Mark right angles
-\draw[cm={cos(0), sin(0), -sin(0), cos(0), (S$_41$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(90), sin(90), -sin(90), cos(90), (T$_41$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(180), sin(180), -sin(180), cos(180), (U$_41$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(-90), sin(-90), -sin(-90), cos(-90), (V$_41$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(0), sin(0), -sin(0), cos(0), (N$_45$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(90), sin(90), -sin(90), cos(90), (O$_45$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(180), sin(180), -sin(180), cos(180), (P$_45$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(-90), sin(-90), -sin(-90), cos(-90), (Q$_45$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
 
 % Label Points
 
 
 \useasboundingbox (0,-0.2) rectangle (1.6,1);
 \end{tikzpicture}
-&
-&
 \\
 \end{tabular}
 \\
@@ -1153,80 +1139,59 @@ quadrilateral\_2\_2, variant: 2
 \begin{tabular}{cc}
 quadrilateral\_3\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
-\begin{tikzpicture}[baseline=8pt]
+\begin{tikzpicture}[baseline=6pt]
 % Declare Points
-\coordinate (I$_42$) at (0,0);
-\coordinate (J$_42$) at (0.46,0.8);
-\coordinate (K$_42$) at (1.38,0.8);
-\coordinate (L$_42$) at (1.84,0);
+\coordinate (D$_46$) at (0,0);
+\coordinate (E$_46$) at (0.46,0.8);
+\coordinate (F$_46$) at (1.38,0.8);
+\coordinate (G$_46$) at (1.84,0);
 
 % Draw Quadrilateral
-\draw (I$_42$)
--- (J$_42$) node[midway, sloped, scale=0.5] {\lozenge}
--- (K$_42$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
--- (L$_42$) node[midway, sloped, scale=0.5] {\lozenge}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (D$_46$)
+-- (E$_46$) node[midway, sloped, scale=0.5] {||}
+-- (F$_46$) node[midway, sloped, scale=0.5] {||}
+-- (G$_46$) node[midway, above right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- cycle node[midway, below] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
 &
 
-\begin{tikzpicture}[baseline=11pt]
+\begin{tikzpicture}[baseline=10pt]
 % Declare Points
-\coordinate (C$_43$) at (1.84,0.8);
-\coordinate (D$_43$) at (1.38,-0);
-\coordinate (E$_43$) at (0.46,0);
-\coordinate (F$_43$) at (0,0.8);
+\coordinate (X$_46$) at (1.84,0.8);
+\coordinate (Y$_46$) at (1.38,-0);
+\coordinate (Z$_46$) at (0.46,0);
+\coordinate (A$_47$) at (0,0.8);
 
 % Draw Quadrilateral
-\draw (C$_43$)
--- (D$_43$) node[midway, sloped, scale=0.5] {|||}
--- (E$_43$) node[midway, sloped, scale=0.5] {|||}
--- (F$_43$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+\draw (X$_46$)
+-- (Y$_46$) node[midway, below right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (Z$_46$) node[midway, sloped, scale=0.5] {O}
+-- (A$_47$) node[midway, sloped, scale=0.5] {O}
+-- cycle node[midway, above] {\SI{1.5}{dam}};
 
 % Label Points
 
-\end{tikzpicture}
-&
-
-\begin{tikzpicture}[baseline=-1pt]
-% Declare Points
-\coordinate (B$_44$) at (0.02,0.5);
-\coordinate (C$_44$) at (0.9,0.7);
-\coordinate (D$_44$) at (0.9,-0.2);
-\coordinate (E$_44$) at (0.02,0);
-
-% Draw Quadrilateral
-\draw (B$_44$)
--- (C$_44$) node[midway, sloped, scale=0.5] {\square}
--- (D$_44$) node[midway, sloped, scale=0.5] {\square}
--- (E$_44$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
-
-% Label Points
-
-
-\useasboundingbox (0,-0.3) rectangle (0.9,0.9);
 \end{tikzpicture}
 \\
 
 \begin{tikzpicture}[baseline=-1pt]
 % Declare Points
-\coordinate (V$_44$) at (0.9,-0);
-\coordinate (W$_44$) at (0.02,-0.2);
-\coordinate (X$_44$) at (0.02,0.7);
-\coordinate (Y$_44$) at (0.9,0.5);
+\coordinate (W$_47$) at (0.02,0.5);
+\coordinate (X$_47$) at (0.9,0.7);
+\coordinate (Y$_47$) at (0.9,-0.2);
+\coordinate (Z$_47$) at (0.02,0);
 
 % Draw Quadrilateral
-\draw (V$_44$)
--- (W$_44$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (X$_44$) node[midway, sloped, scale=0.5] {\triangle}
--- (Y$_44$) node[midway, sloped, scale=0.5] {\triangle}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+\draw (W$_47$)
+-- (X$_47$) node[midway, sloped, scale=0.5] {\triangle}
+-- (Y$_47$) node[midway, sloped, scale=0.5] {\triangle}
+-- (Z$_47$) node[midway, below] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- cycle node[midway, left] {\SI{1.5}{dam}};
 
 % Label Points
 
@@ -1234,7 +1199,26 @@ quadrilateral\_3\_1, variant: 0
 \useasboundingbox (0,-0.3) rectangle (0.9,0.9);
 \end{tikzpicture}
 &
-&
+
+\begin{tikzpicture}[baseline=-1pt]
+% Declare Points
+\coordinate (Q$_48$) at (0.9,-0);
+\coordinate (R$_48$) at (0.02,-0.2);
+\coordinate (S$_48$) at (0.02,0.7);
+\coordinate (T$_48$) at (0.9,0.5);
+
+% Draw Quadrilateral
+\draw (Q$_48$)
+-- (R$_48$) node[midway, below] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (S$_48$) node[midway, sloped, scale=0.5] {|||}
+-- (T$_48$) node[midway, sloped, scale=0.5] {|||}
+-- cycle node[midway, right] {\SI{1.5}{dam}};
+
+% Label Points
+
+
+\useasboundingbox (0,-0.3) rectangle (0.9,0.9);
+\end{tikzpicture}
 \\
 \end{tabular}
 \\
@@ -1245,28 +1229,27 @@ quadrilateral\_3\_1, variant: 0
 \begin{tabular}{cc}
 quadrilateral\_4, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
-\begin{tikzpicture}[baseline=0pt]
+\begin{tikzpicture}[baseline=-6pt]
 % Declare Points
-\coordinate (M$_45$) at (0,0);
-\coordinate (N$_45$) at (1.109,-0.459);
-\coordinate (O$_45$) at (2.218,0);
-\coordinate (P$_45$) at (1.109,0.459);
+\coordinate (H$_49$) at (0,0);
+\coordinate (I$_49$) at (1.109,-0.459);
+\coordinate (J$_49$) at (2.218,0);
+\coordinate (K$_49$) at (1.109,0.459);
 
 % Draw Rhombus
-\draw (M$_45$)
--- (N$_45$) node[midway, sloped, scale=0.5] {O}
--- (O$_45$) node[midway, sloped, scale=0.5] {O}
--- (P$_45$) node[midway, sloped, scale=0.5] {O}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {O};
+\draw (H$_49$)
+-- (I$_49$) node[midway, sloped, scale=0.5] {\square}
+-- (J$_49$) node[midway, sloped, scale=0.5] {\square}
+-- (K$_49$) node[midway, above] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- cycle node[midway, sloped, scale=0.5] {\square};
 
 % Label Points
 
 
 \useasboundingbox (0,-0.65) rectangle (2.3,0.65);
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -1278,32 +1261,31 @@ quadrilateral\_4, variant: 0
 \begin{tabular}{cc}
 quadrilateral\_4, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
-\begin{tikzpicture}[baseline=12pt]
+\begin{tikzpicture}[baseline=7pt]
 % Declare Points
-\coordinate (C$_46$) at (0,0);
-\coordinate (D$_46$) at (1,0);
-\coordinate (E$_46$) at (1,1);
-\coordinate (F$_46$) at (0,1);
+\coordinate (X$_49$) at (0,0);
+\coordinate (Y$_49$) at (1,0);
+\coordinate (Z$_49$) at (1,1);
+\coordinate (A$_50$) at (0,1);
 
 % Draw Square
-\draw (C$_46$)
--- (D$_46$) node[midway, sloped, scale=0.5] {||}
--- (E$_46$) node[midway, below, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (F$_46$) node[midway, sloped, scale=0.5] {||}
--- cycle node[midway, sloped, scale=0.5] {||};
+\draw (X$_49$)
+-- (Y$_49$) node[midway, sloped, scale=0.5] {|}
+-- (Z$_49$) node[midway, sloped, scale=0.5] {|}
+-- (A$_50$) node[midway, above] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- cycle node[midway, sloped, scale=0.5] {|};
 
 % Mark right angles
-\draw[cm={cos(0), sin(0), -sin(0), cos(0), (C$_46$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(90), sin(90), -sin(90), cos(90), (D$_46$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(180), sin(180), -sin(180), cos(180), (E$_46$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
-\draw[cm={cos(-90), sin(-90), -sin(-90), cos(-90), (F$_46$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(0), sin(0), -sin(0), cos(0), (X$_49$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(90), sin(90), -sin(90), cos(90), (Y$_49$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(180), sin(180), -sin(180), cos(180), (Z$_49$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
+\draw[cm={cos(-90), sin(-90), -sin(-90), cos(-90), (A$_50$)}] (0.15 cm, 0) -- (0.15 cm, 0.15 cm) -- (0, 0.15 cm);
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -1315,23 +1297,23 @@ quadrilateral\_4, variant: 1
 \begin{tabular}{cc}
 pentagon\_1\_1\_1\_1\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=8pt]
 % Declare Points
-\coordinate (S$_46$) at (0.6,0);
-\coordinate (T$_46$) at (0,0.4);
-\coordinate (U$_46$) at (1.2,0.8);
-\coordinate (V$_46$) at (2.4,0.4);
-\coordinate (W$_46$) at (1.8,0);
+\coordinate (N$_50$) at (0.6,0);
+\coordinate (O$_50$) at (0,0.4);
+\coordinate (P$_50$) at (1.2,0.8);
+\coordinate (Q$_50$) at (2.4,0.4);
+\coordinate (R$_50$) at (1.8,0);
 
 % Draw Pentagon
-\draw (S$_46$)
--- (T$_46$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (U$_46$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- (V$_46$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- (W$_46$) node[midway, below, sloped] {\SI{4.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{5.5}{dam}};
+\draw (N$_50$)
+-- (O$_50$) node[midway, below left] {\SI{1.5}{dam}}
+-- (P$_50$) node[midway, above] {\SI{2.5}{dam}}
+-- (Q$_50$) node[midway, above] {\SI{3.5}{dam}}
+-- (R$_50$) node[midway, below right] {\SI{4.5}{dam}}
+-- cycle node[midway, below] {\SI{5.5}{dam}};
 
 % Label Points
 
@@ -1340,24 +1322,23 @@ pentagon\_1\_1\_1\_1\_1, variant: 0
 
 \begin{tikzpicture}[baseline=6pt]
 % Declare Points
-\coordinate (M$_47$) at (1.8,0.64);
-\coordinate (N$_47$) at (2.4,0.24);
-\coordinate (O$_47$) at (1.2,-0.16);
-\coordinate (P$_47$) at (-0,0.24);
-\coordinate (Q$_47$) at (0.6,0.64);
+\coordinate (H$_51$) at (1.8,0.64);
+\coordinate (I$_51$) at (2.4,0.24);
+\coordinate (J$_51$) at (1.2,-0.16);
+\coordinate (K$_51$) at (-0,0.24);
+\coordinate (L$_51$) at (0.6,0.64);
 
 % Draw Pentagon
-\draw (M$_47$)
--- (N$_47$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (O$_47$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- (P$_47$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- (Q$_47$) node[midway, above, sloped] {\SI{4.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{5.5}{dam}};
+\draw (H$_51$)
+-- (I$_51$) node[midway, above right] {\SI{1.5}{dam}}
+-- (J$_51$) node[midway, below] {\SI{2.5}{dam}}
+-- (K$_51$) node[midway, below] {\SI{3.5}{dam}}
+-- (L$_51$) node[midway, above left] {\SI{4.5}{dam}}
+-- cycle node[midway, above] {\SI{5.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -1368,23 +1349,23 @@ pentagon\_1\_1\_1\_1\_1, variant: 0
 \begin{tabular}{cc}
 pentagon\_2\_1\_1\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=3pt]
 % Declare Points
-\coordinate (H$_48$) at (1.05,-0.2);
-\coordinate (I$_48$) at (0.3,-0.1);
-\coordinate (J$_48$) at (0,0.6);
-\coordinate (K$_48$) at (1.4,0.6);
-\coordinate (L$_48$) at (2.4,0.1);
+\coordinate (C$_52$) at (1.05,-0.2);
+\coordinate (D$_52$) at (0.3,-0.1);
+\coordinate (E$_52$) at (0,0.6);
+\coordinate (F$_52$) at (1.4,0.6);
+\coordinate (G$_52$) at (2.4,0.1);
 
 % Draw Pentagon
-\draw (H$_48$)
--- (I$_48$) node[midway, below, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- (J$_48$) node[midway, sloped, scale=0.5] {|}
--- (K$_48$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (L$_48$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{3.5}{dam}};
+\draw (C$_52$)
+-- (D$_52$) node[midway, below] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (E$_52$) node[midway, sloped, scale=0.5] {||}
+-- (F$_52$) node[midway, above] {\SI{3.5}{dam}}
+-- (G$_52$) node[midway, above right] {\SI{2.5}{dam}}
+-- cycle node[midway, below] {\SI{1.5}{dam}};
 
 % Label Points
 
@@ -1393,24 +1374,23 @@ pentagon\_2\_1\_1\_1, variant: 0
 
 \begin{tikzpicture}[baseline=3pt]
 % Declare Points
-\coordinate (G$_49$) at (1.01,0.6);
-\coordinate (H$_49$) at (1.76,0.5);
-\coordinate (I$_49$) at (2.06,-0.2);
-\coordinate (J$_49$) at (0.66,-0.2);
-\coordinate (K$_49$) at (-0.34,0.3);
+\coordinate (B$_53$) at (1.01,0.6);
+\coordinate (C$_53$) at (1.76,0.5);
+\coordinate (D$_53$) at (2.06,-0.2);
+\coordinate (E$_53$) at (0.66,-0.2);
+\coordinate (F$_53$) at (-0.34,0.3);
 
 % Draw Pentagon
-\draw (G$_49$)
--- (H$_49$) node[midway, above, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (I$_49$) node[midway, sloped, scale=0.5] {\bigstar}
--- (J$_49$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (K$_49$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{3.5}{dam}};
+\draw (B$_53$)
+-- (C$_53$) node[midway, above] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- (D$_53$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (E$_53$) node[midway, below] {\SI{3.5}{dam}}
+-- (F$_53$) node[midway, below left] {\SI{1.5}{dam}}
+-- cycle node[midway, above] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -1421,23 +1401,23 @@ pentagon\_2\_1\_1\_1, variant: 0
 \begin{tabular}{cc}
 pentagon\_2\_1\_1\_1, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=9pt]
 % Declare Points
-\coordinate (L$_50$) at (0.2,0);
-\coordinate (M$_50$) at (0,0.57);
-\coordinate (N$_50$) at (1.2,0.8);
-\coordinate (O$_50$) at (1.95,0.4);
-\coordinate (P$_50$) at (1.5,0);
+\coordinate (G$_54$) at (0.2,0);
+\coordinate (H$_54$) at (0,0.57);
+\coordinate (I$_54$) at (1.2,0.8);
+\coordinate (J$_54$) at (1.95,0.4);
+\coordinate (K$_54$) at (1.5,0);
 
 % Draw Pentagon
-\draw (L$_50$)
--- (M$_50$) node[midway, below, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (N$_50$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- (O$_50$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- (P$_50$) node[midway, sloped, scale=0.5] {|||}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (G$_54$)
+-- (H$_54$) node[midway, left] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (I$_54$) node[midway, above] {\SI{1.5}{dam}}
+-- (J$_54$) node[midway, above right] {\SI{2.5}{dam}}
+-- (K$_54$) node[midway, sloped, scale=0.5] {O}
+-- cycle node[midway, below] {\SI{3.5}{dam}};
 
 % Label Points
 
@@ -1446,51 +1426,49 @@ pentagon\_2\_1\_1\_1, variant: 1
 
 \begin{tikzpicture}[baseline=6pt]
 % Declare Points
-\coordinate (K$_51$) at (1.74,0.708);
-\coordinate (L$_51$) at (1.94,0.138);
-\coordinate (M$_51$) at (0.74,-0.092);
-\coordinate (N$_51$) at (-0.01,0.308);
-\coordinate (O$_51$) at (0.44,0.708);
+\coordinate (F$_55$) at (1.74,0.708);
+\coordinate (G$_55$) at (1.94,0.138);
+\coordinate (H$_55$) at (0.74,-0.092);
+\coordinate (I$_55$) at (-0.01,0.308);
+\coordinate (J$_55$) at (0.44,0.708);
 
 % Draw Pentagon
-\draw (K$_51$)
--- (L$_51$) node[midway, above, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (M$_51$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- (N$_51$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (O$_51$) node[midway, sloped, scale=0.5] {\triangle}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}};
+\draw (F$_55$)
+-- (G$_55$) node[midway, right] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- (H$_55$) node[midway, below] {\SI{1.5}{dam}}
+-- (I$_55$) node[midway, below left] {\SI{3.5}{dam}}
+-- (J$_55$) node[midway, sloped, scale=0.5] {\bigstar}
+-- cycle node[midway, above] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
 \end{tabular}
 \newline
-\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
-\newline
+\newpage
 \begin{tabular}{cc}
 pentagon\_2\_2\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=8pt]
 % Declare Points
-\coordinate (F$_52$) at (1,0);
-\coordinate (G$_52$) at (0.08,0.4);
-\coordinate (H$_52$) at (0.77,0.8);
-\coordinate (I$_52$) at (1.57,0.7);
-\coordinate (J$_52$) at (2,0.1);
+\coordinate (A$_56$) at (1,0);
+\coordinate (B$_56$) at (0.08,0.4);
+\coordinate (C$_56$) at (0.77,0.8);
+\coordinate (D$_56$) at (1.57,0.7);
+\coordinate (E$_56$) at (2,0.1);
 
 % Draw Pentagon
-\draw (F$_52$)
--- (G$_52$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- (H$_52$) node[midway, sloped, scale=0.5] {O}
--- (I$_52$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- (J$_52$) node[midway, sloped, scale=0.5] {\square}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (A$_56$)
+-- (B$_56$) node[midway, below left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (C$_56$) node[midway, sloped, scale=0.5] {|||}
+-- (D$_56$) node[midway, above] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (E$_56$) node[midway, sloped, scale=0.5] {||}
+-- cycle node[midway, below] {\SI{1.5}{dam}};
 
 % Label Points
 
@@ -1499,24 +1477,23 @@ pentagon\_2\_2\_1, variant: 0
 
 \begin{tikzpicture}[baseline=8pt]
 % Declare Points
-\coordinate (J$_53$) at (1.168,0.8);
-\coordinate (K$_53$) at (2.088,0.4);
-\coordinate (L$_53$) at (1.398,-0);
-\coordinate (M$_53$) at (0.598,0.1);
-\coordinate (N$_53$) at (0.168,0.7);
+\coordinate (E$_57$) at (1.168,0.8);
+\coordinate (F$_57$) at (2.088,0.4);
+\coordinate (G$_57$) at (1.398,-0);
+\coordinate (H$_57$) at (0.598,0.1);
+\coordinate (I$_57$) at (0.168,0.7);
 
 % Draw Pentagon
-\draw (J$_53$)
--- (K$_53$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
--- (L$_53$) node[midway, sloped, scale=0.5] {\lozenge}
--- (M$_53$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (N$_53$) node[midway, sloped, scale=0.5] {||}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+\draw (E$_57$)
+-- (F$_57$) node[midway, above right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- (G$_57$) node[midway, sloped, scale=0.5] {|}
+-- (H$_57$) node[midway, below] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (I$_57$) node[midway, sloped, scale=0.5] {\triangle}
+-- cycle node[midway, above] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -1527,23 +1504,23 @@ pentagon\_2\_2\_1, variant: 0
 \begin{tabular}{cc}
 pentagon\_2\_2\_1, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=7pt]
 % Declare Points
-\coordinate (T$_54$) at (0.5,0);
-\coordinate (U$_54$) at (0,0.33);
-\coordinate (V$_54$) at (0.88,0.8);
-\coordinate (W$_54$) at (1.86,0.59);
-\coordinate (X$_54$) at (1.73,0);
+\coordinate (O$_58$) at (0.5,0);
+\coordinate (P$_58$) at (0,0.33);
+\coordinate (Q$_58$) at (0.88,0.8);
+\coordinate (R$_58$) at (1.86,0.59);
+\coordinate (S$_58$) at (1.73,0);
 
 % Draw Pentagon
-\draw (T$_54$)
--- (U$_54$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (V$_54$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (W$_54$) node[midway, sloped, scale=0.5] {\bigstar}
--- (X$_54$) node[midway, sloped, scale=0.5] {|||}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (O$_58$)
+-- (P$_58$) node[midway, below left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- (Q$_58$) node[midway, above left] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (R$_58$) node[midway, sloped, scale=0.5] {||}
+-- (S$_58$) node[midway, sloped, scale=0.5] {\square}
+-- cycle node[midway, below] {\SI{1.5}{dam}};
 
 % Label Points
 
@@ -1552,50 +1529,50 @@ pentagon\_2\_2\_1, variant: 1
 
 \begin{tikzpicture}[baseline=7pt]
 % Declare Points
-\coordinate (X$_55$) at (1.488,0.688);
-\coordinate (Y$_55$) at (1.988,0.358);
-\coordinate (Z$_55$) at (1.108,-0.112);
-\coordinate (A$_56$) at (0.128,0.098);
-\coordinate (B$_56$) at (0.258,0.688);
+\coordinate (S$_59$) at (1.488,0.688);
+\coordinate (T$_59$) at (1.988,0.358);
+\coordinate (U$_59$) at (1.108,-0.112);
+\coordinate (V$_59$) at (0.128,0.098);
+\coordinate (W$_59$) at (0.258,0.688);
 
 % Draw Pentagon
-\draw (X$_55$)
--- (Y$_55$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (Z$_55$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- (A$_56$) node[midway, sloped, scale=0.5] {|}
--- (B$_56$) node[midway, sloped, scale=0.5] {\triangle}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+\draw (S$_59$)
+-- (T$_59$) node[midway, above right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- (U$_59$) node[midway, below right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (V$_59$) node[midway, sloped, scale=0.5] {O}
+-- (W$_59$) node[midway, sloped, scale=0.5] {\bigstar}
+-- cycle node[midway, above] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
 \end{tabular}
 \newline
-\newpage
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\newline
 \begin{tabular}{cc}
 pentagon\_2\_2\_1, variant: 2
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=6pt]
 % Declare Points
-\coordinate (H$_57$) at (0.71,-0.1);
-\coordinate (I$_57$) at (0,0.46);
-\coordinate (J$_57$) at (0.76,0.7);
-\coordinate (K$_57$) at (1.64,0.5);
-\coordinate (L$_57$) at (1.5,0);
+\coordinate (C$_61$) at (0.71,-0.1);
+\coordinate (D$_61$) at (0,0.46);
+\coordinate (E$_61$) at (0.76,0.7);
+\coordinate (F$_61$) at (1.64,0.5);
+\coordinate (G$_61$) at (1.5,0);
 
 % Draw Pentagon
-\draw (H$_57$)
--- (I$_57$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- (J$_57$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
--- (K$_57$) node[midway, sloped, scale=0.5] {O}
--- (L$_57$) node[midway, sloped, scale=0.5] {\lozenge}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (C$_61$)
+-- (D$_61$) node[midway, below left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- (E$_61$) node[midway, above] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (F$_61$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (G$_61$) node[midway, sloped, scale=0.5] {|||}
+-- cycle node[midway, below] {\SI{1.5}{dam}};
 
 % Label Points
 
@@ -1604,24 +1581,23 @@ pentagon\_2\_2\_1, variant: 2
 
 \begin{tikzpicture}[baseline=6pt]
 % Declare Points
-\coordinate (L$_58$) at (1.134,0.724);
-\coordinate (M$_58$) at (1.844,0.164);
-\coordinate (N$_58$) at (1.084,-0.076);
-\coordinate (O$_58$) at (0.204,0.124);
-\coordinate (P$_58$) at (0.344,0.624);
+\coordinate (G$_62$) at (1.134,0.724);
+\coordinate (H$_62$) at (1.844,0.164);
+\coordinate (I$_62$) at (1.084,-0.076);
+\coordinate (J$_62$) at (0.204,0.124);
+\coordinate (K$_62$) at (0.344,0.624);
 
 % Draw Pentagon
-\draw (L$_58$)
--- (M$_58$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (N$_58$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (O$_58$) node[midway, sloped, scale=0.5] {|||}
--- (P$_58$) node[midway, sloped, scale=0.5] {||}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+\draw (G$_62$)
+-- (H$_62$) node[midway, above right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (I$_62$) node[midway, below] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- (J$_62$) node[midway, sloped, scale=0.5] {||}
+-- (K$_62$) node[midway, sloped, scale=0.5] {\square}
+-- cycle node[midway, above] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -1632,23 +1608,23 @@ pentagon\_2\_2\_1, variant: 2
 \begin{tabular}{cc}
 pentagon\_3\_1\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=8pt]
 % Declare Points
-\coordinate (G$_59$) at (0,0.3);
-\coordinate (H$_59$) at (0.62,0.8);
-\coordinate (I$_59$) at (1.42,0.8);
-\coordinate (J$_59$) at (1.81,0.1);
-\coordinate (K$_59$) at (0.7,0);
+\coordinate (B$_63$) at (0,0.3);
+\coordinate (C$_63$) at (0.62,0.8);
+\coordinate (D$_63$) at (1.42,0.8);
+\coordinate (E$_63$) at (1.81,0.1);
+\coordinate (F$_63$) at (0.7,0);
 
 % Draw Pentagon
-\draw (G$_59$)
--- (H$_59$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- (I$_59$) node[midway, sloped, scale=0.5] {\square}
--- (J$_59$) node[midway, sloped, scale=0.5] {\square}
--- (K$_59$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}};
+\draw (B$_63$)
+-- (C$_63$) node[midway, above left] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (D$_63$) node[midway, sloped, scale=0.5] {\triangle}
+-- (E$_63$) node[midway, sloped, scale=0.5] {\triangle}
+-- (F$_63$) node[midway, below] {\SI{1.5}{dam}}
+-- cycle node[midway, below left] {\SI{2.5}{dam}};
 
 % Label Points
 
@@ -1657,24 +1633,23 @@ pentagon\_3\_1\_1, variant: 0
 
 \begin{tikzpicture}[baseline=9pt]
 % Declare Points
-\coordinate (F$_60$) at (1.82,0.5);
-\coordinate (G$_60$) at (1.2,-0);
-\coordinate (H$_60$) at (0.4,0);
-\coordinate (I$_60$) at (0.01,0.7);
-\coordinate (J$_60$) at (1.12,0.8);
+\coordinate (A$_64$) at (1.82,0.5);
+\coordinate (B$_64$) at (1.2,-0);
+\coordinate (C$_64$) at (0.4,0);
+\coordinate (D$_64$) at (0.01,0.7);
+\coordinate (E$_64$) at (1.12,0.8);
 
 % Draw Pentagon
-\draw (F$_60$)
--- (G$_60$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- (H$_60$) node[midway, sloped, scale=0.5] {|}
--- (I$_60$) node[midway, sloped, scale=0.5] {|}
--- (J$_60$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+\draw (A$_64$)
+-- (B$_64$) node[midway, below right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- (C$_64$) node[midway, sloped, scale=0.5] {|}
+-- (D$_64$) node[midway, sloped, scale=0.5] {|}
+-- (E$_64$) node[midway, above] {\SI{2.5}{dam}}
+-- cycle node[midway, above right] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -1685,23 +1660,23 @@ pentagon\_3\_1\_1, variant: 0
 \begin{tabular}{cc}
 pentagon\_3\_1\_1, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=9pt]
 % Declare Points
-\coordinate (K$_61$) at (0.3,0.6);
-\coordinate (L$_61$) at (1.28,0.8);
-\coordinate (M$_61$) at (2.26,0.6);
-\coordinate (N$_61$) at (1.4,0);
-\coordinate (O$_61$) at (0.4,0);
+\coordinate (F$_65$) at (0.3,0.6);
+\coordinate (G$_65$) at (1.28,0.8);
+\coordinate (H$_65$) at (2.26,0.6);
+\coordinate (I$_65$) at (1.4,0);
+\coordinate (J$_65$) at (0.4,0);
 
 % Draw Pentagon
-\draw (K$_61$)
--- (L$_61$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (M$_61$) node[midway, sloped, scale=0.5] {\bigstar}
--- (N$_61$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- (O$_61$) node[midway, sloped, scale=0.5] {\bigstar}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (F$_65$)
+-- (G$_65$) node[midway, above] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (H$_65$) node[midway, sloped, scale=0.5] {O}
+-- (I$_65$) node[midway, below right] {\SI{1.5}{dam}}
+-- (J$_65$) node[midway, sloped, scale=0.5] {O}
+-- cycle node[midway, left] {\SI{2.5}{dam}};
 
 % Label Points
 
@@ -1710,24 +1685,23 @@ pentagon\_3\_1\_1, variant: 1
 
 \begin{tikzpicture}[baseline=7pt]
 % Declare Points
-\coordinate (J$_62$) at (1.956,0.2);
-\coordinate (K$_62$) at (0.976,0);
-\coordinate (L$_62$) at (-0.004,0.2);
-\coordinate (M$_62$) at (0.856,0.8);
-\coordinate (N$_62$) at (1.856,0.8);
+\coordinate (E$_66$) at (1.956,0.2);
+\coordinate (F$_66$) at (0.976,0);
+\coordinate (G$_66$) at (-0.004,0.2);
+\coordinate (H$_66$) at (0.856,0.8);
+\coordinate (I$_66$) at (1.856,0.8);
 
 % Draw Pentagon
-\draw (J$_62$)
--- (K$_62$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (L$_62$) node[midway, sloped, scale=0.5] {\triangle}
--- (M$_62$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (N$_62$) node[midway, sloped, scale=0.5] {\triangle}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}};
+\draw (E$_66$)
+-- (F$_66$) node[midway, below] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- (G$_66$) node[midway, sloped, scale=0.5] {\square}
+-- (H$_66$) node[midway, above left] {\SI{2.5}{dam}}
+-- (I$_66$) node[midway, sloped, scale=0.5] {\square}
+-- cycle node[midway, right] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -1738,23 +1712,23 @@ pentagon\_3\_1\_1, variant: 1
 \begin{tabular}{cc}
 pentagon\_3\_2, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=6pt]
 % Declare Points
-\coordinate (E$_63$) at (0,0);
-\coordinate (F$_63$) at (0.33,0.73);
-\coordinate (G$_63$) at (1.12,0.8);
-\coordinate (H$_63$) at (1.86,0.5);
-\coordinate (I$_63$) at (1,0);
+\coordinate (Z$_66$) at (0,0);
+\coordinate (A$_67$) at (0.33,0.73);
+\coordinate (B$_67$) at (1.12,0.8);
+\coordinate (C$_67$) at (1.86,0.5);
+\coordinate (D$_67$) at (1,0);
 
 % Draw Pentagon
-\draw (E$_63$)
--- (F$_63$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
--- (G$_63$) node[midway, sloped, scale=0.5] {\lozenge}
--- (H$_63$) node[midway, sloped, scale=0.5] {\lozenge}
--- (I$_63$) node[midway, below, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- cycle node[midway, sloped, scale=0.5] {O};
+\draw (Z$_66$)
+-- (A$_67$) node[midway, above left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (B$_67$) node[midway, sloped, scale=0.5] {|||}
+-- (C$_67$) node[midway, sloped, scale=0.5] {|||}
+-- (D$_67$) node[midway, below right] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- cycle node[midway, sloped, scale=0.5] {\lozenge};
 
 % Label Points
 
@@ -1763,24 +1737,23 @@ pentagon\_3\_2, variant: 0
 
 \begin{tikzpicture}[baseline=12pt]
 % Declare Points
-\coordinate (D$_64$) at (1.724,0.812);
-\coordinate (E$_64$) at (1.394,0.082);
-\coordinate (F$_64$) at (0.604,0.012);
-\coordinate (G$_64$) at (-0.136,0.312);
-\coordinate (H$_64$) at (0.724,0.812);
+\coordinate (Y$_67$) at (1.724,0.812);
+\coordinate (Z$_67$) at (1.394,0.082);
+\coordinate (A$_68$) at (0.604,0.012);
+\coordinate (B$_68$) at (-0.136,0.312);
+\coordinate (C$_68$) at (0.724,0.812);
 
 % Draw Pentagon
-\draw (D$_64$)
--- (E$_64$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (F$_64$) node[midway, sloped, scale=0.5] {|||}
--- (G$_64$) node[midway, sloped, scale=0.5] {|||}
--- (H$_64$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- cycle node[midway, sloped, scale=0.5] {|};
+\draw (Y$_67$)
+-- (Z$_67$) node[midway, below right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- (A$_68$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (B$_68$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (C$_68$) node[midway, above left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- cycle node[midway, sloped, scale=0.5] {||};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -1791,23 +1764,23 @@ pentagon\_3\_2, variant: 0
 \begin{tabular}{cc}
 pentagon\_3\_2, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (I$_65$) at (0,0);
-\coordinate (J$_65$) at (0.33,0.73);
-\coordinate (K$_65$) at (1.12,0.8);
-\coordinate (L$_65$) at (1.86,0.5);
-\coordinate (M$_65$) at (1,0);
+\coordinate (D$_69$) at (0,0);
+\coordinate (E$_69$) at (0.33,0.73);
+\coordinate (F$_69$) at (1.12,0.8);
+\coordinate (G$_69$) at (1.86,0.5);
+\coordinate (H$_69$) at (1,0);
 
 % Draw Pentagon
-\draw (I$_65$)
--- (J$_65$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- (K$_65$) node[midway, sloped, scale=0.5] {\square}
--- (L$_65$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (M$_65$) node[midway, sloped, scale=0.5] {\square}
--- cycle node[midway, sloped, scale=0.5] {\bigstar};
+\draw (D$_69$)
+-- (E$_69$) node[midway, above left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (F$_69$) node[midway, sloped, scale=0.5] {|||}
+-- (G$_69$) node[midway, above] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- (H$_69$) node[midway, sloped, scale=0.5] {|||}
+-- cycle node[midway, sloped, scale=0.5] {\square};
 
 % Label Points
 
@@ -1816,24 +1789,23 @@ pentagon\_3\_2, variant: 1
 
 \begin{tikzpicture}[baseline=4pt]
 % Declare Points
-\coordinate (H$_66$) at (1.724,0.812);
-\coordinate (I$_66$) at (1.394,0.082);
-\coordinate (J$_66$) at (0.604,0.012);
-\coordinate (K$_66$) at (-0.136,0.312);
-\coordinate (L$_66$) at (0.724,0.812);
+\coordinate (C$_70$) at (1.724,0.812);
+\coordinate (D$_70$) at (1.394,0.082);
+\coordinate (E$_70$) at (0.604,0.012);
+\coordinate (F$_70$) at (-0.136,0.312);
+\coordinate (G$_70$) at (0.724,0.812);
 
 % Draw Pentagon
-\draw (H$_66$)
--- (I$_66$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (J$_66$) node[midway, sloped, scale=0.5] {||}
--- (K$_66$) node[midway, below, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (L$_66$) node[midway, sloped, scale=0.5] {||}
--- cycle node[midway, sloped, scale=0.5] {|||};
+\draw (C$_70$)
+-- (D$_70$) node[midway, below right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (E$_70$) node[midway, sloped, scale=0.5] {O}
+-- (F$_70$) node[midway, below] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- (G$_70$) node[midway, sloped, scale=0.5] {O}
+-- cycle node[midway, sloped, scale=0.5] {|};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -1844,23 +1816,23 @@ pentagon\_3\_2, variant: 1
 \begin{tabular}{cc}
 pentagon\_4\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (C$_67$) at (0.21,0.73);
-\coordinate (D$_67$) at (1.11,0.8);
-\coordinate (E$_67$) at (1.78,0.2);
-\coordinate (F$_67$) at (0.9,0);
-\coordinate (G$_67$) at (0,0);
+\coordinate (X$_70$) at (0.21,0.73);
+\coordinate (Y$_70$) at (1.11,0.8);
+\coordinate (Z$_70$) at (1.78,0.2);
+\coordinate (A$_71$) at (0.9,0);
+\coordinate (B$_71$) at (0,0);
 
 % Draw Pentagon
-\draw (C$_67$)
--- (D$_67$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
--- (E$_67$) node[midway, sloped, scale=0.5] {\lozenge}
--- (F$_67$) node[midway, sloped, scale=0.5] {\lozenge}
--- (G$_67$) node[midway, sloped, scale=0.5] {\lozenge}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+\draw (X$_70$)
+-- (Y$_70$) node[midway, above] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (Z$_70$) node[midway, sloped, scale=0.5] {\triangle}
+-- (A$_71$) node[midway, sloped, scale=0.5] {\triangle}
+-- (B$_71$) node[midway, sloped, scale=0.5] {\triangle}
+-- cycle node[midway, left] {\SI{1.5}{dam}};
 
 % Label Points
 
@@ -1869,24 +1841,23 @@ pentagon\_4\_1, variant: 0
 
 \begin{tikzpicture}[baseline=1pt]
 % Declare Points
-\coordinate (W$_67$) at (1.39,-0.038);
-\coordinate (X$_67$) at (0.49,-0.108);
-\coordinate (Y$_67$) at (-0.18,0.492);
-\coordinate (Z$_67$) at (0.7,0.692);
-\coordinate (A$_68$) at (1.6,0.692);
+\coordinate (R$_71$) at (1.39,-0.038);
+\coordinate (S$_71$) at (0.49,-0.108);
+\coordinate (T$_71$) at (-0.18,0.492);
+\coordinate (U$_71$) at (0.7,0.692);
+\coordinate (V$_71$) at (1.6,0.692);
 
 % Draw Pentagon
-\draw (W$_67$)
--- (X$_67$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (Y$_67$) node[midway, sloped, scale=0.5] {\triangle}
--- (Z$_67$) node[midway, sloped, scale=0.5] {\triangle}
--- (A$_68$) node[midway, sloped, scale=0.5] {\triangle}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (R$_71$)
+-- (S$_71$) node[midway, below] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (T$_71$) node[midway, sloped, scale=0.5] {||}
+-- (U$_71$) node[midway, sloped, scale=0.5] {||}
+-- (V$_71$) node[midway, sloped, scale=0.5] {||}
+-- cycle node[midway, right] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -1897,23 +1868,23 @@ pentagon\_4\_1, variant: 0
 \begin{tabular}{cc}
 pentagon\_5, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=16pt]
 % Declare Points
-\coordinate (R$_68$) at (-0.22,0.67);
-\coordinate (S$_68$) at (0.35,1.08);
-\coordinate (T$_68$) at (0.92,0.67);
-\coordinate (U$_68$) at (0.7,0);
-\coordinate (V$_68$) at (0,0);
+\coordinate (M$_72$) at (-0.22,0.67);
+\coordinate (N$_72$) at (0.35,1.08);
+\coordinate (O$_72$) at (0.92,0.67);
+\coordinate (P$_72$) at (0.7,0);
+\coordinate (Q$_72$) at (0,0);
 
 % Draw Pentagon
-\draw (R$_68$)
--- (S$_68$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- (T$_68$) node[midway, sloped, scale=0.5] {|}
--- (U$_68$) node[midway, sloped, scale=0.5] {|}
--- (V$_68$) node[midway, sloped, scale=0.5] {|}
--- cycle node[midway, sloped, scale=0.5] {|};
+\draw (M$_72$)
+-- (N$_72$) node[midway, above left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (O$_72$) node[midway, sloped, scale=0.5] {|||}
+-- (P$_72$) node[midway, sloped, scale=0.5] {|||}
+-- (Q$_72$) node[midway, sloped, scale=0.5] {|||}
+-- cycle node[midway, sloped, scale=0.5] {|||};
 
 % Label Points
 
@@ -1922,24 +1893,23 @@ pentagon\_5, variant: 0
 
 \begin{tikzpicture}[baseline=4pt]
 % Declare Points
-\coordinate (L$_69$) at (0.92,0.298);
-\coordinate (M$_69$) at (0.35,-0.112);
-\coordinate (N$_69$) at (-0.22,0.298);
-\coordinate (O$_69$) at (0,0.968);
-\coordinate (P$_69$) at (0.7,0.968);
+\coordinate (G$_73$) at (0.92,0.298);
+\coordinate (H$_73$) at (0.35,-0.112);
+\coordinate (I$_73$) at (-0.22,0.298);
+\coordinate (J$_73$) at (0,0.968);
+\coordinate (K$_73$) at (0.7,0.968);
 
 % Draw Pentagon
-\draw (L$_69$)
--- (M$_69$) node[midway, below, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- (N$_69$) node[midway, sloped, scale=0.5] {O}
--- (O$_69$) node[midway, sloped, scale=0.5] {O}
--- (P$_69$) node[midway, sloped, scale=0.5] {O}
--- cycle node[midway, sloped, scale=0.5] {O};
+\draw (G$_73$)
+-- (H$_73$) node[midway, below right] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- (I$_73$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (J$_73$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (K$_73$) node[midway, sloped, scale=0.5] {\lozenge}
+-- cycle node[midway, sloped, scale=0.5] {\lozenge};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -1950,25 +1920,25 @@ pentagon\_5, variant: 0
 \begin{tabular}{cc}
 hexagon\_1\_1\_1\_1\_1\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=9pt]
 % Declare Points
-\coordinate (G$_70$) at (0,0.4);
-\coordinate (H$_70$) at (0.7,0.8);
-\coordinate (I$_70$) at (1.7,0.8);
-\coordinate (J$_70$) at (2.8,0.5);
-\coordinate (K$_70$) at (2,0);
-\coordinate (L$_70$) at (0.8,0);
+\coordinate (B$_74$) at (0,0.4);
+\coordinate (C$_74$) at (0.7,0.8);
+\coordinate (D$_74$) at (1.7,0.8);
+\coordinate (E$_74$) at (2.8,0.5);
+\coordinate (F$_74$) at (2,0);
+\coordinate (G$_74$) at (0.8,0);
 
 % Draw Hexagon
-\draw (G$_70$)
--- (H$_70$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (I$_70$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- (J$_70$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- (K$_70$) node[midway, below, sloped] {\SI{4.5}{dam}}
--- (L$_70$) node[midway, below, sloped] {\SI{5.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{6.5}{dam}};
+\draw (B$_74$)
+-- (C$_74$) node[midway, above left] {\SI{1.5}{dam}}
+-- (D$_74$) node[midway, above] {\SI{2.5}{dam}}
+-- (E$_74$) node[midway, above] {\SI{3.5}{dam}}
+-- (F$_74$) node[midway, below right] {\SI{4.5}{dam}}
+-- (G$_74$) node[midway, below] {\SI{5.5}{dam}}
+-- cycle node[midway, below left] {\SI{6.5}{dam}};
 
 % Label Points
 
@@ -1977,26 +1947,25 @@ hexagon\_1\_1\_1\_1\_1\_1, variant: 0
 
 \begin{tikzpicture}[baseline=9pt]
 % Declare Points
-\coordinate (E$_71$) at (2.667,0.433);
-\coordinate (F$_71$) at (1.967,0.033);
-\coordinate (G$_71$) at (0.967,0.033);
-\coordinate (H$_71$) at (-0.133,0.333);
-\coordinate (I$_71$) at (0.667,0.833);
-\coordinate (J$_71$) at (1.867,0.833);
+\coordinate (Z$_74$) at (2.667,0.433);
+\coordinate (A$_75$) at (1.967,0.033);
+\coordinate (B$_75$) at (0.967,0.033);
+\coordinate (C$_75$) at (-0.133,0.333);
+\coordinate (D$_75$) at (0.667,0.833);
+\coordinate (E$_75$) at (1.867,0.833);
 
 % Draw Hexagon
-\draw (E$_71$)
--- (F$_71$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (G$_71$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- (H$_71$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- (I$_71$) node[midway, above, sloped] {\SI{4.5}{dam}}
--- (J$_71$) node[midway, above, sloped] {\SI{5.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{6.5}{dam}};
+\draw (Z$_74$)
+-- (A$_75$) node[midway, below right] {\SI{1.5}{dam}}
+-- (B$_75$) node[midway, below] {\SI{2.5}{dam}}
+-- (C$_75$) node[midway, below] {\SI{3.5}{dam}}
+-- (D$_75$) node[midway, above left] {\SI{4.5}{dam}}
+-- (E$_75$) node[midway, above] {\SI{5.5}{dam}}
+-- cycle node[midway, above right] {\SI{6.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -2007,25 +1976,25 @@ hexagon\_1\_1\_1\_1\_1\_1, variant: 0
 \begin{tabular}{cc}
 hexagon\_2\_1\_1\_1\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=9pt]
 % Declare Points
-\coordinate (D$_72$) at (0.17,0.47);
-\coordinate (E$_72$) at (0.9,0.8);
-\coordinate (F$_72$) at (1.7,0.8);
-\coordinate (G$_72$) at (2.8,0.4);
-\coordinate (H$_72$) at (2,0);
-\coordinate (I$_72$) at (0.7,0);
+\coordinate (Y$_75$) at (0.17,0.47);
+\coordinate (Z$_75$) at (0.9,0.8);
+\coordinate (A$_76$) at (1.7,0.8);
+\coordinate (B$_76$) at (2.8,0.4);
+\coordinate (C$_76$) at (2,0);
+\coordinate (D$_76$) at (0.7,0);
 
 % Draw Hexagon
-\draw (D$_72$)
--- (E$_72$) node[midway, above, sloped] {\SI{5.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- (F$_72$) node[midway, sloped, scale=0.5] {\square}
--- (G$_72$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- (H$_72$) node[midway, below, sloped] {\SI{4.5}{dam}}
--- (I$_72$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (Y$_75$)
+-- (Z$_75$) node[midway, above left] {\SI{5.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- (A$_76$) node[midway, sloped, scale=0.5] {\square}
+-- (B$_76$) node[midway, above] {\SI{1.5}{dam}}
+-- (C$_76$) node[midway, below right] {\SI{4.5}{dam}}
+-- (D$_76$) node[midway, below] {\SI{2.5}{dam}}
+-- cycle node[midway, below left] {\SI{3.5}{dam}};
 
 % Label Points
 
@@ -2034,55 +2003,53 @@ hexagon\_2\_1\_1\_1\_1, variant: 0
 
 \begin{tikzpicture}[baseline=9.5pt]
 % Declare Points
-\coordinate (T$_73$) at (2.587,0.353);
-\coordinate (U$_73$) at (1.857,0.023);
-\coordinate (V$_73$) at (1.057,0.023);
-\coordinate (W$_73$) at (-0.043,0.423);
-\coordinate (X$_73$) at (0.757,0.823);
-\coordinate (Y$_73$) at (2.057,0.823);
+\coordinate (O$_77$) at (2.587,0.353);
+\coordinate (P$_77$) at (1.857,0.023);
+\coordinate (Q$_77$) at (1.057,0.023);
+\coordinate (R$_77$) at (-0.043,0.423);
+\coordinate (S$_77$) at (0.757,0.823);
+\coordinate (T$_77$) at (2.057,0.823);
 
 % Draw Hexagon
-\draw (T$_73$)
--- (U$_73$) node[midway, below, sloped] {\SI{5.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (V$_73$) node[midway, sloped, scale=0.5] {\bigstar}
--- (W$_73$) node[midway, below, sloped] {\SI{4.5}{dam}}
--- (X$_73$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (Y$_73$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{3.5}{dam}};
+\draw (O$_77$)
+-- (P$_77$) node[midway, below right] {\SI{5.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- (Q$_77$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (R$_77$) node[midway, below] {\SI{1.5}{dam}}
+-- (S$_77$) node[midway, above left] {\SI{2.5}{dam}}
+-- (T$_77$) node[midway, above] {\SI{4.5}{dam}}
+-- cycle node[midway, above right] {\SI{3.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
 \end{tabular}
 \newline
-\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
-\newline
+\newpage
 \begin{tabular}{cc}
 hexagon\_2\_1\_1\_1\_1, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=9pt]
 % Declare Points
-\coordinate (Q$_75$) at (0,0.3);
-\coordinate (R$_75$) at (0.87,0.8);
-\coordinate (S$_75$) at (1.7,0.8);
-\coordinate (T$_75$) at (2.68,0.6);
-\coordinate (U$_75$) at (2.2,0.1);
-\coordinate (V$_75$) at (1,0);
+\coordinate (L$_79$) at (0,0.3);
+\coordinate (M$_79$) at (0.87,0.8);
+\coordinate (N$_79$) at (1.7,0.8);
+\coordinate (O$_79$) at (2.68,0.6);
+\coordinate (P$_79$) at (2.2,0.1);
+\coordinate (Q$_79$) at (1,0);
 
 % Draw Hexagon
-\draw (Q$_75$)
--- (R$_75$) node[midway, above, sloped] {\SI{5.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
--- (S$_75$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- (T$_75$) node[midway, sloped, scale=0.5] {\lozenge}
--- (U$_75$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (V$_75$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{4.5}{dam}};
+\draw (L$_79$)
+-- (M$_79$) node[midway, above left] {\SI{5.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (N$_79$) node[midway, above] {\SI{4.5}{dam}}
+-- (O$_79$) node[midway, sloped, scale=0.5] {||}
+-- (P$_79$) node[midway, below right] {\SI{2.5}{dam}}
+-- (Q$_79$) node[midway, below] {\SI{1.5}{dam}}
+-- cycle node[midway, below] {\SI{3.5}{dam}};
 
 % Label Points
 
@@ -2091,26 +2058,25 @@ hexagon\_2\_1\_1\_1\_1, variant: 1
 
 \begin{tikzpicture}[baseline=10pt]
 % Declare Points
-\coordinate (G$_77$) at (2.817,0.567);
-\coordinate (H$_77$) at (1.947,0.067);
-\coordinate (I$_77$) at (1.117,0.067);
-\coordinate (J$_77$) at (0.137,0.267);
-\coordinate (K$_77$) at (0.617,0.767);
-\coordinate (L$_77$) at (1.817,0.867);
+\coordinate (B$_81$) at (2.817,0.567);
+\coordinate (C$_81$) at (1.947,0.067);
+\coordinate (D$_81$) at (1.117,0.067);
+\coordinate (E$_81$) at (0.137,0.267);
+\coordinate (F$_81$) at (0.617,0.767);
+\coordinate (G$_81$) at (1.817,0.867);
 
 % Draw Hexagon
-\draw (G$_77$)
--- (H$_77$) node[midway, below, sloped] {\SI{5.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (I$_77$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- (J$_77$) node[midway, sloped, scale=0.5] {||}
--- (K$_77$) node[midway, above, sloped] {\SI{4.5}{dam}}
--- (L$_77$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}};
+\draw (B$_81$)
+-- (C$_81$) node[midway, below right] {\SI{5.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (D$_81$) node[midway, below] {\SI{3.5}{dam}}
+-- (E$_81$) node[midway, sloped, scale=0.5] {\triangle}
+-- (F$_81$) node[midway, above left] {\SI{4.5}{dam}}
+-- (G$_81$) node[midway, above] {\SI{1.5}{dam}}
+-- cycle node[midway, above] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -2121,25 +2087,25 @@ hexagon\_2\_1\_1\_1\_1, variant: 1
 \begin{tabular}{cc}
 hexagon\_2\_1\_1\_1\_1, variant: 2
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=10pt]
 % Declare Points
-\coordinate (D$_79$) at (0,0.7);
-\coordinate (E$_79$) at (0.83,0.9);
-\coordinate (F$_79$) at (2.2,0.8);
-\coordinate (G$_79$) at (2.44,0.15);
-\coordinate (H$_79$) at (1.6,0);
-\coordinate (I$_79$) at (0.2,0);
+\coordinate (Y$_82$) at (0,0.7);
+\coordinate (Z$_82$) at (0.83,0.9);
+\coordinate (A$_83$) at (2.2,0.8);
+\coordinate (B$_83$) at (2.44,0.15);
+\coordinate (C$_83$) at (1.6,0);
+\coordinate (D$_83$) at (0.2,0);
 
 % Draw Hexagon
-\draw (D$_79$)
--- (E$_79$) node[midway, above, sloped] {\SI{5.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (F$_79$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (G$_79$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- (H$_79$) node[midway, sloped, scale=0.5] {|||}
--- (I$_79$) node[midway, below, sloped] {\SI{4.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}};
+\draw (Y$_82$)
+-- (Z$_82$) node[midway, above] {\SI{5.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (A$_83$) node[midway, above] {\SI{2.5}{dam}}
+-- (B$_83$) node[midway, right] {\SI{3.5}{dam}}
+-- (C$_83$) node[midway, sloped, scale=0.5] {|||}
+-- (D$_83$) node[midway, below] {\SI{1.5}{dam}}
+-- cycle node[midway, left] {\SI{4.5}{dam}};
 
 % Label Points
 
@@ -2148,59 +2114,58 @@ hexagon\_2\_1\_1\_1\_1, variant: 2
 
 \begin{tikzpicture}[baseline=10pt]
 % Declare Points
-\coordinate (Z$_80$) at (0.93,0);
-\coordinate (A$_81$) at (0.1,0.2);
-\coordinate (B$_81$) at (0.3,0.9);
-\coordinate (C$_81$) at (1.3,1);
-\coordinate (D$_81$) at (2.14,0.9);
-\coordinate (E$_81$) at (1.9,0.1);
+\coordinate (U$_84$) at (0.93,0);
+\coordinate (V$_84$) at (0.1,0.2);
+\coordinate (W$_84$) at (0.3,0.9);
+\coordinate (X$_84$) at (1.3,1);
+\coordinate (Y$_84$) at (2.14,0.9);
+\coordinate (Z$_84$) at (1.9,0.1);
 
 % Draw Hexagon
-\draw (Z$_80$)
--- (A$_81$) node[midway, below, sloped] {\SI{5.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- (B$_81$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- (C$_81$) node[midway, above, sloped] {\SI{4.5}{dam}}
--- (D$_81$) node[midway, sloped, scale=0.5] {O}
--- (E$_81$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{3.5}{dam}};
+\draw (U$_84$)
+-- (V$_84$) node[midway, below] {\SI{5.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- (W$_84$) node[midway, left] {\SI{4.5}{dam}}
+-- (X$_84$) node[midway, above] {\SI{3.5}{dam}}
+-- (Y$_84$) node[midway, sloped, scale=0.5] {|}
+-- (Z$_84$) node[midway, right] {\SI{1.5}{dam}}
+-- cycle node[midway, below] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
 \end{tabular}
 \newline
-\newpage
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\newline
 \begin{tabular}{cc}
 hexagon\_2\_2\_1\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=11pt]
 % Declare Points
-\coordinate (X$_81$) at (1.6,0);
-\coordinate (Y$_81$) at (0.7,0);
-\coordinate (Z$_81$) at (0,0.56);
-\coordinate (A$_82$) at (0.9,1);
-\coordinate (B$_82$) at (1.9,1);
-\coordinate (C$_82$) at (2.8,0.5);
+\coordinate (S$_85$) at (1.6,0);
+\coordinate (T$_85$) at (0.7,0);
+\coordinate (U$_85$) at (0,0.56);
+\coordinate (V$_85$) at (0.9,1);
+\coordinate (W$_85$) at (1.9,1);
+\coordinate (X$_85$) at (2.8,0.5);
 
 % Draw Hexagon
-\draw (X$_81$)
--- (Y$_81$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- (Z$_81$) node[midway, sloped, scale=0.5] {|}
--- (A$_82$) node[midway, above, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (B$_82$) node[midway, sloped, scale=0.5] {\triangle}
--- (C$_82$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}};
+\draw (S$_85$)
+-- (T$_85$) node[midway, below] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (U$_85$) node[midway, sloped, scale=0.5] {O}
+-- (V$_85$) node[midway, above left] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (W$_85$) node[midway, sloped, scale=0.5] {\triangle}
+-- (X$_85$) node[midway, above right] {\SI{2.5}{dam}}
+-- cycle node[midway, below right] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2212,30 +2177,29 @@ hexagon\_2\_2\_1\_1, variant: 0
 \begin{tabular}{cc}
 hexagon\_2\_2\_1\_1, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (R$_84$) at (0,0.4);
-\coordinate (S$_84$) at (0.53,1);
-\coordinate (T$_84$) at (1.63,1.1);
-\coordinate (U$_84$) at (2.4,0.9);
-\coordinate (V$_84$) at (1.76,0);
-\coordinate (W$_84$) at (0.8,0);
+\coordinate (M$_88$) at (0,0.4);
+\coordinate (N$_88$) at (0.53,1);
+\coordinate (O$_88$) at (1.63,1.1);
+\coordinate (P$_88$) at (2.4,0.9);
+\coordinate (Q$_88$) at (1.76,0);
+\coordinate (R$_88$) at (0.8,0);
 
 % Draw Hexagon
-\draw (R$_84$)
--- (S$_84$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- (T$_84$) node[midway, above, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (U$_84$) node[midway, sloped, scale=0.5] {\square}
--- (V$_84$) node[midway, sloped, scale=0.5] {\bigstar}
--- (W$_84$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (M$_88$)
+-- (N$_88$) node[midway, above left] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- (O$_88$) node[midway, above] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (P$_88$) node[midway, sloped, scale=0.5] {\square}
+-- (Q$_88$) node[midway, sloped, scale=0.5] {||}
+-- (R$_88$) node[midway, below] {\SI{1.5}{dam}}
+-- cycle node[midway, below left] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2247,30 +2211,29 @@ hexagon\_2\_2\_1\_1, variant: 1
 \begin{tabular}{cc}
 hexagon\_2\_2\_1\_1, variant: 2
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (L$_87$) at (0.4,0);
-\coordinate (M$_87$) at (0,0.81);
-\coordinate (N$_87$) at (1.03,1.1);
-\coordinate (O$_87$) at (2.14,0.9);
-\coordinate (P$_87$) at (2.7,0.2);
-\coordinate (Q$_87$) at (1.5,0.2);
+\coordinate (G$_91$) at (0.4,0);
+\coordinate (H$_91$) at (0,0.81);
+\coordinate (I$_91$) at (1.03,1.1);
+\coordinate (J$_91$) at (2.14,0.9);
+\coordinate (K$_91$) at (2.7,0.2);
+\coordinate (L$_91$) at (1.5,0.2);
 
 % Draw Hexagon
-\draw (L$_87$)
--- (M$_87$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- (N$_87$) node[midway, above, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
--- (O$_87$) node[midway, sloped, scale=0.5] {\lozenge}
--- (P$_87$) node[midway, sloped, scale=0.5] {|}
--- (Q$_87$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (G$_91$)
+-- (H$_91$) node[midway, below left] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- (I$_91$) node[midway, above] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- (J$_91$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (K$_91$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (L$_91$) node[midway, below] {\SI{1.5}{dam}}
+-- cycle node[midway, below] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2282,30 +2245,29 @@ hexagon\_2\_2\_1\_1, variant: 2
 \begin{tabular}{cc}
 hexagon\_2\_2\_1\_1, variant: 3
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (F$_90$) at (0,0.6);
-\coordinate (G$_90$) at (0.69,1.1);
-\coordinate (H$_90$) at (1.69,1.1);
-\coordinate (I$_90$) at (2.32,0.54);
-\coordinate (J$_90$) at (1.64,0);
-\coordinate (K$_90$) at (0.64,0);
+\coordinate (A$_94$) at (0,0.6);
+\coordinate (B$_94$) at (0.69,1.1);
+\coordinate (C$_94$) at (1.69,1.1);
+\coordinate (D$_94$) at (2.32,0.54);
+\coordinate (E$_94$) at (1.64,0);
+\coordinate (F$_94$) at (0.64,0);
 
 % Draw Hexagon
-\draw (F$_90$)
--- (G$_90$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (H$_90$) node[midway, above, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- (I$_90$) node[midway, sloped, scale=0.5] {|||}
--- (J$_90$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- (K$_90$) node[midway, sloped, scale=0.5] {O}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (A$_94$)
+-- (B$_94$) node[midway, above left] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (C$_94$) node[midway, above] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- (D$_94$) node[midway, sloped, scale=0.5] {\triangle}
+-- (E$_94$) node[midway, below right] {\SI{1.5}{dam}}
+-- (F$_94$) node[midway, sloped, scale=0.5] {|}
+-- cycle node[midway, below left] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2317,30 +2279,29 @@ hexagon\_2\_2\_1\_1, variant: 3
 \begin{tabular}{cc}
 hexagon\_2\_2\_1\_1, variant: 4
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (Z$_92$) at (2.7,0.8);
-\coordinate (A$_93$) at (2.41,0);
-\coordinate (B$_93$) at (1.41,0);
-\coordinate (C$_93$) at (0.45,0.27);
-\coordinate (D$_93$) at (0.9,1.1);
-\coordinate (E$_93$) at (1.75,1.1);
+\coordinate (U$_96$) at (2.7,0.8);
+\coordinate (V$_96$) at (2.41,0);
+\coordinate (W$_96$) at (1.41,0);
+\coordinate (X$_96$) at (0.45,0.27);
+\coordinate (Y$_96$) at (0.9,1.1);
+\coordinate (Z$_96$) at (1.75,1.1);
 
 % Draw Hexagon
-\draw (Z$_92$)
--- (A$_93$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (B$_93$) node[midway, below, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (C$_93$) node[midway, sloped, scale=0.5] {\triangle}
--- (D$_93$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (E$_93$) node[midway, sloped, scale=0.5] {||}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}};
+\draw (U$_96$)
+-- (V$_96$) node[midway, right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (W$_96$) node[midway, below] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (X$_96$) node[midway, sloped, scale=0.5] {||}
+-- (Y$_96$) node[midway, above left] {\SI{1.5}{dam}}
+-- (Z$_96$) node[midway, sloped, scale=0.5] {|||}
+-- cycle node[midway, above] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2352,30 +2313,29 @@ hexagon\_2\_2\_1\_1, variant: 4
 \begin{tabular}{cc}
 hexagon\_2\_2\_1\_1, variant: 5
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (T$_95$) at (0.39,0.22);
-\coordinate (U$_95$) at (0,0.8);
-\coordinate (V$_95$) at (0.63,1.1);
-\coordinate (W$_95$) at (1.88,0.86);
-\coordinate (X$_95$) at (2.44,0.15);
-\coordinate (Y$_95$) at (1.55,0);
+\coordinate (O$_99$) at (0.39,0.22);
+\coordinate (P$_99$) at (0,0.8);
+\coordinate (Q$_99$) at (0.63,1.1);
+\coordinate (R$_99$) at (1.88,0.86);
+\coordinate (S$_99$) at (2.44,0.15);
+\coordinate (T$_99$) at (1.55,0);
 
 % Draw Hexagon
-\draw (T$_95$)
--- (U$_95$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (V$_95$) node[midway, sloped, scale=0.5] {\bigstar}
--- (W$_95$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- (X$_95$) node[midway, above, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- (Y$_95$) node[midway, sloped, scale=0.5] {|}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (O$_99$)
+-- (P$_99$) node[midway, below left] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (Q$_99$) node[midway, sloped, scale=0.5] {O}
+-- (R$_99$) node[midway, above] {\SI{1.5}{dam}}
+-- (S$_99$) node[midway, above right] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- (T$_99$) node[midway, sloped, scale=0.5] {\lozenge}
+-- cycle node[midway, below] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2387,30 +2347,29 @@ hexagon\_2\_2\_1\_1, variant: 5
 \begin{tabular}{cc}
 hexagon\_2\_2\_1\_1, variant: 6
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=15pt]
 % Declare Points
-\coordinate (N$_98$) at (0.22,0.8);
-\coordinate (O$_98$) at (1.2,1);
-\coordinate (P$_98$) at (1.99,0.9);
-\coordinate (Q$_98$) at (2.2,0.1);
-\coordinate (R$_98$) at (1.2,0);
-\coordinate (S$_98$) at (0.41,0.1);
+\coordinate (I$_102$) at (0.22,0.8);
+\coordinate (J$_102$) at (1.2,1);
+\coordinate (K$_102$) at (1.99,0.9);
+\coordinate (L$_102$) at (2.2,0.1);
+\coordinate (M$_102$) at (1.2,0);
+\coordinate (N$_102$) at (0.41,0.1);
 
 % Draw Hexagon
-\draw (N$_98$)
--- (O$_98$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
--- (P$_98$) node[midway, above, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- (Q$_98$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- (R$_98$) node[midway, sloped, scale=0.5] {\lozenge}
--- (S$_98$) node[midway, sloped, scale=0.5] {\square}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (I$_102$)
+-- (J$_102$) node[midway, above] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- (K$_102$) node[midway, above] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- (L$_102$) node[midway, right] {\SI{2.5}{dam}}
+-- (M$_102$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (N$_102$) node[midway, sloped, scale=0.5] {|}
+-- cycle node[midway, left] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2422,30 +2381,29 @@ hexagon\_2\_2\_1\_1, variant: 6
 \begin{tabular}{cc}
 hexagon\_2\_2\_1\_1, variant: 7
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=17pt]
 % Declare Points
-\coordinate (H$_101$) at (0.34,0.9);
-\coordinate (I$_101$) at (1.11,1.1);
-\coordinate (J$_101$) at (2.09,0.9);
-\coordinate (K$_101$) at (1.6,0.09);
-\coordinate (L$_101$) at (0.6,0);
-\coordinate (M$_101$) at (-0.18,0.19);
+\coordinate (C$_105$) at (0.34,0.9);
+\coordinate (D$_105$) at (1.11,1.1);
+\coordinate (E$_105$) at (2.09,0.9);
+\coordinate (F$_105$) at (1.6,0.09);
+\coordinate (G$_105$) at (0.6,0);
+\coordinate (H$_105$) at (-0.18,0.19);
 
 % Draw Hexagon
-\draw (H$_101$)
--- (I$_101$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- (J$_101$) node[midway, above, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (K$_101$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (L$_101$) node[midway, sloped, scale=0.5] {|||}
--- (M$_101$) node[midway, sloped, scale=0.5] {O}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}};
+\draw (C$_105$)
+-- (D$_105$) node[midway, above] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- (E$_105$) node[midway, above] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (F$_105$) node[midway, below right] {\SI{2.5}{dam}}
+-- (G$_105$) node[midway, sloped, scale=0.5] {\triangle}
+-- (H$_105$) node[midway, sloped, scale=0.5] {\square}
+-- cycle node[midway, above left] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2457,65 +2415,62 @@ hexagon\_2\_2\_1\_1, variant: 7
 \begin{tabular}{cc}
 hexagon\_2\_2\_2, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (F$_102$) at (0,0.9);
-\coordinate (G$_102$) at (0.77,1.1);
-\coordinate (H$_102$) at (1.57,1);
-\coordinate (I$_102$) at (2.26,0.42);
-\coordinate (J$_102$) at (1.46,0);
-\coordinate (K$_102$) at (0.46,0.01);
+\coordinate (A$_106$) at (0,0.9);
+\coordinate (B$_106$) at (0.77,1.1);
+\coordinate (C$_106$) at (1.57,1);
+\coordinate (D$_106$) at (2.26,0.42);
+\coordinate (E$_106$) at (1.46,0);
+\coordinate (F$_106$) at (0.46,0.01);
 
 % Draw Hexagon
-\draw (F$_102$)
--- (G$_102$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (H$_102$) node[midway, sloped, scale=0.5] {\triangle}
--- (I$_102$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (J$_102$) node[midway, sloped, scale=0.5] {||}
--- (K$_102$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- cycle node[midway, sloped, scale=0.5] {\bigstar};
+\draw (A$_106$)
+-- (B$_106$) node[midway, above] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (C$_106$) node[midway, sloped, scale=0.5] {O}
+-- (D$_106$) node[midway, above right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (E$_106$) node[midway, sloped, scale=0.5] {|||}
+-- (F$_106$) node[midway, below] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- cycle node[midway, sloped, scale=0.5] {|};
 
 % Label Points
 
 \end{tikzpicture}
 &
-&
 \\
 \end{tabular}
 \\
 \end{tabular}
 \newline
-\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
-\newline
+\newpage
 \begin{tabular}{cc}
 hexagon\_2\_2\_2, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=18pt]
 % Declare Points
-\coordinate (B$_104$) at (0,0.5);
-\coordinate (C$_104$) at (0.92,1.1);
-\coordinate (D$_104$) at (1.72,1.1);
-\coordinate (E$_104$) at (2.55,0.63);
-\coordinate (F$_104$) at (1.61,0.05);
-\coordinate (G$_104$) at (0.66,0.05);
+\coordinate (W$_107$) at (0,0.5);
+\coordinate (X$_107$) at (0.92,1.1);
+\coordinate (Y$_107$) at (1.72,1.1);
+\coordinate (Z$_107$) at (2.55,0.63);
+\coordinate (A$_108$) at (1.61,0.05);
+\coordinate (B$_108$) at (0.66,0.05);
 
 % Draw Hexagon
-\draw (B$_104$)
--- (C$_104$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- (D$_104$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- (E$_104$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (F$_104$) node[midway, sloped, scale=0.5] {\square}
--- (G$_104$) node[midway, sloped, scale=0.5] {|||}
--- cycle node[midway, sloped, scale=0.5] {O};
+\draw (W$_107$)
+-- (X$_107$) node[midway, above left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (Y$_107$) node[midway, above] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- (Z$_107$) node[midway, above right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (A$_108$) node[midway, sloped, scale=0.5] {||}
+-- (B$_108$) node[midway, sloped, scale=0.5] {|||}
+-- cycle node[midway, sloped, scale=0.5] {\lozenge};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2527,64 +2482,63 @@ hexagon\_2\_2\_2, variant: 1
 \begin{tabular}{cc}
 hexagon\_2\_2\_2, variant: 2
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (X$_105$) at (0,0.56);
-\coordinate (Y$_105$) at (0.66,1.02);
-\coordinate (Z$_105$) at (1.61,1.07);
-\coordinate (A$_106$) at (2.4,0.96);
-\coordinate (B$_106$) at (1.87,0);
-\coordinate (C$_106$) at (0.77,0);
+\coordinate (S$_109$) at (0,0.56);
+\coordinate (T$_109$) at (0.66,1.02);
+\coordinate (U$_109$) at (1.61,1.07);
+\coordinate (V$_109$) at (2.4,0.96);
+\coordinate (W$_109$) at (1.87,0);
+\coordinate (X$_109$) at (0.77,0);
 
 % Draw Hexagon
-\draw (X$_105$)
--- (Y$_105$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- (Z$_105$) node[midway, sloped, scale=0.5] {\lozenge}
--- (A$_106$) node[midway, sloped, scale=0.5] {|}
--- (B$_106$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (C$_106$) node[midway, sloped, scale=0.5] {|||}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge};
+\draw (S$_109$)
+-- (T$_109$) node[midway, above left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- (U$_109$) node[midway, sloped, scale=0.5] {\triangle}
+-- (V$_109$) node[midway, sloped, scale=0.5] {\square}
+-- (W$_109$) node[midway, below right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- (X$_109$) node[midway, sloped, scale=0.5] {\bigstar}
+-- cycle node[midway, below left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\triangle};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
 \\
 \end{tabular}
 \newline
-\newpage
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\newline
 \begin{tabular}{cc}
 hexagon\_2\_2\_2, variant: 3
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=18pt]
 % Declare Points
-\coordinate (T$_107$) at (0,0.15);
-\coordinate (U$_107$) at (0,0.95);
-\coordinate (V$_107$) at (0.94,1.05);
-\coordinate (W$_107$) at (2.04,0.95);
-\coordinate (X$_107$) at (2.03,0.15);
-\coordinate (Y$_107$) at (1.09,0);
+\coordinate (O$_111$) at (0,0.15);
+\coordinate (P$_111$) at (0,0.95);
+\coordinate (Q$_111$) at (0.94,1.05);
+\coordinate (R$_111$) at (2.04,0.95);
+\coordinate (S$_111$) at (2.03,0.15);
+\coordinate (T$_111$) at (1.09,0);
 
 % Draw Hexagon
-\draw (T$_107$)
--- (U$_107$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- (V$_107$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (W$_107$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (X$_107$) node[midway, sloped, scale=0.5] {\square}
--- (Y$_107$) node[midway, sloped, scale=0.5] {\bigstar}
--- cycle node[midway, sloped, scale=0.5] {||};
+\draw (O$_111$)
+-- (P$_111$) node[midway, left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- (Q$_111$) node[midway, above] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (R$_111$) node[midway, above] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- (S$_111$) node[midway, sloped, scale=0.5] {|}
+-- (T$_111$) node[midway, sloped, scale=0.5] {\triangle}
+-- cycle node[midway, sloped, scale=0.5] {\lozenge};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2596,30 +2550,29 @@ hexagon\_2\_2\_2, variant: 3
 \begin{tabular}{cc}
 hexagon\_3\_1\_1\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (R$_108$) at (0.9,1.1);
-\coordinate (S$_108$) at (1.9,1.1);
-\coordinate (T$_108$) at (2.7,0.5);
-\coordinate (U$_108$) at (1.84,0);
-\coordinate (V$_108$) at (0.39,0.2);
-\coordinate (W$_108$) at (0,0.9);
+\coordinate (M$_112$) at (0.9,1.1);
+\coordinate (N$_112$) at (1.9,1.1);
+\coordinate (O$_112$) at (2.7,0.5);
+\coordinate (P$_112$) at (1.84,0);
+\coordinate (Q$_112$) at (0.39,0.2);
+\coordinate (R$_112$) at (0,0.9);
 
 % Draw Hexagon
-\draw (R$_108$)
--- (S$_108$) node[midway, sloped, scale=0.5] {\triangle}
--- (T$_108$) node[midway, above, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (U$_108$) node[midway, sloped, scale=0.5] {\triangle}
--- (V$_108$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- (W$_108$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}};
+\draw (M$_112$)
+-- (N$_112$) node[midway, sloped, scale=0.5] {|||}
+-- (O$_112$) node[midway, above right] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (P$_112$) node[midway, sloped, scale=0.5] {|||}
+-- (Q$_112$) node[midway, below] {\SI{2.5}{dam}}
+-- (R$_112$) node[midway, below left] {\SI{1.5}{dam}}
+-- cycle node[midway, above] {\SI{3.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2631,30 +2584,29 @@ hexagon\_3\_1\_1\_1, variant: 0
 \begin{tabular}{cc}
 hexagon\_3\_1\_1\_1, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (H$_110$) at (0,0.9);
-\coordinate (I$_110$) at (0.98,1.1);
-\coordinate (J$_110$) at (1.97,1);
-\coordinate (K$_110$) at (2.38,0.2);
-\coordinate (L$_110$) at (1.4,0);
-\coordinate (M$_110$) at (0.4,0.1);
+\coordinate (C$_114$) at (0,0.9);
+\coordinate (D$_114$) at (0.98,1.1);
+\coordinate (E$_114$) at (1.97,1);
+\coordinate (F$_114$) at (2.38,0.2);
+\coordinate (G$_114$) at (1.4,0);
+\coordinate (H$_114$) at (0.4,0.1);
 
 % Draw Hexagon
-\draw (H$_110$)
--- (I$_110$) node[midway, above, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- (J$_110$) node[midway, sloped, scale=0.5] {|}
--- (K$_110$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (L$_110$) node[midway, sloped, scale=0.5] {|}
--- (M$_110$) node[midway, below, sloped] {\SI{3.5}{dam}}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}};
+\draw (C$_114$)
+-- (D$_114$) node[midway, above] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (E$_114$) node[midway, sloped, scale=0.5] {||}
+-- (F$_114$) node[midway, above right] {\SI{3.5}{dam}}
+-- (G$_114$) node[midway, sloped, scale=0.5] {||}
+-- (H$_114$) node[midway, below] {\SI{2.5}{dam}}
+-- cycle node[midway, below left] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2666,30 +2618,29 @@ hexagon\_3\_1\_1\_1, variant: 1
 \begin{tabular}{cc}
 hexagon\_3\_1\_1\_1, variant: 2
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (X$_111$) at (0.7,1.1);
-\coordinate (Y$_111$) at (1.8,1.1);
-\coordinate (Z$_111$) at (2.62,0.6);
-\coordinate (A$_112$) at (1.7,0);
-\coordinate (B$_112$) at (0.85,0);
-\coordinate (C$_112$) at (0,0.7);
+\coordinate (S$_115$) at (0.7,1.1);
+\coordinate (T$_115$) at (1.8,1.1);
+\coordinate (U$_115$) at (2.62,0.6);
+\coordinate (V$_115$) at (1.7,0);
+\coordinate (W$_115$) at (0.85,0);
+\coordinate (X$_115$) at (0,0.7);
 
 % Draw Hexagon
-\draw (X$_111$)
--- (Y$_111$) node[midway, above, sloped] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- (Z$_111$) node[midway, above, sloped] {\SI{3.5}{dam}}
--- (A$_112$) node[midway, sloped, scale=0.5] {O}
--- (B$_112$) node[midway, below, sloped] {\SI{2.5}{dam}}
--- (C$_112$) node[midway, sloped, scale=0.5] {O}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+\draw (S$_115$)
+-- (T$_115$) node[midway, above] {\SI{4.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (U$_115$) node[midway, above right] {\SI{3.5}{dam}}
+-- (V$_115$) node[midway, sloped, scale=0.5] {O}
+-- (W$_115$) node[midway, below] {\SI{1.5}{dam}}
+-- (X$_115$) node[midway, sloped, scale=0.5] {O}
+-- cycle node[midway, above left] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2701,30 +2652,29 @@ hexagon\_3\_1\_1\_1, variant: 2
 \begin{tabular}{cc}
 hexagon\_3\_2\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (V$_112$) at (0.9,1.1);
-\coordinate (W$_112$) at (1.75,1.1);
-\coordinate (X$_112$) at (2.4,0.56);
-\coordinate (Y$_112$) at (1.76,0);
-\coordinate (Z$_112$) at (0.76,0);
-\coordinate (A$_113$) at (0.04,0.7);
+\coordinate (Q$_116$) at (0.9,1.1);
+\coordinate (R$_116$) at (1.75,1.1);
+\coordinate (S$_116$) at (2.4,0.56);
+\coordinate (T$_116$) at (1.76,0);
+\coordinate (U$_116$) at (0.76,0);
+\coordinate (V$_116$) at (0.04,0.7);
 
 % Draw Hexagon
-\draw (V$_112$)
--- (W$_112$) node[midway, sloped, scale=0.5] {\square}
--- (X$_112$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- (Y$_112$) node[midway, sloped, scale=0.5] {\square}
--- (Z$_112$) node[midway, sloped, scale=0.5] {|||}
--- (A$_113$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+\draw (Q$_116$)
+-- (R$_116$) node[midway, sloped, scale=0.5] {\triangle}
+-- (S$_116$) node[midway, above right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (T$_116$) node[midway, sloped, scale=0.5] {\triangle}
+-- (U$_116$) node[midway, sloped, scale=0.5] {|}
+-- (V$_116$) node[midway, below left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- cycle node[midway, above left] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2736,30 +2686,29 @@ hexagon\_3\_2\_1, variant: 0
 \begin{tabular}{cc}
 hexagon\_3\_2\_1, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=10pt]
 % Declare Points
-\coordinate (L$_114$) at (0.8,0);
-\coordinate (M$_114$) at (0.01,0.3);
-\coordinate (N$_114$) at (0.61,1.1);
-\coordinate (O$_114$) at (1.61,1.1);
-\coordinate (P$_114$) at (2.36,0.72);
-\coordinate (Q$_114$) at (1.91,0);
+\coordinate (G$_118$) at (0.8,0);
+\coordinate (H$_118$) at (0.01,0.3);
+\coordinate (I$_118$) at (0.61,1.1);
+\coordinate (J$_118$) at (1.61,1.1);
+\coordinate (K$_118$) at (2.36,0.72);
+\coordinate (L$_118$) at (1.91,0);
 
 % Draw Hexagon
-\draw (L$_114$)
--- (M$_114$) node[midway, sloped, scale=0.5] {\lozenge}
--- (N$_114$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (O$_114$) node[midway, sloped, scale=0.5] {\bigstar}
--- (P$_114$) node[midway, sloped, scale=0.5] {\lozenge}
--- (Q$_114$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (G$_118$)
+-- (H$_118$) node[midway, sloped, scale=0.5] {\square}
+-- (I$_118$) node[midway, above left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- (J$_118$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (K$_118$) node[midway, sloped, scale=0.5] {\square}
+-- (L$_118$) node[midway, below right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- cycle node[midway, below] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2771,30 +2720,29 @@ hexagon\_3\_2\_1, variant: 1
 \begin{tabular}{cc}
 hexagon\_3\_2\_1, variant: 2
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (B$_116$) at (2.6,0.6);
-\coordinate (C$_116$) at (2,0);
-\coordinate (D$_116$) at (1.15,0);
-\coordinate (E$_116$) at (0.27,0.49);
-\coordinate (F$_116$) at (0.86,1.1);
-\coordinate (G$_116$) at (1.86,1.1);
+\coordinate (W$_119$) at (2.6,0.6);
+\coordinate (X$_119$) at (2,0);
+\coordinate (Y$_119$) at (1.15,0);
+\coordinate (Z$_119$) at (0.27,0.49);
+\coordinate (A$_120$) at (0.86,1.1);
+\coordinate (B$_120$) at (1.86,1.1);
 
 % Draw Hexagon
-\draw (B$_116$)
--- (C$_116$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (D$_116$) node[midway, sloped, scale=0.5] {\triangle}
--- (E$_116$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (F$_116$) node[midway, sloped, scale=0.5] {\triangle}
--- (G$_116$) node[midway, sloped, scale=0.5] {||}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+\draw (W$_119$)
+-- (X$_119$) node[midway, below right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- (Y$_119$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (Z$_119$) node[midway, below left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- (A$_120$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (B$_120$) node[midway, sloped, scale=0.5] {|}
+-- cycle node[midway, above right] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2806,30 +2754,29 @@ hexagon\_3\_2\_1, variant: 2
 \begin{tabular}{cc}
 hexagon\_3\_3, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=12pt]
 % Declare Points
-\coordinate (Z$_116$) at (0,0.57);
-\coordinate (A$_117$) at (0.72,1.02);
-\coordinate (B$_117$) at (1.57,1.02);
-\coordinate (C$_117$) at (2.29,0.57);
-\coordinate (D$_117$) at (1.59,0);
-\coordinate (E$_117$) at (0.69,0);
+\coordinate (U$_120$) at (0,0.57);
+\coordinate (V$_120$) at (0.72,1.02);
+\coordinate (W$_120$) at (1.57,1.02);
+\coordinate (X$_120$) at (2.29,0.57);
+\coordinate (Y$_120$) at (1.59,0);
+\coordinate (Z$_120$) at (0.69,0);
 
 % Draw Hexagon
-\draw (Z$_116$)
--- (A$_117$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- (B$_117$) node[midway, sloped, scale=0.5] {O}
--- (C$_117$) node[midway, sloped, scale=0.5] {O}
--- (D$_117$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- (E$_117$) node[midway, sloped, scale=0.5] {|}
--- cycle node[midway, sloped, scale=0.5] {|};
+\draw (U$_120$)
+-- (V$_120$) node[midway, above left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (W$_120$) node[midway, sloped, scale=0.5] {\triangle}
+-- (X$_120$) node[midway, sloped, scale=0.5] {\triangle}
+-- (Y$_120$) node[midway, below right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (Z$_120$) node[midway, sloped, scale=0.5] {||}
+-- cycle node[midway, sloped, scale=0.5] {||};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2841,65 +2788,62 @@ hexagon\_3\_3, variant: 0
 \begin{tabular}{cc}
 hexagon\_3\_3, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=15pt]
 % Declare Points
-\coordinate (P$_118$) at (0,0.49);
-\coordinate (Q$_118$) at (0.66,1.02);
-\coordinate (R$_118$) at (1.51,1.02);
-\coordinate (S$_118$) at (2.29,0.57);
-\coordinate (T$_118$) at (1.65,0);
-\coordinate (U$_118$) at (0.75,0);
+\coordinate (K$_122$) at (0,0.49);
+\coordinate (L$_122$) at (0.66,1.02);
+\coordinate (M$_122$) at (1.51,1.02);
+\coordinate (N$_122$) at (2.29,0.57);
+\coordinate (O$_122$) at (1.65,0);
+\coordinate (P$_122$) at (0.75,0);
 
 % Draw Hexagon
-\draw (P$_118$)
--- (Q$_118$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\square}
--- (R$_118$) node[midway, sloped, scale=0.5] {\square}
--- (S$_118$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (T$_118$) node[midway, sloped, scale=0.5] {\square}
--- (U$_118$) node[midway, sloped, scale=0.5] {|||}
--- cycle node[midway, sloped, scale=0.5] {|||};
+\draw (K$_122$)
+-- (L$_122$) node[midway, above left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (M$_122$) node[midway, sloped, scale=0.5] {|||}
+-- (N$_122$) node[midway, above right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (O$_122$) node[midway, sloped, scale=0.5] {|||}
+-- (P$_122$) node[midway, sloped, scale=0.5] {O}
+-- cycle node[midway, sloped, scale=0.5] {O};
 
 % Label Points
 
 \end{tikzpicture}
 &
-&
 \\
 \end{tabular}
 \\
 \end{tabular}
 \newline
-\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
-\newline
+\newpage
 \begin{tabular}{cc}
 hexagon\_3\_3, variant: 2
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=17pt]
 % Declare Points
-\coordinate (F$_120$) at (0,0.4);
-\coordinate (G$_120$) at (0.55,1.04);
-\coordinate (H$_120$) at (1.45,1.04);
-\coordinate (I$_120$) at (2.23,0.7);
-\coordinate (J$_120$) at (1.66,0);
-\coordinate (K$_120$) at (0.81,0);
+\coordinate (A$_124$) at (0,0.4);
+\coordinate (B$_124$) at (0.55,1.04);
+\coordinate (C$_124$) at (1.45,1.04);
+\coordinate (D$_124$) at (2.23,0.7);
+\coordinate (E$_124$) at (1.66,0);
+\coordinate (F$_124$) at (0.81,0);
 
 % Draw Hexagon
-\draw (F$_120$)
--- (G$_120$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
--- (H$_120$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (I$_120$) node[midway, sloped, scale=0.5] {\lozenge}
--- (J$_120$) node[midway, sloped, scale=0.5] {||}
--- (K$_120$) node[midway, sloped, scale=0.5] {\lozenge}
--- cycle node[midway, sloped, scale=0.5] {||};
+\draw (A$_124$)
+-- (B$_124$) node[midway, above left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- (C$_124$) node[midway, above] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- (D$_124$) node[midway, sloped, scale=0.5] {\square}
+-- (E$_124$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (F$_124$) node[midway, sloped, scale=0.5] {\square}
+-- cycle node[midway, sloped, scale=0.5] {\bigstar};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2911,64 +2855,63 @@ hexagon\_3\_3, variant: 2
 \begin{tabular}{cc}
 hexagon\_4\_1\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=17pt]
 % Declare Points
-\coordinate (D$_121$) at (1,1.1);
-\coordinate (E$_121$) at (1.84,0.99);
-\coordinate (F$_121$) at (1.84,0.14);
-\coordinate (G$_121$) at (1,0);
-\coordinate (H$_121$) at (0.15,0.07);
-\coordinate (I$_121$) at (-0.2,0.9);
+\coordinate (Y$_124$) at (1,1.1);
+\coordinate (Z$_124$) at (1.84,0.99);
+\coordinate (A$_125$) at (1.84,0.14);
+\coordinate (B$_125$) at (1,0);
+\coordinate (C$_125$) at (0.15,0.07);
+\coordinate (D$_125$) at (-0.2,0.9);
 
 % Draw Hexagon
-\draw (D$_121$)
--- (E$_121$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (F$_121$) node[midway, sloped, scale=0.5] {\bigstar}
--- (G$_121$) node[midway, sloped, scale=0.5] {\bigstar}
--- (H$_121$) node[midway, sloped, scale=0.5] {\bigstar}
--- (I$_121$) node[midway, below, sloped] {\SI{1.5}{dam}}
--- cycle node[midway, above, sloped] {\SI{2.5}{dam}};
+\draw (Y$_124$)
+-- (Z$_124$) node[midway, above] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- (A$_125$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (B$_125$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (C$_125$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (D$_125$) node[midway, below left] {\SI{1.5}{dam}}
+-- cycle node[midway, above] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
 \\
 \end{tabular}
 \newline
-\newpage
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+\newline
 \begin{tabular}{cc}
 hexagon\_4\_1\_1, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (T$_122$) at (1,0);
-\coordinate (U$_122$) at (0.16,0.15);
-\coordinate (V$_122$) at (-0.2,0.92);
-\coordinate (W$_122$) at (0.63,1.1);
-\coordinate (X$_122$) at (2.3,1);
-\coordinate (Y$_122$) at (2.01,0.2);
+\coordinate (O$_126$) at (1,0);
+\coordinate (P$_126$) at (0.16,0.15);
+\coordinate (Q$_126$) at (-0.2,0.92);
+\coordinate (R$_126$) at (0.63,1.1);
+\coordinate (S$_126$) at (2.3,1);
+\coordinate (T$_126$) at (2.01,0.2);
 
 % Draw Hexagon
-\draw (T$_122$)
--- (U$_122$) node[midway, sloped, scale=0.5] {\triangle}
--- (V$_122$) node[midway, below, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (W$_122$) node[midway, sloped, scale=0.5] {\triangle}
--- (X$_122$) node[midway, above, sloped] {\SI{1.5}{dam}}
--- (Y$_122$) node[midway, sloped, scale=0.5] {\triangle}
--- cycle node[midway, below, sloped] {\SI{2.5}{dam}};
+\draw (O$_126$)
+-- (P$_126$) node[midway, sloped, scale=0.5] {||}
+-- (Q$_126$) node[midway, below left] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (R$_126$) node[midway, sloped, scale=0.5] {||}
+-- (S$_126$) node[midway, above] {\SI{2.5}{dam}}
+-- (T$_126$) node[midway, sloped, scale=0.5] {||}
+-- cycle node[midway, below] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -2980,30 +2923,29 @@ hexagon\_4\_1\_1, variant: 1
 \begin{tabular}{cc}
 hexagon\_4\_1\_1, variant: 2
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (J$_124$) at (1,0);
-\coordinate (K$_124$) at (0.16,0.1);
-\coordinate (L$_124$) at (0.11,0.95);
-\coordinate (M$_124$) at (1.1,1.1);
-\coordinate (N$_124$) at (1.94,0.96);
-\coordinate (O$_124$) at (2.24,0.17);
+\coordinate (E$_128$) at (1,0);
+\coordinate (F$_128$) at (0.16,0.1);
+\coordinate (G$_128$) at (0.11,0.95);
+\coordinate (H$_128$) at (1.1,1.1);
+\coordinate (I$_128$) at (1.94,0.96);
+\coordinate (J$_128$) at (2.24,0.17);
 
 % Draw Hexagon
-\draw (J$_124$)
--- (K$_124$) node[midway, sloped, scale=0.5] {O}
--- (L$_124$) node[midway, sloped, scale=0.5] {O}
--- (M$_124$) node[midway, above, sloped] {\SI{2.5}{dam}}
--- (N$_124$) node[midway, sloped, scale=0.5] {O}
--- (O$_124$) node[midway, above, sloped] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (E$_128$)
+-- (F$_128$) node[midway, sloped, scale=0.5] {|}
+-- (G$_128$) node[midway, sloped, scale=0.5] {|}
+-- (H$_128$) node[midway, above] {\SI{1.5}{dam}}
+-- (I$_128$) node[midway, sloped, scale=0.5] {|}
+-- (J$_128$) node[midway, right] {\SI{3.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- cycle node[midway, below] {\SI{2.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -3015,30 +2957,29 @@ hexagon\_4\_1\_1, variant: 2
 \begin{tabular}{cc}
 hexagon\_4\_2, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=11.5pt]
 % Declare Points
-\coordinate (H$_125$) at (1.2,0);
-\coordinate (I$_125$) at (0.36,0.09);
-\coordinate (J$_125$) at (0.01,0.87);
-\coordinate (K$_125$) at (0.83,1.1);
-\coordinate (L$_125$) at (1.67,0.97);
-\coordinate (M$_125$) at (2.19,0.12);
+\coordinate (C$_129$) at (1.2,0);
+\coordinate (D$_129$) at (0.36,0.09);
+\coordinate (E$_129$) at (0.01,0.87);
+\coordinate (F$_129$) at (0.83,1.1);
+\coordinate (G$_129$) at (1.67,0.97);
+\coordinate (H$_129$) at (2.19,0.12);
 
 % Draw Hexagon
-\draw (H$_125$)
--- (I$_125$) node[midway, sloped, scale=0.5] {|}
--- (J$_125$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|}
--- (K$_125$) node[midway, sloped, scale=0.5] {|}
--- (L$_125$) node[midway, sloped, scale=0.5] {|}
--- (M$_125$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+\draw (C$_129$)
+-- (D$_129$) node[midway, sloped, scale=0.5] {O}
+-- (E$_129$) node[midway, below left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (F$_129$) node[midway, sloped, scale=0.5] {O}
+-- (G$_129$) node[midway, sloped, scale=0.5] {O}
+-- (H$_129$) node[midway, above right] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\square}
 -- cycle node[midway, sloped, scale=0.5] {\square};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -3050,30 +2991,29 @@ hexagon\_4\_2, variant: 0
 \begin{tabular}{cc}
 hexagon\_4\_2, variant: 1
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (X$_126$) at (0,0.85);
-\coordinate (Y$_126$) at (0.81,1.1);
-\coordinate (Z$_126$) at (1.66,1.02);
-\coordinate (A$_127$) at (2.32,0.48);
-\coordinate (B$_127$) at (1.44,0);
-\coordinate (C$_127$) at (0.59,0.04);
+\coordinate (S$_130$) at (0,0.85);
+\coordinate (T$_130$) at (0.81,1.1);
+\coordinate (U$_130$) at (1.66,1.02);
+\coordinate (V$_130$) at (2.32,0.48);
+\coordinate (W$_130$) at (1.44,0);
+\coordinate (X$_130$) at (0.59,0.04);
 
 % Draw Hexagon
-\draw (X$_126$)
--- (Y$_126$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (Z$_126$) node[midway, sloped, scale=0.5] {|||}
--- (A$_127$) node[midway, sloped, scale=0.5] {|||}
--- (B$_127$) node[midway, below, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (C$_127$) node[midway, sloped, scale=0.5] {|||}
--- cycle node[midway, sloped, scale=0.5] {\bigstar};
+\draw (S$_130$)
+-- (T$_130$) node[midway, above] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
+-- (U$_130$) node[midway, sloped, scale=0.5] {\triangle}
+-- (V$_130$) node[midway, sloped, scale=0.5] {\triangle}
+-- (W$_130$) node[midway, below right] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|||}
+-- (X$_130$) node[midway, sloped, scale=0.5] {\triangle}
+-- cycle node[midway, sloped, scale=0.5] {|||};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -3085,30 +3025,29 @@ hexagon\_4\_2, variant: 1
 \begin{tabular}{cc}
 hexagon\_4\_2, variant: 2
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=17pt]
 % Declare Points
-\coordinate (N$_128$) at (0,0.46);
-\coordinate (O$_128$) at (0.61,1.06);
-\coordinate (P$_128$) at (1.46,1.06);
-\coordinate (Q$_128$) at (2.35,0.6);
-\coordinate (R$_128$) at (1.74,0);
-\coordinate (S$_128$) at (0.89,0);
+\coordinate (I$_132$) at (0,0.46);
+\coordinate (J$_132$) at (0.61,1.06);
+\coordinate (K$_132$) at (1.46,1.06);
+\coordinate (L$_132$) at (2.35,0.6);
+\coordinate (M$_132$) at (1.74,0);
+\coordinate (N$_132$) at (0.89,0);
 
 % Draw Hexagon
-\draw (N$_128$)
--- (O$_128$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\triangle}
--- (P$_128$) node[midway, sloped, scale=0.5] {\triangle}
--- (Q$_128$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
--- (R$_128$) node[midway, sloped, scale=0.5] {\triangle}
--- (S$_128$) node[midway, sloped, scale=0.5] {\triangle}
--- cycle node[midway, sloped, scale=0.5] {\lozenge};
+\draw (I$_132$)
+-- (J$_132$) node[midway, above left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
+-- (K$_132$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (L$_132$) node[midway, above right] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {O}
+-- (M$_132$) node[midway, sloped, scale=0.5] {\bigstar}
+-- (N$_132$) node[midway, sloped, scale=0.5] {\bigstar}
+-- cycle node[midway, sloped, scale=0.5] {O};
 
 % Label Points
 
 \end{tikzpicture}
-&
 &
 \\
 \end{tabular}
@@ -3120,25 +3059,25 @@ hexagon\_4\_2, variant: 2
 \begin{tabular}{cc}
 hexagon\_5\_1, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=10pt]
 % Declare Points
-\coordinate (L$_129$) at (0,0.8);
-\coordinate (M$_129$) at (0.8,1.1);
-\coordinate (N$_129$) at (1.65,1.1);
-\coordinate (O$_129$) at (2.38,0.68);
-\coordinate (P$_129$) at (1.88,0);
-\coordinate (Q$_129$) at (1.03,0);
+\coordinate (G$_133$) at (0,0.8);
+\coordinate (H$_133$) at (0.8,1.1);
+\coordinate (I$_133$) at (1.65,1.1);
+\coordinate (J$_133$) at (2.38,0.68);
+\coordinate (K$_133$) at (1.88,0);
+\coordinate (L$_133$) at (1.03,0);
 
 % Draw Hexagon
-\draw (L$_129$)
--- (M$_129$) node[midway, sloped, scale=0.5] {O}
--- (N$_129$) node[midway, sloped, scale=0.5] {O}
--- (O$_129$) node[midway, sloped, scale=0.5] {O}
--- (P$_129$) node[midway, below, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {O}
--- (Q$_129$) node[midway, sloped, scale=0.5] {O}
--- cycle node[midway, below, sloped] {\SI{1.5}{dam}};
+\draw (G$_133$)
+-- (H$_133$) node[midway, sloped, scale=0.5] {\square}
+-- (I$_133$) node[midway, sloped, scale=0.5] {\square}
+-- (J$_133$) node[midway, sloped, scale=0.5] {\square}
+-- (K$_133$) node[midway, below right] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {\square}
+-- (L$_133$) node[midway, sloped, scale=0.5] {\square}
+-- cycle node[midway, below left] {\SI{1.5}{dam}};
 
 % Label Points
 
@@ -3147,26 +3086,25 @@ hexagon\_5\_1, variant: 0
 
 \begin{tikzpicture}[baseline=19.5pt]
 % Declare Points
-\coordinate (J$_130$) at (2.58,0.427);
-\coordinate (K$_130$) at (1.78,0.127);
-\coordinate (L$_130$) at (0.93,0.127);
-\coordinate (M$_130$) at (0.2,0.547);
-\coordinate (N$_130$) at (0.7,1.227);
-\coordinate (O$_130$) at (1.55,1.227);
+\coordinate (E$_134$) at (2.58,0.427);
+\coordinate (F$_134$) at (1.78,0.127);
+\coordinate (G$_134$) at (0.93,0.127);
+\coordinate (H$_134$) at (0.2,0.547);
+\coordinate (I$_134$) at (0.7,1.227);
+\coordinate (J$_134$) at (1.55,1.227);
 
 % Draw Hexagon
-\draw (J$_130$)
--- (K$_130$) node[midway, sloped, scale=0.5] {||}
--- (L$_130$) node[midway, sloped, scale=0.5] {||}
--- (M$_130$) node[midway, sloped, scale=0.5] {||}
--- (N$_130$) node[midway, above, sloped] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||}
--- (O$_130$) node[midway, sloped, scale=0.5] {||}
--- cycle node[midway, above, sloped] {\SI{1.5}{dam}};
+\draw (E$_134$)
+-- (F$_134$) node[midway, sloped, scale=0.5] {||}
+-- (G$_134$) node[midway, sloped, scale=0.5] {||}
+-- (H$_134$) node[midway, sloped, scale=0.5] {||}
+-- (I$_134$) node[midway, above left] {\SI{2.5}{dam}} node[midway, sloped, scale=0.5] {||}
+-- (J$_134$) node[midway, sloped, scale=0.5] {||}
+-- cycle node[midway, above right] {\SI{1.5}{dam}};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
@@ -3177,25 +3115,25 @@ hexagon\_5\_1, variant: 0
 \begin{tabular}{cc}
 hexagon\_6, variant: 0
  \newline &
-\begin{tabular}{ccc}
+\begin{tabular}{cc}
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (I$_131$) at (0.565,0.233);
-\coordinate (J$_131$) at (0.567,0.869);
-\coordinate (K$_131$) at (1.113,1.184);
-\coordinate (L$_131$) at (1.665,0.867);
-\coordinate (M$_131$) at (1.663,0.231);
-\coordinate (N$_131$) at (1.117,-0.084);
+\coordinate (D$_135$) at (0.502,0.386);
+\coordinate (E$_135$) at (0.668,1);
+\coordinate (F$_135$) at (1.277,1.163);
+\coordinate (G$_135$) at (1.728,0.714);
+\coordinate (H$_135$) at (1.562,0.1);
+\coordinate (I$_135$) at (0.953,-0.063);
 
 % Draw Hexagon
-\draw (I$_131$)
--- (J$_131$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|||}
--- (K$_131$) node[midway, sloped, scale=0.5] {|||}
--- (L$_131$) node[midway, sloped, scale=0.5] {|||}
--- (M$_131$) node[midway, sloped, scale=0.5] {|||}
--- (N$_131$) node[midway, sloped, scale=0.5] {|||}
--- cycle node[midway, sloped, scale=0.5] {|||};
+\draw (D$_135$)
+-- (E$_135$) node[midway, left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {|}
+-- (F$_135$) node[midway, sloped, scale=0.5] {|}
+-- (G$_135$) node[midway, sloped, scale=0.5] {|}
+-- (H$_135$) node[midway, sloped, scale=0.5] {|}
+-- (I$_135$) node[midway, sloped, scale=0.5] {|}
+-- cycle node[midway, sloped, scale=0.5] {|};
 
 % Label Points
 
@@ -3204,26 +3142,25 @@ hexagon\_6, variant: 0
 
 \begin{tikzpicture}[baseline=13pt]
 % Declare Points
-\coordinate (H$_132$) at (0.565,0.233);
-\coordinate (I$_132$) at (0.567,0.869);
-\coordinate (J$_132$) at (1.113,1.184);
-\coordinate (K$_132$) at (1.665,0.867);
-\coordinate (L$_132$) at (1.663,0.231);
-\coordinate (M$_132$) at (1.117,-0.084);
+\coordinate (C$_136$) at (0.502,0.386);
+\coordinate (D$_136$) at (0.668,1);
+\coordinate (E$_136$) at (1.277,1.163);
+\coordinate (F$_136$) at (1.728,0.714);
+\coordinate (G$_136$) at (1.562,0.1);
+\coordinate (H$_136$) at (0.953,-0.063);
 
 % Draw Hexagon
-\draw (H$_132$)
--- (I$_132$) node[midway, above, sloped] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\bigstar}
--- (J$_132$) node[midway, sloped, scale=0.5] {\bigstar}
--- (K$_132$) node[midway, sloped, scale=0.5] {\bigstar}
--- (L$_132$) node[midway, sloped, scale=0.5] {\bigstar}
--- (M$_132$) node[midway, sloped, scale=0.5] {\bigstar}
--- cycle node[midway, sloped, scale=0.5] {\bigstar};
+\draw (C$_136$)
+-- (D$_136$) node[midway, left] {\SI{1.5}{dam}} node[midway, sloped, scale=0.5] {\lozenge}
+-- (E$_136$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (F$_136$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (G$_136$) node[midway, sloped, scale=0.5] {\lozenge}
+-- (H$_136$) node[midway, sloped, scale=0.5] {\lozenge}
+-- cycle node[midway, sloped, scale=0.5] {\lozenge};
 
 % Label Points
 
 \end{tikzpicture}
-&
 \\
 \end{tabular}
 \\
