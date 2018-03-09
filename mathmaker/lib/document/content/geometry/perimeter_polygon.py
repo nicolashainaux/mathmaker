@@ -33,7 +33,9 @@ class sub_object(component.structure):
         # super().setup('numbers', nb=, **options)
         # super().setup('nb_variants', **options)
         super().setup('length_units', **options)
-        super().setup('polygon', polygon_data=build_data)
+
+        # We know the wording will be in two lines:
+        super().setup('polygon', polygon_data=build_data, wlines_nb=2)
 
         self.wording = {
             3: _(r'Perimeter of this triangle?\newline '

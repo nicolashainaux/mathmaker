@@ -565,7 +565,7 @@ class structure(object):
                           layout='×'.join([rows, cols]),
                           fill='×'.join([frows, fcols]))
 
-    def _generate_polygon(self, codename, variant, labels):
+    def _generate_polygon(self, codename, variant, labels, wlines_nb=0):
         # codename: see database, table polygons
         # labels: come as [(1, nb), (2, nb), (2, nb)]
         # (see _setup_polygon below)
@@ -574,7 +574,7 @@ class structure(object):
                       name=self.polygon_name,
                       label_vertices=self.label_polygon_vertices,
                       thickness=self.tikz_linesegments_thickness,
-                      length_unit=None)
+                      length_unit=None, wlines_nb=wlines_nb)
         # Without patching polygons to NOT cycle when drawn, the scaling of
         # tikzpicture will produce a displaying bug (not nice)
         self.polygon.do_cycle = False
@@ -582,12 +582,15 @@ class structure(object):
         for s in self.polygon.sides:
             s.label_scale = Number('0.85')
 
-    def _setup_polygon(self, polygon_data=None):
+    def _setup_polygon(self, polygon_data=None, wlines_nb=0):
         # polygon_data is of the form:
         # (check the tables' columns in shapes.db-dist)
         # (sides_nb, type, special, codename, sides_particularity, level,
         #  variant, table2, table3, table4, table5, table6, ...)
         # where ... are the available numbers to use for sides labeling.
+
+        # wlines_nb is originally there to carry on information about the
+        # number of lines of the wording (to adapt baseline accordingly)
         polygon_data = list(polygon_data)
         self.polygon_sides_nb = polygon_data[0]
         self.polygon_codename = polygon_data[3]
@@ -605,7 +608,8 @@ class structure(object):
         labels = [(occ, n)
                   for occ, n in zip([lbl[0] for lbl in labels],
                                     self.nb_list)]
-        self._generate_polygon(self.polygon_codename, variant, labels)
+        self._generate_polygon(self.polygon_codename, variant, labels,
+                               wlines_nb=wlines_nb)
 
     def setup(self, arg, **kwargs):
         if type(arg) is not str:

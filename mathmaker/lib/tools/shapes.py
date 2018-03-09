@@ -35,7 +35,7 @@ class ShapeGenerator(object):
 
     def generate(self, codename=None, variant=None, labels=None,
                  name=None, label_vertices=None, thickness=None,
-                 length_unit=None):
+                 length_unit=None, wlines_nb=0):
         """
         :param codename: a str describing the type of polygon and the sides
         lengths, grouped by equal sides batches, like triangle_1_1_1,
@@ -84,12 +84,13 @@ class ShapeGenerator(object):
                                        name=name,
                                        label_vertices=label_vertices,
                                        thickness=thickness,
-                                       length_unit=length_unit)
+                                       length_unit=length_unit,
+                                       wlines_nb=wlines_nb)
 
     def _polygon(self, shapes_source, shape_variants, shape_builder, labels,
                  masks=None, marks=None, length_unit=None, name=None,
                  shape_variant_nb=None, label_vertices=None, thickness=None,
-                 rt_extra_info=None):
+                 rt_extra_info=None, wlines_nb=0):
         if shape_variant_nb is None:
             shape_variant_nb = next(shapes_source)[0]
         if rt_extra_info is not None and shape_variant_nb in rt_extra_info:
@@ -99,6 +100,8 @@ class ShapeGenerator(object):
                            'thickness': thickness,
                            'sloped_sides_labels': False})
         baseline = build_data.pop('baseline', None)
+        if isinstance(baseline, dict):
+            baseline = baseline[wlines_nb]
         boundingbox = build_data.pop('boundingbox', None)
         if masks is None:
             masks = build_data.pop('masks', None)
@@ -123,7 +126,7 @@ class ShapeGenerator(object):
 
     def _triangle_1_1_1(self, variant=None, labels=None, name=None,
                         label_vertices=None, thickness=None, length_unit=None,
-                        shape_variant_nb=None):
+                        shape_variant_nb=None, wlines_nb=0):
         if variant not in [0, 1]:
             raise ValueError('variant must be 0 or 1 (not \'{}\')'
                              .format(variant))
@@ -150,32 +153,39 @@ class ShapeGenerator(object):
         elif variant == 1:  # right triangle shapes
             shape_variants = {1: {'start_vertex': Point(0, 0),
                                   'leg1_length': 2, 'leg2_length': 1,
-                                  'baseline': '8pt'},
+                                  'baseline': {0: '8pt', 1: '8pt', 2: '6pt'}},
                               2: {'start_vertex': Point(2, 0),
                                   'leg1_length': 1, 'leg2_length': 2,
-                                  'rotation_angle': 90, 'baseline': '17pt'},
+                                  'rotation_angle': 90,
+                                  'baseline': {0: '17pt', 1: '17pt',
+                                               2: '23pt'}},
                               3: {'start_vertex': Point(2, 1),
                                   'leg1_length': 2, 'leg2_length': 1,
-                                  'rotation_angle': 180, 'baseline': '17pt'},
+                                  'rotation_angle': 180,
+                                  'baseline': {0: '17pt', 1: '17pt',
+                                               2: '40pt'}},
                               4: {'start_vertex': Point(0, 1),
                                   'leg1_length': 1, 'leg2_length': 2,
-                                  'rotation_angle': -90, 'baseline': '8pt'},
+                                  'rotation_angle': -90,
+                                  'baseline': {0: '8pt', 1: '8pt', 2: '48pt'}},
                               5: {'start_vertex': Point('2.236', 0),
                                   'leg1_length': 2, 'leg2_length': 1,
                                   'rotation_angle': Number('153.4'),
-                                  'baseline': '8pt'},
+                                  'baseline': {0: '8pt', 1: '8pt', 2: '10pt'}},
                               6: {'start_vertex': Point('2.236', 0),
                                   'leg1_length': 1, 'leg2_length': 2,
                                   'rotation_angle': Number('116.6'),
-                                  'baseline': '8pt'},
+                                  'baseline': {0: '8pt', 1: '8pt', 2: '17pt'}},
                               7: {'start_vertex': Point(0, '0.981'),
                                   'leg1_length': 1, 'leg2_length': 2,
                                   'rotation_angle': Number('-63.4'),
-                                  'baseline': '17pt'},
+                                  'baseline': {0: '17pt', 1: '17pt',
+                                               2: '52pt'}},
                               8: {'start_vertex': Point(0, '0.981'),
                                   'leg1_length': 2, 'leg2_length': 1,
                                   'rotation_angle': Number('-26.6'),
-                                  'baseline': '17pt'}
+                                  'baseline': {0: '17pt', 1: '17pt',
+                                               2: '44pt'}}
                               }
             shapes_source = shared.right_triangle_shapes_source
             shape_builder = RightTriangle
@@ -192,12 +202,13 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             shape_variant_nb=shape_variant_nb,
-            rt_extra_info=rt_extra_info
+            rt_extra_info=rt_extra_info,
+            wlines_nb=wlines_nb
         )
 
     def _triangle_2_1(self, variant=None, labels=None, name=None,
                       label_vertices=None, thickness=None, length_unit=None,
-                      shape_variant_nb=None):
+                      shape_variant_nb=None, wlines_nb=0):
         mark = next(shared.ls_marks_source)[0]
         shape_variants = {1: {'base_length': Number('2.8'),
                               'equal_legs_length': Number('1.52'),
@@ -246,12 +257,13 @@ class ShapeGenerator(object):
             labels=[baselbl, eqlbl],
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _triangle_3(self, variant=None, labels=None, name=None,
                     label_vertices=None, thickness=None, length_unit=None,
-                    shape_variant_nb=None):
+                    shape_variant_nb=None, wlines_nb=0):
         mark = next(shared.ls_marks_source)[0]
         shape_variants = {1: {'side_length': Number('1.1'),
                               'rotation_angle': 0,
@@ -278,12 +290,14 @@ class ShapeGenerator(object):
             labels=[labels[0][1]],
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _quadrilateral_1_1_1_1(self, variant=None, labels=None, name=None,
                                label_vertices=None, thickness=None,
-                               length_unit=None, shape_variant_nb=None):
+                               length_unit=None, shape_variant_nb=None,
+                               wlines_nb=0):
         quadrilateral_shape1 = [Point(0, 0), Point('0.6', '-0.3'),
                                 Point('1.6', '0.2'), Point('0.4', 1)]
         quadrilateral_shape2 = [Point(0, 0), Point(1, '-0.2'),
@@ -317,12 +331,14 @@ class ShapeGenerator(object):
             labels=[lbl[1] for lbl in labels],
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _quadrilateral_2_1_1(self, variant=None, labels=None, name=None,
                              label_vertices=None, thickness=None,
-                             length_unit=None, shape_variant_nb=None):
+                             length_unit=None, shape_variant_nb=None,
+                             wlines_nb=0):
         if variant not in [0, 1]:
             raise ValueError('variant must be 0 or 1 (not \'{}\')'
                              .format(variant))
@@ -382,12 +398,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _quadrilateral_2_2(self, variant=None, labels=None, name=None,
                            label_vertices=None, thickness=None,
-                           length_unit=None, shape_variant_nb=None):
+                           length_unit=None, shape_variant_nb=None,
+                           wlines_nb=0):
         if variant not in [0, 1, 2]:
             raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
                              .format(variant))
@@ -480,12 +498,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _quadrilateral_3_1(self, variant=None, labels=None, name=None,
                            label_vertices=None, thickness=None,
-                           length_unit=None, shape_variant_nb=None):
+                           length_unit=None, shape_variant_nb=None,
+                           wlines_nb=0):
         shape1 = [Point(0, 0), Point('0.46', '0.8'),
                   Point('1.38', '0.8'), Point('1.84', 0)]
         shape2 = [Point('0.02', '0.5'), Point('0.9', '0.7'),
@@ -521,12 +541,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _quadrilateral_4(self, variant=None, labels=None, name=None,
                          label_vertices=None, thickness=None,
-                         length_unit=None, shape_variant_nb=None):
+                         length_unit=None, shape_variant_nb=None,
+                         wlines_nb=0):
         if variant not in [0, 1]:
             raise ValueError('variant must be 0 or 1 (not \'{}\')'
                              .format(variant))
@@ -570,12 +592,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _pentagon_1_1_1_1_1(self, variant=None, labels=None, name=None,
                             label_vertices=None, thickness=None,
-                            length_unit=None, shape_variant_nb=None):
+                            length_unit=None, shape_variant_nb=None,
+                            wlines_nb=0):
         pentagon_shape1 = [Point('0.6', 0), Point(0, '0.4'),
                            Point('1.2', '0.8'), Point('2.4', '0.4'),
                            Point('1.8', 0)]
@@ -598,12 +622,14 @@ class ShapeGenerator(object):
             labels=[lbl[1] for lbl in labels],
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _pentagon_2_1_1_1(self, variant=None, labels=None, name=None,
                           label_vertices=None, thickness=None,
-                          length_unit=None, shape_variant_nb=None):
+                          length_unit=None, shape_variant_nb=None,
+                          wlines_nb=0):
         if variant not in [0, 1]:
             raise ValueError('variant must be 0 or 1 (not \'{}\')'
                              .format(variant))
@@ -655,12 +681,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _pentagon_2_2_1(self, variant=None, labels=None, name=None,
                         label_vertices=None, thickness=None,
-                        length_unit=None, shape_variant_nb=None):
+                        length_unit=None, shape_variant_nb=None,
+                        wlines_nb=0):
         if variant not in [0, 1, 2]:
             raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
                              .format(variant))
@@ -736,12 +764,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _pentagon_3_1_1(self, variant=None, labels=None, name=None,
                         label_vertices=None, thickness=None,
-                        length_unit=None, shape_variant_nb=None):
+                        length_unit=None, shape_variant_nb=None,
+                        wlines_nb=0):
         if variant not in [0, 1]:
             raise ValueError('variant must be 0 or 1 (not \'{}\')'
                              .format(variant))
@@ -794,12 +824,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _pentagon_3_2(self, variant=None, labels=None, name=None,
                       label_vertices=None, thickness=None,
-                      length_unit=None, shape_variant_nb=None):
+                      length_unit=None, shape_variant_nb=None,
+                      wlines_nb=0):
         if variant not in [0, 1]:
             raise ValueError('variant must be 0 or 1 (not \'{}\')'
                              .format(variant))
@@ -853,12 +885,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _pentagon_4_1(self, variant=None, labels=None, name=None,
                       label_vertices=None, thickness=None,
-                      length_unit=None, shape_variant_nb=None):
+                      length_unit=None, shape_variant_nb=None,
+                      wlines_nb=0):
         pentagonv0_shape1 = [Point('0.21', '0.73'), Point('1.11', '0.8'),
                              Point('1.78', '0.2'), Point('0.9', 0),
                              Point(0, 0)]
@@ -891,12 +925,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _pentagon_5(self, variant=None, labels=None, name=None,
                     label_vertices=None, thickness=None,
-                    length_unit=None, shape_variant_nb=None):
+                    length_unit=None, shape_variant_nb=None,
+                    wlines_nb=0):
         pentagonv0_shape1 = [Point('-0.22', '0.67'), Point('0.35', '1.08'),
                              Point('0.92', '0.67'), Point('0.7', 0),
                              Point(0, 0)]
@@ -917,12 +953,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _hexagon_1_1_1_1_1_1(self, variant=None, labels=None, name=None,
                              label_vertices=None, thickness=None,
-                             length_unit=None, shape_variant_nb=None):
+                             length_unit=None, shape_variant_nb=None,
+                             wlines_nb=0):
         hexagon_shape1 = [Point(0, '0.4'), Point('0.7', '0.8'),
                           Point('1.7', '0.8'), Point('2.8', '0.5'),
                           Point(2, 0), Point('0.8', 0)]
@@ -945,12 +983,14 @@ class ShapeGenerator(object):
             labels=[lbl[1] for lbl in labels],
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _hexagon_2_1_1_1_1(self, variant=None, labels=None, name=None,
                            label_vertices=None, thickness=None,
-                           length_unit=None, shape_variant_nb=None):
+                           length_unit=None, shape_variant_nb=None,
+                           wlines_nb=0):
         if variant not in [0, 1, 2]:
             raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
                              .format(variant))
@@ -1020,12 +1060,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _hexagon_2_2_1_1(self, variant=None, labels=None, name=None,
                          label_vertices=None, thickness=None,
-                         length_unit=None, shape_variant_nb=None):
+                         length_unit=None, shape_variant_nb=None,
+                         wlines_nb=0):
         if variant not in [0, 1, 2, 3, 4, 5, 6, 7]:
             raise ValueError('variant must be 0, 1, 2, 3, 4, 5, 6, or 7 '
                              '(not \'{}\')'.format(variant))
@@ -1165,12 +1207,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _hexagon_2_2_2(self, variant=None, labels=None, name=None,
                        label_vertices=None, thickness=None,
-                       length_unit=None, shape_variant_nb=None):
+                       length_unit=None, shape_variant_nb=None,
+                       wlines_nb=0):
         if variant not in [0, 1, 2, 3]:
             raise ValueError('variant must be 0, 1, 2 or 3 '
                              '(not \'{}\')'.format(variant))
@@ -1254,12 +1298,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _hexagon_3_1_1_1(self, variant=None, labels=None, name=None,
                          label_vertices=None, thickness=None,
-                         length_unit=None, shape_variant_nb=None):
+                         length_unit=None, shape_variant_nb=None,
+                         wlines_nb=0):
         if variant not in [0, 1, 2]:
             raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
                              .format(variant))
@@ -1321,12 +1367,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _hexagon_3_2_1(self, variant=None, labels=None, name=None,
                        label_vertices=None, thickness=None,
-                       length_unit=None, shape_variant_nb=None):
+                       length_unit=None, shape_variant_nb=None,
+                       wlines_nb=0):
         if variant not in [0, 1, 2]:
             raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
                              .format(variant))
@@ -1392,12 +1440,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _hexagon_3_3(self, variant=None, labels=None, name=None,
                      label_vertices=None, thickness=None,
-                     length_unit=None, shape_variant_nb=None):
+                     length_unit=None, shape_variant_nb=None,
+                     wlines_nb=0):
         if variant not in [0, 1, 2]:
             raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
                              .format(variant))
@@ -1461,12 +1511,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _hexagon_4_1_1(self, variant=None, labels=None, name=None,
                        label_vertices=None, thickness=None,
-                       length_unit=None, shape_variant_nb=None):
+                       length_unit=None, shape_variant_nb=None,
+                       wlines_nb=0):
         if variant not in [0, 1, 2]:
             raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
                              .format(variant))
@@ -1529,12 +1581,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _hexagon_4_2(self, variant=None, labels=None, name=None,
                      label_vertices=None, thickness=None,
-                     length_unit=None, shape_variant_nb=None):
+                     length_unit=None, shape_variant_nb=None,
+                     wlines_nb=0):
         if variant not in [0, 1, 2]:
             raise ValueError('variant must be 0, 1 or 2 (not \'{}\')'
                              .format(variant))
@@ -1598,12 +1652,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _hexagon_5_1(self, variant=None, labels=None, name=None,
                      label_vertices=None, thickness=None,
-                     length_unit=None, shape_variant_nb=None):
+                     length_unit=None, shape_variant_nb=None,
+                     wlines_nb=0):
         hexagon_shape1 = [Point(0, '0.8'), Point('0.8', '1.1'),
                           Point('1.65', '1.1'), Point('2.38', '0.68'),
                           Point('1.88', 0), Point('1.03', 0)]
@@ -1637,12 +1693,14 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
 
     def _hexagon_6(self, variant=None, labels=None, name=None,
                    label_vertices=None, thickness=None,
-                   length_unit=None, shape_variant_nb=None):
+                   length_unit=None, shape_variant_nb=None,
+                   wlines_nb=0):
         shape_variant_nb = 2
         hexagon_shape1 = [Point('0.48', '0.55'), Point('0.8', '1.1'),
                           Point('1.43', '1.1'), Point('1.75', '0.55'),
@@ -1651,7 +1709,7 @@ class ShapeGenerator(object):
         shape_variants = {
             1: {'args': hexagon_shape1, 'rotation_angle': 0,
                 'baseline': '16pt'},
-            2: {'args': hexagon_shape1, 'rotation_angle': 30,
+            2: {'args': hexagon_shape1, 'rotation_angle': 15,
                 'baseline': '13pt'},
         }
         masks = [None, ' ', ' ', ' ', ' ', ' ']
@@ -1664,5 +1722,6 @@ class ShapeGenerator(object):
             name=name, label_vertices=label_vertices, thickness=thickness,
             length_unit=length_unit,
             masks=masks, marks=marks,
-            shape_variant_nb=shape_variant_nb
+            shape_variant_nb=shape_variant_nb,
+            wlines_nb=wlines_nb
         )
