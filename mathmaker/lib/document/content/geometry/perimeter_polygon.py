@@ -39,13 +39,13 @@ class sub_object(component.structure):
 
         self.wording = {
             3: _(r'Perimeter of this triangle?\newline '
-                 r'(lengths are given in {length_unit}) |hint:length_unit|'),
+                 r'(length unit: {length_unit}) |hint:length_unit|'),
             4: _(r'Perimeter of this quadrilateral?\newline '
-                 r'(lengths are given in {length_unit}) |hint:length_unit|'),
+                 r'(length unit: {length_unit}) |hint:length_unit|'),
             5: _(r'Perimeter of this pentagon?\newline '
-                 r'(lengths are given in {length_unit}) |hint:length_unit|'),
+                 r'(length unit: {length_unit}) |hint:length_unit|'),
             6: _(r'Perimeter of this hexagon?\newline '
-                 r'(lengths are given in {length_unit}) |hint:length_unit|')
+                 r'(length unit: {length_unit}) |hint:length_unit|')
         }[len(self.polygon.sides)]
 
         self.transduration = 12 + 3 * (level - 1)
