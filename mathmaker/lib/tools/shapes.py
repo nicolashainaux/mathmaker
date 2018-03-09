@@ -25,6 +25,7 @@ import random
 from mathmakerlib.calculus import Number
 from mathmakerlib.geometry import Point, AngleDecoration, Polygon, Triangle
 from mathmakerlib.geometry import IsoscelesTriangle, EquilateralTriangle
+from mathmakerlib.geometry import RightTriangle
 from mathmakerlib.geometry import Quadrilateral, Rectangle, Rhombus, Square
 
 from mathmaker.lib import shared
@@ -92,60 +93,65 @@ class ShapeGenerator(object):
             raise ValueError('variant must be 0 or 1 (not \'{}\')'
                              .format(variant))
         if variant == 0:  # scalene triangle shapes
-            shape_variants = {1: [(0, 0),
-                                  (2, 0),
-                                  (Number('0.582'), Number('0.924')),
-                                  '6pt'],
-                              2: [(0, 0),
-                                  (2, 0),
-                                  (Number('1.418'), Number('0.924')),
-                                  '6pt'],
-                              3: [(2, Number('0.924')),
-                                  (0, Number('0.924')),
-                                  (Number('1.418'), 0),
-                                  '13pt'],
-                              4: [(2, Number('0.924')),
-                                  (0, Number('0.924')),
-                                  (Number('0.582'), 0),
-                                  '13pt']
+            shape_variants = {1: {'args': [Point(0, 0), Point(2, 0),
+                                           Point(Number('0.582'),
+                                                 Number('0.924'))],
+                                  'baseline': '6pt'},
+                              2: {'args': [Point(0, 0), Point(2, 0),
+                                           Point(Number('1.418'),
+                                                 Number('0.924'))],
+                                  'baseline': '6pt'},
+                              3: {'args': [Point(2, Number('0.924')),
+                                           Point(0, Number('0.924')),
+                                           Point(Number('1.418'), 0)],
+                                  'baseline': '13pt'},
+                              4: {'args': [Point(2, Number('0.924')),
+                                           Point(0, Number('0.924')),
+                                           Point(Number('0.582'), 0)],
+                                  'baseline': '13pt'}
                               }
-            if shape_variant_nb is None:
-                shape_variant_nb = \
-                    next(shared.scalene_triangle_shapes_source)[0]
+            shapes_source = shared.scalene_triangle_shapes_source
+            shape_builder = Triangle
         elif variant == 1:  # right triangle shapes
-            shape_variants = {1: [(0, 0), (2, 0), (2, 1), '8pt'],
-                              2: [(2, 0), (2, 1), (0, 1), '17pt'],
-                              3: [(2, 1), (0, 1), (0, 0), '17pt'],
-                              4: [(0, 1), (0, 0), (2, 0), '8pt'],
-                              5: [('2.236', 0), ('0.582', '0.981'), (0, 0),
-                                  '8pt'],
-                              6: [('2.1', 0), ('1.418', '0.981'), (0, 0),
-                                  '8pt'],
-                              7: [(0, '0.981'), ('0.582', 0),
-                                  ('2.236', '0.981'),
-                                  '17pt'],
-                              8: [(0, '0.981'), ('1.418', 0),
-                                  ('2.1', '0.981'),
-                                  '17pt']
+            shape_variants = {1: {'start_vertex': Point(0, 0),
+                                  'leg1_length': 2, 'leg2_length': 1,
+                                  'baseline': '8pt'},
+                              2: {'start_vertex': Point(2, 0),
+                                  'leg1_length': 1, 'leg2_length': 2,
+                                  'rotation_angle': 90, 'baseline': '17pt'},
+                              3: {'start_vertex': Point(2, 1),
+                                  'leg1_length': 2, 'leg2_length': 1,
+                                  'rotation_angle': 180, 'baseline': '17pt'},
+                              4: {'start_vertex': Point(0, 1),
+                                  'leg1_length': 1, 'leg2_length': 2,
+                                  'rotation_angle': -90, 'baseline': '8pt'},
+                              5: {'start_vertex': Point('2.236', 0),
+                                  'leg1_length': 2, 'leg2_length': 1,
+                                  'rotation_angle': 150, 'baseline': '8pt'},
+                              6: {'start_vertex': Point('2.236', 0),
+                                  'leg1_length': 1, 'leg2_length': 2,
+                                  'rotation_angle': 120, 'baseline': '8pt'},
+                              7: {'start_vertex': Point(0, '0.981'),
+                                  'leg1_length': 1, 'leg2_length': 2,
+                                  'rotation_angle': -60, 'baseline': '17pt'},
+                              8: {'start_vertex': Point(0, '0.981'),
+                                  'leg1_length': 2, 'leg2_length': 1,
+                                  'rotation_angle': -30, 'baseline': '17pt'}
                               }
-            if shape_variant_nb is None:
-                shape_variant_nb = \
-                    next(shared.right_triangle_shapes_source)[0]
-        p = shape_variants[shape_variant_nb]
-        polygon = Triangle(Point(*p[0]), Point(*p[1]), Point(*p[2]),
-                           name=name, label_vertices=label_vertices,
-                           thickness=thickness)
-        lbls = [Number(labels[0][1], unit=length_unit),
-                Number(labels[1][1], unit=length_unit),
-                Number(labels[2][1], unit=length_unit)]
+            shapes_source = shared.right_triangle_shapes_source
+            shape_builder = RightTriangle
+        lbls = [labels[i][1] for i in range(len(labels))]
         if variant == 1:
             lbls[0], lbls[2] = lbls[2], lbls[0]
-        polygon.setup_labels(labels=lbls)
-        if variant == 1:  # right triangle shapes
-            polygon.angles[1].decoration = AngleDecoration(thickness=thickness)
-            polygon.angles[1].mark_right = True
-        polygon.baseline = p[3]
-        return polygon
+        return self._polygon(
+            shapes_source,
+            shape_variants,
+            shape_builder,
+            labels=lbls,
+            name=name, label_vertices=label_vertices, thickness=thickness,
+            length_unit=length_unit,
+            shape_variant_nb=shape_variant_nb
+        )
 
     def _triangle_2_1(self, variant=None, labels=None, name=None,
                       label_vertices=None, thickness=None, length_unit=None,
