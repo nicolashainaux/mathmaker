@@ -209,6 +209,11 @@ class LaTeX(Structure.Structure):
                 .format(_('To get a better control on floats positioning '
                           '(e.g. tabulars)'),
                         str(UsePackage('multicol')))
+        textcomp = ''
+        if 'textcomp' in required_pkg:
+            textcomp = '\n' + '% {}\n{}\n\n'\
+                .format(_('To use some symbols like currency units'),
+                        str(UsePackage('textcomp')))
         # ulem
         ulem = ''
         if required.package['ulem']:
@@ -223,8 +228,6 @@ class LaTeX(Structure.Structure):
         else:
             specificpkg = r"""% {arraypkg_comment}
 \usepackage{{array}}
-% {textcomppkg_comment}
-\usepackage{{textcomp}}
 
 % {graphicxpkg_comment}
 \usepackage{{graphicx}}
@@ -238,7 +241,6 @@ class LaTeX(Structure.Structure):
 \setlength{{\arrayrulewidth}}{{0.02pt}}
 \pagestyle{{empty}}"""\
 .format(arraypkg_comment=_('To use extra commands to handle tabulars'),
-        textcomppkg_comment=_('To use some symbols like currency units'),
         graphicxpkg_comment=_('To include .eps pictures'),
         layout_comment=_('General layout of the page'))  # noqa
         # Specific commands
@@ -284,7 +286,7 @@ r"""\newline \normalsize }}
 {language_setup}
 
 {siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{multicol}{placeins}{ulem}"""\
-r"""{specificpackages}
+r"""{textcomp}{specificpackages}
 
 {specificcommands}{commoncommands}
 """.format(luatex85patch=luatex85patch, documentclass=dc, symbols=variouspkg,
@@ -292,6 +294,7 @@ r"""{specificpackages}
            font_patch=font_patch, siunitx=siunitx,
            xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
            cancel=cancel, multicol=multicol, placeins=placeins, ulem=ulem,
+           textcomp=textcomp,
            specificpackages=specificpkg, specificcommands=specificcmd,
            commoncommands=commoncmd)
 
