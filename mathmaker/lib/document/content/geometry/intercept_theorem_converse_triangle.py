@@ -20,6 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from mathmakerlib import required
+
 from mathmaker.lib import shared
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.core.base_calculus import Item, Product, Quotient
@@ -103,6 +105,8 @@ class sub_object(component.structure):
                    '\end{multicols} '
                    'ans as: {crossproduct} '
                    'then: {equal_ratios} {newline} ')
+
+        required.package['multicol'] = True
 
         conclusion = _('Hence by the converse of the intercept theorem, '
                        '{line1} is parallel to {line2}.')

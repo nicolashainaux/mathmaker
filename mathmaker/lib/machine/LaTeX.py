@@ -196,6 +196,12 @@ class LaTeX(Structure.Structure):
         if required.package['cancel']:
             cancel = '\n' + '% {}\n{}\n\n'\
                 .format(_('To strike out numbers '), str(UsePackage('cancel')))
+        # multicol
+        multicol = ''
+        if required.package['multicol']:
+            multicol = '\n' + '% {}\n{}\n\n'\
+                .format(_('To use multicol environment'),
+                        str(UsePackage('multicol')))
         # Specific packages
         if variant == 'slideshow':
             specificpkg = r"""\usepackage[overlay, absolute]{textpos}
@@ -204,8 +210,6 @@ class LaTeX(Structure.Structure):
         else:
             specificpkg = r"""% {placeinspkg_comment}
 \usepackage{{placeins}}
-% {multicolpkg_comment}
-\usepackage{{multicol}}
 % {arraypkg_comment}
 \usepackage{{array}}
 % {ulempkg_comment}
@@ -226,7 +230,6 @@ class LaTeX(Structure.Structure):
 \pagestyle{{empty}}"""\
 .format(placeinspkg_comment=_('To get a better control on floats positioning '
                               '(e.g. tabulars) '),
-        multicolpkg_comment=_('To use multicol environment'),
         arraypkg_comment=_('To use extra commands to handle tabulars'),
         ulempkg_comment=_('For pretty underlining'),
         textcomppkg_comment=_('To use some symbols like currency units'),
@@ -274,14 +277,14 @@ r"""\newline \normalsize }}
 {polyglossia}
 {language_setup}
 
-{siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{specificpackages}
+{siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{multicol}{specificpackages}
 
 {specificcommands}{commoncommands}
 """.format(luatex85patch=luatex85patch, documentclass=dc, symbols=variouspkg,
            polyglossia=polyglossia, language_setup=language_setup,
            font_patch=font_patch, siunitx=siunitx,
            xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
-           cancel=cancel,
+           cancel=cancel, multicol=multicol,
            specificpackages=specificpkg, specificcommands=specificcmd,
            commoncommands=commoncmd)
 
@@ -526,6 +529,7 @@ r"""\newline \normalsize }}
 
         if 'multicolumns' in options:
             keyword = 'multicols'
+            required.package['multicol'] = True
             if options.get('unbalanced', False):
                 keyword = 'multicols*'
             if (type(options['multicolumns']) == int
