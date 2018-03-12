@@ -2226,6 +2226,7 @@ msgstr ""
 msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr ""
 
+#: data/frameworks/mental_calculation/05_yellow2.yaml:55
 #: data/frameworks/mental_calculation/04_yellow1.yaml:183
 #: data/frameworks/mental_calculation/05_yellow2.yaml:49
 #: data/frameworks/mental_calculation/04_yellow1.yaml:181
@@ -2323,4 +2324,28 @@ msgstr ""
 msgid ""
 "Perimeter of this hexagon?\\newline (length unit: {length_unit}) "
 "|hint:length_unit|"
+msgstr ""
+
+#: lib/document/content/calculation/divisibility_questions.py:62
+msgid "True"
+msgstr ""
+
+#: lib/document/content/calculation/divisibility_questions.py:66
+msgid "False"
+msgstr ""
+
+#: data/wordings/divisibility_statements.yaml:2
+msgid "{n2} is divisible by {n1}."
+msgstr ""
+
+#: data/wordings/divisibility_statements.yaml:5
+msgid "{n1} is a divisor of {n2}."
+msgstr ""
+
+#: data/wordings/divisibility_statements.yaml:8
+msgid "{n2} is a multiple of {n1}."
+msgstr ""
+
+#: data/frameworks/mental_calculation/05_yellow2.yaml:49
+msgid "Mental calculation: multiples and divisors"
 msgstr ""

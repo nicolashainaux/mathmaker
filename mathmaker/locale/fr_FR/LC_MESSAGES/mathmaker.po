@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2018-03-09 17:22+0100\n"
+"PO-Revision-Date: 2018-03-12 16:23+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -2561,6 +2561,7 @@ msgstr "Calcul mental : multiplications décimales"
 msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr "Prêt ?{sep}Feu !{sep}Partez !"
 
+#: data/frameworks/mental_calculation/05_yellow2.yaml:55
 #: data/frameworks/mental_calculation/04_yellow1.yaml:183
 #: data/frameworks/mental_calculation/05_yellow2.yaml:49
 #: data/frameworks/mental_calculation/04_yellow1.yaml:181
@@ -2675,6 +2676,30 @@ msgid ""
 msgstr ""
 "Périmètre de cet hexagone ?\\newline (unité de longueur : {length_unit}) |"
 "hint:length_unit|"
+
+#: lib/document/content/calculation/divisibility_questions.py:62
+msgid "True"
+msgstr "Vrai"
+
+#: lib/document/content/calculation/divisibility_questions.py:66
+msgid "False"
+msgstr "Faux"
+
+#: data/wordings/divisibility_statements.yaml:2
+msgid "{n2} is divisible by {n1}."
+msgstr "{n2} est divisible par {n1}."
+
+#: data/wordings/divisibility_statements.yaml:5
+msgid "{n1} is a divisor of {n2}."
+msgstr "{n1} est un diviseur de {n2}."
+
+#: data/wordings/divisibility_statements.yaml:8
+msgid "{n2} is a multiple of {n1}."
+msgstr "{n2} est un multiple de {n1}."
+
+#: data/frameworks/mental_calculation/05_yellow2.yaml:49
+msgid "Mental calculation: multiples and divisors"
+msgstr "Calcul mental : multiples et diviseurs"
 
 #~ msgid "Perimeter of this triangle? |hint:length_unit|"
 #~ msgstr "Périmètre de ce triangle ? |hint:length_unit|"

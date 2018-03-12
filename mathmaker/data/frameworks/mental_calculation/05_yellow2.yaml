@@ -44,6 +44,12 @@ perimeter_of_a_polygon: !!omap
                  perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (4)
                  perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (4)
 
+divisibility: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: multiples and divisors"
+  - exercise: !!omap
+    - questions: divisibility questions -> intpairs_3to9 (10)
+
 challenge: !!omap
     - preset: "mental calculation"
     - title: "Challenge, first part"
