@@ -35,27 +35,27 @@ msgstr ""
 msgid "This equation has no solution."
 msgstr ""
 
-#: lib/machine/LaTeX.py:193
+#: lib/machine/LaTeX.py:198
 msgid "To strike out numbers "
 msgstr ""
 
-#: lib/machine/LaTeX.py:224
+#: lib/machine/LaTeX.py:229
 msgid "To use multicol environment"
 msgstr ""
 
-#: lib/machine/LaTeX.py:225
+#: lib/machine/LaTeX.py:230
 msgid "To use extra commands to handle tabulars"
 msgstr ""
 
-#: lib/machine/LaTeX.py:226
+#: lib/machine/LaTeX.py:231
 msgid "For pretty underlining"
 msgstr ""
 
-#: lib/machine/LaTeX.py:244
+#: lib/machine/LaTeX.py:249
 msgid "Exercises counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:249
+#: lib/machine/LaTeX.py:254
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -269,7 +269,7 @@ msgid "Question:"
 msgstr ""
 
 #: lib/old_style_sheet/exercise/X_Structure.py:265
-#: lib/document/frames/exercise.py:774
+#: lib/document/frames/exercise.py:776
 msgid "Answer:"
 msgstr ""
 
@@ -413,7 +413,7 @@ msgstr ""
 msgid "Mental calculation: mini-problems"
 msgstr ""
 
-#: lib/machine/LaTeX.py:227
+#: lib/machine/LaTeX.py:232
 msgid "To use some symbols like currency units"
 msgstr ""
 
@@ -1702,13 +1702,13 @@ msgstr ""
 msgid "Answers!"
 msgstr ""
 
-#: lib/document/content/calculation/divi_direct.py:54
-#: lib/document/content/calculation/multi_clever.py:108
 #: lib/document/content/calculation/addi_direct.py:110
-#: lib/document/content/calculation/numeric_expansion.py:54
-#: lib/document/content/calculation/order_of_operations.py:1446
-#: lib/document/content/calculation/subtr_direct.py:78
 #: lib/document/content/calculation/numeric_factorization.py:74
+#: lib/document/content/calculation/divi_direct.py:54
+#: lib/document/content/calculation/order_of_operations.py:1447
+#: lib/document/content/calculation/subtr_direct.py:78
+#: lib/document/content/calculation/numeric_expansion.py:54
+#: lib/document/content/calculation/multi_clever.py:108
 #: lib/document/content/calculation/multi_direct.py:60
 #, python-brace-format
 msgid "{math_expr} = {q_mark}"
@@ -1727,11 +1727,11 @@ msgid ""
 "(in the multiplication tables, from 2 to 9)"
 msgstr ""
 
-#: lib/machine/LaTeX.py:222
+#: lib/machine/LaTeX.py:227
 msgid "To get a better control on floats positioning (e.g. tabulars) "
 msgstr ""
 
-#: lib/document/frames/exercise.py:398
+#: lib/document/frames/exercise.py:399
 msgid "Example of detailed solutions:"
 msgstr ""
 
@@ -1840,33 +1840,33 @@ msgstr ""
 msgid "Mental calculation:  final test for yellow belt"
 msgstr ""
 
-#: lib/machine/LaTeX.py:187
+#: lib/machine/LaTeX.py:192
 msgid "To insert pdf formular and javascript"
 msgstr ""
 
-#: lib/document/frames/exercise.py:925
+#: lib/document/frames/exercise.py:927
 msgid "Clear everything"
 msgstr ""
 
-#: lib/document/frames/exercise.py:926
+#: lib/document/frames/exercise.py:928
 msgid "Validate"
-msgstr ""
-
-#: lib/document/frames/exercise.py:936
-#, python-brace-format
-msgid "Score: ... / {q_number}"
 msgstr ""
 
 #: lib/document/frames/exercise.py:938
 #, python-brace-format
+msgid "Score: ... / {q_number}"
+msgstr ""
+
+#: lib/document/frames/exercise.py:940
+#, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:930
+#: lib/document/frames/exercise.py:932
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:933
+#: lib/document/frames/exercise.py:935
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr ""
 
@@ -1913,22 +1913,6 @@ msgstr ""
 #: data/frameworks/mental_calculation/04_yellow1.yaml:3
 #: data/frameworks/mental_calculation/04_yellow1.yaml:23
 msgid "Mental calculation: fraction of a line segment"
-msgstr ""
-
-#: lib/document/content/geometry/perimeter_polygon.py:39
-msgid "Perimeter of this triangle? |hint:length_unit|"
-msgstr ""
-
-#: lib/document/content/geometry/perimeter_polygon.py:40
-msgid "Perimeter of this quadrilateral? |hint:length_unit|"
-msgstr ""
-
-#: lib/document/content/geometry/perimeter_polygon.py:41
-msgid "Perimeter of this pentagon? |hint:length_unit|"
-msgstr ""
-
-#: lib/document/content/geometry/perimeter_polygon.py:42
-msgid "Perimeter of this hexagon? |hint:length_unit|"
 msgstr ""
 
 #: data/frameworks/mental_calculation/04_yellow1.yaml:59
@@ -2242,8 +2226,9 @@ msgstr ""
 msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr ""
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:181
 #: data/frameworks/mental_calculation/04_yellow1.yaml:183
+#: data/frameworks/mental_calculation/05_yellow2.yaml:49
+#: data/frameworks/mental_calculation/04_yellow1.yaml:181
 msgid "Challenge, first part"
 msgstr ""
 
@@ -2270,26 +2255,26 @@ msgid ""
 "{length_unit}. What is its length? |hint:length_unit|"
 msgstr ""
 
-#: lib/machine/LaTeX.py:173
+#: lib/machine/LaTeX.py:178
 msgid "To draw TikZ pictures"
 msgstr ""
 
-#: lib/machine/LaTeX.py:228
+#: lib/machine/LaTeX.py:233
 msgid "To include .eps pictures"
 msgstr ""
 
-#: lib/machine/LaTeX.py:229
+#: lib/machine/LaTeX.py:234
 msgid "General layout of the page"
 msgstr ""
 
-#: lib/machine/LaTeX.py:245
+#: lib/machine/LaTeX.py:250
 msgid ""
 "Definition of the \"exercise\" command, which will insert the word "
 "\"Exercise\" in bold, with its number and automatically increments the "
 "counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:258
+#: lib/machine/LaTeX.py:263
 msgid ""
 "Redefinition of \"\\parallel\" command to draw the parallel symbol slanted "
 "as usual in french notations"
@@ -2310,4 +2295,32 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:3
 msgid "Mental calculation: numeric expansion"
+msgstr ""
+
+#: lib/document/content/geometry/perimeter_polygon.py:41
+#, python-brace-format
+msgid ""
+"Perimeter of this triangle?\\newline (length unit: {length_unit}) "
+"|hint:length_unit|"
+msgstr ""
+
+#: lib/document/content/geometry/perimeter_polygon.py:43
+#, python-brace-format
+msgid ""
+"Perimeter of this quadrilateral?\\newline (length unit: {length_unit}) "
+"|hint:length_unit|"
+msgstr ""
+
+#: lib/document/content/geometry/perimeter_polygon.py:45
+#, python-brace-format
+msgid ""
+"Perimeter of this pentagon?\\newline (length unit: {length_unit}) "
+"|hint:length_unit|"
+msgstr ""
+
+#: lib/document/content/geometry/perimeter_polygon.py:47
+#, python-brace-format
+msgid ""
+"Perimeter of this hexagon?\\newline (length unit: {length_unit}) "
+"|hint:length_unit|"
 msgstr ""
