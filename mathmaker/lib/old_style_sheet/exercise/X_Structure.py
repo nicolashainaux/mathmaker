@@ -22,6 +22,7 @@
 
 from abc import ABCMeta, abstractmethod
 
+from mathmakerlib import required
 from mathmakerlib.calculus import is_integer
 
 from mathmaker.lib import shared
@@ -246,6 +247,7 @@ class X_Structure(object, metaclass=ABCMeta):
                     if (self.x_kind,
                         self.x_subkind) == ('bypass', 'any_simple_expandable'):
                         result += '\n' + r'\FloatBarrier' + '\n'
+                        required.package['placeins'] = True
 
             return result + self.x_spacing[ex_or_answers]
         else:

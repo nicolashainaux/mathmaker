@@ -202,15 +202,20 @@ class LaTeX(Structure.Structure):
             multicol = '\n' + '% {}\n{}\n\n'\
                 .format(_('To use multicol environment'),
                         str(UsePackage('multicol')))
+        # placeins
+        placeins = ''
+        if required.package['placeins']:
+            placeins = '\n' + '% {}\n{}\n\n'\
+                .format(_('To get a better control on floats positioning '
+                          '(e.g. tabulars)'),
+                        str(UsePackage('multicol')))
         # Specific packages
         if variant == 'slideshow':
             specificpkg = r"""\usepackage[overlay, absolute]{textpos}
 % Useless? \usefonttheme{professionalfonts}
 """
         else:
-            specificpkg = r"""% {placeinspkg_comment}
-\usepackage{{placeins}}
-% {arraypkg_comment}
+            specificpkg = r"""% {arraypkg_comment}
 \usepackage{{array}}
 % {ulempkg_comment}
 \usepackage{{ulem}}
@@ -228,9 +233,7 @@ class LaTeX(Structure.Structure):
 \setlength{{\parindent}}{{0cm}}
 \setlength{{\arrayrulewidth}}{{0.02pt}}
 \pagestyle{{empty}}"""\
-.format(placeinspkg_comment=_('To get a better control on floats positioning '
-                              '(e.g. tabulars) '),
-        arraypkg_comment=_('To use extra commands to handle tabulars'),
+.format(arraypkg_comment=_('To use extra commands to handle tabulars'),
         ulempkg_comment=_('For pretty underlining'),
         textcomppkg_comment=_('To use some symbols like currency units'),
         graphicxpkg_comment=_('To include .eps pictures'),
@@ -277,14 +280,15 @@ r"""\newline \normalsize }}
 {polyglossia}
 {language_setup}
 
-{siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{multicol}{specificpackages}
+{siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{multicol}{placeins}"""\
+r"""{specificpackages}
 
 {specificcommands}{commoncommands}
 """.format(luatex85patch=luatex85patch, documentclass=dc, symbols=variouspkg,
            polyglossia=polyglossia, language_setup=language_setup,
            font_patch=font_patch, siunitx=siunitx,
            xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
-           cancel=cancel, multicol=multicol,
+           cancel=cancel, multicol=multicol, placeins=placeins,
            specificpackages=specificpkg, specificcommands=specificcmd,
            commoncommands=commoncmd)
 
