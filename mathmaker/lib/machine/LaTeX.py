@@ -209,6 +209,12 @@ class LaTeX(Structure.Structure):
                 .format(_('To get a better control on floats positioning '
                           '(e.g. tabulars)'),
                         str(UsePackage('multicol')))
+        # ulem
+        ulem = ''
+        if required.package['ulem']:
+            ulem = '\n' + '% {}\n{}\n\n'\
+                .format(_('For pretty underlining'),
+                        str(UsePackage('ulem')))
         # Specific packages
         if variant == 'slideshow':
             specificpkg = r"""\usepackage[overlay, absolute]{textpos}
@@ -217,8 +223,6 @@ class LaTeX(Structure.Structure):
         else:
             specificpkg = r"""% {arraypkg_comment}
 \usepackage{{array}}
-% {ulempkg_comment}
-\usepackage{{ulem}}
 % {textcomppkg_comment}
 \usepackage{{textcomp}}
 
@@ -234,7 +238,6 @@ class LaTeX(Structure.Structure):
 \setlength{{\arrayrulewidth}}{{0.02pt}}
 \pagestyle{{empty}}"""\
 .format(arraypkg_comment=_('To use extra commands to handle tabulars'),
-        ulempkg_comment=_('For pretty underlining'),
         textcomppkg_comment=_('To use some symbols like currency units'),
         graphicxpkg_comment=_('To include .eps pictures'),
         layout_comment=_('General layout of the page'))  # noqa
@@ -280,7 +283,7 @@ r"""\newline \normalsize }}
 {polyglossia}
 {language_setup}
 
-{siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{multicol}{placeins}"""\
+{siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{multicol}{placeins}{ulem}"""\
 r"""{specificpackages}
 
 {specificcommands}{commoncommands}
@@ -288,7 +291,7 @@ r"""{specificpackages}
            polyglossia=polyglossia, language_setup=language_setup,
            font_patch=font_patch, siunitx=siunitx,
            xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
-           cancel=cancel, multicol=multicol, placeins=placeins,
+           cancel=cancel, multicol=multicol, placeins=placeins, ulem=ulem,
            specificpackages=specificpkg, specificcommands=specificcmd,
            commoncommands=commoncmd)
 
@@ -526,6 +529,7 @@ r"""{specificpackages}
                 output_str = "\\textit{" + given_string + "}" + "\n"
             elif options['emphasize'] == 'underlined':
                 output_str = r"\uline{" + given_string + "}" + "\n"
+                required.package['ulem'] = True
             else:
                 output_str = given_string
         else:
