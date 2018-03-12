@@ -160,6 +160,12 @@
         "locked",
         "drawDate"
     ],
+    "divisibility_statements": [
+        "id",
+        "wid",
+        "wording",
+        "drawDate"
+    ],
     "deci_int_triples_for_prop": [
         "id",
         "coeff",

@@ -314,6 +314,22 @@ def __main__():
                    "?, ?, ?, ?, ?)",
                    db_rows)
 
+    creation_query = '''CREATE TABLE divisibility_statements
+                        (id INTEGER PRIMARY KEY, wid INTEGER,
+                         wording TEXT, drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    wordings = get_attributes(WORDINGS_DIR + 'divisibility_statements.yaml',
+                              'wording')
+    db_rows = list(zip([i + 1 for i in range(len(wordings))],
+                       [w.get('wording') for w in wordings],
+                       [0 for _ in range(len(wordings))]))
+    db.executemany("INSERT "
+                   "INTO divisibility_statements"
+                   "(wid, wording, drawDate) "
+                   "VALUES(?, ?, ?)",
+                   db_rows)
+
     sys.stderr.write('Insert mixed decimals and ints triples for '
                      'proportionality...\n')
     integers = [_ for _ in range(2, 32)]

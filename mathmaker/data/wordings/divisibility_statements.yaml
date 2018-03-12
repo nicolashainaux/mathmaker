@@ -1,0 +1,8 @@
+wording1:
+  - wording: "{n2} is divisible by {n1}."
+
+wording2:
+  - wording: "{n1} is a divisor of {n2}."
+
+wording3:
+  - wording: "{n2} is a multiple of {n1}."
