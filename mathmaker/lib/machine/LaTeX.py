@@ -239,10 +239,17 @@ class LaTeX(Structure.Structure):
             epstopdf = '\n' + '% {}\n{}\n\epstopdfsetup{{outdir=./}}\n\n'\
                 .format(_('To make .eps pictures includable by pdflatex'),
                         str(UsePackage('epstopdf')))
+        # textpos
+        textpos = ''
+        if required.package['textpos']:
+            textpos_options = [o for o in required.options['textpos']]
+            textpos = '\n' + '% {}\n{}\n\n'\
+                .format(_('Absolute positioning of text on the page'),
+                        str(UsePackage('textpos',
+                                       options=textpos_options)))
         # Specific packages
         if variant == 'slideshow':
-            specificpkg = r"""\usepackage[overlay, absolute]{textpos}
-% Useless? \usefonttheme{professionalfonts}
+            specificpkg = r"""% Useless? \usefonttheme{professionalfonts}
 """
         else:
             specificpkg = r"""
@@ -297,7 +304,7 @@ r"""\newline \normalsize }}
 {language_setup}
 
 {siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{multicol}{placeins}{ulem}"""\
-r"""{textcomp}{array}{graphicx}{epstopdf}{specificpackages}
+r"""{textcomp}{array}{graphicx}{epstopdf}{textpos}{specificpackages}
 
 {specificcommands}{commoncommands}
 """.format(luatex85patch=luatex85patch, documentclass=dc, symbols=variouspkg,
@@ -306,7 +313,7 @@ r"""{textcomp}{array}{graphicx}{epstopdf}{specificpackages}
            xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
            cancel=cancel, multicol=multicol, placeins=placeins, ulem=ulem,
            textcomp=textcomp, array=array, graphicx=graphicx,
-           epstopdf=epstopdf,
+           epstopdf=epstopdf, textpos=textpos,
            specificpackages=specificpkg, specificcommands=specificcmd,
            commoncommands=commoncmd)
 
@@ -417,6 +424,9 @@ r"""{textcomp}{array}{graphicx}{epstopdf}{specificpackages}
                        + r'\end{{textblock}}') \
                 .format(displ_nb='{' + numbering + '}') + '\n'
             required.options['xcolor'].add('svgnames')
+            required.package['textpos'] = True
+            required.options['textpos'].add('overlay')
+            required.options['textpos'].add('absolute')
         if uncovered:
             for i, chunk in enumerate(content.split(sep=SLIDE_CONTENT_SEP)):
                 result += r'\uncover<{n}>{c}'\
