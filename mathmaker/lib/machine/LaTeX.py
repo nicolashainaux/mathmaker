@@ -209,6 +209,7 @@ class LaTeX(Structure.Structure):
                 .format(_('To get a better control on floats positioning '
                           '(e.g. tabulars)'),
                         str(UsePackage('multicol')))
+        # textcomp
         textcomp = ''
         if 'textcomp' in required_pkg:
             textcomp = '\n' + '% {}\n{}\n\n'\
