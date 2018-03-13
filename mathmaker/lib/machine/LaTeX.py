@@ -246,20 +246,20 @@ class LaTeX(Structure.Structure):
 """
         else:
             specificpkg = r"""
-% {layout_comment}
-\usepackage{{geometry}}
-\geometry{{hmargin=0.75cm, vmargin=0.75cm}}
-\setlength{{\parindent}}{{0cm}}
-\setlength{{\arrayrulewidth}}{{0.02pt}}
-\pagestyle{{empty}}"""\
-.format(layout_comment=_('General layout of the page'))  # noqa
+% {geometry_comment}
+\usepackage{{geometry}}""".format(geometry_comment=_('To define the layout '
+                                                     'of the page'))
         # Specific commands
         if variant == 'slideshow':
             specificcmd = r"""
 \addtolength{\headsep}{-1cm}
 """
         else:
-            specificcmd = r"""% {counter_comment}
+            specificcmd = r"""% {layout_comment}
+\geometry{{hmargin=0.75cm, vmargin=0.75cm}}
+\setlength{{\parindent}}{{0cm}}
+\setlength{{\arrayrulewidth}}{{0.02pt}}
+\pagestyle{{empty}}% {counter_comment}
 \newcounter{{n}}
 % {exercisecmd_comment}
 \newcommand{{\exercise}}{{\noindent \hspace{{-.25cm}} """\
@@ -267,7 +267,8 @@ r"""\stepcounter{{n}} \normalsize \textbf{{Exercice \arabic{{n}}}} """\
 r"""\newline \normalsize }}
 % {resetcounter_comment}
 \newcommand{{\razcompteur}}{{\setcounter{{n}}{{0}}}}
-""".format(counter_comment=_('Exercises counter'),
+""".format(layout_comment=_('General layout of the page'),
+           counter_comment=_('Exercises counter'),
            exercisecmd_comment=_('Definition of the "exercise" command, which '
                                  'will insert the word "Exercise" in bold, '
                                  'with its number and automatically '
