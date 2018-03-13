@@ -31,6 +31,7 @@ import copy
 import random
 from decimal import Decimal
 
+from mathmakerlib import required
 from mathmakerlib.calculus import Number, is_number
 
 from mathmaker.lib.constants import EQUAL_PRODUCTS
@@ -379,6 +380,7 @@ class Polygon(Drawable):
                     rotate_box_angle += Decimal('180')
 
                 content += '  $\\rotatebox{'
+                required.package['graphicx'] = True
                 content += str(rotate_box_angle)
                 content += '}{\sffamily '
                 content += a.label.into_str(display_unit=True, textwrap=False)

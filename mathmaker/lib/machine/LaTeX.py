@@ -227,6 +227,12 @@ class LaTeX(Structure.Structure):
             array = '\n' + '% {}\n{}\n\n'\
                 .format(_('To use extra commands to handle tabulars'),
                         str(UsePackage('array')))
+        # graphicx
+        graphicx = ''
+        if required.package['graphicx']:
+            graphicx = '\n' + '% {}\n{}\n\n'\
+                .format(_('To include .eps pictures'),
+                        str(UsePackage('graphicx')))
         # Specific packages
         if variant == 'slideshow':
             specificpkg = r"""\usepackage[overlay, absolute]{textpos}
@@ -234,8 +240,6 @@ class LaTeX(Structure.Structure):
 """
         else:
             specificpkg = r"""
-% {graphicxpkg_comment}
-\usepackage{{graphicx}}
 \usepackage{{epstopdf}}
 \epstopdfsetup{{outdir=./}}
 
@@ -245,8 +249,7 @@ class LaTeX(Structure.Structure):
 \setlength{{\parindent}}{{0cm}}
 \setlength{{\arrayrulewidth}}{{0.02pt}}
 \pagestyle{{empty}}"""\
-.format(graphicxpkg_comment=_('To include .eps pictures'),
-        layout_comment=_('General layout of the page'))  # noqa
+.format(layout_comment=_('General layout of the page'))  # noqa
         # Specific commands
         if variant == 'slideshow':
             specificcmd = r"""
@@ -290,7 +293,7 @@ r"""\newline \normalsize }}
 {language_setup}
 
 {siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{multicol}{placeins}{ulem}"""\
-r"""{textcomp}{array}{specificpackages}
+r"""{textcomp}{array}{graphicx}{specificpackages}
 
 {specificcommands}{commoncommands}
 """.format(luatex85patch=luatex85patch, documentclass=dc, symbols=variouspkg,
@@ -298,7 +301,7 @@ r"""{textcomp}{array}{specificpackages}
            font_patch=font_patch, siunitx=siunitx,
            xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
            cancel=cancel, multicol=multicol, placeins=placeins, ulem=ulem,
-           textcomp=textcomp, array=array,
+           textcomp=textcomp, array=array, graphicx=graphicx,
            specificpackages=specificpkg, specificcommands=specificcmd,
            commoncommands=commoncmd)
 
@@ -772,6 +775,7 @@ r"""{textcomp}{array}{specificpackages}
     ##
     #   @brief Draws and inserts the picture of the drawable_arg
     def insert_picture(self, drawable_arg, **options):
+        required.package['graphicx'] = True
         if not isinstance(drawable_arg, Drawable):
             raise ValueError('Got: ' + str(drawable_arg)
                              + ' instead of a Drawable')

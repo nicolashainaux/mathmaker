@@ -29,6 +29,7 @@
 import math
 from decimal import Decimal, ROUND_UP, ROUND_HALF_EVEN
 
+from mathmakerlib import required
 from mathmakerlib.calculus import is_number, Number
 
 from mathmaker.lib.core.base import Drawable, Printable
@@ -396,6 +397,7 @@ class Segment(Drawable):
             rotate_box_angle %= Decimal("360")
 
             result += "  $\\rotatebox{"
+            required.package['graphicx'] = True
             result += str(rotate_box_angle)
             result += "}{\sffamily "
             result += self.label.into_str(display_unit=True, textwrap=False)
