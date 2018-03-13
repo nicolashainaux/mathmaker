@@ -85,6 +85,8 @@ class sub_object(component.structure):
             self.figure.ratios_for_converse().into_str())
 
         ans_variant = options.get('ans_variant', 'default')
+        if ans_variant == 'default':
+            required.package['array'] = True
         ans_texts = {
             'default': _('\\begin{tabular}{ll}'
                          'We have: & '

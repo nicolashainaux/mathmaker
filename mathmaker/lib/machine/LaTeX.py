@@ -220,15 +220,19 @@ class LaTeX(Structure.Structure):
             ulem = '\n' + '% {}\n{}\n\n'\
                 .format(_('For pretty underlining'),
                         str(UsePackage('ulem')))
+        # array
+        array = ''
+        if required.package['array']:
+            array = '\n' + '% {}\n{}\n\n'\
+                .format(_('To use extra commands to handle tabulars'),
+                        str(UsePackage('array')))
         # Specific packages
         if variant == 'slideshow':
             specificpkg = r"""\usepackage[overlay, absolute]{textpos}
 % Useless? \usefonttheme{professionalfonts}
 """
         else:
-            specificpkg = r"""% {arraypkg_comment}
-\usepackage{{array}}
-
+            specificpkg = r"""
 % {graphicxpkg_comment}
 \usepackage{{graphicx}}
 \usepackage{{epstopdf}}
@@ -240,8 +244,7 @@ class LaTeX(Structure.Structure):
 \setlength{{\parindent}}{{0cm}}
 \setlength{{\arrayrulewidth}}{{0.02pt}}
 \pagestyle{{empty}}"""\
-.format(arraypkg_comment=_('To use extra commands to handle tabulars'),
-        graphicxpkg_comment=_('To include .eps pictures'),
+.format(graphicxpkg_comment=_('To include .eps pictures'),
         layout_comment=_('General layout of the page'))  # noqa
         # Specific commands
         if variant == 'slideshow':
@@ -286,7 +289,7 @@ r"""\newline \normalsize }}
 {language_setup}
 
 {siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{multicol}{placeins}{ulem}"""\
-r"""{textcomp}{specificpackages}
+r"""{textcomp}{array}{specificpackages}
 
 {specificcommands}{commoncommands}
 """.format(luatex85patch=luatex85patch, documentclass=dc, symbols=variouspkg,
@@ -294,7 +297,7 @@ r"""{textcomp}{specificpackages}
            font_patch=font_patch, siunitx=siunitx,
            xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
            cancel=cancel, multicol=multicol, placeins=placeins, ulem=ulem,
-           textcomp=textcomp,
+           textcomp=textcomp, array=array,
            specificpackages=specificpkg, specificcommands=specificcmd,
            commoncommands=commoncmd)
 
@@ -621,6 +624,10 @@ r"""{textcomp}{specificpackages}
     #   @options: unit='inch' etc. (check the possibilities...)
     #   @return
     def create_table(self, size, content, **options):
+        # 'array' package is loaded whenever a tabular will be used.
+        # It would be complicated to find out which commands exactly require
+        # it, and anyway it is recommended to use it when drawing a tabular.
+        required.package['array'] = True
         n_col = size[1]
         n_lin = size[0]
         result = ""
