@@ -233,6 +233,12 @@ class LaTeX(Structure.Structure):
             graphicx = '\n' + '% {}\n{}\n\n'\
                 .format(_('To include .eps pictures'),
                         str(UsePackage('graphicx')))
+        # epstopdf
+        epstopdf = ''
+        if required.package['epstopdf']:
+            epstopdf = '\n' + '% {}\n{}\n\epstopdfsetup{{outdir=./}}\n\n'\
+                .format(_('To make .eps pictures includable by pdflatex'),
+                        str(UsePackage('epstopdf')))
         # Specific packages
         if variant == 'slideshow':
             specificpkg = r"""\usepackage[overlay, absolute]{textpos}
@@ -240,9 +246,6 @@ class LaTeX(Structure.Structure):
 """
         else:
             specificpkg = r"""
-\usepackage{{epstopdf}}
-\epstopdfsetup{{outdir=./}}
-
 % {layout_comment}
 \usepackage{{geometry}}
 \geometry{{hmargin=0.75cm, vmargin=0.75cm}}
@@ -293,7 +296,7 @@ r"""\newline \normalsize }}
 {language_setup}
 
 {siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{multicol}{placeins}{ulem}"""\
-r"""{textcomp}{array}{graphicx}{specificpackages}
+r"""{textcomp}{array}{graphicx}{epstopdf}{specificpackages}
 
 {specificcommands}{commoncommands}
 """.format(luatex85patch=luatex85patch, documentclass=dc, symbols=variouspkg,
@@ -302,6 +305,7 @@ r"""{textcomp}{array}{graphicx}{specificpackages}
            xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
            cancel=cancel, multicol=multicol, placeins=placeins, ulem=ulem,
            textcomp=textcomp, array=array, graphicx=graphicx,
+           epstopdf=epstopdf,
            specificpackages=specificpkg, specificcommands=specificcmd,
            commoncommands=commoncmd)
 
@@ -776,6 +780,7 @@ r"""{textcomp}{array}{graphicx}{specificpackages}
     #   @brief Draws and inserts the picture of the drawable_arg
     def insert_picture(self, drawable_arg, **options):
         required.package['graphicx'] = True
+        required.package['epstopdf'] = True
         if not isinstance(drawable_arg, Drawable):
             raise ValueError('Got: ' + str(drawable_arg)
                              + ' instead of a Drawable')
