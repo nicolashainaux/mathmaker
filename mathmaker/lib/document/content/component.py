@@ -35,7 +35,7 @@ from mathmaker.lib import shared
 from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.tools import rotate, lined_up, fix_math_style2_fontsize
 from mathmaker.lib.tools.wording import setup_wording_format_of
-from mathmaker.lib.tools.shapes import ShapeGenerator
+from mathmaker.lib.tools.generators.shapes import ShapeGenerator
 from mathmaker.lib.tools.database import preprocess_qkw
 
 

@@ -22,7 +22,7 @@
 
 import pytest
 
-from mathmaker.lib.tools.shapes import ShapeGenerator
+from mathmaker.lib.tools.generators.shapes import ShapeGenerator
 
 
 @pytest.fixture()
