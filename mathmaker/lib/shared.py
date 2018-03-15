@@ -102,6 +102,7 @@ def init():
     global hexagon_6_shapes_source
     global ls_marks_source
     global enable_js_form
+    global distcodes_source
 
     enable_js_form = False
 
@@ -168,6 +169,7 @@ def init():
     dvipsnames_selection_source = database.source('dvipsnames_selection',
                                                   ['id', 'color_name'])
     ls_marks_source = database.source('ls_marks', ['id', 'mark'])
+    distcodes_source = database.source('distcodes', ['id', 'distcode'])
     polygons_source = database.source('polygons',
                                       ['id', 'sides_nb', 'type', 'special',
                                        'codename', 'sides_particularity',

@@ -166,6 +166,14 @@
         "wording",
         "drawDate"
     ],
+    "distcodes": [
+        "id",
+        "nbof_nb",
+        "distcode",
+        "equilateral",
+        "equal_sides",
+        "drawDate"
+    ],
     "deci_int_triples_for_prop": [
         "id",
         "coeff",

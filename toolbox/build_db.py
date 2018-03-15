@@ -330,6 +330,46 @@ def __main__():
                    "VALUES(?, ?, ?)",
                    db_rows)
 
+    creation_query = '''CREATE TABLE distcodes
+                        (id INTEGER PRIMARY KEY, nbof_nb INTEGER,
+                         distcode TEXT, equilateral INTEGER,
+                         equal_sides INTEGER, drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    db_rows = [(2, '2', 1, 1, 0),
+               (2, '1_1', 0, 0, 0),
+               (3, '3', 1, 1, 0),
+               (3, '2_1', 0, 1, 0),
+               (3, '1_1_1', 0, 0, 0),
+               (4, '4', 1, 1, 0),
+               (4, '3_1', 0, 1, 0),
+               (4, '2_2', 0, 1, 0),
+               (4, '2_1_1', 0, 1, 0),
+               (4, '1_1_1_1', 0, 0, 0),
+               (5, '5', 1, 1, 0),
+               (5, '4_1', 0, 1, 0),
+               (5, '3_2', 0, 1, 0),
+               (5, '3_1_1', 0, 1, 0),
+               (5, '2_2_1', 0, 1, 0),
+               (5, '2_1_1_1', 0, 1, 0),
+               (5, '1_1_1_1_1', 0, 0, 0),
+               (6, '6', 1, 1, 0),
+               (6, '5_1', 0, 1, 0),
+               (6, '4_2', 0, 1, 0),
+               (6, '4_1_1', 0, 1, 0),
+               (6, '3_3', 0, 1, 0),
+               (6, '3_2_1', 0, 1, 0),
+               (6, '3_1_1_1', 0, 1, 0),
+               (6, '2_2_2', 0, 1, 0),
+               (6, '2_2_1_1', 0, 1, 0),
+               (6, '2_1_1_1_1_1', 0, 1, 0),
+               (6, '1_1_1_1_1_1', 0, 0, 0)]
+    db.executemany("INSERT "
+                   "INTO distcodes"
+                   "(nbof_nb, distcode, equilateral, equal_sides, drawDate) "
+                   "VALUES(?, ?, ?, ? , ?)",
+                   db_rows)
+
     sys.stderr.write('Insert mixed decimals and ints triples for '
                      'proportionality...\n')
     integers = [_ for _ in range(2, 32)]
