@@ -72,6 +72,7 @@ INTQUINTUPLES_MAX = 36
 INTSEXTUPLES_MAX = 25
 SINGLEINTS_MAX = 1000
 
+NNPAIRS_MAX = 100
 NNTRIPLES_MAX = 10
 NNQUADRUPLES_MAX = 10
 NNQUINTUPLES_MAX = 10
@@ -625,6 +626,41 @@ def __main__():
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers sextuples... 100 %\n')
     # sys.stderr.flush()
+
+    sys.stderr.write('Create natural numbers pairs...\n')
+    creation_query = '''CREATE TABLE pairs
+       (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
+        lock_equal_products INTEGER, drawDate INTEGER, clever INTEGER,
+        suits_for_deci1 INTEGER, suits_for_deci2 INTEGER)'''
+    natural_nb_tuples_db_creation_queries.append(creation_query)
+    natural_nb_tuples_db.execute(creation_query)
+    # Tables of 1, 2, 3... NNPAIRS_MAX
+    db_rows = [(i + 1, j + 1, 0, 0, 0,
+                _suits_for_deci1(i + 1, j + 1),
+                _suits_for_deci2(i + 1, j + 1))
+               for i in range(NNPAIRS_MAX)
+               for j in range(NNPAIRS_MAX)
+               if j >= i]
+    for i in range(100):
+        sys.stderr.write('\rInsert natural numbers pairs... {} %'.format(i))
+        natural_nb_tuples_db.executemany(
+            "INSERT "
+            "INTO pairs(nb1, nb2, lock_equal_products, "
+            "drawDate, clever, suits_for_deci1, suits_for_deci2) "
+            "VALUES(?, ?, ?, ?, ?, ?, ?)",
+            db_rows[i * len(db_rows) // 100:
+                    (i + 1) * len(db_rows) // 100])
+    sys.stderr.write('\rInsert natural numbers pairs... 100 %\n')
+    sys.stderr.write('Setup natural numbers pairs: clever (5)...\n')
+    for couple in [(2, 5), (2, 50), (2, 500), (5, 20), (5, 200)]:
+        natural_nb_tuples_db.execute(
+            "UPDATE pairs SET clever = 5 WHERE nb1 = '" + str(couple[0])
+            + "' and nb2 = '" + str(couple[1]) + "';")
+    sys.stderr.write('Setup natural numbers pairs: clever (4)...\n')
+    for couple in [(4, 25), (4, 250)]:
+        natural_nb_tuples_db.execute(
+            "UPDATE pairs SET clever = 4 WHERE nb1 = '" + str(couple[0])
+            + "' and nb2 = '" + str(couple[1]) + "';")
 
     sys.stderr.write('Create natural numbers triples...\n')
     creation_query = '''CREATE TABLE triples

@@ -848,7 +848,7 @@ def db_table(tag):
                  'int_quintuples', 'int_sextuples']:
         return tag
     elif any(tag.startswith(t)
-             for t in ['nntriples', 'nnquadruples', 'nnquintuples',
+             for t in ['nnpairs', 'nntriples', 'nnquadruples', 'nnquintuples',
                        'nnsextuples']):
         # This is in natural_nb_tuples database.
         # Table name is the same as tag after 'nn' prefix is removed
@@ -876,7 +876,7 @@ def classify_tag(tag):
     elif tag.startswith('int_quintuples'):
         return 'int_quintuples'
     elif any([tag.startswith(t)
-              for t in ['nntriples', 'nnquadruples', 'nnquintuples',
+              for t in ['nnpairs', 'nntriples', 'nnquadruples', 'nnquintuples',
                         'nnsextuples']]):
         return 'natural_nb_tuples'
     elif tag in ['int_deci_clever_pairs',
@@ -1723,14 +1723,13 @@ class mc_source(object):
         if tag_classification == 'natural_nb_tuples':
             log = settings.dbg_logger.getChild('db')
             nb_of_elts = \
-                {'triples': 3,
-                 'quadruples': 4,
-                 'quintuples': 5,
+                {'pairs': 2, 'triples': 3, 'quadruples': 4, 'quintuples': 5,
                  'sextuples': 6}[source_id.split(':')[0][len('nn'):]]
             spans = IntspansProduct(source_id.split(':')[1], nb_of_elts)
             random_result = sorted(spans.random_draw(**kwargs))
             log.debug('Random draw output = {}\n'.format(random_result))
-            db_source = {3: shared.nntriples_source,
+            db_source = {2: shared.nnpairs_source,
+                         3: shared.nntriples_source,
                          4: shared.nnquadruples_source,
                          5: shared.nnquintuples_source,
                          6: shared.nnsextuples_source}[nb_of_elts]

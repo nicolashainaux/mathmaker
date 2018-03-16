@@ -1,4 +1,14 @@
 {
+    "pairs": [
+        "id",
+        "nb1",
+        "nb2",
+        "lock_equal_products",
+        "drawDate",
+        "clever",
+        "suits_for_deci1",
+        "suits_for_deci2"
+    ],
     "triples": [
         "id",
         "nb1",
