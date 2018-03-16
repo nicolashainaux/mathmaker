@@ -72,6 +72,7 @@ INTQUINTUPLES_MAX = 36
 INTSEXTUPLES_MAX = 25
 SINGLEINTS_MAX = 1000
 
+NNQUADRUPLES_MAX = 10
 NNQUINTUPLES_MAX = 10
 NNSEXTUPLES_MAX = 10
 
@@ -622,6 +623,43 @@ def __main__():
                        db_rows[i * len(db_rows) // 100:
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers sextuples... 100 %\n')
+    # sys.stderr.flush()
+
+    sys.stderr.write('Create natural numbers quadruples...\n')
+    creation_query = '''CREATE TABLE quadruples
+       (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
+        nb4 INTEGER, code TEXT, constructible INTEGER,
+        equilateral INTEGER, equal_sides INTEGER, drawDate INTEGER)'''
+    natural_nb_tuples_db_creation_queries.append(creation_query)
+    natural_nb_tuples_db.execute(creation_query)
+    # Tables of 1, 2, 3... NNQUADRUPLES_MAX
+    db_rows = [(i + 1, j + 1, k + 1, n + 1,  # nb1, nb2, nb3, nb4
+                _code(i + 1, j + 1, k + 1, n + 1),  # code
+                n + 1 < i + j + k + 3,  # constructible quadrilateral?
+                i == j == k == n,  # equilateral?
+                (i == j or j == k or k == i or i == n or j == n or k == n),
+                # at least 2 equal sides?
+                0  # drawDate
+                )
+               for i in range(NNQUADRUPLES_MAX)
+               for j in range(NNQUADRUPLES_MAX)
+               for k in range(NNQUADRUPLES_MAX)
+               for n in range(NNQUADRUPLES_MAX)
+               if n >= k >= j >= i]
+
+    sys.stderr.write('Insert natural numbers quadruples...')
+    for i in range(100):
+        sys.stderr.write('\rInsert natural numbers quadruples... {} %'
+                         .format(i))
+        natural_nb_tuples_db\
+            .executemany("INSERT "
+                         "INTO quadruples(nb1, nb2, nb3, nb4, code, "
+                         "constructible, equilateral, equal_sides, "
+                         "drawDate) "
+                         "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                         db_rows[i * len(db_rows) // 100:
+                                 (i + 1) * len(db_rows) // 100])
+    sys.stderr.write('\rInsert natural numbers quadruples... 100 %\n')
     # sys.stderr.flush()
 
     sys.stderr.write('Create natural numbers quintuples...\n')

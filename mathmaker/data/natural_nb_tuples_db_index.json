@@ -1,4 +1,16 @@
 {
+    "quadruples": [
+        "id",
+        "nb1",
+        "nb2",
+        "nb3",
+        "nb4",
+        "code",
+        "constructible",
+        "equilateral",
+        "equal_sides",
+        "drawDate"
+    ],
     "quintuples": [
         "id",
         "nb1",

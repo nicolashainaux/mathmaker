@@ -43,6 +43,7 @@ def init():
     global int_quadruples_source
     global int_quintuples_source
     global int_sextuples_source
+    global nnquadruples_source
     global nnquintuples_source
     global nnsextuples_source
     global simple_fractions_source
@@ -142,6 +143,9 @@ def init():
     int_quintuples_source = database.source("int_quintuples",
                                             ["id", "nb1", "nb2", "nb3", "nb4",
                                              "nb5"])
+    nnquadruples_source = database.source("quadruples",
+                                          ["id", "nb1", "nb2", "nb3", "nb4"],
+                                          db=natural_nb_tuples_db)
     nnquintuples_source = database.source("quintuples",
                                           ["id", "nb1", "nb2", "nb3", "nb4",
                                            "nb5"], db=natural_nb_tuples_db)
