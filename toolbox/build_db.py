@@ -69,9 +69,11 @@ INTPAIRS_MAX = 1000
 INTTRIPLES_MAX = 200
 INTQUADRUPLES_MAX = 50
 INTQUINTUPLES_MAX = 36
-INTQUINTUPLES_MAX2 = 10
 INTSEXTUPLES_MAX = 25
 SINGLEINTS_MAX = 1000
+
+NNQUINTUPLES_MAX = 10
+NNSEXTUPLES_MAX = 10
 
 
 def _suits_for_deci1(i, j):
@@ -582,44 +584,6 @@ def __main__():
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers quintuples... 100 %\n')
 
-    sys.stderr.write('Create integers quintuples (2)...\n')
-    creation_query = '''CREATE TABLE quintuples
-       (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
-        nb4 INTEGER, nb5 INTEGER, code TEXT, constructible INTEGER,
-        equilateral INTEGER, equal_sides INTEGER, drawDate INTEGER)'''
-    natural_nb_tuples_db_creation_queries.append(creation_query)
-    natural_nb_tuples_db.execute(creation_query)
-    # Tables of 1, 2, 3... INTQUINTUPLES_MAX2
-    db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1,  # nb1, nb2, nb3, nb4, nb5
-                _code(i + 1, j + 1, k + 1, n + 1, p + 1),  # code
-                p + 1 < i + j + k + n + 4,  # constructible?
-                i == j == k == n == p,  # equilateral?
-                (i == j or j == k or k == i or i == n or j == n or k == n
-                 or i == p or j == p or k == p or n == p),
-                # at least 2 equal sides?
-                0  # drawDate
-                )
-               for i in range(INTQUINTUPLES_MAX2)
-               for j in range(INTQUINTUPLES_MAX2)
-               for k in range(INTQUINTUPLES_MAX2)
-               for n in range(INTQUINTUPLES_MAX2)
-               for p in range(INTQUINTUPLES_MAX2)
-               if p >= n >= k >= j >= i]
-
-    sys.stderr.write('Insert integers quintuples (2)...')
-    for i in range(100):
-        sys.stderr.write('\rInsert integers quintuples (2)... {} %'.format(i))
-        natural_nb_tuples_db\
-            .executemany("INSERT "
-                         "INTO quintuples(nb1, nb2, nb3, nb4, nb5, code, "
-                         "constructible, equilateral, equal_sides, "
-                         "drawDate) "
-                         "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                         db_rows[i * len(db_rows) // 100:
-                                 (i + 1) * len(db_rows) // 100])
-    sys.stderr.write('\rInsert integers quintuples (2)... 100 %\n')
-    # sys.stderr.flush()
-
     creation_query = '''CREATE TABLE int_sextuples
        (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
         nb4 INTEGER, nb5 INTEGER, nb6 INTEGER, code TEXT, hexagon INTEGER,
@@ -658,6 +622,88 @@ def __main__():
                        db_rows[i * len(db_rows) // 100:
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers sextuples... 100 %\n')
+    # sys.stderr.flush()
+
+    sys.stderr.write('Create natural numbers quintuples...\n')
+    creation_query = '''CREATE TABLE quintuples
+       (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
+        nb4 INTEGER, nb5 INTEGER, code TEXT, constructible INTEGER,
+        equilateral INTEGER, equal_sides INTEGER, drawDate INTEGER)'''
+    natural_nb_tuples_db_creation_queries.append(creation_query)
+    natural_nb_tuples_db.execute(creation_query)
+    # Tables of 1, 2, 3... NNQUINTUPLES_MAX
+    db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1,  # nb1, nb2, nb3, nb4, nb5
+                _code(i + 1, j + 1, k + 1, n + 1, p + 1),  # code
+                p + 1 < i + j + k + n + 4,  # constructible?
+                i == j == k == n == p,  # equilateral?
+                (i == j or j == k or k == i or i == n or j == n or k == n
+                 or i == p or j == p or k == p or n == p),
+                # at least 2 equal sides?
+                0  # drawDate
+                )
+               for i in range(NNQUINTUPLES_MAX)
+               for j in range(NNQUINTUPLES_MAX)
+               for k in range(NNQUINTUPLES_MAX)
+               for n in range(NNQUINTUPLES_MAX)
+               for p in range(NNQUINTUPLES_MAX)
+               if p >= n >= k >= j >= i]
+
+    sys.stderr.write('Insert natural numbers quintuples...')
+    for i in range(100):
+        sys.stderr.write('\rInsert natural numbers quintuples... {} %'
+                         .format(i))
+        natural_nb_tuples_db\
+            .executemany("INSERT "
+                         "INTO quintuples(nb1, nb2, nb3, nb4, nb5, code, "
+                         "constructible, equilateral, equal_sides, "
+                         "drawDate) "
+                         "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                         db_rows[i * len(db_rows) // 100:
+                                 (i + 1) * len(db_rows) // 100])
+    sys.stderr.write('\rInsert natural numbers quintuples... 100 %\n')
+    # sys.stderr.flush()
+
+    sys.stderr.write('Create natural numbers sextuples...\n')
+    creation_query = '''CREATE TABLE sextuples
+       (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
+        nb4 INTEGER, nb5 INTEGER, nb6 INTEGER, code TEXT,
+        constructible INTEGER, equilateral INTEGER, equal_sides INTEGER,
+        drawDate INTEGER)'''
+    natural_nb_tuples_db_creation_queries.append(creation_query)
+    natural_nb_tuples_db.execute(creation_query)
+    # Tables of 1, 2, 3... NNSEXTUPLES_MAX
+    db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1, q + 1,
+                # nb1, nb2, nb3, nb4, nb5, nb6
+                _code(i + 1, j + 1, k + 1, n + 1, p + 1, q + 1),  # code
+                q + 1 < i + j + k + n + p + 5,  # constructible hexagon?
+                i == j == k == n == p == q,  # equilateral?
+                (i == j or j == k or k == i or i == n or j == n or k == n
+                 or i == p or j == p or k == p or n == p or i == q or j == q
+                 or k == q or n == q or p == q),
+                # at least 2 equal sides?
+                0  # drawDate
+                )
+               for i in range(NNSEXTUPLES_MAX)
+               for j in range(NNSEXTUPLES_MAX)
+               for k in range(NNSEXTUPLES_MAX)
+               for n in range(NNSEXTUPLES_MAX)
+               for p in range(NNSEXTUPLES_MAX)
+               for q in range(NNSEXTUPLES_MAX)
+               if q >= p >= n >= k >= j >= i]
+
+    sys.stderr.write('Insert natural numbers sextuples...')
+    for i in range(100):
+        sys.stderr.write('\rInsert natural numbers sextuples... {} %'
+                         .format(i))
+        natural_nb_tuples_db\
+            .executemany("INSERT "
+                         "INTO sextuples(nb1, nb2, nb3, nb4, nb5, nb6, code, "
+                         "constructible, equilateral, equal_sides, "
+                         "drawDate) "
+                         "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                         db_rows[i * len(db_rows) // 100:
+                                 (i + 1) * len(db_rows) // 100])
+    sys.stderr.write('\rInsert natural numbers sextuples... 100 %\n')
     # sys.stderr.flush()
 
     sys.stderr.write('Setup integers pairs: clever (5)...\n')

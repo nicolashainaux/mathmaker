@@ -847,10 +847,10 @@ def db_table(tag):
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
                  'int_quintuples', 'int_sextuples']:
         return tag
-    elif any(tag.startswith(t) for t in ['intquintuples']):
-        # This is in inttuples database.
-        # Table name is the same as tag after 'int' prefix is removed
-        return tag.split(':')[0][len('int'):]
+    elif any(tag.startswith(t) for t in ['nnquintuples', 'nnsextuples']):
+        # This is in natural_nb_tuples database.
+        # Table name is the same as tag after 'nn' prefix is removed
+        return tag.split(':')[0][len('nn'):]
     return ''
 
 
@@ -873,8 +873,8 @@ def classify_tag(tag):
         return 'percentage'
     elif tag.startswith('int_quintuples'):
         return 'int_quintuples'
-    elif any([tag.startswith(t) for t in ['intquintuples']]):
-        return 'inttuples'
+    elif any([tag.startswith(t) for t in ['nnquintuples', 'nnsextuples']]):
+        return 'natural_nb_tuples'
     elif tag in ['int_deci_clever_pairs',
                  'int_irreducible_frac', 'nothing',
                  'decimal_and_10_100_1000_for_multi',
@@ -898,7 +898,7 @@ def preprocess_qkw(table_name, qkw=None):
         db_index = json.load(f)
     with open(settings.shapes_db_index_path) as f:
         db_index.update(json.load(f))
-    with open(settings.inttuples_db_index_path) as f:
+    with open(settings.natural_nb_tuples_db_index_path) as f:
         db_index.update(json.load(f))
     if table_name not in db_index:
         return {}
@@ -1716,14 +1716,16 @@ class mc_source(object):
         not_in = kwargs.get('not_in', None)
         tag_classification = classify_tag(source_id)
         kwargs.update(preprocess_qkw(db_table(source_id), qkw=qkw))
-        if tag_classification == 'inttuples':
+        if tag_classification == 'natural_nb_tuples':
             log = settings.dbg_logger.getChild('db')
             nb_of_elts = \
-                {'quintuples': 5}[source_id.split(':')[0][len('int'):]]
+                {'quintuples': 5,
+                 'sextuples': 6}[source_id.split(':')[0][len('nn'):]]
             spans = IntspansProduct(source_id.split(':')[1], nb_of_elts)
             random_result = sorted(spans.random_draw(**kwargs))
             log.debug('Random draw output = {}\n'.format(random_result))
-            db_source = {5: shared.int_quintuples_source2}[nb_of_elts]
+            db_source = {5: shared.nnquintuples_source,
+                         6: shared.nnsextuples_source}[nb_of_elts]
             L = list(random_result)
             nb_args = {'nb{}'.format(i + 1): L[i] for i in range(nb_of_elts)}
             try:
