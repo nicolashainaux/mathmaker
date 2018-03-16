@@ -1,4 +1,17 @@
 {
+    "triples": [
+        "id",
+        "nb1",
+        "nb2",
+        "nb3",
+        "code",
+        "constructible",
+        "isosceles",
+        "equilateral",
+        "pythagorean",
+        "equal_sides",
+        "drawDate"
+    ],
     "quadruples": [
         "id",
         "nb1",

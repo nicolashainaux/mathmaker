@@ -72,6 +72,7 @@ INTQUINTUPLES_MAX = 36
 INTSEXTUPLES_MAX = 25
 SINGLEINTS_MAX = 1000
 
+NNTRIPLES_MAX = 10
 NNQUADRUPLES_MAX = 10
 NNQUINTUPLES_MAX = 10
 NNSEXTUPLES_MAX = 10
@@ -623,6 +624,61 @@ def __main__():
                        db_rows[i * len(db_rows) // 100:
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers sextuples... 100 %\n')
+    # sys.stderr.flush()
+
+    sys.stderr.write('Create natural numbers triples...\n')
+    creation_query = '''CREATE TABLE triples
+       (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
+        code TEXT, constructible INTEGER, isosceles INTEGER,
+        equilateral INTEGER, pythagorean INTEGER, equal_sides INTEGER,
+        drawDate INTEGER)'''
+    natural_nb_tuples_db_creation_queries.append(creation_query)
+    natural_nb_tuples_db.execute(creation_query)
+    # Tables of 1, 2, 3... NNTRIPLES_MAX
+    db_rows = [(15, 2, 3, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 2, 5, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 2, 6, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 3, 4, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 3, 5, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 4, 5, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 4, 6, 'none', 0, 0, 0, 0, 0, 0),
+               (15, 5, 6, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 2, 3, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 2, 5, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 2, 6, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 3, 4, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 3, 5, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 4, 5, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 4, 6, 'none', 0, 0, 0, 0, 0, 0),
+               (25, 5, 6, 'none', 0, 0, 0, 0, 0, 0)]
+    db_rows += [(i + 1, j + 1, k + 1,  # nb1, nb2, nb3
+                 _code(i + 1, j + 1, k + 1),  # code
+                 k + 1 < i + j + 2,  # constructible triangle?
+                 (i == j and j != k) or (i == k and i != j)
+                 or (j == k and i != j),  # isosceles? (but not equilateral)
+                 i == j == k,  # equilateral?
+                 (k + 1) ** 2 == (i + 1) ** 2 + (j + 1) ** 2,  # pythagorean?
+                 (i == j or j == k or k == i),  # at least 2 equal sides?
+                 0  # drawDate
+                 )
+                for i in range(NNTRIPLES_MAX)
+                for j in range(NNTRIPLES_MAX)
+                for k in range(NNTRIPLES_MAX)
+                if k >= j >= i]
+
+    sys.stderr.write('Insert natural numbers triples...')
+    for i in range(100):
+        sys.stderr.write('\rInsert natural numbers triples... {} %'
+                         .format(i))
+        natural_nb_tuples_db\
+            .executemany("INSERT "
+                         "INTO triples(nb1, nb2, nb3, code, "
+                         "constructible, isosceles, equilateral, pythagorean,"
+                         "equal_sides, drawDate) "
+                         "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                         db_rows[i * len(db_rows) // 100:
+                                 (i + 1) * len(db_rows) // 100])
+    sys.stderr.write('\rInsert natural numbers triples... 100 %\n')
     # sys.stderr.flush()
 
     sys.stderr.write('Create natural numbers quadruples...\n')
