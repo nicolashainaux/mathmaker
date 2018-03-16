@@ -662,6 +662,29 @@ def __main__():
             "UPDATE pairs SET clever = 4 WHERE nb1 = '" + str(couple[0])
             + "' and nb2 = '" + str(couple[1]) + "';")
 
+    sys.stderr.write('Create natural number×decimal "clever" pairs...\n')
+    creation_query = '''CREATE TABLE nn_deci_clever_pairs
+       (id INTEGER, nb1 FLOAT, nb2 FLOAT, drawDate INTEGER,
+        clever INTEGER)'''
+    natural_nb_tuples_db_creation_queries.append(creation_query)
+    natural_nb_tuples_db.execute(creation_query)
+    sys.stderr.write('Insert natural number×decimal "clever" pairs...\n')
+    # Insert natural number/decimal "clever" pairs into the db
+    # The tenths series (only one yet) is identified by a 10
+    # the quarters series by a 4
+    # the halfs/fifths series by a 5
+    start_id = tuple(natural_nb_tuples_db.execute(
+        "SELECT MAX(id) FROM pairs "))[0][0] + 1
+    db_rows = list(zip([i + start_id for i in range(5)],
+                       [0.2, 2, 4, 4, 0.1],
+                       [5, 0.5, 0.25, 2.5, 10],
+                       [0, 0, 0, 0, 0],
+                       [5, 5, 4, 4, 10]))
+
+    natural_nb_tuples_db.executemany(
+        "INSERT INTO nn_deci_clever_pairs(id, nb1, nb2, drawDate, clever) "
+        "VALUES(?, ?, ?, ?, ?)", db_rows)
+
     sys.stderr.write('Create natural numbers triples...\n')
     creation_query = '''CREATE TABLE triples
        (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,

@@ -843,7 +843,8 @@ def db_table(tag):
         return 'decimals'
     elif tag.startswith('deciinttriplesforprop'):
         return 'deci_int_triples_for_prop'
-    elif tag in ['int_deci_clever_pairs', 'digits_places', 'fracdigits_places',
+    elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
+                 'digits_places', 'fracdigits_places',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
                  'int_quintuples', 'int_sextuples']:
         return tag
@@ -879,7 +880,7 @@ def classify_tag(tag):
               for t in ['nnpairs', 'nntriples', 'nnquadruples', 'nnquintuples',
                         'nnsextuples']]):
         return 'natural_nb_tuples'
-    elif tag in ['int_deci_clever_pairs',
+    elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
                  'int_irreducible_frac', 'nothing',
                  'decimal_and_10_100_1000_for_multi',
                  'decimal_and_10_100_1000_for_divi',
@@ -1795,6 +1796,8 @@ class mc_source(object):
             return shared.single_ints_source.next(**kwargs)
         elif tag_classification == 'int_deci_clever_pairs':
             return shared.int_deci_clever_pairs_source.next(**kwargs)
+        elif tag_classification == 'nn_deci_clever_pairs':
+            return shared.nn_deci_clever_pairs_source.next(**kwargs)
         elif tag_classification == 'digits_places':
             return (Decimal(str(
                 shared.digits_places_source.next(**kwargs)[0])), )
