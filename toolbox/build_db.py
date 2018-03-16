@@ -111,19 +111,20 @@ def __main__():
     if os.path.isfile(settings.path.shapes_db_dist):
         sys.stderr.write('Remove previous shapes database...\n')
         os.remove(settings.path.shapes_db_dist)
-    if os.path.isfile(settings.path.inttuples_db_dist):
+    if os.path.isfile(settings.path.natural_nb_tuples_db_dist):
         sys.stderr.write('Remove previous inttuples database...\n')
-        os.remove(settings.path.inttuples_db_dist)
+        os.remove(settings.path.natural_nb_tuples_db_dist)
     sys.stderr.write('Create new databases...\n')
     open(settings.path.db_dist, 'a').close()
     open(settings.path.shapes_db_dist, 'a').close()
-    open(settings.path.inttuples_db_dist, 'a').close()
+    open(settings.path.natural_nb_tuples_db_dist, 'a').close()
     sys.stderr.write('Connect to databases...\n')
     db = sqlite3.connect(settings.path.db_dist)
     shapes_db = sqlite3.connect(settings.path.shapes_db_dist)
-    inttuples_db = sqlite3.connect(settings.path.inttuples_db_dist)
+    natural_nb_tuples_db = sqlite3.connect(
+        settings.path.natural_nb_tuples_db_dist)
 
-    inttuples_db_creation_queries = []
+    natural_nb_tuples_db_creation_queries = []
 
     sys.stderr.write('Create tables...\n')
     # Creation of the tables
@@ -586,8 +587,8 @@ def __main__():
        (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, nb3 INTEGER,
         nb4 INTEGER, nb5 INTEGER, code TEXT, constructible INTEGER,
         equilateral INTEGER, equal_sides INTEGER, drawDate INTEGER)'''
-    inttuples_db_creation_queries.append(creation_query)
-    inttuples_db.execute(creation_query)
+    natural_nb_tuples_db_creation_queries.append(creation_query)
+    natural_nb_tuples_db.execute(creation_query)
     # Tables of 1, 2, 3... INTQUINTUPLES_MAX2
     db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1,  # nb1, nb2, nb3, nb4, nb5
                 _code(i + 1, j + 1, k + 1, n + 1, p + 1),  # code
@@ -608,7 +609,7 @@ def __main__():
     sys.stderr.write('Insert integers quintuples (2)...')
     for i in range(100):
         sys.stderr.write('\rInsert integers quintuples (2)... {} %'.format(i))
-        inttuples_db\
+        natural_nb_tuples_db\
             .executemany("INSERT "
                          "INTO quintuples(nb1, nb2, nb3, nb4, nb5, code, "
                          "constructible, equilateral, equal_sides, "
@@ -1257,11 +1258,11 @@ def __main__():
     sys.stderr.write('Commit changes to databases...\n')
     db.commit()
     shapes_db.commit()
-    inttuples_db.commit()
+    natural_nb_tuples_db.commit()
     sys.stderr.write('Close databases...\n')
     db.close()
     shapes_db.close()
-    inttuples_db.close()
+    natural_nb_tuples_db.close()
     sys.stderr.write('Create databases\' indices...\n')
     db_index = {}
     for qr in db_creation_queries:
@@ -1277,12 +1278,12 @@ def __main__():
     with open(settings.shapes_db_index_path, 'w') as f:
         json.dump(shapes_db_index, f, indent=4)
         f.write('\n')
-    inttuples_db_index = {}
-    for qr in inttuples_db_creation_queries:
+    natural_nb_tuples_db_index = {}
+    for qr in natural_nb_tuples_db_creation_queries:
         key, value = parse_sql_creation_query(qr)
-        inttuples_db_index.update({key: value})
-    with open(settings.inttuples_db_index_path, 'w') as f:
-        json.dump(inttuples_db_index, f, indent=4)
+        natural_nb_tuples_db_index.update({key: value})
+    with open(settings.natural_nb_tuples_db_index_path, 'w') as f:
+        json.dump(natural_nb_tuples_db_index, f, indent=4)
         f.write('\n')
     sys.stderr.write('Done!\n')
 

@@ -30,7 +30,7 @@ from mathmaker.lib.constants import latex
 def init():
     global db
     global shapes_db
-    global inttuples_db
+    global natural_nb_tuples_db
     global unique_letters_words_source
     global names_source
     global mini_problems_wordings_source
@@ -42,7 +42,7 @@ def init():
     global int_triples_source
     global int_quadruples_source
     global int_quintuples_source
-    global int_quintuples_source2
+    global nnquintuples_source
     global int_sextuples_source
     global simple_fractions_source
     global single_ints_source
@@ -110,7 +110,7 @@ def init():
 
     db = sqlite3.connect(settings.path.db)
     shapes_db = sqlite3.connect(settings.path.shapes_db)
-    inttuples_db = sqlite3.connect(settings.path.inttuples_db)
+    natural_nb_tuples_db = sqlite3.connect(settings.path.natural_nb_tuples_db)
 
     from mathmaker.lib.tools import database
     unique_letters_words_source = {}
@@ -141,9 +141,9 @@ def init():
     int_quintuples_source = database.source("int_quintuples",
                                             ["id", "nb1", "nb2", "nb3", "nb4",
                                              "nb5"])
-    int_quintuples_source2 = database.source("quintuples",
-                                             ["id", "nb1", "nb2", "nb3", "nb4",
-                                              "nb5"], db=inttuples_db)
+    nnquintuples_source = database.source("quintuples",
+                                          ["id", "nb1", "nb2", "nb3", "nb4",
+                                           "nb5"], db=natural_nb_tuples_db)
     int_sextuples_source = database.source("int_sextuples",
                                            ["id", "nb1", "nb2", "nb3", "nb4",
                                             "nb5", "nb6"])
