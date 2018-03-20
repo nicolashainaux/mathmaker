@@ -116,3 +116,9 @@ W01d: !!omap
                  mini_pb proportionality -> mergedinttriples_3to9 (1)
                  area rectangle -> intpairs_2to9, nb_variant=decimal2 (1)
                  perimeter polygon -> polygons, sum_ingredients=int_2to10, level=4 (1)
+
+W02a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility questions, variant=true -> intpairs_3to9 (2)
+                 divisibility questions, variant=false -> intpairs_3to9 (3)
