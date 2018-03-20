@@ -78,6 +78,7 @@ def init():
     global extdecimals_source
     global dvipsnames_selection_source
     global polygons_source
+    global anglessets_source
     global scalene_triangle_shapes_source
     global right_triangle_shapes_source
     global triangle_2_1_shapes_source
@@ -115,6 +116,7 @@ def init():
 
     db = sqlite3.connect(settings.path.db)
     shapes_db = sqlite3.connect(settings.path.shapes_db)
+    anglessets_db = sqlite3.connect(settings.path.anglessets_db)
     natural_nb_tuples_db = sqlite3.connect(settings.path.natural_nb_tuples_db)
 
     from mathmaker.lib.tools import database
@@ -194,6 +196,13 @@ def init():
                                        'level', 'variant', 'table2', 'table3',
                                        'table4', 'table5', 'table6'],
                                       db=shapes_db)
+    anglessets_source = database.source('anglessets',
+                                        ['id', 'nbof_angles', 'distcode',
+                                         'nbof_right_angles',
+                                         'equal_angles', 'variant', 'table2',
+                                         'table3', 'table4', 'table5',
+                                         'table6'],
+                                        db=anglessets_db)
     scalene_triangle_shapes_source = database.source('scalene_triangle_shapes',
                                                      ['id', 'shape_nb'],
                                                      db=shapes_db)

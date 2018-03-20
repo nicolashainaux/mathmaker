@@ -77,8 +77,11 @@ class path_object(object):
         self.daemon_db = dd + '{}d.db'.format(__software_name__)
         self.shapes_db = dd + 'shapes-{}.db'.format(__version__)
         self.shapes_db_dist = dd + 'shapes.db-dist'
+        self.anglessets_db = dd + 'anglessets-{}.db'.format(__version__)
+        self.anglessets_db_dist = dd + 'anglessets.db-dist'
         logger.info('db={}'.format(self.db))
         logger.info('shapes db={}'.format(self.shapes_db))
+        logger.info('anglessets db={}'.format(self.anglessets_db))
         logger.info('natural_nb_tuples db={}'
                     .format(self.natural_nb_tuples_db))
         if (not os.path.isfile(self.db)
@@ -91,6 +94,12 @@ class path_object(object):
             logger.info('Copy shapes db from {}\n'
                         .format(self.shapes_db_dist))
             copyfile(self.shapes_db_dist, self.shapes_db)
+        if (not os.path.isfile(self.anglessets_db)
+            or os.path.getmtime(self.anglessets_db)
+            < os.path.getmtime(self.anglessets_db_dist)):
+            logger.info('Copy anglessets db from {}\n'
+                        .format(self.anglessets_db_dist))
+            copyfile(self.anglessets_db_dist, self.anglessets_db)
         if (not os.path.isfile(self.natural_nb_tuples_db)
             or os.path.getmtime(self.natural_nb_tuples_db)
             < os.path.getmtime(self.natural_nb_tuples_db_dist)):
@@ -108,6 +117,7 @@ def init():
     global index_path
     global db_index_path
     global shapes_db_index_path
+    global anglessets_db_index_path
     global natural_nb_tuples_db_index_path
     global default, path
     global mainlogger
@@ -149,7 +159,9 @@ def init():
     index_path = frameworksdir + 'index.json'
     db_index_path = datadir + 'db_index.json'
     shapes_db_index_path = datadir + 'shapes_db_index.json'
-    natural_nb_tuples_db_index_path = datadir + 'natural_nb_tuples_db_index.json'
+    anglessets_db_index_path = datadir + 'anglessets_db_index.json'
+    natural_nb_tuples_db_index_path = \
+        datadir + 'natural_nb_tuples_db_index.json'
     settingsdir = rootdir + settings_dirname
     projectdir = rootdir[:-len('mathmaker/')]
 

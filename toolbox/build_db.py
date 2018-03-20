@@ -116,16 +116,21 @@ def __main__():
     if os.path.isfile(settings.path.shapes_db_dist):
         sys.stderr.write('Remove previous shapes database...\n')
         os.remove(settings.path.shapes_db_dist)
+    if os.path.isfile(settings.path.anglessets_db_dist):
+        sys.stderr.write('Remove previous anglessets database...\n')
+        os.remove(settings.path.anglessets_db_dist)
     if os.path.isfile(settings.path.natural_nb_tuples_db_dist):
         sys.stderr.write('Remove previous inttuples database...\n')
         os.remove(settings.path.natural_nb_tuples_db_dist)
     sys.stderr.write('Create new databases...\n')
     open(settings.path.db_dist, 'a').close()
     open(settings.path.shapes_db_dist, 'a').close()
+    open(settings.path.anglessets_db_dist, 'a').close()
     open(settings.path.natural_nb_tuples_db_dist, 'a').close()
     sys.stderr.write('Connect to databases...\n')
     db = sqlite3.connect(settings.path.db_dist)
     shapes_db = sqlite3.connect(settings.path.shapes_db_dist)
+    anglessets_db = sqlite3.connect(settings.path.anglessets_db_dist)
     natural_nb_tuples_db = sqlite3.connect(
         settings.path.natural_nb_tuples_db_dist)
 
@@ -1055,6 +1060,51 @@ def __main__():
                    "INTO ls_marks(mark, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)
+
+    anglessets_db_creation_queries = []
+    sys.stderr.write('Anglessets db: insert anglessets...\n')
+    creation_query = '''CREATE TABLE anglessets
+                        (id INTEGER PRIMARY KEY,
+                         nbof_angles INTEGER, distcode TEXT,
+                         nbof_right_angles INTEGER, equal_angles TEXT,
+                         variant INTEGER, table2 INTEGER, table3 INTEGER,
+                         table4 INTEGER, table5 INTEGER, table6 INTEGER,
+                         drawDate INTEGER)'''
+    anglessets_db_creation_queries.append(creation_query)
+    anglessets_db.execute(creation_query)
+    db_rows = [(3, '1_1_1', 0, 'none', 0, 0, 0, 0, 0, 0, 0),
+               (3, '1_1_1r', 1, 'none', 0, 0, 0, 0, 0, 0, 0),
+               (3, '1_1_1r', 1, 'none', 1, 0, 0, 0, 0, 0, 0),
+               (3, '1_1_1r', 1, 'none', 2, 0, 0, 0, 0, 0, 0)]
+    anglessets_db.executemany(
+        "INSERT INTO anglessets("
+        "nbof_angles, distcode, nbof_right_angles, equal_angles, variant, "
+        "table2, table3, table4, table5, table6, drawDate) "
+        "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        db_rows)
+
+    sys.stderr.write('Anglessets db: insert anglessets subvariants...\n')
+    creation_query = '''CREATE TABLE _1_1_1_subvariants
+                        (id INTEGER PRIMARY KEY, subvariant_nb,
+                         drawDate INTEGER)'''
+    anglessets_db_creation_queries.append(creation_query)
+    anglessets_db.execute(creation_query)
+    db_rows = [(1, 0)]
+    anglessets_db.executemany(
+        "INSERT INTO _1_1_1_subvariants(subvariant_nb, drawDate) "
+        "VALUES(?, ?)",
+        db_rows)
+
+    creation_query = '''CREATE TABLE _1_1_1r_subvariants
+                        (id INTEGER PRIMARY KEY, subvariant_nb,
+                         drawDate INTEGER)'''
+    anglessets_db_creation_queries.append(creation_query)
+    anglessets_db.execute(creation_query)
+    db_rows = [(1, 0), (2, 0), (3, 0)]
+    anglessets_db.executemany(
+        "INSERT INTO _1_1_1r_subvariants(subvariant_nb, drawDate) "
+        "VALUES(?, ?)",
+        db_rows)
 
     shapes_db_creation_queries = []
     sys.stderr.write('Shapes db: insert polygons...\n')

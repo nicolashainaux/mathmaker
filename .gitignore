@@ -10,6 +10,7 @@ dist/
 mathmaker/data/mathmaker.db
 mathmaker/data/mathmaker-*.db
 mathmaker/data/shapes-*.db
+mathmaker/data/anglessets-*.db
 mathmaker/data/natural_nb_tuples-*.db
 mathmaker/data/mathmakerd.db
 mathmaker/log/*
