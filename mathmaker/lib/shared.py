@@ -192,8 +192,8 @@ def init():
     distcodes_source = database.source('distcodes', ['id', 'distcode'])
     anglessets_source = database.source('anglessets',
                                         ['id', 'nbof_angles', 'distcode',
-                                         'nbof_right_angles',
-                                         'equal_angles', 'variant', 'table2',
+                                         'variant', 'nbof_right_angles',
+                                         'equal_angles', 'table2',
                                          'table3', 'table4', 'table5',
                                          'table6'],
                                         db=anglessets_db)

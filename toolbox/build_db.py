@@ -1065,20 +1065,20 @@ def __main__():
     sys.stderr.write('Anglessets db: insert anglessets...\n')
     creation_query = '''CREATE TABLE anglessets
                         (id INTEGER PRIMARY KEY,
-                         nbof_angles INTEGER, distcode TEXT,
+                         nbof_angles INTEGER, distcode TEXT, variant INTEGER,
                          nbof_right_angles INTEGER, equal_angles TEXT,
-                         variant INTEGER, table2 INTEGER, table3 INTEGER,
+                         table2 INTEGER, table3 INTEGER,
                          table4 INTEGER, table5 INTEGER, table6 INTEGER,
                          drawDate INTEGER)'''
     anglessets_db_creation_queries.append(creation_query)
     anglessets_db.execute(creation_query)
-    db_rows = [(3, '1_1_1', 0, 'none', 0, 0, 0, 0, 0, 0, 0),
-               (3, '1_1_1r', 1, 'none', 0, 0, 0, 0, 0, 0, 0),
-               (3, '1_1_1r', 1, 'none', 1, 0, 0, 0, 0, 0, 0),
-               (3, '1_1_1r', 1, 'none', 2, 0, 0, 0, 0, 0, 0)]
+    db_rows = [(3, '1_1_1', 0, 0, 'none', 0, 0, 0, 0, 0, 0),
+               (3, '1_1_1r', 0, 1, 'none', 0, 0, 0, 0, 0, 0),
+               (3, '1_1_1r', 1, 1, 'none', 0, 0, 0, 0, 0, 0),
+               (3, '1_1_1r', 2, 1, 'none', 0, 0, 0, 0, 0, 0)]
     anglessets_db.executemany(
         "INSERT INTO anglessets("
-        "nbof_angles, distcode, nbof_right_angles, equal_angles, variant, "
+        "nbof_angles, distcode, variant, nbof_right_angles, equal_angles, "
         "table2, table3, table4, table5, table6, drawDate) "
         "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         db_rows)
