@@ -1,0 +1,26 @@
+{
+    "anglessets": [
+        "id",
+        "nbof_angles",
+        "distcode",
+        "nbof_right_angles",
+        "equal_angles",
+        "variant",
+        "table2",
+        "table3",
+        "table4",
+        "table5",
+        "table6",
+        "drawDate"
+    ],
+    "_1_1_1_subvariants": [
+        "id",
+        "subvariant_nb",
+        "drawDate"
+    ],
+    "_1_1_1r_subvariants": [
+        "id",
+        "subvariant_nb",
+        "drawDate"
+    ]
+}

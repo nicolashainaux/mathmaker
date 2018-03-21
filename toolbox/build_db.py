@@ -1507,10 +1507,12 @@ def __main__():
     sys.stderr.write('Commit changes to databases...\n')
     db.commit()
     shapes_db.commit()
+    anglessets_db.commit()
     natural_nb_tuples_db.commit()
     sys.stderr.write('Close databases...\n')
     db.close()
     shapes_db.close()
+    anglessets_db.close()
     natural_nb_tuples_db.close()
     sys.stderr.write('Create databases\' indices...\n')
     db_index = {}
@@ -1526,6 +1528,13 @@ def __main__():
         shapes_db_index.update({key: value})
     with open(settings.shapes_db_index_path, 'w') as f:
         json.dump(shapes_db_index, f, indent=4)
+        f.write('\n')
+    anglessets_db_index = {}
+    for qr in anglessets_db_creation_queries:
+        key, value = parse_sql_creation_query(qr)
+        anglessets_db_index.update({key: value})
+    with open(settings.anglessets_db_index_path, 'w') as f:
+        json.dump(anglessets_db_index, f, indent=4)
         f.write('\n')
     natural_nb_tuples_db_index = {}
     for qr in natural_nb_tuples_db_creation_queries:
