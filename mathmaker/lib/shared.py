@@ -190,12 +190,6 @@ def init():
                                                   ['id', 'color_name'])
     ls_marks_source = database.source('ls_marks', ['id', 'mark'])
     distcodes_source = database.source('distcodes', ['id', 'distcode'])
-    polygons_source = database.source('polygons',
-                                      ['id', 'sides_nb', 'type', 'special',
-                                       'codename', 'sides_particularity',
-                                       'level', 'variant', 'table2', 'table3',
-                                       'table4', 'table5', 'table6'],
-                                      db=shapes_db)
     anglessets_source = database.source('anglessets',
                                         ['id', 'nbof_angles', 'distcode',
                                          'nbof_right_angles',
@@ -203,6 +197,12 @@ def init():
                                          'table3', 'table4', 'table5',
                                          'table6'],
                                         db=anglessets_db)
+    polygons_source = database.source('polygons',
+                                      ['id', 'sides_nb', 'type', 'special',
+                                       'codename', 'sides_particularity',
+                                       'level', 'variant', 'table2', 'table3',
+                                       'table4', 'table5', 'table6'],
+                                      db=shapes_db)
     scalene_triangle_shapes_source = database.source('scalene_triangle_shapes',
                                                      ['id', 'shape_nb'],
                                                      db=shapes_db)
