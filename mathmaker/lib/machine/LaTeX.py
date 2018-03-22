@@ -250,6 +250,7 @@ class LaTeX(Structure.Structure):
         # Specific packages
         if variant == 'slideshow':
             specificpkg = r"""% Useless? \usefonttheme{professionalfonts}
+\usepackage{parskip}
 """
         else:
             specificpkg = r"""
