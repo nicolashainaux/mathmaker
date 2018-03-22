@@ -38,9 +38,9 @@ class sub_object(component.structure):
         if source_id == r'10%of...':
             self.transduration = 12
         elif source_id in [r'25%of...', r'50%of...'] and self.nb2 < 40:
-            self.transduration = 12
-        else:
             self.transduration = 16
+        else:
+            self.transduration = 20
         if self.nb_variant.startswith('decimal'):
             deci_nb = int(self.nb_variant[-1])
             self.nb2 = self.nb2 / Number(10) ** Number(deci_nb)
