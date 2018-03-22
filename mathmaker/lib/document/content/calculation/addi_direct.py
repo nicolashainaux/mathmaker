@@ -77,7 +77,8 @@ class sub_object(component.structure):
                                           color='BrickRed')}
             super().setup('angles_bunch', extra_deco=extra_deco,
                           labels=lined_up(self.nb_list),
-                          subvariant_nb=options.get('subvariant_nb', None))
+                          subvariant_nb=options.get('subvariant_nb', None),
+                          variant=options.get('variant', None))
             # if not self.slideshow:
             #     self.angles_bunch.baseline = '20pt'
 

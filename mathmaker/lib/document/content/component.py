@@ -256,12 +256,15 @@ class structure(object):
         self.quotient_str = q.printed
 
     def _setup_angles_bunch(self, extra_deco=None, labels=None,
-                            subvariant_nb=None):
+                            variant=None, subvariant_nb=None):
         from mathmaker import settings
         dist_code = distcode(*self.nb_list)
         nbof_right_angles = self.nb_list.count(90)
         dist_code += 'r' * nbof_right_angles
-        anglesset_data = shared.anglessets_source.next(distcode=dist_code)
+        anglesset_query_args = {'distcode': dist_code}
+        if variant is not None:
+            anglesset_query_args.update({'variant': variant})
+        anglesset_data = shared.anglessets_source.next(**anglesset_query_args)
         nbof_values = sum([int(_) for _ in dist_code.split('_')])
         required_nb_of_points_names = nbof_values + 2
         if required_nb_of_points_names in settings.available_wNl:
