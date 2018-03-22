@@ -38,13 +38,19 @@ class sub_object(component.structure):
         super().setup("nb_variants", nb=build_data, **options)
         super().setup("length_units", **options)
         super().setup("rectangle", **options)
-        self.transduration = 12
+        self.transduration = 14
 
         if self.picture:
-            self.wording = _("Perimeter of this rectangle? |hint:length_unit|")
+            if self.slideshow:
+                self.wording = _('Perimeter of this rectangle?')
+            else:
+                self.wording = _('Perimeter of this rectangle? '
+                                 '|hint:length_unit|')
             setup_wording_format_of(self)
+            self.part2_wording = _('(Length unit: {})')\
+                .format(self.length_unit)
         else:
-            self.transduration = 16
+            self.transduration = 20
             self.nb1, self.nb2 = \
                 self.rectangle.lbl_width, self.rectangle.lbl_length
             self.wording = _("Perimeter of a rectangle whose width "
@@ -55,20 +61,24 @@ class sub_object(component.structure):
     def q(self, **options):
         if self.picture:
             if self.slideshow:
-                return '{}\n{}'\
-                    .format(self.rectangle.drawn,
-                            self.wording.format(**self.wording_format))
+                return r'{}\par {} \par {}'\
+                    .format(self.wording.format(**self.wording_format),
+                            self.rectangle.drawn,
+                            self.part2_wording)
             else:
                 return shared.machine.write_layout(
-                    (1, 2), [5, 8],
+                    (1, 2), [3, 10],
                     [self.rectangle.drawn,
-                     self.wording.format(**self.wording_format)])
+                     r'{} {}'
+                     .format(self.wording.format(**self.wording_format),
+                             self.part2_wording)])
         else:
             return self.wording.format(**self.wording_format)
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        return self.rectangle.lbl_perimeter.printed
+        return Number(self.rectangle.lbl_perimeter,
+                      unit=self.length_unit).printed
 
     def js_a(self, **kwargs):
         return [Number(self.rectangle.lbl_perimeter, unit=None).uiprinted]
