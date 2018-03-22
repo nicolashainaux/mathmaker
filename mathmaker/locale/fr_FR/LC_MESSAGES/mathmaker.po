@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2018-03-22 07:59+0100\n"
+"PO-Revision-Date: 2018-03-22 08:59+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -50,11 +50,11 @@ msgstr "Pour utiliser des commandes supplémentaires pour les tableaux"
 msgid "For pretty underlining"
 msgstr "Pour de jolis soulignages"
 
-#: lib/machine/LaTeX.py:278
+#: lib/machine/LaTeX.py:279
 msgid "Exercises counter"
 msgstr "Compteur d'exercices"
 
-#: lib/machine/LaTeX.py:283
+#: lib/machine/LaTeX.py:284
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -278,7 +278,6 @@ msgid "Question:"
 msgstr "Question :"
 
 #: lib/old_style_sheet/exercise/X_Structure.py:267
-#: lib/document/frames/exercise.py:776
 msgid "Answer:"
 msgstr "Réponse :"
 
@@ -435,11 +434,11 @@ msgstr "Pour utiliser des symboles (par exemple des unités de monétaires)"
 msgid "To display units correctly"
 msgstr "Pour afficher correctement les unités"
 
-#: lib/document/content/geometry/area_rectangle.py:42
+#: lib/document/content/geometry/area_rectangle.py:45
 msgid "Area of this rectangle? |hint:area_unit|"
 msgstr "Aire de ce rectangle ? |hint:area_unit|"
 
-#: lib/document/content/geometry/area_rectangle.py:48
+#: lib/document/content/geometry/area_rectangle.py:53
 #, python-brace-format
 msgid ""
 "Area of a rectangle whose width is {nb1} {length_unit} and length is {nb2} "
@@ -2604,11 +2603,11 @@ msgstr "Pour dessiner des images TikZ"
 msgid "To include .eps pictures"
 msgstr "Pour inclure des images .eps"
 
-#: lib/machine/LaTeX.py:277
+#: lib/machine/LaTeX.py:278
 msgid "General layout of the page"
 msgstr "Disposition générale de la page"
 
-#: lib/machine/LaTeX.py:279
+#: lib/machine/LaTeX.py:280
 msgid ""
 "Definition of the \"exercise\" command, which will insert the word \"Exercise"
 "\" in bold, with its number and automatically increments the counter"
@@ -2617,7 +2616,7 @@ msgstr ""
 "en gras, accompagné de son numéro et qui va incrémenter automatiquement le "
 "compteur"
 
-#: lib/machine/LaTeX.py:292
+#: lib/machine/LaTeX.py:293
 msgid ""
 "Redefinition of \"\\parallel\" command to draw the parallel symbol slanted "
 "as usual in french notations"
@@ -2716,13 +2715,25 @@ msgstr "Pour permettre à pdflatex d'inclure des images .eps"
 msgid "Absolute positioning of text on the page"
 msgstr "Positionnement absolu du texte sur la page"
 
-#: lib/machine/LaTeX.py:257
+#: lib/machine/LaTeX.py:258
 msgid "To define the layout of the page"
 msgstr "Définir la mise en page"
 
 #: lib/document/content/calculation/divisibility_questions.py:76
 msgid "(True or false?)"
 msgstr "(Vrai ou faux ?)"
+
+#: lib/document/content/geometry/area_rectangle.py:43
+msgid "Area of this rectangle?"
+msgstr "Aire de ce rectangle ?"
+
+#: lib/document/content/geometry/area_rectangle.py:47
+msgid "(Length unit: {})"
+msgstr "(Unité de longueur : {})"
+
+#: lib/document/frames/exercise.py:776
+msgid "Answer: "
+msgstr "Réponse : "
 
 #~ msgid "Perimeter of this triangle? |hint:length_unit|"
 #~ msgstr "Périmètre de ce triangle ? |hint:length_unit|"

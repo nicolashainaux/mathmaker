@@ -51,11 +51,11 @@ msgstr ""
 msgid "For pretty underlining"
 msgstr ""
 
-#: lib/machine/LaTeX.py:278
+#: lib/machine/LaTeX.py:279
 msgid "Exercises counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:283
+#: lib/machine/LaTeX.py:284
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -269,7 +269,6 @@ msgid "Question:"
 msgstr ""
 
 #: lib/old_style_sheet/exercise/X_Structure.py:267
-#: lib/document/frames/exercise.py:776
 msgid "Answer:"
 msgstr ""
 
@@ -421,11 +420,11 @@ msgstr ""
 msgid "To display units correctly"
 msgstr ""
 
-#: lib/document/content/geometry/area_rectangle.py:42
+#: lib/document/content/geometry/area_rectangle.py:45
 msgid "Area of this rectangle? |hint:area_unit|"
 msgstr ""
 
-#: lib/document/content/geometry/area_rectangle.py:48
+#: lib/document/content/geometry/area_rectangle.py:53
 #, python-brace-format
 msgid ""
 "Area of a rectangle whose width is {nb1} {length_unit} and length is {nb2} "
@@ -2267,18 +2266,18 @@ msgstr ""
 msgid "To include .eps pictures"
 msgstr ""
 
-#: lib/machine/LaTeX.py:277
+#: lib/machine/LaTeX.py:278
 msgid "General layout of the page"
 msgstr ""
 
-#: lib/machine/LaTeX.py:279
+#: lib/machine/LaTeX.py:280
 msgid ""
 "Definition of the \"exercise\" command, which will insert the word "
 "\"Exercise\" in bold, with its number and automatically increments the "
 "counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:292
+#: lib/machine/LaTeX.py:293
 msgid ""
 "Redefinition of \"\\parallel\" command to draw the parallel symbol slanted "
 "as usual in french notations"
@@ -2365,10 +2364,22 @@ msgstr ""
 msgid "Absolute positioning of text on the page"
 msgstr ""
 
-#: lib/machine/LaTeX.py:257
+#: lib/machine/LaTeX.py:258
 msgid "To define the layout of the page"
 msgstr ""
 
 #: lib/document/content/calculation/divisibility_questions.py:76
 msgid "(True or false?)"
+msgstr ""
+
+#: lib/document/content/geometry/area_rectangle.py:43
+msgid "Area of this rectangle?"
+msgstr ""
+
+#: lib/document/content/geometry/area_rectangle.py:47
+msgid "(Length unit: {})"
+msgstr ""
+
+#: lib/document/frames/exercise.py:776
+msgid "Answer: "
 msgstr ""
