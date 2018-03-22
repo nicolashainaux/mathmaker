@@ -61,6 +61,7 @@ from mathmakerlib.calculus import Number
 from mathmaker import settings
 from mathmaker.lib.tools import po_file_get_list_of, check_unique_letters_words
 from mathmaker.lib.tools.frameworks import get_attributes
+from mathmaker.lib.tools.distcode import distcode
 from mathmaker.lib.tools.database import parse_sql_creation_query
 from mathmaker.lib.constants.numeration import DIGITSPLACES
 from mathmaker.lib.constants.numeration import DIGITSPLACES_DECIMAL
@@ -85,18 +86,6 @@ def _suits_for_deci1(i, j):
 
 def _suits_for_deci2(i, j):
     return not(i % 10 == 0 or j % 10 == 0)
-
-
-def _code(*numbers):
-    """Identifies a tuple of numbers depending on its composition."""
-    already_found = []
-    code = []
-    for n in numbers:
-        if n not in already_found:
-            already_found.append(n)
-            code.append(numbers.count(n))
-    code.sort(reverse=True)
-    return '_'.join([str(_) for _ in code])
 
 
 def __main__():
@@ -497,7 +486,7 @@ def __main__():
                (25, 4, 6, 'none', 0, 0, 0, 0, 0, 0),
                (25, 5, 6, 'none', 0, 0, 0, 0, 0, 0)]
     db_rows += [(i + 1, j + 1, k + 1,  # nb1, nb2, nb3
-                 _code(i + 1, j + 1, k + 1),  # code
+                 distcode(i + 1, j + 1, k + 1),  # code
                  k + 1 < i + j + 2,  # triangle?
                  (i == j and j != k) or (i == k and i != j)
                  or (j == k and i != j),  # isosceles? (but not equilateral)
@@ -531,7 +520,7 @@ def __main__():
     sys.stderr.write('Create integers quadruples...\n')
     # Tables of 1, 2, 3... INTQUADRUPLES_MAX
     db_rows = [(i + 1, j + 1, k + 1, n + 1,  # nb1, nb2, nb3, nb4
-                _code(i + 1, j + 1, k + 1, n + 1),  # code
+                distcode(i + 1, j + 1, k + 1, n + 1),  # code
                 n + 1 < i + j + k + 3,  # quadrilateral?
                 i == j == k == n,  # equilateral?
                 (i == j or j == k or k == i or i == n or j == n or k == n),
@@ -565,7 +554,7 @@ def __main__():
     sys.stderr.write('Create integers quintuples...\n')
     # Tables of 1, 2, 3... INTQUINTUPLES_MAX
     db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1,  # nb1, nb2, nb3, nb4, nb5
-                _code(i + 1, j + 1, k + 1, n + 1, p + 1),  # code
+                distcode(i + 1, j + 1, k + 1, n + 1, p + 1),  # code
                 p + 1 < i + j + k + n + 4,  # pentagon?
                 i == j == k == n == p,  # equilateral?
                 (i == j or j == k or k == i or i == n or j == n or k == n
@@ -602,7 +591,7 @@ def __main__():
     # Tables of 1, 2, 3... INTSEXTUPLES_MAX
     db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1, q + 1,
                 # nb1, nb2, nb3, nb4, nb5, nb6
-                _code(i + 1, j + 1, k + 1, n + 1, p + 1, q + 1),  # code
+                distcode(i + 1, j + 1, k + 1, n + 1, p + 1, q + 1),  # code
                 q + 1 < i + j + k + n + p + 5,  # hexagon?
                 i == j == k == n == p == q,  # equilateral?
                 (i == j or j == k or k == i or i == n or j == n or k == n
@@ -716,7 +705,7 @@ def __main__():
                (25, 4, 6, 'none', 0, 0, 0, 0, 0, 0),
                (25, 5, 6, 'none', 0, 0, 0, 0, 0, 0)]
     db_rows += [(i + 1, j + 1, k + 1,  # nb1, nb2, nb3
-                 _code(i + 1, j + 1, k + 1),  # code
+                 distcode(i + 1, j + 1, k + 1),  # code
                  k + 1 < i + j + 2,  # constructible triangle?
                  (i == j and j != k) or (i == k and i != j)
                  or (j == k and i != j),  # isosceles? (but not equilateral)
@@ -754,7 +743,7 @@ def __main__():
     natural_nb_tuples_db.execute(creation_query)
     # Tables of 1, 2, 3... NNQUADRUPLES_MAX
     db_rows = [(i + 1, j + 1, k + 1, n + 1,  # nb1, nb2, nb3, nb4
-                _code(i + 1, j + 1, k + 1, n + 1),  # code
+                distcode(i + 1, j + 1, k + 1, n + 1),  # code
                 n + 1 < i + j + k + 3,  # constructible quadrilateral?
                 i == j == k == n,  # equilateral?
                 (i == j or j == k or k == i or i == n or j == n or k == n),
@@ -791,7 +780,7 @@ def __main__():
     natural_nb_tuples_db.execute(creation_query)
     # Tables of 1, 2, 3... NNQUINTUPLES_MAX
     db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1,  # nb1, nb2, nb3, nb4, nb5
-                _code(i + 1, j + 1, k + 1, n + 1, p + 1),  # code
+                distcode(i + 1, j + 1, k + 1, n + 1, p + 1),  # code
                 p + 1 < i + j + k + n + 4,  # constructible?
                 i == j == k == n == p,  # equilateral?
                 (i == j or j == k or k == i or i == n or j == n or k == n
@@ -832,7 +821,7 @@ def __main__():
     # Tables of 1, 2, 3... NNSEXTUPLES_MAX
     db_rows = [(i + 1, j + 1, k + 1, n + 1, p + 1, q + 1,
                 # nb1, nb2, nb3, nb4, nb5, nb6
-                _code(i + 1, j + 1, k + 1, n + 1, p + 1, q + 1),  # code
+                distcode(i + 1, j + 1, k + 1, n + 1, p + 1, q + 1),  # code
                 q + 1 < i + j + k + n + p + 5,  # constructible hexagon?
                 i == j == k == n == p == q,  # equilateral?
                 (i == j or j == k or k == i or i == n or j == n or k == n
