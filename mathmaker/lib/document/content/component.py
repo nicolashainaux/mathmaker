@@ -33,6 +33,7 @@ from mathmaker.lib.core.base_calculus import Division
 from mathmaker.lib import shared
 from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.tools import rotate, lined_up, fix_math_style2_fontsize
+from mathmaker.lib.tools.distcode import distcode
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.tools.generators.shapes import ShapeGenerator
 from mathmaker.lib.tools.generators.anglessets import AnglesSetGenerator
@@ -255,14 +256,13 @@ class structure(object):
         self.quotient_str = q.printed
 
     def _setup_angles_bunch(self, extra_deco=None, labels=None,
-                            distcode='random', subvariant_nb=None):
+                            subvariant_nb=None):
         from mathmaker import settings
-        if distcode == 'random':
-            distcode = shared.distcodes_source.next(nbof_nb=self.nb_nb)[0]
+        dist_code = distcode(*self.nb_list)
         nbof_right_angles = self.nb_list.count(90)
-        distcode += 'r' * nbof_right_angles
-        anglesset_data = shared.anglessets_source.next(distcode=distcode)
-        nbof_values = sum([int(_) for _ in distcode.split('_')])
+        dist_code += 'r' * nbof_right_angles
+        anglesset_data = shared.anglessets_source.next(distcode=dist_code)
+        nbof_values = sum([int(_) for _ in dist_code.split('_')])
         required_nb_of_points_names = nbof_values + 2
         if required_nb_of_points_names in settings.available_wNl:
             names = next(shared.unique_letters_words_source[
@@ -270,7 +270,7 @@ class structure(object):
         else:
             names = copy.deepcopy(ALPHABET)[0:required_nb_of_points_names]
         self.angles_bunch = AnglesSetGenerator()\
-            .generate(codename=distcode, variant=anglesset_data[2],
+            .generate(codename=dist_code, variant=anglesset_data[2],
                       labels=labels, name=names, extra_deco=extra_deco,
                       subvariant_nb=subvariant_nb)
         self.angles_bunch.fontsize = self.tikz_fontsize
