@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2018-03-22 09:22+0100\n"
+"PO-Revision-Date: 2018-03-22 09:35+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -447,11 +447,11 @@ msgstr ""
 "Aire d'un rectangle de largeur {nb1} {length_unit} et de longueur {nb2} "
 "{length_unit}? |hint:area_unit|"
 
-#: lib/document/content/geometry/perimeter_rectangle.py:47
+#: lib/document/content/geometry/perimeter_rectangle.py:49
 msgid "Perimeter of this rectangle? |hint:length_unit|"
 msgstr "Périmètre de ce rectangle ? |hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_rectangle.py:56
+#: lib/document/content/geometry/perimeter_rectangle.py:58
 #, python-brace-format
 msgid ""
 "Perimeter of a rectangle whose width is {nb1} {length_unit} and length is "
@@ -2727,8 +2727,8 @@ msgstr "(Vrai ou faux ?)"
 msgid "Area of this rectangle?"
 msgstr "Aire de ce rectangle ?"
 
-#: lib/document/content/geometry/perimeter_rectangle.py:50
 #: lib/document/content/geometry/area_rectangle.py:47
+#: lib/document/content/geometry/perimeter_rectangle.py:46
 msgid "(Length unit: {})"
 msgstr "(Unité de longueur : {})"
 
@@ -2739,6 +2739,10 @@ msgstr "Réponse : "
 #: lib/document/content/geometry/perimeter_rectangle.py:45
 msgid "Perimeter of this rectangle?"
 msgstr "Périmètre de ce rectangle ?"
+
+#: lib/document/content/geometry/perimeter_rectangle.py:51
+msgid "(Lengths in {})"
+msgstr "(Longueurs en {})"
 
 #~ msgid "Perimeter of this triangle? |hint:length_unit|"
 #~ msgstr "Périmètre de ce triangle ? |hint:length_unit|"

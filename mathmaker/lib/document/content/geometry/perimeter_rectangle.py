@@ -43,12 +43,14 @@ class sub_object(component.structure):
         if self.picture:
             if self.slideshow:
                 self.wording = _('Perimeter of this rectangle?')
+                self.part2_wording = r'{\small' + _('(Length unit: {})')\
+                    .format(self.length_unit) + '}'
             else:
                 self.wording = _('Perimeter of this rectangle? '
                                  '|hint:length_unit|')
+                self.part2_wording = r'{\small' + _('(Lengths in {})')\
+                    .format(self.length_unit) + '}'
             setup_wording_format_of(self)
-            self.part2_wording = _('(Length unit: {})')\
-                .format(self.length_unit)
         else:
             self.transduration = 20
             self.nb1, self.nb2 = \
@@ -67,7 +69,7 @@ class sub_object(component.structure):
                             self.part2_wording)
             else:
                 return shared.machine.write_layout(
-                    (1, 2), [3, 10],
+                    (1, 2), [4, 9],
                     [self.rectangle.drawn,
                      r'{} {}'
                      .format(self.wording.format(**self.wording_format),

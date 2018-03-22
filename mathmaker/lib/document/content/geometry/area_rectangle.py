@@ -41,11 +41,13 @@ class sub_object(component.structure):
         if self.picture:
             if self.slideshow:
                 self.wording = _('Area of this rectangle?')
+                self.part2_wording = r'{\small' + _('(Length unit: {})')\
+                    .format(self.length_unit) + '}'
             else:
                 self.wording = _('Area of this rectangle? |hint:area_unit|')
+                self.part2_wording = r'{\small' + _('(Lengths in {})')\
+                    .format(self.length_unit) + '}'
             setup_wording_format_of(self)
-            self.part2_wording = _('(Length unit: {})')\
-                .format(self.length_unit)
         else:
             self.transduration = 20
             self.nb1, self.nb2 = \
