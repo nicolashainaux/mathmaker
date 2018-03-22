@@ -138,7 +138,7 @@ W02c: !!omap
     - questions: divisibility questions, variant=false -> intpairs_3to9 (1)
                  order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
                  percent direct -> 10%of..., context=simple_unit (1)
-                 area rectangle -> intpairs_2to9, nb_variant=decimal1 (1)
+                 area rectangle, picture=true -> intpairs_2to9, nb_variant=decimal1 (1)
                  multi hole -> int_irreducible_frac (1)
 
 W02d: !!omap
