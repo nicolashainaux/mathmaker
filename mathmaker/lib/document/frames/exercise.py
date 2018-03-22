@@ -773,7 +773,7 @@ class Exercise(object):
                     else:
                         content = q.to_str('exc') + SLIDE_CONTENT_SEP \
                             + q.to_str('exc') \
-                            + '\n\n' + _('Answer:') + '\n\n' \
+                            + r' \par ' + _('Answer: ') \
                             + COLORED_ANSWER.format(
                                 text='{' + q.to_str('ans') + '}')
                     required.package['xcolor'] = True
