@@ -1089,7 +1089,7 @@ def __main__():
                          drawDate INTEGER)'''
     anglessets_db_creation_queries.append(creation_query)
     anglessets_db.execute(creation_query)
-    db_rows = [(1, 0)]
+    db_rows = [(1, 0), (2, 0), (3, 0)]
     anglessets_db.executemany(
         "INSERT INTO _1_1_1_subvariants(subvariant_nb, drawDate) "
         "VALUES(?, ?)",
@@ -1100,7 +1100,7 @@ def __main__():
                          drawDate INTEGER)'''
     anglessets_db_creation_queries.append(creation_query)
     anglessets_db.execute(creation_query)
-    db_rows = [(1, 0), (2, 0), (3, 0)]
+    db_rows = [(1, 0)]
     anglessets_db.executemany(
         "INSERT INTO _1_1_1r_subvariants(subvariant_nb, drawDate) "
         "VALUES(?, ?)",
