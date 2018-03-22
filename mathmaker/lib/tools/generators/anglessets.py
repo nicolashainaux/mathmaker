@@ -119,7 +119,23 @@ class AnglesSetGenerator(Generator):
                            'eccentricities': [Number('1.6'),
                                               Number('1.8'),
                                               Number('1.4')],
-                           'baseline': '22pt'}
+                           'baseline': '22pt'},
+                       2: {'endpoints': [Point('2.5', 0),
+                                         Point('1.5', 2),
+                                         Point(-1, '2.3'),
+                                         Point('-2.5', '0.25')],
+                           'eccentricities': [Number('1.6'),
+                                              Number('1.5'),
+                                              Number('1.4')],
+                           'baseline': '22pt'},
+                       3: {'endpoints': [Point('1.6', '1.92'),
+                                         Point(0, '2.5'),
+                                         Point(-2, '1.5'),
+                                         Point('-2.5', 0)],
+                           'eccentricities': [Number('1.6'),
+                                              Number('1.5'),
+                                              Number('1.4')],
+                           'baseline': '26pt'},
                        }
         shapes_source = shared.anglessets_1_1_1_source
         lbls = [labels[i][1] for i in range(len(labels))]
