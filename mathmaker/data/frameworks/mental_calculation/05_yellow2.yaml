@@ -126,8 +126,10 @@ W02a: !!omap
 W02b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: divisibility questions, variant=true -> intpairs_3to9 (2)
-                 percent direct -> 10%of..., context=simple_unit (2)
+    - questions: divisibility questions, variant=true -> intpairs_3to9 (1)
+                 divisibility questions, variant=false -> intpairs_3to9 (1)
+                 percent direct -> 10%of..., context=simple_unit (1)
+                 percent direct -> 25%of..., context=simple_unit, level=easy (1)
                  mini_pb proportionality -> mergedinttriples_3to9 (1)
 
 W02c: !!omap
