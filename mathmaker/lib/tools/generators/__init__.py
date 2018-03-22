@@ -22,13 +22,22 @@
 
 from abc import ABCMeta, abstractmethod
 
+# from .anglesset
+
 
 class Generator(object, metaclass=ABCMeta):
 
-    def check_args(self, codename=None, variant=None, labels=None, name=None):
-        if type(codename) is not str:
+    def check_args(self, codename_prefix='', distcode='', variant=None,
+                   labels=None, name=None):
+        import sys
+        sys.stderr.write('Entered check_args()\n')
+        if type(codename_prefix) is not str:
             raise TypeError('codename must be a str, found {} instead.'
-                            .format(type(codename)))
+                            .format(type(codename_prefix)))
+        if type(distcode) is not str:
+            raise TypeError('distcode must be a str, found {} instead.'
+                            .format(type(distcode)))
+        codename = codename_prefix + distcode
         if not hasattr(self, '_' + codename):
             raise ValueError('Cannot generate \'{}\'.'.format(codename))
         if not isinstance(labels, list):
@@ -39,14 +48,12 @@ class Generator(object, metaclass=ABCMeta):
                     for t in labels]):
             raise TypeError('All elements of the labels list must be tuples '
                             'of two elements, first being an int.')
-        if codename.endswith('r'):
-            codename = codename[:-1]
-        codename_nb = [int(_) for _ in codename.split('_')[1:]]
+        distcode_nb = [int(_) for _ in distcode.split('_')]
         labels_nb = [t[0] for t in labels]
-        if sorted(codename_nb) != sorted(labels_nb):
+        if sorted(distcode_nb) != sorted(labels_nb):
             raise ValueError('The given labels list does not match the '
-                             'codename: labels\' numbers {} != {}'
-                             .format(labels_nb, codename_nb))
+                             'distcode: labels\' numbers {} != {}'
+                             .format(labels_nb, distcode_nb))
 
     @abstractmethod
     def generate(self, codename=None, variant=None, labels=None, name=None,

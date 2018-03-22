@@ -28,7 +28,6 @@ from string import ascii_uppercase as ALPHABET
 
 from mathmakerlib.calculus import Number, Unit, Fraction, is_integer
 from mathmakerlib.calculus.unit import COMMON_LENGTH_UNITS
-from mathmakerlib.geometry import Angle, AnglesSet
 
 from mathmaker.lib.core.base_calculus import Division
 from mathmaker.lib import shared
@@ -36,6 +35,7 @@ from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.tools import rotate, lined_up, fix_math_style2_fontsize
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.tools.generators.shapes import ShapeGenerator
+from mathmaker.lib.tools.generators.anglessets import AnglesSetGenerator
 from mathmaker.lib.tools.database import preprocess_qkw
 
 
@@ -254,112 +254,24 @@ class structure(object):
         q = Division(('+', self.dividend, self.divisor))
         self.quotient_str = q.printed
 
-    def _setup_angles_bunch(self, measures=None, decorations=None,
-                            orientation=0):
-        from mathmakerlib.geometry import Point, AngleDecoration
+    def _setup_angles_bunch(self, extra_deco=None, labels=None,
+                            distcode='random'):
         from mathmaker import settings
-        angles = []
-        layers = {}
-        L = 0
-        for key in decorations:
-            i, j = key.split(':')
-            i, j = int(i), int(j)
-            if abs(j - i) not in layers:
-                layers.update({abs(j - i): L})
-                L += 1
-        sublayer = layer = 0
-        offset = Number('0.5', unit='cm')
-        if min(measures) < 35:
-            offset = Number('0.7', unit='cm')
-        if min(measures) < 30:
-            offset = Number('0.8', unit='cm')
-        if min(measures) < 25:
-            offset = Number('0.9', unit='cm')
-        if min(measures) < 20:
-            offset = Number(1, unit='cm')
-        layer_thickness = Number(1, unit='cm')
-        if len(measures) >= 3:
-            layer_thickness += Number('0.1', unit='cm') \
-                * abs(len(measures) - 2)
-        arm_length = Number(offset + layers[max(layers)] * layer_thickness
-                            + Number(2, unit='cm'), unit=None)
-        if not self.slideshow:
-            arm_length *= Number('0.7')
-        required_nb_of_points_names = len(measures) + 2
+        if distcode == 'random':
+            distcode = shared.distcodes_source.next(nbof_nb=self.nb_nb)[0]
+        nbof_right_angles = self.nb_list.count(90)
+        distcode += 'r' * nbof_right_angles
+        anglesset_data = shared.anglessets_source.next(distcode=distcode)
+        nbof_values = sum([int(_) for _ in distcode.split('_')])
+        required_nb_of_points_names = nbof_values + 2
         if required_nb_of_points_names in settings.available_wNl:
             names = next(shared.unique_letters_words_source[
                 required_nb_of_points_names])[0]
         else:
             names = copy.deepcopy(ALPHABET)[0:required_nb_of_points_names]
-        Ω = Point(0, 0, names[0])  # vertex of all angles from the bunch
-        P1 = Point(arm_length, 0).rotate(Ω, orientation, rename=names[1])
-        endpoints = [P1]
-        θ = 0
-        for i, ω in enumerate(measures):
-            θ += ω
-            endpoints.append(P1.rotate(Ω, θ, rename=names[i + 2]))
-        for p in endpoints:
-            p.name += '1'
-        duplicate_labels = {}
-        found_labels = []
-        for kn, key in enumerate(decorations):
-            val = decorations[key].label_value
-            if val not in found_labels:
-                found_labels.append(val)
-            else:
-                _variety_hatchmark = next(shared.angle_decorations_source)[0:2]
-                duplicate_labels.update({val: _variety_hatchmark})
-        found_labels = {}
-        for kn, key in enumerate(decorations):
-            i, j = key.split(':')
-            i, j = int(i), int(j)
-            previous_layer = layer
-            layer = layers[abs(j - i)]
-            # color = next(shared.dvipsnames_selection_source)[0]
-            deco = decorations[key]
-            if layer != previous_layer:  # reset layer
-                sublayer = 0
-            armspoints = [(names[i + 1], ), (names[j + 1], )]
-            deco.radius = offset \
-                + sublayer * Number('0.1', unit='cm') \
-                + layer * layer_thickness
-            # if not self.slideshow:
-            #     deco.radius *= Number('0.7')
-            #     deco.gap *= Number('0.7')
-            sublayer += 1
-            mark_right = False
-            if deco.radius is not None and deco.radius.fracdigits_nb() >= 3:
-                deco.radius = deco.radius.rounded(Number('0.01'))
-            if deco.label_value == Number(90, unit=r'\textdegree'):
-                mark_right = True
-                r = Number('0.3', unit='cm')
-                deco = AngleDecoration(color=deco.color,
-                                       thickness=deco.thickness,
-                                       radius=r)
-            else:
-                if deco.label_value in duplicate_labels:
-                    deco = AngleDecoration(
-                        color=deco.color, thickness=deco.thickness,
-                        label=deco.label,
-                        radius=deco.radius, gap=deco.gap,
-                        eccentricity=deco.eccentricity,
-                        variety=duplicate_labels[deco.label_value][0],
-                        hatchmark=duplicate_labels[deco.label_value][1])
-                    if deco.label_value in found_labels:
-                        deco.radius = found_labels[deco.label_value]  \
-                            + Number('0.01', unit=deco.radius.unit)
-                        found_labels[deco.label_value] = deco.radius
-                        deco.label = None
-                    else:
-                        found_labels.update({deco.label_value: deco.radius})
-            deco.eccentricity = 'automatic'  # re-adjust the eccentricity
-            α = Angle(endpoints[i], Ω, endpoints[j],
-                      label_vertex=True, draw_vertex=True,
-                      label_armspoints=True, draw_armspoints=True,
-                      decoration=deco, armspoints=armspoints,
-                      naming_mode='from_armspoints', mark_right=mark_right)
-            angles.append(α)
-        self.angles_bunch = AnglesSet(*angles)
+        self.angles_bunch = AnglesSetGenerator()\
+            .generate(codename=distcode, variant=anglesset_data[2],
+                      labels=labels, name=names, extra_deco=extra_deco)
         self.angles_bunch.fontsize = self.tikz_fontsize
 
     def _setup_rectangle(self, **kwargs):

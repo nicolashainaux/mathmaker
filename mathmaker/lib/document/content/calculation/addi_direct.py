@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
-import random
 
 from mathmakerlib import required
 from mathmakerlib.calculus import Number
@@ -30,6 +29,7 @@ from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import post_process
+from mathmaker.lib.tools import lined_up
 
 
 class sub_object(component.structure):
@@ -67,28 +67,18 @@ class sub_object(component.structure):
                           fix_math_style2_fontsize=True)
         elif self.context == 'angles':
             deg = r'\textdegree'
-            orientation = int(options.get('orientation', 'random'))
-            if orientation == 'random':
-                orientation = 10 * random.randint(0, 35)
             from mathmakerlib.geometry import AngleDecoration
             self.result = Number(self.result, unit=deg)
             required.package['xcolor'] = True
             required.options['xcolor'].add('dvipsnames')
-            decorations = {}
-            for i in range(self.nb_nb):
-                decorations.update({'{}:{}'.format(i, i + 1):
-                                    AngleDecoration(label=Number(
-                                                    getattr(self, 'nb{}'
-                                                            .format(i + 1)),
-                                                    unit=deg))})
-            decorations.update({'0:{}'.format(self.nb_nb):
-                                AngleDecoration(label=None,
-                                                thickness='ultra thick',
-                                                color='BrickRed')})
-            super().setup('angles_bunch', measures=self.nb_list,
-                          decorations=decorations, orientation=orientation)
-            if not self.slideshow:
-                self.angles_bunch.baseline = '20pt'
+            extra_deco = {'0:{}'.format(self.nb_nb):
+                          AngleDecoration(label=None,
+                                          thickness='ultra thick',
+                                          color='BrickRed')}
+            super().setup('angles_bunch', extra_deco=extra_deco,
+                          labels=lined_up(self.nb_list), distcode='1_1_1')
+            # if not self.slideshow:
+            #     self.angles_bunch.baseline = '20pt'
 
     def q(self, **options):
         if self.context == 'mini_problem':

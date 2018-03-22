@@ -846,7 +846,7 @@ def db_table(tag):
     elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
                  'digits_places', 'fracdigits_places',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
-                 'int_quintuples', 'int_sextuples']:
+                 'int_quintuples', 'int_sextuples', 'anglessets']:
         return tag
     elif any(tag.startswith(t)
              for t in ['nnpairs', 'nntriples', 'nnquadruples', 'nnquintuples',
@@ -890,7 +890,7 @@ def classify_tag(tag):
                  'decimals', 'decimalfractionssums', 'extdecimals',
                  'simple_fractions', 'dvipsnames_selection', 'polygons',
                  'int_triples', 'int_quadruples', 'int_quintuples',
-                 'int_sextuples']:
+                 'int_sextuples', 'anglessets']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -1847,6 +1847,8 @@ class mc_source(object):
                     qkw=qkw, **kwargs)
         elif tag_classification == 'dvipsnames_selection':
             return shared.dvipsnames_selection_source.next(**kwargs)
+        elif tag_classification == 'anglessets':
+            result = shared.anglessets_source.next(**kwargs)
         elif tag_classification == 'polygons':
             result = shared.polygons_source.next(**kwargs)
             nb_source, kwords = preprocess_polygons_sides_lengths_query(
