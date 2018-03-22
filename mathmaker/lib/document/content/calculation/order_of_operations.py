@@ -1442,7 +1442,7 @@ class sub_object(component.structure):
         self.transduration = 18
 
     def q(self, **options):
-        if self.x_layout_variant == 'tabular':
+        if self.x_layout_variant == 'tabular' or self.slideshow:
             self.substitutable_question_mark = True
             return _('{math_expr} = {q_mark}').format(
                 math_expr=shared.machine.write_math_style2(self.obj.printed),
