@@ -255,7 +255,7 @@ class structure(object):
         self.quotient_str = q.printed
 
     def _setup_angles_bunch(self, extra_deco=None, labels=None,
-                            distcode='random'):
+                            distcode='random', subvariant_nb=None):
         from mathmaker import settings
         if distcode == 'random':
             distcode = shared.distcodes_source.next(nbof_nb=self.nb_nb)[0]
@@ -271,7 +271,8 @@ class structure(object):
             names = copy.deepcopy(ALPHABET)[0:required_nb_of_points_names]
         self.angles_bunch = AnglesSetGenerator()\
             .generate(codename=distcode, variant=anglesset_data[2],
-                      labels=labels, name=names, extra_deco=extra_deco)
+                      labels=labels, name=names, extra_deco=extra_deco,
+                      subvariant_nb=subvariant_nb)
         self.angles_bunch.fontsize = self.tikz_fontsize
 
     def _setup_rectangle(self, **kwargs):

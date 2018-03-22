@@ -51,12 +51,14 @@ class AnglesSetGenerator(Generator):
         """
         extra_deco = kwargs.pop('extra_deco', None)
         thickness = kwargs.get('thickness', None)
+        subvariant_nb = kwargs.get('subvariant_nb', None)
         self.check_args(distcode=codename, variant=variant, labels=labels,
                         name=name)
         return getattr(self,
                        '_' + codename)(variant=variant, labels=labels,
                                        name=name, extra_deco=extra_deco,
-                                       thickness=thickness)
+                                       thickness=thickness,
+                                       subvariant_nb=subvariant_nb)
 
     def _anglesset(self, shapes_source, subvariants, labels, name=None,
                    extra_deco=None, subvariant_nb=None, thickness=None):
@@ -64,6 +66,7 @@ class AnglesSetGenerator(Generator):
         names = name
         if subvariant_nb is None:
             subvariant_nb = next(shapes_source)[0]
+        subvariant_nb = int(subvariant_nb)
         build_data = subvariants[subvariant_nb]
         # right_angle_radius = build_data.pop('right_angle_radius', None)
         Ω = build_data.pop('center', Point(0, 0, name=names[0]))
