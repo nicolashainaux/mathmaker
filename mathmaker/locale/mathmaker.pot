@@ -431,11 +431,11 @@ msgid ""
 "{length_unit}? |hint:area_unit|"
 msgstr ""
 
-#: lib/document/content/geometry/perimeter_rectangle.py:44
+#: lib/document/content/geometry/perimeter_rectangle.py:47
 msgid "Perimeter of this rectangle? |hint:length_unit|"
 msgstr ""
 
-#: lib/document/content/geometry/perimeter_rectangle.py:50
+#: lib/document/content/geometry/perimeter_rectangle.py:56
 #, python-brace-format
 msgid ""
 "Perimeter of a rectangle whose width is {nb1} {length_unit} and length is "
@@ -2376,10 +2376,15 @@ msgstr ""
 msgid "Area of this rectangle?"
 msgstr ""
 
+#: lib/document/content/geometry/perimeter_rectangle.py:50
 #: lib/document/content/geometry/area_rectangle.py:47
 msgid "(Length unit: {})"
 msgstr ""
 
 #: lib/document/frames/exercise.py:776
 msgid "Answer: "
+msgstr ""
+
+#: lib/document/content/geometry/perimeter_rectangle.py:45
+msgid "Perimeter of this rectangle?"
 msgstr ""
