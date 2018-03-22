@@ -64,8 +64,9 @@ class ShapeGenerator(Generator):
         thickness = kwargs.get('thickness', None)
         length_unit = kwargs.get('length_unit', None)
         wlines_nb = kwargs.get('wlines_nb', 0)
-        Generator.check_args(codename=codename, variant=variant, labels=labels,
-                             name=name)
+        self.check_args(codename_prefix=codename.split('_')[0] + '_',
+                        distcode='_'.join(codename.split('_')[1:]),
+                        variant=variant, labels=labels, name=name)
         return getattr(self,
                        '_' + codename)(variant=variant, labels=labels,
                                        name=name,
