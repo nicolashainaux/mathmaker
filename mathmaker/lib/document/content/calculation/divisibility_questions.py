@@ -71,7 +71,9 @@ class sub_object(component.structure):
             elif variant == 'reversed':
                 self.n1 = self.dividend
                 self.n2 = self.divisor
-        self.wording = _(next(shared.divisibility_statements_source)[0])
+        statement = _(next(shared.divisibility_statements_source)[0])
+        self.wording = r'{} \newline {}'.format(statement,
+                                                _('(True or false?)'))
         setup_wording_format_of(self)
         self.transduration = 18
 

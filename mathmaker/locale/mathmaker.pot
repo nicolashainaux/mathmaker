@@ -39,23 +39,23 @@ msgstr ""
 msgid "To strike out numbers "
 msgstr ""
 
-#: lib/machine/LaTeX.py:229
+#: lib/machine/LaTeX.py:203
 msgid "To use multicol environment"
 msgstr ""
 
-#: lib/machine/LaTeX.py:230
+#: lib/machine/LaTeX.py:228
 msgid "To use extra commands to handle tabulars"
 msgstr ""
 
-#: lib/machine/LaTeX.py:231
+#: lib/machine/LaTeX.py:222
 msgid "For pretty underlining"
 msgstr ""
 
-#: lib/machine/LaTeX.py:249
+#: lib/machine/LaTeX.py:278
 msgid "Exercises counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:254
+#: lib/machine/LaTeX.py:283
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -264,11 +264,11 @@ msgstr ""
 msgid "Factorise, if possible:"
 msgstr ""
 
-#: lib/old_style_sheet/exercise/X_Structure.py:262
+#: lib/old_style_sheet/exercise/X_Structure.py:264
 msgid "Question:"
 msgstr ""
 
-#: lib/old_style_sheet/exercise/X_Structure.py:265
+#: lib/old_style_sheet/exercise/X_Structure.py:267
 #: lib/document/frames/exercise.py:776
 msgid "Answer:"
 msgstr ""
@@ -413,7 +413,7 @@ msgstr ""
 msgid "Mental calculation: mini-problems"
 msgstr ""
 
-#: lib/machine/LaTeX.py:232
+#: lib/machine/LaTeX.py:216
 msgid "To use some symbols like currency units"
 msgstr ""
 
@@ -701,8 +701,8 @@ msgid ""
 "intercept theorem: {newline} {ratios} thus: {ratios_substituted} "
 msgstr ""
 
-#: lib/document/content/geometry/intercept_theorem_converse_butterfly.py:52
-#: lib/document/content/geometry/intercept_theorem_converse_triangle.py:54
+#: lib/document/content/geometry/intercept_theorem_converse_butterfly.py:54
+#: lib/document/content/geometry/intercept_theorem_converse_triangle.py:56
 #, python-brace-format
 msgid ""
 "The drawn figure is out of shape. {newline} The lengths are given in "
@@ -717,7 +717,7 @@ msgstr ""
 msgid "Converse of intercept theorem"
 msgstr ""
 
-#: lib/document/content/geometry/intercept_theorem_converse_butterfly.py:92
+#: lib/document/content/geometry/intercept_theorem_converse_butterfly.py:96
 #, python-brace-format
 msgid ""
 "{vertex1_name}, {main_vertex_name} and {point0_name} on one hand, "
@@ -725,15 +725,15 @@ msgid ""
 "aligned in the same order. "
 msgstr ""
 
-#: lib/document/content/geometry/intercept_theorem_converse_triangle.py:100
-#: lib/document/content/geometry/intercept_theorem_converse_butterfly.py:99
+#: lib/document/content/geometry/intercept_theorem_converse_butterfly.py:103
+#: lib/document/content/geometry/intercept_theorem_converse_triangle.py:104
 #, python-brace-format
 msgid ""
 "\\begin{multicols}{2} On one hand: {ratio1} and on the other hand: {ratio2} "
 "\\end{multicols} ans as: {crossproduct} then: {equal_ratios} {newline} "
 msgstr ""
 
-#: lib/document/content/geometry/intercept_theorem_converse_triangle.py:93
+#: lib/document/content/geometry/intercept_theorem_converse_triangle.py:97
 #, python-brace-format
 msgid ""
 "{main_vertex_name}, {point0_name} and {vertex1_name} on one hand, "
@@ -741,15 +741,15 @@ msgid ""
 "aligned in the same order. {newline} "
 msgstr ""
 
-#: lib/document/content/geometry/intercept_theorem_converse_triangle.py:107
-#: lib/document/content/geometry/intercept_theorem_converse_butterfly.py:106
+#: lib/document/content/geometry/intercept_theorem_converse_butterfly.py:112
+#: lib/document/content/geometry/intercept_theorem_converse_triangle.py:113
 #, python-brace-format
 msgid ""
 "Hence by the converse of the intercept theorem, {line1} is parallel to "
 "{line2}."
 msgstr ""
 
-#: lib/document/content/geometry/intercept_theorem_converse_triangle.py:87
+#: lib/document/content/geometry/intercept_theorem_converse_triangle.py:91
 #, python-brace-format
 msgid ""
 "\\begin{tabular}{ll}We have: & {point0_name} {belongs_to} "
@@ -757,7 +757,7 @@ msgid ""
 "\\end{tabular}"
 msgstr ""
 
-#: lib/document/content/geometry/intercept_theorem_converse_butterfly.py:85
+#: lib/document/content/geometry/intercept_theorem_converse_butterfly.py:89
 #, python-brace-format
 msgid ""
 "\\begin{tabular}{ll}We have: & {main_vertex_name} {belongs_to} "
@@ -1662,22 +1662,26 @@ msgstr ""
 msgid "Mental calculation: multiplication by 11"
 msgstr ""
 
-#: lib/document/content/component.py:526
+#: lib/document/content/component_à_jeter.py:528
+#: lib/document/content/component.py:442
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr ""
 
-#: lib/document/content/component.py:531
+#: lib/document/content/component.py:447
+#: lib/document/content/component_à_jeter.py:533
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:535
+#: lib/document/content/component.py:451
+#: lib/document/content/component_à_jeter.py:537
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:539
+#: lib/document/content/component.py:455
+#: lib/document/content/component_à_jeter.py:541
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr ""
@@ -1702,14 +1706,14 @@ msgstr ""
 msgid "Answers!"
 msgstr ""
 
-#: lib/document/content/calculation/addi_direct.py:110
-#: lib/document/content/calculation/numeric_factorization.py:74
-#: lib/document/content/calculation/divi_direct.py:54
-#: lib/document/content/calculation/order_of_operations.py:1447
 #: lib/document/content/calculation/subtr_direct.py:78
 #: lib/document/content/calculation/numeric_expansion.py:54
-#: lib/document/content/calculation/multi_clever.py:108
+#: lib/document/content/calculation/numeric_factorization.py:74
+#: lib/document/content/calculation/order_of_operations.py:1447
 #: lib/document/content/calculation/multi_direct.py:60
+#: lib/document/content/calculation/multi_clever.py:108
+#: lib/document/content/calculation/addi_direct.py:111
+#: lib/document/content/calculation/divi_direct.py:54
 #, python-brace-format
 msgid "{math_expr} = {q_mark}"
 msgstr ""
@@ -1725,10 +1729,6 @@ msgid ""
 "{q_mark} × {q_mark} = {n}\n"
 "\n"
 "(in the multiplication tables, from 2 to 9)"
-msgstr ""
-
-#: lib/machine/LaTeX.py:227
-msgid "To get a better control on floats positioning (e.g. tabulars) "
 msgstr ""
 
 #: lib/document/frames/exercise.py:399
@@ -1772,12 +1772,14 @@ msgid "{} (or {} etc.)"
 msgstr ""
 
 #: lib/document/content/calculation/decimal_numerals.py:61
-#: lib/document/content/component.py:46
+#: lib/document/content/component_à_jeter.py:47
+#: lib/document/content/component.py:47
 msgid "What is {} as a decimal?"
 msgstr ""
 
-#: lib/document/content/component.py:48
 #: lib/document/content/calculation/decimal_numerals.py:66
+#: lib/document/content/component.py:49
+#: lib/document/content/component_à_jeter.py:49
 msgid "What is {} as a decimal fraction?"
 msgstr ""
 
@@ -1870,7 +1872,8 @@ msgstr ""
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr ""
 
-#: lib/document/content/component.py:69
+#: lib/document/content/component_à_jeter.py:70
+#: lib/document/content/component.py:70
 msgid "undefined"
 msgstr ""
 
@@ -2260,28 +2263,28 @@ msgstr ""
 msgid "To draw TikZ pictures"
 msgstr ""
 
-#: lib/machine/LaTeX.py:233
+#: lib/machine/LaTeX.py:234
 msgid "To include .eps pictures"
 msgstr ""
 
-#: lib/machine/LaTeX.py:234
+#: lib/machine/LaTeX.py:277
 msgid "General layout of the page"
 msgstr ""
 
-#: lib/machine/LaTeX.py:250
+#: lib/machine/LaTeX.py:279
 msgid ""
 "Definition of the \"exercise\" command, which will insert the word "
 "\"Exercise\" in bold, with its number and automatically increments the "
 "counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:263
+#: lib/machine/LaTeX.py:292
 msgid ""
 "Redefinition of \"\\parallel\" command to draw the parallel symbol slanted "
 "as usual in french notations"
 msgstr ""
 
-#: lib/document/content/calculation/addi_direct.py:104
+#: lib/document/content/calculation/addi_direct.py:105
 #, python-brace-format
 msgid "${math_expr}$ = {q_mark}"
 msgstr ""
@@ -2348,4 +2351,24 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:49
 msgid "Mental calculation: multiples and divisors"
+msgstr ""
+
+#: lib/machine/LaTeX.py:209
+msgid "To get a better control on floats positioning (e.g. tabulars)"
+msgstr ""
+
+#: lib/machine/LaTeX.py:240
+msgid "To make .eps pictures includable by pdflatex"
+msgstr ""
+
+#: lib/machine/LaTeX.py:247
+msgid "Absolute positioning of text on the page"
+msgstr ""
+
+#: lib/machine/LaTeX.py:257
+msgid "To define the layout of the page"
+msgstr ""
+
+#: lib/document/content/calculation/divisibility_questions.py:76
+msgid "(True or false?)"
 msgstr ""
