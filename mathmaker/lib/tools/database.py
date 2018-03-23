@@ -227,6 +227,9 @@ class IntspansProduct(object):
         applied_conditions = []
         excluded = kwargs.get('not_in', None)
         if excluded is not None:
+            if len(span) == 1:
+                value = str([_ for _ in span][0])
+                excluded = [v for v in excluded if v != value]
             possibilities = [p for p in possibilities if p not in excluded]
             applied_conditions.append('not_in={}'.format(excluded))
         included = kwargs.get('nb{}_in'.format(i + 1), None)
