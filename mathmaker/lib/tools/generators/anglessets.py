@@ -61,7 +61,8 @@ class AnglesSetGenerator(Generator):
                                        subvariant_nb=subvariant_nb)
 
     def _anglesset(self, shapes_source, subvariants, labels, name=None,
-                   extra_deco=None, subvariant_nb=None, thickness=None):
+                   extra_deco=None, subvariant_nb=None, thickness=None,
+                   rdeco='', rradius=Number('0.5', unit='cm')):
         angles = []
         names = name
         if subvariant_nb is None:
@@ -72,7 +73,8 @@ class AnglesSetGenerator(Generator):
         Ω = build_data.pop('center', Point(0, 0, name=names[0]))
         # Let an error be raised if no endpoints are defined
         endpoints = build_data.pop('endpoints')
-        labels = [Number(lbl, unit=r'\textdegree') for lbl in labels]
+        labels = [Number(lbl, unit=r'\textdegree') if lbl is not None else None
+                  for lbl in labels]
         eccentricities = build_data.pop('eccentricities',
                                         ['automatic'
                                          for _ in range(len(endpoints) - 1)])
@@ -87,6 +89,7 @@ class AnglesSetGenerator(Generator):
                 decorations[d].color = extra_deco[d].color
                 decorations[d].thickness = extra_deco[d].thickness
                 decorations[d].label = extra_deco[d].label
+                decorations[d].radius = extra_deco[d].radius
             else:
                 decorations.update({d: extra_deco[d]})
         for p in endpoints:
@@ -94,13 +97,15 @@ class AnglesSetGenerator(Generator):
         for kn, key in enumerate(decorations):
             i, j = key.split(':')
             i, j = int(i), int(j)
+            mark_right = True if key in rdeco else False
             armspoints = [(names[i + 1], ), (names[j + 1], )]
-            angles.append(Angle(endpoints[i], Ω, endpoints[j],
-                                decoration=decorations[key],
-                                label_vertex=True, draw_vertex=True,
-                                label_armspoints=True, draw_armspoints=True,
-                                armspoints=armspoints,
-                                naming_mode='from_armspoints'))
+            θ = Angle(endpoints[i], Ω, endpoints[j],
+                      decoration=decorations[key],
+                      label_vertex=True, draw_vertex=True,
+                      label_armspoints=True, draw_armspoints=True,
+                      armspoints=armspoints, mark_right=mark_right,
+                      naming_mode='from_armspoints')
+            angles.append(θ)
         anglesset = AnglesSet(*angles)
         anglesset.baseline = build_data.pop('baseline', None)
         anglesset.boundingbox = build_data.pop('boundingbox', None)
@@ -143,4 +148,45 @@ class AnglesSetGenerator(Generator):
             shapes_source, subvariants,
             labels=lbls, name=name, extra_deco=extra_deco, thickness=thickness,
             subvariant_nb=subvariant_nb
+        )
+
+    def _1_1_1r(self, variant=None, labels=None, name=None, extra_deco=None,
+                subvariant_nb=None, thickness=None):
+        if variant not in [0, 1, 2]:
+            raise ValueError('variant must be in [0, 1, 2] (found \'{}\')'
+                             .format(variant))
+        if extra_deco is None:
+            extra_deco = {}
+        if variant == 0:
+            # Tells which angles shouldn't have any label (e.g. right angles)
+            remove_label = [True, False, False]
+            # Tells which angles will be marked as right
+            rdeco = ['0:1']
+            subvariants = {1: {'endpoints': [Point('2.5', 0),
+                                             Point(0, '2.5'),
+                                             Point('-1.5', 2),
+                                             Point('-2.4', '0.7')],
+                               'eccentricities': [Number('1.6'),
+                                                  Number('1.8'),
+                                                  Number('1.4')],
+                               'baseline': '22pt'}
+                           }
+        shapes_source = shared.anglessets_1_1_1r_source
+        unsorted_lbls = [labels[i][1] for i in range(len(labels))]
+        unsorted_lbls.remove(90)
+        lbls = []
+        for i in range(len(remove_label)):
+            if remove_label[i]:
+                lbls.append(None)
+            else:
+                lbls.append(unsorted_lbls.pop())
+        for deco_id in rdeco:
+            if deco_id not in extra_deco:
+                extra_deco[deco_id] = \
+                    AngleDecoration(radius=Number('0.4', unit='cm'),
+                                    label=None)
+        return self._anglesset(
+            shapes_source, subvariants,
+            labels=lbls, name=name, extra_deco=extra_deco, thickness=thickness,
+            subvariant_nb=subvariant_nb, rdeco=rdeco
         )
