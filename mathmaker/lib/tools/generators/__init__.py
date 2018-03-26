@@ -29,8 +29,6 @@ class Generator(object, metaclass=ABCMeta):
 
     def check_args(self, codename_prefix='', distcode='', variant=None,
                    labels=None, name=None):
-        import sys
-        sys.stderr.write('Entered check_args()\n')
         if type(codename_prefix) is not str:
             raise TypeError('codename must be a str, found {} instead.'
                             .format(type(codename_prefix)))
