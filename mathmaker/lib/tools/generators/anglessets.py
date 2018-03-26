@@ -62,7 +62,15 @@ class AnglesSetGenerator(Generator):
 
     def _anglesset(self, shapes_source, subvariants, labels, name=None,
                    extra_deco=None, subvariant_nb=None, thickness=None,
-                   rdeco='', rradius=Number('0.5', unit='cm')):
+                   rdeco='', remove_labels=None):
+        if remove_labels is None:
+            remove_labels = [False for _ in range(len(labels))]
+        lbls = []
+        for i in range(len(remove_labels)):
+            if remove_labels[i]:
+                lbls.append(None)
+            else:
+                lbls.append(labels.pop())
         angles = []
         names = name
         if subvariant_nb is None:
@@ -74,7 +82,7 @@ class AnglesSetGenerator(Generator):
         # Let an error be raised if no endpoints are defined
         endpoints = build_data.pop('endpoints')
         labels = [Number(lbl, unit=r'\textdegree') if lbl is not None else None
-                  for lbl in labels]
+                  for lbl in lbls]
         eccentricities = build_data.pop('eccentricities',
                                         ['automatic'
                                          for _ in range(len(endpoints) - 1)])
@@ -159,7 +167,7 @@ class AnglesSetGenerator(Generator):
             extra_deco = {}
         if variant == 0:
             # Tells which angles shouldn't have any label (e.g. right angles)
-            remove_label = [True, False, False]
+            remove_labels = [True, False, False]
             # Tells which angles will be marked as right
             rdeco = ['0:1']
             subvariants = {1: {'endpoints': [Point('2.5', 0),
@@ -173,7 +181,7 @@ class AnglesSetGenerator(Generator):
                            }
         elif variant == 1:
             # Tells which angles shouldn't have any label (e.g. right angles)
-            remove_label = [False, True, False]
+            remove_labels = [False, True, False]
             # Tells which angles will be marked as right
             rdeco = ['1:2']
             subvariants = {1: {'endpoints': [Point('2.5', 0),
@@ -187,7 +195,7 @@ class AnglesSetGenerator(Generator):
                            }
         elif variant == 2:
             # Tells which angles shouldn't have any label (e.g. right angles)
-            remove_label = [False, False, True]
+            remove_labels = [False, False, True]
             # Tells which angles will be marked as right
             rdeco = ['2:3']
             subvariants = {1: {'endpoints': [Point('2.45', '0.5'),
@@ -202,19 +210,14 @@ class AnglesSetGenerator(Generator):
         shapes_source = shared.anglessets_1_1_1r_source
         unsorted_lbls = [labels[i][1] for i in range(len(labels))]
         unsorted_lbls.remove(90)
-        lbls = []
-        for i in range(len(remove_label)):
-            if remove_label[i]:
-                lbls.append(None)
-            else:
-                lbls.append(unsorted_lbls.pop())
         for deco_id in rdeco:
             if deco_id not in extra_deco:
                 extra_deco[deco_id] = \
                     AngleDecoration(radius=Number('0.4', unit='cm'),
                                     label=None)
         return self._anglesset(
-            shapes_source, subvariants,
-            labels=lbls, name=name, extra_deco=extra_deco, thickness=thickness,
-            subvariant_nb=subvariant_nb, rdeco=rdeco
+            shapes_source, subvariants, labels=unsorted_lbls,
+            name=name, extra_deco=extra_deco, thickness=thickness,
+            subvariant_nb=subvariant_nb, rdeco=rdeco,
+            remove_labels=remove_labels
         )
