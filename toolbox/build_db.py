@@ -1095,6 +1095,17 @@ def __main__():
         "VALUES(?, ?)",
         db_rows)
 
+    creation_query = '''CREATE TABLE _2_1_subvariants
+                        (id INTEGER PRIMARY KEY, subvariant_nb,
+                         drawDate INTEGER)'''
+    anglessets_db_creation_queries.append(creation_query)
+    anglessets_db.execute(creation_query)
+    db_rows = [(1, 0), (2, 0), (3, 0)]
+    anglessets_db.executemany(
+        "INSERT INTO _2_1_subvariants(subvariant_nb, drawDate) "
+        "VALUES(?, ?)",
+        db_rows)
+
     shapes_db_creation_queries = []
     sys.stderr.write('Shapes db: insert polygons...\n')
     creation_query = '''CREATE TABLE polygons
