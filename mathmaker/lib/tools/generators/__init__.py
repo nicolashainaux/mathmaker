@@ -48,7 +48,7 @@ class Generator(object, metaclass=ABCMeta):
                     for t in labels]):
             raise TypeError('All elements of the labels list must be tuples '
                             'of two elements, first being an int.')
-        distcode_nb = [int(_) for _ in distcode.split('_')]
+        distcode_nb = [int(_) for _ in distcode.strip('r').split('_')]
         labels_nb = [t[0] for t in labels]
         if sorted(distcode_nb) != sorted(labels_nb):
             raise ValueError('The given labels list does not match the '
