@@ -210,8 +210,8 @@ class AnglesSetGenerator(Generator):
                                              Point(0, '2.5'),
                                              Point('-2.5', 0)],
                                'eccentricities': [Number('1.6'),
-                                                  Number('1.8'),
-                                                  Number('1.4')],
+                                                  Number('1.6'),
+                                                  Number('1.5')],
                                'baseline': '26pt'}
                            }
         shapes_source = shared.anglessets_1_1_1r_source
