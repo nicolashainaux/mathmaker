@@ -62,7 +62,14 @@ class AnglesSetGenerator(Generator):
 
     def _anglesset(self, shapes_source, subvariants, labels, name=None,
                    extra_deco=None, subvariant_nb=None, thickness=None,
-                   rdeco='', remove_labels=None):
+                   rdeco=None, remove_labels=None):
+        if rdeco is None:
+            rdeco = ['']
+        for deco_id in rdeco:
+            if deco_id not in extra_deco:
+                extra_deco[deco_id] = \
+                    AngleDecoration(radius=Number('0.4', unit='cm'),
+                                    label=None)
         if remove_labels is None:
             remove_labels = [False for _ in range(len(labels))]
         lbls = []
@@ -210,11 +217,6 @@ class AnglesSetGenerator(Generator):
         shapes_source = shared.anglessets_1_1_1r_source
         unsorted_lbls = [labels[i][1] for i in range(len(labels))]
         unsorted_lbls.remove(90)
-        for deco_id in rdeco:
-            if deco_id not in extra_deco:
-                extra_deco[deco_id] = \
-                    AngleDecoration(radius=Number('0.4', unit='cm'),
-                                    label=None)
         return self._anglesset(
             shapes_source, subvariants, labels=unsorted_lbls,
             name=name, extra_deco=extra_deco, thickness=thickness,
