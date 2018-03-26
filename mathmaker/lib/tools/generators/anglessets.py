@@ -185,6 +185,20 @@ class AnglesSetGenerator(Generator):
                                                   Number('1.4')],
                                'baseline': '18pt'}
                            }
+        elif variant == 2:
+            # Tells which angles shouldn't have any label (e.g. right angles)
+            remove_label = [False, False, True]
+            # Tells which angles will be marked as right
+            rdeco = ['2:3']
+            subvariants = {1: {'endpoints': [Point('2.45', '0.5'),
+                                             Point('1.5', 2),
+                                             Point(0, '2.5'),
+                                             Point('-2.5', 0)],
+                               'eccentricities': [Number('1.6'),
+                                                  Number('1.8'),
+                                                  Number('1.4')],
+                               'baseline': '26pt'}
+                           }
         shapes_source = shared.anglessets_1_1_1r_source
         unsorted_lbls = [labels[i][1] for i in range(len(labels))]
         unsorted_lbls.remove(90)
