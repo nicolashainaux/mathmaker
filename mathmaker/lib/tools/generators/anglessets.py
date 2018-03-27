@@ -62,9 +62,9 @@ class AnglesSetGenerator(Generator):
 
     def _anglesset(self, shapes_source, subvariants, labels, name=None,
                    extra_deco=None, subvariant_nb=None, thickness=None,
-                   rdeco=None, remove_labels=None):
+                   rdeco=None, remove_labels=None, labels_dist=None):
         if rdeco is None:
-            rdeco = ['']
+            rdeco = []
         for deco_id in rdeco:
             if deco_id not in extra_deco:
                 extra_deco[deco_id] = \
@@ -72,6 +72,17 @@ class AnglesSetGenerator(Generator):
                                     label=None)
         if remove_labels is None:
             remove_labels = [False for _ in range(len(labels))]
+        hatchmarks = {}
+        if labels_dist is not None:
+            # Then, labels_dist is a values list that tells the order of the
+            # angles' measures (used if some are duplicates)
+            # e.g. [0, 1, 0] means first label value, second, first again
+            # Also, in that case, labels is given "raw", as list of tuples:
+            # [(nb of occurences, value), ...]
+            labels = [labels[k][1] for k in labels_dist]
+            for k in labels_dist:
+                if labels_dist.count(k) != 1 and k not in hatchmarks:
+                    hatchmarks[k] = next(shared.angle_decorations_source)[0:2]
         lbls = []
         for i in range(len(remove_labels)):
             if remove_labels[i]:
@@ -94,11 +105,25 @@ class AnglesSetGenerator(Generator):
                                         ['automatic'
                                          for _ in range(len(endpoints) - 1)])
         # Setup default decorations of all i, i+1 angles
-        decorations = {'{}:{}'.format(i, i + 1):
-                       AngleDecoration(label=labels[i],
-                                       radius=OFFSET + i * LAYER_THICKNESS,
-                                       eccentricity=eccentricities[i])
-                       for i in range(len(endpoints) - 1)}
+        decorations = {}
+        collected_radii = {}
+        layer_nb = 0
+        for i in range(len(endpoints) - 1):
+            r = OFFSET + layer_nb * LAYER_THICKNESS
+            if labels_dist is not None:
+                if labels_dist[i] in collected_radii:
+                    r = collected_radii[labels_dist[i]]
+                else:
+                    collected_radii[labels_dist[i]] = r
+                    layer_nb += 1
+            else:
+                layer_nb += 1
+            ad = AngleDecoration(label=labels[i], radius=r,
+                                 eccentricity=eccentricities[i])
+            if labels_dist[i] in hatchmarks:
+                ad.variety = hatchmarks[labels_dist[i]][0]
+                ad.hatchmark = hatchmarks[labels_dist[i]][1]
+            decorations.update({'{}:{}'.format(i, i + 1): ad})
         for d in extra_deco:
             if d in decorations:
                 decorations[d].color = extra_deco[d].color
@@ -222,4 +247,32 @@ class AnglesSetGenerator(Generator):
             name=name, extra_deco=extra_deco, thickness=thickness,
             subvariant_nb=subvariant_nb, rdeco=rdeco,
             remove_labels=remove_labels
+        )
+
+    def _2_1(self, variant=None, labels=None, name=None, extra_deco=None,
+             subvariant_nb=None, thickness=None):
+        if variant not in [0, 1, 2]:
+            raise ValueError('variant must be in [0, 1, 2] (found \'{}\')'
+                             .format(variant))
+        if extra_deco is None:
+            extra_deco = {}
+        if variant == 0:
+            # Tells which angles shouldn't have any label (e.g. right angles)
+            remove_labels = [False, True, False]
+            lbls_dist = [0, 0, 1]
+            subvariants = {1: {'endpoints': [Point('2.5', 0),
+                                             Point('1.93', '1.59'),
+                                             Point('0.5', '2.45'),
+                                             Point('-2.3', 1)],
+                               'eccentricities': [Number('1.7'),
+                                                  Number('1.8'),
+                                                  Number('1.6')],
+                               'baseline': '26pt'}
+                           }
+        shapes_source = shared.anglessets_2_1_source
+        return self._anglesset(
+            shapes_source, subvariants, labels=labels,
+            name=name, extra_deco=extra_deco, thickness=thickness,
+            subvariant_nb=subvariant_nb,
+            remove_labels=remove_labels, labels_dist=lbls_dist
         )
