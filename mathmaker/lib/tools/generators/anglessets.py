@@ -122,7 +122,7 @@ class AnglesSetGenerator(Generator):
                 layer_nb += 1
             ad = AngleDecoration(label=labels[i], radius=r,
                                  eccentricity=eccentricities[i])
-            if labels_dist[i] in hatchmarks:
+            if labels_dist is not None and labels_dist[i] in hatchmarks:
                 ad.variety = hatchmarks[labels_dist[i]][0]
                 ad.hatchmark = hatchmarks[labels_dist[i]][1]
             decorations.update({'{}:{}'.format(i, i + 1): ad})
