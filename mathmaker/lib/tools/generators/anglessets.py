@@ -267,7 +267,7 @@ class AnglesSetGenerator(Generator):
                                'eccentricities': [Number('1.7'),
                                                   Number('1.8'),
                                                   Number('1.6')],
-                               'baseline': '26pt'}
+                               'baseline': '24pt'}
                            }
         elif variant == 1:
             # Tells which angles shouldn't have any label (e.g. right angles)
