@@ -269,6 +269,19 @@ class AnglesSetGenerator(Generator):
                                                   Number('1.6')],
                                'baseline': '26pt'}
                            }
+        elif variant == 1:
+            # Tells which angles shouldn't have any label (e.g. right angles)
+            remove_labels = [False, False, True]
+            lbls_dist = [0, 1, 0]
+            subvariants = {1: {'endpoints': [Point('2.5', 0),
+                                             Point(2, '1.5'),
+                                             Point(-1, '2.3'),
+                                             Point('-2.2', '1.2')],
+                               'eccentricities': [Number('1.7'),
+                                                  Number('1.8'),
+                                                  Number('1.6')],
+                               'baseline': '23pt'}
+                           }
         shapes_source = shared.anglessets_2_1_source
         return self._anglesset(
             shapes_source, subvariants, labels=labels,
