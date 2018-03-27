@@ -54,6 +54,7 @@ class AnglesSetGenerator(Generator):
         subvariant_nb = kwargs.get('subvariant_nb', None)
         self.check_args(distcode=codename, variant=variant, labels=labels,
                         name=name)
+        labels = sorted(labels, key=lambda x: x[0])[::-1]
         return getattr(self,
                        '_' + codename)(variant=variant, labels=labels,
                                        name=name, extra_deco=extra_deco,
@@ -79,7 +80,7 @@ class AnglesSetGenerator(Generator):
             # e.g. [0, 1, 0] means first label value, second, first again
             # Also, in that case, labels is given "raw", as list of tuples:
             # [(nb of occurences, value), ...]
-            labels = [labels[k][1] for k in labels_dist]
+            labels = [labels[k][1] for k in labels_dist][::-1]
             for k in labels_dist:
                 if labels_dist.count(k) != 1 and k not in hatchmarks:
                     hatchmarks[k] = next(shared.angle_decorations_source)[0:2]
@@ -87,6 +88,7 @@ class AnglesSetGenerator(Generator):
         for i in range(len(remove_labels)):
             if remove_labels[i]:
                 lbls.append(None)
+                labels.pop()
             else:
                 lbls.append(labels.pop())
         angles = []
