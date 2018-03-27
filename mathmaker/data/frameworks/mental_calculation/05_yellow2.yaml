@@ -149,3 +149,8 @@ W02d: !!omap
                  percent direct -> 25%of..., context=simple_unit (1)
                  divi euclidean -> intpairs_3to9 (1)
                  multi direct -> decimal_and_10_100_1000 (1)
+
+W03a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: numeric expansion -> mergedinttriples_3to9 (5)
