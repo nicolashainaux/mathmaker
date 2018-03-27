@@ -1061,10 +1061,13 @@ def __main__():
                          drawDate INTEGER)'''
     anglessets_db_creation_queries.append(creation_query)
     anglessets_db.execute(creation_query)
-    db_rows = [(3, '1_1_1', 0, 0, 'none', 0, 0, 0, 0, 0, 0),
-               (3, '1_1_1r', 0, 1, 'none', 0, 0, 0, 0, 0, 0),
-               (3, '1_1_1r', 1, 1, 'none', 0, 0, 0, 0, 0, 0),
-               (3, '1_1_1r', 2, 1, 'none', 0, 0, 0, 0, 0, 0)]
+    db_rows = [(3, '1_1_1', 0, 0, 'all_different', 0, 0, 0, 0, 0, 0),
+               (3, '1_1_1r', 0, 1, 'all_different', 0, 0, 0, 0, 0, 0),
+               (3, '1_1_1r', 1, 1, 'all_different', 0, 0, 0, 0, 0, 0),
+               (3, '1_1_1r', 2, 1, 'all_different', 0, 0, 0, 0, 0, 0),
+               (3, '2_1', 0, 0, 'none', 1, 0, 0, 0, 0, 0),
+               (3, '2_1', 1, 0, 'none', 1, 0, 0, 0, 0, 0),
+               (3, '2_1', 2, 0, 'none', 1, 0, 0, 0, 0, 0)]
     anglessets_db.executemany(
         "INSERT INTO anglessets("
         "nbof_angles, distcode, variant, nbof_right_angles, equal_angles, "
