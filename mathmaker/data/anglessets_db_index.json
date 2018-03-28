@@ -27,5 +27,10 @@
         "id",
         "subvariant_nb",
         "drawDate"
+    ],
+    "_2_1r_subvariants": [
+        "id",
+        "subvariant_nb",
+        "drawDate"
     ]
 }
