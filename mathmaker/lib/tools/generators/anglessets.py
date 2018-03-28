@@ -309,3 +309,60 @@ class AnglesSetGenerator(Generator):
             subvariant_nb=subvariant_nb,
             remove_labels=remove_labels, labels_dist=lbls_dist
         )
+
+    def _2_1r(self, variant=None, labels=None, name=None, extra_deco=None,
+              subvariant_nb=None, thickness=None):
+        if variant not in [0, 1, 2]:
+            raise ValueError('variant must be in [0, 1, 2] (found \'{}\')'
+                             .format(variant))
+        if extra_deco is None:
+            extra_deco = {}
+        if variant == 0:
+            # Tells which angles shouldn't have any label (e.g. right angles)
+            remove_labels = [True, True, False]
+            lbls_dist = [1, 0, 0]
+            rdeco = ['0:1']
+            subvariants = {1: {'endpoints': [Point('2.5', 0),
+                                             Point(0, '2.5'),
+                                             Point('-1.5', 2),
+                                             Point('-2.4', '0.7')],
+                               'eccentricities': [Number('1.7'),
+                                                  Number('1.8'),
+                                                  Number('1.5')],
+                               'baseline': '25pt'}
+                           }
+        elif variant == 1:
+            # Tells which angles shouldn't have any label (e.g. right angles)
+            remove_labels = [False, True, True]
+            lbls_dist = [0, 1, 0]
+            rdeco = ['1:2']
+            subvariants = {1: {'endpoints': [Point('2.5', 0),
+                                             Point(2, '1.5'),
+                                             Point('-1.5', 2),
+                                             Point('-2.4', '0.7')],
+                               'eccentricities': [Number('1.7'),
+                                                  Number('1.8'),
+                                                  Number('1.5')],
+                               'baseline': '24pt'}
+                           }
+        elif variant == 2:
+            # Tells which angles shouldn't have any label (e.g. right angles)
+            remove_labels = [False, True, True]
+            lbls_dist = [0, 0, 1]
+            rdeco = ['2:3']
+            subvariants = {1: {'endpoints': [Point('2.5', 0),
+                                             Point('1.94', '1.58'),
+                                             Point('0.5', '2.45'),
+                                             Point('-2.45', '0.5')],
+                               'eccentricities': [Number('1.7'),
+                                                  Number('1.8'),
+                                                  Number('1.5')],
+                               'baseline': '24pt'}
+                           }
+        shapes_source = shared.anglessets_2_1r_source
+        return self._anglesset(
+            shapes_source, subvariants, labels=labels,
+            name=name, extra_deco=extra_deco, thickness=thickness,
+            subvariant_nb=subvariant_nb, rdeco=rdeco,
+            remove_labels=remove_labels, labels_dist=lbls_dist
+        )
