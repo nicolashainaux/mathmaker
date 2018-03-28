@@ -199,9 +199,14 @@ class AnglesSetGenerator(Generator):
                              .format(variant))
         if extra_deco is None:
             extra_deco = {}
+        lbls = [labels[i][1] for i in range(len(labels))]
+        lbls.remove(90)
         if variant == 0:
             # Tells which angles shouldn't have any label (e.g. right angles)
             remove_labels = [True, False, False]
+            # /!\ order of labels: from right to left, counterclockwise
+            # (reversed order of remove_labels)
+            lbls = lbls + [Number(90)]
             # Tells which angles will be marked as right
             rdeco = ['0:1']
             subvariants = {1: {'endpoints': [Point('2.5', 0),
@@ -216,6 +221,7 @@ class AnglesSetGenerator(Generator):
         elif variant == 1:
             # Tells which angles shouldn't have any label (e.g. right angles)
             remove_labels = [False, True, False]
+            lbls = [lbls[0], Number(90), lbls[1]]
             # Tells which angles will be marked as right
             rdeco = ['1:2']
             subvariants = {1: {'endpoints': [Point('2.5', 0),
@@ -230,6 +236,7 @@ class AnglesSetGenerator(Generator):
         elif variant == 2:
             # Tells which angles shouldn't have any label (e.g. right angles)
             remove_labels = [False, False, True]
+            lbls = [Number(90)] + lbls
             # Tells which angles will be marked as right
             rdeco = ['2:3']
             subvariants = {1: {'endpoints': [Point('2.45', '0.5'),
@@ -242,10 +249,8 @@ class AnglesSetGenerator(Generator):
                                'baseline': '26pt'}
                            }
         shapes_source = shared.anglessets_1_1_1r_source
-        unsorted_lbls = [labels[i][1] for i in range(len(labels))]
-        unsorted_lbls.remove(90)
         return self._anglesset(
-            shapes_source, subvariants, labels=unsorted_lbls,
+            shapes_source, subvariants, labels=lbls,
             name=name, extra_deco=extra_deco, thickness=thickness,
             subvariant_nb=subvariant_nb, rdeco=rdeco,
             remove_labels=remove_labels
