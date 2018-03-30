@@ -1070,7 +1070,8 @@ def __main__():
                (3, '2_1', 2, 0, 'none', 1, 0, 0, 0, 0, 0),
                (3, '2_1r', 0, 1, 'none', 1, 0, 0, 0, 0, 0),
                (3, '2_1r', 1, 1, 'none', 1, 0, 0, 0, 0, 0),
-               (3, '2_1r', 2, 1, 'none', 1, 0, 0, 0, 0, 0)]
+               (3, '2_1r', 2, 1, 'none', 1, 0, 0, 0, 0, 0),
+               (3, '3', 0, 0, 'equilateral', 0, 1, 0, 0, 0, 0)]
     anglessets_db.executemany(
         "INSERT INTO anglessets("
         "nbof_angles, distcode, variant, nbof_right_angles, equal_angles, "
@@ -1120,6 +1121,17 @@ def __main__():
     db_rows = [(1, 0)]
     anglessets_db.executemany(
         "INSERT INTO _2_1r_subvariants(subvariant_nb, drawDate) "
+        "VALUES(?, ?)",
+        db_rows)
+
+    creation_query = '''CREATE TABLE _3_subvariants
+                        (id INTEGER PRIMARY KEY, subvariant_nb,
+                         drawDate INTEGER)'''
+    anglessets_db_creation_queries.append(creation_query)
+    anglessets_db.execute(creation_query)
+    db_rows = [(1, 0), (2, 0), (3, 0)]
+    anglessets_db.executemany(
+        "INSERT INTO _3_subvariants(subvariant_nb, drawDate) "
         "VALUES(?, ?)",
         db_rows)
 

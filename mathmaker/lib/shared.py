@@ -83,6 +83,7 @@ def init():
     global anglessets_1_1_1r_source
     global anglessets_2_1_source
     global anglessets_2_1r_source
+    global anglessets_3_source
     global scalene_triangle_shapes_source
     global right_triangle_shapes_source
     global triangle_2_1_shapes_source
@@ -209,6 +210,8 @@ def init():
         '_2_1_subvariants', ['id', 'subvariant_nb'], db=anglessets_db)
     anglessets_2_1r_source = database.source(
         '_2_1r_subvariants', ['id', 'subvariant_nb'], db=anglessets_db)
+    anglessets_3_source = database.source(
+        '_3_subvariants', ['id', 'subvariant_nb'], db=anglessets_db)
     polygons_source = database.source('polygons',
                                       ['id', 'sides_nb', 'type', 'special',
                                        'codename', 'sides_particularity',
