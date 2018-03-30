@@ -13,6 +13,21 @@
         "table6",
         "drawDate"
     ],
+    "_1_1_subvariants": [
+        "id",
+        "subvariant_nb",
+        "drawDate"
+    ],
+    "_1_1r_subvariants": [
+        "id",
+        "subvariant_nb",
+        "drawDate"
+    ],
+    "_2_subvariants": [
+        "id",
+        "subvariant_nb",
+        "drawDate"
+    ],
     "_1_1_1_subvariants": [
         "id",
         "subvariant_nb",

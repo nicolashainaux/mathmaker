@@ -79,6 +79,9 @@ def init():
     global dvipsnames_selection_source
     global polygons_source
     global anglessets_source
+    global anglessets_1_1_source
+    global anglessets_1_1r_source
+    global anglessets_2_source
     global anglessets_1_1_1_source
     global anglessets_1_1_1r_source
     global anglessets_2_1_source
@@ -202,6 +205,12 @@ def init():
                                          'table3', 'table4', 'table5',
                                          'table6'],
                                         db=anglessets_db)
+    anglessets_1_1_source = database.source(
+        '_1_1_subvariants', ['id', 'subvariant_nb'], db=anglessets_db)
+    anglessets_1_1r_source = database.source(
+        '_1_1r_subvariants', ['id', 'subvariant_nb'], db=anglessets_db)
+    anglessets_2_source = database.source(
+        '_2_subvariants', ['id', 'subvariant_nb'], db=anglessets_db)
     anglessets_1_1_1_source = database.source(
         '_1_1_1_subvariants', ['id', 'subvariant_nb'], db=anglessets_db)
     anglessets_1_1_1r_source = database.source(
