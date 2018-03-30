@@ -366,3 +366,44 @@ class AnglesSetGenerator(Generator):
             subvariant_nb=subvariant_nb, rdeco=rdeco,
             remove_labels=remove_labels, labels_dist=lbls_dist
         )
+
+    def _3(self, variant=None, labels=None, name=None, extra_deco=None,
+           subvariant_nb=None, thickness=None):
+        if variant != 0:
+            raise ValueError('variant must be 0 (not \'{}\')'.format(variant))
+        lbls_dist = [0, 0, 0]
+        remove_labels = [False, True, True]
+        if extra_deco is None:
+            extra_deco = {}
+        subvariants = {1: {'endpoints': [Point('2.5', 0),
+                                         Point(2, '1.5'),
+                                         Point('0.7', '2.4'),
+                                         Point('-0.88', '2.34')],
+                           'eccentricities': [Number('1.6'),
+                                              Number('1.8'),
+                                              Number('1.4')],
+                           'baseline': '24pt'},
+                       2: {'endpoints': [Point('2.5', 0),
+                                         Point('1.5', 2),
+                                         Point('-0.7', '2.4'),
+                                         Point('-2.34', '0.88')],
+                           'eccentricities': [Number('1.6'),
+                                              Number('1.8'),
+                                              Number('1.4')],
+                           'baseline': '24pt'},
+                       3: {'endpoints': [Point(1, '2.3'),
+                                         Point('-0.61', '2.42'),
+                                         Point('-1.97', '1.54'),
+                                         Point('-2.5', 0)],
+                           'eccentricities': [Number('1.6'),
+                                              Number('1.8'),
+                                              Number('1.4')],
+                           'baseline': '24pt'},
+                       }
+        shapes_source = shared.anglessets_3_source
+        return self._anglesset(
+            shapes_source, subvariants, labels=labels, name=name,
+            extra_deco=extra_deco, thickness=thickness,
+            subvariant_nb=subvariant_nb,
+            remove_labels=remove_labels, labels_dist=lbls_dist
+        )
