@@ -1068,9 +1068,9 @@ def __main__():
                (3, '2_1', 0, 0, 'none', 1, 0, 0, 0, 0, 0),
                (3, '2_1', 1, 0, 'none', 1, 0, 0, 0, 0, 0),
                (3, '2_1', 2, 0, 'none', 1, 0, 0, 0, 0, 0),
-               (3, '2_1r', 0, 0, 'none', 1, 0, 0, 0, 0, 0),
-               (3, '2_1r', 1, 0, 'none', 1, 0, 0, 0, 0, 0),
-               (3, '2_1r', 2, 0, 'none', 1, 0, 0, 0, 0, 0)]
+               (3, '2_1r', 0, 1, 'none', 1, 0, 0, 0, 0, 0),
+               (3, '2_1r', 1, 1, 'none', 1, 0, 0, 0, 0, 0),
+               (3, '2_1r', 2, 1, 'none', 1, 0, 0, 0, 0, 0)]
     anglessets_db.executemany(
         "INSERT INTO anglessets("
         "nbof_angles, distcode, variant, nbof_right_angles, equal_angles, "
