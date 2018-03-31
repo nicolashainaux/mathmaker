@@ -3,6 +3,7 @@
         "id",
         "nb1",
         "nb2",
+        "code",
         "lock_equal_products",
         "drawDate",
         "clever",

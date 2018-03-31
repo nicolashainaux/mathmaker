@@ -623,13 +623,13 @@ def __main__():
 
     sys.stderr.write('Create natural numbers pairs...\n')
     creation_query = '''CREATE TABLE pairs
-       (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
+       (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER, code TEXT,
         lock_equal_products INTEGER, drawDate INTEGER, clever INTEGER,
         suits_for_deci1 INTEGER, suits_for_deci2 INTEGER)'''
     natural_nb_tuples_db_creation_queries.append(creation_query)
     natural_nb_tuples_db.execute(creation_query)
     # Tables of 1, 2, 3... NNPAIRS_MAX
-    db_rows = [(i + 1, j + 1, 0, 0, 0,
+    db_rows = [(i + 1, j + 1, distcode(i + 1, j + 1), 0, 0, 0,
                 _suits_for_deci1(i + 1, j + 1),
                 _suits_for_deci2(i + 1, j + 1))
                for i in range(NNPAIRS_MAX)
@@ -639,9 +639,9 @@ def __main__():
         sys.stderr.write('\rInsert natural numbers pairs... {} %'.format(i))
         natural_nb_tuples_db.executemany(
             "INSERT "
-            "INTO pairs(nb1, nb2, lock_equal_products, "
+            "INTO pairs(nb1, nb2, code, lock_equal_products, "
             "drawDate, clever, suits_for_deci1, suits_for_deci2) "
-            "VALUES(?, ?, ?, ?, ?, ?, ?)",
+            "VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
             db_rows[i * len(db_rows) // 100:
                     (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert natural numbers pairs... 100 %\n')
