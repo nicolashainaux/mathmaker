@@ -153,6 +153,36 @@ class AnglesSetGenerator(Generator):
         anglesset.boundingbox = build_data.pop('boundingbox', None)
         return anglesset
 
+    def _1_1(self, variant=None, labels=None, name=None, extra_deco=None,
+             subvariant_nb=None, thickness=None):
+        if variant != 0:
+            raise ValueError('variant must be 0 (not \'{}\')'.format(variant))
+        if extra_deco is None:
+            extra_deco = {}
+        subvariants = {1: {'endpoints': [Point('2.5', 0),
+                                         Point(2, '1.5'),
+                                         Point('0.5', '2.45')],
+                           'eccentricities': [Number('1.6'), Number('1.6')],
+                           'baseline': '25pt'},
+                       2: {'endpoints': [Point(2, '1.5'),
+                                         Point(0, '2.5'),
+                                         Point('-2.3', 1)],
+                           'eccentricities': [Number('1.6'), Number('1.6')],
+                           'baseline': '25pt'},
+                       3: {'endpoints': [Point(1, '2.3'),
+                                         Point('-1.5', 2),
+                                         Point('-2.5', 0)],
+                           'eccentricities': [Number('1.6'), Number('1.6')],
+                           'baseline': '22pt'},
+                       }
+        shapes_source = shared.anglessets_1_1_source
+        lbls = [labels[i][1] for i in range(len(labels))]
+        return self._anglesset(
+            shapes_source, subvariants,
+            labels=lbls, name=name, extra_deco=extra_deco, thickness=thickness,
+            subvariant_nb=subvariant_nb
+        )
+
     def _1_1_1(self, variant=None, labels=None, name=None, extra_deco=None,
                subvariant_nb=None, thickness=None):
         if variant != 0:
