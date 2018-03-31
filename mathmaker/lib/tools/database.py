@@ -1749,6 +1749,7 @@ class mc_source(object):
                 else:
                     raise
             log.debug('Got a result from db, so redrawing from db')
+            kwargs.update(spans.turn_to_query_conditions())
             return db_source.next(**kwargs)
         elif tag_classification == 'int_pairs':
             kwargs.update(preprocess_int_pairs_tag(source_id, qkw=qkw))
