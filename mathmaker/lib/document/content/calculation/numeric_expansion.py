@@ -39,7 +39,7 @@ class sub_object(component.structure):
         super().setup("minimal", **options)
         super().setup("numbers", nb=build_data, **options)
         # super().setup("nb_variants", nb=build_data, **options)
-        self.transduration = 20
+        self.transduration = 30
 
         n1 = self.nb1
         n2 = 10 * self.nb2 + self.nb3
