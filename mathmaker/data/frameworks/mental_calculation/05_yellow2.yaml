@@ -13,7 +13,7 @@ angles: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: angles sums and differences"
   - exercise: !!omap
-    - questions: addi direct, context=angles, code=1_1_1 -> nntriples:20-30×20-30×20-30 (1)
+    - questions: addi direct, context=angles, variant=0, subvariant_nb=1, code=1_1 -> nnpairs:15-45×90 (8)
 
 operator_precedence: !!omap
   - preset: "mental calculation"
