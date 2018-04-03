@@ -97,6 +97,7 @@ class IntspansProduct(object):
     def turn_to_query_conditions(self):
         """Turn self to a SQLite query condition."""
         query = ''
+        prevails = []
         for i, span in enumerate(self.spans_str):
             ranges = []
             single_values = []
@@ -109,11 +110,13 @@ class IntspansProduct(object):
                 elif r != '':  # only handle really provided values, not ''
                     single_values.append(r)
             ranges = ' OR '.join(ranges)
-            single_values = ', '.join(["'{}'".format(v)
-                                       for v in single_values])
+            single_values_str = ', '.join(["'{}'".format(v)
+                                           for v in single_values])
             q = ''
-            if single_values:
-                q += 'nb{} IN ({})'.format(i + 1, single_values)
+            if single_values_str:
+                q += 'nb{} IN ({})'.format(i + 1, single_values_str)
+                if len(single_values) == 1:
+                    prevails += single_values
             if ranges:
                 hook = ' OR ' if q else ''
                 parenthesis1 = '(' if q else ''
@@ -123,11 +126,13 @@ class IntspansProduct(object):
             parenthesis1 = '(' if len(self.spans) >= 2 else ''
             parenthesis2 = ')' if len(self.spans) >= 2 else ''
             query += hook + parenthesis1 + q + parenthesis2
+        output = {}
         if query:
             query = '({})'.format(query)
-            return {'raw': query}
-        else:
-            return {}
+            output.update({'raw': query})
+        if prevails:
+            output.update({'prevails': prevails})
+        return output
 
     @staticmethod
     def _group_by_packs(spans, dist_code):
