@@ -183,6 +183,77 @@ class AnglesSetGenerator(Generator):
             subvariant_nb=subvariant_nb
         )
 
+    def _1_1r(self, variant=None, labels=None, name=None, extra_deco=None,
+              subvariant_nb=None, thickness=None):
+        if variant not in [0, 1]:
+            raise ValueError('variant must be 0 or 1 (not \'{}\')'
+                             .format(variant))
+        if extra_deco is None:
+            extra_deco = {}
+        lbls = [labels[i][1] for i in range(len(labels))]
+        lbls.remove(90)
+        if variant == 0:
+            # Tells which angles shouldn't have any label (e.g. right angles)
+            remove_labels = [True, False]
+            # /!\ order of labels: from right to left, counterclockwise
+            # (reversed order of remove_labels)
+            lbls = lbls + [Number(90)]
+            # Tells which angles will be marked as right
+            rdeco = ['0:1']
+            subvariants = {1: {'endpoints': [Point('2.5', 0),
+                                             Point(0, '2.5'),
+                                             Point(-2, '1.5')],
+                               'eccentricities': [Number('1.6'),
+                                                  Number('1.6')],
+                               'baseline': '25pt'},
+                           2: {'endpoints': [Point('1.5', 2),
+                                             Point(-2, '1.5'),
+                                             Point('-2.5', 0)],
+                               'eccentricities': [Number('1.6'),
+                                                  Number('1.6')],
+                               'baseline': '20pt'},
+                           3: {'endpoints': [Point('2.3', 1),
+                                             Point(-1, '2.3'),
+                                             Point('-2.45', '0.5')],
+                               'eccentricities': [Number('1.6'),
+                                                  Number('1.6')],
+                               'baseline': '23pt'}
+                           }
+        elif variant == 1:
+            # Tells which angles shouldn't have any label (e.g. right angles)
+            remove_labels = [False, True]
+            # /!\ order of labels: from right to left, counterclockwise
+            # (reversed order of remove_labels)
+            lbls = [Number(90)] + lbls
+            # Tells which angles will be marked as right
+            rdeco = ['1:2']
+            subvariants = {1: {'endpoints': [Point('2.5', 0),
+                                             Point('2.3', 1),
+                                             Point(-1, '2.3')],
+                               'eccentricities': [Number('2.1'),
+                                                  Number('1.6')],
+                               'baseline': '24pt'},
+                           2: {'endpoints': [Point('2.5', 0),
+                                             Point(1, '2.3'),
+                                             Point('-2.3', 1)],
+                               'eccentricities': [Number('1.6'),
+                                                  Number('1.6')],
+                               'baseline': '23pt'},
+                           3: {'endpoints': [Point(2, '1.5'),
+                                             Point('0.5', '2.45'),
+                                             Point('-2.45', '0.5')],
+                               'eccentricities': [Number('1.6'),
+                                                  Number('1.6')],
+                               'baseline': '23pt'}
+                           }
+        shapes_source = shared.anglessets_1_1r_source
+        return self._anglesset(
+            shapes_source, subvariants,
+            labels=lbls, name=name, extra_deco=extra_deco, thickness=thickness,
+            subvariant_nb=subvariant_nb, rdeco=rdeco,
+            remove_labels=remove_labels
+        )
+
     def _1_1_1(self, variant=None, labels=None, name=None, extra_deco=None,
                subvariant_nb=None, thickness=None):
         if variant != 0:
