@@ -84,6 +84,21 @@
         "05_yellow2",
         "W03a"
     ],
+    "05_yellow2_W03b": [
+        "mental_calculation",
+        "05_yellow2",
+        "W03b"
+    ],
+    "05_yellow2_W03c": [
+        "mental_calculation",
+        "05_yellow2",
+        "W03c"
+    ],
+    "05_yellow2_W03d": [
+        "mental_calculation",
+        "05_yellow2",
+        "W03d"
+    ],
     "02_white2_multiplications_reversed": [
         "mental_calculation",
         "02_white2",
