@@ -13,7 +13,16 @@ angles: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: angles sums and differences"
   - exercise: !!omap
-    - questions: addi direct, context=angles, variant=0, subvariant_nb=1, code=1_1 -> nnpairs:15-45×90 (8)
+    - questions: addi direct, context=angles -> nnpairs:11-69×90 (1)
+                 addi direct, context=angles -> nnpairs:11-69×90 (1)
+                 subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×90 (1)
+                 subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×11-69 (1)
+                 addi direct, context=angles -> nnpairs:11-69×11-69 (1)
+                 addi direct, context=angles, code=2_1 -> nntriples:11-69×11-69×90 (1)
+                 addi direct, context=angles, code=2_1 -> nntriples:11-69×11-69×11-69 (1)
+                 addi direct, context=angles, code=1_1_1 -> nntriples:11-69×11-69×90 (1)
+                 addi direct, context=angles, code=1_1_1 -> nntriples:11-69×11-69×11-69 (1)
+                 addi direct, context=angles, code=3 -> nntriples:11-69×11-69×11-69 (1)
 
 operator_precedence: !!omap
   - preset: "mental calculation"
