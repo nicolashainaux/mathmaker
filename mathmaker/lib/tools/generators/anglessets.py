@@ -51,6 +51,7 @@ class AnglesSetGenerator(Generator):
         """
         extra_deco = kwargs.pop('extra_deco', None)
         extra_deco2 = kwargs.pop('extra_deco2', None)
+        subtr_shapes = kwargs.pop('subtr_shapes', False)
         thickness = kwargs.get('thickness', None)
         subvariant_nb = kwargs.get('subvariant_nb', None)
         self.check_args(distcode=codename, variant=variant, labels=labels,
@@ -61,7 +62,8 @@ class AnglesSetGenerator(Generator):
                                        name=name, extra_deco=extra_deco,
                                        thickness=thickness,
                                        extra_deco2=extra_deco2,
-                                       subvariant_nb=subvariant_nb)
+                                       subvariant_nb=subvariant_nb,
+                                       subtr_shapes=subtr_shapes)
 
     def _anglesset(self, shapes_source, subvariants, labels, name=None,
                    extra_deco=None, subvariant_nb=None, thickness=None,
@@ -163,7 +165,8 @@ class AnglesSetGenerator(Generator):
         return anglesset
 
     def _1_1(self, variant=None, labels=None, name=None, extra_deco=None,
-             subvariant_nb=None, thickness=None, extra_deco2=None):
+             subvariant_nb=None, thickness=None, extra_deco2=None,
+             subtr_shapes=False):
         if variant != 0:
             raise ValueError('variant must be 0 (not \'{}\')'.format(variant))
         if extra_deco is None:
@@ -193,15 +196,38 @@ class AnglesSetGenerator(Generator):
         )
 
     def _1_1r(self, variant=None, labels=None, name=None, extra_deco=None,
-              subvariant_nb=None, thickness=None, extra_deco2=None):
+              subvariant_nb=None, thickness=None, extra_deco2=None,
+              subtr_shapes=False):
         if variant not in [0, 1]:
             raise ValueError('variant must be 0 or 1 (not \'{}\')'
                              .format(variant))
         if extra_deco is None:
             extra_deco = {}
         lbls = [labels[i][1] for i in range(len(labels))]
-        lbls.remove(90)
-        if variant == 0:
+        if not subtr_shapes:
+            lbls.remove(90)
+        if subtr_shapes:
+            remove_labels = [False, False]
+            rdeco = ['0:2']
+            subvariants = {1: {'endpoints': [Point('2.5', 0),
+                                             Point('1.5', 2),
+                                             Point(0, '2.5')],
+                               'eccentricities': [Number('1.6'),
+                                                  Number('1.6')],
+                               'baseline': '25pt'},
+                           2: {'endpoints': [Point('2.29', 1),
+                                             Point('1.25', '2.17'),
+                                             Point(-1, '2.29')],
+                               'eccentricities': [Number('1.6'),
+                                                  Number('1.6')],
+                               'baseline': '24pt'},
+                           3: {'endpoints': [Point('0.5', '2.45'),
+                                             Point('-1.8', '1.73'),
+                                             Point('-2.45', '0.5')],
+                               'eccentricities': [Number('1.6'),
+                                                  Number('1.6')],
+                               'baseline': '25pt'}}
+        elif variant == 0:
             # Tells which angles shouldn't have any label (e.g. right angles)
             remove_labels = [True, False]
             # /!\ order of labels: from right to left, counterclockwise
@@ -264,7 +290,8 @@ class AnglesSetGenerator(Generator):
         )
 
     def _2(self, variant=None, labels=None, name=None, extra_deco=None,
-           subvariant_nb=None, thickness=None, extra_deco2=None):
+           subvariant_nb=None, thickness=None, extra_deco2=None,
+           subtr_shapes=False):
         if variant != 0:
             raise ValueError('variant must be 0 (not \'{}\')'.format(variant))
         lbls_dist = [0, 0]
@@ -299,7 +326,8 @@ class AnglesSetGenerator(Generator):
         )
 
     def _1_1_1(self, variant=None, labels=None, name=None, extra_deco=None,
-               subvariant_nb=None, thickness=None, extra_deco2=None):
+               subvariant_nb=None, thickness=None, extra_deco2=None,
+               subtr_shapes=False):
         if variant != 0:
             raise ValueError('variant must be 0 (not \'{}\')'.format(variant))
         if extra_deco is None:
@@ -338,7 +366,8 @@ class AnglesSetGenerator(Generator):
         )
 
     def _1_1_1r(self, variant=None, labels=None, name=None, extra_deco=None,
-                subvariant_nb=None, thickness=None, extra_deco2=None):
+                subvariant_nb=None, thickness=None, extra_deco2=None,
+                subtr_shapes=False):
         if variant not in [0, 1, 2]:
             raise ValueError('variant must be in [0, 1, 2] (found \'{}\')'
                              .format(variant))
@@ -402,7 +431,8 @@ class AnglesSetGenerator(Generator):
         )
 
     def _2_1(self, variant=None, labels=None, name=None, extra_deco=None,
-             subvariant_nb=None, thickness=None, extra_deco2=None):
+             subvariant_nb=None, thickness=None, extra_deco2=None,
+             subtr_shapes=False):
         if variant not in [0, 1, 2]:
             raise ValueError('variant must be in [0, 1, 2] (found \'{}\')'
                              .format(variant))
@@ -456,7 +486,8 @@ class AnglesSetGenerator(Generator):
         )
 
     def _2_1r(self, variant=None, labels=None, name=None, extra_deco=None,
-              subvariant_nb=None, thickness=None, extra_deco2=None):
+              subvariant_nb=None, thickness=None, extra_deco2=None,
+              subtr_shapes=False):
         if variant not in [0, 1, 2]:
             raise ValueError('variant must be in [0, 1, 2] (found \'{}\')'
                              .format(variant))
@@ -514,7 +545,8 @@ class AnglesSetGenerator(Generator):
         )
 
     def _3(self, variant=None, labels=None, name=None, extra_deco=None,
-           subvariant_nb=None, thickness=None, extra_deco2=None):
+           subvariant_nb=None, thickness=None, extra_deco2=None,
+           subtr_shapes=False):
         if variant != 0:
             raise ValueError('variant must be 0 (not \'{}\')'.format(variant))
         lbls_dist = [0, 0, 0]

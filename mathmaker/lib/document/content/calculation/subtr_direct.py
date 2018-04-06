@@ -84,24 +84,35 @@ class sub_object(component.structure):
                                                  color='BrickRed',
                                                  radius=Number('0.5',
                                                                unit='cm')),
-                          '0:2': AngleDecoration(label=None,
-                                                 thickness='ultra thick',
-                                                 color='NavyBlue',
-                                                 radius=Number('1.6',
-                                                               unit='cm'),
-                                                 eccentricity=2,
-                                                 arrow_tips='<->')}
-            extra_deco2 = {'1:2': AngleDecoration(label=Number(self.nb1,
-                                                               unit=deg),
-                                                  do_draw=False,
-                                                  color='NavyBlue',
-                                                  radius=Number('1.6',
-                                                                unit='cm'))}
+                          }
+            extra_deco2 = {}
+            if self.nb1 != 90:
+                extra_deco.update({'0:2':
+                                   AngleDecoration(label=None,
+                                                   thickness='ultra thick',
+                                                   color='NavyBlue',
+                                                   radius=Number('1.6',
+                                                                 unit='cm'),
+                                                   eccentricity=2,
+                                                   arrow_tips='<->')})
+                extra_deco2.update({'1:2':
+                                    AngleDecoration(label=Number(self.nb1,
+                                                                 unit=deg),
+                                                    do_draw=False,
+                                                    color='NavyBlue',
+                                                    radius=Number('1.6',
+                                                                  unit='cm'))})
+            else:
+                extra_deco.update({'0:2':
+                                   AngleDecoration(label=None,
+                                                   radius=Number('0.25',
+                                                                 unit='cm'))})
             super().setup('angles_bunch', extra_deco=extra_deco,
                           extra_deco2=extra_deco2,
                           labels=[(1, self.nb1), (1, self.nb2)],
                           subvariant_nb=options.get('subvariant_nb', None),
-                          variant=options.get('variant', None))
+                          variant=options.get('variant', None),
+                          subtr_shapes=True)
 
     def q(self, **options):
         if self.context == 'angles':
