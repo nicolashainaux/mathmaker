@@ -23,6 +23,9 @@
 import os
 import random
 
+from mathmakerlib import required
+from mathmakerlib.calculus import Number
+
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.core.base_calculus import Sum
@@ -69,9 +72,48 @@ class sub_object(component.structure):
             super().setup('complement_wording',
                           q_id=os.path.splitext(os.path.basename(__file__))[0],
                           **options)
+        elif self.context == 'angles':
+            deg = r'\textdegree'
+            from mathmakerlib.geometry import AngleDecoration
+            self.result = Number(self.nb1 - self.nb2)
+            self.hint = deg
+            required.package['xcolor'] = True
+            required.options['xcolor'].add('dvipsnames')
+            extra_deco = {'0:1': AngleDecoration(label='?',
+                                                 thickness='ultra thick',
+                                                 color='BrickRed',
+                                                 radius=Number('0.5',
+                                                               unit='cm')),
+                          '0:2': AngleDecoration(label=None,
+                                                 thickness='ultra thick',
+                                                 color='NavyBlue',
+                                                 radius=Number('1.6',
+                                                               unit='cm'),
+                                                 eccentricity=2,
+                                                 arrow_tips='<->')}
+            extra_deco2 = {'1:2': AngleDecoration(label=Number(self.nb1,
+                                                               unit=deg),
+                                                  do_draw=False,
+                                                  color='NavyBlue',
+                                                  radius=Number('1.6',
+                                                                unit='cm'))}
+            super().setup('angles_bunch', extra_deco=extra_deco,
+                          extra_deco2=extra_deco2,
+                          labels=[(1, self.nb1), (1, self.nb2)],
+                          subvariant_nb=options.get('subvariant_nb', None),
+                          variant=options.get('variant', None))
 
     def q(self, **options):
-        if hasattr(self, 'wording'):
+        if self.context == 'angles':
+            self.substitutable_question_mark = True
+            return shared.machine.write_layout(
+                (1, 2),
+                [8.25, 4.75],
+                [self.angles_bunch.drawn,
+                 _('${math_expr}$ = {q_mark}')
+                 .format(math_expr=self.angles_bunch.angles[0].name,
+                         q_mark=COLORED_QUESTION_MARK)])
+        elif hasattr(self, 'wording'):
             return post_process(self.wording.format(**self.wording_format))
         else:
             self.substitutable_question_mark = True
