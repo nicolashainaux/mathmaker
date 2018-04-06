@@ -279,6 +279,7 @@ class structure(object):
                       extra_deco2=extra_deco2, subvariant_nb=subvariant_nb,
                       subtr_shapes=subtr_shapes)
         self.angles_bunch.fontsize = self.tikz_fontsize
+        self.angles_bunch.scale = self.tikz_picture_scale * Number('0.84')
 
     def _setup_rectangle(self, **kwargs):
         if hasattr(self, 'nb1') and hasattr(self, 'nb2'):
