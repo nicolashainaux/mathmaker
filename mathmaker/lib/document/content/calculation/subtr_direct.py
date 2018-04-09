@@ -114,6 +114,7 @@ class sub_object(component.structure):
                           subvariant_nb=options.get('subvariant_nb', None),
                           variant=options.get('variant', None),
                           subtr_shapes=True)
+            self.hint = r'\si{\degree}'
 
     def q(self, **options):
         if self.context == 'angles':

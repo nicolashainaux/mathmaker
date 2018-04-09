@@ -80,6 +80,7 @@ class sub_object(component.structure):
                           labels=lined_up(self.nb_list),
                           subvariant_nb=options.get('subvariant_nb', None),
                           variant=options.get('variant', None))
+            self.hint = r'\si{\degree}'
             # if not self.slideshow:
             #     self.angles_bunch.baseline = '20pt'
 
