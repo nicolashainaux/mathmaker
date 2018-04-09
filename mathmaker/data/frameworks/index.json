@@ -99,6 +99,26 @@
         "05_yellow2",
         "W03d"
     ],
+    "05_yellow2_W04a": [
+        "mental_calculation",
+        "05_yellow2",
+        "W04a"
+    ],
+    "05_yellow2_W04b": [
+        "mental_calculation",
+        "05_yellow2",
+        "W04b"
+    ],
+    "05_yellow2_W04c": [
+        "mental_calculation",
+        "05_yellow2",
+        "W04c"
+    ],
+    "05_yellow2_W04d": [
+        "mental_calculation",
+        "05_yellow2",
+        "W04d"
+    ],
     "02_white2_multiplications_reversed": [
         "mental_calculation",
         "02_white2",

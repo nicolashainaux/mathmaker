@@ -190,3 +190,39 @@ W03d: !!omap
                  numeric expansion -> mergedinttriples_3to9 (1)
                  percent direct -> 25%of..., context=simple_unit, level=easy (1)
                  divi direct -> decimal_and_10_100_1000 (1)
+
+W04a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility questions, variant=remainder -> intpairs_3to9 (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=8 (1)
+                 numeric expansion -> mergedinttriples_3to9 (1)
+                 addi direct, context=angles -> nnpairs:11-69×11-69 (1)
+                 multi direct -> decimal_and_10_100_1000 (1)
+
+W04b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility questions, variant=true -> intpairs_3to9 (1)
+                 area rectangle -> intpairs_2to9, nb_variant=decimal2 (1)
+                 subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×11-69 (1)
+                 percent direct -> 10%of..., context=simple_unit (1)
+                 divi euclidean -> intpairs_3to9 (1)
+
+W04c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: addi direct, context=angles, code=2_1 -> nntriples:11-69×11-69×90 (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
+                 numeric expansion -> mergedinttriples_3to9 (1)
+                 mini_pb proportionality -> mergedinttriples_3to9 (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
+
+W04d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility questions, variant=remainder -> intpairs_3to9 (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=4 (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=4 (1)
+                 subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×90 (1)
+                 multi hole -> int_irreducible_frac (1)
