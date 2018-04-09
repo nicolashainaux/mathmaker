@@ -59,6 +59,74 @@ divisibility: !!omap
   - exercise: !!omap
     - questions: divisibility questions -> intpairs_3to9 (10)
 
+exam: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation:  final test for yellow belt, second stripe"
+  - exercise: !!omap
+    - layout:
+      - min_row_height: 0.6
+    - mix0:
+      - questions: area rectangle, picture=true, pick=1,
+                   multi direct, pick=1
+      - nb: intpairs_2to9, nb_variant=decimal (1)
+            table_11_tens_easy (1)
+            table_15 (1)
+    - mix1:
+      - questions: perimeter rectangle, picture=true, pick=1
+      - nb: intpairs_2to9, nb_variant=decimal (1)
+            table_25 (1)
+            intpairs_5to20, nb_variant=decimal1 (1)
+    - questions: fraction_of a_linesegment -> simple_fractions (1)
+                 multi hole -> int_irreducible_frac (1)
+                 [1][addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±halforquarter (1)
+                     addi hole -> complements_to_10, nb_variant=decimal2 (1)
+                     addi hole -> singleint_70to200;;singleint_70to200, nb_variant=decimal2 (1)]
+                 [1][subtr hole, subvariant=only_positive -> singleint_70to200;;singleint_70to200, nb_variant=decimal2 (1)
+                     subtr hole, subvariant=only_positive, hidden=1 -> complements_to_1, nb_variant=decimal1 (1)
+                     subtr hole, subvariant=only_positive, hidden=2 -> complements_to_1, nb_variant=decimal1 (1)
+                     subtr hole, subvariant=only_positive, hidden=1 -> complements_to_10, nb_variant=decimal1 (1)
+                     subtr hole, subvariant=only_positive, hidden=2 -> complements_to_10, nb_variant=decimal1 (1)]
+                 [1][divi euclidean -> intpairs_2to10 (1)
+                     divi euclidean -> table_15 (1)
+                     divi euclidean -> table_25 (1)]
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (1)
+                 [1][multi direct -> decimal_and_10_100_1000 (1)
+                     divi direct -> decimal_and_10_100_1000 (1)]
+                 [1][percent direct -> 75%of..., level=easy, context=simple_unit (1)
+                     percent direct -> 25%of..., context=simple_unit (1)
+                     percent direct -> 10%of..., context=simple_unit (1)]
+                 [1][multi clever, variant=with_a_decimal -> intpairs_2to9 (1)
+                     multi clever -> table_11_tens_easy (1)
+                     multi clever -> table_15 (1)]
+                 [1][mini_pb proportionality -> deciinttriplesforprop_3to9 (1)
+                     mini_pb proportionality -> mergedinttriples_3to9 (1)
+                     mini_pb proportionality -> mergedinttriples_3to9, force_table=7, wid=38 (1)
+                     mini_pb proportionality -> mergedinttriples_15_3to6 (1)
+                     mini_pb proportionality -> mergedinttriples_25_3to6 (1)]
+                 [1][vocabulary simple_parts_of_a_number -> auto_multiples (1)
+                     vocabulary simple_multiples_of_a_number -> auto_multiples (1)
+                     vocabulary operation -> auto_vocabulary (6)]
+                 units conversion -> unitspairs (1)
+                 [1][addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
+                     addi direct, context=ask:turn_to_decimal_repr, variant=cut, iz_ge=1 -> decimalfractionssums (1)
+                     decimal numerals, direction=to_decimal -> decimals (1)
+                     decimal numerals, direction=to_fraction -> decimals (1)]
+                 numeric expansion -> mergedinttriples_3to9 (1)
+                 [1][addi direct, context=angles -> nnpairs:11-69×90 (1)
+                     addi direct, context=angles -> nnpairs:11-69×90 (1)
+                     subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×90 (1)
+                     subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×11-69 (1)
+                     addi direct, context=angles -> nnpairs:11-69×11-69 (1)
+                     addi direct, context=angles, code=2_1 -> nntriples:11-69×11-69×90 (1)
+                     addi direct, context=angles, code=2_1 -> nntriples:11-69×11-69×11-69 (1)
+                     addi direct, context=angles, code=1_1_1 -> nntriples:11-69×11-69×90 (1)
+                     addi direct, context=angles, code=1_1_1 -> nntriples:11-69×11-69×11-69 (1)
+                     addi direct, context=angles, code=3 -> nntriples:11-69×11-69×11-69 (1)]
+                  order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_4to9, variant=0-7 (1)
+                  [1][divisibility questions, variant=true -> intpairs_3to9 (1)
+                      divisibility questions, variant=reversed -> intpairs_3to9 (1)
+                      divisibility questions, variant=remainder -> intpairs_3to9 (1)]
+
 challenge: !!omap
     - preset: "mental calculation"
     - title: "Challenge, first part"
