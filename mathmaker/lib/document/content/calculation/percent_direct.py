@@ -71,4 +71,4 @@ class sub_object(component.structure):
         return self.result.printed
 
     def js_a(self, **kwargs):
-        return self.result.uiprinted
+        return [Number(self.result, unit=None).uiprinted]
