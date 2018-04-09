@@ -57,7 +57,8 @@ class sub_object(component.structure):
                                        generation_type='default')[0]
         self.start_nb = Number(chosen_deci, unit=unit1)
         self.answer = self.start_nb.converted_to(unit2).printed
-        self.js_answer = self.start_nb.converted_to(unit2).uiprinted
+        self.js_answer = Number(self.start_nb.converted_to(unit2),
+                                unit=None).uiprinted
         self.wording = '{} = {}~{}'.format(self.start_nb.printed,
                                            COLORED_QUESTION_MARK,
                                            unit2.printed)
