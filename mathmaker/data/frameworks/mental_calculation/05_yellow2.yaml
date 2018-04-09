@@ -50,8 +50,8 @@ perimeter_of_a_polygon: !!omap
     - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=1 (2)
                  perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
                  perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_nb=4, sides_particularity=equilateral (1)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (4)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (4)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (3)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (3)
 
 divisibility: !!omap
   - preset: "mental calculation"

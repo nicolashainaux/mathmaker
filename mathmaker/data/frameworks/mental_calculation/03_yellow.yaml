@@ -2,12 +2,12 @@ complements: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: decimal complements to 1, to 10 and to 100"
   - exercise: !!omap
-    - questions: addi direct -> complements_to_10, nb_variant=decimal2 (5)
-                 subtr direct, subvariant=only_positive, context=complement_wording -> complements_to_10, nb_variant=decimal1 (5)
-                 addi direct -> complements_to_100 (2)
+    - questions: addi direct -> complements_to_10, nb_variant=decimal2 (2)
+                 subtr direct, subvariant=only_positive, context=complement_wording -> complements_to_10, nb_variant=decimal1 (1)
+                 addi direct -> complements_to_100 (1)
                  addi direct -> complements_to_110...990 (1)
-                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_1, nb_variant=decimal1 (2)
-                 subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_1, nb_variant=decimal1 (2)
+                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_1, nb_variant=decimal1 (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_1, nb_variant=decimal1 (1)
                  subtr direct, subvariant=only_positive -> complements_to_100 (1)
                  subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
                  subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_100 (1)
@@ -16,27 +16,27 @@ addi_subtr_hole: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: additions and subtractions with a hole"
   - exercise: !!omap
-    - questions: addi hole -> singleint_5to20;;singleint_5to20 (3)
-                 addi hole -> singleint_21to100;;singleint_21to100 (4)
-                 addi hole -> complements_to_110...990 (3)
-                 subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (3)
-                 subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (4)
-                 subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (3)
+    - questions: addi hole -> singleint_5to20;;singleint_5to20 (2)
+                 addi hole -> singleint_21to100;;singleint_21to100 (2)
+                 addi hole -> complements_to_110...990 (1)
+                 subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (2)
+                 subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (2)
+                 subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)
 
 units_conversions: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: additions and subtractions with a hole"
   - exercise: !!omap
-    - questions: units conversion -> unitspairs (20)
+    - questions: units conversion -> unitspairs (10)
 
 decimal_numerals: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: decimal numerals"
   - exercise: !!omap
-    - questions: addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (2)
-                 addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (5)
-                 decimal numerals, direction=to_decimal -> decimals (6)
-                 decimal numerals, direction=to_fraction -> decimals (7)
+    - questions: addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
+                 addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (3)
+                 decimal numerals, direction=to_decimal -> decimals (3)
+                 decimal numerals, direction=to_fraction -> decimals (3)
 
 operations_vocabulary: !!omap
   - preset: "mental calculation"
@@ -48,26 +48,22 @@ operations_vocabulary: !!omap
                  vocabulary double -> table_2 (1)
                  vocabulary triple -> table_3 (1)
                  vocabulary quadruple -> table_4 (1)
-                 vocabulary simple_parts_of_a_number -> auto_multiples (2)
-                 vocabulary simple_multiples_of_a_number -> auto_multiples (1)
-                 vocabulary multi -> intpairs_2to9 (1)
-                                  -> table_11_tens_easy (1)
-                 vocabulary divi -> intpairs_4to9 (2)
+                 [1][vocabulary multi -> intpairs_2to9 (1)
+                     vocabulary multi -> table_11_tens_easy (1)]
+                 vocabulary divi -> intpairs_4to9 (1)
                  vocabulary addi -> singleint_10to100;;singleint_10to100 (1)
-                                 -> intpairs_7to15 (1)
-                 vocabulary subtr -> singleint_10to100;;singleint_10to100 (1)
-                                  -> intpairs_2to200, nb_variant=decimal2 (1)
-                 vocabulary operation -> auto_vocabulary (3)
+                 [1][vocabulary subtr -> singleint_10to100;;singleint_10to100 (1)
+                     vocabulary subtr -> intpairs_2to200, nb_variant=decimal2 (1)]
 
 positional_notation: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: positional notation"
   - exercise: !!omap
-    - questions: digitplace direct -> digits_places (6)
-                 digitplace reversed -> digits_places (4)
-                 digitplace numberof -> digits_places, generation_type=default (6)
-                 digitplace reversed -> digits_places, pos_matches_invisible_zero=true (2)
-                 digitplace numberof -> digits_places, generation_type=default, pos_matches_invisible_zero=true (2)
+    - questions: digitplace direct -> digits_places (3)
+                 digitplace reversed -> digits_places (2)
+                 digitplace numberof -> digits_places, generation_type=default (3)
+                 digitplace reversed -> digits_places, pos_matches_invisible_zero=true (1)
+                 digitplace numberof -> digits_places, generation_type=default, pos_matches_invisible_zero=true (1)
 
 rectangles: !!omap
   - preset: "mental calculation"
@@ -75,8 +71,8 @@ rectangles: !!omap
   - exercise: !!omap
     - questions: area rectangle, picture=true -> table_25 (1)
                                               -> intpairs_2to9 (2)
-                                              -> table_15 (2)
-                                              -> table_11_tens_easy (2)
+                                              -> table_15 (1)
+                                              -> table_11_tens_easy (1)
                  perimeter rectangle, picture=true -> table_25 (1)
                                                    -> intpairs_2to9 (2)
                                                    -> table_15 (1)
@@ -86,12 +82,12 @@ tables_15_25: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: tables of 15 and 25"
   - exercise: !!omap
-    - questions: multi direct -> table_15 (4)
-                              -> table_25 (4)
-                 divi direct -> table_15 (4)
-                             -> table_25 (4)
-                 multi hole -> table_15 (2)
-                            -> table_25 (2)
+    - questions: multi direct -> table_15 (2)
+                              -> table_25 (2)
+                 divi direct -> table_15 (2)
+                             -> table_25 (2)
+                 multi hole -> table_15 (1)
+                            -> table_25 (1)
 
 
 exam: !!omap

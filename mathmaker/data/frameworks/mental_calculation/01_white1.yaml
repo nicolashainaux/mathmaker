@@ -2,14 +2,14 @@ multiplications: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: multiplications"
   - exercise: !!omap
-    - questions: multi direct -> intpairs_2to9 (20)
+    - questions: multi direct -> intpairs_2to9 (10)
 
 positional_notation: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: positional notation"
   - exercise: !!omap
-    - questions: digitplace direct -> digits_places (10)
-                 digitplace reversed -> digits_places (10)
+    - questions: digitplace direct -> digits_places (5)
+                 digitplace reversed -> digits_places (5)
 
 exam: !!omap
   - preset: "mental calculation"

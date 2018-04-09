@@ -2,40 +2,40 @@ fraction_of_a_linesegment: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: fraction of a line segment"
   - exercise: !!omap
-    - questions: fraction_of a_linesegment -> simple_fractions (20)
+    - questions: fraction_of a_linesegment -> simple_fractions (10)
 
 multi_hole: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: multiplications with a hole"
   - exercise: !!omap
-    - questions: multi hole -> intpairs_2to9 (7)
-                            -> int_irreducible_frac (8)
-                            -> table_15 (2)
-                            -> table_25 (2)
+    - questions: multi hole -> intpairs_2to9 (3)
+                            -> int_irreducible_frac (4)
+                            -> table_15 (1)
+                            -> table_25 (1)
                             -> table_11_tens_easy (1)
 
 addi_subtr_hole: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: additions and subtractions with a hole"
   - exercise: !!omap
-    - questions: addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±half (3)
-                 addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±quarter (3)
-                 addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±halforquarter (2)
-                 addi hole -> singleint_70to200;;singleint_70to200, nb_variant=decimal2 (2)
-                 subtr hole, subvariant=only_positive -> singleint_70to200;;singleint_70to200, nb_variant=decimal2 (2)
+    - questions: addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±half (1)
+                 addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±quarter (1)
+                 addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±halforquarter (1)
+                 addi hole -> singleint_70to200;;singleint_70to200, nb_variant=decimal2 (1)
+                 subtr hole, subvariant=only_positive -> singleint_70to200;;singleint_70to200, nb_variant=decimal2 (1)
                  subtr hole, subvariant=only_positive, hidden=1 -> complements_to_1, nb_variant=decimal1 (1)
-                 subtr hole, subvariant=only_positive, hidden=2 -> complements_to_1, nb_variant=decimal1 (2)
+                 subtr hole, subvariant=only_positive, hidden=2 -> complements_to_1, nb_variant=decimal1 (1)
                  subtr hole, subvariant=only_positive, hidden=1 -> complements_to_10, nb_variant=decimal1 (1)
-                 subtr hole, subvariant=only_positive, hidden=2 -> complements_to_10, nb_variant=decimal1 (2)
-                 addi hole -> complements_to_10, nb_variant=decimal2 (2)
+                 subtr hole, subvariant=only_positive, hidden=2 -> complements_to_10, nb_variant=decimal1 (1)
+                 addi hole -> complements_to_10, nb_variant=decimal2 (1)
 
 euclidean_divisions: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: euclidean divisions"
   - exercise: !!omap
-    - questions: divi euclidean -> intpairs_2to10 (12)
-                 divi euclidean -> table_15 (4)
-                 divi euclidean -> table_25 (4)
+    - questions: divi euclidean -> intpairs_2to10 (6)
+                 divi euclidean -> table_15 (2)
+                 divi euclidean -> table_25 (2)
 
 rectangles: !!omap
   - preset: "mental calculation"
@@ -63,24 +63,24 @@ perimeter_of_a_polygon: !!omap
   - title: "Mental calculation: perimeter of a polygon"
   - exercise: !!omap
     - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, level=1 (4)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=2 (4)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=3 (4)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=2 (3)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=3 (3)
 
 multi_divi_10_100_1000: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: multiplications and divisions by 10, 100 and 1000"
   - exercise: !!omap
-    - questions: multi direct -> decimal_and_10_100_1000 (10)
-                 divi direct -> decimal_and_10_100_1000 (10)
+    - questions: multi direct -> decimal_and_10_100_1000 (5)
+                 divi direct -> decimal_and_10_100_1000 (5)
 
 percentages: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: simple percentages calculations"
   - exercise: !!omap
-    - questions: percent direct -> 25|75%of..., level=easy (4)
-                 percent direct -> 25|75%of..., level=easy, context=simple_unit (4)
-                 percent direct -> 25|75%of... (4)
-                 percent direct -> 25|75%of..., context=simple_unit (4)
+    - questions: percent direct -> 25|75%of..., level=easy (2)
+                 percent direct -> 25|75%of..., level=easy, context=simple_unit (2)
+                 percent direct -> 25|75%of... (1)
+                 percent direct -> 25|75%of..., context=simple_unit (1)
                  percent direct -> 50%of..., level=easy (1)
                  percent direct -> 50%of... (1)
                  percent direct -> 50%of..., level=easy, context=simple_unit (1)
@@ -90,8 +90,8 @@ multi_clever: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: clever multiplications"
   - exercise: !!omap
-    - questions: multi clever -> singleint_2to99 (5)
-                 multi clever, variant=with_a_decimal -> intpairs_2to9 (12)
+    - questions: multi clever -> singleint_2to99 (2)
+                 multi clever, variant=with_a_decimal -> intpairs_2to9 (5)
                  multi clever -> table_11_tens_easy (1)
                  multi clever -> table_15 (1)
                  multi clever -> int_deci_clever_pairs (1)
@@ -100,17 +100,17 @@ multi_decimal: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: multiplications with decimal numbers"
   - exercise: !!omap
-    - questions: multi direct, nb_variant=decimal -> intpairs_2to9 (20)
+    - questions: multi direct, nb_variant=decimal -> intpairs_2to9 (10)
 
 proportionality_problems: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: mini proportionality problems"
   - exercise: !!omap
-    - questions: mini_pb proportionality -> deciinttriplesforprop_3to9 (8)
-                 mini_pb proportionality -> mergedinttriples_3to9 (7)
+    - questions: mini_pb proportionality -> deciinttriplesforprop_3to9 (2)
+                 mini_pb proportionality -> mergedinttriples_3to9 (5)
                  mini_pb proportionality -> mergedinttriples_3to9, force_table=7, wid=38 (1)
-                 mini_pb proportionality -> mergedinttriples_15_3to6 (2)
-                 mini_pb proportionality -> mergedinttriples_25_3to6 (2)
+                 mini_pb proportionality -> mergedinttriples_15_3to6 (1)
+                 mini_pb proportionality -> mergedinttriples_25_3to6 (1)
                  # mini_pb proportionality -> inttriplesforprop_3to10,15,25 (8)
                  # To select exclusively from table of 15 or from table of 25,
                  # use mergedinttriples_*_3to6
