@@ -73,6 +73,7 @@ class sub_object(component.structure):
                           q_id=os.path.splitext(os.path.basename(__file__))[0],
                           **options)
         elif self.context == 'angles':
+            self.transduration = 25
             deg = r'\textdegree'
             from mathmakerlib.geometry import AngleDecoration
             self.result = Number(self.nb1 - self.nb2)
@@ -116,10 +117,14 @@ class sub_object(component.structure):
 
     def q(self, **options):
         if self.context == 'angles':
+            if self.slideshow:
+                col_widths = [6, 7]
+            else:
+                col_widths = [8.25, 4.75]
             self.substitutable_question_mark = True
             return shared.machine.write_layout(
                 (1, 2),
-                [8.25, 4.75],
+                col_widths,
                 [self.angles_bunch.drawn,
                  _('${math_expr}$ = {q_mark}')
                  .format(math_expr=self.angles_bunch.angles[0].name,

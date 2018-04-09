@@ -66,6 +66,7 @@ class sub_object(component.structure):
                               shared.machine.write_math_style2(self.sum_str)],
                           fix_math_style2_fontsize=True)
         elif self.context == 'angles':
+            self.transduration = 25
             deg = r'\textdegree'
             from mathmakerlib.geometry import AngleDecoration
             self.result = Number(self.result, unit=deg)
@@ -88,10 +89,14 @@ class sub_object(component.structure):
         elif self.context.startswith('ask:'):
             return self.wording
         elif self.context == 'angles':
+            if self.slideshow:
+                col_widths = [6, 7]
+            else:
+                col_widths = [8.25, 4.75]
             self.substitutable_question_mark = True
             return shared.machine.write_layout(
                 (1, 2),
-                [8.25, 4.75],
+                col_widths,
                 [self.angles_bunch.drawn,
                  _('${math_expr}$ = {q_mark}')
                  .format(math_expr=self.angles_bunch.angles[-1].name,
