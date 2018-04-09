@@ -30,6 +30,8 @@ from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.database import generate_random_decimal_nb
+from mathmaker.lib.tools.wording import post_process
+from mathmaker.lib.tools.wording import setup_wording_format_of
 
 
 class sub_object(component.structure):
@@ -49,22 +51,33 @@ class sub_object(component.structure):
         if difference_of_orders_of_magnitude(unit1, unit2) <= Decimal('0.01'):
             start_position = [Decimal('100'), Decimal('10'), Decimal('1')]
         sp = random.choice(start_position)
-        chosen_deci = \
+        nb1 = \
             generate_random_decimal_nb(position=sp,
                                        width=random.choice([1, 2, 3]),
                                        unique_figures=options.get(
                                            'unique_figures', False),
                                        generation_type='default')[0]
-        self.start_nb = Number(chosen_deci, unit=unit1)
-        self.answer = self.start_nb.converted_to(unit2).printed
-        self.js_answer = Number(self.start_nb.converted_to(unit2),
-                                unit=None).uiprinted
-        self.wording = '{} = {}~{}'.format(self.start_nb.printed,
-                                           COLORED_QUESTION_MARK,
-                                           unit2.printed)
+        super().setup('numbers',
+                      nb=[Number(nb1),  # self.nb1
+                          Number(Number(nb1,
+                                        unit=unit1).converted_to(unit2),
+                                 unit=None)  # self.nb2
+                          ],
+                      shuffle_nbs=False, standardize_decimal_numbers=True)
+        self.answer = Number(self.nb2, unit=unit2).printed
+        self.js_answer = self.nb2.uiprinted
+        unit1_attr_name = physical_quantity + '_unit1'
+        unit2_attr_name = physical_quantity + '_unit2'
+        hint = ' |hint:{}_unit2|'.format(physical_quantity)
+        setattr(self, unit1_attr_name, unit1)
+        setattr(self, unit2_attr_name, unit2)
+        self.wording = '{{nb1}} {{{u1}}} = QUESTION_MARK~{{{u2}}}{h}'\
+            .format(u1=unit1_attr_name, u2=unit2_attr_name, h=hint)
+        setup_wording_format_of(self)
 
     def q(self, **options):
-        return shared.machine.write_math_style2(self.wording)
+        return post_process(self.wording.format(**self.wording_format))\
+            .replace('QUESTION_MARK', COLORED_QUESTION_MARK)
 
     def a(self, **options):
         return shared.machine.write_math_style2(self.answer)
