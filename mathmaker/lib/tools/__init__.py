@@ -272,20 +272,6 @@ def rotate(l, n):
     return l[-n:] + l[:-n]
 
 
-def lined_up(nb_tuple):
-    """
-    Return a list of pairs (nb of times number shows up, number).
-
-    :Examples:
-
-    >>> lined_up((3, 4, 4))
-    [(1, 3), (2, 4)]
-    >>> lined_up((2, 5, 5, 5, 8, 8))
-    [(1, 2), (2, 8), (3, 5)]
-    """
-    return sorted(list(set([(nb_tuple.count(n), n) for n in nb_tuple])))
-
-
 def check_unique_letters_words(words_list, n):
     """
     Check if each word of the list contains exactly n letters, all unique.

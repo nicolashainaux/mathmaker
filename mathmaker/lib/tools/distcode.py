@@ -31,3 +31,17 @@ def distcode(*numbers):
             code.append(numbers.count(n))
     code.sort(reverse=True)
     return '_'.join([str(_) for _ in code])
+
+
+def lined_up(nb_tuple):
+    """
+    Return a list of pairs (nb of times number shows up, number).
+
+    :Examples:
+
+    >>> lined_up((3, 4, 4))
+    [(1, 3), (2, 4)]
+    >>> lined_up((2, 5, 5, 5, 8, 8))
+    [(1, 2), (2, 8), (3, 5)]
+    """
+    return sorted(list(set([(nb_tuple.count(n), n) for n in nb_tuple])))

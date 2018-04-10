@@ -29,7 +29,7 @@ from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import post_process
-from mathmaker.lib.tools import lined_up
+from mathmaker.lib.tools.distcode import lined_up
 
 
 class sub_object(component.structure):

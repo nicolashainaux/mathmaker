@@ -38,7 +38,7 @@ from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.constants.numeration import DIGITSPLACES
 from mathmaker.lib.constants.numeration import DIGITSPLACES_CONFUSING
-from mathmaker.lib.tools import lined_up
+from mathmaker.lib.tools.distcode import lined_up
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
 
 FETCH_TABLE_NAME = re.compile(r'CREATE TABLE (\w+)')

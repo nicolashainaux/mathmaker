@@ -32,8 +32,8 @@ from mathmakerlib.calculus.unit import COMMON_LENGTH_UNITS
 from mathmaker.lib.core.base_calculus import Division
 from mathmaker.lib import shared
 from mathmaker.lib.constants import BOOLEAN
-from mathmaker.lib.tools import rotate, lined_up, fix_math_style2_fontsize
-from mathmaker.lib.tools.distcode import distcode
+from mathmaker.lib.tools import rotate, fix_math_style2_fontsize
+from mathmaker.lib.tools.distcode import distcode, lined_up
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.tools.generators.shapes import ShapeGenerator
 from mathmaker.lib.tools.generators.anglessets import AnglesSetGenerator
