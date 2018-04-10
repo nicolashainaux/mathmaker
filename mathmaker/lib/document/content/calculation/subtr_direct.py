@@ -32,6 +32,7 @@ from mathmaker.lib.core.base_calculus import Sum
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import post_process
+from mathmaker.lib.tools.distcode import nndist
 
 
 class sub_object(component.structure):
@@ -110,7 +111,7 @@ class sub_object(component.structure):
                                                                  unit='cm'))})
             super().setup('angles_bunch', extra_deco=extra_deco,
                           extra_deco2=extra_deco2,
-                          labels=[(1, self.nb1), (1, self.nb2)],
+                          labels=nndist([self.nb1, self.nb2]),
                           subvariant_nb=options.get('subvariant_nb', None),
                           variant=options.get('variant', None),
                           subtr_shapes=True)
