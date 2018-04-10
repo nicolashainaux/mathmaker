@@ -33,7 +33,7 @@ from mathmaker.lib.core.base_calculus import Division
 from mathmaker.lib import shared
 from mathmaker.lib.constants import BOOLEAN
 from mathmaker.lib.tools import rotate, fix_math_style2_fontsize
-from mathmaker.lib.tools.distcode import distcode, lined_up
+from mathmaker.lib.tools.distcode import distcode, nndist
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.tools.generators.shapes import ShapeGenerator
 from mathmaker.lib.tools.generators.anglessets import AnglesSetGenerator
@@ -521,7 +521,7 @@ class structure(object):
         self.label_polygon_vertices = False
         # We'll browse the multiples in reversed order
         nb_to_use = polygon_data[-self.polygon_sides_nb:]
-        labels = lined_up(nb_to_use)
+        labels = nndist(nb_to_use)
         # Now, we have lengths stored in labels as, for example:
         # [(1, nb), (2, nb), (2, nb)]
         self._setup_numbers(nb=[lbl[1] for lbl in labels], shuffle=False)

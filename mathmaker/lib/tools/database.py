@@ -38,7 +38,7 @@ from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.constants.numeration import DIGITSPLACES
 from mathmaker.lib.constants.numeration import DIGITSPLACES_CONFUSING
-from mathmaker.lib.tools.distcode import lined_up
+from mathmaker.lib.tools.distcode import nndist
 from mathmaker.lib.tools.maths import coprime_generator, generate_decimal
 
 FETCH_TABLE_NAME = re.compile(r'CREATE TABLE (\w+)')
@@ -1869,7 +1869,7 @@ class mc_source(object):
             adj_qkw = preprocess_qkw(db_table(nb_source), qkw=all_kw)
             nb_result = mc_source().next(nb_source, qkw=adj_qkw)
             if all([isinstance(n, int) for n in nb_result]):
-                matching_pairs = lined_up(nb_result)
+                matching_pairs = nndist(nb_result)
                 for p in matching_pairs:
                     sp = sorted(p)
                     # We won't timestamp the (1, ...) pairs as it does not

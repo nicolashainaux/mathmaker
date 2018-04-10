@@ -29,7 +29,7 @@ from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import post_process
-from mathmaker.lib.tools.distcode import lined_up
+from mathmaker.lib.tools.distcode import nndist
 
 
 class sub_object(component.structure):
@@ -77,7 +77,7 @@ class sub_object(component.structure):
                                           thickness='ultra thick',
                                           color='BrickRed')}
             super().setup('angles_bunch', extra_deco=extra_deco,
-                          labels=lined_up(self.nb_list),
+                          labels=nndist(self.nb_list),
                           subvariant_nb=options.get('subvariant_nb', None),
                           variant=options.get('variant', None))
             self.hint = r'\si{\degree}'
