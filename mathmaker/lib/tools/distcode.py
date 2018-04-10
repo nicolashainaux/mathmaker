@@ -47,6 +47,22 @@ def nndist(nn_tuple):
     return sorted(list(set([(nn_tuple.count(n), n) for n in nn_tuple])))
 
 
+def expanddist(nndist):
+    """
+    Perform the opposite of nndist().
+
+    :Examples:
+
+    >>> expanddist([(1, 3), (2, 4)])
+    (3, 4, 4)
+    >>> expanddist([(1, 2), (2, 8), (3, 5)])
+    (2, 5, 5, 5, 8, 8)
+    """
+    return sorted([item
+                   for sublist in [[pair[1]] * pair[0] for pair in nndist]
+                   for item in sublist])
+
+
 def matchdist(nndist, distcode):
     """
     Tell whether the natural numbers' distribution matches the distcode.
