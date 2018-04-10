@@ -22,7 +22,7 @@
 
 from abc import ABCMeta, abstractmethod
 
-# from .anglesset
+from mathmaker.lib.tools.distcode import matchdist
 
 
 class Generator(object, metaclass=ABCMeta):
@@ -46,12 +46,9 @@ class Generator(object, metaclass=ABCMeta):
                     for t in labels]):
             raise TypeError('All elements of the labels list must be tuples '
                             'of two elements, first being an int.')
-        distcode_nb = [int(_) for _ in distcode.strip('r').split('_')]
-        labels_nb = [t[0] for t in labels]
-        if sorted(distcode_nb) != sorted(labels_nb):
-            raise ValueError('The given labels list does not match the '
-                             'distcode: labels\' numbers {} != {}'
-                             .format(labels_nb, distcode_nb))
+        if not matchdist(labels, distcode):
+            raise ValueError('The given labels list: {}\ndoes not match the '
+                             'distcode: {}\n'.format(labels, distcode))
 
     @abstractmethod
     def generate(self, codename=None, variant=None, labels=None, name=None,

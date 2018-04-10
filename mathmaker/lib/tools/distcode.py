@@ -45,3 +45,24 @@ def nndist(nn_tuple):
     [(1, 2), (2, 8), (3, 5)]
     """
     return sorted(list(set([(nn_tuple.count(n), n) for n in nn_tuple])))
+
+
+def matchdist(nndist, distcode):
+    """
+    Tell whether the natural numbers' distribution matches the distcode.
+
+    Take care, the order of numbers in the distribution is the contrary of the
+    one in the distcode.
+
+    :Examples:
+
+    >>> matchdist([(1, 3), (2, 4)], '2_1')
+    True
+    >>> matchdist([(1, 2), (2, 8), (3, 5)], '3_2_1')
+    True
+    >>> matchdist([(2, 2), (2, 6), (3, 4)], '3_3_2')
+    False
+    """
+    distcode_nb = [int(n) for n in distcode.strip('r').split('_')]
+    nndist_nb = [pair[0] for pair in nndist]
+    return sorted(distcode_nb) == sorted(nndist_nb)
