@@ -30,7 +30,7 @@ def distcode(*numbers):
             already_found.append(n)
             code.append(numbers.count(n))
     code.sort(reverse=True)
-    return '_'.join([str(_) for _ in code])
+    return '_'.join([str(c) for c in code])
 
 
 def nndist(nn_tuple):
@@ -54,9 +54,9 @@ def expanddist(nndist):
     :Examples:
 
     >>> expanddist([(1, 3), (2, 4)])
-    (3, 4, 4)
+    [3, 4, 4]
     >>> expanddist([(1, 2), (2, 8), (3, 5)])
-    (2, 5, 5, 5, 8, 8)
+    [2, 5, 5, 5, 8, 8]
     """
     return sorted([item
                    for sublist in [[pair[1]] * pair[0] for pair in nndist]

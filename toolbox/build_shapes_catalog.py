@@ -32,7 +32,7 @@ from mathmakerlib.LaTeX import KNOWN_AMSSYMB_SYMBOLS
 from mathmaker import settings
 from mathmaker import __software_name__
 from mathmaker.lib import shared
-from mathmaker.lib.tools.shapes import ShapeGenerator
+from mathmaker.lib.tools.generators.shapes import ShapeGenerator
 from mathmaker.lib.constants import LOCALE_US
 
 SHAPES_CATALOG_PATH = './shapes_catalog.tex'
