@@ -25,8 +25,8 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_05_yellow2_numeric_expansions_factorizations():
+def test_05_yellow2_numeric_expansions():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '05_yellow2',
-                                       'numeric_expansions_factorizations')))
+                                       'numeric_expansions')))
