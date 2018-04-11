@@ -1,0 +1,10 @@
+[MESSAGES CONTROL]
+disable=all
+
+#enable=missing-docstring,
+#       empty-docstring
+
+[BASIC]
+# Regular expression matching correct variable names. Overrides variable-
+# naming-style
+variable-rgx=[a-z0-9_]{1,30}
