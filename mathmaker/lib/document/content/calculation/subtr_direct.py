@@ -111,7 +111,7 @@ class sub_object(component.structure):
                                                                  unit='cm'))})
             super().setup('angles_bunch', extra_deco=extra_deco,
                           extra_deco2=extra_deco2,
-                          labels=nndist([self.nb1, self.nb2]),
+                          labels=nndist([self.nb1, self.nb2])[::-1],
                           subvariant_nb=options.get('subvariant_nb', None),
                           variant=options.get('variant', None),
                           subtr_shapes=True)
