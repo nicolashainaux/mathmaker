@@ -36,12 +36,16 @@ def test_ShapeGenerator_errors(SG):
     assert str(excinfo.value) == 'keyword argument label_vertices must be '\
         'set to True or False'
     with pytest.raises(TypeError) as excinfo:
-        SG.generate(label_vertices=False, codename=1)
+        SG.check_args(codename_prefix=1)
     assert str(excinfo.value) == 'codename must be a str, found <class '\
+        '\'int\'> instead.'
+    with pytest.raises(TypeError) as excinfo:
+        SG.check_args(codename_prefix='1', distcode=1)
+    assert str(excinfo.value) == 'distcode must be a str, found <class '\
         '\'int\'> instead.'
     with pytest.raises(ValueError) as excinfo:
         SG.generate(label_vertices=False, codename='undefined')
-    assert str(excinfo.value) == 'Cannot generate \'undefined\'.'
+    assert str(excinfo.value) == 'Cannot generate \'undefined_\'.'
     with pytest.raises(TypeError) as excinfo:
         SG.generate(label_vertices=False, codename='triangle_1_1_1',
                     labels=(2, 3))
@@ -70,8 +74,8 @@ def test_ShapeGenerator_errors(SG):
     with pytest.raises(ValueError) as excinfo:
         SG.generate(label_vertices=False, codename='triangle_1_1_1',
                     labels=[(2, 4), (1, 5)])
-    assert str(excinfo.value) == 'The given labels list does not match the '\
-        'codename: labels\' numbers [2, 1] != [1, 1, 1]'
+    assert str(excinfo.value) == 'The given labels list: [(2, 4), (1, 5)]\n'\
+        'does not match the distcode: 1_1_1\n'
 
 
 def test_ShapeGenerator(SG):

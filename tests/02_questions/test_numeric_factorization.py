@@ -29,34 +29,34 @@ def test_numeric_factorization():
     """Check all normal cases are correctly handled."""
     o = numeric_factorization.sub_object(build_data=[2, 7], do_shuffle=False)
     assert o.q() in [
-        '$ 7 \\times 0.1 + 7 \\times 1.9 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 0.2 + 7 \\times 1.8 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 0.3 + 7 \\times 1.7 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 0.4 + 7 \\times 1.6 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 0.5 + 7 \\times 1.5 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 0.6 + 7 \\times 1.4 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 0.7 + 7 \\times 1.3 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 0.8 + 7 \\times 1.2 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 0.9 + 7 \\times 1.1 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.1 + 7 \\times 0.9 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.2 + 7 \\times 0.8 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.3 + 7 \\times 0.7 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.4 + 7 \\times 0.6 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.5 + 7 \\times 0.5 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.6 + 7 \\times 0.4 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.7 + 7 \\times 0.3 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.8 + 7 \\times 0.2 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.9 + 7 \\times 0.1 $ = \\textcolor{BrickRed}{?}'
+        r'$ 7 \times 0.1 + 7 \times 1.9 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 0.2 + 7 \times 1.8 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 0.3 + 7 \times 1.7 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 0.4 + 7 \times 1.6 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 0.5 + 7 \times 1.5 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 0.6 + 7 \times 1.4 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 0.7 + 7 \times 1.3 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 0.8 + 7 \times 1.2 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 0.9 + 7 \times 1.1 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.1 + 7 \times 0.9 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.2 + 7 \times 0.8 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.3 + 7 \times 0.7 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.4 + 7 \times 0.6 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.5 + 7 \times 0.5 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.6 + 7 \times 0.4 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.7 + 7 \times 0.3 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.8 + 7 \times 0.2 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.9 + 7 \times 0.1 $ = \textcolor{BrickRed}{\text{?}}'
     ]
     assert o.a() == '14'
     assert o.js_a() == ['14']
     o = numeric_factorization.sub_object(build_data=[2, 7], do_shuffle=False,
                                          split_as='quarters')
     assert o.q() in [
-        '$ 7 \\times 0.25 + 7 \\times 1.75 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 0.75 + 7 \\times 1.25 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.25 + 7 \\times 0.75 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.75 + 7 \\times 0.25 $ = \\textcolor{BrickRed}{?}'
+        r'$ 7 \times 0.25 + 7 \times 1.75 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 0.75 + 7 \times 1.25 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.25 + 7 \times 0.75 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.75 + 7 \times 0.25 $ = \textcolor{BrickRed}{\text{?}}'
     ]
     assert o.a() == '14'
     assert o.js_a() == ['14']
@@ -65,12 +65,12 @@ def test_numeric_factorization():
     assert o.js_a() == ['14']
     assert o.nb1 * o.nb2 + o.nb3 * o.nb4 == 14
     assert o.q() in [
-        '$ 7 \\times 0.5 + 7 \\times 1.5 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 0.5 + 1.5 \\times 7 $ = \\textcolor{BrickRed}{?}',
-        '$ 0.5 \\times 7 + 7 \\times 1.5 $ = \\textcolor{BrickRed}{?}',
-        '$ 0.5 \\times 7 + 1.5 \\times 7 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.5 + 7 \\times 0.5 $ = \\textcolor{BrickRed}{?}',
-        '$ 7 \\times 1.5 + 0.5 \\times 7 $ = \\textcolor{BrickRed}{?}',
-        '$ 1.5 \\times 7 + 7 \\times 0.5 $ = \\textcolor{BrickRed}{?}',
-        '$ 1.5 \\times 7 + 0.5 \\times 7 $ = \\textcolor{BrickRed}{?}',
+        r'$ 7 \times 0.5 + 7 \times 1.5 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 0.5 + 1.5 \times 7 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 0.5 \times 7 + 7 \times 1.5 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 0.5 \times 7 + 1.5 \times 7 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.5 + 7 \times 0.5 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 7 \times 1.5 + 0.5 \times 7 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 1.5 \times 7 + 7 \times 0.5 $ = \textcolor{BrickRed}{\text{?}}',
+        r'$ 1.5 \times 7 + 0.5 \times 7 $ = \textcolor{BrickRed}{\text{?}}',
     ]
