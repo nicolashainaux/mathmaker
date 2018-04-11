@@ -33,6 +33,9 @@ from mathmakerlib.calculus.unit import CURRENCIES_DICT
 from mathmaker import settings
 from mathmaker.lib import shared
 
+PROTECTED_LATEX_KEYWORDS = ['multicols', 'multicols*', 'tabular',
+                            'tikzpicture', '\centering', 'll', 'newline']
+
 
 def wrap(word: str, braces='{}', o_str=None, e_str=None) -> str:
     """
@@ -485,7 +488,8 @@ def extract_formatting_tags_from(s: str):
 
     :param s: the sentence where to look for {tags}.
     """
-    return re.findall(r'{(\w+)}', s)
+    return [i for i in re.findall(r'{(\w+)}', s)
+            if i not in PROTECTED_LATEX_KEYWORDS and not i.isdigit()]
 
 
 def wrap_latex_keywords(s: str) -> str:
@@ -495,8 +499,7 @@ def wrap_latex_keywords(s: str) -> str:
     # First, we replace the {numbers} by {{numbers}}
     p = re.compile(r'{(\d{1,}\.?\,?\d*(?:pt|em|cm)*)}')
     s = p.sub(r'{{\1}}', s)
-    for w in ['multicols', 'multicols*', 'tabular', 'tikzpicture',
-              '\centering', 'll']:
+    for w in PROTECTED_LATEX_KEYWORDS:
         s = s.replace('{' + w + '}', '{{' + w + '}}')
     return s
 
