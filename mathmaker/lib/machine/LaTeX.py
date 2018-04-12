@@ -107,7 +107,7 @@ class LaTeX(Structure.Structure):
         if 'amssymb' in required_pkg:
             amssymb = str(UsePackage('amssymb'))
         amsmath = ''
-        if required.package['amsmath']:
+        if required.package['amsmath'] or 'amsmath' in required_pkg:
             amsmath = str(UsePackage('amsmath'))
         eurosym = str(UsePackage('eurosym')) \
             if required.package['eurosym'] else ''

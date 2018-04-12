@@ -25,6 +25,7 @@ import random
 import warnings
 
 from mathmakerlib.LaTeX import KNOWN_AMSSYMB_SYMBOLS, KNOWN_TEXTCOMP_SYMBOLS
+from mathmakerlib.LaTeX import KNOWN_AMSMATH_SYMBOLS
 
 from mathmaker.lib import shared
 from mathmaker.lib.constants import SLIDE_CONTENT_SEP
@@ -282,6 +283,8 @@ class Sheet(object):
             pkg = []
             if any([s in result for s in KNOWN_AMSSYMB_SYMBOLS]):
                 pkg.append('amssymb')
+            if any([s in result for s in KNOWN_AMSMATH_SYMBOLS]):
+                pkg.append('amsmath')
             if any([s in result for s in KNOWN_TEXTCOMP_SYMBOLS]):
                 pkg.append('textcomp')
             result = shared.machine.write_preamble(variant=self.layout_type,
