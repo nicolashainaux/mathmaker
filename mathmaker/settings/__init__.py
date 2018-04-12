@@ -113,6 +113,7 @@ def init():
     global projectdir
     global outputdir
     global toolsdir
+    global testsdir
     global frameworksdir
     global index_path
     global db_index_path
@@ -150,6 +151,7 @@ def init():
     __l1 = len(__process_name)
     __l2 = len(__abspath)
     rootdir = __abspath[:__l2 - __l1][:-(len(settings_dirname))]
+    testsdir = os.path.join(Path(rootdir).parent, 'tests')
     localedir = rootdir + "locale/"
     libdir = rootdir + "lib/"
     datadir = rootdir + "data/"

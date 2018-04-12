@@ -28,6 +28,7 @@ import copy
 import random
 import warnings
 from glob import glob
+from pathlib import Path
 from collections import OrderedDict
 from operator import itemgetter
 
@@ -63,6 +64,52 @@ NB_SOURCE = re.compile(r'([' + _QCHARS + r'\-]+)' + _FETCH_NB)
 FETCH_NB = re.compile(_FETCH_NB + r'$')
 SUB_NB = re.compile(r'([' + _LINE + r']+)' + _FETCH_NB + r'$')
 CURLY_BRACES_CONTENT = re.compile(r'{([' + _CHARS + r']+)}')
+
+TESTFILE_TEMPLATE = """# -*- coding: utf-8 -*-
+
+# Mathmaker creates automatically maths exercises sheets
+# with their answers
+# Copyright 2006-2018 Nicolas Hainaux <nh.techn@gmail.com>
+
+# This file is part of Mathmaker.
+
+# Mathmaker is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# any later version.
+
+# Mathmaker is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Mathmaker; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+
+from mathmaker.lib import shared
+from mathmaker.lib.document.frames import Sheet
+
+
+def test_{sheet_name}():
+    \"""Check this sheet is generated without any error.\"""
+    shared.machine.write_out(str(Sheet('{theme}',
+                                       '{subtheme}',
+                                       '{sheet_name}')),
+                             pdf_output=True)
+"""
+
+MENTAL_CALCULATION_TESTFILE_TEMPLATE_ADDENDUM = """
+
+def test_{sheet_name}_embedding_js():
+    \"""Check this sheet is generated without any error.\"""
+    shared.machine.write_out(str(Sheet('{theme}',
+                                       '{subtheme}',
+                                       '{sheet_name}',
+                                       enable_js_form=True)),
+                             pdf_output=True)
+"""
 
 
 def read_index():
@@ -104,6 +151,27 @@ def build_index():
                 for sheet_name in folder:
                     directive = '_'.join([subtheme, sheet_name])
                     index[directive] = (theme, subtheme, sheet_name)
+                    # Automatic add possibly missing sheet integration test
+                    sheet_test_dir = Path(os.path.join(settings.testsdir,
+                                                       'integration',
+                                                       theme,
+                                                       subtheme))
+                    file_name = subtheme + '_' + sheet_name
+                    sheet_file = Path(os.path.join(sheet_test_dir,
+                                                   'test_{}.py'
+                                                   .format(file_name)))
+                    if not sheet_file.is_file():
+                        sheet_test_dir.mkdir(parents=True, exist_ok=True)
+                        template = TESTFILE_TEMPLATE
+                        if (theme == 'mental_calculation'
+                            and not sheet_name.startswith('W')):
+                            template += \
+                                MENTAL_CALCULATION_TESTFILE_TEMPLATE_ADDENDUM
+                        with open(sheet_file, 'w') as f:
+                            f.write(template.format(theme=theme,
+                                                    subtheme=subtheme,
+                                                    sheet_name=sheet_name))
+
     with open(settings.index_path, 'w') as f:
         json.dump(index, f, indent=4)
         f.write('\n')
