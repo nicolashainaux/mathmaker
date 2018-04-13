@@ -1002,6 +1002,7 @@ class Equation(ComposedCalculable):
         if 'underline_result' in options and options['underline_result']:
             uline1 = MARKUP['open_underline']
             uline2 = MARKUP['close_underline']
+            required.package['ulem'] = True
 
         eq_aux = None
         if (isinstance(self, Equation)
