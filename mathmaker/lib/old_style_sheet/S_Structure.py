@@ -147,7 +147,7 @@ class S_Structure(object, metaclass=ABCMeta):
     def __str__(self):
         result = ""
         if self.layout_type in ['default', 'equations']:
-            result += shared.machine.write_document_header()
+            result += shared.machine.write_preamble()
             result += shared.machine.write_document_begins()
             result += self.sheet_header_to_str()
             result += self.sheet_title_to_str()
@@ -159,7 +159,7 @@ class S_Structure(object, metaclass=ABCMeta):
             result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'short_test':
-            result += shared.machine.write_document_header()
+            result += shared.machine.write_preamble()
             result += shared.machine.write_document_begins()
 
             n = 1
@@ -196,7 +196,7 @@ class S_Structure(object, metaclass=ABCMeta):
             result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'mini_test':
-            result += shared.machine.write_document_header()
+            result += shared.machine.write_preamble()
             result += shared.machine.write_document_begins()
 
             for i in range(3):
@@ -240,7 +240,7 @@ class S_Structure(object, metaclass=ABCMeta):
             result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'mini_training':
-            result += shared.machine.write_document_header()
+            result += shared.machine.write_preamble()
             result += shared.machine.write_document_begins()
 
             for i in range(6):
@@ -255,16 +255,7 @@ class S_Structure(object, metaclass=ABCMeta):
             result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'mental':
-            # if self.slideshow:
-            #    result += shared.machine.write_document_header(slideshow=True)
-            #    result += shared.machine.write_document_begins()
-            #    result += self.sheet_header_to_str()
-            #    result += self.sheet_title_to_str()
-            #    result += self.sheet_text_to_str()
-            #    result += self.texts_to_str('exc', 0)
-            #    result += shared.machine.write_document_ends()
-            # else:
-            result += shared.machine.write_document_header()
+            result += shared.machine.write_preamble()
             result += shared.machine.write_document_begins()
             result += self.sheet_header_to_str()
             result += self.sheet_title_to_str()
