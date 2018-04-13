@@ -1336,16 +1336,19 @@ class sub_object(component.structure):
                 self.nb3 += random.choice([i for i in range(-4, 5) if i != 0])
                 remove_fracdigits_from(self.nb1, to=[self.nb3])
         c, d = self.nb2, self.nb3
+        op = b_signs[self.variant]
         if self.variant in [172, 173, 176, 177, 180, 182, 184, 186]:
-            a, b = Number(self.nb1) \
-                .split(operation=b_signs[self.variant],
-                       dig=self.adjust_depth(self.allow_extra_digits,
-                                             n=self.nb1, N=c, P=d))
+            nb_to_split = self.nb1
+            dig_level = self.adjust_depth(self.allow_extra_digits,
+                                          n=self.nb1, N=c, P=d)
         else:
-            a, b = Number(self.nb1 * self.nb2) \
-                .split(operation=b_signs[self.variant],
-                       dig=self.adjust_depth(self.allow_extra_digits,
-                                             n=self.nb1 * self.nb2, N=c, P=d))
+            nb_to_split = self.nb1 * self.nb2
+            dig_level = self.adjust_depth(self.allow_extra_digits,
+                                          n=self.nb1 * self.nb2, N=c, P=d)
+        try:
+            a, b = Number(nb_to_split).split(operation=op, dig=dig_level)
+        except IndexError as excinfo:
+            a, b = Number(nb_to_split).split(operation=op, dig=dig_level + 1)
         if self.subvariant == 'only_positive':
             if ((self.variant in [173, 177] and self.nb1 * self.nb2 < self.nb3)
                 or (self.variant in [175, 179] and self.nb1 < self.nb3)
