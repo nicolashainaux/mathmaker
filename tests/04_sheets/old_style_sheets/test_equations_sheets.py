@@ -26,24 +26,29 @@ from mathmaker.lib.old_style_sheet import AVAILABLE
 
 def test_basic():
     """Checks if 'equations-basic' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['equations-basic'][0]()))
+    shared.machine.write_out(str(AVAILABLE['equations-basic'][0]()),
+                             pdf_output=True)
 
 
 def test_classic():
     """Checks if 'equations-classic' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['equations-classic'][0]()))
+    shared.machine.write_out(str(AVAILABLE['equations-classic'][0]()),
+                             pdf_output=True)
 
 
 def test_harder():
     """Checks if 'equations-harder' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['equations-harder'][0]()))
+    shared.machine.write_out(str(AVAILABLE['equations-harder'][0]()),
+                             pdf_output=True)
 
 
 def test_test():
     """Checks if 'equations-test' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['equations-test'][0]()))
+    shared.machine.write_out(str(AVAILABLE['equations-test'][0]()),
+                             pdf_output=True)
 
 
 def test_short_test():
     """Checks if 'equations-short-test' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['equations-short-test'][0]()))
+    shared.machine.write_out(str(AVAILABLE['equations-short-test'][0]()),
+                             pdf_output=True)

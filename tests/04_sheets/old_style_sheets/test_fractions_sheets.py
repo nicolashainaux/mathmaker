@@ -26,7 +26,8 @@ from mathmaker.lib.old_style_sheet import AVAILABLE
 
 def test_simplification():
     """Checks if 'fraction-simplification' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['fraction-simplification'][0]()))
+    shared.machine.write_out(str(AVAILABLE['fraction-simplification'][0]()),
+                             pdf_output=True)
 
 
 def test_product_and_quotient():
@@ -34,9 +35,10 @@ def test_product_and_quotient():
     Checks if 'fractions-product-and-quotient' is generated without any error.
     """
     shared.machine.write_out(
-        str(AVAILABLE['fractions-product-and-quotient'][0]()))
+        str(AVAILABLE['fractions-product-and-quotient'][0]()), pdf_output=True)
 
 
 def test_sum():
     """Checks if 'fractions-sum' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['fractions-sum'][0]()))
+    shared.machine.write_out(str(AVAILABLE['fractions-sum'][0]()),
+                             pdf_output=True)

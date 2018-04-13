@@ -34,7 +34,8 @@ def test_intercept_theorem_triangles():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['intercept_theorem_triangles'])))
+                  filename=XML_SHEETS['intercept_theorem_triangles'])),
+        pdf_output=True)
 
 
 def test_intercept_theorem_triangles_alt1():
@@ -43,7 +44,8 @@ def test_intercept_theorem_triangles_alt1():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['intercept_theorem_triangles_alt1'])))
+                  filename=XML_SHEETS['intercept_theorem_triangles_alt1'])),
+        pdf_output=True)
 
 
 def test_intercept_theorem_triangles_alt2():
@@ -52,7 +54,8 @@ def test_intercept_theorem_triangles_alt2():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['intercept_theorem_triangles_alt2'])))
+                  filename=XML_SHEETS['intercept_theorem_triangles_alt2'])),
+        pdf_output=True)
 
 
 def test_intercept_theorem_triangles_formulae():
@@ -62,7 +65,8 @@ def test_intercept_theorem_triangles_formulae():
     shared.machine.write_out(
         str(Sheet('', '', '',
                   filename=XML_SHEETS['intercept_theorem_triangles_'
-                                      'formulae'])))
+                                      'formulae'])),
+        pdf_output=True)
 
 
 def test_intercept_theorem_butterflies():
@@ -71,7 +75,8 @@ def test_intercept_theorem_butterflies():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['intercept_theorem_butterflies'])))
+                  filename=XML_SHEETS['intercept_theorem_butterflies'])),
+        pdf_output=True)
 
 
 def test_intercept_theorem_butterflies_alt1():
@@ -80,7 +85,8 @@ def test_intercept_theorem_butterflies_alt1():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['intercept_theorem_butterflies_alt1'])))
+                  filename=XML_SHEETS['intercept_theorem_butterflies_alt1'])),
+        pdf_output=True)
 
 
 def test_intercept_theorem_butterflies_alt2():
@@ -89,7 +95,8 @@ def test_intercept_theorem_butterflies_alt2():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['intercept_theorem_butterflies_alt2'])))
+                  filename=XML_SHEETS['intercept_theorem_butterflies_alt2'])),
+        pdf_output=True)
 
 
 def test_intercept_theorem_butterflies_formulae():
@@ -99,7 +106,8 @@ def test_intercept_theorem_butterflies_formulae():
     shared.machine.write_out(
         str(Sheet('', '', '',
                   filename=XML_SHEETS['intercept_theorem_butterflies_'
-                                      'formulae'])))
+                                      'formulae'])),
+        pdf_output=True)
 
 
 def test_intercept_theorem_converse():
@@ -108,7 +116,8 @@ def test_intercept_theorem_converse():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['intercept_theorem_converse'])))
+                  filename=XML_SHEETS['intercept_theorem_converse'])),
+        pdf_output=True)
 
 
 def test_intercept_theorem_converse_alt2():
@@ -117,7 +126,8 @@ def test_intercept_theorem_converse_alt2():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['intercept_theorem_converse_alt2'])))
+                  filename=XML_SHEETS['intercept_theorem_converse_alt2'])),
+        pdf_output=True)
 
 
 def test_trigonometry_cos_length():
@@ -126,7 +136,8 @@ def test_trigonometry_cos_length():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_cos_length'])))
+                  filename=XML_SHEETS['trigonometry_cos_length'])),
+        pdf_output=True)
 
 
 def test_trigonometry_sin_length():
@@ -135,7 +146,8 @@ def test_trigonometry_sin_length():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_sin_length'])))
+                  filename=XML_SHEETS['trigonometry_sin_length'])),
+        pdf_output=True)
 
 
 def test_trigonometry_tan_length():
@@ -144,7 +156,8 @@ def test_trigonometry_tan_length():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_tan_length'])))
+                  filename=XML_SHEETS['trigonometry_tan_length'])),
+        pdf_output=True)
 
 
 def test_trigonometry_calculate_length():
@@ -153,7 +166,8 @@ def test_trigonometry_calculate_length():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_calculate_length'])))
+                  filename=XML_SHEETS['trigonometry_calculate_length'])),
+        pdf_output=True)
 
 
 def test_trigonometry_cos_angle():
@@ -162,7 +176,8 @@ def test_trigonometry_cos_angle():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_cos_angle'])))
+                  filename=XML_SHEETS['trigonometry_cos_angle'])),
+        pdf_output=True)
 
 
 def test_trigonometry_sin_angle():
@@ -171,7 +186,8 @@ def test_trigonometry_sin_angle():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_sin_angle'])))
+                  filename=XML_SHEETS['trigonometry_sin_angle'])),
+        pdf_output=True)
 
 
 def test_trigonometry_tan_angle():
@@ -180,7 +196,8 @@ def test_trigonometry_tan_angle():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_tan_angle'])))
+                  filename=XML_SHEETS['trigonometry_tan_angle'])),
+        pdf_output=True)
 
 
 def test_trigonometry_calculate_angle():
@@ -189,7 +206,8 @@ def test_trigonometry_calculate_angle():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_calculate_angle'])))
+                  filename=XML_SHEETS['trigonometry_calculate_angle'])),
+        pdf_output=True)
 
 
 def test_trigonometry_cos_formulae():
@@ -198,7 +216,8 @@ def test_trigonometry_cos_formulae():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_cos_formulae'])))
+                  filename=XML_SHEETS['trigonometry_cos_formulae'])),
+        pdf_output=True)
 
 
 def test_trigonometry_sin_formulae():
@@ -207,7 +226,8 @@ def test_trigonometry_sin_formulae():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_sin_formulae'])))
+                  filename=XML_SHEETS['trigonometry_sin_formulae'])),
+        pdf_output=True)
 
 
 def test_trigonometry_tan_formulae():
@@ -216,7 +236,8 @@ def test_trigonometry_tan_formulae():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_tan_formulae'])))
+                  filename=XML_SHEETS['trigonometry_tan_formulae'])),
+        pdf_output=True)
 
 
 def test_trigonometry_formulae():
@@ -225,7 +246,8 @@ def test_trigonometry_formulae():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_formulae'])))
+                  filename=XML_SHEETS['trigonometry_formulae'])),
+        pdf_output=True)
 
 
 def test_trigonometry_vocabulary():
@@ -234,4 +256,5 @@ def test_trigonometry_vocabulary():
     """
     shared.machine.write_out(
         str(Sheet('', '', '',
-                  filename=XML_SHEETS['trigonometry_vocabulary'])))
+                  filename=XML_SHEETS['trigonometry_vocabulary'])),
+        pdf_output=True)
