@@ -22,6 +22,9 @@
 
 from abc import ABCMeta, abstractmethod
 
+from mathmakerlib.LaTeX import KNOWN_AMSSYMB_SYMBOLS, KNOWN_TEXTCOMP_SYMBOLS
+from mathmakerlib.LaTeX import KNOWN_AMSMATH_SYMBOLS
+
 from mathmaker.lib import shared
 
 
@@ -147,7 +150,6 @@ class S_Structure(object, metaclass=ABCMeta):
     def __str__(self):
         result = ""
         if self.layout_type in ['default', 'equations']:
-            result += shared.machine.write_preamble()
             result += shared.machine.write_document_begins()
             result += self.sheet_header_to_str()
             result += self.sheet_title_to_str()
@@ -159,7 +161,6 @@ class S_Structure(object, metaclass=ABCMeta):
             result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'short_test':
-            result += shared.machine.write_preamble()
             result += shared.machine.write_document_begins()
 
             n = 1
@@ -196,7 +197,6 @@ class S_Structure(object, metaclass=ABCMeta):
             result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'mini_test':
-            result += shared.machine.write_preamble()
             result += shared.machine.write_document_begins()
 
             for i in range(3):
@@ -240,7 +240,6 @@ class S_Structure(object, metaclass=ABCMeta):
             result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'mini_training':
-            result += shared.machine.write_preamble()
             result += shared.machine.write_document_begins()
 
             for i in range(6):
@@ -255,7 +254,6 @@ class S_Structure(object, metaclass=ABCMeta):
             result += shared.machine.write_document_ends()
 
         elif self.layout_type == 'mental':
-            result += shared.machine.write_preamble()
             result += shared.machine.write_document_begins()
             result += self.sheet_header_to_str()
             result += self.sheet_title_to_str()
@@ -269,8 +267,16 @@ class S_Structure(object, metaclass=ABCMeta):
         else:
             raise ValueError('Got ' + self.layout_type + 'instead of std|'
                              'short_test|mini_test|equations|mental')
+        pkg = []
+        if any([s in result for s in KNOWN_AMSSYMB_SYMBOLS]):
+            pkg.append('amssymb')
+        if any([s in result for s in KNOWN_AMSMATH_SYMBOLS]):
+            pkg.append('amsmath')
+        if any([s in result for s in KNOWN_TEXTCOMP_SYMBOLS]):
+            pkg.append('textcomp')
 
-        return result
+        return shared.machine.write_preamble(variant=self.layout_type,
+                                             required_pkg=pkg) + result
 
     # --------------------------------------------------------------------------
     ##
