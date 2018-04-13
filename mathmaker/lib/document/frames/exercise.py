@@ -623,8 +623,7 @@ class Exercise(object):
                     not_in = last_draw[nb_source]
                     either = None  # default value, no effect
                     if (nb_source == 'polygons'
-                        or nb_source.startswith('int_quintuples')
-                        or nb_source.startswith('intquintuples')):
+                        or nb_source.startswith('int_quintuples')):
                         not_in = None
                     if q.options.get('force_table', None) is not None:
                         not_in = None

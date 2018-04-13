@@ -144,7 +144,7 @@ challenge: !!omap
                      numeric expansion -> mergedinttriples_3to9 (1)
                      order of_operations, subvariant=only_positive -> singleint_2to9;;intpairs_2to9, variant=116-163 (1)
                      multi hole -> int_irreducible_frac (1)
-                     addi direct, context=angles -> intquintuples:20-30×20-30×20-30×20-60×90, code=2_2_1, orientation=0 (1)
+                     addi direct, context=angles -> nntriples:15-69×15-69×90, code=2_1, orientation=0 (1)
                      divi euclidean -> table_15 (1)
                      percent direct -> 10%of..., context=simple_unit (1)
                      divi direct -> intpairs_4to4×12to24, order=divisor,quotient (1)
