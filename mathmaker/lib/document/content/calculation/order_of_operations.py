@@ -642,9 +642,10 @@ class sub_object(component.structure):
             self.watch('no negative; decimals distribution; '
                        'c isnt 1'
                        'a isnt 0; b isnt 0; c isnt 0; d isnt 0', a, b, c, d)
-        self.abcd = [a, b, c]
+        abcd = [a, b, c]
         if self.variant >= 8:
-            self.abcd.append(d)
+            abcd.append(d)
+        return abcd
 
     def _create_100_104(self):
         # (a + b)×c    (a - b)×c
@@ -657,6 +658,7 @@ class sub_object(component.structure):
         self.obj = Product([Sum([Item(a), Item(opn * b)]),
                             Item(c)])
         self.watch('no negative; c isnt 1; decimals distribution', a, b, c)
+        return [a, b, c]
 
     def _create_101_105(self):
         # (a + b)÷c     (a - b)÷c
@@ -670,6 +672,7 @@ class sub_object(component.structure):
         self.obj = Division(('+', Sum([a, opn * b]), c))
         self.watch('no negative; c isnt 1; c isnt deci; decimals distribution',
                    a, b, c)
+        return [a, b, c]
 
     def _create_102_106(self):
         # a×(b + c)     a×(b - c)
@@ -683,6 +686,7 @@ class sub_object(component.structure):
                             Sum([Item(b), Item(opn * c)])],
                            compact_display=False)
         self.watch('no negative; a isnt 1; decimals distribution', a, b, c)
+        return [a, b, c]
 
     def _create_103_107(self):
         # a÷(b + c)     a÷(b - c)
@@ -697,6 +701,7 @@ class sub_object(component.structure):
         d = b + opn * c
         self.watch('no negative; d isnt deci; decimals distribution',
                    a, b, c, d)
+        return [a, b, c]
 
     def _create_108_112(self):
         # a×(b ± c)×d
@@ -714,6 +719,7 @@ class sub_object(component.structure):
                            compact_display=False)
         self.watch('no negative; a isnt 1; d isnt 1; decimals distribution',
                    a, b, c, d)
+        return [a, b, c, d]
 
     def _create_109_113(self):
         # a×(b ± c)÷d
@@ -738,6 +744,7 @@ class sub_object(component.structure):
                                  d))
         self.watch('no negative; a isnt 1; d isnt 1; d isnt deci; '
                    'decimals distribution', a, b, c, d)
+        return [a, b, c, d]
 
     def _create_110_114(self):
         # a÷(b ± c)×d
@@ -755,6 +762,7 @@ class sub_object(component.structure):
         e = self.nb3
         self.watch('no negative; d isnt 1; e isnt deci; '
                    'decimals distribution', a, b, c, d, e)
+        return [a, b, c, d]
 
     def _create_111_115(self):
         # a÷(b ± c)÷d
@@ -772,6 +780,7 @@ class sub_object(component.structure):
         e = self.nb2
         self.watch('no negative; d isnt 1; d isnt deci; '
                    'e isnt deci; decimals distribution', a, b, c, d, e)
+        return [a, b, c, d]
 
     def _create_116to123(self):
         # 116: a×(b + c×d)         117: (b + c×d)×a
@@ -814,6 +823,7 @@ class sub_object(component.structure):
                                 a], compact_display=False)
         self.watch('no negative; decimals distribution; a isnt 1; '
                    'c isnt 1; d isnt 1; b isnt 0', a, b, c, d)
+        return [a, b, c, d]
 
     def _create_124to131(self):
         # 124: a×(b + c÷d)         125: (b + c÷d)×a
@@ -861,6 +871,7 @@ class sub_object(component.structure):
         # a×(b ± c÷d) and variants
         self.watch('no negative; decimals distribution; a isnt 1; d isnt 1; '
                    'd isnt deci; b isnt 0', a, b, c, d)
+        return [a, b, c, d]
 
     def _create_132_133(self):
         # a÷(b + c×d)           a÷(c×d + b)
@@ -921,6 +932,7 @@ class sub_object(component.structure):
         e = b + c * d
         self.watch('no negative; decimals distribution; c isnt 1; d isnt 1; '
                    'e isnt deci; e isnt 0; b isnt 0', a, b, c, d, e)
+        return [a, b, c, d]
 
     def _create_134_135(self):
         # a÷(b - c×d)         a÷(c×d - b)
@@ -966,6 +978,7 @@ class sub_object(component.structure):
         # a÷(b - c×d)
         self.watch('no negative; decimals distribution; c isnt 1; d isnt 1; '
                    'e isnt deci; b isnt 0; a isnt 0', a, b, c, d, e)
+        return [a, b, c, d]
 
     def _create_136_137(self):
         # (a×b + c)÷d       (c + a×b)÷d
@@ -1029,6 +1042,7 @@ class sub_object(component.structure):
         # (a×b + c)÷d       (c + a×b)÷d
         self.watch('no negative; decimals distribution; d isnt 1; '
                    'd isnt deci; a isnt 1; b isnt 1; c isnt 0', a, b, c, d)
+        return [a, b, c, d]
 
     def _create_138_139(self):
         # (a×b - c)÷d    (c - a×b)÷d
@@ -1059,6 +1073,7 @@ class sub_object(component.structure):
         # (a×b - c)÷d    (c - a×b)÷d
         self.watch('no negative; decimals distribution; d isnt deci; c isnt 0',
                    a, b, c, d)
+        return [a, b, c, d]
 
     def _create_140to147(self):
         # a ÷ (b + c÷d)   a ÷ (c÷d + b)
@@ -1179,6 +1194,7 @@ class sub_object(component.structure):
         else:
             watch_rules += '; b isnt 1; b isnt deci; c isnt 0'
             self.watch(watch_rules, a, b, c, d)
+        return [a, b, c, d]
 
     def _create_148to155(self):
         # 148: (a + b)×(c + d)          # 152: (a - b)×(c + d)
@@ -1223,6 +1239,7 @@ class sub_object(component.structure):
         if self.variant in [149, 151, 153, 155]:
             watch_rules += '; e isnt deci; e isnt 0'
         self.watch(watch_rules, a, b, c, d, e)
+        return [a, b, c, d]
 
     def _create_156to171(self):
         # 156: a + b×(c + d)            # 160: a - b×(c + d)
@@ -1311,6 +1328,7 @@ class sub_object(component.structure):
             elif self.variant in [165, 169]:
                 f = b * self.nb3 - a
             self.watch('no negative', f, letters='f')
+        return [a, b, c, d]
 
     def _create_172to187(self):
         # (a ± b)×c ± d;    (a ± b)÷c ± d
@@ -1388,6 +1406,7 @@ class sub_object(component.structure):
             elif self.variant in [185, 187]:
                 f = d - (a + nbs * b) / c
             self.watch('no negative', f, letters='f')
+        return [a, b, c, d]
 
     def __init__(self, build_data, **options):
         super().setup("minimal", **options)
@@ -1401,7 +1420,6 @@ class sub_object(component.structure):
         self.adjust_numbers()
         self.expression = None
         self.obj = None
-        self.abcd = None
 
         catalog = dict.fromkeys([i for i in range(24)],
                                 self._create_0to23)
@@ -1431,7 +1449,7 @@ class sub_object(component.structure):
                                      self._create_172to187))
 
         try:
-            catalog[self.variant]()
+            self.abcd = catalog[self.variant]()
         except KeyError:
             raise ValueError('Unknown variant identifier for '
                              'order_of_operations: {}'

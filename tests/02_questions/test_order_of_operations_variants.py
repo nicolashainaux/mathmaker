@@ -535,3 +535,36 @@ def test_variant23():
     assert any(not is_integer(x) for x in o.abcd)
     assert o.abcd[0] > o.abcd[1] / o.abcd[2]
     assert o.abcd[0] > o.abcd[1] / o.abcd[2] + o.abcd[3]
+
+
+def test_variant109():
+    """Check variant109 in problematic cases."""
+    # a×(b + c)÷d
+    o = order_of_operations.sub_object(
+        build_data=[7, 2, 5],
+        variant=109,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd[1] + o.abcd[2] == 10
+
+
+def test_variant113():
+    """Check variant113 in problematic cases."""
+    # a×(b - c)÷d
+    o = order_of_operations.sub_object(
+        build_data=[7, 2, 5],
+        variant=113,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd[1] - o.abcd[2] == 10
+
+
+def test_variant176():
+    """Check variant176 in problematic cases."""
+    # (a - b)×c + d
+    o = order_of_operations.sub_object(
+        build_data=[10, 3, 8],
+        variant=176,
+        subvariant='only_positive',
+        direct_test=True)
+    assert o.abcd[0] - o.abcd[1] == 10
