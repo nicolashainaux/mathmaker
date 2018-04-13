@@ -771,6 +771,7 @@ r"""{textcomp}{array}{graphicx}{epstopdf}{textpos}{specificpackages}
     ##
     #   @brief Draws a horizontal dashed line
     def insert_dashed_hline(self, **options):
+        required.package['tikz'] = True
         return "\\begin{tikzpicture}[x=2cm]" \
                + "\draw[black,line width=0.5pt,dashed] (0,0)--(9,0);" \
                + "\end{tikzpicture}" + "\n"
