@@ -180,6 +180,8 @@ class sub_object(component.structure):
         :type n: a number (int or Decimal)
         :rtype: int
         """
+        if Number(n).is_power_of_10() and depth == 0:
+            depth = 1
         # mad stands for maximum added depth
         if self.nb_variant.startswith('decimal'):
             mad = int(self.nb_variant[-1]) - Number(n).fracdigits_nb()
@@ -1345,10 +1347,7 @@ class sub_object(component.structure):
             nb_to_split = self.nb1 * self.nb2
             dig_level = self.adjust_depth(self.allow_extra_digits,
                                           n=self.nb1 * self.nb2, N=c, P=d)
-        try:
-            a, b = Number(nb_to_split).split(operation=op, dig=dig_level)
-        except IndexError as excinfo:
-            a, b = Number(nb_to_split).split(operation=op, dig=dig_level + 1)
+        a, b = Number(nb_to_split).split(operation=op, dig=dig_level)
         if self.subvariant == 'only_positive':
             if ((self.variant in [173, 177] and self.nb1 * self.nb2 < self.nb3)
                 or (self.variant in [175, 179] and self.nb1 < self.nb3)
