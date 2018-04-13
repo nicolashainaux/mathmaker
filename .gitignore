@@ -28,4 +28,5 @@ toolbox/stderr.log
 outfiles/
 *.mo
 __pycache__/
+.pytest_cache/
 .idea/
