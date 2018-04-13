@@ -208,7 +208,7 @@ class LaTeX(Structure.Structure):
             placeins = '\n' + '% {}\n{}\n\n'\
                 .format(_('To get a better control on floats positioning '
                           '(e.g. tabulars)'),
-                        str(UsePackage('multicol')))
+                        str(UsePackage('placeins')))
         # textcomp
         textcomp = ''
         if 'textcomp' in required_pkg:
