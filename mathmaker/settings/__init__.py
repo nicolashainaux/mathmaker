@@ -143,6 +143,9 @@ def init():
     global round_letters_in_math_expr
     global mm_executable
     global available_wNl
+    global luatex_version
+
+    luatex_version = ''
 
     settings_dirname = "settings/"
 

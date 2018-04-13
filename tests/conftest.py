@@ -30,7 +30,13 @@ from mathmaker import __software_name__
 from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.constants import LOCALE_US
+from mathmaker.lib.tools.ignition import check_dependencies
 settings.init()
+check_dependencies(euktoeps=settings.euktoeps,
+                   xmllint=settings.xmllint,
+                   lualatex=settings.lualatex,
+                   luaotfload_tool=settings
+                   .luaotfload_tool)
 settings.language = 'en'
 settings.locale = LOCALE_US
 locale.setlocale(locale.LC_ALL, settings.locale)

@@ -117,6 +117,7 @@ def check_dependency(name: str, goal: str, path_to: str,
         raise EnvironmentError(err_msg + add_msg)
 
     if name in ['lualatex']:
+        from mathmaker import settings
         try:
             grep_out, grep_err = subprocess.Popen(['grep', 'Version'],
                                                   stdin=the_call.stdout,
@@ -127,6 +128,7 @@ def check_dependency(name: str, goal: str, path_to: str,
                 v = temp.split(sep='-')[1]
             else:
                 v = temp
+            settings.luatex_version = str(v)
         except IndexError:
             warnings.warn(warning_msg(name=name, path_to=path_to,
                                       c_out=the_call_out, c_err=the_call_err,
