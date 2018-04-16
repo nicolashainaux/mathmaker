@@ -18,6 +18,5 @@ RUN mkdir -p /build/
 COPY requirements.txt setup.py mathmaker/ tests/ /build/
 
 ## Run pip
-RUN cd /build/
-RUN pip3 install --force -r requirements.txt --extra-index-url https://mirror.picosecond.org/pypi/simple
+RUN cd /build/ ; pip3 install --force -r requirements.txt --extra-index-url https://mirror.picosecond.org/pypi/simple
 RUN pip3 install coverage coveralls
