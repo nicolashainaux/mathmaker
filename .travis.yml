@@ -12,6 +12,7 @@ branches:
 before_install:
     - docker build -t nicolashainaux/mathmaker .
 script:
-    - docker run -d nicolashainaux/mathmaker /bin/bash -c "coverage run pytest -x -vv -r w /build/"
+    - docker run nicolashainaux/mathmaker /bin/bash -c "echo Started container"
+    - docker exec nicolashainaux/mathmaker /bin/bash -c "coverage run pytest -x -vv -r w /build/"
 after_success:
-    - docker run -d nicolashainaux/mathmaker /bin/bash -c "cd /build/ ; coveralls"
+    - docker exec nicolashainaux/mathmaker /bin/bash -c "cd /build/ ; coveralls"
