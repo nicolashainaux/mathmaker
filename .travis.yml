@@ -8,12 +8,10 @@ cache:
 # blocklist
 branches:
   except:
-  - broken
+    - broken
 before_install:
-  - docker build -t nicolashainaux/mathmaker .
-install:
-  - docker run -d nicolashainaux/mathmaker /bin/bash -c "cd /build/ ; pip3 install --force -r requirements.txt --extra-index-url https://mirror.picosecond.org/pypi/simple ; pip3 install coverage coveralls"
+    - docker build -t nicolashainaux/mathmaker .
 script:
-    - "coverage run --source=mathmaker setup.py test"
+    - docker run -d nicolashainaux/mathmaker /bin/bash -c "cd /build/ ; coverage run setup.py test"
 after_success:
-    coveralls
+    - docker run -d nicolashainaux/mathmaker /bin/bash -c "cd /build/ ; coveralls"
