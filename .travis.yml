@@ -1,6 +1,6 @@
 sudo: required
-dist: trusty
 language: python
+services: docker
 python:
     - "3.6"
 cache:
@@ -10,12 +10,9 @@ branches:
   except:
   - broken
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y eukleides libxml2-utils gettext texlive-latex-base texlive-luatex texlive-latex-recommended texlive-xetex texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
+  - docker build -t nicolashainaux/mathmaker .
 install:
-    - "pip3 install --force -r requirements.txt --extra-index-url https://mirror.picosecond.org/pypi/simple"
-    - "pip3 install coverage"
-    - "pip3 install coveralls"
+  - docker run -d nicolashainaux/mathmaker /bin/bash -c "cd /build/ ; pip3 install --force -r requirements.txt --extra-index-url https://mirror.picosecond.org/pypi/simple ; pip3 install coverage coveralls"
 script:
     - "coverage run --source=mathmaker setup.py test"
 after_success:
