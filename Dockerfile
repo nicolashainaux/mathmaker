@@ -9,7 +9,7 @@ RUN apt-get install -y python3.6 python3-pip eukleides libxml2-utils gettext \
     texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base \
     texlive-science texlive-pictures texlive-generic-recommended \
     texlive-fonts-recommended texlive-fonts-extra
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get clean
 
 ## Create a directory for required files
 RUN mkdir -p /build/
@@ -18,5 +18,5 @@ RUN mkdir -p /build/
 COPY requirements.txt setup.py mathmaker/ tests/ /build/
 
 ## Run pip
-RUN cd /build/ ; pip3 install --force -r requirements.txt --extra-index-url https://mirror.picosecond.org/pypi/simple
-RUN pip3 install coverage coveralls
+RUN pip3 install --force -r /build/requirements.txt --extra-index-url https://mirror.picosecond.org/pypi/simple
+RUN pip3 install pytest coverage coveralls
