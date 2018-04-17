@@ -1,0 +1,39 @@
+## DIRECTORIES
+
+#  top-level directories
+*.egg/
+*.egg-info/
+.cache/
+.idea/
+.pytest_cache/
+.tox/
+build/
+dist/
+outfiles/
+
+#  specific directories
+mathmaker/settings/dev
+docs/_build/
+tests/outfiles/
+
+## GARBAGE
+**/__pycache__/
+**/*.pyc
+**/*~
+**/*.mo
+
+## SPECIFIC FILES
+.coverage
+mathmaker/data/fonts_list.txt
+toolbox/shapes_catalog.aux
+toolbox/shapes_catalog.log
+toolbox/shapes_catalog.pdf
+toolbox/stderr.log
+
+#  runtime databases
+mathmaker/data/anglessets-*.db
+mathmaker/data/mathmaker.db
+mathmaker/data/mathmaker-*.db
+mathmaker/data/mathmakerd.db
+mathmaker/data/natural_nb_tuples-*.db
+mathmaker/data/shapes-*.db
