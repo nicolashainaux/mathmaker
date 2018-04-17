@@ -177,8 +177,9 @@ class Drawable(NamedObject, metaclass=ABCMeta):
             with open(euk_path, 'w') as f:
                 f.write(hc + self.into_euk())
             # todo: remove the options when they are corrected in euktoeps
-            subprocess.Popen([settings.euktoeps,
-                              '-i',
-                              r'\usepackage{eukleides,graphicx,textcomp}',
-                              euk_path],
-                             cwd=settings.outputdir)
+            p = subprocess.Popen([settings.euktoeps,
+                                  '-i',
+                                  r'\usepackage{eukleides,graphicx,textcomp}',
+                                  euk_path],
+                                 cwd=settings.outputdir)
+            p.wait()
