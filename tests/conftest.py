@@ -35,8 +35,7 @@ settings.init()
 check_dependencies(euktoeps=settings.euktoeps,
                    xmllint=settings.xmllint,
                    lualatex=settings.lualatex,
-                   luaotfload_tool=settings
-                   .luaotfload_tool)
+                   luaotfload_tool=settings.luaotfload_tool)
 settings.language = 'en'
 settings.locale = LOCALE_US
 locale.setlocale(locale.LC_ALL, settings.locale)
