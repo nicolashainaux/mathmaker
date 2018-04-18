@@ -17,7 +17,7 @@ install:
 script:
     - docker run --name affectionate_carson nicolashainaux/mathmaker /bin/bash -c "cd /build && coverage run --source=mathmaker setup.py test"
     - docker cp affectionate_carson:/build/.coverage .coverage
-    - docker cp affectionate_carson:/build/mathmaker /build/
+    - sudo docker cp affectionate_carson:/build/mathmaker /build/
 after_success:
     - coveralls
     # - coverage combine
