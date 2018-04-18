@@ -10,7 +10,7 @@ branches:
   except:
     - broken
 before_install:
-    - sudo mkdir /build/mathmaker/
+    - sudo mkdir -p /build/mathmaker/
     - docker build -t nicolashainaux/mathmaker .
 install:
     - "pip3 install coveralls"
