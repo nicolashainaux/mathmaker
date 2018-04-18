@@ -14,4 +14,4 @@ before_install:
 script:
     - docker run --name affectionate_carson zezollo/mathmaker:ubuntu17.10 /bin/bash -c "cd /build && coverage run --source=mathmaker setup.py test"
 after_success:
-    - docker start affectionate_carson && docker exec affectionate_carson /bin/bash -c "cd /build/ && coveralls"
+    - docker start -e CI="$CI" -e TRAVIS="$TRAVIS" -e CONTINUOUS_INTEGRATION="$CONTINUOUS_INTEGRATION" -e DEBIAN_FRONTEND="$DEBIAN_FRONTEND" -e USER="$USER" -e TRAVIS_BUILD_NUMBER="$TRAVIS_BUILD_NUMBER" -e TRAVIS_JOB_ID="$TRAVIS_JOB_ID" -e TRAVIS_BRANCH="$TRAVIS_BRANCH" affectionate_carson && docker exec affectionate_carson /bin/bash -c "cd /build/ && coveralls"
