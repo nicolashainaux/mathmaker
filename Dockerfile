@@ -1,6 +1,6 @@
 FROM ubuntu:17.10
 
-MAINTAINER nicolashainaux "https://github.com/nicolashainaux"
+LABEL maintainer="nh.techn@gmail.com"
 
 # Install third-party dependencies
 RUN apt-get -qq update
