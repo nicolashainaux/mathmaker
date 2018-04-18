@@ -10,7 +10,7 @@ branches:
   except:
     - broken
 before_install:
-    - docker pull zezollo/mathmaker:ubuntu17.10
+    - docker build -t nicolashainaux/mathmaker .
 script:
     - docker run --name affectionate_carson zezollo/mathmaker:ubuntu17.10 /bin/bash -c "cd /build && coverage run --source=mathmaker setup.py test"
 after_success:

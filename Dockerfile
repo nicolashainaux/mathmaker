@@ -8,7 +8,7 @@ RUN apt-get install -y python3.6 python3-pip eukleides libxml2-utils gettext \
     texlive-latex-base texlive-luatex texlive-latex-recommended texlive-xetex \
     texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base \
     texlive-science texlive-pictures texlive-generic-recommended \
-    texlive-fonts-recommended texlive-fonts-extra locales
+    texlive-fonts-recommended texlive-fonts-extra locales git
 RUN apt-get clean
 
 ## Create directories for required files
