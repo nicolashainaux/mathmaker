@@ -14,4 +14,4 @@ before_install:
 script:
     - docker run --name affectionate_carson zezollo/mathmaker:ubuntu17.10 /bin/bash -c "cd /build && coverage run --source=mathmaker setup.py test"
 after_success:
-    - docker exec affectionate_carson /bin/bash -c "cd /build/ && coveralls"
+    - docker run affectionate_carson /bin/bash -c "cd /build/ && coveralls"
