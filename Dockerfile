@@ -21,6 +21,7 @@ RUN locale-gen en_US.UTF-8 && locale-gen fr_FR.UTF-8
 COPY requirements.txt setup.py CONTRIBUTORS.rst CHANGELOG.rst LICENSE MANIFEST.in  README  README.rst  mathmaker  pytest.ini /build/
 COPY mathmaker /build/mathmaker/
 COPY tests /build/tests/
+COPY .git /build/.git/
 
 ## Run pip
 RUN pip3 install --force -r /build/requirements.txt \
