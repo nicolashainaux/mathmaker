@@ -12,6 +12,6 @@ branches:
 before_install:
     - docker pull zezollo/mathmaker:ubuntu17.10
 script:
-    - docker run zezollo/mathmaker:ubuntu17.10 /bin/bash -c "cd /build && coverage run --source=mathmaker setup.py test"
+    - docker run --name affectionate_carson zezollo/mathmaker:ubuntu17.10 /bin/bash -c "cd /build && coverage run --source=mathmaker setup.py test"
 after_success:
-    - docker exec zezollo/mathmaker:ubuntu17.10 /bin/bash -c "cd /build/ && coveralls"
+    - docker exec affectionate_carson /bin/bash -c "cd /build/ && coveralls"
