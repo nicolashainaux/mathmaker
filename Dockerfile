@@ -26,4 +26,4 @@ COPY .git /build/.git/
 ## Run pip
 RUN pip3 install --force -r /build/requirements.txt \
     --extra-index-url https://mirror.picosecond.org/pypi/simple && \
-    pip3 install pytest python-coveralls
+    pip3 install pytest
