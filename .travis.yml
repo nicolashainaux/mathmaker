@@ -10,14 +10,15 @@ branches:
   except:
     - broken
 before_install:
-    - sudo mkdir -p /build/mathmaker/
     - docker build -t nicolashainaux/mathmaker .
+    - docker run --name affectionate_carson nicolashainaux/mathmaker
+    - docker ps -a
+    - docker cp mathmaker/ affectionate_carson:/
 install:
-    - "pip3 install coveralls"
+    - pip3 install coveralls
 script:
-    - docker run --name affectionate_carson nicolashainaux/mathmaker /bin/bash -c "cd /build && coverage run --source=mathmaker setup.py test"
-    - docker cp affectionate_carson:/build/.coverage .coverage
-    - sudo docker cp affectionate_carson:/build/mathmaker /build/
+    - docker start affectionate_carson && docker exec affectionate_carson /bin/bash -c "cd /mathmaker && coverage run --source=mathmaker setup.py test"
+    - docker cp affectionate_carson:/mathmaker/.coverage /mathmaker/.coverage
 after_success:
     - coveralls
     # - coverage combine
