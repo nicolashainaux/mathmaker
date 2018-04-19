@@ -19,6 +19,6 @@ RUN mkdir -p /root/.mathmaker/outfiles/
 ## Files required for the build should be copied as /mathmaker/ at build time
 
 ## Run pip
-RUN pip3 install --force -r /mathmaker/requirements.txt \
-    --extra-index-url https://mirror.picosecond.org/pypi/simple && \
-    pip3 install pytest coverage
+RUN pip3 install pytest coverage
+# As mathmaker/requirements.txt is not available yet, it is still required
+# to pip3 install these requirements before build time.
