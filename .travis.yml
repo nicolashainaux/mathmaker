@@ -15,7 +15,8 @@ before_install:
     - docker ps -a
 install:
     - docker cp mathmaker/ affectionate_carson:/
-    - docker start affectionate_carson && docker ps -a && docker exec affectionate_carson /bin/bash -c "pip3 install --force -r /mathmaker/requirements.txt --extra-index-url https://mirror.picosecond.org/pypi/simple"
+    - docker start affectionate_carson && sleep 5 && docker ps -a && docker exec affectionate_carson /bin/bash -c "ls -al /"
+    - docker start affectionate_carson && sleep 5 && docker ps -a && docker exec affectionate_carson /bin/bash -c "pip3 install --force -r /mathmaker/requirements.txt --extra-index-url https://mirror.picosecond.org/pypi/simple"
     - pip3 install coveralls
 script:
     - docker start affectionate_carson && docker ps -a && docker exec affectionate_carson /bin/bash -c "cd /mathmaker && coverage run --source=mathmaker setup.py test"
