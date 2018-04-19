@@ -11,13 +11,10 @@ branches:
     - broken
 before_install:
     - docker build -t nicolashainaux/mathmaker .
-    - docker run --name affectionate_carson nicolashainaux/mathmaker
-    - docker cp mathmaker/ affectionate_carson:/
-    - docker start affectionate_carson && docker exec affectionate_carson /bin/bash -c "pip3 install --force -r /mathmaker/requirements.txt --extra-index-url https://mirror.picosecond.org/pypi/simple"
 install:
     - pip3 install coveralls
 script:
-    - docker start affectionate_carson && docker exec affectionate_carson /bin/bash -c "cd /mathmaker && coverage run --source=mathmaker setup.py test"
+    - docker run --name affectionate_carson nicolashainaux/mathmaker /bin/bash -c "cd /build && coverage run --source=mathmaker setup.py test"
 after_success:
     - docker cp affectionate_carson:/mathmaker/.coverage /mathmaker/.coverage
     - coveralls

@@ -15,10 +15,14 @@ RUN apt-get clean
 RUN locale-gen en_US.UTF-8 && locale-gen fr_FR.UTF-8
 
 ## Create directories for required files
-RUN mkdir -p /root/.mathmaker/outfiles/
-## Files required for the build should be copied as /mathmaker/ at build time
+RUN mkdir -p /mathmaker/ && mkdir -p /root/.mathmaker/outfiles/
+
+## Add files required for the build
+COPY requirements.txt setup.py CONTRIBUTORS.rst CHANGELOG.rst LICENSE MANIFEST.in  README  README.rst  mathmaker  pytest.ini /mathmaker/
+COPY mathmaker /mathmaker/mathmaker/
+COPY tests /mathmaker/tests/
 
 ## Run pip
-RUN pip3 install pytest coverage
-# As mathmaker/requirements.txt is not available yet, it is still required
-# to pip3 install these requirements before build time.
+RUN pip3 install --force -r /build/requirements.txt \
+    --extra-index-url https://mirror.picosecond.org/pypi/simple && \
+    pip3 install pytest coverage
