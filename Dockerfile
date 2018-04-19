@@ -18,7 +18,7 @@ RUN locale-gen en_US.UTF-8 && locale-gen fr_FR.UTF-8
 RUN mkdir -p /mathmaker/ && mkdir -p /root/.mathmaker/outfiles/
 
 ## Add files required for the build
-COPY requirements.txt setup.py CONTRIBUTORS.rst CHANGELOG.rst LICENSE MANIFEST.in  README  README.rst  mathmaker  pytest.ini /mathmaker/
+COPY requirements.txt setup.py CONTRIBUTORS.rst CHANGELOG.rst LICENSE MANIFEST.in  README  README.rst  pytest.ini /mathmaker/
 COPY mathmaker /mathmaker/mathmaker/
 COPY tests /mathmaker/tests/
 
