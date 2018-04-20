@@ -27,4 +27,5 @@ COPY tests ${BUILD_DIR}/tests/
 ## Run pip
 RUN pip3 install --force -r ${BUILD_DIR}/requirements.txt \
     --extra-index-url https://mirror.picosecond.org/pypi/simple && \
-    pip3 install pytest coverage
+    pip3 install pytest coverage && \
+    cd ${BUILD_DIR} && python3.6 setup.py install
