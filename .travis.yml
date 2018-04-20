@@ -10,7 +10,8 @@ branches:
   except:
     - broken
 before_install:
-    - docker build -t nicolashainaux/mathmaker .
+    - echo "Build directory = $TRAVIS_BUILD_DIR"
+    - docker build --build-arg BUILD_DIR=$TRAVIS_BUILD_DIR -t nicolashainaux/mathmaker .
 install:
     - pip3 install coveralls
 script:
