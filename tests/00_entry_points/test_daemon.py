@@ -34,7 +34,7 @@ global DAEMON_PROCESS
 DAEMON_PROCESS = Popen(['mathmakerd'])
 
 
-def test_ensure_daemon_is_alive():
+def test_only_wait_to_ensure_daemon_is_started():
     """Just ensure mathmaker daemon is started"""
     sleep(2)
 
