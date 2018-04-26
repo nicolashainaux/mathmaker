@@ -20,22 +20,22 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import threading
 from time import sleep
-from subprocess import Popen
 from urllib.request import urlopen
 from urllib.error import HTTPError
 
 import pytest
 
-# from mathmaker.lib import shared_daemon
+from mathmaker.daemon import HTTPD
 
 
-global DAEMON_PROCESS
-DAEMON_PROCESS = Popen(['mathmakerd'])
+thread = threading.Thread(target=HTTPD.serve_forever)
 
 
 def test_only_wait_to_ensure_daemon_is_started():
     """Just ensure mathmaker daemon is started"""
+    thread.start()
     sleep(2)
 
 
@@ -101,6 +101,6 @@ def test_unknown_sheetname():
 #     settings.mm_executable = settings.mm_executable[:-len('WRONG')]
 
 
-# def test_terminate_daemon():
-#     """Just terminate mathmaker daemon"""
-#     shared_daemon.shutdown()
+def test_terminate_daemon():
+    """Just terminate mathmaker daemon"""
+    HTTPD.shutdown()
