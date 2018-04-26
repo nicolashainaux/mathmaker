@@ -72,8 +72,9 @@ class sub_object(component.structure):
                 self.n1 = self.dividend
                 self.n2 = self.divisor
         statement = _(next(shared.divisibility_statements_source)[0])
-        self.wording = r'{} \newline {}'.format(statement,
-                                                _('(True or false?)'))
+        nl = r'\newline' if self.slideshow else ''
+        self.wording = r'{} {} {}'.format(statement, nl,
+                                          _('(True or false?)'))
         setup_wording_format_of(self)
         self.transduration = 18
 
