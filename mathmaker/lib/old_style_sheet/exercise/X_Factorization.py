@@ -32,14 +32,11 @@ from . import question
 # Note: the bypass value allows to give the value of *x_subkind* directly to
 # the matching question Constructor, bypassing the action of the present class
 AVAILABLE_X_KIND_VALUES = \
-    {'short_test': ['medium_level', 'hard_level'],
-     'mini_test': ['two_factorizations'],
-     'preformatted': ['level_01_easy', 'level_02_easy',
-                      'level_02_intermediate', 'level_03_sum_squares',
+    {'preformatted': ['level_01_easy',
+                      'level_03_sum_squares',
                       'level_03_difference_squares',
                       'level_03_squares_differences',
-                      'level_03_some_not_factorizable',
-                      'level_03_all_kinds'],
+                      'level_03_some_not_factorizable'],
      'bypass': ['level_01']
      }
 
@@ -59,27 +56,10 @@ X_LAYOUTS = {'default':
               'ans': [[1, 6, 6, 6], (1, 1, 1)]
               },
 
-             ('short_test', 'hard_level'):
-             {'exc': [None, 'all'],
-              'ans': [[4, 9, 9], (1, 1,
-                                  1, 1,
-                                  1, 1,
-                                  1, 1)]
-              },
-
-             ('mini_test', 'two_factorizations'):
-             {'exc': [None, 'all'],
-              'ans': [None, 'all']
-              },
-
              ('preformatted', 'level_01_easy'):
              {'exc': [None, 'all'],
               'ans': [['?', 6, 6, 6], 'all']
               },
-
-             ('preformatted', 'level_02_easy'): ALT_DEFAULT_LAYOUT,
-
-             ('preformatted', 'level_02_intermediate'): ALT_DEFAULT_LAYOUT,
 
              ('preformatted', 'level_03_some_not_factorizable'):
              {'exc': [None, 'all'],
@@ -100,38 +80,6 @@ X_LAYOUTS = {'default':
 # @class X_Factorization
 # @brief Factorization exercises.
 class X_Factorization(X_Structure):
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Constructor.
-    #   @param **options Options detailed below:
-    #          - start_number=<integer>
-    #                         (should be >= 1)
-    #          - number_of_questions=<integer>
-    #            /!\ only useful if you use x_kind and not preformatted
-    #                         (should be >= 1)
-    #          - x_kind=<string>
-    #                         ...
-    #                         ...
-    #          - preformatted=<string>
-    #            /!\ preformatted is useless with short_test
-    #            /!\ number_of_questions is useless with preformatted
-    #            /!\ if you use it with the x_kind option, ensure there's a
-    #                preformatted possibility with this option
-    #                         'yes'
-    #                         'OK'
-    #                         any other value will be understood as 'no'
-    #          - short_test=bool
-    #            /!\ the x_kind option above can't be used along this option
-    #            use subtype if you need to make different short_test exercises
-    #                         'yes'
-    #                         'OK'
-    #                         any other value will be understood as 'no'
-    #          - subtype=<string>
-    #                         ...
-    #                         ...
-    #   @todo Complete the description of the possible options !
-    #   @return One instance of exercise.Factorization
     def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
         X_Structure.__init__(self,
@@ -151,130 +99,14 @@ class X_Factorization(X_Structure):
                      }
 
         # alternate texts section
-        if self.x_kind == 'level_02_easy' \
-           or self.x_kind == 'level_02_intermediate':
-            self.text = {'exc': _("Factorise:"),
-                         'ans': ""
-                         }
-
-        elif (self.x_kind == 'level_03_some_not_factorizable'
-              or (self.x_kind, self.x_subkind)
-              == ('mini_test', 'two_factorizations')):
+        if self.x_kind == 'level_03_some_not_factorizable':
             # __
             self.text = {'exc': _("Factorise, if possible:"),
                          'ans': ""
                          }
 
-        # SHORT TEST & OTHER PREFORMATTED EXERCISES
-        if self.x_kind == 'short_test':
-            if self.x_subkind == 'easy_level':
-                # NOTE: the algebra (easy) short test uses directly one
-                # question and passes its arguments (x_kind...) directly
-                # to question.Factorization() (see below, at the end)
-                pass
-
-            elif self.x_subkind == 'medium_level':
-                lil_box = []
-
-                lil_box.append(default_question(q_kind='level_01',
-                                                q_subkind='ax² + bx',
-                                                expression_number=0))
-
-                if random.choice([True, False]):
-                    lil_box.append(default_question(q_kind='level_01',
-                                                    q_subkind='ax² + b',
-                                                    expression_number=0))
-                else:
-                    lil_box.append(default_question(q_kind='level_01',
-                                                    q_subkind='ax + b',
-                                                    expression_number=0))
-
-                lil_box.append(default_question(q_kind='level_01',
-                                                q_subkind='not_factorizable',
-                                                expression_number=0))
-                random.shuffle(lil_box)
-                for i in range(len(lil_box)):
-                    q = lil_box.pop()
-                    q.expression.name = alphabet[i]
-                    for expression in q.steps:
-                        expression.name = alphabet[i]
-                    self.questions_list.append(q)
-
-            elif self.x_subkind == 'hard_level':
-                lil_box = []
-
-                l03_kinds = ['sum_square_mixed',
-                             'difference_square_mixed',
-                             random.choice(['squares_difference',
-                                            'squares_difference_mixed']),
-                             random.choice(['fake_01',
-                                            'fake_01_mixed',
-                                            'fake_02',
-                                            'fake_02_mixed',
-                                            'fake_03',
-                                            'fake_03_mixed']),
-                             'fake_04_any_mixed']
-
-                for n in range(len(l03_kinds)):
-                    lil_box.append(default_question(
-                                   q_kind='level_03',
-                                   q_subkind=l03_kinds[n],
-                                   expression_number=n + 1))
-
-                l02_kinds = [('type_2_A1', False),
-                             ('type_2_A0', True),
-                             ('type_4_A0', False)]
-
-                for n in range(len(l02_kinds)):
-                    lil_box.append(default_question(
-                                   q_kind='level_02',
-                                   q_subkind=l02_kinds[n][0],
-                                   max_coeff=10,
-                                   minus_sign=l02_kinds[n][1],
-                                   expression_number=n + len(l03_kinds) + 1))
-
-                random.shuffle(lil_box)
-                for i in range(len(lil_box)):
-                    q = lil_box.pop()
-                    q.expression.name = alphabet[i]
-                    for expression in q.steps:
-                        if isinstance(expression, Expression):
-                            expression.name = alphabet[i]
-                    self.questions_list.append(q)
-
-        elif self.x_kind == 'mini_test':
-            if self.x_subkind == 'two_factorizations':
-                lil_box = []
-
-                lil_box.append(default_question(
-                    q_kind='level_03',
-                    q_subkind=random.choices(['any_fake',
-                                              'any_true'],
-                                             cum_weights=[0.2, 1])[0],
-                    expression_number=1))
-
-                l02_kinds = [('type_2_A1', False),
-                             ('type_2_A0', True),
-                             ('type_4_A0', False)]
-
-                n = random.choice([0, 1, 2])
-
-                lil_box.append(default_question(q_kind='level_02',
-                                                q_subkind=l02_kinds[n][0],
-                                                max_coeff=10,
-                                                minus_sign=l02_kinds[n][1],
-                                                expression_number=2))
-
-                random.shuffle(lil_box)
-                for i in range(len(lil_box)):
-                    q = lil_box.pop()
-                    q.expression.name = alphabet[i + self.start_number]
-                    for expression in q.steps:
-                        if isinstance(expression, Expression):
-                            expression.name = alphabet[i + self.start_number]
-                    self.questions_list.append(q)
-
-        elif self.x_kind == 'preformatted':
+        # PREFORMATTED EXERCISES
+        if self.x_kind == 'preformatted':
             if self.x_subkind == 'level_01_easy':
                 # n is the number of questions still left to do
                 n = 10
@@ -330,59 +162,6 @@ class X_Factorization(X_Structure):
                     for expression in q.steps:
                         expression.name = alphabet[i]
                     self.questions_list.append(q)
-
-            elif self.x_subkind == 'level_02_easy':
-                subkinds = ['type_1_A0',
-                            'type_1_D0',
-                            'type_1_G0']
-
-                n1 = len(subkinds)
-                random.shuffle(subkinds)
-                for i in range(n1):
-                    self.questions_list.append(
-                        default_question(q_kind='level_02',
-                                         q_subkind=subkinds.pop(),
-                                         minus_sign=False,
-                                         expression_number=i))
-
-                subkinds = ['type_2_A0',
-                            'type_2_D0']
-                random.shuffle(subkinds)
-                n2 = len(subkinds)
-                for i in range(n2):
-                    self.questions_list.append(
-                        default_question(q_kind='level_02',
-                                         q_subkind=subkinds.pop(),
-                                         minus_sign=False,
-                                         expression_number=i + n1))
-
-            elif self.x_subkind == 'level_02_intermediate':
-                subkinds = ['type_1_D',
-                            'type_1_G0',
-                            'type_1_1']
-
-                n1 = len(subkinds)
-                random.shuffle(subkinds)
-
-                for i in range(n1):
-                    self.questions_list.append(
-                        default_question(q_kind='level_02',
-                                         q_subkind=subkinds.pop(),
-                                         minus_sign=False,
-                                         expression_number=i))
-
-                subkinds = random.choice([['type_2_A0', 'type_2_D1'],
-                                          ['type_2_A1', 'type_2_D0']])
-
-                n2 = len(subkinds)
-                random.shuffle(subkinds)
-
-                for i in range(n2):
-                    self.questions_list.append(
-                        default_question(q_kind='level_02',
-                                         q_subkind=subkinds.pop(),
-                                         minus_sign=False,
-                                         expression_number=i + n1))
 
             elif self.x_subkind == 'level_03_sum_squares':
                 lil_box = []
@@ -475,44 +254,6 @@ class X_Factorization(X_Structure):
                     lil_box.append(default_question(q_kind='level_03',
                                                     q_subkind='any',
                                                     expression_number=n + 7))
-
-                for i in range(len(lil_box)):
-                    q = lil_box[i]
-                    q.expression.name = alphabet[i]
-                    for expression in q.steps:
-                        if isinstance(expression, Expression):
-                            expression.name = alphabet[i]
-                    self.questions_list.append(q)
-
-            elif self.x_subkind == 'level_03_all_kinds':
-                all_kinds = ['sum_square',
-                             'sum_square_mixed',
-                             'difference_square',
-                             'difference_square_mixed',
-                             'squares_difference',
-                             'squares_difference_mixed',
-                             'fake_01',
-                             'fake_01_mixed',
-                             'fake_02',
-                             'fake_02_mixed',
-                             'fake_03',
-                             'fake_03_mixed',
-                             'fake_04_A',
-                             'fake_04_A_mixed',
-                             'fake_04_B',
-                             'fake_04_B_mixed',
-                             'fake_04_C',
-                             'fake_04_C_mixed',
-                             'fake_04_D',
-                             'fake_04_D_mixed']
-
-                lil_box = []
-
-                for n in range(len(all_kinds)):
-                    lil_box.append(default_question(
-                                   q_kind='level_03',
-                                   q_subkind=all_kinds[n],
-                                   expression_number=n + 1))
 
                 for i in range(len(lil_box)):
                     q = lil_box[i]
