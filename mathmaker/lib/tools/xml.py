@@ -25,13 +25,12 @@ import errno
 import subprocess
 import copy
 import logging
-import random
 import xml.etree.ElementTree as XML_PARSER
 
 from mathmaker import settings
-from mathmaker.lib.constants import BOOLEAN, DEFAULT_LAYOUT
+from mathmaker.lib.constants import DEFAULT_LAYOUT
 from mathmaker.lib.tools import parse_layout_descriptor
-from mathmaker.lib.tools.frameworks import _match_qid_sourcenb, parse_qid
+from mathmaker.lib.tools.frameworks import parse_qid
 
 
 # So far, quite useless features, so disabled on august 8th, 2017
@@ -288,79 +287,6 @@ def _get_q_list_from(exercise_node):
                 sources = elt.attrib['source'].split(sep=';;')
                 check_q_consistency(o, sources)
                 questions += [[o, sources, int(elt.text)]]
-
-        elif child.tag == 'mix':
-            q_temp_list = []
-            n_temp_list = []
-            mix_questions = []
-            for elt in child:
-                if elt.tag == 'question':
-                    pick = int(elt.attrib.pop('pick', 1))
-                    q_temp_list += [elt.attrib for i in range(pick)]
-                elif elt.tag == 'nb':
-                    # We don't check that 'source' is in elt.attrib,
-                    # this should have been checked by the xml schema,
-                    # nor we don't check if the source tag is valid.
-                    # This would be best done by the xml schema
-                    # (requires to use xsd1.1 but lxml validates only
-                    # xsd1.0). So far, it is done partially and later,
-                    # in lib/tools.py (the tag functions)
-                    # So far it's not possible to mix questions
-                    # requiring several sources with other questions
-                    # yet multiple sources questions can be mixed together
-                    # if they are the same type.
-                    n_temp_list += [[[elt.attrib['source']],
-                                     elt.attrib,
-                                     1] for i in range(int(elt.text))]
-                else:
-                    raise ValueError(
-                        'XMLFileFormatError: unknown element found in '
-                        'the xml file: ' + elt.tag)
-
-            if len(q_temp_list) > len(n_temp_list):
-                raise ValueError(
-                    'XMLFileFormatError: incorrect mix section: the number '
-                    'of sources of numbers (' + str(len(n_temp_list)) + ') '
-                    'must be at least equal to the number of questions '
-                    '(' + str(len(q_temp_list)) + ').')
-
-            # So far, we only check if all of the numbers' sources
-            # may be attributed to any of the questions, in order
-            # to just distribute them all randomly.
-            for n in n_temp_list:
-                for q in q_temp_list:
-                    v = n[1].get('variant', q.get('variant', ''))
-                    if (not _match_qid_sourcenb(q['id'].replace(' ', '_'),
-                                                n[0], v)):
-                        # __
-                        raise ValueError(
-                            'XMLFileFormatError: this source: '
-                            + str(n[0]) + ' cannot '
-                            'be attributed to this question:'
-                            ' ' + str(q['id'].replace(' ', '_')))
-
-            random.shuffle(q_temp_list)
-            if any(BOOLEAN[n[1].get('required', 'false')]()
-                   for n in n_temp_list):
-                required_n_temp_list = [n for n in n_temp_list
-                                        if BOOLEAN[n[1].get('required',
-                                                            'false')]()]
-                rest_n_temp_list = [n for n in n_temp_list
-                                    if not BOOLEAN[n[1].get('required',
-                                                            'false')]()]
-                random.shuffle(required_n_temp_list)
-                random.shuffle(rest_n_temp_list)
-                n_temp_list = required_n_temp_list + rest_n_temp_list
-            else:
-                random.shuffle(n_temp_list)
-
-            for (q, n) in zip(q_temp_list, n_temp_list):
-                merged_q = copy.deepcopy(q)
-                merged_q.update(n[1])
-                mix_questions += [[merged_q, n[0], 1]]
-
-            random.shuffle(mix_questions)
-            questions += mix_questions
 
     return questions
 
