@@ -196,77 +196,9 @@ class S_Structure(object, metaclass=ABCMeta):
             result += self.texts_to_str('ans', len(self.exercises_list) // 2)
             result += shared.machine.write_document_ends()
 
-        elif self.layout_type == 'mini_test':
-            result += shared.machine.write_document_begins()
-
-            for i in range(3):
-                result += self.sheet_header_to_str()
-                result += self.sheet_title_to_str()
-                result += self.sheet_text_to_str()
-                result += self.texts_to_str('exc', 0)
-                result += shared.machine.write_new_line_twice()
-                result += self.sheet_header_to_str()
-                result += self.sheet_title_to_str()
-                result += self.sheet_text_to_str()
-                result += self.texts_to_str('exc',
-                                            len(self.exercises_list) // 2)
-                result += shared.machine.write_new_line_twice()
-
-            # result += self.sheet_header_to_str()
-            # result += self.sheet_title_to_str()
-            # result += self.sheet_text_to_str()
-            # result += self.texts_to_str('exc', len(self.exercises_list)/2)
-            # result += shared.machine.write_new_line_twice()
-            # result += self.sheet_header_to_str()
-            # result += self.sheet_title_to_str()
-            # result += self.sheet_text_to_str()
-            # result += self.texts_to_str('exc', 3*len(self.exercises_list)/4)
-
-            result += shared.machine.write_jump_to_next_page()
-
-            result += self.answers_title_to_str()
-            result += self.texts_to_str('ans', 0)
-            result += shared.machine.write_jump_to_next_page()
-            result += self.answers_title_to_str()
-            result += self.texts_to_str('ans', len(self.exercises_list) // 2)
-
-            # result += shared.machine.write_jump_to_next_page()
-            # result += self.answers_title_to_str()
-            # result += self.texts_to_str('ans', len(self.exercises_list)/2)
-            # result += shared.machine.write_jump_to_next_page()
-            # result += self.answers_title_to_str()
-            # result += self.texts_to_str('ans', 3*len(self.exercises_list)/4)
-
-            result += shared.machine.write_document_ends()
-
-        elif self.layout_type == 'mini_training':
-            result += shared.machine.write_document_begins()
-
-            for i in range(6):
-                result += self.texts_to_str('exc', 0)
-                result += shared.machine.write_new_line_twice()
-
-            result += shared.machine.write_jump_to_next_page()
-
-            result += self.answers_title_to_str()
-            result += self.texts_to_str('ans', 0)
-
-            result += shared.machine.write_document_ends()
-
-        elif self.layout_type == 'mental':
-            result += shared.machine.write_document_begins()
-            result += self.sheet_header_to_str()
-            result += self.sheet_title_to_str()
-            result += self.sheet_text_to_str()
-            result += self.texts_to_str('exc', 0)
-            result += shared.machine.write_jump_to_next_page()
-            result += self.answers_title_to_str()
-            result += self.texts_to_str('ans', 0)
-            result += shared.machine.write_document_ends()
-
         else:
             raise ValueError('Got ' + self.layout_type + 'instead of std|'
-                             'short_test|mini_test|equations|mental')
+                             'short_test|mini_test|equations')
         pkg = []
         if any([s in result for s in KNOWN_AMSSYMB_SYMBOLS]):
             pkg.append('amssymb')
@@ -302,17 +234,10 @@ class S_Structure(object, metaclass=ABCMeta):
                         and ex_n < len(self.exercises_list) // 2):
                         # __
                         how_many = len(self.exercises_list) // 2 - ex_n
-                    # elif self.layout_type == 'mini_test':
-                    #    if ex_n < len(self.exercises_list) / 4:
-                    #        how_many = len(self.exercises_list) / 4 - ex_n
-                    #    elif ex_n < len(self.exercises_list) / 2:
-                    #        how_many = len(self.exercises_list) / 2 - ex_n
-                    #    elif ex_n < 3*len(self.exercises_list) / 4:
-                    #        how_many = 3*len(self.exercises_list) / 4 - ex_n
 
                 for i in range(how_many):
-                    if not self.layout_type == 'mental':
-                        result += M.write_exercise_number()
+                    # if not self.layout_type == 'mental': (next line only)
+                    result += M.write_exercise_number()
                     result += self.exercises_list[ex_n].to_str(ex_or_answers)
                     if (self.layout_type == 'default'
                         and ex_or_answers == 'ans'):
@@ -346,8 +271,9 @@ class S_Structure(object, metaclass=ABCMeta):
                             layout[2 * k + 1][i * nb_of_cols + j]
                         cell_content = ""
                         for n in range(nb_of_ex_in_this_cell):
-                            if not self.layout_type == 'mental':
-                                cell_content += M.write_exercise_number()
+                            # if not self.layout_type == 'mental':
+                            # (only very next line)
+                            cell_content += M.write_exercise_number()
                             cell_content += \
                                 self.exercises_list[ex_n].to_str(ex_or_answers)
                             ex_n += 1
