@@ -20,8 +20,6 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import random
-
 from .X_Structure import X_Structure
 from . import question
 
@@ -105,44 +103,8 @@ class X_AlgebraExpressionReduction(X_Structure):
                          'ans': _("Pay attention that the intermediate line "
                                   "is optional.")}
 
-        # SHORT TEST EXERCISES
-        if self.x_kind == 'short_test':
-            if self.x_subkind == 'easy':
-                self.questions_list.append(
-                    default_question(q_kind='product', short_test=True,
-                                     expression_number=0))
-
-                self.questions_list.append(
-                    default_question(q_kind='sum', short_test=True, length=4,
-                                     expression_number=1))
-
-                self.questions_list.append(
-                    default_question(q_kind='sum_of_products', length=2,
-                                     expression_number=2))
-
-            if self.x_subkind == 'medium_level':
-                q = []
-
-                q.append(default_question(q_kind='long_sum',
-                                          expression_number=2))
-
-                q.append(default_question(q_kind='sum_not_reducible',
-                                          expression_number=3))
-
-                q.append(default_question(q_kind='sum_with_minus-brackets',
-                                          minus_brackets_nb=2,
-                                          plus_brackets_nb=1,
-                                          expression_number=4))
-
-                q.append(default_question(q_kind='long_sum_including_'
-                                                 'a_coeff_1',
-                                          length=7,
-                                          expression_number=5))
-                random.shuffle(q)
-                self.questions_list = q
-
         # PREFORMATTED EXERCISES
-        elif self.x_kind == 'preformatted':
+        if self.x_kind == 'preformatted':
             if self.x_subkind == 'product':
                 self.questions_list.append(default_question(
                                            q_kind='product',
