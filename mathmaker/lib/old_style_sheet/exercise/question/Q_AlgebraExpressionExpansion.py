@@ -116,80 +116,19 @@ class Q_AlgebraExpressionExpansion(Q_Structure):
                     Expandable((RANDOMLY,
                                 random.choice(['monom0_polyn1',
                                                'monom1_polyn1']))))
-                if random.choice([True, False]):
-                    aux_expd_list.append(Expandable((RANDOMLY, 'sign_exp')))
-                else:
-                    aux_expd_list.append(Monomial((RANDOMLY, 15,
-                                                   random.randint(0, 2))))
+                last_term = Expandable((RANDOMLY, 'sign_exp')) \
+                    if random.choice([True, False]) \
+                    else Monomial((RANDOMLY, 15, random.randint(0, 2)))
+                aux_expd_list.append(last_term)
                 random.shuffle(aux_expd_list)
                 self.expandable_objct = Sum(aux_expd_list)
 
         elif q_kind in ['sign_expansion', 'sign_expansion_short_test']:
-            sign_exp_kind = options.get('sign_exp_kind', 0)
-
-            if q_kind == 'sign_expansion_short_test':
-                sign_exp_kind = 1
-
-            if sign_exp_kind == 0:
-                sign_exp_kind = random.randint(1, 5)
-
             # Creation of the terms
-            aux_terms_list = list()
-
-            aux_expd_1 = Expandable((Monomial((random.choice(['+', '-']),
-                                               1, 0)),
-                                     Polynomial((RANDOMLY, 15, 2, 2))))
-
-            aux_expd_2 = Expandable((Monomial((random.choice(['+', '-']),
-                                               1, 0)),
-                                     Polynomial((RANDOMLY, 15, 2, 2))))
-
-            aux_expd_3 = Expandable((Monomial((random.choice(['+', '-']),
-                                               1, 0)),
-                                     Polynomial((RANDOMLY, 15, 2, 2))))
-
-            long_aux_expd = Expandable((Monomial((random.choice(['+', '-']),
-                                                  1, 0)),
+            long_aux_expd = Expandable((Monomial(('-', 1, 0)),
                                         Polynomial((RANDOMLY, 15, 2, 3))))
-
-            if q_kind == 'sign_expansion_short_test':
-                long_aux_expd = Expandable((Monomial(('-', 1, 0)),
-                                            Polynomial((RANDOMLY, 15, 2, 3))))
-
             aux_monomial = Monomial((RANDOMLY, 15, 2))
-
-            # 1st kind: a Monomial and ± (long Polynomial)
-            # (like in a short test)
-            if sign_exp_kind == 1:
-                aux_terms_list.append(long_aux_expd)
-                aux_terms_list.append(aux_monomial)
-
-            # 2d kind: ± (x+3) ± (4x - 7)
-            elif sign_exp_kind == 2:
-                aux_terms_list.append(aux_expd_1)
-                aux_terms_list.append(aux_expd_2)
-
-            # 3d kind: ± (x+3) ± (4x - 7) ± (x² - 5x)
-            elif sign_exp_kind == 3:
-                aux_terms_list.append(aux_expd_1)
-                aux_terms_list.append(aux_expd_2)
-                aux_terms_list.append(aux_expd_3)
-
-            # 4th kind: ± (x+3) ± (4x - 7) ± Monomial
-            elif sign_exp_kind == 4:
-                aux_terms_list.append(aux_expd_1)
-                aux_terms_list.append(aux_expd_2)
-                aux_terms_list.append(aux_monomial)
-
-            # 5th kind: ± (x+3) ± Monomial ± (long Polynomial)
-            elif sign_exp_kind == 5:
-                aux_terms_list.append(aux_expd_2)
-                aux_terms_list.append(aux_monomial)
-                aux_terms_list.append(long_aux_expd)
-
-            # add as many possibilities as wanted,
-            # don't forget to increase the last number here:
-            # sign_exp_kind = random.randint(1, 5) (what's a bit above)
+            aux_terms_list = [long_aux_expd, aux_monomial]
             random.shuffle(aux_terms_list)
             self.expandable_objct = Sum(aux_terms_list)
 
