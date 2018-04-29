@@ -20,13 +20,19 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import os
 import sys
+import locale
+import gettext
 from unittest.mock import patch
 
 import pytest
 
-from mathmaker import __software_name__
+from mathmaker import settings
+from mathmaker.lib import shared
 from mathmaker.cli import entry_point
+from mathmaker import __software_name__
+from mathmaker.lib.constants import LOCALE_US
 
 
 def test_list():
@@ -72,3 +78,16 @@ def test_unknown_directive():
         with pytest.raises(SystemExit) as excinfo:
             entry_point()
         assert str(excinfo.value) == '1'
+
+    # Reset settings and re-open database
+    settings.init()
+    settings.language = 'en'
+    settings.locale = LOCALE_US
+    locale.setlocale(locale.LC_ALL, settings.locale)
+    gettext.translation(__software_name__,
+                        settings.localedir,
+                        ['en']).install()
+    settings.outputdir = settings.projectdir + 'outfiles/'
+    if not os.path.isdir(settings.outputdir):
+        os.mkdir(settings.outputdir, mode=0o777)
+    shared.init()
