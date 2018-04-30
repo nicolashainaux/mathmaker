@@ -270,7 +270,7 @@ class IntspansProduct(object):
             applied_conditions.append('nb{}_max={}'.format(i + 1, maxi))
         notmod = kwargs.get('nb{}_notmod'.format(i + 1), None)
         if notmod is not None:
-            possibilities = [p for p in possibilities if p % notmod]
+            possibilities = [p for p in possibilities if p % int(notmod)]
             applied_conditions.append('nb{}_notmod={}'
                                       .format(i + 1, notmod))
         mod = kwargs.get('nb{}_mod'.format(i + 1), None)
