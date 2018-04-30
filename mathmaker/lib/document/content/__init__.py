@@ -37,7 +37,7 @@ from .calculation import units_conversion, decimal_numerals
 from .calculation import percent_direct, divi_euclidean
 from .calculation import mini_pb_proportionality
 from .calculation import numeric_expansion, numeric_factorization
-from .calculation import divisibility_questions
+from .calculation import divisibility_vocabulary
 from .geometry import intercept_theorem_triangle
 from .geometry import intercept_theorem_triangle_formula
 from .geometry import intercept_theorem_butterfly
@@ -65,7 +65,7 @@ __all__ = ['expand_simple', 'expand_double',
            'units_conversion', 'decimal_numerals', 'percent_direct',
            'divi_euclidean', 'mini_pb_proportionality',
            'numeric_expansion', 'numeric_factorization',
-           'divisibility_questions',
+           'divisibility_vocabulary',
            'area_rectangle', 'perimeter_rectangle', 'perimeter_polygon',
            'rectangle_length_or_width',
            'intercept_theorem_triangle', 'intercept_theorem_triangle_formula',

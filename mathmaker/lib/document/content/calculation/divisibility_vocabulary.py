@@ -31,7 +31,7 @@ class sub_object(component.structure):
 
     def __init__(self, build_data, **kwargs):
         """
-        The two numbers in nb_to_use are the factors of the product.
+        The two numbers in build_data are the factors of the product.
 
         kwargs may contain a 'variant' parameter.
         It can contain these values:
@@ -48,10 +48,10 @@ class sub_object(component.structure):
         :param nb_to_use: a tuple of 2 numbers
         :type nb_to_use: tuple
         """
-        super().setup("minimal", **kwargs)
+        super().setup('minimal', **kwargs)
         # super().setup("numbers", nb=nb_to_use, **kwargs)
         # super().setup("nb_variants", nb=nb_to_use, **kwargs)
-        super().setup("division", nb=build_data, **kwargs)
+        super().setup('division', nb=build_data, **kwargs)
 
         variant = kwargs.get('variant', 'random')
         if variant == 'random':
