@@ -50,7 +50,7 @@ class structure(object):
 
     def h(self, **kwargs):
         if hasattr(self, 'hint'):
-            return '\hfill ${}$'.format(self.hint)
+            return r'\hfill ${}$'.format(self.hint)
         else:
             return ""
 
@@ -79,9 +79,9 @@ class structure(object):
 
     def _setup_minimal(self, **kwargs):
         self.newline = '\\newline'
-        self.parallel_to = '$\parallel$'
-        self.belongs_to = '$\in$'
-        self.percent_symbol = '\%'
+        self.parallel_to = r'$\parallel$'
+        self.belongs_to = r'$\in$'
+        self.percent_symbol = r'\%'
         self.nb_source = kwargs.get('nb_source')
         self.preset = kwargs.get('preset', 'default')
         if 'nb_variant' in kwargs and kwargs['nb_variant'] == 'decimal':
