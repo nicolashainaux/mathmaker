@@ -289,6 +289,15 @@ class IntspansProduct(object):
         if neq is not None:
             possibilities = [p for p in possibilities if p != neq]
             applied_conditions.append('nb{}_neq={}'.format(i + 1, neq))
+        regex_rule = r'nb{}_mod(\d+)_ge'.format(i + 1)
+        for kw in kwargs:
+            matches = re.findall(regex_rule, kw)
+            for value in matches:
+                possibilities = [p for p in possibilities
+                                 if p % int(value) >= kwargs[kw]]
+                applied_conditions.append('nb{}mod{}_ge={}'.format(i + 1,
+                                                                   value,
+                                                                   kwargs[kw]))
         return possibilities, applied_conditions, result
 
     @staticmethod
@@ -665,6 +674,13 @@ class source(object):
             elif kw == 'diff7atleast':
                 result += next(hook(kn)) + " nb2 - nb1 >= 7 "
                 kn += 1
+            elif re.findall(r'nb(\d)_mod(\d+)_ge', kw):
+                for match in re.findall(r'nb(\d)_mod(\d+)_ge', kw):
+                    result += "{} nb{} % {} >= {} ".format(next(hook(kn)),
+                                                           match[0],
+                                                           match[1],
+                                                           kwargs[kw])
+                    kn += 1
             elif kw.endswith('_noqr'):
                 pass
             else:  # default interpretation is " AND key = value "

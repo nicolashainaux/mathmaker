@@ -239,6 +239,9 @@ def test_intspansproduct_random_draw_filtered():
         r.random_draw(nb2_mod=5)
     assert str(excinfo.value) == 'Impossible to draw an int tuple from '\
         "['6-9', '6-9'] under these conditions: nb2_mod=5.\n"
+    r = IntspansProduct('2-40')
+    d = r.random_draw(return_all=True, nb1_mod7_ge=5)
+    assert d == [[5, 6, 12, 13, 19, 20, 26, 27, 33, 34, 40]]
 
 
 def test_intspansproduct_random_draw_constructible():
