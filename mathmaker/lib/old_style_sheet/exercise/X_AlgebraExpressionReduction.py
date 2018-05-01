@@ -23,8 +23,7 @@
 from .X_Structure import X_Structure
 from . import question
 
-AVAILABLE_X_KIND_VALUES = {'short_test': ['easy', 'medium_level'],
-                           'preformatted': ['product'],
+AVAILABLE_X_KIND_VALUES = {'preformatted': ['product'],
                            'bypass': ['sum', 'sum_of_products']}
 
 X_LAYOUT_UNIT = "cm"
@@ -47,32 +46,6 @@ X_LAYOUTS = {'default':
 # reduction exercises
 class X_AlgebraExpressionReduction(X_Structure):
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Constructor.
-    #   @param **options Options detailed below:
-    #          - start_number=<integer>
-    #                         (should be >= 1)
-    #          - number_of_questions=<integer>
-    #            /!\ only useful if you use x_kind and not preformatted
-    #                         (should be >= 1)
-    #          - x_kind=<string>
-    #                         ...
-    #                         ...
-    #          - preformatted=<string>
-    #            /!\ preformatted is useless with short_test
-    #            /!\ number_of_questions is useless with preformatted
-    #            /!\ if you use it with the x_kind option, ensure there's a
-    #                preformatted possibility with this option
-    #                         'yes'
-    #                         'OK'
-    #                         any other value will be understood as 'no'
-    #          - short_test=bool
-    #            /!\ the x_kind option above can't be used along this option
-    #                         'yes'
-    #                         'OK'
-    #                         any other value will be understood as 'no'
-    #   @return One instance of exercise.ExpressionReduction
     def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
         X_Structure.__init__(self,

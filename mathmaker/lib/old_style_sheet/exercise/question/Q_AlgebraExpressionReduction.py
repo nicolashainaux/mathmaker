@@ -27,7 +27,7 @@ from mathmakerlib.calculus import is_integer, is_natural
 from mathmaker.lib import shared
 from .Q_Structure import Q_Structure
 from mathmaker.lib.core.base_calculus import (Product, Monomial, Item, Sum,
-                                              Polynomial, Expandable)
+                                              Polynomial)
 from mathmaker.lib.core.calculus import Expression
 from mathmaker.lib.constants import RANDOMLY, NUMERIC
 
@@ -128,21 +128,11 @@ class Q_AlgebraExpressionReduction(Q_Structure):
         self.kind_of_answer = ""
 
         # Max coefficient & degree values...
-        max_coeff = MAX_COEFF
-        max_expon = MAX_EXPONENT
-
-        if 'max_coeff' in options and options['max_coeff'] >= 1:
-            max_coeff = options['max_coeff']
-
-        if 'max_expon' in options and options['max_expon'] >= 1:
-            max_expon = options['max_expon']
-
-        length = random.choice([n + MIN_LENGTH for n in range(LENGTH_SPAN)])
-
-        if ('length' in options and is_integer(options['length'])
-            and options['length'] >= 2):
-            # __
-            length = options['length']
+        max_coeff = options.get('max_coeff', MAX_COEFF)
+        max_expon = options.get('max_expon', MAX_EXPONENT)
+        length = options.get('length',
+                             random.choice([n + MIN_LENGTH
+                                            for n in range(LENGTH_SPAN)]))
 
         # 1st CASE:
         # PRODUCT REDUCTION
@@ -152,158 +142,141 @@ class Q_AlgebraExpressionReduction(Q_Structure):
             # but the reduced or entire alphabets can be used as well
             letters_package = ['a', 'b', 'c', 'x', 'y', 'z']
 
-            if 'short_test' in options and options['short_test']:
+            self.kind_of_answer = 'product_detailed'
+            if 'use_reduced_alphabet' in options:
+                letters_package = ['a', 'b', 'c', 'd', 'g', 'h', 'k', 'p',
+                                   'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
+                                   'y', 'z']
+
+            elif ('use_these_letters' in options
+                  and type(options['use_these_letters']) is list
+                  and all([type(elt) is str
+                           for elt in options['use_these_letters']])):
                 # __
-                self.objct = Product([Monomial((RANDOMLY, 12, 1)),
-                                      Monomial((RANDOMLY, 12, 1))])
+                letters_package = options['use_these_letters']
 
-                self.objct.factor[0].set_degree(1)
-                self.objct.factor[1].set_degree(1)
+            # Maximum Items number. (We make sure at the same time that
+            # we won't
+            # risk to draw a greater number of letters than the available
+            # letters
+            # in letters_package)
+            max_literal_items_nb = min(PR_MAX_LITERAL_ITEMS_NB,
+                                       len(letters_package))
 
-            else:
-                # In the case of an exercise about reducing products
-                # in a training sheet, the answers will be more detailed
-                self.kind_of_answer = 'product_detailed'
-                if 'use_reduced_alphabet' in options:
-                    letters_package = ['a', 'b', 'c', 'd', 'g', 'h', 'k', 'p',
-                                       'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
-                                       'y', 'z']
+            # Maximum number of occurences of the same letter in
+            # the initial expression
+            same_letter_max_occurences = PR_SAME_LETTER_MAX_OCCURENCES_NB
 
-                elif ('use_these_letters' in options
-                      and type(options['use_these_letters']) is list
-                      and all([type(elt) is str
-                               for elt in options['use_these_letters']])):
-                    # __
-                    letters_package = options['use_these_letters']
+            if ('nb_occurences_of_the_same_letter' in options
+                and options['nb_occurences_of_the_same_letter'] >= 1):
+                # __
+                same_letter_max_occurences = options['nb_occurences_of'
+                                                     '_the_same_letter']
 
-                # Maximum Items number. (We make sure at the same time that
-                # we won't
-                # risk to draw a greater number of letters than the available
-                # letters
-                # in letters_package)
-                max_literal_items_nb = min(PR_MAX_LITERAL_ITEMS_NB,
-                                           len(letters_package))
+            # CREATION OF THE EXPRESSION
+            # We draw randomly the letters that will appear
+            # in the expression
+            current_letters_package = list(letters_package)
 
-                if ('max_literal_items_nb' in options
-                    and 2 <= options['max_literal_items_nb'] <= 6):
-                    # __
-                    max_literal_items_nb = min(options['max_literal_items_nb'],
-                                               len(letters_package))
+            nb_of_letters_to_draw = random.randint(1, max_literal_items_nb)
 
-                # Maximum number of occurences of the same letter in
-                # the initial expression
-                same_letter_max_occurences = PR_SAME_LETTER_MAX_OCCURENCES_NB
+            drawn_letters = list()
 
-                if ('nb_occurences_of_the_same_letter' in options
-                    and options['nb_occurences_of_the_same_letter'] >= 1):
-                    # __
-                    same_letter_max_occurences = options['nb_occurences_of'
-                                                         '_the_same_letter']
+            for j in range(nb_of_letters_to_draw):
+                drawn_letters.append(
+                    random.choice(current_letters_package))
 
-                # CREATION OF THE EXPRESSION
-                # We draw randomly the letters that will appear
-                # in the expression
-                current_letters_package = list(letters_package)
+            # Let's determine how many times will appear each letter
+            # and then create a list containing each of these letters
+            # the number of times they will appear
+            pre_items_list = list()
+            items_list = list()
 
-                nb_of_letters_to_draw = random.randint(1, max_literal_items_nb)
-
-                drawn_letters = list()
-
-                for j in range(nb_of_letters_to_draw):
-                    drawn_letters.append(
-                        random.choice(current_letters_package))
-
-                # Let's determine how many times will appear each letter
-                # and then create a list containing each of these letters
-                # the number of times they will appear
-                pre_items_list = list()
-                items_list = list()
-
-                for j in range(len(drawn_letters)):
-                    if j == 0:
-                        # We make sure that at least one letter occurs twice
-                        # so that the exercise remains interesting !
-                        # But the number of cases this letter occurs 3 three
-                        # times  should be limited to keep sufficient
-                        # simple cases for the pupils to begin with.
-                        # It is really easy to make it much more complicated
-                        # simply giving:
-                        # nb_occurences_of_the_same_letter=<enough_high_nb>
-                        # as an argument.
-                        if random.random() < 0.5:
-                            occurences_nb = 2
-                        else:
-                            occurences_nb = \
-                                random.randint(
-                                    min(2, same_letter_max_occurences),
-                                    same_letter_max_occurences)
+            for j in range(len(drawn_letters)):
+                if j == 0:
+                    # We make sure that at least one letter occurs twice
+                    # so that the exercise remains interesting !
+                    # But the number of cases this letter occurs 3 three
+                    # times  should be limited to keep sufficient
+                    # simple cases for the pupils to begin with.
+                    # It is really easy to make it much more complicated
+                    # simply giving:
+                    # nb_occurences_of_the_same_letter=<enough_high_nb>
+                    # as an argument.
+                    if random.random() < 0.5:
+                        occurences_nb = 2
                     else:
                         occurences_nb = \
-                            random.randint(1, same_letter_max_occurences)
+                            random.randint(
+                                min(2, same_letter_max_occurences),
+                                same_letter_max_occurences)
+                else:
+                    occurences_nb = \
+                        random.randint(1, same_letter_max_occurences)
 
-                    if occurences_nb >= 1:
-                        for k in range(occurences_nb):
-                            pre_items_list.append(drawn_letters[j])
+                if occurences_nb >= 1:
+                    for k in range(occurences_nb):
+                        pre_items_list.append(drawn_letters[j])
 
-                # draw the number of numeric Items
-                nb_item_num = random.randint(1, PR_NUMERIC_ITEMS_MAX_NB)
+            # draw the number of numeric Items
+            nb_item_num = random.randint(1, PR_NUMERIC_ITEMS_MAX_NB)
 
-                # put them in the pre items' list
-                for j in range(nb_item_num):
-                    pre_items_list.append(NUMERIC)
+            # put them in the pre items' list
+            for j in range(nb_item_num):
+                pre_items_list.append(NUMERIC)
 
-                # prepare the items' list that will be given to the Product's
-                # constructor
-                loop_nb = len(pre_items_list)
+            # prepare the items' list that will be given to the Product's
+            # constructor
+            loop_nb = len(pre_items_list)
 
-                for j in range(loop_nb):
-                    next_item_kind = random.choice(pre_items_list)
+            for j in range(loop_nb):
+                next_item_kind = random.choice(pre_items_list)
 
-                    # It's not really useful nor really possible to limit the
-                    # number
-                    # of occurences of the same letter being drawn twice in
-                    # a row because it belongs to the exercise and there
-                    # are many cases when
-                    # the same letter is in the list in 3 over 4 elements.
-                    # if j >= 1 and next_item_kind == items_list[j - 1]
-                    # .raw_value:
-                    #    pre_items_list.append(next_item_kind)
-                    #    next_item_kind = random.choice(pre_items_list)
+                # It's not really useful nor really possible to limit the
+                # number
+                # of occurences of the same letter being drawn twice in
+                # a row because it belongs to the exercise and there
+                # are many cases when
+                # the same letter is in the list in 3 over 4 elements.
+                # if j >= 1 and next_item_kind == items_list[j - 1]
+                # .raw_value:
+                #    pre_items_list.append(next_item_kind)
+                #    next_item_kind = random.choice(pre_items_list)
 
-                    if next_item_kind == NUMERIC:
-                        temp_item = Item((random.choices(['+', '-'],
-                                                         cum_weights=[0.75,
-                                                                      1])[0],
-                                          random.randint(1, max_coeff),
-                                          1))
-                        items_list.append(temp_item)
+                if next_item_kind == NUMERIC:
+                    temp_item = Item((random.choices(['+', '-'],
+                                                     cum_weights=[0.75,
+                                                                  1])[0],
+                                      random.randint(1, max_coeff),
+                                      1))
+                    items_list.append(temp_item)
 
-                    else:
-                        item_value = next_item_kind
-                        temp_item = Item((random.choices(['+', '-'],
-                                                         cum_weights=[0.9,
-                                                                      1])[0],
-                                          item_value,
-                                          random.randint(1, max_expon)))
-                        items_list.append(temp_item)
+                else:
+                    item_value = next_item_kind
+                    temp_item = Item((random.choices(['+', '-'],
+                                                     cum_weights=[0.9,
+                                                                  1])[0],
+                                      item_value,
+                                      random.randint(1, max_expon)))
+                    items_list.append(temp_item)
 
-                # so now that the items_list is complete,
-                # let's build the Product !
-                self.objct = Product(items_list)
-                self.objct.set_compact_display(False)
+            # so now that the items_list is complete,
+            # let's build the Product !
+            self.objct = Product(items_list)
+            self.objct.set_compact_display(False)
 
-                # Let's take some × symbols off the Product to match a more
-                # usual situation
-                for i in range(len(self.objct) - 1):
-                    if ((self.objct.factor[i].is_numeric()
-                         and self.objct.factor[i + 1].is_literal())
-                        or (self.objct.factor[i].is_literal()
-                            and self.objct.factor[i + 1].is_literal()
-                            and self.objct.factor[i].raw_value
-                            != self.objct.factor[i + 1].raw_value
-                        and random.random() > 0.5)):
-                        # __
-                        self.objct.info[i] = False
+            # Let's take some × symbols off the Product to match a more
+            # usual situation
+            for i in range(len(self.objct) - 1):
+                if ((self.objct.factor[i].is_numeric()
+                     and self.objct.factor[i + 1].is_literal())
+                    or (self.objct.factor[i].is_literal()
+                        and self.objct.factor[i + 1].is_literal()
+                        and self.objct.factor[i].raw_value
+                        != self.objct.factor[i + 1].raw_value
+                    and random.random() > 0.5)):
+                    # __
+                    self.objct.info[i] = False
 
         # 2d CASE:
         # SUM OF PRODUCTS REDUCTION
@@ -334,146 +307,13 @@ class Q_AlgebraExpressionReduction(Q_Structure):
         # SUM REDUCTION
         if q_kind == 'sum':
             self.kind_of_answer = 'sum'
-            # Let's determine the length of the Sum to create
-            if not ('length' in options and is_integer(options['length'])
-                    and options['length'] >= 1):
-                # __
-                length = random.choice([n + MIN_LENGTH
-                                        for n in range(LENGTH_SPAN)])
-
-            else:
-                length = options['length']
-
-            # Creation of the Polynomial...
-
-            if 'short_test' in options:
-                self.objct = Polynomial((RANDOMLY,
-                                         max_coeff,
-                                         2,
-                                         length - 1))
-                temp_sum = self.objct.term
-
-                degree_1_monomial_here = False
-                for i in range(len(temp_sum)):
-                    if temp_sum[i].degree == 1:
-                        degree_1_monomial_here = True
-
-                if degree_1_monomial_here == 1:
-                    temp_sum.append(Monomial((random.choice(['+', '-']),
-                                              1,
-                                              1)))
-                else:
-                    # this should be 2d deg Polynomial w/out any 1st deg term
-                    temp_sum.append(Monomial((random.choice(['+', '-']),
-                                              1, 2)))
-
-                self.objct.reset_element()
-
-                random.shuffle(temp_sum)
-                for i in range(length):
-                    self.objct.term.append(temp_sum.pop())
-                    self.objct.info.append(False)
-
-            else:
-                self.objct = Polynomial((RANDOMLY,
-                                         max_coeff,
-                                         max_expon,
-                                         length))
-
-        if q_kind == 'long_sum':
-            m = []
-
-            for i in range(length):
-                m.append(Monomial(RANDOMLY,
-                                  max_coeff,
-                                  max_expon))
-
-            self.objct = Polynomial(m)
-
-        if q_kind == 'long_sum_including_a_coeff_1':
-            m = []
-
-            for i in range(length - 1):
-                m.append(Monomial(RANDOMLY,
-                                  max_coeff,
-                                  max_expon))
-
-            m.append(Monomial(RANDOMLY,
-                              1,
-                              max_expon))
-
-            terms_list = []
-
-            random.shuffle(m)
-            for i in range(len(m)):
-                terms_list.append(m.pop())
-
-            self.objct = Polynomial(terms_list)
-
-        if q_kind == 'sum_not_reducible':
-            self.kind_of_answer = 'sum_not_reducible'
-
-            m1 = Monomial((RANDOMLY, max_coeff, 0))
-            m2 = Monomial((RANDOMLY, max_coeff, 1))
-            m3 = Monomial((RANDOMLY, max_coeff, 2))
-
-            lil_box = [m1, m2, m3]
-            random.shuffle(lil_box)
-
-            self.objct = Polynomial([lil_box.pop()])
-
-            for i in range(len(lil_box) - 1):
-                self.objct.append(lil_box.pop())
-
-        if q_kind == 'sum_with_minus-brackets':
-            minus_brackets = []
-
-            for i in range(3):
-                minus_brackets.append(Expandable((Monomial(('-', 1, 0)),
-                                                  Polynomial((RANDOMLY,
-                                                              15, 2,
-                                                              random
-                                                              .randint(2, 3)))
-                                                  )))
-            m1 = Monomial((RANDOMLY, max_coeff, 0))
-            m2 = Monomial((RANDOMLY, max_coeff, 1))
-            m3 = Monomial((RANDOMLY, max_coeff, 2))
-            m4 = Monomial((RANDOMLY, max_coeff, random.randint(0, 2)))
-
-            plus_brackets = []
-
-            for i in range(3):
-                plus_brackets.append(Expandable((Monomial(('+', 1, 0)),
-                                                 Polynomial((RANDOMLY,
-                                                             15, 2,
-                                                             random
-                                                             .randint(2, 3)))
-                                                 )))
-
-            big_box = []
-            big_box.append(minus_brackets[0])
-
-            if ('minus_brackets_nb' in options
-                and 2 <= options['minus_brackets_nb'] <= 3):
-                # __
-                big_box.append(minus_brackets[1])
-
-                if options['minus_brackets_nb'] == 3:
-                    big_box.append(minus_brackets[2])
-
-            lil_box = [m1, m2, m3, m4]
-            random.shuffle(lil_box)
-            for i in range(random.randint(1, 4)):
-                big_box.append(lil_box.pop())
-
-            if ('plus_brackets_nb' in options
-                and 1 <= options['plus_brackets_nb'] <= 3):
-                # __
-                for i in range(options['plus_brackets_nb']):
-                    big_box.append(plus_brackets[i])
-
-            random.shuffle(big_box)
-            self.objct = Sum(big_box)
+            length = options.get('length',
+                                 random.choice([n + MIN_LENGTH
+                                                for n in range(LENGTH_SPAN)]))
+            self.objct = Polynomial((RANDOMLY,
+                                     max_coeff,
+                                     max_expon,
+                                     length))
 
         # Creation of the expression:
         number = 0
