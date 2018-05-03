@@ -1323,6 +1323,29 @@ def preprocess_decimalfractions_pairs_tag(qkw=None, **kwargs):
             'overlap_noqr': qkw.get('overlap', 0)}
 
 
+def preprocess_divisibles(intsp, reason='no reason'):
+    """
+    Called to help to choose special numbers divisible by intsp (e.g. 3 or 9).
+
+    :param intsp: the possible divisor
+    """
+    result = {}
+    if intsp == intspan('3'):
+        # This added condition makes sure that the two last digits of 3×nb2
+        # will not be a multiple of 3.
+        result = {'nb2_mod100_ge': 34}
+    if intsp == intspan('9'):
+        # This added condition makes sure that the two last digits of 9×nb2
+        # will not be a multiple of 9.
+        result = {'nb2_mod100_ge': 12}
+    elif intsp == intspan('4'):
+        if reason == '4easy':
+            result = {'nb2_mod100_range': '0-10,25-35,50-60,75-85'}
+        elif reason == '4harder':
+            result = {'nb2_mod100_range': '11-24,36-49,61-74,86-99'}
+    return result
+
+
 def postprocess_decimalfractionssums_query(qr, qkw=None, **kwargs):
     """
     Create two decimal fractions from the drawn decimal number.
@@ -1783,6 +1806,18 @@ class mc_source(object):
                 {'pairs': 2, 'triples': 3, 'quadruples': 4, 'quintuples': 5,
                  'sextuples': 6}[source_id.split(':')[0][len('nn'):]]
             spans = IntspansProduct(source_id.split(':')[1], nb_of_elts)
+            if nb_of_elts == 2:
+                reason = 'no reason'
+                if (qkw.get('variant2', 'default')
+                    == 'ensure_no_confusion_between_rules'
+                    and spans.spans[0] in [intspan('3'), intspan('9')]):
+                    reason = '3or9'
+                if spans.spans[0] == intspan('4'):
+                    if qkw.get('level', 'default') != 'default':
+                        reason = '4' + qkw.get('level', 'default')
+                if reason != 'no reason':
+                    kwargs.update(preprocess_divisibles(spans.spans[0],
+                                                        reason=reason))
             random_result = sorted(spans.random_draw(**kwargs))
             log.debug('Random draw output = {}\n'.format(random_result))
             db_source = {2: shared.nnpairs_source,
