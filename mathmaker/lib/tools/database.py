@@ -94,19 +94,36 @@ class IntspansProduct(object):
         self.spans_str = spans
         self.spans = [intspan(_) for _ in spans]
 
-    def turn_to_query_conditions(self):
+    def turn_to_query_conditions(self, nb_list=None, nb_modifiers=None):
         """Turn self to a SQLite query condition."""
         query = ''
         prevails = []
+        if nb_list is not None and (len(nb_list) != len(self.spans_str)):
+            raise ValueError('nb_list must be either None or a list of {} '
+                             'elements. Found {} instead.'
+                             .format(len(self.spans_str), repr(nb_list)))
+        if nb_modifiers is None:
+            nb_modifiers = ['' for _ in self.spans_str]
+        if len(nb_modifiers) == 1:
+            nb_modifiers = [nb_modifiers[0] for i in range(len(nb_modifiers))]
+        if len(nb_modifiers) != len(self.spans_str):
+            raise ValueError('nb_modifiers can be None or a list of one '
+                             'element or a list of {} elements. Found {} '
+                             'instead.'.format(len(self.spans_str),
+                                               repr(nb_modifiers)))
         for i, span in enumerate(self.spans_str):
             ranges = []
             single_values = []
             s = span.split(',')
+            if nb_list is None:
+                nb_id = 'nb{}{}'.format(i + 1, nb_modifiers[i])
+            else:
+                nb_id = '{}{}'.format(nb_list[i], nb_modifiers[i])
             for r in s:
                 if '-' in r:
                     mini, maxi = r.split('-')
-                    ranges.append('nb{} BETWEEN {} AND {}'
-                                  .format(i + 1, mini, maxi))
+                    ranges.append('{} BETWEEN {} AND {}'
+                                  .format(nb_id, mini, maxi))
                 elif r != '':  # only handle really provided values, not ''
                     single_values.append(r)
             ranges = ' OR '.join(ranges)
@@ -114,7 +131,7 @@ class IntspansProduct(object):
                                            for v in single_values])
             q = ''
             if single_values_str:
-                q += 'nb{} IN ({})'.format(i + 1, single_values_str)
+                q += '{} IN ({})'.format(nb_id, single_values_str)
                 if len(single_values) == 1:
                     prevails += single_values
             if ranges:
@@ -294,10 +311,16 @@ class IntspansProduct(object):
             matches = re.findall(regex_rule, kw)
             for value in matches:
                 possibilities = [p for p in possibilities
-                                 if p % int(value) >= kwargs[kw]]
+                                 if p % int(value) >= int(kwargs[kw])]
                 applied_conditions.append('nb{}mod{}_ge={}'.format(i + 1,
                                                                    value,
                                                                    kwargs[kw]))
+        regex_rule = r'nb{}_mod(\d+)_range'.format(i + 1)
+        for kw in kwargs:
+            matches = re.findall(regex_rule, kw)
+            for value in matches:
+                possibilities = [p for p in possibilities
+                                 if p % int(value) in intspan(kwargs[kw])]
         return possibilities, applied_conditions, result
 
     @staticmethod
@@ -680,6 +703,15 @@ class source(object):
                                                            match[0],
                                                            match[1],
                                                            kwargs[kw])
+                    kn += 1
+            elif re.findall(r'nb(\d)_mod(\d+)_range', kw):
+                for match in re.findall(r'nb(\d)_mod(\d+)_range', kw):
+                    result += "{} {} "\
+                        .format(next(hook(kn)),
+                                IntspansProduct(kwargs[kw])
+                                .turn_to_query_conditions(
+                                nb_list=['nb{}'.format(match[0])],
+                                nb_modifiers=[' % {} '.format(match[1])]))
                     kn += 1
             elif kw.endswith('_noqr'):
                 pass
