@@ -50,11 +50,11 @@ class sub_object(component.structure):
         self.transduration = 21
 
         if self.slideshow:
-            self.wording = _('Area of this right triangle?')
+            self.wording = _('Area?')
             self.part2_wording = r'{\small' + _('(Length unit: {})')\
                 .format(self.length_unit) + '}'
         else:
-            self.wording = _('Area of this right triangle? |hint:area_unit|')
+            self.wording = _('Area of this triangle? |hint:area_unit|')
             self.part2_wording = r'{\small' + _('(Lengths in {})')\
                 .format(self.length_unit) + '}'
         setup_wording_format_of(self)
@@ -68,7 +68,7 @@ class sub_object(component.structure):
                         self.part2_wording)
         else:
             return shared.machine.write_layout(
-                (1, 2), [4, 9],
+                (1, 2), [3, 10],
                 [self.polygon.drawn,
                  r'{} {}'
                  .format(self.wording.format(**self.wording_format),
