@@ -50,6 +50,7 @@ from .geometry import trigonometry_calculate_angle
 from .geometry import trigonometry_formula
 from .geometry import trigonometry_vocabulary
 from .geometry import area_rectangle, perimeter_rectangle, perimeter_polygon
+from .geometry import area_righttriangle
 from .geometry import rectangle_length_or_width
 
 __all__ = ['expand_simple', 'expand_double',
@@ -68,7 +69,7 @@ __all__ = ['expand_simple', 'expand_double',
            'numeric_expansion', 'numeric_factorization',
            'divisibility_vocabulary', 'divisibility_rule',
            'area_rectangle', 'perimeter_rectangle', 'perimeter_polygon',
-           'rectangle_length_or_width',
+           'rectangle_length_or_width', 'area_righttriangle',
            'intercept_theorem_triangle', 'intercept_theorem_triangle_formula',
            'intercept_theorem_butterfly',
            'intercept_theorem_butterfly_formula',
