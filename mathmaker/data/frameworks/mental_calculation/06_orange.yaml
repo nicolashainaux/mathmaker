@@ -12,3 +12,39 @@ divisibility_rules: !!omap
                  divisibility rule, variant=false, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
                  divisibility rule, variant=true, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
                  divisibility rule, variant=false, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
+
+W01a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility rule, variant=true, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant=false, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant=true, level=harder, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant=false, level=easy, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
+
+W01b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility vocabulary, variant=remainder -> intpairs_3to9 (1)
+                 divisibility rule, variant=false, level=easy, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
+                 area rectangle, picture=true -> intpairs_2to9, nb_variant=decimal1 (1)
+
+W01c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: numeric expansion -> mergedinttriples_3to9 (1)
+                 divisibility rule, variant=true, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 addi direct, context=angles -> nnpairs:11-69×11-69 (1)
+                 multi direct -> decimal_and_10_100_1000 (1)
+
+W01d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility rule, variant=false, level=harder, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-2500, nb2_notmod=10 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 multi hole -> int_irreducible_frac (1)
+                 multi clever -> table_15 (1)
+                 decimal numerals, direction=to_decimal -> decimals (1)

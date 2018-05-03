@@ -129,6 +129,26 @@
         "06_orange",
         "divisibility_rules"
     ],
+    "06_orange_W01a": [
+        "mental_calculation",
+        "06_orange",
+        "W01a"
+    ],
+    "06_orange_W01b": [
+        "mental_calculation",
+        "06_orange",
+        "W01b"
+    ],
+    "06_orange_W01c": [
+        "mental_calculation",
+        "06_orange",
+        "W01c"
+    ],
+    "06_orange_W01d": [
+        "mental_calculation",
+        "06_orange",
+        "W01d"
+    ],
     "02_white2_multiplications_reversed": [
         "mental_calculation",
         "02_white2",
