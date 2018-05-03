@@ -41,9 +41,6 @@ class sub_object(component.structure):
             Number(Number(build_data[0]) * Number(build_data[0])
                    + Number(build_data[1]) * Number(build_data[1]))\
             .sqrt().rounded(Decimal('0.1'))
-        import sys
-        sys.stderr.write('build_data={}\n'.format(build_data))
-        sys.stderr.write('hypotenuse_length={}\n'.format(hypotenuse_length))
         super().setup("polygon",
                       polygon_data=(3, 'triangle', 'right_triangle',
                                     'triangle_1_1_1', 'all_different', 2, 1,
