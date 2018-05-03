@@ -1,0 +1,14 @@
+divisibility_rules: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: divisibility rules"
+  - exercise: !!omap
+    - questions: divisibility rule -> nnpairs:2×501-5000, nb2_notmod=10 (1)
+                 divisibility rule -> nnpairs:5×501-2500, nb2_notmod=10 (1)
+                 divisibility rule -> nnpairs:10×501-5000 (1)
+                 divisibility rule, variant=true, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant=false, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 divisibility rule -> nnpairs:4×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant=true, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant=false, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant=true, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
+                 divisibility rule, variant=false, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
