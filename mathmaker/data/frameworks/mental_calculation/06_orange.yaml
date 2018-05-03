@@ -13,6 +13,14 @@ divisibility_rules: !!omap
                  divisibility rule, variant=true, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
                  divisibility rule, variant=false, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
 
+right_triangles: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: right triangles"
+  - exercise: !!omap
+    - questions: perimeter righttriangle -> nnpairs:3-9×3-9, code=1_1 (5)
+                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (5)
+
+
 W01a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
