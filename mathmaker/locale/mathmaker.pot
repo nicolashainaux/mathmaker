@@ -2322,9 +2322,10 @@ msgstr ""
 msgid "Area of this rectangle?"
 msgstr ""
 
+#: lib/document/content/geometry/area_righttriangle.py:54
 #: lib/document/content/geometry/perimeter_rectangle.py:46
-#: lib/document/content/geometry/area_righttriangle.py:57
 #: lib/document/content/geometry/area_rectangle.py:44
+#: lib/document/content/geometry/perimeter_righttriangle.py:54
 msgid "(Length unit: {})"
 msgstr ""
 
@@ -2336,22 +2337,15 @@ msgstr ""
 msgid "Perimeter of this rectangle?"
 msgstr ""
 
-#: lib/document/content/geometry/perimeter_rectangle.py:51
-#: lib/document/content/geometry/area_righttriangle.py:61
+#: lib/document/content/geometry/perimeter_righttriangle.py:59
+#: lib/document/content/geometry/area_righttriangle.py:58
 #: lib/document/content/geometry/area_rectangle.py:48
+#: lib/document/content/geometry/perimeter_rectangle.py:51
 msgid "(Lengths in {})"
 msgstr ""
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:63
 msgid "Mental calculation:  final test for yellow belt, second stripe"
-msgstr ""
-
-#: lib/document/content/geometry/area_righttriangle.py:56
-msgid "Area of this right triangle?"
-msgstr ""
-
-#: lib/document/content/geometry/area_righttriangle.py:60
-msgid "Area of this right triangle? |hint:area_unit|"
 msgstr ""
 
 #: data/frameworks/mental_calculation/06_orange.yaml:3
@@ -2360,4 +2354,20 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/06_orange.yaml:18
 msgid "Mental calculation: right triangles"
+msgstr ""
+
+#: lib/document/content/geometry/area_righttriangle.py:53
+msgid "Area?"
+msgstr ""
+
+#: lib/document/content/geometry/perimeter_righttriangle.py:53
+msgid "Perimeter?"
+msgstr ""
+
+#: lib/document/content/geometry/perimeter_righttriangle.py:57
+msgid "Perimeter of this triangle? |hint:length_unit|"
+msgstr ""
+
+#: lib/document/content/geometry/area_righttriangle.py:57
+msgid "Area of this triangle? |hint:area_unit|"
 msgstr ""

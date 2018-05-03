@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2018-05-03 11:56+0200\n"
+"PO-Revision-Date: 2018-05-03 15:40+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -2670,9 +2670,10 @@ msgstr "(Vrai ou faux ?)"
 msgid "Area of this rectangle?"
 msgstr "Aire de ce rectangle ?"
 
+#: lib/document/content/geometry/area_righttriangle.py:54
 #: lib/document/content/geometry/perimeter_rectangle.py:46
-#: lib/document/content/geometry/area_righttriangle.py:57
 #: lib/document/content/geometry/area_rectangle.py:44
+#: lib/document/content/geometry/perimeter_righttriangle.py:54
 msgid "(Length unit: {})"
 msgstr "(Unité de longueur : {})"
 
@@ -2684,23 +2685,16 @@ msgstr "Réponse : "
 msgid "Perimeter of this rectangle?"
 msgstr "Périmètre de ce rectangle ?"
 
-#: lib/document/content/geometry/perimeter_rectangle.py:51
-#: lib/document/content/geometry/area_righttriangle.py:61
+#: lib/document/content/geometry/perimeter_righttriangle.py:59
+#: lib/document/content/geometry/area_righttriangle.py:58
 #: lib/document/content/geometry/area_rectangle.py:48
+#: lib/document/content/geometry/perimeter_rectangle.py:51
 msgid "(Lengths in {})"
 msgstr "(Longueurs en {})"
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:63
 msgid "Mental calculation:  final test for yellow belt, second stripe"
 msgstr "Calcul mental : ceinture jaune, deuxième trait"
-
-#: lib/document/content/geometry/area_righttriangle.py:56
-msgid "Area of this right triangle?"
-msgstr "Aire de ce triangle rectangle ?"
-
-#: lib/document/content/geometry/area_righttriangle.py:60
-msgid "Area of this right triangle? |hint:area_unit|"
-msgstr "Aire de ce triangle rectangle ? |hint:area_unit|"
 
 #: data/frameworks/mental_calculation/06_orange.yaml:3
 msgid "Mental calculation: divisibility rules"
@@ -2709,6 +2703,31 @@ msgstr "Calcul mental : critères de divisibilité"
 #: data/frameworks/mental_calculation/06_orange.yaml:18
 msgid "Mental calculation: right triangles"
 msgstr "Calcul mental : triangles rectangles"
+
+#: lib/document/content/geometry/area_righttriangle.py:53
+msgid "Area?"
+msgstr "Aire ?"
+
+#: lib/document/content/geometry/perimeter_righttriangle.py:53
+msgid "Perimeter?"
+msgstr "Périmètre ?"
+
+#: lib/document/content/geometry/perimeter_righttriangle.py:57
+msgid "Perimeter of this triangle? |hint:length_unit|"
+msgstr "Périmètre de ce triangle ? |hint:length_unit|"
+
+#: lib/document/content/geometry/area_righttriangle.py:57
+msgid "Area of this triangle? |hint:area_unit|"
+msgstr "Aire de ce triangle ? |hint:area_unit|"
+
+#~ msgid "Area of this right triangle? |hint:area_unit|"
+#~ msgstr "Aire de ce triangle rectangle ? |hint:area_unit|"
+
+#~ msgid "Perimeter of this triangle? |hint:area_unit|"
+#~ msgstr "Périmètre de ce triangle ? |hint:area_unit|"
+
+#~ msgid "Area of this right triangle?"
+#~ msgstr "Aire de ce triangle rectangle ?"
 
 #~ msgid "Expanding and reducing algebraic expressions"
 #~ msgstr "Développer et réduire des expressions littérales"
@@ -2742,9 +2761,6 @@ msgstr "Calcul mental : triangles rectangles"
 
 #~ msgid "Answer:"
 #~ msgstr "Réponse :"
-
-#~ msgid "Perimeter of this triangle? |hint:length_unit|"
-#~ msgstr "Périmètre de ce triangle ? |hint:length_unit|"
 
 #~ msgid "Perimeter of this quadrilateral? |hint:length_unit|"
 #~ msgstr "Périmètre de ce quadrilatère ? |hint:length_unit|"
