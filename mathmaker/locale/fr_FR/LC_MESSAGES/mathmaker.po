@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2018-05-03 15:40+0200\n"
+"PO-Revision-Date: 2018-05-05 07:41+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -2719,6 +2719,15 @@ msgstr "Périmètre de ce triangle ? |hint:length_unit|"
 #: lib/document/content/geometry/area_righttriangle.py:57
 msgid "Area of this triangle? |hint:area_unit|"
 msgstr "Aire de ce triangle ? |hint:area_unit|"
+
+#: lib/document/content/calculation/fraction_simplification.py:47
+#, python-brace-format
+msgid "Reduce: {fraction}"
+msgstr "Simplifier : {fraction}"
+
+#: data/frameworks/mental_calculation/06_orange.yaml:25
+msgid "Mental calculation: fractions simplifications"
+msgstr "Calcul mental : simplifications de fractions"
 
 #~ msgid "Area of this right triangle? |hint:area_unit|"
 #~ msgstr "Aire de ce triangle rectangle ? |hint:area_unit|"

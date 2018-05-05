@@ -2371,3 +2371,12 @@ msgstr ""
 #: lib/document/content/geometry/area_righttriangle.py:57
 msgid "Area of this triangle? |hint:area_unit|"
 msgstr ""
+
+#: lib/document/content/calculation/fraction_simplification.py:47
+#, python-brace-format
+msgid "Reduce: {fraction}"
+msgstr ""
+
+#: data/frameworks/mental_calculation/06_orange.yaml:25
+msgid "Mental calculation: fractions simplifications"
+msgstr ""
