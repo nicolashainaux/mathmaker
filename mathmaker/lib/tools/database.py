@@ -900,7 +900,7 @@ def db_table(tag):
     elif tag.startswith('deciinttriplesforprop'):
         return 'deci_int_triples_for_prop'
     elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
-                 'digits_places', 'fracdigits_places',
+                 'digits_places', 'fracdigits_places', 'simple_fractions',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
                  'int_quintuples', 'int_sextuples', 'anglessets']:
         return tag
