@@ -20,6 +20,12 @@ right_triangles: !!omap
     - questions: perimeter righttriangle -> nnpairs:3-9×3-9, code=1_1 (5)
                  area righttriangle -> nnpairs:3-9×3-9, code=1_1 (5)
 
+fractions_simplifications: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: fractions simplifications"
+  - exercise: !!omap
+    - questions: fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (10)
+                 # fraction simplification -> mergedinttriples_3to9, code=1_1_1 (10)
 
 W01a: !!omap
   - preset: "mental calculation slideshow"
