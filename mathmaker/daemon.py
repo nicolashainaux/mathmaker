@@ -27,12 +27,8 @@ from mathmaker import DAEMON_PORT
 from mathmaker.lib.tools.request_handler import MathmakerHTTPRequestHandler
 
 
-def run():
+def entry_point():
     with daemon.DaemonContext(stdout=sys.stdout, stderr=sys.stderr):
         server_address = ('', DAEMON_PORT)
         httpd = HTTPServer(server_address, MathmakerHTTPRequestHandler)
         httpd.serve_forever()
-
-
-if __name__ == '__main__':
-    run()

@@ -183,7 +183,7 @@ setup(
     packages=find_packages(exclude=['tests', 'docs']),
     entry_points={
         'console_scripts': ['mathmaker = mathmaker.cli:entry_point',
-                            'mathmakerd = mathmaker.daemon:run'],
+                            'mathmakerd = mathmaker.daemon:entry_point'],
     },
     data_files=create_mo_files(force='--force' in sys.argv)
     + retrieve_fonts(force='--force' in sys.argv)
