@@ -105,6 +105,9 @@ def __main__():
     if os.path.isfile(settings.path.shapes_db_dist):
         sys.stderr.write('Remove previous shapes database...\n')
         os.remove(settings.path.shapes_db_dist)
+    if os.path.isfile(settings.path.solids_db_dist):
+        sys.stderr.write('Remove previous shapes database...\n')
+        os.remove(settings.path.solids_db_dist)
     if os.path.isfile(settings.path.anglessets_db_dist):
         sys.stderr.write('Remove previous anglessets database...\n')
         os.remove(settings.path.anglessets_db_dist)
@@ -114,11 +117,13 @@ def __main__():
     sys.stderr.write('Create new databases...\n')
     open(settings.path.db_dist, 'a').close()
     open(settings.path.shapes_db_dist, 'a').close()
+    open(settings.path.solids_db_dist, 'a').close()
     open(settings.path.anglessets_db_dist, 'a').close()
     open(settings.path.natural_nb_tuples_db_dist, 'a').close()
     sys.stderr.write('Connect to databases...\n')
     db = sqlite3.connect(settings.path.db_dist)
     shapes_db = sqlite3.connect(settings.path.shapes_db_dist)
+    solids_db = sqlite3.connect(settings.path.solids_db_dist)
     anglessets_db = sqlite3.connect(settings.path.anglessets_db_dist)
     natural_nb_tuples_db = sqlite3.connect(
         settings.path.natural_nb_tuples_db_dist)
@@ -1571,14 +1576,57 @@ def __main__():
         "VALUES(?, ?)",
         db_rows)
 
+    solids_db_creation_queries = []
+    sys.stderr.write('Solids db: insert solids...\n')
+    # type will be: cuboid, cube, prism etc.
+    creation_query = '''CREATE TABLE polyhedra
+                        (id INTEGER PRIMARY KEY,
+                         faces_nb INTEGER, type TEXT, variant INTEGER,
+                         direction TEXT,
+                         drawDate INTEGER)'''
+    solids_db_creation_queries.append(creation_query)
+    solids_db.execute(creation_query)
+    db_rows = [(6, 'rightcuboid', 0, 0, 'top-right'),
+               (6, 'rightcuboid', 0, 0, 'top-left'),
+               (6, 'rightcuboid', 0, 0, 'bottom-left'),
+               (6, 'rightcuboid', 0, 0, 'bottom-right'),
+               (6, 'rightcuboid', 0, 1, 'top-right'),
+               (6, 'rightcuboid', 0, 1, 'top-left'),
+               (6, 'rightcuboid', 0, 1, 'bottom-left'),
+               (6, 'rightcuboid', 0, 1, 'bottom-right'),
+               (6, 'rightcuboid', 0, 2, 'top-right'),
+               (6, 'rightcuboid', 0, 2, 'top-left'),
+               (6, 'rightcuboid', 0, 2, 'bottom-left'),
+               (6, 'rightcuboid', 0, 2, 'bottom-right'),
+               (6, 'rightcuboid', 0, 3, 'top-right'),
+               (6, 'rightcuboid', 0, 3, 'top-left'),
+               (6, 'rightcuboid', 0, 3, 'bottom-left'),
+               (6, 'rightcuboid', 0, 3, 'bottom-right'),
+               (6, 'rightcuboid', 0, 4, 'top-right'),
+               (6, 'rightcuboid', 0, 4, 'top-left'),
+               (6, 'rightcuboid', 0, 4, 'bottom-left'),
+               (6, 'rightcuboid', 0, 4, 'bottom-right'),
+               (6, 'rightcuboid', 0, 5, 'top-right'),
+               (6, 'rightcuboid', 0, 5, 'top-left'),
+               (6, 'rightcuboid', 0, 5, 'bottom-left'),
+               (6, 'rightcuboid', 0, 5, 'bottom-right'),
+               ]
+    solids_db.executemany(
+        "INSERT INTO polyhedra("
+        "faces_nb, type, variant, direction, drawDate) "
+        "VALUES(?, ?, ?, ?, ?)",
+        db_rows)
+
     sys.stderr.write('Commit changes to databases...\n')
     db.commit()
     shapes_db.commit()
+    solids_db.commit()
     anglessets_db.commit()
     natural_nb_tuples_db.commit()
     sys.stderr.write('Close databases...\n')
     db.close()
     shapes_db.close()
+    solids_db.close()
     anglessets_db.close()
     natural_nb_tuples_db.close()
     sys.stderr.write('Create databases\' indices...\n')
@@ -1595,6 +1643,13 @@ def __main__():
         shapes_db_index.update({key: value})
     with open(settings.shapes_db_index_path, 'w') as f:
         json.dump(shapes_db_index, f, indent=4)
+        f.write('\n')
+    solids_db_index = {}
+    for qr in solids_db_creation_queries:
+        key, value = parse_sql_creation_query(qr)
+        solids_db_index.update({key: value})
+    with open(settings.solids_db_index_path, 'w') as f:
+        json.dump(solids_db_index, f, indent=4)
         f.write('\n')
     anglessets_db_index = {}
     for qr in anglessets_db_creation_queries:

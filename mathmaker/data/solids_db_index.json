@@ -1,0 +1,10 @@
+{
+    "polyhedra": [
+        "id",
+        "faces_nb",
+        "type",
+        "variant",
+        "direction",
+        "drawDate"
+    ]
+}

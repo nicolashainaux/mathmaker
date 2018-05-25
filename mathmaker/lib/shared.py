@@ -125,6 +125,7 @@ def init():
     db = sqlite3.connect(settings.path.db)
     shapes_db = sqlite3.connect(settings.path.shapes_db)
     anglessets_db = sqlite3.connect(settings.path.anglessets_db)
+    shapes_db = sqlite3.connect(settings.path.shapes_db)
     natural_nb_tuples_db = sqlite3.connect(settings.path.natural_nb_tuples_db)
 
     from mathmaker.lib.tools import database
