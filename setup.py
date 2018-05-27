@@ -167,7 +167,7 @@ setup(
     license=__licence__,
     author=__author__,
     tests_require=['tox'],
-    install_requires=['mathmakerlib>=0.6.1',
+    install_requires=['mathmakerlib>=0.7.0',
                       'polib>=1.0.8',
                       'python-daemon>=2.1.2',
                       'intspan>=1.5.8',

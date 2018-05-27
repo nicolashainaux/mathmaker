@@ -232,9 +232,9 @@ class IntspansProduct(object):
         applied_conditions = []
         excluded = kwargs.get('not_in', None)
         if excluded is not None:
-            if len(span) == 1:
-                value = str([_ for _ in span][0])
-                excluded = [v for v in excluded if v != value]
+            span_values = [str(_) for _ in span]
+            if all(v in excluded for v in span_values):
+                excluded = [v for v in excluded if v not in span_values]
             possibilities = [p for p in possibilities if p not in excluded]
             applied_conditions.append('not_in={}'.format(excluded))
         included = kwargs.get('nb{}_in'.format(i + 1), None)
@@ -517,7 +517,8 @@ class source(object):
         if "union" in kwargs:
             self.db.execute("UPDATE {} SET drawDate = 0;"
                             .format(kwargs['union']['table_name']))
-        if (not len(tuple(self.db.execute(self._cmd(**kwargs))))
+        cmd = self._cmd(**kwargs)
+        if (not len(tuple(self.db.execute(cmd)))
             and kwargs.get('not_in', None) is not None):
             if 'nb1_min' in kwargs and 'nb1_max' in kwargs:
                 kwargs.update({'not_in': [str(n)
@@ -533,6 +534,15 @@ class source(object):
                                           if not (Decimal(kwargs['nb2_min'])
                                                   <= Decimal(n)
                                                   <= Decimal(kwargs['nb2_max'])
+                                                  )]
+                               })
+            results = re.findall(r"nb(\d) BETWEEN (\d+) AND (\d+)", cmd)
+            for r in results:
+                kwargs.update({'not_in': [str(n)
+                                          for n in kwargs['not_in']
+                                          if not (Decimal(r[1])
+                                                  <= Decimal(n)
+                                                  <= Decimal(r[2])
                                                   )]
                                })
         return kwargs
@@ -851,6 +861,8 @@ def db_table(tag):
         return 'decimals'
     elif tag.startswith('deciinttriplesforprop'):
         return 'deci_int_triples_for_prop'
+    elif tag == 'rightcuboids':
+        return 'polyhedra'
     elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
                  'digits_places', 'fracdigits_places',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
@@ -898,7 +910,7 @@ def classify_tag(tag):
                  'decimals', 'decimalfractionssums', 'extdecimals',
                  'simple_fractions', 'dvipsnames_selection', 'polygons',
                  'int_triples', 'int_quadruples', 'int_quintuples',
-                 'int_sextuples', 'anglessets']:
+                 'int_sextuples', 'anglessets', 'rightcuboids']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -910,6 +922,8 @@ def preprocess_qkw(table_name, qkw=None):
     with open(settings.db_index_path) as f:
         db_index = json.load(f)
     with open(settings.shapes_db_index_path) as f:
+        db_index.update(json.load(f))
+    with open(settings.solids_db_index_path) as f:
         db_index.update(json.load(f))
     with open(settings.natural_nb_tuples_db_index_path) as f:
         db_index.update(json.load(f))
@@ -1857,7 +1871,7 @@ class mc_source(object):
         elif tag_classification == 'dvipsnames_selection':
             return shared.dvipsnames_selection_source.next(**kwargs)
         elif tag_classification == 'anglessets':
-            result = shared.anglessets_source.next(**kwargs)
+            return shared.anglessets_source.next(**kwargs)
         elif tag_classification == 'polygons':
             result = shared.polygons_source.next(**kwargs)
             nb_source, kwords = preprocess_polygons_sides_lengths_query(
@@ -1878,6 +1892,8 @@ class mc_source(object):
                         shared.int_pairs_source._timestamp({'nb1': sp[0],
                                                             'nb2': sp[1]})
             return result + nb_result
+        elif tag_classification == 'rightcuboids':
+            return shared.rightcuboids_source.next(**kwargs)
         elif tag_classification == 'deciinttriplesforprop':
             kwargs.update(
                 preprocess_deci_int_triplesforprop_tag(source_id, qkw=qkw))

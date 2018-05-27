@@ -30,6 +30,7 @@ from mathmaker.lib.constants import latex
 def init():
     global db
     global shapes_db
+    global solids_db
     global natural_nb_tuples_db
     global unique_letters_words_source
     global names_source
@@ -114,6 +115,7 @@ def init():
     global hexagon_4_2_shapes_source
     global hexagon_5_1_shapes_source
     global hexagon_6_shapes_source
+    global rightcuboids_source
     global ls_marks_source
     global enable_js_form
     global distcodes_source
@@ -125,6 +127,7 @@ def init():
     db = sqlite3.connect(settings.path.db)
     shapes_db = sqlite3.connect(settings.path.shapes_db)
     anglessets_db = sqlite3.connect(settings.path.anglessets_db)
+    solids_db = sqlite3.connect(settings.path.solids_db)
     natural_nb_tuples_db = sqlite3.connect(settings.path.natural_nb_tuples_db)
 
     from mathmaker.lib.tools import database
@@ -283,6 +286,9 @@ def init():
         'hexagon_5_1_shapes', ['id', 'shape_nb'], db=shapes_db)
     hexagon_6_shapes_source = database.source(
         'hexagon_6_shapes', ['id', 'shape_nb'], db=shapes_db)
+    rightcuboids_source = database.source(
+        'polyhedra', ['id', 'faces_nb', 'variant', 'direction'],
+        db=solids_db)
 
     markup = latex.MARKUP
 

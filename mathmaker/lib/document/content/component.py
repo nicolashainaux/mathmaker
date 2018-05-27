@@ -26,6 +26,7 @@ from decimal import Decimal
 from string import ascii_lowercase as alphabet
 from string import ascii_uppercase as ALPHABET
 
+from mathmakerlib import mmlib_setup
 from mathmakerlib.calculus import Number, Unit, Fraction, is_integer
 from mathmakerlib.calculus.unit import COMMON_LENGTH_UNITS
 
@@ -36,6 +37,7 @@ from mathmaker.lib.tools import rotate, fix_math_style2_fontsize
 from mathmaker.lib.tools.distcode import distcode, nndist
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.tools.generators.shapes import ShapeGenerator
+from mathmaker.lib.tools.generators.solids import SolidGenerator
 from mathmaker.lib.tools.generators.anglessets import AnglesSetGenerator
 from mathmaker.lib.tools.database import preprocess_qkw
 
@@ -532,6 +534,17 @@ class structure(object):
                                     self.nb_list)]
         self._generate_polygon(self.polygon_codename, variant, labels,
                                wlines_nb=wlines_nb)
+
+    def _generate_solid(self, codename, variant, labels, **kwargs):
+        self.solid, self.drawn_solid = SolidGenerator()\
+            .generate(codename, variant=variant, labels=labels,
+                      name=kwargs.get('name', None), **kwargs)
+
+    def _setup_rightcuboid(self, variant, labels, **kwargs):
+        store_temp = mmlib_setup.polygons.DEFAULT_WINDING
+        mmlib_setup.polygons.DEFAULT_WINDING = 'anticlockwise'
+        self._generate_solid('rightcuboid', variant, labels, **kwargs)
+        mmlib_setup.polygons.DEFAULT_WINDING = store_temp
 
     def setup(self, arg, **kwargs):
         if type(arg) is not str:

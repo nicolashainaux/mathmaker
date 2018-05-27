@@ -1,0 +1,64 @@
+# -*- coding: utf-8 -*-
+
+# Mathmaker creates automatically maths exercises sheets
+# with their answers
+# Copyright 2006-2017 Nicolas Hainaux <nh.techn@gmail.com>
+
+# This file is part of Mathmaker.
+
+# Mathmaker is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# any later version.
+
+# Mathmaker is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Mathmaker; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+from mathmakerlib.geometry import RightCuboid, ObliqueProjection
+
+from mathmaker.lib.tools.generators import Generator
+
+
+class SolidGenerator(Generator):
+
+    def generate(self, codename=None, variant=None, labels=None, name=None,
+                 **kwargs):
+        """
+        Possible kwargs: direction, thickness, label_vertices
+
+        :param codename: the type of solid (rightcuboid...)
+        :type codename: str
+        :param variant: the variant number
+        :type variant: int
+        :param labels: the labels to set, in the form of a list that can be
+        used by the setup_labels() method of the solid.
+        :type labels: list
+        :param name: the series of letters to use to name the Solid
+        :type name: str (or None, then it will be set automatically)
+        """
+        return getattr(self, '_' + codename)(variant, labels, name, **kwargs)
+
+    def _rightcuboid(self, variant, labels, name, **kwargs):
+        build_data = {0: {'dimensions': (1, 2.5, 0.5),
+                          'baseline': '20pt'},
+                      1: {'dimensions': (0.5, 2.5, 1)},
+                      2: {'dimensions': (0.5, 1.75, 0.75)},
+                      3: {'dimensions': (2, 0.5, 1)},
+                      4: {'dimensions': (0.75, 0.5, 1.25)},
+                      5: {'dimensions': (0.75, 1.25, 0.5)}
+                      }[variant]
+        rc = RightCuboid(dimensions=build_data['dimensions'], name=name,
+                         thickness=kwargs.get('thickness', 'thick'))
+        rc.setup_labels(labels)
+        label_vertices = kwargs.get('label_vertices', False)
+        direction = kwargs.get('direction', 'top-right')
+        op = ObliqueProjection(rc, direction=direction,
+                               label_vertices=label_vertices)
+        op.baseline = kwargs.get('baseline', '15pt')
+        return rc, op.drawn

@@ -124,6 +124,46 @@
         "05_yellow2",
         "W04d"
     ],
+    "06_orange_divisibility_rules": [
+        "mental_calculation",
+        "06_orange",
+        "divisibility_rules"
+    ],
+    "06_orange_right_triangles": [
+        "mental_calculation",
+        "06_orange",
+        "right_triangles"
+    ],
+    "06_orange_fractions_simplifications": [
+        "mental_calculation",
+        "06_orange",
+        "fractions_simplifications"
+    ],
+    "06_orange_rightcuboids": [
+        "mental_calculation",
+        "06_orange",
+        "rightcuboids"
+    ],
+    "06_orange_W01a": [
+        "mental_calculation",
+        "06_orange",
+        "W01a"
+    ],
+    "06_orange_W01b": [
+        "mental_calculation",
+        "06_orange",
+        "W01b"
+    ],
+    "06_orange_W01c": [
+        "mental_calculation",
+        "06_orange",
+        "W01c"
+    ],
+    "06_orange_W01d": [
+        "mental_calculation",
+        "06_orange",
+        "W01d"
+    ],
     "02_white2_multiplications_reversed": [
         "mental_calculation",
         "02_white2",

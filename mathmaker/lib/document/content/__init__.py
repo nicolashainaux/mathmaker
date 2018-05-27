@@ -50,6 +50,7 @@ from .geometry import trigonometry_formula
 from .geometry import trigonometry_vocabulary
 from .geometry import area_rectangle, perimeter_rectangle, perimeter_polygon
 from .geometry import rectangle_length_or_width
+from .geometry import volume_rightcuboid
 
 __all__ = ['expand_simple', 'expand_double',
            'multi_direct', 'multi_reversed', 'multi_hole', 'divi_direct',
@@ -67,7 +68,8 @@ __all__ = ['expand_simple', 'expand_double',
            'numeric_expansion', 'numeric_factorization',
            'divisibility_questions',
            'area_rectangle', 'perimeter_rectangle', 'perimeter_polygon',
-           'rectangle_length_or_width',
+           'rectangle_length_or_width', 'area_righttriangle',
+           'perimeter_righttriangle', 'volume_rightcuboid',
            'intercept_theorem_triangle', 'intercept_theorem_triangle_formula',
            'intercept_theorem_butterfly',
            'intercept_theorem_butterfly_formula',
