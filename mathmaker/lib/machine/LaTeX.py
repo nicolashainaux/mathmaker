@@ -32,7 +32,7 @@ from mathmakerlib import required
 from mathmakerlib.calculus import is_integer, is_number
 from mathmakerlib.LaTeX import TIKZSET
 from mathmakerlib.LaTeX import AttrList, Command, DocumentClass, UsePackage
-from mathmakerlib.LaTeX import UseTikzLibrary
+from mathmakerlib.LaTeX import OptionsList, UseTikzLibrary
 
 from mathmaker import settings
 from mathmaker.lib.constants import latex, SLIDE_CONTENT_SEP
@@ -151,12 +151,14 @@ class LaTeX(Structure.Structure):
 }}""".format(font_name='{' + settings.font + '}')
         # language
         polyglossia = str(UsePackage('polyglossia'))
-        language_setup = str(Command('setmainlanguage', self.language))
+        language_options = None
         if self.language_code in latex.LANGUAGE_OPTIONS:
             lod = latex.LANGUAGE_OPTIONS[self.language_code]
-            language_setup += '\n' + str(Command('setkeys',
-                                                 options=AttrList(lod),
-                                                 content=self.language))
+            language_options = OptionsList(lod)
+        language_setup = Command('setmainlanguage',
+                                 content=self.language,
+                                 options=language_options)
+        language_setup = str(language_setup)
         # siunitx
         siunitx = ''
         if required.package['siunitx']:

@@ -34,7 +34,7 @@ from mathmaker import settings
 from mathmaker.lib import shared
 
 PROTECTED_LATEX_KEYWORDS = ['multicols', 'multicols*', 'tabular',
-                            'tikzpicture', '\centering', 'll', 'newline']
+                            'tikzpicture', r'\centering', 'll', 'newline']
 
 
 def wrap(word: str, braces='{}', o_str=None, e_str=None) -> str:
@@ -585,8 +585,6 @@ def setup_wording_format_of(w_object: object, w_prefix=''):
                 n = Number(3)
             setattr(w_object, attr,
                     Unit(getattr(w_object, attr), exponent=n).printed)
-    import sys
-    sys.stderr.write('w_object_wording={}\n'.format(w_object_wording))
 
     w_object_wording_format = {}
     for attr in extract_formatting_tags_from(w_object_wording):

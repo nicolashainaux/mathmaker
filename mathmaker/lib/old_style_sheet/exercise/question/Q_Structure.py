@@ -51,31 +51,6 @@ class Q_Structure(object, metaclass=ABCMeta):
         if 'number_of_the_question' in options:
             self.number = options['number_of_the_question']
 
-        q_kind_id = q_kind
-        q_context = ""
-        if 'context' in options:
-            q_context = options['context']
-
-        if AVAILABLE_Q_KIND_VALUES is not None:
-            try:
-                AVAILABLE_Q_KIND_VALUES[q_kind]
-            except KeyError:
-                if q_context == "":
-                    raise KeyError('The given question kind (' + q_kind
-                                   + ') does not belong to the available '
-                                   'questions kinds: '
-                                   + str(AVAILABLE_Q_KIND_VALUES))
-                else:
-                    try:
-                        AVAILABLE_Q_KIND_VALUES[q_kind + "_" + q_context]
-                        q_kind_id = q_kind + "_" + q_context
-                    except KeyError:
-                        raise KeyError('The give question_context kind ('
-                                       + q_kind + "_" + q_context
-                                       + ') does not belong to the available '
-                                       'questions kinds: '
-                                       + str(AVAILABLE_Q_KIND_VALUES))
-
         self.displayable_number = ""
 
         if self.number != "":
@@ -92,13 +67,6 @@ class Q_Structure(object, metaclass=ABCMeta):
                 if key != 'q_subkind':
                     temp_options[key] = options[key]
             self.options = temp_options
-
-        if AVAILABLE_Q_KIND_VALUES is not None:
-            if q_subkind not in AVAILABLE_Q_KIND_VALUES[q_kind_id]:
-                raise KeyError('The question subkinds (' + q_subkind
-                               + ') does not belong to available question '
-                               'subkinds: '
-                               + str(AVAILABLE_Q_KIND_VALUES[q_kind_id]))
 
         # these two fields for the case of needing to know the them in the
         # answer_to_str() especially

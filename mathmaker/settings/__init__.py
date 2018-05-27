@@ -77,10 +77,13 @@ class path_object(object):
         self.daemon_db = dd + '{}d.db'.format(__software_name__)
         self.shapes_db = dd + 'shapes-{}.db'.format(__version__)
         self.shapes_db_dist = dd + 'shapes.db-dist'
+        self.solids_db = dd + 'solids-{}.db'.format(__version__)
+        self.solids_db_dist = dd + 'solids.db-dist'
         self.anglessets_db = dd + 'anglessets-{}.db'.format(__version__)
         self.anglessets_db_dist = dd + 'anglessets.db-dist'
         logger.info('db={}'.format(self.db))
         logger.info('shapes db={}'.format(self.shapes_db))
+        logger.info('solids db={}'.format(self.solids_db))
         logger.info('anglessets db={}'.format(self.anglessets_db))
         logger.info('natural_nb_tuples db={}'
                     .format(self.natural_nb_tuples_db))
@@ -94,6 +97,12 @@ class path_object(object):
             logger.info('Copy shapes db from {}\n'
                         .format(self.shapes_db_dist))
             copyfile(self.shapes_db_dist, self.shapes_db)
+        if (not os.path.isfile(self.solids_db)
+            or os.path.getmtime(self.solids_db)
+            < os.path.getmtime(self.solids_db_dist)):
+            logger.info('Copy solids db from {}\n'
+                        .format(self.solids_db_dist))
+            copyfile(self.solids_db_dist, self.solids_db)
         if (not os.path.isfile(self.anglessets_db)
             or os.path.getmtime(self.anglessets_db)
             < os.path.getmtime(self.anglessets_db_dist)):
@@ -118,6 +127,7 @@ def init():
     global index_path
     global db_index_path
     global shapes_db_index_path
+    global solids_db_index_path
     global anglessets_db_index_path
     global natural_nb_tuples_db_index_path
     global default, path
@@ -164,6 +174,7 @@ def init():
     index_path = frameworksdir + 'index.json'
     db_index_path = datadir + 'db_index.json'
     shapes_db_index_path = datadir + 'shapes_db_index.json'
+    solids_db_index_path = datadir + 'solids_db_index.json'
     anglessets_db_index_path = datadir + 'anglessets_db_index.json'
     natural_nb_tuples_db_index_path = \
         datadir + 'natural_nb_tuples_db_index.json'

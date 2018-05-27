@@ -15,7 +15,7 @@ before_install:
 install:
     - pip3 install coveralls
 script:
-    - docker run --name affectionate_carson nicolashainaux/mathmaker /bin/bash -c "cd /home/travis/build/nicolashainaux/mathmaker && coverage run --source=mathmaker setup.py test"
+    - docker run --name affectionate_carson nicolashainaux/mathmaker /bin/bash -c "cd ${TRAVIS_BUILD_DIR} && coverage run --source=mathmaker setup.py test"
 after_success:
-    - docker cp affectionate_carson:/home/travis/build/nicolashainaux/mathmaker/.coverage .coverage
+    - docker cp affectionate_carson:${TRAVIS_BUILD_DIR}/.coverage .coverage
     - coveralls

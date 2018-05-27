@@ -20,13 +20,10 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import random
-
 from .X_Structure import X_Structure
 from . import question
 
-AVAILABLE_X_KIND_VALUES = {'short_test': ['easy', 'medium_level'],
-                           'preformatted': ['product'],
+AVAILABLE_X_KIND_VALUES = {'preformatted': ['product'],
                            'bypass': ['sum', 'sum_of_products']}
 
 X_LAYOUT_UNIT = "cm"
@@ -49,32 +46,6 @@ X_LAYOUTS = {'default':
 # reduction exercises
 class X_AlgebraExpressionReduction(X_Structure):
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Constructor.
-    #   @param **options Options detailed below:
-    #          - start_number=<integer>
-    #                         (should be >= 1)
-    #          - number_of_questions=<integer>
-    #            /!\ only useful if you use x_kind and not preformatted
-    #                         (should be >= 1)
-    #          - x_kind=<string>
-    #                         ...
-    #                         ...
-    #          - preformatted=<string>
-    #            /!\ preformatted is useless with short_test
-    #            /!\ number_of_questions is useless with preformatted
-    #            /!\ if you use it with the x_kind option, ensure there's a
-    #                preformatted possibility with this option
-    #                         'yes'
-    #                         'OK'
-    #                         any other value will be understood as 'no'
-    #          - short_test=bool
-    #            /!\ the x_kind option above can't be used along this option
-    #                         'yes'
-    #                         'OK'
-    #                         any other value will be understood as 'no'
-    #   @return One instance of exercise.ExpressionReduction
     def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
         X_Structure.__init__(self,
@@ -105,44 +76,8 @@ class X_AlgebraExpressionReduction(X_Structure):
                          'ans': _("Pay attention that the intermediate line "
                                   "is optional.")}
 
-        # SHORT TEST EXERCISES
-        if self.x_kind == 'short_test':
-            if self.x_subkind == 'easy':
-                self.questions_list.append(
-                    default_question(q_kind='product', short_test=True,
-                                     expression_number=0))
-
-                self.questions_list.append(
-                    default_question(q_kind='sum', short_test=True, length=4,
-                                     expression_number=1))
-
-                self.questions_list.append(
-                    default_question(q_kind='sum_of_products', length=2,
-                                     expression_number=2))
-
-            if self.x_subkind == 'medium_level':
-                q = []
-
-                q.append(default_question(q_kind='long_sum',
-                                          expression_number=2))
-
-                q.append(default_question(q_kind='sum_not_reducible',
-                                          expression_number=3))
-
-                q.append(default_question(q_kind='sum_with_minus-brackets',
-                                          minus_brackets_nb=2,
-                                          plus_brackets_nb=1,
-                                          expression_number=4))
-
-                q.append(default_question(q_kind='long_sum_including_'
-                                                 'a_coeff_1',
-                                          length=7,
-                                          expression_number=5))
-                random.shuffle(q)
-                self.questions_list = q
-
         # PREFORMATTED EXERCISES
-        elif self.x_kind == 'preformatted':
+        if self.x_kind == 'preformatted':
             if self.x_subkind == 'product':
                 self.questions_list.append(default_question(
                                            q_kind='product',

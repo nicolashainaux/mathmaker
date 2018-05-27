@@ -22,9 +22,6 @@
 
 import random
 
-from mathmakerlib.calculus import is_number
-
-from mathmaker.lib.core.base_calculus import Monomial
 from .X_Structure import X_Structure
 from . import question
 
@@ -33,11 +30,10 @@ AVAILABLE_X_KIND_VALUES = \
     {'short_test': ['sign_expansion', 'medium_level',
                     'three_binomials', 'three_numeric_binomials',
                     'default'],
-     'mini_test': ['two_expansions_hard', 'two_randomly'],
-     'preformatted': ['mixed_monom_polyn1'],
-     'bypass': ['sign_expansion', 'any_basic_expd', 'sum_of_any_basic_expd',
+     'mini_test': ['two_randomly'],
+     'bypass': ['sign_expansion', 'sum_of_any_basic_expd',
                 'sum_square', 'difference_square', 'squares_difference',
-                'any_binomial', 'polyn1_polyn1', 'two_expansions_hard']}
+                'any_binomial', 'polyn1_polyn1']}
 
 DEFAULT_RATIO_MIXED_MONOM_POLYN1 = 0.5
 
@@ -63,37 +59,6 @@ X_LAYOUTS = {'default':
 # @class X_AlgebraExpressionExpansion
 # @brief Expressions to expand (like 2(x-3) or 4x(2-9x) or (3+x)(x-1))
 class X_AlgebraExpressionExpansion(X_Structure):
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Constructor.
-    #   @param **options Options detailed below:
-    #          - start_number=<integer>
-    #                         (should be >= 1)
-    #          - number_of_questions=<integer>
-    #            /!\ only useful if you use x_kind and not preformatted
-    #                         (should be >= 1)
-    #          - x_kind=<string>
-    #                         ...
-    #                         ...
-    #          - preformatted=<string>
-    #            /!\ preformatted is useless with short_test
-    #            /!\ number_of_questions is useless with preformatted
-    #            /!\ if you use it with the x_kind option, ensure there's a
-    #                preformatted possibility with this option
-    #                         'yes'
-    #                         'OK'
-    #                         any other value will be understood as 'no'
-    #          - short_test=bool
-    #            /!\ the x_kind option above can't be used along this option
-    #            use subtype if you need to make different short_test exercises
-    #                         'yes'
-    #                         'OK'
-    #                         any other value will be understood as 'no'
-    #          - subtype=<string>
-    #                         ...
-    #                         ...
-    #   @return One instance of exercise.AlgebraExpressionExpansion
     def __init__(self, x_kind='default_nothing', **options):
         self.derived = True
         X_Structure.__init__(self,
@@ -116,148 +81,8 @@ class X_AlgebraExpressionExpansion(X_Structure):
                          'ans': ""}
 
         # PREFORMATTED EXERCISES
-        if self.x_kind == 'short_test':
-            if self.x_subkind == 'sign_expansion':
-                q = default_question(q_kind='sign_expansion_short_test',
-                                     expression_number=self.start_number,
-                                     **options)
-
-                self.questions_list.append(q)
-
-            elif self.x_subkind == 'medium_level':
-
-                q = default_question(q_kind='monom01_polyn1',
-                                     expression_number=self.start_number,
-                                     **options)
-
-                self.questions_list.append(q)
-
-                q = default_question(q_kind='polyn1_polyn1',
-                                     expression_number=self.start_number,
-                                     **options)
-
-                self.questions_list.append(q)
-
-                q = default_question(q_kind='sum_of_any_basic_expd',
-                                     expression_number=self.start_number,
-                                     **options)
-
-                self.questions_list.append(q)
-
-            elif self.x_subkind == 'three_binomials':
-                kinds_list = ['sum_square',
-                              'difference_square',
-                              'squares_difference']
-                random.shuffle(kinds_list)
-                for i in range(3):
-                    q = default_question(q_kind=kinds_list.pop(),
-                                         expression_number=i,
-                                         **options)
-                    self.questions_list.append(q)
-
-            elif self.x_subkind == 'three_numeric_binomials':
-                a_list1 = [20, 30, 40, 50, 60, 70, 80, 90, 100]
-                a_list2 = [200, 300, 400, 500, 600, 700, 800, 1000]
-                b_list = [1, 2, 3]
-                random.shuffle(b_list)
-                random.shuffle(a_list1)
-                a1_choice = random.choice(a_list2)
-                b1_choice = b_list.pop()
-                a2_choice = a_list1.pop()
-                b2_choice = b_list.pop()
-                a3_choice = a_list1.pop()
-                b3_choice = b_list.pop()
-
-                a1 = Monomial(('+', a1_choice, 0))
-                b1 = Monomial(('+', b1_choice, 0))
-                a2 = Monomial(('+', a2_choice, 0))
-                b2 = Monomial(('+', b2_choice, 0))
-                a3 = Monomial(('+', a3_choice, 0))
-                b3 = Monomial(('+', b3_choice, 0))
-
-                kinds_list = ['numeric_sum_square',
-                              'numeric_difference_square',
-                              'numeric_squares_difference']
-                random.shuffle(kinds_list)
-                monomials_to_use = [(a1, b1), (a2, b2), (a3, b3)]
-
-                ordered_kinds_list = []
-                squares_differences_option = [0, 0, 0]
-
-                for i in range(3):
-                    ordered_kinds_list.append(kinds_list.pop())
-                    if ordered_kinds_list[i] == 'numeric_difference_square':
-                        monomials_to_use[i][1].set_sign('-')
-                    elif ordered_kinds_list[i] == 'numeric_squares_difference':
-                        squares_differences_option[i] = 1
-
-                for i in range(3):
-                    if squares_differences_option[i] == 1:
-                        q = default_question(q_kind=ordered_kinds_list[i],
-                                             couple=monomials_to_use[i],
-                                             squares_difference=True,
-                                             expression_number=i,
-                                             **options)
-                    else:
-                        q = default_question(q_kind=ordered_kinds_list[i],
-                                             couple=monomials_to_use[i],
-                                             expression_number=i,
-                                             **options)
-                    self.questions_list.append(q)
-
-            else:  # default short_test option
-                if random.choice([True, False]):
-                    q1 = default_question(
-                        q_kind='monom0_polyn1',
-                        expression_number=0 + self.start_number)
-
-                    q2 = default_question(
-                        q_kind='monom1_polyn1',
-                        expression_number=1 + self.start_number,
-                        reversed='OK')
-
-                else:
-                    q1 = default_question(
-                        q_kind='monom0_polyn1',
-                        reversed='OK',
-                        expression_number=0 + self.start_number)
-
-                    q2 = default_question(
-                        q_kind='monom1_polyn1',
-                        expression_number=1 + self.start_number)
-
-                q3 = default_question(q_kind='polyn1_polyn1',
-                                      expression_number=2 + self.start_number)
-
-                self.questions_list.append(q1)
-                self.questions_list.append(q2)
-                self.questions_list.append(q3)
-
-        elif self.x_kind == 'mini_test':
-            if self.x_subkind == 'two_expansions_hard':
-                if random.choice([True, False]):
-                    q1 = default_question(
-                        q_kind='sum_of_any_basic_expd',
-                        q_subkind='harder',
-                        expression_number=0 + self.start_number)
-                    q2 = default_question(
-                        q_kind='sum_of_any_basic_expd',
-                        q_subkind='with_a_binomial',
-                        expression_number=1 + self.start_number)
-                else:
-                    q1 = default_question(
-                        q_kind='sum_of_any_basic_expd',
-                        q_subkind='with_a_binomial',
-                        expression_number=0 + self.start_number)
-                    q2 = default_question(
-                        q_kind='sum_of_any_basic_expd',
-                        q_subkind='harder',
-                        expression_number=1 + self.start_number)
-
-                self.questions_list.append(q1)
-                self.questions_list.append(q2)
-
-            elif self.x_subkind == 'two_randomly':
+        if self.x_kind == 'mini_test':
+            if self.x_subkind == 'two_randomly':
                 if random.choice([True, False]):
                     q = default_question(q_kind='sign_expansion_short_test',
                                          expression_number=self.start_number,
@@ -285,37 +110,6 @@ class X_AlgebraExpressionExpansion(X_Structure):
                         expression_number=self.start_number + 1,
                         **options)
 
-                    self.questions_list.append(q)
-
-        elif self.x_kind == 'preformatted':
-            # Mixed expandable expressions from the following types:
-            # 0-degree Monomial × (1st-degree Polynomial)
-            # 1-degree Monomial × (1st-degree Polynomial)
-            # The Monomial & the polynomial may be swapped: it depends
-            # if the option 'reversed' has been given in
-            # argument in this method
-            if self.x_subkind == 'mixed_monom_polyn1':
-                ratio = DEFAULT_RATIO_MIXED_MONOM_POLYN1
-
-                if 'ratio_mmp' in options \
-                   and is_number(options['ratio_mmp']) \
-                   and options['ratio_mmp'] > 0 \
-                   and options['ratio_mmp'] < 1:
-                    # __
-                    ratio = options['ratio_mmp']
-
-                choices_list = []
-                for i in range(int(self.q_nb * ratio) + 1):
-                    choices_list.append('monom0_polyn1')
-                for i in range(int(self.q_nb - self.q_nb * ratio)):
-                    choices_list.append('monom1_polyn1')
-
-                random.shuffle(choices_list)
-                for i in range(len(choices_list)):
-                    q = default_question(
-                        q_kind=choices_list.pop(),
-                        expression_number=i + self.start_number,
-                        **options)
                     self.questions_list.append(q)
 
         # OTHER EXERCISES

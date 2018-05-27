@@ -37,7 +37,9 @@ from .calculation import units_conversion, decimal_numerals
 from .calculation import percent_direct, divi_euclidean
 from .calculation import mini_pb_proportionality
 from .calculation import numeric_expansion, numeric_factorization
-from .calculation import divisibility_questions
+from .calculation import divisibility_vocabulary
+from .calculation import divisibility_rule
+from .calculation import fraction_simplification
 from .geometry import intercept_theorem_triangle
 from .geometry import intercept_theorem_triangle_formula
 from .geometry import intercept_theorem_butterfly
@@ -49,6 +51,7 @@ from .geometry import trigonometry_calculate_angle
 from .geometry import trigonometry_formula
 from .geometry import trigonometry_vocabulary
 from .geometry import area_rectangle, perimeter_rectangle, perimeter_polygon
+from .geometry import area_righttriangle, perimeter_righttriangle
 from .geometry import rectangle_length_or_width
 from .geometry import volume_rightcuboid
 
@@ -66,7 +69,8 @@ __all__ = ['expand_simple', 'expand_double',
            'units_conversion', 'decimal_numerals', 'percent_direct',
            'divi_euclidean', 'mini_pb_proportionality',
            'numeric_expansion', 'numeric_factorization',
-           'divisibility_questions',
+           'divisibility_vocabulary', 'divisibility_rule',
+           'fraction_simplification',
            'area_rectangle', 'perimeter_rectangle', 'perimeter_polygon',
            'rectangle_length_or_width', 'area_righttriangle',
            'perimeter_righttriangle', 'volume_rightcuboid',

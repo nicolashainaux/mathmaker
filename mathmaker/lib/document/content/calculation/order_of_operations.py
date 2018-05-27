@@ -215,9 +215,8 @@ class sub_object(component.structure):
                 and is_integer(n)):
                 if (n <= 1 or n <= 6
                     or (7 <= n <= 20 and random.choice([True, True, False]))
-                    or
-                    (last
-                     and is_integer(kwargs['N']) and is_integer(kwargs['P']))):
+                    or (last and is_integer(kwargs['N'])
+                        and is_integer(kwargs['P']))):
                     return max(depth, int(self.nb_variant[-1]))
                 else:
                     return depth + random.choice([i for i in range(mad + 1)])

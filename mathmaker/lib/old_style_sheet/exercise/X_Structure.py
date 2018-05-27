@@ -52,13 +52,6 @@ class X_Structure(object, metaclass=ABCMeta):
         # possibly modified value to the child class
         self.options = options
 
-        try:
-            AVAILABLE_X_KIND_VALUES[x_kind]
-        except KeyError:
-            raise ValueError('Got ' + str(x_kind) + ' instead of one of the '
-                             'possible values: '
-                             + str(AVAILABLE_X_KIND_VALUES))
-
         x_subkind = 'default'
         if 'x_subkind' in options:
             x_subkind = options['x_subkind']
@@ -69,11 +62,6 @@ class X_Structure(object, metaclass=ABCMeta):
                 if key != 'x_subkind':
                     temp_options[key] = options[key]
             self.options = temp_options
-
-        if x_subkind not in AVAILABLE_X_KIND_VALUES[x_kind]:
-            raise ValueError('Got ' + str(x_kind) + ' instead of one of the '
-                             'possible values: '
-                             + str(AVAILABLE_X_KIND_VALUES[x_kind]))
 
         self.x_kind = x_kind
         self.x_subkind = x_subkind
@@ -129,27 +117,6 @@ class X_Structure(object, metaclass=ABCMeta):
             self.x_spacing = \
                 {'exc': shared.machine.addvspace(height=x_spacing),
                  'ans': shared.machine.addvspace(height=x_spacing)}
-        if options.get('x_config', None) is not None:
-            spacing_w = options.get('x_config').get('spacing_w', 'undefined')
-            spacing_a = options.get('x_config').get('spacing_a', 'undefined')
-            for key, s in zip(['exc', 'ans'], [spacing_w, spacing_a]):
-                if s != 'undefined':
-                    if s == 'newline':
-                        self.x_spacing.update(
-                            {key: shared.machine.write_new_line()})
-                    elif s == 'newline_twice':
-                        self.x_spacing.update(
-                            {key: shared.machine.write_new_line()
-                                + shared.machine.write_new_line()})
-                    elif s == '':
-                        # do not remove otherwise you'll get empty addvspace
-                        self.x_spacing.update({key: ''})
-                    elif s == 'jump to next page':
-                        self.x_spacing.update(
-                            {key: shared.machine.write_jump_to_next_page()})
-                    else:
-                        self.x_spacing.update(
-                            {key: shared.machine.addvspace(height=s)})
 
         # The slideshow option (for MentalCalculation sheets)
         self.slideshow = options.get('slideshow', False)
@@ -163,133 +130,89 @@ class X_Structure(object, metaclass=ABCMeta):
         M = shared.machine
         result = ""
 
-        if self.x_kind not in ['tabular', 'slideshow']:
-            layout = self.x_layout[ex_or_answers]
+        layout = self.x_layout[ex_or_answers]
 
-            if self.text[ex_or_answers] != "":
-                result += self.text[ex_or_answers]
-                result += M.addvspace(height='10.0pt')
+        if self.text[ex_or_answers] != "":
+            result += self.text[ex_or_answers]
+            result += M.addvspace(height='10.0pt')
 
-            q_n = 0
+        q_n = 0
 
-            for k in range(int(len(layout) // 2)):
-                if layout[2 * k] is None:
-                    how_many = layout[2 * k + 1]
-                    if layout[2 * k + 1] in ['all_left', 'all']:
-                        how_many = len(self.questions_list) - q_n
-                    for i in range(how_many):
-                        result += self.questions_list[q_n]\
-                            .to_str(ex_or_answers)
-                        if ex_or_answers == 'ans' and i < how_many - 1:
-                            result += M.addvspace(height='20.0pt')
-                        q_n += 1
+        for k in range(int(len(layout) // 2)):
+            if layout[2 * k] is None:
+                how_many = layout[2 * k + 1]
+                if layout[2 * k + 1] in ['all_left', 'all']:
+                    how_many = len(self.questions_list) - q_n
+                for i in range(how_many):
+                    result += self.questions_list[q_n]\
+                        .to_str(ex_or_answers)
+                    if ex_or_answers == 'ans' and i < how_many - 1:
+                        result += M.addvspace(height='20.0pt')
+                    q_n += 1
 
-                elif (layout[2 * k] == 'jump'
-                      and layout[2 * k + 1] == 'next_page'):
-                    result += M.write_jump_to_next_page()
+            elif (layout[2 * k] == 'jump'
+                  and layout[2 * k + 1] == 'next_page'):
+                result += M.write_jump_to_next_page()
 
-                else:
-                    nb_of_cols = len(layout[2 * k]) - 1
-                    col_widths = layout[2 * k][1:]
-                    nb_of_lines = layout[2 * k][0]
-                    undefined_nb_of_lines = False
-                    if nb_of_lines == '?':
-                        undefined_nb_of_lines = True
-                        if layout[2 * k + 1] == 'all':
-                            nb_of_q_per_row = nb_of_cols
-                        else:
-                            nb_of_q_per_row = sum(layout[2 * k + 1][j]
-                                                  for j in range(nb_of_cols))
-                        nb_of_lines = \
-                            len(self.questions_list) // nb_of_q_per_row \
-                            + (0
-                               if not len(self.questions_list)
-                               % nb_of_q_per_row
-                               else 1)
-                    content = []
-                    for i in range(int(nb_of_lines)):
-                        for j in range(nb_of_cols):
-                            if layout[2 * k + 1] == 'all':
-                                nb_of_q_in_this_cell = 1
-                            else:
-                                K = 0 if undefined_nb_of_lines else i
-                                nb_of_q_in_this_cell = \
-                                    layout[2 * k + 1][K * nb_of_cols + j]
-                            cell_content = ""
-                            for n in range(nb_of_q_in_this_cell):
-                                empty_cell = False
-                                if q_n >= len(self.questions_list):
-                                    cell_content += " "
-                                    empty_cell = True
-                                else:
-                                    cell_content += \
-                                        self.questions_list[q_n].\
-                                        to_str(ex_or_answers)
-                                if ex_or_answers == 'ans' and not empty_cell:
-                                    vspace = '' \
-                                        if len(cell_content) <= 25 \
-                                        else cell_content[-25:]
-                                    newpage = '' \
-                                        if len(cell_content) <= 9 \
-                                        else cell_content[-9:]
-                                    cell_content += M.write_new_line(
-                                        check=cell_content[-2:],
-                                        check2=vspace,
-                                        check3=newpage)
-                                q_n += 1
-                            content += [cell_content]
-
-                    options = {'unit': self.x_layout_unit}
-                    result += M.write_layout((nb_of_lines, nb_of_cols),
-                                             col_widths,
-                                             content,
-                                             **options)
-                    if (self.x_kind,
-                        self.x_subkind) == ('bypass', 'any_simple_expandable'):
-                        result += '\n' + r'\FloatBarrier' + '\n'
-                        required.package['placeins'] = True
-
-            return result + self.x_spacing[ex_or_answers]
-        else:
-            if self.slideshow:
-                result += M.write_frame("", frame='start_frame')
-                for i in range(self.q_nb):
-                    result += M.write_frame(
-                        self.questions_list[i].to_str('exc'),
-                        timing=self.questions_list[i].transduration)
-
-                result += M.write_frame("", frame='middle_frame')
-
-                for i in range(self.q_nb):
-                    result += M.write_frame(_("Question:")
-                                            + self.questions_list[i]
-                                            .to_str('exc')
-                                            + _("Answer:")
-                                            + self.questions_list[i]
-                                            .to_str('ans'),
-                                            timing=0)
-
-            # default tabular option:
             else:
-                q = [self.questions_list[i].to_str('exc')
-                     for i in range(self.q_nb)]
-                a = [self.questions_list[i].to_str('ans')
-                     for i in range(self.q_nb)]\
-                    if ex_or_answers == 'ans' \
-                    else [self.questions_list[i].to_str('hint')
-                          for i in range(self.q_nb)]
+                nb_of_cols = len(layout[2 * k]) - 1
+                col_widths = layout[2 * k][1:]
+                nb_of_lines = layout[2 * k][0]
+                undefined_nb_of_lines = False
+                if nb_of_lines == '?':
+                    undefined_nb_of_lines = True
+                    if layout[2 * k + 1] == 'all':
+                        nb_of_q_per_row = nb_of_cols
+                    else:
+                        nb_of_q_per_row = sum(layout[2 * k + 1][j]
+                                              for j in range(nb_of_cols))
+                    nb_of_lines = \
+                        len(self.questions_list) // nb_of_q_per_row \
+                        + (0
+                           if not len(self.questions_list)
+                           % nb_of_q_per_row
+                           else 1)
+                content = []
+                for i in range(int(nb_of_lines)):
+                    for j in range(nb_of_cols):
+                        if layout[2 * k + 1] == 'all':
+                            nb_of_q_in_this_cell = 1
+                        else:
+                            K = 0 if undefined_nb_of_lines else i
+                            nb_of_q_in_this_cell = \
+                                layout[2 * k + 1][K * nb_of_cols + j]
+                        cell_content = ""
+                        for n in range(nb_of_q_in_this_cell):
+                            empty_cell = False
+                            if q_n >= len(self.questions_list):
+                                cell_content += " "
+                                empty_cell = True
+                            else:
+                                cell_content += \
+                                    self.questions_list[q_n].\
+                                    to_str(ex_or_answers)
+                            if ex_or_answers == 'ans' and not empty_cell:
+                                vspace = '' \
+                                    if len(cell_content) <= 25 \
+                                    else cell_content[-25:]
+                                newpage = '' \
+                                    if len(cell_content) <= 9 \
+                                    else cell_content[-9:]
+                                cell_content += M.write_new_line(
+                                    check=cell_content[-2:],
+                                    check2=vspace,
+                                    check3=newpage)
+                            q_n += 1
+                        content += [cell_content]
 
-                n = [M.write(str(i + 1) + ".", emphasize='bold')
-                     for i in range(self.q_nb)]
-
-                content = [elt for triplet in zip(n, q, a) for elt in triplet]
-
-                result += M.write_layout((self.q_nb, 3),
-                                         [0.5, 14.25, 3.75],
+                options = {'unit': self.x_layout_unit}
+                result += M.write_layout((nb_of_lines, nb_of_cols),
+                                         col_widths,
                                          content,
-                                         borders='penultimate',
-                                         justify=['left', 'left', 'center'],
-                                         center_vertically=True,
-                                         min_row_height=MIN_ROW_HEIGHT)
+                                         **options)
+                if (self.x_kind,
+                    self.x_subkind) == ('bypass', 'any_simple_expandable'):
+                    result += '\n' + r'\FloatBarrier' + '\n'
+                    required.package['placeins'] = True
 
-            return result
+        return result + self.x_spacing[ex_or_answers]

@@ -68,6 +68,21 @@ def test_intspansproduct_turn_to_query_conditions():
     assert IntspansProduct('2-9,15,25', elt_nb=2).turn_to_query_conditions() \
         == {'raw': "((nb1 IN ('15', '25') OR (nb1 BETWEEN 2 AND 9)) "
                    "AND (nb2 IN ('15', '25') OR (nb2 BETWEEN 2 AND 9)))"}
+    assert IntspansProduct('2-100')\
+        .turn_to_query_conditions(nb_list=['nb2'],
+                                  nb_modifiers=[' % 10']) \
+        == {'raw': '(nb2 % 10 BETWEEN 2 AND 100)'}
+    with pytest.raises(ValueError) as excinfo:
+        IntspansProduct('2-100').turn_to_query_conditions(nb_list=['nb2',
+                                                                   'nb3'])
+    assert str(excinfo.value) == 'nb_list must be either None or a list of 1 '\
+        'elements. Found [\'nb2\', \'nb3\'] instead.'
+    with pytest.raises(ValueError) as excinfo:
+        IntspansProduct('2-100').turn_to_query_conditions(
+            nb_modifiers=[' modif1', ' modif2'])
+    assert str(excinfo.value) == 'nb_modifiers can be None or a list of one '\
+        "element or a list of 1 elements. Found [' modif1', ' modif2'] "\
+        "instead."
 
 
 def test_intspansproduct_group_by_packs():
@@ -239,6 +254,12 @@ def test_intspansproduct_random_draw_filtered():
         r.random_draw(nb2_mod=5)
     assert str(excinfo.value) == 'Impossible to draw an int tuple from '\
         "['6-9', '6-9'] under these conditions: nb2_mod=5.\n"
+    r = IntspansProduct('2-40')
+    d = r.random_draw(return_all=True, nb1_mod7_ge=5)
+    assert d == [[5, 6, 12, 13, 19, 20, 26, 27, 33, 34, 40]]
+    d = r.random_draw(return_all=True, nb1_mod7_range='0-1,4-6')
+    assert d == [[4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 18, 19, 20, 21, 22,
+                  25, 26, 27, 28, 29, 32, 33, 34, 35, 36, 39, 40]]
 
 
 def test_intspansproduct_random_draw_constructible():

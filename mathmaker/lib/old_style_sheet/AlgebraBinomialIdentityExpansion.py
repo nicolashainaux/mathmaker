@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from . import exercise
-from mathmaker.lib import shared
 from .S_Structure import S_Structure
 
 FONT_SIZE_OFFSET = -1
@@ -64,7 +63,7 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
         # ex1
         ex1 = exercise.X_AlgebraExpressionExpansion(x_kind='bypass',
                                                     x_subkind='sum_square',
-                                                    number_of_questions=5)
+                                                    number_of_questions=3)
 
         self.exercises_list.append(ex1)
 
@@ -72,7 +71,7 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
         ex2 = exercise.X_AlgebraExpressionExpansion(x_kind='bypass',
                                                     x_subkind='difference_'
                                                               'square',
-                                                    number_of_questions=5)
+                                                    number_of_questions=3)
 
         self.exercises_list.append(ex2)
 
@@ -80,7 +79,7 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
         ex3 = exercise.X_AlgebraExpressionExpansion(x_kind='bypass',
                                                     x_subkind='squares_'
                                                               'difference',
-                                                    number_of_questions=5)
+                                                    number_of_questions=3)
 
         self.exercises_list.append(ex3)
 
@@ -90,34 +89,3 @@ class AlgebraBinomialIdentityExpansion(S_Structure):
                                                     number_of_questions=5)
 
         self.exercises_list.append(ex4)
-
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Writes to the output all exercises' answers
-    def write_answers(self):
-        shared.machine.reset_exercises_counter()
-        shared.machine.write_set_font_size_to('large')
-
-        shared.machine.write_tabular_begins("p{9 cm} p{9 cm}")
-
-        shared.machine.write_exercise_number()
-        self.exercises_list[0].write_answer()
-
-        shared.machine.write_separator_tabular_columns()
-
-        shared.machine.write_exercise_number()
-        self.exercises_list[1].write_answer()
-
-        shared.machine.write_tabular_ends()
-
-        shared.machine.write_tabular_begins("p{9 cm} p{9 cm}")
-
-        shared.machine.write_exercise_number()
-        self.exercises_list[2].write_answer()
-
-        shared.machine.write_separator_tabular_columns()
-
-        shared.machine.write_exercise_number()
-        self.exercises_list[3].write_answer()
-
-        shared.machine.write_tabular_ends()

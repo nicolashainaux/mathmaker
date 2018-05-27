@@ -94,19 +94,36 @@ class IntspansProduct(object):
         self.spans_str = spans
         self.spans = [intspan(_) for _ in spans]
 
-    def turn_to_query_conditions(self):
+    def turn_to_query_conditions(self, nb_list=None, nb_modifiers=None):
         """Turn self to a SQLite query condition."""
         query = ''
         prevails = []
+        if nb_list is not None and (len(nb_list) != len(self.spans_str)):
+            raise ValueError('nb_list must be either None or a list of {} '
+                             'elements. Found {} instead.'
+                             .format(len(self.spans_str), repr(nb_list)))
+        if nb_modifiers is None:
+            nb_modifiers = ['' for _ in self.spans_str]
+        if len(nb_modifiers) == 1:
+            nb_modifiers = [nb_modifiers[0] for i in range(len(nb_modifiers))]
+        if len(nb_modifiers) != len(self.spans_str):
+            raise ValueError('nb_modifiers can be None or a list of one '
+                             'element or a list of {} elements. Found {} '
+                             'instead.'.format(len(self.spans_str),
+                                               repr(nb_modifiers)))
         for i, span in enumerate(self.spans_str):
             ranges = []
             single_values = []
             s = span.split(',')
+            if nb_list is None:
+                nb_id = 'nb{}{}'.format(i + 1, nb_modifiers[i])
+            else:
+                nb_id = '{}{}'.format(nb_list[i], nb_modifiers[i])
             for r in s:
                 if '-' in r:
                     mini, maxi = r.split('-')
-                    ranges.append('nb{} BETWEEN {} AND {}'
-                                  .format(i + 1, mini, maxi))
+                    ranges.append('{} BETWEEN {} AND {}'
+                                  .format(nb_id, mini, maxi))
                 elif r != '':  # only handle really provided values, not ''
                     single_values.append(r)
             ranges = ' OR '.join(ranges)
@@ -114,7 +131,7 @@ class IntspansProduct(object):
                                            for v in single_values])
             q = ''
             if single_values_str:
-                q += 'nb{} IN ({})'.format(i + 1, single_values_str)
+                q += '{} IN ({})'.format(nb_id, single_values_str)
                 if len(single_values) == 1:
                     prevails += single_values
             if ranges:
@@ -270,7 +287,7 @@ class IntspansProduct(object):
             applied_conditions.append('nb{}_max={}'.format(i + 1, maxi))
         notmod = kwargs.get('nb{}_notmod'.format(i + 1), None)
         if notmod is not None:
-            possibilities = [p for p in possibilities if p % notmod]
+            possibilities = [p for p in possibilities if p % int(notmod)]
             applied_conditions.append('nb{}_notmod={}'
                                       .format(i + 1, notmod))
         mod = kwargs.get('nb{}_mod'.format(i + 1), None)
@@ -289,6 +306,21 @@ class IntspansProduct(object):
         if neq is not None:
             possibilities = [p for p in possibilities if p != neq]
             applied_conditions.append('nb{}_neq={}'.format(i + 1, neq))
+        regex_rule = r'nb{}_mod(\d+)_ge'.format(i + 1)
+        for kw in kwargs:
+            matches = re.findall(regex_rule, kw)
+            for value in matches:
+                possibilities = [p for p in possibilities
+                                 if p % int(value) >= int(kwargs[kw])]
+                applied_conditions.append('nb{}mod{}_ge={}'.format(i + 1,
+                                                                   value,
+                                                                   kwargs[kw]))
+        regex_rule = r'nb{}_mod(\d+)_range'.format(i + 1)
+        for kw in kwargs:
+            matches = re.findall(regex_rule, kw)
+            for value in matches:
+                possibilities = [p for p in possibilities
+                                 if p % int(value) in intspan(kwargs[kw])]
         return possibilities, applied_conditions, result
 
     @staticmethod
@@ -675,6 +707,22 @@ class source(object):
             elif kw == 'diff7atleast':
                 result += next(hook(kn)) + " nb2 - nb1 >= 7 "
                 kn += 1
+            elif re.findall(r'nb(\d)_mod(\d+)_ge', kw):
+                for match in re.findall(r'nb(\d)_mod(\d+)_ge', kw):
+                    result += "{} nb{} % {} >= {} ".format(next(hook(kn)),
+                                                           match[0],
+                                                           match[1],
+                                                           kwargs[kw])
+                    kn += 1
+            elif re.findall(r'nb(\d)_mod(\d+)_range', kw):
+                for match in re.findall(r'nb(\d)_mod(\d+)_range', kw):
+                    result += "{} {} "\
+                        .format(next(hook(kn)),
+                                IntspansProduct(kwargs[kw])
+                                .turn_to_query_conditions(
+                                nb_list=['nb{}'.format(match[0])],
+                                nb_modifiers=[' % {} '.format(match[1])]))
+                    kn += 1
             elif kw.endswith('_noqr'):
                 pass
             else:  # default interpretation is " AND key = value "
@@ -864,7 +912,7 @@ def db_table(tag):
     elif tag == 'rightcuboids':
         return 'polyhedra'
     elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
-                 'digits_places', 'fracdigits_places',
+                 'digits_places', 'fracdigits_places', 'simple_fractions',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
                  'int_quintuples', 'int_sextuples', 'anglessets']:
         return tag
@@ -1287,6 +1335,29 @@ def preprocess_decimalfractions_pairs_tag(qkw=None, **kwargs):
     """
     return {'overlap_level_ge': qkw.get('overlap', 0),
             'overlap_noqr': qkw.get('overlap', 0)}
+
+
+def preprocess_divisibles(intsp, reason='no reason'):
+    """
+    Called to help to choose special numbers divisible by intsp (e.g. 3 or 9).
+
+    :param intsp: the possible divisor
+    """
+    result = {}
+    if intsp == intspan('3'):
+        # This added condition makes sure that the two last digits of 3×nb2
+        # will not be a multiple of 3.
+        result = {'nb2_mod100_ge': 34}
+    if intsp == intspan('9'):
+        # This added condition makes sure that the two last digits of 9×nb2
+        # will not be a multiple of 9.
+        result = {'nb2_mod100_ge': 12}
+    elif intsp == intspan('4'):
+        if reason == '4easy':
+            result = {'nb2_mod100_range': '0-10,25-35,50-60,75-85'}
+        elif reason == '4harder':
+            result = {'nb2_mod100_range': '11-24,36-49,61-74,86-99'}
+    return result
 
 
 def postprocess_decimalfractionssums_query(qr, qkw=None, **kwargs):
@@ -1749,6 +1820,18 @@ class mc_source(object):
                 {'pairs': 2, 'triples': 3, 'quadruples': 4, 'quintuples': 5,
                  'sextuples': 6}[source_id.split(':')[0][len('nn'):]]
             spans = IntspansProduct(source_id.split(':')[1], nb_of_elts)
+            if nb_of_elts == 2:
+                reason = 'no reason'
+                if (qkw.get('variant2', 'default')
+                    == 'ensure_no_confusion_between_rules'
+                    and spans.spans[0] in [intspan('3'), intspan('9')]):
+                    reason = '3or9'
+                if spans.spans[0] == intspan('4'):
+                    if qkw.get('level', 'default') != 'default':
+                        reason = '4' + qkw.get('level', 'default')
+                if reason != 'no reason':
+                    kwargs.update(preprocess_divisibles(spans.spans[0],
+                                                        reason=reason))
             random_result = sorted(spans.random_draw(**kwargs))
             log.debug('Random draw output = {}\n'.format(random_result))
             db_source = {2: shared.nnpairs_source,

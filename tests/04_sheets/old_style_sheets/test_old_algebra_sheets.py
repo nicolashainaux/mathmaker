@@ -24,26 +24,12 @@ from mathmaker.lib import shared
 from mathmaker.lib.old_style_sheet import AVAILABLE
 
 
-def test_balance_01():
-    """Checks if 'algebra-balance-01' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['algebra-balance-01'][0]()),
-                             pdf_output=True)
-
-
 def test_expression_reduction():
     """
     Checks if 'algebra-expression-reduction' is generated without any error.
     """
     shared.machine.write_out(
         str(AVAILABLE['algebra-expression-reduction'][0]()), pdf_output=True)
-
-
-def test_expression_expansion():
-    """
-    Checks if 'algebra-expression-expansion' is generated without any error.
-    """
-    shared.machine.write_out(
-        str(AVAILABLE['algebra-expression-expansion'][0]()), pdf_output=True)
 
 
 def test_binomial_identities_expansion():
@@ -56,21 +42,9 @@ def test_binomial_identities_expansion():
         pdf_output=True)
 
 
-def test_short_test():
-    """Checks if 'algebra-short-test' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['algebra-short-test'][0]()),
-                             pdf_output=True)
-
-
 def test_factorization_01():
     """Checks if 'algebra-factorization-01' is generated without any error."""
     shared.machine.write_out(str(AVAILABLE['algebra-factorization-01'][0]()),
-                             pdf_output=True)
-
-
-def test_factorization_02():
-    """Checks if 'algebra-factorization-02' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['algebra-factorization-02'][0]()),
                              pdf_output=True)
 
 
@@ -80,19 +54,7 @@ def test_factorization_03():
                              pdf_output=True)
 
 
-def test_test_2():
-    """Checks if 'algebra-test-2' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['algebra-test-2'][0]()),
-                             pdf_output=True)
-
-
 def test_mini_test_0():
     """Checks if 'algebra-mini-test-0' is generated without any error."""
     shared.machine.write_out(str(AVAILABLE['algebra-mini-test-0'][0]()),
-                             pdf_output=True)
-
-
-def test_mini_test_1():
-    """Checks if 'algebra-mini-test-1' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['algebra-mini-test-1'][0]()),
                              pdf_output=True)

@@ -40,15 +40,3 @@ def test_harder():
     """Checks if 'equations-harder' is generated without any error."""
     shared.machine.write_out(str(AVAILABLE['equations-harder'][0]()),
                              pdf_output=True)
-
-
-def test_test():
-    """Checks if 'equations-test' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['equations-test'][0]()),
-                             pdf_output=True)
-
-
-def test_short_test():
-    """Checks if 'equations-short-test' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['equations-short-test'][0]()),
-                             pdf_output=True)

@@ -149,61 +149,7 @@ class X_Equation(X_Structure):
         # self.text = ...
 
         # PREFORMATTED EXERCISES
-        if self.x_kind == 'short_test':
-            if self.x_subkind == 'basic':
-                self.questions_list.append(default_question(
-                                           q_kind='basic_addition',
-                                           expression_number=0))
-                self.questions_list.append(default_question(
-                                           q_kind='basic_addition_r',
-                                           expression_number=1))
-                self.questions_list.append(default_question(
-                                           q_kind='basic_multiplication',
-                                           expression_number=2))
-                self.questions_list.append(default_question(
-                                           q_kind='basic_multiplication_r',
-                                           expression_number=3))
-            elif self.x_subkind == 'classic':
-                self.questions_list.append(default_question(
-                                           q_kind='classic',
-                                           expression_number=4))
-                self.questions_list.append(default_question(
-                                           q_kind='classic_r',
-                                           expression_number=5))
-
-            elif self.x_subkind == 'classic_harder':
-                # __
-                self.questions_list.append(default_question(
-                                           q_kind='classic',
-                                           expression_number=4))
-                self.questions_list.append(default_question(
-                                           q_kind='classic_r',
-                                           expression_number=5))
-                self.questions_list.append(default_question(
-                                           q_kind='classic_x_twice',
-                                           expression_number=6))
-                self.questions_list.append(default_question(
-                                           q_kind='classic_with_fractions',
-                                           expression_number=7))
-
-            elif self.x_subkind == 'harder':
-                self.questions_list.append(default_question(
-                                           q_kind='classic_x_twice',
-                                           expression_number=6))
-                self.questions_list.append(default_question(
-                                           q_kind='any_simple_expandable',
-                                           expression_number=7))
-
-            elif self.x_subkind == 'harder_harder':
-                # self.number_of_equations_per_column = 1
-                self.questions_list.append(default_question(
-                                           q_kind='any_simple_expandable',
-                                           expression_number=8))
-                self.questions_list.append(default_question(
-                                           q_kind='any_double_expandable',
-                                           expression_number=9))
-
-        elif self.x_kind == 'preformatted':
+        if self.x_kind == 'preformatted':
             if self.x_subkind == 'basic_additions':
                 # self.number_of_equations_per_column = 3
                 for i in range(3):

@@ -26,165 +26,108 @@ from abc import ABCMeta, abstractmethod
 class Structure(object, metaclass=ABCMeta):
     """Abstract mother class of machine objects."""
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @warning Will raise an exception if not redefined
     @abstractmethod
     def __init__(self, language):
-        pass
+        """Initialization"""
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Returns a deep copy of the object
-    def clone(self, language):
-        result = object.__new__(type(self))
-        result.__init__(language)
-        return result
-
-    # --------------------------------------------------------------------------
-    ##
-    #   Write the complete preamble of the sheet to the output.
     @abstractmethod
     def write_preamble(self):
-        pass
+        """Write the LaTeX document's preamble."""
 
-    # --------------------------------------------------------------------------
-    ##
-    #   Writes to the output the command to begin the document
     @abstractmethod
     def write_document_begins(self):
-        pass
+        """Write "document begins" markup."""
 
-    ##
-    #   Writes to the output the command displaying an exercise's title plus
-    #   its number
     @abstractmethod
     def write_exercise_number(self):
-        pass
+        """Write the command displaying "Exercise n°..."."""
 
-    ##
-    #   Writes to the output the jump to next page command
     @abstractmethod
     def write_jump_to_next_page(self):
-        pass
+        """Write the "jump to next page" command."""
 
-    ##
-    #   Writes to the output the exercises counter reinitializing command
     @abstractmethod
     def reset_exercises_counter(self):
-        pass
+        """Write command reinitializing the exercises counter."""
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Sets the font_size_offset field
     @abstractmethod
     def set_font_size_offset(self, arg):
-        pass
+        """Set the font_size_offset field"""
 
-    # --------------------------------------------------------------------------
-    ##
-    #   @brief Sets the redirect_output_to_str field to True or False
     @abstractmethod
     def set_redirect_output_to_str(self, arg):
-        pass
+        """Set the redirect_output_to_str field to True or False"""
 
-    ##
-    #   @brief turn the size keyword in language matching keyword
-    #   @warning if you chose a too low or too high value as font_size_offset,
-    #   @warning then all the text will be either tiny or Huge.
     @abstractmethod
     def translate_font_size(self, arg):
-        pass
+        """Turn the size keyword in markup language matching keyword."""
 
-    ##
-    #   Writes to the output the end of document command
     @abstractmethod
     def write_document_ends(self):
-        pass
+        """Write the "end of document" command."""
 
     @abstractmethod
     def write_frame(self, content, uncovered=False, only=False,
                     duration=None, numbering=''):
-        """Write frame to the output"""
-        pass
+        """Write a frame to the output."""
 
-    ##
-    #   Writes to the output the new line command
     @abstractmethod
     def write_new_line(self, **options):
-        pass
+        """Write the "new line" command."""
 
-    ##
-    #   Writes to the output two commands writing two new lines
     @abstractmethod
     def write_new_line_twice(self, **options):
-        pass
+        """Write the "new line" command twice."""
 
-    ##
-    #   Writes to the output the given string as a mathematical expression
     @abstractmethod
     def write_math_style2(self, given_string):
-        pass
+        """Write the given string as a mathematical expression."""
 
-    ##
-    #   Writes to the output the given string as a math. expression (2d option)
     @abstractmethod
     def write_math_style1(self, given_string):
-        pass
+        """Write the given string as a math. expression (2d option)"""
 
-    ##
-    #   Writes to the output the given string
     @abstractmethod
     def write(self, given_string, **options):
-        pass
+        """Write the given string."""
 
     @abstractmethod
     def write_out(self, given_string, **options):
-        pass
+        """Write to the current output."""
 
     @abstractmethod
     def write_set_font_size_to(self, arg):
-        pass
+        """Write the command to set font size."""
 
-    ##
-    #   @brief Writes a table filled with the given [strings]
-    #   @param size: (nb of columns, nb of lines)
-    #   @param col_widths: [int]
-    #   @param content: [strings]
-    #   @options: borders=0|1|2|3... (not implemented yet)
-    #   @options: unit='inch' etc. (check the possibilities...)
     @abstractmethod
     def create_table(self, size, content, **options):
-        pass
+        """Write a table filled with the given content."""
 
-    ##
-    #   @brief Writes content arranged like in a table (but can be written
-    #   @brief without using a table)
-    #   @param size: (nb of columns, nb of lines)
-    #   @param col_widths: [int]
-    #   @param content: [strings]
-    #   @options: borders=0|1|2|3... (not implemented yet)
-    #   @options: unit='inch' etc. (check the possibilities...)
     @abstractmethod
     def write_layout(self, size, col_widths, content, **options):
-        pass
+        """Writes content arranged like in a table.
+
+        :param: size: (nb of columns, nb of lines)
+        :param col_widths: list of int
+        :param content: list of str
+        """
 
     @abstractmethod
     def type_string(self, objct, **options):
-        pass
+        """Get the str version of objct. (Should be __str__())"""
 
     @abstractmethod
     def insert_picture(self, drawable_arg, **options):
-        pass
+        """Draw and insert the picture of the drawable_arg."""
 
     @abstractmethod
     def insert_dashed_hline(self, **options):
-        pass
+        """Draw a horizontal dashed line."""
 
     @abstractmethod
     def insert_vspace(self, **options):
-        pass
+        """Insert a vertical space (default height: 1 cm)."""
 
     @abstractmethod
     def insert_nonbreaking_space(self, **options):
-        pass
+        """Insert a non-breaking space."""
