@@ -29,7 +29,7 @@ fractions_simplifications: !!omap
 
 rightcuboids: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: fractions simplifications"
+  - title: "Mental calculation: right cuboids volumes"
   - exercise: !!omap
     - questions: volume rightcuboid -> nntriples:2-3×2-3×2-9 (10)
 

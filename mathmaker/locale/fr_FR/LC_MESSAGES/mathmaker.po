@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2018-05-05 07:41+0200\n"
+"PO-Revision-Date: 2018-05-28 16:36+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: /home/nico/mathmaker\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.0.7\n"
 "X-Poedit-KeywordsList: title\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -1843,22 +1843,22 @@ msgstr "Calcul mental : divisions"
 msgid "Mental calculation: multiplication by 11"
 msgstr "Calcul mental : multiplications par 11"
 
-#: lib/document/content/component.py:448
+#: lib/document/content/component.py:450
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr "Combien faut-il ajouter à {number1} pour obtenir {number2} ?"
 
-#: lib/document/content/component.py:453
+#: lib/document/content/component.py:455
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr "Quel est le complément à 10 de {number} ?"
 
-#: lib/document/content/component.py:457
+#: lib/document/content/component.py:459
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr "Quel est le complément à 100 de {number} ?"
 
-#: lib/document/content/component.py:461
+#: lib/document/content/component.py:463
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr "Quel est le complément à {number1} de {number2} ?"
@@ -1952,12 +1952,12 @@ msgid "{} (or {} etc.)"
 msgstr "{} (ou {} etc.)"
 
 #: lib/document/content/calculation/decimal_numerals.py:61
-#: lib/document/content/component.py:47
+#: lib/document/content/component.py:49
 msgid "What is {} as a decimal?"
 msgstr "Écriture décimale de {} ?"
 
+#: lib/document/content/component.py:51
 #: lib/document/content/calculation/decimal_numerals.py:66
-#: lib/document/content/component.py:49
 msgid "What is {} as a decimal fraction?"
 msgstr "Fraction décimale égale à {} ?"
 
@@ -2053,7 +2053,7 @@ msgstr "J"
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr "F"
 
-#: lib/document/content/component.py:70
+#: lib/document/content/component.py:72
 msgid "undefined"
 msgstr "indéfini"
 
@@ -2720,14 +2720,28 @@ msgstr "Périmètre de ce triangle ? |hint:length_unit|"
 msgid "Area of this triangle? |hint:area_unit|"
 msgstr "Aire de ce triangle ? |hint:area_unit|"
 
-#: lib/document/content/calculation/fraction_simplification.py:47
+#: lib/document/content/calculation/fraction_simplification.py:49
 #, python-brace-format
 msgid "Reduce: {fraction}"
 msgstr "Simplifier : {fraction}"
 
 #: data/frameworks/mental_calculation/06_orange.yaml:25
+#: data/frameworks/mental_calculation/06_orange.yaml:32
 msgid "Mental calculation: fractions simplifications"
 msgstr "Calcul mental : simplifications de fractions"
+
+#: lib/document/content/geometry/volume_rightcuboid.py:46
+#, python-brace-format
+msgid ""
+"Volume of this right cuboid?\\newline (length unit: {length_unit}) |hint:"
+"volume_unit|"
+msgstr ""
+"Volume de ce pavé droit ?\\newline (unité de longueur : {length_unit}) |hint:"
+"volume_unit|"
+
+#: data/frameworks/mental_calculation/06_orange.yaml:32
+msgid "Mental calculation: right cuboids volumes"
+msgstr "Calcul mental : volumes de pavés droits"
 
 #~ msgid "Area of this right triangle? |hint:area_unit|"
 #~ msgstr "Aire de ce triangle rectangle ? |hint:area_unit|"
