@@ -62,7 +62,9 @@ class SolidGenerator(Generator):
                       4: {'dimensions': (0.75, 1.25, 0.5),
                           'baseline': '16pt',
                           'boundingbox': (0, 0, 1, 1.65)},
-                      5: {'dimensions': (0.75, 0.5, 1.25)}
+                      5: {'dimensions': (1, 0.5, 1.25), 'α': 70,
+                          'baseline': '8pt',
+                          'boundingbox': (0, 0, 1, 0.9)}
                       }[variant]
         rc = RightCuboid(dimensions=build_data['dimensions'], name=name,
                          thickness=kwargs.get('thickness', 'thick'))
