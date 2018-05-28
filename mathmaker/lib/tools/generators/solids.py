@@ -49,22 +49,22 @@ class SolidGenerator(Generator):
         RECEDING_ANGLE = mmlib_setup.oblique_projection.RECEDING_AXIS_ANGLE
         # dimensions are: width, height, depth
         build_data = {0: {'dimensions': (2.5, 0.5, 1), 'α': 60,
-                          'boundingbox': (-0.05, -0.05, 1.05, 1.05)},
+                          'boundingbox': (-0.2, -0.5, 1.05, 1.05)},
                       1: {'dimensions': (0.5, 0.8, 1.3), 'α': 70,
                           'baseline': '12pt',
-                          'boundingbox': (0, 0, 1, 1.2)},
+                          'boundingbox': (-0.2, -0.5, 1, 1.2)},
                       2: {'dimensions': (0.5, 0.6, 1.4), 'α': 60,
                           'baseline': '11pt',
-                          'boundingbox': (0, 0, 1, 1.2)},
+                          'boundingbox': (-0.2, -0.6, 1, 1.2)},
                       3: {'dimensions': (2, 1, 0.5),
                           'baseline': '13pt',
-                          'boundingbox': (0, 0, 1, 1.35)},
+                          'boundingbox': (-0.2, -0.5, 1, 1.35)},
                       4: {'dimensions': (0.75, 1.25, 0.5),
                           'baseline': '16pt',
-                          'boundingbox': (0, 0, 1, 1.65)},
+                          'boundingbox': (-0.2, -0.5, 1, 1.65)},
                       5: {'dimensions': (1, 0.5, 1.25), 'α': 70,
                           'baseline': '8pt',
-                          'boundingbox': (0, 0, 1, 0.9)}
+                          'boundingbox': (-0.2, -0.5, 1, 0.9)}
                       }[variant]
         rc = RightCuboid(dimensions=build_data['dimensions'], name=name,
                          thickness=kwargs.get('thickness', 'thick'))
