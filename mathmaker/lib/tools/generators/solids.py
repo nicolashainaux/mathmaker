@@ -51,11 +51,11 @@ class SolidGenerator(Generator):
         build_data = {0: {'dimensions': (2.5, 0.5, 1),
                           'baseline': '10pt', 'α': 60,
                           'boundingbox': (-0.05, -0.05, 1.05, 1.05)},
-                      1: {'dimensions': (0.5, 2.5, 1)},
-                      2: {'dimensions': (0.5, 1.75, 0.75)},
-                      3: {'dimensions': (2, 0.5, 1)},
-                      4: {'dimensions': (0.75, 0.5, 1.25)},
-                      5: {'dimensions': (0.75, 1.25, 0.5)}
+                      1: {'dimensions': (0.5, 1, 2.5)},
+                      2: {'dimensions': (0.5, 0.75, 1.75)},
+                      3: {'dimensions': (2, 1, 0.5)},
+                      4: {'dimensions': (0.75, 1.25, 0.5)},
+                      5: {'dimensions': (0.75, 0.5, 1.25)}
                       }[variant]
         rc = RightCuboid(dimensions=build_data['dimensions'], name=name,
                          thickness=kwargs.get('thickness', 'thick'))
