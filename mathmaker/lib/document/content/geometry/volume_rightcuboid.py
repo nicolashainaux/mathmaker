@@ -57,10 +57,10 @@ class sub_object(component.structure):
         if self.slideshow:
             return '{}{}{}'.format(self.wording,
                                    shared.machine.addvspace(height='10pt'),
-                                   self.drawn_solid)
+                                   self.projection.drawn)
         else:
             return shared.machine.write_layout(
-                (1, 2), [5, 8], [self.drawn_solid, self.wording])
+                (1, 2), [5, 8], [self.projection.drawn, self.wording])
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'

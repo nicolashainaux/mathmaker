@@ -536,7 +536,7 @@ class structure(object):
                                wlines_nb=wlines_nb)
 
     def _generate_solid(self, codename, variant, labels, **kwargs):
-        self.solid, self.drawn_solid = SolidGenerator()\
+        self.solid, self.projection = SolidGenerator()\
             .generate(codename, variant=variant, labels=labels,
                       name=kwargs.get('name', None), **kwargs)
 
@@ -545,6 +545,10 @@ class structure(object):
         mmlib_setup.polygons.DEFAULT_WINDING = 'anticlockwise'
         self._generate_solid('rightcuboid', variant, labels, **kwargs)
         mmlib_setup.polygons.DEFAULT_WINDING = store_temp
+        if self.slideshow:
+            self.projection.scale = 2
+        for s in self.projection.edges:
+            s.label_scale = Number('0.75')
 
     def setup(self, arg, **kwargs):
         if type(arg) is not str:

@@ -76,4 +76,4 @@ class SolidGenerator(Generator):
                                label_vertices=label_vertices)
         op.baseline = build_data.get('baseline', '10pt')
         op.boundingbox = build_data.pop('boundingbox', None)
-        return rc, op.drawn
+        return rc, op
