@@ -48,10 +48,11 @@ class SolidGenerator(Generator):
     def _rightcuboid(self, variant, labels, name, **kwargs):
         RECEDING_ANGLE = mmlib_setup.oblique_projection.RECEDING_AXIS_ANGLE
         # dimensions are: width, height, depth
-        build_data = {0: {'dimensions': (2.5, 0.5, 1),
-                          'baseline': '10pt', 'α': 60,
+        build_data = {0: {'dimensions': (2.5, 0.5, 1), 'α': 60,
                           'boundingbox': (-0.05, -0.05, 1.05, 1.05)},
-                      1: {'dimensions': (0.5, 1, 2.5)},
+                      1: {'dimensions': (0.5, 0.8, 1.3), 'α': 70,
+                          'baseline': '12pt',
+                          'boundingbox': (0, 0, 1, 1.2)},
                       2: {'dimensions': (0.5, 0.75, 1.75)},
                       3: {'dimensions': (2, 1, 0.5)},
                       4: {'dimensions': (0.75, 1.25, 0.5)},
@@ -65,6 +66,6 @@ class SolidGenerator(Generator):
         op = ObliqueProjection(rc, direction=direction,
                                α=build_data.get('α', RECEDING_ANGLE),
                                label_vertices=label_vertices)
-        op.baseline = build_data.get('baseline', '20pt')
+        op.baseline = build_data.get('baseline', '10pt')
         op.boundingbox = build_data.pop('boundingbox', None)
         return rc, op.drawn
