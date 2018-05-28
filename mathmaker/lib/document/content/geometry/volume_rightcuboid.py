@@ -41,8 +41,8 @@ class sub_object(component.structure):
         else:
             faces_nb, variant = shared.rightcuboids_source.next()
 
-        # We know the wording will be in two lines:
-        super().setup('rightcuboid', variant=variant, labels=self.nb_list,
+        labels = [n.standardized() for n in self.nb_list]
+        super().setup('rightcuboid', variant=variant, labels=labels,
                       direction=direction)
 
         self.wording = _(r'Volume of this right cuboid?\newline '
@@ -64,7 +64,9 @@ class sub_object(component.structure):
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        return Number(self.solid.lbl_volume, unit=self.volume_unit).printed
+        return Number(self.solid.lbl_volume.standardized(),
+                      unit=self.volume_unit).printed
 
     def js_a(self, **kwargs):
-        return [Number(self.solid.lbl_volume, unit=None).uiprinted]
+        return [Number(self.solid.lbl_volume.standardized(),
+                       unit=None).uiprinted]
