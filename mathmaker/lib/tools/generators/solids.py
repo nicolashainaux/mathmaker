@@ -59,7 +59,9 @@ class SolidGenerator(Generator):
                       3: {'dimensions': (2, 1, 0.5),
                           'baseline': '13pt',
                           'boundingbox': (0, 0, 1, 1.35)},
-                      4: {'dimensions': (0.75, 1.25, 0.5)},
+                      4: {'dimensions': (0.75, 1.25, 0.5),
+                          'baseline': '16pt',
+                          'boundingbox': (0, 0, 1, 1.65)},
                       5: {'dimensions': (0.75, 0.5, 1.25)}
                       }[variant]
         rc = RightCuboid(dimensions=build_data['dimensions'], name=name,
