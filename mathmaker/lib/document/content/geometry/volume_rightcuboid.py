@@ -32,7 +32,8 @@ class sub_object(component.structure):
         super().setup('numbers', nb=build_data, **options)
         super().setup('length_units', **options)
 
-        direction = options.get('direction', shared.directions_source.next())
+        direction = options.get('direction',
+                                shared.directions_source.next()[0])
         if 'variant' in options:
             variant = int(options['variant'])
         else:
