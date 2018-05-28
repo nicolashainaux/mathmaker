@@ -375,6 +375,21 @@ def __main__():
                    "VALUES(?, ?, ?, ? , ?)",
                    db_rows)
 
+    creation_query = '''CREATE TABLE directions
+                        (id INTEGER PRIMARY KEY, direction TEXT,
+                         drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    db_rows = [('top-right', 0),
+               ('top-left', 0),
+               ('bottom-left', 0),
+               ('bottom-right', 0)]
+    db.executemany("INSERT "
+                   "INTO directions"
+                   "(direction, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+
     sys.stderr.write('Insert mixed decimals and ints triples for '
                      'proportionality...\n')
     integers = [_ for _ in range(2, 32)]
