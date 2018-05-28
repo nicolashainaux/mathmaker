@@ -20,6 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from mathmakerlib.calculus import Number
+
 from mathmaker.lib import shared
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import setup_wording_format_of
@@ -62,7 +64,7 @@ class sub_object(component.structure):
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        return self.solid.lbl_volume.printed
+        return Number(self.solid.lbl_volume, unit=self.volume_unit).printed
 
     def js_a(self, **kwargs):
-        return [self.solid.lbl_volume.uiprinted]
+        return [Number(self.solid.lbl_volume, unit=None).uiprinted]
