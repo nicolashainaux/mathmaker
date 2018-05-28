@@ -287,7 +287,7 @@ def init():
     hexagon_6_shapes_source = database.source(
         'hexagon_6_shapes', ['id', 'shape_nb'], db=shapes_db)
     rightcuboids_source = database.source(
-        'polyhedra', ['id', 'faces_nb', 'variant', 'direction'],
+        'polyhedra', ['id', 'faces_nb', 'variant'],
         db=solids_db)
 
     markup = latex.MARKUP

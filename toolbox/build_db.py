@@ -1582,39 +1582,20 @@ def __main__():
     creation_query = '''CREATE TABLE polyhedra
                         (id INTEGER PRIMARY KEY,
                          faces_nb INTEGER, type TEXT, variant INTEGER,
-                         direction TEXT,
                          drawDate INTEGER)'''
     solids_db_creation_queries.append(creation_query)
     solids_db.execute(creation_query)
-    db_rows = [(6, 'rightcuboid', 0, 'top-right', 0),
-               (6, 'rightcuboid', 0, 'top-left', 0),
-               (6, 'rightcuboid', 0, 'bottom-left', 0),
-               (6, 'rightcuboid', 0, 'bottom-right', 0),
-               (6, 'rightcuboid', 1, 'top-right', 0),
-               (6, 'rightcuboid', 1, 'top-left', 0),
-               (6, 'rightcuboid', 1, 'bottom-left', 0),
-               (6, 'rightcuboid', 1, 'bottom-right', 0),
-               (6, 'rightcuboid', 2, 'top-right', 0),
-               (6, 'rightcuboid', 2, 'top-left', 0),
-               (6, 'rightcuboid', 2, 'bottom-left', 0),
-               (6, 'rightcuboid', 2, 'bottom-right', 0),
-               (6, 'rightcuboid', 3, 'top-right', 0),
-               (6, 'rightcuboid', 3, 'top-left', 0),
-               (6, 'rightcuboid', 3, 'bottom-left', 0),
-               (6, 'rightcuboid', 3, 'bottom-right', 0),
-               (6, 'rightcuboid', 4, 'top-right', 0),
-               (6, 'rightcuboid', 4, 'top-left', 0),
-               (6, 'rightcuboid', 4, 'bottom-left', 0),
-               (6, 'rightcuboid', 4, 'bottom-right', 0),
-               (6, 'rightcuboid', 5, 'top-right', 0),
-               (6, 'rightcuboid', 5, 'top-left', 0),
-               (6, 'rightcuboid', 5, 'bottom-left', 0),
-               (6, 'rightcuboid', 5, 'bottom-right', 0),
+    db_rows = [(6, 'rightcuboid', 0, 0),
+               (6, 'rightcuboid', 1, 0),
+               (6, 'rightcuboid', 2, 0),
+               (6, 'rightcuboid', 3, 0),
+               (6, 'rightcuboid', 4, 0),
+               (6, 'rightcuboid', 5, 0),
                ]
     solids_db.executemany(
         "INSERT INTO polyhedra("
-        "faces_nb, type, variant, direction, drawDate) "
-        "VALUES(?, ?, ?, ?, ?)",
+        "faces_nb, type, variant, drawDate) "
+        "VALUES(?, ?, ?, ?)",
         db_rows)
 
     sys.stderr.write('Commit changes to databases...\n')
