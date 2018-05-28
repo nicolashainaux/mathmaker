@@ -32,7 +32,11 @@ class sub_object(component.structure):
         super().setup('numbers', nb=build_data, **options)
         super().setup('length_units', **options)
 
-        faces_nb, variant, direction = next(shared.rightcuboids_source)
+        direction = options.get('direction', shared.directions_source.next())
+        if 'variant' in options:
+            variant = int(options['variant'])
+        else:
+            faces_nb, variant = shared.rightcuboids_source.next()
 
         # We know the wording will be in two lines:
         super().setup('rightcuboid', variant=variant, labels=self.nb_list,
