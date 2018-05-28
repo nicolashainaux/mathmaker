@@ -53,7 +53,9 @@ class SolidGenerator(Generator):
                       1: {'dimensions': (0.5, 0.8, 1.3), 'α': 70,
                           'baseline': '12pt',
                           'boundingbox': (0, 0, 1, 1.2)},
-                      2: {'dimensions': (0.5, 0.75, 1.75)},
+                      2: {'dimensions': (0.5, 0.6, 1.4), 'α': 60,
+                          'baseline': '11pt',
+                          'boundingbox': (0, 0, 1, 1.2)},
                       3: {'dimensions': (2, 1, 0.5)},
                       4: {'dimensions': (0.75, 1.25, 0.5)},
                       5: {'dimensions': (0.75, 0.5, 1.25)}
