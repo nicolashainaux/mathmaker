@@ -71,3 +71,11 @@ W01d: !!omap
                  multi hole -> int_irreducible_frac (1)
                  multi clever -> table_15 (1)
                  decimal numerals, direction=to_decimal -> decimals (1)
+
+W02a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
+                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
+                 volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
+                 volume rightcuboid -> nntriples:2-3×2-3×2-9 (2)
