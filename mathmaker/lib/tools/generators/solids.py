@@ -20,6 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from mathmakerlib import mmlib_setup
 from mathmakerlib.geometry import RightCuboid, ObliqueProjection
 
 from mathmaker.lib.tools.generators import Generator
@@ -45,8 +46,11 @@ class SolidGenerator(Generator):
         return getattr(self, '_' + codename)(variant, labels, name, **kwargs)
 
     def _rightcuboid(self, variant, labels, name, **kwargs):
-        build_data = {0: {'dimensions': (1, 2.5, 0.5),
-                          'baseline': '20pt'},
+        RECEDING_ANGLE = mmlib_setup.oblique_projection.RECEDING_AXIS_ANGLE
+        # dimensions are: width, height, depth
+        build_data = {0: {'dimensions': (2.5, 0.5, 1),
+                          'baseline': '10pt', 'α': 60,
+                          'boundingbox': (-0.05, -0.05, 1.05, 1.05)},
                       1: {'dimensions': (0.5, 2.5, 1)},
                       2: {'dimensions': (0.5, 1.75, 0.75)},
                       3: {'dimensions': (2, 0.5, 1)},
@@ -59,6 +63,8 @@ class SolidGenerator(Generator):
         label_vertices = kwargs.get('label_vertices', False)
         direction = kwargs.get('direction', 'top-right')
         op = ObliqueProjection(rc, direction=direction,
+                               α=build_data.get('α', RECEDING_ANGLE),
                                label_vertices=label_vertices)
-        op.baseline = kwargs.get('baseline', '15pt')
+        op.baseline = build_data.get('baseline', '20pt')
+        op.boundingbox = build_data.pop('boundingbox', None)
         return rc, op.drawn
