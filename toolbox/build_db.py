@@ -390,6 +390,18 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
+    creation_query = '''CREATE TABLE times
+                        (id INTEGER PRIMARY KEY, hour INTEGER, minute INTEGER,
+                         drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    db_rows = [(hour, minute, 0) for hour in range(24) for minute in range(60)]
+    db.executemany("INSERT "
+                   "INTO times"
+                   "(hour, minute, drawDate) "
+                   "VALUES(?, ?, ?)",
+                   db_rows)
+
     sys.stderr.write('Insert mixed decimals and ints triples for '
                      'proportionality...\n')
     integers = [_ for _ in range(2, 32)]

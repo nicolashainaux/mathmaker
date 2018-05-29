@@ -179,6 +179,12 @@
         "direction",
         "drawDate"
     ],
+    "times": [
+        "id",
+        "hour",
+        "minute",
+        "drawDate"
+    ],
     "deci_int_triples_for_prop": [
         "id",
         "coeff",
