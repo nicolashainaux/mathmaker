@@ -50,6 +50,7 @@ class sub_object(component.structure):
         self.transduration = 18
 
         if self.slideshow:
+            self.polygon.scale = 2
             self.wording = _('Perimeter?')
             self.part2_wording = r'{\small' + _('(Length unit: {})')\
                 .format(self.length_unit) + '}'
