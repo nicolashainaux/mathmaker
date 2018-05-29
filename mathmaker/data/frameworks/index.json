@@ -169,6 +169,21 @@
         "06_orange",
         "W02a"
     ],
+    "06_orange_W02b": [
+        "mental_calculation",
+        "06_orange",
+        "W02b"
+    ],
+    "06_orange_W02c": [
+        "mental_calculation",
+        "06_orange",
+        "W02c"
+    ],
+    "06_orange_W02d": [
+        "mental_calculation",
+        "06_orange",
+        "W02d"
+    ],
     "02_white2_multiplications_reversed": [
         "mental_calculation",
         "02_white2",

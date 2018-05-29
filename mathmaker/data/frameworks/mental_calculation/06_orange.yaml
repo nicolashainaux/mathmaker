@@ -79,3 +79,30 @@ W02a: !!omap
                  volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
                  volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
                  volume rightcuboid -> nntriples:2-3×2-3×2-9 (2)
+
+W02b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility rule, variant=false, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 volume rightcuboid -> nntriples:2-3×2-3×2-9 (1)
+                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
+                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
+
+W02c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility rule, variant=true, level=harder, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-2500, nb2_notmod=10 (1)
+                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
+                 percent direct -> 10%of..., nb_variant=decimal1, context=simple_unit (1)
+                 numeric expansion -> mergedinttriples_3to9 (1)
+                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
+
+W02d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
+                 volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
+                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
+                 multi hole -> int_irreducible_frac (1)
+                 mini_pb proportionality -> mergedinttriples_3to9 (1)
