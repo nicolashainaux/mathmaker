@@ -69,9 +69,9 @@ challenge: !!omap
                 decimal numerals, direction=to_decimal -> decimals (1)
                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
                 subtr hole -> singleint_5to20;;singleint_5to20, nb_variant=±halforquarter (1)
-                area rectangle, picture=true -> table_11, nb_variant=decimal (1)
+                area rectangle, picture=true -> intpairs_2to9, nb_variant=decimal2 (1)
                 mini_pb proportionality -> mergedinttriples_25_3to6 (1)
-                rectangle length_or_width, context=from_area, picture=true -> intpairs_2to9, nb_variant=decimal1 (1)
+                rectangle length_or_width, context=from_area, picture=true -> nnpairs:11×21-27,31-36,41-45,51-54,61-63,71,72,81 (1)
                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
 
 W01a: !!omap
