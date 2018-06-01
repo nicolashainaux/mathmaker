@@ -160,6 +160,26 @@
         "locked",
         "drawDate"
     ],
+    "mini_pb_time_wordings": [
+        "id",
+        "wid",
+        "context",
+        "type",
+        "wording",
+        "mini_start_hour",
+        "mini_start_minute",
+        "maxi_start_hour",
+        "maxi_start_minute",
+        "mini_duration_hour",
+        "mini_duration_minute",
+        "maxi_duration_hour",
+        "maxi_duration_minute",
+        "mini_end_hour",
+        "mini_end_minute",
+        "maxi_end_hour",
+        "maxi_end_minute",
+        "drawDate"
+    ],
     "divisibility_statements": [
         "id",
         "wid",

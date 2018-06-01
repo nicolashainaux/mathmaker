@@ -319,6 +319,49 @@ def __main__():
                    "?, ?, ?, ?, ?)",
                    db_rows)
 
+    creation_query = '''CREATE TABLE mini_pb_time_wordings
+                        (id INTEGER PRIMARY KEY, wid INTEGER,
+                         context TEXT, type TEXT, wording TEXT,
+                         mini_start_hour INTEGER, mini_start_minute INTEGER,
+                         maxi_start_hour INTEGER, maxi_start_minute INTEGER,
+                         mini_duration_hour INTEGER,
+                         mini_duration_minute INTEGER,
+                         maxi_duration_hour INTEGER,
+                         maxi_duration_minute INTEGER,
+                         mini_end_hour INTEGER, mini_end_minute INTEGER,
+                         maxi_end_hour INTEGER, maxi_end_minute INTEGER,
+                         drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    TIME_WORDINGS_FILE = WORDINGS_DIR + 'mini_pb_time' + '.yaml'
+    wordings = get_attributes(TIME_WORDINGS_FILE, 'wording')
+    db_rows = list(zip([i + 1 for i in range(len(wordings))],
+                       [w.get('context') for w in wordings],
+                       [w.get('type') for w in wordings],
+                       [w.get('wording') for w in wordings],
+                       [w.get('mini_start_hour') for w in wordings],
+                       [w.get('mini_start_minute') for w in wordings],
+                       [w.get('maxi_start_hour') for w in wordings],
+                       [w.get('maxi_start_minute') for w in wordings],
+                       [w.get('mini_duration_hour') for w in wordings],
+                       [w.get('mini_duration_minute') for w in wordings],
+                       [w.get('maxi_duration_hour') for w in wordings],
+                       [w.get('maxi_duration_minute') for w in wordings],
+                       [w.get('mini_end_hour') for w in wordings],
+                       [w.get('mini_end_minute') for w in wordings],
+                       [w.get('maxi_end_hour') for w in wordings],
+                       [w.get('maxi_end_minute') for w in wordings],
+                       [0 for _ in range(len(wordings))]))
+    db.executemany("INSERT "
+                   "INTO mini_pb_time_wordings(wid, context, type, wording, "
+                   "mini_start_hour, mini_start_minute, maxi_start_hour, "
+                   "maxi_start_minute, mini_duration_hour,"
+                   "mini_duration_minute, maxi_duration_hour, "
+                   "maxi_duration_minute, mini_end_hour, mini_end_minute, "
+                   "maxi_end_hour, maxi_end_minute, drawDate) "
+                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                   db_rows)
+
     creation_query = '''CREATE TABLE divisibility_statements
                         (id INTEGER PRIMARY KEY, wid INTEGER,
                          wording TEXT, drawDate INTEGER)'''

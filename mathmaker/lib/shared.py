@@ -36,6 +36,7 @@ def init():
     global names_source
     global mini_problems_wordings_source
     global mini_problems_prop_wordings_source
+    global mini_problems_time_wordings_source
     global divisibility_statements_source
     global markup
     global deci_int_triples_for_prop_source
@@ -147,6 +148,14 @@ def init():
     mini_problems_prop_wordings_source = database.source(
         "mini_pb_prop_wordings", ["id", "wording_context", "wording",
                                   "nb1_xcoeff", "nb2_xcoeff", "nb3_xcoeff"])
+    mini_problems_time_wordings_source = database.source(
+        "mini_pb_time_wordings", ["id", "wording", "mini_start_hour",
+                                  "mini_start_minute", "maxi_start_hour",
+                                  "maxi_start_minute", "mini_duration_hour",
+                                  "mini_duration_minute", "maxi_duration_hour",
+                                  "maxi_duration_minute", "mini_end_hour",
+                                  "mini_end_minute", "maxi_end_hour",
+                                  "maxi_end_minute"])
     divisibility_statements_source = database.source("divisibility_statements",
                                                      ["id", "wording"])
     deci_int_triples_for_prop_source = database.source(
