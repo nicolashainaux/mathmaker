@@ -35,7 +35,7 @@ from .calculation import fraction_of_a_rectangle, fraction_of_a_linesegment
 from .calculation import addi_hole, subtr_hole
 from .calculation import units_conversion, decimal_numerals
 from .calculation import percent_direct, divi_euclidean
-from .calculation import mini_pb_proportionality
+from .calculation import mini_pb_proportionality, mini_pb_time
 from .calculation import numeric_expansion, numeric_factorization
 from .calculation import divisibility_vocabulary
 from .calculation import divisibility_rule
@@ -67,7 +67,7 @@ __all__ = ['expand_simple', 'expand_double',
            'order_of_operations',
            'addi_hole', 'subtr_hole',
            'units_conversion', 'decimal_numerals', 'percent_direct',
-           'divi_euclidean', 'mini_pb_proportionality',
+           'divi_euclidean', 'mini_pb_proportionality', 'mini_pb_time',
            'numeric_expansion', 'numeric_factorization',
            'divisibility_vocabulary', 'divisibility_rule',
            'fraction_simplification',

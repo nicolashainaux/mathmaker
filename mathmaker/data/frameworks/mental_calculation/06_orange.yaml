@@ -36,6 +36,12 @@ rightcuboids: !!omap
                  volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (2)
                  volume rightcuboid -> nntriples:2-3×2-3×2-9 (4)
 
+time_problems: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: time problems"
+  - exercise: !!omap
+    - questions: mini_pb time -> clocktime_data (10)
+
 challenge: !!omap
 - preset: "mental calculation"
 - title: "Challenge, first part"

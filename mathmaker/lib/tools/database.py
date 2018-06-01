@@ -958,7 +958,8 @@ def classify_tag(tag):
                  'decimals', 'decimalfractionssums', 'extdecimals',
                  'simple_fractions', 'dvipsnames_selection', 'polygons',
                  'int_triples', 'int_quadruples', 'int_quintuples',
-                 'int_sextuples', 'anglessets', 'rightcuboids', 'times']:
+                 'int_sextuples', 'anglessets', 'rightcuboids', 'times',
+                 'clocktime_data']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -1983,6 +1984,54 @@ class mc_source(object):
             return shared.deci_int_triples_for_prop_source.next(**kwargs)
         elif tag_classification == 'times':
             return shared.times_source.next(**kwargs)
+        elif tag_classification == 'clocktime_data':
+            from mathmakerlib.calculus import ClockTime
+            # times are drawn *after* the wording...
+            wordings_kw = kwargs
+            wordings_kw.update(
+                preprocess_qkw(db_table('mini_pb_time_wordings'), qkw=qkw))
+            wdata = shared.mini_problems_time_wordings_source.next(
+                **wordings_kw)
+            max_start_time = ClockTime(wdata[4], wdata[5])
+            min_duration = ClockTime(wdata[6], wdata[7])
+            max_duration = ClockTime(wdata[8], wdata[9])
+            min_end_time = ClockTime(wdata[10], wdata[11])
+            max_end_time = ClockTime(wdata[12], wdata[13])
+            times_kw = kwargs
+            times_kw.update(preprocess_qkw(db_table('times'), qkw=qkw))
+            adj_max = max_start_time - min_duration
+            times_kw.update({'raw':
+                             '((hour = {} AND minute >= {}) OR hour > {})'
+                             ' AND '
+                             '((hour = {} AND minute <= {}) OR hour < {})'
+                             .format(wdata[2], wdata[3], wdata[2],
+                                     adj_max.hour, adj_max.minute,
+                                     adj_max.hour)
+                             })
+            start_time = \
+                ClockTime(*shared.times_source.next(**times_kw))
+            if start_time + min_duration >= start_time:
+                adj_min = max(start_time + min_duration, min_end_time)
+            else:
+                adj_min = min_end_time
+            if start_time + max_duration >= start_time:
+                adj_max = min(start_time + max_duration, max_end_time)
+            else:
+                adj_max = max_end_time
+            times_kw.update({'raw':
+                             '((hour = {} AND minute >= {}) OR hour > {})'
+                             ' AND '
+                             '((hour = {} AND minute <= {}) OR hour < {})'
+                             .format(adj_min.hour, adj_min.minute,
+                                     adj_min.hour, adj_max.hour,
+                                     adj_max.minute, adj_max.hour)
+                             })
+            times_kw.update({'minute_max': start_time.minute - 1
+                             if start_time.minute - 1 >= 0 else 0})
+            end_time = \
+                ClockTime(*shared.times_source.next(**times_kw), 0)
+            return (wdata[0], wdata[1], start_time, end_time)
+
         elif tag_classification == 'nothing':
             return ()
         else:

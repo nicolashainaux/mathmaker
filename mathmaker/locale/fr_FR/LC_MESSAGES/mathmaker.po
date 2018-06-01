@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2018-05-28 16:36+0200\n"
+"PO-Revision-Date: 2018-06-01 17:11+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -2495,11 +2495,12 @@ msgstr "Calcul mental : multiplications décimales"
 msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr "Prêt ?{sep}Feu !{sep}Partez !"
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:181
-#: data/frameworks/mental_calculation/05_yellow2.yaml:55
 #: data/frameworks/mental_calculation/05_yellow2.yaml:131
-#: data/frameworks/mental_calculation/04_yellow1.yaml:183
+#: data/frameworks/mental_calculation/06_orange.yaml:47
+#: data/frameworks/mental_calculation/05_yellow2.yaml:55
 #: data/frameworks/mental_calculation/05_yellow2.yaml:49
+#: data/frameworks/mental_calculation/04_yellow1.yaml:181
+#: data/frameworks/mental_calculation/04_yellow1.yaml:183
 msgid "Challenge, first part"
 msgstr "Première épreuve du Tournoi"
 
@@ -2670,10 +2671,10 @@ msgstr "(Vrai ou faux ?)"
 msgid "Area of this rectangle?"
 msgstr "Aire de ce rectangle ?"
 
-#: lib/document/content/geometry/area_righttriangle.py:54
-#: lib/document/content/geometry/perimeter_rectangle.py:46
 #: lib/document/content/geometry/area_rectangle.py:44
-#: lib/document/content/geometry/perimeter_righttriangle.py:54
+#: lib/document/content/geometry/perimeter_rectangle.py:46
+#: lib/document/content/geometry/perimeter_righttriangle.py:55
+#: lib/document/content/geometry/area_righttriangle.py:55
 msgid "(Length unit: {})"
 msgstr "(Unité de longueur : {})"
 
@@ -2685,9 +2686,9 @@ msgstr "Réponse : "
 msgid "Perimeter of this rectangle?"
 msgstr "Périmètre de ce rectangle ?"
 
-#: lib/document/content/geometry/perimeter_righttriangle.py:59
-#: lib/document/content/geometry/area_righttriangle.py:58
 #: lib/document/content/geometry/area_rectangle.py:48
+#: lib/document/content/geometry/perimeter_righttriangle.py:60
+#: lib/document/content/geometry/area_righttriangle.py:59
 #: lib/document/content/geometry/perimeter_rectangle.py:51
 msgid "(Lengths in {})"
 msgstr "(Longueurs en {})"
@@ -2704,19 +2705,19 @@ msgstr "Calcul mental : critères de divisibilité"
 msgid "Mental calculation: right triangles"
 msgstr "Calcul mental : triangles rectangles"
 
-#: lib/document/content/geometry/area_righttriangle.py:53
+#: lib/document/content/geometry/area_righttriangle.py:54
 msgid "Area?"
 msgstr "Aire ?"
 
-#: lib/document/content/geometry/perimeter_righttriangle.py:53
+#: lib/document/content/geometry/perimeter_righttriangle.py:54
 msgid "Perimeter?"
 msgstr "Périmètre ?"
 
-#: lib/document/content/geometry/perimeter_righttriangle.py:57
+#: lib/document/content/geometry/perimeter_righttriangle.py:58
 msgid "Perimeter of this triangle? |hint:length_unit|"
 msgstr "Périmètre de ce triangle ? |hint:length_unit|"
 
-#: lib/document/content/geometry/area_righttriangle.py:57
+#: lib/document/content/geometry/area_righttriangle.py:58
 msgid "Area of this triangle? |hint:area_unit|"
 msgstr "Aire de ce triangle ? |hint:area_unit|"
 
@@ -2730,7 +2731,7 @@ msgstr "Simplifier : {fraction}"
 msgid "Mental calculation: fractions simplifications"
 msgstr "Calcul mental : simplifications de fractions"
 
-#: lib/document/content/geometry/volume_rightcuboid.py:46
+#: lib/document/content/geometry/volume_rightcuboid.py:48
 #, python-brace-format
 msgid ""
 "Volume of this right cuboid?\\newline (length unit: {length_unit}) |hint:"
@@ -2742,6 +2743,106 @@ msgstr ""
 #: data/frameworks/mental_calculation/06_orange.yaml:32
 msgid "Mental calculation: right cuboids volumes"
 msgstr "Calcul mental : volumes de pavés droits"
+
+#: data/wordings/mini_pb_time.yaml:7
+msgid ""
+"My train left at {start_time} and arrived at {arrival_time}. How long was "
+"the trip? |hint:time_unit|"
+msgstr ""
+"Mon train est parti à {start_time} et arrivé à {arrival_time}. Combien a "
+"duré le trajet ? |hint:time_unit|"
+
+#: data/wordings/mini_pb_time.yaml:24
+msgid ""
+"My train arrived at {arrival_time} and the trip lasted {duration_time}. When "
+"did it start? |hint:time_unit|"
+msgstr ""
+"Mon train est arrivé à {arrival_time} et le trajet a duré {duration_time}. À "
+"quelle heure est-il parti ? |hint:time_unit|"
+
+#: data/wordings/mini_pb_time.yaml:41
+msgid ""
+"My train started at {start_time} and the trip will last {duration_time}. "
+"When will it arrive? |hint:time_unit|"
+msgstr ""
+"Mon train a démarré à {start_time} et le trajet va durer {duration_time}. À "
+"quelle heure vais-je arriver ? |hint:time_unit|"
+
+#: data/wordings/mini_pb_time.yaml:109
+msgid ""
+"My bus left at {start_time} and arrived at {arrival_time}. How long was the "
+"trip? |hint:time_unit|"
+msgstr ""
+"Mon bus est parti à {start_time} et arrivé à {arrival_time}. Combien a duré "
+"le trajet ? |hint:time_unit|"
+
+#: data/wordings/mini_pb_time.yaml:126
+msgid ""
+"My bus arrived at {arrival_time} and the trip lasted {duration_time}. When "
+"did it start? |hint:time_unit|"
+msgstr ""
+"Mon bus est arrivé à {arrival_time} et le trajet a duré {duration_time}. À "
+"quelle heure est-il parti ? |hint:time_unit|"
+
+#: data/wordings/mini_pb_time.yaml:143
+msgid ""
+"My bus started at {start_time} and the trip will last {duration_time}. When "
+"will it arrive? |hint:time_unit|"
+msgstr ""
+"Mon bus est parti à {start_time} et le trajet va durer {duration_time}. À "
+"quelle heure vais-je arriver ? |hint:time_unit|"
+
+#: data/wordings/mini_pb_time.yaml:160
+msgid ""
+"I took the underground at {start_time} and arrived at {arrival_time}. How "
+"long was the trip? |hint:time_unit|"
+msgstr ""
+"J'ai pris le métro de {start_time} et je suis arrivé à {arrival_time}. "
+"Combien a duré le trajet ? |hint:time_unit|"
+
+#: data/wordings/mini_pb_time.yaml:177
+msgid ""
+"I got out of the underground at {arrival_time} and the trip lasted "
+"{duration_time}. When did it start? |hint:time_unit|"
+msgstr ""
+"Je suis sorti du métro à {arrival_time} et le trajet a duré {duration_time}. "
+"À quelle heure est-il parti ? |hint:time_unit|"
+
+#: data/wordings/mini_pb_time.yaml:194
+msgid ""
+"I took the underground at {start_time} and the trip should last "
+"{duration_time}. When will it arrive? |hint:time_unit|"
+msgstr ""
+"J'ai pris le métro de {start_time} et le trajet devrait durer "
+"{duration_time}. À quelle heure vais-je arriver ? |hint:time_unit|"
+
+#: data/frameworks/mental_calculation/06_orange.yaml:41
+msgid "Mental calculation: time problems"
+msgstr "Calcul mental : problèmes horaires"
+
+#: data/wordings/mini_pb_time.yaml:58
+msgid ""
+"My plane took off at {start_time} and landed at {arrival_time}. How long was "
+"the flight? |hint:time_unit|"
+msgstr ""
+"Mon avion a décollé à {start_time} et atterri à {arrival_time}. Combien a "
+"duré le vol ? |hint:time_unit|"
+
+#: data/wordings/mini_pb_time.yaml:75
+msgid ""
+"My plane landed at {arrival_time} and the flight lasted {duration_time}. "
+"When did it start? |hint:time_unit|"
+msgstr ""
+"Mon avion a atterri à {arrival_time} et le vol a duré {duration_time}. À "
+"quelle heure a-t-il décollé ? |hint:time_unit|"
+
+#: data/wordings/mini_pb_time.yaml:92
+msgid ""
+"My plane took off at {start_time} and the flight will last {duration_time}. "
+"When will it land? |hint:time_unit|"
+msgstr ""
+"Mon avion a décollé à {start_time} et le vol va durer {duration_time}. À "
+"quelle heure vais-je arriver ? |hint:time_unit|"
 
 #~ msgid "Area of this right triangle? |hint:area_unit|"
 #~ msgstr "Aire de ce triangle rectangle ? |hint:area_unit|"
