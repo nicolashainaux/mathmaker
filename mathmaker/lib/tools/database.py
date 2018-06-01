@@ -914,7 +914,7 @@ def db_table(tag):
     elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
                  'digits_places', 'fracdigits_places', 'simple_fractions',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
-                 'int_quintuples', 'int_sextuples', 'anglessets']:
+                 'int_quintuples', 'int_sextuples', 'anglessets', 'times']:
         return tag
     elif any(tag.startswith(t)
              for t in ['nnpairs', 'nntriples', 'nnquadruples', 'nnquintuples',
@@ -958,7 +958,7 @@ def classify_tag(tag):
                  'decimals', 'decimalfractionssums', 'extdecimals',
                  'simple_fractions', 'dvipsnames_selection', 'polygons',
                  'int_triples', 'int_quadruples', 'int_quintuples',
-                 'int_sextuples', 'anglessets', 'rightcuboids']:
+                 'int_sextuples', 'anglessets', 'rightcuboids', 'times']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -1981,6 +1981,8 @@ class mc_source(object):
             kwargs.update(
                 preprocess_deci_int_triplesforprop_tag(source_id, qkw=qkw))
             return shared.deci_int_triples_for_prop_source.next(**kwargs)
+        elif tag_classification == 'times':
+            return shared.times_source.next(**kwargs)
         elif tag_classification == 'nothing':
             return ()
         else:

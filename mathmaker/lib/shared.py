@@ -120,6 +120,7 @@ def init():
     global enable_js_form
     global distcodes_source
     global directions_source
+    global times_source
 
     enable_js_form = False
 
@@ -203,6 +204,7 @@ def init():
     ls_marks_source = database.source('ls_marks', ['id', 'mark'])
     distcodes_source = database.source('distcodes', ['id', 'distcode'])
     directions_source = database.source('directions', ['id', 'direction'])
+    times_source = database.source('times', ['id', 'hour', 'minute'])
     anglessets_source = database.source('anglessets',
                                         ['id', 'nbof_angles', 'distcode',
                                          'variant', 'nbof_right_angles',
