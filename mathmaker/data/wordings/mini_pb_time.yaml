@@ -109,14 +109,14 @@ wording7:
   - wording: "My bus left at {start_time} and arrived at {arrival_time}. How long was the trip? |hint:time_unit|"
   - mini_start_hour: 5
   - mini_start_minute: 0
-  - maxi_start_hour: 21
+  - maxi_start_hour: 22
   - maxi_start_minute: 30
   - mini_duration_hour: 0
-  - mini_duration_minute: 11
-  - maxi_duration_hour: 8
-  - maxi_duration_minute: 30
+  - mini_duration_minute: 9
+  - maxi_duration_hour: 0
+  - maxi_duration_minute: 55
   - mini_end_hour: 5
-  - mini_end_minute: 11
+  - mini_end_minute: 9
   - maxi_end_hour: 23
   - maxi_end_minute: 59
 
@@ -126,14 +126,14 @@ wording8:
   - wording: "My bus arrived at {arrival_time} and the trip lasted {duration_time}. When did it start? |hint:time_unit|"
   - mini_start_hour: 5
   - mini_start_minute: 0
-  - maxi_start_hour: 21
+  - maxi_start_hour: 22
   - maxi_start_minute: 30
   - mini_duration_hour: 0
-  - mini_duration_minute: 11
-  - maxi_duration_hour: 8
-  - maxi_duration_minute: 30
+  - mini_duration_minute: 9
+  - maxi_duration_hour: 0
+  - maxi_duration_minute: 55
   - mini_end_hour: 5
-  - mini_end_minute: 11
+  - mini_end_minute: 9
   - maxi_end_hour: 23
   - maxi_end_minute: 59
 
@@ -143,14 +143,14 @@ wording9:
   - wording: "My bus started at {start_time} and the trip will last {duration_time}. When will it arrive? |hint:time_unit|"
   - mini_start_hour: 5
   - mini_start_minute: 0
-  - maxi_start_hour: 21
+  - maxi_start_hour: 22
   - maxi_start_minute: 30
   - mini_duration_hour: 0
-  - mini_duration_minute: 11
-  - maxi_duration_hour: 8
-  - maxi_duration_minute: 30
+  - mini_duration_minute: 9
+  - maxi_duration_hour: 0
+  - maxi_duration_minute: 55
   - mini_end_hour: 5
-  - mini_end_minute: 11
+  - mini_end_minute: 9
   - maxi_end_hour: 23
   - maxi_end_minute: 59
 
@@ -167,7 +167,7 @@ wording10:
   - maxi_duration_hour: 0
   - maxi_duration_minute: 55
   - mini_end_hour: 5
-  - mini_end_minute: 11
+  - mini_end_minute: 9
   - maxi_end_hour: 23
   - maxi_end_minute: 59
 
@@ -184,7 +184,7 @@ wording11:
   - maxi_duration_hour: 0
   - maxi_duration_minute: 55
   - mini_end_hour: 5
-  - mini_end_minute: 11
+  - mini_end_minute: 9
   - maxi_end_hour: 23
   - maxi_end_minute: 59
 
@@ -201,6 +201,57 @@ wording12:
   - maxi_duration_hour: 0
   - maxi_duration_minute: 55
   - mini_end_hour: 5
-  - mini_end_minute: 11
+  - mini_end_minute: 9
+  - maxi_end_hour: 23
+  - maxi_end_minute: 59
+
+wording13:
+  - context: coach
+  - type: duration
+  - wording: "My coach left at {start_time} and arrived at {arrival_time}. How long was the trip? |hint:time_unit|"
+  - mini_start_hour: 5
+  - mini_start_minute: 0
+  - maxi_start_hour: 22
+  - maxi_start_minute: 30
+  - mini_duration_hour: 0
+  - mini_duration_minute: 55
+  - maxi_duration_hour: 12
+  - maxi_duration_minute: 0
+  - mini_end_hour: 5
+  - mini_end_minute: 55
+  - maxi_end_hour: 23
+  - maxi_end_minute: 59
+
+wording14:
+  - context: coach
+  - type: start
+  - wording: "My coach arrived at {arrival_time} and the trip lasted {duration_time}. When did it start? |hint:time_unit|"
+  - mini_start_hour: 5
+  - mini_start_minute: 0
+  - maxi_start_hour: 22
+  - maxi_start_minute: 30
+  - mini_duration_hour: 0
+  - mini_duration_minute: 55
+  - maxi_duration_hour: 0
+  - maxi_duration_minute: 55
+  - mini_end_hour: 5
+  - mini_end_minute: 55
+  - maxi_end_hour: 23
+  - maxi_end_minute: 59
+
+wording15:
+  - context: coach
+  - type: arrival
+  - wording: "My coach started at {start_time} and the trip will last {duration_time}. When will it arrive? |hint:time_unit|"
+  - mini_start_hour: 5
+  - mini_start_minute: 0
+  - maxi_start_hour: 22
+  - maxi_start_minute: 30
+  - mini_duration_hour: 0
+  - mini_duration_minute: 55
+  - maxi_duration_hour: 12
+  - maxi_duration_minute: 0
+  - mini_end_hour: 5
+  - mini_end_minute: 55
   - maxi_end_hour: 23
   - maxi_end_minute: 59

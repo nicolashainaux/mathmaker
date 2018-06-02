@@ -2469,3 +2469,21 @@ msgid ""
 "My plane took off at {start_time} and the flight will last {duration_time}. "
 "When will it land? |hint:time_unit|"
 msgstr ""
+
+#: data/wordings/mini_pb_time.yaml:211
+msgid ""
+"My coach left at {start_time} and arrived at {arrival_time}. How long was "
+"the trip? |hint:time_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_time.yaml:228
+msgid ""
+"My coach arrived at {arrival_time} and the trip lasted {duration_time}. When"
+" did it start? |hint:time_unit|"
+msgstr ""
+
+#: data/wordings/mini_pb_time.yaml:245
+msgid ""
+"My coach started at {start_time} and the trip will last {duration_time}. "
+"When will it arrive? |hint:time_unit|"
+msgstr ""
