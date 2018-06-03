@@ -20,9 +20,26 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from mathmakerlib.calculus import ClockTime
+
+from mathmaker import settings
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import post_process
+
+TIME_CONTEXT = {'en': {'h': ':', 'min': '', 's': '',
+                       'display_s': False, 'display_0h': True,
+                       'display_0min': True},
+                'fr': {'h': 'h', 'min': '', 's': '',
+                       'display_s': False, 'display_0h': True,
+                       'display_0min': True}}
+
+DURATION_CONTEXT = {'en': {'h': ':', 'min': '', 's': '',
+                           'display_s': False, 'display_0h': False,
+                           'display_0min': True},
+                    'fr': {'h': 'h', 'min': '', 's': '',
+                           'display_s': False, 'display_0h': False,
+                           'display_0min': True}}
 
 
 class sub_object(component.structure):
@@ -36,9 +53,11 @@ class sub_object(component.structure):
         super().setup("minimal", **options)
         wording_type = build_data[0]
         self.wording = _(build_data[1])
-        start_time = build_data[2]
-        arrival_time = build_data[3]
-        duration_time = arrival_time - start_time
+        lang = settings.language[:2]
+        start_time = ClockTime(build_data[2], context=TIME_CONTEXT[lang])
+        arrival_time = ClockTime(build_data[3], context=TIME_CONTEXT[lang])
+        duration_time = ClockTime(arrival_time - start_time,
+                                  context=DURATION_CONTEXT[lang])
         self.start_time = start_time.printed
         self.arrival_time = arrival_time.printed
         self.duration_time = duration_time.printed
