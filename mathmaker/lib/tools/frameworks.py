@@ -711,7 +711,7 @@ def _expand_alternatives(s):
     alternatives = []
     if '{' in s and '|' in s and '}' in s:
         content = CURLY_BRACES_CONTENT.findall(s)[0]
-        p = '{' + content.replace('|', '\|') + '}'
+        p = '{' + content.replace('|', r'\|') + '}'
         for alt in content.split('|'):
             alternatives += _expand_alternatives(re.sub(p, alt, s))
     else:
