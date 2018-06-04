@@ -149,7 +149,8 @@ def init():
         "mini_pb_prop_wordings", ["id", "wording_context", "wording",
                                   "nb1_xcoeff", "nb2_xcoeff", "nb3_xcoeff"])
     mini_problems_time_wordings_source = database.source(
-        "mini_pb_time_wordings", ["id", "type", "wording", "mini_start_hour",
+        "mini_pb_time_wordings", ["id", "wording_context", "type", "wording",
+                                  "mini_start_hour",
                                   "mini_start_minute", "maxi_start_hour",
                                   "maxi_start_minute", "mini_duration_hour",
                                   "mini_duration_minute", "maxi_duration_hour",

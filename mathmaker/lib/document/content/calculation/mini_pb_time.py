@@ -46,16 +46,16 @@ class sub_object(component.structure):
 
     def __init__(self, build_data, **options):
         """
-        :param build_data: tuple of a wording and two ClockTime objects, the
-        first being the start hour and the second the end hour.
+        :param build_data: tuple containing: wording's context and type, the
+        wording itself and two ClockTime objects: start and arrival hours.
         :type build_data: tuple
         """
         super().setup("minimal", **options)
-        wording_type = build_data[0]
-        self.wording = _(build_data[1])
+        wording_type = build_data[1]
+        self.wording = _(build_data[2])
         lang = settings.language[:2]
-        start_time = ClockTime(build_data[2], context=TIME_CONTEXT[lang])
-        arrival_time = ClockTime(build_data[3], context=TIME_CONTEXT[lang])
+        start_time = ClockTime(build_data[3], context=TIME_CONTEXT[lang])
+        arrival_time = ClockTime(build_data[4], context=TIME_CONTEXT[lang])
         duration_time = ClockTime(arrival_time - start_time,
                                   context=DURATION_CONTEXT[lang])
         self.start_time = start_time.printed

@@ -25,6 +25,7 @@ import copy
 import json
 import random
 import warnings
+from copy import deepcopy
 from decimal import Decimal
 from functools import reduce
 from itertools import combinations
@@ -641,7 +642,8 @@ class source(object):
             elif kw == "lock_equal_products":
                 result += next(hook(kn)) + " lock_equal_products = 0 "
                 kn += 1
-            elif kw in ["lock_equal_coeffs", "lock_equal_contexts"]:
+            elif kw in ["lock_equal_coeffs", "lock_equal_contexts",
+                        "lock_equal_types"]:
                 if "locked = " not in result:
                     result += next(hook(kn)) + " locked = 0 "
                     kn += 1
@@ -794,7 +796,8 @@ class source(object):
         qr = tuple(self.db.execute(cmd))
         if (not len(qr)
             and self.table_name in ['deci_int_triples_for_prop',
-                                    'mini_pb_prop_wordings']):
+                                    'mini_pb_prop_wordings',
+                                    'mini_pb_time_wordings']):
             self._unlock()
             qr = tuple(self.db.execute(cmd))
         if not len(qr) and enablereset:
@@ -866,13 +869,22 @@ class source(object):
                 "UPDATE {table_name} SET locked = 1 WHERE coeff = '{coeff}';"
                 .format(table_name=self.table_name, coeff=str(t[0])))
         if ('lock_equal_contexts' in kwargs
-            and self.table_name == 'mini_pb_prop_wordings'):
+            and self.table_name in ['mini_pb_prop_wordings',
+                                    'mini_pb_time_wordings']):
             log.debug('LOCK: context "{}" in {}\n'
                       .format(str(t[0]), self.table_name))
             self.db.execute(
                 "UPDATE {table_name} SET locked = 1 "
                 "WHERE wording_context = '{wcontext}';"
                 .format(table_name=self.table_name, wcontext=str(t[0])))
+        if ('lock_equal_types' in kwargs
+            and self.table_name == 'mini_pb_time_wordings'):
+            log.debug('LOCK: type "{}" in {}\n'
+                      .format(str(t[1]), self.table_name))
+            self.db.execute(
+                "UPDATE {table_name} SET locked = 1 "
+                "WHERE type = '{wtype}';"
+                .format(table_name=self.table_name, wtype=str(t[1])))
 
     ##
     #   @brief  Synonym of self.next(), but makes the source an Iterator.
@@ -1987,16 +1999,18 @@ class mc_source(object):
         elif tag_classification == 'clocktime_data':
             from mathmakerlib.calculus import ClockTime
             # times are drawn *after* the wording...
-            wordings_kw = kwargs
+            wordings_kw = deepcopy(kwargs)
             wordings_kw.update(
                 preprocess_qkw(db_table('mini_pb_time_wordings'), qkw=qkw))
+            wordings_kw.update({'lock_equal_contexts': True,
+                                'lock_equal_types': True})
             wdata = shared.mini_problems_time_wordings_source.next(
                 **wordings_kw)
-            max_start_time = ClockTime(wdata[4], wdata[5])
-            min_duration = ClockTime(wdata[6], wdata[7])
-            max_duration = ClockTime(wdata[8], wdata[9])
-            min_end_time = ClockTime(wdata[10], wdata[11])
-            max_end_time = ClockTime(wdata[12], wdata[13])
+            max_start_time = ClockTime(wdata[5], wdata[6])
+            min_duration = ClockTime(wdata[7], wdata[8])
+            max_duration = ClockTime(wdata[9], wdata[10])
+            min_end_time = ClockTime(wdata[11], wdata[12])
+            max_end_time = ClockTime(wdata[13], wdata[14])
             times_kw = kwargs
             times_kw.update(preprocess_qkw(db_table('times'), qkw=qkw))
             adj_max = max_start_time - min_duration
@@ -2004,7 +2018,7 @@ class mc_source(object):
                              '((hour = {} AND minute >= {}) OR hour > {})'
                              ' AND '
                              '((hour = {} AND minute <= {}) OR hour < {})'
-                             .format(wdata[2], wdata[3], wdata[2],
+                             .format(wdata[3], wdata[4], wdata[3],
                                      adj_max.hour, adj_max.minute,
                                      adj_max.hour)
                              })
@@ -2030,7 +2044,7 @@ class mc_source(object):
                              if start_time.minute - 1 >= 0 else 0})
             end_time = \
                 ClockTime(*shared.times_source.next(**times_kw), 0)
-            return (wdata[0], wdata[1], start_time, end_time)
+            return (wdata[0], wdata[1], wdata[2], start_time, end_time)
 
         elif tag_classification == 'nothing':
             return ()

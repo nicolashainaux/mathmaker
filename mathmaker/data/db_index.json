@@ -163,7 +163,7 @@
     "mini_pb_time_wordings": [
         "id",
         "wid",
-        "context",
+        "wording_context",
         "type",
         "wording",
         "mini_start_hour",
@@ -178,6 +178,7 @@
         "mini_end_minute",
         "maxi_end_hour",
         "maxi_end_minute",
+        "locked",
         "drawDate"
     ],
     "divisibility_statements": [
