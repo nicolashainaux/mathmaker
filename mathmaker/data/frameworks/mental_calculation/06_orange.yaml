@@ -150,3 +150,10 @@ W02d: !!omap
                  area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
                  multi hole -> int_irreducible_frac (1)
                  mini_pb proportionality -> mergedinttriples_3to9 (1)
+
+W03a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: mini_pb time -> clocktime_data (3)
+                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
+                 divisibility rule, variant=true, level=harder, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-2500, nb2_notmod=10 (1)
