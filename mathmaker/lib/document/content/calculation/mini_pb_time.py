@@ -29,17 +29,17 @@ from mathmaker.lib.tools.wording import post_process
 
 TIME_CONTEXT = {'en': {'h': ':', 'min': '', 's': '',
                        'display_s': False, 'display_0h': True,
-                       'display_0min': True},
+                       'display_0min': True, 'min_if_0h': ' min'},
                 'fr': {'h': 'h', 'min': '', 's': '',
                        'display_s': False, 'display_0h': True,
-                       'display_0min': True}}
+                       'display_0min': True, 'min_if_0h': ' min'}}
 
 DURATION_CONTEXT = {'en': {'h': ':', 'min': '', 's': '',
                            'display_s': False, 'display_0h': False,
-                           'display_0min': True},
+                           'display_0min': True, 'min_if_0h': ' min'},
                     'fr': {'h': 'h', 'min': '', 's': '',
                            'display_s': False, 'display_0h': False,
-                           'display_0min': True}}
+                           'display_0min': True, 'min_if_0h': ' min'}}
 
 
 class sub_object(component.structure):
