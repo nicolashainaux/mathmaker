@@ -2023,7 +2023,7 @@ class mc_source(object):
                                      adj_max.hour)
                              })
             start_time = \
-                ClockTime(*shared.times_source.next(**times_kw))
+                ClockTime(*shared.times_source.next(minute_neq=0, **times_kw))
             if start_time + min_duration >= start_time:
                 adj_min = max(start_time + min_duration, min_end_time)
             else:
@@ -2040,10 +2040,12 @@ class mc_source(object):
                                      adj_min.hour, adj_max.hour,
                                      adj_max.minute, adj_max.hour)
                              })
-            times_kw.update({'minute_max': start_time.minute - 1
-                             if start_time.minute - 1 >= 0 else 0})
+            if adj_max.hour > adj_min.hour and start_time.minute >= 2:
+                times_kw.update({'minute_max': start_time.minute - 1})
             end_time = \
-                ClockTime(*shared.times_source.next(**times_kw), 0)
+                ClockTime(
+                    *shared.times_source.next(minute_neq=start_time.minute,
+                                              **times_kw), 0)
             return (wdata[0], wdata[1], wdata[2], start_time, end_time)
 
         elif tag_classification == 'nothing':
