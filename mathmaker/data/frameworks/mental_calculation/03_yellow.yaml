@@ -25,7 +25,7 @@ addi_subtr_hole: !!omap
 
 units_conversions: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: additions and subtractions with a hole"
+  - title: "Mental calculation: units conversions"
   - exercise: !!omap
     - questions: units conversion -> unitspairs (10)
 

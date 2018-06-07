@@ -65,6 +65,7 @@
         "direction",
         "category",
         "level",
+        "dimension",
         "drawDate"
     ],
     "int_pairs": [

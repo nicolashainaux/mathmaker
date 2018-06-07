@@ -49,7 +49,7 @@ class sub_object(component.structure):
         self.n1 = self.nb1.printed
         hint = ''
         if self.context == 'simple_unit':
-            u = shared.unitspairs_source.next(direction='left')[0]
+            u = shared.unitspairs_source.next(direction='left', level=1)[0]
             pq = physical_quantity(u)
             self.n2 = Number(self.nb2, unit=Unit(u)).printed
             hint = ' |hint:{}_unit|'.format(pq)

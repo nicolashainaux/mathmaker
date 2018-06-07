@@ -1251,8 +1251,6 @@ def preprocess_units_pairs_tag(tag, last_draw=None, qkw=None):
         last_draw = {}
     if 'level' in qkw:
         d.update({'level': qkw['level']})
-    else:
-        d.update({'level': 1})
     if 'category' in qkw:
         d.update({'category': qkw['category']})
     elif len(last_draw) >= 5:
@@ -1261,6 +1259,9 @@ def preprocess_units_pairs_tag(tag, last_draw=None, qkw=None):
         d.update({'direction': qkw['direction']})
     elif len(last_draw) >= 5:
         d.update({'direction_neq': last_draw[2]})
+    if ('category' not in d and 'category_neq' not in d and 'level' not in d
+        and d.get('direction', None) is not None):
+        d.update({'level': 1})
     return d
 
 

@@ -42,6 +42,18 @@ time_problems: !!omap
   - exercise: !!omap
     - questions: mini_pb time -> clocktime_data (10)
 
+units_conversions: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: units conversions"
+  - exercise: !!omap
+    - questions: units conversion -> unitspairs, category=area, level=2 (3)
+                 units conversion -> unitspairs, category=volume, level=3 (2)
+                 units conversion -> unitspairs (1)
+                 units conversion -> unitspairs, dimension=1, level=2 (1)
+                 units conversion -> unitspairs, dimension=1, level=3 (1)
+                 units conversion -> unitspairs, category=volume2capacity, level=3 (1)
+                 units conversion -> unitspairs, category=capacity2volume, level=3 (1)
+
 challenge: !!omap
 - preset: "mental calculation"
 - title: "Challenge, first part"

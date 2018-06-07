@@ -204,7 +204,7 @@ def init():
     unitspairs_source = database.source('units_conversions',
                                         ['id', 'unit1', 'unit2',
                                          'direction', 'category',
-                                         'level'])
+                                         'level', 'dimension'])
     decimals_source = database.source('decimals', ['id', 'nb1'])
     digits_places_source = database.source('digits_places', ['id', 'place'])
     fracdigits_places_source = database.source('fracdigits_places',
