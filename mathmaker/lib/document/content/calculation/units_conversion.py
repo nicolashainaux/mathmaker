@@ -21,6 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import random
+from operator import xor
 from decimal import Decimal
 
 from mathmakerlib.calculus import difference_of_orders_of_magnitude
@@ -41,9 +42,9 @@ class sub_object(component.structure):
         # if (self.nb1 > 20 and self.nb2 > 20
         #     and not self.nb1 % 10 == 0 and not self.nb2 % 10 == 0):
         #     self.transduration = 12
-        unit1, unit2, direction, phq, level, dimension = build_data
-        self.transduration = {1: 15, 2: 20, 3: 25, 4: 25, 5: 25, 6: 30,
-                              7: 30, 8: 30}[int(level)]
+        unit1, unit2, direction, category, level, dimension = build_data
+        self.transduration = {1: 15, 2: 20, 3: 25, 4: 25, 5: 25}\
+            .get(int(level), 30)
         unit1 = Unit(unit1)
         unit2 = Unit(unit2)
         if physical_quantity(unit1) == 'length' and dimension != 1:
@@ -52,6 +53,11 @@ class sub_object(component.structure):
         if physical_quantity(unit2) == 'length' and dimension != 1:
             self.length_unit2 = unit2.content
             unit2 = Unit(unit2.content, exponent=dimension)
+        if xor(hasattr(self, 'length_unit1'), hasattr(self, 'length_unit2')):
+            if hasattr(self, 'length_unit1'):
+                self.length_unit = getattr(self, 'length_unit1')
+            else:
+                self.length_unit = getattr(self, 'length_unit2')
         start_position = [Decimal('10'), Decimal('1'), Decimal('0.1')]
         if difference_of_orders_of_magnitude(unit1, unit2) >= Decimal('100'):
             start_position = [Decimal('1'), Decimal('0.1'), Decimal('0.01')]
@@ -73,9 +79,15 @@ class sub_object(component.structure):
                       shuffle_nbs=False, standardize_decimal_numbers=True)
         self.answer = Number(self.nb2, unit=unit2).printed
         self.js_answer = self.nb2.uiprinted
-        unit1_attr_name = phq + '_unit1'
-        unit2_attr_name = phq + '_unit2'
-        hint = ' |hint:{}_unit2|'.format(phq)
+        phq1 = physical_quantity(unit1)
+        phq2 = physical_quantity(unit2)
+        suffix1 = suffix2 = ''
+        if phq1 == phq2:
+            suffix1 = '1'
+            suffix2 = '2'
+        unit1_attr_name = phq1 + '_unit' + suffix1
+        unit2_attr_name = phq2 + '_unit' + suffix2
+        hint = ' |hint:{}_unit{}|'.format(phq2, suffix2)
         setattr(self, unit1_attr_name, unit1)
         setattr(self, unit2_attr_name, unit2)
         self.wording = '{{nb1}} {{{u1}}} = QUESTION_MARK~{{{u2}}}{h}'\
