@@ -1939,7 +1939,15 @@ class mc_source(object):
                                                      last_draw=kwargs.get(
                                                          'not_in', None)))
             kwargs.pop('not_in', None)
-            return shared.unitspairs_source.next(**kwargs)
+            try:  # poor way to remove possibly too constraining conditions
+                return shared.unitspairs_source.next(**kwargs)
+            except RuntimeError:
+                kwargs.pop('direction_neq', None)
+                try:
+                    return shared.unitspairs_source.next(**kwargs)
+                except RuntimeError:
+                    kwargs.pop('category_neq', None)
+                    return shared.unitspairs_source.next(**kwargs)
         elif tag_classification == 'decimals':
             kwargs.update(preprocess_decimals_query(qkw=qkw))
             return shared.decimals_source.next(**kwargs)
