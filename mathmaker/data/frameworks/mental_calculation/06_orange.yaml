@@ -54,6 +54,17 @@ units_conversions: !!omap
                  units conversion -> unitspairs, category=volume2capacity, level=3 (1)
                  units conversion -> unitspairs, category=capacity2volume, level=3 (1)
 
+percentages: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: simple percentages calculations"
+  - exercise: !!omap
+    - questions: percent direct -> 20|30|40|60|70|80|90%of..., context=simple_unit (4)
+                 percent direct -> 5%of..., level=easy, context=simple_unit (2)
+                 percent direct -> 5%of..., context=simple_unit (1)
+                 percent direct -> 10%of..., nb_variant=decimal1, context=simple_unit (1)
+                 percent direct -> 25%of..., context=simple_unit (1)
+                 percent direct -> 75%of..., context=simple_unit (1)
+
 challenge: !!omap
 - preset: "mental calculation"
 - title: "Challenge, first part"
