@@ -206,3 +206,38 @@ W03d: !!omap
                  mini_pb time -> clocktime_data (1)
                  divisibility rule, variant=true, level=harder, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-2500, nb2_notmod=10 (1)
                  percent direct -> 10%of..., nb_variant=decimal1, context=simple_unit (1)
+
+W04a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: percent direct -> 20|30|40|60|70|80|90%of..., context=simple_unit (2)
+                 percent direct -> 5%of..., level=easy, context=simple_unit (1)
+                 mini_pb time -> clocktime_data (1)
+                 units conversion -> unitspairs, category=area, level=2 (1)
+
+W04b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: percent direct -> 20|30|40|60|70|80|90%of..., context=simple_unit (1)
+                 percent direct -> 5%of..., level=easy, context=simple_unit (1)
+                 units conversion -> unitspairs, category=area, level=2 (1)
+                 units conversion -> unitspairs, category=volume, level=3 (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
+
+W04c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: percent direct -> 20|30|40|60|70|80|90%of..., context=simple_unit (1)
+                 percent direct -> 5%of..., level=easy, context=simple_unit (1)
+                 units conversion -> unitspairs, category=volume2capacity, level=3 (1)
+                 units conversion -> unitspairs, category=area, level=2 (1)
+                 units conversion -> unitspairs, category=volume, level=3 (1)
+
+W04d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: percent direct -> 20|30|40|60|70|80|90%of..., context=simple_unit (1)
+                 percent direct -> 5%of..., level=easy, context=simple_unit (1)
+                 units conversion -> unitspairs, category=volume2capacity, level=3 (1)
+                 units conversion -> unitspairs, category=volume, level=3 (1)
+                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
