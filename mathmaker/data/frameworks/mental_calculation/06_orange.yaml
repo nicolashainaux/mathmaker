@@ -169,3 +169,29 @@ W03a: !!omap
     - questions: mini_pb time -> clocktime_data (3)
                  fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
                  divisibility rule, variant=true, level=harder, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-2500, nb2_notmod=10 (1)
+
+W03b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: mini_pb time -> clocktime_data (2)
+                 multi hole -> int_irreducible_frac (1)
+                 divisibility rule, variant=false, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 volume rightcuboid -> nntriples:2-3×2-3×2-9 (1)
+
+W03c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: units conversion -> unitspairs, category=area, level=2 (1)
+                 units conversion -> unitspairs, category=volume, level=3 (1)
+                 units conversion -> unitspairs, dimension=1, level=2 (1)
+                 units conversion -> unitspairs, dimension=1, level=3 (1)
+                 units conversion -> unitspairs, category=volume2capacity, level=3 (1)
+
+W03d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: units conversion -> unitspairs, category=area, level=2 (1)
+                 units conversion -> unitspairs, category=volume2capacity, level=3 (1)
+                 mini_pb time -> clocktime_data (1)
+                 divisibility rule, variant=true, level=harder, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-2500, nb2_notmod=10 (1)
+                 percent direct -> 10%of..., nb_variant=decimal1, context=simple_unit (1)
