@@ -575,7 +575,7 @@ def setup_wording_format_of(w_object: object, w_prefix=''):
     for attr in vars(w_object):
         # logger.debug("attr: " + str(attr) + "\n")
         if ((attr.endswith('_unit') or attr[:-1].endswith('_unit'))
-            and not (attr.startswith('nb'))):
+            and not (attr.startswith('nb')) and not attr == 'time_unit'):
             # __
             logger.debug("(re)defining: " + attr + "\n")
             n = None
@@ -604,7 +604,7 @@ def setup_wording_format_of(w_object: object, w_prefix=''):
     if len(hint):
         if hasattr(w_object, hint):
             logger.debug("Retrieving as hint value: "
-                         + getattr(w_object, hint) + "\n")
+                         + str(getattr(w_object, hint)) + "\n")
             w_object.hint = getattr(w_object, hint)
         else:
             logger.debug("Setting as hint value: " + hint + "\n")

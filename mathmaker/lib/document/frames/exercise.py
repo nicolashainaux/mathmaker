@@ -805,11 +805,6 @@ class Exercise(object):
                           for i in range(*qn_bounds)]
                 required.package['xcolor'] = True
                 required.options['xcolor'].add('dvipsnames')
-                if shared.enable_js_form and ex_or_answers == 'exc':
-                    for i in range(len(a)):
-                        a[i] = r"""\TextField[name=ans""" + str(i + 1) \
-                            + r""",bordercolor=,value=,width=2.6cm]{} """ \
-                            + a[i]
 
                 n = [M.write(str(i + 1) + ".", emphasize='bold')
                      for i in range(*qn_bounds)]
@@ -876,35 +871,53 @@ class Exercise(object):
                      for (var i = 1; i <= qNumber; i++) {{
                        var istr = i.toString();
                        var ansfield = this.getField("ans" + istr);
+                       var ansfield0 = 0;
                        var ansbox = ansfield.rect;
                        var crect = [ansbox[2] - 13, ansbox[3] + 20, """
                                r"""ansbox[2] - 3, ansbox[3]];
+                       if (answers[i - 1][0].constructor == Array) {{
+                         crect = [ansbox[2] + 8, ansbox[3] + 20, """
+                               r"""ansbox[2] + 18, ansbox[3]];
+                         ansfield0 = this.getField("ans" + istr + "a");
+                       }}
                        this.addField("c" + istr, "text", 0, crect);
                        var checkfield = this.getField("c" + istr);
                        checkfield.readonly = true;
                        var found = false;
-                       for (var j = 0; j < answers[i - 1].length; ++j) {{
-                         if (ansfield.value == decodeURIComponent("""
-                               r"""escape(answers[i - 1][j]))) {{
-                           found = true;
+                       if (answers[i - 1][0].constructor == Array) {{
+                         for (var j = 0; j < answers[i - 1].length; ++j) {{
+                           if ((ansfield0.value == decodeURIComponent("""
+                               r"""escape(answers[i - 1][j][0]))) &&
+                               (ansfield.value == decodeURIComponent("""
+                               r"""escape(answers[i - 1][j][1])))) {{
+                             found = true;
+                           }}
                          }}
-                         if ((!found) &&
-                             (answers[i - 1][j].indexOf(" == ") !== -1)) {{
-                           var chunks = answers[i - 1][j].split(" == ");
-                           if ((chunks[0] == "any_fraction" """
+                       }} else {{
+                         for (var j = 0; j < answers[i - 1].length; ++j) {{
+                           if (ansfield.value == decodeURIComponent("""
+                               r"""escape(answers[i - 1][j]))) {{
+                             found = true;
+                           }}
+                           if ((!found) &&
+                               (answers[i - 1][j].indexOf(" == ") !== -1)) {{
+                             var chunks = answers[i - 1][j].split(" == ");
+                             if ((chunks[0] == "any_fraction" """
                                r"""|| chunks[0] == "any_decimal_fraction")  &&
-                               (ansfield.value.indexOf("/") !== -1)) {{
-                             var nd = ansfield.value.split("/");
-                             if ((nd.length == 2) &&
-                                 isInt(nd[0]) && isInt(nd[1])) {{
-                               var n = Number(nd[0]);
-                               var d = Number(nd[1]);
-                               if (!(chunks[0] == "any_decimal_fraction" """
-                               r""" && !(isPowerOf10(d)))) {{
-                                 var r = reduce(n, d);
-                                 var N = r[0].toString();
-                                 var D = r[1].toString();
-                                 if (chunks[1] === N + "/" + D) found = true;
+                                 (ansfield.value.indexOf("/") !== -1)) {{
+                               var nd = ansfield.value.split("/");
+                               if ((nd.length == 2) &&
+                                   isInt(nd[0]) && isInt(nd[1])) {{
+                                 var n = Number(nd[0]);
+                                 var d = Number(nd[1]);
+                                 if (!(chunks[0] == "any_decimal_fract"""
+                               r"""ion" && !(isPowerOf10(d)))) {{
+                                   var r = reduce(n, d);
+                                   var N = r[0].toString();
+                                   var D = r[1].toString();
+                                   if (chunks[1] === N + "/" + D) """
+                               r"""found = true;
+                                 }}
                                }}
                              }}
                            }}

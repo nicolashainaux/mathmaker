@@ -51,10 +51,30 @@ class structure(object):
                     _('What is {} as a decimal fraction?')}
 
     def h(self, **kwargs):
+        q_nb = kwargs.get('number_of_the_question', 0)
+        single_tf = r"""\TextField[name=ans""" + str(q_nb) \
+            + r""",bordercolor=,value=,width=2.6cm,align=1]{} """
         if hasattr(self, 'hint'):
-            return r'\hfill ${}$'.format(self.hint)
+            # 1st case: display of a double hint, typically for hours and
+            # minutes
+            if isinstance(self.hint, tuple) and len(self.hint) == 4:
+                tf1 = tf2 = r"""\hspace{0.6cm}"""
+                if shared.enable_js_form:
+                    tf1 = r"""\TextField[name=ans""" + str(q_nb) \
+                        + r"""a,bordercolor=,value=,width=0.6cm,"""\
+                        + r"""align=1]{} """
+                    tf2 = r"""\TextField[name=ans""" + str(q_nb) \
+                        + r""",bordercolor=,value=,width=0.6cm,"""\
+                        + r"""align=1]{} """
+                before1, after1, before2, after2 = self.hint
+                return before1 + tf1 + after1 + before2 + tf2 + after2
+            else:
+                return single_tf + r'\hfill ${}$'.format(self.hint)
         else:
-            return ""
+            if shared.enable_js_form:
+                return single_tf
+            else:
+                return ''
 
     def js_a(self, **kwargs):
         """

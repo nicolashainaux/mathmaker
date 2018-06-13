@@ -65,6 +65,8 @@ class sub_object(component.structure):
                          'start': start_time,
                          'arrival': arrival_time}[wording_type]
         self.transduration = 24
+        self.time_unit = ('', TIME_CONTEXT[lang]['h'],
+                          '', TIME_CONTEXT[lang]['min'])
         setup_wording_format_of(self)
 
     def q(self, **options):
@@ -76,4 +78,4 @@ class sub_object(component.structure):
         return self.solution.printed
 
     def js_a(self, **kwargs):
-        return self.solution.uiprinted
+        return [[str(self.solution.hour), str(self.solution.minute)]]
