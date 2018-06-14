@@ -159,6 +159,11 @@
         "06_orange",
         "percentages"
     ],
+    "06_orange_exam": [
+        "mental_calculation",
+        "06_orange",
+        "exam"
+    ],
     "06_orange_challenge": [
         "mental_calculation",
         "06_orange",
