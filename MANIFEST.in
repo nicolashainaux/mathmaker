@@ -7,10 +7,12 @@ include tox.ini
 include LICENSE
 include mathmaker/data/mathmaker.db-dist
 include mathmaker/data/shapes.db-dist
+include mathmaker/data/solids.db-dist
 include mathmaker/data/anglessets.db-dist
 include mathmaker/data/natural_nb_tuples.db-dist
 include mathmaker/data/db_index.json
 include mathmaker/data/shapes_db_index.json
+include mathmaker/data/solids_db_index.json
 include mathmaker/data/anglessets_db_index.json
 include mathmaker/data/natural_nb_tuples_db_index.json
 include mathmaker/data/frameworks/index.json
