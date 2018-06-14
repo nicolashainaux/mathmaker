@@ -56,8 +56,10 @@ class sub_object(component.structure):
         lang = settings.language[:2]
         start_time = ClockTime(build_data[3], context=TIME_CONTEXT[lang])
         arrival_time = ClockTime(build_data[4], context=TIME_CONTEXT[lang])
+        duration_ctxt = TIME_CONTEXT[lang] if wording_type == 'duration' \
+            else DURATION_CONTEXT[lang]
         duration_time = ClockTime(arrival_time - start_time,
-                                  context=DURATION_CONTEXT[lang])
+                                  context=duration_ctxt)
         self.start_time = start_time.printed
         self.arrival_time = arrival_time.printed
         self.duration_time = duration_time.printed
