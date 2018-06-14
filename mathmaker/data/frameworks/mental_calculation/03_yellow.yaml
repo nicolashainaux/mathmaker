@@ -27,7 +27,7 @@ units_conversions: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: units conversions"
   - exercise: !!omap
-    - questions: units conversion -> unitspairs (10)
+    - questions: units conversion -> unitspairs, level=1 (10)
 
 decimal_numerals: !!omap
   - preset: "mental calculation"
@@ -118,7 +118,7 @@ exam: !!omap
                      subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)]
                  [1][vocabulary operation -> auto_vocabulary (1)
                      vocabulary simple_parts_or_multiples_of_a_number -> auto_vocabulary (1)]
-                 units conversion -> unitspairs (1)
+                 units conversion -> unitspairs, level=1 (1)
                  decimal numerals, direction=to_decimal -> decimals (1)
                  decimal numerals, direction=to_fraction -> extdecimals, width=random_1to3, unique_figures=false, generation_type=default, grow_left=true (1)
                  [1][addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
@@ -162,7 +162,7 @@ exam_with_distinction: !!omap
                      subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)]
                  [1][vocabulary operation -> auto_vocabulary (1)
                      vocabulary simple_parts_or_multiples_of_a_number -> auto_vocabulary (1)]
-                 units conversion -> unitspairs (1)
+                 units conversion -> unitspairs, level=1 (1)
                  decimal numerals, direction=to_decimal -> decimals (1)
                  decimal numerals, direction=to_fraction -> extdecimals, width=random_1to3, unique_figures=false, generation_type=default, grow_left=true (1)
                  [1][addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
@@ -259,12 +259,12 @@ W02d: !!omap
 W03a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: units conversion -> unitspairs (5)
+    - questions: units conversion -> unitspairs, level=1 (5)
 
 W03b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: units conversion -> unitspairs (2)
+    - questions: units conversion -> unitspairs, level=1 (2)
                  digitplace reversed -> digits_places, pos_matches_invisible_zero=true (1)
                  vocabulary addi -> singleint_10to100;;singleint_10to100 (1)
                  divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
@@ -272,7 +272,7 @@ W03b: !!omap
 W03c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: units conversion -> unitspairs (1)
+    - questions: units conversion -> unitspairs, level=1 (1)
                  digitplace direct -> digits_places (1)
                  vocabulary subtr -> intpairs_2to200, nb_variant=decimal2 (1)
                  fraction_of a_rectangle -> intpairs_3to7;;intpairs_3to7 (1)
@@ -281,7 +281,7 @@ W03c: !!omap
 W03d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: units conversion -> unitspairs (1)
+    - questions: units conversion -> unitspairs, level=1 (1)
                  digitplace numberof -> digits_places, generation_type=default (1)
                  vocabulary divi -> intpairs_4to9 (1)
                  decimal numerals, direction=to_decimal -> decimals (1)
@@ -301,7 +301,7 @@ W04b: !!omap
   - exercise: !!omap
     - questions: multi direct -> table_15 (1)
                  divi direct -> table_25 (1)
-                 units conversion -> unitspairs (1)
+                 units conversion -> unitspairs, level=1 (1)
                  digitplace reversed -> digits_places (1)
                  decimal numerals, direction=to_fraction -> decimals (1)
 
@@ -319,6 +319,6 @@ W04d: !!omap
   - exercise: !!omap
     - questions: area rectangle, picture=true -> table_15 (1)
                  perimeter rectangle, picture=true -> complements_to_10, nb_variant=decimal2 (1)
-                 units conversion -> unitspairs (1)
+                 units conversion -> unitspairs, level=1 (1)
                  vocabulary double -> auto_multiples (1)
                  divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)

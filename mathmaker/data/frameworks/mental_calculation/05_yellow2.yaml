@@ -105,7 +105,7 @@ exam: !!omap
                  [1][vocabulary simple_parts_of_a_number -> auto_multiples (1)
                      vocabulary simple_multiples_of_a_number -> auto_multiples (1)
                      vocabulary operation -> auto_vocabulary (6)]
-                 units conversion -> unitspairs (1)
+                 units conversion -> unitspairs, level=1 (1)
                  [1][addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
                      addi direct, context=ask:turn_to_decimal_repr, variant=cut, iz_ge=1 -> decimalfractionssums (1)
                      decimal numerals, direction=to_decimal -> decimals (1)
@@ -152,7 +152,7 @@ challenge: !!omap
                      [1] [multi direct -> decimal_and_10_100_1000 (1)
                           divi direct -> decimal_and_10_100_1000 (1)]
                      vocabulary third -> multiplesof3_10to20 (1)
-                     units conversion -> unitspairs (1)
+                     units conversion -> unitspairs, level=1 (1)
                      multi hole -> int_irreducible_frac (1)
                      decimal numerals, direction=to_decimal -> decimals (1)
                      percent direct -> 75%of..., context=simple_unit (1)
