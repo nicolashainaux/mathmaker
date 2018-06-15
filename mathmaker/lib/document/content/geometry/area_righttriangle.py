@@ -59,7 +59,8 @@ class sub_object(component.structure):
             self.part2_wording = r'{\small' + _('(Lengths in {})')\
                 .format(self.length_unit) + '}'
         setup_wording_format_of(self)
-        self.polygon_area = Number(build_data[0] * build_data[1] / 2)
+        self.polygon_area = Number(build_data[0] * build_data[1] / 2)\
+            .standardized()
 
     def q(self, **options):
         if self.slideshow:
