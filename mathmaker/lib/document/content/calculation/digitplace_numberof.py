@@ -23,10 +23,11 @@
 
 from mathmaker.lib.constants.numeration import DIGITSPLACES_HOW_MANY
 from mathmaker.lib.core.base_calculus import Item
+from mathmaker.lib.document.content import component
 from . import digitplace_reversed
 
 
-class sub_object(object):
+class sub_object(component.structure):
 
     def __init__(self, **options):
         digitplace_reversed.sub_object.__init__(self, numberof=True, **options)

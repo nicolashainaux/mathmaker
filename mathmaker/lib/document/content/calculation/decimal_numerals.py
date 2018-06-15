@@ -27,9 +27,10 @@ from decimal import Decimal
 from mathmaker.lib import shared
 from mathmaker.lib.tools import fix_math_style2_fontsize
 from mathmaker.lib.core.base_calculus import Item, Fraction
+from mathmaker.lib.document.content import component
 
 
-class sub_object(object):
+class sub_object(component.structure):
 
     def __init__(self, **options):
         self.preset = options.get('preset', 'default')

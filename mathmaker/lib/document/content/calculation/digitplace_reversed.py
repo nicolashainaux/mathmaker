@@ -30,9 +30,10 @@ from mathmakerlib.calculus import Number
 
 from mathmaker.lib.tools.database import generate_random_decimal_nb
 from mathmaker.lib.constants.numeration import DIGITSPLACES_WORDS
+from mathmaker.lib.document.content import component
 
 
-class sub_object(object):
+class sub_object(component.structure):
 
     def __init__(self, **options):
         self.preset = options.get('preset', 'default')

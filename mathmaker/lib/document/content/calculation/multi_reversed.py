@@ -26,9 +26,10 @@ from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.base_calculus import Product
+from mathmaker.lib.document.content import component
 
 
-class sub_object(object):
+class sub_object(component.structure):
 
     def __init__(self, build_data, **options):
         nb_list = list(build_data)

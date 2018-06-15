@@ -24,9 +24,10 @@
 
 from mathmaker.lib.constants.numeration import DIGITSPLACES_WORDS
 from . import digitplace_reversed
+from mathmaker.lib.document.content import component
 
 
-class sub_object(object):
+class sub_object(component.structure):
 
     def __init__(self, **options):
         digitplace_reversed.sub_object.__init__(self, **options)
