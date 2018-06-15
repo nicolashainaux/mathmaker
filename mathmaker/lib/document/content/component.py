@@ -69,7 +69,8 @@ class structure(object):
                 before1, after1, before2, after2 = self.hint
                 return before1 + tf1 + after1 + before2 + tf2 + after2
             else:
-                return r'\hfill ${}$'.format(self.hint)
+                tf = single_tf if shared.enable_js_form else ''
+                return tf + r'\hfill ${}$'.format(self.hint)
         else:
             if shared.enable_js_form:
                 return single_tf
