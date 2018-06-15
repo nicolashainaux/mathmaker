@@ -1600,22 +1600,22 @@ msgstr ""
 msgid "Mental calculation: multiplication by 11"
 msgstr ""
 
-#: lib/document/content/component.py:450
+#: lib/document/content/component.py:471
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr ""
 
-#: lib/document/content/component.py:455
+#: lib/document/content/component.py:476
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:459
+#: lib/document/content/component.py:480
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:463
+#: lib/document/content/component.py:484
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr ""
@@ -1781,33 +1781,33 @@ msgstr ""
 msgid "To insert pdf formular and javascript"
 msgstr ""
 
-#: lib/document/frames/exercise.py:926
+#: lib/document/frames/exercise.py:939
 msgid "Clear everything"
 msgstr ""
 
-#: lib/document/frames/exercise.py:927
+#: lib/document/frames/exercise.py:940
 msgid "Validate"
 msgstr ""
 
-#: lib/document/frames/exercise.py:937
+#: lib/document/frames/exercise.py:950
 #, python-brace-format
 msgid "Score: ... / {q_number}"
 msgstr ""
 
-#: lib/document/frames/exercise.py:939
+#: lib/document/frames/exercise.py:952
 #, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:931
+#: lib/document/frames/exercise.py:944
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:934
+#: lib/document/frames/exercise.py:947
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr ""
 
-#: lib/document/content/component.py:72
+#: lib/document/content/component.py:93
 msgid "undefined"
 msgstr ""
 
@@ -1825,14 +1825,15 @@ msgstr ""
 msgid "{how_many_digitplace} are there in {decimal_number}?"
 msgstr ""
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:11
-#: data/frameworks/mental_calculation/04_yellow1.yaml:17
-#: data/frameworks/mental_calculation/04_yellow1.yaml:19
-#: data/frameworks/mental_calculation/05_yellow2.yaml:29
 #: data/frameworks/mental_calculation/04_yellow1.yaml:18
-#: data/frameworks/mental_calculation/04_yellow1.yaml:29
-#: data/frameworks/mental_calculation/04_yellow1.yaml:78
 #: data/frameworks/mental_calculation/05_yellow2.yaml:37
+#: data/frameworks/mental_calculation/06_orange.yaml:59
+#: data/frameworks/mental_calculation/04_yellow1.yaml:11
+#: data/frameworks/mental_calculation/05_yellow2.yaml:29
+#: data/frameworks/mental_calculation/04_yellow1.yaml:78
+#: data/frameworks/mental_calculation/04_yellow1.yaml:19
+#: data/frameworks/mental_calculation/04_yellow1.yaml:17
+#: data/frameworks/mental_calculation/04_yellow1.yaml:29
 #: data/frameworks/mental_calculation/04_yellow1.yaml:74
 msgid "Mental calculation: simple percentages calculations"
 msgstr ""
@@ -2165,12 +2166,13 @@ msgstr ""
 msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr ""
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:131
-#: data/frameworks/mental_calculation/06_orange.yaml:47
-#: data/frameworks/mental_calculation/05_yellow2.yaml:55
-#: data/frameworks/mental_calculation/05_yellow2.yaml:49
-#: data/frameworks/mental_calculation/04_yellow1.yaml:181
 #: data/frameworks/mental_calculation/04_yellow1.yaml:183
+#: data/frameworks/mental_calculation/05_yellow2.yaml:131
+#: data/frameworks/mental_calculation/06_orange.yaml:127
+#: data/frameworks/mental_calculation/04_yellow1.yaml:181
+#: data/frameworks/mental_calculation/05_yellow2.yaml:49
+#: data/frameworks/mental_calculation/05_yellow2.yaml:55
+#: data/frameworks/mental_calculation/06_orange.yaml:47
 msgid "Challenge, first part"
 msgstr ""
 
@@ -2486,4 +2488,13 @@ msgstr ""
 msgid ""
 "My coach started at {start_time} and the trip will last {duration_time}. "
 "When will it arrive? |hint:time_unit|"
+msgstr ""
+
+#: data/frameworks/mental_calculation/06_orange.yaml:47
+#: data/frameworks/mental_calculation/03_yellow.yaml:28
+msgid "Mental calculation: units conversions"
+msgstr ""
+
+#: data/frameworks/mental_calculation/06_orange.yaml:70
+msgid "Mental calculation:  final test for orange belt"
 msgstr ""
