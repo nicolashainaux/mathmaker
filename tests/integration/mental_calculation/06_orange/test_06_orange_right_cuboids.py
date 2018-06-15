@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_rightcuboids():
+def test_right_cuboids():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '06_orange',
-                                       'rightcuboids')),
+                                       'right_cuboids')),
                              pdf_output=True)
 
 
-def test_rightcuboids_embedding_js():
+def test_right_cuboids_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '06_orange',
-                                       'rightcuboids',
+                                       'right_cuboids',
                                        enable_js_form=True)),
                              pdf_output=True)

@@ -27,7 +27,7 @@ fractions_simplifications: !!omap
     - questions: fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (10)
                  # fraction simplification -> mergedinttriples_3to9, code=1_1_1 (10)
 
-rightcuboids: !!omap
+right_cuboids: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: right cuboids volumes"
   - exercise: !!omap
