@@ -101,4 +101,5 @@ class sub_object(component.structure):
         return str(self.answer)
 
     def js_a(self, **kwargs):
-        return [self.answer, self.answer.lower()]
+        return [self.answer, self.answer.lower(),
+                self.answer[0], self.answer[0].lower()]
