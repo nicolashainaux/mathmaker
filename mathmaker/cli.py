@@ -25,7 +25,7 @@ import os
 import argparse
 import locale
 
-from mathmakerlib import required, mmlib_setup
+import mathmakerlib.config
 
 from mathmaker import __info__, __software_name__
 from mathmaker import settings
@@ -40,9 +40,7 @@ from mathmaker.lib.tools.xml import get_xml_sheets_paths
 
 
 def entry_point():
-    required.init()
-    mmlib_setup.init()
-    mmlib_setup.polygons.DEFAULT_WINDING = 'clockwise'
+    mathmakerlib.config.polygons.DEFAULT_WINDING = 'clockwise'
     settings.init()
     XML_SHEETS = get_xml_sheets_paths()
     YAML_SHEETS = read_index()
@@ -119,7 +117,7 @@ def entry_point():
     locale.setlocale(locale.LC_ALL, settings.locale)
     check_settings_consistency()
     shared.init()
-    mmlib_setup.language = settings.language
+    mathmakerlib.config.language = settings.language
 
     if args.main_directive == 'list':
         sys.stdout.write(list_all_sheets())

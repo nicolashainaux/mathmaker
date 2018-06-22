@@ -26,7 +26,7 @@ from decimal import Decimal
 from string import ascii_lowercase as alphabet
 from string import ascii_uppercase as ALPHABET
 
-from mathmakerlib import mmlib_setup
+import mathmakerlib.config as mmlib_cfg
 from mathmakerlib.calculus import Number, Unit, Fraction, is_integer
 from mathmakerlib.calculus.unit import COMMON_LENGTH_UNITS
 
@@ -562,10 +562,10 @@ class structure(object):
                       name=kwargs.get('name', None), **kwargs)
 
     def _setup_rightcuboid(self, variant, labels, **kwargs):
-        store_temp = mmlib_setup.polygons.DEFAULT_WINDING
-        mmlib_setup.polygons.DEFAULT_WINDING = 'anticlockwise'
+        store_temp = mmlib_cfg.polygons.DEFAULT_WINDING
+        mmlib_cfg.polygons.DEFAULT_WINDING = 'anticlockwise'
         self._generate_solid('rightcuboid', variant, labels, **kwargs)
-        mmlib_setup.polygons.DEFAULT_WINDING = store_temp
+        mmlib_cfg.polygons.DEFAULT_WINDING = store_temp
         if self.slideshow:
             self.projection.scale = 2
         for s in self.projection.edges:

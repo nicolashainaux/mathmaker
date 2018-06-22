@@ -20,7 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from mathmakerlib import mmlib_setup
+import mathmakerlib.config as mmlib_cfg
 from mathmakerlib.geometry import RightCuboid, ObliqueProjection
 
 from mathmaker.lib.tools.generators import Generator
@@ -46,7 +46,7 @@ class SolidGenerator(Generator):
         return getattr(self, '_' + codename)(variant, labels, name, **kwargs)
 
     def _rightcuboid(self, variant, labels, name, **kwargs):
-        RECEDING_ANGLE = mmlib_setup.oblique_projection.RECEDING_AXIS_ANGLE
+        RECEDING_ANGLE = mmlib_cfg.oblique_projection.RECEDING_AXIS_ANGLE
         # dimensions are: width, height, depth
         build_data = {0: {'dimensions': (2.5, 0.5, 1), 'α': 60,
                           'boundingbox': (-0.2, -0.5, 1.05, 1.05)},

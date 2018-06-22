@@ -418,11 +418,11 @@ msgstr ""
 msgid "Calculate thanks to a binomial identity:"
 msgstr ""
 
-#: lib/document/content/calculation/multi_reversed.py:49
-#: lib/document/content/calculation/multi_reversed.py:56
-#: lib/document/content/calculation/multi_reversed.py:77
-#: lib/document/content/calculation/multi_reversed.py:63
-#: lib/document/content/calculation/multi_reversed.py:70
+#: lib/document/content/calculation/multi_reversed.py:57
+#: lib/document/content/calculation/multi_reversed.py:50
+#: lib/document/content/calculation/multi_reversed.py:64
+#: lib/document/content/calculation/multi_reversed.py:71
+#: lib/document/content/calculation/multi_reversed.py:78
 #, python-brace-format
 msgid "{product1} or {product2}"
 msgstr ""
@@ -1657,7 +1657,7 @@ msgstr ""
 msgid "{math_expr}"
 msgstr ""
 
-#: lib/document/content/calculation/multi_reversed.py:41
+#: lib/document/content/calculation/multi_reversed.py:42
 #, python-brace-format
 msgid ""
 "{q_mark} × {q_mark} = {n}\n"
@@ -1669,23 +1669,23 @@ msgstr ""
 msgid "Example of detailed solutions:"
 msgstr ""
 
-#: lib/document/content/calculation/digitplace_direct.py:37
+#: lib/document/content/calculation/digitplace_direct.py:38
 #, python-brace-format
 msgid "Position of the digit {figure} in: {decimal_number}?"
 msgstr ""
 
-#: lib/document/content/calculation/digitplace_direct.py:40
+#: lib/document/content/calculation/digitplace_direct.py:41
 #, python-brace-format
 msgid ""
 "What is the position of the figure {figure} in the number {decimal_number}?"
 msgstr ""
 
-#: lib/document/content/calculation/digitplace_reversed.py:51
+#: lib/document/content/calculation/digitplace_reversed.py:52
 #, python-brace-format
 msgid "Digit of {position} in {decimal_number}?"
 msgstr ""
 
-#: lib/document/content/calculation/digitplace_reversed.py:53
+#: lib/document/content/calculation/digitplace_reversed.py:54
 #, python-brace-format
 msgid ""
 "Which figure matches the {position} in the number     {decimal_number}?"
@@ -1701,17 +1701,17 @@ msgstr ""
 msgid "Mental calculation: additions and subtractions with a hole"
 msgstr ""
 
-#: lib/document/content/calculation/decimal_numerals.py:76
+#: lib/document/content/calculation/decimal_numerals.py:77
 msgid "{} (or {} etc.)"
 msgstr ""
 
-#: lib/document/content/calculation/decimal_numerals.py:61
+#: lib/document/content/calculation/decimal_numerals.py:62
 #: lib/document/content/component.py:49
 msgid "What is {} as a decimal?"
 msgstr ""
 
 #: lib/document/content/component.py:51
-#: lib/document/content/calculation/decimal_numerals.py:66
+#: lib/document/content/calculation/decimal_numerals.py:67
 msgid "What is {} as a decimal fraction?"
 msgstr ""
 
@@ -1820,7 +1820,7 @@ msgstr ""
 msgid "Mental calculation: multiplications with a hole"
 msgstr ""
 
-#: lib/document/content/calculation/digitplace_numberof.py:39
+#: lib/document/content/calculation/digitplace_numberof.py:40
 #, python-brace-format
 msgid "{how_many_digitplace} are there in {decimal_number}?"
 msgstr ""
