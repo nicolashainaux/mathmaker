@@ -38,6 +38,8 @@ Dependencies: in short
 
        $ sudo pacman -S python-pip texlive-most libxml2 python-lxml
 
+   You'll have to install ``eukleides`` too. I had to compile it myself, but I notice there's now a package in AUR, so you can try it.
+
 
 -  on FreeBSD 10.4+:
 
