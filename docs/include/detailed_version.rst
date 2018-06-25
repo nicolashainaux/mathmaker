@@ -10,7 +10,7 @@ Dev environment
 
 Install external dependencies
 """""""""""""""""""""""""""""
-You'll need to install the same dependencies as users do (see :ref:`install`). In addition, ``xgettext`` is required to extract the gettext messages from py files. In Ubuntu 14.04 it's in the ``gettext`` package.
+You'll need to install the same dependencies as users do (see :ref:`install`), plus ``msgfmt`` and ``xgettext``. In Ubuntu 18.04+ or Manjaro, it's in the ``gettext`` package.
 
 Get mathmaker's source code from github repo
 """"""""""""""""""""""""""""""""""""""""""""

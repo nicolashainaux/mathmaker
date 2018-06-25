@@ -22,39 +22,89 @@ Quickstart
 Install
 -------
 
-Required (non python) dependencies are python >=3.6, euktoeps >=1.5.4, xmllint, msgfmt, lualatex, luaotfload-tool and a bunch of LaTeX packages(1)
+Dependencies: in short
+^^^^^^^^^^^^^^^^^^^^^^
 
-To install them:
-
--  on Ubuntu, install python3.6 if it is not already installed, then:
-
-   ::
-
-       $ sudo apt-get install eukleides libxml2-utils gettext texlive-latex-base
-
-   And for the yet missing LaTeX packages: you can either install the complete
-   texlive distribution (takes some room on the hard disk): run
-   ``$ sudo apt-get install texlive-full``, or install only the
-   necessary packages:
+-  on Ubuntu 18.04+:
 
    ::
 
-       $ sudo apt-get install texlive-luatex texlive-latex-recommended texlive-xetex texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra
+       $ sudo apt-get install python3-pip texlive-full eukleides libxml2-utils
 
--  on FreeBSD(2):
+
+-  on Manjaro:
 
    ::
 
-       $ sudo pkg install python36 py36-sqlite3 gettext eukleides libxml2 texlive-full
+       $ sudo pacman -S python-pip texlive-most libxml2 python-lxml
+
+
+-  on FreeBSD 10.4+:
+
+   ::
+
+       $ sudo pkg install python36 py36-sqlite3 eukleides libxml2
        $ rehash
+       $ python3.6 -m ensurepip
 
    .. note::
-       As of 2018 (mathmaker version 0.7.3) it is necessary to install texlive directly using `texlive instructions <https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#x1-50001.3>`__. Do not forget to setup the fonts for lualatex if you intend to use them (as described in the same link).
+       In 2018 (mathmaker 0.7.3), the binary version of TeXLive is outdated (2015) and it is, again, necessary to install texlive directly using `texlive instructions <https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#x1-50001.3>`__. Do not forget to setup the fonts for lualatex if you intend to use them (as described in the same link).
 
-   .. note::
-       Check how to fix eukleides install in `the complete documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#eukleides-fix>`__
 
-Once you're done, you can proceed installing mathmaker:
+Dependencies in details
+^^^^^^^^^^^^^^^^^^^^^^^
+
+python (3.6+) and pip
+"""""""""""""""""""""
+
+`Python is available for most platforms <https://www.python.org/downloads/>`__.
+
+It is included by default in most Linux distributions.
+
+- On Manjaro, the default python package is already 3.6 (or newer)
+- On Ubuntu 18.04+, python3.6+ is already available as python3 (maybe install it separately). If your Ubuntu version is older, you'll need some extra steps to install it (maybe `try this <https://www.linuxbabe.com/ubuntu/install-python-3-6-ubuntu-16-04-16-10-17-04>`__?).
+- On openSUSE Leap 42.3, you'll need to install python3.6. Some hints `here <https://stackoverflow.com/questions/41558535/python-3-6-installation-and-lib64>`__ or `there <https://gist.github.com/antivanov/01ed4eac2d7486a170be598b5a0a4ac7>`__.
+
+On FreeBSD 10.4 you'll need to install packages python36 (or newer) and py36-sqlite3 (or newer).
+
+pip may come automatically with python installation, or as a separate package (look for python-pip or python3-pip and ensure this is pip for python 3, not python 2!).
+
+a LaTeX distribution
+""""""""""""""""""""
+
+It must include lualatex and related tools. You can either install a full distribution or add the required packages one by one, or try to use a package that helps to download and install packages "on the fly", like `texliveonfly <https://ctan.org/pkg/texliveonfly>`__ in the case of TeX Live.
+
+Recommanded LaTeX distribution is actually an up to date `TeXLive <https://www.tug.org/texlive/>`__, as this is the one used in mathmaker's development and testing. Nothing prevents you from using another distribution, there is just no guarantee that it will be fully compatible.
+
+The recommanded way to install TeXLive is over the internet, like `described on the official website <https://www.tug.org/texlive/acquire-netinstall.html>`__. This way is currently mandatory for FreeBSD. Some Linux distributions (Ubuntu 18.04+ or Manjaro) may provide up-to-date binary packages.
+
+eukleides
+"""""""""
+
+.. note::
+
+  This dependency won't be required in mathmaker 0.8+
+
+It is available as binary package in Ubuntu, in Manjaro (AUR). You can also install it `directly from source <http://www.eukleides.org/download.html>`__.
+
+.. note::
+
+  FreeBSD users, check how to fix eukleides install in `the complete documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#eukleides-fix>`__
+
+libxml2
+"""""""
+
+.. note::
+
+  This dependency won't be required in mathmaker 0.8+
+
+It is available as binary package in most Linux distributions and FreeBSD (look for a package named libxml2).
+
+
+Install mathmaker
+^^^^^^^^^^^^^^^^^
+
+Once you're done with the dependencies, you can proceed installing mathmaker:
 
 ::
 
@@ -146,51 +196,3 @@ Any question can be sent to nh dot techn (hosted at gmail dot com).
 .. include:: ../CONTRIBUTORS.rst
 
 .. include:: ../CHANGELOG.rst
-
-
---------------
-
-**Footnotes:**
-
-(1) Complete list of recommended LaTeX packages (list up-to-date for 0.7 release):
-
-+---------------------+--------------------------------+
-| CTAN Package Name   | Package name (Ubuntu 14.04 )   |
-+=====================+================================+
-| fontspec            | texlive-latex-recommended      |
-+---------------------+--------------------------------+
-| polyglossia         | texlive-xetex                  |
-+---------------------+--------------------------------+
-| geometry            | texlive-latex-base             |
-+---------------------+--------------------------------+
-| graphicx            | texlive-pstricks               |
-+---------------------+--------------------------------+
-| epstopdf            | texlive-font-utils             |
-+---------------------+--------------------------------+
-| tikz                | texlive-latex-extra            |
-+---------------------+--------------------------------+
-| amssymb             | texlive-base                   |
-+---------------------+--------------------------------+
-| amsmath             | texlive-latex-base             |
-+---------------------+--------------------------------+
-| siunitx             | texlive-science                |
-+---------------------+--------------------------------+
-| cancel              | texlive-pictures               |
-+---------------------+--------------------------------+
-| array               | texlive-latex-base             |
-+---------------------+--------------------------------+
-| ulem                | texlive-generic-recommended    |
-+---------------------+--------------------------------+
-| textcomp            | texlive-latex-base             |
-+---------------------+--------------------------------+
-| eurosym             | texlive-fonts-recommended      |
-+---------------------+--------------------------------+
-| lxfonts             | texlive-fonts-extra            |
-+---------------------+--------------------------------+
-| multicol            | texlive-latex-base             |
-+---------------------+--------------------------------+
-
-(2) Using ``pkg``, you'll have to install ``texlive-full``; if you wish
-    to install only the relevant LaTeX packages, you'll have to browse
-    the ports, I haven't done this yet so cannot tell you exactly which
-    ones are necessary.
