@@ -22,14 +22,17 @@ Quickstart
 Install
 -------
 
-Dependencies: in short
-^^^^^^^^^^^^^^^^^^^^^^
+Dependencies
+^^^^^^^^^^^^
+
+On Ubuntu, Manjaro, FreeBSD
+"""""""""""""""""""""""""""
 
 -  on Ubuntu 18.04+:
 
    ::
 
-       $ sudo apt-get install python3-pip texlive-full eukleides libxml2-utils
+       $ sudo apt install python3-pip texlive-full eukleides libxml2-utils
 
 
 -  on Manjaro:
@@ -37,8 +40,7 @@ Dependencies: in short
    ::
 
        $ sudo pacman -S python-pip texlive-most libxml2 python-lxml
-
-   You'll have to install ``eukleides`` too. I had to compile it myself, but I notice there's now a package in AUR, so you can try it.
+       $ yaourt -S eukleides
 
 
 -  on FreeBSD 10.4+:
@@ -50,57 +52,47 @@ Dependencies: in short
        $ python3.6 -m ensurepip
 
    .. note::
-       FreeBSD users: in 2018 (mathmaker 0.7.3), the binary version of TeXLive is outdated (2015) and it is, again, necessary to install texlive directly using `texlive instructions <https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#x1-50001.3>`__. Do not forget to setup the fonts for lualatex if you intend to use them (as described in the same link).
+       FreeBSD users: in 2018 (mathmaker 0.7.3), the binary version of TeXLive is outdated (2015) and it is, again, necessary to install texlive directly using `texlive instructions <https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#x1-50001.3>`__. Do not forget to setup the fonts for lualatex if you intend to use them (as described in the same `page <https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#x1-340003.4.4>`__).
+
+   .. note::
+
+       FreeBSD users, check how to fix eukleides install in `the complete documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#eukleides-fix>`__
 
 
-Dependencies in details
-^^^^^^^^^^^^^^^^^^^^^^^
+On other Linux or BSD platforms
+"""""""""""""""""""""""""""""""
 
-python (3.6+) and pip
-"""""""""""""""""""""
+- python (3.6+) and pip
 
-`Python is available for most platforms <https://www.python.org/downloads/>`__.
+  `Python is available for most platforms <https://www.python.org/downloads/>`__.
 
-It is included by default in most Linux distributions.
+  It is included by default in most distributions, but you may have to install it, for instance if your Ubuntu version is older than 18.04 (maybe `try this <https://www.linuxbabe.com/ubuntu/install-python-3-6-ubuntu-16-04-16-10-17-04>`__?), or on openSUSE Leap 42.3 (some hints `here <https://stackoverflow.com/questions/41558535/python-3-6-installation-and-lib64>`__ or `there <https://gist.github.com/antivanov/01ed4eac2d7486a170be598b5a0a4ac7>`__).
 
-- On Manjaro, the default python package is already 3.6 (or newer)
-- On Ubuntu 18.04+, python3.6+ is already available as python3 (maybe install it separately). If your Ubuntu version is older, you'll need some extra steps to install it (maybe `try this <https://www.linuxbabe.com/ubuntu/install-python-3-6-ubuntu-16-04-16-10-17-04>`__?).
-- On openSUSE Leap 42.3, you'll need to install python3.6. Some hints `here <https://stackoverflow.com/questions/41558535/python-3-6-installation-and-lib64>`__ or `there <https://gist.github.com/antivanov/01ed4eac2d7486a170be598b5a0a4ac7>`__.
+  pip may come automatically with python installation, or as a separate package (look for python-pip or python3-pip and ensure this is pip for python 3, not python 2!).
 
-On FreeBSD 10.4 you'll need to install packages python36 (or newer) and py36-sqlite3 (or newer).
+- a LaTeX distribution
 
-pip may come automatically with python installation, or as a separate package (look for python-pip or python3-pip and ensure this is pip for python 3, not python 2!).
+  It must include lualatex and related tools. You can either install a full distribution or add the required packages one by one, or try to use a package that helps to download and install packages "on the fly", like `texliveonfly <https://ctan.org/pkg/texliveonfly>`__ in the case of TeX Live.
 
-a LaTeX distribution
-""""""""""""""""""""
+  Recommanded LaTeX distribution is actually an up to date `TeXLive <https://www.tug.org/texlive/>`__, as this is the one used in mathmaker's development and testing. Nothing prevents you from using another distribution, there is just no guarantee that it will be fully compatible.
 
-It must include lualatex and related tools. You can either install a full distribution or add the required packages one by one, or try to use a package that helps to download and install packages "on the fly", like `texliveonfly <https://ctan.org/pkg/texliveonfly>`__ in the case of TeX Live.
+  Some distributions provide up-to-date binary packages for TeXLive (mathmaker >= 0.7.4 requires TeXLive >= 2017). If not, the recommanded way to install TeXLive is over the internet, like `described on the official website <https://www.tug.org/texlive/acquire-netinstall.html>`__. Do not forget to setup the fonts for lualatex if you intend to use them (as described in the same `page <https://www.tug.org/texlive/doc/texlive-en/texlive-en.html#x1-340003.4.4>`__).
 
-Recommanded LaTeX distribution is actually an up to date `TeXLive <https://www.tug.org/texlive/>`__, as this is the one used in mathmaker's development and testing. Nothing prevents you from using another distribution, there is just no guarantee that it will be fully compatible.
+- eukleides
 
-The recommanded way to install TeXLive is over the internet, like `described on the official website <https://www.tug.org/texlive/acquire-netinstall.html>`__. This way is currently mandatory for FreeBSD. Some Linux distributions (Ubuntu 18.04+ or Manjaro) may provide up-to-date binary packages.
+  .. note::
 
-eukleides
-"""""""""
+    This dependency won't be required in mathmaker 0.8+
 
-.. note::
+  Some distributions provide a binary package. You can also install it `directly from source <http://www.eukleides.org/download.html>`__.
 
-  This dependency won't be required in mathmaker 0.8+
+- libxml2
 
-It is available as binary package in Ubuntu, in Manjaro (AUR). You can also install it `directly from source <http://www.eukleides.org/download.html>`__.
+  .. note::
 
-.. note::
+    This dependency won't be required in mathmaker 0.8+
 
-  FreeBSD users, check how to fix eukleides install in `the complete documentation <http://mathmaker.readthedocs.io/en/master/user_doc.html#eukleides-fix>`__
-
-libxml2
-"""""""
-
-.. note::
-
-  This dependency won't be required in mathmaker 0.8+
-
-It is available as binary package in most Linux distributions and FreeBSD (look for a package named libxml2).
+  It is available as binary package in most distributions (look for a package named libxml2).
 
 
 Install mathmaker
