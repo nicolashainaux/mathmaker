@@ -6,11 +6,11 @@ Dev environment
 
 .. note::
 
-  python3.6 is mandatory for mathmaker development
+  git and python>=3.6 are mandatory for mathmaker development
 
 Install external dependencies
 """""""""""""""""""""""""""""
-You'll need to install the same dependencies as users do (see :ref:`install`), plus ``msgfmt`` and ``xgettext``. In Ubuntu 18.04+ or Manjaro, it's in the ``gettext`` package.
+You'll need to install the same dependencies as users do (see :ref:`install`), plus ``gettext``.
 
 Get mathmaker's source code from github repo
 """"""""""""""""""""""""""""""""""""""""""""
@@ -32,7 +32,7 @@ It is strongly advised to install mathmaker in develop mode inside of a python v
 
 From there, you can activate it:
 
-on Ubuntu::
+on Linux::
 
     $ source dev0/bin/activate
 
@@ -73,20 +73,11 @@ From now on, it is possible to run ``mathmaker`` from your virtual environment. 
 ::
 
     (dev0) $ cd path/to/garbage/directory/
-    (dev0) $ mathmaker test_11_2 > out.tex
-    (dev0) $ lualatex out.tex
+    (dev0) $ mathmaker 06_orange_exam > out.tex 2> stderr.log && lualatex out.tex
 
 You can check ``out.pdf`` with the pdf viewer you like.
 
-You can also run the tools:
-::
-
-    (dev0) $ cd path/to/mathmaker/
-    (dev0) $ cd toolbox/
-    (dev0) $ ./build_db.py
-    (dev0) $ ./update_pot_files
-
-Somewhat below, more informations about the :ref:`auxiliary_tools`.
+You can also run the tools from the toolbox. Somewhat below, more informations about the :ref:`auxiliary_tools`.
 
 Once you're done working with mathmaker, you can deactivate the virtual environment:
 ::
@@ -94,7 +85,7 @@ Once you're done working with mathmaker, you can deactivate the virtual environm
     (dev0) $ deactivate
     $
 
-Note that it is possible to run ``mathmaker`` outside the virtual environment this way:
+Note that it is not recommanded but possible to run ``mathmaker`` outside the virtual environment this way (as of 2018, not sure this feature still works and anyway you shouldn't do that):
 ::
 
     $ cd path/to/mathmaker/
@@ -115,9 +106,14 @@ It is recommended to install linters for PEP 8 and PEP 257 (see :ref:`writing_ru
     (dev0) $ pip3 install flake8
     (dev0) $ pip3 install pydocstyle
 
+.. note::
+
+    PEP 257 is not yet really applied... but PEP 8 is!
+
+
 Test dependencies
 #################
-In addition you should install at least ``py.test``, and also ``tox`` if you intend to run tox tests:
+In addition you should install at least ``pytest``, and maybe ``tox`` if you intend to include tox tests in mathmaker:
 
 ::
 
@@ -138,7 +134,7 @@ You'll need to install these dependencies in the virtual environment:
 
 .. note::
 
-    ``sphinx-autodoc-annotation`` makes writing docstrings lighter when using python3 annotations. Problem is, this package currently has a bug that prevents to build the doc on `readthedocs <https://readthedocs.org/>`_.
+    ``sphinx-autodoc-annotation`` makes writing docstrings lighter when using python3 annotations.
 
 Below is more information about `documentation`_.
 
@@ -147,11 +143,10 @@ Below is more information about `documentation`_.
 Dev settings
 ^^^^^^^^^^^^
 
-You can make a copy of the default configuration files:
+You should make a copy of the default configuration files:
 ::
 
-    (dev0) $ cd path/to/mathmaker/
-    (dev0) $ cd settings/
+    (dev0) $ cd path/to/mathmaker/settings/
     (dev0) $ mkdir dev/
     (dev0) $ cp default/*.yaml dev/
 
@@ -195,7 +190,7 @@ The testing suite is run by `py.test <http://pytest.org/latest/contents.html>`_ 
 
 ::
 
-    (dev0) $ py.test
+    (dev0) $ pytest
 
 or this way:
 
@@ -206,14 +201,14 @@ or this way:
 Where do they live?
 """""""""""""""""""
 
-Most of the tests belong to ``tests/``. Any function whose name starts with ``test_`` written in any python file whose name also starts with ``test_`` (and stored somewhere under ``tests/``) and will be automatically added to the tests run by ``py.test``.
+Most of the tests belong to ``tests/``. Any function whose name starts with ``test_`` or ends with ``_test`` written in any python file whose name also starts with ``test_`` (and stored somewhere under ``tests/``) and will be automatically added to the tests run by ``pytest``.
 
-Some more tests are written as `doctests <https://docs.python.org/3/library/doctest.html>`_ (see also `pytest documentation about doctests <http://pytest.org/latest/doctest.html>`_) in the docstrings of the functions. It's possible to add doctests, especially for simple functions (sometimes it is redundant with the tests from ``tests/``, but this is not a serious problem). The configuration for tests is so that any new doctest will be automatically added to the tests run by ``py.test``.
+Some more tests are written as `doctests <https://docs.python.org/3/library/doctest.html>`_ (see also `pytest documentation about doctests <http://pytest.org/latest/doctest.html>`_) in the docstrings of the functions. It's possible to add doctests, especially for simple functions (sometimes it is redundant with the tests from ``tests/``, but this is not a serious problem). The configuration for tests is so that any new doctest will be automatically added to the tests run by ``pytest``.
 
 Tox
 """
 
-To test ``mathmaker`` against different versions of python, you can run tox this way:
+Still needs to be setup for mathmaker. To test ``mathmaker`` against different versions of python, we should be able to run tox this way:
 ::
 
     (dev0) $ tox
@@ -224,7 +219,7 @@ or this way:
 
     (dev0) $ python3 setup.py tox
 
-Be sure you have different versions of python installed correctly on your computer before starting this. The missing versions will be skipped anyway. Note that it is not a purpose of ``mathmaker`` to run under a lot of python versions (several python3 versions are OK, but no support for python2 is planned, unless someone really wants to do that).
+Be sure you have different versions of python installed correctly on your computer before starting this. The missing versions will be skipped anyway. Note that it is not a purpose of ``mathmaker`` to run under a lot of python versions (several python3 versions are OK, but no support for python2.7 is planned and that would be a waste of time since in 2020 python2.7 will not be developped anymore).
 
 .. _logging_debugging:
 
@@ -305,7 +300,7 @@ If there's no logger object in the function you want to print debugging messages
 
 Later when you need to disable this logger, you just set it to ``INFO`` instead of ``DEBUG`` in ``settings/dev/debug_conf.yaml``. See :ref:`dev_settings` for information on these files.
 
-A summary of the conventions used to represent the different core objects (i.e. what their ``__repr__()`` returns):
+(Will be obsolete once the core is replaced by ``mathmakerlib``) A summary of the conventions used to represent the different core objects (i.e. what their ``__repr__()`` returns):
 
 .. image:: pics/dbg_all.png
 
@@ -440,13 +435,11 @@ Auxiliary tools
 
 Several standalone scripts live in the ``toolbox/`` directory under root. They can be useful for several tasks that automate the handling of data.
 
-The two most useful ones are both meant to be run from the ``toolbox/`` directory. They are:
+* ``build_db.py`` rebuilds the database from scratch, updating its data from several sources (some \*.yaml files, \*.po files etc.). This tool greatly needs to be rewritten! And once the database is smaller, it should be included in the main code and used to generate the database that will be shipped).
 
-* ``build_db.py``, used to update the database when there are new entries to add in it. If new words of 4 letters are added to any po file, ``build_db.py`` should be run, it will add them to the database. If new wordings are entered in ``mathmaker/data/wordings/*.xml`` (obsolete: xml files will be replaced by yaml files up from 0.7.2), then it should be run too. See details in the docstring. And if a new table is required, it should be added in this script. For instance, the pythagorean triples should live in the database and will be added to this list soon or later.
+* ``build_index.py`` must be run when a new sheet is to be "registered" (or removed)
 
 * ``update_pot_files``, a shell script making use of ``xgettext`` and of the scripts ``merge_py_updates_to_main_pot_file``, ``merge_yaml_updates_to_pot_file`` and ``merge_xml_updates_to_pot_file`` (this last one will be removed in 0.7.2). Run ``update_pot_files`` to update ``locale/mathmaker.pot`` when new strings to translate have been added to python code (i.e. inside a call to ``_()``) or new entries have been added to any yaml or xml (xml files will be turned to yaml files in 0.7.2) file from ``mathmaker/data`` (only entries matching a number of identifiers are taken into account, see DEFAULT_KEYWORDS in the source code to know which ones exactly).
-
-* ``build_index.py`` will build the index of available sheets. Run it when you need to test a new sheet.
 
 ``import_msgstr`` and ``retrieve_po_entries`` are useful on some rare occasions. See their docstrings for more explanations. They both have a ``--help`` option.
 

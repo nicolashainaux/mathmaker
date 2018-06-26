@@ -6,22 +6,24 @@ Guided tour
 Foreword
 --------
 
-This code has been developed chunk by chunk over more than 10 years now, starting with python2.3 or 4. Now it is a python3.6 software and my python skills have fortunately improved over the years. Problem is that several old parts, even after big efforts to correct the worst pieces, are not very idiomatic, especially the core.
+This code has been developed chunk by chunk over more than 10 years now, starting with python2.3 or 4. Now it is a python3.6 software and, fortunately, my python skills have improved over the years. Problem is that several old parts, even after big efforts to correct the worst pieces, are still not very idiomatic.
 
-Luckily there are unit tests, and whatever one might think about them, it's not difficult to admit that they're extremely useful to check nothing got broken when the core parts are written anew or debugged.
+Among these parts that need to be rewritten from scratch, the core is currently being developed as `a separate library <https://github.com/nicolashainaux/mathmakerlib>`__). One this is done, the old core will be completely removed.
 
-The documentation has been originately written using `doxygen <http://www.stack.nl/~dimitri/doxygen/>`_. Despite the fact it is an excellent documentation software, I have decided to move to `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ because it corresponds closer to python best practices. So, all doxygen-style comments will be turned into docstrings so mathmaker can use Sphinx to build the documentation. At the moment this work is just started, so the auto-generated Sphinx documentation is quite uncomplete now.
+Even if they're not written as good as can be, the unit tests remain a precious tool to check nothing got broken when the core parts are written anew or debugged.
 
-So, a part of the work to do is surely to bring new features, but another part, more annoying, is to turn ugly old parts into the right pythonic idioms. That's why at places you'll see that this or this other module is deprecated and should be "reduced", or rewritten. A list of such things to do is available on `sourceforge <https://sourceforge.net/p/mathmaker/tickets/>`_.
+The documentation has been originately written using `doxygen <http://www.stack.nl/~dimitri/doxygen/>`_. Although it is an excellent documentation software, I have decided to move to `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ because it corresponds closer to python best practices. So, all doxygen-style comments will be turned into docstrings so mathmaker can use Sphinx to build the documentation. At the moment this work is just started, so the auto-generated Sphinx documentation is quite uncomplete now.
+
+Before working further on bringing new features, there's a need for more annoying work, to turn ugly old parts into the right pythonic idioms. That's why at places you'll see that this or this other module is deprecated and should be "reduced", or rewritten. Refer to the `issues <https://github.com/nicolashainaux/mathmaker/issues>`__ and `projects <https://github.com/nicolashainaux/mathmaker/projects>`__ on github.
 
 The issue
 ---------
 
-It is utmost important to understand that mathmaker is not a software intended to *compute* mathematical stuff, but to *display* it. For instance, resolving a first-degree equation is not in itself a goal of mathmaker, because other softwares do that already (and we don't even need any software to do it). Instead, mathmaker will determine and display the steps of this resolution. Whenever possible, mathmaker solutions will try to mimic the pupils' way of doing things.
+It is utmost important to understand that mathmaker is not a software intended to *compute* mathematical stuff, but to *display* it. For instance, resolving a first-degree equation is not in itself a goal of mathmaker, because other softwares do that already (and we don't even need any software to do it). The true goal of mathmaker is to determine and display the steps of this resolution. Whenever possible, mathmaker will try to mimic the pupils' way of doing things.
 
 For instance, it won't automatically simplify a fraction to make it irreducible in one step, but will try to reproduce the steps that pupils usually need to simplify the fraction. So the GCD is only used to check when the fraction is irreducible and for the cases where there's no other choice, but not as the mean to simplify a fraction directly (not before pupils learn how to use it, at least).
 
-Another example is the need of mathmaker to control the displaying of decimal and integer numbers perfectly. Of course, most of the time, it doesn't matter if a computer tells that 5.2×5.2 = 27.040000000000003 or 3.9×3.9 = 15.209999999999999 because everyone knows that the correct results are 27.04 and 15.21 and because the difference is not so important, so in many situations, this precision will be sufficient. But, mathmaker can't display to pupils that the result of 5.2×5.2 is 27.040000000000003.
+Another example is the need of mathmaker to control the displaying of decimal and integer numbers perfectly. Of course, most of the time, it doesn't matter if a computer tells that 5.2×5.2 = 27.040000000000003 or 3.9×3.9 = 15.209999999999999 because everyone knows that the correct results are 27.04 and 15.21 and because the difference is not so important, so in many situations, this precision will be sufficient. But, mathmaker can't display to pupils that the result of 5.2×5.2 is 27.040000000000003. (This problem is addressed by the use of ``Decimal`` that is extended by ``mathmakerlib``)
 
 Also, the human rules we use to write maths are full of exceptions and odd details we don't notice usually because we're familiar to them. We would never write
 
@@ -33,7 +35,7 @@ but instead
 
 There are many conventions in the human way to write maths and many exceptions.
 
-These are the reasons why the core is quite complex: re-create these writing rules and habits on a computer and let the result be readable by pupils is not an easy thing.
+These are the reasons why the old core is quite complex: re-create these writing rules and habits on a computer and let the result be readable by pupils is not an easy thing.
 
 
 Workflow
@@ -59,7 +61,7 @@ The main executable (``entry_point()`` in ``mathmaker/cli.py``) performs followi
 
 * If the main directive is ``list``, it just write the directives list to stdout
 
-* Otherwise, it checks that the directive matches a known sheet (either a yaml or xml file or a sheet's name that mathmaker provides) and writes the result to the output (``stdout`` or a file) (xml will be dropped in 0.7.2)
+* Otherwise, it checks that the directive matches a known sheet (either a yaml or xml file or a sheet's name that mathmaker provides) and writes the result to the output (``stdout`` or a file) (xml will be dropped in 0.7.5)
 
 The directories
 ---------------
@@ -118,11 +120,11 @@ Directories that are relevant to git, at the root:
   └── tools
 
 * ``constants/`` contains several constants (but ``pythagorean.py`` must be replaced by requests to the database)
-* ``core/`` contains all mathematical objects, numeric or geometric
+* ``core/`` contains all mathematical objects, numeric or geometric; once ``mathmakerlib`` contains all its features, it will be removed
 * ``document/`` contains the frames for sheets, exercises in questions, under ``document/frames/``, and the questions' content, under ``document/content/``.
 * ``machine/`` contains the "typewriter"
 * ``old_style_sheet/`` contains all old style sheets, exercices and questions. All of this is obsolete (will be replaced by generic objects that take their data from yaml files and created by the objects defined in ``document/frames/``)
-* ``tools/`` contains collections of useful functions
+* ``tools/`` contains collections of useful functions nad objects
 
   - ``__init__.py`` contains various functions
 
@@ -136,7 +138,7 @@ Directories that are relevant to git, at the root:
 
   - ``wording.py`` contains a collection of useful functions to handle wordings
 
-  - ``xml.py`` contains a collection of useful functions to handle the xml files (obsolete, will disappear in 0.7.2)
+  - ``xml.py`` contains a collection of useful functions to handle the xml files (obsolete, will disappear in 0.7.5)
 
 * ``shared.py`` contains objects and variables that need to be shared (except settings), like the database connection
 
