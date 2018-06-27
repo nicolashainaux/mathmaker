@@ -20,10 +20,10 @@ mathmaker\.cli module
     :undoc-members:
     :show-inheritance:
 
-mathmaker\.daemon module
-------------------------
+mathmaker\.daemonized module
+----------------------------
 
-.. automodule:: mathmaker.daemon
+.. automodule:: mathmaker.daemonized
     :members:
     :undoc-members:
     :show-inheritance:

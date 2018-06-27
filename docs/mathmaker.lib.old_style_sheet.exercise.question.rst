@@ -44,14 +44,6 @@ mathmaker\.lib\.old\_style\_sheet\.exercise\.question\.Q\_Factorization module
     :undoc-members:
     :show-inheritance:
 
-mathmaker\.lib\.old\_style\_sheet\.exercise\.question\.Q\_Model module
-----------------------------------------------------------------------
-
-.. automodule:: mathmaker.lib.old_style_sheet.exercise.question.Q_Model
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 mathmaker\.lib\.old\_style\_sheet\.exercise\.question\.Q\_RightTriangle module
 ------------------------------------------------------------------------------
 

@@ -51,14 +51,6 @@ mathmaker\.lib\.old\_style\_sheet\.exercise\.X\_Factorization module
     :undoc-members:
     :show-inheritance:
 
-mathmaker\.lib\.old\_style\_sheet\.exercise\.X\_Model module
-------------------------------------------------------------
-
-.. automodule:: mathmaker.lib.old_style_sheet.exercise.X_Model
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 mathmaker\.lib\.old\_style\_sheet\.exercise\.X\_RightTriangle module
 --------------------------------------------------------------------
 

@@ -11,26 +11,10 @@ Subpackages
 Submodules
 ----------
 
-mathmaker\.lib\.old\_style\_sheet\.AlgebraBalance\_01 module
-------------------------------------------------------------
-
-.. automodule:: mathmaker.lib.old_style_sheet.AlgebraBalance_01
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 mathmaker\.lib\.old\_style\_sheet\.AlgebraBinomialIdentityExpansion module
 --------------------------------------------------------------------------
 
 .. automodule:: mathmaker.lib.old_style_sheet.AlgebraBinomialIdentityExpansion
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.old\_style\_sheet\.AlgebraExpressionExpansion module
---------------------------------------------------------------------
-
-.. automodule:: mathmaker.lib.old_style_sheet.AlgebraExpressionExpansion
     :members:
     :undoc-members:
     :show-inheritance:
@@ -51,14 +35,6 @@ mathmaker\.lib\.old\_style\_sheet\.AlgebraFactorization\_01 module
     :undoc-members:
     :show-inheritance:
 
-mathmaker\.lib\.old\_style\_sheet\.AlgebraFactorization\_02 module
-------------------------------------------------------------------
-
-.. automodule:: mathmaker.lib.old_style_sheet.AlgebraFactorization_02
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 mathmaker\.lib\.old\_style\_sheet\.AlgebraFactorization\_03 module
 ------------------------------------------------------------------
 
@@ -71,38 +47,6 @@ mathmaker\.lib\.old\_style\_sheet\.AlgebraMiniTest0 module
 ----------------------------------------------------------
 
 .. automodule:: mathmaker.lib.old_style_sheet.AlgebraMiniTest0
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.old\_style\_sheet\.AlgebraMiniTest1 module
-----------------------------------------------------------
-
-.. automodule:: mathmaker.lib.old_style_sheet.AlgebraMiniTest1
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.old\_style\_sheet\.AlgebraShortTest module
-----------------------------------------------------------
-
-.. automodule:: mathmaker.lib.old_style_sheet.AlgebraShortTest
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.old\_style\_sheet\.AlgebraTest module
------------------------------------------------------
-
-.. automodule:: mathmaker.lib.old_style_sheet.AlgebraTest
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.old\_style\_sheet\.AlgebraTest2 module
-------------------------------------------------------
-
-.. automodule:: mathmaker.lib.old_style_sheet.AlgebraTest2
     :members:
     :undoc-members:
     :show-inheritance:
@@ -139,22 +83,6 @@ mathmaker\.lib\.old\_style\_sheet\.EquationsHarder module
     :undoc-members:
     :show-inheritance:
 
-mathmaker\.lib\.old\_style\_sheet\.EquationsShortTest module
-------------------------------------------------------------
-
-.. automodule:: mathmaker.lib.old_style_sheet.EquationsShortTest
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.old\_style\_sheet\.EquationsTest module
--------------------------------------------------------
-
-.. automodule:: mathmaker.lib.old_style_sheet.EquationsTest
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 mathmaker\.lib\.old\_style\_sheet\.FractionSimplification module
 ----------------------------------------------------------------
 
@@ -183,14 +111,6 @@ mathmaker\.lib\.old\_style\_sheet\.PythagoreanTheoremShortTest module
 ---------------------------------------------------------------------
 
 .. automodule:: mathmaker.lib.old_style_sheet.PythagoreanTheoremShortTest
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-mathmaker\.lib\.old\_style\_sheet\.S\_Model module
---------------------------------------------------
-
-.. automodule:: mathmaker.lib.old_style_sheet.S_Model
     :members:
     :undoc-members:
     :show-inheritance:
