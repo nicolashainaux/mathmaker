@@ -69,7 +69,7 @@ It's possible to clean the project's main directory:
 Run mathmaker and tools
 """""""""""""""""""""""
 
-From now on, it is possible to run ``mathmaker`` from your virtual environment. As ``mathmaker`` is installed in developer mode, any change in the source files will be effective when running ``mathmaker``. Go to a directory where you can leave temporary files (each sheet requiring pictures will produce picture files, by default), and test it:
+From now on, it is possible to run ``mathmaker`` from your virtual environment. As ``mathmaker`` is installed in developer mode, any change in the source files will be effective when running ``mathmaker``. Go to a directory where you can leave temporary files (old sheets with pictures will produce .eps files, and LaTeX compilation produces also a bunch of auxiliary files), and test it:
 ::
 
     (dev0) $ cd path/to/garbage/directory/
@@ -85,13 +85,10 @@ Once you're done working with mathmaker, you can deactivate the virtual environm
     (dev0) $ deactivate
     $
 
-Note that it is not recommanded but possible to run ``mathmaker`` outside the virtual environment this way (as of 2018, not sure this feature still works and anyway you shouldn't do that):
-::
 
-    $ cd path/to/mathmaker/
-    $ python3 -m mathmaker.cli
+.. note::
 
-But it requires to have installed the python dependencies yourself on the host system (e.g. the computer) and maybe also to have set ``$PYTHONPATH`` correctly (and exported it).
+    It is not recommanded to run ``mathmaker`` outside the virtual environment. For information, the possible command is ``cd path/to/mathmaker/ && python3 -m mathmaker.cli``. Not sure it still works, and would require to have the python dependencies installed too, on the main system (outside the virtual environment) and maybe also to have correctly set and exported ``$PYTHONPATH``.
 
 Other dependencies
 """"""""""""""""""
@@ -164,7 +161,7 @@ For instance, my ``settings/dev/user_config.yaml`` contains this:
     # SOFTWARE'S CONFIGURATION FILE
 
     PATHS:
-        OUTPUT_DIR: /home/nico/dev/mathmaker/poubelle/
+        OUTPUT_DIR: dev/mathmaker/poubelle/
 
     LOCALES:
         LANGUAGE: fr_FR
@@ -186,7 +183,7 @@ Testing
 Run the tests
 """""""""""""
 
-The testing suite is run by `py.test <http://pytest.org/latest/contents.html>`_ this way:
+The testing suite is run by `pytest <http://pytest.org/latest/contents.html>`_ this way:
 
 ::
 
@@ -201,7 +198,7 @@ or this way:
 Where do they live?
 """""""""""""""""""
 
-Most of the tests belong to ``tests/``. Any function whose name starts with ``test_`` or ends with ``_test`` written in any python file whose name also starts with ``test_`` (and stored somewhere under ``tests/``) and will be automatically added to the tests run by ``pytest``.
+Most of the tests belong to ``tests/``. Any function whose name starts with ``test_`` written in any python file whose name also starts with ``test_`` or ends with ``_test`` (and stored somewhere under ``tests/``) and will be automatically added to the tests run by ``pytest``.
 
 Some more tests are written as `doctests <https://docs.python.org/3/library/doctest.html>`_ (see also `pytest documentation about doctests <http://pytest.org/latest/doctest.html>`_) in the docstrings of the functions. It's possible to add doctests, especially for simple functions (sometimes it is redundant with the tests from ``tests/``, but this is not a serious problem). The configuration for tests is so that any new doctest will be automatically added to the tests run by ``pytest``.
 
@@ -219,7 +216,7 @@ or this way:
 
     (dev0) $ python3 setup.py tox
 
-Be sure you have different versions of python installed correctly on your computer before starting this. The missing versions will be skipped anyway. Note that it is not a purpose of ``mathmaker`` to run under a lot of python versions (several python3 versions are OK, but no support for python2.7 is planned and that would be a waste of time since in 2020 python2.7 will not be developped anymore).
+Be sure you have different versions of python installed correctly on your computer before starting this. The missing versions will be skipped anyway. Note that it is not a purpose of ``mathmaker`` to run under a lot of python versions (several python3 versions are OK, but no support for python2.7 is planned and that would be a waste of time since the end of development of python 2.7 is planned for 2020).
 
 .. _logging_debugging:
 
@@ -312,6 +309,10 @@ Works the same way as the main logger. The log messages are sent to another faci
 System log configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. warning::
+
+    Informations of this subsubsection are certainly outdated since most Linux systems switch to ``systemd``, what makes the use of ``rsyslog`` more difficult, unfortunately.See `issue #61 <https://github.com/nicolashainaux/mathmaker/issues/61>`__.
+
 Systems using ``rsyslog``
 """""""""""""""""""""""""
 
@@ -319,7 +320,7 @@ The communication with ``rsyslog`` goes through a local Unix socket (no need to 
 
 .. note::
 
-    The default socket is ``/dev/log`` for Linux systems, and ``/var/run/log`` for FreeBSD. These values are defined in the logging*.yaml settings files.
+    The default socket is ``/dev/log`` for Linux systems, and ``/var/run/log`` for FreeBSD. These values are defined in the logging\*.yaml settings files.
 
 ``rsyslog`` may be already enabled and running by default (Ubuntu) or you can install, enable and start it (in Manjaro, ``# systemctl enable rsyslog`` and ``# systemctl start rsyslog``).
 
@@ -391,7 +392,7 @@ Once you've checked this works as expected, do not forget to configure your log 
 
 .. note::
 
-    mathmaker does not support systemd journalisation (the default one in Manjaro). You may have to setup systemd too (enable ``ForwardToSyslog`` in its conf file) in order to get ``rsyslog`` recording messages. Also you may need to add ``$ModLoad imjournal`` in ``/etc/rsyslog.conf`` and to create the file ``/var/spool/rsyslog``. For a better setup, see https://www.freedesktop.org/wiki/Software/systemd/syslog/. A workaround to prevent duplicate messages could be to discard the unwanted ones, like described here: http://www.rsyslog.com/discarding-unwanted-messages/.
+    mathmaker does not support systemd journalisation (the default one in Manjaro). You may have to setup systemd too (enable ``ForwardToSyslog`` in its conf file) in order to get ``rsyslog`` recording messages. Also you may need is to add ``$ModLoad imjournal`` in ``/etc/rsyslog.conf`` and to create the file ``/var/spool/rsyslog``. For a better setup, see https://www.freedesktop.org/wiki/Software/systemd/syslog/. A workaround to prevent duplicate messages could be to discard the unwanted ones, like described here: http://www.rsyslog.com/discarding-unwanted-messages/.
 
 Documentation
 ^^^^^^^^^^^^^
@@ -399,18 +400,18 @@ Documentation
 Current state
 """""""""""""
 
-As stated in the :ref:`guided_tour.foreword`, the documentation is being turned from doxygen to Sphinx, so there are missing parts .
+As stated in the :ref:`guided_tour.foreword`, the documentation is being turned from doxygen to Sphinx, so there are missing parts.
 
-Any new function or module has to be documented as described in `PEP 257  <https://www.python.org/dev/peps/pep-0257/>`_.
+Any new public function or module has to be documented as described in `PEP 257  <https://www.python.org/dev/peps/pep-0257/>`_. A part of the boring but necessary work to do is to add these docstrings (or turn the doxygen-style comments to docstrings), but do not rush into it too quickly as many parts should be rewritten, most of the missing or doxygen-style comments will match methods that will disappear.
 
-The doxygen documentation for version 0.6 is `here <http://mathmaker.sourceforge.net/contribute/doc/annotated.html>`_. The core parts are still correct, so far.
+The doxygen documentation for version 0.6 is `here <http://mathmaker.sourceforge.net/contribute/doc/annotated.html>`_. The core parts are still correct, so far, but the core is being rewritten as `a separate library <https://github.com/nicolashainaux/mathmakerlib>`__.
 
 Format
 """"""
 
 This documentation is written in `ReStructured Text <http://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html>`_ format.
 
-There are no newlines inside paragraphs. Set your editor to wrap lines automatically to your liking.
+There are no newlines inside paragraphs. Set your editor to soft wrap lines or not, to your liking.
 
 Make html
 """""""""
@@ -419,8 +420,8 @@ To produce the html documentation:
 
 ::
 
-    (dev0) mathmaker [dev] $ $ cd docs/
-    (dev0) mathmaker/docs [dev] $ $ make html
+    (dev0) mathmaker [dev] $ cd docs/
+    (dev0) mathmaker/docs [dev] $ make html
 
 If modules have changed (new ones, deleted ones), it is necessary to rebuild the autogenerated index:
 
@@ -486,9 +487,9 @@ As to PEP 8, mathmaker 's code being free from errors, the best is to use a lint
 
 Other choices are:
 
-* A maximum line length of 79
+* A standard maximum line length of 79
 * Declare ``_`` as builtin, otherwise all calls to ``_()`` (i.e. the translation function installed by gettext) would trigger flake8's error F821 (undefined name).
-* No complexity check. This might change in the future, but the algorithms in the core are complex. It's not easy to make them more simple (if anyone wants to try, (s)he's welcome).
+* No complexity check. This might change in the future, but the algorithms in the core are complex. It'll be a lot of work to make them more simple (this will be done while rewriting the core as `mathmakerlib <https://github.com/nicolashainaux/mathmakerlib>`__ and also using DataSource and other new objects to better handle sheets, exercises, questions and data/numbers sources).
 * Name modules, functions, instances, and other variables in lower case, whenever possible using a single ``word`` but if necessary, using ``several_words_separated_with_underscores``.
 * Name classes in CapitalizedWords, like: ``SuchAWonderfullClass`` (don't use mixedCase, like ``wrongCapitalizedClass``).
 * All ``import`` statements must be at the top of any module. It must be avoided to add ``from ... import ...`` at the top of some functions, but sometimes it's necessary. A solution to avoid this is always preferred.
@@ -502,7 +503,7 @@ The module `mathmaker.lib.tools.wording` can be considered as a reference on how
 
 .. note::
 
-    The use of python3's annotations and ``sphinx-autodoc-annotation`` would automatically add the types (including return type) to the generated documentation. If ``sphinx-autodoc-annotation``'s bug is corrected, the ``:type ...: ...`` and ``:rtype: ...`` lines will be removed.
+    The use of python3's annotations and ``sphinx-autodoc-annotation`` would automatically add the types (including return type) to the generated documentation. As ``sphinx-autodoc-annotation``'s bug is corrected, the ``:type ...: ...`` and ``:rtype: ...`` lines may be removed (but sphinx-autodoc-annotation is not setup anymore in mathmaker... so have to set it up again).
 
 .. code-block:: python
 
