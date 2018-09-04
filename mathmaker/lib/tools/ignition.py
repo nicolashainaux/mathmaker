@@ -182,7 +182,7 @@ def check_dependency(name: str, goal: str, path_to: str,
                       .format(nb1=installed_version_nb,
                               nb2=required_version_nb)
             raise EnvironmentError(err_msg + add_msg)
-    except TypeError as e:
+    except TypeError:
         add_msg = ' but something went wrong while trying to determine ' \
             'the installed version number. Likely, {n} is installed but ' \
             'the version number could not be retrieved (got: {v}).'\

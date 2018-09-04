@@ -243,7 +243,7 @@ def init():
                            .format(outputdir))
         try:
             Path(outputdir).mkdir(parents=True)
-        except Exception as e:
+        except Exception:
             mainlogger.exception('Impossible to create the missing output '
                                  'directory')
             raise
