@@ -259,6 +259,11 @@
         "02_white2",
         "multiplications_hole"
     ],
+    "02_white2_multiplications_multiplesof10": [
+        "mental_calculation",
+        "02_white2",
+        "multiplications_multiplesof10"
+    ],
     "02_white2_multiplications": [
         "mental_calculation",
         "02_white2",
@@ -269,30 +274,25 @@
         "02_white2",
         "addi_subtr"
     ],
-    "02_white2_divisions": [
+    "02_white2_complements": [
         "mental_calculation",
         "02_white2",
-        "divisions"
-    ],
-    "02_white2_fraction_of_a_rectangle": [
-        "mental_calculation",
-        "02_white2",
-        "fraction_of_a_rectangle"
-    ],
-    "02_white2_mini_problems": [
-        "mental_calculation",
-        "02_white2",
-        "mini_problems"
+        "complements"
     ],
     "02_white2_multiplication_by_11": [
         "mental_calculation",
         "02_white2",
         "multiplication_by_11"
     ],
-    "02_white2_complements": [
+    "02_white2_tables_15_25": [
         "mental_calculation",
         "02_white2",
-        "complements"
+        "tables_15_25"
+    ],
+    "02_white2_fraction_of_a_linesegment": [
+        "mental_calculation",
+        "02_white2",
+        "fraction_of_a_linesegment"
     ],
     "02_white2_exam": [
         "mental_calculation",

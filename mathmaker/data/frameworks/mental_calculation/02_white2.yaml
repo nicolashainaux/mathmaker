@@ -8,70 +8,30 @@ multiplications_hole: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: multiplications with a hole"
   - exercise: !!omap
-    - questions: multi hole -> intpairs_2to9 (10)
+    - questions: multi hole -> intpairs_2to9 (7)
+                            -> int_irreducible_frac (3)
+
+multiplications_multiplesof10: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: multiplications of multiples of 10"
+  - exercise: !!omap
+    - questions: multi direct -> intpairs_2to9, nb_variant=multiplesof10 (10)
 
 multiplications: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: multiplications"
   - exercise: !!omap
     - questions: multi reversed -> intpairs_2to9 (4)
-                 multi hole -> intpairs_2to9 (4)
+                 multi hole -> intpairs_2to9 (2)
+                            -> int_irreducible_frac (2)
                  multi direct -> intpairs_2to9 (2)
 
 addi_subtr: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: additions and subtractions"
   - exercise: !!omap
-    - questions: addi direct -> intpairs_9to50 (2)
-                 addi direct -> intpairs_9to100 (3)
-                 subtr direct, subvariant=only_positive -> intpairs_9to50 (2)
-                 subtr direct, subvariant=only_positive -> intpairs_9to100 (3)
-
-divisions: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: divisions"
-  - exercise: !!omap
-    - questions: divi direct -> intpairs_2to9 (10)
-
-fraction_of_a_rectangle: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: fraction of a rectangle"
-  - exercise: !!omap
-    - shuffle: false
-    - mix0:
-      - question: fraction_of a_rectangle, pick=2
-      - nb: properfraction_1to4 (1)
-            properfraction_5to10 (1)
-    - mix1:
-      - question: fraction_of a_rectangle, pick=4
-      - nb: properfraction_2to3×4to10 (1)
-            properfraction_2to4×1to10 (1)
-            intpairs_2to5;;intpairs_2to5 (2)
-    - mix2:
-      - question: fraction_of a_rectangle, pick=2
-      - nb: intpairs_3to6;;intpairs_3to6 (1)
-            properfraction_3to6×3to6 (1)
-    - mix3:
-      - question: fraction_of a_rectangle, pick=2
-      - nb: intpairs_4to9;;intpairs_4to9 (1)
-            properfraction_4to9×4to9 (1)
-
-mini_problems: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: mini-problems"
-  - exercise: !!omap
-    - questions: addi direct, context=mini_problem -> intpairs_5to20 (2)
-                 multi direct, context=mini_problem -> intpairs_4to9 (3)
-                 subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100 (2)
-                 divi direct, context=mini_problem -> intpairs_4to9 (2)
-                 divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
-
-multiplication_by_11: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: multiplication by 11"
-  - exercise: !!omap
-    - questions: multi direct -> table_11_tens_easy (8)
-                 multi direct -> table_11_ones (2)
+    - questions: addi direct -> intpairs_7to20 (5)
+                 subtr direct, subvariant=only_positive -> intpairs_7to20 (5)
 
 complements: !!omap
   - preset: "mental calculation"
@@ -87,6 +47,30 @@ complements: !!omap
                  subtr direct, subvariant=only_positive -> complements_to_100 (2)
                  subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (4)
                  subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_100 (4)
+
+multiplication_by_11: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: multiplication by 11"
+  - exercise: !!omap
+    - questions: multi direct -> table_11_tens_easy (8)
+                 multi direct -> table_11_ones (2)
+
+tables_15_25: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: tables of 15 and 25"
+  - exercise: !!omap
+    - questions: multi direct -> table_15 (2)
+                              -> table_25 (2)
+                 divi direct -> table_15 (2)
+                             -> table_25 (2)
+                 multi hole -> table_15 (1)
+                            -> table_25 (1)
+
+fraction_of_a_linesegment: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: fraction of a line segment"
+  - exercise: !!omap
+    - questions: fraction_of a_linesegment -> simple_fractions (10)
 
 exam: !!omap
   - preset: "mental calculation"
@@ -123,39 +107,51 @@ exam: !!omap
 W01a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi direct -> table_11_tens_easy (5)
+    - questions: multi reversed -> intpairs_3to9 (5)
 
 W01b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi direct -> table_11_tens_easy (3)
-                 addi direct -> intpairs_9to100 (1)
-                 subtr direct, subvariant=only_positive -> intpairs_9to100 (1)
+    - questions: multi hole -> intpairs_4to9 (2)
+                            -> int_irreducible_frac (1)
+                 multi reversed -> intpairs_3to9 (2)
 
 W01c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi hole -> intpairs_4to9 (1)
+    - questions: addi direct -> intpairs_9to20 (1)
+                 subtr direct, subvariant=only_positive -> intpairs_7to20 (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_10 (1)
+                 multi hole -> intpairs_4to9 (1)
                  multi reversed -> intpairs_3to9 (1)
-                 multi direct -> table_11_tens_easy (1)
-                 addi direct -> intpairs_9to100 (1)
-                 digitplace reversed -> digits_places (1)
 
 W01d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi hole -> intpairs_4to9 (1)
+    - questions: subtr direct, subvariant=only_positive -> intpairs_7to20 (1)
+                 addi direct -> complements_to_110...250 (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_100 (1)
+                 multi hole -> int_irreducible_frac (1)
                  multi reversed -> intpairs_3to9 (1)
-                 multi direct -> table_11_tens_easy (1)
-                 subtr direct, subvariant=only_positive -> intpairs_9to100 (1)
-                 digitplace direct -> digits_places (1)
 
 W02a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi hole -> intpairs_4to9 (2)
-                 multi reversed -> intpairs_3to9 (2)
-                 divi direct -> intpairs_4to9 (1)
+    - questions: multi direct -> table_11_tens_easy (3)
+                 multi reversed -> intpairs_3to9 (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
+
+# RESTART HERE
+
+
+
+
+
+
+
+
+                 multi hole -> int_irreducible_frac (1)
+
 
 W02b: !!omap
   - preset: "mental calculation slideshow"
