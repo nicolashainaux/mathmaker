@@ -122,6 +122,7 @@ def init():
     global distcodes_source
     global directions_source
     global times_source
+    global multiplesof10_source
 
     enable_js_form = False
 
@@ -215,6 +216,8 @@ def init():
     distcodes_source = database.source('distcodes', ['id', 'distcode'])
     directions_source = database.source('directions', ['id', 'direction'])
     times_source = database.source('times', ['id', 'hour', 'minute'])
+    multiplesof10_source = database.source('multiplesof10',
+                                           ['id', 'factor1', 'factor2'])
     anglessets_source = database.source('anglessets',
                                         ['id', 'nbof_angles', 'distcode',
                                          'variant', 'nbof_right_angles',

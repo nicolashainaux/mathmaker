@@ -437,6 +437,21 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
+    creation_query = '''CREATE TABLE multiplesof10
+                        (id INTEGER PRIMARY KEY, factor1 INTEGER,
+                         factor2 INTEGER, drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+    db_rows = [(10, 10, 0),
+               (10, 100, 0),
+               (10, 1000, 0),
+               (100, 100, 0)]
+    db.executemany("INSERT "
+                   "INTO multiplesof10"
+                   "(factor1, factor2, drawDate) "
+                   "VALUES(?, ?, ?)",
+                   db_rows)
+
     creation_query = '''CREATE TABLE times
                         (id INTEGER PRIMARY KEY, hour INTEGER, minute INTEGER,
                          drawDate INTEGER)'''

@@ -926,7 +926,8 @@ def db_table(tag):
     elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
                  'digits_places', 'fracdigits_places', 'simple_fractions',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
-                 'int_quintuples', 'int_sextuples', 'anglessets', 'times']:
+                 'int_quintuples', 'int_sextuples', 'anglessets', 'times',
+                 'multiplesof10']:
         return tag
     elif any(tag.startswith(t)
              for t in ['nnpairs', 'nntriples', 'nnquadruples', 'nnquintuples',
@@ -971,7 +972,7 @@ def classify_tag(tag):
                  'simple_fractions', 'dvipsnames_selection', 'polygons',
                  'int_triples', 'int_quadruples', 'int_quintuples',
                  'int_sextuples', 'anglessets', 'rightcuboids', 'times',
-                 'clocktime_data']:
+                 'clocktime_data', 'multiplesof10']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -1911,6 +1912,8 @@ class mc_source(object):
             return shared.int_sextuples_source.next(**correct_kw)
         elif tag_classification == 'simple_fractions':
             return shared.simple_fractions_source.next(**kwargs)
+        elif tag_classification == 'multiplesof10':
+            return shared.multiplesof10_source.next(**kwargs)
         elif tag_classification.startswith('single'):
             kwargs.update(preprocess_single_nb_tag(source_id))
             return shared.single_ints_source.next(**kwargs)

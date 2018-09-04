@@ -201,6 +201,12 @@
         "direction",
         "drawDate"
     ],
+    "multiplesof10": [
+        "id",
+        "factor1",
+        "factor2",
+        "drawDate"
+    ],
     "times": [
         "id",
         "hour",
