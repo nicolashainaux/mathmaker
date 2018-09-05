@@ -137,47 +137,31 @@ W01d: !!omap
 W02a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi direct -> table_11_tens_easy (3)
-                 multi reversed -> intpairs_3to9 (1)
-                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
-
-# RESTART HERE
-
-
-
-
-
-
-
-
-                 multi hole -> int_irreducible_frac (1)
-
+    - questions: multi direct -> table_11_tens_easy (5)
 
 W02b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi direct -> table_11_tens_easy (1)
-                 subtr direct, subvariant=only_positive -> intpairs_9to100 (1)
+    - questions: multi direct -> table_11_tens_easy (2)
                  digitplace direct -> digits_places (1)
+                 subtr direct, subvariant=only_positive -> intpairs_9to100 (1)
                  multi hole -> intpairs_4to9 (1)
-                 divi direct -> intpairs_3to9 (1)
 
 W02c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi direct -> table_11_tens_easy (1)
-                 addi direct -> intpairs_9to100 (1)
-                 digitplace reversed -> digits_places (1)
-                 divi direct -> intpairs_3to9 (2)
+    - questions: multi hole -> int_irreducible_frac (1)
+                 multi direct -> table_15 (2)
+                 multi direct -> table_25 (2)
 
 W02d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> table_11_tens_easy (1)
-                 subtr direct, subvariant=only_positive -> intpairs_9to100 (1)
-                 digitplace direct -> digits_places (1)
-                 divi direct -> intpairs_3to9 (1)
-                 multi hole -> intpairs_4to9 (1)
+                 multi direct -> table_15 (1)
+                 multi direct -> table_25 (1)
+                 digitplace reversed -> digits_places (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_100 (1)
 
 W03a: !!omap
   - preset: "mental calculation slideshow"
@@ -187,6 +171,7 @@ W03a: !!omap
                  divi direct -> intpairs_3to9 (1)
                  addi direct -> intpairs_9to100 (1)
                  subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100 (1)
+                 # multi direct -> intpairs_2to9, nb_variant=multiplesof10 (1)
 
 W03b: !!omap
   - preset: "mental calculation slideshow"
