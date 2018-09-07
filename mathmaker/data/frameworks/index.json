@@ -294,6 +294,21 @@
         "02_white2",
         "fraction_of_a_linesegment"
     ],
+    "02_white2_rectangles": [
+        "mental_calculation",
+        "02_white2",
+        "rectangles"
+    ],
+    "02_white2_perimeter_of_a_polygon": [
+        "mental_calculation",
+        "02_white2",
+        "perimeter_of_a_polygon"
+    ],
+    "02_white2_operator_precedence": [
+        "mental_calculation",
+        "02_white2",
+        "operator_precedence"
+    ],
     "02_white2_exam": [
         "mental_calculation",
         "02_white2",
@@ -378,6 +393,26 @@
         "mental_calculation",
         "02_white2",
         "W04d"
+    ],
+    "02_white2_W05a": [
+        "mental_calculation",
+        "02_white2",
+        "W05a"
+    ],
+    "02_white2_W05b": [
+        "mental_calculation",
+        "02_white2",
+        "W05b"
+    ],
+    "02_white2_W05c": [
+        "mental_calculation",
+        "02_white2",
+        "W05c"
+    ],
+    "02_white2_W05d": [
+        "mental_calculation",
+        "02_white2",
+        "W05d"
     ],
     "01_white1_multiplications": [
         "mental_calculation",
