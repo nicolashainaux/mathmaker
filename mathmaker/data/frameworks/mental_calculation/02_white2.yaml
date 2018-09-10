@@ -99,8 +99,6 @@ exam: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: final test for white belt, second stripe"
   - exercise: !!omap
-    - layout:
-      - min_row_height: 0.7
     - mix:
       - questions: multi reversed,
                    multi hole,
