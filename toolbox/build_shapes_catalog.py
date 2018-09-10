@@ -25,7 +25,6 @@ import sys
 import locale
 import gettext
 
-from mathmakerlib import required, mmlib_setup
 from mathmakerlib.calculus import Number
 from mathmakerlib.LaTeX import KNOWN_AMSSYMB_SYMBOLS
 
@@ -34,6 +33,7 @@ from mathmaker import __software_name__
 from mathmaker.lib import shared
 from mathmaker.lib.tools.generators.shapes import ShapeGenerator
 from mathmaker.lib.constants import LOCALE_US
+from mathmaker.lib.tools.ignition import check_dependencies
 
 SHAPES_CATALOG_PATH = './shapes_catalog.tex'
 SG = ShapeGenerator()
@@ -49,8 +49,7 @@ def __main__():
     gettext.translation(__software_name__,
                         settings.localedir, ['en']).install()
     shared.init()
-    required.init()
-    mmlib_setup.init()
+    check_dependencies()
 
     output = ''
     rows_per_page = 0
