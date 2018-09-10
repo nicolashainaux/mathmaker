@@ -29,7 +29,7 @@ from string import ascii_lowercase as alphabet
 from intspan import intspan
 from intspan.core import ParseError
 from mathmakerlib import required
-from mathmakerlib.calculus import is_integer
+from mathmakerlib.calculus import is_integer, Number
 
 from mathmaker.lib import shared
 from mathmaker import settings
@@ -812,13 +812,23 @@ class Exercise(object):
                 content = [elt for triple in zip(n, q, a) for elt in triple]
                 lines_nb = min(self.tabular_batch,
                                self.q_nb - bn * self.tabular_batch)
+                fmt = r'''@{{}}
+                p{{0.5cm}}<{{\rule[{offset}]{{0pt}}{{{min_row_height}}}}}
+                m{{14.25cm}}|
+                m{{3.75cm}}
+                @{{}}'''\
+                .format(min_row_height='{}cm'.format(self.min_row_height),
+                        offset='-{}cm'.format((Number(0.35)
+                                               * self.min_row_height)
+                                              .rounded(Number(0.01))))
                 result += M.write_layout((lines_nb, 3),
                                          [0.5, 14.25, 3.75],
                                          content,
                                          borders='penultimate',
                                          justify=['left', 'left', 'center'],
                                          center_vertically=True,
-                                         min_row_height=self.min_row_height)
+                                         min_row_height=self.min_row_height,
+                                         tabular_format=fmt)
                 if shared.enable_js_form and ex_or_answers == 'exc':
                     # Requiring amsmath because of the \text{{ }} below
                     required.package['amsmath'] = True
