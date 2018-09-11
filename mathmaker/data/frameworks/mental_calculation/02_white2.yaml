@@ -21,10 +21,11 @@ multiplications: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: multiplications"
   - exercise: !!omap
-    - questions: multi reversed -> intpairs_2to9 (4)
+    - questions: multi reversed -> intpairs_2to9 (3)
                  multi hole -> intpairs_2to9 (2)
                             -> int_irreducible_frac (2)
-                 multi direct -> intpairs_2to9 (2)
+                 multi direct -> intpairs_2to9 (1)
+                              -> intpairs_2to9, nb_variant=multiplesof10 (2)
 
 addi_subtr: !!omap
   - preset: "mental calculation"
