@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_complements():
+def test_areas_and_perimeters():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
-                                       'complements')),
+                                       'areas_and_perimeters')),
                              pdf_output=True)
 
 
-def test_complements_embedding_js():
+def test_areas_and_perimeters_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
-                                       'complements',
+                                       'areas_and_perimeters',
                                        enable_js_form=True)),
                              pdf_output=True)

@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_tables_15_25():
+def test_operator_precedence():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
-                                       'tables_15_25')),
+                                       'operator_precedence')),
                              pdf_output=True)
 
 
-def test_tables_15_25_embedding_js():
+def test_operator_precedence_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
-                                       'tables_15_25',
+                                       'operator_precedence',
                                        enable_js_form=True)),
                              pdf_output=True)

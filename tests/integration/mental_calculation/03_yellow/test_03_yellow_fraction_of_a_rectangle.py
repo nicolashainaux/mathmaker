@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_rectangles():
+def test_fraction_of_a_rectangle():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
-                                       'rectangles')),
+                                       'fraction_of_a_rectangle')),
                              pdf_output=True)
 
 
-def test_rectangles_embedding_js():
+def test_fraction_of_a_rectangle_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
-                                       'rectangles',
+                                       'fraction_of_a_rectangle',
                                        enable_js_form=True)),
                              pdf_output=True)

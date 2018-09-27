@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_addi_subtr_hole():
+def test_divisions():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
-                                       'addi_subtr_hole')),
+                                       'divisions')),
                              pdf_output=True)
 
 
-def test_addi_subtr_hole_embedding_js():
+def test_divisions_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '03_yellow',
-                                       'addi_subtr_hole',
+                                       'divisions',
                                        enable_js_form=True)),
                              pdf_output=True)

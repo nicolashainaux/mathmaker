@@ -614,45 +614,55 @@
         "04_yellow1",
         "W04d"
     ],
-    "03_yellow_complements": [
+    "03_yellow_addi_subtr": [
         "mental_calculation",
         "03_yellow",
-        "complements"
+        "addi_subtr"
     ],
-    "03_yellow_addi_subtr_hole": [
+    "03_yellow_operator_precedence": [
         "mental_calculation",
         "03_yellow",
-        "addi_subtr_hole"
+        "operator_precedence"
     ],
-    "03_yellow_units_conversions": [
+    "03_yellow_areas_and_perimeters": [
         "mental_calculation",
         "03_yellow",
-        "units_conversions"
+        "areas_and_perimeters"
     ],
-    "03_yellow_decimal_numerals": [
+    "03_yellow_divisions": [
         "mental_calculation",
         "03_yellow",
-        "decimal_numerals"
+        "divisions"
     ],
     "03_yellow_operations_vocabulary": [
         "mental_calculation",
         "03_yellow",
         "operations_vocabulary"
     ],
+    "03_yellow_numeric_expansions": [
+        "mental_calculation",
+        "03_yellow",
+        "numeric_expansions"
+    ],
+    "03_yellow_units_conversions": [
+        "mental_calculation",
+        "03_yellow",
+        "units_conversions"
+    ],
+    "03_yellow_fraction_of_a_rectangle": [
+        "mental_calculation",
+        "03_yellow",
+        "fraction_of_a_rectangle"
+    ],
     "03_yellow_positional_notation": [
         "mental_calculation",
         "03_yellow",
         "positional_notation"
     ],
-    "03_yellow_rectangles": [
+    "03_yellow_decimal_numerals": [
         "mental_calculation",
         "03_yellow",
-        "rectangles"
-    ],
-    "03_yellow_tables_15_25": [
-        "mental_calculation",
-        "03_yellow",
-        "tables_15_25"
+        "decimal_numerals"
     ],
     "03_yellow_exam": [
         "mental_calculation",
