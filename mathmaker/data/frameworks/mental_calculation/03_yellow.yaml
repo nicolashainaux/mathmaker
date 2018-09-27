@@ -159,138 +159,139 @@ exam: !!omap
 W01a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: addi direct -> complements_to_10, nb_variant=decimal2 (1)
-                 digitplace numberof -> digits_places, generation_type=default (1)
-                 fraction_of a_rectangle -> intpairs_3to6;;intpairs_3to6 (1)
-                 divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
-                 addi hole -> singleint_5to20;;singleint_5to20 (1)
+    - questions: divi direct -> intpairs_4to9 (3)
+                 multi direct -> intpairs_3to9, nb_variant=multiplesof10 (1)
+                 multi hole -> intpairs_3to9 (1)
 
 W01b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: digitplace reversed -> digits_places, pos_matches_invisible_zero=true (1)
-                 subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_10, nb_variant=decimal1 (1)
-                 divi direct -> intpairs_4to9 (1)
-                 multi direct, context=mini_problem -> table_11_tens_easy (1)
-                 addi hole -> singleint_21to100;;singleint_21to100 (1)
+    - questions: divi direct -> intpairs_4to9 (3)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
+                 multi reversed -> intpairs_4to9 (1)
 
 W01c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_1, nb_variant=decimal1 (1)
-                 digitplace direct -> digits_places (1)
-                 subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (1)
-                 fraction_of a_rectangle -> intpairs_3to7;;intpairs_3to7 (1)
-                 divi direct, context=mini_problem -> intpairs_4to9 (1)
+    - questions: vocabulary divi -> intpairs_4to9 (1)
+                 vocabulary addi -> singleint_11to100;;singleint_11to100 (1)
+                 vocabulary subtr -> singleint_11to100;;singleint_11to100 (1)
+                 [1][vocabulary multi -> intpairs_3to9 (1)
+                     vocabulary multi -> table_11_tens_easy (1)
+                     vocabulary multi -> table_15 (1)]
+                 [1][vocabulary half -> table_2 (1)
+                     vocabulary third -> table_3 (1)
+                     vocabulary quarter -> table_4 (1)
+                     vocabulary double -> table_2 (1)
+                     vocabulary triple -> table_3 (1)
+                     vocabulary quadruple -> table_4 (1)]
 
 W01d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)
-                 digitplace numberof -> digits_places, generation_type=default (1)
-                 addi direct, context=mini_problem -> intpairs_5to20 (1)
-                 digitplace reversed -> digits_places (1)
-                 divi direct -> intpairs_4to9 (1)
+    - questions: digitplace reversed -> digits_places (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
+                 vocabulary addi -> singleint_11to100;;singleint_11to100 (1)
+                 vocabulary divi -> intpairs_4to9 (1)
+                 vocabulary multi -> table_25 (1)
 
 W02a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: vocabulary third -> table_3 (1)
-                 vocabulary double -> table_2 (1)
-                 vocabulary triple -> table_3 (1)
+    - questions: area rectangle, picture=true -> table_15 (1)
+                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
+                 vocabulary third -> table_3 (1)
+                 vocabulary subtr -> singleint_11to100;;singleint_11to100 (1)
                  vocabulary divi -> intpairs_4to9 (1)
-                 vocabulary addi -> singleint_10to100;;singleint_10to100 (1)
-
 W02b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: digitplace reversed -> digits_places, pos_matches_invisible_zero=true (1)
-                 vocabulary quadruple -> table_4 (1)
-                 vocabulary half -> table_2 (1)
+    - questions: area rectangle, picture=true -> table_11_tens_easy (1)
+                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
                  vocabulary quarter -> table_4 (1)
-                 vocabulary multi -> table_11_tens_easy (1)
+                 digitplace direct -> digits_places (1)
+                 vocabulary addi -> singleint_11to100;;singleint_11to100 (1)
 
 W02c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: digitplace direct -> digits_places (1)
-                 subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_1, nb_variant=decimal1 (1)
-                 addi hole -> complements_to_110...990 (1)
-                 vocabulary third -> auto_multiples (1)
-                 vocabulary subtr -> complements_to_100 (1)
+    - questions: numeric expansion -> mergedinttriples_3to9 (3)
+                 subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_100 (1)
+                 vocabulary multi -> table_25 (1)
 
 W02d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: digitplace numberof -> digits_places, generation_type=default (1)
-                 subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (1)
-                 vocabulary multi -> intpairs_4to9 (1)
+    - questions: numeric expansion -> mergedinttriples_3to9 (2)
+                 digitplace numberof -> digits_places, generation_type=default (1)
                  vocabulary divi -> intpairs_4to9 (1)
                  vocabulary triple -> table_3 (1)
 
 W03a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: units conversion -> unitspairs, level=1 (5)
+    - questions: units conversion -> unitspairs, level=1 (3)
+                 multi direct -> intpairs_3to9, nb_variant=multiplesof10 (1)
+                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
 
 W03b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: units conversion -> unitspairs, level=1 (2)
-                 digitplace reversed -> digits_places, pos_matches_invisible_zero=true (1)
+                 digitplace reversed -> digits_places (1)
                  vocabulary addi -> singleint_10to100;;singleint_10to100 (1)
-                 divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
+                 vocabulary subtr -> singleint_11to100;;singleint_11to100 (1)
 
 W03c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: units conversion -> unitspairs, level=1 (1)
-                 digitplace direct -> digits_places (1)
-                 vocabulary subtr -> intpairs_2to200, nb_variant=decimal2 (1)
                  fraction_of a_rectangle -> intpairs_3to7;;intpairs_3to7 (1)
-                 addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=8-15 (1)
+                 subtr direct, subvariant=only_positive -> intpairs_11to90 (1)
+                 numeric expansion -> mergedinttriples_3to9 (1)
 
 W03d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: units conversion -> unitspairs, level=1 (1)
+                 fraction_of a_rectangle -> intpairs_3to7;;intpairs_3to7 (1)
+                 numeric expansion -> mergedinttriples_3to9 (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_3to10, type=pentagon (1)
                  digitplace numberof -> digits_places, generation_type=default (1)
-                 vocabulary divi -> intpairs_4to9 (1)
-                 decimal numerals, direction=to_decimal -> decimals (1)
-                 addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (1)
 
 W04a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi direct -> table_15 (1)
-                              -> table_25 (1)
-                 divi direct -> table_15 (1)
-                             -> table_25 (1)
-                 multi hole -> table_15 (1)
+    - questions: addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
+                 addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (1)
+                 decimal numerals, direction=to_decimal -> decimals (1)
+                 decimal numerals, direction=to_fraction -> decimals (1)
+                 multi direct -> intpairs_3to9, nb_variant=multiplesof10 (1)
 
 W04b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi direct -> table_15 (1)
-                 divi direct -> table_25 (1)
-                 units conversion -> unitspairs, level=1 (1)
-                 digitplace reversed -> digits_places (1)
-                 decimal numerals, direction=to_fraction -> decimals (1)
+    - questions: units conversion -> unitspairs, level=1 (1)
+                 decimal numerals, direction=to_decimal -> decimals (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=8-15 (1)
+                 vocabulary addi -> singleint_10to100;;singleint_10to100 (1)
+                 vocabulary multi -> table_15 (1)
 
 W04c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: area rectangle, picture=true -> table_25 (1)
-                 perimeter rectangle, picture=true -> table_15 (1)
-                 digitplace numberof -> digits_places, generation_type=default (1)
-                 vocabulary third -> auto_multiples (1)
+    - questions: units conversion -> unitspairs, level=1 (1)
                  addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (1)
+                 vocabulary half -> table_2 (1)
+                 vocabulary subtr -> singleint_11to100;;singleint_11to100 (1)
+                 divi direct -> intpairs_2to9 (1)
 
 W04d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: area rectangle, picture=true -> table_15 (1)
-                 perimeter rectangle, picture=true -> complements_to_10, nb_variant=decimal2 (1)
-                 units conversion -> unitspairs, level=1 (1)
-                 vocabulary double -> auto_multiples (1)
-                 divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
+    - questions: units conversion -> unitspairs, level=1 (1)
+                 decimal numerals, direction=to_fraction -> decimals (1)
+                 vocabulary quadruple -> table_4 (1)
+                 fraction_of a_rectangle -> intpairs_3to7;;intpairs_3to7 (1)
+                 numeric expansion -> mergedinttriples_3to9 (1)
