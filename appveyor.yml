@@ -17,7 +17,7 @@ max_jobs: 1
 install:
   # We need wheel installed to build wheels
   - sh: "sudo apt -qq update"
-  - sh: "sudo apt -y install libxml2-utils gettext python3-pip texlive-latex-base texlive-luatex texlive-latex-recommended texlive-xetex texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra locales"
+  - sh: "sudo apt -y install libxml2-utils eukleides gettext python3-pip texlive-latex-base texlive-luatex texlive-latex-recommended texlive-xetex texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra locales"
   - sh: "sudo -H pip3 install wheel pytest codecov pytest-cov"
   - sh: "sudo locale-gen en_US.UTF-8 && sudo locale-gen fr_FR.UTF-8"
   - sh: "sudo python3 setup.py install"
