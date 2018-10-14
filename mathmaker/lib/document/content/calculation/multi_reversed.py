@@ -35,7 +35,7 @@ class sub_object(component.structure):
         nb_list = list(build_data)
         self.nb1, self.nb2 = random.sample(nb_list, 2)
         self.product = Product([self.nb1, self.nb2]).evaluate()
-        self.transduration = 9
+        self.transduration = 15
 
     def q(self, **options):
         # self.substitutable_question_mark = True

@@ -54,7 +54,7 @@ class sub_object(component.structure):
         self.direction = options.get('direction',
                                      directions[
                                          next(shared.alternate_source)[0]])
-        self.transduration = 8
+        self.transduration = 15
 
     def q(self, **options):
         # This is actually meant for self.preset == 'mental calculation'

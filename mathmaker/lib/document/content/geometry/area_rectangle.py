@@ -36,7 +36,7 @@ class sub_object(component.structure):
         super().setup("nb_variants", nb=build_data, **options)
         super().setup("length_units", **options)
         super().setup("rectangle", **options)
-        self.transduration = 14
+        self.transduration = 15
 
         if self.picture:
             if self.slideshow:

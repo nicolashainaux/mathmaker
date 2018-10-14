@@ -48,7 +48,7 @@ class sub_object(component.structure):
                  r'(length unit: {length_unit}) |hint:length_unit|')
         }[len(self.polygon.sides)]
 
-        self.transduration = 12 + 3 * (level - 1)
+        self.transduration = 15 + 3 * (level - 1)
 
         setup_wording_format_of(self)
         self.wording = self.wording.format(**self.wording_format)

@@ -48,7 +48,7 @@ class sub_object(component.structure):
             and not self.nb1 % 10 == 0 and not self.nb2 % 10 == 0):
             self.transduration = 12
         if self.nb_source.startswith('decimalfractionssums'):
-            self.transduration = 15
+            self.transduration = 20
 
         # TODO: better use a Sum object (when it's available in mathmakerlib)
         self.sum_str = ' + '.join([_.printed for _ in self.nb_list])

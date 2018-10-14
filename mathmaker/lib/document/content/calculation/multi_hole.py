@@ -48,7 +48,7 @@ class sub_object(component.structure):
         # though seldom)
         self.product = (self.nb1.evaluate() * self.nb2.evaluate())\
             .rounded(Number('1')).printed
-        self.transduration = 9
+        self.transduration = 15
 
         if isinstance(self.nb2, Fraction):
             self.hidden_one = self.nb2
