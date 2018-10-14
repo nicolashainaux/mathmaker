@@ -189,7 +189,7 @@ W01d: !!omap
   - exercise: !!omap
     - questions: digitplace reversed -> digits_places (1)
                  subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
-                 vocabulary addi -> singleint_11to100;;singleint_11to100 (1)
+                 multi hole -> int_irreducible_frac (1)
                  vocabulary divi -> intpairs_4to9 (1)
                  vocabulary multi -> table_25 (1)
 
@@ -243,7 +243,7 @@ W03b: !!omap
 W03c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: units conversion -> unitspairs, level=1 (1)
+    - questions: fraction_of a_linesegment -> simple_fractions (1)
                  fraction_of a_rectangle -> intpairs_3to7;;intpairs_3to7 (1)
                  order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=8-15 (1)
                  subtr direct, subvariant=only_positive -> intpairs_11to90 (1)
@@ -253,7 +253,7 @@ W03d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: units conversion -> unitspairs, level=1 (1)
-                 fraction_of a_rectangle -> intpairs_3to7;;intpairs_3to7 (1)
+                 vocabulary multi -> table_15 (1)
                  numeric expansion -> mergedinttriples_3to9 (1)
                  perimeter polygon -> polygons, sum_ingredients=int_3to10, type=pentagon (1)
                  digitplace numberof -> digits_places, generation_type=default (1)
@@ -274,7 +274,7 @@ W04b: !!omap
                  decimal numerals, direction=to_decimal -> decimals (1)
                  order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=8-15 (1)
                  vocabulary addi -> singleint_10to100;;singleint_10to100 (1)
-                 vocabulary multi -> table_15 (1)
+                 fraction_of a_rectangle -> intpairs_3to7;;intpairs_3to7 (1)
 
 W04c: !!omap
   - preset: "mental calculation slideshow"
