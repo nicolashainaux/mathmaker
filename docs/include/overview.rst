@@ -8,7 +8,7 @@ Examples of available themes are: first degree equations, pythagorean theorem, f
 
 It can run from command line, but can be controlled via http requests too.
 
-`License <https://github.com/nicolashainaux/mathmaker/blob/master/LICENSE>`__
+`License <https://gitlab.com/nicolas.hainaux/mathmaker/blob/master/LICENSE>`__
 
 `Documentation (master release) <http://mathmaker.readthedocs.io/en/master/index.html>`__
 
@@ -154,8 +154,8 @@ As a wordings contributor
 
 Mathmaker needs contexts for problems wordings. There are already some,
 but the more there is, the better. Existing wordings can be found
-`here <https://github.com/nicolashainaux/mathmaker/tree/dev/mathmaker/data/wordings>`_. You can submit any new idea as an enhancement proposal
-`there <https://github.com/nicolashainaux/mathmaker/issues>`__ (should be written in english, french or german).
+`here <https://gitlab.com/nicolas.hainaux/mathmaker/tree/dev/mathmaker/data/wordings>`_. You can submit any new idea as an enhancement proposal
+`there <https://gitlab.com/nicolas.hainaux/mathmaker/issues>`__ (should be written in english, french or german).
 
 Any question can be sent to nh dot techn (hosted at gmail dot com).
 
@@ -166,15 +166,15 @@ You can help translating mathmaker to your language (or any language you
 like, if you have enough elementary maths vocabulary for that).
 
 If the translation to your language isn't started yet, there are several
-pot files to get `here <https://github.com/nicolashainaux/mathmaker/tree/dev/mathmaker/locale>`__ (see explanations about their respective
+pot files to get `here <https://gitlab.com/nicolas.hainaux/mathmaker/tree/dev/mathmaker/locale>`__ (see explanations about their respective
 roles `there <http://mathmaker.readthedocs.io/en/dev/dev_doc.html#the-real-and-the-fake-translation-files>`__). You can use an editor like
 `poedit <https://poedit.net/>`__ or any other you like better, to create
 po files from them and start to translate.
 
 If you want to add missing translations, or to correct some, you can
-find the po files in the subdirectories `here <https://github.com/nicolashainaux/mathmaker/tree/dev/mathmaker/locale>`__.
+find the po files in the subdirectories `here <https://gitlab.com/nicolas.hainaux/mathmaker/tree/dev/mathmaker/locale>`__.
 
-Once you're done, you can make a pull request `here <https://github.com/nicolashainaux/mathmaker/pulls>`__.
+Once you're done, you can make a pull request `here <https://gitlab.com/nicolas.hainaux/mathmaker/pulls>`__.
 
 Any question can be sent to nh dot techn (hosted at gmail dot com).
 

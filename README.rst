@@ -1,6 +1,4 @@
-|PyPI1| |PyPI2| |PyPI3| |Build Status| |Coveralls branch| |Documentation Status1| |Documentation Status2| |Maintenance|
-
-|PyPI4|
+|PyPI1| |PyPI2| |PyPI3| |Build Status| |Coveralls branch| |Documentation Status1| |Maintenance| |PyPI4|
 
 Overview
 ========
@@ -14,7 +12,7 @@ theorem, fractions calculation...
 It can run from command line, but can be controlled via http requests
 too.
 
-`Licence <https://github.com/nicolashainaux/mathmaker/blob/master/LICENSE>`__
+`Licence <https://gitlab.com/nicolas.hainaux/mathmaker/blob/master/LICENSE>`__
 `Documentation (master
 release) <http://mathmaker.readthedocs.io/en/master/index.html>`__
 `Documentation (latest development
@@ -28,7 +26,7 @@ Complete install
 
 .. note::
 
-  python3.6 is mandatory for mathmaker to work, so check is installed on your system
+  python3.6+ is mandatory for mathmaker to work, so check is installed on your system
 
 -  on Ubuntu 14.04 or later:
 
@@ -118,9 +116,9 @@ As a wordings contributor
 
 Mathmaker needs contexts for problems wordings. There are already some,
 but the more there is, the better. Existing wordings can be found
-`here <https://github.com/nicolashainaux/mathmaker/tree/dev/mathmaker/data/wordings>`__.
+`here <https://gitlab.com/nicolas.hainaux/mathmaker/tree/dev/mathmaker/data/wordings>`__.
 You can submit any new idea as an enhancement proposal
-`there <https://github.com/nicolashainaux/mathmaker/issues>`__ (should
+`there <https://gitlab.com/nicolas.hainaux/mathmaker/issues>`__ (should
 be written in english, french or german).
 
 Any question can be sent to nh dot techn (hosted at gmail dot com).
@@ -133,7 +131,7 @@ like, if you have enough elementary maths vocabulary for that).
 
 If the translation to your language isn't started yet, there are several
 pot files to get
-`here <https://github.com/nicolashainaux/mathmaker/tree/dev/mathmaker/locale>`__
+`here <https://gitlab.com/nicolas.hainaux/mathmaker/tree/dev/mathmaker/locale>`__
 (see explanations about their respective roles
 `there <http://mathmaker.readthedocs.io/en/dev/dev_doc.html#the-real-and-the-fake-translation-files>`__).
 You can use an editor like `poedit <https://poedit.net/>`__ or any other
@@ -141,10 +139,10 @@ you like better, to create po files from them and start to translate.
 
 If you want to add missing translations, or to correct some, you can
 find the po files in the subdirectories
-`here <https://github.com/nicolashainaux/mathmaker/tree/dev/mathmaker/locale>`__.
+`here <https://gitlab.com/nicolas.hainaux/mathmaker/tree/dev/mathmaker/locale>`__.
 
 Once you're done, you can make a pull request
-`here <https://github.com/nicolashainaux/mathmaker/pulls>`__.
+`here <https://gitlab.com/nicolas.hainaux/mathmaker/pulls>`__.
 
 Any question can be sent to nh dot techn (hosted at gmail dot com).
 
@@ -164,22 +162,20 @@ Additional informations
 
 Contact: nh dot techn (hosted by gmail dot com)
 
-`Changelog <https://github.com/nicolashainaux/mathmaker/blob/master/CHANGELOG.rst>`__
+`Changelog <https://gitlab.com/nicolas.hainaux/mathmaker/blob/master/CHANGELOG.rst>`__
 
-`Contributors <https://github.com/nicolashainaux/mathmaker/blob/master/CONTRIBUTORS.rst>`__
+`Contributors <https://gitlab.com/nicolas.hainaux/mathmaker/blob/master/CONTRIBUTORS.rst>`__
 
 .. |PyPI1| image:: https://img.shields.io/pypi/v/mathmaker.svg?maxAge=2592000
    :target: https://pypi.python.org/pypi/mathmaker
 .. |PyPI2| image:: https://img.shields.io/pypi/status/mathmaker.svg?maxAge=2592000
 .. |PyPI3| image:: https://img.shields.io/pypi/pyversions/mathmaker.svg?maxAge=2592000
-.. |Build Status| image:: https://travis-ci.org/nicolashainaux/mathmaker.svg?branch=dev
-   :target: https://travis-ci.org/nicolashainaux/mathmaker
-.. |Coveralls branch| image:: https://img.shields.io/coveralls/nicolashainaux/mathmaker/dev.svg?maxAge=2592000
-   :target: https://coveralls.io/github/nicolashainaux/mathmaker
-.. |Documentation Status1| image:: https://readthedocs.org/projects/mathmaker/badge/?version=master
-   :target: http://mathmaker.readthedocs.io/en/master/
-.. |Documentation Status2| image:: https://readthedocs.org/projects/mathmaker/badge/?version=dev
-   :target: http://mathmaker.readthedocs.io/en/dev/
+.. |Build Status| image:: https://ci.appveyor.com/api/projects/status/88ay13trwvipaijb/branch/master?svg=true
+   :target: https://ci.appveyor.com/project/nicolashainaux/mathmakerlib-ho94f
+.. |Codecov| image:: https://codecov.io/gl/nicolas.hainaux/mathmaker/branch/master/graph/badge.svg
+   :target: https://codecov.io/gl/nicolas.hainaux/mathmaker
+.. |Documentation Status| image:: https://readthedocs.org/projects/mathmaker/badge/?version=latest
+   :target: https://mathmaker-lib.readthedocs.io/en/latest/
 .. |Maintenance| image:: https://img.shields.io/maintenance/yes/2018.svg?maxAge=2592000
 .. |PyPI4| image:: https://img.shields.io/pypi/l/mathmaker.svg?maxAge=2592000
-   :target: https://github.com/nicolashainaux/mathmaker/blob/master/LICENSE
+   :target: https://gitlab.com/nicolas.hainaux/mathmaker/blob/master/LICENSE

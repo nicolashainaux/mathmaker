@@ -36,7 +36,7 @@ __release__ = __version__ + ' (alpha)'
 __author__ = 'Nicolas Hainaux'
 __author_email__ = 'nh.techn@gmail.com'
 __licence__ = 'GNU General Public License v3 or later (GPLv3+)'
-__url__ = 'https://github.com/nicolashainaux/mathmaker/'
+__url__ = 'https://gitlab.com/nicolas.hainaux/mathmaker/'
 __copyright__ = 'Copyright 2006-2017'
 __contact__ = '{author} <{author_email}>'\
               .format(author=__author__, author_email=__author_email__)

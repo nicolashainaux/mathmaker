@@ -8,13 +8,13 @@ Foreword
 
 This code has been developed chunk by chunk over more than 10 years now, starting with python2.3 or 4. Now it is a python3.6 software and, fortunately, my python skills have improved over the years. Problem is that several old parts, even after big efforts to correct the worst pieces, are still not very idiomatic.
 
-Among these parts that need to be rewritten from scratch, the core is currently being developed as `a separate library <https://github.com/nicolashainaux/mathmakerlib>`__). One this is done, the old core will be completely removed.
+Among these parts that need to be rewritten from scratch, the core is currently being developed as `a separate library <https://gitlab.com/nicolas.hainaux/mathmakerlib>`__). One this is done, the old core will be completely removed.
 
 Even if they're not written as good as can be, the unit tests remain a precious tool to check nothing got broken when the core parts are written anew or debugged.
 
 The documentation has been originately written using `doxygen <http://www.stack.nl/~dimitri/doxygen/>`_. Although it is an excellent documentation software, I have decided to move to `Sphinx <http://www.sphinx-doc.org/en/stable/>`_ because it corresponds closer to python best practices. So, all doxygen-style comments will be turned into docstrings so mathmaker can use Sphinx to build the documentation. At the moment this work is just started, so the auto-generated Sphinx documentation is quite uncomplete now.
 
-Before working further on bringing new features, there's a need for more annoying work, to turn ugly old parts into the right pythonic idioms. That's why at places you'll see that this or this other module is deprecated and should be "reduced", or rewritten. Refer to the `issues <https://github.com/nicolashainaux/mathmaker/issues>`__ and `projects <https://github.com/nicolashainaux/mathmaker/projects>`__ on github.
+Before working further on bringing new features, there's a need for more annoying work, to turn ugly old parts into the right pythonic idioms. That's why at places you'll see that this or this other module is deprecated and should be "reduced", or rewritten. Refer to the `issues <https://gitlab.com/nicolas.hainaux/mathmaker/issues>`__ and `projects <https://gitlab.com/nicolas.hainaux/mathmaker/projects>`__ on gitlab.
 
 The issue
 ---------

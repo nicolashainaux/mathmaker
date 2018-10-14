@@ -12,14 +12,14 @@ Install external dependencies
 """""""""""""""""""""""""""""
 You'll need to install the same dependencies as users do (see :ref:`install`), plus ``gettext``.
 
-Get mathmaker's source code from github repo
+Get mathmaker's source code from gitlab repo
 """"""""""""""""""""""""""""""""""""""""""""
 
 In the folder of your choice:
 
 ::
 
-    $ git clone https://github.com/nicolashainaux/mathmaker.git
+    $ git clone https://gitlab.com/nicolas.hainaux/mathmaker.git
 
 Setup a python virtual environment
 """"""""""""""""""""""""""""""""""
@@ -311,7 +311,7 @@ System log configuration
 
 .. warning::
 
-    Informations of this subsubsection are certainly outdated since most Linux systems switch to ``systemd``, what makes the use of ``rsyslog`` more difficult, unfortunately.See `issue #61 <https://github.com/nicolashainaux/mathmaker/issues/61>`__.
+    Informations of this subsubsection are certainly outdated since most Linux systems switch to ``systemd``, what makes the use of ``rsyslog`` more difficult, unfortunately. See `issue #61 <https://gitlab.com/nicolas.hainaux/mathmaker/issues/61>`__.
 
 Systems using ``rsyslog``
 """""""""""""""""""""""""
@@ -404,7 +404,7 @@ As stated in the :ref:`guided_tour.foreword`, the documentation is being turned 
 
 Any new public function or module has to be documented as described in `PEP 257  <https://www.python.org/dev/peps/pep-0257/>`_. A part of the boring but necessary work to do is to add these docstrings (or turn the doxygen-style comments to docstrings), but do not rush into it too quickly as many parts should be rewritten, most of the missing or doxygen-style comments will match methods that will disappear.
 
-The doxygen documentation for version 0.6 is `here <http://mathmaker.sourceforge.net/contribute/doc/annotated.html>`_. The core parts are still correct, so far, but the core is being rewritten as `a separate library <https://github.com/nicolashainaux/mathmakerlib>`__.
+The doxygen documentation for version 0.6 is `here <http://mathmaker.sourceforge.net/contribute/doc/annotated.html>`_. The core parts are still correct, so far, but the core is being rewritten as `a separate library <https://gitlab.com/nicolas.hainaux/mathmakerlib>`__.
 
 Format
 """"""
@@ -489,7 +489,7 @@ Other choices are:
 
 * A standard maximum line length of 79
 * Declare ``_`` as builtin, otherwise all calls to ``_()`` (i.e. the translation function installed by gettext) would trigger flake8's error F821 (undefined name).
-* No complexity check. This might change in the future, but the algorithms in the core are complex. It'll be a lot of work to make them more simple (this will be done while rewriting the core as `mathmakerlib <https://github.com/nicolashainaux/mathmakerlib>`__ and also using DataSource and other new objects to better handle sheets, exercises, questions and data/numbers sources).
+* No complexity check. This might change in the future, but the algorithms in the core are complex. It'll be a lot of work to make them more simple (this will be done while rewriting the core as `mathmakerlib <https://gitlab.com/nicolas.hainaux/mathmakerlib>`__ and also using DataSource and other new objects to better handle sheets, exercises, questions and data/numbers sources).
 * Name modules, functions, instances, and other variables in lower case, whenever possible using a single ``word`` but if necessary, using ``several_words_separated_with_underscores``.
 * Name classes in CapitalizedWords, like: ``SuchAWonderfullClass`` (don't use mixedCase, like ``wrongCapitalizedClass``).
 * All ``import`` statements must be at the top of any module. It must be avoided to add ``from ... import ...`` at the top of some functions, but sometimes it's necessary. A solution to avoid this is always preferred.

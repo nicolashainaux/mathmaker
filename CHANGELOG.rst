@@ -1,12 +1,13 @@
 Changelog
 =========
 
-New in version 0.7.4 (2018-09-..)
+New in version 0.7.4 (2018-10-14)
 ---------------------------------
 
 * Add mental calculation sheets for fifth level ("yellow belt, 2d stripe")
 * Add mental calculation sheets for sixth level ("orange belt")
 * Automatically adapt LaTeX preamble, depending on packages really required to compile the document
+* mathmaker project moves to gitlab.com
 
 New in version 0.7.3 (2018-01-15)
 ---------------------------------
