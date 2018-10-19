@@ -5,7 +5,9 @@ ignore =
     # visually indented line with same indent as next logical line
     E129,
     # multiple statements on one line (def)
-    E704
+    E704,
+    # invalid escape sequence
+    W605
 max-line-length = 79
 max-complexity = -1
 builtins = _
