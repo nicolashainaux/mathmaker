@@ -20,6 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import os
 import subprocess
 from abc import ABCMeta, abstractmethod
 
@@ -173,7 +174,7 @@ class Drawable(NamedObject, metaclass=ABCMeta):
         hc = generate_preamble_comment('eukleides')
 
         if create_pic_file:
-            euk_path = settings.outputdir + self.euk_filename
+            euk_path = os.path.join(settings.outputdir, self.euk_filename)
             with open(euk_path, 'w') as f:
                 f.write(hc + self.into_euk())
             # todo: remove the options when they are corrected in euktoeps

@@ -26,6 +26,7 @@ import locale
 
 
 from mathmaker import __software_name__
+from mathmaker.core.env import USER_LOCAL_SHARE
 from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.constants import LOCALE_US
@@ -39,7 +40,6 @@ settings.language = 'en'
 settings.locale = LOCALE_US
 locale.setlocale(locale.LC_ALL, settings.locale)
 gettext.translation(__software_name__, settings.localedir, ['en']).install()
-settings.outputdir = settings.projectdir + 'outfiles/'
-if not os.path.isdir(settings.outputdir):
-    os.mkdir(settings.outputdir, mode=0o777)
+settings.outputdir = os.path.join(USER_LOCAL_SHARE, 'outfiles')
+os.makedirs(settings.outputdir, mode=0o770, exist_ok=True)
 shared.init()
