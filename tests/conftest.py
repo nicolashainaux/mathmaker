@@ -24,6 +24,7 @@ import os
 import gettext
 import locale
 
+import mathmakerlib.config
 
 from mathmaker import __software_name__
 from mathmaker.core.env import USER_LOCAL_SHARE
@@ -42,4 +43,5 @@ locale.setlocale(locale.LC_ALL, settings.locale)
 gettext.translation(__software_name__, settings.localedir, ['en']).install()
 settings.outputdir = os.path.join(USER_LOCAL_SHARE, 'outfiles')
 os.makedirs(settings.outputdir, mode=0o770, exist_ok=True)
+mathmakerlib.config.PolygonsSetup.ENABLE_MISMATCH_WINDING_WARNING = False
 shared.init()
