@@ -36,16 +36,13 @@ DAEMON_PROCESS = Popen(['mathmakerd'])
 
 def test_only_wait_to_ensure_daemon_is_started():
     """Just ensure mathmaker daemon is started"""
-    sleep(2)
+    sleep(4)
 
 
-def test_correct_request():
+def test_requests():
     """Check a simple correct request."""
     urlopen("http://127.0.0.1:9999/?sheetname=expand_simple&ip=127.0.0.2")
-
-
-def test_too_many_requests():
-    """Check a second request before the minimal interval time is elapsed."""
+    # Check a second request before the minimal interval time is elapsed.
     with pytest.raises(HTTPError) as excinfo:
         urlopen("http://127.0.0.1:9999/?sheetname=expand_simple&ip=127.0.0.2")
     assert str(excinfo.value) == 'HTTP Error 429: Too Many Requests'
