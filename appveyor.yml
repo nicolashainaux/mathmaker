@@ -11,7 +11,8 @@ image:
 
 max_jobs: 1
 
-# environment:
+environment:
+  PYTHONWARNINGS: ignore
   # CODECOV_TOKEN: "11e629de-a607-4624-a3c2-71bac08124a5"
 
 install:
