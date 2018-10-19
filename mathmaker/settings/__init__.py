@@ -29,6 +29,7 @@ from shutil import copyfile
 
 from mathmaker import __version__, __software_name__
 from mathmaker.lib.tools import ext_dict, load_config
+from mathmaker.core.env import USER_LOCAL_SHARE
 
 AVAILABLE = {'LANGUAGES': ['fr', 'fr_FR', 'en', 'en_US', 'en_GB'],
              'CURRENCY': {'fr': 'euro', 'fr_FR': 'euro',
@@ -68,18 +69,19 @@ class default_object(object):
 
 
 class path_object(object):
-    def __init__(self, dd=None, logger=None):
-        self.db = dd + '{}-{}.db'.format(__software_name__, __version__)
+    def __init__(self, ldd='', dd='', logger=None):
+        ldd += '/'
+        self.db = ldd + '{}-{}.db'.format(__software_name__, __version__)
         self.db_dist = dd + '{}.db-dist'.format(__software_name__)
-        self.natural_nb_tuples_db = dd + 'natural_nb_tuples-{}.db'\
+        self.natural_nb_tuples_db = ldd + 'natural_nb_tuples-{}.db'\
             .format(__version__)
         self.natural_nb_tuples_db_dist = dd + 'natural_nb_tuples.db-dist'
-        self.daemon_db = dd + '{}d.db'.format(__software_name__)
-        self.shapes_db = dd + 'shapes-{}.db'.format(__version__)
+        self.daemon_db = ldd + '{}d.db'.format(__software_name__)
+        self.shapes_db = ldd + 'shapes-{}.db'.format(__version__)
         self.shapes_db_dist = dd + 'shapes.db-dist'
-        self.solids_db = dd + 'solids-{}.db'.format(__version__)
+        self.solids_db = ldd + 'solids-{}.db'.format(__version__)
         self.solids_db_dist = dd + 'solids.db-dist'
-        self.anglessets_db = dd + 'anglessets-{}.db'.format(__version__)
+        self.anglessets_db = ldd + 'anglessets-{}.db'.format(__version__)
         self.anglessets_db_dist = dd + 'anglessets.db-dist'
         logger.info('db={}'.format(self.db))
         logger.info('shapes db={}'.format(self.shapes_db))
@@ -194,7 +196,8 @@ def init():
     daemon_logger = logging.getLogger('__daemon__')
     output_watcher_logger = logging.getLogger("__output_watcher__")
 
-    path = path_object(dd=datadir, logger=mainlogger)
+    os.makedirs(USER_LOCAL_SHARE, mode=0o770, exist_ok=True)
+    path = path_object(ldd=USER_LOCAL_SHARE, dd=datadir, logger=mainlogger)
 
     CONFIG = load_config('user_config', settingsdir)
     xmllint = CONFIG["PATHS"]["XMLLINT"]
