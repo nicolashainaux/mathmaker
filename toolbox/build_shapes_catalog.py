@@ -25,7 +25,7 @@ import sys
 import locale
 import gettext
 
-from mathmakerlib import required, mmlib_setup
+from mathmakerlib import required, config
 from mathmakerlib.calculus import Number
 from mathmakerlib.LaTeX import KNOWN_AMSSYMB_SYMBOLS
 
@@ -50,7 +50,7 @@ def __main__():
                         settings.localedir, ['en']).install()
     shared.init()
     required.init()
-    mmlib_setup.init()
+    config.init()
 
     output = ''
     rows_per_page = 0
