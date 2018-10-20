@@ -42,7 +42,10 @@ def test_only_wait_to_ensure_daemon_is_started():
 def test_requests():
     """Check a simple correct request."""
     urlopen("http://127.0.0.1:9999/?sheetname=expand_simple&ip=127.0.0.2")
-    # Check a second request before the minimal interval time is elapsed.
+
+
+def test_too_many_requests():
+    """Check a second request before the minimal interval time is elapsed."""
     with pytest.raises(HTTPError) as excinfo:
         urlopen("http://127.0.0.1:9999/?sheetname=expand_simple&ip=127.0.0.2")
         urlopen("http://127.0.0.1:9999/?sheetname=expand_simple&ip=127.0.0.2")
