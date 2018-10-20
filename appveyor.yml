@@ -13,7 +13,7 @@ max_jobs: 1
 
 environment:
   PYTHONWARNINGS: ignore
-  CODECOV_TOKEN: "11e629de-a607-4624-a3c2-71bac08124a5"
+  CODECOV_TOKEN: "3afbcc45-e086-40e5-af77-375c8c7e9694"
 
 install:
   # We need wheel installed to build wheels
