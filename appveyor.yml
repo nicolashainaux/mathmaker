@@ -13,7 +13,7 @@ max_jobs: 1
 
 environment:
   PYTHONWARNINGS: ignore
-  # CODECOV_TOKEN: "11e629de-a607-4624-a3c2-71bac08124a5"
+  CODECOV_TOKEN: "11e629de-a607-4624-a3c2-71bac08124a5"
 
 install:
   # We need wheel installed to build wheels
@@ -28,15 +28,16 @@ build: off
 test_script:
   - sh: "pytest --cov=mathmaker tests/"
 
-#after_test:
-  # This step builds your wheels.
-  #- sh: "codecov"
+# after_test:
+#   # This step builds your wheels.
+#   - sh: "codecov"
 
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory
   #- path: dist\*
 
-#on_success:
+on_success:
 #  You can use this step to upload your artifacts to a public website.
 #  See Appveyor's documentation for more details. Or you can simply
 #  access your wheels from the Appveyor "artifacts" tab for your build.
+  - sh: "codecov"
