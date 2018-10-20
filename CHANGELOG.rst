@@ -1,7 +1,7 @@
 Changelog
 =========
 
-New in version 0.7.4 (2018-10-14)
+New in version 0.7.4 (2018-10-20)
 ---------------------------------
 
 * Add mental calculation sheets for fifth level ("yellow belt, 2d stripe")
