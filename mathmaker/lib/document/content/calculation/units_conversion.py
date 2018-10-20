@@ -43,8 +43,7 @@ class sub_object(component.structure):
         #     and not self.nb1 % 10 == 0 and not self.nb2 % 10 == 0):
         #     self.transduration = 12
         unit1, unit2, direction, category, level, dimension = build_data
-        self.transduration = {1: 15, 2: 20, 3: 25, 4: 25, 5: 25}\
-            .get(int(level), 30)
+        self.transduration = {1: 20, 2: 25, 3: 25}.get(int(level), 30)
         unit1 = Unit(unit1)
         unit2 = Unit(unit2)
         if physical_quantity(unit1) == 'length' and dimension != 1:

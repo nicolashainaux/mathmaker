@@ -227,6 +227,12 @@ class structure(object):
                 if ((new_value in self.nb_list and not avoid_duplicates)
                     or new_value not in self.nb_list):
                     setattr(self, 'nb' + str(chosen_ones[i]), new_value)
+        if self.nb_variant.startswith('multiplesof10'):
+            f1, f2 = next(shared.multiplesof10_source)
+            f1, f2 = {True: (f1, f2),
+                      False: (f2, f1)}[random.choice([True, False])]
+            self.nb1 *= f1
+            self.nb2 *= f2
 
     def _setup_euclidean_division(self, **kwargs):
         nb_list = list(kwargs['nb'])

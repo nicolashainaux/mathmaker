@@ -34,9 +34,9 @@ class sub_object(component.structure):
     def __init__(self, build_data, **options):
         super().setup("minimal", **options)
         super().setup("division", nb=build_data, **options)
-        self.transduration = 12
+        self.transduration = 15
         if self.divisor > 9 and self.divisor % 10 != 0:
-            self.transduration = 16
+            self.transduration = 20
 
         if self.context == 'mini_problem':
             self.transduration = 25

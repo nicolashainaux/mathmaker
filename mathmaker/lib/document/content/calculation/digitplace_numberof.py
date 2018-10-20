@@ -31,7 +31,7 @@ class sub_object(component.structure):
 
     def __init__(self, **options):
         digitplace_reversed.sub_object.__init__(self, numberof=True, **options)
-        self.transduration = 12
+        self.transduration = 15
         n = self.chosen_deci
         r = self.chosen_digitplace
         self.result = Item(((n - n % r) / r))

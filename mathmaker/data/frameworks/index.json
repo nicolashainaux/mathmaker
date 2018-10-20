@@ -259,6 +259,11 @@
         "02_white2",
         "multiplications_hole"
     ],
+    "02_white2_multiplications_multiplesof10": [
+        "mental_calculation",
+        "02_white2",
+        "multiplications_multiplesof10"
+    ],
     "02_white2_multiplications": [
         "mental_calculation",
         "02_white2",
@@ -269,30 +274,40 @@
         "02_white2",
         "addi_subtr"
     ],
-    "02_white2_divisions": [
+    "02_white2_complements": [
         "mental_calculation",
         "02_white2",
-        "divisions"
-    ],
-    "02_white2_fraction_of_a_rectangle": [
-        "mental_calculation",
-        "02_white2",
-        "fraction_of_a_rectangle"
-    ],
-    "02_white2_mini_problems": [
-        "mental_calculation",
-        "02_white2",
-        "mini_problems"
+        "complements"
     ],
     "02_white2_multiplication_by_11": [
         "mental_calculation",
         "02_white2",
         "multiplication_by_11"
     ],
-    "02_white2_complements": [
+    "02_white2_tables_15_25": [
         "mental_calculation",
         "02_white2",
-        "complements"
+        "tables_15_25"
+    ],
+    "02_white2_fraction_of_a_linesegment": [
+        "mental_calculation",
+        "02_white2",
+        "fraction_of_a_linesegment"
+    ],
+    "02_white2_rectangles": [
+        "mental_calculation",
+        "02_white2",
+        "rectangles"
+    ],
+    "02_white2_perimeter_of_a_polygon": [
+        "mental_calculation",
+        "02_white2",
+        "perimeter_of_a_polygon"
+    ],
+    "02_white2_operator_precedence": [
+        "mental_calculation",
+        "02_white2",
+        "operator_precedence"
     ],
     "02_white2_exam": [
         "mental_calculation",
@@ -378,6 +393,26 @@
         "mental_calculation",
         "02_white2",
         "W04d"
+    ],
+    "02_white2_W05a": [
+        "mental_calculation",
+        "02_white2",
+        "W05a"
+    ],
+    "02_white2_W05b": [
+        "mental_calculation",
+        "02_white2",
+        "W05b"
+    ],
+    "02_white2_W05c": [
+        "mental_calculation",
+        "02_white2",
+        "W05c"
+    ],
+    "02_white2_W05d": [
+        "mental_calculation",
+        "02_white2",
+        "W05d"
     ],
     "01_white1_multiplications": [
         "mental_calculation",
@@ -579,55 +614,60 @@
         "04_yellow1",
         "W04d"
     ],
-    "03_yellow_complements": [
+    "03_yellow_addi_subtr": [
         "mental_calculation",
         "03_yellow",
-        "complements"
+        "addi_subtr"
     ],
-    "03_yellow_addi_subtr_hole": [
+    "03_yellow_operator_precedence": [
         "mental_calculation",
         "03_yellow",
-        "addi_subtr_hole"
+        "operator_precedence"
     ],
-    "03_yellow_units_conversions": [
+    "03_yellow_areas_and_perimeters": [
         "mental_calculation",
         "03_yellow",
-        "units_conversions"
+        "areas_and_perimeters"
     ],
-    "03_yellow_decimal_numerals": [
+    "03_yellow_divisions": [
         "mental_calculation",
         "03_yellow",
-        "decimal_numerals"
+        "divisions"
     ],
     "03_yellow_operations_vocabulary": [
         "mental_calculation",
         "03_yellow",
         "operations_vocabulary"
     ],
+    "03_yellow_numeric_expansions": [
+        "mental_calculation",
+        "03_yellow",
+        "numeric_expansions"
+    ],
+    "03_yellow_units_conversions": [
+        "mental_calculation",
+        "03_yellow",
+        "units_conversions"
+    ],
+    "03_yellow_fraction_of_a_rectangle": [
+        "mental_calculation",
+        "03_yellow",
+        "fraction_of_a_rectangle"
+    ],
     "03_yellow_positional_notation": [
         "mental_calculation",
         "03_yellow",
         "positional_notation"
     ],
-    "03_yellow_rectangles": [
+    "03_yellow_decimal_numerals": [
         "mental_calculation",
         "03_yellow",
-        "rectangles"
-    ],
-    "03_yellow_tables_15_25": [
-        "mental_calculation",
-        "03_yellow",
-        "tables_15_25"
+        "decimal_numerals"
     ],
     "03_yellow_exam": [
         "mental_calculation",
         "03_yellow",
         "exam"
-    ],
-    "03_yellow_exam_with_distinction": [
-        "mental_calculation",
-        "03_yellow",
-        "exam_with_distinction"
     ],
     "03_yellow_W01a": [
         "mental_calculation",

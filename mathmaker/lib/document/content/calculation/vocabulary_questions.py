@@ -43,13 +43,13 @@ class structure(component.structure):
             self.nb1, self.nb2, self.result = self.result, self.nb1, self.nb2
         self.wording = wording
         setup_wording_format_of(self)
-        self.transduration = 10
+        self.transduration = 15
         if result >= 20 or self.nb1 >= 20 or self.nb2 >= 20:
-            self.transduration = 14
-        elif result >= 81 or self.nb1 >= 81 or self.nb2 >= 81:
-            self.transduration = 18
-        elif result >= 100 or self.nb1 >= 100 or self.nb2 >= 100:
             self.transduration = 20
+        elif result >= 81 or self.nb1 >= 81 or self.nb2 >= 81:
+            self.transduration = 25
+        elif result >= 100 or self.nb1 >= 100 or self.nb2 >= 100:
+            self.transduration = 30
         if kwargs.get('answer') is None:
             self.js_answer = result.uiprinted
         else:

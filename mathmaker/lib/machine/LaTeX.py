@@ -742,6 +742,12 @@ r"""{textcomp}{array}{graphicx}{epstopdf}{textpos}{specificpackages}
         if 'borders' in options and options['borders'] in ['v_internal']:
             tabular_format = tabular_format[1:-1]
 
+        # Dirty patch... to override the whole tabular format definition
+        if 'tabular_format' in options:
+            tabular_format = options['tabular_format']
+            extra_col_sep = ''
+            min_row_height = ''
+
         result += "\\begin{tabular}{" + tabular_format + "}" + "\n"
         result += h_border
 

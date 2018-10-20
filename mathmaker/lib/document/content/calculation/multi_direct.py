@@ -39,8 +39,9 @@ class sub_object(component.structure):
         super().setup("numbers", nb=build_data, **options)
         super().setup("nb_variants", nb=build_data, **options)
         self.transduration = 8
-        if not is_integer(self.nb1) or not is_integer(self.nb2):
-            self.transduration = 15
+        if (not is_integer(self.nb1) or not is_integer(self.nb2)
+            or self.nb1 > 10 or self.nb2 > 10):
+                self.transduration = 15
 
         product = Product([self.nb1, self.nb2])
         self.product_str = product.printed
