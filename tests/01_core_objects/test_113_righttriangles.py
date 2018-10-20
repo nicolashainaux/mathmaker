@@ -28,7 +28,7 @@ from mathmaker.lib.core.base_calculus import AngleItem
 from mathmaker.lib.core.calculus import Equation
 from mathmaker.lib.core.geometry import RightTriangle
 from mathmaker.lib.constants import pythagorean
-from tools import wrap_nb
+from tests.tools import wrap_nb
 
 
 @pytest.fixture

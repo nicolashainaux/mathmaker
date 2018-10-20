@@ -25,7 +25,7 @@
 from mathmakerlib.calculus.number import is_number, is_integer
 
 from mathmaker.lib.document.content.calculation import addi_hole
-from tools import wrap_nb
+from tests.tools import wrap_nb
 
 
 def test_addi_hole():

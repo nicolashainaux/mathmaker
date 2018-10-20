@@ -26,7 +26,7 @@ import math
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.core.base_calculus import Item, Function, AngleItem
 from mathmaker.lib.core.base_geometry import Point, Angle
-from tools import wrap_nb
+from tests.tools import wrap_nb
 
 
 @pytest.fixture()

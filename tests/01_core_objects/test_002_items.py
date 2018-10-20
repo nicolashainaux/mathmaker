@@ -27,7 +27,7 @@ import decimal
 from mathmaker.lib.core.root_calculus import Exponented, Value
 from mathmaker.lib.core.base_calculus import Item, Sum, Product
 from mathmaker.lib.constants import LOCALE_US, LOCALE_FR
-from tools import wrap_nb
+from tests.tools import wrap_nb
 
 
 @pytest.fixture()

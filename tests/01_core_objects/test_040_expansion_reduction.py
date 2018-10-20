@@ -27,7 +27,7 @@ from mathmaker.lib.core.base_calculus import (Item, Sum, Monomial, Expandable,
                                               Product)
 from mathmaker.lib.core.base_calculus import Polynomial, BinomialIdentity
 from mathmaker.lib.core.calculus import Expression
-from tools import wrap_nb
+from tests.tools import wrap_nb
 
 
 @pytest.fixture

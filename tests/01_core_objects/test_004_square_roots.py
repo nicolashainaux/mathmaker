@@ -21,7 +21,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from mathmaker.lib.core.base_calculus import Item, SquareRoot
-from tools import wrap_nb
+from tests.tools import wrap_nb
 
 
 def test_sq5_printed():

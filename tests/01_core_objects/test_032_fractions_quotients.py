@@ -23,7 +23,7 @@
 import pytest
 
 from mathmaker.lib.core.base_calculus import Item, Quotient, Fraction
-from tools import wrap_nb
+from tests.tools import wrap_nb
 
 
 @pytest.fixture

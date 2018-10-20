@@ -24,7 +24,7 @@ import pytest
 from decimal import Decimal
 
 from mathmaker.lib.core.base_calculus import Item, Sum, Fraction
-from tools import wrap_nb
+from tests.tools import wrap_nb
 
 
 @pytest.fixture

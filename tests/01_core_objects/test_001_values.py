@@ -26,7 +26,7 @@ from decimal import Decimal
 
 from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.constants import LOCALE_US, LOCALE_FR
-from tools import wrap_nb
+from tests.tools import wrap_nb
 
 
 @pytest.fixture()

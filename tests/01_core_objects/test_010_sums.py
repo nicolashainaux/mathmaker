@@ -26,7 +26,7 @@ from decimal import Decimal
 from mathmaker.lib.core.base_calculus import (Item, Sum, Product, Monomial,
                                               Polynomial)
 from mathmaker.lib.core.base_calculus import BinomialIdentity, Expandable
-from tools import wrap_nb
+from tests.tools import wrap_nb
 
 
 @pytest.fixture
