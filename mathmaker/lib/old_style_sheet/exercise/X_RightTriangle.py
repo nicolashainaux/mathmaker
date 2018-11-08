@@ -114,11 +114,12 @@ class X_RightTriangle(X_Structure):
         if self.x_kind == 'short_test':
             if self.x_subkind == 'pythagorean_theorem_one_of_each':
                 q_subkinds = ['calculate_hypotenuse', 'calculate_one_leg']
+                random.shuffle(q_subkinds)
                 if random.choice([True, False]):
                     self.questions_list.append(
                         default_question(
                             q_kind='pythagorean_theorem',
-                            q_subkind=random.choice(q_subkinds),
+                            q_subkind=q_subkinds.pop(),
                             use_pythagorean_triples=True,
                             use_decimals=True,
                             final_unit=random.choice(units),
@@ -129,7 +130,7 @@ class X_RightTriangle(X_Structure):
                     self.questions_list.append(
                         default_question(
                             q_kind='pythagorean_theorem',
-                            q_subkind=random.choice(q_subkinds),
+                            q_subkind=q_subkinds.pop(),
                             use_pythagorean_triples=False,
                             round_to=random.choice([TENTH,
                                                     HUNDREDTH]),
@@ -142,7 +143,7 @@ class X_RightTriangle(X_Structure):
                     self.questions_list.append(
                         default_question(
                             q_kind='pythagorean_theorem',
-                            q_subkind=random.choice(q_subkinds),
+                            q_subkind=q_subkinds.pop(),
                             use_pythagorean_triples=False,
                             round_to=random.choice([TENTH,
                                                     HUNDREDTH]),
@@ -155,7 +156,7 @@ class X_RightTriangle(X_Structure):
                     self.questions_list.append(
                         default_question(
                             q_kind='pythagorean_theorem',
-                            q_subkind=random.choice(q_subkinds),
+                            q_subkind=q_subkinds.pop(),
                             use_pythagorean_triples=True,
                             use_decimals=True,
                             final_unit=random.choice(units),
