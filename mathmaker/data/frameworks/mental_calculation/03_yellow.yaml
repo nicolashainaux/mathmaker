@@ -154,6 +154,62 @@ exam: !!omap
                  [1][addi direct -> intpairs_11to99 (1)
                      subtr direct, subvariant=only_positive -> intpairs_11to90 (1)]
 
+challenge: !!omap
+  - preset: "mental calculation"
+  - title: "Challenge, first part"
+  - exercise: !!omap
+    - shuffle: false
+    - batch: 20
+    - layout:
+      - min_row_height: 1
+    - questions: multi direct -> intpairs_3to9×6to9 (4)
+                 multi direct -> intpairs_3to9, nb_variant=multiplesof10 (1)
+                 multi reversed -> intpairs_4to9 (1)
+                 multi hole, hidden=1 -> intpairs_6to9×6to9 (1)
+                 multi hole, hidden=2 -> intpairs_6to9×6to9 (1)
+                 multi hole -> int_irreducible_frac (1)
+                 divi direct -> intpairs_6to9×6to9 (1)
+                 addi direct -> intpairs_20to100 (1)
+                 perimeter rectangle, picture=true -> intpairs_4to15 (1)
+                 [1][area rectangle, picture=true -> table_25 (1)
+                     area rectangle, picture=true -> intpairs_3to9 (1)
+                     area rectangle, picture=true -> table_15 (1)
+                     area rectangle, picture=true -> table_11_tens_easy (1)]
+                 [1][digitplace direct -> digits_places (1)
+                     digitplace reversed -> digits_places (1)]
+                 fraction_of a_linesegment -> simple_fractions (1)
+                 rectangle length_or_width, context=from_area -> intpairs_2to9 (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording -> complements_to_100 (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_3to10, type=pentagon (1)
+                 units conversion -> unitspairs, level=1 (1)
+                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
+                 [1][vocabulary half -> multiplesof2_7to19 (1)
+                     vocabulary third -> multiplesof3_4to9 (1)
+                     vocabulary quarter -> multiplesof4_4to9 (1)
+                     vocabulary double -> multiplesof2_7to19 (1)
+                     vocabulary triple -> multiplesof3_4to9 (1)
+                     vocabulary quadruple -> multiplesof4_4to9 (1)
+                     vocabulary multi -> intpairs_3to9 (1)
+                     vocabulary multi -> table_11_tens_easy (1)
+                     vocabulary multi -> table_25 (1)
+                     vocabulary multi -> table_15 (1)
+                     vocabulary divi -> intpairs_4to9 (1)
+                     vocabulary addi -> singleint_11to100;;singleint_11to100 (1)
+                     vocabulary subtr -> singleint_11to100;;singleint_11to100 (1)]
+                 numeric expansion -> mergedinttriples_3to9 (1)
+                 fraction_of a_rectangle -> intpairs_4to7;;intpairs_4to7 (1)
+                 digitplace numberof, generation_type=default -> digits_places (1)
+                 [1][decimal numerals, direction=to_decimal -> decimals (1)
+                     decimal numerals, direction=to_fraction -> decimals (1)]
+                 [1][addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
+                     addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (1)]
+                 order of_operations, subvariant=only_positive -> singleint_5to100;;intpairs_3to9, variant=0-3 (1)
+                 [1][addi direct -> intpairs_11to99 (1)
+                     subtr direct, subvariant=only_positive -> intpairs_11to90 (1)]
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=3 (1)
+                 divi euclidean -> intpairs_6to10 (1)
+                 rectangle length_or_width, context=from_perimeter, picture=true -> intpairs_5to20 (1)
+
 W01a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap

@@ -669,6 +669,11 @@
         "03_yellow",
         "exam"
     ],
+    "03_yellow_challenge": [
+        "mental_calculation",
+        "03_yellow",
+        "challenge"
+    ],
     "03_yellow_W01a": [
         "mental_calculation",
         "03_yellow",
