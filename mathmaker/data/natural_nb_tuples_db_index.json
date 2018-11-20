@@ -1,4 +1,9 @@
 {
+    "singletons": [
+        "id",
+        "nb1",
+        "drawDate"
+    ],
     "pairs": [
         "id",
         "nb1",

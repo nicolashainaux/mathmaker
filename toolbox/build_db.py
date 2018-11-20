@@ -73,6 +73,7 @@ INTQUINTUPLES_MAX = 36
 INTSEXTUPLES_MAX = 25
 SINGLEINTS_MAX = 1000
 
+NNSINGLETONS_MAX = 100
 NNPAIRS_MAX = 100
 NNTRIPLES_MAX = 10
 NNQUADRUPLES_MAX = 10
@@ -715,6 +716,24 @@ def __main__():
                                (i + 1) * len(db_rows) // 100])
     sys.stderr.write('\rInsert integers sextuples... 100 %\n')
     # sys.stderr.flush()
+
+    sys.stderr.write('Create natural numbers singletons...\n')
+    creation_query = '''CREATE TABLE singletons
+       (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)'''
+    natural_nb_tuples_db_creation_queries.append(creation_query)
+    natural_nb_tuples_db.execute(creation_query)
+    # Tables of 1, 2, 3... NNSINGLETONS_MAX
+    db_rows = [(i + 1, 0) for i in range(NNSINGLETONS_MAX)]
+    for i in range(100):
+        sys.stderr.write('\rInsert natural numbers singletons... {} %'
+                         .format(i))
+        natural_nb_tuples_db.executemany(
+            "INSERT "
+            "INTO singletons(nb1, drawDate) "
+            "VALUES(?, ?)",
+            db_rows[i * len(db_rows) // 100:
+                    (i + 1) * len(db_rows) // 100])
+    sys.stderr.write('\rInsert natural numbers singletons... 100 %\n')
 
     sys.stderr.write('Create natural numbers pairs...\n')
     creation_query = '''CREATE TABLE pairs
