@@ -930,8 +930,8 @@ def db_table(tag):
                  'multiplesof10']:
         return tag
     elif any(tag.startswith(t)
-             for t in ['nnpairs', 'nntriples', 'nnquadruples', 'nnquintuples',
-                       'nnsextuples']):
+             for t in ['nnsingletons', 'nnpairs', 'nntriples', 'nnquadruples',
+                       'nnquintuples', 'nnsextuples']):
         # This is in natural_nb_tuples database.
         # Table name is the same as tag after 'nn' prefix is removed
         return tag.split(':')[0][len('nn'):]
@@ -958,8 +958,8 @@ def classify_tag(tag):
     elif tag.startswith('int_quintuples'):
         return 'int_quintuples'
     elif any([tag.startswith(t)
-              for t in ['nnpairs', 'nntriples', 'nnquadruples', 'nnquintuples',
-                        'nnsextuples']]):
+              for t in ['nnsingletons', 'nnpairs', 'nntriples', 'nnquadruples',
+                        'nnquintuples', 'nnsextuples']]):
         return 'natural_nb_tuples'
     elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
                  'int_irreducible_frac', 'nothing',
@@ -1832,7 +1832,8 @@ class mc_source(object):
         if tag_classification == 'natural_nb_tuples':
             log = settings.dbg_logger.getChild('db')
             nb_of_elts = \
-                {'pairs': 2, 'triples': 3, 'quadruples': 4, 'quintuples': 5,
+                {'singletons': 1, 'pairs': 2, 'triples': 3, 'quadruples': 4,
+                 'quintuples': 5,
                  'sextuples': 6}[source_id.split(':')[0][len('nn'):]]
             spans = IntspansProduct(source_id.split(':')[1], nb_of_elts)
             if nb_of_elts == 2:
@@ -1849,7 +1850,8 @@ class mc_source(object):
                                                         reason=reason))
             random_result = sorted(spans.random_draw(**kwargs))
             log.debug('Random draw output = {}\n'.format(random_result))
-            db_source = {2: shared.nnpairs_source,
+            db_source = {1: shared.nnsingletons_source,
+                         2: shared.nnpairs_source,
                          3: shared.nntriples_source,
                          4: shared.nnquadruples_source,
                          5: shared.nnquintuples_source,
