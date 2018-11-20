@@ -479,6 +479,11 @@
         "04_yellow1",
         "multi_hole"
     ],
+    "04_yellow1_estimations": [
+        "mental_calculation",
+        "04_yellow1",
+        "estimations"
+    ],
     "04_yellow1_addi_subtr_hole": [
         "mental_calculation",
         "04_yellow1",

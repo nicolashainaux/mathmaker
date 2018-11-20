@@ -14,6 +14,14 @@ multi_hole: !!omap
                             -> table_25 (1)
                             -> table_11_tens_easy (1)
 
+estimations: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: estimations"
+  - exercise: !!omap
+    - questions: estimation_of number -> nnsingletons:70-1000 (3)
+                 estimation_of number -> nnsingletons:1000-10000 (4)
+                 estimation_of number -> nnsingletons:10000-100000 (3)
+
 addi_subtr_hole: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: additions and subtractions with a hole"
