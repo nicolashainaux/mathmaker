@@ -226,9 +226,13 @@ def auto_adjust_nb_sources(nb_sources: list, q_i: namedtuple):
             raise ValueError('There must be two sources for '
                              'order_of_operations '
                              'questions.')
-        if nb_sources[0].startswith('single') and 'pairs' in nb_sources[1]:
+        if (nb_sources[0].startswith('single')
+            and ('pairs' in nb_sources[1]
+                 or nb_sources[1].startswith('table_'))):
             single_nb_source, pairs_nb_source = nb_sources
-        elif nb_sources[1].startswith('single') and 'pairs' in nb_sources[0]:
+        elif (nb_sources[1].startswith('single')
+              and ('pairs' in nb_sources[0]
+                   or nb_sources[0].startswith('table_'))):
             pairs_nb_source, single_nb_source = nb_sources
         else:
             raise ValueError('One of the two sources for '
