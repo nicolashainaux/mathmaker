@@ -36,17 +36,12 @@ def ABC(): return Angle((Point('A', 1, 0),
                          Point('C', 0.5, 0.75)))
 
 
-@pytest.fixture()
-def cos_ABC(ABC): return Function(name='cos',
-                                  var=ABC,
-                                  fct=lambda x: math.cos(math.radians(x)),
-                                  inv_fct=lambda x: math.degrees(
-                                      math.acos(x)))
-
-
 @pytest.fixture
-def qe0():
-    return QuotientsEquality([[cos_ABC(ABC()), Item('BC')],
+def qe0(ABC):
+    cos_ABC = Function(name='cos', var=ABC,
+                       fct=lambda x: math.cos(math.radians(x)),
+                       inv_fct=lambda x: math.degrees(math.acos(x)))
+    return QuotientsEquality([[cos_ABC, Item('BC')],
                               [Item((1)), Item('BA')]],
                              subst_dict={Value('BC'): Value(10),
                                          Value('BA'): Value(15)})

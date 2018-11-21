@@ -30,21 +30,9 @@ from mathmaker.lib.core.calculus import Table
 from tests.tools import wrap_nb
 
 
-@pytest.fixture()
-def ABC(): return Angle((Point('A', 1, 0),
-                         Point('B', 0, 0),
-                         Point('C', 0.5, 0.75)))
-
-
-@pytest.fixture()
-def cos_x(): return Function(name='cos',
-                             fct=lambda x: math.cos(math.radians(x)))
-
-
-@pytest.fixture()
-def cos_ABC(ABC): return Function(name='cos',
-                                  var=ABC,
-                                  fct=lambda x: math.cos(math.radians(x)))
+@pytest.fixture
+def ABC():
+    return Angle((Point('A', 1, 0), Point('B', 0, 0), Point('C', 0.5, 0.75)))
 
 
 @pytest.fixture
@@ -55,14 +43,17 @@ def t0():
 
 @pytest.fixture
 def t1():
-    return Table([[cos_x(), Item(('BC'))],
+    cos_x = Function(name='cos', fct=lambda x: math.cos(math.radians(x)))
+    return Table([[cos_x, Item(('BC'))],
                   [Item((1)), Item(('BA'))]],
                  displ_as_qe=True)
 
 
 @pytest.fixture
-def t2():
-    return Table([[cos_ABC(ABC()), Item(('EG'))],
+def t2(ABC):
+    cos_ABC = Function(name='cos', var=ABC,
+                       fct=lambda x: math.cos(math.radians(x)))
+    return Table([[cos_ABC, Item(('EG'))],
                   [Item((1)), Item(('EF'))]],
                  displ_as_qe=True)
 

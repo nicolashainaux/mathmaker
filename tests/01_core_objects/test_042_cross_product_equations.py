@@ -30,27 +30,6 @@ from mathmaker.lib.core.base_geometry import Point, Angle
 from tests.tools import wrap_nb
 
 
-@pytest.fixture()
-def ABC(): return Angle((Point('A', 1, 0),
-                         Point('B', 0, 0),
-                         Point('C', 0.5, 0.75)))
-
-
-@pytest.fixture()
-def cos_ABC(ABC): return Function(name='cos',
-                                  var=ABC,
-                                  fct=lambda x: math.cos(math.radians(x)),
-                                  inv_fct=lambda x: math.degrees(math.acos(x)))
-
-
-@pytest.fixture()
-def cos_40():
-    return Function(name='cos',
-                    fct=lambda x: math.cos(math.radians(x)),
-                    num_val=Value(40),
-                    display_mode='numeric')
-
-
 @pytest.fixture
 def cpeq0():
     return CrossProductEquation((Item('AB'), Item(3),
@@ -59,13 +38,21 @@ def cpeq0():
 
 @pytest.fixture
 def cpeq2():
-    return CrossProductEquation((cos_40(), Item('AB'),
+    cos_40 = Function(name='cos',
+                      fct=lambda x: math.cos(math.radians(x)),
+                      num_val=Value(40),
+                      display_mode='numeric')
+    return CrossProductEquation((cos_40, Item('AB'),
                                  Item(1), Item(8)))
 
 
 @pytest.fixture
-def cpeq3(ABC):
-    return CrossProductEquation((cos_ABC(ABC), Item(3),
+def cpeq3():
+    ABC = Angle((Point('A', 1, 0), Point('B', 0, 0), Point('C', 0.5, 0.75)))
+    cos_ABC = Function(name='cos', var=ABC,
+                       fct=lambda x: math.cos(math.radians(x)),
+                       inv_fct=lambda x: math.degrees(math.acos(x)))
+    return CrossProductEquation((cos_ABC, Item(3),
                                  Item(1), Item(8)))
 
 
