@@ -51,6 +51,13 @@ estimations: !!omap
                  estimation_of number -> nnsingletons:1000-10000 (4)
                  estimation_of number -> nnsingletons:10000-100000 (3)
 
+additions: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: additions"
+  - exercise: !!omap
+    - questions: addi direct -> nnsingletons:11-99;;complements_to_20...90 (5)
+                 addi direct -> nnsingletons:11-99;;complements_to_100 (5)
+
 exam: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation:  final test for yellow belt, first stripe"
@@ -129,6 +136,8 @@ exam: !!omap
                  [1][estimation_of number -> nnsingletons:70-1000 (1)
                      estimation_of number -> nnsingletons:1000-10000 (1)
                      estimation_of number -> nnsingletons:10000-100000 (1)]
+                 [1][addi direct -> nnsingletons:11-99;;complements_to_20...90 (1)
+                     addi direct -> nnsingletons:11-99;;complements_to_100 (1)]
 
 W01a: !!omap
   - preset: "mental calculation slideshow"
