@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2018-12-07 17:50+0100\n"
+"PO-Revision-Date: 2018-12-07 18:08+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -2493,10 +2493,11 @@ msgstr "Prêt ?{sep}Feu !{sep}Partez !"
 msgid "Challenge, first part"
 msgstr "Première épreuve du Tournoi"
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:118
-#: data/frameworks/mental_calculation/04_yellow1.yaml:120
 #: data/frameworks/mental_calculation/04_yellow1.yaml:128
 #: data/frameworks/mental_calculation/04_yellow1.yaml:62
+#: data/frameworks/mental_calculation/04_yellow1.yaml:84
+#: data/frameworks/mental_calculation/04_yellow1.yaml:120
+#: data/frameworks/mental_calculation/04_yellow1.yaml:118
 msgid "Mental calculation:  final test for yellow belt, first stripe"
 msgstr "Calcul mental : ceinture jaune, premier trait"
 
@@ -2892,14 +2893,15 @@ msgstr "Calcul mental : mini-problèmes"
 msgid "Mental calculation: additions"
 msgstr "Calcul mental : additions"
 
+#: data/frameworks/mental_calculation/04_yellow1.yaml:62
+msgid "Mental calculation: areas, perimeters, angles"
+msgstr "Calcul mental : aires, périmètres, angles"
+
 #~ msgid "Mental calculation: additions and subtractions with a hole"
 #~ msgstr "Calcul mental : additions et soustractions à trou"
 
 #~ msgid "Mental calculation: mini proportionality problems"
 #~ msgstr "Calcul mental : mini-problèmes (proportionnalité)"
-
-#~ msgid "Mental calculation: areas and perimeters of rectangles"
-#~ msgstr "Calcul mental : aires et périmètres de rectangles"
 
 #~ msgid "Mental calculation: clever multiplications"
 #~ msgstr "Calcul mental : multiplications astucieuses"

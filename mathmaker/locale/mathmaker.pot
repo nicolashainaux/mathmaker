@@ -2163,10 +2163,11 @@ msgstr ""
 msgid "Challenge, first part"
 msgstr ""
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:118
-#: data/frameworks/mental_calculation/04_yellow1.yaml:120
 #: data/frameworks/mental_calculation/04_yellow1.yaml:128
 #: data/frameworks/mental_calculation/04_yellow1.yaml:62
+#: data/frameworks/mental_calculation/04_yellow1.yaml:84
+#: data/frameworks/mental_calculation/04_yellow1.yaml:120
+#: data/frameworks/mental_calculation/04_yellow1.yaml:118
 msgid "Mental calculation:  final test for yellow belt, first stripe"
 msgstr ""
 
@@ -2510,4 +2511,8 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/04_yellow1.yaml:55
 msgid "Mental calculation: additions"
+msgstr ""
+
+#: data/frameworks/mental_calculation/04_yellow1.yaml:62
+msgid "Mental calculation: areas, perimeters, angles"
 msgstr ""

@@ -57,6 +57,28 @@ additions: !!omap
     - questions: addi direct -> nnsingletons:11-99;;complements_to_20...90 (5)
                  addi direct -> nnsingletons:11-99;;complements_to_100 (5)
 
+areas_perimeters_angles: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: areas, perimeters, angles"
+  - exercise: !!omap
+    - questions: area righttriangle -> nnpairs:3-9×3-9, code=1_1 (2)
+                 [2][area rectangle, picture=true -> nnpairs:4-9×6-9 (1)
+                     area rectangle, picture=true -> nnpairs:2-9×2-9, nb_variant=decimal (1)
+                     area rectangle, picture=true -> table_11_tens_easy (1)
+                     area rectangle, picture=true -> nnpairs:3-6×15,25 (1)]
+                 [2][perimeter rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
+                     perimeter rectangle, picture=true -> table_25 (1)
+                     perimeter rectangle, picture=true -> nnpairs:3-9,11-19×3-9,11-19, nb_variant=decimal1 (1)]
+                 [2][perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=1 (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_nb=4, sides_particularity=equilateral (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (1)]
+                 [2][addi direct, context=angles -> nnpairs:11-69×90 (1)
+                     addi direct, context=angles -> nnpairs:11-69×11-69 (1)
+                     subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×90 (1)
+                     subtr direct, subvariant=only_positive, context=angles, code=1_1 -> nnpairs:11-69×11-69 (1)]
+
 exam: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation:  final test for yellow belt, first stripe"
@@ -109,12 +131,7 @@ exam: !!omap
                      addi direct, context=angles -> nnpairs:11-69×90 (1)
                      addi direct, context=angles -> nnpairs:11-69×11-69 (1)
                      subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×90 (1)
-                     subtr direct, subvariant=only_positive, context=angles, code=1_1 -> nnpairs:11-69×11-69 (1)
-                     addi direct, context=angles, code=2_1 -> nntriples:11-69×11-69×90 (1)
-                     addi direct, context=angles, code=2_1 -> nntriples:11-69×11-69×11-69 (1)
-                     addi direct, context=angles, code=1_1_1 -> nntriples:11-69×11-69×90 (1)
-                     addi direct, context=angles, code=1_1_1 -> nntriples:11-69×11-69×11-69 (1)
-                     addi direct, context=angles, code=3 -> nntriples:11-69×11-69×11-69 (1)]
+                     subtr direct, subvariant=only_positive, context=angles, code=1_1 -> nnpairs:11-69×11-69 (1)]
                  [1][divi euclidean -> intpairs_2to10 (1)
                      divi euclidean -> table_15 (1)
                      divi euclidean -> table_25 (1)]
@@ -286,7 +303,7 @@ W05b: !!omap
   - exercise: !!omap
     - questions: percent direct -> 75%of..., level=easy, context=simple_unit (1)
                  mini_pb time -> clocktime_data (1)
-                 units conversion -> unitspairs, level=1 (1)
+                 addi direct, context=angles -> nnpairs:11-69×11-69 (1)
                  perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
                  area rectangle, picture=true -> table_11_tens_easy (1)
 
@@ -302,7 +319,7 @@ W05c: !!omap
 W05d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: percent direct -> 25%of..., level=easy, context=simple_unit (1)
+    - questions: subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×90 (1)
                  multi direct, nb_variant=decimal2 -> intpairs_2to9 (1)
                  vocabulary multi -> nnpairs:3-6×25 (1)
                  perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (1)

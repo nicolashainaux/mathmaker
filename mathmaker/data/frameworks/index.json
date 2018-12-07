@@ -504,6 +504,11 @@
         "04_yellow1",
         "additions"
     ],
+    "04_yellow1_areas_perimeters_angles": [
+        "mental_calculation",
+        "04_yellow1",
+        "areas_perimeters_angles"
+    ],
     "04_yellow1_exam": [
         "mental_calculation",
         "04_yellow1",
