@@ -63,17 +63,6 @@ exam: !!omap
   - exercise: !!omap
     - layout:
       - min_row_height: 1
-    - mix0:
-      - questions: area rectangle, picture=true, pick=1
-      - nb: intpairs_2to9 (1)
-            intpairs_2to9, nb_variant=decimal (1)
-            table_11_tens_easy (1)
-            table_15 (1)
-    - mix1:
-      - questions: perimeter rectangle, picture=true, pick=1
-      - nb: intpairs_2to9, nb_variant=decimal (1)
-            table_25 (1)
-            intpairs_5to20, nb_variant=decimal1 (1)
     - questions: fraction_of a_linesegment -> simple_fractions (1)
                  [1][multi hole -> nnpairs:6-9×6-9 (1)
                      multi hole -> nnpairs:3-6×15 (1)
@@ -92,7 +81,10 @@ exam: !!omap
                      area rectangle, picture=true -> nnpairs:2-9×2-9, nb_variant=decimal (1)
                      area rectangle, picture=true -> table_11_tens_easy (1)
                      area rectangle, picture=true -> nnpairs:3-6×15,25 (1)
-                     area righttriangle -> nnpairs:3-9×3-9, code=1_1 (4)]
+                     area righttriangle -> nnpairs:3-9×3-9, code=1_1 (4)
+                     perimeter rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
+                     perimeter rectangle, picture=true -> table_25 (1)
+                     perimeter rectangle, picture=true -> nnpairs:3-9,11-19×3-9,11-19, nb_variant=decimal1 (1)]
                  numeric expansion -> mergedinttriples_3to9 (1)
                  fraction_of a_rectangle -> intpairs_4to9;;intpairs_6to9 (1)
                  order of_operations, subvariant=only_positive -> singleint_5to100;;intpairs_3to9, variant=8-23,100-107 (1)
