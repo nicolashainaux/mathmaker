@@ -589,6 +589,26 @@
         "04_yellow1",
         "W04d"
     ],
+    "04_yellow1_W05a": [
+        "mental_calculation",
+        "04_yellow1",
+        "W05a"
+    ],
+    "04_yellow1_W05b": [
+        "mental_calculation",
+        "04_yellow1",
+        "W05b"
+    ],
+    "04_yellow1_W05c": [
+        "mental_calculation",
+        "04_yellow1",
+        "W05c"
+    ],
+    "04_yellow1_W05d": [
+        "mental_calculation",
+        "04_yellow1",
+        "W05d"
+    ],
     "03_yellow_addi_subtr": [
         "mental_calculation",
         "03_yellow",
