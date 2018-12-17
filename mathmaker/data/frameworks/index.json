@@ -4,35 +4,40 @@
         "order_of_operations",
         "positive_numbers"
     ],
-    "05_yellow2_numeric_expansions": [
+    "05_yellow2_divisibility": [
         "mental_calculation",
         "05_yellow2",
-        "numeric_expansions"
+        "divisibility"
     ],
-    "05_yellow2_angles": [
+    "05_yellow2_addi_subtr_hole": [
         "mental_calculation",
         "05_yellow2",
-        "angles"
+        "addi_subtr_hole"
     ],
-    "05_yellow2_operator_precedence": [
+    "05_yellow2_addi_clever": [
         "mental_calculation",
         "05_yellow2",
-        "operator_precedence"
+        "addi_clever"
+    ],
+    "05_yellow2_multi_clever": [
+        "mental_calculation",
+        "05_yellow2",
+        "multi_clever"
+    ],
+    "05_yellow2_proportionality_problems": [
+        "mental_calculation",
+        "05_yellow2",
+        "proportionality_problems"
     ],
     "05_yellow2_percentages": [
         "mental_calculation",
         "05_yellow2",
         "percentages"
     ],
-    "05_yellow2_perimeter_of_a_polygon": [
+    "05_yellow2_perimeters_areas_volumes": [
         "mental_calculation",
         "05_yellow2",
-        "perimeter_of_a_polygon"
-    ],
-    "05_yellow2_divisibility": [
-        "mental_calculation",
-        "05_yellow2",
-        "divisibility"
+        "perimeters_areas_volumes"
     ],
     "05_yellow2_exam": [
         "mental_calculation",

@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_numeric_expansions():
+def test_perimeters_areas_volumes():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '05_yellow2',
-                                       'numeric_expansions')),
+                                       'perimeters_areas_volumes')),
                              pdf_output=True)
 
 
-def test_numeric_expansions_embedding_js():
+def test_perimeters_areas_volumes_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '05_yellow2',
-                                       'numeric_expansions',
+                                       'perimeters_areas_volumes',
                                        enable_js_form=True)),
                              pdf_output=True)

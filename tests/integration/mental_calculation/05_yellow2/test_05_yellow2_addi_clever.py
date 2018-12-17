@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_angles():
+def test_addi_clever():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '05_yellow2',
-                                       'angles')),
+                                       'addi_clever')),
                              pdf_output=True)
 
 
-def test_angles_embedding_js():
+def test_addi_clever_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '05_yellow2',
-                                       'angles',
+                                       'addi_clever',
                                        enable_js_form=True)),
                              pdf_output=True)

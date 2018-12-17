@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2017 Nicolas Hainaux <nh.techn@gmail.com>
+# Copyright 2006-2018 Nicolas Hainaux <nh.techn@gmail.com>
 
 # This file is part of Mathmaker.
 
@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_numeric_expansions():
+def test_addi_subtr_hole():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '05_yellow2',
-                                       'numeric_expansions')),
+                                       'addi_subtr_hole')),
                              pdf_output=True)
 
 
-def test_numeric_expansions_embedding_js():
+def test_addi_subtr_hole_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '05_yellow2',
-                                       'numeric_expansions',
+                                       'addi_subtr_hole',
                                        enable_js_form=True)),
                              pdf_output=True)

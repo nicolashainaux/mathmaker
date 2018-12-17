@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_operator_precedence():
+def test_proportionality_problems():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '05_yellow2',
-                                       'operator_precedence')),
+                                       'proportionality_problems')),
                              pdf_output=True)
 
 
-def test_operator_precedence_embedding_js():
+def test_proportionality_problems_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '05_yellow2',
-                                       'operator_precedence',
+                                       'proportionality_problems',
                                        enable_js_form=True)),
                              pdf_output=True)

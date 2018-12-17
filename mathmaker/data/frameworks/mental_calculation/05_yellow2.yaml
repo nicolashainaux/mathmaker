@@ -1,36 +1,52 @@
-numeric_expansions: !!omap
+divisibility: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: numeric expansion"
+  - title: "Mental calculation: multiples and divisors"
   - exercise: !!omap
-    - questions: numeric expansion -> mergedinttriples_3to9 (10)
-                 # numeric factorization -> decimal_and_10_100_1000_for_multi (10)
-                 # numeric factorization -> intpairs_2to9 (10)
-                 # numeric factorization -> intpairs_2to9, split_as=quarters (10)
-                 # numeric factorization -> intpairs_2to9, split_as=halves (10)
-                 # numeric factorization -> decimal_and_10_100_1000_for_multi, split_as=quarters (1)
+    - questions: divisibility vocabulary -> intpairs_3to9 (10)
 
-angles: !!omap
+addi_subtr_hole: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: angles sums and differences"
+  - title: "Mental calculation: additions and subtractions with a hole"
   - exercise: !!omap
-    - questions: addi direct, context=angles -> nnpairs:11-69×90 (2)
-                 addi direct, context=angles -> nnpairs:11-69×11-69 (1)
-                 subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×90 (1)
-                 subtr direct, subvariant=only_positive, context=angles, code=1_1 -> nnpairs:11-69×11-69 (1)
-                 addi direct, context=angles, code=2_1 -> nntriples:11-69×11-69×90 (1)
-                 addi direct, context=angles, code=2_1 -> nntriples:11-69×11-69×11-69 (1)
-                 addi direct, context=angles, code=1_1_1 -> nntriples:11-69×11-69×90 (1)
-                 addi direct, context=angles, code=1_1_1 -> nntriples:11-69×11-69×11-69 (1)
-                 addi direct, context=angles, code=3 -> nntriples:11-69×11-69×11-69 (1)
+    - questions: addi hole -> singleint_5to20;;singleint_5to20 (2)
+                 addi hole -> singleint_21to100;;singleint_21to100 (1)
+                 addi hole -> complements_to_20...90 (2)
+                 subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (2)
+                 subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (2)
+                 subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)
 
-operator_precedence: !!omap
+addi_clever: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: order of operations"
+  - title: "Mental calculation: clever additions"
   - exercise: !!omap
-    - questions: order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (3)
-                                                               -> singleint_5to100;;intpairs_3to9, variant=1-3 (2)
-                                                               -> singleint_3to9;;intpairs_3to9, variant=4-7 (3)
-                                                               -> singleint_3to12;;intpairs_3to9, variant=100-107 (2)
+    - questions: addi direct -> complements_to_20...90;;complements_to_20...90, patch=true (5)
+                 # "patch" is to use all pairs as complements
+
+multi_clever: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: clever multiplications"
+  - exercise: !!omap
+    - questions: multi clever -> singleint_2to99 (2)
+                 multi clever, variant=with_a_decimal -> intpairs_2to9 (2)
+                 multi clever -> table_11_tens_easy (1)
+                 multi clever -> table_15 (1)
+                 multi clever -> int_deci_clever_pairs (1)
+                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
+                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
+                 volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
+
+proportionality_problems: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: mini proportionality problems"
+  - exercise: !!omap
+    - questions: mini_pb proportionality -> mergedinttriples_3to9 (5)
+                 mini_pb proportionality -> mergedinttriples_15_3to6 (1)
+                 mini_pb proportionality -> mergedinttriples_25_3to6 (1)
+                 # mini_pb proportionality -> mergedinttriples_3to9, force_table=7, wid=38 (1)
+                 # mini_pb proportionality -> deciinttriplesforprop_3to9 (2)
+                 # mini_pb proportionality -> inttriplesforprop_3to10,15,25 (8)
+                 # To select exclusively from table of 15 or from table of 25,
+                 # use mergedinttriples_*_3to6
 
 percentages: !!omap
   - preset: "mental calculation"
@@ -42,21 +58,26 @@ percentages: !!omap
                  percent direct -> 10%of..., nb_variant=decimal1, context=simple_unit (2)
                  percent direct -> 50%of..., context=simple_unit (1)
 
-perimeter_of_a_polygon: !!omap
+perimeters_areas_volumes: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: perimeter of a polygon"
+  - title: "Mental calculation: perimeters, areas and volumes"
   - exercise: !!omap
-    - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=1 (2)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_nb=4, sides_particularity=equilateral (1)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (3)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (3)
-
-divisibility: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: multiples and divisors"
-  - exercise: !!omap
-    - questions: divisibility vocabulary -> intpairs_3to9 (10)
+    - questions: perimeter righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
+                 [1][perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=1 (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_nb=4, sides_particularity=equilateral (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (1)]
+                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
+                 area rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
+                 area rectangle, picture=true -> nnpairs:3-6×15,25 (1)
+                 area rectangle, picture=true -> table_11_tens_easy (1)
+                 [1][perimeter rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
+                     perimeter rectangle, picture=true -> table_25 (1)
+                     perimeter rectangle, picture=true -> nnpairs:3-9,11-19×3-9,11-19, nb_variant=decimal (1)]
+                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
+                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
+                 volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
 
 exam: !!omap
   - preset: "mental calculation"
