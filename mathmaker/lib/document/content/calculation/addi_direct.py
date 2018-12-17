@@ -37,10 +37,13 @@ class sub_object(component.structure):
 
     def __init__(self, build_data, **options):
         super().setup("minimal", **options)
-        import sys
-        sys.stderr.write('self.nb_source={}\n'.format(self.nb_source))
-        sys.stderr.write('build_data={}\n'.format(build_data))
         if self.nb_source.startswith('complement'):
+            # This will add a patch for the case of 2 pairs of complements
+            # (This is crap programming and should be rewritten: question
+            # modules should never have to modify the numbers they're given)
+            if len(build_data) == 4 and options.get('patch', None) == 'true':
+                maxi, mini = max(build_data[:2]), min(build_data[:2])
+                build_data = [mini, maxi - mini] + list(build_data[2:])
             # This will be OK for 2 complementary numbers among 2, 3, 4 etc.
             # numbers, the 2 complementary ones being the 2 last ones (in
             # given build_data).
