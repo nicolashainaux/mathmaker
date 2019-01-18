@@ -262,6 +262,19 @@
         "equal_sides",
         "drawDate"
     ],
+    "time_units_couples": [
+        "id",
+        "u1",
+        "u2",
+        "drawDate"
+    ],
+    "time_units_conversions": [
+        "id",
+        "category",
+        "level",
+        "direction",
+        "drawDate"
+    ],
     "ls_marks": [
         "id",
         "mark",

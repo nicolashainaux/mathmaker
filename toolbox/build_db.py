@@ -1077,6 +1077,35 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
+    sys.stderr.write('Insert time units couples...\n')
+    creation_query = '''CREATE TABLE time_units_couples
+                        (id INTEGER PRIMARY KEY, u1 TEXT, u2 TEXT,
+                         drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+
+    db_rows = [('h', 'min', 0), ('min', 's', 0)]
+    db.executemany("INSERT "
+                   "INTO time_units_couples(u1, u2, drawDate) "
+                   "VALUES(?, ?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert time units conversions...\n')
+    creation_query = '''CREATE TABLE time_units_conversions
+                        (id INTEGER PRIMARY KEY, category INTEGER,
+                         level INTEGER, direction TEXT,
+                         drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+
+    db_rows = [(1, 1, 'right', 0), (1, 1, 'left', 0),
+               (2, 2, 'right', 0), (2, 3, 'left', 0),
+               (3, 2, 'right', 0), (3, 3, 'left', 0)]
+    db.executemany("INSERT "
+                   "INTO time_units_conversions(category, level, direction, "
+                   "drawDate) VALUES(?, ?, ?, ?)",
+                   db_rows)
+
     sys.stderr.write('Insert unit conversions...\n')
     db_rows = [('km', 'hm', 'right', 'length', 1, 1, 0),   # simple units,
                ('hm', 'dam', 'right', 'length', 1, 1, 0),  # one column or
