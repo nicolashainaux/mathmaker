@@ -927,7 +927,8 @@ def db_table(tag):
                  'digits_places', 'fracdigits_places', 'simple_fractions',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
                  'int_quintuples', 'int_sextuples', 'anglessets', 'times',
-                 'multiplesof10']:
+                 'multiplesof10', 'time_units_couples',
+                 'time_units_conversions']:
         return tag
     elif any(tag.startswith(t)
              for t in ['nnsingletons', 'nnpairs', 'nntriples', 'nnquadruples',
@@ -967,7 +968,8 @@ def classify_tag(tag):
                  'decimal_and_10_100_1000_for_divi',
                  'decimal_and_one_digit_for_multi',
                  'decimal_and_one_digit_for_divi',
-                 'unitspairs', 'digits_places', 'fracdigits_places',
+                 'unitspairs', 'time_units_couples', 'time_units_conversions',
+                 'digits_places', 'fracdigits_places',
                  'decimals', 'decimalfractionssums', 'extdecimals',
                  'simple_fractions', 'dvipsnames_selection', 'polygons',
                  'int_triples', 'int_quadruples', 'int_quintuples',
@@ -1953,6 +1955,10 @@ class mc_source(object):
                 except RuntimeError:
                     kwargs.pop('category_neq', None)
                     return shared.unitspairs_source.next(**kwargs)
+        elif tag_classification == 'time_units_couples':
+            return shared.time_units_couples_source.next(**kwargs)
+        elif tag_classification == 'time_units_conversions':
+            return shared.time_units_conversions_source.next(**kwargs)
         elif tag_classification == 'decimals':
             kwargs.update(preprocess_decimals_query(qkw=qkw))
             return shared.decimals_source.next(**kwargs)

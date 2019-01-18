@@ -124,6 +124,8 @@ def init():
     global directions_source
     global times_source
     global multiplesof10_source
+    global time_units_couples_source
+    global time_units_conversions_source
 
     enable_js_form = False
 
@@ -205,6 +207,11 @@ def init():
                                                    ["id", "nb1", "nb2"])
     order_of_operations_variants_source = database.source(
         'order_of_operations_variants', ['id', 'nb1'])
+    time_units_couples_source = database.source('time_units_couples',
+                                                ['id', 'u1', 'u2'])
+    time_units_conversions_source = database.source('time_units_conversions',
+                                                    ['id', 'category',
+                                                     'level', 'direction'])
     unitspairs_source = database.source('units_conversions',
                                         ['id', 'unit1', 'unit2',
                                          'direction', 'category',
