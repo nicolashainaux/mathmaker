@@ -1,6 +1,7 @@
 ## DIRECTORIES
 
 #  top-level directories
+.venv/
 *.egg/
 *.egg-info/
 .cache/
