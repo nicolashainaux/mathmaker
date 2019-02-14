@@ -756,7 +756,7 @@ class source(object):
                 # This automatic detection in not enough, since int('1_1_1')
                 # does not raise an error.
                 if any([c not in '0123456789.' for c in str(kwargs[kw])]):
-                        simple_quote = "'"
+                    simple_quote = "'"
                 result += next(hook(kn)) + key + rel_sign + simple_quote \
                     + str(kwargs[kw]) + simple_quote + " "
                 kn += 1
