@@ -27,19 +27,12 @@ from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import post_process
 
-TIME_CONTEXT = {'en': {'h': ':', 'min': '', 's': '',
-                       'display_s': False, 'display_0h': True,
-                       'display_0min': True, 'min_if_0h': ' min'},
-                'fr': {'h': 'h', 'min': '', 's': '',
-                       'display_s': False, 'display_0h': True,
-                       'display_0min': True, 'min_if_0h': ' min'}}
+TIME_CONTEXT = {'en': {'show_0s': False},
+                'fr': {'sep': 'as_si_units', 'si_show_0s': False,
+                       'si_only_central': True}}
 
-DURATION_CONTEXT = {'en': {'h': ':', 'min': '', 's': '',
-                           'display_s': False, 'display_0h': False,
-                           'display_0min': True, 'min_if_0h': ' min'},
-                    'fr': {'h': 'h', 'min': '', 's': '',
-                           'display_s': False, 'display_0h': False,
-                           'display_0min': True, 'min_if_0h': ' min'}}
+DURATION_CONTEXT = {'sep': 'as_si_units', 'si_show_0h': False,
+                    'si_show_0min': False, 'si_show_0s': False}
 
 
 class sub_object(component.structure):
@@ -57,7 +50,7 @@ class sub_object(component.structure):
         start_time = ClockTime(build_data[3], context=TIME_CONTEXT[lang])
         arrival_time = ClockTime(build_data[4], context=TIME_CONTEXT[lang])
         duration_ctxt = TIME_CONTEXT[lang] if wording_type == 'duration' \
-            else DURATION_CONTEXT[lang]
+            else DURATION_CONTEXT
         duration_time = ClockTime(arrival_time - start_time,
                                   context=duration_ctxt)
         self.start_time = start_time.printed
@@ -67,8 +60,8 @@ class sub_object(component.structure):
                          'start': start_time,
                          'arrival': arrival_time}[wording_type]
         self.transduration = 24
-        self.time_unit = ('', TIME_CONTEXT[lang]['h'],
-                          '', TIME_CONTEXT[lang]['min'])
+        time_sep = {'en': ':', 'fr': 'h'}[lang]
+        self.time_unit = ('', time_sep, '', '')
         setup_wording_format_of(self)
 
     def q(self, **options):
