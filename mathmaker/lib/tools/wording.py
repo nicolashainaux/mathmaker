@@ -243,13 +243,12 @@ def cut_off_hint_from(sentence: str) -> tuple:
     >>> cut_off_hint_from("Two hints: |hint:unit| |hint:something_else|")
     ('Two hints: |hint:unit|', 'something_else')
     """
-    if sentence is '':
+    if sentence == '':
         return ('', '')
     last_word = sentence.split()[-1:][0]
     hint_block = ''
     if (is_wrapped(last_word, braces='||')
         and last_word[1:-1].startswith('hint:')):
-        # __
         hint_block = last_word
     if len(hint_block):
         new_s = ' '.join(w for w in sentence.split() if w != hint_block)
