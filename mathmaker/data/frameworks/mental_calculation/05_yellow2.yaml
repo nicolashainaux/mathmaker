@@ -4,6 +4,12 @@ divisibility: !!omap
   - exercise: !!omap
     - questions: divisibility vocabulary -> intpairs_3to9 (10)
 
+numbers_rounding: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: numbers rounding"
+  - exercise: !!omap
+    - questions: round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (10)
+
 time_units: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: time units conversions"

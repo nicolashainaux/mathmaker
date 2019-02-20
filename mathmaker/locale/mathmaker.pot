@@ -1820,18 +1820,19 @@ msgstr ""
 msgid "{how_many_digitplace} are there in {decimal_number}?"
 msgstr ""
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:29
-#: data/frameworks/mental_calculation/06_orange.yaml:59
-#: data/frameworks/mental_calculation/05_yellow2.yaml:65
-#: data/frameworks/mental_calculation/04_yellow1.yaml:78
 #: data/frameworks/mental_calculation/04_yellow1.yaml:86
-#: data/frameworks/mental_calculation/04_yellow1.yaml:74
-#: data/frameworks/mental_calculation/04_yellow1.yaml:3
 #: data/frameworks/mental_calculation/05_yellow2.yaml:37
-#: data/frameworks/mental_calculation/04_yellow1.yaml:11
+#: data/frameworks/mental_calculation/04_yellow1.yaml:74
+#: data/frameworks/mental_calculation/05_yellow2.yaml:29
 #: data/frameworks/mental_calculation/04_yellow1.yaml:19
-#: data/frameworks/mental_calculation/04_yellow1.yaml:18
 #: data/frameworks/mental_calculation/04_yellow1.yaml:29
+#: data/frameworks/mental_calculation/04_yellow1.yaml:18
+#: data/frameworks/mental_calculation/06_orange.yaml:59
+#: data/frameworks/mental_calculation/04_yellow1.yaml:78
+#: data/frameworks/mental_calculation/04_yellow1.yaml:3
+#: data/frameworks/mental_calculation/04_yellow1.yaml:11
+#: data/frameworks/mental_calculation/05_yellow2.yaml:65
+#: data/frameworks/mental_calculation/05_yellow2.yaml:75
 #: data/frameworks/mental_calculation/04_yellow1.yaml:17
 msgid "Mental calculation: simple percentages calculations"
 msgstr ""
@@ -2152,16 +2153,17 @@ msgstr ""
 msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr ""
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:49
-#: data/frameworks/mental_calculation/04_yellow1.yaml:183
-#: data/frameworks/mental_calculation/04_yellow1.yaml:181
-#: data/frameworks/mental_calculation/05_yellow2.yaml:55
-#: data/frameworks/mental_calculation/06_orange.yaml:127
+#: data/frameworks/mental_calculation/05_yellow2.yaml:174
 #: data/frameworks/mental_calculation/03_yellow.yaml:159
+#: data/frameworks/mental_calculation/05_yellow2.yaml:55
+#: data/frameworks/mental_calculation/04_yellow1.yaml:183
 #: data/frameworks/mental_calculation/06_orange.yaml:47
-#: data/frameworks/mental_calculation/05_yellow2.yaml:164
-#: data/frameworks/mental_calculation/04_yellow1.yaml:191
+#: data/frameworks/mental_calculation/04_yellow1.yaml:181
 #: data/frameworks/mental_calculation/05_yellow2.yaml:131
+#: data/frameworks/mental_calculation/04_yellow1.yaml:191
+#: data/frameworks/mental_calculation/05_yellow2.yaml:164
+#: data/frameworks/mental_calculation/06_orange.yaml:127
+#: data/frameworks/mental_calculation/05_yellow2.yaml:49
 msgid "Challenge, first part"
 msgstr ""
 
@@ -2334,8 +2336,9 @@ msgstr ""
 msgid "(Lengths in {})"
 msgstr ""
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:96
 #: data/frameworks/mental_calculation/05_yellow2.yaml:63
+#: data/frameworks/mental_calculation/05_yellow2.yaml:106
+#: data/frameworks/mental_calculation/05_yellow2.yaml:96
 msgid "Mental calculation:  final test for yellow belt, second stripe"
 msgstr ""
 
@@ -2518,29 +2521,64 @@ msgid "Mental calculation: areas, perimeters, angles"
 msgstr ""
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:9
+#: data/frameworks/mental_calculation/05_yellow2.yaml:15
 msgid "Mental calculation: time units conversions"
 msgstr ""
 
+#: data/frameworks/mental_calculation/05_yellow2.yaml:31
 #: data/frameworks/mental_calculation/05_yellow2.yaml:21
 msgid "Mental calculation: additions and subtractions with a hole"
 msgstr ""
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:32
+#: data/frameworks/mental_calculation/05_yellow2.yaml:42
 msgid "Mental calculation: clever additions"
 msgstr ""
 
+#: data/frameworks/mental_calculation/05_yellow2.yaml:49
 #: data/frameworks/mental_calculation/05_yellow2.yaml:39
 msgid "Mental calculation: clever multiplications"
 msgstr ""
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:52
+#: data/frameworks/mental_calculation/05_yellow2.yaml:62
 msgid "Mental calculation: mini proportionality problems"
 msgstr ""
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:75
+#: data/frameworks/mental_calculation/05_yellow2.yaml:85
 msgid "Mental calculation: perimeters, areas and volumes"
 msgstr ""
 
-#: lib/document/content/calculation/time_units_conversion.py:157
+#: lib/document/content/calculation/time_units_conversion.py:141
 msgid "Convert: {} |hint:{}|"
+msgstr ""
+
+#: lib/document/content/calculation/round_number.py:35
+#, python-brace-format
+msgid "Round {nb1} to the nearest ten."
+msgstr ""
+
+#: lib/document/content/calculation/round_number.py:36
+#, python-brace-format
+msgid "Round {nb1} to the nearest unit."
+msgstr ""
+
+#: lib/document/content/calculation/round_number.py:37
+#, python-brace-format
+msgid "Round {nb1} to the nearest tenth."
+msgstr ""
+
+#: lib/document/content/calculation/round_number.py:38
+#, python-brace-format
+msgid "Round {nb1} to the nearest hundredth."
+msgstr ""
+
+#: lib/document/content/calculation/round_number.py:39
+#, python-brace-format
+msgid "Round {nb1} to the nearest thousandth."
+msgstr ""
+
+#: data/frameworks/mental_calculation/05_yellow2.yaml:9
+msgid "Mental calculation: numbers rounding"
 msgstr ""
