@@ -134,6 +134,26 @@
         "05_yellow2",
         "W04d"
     ],
+    "05_yellow2_W05a": [
+        "mental_calculation",
+        "05_yellow2",
+        "W05a"
+    ],
+    "05_yellow2_W05b": [
+        "mental_calculation",
+        "05_yellow2",
+        "W05b"
+    ],
+    "05_yellow2_W05c": [
+        "mental_calculation",
+        "05_yellow2",
+        "W05c"
+    ],
+    "05_yellow2_W05d": [
+        "mental_calculation",
+        "05_yellow2",
+        "W05d"
+    ],
     "06_orange_divisibility_rules": [
         "mental_calculation",
         "06_orange",
