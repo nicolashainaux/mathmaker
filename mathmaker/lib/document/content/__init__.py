@@ -28,6 +28,7 @@ from .calculation import addi_direct, subtr_direct, digitplace_direct
 from .calculation import digitplace_reversed
 from .calculation import digitplace_numberof
 from .calculation import estimation_of_number
+from .calculation import round_number
 from .calculation import vocabulary_simple_part_of_a_number
 from .calculation import vocabulary_simple_multiple_of_a_number
 from .calculation import vocabulary_multi, vocabulary_divi
@@ -62,7 +63,8 @@ __all__ = ['expand_simple', 'expand_double',
            'multi_clever',
            'addi_direct', 'subtr_direct', 'digitplace_direct',
            'digitplace_reversed', 'estimation_of_number',
-           'digitplace_numberof', 'vocabulary_simple_part_of_a_number',
+           'digitplace_numberof', 'round_number',
+           'vocabulary_simple_part_of_a_number',
            'vocabulary_simple_multiple_of_a_number', 'vocabulary_multi',
            'vocabulary_divi', 'vocabulary_addi', 'vocabulary_subtr',
            'fraction_of_a_rectangle', 'fraction_of_a_linesegment',
