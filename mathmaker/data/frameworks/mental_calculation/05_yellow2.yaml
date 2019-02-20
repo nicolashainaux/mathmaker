@@ -37,25 +37,20 @@ addi_subtr_hole: !!omap
                  subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (2)
                  subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)
 
-addi_clever: !!omap
+clever_calculations: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: clever additions"
+  - title: "Mental calculation: clever additions and multiplications"
   - exercise: !!omap
-    - questions: addi direct -> complements_to_20...90;;complements_to_20...90, patch=true (5)
-                 # "patch" is to use all pairs as complements
-
-multi_clever: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: clever multiplications"
-  - exercise: !!omap
-    - questions: multi clever -> singleint_2to99 (2)
-                 multi clever, variant=with_a_decimal -> intpairs_2to9 (2)
+    - questions: multi clever -> singleint_2to99 (1)
+                 multi clever, variant=with_a_decimal -> intpairs_2to9 (1)
                  multi clever -> table_11_tens_easy (1)
                  multi clever -> table_15 (1)
                  multi clever -> int_deci_clever_pairs (1)
                  volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
                  volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
                  volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
+                 addi direct -> complements_to_20...90;;complements_to_20...90, patch=true (2)
+                 # "patch" is to use all pairs as complements
 
 proportionality_problems: !!omap
   - preset: "mental calculation"

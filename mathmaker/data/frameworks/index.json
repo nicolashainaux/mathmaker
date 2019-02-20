@@ -24,15 +24,10 @@
         "05_yellow2",
         "addi_subtr_hole"
     ],
-    "05_yellow2_addi_clever": [
+    "05_yellow2_clever_calculations": [
         "mental_calculation",
         "05_yellow2",
-        "addi_clever"
-    ],
-    "05_yellow2_multi_clever": [
-        "mental_calculation",
-        "05_yellow2",
-        "multi_clever"
+        "clever_calculations"
     ],
     "05_yellow2_proportionality_problems": [
         "mental_calculation",
