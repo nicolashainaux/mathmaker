@@ -883,9 +883,9 @@ class sub_object(component.structure):
             except ValueError:
                 rnd = random.choice([i for i in range(-4, 5) if i != 0])
                 choice = random.choice([1, 2, 3])
-                if choice is 1:
+                if choice == 1:
                     b += rnd
-                elif choice is 2:
+                elif choice == 2:
                     c += rnd
                 else:
                     d += rnd
@@ -962,7 +962,7 @@ class sub_object(component.structure):
                 b, c, d = remove_fracdigits_from(b, to=[c, d])
         if (self.variant == 135 and self.subvariant == 'only_positive'
             and c * d - b <= 0):
-                self.variant = 134
+            self.variant = 134
         if self.variant == 134:
             b = b + c * d
         elif self.variant == 135:
@@ -1387,10 +1387,9 @@ class sub_object(component.structure):
                                       c)),
                             nds * d])
         elif self.variant in [181, 183, 185, 187]:
-                self.obj = Sum([d,
-                                Division((d_signs[self.variant],
-                                          Sum([a, nbs * b]),
-                                          c))])
+            self.obj = Sum([d, Division((d_signs[self.variant],
+                                         Sum([a, nbs * b]),
+                                         c))])
         watch_rules = 'no negative; decimals distribution; c isnt 1'
         if self.variant in [174, 175, 178, 179, 181, 183, 185, 187]:
             watch_rules += '; c isnt deci'
