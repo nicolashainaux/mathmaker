@@ -56,9 +56,6 @@ def check_options_consistency(category, level, direction):
 class sub_object(component.structure):
 
     def __init__(self, build_data, **options):
-        import sys
-        sys.stderr.write('\nbuild_data={} options={}\n'
-                         .format(build_data, options))
         super().setup('minimal', **options)
         n1, n2 = Number(build_data[0]), Number(build_data[1])
         # super().setup('numbers', shuffle_nbs=False, nb=build_data)
@@ -78,9 +75,6 @@ class sub_object(component.structure):
         self.time_unit1, self.time_unit2 = \
             shared.time_units_couples_source.next()
         hint_unit = ''
-        import sys
-        sys.stderr.write('self.time_unit1={}\n'.format(self.time_unit1))
-        sys.stderr.write('self.time_unit2={}\n'.format(self.time_unit2))
         # self.nb4 is the amount of the lowest unit (minutes or seconds)
         # for instance 375 minutes
         self.nb4 = n1 * n2
@@ -144,7 +138,6 @@ class sub_object(component.structure):
                 self.js_answer = u1_u2_js_ans
                 hint_unit = 'time_unit'
 
-        sys.stderr.write('hint_unit={}\n'.format(hint_unit))
         self.wording = _('Convert: {} |hint:{}|').format(wording_part,
                                                          hint_unit)
         setup_wording_format_of(self)
