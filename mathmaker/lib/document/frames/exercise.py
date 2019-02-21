@@ -967,5 +967,7 @@ class Exercise(object):
                                              '+ " / {q_number}"')
                                 .format(q_number=self.q_nb)
                                 )
+                if bn <= batches_nb - 2:
+                    result += '\n' + r'\newpage' + '\n'
 
             return result
