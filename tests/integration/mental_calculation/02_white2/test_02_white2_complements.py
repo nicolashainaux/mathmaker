@@ -20,6 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import time
 
 from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
@@ -27,6 +28,7 @@ from mathmaker.lib.document.frames import Sheet
 
 def test_complements():
     """Check this sheet is generated without any error."""
+    time.sleep(10)
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '02_white2',
                                        'complements')),
