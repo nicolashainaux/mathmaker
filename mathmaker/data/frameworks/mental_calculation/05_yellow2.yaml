@@ -282,7 +282,7 @@ W02b: !!omap
   - exercise: !!omap
     - questions: round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (2)
                  mini_pb proportionality -> mergedinttriples_25_3to6 (1)
-                 percent direct -> 75%of... (1)
+                 percent direct -> 75%of..., context=simple_unit (1)
                  divi euclidean -> intpairs_2to10 (1)
 
 W02c: !!omap
