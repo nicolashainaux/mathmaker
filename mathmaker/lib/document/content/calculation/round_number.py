@@ -25,8 +25,6 @@ import random
 from mathmakerlib.calculus import Number
 
 from mathmaker.lib.document.content import component
-from mathmaker.lib.tools.wording import post_process
-from mathmaker.lib.tools.wording import setup_wording_format_of
 
 
 class sub_object(component.structure):
@@ -49,10 +47,10 @@ class sub_object(component.structure):
             self.nb1 += Number(random.randint(1, 9) * 10)
 
         self.wording = WORDINGS[self.place]
-        setup_wording_format_of(self)
+        self.wording = self.wording.format(nb1=self.nb1.printed)
 
     def q(self, **options):
-        return post_process(self.wording.format(**self.wording_format))
+        return self.wording
 
     def a(self, **options):
         return self.nb1.rounded(self.place).printed
