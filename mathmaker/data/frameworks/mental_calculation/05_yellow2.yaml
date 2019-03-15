@@ -101,18 +101,7 @@ exam: !!omap
   - title: "Mental calculation:  final test for yellow belt, second stripe"
   - exercise: !!omap
     - layout:
-      - min_row_height: 0.6
-    - mix0:
-      - questions: area rectangle, picture=true, pick=1,
-                   multi direct, pick=1
-      - nb: intpairs_2to9, nb_variant=decimal (1)
-            table_11_tens_easy (1)
-            table_15 (1)
-    - mix1:
-      - questions: perimeter rectangle, picture=true, pick=1
-      - nb: intpairs_2to9, nb_variant=decimal (1)
-            table_25 (1)
-            intpairs_5to20, nb_variant=decimal1 (1)
+      - min_row_height: 0.8
     - questions: numeric expansion -> mergedinttriples_3to9 (1)
                  [1][multi hole -> nnpairs:6-9×6-9 (1)
                      multi hole -> nnpairs:3-6×15 (1)
