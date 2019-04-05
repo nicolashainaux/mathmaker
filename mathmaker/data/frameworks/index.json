@@ -159,25 +159,10 @@
         "06_orange",
         "divisibility_rules"
     ],
-    "06_orange_right_triangles": [
-        "mental_calculation",
-        "06_orange",
-        "right_triangles"
-    ],
     "06_orange_fractions_simplifications": [
         "mental_calculation",
         "06_orange",
         "fractions_simplifications"
-    ],
-    "06_orange_right_cuboids": [
-        "mental_calculation",
-        "06_orange",
-        "right_cuboids"
-    ],
-    "06_orange_time_problems": [
-        "mental_calculation",
-        "06_orange",
-        "time_problems"
     ],
     "06_orange_units_conversions": [
         "mental_calculation",
@@ -188,6 +173,11 @@
         "mental_calculation",
         "06_orange",
         "percentages"
+    ],
+    "06_orange_compendium": [
+        "mental_calculation",
+        "06_orange",
+        "compendium"
     ],
     "06_orange_exam": [
         "mental_calculation",

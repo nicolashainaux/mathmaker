@@ -13,34 +13,12 @@ divisibility_rules: !!omap
                  divisibility rule, variant=true, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
                  divisibility rule, variant=false, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
 
-right_triangles: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: right triangles"
-  - exercise: !!omap
-    - questions: perimeter righttriangle -> nnpairs:3-9×3-9, code=1_1 (5)
-                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (5)
-
 fractions_simplifications: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: fractions simplifications"
   - exercise: !!omap
     - questions: fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (10)
                  # fraction simplification -> mergedinttriples_3to9, code=1_1_1 (10)
-
-right_cuboids: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: right cuboids volumes"
-  - exercise: !!omap
-    - questions: volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (2)
-                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (2)
-                 volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (2)
-                 volume rightcuboid -> nntriples:2-3×2-3×2-9 (4)
-
-time_problems: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: time problems"
-  - exercise: !!omap
-    - questions: mini_pb time -> clocktime_data (10)
 
 units_conversions: !!omap
   - preset: "mental calculation"
@@ -64,6 +42,38 @@ percentages: !!omap
                  percent direct -> 10%of..., nb_variant=decimal1, context=simple_unit (1)
                  percent direct -> 25%of..., context=simple_unit (1)
                  percent direct -> 75%of..., context=simple_unit (1)
+
+compendium: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: compendium"
+  - exercise: !!omap
+    - questions: volume rightcuboid -> nntriples:2-3×2-3×2-9 (1)
+                 addi direct -> int_quadruples_4to20, nb_variant=±halforquarter (2)
+                 [3][mini_pb proportionality -> mergedinttriples_15_3to6 (2)
+                     mini_pb proportionality -> mergedinttriples_25_3to6 (2)]
+                 addi hole -> singleint_11to100;;singleint_11to100 (1)
+                 subtr hole, subvariant=only_positive -> singleint_11to100;;singleint_11to100 (1)
+                 [2][addi direct, context=angles, code=2_1 -> nntriples:11-69×11-69×90 (1)
+                     addi direct, context=angles, code=2_1 -> nntriples:11-69×11-69×11-69 (1)
+                     addi direct, context=angles, code=1_1_1 -> nntriples:11-69×11-69×90 (1)
+                     addi direct, context=angles, code=1_1_1 -> nntriples:11-69×11-69×11-69 (1)
+                     addi direct, context=angles, code=3 -> nntriples:11-69×11-69×11-69 (1)]
+
+# addi_subtr_hole: !!omap
+#   - preset: "mental calculation"
+#   - title: "Mental calculation: additions and subtractions with a hole"
+#   - exercise: !!omap
+#     - questions: addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±half (1)
+#                  addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±quarter (1)
+#                  addi hole -> singleint_5to20;;singleint_5to20, nb_variant=±halforquarter (1)
+#                  addi hole -> singleint_70to200;;singleint_70to200, nb_variant=decimal2 (1)
+#                  subtr hole, subvariant=only_positive -> singleint_70to200;;singleint_70to200, nb_variant=decimal2 (1)
+#                  subtr hole, subvariant=only_positive, hidden=1 -> complements_to_1, nb_variant=decimal1 (1)
+#                  subtr hole, subvariant=only_positive, hidden=2 -> complements_to_1, nb_variant=decimal1 (1)
+#                  subtr hole, subvariant=only_positive, hidden=1 -> complements_to_10, nb_variant=decimal1 (1)
+#                  subtr hole, subvariant=only_positive, hidden=2 -> complements_to_10, nb_variant=decimal1 (1)
+#                  addi hole -> complements_to_10, nb_variant=decimal2 (1)
+
 
 exam: !!omap
   - preset: "mental calculation"

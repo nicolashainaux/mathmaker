@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_time_problems():
+def test_compendium():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '06_orange',
-                                       'time_problems')),
+                                       'compendium')),
                              pdf_output=True)
 
 
-def test_time_problems_embedding_js():
+def test_compendium_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '06_orange',
-                                       'time_problems',
+                                       'compendium',
                                        enable_js_form=True)),
                              pdf_output=True)
