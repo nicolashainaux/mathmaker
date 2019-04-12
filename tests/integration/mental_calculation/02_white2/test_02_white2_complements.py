@@ -28,7 +28,7 @@ from mathmaker.lib.document.frames import Sheet
 
 def test_complements():
     """Check this sheet is generated without any error."""
-    time.sleep(60)
+    time.sleep(180)
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '02_white2',
                                        'complements')),
