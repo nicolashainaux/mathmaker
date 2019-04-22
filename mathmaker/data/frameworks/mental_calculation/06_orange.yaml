@@ -48,7 +48,7 @@ compendium: !!omap
   - title: "Mental calculation: compendium"
   - exercise: !!omap
     - questions: volume rightcuboid -> nntriples:2-3×2-3×2-9 (1)
-                 addi direct -> int_quadruples_4to20, nb_variant=±halforquarter (1)
+                 addi direct -> nnquadruples:4-20, nb_variant=±halforquarter (1)
                  [1][mini_pb proportionality -> mergedinttriples_15_3to6 (1)
                      mini_pb proportionality -> mergedinttriples_25_3to6 (1)]
                  mini_pb proportionality -> deciinttriplesforprop_3to9 (1)
@@ -159,7 +159,7 @@ exam: !!omap
                      addi direct, context=angles, code=1_1_1 -> nntriples:11-69×11-69×90 (1)
                      addi direct, context=angles, code=1_1_1 -> nntriples:11-69×11-69×11-69 (1)
                      addi direct, context=angles, code=3 -> nntriples:11-69×11-69×11-69 (1)
-                     addi direct -> int_quadruples_4to20, nb_variant=±halforquarter (5)
+                     addi direct -> nnquadruples:4-20, nb_variant=±halforquarter (5)
                      perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (5)]
 
 challenge: !!omap
@@ -234,7 +234,7 @@ W01d: !!omap
                  divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
                  multi clever -> table_15 (1)
                  decimal numerals, direction=to_decimal -> decimals (1)
-                 addi direct -> int_quadruples_4to20, nb_variant=±halforquarter (1)
+                 addi direct -> nnquadruples:4-20, nb_variant=±halforquarter (1)
 
 W02a: !!omap
   - preset: "mental calculation slideshow"
@@ -340,7 +340,7 @@ W04d: !!omap
     - questions: percent direct -> 20|30|40|60|70|80|90%of..., context=simple_unit (1)
                  units conversion -> unitspairs, category=volume2capacity, level=3 (1)
                  fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
-                 addi direct -> int_quadruples_4to20, nb_variant=±halforquarter (1)
+                 addi direct -> nnquadruples:4-20, nb_variant=±halforquarter (1)
                  divisibility rule, variant=false, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
 
 W05a: !!omap
@@ -376,5 +376,5 @@ W05d: !!omap
     - questions: percent direct -> 20|30|40|60|70|80|90%of..., context=simple_unit (1)
                  units conversion -> unitspairs, category=volume2capacity, level=3 (1)
                  fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
-                 addi direct -> int_quadruples_4to20, nb_variant=±halforquarter (1)
+                 addi direct -> nnquadruples:4-20, nb_variant=±halforquarter (1)
                  divisibility rule, variant=false, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
