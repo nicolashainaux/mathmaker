@@ -84,7 +84,7 @@ exam: !!omap
   - title: "Mental calculation:  final test for orange belt"
   - exercise: !!omap
     - layout:
-      - min_row_height: 0.6
+      - min_row_height: 0.8
     - questions: multi hole -> int_irreducible_frac (1)
                  [1][vocabulary simple_parts_of_a_number -> auto_multiples (1)
                      vocabulary simple_multiples_of_a_number -> auto_multiples (1)
