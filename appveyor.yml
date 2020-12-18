@@ -13,24 +13,22 @@ max_jobs: 1
 
 environment:
   PYTHONWARNINGS: ignore
-  CODECOV_TOKEN: "3afbcc45-e086-40e5-af77-375c8c7e9694"
 
 install:
   # We need wheel installed to build wheels
   - sh: "sudo apt -qq update"
   - sh: "sudo apt -y install libxml2-utils eukleides gettext python3-pip texlive-latex-base texlive-luatex texlive-latex-recommended texlive-xetex texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-science texlive-pictures texlive-generic-recommended texlive-fonts-recommended texlive-fonts-extra locales"
-  - sh: "sudo -H pip3 install wheel pytest codecov pytest-cov"
+  - sh: "sudo -H pip3 install wheel pytest coverage coveralls"
   - sh: "sudo locale-gen en_US.UTF-8 && sudo locale-gen fr_FR.UTF-8"
   - sh: "sudo python3 setup.py install"
 
 build: off
 
 test_script:
-  - sh: "pytest --cov=mathmaker tests/"
+  - sh: "coverage run --source=mathmaker -m pytest -vv"
 
 # after_test:
 #   # This step builds your wheels.
-#   - sh: "codecov"
 
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory
@@ -40,4 +38,4 @@ on_success:
 #  You can use this step to upload your artifacts to a public website.
 #  See Appveyor's documentation for more details. Or you can simply
 #  access your wheels from the Appveyor "artifacts" tab for your build.
-  - sh: "codecov"
+  - sh: "coveralls"
