@@ -27,7 +27,7 @@ from string import ascii_lowercase as alphabet
 from string import ascii_uppercase as ALPHABET
 
 import mathmakerlib.config as mmlib_cfg
-from mathmakerlib.calculus import Number, Unit, Fraction, is_integer
+from mathmakerlib.calculus import Number, Unit, Fraction, is_integer, ClockTime
 from mathmakerlib.calculus.unit import COMMON_LENGTH_UNITS
 
 from mathmaker.lib.core.base_calculus import Division
@@ -153,7 +153,7 @@ class structure(object):
         elif kwargs.get('sort_nbs', False):
             nb_list = sorted(nb_list)
         for i in range(len(nb_list)):
-            if isinstance(nb_list[i], Fraction):
+            if isinstance(nb_list[i], (Fraction, ClockTime)):
                 setattr(self, 'nb' + str(i + 1), nb_list[i])
             else:
                 setattr(self, 'nb' + str(i + 1), Number(str(nb_list[i])))

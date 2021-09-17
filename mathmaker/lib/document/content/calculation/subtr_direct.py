@@ -25,7 +25,9 @@ import random
 
 from mathmakerlib import required
 from mathmakerlib.calculus import Number
+from mathmakerlib.calculus import ClockTime
 
+from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.core.base_calculus import Sum
@@ -34,20 +36,25 @@ from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import post_process
 from mathmaker.lib.tools.distcode import nndist
 
+TIME_CONTEXT = {'en': {'show_0s': False},
+                'fr': {'sep': 'as_si_units', 'si_show_0s': False,
+                       'si_only_central': True}}
+
 
 class sub_object(component.structure):
 
     def __init__(self, build_data, **options):
+        lang = settings.language[:2]
         super().setup("minimal", **options)
+        if self.nb_source == 'clocktime_data':
+            build_data = [ClockTime(b, context=TIME_CONTEXT[lang])
+                          for b in list(reversed(build_data[3:]))]
+            options['shuffle_nbs'] = False
         super().setup("numbers", nb=build_data, **options)
         super().setup("nb_variants", nb=build_data, **options)
-        self.transduration = 8
-        if (self.nb1 > 20 and self.nb2 > 20
-            and abs(self.nb1 - self.nb2) > 10
-            and abs(self.nb1 - self.nb2) % 10 != 0):
-            self.transduration = 12
-        elif abs(self.nb1 - self.nb2) % 1 != 0:
-            self.transduration = 10
+        self.transduration = 18
+        if self.nb_source == 'clocktime_data':
+            self.transduration = 30
 
         if self.subvariant == 'only_positive':
             self.nb1, self.nb2 = max(self.nb1, self.nb2), min(self.nb1,
@@ -59,9 +66,15 @@ class sub_object(component.structure):
             and random.choice([True, False])):
             self.nb2 = self.nb1 - self.nb2
 
-        the_diff = Sum([self.nb1, -self.nb2])
-        self.diff_str = the_diff.printed
-        self.result = the_diff.evaluate()
+        if self.nb_source == 'clocktime_data':
+            self.diff_str = ' - '.join([_.printed.replace('~', '', 1)
+                                        for _ in self.nb_list])
+            self.result = ClockTime(self.nb1 - self.nb2,
+                                    context=TIME_CONTEXT[lang])
+        else:
+            the_diff = Sum([self.nb1, -self.nb2])
+            self.diff_str = the_diff.printed
+            self.result = the_diff.evaluate()
 
         if self.context == 'mini_problem':
             self.transduration = 25
@@ -144,11 +157,20 @@ class sub_object(component.structure):
         # This is actually meant for self.preset == 'mental calculation'
         v = None
         if hasattr(self, 'hint'):
-            v = Value(self.result, unit=self.hint)\
-                .into_str(display_SI_unit=True)
+            if self.nb_source == 'clocktime_data':
+                v = self.result.printed.replace('~', '', 1)
+            else:
+                v = Value(self.result, unit=self.hint)\
+                    .into_str(display_SI_unit=True)
         else:
-            v = Value(self.result).into_str()
+            if self.nb_source == 'clocktime_data':
+                v = self.result.printed.replace('~', '', 1)
+            else:
+                v = Value(self.result).into_str()
         return v
 
     def js_a(self, **kwargs):
-        return [Value(self.result).jsprinted]
+        if self.nb_source == 'clocktime_data':
+            return [[str(self.result.hour), str(self.result.minute)]]
+        else:
+            return [Value(self.result).jsprinted]

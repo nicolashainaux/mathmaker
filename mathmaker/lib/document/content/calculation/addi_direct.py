@@ -25,17 +25,24 @@ import random
 
 from mathmakerlib import required
 from mathmakerlib.calculus import Number
+from mathmakerlib.calculus import ClockTime
 
+from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import post_process
 from mathmaker.lib.tools.distcode import nndist
 
+TIME_CONTEXT = {'en': {'show_0s': False},
+                'fr': {'sep': 'as_si_units', 'si_show_0s': False,
+                       'si_only_central': True}}
+
 
 class sub_object(component.structure):
 
     def __init__(self, build_data, **options):
+        lang = settings.language[:2]
         super().setup("minimal", **options)
         if self.nb_source.startswith('complement'):
             # This will add a patch for the case of 2 pairs of complements
@@ -53,21 +60,32 @@ class sub_object(component.structure):
             while build_data == previous:
                 previous = build_data.copy()
                 random.shuffle(build_data)
+        if self.nb_source == 'clocktime_data':
+            t0 = ClockTime(build_data[3], context=TIME_CONTEXT[lang])
+            t1 = ClockTime(build_data[4] - build_data[3],
+                           context=TIME_CONTEXT[lang])
+            build_data = [t0, t1]
         super().setup("numbers", nb=build_data,
                       shuffle_nbs=(self.nb_source != 'decimalfractionssums'
-                          and not self.nb_source.startswith('complement')),
+                                   and not self.nb_source.startswith('compl'
+                                                                     'ement')
+                                   and not self.nb_source == 'clocktime_data'),
                       **options)
         super().setup("nb_variants", nb=build_data, **options)
-        self.transduration = 8
-        if (self.nb1 > 20 and self.nb2 > 20
-            and not self.nb1 % 10 == 0 and not self.nb2 % 10 == 0):
-            self.transduration = 12
-        if self.nb_source.startswith('decimalfractionssums'):
-            self.transduration = 20
+        self.transduration = 12
+        if (self.nb_source.startswith('decimalfractionssums')
+           or self.nb_source == 'clocktime_data'):
+            self.transduration = 24
 
         # TODO: better use a Sum object (when it's available in mathmakerlib)
         self.sum_str = ' + '.join([_.printed for _ in self.nb_list])
-        self.result = sum([_.evaluate() for _ in self.nb_list])
+        if self.nb_source == 'clocktime_data':
+            self.sum_str = ' + '.join([_.printed.replace('~', '', 1)
+                                       for _ in self.nb_list])
+            self.result = ClockTime(build_data[0] + build_data[1],
+                                    context=TIME_CONTEXT[lang])
+        else:
+            self.result = sum([_.evaluate() for _ in self.nb_list])
 
         if self.context == 'mini_problem':
             self.transduration = 25
@@ -124,7 +142,13 @@ class sub_object(component.structure):
                 .format(math_expr=self.sum_str, q_mark=COLORED_QUESTION_MARK))
 
     def a(self, **options):
-        return self.result.printed
+        output = self.result.printed
+        if self.nb_source == 'clocktime_data':
+            output = output.replace('~', '', 1)
+        return output
 
     def js_a(self, **kwargs):
-        return [Number(self.result, unit=None).uiprinted]
+        if self.nb_source == 'clocktime_data':
+            return [[str(self.result.hour), str(self.result.minute)]]
+        else:
+            return [Number(self.result, unit=None).uiprinted]
