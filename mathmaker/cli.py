@@ -122,6 +122,10 @@ def entry_point():
     if args.main_directive == 'list':
         sys.stdout.write(list_all_sheets())
         shared.db.close()
+        shared.natural_nb_tuples_db.close()
+        shared.solids_db.close()
+        shared.shapes_db.close()
+        shared.anglessets_db.close()
         sys.exit(0)
     elif args.main_directive in old_style_sheet.AVAILABLE:
         sh = old_style_sheet.AVAILABLE[args.main_directive][0]()
@@ -142,6 +146,10 @@ def entry_point():
             # print("--- {sec} seconds ---"\
             #      .format(sec=round(time.time() - start_time, 3)))
             shared.db.close()
+            shared.natural_nb_tuples_db.close()
+            shared.solids_db.close()
+            shared.shapes_db.close()
+            shared.anglessets_db.close()
             sys.exit(1)
         if build_from_yaml:
             sh = Sheet(*fn, filename=None, shift=args.shift,
@@ -154,11 +162,23 @@ def entry_point():
     except Exception:
         log.error("An exception occured during the creation of the sheet.",
                   exc_info=True)
+        shared.natural_nb_tuples_db.close()
+        shared.solids_db.close()
+        shared.shapes_db.close()
+        shared.anglessets_db.close()
         shared.db.close()
         sys.exit(1)
 
     shared.db.commit()
     shared.db.close()
+    shared.natural_nb_tuples_db.commit()
+    shared.natural_nb_tuples_db.close()
+    shared.solids_db.commit()
+    shared.solids_db.close()
+    shared.shapes_db.commit()
+    shared.shapes_db.close()
+    shared.anglessets_db.commit()
+    shared.anglessets_db.close()
     log.info("Done.")
     sys.exit(0)
 
