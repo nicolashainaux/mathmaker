@@ -634,10 +634,9 @@ class source(object):
                     'AND ( nb1 >= ' + mini + ' AND nb1 <= ' + maxi + ' ) '\
                     ')) '
                 kn += 1
-            elif (kw == "prevails" or kw.startswith("info_") or kw == "union"
-                  or kw == 'table_name' or kw == 'no_order_by_random'
-                  or kw == 'enablereset'):
-                # __
+            elif (kw.startswith('info_')
+                  or kw in ['prevails', 'union', 'table_name', 'enablereset',
+                            'no_order_by_random', 'timestamp', 'timestamped']):
                 pass
             elif kw == "lock_equal_products":
                 result += next(hook(kn)) + " lock_equal_products = 0 "
@@ -781,7 +780,10 @@ class source(object):
             order_by_random = " ORDER BY random() LIMIT 1;"
             if 'no_order_by_random' in kwargs:
                 order_by_random = ""
-            return self._select_part(**kwargs) + " WHERE drawDate = 0 " \
+            ts_condition = " WHERE drawDate = 0 "
+            if kwargs.get('timestamped', False):
+                ts_condition = " WHERE drawDate != 0 "
+            return self._select_part(**kwargs) + ts_condition \
                 + self._language_part(**kwargs) \
                 + self._kw_conditions(**kwargs) \
                 + order_by_random
@@ -901,7 +903,8 @@ class source(object):
             raise RuntimeError('No result from database query. Command was:\n'
                                + str(sql_query))
         t = query_result[0]
-        self._timestamp({str(self.idcol): str(t[0])}, **kwargs)
+        if kwargs.get('timestamp', True):
+            self._timestamp({str(self.idcol): str(t[0])}, **kwargs)
         self._lock(t[1:len(t)], **kwargs)
         return t[1:len(t)]
 
@@ -1860,18 +1863,45 @@ class mc_source(object):
                          6: shared.nnsextuples_source}[nb_of_elts]
             L = list(random_result)
             nb_args = {'nb{}'.format(i + 1): L[i] for i in range(nb_of_elts)}
+            found_among_timestamped = False
+            found_among_not_timestamped = False
             try:
-                db_source.next(enablereset=False, **nb_args)
+                db_source.next(enablereset=False, timestamp=False, **nb_args)
             except RuntimeError as excinfo:
                 if str(excinfo).startswith('No result from database query. '
                                            'Command was:'):
-                    log.debug('No result from db query, return random result')
-                    return tuple(random_result)
+                    log.debug('No result from db query, among not timestamped '
+                              'entries.')
                 else:
                     raise
-            log.debug('Got a result from db, so redrawing from db')
-            kwargs.update(spans.turn_to_query_conditions())
-            return db_source.next(**kwargs)
+            else:
+                found_among_not_timestamped = True
+
+            try:
+                db_source.next(enablereset=False, timestamp=False,
+                               timestamped=True, **nb_args)
+            except RuntimeError as excinfo:
+                if str(excinfo).startswith('No result from database query. '
+                                           'Command was:'):
+                    log.debug('No result from db query, among timestamped '
+                              'entries.')
+                else:
+                    raise
+            else:
+                found_among_timestamped = True
+
+            if not found_among_timestamped and not found_among_not_timestamped:
+                log.debug('Got no result from db, returning random result')
+                return tuple(random_result)
+            if found_among_timestamped:
+                log.debug('Got a timestamped result from db, so redrawing '
+                          'from db')
+                kwargs.update(spans.turn_to_query_conditions())
+                return db_source.next(**kwargs)
+            else:  # found among not timestamped
+                log.debug('Got a NOT timestamped result from db, so timestamp '
+                          'and return it')
+                return db_source.next(**nb_args)
         elif tag_classification == 'int_pairs':
             kwargs.update(preprocess_int_pairs_tag(source_id, qkw=qkw))
             return shared.int_pairs_source.next(**kwargs)
