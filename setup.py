@@ -120,8 +120,8 @@ def create_mo_files(force=False):
         return []
     data_files = []
     localedir = 'mathmaker/locale/'
-    po_dirs = [localedir + l + '/LC_MESSAGES/'
-               for l in next(os.walk(localedir))[1]]
+    po_dirs = [localedir + loc + '/LC_MESSAGES/'
+               for loc in next(os.walk(localedir))[1]]
     for d in po_dirs:
         mo_files = []
         po_files = [f
