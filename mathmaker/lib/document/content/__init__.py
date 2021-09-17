@@ -43,6 +43,7 @@ from .calculation import numeric_expansion, numeric_factorization
 from .calculation import divisibility_vocabulary
 from .calculation import divisibility_rule
 from .calculation import fraction_simplification
+from .calculation import fractions_conversions
 from .geometry import intercept_theorem_triangle
 from .geometry import intercept_theorem_triangle_formula
 from .geometry import intercept_theorem_butterfly
@@ -75,7 +76,7 @@ __all__ = ['expand_simple', 'expand_double',
            'mini_pb_time',
            'numeric_expansion', 'numeric_factorization',
            'divisibility_vocabulary', 'divisibility_rule',
-           'fraction_simplification',
+           'fraction_simplification', 'fractions_conversions',
            'area_rectangle', 'perimeter_rectangle', 'perimeter_polygon',
            'rectangle_length_or_width', 'area_righttriangle',
            'perimeter_righttriangle', 'volume_rightcuboid',
