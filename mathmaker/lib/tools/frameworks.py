@@ -606,6 +606,7 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
                 'vocabulary_multi', 'vocabulary_divi']:
         # __
         return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('nnpairs:'),
                     source_nb.startswith('multiplesof'),
                     source_nb.startswith('table_'),
                     source_nb == 'decimal_and_10_100_1000',
@@ -616,6 +617,7 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
                   'vocabulary_addi', 'vocabulary_subtr']:
         # __
         return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('nnpairs:'),
                     source_nb.startswith('multiplesof'),
                     source_nb.startswith('table_'),
                     source_nb.startswith('complements_to_'),
@@ -629,6 +631,7 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
                     source_nb == 'bypass'])
     elif q_id in ['perimeter_square', 'area_square']:
         return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('nnpairs:'),
                     source_nb.startswith('multiplesof'),
                     source_nb.startswith('table_'),
                     source_nb == 'bypass'])
@@ -646,6 +649,7 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
                     source_nb == 'bypass'])
     elif q_id in ['multi_reversed', 'fraction_of_rectangle']:
         return any([source_nb.startswith('intpairs_'),
+                    source_nb.startswith('nnpairs:'),
                     source_nb == 'table_2',
                     source_nb == 'table_3',
                     source_nb == 'table_4',
@@ -661,6 +665,7 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
         return any([source_nb.startswith('properfraction'),
                     source_nb.startswith('simple_fractions'),
                     source_nb.startswith('intpairs'),
+                    source_nb.startswith('nnpairs:'),
                     (len(source_nb.split(sep=';;')) == 2
                      and source_nb.split(sep=';;')[0].startswith('singleint')
                      and source_nb.split(sep=';;')[1].startswith('singleint')),
