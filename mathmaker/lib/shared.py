@@ -32,6 +32,7 @@ def init():
     global shapes_db
     global solids_db
     global natural_nb_tuples_db
+    global anglessets_db
     global unique_letters_words_source
     global names_source
     global mini_problems_wordings_source
