@@ -62,7 +62,7 @@ def test_p1_into_euk(p1):
         '  (A.B.C.D)\n'\
         '  $\\rotatebox{11}{\sffamily 4~cm}$ A 11 - 12.7 deg 4.1\n'\
         '  $\\rotatebox{86}{\sffamily 3~cm}$ B 86 - 8.9 deg 4.9\n'\
-        '  $\\rotatebox{23}{\sffamily 2~cm}$ C 203 - 12.2 deg 4.2\n'\
+        '  $\\rotatebox{23}{\sffamily 2~cm}$ C 203 - 12.3 deg 4.2\n'\
         '  $\\rotatebox{83}{\sffamily 6.5~cm}$ D 263 - 12.9 deg 4.1\n'\
         '  $\\rotatebox{47.3}{\sffamily 64\\textdegree}$ A 47.3 deg 2.7\n'\
         '  $\\rotatebox{-41.3}{\sffamily 128\\textdegree}$ B 138.7 deg 2.7\n'\
@@ -103,7 +103,7 @@ def test_p1_renamed(p1):
         '  (A.G.O.Y)\n'\
         '  $\\rotatebox{11}{\sffamily 4~cm}$ A 11 - 12.7 deg 4.1\n'\
         '  $\\rotatebox{86}{\sffamily 3~cm}$ G 86 - 8.9 deg 4.9\n'\
-        '  $\\rotatebox{23}{\sffamily 2~cm}$ O 203 - 12.2 deg 4.2\n'\
+        '  $\\rotatebox{23}{\sffamily 2~cm}$ O 203 - 12.3 deg 4.2\n'\
         '  $\\rotatebox{83}{\sffamily 6.5~cm}$ Y 263 - 12.9 deg 4.1\n'\
         '  $\\rotatebox{47.3}{\sffamily 64\\textdegree}$ A 47.3 deg 2.7\n'\
         '  $\\rotatebox{-41.3}{\sffamily 128\\textdegree}$ G 138.7 deg 2.7\n'\
