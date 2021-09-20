@@ -26,7 +26,7 @@ fractions: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: fractions"
   - exercise: !!omap
-    - questions: fractions conversions -> nnsingletons:20,25,50,75 (5)
+    - questions: fractions conversions -> nnsingletons:1,10,20,25,50,75 (5)
                  fraction_of a_rectangle -> properfraction_1to10 (1)
                  fraction_of a_rectangle -> properfraction_2to4×1to10 (1)
                  fraction_of a_rectangle -> intpairs_2to5;;intpairs_2to5 (1)
@@ -150,7 +150,7 @@ exam: !!omap
                      divi direct, context=mini_problem -> intpairs_4to9 (1)]
                  digitplace direct -> digits_places (1)
                  digitplace reversed -> digits_places (1)
-                 fractions conversions -> nnsingletons:20,25,50,75 (1)
+                 fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
                  fraction_of a_rectangle -> intpairs_2to5;;intpairs_2to5 (1)
                  units conversion -> unitspairs, level=1 (1)
                  order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
@@ -262,7 +262,7 @@ W03c: !!omap
 W03d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: fractions conversions -> nnsingletons:20,25,50,75 (1)
+    - questions: fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
                  subtr direct -> clocktime_data (1)
                  numeric expansion -> mergedinttriples_3to9 (1)
                  subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (1)
@@ -286,7 +286,7 @@ W04c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: addi direct -> clocktime_data (1)
-                 fractions conversions -> nnsingletons:20,25,50,75 (1)
+                 fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
                  subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)
                  divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
                  order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
@@ -314,7 +314,7 @@ W05b: !!omap
   - exercise: !!omap
     - questions: divi direct -> nnpairs:4-9 (1)
                  digitplace reversed -> digits_places (1)
-                 fractions conversions -> nnsingletons:20,25,50,75 (1)
+                 fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
                  mini_pb time -> clocktime_data (1)
                  units conversion -> unitspairs, level=1 (1)
 
@@ -330,7 +330,7 @@ W05c: !!omap
 W05d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: fractions conversions -> nnsingletons:20,25,50,75 (1)
+    - questions: fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
                  numeric expansion -> mergedinttriples_3to9 (1)
                  subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (1)
                  units conversion -> unitspairs, level=1 (1)
