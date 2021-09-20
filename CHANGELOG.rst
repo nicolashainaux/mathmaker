@@ -1,6 +1,19 @@
 Changelog
 =========
 
+New in development version 0.7.6 (2021-09-20)
+---------------------------------------------
+
+* Add mental calculation questions: simple conversions between a fraction and a decimal; additions and subtractions of clock times.
+* Bug fixes and upgrade of mental calculation sheets (white1 to yellow).
+
+
+New in unreleased version 0.7.5 (2019-04-22)
+--------------------------------------------
+
+* Bug fixes and upgrade of mental calculation sheets.
+
+
 New in version 0.7.4 (2018-10-20)
 ---------------------------------
 
