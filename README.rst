@@ -1,4 +1,4 @@
-|PyPI1| |PyPI2| |PyPI3| |Build Status| |Coveralls branch| |Documentation Status1| |Maintenance| |PyPI4|
+|PyPI1| |PyPI2| |PyPI3| |Build Status| |Coveralls| |Documentation Status| |Maintenance| |PyPI4|
 
 Overview
 ========
@@ -172,10 +172,10 @@ Contact: nh dot techn (hosted by gmail dot com)
 .. |PyPI3| image:: https://img.shields.io/pypi/pyversions/mathmaker.svg?maxAge=2592000
 .. |Build Status| image:: https://ci.appveyor.com/api/projects/status/88ay13trwvipaijb/branch/master?svg=true
    :target: https://ci.appveyor.com/project/nicolashainaux/mathmakerlib-ho94f
-.. |Codecov| image:: https://codecov.io/gl/nicolas.hainaux/mathmaker/branch/master/graph/badge.svg
-   :target: https://codecov.io/gl/nicolas.hainaux/mathmaker
+.. |Coveralls| image:: https://coveralls.io/repos/gitlab/nicolashainaux/mathmaker/badge.svg?branch=master
+   :target: https://coveralls.io/gitlab/nicolashainaux/mathmaker?branch=master
 .. |Documentation Status| image:: https://readthedocs.org/projects/mathmaker/badge/?version=latest
-   :target: https://mathmaker-lib.readthedocs.io/en/latest/
-.. |Maintenance| image:: https://img.shields.io/maintenance/yes/2018.svg?maxAge=2592000
+   :target: https://mathmaker.readthedocs.io/en/latest/
+.. |Maintenance| image:: https://img.shields.io/maintenance/yes/2021.svg?maxAge=2592000
 .. |PyPI4| image:: https://img.shields.io/pypi/l/mathmaker.svg?maxAge=2592000
    :target: https://gitlab.com/nicolas.hainaux/mathmaker/blob/master/LICENSE

@@ -179,6 +179,7 @@ setup(
     author_email=__author_email__,
     description='Mathmaker creates automatically elementary maths exercises '
                 'and their (detailed) answers.',
+    long_description_content_type='text/x-rst',
     long_description=read('README.rst', 'CONTRIBUTORS.rst', 'CHANGELOG.rst'),
     packages=find_packages(exclude=['tests', 'docs']),
     entry_points={
