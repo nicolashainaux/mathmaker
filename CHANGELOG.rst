@@ -1,6 +1,13 @@
 Changelog
 =========
 
+New in development version 0.7.7 (2021-09-21)
+---------------------------------------------
+
+* Bug fix.
+* Minor modifications to some mental calculation sheets.
+
+
 New in development version 0.7.6 (2021-09-20)
 ---------------------------------------------
 
