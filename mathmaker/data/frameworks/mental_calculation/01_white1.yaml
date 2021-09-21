@@ -71,12 +71,12 @@ W02c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> nnpairs:4-9 (1)
-                 multi reversed -> nnpairs:2-9 (2)
-                 multi hole -> nnpairs:2-9 (2)
+                 multi reversed -> nnpairs:4-9 (2)
+                 multi hole -> nnpairs:4-9 (2)
 
 W02d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> nnpairs:4-9 (1)
-                 multi reversed -> nnpairs:2-9 (2)
-                 multi hole -> nnpairs:2-9 (2)
+                 multi reversed -> nnpairs:4-9 (2)
+                 multi hole -> nnpairs:4-9 (2)
