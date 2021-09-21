@@ -34,7 +34,7 @@ from mathmaker import settings
 from mathmaker.lib import shared
 
 PROTECTED_LATEX_KEYWORDS = ['multicols', 'multicols*', 'tabular',
-                            'tikzpicture', r'\centering', 'll', 'newline']
+                            'tikzpicture', r'\centering', 'll']
 
 
 def wrap(word: str, braces='{}', o_str=None, e_str=None) -> str:
