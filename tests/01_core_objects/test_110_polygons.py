@@ -20,6 +20,7 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import sys
 import pytest
 
 from mathmaker.lib.core.root_calculus import Value
@@ -51,6 +52,10 @@ def p1():
 
 def test_p1_into_euk(p1):
     """Check Polygon's generated euk file."""
+    if sys.version_info[:2] == (3, 6):
+        val = 2
+    else:
+        val = 3
     assert p1.into_euk() == \
         'box -0.1, -0.1, 3.8, 4.6\n\n'\
         'A = point(0.5, 0.5)\n'\
@@ -60,14 +65,14 @@ def test_p1_into_euk(p1):
         '\n'\
         'draw\n'\
         '  (A.B.C.D)\n'\
-        '  $\\rotatebox{11}{\sffamily 4~cm}$ A 11 - 12.7 deg 4.1\n'\
-        '  $\\rotatebox{86}{\sffamily 3~cm}$ B 86 - 8.9 deg 4.9\n'\
-        '  $\\rotatebox{23}{\sffamily 2~cm}$ C 203 - 12.3 deg 4.2\n'\
-        '  $\\rotatebox{83}{\sffamily 6.5~cm}$ D 263 - 12.9 deg 4.1\n'\
-        '  $\\rotatebox{47.3}{\sffamily 64\\textdegree}$ A 47.3 deg 2.7\n'\
-        '  $\\rotatebox{-41.3}{\sffamily 128\\textdegree}$ B 138.7 deg 2.7\n'\
-        '  $\\rotatebox{54.3}{\sffamily 32\\textdegree}$ C 234.3 deg 2.7\n'\
-        '  $\\rotatebox{322.7}{\sffamily 256\\textdegree}$ D 322.7 deg 2.7\n'\
+        '  $\\rotatebox{11}{\\sffamily 4~cm}$ A 11 - 12.7 deg 4.1\n'\
+        '  $\\rotatebox{86}{\\sffamily 3~cm}$ B 86 - 8.9 deg 4.9\n'\
+        f'  $\\rotatebox{{23}}{{\\sffamily 2~cm}}$ C 203 - 12.{val} deg 4.2\n'\
+        '  $\\rotatebox{83}{\\sffamily 6.5~cm}$ D 263 - 12.9 deg 4.1\n'\
+        '  $\\rotatebox{47.3}{\\sffamily 64\\textdegree}$ A 47.3 deg 2.7\n'\
+        '  $\\rotatebox{-41.3}{\\sffamily 128\\textdegree}$ B 138.7 deg 2.7\n'\
+        '  $\\rotatebox{54.3}{\\sffamily 32\\textdegree}$ C 234.3 deg 2.7\n'\
+        '  $\\rotatebox{322.7}{\\sffamily 256\\textdegree}$ D 322.7 deg 2.7\n'\
         '  "A" A 227.3 deg, font("sffamily")\n'\
         '  "B" B 318.7 deg, font("sffamily")\n'\
         '  "C" C 54.3 deg, font("sffamily")\n'\
@@ -92,6 +97,10 @@ def test_p1_rename_errors(p1):
 def test_p1_renamed(p1):
     """Check renaming Polygon is OK."""
     p1.rename('YOGA')
+    if sys.version_info[:2] == (3, 6):
+        val = 2
+    else:
+        val = 3
     assert p1.into_euk() == \
         'box -0.1, -0.1, 3.8, 4.6\n\n'\
         'A = point(0.5, 0.5)\n'\
@@ -101,14 +110,14 @@ def test_p1_renamed(p1):
         '\n'\
         'draw\n'\
         '  (A.G.O.Y)\n'\
-        '  $\\rotatebox{11}{\sffamily 4~cm}$ A 11 - 12.7 deg 4.1\n'\
-        '  $\\rotatebox{86}{\sffamily 3~cm}$ G 86 - 8.9 deg 4.9\n'\
-        '  $\\rotatebox{23}{\sffamily 2~cm}$ O 203 - 12.3 deg 4.2\n'\
-        '  $\\rotatebox{83}{\sffamily 6.5~cm}$ Y 263 - 12.9 deg 4.1\n'\
-        '  $\\rotatebox{47.3}{\sffamily 64\\textdegree}$ A 47.3 deg 2.7\n'\
-        '  $\\rotatebox{-41.3}{\sffamily 128\\textdegree}$ G 138.7 deg 2.7\n'\
-        '  $\\rotatebox{54.3}{\sffamily 32\\textdegree}$ O 234.3 deg 2.7\n'\
-        '  $\\rotatebox{322.7}{\sffamily 256\\textdegree}$ Y 322.7 deg 2.7\n'\
+        '  $\\rotatebox{11}{\\sffamily 4~cm}$ A 11 - 12.7 deg 4.1\n'\
+        '  $\\rotatebox{86}{\\sffamily 3~cm}$ G 86 - 8.9 deg 4.9\n'\
+        f'  $\\rotatebox{{23}}{{\\sffamily 2~cm}}$ O 203 - 12.{val} deg 4.2\n'\
+        '  $\\rotatebox{83}{\\sffamily 6.5~cm}$ Y 263 - 12.9 deg 4.1\n'\
+        '  $\\rotatebox{47.3}{\\sffamily 64\\textdegree}$ A 47.3 deg 2.7\n'\
+        '  $\\rotatebox{-41.3}{\\sffamily 128\\textdegree}$ G 138.7 deg 2.7\n'\
+        '  $\\rotatebox{54.3}{\\sffamily 32\\textdegree}$ O 234.3 deg 2.7\n'\
+        '  $\\rotatebox{322.7}{\\sffamily 256\\textdegree}$ Y 322.7 deg 2.7\n'\
         '  "A" A 227.3 deg, font("sffamily")\n'\
         '  "G" G 318.7 deg, font("sffamily")\n'\
         '  "O" O 54.3 deg, font("sffamily")\n'\
