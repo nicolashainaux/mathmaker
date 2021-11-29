@@ -78,11 +78,22 @@ class sub_object(component.structure):
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        return shared.machine.write_math_style2(self.hidden_one.printed)
+        answer = shared.machine.write_math_style2(self.hidden_one.printed)
+        if isinstance(self.hidden_one, Fraction):
+            deciv = self.hidden_one.evaluate()
+            if deciv.fracdigits_nb() <= 2:
+                answer += _(' (or {})').format(deciv.printed)
+        return answer
 
     def js_a(self, **kwargs):
         if isinstance(self.hidden_one, Fraction):
+            answers = []
+            deciv = self.hidden_one.evaluate()
+            if deciv.fracdigits_nb() <= 2:
+                answers = [deciv.uiprinted]
             f = self.hidden_one.reduced().uiprinted
-            return [f, 'any_fraction == ' + f]
+            answers.append(f)
+            answers.append('any_fraction == ' + f)
+            return answers
         else:
             return [self.hidden_one.uiprinted]
