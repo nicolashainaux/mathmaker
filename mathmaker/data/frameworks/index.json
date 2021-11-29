@@ -269,20 +269,10 @@
         "02_white2",
         "W04d"
     ],
-    "04_yellow1_operator_precedence": [
-        "mental_calculation",
-        "04_yellow1",
-        "operator_precedence"
-    ],
     "04_yellow1_positional_notation": [
         "mental_calculation",
         "04_yellow1",
         "positional_notation"
-    ],
-    "04_yellow1_decimal_numerals": [
-        "mental_calculation",
-        "04_yellow1",
-        "decimal_numerals"
     ],
     "04_yellow1_operations_vocabulary": [
         "mental_calculation",
@@ -294,15 +284,10 @@
         "04_yellow1",
         "fraction_of_a_linesegment"
     ],
-    "04_yellow1_tables_15_25": [
+    "04_yellow1_multiplications_of_integers": [
         "mental_calculation",
         "04_yellow1",
-        "tables_15_25"
-    ],
-    "04_yellow1_percentages": [
-        "mental_calculation",
-        "04_yellow1",
-        "percentages"
+        "multiplications_of_integers"
     ],
     "04_yellow1_multi_divi_10_100_1000": [
         "mental_calculation",
@@ -319,20 +304,10 @@
         "04_yellow1",
         "multi_decimal"
     ],
-    "04_yellow1_estimations": [
+    "04_yellow1_multiplications_hole": [
         "mental_calculation",
         "04_yellow1",
-        "estimations"
-    ],
-    "04_yellow1_additions": [
-        "mental_calculation",
-        "04_yellow1",
-        "additions"
-    ],
-    "04_yellow1_areas_perimeters_angles": [
-        "mental_calculation",
-        "04_yellow1",
-        "areas_perimeters_angles"
+        "multiplications_hole"
     ],
     "04_yellow1_exam": [
         "mental_calculation",
@@ -418,26 +393,6 @@
         "mental_calculation",
         "04_yellow1",
         "W04d"
-    ],
-    "04_yellow1_W05a": [
-        "mental_calculation",
-        "04_yellow1",
-        "W05a"
-    ],
-    "04_yellow1_W05b": [
-        "mental_calculation",
-        "04_yellow1",
-        "W05b"
-    ],
-    "04_yellow1_W05c": [
-        "mental_calculation",
-        "04_yellow1",
-        "W05c"
-    ],
-    "04_yellow1_W05d": [
-        "mental_calculation",
-        "04_yellow1",
-        "W05d"
     ],
     "01_white1_multiplications": [
         "mental_calculation",

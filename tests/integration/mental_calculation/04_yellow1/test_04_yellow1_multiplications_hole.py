@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_areas_perimeters_angles():
+def test_multiplications_hole():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '04_yellow1',
-                                       'areas_perimeters_angles')),
+                                       'multiplications_hole')),
                              pdf_output=True)
 
 
-def test_areas_perimeters_angles_embedding_js():
+def test_multiplications_hole_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '04_yellow1',
-                                       'areas_perimeters_angles',
+                                       'multiplications_hole',
                                        enable_js_form=True)),
                              pdf_output=True)
