@@ -1467,7 +1467,7 @@ def postprocess_int_triplesforprop_query(qr):
 #   @todo   Several cases should be factorized or maybe later moved to the db
 def generate_values(source_id):
     if source_id == 'int_irreducible_frac':
-        return [(k, Fraction(n, k)) for k in [i + 2 for i in range(18)]
+        return [(k, Fraction(n, k)) for k in [i + 2 for i in range(9)]
                 for n in coprime_generator(k)]
 
     elif source_id == 'alternate_2masks':
