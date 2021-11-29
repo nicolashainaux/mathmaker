@@ -605,6 +605,9 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
                 'rectangle_length_or_width_from_area', 'divi_direct',
                 'vocabulary_multi', 'vocabulary_divi']:
         # __
+        if (q_id in ['multi_hole', 'divi_direct']
+            and source_nb == 'int_irreducible_frac'):
+            return True
         return any([source_nb.startswith('intpairs_'),
                     source_nb.startswith('nnpairs:'),
                     source_nb.startswith('multiplesof'),

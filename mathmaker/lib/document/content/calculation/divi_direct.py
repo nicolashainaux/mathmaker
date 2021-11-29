@@ -22,6 +22,8 @@
 
 import os
 
+from mathmakerlib.calculus import Fraction
+
 from mathmaker.lib import shared
 from mathmaker.lib.constants.latex import COLORED_QUESTION_MARK
 from mathmaker.lib.core.root_calculus import Value
@@ -63,8 +65,21 @@ class sub_object(component.structure):
             v = Value(self.result, unit=self.hint)\
                 .into_str(display_SI_unit=True)
         else:
-            v = Value(self.result).into_str()
+            if isinstance(self.result, Fraction):
+                v = shared.machine.write_math_style2(self.result.printed)
+                deciv = self.result.evaluate()
+                if deciv.fracdigits_nb() <= 2:
+                    v += _(' (or {})').format(deciv.printed)
+            else:
+                v = Value(self.result).into_str()
         return v
 
     def js_a(self, **kwargs):
-        return [Value(self.result).jsprinted]
+        if isinstance(self.result, Fraction):
+            v = [self.result.uiprinted]
+            deciv = self.result.evaluate()
+            if deciv.fracdigits_nb() <= 5:
+                v.append(deciv.printed)
+        else:
+            v = [Value(self.result).jsprinted]
+        return v

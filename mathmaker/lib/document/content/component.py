@@ -258,6 +258,7 @@ class structure(object):
         nb_list = list(kwargs['nb'])
         self.divisor = self.result = self.dividend = 0
         self.result_str = self.quotient_str = ""
+        irreducible_frac = False
 
         if '10_100_1000' in kwargs and kwargs['10_100_1000']:
             self.divisor, self.dividend = nb_list[0], nb_list[1]
@@ -268,19 +269,29 @@ class structure(object):
                 self.divisor, self.result = nb_list[0], nb_list[1]
             elif order == 'quotient,divisor':
                 self.divisor, self.result = nb_list[1], nb_list[0]
+            elif isinstance(nb_list[1], Fraction):
+                irreducible_frac = True
+                self.divisor = nb_list[0]
+                self.result = nb_list[1]
             else:
                 self.divisor = Number(nb_list.pop(random.choice([0, 1])))
                 self.result = Number(nb_list.pop())
             if self.variant[:-1] == 'decimal':
                 self.result /= 10
-            self.dividend = self.divisor * self.result
+            if irreducible_frac:
+                self.dividend = nb_list[1].numerator
+            else:
+                self.dividend = self.divisor * self.result
 
         if self.context == "from_area":
             self.subcontext = "w" if self.result < self.divisor else "l"
 
         self.dividend_str = Number(self.dividend).printed
         self.divisor_str = Number(self.divisor).printed
-        self.result_str = Number(self.result).printed
+        if irreducible_frac:
+            self.result_str = self.result.printed
+        else:
+            self.result_str = Number(self.result).printed
         q = Division(('+', self.dividend, self.divisor))
         self.quotient_str = q.printed
 
