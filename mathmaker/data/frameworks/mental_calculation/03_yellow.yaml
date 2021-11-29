@@ -161,15 +161,15 @@ exam: !!omap
                      vocabulary triple -> table_3 (2)
                      vocabulary quadruple -> table_4 (1)]
 
-challenge: !!omap
-  - preset: "mental calculation"
-  - title: "Challenge, first part"
-  - exercise: !!omap
-    - shuffle: false
-    - batch: 20
-    - layout:
-      - min_row_height: 1
-    - questions: pass
+# challenge: !!omap
+#   - preset: "mental calculation"
+#   - title: "Challenge, first part"
+#   - exercise: !!omap
+#     - shuffle: false
+#     - batch: 20
+#     - layout:
+#       - min_row_height: 1
+#     - questions: pass
 
 W01a: !!omap
   - preset: "mental calculation slideshow"
