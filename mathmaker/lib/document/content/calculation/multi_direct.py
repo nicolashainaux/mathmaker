@@ -41,9 +41,13 @@ class sub_object(component.structure):
         self.transduration = 8
         if (not is_integer(self.nb1) or not is_integer(self.nb2)
             or self.nb1 > 10 or self.nb2 > 10):
-                self.transduration = 15
+            self.transduration = 15
+        if hasattr(self, 'nb3'):
+            self.transduration = 30
 
         product = Product([self.nb1, self.nb2])
+        if hasattr(self, 'nb3'):
+            product = Product([self.nb1, self.nb2, self.nb3])
         self.product_str = product.printed
         self.result = product.evaluate()
 
