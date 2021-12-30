@@ -48,7 +48,7 @@ class sub_object(component.structure):
         self.wording = _(r'Volume of this right cuboid?\newline '
                          r'(length unit: {length_unit}) |hint:volume_unit|')
 
-        self.transduration = 21
+        self.transduration = 30
 
         setup_wording_format_of(self)
         self.wording = self.wording.format(**self.wording_format)
