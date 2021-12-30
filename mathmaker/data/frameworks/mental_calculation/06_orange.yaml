@@ -1,3 +1,127 @@
+# START OF IMPORTED SHEETS
+
+# divisibility: !!omap
+#   - preset: "mental calculation"
+#   - title: "Mental calculation: multiples and divisors"
+#   - exercise: !!omap
+#     - questions: divisibility vocabulary -> intpairs_3to9 (10)
+#
+# numbers_rounding: !!omap
+#   - preset: "mental calculation"
+#   - title: "Mental calculation: numbers rounding"
+#   - exercise: !!omap
+#     - questions: round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (10)
+#
+# addi_subtr_hole: !!omap
+#   - preset: "mental calculation"
+#   - title: "Mental calculation: additions and subtractions with a hole"
+#   - exercise: !!omap
+#     - questions: addi hole -> singleint_5to20;;singleint_5to20 (2)
+#                  addi hole -> singleint_21to100;;singleint_21to100 (1)
+#                  addi hole -> complements_to_20...90 (2)
+#                  subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (2)
+#                  subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (2)
+#                  subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)
+#
+# clever_calculations: !!omap
+#   - preset: "mental calculation"
+#   - title: "Mental calculation: clever additions and multiplications"
+#   - exercise: !!omap
+#     - questions: multi clever -> singleint_2to99 (1)
+#                  multi clever, variant=with_a_decimal -> intpairs_2to9 (1)
+#                  multi clever -> table_11_tens_easy (1)
+#                  multi clever -> table_15 (1)
+#                  multi clever -> int_deci_clever_pairs (1)
+#                  volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
+#                  volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
+#                  volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
+#                  addi direct -> complements_to_20...90;;complements_to_20...90, patch=true (2)
+#                  # "patch" is to use all pairs as complements
+#
+# proportionality_problems: !!omap
+#   - preset: "mental calculation"
+#   - title: "Mental calculation: mini proportionality problems"
+#   - exercise: !!omap
+#     - questions: mini_pb proportionality -> mergedinttriples_3to9 (6)
+#                  mini_pb proportionality -> mergedinttriples_15_3to6 (2)
+#                  mini_pb proportionality -> mergedinttriples_25_3to6 (2)
+#                  # mini_pb proportionality -> mergedinttriples_3to9, force_table=7, wid=38 (1)
+#                  # mini_pb proportionality -> deciinttriplesforprop_3to9 (2)
+#                  # mini_pb proportionality -> inttriplesforprop_3to10,15,25 (8)
+#                  # To select exclusively from table of 15 or from table of 25,
+#                  # use mergedinttriples_*_3to6
+#
+# perimeters_areas_volumes: !!omap
+#   - preset: "mental calculation"
+#   - title: "Mental calculation: perimeters, areas and volumes"
+#   - exercise: !!omap
+#     - questions: perimeter righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
+#                  [1][perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=1 (1)
+#                      perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
+#                      perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_nb=4, sides_particularity=equilateral (1)
+#                      perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (1)
+#                      perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (1)]
+#                  area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
+#                  area rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
+#                  area rectangle, picture=true -> nnpairs:3-6×15,25 (1)
+#                  area rectangle, picture=true -> table_11_tens_easy (1)
+#                  [1][perimeter rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
+#                      perimeter rectangle, picture=true -> table_25 (1)
+#                      perimeter rectangle, picture=true -> nnpairs:3-9,11-19×3-9,11-19, nb_variant=decimal (1)]
+#                  volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
+#                  volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
+#                  volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
+#
+# percentagesBIS: !!omap
+#   - preset: "mental calculation"
+#   - title: "Mental calculation: simple percentages calculations"
+#   - exercise: !!omap
+#     - questions: percent direct -> 25%of..., context=simple_unit (2)
+#                  percent direct -> 75%of..., context=simple_unit (2)
+#                  percent direct -> 10%of..., context=simple_unit (3)
+#                  percent direct -> 10%of..., nb_variant=decimal1, context=simple_unit (2)
+#                  percent direct -> 50%of..., context=simple_unit (1)
+# estimations: !!omap
+#   - preset: "mental calculation"
+#   - title: "Mental calculation: estimations"
+#   - exercise: !!omap
+#     - questions: estimation_of number -> nnsingletons:70-1000 (5)
+#                  estimation_of number -> nnsingletons:1000-10000 (5)
+#
+# areas_perimeters_angles: !!omap
+#   - preset: "mental calculation"
+#   - title: "Mental calculation: areas, perimeters, angles"
+#   - exercise: !!omap
+#     - questions: area righttriangle -> nnpairs:3-9×3-9, code=1_1 (2)
+#                  [2][area rectangle, picture=true -> nnpairs:4-9×6-9 (1)
+#                      area rectangle, picture=true -> nnpairs:2-9×2-9, nb_variant=decimal (1)
+#                      area rectangle, picture=true -> table_11_tens_easy (1)
+#                      area rectangle, picture=true -> nnpairs:3-6×15,25 (1)]
+#                  [2][perimeter rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
+#                      perimeter rectangle, picture=true -> table_25 (1)
+#                      perimeter rectangle, picture=true -> nnpairs:3-9,11-19×3-9,11-19, nb_variant=decimal1 (1)]
+#                  [2][perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=1 (1)
+#                      perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
+#                      perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_nb=4, sides_particularity=equilateral (1)
+#                      perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (1)
+#                      perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (1)]
+#                  [2][addi direct, context=angles -> nnpairs:11-69×90 (1)
+#                      addi direct, context=angles -> nnpairs:11-69×11-69 (1)
+#                      subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×90 (1)
+#                      subtr direct, subvariant=only_positive, context=angles, code=1_1 -> nnpairs:11-69×11-69 (1)]
+#
+# decimal_numerals: !!omap
+#   - preset: "mental calculation"
+#   - title: "Mental calculation: decimal numerals"
+#   - exercise: !!omap
+#     - questions: addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
+#                  addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (3)
+#                  decimal numerals, direction=to_decimal -> decimals (3)
+#                  decimal numerals, direction=to_fraction -> decimals (3)
+
+
+################## END OF IMPORTED SHEETS
+
 divisibility_rules: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: divisibility rules"
@@ -216,6 +340,50 @@ challenge: !!omap
                     mini_pb proportionality -> mergedinttriples_25_3to6 (1)]
                 rectangle length_or_width, context=from_area, picture=true -> nnpairs:11×21-27,31-36,41-45,51-54,61-63,71,72,81 (1)
                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
+
+# challenge: !!omap
+#     - preset: "mental calculation"
+#     - title: "Challenge, first part"
+#     - exercise: !!omap
+#         - shuffle: false
+#         - tabular_batch: 20
+#         - layout:
+#           - min_row_height: 1
+#         - questions: multi direct -> intpairs_3to9×6to9 (4)
+#                      multi hole -> intpairs_6to9×6to9 (1)
+#                      addi direct -> intpairs_20to100 (1)
+#                      addi direct -> int_quintuples_4to20, nb_variant=±halforquarter (1)
+#                      multi hole -> int_irreducible_frac (1)
+#                      order of_operations, subvariant=only_positive -> singleint_2to9;;intpairs_2to9, variant=8-23 (1)
+#                      subtr direct, subvariant=only_positive, context=complement_wording -> complements_to_10, nb_variant=decimal1 (1)
+#                      numeric expansion -> mergedinttriples_3to9 (1)
+#                      [1][time_units conversion, level=1 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
+#                          time_units conversion, level=1 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
+#                          time_units conversion, level=2 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
+#                          time_units conversion, level=2 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
+#                          time_units conversion, category=3, level=2 -> nnpairs:10×10,11,13-17,19-23,25-29,31-35,37-41,43-47,49-53,55-59 (2)]
+#                      addi direct, context=angles -> nntriples:15-69×15-69×90, code=2_1, orientation=0 (1)
+#                      [1][divi euclidean -> table_15 (1)
+#                          divi euclidean -> table_25 (1)]
+#                      percent direct -> 10%of..., context=simple_unit (1)
+#                      divi direct -> intpairs_4to4×12to24, order=divisor,quotient (1)
+#                      round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
+#                      multi clever ->  intpairs_6to9×6to9 (1)
+#                      [1][multi direct -> decimal_and_10_100_1000 (1)
+#                          divi direct -> decimal_and_10_100_1000 (1)]
+#                      vocabulary third -> multiplesof3_10to20 (1)
+#                      units conversion -> unitspairs, level=1 (1)
+#                      addi direct -> complements_to_20...90;;complements_to_20...90, patch=true (1)
+#                      decimal numerals, direction=to_decimal -> decimals (1)
+#                      percent direct -> 75%of..., context=simple_unit (1)
+#                      subtr hole -> singleint_5to20;;singleint_5to20, nb_variant=±halforquarter (1)
+#                      area rectangle, picture=true -> intpairs_3to9, nb_variant=decimal (1)
+#                      mini_pb proportionality -> mergedinttriples_25_3to6 (1)
+#                      rectangle length_or_width, context=from_area, picture=true -> intpairs_2to9, nb_variant=decimal1 (1)
+#                      perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
+#                      [1][volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
+#                          volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)]
+
 
 W01a: !!omap
   - preset: "mental calculation slideshow"

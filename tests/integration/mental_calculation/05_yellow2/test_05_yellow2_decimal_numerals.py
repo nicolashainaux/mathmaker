@@ -25,9 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_W05d():
+def test_decimal_numerals():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '05_yellow2',
-                                       'W05d')),
+                                       'decimal_numerals')),
+                             pdf_output=True)
+
+
+def test_decimal_numerals_embedding_js():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('mental_calculation',
+                                       '05_yellow2',
+                                       'decimal_numerals',
+                                       enable_js_form=True)),
                              pdf_output=True)

@@ -1,14 +1,26 @@
-divisibility: !!omap
+multiplications_of_integers: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: multiples and divisors"
+  - title: "Mental calculation: multiplications"
   - exercise: !!omap
-    - questions: divisibility vocabulary -> intpairs_3to9 (10)
+    - questions: multi reversed -> nnpairs:3-9 (1)
+                 multi direct -> nnpairs:3-9, nb_variant=multiplesof10 (1)
+                 multi direct -> nntriples:2-6 (1)
+                 volume rightcuboid -> nntriples:2-6 (1)
+                 multi direct -> nntriples:2-4, nb_variant=multiplesof10 (1)
+                 multi direct -> nnpairs:3-6×15 (3)
+                 multi direct -> nnpairs:3-6×25 (1)
+                 multi direct -> table_11_tens_easy (1)
 
-numbers_rounding: !!omap
+percentages: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: numbers rounding"
+  - title: "Mental calculation: simple percentages calculations"
   - exercise: !!omap
-    - questions: round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (10)
+    - questions: percent direct -> 50%of..., level=easy, context=simple_unit (1)
+                 percent direct -> 50%of..., context=simple_unit (2)
+                 percent direct -> 25%of..., level=easy, context=simple_unit (2)
+                 percent direct -> 25%of..., context=simple_unit (1)
+                 percent direct -> 75%of..., level=easy, context=simple_unit (2)
+                 percent direct -> 75%of..., level=easy (2)
 
 time_units: !!omap
   - preset: "mental calculation"
@@ -26,75 +38,23 @@ time_units: !!omap
                  # time_units conversion, category=3, direction=right -> nnpairs:5-7,9-11,13-14×15 (1)
                  # time_units conversion, category=3, direction=left -> nnpairs:5-7,9-11,13-14×15 (1)
 
-addi_subtr_hole: !!omap
+decimal_numerals: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: additions and subtractions with a hole"
+  - title: "Mental calculation: decimal numerals"
   - exercise: !!omap
-    - questions: addi hole -> singleint_5to20;;singleint_5to20 (2)
-                 addi hole -> singleint_21to100;;singleint_21to100 (1)
-                 addi hole -> complements_to_20...90 (2)
-                 subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (2)
-                 subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (2)
-                 subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)
+    - questions: decimal numerals, direction=to_decimal -> decimals (5)
+                 decimal numerals, direction=to_fraction -> decimals (5)
 
-clever_calculations: !!omap
+operator_precedence: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: clever additions and multiplications"
+  - title: "Mental calculation: order of operations"
   - exercise: !!omap
-    - questions: multi clever -> singleint_2to99 (1)
-                 multi clever, variant=with_a_decimal -> intpairs_2to9 (1)
-                 multi clever -> table_11_tens_easy (1)
-                 multi clever -> table_15 (1)
-                 multi clever -> int_deci_clever_pairs (1)
-                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
-                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
-                 volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
-                 addi direct -> complements_to_20...90;;complements_to_20...90, patch=true (2)
-                 # "patch" is to use all pairs as complements
-
-proportionality_problems: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: mini proportionality problems"
-  - exercise: !!omap
-    - questions: mini_pb proportionality -> mergedinttriples_3to9 (6)
-                 mini_pb proportionality -> mergedinttriples_15_3to6 (2)
-                 mini_pb proportionality -> mergedinttriples_25_3to6 (2)
-                 # mini_pb proportionality -> mergedinttriples_3to9, force_table=7, wid=38 (1)
-                 # mini_pb proportionality -> deciinttriplesforprop_3to9 (2)
-                 # mini_pb proportionality -> inttriplesforprop_3to10,15,25 (8)
-                 # To select exclusively from table of 15 or from table of 25,
-                 # use mergedinttriples_*_3to6
-
-percentages: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: simple percentages calculations"
-  - exercise: !!omap
-    - questions: percent direct -> 25%of..., context=simple_unit (2)
-                 percent direct -> 75%of..., context=simple_unit (2)
-                 percent direct -> 10%of..., context=simple_unit (3)
-                 percent direct -> 10%of..., nb_variant=decimal1, context=simple_unit (2)
-                 percent direct -> 50%of..., context=simple_unit (1)
-
-perimeters_areas_volumes: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: perimeters, areas and volumes"
-  - exercise: !!omap
-    - questions: perimeter righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
-                 [1][perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=1 (1)
-                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
-                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_nb=4, sides_particularity=equilateral (1)
-                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (1)
-                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (1)]
-                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
-                 area rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
-                 area rectangle, picture=true -> nnpairs:3-6×15,25 (1)
-                 area rectangle, picture=true -> table_11_tens_easy (1)
-                 [1][perimeter rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
-                     perimeter rectangle, picture=true -> table_25 (1)
-                     perimeter rectangle, picture=true -> nnpairs:3-9,11-19×3-9,11-19, nb_variant=decimal (1)]
-                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
-                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
-                 volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
+    - questions: order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
+                                                               -> singleint_5to20;;table_25, variant=0 (1)
+                                                               -> singleint_5to20;;table_15, variant=0 (1)
+                                                               -> singleint_5to20;;table_11_tens_easy, variant=0 (1)
+                                                               -> singleint_5to100;;intpairs_3to9, variant=1-7 (2)
+                                                               -> singleint_3to9;;intpairs_3to9, variant=8-23 (4)
 
 exam: !!omap
   - preset: "mental calculation"
@@ -102,300 +62,183 @@ exam: !!omap
   - exercise: !!omap
     - layout:
       - min_row_height: 0.8
-    - questions: numeric expansion -> mergedinttriples_3to9 (1)
-                 [1][multi hole -> nnpairs:6-9×6-9 (1)
-                     multi hole -> nnpairs:3-6×15 (1)
-                     multi hole -> nnpairs:3-6×25 (1)
-                     multi hole -> int_irreducible_frac (1)]
-                 [1][vocabulary simple_parts_of_a_number -> auto_multiples (1)
-                     vocabulary simple_multiples_of_a_number -> auto_multiples (1)
-                     vocabulary operation -> auto_vocabulary (6)]
-                 order of_operations, subvariant=only_positive -> singleint_5to100;;intpairs_3to9, variant=8-23,100-107 (1)
-                 [1][multi direct -> decimal_and_10_100_1000 (1)
+    - mix:
+      - questions: multi hole,
+                   divi direct
+      - nb: int_irreducible_frac (1)
+            nnpairs:4-9 (1)
+    - questions: multi direct -> nnpairs:3-6×15 (1)
+                 [1][multi direct -> nnpairs:3-6×25 (1)
+                     multi reversed -> nnpairs:4-9 (1)
+                     multi direct -> nnpairs:3-9, nb_variant=multiplesof10 (1)
+                     multi direct -> table_11_tens_easy (1)
+                     multi direct, nb_variant=decimal1 -> nnpairs:3-9 (1)
+                     multi direct, nb_variant=decimal2 -> nnpairs:2-9 (1)
+                     multi direct -> decimal_and_10_100_1000 (1)
                      divi direct -> decimal_and_10_100_1000 (1)]
-                 [1][digitplace direct -> digits_places (1)
-                     digitplace reversed -> digits_places (1)
-                     digitplace numberof -> digits_places, generation_type=default (1)
-                     digitplace reversed -> digits_places, pos_matches_invisible_zero=true (2)
-                     digitplace numberof -> digits_places, generation_type=default, pos_matches_invisible_zero=true (1)]
-                 [1][perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=1 (2)
-                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (2)
-                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_nb=4, sides_particularity=equilateral (2)
-                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=2 (2)
-                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=3 (2)
-                     perimeter rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
-                     perimeter rectangle, picture=true -> table_25 (1)
-                     perimeter rectangle, picture=true -> nnpairs:3-9,11-19×3-9,11-19, nb_variant=decimal1 (1)
-                     addi direct, context=angles -> nnpairs:11-69×90 (1)
-                     addi direct, context=angles -> nnpairs:11-69×11-69 (1)
-                     subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×90 (1)
-                     subtr direct, subvariant=only_positive, context=angles, code=1_1 -> nnpairs:11-69×11-69 (1)]
+                 [1][area rectangle, picture=true -> nnpairs:4-9×6-9 (1)
+                     area rectangle, picture=true -> table_11_tens_easy (1)
+                     area rectangle, picture=true -> nnpairs:3-6×15,25 (1)
+                     area rectangle, picture=true -> nnpairs:3-9, nb_variant=multiplesof10 (1)
+                     area rectangle, picture=true -> nnpairs:3-9, nb_variant=decimal (1)
+                     area righttriangle -> nnpairs:3-9, code=1_1 (2)
+                     area righttriangle -> nnpairs:3-9, nb_variant=multiplesof10, code=1_1 (1)
+                     area righttriangle -> table_11_tens_easy, code=1_1 (1)
+                     area righttriangle -> nnpairs:3-6×15,25, code=1_1 (1)
+                     volume rightcuboid -> nntriples:2-6 (5)]
+                 [1][addi hole -> singleint_5to20;;singleint_5to20 (1)
+                     addi hole -> singleint_21to100;;singleint_21to100 (1)
+                     addi hole -> complements_to_20...90 (1)
+                     subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (2)
+                     subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (2)
+                     subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (2)]
+                 numeric expansion -> mergedinttriples_3to9 (1)
+                 [1][divi euclidean -> nnpairs:2-9 (1)
+                     divi euclidean -> nnpairs:3-6×15,25 (1)]
+                 [1][addi direct -> nnpairs:11-99 (1)
+                     addi direct -> nntriples:7-30 (1)
+                     addi direct -> nntriples:7-20, nb_variant=±half (1)
+                     addi direct -> nnquadruples:7-20 (1)
+                     addi direct -> complements_to_300...1000 (1)
+                     addi direct -> clocktime_data (1)
+                     perimeter rectangle, picture=true -> nnpairs:4-20 (3)
+                     perimeter rectangle, picture=true -> nnpairs:3-9, nb_variant=±quarter (3)
+                     perimeter polygon -> polygons, sum_ingredients=int_7to30, sides_nb=3, sides_particularity=none (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_7to20, sides_nb=3, sides_particularity=none, nb_variant=±half (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_7to15, sides_nb=3, sides_particularity=none, nb_variant=±quarter (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_7to20, sides_nb=4, sides_particularity=none (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_3to15, sides_nb=4, sides_particularity=none, nb_variant=±half (1)
+                     perimeter polygon -> polygons, sum_ingredients=int_3to10, sides_nb=4, sides_particularity=none, nb_variant=±quarter (1)]
+                 [1][subtr direct -> clocktime_data (1)
+                     subtr direct, subvariant=only_positive -> intpairs_11to90 (1)]
                  [1][multi direct, context=mini_problem -> intpairs_4to9 (1)
                      subtr direct, context=mini_problem, subvariant=only_positive -> intpairs_10to100 (1)
                      divi direct, context=mini_problem -> intpairs_4to9 (1)
                      divi direct, context=mini_problem, back_to_unit=true -> intpairs_4to9 (1)
                      mini_pb time -> clocktime_data (1)]
-                 [1][divi euclidean -> intpairs_2to10 (1)
-                     divi euclidean -> table_15 (1)
-                     divi euclidean -> table_25 (1)]
-                 [1][multi direct, nb_variant=decimal1 -> intpairs_3to9 (1)
-                     multi direct, nb_variant=decimal2 -> intpairs_2to9 (1)]
-                 [1][addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
-                     addi direct, context=ask:turn_to_decimal_repr, variant=cut, iz_ge=1 -> decimalfractionssums (1)
-                     decimal numerals, direction=to_decimal -> decimals (1)
-                     decimal numerals, direction=to_fraction -> decimals (1)]
-                 addi direct -> complements_to_20...90;;complements_to_20...90, patch=true (1)
-                 [1][time_units conversion, level=1 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
-                     time_units conversion, level=1 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
+                 [1][digitplace direct -> digits_places (1)
+                     digitplace reversed -> digits_places (1)
+                     digitplace numberof -> digits_places, generation_type=default (1)]
+                 fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
+                 [1][fraction_of a_rectangle -> intpairs_4to9;;intpairs_6to9 (1)
+                     fraction_of a_linesegment -> simple_fractions (1)]
+                 [1][time_units conversion, level=1, direction=right -> nnpairs:1-3,5-7,9-11,13-14×15 (2)
+                     time_units conversion, level=1, direction=left -> nnpairs:1-3,5-7,9-11,13-14×15 (2)
+                     time_units conversion, level=1, direction=right -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
+                     time_units conversion, level=1, direction=left -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
                      time_units conversion, level=2 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
                      time_units conversion, level=2 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
                      time_units conversion, category=3, level=2 -> nnpairs:10×10,11,13-17,19-23,25-29,31-35,37-41,43-47,49-53,55-59 (2)]
-                 divisibility vocabulary -> intpairs_3to9 (1)
-                 [1][addi hole -> singleint_5to20;;singleint_5to20 (1)
-                     addi hole -> singleint_21to100;;singleint_21to100 (1)
-                     addi hole -> complements_to_20...90 (1)
-                     subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (1)
-                     subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (1)
-                     subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)]
-                 [1][area rectangle, picture=true -> nnpairs:4-9×6-9 (1)
-                     area rectangle, picture=true -> nnpairs:2-9×2-9, nb_variant=decimal (1)
-                     area rectangle, picture=true -> table_11_tens_easy (1)
-                     area rectangle, picture=true -> nnpairs:3-6×15,25 (1)
-                     area righttriangle -> nnpairs:3-9×3-9, code=1_1 (4)]
-                 [1][multi clever -> singleint_2to99 (1)
-                     multi clever, variant=with_a_decimal -> intpairs_2to9 (1)
-                     multi clever -> table_11_tens_easy (1)
-                     multi clever -> table_15 (1)
-                     multi clever -> int_deci_clever_pairs (1)
-                     volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
-                     volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
-                     volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)]
-                 [1][percent direct -> 25%of..., context=simple_unit (1)
-                     percent direct -> 75%of..., context=simple_unit (1)
-                     percent direct -> 10%of..., context=simple_unit (1)
-                     percent direct -> 10%of..., nb_variant=decimal1, context=simple_unit (1)]
-                 [1][estimation_of number -> nnsingletons:70-1000 (1)
-                     estimation_of number -> nnsingletons:1000-10000 (1)
-                     estimation_of number -> nnsingletons:10000-100000 (1)
-                     round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (6)]
-                 [1][mini_pb proportionality -> mergedinttriples_3to9 (6)
-                     mini_pb proportionality -> mergedinttriples_15_3to6 (2)
-                     mini_pb proportionality -> mergedinttriples_25_3to6 (2)]
-
-challenge: !!omap
-    - preset: "mental calculation"
-    - title: "Challenge, first part"
-    - exercise: !!omap
-        - shuffle: false
-        - tabular_batch: 20
-        - layout:
-          - min_row_height: 1
-        - questions: multi direct -> intpairs_3to9×6to9 (4)
-                     multi hole -> intpairs_6to9×6to9 (1)
-                     addi direct -> intpairs_20to100 (1)
-                     addi direct -> int_quintuples_4to20, nb_variant=±halforquarter (1)
-                     multi hole -> int_irreducible_frac (1)
-                     order of_operations, subvariant=only_positive -> singleint_2to9;;intpairs_2to9, variant=8-23 (1)
-                     subtr direct, subvariant=only_positive, context=complement_wording -> complements_to_10, nb_variant=decimal1 (1)
-                     numeric expansion -> mergedinttriples_3to9 (1)
-                     [1][time_units conversion, level=1 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
-                         time_units conversion, level=1 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
-                         time_units conversion, level=2 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
-                         time_units conversion, level=2 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
-                         time_units conversion, category=3, level=2 -> nnpairs:10×10,11,13-17,19-23,25-29,31-35,37-41,43-47,49-53,55-59 (2)]
-                     addi direct, context=angles -> nntriples:15-69×15-69×90, code=2_1, orientation=0 (1)
-                     [1][divi euclidean -> table_15 (1)
-                         divi euclidean -> table_25 (1)]
-                     percent direct -> 10%of..., context=simple_unit (1)
-                     divi direct -> intpairs_4to4×12to24, order=divisor,quotient (1)
-                     round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
-                     multi clever ->  intpairs_6to9×6to9 (1)
-                     [1][multi direct -> decimal_and_10_100_1000 (1)
-                         divi direct -> decimal_and_10_100_1000 (1)]
-                     vocabulary third -> multiplesof3_10to20 (1)
-                     units conversion -> unitspairs, level=1 (1)
-                     addi direct -> complements_to_20...90;;complements_to_20...90, patch=true (1)
-                     decimal numerals, direction=to_decimal -> decimals (1)
-                     percent direct -> 75%of..., context=simple_unit (1)
-                     subtr hole -> singleint_5to20;;singleint_5to20, nb_variant=±halforquarter (1)
-                     area rectangle, picture=true -> intpairs_3to9, nb_variant=decimal (1)
-                     mini_pb proportionality -> mergedinttriples_25_3to6 (1)
-                     rectangle length_or_width, context=from_area, picture=true -> intpairs_2to9, nb_variant=decimal1 (1)
-                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
-                     [1][volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
-                         volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)]
+                 units conversion -> unitspairs, level=1 (1)
+                 [1][order of_operations, subvariant=only_positive -> singleint_5to100;;intpairs_3to9, variant=1-7 (1)
+                     order of_operations, subvariant=only_positive -> singleint_3to9;;intpairs_3to9, variant=8-23 (1)]
+                 [1][vocabulary simple_parts_of_a_number -> auto_multiples (1)
+                     vocabulary simple_multiples_of_a_number -> auto_multiples (1)
+                     vocabulary operation -> auto_vocabulary (6)]
+                 percent direct -> 25|75%of..., level=easy, context=simple_unit (1)
 
 W01a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: mini_pb proportionality -> mergedinttriples_3to9 (2)
-                 addi direct -> complements_to_20...90;;complements_to_20...90, patch=true (1)
-                 area rectangle, picture=true -> intpairs_2to9, nb_variant=decimal2 (1)
-                 mini_pb proportionality -> mergedinttriples_15_3to6 (1)
+    - questions: multi direct -> nnpairs:3-6×15 (3)
+                 multi direct -> nntriples:2-6 (1)
+                 volume rightcuboid -> nntriples:2-6 (1)
 
 W01b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: mini_pb proportionality -> mergedinttriples_3to9 (2)
-                 addi direct -> complements_to_20...90;;complements_to_20...90, patch=true (1)
-                 mini_pb proportionality -> mergedinttriples_25_3to6 (1)
-                 multi hole -> int_irreducible_frac (1)
+    - questions: multi direct -> nnpairs:3-6×15 (1)
+                 multi direct -> nntriples:2-4, nb_variant=multiplesof10 (1)
+                 numeric expansion -> mergedinttriples_3to9 (1)
+                 subtr direct, subvariant=only_positive -> intpairs_11to90 (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
 
 W01c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: mini_pb proportionality -> mergedinttriples_3to9 (1)
-                 mini_pb proportionality -> mergedinttriples_15_3to6 (1)
-                 area rectangle, picture=true -> intpairs_2to9, nb_variant=decimal1 (1)
-                 perimeter rectangle, picture=true -> nnpairs:3-9,11-19×3-9,11-19, nb_variant=decimal (1)
-                 estimation_of number -> nnsingletons:1000-10000 (1)
+    - questions: percent direct -> 50%of..., level=easy, context=simple_unit (1)
+                 percent direct -> 50%of..., context=simple_unit (1)
+                 percent direct -> 25%of..., level=easy, context=simple_unit (1)
+                 percent direct -> 25%of..., level=easy (1)
+                 percent direct -> 75%of..., level=easy, context=simple_unit (1)
 
 W01d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: mini_pb proportionality -> mergedinttriples_3to9 (1)
-                 mini_pb proportionality -> mergedinttriples_25_3to6 (1)
-                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
-                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=16-23 (1)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
+    - questions: multi direct -> nnpairs:3-6×15 (1)
+                 percent direct -> 25%of..., level=easy, context=simple_unit (1)
+                 percent direct -> 75%of..., level=easy, context=simple_unit (1)
+                 subtr direct -> clocktime_data (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_7to20, sides_nb=4, nb_variant=±quarter, sides_particularity=none (1)
 
 W02a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (3)
-                 mini_pb proportionality -> mergedinttriples_3to9 (1)
-                 mini_pb proportionality -> mergedinttriples_15_3to6 (1)
+    - questions: time_units conversion, level=1 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
+                 time_units conversion, level=1 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
+                 time_units conversion, level=2 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
+                 time_units conversion, level=2 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
+                 time_units conversion, category=3, level=2 -> nnpairs:10×10,11,13-17,19-23,25-29,31-35,37-41,43-47,49-53,55-59 (1)
 
 W02b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (2)
-                 mini_pb proportionality -> mergedinttriples_25_3to6 (1)
-                 percent direct -> 75%of..., context=simple_unit (1)
-                 divi euclidean -> intpairs_2to10 (1)
+    - questions: multi direct -> nnpairs:3-6×15 (1)
+                 percent direct -> 25%of..., context=simple_unit (1)
+                 divi euclidean -> nnpairs:2-9 (1)
+                 time_units conversion, level=1 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
+                 decimal numerals, direction=to_decimal -> decimals (1)
 
 W02c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: time_units conversion, level=1, direction=right -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
-                 time_units conversion, level=1, direction=left -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
-                 time_units conversion, level=2 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
-                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
-                 divi direct -> decimal_and_10_100_1000 (1)
+    - questions: time_units conversion, level=1 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
+                 decimal numerals, direction=to_fraction -> decimals (1)
+                 divi euclidean -> nnpairs:3-6×15,25 (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to100;;intpairs_3to9, variant=1-7 (1)
+                 vocabulary operation -> auto_vocabulary (1)
 
 W02d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: time_units conversion, level=1, direction=left -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
-                 time_units conversion, level=1, direction=right -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
-                 time_units conversion, level=2 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
-                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
-                 addi direct -> complements_to_20...90;;complements_to_20...90, patch=true (1)
+    - questions: multi direct -> nnpairs:3-6×15 (1)
+                 percent direct -> 75%of..., level=easy, context=simple_unit (1)
+                 time_units conversion, level=2 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
+                 order of_operations, subvariant=only_positive -> singleint_3to9;;intpairs_3to9, variant=8-23 (1)
+                 units conversion -> unitspairs, level=1 (1)
 
 W03a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: time_units conversion, category=3, level=2 -> nnpairs:10×10,11,13-17,19-23,25-29,31-35,37-41,43-47,49-53,55-59 (1)
-                 multi clever -> table_11_tens_easy (1)
-                 multi clever -> singleint_2to99 (1)
-                 volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
-                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
+    - questions: time_units conversion, level=2 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
+                 fraction_of a_rectangle -> intpairs_4to9;;intpairs_6to9 (1)
+                 percent direct -> 25%of..., context=simple_unit (1)
+                 digitplace numberof -> digits_places, generation_type=default (1)
+                 area righttriangle -> nnpairs:3-6×15,25, code=1_1 (1)
 
 W03b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: mini_pb proportionality -> mergedinttriples_3to9 (1)
-                 time_units conversion, level=1, direction=right -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
-                 multi clever -> int_deci_clever_pairs (1)
-                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
-                 numeric expansion -> mergedinttriples_3to9 (1)
+    - questions: time_units conversion, category=3, level=2 -> nnpairs:10×10,11,13-17,19-23,25-29,31-35,37-41,43-47,49-53,55-59 (1)
+                 fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
+                 percent direct -> 75%of..., level=easy, context=simple_unit (1)
+                 multi direct -> nnpairs:3-6×15 (1)
+                 volume rightcuboid -> nntriples:2-6 (1)
 
 W03c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: percent direct -> 10%of..., context=simple_unit (1)
-                 multi direct -> decimal_and_10_100_1000 (1)
-                 mini_pb proportionality -> mergedinttriples_15_3to6 (1)
-                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
-                 multi clever, variant=with_a_decimal -> intpairs_2to9 (1)
+    - questions: addi direct -> nnquadruples:7-20 (1)
+                 addi direct -> clocktime_data (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_7to20, sides_nb=4, nb_variant=±quarter, sides_particularity=none (1)
+                 time_units conversion, level=2 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
+                 percent direct -> 25%of..., context=simple_unit (1)
 
 W03d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: percent direct -> 75%of... (1)
-                 mini_pb proportionality -> mergedinttriples_3to9 (1)
-                 multi clever -> table_15 (1)
-                 time_units conversion, level=2 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
-                 estimation_of number -> nnsingletons:1000-10000 (1)
-
-W04a: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: addi hole -> singleint_5to20;;singleint_5to20 (1)
-                 time_units conversion, category=3, level=2 -> nnpairs:10×10,11,13-17,19-23,25-29,31-35,37-41,43-47,49-53,55-59 (1)
-                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
-                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
-                 multi clever -> int_deci_clever_pairs (1)
-
-W04b: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: area rectangle -> intpairs_2to9, nb_variant=decimal2 (1)
-                 percent direct -> 10%of..., context=simple_unit (1)
-                 subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20 (1)
-                 volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
-                 mini_pb proportionality -> mergedinttriples_25_3to6 (1)
-
-W04c: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)
-                 addi hole -> complements_to_20...90 (1)
-                 addi direct, context=angles -> nnpairs:11-69×11-69 (1)
-                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
-                 time_units conversion, level=1, direction=left -> nnpairs:15×17-19,21-23,25-27,29-31 (1)
-
-W04d: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: subtr hole, subvariant=only_positive -> singleint_21to100;;singleint_21to100 (1)
-                 mini_pb proportionality -> mergedinttriples_3to9 (1)
-                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
-                 time_units conversion, level=2 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
-
-W05a: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: divisibility vocabulary, variant=remainder -> intpairs_3to9 (1)
-                 divisibility vocabulary, variant=true -> intpairs_3to9 (1)
-                 divisibility vocabulary, variant=false -> intpairs_3to9 (1)
-                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=16-23 (1)
-                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
-
-W05b: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: divisibility vocabulary, variant=remainder -> intpairs_3to9 (1)
-                 divisibility vocabulary, variant=true -> intpairs_3to9 (1)
-                 divisibility vocabulary, variant=false -> intpairs_3to9 (1)
+    - questions: divi direct -> decimal_and_10_100_1000 (1)
                  multi hole -> int_irreducible_frac (1)
-                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
-
-W05c: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: divisibility vocabulary, variant=remainder -> intpairs_3to9 (1)
-                 divisibility vocabulary, variant=true -> intpairs_3to9 (1)
-                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=16-23 (1)
-                 volume rightcuboid -> int_deci_clever_pairs;;singleint_2to99 (1)
+                 order of_operations, subvariant=only_positive -> singleint_3to9;;intpairs_3to9, variant=8-23 (1)
                  time_units conversion, category=3, level=2 -> nnpairs:10×10,11,13-17,19-23,25-29,31-35,37-41,43-47,49-53,55-59 (1)
-
-W05d: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: divisibility vocabulary, variant=true -> intpairs_3to9 (1)
-                 divisibility vocabulary, variant=false -> intpairs_3to9 (1)
-                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
-                 mini_pb proportionality -> mergedinttriples_15_3to6 (1)
-                 multi clever -> table_11_tens_easy (1)
+                 percent direct -> 75%of..., level=easy, context=simple_unit (1)

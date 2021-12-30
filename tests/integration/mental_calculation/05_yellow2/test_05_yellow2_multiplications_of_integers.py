@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_perimeters_areas_volumes():
+def test_multiplications_of_integers():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '05_yellow2',
-                                       'perimeters_areas_volumes')),
+                                       'multiplications_of_integers')),
                              pdf_output=True)
 
 
-def test_perimeters_areas_volumes_embedding_js():
+def test_multiplications_of_integers_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '05_yellow2',
-                                       'perimeters_areas_volumes',
+                                       'multiplications_of_integers',
                                        enable_js_form=True)),
                              pdf_output=True)

@@ -624,55 +624,35 @@
         "03_yellow",
         "W05d"
     ],
-    "05_yellow2_divisibility": [
+    "05_yellow2_multiplications_of_integers": [
         "mental_calculation",
         "05_yellow2",
-        "divisibility"
-    ],
-    "05_yellow2_numbers_rounding": [
-        "mental_calculation",
-        "05_yellow2",
-        "numbers_rounding"
-    ],
-    "05_yellow2_time_units": [
-        "mental_calculation",
-        "05_yellow2",
-        "time_units"
-    ],
-    "05_yellow2_addi_subtr_hole": [
-        "mental_calculation",
-        "05_yellow2",
-        "addi_subtr_hole"
-    ],
-    "05_yellow2_clever_calculations": [
-        "mental_calculation",
-        "05_yellow2",
-        "clever_calculations"
-    ],
-    "05_yellow2_proportionality_problems": [
-        "mental_calculation",
-        "05_yellow2",
-        "proportionality_problems"
+        "multiplications_of_integers"
     ],
     "05_yellow2_percentages": [
         "mental_calculation",
         "05_yellow2",
         "percentages"
     ],
-    "05_yellow2_perimeters_areas_volumes": [
+    "05_yellow2_time_units": [
         "mental_calculation",
         "05_yellow2",
-        "perimeters_areas_volumes"
+        "time_units"
+    ],
+    "05_yellow2_decimal_numerals": [
+        "mental_calculation",
+        "05_yellow2",
+        "decimal_numerals"
+    ],
+    "05_yellow2_operator_precedence": [
+        "mental_calculation",
+        "05_yellow2",
+        "operator_precedence"
     ],
     "05_yellow2_exam": [
         "mental_calculation",
         "05_yellow2",
         "exam"
-    ],
-    "05_yellow2_challenge": [
-        "mental_calculation",
-        "05_yellow2",
-        "challenge"
     ],
     "05_yellow2_W01a": [
         "mental_calculation",
@@ -733,45 +713,5 @@
         "mental_calculation",
         "05_yellow2",
         "W03d"
-    ],
-    "05_yellow2_W04a": [
-        "mental_calculation",
-        "05_yellow2",
-        "W04a"
-    ],
-    "05_yellow2_W04b": [
-        "mental_calculation",
-        "05_yellow2",
-        "W04b"
-    ],
-    "05_yellow2_W04c": [
-        "mental_calculation",
-        "05_yellow2",
-        "W04c"
-    ],
-    "05_yellow2_W04d": [
-        "mental_calculation",
-        "05_yellow2",
-        "W04d"
-    ],
-    "05_yellow2_W05a": [
-        "mental_calculation",
-        "05_yellow2",
-        "W05a"
-    ],
-    "05_yellow2_W05b": [
-        "mental_calculation",
-        "05_yellow2",
-        "W05b"
-    ],
-    "05_yellow2_W05c": [
-        "mental_calculation",
-        "05_yellow2",
-        "W05c"
-    ],
-    "05_yellow2_W05d": [
-        "mental_calculation",
-        "05_yellow2",
-        "W05d"
     ]
 }
