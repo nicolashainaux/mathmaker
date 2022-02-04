@@ -148,6 +148,8 @@ def build_index():
                 loaded_data = yaml.safe_load(f)
                 if loaded_data is not None:
                     folder = OrderedDict(loaded_data)
+                else:
+                    folder = []
                 for sheet_name in folder:
                     directive = '_'.join([subtheme, sheet_name])
                     index[directive] = (theme, subtheme, sheet_name)
