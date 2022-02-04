@@ -24,26 +24,6 @@
         "expand",
         "double_detailed_solutions"
     ],
-    "07_orange1_simple": [
-        "mental_calculation",
-        "07_orange1",
-        "simple"
-    ],
-    "07_orange1_simple_detailed_solutions": [
-        "mental_calculation",
-        "07_orange1",
-        "simple_detailed_solutions"
-    ],
-    "07_orange1_double": [
-        "mental_calculation",
-        "07_orange1",
-        "double"
-    ],
-    "07_orange1_double_detailed_solutions": [
-        "mental_calculation",
-        "07_orange1",
-        "double_detailed_solutions"
-    ],
     "06_orange_divisibility": [
         "mental_calculation",
         "06_orange",
