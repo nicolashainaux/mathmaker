@@ -141,8 +141,8 @@ W01a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> nnpairs:3-6×15 (3)
-                 multi direct -> nntriples:2-6 (1)
-                 volume rightcuboid -> nntriples:2-6 (1)
+                 multi direct -> nntriples:3-6 (1)
+                 volume rightcuboid -> nntriples:2-4×2-4×3-6 (1)
 
 W01b: !!omap
   - preset: "mental calculation slideshow"
@@ -156,11 +156,12 @@ W01b: !!omap
 W01c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
+    - shuffle: false
     - questions: percent direct -> 50%of..., level=easy, context=simple_unit (1)
-                 percent direct -> 50%of..., context=simple_unit (1)
                  percent direct -> 25%of..., level=easy, context=simple_unit (1)
-                 percent direct -> 25%of..., level=easy (1)
+                 percent direct -> 50%of..., context=simple_unit (1)
                  percent direct -> 75%of..., level=easy, context=simple_unit (1)
+                 percent direct -> 25%of..., context=simple_unit (1)
 
 W01d: !!omap
   - preset: "mental calculation slideshow"
