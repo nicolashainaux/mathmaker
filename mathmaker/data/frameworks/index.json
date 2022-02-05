@@ -24,25 +24,45 @@
         "expand",
         "double_detailed_solutions"
     ],
+    "06_orange_proportionality_problems": [
+        "mental_calculation",
+        "06_orange",
+        "proportionality_problems"
+    ],
+    "06_orange_testsheet": [
+        "mental_calculation",
+        "06_orange",
+        "testsheet"
+    ],
+    "06_orange_geometry": [
+        "mental_calculation",
+        "06_orange",
+        "geometry"
+    ],
+    "06_orange_estimations": [
+        "mental_calculation",
+        "06_orange",
+        "estimations"
+    ],
     "06_orange_divisibility": [
         "mental_calculation",
         "06_orange",
         "divisibility"
     ],
-    "06_orange_units_conversions": [
+    "06_orange_clever_calculations": [
         "mental_calculation",
         "06_orange",
-        "units_conversions"
+        "clever_calculations"
     ],
     "06_orange_percentages": [
         "mental_calculation",
         "06_orange",
         "percentages"
     ],
-    "06_orange_compendium": [
+    "06_orange_units_conversions": [
         "mental_calculation",
         "06_orange",
-        "compendium"
+        "units_conversions"
     ],
     "06_orange_exam": [
         "mental_calculation",

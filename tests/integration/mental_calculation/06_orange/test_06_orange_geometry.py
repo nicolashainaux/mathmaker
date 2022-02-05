@@ -25,18 +25,18 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_fractions_simplifications():
+def test_geometry():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '06_orange',
-                                       'fractions_simplifications')),
+                                       'geometry')),
                              pdf_output=True)
 
 
-def test_fractions_simplifications_embedding_js():
+def test_geometry_embedding_js():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('mental_calculation',
                                        '06_orange',
-                                       'fractions_simplifications',
+                                       'geometry',
                                        enable_js_form=True)),
                              pdf_output=True)
