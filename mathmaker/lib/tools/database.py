@@ -2019,6 +2019,9 @@ class mc_source(object):
         elif tag_classification == 'anglessets':
             return shared.anglessets_source.next(**kwargs)
         elif tag_classification == 'polygons':
+            if 'sides_nb' in kwargs:
+                kwargs['sides_nb'] = random.choice(
+                    list(intspan(kwargs['sides_nb'])))
             result = shared.polygons_source.next(**kwargs)
             nb_source, kwords = preprocess_polygons_sides_lengths_query(
                 polygon_data=result, qkw=qkw)
