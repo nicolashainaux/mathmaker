@@ -112,6 +112,8 @@ yaml.Constructor = _Constructor
 
 def collect_strings(data, rel_file_name, keywords_starts, keywords):
     # sys.stderr.write('data={}\ntype={}\n'.format(data, type(data)))
+    if data is None:
+        data = []
     for key in data:
         # sys.stderr.write('key={}; type={}\n'.format(key, type(key)))
         if isinstance(data, list):
