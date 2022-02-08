@@ -34,6 +34,7 @@ from .calculation import vocabulary_simple_multiple_of_a_number
 from .calculation import vocabulary_multi, vocabulary_divi
 from .calculation import vocabulary_addi, vocabulary_subtr
 from .calculation import fraction_of_a_rectangle, fraction_of_a_linesegment
+from .calculation import fraction_of_a_quantity
 from .calculation import addi_hole, subtr_hole
 from .calculation import units_conversion, time_units_conversion
 from .calculation import decimal_numerals
@@ -69,6 +70,7 @@ __all__ = ['expand_simple', 'expand_double',
            'vocabulary_simple_multiple_of_a_number', 'vocabulary_multi',
            'vocabulary_divi', 'vocabulary_addi', 'vocabulary_subtr',
            'fraction_of_a_rectangle', 'fraction_of_a_linesegment',
+           'fraction_of_a_quantity',
            'order_of_operations',
            'addi_hole', 'subtr_hole',
            'units_conversion', 'time_units_conversion', 'decimal_numerals',
