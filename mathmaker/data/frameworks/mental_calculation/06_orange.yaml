@@ -15,7 +15,9 @@ testsheet: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation"
   - exercise: !!omap
-    - questions: perimeter polygon, qvariant=missing_length -> polygons, sum_ingredients=int_2to10, sides_nb=5-6 (10)
+    - layout:
+      - min_row_height: 0.9
+    - questions: fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (10)
 
 geometry: !!omap
   - preset: "mental calculation"
@@ -45,6 +47,17 @@ geometry: !!omap
                      addi direct, context=angles -> nnpairs:11-69×11-69 (1)
                      subtr direct, subvariant=only_positive, context=angles -> nnpairs:11-69×90 (1)
                      subtr direct, subvariant=only_positive, context=angles, code=1_1 -> nnpairs:11-69×11-69 (1)]
+
+fractions: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: fractions"
+  - exercise: !!omap
+    - layout:
+      - min_row_height: 0.9
+    - questions: fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (4)
+                 fraction_of a_rectangle -> intpairs_4to9;;intpairs_6to9 (1)
+                 fraction_of a_linesegment -> simple_fractions (1)
+                 fractions conversions -> nnsingletons:1,10,20,25,50,75 (2)
 
 estimations: !!omap
   - preset: "mental calculation"

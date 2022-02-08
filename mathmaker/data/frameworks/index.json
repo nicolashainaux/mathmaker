@@ -39,6 +39,11 @@
         "06_orange",
         "geometry"
     ],
+    "06_orange_fractions": [
+        "mental_calculation",
+        "06_orange",
+        "fractions"
+    ],
     "06_orange_estimations": [
         "mental_calculation",
         "06_orange",
