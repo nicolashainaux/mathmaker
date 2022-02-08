@@ -36,8 +36,6 @@ class sub_object(component.structure):
         :type build_data: tuple
         """
         super().setup("minimal", **options)
-        import sys
-        sys.stderr.write('build_data={}\n'.format(build_data))
         super().setup("numbers", nb=build_data, shuffle_nbs=False, **options)
         # super().setup("nb_variants", nb=build_data, **options)
         self.transduration = 30
