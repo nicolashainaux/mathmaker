@@ -1609,15 +1609,13 @@ def generate_random_decimal_nb(position=None, width='random',
         if len(width.split('_')) != 2:
             width = 'random'
             warnings.warn('Malformed random width. '
-                          'A random value will be chosen instead.'
-                          .format(width, len(digits_positions)))
+                          'A random value will be chosen instead.')
         else:
             _, span = width.split('_')
             if not len(span.split('to')) == 2:
                 width = 'random'
                 warnings.warn('Malformed random width\'s span. '
-                              'A random value will be chosen instead.'
-                              .format(width, len(digits_positions)))
+                              'A random value will be chosen instead.')
             else:
                 mini, maxi = span.split('to')
                 try:
@@ -1626,8 +1624,7 @@ def generate_random_decimal_nb(position=None, width='random',
                     width = 'random'
                     warnings.warn('Malformed random width\'s span bounds '
                                   '(both should be int). '
-                                  'A random value will be chosen instead.'
-                                  .format(width, len(digits_positions)))
+                                  'A random value will be chosen instead.')
                 else:
                     width = random.choice([i + 1
                                            for i
