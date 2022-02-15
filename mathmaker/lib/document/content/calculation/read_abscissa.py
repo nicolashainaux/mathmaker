@@ -52,21 +52,18 @@ class sub_object(component.structure):
 
         # default amplitude between mini and maxi values
         amplitude = 3
-        if self.nb2 >= 3:
+        if 3 <= self.nb2 <= 5:
             amplitude = 2
         elif self.nb2 >= 6:
             amplitude = 1
 
-        if start_at_zero:
+        mini = random.choice([floor, floor - 1])
+        if start_at_zero or mini < 0:
             mini = 0
-        else:
-            mini = random.choice([floor, floor - 1])
-            if mini < 0:
-                mini = 0
 
         maxi = mini + amplitude
 
-        if not deci_value < maxi + 2 / self.nb2:
+        if deci_value >= (maxi + 2 / self.nb2):
             maxi += 1
 
         self.xaxis = XAxis(mini, maxi, length=8, subdivisions=self.nb2,
