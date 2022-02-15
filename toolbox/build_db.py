@@ -44,7 +44,11 @@ It will add all entries:
 - decimals from 0.001 to 9.999
 - digits positions: one table for thousands to thousandths, another for
   tenths to thousandths.
+  TODO: simple fractions are actually called (and should be renamed as) proper
+  fractions
 - simple fractions: 1/2 to 1/10, 2/3 to 2/10 etc. until 9/10
+- improper fractions: 2/2, 3/2, ... to 99/2, 3/3, 4/3... to 99/3 etc. until
+  99/10
 - dvipsnames_selection for LaTeX package 'xcolor'
 - polygons shapes
 """
@@ -172,6 +176,9 @@ def __main__():
              equilateral INTEGER, pythagorean INTEGER, equal_sides INTEGER,
              drawDate INTEGER)''',
          '''CREATE TABLE simple_fractions
+            (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
+             reducible INTEGER, drawDate INTEGER)''',
+         '''CREATE TABLE improper_fractions
             (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
              reducible INTEGER, drawDate INTEGER)''',
          # As int_deci_clever_pairs may be 'unioned' with int_pairs, its ids
@@ -1012,6 +1019,16 @@ def __main__():
                if j > i]
     db.executemany("INSERT "
                    "INTO simple_fractions(nb1, nb2, reducible, drawDate) "
+                   "VALUES(?, ?, ?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert improper fractions...\n')
+    db_rows = [(i + 1, j + 2, 0 if gcd(i + 1, j + 2) == 1 else 1, 0)
+               for j in range(100)
+               for i in range(100)
+               if j < i]
+    db.executemany("INSERT "
+                   "INTO improper_fractions(nb1, nb2, reducible, drawDate) "
                    "VALUES(?, ?, ?, ?)",
                    db_rows)
 
