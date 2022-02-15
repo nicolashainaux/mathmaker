@@ -73,6 +73,7 @@ def init():
     global number_of_the_question
     global order_of_operations_variants_source
     global unitspairs_source
+    global uppercase_letters_source
     global alternate_source  # , alternate_source2
     global alternate_2masks_source
     global alternate_3masks_source
@@ -325,6 +326,7 @@ def init():
     extdecimals_source = sub_source('extdecimals', ondemand=True,
                                     generator_fct=generate_random_decimal_nb)
     alternate_source = sub_source('alternate')
+    uppercase_letters_source = sub_source('uppercase_letters_source')
     alternate_2masks_source = sub_source('alternate_2masks')
     alternate_3masks_source = sub_source('alternate_3masks')
     alternate_4masks_source = sub_source('alternate_4masks')
