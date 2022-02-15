@@ -47,7 +47,7 @@ class sub_object(component.structure):
         self.point_name = next(shared.uppercase_letters_source)[0]
 
         self.answer = Fraction(self.nb1, self.nb2)
-        deci_value = Number(self.answer.evaluate()).rounded(Number('1.00'))
+        deci_value = Number(self.answer.evaluate()).rounded(Number('1.000'))
         floor = deci_value.rounded(Number('1'), rounding=ROUND_DOWN)
 
         # default amplitude between mini and maxi values
@@ -71,6 +71,7 @@ class sub_object(component.structure):
 
         self.xaxis = XAxis(mini, maxi, length=8, subdivisions=self.nb2,
                            points_def=[(deci_value, self.point_name)])
+        self.xaxis.baseline = '-6pt'
 
         # This default wording is meant for mental calculation.
         self.wording = _('Abscissa of {point_name}?')
@@ -84,13 +85,13 @@ class sub_object(component.structure):
         else:
             return shared.machine.write_layout(
                 (1, 2), [8.5, 4.5],
-                [self.xaxis.drawn,
-                 self.wording.format(**self.wording_format)])
+                [self.xaxis.drawn, self.wording.format(**self.wording_format)],
+                justify=['left', 'center'])
         # return post_process(self.wording.format(**self.wording_format))
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        answer = shared.machine.write_math_style2(self.answer)
+        answer = shared.machine.write_math_style2(self.answer.printed)
         deci_value = self.answer.evaluate()
         if deci_value.fracdigits_nb() <= 3:
             answer += _(' (or {})').format(deci_value.printed)
