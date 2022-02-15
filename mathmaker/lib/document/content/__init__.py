@@ -45,6 +45,7 @@ from .calculation import divisibility_vocabulary
 from .calculation import divisibility_rule
 from .calculation import fraction_simplification
 from .calculation import fractions_conversions
+from .calculation import read_abscissa
 from .geometry import intercept_theorem_triangle
 from .geometry import intercept_theorem_triangle_formula
 from .geometry import intercept_theorem_butterfly
@@ -71,7 +72,7 @@ __all__ = ['expand_simple', 'expand_double',
            'vocabulary_divi', 'vocabulary_addi', 'vocabulary_subtr',
            'fraction_of_a_rectangle', 'fraction_of_a_linesegment',
            'fraction_of_a_quantity',
-           'order_of_operations',
+           'order_of_operations', 'read_abscissa',
            'addi_hole', 'subtr_hole',
            'units_conversion', 'time_units_conversion', 'decimal_numerals',
            'percent_direct', 'divi_euclidean', 'mini_pb_proportionality',
