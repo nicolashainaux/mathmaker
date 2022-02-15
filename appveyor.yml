@@ -7,7 +7,7 @@ branches:
   - dev
 
 image:
-  - Ubuntu1804
+  - Ubuntu2004
 
 max_jobs: 1
 
