@@ -103,6 +103,8 @@
         "nb1",
         "nb2",
         "reducible",
+        "mod",
+        "deci",
         "drawDate"
     ],
     "int_deci_clever_pairs": [

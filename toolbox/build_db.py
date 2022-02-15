@@ -180,7 +180,8 @@ def __main__():
              reducible INTEGER, drawDate INTEGER)''',
          '''CREATE TABLE improper_fractions
             (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
-             reducible INTEGER, drawDate INTEGER)''',
+             reducible INTEGER, mod INTEGER, deci DECIMAL(4, 1),
+             drawDate INTEGER)''',
          # As int_deci_clever_pairs may be 'unioned' with int_pairs, its ids
          # will be determined starting from the max id of int_pairs, in order
          # to have unique ids over the two tables.
@@ -1023,13 +1024,16 @@ def __main__():
                    db_rows)
 
     sys.stderr.write('Insert improper fractions...\n')
-    db_rows = [(i + 1, j + 2, 0 if gcd(i + 1, j + 2) == 1 else 1, 0)
+    db_rows = [(i + 1, j + 2, 0 if gcd(i + 1, j + 2) == 1 else 1,
+                (i + 1) % (j + 2),
+                float(Number((i + 1) / (j + 2)).rounded(Number('1.00'))), 0)
                for j in range(100)
                for i in range(100)
                if j < i]
     db.executemany("INSERT "
-                   "INTO improper_fractions(nb1, nb2, reducible, drawDate) "
-                   "VALUES(?, ?, ?, ?)",
+                   "INTO improper_fractions(nb1, nb2, reducible, mod, "
+                   "deci, drawDate) "
+                   "VALUES(?, ?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert single decimals from 0.0 to 100.0...\n')
