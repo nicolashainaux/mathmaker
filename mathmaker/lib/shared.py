@@ -201,7 +201,7 @@ def init():
                                             "nb5", "nb6"])
     simple_fractions_source = database.source('simple_fractions',
                                               ['id', 'nb1', 'nb2'])
-    improper_fractions_source = database.source('simple_fractions',
+    improper_fractions_source = database.source('improper_fractions',
                                                 ['id', 'nb1', 'nb2'])
     single_ints_source = database.source("single_ints", ["id", "nb1"])
     single_deci1_source = database.source("single_deci1", ["id", "nb1"])
