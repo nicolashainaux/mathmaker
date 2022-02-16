@@ -11,14 +11,6 @@ proportionality_problems: !!omap
                  # To select exclusively from table of 15 or from table of 25,
                  # use mergedinttriples_*_3to6
 
-testsheet: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation"
-  - exercise: !!omap
-    - layout:
-      - min_row_height: 0.9
-    - questions: fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (10)
-
 geometry: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: geometry"
@@ -55,6 +47,8 @@ fractions: !!omap
     - layout:
       - min_row_height: 0.9
     - questions: fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (4)
+                 read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
+                 read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
                  fraction_of a_rectangle -> intpairs_4to9;;intpairs_6to9 (1)
                  fraction_of a_linesegment -> simple_fractions (1)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (2)
