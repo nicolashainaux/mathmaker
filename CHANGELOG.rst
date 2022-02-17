@@ -1,6 +1,15 @@
 Changelog
 =========
 
+New in development version 0.7.9 (2022-02-17)
+---------------------------------------------
+
+* New questions types for mental calculation: read abscissa of a point on an axis; find the missing length of a polygon, knowing its perimeter and other sides; calculate a simple fraction of a simple quantity. multi_direct questions may have 3 factors.
+* Update yellow1, yellow2 and orange belts in mental calculation.
+* Support python>=3.8 (drop 3.6 support)
+* Several minor improvements.
+* Bug fixes.
+
 New in development version 0.7.7 (2021-09-21)
 ---------------------------------------------
 
