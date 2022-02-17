@@ -126,6 +126,7 @@ exam: !!omap
                  [1][digitplace direct -> digits_places (1)
                      digitplace reversed -> digits_places (1)
                      digitplace numberof -> digits_places, generation_type=default (1)]
+                 decimal numerals -> decimals (1)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
                  [1][fraction_of a_rectangle -> intpairs_4to9;;intpairs_6to9 (1)
                      fraction_of a_linesegment -> simple_fractions (1)]
