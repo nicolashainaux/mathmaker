@@ -346,17 +346,17 @@ def get_nb_sources_from_question_info(q_i):
 # --------------------------------------------------------------------------
 ##
 #   @brief Increases the disorder of the questions' list
-#   @param  l           The list
+#   @param  L           The list
 #   @param  sort_key    The list's objects' attribute that will be used to
 #                       determine whether the order should be changed or not
-def increase_alternation(l, sort_key):
-    if len(l) >= 3:
-        for i in range(len(l) - 2):
-            if getattr(l[i], sort_key) == getattr(l[i + 1], sort_key):
-                if getattr(l[i + 2], sort_key) != getattr(l[i], sort_key):
-                    l[i + 1], l[i + 2] = l[i + 2], l[i + 1]
+def increase_alternation(L, sort_key):
+    if len(L) >= 3:
+        for i in range(len(L) - 2):
+            if getattr(L[i], sort_key) == getattr(L[i + 1], sort_key):
+                if getattr(L[i + 2], sort_key) != getattr(L[i], sort_key):
+                    L[i + 1], L[i + 2] = L[i + 2], L[i + 1]
 
-    return l
+    return L
 
 
 def numbering_device(numbering_kind='disabled'):
