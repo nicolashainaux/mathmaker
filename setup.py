@@ -168,7 +168,7 @@ setup(
     author=__author__,
     tests_require=['tox'],
     install_requires=['microlib>=1.7',
-                      'mathmakerlib>=0.7.8',
+                      'mathmakerlib>=0.7.9',
                       'polib>=1.0.8',
                       'python-daemon>=2.1.2',
                       'intspan>=1.5.8',
