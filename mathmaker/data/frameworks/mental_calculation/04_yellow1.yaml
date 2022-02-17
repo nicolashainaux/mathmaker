@@ -70,6 +70,7 @@ multiplications_hole: !!omap
 exam: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation:  final test for yellow belt, first stripe"
+  - answers_title: "Answers (yellow belt, 1st stripe)"
   - exercise: !!omap
     - layout:
       - min_row_height: 1

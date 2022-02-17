@@ -42,6 +42,7 @@ addi_subtr: !!omap
 exam: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: final test for white belt, second stripe"
+  - answers_title: "Answers (white belt, 2d stripe)"
   - exercise: !!omap
     - mix:
       - questions: multi reversed,

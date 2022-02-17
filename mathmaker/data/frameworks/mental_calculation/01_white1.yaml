@@ -19,6 +19,7 @@ multiplications_hole: !!omap
 exam: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: final test for white belt, first stripe"
+  - answers_title: "Answers (white belt, 1st stripe)"
   - exercise: !!omap
     - mix:
       - questions: multi direct,

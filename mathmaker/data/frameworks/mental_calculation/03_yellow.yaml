@@ -116,6 +116,7 @@ operator_precedence: !!omap
 exam: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation:  final test for yellow belt"
+  - answers_title: "Answers (yellow belt)"
   - exercise: !!omap
     - layout:
       - min_row_height: 1
