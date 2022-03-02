@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2022-02-17 11:57+0100\n"
+"PO-Revision-Date: 2022-03-02 11:12+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -2503,25 +2503,26 @@ msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr "Prêt ?{sep}Feu !{sep}Partez !"
 
 #: data/frameworks/mental_calculation/06_orange.yaml:179
+#: data/frameworks/mental_calculation/06_orange.yaml:167
+#: data/frameworks/mental_calculation/05_yellow2.yaml:49
 #: data/frameworks/mental_calculation/04_yellow1.yaml:181
 #: data/frameworks/mental_calculation/05_yellow2.yaml:131
-#: data/frameworks/mental_calculation/05_yellow2.yaml:55
-#: data/frameworks/mental_calculation/05_yellow2.yaml:174
-#: data/frameworks/mental_calculation/06_orange.yaml:47
-#: data/frameworks/mental_calculation/06_orange.yaml:127
-#: data/frameworks/mental_calculation/03_yellow.yaml:166
-#: data/frameworks/mental_calculation/05_yellow2.yaml:187
-#: data/frameworks/mental_calculation/05_yellow2.yaml:169
-#: data/frameworks/mental_calculation/06_orange.yaml:192
-#: data/frameworks/mental_calculation/03_yellow.yaml:167
-#: data/frameworks/mental_calculation/03_yellow.yaml:159
-#: data/frameworks/mental_calculation/05_yellow2.yaml:164
-#: data/frameworks/mental_calculation/04_yellow1.yaml:191
-#: data/frameworks/mental_calculation/06_orange.yaml:194
+#: data/frameworks/mental_calculation/06_orange.yaml:160
 #: data/frameworks/mental_calculation/04_yellow1.yaml:183
-#: data/frameworks/mental_calculation/05_yellow2.yaml:49
-#: data/frameworks/mental_calculation/06_orange.yaml:167
+#: data/frameworks/mental_calculation/06_orange.yaml:194
+#: data/frameworks/mental_calculation/05_yellow2.yaml:169
 #: data/frameworks/mental_calculation/05_yellow2.yaml:255
+#: data/frameworks/mental_calculation/03_yellow.yaml:166
+#: data/frameworks/mental_calculation/05_yellow2.yaml:164
+#: data/frameworks/mental_calculation/03_yellow.yaml:159
+#: data/frameworks/mental_calculation/05_yellow2.yaml:55
+#: data/frameworks/mental_calculation/06_orange.yaml:192
+#: data/frameworks/mental_calculation/04_yellow1.yaml:191
+#: data/frameworks/mental_calculation/06_orange.yaml:127
+#: data/frameworks/mental_calculation/03_yellow.yaml:167
+#: data/frameworks/mental_calculation/05_yellow2.yaml:187
+#: data/frameworks/mental_calculation/06_orange.yaml:47
+#: data/frameworks/mental_calculation/05_yellow2.yaml:174
 msgid "Challenge, first part"
 msgstr "Première épreuve du Tournoi"
 
@@ -2605,7 +2606,7 @@ msgstr "Calcul mental : priorités opératoires"
 msgid "Mental calculation: numeric expansion"
 msgstr "Calcul mental : développement numérique"
 
-#: lib/document/content/geometry/perimeter_polygon.py:74
+#: lib/document/content/geometry/perimeter_polygon.py:84
 #, python-brace-format
 msgid ""
 "Perimeter of this quadrilateral?\\newline (length unit: {length_unit}) |hint:"
@@ -2614,7 +2615,7 @@ msgstr ""
 "Périmètre de ce quadrilatère ?\\newline (unité de longueur : {length_unit}) |"
 "hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_polygon.py:76
+#: lib/document/content/geometry/perimeter_polygon.py:86
 #, python-brace-format
 msgid ""
 "Perimeter of this pentagon?\\newline (length unit: {length_unit}) |hint:"
@@ -2623,7 +2624,7 @@ msgstr ""
 "Périmètre de ce pentagone ?\\newline (unité de longueur : {length_unit}) |"
 "hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_polygon.py:78
+#: lib/document/content/geometry/perimeter_polygon.py:88
 #, python-brace-format
 msgid ""
 "Perimeter of this hexagon?\\newline (length unit: {length_unit}) |hint:"
@@ -2887,12 +2888,13 @@ msgstr ""
 msgid "Mental calculation: units conversions"
 msgstr "Calcul mental : conversions d'unités"
 
-#: data/frameworks/mental_calculation/06_orange.yaml:111
-#: data/frameworks/mental_calculation/06_orange.yaml:84
-#: data/frameworks/mental_calculation/06_orange.yaml:109
-#: data/frameworks/mental_calculation/06_orange.yaml:108
-#: data/frameworks/mental_calculation/06_orange.yaml:96
 #: data/frameworks/mental_calculation/06_orange.yaml:70
+#: data/frameworks/mental_calculation/06_orange.yaml:108
+#: data/frameworks/mental_calculation/06_orange.yaml:109
+#: data/frameworks/mental_calculation/06_orange.yaml:84
+#: data/frameworks/mental_calculation/06_orange.yaml:111
+#: data/frameworks/mental_calculation/06_orange.yaml:96
+#: data/frameworks/mental_calculation/06_orange.yaml:101
 msgid "Mental calculation:  final test for orange belt"
 msgstr "Calcul mental : ceinture orange"
 
@@ -2993,10 +2995,11 @@ msgstr "Fraction simple égale à {} ?"
 msgid "{}"
 msgstr "{}"
 
-#: data/frameworks/mental_calculation/06_orange.yaml:45
 #: data/frameworks/mental_calculation/03_yellow.yaml:27
-#: data/frameworks/mental_calculation/06_orange.yaml:53
 #: data/frameworks/mental_calculation/06_orange.yaml:54
+#: data/frameworks/mental_calculation/06_orange.yaml:45
+#: data/frameworks/mental_calculation/06_orange.yaml:53
+#: data/frameworks/mental_calculation/06_orange.yaml:38
 msgid "Mental calculation: fractions"
 msgstr "Calcul mental : fractions"
 
@@ -3010,14 +3013,15 @@ msgstr "Calcul mental : multiplications à trou et divisions"
 msgid " (or {})"
 msgstr " (ou {})"
 
+#: data/frameworks/mental_calculation/06_orange.yaml:24
 #: data/frameworks/mental_calculation/06_orange.yaml:25
 #: data/frameworks/mental_calculation/06_orange.yaml:22
-#: data/frameworks/mental_calculation/06_orange.yaml:24
 #: data/frameworks/mental_calculation/06_orange.yaml:16
+#: data/frameworks/mental_calculation/06_orange.yaml:9
 msgid "Mental calculation: geometry"
 msgstr "Calcul mental : situations géométriques"
 
-#: lib/document/content/geometry/perimeter_polygon.py:72
+#: lib/document/content/geometry/perimeter_polygon.py:82
 #, python-brace-format
 msgid ""
 "Perimeter of this triangle?\\newline (length unit: {length_unit}) |hint:"
@@ -3026,7 +3030,7 @@ msgstr ""
 "Périmètre de ce triangle ?\\newline (unité de longueur : {length_unit}) |"
 "hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_polygon.py:55
+#: lib/document/content/geometry/perimeter_polygon.py:61
 msgid ""
 "The perimeter of this triangle is {}~{{length_unit}}.\\newline What is the "
 "length of the missing side? |hint:length_unit|"
@@ -3034,7 +3038,7 @@ msgstr ""
 "Le périmètre de ce triangle vaut {}~{{length_unit}}.\\newline Quelle est la "
 "longueur du côté manquant ? |hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_polygon.py:58
+#: lib/document/content/geometry/perimeter_polygon.py:65
 msgid ""
 "The perimeter of this quadrilateral is {}~{{length_unit}}.\\newline What is "
 "the length of the missing side? |hint:length_unit|"
@@ -3042,7 +3046,7 @@ msgstr ""
 "Le périmètre de ce quadrilatère vaut {}~{{length_unit}}.\\newline Quelle est "
 "la longueur du côté manquant ? |hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_polygon.py:61
+#: lib/document/content/geometry/perimeter_polygon.py:69
 msgid ""
 "The perimeter of this pentagon is {}~{{length_unit}}.\\newline What is the "
 "length of the missing side? |hint:length_unit|"
@@ -3050,7 +3054,7 @@ msgstr ""
 "Le périmètre de ce pentagone vaut {}~{{length_unit}}.\\newline Quelle est la "
 "longueur du côté manquant ? |hint:length_unit|"
 
-#: lib/document/content/geometry/perimeter_polygon.py:64
+#: lib/document/content/geometry/perimeter_polygon.py:73
 msgid ""
 "The perimeter of this hexagon is {}~{{length_unit}}.\\newline What is the "
 "length of the missing side? |hint:length_unit|"
@@ -3069,6 +3073,7 @@ msgid "Abscissa of {point_name}?"
 msgstr "Abscisse de {point_name}?"
 
 #: data/frameworks/mental_calculation/06_orange.yaml:109
+#: data/frameworks/mental_calculation/06_orange.yaml:102
 msgid "Answers (orange belt)"
 msgstr "Réponses (ceinture orange)"
 
@@ -3091,6 +3096,14 @@ msgstr "Réponses (ceinture jaune)"
 #: data/frameworks/mental_calculation/05_yellow2.yaml:69
 msgid "Answers (yellow belt, 2d stripe)"
 msgstr "Réponses (ceinture jaune, 2e trait)"
+
+#: lib/document/content/geometry/perimeter_polygon.py:56
+msgid ""
+"Perimeter: {}~{{length_unit}}.\\newline Length of the missing side? |hint:"
+"length_unit|"
+msgstr ""
+"Périmètre : {}~{{length_unit}}.\\newline Longueur du côté manquant ? |hint:"
+"length_unit|"
 
 #~ msgid "Mental calculation"
 #~ msgstr "Calcul mental"

@@ -2173,25 +2173,26 @@ msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr ""
 
 #: data/frameworks/mental_calculation/06_orange.yaml:179
+#: data/frameworks/mental_calculation/06_orange.yaml:167
+#: data/frameworks/mental_calculation/05_yellow2.yaml:49
 #: data/frameworks/mental_calculation/04_yellow1.yaml:181
 #: data/frameworks/mental_calculation/05_yellow2.yaml:131
-#: data/frameworks/mental_calculation/05_yellow2.yaml:55
-#: data/frameworks/mental_calculation/05_yellow2.yaml:174
-#: data/frameworks/mental_calculation/06_orange.yaml:47
-#: data/frameworks/mental_calculation/06_orange.yaml:127
-#: data/frameworks/mental_calculation/03_yellow.yaml:166
-#: data/frameworks/mental_calculation/05_yellow2.yaml:187
-#: data/frameworks/mental_calculation/05_yellow2.yaml:169
-#: data/frameworks/mental_calculation/06_orange.yaml:192
-#: data/frameworks/mental_calculation/03_yellow.yaml:167
-#: data/frameworks/mental_calculation/03_yellow.yaml:159
-#: data/frameworks/mental_calculation/05_yellow2.yaml:164
-#: data/frameworks/mental_calculation/04_yellow1.yaml:191
-#: data/frameworks/mental_calculation/06_orange.yaml:194
+#: data/frameworks/mental_calculation/06_orange.yaml:160
 #: data/frameworks/mental_calculation/04_yellow1.yaml:183
-#: data/frameworks/mental_calculation/05_yellow2.yaml:49
-#: data/frameworks/mental_calculation/06_orange.yaml:167
+#: data/frameworks/mental_calculation/06_orange.yaml:194
+#: data/frameworks/mental_calculation/05_yellow2.yaml:169
 #: data/frameworks/mental_calculation/05_yellow2.yaml:255
+#: data/frameworks/mental_calculation/03_yellow.yaml:166
+#: data/frameworks/mental_calculation/05_yellow2.yaml:164
+#: data/frameworks/mental_calculation/03_yellow.yaml:159
+#: data/frameworks/mental_calculation/05_yellow2.yaml:55
+#: data/frameworks/mental_calculation/06_orange.yaml:192
+#: data/frameworks/mental_calculation/04_yellow1.yaml:191
+#: data/frameworks/mental_calculation/06_orange.yaml:127
+#: data/frameworks/mental_calculation/03_yellow.yaml:167
+#: data/frameworks/mental_calculation/05_yellow2.yaml:187
+#: data/frameworks/mental_calculation/06_orange.yaml:47
+#: data/frameworks/mental_calculation/05_yellow2.yaml:174
 msgid "Challenge, first part"
 msgstr ""
 
@@ -2267,21 +2268,21 @@ msgstr ""
 msgid "Mental calculation: numeric expansion"
 msgstr ""
 
-#: lib/document/content/geometry/perimeter_polygon.py:74
+#: lib/document/content/geometry/perimeter_polygon.py:84
 #, python-brace-format
 msgid ""
 "Perimeter of this quadrilateral?\\newline (length unit: {length_unit}) "
 "|hint:length_unit|"
 msgstr ""
 
-#: lib/document/content/geometry/perimeter_polygon.py:76
+#: lib/document/content/geometry/perimeter_polygon.py:86
 #, python-brace-format
 msgid ""
 "Perimeter of this pentagon?\\newline (length unit: {length_unit}) "
 "|hint:length_unit|"
 msgstr ""
 
-#: lib/document/content/geometry/perimeter_polygon.py:78
+#: lib/document/content/geometry/perimeter_polygon.py:88
 #, python-brace-format
 msgid ""
 "Perimeter of this hexagon?\\newline (length unit: {length_unit}) "
@@ -2509,12 +2510,13 @@ msgstr ""
 msgid "Mental calculation: units conversions"
 msgstr ""
 
-#: data/frameworks/mental_calculation/06_orange.yaml:111
-#: data/frameworks/mental_calculation/06_orange.yaml:84
-#: data/frameworks/mental_calculation/06_orange.yaml:109
-#: data/frameworks/mental_calculation/06_orange.yaml:108
-#: data/frameworks/mental_calculation/06_orange.yaml:96
 #: data/frameworks/mental_calculation/06_orange.yaml:70
+#: data/frameworks/mental_calculation/06_orange.yaml:108
+#: data/frameworks/mental_calculation/06_orange.yaml:109
+#: data/frameworks/mental_calculation/06_orange.yaml:84
+#: data/frameworks/mental_calculation/06_orange.yaml:111
+#: data/frameworks/mental_calculation/06_orange.yaml:96
+#: data/frameworks/mental_calculation/06_orange.yaml:101
 msgid "Mental calculation:  final test for orange belt"
 msgstr ""
 
@@ -2615,10 +2617,11 @@ msgstr ""
 msgid "{}"
 msgstr ""
 
-#: data/frameworks/mental_calculation/06_orange.yaml:45
 #: data/frameworks/mental_calculation/03_yellow.yaml:27
-#: data/frameworks/mental_calculation/06_orange.yaml:53
 #: data/frameworks/mental_calculation/06_orange.yaml:54
+#: data/frameworks/mental_calculation/06_orange.yaml:45
+#: data/frameworks/mental_calculation/06_orange.yaml:53
+#: data/frameworks/mental_calculation/06_orange.yaml:38
 msgid "Mental calculation: fractions"
 msgstr ""
 
@@ -2632,39 +2635,40 @@ msgstr ""
 msgid " (or {})"
 msgstr ""
 
+#: data/frameworks/mental_calculation/06_orange.yaml:24
 #: data/frameworks/mental_calculation/06_orange.yaml:25
 #: data/frameworks/mental_calculation/06_orange.yaml:22
-#: data/frameworks/mental_calculation/06_orange.yaml:24
 #: data/frameworks/mental_calculation/06_orange.yaml:16
+#: data/frameworks/mental_calculation/06_orange.yaml:9
 msgid "Mental calculation: geometry"
 msgstr ""
 
-#: lib/document/content/geometry/perimeter_polygon.py:72
+#: lib/document/content/geometry/perimeter_polygon.py:82
 #, python-brace-format
 msgid ""
 "Perimeter of this triangle?\\newline (length unit: {length_unit}) "
 "|hint:length_unit|"
 msgstr ""
 
-#: lib/document/content/geometry/perimeter_polygon.py:55
+#: lib/document/content/geometry/perimeter_polygon.py:61
 msgid ""
 "The perimeter of this triangle is {}~{{length_unit}}.\\newline What is the "
 "length of the missing side? |hint:length_unit|"
 msgstr ""
 
-#: lib/document/content/geometry/perimeter_polygon.py:58
+#: lib/document/content/geometry/perimeter_polygon.py:65
 msgid ""
 "The perimeter of this quadrilateral is {}~{{length_unit}}.\\newline What is "
 "the length of the missing side? |hint:length_unit|"
 msgstr ""
 
-#: lib/document/content/geometry/perimeter_polygon.py:61
+#: lib/document/content/geometry/perimeter_polygon.py:69
 msgid ""
 "The perimeter of this pentagon is {}~{{length_unit}}.\\newline What is the "
 "length of the missing side? |hint:length_unit|"
 msgstr ""
 
-#: lib/document/content/geometry/perimeter_polygon.py:64
+#: lib/document/content/geometry/perimeter_polygon.py:73
 msgid ""
 "The perimeter of this hexagon is {}~{{length_unit}}.\\newline What is the "
 "length of the missing side? |hint:length_unit|"
@@ -2681,6 +2685,7 @@ msgid "Abscissa of {point_name}?"
 msgstr ""
 
 #: data/frameworks/mental_calculation/06_orange.yaml:109
+#: data/frameworks/mental_calculation/06_orange.yaml:102
 msgid "Answers (orange belt)"
 msgstr ""
 
@@ -2702,4 +2707,10 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:69
 msgid "Answers (yellow belt, 2d stripe)"
+msgstr ""
+
+#: lib/document/content/geometry/perimeter_polygon.py:56
+msgid ""
+"Perimeter: {}~{{length_unit}}.\\newline Length of the missing side? "
+"|hint:length_unit|"
 msgstr ""
