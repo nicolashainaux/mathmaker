@@ -30,5 +30,7 @@ from mathmaker.lib.tools.request_handler import MathmakerHTTPRequestHandler
 def entry_point():
     with daemon.DaemonContext(stdout=sys.stdout, stderr=sys.stderr):
         server_address = ('', DAEMON_PORT)
+        # TODO: catch possible OSError: [Errno 48] Address already in use
+        # from next line below
         httpd = HTTPServer(server_address, MathmakerHTTPRequestHandler)
         httpd.serve_forever()
