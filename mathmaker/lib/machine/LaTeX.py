@@ -162,8 +162,8 @@ class LaTeX(Structure.Structure):
         # siunitx
         siunitx = ''
         if required.package['siunitx']:
-            siunitx = '% {}\n{}'.format(_('To display units correctly'),
-                                        str(UsePackage('siunitx')))
+            siunitx = '% {}\n{}[=v2]'.format(_('To display units correctly'),
+                                             str(UsePackage('siunitx')))
             sisetup_attr = {'mode': 'text'}
             if settings.language.startswith('fr'):
                 sisetup_attr.update({'locale': 'FR'})
