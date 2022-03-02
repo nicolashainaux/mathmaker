@@ -51,20 +51,30 @@ class sub_object(component.structure):
             to_find = random.choice(unmasked)
             self.polygon.sides[to_find].label_mask = '?'
             self.answer = self.polygon.sides[to_find].label_value
-            self.wording = {
-                3: _(r'The perimeter of this triangle is {}~{{length_unit}}.'
-                     r'\newline What is the length of the missing side? '
-                     r'|hint:length_unit|').format(perimeter),
-                4: _(r'The perimeter of this quadrilateral is {}~'
-                     r'{{length_unit}}.\newline What is the length of the '
-                     r'missing side? |hint:length_unit|').format(perimeter),
-                5: _(r'The perimeter of this pentagon is {}~{{length_unit}}.'
-                     r'\newline What is the length of the missing side? '
-                     r'|hint:length_unit|').format(perimeter),
-                6: _(r'The perimeter of this hexagon is {}~{{length_unit}}.'
-                     r'\newline What is the length of the missing side? '
-                     r'|hint:length_unit|').format(perimeter)
-            }[len(self.polygon.sides)]
+
+            if self.slideshow:
+                self.wording = _(r'Perimeter: {}~{{length_unit}}.\newline '
+                                 r'Length of the missing side? '
+                                 r'|hint:length_unit|').format(perimeter)
+            else:
+                self.wording = {
+                    3: _(r'The perimeter of this triangle is '
+                         r'{}~{{length_unit}}.\newline What is the length of '
+                         r'the missing side? |hint:length_unit|')
+                    .format(perimeter),
+                    4: _(r'The perimeter of this quadrilateral is {}~'
+                         r'{{length_unit}}.\newline What is the length of the '
+                         r'missing side? |hint:length_unit|')
+                    .format(perimeter),
+                    5: _(r'The perimeter of this pentagon is '
+                         r'{}~{{length_unit}}.\newline What is the length of '
+                         r'the missing side? |hint:length_unit|')
+                    .format(perimeter),
+                    6: _(r'The perimeter of this hexagon is '
+                         r'{}~{{length_unit}}.\newline What is the length '
+                         r'of the missing side? |hint:length_unit|')
+                    .format(perimeter)
+                }[len(self.polygon.sides)]
 
         else:  # default
             self.answer = self.polygon.lbl_perimeter
