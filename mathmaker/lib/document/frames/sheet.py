@@ -23,6 +23,7 @@
 import copy
 import random
 import warnings
+from pathlib import Path
 
 from mathmakerlib.LaTeX import KNOWN_AMSSYMB_SYMBOLS, KNOWN_TEXTCOMP_SYMBOLS
 from mathmakerlib.LaTeX import KNOWN_AMSMATH_SYMBOLS
@@ -51,6 +52,7 @@ class Sheet(object):
         from mathmaker.lib.tools.xml import get_exercises_list
         # from mathmaker.lib.tools.frameworks import load_sheet
         filename = options.get('filename', None)
+        self.cot = options.get('cot', '')
         self.preset = 'default'
         # default presets
         presets = {'default':
@@ -287,9 +289,25 @@ class Sheet(object):
                 pkg.append('amsmath')
             if any([s in result for s in KNOWN_TEXTCOMP_SYMBOLS]):
                 pkg.append('textcomp')
-            result = shared.machine.write_preamble(variant=self.layout_type,
-                                                   required_pkg=pkg)\
-                + result
+            preamble = shared.machine.write_preamble(variant=self.layout_type,
+                                                     required_pkg=pkg)
+            result = preamble + result
+
+        if self.cot:
+            title = shared.machine.write(self.title, emphasize='bold')
+            template = Path(__file__).parent / 'templates/cotinga_template.tex'
+            template = template.read_text()
+            template = template.replace('PREAMBLE', preamble)
+            template = template.replace('TITLE', title)
+            if self.shift:
+                for i in [0, 1]:
+                    output = Path(f'{self.cot}{i}.tex')
+                    content = self.exercises_list[i].to_str('exc')
+                    output.write_text(template.replace('CONTENT', content))
+            else:
+                output = Path(f'{self.cot}.tex')
+                content = self.exercises_list[0].to_str('exc')
+                output.write_text(template.replace('CONTENT', content))
 
         return result
 

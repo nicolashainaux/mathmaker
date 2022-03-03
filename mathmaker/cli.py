@@ -57,6 +57,13 @@ def entry_point():
                         help='force the language of the output to LANGUAGE. '
                              'This will override any value you may have set '
                              'in ~/.config/mathmaker/user_config.yaml')
+    parser.add_argument('--cotinga-template', action='store', dest='cot',
+                        default='',
+                        help='extra tex files will be produced as templates '
+                             'for use with Cotinga. The provided value will '
+                             'be used as name for the template(s). In '
+                             'conjunction with --shift, two templates will '
+                             'be produced.')
     parser.add_argument('--pdf', action='store_true', dest='pdf_output',
                         help='the output will be in pdf format instead '
                              'of LaTeX')
@@ -153,7 +160,7 @@ def entry_point():
             sys.exit(1)
         if build_from_yaml:
             sh = Sheet(*fn, filename=None, shift=args.shift,
-                       enable_js_form=args.enable_js_form)
+                       enable_js_form=args.enable_js_form, cot=args.cot)
         else:
             sh = Sheet('', '', '', filename=fn)
 
