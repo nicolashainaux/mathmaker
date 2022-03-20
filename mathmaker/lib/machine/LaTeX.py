@@ -112,6 +112,14 @@ class LaTeX(Structure.Structure):
         amsmath = ''
         if required.package['amsmath'] or 'amsmath' in required_pkg:
             amsmath = str(UsePackage('amsmath'))
+        fancyvrb = ''
+        optional_verbatim = ''
+        if required.package['fancyvrb'] or 'fancyvrb' in required_pkg:
+            fancyvrb = str(UsePackage('fancyvrb'))
+            if settings.font is not None:
+                optional_verbatim = \
+                    '\n%Redefine Verb to preserve font setting\n'\
+                    r'\newcommand{\fverb}{\Verb[fontfamily=fontid]}'
         eurosym = str(UsePackage('eurosym')) \
             if required.package['eurosym'] else ''
         stackengine = str(UsePackage('stackengine')) \
@@ -119,7 +127,7 @@ class LaTeX(Structure.Structure):
         scalerel = str(UsePackage('scalerel')) \
             if required.package['scalerel'] else ''
         variouspkg = [p
-                      for p in [lxfonts, amssymb, amsmath, eurosym,
+                      for p in [lxfonts, amssymb, amsmath, fancyvrb, eurosym,
                                 stackengine, scalerel]
                       if p != '']
         variouspkg = '\n'.join(variouspkg)
@@ -130,7 +138,23 @@ class LaTeX(Structure.Structure):
         if settings.font is not None:
             font_patch = r"""\usepackage[no-math]{{fontspec}}
 
-\AtEndPreamble{{\setmainfont{font_name}[NFSSFamily=fontid]}}
+%%% fixes in order to use lxfonts only for math
+\let\savedrmdefault\rmdefault
+\let\savedsfdefault\sfdefault
+\let\savedttdefault\itdefault
+\let\saveditdefault\itdefault
+\let\savedsldefault\sldefault
+\let\savedbxdefault\bxdefault
+\AtEndPreamble{{% undo the nonmath settings by lxfonts
+  \let\rmdefault\savedrmdefault
+  \let\sfdefault\savedsfdefault
+  \let\ttdefault\saveditdefault
+  \let\itdefault\saveditdefault
+  \let\sldefault\savedsldefault
+  \let\bxdefault\savedbxdefault
+  \setmainfont{font_name}[NFSSFamily=fontid]%
+}}
+%%%
 
 \DeclareSymbolFont{{mynumbers}}      {{TU}}{{fontid}}{{m}}{{n}}
 \SetSymbolFont    {{mynumbers}}{{bold}}{{TU}}{{fontid}}{{bx}}{{n}}
@@ -146,8 +170,8 @@ class LaTeX(Structure.Structure):
 \DeclareMathSymbol{{7}}{{\mathalpha}}{{mynumbers}}{{`7}}
 \DeclareMathSymbol{{8}}{{\mathalpha}}{{mynumbers}}{{`8}}
 \DeclareMathSymbol{{9}}{{\mathalpha}}{{mynumbers}}{{`9}}
-\DeclareMathSymbol{{.}}{{\mathalpha}}{{mynumbers}}{{`.}}
-\DeclareMathSymbol{{,}}{{\mathalpha}}{{mynumbers}}{{`,}}
+\DeclareMathSymbol{{.}}{{\mathord}}{{mynumbers}}{{`.}}
+\DeclareMathSymbol{{,}}{{\mathpunct}}{{mynumbers}}{{`,}}
 }}""".format(font_name='{' + settings.font + '}')
         # language
         polyglossia = str(UsePackage('polyglossia'))
@@ -276,19 +300,20 @@ class LaTeX(Structure.Structure):
 \newcounter{{n}}
 % {exercisecmd_comment}
 \newcommand{{\exercise}}{{\noindent \hspace{{-.25cm}} """\
-r"""\stepcounter{{n}} \normalsize \textbf{{Exercice \arabic{{n}}}} """\
-r"""\newline \normalsize }}
+    r"""\stepcounter{{n}} \normalsize \textbf{{Exercice \arabic{{n}}}}
+\newline \normalsize }}
 % {resetcounter_comment}
-\newcommand{{\razcompteur}}{{\setcounter{{n}}{{0}}}}
+\newcommand{{\razcompteur}}{{\setcounter{{n}}{{0}}}}{optional_verbatim}
 """.format(layout_comment=_('General layout of the page'),
-           counter_comment=_('Exercises counter'),
-           exercisecmd_comment=_('Definition of the "exercise" command, which '
+           counter_comment=_('Exercises counter'),  # noqa
+           exercisecmd_comment=_('Definition of the "exercise" command, which '  # noqa
                                  'will insert the word "Exercise" in bold, '
                                  'with its number and automatically '
                                  'increments the counter'),
-           resetcounter_comment=_('Definition of the command resetting the '
+           resetcounter_comment=_('Definition of the command resetting the '  # noqa
                                   'exercises counter (which is useful when '
-                                  'begining to write the answers sheet)'))  # noqa
+                                  'begining to write the answers sheet)'),
+           optional_verbatim=optional_verbatim)  # noqa
         # Common commands
         commoncmd = ''
         if settings.language.startswith('fr'):

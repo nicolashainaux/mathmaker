@@ -27,6 +27,7 @@ from pathlib import Path
 
 from mathmakerlib.LaTeX import KNOWN_AMSSYMB_SYMBOLS, KNOWN_TEXTCOMP_SYMBOLS
 from mathmakerlib.LaTeX import KNOWN_AMSMATH_SYMBOLS
+from mathmakerlib import required
 
 from mathmaker.lib import shared
 from mathmaker.lib.constants import SLIDE_CONTENT_SEP
@@ -269,6 +270,8 @@ class Sheet(object):
     #   @brief Writes the whole sheet's content to the output.
     def __str__(self):
         result = ''
+        if self.cot:
+            required.package['fancyvrb'] = True
         if self.layout_type in ['default', 'equations', 'slideshow']:
             result += shared.machine.write_document_begins(
                 variant=self.layout_type)
