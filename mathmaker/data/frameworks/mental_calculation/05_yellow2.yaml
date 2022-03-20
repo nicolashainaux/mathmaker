@@ -184,11 +184,11 @@ challenge: !!omap
                  decimal numerals, direction=to_decimal -> decimals (1)
                  area rectangle, picture=true -> table_11_tens_easy (1)
                  mini_pb proportionality -> mergedinttriples_3to9 (1)
-                 addi direct -> complements_to_20...90;;complements_to_20...90, patch=true (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
                  subtr hole, subvariant=only_positive -> singleint_5to20;;singleint_5to20, nb_variant=±halforquarter (1)
                  area rectangle, picture=true -> nnpairs:3-9, nb_variant=decimal (1)
                  rectangle length_or_width, context=from_area, picture=true -> nnpairs:3-9, nb_variant=decimal1 (1)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±quarter, sides_particularity=none (1)
+                 perimeter polygon, qvariant=missing_length -> polygons, sum_ingredients=int_2to10, sides_nb=3-4 (1)
 
 W01a: !!omap
   - preset: "mental calculation slideshow"
