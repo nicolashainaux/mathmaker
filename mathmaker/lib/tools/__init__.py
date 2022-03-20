@@ -267,9 +267,9 @@ def parse_layout_descriptor(d, sep=None, special_row_chars=None,
     return nrow, ncol
 
 
-def rotate(l, n):
-    """Rotate list l of n places, to the right if n > 0; else to the left."""
-    return l[-n:] + l[:-n]
+def rotate(L, n):
+    """Rotate list L of n places, to the right if n > 0; else to the left."""
+    return L[-n:] + L[:-n]
 
 
 def check_unique_letters_words(words_list, n):
