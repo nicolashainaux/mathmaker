@@ -22,6 +22,7 @@
 # start_time = time.time()
 import sys
 import os
+import json
 import argparse
 import locale
 
@@ -32,6 +33,7 @@ from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib import old_style_sheet
 from mathmaker.lib.document.frames import Sheet
+from mathmaker.lib.tools import load_config
 from mathmaker.lib.tools.ignition \
     import (check_dependencies, install_gettext_translations,
             check_settings_consistency)
@@ -128,6 +130,15 @@ def entry_point():
 
     if args.main_directive == 'list':
         sys.stdout.write(list_all_sheets())
+        shared.db.close()
+        shared.natural_nb_tuples_db.close()
+        shared.solids_db.close()
+        shared.shapes_db.close()
+        shared.anglessets_db.close()
+        sys.exit(0)
+    elif args.main_directive == 'config':
+        print(json.dumps(load_config('user_config', settings.settingsdir),
+                         indent=2))
         shared.db.close()
         shared.natural_nb_tuples_db.close()
         shared.solids_db.close()
