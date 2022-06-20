@@ -43,7 +43,8 @@ class sub_object(component.structure):
         super().setup("minimal", **options)
         super().setup("numbers", nb=build_data, shuffle_nbs=False, **options)
         self.transduration = 20
-        start_at_zero = options.get('start_at_zero', False)
+        start_at_zero = options.get('start_at_zero', 'false')
+        start_at_zero = {'true': True, 'false': False}[start_at_zero]
         self.point_name = next(shared.uppercase_letters_source)[0]
 
         self.answer = Fraction(self.nb1, self.nb2)
