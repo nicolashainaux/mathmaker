@@ -180,5 +180,46 @@ challenge: !!omap
                  perimeter polygon, qvariant=missing_length -> polygons, sum_ingredients=int_2to10, sides_nb=3-4 (1)
 
 
+W01a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (5)
+
+
+W01b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: multi clever -> intpairs_2to9 (1)
+                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (2)
+                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
+
+W01c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: percent direct -> 10%of..., context=simple_unit (1)
+                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (2)
+                 read abscissa, start_at_zero=false -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
+                 time_units conversion, category=3, level=2 -> nnpairs:10×10,11,13-17,19-23,25-29,31-35,37-41,43-47,49-53,55-59 (1)
+
+W01d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: multi hole -> int_irreducible_frac (1)
+                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (2)
+                 perimeter polygon, qvariant=missing_length -> polygons, sum_ingredients=int_2to10, sides_nb=3-4 (1)
+                 mini_pb proportionality -> mergedinttriples_3to9 (1)
+
+W02a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (2)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (2)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
+
+                 
+
+
+
 
 
