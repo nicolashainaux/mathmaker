@@ -86,7 +86,7 @@ class LaTeX(Structure.Structure):
         # option (if using 'beamer' document class)
         xcolor = ''
         xcolor_attr = []
-        if required.package['xcolor']:
+        if required.package.get('xcolor', False):
             xcolor_attr = [o for o in required.options['xcolor']]
             if variant != 'slideshow':
                 xcolor = '% {}\n{}\n\n'.format(
@@ -95,7 +95,7 @@ class LaTeX(Structure.Structure):
         # \documentclass
         if variant == 'slideshow':
             dc = DocumentClass('beamer', options='20pt')
-            if required.package['xcolor']:
+            if required.package.get('xcolor', False):
                 if xcolor_attr:
                     dc.options.append({'xcolor': AttrList(*xcolor_attr)})
                 else:
@@ -110,22 +110,23 @@ class LaTeX(Structure.Structure):
         if 'amssymb' in required_pkg:
             amssymb = str(UsePackage('amssymb'))
         amsmath = ''
-        if required.package['amsmath'] or 'amsmath' in required_pkg:
+        if required.package.get('amsmath', False) or 'amsmath' in required_pkg:
             amsmath = str(UsePackage('amsmath'))
         fancyvrb = ''
         optional_verbatim = ''
-        if required.package['fancyvrb'] or 'fancyvrb' in required_pkg:
+        if (required.package.get('fancyvrb', False)
+            or 'fancyvrb' in required_pkg):
             fancyvrb = str(UsePackage('fancyvrb'))
             if settings.font is not None:
                 optional_verbatim = \
                     '\n%Redefine Verb to preserve font setting\n'\
                     r'\newcommand{\fverb}{\Verb[fontfamily=fontid]}'
         eurosym = str(UsePackage('eurosym')) \
-            if required.package['eurosym'] else ''
+            if required.package.get('eurosym', False) else ''
         stackengine = str(UsePackage('stackengine')) \
-            if required.package['stackengine'] else ''
+            if required.package.get('stackengine', False) else ''
         scalerel = str(UsePackage('scalerel')) \
-            if required.package['scalerel'] else ''
+            if required.package.get('scalerel', False) else ''
         variouspkg = [p
                       for p in [lxfonts, amssymb, amsmath, fancyvrb, eurosym,
                                 stackengine, scalerel]
@@ -185,7 +186,7 @@ class LaTeX(Structure.Structure):
         language_setup = str(language_setup)
         # siunitx
         siunitx = ''
-        if required.package['siunitx']:
+        if required.package.get('siunitx', False):
             siunitx = '% {}\n{}[=v2]'.format(_('To display units correctly'),
                                              str(UsePackage('siunitx')))
             sisetup_attr = {'mode': 'text'}
@@ -203,7 +204,7 @@ class LaTeX(Structure.Structure):
             siunitx += '\n\n'
         # TikZ setup
         tikz_setup = ''
-        if required.package['tikz']:
+        if required.package.get('tikz', False):
             tikz = '% {}\n{}'.format(_('To draw TikZ pictures'),
                                      str(UsePackage('tikz')))
             tikzlibraries = '\n'.join([str(UseTikzLibrary(k))
@@ -222,18 +223,18 @@ class LaTeX(Structure.Structure):
                         str(UsePackage('hyperref')))
         # cancel
         cancel = ''
-        if required.package['cancel']:
+        if required.package.get('cancel', False):
             cancel = '\n' + '% {}\n{}\n\n'\
                 .format(_('To strike out numbers '), str(UsePackage('cancel')))
         # multicol
         multicol = ''
-        if required.package['multicol']:
+        if required.package.get('multicol', False):
             multicol = '\n' + '% {}\n{}\n\n'\
                 .format(_('To use multicol environment'),
                         str(UsePackage('multicol')))
         # placeins
         placeins = ''
-        if required.package['placeins']:
+        if required.package.get('placeins', False):
             placeins = '\n' + '% {}\n{}\n\n'\
                 .format(_('To get a better control on floats positioning '
                           '(e.g. tabulars)'),
@@ -246,31 +247,31 @@ class LaTeX(Structure.Structure):
                         str(UsePackage('textcomp')))
         # ulem
         ulem = ''
-        if required.package['ulem']:
+        if required.package.get('ulem', False):
             ulem = '\n' + '% {}\n{}\n\n'\
                 .format(_('For pretty underlining'),
                         str(UsePackage('ulem')))
         # array
         array = ''
-        if required.package['array']:
+        if required.package.get('array', False):
             array = '\n' + '% {}\n{}\n\n'\
                 .format(_('To use extra commands to handle tabulars'),
                         str(UsePackage('array')))
         # graphicx
         graphicx = ''
-        if required.package['graphicx']:
+        if required.package.get('graphicx', False):
             graphicx = '\n' + '% {}\n{}\n\n'\
                 .format(_('To include .eps pictures'),
                         str(UsePackage('graphicx')))
         # epstopdf
         epstopdf = ''
-        if required.package['epstopdf']:
+        if required.package.get('epstopdf', False):
             epstopdf = '\n' + '% {}\n{}\n\epstopdfsetup{{outdir=./}}\n\n'\
                 .format(_('To make .eps pictures includable by pdflatex'),
                         str(UsePackage('epstopdf')))
         # textpos
         textpos = ''
-        if required.package['textpos']:
+        if required.package.get('textpos', False):
             textpos_options = [o for o in required.options['textpos']]
             textpos = '\n' + '% {}\n{}\n\n'\
                 .format(_('Absolute positioning of text on the page'),
