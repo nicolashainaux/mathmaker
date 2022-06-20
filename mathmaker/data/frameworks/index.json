@@ -24,6 +24,46 @@
         "expand",
         "double_detailed_solutions"
     ],
+    "07_orange1_numbers_rounding": [
+        "mental_calculation",
+        "07_orange1",
+        "numbers_rounding"
+    ],
+    "07_orange1_divisibility_rules": [
+        "mental_calculation",
+        "07_orange1",
+        "divisibility_rules"
+    ],
+    "07_orange1_proportionality_problems": [
+        "mental_calculation",
+        "07_orange1",
+        "proportionality_problems"
+    ],
+    "07_orange1_fractions": [
+        "mental_calculation",
+        "07_orange1",
+        "fractions"
+    ],
+    "07_orange1_clever_calculations": [
+        "mental_calculation",
+        "07_orange1",
+        "clever_calculations"
+    ],
+    "07_orange1_decimal_numerals": [
+        "mental_calculation",
+        "07_orange1",
+        "decimal_numerals"
+    ],
+    "07_orange1_exam": [
+        "mental_calculation",
+        "07_orange1",
+        "exam"
+    ],
+    "07_orange1_challenge": [
+        "mental_calculation",
+        "07_orange1",
+        "challenge"
+    ],
     "06_orange_proportionality_problems": [
         "mental_calculation",
         "06_orange",
@@ -68,11 +108,6 @@
         "mental_calculation",
         "06_orange",
         "exam"
-    ],
-    "06_orange_challenge": [
-        "mental_calculation",
-        "06_orange",
-        "challenge"
     ],
     "06_orange_W01a": [
         "mental_calculation",
