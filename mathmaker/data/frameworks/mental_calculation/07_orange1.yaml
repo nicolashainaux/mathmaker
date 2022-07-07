@@ -27,7 +27,7 @@ proportionality_problems: !!omap
                  mini_pb proportionality -> mergedinttriples_25_3to6 (1)
                  mini_pb proportionality -> mergedinttriples_3to9, force_table=7, wid=38 (1)
                  mini_pb proportionality -> mergedinttriples_3to9 (2)
-                 mini_pb proportionality -> inttriplesforprop_3to10,15,25 (5)
+                 mini_pb proportionality -> inttriplesforprop_3-10,15,25 (5)
                  # To select exclusively from table of 15 or from table of 25,
                  # use mergedinttriples_*_3to6
 
@@ -114,7 +114,7 @@ exam: !!omap  # SUITE: ÉCRIRE LES DIAPOS; TESTER TOUTES LES NOUVELLES FEUILLES;
                  [1][mini_pb proportionality -> mergedinttriples_15_3to6 (1)
                      mini_pb proportionality -> mergedinttriples_25_3to6 (1)
                      mini_pb proportionality -> mergedinttriples_3to9, force_table=7, wid=38 (1)
-                     mini_pb proportionality -> inttriplesforprop_3to10,15,25 (4)]
+                     mini_pb proportionality -> inttriplesforprop_3-10,15,25 (4)]
                  estimation_of number -> nnsingletons:70-10000 (1)
                  round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
                  [1][divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
@@ -171,7 +171,7 @@ challenge: !!omap
                  estimation_of number -> nnsingletons:70-10000 (1)
                  round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
                  area rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
-                 [1][mini_pb proportionality -> deciinttriplesforprop_3to9 (4)
+                 [1][mini_pb proportionality -> deciinttriplesforprop_3-9 (4)
                      mini_pb proportionality -> mergedinttriples_3to9 (1)
                      mini_pb proportionality -> mergedinttriples_3to9, force_table=7, wid=38 (1)
                      mini_pb proportionality -> mergedinttriples_15_3to6 (1)
@@ -199,7 +199,7 @@ W01c: !!omap
   - exercise: !!omap
     - questions: percent direct -> 10%of..., context=simple_unit (1)
                  round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (2)
-                 read abscissa, start_at_zero=false -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
+                 read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
                  time_units conversion, category=3, level=2 -> nnpairs:10×10,11,13-17,19-23,25-29,31-35,37-41,43-47,49-53,55-59 (1)
 
 W01d: !!omap
@@ -217,9 +217,73 @@ W02a: !!omap
                  divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (2)
                  divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
 
-                 
+W02b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: units conversion -> unitspairs, level=2, dimension=1 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
+                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
 
+W02c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
+                 area righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
 
+W02d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
+                 multi clever, variant=with_a_decimal -> intpairs_2to9 (1)
+                 mini_pb proportionality -> inttriplesforprop_3-10,15,25 (1)
 
+W03a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
+                 multi clever, variant=with_a_decimal -> intpairs_2to9 (1)
+                 mini_pb proportionality -> inttriplesforprop_3-10,15,25 (1)
+                 addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
 
+W03b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
+                 multi clever -> int_deci_clever_pairs (1)
+                 addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (1)
+                 multi hole -> int_irreducible_frac (1)
 
+W03c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
+                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
+                 mini_pb proportionality -> mergedinttriples_15_3to6 (1)
+                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
+
+W03d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
+                 mini_pb proportionality -> mergedinttriples_25_3to6 (1)
+                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (1)
+
+W04a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: units conversion -> unitspairs, category=area, level=2 (2)
+                 units conversion -> unitspairs, category=volume, level=3 (2)
+                 units conversion -> unitspairs, category=volume2capacity, level=3 (1)
+                 # units conversion -> unitspairs, category=capacity2volume, level=3 (1)
