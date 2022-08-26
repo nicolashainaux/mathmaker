@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "mathmaker"
+version = "0.7.9"
+description = "Mathmaker creates automatically elementary maths exercises and their (detailed) answers."
+authors = ["Nicolas Hainaux <nh.techn@posteo.net>"]
+license = "GPL-3.0-or-later"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+mathmakerlib = "^0.7.10"
+polib = "^1.1.1"
+python-daemon = "^2.3.1"
+intspan = "^1.6.1"
+"ruamel.yaml" = "^0.17.21"
+
+[tool.poetry.dev-dependencies]
+tox = "^3.25.1"
+pytest = "^7.1.2"
+flake8 = "^5.0.4"
+Sphinx = "^5.1.1"
+sphinx-rtd-theme = "^1.0.0"
+
+[build-system]
+# requires = ["poetry-core>=1.0.0"]
+# build-backend = "poetry.core.masonry.api"
+requires = ["setuptools >= 40.6.0", "wheel"]
+build-backend = "setuptools.build_meta"
