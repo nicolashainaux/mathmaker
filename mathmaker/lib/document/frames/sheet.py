@@ -297,11 +297,11 @@ class Sheet(object):
             result = preamble + result
 
         if self.cot:
-            title = shared.machine.write(self.title, emphasize='bold')
+            # title = shared.machine.write(self.title, emphasize='bold')
             template = Path(__file__).parent / 'templates/cotinga_template.tex'
             template = template.read_text()
             template = template.replace('PREAMBLE', preamble)
-            template = template.replace('TITLE', title)
+            # template = template.replace('TITLE', title)
             if self.shift:
                 for i in [0, 1]:
                     output = Path(f'{self.cot}{i}.tex')
