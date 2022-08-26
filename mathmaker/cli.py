@@ -109,8 +109,10 @@ def entry_point():
     parser.add_argument('main_directive', metavar='[DIRECTIVE|FILE]',
                         help='this can either match a sheetname included in '
                              'mathmaker, or a mathmaker xml file, or it may '
-                             'be the special directive "list", that will '
-                             'print the complete list and exit.')
+                             'be the special directives "list", that will '
+                             'print the complete list and exit, or "config" '
+                             'that will show current mathmaker configuration '
+                             'values.')
     parser.add_argument('--version', '-v',
                         action='version',
                         version=__info__)
