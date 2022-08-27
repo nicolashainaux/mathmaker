@@ -171,7 +171,7 @@ challenge: !!omap
                  estimation_of number -> nnsingletons:70-10000 (1)
                  round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
                  area rectangle, picture=true -> intpairs_2to9, nb_variant=decimal (1)
-                 [1][mini_pb proportionality -> deciinttriplesforprop_3-9 (4)
+                 [1][mini_pb proportionality -> deciinttriplesforprop_3to9 (4)
                      mini_pb proportionality -> mergedinttriples_3to9 (1)
                      mini_pb proportionality -> mergedinttriples_3to9, force_table=7, wid=38 (1)
                      mini_pb proportionality -> mergedinttriples_15_3to6 (1)
