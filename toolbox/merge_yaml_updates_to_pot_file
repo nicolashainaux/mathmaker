@@ -80,7 +80,6 @@ class _SingleQuotedScalarString(ruamel.yaml.scalarstring
 
 class _Constructor(ruamel.yaml.constructor.RoundTripConstructor):
     def construct_scalar(self, node):
-        # type: (Any) -> Any
         if not isinstance(node, ruamel.yaml.nodes.ScalarNode):
             raise ruamel.yaml.constructor.ConstructorError(
                 None, None,
@@ -279,8 +278,8 @@ def main():
                             previous_occ = main_entry.occurrences
                             main_entry.merge(entry)
                             main_entry.occurrences = list(
-                                set(main_entry.occurrences) |
-                                set(previous_occ))
+                                set(main_entry.occurrences)
+                                | set(previous_occ))
                             something_changed = True
                             break
         else:
