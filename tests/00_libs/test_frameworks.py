@@ -23,6 +23,7 @@
 # TODO: add yaml validation tests (per json schema?)
 
 import copy
+import warnings
 import pytest
 from collections import OrderedDict
 
@@ -44,9 +45,9 @@ yaml = YAML(typ='safe')
 
 def test_AttrStr_parse_warnings():
     """Check parse() raises proper warnings in proper cases."""
-    with pytest.warns(None) as record:
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")
         _AttrStr('').parse()
-    assert len(record) == 0
     with pytest.warns(UserWarning) as record:
         _AttrStr('rowxcol=?×2,  , spacing=').parse()
     assert len(record) == 1
