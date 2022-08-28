@@ -122,7 +122,8 @@ def read_index():
 def build_index():
     """Create the index of all (YAML) sheets available."""
     from mathmaker import settings
-    from ruamel import yaml
+    from ruamel.yaml import YAML
+    yaml = YAML(typ='safe', pure=True)
     # Below snippet from https://stackoverflow.com/a/21048064/3926735
     # to load roadmap.yaml using OrderedDict instead of dict
     _mapping_tag = yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG
@@ -145,7 +146,7 @@ def build_index():
         for folder_path in folder_files:
             subtheme = os.path.splitext(os.path.basename(folder_path))[0]
             with open(folder_path) as f:
-                loaded_data = yaml.safe_load(f)
+                loaded_data = yaml.load(f)
                 if loaded_data is not None:
                     folder = OrderedDict(loaded_data)
                 else:
@@ -290,9 +291,9 @@ def load_sheet(theme, subtheme, sheet_name):
     :type sheet_name: str
     :rtype: OrderedDict
     """
-    from ruamel import yaml
-    # from ruamel.yaml import YAML
-    # yaml = YAML(typ='safe')
+    # from ruamel import yaml
+    from ruamel.yaml import YAML
+    yaml = YAML()
 
     theme_dir = os.path.join(settings.frameworksdir, theme)
     subtheme_file = os.path.join(settings.frameworksdir, theme,
@@ -300,7 +301,7 @@ def load_sheet(theme, subtheme, sheet_name):
     if os.path.isdir(theme_dir):
         if os.path.isfile(subtheme_file):
             with open(subtheme_file) as file_path:
-                file_data = yaml.round_trip_load(file_path)
+                file_data = yaml.load(file_path)
                 if sheet_name in file_data:
                     return file_data[sheet_name]
                 else:
@@ -1082,6 +1083,7 @@ def get_attributes(filename, tag):
     :type tag: str
     :rtype: list
     """
-    from ruamel import yaml
+    from ruamel.yaml import YAML
+    yaml = YAML(typ='safe', pure=True)
     with open(filename) as f:
-        return _get_attributes(yaml.safe_load(f), tag)
+        return _get_attributes(yaml.load(f), tag)

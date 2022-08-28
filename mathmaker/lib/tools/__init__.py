@@ -38,7 +38,8 @@ def load_config(file_tag, settingsdir):
     /etc/mathmaker/*.yaml, then in ~/.config/mathmaker/*.yaml,
     finally in mathmaker/settings/dev/*.yaml.
     """
-    from ruamel import yaml
+    from ruamel.yaml import YAML
+    yaml = YAML(typ='safe', pure=True)
     # As one wants to log anything as soon as possible, but at least the
     # default values from ``logging.yaml`` must be read before anything
     # can be logged, the logger is only set and used if the filename is
@@ -53,7 +54,7 @@ def load_config(file_tag, settingsdir):
             if file_tag != 'logging':
                 mainlogger.info('Loading ' + file_tag + '.yaml from '
                                 + file_path.name)
-            configuration = ext_dict(yaml.safe_load(file_path))
+            configuration = ext_dict(yaml.load(file_path))
     except IOError:
         if file_tag != 'logging':
             mainlogger.error('FileNotFoundError: No default config file for '
@@ -66,7 +67,7 @@ def load_config(file_tag, settingsdir):
             with open(os.path.join(settingsdir, 'default/',
                                    file_tag + '_freebsd.yaml')) as file_path:
                 # __
-                configuration.recursive_update(yaml.safe_load(file_path))
+                configuration.recursive_update(yaml.load(file_path))
         except IOError:
             raise FileNotFoundError(errno.ENOENT,
                                     os.strerror(errno.ENOENT),
@@ -76,7 +77,7 @@ def load_config(file_tag, settingsdir):
             with open(os.path.join(settingsdir, 'default/',
                                    file_tag + '_windows.yaml')) as file_path:
                 # __
-                configuration.recursive_update(yaml.safe_load(file_path))
+                configuration.recursive_update(yaml.load(file_path))
         except IOError:
             raise FileNotFoundError(errno.ENOENT,
                                     os.strerror(errno.ENOENT),
@@ -89,7 +90,7 @@ def load_config(file_tag, settingsdir):
                 if file_tag != 'logging':
                     mainlogger.info('Updating config values for ' + file_tag
                                     + ' from ' + file_path.name)
-                configuration.recursive_update(yaml.safe_load(file_path))
+                configuration.recursive_update(yaml.load(file_path))
         except IOError:
             pass
         if file_tag == 'logging' and sys.platform.startswith('freebsd'):
@@ -98,7 +99,7 @@ def load_config(file_tag, settingsdir):
                                        file_tag
                                        + '_freebsd.yaml')) as file_path:
                     # __
-                    configuration.recursive_update(yaml.safe_load(file_path))
+                    configuration.recursive_update(yaml.load(file_path))
             except IOError:
                 pass
         if file_tag == 'user_config' and sys.platform.startswith('win'):
@@ -107,7 +108,7 @@ def load_config(file_tag, settingsdir):
                                        file_tag
                                        + '_windows.yaml')) as file_path:
                     # __
-                    configuration.recursive_update(yaml.safe_load(file_path))
+                    configuration.recursive_update(yaml.load(file_path))
             except IOError:
                 pass
     return configuration

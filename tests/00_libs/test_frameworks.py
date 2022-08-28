@@ -28,7 +28,7 @@ from collections import OrderedDict
 
 from ruamel.yaml.compat import ordereddict
 from ruamel.yaml.comments import CommentedOrderedMap
-from ruamel import yaml
+from ruamel.yaml import YAML
 
 from mathmaker.lib.tools.frameworks import list_all_sheets
 from mathmaker.lib.tools.frameworks import _AttrStr
@@ -38,6 +38,8 @@ from mathmaker.lib.tools.frameworks import _read_mix_question, _read_mix_nb
 from mathmaker.lib.tools.frameworks import _get_attributes, _dissolve_block
 from mathmaker.lib.tools.frameworks import _expand_alternatives
 from mathmaker.lib.constants import MIN_ROW_HEIGHT, DEFAULT_LAYOUT
+
+yaml = YAML(typ='safe')
 
 
 def test_AttrStr_parse_warnings():
@@ -463,7 +465,7 @@ wording2:
   - nb2_max: 100
   - q_id: "addi_direct"
 """
-    assert _get_attributes(yaml.safe_load(data), 'wording') == \
+    assert _get_attributes(yaml.load(data), 'wording') == \
         [{'wording_context': 'marbles',
           'wording': '{name1} has {nb1} marbles... ?',
           'nb1_min': 2,
