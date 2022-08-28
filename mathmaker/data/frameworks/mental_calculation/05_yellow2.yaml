@@ -91,7 +91,7 @@ exam: !!omap
                      area rectangle, picture=true -> nnpairs:3-9, nb_variant=decimal (1)
                      area righttriangle -> nnpairs:3-9, code=1_1 (2)
                      area righttriangle -> nnpairs:3-9, nb_variant=multiplesof10, code=1_1 (1)
-                     area righttriangle -> table_11_tens_easy, code=1_1 (1)
+                     area righttriangle -> table_11_tens_easy, except_11×11=true (1)
                      area righttriangle -> nnpairs:3-6×15,25, code=1_1 (1)
                      volume rightcuboid -> nntriples:2-6 (5)]
                  [1][addi hole -> singleint_5to20;;singleint_5to20 (1)
