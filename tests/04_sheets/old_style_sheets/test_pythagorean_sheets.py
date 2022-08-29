@@ -39,5 +39,4 @@ def test_converse_and_contrapositive():
     is generated without any error.
     """
     shared.machine.write_out(str(AVAILABLE[
-        'converse-and-contrapositive-of-pythagorean-theorem-short-test'][0]()),
-        pdf_output=True)
+        'converse-and-contrapositive-of-pythagorean-theorem-short-test'][0]()))

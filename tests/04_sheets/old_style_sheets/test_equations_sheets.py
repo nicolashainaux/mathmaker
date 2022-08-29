@@ -26,14 +26,12 @@ from mathmaker.lib.old_style_sheet import AVAILABLE
 
 def test_basic():
     """Checks if 'equations-basic' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['equations-basic'][0]()),
-                             pdf_output=True)
+    shared.machine.write_out(str(AVAILABLE['equations-basic'][0]()))
 
 
 def test_classic():
     """Checks if 'equations-classic' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['equations-classic'][0]()),
-                             pdf_output=True)
+    shared.machine.write_out(str(AVAILABLE['equations-classic'][0]()))
 
 
 def test_harder():

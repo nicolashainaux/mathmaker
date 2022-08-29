@@ -29,5 +29,4 @@ def test_positive_numbers():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('calculation',
                                        'order_of_operations',
-                                       'positive_numbers')),
-                             pdf_output=True)
+                                       'positive_numbers')))

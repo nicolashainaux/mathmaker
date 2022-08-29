@@ -35,10 +35,9 @@ def test_product_and_quotient():
     Checks if 'fractions-product-and-quotient' is generated without any error.
     """
     shared.machine.write_out(
-        str(AVAILABLE['fractions-product-and-quotient'][0]()), pdf_output=True)
+        str(AVAILABLE['fractions-product-and-quotient'][0]()))
 
 
 def test_sum():
     """Checks if 'fractions-sum' is generated without any error."""
-    shared.machine.write_out(str(AVAILABLE['fractions-sum'][0]()),
-                             pdf_output=True)
+    shared.machine.write_out(str(AVAILABLE['fractions-sum'][0]()))

@@ -29,5 +29,4 @@ def test_simple_detailed_solutions():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('algebra',
                                        'expand',
-                                       'simple_detailed_solutions')),
-                             pdf_output=True)
+                                       'simple_detailed_solutions')))
