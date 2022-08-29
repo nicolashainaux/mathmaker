@@ -64,8 +64,8 @@ def test_xml_sheet():
 
 
 def test_yaml_sheet():
-    """Test `mathmaker 01_white1_multiplications`"""
-    testargs = [__software_name__, '01_white1_multiplications']
+    """Test `mathmaker y1b1_exam`"""
+    testargs = [__software_name__, 'y1b1_exam']
     with patch.object(sys, 'argv', testargs):
         with pytest.raises(SystemExit) as excinfo:
             entry_point()
