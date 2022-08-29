@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2022-08-29 08:59+0200\n"
+"PO-Revision-Date: 2022-08-29 10:16+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -1859,14 +1859,6 @@ msgstr "Quel est le complément à 100 de {number} ?"
 msgid "What is the complement to {number1} of {number2}?"
 msgstr "Quel est le complément à {number1} de {number2} ?"
 
-#: data/frameworks/mental_calculation/02_white2.yaml:101
-#: data/frameworks/mental_calculation/02_white2.yaml:44
-#: data/frameworks/mental_calculation/02_white2.yaml:81
-#: data/frameworks/mental_calculation/02_white2.yaml:93
-#: data/frameworks/mental_calculation/02_white2.yaml:88
-msgid "Mental calculation: final test for white belt, second stripe"
-msgstr "Calcul mental : ceinture blanche, deuxième trait"
-
 #: lib/machine/LaTeX.py:93
 msgid "To be able to color the documents"
 msgstr "Pour pouvoir mettre les documents en couleur"
@@ -2003,14 +1995,6 @@ msgstr "Quel est le quart de {result} ?"
 #: data/frameworks/mental_calculation/03_yellow.yaml:74
 msgid "Mental calculation: area and perimeter of a rectangle"
 msgstr "Calcul mental : aires et périmètres de rectangles"
-
-#: data/frameworks/mental_calculation/03_yellow.yaml:113
-#: data/frameworks/mental_calculation/03_yellow.yaml:95
-#: data/frameworks/mental_calculation/03_yellow.yaml:97
-#: data/frameworks/mental_calculation/03_yellow.yaml:99
-#: data/frameworks/mental_calculation/03_yellow.yaml:118
-msgid "Mental calculation:  final test for yellow belt"
-msgstr "Calcul mental : ceinture jaune"
 
 #: lib/machine/LaTeX.py:222
 msgid "To insert pdf formular and javascript"
@@ -2522,16 +2506,6 @@ msgstr "Prêt ?{sep}Feu !{sep}Partez !"
 msgid "Challenge, first part"
 msgstr "Première épreuve du Tournoi"
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:120
-#: data/frameworks/mental_calculation/04_yellow1.yaml:118
-#: data/frameworks/mental_calculation/04_yellow1.yaml:128
-#: data/frameworks/mental_calculation/04_yellow1.yaml:140
-#: data/frameworks/mental_calculation/04_yellow1.yaml:62
-#: data/frameworks/mental_calculation/04_yellow1.yaml:72
-#: data/frameworks/mental_calculation/04_yellow1.yaml:84
-msgid "Mental calculation:  final test for yellow belt, first stripe"
-msgstr "Calcul mental : ceinture jaune, premier trait"
-
 #: lib/document/content/geometry/rectangle_length_or_width.py:46
 #, python-brace-format
 msgid ""
@@ -2713,15 +2687,6 @@ msgstr "Périmètre de ce rectangle ?"
 msgid "(Lengths in {})"
 msgstr "(Longueurs en {})"
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:96
-#: data/frameworks/mental_calculation/05_yellow2.yaml:63
-#: data/frameworks/mental_calculation/05_yellow2.yaml:169
-#: data/frameworks/mental_calculation/05_yellow2.yaml:101
-#: data/frameworks/mental_calculation/05_yellow2.yaml:106
-#: data/frameworks/mental_calculation/05_yellow2.yaml:68
-msgid "Mental calculation:  final test for yellow belt, second stripe"
-msgstr "Calcul mental : ceinture jaune, deuxième trait"
-
 #: lib/document/content/geometry/area_righttriangle.py:54
 msgid "Area?"
 msgstr "Aire ?"
@@ -2884,17 +2849,6 @@ msgstr ""
 #: data/frameworks/mental_calculation/06_orange.yaml:100
 msgid "Mental calculation: units conversions"
 msgstr "Calcul mental : conversions d'unités"
-
-#: data/frameworks/mental_calculation/06_orange.yaml:101
-#: data/frameworks/mental_calculation/06_orange.yaml:98
-#: data/frameworks/mental_calculation/06_orange.yaml:70
-#: data/frameworks/mental_calculation/06_orange.yaml:109
-#: data/frameworks/mental_calculation/06_orange.yaml:108
-#: data/frameworks/mental_calculation/06_orange.yaml:111
-#: data/frameworks/mental_calculation/06_orange.yaml:84
-#: data/frameworks/mental_calculation/06_orange.yaml:96
-msgid "Mental calculation:  final test for orange belt"
-msgstr "Calcul mental : ceinture orange"
 
 #: lib/document/content/calculation/estimation_of_number.py:34
 msgid "Give an estimation: {} is close to..."
@@ -3073,28 +3027,6 @@ msgstr "{fraction} de {quantity}?"
 msgid "Abscissa of {point_name}?"
 msgstr "Abscisse de {point_name}?"
 
-#: data/frameworks/mental_calculation/06_orange.yaml:99
-#: data/frameworks/mental_calculation/06_orange.yaml:102
-#: data/frameworks/mental_calculation/06_orange.yaml:109
-msgid "Answers (orange belt)"
-msgstr "Réponses (ceinture orange)"
-
-#: data/frameworks/mental_calculation/02_white2.yaml:45
-msgid "Answers (white belt, 2d stripe)"
-msgstr "Réponses (ceinture blanche, 2e trait)"
-
-#: data/frameworks/mental_calculation/04_yellow1.yaml:73
-msgid "Answers (yellow belt, 1st stripe)"
-msgstr "Réponses (ceinture jaune, 1er trait)"
-
-#: data/frameworks/mental_calculation/03_yellow.yaml:119
-msgid "Answers (yellow belt)"
-msgstr "Réponses (ceinture jaune)"
-
-#: data/frameworks/mental_calculation/05_yellow2.yaml:69
-msgid "Answers (yellow belt, 2d stripe)"
-msgstr "Réponses (ceinture jaune, 2e trait)"
-
 #: lib/document/content/geometry/perimeter_polygon.py:56
 msgid ""
 "Perimeter: {}~{{length_unit}}.\\newline Length of the missing side? |hint:"
@@ -3111,29 +3043,100 @@ msgstr "Calcul mental : arrondis"
 msgid "Mental calculation: divisibility rules"
 msgstr "Calcul mental : critères de divisibilité"
 
-#: data/frameworks/mental_calculation/07_orange1.yaml:73
-msgid "Mental calculation:  final test for orange belt, first stripe"
-msgstr "Calcul mental : ceinture orange, premier trait"
-
-#: data/frameworks/mental_calculation/07_orange1.yaml:74
-msgid "Answers (orange belt, first stripe)"
-msgstr "Réponses (ceinture orange, 1er trait)"
-
 #: data/frameworks/mental_calculation/07_orange1.yaml:127
 msgid "Challenge, final part"
 msgstr "Finale du Tournoi"
 
-#: data/frameworks/mental_calculation/01_white1.yaml:21
-msgid "Mental calculation: admission to <BELT>"
-msgstr "Calcul mental : passage de la <BELT>"
-
-#: data/frameworks/mental_calculation/01_white1.yaml:22
-msgid "Answers (<BELT>)"
-msgstr "Réponses (<BELT>)"
-
 #: data/frameworks/mental_calculation/05_yellow2.yaml:151
 msgid "Challenge, second part"
 msgstr "Deuxième épreuve du Tournoi"
+
+#: data/frameworks/mental_calculation/07_orange1.yaml:73
+#: data/frameworks/mental_calculation/07_orange1.yaml:74
+#: data/frameworks/mental_calculation/06_orange.yaml:98
+#: data/frameworks/mental_calculation/06_orange.yaml:99
+#: data/frameworks/mental_calculation/02_white2.yaml:44
+#: data/frameworks/mental_calculation/02_white2.yaml:45
+#: data/frameworks/mental_calculation/04_yellow1.yaml:72
+#: data/frameworks/mental_calculation/04_yellow1.yaml:73
+#: data/frameworks/mental_calculation/01_white1.yaml:21
+#: data/frameworks/mental_calculation/01_white1.yaml:22
+#: data/frameworks/mental_calculation/03_yellow.yaml:118
+#: data/frameworks/mental_calculation/03_yellow.yaml:119
+#: data/frameworks/mental_calculation/05_yellow2.yaml:68
+#: data/frameworks/mental_calculation/05_yellow2.yaml:69
+msgid "<DEFAULT>"
+msgstr "<DEFAULT>"
+
+#: settings/default/mc/titles.json:1
+msgid "Mental calculation: admission to <BELT>"
+msgstr "Calcul mental : passage de la <BELT>"
+
+#: settings/default/mc/titles.json:2
+msgid "Answers (<BELT>)"
+msgstr "Réponses (<BELT>)"
+
+#: settings/default/mc/belts.json:1 settings/default/mc/belts.json:9
+msgid "yellow belt"
+msgstr "ceinture jaune"
+
+#: settings/default/mc/belts.json:2 settings/default/mc/belts.json:10
+msgid "orange belt"
+msgstr "ceinture orange"
+
+#: settings/default/mc/belts.json:3 settings/default/mc/belts.json:11
+msgid "green belt"
+msgstr "ceinture verte"
+
+#: settings/default/mc/belts.json:4 settings/default/mc/belts.json:12
+msgid "blue belt"
+msgstr "ceinture bleue"
+
+#: settings/default/mc/belts.json:5 settings/default/mc/belts.json:13
+msgid "brown belt"
+msgstr "ceinture marron"
+
+#: settings/default/mc/belts.json:6 settings/default/mc/belts.json:14
+msgid "red belt"
+msgstr "ceinture rouge"
+
+#: settings/default/mc/belts.json:7 settings/default/mc/belts.json:15
+msgid "purple belt"
+msgstr "ceinture violette"
+
+#: settings/default/mc/belts.json:8 settings/default/mc/belts.json:16
+msgid "black belt"
+msgstr "ceinture noire"
+
+#~ msgid "Mental calculation: final test for white belt, second stripe"
+#~ msgstr "Calcul mental : ceinture blanche, deuxième trait"
+
+#~ msgid "Mental calculation:  final test for yellow belt"
+#~ msgstr "Calcul mental : ceinture jaune"
+
+#~ msgid "Mental calculation:  final test for yellow belt, first stripe"
+#~ msgstr "Calcul mental : ceinture jaune, premier trait"
+
+#~ msgid "Mental calculation:  final test for yellow belt, second stripe"
+#~ msgstr "Calcul mental : ceinture jaune, deuxième trait"
+
+#~ msgid "Mental calculation:  final test for orange belt"
+#~ msgstr "Calcul mental : ceinture orange"
+
+#~ msgid "Answers (white belt, 2d stripe)"
+#~ msgstr "Réponses (ceinture blanche, 2e trait)"
+
+#~ msgid "Answers (yellow belt, 1st stripe)"
+#~ msgstr "Réponses (ceinture jaune, 1er trait)"
+
+#~ msgid "Answers (yellow belt, 2d stripe)"
+#~ msgstr "Réponses (ceinture jaune, 2e trait)"
+
+#~ msgid "Mental calculation:  final test for orange belt, first stripe"
+#~ msgstr "Calcul mental : ceinture orange, premier trait"
+
+#~ msgid "Answers (orange belt, first stripe)"
+#~ msgstr "Réponses (ceinture orange, 1er trait)"
 
 #~ msgid "Mental calculation: final test for white belt, first stripe"
 #~ msgstr "Calcul mental : ceinture blanche, premier trait"

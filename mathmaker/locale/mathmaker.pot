@@ -1616,14 +1616,6 @@ msgstr ""
 msgid "What is the complement to {number1} of {number2}?"
 msgstr ""
 
-#: data/frameworks/mental_calculation/02_white2.yaml:101
-#: data/frameworks/mental_calculation/02_white2.yaml:44
-#: data/frameworks/mental_calculation/02_white2.yaml:81
-#: data/frameworks/mental_calculation/02_white2.yaml:93
-#: data/frameworks/mental_calculation/02_white2.yaml:88
-msgid "Mental calculation: final test for white belt, second stripe"
-msgstr ""
-
 #: lib/machine/LaTeX.py:93
 msgid "To be able to color the documents"
 msgstr ""
@@ -1756,14 +1748,6 @@ msgstr ""
 #: data/frameworks/mental_calculation/03_yellow.yaml:73
 #: data/frameworks/mental_calculation/03_yellow.yaml:74
 msgid "Mental calculation: area and perimeter of a rectangle"
-msgstr ""
-
-#: data/frameworks/mental_calculation/03_yellow.yaml:113
-#: data/frameworks/mental_calculation/03_yellow.yaml:95
-#: data/frameworks/mental_calculation/03_yellow.yaml:97
-#: data/frameworks/mental_calculation/03_yellow.yaml:99
-#: data/frameworks/mental_calculation/03_yellow.yaml:118
-msgid "Mental calculation:  final test for yellow belt"
 msgstr ""
 
 #: lib/machine/LaTeX.py:222
@@ -2192,16 +2176,6 @@ msgstr ""
 msgid "Challenge, first part"
 msgstr ""
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:120
-#: data/frameworks/mental_calculation/04_yellow1.yaml:118
-#: data/frameworks/mental_calculation/04_yellow1.yaml:128
-#: data/frameworks/mental_calculation/04_yellow1.yaml:140
-#: data/frameworks/mental_calculation/04_yellow1.yaml:62
-#: data/frameworks/mental_calculation/04_yellow1.yaml:72
-#: data/frameworks/mental_calculation/04_yellow1.yaml:84
-msgid "Mental calculation:  final test for yellow belt, first stripe"
-msgstr ""
-
 #: lib/document/content/geometry/rectangle_length_or_width.py:46
 #, python-brace-format
 msgid ""
@@ -2366,15 +2340,6 @@ msgstr ""
 msgid "(Lengths in {})"
 msgstr ""
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:96
-#: data/frameworks/mental_calculation/05_yellow2.yaml:63
-#: data/frameworks/mental_calculation/05_yellow2.yaml:169
-#: data/frameworks/mental_calculation/05_yellow2.yaml:101
-#: data/frameworks/mental_calculation/05_yellow2.yaml:106
-#: data/frameworks/mental_calculation/05_yellow2.yaml:68
-msgid "Mental calculation:  final test for yellow belt, second stripe"
-msgstr ""
-
 #: lib/document/content/geometry/area_righttriangle.py:54
 msgid "Area?"
 msgstr ""
@@ -2504,17 +2469,6 @@ msgstr ""
 #: data/frameworks/mental_calculation/03_yellow.yaml:28
 #: data/frameworks/mental_calculation/06_orange.yaml:100
 msgid "Mental calculation: units conversions"
-msgstr ""
-
-#: data/frameworks/mental_calculation/06_orange.yaml:101
-#: data/frameworks/mental_calculation/06_orange.yaml:98
-#: data/frameworks/mental_calculation/06_orange.yaml:70
-#: data/frameworks/mental_calculation/06_orange.yaml:109
-#: data/frameworks/mental_calculation/06_orange.yaml:108
-#: data/frameworks/mental_calculation/06_orange.yaml:111
-#: data/frameworks/mental_calculation/06_orange.yaml:84
-#: data/frameworks/mental_calculation/06_orange.yaml:96
-msgid "Mental calculation:  final test for orange belt"
 msgstr ""
 
 #: lib/document/content/calculation/estimation_of_number.py:34
@@ -2684,28 +2638,6 @@ msgstr ""
 msgid "Abscissa of {point_name}?"
 msgstr ""
 
-#: data/frameworks/mental_calculation/06_orange.yaml:99
-#: data/frameworks/mental_calculation/06_orange.yaml:102
-#: data/frameworks/mental_calculation/06_orange.yaml:109
-msgid "Answers (orange belt)"
-msgstr ""
-
-#: data/frameworks/mental_calculation/02_white2.yaml:45
-msgid "Answers (white belt, 2d stripe)"
-msgstr ""
-
-#: data/frameworks/mental_calculation/04_yellow1.yaml:73
-msgid "Answers (yellow belt, 1st stripe)"
-msgstr ""
-
-#: data/frameworks/mental_calculation/03_yellow.yaml:119
-msgid "Answers (yellow belt)"
-msgstr ""
-
-#: data/frameworks/mental_calculation/05_yellow2.yaml:69
-msgid "Answers (yellow belt, 2d stripe)"
-msgstr ""
-
 #: lib/document/content/geometry/perimeter_polygon.py:56
 msgid ""
 "Perimeter: {}~{{length_unit}}.\\newline Length of the missing side? "
@@ -2720,26 +2652,67 @@ msgstr ""
 msgid "Mental calculation: divisibility rules"
 msgstr ""
 
-#: data/frameworks/mental_calculation/07_orange1.yaml:73
-msgid "Mental calculation:  final test for orange belt, first stripe"
-msgstr ""
-
-#: data/frameworks/mental_calculation/07_orange1.yaml:74
-msgid "Answers (orange belt, first stripe)"
-msgstr ""
-
 #: data/frameworks/mental_calculation/07_orange1.yaml:127
 msgid "Challenge, final part"
 msgstr ""
 
+#: data/frameworks/mental_calculation/05_yellow2.yaml:151
+msgid "Challenge, second part"
+msgstr ""
+
+#: data/frameworks/mental_calculation/07_orange1.yaml:73
+#: data/frameworks/mental_calculation/07_orange1.yaml:74
+#: data/frameworks/mental_calculation/06_orange.yaml:98
+#: data/frameworks/mental_calculation/06_orange.yaml:99
+#: data/frameworks/mental_calculation/02_white2.yaml:44
+#: data/frameworks/mental_calculation/02_white2.yaml:45
+#: data/frameworks/mental_calculation/04_yellow1.yaml:72
+#: data/frameworks/mental_calculation/04_yellow1.yaml:73
 #: data/frameworks/mental_calculation/01_white1.yaml:21
+#: data/frameworks/mental_calculation/01_white1.yaml:22
+#: data/frameworks/mental_calculation/03_yellow.yaml:118
+#: data/frameworks/mental_calculation/03_yellow.yaml:119
+#: data/frameworks/mental_calculation/05_yellow2.yaml:68
+#: data/frameworks/mental_calculation/05_yellow2.yaml:69
+msgid "<DEFAULT>"
+msgstr ""
+
+#: settings/default/mc/titles.json:1
 msgid "Mental calculation: admission to <BELT>"
 msgstr ""
 
-#: data/frameworks/mental_calculation/01_white1.yaml:22
+#: settings/default/mc/titles.json:2
 msgid "Answers (<BELT>)"
 msgstr ""
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:151
-msgid "Challenge, second part"
+#: settings/default/mc/belts.json:1 settings/default/mc/belts.json:9
+msgid "yellow belt"
+msgstr ""
+
+#: settings/default/mc/belts.json:2 settings/default/mc/belts.json:10
+msgid "orange belt"
+msgstr ""
+
+#: settings/default/mc/belts.json:3 settings/default/mc/belts.json:11
+msgid "green belt"
+msgstr ""
+
+#: settings/default/mc/belts.json:4 settings/default/mc/belts.json:12
+msgid "blue belt"
+msgstr ""
+
+#: settings/default/mc/belts.json:5 settings/default/mc/belts.json:13
+msgid "brown belt"
+msgstr ""
+
+#: settings/default/mc/belts.json:6 settings/default/mc/belts.json:14
+msgid "red belt"
+msgstr ""
+
+#: settings/default/mc/belts.json:7 settings/default/mc/belts.json:15
+msgid "purple belt"
+msgstr ""
+
+#: settings/default/mc/belts.json:8 settings/default/mc/belts.json:16
+msgid "black belt"
 msgstr ""
