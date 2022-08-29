@@ -29,6 +29,7 @@ from mathmakerlib.LaTeX import KNOWN_AMSSYMB_SYMBOLS, KNOWN_TEXTCOMP_SYMBOLS
 from mathmakerlib.LaTeX import KNOWN_AMSMATH_SYMBOLS
 from mathmakerlib import required
 
+from mathmaker import settings
 from mathmaker.lib import shared
 from mathmaker.lib.constants import SLIDE_CONTENT_SEP
 from mathmaker.lib.tools import rotate
@@ -86,10 +87,20 @@ class Sheet(object):
                                      and self.preset == 'mental calculation')
             header = data.get('header', presets[self.preset]['header'])
             title = data.get('title', presets[self.preset]['title'])
+            if title == '<DEFAULT>':
+                title = settings.mc_titles['title']
+                if '<BELT>' in title:
+                    title = title.replace('<BELT>',
+                                          settings.mc_belts[subtheme])
             subtitle = data.get('subtitle', presets[self.preset]['subtitle'])
             text = data.get('text', presets[self.preset]['text'])
             answers_title = data.get('answers_title',
                                      presets[self.preset]['answers_title'])
+            if answers_title == '<DEFAULT>':
+                answers_title = settings.mc_titles['answers_title']
+                if '<BELT>' in answers_title:
+                    answers_title = answers_title.replace(
+                        '<BELT>', settings.mc_belts[subtheme])
             layout_data = copy.deepcopy(DEFAULT_SHEET_LAYOUT)
             if self.preset == 'mental calculation':
                 layout_data['font_size_offset'] = '-1'
