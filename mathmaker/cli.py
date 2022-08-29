@@ -23,8 +23,11 @@
 import sys
 import os
 import json
+import errno
 import argparse
 import locale
+from pathlib import Path
+from json.decoder import JSONDecodeError
 
 import mathmakerlib.config
 
@@ -66,6 +69,9 @@ def entry_point():
                              'be used as name for the template(s). In '
                              'conjunction with --shift, two templates will '
                              'be produced.')
+    parser.add_argument('--belts', action='store', dest='belts', default=None,
+                        help='belts names defined in the file whose path is '
+                             'provided will override the default ones.')
     parser.add_argument('--pdf', action='store_true', dest='pdf_output',
                         help='the output will be in pdf format instead '
                              'of LaTeX')
@@ -129,6 +135,18 @@ def entry_point():
     check_settings_consistency()
     shared.init()
     mathmakerlib.config.language = settings.language
+    if args.belts:
+        if Path(args.belts).is_file():
+            try:
+                redefined_belts = json.loads(Path(args.belts).read_text())
+            except JSONDecodeError:
+                raise RuntimeError(f'Provided file for belts names '
+                                   f'({args.belts}) cannot be read as json '
+                                   '(raised a JSONDecodeError)')
+            settings.mc_belts.recursive_update(redefined_belts)
+        else:
+            raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),
+                                    args.belts)
 
     if args.main_directive == 'list':
         sys.stdout.write(list_all_sheets())
