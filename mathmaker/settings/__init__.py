@@ -156,6 +156,8 @@ def init():
     global mm_executable
     global available_wNl
     global luatex_version
+    global mc_belts
+    global mc_titles
 
     luatex_version = ''
 
@@ -198,6 +200,9 @@ def init():
 
     os.makedirs(USER_LOCAL_SHARE, mode=0o770, exist_ok=True)
     path = path_object(ldd=USER_LOCAL_SHARE, dd=datadir, logger=mainlogger)
+
+    mc_belts = load_config('mc_belts', settingsdir, fmt='.json')
+    mc_titles = load_config('mc_titles', settingsdir, fmt='.json')
 
     CONFIG = load_config('user_config', settingsdir)
     xmllint = CONFIG["PATHS"]["XMLLINT"]
