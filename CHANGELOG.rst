@@ -4,11 +4,18 @@ Changelog
 Unreleased
 ----------
 
+
+Version 0.7.10 (2022-08-29)
+---------------------------
+
 * Make use of siunitx version 2, so far, when siunitx is the default version.
 * New option --cotinga-template to create the templates to be used by cotinga.
 * New directive: config, to print loaded configuration (loadable as json, if necessary)
-* Add orange1 belt.
 * Minor improvements
+* Maintenance.
+* Do not compile all sheets created during tests to reduce the time spent.
+* Rename all mental calculation sheets; organize them in 2 years; provide default titles
+* Add --belts option to let the user provide its own belts names (use like this: --belts=/path/to/belts.json; belts.json must redefine some or all of the belts identifiers like in the default settings file mathmaker/settings/defaults/mc_belts.json)
 
 Version 0.7.9 (dev) (2022-02-17)
 --------------------------------
