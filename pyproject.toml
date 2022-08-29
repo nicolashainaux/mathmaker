@@ -4,6 +4,8 @@ version = "0.7.10"
 description = "Mathmaker creates automatically elementary maths exercises and their (detailed) answers."
 authors = ["Nicolas Hainaux <nh.techn@posteo.net>"]
 license = "GPL-3.0-or-later"
+readme = 'README.rst'
+include = ['pyproject.toml']
 
 [tool.poetry.dependencies]
 python = "^3.8"
