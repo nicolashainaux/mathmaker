@@ -571,6 +571,8 @@ r"""{textcomp}{array}{graphicx}{epstopdf}{textpos}{specificpackages}
                 for f in glob.glob(os.path.join(settings.outputdir,
                                                 tmp_filename + '.*')):
                     os.remove(f)
+        else:
+            self.out = sys.stdout
         self.out.write(document)
 
     ##
