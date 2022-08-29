@@ -96,8 +96,7 @@ def test_{sheet_name}():
     \"""Check this sheet is generated without any error.\"""
     shared.machine.write_out(str(Sheet('{theme}',
                                        '{subtheme}',
-                                       '{sheet_name}')),
-                             pdf_output=True)
+                                       '{sheet_name}')))
 """
 
 MENTAL_CALCULATION_TESTFILE_TEMPLATE_ADDENDUM = """
@@ -107,8 +106,7 @@ def test_{sheet_name}_embedding_js():
     shared.machine.write_out(str(Sheet('{theme}',
                                        '{subtheme}',
                                        '{sheet_name}',
-                                       enable_js_form=True)),
-                             pdf_output=True)
+                                       enable_js_form=True)))
 """
 
 
