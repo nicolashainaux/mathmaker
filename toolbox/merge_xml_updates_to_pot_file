@@ -53,21 +53,21 @@ LINE_DUMMY_ATTR = 'THATS_A_DUMMY_LINE'
 
 def parse_xml(filename):
     with open(filename, "r") as f, TemporaryFile(mode='r+t') as tmp_file:
-        l = 1
+        L = 1
         for line in f:
             processed = re.sub(r'<(\w+)',
                                r'<\1 '
                                + LINE_DUMMY_ATTR
                                + '="'
-                               + str(l)
+                               + str(L)
                                + '"',
                                line)
-            l += 1
+            L += 1
             tmp_file.write(processed)
 
         tmp_file.seek(0)
 
-        return(xml_tree.parse(tmp_file).getroot())
+        return xml_tree.parse(tmp_file).getroot()
 
 
 ##
@@ -175,8 +175,8 @@ def main():
                             previous_occ = main_entry.occurrences
                             main_entry.merge(xml_entry)
                             main_entry.occurrences = list(
-                                set(main_entry.occurrences) |
-                                set(previous_occ))
+                                set(main_entry.occurrences)
+                                | set(previous_occ))
                             something_changed = True
                             break
         else:
