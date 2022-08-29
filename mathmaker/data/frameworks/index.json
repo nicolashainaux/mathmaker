@@ -24,819 +24,819 @@
         "expand",
         "double_detailed_solutions"
     ],
-    "07_orange1_numbers_rounding": [
+    "y1b4_positional_notation": [
         "mental_calculation",
-        "07_orange1",
-        "numbers_rounding"
-    ],
-    "07_orange1_divisibility_rules": [
-        "mental_calculation",
-        "07_orange1",
-        "divisibility_rules"
-    ],
-    "07_orange1_proportionality_problems": [
-        "mental_calculation",
-        "07_orange1",
-        "proportionality_problems"
-    ],
-    "07_orange1_fractions": [
-        "mental_calculation",
-        "07_orange1",
-        "fractions"
-    ],
-    "07_orange1_clever_calculations": [
-        "mental_calculation",
-        "07_orange1",
-        "clever_calculations"
-    ],
-    "07_orange1_decimal_numerals": [
-        "mental_calculation",
-        "07_orange1",
-        "decimal_numerals"
-    ],
-    "07_orange1_exam": [
-        "mental_calculation",
-        "07_orange1",
-        "exam"
-    ],
-    "07_orange1_challenge": [
-        "mental_calculation",
-        "07_orange1",
-        "challenge"
-    ],
-    "07_orange1_W01a": [
-        "mental_calculation",
-        "07_orange1",
-        "W01a"
-    ],
-    "07_orange1_W01b": [
-        "mental_calculation",
-        "07_orange1",
-        "W01b"
-    ],
-    "07_orange1_W01c": [
-        "mental_calculation",
-        "07_orange1",
-        "W01c"
-    ],
-    "07_orange1_W01d": [
-        "mental_calculation",
-        "07_orange1",
-        "W01d"
-    ],
-    "07_orange1_W02a": [
-        "mental_calculation",
-        "07_orange1",
-        "W02a"
-    ],
-    "07_orange1_W02b": [
-        "mental_calculation",
-        "07_orange1",
-        "W02b"
-    ],
-    "07_orange1_W02c": [
-        "mental_calculation",
-        "07_orange1",
-        "W02c"
-    ],
-    "07_orange1_W02d": [
-        "mental_calculation",
-        "07_orange1",
-        "W02d"
-    ],
-    "07_orange1_W03a": [
-        "mental_calculation",
-        "07_orange1",
-        "W03a"
-    ],
-    "07_orange1_W03b": [
-        "mental_calculation",
-        "07_orange1",
-        "W03b"
-    ],
-    "07_orange1_W03c": [
-        "mental_calculation",
-        "07_orange1",
-        "W03c"
-    ],
-    "07_orange1_W03d": [
-        "mental_calculation",
-        "07_orange1",
-        "W03d"
-    ],
-    "07_orange1_W04a": [
-        "mental_calculation",
-        "07_orange1",
-        "W04a"
-    ],
-    "06_orange_proportionality_problems": [
-        "mental_calculation",
-        "06_orange",
-        "proportionality_problems"
-    ],
-    "06_orange_geometry": [
-        "mental_calculation",
-        "06_orange",
-        "geometry"
-    ],
-    "06_orange_fractions": [
-        "mental_calculation",
-        "06_orange",
-        "fractions"
-    ],
-    "06_orange_estimations": [
-        "mental_calculation",
-        "06_orange",
-        "estimations"
-    ],
-    "06_orange_divisibility": [
-        "mental_calculation",
-        "06_orange",
-        "divisibility"
-    ],
-    "06_orange_clever_calculations": [
-        "mental_calculation",
-        "06_orange",
-        "clever_calculations"
-    ],
-    "06_orange_percentages": [
-        "mental_calculation",
-        "06_orange",
-        "percentages"
-    ],
-    "06_orange_units_conversions": [
-        "mental_calculation",
-        "06_orange",
-        "units_conversions"
-    ],
-    "06_orange_exam": [
-        "mental_calculation",
-        "06_orange",
-        "exam"
-    ],
-    "06_orange_W01a": [
-        "mental_calculation",
-        "06_orange",
-        "W01a"
-    ],
-    "06_orange_W01b": [
-        "mental_calculation",
-        "06_orange",
-        "W01b"
-    ],
-    "06_orange_W01c": [
-        "mental_calculation",
-        "06_orange",
-        "W01c"
-    ],
-    "06_orange_W01d": [
-        "mental_calculation",
-        "06_orange",
-        "W01d"
-    ],
-    "06_orange_W02a": [
-        "mental_calculation",
-        "06_orange",
-        "W02a"
-    ],
-    "06_orange_W02b": [
-        "mental_calculation",
-        "06_orange",
-        "W02b"
-    ],
-    "06_orange_W02c": [
-        "mental_calculation",
-        "06_orange",
-        "W02c"
-    ],
-    "06_orange_W02d": [
-        "mental_calculation",
-        "06_orange",
-        "W02d"
-    ],
-    "06_orange_W03a": [
-        "mental_calculation",
-        "06_orange",
-        "W03a"
-    ],
-    "06_orange_W03b": [
-        "mental_calculation",
-        "06_orange",
-        "W03b"
-    ],
-    "06_orange_W03c": [
-        "mental_calculation",
-        "06_orange",
-        "W03c"
-    ],
-    "06_orange_W03d": [
-        "mental_calculation",
-        "06_orange",
-        "W03d"
-    ],
-    "06_orange_W04a": [
-        "mental_calculation",
-        "06_orange",
-        "W04a"
-    ],
-    "06_orange_W04b": [
-        "mental_calculation",
-        "06_orange",
-        "W04b"
-    ],
-    "06_orange_W04c": [
-        "mental_calculation",
-        "06_orange",
-        "W04c"
-    ],
-    "06_orange_W04d": [
-        "mental_calculation",
-        "06_orange",
-        "W04d"
-    ],
-    "02_white2_positional_notation": [
-        "mental_calculation",
-        "02_white2",
+        "y1b4",
         "positional_notation"
     ],
-    "02_white2_divisions": [
+    "y1b4_operations_vocabulary": [
         "mental_calculation",
-        "02_white2",
-        "divisions"
-    ],
-    "02_white2_multiplications_multiplesof10": [
-        "mental_calculation",
-        "02_white2",
-        "multiplications_multiplesof10"
-    ],
-    "02_white2_multiplications": [
-        "mental_calculation",
-        "02_white2",
-        "multiplications"
-    ],
-    "02_white2_addi_subtr": [
-        "mental_calculation",
-        "02_white2",
-        "addi_subtr"
-    ],
-    "02_white2_exam": [
-        "mental_calculation",
-        "02_white2",
-        "exam"
-    ],
-    "02_white2_W01a": [
-        "mental_calculation",
-        "02_white2",
-        "W01a"
-    ],
-    "02_white2_W01b": [
-        "mental_calculation",
-        "02_white2",
-        "W01b"
-    ],
-    "02_white2_W01c": [
-        "mental_calculation",
-        "02_white2",
-        "W01c"
-    ],
-    "02_white2_W01d": [
-        "mental_calculation",
-        "02_white2",
-        "W01d"
-    ],
-    "02_white2_W02a": [
-        "mental_calculation",
-        "02_white2",
-        "W02a"
-    ],
-    "02_white2_W02b": [
-        "mental_calculation",
-        "02_white2",
-        "W02b"
-    ],
-    "02_white2_W02c": [
-        "mental_calculation",
-        "02_white2",
-        "W02c"
-    ],
-    "02_white2_W02d": [
-        "mental_calculation",
-        "02_white2",
-        "W02d"
-    ],
-    "02_white2_W03a": [
-        "mental_calculation",
-        "02_white2",
-        "W03a"
-    ],
-    "02_white2_W03b": [
-        "mental_calculation",
-        "02_white2",
-        "W03b"
-    ],
-    "02_white2_W03c": [
-        "mental_calculation",
-        "02_white2",
-        "W03c"
-    ],
-    "02_white2_W03d": [
-        "mental_calculation",
-        "02_white2",
-        "W03d"
-    ],
-    "02_white2_W04a": [
-        "mental_calculation",
-        "02_white2",
-        "W04a"
-    ],
-    "02_white2_W04b": [
-        "mental_calculation",
-        "02_white2",
-        "W04b"
-    ],
-    "02_white2_W04c": [
-        "mental_calculation",
-        "02_white2",
-        "W04c"
-    ],
-    "02_white2_W04d": [
-        "mental_calculation",
-        "02_white2",
-        "W04d"
-    ],
-    "04_yellow1_positional_notation": [
-        "mental_calculation",
-        "04_yellow1",
-        "positional_notation"
-    ],
-    "04_yellow1_operations_vocabulary": [
-        "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "operations_vocabulary"
     ],
-    "04_yellow1_fraction_of_a_linesegment": [
+    "y1b4_fraction_of_a_linesegment": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "fraction_of_a_linesegment"
     ],
-    "04_yellow1_multiplications_of_integers": [
+    "y1b4_multiplications_of_integers": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "multiplications_of_integers"
     ],
-    "04_yellow1_multi_divi_10_100_1000": [
+    "y1b4_multi_divi_10_100_1000": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "multi_divi_10_100_1000"
     ],
-    "04_yellow1_euclidean_divisions": [
+    "y1b4_euclidean_divisions": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "euclidean_divisions"
     ],
-    "04_yellow1_multi_decimal": [
+    "y1b4_multi_decimal": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "multi_decimal"
     ],
-    "04_yellow1_multiplications_hole": [
+    "y1b4_multiplications_hole": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "multiplications_hole"
     ],
-    "04_yellow1_exam": [
+    "y1b4_exam": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "exam"
     ],
-    "04_yellow1_W01a": [
+    "y1b4_W01a": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W01a"
     ],
-    "04_yellow1_W01b": [
+    "y1b4_W01b": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W01b"
     ],
-    "04_yellow1_W01c": [
+    "y1b4_W01c": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W01c"
     ],
-    "04_yellow1_W01d": [
+    "y1b4_W01d": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W01d"
     ],
-    "04_yellow1_W02a": [
+    "y1b4_W02a": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W02a"
     ],
-    "04_yellow1_W02b": [
+    "y1b4_W02b": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W02b"
     ],
-    "04_yellow1_W02c": [
+    "y1b4_W02c": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W02c"
     ],
-    "04_yellow1_W02d": [
+    "y1b4_W02d": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W02d"
     ],
-    "04_yellow1_W03a": [
+    "y1b4_W03a": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W03a"
     ],
-    "04_yellow1_W03b": [
+    "y1b4_W03b": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W03b"
     ],
-    "04_yellow1_W03c": [
+    "y1b4_W03c": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W03c"
     ],
-    "04_yellow1_W03d": [
+    "y1b4_W03d": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W03d"
     ],
-    "04_yellow1_W04a": [
+    "y1b4_W04a": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W04a"
     ],
-    "04_yellow1_W04b": [
+    "y1b4_W04b": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W04b"
     ],
-    "04_yellow1_W04c": [
+    "y1b4_W04c": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W04c"
     ],
-    "04_yellow1_W04d": [
+    "y1b4_W04d": [
         "mental_calculation",
-        "04_yellow1",
+        "y1b4",
         "W04d"
     ],
-    "01_white1_multiplications": [
+    "y1b1_multiplications": [
         "mental_calculation",
-        "01_white1",
+        "y1b1",
         "multiplications"
     ],
-    "01_white1_multiplications_reversed": [
+    "y1b1_multiplications_reversed": [
         "mental_calculation",
-        "01_white1",
+        "y1b1",
         "multiplications_reversed"
     ],
-    "01_white1_multiplications_hole": [
+    "y1b1_multiplications_hole": [
         "mental_calculation",
-        "01_white1",
+        "y1b1",
         "multiplications_hole"
     ],
-    "01_white1_exam": [
+    "y1b1_exam": [
         "mental_calculation",
-        "01_white1",
+        "y1b1",
         "exam"
     ],
-    "01_white1_W01a": [
+    "y1b1_W01a": [
         "mental_calculation",
-        "01_white1",
+        "y1b1",
         "W01a"
     ],
-    "01_white1_W01b": [
+    "y1b1_W01b": [
         "mental_calculation",
-        "01_white1",
+        "y1b1",
         "W01b"
     ],
-    "01_white1_W01c": [
+    "y1b1_W01c": [
         "mental_calculation",
-        "01_white1",
+        "y1b1",
         "W01c"
     ],
-    "01_white1_W01d": [
+    "y1b1_W01d": [
         "mental_calculation",
-        "01_white1",
+        "y1b1",
         "W01d"
     ],
-    "01_white1_W02a": [
+    "y1b1_W02a": [
         "mental_calculation",
-        "01_white1",
+        "y1b1",
         "W02a"
     ],
-    "01_white1_W02b": [
+    "y1b1_W02b": [
         "mental_calculation",
-        "01_white1",
+        "y1b1",
         "W02b"
     ],
-    "01_white1_W02c": [
+    "y1b1_W02c": [
         "mental_calculation",
-        "01_white1",
+        "y1b1",
         "W02c"
     ],
-    "01_white1_W02d": [
+    "y1b1_W02d": [
         "mental_calculation",
-        "01_white1",
+        "y1b1",
         "W02d"
     ],
-    "03_yellow_addi_subtr": [
+    "y1b2_positional_notation": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
+        "positional_notation"
+    ],
+    "y1b2_divisions": [
+        "mental_calculation",
+        "y1b2",
+        "divisions"
+    ],
+    "y1b2_multiplications_multiplesof10": [
+        "mental_calculation",
+        "y1b2",
+        "multiplications_multiplesof10"
+    ],
+    "y1b2_multiplications": [
+        "mental_calculation",
+        "y1b2",
+        "multiplications"
+    ],
+    "y1b2_addi_subtr": [
+        "mental_calculation",
+        "y1b2",
         "addi_subtr"
     ],
-    "03_yellow_operations_vocabulary": [
+    "y1b2_exam": [
         "mental_calculation",
-        "03_yellow",
-        "operations_vocabulary"
-    ],
-    "03_yellow_fractions": [
-        "mental_calculation",
-        "03_yellow",
-        "fractions"
-    ],
-    "03_yellow_multiplication_by_11": [
-        "mental_calculation",
-        "03_yellow",
-        "multiplication_by_11"
-    ],
-    "03_yellow_addi_subtr_hole": [
-        "mental_calculation",
-        "03_yellow",
-        "addi_subtr_hole"
-    ],
-    "03_yellow_numeric_expansions": [
-        "mental_calculation",
-        "03_yellow",
-        "numeric_expansions"
-    ],
-    "03_yellow_mini_problems": [
-        "mental_calculation",
-        "03_yellow",
-        "mini_problems"
-    ],
-    "03_yellow_units_conversions": [
-        "mental_calculation",
-        "03_yellow",
-        "units_conversions"
-    ],
-    "03_yellow_rectangles": [
-        "mental_calculation",
-        "03_yellow",
-        "rectangles"
-    ],
-    "03_yellow_perimeter_of_a_polygon": [
-        "mental_calculation",
-        "03_yellow",
-        "perimeter_of_a_polygon"
-    ],
-    "03_yellow_areas_and_perimeters": [
-        "mental_calculation",
-        "03_yellow",
-        "areas_and_perimeters"
-    ],
-    "03_yellow_operator_precedence": [
-        "mental_calculation",
-        "03_yellow",
-        "operator_precedence"
-    ],
-    "03_yellow_exam": [
-        "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "exam"
     ],
-    "03_yellow_challenge": [
+    "y1b2_W01a": [
         "mental_calculation",
-        "03_yellow",
-        "challenge"
-    ],
-    "03_yellow_W01a": [
-        "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W01a"
     ],
-    "03_yellow_W01b": [
+    "y1b2_W01b": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W01b"
     ],
-    "03_yellow_W01c": [
+    "y1b2_W01c": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W01c"
     ],
-    "03_yellow_W01d": [
+    "y1b2_W01d": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W01d"
     ],
-    "03_yellow_W02a": [
+    "y1b2_W02a": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W02a"
     ],
-    "03_yellow_W02b": [
+    "y1b2_W02b": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W02b"
     ],
-    "03_yellow_W02c": [
+    "y1b2_W02c": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W02c"
     ],
-    "03_yellow_W02d": [
+    "y1b2_W02d": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W02d"
     ],
-    "03_yellow_W03a": [
+    "y1b2_W03a": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W03a"
     ],
-    "03_yellow_W03b": [
+    "y1b2_W03b": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W03b"
     ],
-    "03_yellow_W03c": [
+    "y1b2_W03c": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W03c"
     ],
-    "03_yellow_W03d": [
+    "y1b2_W03d": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W03d"
     ],
-    "03_yellow_W04a": [
+    "y1b2_W04a": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W04a"
     ],
-    "03_yellow_W04b": [
+    "y1b2_W04b": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W04b"
     ],
-    "03_yellow_W04c": [
+    "y1b2_W04c": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W04c"
     ],
-    "03_yellow_W04d": [
+    "y1b2_W04d": [
         "mental_calculation",
-        "03_yellow",
+        "y1b2",
         "W04d"
     ],
-    "03_yellow_W05a": [
+    "y1b7_numbers_rounding": [
         "mental_calculation",
-        "03_yellow",
-        "W05a"
+        "y1b7",
+        "numbers_rounding"
     ],
-    "03_yellow_W05b": [
+    "y1b7_divisibility_rules": [
         "mental_calculation",
-        "03_yellow",
-        "W05b"
+        "y1b7",
+        "divisibility_rules"
     ],
-    "03_yellow_W05c": [
+    "y1b7_proportionality_problems": [
         "mental_calculation",
-        "03_yellow",
-        "W05c"
+        "y1b7",
+        "proportionality_problems"
     ],
-    "03_yellow_W05d": [
+    "y1b7_fractions": [
         "mental_calculation",
-        "03_yellow",
-        "W05d"
+        "y1b7",
+        "fractions"
     ],
-    "05_yellow2_multiplications_of_integers": [
+    "y1b7_clever_calculations": [
         "mental_calculation",
-        "05_yellow2",
-        "multiplications_of_integers"
+        "y1b7",
+        "clever_calculations"
     ],
-    "05_yellow2_percentages": [
+    "y1b7_decimal_numerals": [
         "mental_calculation",
-        "05_yellow2",
-        "percentages"
-    ],
-    "05_yellow2_time_units": [
-        "mental_calculation",
-        "05_yellow2",
-        "time_units"
-    ],
-    "05_yellow2_units_conversions": [
-        "mental_calculation",
-        "05_yellow2",
-        "units_conversions"
-    ],
-    "05_yellow2_decimal_numerals": [
-        "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "decimal_numerals"
     ],
-    "05_yellow2_operator_precedence": [
+    "y1b7_exam": [
         "mental_calculation",
-        "05_yellow2",
-        "operator_precedence"
-    ],
-    "05_yellow2_exam": [
-        "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "exam"
     ],
-    "05_yellow2_challenge": [
+    "y1b7_challenge": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "challenge"
     ],
-    "05_yellow2_W01a": [
+    "y1b7_W01a": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W01a"
     ],
-    "05_yellow2_W01b": [
+    "y1b7_W01b": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W01b"
     ],
-    "05_yellow2_W01c": [
+    "y1b7_W01c": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W01c"
     ],
-    "05_yellow2_W01d": [
+    "y1b7_W01d": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W01d"
     ],
-    "05_yellow2_W02a": [
+    "y1b7_W02a": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W02a"
     ],
-    "05_yellow2_W02b": [
+    "y1b7_W02b": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W02b"
     ],
-    "05_yellow2_W02c": [
+    "y1b7_W02c": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W02c"
     ],
-    "05_yellow2_W02d": [
+    "y1b7_W02d": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W02d"
     ],
-    "05_yellow2_W03a": [
+    "y1b7_W03a": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W03a"
     ],
-    "05_yellow2_W03b": [
+    "y1b7_W03b": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W03b"
     ],
-    "05_yellow2_W03c": [
+    "y1b7_W03c": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W03c"
     ],
-    "05_yellow2_W03d": [
+    "y1b7_W03d": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W03d"
     ],
-    "05_yellow2_W04a": [
+    "y1b7_W04a": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b7",
         "W04a"
     ],
-    "05_yellow2_W04b": [
+    "y1b6_proportionality_problems": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b6",
+        "proportionality_problems"
+    ],
+    "y1b6_geometry": [
+        "mental_calculation",
+        "y1b6",
+        "geometry"
+    ],
+    "y1b6_fractions": [
+        "mental_calculation",
+        "y1b6",
+        "fractions"
+    ],
+    "y1b6_estimations": [
+        "mental_calculation",
+        "y1b6",
+        "estimations"
+    ],
+    "y1b6_divisibility": [
+        "mental_calculation",
+        "y1b6",
+        "divisibility"
+    ],
+    "y1b6_clever_calculations": [
+        "mental_calculation",
+        "y1b6",
+        "clever_calculations"
+    ],
+    "y1b6_percentages": [
+        "mental_calculation",
+        "y1b6",
+        "percentages"
+    ],
+    "y1b6_units_conversions": [
+        "mental_calculation",
+        "y1b6",
+        "units_conversions"
+    ],
+    "y1b6_exam": [
+        "mental_calculation",
+        "y1b6",
+        "exam"
+    ],
+    "y1b6_W01a": [
+        "mental_calculation",
+        "y1b6",
+        "W01a"
+    ],
+    "y1b6_W01b": [
+        "mental_calculation",
+        "y1b6",
+        "W01b"
+    ],
+    "y1b6_W01c": [
+        "mental_calculation",
+        "y1b6",
+        "W01c"
+    ],
+    "y1b6_W01d": [
+        "mental_calculation",
+        "y1b6",
+        "W01d"
+    ],
+    "y1b6_W02a": [
+        "mental_calculation",
+        "y1b6",
+        "W02a"
+    ],
+    "y1b6_W02b": [
+        "mental_calculation",
+        "y1b6",
+        "W02b"
+    ],
+    "y1b6_W02c": [
+        "mental_calculation",
+        "y1b6",
+        "W02c"
+    ],
+    "y1b6_W02d": [
+        "mental_calculation",
+        "y1b6",
+        "W02d"
+    ],
+    "y1b6_W03a": [
+        "mental_calculation",
+        "y1b6",
+        "W03a"
+    ],
+    "y1b6_W03b": [
+        "mental_calculation",
+        "y1b6",
+        "W03b"
+    ],
+    "y1b6_W03c": [
+        "mental_calculation",
+        "y1b6",
+        "W03c"
+    ],
+    "y1b6_W03d": [
+        "mental_calculation",
+        "y1b6",
+        "W03d"
+    ],
+    "y1b6_W04a": [
+        "mental_calculation",
+        "y1b6",
+        "W04a"
+    ],
+    "y1b6_W04b": [
+        "mental_calculation",
+        "y1b6",
         "W04b"
     ],
-    "05_yellow2_W04c": [
+    "y1b6_W04c": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b6",
         "W04c"
     ],
-    "05_yellow2_W04d": [
+    "y1b6_W04d": [
         "mental_calculation",
-        "05_yellow2",
+        "y1b6",
+        "W04d"
+    ],
+    "y1b3_addi_subtr": [
+        "mental_calculation",
+        "y1b3",
+        "addi_subtr"
+    ],
+    "y1b3_operations_vocabulary": [
+        "mental_calculation",
+        "y1b3",
+        "operations_vocabulary"
+    ],
+    "y1b3_fractions": [
+        "mental_calculation",
+        "y1b3",
+        "fractions"
+    ],
+    "y1b3_multiplication_by_11": [
+        "mental_calculation",
+        "y1b3",
+        "multiplication_by_11"
+    ],
+    "y1b3_addi_subtr_hole": [
+        "mental_calculation",
+        "y1b3",
+        "addi_subtr_hole"
+    ],
+    "y1b3_numeric_expansions": [
+        "mental_calculation",
+        "y1b3",
+        "numeric_expansions"
+    ],
+    "y1b3_mini_problems": [
+        "mental_calculation",
+        "y1b3",
+        "mini_problems"
+    ],
+    "y1b3_units_conversions": [
+        "mental_calculation",
+        "y1b3",
+        "units_conversions"
+    ],
+    "y1b3_rectangles": [
+        "mental_calculation",
+        "y1b3",
+        "rectangles"
+    ],
+    "y1b3_perimeter_of_a_polygon": [
+        "mental_calculation",
+        "y1b3",
+        "perimeter_of_a_polygon"
+    ],
+    "y1b3_areas_and_perimeters": [
+        "mental_calculation",
+        "y1b3",
+        "areas_and_perimeters"
+    ],
+    "y1b3_operator_precedence": [
+        "mental_calculation",
+        "y1b3",
+        "operator_precedence"
+    ],
+    "y1b3_exam": [
+        "mental_calculation",
+        "y1b3",
+        "exam"
+    ],
+    "y1b3_challenge": [
+        "mental_calculation",
+        "y1b3",
+        "challenge"
+    ],
+    "y1b3_W01a": [
+        "mental_calculation",
+        "y1b3",
+        "W01a"
+    ],
+    "y1b3_W01b": [
+        "mental_calculation",
+        "y1b3",
+        "W01b"
+    ],
+    "y1b3_W01c": [
+        "mental_calculation",
+        "y1b3",
+        "W01c"
+    ],
+    "y1b3_W01d": [
+        "mental_calculation",
+        "y1b3",
+        "W01d"
+    ],
+    "y1b3_W02a": [
+        "mental_calculation",
+        "y1b3",
+        "W02a"
+    ],
+    "y1b3_W02b": [
+        "mental_calculation",
+        "y1b3",
+        "W02b"
+    ],
+    "y1b3_W02c": [
+        "mental_calculation",
+        "y1b3",
+        "W02c"
+    ],
+    "y1b3_W02d": [
+        "mental_calculation",
+        "y1b3",
+        "W02d"
+    ],
+    "y1b3_W03a": [
+        "mental_calculation",
+        "y1b3",
+        "W03a"
+    ],
+    "y1b3_W03b": [
+        "mental_calculation",
+        "y1b3",
+        "W03b"
+    ],
+    "y1b3_W03c": [
+        "mental_calculation",
+        "y1b3",
+        "W03c"
+    ],
+    "y1b3_W03d": [
+        "mental_calculation",
+        "y1b3",
+        "W03d"
+    ],
+    "y1b3_W04a": [
+        "mental_calculation",
+        "y1b3",
+        "W04a"
+    ],
+    "y1b3_W04b": [
+        "mental_calculation",
+        "y1b3",
+        "W04b"
+    ],
+    "y1b3_W04c": [
+        "mental_calculation",
+        "y1b3",
+        "W04c"
+    ],
+    "y1b3_W04d": [
+        "mental_calculation",
+        "y1b3",
+        "W04d"
+    ],
+    "y1b3_W05a": [
+        "mental_calculation",
+        "y1b3",
+        "W05a"
+    ],
+    "y1b3_W05b": [
+        "mental_calculation",
+        "y1b3",
+        "W05b"
+    ],
+    "y1b3_W05c": [
+        "mental_calculation",
+        "y1b3",
+        "W05c"
+    ],
+    "y1b3_W05d": [
+        "mental_calculation",
+        "y1b3",
+        "W05d"
+    ],
+    "y1b5_multiplications_of_integers": [
+        "mental_calculation",
+        "y1b5",
+        "multiplications_of_integers"
+    ],
+    "y1b5_percentages": [
+        "mental_calculation",
+        "y1b5",
+        "percentages"
+    ],
+    "y1b5_time_units": [
+        "mental_calculation",
+        "y1b5",
+        "time_units"
+    ],
+    "y1b5_units_conversions": [
+        "mental_calculation",
+        "y1b5",
+        "units_conversions"
+    ],
+    "y1b5_decimal_numerals": [
+        "mental_calculation",
+        "y1b5",
+        "decimal_numerals"
+    ],
+    "y1b5_operator_precedence": [
+        "mental_calculation",
+        "y1b5",
+        "operator_precedence"
+    ],
+    "y1b5_exam": [
+        "mental_calculation",
+        "y1b5",
+        "exam"
+    ],
+    "y1b5_challenge": [
+        "mental_calculation",
+        "y1b5",
+        "challenge"
+    ],
+    "y1b5_W01a": [
+        "mental_calculation",
+        "y1b5",
+        "W01a"
+    ],
+    "y1b5_W01b": [
+        "mental_calculation",
+        "y1b5",
+        "W01b"
+    ],
+    "y1b5_W01c": [
+        "mental_calculation",
+        "y1b5",
+        "W01c"
+    ],
+    "y1b5_W01d": [
+        "mental_calculation",
+        "y1b5",
+        "W01d"
+    ],
+    "y1b5_W02a": [
+        "mental_calculation",
+        "y1b5",
+        "W02a"
+    ],
+    "y1b5_W02b": [
+        "mental_calculation",
+        "y1b5",
+        "W02b"
+    ],
+    "y1b5_W02c": [
+        "mental_calculation",
+        "y1b5",
+        "W02c"
+    ],
+    "y1b5_W02d": [
+        "mental_calculation",
+        "y1b5",
+        "W02d"
+    ],
+    "y1b5_W03a": [
+        "mental_calculation",
+        "y1b5",
+        "W03a"
+    ],
+    "y1b5_W03b": [
+        "mental_calculation",
+        "y1b5",
+        "W03b"
+    ],
+    "y1b5_W03c": [
+        "mental_calculation",
+        "y1b5",
+        "W03c"
+    ],
+    "y1b5_W03d": [
+        "mental_calculation",
+        "y1b5",
+        "W03d"
+    ],
+    "y1b5_W04a": [
+        "mental_calculation",
+        "y1b5",
+        "W04a"
+    ],
+    "y1b5_W04b": [
+        "mental_calculation",
+        "y1b5",
+        "W04b"
+    ],
+    "y1b5_W04c": [
+        "mental_calculation",
+        "y1b5",
+        "W04c"
+    ],
+    "y1b5_W04d": [
+        "mental_calculation",
+        "y1b5",
         "W04d"
     ]
 }

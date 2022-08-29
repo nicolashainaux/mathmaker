@@ -120,11 +120,12 @@ def read_index():
 def build_index():
     """Create the index of all (YAML) sheets available."""
     from mathmaker import settings
+    import ruamel
     from ruamel.yaml import YAML
     yaml = YAML(typ='safe', pure=True)
     # Below snippet from https://stackoverflow.com/a/21048064/3926735
     # to load roadmap.yaml using OrderedDict instead of dict
-    _mapping_tag = yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG
+    _mapping_tag = ruamel.yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG
 
     def dict_representer(dumper, data):
         return dumper.represent_dict(data.items())
@@ -132,8 +133,8 @@ def build_index():
     def dict_constructor(loader, node):
         return OrderedDict(loader.construct_pairs(node))
 
-    yaml.add_representer(OrderedDict, dict_representer)
-    yaml.add_constructor(_mapping_tag, dict_constructor)
+    ruamel.yaml.add_representer(OrderedDict, dict_representer)
+    ruamel.yaml.add_constructor(_mapping_tag, dict_constructor)
     index = dict()
     themes_dirs = [x
                    for x in os.listdir(settings.frameworksdir)
