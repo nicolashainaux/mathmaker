@@ -1,0 +1,209 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Copyright 2006-2017 Nicolas Hainaux <nh.techn@gmail.com>
+
+# This file is part of Mathmaker.
+
+# Mathmaker is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+
+# Mathmaker is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Mathmaker; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+
+import os
+import sys
+import json
+import errno
+import argparse
+from pathlib import Path
+
+import polib
+
+from mathmaker import settings
+
+settings.init()
+
+# /!\ Only one-level json documents are handled, so far
+
+DEFAULT_KEYWORD_STARTS = ['header', 'title', 'text', 'subtitle',
+                          'answers_title']
+DEFAULT_KEYWORDS = \
+    ['wording', 'y1b1', 'y1b2', 'y1b3', 'y1b4', 'y1b5', 'y1b6', 'y1b7', 'y1b8',
+     'y2b1', 'y2b2', 'y2b3', 'y2b4', 'y2b5', 'y2b6', 'y2b7', 'y2b8']
+MAIN_POT_FILE_PATH = settings.localedir + 'mathmaker.pot'
+PROJECT_ROOT = DIR_TO_BROWSE = settings.rootdir
+
+COLLECTED_STRINGS = {}
+
+
+def get_line_nb(entry, file_path):
+    """Line number of the first occurence"""
+    for i, line in enumerate(Path(file_path).read_text().split('\n')):
+        if f'"{entry}":' in line:
+            return i
+
+
+def collect_strings(file_path, rel_file_name, keywords_starts, keywords):
+    """
+    :param file_path: path of the file where to collect strings from
+    :type file_path: pathlib.Path
+    """
+    # sys.stderr.write('data={}\ntype={}\n'.format(data, type(data)))
+    data = json.loads(file_path.read_text())
+    for key in data:
+        if ((any([key.startswith(k) for k in keywords_starts])
+             or key in keywords)
+            and data[key] != ''):
+            if not data[key] in COLLECTED_STRINGS:
+                COLLECTED_STRINGS[data[key]] = []
+            COLLECTED_STRINGS[data[key]] += \
+                [(rel_file_name, str(get_line_nb(key, file_path)))]
+
+    # COLLECTED_STRINGS looks like:
+    # {'Something to translate': [("this_file.json", 76),
+    #                             ("this_other_file.json", 34)],
+    #  'Something else to translate': [("another_file.json", 21)],
+    #  etc. }
+
+
+def browse_files(path, keyword_starts, keywords_list):
+    os.chdir(path)
+    file_names = next(os.walk('.'))[2]
+
+    for (file_name, extension) in [os.path.splitext(f) for f in file_names]:
+        if extension == '.json' and file_name != 'tmp':
+            # sys.stderr.write('Browsing {}{}\n'.format(file_name, extension))
+            # sys.stdout.write("Checking " + file_name + extension + "\n")
+            abspath = os.getcwd() + "/" + file_name + extension
+            relpath = abspath[len(PROJECT_ROOT):]
+            # collect_strings(file_name + extension, relpath, keywords_list)
+            # Below is json browsing version
+            collect_strings(Path(f'{file_name}{extension}'),
+                            relpath, keyword_starts, keywords_list)
+
+    for dir_name in next(os.walk('.'))[1]:
+        if dir_name != '.git':
+            browse_files(dir_name, keyword_starts, keywords_list)
+
+    os.chdir('..')
+
+
+def main():
+    sys.stdout.write('[merge_json_updates_to_pot_file] Starting...\n')
+    parser = argparse.ArgumentParser(description='Import strings to be '
+                                                 'translated from json files.')
+    parser.add_argument('--potfile', action='store', dest='filename',
+                        default=MAIN_POT_FILE_PATH,
+                        help='to provide an alternative pot file to process.')
+    parser.add_argument('--dirs', action='store', dest='dir_to_browse',
+                        nargs='*',
+                        default=[DIR_TO_BROWSE],
+                        help='to provide other specific directories '
+                             'to browse.')
+    parser.add_argument('--keywords', action='store', dest='keywords_list',
+                        nargs='*', default=DEFAULT_KEYWORDS,
+                        help='to provide other keywords.')
+    parser.add_argument('--keyword-starts', action='store',
+                        dest='keyword_starts',
+                        nargs='*', default=DEFAULT_KEYWORD_STARTS,
+                        help='to provide other keywords.')
+    args = parser.parse_args()
+
+    if not os.path.isfile(args.filename):
+        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT),
+                                args.filename)
+
+    for d in args.dir_to_browse:
+        if not os.path.exists(d):
+            raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), d)
+
+        if not os.path.isdir(d):
+            raise NotADirectoryError(errno.ENOTDIR,
+                                     os.strerror(errno.ENOTDIR),
+                                     d)
+
+    sys.stdout.write('Will look for labels starting with: {}'
+                     ' and for labels: {}\n'
+                     .format(args.keyword_starts,
+                             args.keywords_list))
+
+    for d in args.dir_to_browse:
+        browse_files(d, args.keyword_starts, args.keywords_list)
+
+    json_pot_file = polib.POFile()
+    for sentence in COLLECTED_STRINGS:
+        occ = []
+        for elt in COLLECTED_STRINGS[sentence]:
+            occ += [(elt[0], elt[1])]
+
+        new_entry = polib.POEntry(msgid=sentence, msgstr='', occurrences=occ)
+        json_pot_file.append(new_entry)
+
+    main_pot_file = polib.pofile(args.filename)
+    msgids_from_main_file = [entry.msgid for entry in main_pot_file]
+
+    something_changed = False
+    for entry in json_pot_file:
+        if entry.msgid in msgids_from_main_file:
+            for main_entry in main_pot_file:
+                if entry.msgid == main_entry.msgid:
+                    for ref in entry.occurrences:
+                        if ref not in main_entry.occurrences:
+                            sys.stderr.write('Merging this entry: \n'
+                                             + str(entry) + '\n')
+                            previous_occ = main_entry.occurrences
+                            main_entry.merge(entry)
+                            main_entry.occurrences = list(
+                                set(main_entry.occurrences)
+                                | set(previous_occ))
+                            something_changed = True
+                            break
+        else:
+            sys.stderr.write('Adding new entry: \n' + str(entry) + '\n')
+            main_pot_file.append(entry)
+            something_changed = True
+
+    msgids_from_json_pot_file = [entry.msgid for entry in json_pot_file]
+
+    to_delete = []
+    for main_entry in main_pot_file:
+        o_to_delete = []
+        for o in main_entry.occurrences:
+            if (o[0][-5:] == '.json'
+                and main_entry.msgid not in msgids_from_json_pot_file):
+                o_to_delete.append(o)
+                something_changed = True
+        for o in o_to_delete:
+            del main_entry.occurrences[main_entry.occurrences.index(o)]
+            sys.stderr.write('Removed this obsolete occurrence: {} '
+                             'from entry:\n{}\n'.format(o, main_entry))
+        if not len(main_entry.occurrences):
+            to_delete.append(main_entry)
+            something_changed = True
+            sys.stderr.write("Will remove this obsolete entry: \n"
+                             + str(main_entry) + "\n")
+
+    for entry in to_delete:
+        del main_pot_file[main_pot_file.index(entry)]
+
+    if something_changed:
+        main_pot_file.save(args.filename)
+    else:
+        sys.stderr.write('No changes to save. ' + str(args.filename)
+                         + ' remains unchanged.\n')
+
+    sys.stdout.write('[merge_json_updates_to_pot_file] Done.\n\n')
+
+
+if __name__ == '__main__':
+    main()
