@@ -4,6 +4,7 @@ Changelog
 Unreleased
 ----------
 
+* Patch version (fix pyproject.toml contents).
 
 Version 0.7.10 (2022-08-29)
 ---------------------------
