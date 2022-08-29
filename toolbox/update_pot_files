@@ -29,7 +29,7 @@ echo
 # Merging mathmaker entries to main pot file:
 ../toolbox/merge_xml_updates_to_pot_file --dirs "$ROOT_DIR""/data/"
 ../toolbox/merge_yaml_updates_to_pot_file --dirs "$ROOT_DIR""/data/"
-../toolbox/merge_json_updates_to_pot_file --dirs "$ROOT_DIR""/settings/default/mc/"
+../toolbox/merge_json_updates_to_pot_file --dirs "$ROOT_DIR""/settings/default/"
 
 # Merging updates from other xml files to other pot files
 # In order to create a new pot file, first `touch` it, then comment out one of the lines below
