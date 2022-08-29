@@ -70,8 +70,8 @@ decimal_numerals: !!omap
 
 exam: !!omap  # SUITE: ÉCRIRE LES DIAPOS; TESTER TOUTES LES NOUVELLES FEUILLES; ÉCRIRE LE CHALLENGE (EN ORANGE ?)
   - preset: "mental calculation"
-  - title: "Mental calculation:  final test for orange belt, first stripe"
-  - answers_title: "Answers (orange belt, first stripe)"
+  - title: "<DEFAULT>"
+  - answers_title: "<DEFAULT>"
   - exercise: !!omap
     - layout:
       - min_row_height: 0.8

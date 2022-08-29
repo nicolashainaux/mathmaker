@@ -95,8 +95,8 @@ units_conversions: !!omap
 
 exam: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation:  final test for orange belt"
-  - answers_title: "Answers (orange belt)"
+  - title: "<DEFAULT>"
+  - answers_title: "<DEFAULT>"
   - exercise: !!omap
     - layout:
       - min_row_height: 0.8

@@ -65,8 +65,8 @@ operator_precedence: !!omap
 
 exam: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation:  final test for yellow belt, second stripe"
-  - answers_title: "Answers (yellow belt, 2d stripe)"
+  - title: "<DEFAULT>"
+  - answers_title: "<DEFAULT>"
   - exercise: !!omap
     - layout:
       - min_row_height: 0.8
