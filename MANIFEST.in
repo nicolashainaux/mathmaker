@@ -23,6 +23,7 @@ recursive-include mathmaker *.pot
 recursive-include mathmaker *.xml
 recursive-include mathmaker *.xsd
 recursive-include mathmaker *.yaml
+recursive-include mathmaker *.json
 recursive-include tests *.py
 include pytest.ini
 recursive-include docs *.bat
