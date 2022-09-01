@@ -1,0 +1,521 @@
+lmromancaps10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsans10-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman6-bold	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmono10-italic	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonoproplt10-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmono9-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsansdemicond10-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman8-italic	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman8-bold	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonolt10-boldoblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonoslant10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsansquot8-bold	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonocaps10-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman8-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonoltcond10-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmono12-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman6-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman5-bold	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonocaps10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmromandunh10-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmromanslant17-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsans8-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmromancaps10-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonoproplt10-bold	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsans17-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman7-bold	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmromanslant12-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsansdemicond10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsans9-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmromandemi10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman17-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmromanslant8-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman7-italic	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsans9-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman12-italic	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsans12-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmromanslant10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonolt10-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman10-italic	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman10-bolditalic	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsansquot8-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonoprop10-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonolt10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman10-bold	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsans17-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman5-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsans10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonoltcond10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonoproplt10-boldoblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmromanunsl10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsans8-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsansquot8-boldoblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmromandemi10-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmromanslant9-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmromanslant10-bold	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonoproplt10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmono8-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman9-italic	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsans10-bold	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonolt10-bold	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsans12-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmromandunh10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsansquot8-oblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmonoprop10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmsans10-boldoblique	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman9-bold	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman7-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman12-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmmono10-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman12-bold	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+lmroman9-regular	version 2.004;ps 2.004;hotconv 1.0.49;makeotf.lib2.0.14853
+fontawesome	version 4.7.0 2016
+nimbusroman-bold	version 1.00
+nimbusroman-bolditalic	version 1.00
+p052-roman	version 1.00
+nimbusmonops-bolditalic	version 1.00
+p052-bold	version 1.00
+standard symbols ps	version 2.00
+urwgothic-demioblique	version 1.00
+urwbookman-lightitalic	version 1.00
+nimbusmonops-regular	version 1.00
+nimbussansnarrow-regular	version 1.00
+urwbookman-demi	version 1.00
+nimbussans-bolditalic	version 1.00
+nimbussans-regular	version 1.00
+c059-italic	version 1.00
+nimbusroman-italic	version 1.00
+nimbussans-bold	version 1.00
+p052-bolditalic	version 1.00
+urwbookman-demiitalic	version 1.00
+nimbusroman-regular	version 1.00
+c059-bold	version 1.00
+p052-italic	version 1.00
+urwgothic-demi	version 1.00
+c059-roman	version 1.00
+nimbussansnarrow-oblique	version 1.00
+z003-mediumitalic	version 1.00
+urwgothic-book	version 1.00
+urwbookman-light	version 1.00
+nimbusmonops-italic	version 1.00
+nimbussansnarrow-bold	version 1.00
+nimbussansnarrow-boldoblique	version 1.00
+urwgothic-bookoblique	version 1.00
+nimbusmonops-bold	version 1.00
+d050000l	version 2.00
+c059-bdita	version 1.00
+nimbussans-italic	version 1.00
+mathjax_typewriter-regular	version 1.1
+mathjax_fraktur-regular	version 1.1
+mathjax_sansserif-italic	version 1.1
+mathjax_math-bolditalic	version 1.1
+mathjax_winchrome-regular	version 1.1
+mathjax_fraktur-bold	version 1.1
+mathjax_caligraphic-regular	version 1.1
+mathjax_main-regular	version 1.1
+mathjax_size3-regular	version 1.1
+mathjax_sansserif-regular	version 1.1
+mathjax_caligraphic-bold	version 1.1
+mathjax_vector-bold	version 1.1
+mathjax_main-bold	version 1.1
+mathjax_size1-regular	version 1.1
+mathjax_sansserif-bold	version 1.1
+mathjax_vector-regular	version 1.1
+mathjax_math-regular	version 1.1
+mathjax_size2-regular	version 1.1
+mathjax_main-italic	version 1.1
+mathjax_script-regular	version 1.1
+mathjax_math-italic	version 1.1
+mathjax_size4-regular	version 1.1
+mathjax_ams-regular	version 1.1
+mathjax_winie6-regular	version 1.1
+manjari bold	version 1.710
+manjari thin	version 1.710
+manjari regular	version 1.710
+gayathri regular	version 1.000
+chilanka regular	version 1.400
+gayathri bold	version 1.000
+gayathri thin	version 1.000
+noto sans cjk jp bold	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans cjk kr bold	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans cjk sc bold	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans cjk tc bold	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans cjk hk bold	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans mono cjk jp bold	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans mono cjk kr bold	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans mono cjk sc bold	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans mono cjk tc bold	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans mono cjk hk bold	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto serif cjk jp bold	version 1.001;ps 1.001;hotconv 16.6.54;makeotf.lib2.5.65590
+noto serif cjk kr bold	version 1.001;ps 1.001;hotconv 16.6.54;makeotf.lib2.5.65590
+noto serif cjk sc bold	version 1.001;ps 1.001;hotconv 16.6.54;makeotf.lib2.5.65590
+noto serif cjk tc bold	version 1.001;ps 1.001;hotconv 16.6.54;makeotf.lib2.5.65590
+noto serif cjk jp	version 1.001;ps 1.001;hotconv 16.6.54;makeotf.lib2.5.65590
+noto serif cjk kr	version 1.001;ps 1.001;hotconv 16.6.54;makeotf.lib2.5.65590
+noto serif cjk sc	version 1.001;ps 1.001;hotconv 16.6.54;makeotf.lib2.5.65590
+noto serif cjk tc	version 1.001;ps 1.001;hotconv 16.6.54;makeotf.lib2.5.65590
+noto sans cjk jp	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans cjk kr	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans cjk sc	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans cjk tc	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans cjk hk	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans mono cjk jp	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans mono cjk kr	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans mono cjk sc	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans mono cjk tc	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+noto sans mono cjk hk	version 2.001;hotconv 1.0.107;makeotfexe 2.5.65593
+cantarell bold	version 0.111
+cantarell thin	version 0.111
+cantarell regular	version 0.111
+cantarell extra bold	version 0.111
+cantarell light	version 0.111
+lohit tamil	2.91.1
+utkal medium	version 0.13 2003
+nakula	version 1
+lohit kannada	version 2.5.4
+fontawesome	version 4.7.0 2016
+liberation mono italic	version 1.07.4
+liberation serif	version 1.07.4
+liberation sans	version 1.07.4
+liberation mono bold italic	version 1.07.4
+liberation sans narrow italic	version 1.07.4
+liberation sans italic	version 1.07.4
+liberation serif bold	version 1.07.4
+liberation mono	version 1.07.4
+liberation mono bold	version 1.07.4
+liberation serif bold italic	version 1.07.4
+liberation sans narrow	version 1.07.4
+liberation sans bold	version 1.07.4
+liberation sans narrow bold italic	version 1.07.4
+liberation sans narrow bold	version 1.07.4
+liberation sans bold italic	version 1.07.4
+liberation serif italic	version 1.07.4
+lohit malayalam	2.92.2
+samyak tamil	version 1.2 
+samyak malayalam	original version 1.00 (2005)
+samyak gujarati	version 1.2 
+dejavu sans mono	version 2.37
+dejavu sans bold	version 2.37
+dejavu serif bold	version 2.37
+dejavu serif	version 2.37
+dejavu sans	version 2.37
+dejavu sans mono bold	version 2.37
+khmer os system	3.02 2006
+khmer os	3.02 2006
+lohit gurmukhi	version 2.91.2
+lato italic	version 2.007; 2014-02-27
+lato thin	version 2.007; 2014-02-27
+lato medium	version 2.006; 2014-01-15
+lato bold	version 2.007; 2014-02-27
+lato hairline italic	version 2.007; 2014-02-27
+lato medium italic	version 2.006; 2014-01-15
+lato heavy	version 2.007; 2014-02-27
+lato light italic	version 2.007; 2014-02-27
+lato hairline	version 2.007; 2014-02-27
+lato light	version 2.007; 2014-02-27
+lato regular	version 2.007; 2014-02-27
+lato black italic	version 2.007; 2014-02-27
+lato heavy italic	version 2.007; 2014-02-27
+lato semibold	version 2.006; 2014-01-15
+lato semibold italic	version 2.006; 2014-01-15
+lato bold italic	version 2.007; 2014-02-27
+lato thin italic	version 2.007; 2014-02-27
+lato black	version 2.007; 2014-02-27
+yrsa medium	version 1.002;ps 1.001;hotconv 1.0.88;makeotf.lib2.5.647800; ttfautohint (v1.5)
+yrsa	version 1.002;ps 1.001;hotconv 1.0.88;makeotf.lib2.5.647800; ttfautohint (v1.5)
+rasa	version 1.002;ps 1.001;hotconv 1.0.88;makeotf.lib2.5.647800; ttfautohint (v1.5)
+rasa light	version 1.002;ps 1.001;hotconv 1.0.88;makeotf.lib2.5.647800; ttfautohint (v1.5)
+rasa bold	version 1.002;ps 1.001;hotconv 1.0.88;makeotf.lib2.5.647800; ttfautohint (v1.5)
+yrsa light	version 1.002;ps 1.001;hotconv 1.0.88;makeotf.lib2.5.647800; ttfautohint (v1.5)
+yrsa semibold	version 1.002;ps 1.001;hotconv 1.0.88;makeotf.lib2.5.647800; ttfautohint (v1.5)
+rasa medium	version 1.002;ps 1.001;hotconv 1.0.88;makeotf.lib2.5.647800; ttfautohint (v1.5)
+rasa semibold	version 1.002;ps 1.001;hotconv 1.0.88;makeotf.lib2.5.647800; ttfautohint (v1.5)
+yrsa bold	version 1.002;ps 1.001;hotconv 1.0.88;makeotf.lib2.5.647800; ttfautohint (v1.5)
+trebuchet ms bold italic	version 1.22
+webdings	version 1.03
+georgia bold	version 2.05
+times new roman	version 2.82
+impact	version 2.35
+webdings	version 1.03
+times new roman bold	version 2.82
+times new roman bold italic	version 2.82
+trebuchet ms	version 1.22
+verdana italic	version 2.35
+courier new italic	version 2.82
+trebuchet ms bold	version 1.22
+courier new italic	version 2.82
+arial bold	version 2.82
+trebuchet ms bold	version 1.22
+georgia bold italic	version 2.05
+courier new bold italic	version 2.82
+comic sans ms bold	version 2.10
+arial italic	version 2.82
+comic sans ms bold	version 2.10
+verdana bold	version 2.35
+times new roman italic	version 2.82
+arial bold	version 2.82
+trebuchet ms	version 1.22
+georgia bold	version 2.05
+arial	version 2.82
+verdana	version 2.35
+courier new bold	version 2.82
+verdana italic	version 2.35
+georgia	version 2.05
+trebuchet ms bold italic	version 1.22
+andale mono	version 2.00
+verdana bold	version 2.35
+times new roman	version 2.82
+comic sans ms	version 2.10
+georgia	version 2.05
+times new roman bold	version 2.82
+times new roman italic	version 2.82
+andale mono	version 2.00
+comic sans ms	version 2.10
+verdana bold italic	version 2.35
+verdana bold italic	version 2.35
+arial black	version 2.35
+times new roman bold italic	version 2.82
+trebuchet ms italic	version 1.22
+arial italic	version 2.82
+verdana	version 2.35
+georgia italic	version 2.05
+georgia bold italic	version 2.05
+courier new bold italic	version 2.82
+arial	version 2.82
+arial black	version 2.35
+trebuchet ms italic	version 1.22
+courier new	version 2.82
+arial bold italic	version 2.82
+arial bold italic	version 2.82
+georgia italic	version 2.05
+courier new bold	version 2.82
+impact	version 2.35
+courier new	version 2.82
+lohit bengali	version 2.91.5
+vemana2000	version 1.1.2
+pothana2000	version 1.3.2
+lohit tamil classical	version 2.5.4
+kalimati	version 1.30 
+chandas	version 1.2
+samanata	version 1.00
+lohit devanagari	2.95.4
+sarai	1.0
+kalapi	fontographer 4.7 10/15/09 fg4m­0000004045
+droid sans fallback	version 1.00c
+saab	version 0.91 2004
+bitstream vera sans mono	release 1.10
+bitstream vera sans bold	release 1.10
+bitstream vera serif bold	release 1.10
+bitstream vera sans mono bold	release 1.10
+bitstream vera sans oblique	release 1.10
+bitstream vera sans	release 1.10
+bitstream vera serif	release 1.10
+bitstream vera sans bold oblique	release 1.10
+bitstream vera sans mono bold oblique	release 1.10
+bitstream vera sans mono oblique	release 1.10
+lohit gujarati	2.92.4
+lohit odia	2.91.2
+inconsolata	version 001.010 
+mukti narrow	version 0.94 november 1, 2003
+likhan	version 0.6 
+jamrul	version 0.1 
+mitra mono	version 0.70, october 14, 2002
+ani	version 0.70; october 13 2002
+mukti narrow bold	version 0.94 november 1, 2003
+lohit assamese	version 2.91.5
+stmary10	version 001.001 
+cmsy10	1.1/12-nov-94
+cmr10	1.1/12-nov-94
+eufm10	1.2/19-jan-95
+msbm10	1.2/19-jan-95
+cmex10	1.1/12-nov-94
+esint10	version 001.001 
+wasy10	version 001.002 
+rsfs10	version 001.001 
+msam10	1.2/19-jan-95
+cmmi10	1.1/12-nov-94
+liberation mono italic	version 2.1.0
+liberation serif	version 2.1.0
+liberation sans	version 2.1.0
+liberation mono bold italic	version 2.1.0
+liberation sans italic	version 2.1.0
+liberation serif bold	version 2.1.0
+liberation mono	version 2.1.0
+liberation mono bold	version 2.1.0
+liberation serif bold italic	version 2.1.0
+liberation sans bold	version 2.1.0
+liberation sans bold italic	version 2.1.0
+liberation serif italic	version 2.1.0
+lohit telugu	version 2.5.5
+norasi oblique	version 006.000 
+kinnari oblique	version 003.000 
+garuda oblique	version 004.000 
+tlwg typewriter bold oblique	version 003.001 
+kinnari bold	version 003.000 
+tlwg typo bold oblique	version 004.001 
+laksaman bold	version 004.001 
+laksaman italic	version 004.001 
+sawasdee	version 003.001 
+umpush oblique	version 001.001 
+garuda bold oblique	version 004.000 
+umpush light	version 001.001 
+tlwg typo	version 004.001 
+norasi bold	version 006.000 
+tlwg mono bold oblique	version 002.001 
+garuda bold	version 004.000 
+umpush bold oblique	version 001.001 
+umpush light oblique	version 001.001 
+tlwg typewriter bold	version 003.001 
+tlwg mono bold	version 002.001 
+waree bold oblique	version 001.001 
+norasi italic	version 006.000 
+norasi	version 006.000 
+loma oblique	version 001.001 
+purisa	version 004.001 
+tlwg typo bold	version 004.001 
+garuda	version 004.000 
+kinnari bold italic	version 003.000 
+loma	version 001.001 
+tlwg typist	version 003.001 
+sawasdee bold oblique	version 003.001 
+sawasdee bold	version 003.001 
+tlwg mono	version 002.001 
+norasi bold oblique	version 006.000 
+tlwg typewriter	version 003.001 
+waree oblique	version 001.001 
+umpush	version 001.001 
+waree bold	version 001.001 
+purisa bold oblique	version 004.001 
+purisa bold	version 004.001 
+purisa oblique	version 004.001 
+kinnari italic	version 003.000 
+laksaman bold italic	version 004.001 
+loma bold	version 001.001 
+tlwg mono oblique	version 002.001 
+loma bold oblique	version 001.001 
+tlwg typist oblique	version 003.001 
+tlwg typo oblique	version 004.001 
+tlwg typist bold oblique	version 003.001 
+sawasdee oblique	version 003.001 
+kinnari	version 003.000 
+umpush bold	version 001.001 
+tlwg typewriter oblique	version 003.001 
+laksaman	version 004.001 
+norasi bold italic	version 006.000 
+kinnari bold oblique	version 003.000 
+tlwg typist bold	version 003.001 
+waree	version 001.001 
+tibetan_machine_uni	version 1.901 2007 (beta for v 2.00)
+lklug	version 0.6 
+ubuntu	0.83
+ubuntu mono bold	version 0.80
+ubuntu light	0.83
+ubuntu thin	version 0.84
+ubuntu light italic	0.83
+ubuntu bold	0.83
+ubuntu mono bold italic	version 0.80
+ubuntu bold italic	0.83
+ubuntu italic	0.83
+ubuntu condensed	0.83
+ubuntu mono italic	version 0.80
+ubuntu medium italic	0.83
+ubuntu mono	version 0.80
+ubuntu medium	0.83
+phetsarath ot	version 2.00 july 31, 2012, initial release
+gubbi	1.3
+uroob regular	version 2.0.0+20200101
+keraleeyam regular	version 3.0.0+20200101
+rachana bold	version 7.0.0+20200101
+rachana regular	version 7.0.0+20200101
+dyuthi regular	version 3.0.0+20200101
+suruma	version 3.2.1 
+anjalioldlipi regular	version 7.1.0+20200101
+karumbi regular	1.1.0+20200101
+meera regular	version 7.0.0+20200101
+raghumalayalamsans regular	version 2.2.0+20200101
+kacstposter	2.01
+kacstqurn	2.01
+kacsttitle	2.01
+kacstdecorative	2.01
+kacstpen	2.01
+kacstart	2.01
+mry_kacstqurn	version 1.003 february 6, 2006
+kacstfarsi	2.01
+kacsttitlel	2.01
+kacstnaskh	2.01
+kacstbook	2.01
+kacstdigital	2.01
+kacstoffice	2.01
+kacstscreen	2.01
+kacstletter	2.01
+padauk book bold	version 4.000
+padauk bold	version 4.000
+padauk book	version 4.000
+padauk	version 4.000
+noto mono	version 1.00
+noto color emoji	version 2.020;goog;noto-emoji:20200914:beta
+rekha	version 0.2 
+padmaa-bold.1.1	version 001.200 
+aakar	version 0.2 
+padmaa	version 0.7 
+padmaa-normal-indictrans	version 001.100 
+kacstone	version 5.0 
+kacstone bold	version 5.0 
+opensymbol	version 102.11 
+pagul	version 1.0 2011 initial release
+navilu	version 1.2
+gargi	version 2.0 
+sahadeva	version 1
+freesans oblique	version 0412.2261 
+freemono bold oblique	version 0412.2261 
+freeserif	version 0412.2263 
+freeserif italic	version 0412.2268 
+freemono	version 0412.2268 
+freeserif bold italic	version 0412.2268 
+freeserif bold	version 0412.2268 
+freesans	version 0412.2268 
+freemono bold	version 0412.2261 
+freemono oblique	version 0412.2264 
+freesans bold oblique	version 0412.2268 
+freesans bold	version 0412.2261 
+abyssinica sil	version 2.000
+samyak devanagari	version 1.2.2 
+indie flower bold	version 1.001 2010
+deuxiemerang-original	version 1.000;ps 001.001;hotconv 1.0.56
+indie flower regular	version 1.001 2010
+meslolgs nf bold	1.210
+deuxiemerang	version 1.000;ps 001.001;hotconv 1.0.56
+amandine	1998; 1.0, initial release
+meslolgs nf italic	1.210
+becca & perry script	version 1.00;february 21, 2019;fontcreator 11.5.0.2430 64-bit
+deuxiemerang-italic	1.000
+courier 10 pitch	version 2.0-1.0 
+lecteur heureux	version 1.00 
+microsoft sans serif	version 7.00
+courier 10 pitch italic	version 2.0-1.0 
+lcmmi8	version 001.001 
+meslolgs nf bold italic	1.210
+courier 10 pitch bold italic	version 2.0-1.0 
+courier 10 pitch bold	version 2.0-1.0 
+meslolgs nf regular	1.210
+opendyslexicalta bold	version 2.001;ps 002.001;hotconv 1.0.70;makeotf.lib2.5.58329
+opendyslexic italic	version 2.001;ps 002.001;hotconv 1.0.70;makeotf.lib2.5.58329
+opendyslexicalta	version 2.001;ps 002.001;hotconv 1.0.70;makeotf.lib2.5.58329
+opendyslexicalta bold italic	version 2.001;ps 002.001;hotconv 1.0.70;makeotf.lib2.5.58329
+opendyslexic bold	version 2.001;ps 002.001;hotconv 1.0.70;makeotf.lib2.5.58329
+opendyslexicalta italic	version 2.001;ps 002.001;hotconv 1.0.70;makeotf.lib2.5.58329
+opendyslexic bold italic	version 2.001;ps 002.001;hotconv 1.0.70;makeotf.lib2.5.58329
+opendyslexicmono	version 1.001;ps 001.001;hotconv 1.0.70;makeotf.lib2.5.58329
+opendyslexic	version 2.001;ps 002.001;hotconv 1.0.70;makeotf.lib2.5.58329
+kerkis	version 001.000 
+kerkissmallcaps bold	version 001.000 
+kerkis bold italic	version 001.000 
+kerkis sans bold	version 001.000 
+kerkis italic	version 001.000 
+kerkissanssmallcaps	version 001.000 
+kerkissans italic	version 001.000 
+kerkissans	version 001.000 
+kerkissmallcaps	version 001.000 
+kerkis bold	version 001.000 
+kerkis sans bold italic	version 001.000 

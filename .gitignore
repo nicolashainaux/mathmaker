@@ -24,7 +24,6 @@ __pycache__/
 
 ## SPECIFIC FILES
 .coverage
-mathmaker/data/fonts_list.txt
 toolbox/shapes_catalog.aux
 toolbox/shapes_catalog.log
 toolbox/shapes_catalog.pdf
