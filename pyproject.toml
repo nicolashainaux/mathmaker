@@ -6,7 +6,7 @@ authors = ["Nicolas Hainaux <nh.techn@posteo.net>"]
 license = "GPL-3.0-or-later"
 readme = 'README.rst'
 include = ['pyproject.toml', '*.rst', '*.toml', '*.po', '*.mo', '*.pot',
-           '*.json', '*.svg', '*.xml', '*.desktop', '*.yaml']
+           '*.json', '*.svg', '*.xml', '*.desktop', '*.yaml', '*.txt']
 
 [tool.poetry.dependencies]
 python = "^3.8"
