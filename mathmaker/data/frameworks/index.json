@@ -209,6 +209,86 @@
         "y1b1",
         "W02d"
     ],
+    "y2b1_four_operations": [
+        "mental_calculation",
+        "y2b1",
+        "four_operations"
+    ],
+    "y2b1_decimal_numerals": [
+        "mental_calculation",
+        "y2b1",
+        "decimal_numerals"
+    ],
+    "y2b1_geometry": [
+        "mental_calculation",
+        "y2b1",
+        "geometry"
+    ],
+    "y2b1_fractions": [
+        "mental_calculation",
+        "y2b1",
+        "fractions"
+    ],
+    "y2b1_units_conversions": [
+        "mental_calculation",
+        "y2b1",
+        "units_conversions"
+    ],
+    "y2b1_operations_vocabulary": [
+        "mental_calculation",
+        "y2b1",
+        "operations_vocabulary"
+    ],
+    "y2b1_exam": [
+        "mental_calculation",
+        "y2b1",
+        "exam"
+    ],
+    "y2b1_W01a": [
+        "mental_calculation",
+        "y2b1",
+        "W01a"
+    ],
+    "y2b1_W01b": [
+        "mental_calculation",
+        "y2b1",
+        "W01b"
+    ],
+    "y2b1_W01c": [
+        "mental_calculation",
+        "y2b1",
+        "W01c"
+    ],
+    "y2b1_W02a": [
+        "mental_calculation",
+        "y2b1",
+        "W02a"
+    ],
+    "y2b1_W02b": [
+        "mental_calculation",
+        "y2b1",
+        "W02b"
+    ],
+    "y2b1_W02c": [
+        "mental_calculation",
+        "y2b1",
+        "W02c"
+    ],
+    "y2b1_W03a": [
+        "mental_calculation",
+        "y2b1",
+        "W03a"
+    ],
+    "y2b1_W03b": [
+        "mental_calculation",
+        "y2b1",
+        "W03b"
+    ],
+    "y2b1_W03c": [
+        "mental_calculation",
+        "y2b1",
+        "W03c"
+    ],
     "y1b2_positional_notation": [
         "mental_calculation",
         "y1b2",
