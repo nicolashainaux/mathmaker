@@ -21,7 +21,6 @@ tests/outfiles/
 __pycache__/
 *.pyc
 *~
-*.mo
 
 ## SPECIFIC FILES
 .coverage
