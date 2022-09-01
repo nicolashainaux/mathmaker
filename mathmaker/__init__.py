@@ -22,7 +22,7 @@
 
 from . import lib
 
-__version_info__ = (0, 7, 13)
+__version_info__ = (0, 7, 14)
 __dev__ = 0
 __patch_nb__ = 0
 __version__ = '.'.join(str(c) for c in __version_info__)
