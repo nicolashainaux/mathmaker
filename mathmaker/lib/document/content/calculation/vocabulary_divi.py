@@ -22,15 +22,27 @@
 
 # This module will add a question about the quotient of two numbers
 
+from mathmakerlib.calculus import Fraction
+
 from . import vocabulary_questions
 
 
 class sub_object(vocabulary_questions.structure):
 
     def __init__(self, build_data, **options):
-        super().__init__(build_data,
-                         result_fct=lambda x, y: x * y,
-                         wording=_('How much is the quotient of {result} by '
-                                   '{nb1}?'),
-                         answer='{nb2}',
-                         **options)
+        if isinstance(build_data[1], Fraction):
+            super().__init__((build_data[1].denominator, build_data[1]),
+                             result_fct=None,
+                             result=build_data[1].numerator,
+                             wording=_('How much is the quotient of {result} '
+                                       'by {nb1}?'),
+                             answer='{nb2}',
+                             shuffle_nbs=False,
+                             **options)
+        else:
+            super().__init__(build_data,
+                             result_fct=lambda x, y: x * y,
+                             wording=_('How much is the quotient of {result} '
+                                       'by {nb1}?'),
+                             answer='{nb2}',
+                             **options)

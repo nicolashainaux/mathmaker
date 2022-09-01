@@ -22,9 +22,11 @@
 
 # This module will add a question about the sum of two numbers
 
-from mathmakerlib.calculus import Number
+from mathmakerlib.calculus import Number, Fraction
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.wording import setup_wording_format_of
+
+from mathmaker.lib import shared
 
 
 class structure(component.structure):
@@ -35,8 +37,11 @@ class structure(component.structure):
         super().setup("minimal", **kwargs)
         super().setup("numbers", nb=nbs_to_use, **kwargs)
         super().setup("nb_variants", nb=nbs_to_use, **kwargs)
-        result = Number(result_fct(self.nb1, self.nb2))
-        self.result = str(result)
+        if result_fct is None:
+            result = kwargs['result']
+        else:
+            result = Number(result_fct(self.nb1, self.nb2))
+        self.result = result.printed
         if ('permute_nb1_nb2_result' in kwargs
             and kwargs['permute_nb1_nb2_result']):
             # __
@@ -58,6 +63,8 @@ class structure(component.structure):
                         nb2=self.nb2.uiprinted)
         self.answer_wording = kwargs.get('answer', self.result)
         if isinstance(self.answer_wording, str):
+            if isinstance(self.nb2, Fraction):
+                self.nb2 = shared.machine.write_math_style2(self.nb2.printed)
             setup_wording_format_of(self, w_prefix='answer_')
             self.answer_wording = self.answer_wording\
                 .format(**self.answer_wording_format)
