@@ -5,6 +5,11 @@ Unreleased
 ----------
 
 
+Version 0.7.12 (2022-09-01)
+---------------------------
+
+* Patch version (include required files).
+
 Version 0.7.11 (2022-08-29)
 ---------------------------
 
