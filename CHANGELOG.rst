@@ -5,6 +5,12 @@ Unreleased
 ----------
 
 
+Version 0.7.15 (2022-09-01)
+---------------------------
+
+* divi_vocabulary questions may now be asked using numbers not divisible by each other (answer is a fraction)
+* Add y2b1 mental calculation level.
+
 Version 0.7.14 (2022-09-01)
 ---------------------------
 
