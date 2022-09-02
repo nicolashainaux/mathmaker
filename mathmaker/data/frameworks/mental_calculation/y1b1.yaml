@@ -64,51 +64,36 @@ exam: !!omap
 W01a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi direct -> nnpairs:2-4×6-9 (2)
-                 multi direct -> nnpairs:3-4×5-8 (2)
-                 multi direct -> nnpairs:4-6×5-8 (1)
+    - questions: multi direct -> nnpairs:4-9 (5)
 
 W01b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi direct -> nnpairs:4-9 (5)
+    - questions: multi direct -> nnpairs:4-9 (3)
+                 multi reversed -> nnpairs:2-9 (2)
 
 W01c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: multi direct -> nnpairs:4-9 (2)
-                 multi reversed -> nnpairs:2-5 (1)
+    - questions: multi direct -> nnpairs:4-9 (1)
                  multi reversed -> nnpairs:4-9 (2)
+                 multi hole -> nnpairs:2-9 (2)
 
 W01d: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: multi direct -> nnpairs:4-9 (2)
-                 multi reversed -> nnpairs:2-5 (1)
-                 multi reversed -> nnpairs:4-9 (2)
-
-W02a: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: multi direct -> nnpairs:4-9 (1)
-                 multi reversed -> nnpairs:4-9 (2)
-                 multi hole -> nnpairs:2-9 (2)
-
-W02b: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: multi direct -> nnpairs:4-9 (1)
-                 multi reversed -> nnpairs:2-9 (2)
-                 multi hole -> nnpairs:2-9 (2)
-
-W02c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> nnpairs:4-9 (1)
                  multi reversed -> nnpairs:4-9 (2)
                  multi hole -> nnpairs:4-9 (2)
 
-W02d: !!omap
+W02a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: multi direct -> nnpairs:4-9 (1)
+                 multi reversed -> nnpairs:4-9 (2)
+                 multi hole -> nnpairs:4-9 (2)
+
+W02b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: multi direct -> nnpairs:4-9 (1)
