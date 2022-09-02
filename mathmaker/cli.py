@@ -116,9 +116,10 @@ def entry_point():
                         help='this can either match a sheetname included in '
                              'mathmaker, or a mathmaker xml file, or it may '
                              'be the special directives "list", that will '
-                             'print the complete list and exit, or "config" '
+                             'print the complete list and exit; "config" '
                              'that will show current mathmaker configuration '
-                             'values.')
+                             'values; or "belts" that will show currently '
+                             'loaded belts scale.')
     parser.add_argument('--version', '-v',
                         action='version',
                         version=__info__)
@@ -156,9 +157,13 @@ def entry_point():
         shared.shapes_db.close()
         shared.anglessets_db.close()
         sys.exit(0)
-    elif args.main_directive == 'config':
-        print(json.dumps(load_config('user_config', settings.settingsdir),
-                         indent=2))
+    elif args.main_directive in ('config', 'belts'):
+        if args.main_directive == 'config':
+            print(json.dumps(load_config('user_config', settings.settingsdir),
+                             indent=2))
+        else:
+            print(json.dumps(settings.mc_belts,
+                             indent=2))
         shared.db.close()
         shared.natural_nb_tuples_db.close()
         shared.solids_db.close()
