@@ -71,26 +71,20 @@ W01a: !!omap
 W01b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: digitplace direct -> digits_places (3)
-                 digitplace reversed -> digits_places (2)
+    - questions: digitplace direct -> digits_places (2)
+                 digitplace reversed -> digits_places (3)
 
 W01c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: digitplace direct -> digits_places (1)
-                 digitplace reversed -> digits_places (1)
-                 multi direct -> nnpairs:4-9 (1)
-                 multi reversed -> nnpairs:3-9 (1)
-                 multi hole -> nnpairs:4-9 (1)
+    - questions: digitplace direct -> digits_places (3)
+                 digitplace reversed -> digits_places (2)
 
 W01d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: digitplace direct -> digits_places (1)
-                 digitplace reversed -> digits_places (1)
-                 multi direct -> nnpairs:4-9 (1)
-                 multi reversed -> nnpairs:3-9 (1)
-                 multi hole -> nnpairs:4-9 (1)
+    - questions: digitplace direct -> digits_places (2)
+                 digitplace reversed -> digits_places (3)
 
 W02a: !!omap
   - preset: "mental calculation slideshow"
@@ -100,24 +94,9 @@ W02a: !!omap
 W02b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: digitplace direct -> digits_places (1)
-                 digitplace reversed -> digits_places (1)
-                 divi direct -> nnpairs:4-9 (3)
-
-W02c: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
     - questions: multi direct -> nnpairs:2-9, nb_variant=multiplesof10 (5)
 
-W02d: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: digitplace direct -> digits_places (1)
-                 divi direct -> nnpairs:4-9 (2)
-                 multi direct -> nnpairs:2-9, nb_variant=multiplesof10 (1)
-                 multi reversed -> nnpairs:3-9 (1)
-
-W03a: !!omap
+W02c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: addi direct -> nntriples:11-30 (1)
@@ -125,6 +104,24 @@ W03a: !!omap
                  addi direct -> complements_to_300...1000 (1)
                  subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
                  subtr direct, subvariant=only_positive, context=complement_wording2 -> complements_to_100 (1)
+
+W02d: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: digitplace reversed -> digits_places (1)
+                 divi direct -> nnpairs:4-9 (1)
+                 multi hole -> nnpairs:3-9 (1)
+                 addi direct -> nntriples:11-30 (1)
+                 subtr direct, subvariant=only_positive -> nnpairs:31-199 (1)
+
+W03a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: digitplace direct -> digits_places (1)
+                 divi direct -> nnpairs:4-9 (1)
+                 multi direct -> nnpairs:2-9, nb_variant=multiplesof10 (1)
+                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
+                 addi direct -> nnpairs:80-170×410-530 (1)
 
 W03b: !!omap
   - preset: "mental calculation slideshow"
@@ -149,42 +146,6 @@ W03d: !!omap
   - exercise: !!omap
     - questions: digitplace reversed -> digits_places (1)
                  divi direct -> nnpairs:4-9 (1)
-                 multi hole -> nnpairs:3-9 (1)
-                 addi direct -> nntriples:11-30 (1)
-                 subtr direct, subvariant=only_positive -> nnpairs:31-199 (1)
-
-W04a: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: digitplace direct -> digits_places (1)
-                 divi direct -> nnpairs:4-9 (1)
-                 multi direct -> nnpairs:2-9, nb_variant=multiplesof10 (1)
-                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
-                 addi direct -> nnpairs:80-170×410-530 (1)
-
-W04b: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: digitplace reversed -> digits_places (1)
-                 divi direct -> nnpairs:4-9 (1)
                  multi reversed -> nnpairs:3-9 (1)
-                 addi direct -> nntriples:11-30 (1)
-                 subtr direct, subvariant=only_positive -> nnpairs:31-199 (1)
-
-W04c: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: digitplace direct -> digits_places (1)
-                 divi direct -> nnpairs:4-9 (1)
-                 multi direct -> nnpairs:2-9, nb_variant=multiplesof10 (1)
-                 subtr direct, subvariant=only_positive, context=complement_wording1 -> complements_to_100 (1)
-                 addi direct -> nnpairs:80-170×410-530 (1)
-
-W04d: !!omap
-  - preset: "mental calculation slideshow"
-  - exercise: !!omap
-    - questions: digitplace reversed -> digits_places (1)
-                 divi direct -> nnpairs:4-9 (1)
-                 multi hole -> nnpairs:3-9 (1)
                  addi direct -> nntriples:11-30 (1)
                  subtr direct, subvariant=only_positive -> nnpairs:31-199 (1)
