@@ -5,6 +5,12 @@ Unreleased
 ----------
 
 
+Version 0.7.16 (2022-09-04)
+---------------------------
+
+* Add "belts" directive.
+* Update y2b1 mental calculation level.
+
 Version 0.7.15 (2022-09-01)
 ---------------------------
 
