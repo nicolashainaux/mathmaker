@@ -31,13 +31,10 @@ geometry: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: areas and perimeters"
   - exercise: !!omap
-    - questions: area rectangle, picture=true -> nnpairs:4-9×6-9 (2)
+    - questions: area rectangle, picture=true -> nnpairs:4-9×6-9 (4)
                  perimeter righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
-                 perimeter rectangle, picture=true -> nnpairs:3-9, nb_variant=±quarter (1)
-                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=4 (2)
-                 perimeter polygon, qvariant=missing_length -> polygons, sum_ingredients=int_2to10, sides_nb=3-4 (1)
-                 rectangle length_or_width, context=from_area, picture=true -> nnpairs:3-9 (2)
-                 rectangle length_or_width, context=from_perimeter, picture=true -> nnpairs:5-20 (1)
+                 perimeter rectangle, picture=true -> nnpairs:3-9 (2)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, level=4 (3)
 
 fractions: !!omap
   - preset: "mental calculation"
@@ -50,12 +47,6 @@ fractions: !!omap
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (4)
                  decimal numerals, direction=to_decimal -> decimals (1)
                  decimal numerals, direction=to_fraction -> decimals (1)
-
-units_conversions: !!omap
-  - preset: "mental calculation"
-  - title: "Mental calculation: units conversions"
-  - exercise: !!omap
-    - questions: units conversion -> unitspairs, level=1 (10)
 
 operations_vocabulary: !!omap
   - preset: "mental calculation"
@@ -94,20 +85,16 @@ exam: !!omap
                  subtr direct, subvariant=only_positive -> intpairs_11to90 (1)
                  [1][addi direct -> clocktime_data (1)
                      subtr direct -> clocktime_data (1)]
-                 [1][digitplace direct -> digits_places (1)
-                     digitplace reversed -> digits_places (1)]
+                 digitplace direct -> digits_places (1)
+                 digitplace reversed -> digits_places (1)
                  decimal numerals -> decimals (1)
                  area rectangle, picture=true -> nnpairs:4-9×6-9 (1)
-                 perimeter rectangle, picture=true -> nnpairs:3-9, nb_variant=±quarter (1)
+                 perimeter rectangle, picture=true -> nnpairs:3-9 (1)
                  [1][perimeter righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
-                     perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=4 (1)
-                     perimeter polygon, qvariant=missing_length -> polygons, sum_ingredients=int_2to10, sides_nb=3-4 (1)
-                     rectangle length_or_width, context=from_area, picture=true -> nnpairs:3-9 (1)
-                     rectangle length_or_width, context=from_perimeter, picture=true -> nnpairs:5-20 (1)]
+                     perimeter polygon -> polygons, sum_ingredients=int_2to10, level=4 (1)]
                  [1][read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
                      read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)]
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
-                 units conversion -> unitspairs, level=1 (1)
                  [1][vocabulary half -> nnpairs:2×6-15 (1)
                      vocabulary third -> table_3 (1)
                      vocabulary quarter -> table_4 (1)
@@ -159,36 +146,36 @@ W02b: !!omap
     - questions: addi direct -> clocktime_data (1)
                  digitplace reversed -> digits_places (1)
                  decimal numerals, direction=to_fraction -> decimals (1)
-                 perimeter rectangle, picture=true -> nnpairs:3-9, nb_variant=±quarter (1)
+                 perimeter rectangle, picture=true -> nnpairs:3-9 (1)
 
 W02c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=4 (1)
+    - questions: perimeter polygon -> polygons, sum_ingredients=int_2to10, level=4 (1)
                  read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
-                 units conversion -> unitspairs, level=1 (1)
+                 subtr direct, subvariant=only_positive -> intpairs_11to90 (1)
 
 W03a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: perimeter polygon, qvariant=missing_length -> polygons, sum_ingredients=int_2to10, sides_nb=3-4 (1)
-                 read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
+    - questions: read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
                  vocabulary third -> table_3 (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
 
 W03b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: rectangle length_or_width, context=from_area, picture=true -> nnpairs:3-9 (1)
-                 units conversion -> unitspairs, level=1 (1)
-                 vocabulary multi -> nnpairs:3-9, nb_variant=multiplesof10 (1)
+    - questions: vocabulary multi -> nnpairs:3-9, nb_variant=multiplesof10 (1)
                  multi hole -> int_irreducible_frac (1)
+                 area rectangle, picture=true -> nnpairs:4-9×6-9 (1)
+                 divi euclidean -> nnpairs:4-9 (1)
 
 W03c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: rectangle length_or_width, context=from_perimeter, picture=true -> nnpairs:5-20 (1)
-                 units conversion -> unitspairs, level=1 (1)
-                 vocabulary divi -> int_irreducible_frac (1)
-                 divi euclidean -> nnpairs:4-9 (1)
+    - questions: vocabulary divi -> int_irreducible_frac (1)
+                 perimeter rectangle, picture=true -> nnpairs:3-9 (1)
+                 fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
+                 read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
