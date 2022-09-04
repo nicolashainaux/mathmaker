@@ -5,6 +5,14 @@ Unreleased
 ----------
 
 
+Version 0.7.17 (2022-09-04)
+---------------------------
+
+* Update y1b2 mental calculation level.
+* Read metadata from pyproject.toml (not all of them yet, though)
+* Update french translation.
+
+
 Version 0.7.16 (2022-09-04)
 ---------------------------
 

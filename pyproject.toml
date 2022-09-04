@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mathmaker"
-version = "0.7.16"
+version = "0.7.17"
 description = "Mathmaker creates automatically elementary maths exercises and their (detailed) answers."
 authors = ["Nicolas Hainaux <nh.techn@posteo.net>"]
 license = "GPL-3.0-or-later"
