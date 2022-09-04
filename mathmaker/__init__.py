@@ -20,33 +20,35 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import datetime
+from pathlib import Path
+
+import toml
+
 from . import lib
 
-__version_info__ = (0, 7, 15)
-__dev__ = 0
-__patch_nb__ = 0
-__version__ = '.'.join(str(c) for c in __version_info__)
-if __dev__ != 0:
-    __version__ += 'dev' + str(__dev__)
-if __patch_nb__ != 0:
-    __version__ += '-' + str(__patch_nb__)
+pp_path = Path(__file__).parent.parent / 'pyproject.toml'
+if not pp_path.is_file():
+    pp_path = Path(__file__).parent / 'data/pyproject.toml'
 
-__software_name__ = 'mathmaker'
+METADATA = toml.loads(pp_path.read_text())
+
+__version__ = METADATA['tool']['poetry']['version']
+
+__software_name__ = METADATA['tool']['poetry']['name']
 __release__ = __version__ + ' (alpha)'
 __author__ = 'Nicolas Hainaux'
-__author_email__ = 'nh.techn@gmail.com'
-__licence__ = 'GNU General Public License v3 or later (GPLv3+)'
+__author_email__ = 'nh.techn@posteo.net'
+__licence__ = METADATA['tool']['poetry']['license']
 __url__ = 'https://gitlab.com/nicolas.hainaux/mathmaker/'
-__copyright__ = 'Copyright 2006-2017'
+__copyright__ = f'Copyright 2006-{datetime.datetime.now().year}'
 __contact__ = '{author} <{author_email}>'\
               .format(author=__author__, author_email=__author_email__)
 __licence_info__ = '{software_ref} is free software. Its license is '\
                    '{software_license}.'
-__url_info__ = 'Further details on {software_website}'
-__info__ = '{software_name} {r}\nLicense: {li}\n{c} {contact}'\
-           .format(software_name=__software_name__,
-                   r=__release__, li=__licence__, c=__copyright__,
-                   contact=__contact__)
+__url_info__ = f'Further details on {__url__}'
+__info__ = f'{__software_name__} {__release__}\n'\
+    f'License: {__licence__}\n{__copyright__} {__contact__}'
 
 DAEMON_PORT = 9999
 

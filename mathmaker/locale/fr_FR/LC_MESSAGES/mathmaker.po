@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2022-08-29 10:41+0200\n"
+"PO-Revision-Date: 2022-09-04 16:23+0200\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -349,7 +349,7 @@ msgstr "Donc, d'après la contraposée du théorème de Pythagore,"
 msgid "{triangle_name} has no right angle."
 msgstr "{triangle_name} n'est pas rectangle."
 
-#: lib/document/frames/sheet.py:72 lib/document/frames/sheet.py:65
+#: lib/document/frames/sheet.py:73 lib/document/frames/sheet.py:66
 msgid "Answers"
 msgstr "Réponses"
 
@@ -1167,25 +1167,31 @@ msgstr "Développer et réduire les expressions suivantes :"
 msgid "Algebra: expand and reduce double brackets"
 msgstr "Calcul littéral: développement \"double\""
 
-#: data/frameworks/mental_calculation/02_white2.yaml:3
 #: data/frameworks/mental_calculation/01_white1.yaml:3
-#: data/frameworks/mental_calculation/04_yellow1.yaml:34
-#: data/frameworks/mental_calculation/05_yellow2.yaml:3
+#: data/frameworks/mental_calculation/y1b5.yaml:3
+#: data/frameworks/mental_calculation/y1b1.yaml:3
 #: data/frameworks/mental_calculation/02_white2.yaml:22
+#: data/frameworks/mental_calculation/04_yellow1.yaml:34
 #: data/frameworks/mental_calculation/02_white2.yaml:15
+#: data/frameworks/mental_calculation/y1b4.yaml:34
+#: data/frameworks/mental_calculation/y1b2.yaml:22
+#: data/frameworks/mental_calculation/05_yellow2.yaml:3
+#: data/frameworks/mental_calculation/02_white2.yaml:3
 msgid "Mental calculation: multiplications"
 msgstr "Calcul mental : multiplications"
 
-#: data/frameworks/mental_calculation/03_yellow.yaml:64
-#: data/frameworks/mental_calculation/03_yellow.yaml:63
-#: data/frameworks/mental_calculation/04_yellow1.yaml:3
-#: data/frameworks/mental_calculation/02_white2.yaml:13
-#: data/frameworks/mental_calculation/01_white1.yaml:9
-#: data/frameworks/mental_calculation/04_yellow1.yaml:15
 #: data/frameworks/mental_calculation/02_white2.yaml:11
+#: data/frameworks/mental_calculation/y1b4.yaml:3
 #: data/frameworks/mental_calculation/03_yellow.yaml:96
+#: data/frameworks/mental_calculation/02_white2.yaml:13
+#: data/frameworks/mental_calculation/y1b2.yaml:3
+#: data/frameworks/mental_calculation/03_yellow.yaml:63
+#: data/frameworks/mental_calculation/04_yellow1.yaml:15
 #: data/frameworks/mental_calculation/03_yellow.yaml:60
+#: data/frameworks/mental_calculation/04_yellow1.yaml:3
 #: data/frameworks/mental_calculation/02_white2.yaml:3
+#: data/frameworks/mental_calculation/01_white1.yaml:9
+#: data/frameworks/mental_calculation/03_yellow.yaml:64
 msgid "Mental calculation: positional notation"
 msgstr "Calcul mental : rangs des chiffres dans un nombre décimal"
 
@@ -1814,28 +1820,32 @@ msgstr ""
 "Nos voisins ont {nb1} moutons. C'est {nb2} de moins que nous. Combien de "
 "moutons avons-nous ?"
 
-#: data/frameworks/mental_calculation/02_white2.yaml:23
 #: data/frameworks/mental_calculation/02_white2.yaml:11
-#: data/frameworks/mental_calculation/03_yellow.yaml:3
-#: data/frameworks/mental_calculation/02_white2.yaml:31
-#: data/frameworks/mental_calculation/02_white2.yaml:18
+#: data/frameworks/mental_calculation/y1b2.yaml:31
+#: data/frameworks/mental_calculation/y1b3.yaml:3
 #: data/frameworks/mental_calculation/02_white2.yaml:32
+#: data/frameworks/mental_calculation/02_white2.yaml:31
+#: data/frameworks/mental_calculation/03_yellow.yaml:3
+#: data/frameworks/mental_calculation/02_white2.yaml:23
+#: data/frameworks/mental_calculation/02_white2.yaml:18
 msgid "Mental calculation: additions and subtractions"
 msgstr "Calcul mental : additions et soustractions"
 
-#: data/frameworks/mental_calculation/02_white2.yaml:20
-#: data/frameworks/mental_calculation/02_white2.yaml:10
 #: data/frameworks/mental_calculation/02_white2.yaml:27
+#: data/frameworks/mental_calculation/02_white2.yaml:20
 #: data/frameworks/mental_calculation/03_yellow.yaml:37
+#: data/frameworks/mental_calculation/02_white2.yaml:10
+#: data/frameworks/mental_calculation/y1b2.yaml:10
 #: data/frameworks/mental_calculation/02_white2.yaml:32
 msgid "Mental calculation: divisions"
 msgstr "Calcul mental : divisions"
 
 #: data/frameworks/mental_calculation/02_white2.yaml:54
 #: data/frameworks/mental_calculation/02_white2.yaml:66
-#: data/frameworks/mental_calculation/02_white2.yaml:71
-#: data/frameworks/mental_calculation/02_white2.yaml:59
 #: data/frameworks/mental_calculation/03_yellow.yaml:37
+#: data/frameworks/mental_calculation/y1b3.yaml:37
+#: data/frameworks/mental_calculation/02_white2.yaml:59
+#: data/frameworks/mental_calculation/02_white2.yaml:71
 msgid "Mental calculation: multiplication by 11"
 msgstr "Calcul mental : multiplications par 11"
 
@@ -1863,7 +1873,7 @@ msgstr "Quel est le complément à {number1} de {number2} ?"
 msgid "To be able to color the documents"
 msgstr "Pour pouvoir mettre les documents en couleur"
 
-#: lib/document/frames/sheet.py:80
+#: lib/document/frames/sheet.py:81
 msgid "Answers!"
 msgstr "Allez, on corrige !"
 
@@ -1936,24 +1946,31 @@ msgstr "Écriture décimale de {} ?"
 msgid "What is {} as a decimal fraction?"
 msgstr "Fraction décimale égale à {} ?"
 
-#: data/frameworks/mental_calculation/03_yellow.yaml:104
-#: data/frameworks/mental_calculation/04_yellow1.yaml:24
 #: data/frameworks/mental_calculation/05_yellow2.yaml:18
 #: data/frameworks/mental_calculation/03_yellow.yaml:34
-#: data/frameworks/mental_calculation/07_orange1.yaml:64
 #: data/frameworks/mental_calculation/05_yellow2.yaml:50
+#: data/frameworks/mental_calculation/y1b5.yaml:50
+#: data/frameworks/mental_calculation/y1b7.yaml:64
+#: data/frameworks/mental_calculation/03_yellow.yaml:104
+#: data/frameworks/mental_calculation/07_orange1.yaml:64
+#: data/frameworks/mental_calculation/04_yellow1.yaml:24
+#: data/frameworks/mental_calculation/y2b1.yaml:23
 msgid "Mental calculation: decimal numerals"
 msgstr "Calcul mental : fraction décimale et écriture décimale"
 
 #: data/frameworks/mental_calculation/03_yellow.yaml:16
+#: data/frameworks/mental_calculation/y1b3.yaml:16
 #: data/frameworks/mental_calculation/03_yellow.yaml:43
+#: data/frameworks/mental_calculation/y1b4.yaml:11
+#: data/frameworks/mental_calculation/04_yellow1.yaml:33
+#: data/frameworks/mental_calculation/y2b1.yaml:53
 #: data/frameworks/mental_calculation/03_yellow.yaml:42
 #: data/frameworks/mental_calculation/04_yellow1.yaml:11
-#: data/frameworks/mental_calculation/04_yellow1.yaml:33
 msgid "Mental calculation: operations' vocabulary"
 msgstr "Calcul mental : vocabulaire des opérations"
 
-#: lib/document/content/calculation/vocabulary_divi.py:33
+#: lib/document/content/calculation/vocabulary_divi.py:37
+#: lib/document/content/calculation/vocabulary_divi.py:45
 #, python-brace-format
 msgid "How much is the quotient of {result} by {nb1}?"
 msgstr "Combien vaut le quotient de {result} par {nb1} ?"
@@ -1988,11 +2005,12 @@ msgstr "Quel est le tiers de {result} ?"
 msgid "What is the quarter of {result}?"
 msgstr "Quel est le quart de {result} ?"
 
-#: data/frameworks/mental_calculation/03_yellow.yaml:78
+#: data/frameworks/mental_calculation/03_yellow.yaml:73
 #: data/frameworks/mental_calculation/03_yellow.yaml:70
 #: data/frameworks/mental_calculation/02_white2.yaml:78
-#: data/frameworks/mental_calculation/03_yellow.yaml:73
 #: data/frameworks/mental_calculation/03_yellow.yaml:74
+#: data/frameworks/mental_calculation/03_yellow.yaml:78
+#: data/frameworks/mental_calculation/y1b3.yaml:78
 msgid "Mental calculation: area and perimeter of a rectangle"
 msgstr "Calcul mental : aires et périmètres de rectangles"
 
@@ -2030,14 +2048,16 @@ msgstr "F"
 msgid "undefined"
 msgstr "indéfini"
 
-#: data/frameworks/mental_calculation/01_white1.yaml:9
+#: data/frameworks/mental_calculation/y1b1.yaml:9
 #: data/frameworks/mental_calculation/02_white2.yaml:3
+#: data/frameworks/mental_calculation/01_white1.yaml:9
 msgid "Mental calculation: reversed multiplications"
 msgstr "Calcul mental : multiplications à l'envers"
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:9
-#: data/frameworks/mental_calculation/01_white1.yaml:15
 #: data/frameworks/mental_calculation/02_white2.yaml:9
+#: data/frameworks/mental_calculation/01_white1.yaml:15
+#: data/frameworks/mental_calculation/04_yellow1.yaml:9
+#: data/frameworks/mental_calculation/y1b1.yaml:15
 msgid "Mental calculation: multiplications with a hole"
 msgstr "Calcul mental : multiplications à trou"
 
@@ -2046,30 +2066,32 @@ msgstr "Calcul mental : multiplications à trou"
 msgid "{how_many_digitplace} are there in {decimal_number}?"
 msgstr "{how_many_digitplace} dans {decimal_number} ?"
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:74
-#: data/frameworks/mental_calculation/05_yellow2.yaml:34
-#: data/frameworks/mental_calculation/04_yellow1.yaml:19
-#: data/frameworks/mental_calculation/05_yellow2.yaml:75
-#: data/frameworks/mental_calculation/04_yellow1.yaml:18
-#: data/frameworks/mental_calculation/06_orange.yaml:88
-#: data/frameworks/mental_calculation/05_yellow2.yaml:70
-#: data/frameworks/mental_calculation/04_yellow1.yaml:3
-#: data/frameworks/mental_calculation/04_yellow1.yaml:86
-#: data/frameworks/mental_calculation/05_yellow2.yaml:29
-#: data/frameworks/mental_calculation/06_orange.yaml:37
-#: data/frameworks/mental_calculation/04_yellow1.yaml:17
-#: data/frameworks/mental_calculation/04_yellow1.yaml:29
-#: data/frameworks/mental_calculation/05_yellow2.yaml:65
-#: data/frameworks/mental_calculation/06_orange.yaml:82
-#: data/frameworks/mental_calculation/05_yellow2.yaml:37
-#: data/frameworks/mental_calculation/04_yellow1.yaml:78
-#: data/frameworks/mental_calculation/05_yellow2.yaml:16
-#: data/frameworks/mental_calculation/05_yellow2.yaml:138
-#: data/frameworks/mental_calculation/06_orange.yaml:90
-#: data/frameworks/mental_calculation/06_orange.yaml:59
-#: data/frameworks/mental_calculation/04_yellow1.yaml:11
 #: data/frameworks/mental_calculation/06_orange.yaml:75
+#: data/frameworks/mental_calculation/06_orange.yaml:82
+#: data/frameworks/mental_calculation/04_yellow1.yaml:29
 #: data/frameworks/mental_calculation/04_yellow1.yaml:68
+#: data/frameworks/mental_calculation/04_yellow1.yaml:17
+#: data/frameworks/mental_calculation/06_orange.yaml:90
+#: data/frameworks/mental_calculation/06_orange.yaml:37
+#: data/frameworks/mental_calculation/04_yellow1.yaml:74
+#: data/frameworks/mental_calculation/04_yellow1.yaml:19
+#: data/frameworks/mental_calculation/05_yellow2.yaml:138
+#: data/frameworks/mental_calculation/y1b5.yaml:16
+#: data/frameworks/mental_calculation/y1b6.yaml:75
+#: data/frameworks/mental_calculation/06_orange.yaml:88
+#: data/frameworks/mental_calculation/05_yellow2.yaml:75
+#: data/frameworks/mental_calculation/06_orange.yaml:59
+#: data/frameworks/mental_calculation/04_yellow1.yaml:78
+#: data/frameworks/mental_calculation/05_yellow2.yaml:29
+#: data/frameworks/mental_calculation/05_yellow2.yaml:65
+#: data/frameworks/mental_calculation/05_yellow2.yaml:34
+#: data/frameworks/mental_calculation/05_yellow2.yaml:37
+#: data/frameworks/mental_calculation/05_yellow2.yaml:16
+#: data/frameworks/mental_calculation/04_yellow1.yaml:3
+#: data/frameworks/mental_calculation/05_yellow2.yaml:70
+#: data/frameworks/mental_calculation/04_yellow1.yaml:86
+#: data/frameworks/mental_calculation/04_yellow1.yaml:18
+#: data/frameworks/mental_calculation/04_yellow1.yaml:11
 msgid "Mental calculation: simple percentages calculations"
 msgstr "Calcul mental : pourcentages simples"
 
@@ -2082,25 +2104,27 @@ msgstr "{n1} {percent_symbol} de {n2} ?"
 msgid "Which fraction of the line segment represents the colored part?"
 msgstr "À quelle fraction du segment correspond la partie colorée ?"
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:28
-#: data/frameworks/mental_calculation/02_white2.yaml:72
-#: data/frameworks/mental_calculation/04_yellow1.yaml:3
-#: data/frameworks/mental_calculation/04_yellow1.yaml:23
+#: data/frameworks/mental_calculation/y1b4.yaml:28
 #: data/frameworks/mental_calculation/04_yellow1.yaml:51
-#: data/frameworks/mental_calculation/04_yellow1.yaml:11
+#: data/frameworks/mental_calculation/02_white2.yaml:72
 #: data/frameworks/mental_calculation/04_yellow1.yaml:13
+#: data/frameworks/mental_calculation/04_yellow1.yaml:23
+#: data/frameworks/mental_calculation/04_yellow1.yaml:3
+#: data/frameworks/mental_calculation/04_yellow1.yaml:28
+#: data/frameworks/mental_calculation/04_yellow1.yaml:11
 msgid "Mental calculation: fraction of a line segment"
 msgstr "Calcul mental : fraction d'un segment"
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:59
 #: data/frameworks/mental_calculation/05_yellow2.yaml:47
-#: data/frameworks/mental_calculation/04_yellow1.yaml:71
-#: data/frameworks/mental_calculation/04_yellow1.yaml:15
-#: data/frameworks/mental_calculation/03_yellow.yaml:85
-#: data/frameworks/mental_calculation/04_yellow1.yaml:63
+#: data/frameworks/mental_calculation/04_yellow1.yaml:59
 #: data/frameworks/mental_calculation/02_white2.yaml:85
 #: data/frameworks/mental_calculation/05_yellow2.yaml:39
 #: data/frameworks/mental_calculation/04_yellow1.yaml:7
+#: data/frameworks/mental_calculation/04_yellow1.yaml:63
+#: data/frameworks/mental_calculation/04_yellow1.yaml:15
+#: data/frameworks/mental_calculation/04_yellow1.yaml:71
+#: data/frameworks/mental_calculation/03_yellow.yaml:85
+#: data/frameworks/mental_calculation/y1b3.yaml:85
 msgid "Mental calculation: perimeter of a polygon"
 msgstr "Calcul mental : périmètres de polygones"
 
@@ -2110,8 +2134,9 @@ msgid "Euclidean division of {dividend} by {divisor}?"
 msgstr "Division euclidienne de {dividend} par {divisor} ?"
 
 #: data/frameworks/mental_calculation/04_yellow1.yaml:30
-#: data/frameworks/mental_calculation/04_yellow1.yaml:34
 #: data/frameworks/mental_calculation/04_yellow1.yaml:7
+#: data/frameworks/mental_calculation/y1b4.yaml:50
+#: data/frameworks/mental_calculation/04_yellow1.yaml:34
 #: data/frameworks/mental_calculation/04_yellow1.yaml:42
 #: data/frameworks/mental_calculation/04_yellow1.yaml:50
 #: data/frameworks/mental_calculation/04_yellow1.yaml:90
@@ -2457,52 +2482,55 @@ msgstr ""
 "J'ai acheté {nb1} {mass_unit=g} de fromage pour {nb3} {currency_unit}. "
 "Combien coûteraient {nb2} {mass_unit} ? |hint:currency_unit|"
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:79
+#: data/frameworks/mental_calculation/04_yellow1.yaml:43
+#: data/frameworks/mental_calculation/y1b4.yaml:43
 #: data/frameworks/mental_calculation/04_yellow1.yaml:71
 #: data/frameworks/mental_calculation/04_yellow1.yaml:16
-#: data/frameworks/mental_calculation/04_yellow1.yaml:43
+#: data/frameworks/mental_calculation/04_yellow1.yaml:79
 #: data/frameworks/mental_calculation/04_yellow1.yaml:81
 #: data/frameworks/mental_calculation/04_yellow1.yaml:67
 msgid "Mental calculation: multiplications and divisions by 10, 100 and 1000"
 msgstr "Calcul mental : multiplications et divisions par 10, 100 et 1000"
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:97
-#: data/frameworks/mental_calculation/04_yellow1.yaml:93
-#: data/frameworks/mental_calculation/04_yellow1.yaml:101
 #: data/frameworks/mental_calculation/04_yellow1.yaml:57
-#: data/frameworks/mental_calculation/04_yellow1.yaml:99
-#: data/frameworks/mental_calculation/04_yellow1.yaml:109
+#: data/frameworks/mental_calculation/04_yellow1.yaml:93
 #: data/frameworks/mental_calculation/04_yellow1.yaml:98
+#: data/frameworks/mental_calculation/04_yellow1.yaml:109
+#: data/frameworks/mental_calculation/04_yellow1.yaml:99
 #: data/frameworks/mental_calculation/04_yellow1.yaml:42
+#: data/frameworks/mental_calculation/y1b4.yaml:57
+#: data/frameworks/mental_calculation/04_yellow1.yaml:97
+#: data/frameworks/mental_calculation/04_yellow1.yaml:101
 msgid "Mental calculation: multiplications with decimal numbers"
 msgstr "Calcul mental : multiplications décimales"
 
-#: lib/document/frames/sheet.py:76
+#: lib/document/frames/sheet.py:77
 #, python-brace-format
 msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr "Prêt ?{sep}Feu !{sep}Partez !"
 
-#: data/frameworks/mental_calculation/06_orange.yaml:179
-#: data/frameworks/mental_calculation/06_orange.yaml:167
-#: data/frameworks/mental_calculation/05_yellow2.yaml:49
-#: data/frameworks/mental_calculation/04_yellow1.yaml:181
-#: data/frameworks/mental_calculation/05_yellow2.yaml:131
-#: data/frameworks/mental_calculation/06_orange.yaml:160
-#: data/frameworks/mental_calculation/04_yellow1.yaml:183
-#: data/frameworks/mental_calculation/06_orange.yaml:194
-#: data/frameworks/mental_calculation/05_yellow2.yaml:169
-#: data/frameworks/mental_calculation/05_yellow2.yaml:255
-#: data/frameworks/mental_calculation/03_yellow.yaml:166
-#: data/frameworks/mental_calculation/05_yellow2.yaml:164
-#: data/frameworks/mental_calculation/03_yellow.yaml:159
 #: data/frameworks/mental_calculation/05_yellow2.yaml:55
 #: data/frameworks/mental_calculation/06_orange.yaml:192
-#: data/frameworks/mental_calculation/04_yellow1.yaml:191
-#: data/frameworks/mental_calculation/06_orange.yaml:127
-#: data/frameworks/mental_calculation/03_yellow.yaml:167
-#: data/frameworks/mental_calculation/05_yellow2.yaml:187
 #: data/frameworks/mental_calculation/06_orange.yaml:47
+#: data/frameworks/mental_calculation/05_yellow2.yaml:164
+#: data/frameworks/mental_calculation/06_orange.yaml:160
+#: data/frameworks/mental_calculation/04_yellow1.yaml:181
+#: data/frameworks/mental_calculation/04_yellow1.yaml:183
+#: data/frameworks/mental_calculation/05_yellow2.yaml:169
+#: data/frameworks/mental_calculation/03_yellow.yaml:167
+#: data/frameworks/mental_calculation/05_yellow2.yaml:131
+#: data/frameworks/mental_calculation/03_yellow.yaml:166
+#: data/frameworks/mental_calculation/06_orange.yaml:194
+#: data/frameworks/mental_calculation/05_yellow2.yaml:255
+#: data/frameworks/mental_calculation/04_yellow1.yaml:191
+#: data/frameworks/mental_calculation/06_orange.yaml:167
 #: data/frameworks/mental_calculation/05_yellow2.yaml:174
+#: data/frameworks/mental_calculation/05_yellow2.yaml:187
+#: data/frameworks/mental_calculation/06_orange.yaml:179
+#: data/frameworks/mental_calculation/03_yellow.yaml:159
+#: data/frameworks/mental_calculation/06_orange.yaml:127
+#: data/frameworks/mental_calculation/05_yellow2.yaml:49
+#: data/frameworks/mental_calculation/y1b3.yaml:167
 msgid "Challenge, first part"
 msgstr "Première épreuve du Tournoi"
 
@@ -2560,20 +2588,23 @@ msgstr ""
 msgid "${math_expr}$ = {q_mark}"
 msgstr "${math_expr}$ = {q_mark}"
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:57
 #: data/frameworks/mental_calculation/03_yellow.yaml:10
-#: data/frameworks/mental_calculation/03_yellow.yaml:109
-#: data/frameworks/mental_calculation/05_yellow2.yaml:20
-#: data/frameworks/mental_calculation/05_yellow2.yaml:28
-#: data/frameworks/mental_calculation/04_yellow1.yaml:3
-#: data/frameworks/mental_calculation/05_yellow2.yaml:6
+#: data/frameworks/mental_calculation/05_yellow2.yaml:57
 #: data/frameworks/mental_calculation/02_white2.yaml:92
+#: data/frameworks/mental_calculation/y1b5.yaml:57
+#: data/frameworks/mental_calculation/05_yellow2.yaml:6
+#: data/frameworks/mental_calculation/05_yellow2.yaml:20
+#: data/frameworks/mental_calculation/03_yellow.yaml:109
+#: data/frameworks/mental_calculation/y1b3.yaml:109
+#: data/frameworks/mental_calculation/04_yellow1.yaml:3
+#: data/frameworks/mental_calculation/05_yellow2.yaml:28
 msgid "Mental calculation: order of operations"
 msgstr "Calcul mental : priorités opératoires"
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:3
-#: data/frameworks/mental_calculation/03_yellow.yaml:61
 #: data/frameworks/mental_calculation/03_yellow.yaml:55
+#: data/frameworks/mental_calculation/y1b3.yaml:55
+#: data/frameworks/mental_calculation/03_yellow.yaml:61
+#: data/frameworks/mental_calculation/05_yellow2.yaml:3
 msgid "Mental calculation: numeric expansion"
 msgstr "Calcul mental : développement numérique"
 
@@ -2627,14 +2658,15 @@ msgstr "{n1} est un diviseur de {n2}."
 msgid "{n2} is a multiple of {n1}."
 msgstr "{n2} est un multiple de {n1}."
 
-#: data/frameworks/mental_calculation/06_orange.yaml:58
-#: data/frameworks/mental_calculation/05_yellow2.yaml:3
 #: data/frameworks/mental_calculation/05_yellow2.yaml:57
+#: data/frameworks/mental_calculation/06_orange.yaml:65
+#: data/frameworks/mental_calculation/y1b6.yaml:58
+#: data/frameworks/mental_calculation/06_orange.yaml:58
 #: data/frameworks/mental_calculation/06_orange.yaml:73
 #: data/frameworks/mental_calculation/06_orange.yaml:71
-#: data/frameworks/mental_calculation/06_orange.yaml:65
 #: data/frameworks/mental_calculation/05_yellow2.yaml:71
 #: data/frameworks/mental_calculation/05_yellow2.yaml:49
+#: data/frameworks/mental_calculation/05_yellow2.yaml:3
 msgid "Mental calculation: multiples and divisors"
 msgstr "Calcul mental : multiples et diviseurs"
 
@@ -2838,14 +2870,17 @@ msgstr ""
 "quelle heure vais-je arriver ? |hint:time_unit|"
 
 #: data/frameworks/mental_calculation/06_orange.yaml:25
+#: data/frameworks/mental_calculation/y1b6.yaml:85
+#: data/frameworks/mental_calculation/06_orange.yaml:47
 #: data/frameworks/mental_calculation/06_orange.yaml:85
 #: data/frameworks/mental_calculation/06_orange.yaml:98
-#: data/frameworks/mental_calculation/05_yellow2.yaml:43
-#: data/frameworks/mental_calculation/06_orange.yaml:47
-#: data/frameworks/mental_calculation/03_yellow.yaml:72
-#: data/frameworks/mental_calculation/03_yellow.yaml:67
 #: data/frameworks/mental_calculation/06_orange.yaml:92
+#: data/frameworks/mental_calculation/03_yellow.yaml:67
 #: data/frameworks/mental_calculation/03_yellow.yaml:28
+#: data/frameworks/mental_calculation/03_yellow.yaml:72
+#: data/frameworks/mental_calculation/y1b3.yaml:72
+#: data/frameworks/mental_calculation/05_yellow2.yaml:43
+#: data/frameworks/mental_calculation/y1b5.yaml:43
 #: data/frameworks/mental_calculation/06_orange.yaml:100
 msgid "Mental calculation: units conversions"
 msgstr "Calcul mental : conversions d'unités"
@@ -2854,51 +2889,59 @@ msgstr "Calcul mental : conversions d'unités"
 msgid "Give an estimation: {} is close to..."
 msgstr "Ordre de grandeur de {} ?"
 
+#: data/frameworks/mental_calculation/y1b2.yaml:16
 #: data/frameworks/mental_calculation/02_white2.yaml:16
 msgid "Mental calculation: multiplications of multiples of 10"
 msgstr "Calcul mental : multiplications de multiples de 10"
 
-#: data/frameworks/mental_calculation/04_yellow1.yaml:19
-#: data/frameworks/mental_calculation/05_yellow2.yaml:27
+#: data/frameworks/mental_calculation/y1b6.yaml:51
 #: data/frameworks/mental_calculation/06_orange.yaml:51
-#: data/frameworks/mental_calculation/06_orange.yaml:64
-#: data/frameworks/mental_calculation/06_orange.yaml:66
-#: data/frameworks/mental_calculation/06_orange.yaml:58
-#: data/frameworks/mental_calculation/04_yellow1.yaml:48
 #: data/frameworks/mental_calculation/04_yellow1.yaml:104
+#: data/frameworks/mental_calculation/06_orange.yaml:58
+#: data/frameworks/mental_calculation/05_yellow2.yaml:27
+#: data/frameworks/mental_calculation/06_orange.yaml:64
+#: data/frameworks/mental_calculation/04_yellow1.yaml:48
+#: data/frameworks/mental_calculation/06_orange.yaml:66
+#: data/frameworks/mental_calculation/04_yellow1.yaml:19
 msgid "Mental calculation: estimations"
 msgstr "Calcul mental : estimations"
 
-#: data/frameworks/mental_calculation/03_yellow.yaml:22
 #: data/frameworks/mental_calculation/03_yellow.yaml:94
+#: data/frameworks/mental_calculation/y1b3.yaml:94
+#: data/frameworks/mental_calculation/03_yellow.yaml:22
 msgid "Mental calculation: areas and perimeters of polygons"
 msgstr "Calcul mental : aires et périmètres de polygones"
 
-#: data/frameworks/mental_calculation/03_yellow.yaml:61
 #: data/frameworks/mental_calculation/04_yellow1.yaml:23
+#: data/frameworks/mental_calculation/03_yellow.yaml:61
+#: data/frameworks/mental_calculation/y1b3.yaml:61
 msgid "Mental calculation: mini-problems"
 msgstr "Calcul mental : mini-problèmes"
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:83
-#: data/frameworks/mental_calculation/05_yellow2.yaml:9
 #: data/frameworks/mental_calculation/05_yellow2.yaml:27
 #: data/frameworks/mental_calculation/05_yellow2.yaml:15
+#: data/frameworks/mental_calculation/y1b5.yaml:27
+#: data/frameworks/mental_calculation/05_yellow2.yaml:83
+#: data/frameworks/mental_calculation/05_yellow2.yaml:9
 msgid "Mental calculation: time units conversions"
 msgstr "Calcul mental : conversions d'unités de temps"
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:99
-#: data/frameworks/mental_calculation/05_yellow2.yaml:31
-#: data/frameworks/mental_calculation/03_yellow.yaml:44
 #: data/frameworks/mental_calculation/05_yellow2.yaml:21
+#: data/frameworks/mental_calculation/03_yellow.yaml:44
+#: data/frameworks/mental_calculation/05_yellow2.yaml:31
+#: data/frameworks/mental_calculation/05_yellow2.yaml:99
+#: data/frameworks/mental_calculation/y1b3.yaml:44
 msgid "Mental calculation: additions and subtractions with a hole"
 msgstr "Calcul mental : additions et soustractions à trou"
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:57
-#: data/frameworks/mental_calculation/05_yellow2.yaml:125
-#: data/frameworks/mental_calculation/05_yellow2.yaml:62
-#: data/frameworks/mental_calculation/06_orange.yaml:3
 #: data/frameworks/mental_calculation/07_orange1.yaml:24
+#: data/frameworks/mental_calculation/05_yellow2.yaml:125
 #: data/frameworks/mental_calculation/05_yellow2.yaml:52
+#: data/frameworks/mental_calculation/05_yellow2.yaml:62
+#: data/frameworks/mental_calculation/y1b6.yaml:3
+#: data/frameworks/mental_calculation/06_orange.yaml:3
+#: data/frameworks/mental_calculation/y1b7.yaml:24
 msgid "Mental calculation: mini proportionality problems"
 msgstr "Calcul mental : mini-problèmes (proportionnalité)"
 
@@ -2931,13 +2974,15 @@ msgstr "Arrondir {nb1} au centième."
 msgid "Round {nb1} to the nearest thousandth."
 msgstr "Arrondir {nb1} au millième."
 
-#: data/frameworks/mental_calculation/06_orange.yaml:71
+#: data/frameworks/mental_calculation/y1b7.yaml:49
 #: data/frameworks/mental_calculation/07_orange1.yaml:49
 #: data/frameworks/mental_calculation/05_yellow2.yaml:110
-#: data/frameworks/mental_calculation/06_orange.yaml:64
-#: data/frameworks/mental_calculation/06_orange.yaml:79
+#: data/frameworks/mental_calculation/y1b6.yaml:64
 #: data/frameworks/mental_calculation/05_yellow2.yaml:42
 #: data/frameworks/mental_calculation/06_orange.yaml:77
+#: data/frameworks/mental_calculation/06_orange.yaml:71
+#: data/frameworks/mental_calculation/06_orange.yaml:64
+#: data/frameworks/mental_calculation/06_orange.yaml:79
 msgid "Mental calculation: clever additions and multiplications"
 msgstr "Calcul mental : additions et multiplications astucieuses"
 
@@ -2949,15 +2994,20 @@ msgstr "Fraction simple égale à {} ?"
 msgid "{}"
 msgstr "{}"
 
-#: data/frameworks/mental_calculation/07_orange1.yaml:36
+#: data/frameworks/mental_calculation/y1b3.yaml:27
 #: data/frameworks/mental_calculation/06_orange.yaml:54
-#: data/frameworks/mental_calculation/06_orange.yaml:38
 #: data/frameworks/mental_calculation/03_yellow.yaml:27
-#: data/frameworks/mental_calculation/06_orange.yaml:45
 #: data/frameworks/mental_calculation/06_orange.yaml:53
+#: data/frameworks/mental_calculation/y2b1.yaml:41
+#: data/frameworks/mental_calculation/y1b6.yaml:38
+#: data/frameworks/mental_calculation/06_orange.yaml:45
+#: data/frameworks/mental_calculation/y1b7.yaml:36
+#: data/frameworks/mental_calculation/07_orange1.yaml:36
+#: data/frameworks/mental_calculation/06_orange.yaml:38
 msgid "Mental calculation: fractions"
 msgstr "Calcul mental : fractions"
 
+#: data/frameworks/mental_calculation/y1b4.yaml:63
 #: data/frameworks/mental_calculation/04_yellow1.yaml:63
 msgid "Mental calculation: multiplications with a hole and divisions"
 msgstr "Calcul mental : multiplications à trou et divisions"
@@ -2970,9 +3020,10 @@ msgstr " (ou {})"
 
 #: data/frameworks/mental_calculation/06_orange.yaml:24
 #: data/frameworks/mental_calculation/06_orange.yaml:25
-#: data/frameworks/mental_calculation/06_orange.yaml:22
 #: data/frameworks/mental_calculation/06_orange.yaml:16
+#: data/frameworks/mental_calculation/y1b6.yaml:9
 #: data/frameworks/mental_calculation/06_orange.yaml:9
+#: data/frameworks/mental_calculation/06_orange.yaml:22
 msgid "Mental calculation: geometry"
 msgstr "Calcul mental : situations géométriques"
 
@@ -3036,35 +3087,55 @@ msgstr ""
 "length_unit|"
 
 #: data/frameworks/mental_calculation/07_orange1.yaml:3
+#: data/frameworks/mental_calculation/y1b7.yaml:3
 msgid "Mental calculation: numbers rounding"
 msgstr "Calcul mental : arrondis"
 
 #: data/frameworks/mental_calculation/07_orange1.yaml:9
+#: data/frameworks/mental_calculation/y1b7.yaml:9
 msgid "Mental calculation: divisibility rules"
 msgstr "Calcul mental : critères de divisibilité"
 
 #: data/frameworks/mental_calculation/07_orange1.yaml:127
+#: data/frameworks/mental_calculation/y1b7.yaml:127
 msgid "Challenge, final part"
 msgstr "Finale du Tournoi"
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:151
+#: data/frameworks/mental_calculation/y1b5.yaml:151
 msgid "Challenge, second part"
 msgstr "Deuxième épreuve du Tournoi"
 
-#: data/frameworks/mental_calculation/07_orange1.yaml:73
-#: data/frameworks/mental_calculation/07_orange1.yaml:74
+#: data/frameworks/mental_calculation/y2b1.yaml:71
+#: data/frameworks/mental_calculation/05_yellow2.yaml:69
+#: data/frameworks/mental_calculation/y1b6.yaml:99
 #: data/frameworks/mental_calculation/06_orange.yaml:98
-#: data/frameworks/mental_calculation/06_orange.yaml:99
-#: data/frameworks/mental_calculation/02_white2.yaml:44
-#: data/frameworks/mental_calculation/02_white2.yaml:45
-#: data/frameworks/mental_calculation/04_yellow1.yaml:72
-#: data/frameworks/mental_calculation/04_yellow1.yaml:73
-#: data/frameworks/mental_calculation/01_white1.yaml:21
+#: data/frameworks/mental_calculation/y1b5.yaml:68
+#: data/frameworks/mental_calculation/y1b3.yaml:119
+#: data/frameworks/mental_calculation/y2b1.yaml:70
+#: data/frameworks/mental_calculation/y1b7.yaml:73
+#: data/frameworks/mental_calculation/y1b3.yaml:118
+#: data/frameworks/mental_calculation/07_orange1.yaml:74
+#: data/frameworks/mental_calculation/y1b6.yaml:98
 #: data/frameworks/mental_calculation/01_white1.yaml:22
+#: data/frameworks/mental_calculation/y1b2.yaml:45
+#: data/frameworks/mental_calculation/y1b5.yaml:69
+#: data/frameworks/mental_calculation/04_yellow1.yaml:72
+#: data/frameworks/mental_calculation/05_yellow2.yaml:68
+#: data/frameworks/mental_calculation/04_yellow1.yaml:73
+#: data/frameworks/mental_calculation/06_orange.yaml:99
+#: data/frameworks/mental_calculation/y1b2.yaml:44
+#: data/frameworks/mental_calculation/01_white1.yaml:21
+#: data/frameworks/mental_calculation/y1b1.yaml:22
+#: data/frameworks/mental_calculation/y1b4.yaml:72
+#: data/frameworks/mental_calculation/07_orange1.yaml:73
+#: data/frameworks/mental_calculation/y1b1.yaml:21
+#: data/frameworks/mental_calculation/y1b4.yaml:73
 #: data/frameworks/mental_calculation/03_yellow.yaml:118
 #: data/frameworks/mental_calculation/03_yellow.yaml:119
-#: data/frameworks/mental_calculation/05_yellow2.yaml:68
-#: data/frameworks/mental_calculation/05_yellow2.yaml:69
+#: data/frameworks/mental_calculation/02_white2.yaml:45
+#: data/frameworks/mental_calculation/y1b7.yaml:74
+#: data/frameworks/mental_calculation/02_white2.yaml:44
 msgid "<DEFAULT>"
 msgstr "<DEFAULT>"
 
@@ -3107,6 +3178,14 @@ msgstr "Calcul mental : passage de la <BELT>"
 #: settings/default/mc_titles.json:2
 msgid "Answers (<BELT>)"
 msgstr "Réponses (<BELT>)"
+
+#: data/frameworks/mental_calculation/y2b1.yaml:3
+msgid "Mental calculation: four operations"
+msgstr "Calcul mental : quatre opérations"
+
+#: data/frameworks/mental_calculation/y2b1.yaml:32
+msgid "Mental calculation: areas and perimeters"
+msgstr "Calcul mental : aires et périmètres"
 
 #~ msgid "Mental calculation: final test for white belt, second stripe"
 #~ msgstr "Calcul mental : ceinture blanche, deuxième trait"

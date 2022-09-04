@@ -6,6 +6,8 @@ import os
 import atexit
 import subprocess
 from glob import glob
+from pathlib import Path
+from shutil import copyfile
 from setuptools import setup, find_packages, Command
 from setuptools.command.test import test as TestCommand
 from setuptools.command.install import install
@@ -14,6 +16,11 @@ from mathmaker import __version__, __software_name__, __licence__, __author__
 from mathmaker import __author_email__
 from mathmaker.lib.tools.ignition import retrieve_fonts
 from mathmaker.lib.tools.ignition import check_dependency, check_dependencies
+
+pp_path = Path(__file__).parent / 'pyproject.toml'
+data_path = Path(__file__).parent / f'{__software_name__}/data'
+copyfile(pp_path, data_path / 'pyproject.toml')
+print(f'[setup.py] Copied pyproject.toml to {__software_name__}/data/')
 
 
 class CustomInstallCommand(install):
