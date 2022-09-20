@@ -5,6 +5,12 @@ Unreleased
 ----------
 
 
+Version 0.7.18 (2022-09-20)
+---------------------------
+
+* Add y2b2 mental calculation level.
+* Remove some deprecation warnings in tests.
+
 Version 0.7.17 (2022-09-04)
 ---------------------------
 
