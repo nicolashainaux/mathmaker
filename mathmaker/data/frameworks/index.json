@@ -274,6 +274,96 @@
         "y2b1",
         "W03c"
     ],
+    "y2b2_four_operations": [
+        "mental_calculation",
+        "y2b2",
+        "four_operations"
+    ],
+    "y2b2_geometry": [
+        "mental_calculation",
+        "y2b2",
+        "geometry"
+    ],
+    "y2b2_mini_problems": [
+        "mental_calculation",
+        "y2b2",
+        "mini_problems"
+    ],
+    "y2b2_fractions": [
+        "mental_calculation",
+        "y2b2",
+        "fractions"
+    ],
+    "y2b2_units_conversions": [
+        "mental_calculation",
+        "y2b2",
+        "units_conversions"
+    ],
+    "y2b2_numbers_rounding": [
+        "mental_calculation",
+        "y2b2",
+        "numbers_rounding"
+    ],
+    "y2b2_percentages": [
+        "mental_calculation",
+        "y2b2",
+        "percentages"
+    ],
+    "y2b2_divisibility": [
+        "mental_calculation",
+        "y2b2",
+        "divisibility"
+    ],
+    "y2b2_exam": [
+        "mental_calculation",
+        "y2b2",
+        "exam"
+    ],
+    "y2b2_W01a": [
+        "mental_calculation",
+        "y2b2",
+        "W01a"
+    ],
+    "y2b2_W01b": [
+        "mental_calculation",
+        "y2b2",
+        "W01b"
+    ],
+    "y2b2_W01c": [
+        "mental_calculation",
+        "y2b2",
+        "W01c"
+    ],
+    "y2b2_W02a": [
+        "mental_calculation",
+        "y2b2",
+        "W02a"
+    ],
+    "y2b2_W02b": [
+        "mental_calculation",
+        "y2b2",
+        "W02b"
+    ],
+    "y2b2_W02c": [
+        "mental_calculation",
+        "y2b2",
+        "W02c"
+    ],
+    "y2b2_W03a": [
+        "mental_calculation",
+        "y2b2",
+        "W03a"
+    ],
+    "y2b2_W03b": [
+        "mental_calculation",
+        "y2b2",
+        "W03b"
+    ],
+    "y2b2_W03c": [
+        "mental_calculation",
+        "y2b2",
+        "W03c"
+    ],
     "y1b2_positional_notation": [
         "mental_calculation",
         "y1b2",
