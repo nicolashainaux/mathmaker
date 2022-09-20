@@ -92,8 +92,7 @@ exam: !!omap
                  perimeter rectangle, picture=true -> nnpairs:3-9 (1)
                  [1][perimeter righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
                      perimeter polygon -> polygons, sum_ingredients=int_2to10, level=4 (1)]
-                 [1][read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
-                     read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)]
+                 read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
                  [1][vocabulary half -> nnpairs:2×6-15 (1)
                      vocabulary third -> table_3 (1)
