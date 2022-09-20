@@ -85,14 +85,14 @@ def test_fig0_into_euk(fig0):
         '  -u U1\n'\
         '  v V1\n'\
         '  -v V0\n'\
-        '  $\\rotatebox{40}{\sffamily 6}$ A 40 - 7.8 deg 6\n'\
-        '  $\\rotatebox{-10}{\sffamily 12}$ M 170 - 6.3 deg 8.4\n'\
-        '  $\\rotatebox{305}{\sffamily 9}$ N 305 - 7.5 deg 6.5\n'\
-        '  $\\rotatebox{40}{\sffamily 2}$ M 40 - 23.1 deg 2\n'\
-        '  $\\rotatebox{304}{\sffamily 3}$ C 304 - 22.3 deg 2.2\n'\
-        '  $\\rotatebox{40}{\sffamily 8}$ U0 40 - 6.5 deg 8\n'\
-        '  $\\rotatebox{305}{\sffamily 12}$ V1 305 - 6.2 deg 8.7\n'\
-        '  $\\rotatebox{-10}{\sffamily 16}$ B 170 - 5.2 deg 11.2\n'\
+        '  $\\rotatebox{40}{\\sffamily 6}$ A 40 - 7.8 deg 6\n'\
+        '  $\\rotatebox{-10}{\\sffamily 12}$ M 170 - 6.3 deg 8.4\n'\
+        '  $\\rotatebox{305}{\\sffamily 9}$ N 305 - 7.5 deg 6.5\n'\
+        '  $\\rotatebox{40}{\\sffamily 2}$ M 40 - 23.1 deg 2\n'\
+        '  $\\rotatebox{304}{\\sffamily 3}$ C 304 - 22.3 deg 2.2\n'\
+        '  $\\rotatebox{40}{\\sffamily 8}$ U0 40 - 6.5 deg 8\n'\
+        '  $\\rotatebox{305}{\\sffamily 12}$ V1 305 - 6.2 deg 8.7\n'\
+        '  $\\rotatebox{-10}{\\sffamily 16}$ B 170 - 5.2 deg 11.2\n'\
         'end\n'
 
 
@@ -121,11 +121,11 @@ def test_fig0b_into_euk2(fig0b):
         '  "N" N 214.8 deg, font("sffamily")\n'\
         '  u U0\n'\
         '  -u U1\n'\
-        '  $\\rotatebox{40}{\sffamily 6}$ A 40 - 7.8 deg 6\n'\
-        '  $\\rotatebox{-10}{\sffamily 12}$ M 170 - 6.3 deg 8.4\n'\
-        '  $\\rotatebox{305}{\sffamily 9}$ N 305 - 7.5 deg 6.5\n'\
-        '  $\\rotatebox{40}{\sffamily ?}$ U0 40 - 6.5 deg 8\n'\
-        '  $\\rotatebox{-10}{\sffamily 16}$ B 170 - 5.2 deg 11.2\n'\
+        '  $\\rotatebox{40}{\\sffamily 6}$ A 40 - 7.8 deg 6\n'\
+        '  $\\rotatebox{-10}{\\sffamily 12}$ M 170 - 6.3 deg 8.4\n'\
+        '  $\\rotatebox{305}{\\sffamily 9}$ N 305 - 7.5 deg 6.5\n'\
+        '  $\\rotatebox{40}{\\sffamily ?}$ U0 40 - 6.5 deg 8\n'\
+        '  $\\rotatebox{-10}{\\sffamily 16}$ B 170 - 5.2 deg 11.2\n'\
         'end\n'
 
 
@@ -175,10 +175,10 @@ def test_fig1_into_euk(fig1):
         '  "E" E 147.4 deg, font("sffamily")\n'\
         '  "B" B 214.8 deg, font("sffamily")\n'\
         '  "A" A 309.7 deg, font("sffamily")\n'\
-        '  $\\rotatebox{40}{\sffamily 6}$ C 220 - 7.8 deg 6.1\n'\
-        '  $\\rotatebox{350}{\sffamily 12}$ B 350 - 6.3 deg 8.4\n'\
-        '  $\\rotatebox{-55}{\sffamily 9}$ A 125 - 7.5 deg 6.5\n'\
-        '  $\\rotatebox{40}{\sffamily 8}$ C 40 - 6.5 deg 8\n'\
-        '  $\\rotatebox{-10}{\sffamily 16}$ D 170 - 5.2 deg 11.2\n'\
-        '  $\\rotatebox{305}{\sffamily 12}$ E 305 - 6.2 deg 8.7\n'\
+        '  $\\rotatebox{40}{\\sffamily 6}$ C 220 - 7.8 deg 6.1\n'\
+        '  $\\rotatebox{350}{\\sffamily 12}$ B 350 - 6.3 deg 8.4\n'\
+        '  $\\rotatebox{-55}{\\sffamily 9}$ A 125 - 7.5 deg 6.5\n'\
+        '  $\\rotatebox{40}{\\sffamily 8}$ C 40 - 6.5 deg 8\n'\
+        '  $\\rotatebox{-10}{\\sffamily 16}$ D 170 - 5.2 deg 11.2\n'\
+        '  $\\rotatebox{305}{\\sffamily 12}$ E 305 - 6.2 deg 8.7\n'\
         'end\n'
