@@ -7,7 +7,7 @@ branches:
   - dev
 
 image:
-  - Ubuntu2204
+  - Ubuntu2004
 
 max_jobs: 1
 
