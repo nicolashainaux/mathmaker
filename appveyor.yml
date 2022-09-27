@@ -21,6 +21,7 @@ install:
   - sh: "sudo locale-gen en_US.UTF-8 && sudo locale-gen fr_FR.UTF-8"
   # - sh: "sudo -H pip3 install wheel pytest coverage coveralls"
   - sh: curl -sSL https://install.python-poetry.org | python3 -
+  - sh: export PATH="$HOME/.local/bin:$PATH"
   - sh: poetry install
   # - sh: "sudo python3 setup.py install"
 
