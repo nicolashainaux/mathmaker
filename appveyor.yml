@@ -13,6 +13,7 @@ max_jobs: 1
 
 environment:
   PYTHONWARNINGS: ignore
+  APPVEYOR_BAKE_IMAGE: ubuntu2004_mathmaker
 
 install:
   # We need wheel installed to build wheels
