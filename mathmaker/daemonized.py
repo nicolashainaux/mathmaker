@@ -23,14 +23,22 @@ from http.server import HTTPServer
 
 import daemon
 
-from mathmaker import DAEMON_PORT
+from mathmaker import DAEMON_PORT, __version__
 from mathmaker.lib.tools.request_handler import MathmakerHTTPRequestHandler
 
 
 def entry_point():
     with daemon.DaemonContext(stdout=sys.stdout, stderr=sys.stderr):
         server_address = ('', DAEMON_PORT)
-        # TODO: catch possible OSError: [Errno 48] Address already in use
-        # from next line below
-        httpd = HTTPServer(server_address, MathmakerHTTPRequestHandler)
+        try:
+            httpd = HTTPServer(server_address, MathmakerHTTPRequestHandler)
+        except OSError as excinfo:
+            if str(excinfo) == '[Errno 98] Address already in use':
+                sys.stderr.write('\nmathmakerd: Another process is already '
+                                 f'listening to port {DAEMON_PORT}. '
+                                 'Aborting.\n')
+                sys.exit(1)
+            else:
+                raise
+        sys.stdout.write(f'Starting mathmakerd {__version__}')
         httpd.serve_forever()
