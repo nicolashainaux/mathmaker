@@ -33,7 +33,7 @@ import gettext
 import warnings
 import subprocess
 from tempfile import TemporaryFile
-from distutils.version import LooseVersion
+from packaging.version import Version
 
 from mathmaker import __software_name__
 from mathmaker.lib.constants import latex
@@ -175,8 +175,7 @@ def check_dependency(name: str, goal: str, path_to: str,
     installed_version_nb = str(v)
 
     try:
-        if (LooseVersion(installed_version_nb)
-            < LooseVersion(required_version_nb)):
+        if Version(installed_version_nb) < Version(required_version_nb):
             add_msg = ' but the installed version number {nb1} ' \
                       'is lower than expected (at least {nb2}).'\
                       .format(nb1=installed_version_nb,

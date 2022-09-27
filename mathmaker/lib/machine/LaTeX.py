@@ -25,7 +25,7 @@ import sys
 import time
 import glob
 import subprocess
-from distutils.version import LooseVersion
+from packaging.version import Version
 from tempfile import NamedTemporaryFile
 
 from mathmakerlib import required
@@ -80,7 +80,7 @@ class LaTeX(Structure.Structure):
             required_pkg = []
         from mathmaker.lib import shared
         luatex85patch = str(Command('RequirePackage', 'luatex85')) + '\n' \
-            if LooseVersion(settings.luatex_version) >= LooseVersion('0.85') \
+            if Version(settings.luatex_version) >= Version('0.85') \
             else ''
         # xcolor is handled first, because it may require to be loaded as an
         # option (if using 'beamer' document class)
