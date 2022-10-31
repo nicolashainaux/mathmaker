@@ -257,6 +257,13 @@ class LaTeX(Structure.Structure):
             array = '\n' + '% {}\n{}\n\n'\
                 .format(_('To use extra commands to handle tabulars'),
                         str(UsePackage('array')))
+        # cellspace
+        cellspace = ''
+        if required.package.get('cellspace', False):
+            cellspace = '\n' + '% {}\n{}\n\n'\
+                .format(_('To define space above and below content of tabular'
+                          ' lines'),
+                        str(UsePackage('cellspace')))
         # graphicx
         graphicx = ''
         if required.package.get('graphicx', False):
@@ -317,8 +324,13 @@ class LaTeX(Structure.Structure):
            optional_verbatim=optional_verbatim)  # noqa
         # Common commands
         commoncmd = ''
+        if required.package.get('cellspace', False):
+            commoncmd += r'''
+\cellspacetoplimit 0.1pt
+\cellspacebottomlimit 0.1pt
+'''
         if settings.language.startswith('fr'):
-            commoncmd = r'''
+            commoncmd += r'''
 % {french_parallel_sign_comment}
 \renewcommand{{\parallel}}{{\mathbin{{/\negthickspace/}}}}
 '''.format(french_parallel_sign_comment=_('Redefinition of "\parallel" '
@@ -336,7 +348,7 @@ class LaTeX(Structure.Structure):
 {language_setup}
 
 {siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{multicol}{placeins}{ulem}"""\
-r"""{textcomp}{array}{graphicx}{epstopdf}{textpos}{specificpackages}
+r"""{textcomp}{array}{cellspace}{graphicx}{epstopdf}{textpos}{specificpackages}
 
 {specificcommands}{commoncommands}
 """.format(luatex85patch=luatex85patch, documentclass=dc, symbols=variouspkg,
@@ -344,8 +356,8 @@ r"""{textcomp}{array}{graphicx}{epstopdf}{textpos}{specificpackages}
            font_patch=font_patch, siunitx=siunitx,
            xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
            cancel=cancel, multicol=multicol, placeins=placeins, ulem=ulem,
-           textcomp=textcomp, array=array, graphicx=graphicx,
-           epstopdf=epstopdf, textpos=textpos,
+           textcomp=textcomp, array=array, cellspace=cellspace,
+           graphicx=graphicx, epstopdf=epstopdf, textpos=textpos,
            specificpackages=specificpkg, specificcommands=specificcmd,
            commoncommands=commoncmd)
 
@@ -681,6 +693,7 @@ r"""{textcomp}{array}{graphicx}{epstopdf}{textpos}{specificpackages}
         # It would be complicated to find out which commands exactly require
         # it, and anyway it is recommended to use it when drawing a tabular.
         required.package['array'] = True
+        required.package['cellspace'] = True
         n_col = size[1]
         n_lin = size[0]
         result = ""
