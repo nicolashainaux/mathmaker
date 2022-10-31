@@ -258,7 +258,10 @@ class IntspansProduct(object):
         included = kwargs.get('nb{}_in'.format(i + 1), None)
         if included is not None:
             possibilities = [p for p in possibilities if p in included]
-            applied_conditions.append('nb{}_in={}'.format(i + 1, included))
+            if kwargs.get('either_nb1_nb2_in', None) is not None:
+                applied_conditions.append(f'either_nb1_nb2_in={included}')
+            else:
+                applied_conditions.append('nb{}_in={}'.format(i + 1, included))
         # back to tests on ints
         possibilities = [int(p) for p in possibilities]
         constructible = kwargs.get('constructible', None)
@@ -346,6 +349,26 @@ class IntspansProduct(object):
             distcodes = [int(_) for _ in distcodes.split('_')]
             for p in distcodes:
                 stick_on += [False] + [True for _ in range(p - 1)]
+
+        # PREPROCESS "either..." tag before looping over the spans
+        either = kwargs.get('either_nb1_nb2_in', None)
+        if either is not None:
+            if len(spans) == 1:
+                kwargs['nb1_in'] = [str(n) for n in either]
+            else:
+                nb1_possible = any(str(n) in [str(p) for p in spans[0]]
+                                   for n in either)
+                nb2_possible = any(str(n) in [str(p) for p in spans[1]]
+                                   for n in either)
+                if nb1_possible and nb2_possible:
+                    kwargs[random.choice(['nb1_in', 'nb2_in'])] \
+                        = [str(n) for n in either]
+                elif nb1_possible:
+                    kwargs['nb1_in'] = [str(n) for n in either]
+                else:
+                    # if still not possible, it will be detected later
+                    # (in the filtering function)
+                    kwargs['nb2_in'] = [str(n) for n in either]
 
         # LOOP OVER THE SPANS
         for i, span in enumerate(spans):

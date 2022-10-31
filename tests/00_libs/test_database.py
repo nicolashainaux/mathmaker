@@ -233,6 +233,9 @@ def test_intspansproduct_random_draw_filtered():
     assert d == [[2, 4, 6, 8]]
     d = r.random_draw(return_all=True, not_in=['4', '5', '7'])
     assert d == [[2, 3, 6, 8, 9]]
+    r = IntspansProduct('2-9×10-12')
+    d = r.random_draw(return_all=True)
+    assert d == [[10, 11, 12], [2, 3, 4, 5, 6, 7, 8, 9]]
     r = IntspansProduct('6-9×6-9')
     d = r.random_draw(return_all=True)
     assert d == [[6, 7, 8, 9], [6, 7, 8, 9]]
@@ -260,6 +263,30 @@ def test_intspansproduct_random_draw_filtered():
     d = r.random_draw(return_all=True, nb1_mod7_range='0-1,4-6')
     assert d == [[4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 18, 19, 20, 21, 22,
                   25, 26, 27, 28, 29, 32, 33, 34, 35, 36, 39, 40]]
+
+
+def test_intspansproduct_random_draw_filtered_either_nb1_nb2_in():
+    """Check IntspansProduct."""
+    r = IntspansProduct('2-8')
+    d = r.random_draw(return_all=True, either_nb1_nb2_in=['3'])
+    assert d == [[3]]
+    with pytest.raises(RuntimeError) as excinfo:
+        r.random_draw(either_nb1_nb2_in=['9'])
+    assert str(excinfo.value) == 'Impossible to draw an int tuple from '\
+        "['2-8'] under these conditions: either_nb1_nb2_in=['9'].\n"
+    r = IntspansProduct('2-8×2-8')
+    with pytest.raises(RuntimeError) as excinfo:
+        r.random_draw(either_nb1_nb2_in=['9'])
+    assert str(excinfo.value) == 'Impossible to draw an int tuple from '\
+        "['2-8', '2-8'] under these conditions: either_nb1_nb2_in=['9'].\n"
+    d = r.random_draw(return_all=True, either_nb1_nb2_in=['3'])
+    assert d in [[[3], [2, 3, 4, 5, 6, 7, 8]],
+                 [[2, 3, 4, 5, 6, 7, 8], [3]]]
+    r = IntspansProduct('2-8×9-12')
+    d = r.random_draw(return_all=True, either_nb1_nb2_in=['3'])
+    assert d == [[9, 10, 11, 12], [3]]
+    d = r.random_draw(return_all=True, either_nb1_nb2_in=['10'])
+    assert d == [[10], [2, 3, 4, 5, 6, 7, 8]]
 
 
 def test_intspansproduct_random_draw_constructible():
