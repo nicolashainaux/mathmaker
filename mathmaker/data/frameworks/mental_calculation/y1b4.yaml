@@ -72,8 +72,6 @@ exam: !!omap
   - title: "<DEFAULT>"
   - answers_title: "<DEFAULT>"
   - exercise: !!omap
-    - layout:
-      - min_row_height: 1
     - mix:
       - questions: multi hole,
                    divi direct

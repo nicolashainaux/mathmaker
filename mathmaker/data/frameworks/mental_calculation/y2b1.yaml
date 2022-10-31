@@ -70,6 +70,8 @@ exam: !!omap
   - title: "<DEFAULT>"
   - answers_title: "<DEFAULT>"
   - exercise: !!omap
+    - layout:
+      - min_row_height: 0.8
     - questions: multi direct -> nnpairs:2-9 (1)
                  multi reversed -> nnpairs:2-9 (1)
                  [1][multi hole -> nnpairs:2-9 (1)

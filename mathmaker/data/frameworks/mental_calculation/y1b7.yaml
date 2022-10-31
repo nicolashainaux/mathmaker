@@ -128,8 +128,6 @@ challenge: !!omap
   - exercise: !!omap
     - shuffle: false
     - tabular_batch: 20
-    - layout:
-      - min_row_height: 1
     - questions: multi direct -> intpairs_6to9×6to9 (1)
                  addi direct -> intpairs_20to100 (1)
                  addi direct -> int_quintuples_4to20, nb_variant=±halforquarter (1)

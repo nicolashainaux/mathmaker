@@ -263,7 +263,7 @@ class LaTeX(Structure.Structure):
             cellspace = '\n' + '% {}\n{}\n\n'\
                 .format(_('To define space above and below content of tabular'
                           ' lines'),
-                        str(UsePackage('cellspace')))
+                        str(UsePackage('cellspace', options='column=O')))
         # graphicx
         graphicx = ''
         if required.package.get('graphicx', False):
@@ -326,8 +326,8 @@ class LaTeX(Structure.Structure):
         commoncmd = ''
         if required.package.get('cellspace', False):
             commoncmd += r'''
-\cellspacetoplimit 0.1pt
-\cellspacebottomlimit 0.1pt
+\cellspacetoplimit 0.04cm
+\cellspacebottomlimit 0.04cm
 '''
         if settings.language.startswith('fr'):
             commoncmd += r'''
@@ -742,10 +742,10 @@ r"""{textcomp}{array}{cellspace}{graphicx}{epstopdf}{textpos}{specificpackages}
             min_row_height = " [" + str(options['min_row_height']) \
                 + length_unit + "] "
 
-        cell_fmt = "p{"
+        cell_fmt = "O{p{"
 
         if 'center_vertically' in options and options['center_vertically']:
-            cell_fmt = "m{"
+            cell_fmt = "O{m{"
 
         if 'borders' in options and options['borders'] in ['all',
                                                            'v_internal',
@@ -764,7 +764,7 @@ r"""{textcomp}{array}{cellspace}{graphicx}{epstopdf}{textpos}{specificpackages}
         for i in range(len(col_fmt)):
             t = col_fmt[i]
             if is_number(col_fmt[i]):
-                t = cell_fmt + str(col_fmt[i]) + " " + str(length_unit) + "}"
+                t = cell_fmt + str(col_fmt[i]) + " " + str(length_unit) + "}}"
 
             vb = v_border
             if 'borders' in options and options['borders'] == "penultimate":

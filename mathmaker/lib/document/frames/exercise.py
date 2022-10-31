@@ -816,9 +816,10 @@ class Exercise(object):
                 content = [elt for triple in zip(n, q, a) for elt in triple]
                 lines_nb = min(self.tabular_batch,
                                self.q_nb - bn * self.tabular_batch)
+                required.package['cellspace'] = True
                 fmt = r'''@{{}}
-                p{{0.5cm}}<{{\rule[{offset}]{{0pt}}{{{min_row_height}}}}}
-                m{{14.25cm}}|
+                O{{p{{0.5cm}}}}<{{\rule[{offset}]{{0pt}}{{{min_row_height}}}}}
+                O{{m{{14.25cm}}}}|
                 m{{3.75cm}}
                 @{{}}'''\
                 .format(min_row_height='{}cm'.format(self.min_row_height),

@@ -152,8 +152,6 @@ challenge: !!omap
   - exercise: !!omap
     - shuffle: false
     - tabular_batch: 20
-    - layout:
-      - min_row_height: 1
     - questions: multi direct -> nnpairs:3-9×6-9 (3)
                  multi hole -> nnpairs:6-9 (1)
                  addi direct -> nnpairs:21-99 (1)
