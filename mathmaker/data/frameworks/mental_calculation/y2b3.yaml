@@ -1,0 +1,21 @@
+proportionality: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: proportionality"
+  - exercise: !!omap
+    - layout:
+      - min_row_height: 0.8
+    - questions: proportionality fill -> mergednnpairs:3-9 (1)
+                 [1][proportionality fill -> mergednnpairs:2-10×10, nb_variant=decimal (1)
+                     proportionality fill -> mergednnpairs:3-30×100, nb_variant=decimal (1)]
+                 proportionality findout, variant=true -> mergednntriples:3-9 (1)
+                 proportionality findout, variant=false_additive -> mergednntriples:1-9×10,20,30,40 (1)
+                 [1][proportionality findout -> mergednnpairs:3-6×15 (1)
+                     proportionality findout -> mergednnpairs:3-6×25 (1)]
+                 proportionality coefficient -> mergednnpairs:3-9 (1)
+                 [1][proportionality coefficient -> mergednnpairs:3-6×15 (1)
+                     proportionality coefficient -> mergednnpairs:3-6×25 (1)]
+                 [1][proportionality coefficient -> simple_fractions;;nntriples:3-9, reducible=0, code=1_1_1, coeff_variant=fraction, nb_variant=decimal1 (1)
+                     proportionality coefficient -> simple_improper_fractions;;nntriples:3-9, reducible=0, code=1_1_1, coeff_variant=fraction, nb_variant=decimal1 (1)]
+                 [2][mini_pb proportionality -> mergednnpairs:3-6×15 (1)
+                     mini_pb proportionality -> mergednnpairs:3-6×25 (1)
+                     mini_pb proportionality -> mergednnpairs:3-9 (1)]

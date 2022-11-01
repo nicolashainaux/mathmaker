@@ -943,5 +943,10 @@
         "mental_calculation",
         "y1b5",
         "W04d"
+    ],
+    "y2b3_proportionality": [
+        "mental_calculation",
+        "y2b3",
+        "proportionality"
     ]
 }
