@@ -301,6 +301,13 @@ def get_nb_sources_from_question_info(q_i):
                 questions_sources = ['multiplesof' + bounds + '_' + chunks[2],
                                      'multiplesof' + bounds + '_' + chunks[2]]
             extra_infos.update({'merge_sources': True})
+        elif q_i.nb_source[0].startswith('mergednn'):
+            nature, ranges = q_i.nb_source[0].split(':')
+            nature = nature[len('merged'):]
+            n = {'nnpairs': 2, 'nntriples': 3, 'nnquadruples': 4,
+                 'nnquintuples': 5}[nature]
+            questions_sources = [f'nnpairs:{ranges}'] * n
+            extra_infos.update({'merge_sources': True})
         elif q_i.nb_source[0].startswith('ext_'):
             chunks = q_i.nb_source[0][4:].split(sep='_')
             if chunks[0] == 'proportionality':
@@ -632,13 +639,22 @@ class Exercise(object):
                     if q.options.get('force_table', None) is not None:
                         not_in = None
                         either = [q.options.get('force_table')]
-                    drawn = shared.mc_source.next(nb_source,
-                                                  not_in=not_in,
-                                                  either_nb1_nb2_in=either,
-                                                  qkw=q.options,
-                                                  **get_q_modifier(
-                                                      q.id, nb_source),
-                                                  **xkw)
+                    try:
+                        drawn = shared.mc_source.next(
+                            nb_source, not_in=not_in, either_nb1_nb2_in=either,
+                            qkw=q.options, **get_q_modifier(q.id, nb_source),
+                            **xkw)
+                    except RuntimeError as excinfo:
+                        if (str(excinfo).startswith('The conditions to draw a '
+                            'random int tuple lead to no result.')
+                            and nb_source.startswith('nn')):
+                            not_in = None
+                            drawn = shared.mc_source.next(
+                                nb_source, not_in=not_in,
+                                either_nb1_nb2_in=either, qkw=q.options,
+                                **get_q_modifier(q.id, nb_source), **xkw)
+                        else:
+                            raise
                     nb_to_use += drawn
 
                 known_elts = set()
