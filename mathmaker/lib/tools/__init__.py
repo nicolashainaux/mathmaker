@@ -165,7 +165,7 @@ def deci_and_frac_repr(n, output='default'):
         n = Number(n)
         f = Fraction(from_decimal=n).reduced()
         representations = [n]
-        if f.numerator < 100 and f.denominator < 100:
+        if f.numerator < 100 and f.denominator < 100 and f.denominator != 1:
             fraction_among_answers = True
             representations.append(f)
     if output == 'js':

@@ -178,6 +178,9 @@ def test_deci_and_frac_repr():
     n = Number('1.21')
     assert deci_and_frac_repr(n) == r"1.21"
     assert deci_and_frac_repr(n, output='js') == ['1.21']
+    n = Number('5')
+    assert deci_and_frac_repr(n) == r"5"
+    assert deci_and_frac_repr(n, output='js') == ['5']
 
 
 def test_closest_nn_outside_data():
