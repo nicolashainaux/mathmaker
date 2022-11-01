@@ -46,6 +46,7 @@ from .calculation import divisibility_rule
 from .calculation import fraction_simplification
 from .calculation import fractions_conversions
 from .calculation import read_abscissa
+from .calculation import proportionality_coefficient
 from .geometry import intercept_theorem_triangle
 from .geometry import intercept_theorem_triangle_formula
 from .geometry import intercept_theorem_butterfly
@@ -80,6 +81,7 @@ __all__ = ['expand_simple', 'expand_double',
            'numeric_expansion', 'numeric_factorization',
            'divisibility_vocabulary', 'divisibility_rule',
            'fraction_simplification', 'fractions_conversions',
+           'proportionality_coefficient',
            'area_rectangle', 'perimeter_rectangle', 'perimeter_polygon',
            'rectangle_length_or_width', 'area_righttriangle',
            'perimeter_righttriangle', 'volume_rightcuboid',
