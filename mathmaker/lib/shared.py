@@ -54,6 +54,7 @@ def init():
     global nnquintuples_source
     global nnsextuples_source
     global simple_fractions_source
+    global simple_improper_fractions_source
     global improper_fractions_source
     global single_ints_source
     global single_deci1_source
@@ -203,6 +204,8 @@ def init():
                                               ['id', 'nb1', 'nb2'])
     improper_fractions_source = database.source('improper_fractions',
                                                 ['id', 'nb1', 'nb2'])
+    simple_improper_fractions_source = database.source(
+        'simple_improper_fractions', ['id', 'nb1', 'nb2'])
     single_ints_source = database.source("single_ints", ["id", "nb1"])
     single_deci1_source = database.source("single_deci1", ["id", "nb1"])
     angle_ranges_source = database.source("angle_ranges", ["id", "nb1", "nb2"])

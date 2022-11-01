@@ -951,6 +951,7 @@ def db_table(tag):
         return 'polyhedra'
     elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
                  'digits_places', 'fracdigits_places', 'simple_fractions',
+                 'simple_improper_fractions',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
                  'int_quintuples', 'int_sextuples', 'anglessets', 'times',
                  'multiplesof10', 'time_units_couples',
@@ -1000,7 +1001,8 @@ def classify_tag(tag):
                  'simple_fractions', 'dvipsnames_selection', 'polygons',
                  'int_triples', 'int_quadruples', 'int_quintuples',
                  'int_sextuples', 'anglessets', 'rightcuboids', 'times',
-                 'clocktime_data', 'multiplesof10', 'improper_fractions']:
+                 'clocktime_data', 'multiplesof10', 'improper_fractions',
+                 'simple_improper_fractions']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -1977,6 +1979,8 @@ class mc_source(object):
             return shared.simple_fractions_source.next(**kwargs)
         elif tag_classification == 'improper_fractions':
             return shared.improper_fractions_source.next(**kwargs)
+        elif tag_classification == 'simple_improper_fractions':
+            return shared.simple_improper_fractions_source.next(**kwargs)
         elif tag_classification == 'multiplesof10':
             return shared.multiplesof10_source.next(**kwargs)
         elif tag_classification.startswith('single'):
