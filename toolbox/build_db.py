@@ -1027,9 +1027,9 @@ def __main__():
                    db_rows)
 
     sys.stderr.write('Insert simple improper fractions...\n')
-    db_rows = [(i + 1, j + 1, 0 if gcd(i + 1, j + 1) == 1 else 1, 0)
+    db_rows = [(i + 1, j + 2, 0 if gcd(i + 1, j + 2) == 1 else 1, 0)
                for i in range(10)
-               for j in range(10)
+               for j in range(9)
                if j < i]
     db.executemany("INSERT "
                    "INTO simple_improper_fractions(nb1, nb2, reducible, "
