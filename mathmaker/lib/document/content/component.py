@@ -301,6 +301,29 @@ class structure(object):
         q = Division(('+', self.dividend, self.divisor))
         self.quotient_str = q.printed
 
+    def _setup_proportionality_nb_lines(self, build_data, **options):
+        """
+        Assumes minimal setup has been called before; will call setup numbers
+        and nb_variants.
+        """
+        if self.coeff_variant == 'fraction':
+            self.coeff = Fraction(build_data[0], build_data[1])
+            numbers_series = [Number(n) * self.coeff.denominator
+                              for n in build_data[2:]]
+            options['force_a_nb_to'] = self.coeff.denominator
+        else:
+            self.coeff = Number(build_data[0])
+            if self.coeff_variant == 'decimal':
+                self.coeff /= 10
+            numbers_series = build_data[1:]
+        self.setup('numbers', nb=numbers_series,
+                   standardize_decimal_numbers=True, **options)
+        self.setup('nb_variants', **options)
+        self.line1 = sorted([Number(n).standardized() for n in self.nb_list])
+        self.line2 = [Number(self.coeff.evaluate() * n).rounded(Number('1.00'))
+                      .standardized()
+                      for n in self.line1]
+
     def _setup_angles_bunch(self, extra_deco=None, extra_deco2=None,
                             labels=None, variant=None, subvariant_nb=None,
                             subtr_shapes=False):
