@@ -645,9 +645,11 @@ class Exercise(object):
                             qkw=q.options, **get_q_modifier(q.id, nb_source),
                             **xkw)
                     except RuntimeError as excinfo:
-                        if (str(excinfo).startswith('The conditions to draw a '
-                            'random int tuple lead to no result.')
-                            and nb_source.startswith('nn')):
+                        if ((str(excinfo).startswith('The conditions to draw a'
+                             ' random int tuple lead to no result.')
+                             and nb_source.startswith('nn'))
+                            or (str(excinfo).startswith('No result from '
+                                'database query.'))):
                             not_in = None
                             drawn = shared.mc_source.next(
                                 nb_source, not_in=not_in,
