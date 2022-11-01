@@ -22,9 +22,11 @@
 
 import pytest
 
+from mathmakerlib.calculus import Number, Fraction
+
 from mathmaker.lib.tools import check_unique_letters_words, rotate
 from mathmaker.lib.tools import parse_layout_descriptor, ext_dict
-from mathmaker.lib.tools import fix_math_style2_fontsize
+from mathmaker.lib.tools import fix_math_style2_fontsize, deci_and_frac_repr
 
 
 def test_recursive_update():
@@ -157,3 +159,21 @@ def test_fix_math_style2_fontsize():
         ', or ' \
         '$ \\dfrac{\\text{3}}{\\text{4}} $' \
         ')'
+
+
+def test_deci_and_frac_repr():
+    f = Fraction(3, 4)
+    assert deci_and_frac_repr(f) == r"$\dfrac{3}{4}$ (or 0.75)"
+    assert deci_and_frac_repr(f, output='js') == [
+        '3/4', '0.75', 'any_fraction == 3/4']
+    n = Number('0.75')
+    assert deci_and_frac_repr(n) == r"0.75 (or $\dfrac{3}{4}$)"
+    assert deci_and_frac_repr(n, output='js') == [
+        '0.75', '3/4', 'any_fraction == 3/4']
+    f = Fraction(3, 7)
+    assert deci_and_frac_repr(f) == r"$\dfrac{3}{7}$"
+    assert deci_and_frac_repr(f, output='js') == [
+        '3/7', 'any_fraction == 3/7']
+    n = Number('1.21')
+    assert deci_and_frac_repr(n) == r"1.21"
+    assert deci_and_frac_repr(n, output='js') == ['1.21']

@@ -28,6 +28,8 @@ import logging
 import errno
 import re
 
+from mathmakerlib.calculus import Number, Fraction
+
 
 def load_config(file_tag, settingsdir, fmt='.yaml'):
     """
@@ -137,6 +139,47 @@ def po_file_get_list_of(what, language, arg):
     if len(output) < 20:
         output.append(_retrieve_po_file_content('en', what_map[what]))
     return output
+
+
+def deci_and_frac_repr(n, output='default'):
+    """
+    Decimal (if any) and reduced fraction representations of number n
+
+    A decimal representation is taken into account only if it has at most two
+    fractional digits.
+
+    'default' output is a str (e.g. "dfrac{3}{4} (or 0.75)")
+    'js' output is a list of these representations
+    (e.g. ['3/4', '0.75', 'any_fraction == 3/4'])
+    """
+    fraction_among_answers = False
+    if isinstance(n, Fraction):
+        fraction_among_answers = True
+        f = Fraction(n.sign, n.numerator, n.denominator)
+        deciv = n.evaluate()
+        if deciv.fracdigits_nb() <= 2:
+            representations = [f, deciv]
+        else:
+            representations = [f]
+    else:
+        n = Number(n)
+        f = Fraction(from_decimal=n).reduced()
+        representations = [n]
+        if f.numerator < 100 and f.denominator < 100:
+            fraction_among_answers = True
+            representations.append(f)
+    if output == 'js':
+        results = [i.uiprinted for i in representations]
+        if fraction_among_answers:
+            results.append(f'any_fraction == {f.uiprinted}')
+        return results
+    else:  # 'default'
+        r = [f"${i.printed}$" if isinstance(i, Fraction) else i.printed
+             for i in representations]
+        if len(representations) == 1:
+            return r[0]
+        else:
+            return _('{n1} (or {n2})').format(n1=r[0], n2=r[1])
 
 
 class ext_dict(dict):
