@@ -98,6 +98,13 @@
         "reducible",
         "drawDate"
     ],
+    "simple_improper_fractions": [
+        "id",
+        "nb1",
+        "nb2",
+        "reducible",
+        "drawDate"
+    ],
     "improper_fractions": [
         "id",
         "nb1",

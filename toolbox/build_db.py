@@ -86,11 +86,11 @@ NNSEXTUPLES_MAX = 10
 
 
 def _suits_for_deci1(i, j):
-    return not(i % 10 == 0 and j % 10 == 0)
+    return not (i % 10 == 0 and j % 10 == 0)
 
 
 def _suits_for_deci2(i, j):
-    return not(i % 10 == 0 or j % 10 == 0)
+    return not (i % 10 == 0 or j % 10 == 0)
 
 
 def __main__():
@@ -176,6 +176,9 @@ def __main__():
              equilateral INTEGER, pythagorean INTEGER, equal_sides INTEGER,
              drawDate INTEGER)''',
          '''CREATE TABLE simple_fractions
+            (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
+             reducible INTEGER, drawDate INTEGER)''',
+         '''CREATE TABLE simple_improper_fractions
             (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
              reducible INTEGER, drawDate INTEGER)''',
          '''CREATE TABLE improper_fractions
@@ -1020,6 +1023,17 @@ def __main__():
                if j > i]
     db.executemany("INSERT "
                    "INTO simple_fractions(nb1, nb2, reducible, drawDate) "
+                   "VALUES(?, ?, ?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert simple improper fractions...\n')
+    db_rows = [(i + 1, j + 1, 0 if gcd(i + 1, j + 1) == 1 else 1, 0)
+               for i in range(10)
+               for j in range(10)
+               if j < i]
+    db.executemany("INSERT "
+                   "INTO simple_improper_fractions(nb1, nb2, reducible, "
+                   "drawDate) "
                    "VALUES(?, ?, ?, ?)",
                    db_rows)
 
