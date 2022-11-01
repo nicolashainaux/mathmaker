@@ -27,6 +27,7 @@ from mathmakerlib.calculus import Number, Fraction
 from mathmaker.lib.tools import check_unique_letters_words, rotate
 from mathmaker.lib.tools import parse_layout_descriptor, ext_dict
 from mathmaker.lib.tools import fix_math_style2_fontsize, deci_and_frac_repr
+from mathmaker.lib.tools import closest_nn_outside_data
 
 
 def test_recursive_update():
@@ -177,3 +178,14 @@ def test_deci_and_frac_repr():
     n = Number('1.21')
     assert deci_and_frac_repr(n) == r"1.21"
     assert deci_and_frac_repr(n, output='js') == ['1.21']
+
+
+def test_closest_nn_outside_data():
+    line = [2, 3, 7]
+    assert closest_nn_outside_data(line, 0) == 1
+    assert closest_nn_outside_data(line, 1) == 4
+    assert closest_nn_outside_data(line, 2) == 8
+    line = [2, 3, 7, 8]
+    assert closest_nn_outside_data(line, 2) == 6
+    line = [1, 3, 7]
+    assert closest_nn_outside_data(line, 0) == 2

@@ -182,6 +182,20 @@ def deci_and_frac_repr(n, output='default'):
             return _('{n1} (or {n2})').format(n1=r[0], n2=r[1])
 
 
+def closest_nn_outside_data(line, i):
+    """The closest natural number to the ith item of line."""
+    n = p = line[i]
+    assert p >= 0
+    while n in line and p in line:
+        n += 1
+        if p > 1:
+            p -= 1
+    if n not in line:
+        return n
+    else:
+        return p
+
+
 class ext_dict(dict):
     """A dict with more methods."""
 
