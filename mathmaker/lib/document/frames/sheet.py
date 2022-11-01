@@ -93,7 +93,6 @@ class Sheet(object):
                 if '<BELT>' in title:
                     title = title.replace('<BELT>',
                                           _(settings.mc_belts[subtheme]))
-                    title = _(title)
             subtitle = data.get('subtitle', presets[self.preset]['subtitle'])
             text = data.get('text', presets[self.preset]['text'])
             answers_title = data.get('answers_title',
@@ -104,7 +103,6 @@ class Sheet(object):
                 if '<BELT>' in answers_title:
                     answers_title = answers_title.replace(
                         '<BELT>', _(settings.mc_belts[subtheme]))
-                    answers_title = _(answers_title)
             layout_data = copy.deepcopy(DEFAULT_SHEET_LAYOUT)
             if self.preset == 'mental calculation':
                 layout_data['font_size_offset'] = '-1'
