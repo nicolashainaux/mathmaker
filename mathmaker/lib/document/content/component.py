@@ -121,6 +121,7 @@ class structure(object):
         self.variant = kwargs.get('variant', 'default')
         self.subvariant = kwargs.get('subvariant', 'default')
         self.nb_variant = kwargs.get('nb_variant', 'default')
+        self.coeff_variant = kwargs.get('coeff_variant', 'default')
         self.context = kwargs.get('context', 'default')
         self.picture = BOOLEAN[kwargs.get('picture', 'false')]()
         self.decimal_result = int(kwargs.get('decimal_result', 2))
@@ -233,6 +234,11 @@ class structure(object):
                       False: (f2, f1)}[random.choice([True, False])]
             self.nb1 *= f1
             self.nb2 *= f2
+        if kwargs.get('force_a_nb_to', None) is not None:
+            forced_nb = Number(kwargs.get('force_a_nb_to'))
+            if all(n != forced_nb for n in self.nb_list):
+                forced = random.randint(1, self.nb_nb)
+                setattr(self, f'nb{forced}', forced_nb)
 
     def _setup_euclidean_division(self, **kwargs):
         nb_list = list(kwargs['nb'])
