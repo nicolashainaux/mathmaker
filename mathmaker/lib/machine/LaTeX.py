@@ -142,14 +142,14 @@ class LaTeX(Structure.Structure):
 %%% fixes in order to use lxfonts only for math
 \let\savedrmdefault\rmdefault
 \let\savedsfdefault\sfdefault
-\let\savedttdefault\itdefault
+\let\savedttdefault\ttdefault
 \let\saveditdefault\itdefault
 \let\savedsldefault\sldefault
 \let\savedbxdefault\bxdefault
 \AtEndPreamble{{% undo the nonmath settings by lxfonts
   \let\rmdefault\savedrmdefault
   \let\sfdefault\savedsfdefault
-  \let\ttdefault\saveditdefault
+  \let\ttdefault\savedttdefault
   \let\itdefault\saveditdefault
   \let\sldefault\savedsldefault
   \let\bxdefault\savedbxdefault
