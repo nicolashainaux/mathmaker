@@ -126,6 +126,7 @@ def init():
     global enable_js_form
     global distcodes_source
     global formulae_source
+    global cols_for_spreadsheets_source
     global directions_source
     global times_source
     global multiplesof10_source
@@ -217,6 +218,8 @@ def init():
     order_of_operations_variants_source = database.source(
         'order_of_operations_variants', ['id', 'nb1'])
     formulae_source = database.source('formulae', ['id', 'nb1'])
+    cols_for_spreadsheets_source = database.source(
+        'cols_for_spreadsheets', ['id', 'col'])
     time_units_couples_source = database.source('time_units_couples',
                                                 ['id', 'u1', 'u2'])
     time_units_conversions_source = database.source('time_units_conversions',

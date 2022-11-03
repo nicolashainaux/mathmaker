@@ -131,6 +131,11 @@
         "nb1",
         "drawDate"
     ],
+    "cols_for_spreadsheets": [
+        "id",
+        "col",
+        "drawDate"
+    ],
     "decimals": [
         "id",
         "nb1",

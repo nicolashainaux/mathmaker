@@ -955,7 +955,8 @@ def db_table(tag):
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
                  'int_quintuples', 'int_sextuples', 'anglessets', 'times',
                  'multiplesof10', 'time_units_couples',
-                 'time_units_conversions', 'improper_fractions']:
+                 'time_units_conversions', 'improper_fractions',
+                 'cols_for_spreadsheets']:
         return tag
     elif any(tag.startswith(t)
              for t in ['nnsingletons', 'nnpairs', 'nntriples', 'nnquadruples',
@@ -1002,7 +1003,8 @@ def classify_tag(tag):
                  'int_triples', 'int_quadruples', 'int_quintuples',
                  'int_sextuples', 'anglessets', 'rightcuboids', 'times',
                  'clocktime_data', 'multiplesof10', 'improper_fractions',
-                 'simple_improper_fractions', 'formulae']:
+                 'simple_improper_fractions', 'formulae',
+                 'cols_for_spreadsheets']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -1985,6 +1987,8 @@ class mc_source(object):
             return shared.simple_improper_fractions_source.next(**kwargs)
         elif tag_classification == 'formulae':
             return shared.formulae_source.next(**kwargs)
+        elif tag_classification == 'cols_for_spreadsheets':
+            return shared.cols_for_spreadsheets_source.next(**kwargs)
         elif tag_classification == 'multiplesof10':
             return shared.multiplesof10_source.next(**kwargs)
         elif tag_classification.startswith('single'):

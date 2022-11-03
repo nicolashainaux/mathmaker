@@ -196,6 +196,8 @@ def __main__():
             (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
          '''CREATE TABLE formulae
             (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
+         '''CREATE TABLE cols_for_spreadsheets
+            (id INTEGER PRIMARY KEY, col TEXT, drawDate INTEGER)''',
          # DECIMAL(2, 3) stands for up to 2 integer digits,
          # up to 3 fractional digits
          # but these values may have no effect (purpose is only documentation)
@@ -1112,6 +1114,14 @@ def __main__():
     db.executemany("INSERT "
                    "INTO order_of_operations_variants"
                    "(nb1, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert letters for spreadsheet columns...\n')
+    db_rows = [(letter, 0) for letter in 'ABCDEFGHIJKLM']
+    db.executemany("INSERT "
+                   "INTO cols_for_spreadsheets"
+                   "(col, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)
 
