@@ -51,6 +51,7 @@ It will add all entries:
   99/10
 - dvipsnames_selection for LaTeX package 'xcolor'
 - polygons shapes
+- some more (check the db)
 """
 
 import os
@@ -192,6 +193,8 @@ def __main__():
             (id INTEGER, nb1 FLOAT, nb2 FLOAT, drawDate INTEGER,
              clever INTEGER)''',
          '''CREATE TABLE order_of_operations_variants
+            (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
+         '''CREATE TABLE formulae
             (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
          # DECIMAL(2, 3) stands for up to 2 integer digits,
          # up to 3 fractional digits
@@ -1108,6 +1111,14 @@ def __main__():
     db_rows = [(i + 100, 0) for i in range(88)]
     db.executemany("INSERT "
                    "INTO order_of_operations_variants"
+                   "(nb1, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert variants of spreadsheet formulae...\n')
+    db_rows = [(i + 100, 0) for i in range(25)]
+    db.executemany("INSERT "
+                   "INTO formulae"
                    "(nb1, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)
