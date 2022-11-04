@@ -165,16 +165,17 @@ class structure(object):
                     setattr(self, 'nb' + str(i + 1), nb.standardized())
         self.nb_nb = len(nb_list)
 
-    def _setup_nb_variants(self, **kwargs):
+    def _setup_nb_variants(self, included=None, **kwargs):
+        if included is None:
+            included = [i + 1 for i in range(self.nb_nb)]
+        all_nb_ids = [i for i in included]
         if self.nb_variant.startswith('decimal'):
             deci_nb = int(self.nb_variant[-1])  # so, from decimal1 up to 9
             # In order to ensure we'll have at least one decimal number,
             # we should try to remove all multiples of 10 from our possible
             # choices:
-            all_nb_ids = [i + 1
-                          for i in range(self.nb_nb)
-                          if not getattr(self,
-                                         'nb' + str(i + 1)) % 10 == 0]
+            all_nb_ids = [i for i in all_nb_ids
+                          if not getattr(self, 'nb' + str(i)) % 10 == 0]
             # But if this would lead to remove too many numbers, then
             # we have to change the extraneous multiples of 10
             if len(all_nb_ids) < deci_nb:
@@ -212,7 +213,6 @@ class structure(object):
                     while True:
                         yield random.choice([Number('0.5'), Number('0.25')])
                 g_xnb = g_xnb()
-            all_nb_ids = [i + 1 for i in range(self.nb_nb)]
             random.shuffle(all_nb_ids)
             how_many = kwargs.get('how_many', None)
             if how_many is None or how_many > self.nb_nb:
