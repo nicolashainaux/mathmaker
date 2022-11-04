@@ -335,6 +335,15 @@ def rotate(L, n):
     return L[-n:] + L[:-n]
 
 
+def divisors(n):
+    output = []
+    for i in range(1, int(n ** 0.5) + 1):
+        if n % i == 0:
+            output.append(i)
+            output.append(n // i)
+    return sorted(output)
+
+
 def check_unique_letters_words(words_list, n):
     """
     Check if each word of the list contains exactly n letters, all unique.

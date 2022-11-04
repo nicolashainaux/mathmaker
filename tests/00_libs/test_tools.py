@@ -27,7 +27,7 @@ from mathmakerlib.calculus import Number, Fraction
 from mathmaker.lib.tools import check_unique_letters_words, rotate
 from mathmaker.lib.tools import parse_layout_descriptor, ext_dict
 from mathmaker.lib.tools import fix_math_style2_fontsize, deci_and_frac_repr
-from mathmaker.lib.tools import closest_nn_outside_data
+from mathmaker.lib.tools import closest_nn_outside_data, divisors
 
 
 def test_recursive_update():
@@ -67,6 +67,10 @@ def test_rotate():
     assert rotate([1, 2, 3, 4, 5], -3) == [4, 5, 1, 2, 3]
     assert rotate([1, 2, 3], 3) == [1, 2, 3]
     assert rotate([1, 2, 3], -9) == [1, 2, 3]
+
+
+def test_divisors():
+    assert divisors(60) == [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60]
 
 
 def test_parse_layout_descriptor():
