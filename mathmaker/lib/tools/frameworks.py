@@ -74,8 +74,8 @@ AUTOFIT_SOURCES = {'fid': 'formulae:SPAN',
                    'sq2': 'nnpairs:SPAN, code=2',
                    'st2': 'nnsingletons:SPAN',
                    'sf2': 'nnsingletons:SPAN'}
-AUTOFIT_SPANS = {'fid': '100-124', 'pr1': '3-9', 'sq1': '3-9', 'st1': '3-9',
-                 'sf1': '2,4,10,100', 'pr2': '3-9', 'sq2': '3-9', 'st2': '3-9',
+AUTOFIT_SPANS = {'fid': '100-124', 'pr1': '3-9', 'sq1': '3-9', 'st1': '1-9',
+                 'sf1': '2,4,10,100', 'pr2': '3-9', 'sq2': '3-9', 'st2': '1-9',
                  'sf2': '2,4,10,100'}
 
 TESTFILE_TEMPLATE = """# -*- coding: utf-8 -*-
