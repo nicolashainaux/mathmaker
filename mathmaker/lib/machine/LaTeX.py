@@ -137,7 +137,15 @@ class LaTeX(Structure.Structure):
         # font patch
         font_patch = ''
         if settings.font is not None:
-            font_patch = r"""\usepackage[no-math]{{fontspec}}
+            sourcecodepro = ''
+            if required.package.get('sourcecodepro', False):
+                sourcecodepro = r"""
+
+\newfontfamily\codefont[
+  NFSSFamily=Source Code Pro,
+  Scale=MatchLowercase,
+]{Source Code Pro}"""
+            font_patch = r"""\usepackage[no-math]{{fontspec}}SOURCECODEPRO
 
 %%% fixes in order to use lxfonts only for math
 \let\savedrmdefault\rmdefault
@@ -173,7 +181,8 @@ class LaTeX(Structure.Structure):
 \DeclareMathSymbol{{9}}{{\mathalpha}}{{mynumbers}}{{`9}}
 \DeclareMathSymbol{{.}}{{\mathord}}{{mynumbers}}{{`.}}
 \DeclareMathSymbol{{,}}{{\mathpunct}}{{mynumbers}}{{`,}}
-}}""".format(font_name='{' + settings.font + '}')
+}}""".format(font_name='{' + settings.font + '}')\
+                .replace('SOURCECODEPRO', sourcecodepro)
         # language
         polyglossia = str(UsePackage('polyglossia'))
         language_options = None
