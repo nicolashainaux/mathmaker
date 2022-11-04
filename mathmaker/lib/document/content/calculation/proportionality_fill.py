@@ -26,6 +26,7 @@ from pathlib import Path
 from mathmakerlib.calculus import Table
 
 from mathmaker.lib.document.content import component
+from mathmaker.lib.tools import deci_and_frac_repr
 
 
 class sub_object(component.structure):
@@ -64,8 +65,7 @@ class sub_object(component.structure):
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        return str(self.answer)
+        return deci_and_frac_repr(self.answer)
 
     def js_a(self, **kwargs):
-        return [self.answer, self.answer.lower(), self.answer[0],
-                self.answer[0].lower()]
+        return deci_and_frac_repr(self.answer, output='js')
