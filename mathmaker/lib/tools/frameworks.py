@@ -68,12 +68,15 @@ CURLY_BRACES_CONTENT = re.compile(r'{([' + _CHARS + r']+)}')
 AUTOFIT_SOURCES = {'fid': 'formulae:SPAN',
                    'pr1': 'nnpairs:SPAN',
                    'sq1': 'nnpairs:SPAN, code=2',
-                   'sg1': 'nnsingletons:SPAN',
+                   'st1': 'nnsingletons:SPAN',
+                   'sf1': 'nnsingletons:SPAN',
                    'pr2': 'nnpairs:SPAN',
                    'sq2': 'nnpairs:SPAN, code=2',
-                   'sg2': 'nnsingletons:SPAN'}
-AUTOFIT_SPANS = {'fid': '100-124', 'pr1': '3-9', 'sq1': '3-9', 'sg1': '3-9',
-                 'pr2': '3-9', 'sq2': '3-9', 'sg2': '3-9'}
+                   'st2': 'nnsingletons:SPAN',
+                   'sf2': 'nnsingletons:SPAN'}
+AUTOFIT_SPANS = {'fid': '100-124', 'pr1': '3-9', 'sq1': '3-9', 'st1': '3-9',
+                 'sf1': '2,4,10,100', 'pr2': '3-9', 'sq2': '3-9', 'st2': '3-9',
+                 'sf2': '2,4,10,100'}
 
 TESTFILE_TEMPLATE = """# -*- coding: utf-8 -*-
 
@@ -1133,9 +1136,10 @@ def process_autofit(source_id):
     'autofit' translates to default values: (formulae should cover all values,
     this is the current default)
     {'fid': 'formulae:100-124', 'pr1': 'nnpairs:3-9',
-     'sq1': 'nnpairs:3-9, code=2', 'sg1': 'nnsingletons:3-9',
+     'sq1': 'nnpairs:3-9, code=2', 'st1': 'nnsingletons:3-9',
+     'sf1': 'nnsingletons:2,4,10,100',
      'pr2': 'nnpairs:3-9', 'sq2': 'nnpairs:3-9, code=2',
-     'sg2': 'nnsingletons:3-9'}
+     'st2': 'nnsingletons:3-9', 'sf2': 'nnsingletons:2,4,10,100',}
 
     """
     chunks = {s[0:3]: s[3:] for s in source_id.split('@')[1:]}
