@@ -39,7 +39,7 @@ from mathmaker.lib.tools import parse_layout_descriptor
 
 # Characters allowed inside questions, numbers' sources and attributes
 # (including =)
-_CHARS = r'a-zA-Z0-9_×±;:%\. =|'
+_CHARS = r'a-zA-Z0-9_×±;:%@‣·\. =|'
 _QA_ICHARS = _CHARS + r'{}'
 # Separator between attributes (and question's id)
 _ATTR_SEP = r','
@@ -64,6 +64,16 @@ NB_SOURCE = re.compile(r'([' + _QCHARS + r'\-]+)' + _FETCH_NB)
 FETCH_NB = re.compile(_FETCH_NB + r'$')
 SUB_NB = re.compile(r'([' + _LINE + r']+)' + _FETCH_NB + r'$')
 CURLY_BRACES_CONTENT = re.compile(r'{([' + _CHARS + r']+)}')
+
+AUTOFIT_SOURCES = {'fid': 'formulae:SPAN',
+                   'pr1': 'nnpairs:SPAN',
+                   'sq1': 'nnpairs:SPAN, code=2',
+                   'sg1': 'nnsingletons:SPAN',
+                   'pr2': 'nnpairs:SPAN',
+                   'sq2': 'nnpairs:SPAN, code=2',
+                   'sg2': 'nnsingletons:SPAN'}
+AUTOFIT_SPANS = {'fid': '100-124', 'pr1': '3-9', 'sq1': '3-9', 'sg1': '3-9',
+                 'pr2': '3-9', 'sq2': '3-9', 'sg2': '3-9'}
 
 TESTFILE_TEMPLATE = """# -*- coding: utf-8 -*-
 
@@ -361,7 +371,7 @@ class _AttrStr(str):
                           'in \'{}\'.'.format(self))
         return {k: v
                 for couple in attr_list if '=' in couple
-                for (k, v) in [couple.strip().split(sep='=')]}
+                for (k, v) in [couple.strip().split(sep='=', maxsplit=1)]}
 
     def split_clever(self, key):
         """
@@ -1086,3 +1096,64 @@ def get_attributes(filename, tag):
     yaml = YAML(typ='safe', pure=True)
     with open(filename) as f:
         return _get_attributes(yaml.load(f), tag)
+
+
+def _get_autofit_span(s):
+    """
+    The possible span included at start of the provided string, and the rest.
+
+    s is assumed to include at most one character ‣
+
+    E.g.
+    '‣100-107' returns ('100-107', ''),
+    '·nb_variant=decimal1' returns ('', '·nb_variant=decimal1')
+    '‣1-20·nb_variant=decimal1' returns ('1-20', '·nb_variant=decimal1')
+    """
+    if '‣' in s:
+        if '·' in s:
+            parts = s.split('·')
+            attributes = ''
+            span = ''
+            for p in parts:
+                if p.startswith('‣'):
+                    span = p[1:]
+                else:
+                    attributes += f'·{p}'
+            return (span, attributes)
+        else:
+            return (s[1:], '')
+    return ('', s)
+
+
+def process_autofit(source_id):
+    """
+    Translate the autofit source into several conventional source ids for use
+    with the usual db.
+
+    'autofit' translates to default values: (formulae should cover all values,
+    this is the current default)
+    {'fid': 'formulae:100-124', 'pr1': 'nnpairs:3-9',
+     'sq1': 'nnpairs:3-9, code=2', 'sg1': 'nnsingletons:3-9',
+     'pr2': 'nnpairs:3-9', 'sq2': 'nnpairs:3-9, code=2',
+     'sg2': 'nnsingletons:3-9'}
+
+    """
+    chunks = {s[0:3]: s[3:] for s in source_id.split('@')[1:]}
+    # e.g. {'fid': '‣100-107', 'pr1': '·nb_variant=decimal1',
+    #       'sq1': '‣1-20·nb_variant=decimal1'}
+    if any(k not in AUTOFIT_SOURCES for k in chunks):
+        raise ValueError(f'Invalid autofit source: {source_id}')
+    output = copy.deepcopy(AUTOFIT_SOURCES)
+    for k in AUTOFIT_SOURCES:
+        span = attributes = ''
+        if k in chunks:
+            span, attributes = _get_autofit_span(chunks[k])
+        if not span:
+            span = AUTOFIT_SPANS[k]
+        output[k] = output[k].replace('SPAN', span)
+        attributes = ', '.join(s for s in attributes.split('·') if s)
+        if attributes:
+            output[k] = f'{output[k]}, {attributes}'
+    for k in output:
+        output[k] = _AttrStr('source=' + output[k]).parse()
+    return output

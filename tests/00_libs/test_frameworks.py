@@ -38,6 +38,7 @@ from mathmaker.lib.tools.frameworks import _read_simple_question
 from mathmaker.lib.tools.frameworks import _read_mix_question, _read_mix_nb
 from mathmaker.lib.tools.frameworks import _get_attributes, _dissolve_block
 from mathmaker.lib.tools.frameworks import _expand_alternatives
+from mathmaker.lib.tools.frameworks import process_autofit, _get_autofit_span
 from mathmaker.lib.constants import MIN_ROW_HEIGHT, DEFAULT_LAYOUT
 
 yaml = YAML(typ='safe')
@@ -375,6 +376,20 @@ def test__read_simple_question():
             in example_with_block
             or [{'id': 'q id1'}, ['source2'], 1]
             in example_with_block)
+    autofit = 'spreadsheet formula -> autofit@pr‣nnpairs:3-9'\
+        '@sq‣nnsingletons:3-9@sg‣nnsingletons:3-9 (1)'
+    assert _read_simple_question(autofit) == \
+        [[{'id': 'spreadsheet formula'},
+          ['autofit@pr‣nnpairs:3-9@sq‣nnsingletons:3-9@sg‣nnsingletons:3-9'],
+          1]
+         ]
+    autofit = 'spreadsheet formula -> autofit@pr‣nnpairs:3-9'\
+        '·nb_variant=decimal1@sq‣nnsingletons:3-9@sg‣nnsingletons:3-9 (1)'
+    assert _read_simple_question(autofit) == \
+        [[{'id': 'spreadsheet formula'},
+          ['autofit@pr‣nnpairs:3-9·nb_variant=decimal1@sq‣nnsingletons:3-9'
+           '@sg‣nnsingletons:3-9'], 1]
+         ]
 
 
 def test__read_mix_question():
@@ -483,3 +498,36 @@ wording2:
           'nb2_max': 100,
           'q_id': 'addi_direct',
           }]
+
+
+def test_get_autofit_span():
+    assert _get_autofit_span('‣100-107') == ('100-107', '')
+    assert _get_autofit_span('·nb_variant=decimal1') \
+        == ('', '·nb_variant=decimal1')
+    assert _get_autofit_span('‣1-20·nb_variant=decimal1') \
+        == ('1-20', '·nb_variant=decimal1')
+    assert _get_autofit_span('‣7-19·nb_variant=decimal1·attr2=val2') \
+        == ('7-19', '·nb_variant=decimal1·attr2=val2')
+
+
+def test_process_autofit():
+    assert process_autofit('autofit') \
+        == {'fid': {'source': 'formulae:100-124'},
+            'pr1': {'source': 'nnpairs:3-9'},
+            'sq1': {'source': 'nnpairs:3-9', 'code': '2'},
+            'sg1': {'source': 'nnsingletons:3-9'},
+            'pr2': {'source': 'nnpairs:3-9'},
+            'sq2': {'source': 'nnpairs:3-9', 'code': '2'},
+            'sg2': {'source': 'nnsingletons:3-9'}}
+    s = 'autofit@fid‣100-107@pr1·nb_variant=decimal1'\
+        '@sq1‣1-20·nb_variant=decimal1'
+    assert process_autofit(s) \
+        == {'fid': {'source': 'formulae:100-107'},
+            'pr1': {'source': 'nnpairs:3-9', 'nb_variant': 'decimal1'},
+            'sq1': {'source': 'nnpairs:1-20', 'code': '2',
+                    'nb_variant': 'decimal1'},
+            'sg1': {'source': 'nnsingletons:3-9'},
+            'pr2': {'source': 'nnpairs:3-9'},
+            'sq2': {'source': 'nnpairs:3-9', 'code': '2'},
+            'sg2': {'source': 'nnsingletons:3-9'}
+            }
