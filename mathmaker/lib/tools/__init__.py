@@ -143,7 +143,7 @@ def po_file_get_list_of(what, language, arg):
 
 def deci_and_frac_repr(n, output='default'):
     """
-    Decimal (if any) and reduced fraction representations of number n
+    Standard decimal (if any) and reduced fraction representations of number n
 
     A decimal representation is taken into account only if it has at most two
     fractional digits.
@@ -156,13 +156,13 @@ def deci_and_frac_repr(n, output='default'):
     if isinstance(n, Fraction):
         fraction_among_answers = True
         f = Fraction(n.sign, n.numerator, n.denominator)
-        deciv = n.evaluate()
+        deciv = n.evaluate().standardized()
         if deciv.fracdigits_nb() <= 2:
             representations = [f, deciv]
         else:
             representations = [f]
     else:
-        n = Number(n)
+        n = Number(n).standardized()
         f = Fraction(from_decimal=n).reduced()
         representations = [n]
         if f.numerator < 100 and f.denominator < 100 and f.denominator != 1:
