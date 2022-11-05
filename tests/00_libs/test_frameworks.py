@@ -377,19 +377,19 @@ def test__read_simple_question():
             or [{'id': 'q id1'}, ['source2'], 1]
             in example_with_block)
     autofit = 'spreadsheet formula -> autofit@pr1‣nnpairs:3-9'\
-        '@sq1‣nnsingletons:3-9@st1‣nnsingletons:3-9 (1)'
+        '@sq1‣nnsingletons:3-9@at1‣nnsingletons:3-9 (1)'
     assert _read_simple_question(autofit) == \
         [[{'id': 'spreadsheet formula'},
           ['autofit@pr1‣nnpairs:3-9@sq1‣nnsingletons:3-9'
-           '@st1‣nnsingletons:3-9'],
+           '@at1‣nnsingletons:3-9'],
           1]
          ]
     autofit = 'spreadsheet formula -> autofit@pr1‣nnpairs:3-9'\
-        '·nb_variant=decimal1@sq1‣nnsingletons:3-9@st1‣nnsingletons:3-9 (1)'
+        '·nb_variant=decimal1@sq1‣nnsingletons:3-9@at1‣nnsingletons:3-9 (1)'
     assert _read_simple_question(autofit) == \
         [[{'id': 'spreadsheet formula'},
           ['autofit@pr1‣nnpairs:3-9·nb_variant=decimal1@sq1‣nnsingletons:3-9'
-           '@st1‣nnsingletons:3-9'], 1]
+           '@at1‣nnsingletons:3-9'], 1]
          ]
 
 
@@ -516,12 +516,12 @@ def test_process_autofit():
         == {'fid': {'source': 'formulae:100-123'},
             'pr1': {'source': 'nnpairs:3-9'},
             'sq1': {'source': 'nnpairs:3-9', 'code': '2'},
-            'st1': {'source': 'nnsingletons:1-9'},
+            'at1': {'source': 'nnsingletons:1-9'},
             'sf1': {'source': 'nnsingletons:2,4,10,100'},
             'sd1': {'source': 'nnsingletons:2-10,15,25,100'},
             'pr2': {'source': 'nnpairs:3-9'},
             'sq2': {'source': 'nnpairs:3-9', 'code': '2'},
-            'st2': {'source': 'nnsingletons:1-9'},
+            'at2': {'source': 'nnsingletons:1-9'},
             'sf2': {'source': 'nnsingletons:2,4,10,100'},
             'sd2': {'source': 'nnsingletons:2-10,15,25,100'}}
     s = 'autofit@fid‣100-107@pr1·nb_variant=decimal1'\
@@ -531,12 +531,12 @@ def test_process_autofit():
             'pr1': {'source': 'nnpairs:3-9', 'nb_variant': 'decimal1'},
             'sq1': {'source': 'nnpairs:1-20', 'code': '2',
                     'nb_variant': 'decimal1'},
-            'st1': {'source': 'nnsingletons:1-9'},
+            'at1': {'source': 'nnsingletons:1-9'},
             'sf1': {'source': 'nnsingletons:2,4,10,100'},
             'sd1': {'source': 'nnsingletons:2-10,15,25,100'},
             'pr2': {'source': 'nnpairs:3-9'},
             'sq2': {'source': 'nnpairs:3-9', 'code': '2'},
-            'st2': {'source': 'nnsingletons:1-9'},
+            'at2': {'source': 'nnsingletons:1-9'},
             'sf2': {'source': 'nnsingletons:2,4,10,100'},
             'sd2': {'source': 'nnsingletons:2-10,15,25,100'}
             }

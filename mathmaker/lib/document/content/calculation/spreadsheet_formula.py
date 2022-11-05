@@ -116,9 +116,9 @@ class sub_object(component.structure):
         return [self.answer.uiprinted]
 
     def setup_sources(self, build_data):
-        self.st1_source = build_data['st1']['source']
-        self.st1_attr = {k: build_data['st1'][k]
-                         for k in build_data['st1']
+        self.at1_source = build_data['at1']['source']
+        self.at1_attr = {k: build_data['at1'][k]
+                         for k in build_data['at1']
                          if k != 'source'}
         self.sf1_source = build_data['sf1']['source']
         self.sf1_attr = {k: build_data['sf1'][k]
@@ -136,9 +136,9 @@ class sub_object(component.structure):
         self.sq1_attr = {k: build_data['sq1'][k]
                          for k in build_data['sq1']
                          if k != 'source'}
-        self.st2_source = build_data['st2']['source']
-        self.st2_attr = {k: build_data['st2'][k]
-                         for k in build_data['st2']
+        self.at2_source = build_data['at2']['source']
+        self.at2_attr = {k: build_data['at2'][k]
+                         for k in build_data['at2']
                          if k != 'source'}
         self.sf2_source = build_data['sf2']['source']
         self.sf2_attr = {k: build_data['sf2'][k]
@@ -174,30 +174,30 @@ class sub_object(component.structure):
         self.picture = template.replace('OPTIONS', self.pic_options)
 
     def setup_term_nb1_product_nb2_nb3(self):
-        n = shared.mc_source.next(self.st1_source, qkw=self.st1_attr)[0]
+        n = shared.mc_source.next(self.at1_source, qkw=self.at1_attr)[0]
         p, val = shared.mc_source.next(self.pr1_source, qkw=self.pr1_attr)
         # self.nb1 = n; self.nb2 = p; self.nb3 = val (X)
         super().setup("numbers", nb=[n, p, val], shuffle_nbs=False,
                       standardize_decimal_numbers=True)
         options = copy.deepcopy(self.options)
-        options.update(self.st1_attr)
+        options.update(self.at1_attr)
         super().setup("minimal", **options)
-        super().setup("nb_variants", included=[1], **self.st1_attr)
+        super().setup("nb_variants", included=[1], **self.at1_attr)
         options = copy.deepcopy(self.options)
         options.update(self.pr1_attr)
         super().setup("minimal", **options)
         super().setup("nb_variants", included=[2, 3], **self.pr1_attr)
 
     def setup_term_nb1_square_nb2_nb3(self):
-        n = shared.mc_source.next(self.st1_source, qkw=self.st1_attr)[0]
+        n = shared.mc_source.next(self.at1_source, qkw=self.at1_attr)[0]
         p, v = shared.mc_source.next(self.sq1_source, qkw=self.sq1_attr)
         # self.nb1 = n; self.nb2 = self.nb3 = val (X)
         super().setup("numbers", nb=[n, p, v], shuffle_nbs=False,
                       standardize_decimal_numbers=True)
         options = copy.deepcopy(self.options)
-        options.update(self.st1_attr)
+        options.update(self.at1_attr)
         super().setup("minimal", **options)
-        super().setup("nb_variants", included=[1], **self.st1_attr)
+        super().setup("nb_variants", included=[1], **self.at1_attr)
         options = copy.deepcopy(self.options)
         options.update(self.sq1_attr)
         super().setup("minimal", **options)
@@ -335,9 +335,9 @@ class sub_object(component.structure):
                 maxi = self.nb2 * self.nb3 * 10 ** decimals
             else:  # the product is actually an integer
                 maxi = int(self.nb2 * self.nb3)
-            options = copy.deepcopy(self.st1_attr)
+            options = copy.deepcopy(self.at1_attr)
             options.update({'nb1_lt': maxi})
-            self.nb1 = shared.mc_source.next(self.st1_source, qkw=options)[0]
+            self.nb1 = shared.mc_source.next(self.at1_source, qkw=options)[0]
             self.nb1 = Number(self.nb1).standardized()
             if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
                 self.nb1 = self.nb1 / (10 ** decimals)
@@ -360,9 +360,9 @@ class sub_object(component.structure):
                 maxi = (self.nb3 / self.nb2) * 10 ** decimals
             else:  # the product is actually an integer
                 maxi = int(self.nb3 / self.nb2)
-            options = copy.deepcopy(self.st1_attr)
+            options = copy.deepcopy(self.at1_attr)
             options.update({'nb1_lt': maxi})
-            self.nb1 = shared.mc_source.next(self.st1_source, qkw=options)[0]
+            self.nb1 = shared.mc_source.next(self.at1_source, qkw=options)[0]
             self.nb1 = Number(self.nb1).standardized()
             if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
                 self.nb1 = self.nb1 / (10 ** decimals)
@@ -424,9 +424,9 @@ class sub_object(component.structure):
                 maxi = (self.nb2 / self.nb3) * 10 ** decimals
             else:  # the product is actually an integer
                 maxi = int(self.nb2 / self.nb3)
-            options = copy.deepcopy(self.st1_attr)
+            options = copy.deepcopy(self.at1_attr)
             options.update({'nb1_lt': maxi})
-            self.nb1 = shared.mc_source.next(self.st1_source, qkw=options)[0]
+            self.nb1 = shared.mc_source.next(self.at1_source, qkw=options)[0]
             self.nb1 = Number(self.nb1).standardized()
             if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
                 self.nb1 = self.nb1 / (10 ** decimals)
@@ -482,9 +482,9 @@ class sub_object(component.structure):
                 maxi = self.nb2 * self.nb2 * 10 ** (2 * decimals)
             else:  # the product is actually an integer
                 maxi = int(self.nb2 * self.nb2)
-            options = copy.deepcopy(self.st1_attr)
+            options = copy.deepcopy(self.at1_attr)
             options.update({'nb1_lt': maxi})
-            self.nb1 = shared.mc_source.next(self.st1_source, qkw=options)[0]
+            self.nb1 = shared.mc_source.next(self.at1_source, qkw=options)[0]
             self.nb1 = Number(self.nb1).standardized()
             if self.sq1_attr.get('nb_variant', '').startswith('decimal'):
                 self.nb1 = self.nb1 / (10 ** (2 * decimals))
