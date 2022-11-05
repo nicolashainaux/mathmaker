@@ -517,11 +517,13 @@ def test_process_autofit():
             'pr1': {'source': 'nnpairs:3-9'},
             'sq1': {'source': 'nnpairs:3-9', 'code': '2'},
             'at1': {'source': 'nnsingletons:1-9'},
+            'st1': {'source': 'nnsingletons:1-9'},
             'sf1': {'source': 'nnsingletons:2,4,10,100'},
             'sd1': {'source': 'nnsingletons:2-10,15,25,100'},
             'pr2': {'source': 'nnpairs:3-9'},
             'sq2': {'source': 'nnpairs:3-9', 'code': '2'},
             'at2': {'source': 'nnsingletons:1-9'},
+            'st2': {'source': 'nnsingletons:1-9'},
             'sf2': {'source': 'nnsingletons:2,4,10,100'},
             'sd2': {'source': 'nnsingletons:2-10,15,25,100'}}
     s = 'autofit@fid‣100-107@pr1·nb_variant=decimal1'\
@@ -532,11 +534,13 @@ def test_process_autofit():
             'sq1': {'source': 'nnpairs:1-20', 'code': '2',
                     'nb_variant': 'decimal1'},
             'at1': {'source': 'nnsingletons:1-9'},
+            'st1': {'source': 'nnsingletons:1-9'},
             'sf1': {'source': 'nnsingletons:2,4,10,100'},
             'sd1': {'source': 'nnsingletons:2-10,15,25,100'},
             'pr2': {'source': 'nnpairs:3-9'},
             'sq2': {'source': 'nnpairs:3-9', 'code': '2'},
             'at2': {'source': 'nnsingletons:1-9'},
+            'st2': {'source': 'nnsingletons:1-9'},
             'sf2': {'source': 'nnsingletons:2,4,10,100'},
             'sd2': {'source': 'nnsingletons:2-10,15,25,100'}
             }
