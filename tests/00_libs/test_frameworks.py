@@ -513,15 +513,17 @@ def test_get_autofit_span():
 
 def test_process_autofit():
     assert process_autofit('autofit') \
-        == {'fid': {'source': 'formulae:100-124'},
+        == {'fid': {'source': 'formulae:100-123'},
             'pr1': {'source': 'nnpairs:3-9'},
             'sq1': {'source': 'nnpairs:3-9', 'code': '2'},
-            'st1': {'source': 'nnsingletons:3-9'},
+            'st1': {'source': 'nnsingletons:1-9'},
             'sf1': {'source': 'nnsingletons:2,4,10,100'},
+            'sd1': {'source': 'nnsingletons:2-10,15,25,100'},
             'pr2': {'source': 'nnpairs:3-9'},
             'sq2': {'source': 'nnpairs:3-9', 'code': '2'},
-            'st2': {'source': 'nnsingletons:3-9'},
-            'sf2': {'source': 'nnsingletons:2,4,10,100'}}
+            'st2': {'source': 'nnsingletons:1-9'},
+            'sf2': {'source': 'nnsingletons:2,4,10,100'},
+            'sd2': {'source': 'nnsingletons:2-10,15,25,100'}}
     s = 'autofit@fid‣100-107@pr1·nb_variant=decimal1'\
         '@sq1‣1-20·nb_variant=decimal1'
     assert process_autofit(s) \
@@ -529,10 +531,12 @@ def test_process_autofit():
             'pr1': {'source': 'nnpairs:3-9', 'nb_variant': 'decimal1'},
             'sq1': {'source': 'nnpairs:1-20', 'code': '2',
                     'nb_variant': 'decimal1'},
-            'st1': {'source': 'nnsingletons:3-9'},
+            'st1': {'source': 'nnsingletons:1-9'},
             'sf1': {'source': 'nnsingletons:2,4,10,100'},
+            'sd1': {'source': 'nnsingletons:2-10,15,25,100'},
             'pr2': {'source': 'nnpairs:3-9'},
             'sq2': {'source': 'nnpairs:3-9', 'code': '2'},
-            'st2': {'source': 'nnsingletons:3-9'},
-            'sf2': {'source': 'nnsingletons:2,4,10,100'}
+            'st2': {'source': 'nnsingletons:1-9'},
+            'sf2': {'source': 'nnsingletons:2,4,10,100'},
+            'sd2': {'source': 'nnsingletons:2-10,15,25,100'}
             }
