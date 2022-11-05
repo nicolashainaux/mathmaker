@@ -314,7 +314,7 @@ class sub_object(component.structure):
         self.setup_formula_cell1_cell2()
 
     def _create_variant_105(self, build_data):
-        self.formula = '=X/p + n'
+        self.formula = '=X/p+n'
         self.setup_term_nb1_product_nb2_nb3()
         while self.nb2.fracdigits_nb():  # to avoid dividing by a decimal
             self.nb3 /= 10
