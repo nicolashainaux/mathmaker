@@ -40,7 +40,7 @@ class sub_object(component.structure):
         hidden_row = int(options.get('hidden_row', random.choice([0, 1])))
         hidden_col = int(options.get('hidden_col',
                                      random.randint(0, len(row2) - 1)))
-        self.answer = [row1, row2][hidden_row][hidden_col]
+        self.answer = [self.line1, self.line2][hidden_row][hidden_col]
         [row1, row2][hidden_row][hidden_col] = \
             r'\textcolor{BrickRed}{\text{?}}'
         compact = not self.slideshow
