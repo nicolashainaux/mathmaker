@@ -191,10 +191,18 @@ class structure(object):
                             + random.choice([i for i in range(-4, 5)
                                              if i != 0]))
                     all_nb_ids += [i]
-            chosen_ones = random.sample(all_nb_ids, deci_nb)
-            for i in chosen_ones:
-                setattr(self, 'nb' + str(i),
-                        getattr(self, 'nb' + str(i)) / 10)
+            while deci_nb:
+                # still not enough numbers as required
+                # e.g. to divide one number by 100 (i.e. twice by 10)
+                if len(all_nb_ids) < deci_nb:
+                    chosen_ones = all_nb_ids
+                else:
+                    chosen_ones = random.sample(all_nb_ids, deci_nb)
+                deci_nb -= len(chosen_ones)
+                for i in chosen_ones:
+                    setattr(self, 'nb' + str(i),
+                            getattr(self, 'nb' + str(i)) / 10)
+
         elif (self.nb_variant in ['±half', '±quarter', '±halforquarter']
               and self.nb_nb >= 1):
             # Depending on the case we randomly add or substract 0.5 or 0.25
