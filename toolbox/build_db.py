@@ -85,6 +85,8 @@ NNQUADRUPLES_MAX = 10
 NNQUINTUPLES_MAX = 10
 NNSEXTUPLES_MAX = 10
 
+COORD_MAX = 100
+
 
 def _suits_for_deci1(i, j):
     return not (i % 10 == 0 and j % 10 == 0)
@@ -214,6 +216,9 @@ def __main__():
             (id INTEGER PRIMARY KEY, place DECIMAL(4, 3), drawDate INTEGER)''',
          '''CREATE TABLE dvipsnames_selection
             (id INTEGER PRIMARY KEY, color_name TEXT, drawDate INTEGER)''',
+         '''CREATE TABLE coordinates_xy
+            (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
+             drawDate INTEGER)''',
          ]
 
     for qr in db_creation_queries:
@@ -1092,6 +1097,15 @@ def __main__():
                    "INTO decimals(nb1, nz, iz, fd, overlap_level, "
                    "pure_half, pure_quarter, drawDate) "
                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert (x;y) coordinates...\n')
+    db_rows = [(x, y, 0)
+               for x in range(-COORD_MAX, COORD_MAX + 1)
+               for y in range(-COORD_MAX, COORD_MAX + 1)]
+    db.executemany("INSERT "
+                   "INTO coordinates_xy (nb1, nb2, drawDate) "
+                   "VALUES(?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert angle ranges...\n')

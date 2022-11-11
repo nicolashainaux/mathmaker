@@ -162,6 +162,12 @@
         "color_name",
         "drawDate"
     ],
+    "coordinates_xy": [
+        "id",
+        "nb1",
+        "nb2",
+        "drawDate"
+    ],
     "mini_pb_prop_wordings": [
         "id",
         "wid",
