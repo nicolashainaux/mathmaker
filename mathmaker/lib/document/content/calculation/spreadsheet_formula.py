@@ -22,7 +22,6 @@
 
 import copy
 import random
-from pathlib import Path
 from string import ascii_uppercase as alphabet
 
 from intspan import intspan
@@ -33,6 +32,8 @@ from mathmaker.lib import shared
 from mathmaker.lib.tools import divisors
 from mathmaker.lib.document.content import component
 from mathmaker.lib.tools.frameworks import process_autofit
+from mathmaker.lib.LaTeX import SlideContent, TabularCellPictureWording
+from mathmaker.lib.LaTeX import SpreadsheetPicture
 
 # Possible variants (where X and Y represent a cell; n and p fixed numbers)
 # 100   = n + p*X           104   = X*p + n
@@ -82,31 +83,27 @@ class sub_object(component.structure):
         self.setup_sources(build_data)
         getattr(self, f'_create_variant_{self.variant_id}')(build_data)
 
-        wording_part1 = _('In {cell_ref}, one types {formula}.')\
+        self.wording1 = _('In {cell_ref}, one types {formula}.')\
             .format(formula=r'{\codefont F}'.replace('F', self.formula),
                     cell_ref=r'{\codefont R}'.replace('R', self.qcell))
-        wording_part2 = r'\small{TEXT}'\
-            .replace('TEXT',
-                     _('What will it display once enter is pressed?'))
-        self.wording = f'{wording_part1} {wording_part2}'
-        self.pic_options = ''
+        self.wording2 = _('What will it display once enter is pressed?')
+        self.wording = f'{self.wording1} {self.wording2}'
         self.setup_picture(build_data)
         self.transduration = 30
 
     def q(self, **options):
         if self.slideshow:
-            template_name = 'templates/slide_picture_wording.tex'
-        else:
-            template_name = 'templates/inline_picture_wording.tex'
-        template = (Path(__file__).parent / template_name).read_text()
-        template = template.replace('PICTURE', self.picture)\
-            .replace('WORDING', self.wording)
-        if self.slideshow:
-            return template.replace('HEIGHT', '2.5')
+            output = SlideContent(wording1=self.wording1,
+                                  height1='0.25pt',
+                                  picture=self.picture,
+                                  height2='0.25pt',
+                                  wording2=self.wording2)
         else:
             w1 = {1: '5.75', 2: '4'}[self.scheme]
             w2 = {1: '7.75', 2: '9'}[self.scheme]
-            return template.replace('COLW1', w1).replace('COLW2', w2)
+            output = TabularCellPictureWording(self.picture,
+                                               self.wording, w1=w1, w2=w2)
+        return str(output)
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
@@ -159,19 +156,15 @@ class sub_object(component.structure):
 
     def setup_picture(self, build_data):
         var_nb = self.variant_id[0]
-        template_name = f'templates/spreadsheet_{var_nb}_{self.scheme}.tikz'
-        template = (Path(__file__).parent / template_name).read_text()
-        row1 = r'\text{{{r1}}}'.format(r1=self.row)
-        row2 = r'\text{{{r2}}}'.format(r2=self.nextrow)
-        template = template.replace('ROW1', row1).replace('ROW2', row2)
-        col1 = r'\text{{{c1}}}'.format(c1=self.col)
-        col2 = r'\text{{{c2}}}'.format(c2=self.nextcol)
-        template = template.replace('COL1', col1).replace('COL2', col2)
-        template = template.replace('CELL1', self.cell1)\
-            .replace('CELL2', self.cell2).replace('CELL3', self.cell3)
-        self.pic_options = {1: '[baseline=30pt]',
-                            2: '[baseline=3pt]'}[self.scheme]
-        self.picture = template.replace('OPTIONS', self.pic_options)
+        bl = {1: '30pt', 2: '3pt'}[self.scheme]
+        options = {'baseline': bl}
+        if self.slideshow:
+            options['cellnodeoptions'] = {'font': r'\small'}
+            options['coordoptions'] = {'font': r'\small'}
+            options['scale'] = '1.5'
+        self.picture = str(SpreadsheetPicture(
+            var_nb, self.scheme, self.row, self.nextrow, self.col,
+            self.nextrow, self.cell1, self.cell2, **options))
 
     def setup_term_nb1_product_nb2_nb3(self):
         n = shared.mc_source.next(self.at1_source, qkw=self.at1_attr)[0]

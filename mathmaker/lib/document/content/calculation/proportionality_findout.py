@@ -21,12 +21,12 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import random
-from pathlib import Path
 
 from mathmakerlib.calculus import Table, Number
 
 from mathmaker.lib.tools import closest_nn_outside_data
 from mathmaker.lib.document.content import component
+from mathmaker.lib.LaTeX import SlideContent, TabularCellPictureWording
 
 
 class sub_object(component.structure):
@@ -55,7 +55,7 @@ class sub_object(component.structure):
         line1 = [r"\text{{{nb}}}".format(nb=n.printed) for n in self.line1]
         line2 = [r"\text{{{nb}}}".format(nb=n.printed) for n in self.line2]
         compact = not self.slideshow
-        bl = {True: 3, False: None}[compact]
+        bl = {True: '3pt', False: None}[compact]
         self.table_question = Table([(n1, n2) for n1, n2 in zip(line1, line2)],
                                     compact=compact, baseline=bl)
         self.wording = _('This table is proportional. True or false?')
@@ -63,16 +63,13 @@ class sub_object(component.structure):
 
     def q(self, **options):
         if self.slideshow:
-            template_name = 'templates/slide_picture_wording.tex'
+            output = SlideContent(wording1=self.wording,
+                                  picture=self.table_question.printed,
+                                  height1='2.5pt')
         else:
-            template_name = 'templates/inline_picture_wording.tex'
-        template = (Path(__file__).parent / template_name).read_text()
-        template = template.replace('PICTURE', self.table_question.printed)\
-            .replace('WORDING', self.wording)
-        if self.slideshow:
-            return template.replace('HEIGHT', '2.5')
-        else:
-            return template.replace('COLW1', '5').replace('COLW2', '8')
+            output = TabularCellPictureWording(self.table_question.printed,
+                                               self.wording)
+        return str(output)
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'

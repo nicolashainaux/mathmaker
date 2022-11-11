@@ -1,14 +1,12 @@
-\begin{tikzpicture}OPTIONS
 \fill[lightgray!50] (1,0.5) rectangle ++(2,-0.5);
 \draw[thick,gray] (1,0.5) -- (1,0);
 \draw[thick,gray] (3,0.5) -- (3,0);
-\node[] at (2,0.25) {$COL1$};
+\nodeCELLNODEOPTIONS at (2,0.25) {$COL1$};
 \foreach \y/\row/\cell in{0/ROW1/CELL1,-0.5/ROW2/CELL2}
 {\fill[lightgray!50] (-1,\y) rectangle ++(2,-0.5);
 \draw[thick,gray] (-1,\y) -- (1,\y);
 \draw[thick,gray] (-1,\y-0.5) -- (1,\y-0.5);
 \draw[thick] (1,\y) rectangle ++(2,-0.5) ;
-\node[] at (2,\y-0.25) {$\cell$};
-\node[] at (0,\y-0.25) {$\row$};
+\nodeCOORDOPTIONS at (2,\y-0.25) {$\cell$};
+\nodeCOORDOPTIONS at (0,\y-0.25) {$\row$};
 }
-\end{tikzpicture}
