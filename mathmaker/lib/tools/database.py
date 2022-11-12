@@ -779,6 +779,10 @@ class source(object):
                 # does not raise an error.
                 if any([c not in '0123456789.' for c in str(kwargs[kw])]):
                     simple_quote = "'"
+                # EXCEPTION, if the number compared to is another column
+                # then do not quote it
+                if str(kwargs[kw]).startswith('nb'):
+                    simple_quote = ""
                 result += next(hook(kn)) + key + rel_sign + simple_quote \
                     + str(kwargs[kw]) + simple_quote + " "
                 kn += 1
@@ -1862,7 +1866,7 @@ class mc_source(object):
     ##
     #   @brief  Handles the choice of the next value to return
     def next(self, source_id, qkw=None, **kwargs):
-        if source_id.startswith('autofit'):
+        if source_id.startswith('autofit') or source_id == 'default':
             return (source_id, )
         if qkw is None:
             qkw = {}
