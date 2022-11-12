@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2022-11-05 16:11+0100\n"
+"PO-Revision-Date: 2022-11-12 17:18+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -1849,22 +1849,22 @@ msgstr "Calcul mental : divisions"
 msgid "Mental calculation: multiplication by 11"
 msgstr "Calcul mental : multiplications par 11"
 
-#: lib/document/content/component.py:517
+#: lib/document/content/component.py:525
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr "Combien faut-il ajouter à {number1} pour obtenir {number2} ?"
 
-#: lib/document/content/component.py:522
+#: lib/document/content/component.py:530
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr "Quel est le complément à 10 de {number} ?"
 
-#: lib/document/content/component.py:526
+#: lib/document/content/component.py:534
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr "Quel est le complément à 100 de {number} ?"
 
-#: lib/document/content/component.py:530
+#: lib/document/content/component.py:538
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr "Quel est le complément à {number1} de {number2} ?"
@@ -1877,14 +1877,14 @@ msgstr "Pour pouvoir mettre les documents en couleur"
 msgid "Answers!"
 msgstr "Allez, on corrige !"
 
+#: lib/document/content/calculation/addi_direct.py:141
+#: lib/document/content/calculation/multi_direct.py:65
 #: lib/document/content/calculation/numeric_expansion.py:54
 #: lib/document/content/calculation/multi_clever.py:108
-#: lib/document/content/calculation/addi_direct.py:141
-#: lib/document/content/calculation/subtr_direct.py:151
-#: lib/document/content/calculation/multi_direct.py:65
-#: lib/document/content/calculation/order_of_operations.py:1465
-#: lib/document/content/calculation/numeric_factorization.py:74
 #: lib/document/content/calculation/divi_direct.py:56
+#: lib/document/content/calculation/numeric_factorization.py:98
+#: lib/document/content/calculation/subtr_direct.py:151
+#: lib/document/content/calculation/order_of_operations.py:1465
 #, python-brace-format
 msgid "{math_expr} = {q_mark}"
 msgstr "{math_expr} = {q_mark}"
@@ -3191,11 +3191,12 @@ msgstr "Calcul mental : passage de la <BELT>"
 msgid "Answers (<BELT>)"
 msgstr "Réponses (<BELT>)"
 
+#: data/frameworks/mental_calculation/y2b3.yaml:51
 #: data/frameworks/mental_calculation/y2b3.yaml:37
-#: data/frameworks/mental_calculation/y2b3.yaml:40
-#: data/frameworks/mental_calculation/y2b1.yaml:3
 #: data/frameworks/mental_calculation/y2b2.yaml:3
+#: data/frameworks/mental_calculation/y2b3.yaml:40
 #: data/frameworks/mental_calculation/y2b3.yaml:35
+#: data/frameworks/mental_calculation/y2b1.yaml:3
 msgid "Mental calculation: four operations"
 msgstr "Calcul mental : quatre opérations"
 
@@ -3212,7 +3213,7 @@ msgstr ""
 msgid "{n1} (or {n2})"
 msgstr "{n1} (ou {n2})"
 
-#: lib/document/content/calculation/proportionality_coefficient.py:44
+#: lib/document/content/calculation/proportionality_coefficient.py:43
 msgid "Coefficient of this proportional table?"
 msgstr "Coefficient de ce tableau de proportionnalité ?"
 
@@ -3233,9 +3234,18 @@ msgstr "Calcul mental : proportionnalité"
 msgid "In {cell_ref}, one types {formula}."
 msgstr "En {cell_ref}, on entre {formula}."
 
-#: lib/document/content/calculation/spreadsheet_formula.py:90
+#: lib/document/content/calculation/spreadsheet_formula.py:88
 msgid "What will it display once enter is pressed?"
 msgstr "Que va-t-il s'y afficher après avoir pressé entrée ?"
+
+#: lib/document/content/calculation/read_coordinates.py:52
+#, python-brace-format
+msgid "Coordinates of point {point_name}?"
+msgstr "Coordonnées du point {point_name} ?"
+
+#: data/frameworks/mental_calculation/y2b3.yaml:27
+msgid "Mental calculation: signed numbers"
+msgstr "Calcul mental : nombres relatifs"
 
 #, python-brace-format
 #~ msgid "One types {formula} in {cell_ref} cell."

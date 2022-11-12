@@ -1606,22 +1606,22 @@ msgstr ""
 msgid "Mental calculation: multiplication by 11"
 msgstr ""
 
-#: lib/document/content/component.py:517
+#: lib/document/content/component.py:525
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr ""
 
-#: lib/document/content/component.py:522
+#: lib/document/content/component.py:530
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:526
+#: lib/document/content/component.py:534
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:530
+#: lib/document/content/component.py:538
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr ""
@@ -1634,14 +1634,14 @@ msgstr ""
 msgid "Answers!"
 msgstr ""
 
+#: lib/document/content/calculation/addi_direct.py:141
+#: lib/document/content/calculation/multi_direct.py:65
 #: lib/document/content/calculation/numeric_expansion.py:54
 #: lib/document/content/calculation/multi_clever.py:108
-#: lib/document/content/calculation/addi_direct.py:141
-#: lib/document/content/calculation/subtr_direct.py:151
-#: lib/document/content/calculation/multi_direct.py:65
-#: lib/document/content/calculation/order_of_operations.py:1465
-#: lib/document/content/calculation/numeric_factorization.py:74
 #: lib/document/content/calculation/divi_direct.py:56
+#: lib/document/content/calculation/numeric_factorization.py:98
+#: lib/document/content/calculation/subtr_direct.py:151
+#: lib/document/content/calculation/order_of_operations.py:1465
 #, python-brace-format
 msgid "{math_expr} = {q_mark}"
 msgstr ""
@@ -2800,11 +2800,12 @@ msgstr ""
 msgid "Answers (<BELT>)"
 msgstr ""
 
+#: data/frameworks/mental_calculation/y2b3.yaml:51
 #: data/frameworks/mental_calculation/y2b3.yaml:37
-#: data/frameworks/mental_calculation/y2b3.yaml:40
-#: data/frameworks/mental_calculation/y2b1.yaml:3
 #: data/frameworks/mental_calculation/y2b2.yaml:3
+#: data/frameworks/mental_calculation/y2b3.yaml:40
 #: data/frameworks/mental_calculation/y2b3.yaml:35
+#: data/frameworks/mental_calculation/y2b1.yaml:3
 msgid "Mental calculation: four operations"
 msgstr ""
 
@@ -2821,7 +2822,7 @@ msgstr ""
 msgid "{n1} (or {n2})"
 msgstr ""
 
-#: lib/document/content/calculation/proportionality_coefficient.py:44
+#: lib/document/content/calculation/proportionality_coefficient.py:43
 msgid "Coefficient of this proportional table?"
 msgstr ""
 
@@ -2842,6 +2843,15 @@ msgstr ""
 msgid "In {cell_ref}, one types {formula}."
 msgstr ""
 
-#: lib/document/content/calculation/spreadsheet_formula.py:90
+#: lib/document/content/calculation/spreadsheet_formula.py:88
 msgid "What will it display once enter is pressed?"
+msgstr ""
+
+#: lib/document/content/calculation/read_coordinates.py:52
+#, python-brace-format
+msgid "Coordinates of point {point_name}?"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y2b3.yaml:27
+msgid "Mental calculation: signed numbers"
 msgstr ""
