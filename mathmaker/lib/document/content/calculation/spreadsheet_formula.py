@@ -59,7 +59,6 @@ class sub_object(component.structure):
         # it here, it would be overriden. Save it instead.
         self.options = options
         required.package['sourcecodepro'] = True
-        required.package['tikz'] = True
         build_data = process_autofit(build_data[0])
         self.cell1 = self.cell2 = self.cell3 = ''
         self.col = shared.cols_for_spreadsheets_source.next()[0]

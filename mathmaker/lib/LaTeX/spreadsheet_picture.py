@@ -22,6 +22,7 @@
 
 from pathlib import Path
 
+from mathmakerlib import required
 from mathmakerlib.LaTeX import TikZPicture, OptionsList
 
 
@@ -49,6 +50,7 @@ class SpreadsheetPicture(object):
         self.scale = scale
 
     def __str__(self):
+        required.package['tikz'] = True
         template_name = \
             f'templates/spreadsheet_{self.variant}_{self.scheme}.tikz'
         content = (Path(__file__).parent / template_name).read_text()
