@@ -1,0 +1,2 @@
+\nodePOINTOPTIONS at (POINTX,POINTY) {\textcolor{COLOR}{$\boldsymbol{\times}$}};
+\nodeLABELOPTIONS at (LABELX,LABELY) {\textcolor{COLOR}{$\text{LABEL}$}

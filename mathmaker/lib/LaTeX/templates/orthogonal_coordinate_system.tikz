@@ -1,0 +1,23 @@
+\draw[step=1,gray,GRIDTHICKNESS] (-5,-5) grid (5,5);
+
+\foreach \x in{-4,...,-1}{
+\draw[AXESTHICKNESS,black!70] (\x,-0.2) -- (\x,0.2);
+\nodeGRADOPTIONS at (\x-0.2,-0.6) {$\text{\x}$};
+}
+\foreach \x in{1,...,4}{
+\draw[AXESTHICKNESS,black!70] (\x,-0.2) -- (\x,0.2);
+\nodeGRADOPTIONS at (\x,-0.6) {$\text{\x}$};
+}
+\foreach \y in{-4,...,-1}{
+\draw[AXESTHICKNESS,black!70] (-0.2,\y) -- (0.2,\y);
+\nodeGRADOPTIONS at (-0.55,\y-0.1) {$\text{\y}$};
+}
+\foreach \y in{1,...,4}{
+\draw[AXESTHICKNESS,black!70] (-0.2,\y) -- (0.2,\y);
+\nodeGRADOPTIONS at (-0.5,\y) {$\text{\y}$};
+}
+\draw[AXESTHICKNESS,->] (0,-5) -- (0,5);
+\draw[AXESTHICKNESS,->] (-5,0) -- (5,0);
+
+\nodeGRADOPTIONS at (-0.45,-0.45) {\text{0}};
+POINT};

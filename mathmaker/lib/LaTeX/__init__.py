@@ -23,5 +23,8 @@
 from .slide_content import SlideContent
 from .spreadsheet_picture import SpreadsheetPicture
 from .tabular_cell_picture_wording import TabularCellPictureWording
+from .orthogonal_coordinate_system_picture \
+    import OrthogonalCoordinateSystemPicture
 
-__all__ = [SlideContent, SpreadsheetPicture, TabularCellPictureWording]
+__all__ = [SlideContent, SpreadsheetPicture, TabularCellPictureWording,
+           OrthogonalCoordinateSystemPicture]
