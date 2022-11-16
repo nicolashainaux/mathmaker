@@ -66,6 +66,7 @@ SUB_NB = re.compile(r'([' + _LINE + r']+)' + _FETCH_NB + r'$')
 CURLY_BRACES_CONTENT = re.compile(r'{([' + _CHARS + r']+)}')
 
 AUTOFIT_SOURCES = {'fid': 'formulae:SPAN',
+                   'Sid': 'signed_nb_comparisons:SPAN',
                    'pr1': 'nnpairs:SPAN',
                    'sq1': 'nnpairs:SPAN, code=2',
                    'at1': 'nnsingletons:SPAN',
@@ -78,10 +79,11 @@ AUTOFIT_SOURCES = {'fid': 'formulae:SPAN',
                    'st2': 'nnsingletons:SPAN',
                    'sf2': 'nnsingletons:SPAN',
                    'sd2': 'nnsingletons:SPAN'}
-AUTOFIT_SPANS = {'fid': '100-123', 'pr1': '3-9', 'sq1': '3-9', 'at1': '1-9',
-                 'st1': '1-9', 'sf1': '2,4,10,100', 'sd1': '2-10,15,25,100',
-                 'pr2': '3-9', 'sq2': '3-9', 'at2': '1-9', 'st2': '1-9',
-                 'sf2': '2,4,10,100', 'sd2': '2-10,15,25,100'}
+AUTOFIT_SPANS = {'fid': '100-123', 'Sid': '0-11', 'pr1': '3-9', 'sq1': '3-9',
+                 'at1': '1-9', 'st1': '1-9', 'sf1': '2,4,10,100',
+                 'sd1': '2-10,15,25,100', 'pr2': '3-9', 'sq2': '3-9',
+                 'at2': '1-9', 'st2': '1-9', 'sf2': '2,4,10,100',
+                 'sd2': '2-10,15,25,100'}
 
 TESTFILE_TEMPLATE = """# -*- coding: utf-8 -*-
 
