@@ -198,6 +198,8 @@ def __main__():
             (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
          '''CREATE TABLE formulae
             (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
+         '''CREATE TABLE signed_nb_comparisons
+            (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
          '''CREATE TABLE cols_for_spreadsheets
             (id INTEGER PRIMARY KEY, col TEXT, drawDate INTEGER)''',
          # DECIMAL(2, 3) stands for up to 2 integer digits,
@@ -1143,6 +1145,14 @@ def __main__():
     db_rows = [(i + 100, 0) for i in range(25)]
     db.executemany("INSERT "
                    "INTO formulae"
+                   "(nb1, drawDate) "
+                   "VALUES(?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert variants of signed numbers comparisons...\n')
+    db_rows = [(i, 0) for i in range(12)]
+    db.executemany("INSERT "
+                   "INTO signed_nb_comparisons"
                    "(nb1, drawDate) "
                    "VALUES(?, ?)",
                    db_rows)

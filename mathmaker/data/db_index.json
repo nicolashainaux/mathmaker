@@ -131,6 +131,11 @@
         "nb1",
         "drawDate"
     ],
+    "signed_nb_comparisons": [
+        "id",
+        "nb1",
+        "drawDate"
+    ],
     "cols_for_spreadsheets": [
         "id",
         "col",

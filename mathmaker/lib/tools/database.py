@@ -956,6 +956,7 @@ def db_table(tag):
     elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
                  'digits_places', 'fracdigits_places', 'simple_fractions',
                  'simple_improper_fractions', 'formulae',
+                 'signed_numbers_comparisons_source',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
                  'int_quintuples', 'int_sextuples', 'anglessets', 'times',
                  'multiplesof10', 'time_units_couples',
@@ -1008,6 +1009,7 @@ def classify_tag(tag):
                  'int_sextuples', 'anglessets', 'rightcuboids', 'times',
                  'clocktime_data', 'multiplesof10', 'improper_fractions',
                  'simple_improper_fractions', 'formulae',
+                 'signed_numbers_comparisons_source',
                  'cols_for_spreadsheets', 'coordinates_xy']:
         # __
         return tag
@@ -1991,6 +1993,8 @@ class mc_source(object):
             return shared.simple_improper_fractions_source.next(**kwargs)
         elif tag_classification == 'formulae':
             return shared.formulae_source.next(**kwargs)
+        elif tag_classification == 'signed_numbers_comparisons':
+            return shared.signed_numbers_comparisons_source.next(**kwargs)
         elif tag_classification == 'coordinates_xy':
             return shared.coordinates_xy_source.next(**kwargs)
         elif tag_classification == 'cols_for_spreadsheets':
