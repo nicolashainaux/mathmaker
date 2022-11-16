@@ -111,48 +111,6 @@ class sub_object(component.structure):
     def js_a(self, **kwargs):
         return [self.answer.uiprinted]
 
-    def setup_sources(self, build_data):
-        self.at1_source = build_data['at1']['source']
-        self.at1_attr = {k: build_data['at1'][k]
-                         for k in build_data['at1']
-                         if k != 'source'}
-        self.sf1_source = build_data['sf1']['source']
-        self.sf1_attr = {k: build_data['sf1'][k]
-                         for k in build_data['sf1']
-                         if k != 'source'}
-        self.sd1_source = build_data['sd1']['source']
-        self.sd1_attr = {k: build_data['sd1'][k]
-                         for k in build_data['sd1']
-                         if k != 'source'}
-        self.pr1_source = build_data['pr1']['source']
-        self.pr1_attr = {k: build_data['pr1'][k]
-                         for k in build_data['pr1']
-                         if k != 'source'}
-        self.sq1_source = build_data['sq1']['source']
-        self.sq1_attr = {k: build_data['sq1'][k]
-                         for k in build_data['sq1']
-                         if k != 'source'}
-        self.at2_source = build_data['at2']['source']
-        self.at2_attr = {k: build_data['at2'][k]
-                         for k in build_data['at2']
-                         if k != 'source'}
-        self.sf2_source = build_data['sf2']['source']
-        self.sf2_attr = {k: build_data['sf2'][k]
-                         for k in build_data['sf2']
-                         if k != 'source'}
-        self.sd2_source = build_data['sd2']['source']
-        self.sd2_attr = {k: build_data['sd2'][k]
-                         for k in build_data['sd2']
-                         if k != 'source'}
-        self.pr2_source = build_data['pr2']['source']
-        self.pr2_attr = {k: build_data['pr2'][k]
-                         for k in build_data['pr2']
-                         if k != 'source'}
-        self.sq2_source = build_data['sq2']['source']
-        self.sq2_attr = {k: build_data['sq2'][k]
-                         for k in build_data['sq2']
-                         if k != 'source'}
-
     def setup_picture(self, build_data):
         var_nb = self.variant_id[0]
         bl = {1: '30pt', 2: '3pt'}[self.scheme]

@@ -625,6 +625,68 @@ class structure(object):
         for s in self.projection.edges:
             s.label_scale = Number('0.75')
 
+    def setup_sources(self, build_data):
+        # additive term #1
+        self.at1_source = build_data['at1']['source']
+        self.at1_attr = {k: build_data['at1'][k]
+                         for k in build_data['at1']
+                         if k != 'source'}
+        # subtractive term #1
+        self.st1_source = build_data['st1']['source']
+        self.st1_attr = {k: build_data['st1'][k]
+                         for k in build_data['st1']
+                         if k != 'source'}
+        # single factor #1
+        self.sf1_source = build_data['sf1']['source']
+        self.sf1_attr = {k: build_data['sf1'][k]
+                         for k in build_data['sf1']
+                         if k != 'source'}
+        # single divisor #1
+        self.sd1_source = build_data['sd1']['source']
+        self.sd1_attr = {k: build_data['sd1'][k]
+                         for k in build_data['sd1']
+                         if k != 'source'}
+        # product #1
+        self.pr1_source = build_data['pr1']['source']
+        self.pr1_attr = {k: build_data['pr1'][k]
+                         for k in build_data['pr1']
+                         if k != 'source'}
+        # square #1
+        self.sq1_source = build_data['sq1']['source']
+        self.sq1_attr = {k: build_data['sq1'][k]
+                         for k in build_data['sq1']
+                         if k != 'source'}
+        # additive term #2
+        self.at2_source = build_data['at2']['source']
+        self.at2_attr = {k: build_data['at2'][k]
+                         for k in build_data['at2']
+                         if k != 'source'}
+        # subtractive term #2
+        self.st2_source = build_data['st2']['source']
+        self.st2_attr = {k: build_data['st2'][k]
+                         for k in build_data['st2']
+                         if k != 'source'}
+        # single factor #2
+        self.sf2_source = build_data['sf2']['source']
+        self.sf2_attr = {k: build_data['sf2'][k]
+                         for k in build_data['sf2']
+                         if k != 'source'}
+        # single divisor #2
+        self.sd2_source = build_data['sd2']['source']
+        self.sd2_attr = {k: build_data['sd2'][k]
+                         for k in build_data['sd2']
+                         if k != 'source'}
+        # product #2
+        self.pr2_source = build_data['pr2']['source']
+        self.pr2_attr = {k: build_data['pr2'][k]
+                         for k in build_data['pr2']
+                         if k != 'source'}
+        # square #2
+        self.sq2_source = build_data['sq2']['source']
+        self.sq2_attr = {k: build_data['sq2'][k]
+                         for k in build_data['sq2']
+                         if k != 'source'}
+
     def setup(self, arg, **kwargs):
         if type(arg) is not str:
             raise TypeError('arg must be a str')
