@@ -1606,22 +1606,22 @@ msgstr ""
 msgid "Mental calculation: multiplication by 11"
 msgstr ""
 
-#: lib/document/content/component.py:525
+#: lib/document/content/component.py:536
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr ""
 
-#: lib/document/content/component.py:530
+#: lib/document/content/component.py:541
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:534
+#: lib/document/content/component.py:545
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:538
+#: lib/document/content/component.py:549
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr ""
@@ -2294,13 +2294,15 @@ msgstr ""
 
 #: lib/document/content/calculation/divisibility_rule.py:62
 #: lib/document/content/calculation/proportionality_findout.py:41
+#: lib/document/content/calculation/compare_signed_numbers.py:68
 #: lib/document/content/calculation/divisibility_vocabulary.py:62
 msgid "True"
 msgstr ""
 
 #: lib/document/content/calculation/divisibility_rule.py:69
-#: lib/document/content/calculation/divisibility_vocabulary.py:66
 #: lib/document/content/calculation/proportionality_findout.py:43
+#: lib/document/content/calculation/compare_signed_numbers.py:68
+#: lib/document/content/calculation/divisibility_vocabulary.py:66
 msgid "False"
 msgstr ""
 
@@ -2800,12 +2802,13 @@ msgstr ""
 msgid "Answers (<BELT>)"
 msgstr ""
 
-#: data/frameworks/mental_calculation/y2b3.yaml:51
-#: data/frameworks/mental_calculation/y2b3.yaml:37
+#: data/frameworks/mental_calculation/y2b1.yaml:3
+#: data/frameworks/mental_calculation/y2b3.yaml:54
 #: data/frameworks/mental_calculation/y2b2.yaml:3
+#: data/frameworks/mental_calculation/y2b3.yaml:37
+#: data/frameworks/mental_calculation/y2b3.yaml:51
 #: data/frameworks/mental_calculation/y2b3.yaml:40
 #: data/frameworks/mental_calculation/y2b3.yaml:35
-#: data/frameworks/mental_calculation/y2b1.yaml:3
 msgid "Mental calculation: four operations"
 msgstr ""
 
@@ -2854,4 +2857,8 @@ msgstr ""
 
 #: data/frameworks/mental_calculation/y2b3.yaml:27
 msgid "Mental calculation: signed numbers"
+msgstr ""
+
+#: lib/document/content/calculation/compare_signed_numbers.py:69
+msgid "(True, or false?)"
 msgstr ""
