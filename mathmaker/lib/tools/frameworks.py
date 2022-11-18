@@ -73,17 +73,19 @@ AUTOFIT_SOURCES = {'fid': 'formulae:SPAN',
                    'st1': 'nnsingletons:SPAN',
                    'sf1': 'nnsingletons:SPAN',
                    'sd1': 'nnsingletons:SPAN',
+                   'sF1': 'simple_fractions',
                    'pr2': 'nnpairs:SPAN',
                    'sq2': 'nnpairs:SPAN, code=2',
                    'at2': 'nnsingletons:SPAN',
                    'st2': 'nnsingletons:SPAN',
                    'sf2': 'nnsingletons:SPAN',
-                   'sd2': 'nnsingletons:SPAN'}
+                   'sd2': 'nnsingletons:SPAN',
+                   'sF2': 'simple_fractions'}
 AUTOFIT_SPANS = {'fid': '100-123', 'Sid': '0-11', 'pr1': '3-9', 'sq1': '3-9',
                  'at1': '1-9', 'st1': '1-9', 'sf1': '2,4,10,100',
-                 'sd1': '2-10,15,25,100', 'pr2': '3-9', 'sq2': '3-9',
-                 'at2': '1-9', 'st2': '1-9', 'sf2': '2,4,10,100',
-                 'sd2': '2-10,15,25,100'}
+                 'sd1': '2-10,15,25,100', 'sF1': '', 'pr2': '3-9',
+                 'sq2': '3-9', 'at2': '1-9', 'st2': '1-9', 'sf2': '2,4,10,100',
+                 'sd2': '2-10,15,25,100', 'sF2': ''}
 
 TESTFILE_TEMPLATE = """# -*- coding: utf-8 -*-
 
