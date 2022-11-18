@@ -51,6 +51,7 @@ from .calculation import proportionality_coefficient
 from .calculation import proportionality_findout
 from .calculation import proportionality_fill
 from .calculation import spreadsheet_formula
+from .calculation import compare_signed_numbers
 from .geometry import intercept_theorem_triangle
 from .geometry import intercept_theorem_triangle_formula
 from .geometry import intercept_theorem_butterfly
@@ -81,7 +82,7 @@ __all__ = [expand_simple, expand_double,
            addi_hole, subtr_hole,
            units_conversion, time_units_conversion, decimal_numerals,
            percent_direct, divi_euclidean, mini_pb_proportionality,
-           mini_pb_time,
+           mini_pb_time, compare_signed_numbers,
            numeric_expansion, numeric_factorization,
            divisibility_vocabulary, divisibility_rule,
            fraction_simplification, fractions_conversions,
