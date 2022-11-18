@@ -171,26 +171,27 @@ class structure(object):
         all_nb_ids = [i for i in included]
         if self.nb_variant.startswith('decimal'):
             deci_nb = int(self.nb_variant[-1])  # so, from decimal1 up to 9
-            # In order to ensure we'll have at least one decimal number,
-            # we should try to remove all multiples of 10 from our possible
-            # choices:
-            all_nb_ids = [i for i in all_nb_ids
-                          if not getattr(self, 'nb' + str(i)) % 10 == 0]
-            # But if this would lead to remove too many numbers, then
-            # we have to change the extraneous multiples of 10
-            if len(all_nb_ids) < deci_nb:
-                remaining = list(
-                    set(i + 1 for i in range(self.nb_nb))
-                    - set(all_nb_ids))
-                while len(all_nb_ids) < min(deci_nb, self.nb_nb):
-                    random.shuffle(remaining)
-                    i = remaining.pop()
-                    setattr(self, 'nb' + str(i),
-                            getattr(self,
-                                    'nb' + str(i))
-                            + random.choice([i for i in range(-4, 5)
-                                             if i != 0]))
-                    all_nb_ids += [i]
+            if kwargs.get('enforce_decimal', True):
+                # In order to ensure we'll have at least one decimal number,
+                # we should try to remove all multiples of 10 from our possible
+                # choices:
+                all_nb_ids = [i for i in all_nb_ids
+                              if not getattr(self, 'nb' + str(i)) % 10 == 0]
+                # But if this would lead to remove too many numbers, then
+                # we have to change the extraneous multiples of 10
+                if len(all_nb_ids) < deci_nb:
+                    remaining = list(
+                        set(i + 1 for i in range(self.nb_nb))
+                        - set(all_nb_ids))
+                    while len(all_nb_ids) < min(deci_nb, self.nb_nb):
+                        random.shuffle(remaining)
+                        i = remaining.pop()
+                        setattr(self, 'nb' + str(i),
+                                getattr(self,
+                                        'nb' + str(i))
+                                + random.choice([i for i in range(-4, 5)
+                                                 if i != 0]))
+                        all_nb_ids += [i]
             while deci_nb:
                 # still not enough numbers as required
                 # e.g. to divide one number by 100 (i.e. twice by 10)
@@ -237,11 +238,21 @@ class structure(object):
                     or new_value not in self.nb_list):
                     setattr(self, 'nb' + str(chosen_ones[i]), new_value)
         if self.nb_variant.startswith('multiplesof10'):
-            f1, f2 = next(shared.multiplesof10_source)
-            f1, f2 = {True: (f1, f2),
-                      False: (f2, f1)}[random.choice([True, False])]
-            self.nb1 *= f1
-            self.nb2 *= f2
+            if len(included) == 1:
+                f = random.choice([10, 100, 1000])
+                setattr(self, f'nb{included[0]}',
+                        f * getattr(self, f'nb{included[0]}'))
+            else:
+                f1, f2 = next(shared.multiplesof10_source)
+                f1, f2 = {True: (f1, f2),
+                          False: (f2, f1)}[random.choice([True, False])]
+                self.nb1 *= f1
+                self.nb2 *= f2
+            if kwargs.get('standardize_decimal_numbers', False):
+                if isinstance(self.nb1, Number):
+                    self.nb1 = self.nb1.standardized()
+                if isinstance(self.nb2, Number):
+                    self.nb2 = self.nb2.standardized()
         if kwargs.get('force_a_nb_to', None) is not None:
             forced_nb = Number(kwargs.get('force_a_nb_to'))
             if all(n != forced_nb for n in self.nb_list):
@@ -656,6 +667,11 @@ class structure(object):
         self.sq1_attr = {k: build_data['sq1'][k]
                          for k in build_data['sq1']
                          if k != 'source'}
+        # simple fraction #1
+        self.sF1_source = build_data['sF1']['source']
+        self.sF1_attr = {k: build_data['sF1'][k]
+                         for k in build_data['sF1']
+                         if k != 'source'}
         # additive term #2
         self.at2_source = build_data['at2']['source']
         self.at2_attr = {k: build_data['at2'][k]
@@ -685,6 +701,11 @@ class structure(object):
         self.sq2_source = build_data['sq2']['source']
         self.sq2_attr = {k: build_data['sq2'][k]
                          for k in build_data['sq2']
+                         if k != 'source'}
+        # simple fraction #2
+        self.sF2_source = build_data['sF2']['source']
+        self.sF2_attr = {k: build_data['sF2'][k]
+                         for k in build_data['sF2']
                          if k != 'source'}
 
     def setup(self, arg, **kwargs):
