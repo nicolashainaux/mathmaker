@@ -1871,6 +1871,9 @@ class mc_source(object):
     def next(self, source_id, qkw=None, **kwargs):
         if source_id.startswith('autofit') or source_id == 'default':
             return (source_id, )
+        if source_id == 'simple_fractions':
+            source_id = random.choice(['simple_proper_fractions',
+                                       'simple_improper_fractions'])
         if qkw is None:
             qkw = {}
         not_in = kwargs.get('not_in', None)
