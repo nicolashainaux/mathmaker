@@ -687,8 +687,7 @@ def _match_qid_sourcenb(q_id: str, source_nb: str, variant: str):
                     source_nb.startswith('properfraction'),
                     source_nb == 'bypass'])
     elif q_id == 'fraction_of_a_linesegment':
-        return any([source_nb.startswith('properfraction'),
-                    source_nb.startswith('simple_fractions'),
+        return any([source_nb.startswith('simple_proper_fractions'),
                     source_nb.startswith('intpairs'),
                     source_nb.startswith('nnpairs:'),
                     (len(source_nb.split(sep=';;')) == 2

@@ -39,11 +39,11 @@ fractions: !!omap
   - exercise: !!omap
     - layout:
       - min_row_height: 0.9
-    - questions: fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (4)
+    - questions: fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (4)
                  read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
-                 read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
+                 read abscissa, start_at_zero=true -> simple_proper_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
                  fraction_of a_rectangle -> intpairs_4to9;;intpairs_6to9 (1)
-                 fraction_of a_linesegment -> simple_fractions (1)
+                 fraction_of a_linesegment -> simple_proper_fractions (1)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (2)
 
 estimations: !!omap
@@ -135,8 +135,8 @@ exam: !!omap
                  mini_pb time -> clocktime_data (1)
                  mini_pb proportionality -> mergedinttriples_3to9 (1)
                  decimal numerals -> decimals (1)
-                 read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
-                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 read abscissa, start_at_zero=true -> simple_proper_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
                  [1][units conversion -> unitspairs, level=2, dimension=1 (1)
                      units conversion -> unitspairs, level=3, dimension=1 (1)]
                  [1][time_units conversion, level=1 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
@@ -176,7 +176,7 @@ W01d: !!omap
   - exercise: !!omap
     - questions: mini_pb proportionality -> mergedinttriples_3to9 (1)
                  estimation_of number -> nnsingletons:70-1000 (1)
-                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (3)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (3)
 
 W02a: !!omap
   - preset: "mental calculation slideshow"
@@ -187,10 +187,10 @@ W02b: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
-                 read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
+                 read abscissa, start_at_zero=true -> simple_proper_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
                  divisibility vocabulary -> intpairs_3to9 (1)
                  perimeter polygon, qvariant=missing_length -> polygons, sum_ingredients=int_2to10, sides_nb=3-4 (1)
-                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
 
 W02c: !!omap
   - preset: "mental calculation slideshow"
@@ -203,7 +203,7 @@ W02d: !!omap
   - exercise: !!omap
     - questions: multi clever -> singleint_2to99 (1)
                  estimation_of number -> nnsingletons:1000-10000 (1)
-                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
                  mini_pb proportionality -> mergedinttriples_3to9 (1)
                  divisibility vocabulary -> intpairs_3to9 (1)
 
@@ -221,7 +221,7 @@ W03b: !!omap
     - questions: percent direct -> 75%of..., context=simple_unit (1)
                  mini_pb proportionality -> mergedinttriples_3to9 (1)
                  multi clever -> intpairs_2to9 (1)
-                 read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
+                 read abscissa, start_at_zero=true -> simple_proper_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
                  estimation_of number -> nnsingletons:1000-10000 (1)
 
 W03c: !!omap
@@ -229,7 +229,7 @@ W03c: !!omap
   - exercise: !!omap
     - questions: percent direct -> 10%of..., context=simple_unit (1)
                  divisibility vocabulary -> intpairs_3to9 (1)
-                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
                  volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
                  addi direct, context=angles -> nnpairs:11-69×90 (1)
 
@@ -249,7 +249,7 @@ W04a: !!omap
                  divisibility vocabulary -> intpairs_3to9 (1)
                  multi clever -> intpairs_2to9 (1)
                  estimation_of number -> nnsingletons:1000-10000 (1)
-                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
 
 W04b: !!omap
   - preset: "mental calculation slideshow"
@@ -266,7 +266,7 @@ W04c: !!omap
     - questions: percent direct -> 10%of..., context=simple_unit (1)
                  divisibility vocabulary -> intpairs_3to9 (1)
                  estimation_of number -> nnsingletons:1000-10000 (1)
-                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
                  area rectangle, picture=true -> nnpairs:3-6×15,25 (1)
 
 W04d: !!omap

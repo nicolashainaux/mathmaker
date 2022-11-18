@@ -53,7 +53,7 @@ def init():
     global nnquadruples_source
     global nnquintuples_source
     global nnsextuples_source
-    global simple_fractions_source
+    global simple_proper_fractions_source
     global simple_improper_fractions_source
     global improper_fractions_source
     global single_ints_source
@@ -204,8 +204,8 @@ def init():
     int_sextuples_source = database.source("int_sextuples",
                                            ["id", "nb1", "nb2", "nb3", "nb4",
                                             "nb5", "nb6"])
-    simple_fractions_source = database.source('simple_fractions',
-                                              ['id', 'nb1', 'nb2'])
+    simple_proper_fractions_source = database.source(
+        'simple_proper_fractions', ['id', 'nb1', 'nb2'])
     improper_fractions_source = database.source('improper_fractions',
                                                 ['id', 'nb1', 'nb2'])
     simple_improper_fractions_source = database.source(

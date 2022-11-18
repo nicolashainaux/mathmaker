@@ -14,7 +14,7 @@ proportionality: !!omap
                  proportionality coefficient -> mergednnpairs:3-9 (1)
                  [1][proportionality coefficient -> mergednnpairs:3-6×15 (1)
                      proportionality coefficient -> mergednnpairs:3-6×25 (1)]
-                 [1][proportionality coefficient -> simple_fractions;;nntriples:3-9, reducible=0, code=1_1_1, coeff_variant=fraction, nb_variant=decimal1 (1)
+                 [1][proportionality coefficient -> simple_proper_fractions;;nntriples:3-9, reducible=0, code=1_1_1, coeff_variant=fraction, nb_variant=decimal1 (1)
                      proportionality coefficient -> simple_improper_fractions;;nntriples:3-9, reducible=0, code=1_1_1, coeff_variant=fraction, nb_variant=decimal1 (1)]
                  [2][mini_pb proportionality -> mergednnpairs:3-6×15 (1)
                      mini_pb proportionality -> mergednnpairs:3-6×25 (1)

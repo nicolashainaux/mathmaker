@@ -43,7 +43,7 @@ fractions: !!omap
     - layout:
       - min_row_height: 0.9
     - questions: read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (2)
-                 read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (2)
+                 read abscissa, start_at_zero=true -> simple_proper_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (2)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (4)
                  decimal numerals, direction=to_decimal -> decimals (1)
                  decimal numerals, direction=to_fraction -> decimals (1)
@@ -94,7 +94,7 @@ exam: !!omap
                  perimeter rectangle, picture=true -> nnpairs:3-9 (1)
                  [1][perimeter righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
                      perimeter polygon -> polygons, sum_ingredients=int_2to10, level=4 (1)]
-                 read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
+                 read abscissa, start_at_zero=true -> simple_proper_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
                  [1][vocabulary half -> nnpairs:2×6-15 (1)
                      vocabulary third -> table_3 (1)
@@ -160,7 +160,7 @@ W02c: !!omap
 W03a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
+    - questions: read abscissa, start_at_zero=true -> simple_proper_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
                  vocabulary third -> table_3 (1)
                  order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)

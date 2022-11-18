@@ -53,7 +53,7 @@ fractions: !!omap
       - min_row_height: 0.9
     - questions: read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (2)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
-                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (3)
+                 fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (3)
                  addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (2)
                  addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (2)
 
@@ -134,7 +134,7 @@ exam: !!omap
                  [1][addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
                      addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (1)]
                  read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
-                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
+                 fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (1)
                  units conversion -> unitspairs, level=1 (1)
                  order of_operations, subvariant=only_positive -> singleint_3to9;;intpairs_3to9, variant=8-23 (1)
                  [1][vocabulary half -> nnpairs:2×12-49 (1)
@@ -169,7 +169,7 @@ W01b: !!omap
     - questions: multi direct -> nnpairs:3-9, nb_variant=multiplesof10 (1)
                  area rectangle, picture=true -> nnpairs:3-6×15,25 (1)
                  perimeter polygon, qvariant=missing_length -> polygons, sum_ingredients=int_2to10, sides_nb=3-4 (1)
-                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
+                 fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (1)
 
 W01c: !!omap
   - preset: "mental calculation slideshow"
@@ -200,7 +200,7 @@ W02c: !!omap
   - exercise: !!omap
     - questions: percent direct -> 10%of..., level=easy, context=simple_unit (1)
                  divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
-                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
+                 fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (1)
                  addi direct, context=ask:turn_to_decimal_repr, variant=atomize, iz_ge=1 -> decimalfractionssums (1)
 
 W03a: !!omap
@@ -225,4 +225,4 @@ W03c: !!omap
     - questions: percent direct -> 5%of..., level=easy, context=simple_unit (1)
                  divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
                  rectangle length_or_width, context=from_perimeter, picture=true -> nnpairs:5-20 (1)
-                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
+                 fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (1)

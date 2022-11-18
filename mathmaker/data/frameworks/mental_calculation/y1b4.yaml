@@ -27,7 +27,7 @@ fraction_of_a_linesegment: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: fraction of a line segment"
   - exercise: !!omap
-    - questions: fraction_of a_linesegment -> simple_fractions (10)
+    - questions: fraction_of a_linesegment -> simple_proper_fractions (10)
 
 multiplications_of_integers: !!omap
   - preset: "mental calculation"
@@ -125,7 +125,7 @@ exam: !!omap
                      digitplace numberof -> digits_places, generation_type=default (1)]
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
                  [1][fraction_of a_rectangle -> intpairs_4to9;;intpairs_6to9 (1)
-                     fraction_of a_linesegment -> simple_fractions (1)]
+                     fraction_of a_linesegment -> simple_proper_fractions (1)]
                  units conversion -> unitspairs, level=1 (1)
                  order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0-3 (1)
                  [1][vocabulary simple_parts_of_a_number -> auto_multiples (1)
@@ -178,7 +178,7 @@ W02b: !!omap
   - exercise: !!omap
     - questions: vocabulary subtr -> nnpairs:11-99 (1)
                  multi direct, nb_variant=decimal -> nnpairs:2-9 (2)
-                 fraction_of a_linesegment -> simple_fractions (1)
+                 fraction_of a_linesegment -> simple_proper_fractions (1)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
 
 W02c: !!omap
@@ -249,7 +249,7 @@ W04b: !!omap
                  divi direct -> decimal_and_10_100_1000 (1)
                  digitplace reversed -> digits_places (1)
                  perimeter polygon -> polygons, sum_ingredients=int_7to20, sides_nb=4, sides_particularity=none (1)
-                 fraction_of a_linesegment -> simple_fractions (1)
+                 fraction_of a_linesegment -> simple_proper_fractions (1)
 
 W04c: !!omap
   - preset: "mental calculation slideshow"

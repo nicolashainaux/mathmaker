@@ -954,7 +954,8 @@ def db_table(tag):
     elif tag == 'rightcuboids':
         return 'polyhedra'
     elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
-                 'digits_places', 'fracdigits_places', 'simple_fractions',
+                 'digits_places', 'fracdigits_places',
+                 'simple_proper_fractions',
                  'simple_improper_fractions', 'formulae',
                  'signed_numbers_comparisons_source',
                  'decimals', 'polygons', 'int_triples', 'int_quadruples',
@@ -1004,7 +1005,7 @@ def classify_tag(tag):
                  'unitspairs', 'time_units_couples', 'time_units_conversions',
                  'digits_places', 'fracdigits_places',
                  'decimals', 'decimalfractionssums', 'extdecimals',
-                 'simple_fractions', 'dvipsnames_selection', 'polygons',
+                 'simple_proper_fractions', 'dvipsnames_selection', 'polygons',
                  'int_triples', 'int_quadruples', 'int_quintuples',
                  'int_sextuples', 'anglessets', 'rightcuboids', 'times',
                  'clocktime_data', 'multiplesof10', 'improper_fractions',
@@ -1985,8 +1986,8 @@ class mc_source(object):
             if 'codename' in correct_kw:
                 del correct_kw['codename']
             return shared.int_sextuples_source.next(**correct_kw)
-        elif tag_classification == 'simple_fractions':
-            return shared.simple_fractions_source.next(**kwargs)
+        elif tag_classification == 'simple_proper_fractions':
+            return shared.simple_proper_fractions_source.next(**kwargs)
         elif tag_classification == 'improper_fractions':
             return shared.improper_fractions_source.next(**kwargs)
         elif tag_classification == 'simple_improper_fractions':

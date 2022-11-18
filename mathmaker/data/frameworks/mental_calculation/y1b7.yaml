@@ -35,10 +35,10 @@ fractions: !!omap
   - preset: "mental calculation"
   - title: "Mental calculation: fractions"
   - exercise: !!omap
-    - questions: fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (3)
-                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (2)
+    - questions: fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (3)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (2)
                  read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
-                 read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
+                 read abscissa, start_at_zero=true -> simple_proper_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
                  fraction_of a_rectangle -> intpairs_4to9;;intpairs_6to9 (1)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (2)
                  # fraction simplification -> mergedinttriples_3to9, code=1_1_1 (10)
@@ -91,10 +91,10 @@ exam: !!omap  # SUITE: ÉCRIRE LES DIAPOS; TESTER TOUTES LES NOUVELLES FEUILLES;
                      perimeter polygon -> polygons, sum_ingredients=int_7to15, sides_nb=4, nb_variant=±quarter (1)
                      perimeter polygon -> polygons, sum_ingredients=int_3to10, sides_nb=5, nb_variant=±quarter (1)]
                  decimal numerals -> decimals (1)
-                 read abscissa, start_at_zero=true -> simple_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
+                 read abscissa, start_at_zero=true -> simple_proper_fractions, nb2_ge=3, nb2_lt=11, reducible=0 (1)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
-                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
-                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
                  [1][units conversion -> unitspairs, level=2, dimension=1 (1)
                      units conversion -> unitspairs, level=3, dimension=1 (1)
                      time_units conversion, level=2 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
@@ -138,8 +138,8 @@ challenge: !!omap
                      perimeter polygon -> polygons, sum_ingredients=int_7to15, sides_nb=4, nb_variant=±quarter (1)
                      perimeter polygon -> polygons, sum_ingredients=int_3to10, sides_nb=5, nb_variant=±quarter (1)]
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
-                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
-                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
                  read abscissa, start_at_zero=false -> improper_fractions, nb2_ge=3, nb2_lt=8, reducible=0 (1)
                  [1][divi euclidean -> nnpairs:4-9 (1)
                      divi euclidean -> nnpairs:3-6×15,25 (1)]
@@ -189,7 +189,7 @@ W01b: !!omap
   - exercise: !!omap
     - questions: multi clever -> intpairs_2to9 (1)
                  round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (2)
-                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
                  volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=5 (1)
 
 W01c: !!omap
@@ -227,7 +227,7 @@ W02b: !!omap
 W02c: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
-    - questions: fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
+    - questions: fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (1)
                  divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
                  divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
                  divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
@@ -267,15 +267,15 @@ W03c: !!omap
                  volume rightcuboid -> intpairs_2to500;;singleint_2to99, clever=4 (1)
                  round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
                  mini_pb proportionality -> mergedinttriples_15_3to6 (1)
-                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
+                 fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (1)
 
 W03d: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
     - questions: divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
                  mini_pb proportionality -> mergedinttriples_25_3to6 (1)
-                 fraction simplification -> singleint_3to9;;simple_fractions, reducible=0 (1)
-                 fraction_of a_quantity -> singleint_3to9;;simple_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (1)
                  addi direct, context=ask:turn_to_decimal_repr, variant=cut -> decimalfractionssums (1)
 
 W04a: !!omap

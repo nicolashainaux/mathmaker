@@ -44,9 +44,7 @@ It will add all entries:
 - decimals from 0.001 to 9.999
 - digits positions: one table for thousands to thousandths, another for
   tenths to thousandths.
-  TODO: simple fractions are actually called (and should be renamed as) proper
-  fractions
-- simple fractions: 1/2 to 1/10, 2/3 to 2/10 etc. until 9/10
+- proper fractions: 1/2 to 1/10, 2/3 to 2/10 etc. until 9/10
 - improper fractions: 2/2, 3/2, ... to 99/2, 3/3, 4/3... to 99/3 etc. until
   99/10
 - dvipsnames_selection for LaTeX package 'xcolor'
@@ -178,7 +176,7 @@ def __main__():
              code TEXT, triangle INTEGER, isosceles INTEGER,
              equilateral INTEGER, pythagorean INTEGER, equal_sides INTEGER,
              drawDate INTEGER)''',
-         '''CREATE TABLE simple_fractions
+         '''CREATE TABLE simple_proper_fractions
             (id INTEGER PRIMARY KEY, nb1 INTEGER, nb2 INTEGER,
              reducible INTEGER, drawDate INTEGER)''',
          '''CREATE TABLE simple_improper_fractions
@@ -1028,13 +1026,14 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
-    sys.stderr.write('Insert simple fractions...\n')
+    sys.stderr.write('Insert proper fractions...\n')
     db_rows = [(i + 1, j + 1, 0 if gcd(i + 1, j + 1) == 1 else 1, 0)
                for i in range(10)
                for j in range(10)
                if j > i]
     db.executemany("INSERT "
-                   "INTO simple_fractions(nb1, nb2, reducible, drawDate) "
+                   "INTO simple_proper_fractions(nb1, nb2, reducible, "
+                   "drawDate) "
                    "VALUES(?, ?, ?, ?)",
                    db_rows)
 
