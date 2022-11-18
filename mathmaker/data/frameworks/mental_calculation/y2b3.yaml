@@ -19,3 +19,15 @@ proportionality: !!omap
                  [2][mini_pb proportionality -> mergednnpairs:3-6×15 (1)
                      mini_pb proportionality -> mergednnpairs:3-6×25 (1)
                      mini_pb proportionality -> mergednnpairs:3-9 (1)]
+
+# default source, for "read coordinates", is equivalent to:
+# coordinates_xy, nb1_ge=-4, nb1_lt=5, nb2_ge=-4, nb2_lt=5 (nothing else possible, so far)
+signed_numbers: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: signed numbers"
+  - exercise: !!omap
+    - questions: read coordinates -> default (5)
+                 compare signed_numbers -> autofit@Sid‣0@at1‣1-20@at2‣1-20 (1)
+                 compare signed_numbers -> autofit@Sid‣1@at1‣1-20@at2‣1-20 (1)
+                 compare signed_numbers -> autofit@Sid‣4-7@at1‣1-20@at2‣1-20 (2)
+                 compare signed_numbers -> autofit@Sid‣8-11@at1‣1-20@at2‣1-20 (2)
