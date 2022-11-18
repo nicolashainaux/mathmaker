@@ -112,7 +112,7 @@ class sub_object(component.structure):
         return [self.answer.uiprinted]
 
     def setup_picture(self, build_data):
-        var_nb = self.variant_id[0]
+        var_nb = str(self.variant_id)[0]
         bl = {1: '30pt', 2: '3pt'}[self.scheme]
         options = {'baseline': bl}
         if self.slideshow:
@@ -121,7 +121,7 @@ class sub_object(component.structure):
             options['scale'] = '1.5'
         self.picture = str(SpreadsheetPicture(
             var_nb, self.scheme, self.row, self.nextrow, self.col,
-            self.nextrow, self.cell1, self.cell2, **options))
+            self.nextcol, self.cell1, self.cell2, **options))
 
     def setup_term_nb1_product_nb2_nb3(self):
         n = shared.mc_source.next(self.at1_source, qkw=self.at1_attr)[0]
