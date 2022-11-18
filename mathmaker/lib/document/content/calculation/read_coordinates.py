@@ -23,6 +23,8 @@
 import random
 from string import ascii_uppercase as alphabet
 
+from mathmakerlib.calculus import Number
+
 from mathmaker.lib import shared
 from mathmaker.lib.document.content import component
 from mathmaker.lib.LaTeX import OrthogonalCoordinateSystemPicture
@@ -64,7 +66,7 @@ class sub_object(component.structure):
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'
-        answer = f'({self.x}; {self.y})'
+        answer = f'(${Number(self.x).printed}$; ${Number(self.y).printed}$)'
         return answer
 
     def js_a(self, **kwargs):
