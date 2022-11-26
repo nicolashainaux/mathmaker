@@ -65,6 +65,35 @@ FETCH_NB = re.compile(_FETCH_NB + r'$')
 SUB_NB = re.compile(r'([' + _LINE + r']+)' + _FETCH_NB + r'$')
 CURLY_BRACES_CONTENT = re.compile(r'{([' + _CHARS + r']+)}')
 
+# (fid will be used as the formula's id in table formulae from main db
+# All shortcuts must be followed by 1 or 2 (to define options specific to
+# the first or second product, the first or second square etc.)
+# pr stands for product and matches nnpairs,
+# sq stands for square and matches nnpairs,
+# at stands for single terms (to be added or subtracted)
+#    and matches nnsingletons
+# sf stands for single factors (for use in multiplications)
+#    and matches nnsingletons
+# sd stands for single divisors and matches nnsingletons;
+#    its intspan will act as a sieve for the possible divisors;
+#    you may wish to include extra divisors, using ·include=SPAN
+#    (then these divisors will belong to the possible list,
+#    no matter if they really are divisors or not). So, to force using 10 or
+#    100, for instance, write @sd1‣10,100·include=10,100
+# SF stands for simple fractions
+# IF and PF stand for improper and proper fractions
+# add variants to each source starting with a ·, e.g.
+# autofit@pr1·nb_variant=decimal1@at1‣1-20·nb_variant=decimal1
+# Current defaults:
+# autofit
+# @fid‣100-124
+# @pr1‣3-9              @pr2‣3-9
+# @sq1‣3-9·code=2       @sq2‣3-9·code=2
+# @at1‣3-9              @at2‣3-9
+# @st1‣1-9              @st2‣1-9
+# @sf1‣2,4,10,100       @sf2‣2,4,10,100
+# @sd1‣2-10,15,25,100   @sd2‣2-10,15,25,100     these spans act as sieves
+# @sF1                  @sF2                    no spans, just simple fractions
 AUTOFIT_SOURCES = {'fid': 'formulae:SPAN',
                    'Sid': 'signed_nb_comparisons:SPAN',
                    'pr1': 'nnpairs:SPAN',
