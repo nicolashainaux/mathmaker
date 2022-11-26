@@ -61,7 +61,7 @@ class sub_object(component.structure):
             self.nb1 = self.rectangle.lbl_perimeter
             if self.subcontext == 'l':
                 self.nb2, self.nb3 = (self.rectangle.lbl_width,
-                                      self.rectangle.lbl_width)
+                                      self.rectangle.lbl_length)
             else:
                 self.nb2, self.nb3 = (self.rectangle.lbl_length,
                                       self.rectangle.lbl_width)
