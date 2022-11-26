@@ -948,5 +948,115 @@
         "mental_calculation",
         "y2b3",
         "proportionality"
+    ],
+    "y2b3_signed_numbers": [
+        "mental_calculation",
+        "y2b3",
+        "signed_numbers"
+    ],
+    "y2b3_multi_divi": [
+        "mental_calculation",
+        "y2b3",
+        "multi_divi"
+    ],
+    "y2b3_four_operations": [
+        "mental_calculation",
+        "y2b3",
+        "four_operations"
+    ],
+    "y2b3_units_conversions": [
+        "mental_calculation",
+        "y2b3",
+        "units_conversions"
+    ],
+    "y2b3_fractions": [
+        "mental_calculation",
+        "y2b3",
+        "fractions"
+    ],
+    "y2b3_geometry": [
+        "mental_calculation",
+        "y2b3",
+        "geometry"
+    ],
+    "y2b3_exam": [
+        "mental_calculation",
+        "y2b3",
+        "exam"
+    ],
+    "y2b3_W01a": [
+        "mental_calculation",
+        "y2b3",
+        "W01a"
+    ],
+    "y2b3_W01b": [
+        "mental_calculation",
+        "y2b3",
+        "W01b"
+    ],
+    "y2b3_W01c": [
+        "mental_calculation",
+        "y2b3",
+        "W01c"
+    ],
+    "y2b3_W02a": [
+        "mental_calculation",
+        "y2b3",
+        "W02a"
+    ],
+    "y2b3_W02b": [
+        "mental_calculation",
+        "y2b3",
+        "W02b"
+    ],
+    "y2b3_W02c": [
+        "mental_calculation",
+        "y2b3",
+        "W02c"
+    ],
+    "y2b3_W03a": [
+        "mental_calculation",
+        "y2b3",
+        "W03a"
+    ],
+    "y2b3_W03b": [
+        "mental_calculation",
+        "y2b3",
+        "W03b"
+    ],
+    "y2b3_W03c": [
+        "mental_calculation",
+        "y2b3",
+        "W03c"
+    ],
+    "y2b3_W04a": [
+        "mental_calculation",
+        "y2b3",
+        "W04a"
+    ],
+    "y2b3_W04b": [
+        "mental_calculation",
+        "y2b3",
+        "W04b"
+    ],
+    "y2b3_W04c": [
+        "mental_calculation",
+        "y2b3",
+        "W04c"
+    ],
+    "y2b3_W05a": [
+        "mental_calculation",
+        "y2b3",
+        "W05a"
+    ],
+    "y2b3_W05b": [
+        "mental_calculation",
+        "y2b3",
+        "W05b"
+    ],
+    "y2b3_W05c": [
+        "mental_calculation",
+        "y2b3",
+        "W05c"
     ]
 }
