@@ -36,7 +36,7 @@ class sub_object(component.structure):
         line1 = [r"\text{{{nb}}}".format(nb=n.printed) for n in self.line1]
         line2 = [r"\text{{{nb}}}".format(nb=n.printed) for n in self.line2]
         compact = not self.slideshow
-        bl = {True: '3pt', False: None}[compact]
+        bl = {True: '10pt', False: None}[compact]
         self.table_question = Table([(n1, n2) for n1, n2 in zip(line1, line2)],
                                     bubble_value='?', bubble_color='BrickRed',
                                     compact=compact, baseline=bl)
