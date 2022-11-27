@@ -5,6 +5,15 @@ Unreleased
 ----------
 
 
+Version 0.7.19 (2022-11-27)
+---------------------------
+
+* Update numeric_factorization question.
+* Add proportionality_coefficient, proportionality_findout and proportionality_fill questions.
+* Add read_coordinates and compare_signed_numbers questions.
+* Add y2b3 mental calculation level.
+* Several bug fixes.
+
 Version 0.7.18 (2022-09-20)
 ---------------------------
 
