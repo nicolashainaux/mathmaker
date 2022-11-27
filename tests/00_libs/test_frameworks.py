@@ -525,7 +525,10 @@ def test_process_autofit():
             'at2': {'source': 'nnsingletons:1-9'},
             'st2': {'source': 'nnsingletons:1-9'},
             'sf2': {'source': 'nnsingletons:2,4,10,100'},
-            'sd2': {'source': 'nnsingletons:2-10,15,25,100'}}
+            'sd2': {'source': 'nnsingletons:2-10,15,25,100'},
+            'Sid': {'source': 'signed_nb_comparisons:0-11'},
+            'sF1': {'source': 'simple_fractions'},
+            'sF2': {'source': 'simple_fractions'}}
     s = 'autofit@fid‣100-107@pr1·nb_variant=decimal1'\
         '@sq1‣1-20·nb_variant=decimal1'
     assert process_autofit(s) \
@@ -542,5 +545,8 @@ def test_process_autofit():
             'at2': {'source': 'nnsingletons:1-9'},
             'st2': {'source': 'nnsingletons:1-9'},
             'sf2': {'source': 'nnsingletons:2,4,10,100'},
-            'sd2': {'source': 'nnsingletons:2-10,15,25,100'}
+            'sd2': {'source': 'nnsingletons:2-10,15,25,100'},
+            'Sid': {'source': 'signed_nb_comparisons:0-11'},
+            'sF1': {'source': 'simple_fractions'},
+            'sF2': {'source': 'simple_fractions'}
             }
