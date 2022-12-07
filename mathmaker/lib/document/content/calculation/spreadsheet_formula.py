@@ -29,8 +29,8 @@ from mathmakerlib import required
 from mathmakerlib.calculus import Number
 
 from mathmaker.lib import shared
-from mathmaker.lib.tools import divisors
 from mathmaker.lib.document.content import component
+from mathmaker.lib.document.content.autofit_sourced import AutofitSourced
 from mathmaker.lib.tools.frameworks import process_autofit
 from mathmaker.lib.LaTeX import SlideContent, TabularCellPictureWording
 from mathmaker.lib.LaTeX import SpreadsheetPicture
@@ -52,7 +52,7 @@ from mathmaker.lib.LaTeX import SpreadsheetPicture
 # 119   = n * X*X           123   = X*X * n
 
 
-class sub_object(component.structure):
+class sub_object(AutofitSourced, component.structure):
 
     def __init__(self, build_data, **options):
         # Since minimal setup will be called later for each source, do not call
@@ -122,97 +122,6 @@ class sub_object(component.structure):
         self.picture = str(SpreadsheetPicture(
             var_nb, self.scheme, self.row, self.nextrow, self.col,
             self.nextcol, self.cell1, self.cell2, **options))
-
-    def setup_term_nb1_product_nb2_nb3(self):
-        n = shared.mc_source.next(self.at1_source, qkw=self.at1_attr)[0]
-        p, val = shared.mc_source.next(self.pr1_source, qkw=self.pr1_attr)
-        # self.nb1 = n; self.nb2 = p; self.nb3 = val (X)
-        super().setup("numbers", nb=[n, p, val], shuffle_nbs=False,
-                      standardize_decimal_numbers=True)
-        options = copy.deepcopy(self.options)
-        options.update(self.at1_attr)
-        super().setup("minimal", **options)
-        super().setup("nb_variants", included=[1], **self.at1_attr)
-        options = copy.deepcopy(self.options)
-        options.update(self.pr1_attr)
-        super().setup("minimal", **options)
-        super().setup("nb_variants", included=[2, 3], **self.pr1_attr)
-
-    def setup_term_nb1_square_nb2_nb3(self):
-        n = shared.mc_source.next(self.at1_source, qkw=self.at1_attr)[0]
-        p, v = shared.mc_source.next(self.sq1_source, qkw=self.sq1_attr)
-        # self.nb1 = n; self.nb2 = self.nb3 = val (X)
-        super().setup("numbers", nb=[n, p, v], shuffle_nbs=False,
-                      standardize_decimal_numbers=True)
-        options = copy.deepcopy(self.options)
-        options.update(self.at1_attr)
-        super().setup("minimal", **options)
-        super().setup("nb_variants", included=[1], **self.at1_attr)
-        options = copy.deepcopy(self.options)
-        options.update(self.sq1_attr)
-        super().setup("minimal", **options)
-        super().setup("nb_variants", included=[2, 3], **self.sq1_attr)
-        if self.nb2 < self.nb3:
-            self.nb3 = self.nb2
-        elif self.nb3 < self.nb3:
-            self.nb2 = self.nb3
-
-    def setup_square_nb2_nb3(self):
-        p, v = shared.mc_source.next(self.sq1_source, qkw=self.sq1_attr)
-        # self.nb2 = self.nb3 = val (X)
-        super().setup("numbers", nb=[p, v], shuffle_nbs=False,
-                      standardize_decimal_numbers=True)
-        options = copy.deepcopy(self.options)
-        options.update(self.sq1_attr)
-        super().setup("minimal", **options)
-        super().setup("nb_variants", included=[2, 3], **self.sq1_attr)
-        if self.nb2 < self.nb3:
-            self.nb3 = self.nb2
-        elif self.nb3 < self.nb3:
-            self.nb2 = self.nb3
-
-    def setup_factor_nb1_square_nb2_nb3(self):
-        n = shared.mc_source.next(self.sf1_source, qkw=self.sf1_attr)[0]
-        p, v = shared.mc_source.next(self.sq1_source, qkw=self.sq1_attr)
-        # self.nb1 = n; self.nb2 = self.nb3 = val (X)
-        super().setup("numbers", nb=[n, p, v], shuffle_nbs=False,
-                      standardize_decimal_numbers=True)
-        options = copy.deepcopy(self.options)
-        options.update(self.sf1_attr)
-        super().setup("minimal", **options)
-        super().setup("nb_variants", included=[1], **self.sf1_attr)
-        options = copy.deepcopy(self.options)
-        options.update(self.sq1_attr)
-        super().setup("minimal", **options)
-        super().setup("nb_variants", included=[2, 3], **self.sq1_attr)
-        if self.nb2 < self.nb3:
-            self.nb3 = self.nb2
-        elif self.nb3 < self.nb3:
-            self.nb2 = self.nb3
-
-    def setup_divisor_nb1_square_nb2_nb3(self):
-        p, v = shared.mc_source.next(self.sq1_source, qkw=self.sq1_attr)
-        pv_divisors = divisors(p * v)
-        sd_span = intspan(self.sd1_source.split(':')[1])
-        sd_list = [d for d in sd_span if d in pv_divisors]
-        sd_list += list(intspan(self.sd1_attr.get('include', '')))
-        sd_span = intspan(sd_list)
-        sd_source = f'nnsingletons:{str(sd_span)}'
-        import sys
-        sys.stderr.write(f'sd_source={sd_source}\n')
-        n = shared.mc_source.next(sd_source, qkw=self.sd1_attr)[0]
-        # self.nb1 = n; self.nb2 = self.nb3 = val (X)
-        super().setup("numbers", nb=[n, p, v], shuffle_nbs=False,
-                      standardize_decimal_numbers=True)
-        options = copy.deepcopy(self.options)
-        options.update(self.sd1_attr)
-        super().setup("minimal", **options)
-        super().setup("nb_variants", included=[1], **self.sd1_attr)
-        options = copy.deepcopy(self.options)
-        options.update(self.sq1_attr)
-        super().setup("minimal", **options)
-        super().setup("nb_variants", included=[2], **self.sq1_attr)
-        self.nb3 = self.nb2
 
     def setup_formula_cell1_cell2(self):
         self.formula = self.formula.replace('n', self.nb1.printed)\
