@@ -136,6 +136,11 @@
         "nb1",
         "drawDate"
     ],
+    "expressions": [
+        "id",
+        "nb1",
+        "drawDate"
+    ],
     "cols_for_spreadsheets": [
         "id",
         "col",
