@@ -81,6 +81,7 @@ class sub_object(AutofitSourced, component.structure):
                 nb1_in=list(variant_span))[0]
         self.setup_sources(build_data)
         getattr(self, f'_create_variant_{self.variant_id}')(build_data)
+        self.setup_formula_cell1_cell2()
 
         self.wording1 = _('In {cell_ref}, one types {formula}.')\
             .format(formula=r'{\codefont F}'.replace('F', self.formula),
@@ -133,7 +134,6 @@ class sub_object(AutofitSourced, component.structure):
         self.formula = '=n+p*X'
         self.setup_term_nb1_product_nb2_nb3()
         self.answer = (self.nb1 + self.nb2 * self.nb3).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_101(self, build_data):
         self.formula = '=n+p/X'
@@ -145,7 +145,6 @@ class sub_object(AutofitSourced, component.structure):
         self.nb2 = self.nb2.standardized()
         self.nb3 = self.nb3.standardized()
         self.answer = (self.nb1 + self.nb2 / self.nb3).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_102(self, build_data):
         self.formula = '=n-p*X'
@@ -155,7 +154,6 @@ class sub_object(AutofitSourced, component.structure):
             self.nb1 += self.nb2 * self.nb3
             self.nb1 = self.nb1.standardized()
         self.answer = (self.nb1 - self.nb2 * self.nb3).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_103(self, build_data):
         self._create_variant_101(build_data)
@@ -165,12 +163,10 @@ class sub_object(AutofitSourced, component.structure):
         if self.subvariant == 'only_positive' and self.answer < 0:
             self.nb1 = (self.nb1 + self.nb2 / self.nb3).standardized()
         self.answer = (self.nb1 - self.nb2 / self.nb3).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_104(self, build_data):
         self._create_variant_100(build_data)
         self.formula = '=X*p+n'
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_105(self, build_data):
         self.formula = '=X/p+n'
@@ -181,7 +177,6 @@ class sub_object(AutofitSourced, component.structure):
         self.nb3 = (self.nb2 * self.nb3).standardized()
         self.nb2 = self.nb2.standardized()
         self.answer = (self.nb3 / self.nb2 + self.nb1).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_106(self, build_data):
         self.formula = '=X*p-n'
@@ -201,7 +196,6 @@ class sub_object(AutofitSourced, component.structure):
             if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
                 self.nb1 = self.nb1 / (10 ** decimals)
         self.answer = (self.nb3 * self.nb2 - self.nb1).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_107(self, build_data):
         self.formula = '=X/p-n'
@@ -226,22 +220,18 @@ class sub_object(AutofitSourced, component.structure):
             if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
                 self.nb1 = self.nb1 / (10 ** decimals)
         self.answer = (self.nb3 / self.nb2 - self.nb1).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_108(self, build_data):
         self._create_variant_100(build_data)
         self.formula = '=n+X*p'
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_109(self, build_data):
         self._create_variant_105(build_data)
         self.formula = '=n+X/p'
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_110(self, build_data):
         self._create_variant_102(build_data)
         self.formula = '=n-X*p'
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_111(self, build_data):
         self._create_variant_105(build_data)
@@ -250,22 +240,18 @@ class sub_object(AutofitSourced, component.structure):
             and self.nb1 < self.nb3 / self.nb2):
             self.nb1 = (self.nb1 + self.nb3 / self.nb2).standardized()
         self.answer = (self.nb1 - self.nb3 / self.nb2).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_112(self, build_data):
         self._create_variant_100(build_data)
         self.formula = '=p*X+n'
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_113(self, build_data):
         self._create_variant_101(build_data)
         self.formula = '=p/X+n'
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_114(self, build_data):
         self._create_variant_106(build_data)
         self.formula = '=p*X-n'
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_115(self, build_data):
         self.formula = '=p/X-n'
@@ -290,19 +276,16 @@ class sub_object(AutofitSourced, component.structure):
             if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
                 self.nb1 = self.nb1 / (10 ** decimals)
         self.answer = (self.nb2 / self.nb3 - self.nb1).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_116(self, build_data):
         self.setup_term_nb1_square_nb2_nb3()
         self.formula = '=X*X'
         self.answer = (self.nb2 * self.nb2).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_117(self, build_data):
         self.setup_term_nb1_square_nb2_nb3()
         self.formula = '=n+X*X'
         self.answer = (self.nb1 + self.nb2 * self.nb2).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_118(self, build_data):
         self.setup_term_nb1_square_nb2_nb3()
@@ -311,24 +294,20 @@ class sub_object(AutofitSourced, component.structure):
             and self.nb1 < self.nb2 * self.nb2):
             self.nb1 = (self.nb1 + self.nb2 * self.nb2).standardized()
         self.answer = (self.nb1 - self.nb2 * self.nb2).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_119(self, build_data):
         self.setup_factor_nb1_square_nb2_nb3()
         self.formula = '=n*X*X'
         self.answer = (self.nb1 * self.nb2 * self.nb2).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_120(self, build_data):
         self.setup_divisor_nb1_square_nb2_nb3()
         self.formula = '=X*X/n'
         self.answer = (self.nb2 * self.nb2 / self.nb1).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_121(self, build_data):
         self._create_variant_117(build_data)
         self.formula = '=X*X+n'
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_122(self, build_data):
         self.formula = '=X*X-n'
@@ -348,10 +327,8 @@ class sub_object(AutofitSourced, component.structure):
             if self.sq1_attr.get('nb_variant', '').startswith('decimal'):
                 self.nb1 = self.nb1 / (10 ** (2 * decimals))
         self.answer = (self.nb2 * self.nb2 - self.nb1).standardized()
-        self.setup_formula_cell1_cell2()
 
     def _create_variant_123(self, build_data):
         self.setup_factor_nb1_square_nb2_nb3()
         self.formula = '=X*X*n'
         self.answer = (self.nb1 * self.nb2 * self.nb2).standardized()
-        self.setup_formula_cell1_cell2()
