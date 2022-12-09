@@ -20,17 +20,15 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import copy
 import random
 from string import ascii_uppercase as alphabet
 
 from intspan import intspan
 from mathmakerlib import required
-from mathmakerlib.calculus import Number
 
 from mathmaker.lib import shared
 from mathmaker.lib.document.content import component
-from mathmaker.lib.document.content.autofit_sourced import AutofitSourced
+from mathmaker.lib.document.content.expression_creator import ExpressionCreator
 from mathmaker.lib.tools.frameworks import process_autofit
 from mathmaker.lib.LaTeX import SlideContent, TabularCellPictureWording
 from mathmaker.lib.LaTeX import SpreadsheetPicture
@@ -61,7 +59,7 @@ FORMULAE = {
 }
 
 
-class sub_object(AutofitSourced, component.structure):
+class sub_object(ExpressionCreator, component.structure):
 
     def __init__(self, build_data, **options):
         # Since minimal setup will be called later for each source, do not call
@@ -139,182 +137,3 @@ class sub_object(AutofitSourced, component.structure):
             .replace('p', self.nb2.printed).replace('X', self.Xcell)
         self.cell1 = r'\text{{{c1}}}'.format(c1=self.nb3.printed)
         self.cell2 = r'\textcolor{BrickRed}{\text{?}}'
-
-    def _create_variant_100(self, build_data):  # =n+p*X
-        self.setup_term_nb1_product_nb2_nb3()
-        self.answer = (self.nb1 + self.nb2 * self.nb3).standardized()
-
-    def _create_variant_101(self, build_data):  # =n+p/X
-        self.setup_term_nb1_product_nb2_nb3()
-        while self.nb3.fracdigits_nb():  # to avoid dividing by a decimal
-            self.nb2 /= 10
-            self.nb3 *= 10
-        self.nb2 = self.nb2 * self.nb3
-        self.nb2 = self.nb2.standardized()
-        self.nb3 = self.nb3.standardized()
-        self.answer = (self.nb1 + self.nb2 / self.nb3).standardized()
-
-    def _create_variant_102(self, build_data):  # =n-p*X
-        self.setup_term_nb1_product_nb2_nb3()
-        if (self.subvariant == 'only_positive'
-            and self.nb2 * self.nb3 > self.nb1):
-            self.nb1 += self.nb2 * self.nb3
-            self.nb1 = self.nb1.standardized()
-        self.answer = (self.nb1 - self.nb2 * self.nb3).standardized()
-
-    def _create_variant_103(self, build_data):  # =n-p/X
-        self._create_variant_101(build_data)
-        self.answer = self.nb1 - self.nb2 / self.nb3
-        # add up to self.nb1 to avoid negative result
-        if self.subvariant == 'only_positive' and self.answer < 0:
-            self.nb1 = (self.nb1 + self.nb2 / self.nb3).standardized()
-        self.answer = (self.nb1 - self.nb2 / self.nb3).standardized()
-
-    def _create_variant_104(self, build_data):  # =X*p+n
-        self._create_variant_100(build_data)
-
-    def _create_variant_105(self, build_data):  # =X/p+n
-        self.setup_term_nb1_product_nb2_nb3()
-        while self.nb2.fracdigits_nb():  # to avoid dividing by a decimal
-            self.nb3 /= 10
-            self.nb2 *= 10
-        self.nb3 = (self.nb2 * self.nb3).standardized()
-        self.nb2 = self.nb2.standardized()
-        self.answer = (self.nb3 / self.nb2 + self.nb1).standardized()
-
-    def _create_variant_106(self, build_data):  # =X*p-n
-        self.setup_term_nb1_product_nb2_nb3()
-        if (self.subvariant == 'only_positive'
-            and self.nb1 > self.nb2 * self.nb3):
-            decimals = 0
-            if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
-                decimals = int(self.pr1_attr['nb_variant'][-1])
-                maxi = self.nb2 * self.nb3 * 10 ** decimals
-            else:  # the product is actually an integer
-                maxi = int(self.nb2 * self.nb3)
-            options = copy.deepcopy(self.at1_attr)
-            options.update({'nb1_lt': maxi})
-            self.nb1 = shared.mc_source.next(self.at1_source, qkw=options)[0]
-            self.nb1 = Number(self.nb1).standardized()
-            if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
-                self.nb1 = self.nb1 / (10 ** decimals)
-        self.answer = (self.nb3 * self.nb2 - self.nb1).standardized()
-
-    def _create_variant_107(self, build_data):  # =X/p-n
-        self.setup_term_nb1_product_nb2_nb3()
-        while self.nb2.fracdigits_nb():  # to avoid dividing by a decimal
-            self.nb3 /= 10
-            self.nb2 *= 10
-        self.nb3 = (self.nb2 * self.nb3).standardized()
-        self.nb2 = self.nb2.standardized()
-        if (self.subvariant == 'only_positive'
-            and self.nb1 > self.nb3 / self.nb2):
-            decimals = 0
-            if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
-                decimals = int(self.pr1_attr['nb_variant'][-1])
-                maxi = (self.nb3 / self.nb2) * 10 ** decimals
-            else:  # the product is actually an integer
-                maxi = int(self.nb3 / self.nb2)
-            options = copy.deepcopy(self.at1_attr)
-            options.update({'nb1_lt': maxi})
-            self.nb1 = shared.mc_source.next(self.at1_source, qkw=options)[0]
-            self.nb1 = Number(self.nb1).standardized()
-            if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
-                self.nb1 = self.nb1 / (10 ** decimals)
-        self.answer = (self.nb3 / self.nb2 - self.nb1).standardized()
-
-    def _create_variant_108(self, build_data):  # =n+X*p
-        self._create_variant_100(build_data)
-
-    def _create_variant_109(self, build_data):  # =n+X/p
-        self._create_variant_105(build_data)
-
-    def _create_variant_110(self, build_data):  # =n-X*p
-        self._create_variant_102(build_data)
-
-    def _create_variant_111(self, build_data):  # =n-X/p
-        self._create_variant_105(build_data)
-        if (self.subvariant == 'only_positive'
-            and self.nb1 < self.nb3 / self.nb2):
-            self.nb1 = (self.nb1 + self.nb3 / self.nb2).standardized()
-        self.answer = (self.nb1 - self.nb3 / self.nb2).standardized()
-
-    def _create_variant_112(self, build_data):  # =p*X+n
-        self._create_variant_100(build_data)
-
-    def _create_variant_113(self, build_data):  # =p/X+n
-        self._create_variant_101(build_data)
-
-    def _create_variant_114(self, build_data):  # =p*X-n
-        self._create_variant_106(build_data)
-
-    def _create_variant_115(self, build_data):  # =p/X-n
-        self.setup_term_nb1_product_nb2_nb3()
-        while self.nb3.fracdigits_nb():  # to avoid dividing by a decimal
-            self.nb2 /= 10
-            self.nb3 *= 10
-        self.nb2 = (self.nb3 * self.nb2).standardized()
-        self.nb3 = self.nb3.standardized()
-        if (self.subvariant == 'only_positive'
-            and self.nb1 > self.nb2 / self.nb3):
-            decimals = 0
-            if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
-                decimals = int(self.pr1_attr['nb_variant'][-1])
-                maxi = (self.nb2 / self.nb3) * 10 ** decimals
-            else:  # the product is actually an integer
-                maxi = int(self.nb2 / self.nb3)
-            options = copy.deepcopy(self.at1_attr)
-            options.update({'nb1_lt': maxi})
-            self.nb1 = shared.mc_source.next(self.at1_source, qkw=options)[0]
-            self.nb1 = Number(self.nb1).standardized()
-            if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
-                self.nb1 = self.nb1 / (10 ** decimals)
-        self.answer = (self.nb2 / self.nb3 - self.nb1).standardized()
-
-    def _create_variant_116(self, build_data):  # =X*X
-        self.setup_term_nb1_square_nb2_nb3()
-        self.answer = (self.nb2 * self.nb2).standardized()
-
-    def _create_variant_117(self, build_data):  # =n+X*X
-        self.setup_term_nb1_square_nb2_nb3()
-        self.answer = (self.nb1 + self.nb2 * self.nb2).standardized()
-
-    def _create_variant_118(self, build_data):  # =n-X*X
-        self.setup_term_nb1_square_nb2_nb3()
-        if (self.subvariant == 'only_positive'
-            and self.nb1 < self.nb2 * self.nb2):
-            self.nb1 = (self.nb1 + self.nb2 * self.nb2).standardized()
-        self.answer = (self.nb1 - self.nb2 * self.nb2).standardized()
-
-    def _create_variant_119(self, build_data):  # =n*X*X
-        self.setup_factor_nb1_square_nb2_nb3()
-        self.answer = (self.nb1 * self.nb2 * self.nb2).standardized()
-
-    def _create_variant_120(self, build_data):  # =X*X/n
-        self.setup_divisor_nb1_square_nb2_nb3()
-        self.answer = (self.nb2 * self.nb2 / self.nb1).standardized()
-
-    def _create_variant_121(self, build_data):  # =X*X+n
-        self._create_variant_117(build_data)
-
-    def _create_variant_122(self, build_data):  # =X*X-n
-        self.setup_term_nb1_square_nb2_nb3()
-        if (self.subvariant == 'only_positive'
-            and self.nb1 > self.nb2 * self.nb2):
-            decimals = 0
-            if self.sq1_attr.get('nb_variant', '').startswith('decimal'):
-                decimals = int(self.sq1_attr['nb_variant'][-1])
-                maxi = self.nb2 * self.nb2 * 10 ** (2 * decimals)
-            else:  # the product is actually an integer
-                maxi = int(self.nb2 * self.nb2)
-            options = copy.deepcopy(self.at1_attr)
-            options.update({'nb1_lt': maxi})
-            self.nb1 = shared.mc_source.next(self.at1_source, qkw=options)[0]
-            self.nb1 = Number(self.nb1).standardized()
-            if self.sq1_attr.get('nb_variant', '').startswith('decimal'):
-                self.nb1 = self.nb1 / (10 ** (2 * decimals))
-        self.answer = (self.nb2 * self.nb2 - self.nb1).standardized()
-
-    def _create_variant_123(self, build_data):  # =X*X*n
-        self.setup_factor_nb1_square_nb2_nb3()
-        self.answer = (self.nb1 * self.nb2 * self.nb2).standardized()
