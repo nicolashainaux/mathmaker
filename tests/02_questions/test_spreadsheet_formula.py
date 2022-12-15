@@ -168,3 +168,105 @@ def test_variant123():
     """Check all normal cases are correctly handled."""
     build_data = ('spreadsheet formula -> @xid‣123', )
     spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant124():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣124', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant125():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣125', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant126():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣126', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant127():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣127', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant128():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣128', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant129():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣129', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant130():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣130', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant131():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣131', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant132():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣132', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant133():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣133', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant134():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣134', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant135():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣135', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant136():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣136', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant137():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣137', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant138():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣138', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant139():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣139', )
+    spreadsheet_formula.sub_object(build_data)
+
+
+def test_variant140():
+    """Check all normal cases are correctly handled."""
+    build_data = ('spreadsheet formula -> @xid‣140', )
+    spreadsheet_formula.sub_object(build_data)
