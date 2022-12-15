@@ -34,28 +34,58 @@ from mathmaker.lib.LaTeX import SlideContent, TabularCellPictureWording
 from mathmaker.lib.LaTeX import SpreadsheetPicture
 
 # Possible variants (where X and Y represent a cell; n and p fixed numbers)
-# 100   = n + p*X           104   = X*p + n
-# 101   = n + p/X           105   = X/p + n
-# 102   = n - p*X           106   = X*p - n
-# 103   = n - p/X           107   = X/p - n
+# 95    = X*X * n
+# 96    = X*p + n
+# 97    = X*p - n
+# 98    = n + X*p
+# 99    = n - X*p
+# 100   = n + p*X           104   = n + X/p
+# 101   = n - p*X           105   = n - X/p
+# 102   = p*X + n           106   = X/p + n
+# 103   = p*X - n           107   = X/p - n
 
-# 108   = n + X*p           112   = p*X + n
-# 109   = n + X/p           113   = p/X + n
-# 110   = n - X*p           114   = p*X - n
-# 111   = n - X/p           115   = p/X - n
+# 108   = n + p/X           112   = n*(X + p)
+# 109   = n - p/X           113   = n*(X - p)
+# 110   = p/X + n           114   = n/(X + p)
+# 111   = p/X - n           115   = n/(X - p)
 
-# 116   = X*X               120   = X*X / n
-# 117   = n + X*X           121   = X*X + n
-# 118   = n - X*X           122   = X*X - n
-# 119   = n * X*X           123   = X*X * n
+# 116   = n*(p + X)         120   = (X + p)/n
+# 117   = n*(p - X)         121   = (X - p)/n
+# 118   = n/(p + X)         122   = (p + X)/n
+# 119   = n/(p - X)         123   = (p - X)/n
+
+# 124   = X*X + n           128   = X*X
+# 125   = n + X*X           129   = n * X*X
+# 126   = X*X - n           130   = X*X / n
+# 127   = n - X*X           131   = n / (X*X)
+
+# 132   = X*X + X
+# 133   = X + X*X
+# 134   = X*X - X
+# 135   = X*X + n*X
+
+# 200   =                   204   =
+# 201   =                   205   =
+# 202   =                   206   =
+# 203   =                   207   =
+
+# 208   =                   212   =
+# 209   =                   213   =
+# 210   =                   214   =
+# 211   =                   215   =
 
 FORMULAE = {
-    '100': '=n+p*X', '101': '=n+p/X', '102': '=n-p*X', '103': '=n-p*X',
-    '104': '=X*p+n', '105': '=X/p+n', '106': '=X*p-n', '107': '=X/p-n',
-    '108': '=n+X*p', '109': '=n+X/p', '110': '=n-X*p', '111': '=n-X/p',
-    '112': '=p*X+n', '113': '=p/X+n', '114': '=p*X-n', '115': '=p/X-n',
-    '116': '=X*X', '117': '=n+X*X', '118': '=n+X*X', '119': '=n*X*X',
-    '120': '=X*X/n', '121': '=X*X+n', '122': '=X*X-n', '123': '=X*X*n',
+    '95': '=X*X*n', '96': '=X*p+n', '97': '=X*p-n', '98': '=n+X*p',
+    '99': '=n-X*p',
+    '100': '=n+p*X', '101': '=n-p*X', '102': '=p*X+n', '103': '=p*X-n',
+    '104': '=n+X/p', '105': '=n-X/p', '106': '=X/p+n', '107': '=X/p-n',
+    '108': '=n+p/X', '109': '=n-p*X', '110': '=p/X+n', '111': '=p/X-n',
+    '112': '=n*(X+p)', '113': '=n*(X-p)', '114': '=n/(X+p)', '115': '=n/(X-p)',
+    '116': '=n*(p+X)', '117': '=n*(p-X)', '118': '=n/(p+X)', '119': '=n/(p-X)',
+    '120': '=(X+p)/n', '121': '=(X-p)/n', '122': '=(p+X)/n', '123': '=(p-X)/n',
+    '124': '=X*X+n', '125': '=n+X*X', '126': '=X*X-n', '127': '=n+X*X',
+    '128': '=X*X', '129': '=n*X*X', '130': '=X*X/n', '131': '=n/(X*X)',
+    '132': '=X*X+X', '133': '=X+X*X', '134': '=X*X-X', '135': '=X*X+n*X'
 }
 
 
@@ -80,15 +110,16 @@ class sub_object(ExpressionCreator, component.structure):
             self.qcell = f'{self.nextcol}{self.row}'
         elif self.scheme == 2:
             self.qcell = f'{self.col}{self.nextrow}'
-        variant_span = intspan(build_data['fid']['source'][len('formulae:'):])
+        variant_span = intspan(build_data['xid']['source']
+                               [len('expressions:'):])
         if len(variant_span) == 1:
             self.variant_id = str(list(variant_span)[0])
         else:
-            self.variant_id = shared.formulae_source.next(
+            self.variant_id = shared.expressions_source.next(
                 nb1_in=list(variant_span))[0]
         self.setup_sources(build_data)
         getattr(self, f'_create_variant_{self.variant_id}')(build_data)
-        self.formula = FORMULAE[self.variant_id]
+        self.formula = FORMULAE[str(self.variant_id)]
         self.setup_formula_cell1_cell2()
 
         self.wording1 = _('In {cell_ref}, one types {formula}.')\
