@@ -128,6 +128,16 @@ class structure(object):
         self.allow_extra_digits = int(kwargs.get('allow_extra_digits', 0))
         self.allow_division_by_decimal = BOOLEAN[
             kwargs.get('allow_division_by_decimal', 'false')]()
+        split_as = kwargs.get('split_as', 'dig1')
+        self.split_options = {'int_as_halves': False,
+                              'int_as_quarters': False,
+                              'int_as_halves_or_quarters': False}
+        if split_as in ['halves', 'quarters', 'halves_or_quarters']:
+            self.split_options.update({'int_as_' + split_as: True})
+        elif split_as.startswith('dig'):
+            self.split_options.update({'dig': int(split_as[len('dig'):])})
+        elif split_as == 'unit':
+            self.split_options.update({'at_unit': True})
 
     def _setup_length_units(self, **kwargs):
         if 'unit' in kwargs:

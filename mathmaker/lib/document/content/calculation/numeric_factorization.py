@@ -59,16 +59,6 @@ class sub_object(component.structure):
             build_data = (build_data[1], build_data[0])
         super().setup("minimal", **options)
         self.transduration = 30
-        split_as = options.get('split_as', 'dig1')
-        split_options = {'int_as_halves': False,
-                         'int_as_quarters': False,
-                         'int_as_halves_or_quarters': False}
-        if split_as in ['halves', 'quarters', 'halves_or_quarters']:
-            split_options.update({'int_as_' + split_as: True})
-        elif split_as.startswith('dig'):
-            split_options.update({'dig': int(split_as[len('dig'):])})
-        elif split_as == 'unit':
-            split_options.update({'at_unit': True})
         a, b = build_data
         a, b = Number(a), Number(b)
         # setup possible nb_variant on b only
@@ -77,7 +67,7 @@ class sub_object(component.structure):
         # then retrieve b, after nb_variant has been applied to it
         b = copy.deepcopy(self.nb1)
         # and go on, preparing the numbers
-        a1, a2 = a.split(**split_options)
+        a1, a2 = a.split(**self.split_options)
         n1n2 = [a1, b]
         n3n4 = [a2, b]
         if options.get('do_shuffle', True):
