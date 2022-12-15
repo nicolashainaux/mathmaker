@@ -168,37 +168,6 @@ class ExpressionCreator(object):
         super().setup("nb_variants", included=[2], **self.sq1_attr)
         self.nb3 = self.nb2
 
-    def _create_variant_95(self, build_data):  # =X*X*n
-        self.setup_factor_nb1_square_nb2_nb3()
-        self.answer = (self.nb1 * self.nb2 * self.nb2).standardized()
-
-    def _create_variant_96(self, build_data):  # =X*p+n
-        self._create_variant_100(build_data)
-
-    def _create_variant_97(self, build_data):  # =X*p-n
-        self.setup_term_nb1_product_nb2_nb3()
-        if (self.subvariant == 'only_positive'
-            and self.nb1 > self.nb2 * self.nb3):
-            decimals = 0
-            if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
-                decimals = int(self.pr1_attr['nb_variant'][-1])
-                maxi = self.nb2 * self.nb3 * 10 ** decimals
-            else:  # the product is actually an integer
-                maxi = int(self.nb2 * self.nb3)
-            options = copy.deepcopy(self.at1_attr)
-            options.update({'nb1_lt': maxi})
-            self.nb1 = shared.mc_source.next(self.at1_source, qkw=options)[0]
-            self.nb1 = Number(self.nb1).standardized()
-            if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
-                self.nb1 = self.nb1 / (10 ** decimals)
-        self.answer = (self.nb3 * self.nb2 - self.nb1).standardized()
-
-    def _create_variant_98(self, build_data):  # =n+X*p
-        self._create_variant_100(build_data)
-
-    def _create_variant_99(self, build_data):  # =n-X*p
-        self._create_variant_101(build_data)
-
     def _create_variant_100(self, build_data):  # =n+p*X
         self.setup_term_nb1_product_nb2_nb3()
         if self.nb2 == 1:
@@ -217,7 +186,7 @@ class ExpressionCreator(object):
         self._create_variant_100(build_data)
 
     def _create_variant_103(self, build_data):  # =p*X-n
-        self._create_variant_97(build_data)
+        self._create_variant_137(build_data)
 
     def _create_variant_104(self, build_data):  # =n+X/p
         self._create_variant_106(build_data)
@@ -433,7 +402,38 @@ class ExpressionCreator(object):
         self._create_variant_132(build_data)
         self.answer = (self.nb1 * self.nb1 - self.nb1).standardized()
 
-    def _create_variant_135(self, build_data):  # =X*X + n*X
+    def _create_variant_135(self, build_data):  # =X*X*n
+        self.setup_factor_nb1_square_nb2_nb3()
+        self.answer = (self.nb1 * self.nb2 * self.nb2).standardized()
+
+    def _create_variant_136(self, build_data):  # =X*p+n
+        self._create_variant_100(build_data)
+
+    def _create_variant_137(self, build_data):  # =X*p-n
+        self.setup_term_nb1_product_nb2_nb3()
+        if (self.subvariant == 'only_positive'
+            and self.nb1 > self.nb2 * self.nb3):
+            decimals = 0
+            if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
+                decimals = int(self.pr1_attr['nb_variant'][-1])
+                maxi = self.nb2 * self.nb3 * 10 ** decimals
+            else:  # the product is actually an integer
+                maxi = int(self.nb2 * self.nb3)
+            options = copy.deepcopy(self.at1_attr)
+            options.update({'nb1_lt': maxi})
+            self.nb1 = shared.mc_source.next(self.at1_source, qkw=options)[0]
+            self.nb1 = Number(self.nb1).standardized()
+            if self.pr1_attr.get('nb_variant', '').startswith('decimal'):
+                self.nb1 = self.nb1 / (10 ** decimals)
+        self.answer = (self.nb3 * self.nb2 - self.nb1).standardized()
+
+    def _create_variant_138(self, build_data):  # =n+X*p
+        self._create_variant_100(build_data)
+
+    def _create_variant_139(self, build_data):  # =n-X*p
+        self._create_variant_101(build_data)
+
+    def _create_variant_140(self, build_data):  # =X*X + n*X
         self._create_variant_125(build_data)
         if self.nb1 == 1:
             self.nb1 = Number(shared.mc_source.next('nnsingletons:2-9')[0])

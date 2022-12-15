@@ -34,11 +34,7 @@ from mathmaker.lib.LaTeX import SlideContent, TabularCellPictureWording
 from mathmaker.lib.LaTeX import SpreadsheetPicture
 
 # Possible variants (where X and Y represent a cell; n and p fixed numbers)
-# 95    = X*X * n
-# 96    = X*p + n
-# 97    = X*p - n
-# 98    = n + X*p
-# 99    = n - X*p
+
 # 100   = n + p*X           104   = n + X/p
 # 101   = n - p*X           105   = n - X/p
 # 102   = p*X + n           106   = X/p + n
@@ -59,10 +55,12 @@ from mathmaker.lib.LaTeX import SpreadsheetPicture
 # 126   = X*X - n           130   = X*X / n
 # 127   = n - X*X           131   = n / (X*X)
 
-# 132   = X*X + X
-# 133   = X + X*X
-# 134   = X*X - X
-# 135   = X*X + n*X
+# 132   = X*X + X           136   = X*p + n
+# 133   = X + X*X           137   = X*p - n
+# 134   = X*X - X           138   = n + X*p
+# 135   = X*X * n           139   = n - X*p
+
+# 140   = X*X + n*X
 
 # 200   =                   204   =
 # 201   =                   205   =
@@ -75,17 +73,18 @@ from mathmaker.lib.LaTeX import SpreadsheetPicture
 # 211   =                   215   =
 
 FORMULAE = {
-    '95': '=X*X*n', '96': '=X*p+n', '97': '=X*p-n', '98': '=n+X*p',
-    '99': '=n-X*p',
     '100': '=n+p*X', '101': '=n-p*X', '102': '=p*X+n', '103': '=p*X-n',
     '104': '=n+X/p', '105': '=n-X/p', '106': '=X/p+n', '107': '=X/p-n',
-    '108': '=n+p/X', '109': '=n-p*X', '110': '=p/X+n', '111': '=p/X-n',
+    '108': '=n+p/X', '109': '=n-p/X', '110': '=p/X+n', '111': '=p/X-n',
     '112': '=n*(X+p)', '113': '=n*(X-p)', '114': '=n/(X+p)', '115': '=n/(X-p)',
     '116': '=n*(p+X)', '117': '=n*(p-X)', '118': '=n/(p+X)', '119': '=n/(p-X)',
     '120': '=(X+p)/n', '121': '=(X-p)/n', '122': '=(p+X)/n', '123': '=(p-X)/n',
-    '124': '=X*X+n', '125': '=n+X*X', '126': '=X*X-n', '127': '=n+X*X',
+    '124': '=X*X+n', '125': '=n+X*X', '126': '=X*X-n', '127': '=n-X*X',
     '128': '=X*X', '129': '=n*X*X', '130': '=X*X/n', '131': '=n/(X*X)',
-    '132': '=X*X+X', '133': '=X+X*X', '134': '=X*X-X', '135': '=X*X+n*X'
+    '132': '=X*X+X', '133': '=X+X*X', '134': '=X*X-X',
+    '135': '=X*X*n', '136': '=X*p+n', '137': '=X*p-n', '138': '=n+X*p',
+    '139': '=n-X*p',
+    '140': '=X*X+n*X'
 }
 
 
