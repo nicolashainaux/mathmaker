@@ -513,7 +513,7 @@ def test_get_autofit_span():
 
 def test_process_autofit():
     assert process_autofit('') \
-        == {'xid': {'source': 'expressions:95-135'},
+        == {'xid': {'source': 'expressions:100-140'},
             'pr1': {'source': 'nnpairs:3-9'},
             'sq1': {'source': 'nnpairs:3-9', 'code': '2'},
             'at1': {'source': 'nnsingletons:1-9'},
