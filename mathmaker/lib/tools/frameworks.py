@@ -103,7 +103,7 @@ AUTOFIT_SOURCES = {'Sid': 'signed_nb_comparisons:SPAN',
                    'sf2': 'nnsingletons:SPAN',
                    'sd2': 'nnsingletons:SPAN',
                    'sF2': 'simple_fractions'}
-AUTOFIT_SPANS = {'xid': '95-135', 'Sid': '0-11',
+AUTOFIT_SPANS = {'xid': '100-140', 'Sid': '0-11',
                  'pr1': '3-9', 'sq1': '3-9', 'at1': '1-9', 'st1': '1-9',
                  'sf1': '2,4,10,100', 'sd1': '2-10,15,25,100', 'sF1': '',
                  'pr2': '3-9', 'sq2': '3-9', 'at2': '1-9', 'st2': '1-9',
