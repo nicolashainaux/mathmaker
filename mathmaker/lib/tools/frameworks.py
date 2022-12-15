@@ -83,7 +83,7 @@ CURLY_BRACES_CONTENT = re.compile(r'{([' + _CHARS + r']+)}')
 # SF stands for simple fractions
 # IF and PF stand for improper and proper fractions
 # add variants to each source starting with a ·, e.g.
-# autofit@pr1·nb_variant=decimal1@at1‣1-20·nb_variant=decimal1
+# @pr1·nb_variant=decimal1@at1‣1-20·nb_variant=decimal1
 # Specials:
 #   @sd1 and @sd2 spans act as sieves
 #   @sF1 and @sF2 do not define spans (only simple fractions)
@@ -1163,14 +1163,7 @@ def process_autofit(source_id):
     Translate the autofit source into several conventional source ids for use
     with the usual db.
 
-    'autofit' translates to default values: (expressions should cover all
-    id values, this is the current default)
-    {'xid': 'expressions:100-123', 'pr1': 'nnpairs:3-9',
-     'sq1': 'nnpairs:3-9, code=2', 'st1': 'nnsingletons:3-9',
-     'sf1': 'nnsingletons:2,4,10,100',
-     'pr2': 'nnpairs:3-9', 'sq2': 'nnpairs:3-9, code=2',
-     'st2': 'nnsingletons:3-9', 'sf2': 'nnsingletons:2,4,10,100',}
-
+    'autofit' translates to default values (see AUTOFIT_SOURCES)
     """
     chunks = {s[0:3]: s[3:] for s in source_id.split('@')[1:]}
     # e.g. {'xid': '‣100-107', 'pr1': '·nb_variant=decimal1',

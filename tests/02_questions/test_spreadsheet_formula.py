@@ -28,143 +28,143 @@ from mathmaker.lib.document.content.calculation import spreadsheet_formula
 
 def test_variant100():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣100', )
+    build_data = ('spreadsheet formula -> @xid‣100', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant101():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣101', )
+    build_data = ('spreadsheet formula -> @xid‣101', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant102():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣102', )
+    build_data = ('spreadsheet formula -> @xid‣102', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant103():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣103', )
+    build_data = ('spreadsheet formula -> @xid‣103', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant104():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣104', )
+    build_data = ('spreadsheet formula -> @xid‣104', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant105():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣105', )
+    build_data = ('spreadsheet formula -> @xid‣105', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant106():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣106', )
+    build_data = ('spreadsheet formula -> @xid‣106', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant107():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣107', )
+    build_data = ('spreadsheet formula -> @xid‣107', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant108():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣108', )
+    build_data = ('spreadsheet formula -> @xid‣108', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant109():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣109', )
+    build_data = ('spreadsheet formula -> @xid‣109', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant110():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣110', )
+    build_data = ('spreadsheet formula -> @xid‣110', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant111():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣111', )
+    build_data = ('spreadsheet formula -> @xid‣111', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant112():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣112', )
+    build_data = ('spreadsheet formula -> @xid‣112', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant113():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣113', )
+    build_data = ('spreadsheet formula -> @xid‣113', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant114():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣114', )
+    build_data = ('spreadsheet formula -> @xid‣114', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant115():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣115', )
+    build_data = ('spreadsheet formula -> @xid‣115', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant116():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣116', )
+    build_data = ('spreadsheet formula -> @xid‣116', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant117():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣117', )
+    build_data = ('spreadsheet formula -> @xid‣117', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant118():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣118', )
+    build_data = ('spreadsheet formula -> @xid‣118', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant119():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣119', )
+    build_data = ('spreadsheet formula -> @xid‣119', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant120():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣120', )
+    build_data = ('spreadsheet formula -> @xid‣120', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant121():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣121', )
+    build_data = ('spreadsheet formula -> @xid‣121', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant122():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣122', )
+    build_data = ('spreadsheet formula -> @xid‣122', )
     spreadsheet_formula.sub_object(build_data)
 
 
 def test_variant123():
     """Check all normal cases are correctly handled."""
-    build_data = ('spreadsheet formula -> autofit@fid‣123', )
+    build_data = ('spreadsheet formula -> @xid‣123', )
     spreadsheet_formula.sub_object(build_data)

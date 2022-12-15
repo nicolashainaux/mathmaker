@@ -28,71 +28,71 @@ from mathmaker.lib.document.content.calculation import compare_signed_numbers
 
 def test_variant0():
     """Check all normal cases are correctly handled."""
-    build_data = ('compare signed_numbers -> autofit@Sid‣0', )
+    build_data = ('compare signed_numbers -> @Sid‣0', )
     compare_signed_numbers.sub_object(build_data)
 
 
 def test_variant1():
     """Check all normal cases are correctly handled."""
-    build_data = ('compare signed_numbers -> autofit@Sid‣1', )
+    build_data = ('compare signed_numbers -> @Sid‣1', )
     compare_signed_numbers.sub_object(build_data)
 
 
 def test_variant2():
     """Check all normal cases are correctly handled."""
-    build_data = ('compare signed_numbers -> autofit@Sid‣2', )
+    build_data = ('compare signed_numbers -> @Sid‣2', )
     compare_signed_numbers.sub_object(build_data)
 
 
 def test_variant3():
     """Check all normal cases are correctly handled."""
-    build_data = ('compare signed_numbers -> autofit@Sid‣3', )
+    build_data = ('compare signed_numbers -> @Sid‣3', )
     compare_signed_numbers.sub_object(build_data)
 
 
 def test_variant4():
     """Check all normal cases are correctly handled."""
-    build_data = ('compare signed_numbers -> autofit@Sid‣4', )
+    build_data = ('compare signed_numbers -> @Sid‣4', )
     compare_signed_numbers.sub_object(build_data)
 
 
 def test_variant5():
     """Check all normal cases are correctly handled."""
-    build_data = ('compare signed_numbers -> autofit@Sid‣5', )
+    build_data = ('compare signed_numbers -> @Sid‣5', )
     compare_signed_numbers.sub_object(build_data)
 
 
 def test_variant6():
     """Check all normal cases are correctly handled."""
-    build_data = ('compare signed_numbers -> autofit@Sid‣6', )
+    build_data = ('compare signed_numbers -> @Sid‣6', )
     compare_signed_numbers.sub_object(build_data)
 
 
 def test_variant7():
     """Check all normal cases are correctly handled."""
-    build_data = ('compare signed_numbers -> autofit@Sid‣7', )
+    build_data = ('compare signed_numbers -> @Sid‣7', )
     compare_signed_numbers.sub_object(build_data)
 
 
 def test_variant8():
     """Check all normal cases are correctly handled."""
-    build_data = ('compare signed_numbers -> autofit@Sid‣8', )
+    build_data = ('compare signed_numbers -> @Sid‣8', )
     compare_signed_numbers.sub_object(build_data)
 
 
 def test_variant9():
     """Check all normal cases are correctly handled."""
-    build_data = ('compare signed_numbers -> autofit@Sid‣9', )
+    build_data = ('compare signed_numbers -> @Sid‣9', )
     compare_signed_numbers.sub_object(build_data)
 
 
 def test_variant10():
     """Check all normal cases are correctly handled."""
-    build_data = ('compare signed_numbers -> autofit@Sid‣10', )
+    build_data = ('compare signed_numbers -> @Sid‣10', )
     compare_signed_numbers.sub_object(build_data)
 
 
 def test_variant11():
     """Check all normal cases are correctly handled."""
-    build_data = ('compare signed_numbers -> autofit@Sid‣11', )
+    build_data = ('compare signed_numbers -> @Sid‣11', )
     compare_signed_numbers.sub_object(build_data)

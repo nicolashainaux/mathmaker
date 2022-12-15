@@ -376,19 +376,19 @@ def test__read_simple_question():
             in example_with_block
             or [{'id': 'q id1'}, ['source2'], 1]
             in example_with_block)
-    autofit = 'spreadsheet formula -> autofit@pr1‣nnpairs:3-9'\
+    autofit = 'spreadsheet formula -> @pr1‣nnpairs:3-9'\
         '@sq1‣nnsingletons:3-9@at1‣nnsingletons:3-9 (1)'
     assert _read_simple_question(autofit) == \
         [[{'id': 'spreadsheet formula'},
-          ['autofit@pr1‣nnpairs:3-9@sq1‣nnsingletons:3-9'
+          ['@pr1‣nnpairs:3-9@sq1‣nnsingletons:3-9'
            '@at1‣nnsingletons:3-9'],
           1]
          ]
-    autofit = 'spreadsheet formula -> autofit@pr1‣nnpairs:3-9'\
+    autofit = 'spreadsheet formula -> @pr1‣nnpairs:3-9'\
         '·nb_variant=decimal1@sq1‣nnsingletons:3-9@at1‣nnsingletons:3-9 (1)'
     assert _read_simple_question(autofit) == \
         [[{'id': 'spreadsheet formula'},
-          ['autofit@pr1‣nnpairs:3-9·nb_variant=decimal1@sq1‣nnsingletons:3-9'
+          ['@pr1‣nnpairs:3-9·nb_variant=decimal1@sq1‣nnsingletons:3-9'
            '@at1‣nnsingletons:3-9'], 1]
          ]
 
@@ -512,8 +512,8 @@ def test_get_autofit_span():
 
 
 def test_process_autofit():
-    assert process_autofit('autofit') \
-        == {'fid': {'source': 'formulae:100-123'},
+    assert process_autofit('') \
+        == {'xid': {'source': 'expressions:95-135'},
             'pr1': {'source': 'nnpairs:3-9'},
             'sq1': {'source': 'nnpairs:3-9', 'code': '2'},
             'at1': {'source': 'nnsingletons:1-9'},
@@ -529,10 +529,10 @@ def test_process_autofit():
             'Sid': {'source': 'signed_nb_comparisons:0-11'},
             'sF1': {'source': 'simple_fractions'},
             'sF2': {'source': 'simple_fractions'}}
-    s = 'autofit@fid‣100-107@pr1·nb_variant=decimal1'\
+    s = '@xid‣100-107@pr1·nb_variant=decimal1'\
         '@sq1‣1-20·nb_variant=decimal1'
     assert process_autofit(s) \
-        == {'fid': {'source': 'formulae:100-107'},
+        == {'xid': {'source': 'expressions:100-107'},
             'pr1': {'source': 'nnpairs:3-9', 'nb_variant': 'decimal1'},
             'sq1': {'source': 'nnpairs:1-20', 'code': '2',
                     'nb_variant': 'decimal1'},

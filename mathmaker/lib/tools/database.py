@@ -1869,7 +1869,7 @@ class mc_source(object):
     ##
     #   @brief  Handles the choice of the next value to return
     def next(self, source_id, qkw=None, **kwargs):
-        if source_id.startswith('autofit') or source_id == 'default':
+        if source_id.startswith('@') or source_id == 'default':
             return (source_id, )
         if source_id == 'simple_fractions':
             source_id = random.choice(['simple_proper_fractions',
