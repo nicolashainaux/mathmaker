@@ -194,8 +194,6 @@ def __main__():
              clever INTEGER)''',
          '''CREATE TABLE order_of_operations_variants
             (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
-         '''CREATE TABLE formulae
-            (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
          '''CREATE TABLE signed_nb_comparisons
             (id INTEGER PRIMARY KEY, nb1 INTEGER, drawDate INTEGER)''',
          '''CREATE TABLE expressions
@@ -1142,14 +1140,6 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
-    sys.stderr.write('Insert variants of spreadsheet formulae...\n')
-    db_rows = [(i + 100, 0) for i in range(25)]
-    db.executemany("INSERT "
-                   "INTO formulae"
-                   "(nb1, drawDate) "
-                   "VALUES(?, ?)",
-                   db_rows)
-
     sys.stderr.write('Insert variants of signed numbers comparisons...\n')
     db_rows = [(i, 0) for i in range(12)]
     db.executemany("INSERT "
@@ -1159,8 +1149,8 @@ def __main__():
                    db_rows)
 
     sys.stderr.write('Insert variants of expressions...\n')
-    db_rows = [(i + 100, 0) for i in range(32)]\
-        + [(i + 200, 0) for i in range(8)]
+    db_rows = [(i + 95, 0) for i in range(41)]  # hence from 95 to 135 included
+    # + [(i + 200, 0) for i in range(8)]   later, add 20* ids
     db.executemany("INSERT "
                    "INTO expressions"
                    "(nb1, drawDate) "

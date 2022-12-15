@@ -65,13 +65,13 @@ FETCH_NB = re.compile(_FETCH_NB + r'$')
 SUB_NB = re.compile(r'([' + _LINE + r']+)' + _FETCH_NB + r'$')
 CURLY_BRACES_CONTENT = re.compile(r'{([' + _CHARS + r']+)}')
 
-# (fid will be used as the formula's id in table formulae from main db
+# (*id will be used as *'s id in matching table from main db
 # All shortcuts must be followed by 1 or 2 (to define options specific to
 # the first or second product, the first or second square etc.)
 # pr stands for product and matches nnpairs,
 # sq stands for square and matches nnpairs,
-# at stands for single terms (to be added or subtracted)
-#    and matches nnsingletons
+# at stands for single additive terms and matches nnsingletons
+# st stands for single subtractive terms and matches nnsingletons
 # sf stands for single factors (for use in multiplications)
 #    and matches nnsingletons
 # sd stands for single divisors and matches nnsingletons;
@@ -84,18 +84,11 @@ CURLY_BRACES_CONTENT = re.compile(r'{([' + _CHARS + r']+)}')
 # IF and PF stand for improper and proper fractions
 # add variants to each source starting with a ·, e.g.
 # autofit@pr1·nb_variant=decimal1@at1‣1-20·nb_variant=decimal1
-# Current defaults:
-# autofit
-# @fid‣100-124
-# @pr1‣3-9              @pr2‣3-9
-# @sq1‣3-9·code=2       @sq2‣3-9·code=2
-# @at1‣3-9              @at2‣3-9
-# @st1‣1-9              @st2‣1-9
-# @sf1‣2,4,10,100       @sf2‣2,4,10,100
-# @sd1‣2-10,15,25,100   @sd2‣2-10,15,25,100     these spans act as sieves
-# @sF1                  @sF2                    no spans, just simple fractions
-AUTOFIT_SOURCES = {'fid': 'formulae:SPAN',
-                   'Sid': 'signed_nb_comparisons:SPAN',
+# Specials:
+#   @sd1 and @sd2 spans act as sieves
+#   @sF1 and @sF2 do not define spans (only simple fractions)
+AUTOFIT_SOURCES = {'Sid': 'signed_nb_comparisons:SPAN',
+                   'xid': 'expressions:SPAN',
                    'pr1': 'nnpairs:SPAN',
                    'sq1': 'nnpairs:SPAN, code=2',
                    'at1': 'nnsingletons:SPAN',
@@ -110,11 +103,11 @@ AUTOFIT_SOURCES = {'fid': 'formulae:SPAN',
                    'sf2': 'nnsingletons:SPAN',
                    'sd2': 'nnsingletons:SPAN',
                    'sF2': 'simple_fractions'}
-AUTOFIT_SPANS = {'fid': '100-123', 'Sid': '0-11', 'pr1': '3-9', 'sq1': '3-9',
-                 'at1': '1-9', 'st1': '1-9', 'sf1': '2,4,10,100',
-                 'sd1': '2-10,15,25,100', 'sF1': '', 'pr2': '3-9',
-                 'sq2': '3-9', 'at2': '1-9', 'st2': '1-9', 'sf2': '2,4,10,100',
-                 'sd2': '2-10,15,25,100', 'sF2': ''}
+AUTOFIT_SPANS = {'xid': '95-135', 'Sid': '0-11',
+                 'pr1': '3-9', 'sq1': '3-9', 'at1': '1-9', 'st1': '1-9',
+                 'sf1': '2,4,10,100', 'sd1': '2-10,15,25,100', 'sF1': '',
+                 'pr2': '3-9', 'sq2': '3-9', 'at2': '1-9', 'st2': '1-9',
+                 'sf2': '2,4,10,100', 'sd2': '2-10,15,25,100', 'sF2': ''}
 
 TESTFILE_TEMPLATE = """# -*- coding: utf-8 -*-
 
@@ -1170,9 +1163,9 @@ def process_autofit(source_id):
     Translate the autofit source into several conventional source ids for use
     with the usual db.
 
-    'autofit' translates to default values: (formulae should cover all values,
-    this is the current default)
-    {'fid': 'formulae:100-123', 'pr1': 'nnpairs:3-9',
+    'autofit' translates to default values: (expressions should cover all
+    id values, this is the current default)
+    {'xid': 'expressions:100-123', 'pr1': 'nnpairs:3-9',
      'sq1': 'nnpairs:3-9, code=2', 'st1': 'nnsingletons:3-9',
      'sf1': 'nnsingletons:2,4,10,100',
      'pr2': 'nnpairs:3-9', 'sq2': 'nnpairs:3-9, code=2',
@@ -1180,7 +1173,7 @@ def process_autofit(source_id):
 
     """
     chunks = {s[0:3]: s[3:] for s in source_id.split('@')[1:]}
-    # e.g. {'fid': '‣100-107', 'pr1': '·nb_variant=decimal1',
+    # e.g. {'xid': '‣100-107', 'pr1': '·nb_variant=decimal1',
     #       'sq1': '‣1-20·nb_variant=decimal1'}
     if any(k not in AUTOFIT_SOURCES for k in chunks):
         raise ValueError(f'Invalid autofit source: {source_id}')

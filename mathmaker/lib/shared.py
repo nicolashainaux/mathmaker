@@ -126,7 +126,6 @@ def init():
     global ls_marks_source
     global enable_js_form
     global distcodes_source
-    global formulae_source
     global expressions_source
     global signed_nb_comparisons_source
     global coordinates_xy_source
@@ -223,7 +222,6 @@ def init():
                                                    ["id", "nb1", "nb2"])
     order_of_operations_variants_source = database.source(
         'order_of_operations_variants', ['id', 'nb1'])
-    formulae_source = database.source('formulae', ['id', 'nb1'])
     expressions_source = database.source('expressions', ['id', 'nb1'])
     signed_nb_comparisons_source = database.source(
         'signed_nb_comparisons', ['id', 'nb1'])
