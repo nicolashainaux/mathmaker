@@ -51,6 +51,7 @@ from .calculation import proportionality_coefficient
 from .calculation import proportionality_findout
 from .calculation import proportionality_fill
 from .calculation import spreadsheet_formula
+from .calculation import evaluate_expression
 from .calculation import compare_signed_numbers
 from .geometry import intercept_theorem_triangle
 from .geometry import intercept_theorem_triangle_formula
@@ -87,7 +88,7 @@ __all__ = [expand_simple, expand_double,
            divisibility_vocabulary, divisibility_rule,
            fraction_simplification, fractions_conversions,
            proportionality_coefficient, proportionality_findout,
-           proportionality_fill, spreadsheet_formula,
+           proportionality_fill, spreadsheet_formula, evaluate_expression,
            area_rectangle, perimeter_rectangle, perimeter_polygon,
            rectangle_length_or_width, area_righttriangle,
            perimeter_righttriangle, volume_rightcuboid,
