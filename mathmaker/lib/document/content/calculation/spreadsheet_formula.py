@@ -100,14 +100,14 @@ class sub_object(ExpressionCreator, component.structure):
         self.col = shared.cols_for_spreadsheets_source.next()[0]
         self.row = random.randint(1, 9)
         build_data['tl_cell'] = [self.col, self.row]
-        self.scheme = random.randint(1, 2)
+        self.layout = random.choice(['horizontal', 'vertical'])
         self.Xcell = f'{self.col}{self.row}'
         self.nextrow = self.row + 1
         # OK since letters up to M only are used:
         self.nextcol = alphabet[alphabet.index(self.col) + 1]
-        if self.scheme == 1:
+        if self.layout == 'horizontal':
             self.qcell = f'{self.nextcol}{self.row}'
-        elif self.scheme == 2:
+        elif self.layout == 'vertical':
             self.qcell = f'{self.col}{self.nextrow}'
         variant_span = intspan(build_data['xid']['source']
                                [len('expressions:'):])
@@ -116,6 +116,8 @@ class sub_object(ExpressionCreator, component.structure):
         else:
             self.variant_id = shared.expressions_source.next(
                 nb1_in=list(variant_span))[0]
+        var_nb = str(self.variant_id)[0]
+        self.variant_name = {'1': '1variable', '2': '2variables'}[var_nb]
         self.setup_sources(build_data)
         getattr(self, f'_create_variant_{self.variant_id}')(build_data)
         self.formula = FORMULAE[str(self.variant_id)]
@@ -137,8 +139,8 @@ class sub_object(ExpressionCreator, component.structure):
                                   height2='0.25pt',
                                   wording2=self.wording2)
         else:
-            w1 = {1: '5.75', 2: '4'}[self.scheme]
-            w2 = {1: '7.75', 2: '9'}[self.scheme]
+            w1 = {'horizontal': '5.75', 'vertical': '4'}[self.layout]
+            w2 = {'horizontal': '7.75', 'vertical': '9'}[self.layout]
             output = TabularCellPictureWording(self.picture,
                                                self.wording, w1=w1, w2=w2)
         return str(output)
@@ -151,15 +153,14 @@ class sub_object(ExpressionCreator, component.structure):
         return [self.answer.uiprinted]
 
     def setup_picture(self, build_data):
-        var_nb = str(self.variant_id)[0]
-        bl = {1: '30pt', 2: '3pt'}[self.scheme]
+        bl = {'horizontal': '30pt', 'vertical': '3pt'}[self.layout]
         options = {'baseline': bl}
         if self.slideshow:
             options['cellnodeoptions'] = {'font': r'\small'}
             options['coordoptions'] = {'font': r'\small'}
             options['scale'] = '1.5'
         self.picture = str(SpreadsheetPicture(
-            var_nb, self.scheme, self.row, self.nextrow, self.col,
+            self.variant_name, self.layout, self.row, self.nextrow, self.col,
             self.nextcol, self.cell1, self.cell2, **options))
 
     def setup_formula_cell1_cell2(self):

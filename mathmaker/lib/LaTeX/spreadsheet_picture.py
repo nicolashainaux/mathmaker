@@ -28,16 +28,18 @@ from mathmakerlib.LaTeX import TikZPicture, OptionsList
 
 class SpreadsheetPicture(object):
 
-    def __init__(self, variant, scheme, row1, row2, col1, col2, cell1, cell2,
-                 cellnodeoptions='', coordoptions='', baseline='', scale=''):
+    def __init__(self, variant_name, layout, row1, row2, col1, col2, cell1,
+                 cell2, cellnodeoptions='', coordoptions='', baseline='',
+                 scale=''):
         """
-        :param variant: may be 1 or 2 (used to pick up the right tikz template)
-        :type variant: int
-        :param mode: whether 'default' or 'slideshow'
-        :type mode: str
+        :param variant_name: may be '1variable' or '2variables' (used to pick
+                             up the right tikz template)
+        :type variant_name: str
+        :param layout: 'horizontal' or 'vertical'
+        :type layout: str
         """
-        self.variant = variant
-        self.scheme = scheme
+        self.variant_name = variant_name
+        self.layout = layout
         self.row1 = row1
         self.row2 = row2
         self.col1 = col1
@@ -52,7 +54,7 @@ class SpreadsheetPicture(object):
     def __str__(self):
         required.package['tikz'] = True
         template_name = \
-            f'templates/spreadsheet_{self.variant}_{self.scheme}.tikz'
+            f'templates/spreadsheet_{self.variant_name}_{self.layout}.tikz'
         content = (Path(__file__).parent / template_name).read_text()
         row1 = r'\text{{{r1}}}'.format(r1=self.row1)
         row2 = r'\text{{{r2}}}'.format(r2=self.row2)
