@@ -282,3 +282,27 @@ W05c: !!omap
                  mini_pb proportionality -> mergednnpairs:3-9 (1)
                  numeric factorization -> nnpairs:100×11-19, split_as=unit, nb_variant=decimal1 (1)
                  fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb1_ge=2, nb2_ge=3, reducible=0, context=simple_unit (1)
+
+W06a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: units conversion -> unitspairs, category=area, level=2 (1)
+                 spreadsheet formula, subvariant=only_positive -> @xid‣100-139 (1)
+                 fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (1)
+                 percent direct -> 5%of..., context=simple_unit (1)
+
+W06b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:3×501-5000, nb2_notmod=10 (1)
+                 numeric factorization -> nnpairs:10×11-19, split_as=halves (1)
+                 fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb1_ge=2, nb2_ge=3, reducible=0, context=simple_unit (1)
+                 time_units conversion, category=2, direction=right -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
+
+W06c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: units conversion -> unitspairs, category=area, level=2 (1)
+                 order of_operations, subvariant=only_positive -> singleint_3to9;;intpairs_3to9, variant=108-187 (1)
+                 time_units conversion, category=2, direction=left -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
+                 multi clever, variant=with_a_decimal -> nnpairs:2-9 (1)
