@@ -4,13 +4,16 @@ Changelog
 Unreleased
 ----------
 
+* Enhance spreadsheet_formula question (more variants)
+* Add evaluate_expression question (same variants as for spreadsheet_formula)
+* Add area_parallelogram, perimeter_parallelogram, area_circle, perimeter_circle, area_triangle, perimeter_triangle questions.
 
 Version 0.7.19 (2022-11-27)
 ---------------------------
 
 * Update numeric_factorization question.
 * Add proportionality_coefficient, proportionality_findout and proportionality_fill questions.
-* Add read_coordinates and compare_signed_numbers questions.
+* Add read_coordinates, spreadsheet_formula and compare_signed_numbers questions.
 * Add y2b3 mental calculation level.
 * Several bug fixes.
 
