@@ -1,0 +1,78 @@
+units_conversions: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: units conversions"
+  - exercise: !!omap
+    - questions: units conversion -> unitspairs, level=2, dimension=1 (1)
+                 units conversion -> unitspairs, level=2, dimension=2 (2)
+                 units conversion -> unitspairs, level=3, dimension=3 (4)
+                 [1][time_units conversion, level=2 -> nnpairs:1-3,5-7,9-11,13-14×15 (1)
+                     time_units conversion, level=2 -> nnpairs:15×17-19,21-23,25-27,29-31 (1)]
+                 time_units conversion, category=2, level=3 -> nnpairs:10×10,11,13-17,19-23,25-29,31-35,37-41,43-47,49-53,55-59 (1)
+                 time_units conversion, category=3, level=3 -> nnpairs:10×10,11,13-17,19-23,25-29,31-35,37-41,43-47,49-53,55-59 (1)
+
+# autofit defaults: see frameworks.py
+four_operations: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: four operations"
+  - exercise: !!omap
+    - questions: spreadsheet formula, subvariant=only_positive -> @xid‣130@sd1‣10,100·include=10,100 (15)
+
+
+# evaluate expression
+# @pr1·nb_variant=decimal1
+# @pr1·split_as=halves
+# @pr1·split_as=unit
+# @at1·nb_variant=decimal1
+
+                 # spreadsheet formula, subvariant=only_positive -> @xid‣100-107,116-123 (2)
+                 # [2][numeric factorization -> nnpairs:10×11-19, split_as=halves_or_quarters (1)
+                 #     numeric factorization -> nnpairs:100×11-19, split_as=unit, nb_variant=decimal1 (1)
+                 #     numeric factorization -> nnpairs:3-9×3-9, split_as=halves_or_quarters (1)]
+                 # subtr direct, subvariant=only_positive -> nnpairs:11-999 (1)
+                 # [1][addi direct -> clocktime_data (1)
+                 #     subtr direct -> clocktime_data (1)]
+                 # order of_operations, subvariant=only_positive -> singleint_3to9;;intpairs_3to9, variant=108-187 (2)
+                 # addi direct -> nnpairs:20-100 (1)
+                 # addi direct -> nntriples:4-20, nb_variant=±halforquarter (1)
+
+
+# proportionality coefficient -> proper_fractions;;nntriples:3-9, reducible=0, code=1_1_1, coeff_variant=fraction (5)
+# proportionality findout -> mergednnpairs:3-6×15,25 (1)
+
+
+# proportionality coefficient -> deciinttriplesforprop_3to9 (1)
+# proportionality coefficient -> mergedinttriples_15_3to6 (1)
+# proportionality coefficient -> mergedinttriples_25_3to6 (1)
+# proportionality coefficient -> mergedinttriples_15_3to6 (1)
+# mergednntriples:3×9, coeff_variant=decimal (1)
+# proportionality coefficient -> mergednnpairs:2-14×15, coeff_variant=decimal (6)
+# proportionality coefficient -> proper_fractions;;nntriples:3-9, reducible=0, code=1_1_1, coeff_variant=fraction, nb_variant=decimal1 (10)
+# /!\ avec proportionality findout, coeff_variant=fraction sera une question difficile (ceinture noire?)
+# try to use deci_int_triples_for_prop, maybe? (gives coeff, nb1, nb3, nb2, solution (=nb4))
+# proportionality fill -> mergednnpairs:2-6,8,10×15, coeff_variant=decimal (10)
+# proportionality fill -> mergednnpairs:2-6,8,10×25, coeff_variant=decimal (10)
+
+# proportionality coefficient -> mergednntriples:3-9, coeff_variant=decimal (1)
+# proportionality coefficient -> mergednnquadruples:3-9, coeff_variant=decimal (1)
+# proportionality coefficient -> mergednntriples:3-9, nb_variant=decimal (1)
+# proportionality coefficient -> mergednntriples:3-9×13,17,19, nb_variant=decimal1, coeff_variant=decimal, force_a_nb_to=1 (1)
+
+
+#     - questions: mini_pb proportionality -> mergedinttriples_15_3to6 (1)
+#                  mini_pb proportionality -> mergedinttriples_25_3to6 (1)
+#                  mini_pb proportionality -> mergedinttriples_3to9, force_table=7, wid=38 (1)
+#                  mini_pb proportionality -> deciinttriplesforprop_3to9 (2)
+#                  mini_pb proportionality -> inttriplesforprop_3to10,15,25 (5)
+#                  # To select exclusively from table of 15 or from table of 25,
+#                  # use mergedinttriples_*_3to6
+
+# proportionality coefficient -> mergednntriples:3×9 (1)
+# proportionality coefficient -> mergednntriples:3-6×15 (1)
+# proportionality coefficient -> mergednntriples:3-6×25 (1)
+# proportionality coefficient -> mergednntriples:2-8,10,12,14×15, coeff_variant=decimal (1)
+# proportionality coefficient -> mergednnquadruples:3×9 (1)
+# proportionality coefficient -> mergednnquadruples:3-6×15 (1)
+# proportionality coefficient -> mergednnquadruples:3-6×25 (1)
+# proportionality coefficient -> mergednnquintuples:3×9 (1)
+# proportionality coefficient -> mergednnquintuples:3-6×15 (1)
+# proportionality coefficient -> mergednnquintuples:3-6×25 (1)
