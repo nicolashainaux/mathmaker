@@ -944,6 +944,16 @@
         "y1b5",
         "W04d"
     ],
+    "y2b4_units_conversions": [
+        "mental_calculation",
+        "y2b4",
+        "units_conversions"
+    ],
+    "y2b4_four_operations": [
+        "mental_calculation",
+        "y2b4",
+        "four_operations"
+    ],
     "y2b3_proportionality": [
         "mental_calculation",
         "y2b3",
@@ -1058,5 +1068,20 @@
         "mental_calculation",
         "y2b3",
         "W05c"
+    ],
+    "y2b3_W06a": [
+        "mental_calculation",
+        "y2b3",
+        "W06a"
+    ],
+    "y2b3_W06b": [
+        "mental_calculation",
+        "y2b3",
+        "W06b"
+    ],
+    "y2b3_W06c": [
+        "mental_calculation",
+        "y2b3",
+        "W06c"
     ]
 }
