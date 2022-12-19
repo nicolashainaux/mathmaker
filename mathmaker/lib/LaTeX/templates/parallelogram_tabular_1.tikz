@@ -1,0 +1,5 @@
+\draw[semithick,black] (0, 0) -- (6, 0) -- (8, 3) -- (2, 3) -- cycle;
+\draw[semithick,black!80,dash pattern=on 2pt off 1pt] (2, 0) -- (2, 3);
+\draw node[font=\tiny] at (3.25, -0.45) {LENGTHTEXT};
+\draw node[font=\tiny,rotate=55] at (0.5, 1.75) {WIDTHTEXT};
+\draw node[font=\tiny] at (3.5, 1.25) {HEIGHTTEXT};
