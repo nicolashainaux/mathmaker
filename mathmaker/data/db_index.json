@@ -65,6 +65,7 @@
         "direction",
         "category",
         "level",
+        "easiest",
         "dimension",
         "drawDate"
     ],

@@ -74,17 +74,7 @@
 #     - questions: fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (10)
 #                  # fraction simplification -> mergedinttriples_3to9, code=1_1_1 (10)
 
-# units_conversions: !!omap
-#   - preset: "mental calculation"
-#   - title: "Mental calculation: units conversions"
-#   - exercise: !!omap
-#     - questions: units conversion -> unitspairs, category=area, level=2 (3)
-#                  units conversion -> unitspairs, category=volume, level=3 (2)
-#                  units conversion -> unitspairs, level=1 (1)
-#                  units conversion -> unitspairs, dimension=1, level=2 (1)
-#                  units conversion -> unitspairs, dimension=1, level=3 (1)
-#                  units conversion -> unitspairs, category=volume2capacity, level=3 (1)
-#                  units conversion -> unitspairs, category=capacity2volume, level=3 (1)
+
 
 # percentages: !!omap
 #   - preset: "mental calculation"

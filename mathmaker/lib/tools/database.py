@@ -1200,7 +1200,7 @@ def preprocess_percentage_tag(tag, qkw=None):
         if qkw.get('level', 'normal') == 'easy':
             return tag, 'multiplesof4_2to10'
         else:
-            return tag, 'multiplesof2_2to100'
+            return tag, 'multiplesof2_2to50'
     elif tag == r'50%of...':
         if qkw.get('level', 'normal') == 'easy':
             return tag, 'multiplesof2_2to100'

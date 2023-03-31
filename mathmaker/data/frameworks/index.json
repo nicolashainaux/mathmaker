@@ -69,6 +69,11 @@
         "y1b4",
         "exam"
     ],
+    "y1b4_easier_challenge": [
+        "mental_calculation",
+        "y1b4",
+        "easier_challenge"
+    ],
     "y1b4_W01a": [
         "mental_calculation",
         "y1b4",
@@ -454,10 +459,15 @@
         "y1b2",
         "W03d"
     ],
-    "y1b7_numbers_rounding": [
+    "y1b7_fortests": [
         "mental_calculation",
         "y1b7",
-        "numbers_rounding"
+        "fortests"
+    ],
+    "y1b7_percentages": [
+        "mental_calculation",
+        "y1b7",
+        "percentages"
     ],
     "y1b7_divisibility_rules": [
         "mental_calculation",
@@ -483,6 +493,11 @@
         "mental_calculation",
         "y1b7",
         "decimal_numerals"
+    ],
+    "y1b7_units_conversions": [
+        "mental_calculation",
+        "y1b7",
+        "units_conversions"
     ],
     "y1b7_exam": [
         "mental_calculation",
@@ -554,11 +569,6 @@
         "y1b7",
         "W03d"
     ],
-    "y1b7_W04a": [
-        "mental_calculation",
-        "y1b7",
-        "W04a"
-    ],
     "y1b6_proportionality_problems": [
         "mental_calculation",
         "y1b6",
@@ -574,10 +584,10 @@
         "y1b6",
         "fractions"
     ],
-    "y1b6_estimations": [
+    "y1b6_numbers_rounding": [
         "mental_calculation",
         "y1b6",
-        "estimations"
+        "numbers_rounding"
     ],
     "y1b6_divisibility": [
         "mental_calculation",
@@ -588,11 +598,6 @@
         "mental_calculation",
         "y1b6",
         "clever_calculations"
-    ],
-    "y1b6_percentages": [
-        "mental_calculation",
-        "y1b6",
-        "percentages"
     ],
     "y1b6_units_conversions": [
         "mental_calculation",

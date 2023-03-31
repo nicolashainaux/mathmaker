@@ -132,6 +132,45 @@ exam: !!omap
                      vocabulary simple_multiples_of_a_number -> auto_multiples (1)
                      vocabulary operation -> auto_vocabulary (6)]
 
+easier_challenge: !!omap
+  - preset: "mental calculation"
+  - title: "Challenge, first part"
+  - exercise: !!omap
+    - shuffle: false
+    - questions: multi direct -> nnpairs:3-9×6-9 (1)
+                 multi reversed -> nnpairs:4-9 (1)
+                 multi hole, hidden=2 -> nnpairs:6-9 (1)
+                 multi direct -> decimal_and_10_100_1000 (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
+                 [1][addi direct -> nnpairs:11-99 (1)
+                     addi direct -> nntriples:7-20 (1)
+                     addi direct -> nnquadruples:4-15 (1)
+                     addi direct -> complements_to_300...1000 (1)
+                     addi direct -> clocktime_data (1)]
+                 subtr direct -> clocktime_data (1)
+                 subtr direct, subvariant=only_positive -> intpairs_11to90 (1)
+                 divi direct -> nnpairs:2-9 (1)
+                 [1][divi direct -> nnpairs:2×12-49 (1)
+                     divi direct -> nnpairs:4×12-24 (1)]
+                 divi euclidean -> nnpairs:2-9 (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=100-107 (1)
+                 addi direct, context=ask:turn_to_decimal_repr, variant=atomize -> decimalfractionssums (1)
+                 decimal numerals, direction=to_decimal -> decimals (1)
+                 fraction_of a_rectangle -> intpairs_4to9;;intpairs_6to9 (1)
+                 units conversion -> unitspairs, easiest=yes (1)
+                 [1][vocabulary simple_parts_of_a_number -> auto_multiples (1)
+                     vocabulary simple_multiples_of_a_number -> auto_multiples (1)]
+                 multi clever -> nnsingletons:2-99 (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_3to15, type=quadrilateral (1)
+                 # [1][addi hole -> singleint_5to20;;singleint_5to20 (1)
+                 #     addi hole -> singleint_21to100;;singleint_21to100 (1)
+                 #     addi hole -> complements_to_20...90 (1)]
+                 # [1][subtr hole, subvariant=only_positive, hidden=2 -> singleint_5to20;;singleint_5to20 (1)
+                 #     subtr hole, subvariant=only_positive, hidden=2 -> singleint_21to100;;singleint_21to100 (1)
+                 #     subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)]
+                 # addi direct, context=ask:turn_to_decimal_repr, variant=split -> decimalfractionssums (1)
+
+
 W01a: !!omap
   - preset: "mental calculation slideshow"
   - exercise: !!omap
