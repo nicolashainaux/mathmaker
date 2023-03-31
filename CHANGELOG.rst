@@ -1,12 +1,21 @@
 Changelog
 =========
 
+Unpublished
+-----------
+
+* Add area_parallelogram, perimeter_parallelogram, area_circle, perimeter_circle, area_triangle, perimeter_triangle questions.
+
 Unreleased
 ----------
 
+
+Version 0.7.20 (2023-03-31)
+---------------------------
+
 * Enhance spreadsheet_formula question (more variants)
 * Add evaluate_expression question (same variants as for spreadsheet_formula)
-* Add area_parallelogram, perimeter_parallelogram, area_circle, perimeter_circle, area_triangle, perimeter_triangle questions.
+* Update several y1b* levels.
 
 Version 0.7.19 (2022-11-27)
 ---------------------------
