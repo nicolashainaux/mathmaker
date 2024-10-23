@@ -1,8 +1,8 @@
 fortests: !!omap
   - preset: "mental calculation"
-  - title: "Mental calculation: questions tests"
+  - title: "Fraction d'une quantité"
   - exercise: !!omap
-    - questions: perimeter polygon, qvariant=missing_length -> polygons, sum_ingredients=int_2to10, sides_nb=4-6 (10)
+    - questions: fraction_of a_quantity -> singleint_3to9;;simple_proper_fractions, nb2_ge=3, reducible=0, context=simple_unit (10)
 
 percentages: !!omap
   - preset: "mental calculation"
