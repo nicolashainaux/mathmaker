@@ -24,6 +24,7 @@ __pycache__/
 
 ## SPECIFIC FILES
 .coverage
+.pypirc
 toolbox/shapes_catalog.aux
 toolbox/shapes_catalog.log
 toolbox/shapes_catalog.pdf
