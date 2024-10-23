@@ -9,6 +9,7 @@ Unpublished
 Unreleased
 ----------
 
+* Update translations for level 0 sheets y0b1-7.
 
 Version 0.7.21 (2024-10-23)
 ---------------------------

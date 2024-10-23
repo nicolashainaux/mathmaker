@@ -351,9 +351,11 @@ msgid "To display units correctly"
 msgstr ""
 
 #: lib/document/content/geometry/area_rectangle.py:47
+#: lib/document/content/geometry/area_parallelogram.py:47
 msgid "Area of this rectangle? |hint:area_unit|"
 msgstr ""
 
+#: lib/document/content/geometry/area_parallelogram.py:55
 #: lib/document/content/geometry/area_rectangle.py:55
 #, python-brace-format
 msgid ""
@@ -1084,16 +1086,17 @@ msgstr ""
 msgid "Algebra: expand and reduce double brackets"
 msgstr ""
 
-#: data/frameworks/mental_calculation/01_white1.yaml:3
-#: data/frameworks/mental_calculation/y1b5.yaml:3
-#: data/frameworks/mental_calculation/y1b1.yaml:3
-#: data/frameworks/mental_calculation/02_white2.yaml:22
 #: data/frameworks/mental_calculation/04_yellow1.yaml:34
-#: data/frameworks/mental_calculation/02_white2.yaml:15
+#: data/frameworks/mental_calculation/y0b7.yaml:3
 #: data/frameworks/mental_calculation/y1b4.yaml:34
-#: data/frameworks/mental_calculation/y1b2.yaml:22
-#: data/frameworks/mental_calculation/05_yellow2.yaml:3
+#: data/frameworks/mental_calculation/02_white2.yaml:22
 #: data/frameworks/mental_calculation/02_white2.yaml:3
+#: data/frameworks/mental_calculation/05_yellow2.yaml:3
+#: data/frameworks/mental_calculation/y1b5.yaml:3
+#: data/frameworks/mental_calculation/y1b2.yaml:22
+#: data/frameworks/mental_calculation/02_white2.yaml:15
+#: data/frameworks/mental_calculation/01_white1.yaml:3
+#: data/frameworks/mental_calculation/y1b1.yaml:3
 msgid "Mental calculation: multiplications"
 msgstr ""
 
@@ -1606,22 +1609,22 @@ msgstr ""
 msgid "Mental calculation: multiplication by 11"
 msgstr ""
 
-#: lib/document/content/component.py:536
+#: lib/document/content/component.py:546
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr ""
 
-#: lib/document/content/component.py:541
+#: lib/document/content/component.py:551
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:545
+#: lib/document/content/component.py:555
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:549
+#: lib/document/content/component.py:559
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr ""
@@ -1634,14 +1637,14 @@ msgstr ""
 msgid "Answers!"
 msgstr ""
 
+#: lib/document/content/calculation/order_of_operations.py:1465
+#: lib/document/content/calculation/multi_clever.py:108
+#: lib/document/content/calculation/numeric_expansion.py:54
 #: lib/document/content/calculation/addi_direct.py:141
 #: lib/document/content/calculation/multi_direct.py:65
-#: lib/document/content/calculation/numeric_expansion.py:54
-#: lib/document/content/calculation/multi_clever.py:108
+#: lib/document/content/calculation/numeric_factorization.py:88
 #: lib/document/content/calculation/divi_direct.py:56
-#: lib/document/content/calculation/numeric_factorization.py:98
 #: lib/document/content/calculation/subtr_direct.py:151
-#: lib/document/content/calculation/order_of_operations.py:1465
 #, python-brace-format
 msgid "{math_expr} = {q_mark}"
 msgstr ""
@@ -1700,15 +1703,16 @@ msgstr ""
 msgid "What is {} as a decimal fraction?"
 msgstr ""
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:18
-#: data/frameworks/mental_calculation/03_yellow.yaml:34
-#: data/frameworks/mental_calculation/05_yellow2.yaml:50
+#: data/frameworks/mental_calculation/07_orange1.yaml:64
 #: data/frameworks/mental_calculation/y1b5.yaml:50
 #: data/frameworks/mental_calculation/y1b7.yaml:64
-#: data/frameworks/mental_calculation/03_yellow.yaml:104
-#: data/frameworks/mental_calculation/07_orange1.yaml:64
 #: data/frameworks/mental_calculation/04_yellow1.yaml:24
 #: data/frameworks/mental_calculation/y2b1.yaml:23
+#: data/frameworks/mental_calculation/03_yellow.yaml:34
+#: data/frameworks/mental_calculation/03_yellow.yaml:104
+#: data/frameworks/mental_calculation/y1b7.yaml:74
+#: data/frameworks/mental_calculation/05_yellow2.yaml:18
+#: data/frameworks/mental_calculation/05_yellow2.yaml:50
 msgid "Mental calculation: decimal numerals"
 msgstr ""
 
@@ -1805,12 +1809,14 @@ msgstr ""
 #: data/frameworks/mental_calculation/y1b1.yaml:9
 #: data/frameworks/mental_calculation/02_white2.yaml:3
 #: data/frameworks/mental_calculation/01_white1.yaml:9
+#: data/frameworks/mental_calculation/y0b7.yaml:9
 msgid "Mental calculation: reversed multiplications"
 msgstr ""
 
 #: data/frameworks/mental_calculation/02_white2.yaml:9
-#: data/frameworks/mental_calculation/01_white1.yaml:15
+#: data/frameworks/mental_calculation/y0b7.yaml:15
 #: data/frameworks/mental_calculation/04_yellow1.yaml:9
+#: data/frameworks/mental_calculation/01_white1.yaml:15
 #: data/frameworks/mental_calculation/y1b1.yaml:15
 msgid "Mental calculation: multiplications with a hole"
 msgstr ""
@@ -1820,33 +1826,34 @@ msgstr ""
 msgid "{how_many_digitplace} are there in {decimal_number}?"
 msgstr ""
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:29
-#: data/frameworks/mental_calculation/06_orange.yaml:82
-#: data/frameworks/mental_calculation/05_yellow2.yaml:16
-#: data/frameworks/mental_calculation/04_yellow1.yaml:18
-#: data/frameworks/mental_calculation/04_yellow1.yaml:68
-#: data/frameworks/mental_calculation/y1b6.yaml:75
-#: data/frameworks/mental_calculation/05_yellow2.yaml:138
-#: data/frameworks/mental_calculation/06_orange.yaml:88
-#: data/frameworks/mental_calculation/06_orange.yaml:75
-#: data/frameworks/mental_calculation/y2b2.yaml:74
-#: data/frameworks/mental_calculation/04_yellow1.yaml:17
-#: data/frameworks/mental_calculation/04_yellow1.yaml:19
-#: data/frameworks/mental_calculation/04_yellow1.yaml:86
-#: data/frameworks/mental_calculation/05_yellow2.yaml:37
-#: data/frameworks/mental_calculation/06_orange.yaml:59
-#: data/frameworks/mental_calculation/04_yellow1.yaml:29
-#: data/frameworks/mental_calculation/06_orange.yaml:37
-#: data/frameworks/mental_calculation/04_yellow1.yaml:3
-#: data/frameworks/mental_calculation/05_yellow2.yaml:70
-#: data/frameworks/mental_calculation/04_yellow1.yaml:74
-#: data/frameworks/mental_calculation/06_orange.yaml:90
-#: data/frameworks/mental_calculation/y1b5.yaml:16
-#: data/frameworks/mental_calculation/05_yellow2.yaml:75
-#: data/frameworks/mental_calculation/04_yellow1.yaml:11
-#: data/frameworks/mental_calculation/05_yellow2.yaml:65
 #: data/frameworks/mental_calculation/05_yellow2.yaml:34
 #: data/frameworks/mental_calculation/04_yellow1.yaml:78
+#: data/frameworks/mental_calculation/06_orange.yaml:82
+#: data/frameworks/mental_calculation/05_yellow2.yaml:75
+#: data/frameworks/mental_calculation/05_yellow2.yaml:138
+#: data/frameworks/mental_calculation/06_orange.yaml:59
+#: data/frameworks/mental_calculation/05_yellow2.yaml:16
+#: data/frameworks/mental_calculation/06_orange.yaml:88
+#: data/frameworks/mental_calculation/04_yellow1.yaml:74
+#: data/frameworks/mental_calculation/05_yellow2.yaml:65
+#: data/frameworks/mental_calculation/04_yellow1.yaml:18
+#: data/frameworks/mental_calculation/05_yellow2.yaml:70
+#: data/frameworks/mental_calculation/06_orange.yaml:90
+#: data/frameworks/mental_calculation/y1b6.yaml:75
+#: data/frameworks/mental_calculation/04_yellow1.yaml:68
+#: data/frameworks/mental_calculation/04_yellow1.yaml:19
+#: data/frameworks/mental_calculation/04_yellow1.yaml:86
+#: data/frameworks/mental_calculation/06_orange.yaml:37
+#: data/frameworks/mental_calculation/06_orange.yaml:75
+#: data/frameworks/mental_calculation/y1b5.yaml:16
+#: data/frameworks/mental_calculation/04_yellow1.yaml:3
+#: data/frameworks/mental_calculation/05_yellow2.yaml:29
+#: data/frameworks/mental_calculation/04_yellow1.yaml:29
+#: data/frameworks/mental_calculation/y2b2.yaml:74
+#: data/frameworks/mental_calculation/y1b7.yaml:9
+#: data/frameworks/mental_calculation/04_yellow1.yaml:17
+#: data/frameworks/mental_calculation/04_yellow1.yaml:11
+#: data/frameworks/mental_calculation/05_yellow2.yaml:37
 msgid "Mental calculation: simple percentages calculations"
 msgstr ""
 
@@ -2180,29 +2187,30 @@ msgstr ""
 msgid "Ready,{sep}Steady,{sep}Go!"
 msgstr ""
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:164
-#: data/frameworks/mental_calculation/y1b3.yaml:167
 #: data/frameworks/mental_calculation/05_yellow2.yaml:49
-#: data/frameworks/mental_calculation/06_orange.yaml:167
-#: data/frameworks/mental_calculation/03_yellow.yaml:166
-#: data/frameworks/mental_calculation/05_yellow2.yaml:131
-#: data/frameworks/mental_calculation/05_yellow2.yaml:55
-#: data/frameworks/mental_calculation/05_yellow2.yaml:174
-#: data/frameworks/mental_calculation/04_yellow1.yaml:183
-#: data/frameworks/mental_calculation/06_orange.yaml:160
-#: data/frameworks/mental_calculation/05_yellow2.yaml:187
-#: data/frameworks/mental_calculation/05_yellow2.yaml:255
-#: data/frameworks/mental_calculation/05_yellow2.yaml:169
-#: data/frameworks/mental_calculation/03_yellow.yaml:159
 #: data/frameworks/mental_calculation/y1b3.yaml:165
-#: data/frameworks/mental_calculation/04_yellow1.yaml:181
 #: data/frameworks/mental_calculation/06_orange.yaml:194
-#: data/frameworks/mental_calculation/06_orange.yaml:179
-#: data/frameworks/mental_calculation/03_yellow.yaml:167
+#: data/frameworks/mental_calculation/05_yellow2.yaml:55
+#: data/frameworks/mental_calculation/06_orange.yaml:160
+#: data/frameworks/mental_calculation/y1b3.yaml:167
+#: data/frameworks/mental_calculation/04_yellow1.yaml:183
+#: data/frameworks/mental_calculation/06_orange.yaml:167
+#: data/frameworks/mental_calculation/05_yellow2.yaml:187
+#: data/frameworks/mental_calculation/04_yellow1.yaml:181
+#: data/frameworks/mental_calculation/05_yellow2.yaml:131
 #: data/frameworks/mental_calculation/06_orange.yaml:127
-#: data/frameworks/mental_calculation/06_orange.yaml:47
+#: data/frameworks/mental_calculation/y1b4.yaml:137
 #: data/frameworks/mental_calculation/06_orange.yaml:192
+#: data/frameworks/mental_calculation/03_yellow.yaml:166
+#: data/frameworks/mental_calculation/03_yellow.yaml:167
+#: data/frameworks/mental_calculation/05_yellow2.yaml:164
 #: data/frameworks/mental_calculation/04_yellow1.yaml:191
+#: data/frameworks/mental_calculation/06_orange.yaml:47
+#: data/frameworks/mental_calculation/05_yellow2.yaml:255
+#: data/frameworks/mental_calculation/05_yellow2.yaml:174
+#: data/frameworks/mental_calculation/03_yellow.yaml:159
+#: data/frameworks/mental_calculation/05_yellow2.yaml:169
+#: data/frameworks/mental_calculation/06_orange.yaml:179
 msgid "Challenge, first part"
 msgstr ""
 
@@ -2319,16 +2327,17 @@ msgstr ""
 msgid "{n2} is a multiple of {n1}."
 msgstr ""
 
-#: data/frameworks/mental_calculation/05_yellow2.yaml:57
-#: data/frameworks/mental_calculation/06_orange.yaml:71
-#: data/frameworks/mental_calculation/06_orange.yaml:58
-#: data/frameworks/mental_calculation/05_yellow2.yaml:3
-#: data/frameworks/mental_calculation/05_yellow2.yaml:49
 #: data/frameworks/mental_calculation/y1b6.yaml:58
-#: data/frameworks/mental_calculation/06_orange.yaml:73
-#: data/frameworks/mental_calculation/05_yellow2.yaml:71
+#: data/frameworks/mental_calculation/05_yellow2.yaml:49
 #: data/frameworks/mental_calculation/y2b2.yaml:85
+#: data/frameworks/mental_calculation/05_yellow2.yaml:57
 #: data/frameworks/mental_calculation/06_orange.yaml:65
+#: data/frameworks/mental_calculation/05_yellow2.yaml:71
+#: data/frameworks/mental_calculation/06_orange.yaml:73
+#: data/frameworks/mental_calculation/05_yellow2.yaml:3
+#: data/frameworks/mental_calculation/06_orange.yaml:58
+#: data/frameworks/mental_calculation/06_orange.yaml:71
+#: data/frameworks/mental_calculation/y1b6.yaml:57
 msgid "Mental calculation: multiples and divisors"
 msgstr ""
 
@@ -2354,13 +2363,15 @@ msgid "(True or false?)"
 msgstr ""
 
 #: lib/document/content/geometry/area_rectangle.py:43
+#: lib/document/content/geometry/area_parallelogram.py:43
 msgid "Area of this rectangle?"
 msgstr ""
 
-#: lib/document/content/geometry/area_rectangle.py:44
 #: lib/document/content/geometry/perimeter_rectangle.py:46
+#: lib/document/content/geometry/area_rectangle.py:44
 #: lib/document/content/geometry/perimeter_righttriangle.py:55
 #: lib/document/content/geometry/area_righttriangle.py:55
+#: lib/document/content/geometry/area_parallelogram.py:44
 msgid "(Length unit: {})"
 msgstr ""
 
@@ -2372,10 +2383,11 @@ msgstr ""
 msgid "Perimeter of this rectangle?"
 msgstr ""
 
-#: lib/document/content/geometry/area_rectangle.py:48
+#: lib/document/content/geometry/perimeter_rectangle.py:51
+#: lib/document/content/geometry/area_parallelogram.py:48
 #: lib/document/content/geometry/perimeter_righttriangle.py:60
 #: lib/document/content/geometry/area_righttriangle.py:59
-#: lib/document/content/geometry/perimeter_rectangle.py:51
+#: lib/document/content/geometry/area_rectangle.py:48
 msgid "(Lengths in {})"
 msgstr ""
 
@@ -2497,20 +2509,24 @@ msgid ""
 "When will it arrive? |hint:time_unit|"
 msgstr ""
 
-#: data/frameworks/mental_calculation/06_orange.yaml:98
+#: data/frameworks/mental_calculation/03_yellow.yaml:28
+#: data/frameworks/mental_calculation/05_yellow2.yaml:43
+#: data/frameworks/mental_calculation/06_orange.yaml:92
+#: data/frameworks/mental_calculation/06_orange.yaml:100
+#: data/frameworks/mental_calculation/03_yellow.yaml:72
+#: data/frameworks/mental_calculation/y1b6.yaml:74
+#: data/frameworks/mental_calculation/y2b2.yaml:62
+#: data/frameworks/mental_calculation/03_yellow.yaml:67
+#: data/frameworks/mental_calculation/y2b4.yaml:3
 #: data/frameworks/mental_calculation/y1b6.yaml:85
+#: data/frameworks/mental_calculation/y2b3.yaml:65
+#: data/frameworks/mental_calculation/06_orange.yaml:85
+#: data/frameworks/mental_calculation/06_orange.yaml:98
+#: data/frameworks/mental_calculation/06_orange.yaml:47
+#: data/frameworks/mental_calculation/y1b3.yaml:72
+#: data/frameworks/mental_calculation/y1b7.yaml:83
 #: data/frameworks/mental_calculation/y1b5.yaml:43
 #: data/frameworks/mental_calculation/06_orange.yaml:25
-#: data/frameworks/mental_calculation/03_yellow.yaml:72
-#: data/frameworks/mental_calculation/03_yellow.yaml:28
-#: data/frameworks/mental_calculation/03_yellow.yaml:67
-#: data/frameworks/mental_calculation/05_yellow2.yaml:43
-#: data/frameworks/mental_calculation/y1b3.yaml:72
-#: data/frameworks/mental_calculation/06_orange.yaml:100
-#: data/frameworks/mental_calculation/06_orange.yaml:47
-#: data/frameworks/mental_calculation/y2b2.yaml:62
-#: data/frameworks/mental_calculation/06_orange.yaml:85
-#: data/frameworks/mental_calculation/06_orange.yaml:92
 msgid "Mental calculation: units conversions"
 msgstr ""
 
@@ -2521,18 +2537,6 @@ msgstr ""
 #: data/frameworks/mental_calculation/y1b2.yaml:16
 #: data/frameworks/mental_calculation/02_white2.yaml:16
 msgid "Mental calculation: multiplications of multiples of 10"
-msgstr ""
-
-#: data/frameworks/mental_calculation/y1b6.yaml:51
-#: data/frameworks/mental_calculation/06_orange.yaml:51
-#: data/frameworks/mental_calculation/04_yellow1.yaml:104
-#: data/frameworks/mental_calculation/06_orange.yaml:58
-#: data/frameworks/mental_calculation/05_yellow2.yaml:27
-#: data/frameworks/mental_calculation/06_orange.yaml:64
-#: data/frameworks/mental_calculation/04_yellow1.yaml:48
-#: data/frameworks/mental_calculation/06_orange.yaml:66
-#: data/frameworks/mental_calculation/04_yellow1.yaml:19
-msgid "Mental calculation: estimations"
 msgstr ""
 
 #: data/frameworks/mental_calculation/03_yellow.yaml:94
@@ -2565,12 +2569,13 @@ msgid "Mental calculation: additions and subtractions with a hole"
 msgstr ""
 
 #: data/frameworks/mental_calculation/05_yellow2.yaml:57
-#: data/frameworks/mental_calculation/07_orange1.yaml:24
-#: data/frameworks/mental_calculation/05_yellow2.yaml:125
+#: data/frameworks/mental_calculation/y1b7.yaml:34
+#: data/frameworks/mental_calculation/y1b6.yaml:3
 #: data/frameworks/mental_calculation/05_yellow2.yaml:52
 #: data/frameworks/mental_calculation/05_yellow2.yaml:62
-#: data/frameworks/mental_calculation/y1b6.yaml:3
 #: data/frameworks/mental_calculation/06_orange.yaml:3
+#: data/frameworks/mental_calculation/05_yellow2.yaml:125
+#: data/frameworks/mental_calculation/07_orange1.yaml:24
 #: data/frameworks/mental_calculation/y1b7.yaml:24
 msgid "Mental calculation: mini proportionality problems"
 msgstr ""
@@ -2604,15 +2609,17 @@ msgstr ""
 msgid "Round {nb1} to the nearest thousandth."
 msgstr ""
 
+#: data/frameworks/mental_calculation/y1b6.yaml:63
 #: data/frameworks/mental_calculation/y1b7.yaml:49
-#: data/frameworks/mental_calculation/07_orange1.yaml:49
-#: data/frameworks/mental_calculation/05_yellow2.yaml:110
-#: data/frameworks/mental_calculation/y1b6.yaml:64
-#: data/frameworks/mental_calculation/05_yellow2.yaml:42
 #: data/frameworks/mental_calculation/06_orange.yaml:77
-#: data/frameworks/mental_calculation/06_orange.yaml:71
-#: data/frameworks/mental_calculation/06_orange.yaml:64
+#: data/frameworks/mental_calculation/y1b7.yaml:59
 #: data/frameworks/mental_calculation/06_orange.yaml:79
+#: data/frameworks/mental_calculation/06_orange.yaml:64
+#: data/frameworks/mental_calculation/05_yellow2.yaml:42
+#: data/frameworks/mental_calculation/06_orange.yaml:71
+#: data/frameworks/mental_calculation/05_yellow2.yaml:110
+#: data/frameworks/mental_calculation/07_orange1.yaml:49
+#: data/frameworks/mental_calculation/y1b6.yaml:64
 msgid "Mental calculation: clever additions and multiplications"
 msgstr ""
 
@@ -2624,17 +2631,19 @@ msgstr ""
 msgid "{}"
 msgstr ""
 
-#: data/frameworks/mental_calculation/y2b2.yaml:50
 #: data/frameworks/mental_calculation/y1b6.yaml:38
+#: data/frameworks/mental_calculation/y2b3.yaml:78
 #: data/frameworks/mental_calculation/06_orange.yaml:54
-#: data/frameworks/mental_calculation/y1b3.yaml:27
-#: data/frameworks/mental_calculation/y2b1.yaml:41
-#: data/frameworks/mental_calculation/03_yellow.yaml:27
-#: data/frameworks/mental_calculation/y1b7.yaml:36
 #: data/frameworks/mental_calculation/07_orange1.yaml:36
 #: data/frameworks/mental_calculation/06_orange.yaml:38
-#: data/frameworks/mental_calculation/06_orange.yaml:45
+#: data/frameworks/mental_calculation/y2b1.yaml:41
+#: data/frameworks/mental_calculation/y1b3.yaml:27
 #: data/frameworks/mental_calculation/06_orange.yaml:53
+#: data/frameworks/mental_calculation/y2b2.yaml:50
+#: data/frameworks/mental_calculation/y1b7.yaml:46
+#: data/frameworks/mental_calculation/y1b7.yaml:36
+#: data/frameworks/mental_calculation/03_yellow.yaml:27
+#: data/frameworks/mental_calculation/06_orange.yaml:45
 msgid "Mental calculation: fractions"
 msgstr ""
 
@@ -2649,13 +2658,14 @@ msgstr ""
 msgid " (or {})"
 msgstr ""
 
-#: data/frameworks/mental_calculation/y1b6.yaml:9
-#: data/frameworks/mental_calculation/06_orange.yaml:16
-#: data/frameworks/mental_calculation/06_orange.yaml:25
-#: data/frameworks/mental_calculation/y2b2.yaml:22
+#: data/frameworks/mental_calculation/y2b3.yaml:90
 #: data/frameworks/mental_calculation/06_orange.yaml:24
+#: data/frameworks/mental_calculation/y2b2.yaml:22
+#: data/frameworks/mental_calculation/y1b6.yaml:9
 #: data/frameworks/mental_calculation/06_orange.yaml:22
+#: data/frameworks/mental_calculation/06_orange.yaml:16
 #: data/frameworks/mental_calculation/06_orange.yaml:9
+#: data/frameworks/mental_calculation/06_orange.yaml:25
 msgid "Mental calculation: geometry"
 msgstr ""
 
@@ -2706,19 +2716,22 @@ msgid ""
 "|hint:length_unit|"
 msgstr ""
 
-#: data/frameworks/mental_calculation/y2b2.yaml:68
-#: data/frameworks/mental_calculation/07_orange1.yaml:3
 #: data/frameworks/mental_calculation/y1b7.yaml:3
+#: data/frameworks/mental_calculation/y2b2.yaml:68
+#: data/frameworks/mental_calculation/y1b6.yaml:51
+#: data/frameworks/mental_calculation/07_orange1.yaml:3
 msgid "Mental calculation: numbers rounding"
 msgstr ""
 
-#: data/frameworks/mental_calculation/07_orange1.yaml:9
 #: data/frameworks/mental_calculation/y1b7.yaml:9
+#: data/frameworks/mental_calculation/07_orange1.yaml:9
+#: data/frameworks/mental_calculation/y1b7.yaml:19
 msgid "Mental calculation: divisibility rules"
 msgstr ""
 
-#: data/frameworks/mental_calculation/07_orange1.yaml:127
 #: data/frameworks/mental_calculation/y1b7.yaml:127
+#: data/frameworks/mental_calculation/07_orange1.yaml:127
+#: data/frameworks/mental_calculation/y1b7.yaml:150
 msgid "Challenge, final part"
 msgstr ""
 
@@ -2727,70 +2740,102 @@ msgstr ""
 msgid "Challenge, second part"
 msgstr ""
 
-#: data/frameworks/mental_calculation/y2b1.yaml:70
-#: data/frameworks/mental_calculation/03_yellow.yaml:119
-#: data/frameworks/mental_calculation/03_yellow.yaml:118
-#: data/frameworks/mental_calculation/y1b6.yaml:98
-#: data/frameworks/mental_calculation/y1b1.yaml:21
-#: data/frameworks/mental_calculation/y1b4.yaml:73
-#: data/frameworks/mental_calculation/y1b7.yaml:73
-#: data/frameworks/mental_calculation/y1b4.yaml:72
+#: data/frameworks/mental_calculation/y1b5.yaml:69
+#: data/frameworks/mental_calculation/y1b3.yaml:118
+#: data/frameworks/mental_calculation/y2b1.yaml:71
 #: data/frameworks/mental_calculation/y1b5.yaml:68
 #: data/frameworks/mental_calculation/01_white1.yaml:21
-#: data/frameworks/mental_calculation/y1b6.yaml:99
-#: data/frameworks/mental_calculation/y1b1.yaml:22
-#: data/frameworks/mental_calculation/05_yellow2.yaml:69
-#: data/frameworks/mental_calculation/01_white1.yaml:22
-#: data/frameworks/mental_calculation/04_yellow1.yaml:73
-#: data/frameworks/mental_calculation/07_orange1.yaml:73
-#: data/frameworks/mental_calculation/02_white2.yaml:45
-#: data/frameworks/mental_calculation/04_yellow1.yaml:72
-#: data/frameworks/mental_calculation/06_orange.yaml:98
-#: data/frameworks/mental_calculation/y1b2.yaml:45
-#: data/frameworks/mental_calculation/y1b7.yaml:74
-#: data/frameworks/mental_calculation/y2b2.yaml:99
-#: data/frameworks/mental_calculation/y1b5.yaml:69
-#: data/frameworks/mental_calculation/06_orange.yaml:99
-#: data/frameworks/mental_calculation/y2b1.yaml:71
-#: data/frameworks/mental_calculation/y1b3.yaml:119
-#: data/frameworks/mental_calculation/y1b3.yaml:118
-#: data/frameworks/mental_calculation/y2b2.yaml:100
-#: data/frameworks/mental_calculation/05_yellow2.yaml:68
-#: data/frameworks/mental_calculation/02_white2.yaml:44
+#: data/frameworks/mental_calculation/y1b6.yaml:87
 #: data/frameworks/mental_calculation/07_orange1.yaml:74
+#: data/frameworks/mental_calculation/05_yellow2.yaml:69
+#: data/frameworks/mental_calculation/y1b4.yaml:73
+#: data/frameworks/mental_calculation/y1b3.yaml:119
+#: data/frameworks/mental_calculation/03_yellow.yaml:118
+#: data/frameworks/mental_calculation/y1b6.yaml:98
+#: data/frameworks/mental_calculation/05_yellow2.yaml:68
+#: data/frameworks/mental_calculation/y0b5.yaml:18
+#: data/frameworks/mental_calculation/06_orange.yaml:98
+#: data/frameworks/mental_calculation/y1b7.yaml:97
+#: data/frameworks/mental_calculation/01_white1.yaml:22
+#: data/frameworks/mental_calculation/y2b1.yaml:70
+#: data/frameworks/mental_calculation/02_white2.yaml:45
+#: data/frameworks/mental_calculation/y0b7.yaml:21
+#: data/frameworks/mental_calculation/02_white2.yaml:44
+#: data/frameworks/mental_calculation/03_yellow.yaml:119
+#: data/frameworks/mental_calculation/y1b7.yaml:73
+#: data/frameworks/mental_calculation/y0b6.yaml:17
+#: data/frameworks/mental_calculation/y0b3.yaml:17
+#: data/frameworks/mental_calculation/y2b3.yaml:110
+#: data/frameworks/mental_calculation/y1b6.yaml:99
+#: data/frameworks/mental_calculation/y0b4.yaml:17
+#: data/frameworks/mental_calculation/y1b2.yaml:45
+#: data/frameworks/mental_calculation/04_yellow1.yaml:72
 #: data/frameworks/mental_calculation/y1b2.yaml:44
+#: data/frameworks/mental_calculation/04_yellow1.yaml:73
+#: data/frameworks/mental_calculation/y1b1.yaml:21
+#: data/frameworks/mental_calculation/06_orange.yaml:99
+#: data/frameworks/mental_calculation/y0b1.yaml:21
+#: data/frameworks/mental_calculation/y0b2.yaml:17
+#: data/frameworks/mental_calculation/07_orange1.yaml:73
+#: data/frameworks/mental_calculation/y2b2.yaml:100
+#: data/frameworks/mental_calculation/y0b7.yaml:22
+#: data/frameworks/mental_calculation/y0b3.yaml:18
+#: data/frameworks/mental_calculation/y1b4.yaml:72
+#: data/frameworks/mental_calculation/y0b4.yaml:18
+#: data/frameworks/mental_calculation/y2b2.yaml:99
+#: data/frameworks/mental_calculation/y0b6.yaml:18
+#: data/frameworks/mental_calculation/y1b6.yaml:88
+#: data/frameworks/mental_calculation/y1b7.yaml:96
+#: data/frameworks/mental_calculation/y2b3.yaml:111
+#: data/frameworks/mental_calculation/y0b2.yaml:16
+#: data/frameworks/mental_calculation/y1b1.yaml:22
+#: data/frameworks/mental_calculation/y1b7.yaml:74
+#: data/frameworks/mental_calculation/y0b5.yaml:17
+#: data/frameworks/mental_calculation/y0b1.yaml:22
 msgid "<DEFAULT>"
 msgstr ""
 
-#: settings/default/mc_belts.json:1 settings/default/mc_belts.json:9
+#: settings/default/mc_belts.json:1 settings/default/mc_belts.json:2
+#: settings/default/mc_belts.json:16 settings/default/mc_belts.json:8
+#: settings/default/mc_belts.json:9
 msgid "yellow belt"
 msgstr ""
 
+#: settings/default/mc_belts.json:17 settings/default/mc_belts.json:9
 #: settings/default/mc_belts.json:2 settings/default/mc_belts.json:10
 msgid "orange belt"
 msgstr ""
 
-#: settings/default/mc_belts.json:3 settings/default/mc_belts.json:11
+#: settings/default/mc_belts.json:18 settings/default/mc_belts.json:11
+#: settings/default/mc_belts.json:3 settings/default/mc_belts.json:10
 msgid "green belt"
 msgstr ""
 
-#: settings/default/mc_belts.json:4 settings/default/mc_belts.json:12
+#: settings/default/mc_belts.json:11 settings/default/mc_belts.json:4
+#: settings/default/mc_belts.json:12 settings/default/mc_belts.json:19
+#: settings/default/mc_belts.json:5
 msgid "blue belt"
 msgstr ""
 
-#: settings/default/mc_belts.json:5 settings/default/mc_belts.json:13
+#: settings/default/mc_belts.json:12 settings/default/mc_belts.json:6
+#: settings/default/mc_belts.json:20 settings/default/mc_belts.json:5
+#: settings/default/mc_belts.json:13
 msgid "brown belt"
 msgstr ""
 
-#: settings/default/mc_belts.json:6 settings/default/mc_belts.json:14
+#: settings/default/mc_belts.json:21 settings/default/mc_belts.json:6
+#: settings/default/mc_belts.json:13 settings/default/mc_belts.json:14
 msgid "red belt"
 msgstr ""
 
-#: settings/default/mc_belts.json:7 settings/default/mc_belts.json:15
+#: settings/default/mc_belts.json:7 settings/default/mc_belts.json:22
+#: settings/default/mc_belts.json:14 settings/default/mc_belts.json:15
 msgid "purple belt"
 msgstr ""
 
-#: settings/default/mc_belts.json:8 settings/default/mc_belts.json:16
+#: settings/default/mc_belts.json:15 settings/default/mc_belts.json:16
+#: settings/default/mc_belts.json:7 settings/default/mc_belts.json:8
+#: settings/default/mc_belts.json:23
 msgid "black belt"
 msgstr ""
 
@@ -2802,13 +2847,15 @@ msgstr ""
 msgid "Answers (<BELT>)"
 msgstr ""
 
+#: data/frameworks/mental_calculation/y2b4.yaml:16
 #: data/frameworks/mental_calculation/y2b1.yaml:3
-#: data/frameworks/mental_calculation/y2b3.yaml:54
-#: data/frameworks/mental_calculation/y2b2.yaml:3
-#: data/frameworks/mental_calculation/y2b3.yaml:37
 #: data/frameworks/mental_calculation/y2b3.yaml:51
-#: data/frameworks/mental_calculation/y2b3.yaml:40
 #: data/frameworks/mental_calculation/y2b3.yaml:35
+#: data/frameworks/mental_calculation/y2b3.yaml:50
+#: data/frameworks/mental_calculation/y2b3.yaml:37
+#: data/frameworks/mental_calculation/y2b2.yaml:3
+#: data/frameworks/mental_calculation/y2b3.yaml:54
+#: data/frameworks/mental_calculation/y2b3.yaml:40
 msgid "Mental calculation: four operations"
 msgstr ""
 
@@ -2841,16 +2888,16 @@ msgstr ""
 msgid "Mental calculation: proportionality"
 msgstr ""
 
-#: lib/document/content/calculation/spreadsheet_formula.py:85
+#: lib/document/content/calculation/spreadsheet_formula.py:126
 #, python-brace-format
 msgid "In {cell_ref}, one types {formula}."
 msgstr ""
 
-#: lib/document/content/calculation/spreadsheet_formula.py:88
+#: lib/document/content/calculation/spreadsheet_formula.py:129
 msgid "What will it display once enter is pressed?"
 msgstr ""
 
-#: lib/document/content/calculation/read_coordinates.py:52
+#: lib/document/content/calculation/read_coordinates.py:54
 #, python-brace-format
 msgid "Coordinates of point {point_name}?"
 msgstr ""
@@ -2861,4 +2908,78 @@ msgstr ""
 
 #: lib/document/content/calculation/compare_signed_numbers.py:69
 msgid "(True, or false?)"
+msgstr ""
+
+#: lib/document/content/calculation/evaluate_expression.py:124
+#, python-brace-format
+msgid "Evaluate the expression {expression}"
+msgstr ""
+
+#: lib/document/content/calculation/evaluate_expression.py:126
+#, python-brace-format
+msgid "for {values}"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b1.yaml:3
+msgid "Mental calculation: table of 2"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b1.yaml:9
+msgid "Mental calculation: table of 3"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b1.yaml:15
+msgid "Mental calculation: table of 4"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b3.yaml:3
+msgid "Mental calculation: tables of 2, 3, 4 and 5"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b3.yaml:11
+msgid "Mental calculation: table of 6"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y1b7.yaml:3
+msgid "Fraction d'une quantité"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b5.yaml:3
+msgid "Mental calculation: tables of 2 to 7"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b5.yaml:11
+msgid "Mental calculation: table of 8"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b4.yaml:3
+msgid "Mental calculation: tables of 2 to 6"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b4.yaml:11
+msgid "Mental calculation: table of 7"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b6.yaml:3
+msgid "Mental calculation: tables of 2 to 8"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b6.yaml:11
+msgid "Mental calculation: table of 9"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b2.yaml:3
+msgid "Mental calculation: tables of 2, 3 and 4"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y0b2.yaml:10
+msgid "Mental calculation: table of 5"
+msgstr ""
+
+#: data/frameworks/mental_calculation/y2b3.yaml:37
+msgid "Mental calculation: multiplications and divisions"
+msgstr ""
+
+#: settings/default/mc_belts.json:1
+msgid "white belt"
 msgstr ""

@@ -38,7 +38,8 @@ settings.init()
 DEFAULT_KEYWORD_STARTS = ['header', 'title', 'text', 'subtitle',
                           'answers_title']
 DEFAULT_KEYWORDS = \
-    ['wording', 'y1b1', 'y1b2', 'y1b3', 'y1b4', 'y1b5', 'y1b6', 'y1b7', 'y1b8',
+    ['wording', 'y0b1', 'y0b2', 'y01b4', 'y0b5', 'y0b6', 'y0b7', 'y0b8',
+     'y1b1', 'y1b2', 'y1b3', 'y1b4', 'y1b5', 'y1b6', 'y1b7', 'y1b8',
      'y2b1', 'y2b2', 'y2b3', 'y2b4', 'y2b5', 'y2b6', 'y2b7', 'y2b8']
 MAIN_POT_FILE_PATH = settings.localedir + 'mathmaker.pot'
 PROJECT_ROOT = DIR_TO_BROWSE = settings.rootdir
