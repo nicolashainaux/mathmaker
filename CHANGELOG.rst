@@ -10,6 +10,11 @@ Unreleased
 ----------
 
 
+Version 0.7.21 (2024-10-23)
+---------------------------
+
+* Add level 0 sheets y0b1-7 (multiplications tables).
+
 Version 0.7.20 (2023-03-31)
 ---------------------------
 
