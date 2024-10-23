@@ -180,3 +180,27 @@ W03c: !!omap
                  perimeter rectangle, picture=true -> nnpairs:3-9 (1)
                  fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
                  read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
+
+W04a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: multi direct -> nnpairs:3-9, nb_variant=multiplesof10 (1)
+                 area rectangle, picture=true -> nnpairs:4-9×6-9 (1)
+                 subtr direct -> clocktime_data (1)
+                 order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
+
+W04b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: vocabulary divi -> int_irreducible_frac (1)
+                 perimeter rectangle, picture=true -> nnpairs:3-9 (1)
+                 fractions conversions -> nnsingletons:1,10,20,25,50,75 (1)
+                 decimal numerals, direction=to_decimal -> decimals (1)
+
+W04c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0 (1)
+                 divi euclidean -> nnpairs:4-9 (1)
+                 read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
+                 multi hole -> int_irreducible_frac (1)

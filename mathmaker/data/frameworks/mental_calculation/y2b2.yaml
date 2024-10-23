@@ -226,3 +226,27 @@ W03c: !!omap
                  divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:4×501-5000, nb2_notmod=10 (1)
                  rectangle length_or_width, context=from_perimeter, picture=true -> nnpairs:5-20 (1)
                  fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (1)
+
+W04a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: perimeter righttriangle -> nnpairs:3-9×3-9, code=1_1 (1)
+                 divi euclidean -> nnpairs:4-9 (1)
+                 round number -> digits_places;;decimals, place_lt=100, nz=3, fd=3, nb1_lt=1 (1)
+                 numeric expansion -> mergedinttriples_3to9 (1)
+
+W04b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: divi euclidean -> nnpairs:3-6×15,25 (1)
+                 read abscissa, start_at_zero=true -> improper_fractions, nb1_lt=10, nb2_ge=2, nb2_lt=11, mod_neq=0 (1)
+                 units conversion -> unitspairs, level=1 (1)
+                 perimeter polygon -> polygons, sum_ingredients=int_2to10, nb_variant=±half, level=4 (1)
+
+W04c: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: percent direct -> 5%of..., level=easy, context=simple_unit (1)
+                 divisibility rule, variant2=ensure_no_confusion_between_rules -> nnpairs:9×501-2500, nb2_notmod=10 (1)
+                 fraction simplification -> singleint_3to9;;simple_proper_fractions, reducible=0 (1)
+                 order of_operations, subvariant=only_positive -> singleint_3to9;;intpairs_3to9, variant=8-23 (1)

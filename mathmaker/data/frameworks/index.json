@@ -279,6 +279,21 @@
         "y2b1",
         "W03c"
     ],
+    "y2b1_W04a": [
+        "mental_calculation",
+        "y2b1",
+        "W04a"
+    ],
+    "y2b1_W04b": [
+        "mental_calculation",
+        "y2b1",
+        "W04b"
+    ],
+    "y2b1_W04c": [
+        "mental_calculation",
+        "y2b1",
+        "W04c"
+    ],
     "y2b2_four_operations": [
         "mental_calculation",
         "y2b2",
@@ -368,6 +383,21 @@
         "mental_calculation",
         "y2b2",
         "W03c"
+    ],
+    "y2b2_W04a": [
+        "mental_calculation",
+        "y2b2",
+        "W04a"
+    ],
+    "y2b2_W04b": [
+        "mental_calculation",
+        "y2b2",
+        "W04b"
+    ],
+    "y2b2_W04c": [
+        "mental_calculation",
+        "y2b2",
+        "W04c"
     ],
     "y1b2_positional_notation": [
         "mental_calculation",
