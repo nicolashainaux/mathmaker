@@ -294,6 +294,26 @@
         "y2b1",
         "W04c"
     ],
+    "y0b1_table2": [
+        "mental_calculation",
+        "y0b1",
+        "table2"
+    ],
+    "y0b1_table3": [
+        "mental_calculation",
+        "y0b1",
+        "table3"
+    ],
+    "y0b1_table4": [
+        "mental_calculation",
+        "y0b1",
+        "table4"
+    ],
+    "y0b1_exam": [
+        "mental_calculation",
+        "y0b1",
+        "exam"
+    ],
     "y2b2_four_operations": [
         "mental_calculation",
         "y2b2",
@@ -489,6 +509,21 @@
         "y1b2",
         "W03d"
     ],
+    "y0b3_table2_5": [
+        "mental_calculation",
+        "y0b3",
+        "table2_5"
+    ],
+    "y0b3_table6": [
+        "mental_calculation",
+        "y0b3",
+        "table6"
+    ],
+    "y0b3_exam": [
+        "mental_calculation",
+        "y0b3",
+        "exam"
+    ],
     "y1b7_fortests": [
         "mental_calculation",
         "y1b7",
@@ -598,6 +633,21 @@
         "mental_calculation",
         "y1b7",
         "W03d"
+    ],
+    "y0b5_table2_7": [
+        "mental_calculation",
+        "y0b5",
+        "table2_7"
+    ],
+    "y0b5_table8": [
+        "mental_calculation",
+        "y0b5",
+        "table8"
+    ],
+    "y0b5_exam": [
+        "mental_calculation",
+        "y0b5",
+        "exam"
     ],
     "y1b6_proportionality_problems": [
         "mental_calculation",
@@ -979,6 +1029,36 @@
         "y1b5",
         "W04d"
     ],
+    "y0b4_table2_6": [
+        "mental_calculation",
+        "y0b4",
+        "table2_6"
+    ],
+    "y0b4_table7": [
+        "mental_calculation",
+        "y0b4",
+        "table7"
+    ],
+    "y0b4_exam": [
+        "mental_calculation",
+        "y0b4",
+        "exam"
+    ],
+    "y0b6_table2_8": [
+        "mental_calculation",
+        "y0b6",
+        "table2_8"
+    ],
+    "y0b6_table9": [
+        "mental_calculation",
+        "y0b6",
+        "table9"
+    ],
+    "y0b6_exam": [
+        "mental_calculation",
+        "y0b6",
+        "exam"
+    ],
     "y2b4_units_conversions": [
         "mental_calculation",
         "y2b4",
@@ -988,6 +1068,21 @@
         "mental_calculation",
         "y2b4",
         "four_operations"
+    ],
+    "y0b2_table2_4": [
+        "mental_calculation",
+        "y0b2",
+        "table2_4"
+    ],
+    "y0b2_table5": [
+        "mental_calculation",
+        "y0b2",
+        "table5"
+    ],
+    "y0b2_exam": [
+        "mental_calculation",
+        "y0b2",
+        "exam"
     ],
     "y2b3_proportionality": [
         "mental_calculation",
@@ -1118,5 +1213,25 @@
         "mental_calculation",
         "y2b3",
         "W06c"
+    ],
+    "y0b7_multiplications": [
+        "mental_calculation",
+        "y0b7",
+        "multiplications"
+    ],
+    "y0b7_multiplications_reversed": [
+        "mental_calculation",
+        "y0b7",
+        "multiplications_reversed"
+    ],
+    "y0b7_multiplications_hole": [
+        "mental_calculation",
+        "y0b7",
+        "multiplications_hole"
+    ],
+    "y0b7_exam": [
+        "mental_calculation",
+        "y0b7",
+        "exam"
     ]
 }

@@ -1,0 +1,24 @@
+table2: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: table of 2"
+  - exercise: !!omap
+    - questions: multi direct, sort_nbs=True -> nnpairs:2×2-9 (8)
+
+table3: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: table of 3"
+  - exercise: !!omap
+    - questions: multi direct, sort_nbs=True -> nnpairs:3×2-9 (8)
+
+table4: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: table of 4"
+  - exercise: !!omap
+    - questions: multi direct, sort_nbs=True -> nnpairs:4×2-9 (8)
+    
+exam: !!omap
+  - preset: "mental calculation"
+  - title: "<DEFAULT>"
+  - answers_title: "<DEFAULT>"
+  - exercise: !!omap
+    - questions: multi direct, sort_nbs=True -> nnpairs:2-4×2-9 (20)

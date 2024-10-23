@@ -1,0 +1,62 @@
+multiplications: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: multiplications"
+  - exercise: !!omap
+    - questions: multi direct -> nnpairs:2-9 (10)
+
+multiplications_reversed: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: reversed multiplications"
+  - exercise: !!omap
+    - questions: multi reversed -> nnpairs:2-9 (10)
+
+multiplications_hole: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: multiplications with a hole"
+  - exercise: !!omap
+    - questions: multi hole -> nnpairs:2-9 (10)
+
+exam: !!omap
+  - preset: "mental calculation"
+  - title: "<DEFAULT>"
+  - answers_title: "<DEFAULT>"
+  - exercise: !!omap
+    - mix:
+      - questions: multi direct,
+                   multi direct,
+                   multi direct,
+                   multi direct,
+                   multi direct,
+                   multi direct,
+                   multi hole,
+                   multi hole,
+                   multi hole,
+                   multi hole,
+                   multi hole,
+                   multi hole,
+                   multi reversed,
+                   multi reversed,
+                   multi reversed,
+                   multi reversed,
+                   multi reversed,
+                   multi reversed
+      - nb: nnpairs:2×6-9 (1)
+            nnpairs:3×5-9 (5)
+            nnpairs:4×4-8 (2)
+            nnpairs:5×5-9 (1)
+            nnpairs:6×7 (1)
+            nnpairs:6×8 (1)
+            nnpairs:6×9 (1)
+            nnpairs:7×7 (1)
+            nnpairs:7×8 (1)
+            nnpairs:7×9 (1)
+            nnpairs:8×8 (1)
+            nnpairs:8×9 (1)
+            nnpairs:9×9 (1)
+    - questions: multi direct -> nnpairs:5×5-9 (1)
+                 [1][multi direct -> nnpairs:6×6 (1)
+                     multi reversed -> nnpairs:6×6 (1)
+                     multi hole -> nnpairs:6×6 (1)
+                     multi direct -> nnpairs:4×9 (1)
+                     multi reversed -> nnpairs:4×9 (1)
+                     multi hole -> nnpairs:4×9 (1)]

@@ -1,0 +1,23 @@
+table2_6: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: tables of 2 to 6"
+  - exercise: !!omap
+    - questions: multi direct -> nnpairs:2-6×2-9 (3)
+                 multi hole -> nnpairs:2-6×2-9 (3)
+                 multi reversed -> nnpairs:2-6×2-9 (4)
+
+table7: !!omap
+  - preset: "mental calculation"
+  - title: "Mental calculation: table of 7"
+  - exercise: !!omap
+    - questions: multi direct -> nnpairs:7×2-9 (8)
+    
+exam: !!omap
+  - preset: "mental calculation"
+  - title: "<DEFAULT>"
+  - answers_title: "<DEFAULT>"
+  - exercise: !!omap
+    - questions: multi direct -> nnpairs:7×2-9 (3)
+                 multi direct -> nnpairs:2-7×2-9 (7)
+                 multi hole -> nnpairs:2-6×2-9 (6)
+                 multi reversed -> nnpairs:2-6×2-9 (4)
