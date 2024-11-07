@@ -300,6 +300,14 @@
         "equal_sides",
         "drawDate"
     ],
+    "pythagorean_triples": [
+        "id",
+        "leg0",
+        "leg1",
+        "hyp",
+        "use_decimals",
+        "drawDate"
+    ],
     "time_units_couples": [
         "id",
         "u1",
