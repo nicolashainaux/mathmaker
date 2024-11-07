@@ -80,7 +80,7 @@ class Sheet(object):
                     'text': '',
                     'answers_title': _('Answers!')}}
 
-        if filename is None:
+        if filename is None:  # build from yaml
             data = load_sheet(theme, subtheme, sheet_name)
             self.preset = data.get('preset', 'default')
             shared.enable_js_form = (options.get('enable_js_form', False)
@@ -129,7 +129,7 @@ class Sheet(object):
                 raise ValueError('YAML file format error: expected an integer'
                                  'as font_size_offset value, got {} instead.'
                                  .format(str(type(font_size_offset))))
-        else:
+        else:  # build from xml
             (header,
              title,
              subtitle,
@@ -145,10 +145,7 @@ class Sheet(object):
         self.exercises_list = list()
         shared.machine.set_font_size_offset(font_size_offset)
 
-        self.write_texts_twice = False
-
-        if 'write_texts_twice' in options and options['write_texts_twice']:
-            self.write_texts_twice = True
+        self.write_texts_twice = layout_data.get('write_texts_twice', False)
 
         # Some tests on sheet_layout before using it ;
         # but it's a bit complicated to write a complete set of tests on it ;
@@ -250,8 +247,11 @@ class Sheet(object):
 
         self.shift = options.get('shift', False)
 
-        if filename is None:
-            for e_data in build_exercises_list(data):
+        if filename is None:  # build from yaml
+            repeat = 1
+            if self.layout_type == 'short_test':
+                repeat = 2
+            for e_data in build_exercises_list(data) * repeat:
                 if self.preset != 'default' and 'preset' not in e_data:
                     if self.preset == 'mental calculation slideshow':
                         e_preset = 'mental calculation'
@@ -270,7 +270,8 @@ class Sheet(object):
                     excbis.questions_list = rotate(excbis.questions_list,
                                                    offset)
                     self.exercises_list.append(excbis)
-        else:
+
+        else:  # build from xml
             for ex in get_exercises_list(filename):
                 ex_kwargs = ex[2]
                 if self.preset != 'default':
@@ -282,12 +283,9 @@ class Sheet(object):
 
     #   @brief Writes the whole sheet's content to the output.
     def __str__(self):
-        result = ''
-        if self.cot:
-            required.package['fancyvrb'] = True
+        result = shared.machine.write_document_begins(variant=self.layout_type)
+
         if self.layout_type in ['default', 'equations', 'slideshow']:
-            result += shared.machine.write_document_begins(
-                variant=self.layout_type)
             result += self.sheet_header_to_str()
             result += self.sheet_title_to_str(variant=self.layout_type)
             result += self.sheet_text_to_str()
@@ -297,19 +295,53 @@ class Sheet(object):
             result += self.answers_title_to_str(
                 variant=self.layout_type)
             result += self.texts_to_str('ans', 0)
-            result += shared.machine.write_document_ends()
-            pkg = []
-            if any([s in result for s in KNOWN_AMSSYMB_SYMBOLS]):
-                pkg.append('amssymb')
-            if any([s in result for s in KNOWN_AMSMATH_SYMBOLS]):
-                pkg.append('amsmath')
-            if any([s in result for s in KNOWN_TEXTCOMP_SYMBOLS]):
-                pkg.append('textcomp')
-            preamble = shared.machine.write_preamble(variant=self.layout_type,
-                                                     required_pkg=pkg)
-            result = preamble + result
+
+        elif self.layout_type in ['short_test']:
+            n = 1
+            if self.write_texts_twice:
+                n = 2
+            for i in range(n):
+                result += self.sheet_header_to_str()
+                result += self.sheet_title_to_str()
+                result += self.sheet_text_to_str()
+                result += self.texts_to_str('exc', 0)
+                result += shared.machine.write_new_line_twice()
+
+                result += self.sheet_header_to_str()
+                result += self.sheet_title_to_str()
+                result += self.sheet_text_to_str()
+                result += self.texts_to_str('exc',
+                                            len(self.exercises_list) // 2)
+                result += shared.machine.write_new_line_twice()
+
+                if n == 2 and i == 0:
+                    result += shared.machine.insert_dashed_hline()
+                    result += shared.machine.write_new_line()
+                    result += shared.machine.insert_vspace()
+                    result += shared.machine.write_new_line_twice()
+
+            result += shared.machine.write_jump_to_next_page()
+
+            result += self.answers_title_to_str()
+            result += self.texts_to_str('ans', 0)
+            result += shared.machine.write_jump_to_next_page()
+            result += self.answers_title_to_str()
+            result += self.texts_to_str('ans', len(self.exercises_list) // 2)
+
+        result += shared.machine.write_document_ends()
+
+        pkg = []
+        if any([s in result for s in KNOWN_AMSSYMB_SYMBOLS]):
+            pkg.append('amssymb')
+        if any([s in result for s in KNOWN_AMSMATH_SYMBOLS]):
+            pkg.append('amsmath')
+        if any([s in result for s in KNOWN_TEXTCOMP_SYMBOLS]):
+            pkg.append('textcomp')
+        preamble = shared.machine.write_preamble(variant=self.layout_type,
+                                                 required_pkg=pkg)
 
         if self.cot:
+            required.package['fancyvrb'] = True
             # title = shared.machine.write(self.title, emphasize='bold')
             template = Path(__file__).parent / 'templates/cotinga_template.tex'
             template = template.read_text()
@@ -325,7 +357,7 @@ class Sheet(object):
                 content = self.exercises_list[0].to_str('exc')
                 output.write_text(template.replace('CONTENT', content))
 
-        return result
+        return preamble + result
 
     # --------------------------------------------------------------------------
     ##
