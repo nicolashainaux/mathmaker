@@ -135,7 +135,7 @@ def init():
     global multiplesof10_source
     global time_units_couples_source
     global time_units_conversions_source
-    global pythagorean_triples
+    global pythagorean_triples_source
 
     enable_js_form = False
 
@@ -230,9 +230,8 @@ def init():
                                             ['id', 'nb1', 'nb2'])
     cols_for_spreadsheets_source = database.source(
         'cols_for_spreadsheets', ['id', 'col'])
-    pythagorean_triples = database.source('pythagorean_triples',
-                                          ['id', 'leg0', 'leg1', 'hyp',
-                                           'use_decimals'])
+    pythagorean_triples_source = database.source(
+        'pythagorean_triples', ['id', 'leg0', 'leg1', 'hyp', 'use_decimals'])
     time_units_couples_source = database.source('time_units_couples',
                                                 ['id', 'u1', 'u2'])
     time_units_conversions_source = database.source('time_units_conversions',
