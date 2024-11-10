@@ -69,6 +69,8 @@ from mathmaker.lib.tools.database import parse_sql_creation_query
 from mathmaker.lib.constants.numeration import DIGITSPLACES
 from mathmaker.lib.constants.numeration import DIGITSPLACES_DECIMAL
 from mathmaker.lib.constants.pythagorean import ALL_TRIPLES_5_200
+from mathmaker.lib.constants.pythagorean import NO_TRIPLES_LEGS_1_200
+from mathmaker.lib.constants.pythagorean import NO_TRIPLES_HYPS_1_200
 
 INTPAIRS_MAX = 1000
 INTTRIPLES_MAX = 200
@@ -1158,21 +1160,43 @@ def __main__():
                    "VALUES(?, ?)",
                    db_rows)
 
-    sys.stderr.write('Insert pythagorean triples...\n')
-    creation_query = '''CREATE TABLE pythagorean_triples
+    sys.stderr.write('Insert pythagorean triples (exact)...\n')
+    creation_query = '''CREATE TABLE pythagorean_triples_exact
                         (id INTEGER PRIMARY KEY, leg0 INTEGER, leg1 INTEGER,
-                         hyp INTEGER, use_decimals INTEGER,
+                         hyp INTEGER, calculate_hyp INTEGER,
+                         calculate_leg INTEGER, use_decimals INTEGER,
                          drawDate INTEGER)'''
     db_creation_queries.append(creation_query)
     db.execute(creation_query)
 
-    db_rows = [(leg0, leg1, hyp,
+    db_rows = [(leg0, leg1, hyp, 1, 1,
                 0 if all([not leg0 % 10, not leg1 % 10, not hyp % 10]) else 1,
                 0) for (leg0, leg1, hyp) in ALL_TRIPLES_5_200]
     db.executemany("INSERT "
-                   "INTO pythagorean_triples(leg0, "
-                   "leg1, hyp, use_decimals, drawDate) "
-                   "VALUES(?, ?, ?, ?, ?)",
+                   "INTO pythagorean_triples_exact(leg0, "
+                   "leg1, hyp, calculate_hyp, calculate_leg, use_decimals, "
+                   "drawDate) "
+                   "VALUES(?, ?, ?, ?, ?, ?, ?)",
+                   db_rows)
+
+    sys.stderr.write('Insert pythagorean triples (approx)...\n')
+    creation_query = '''CREATE TABLE pythagorean_triples_approx
+                        (id INTEGER PRIMARY KEY, leg0 INTEGER, leg1 INTEGER,
+                         hyp INTEGER, calculate_hyp INTEGER,
+                         calculate_leg INTEGER, use_decimals INTEGER,
+                         drawDate INTEGER)'''
+    db_creation_queries.append(creation_query)
+    db.execute(creation_query)
+
+    DATA = NO_TRIPLES_LEGS_1_200 + NO_TRIPLES_HYPS_1_200
+    db_rows = [(leg0, leg1, hyp, 0 if hyp == 0 else 1, 0 if leg0 == 0 else 1,
+                0 if all([not leg0 % 10, not leg1 % 10, not hyp % 10]) else 1,
+                0) for (leg0, leg1, hyp) in DATA]
+    db.executemany("INSERT "
+                   "INTO pythagorean_triples_approx(leg0, "
+                   "leg1, hyp, calculate_hyp, calculate_leg, use_decimals, "
+                   "drawDate) "
+                   "VALUES(?, ?, ?, ?, ?, ?, ?)",
                    db_rows)
 
     sys.stderr.write('Insert time units couples...\n')
