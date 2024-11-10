@@ -434,7 +434,7 @@ NO_TRIPLES_HYPS_1_200 =\
 ##
 #   @brief Will return all [first_leg, second_leg] matching a given hypotenuse
 def get_legs_matching_given_hypotenuse(side_length):
-    if not type(side_length) == int:
+    if type(side_length) is not int:
         raise ValueError('side_length must be int')
 
     result = []
@@ -450,7 +450,7 @@ def get_legs_matching_given_hypotenuse(side_length):
 ##
 #   @brief Will return all leg values matching a given one
 def get_legs_matching_given_leg(side_length):
-    if not type(side_length) == int:
+    if type(side_length) is not int:
         raise ValueError('side_length must be int')
 
     result = []
