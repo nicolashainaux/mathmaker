@@ -152,7 +152,7 @@ class Sheet(object):
         # e.g. if the user doesn't use the same number of exercises in the
         # 'exc' key as in 'ans' key (which would be stupid) this
         # won't be checked here and so it won't work.
-        if type(sheet_layout) != dict:
+        if type(sheet_layout) is not dict:
             raise TypeError('Got: ' + str(type(type(sheet_layout)))
                             + ' instead of a dict')
 
@@ -165,7 +165,7 @@ class Sheet(object):
                 raise ValueError('SHEET_LAYOUT should have a key '
                                  + k + ' but it has no such key')
 
-            if type(sheet_layout[k]) != list:
+            if type(sheet_layout[k]) is not list:
                 raise ValueError('SHEET_LAYOUT[' + k + '] should be'
                                  + ' a list, but it is '
                                  + str(type(sheet_layout[k])))
@@ -178,7 +178,7 @@ class Sheet(object):
 
             for i in range(int(len(sheet_layout[k]) // 2)):
                 if (not (sheet_layout[k][2 * i] is None
-                    or type(sheet_layout[k][2 * i]) == list
+                    or type(sheet_layout[k][2 * i]) is list
                     or sheet_layout[k][2 * i] == 'jump')):
                     # __
                     raise ValueError('SHEET_LAYOUT[' + k + ']['
@@ -187,7 +187,7 @@ class Sheet(object):
                                      'or None or "jump", but it is a '
                                      + str(type(sheet_layout[k][2 * i])))
                 elif sheet_layout[k][2 * i] is None:
-                    if (not (type(sheet_layout[k][2 * i + 1]) == int
+                    if (not (type(sheet_layout[k][2 * i + 1]) is int
                         or sheet_layout[k][2 * i + 1]
                         in ['all', 'all_left', 'jump'])):
                         # __
@@ -207,8 +207,8 @@ class Sheet(object):
                             + 'the jump keyword, but it is '
                             + str(type(sheet_layout[k][2 * i + 1])))
 
-                elif type(sheet_layout[k][2 * i]) == list:
-                    if not type(sheet_layout[k][2 * i + 1]) == tuple:
+                elif type(sheet_layout[k][2 * i]) is list:
+                    if type(sheet_layout[k][2 * i + 1]) is not tuple:
                         raise ValueError(
                             'SHEET_LAYOUT[' + k + ']['
                             + str(2 * i + 1) + '] should be a tuple, '
