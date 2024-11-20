@@ -168,7 +168,6 @@ class LaTeX(Structure.Structure):
 \DeclareSymbolFont{{mynumbers}}      {{TU}}{{fontid}}{{m}}{{n}}
 \SetSymbolFont    {{mynumbers}}{{bold}}{{TU}}{{fontid}}{{bx}}{{n}}
 
-\AtBeginDocument{{
 \DeclareMathSymbol{{0}}{{\mathalpha}}{{mynumbers}}{{`0}}
 \DeclareMathSymbol{{1}}{{\mathalpha}}{{mynumbers}}{{`1}}
 \DeclareMathSymbol{{2}}{{\mathalpha}}{{mynumbers}}{{`2}}
@@ -181,7 +180,7 @@ class LaTeX(Structure.Structure):
 \DeclareMathSymbol{{9}}{{\mathalpha}}{{mynumbers}}{{`9}}
 \DeclareMathSymbol{{.}}{{\mathord}}{{mynumbers}}{{`.}}
 \DeclareMathSymbol{{,}}{{\mathpunct}}{{mynumbers}}{{`,}}
-}}""".format(font_name='{' + settings.font + '}')\
+""".format(font_name='{' + settings.font + '}')\
                 .replace('SOURCECODEPRO', sourcecodepro)
         # language
         polyglossia = str(UsePackage('polyglossia'))
@@ -193,6 +192,11 @@ class LaTeX(Structure.Structure):
                                  content=self.language,
                                  options=language_options)
         language_setup = str(language_setup)
+        decimalcomma = ''
+        if settings.language.startswith('fr'):
+            decimalcomma = '\n' + '% {}\n{}\n\n'\
+                .format(_('For pretty comma in decimal numbers'),
+                        str(UsePackage('decimalcomma')))
         # siunitx
         siunitx = ''
         if required.package.get('siunitx', False):
@@ -354,7 +358,7 @@ class LaTeX(Structure.Structure):
 {font_patch}
 
 {polyglossia}
-{language_setup}
+{language_setup}{decimalcomma}
 
 {siunitx}{xcolor}{tikz_setup}{hyperref}{cancel}{multicol}{placeins}{ulem}"""\
 r"""{textcomp}{array}{cellspace}{graphicx}{epstopdf}{textpos}{specificpackages}
@@ -362,7 +366,7 @@ r"""{textcomp}{array}{cellspace}{graphicx}{epstopdf}{textpos}{specificpackages}
 {specificcommands}{commoncommands}
 """.format(luatex85patch=luatex85patch, documentclass=dc, symbols=variouspkg,
            polyglossia=polyglossia, language_setup=language_setup,
-           font_patch=font_patch, siunitx=siunitx,
+           font_patch=font_patch, siunitx=siunitx, decimalcomma=decimalcomma,
            xcolor=xcolor, tikz_setup=tikz_setup, hyperref=hyperref,
            cancel=cancel, multicol=multicol, placeins=placeins, ulem=ulem,
            textcomp=textcomp, array=array, cellspace=cellspace,
@@ -620,7 +624,7 @@ r"""{textcomp}{array}{cellspace}{graphicx}{epstopdf}{textpos}{specificpackages}
             required.package['multicol'] = True
             if options.get('unbalanced', False):
                 keyword = 'multicols*'
-            if (type(options['multicolumns']) == int
+            if (type(options['multicolumns']) is int
                 and options['multicolumns'] >= 1):
                 # __
                 output_str = '\\begin{' + keyword + '}{' \
@@ -641,7 +645,7 @@ r"""{textcomp}{array}{cellspace}{graphicx}{epstopdf}{textpos}{specificpackages}
     #   @warning if you chose a too low or too high value as font_size_offset,
     #   @warning then all the text will be either tiny or Huge.
     def translate_font_size(self, arg):
-        if not type(arg) == str:
+        if type(arg) is not str:
             raise TypeError('Got: ' + str(type(arg)) + ' instead of str')
         elif arg not in TEXT_SCALES:
             raise ValueError('expected a text size (see TEXT_SCALES) '
@@ -723,7 +727,7 @@ r"""{textcomp}{array}{cellspace}{graphicx}{epstopdf}{textpos}{specificpackages}
         extra_last_column = ""
         extra_col_sep = ""
 
-        if 'justify' in options and type(options['justify']) == list:
+        if 'justify' in options and type(options['justify']) is list:
             if not len(options['justify']) == n_col:
                 raise ValueError("The number of elements of this list should "
                                  "be equal to the number of columns of the "
@@ -764,7 +768,7 @@ r"""{textcomp}{array}{cellspace}{graphicx}{epstopdf}{textpos}{specificpackages}
 
         col_fmt = ['c' for i in range(n_col)]
 
-        if ('col_fmt' in options and type(options['col_fmt']) == list
+        if ('col_fmt' in options and type(options['col_fmt']) is list
             and len(options['col_fmt']) == n_col):
             # __
             for i in range(len(col_fmt)):
@@ -798,7 +802,10 @@ r"""{textcomp}{array}{cellspace}{graphicx}{epstopdf}{textpos}{specificpackages}
             extra_col_sep = ''
             min_row_height = ''
 
-        result += "\\begin{tabular}{" + tabular_format + "}" + "\n"
+        tabular_options = options.get('tabular_options', '')
+
+        result += "\\begin{tabular}" + tabular_options \
+            + "{" + tabular_format + "}" + "\n"
         result += h_border
 
         for i in range(int(n_lin)):
@@ -898,7 +905,7 @@ r"""{textcomp}{array}{cellspace}{graphicx}{epstopdf}{textpos}{specificpackages}
     ##
     #   @brief Sets the redirect_output_to_str field to True or False
     def set_redirect_output_to_str(self, arg):
-        if type(arg) == bool:
+        if type(arg) is bool:
             self.redirect_output_to_str = arg
         else:
             raise TypeError('Got: ' + str(type(arg)) + ' instead of boolean ')

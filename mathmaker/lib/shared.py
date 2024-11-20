@@ -21,10 +21,18 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import sqlite3
+from pathlib import Path
 
 from mathmaker import settings
 from mathmaker.lib.machine import LaTeX
 from mathmaker.lib.constants import latex
+
+TEMPLOG = Path.home() / '.local/log/mmdebug.log'
+
+
+def log_append(text, encoding=None, errors=None):
+    with TEMPLOG.open('a', encoding=encoding, errors=errors) as f:
+        f.write(text)
 
 
 def init():
@@ -136,6 +144,9 @@ def init():
     global time_units_couples_source
     global time_units_conversions_source
     global pythagorean_triples_source
+    global alternate_hyp_leg_source
+    global alternate_pyth_use_decimals_source
+    global alternate_exactness_source
 
     enable_js_form = False
 
@@ -231,7 +242,9 @@ def init():
     cols_for_spreadsheets_source = database.source(
         'cols_for_spreadsheets', ['id', 'col'])
     pythagorean_triples_source = database.source(
-        'pythagorean_triples', ['id', 'leg0', 'leg1', 'hyp', 'use_decimals'])
+        'pythagorean_triples', ['id', 'leg0', 'leg1', 'hyp', 'calculate_hyp',
+                                'calculate_leg', 'suits_for_decimals',
+                                'exactness'])
     time_units_couples_source = database.source('time_units_couples',
                                                 ['id', 'u1', 'u2'])
     time_units_conversions_source = database.source('time_units_conversions',
@@ -350,6 +363,11 @@ def init():
                                     generator_fct=generate_random_decimal_nb)
     alternate_source = sub_source('alternate')
     uppercase_letters_source = sub_source('uppercase_letters_source')
+    alternate_hyp_leg_source = sub_source('alternate_hyp_leg', shuffle=False)
+    alternate_pyth_use_decimals_source = sub_source(
+        'alternate_pyth_use_decimals', shuffle=False)
+    alternate_exactness_source = sub_source('alternate_exactness',
+                                            shuffle=False)
     alternate_2masks_source = sub_source('alternate_2masks')
     alternate_3masks_source = sub_source('alternate_3masks')
     alternate_4masks_source = sub_source('alternate_4masks')

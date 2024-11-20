@@ -33,7 +33,7 @@ class sub_object(component.structure):
     def __init__(self, build_data, picture='true', **options):
         super().setup("minimal", **options)
         super().setup("length_units", **options)
-        super().setup("right_triangle", **options)
+        super().setup("right_triangle_OLD", **options)
         # There's no need to setup numbers for this question.
 
         if self.variant in ['default', 'random']:

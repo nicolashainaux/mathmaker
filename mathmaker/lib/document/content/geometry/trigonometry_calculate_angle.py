@@ -32,7 +32,7 @@ class sub_object(component.structure):
     def __init__(self, build_data, picture='true', **options):
         super().setup("minimal", **options)
         super().setup("length_units", **options)
-        super().setup("right_triangle", **options)
+        super().setup("right_triangle_OLD", **options)
         # nb1 and nb2 are sides' lengths,
         # they may require to be ordered, later on...
         super().setup("numbers", nb=build_data,

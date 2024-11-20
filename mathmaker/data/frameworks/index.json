@@ -4,6 +4,11 @@
         "order_of_operations",
         "positive_numbers"
     ],
+    "pythagorean_theorem_short_test2": [
+        "geometry",
+        "pythagorean_theorem",
+        "short_test2"
+    ],
     "expand_simple": [
         "algebra",
         "expand",

@@ -996,6 +996,8 @@ def classify_tag(tag):
               for t in ['nnsingletons', 'nnpairs', 'nntriples', 'nnquadruples',
                         'nnquintuples', 'nnsextuples']]):
         return 'natural_nb_tuples'
+    elif tag.startswith('pythagorean_triples'):
+        return 'pythagorean_triples'
     elif tag in ['int_deci_clever_pairs', 'nn_deci_clever_pairs',
                  'int_irreducible_frac', 'nothing',
                  'decimal_and_10_100_1000_for_multi',
@@ -1418,6 +1420,37 @@ def preprocess_divisibles(intsp, reason='no reason'):
     return result
 
 
+def preprocess_pythagorean_query(**kwargs):
+    """
+    Prepare kwargs for pythagorean_triples queries.
+
+    * Possibly force use_decimals to 1 (use_decimals will be deleted otherwise)
+    * variant is set either to 'calculate_hyp' or 'calculate_leg' and the
+      calculate_{hyp|leg} kwarg is added accordingly.
+    * exactness is set either to 'exact' or 'approx'.
+    """
+    d = {}
+
+    if kwargs.get('use_decimals') == 'true':
+        d.update({'suits_for_decimals': 1})
+        # do not update if use_decimals is set to 'false'
+
+    variant = kwargs.get('variant', 'default')
+    if variant in ['default', 'random']:
+        alt = shared.alternate_hyp_leg_source.next()[0]
+        variant = f'calculate_{alt}'
+    d.update({variant: 1})  # d['calculate_{hyp|leg}'] = 1
+    if 'variant' in d.keys():
+        del d['variant']
+
+    exactness = kwargs.get('exactness', 'random')
+    if exactness in ['default', 'random']:
+        exactness = shared.alternate_exactness_source.next()[0]
+    d.update({'exactness': exactness})
+
+    return d
+
+
 def postprocess_decimalfractionssums_query(qr, qkw=None, **kwargs):
     """
     Create two decimal fractions from the drawn decimal number.
@@ -1507,6 +1540,22 @@ def generate_values(source_id):
     if source_id == 'int_irreducible_frac':
         return [(k, Fraction(n, k)) for k in [i + 2 for i in range(9)]
                 for n in coprime_generator(k)]
+
+    elif source_id == 'alternate_hyp_leg':
+        lr = ['hyp', 'leg']
+        random.shuffle(lr)
+        return lr + list(reversed(lr))
+
+    elif source_id == 'alternate_exactness':
+        lr = ['exact', 'approx']
+        random.shuffle(lr)
+        return lr + list(reversed(lr))
+
+    elif source_id == 'alternate_pyth_use_decimals':
+        lr = ['true', 'false']
+        random.shuffle(lr)
+        result = lr + list(reversed(lr))
+        return result
 
     elif source_id == 'alternate_2masks':
         lr = ['left', 'right']
@@ -1822,21 +1871,24 @@ def generate_random_decimal_nb(position=None, width='random',
 class sub_source(object):
     ##
     #   @brief  Initializer
-    def __init__(self, source_id, **kwargs):
+    def __init__(self, source_id, shuffle=True, **kwargs):
         self.ondemand = kwargs.get('ondemand', False)
+        self.shuffle = shuffle
         if self.ondemand:
             self.values = []
             self.generator_fct = kwargs.get('generator_fct')
         else:
             self.values = generate_values(source_id)
-        random.shuffle(self.values)
+        if self.shuffle:
+            random.shuffle(self.values)
         self.current = 0
         self.max = len(self.values)
 
     ##
     #   @brief  Resets the source
     def _reset(self):
-        random.shuffle(self.values)
+        if self.shuffle:
+            random.shuffle(self.values)
         self.current = 0
 
     ##
@@ -2157,6 +2209,17 @@ class mc_source(object):
                     *shared.times_source.next(minute_neq=start_time.minute,
                                               **times_kw), 0)
             return (wdata[0], wdata[1], wdata[2], start_time, end_time)
+
+        elif tag_classification == 'pythagorean_triples':
+            kwargs.update(preprocess_pythagorean_query(**qkw))
+
+            # 'use_decimals' does not match a column of the table;
+            # 'suits_for_decimals' has been set correctly according to its
+            # value, already
+            if 'use_decimals' in kwargs:
+                del kwargs['use_decimals']
+
+            return shared.pythagorean_triples_source.next(**kwargs)
 
         elif tag_classification == 'nothing':
             return ()

@@ -42,7 +42,7 @@ from mathmaker.lib.constants import BOOLEAN, SLIDE_CONTENT_SEP
 from mathmaker.lib.constants.content \
     import SUBKINDS_TO_UNPACK, UNPACKABLE_SUBKINDS, SOURCES_TO_UNPACK
 
-AVAILABLE_PRESETS = ['default', 'mental calculation']
+AVAILABLE_PRESETS = ['default', 'short_test', 'mental calculation']
 
 AVAILABLE_DETAILS_LEVELS = ['maximum', 'medium', 'none']
 
@@ -176,7 +176,7 @@ def build_mixed_q_list(q_dict, shuffle=True):
     return mixed_q_list
 
 
-def preprocess_variant(q_i):
+def preprocess_qoptions(q_i):
     """
     Preprocess question's variant (if necessary)
 
@@ -211,6 +211,14 @@ def preprocess_variant(q_i):
              int(shared
                  .order_of_operations_variants_source
                  .next(**{'raw': raw_query})[0])})
+
+    elif q_i.id == 'pythagorean_theorem':
+        use_decimals = q_i.options.get('use_decimals', 'default')
+        if use_decimals in ['default', 'random']:
+            use_decimals = shared.alternate_pyth_use_decimals_source.next()[0]
+            q_i.options.update({'use_decimals': use_decimals})
+        # the matching field, suits_for_decimals, in table pythagorean_triples,
+        # will be handled in database.py (preprocess_pythagorean_query)
 
 
 def auto_adjust_nb_sources(nb_sources: list, q_i: namedtuple):
@@ -421,6 +429,14 @@ class Exercise(object):
                        'text_ans': '',
                        'q_numbering': 'numeric',
                        'tabular_batch': 20}
+        elif self.preset == 'short_test':
+            presets = {'layout_variant': 'default',
+                       'shuffle': 'true',
+                       'q_spacing': '',
+                       'details_level': 'none',
+                       'text_ans': _('Example of detailed solutions:'),
+                       'q_numbering': 'alphabet',
+                       'tabular_batch': 0}
         self.tabular_batch = presets.get('tabular_batch', 0)
         self.layout_variant = options.get('layout_variant',
                                           presets.get('layout_variant'))
@@ -560,7 +576,8 @@ class Exercise(object):
             q_number = next(numbering)
             log.debug('QUESTION # {} -------------------------------- {} ---'
                       '-----------------------------'.format(q_number, q.id))
-            preprocess_variant(q)
+            preprocess_qoptions(q)
+
             (nbsources_xkw_list, extra_infos) = \
                 get_nb_sources_from_question_info(q)
             nb_to_use = tuple()

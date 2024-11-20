@@ -1,0 +1,14 @@
+short_test2: !!omap
+  - title: "Short Test: pythagorean theorem"
+  - header: "Name: ......................................."
+  - layout:
+    - type: 'short_test'
+    - write_texts_twice: true
+  - exercise: !!omap
+    # - question: pythagorean theorem, variant=calculate_leg -> pythagorean_triples, use_decimals=false (1)
+    - shuffle: false
+    - mix:
+      - questions: pythagorean theorem, variant=calculate_leg,
+                   pythagorean theorem, variant=calculate_hyp
+      - nb: pythagorean_triples, exactness=exact (1)
+            pythagorean_triples, exactness=approx (1)

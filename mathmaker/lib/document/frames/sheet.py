@@ -80,6 +80,8 @@ class Sheet(object):
                     'text': '',
                     'answers_title': _('Answers!')}}
 
+        layout_data = copy.deepcopy(DEFAULT_SHEET_LAYOUT)
+
         if filename is None:  # build from yaml
             data = load_sheet(theme, subtheme, sheet_name)
             self.preset = data.get('preset', 'default')
@@ -103,7 +105,6 @@ class Sheet(object):
                 if '<BELT>' in answers_title:
                     answers_title = answers_title.replace(
                         '<BELT>', _(settings.mc_belts[subtheme]))
-            layout_data = copy.deepcopy(DEFAULT_SHEET_LAYOUT)
             if self.preset == 'mental calculation':
                 layout_data['font_size_offset'] = '-1'
             loaded_layout_data = data.get('layout', layout_data)
@@ -260,6 +261,9 @@ class Sheet(object):
                     e_data.update({'preset': e_preset})
                     if self.preset == 'mental calculation slideshow':
                         e_data.update({'layout_variant': 'slideshow'})
+                elif self.preset == 'default' and 'preset' not in e_data:
+                    if self.layout_type == 'short_test':
+                        e_data.update({'preset': 'short_test'})
                 exc = Exercise(data=e_data)
                 self.exercises_list.append(exc)
                 if self.shift:
@@ -305,14 +309,22 @@ class Sheet(object):
                 result += self.sheet_title_to_str()
                 result += self.sheet_text_to_str()
                 result += self.texts_to_str('exc', 0)
-                result += shared.machine.write_new_line_twice()
+                # result += shared.machine.write_new_line_twice()
+                # TAKE CARE, the spacing is not handled very easily
+                # maybe switch to templates, what would lead to easier
+                # management of such details. Writing new line now might
+                # break compilation (after an addvspace that has been added
+                # previously)
+                result += shared.machine.addvspace(height='30pt')
 
                 result += self.sheet_header_to_str()
                 result += self.sheet_title_to_str()
                 result += self.sheet_text_to_str()
                 result += self.texts_to_str('exc',
                                             len(self.exercises_list) // 2)
-                result += shared.machine.write_new_line_twice()
+                # result += shared.machine.write_new_line_twice()
+                # TAKE CARE (see above)
+                result += shared.machine.addvspace(height='30pt')
 
                 if n == 2 and i == 0:
                     result += shared.machine.insert_dashed_hline()
