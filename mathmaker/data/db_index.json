@@ -300,24 +300,15 @@
         "equal_sides",
         "drawDate"
     ],
-    "pythagorean_triples_exact": [
+    "pythagorean_triples": [
         "id",
         "leg0",
         "leg1",
         "hyp",
         "calculate_hyp",
         "calculate_leg",
-        "use_decimals",
-        "drawDate"
-    ],
-    "pythagorean_triples_approx": [
-        "id",
-        "leg0",
-        "leg1",
-        "hyp",
-        "calculate_hyp",
-        "calculate_leg",
-        "use_decimals",
+        "suits_for_decimals",
+        "exactness",
         "drawDate"
     ],
     "time_units_couples": [
