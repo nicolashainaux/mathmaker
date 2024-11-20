@@ -249,7 +249,7 @@ def test__dissolve_block():
                     'fifth id -> label_5, attr=7.5pt (4)\n'
                     'sixth id, attr5=random value -> label_6 (7)']
     result = _dissolve_block(q_block)
-    assert type(result) == list
+    assert type(result) is list
     assert len(result) == 3
     # assert result == []
     assert all([r in ['fourth id, attr4=some value, attr4=yet another value '
