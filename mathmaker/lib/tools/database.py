@@ -1420,14 +1420,19 @@ def preprocess_divisibles(intsp, reason='no reason'):
     return result
 
 
-def preprocess_pythagorean_query(**kwargs):
+def preprocess_pythagorean_query(q_id='', **kwargs):
     """
     Prepare kwargs for pythagorean_triples queries.
 
     * Possibly force use_decimals to 1 (use_decimals will be deleted otherwise)
+
+    For pythagorean_theorem questions:
     * variant is set either to 'calculate_hyp' or 'calculate_leg' and the
       calculate_{hyp|leg} kwarg is added accordingly.
-    * exactness is set either to 'exact' or 'approx'.
+    * exactness is set either to 'exact' or 'approx';
+
+    For converse_of_pythagorean_theorem questions:
+    * exactness is forced to 'exact'
     """
     d = {}
 
@@ -1435,18 +1440,22 @@ def preprocess_pythagorean_query(**kwargs):
         d.update({'suits_for_decimals': 1})
         # do not update if use_decimals is set to 'false'
 
-    variant = kwargs.get('variant', 'default')
-    if variant in ['default', 'random']:
-        alt = shared.alternate_hyp_leg_source.next()[0]
-        variant = f'calculate_{alt}'
-    d.update({variant: 1})  # d['calculate_{hyp|leg}'] = 1
-    if 'variant' in d.keys():
-        del d['variant']
+    if q_id == 'converse_of_pythagoren_theorem':
+        d.update({'exactness': 'exact'})
 
-    exactness = kwargs.get('exactness', 'random')
-    if exactness in ['default', 'random']:
-        exactness = shared.alternate_exactness_source.next()[0]
-    d.update({'exactness': exactness})
+    elif q_id == 'pythagorean_theorem':
+        variant = kwargs.get('variant', 'default')
+        if variant in ['default', 'random']:
+            alt = shared.alternate_hyp_leg_source.next()[0]
+            variant = f'calculate_{alt}'
+        d.update({variant: 1})  # d['calculate_{hyp|leg}'] = 1
+        if 'variant' in d.keys():
+            del d['variant']
+
+        exactness = kwargs.get('exactness', 'random')
+        if exactness in ['default', 'random']:
+            exactness = shared.alternate_exactness_source.next()[0]
+        d.update({'exactness': exactness})
 
     return d
 
@@ -1920,7 +1929,7 @@ class sub_source(object):
 class mc_source(object):
     ##
     #   @brief  Handles the choice of the next value to return
-    def next(self, source_id, qkw=None, **kwargs):
+    def next(self, source_id, q_id='', qkw=None, **kwargs):
         if source_id.startswith('@') or source_id == 'default':
             return (source_id, )
         if source_id == 'simple_fractions':
@@ -2211,7 +2220,7 @@ class mc_source(object):
             return (wdata[0], wdata[1], wdata[2], start_time, end_time)
 
         elif tag_classification == 'pythagorean_triples':
-            kwargs.update(preprocess_pythagorean_query(**qkw))
+            kwargs.update(preprocess_pythagorean_query(q_id=q_id, **qkw))
 
             # 'use_decimals' does not match a column of the table;
             # 'suits_for_decimals' has been set correctly according to its

@@ -607,6 +607,7 @@ class Exercise(object):
                                     int(last_draw[nb_source][-1]), span)]
                         second_couple_drawn = shared.mc_source\
                             .next(nb_source,
+                                  q_id=q.id,
                                   nb1=last_draw[nb_source][0],
                                   nb2_in=coprimes,
                                   qkw=q.options,
@@ -618,6 +619,7 @@ class Exercise(object):
                             either = [q.options.get('force_table')]
                         second_couple_drawn = shared.mc_source\
                             .next(nb_source,
+                                  q_id=q.id,
                                   either_nb1_nb2_in=either,
                                   qkw=q.options,
                                   **get_q_modifier(q.id, nb_source),
@@ -633,6 +635,7 @@ class Exercise(object):
                         # __
                         new_couple_drawn = shared.mc_source\
                             .next(nb_source,
+                                  q_id=q.id,
                                   triangle_inequality=nb_to_use,
                                   qkw=q.options,
                                   **get_q_modifier(q.id, nb_source),
@@ -640,6 +643,7 @@ class Exercise(object):
                     else:
                         new_couple_drawn = shared.mc_source\
                             .next(nb_source,
+                                  q_id=q.id,
                                   either_nb1_nb2_in=[common_nb],
                                   qkw=q.options,
                                   **get_q_modifier(q.id, nb_source),
@@ -658,9 +662,9 @@ class Exercise(object):
                         either = [q.options.get('force_table')]
                     try:
                         drawn = shared.mc_source.next(
-                            nb_source, not_in=not_in, either_nb1_nb2_in=either,
-                            qkw=q.options, **get_q_modifier(q.id, nb_source),
-                            **xkw)
+                            nb_source, q_id=q.id, not_in=not_in,
+                            either_nb1_nb2_in=either, qkw=q.options,
+                            **get_q_modifier(q.id, nb_source), **xkw)
                     except RuntimeError as excinfo:
                         if ((str(excinfo).startswith('The conditions to draw a'
                              ' random int tuple lead to no result.')
@@ -669,7 +673,7 @@ class Exercise(object):
                                 'database query.'))):
                             not_in = None
                             drawn = shared.mc_source.next(
-                                nb_source, not_in=not_in,
+                                nb_source, q_id=q.id, not_in=not_in,
                                 either_nb1_nb2_in=either, qkw=q.options,
                                 **get_q_modifier(q.id, nb_source), **xkw)
                         else:
