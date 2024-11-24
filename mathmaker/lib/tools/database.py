@@ -1440,7 +1440,7 @@ def preprocess_pythagorean_query(q_id='', **kwargs):
         d.update({'suits_for_decimals': 1})
         # do not update if use_decimals is set to 'false'
 
-    if q_id == 'converse_of_pythagoren_theorem':
+    if q_id == 'converse_of_pythagorean_theorem':
         d.update({'exactness': 'exact'})
 
     elif q_id == 'pythagorean_theorem':
