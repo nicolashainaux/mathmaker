@@ -16,7 +16,7 @@ intspan = "^1.6.1"
 "ruamel.yaml" = "^0.17.21"
 toml = "^0.10.2"
 packaging = "^21.3"
-mathmakerlib = "^0.7.18"
+mathmakerlib = "^0.7.20"
 
 [tool.poetry.dev-dependencies]
 tox = "^3.25.1"

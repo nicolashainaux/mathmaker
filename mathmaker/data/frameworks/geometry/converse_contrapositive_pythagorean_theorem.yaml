@@ -1,0 +1,5 @@
+testsheet: !!omap
+  - title: "Some title"
+  - header: "Some header"
+  - exercise: !!omap
+    - questions: converse_of pythagorean_theorem -> pythagorean_triples, use_decimals=true (1)

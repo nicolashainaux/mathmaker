@@ -35,27 +35,27 @@ msgstr ""
 msgid "This equation has no solution."
 msgstr ""
 
-#: lib/machine/LaTeX.py:237
+#: lib/machine/LaTeX.py:241
 msgid "To strike out numbers "
 msgstr ""
 
-#: lib/machine/LaTeX.py:242
+#: lib/machine/LaTeX.py:246
 msgid "To use multicol environment"
 msgstr ""
 
-#: lib/machine/LaTeX.py:267
+#: lib/machine/LaTeX.py:271
 msgid "To use extra commands to handle tabulars"
 msgstr ""
 
-#: lib/machine/LaTeX.py:261
+#: lib/machine/LaTeX.py:265
 msgid "For pretty underlining"
 msgstr ""
 
-#: lib/machine/LaTeX.py:325
+#: lib/machine/LaTeX.py:329
 msgid "Exercises counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:330
+#: lib/machine/LaTeX.py:334
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -110,11 +110,14 @@ msgstr ""
 msgid "Factorization thanks to binomial identities"
 msgstr ""
 
-#: lib/old_style_sheet/PythagoreanTheoremShortTest.py:56
 #: lib/old_style_sheet/ConverseAndContrapositiveOfPythagoreanTheoremShortTest.py:61
+#: lib/old_style_sheet/PythagoreanTheoremShortTest.py:56
+#: data/frameworks/geometry/pythagorean_theorem.yaml:3
+#: data/frameworks/geometry/converse_contrapositive_pythagorean_theorem.yaml:3
 msgid "Name: ......................................."
 msgstr ""
 
+#: data/frameworks/geometry/converse_contrapositive_pythagorean_theorem.yaml:2
 #: lib/old_style_sheet/ConverseAndContrapositiveOfPythagoreanTheoremShortTest.py:63
 msgid "Short Test: converse and contrapositive of pythagorean theorem"
 msgstr ""
@@ -144,31 +147,37 @@ msgstr ""
 msgid "Sums of fractions"
 msgstr ""
 
+#: data/frameworks/geometry/pythagorean_theorem.yaml:2
 #: lib/old_style_sheet/PythagoreanTheoremShortTest.py:57
 msgid "Short Test: pythagorean theorem"
 msgstr ""
 
-#: data/vocabulary.yaml:39
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:343
+#: data/vocabulary.yaml:39
+#: lib/document/content/geometry/pythagorean_theorem.py:121
 msgid "to the unit"
 msgstr ""
 
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:344
 #: data/vocabulary.yaml:40
+#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:344
+#: lib/document/content/geometry/pythagorean_theorem.py:122
 msgid "to the tenth"
 msgstr ""
 
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:345
 #: data/vocabulary.yaml:41
+#: lib/document/content/geometry/pythagorean_theorem.py:123
 msgid "to the hundreth"
 msgstr ""
 
+#: lib/document/content/geometry/pythagorean_theorem.py:124
 #: data/vocabulary.yaml:42
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:346
 msgid "to the thousandth"
 msgstr ""
 
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:347
+#: lib/document/content/geometry/pythagorean_theorem.py:125
 #: data/vocabulary.yaml:43
 msgid "to the ten thousandth"
 msgstr ""
@@ -265,23 +274,28 @@ msgstr ""
 msgid "it does not match a binomial identity."
 msgstr ""
 
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:422
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:356
+#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:422
+#: lib/document/content/geometry/pythagorean_theorem.py:156
+#: lib/document/content/geometry/pythagorean_theorem.py:131
 #, python-brace-format
 msgid "The triangle {triangle_name} has a right angle in {right_vertex}."
 msgstr ""
 
+#: lib/document/content/geometry/pythagorean_theorem.py:141
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:371
 #, python-brace-format
 msgid "Calculate the length of {this_side}."
 msgstr ""
 
+#: lib/document/content/geometry/pythagorean_theorem.py:145
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:375
 #, python-brace-format
 msgid "Give the result in {this_unit}."
 msgstr ""
 
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:379
+#: lib/document/content/geometry/pythagorean_theorem.py:149
 #, python-brace-format
 msgid "Round the result {at_this_precision}."
 msgstr ""
@@ -293,6 +307,7 @@ msgid ""
 " = {nb1} and {side_length2} = {nb2}"
 msgstr ""
 
+#: lib/document/content/geometry/converse_of_pythagorean_theorem.py:87
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:406
 msgid ""
 "Is it a right triangle ? Prove your answer and if the triangle is right, "
@@ -300,11 +315,14 @@ msgid ""
 msgstr ""
 
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:429
+#: lib/document/content/geometry/pythagorean_theorem.py:163
 msgid "Then by Pythagoras theorem"
 msgstr ""
 
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:544
+#: lib/document/content/geometry/pythagorean_theorem.py:176
 #: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:455
+#: lib/document/content/geometry/converse_of_pythagorean_theorem.py:101
+#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:544
 msgid "Sketch"
 msgstr ""
 
@@ -342,11 +360,11 @@ msgstr ""
 msgid "Answers"
 msgstr ""
 
-#: lib/machine/LaTeX.py:255
+#: lib/machine/LaTeX.py:259
 msgid "To use some symbols like currency units"
 msgstr ""
 
-#: lib/machine/LaTeX.py:199
+#: lib/machine/LaTeX.py:203
 msgid "To display units correctly"
 msgstr ""
 
@@ -1609,22 +1627,22 @@ msgstr ""
 msgid "Mental calculation: multiplication by 11"
 msgstr ""
 
-#: lib/document/content/component.py:546
+#: lib/document/content/component.py:568
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr ""
 
-#: lib/document/content/component.py:551
+#: lib/document/content/component.py:573
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:555
+#: lib/document/content/component.py:577
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr ""
 
-#: lib/document/content/component.py:559
+#: lib/document/content/component.py:581
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr ""
@@ -1662,7 +1680,7 @@ msgid ""
 "(in the multiplication tables, from 2 to 9)"
 msgstr ""
 
-#: lib/document/frames/exercise.py:410
+#: lib/document/frames/exercise.py:418 lib/document/frames/exercise.py:437
 msgid "Example of detailed solutions:"
 msgstr ""
 
@@ -1772,33 +1790,33 @@ msgstr ""
 msgid "Mental calculation: area and perimeter of a rectangle"
 msgstr ""
 
-#: lib/machine/LaTeX.py:231
+#: lib/machine/LaTeX.py:235
 msgid "To insert pdf formular and javascript"
 msgstr ""
 
-#: lib/document/frames/exercise.py:972
+#: lib/document/frames/exercise.py:993
 msgid "Clear everything"
 msgstr ""
 
-#: lib/document/frames/exercise.py:973
+#: lib/document/frames/exercise.py:994
 msgid "Validate"
 msgstr ""
 
-#: lib/document/frames/exercise.py:983
+#: lib/document/frames/exercise.py:1004
 #, python-brace-format
 msgid "Score: ... / {q_number}"
 msgstr ""
 
-#: lib/document/frames/exercise.py:985
+#: lib/document/frames/exercise.py:1006
 #, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:977
+#: lib/document/frames/exercise.py:998
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr ""
 
-#: lib/document/frames/exercise.py:980
+#: lib/document/frames/exercise.py:1001
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr ""
 
@@ -2228,26 +2246,26 @@ msgid ""
 "{length_unit}. What is its length? |hint:length_unit|"
 msgstr ""
 
-#: lib/machine/LaTeX.py:217
+#: lib/machine/LaTeX.py:221
 msgid "To draw TikZ pictures"
 msgstr ""
 
-#: lib/machine/LaTeX.py:280
+#: lib/machine/LaTeX.py:284
 msgid "To include .eps pictures"
 msgstr ""
 
-#: lib/machine/LaTeX.py:324
+#: lib/machine/LaTeX.py:328
 msgid "General layout of the page"
 msgstr ""
 
-#: lib/machine/LaTeX.py:326
+#: lib/machine/LaTeX.py:330
 msgid ""
 "Definition of the \"exercise\" command, which will insert the word "
 "\"Exercise\" in bold, with its number and automatically increments the "
 "counter"
 msgstr ""
 
-#: lib/machine/LaTeX.py:345
+#: lib/machine/LaTeX.py:349
 msgid ""
 "Redefinition of \"\\parallel\" command to draw the parallel symbol slanted "
 "as usual in french notations"
@@ -2341,19 +2359,19 @@ msgstr ""
 msgid "Mental calculation: multiples and divisors"
 msgstr ""
 
-#: lib/machine/LaTeX.py:248
+#: lib/machine/LaTeX.py:252
 msgid "To get a better control on floats positioning (e.g. tabulars)"
 msgstr ""
 
-#: lib/machine/LaTeX.py:286
+#: lib/machine/LaTeX.py:290
 msgid "To make .eps pictures includable by pdflatex"
 msgstr ""
 
-#: lib/machine/LaTeX.py:293
+#: lib/machine/LaTeX.py:297
 msgid "Absolute positioning of text on the page"
 msgstr ""
 
-#: lib/machine/LaTeX.py:304
+#: lib/machine/LaTeX.py:308
 msgid "To define the layout of the page"
 msgstr ""
 
@@ -2375,7 +2393,7 @@ msgstr ""
 msgid "(Length unit: {})"
 msgstr ""
 
-#: lib/document/frames/exercise.py:797
+#: lib/document/frames/exercise.py:818
 msgid "Answer: "
 msgstr ""
 
@@ -2863,7 +2881,7 @@ msgstr ""
 msgid "Mental calculation: areas and perimeters"
 msgstr ""
 
-#: lib/machine/LaTeX.py:273
+#: lib/machine/LaTeX.py:277
 msgid "To define space above and below content of tabular lines"
 msgstr ""
 
@@ -2982,4 +3000,23 @@ msgstr ""
 
 #: settings/default/mc_belts.json:1
 msgid "white belt"
+msgstr ""
+
+#: lib/machine/LaTeX.py:198
+msgid "For pretty comma in decimal numbers"
+msgstr ""
+
+#: lib/document/content/geometry/converse_of_pythagorean_theorem.py:76
+#, python-brace-format
+msgid ""
+"{triangle_name} is a triangle such as {side_length0} = {nb0}, {side_length1}"
+" = {nb1} and {side_length2} = {nb2}."
+msgstr ""
+
+#: data/frameworks/geometry/converse_contrapositive_pythagorean_theorem.yaml:16
+msgid "Some title"
+msgstr ""
+
+#: data/frameworks/geometry/converse_contrapositive_pythagorean_theorem.yaml:17
+msgid "Some header"
 msgstr ""

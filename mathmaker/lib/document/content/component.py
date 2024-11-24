@@ -412,16 +412,19 @@ class structure(object):
             or not hasattr(self, 'unit_area')):
             self.setup('length_units', **kwargs)
 
+        mark_right_angle = kwargs.get('mark_right_angle', True)
+
         rt_name = next(shared.unique_letters_words_source[3])[0]
         alpha, beta = next(shared.angle_ranges_source)
         rotation_angle = kwargs.get(
             'rotation_angle',
             alpha + random.choice(range(beta - alpha)))
         self.right_triangle = RightTriangle(
-            name=rt_name,
+            name=rt_name, mark_right_angle=mark_right_angle,
             leg1_length=Number(str(random.choice(range(20, 40)) / 10)),  # leg0
             leg2_length=Number(str(random.choice(range(20, 40)) / 10)),  # leg1
             rotation_angle=rotation_angle)
+        self.rt = self.right_triangle
 
     def _setup_right_triangle_OLD(self, **kwargs):
         from mathmaker.lib.core.geometry import RightTriangle

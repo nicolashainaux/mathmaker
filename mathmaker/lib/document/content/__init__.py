@@ -67,7 +67,7 @@ from .geometry import area_rectangle, perimeter_rectangle, perimeter_polygon
 from .geometry import area_righttriangle, perimeter_righttriangle
 from .geometry import rectangle_length_or_width
 from .geometry import volume_rightcuboid
-from .geometry import pythagorean_theorem
+from .geometry import pythagorean_theorem, converse_of_pythagorean_theorem
 
 __all__ = [expand_simple, expand_double,
            multi_direct, multi_reversed, multi_hole, divi_direct,
@@ -102,4 +102,4 @@ __all__ = [expand_simple, expand_double,
            trigonometry_calculate_angle,
            trigonometry_formula,
            trigonometry_vocabulary,
-           pythagorean_theorem]
+           pythagorean_theorem, converse_of_pythagorean_theorem]
