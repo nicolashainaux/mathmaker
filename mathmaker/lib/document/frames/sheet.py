@@ -315,7 +315,7 @@ class Sheet(object):
                 # management of such details. Writing new line now might
                 # break compilation (after an addvspace that has been added
                 # previously)
-                result += shared.machine.addvspace(height='30pt')
+                result += shared.machine.addvspace(height='10pt')
 
                 result += self.sheet_header_to_str()
                 result += self.sheet_title_to_str()
@@ -324,7 +324,7 @@ class Sheet(object):
                                             len(self.exercises_list) // 2)
                 # result += shared.machine.write_new_line_twice()
                 # TAKE CARE (see above)
-                result += shared.machine.addvspace(height='30pt')
+                result += shared.machine.addvspace(height='10pt')
 
                 if n == 2 and i == 0:
                     result += shared.machine.insert_dashed_hline()
