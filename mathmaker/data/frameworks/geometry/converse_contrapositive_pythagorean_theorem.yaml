@@ -1,5 +1,13 @@
-testsheet: !!omap
-  - title: "Some title"
-  - header: "Some header"
+short_test2: !!omap
+  - title: "Short Test: converse and contrapositive of pythagorean theorem"
+  - header: "Name: ......................................."
+  - layout:
+    - type: 'short_test'
+    - write_texts_twice: true
   - exercise: !!omap
-    - questions: converse_of pythagorean_theorem -> pythagorean_triples, use_decimals=true (1)
+    - shuffle: true
+    - mix:
+      - questions: converse_of pythagorean_theorem,
+                   contrapositive_of pythagorean_theorem
+      - nb: pythagorean_triples, use_decimals=true (1)
+            pythagorean_triples, use_decimals=false (1)
