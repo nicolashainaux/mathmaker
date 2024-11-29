@@ -4,15 +4,15 @@
         "order_of_operations",
         "positive_numbers"
     ],
-    "converse_contrapositive_pythagorean_theorem_short_test2": [
+    "converse_contrapositive_pythagorean_theorem_short_test": [
         "geometry",
         "converse_contrapositive_pythagorean_theorem",
-        "short_test2"
+        "short_test"
     ],
-    "pythagorean_theorem_short_test2": [
+    "pythagorean_theorem_short_test": [
         "geometry",
         "pythagorean_theorem",
-        "short_test2"
+        "short_test"
     ],
     "expand_simple": [
         "algebra",

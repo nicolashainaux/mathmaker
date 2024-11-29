@@ -39,8 +39,6 @@ from . import FractionsSum
 from . import AlgebraFactorization_01
 from . import AlgebraFactorization_03
 from . import AlgebraMiniTest0
-from . import PythagoreanTheoremShortTest
-from . import ConverseAndContrapositiveOfPythagoreanTheoremShortTest
 
 S_Structure = S_Structure.S_Structure
 AlgebraExpressionReduction = \
@@ -57,11 +55,6 @@ FractionsSum = FractionsSum.FractionsSum
 AlgebraFactorization_01 = AlgebraFactorization_01.AlgebraFactorization_01
 AlgebraFactorization_03 = AlgebraFactorization_03.AlgebraFactorization_03
 AlgebraMiniTest0 = AlgebraMiniTest0.AlgebraMiniTest0
-PythagoreanTheoremShortTest = \
-    PythagoreanTheoremShortTest.PythagoreanTheoremShortTest
-ConverseAndContrapositiveOfPythagoreanTheoremShortTest = \
-    ConverseAndContrapositiveOfPythagoreanTheoremShortTest.\
-    ConverseAndContrapositiveOfPythagoreanTheoremShortTest
 
 
 AVAILABLE = {"algebra-expression-reduction": (AlgebraExpressionReduction, ""),
@@ -76,10 +69,5 @@ AVAILABLE = {"algebra-expression-reduction": (AlgebraExpressionReduction, ""),
              "fraction-simplification": (FractionSimplification, ""),
              "fractions-product-and-quotient": (FractionsProductAndQuotient,
                                                 ""),
-             "fractions-sum": (FractionsSum, ""),
-             "pythagorean-theorem-short-test": (PythagoreanTheoremShortTest,
-                                                ""),
-             "converse-and-contrapositive-of-pythagorean-theorem-short-test":
-                 (ConverseAndContrapositiveOfPythagoreanTheoremShortTest,
-                  "")
+             "fractions-sum": (FractionsSum, "")
              }

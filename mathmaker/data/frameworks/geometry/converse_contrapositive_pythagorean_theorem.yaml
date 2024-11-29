@@ -1,4 +1,4 @@
-short_test2: !!omap
+short_test: !!omap
   - title: "Short Test: converse and contrapositive of pythagorean theorem"
   - header: "Name: ......................................."
   - layout:

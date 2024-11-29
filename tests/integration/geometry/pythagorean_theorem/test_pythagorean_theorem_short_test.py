@@ -25,8 +25,8 @@ from mathmaker.lib import shared
 from mathmaker.lib.document.frames import Sheet
 
 
-def test_short_test2():
+def test_short_test():
     """Check this sheet is generated without any error."""
     shared.machine.write_out(str(Sheet('geometry',
-                                       'converse_contrapositive_pythagorean_theorem',
-                                       'short_test2')))
+                                       'pythagorean_theorem',
+                                       'short_test')))

@@ -2,7 +2,7 @@
 
 # Mathmaker creates automatically maths exercises sheets
 # with their answers
-# Copyright 2006-2017 Nicolas Hainaux <nh.techn@gmail.com>
+# Copyright 2006-2018 Nicolas Hainaux <nh.techn@gmail.com>
 
 # This file is part of Mathmaker.
 
@@ -20,23 +20,13 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+
 from mathmaker.lib import shared
-from mathmaker.lib.old_style_sheet import AVAILABLE
+from mathmaker.lib.document.frames import Sheet
 
 
-def test_direct_theorem():
-    """
-    Checks if 'pythagorean-theorem-short-test' is generated without any error.
-    """
-    shared.machine.write_out(
-        str(AVAILABLE['pythagorean-theorem-short-test'][0]()), pdf_output=True)
-
-
-def test_converse_and_contrapositive():
-    """
-    Checks if
-    'converse-and-contrapositive-of-pythagorean-theorem-short-test'
-    is generated without any error.
-    """
-    shared.machine.write_out(str(AVAILABLE[
-        'converse-and-contrapositive-of-pythagorean-theorem-short-test'][0]()))
+def test_short_test():
+    """Check this sheet is generated without any error."""
+    shared.machine.write_out(str(Sheet('geometry',
+                                       'converse_contrapositive_pythagorean_theorem',
+                                       'short_test')))

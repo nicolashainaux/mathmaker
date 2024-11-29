@@ -34,7 +34,6 @@ from . import Q_AlgebraExpressionExpansion
 from . import Q_Equation
 from . import Q_Calculation
 from . import Q_Factorization
-from . import Q_RightTriangle
 
 
 Q_Structure = Q_Structure.Q_Structure
@@ -46,4 +45,3 @@ Q_AlgebraExpressionExpansion = \
 Q_Calculation = Q_Calculation.Q_Calculation
 Q_Equation = Q_Equation.Q_Equation
 Q_Factorization = Q_Factorization.Q_Factorization
-Q_RightTriangle = Q_RightTriangle.Q_RightTriangle
