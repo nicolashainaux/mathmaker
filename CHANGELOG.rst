@@ -10,6 +10,11 @@ Unreleased
 ----------
 
 
+Version 0.7.23 (2024-11-30)
+---------------------------
+
+* Pythagorean theorem and its converse and contrapositive tests have been rewritten without eukleides.
+
 Version 0.7.22 (2024-10-23)
 ---------------------------
 
@@ -35,6 +40,7 @@ Version 0.7.19 (2022-11-27)
 * Add read_coordinates, spreadsheet_formula and compare_signed_numbers questions.
 * Add y2b3 mental calculation level.
 * Several bug fixes.
+* Pythagorean theorem and its converse and contrapositive tests have been rewritten without eukleides.
 
 Version 0.7.18 (2022-09-20)
 ---------------------------
