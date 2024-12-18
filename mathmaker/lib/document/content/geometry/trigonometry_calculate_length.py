@@ -21,6 +21,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import random
+from decimal import Decimal
+
+from mathmakerlib.calculus import Number
+from mathmakerlib.calculus.equations import TrigonometricEquation
 
 from mathmaker.lib import shared
 from mathmaker.lib.tools.wording import setup_wording_format_of
@@ -32,7 +36,7 @@ class sub_object(component.structure):
     def __init__(self, build_data, picture='true', **options):
         super().setup("minimal", **options)
         super().setup("length_units", **options)
-        super().setup("right_triangle_OLD", **options)
+        super().setup("right_triangle", **options)
         # nb1 will be the length to use; nb2 the acute angle
         super().setup("numbers", nb=build_data,
                       shuffle_nbs=False, **options)
@@ -83,26 +87,20 @@ class sub_object(component.structure):
             self.right_triangle.setup_for_trigonometry(
                 angle_nb=random.choice([0, 2]),
                 trigo_fct=variant[0],
-                angle_val=self.nb2,
-                up_length_val=self.nb1,
-                length_unit=self.length_unit)
+                angle_val=Number(self.nb2, unit=r'\degree'),
+                up_length_val=Number(self.nb1, unit=self.length_unit))
         else:
             self.right_triangle.setup_for_trigonometry(
                 angle_nb=random.choice([0, 2]),
                 trigo_fct=variant[0],
-                angle_val=self.nb2,
-                down_length_val=self.nb1,
-                length_unit=self.length_unit)
+                angle_val=Number(self.nb2, unit=r'\degree'),
+                down_length_val=Number(self.nb1, unit=self.length_unit))
 
-        self.wording = ''
+        self.wording = ''  # wording is defined in xml, so far
         setup_wording_format_of(self)
 
-        trigo_eq = self.right_triangle.trigonometric_equality(autosetup=True)
-        self.resolution = trigo_eq.auto_resolution(
-            dont_display_equations_name=True,
-            skip_fraction_simplification=True,
-            decimal_result=self.decimal_result,
-            unit=self.length_unit)
+        trigo_eq = TrigonometricEquation(self.right_triangle)
+        self.resolution = trigo_eq.autosolve(required_rounding=Decimal('1.0'))
         self.answer_wording = \
             _('The triangle {triangle_name} has a right angle in'
               ' {right_vertex_name}. {newline} Hence: {resolution}')
@@ -116,14 +114,9 @@ class sub_object(component.structure):
                 (1, 2),
                 [10, 10],
                 [self.wording.format(**self.wording_format),
-                 shared.machine.insert_picture(self.right_triangle,
-                                               scale=0.8,
-                                               top_aligned_in_a_tabular=True)])
+                 self.right_triangle.drawn])
         else:
-            return shared.machine.insert_picture(
-                self.right_triangle,
-                scale=0.8,
-                vertical_alignment_in_a_tabular=True)
+            self.right_triangle.drawn
 
     def a(self, **options):
         return self.answer_wording.format(**self.answer_wording_format)
