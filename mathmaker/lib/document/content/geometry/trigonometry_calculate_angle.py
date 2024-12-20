@@ -22,6 +22,10 @@
 
 import random
 
+from mathmakerlib.calculus import Number
+from mathmakerlib.geometry import AngleDecoration
+from mathmakerlib.calculus.equations import TrigonometricEquation
+
 from mathmaker.lib import shared
 from mathmaker.lib.tools.wording import setup_wording_format_of
 from mathmaker.lib.document.content import component
@@ -32,7 +36,7 @@ class sub_object(component.structure):
     def __init__(self, build_data, picture='true', **options):
         super().setup("minimal", **options)
         super().setup("length_units", **options)
-        super().setup("right_triangle_OLD", **options)
+        super().setup("right_triangle", **options)
         # nb1 and nb2 are sides' lengths,
         # they may require to be ordered, later on...
         super().setup("numbers", nb=build_data,
@@ -56,27 +60,24 @@ class sub_object(component.structure):
         if variant == 'tan' and random.choice([True, False]):
             up_val, down_val = down_val, up_val
 
+        dec = AngleDecoration(radius=Number('0.5', unit='cm'))
         self.right_triangle.setup_for_trigonometry(
             angle_nb=random.choice([0, 2]),
             trigo_fct=variant,
-            down_length_val=down_val,
-            up_length_val=up_val,
-            length_unit=self.length_unit)
+            down_length_val=Number(down_val, unit=self.length_unit),
+            up_length_val=Number(up_val, unit=self.length_unit),
+            angle_decoration=dec)
 
         self.wording = ''
         setup_wording_format_of(self)
 
-        trigo_eq = self.right_triangle.trigonometric_equality(autosetup=True)
-        self.resolution = trigo_eq.auto_resolution(
-            dont_display_equations_name=True,
-            skip_fraction_simplification=True,
-            decimal_result=self.decimal_result,
-            unit='\\textdegree')
+        trigo_eq = TrigonometricEquation(self.right_triangle)
+        self.resolution = trigo_eq.autosolve(required_rounding=Number('1'))
         self.answer_wording = \
             _('The triangle {triangle_name} has a right angle in'
               ' {right_vertex_name}. {newline} Hence: {resolution}')
         self.triangle_name = self.right_triangle.name
-        self.right_vertex_name = self.right_triangle.vertex[1].name
+        self.right_vertex_name = self.right_triangle.vertices[1].name
         setup_wording_format_of(self, w_prefix='answer_')
 
     def q(self, **options):
@@ -85,14 +86,9 @@ class sub_object(component.structure):
                 (1, 2),
                 [10, 10],
                 [self.wording.format(**self.wording_format),
-                 shared.machine.insert_picture(self.right_triangle,
-                                               scale=0.8,
-                                               top_aligned_in_a_tabular=True)])
+                 self.right_triangle.drawn])
         else:
-            return shared.machine.insert_picture(
-                self.right_triangle,
-                scale=0.8,
-                vertical_alignment_in_a_tabular=True)
+            return self.right_triangle.drawn
 
     def a(self, **options):
         return self.answer_wording.format(**self.answer_wording_format)

@@ -22,9 +22,12 @@
 
 import random
 
+from mathmakerlib.calculus import Number
+from mathmakerlib.geometry import AngleDecoration
+from mathmakerlib.calculus.equations import TrigonometricFormula
+
 from mathmaker.lib import shared
 from mathmaker.lib.tools.wording import setup_wording_format_of
-from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.document.content import component
 
 
@@ -33,7 +36,7 @@ class sub_object(component.structure):
     def __init__(self, build_data, picture='true', **options):
         super().setup("minimal", **options)
         super().setup("length_units", **options)
-        super().setup("right_triangle_OLD", **options)
+        super().setup("right_triangle", **options)
         # There's no need to setup numbers for this question.
 
         if self.variant in ['default', 'random']:
@@ -48,13 +51,11 @@ class sub_object(component.structure):
 
         angle_nb = random.choice([0, 2])
 
-        self.right_triangle.setup_for_trigonometry(
-            angle_nb=angle_nb,
-            trigo_fct=variant,
-            down_length_val=Value(''),
-            up_length_val=Value(''),
-            length_unit=self.length_unit,
-            only_mark_unknown_angle=True)
+        dec = AngleDecoration(radius=Number('0.4', unit='cm'))
+        self.right_triangle.angles[angle_nb].decoration = dec
+        self.right_triangle.angles[angle_nb].label = ''
+
+        self.right_triangle.scale = Number('0.8')
 
         self.trigo_fct = variant
         self.the_formula_of_trigo_fct = {
@@ -62,17 +63,15 @@ class sub_object(component.structure):
             'sin': _('the formula of sine'),
             'tan': _('the formula of tangent')}[variant]
         self.acute_angle = shared.machine.write_math_style2(
-            self.right_triangle.angle[angle_nb].printed)
+            self.right_triangle.angles[angle_nb].name)
 
         self.wording = options.get('text', options.get('wording', ''))
         if self.wording:
             self.wording = _(self.wording)
         setup_wording_format_of(self)
 
-        self.formula = shared.machine.write_math_style1(
-            self.right_triangle.trigonometric_equality(
-                angle=self.right_triangle.angle[angle_nb],
-                trigo_fct=variant).printed)
+        self.formula = TrigonometricFormula(
+            self.right_triangle, variant, angle_nb).printed
 
         self.answer_wording = \
             _('The formula is: {formula}')
@@ -89,15 +88,10 @@ class sub_object(component.structure):
                 (1, 2),
                 [12, 8],
                 [q_nb + self.wording.format(**self.wording_format),
-                 shared.machine.insert_picture(
-                    self.right_triangle,
-                    scale=0.8,
-                    vertical_alignment_in_a_tabular=True)])
+                 self.right_triangle.drawn], tabular_options='[t]',
+                center_vertically=True)
         else:
-            return shared.machine.insert_picture(
-                self.right_triangle,
-                scale=0.8,
-                vertical_alignment_in_a_tabular=True)
+            return self.right_triangle.drawn
 
     def a(self, **options):
         return self.answer_wording.format(**self.answer_wording_format)

@@ -22,9 +22,11 @@
 
 import random
 
+from mathmakerlib.calculus import Number
+from mathmakerlib.geometry import AngleDecoration
+
 from mathmaker.lib import shared
 from mathmaker.lib.tools.wording import setup_wording_format_of
-from mathmaker.lib.core.root_calculus import Value
 from mathmaker.lib.document.content import component
 
 
@@ -33,7 +35,7 @@ class sub_object(component.structure):
     def __init__(self, build_data, picture='true', **options):
         super().setup("minimal", **options)
         super().setup("length_units", **options)
-        super().setup("right_triangle_OLD", **options)
+        super().setup("right_triangle", **options)
         # There's no need to setup numbers for this question.
 
         if self.variant in ['default', 'random']:
@@ -49,16 +51,14 @@ class sub_object(component.structure):
 
         angle_nb = random.choice([0, 2])
 
-        self.right_triangle.setup_for_trigonometry(
-            angle_nb=angle_nb,
-            trigo_fct='cos',
-            down_length_val=Value(''),
-            up_length_val=Value(''),
-            length_unit=self.length_unit,
-            only_mark_unknown_angle=True)
+        dec = AngleDecoration(radius=Number('0.4', unit='cm'))
+        self.right_triangle.angles[angle_nb].decoration = dec
+        self.right_triangle.angles[angle_nb].label = ''
+
+        self.right_triangle.scale = Number('0.8')
 
         self.acute_angle = shared.machine.write_math_style2(
-            self.right_triangle.angle[angle_nb].printed)
+            self.right_triangle.angles[angle_nb].name)
 
         self.wording = {
             'adjacent': _('Which side is adjacent to {acute_angle} ?'),
@@ -68,8 +68,7 @@ class sub_object(component.structure):
 
         side_getter = getattr(self.right_triangle,
                               'side_' + variant + '_to')
-        self.correct_answer = side_getter(
-            angle=self.right_triangle.angle[angle_nb]).length_name
+        self.correct_answer = side_getter(angle_nb)
 
         self.answer_wording = {
             'adjacent': _('The side adjacent to {acute_angle} is:'
@@ -90,15 +89,10 @@ class sub_object(component.structure):
                 (1, 2),
                 [12, 8],
                 [q_nb + self.wording.format(**self.wording_format),
-                 shared.machine.insert_picture(
-                    self.right_triangle,
-                    scale=0.8,
-                    vertical_alignment_in_a_tabular=True)])
+                 self.right_triangle.drawn], tabular_options='[t]',
+                center_vertically=True)
         else:
-            return shared.machine.insert_picture(
-                self.right_triangle,
-                scale=0.8,
-                vertical_alignment_in_a_tabular=True)
+            return self.right_triangle.drawn
 
     def a(self, **options):
         return self.answer_wording.format(**self.answer_wording_format)
