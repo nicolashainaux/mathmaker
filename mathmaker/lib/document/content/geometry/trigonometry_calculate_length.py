@@ -84,7 +84,7 @@ class sub_object(component.structure):
                              .format(v='_'.join(variant)))
 
         # Now it's possible to setup the right triangle
-        dec = AngleDecoration(radius=Number('0.4', unit='cm'))
+        dec = AngleDecoration(radius=Number('0.5', unit='cm'))
         if variant[1] == 'up':
             self.right_triangle.setup_for_trigonometry(
                 angle_nb=random.choice([0, 2]),

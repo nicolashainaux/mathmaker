@@ -419,7 +419,7 @@ class structure(object):
         random_signs = [random.choice([-1, 1]), random.choice([-1, 1])]
         rot_angle = random.choice(angles) \
             + random_signs[0] * random.randint(0, 20)
-        leg0_length = Number(str(random.randint(35, 55))) / 10
+        leg0_length = Number(str(random.randint(35, 45))) / 10
         leg1_length = Number(str(random.randint(7, 17))) / Number(20) \
             * leg0_length
         self.right_triangle = RightTriangle(
