@@ -24,6 +24,7 @@ import random
 from decimal import Decimal
 
 from mathmakerlib.calculus import Number
+from mathmakerlib.geometry import AngleDecoration
 from mathmakerlib.calculus.equations import TrigonometricEquation
 
 from mathmaker.lib import shared
@@ -83,18 +84,21 @@ class sub_object(component.structure):
                              .format(v='_'.join(variant)))
 
         # Now it's possible to setup the right triangle
+        dec = AngleDecoration(radius=Number('0.4', unit='cm'))
         if variant[1] == 'up':
             self.right_triangle.setup_for_trigonometry(
                 angle_nb=random.choice([0, 2]),
                 trigo_fct=variant[0],
                 angle_val=Number(self.nb2, unit=r'\degree'),
-                up_length_val=Number(self.nb1, unit=self.length_unit))
+                up_length_val=Number(self.nb1, unit=self.length_unit),
+                angle_decoration=dec)
         else:
             self.right_triangle.setup_for_trigonometry(
                 angle_nb=random.choice([0, 2]),
                 trigo_fct=variant[0],
                 angle_val=Number(self.nb2, unit=r'\degree'),
-                down_length_val=Number(self.nb1, unit=self.length_unit))
+                down_length_val=Number(self.nb1, unit=self.length_unit),
+                angle_decoration=dec)
 
         self.wording = ''  # wording is defined in xml, so far
         setup_wording_format_of(self)
@@ -105,7 +109,7 @@ class sub_object(component.structure):
             _('The triangle {triangle_name} has a right angle in'
               ' {right_vertex_name}. {newline} Hence: {resolution}')
         self.triangle_name = self.right_triangle.name
-        self.right_vertex_name = self.right_triangle.vertex[1].name
+        self.right_vertex_name = self.right_triangle.vertices[1].name
         setup_wording_format_of(self, w_prefix='answer_')
 
     def q(self, **options):
@@ -116,7 +120,7 @@ class sub_object(component.structure):
                 [self.wording.format(**self.wording_format),
                  self.right_triangle.drawn])
         else:
-            self.right_triangle.drawn
+            return self.right_triangle.drawn
 
     def a(self, **options):
         return self.answer_wording.format(**self.answer_wording_format)
