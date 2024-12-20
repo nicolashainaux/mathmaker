@@ -415,15 +415,17 @@ class structure(object):
         mark_right_angle = kwargs.get('mark_right_angle', True)
 
         rt_name = next(shared.unique_letters_words_source[3])[0]
-        alpha, beta = next(shared.angle_ranges_source)
-        rotation_angle = kwargs.get(
-            'rotation_angle',
-            alpha + random.choice(range(beta - alpha)))
+        angles = random.choice([[0, 180], [90, 270]])
+        random_signs = [random.choice([-1, 1]), random.choice([-1, 1])]
+        rot_angle = random.choice(angles) \
+            + random_signs[0] * random.randint(0, 20)
+        leg0_length = Number(str(random.randint(35, 55))) / 10
+        leg1_length = Number(str(random.randint(7, 17))) / Number(20) \
+            * leg0_length
         self.right_triangle = RightTriangle(
             name=rt_name, mark_right_angle=mark_right_angle,
-            leg1_length=Number(str(random.choice(range(20, 40)) / 10)),  # leg0
-            leg2_length=Number(str(random.choice(range(20, 40)) / 10)),  # leg1
-            rotation_angle=rotation_angle)
+            leg0_length=leg0_length, leg1_length=leg1_length,
+            rotation_angle=rot_angle)
         self.rt = self.right_triangle
 
     def _setup_right_triangle_OLD(self, **kwargs):

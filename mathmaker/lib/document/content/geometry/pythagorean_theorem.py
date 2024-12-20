@@ -40,11 +40,7 @@ class sub_object(component.structure):
 
         self.exactness = build_data[-1]
 
-        angles = random.choice([[0, 180], [90, 270]])
-        random_signs = [random.choice([-1, 1]), random.choice([-1, 1])]
-        rot_angle = random.choice(angles) \
-            + random_signs[0] * random.randint(0, 20)
-        super().setup("right_triangle", rotation_angle=rot_angle, **options)
+        super().setup("right_triangle", **options)
 
         variants = ['calculate_hyp', 'calculate_leg0', 'calculate_leg1']
         if self.variant == 'calculate_leg':
