@@ -10,6 +10,11 @@ Unreleased
 ----------
 
 
+Version 0.7.24 (2024-12-21)
+---------------------------
+
+* Questions about trigonometry have been rewritten without eukleides.
+
 Version 0.7.23 (2024-11-30)
 ---------------------------
 
