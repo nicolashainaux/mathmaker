@@ -17,7 +17,12 @@ environment:
 
 install:
   # We need wheel installed to build wheels
-  - sh: sudo apt -qq update
+  - sh: sudo apt -qq update --allow-releaseinfo-change
+  - sh: sudo apt install software-properties-common
+  - sh: sudo add-apt-repository -y ppa:deadsnakes/ppa
+  - sh: sudo apt install -y python3.9
+  - sh: sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 8
+  - sh: sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 9
   - sh: sudo apt -y install libxml2-utils eukleides gettext python3-pip texlive-latex-base texlive-luatex texlive-xetex texlive-pstricks texlive-font-utils texlive-latex-extra texlive-base texlive-science texlive-pictures texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra locales
 
 build_script:
