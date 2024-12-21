@@ -27,6 +27,7 @@ from string import ascii_lowercase as alphabet
 from string import ascii_uppercase as ALPHABET
 
 import mathmakerlib.config as mmlib_cfg
+from mathmakerlib.geometry import RightTriangle
 from mathmakerlib.calculus import Number, Unit, Fraction, is_integer, ClockTime
 from mathmakerlib.calculus.unit import COMMON_LENGTH_UNITS
 
@@ -405,7 +406,6 @@ class structure(object):
         self.rectangle = self.polygon
 
     def _setup_right_triangle(self, **kwargs):
-        from mathmakerlib.geometry import RightTriangle
         # Too many different possibilities for a Right Triangle,
         # so the angles|lengths' labels must be set outside of this setup()
         if (not hasattr(self, 'unit_length')
@@ -427,23 +427,6 @@ class structure(object):
             leg0_length=leg0_length, leg1_length=leg1_length,
             rotation_angle=rot_angle)
         self.rt = self.right_triangle
-
-    def _setup_right_triangle_OLD(self, **kwargs):
-        from mathmaker.lib.core.geometry import RightTriangle
-        # Too many different possibilities for a Right Triangle,
-        # so the angles|lengths' labels must be set outside of this setup()
-        if (not hasattr(self, 'unit_length')
-            or not hasattr(self, 'unit_area')):
-            self.setup('length_units', **kwargs)
-
-        rt_name = next(shared.unique_letters_words_source[3])[0]
-        alpha, beta = next(shared.angle_ranges_source)
-        rotation_angle = alpha + random.choice(range(beta - alpha))
-        self.right_triangle = RightTriangle(
-            ((rt_name[0], rt_name[1], rt_name[2]),
-             {'leg0': Decimal(str(random.choice(range(20, 40)) / 10)),
-              'leg1': Decimal(str(random.choice(range(20, 40)) / 10))}),
-            rotate_around_isobarycenter=rotation_angle)
 
     def _setup_intercept_theorem_figure(self, **kwargs):
         from mathmaker.lib.core.geometry import InterceptTheoremConfiguration
