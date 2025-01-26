@@ -307,3 +307,21 @@ W04d: !!omap
                  multi direct, nb_variant=decimal -> nnpairs:2-9 (1)
                  subtr hole, subvariant=only_positive, hidden=2 -> complements_to_100 (1)
                  order of_operations, subvariant=only_positive -> singleint_5to20;;intpairs_3to9, variant=0-3 (1)
+
+W05a: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: vocabulary operation -> auto_vocabulary (1)
+                 divi direct -> decimal_and_10_100_1000 (1)
+                 multi direct, nb_variant=decimal2 -> nnpairs:2-9 (1)
+                 area rectangle, picture=true -> nnpairs:3-9, nb_variant=multiplesof10 (1)
+                 units conversion -> unitspairs, easiest=yes (1)
+
+W05b: !!omap
+  - preset: "mental calculation slideshow"
+  - exercise: !!omap
+    - questions: vocabulary operation -> auto_vocabulary (1)
+                 multi direct -> decimal_and_10_100_1000 (1)
+                 multi direct, nb_variant=decimal1 -> nnpairs:2-9 (1)
+                 multi clever -> nnsingletons:2-99 (1)
+                 multi hole -> int_irreducible_frac (1)
