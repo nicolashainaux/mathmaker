@@ -1550,6 +1550,14 @@ def generate_values(source_id):
         return [(k, Fraction(n, k)) for k in [i + 2 for i in range(9)]
                 for n in coprime_generator(k)]
 
+    elif source_id == 'alternate_clockwise_anticlockwise':
+        result = []
+        for i in range(5):
+            lr = ['clockwise', 'anticlockwise']
+            random.shuffle(lr)
+            result += lr
+        return result
+
     elif source_id == 'alternate_hyp_leg':
         lr = ['hyp', 'leg']
         random.shuffle(lr)
