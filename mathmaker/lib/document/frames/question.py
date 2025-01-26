@@ -156,7 +156,7 @@ class Question(object):
     #   @brief Returns the answer of the question as a str
     def answer_to_str(self):
         answer = str(self.q_answer) + str(self.a_spacing)
-        if not self.external_numbering:
+        if not self.q_nb_included_in_wording and not self.external_numbering:
             answer = str(self.displayable_number) + answer
         return answer
 
