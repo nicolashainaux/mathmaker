@@ -113,7 +113,7 @@ class AnglesSetGenerator(Generator):
         labels = [Number(lbl, unit=r'\textdegree') if lbl is not None else None
                   for lbl in lbls]
         eccentricities = build_data.pop('eccentricities',
-                                        ['automatic'
+                                        ['auto'
                                          for _ in range(len(endpoints) - 1)])
         # Setup default decorations of all i, i+1 angles
         decorations = {}

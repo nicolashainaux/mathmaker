@@ -28,6 +28,7 @@ import subprocess
 from packaging.version import Version
 from tempfile import NamedTemporaryFile
 
+import mathmakerlib
 from mathmakerlib import required
 from mathmakerlib.calculus import is_integer, is_number
 from mathmakerlib.LaTeX import TIKZSET
@@ -228,6 +229,12 @@ class LaTeX(Structure.Structure):
                                  if required.tikzset[k]])
             tikz_setup = '\n'.join(_ for _ in [tikz, tikzlibraries, tikzset])
             tikz_setup += '\n'
+            if required.callout_style['callout_style1']:
+                cs_styles = mathmakerlib.config.callout_styles
+                content = 'callout_style1/.style={{{}}}'\
+                    .format(cs_styles['callout_style1'])
+                cs = Command('tikzset', content=content)
+                tikz_setup += str(cs)
         # hyperref
         hyperref = ''
         if shared.enable_js_form:
