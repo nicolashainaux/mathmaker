@@ -89,6 +89,8 @@ class Question(object):
                 + shared.machine.write_new_line()
         elif sp == '':
             self.q_spacing = ''
+        elif sp.startswith('h'):
+            self.q_spacing = shared.machine.hspace(width=sp[1:])
         else:
             self.q_spacing = shared.machine.addvspace(height=sp)
 
@@ -100,6 +102,8 @@ class Question(object):
                 + shared.machine.write_new_line()
         elif asp == '':
             self.a_spacing = ''
+        elif asp.startswith('h'):
+            self.a_spacing = shared.machine.hspace(width=sp[1:])
         else:
             self.a_spacing = shared.machine.addvspace(height=asp)
 

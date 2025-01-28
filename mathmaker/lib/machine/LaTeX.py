@@ -450,6 +450,16 @@ r"""{textcomp}{array}{cellspace}{graphicx}{epstopdf}{textpos}{specificpackages}
         else:
             self.out.write(output_str)
 
+    def hspace(self, width='10.0pt', **options):
+        """
+        Add a horizontal space.
+        """
+        output_str = r"\hspace{{{width}}}".format(width=width)
+        if self.redirect_output_to_str:
+            return output_str
+        else:
+            self.out.write(output_str)
+
     def write_frame(self, content, uncovered=False, only=False, duration=None,
                     numbering=''):
         """
