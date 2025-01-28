@@ -452,6 +452,7 @@ class Exercise(object):
         self.q_numbering = options.get('q_numbering', presets['q_numbering'])
         self.shuffle = BOOLEAN[options.get('shuffle',
                                            presets.get('shuffle'))]()
+        self.answers_autovspace = options.get('answers_autovspace', True)
 
         self.details_level = options.get('details_level',
                                          presets.get('details_level'))
@@ -513,6 +514,8 @@ class Exercise(object):
 
         self.text = {'exc': options.get('text_exc', ''),
                      'ans': options.get('text_ans', presets['text_ans'])}
+        if self.text['ans'] is None:
+            self.text['ans'] = ''
         if self.text['exc'] != '':
             self.text['exc'] = _(self.text['exc'])
         if self.text['ans'] != '':
@@ -732,7 +735,8 @@ class Exercise(object):
                     for i in range(how_many):
                         result += self.questions_list[q_n]\
                             .to_str(ex_or_answers)
-                        if ex_or_answers == 'ans' and i < how_many - 1:
+                        if (self.answers_autovspace and ex_or_answers == 'ans'
+                            and i < how_many - 1):
                             result += M.addvspace(height='20.0pt')
                         q_n += 1
 
