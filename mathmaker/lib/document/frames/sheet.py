@@ -82,13 +82,18 @@ class Sheet(object):
 
         layout_data = copy.deepcopy(DEFAULT_SHEET_LAYOUT)
 
+        write_ex_titles = presets[self.preset].get('write_ex_titles')
+
         if filename is None:  # build from yaml
             data = load_sheet(theme, subtheme, sheet_name)
+            self.newlines_after_title = data.get('newlines_after_title',
+                                                 'twice')
             self.preset = data.get('preset', 'default')
             shared.enable_js_form = (options.get('enable_js_form', False)
                                      and self.preset == 'mental calculation')
             header = data.get('header', presets[self.preset]['header'])
             title = data.get('title', presets[self.preset]['title'])
+            write_ex_titles = data.get('write_ex_titles', write_ex_titles)
             if title == '<DEFAULT>':
                 title = settings.mc_titles['title']
                 title = _(title)
@@ -142,7 +147,7 @@ class Sheet(object):
              sheet_layout,
              self.preset) = get_sheet_config(filename)
 
-        self.write_ex_titles = presets[self.preset].get('write_ex_titles')
+        self.write_ex_titles = write_ex_titles
         self.exercises_list = list()
         shared.machine.set_font_size_offset(font_size_offset)
 
@@ -507,7 +512,10 @@ class Sheet(object):
                 result += shared.machine.write_new_line()
                 result += shared.machine.write_set_font_size_to('normal')
                 result += shared.machine.write(self.subtitle, emphasize='bold')
-            result += shared.machine.write_new_line_twice()
+            if self.newlines_after_title == 'twice':
+                result += shared.machine.write_new_line_twice()
+            elif self.newlines_after_title == 'single':
+                result += shared.machine.write_new_line()
 
         return result
 
@@ -533,6 +541,9 @@ class Sheet(object):
             result += shared.machine.write_set_font_size_to('Large')
             result += shared.machine.write(self.answers_title,
                                            emphasize='bold')
-            result += shared.machine.write_new_line_twice()
+            if self.newlines_after_title == 'twice':
+                result += shared.machine.write_new_line_twice()
+            elif self.newlines_after_title == 'single':
+                result += shared.machine.write_new_line()
 
         return result
