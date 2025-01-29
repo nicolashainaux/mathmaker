@@ -83,6 +83,8 @@ class Sheet(object):
         layout_data = copy.deepcopy(DEFAULT_SHEET_LAYOUT)
 
         write_ex_titles = presets[self.preset].get('write_ex_titles')
+        self.newlines_after_title = 'twice'  # default value
+        # xml sheets cannot change this value
 
         if filename is None:  # build from yaml
             data = load_sheet(theme, subtheme, sheet_name)
