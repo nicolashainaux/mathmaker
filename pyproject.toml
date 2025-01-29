@@ -16,22 +16,20 @@ intspan = "^1.6.1"
 "ruamel.yaml" = "^0.17.21"
 toml = "^0.10.2"
 packaging = "^21.3"
-mathmakerlib = "^0.7.23"
+mathmakerlib = "^0.7.26"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 tox = "^3.25.1"
 pytest = "^7.1.2"
 flake8 = "^5.0.4"
 Sphinx = "^5.1.1"
 sphinx-rtd-theme = "^1.0.0"
+coverage = "^6.4.4"
+coveralls = "^3.3.1"
 
 [tool.poetry.scripts]
 mathmaker = "mathmaker.cli:entry_point"
 mathmakerd = "mathmaker.daemonized:entry_point"
-
-[tool.poetry.group.dev.dependencies]
-coverage = "^6.4.4"
-coveralls = "^3.3.1"
 
 [build-system]
 # requires = ["poetry-core>=1.0.0"]
