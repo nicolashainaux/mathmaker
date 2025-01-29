@@ -1013,7 +1013,8 @@ def classify_tag(tag):
                  'clocktime_data', 'multiplesof10', 'improper_fractions',
                  'simple_improper_fractions', 'expressions',
                  'signed_numbers_comparisons_source',
-                 'cols_for_spreadsheets', 'coordinates_xy']:
+                 'cols_for_spreadsheets', 'coordinates_xy',
+                 'alternate_acute_obtuse_pairs']:
         # __
         return tag
     raise ValueError(tag + " is not recognized as a valid 'tag' that can be "
@@ -1558,6 +1559,14 @@ def generate_values(source_id):
             result += lr
         return result
 
+    elif source_id == 'alternate_acute_obtuse_pairs':
+        result = []
+        for i in range(8):
+            lr = [random.choice(range(10, 89)), random.choice(range(91, 170))]
+            random.shuffle(lr)
+            result += lr
+        return result
+
     elif source_id == 'alternate_hyp_leg':
         lr = ['hyp', 'leg']
         random.shuffle(lr)
@@ -2058,6 +2067,8 @@ class mc_source(object):
             if 'codename' in correct_kw:
                 del correct_kw['codename']
             return shared.int_sextuples_source.next(**correct_kw)
+        elif tag_classification == 'alternate_acute_obtuse_pairs':
+            return shared.alternate_acute_obtuse_pairs_source.next(**kwargs)
         elif tag_classification == 'simple_proper_fractions':
             return shared.simple_proper_fractions_source.next(**kwargs)
         elif tag_classification == 'improper_fractions':

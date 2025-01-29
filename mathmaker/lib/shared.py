@@ -148,6 +148,7 @@ def init():
     global alternate_pyth_use_decimals_source
     global alternate_exactness_source
     global alternate_clockwise_anticlockwise_source
+    global alternate_acute_obtuse_pairs_source
 
     enable_js_form = False
 
@@ -366,6 +367,8 @@ def init():
     uppercase_letters_source = sub_source('uppercase_letters_source')
     alternate_clockwise_anticlockwise_source = sub_source(
         'alternate_clockwise_anticlockwise', shuffle=False)
+    alternate_acute_obtuse_pairs_source = sub_source(
+        'alternate_acute_obtuse_pairs', shuffle=False)
     alternate_hyp_leg_source = sub_source('alternate_hyp_leg', shuffle=False)
     alternate_pyth_use_decimals_source = sub_source(
         'alternate_pyth_use_decimals', shuffle=False)
