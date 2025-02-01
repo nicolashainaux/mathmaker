@@ -1561,8 +1561,12 @@ def generate_values(source_id):
 
     elif source_id == 'alternate_acute_obtuse_pairs':
         result = []
+        acute = list(range(10, 89))
+        obtuse = list(range(91, 170))
+        random.shuffle(acute)
+        random.shuffle(obtuse)
         for i in range(8):
-            lr = [random.choice(range(10, 89)), random.choice(range(91, 170))]
+            lr = [acute.pop(), obtuse.pop()]
             random.shuffle(lr)
             result += lr
         return result
