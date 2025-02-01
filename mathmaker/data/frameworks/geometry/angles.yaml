@@ -3,16 +3,13 @@ measures: !!omap
   - newlines_after_title: single
   - write_ex_titles: False
   - exercise: !!omap
+    - layout_variant: evenly_hspaced
+    - layout:
+      - wordings: per_line=2, vsep=0.8cm
+      - answers: per_line=2, vsep=0.8cm
     - shuffle: False
     - q_numbering: numeric
     - answers_autovspace: False
     - text_ans:
     # angle measure, read=clockwise|anticlockwise (default: alternate)
-    - question: angle measure, spacing=h0.8cm, answers_spacing=h0.8cm -> alternate_acute_obtuse_pairs (1)
-                angle measure, spacing=0.2cm, answers_spacing=0.2cm -> alternate_acute_obtuse_pairs (1)
-                angle measure, spacing=h0.8cm, answers_spacing=h0.8cm -> alternate_acute_obtuse_pairs (1)
-                angle measure, spacing=0.2cm, answers_spacing=0.2cm -> alternate_acute_obtuse_pairs (1)
-                angle measure, spacing=h0.8cm, answers_spacing=h0.8cm -> alternate_acute_obtuse_pairs (1)
-                angle measure, spacing=0.2cm, answers_spacing=0.2cm -> alternate_acute_obtuse_pairs (1)
-                angle measure, spacing=h0.8cm, answers_spacing=h0.8cm -> alternate_acute_obtuse_pairs (1)
-                angle measure, spacing=, answers_spacing= -> alternate_acute_obtuse_pairs (1)
+    - question: angle measure -> alternate_acute_obtuse_pairs (8)

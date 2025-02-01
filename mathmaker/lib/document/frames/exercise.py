@@ -46,7 +46,8 @@ AVAILABLE_PRESETS = ['default', 'short_test', 'mental calculation']
 
 AVAILABLE_DETAILS_LEVELS = ['maximum', 'medium', 'none']
 
-AVAILABLE_LAYOUT_VARIANTS = ['default', 'tabular', 'slideshow']
+AVAILABLE_LAYOUT_VARIANTS = ['default', 'tabular', 'slideshow',
+                             'evenly_hspaced']
 DEFAULT_LAYOUT = {'exc': [None, 'all'], 'ans': [None, 'all']}
 
 to_unpack = copy.deepcopy(SUBKINDS_TO_UNPACK)
@@ -800,6 +801,27 @@ class Exercise(object):
                                              col_widths,
                                              content,
                                              **options)
+            return result + self.x_spacing[ex_or_answers]
+
+        if self.layout_variant == 'evenly_hspaced':
+            import sys
+            sys.stderr.write(f'\n{self.x_layout = }\n')
+            if ex_or_answers == 'exc':
+                per_line = int(self.x_layout['per_line_w'])
+                vsep = self.x_layout['vsep_w']
+            elif ex_or_answers == 'ans':
+                per_line = int(self.x_layout['per_line_a'])
+                vsep = self.x_layout['vsep_a']
+            line = ''
+            linesep = r'\hspace*{\fill}'
+            for (i, q) in enumerate(self.questions_list, start=1):
+                hsep = r'\hfill' if line else ''
+                line += hsep + q.to_str(ex_or_answers)
+                if i != 0 and not (i % per_line):
+                    result += f'{linesep}{line}{linesep}'
+                    if vsep:
+                        result += M.addvspace(height=vsep)
+                    line = ''
             return result + self.x_spacing[ex_or_answers]
 
         elif self.layout_variant == 'slideshow':

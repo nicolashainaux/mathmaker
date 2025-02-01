@@ -544,6 +544,17 @@ def read_layout(data):
                 layout['spacing_w'] = s
             if part == 'answers':
                 layout['spacing_a'] = s
+        if 'per_line' in attributes:
+            if part == 'wordings':
+                layout['per_line_w'] = attributes.get('per_line')
+            if part == 'answers':
+                layout['per_line_a'] = attributes.get('per_line')
+        if 'vsep' in attributes:
+            if part == 'wordings':
+                layout['vsep_w'] = attributes.get('vsep')
+            if part == 'answers':
+                layout['vsep_a'] = attributes.get('vsep')
+
         # part is either wordings or answers
         rowxcol = attributes.get('rowxcol', 'none')
         distri = attributes.get('print', 'auto')

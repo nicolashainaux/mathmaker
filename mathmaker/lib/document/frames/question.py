@@ -81,7 +81,10 @@ class Question(object):
                                              for m in ALL_MODULES]))
         m = module.sub_object(**options)
 
-        sp = options.get('spacing', '30.0pt')
+        default_q_sp = '30.0pt'
+        if self.x_layout_variant == 'evenly_hspaced':
+            default_q_sp = ''
+        sp = options.get('spacing', default_q_sp)
         if sp == 'newline':
             self.q_spacing = shared.machine.write_new_line()
         elif sp == 'newline_twice':
