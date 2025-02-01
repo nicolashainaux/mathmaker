@@ -13,3 +13,18 @@ measures: !!omap
     - text_ans:
     # angle measure, read=clockwise|anticlockwise (default: alternate)
     - question: angle measure -> alternate_acute_obtuse_pairs (8)
+
+
+constructions: !!omap
+  - title: "Construct the angles of following measures"
+  - write_ex_titles: False
+  - exercise: !!omap
+    - layout_variant: evenly_hspaced
+    - layout:
+      - wordings: per_line=4, vsep=0.4cm
+      - answers: per_line=2, vsep=0.8cm
+    - shuffle: False
+    - q_numbering: numeric
+    - answers_autovspace: False
+    - text_ans:
+    - question: angle construction -> alternate_acute_obtuse_pairs (8)

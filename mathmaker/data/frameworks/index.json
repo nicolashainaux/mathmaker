@@ -14,6 +14,11 @@
         "angles",
         "measures"
     ],
+    "angles_constructions": [
+        "geometry",
+        "angles",
+        "constructions"
+    ],
     "pythagorean_theorem_short_test": [
         "geometry",
         "pythagorean_theorem",

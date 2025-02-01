@@ -815,7 +815,7 @@ class Exercise(object):
             line = ''
             linesep = r'\hspace*{\fill}'
             for (i, q) in enumerate(self.questions_list, start=1):
-                hsep = r'\hfill' if line else ''
+                hsep = r'\hfill ' if line else ''
                 line += hsep + q.to_str(ex_or_answers)
                 if i != 0 and not (i % per_line):
                     result += f'{linesep}{line}{linesep}'
