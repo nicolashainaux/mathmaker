@@ -10,6 +10,12 @@ Unreleased
 ----------
 
 
+Version 0.7.25 (2025-02-02)
+---------------------------
+
+* Add sheet: angles_measures
+* Add sheet: angles_constructions
+
 Version 0.7.24 (2024-12-21)
 ---------------------------
 
