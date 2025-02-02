@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mathmaker 0.2 pre-alpha\n"
 "Report-Msgid-Bugs-To: nh.techn@gmail.com\n"
 "POT-Creation-Date: 2016-03-18 18:44+0100\n"
-"PO-Revision-Date: 2024-12-21 06:38+0100\n"
+"PO-Revision-Date: 2025-02-02 15:57+0100\n"
 "Last-Translator: Nicolas Hainaux <nh.techn@gmail.com>\n"
 "Language-Team: Nicolas Hainaux <<nico_h@users.sourceforge.net>>\n"
 "Language: fr_FR\n"
@@ -34,27 +34,27 @@ msgstr "N'importe quelle valeur de {variable_name} est solution de l'équation."
 msgid "This equation has no solution."
 msgstr "Cette équation n'a pas de solution."
 
-#: lib/machine/LaTeX.py:241
+#: lib/machine/LaTeX.py:248
 msgid "To strike out numbers "
 msgstr "Pour pouvoir rayer des nombres "
 
-#: lib/machine/LaTeX.py:246
+#: lib/machine/LaTeX.py:253
 msgid "To use multicol environment"
 msgstr "Pour faire une présentation multicolonnes"
 
-#: lib/machine/LaTeX.py:271
+#: lib/machine/LaTeX.py:278
 msgid "To use extra commands to handle tabulars"
 msgstr "Pour utiliser des commandes supplémentaires pour les tableaux"
 
-#: lib/machine/LaTeX.py:265
+#: lib/machine/LaTeX.py:272
 msgid "For pretty underlining"
 msgstr "Pour de jolis soulignages"
 
-#: lib/machine/LaTeX.py:329
+#: lib/machine/LaTeX.py:336
 msgid "Exercises counter"
 msgstr "Compteur d'exercices"
 
-#: lib/machine/LaTeX.py:334
+#: lib/machine/LaTeX.py:341
 msgid ""
 "Definition of the command resetting the exercises counter (which is useful "
 "when begining to write the answers sheet)"
@@ -82,10 +82,8 @@ msgstr "Feuille d'exercices d'entraînement :"
 #: lib/old_style_sheet/AlgebraFactorization_03.py:60
 #: lib/old_style_sheet/FractionsSum.py:60
 #: lib/old_style_sheet/AlgebraBinomialIdentityExpansion.py:61
-#: lib/old_style_sheet/PythagoreanTheoremShortTest.py:60
 #: lib/old_style_sheet/AlgebraFactorization_01.py:61
 #: lib/old_style_sheet/AlgebraMiniTest0.py:62
-#: lib/old_style_sheet/ConverseAndContrapositiveOfPythagoreanTheoremShortTest.py:66
 #: lib/old_style_sheet/AlgebraExpressionReduction.py:62
 #: lib/old_style_sheet/EquationsBasic.py:62
 msgid "Examples of answers"
@@ -158,32 +156,27 @@ msgstr "Somme de fractions"
 msgid "Short Test: pythagorean theorem"
 msgstr "Interrogation : théorème de Pythagore"
 
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:343
+#: lib/document/content/geometry/pythagorean_theorem.py:117
 #: data/vocabulary.yaml:39
-#: lib/document/content/geometry/pythagorean_theorem.py:121
 msgid "to the unit"
 msgstr "à l'unité"
 
+#: lib/document/content/geometry/pythagorean_theorem.py:118
 #: data/vocabulary.yaml:40
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:344
-#: lib/document/content/geometry/pythagorean_theorem.py:122
 msgid "to the tenth"
 msgstr "au dixième"
 
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:345
 #: data/vocabulary.yaml:41
-#: lib/document/content/geometry/pythagorean_theorem.py:123
+#: lib/document/content/geometry/pythagorean_theorem.py:119
 msgid "to the hundreth"
 msgstr "au centième"
 
-#: lib/document/content/geometry/pythagorean_theorem.py:124
 #: data/vocabulary.yaml:42
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:346
+#: lib/document/content/geometry/pythagorean_theorem.py:120
 msgid "to the thousandth"
 msgstr "au millième"
 
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:347
-#: lib/document/content/geometry/pythagorean_theorem.py:125
+#: lib/document/content/geometry/pythagorean_theorem.py:121
 #: data/vocabulary.yaml:43
 msgid "to the ten thousandth"
 msgstr "au dix-millième"
@@ -281,43 +274,28 @@ msgstr "À cause des signes,"
 msgid "it does not match a binomial identity."
 msgstr "ça ne correspond pas à une identité remarquable."
 
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:356
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:422
-#: lib/document/content/geometry/pythagorean_theorem.py:156
-#: lib/document/content/geometry/pythagorean_theorem.py:131
+#: lib/document/content/geometry/pythagorean_theorem.py:127
+#: lib/document/content/geometry/pythagorean_theorem.py:152
 #, python-brace-format
 msgid "The triangle {triangle_name} has a right angle in {right_vertex}."
 msgstr "{triangle_name} est un triangle rectangle en {right_vertex}."
 
-#: lib/document/content/geometry/pythagorean_theorem.py:141
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:371
+#: lib/document/content/geometry/pythagorean_theorem.py:137
 #, python-brace-format
 msgid "Calculate the length of {this_side}."
 msgstr "Calculer la longueur de {this_side}."
 
-#: lib/document/content/geometry/pythagorean_theorem.py:145
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:375
+#: lib/document/content/geometry/pythagorean_theorem.py:141
 #, python-brace-format
 msgid "Give the result in {this_unit}."
 msgstr "Donner le résultat en {this_unit}."
 
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:379
-#: lib/document/content/geometry/pythagorean_theorem.py:149
+#: lib/document/content/geometry/pythagorean_theorem.py:145
 #, python-brace-format
 msgid "Round the result {at_this_precision}."
 msgstr "Arrondir le résultat {at_this_precision}."
 
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:395
-#, python-brace-format
-msgid ""
-"{triangle_name} is a triangle such as {side_length0} = {nb0}, {side_length1} "
-"= {nb1} and {side_length2} = {nb2}"
-msgstr ""
-"{triangle_name} est un triangle tel que {side_length0} = {nb0}, "
-"{side_length1} = {nb1} et {side_length2} = {nb2}"
-
 #: lib/document/content/geometry/converse_of_pythagorean_theorem.py:87
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:406
 msgid ""
 "Is it a right triangle ? Prove your answer and if the triangle is right, "
 "give the name of the right angle."
@@ -325,57 +303,24 @@ msgstr ""
 "Est-ce un triangle rectangle ? Justifier votre réponse et si le triangle est "
 "rectangle, préciser où se trouve l'angle droit."
 
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:429
-#: lib/document/content/geometry/pythagorean_theorem.py:163
+#: lib/document/content/geometry/pythagorean_theorem.py:159
 msgid "Then by Pythagoras theorem"
 msgstr "Donc d'après le théorème de Pythagore"
 
-#: lib/document/content/geometry/pythagorean_theorem.py:176
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:455
 #: lib/document/content/geometry/converse_of_pythagorean_theorem.py:101
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:544
+#: lib/document/content/geometry/pythagorean_theorem.py:172
 msgid "Sketch"
 msgstr "Figure à main levée"
-
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:507
-msgid "On one hand:"
-msgstr "D'une part :"
-
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:511
-msgid "On the other hand:"
-msgstr "D'autre part :"
-
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:515
-msgid "Hence:"
-msgstr "Donc :"
-
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:520
-msgid "So, by the converse of the pythagorean theorem,"
-msgstr "Donc, d'après la réciproque du théorème de Pythagore,"
-
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:523
-#, python-brace-format
-msgid "{triangle_name} has a right angle in {right_vertex}."
-msgstr "{triangle_name} est un triangle rectangle en {right_vertex}."
-
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:534
-msgid "So, by the contrapositive of the pythagorean theorem,"
-msgstr "Donc, d'après la contraposée du théorème de Pythagore,"
-
-#: lib/old_style_sheet/exercise/question/Q_RightTriangle.py:537
-#, python-brace-format
-msgid "{triangle_name} has no right angle."
-msgstr "{triangle_name} n'est pas rectangle."
 
 #: lib/document/frames/sheet.py:73 lib/document/frames/sheet.py:66
 msgid "Answers"
 msgstr "Réponses"
 
-#: lib/machine/LaTeX.py:259
+#: lib/machine/LaTeX.py:266
 msgid "To use some symbols like currency units"
 msgstr "Pour utiliser des symboles (par exemple des unités de monétaires)"
 
-#: lib/machine/LaTeX.py:203
+#: lib/machine/LaTeX.py:204
 msgid "To display units correctly"
 msgstr "Pour afficher correctement les unités"
 
@@ -817,8 +762,8 @@ msgstr "Trigonométrie"
 msgid "Calculate the length of a side using cosine"
 msgstr "Calculer la longueur d'un côté à l'aide de cosinus"
 
-#: lib/document/content/geometry/trigonometry_calculate_length.py:107
-#: lib/document/content/geometry/trigonometry_calculate_angle.py:76
+#: lib/document/content/geometry/trigonometry_calculate_angle.py:77
+#: lib/document/content/geometry/trigonometry_calculate_length.py:109
 #, python-brace-format
 msgid ""
 "The triangle {triangle_name} has a right angle in {right_vertex_name}. "
@@ -903,7 +848,7 @@ msgstr ""
 "Calculer l'angle manquant dans chaque triangle. Arrondir les résultats à "
 "l'unité."
 
-#: lib/document/content/geometry/trigonometry_formula.py:78
+#: lib/document/content/geometry/trigonometry_formula.py:77
 #, python-brace-format
 msgid "The formula is: {formula}"
 msgstr "La formule est : {formula}"
@@ -929,15 +874,15 @@ msgstr "Donner la formule du cosinus de l'angle aigu dans chaque triangle."
 msgid "What is {the_formula_of_trigo_fct} of {acute_angle} ?"
 msgstr "Quelle est {the_formula_of_trigo_fct} de l'angle {acute_angle} ?"
 
-#: lib/document/content/geometry/trigonometry_formula.py:61
+#: lib/document/content/geometry/trigonometry_formula.py:62
 msgid "the formula of cosine"
 msgstr "la formule du cosinus"
 
-#: lib/document/content/geometry/trigonometry_formula.py:62
+#: lib/document/content/geometry/trigonometry_formula.py:63
 msgid "the formula of sine"
 msgstr "la formule du sinus"
 
-#: lib/document/content/geometry/trigonometry_formula.py:63
+#: lib/document/content/geometry/trigonometry_formula.py:64
 msgid "the formula of tangent"
 msgstr "la formule de la tangente"
 
@@ -951,12 +896,12 @@ msgstr "Quel est le côté adjacent à {acute_angle} ?"
 msgid "Which side is opposite to {acute_angle} ?"
 msgstr "Quel est le côté opposé à {acute_angle} ?"
 
-#: lib/document/content/geometry/trigonometry_vocabulary.py:75
+#: lib/document/content/geometry/trigonometry_vocabulary.py:74
 #, python-brace-format
 msgid "The side adjacent to {acute_angle} is: {correct_answer}"
 msgstr "Le côté adjacent à {acute_angle} est : [{correct_answer}]"
 
-#: lib/document/content/geometry/trigonometry_vocabulary.py:77
+#: lib/document/content/geometry/trigonometry_vocabulary.py:76
 #, python-brace-format
 msgid "The side opposite to {acute_angle} is: {correct_answer}"
 msgstr "Le côté opposé à {acute_angle} est : [{correct_answer}]"
@@ -1870,27 +1815,27 @@ msgstr "Calcul mental : divisions"
 msgid "Mental calculation: multiplication by 11"
 msgstr "Calcul mental : multiplications par 11"
 
-#: lib/document/content/component.py:568
+#: lib/document/content/component.py:553
 #, python-brace-format
 msgid "What number must be added to {number1} to make {number2}?"
 msgstr "Combien faut-il ajouter à {number1} pour obtenir {number2} ?"
 
-#: lib/document/content/component.py:573
+#: lib/document/content/component.py:558
 #, python-brace-format
 msgid "What is the tens complement of {number}?"
 msgstr "Quel est le complément à 10 de {number} ?"
 
-#: lib/document/content/component.py:577
+#: lib/document/content/component.py:562
 #, python-brace-format
 msgid "What is the hundreds complement of {number}?"
 msgstr "Quel est le complément à 100 de {number} ?"
 
-#: lib/document/content/component.py:581
+#: lib/document/content/component.py:566
 #, python-brace-format
 msgid "What is the complement to {number1} of {number2}?"
 msgstr "Quel est le complément à {number1} de {number2} ?"
 
-#: lib/machine/LaTeX.py:93
+#: lib/machine/LaTeX.py:94
 msgid "To be able to color the documents"
 msgstr "Pour pouvoir mettre les documents en couleur"
 
@@ -1926,7 +1871,7 @@ msgstr ""
 "\n"
 "(dans les tables de multiplication, de 2 à 9)"
 
-#: lib/document/frames/exercise.py:418 lib/document/frames/exercise.py:437
+#: lib/document/frames/exercise.py:419 lib/document/frames/exercise.py:438
 msgid "Example of detailed solutions:"
 msgstr "Exemple de solutions détaillées :"
 
@@ -1956,13 +1901,13 @@ msgstr "Quel est le chiffre des {position} dans le nombre {decimal_number} ?"
 msgid "{} (or {} etc.)"
 msgstr "{} (ou {} etc.)"
 
-#: lib/document/content/component.py:49
 #: lib/document/content/calculation/fractions_conversions.py:49
+#: lib/document/content/component.py:50
 #: lib/document/content/calculation/decimal_numerals.py:62
 msgid "What is {} as a decimal?"
 msgstr "Écriture décimale de {} ?"
 
-#: lib/document/content/component.py:51
+#: lib/document/content/component.py:52
 #: lib/document/content/calculation/decimal_numerals.py:67
 msgid "What is {} as a decimal fraction?"
 msgstr "Fraction décimale égale à {} ?"
@@ -2036,37 +1981,37 @@ msgstr "Quel est le quart de {result} ?"
 msgid "Mental calculation: area and perimeter of a rectangle"
 msgstr "Calcul mental : aires et périmètres de rectangles"
 
-#: lib/machine/LaTeX.py:235
+#: lib/machine/LaTeX.py:242
 msgid "To insert pdf formular and javascript"
 msgstr "Pour insérer un formulaire pdf et du javascript"
 
-#: lib/document/frames/exercise.py:993
+#: lib/document/frames/exercise.py:1019
 msgid "Clear everything"
 msgstr "Tout effacer"
 
-#: lib/document/frames/exercise.py:994
+#: lib/document/frames/exercise.py:1020
 msgid "Validate"
 msgstr "Valider"
 
-#: lib/document/frames/exercise.py:1004
+#: lib/document/frames/exercise.py:1030
 #, python-brace-format
 msgid "Score: ... / {q_number}"
 msgstr "Score : ... / {q_number}"
 
-#: lib/document/frames/exercise.py:1006
+#: lib/document/frames/exercise.py:1032
 #, python-brace-format
 msgid "\"Score: \" + count.toString() + \" / {q_number}\""
 msgstr "\"Score : \" + count.toString() + \" / {q_number}\""
 
-#: lib/document/frames/exercise.py:998
+#: lib/document/frames/exercise.py:1024
 msgid "Please translate this into only one letter to mean \"correct answer\""
 msgstr "J"
 
-#: lib/document/frames/exercise.py:1001
+#: lib/document/frames/exercise.py:1027
 msgid "Please translate this into only one letter to mean \"wrong answer\""
 msgstr "F"
 
-#: lib/document/content/component.py:93
+#: lib/document/content/component.py:94
 msgid "undefined"
 msgstr "indéfini"
 
@@ -2580,19 +2525,19 @@ msgstr ""
 "Un rectangle a une aire de {nb3} {area_unit} et une largeur de {nb2} "
 "{length_unit}. Quelle est sa longueur ? |hint:length_unit|"
 
-#: lib/machine/LaTeX.py:221
+#: lib/machine/LaTeX.py:222
 msgid "To draw TikZ pictures"
 msgstr "Pour dessiner des images TikZ"
 
-#: lib/machine/LaTeX.py:284
+#: lib/machine/LaTeX.py:291
 msgid "To include .eps pictures"
 msgstr "Pour inclure des images .eps"
 
-#: lib/machine/LaTeX.py:328
+#: lib/machine/LaTeX.py:335
 msgid "General layout of the page"
 msgstr "Disposition générale de la page"
 
-#: lib/machine/LaTeX.py:330
+#: lib/machine/LaTeX.py:337
 msgid ""
 "Definition of the \"exercise\" command, which will insert the word "
 "\"Exercise\" in bold, with its number and automatically increments the "
@@ -2602,7 +2547,7 @@ msgstr ""
 "en gras, accompagné de son numéro et qui va incrémenter automatiquement le "
 "compteur"
 
-#: lib/machine/LaTeX.py:349
+#: lib/machine/LaTeX.py:356
 msgid ""
 "Redefinition of \"\\parallel\" command to draw the parallel symbol slanted "
 "as usual in french notations"
@@ -2704,21 +2649,21 @@ msgstr "{n2} est un multiple de {n1}."
 msgid "Mental calculation: multiples and divisors"
 msgstr "Calcul mental : multiples et diviseurs"
 
-#: lib/machine/LaTeX.py:252
+#: lib/machine/LaTeX.py:259
 msgid "To get a better control on floats positioning (e.g. tabulars)"
 msgstr ""
 "Pour avoir un meilleur contrôle sur le positionnement des \"flottants\" (par "
 "exemple les tabulars)"
 
-#: lib/machine/LaTeX.py:290
+#: lib/machine/LaTeX.py:297
 msgid "To make .eps pictures includable by pdflatex"
 msgstr "Pour permettre à pdflatex d'inclure des images .eps"
 
-#: lib/machine/LaTeX.py:297
+#: lib/machine/LaTeX.py:304
 msgid "Absolute positioning of text on the page"
 msgstr "Positionnement absolu du texte sur la page"
 
-#: lib/machine/LaTeX.py:308
+#: lib/machine/LaTeX.py:315
 msgid "To define the layout of the page"
 msgstr "Définir la mise en page"
 
@@ -2740,7 +2685,7 @@ msgstr "Aire de ce rectangle ?"
 msgid "(Length unit: {})"
 msgstr "(Unité de longueur : {})"
 
-#: lib/document/frames/exercise.py:818
+#: lib/document/frames/exercise.py:844
 msgid "Answer: "
 msgstr "Réponse : "
 
@@ -3272,7 +3217,7 @@ msgstr "Calcul mental : quatre opérations"
 msgid "Mental calculation: areas and perimeters"
 msgstr "Calcul mental : aires et périmètres"
 
-#: lib/machine/LaTeX.py:277
+#: lib/machine/LaTeX.py:284
 msgid "To define space above and below content of tabular lines"
 msgstr ""
 
@@ -3393,7 +3338,7 @@ msgstr "Calcul mental : multiplications et divisions"
 msgid "white belt"
 msgstr "ceinture blanche"
 
-#: lib/machine/LaTeX.py:198
+#: lib/machine/LaTeX.py:199
 msgid "For pretty comma in decimal numbers"
 msgstr "Pour des virgules non suivies d'espaces dans les nombres décimaux"
 
@@ -3406,13 +3351,50 @@ msgstr ""
 "{triangle_name} est un triangle tel que {side_length0} = {nb0}, "
 "{side_length1} = {nb1} et {side_length2} = {nb2}."
 
-#: data/frameworks/geometry/converse_contrapositive_pythagorean_theorem.yaml:16
-msgid "Some title"
-msgstr "Un titre"
+#: data/frameworks/geometry/angles.yaml:2
+msgid "Measure the angles"
+msgstr "Mesurer les angles"
 
-#: data/frameworks/geometry/converse_contrapositive_pythagorean_theorem.yaml:17
-msgid "Some header"
-msgstr "Un en-tête"
+#: data/frameworks/geometry/angles.yaml:19
+msgid "Construct the angles of following measures"
+msgstr "Construire les angles de mesures suivantes"
+
+#, python-brace-format
+#~ msgid ""
+#~ "{triangle_name} is a triangle such as {side_length0} = {nb0}, "
+#~ "{side_length1} = {nb1} and {side_length2} = {nb2}"
+#~ msgstr ""
+#~ "{triangle_name} est un triangle tel que {side_length0} = {nb0}, "
+#~ "{side_length1} = {nb1} et {side_length2} = {nb2}"
+
+#~ msgid "On one hand:"
+#~ msgstr "D'une part :"
+
+#~ msgid "On the other hand:"
+#~ msgstr "D'autre part :"
+
+#~ msgid "Hence:"
+#~ msgstr "Donc :"
+
+#~ msgid "So, by the converse of the pythagorean theorem,"
+#~ msgstr "Donc, d'après la réciproque du théorème de Pythagore,"
+
+#, python-brace-format
+#~ msgid "{triangle_name} has a right angle in {right_vertex}."
+#~ msgstr "{triangle_name} est un triangle rectangle en {right_vertex}."
+
+#~ msgid "So, by the contrapositive of the pythagorean theorem,"
+#~ msgstr "Donc, d'après la contraposée du théorème de Pythagore,"
+
+#, python-brace-format
+#~ msgid "{triangle_name} has no right angle."
+#~ msgstr "{triangle_name} n'est pas rectangle."
+
+#~ msgid "Some title"
+#~ msgstr "Un titre"
+
+#~ msgid "Some header"
+#~ msgstr "Un en-tête"
 
 #~ msgid ""
 #~ "Prove your answer and if the triangle is right, give the name of the "

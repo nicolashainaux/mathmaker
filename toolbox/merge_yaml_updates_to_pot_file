@@ -129,7 +129,7 @@ def collect_strings(data, rel_file_name, keywords_starts, keywords):
             # sys.stderr.write('data[key]={}\n'.format(data[key]))
             if ((any([key.startswith(k) for k in keywords_starts])
                  or key in keywords)
-                and data[key] != ''):
+                and data[key] != '' and data[key] is not None):
                 if not data[key] in COLLECTED_STRINGS:
                     COLLECTED_STRINGS[data[key]] = []
                 COLLECTED_STRINGS[data[key]] += \
