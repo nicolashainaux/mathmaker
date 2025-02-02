@@ -50,12 +50,12 @@ class sub_object(component.structure):
         direction = -1 if read_direction == 'clockwise' else 1
         A = Point(5.5 * direction, 0, 'A')
         Ω = Point(0, 0, 'O')
-        answer = Number(self.nb1, unit=r'\degree').printed
-        vrule = r'\vrule width 0pt height 0.5cm'
+        self.answer = Number(self.nb1, unit=r'\degree').printed
+        self.vrule = r'\vrule width 0pt height 0.5cm'
         self.color = random.choice(COLORS)
         self.q_nb = options.get('number_of_the_question', '')
-        self.q_text = f'n°{self.q_nb} :' + r' \dots\dots\dots ' + vrule
-        self.a_text = f'n°{self.q_nb} : {answer} ' + vrule
+        self.q_text = f'n°{self.q_nb} :' + r' \dots\dots\dots ' + self.vrule
+        self.a_text = f'n°{self.q_nb} : {self.answer} ' + self.vrule
 
         ω = Angle(A, Ω, direction * self.nb1, thickness='thick',
                   arrow_tips='round cap-round cap',

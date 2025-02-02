@@ -29,4 +29,6 @@ class sub_object(angle_measure.sub_object):
         super().__init__(build_data, **options)
 
     def q(self, **options):
-        return self.a_text
+        result = r'\textbf{{n°{nb}}} : {measure} '\
+            .format(nb=self.q_nb, measure=self.answer)
+        return result + self.vrule
