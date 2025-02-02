@@ -10,13 +10,13 @@ include = ['pyproject.toml', '*.rst', '*.toml', '*.po', '*.mo', '*.pot',
 
 [tool.poetry.dependencies]
 python = "^3.9"
-polib = "^1.1.1"
-python-daemon = "^2.3.1"
-intspan = "^1.6.1"
-"ruamel.yaml" = "^0.17.21"
-toml = "^0.10.2"
-packaging = "^21.3"
-mathmakerlib = "^0.7.26"
+polib = "1.*"
+python-daemon = "2.*"
+intspan = "1.*"
+"ruamel.yaml" = "0.*"
+toml = "0.10.*"
+packaging = "*"
+mathmakerlib = "*"
 
 [tool.poetry.group.dev.dependencies]
 tox = "^3.25.1"
@@ -26,6 +26,7 @@ Sphinx = "^5.1.1"
 sphinx-rtd-theme = "^1.0.0"
 coverage = "^6.4.4"
 coveralls = "^3.3.1"
+twine = "^6.1.0"
 
 [tool.poetry.scripts]
 mathmaker = "mathmaker.cli:entry_point"
