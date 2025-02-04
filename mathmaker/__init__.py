@@ -21,25 +21,17 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import datetime
-from pathlib import Path
-
-import toml
+from importlib.metadata import metadata
 
 from . import lib
 
-pp_path = Path(__file__).parent.parent / 'pyproject.toml'
-if not pp_path.is_file():
-    pp_path = Path(__file__).parent / 'data/pyproject.toml'
+__version__ = metadata(__name__)['Version']
 
-METADATA = toml.loads(pp_path.read_text())
-
-__version__ = METADATA['tool']['poetry']['version']
-
-__software_name__ = METADATA['tool']['poetry']['name']
+__software_name__ = metadata(__name__)['Name']
 __release__ = __version__ + ' (alpha)'
-__author__ = 'Nicolas Hainaux'
-__author_email__ = 'nh.techn@posteo.net'
-__licence__ = METADATA['tool']['poetry']['license']
+__author__ = metadata(__name__)['Author']
+__author_email__ = metadata(__name__)['Author-email']
+__licence__ = metadata(__name__)['License']
 __url__ = 'https://gitlab.com/nicolas.hainaux/mathmaker/'
 __copyright__ = f'Copyright 2006-{datetime.datetime.now().year}'
 __contact__ = '{author} <{author_email}>'\

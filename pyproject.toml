@@ -14,9 +14,8 @@ polib = "1.*"
 python-daemon = "2.*"
 intspan = "1.*"
 "ruamel.yaml" = "0.*"
-toml = "0.10.*"
 packaging = "*"
-mathmakerlib = "*"
+mathmakerlib = "^0.7.27"
 
 [tool.poetry.group.dev.dependencies]
 tox = "^3.25.1"
