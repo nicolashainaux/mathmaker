@@ -33,9 +33,9 @@ from decimal import Decimal
 
 from mathmakerlib import required
 from mathmakerlib.calculus import Number, is_number
+from mathmakerlib.core import parse_layout_descriptor
 
 from mathmaker.lib.constants import EQUAL_PRODUCTS
-from mathmaker.lib.tools import parse_layout_descriptor
 from mathmaker.lib.tools.maths import barycenter, POLYGONS_NATURES
 from .root_calculus import Evaluable, Value, Unit
 from .base_calculus import Item, Product, Sum, Function, AngleItem

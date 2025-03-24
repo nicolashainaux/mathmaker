@@ -32,10 +32,11 @@ from pathlib import Path
 from collections import OrderedDict
 from operator import itemgetter
 
+from mathmakerlib.core import parse_layout_descriptor
+
 from mathmaker import settings
 from mathmaker.lib.constants import DEFAULT_LAYOUT, EQUAL_PRODUCTS
 from mathmaker.lib.constants import BOOLEAN
-from mathmaker.lib.tools import parse_layout_descriptor
 
 # Characters allowed inside questions, numbers' sources and attributes
 # (including =)

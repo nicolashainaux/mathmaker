@@ -27,9 +27,10 @@ import copy
 import logging
 import xml.etree.ElementTree as XML_PARSER
 
+from mathmakerlib.core import parse_layout_descriptor
+
 from mathmaker import settings
 from mathmaker.lib.constants import DEFAULT_LAYOUT
-from mathmaker.lib.tools import parse_layout_descriptor
 from mathmaker.lib.tools.frameworks import parse_qid
 
 

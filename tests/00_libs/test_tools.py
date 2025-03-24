@@ -25,7 +25,7 @@ import pytest
 from mathmakerlib.calculus import Number, Fraction
 
 from mathmaker.lib.tools import check_unique_letters_words, rotate
-from mathmaker.lib.tools import parse_layout_descriptor, ext_dict
+from mathmaker.lib.tools import ext_dict
 from mathmaker.lib.tools import fix_math_style2_fontsize, deci_and_frac_repr
 from mathmaker.lib.tools import closest_nn_outside_data, divisors
 
@@ -71,78 +71,6 @@ def test_rotate():
 
 def test_divisors():
     assert divisors(60) == [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60]
-
-
-def test_parse_layout_descriptor():
-    """Test parse_layout_descriptor() in several cases."""
-    with pytest.raises(TypeError) as excinfo:
-        parse_layout_descriptor(4)
-    assert 'The layout descriptor must be str' in str(excinfo.value)
-    with pytest.raises(TypeError) as excinfo:
-        parse_layout_descriptor('2×3', sep=[1])
-    assert 'All items of the sep list must be str' in str(excinfo.value)
-    with pytest.raises(TypeError) as excinfo:
-        parse_layout_descriptor('2×3', sep=1)
-    assert 'sep must be a str or a list' in str(excinfo.value)
-    with pytest.raises(TypeError) as excinfo:
-        parse_layout_descriptor('2×3', special_row_chars=4)
-    assert 'special_row_char must be a list' in str(excinfo.value)
-    with pytest.raises(TypeError) as excinfo:
-        parse_layout_descriptor('2×3', special_row_chars=[4])
-    assert 'All items of the special_row_chars list must be str' \
-        in str(excinfo.value)
-    with pytest.raises(TypeError) as excinfo:
-        parse_layout_descriptor('2×3', min_row='a')
-    assert 'min_row and min_col must both be int' in str(excinfo.value)
-    with pytest.raises(TypeError) as excinfo:
-        parse_layout_descriptor('2×3', min_col='a')
-    assert 'min_row and min_col must both be int' in str(excinfo.value)
-    with pytest.raises(TypeError) as excinfo:
-        parse_layout_descriptor('2×3', min_row=-2)
-    assert 'min_row and min_col must both be positive' in str(excinfo.value)
-    with pytest.raises(TypeError) as excinfo:
-        parse_layout_descriptor('2×3', min_col=-2)
-    assert 'min_row and min_col must both be positive' in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        parse_layout_descriptor('2×')
-    assert 'The layout format must be a string like '\
-        '\'row×col\', where × is your delimiter. ' \
-        'Cannot find a row and a col in \'' in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        parse_layout_descriptor('2x3')
-    assert 'Cannot find a row and a col in \'' in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        parse_layout_descriptor('2;')
-    assert ' with any of the str from this list as delimiter: ' \
-        in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        parse_layout_descriptor('2×3', sep=['x'])
-    assert ' with any of the str from this list as delimiter: ' \
-        in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        parse_layout_descriptor('a×3')
-    assert 'Number of rows: \'a\' cannot be turned into int' \
-        in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        parse_layout_descriptor('3×a')
-    assert 'Number of cols: \'a\' cannot be turned into int' \
-        in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        parse_layout_descriptor('?×3')
-    assert 'Number of rows: \'?\' cannot be turned into int' \
-        in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        parse_layout_descriptor('0×3', min_row=1)
-    assert 'nrow must be greater than 1' in str(excinfo.value)
-    with pytest.raises(ValueError) as excinfo:
-        parse_layout_descriptor('4×0', min_col=1)
-    assert 'ncol must be greater than 1' in str(excinfo.value)
-
-    assert parse_layout_descriptor('?×0', special_row_chars=['?'],
-                                   min_row=1) == ('?', 0)
-    assert parse_layout_descriptor('2×3', sep=['x', '×']) == (2, 3)
-    assert parse_layout_descriptor('4×5') == (4, 5)
-    assert parse_layout_descriptor('6×7', special_row_chars=['?']) == (6, 7)
 
 
 def test_fix_math_style2_fontsize():
