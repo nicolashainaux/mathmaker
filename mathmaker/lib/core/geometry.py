@@ -382,7 +382,7 @@ class Polygon(Drawable):
                 content += '  $\\rotatebox{'
                 required.package['graphicx'] = True
                 content += str(rotate_box_angle)
-                content += '}{\sffamily '
+                content += r'}{\sffamily '
                 content += a.label.into_str(display_unit=True, textwrap=False)
                 content += '}$ '
                 content += a.vertex.name + ' '
