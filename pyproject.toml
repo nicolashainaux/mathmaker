@@ -10,12 +10,12 @@ include = ['pyproject.toml', '*.rst', '*.toml', '*.po', '*.mo', '*.pot',
 
 [tool.poetry.dependencies]
 python = "^3.9"
-polib = "1.*"
-python-daemon = "2.*"
-intspan = "1.*"
-"ruamel.yaml" = "0.*"
-packaging = "*"
-mathmakerlib = "^0.7.27"
+polib = "^1.2.0"
+python-daemon = "^3.1.2"
+intspan = "^1.6.1"
+"ruamel.yaml" = "^0.18.10"
+packaging = "^24.2"
+mathmakerlib = "^0.7.28"
 
 [tool.poetry.group.dev.dependencies]
 tox = "^3.25.1"
