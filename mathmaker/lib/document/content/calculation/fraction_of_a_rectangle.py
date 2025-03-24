@@ -87,18 +87,15 @@ class sub_object(component.structure):
 
     def q(self, **options):
         if options.get('x_layout_variant', 'default') == 'slideshow':
-            return shared.machine.insert_picture(self.rectangle_grid,
-                                                 scale=0.4) \
-                + '\n' + self.wording
+            self.rectangle_grid.scale = 0.5
+            return self.rectangle_grid.drawn + '\n\n' + self.wording
         else:
+            self.rectangle_grid.scale = 0.4
             return shared.machine.write_layout(
                 (1, 2),
                 [5, 8],
-                [shared.machine.insert_picture(
-                 self.rectangle_grid,
-                 scale=0.4,
-                 vertical_alignment_in_a_tabular=True),
-                 self.wording])
+                [self.rectangle_grid.drawn, self.wording],
+                center_vertically=True)
 
     def a(self, **options):
         # This is actually meant for self.preset == 'mental calculation'

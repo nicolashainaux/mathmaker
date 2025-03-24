@@ -807,17 +807,17 @@ files = [
 
 [[package]]
 name = "mathmakerlib"
-version = "0.7.28"
+version = "0.7.30"
 description = "Collection of lualatex-printable mathematical objects, including geometric shapes."
 optional = false
-python-versions = "<4.0,>=3.9"
+python-versions = "<3.13,>=3.9"
 groups = ["main"]
 files = [
-    {file = "mathmakerlib-0.7.28-py3-none-any.whl", hash = "sha256:e7a439e85538c699d7cbca63e41f22ef1326ca4c6ae7e44abbf19d0bfb9c4f10"},
+    {file = "mathmakerlib-0.7.30-py3-none-any.whl", hash = "sha256:21cd45f844bfec9560ac848179a0da794b1d45f2d503c1205c8691051f045bde"},
 ]
 
 [package.dependencies]
-sympy = "==1.*"
+sympy = ">=1.13.3,<2.0.0"
 
 [[package]]
 name = "mccabe"
@@ -1205,7 +1205,7 @@ description = "C version of reader, parser and emitter for ruamel.yaml derived f
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
-markers = "platform_python_implementation == \"CPython\" and python_version < \"3.13\""
+markers = "platform_python_implementation == \"CPython\""
 files = [
     {file = "ruamel.yaml.clib-0.2.12-cp310-cp310-macosx_13_0_arm64.whl", hash = "sha256:11f891336688faf5156a36293a9c362bdc7c88f03a8a027c2c1d8e0bcde998e5"},
     {file = "ruamel.yaml.clib-0.2.12-cp310-cp310-manylinux2014_aarch64.whl", hash = "sha256:a606ef75a60ecf3d924613892cc603b154178ee25abb3055db5062da811fd969"},
@@ -1656,5 +1656,5 @@ type = ["pytest-mypy"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = "^3.9"
-content-hash = "ffd9df68c70f4d1c4a7f326dcef61c0a28ba79b7e18042f8504d530fb2a6e309"
+python-versions = ">=3.9,<3.13"
+content-hash = "debfc27bd1b49fed430f5e3606e26914eb4ee9a98f3cd0878f1be5b31c2944ee"

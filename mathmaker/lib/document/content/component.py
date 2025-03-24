@@ -28,6 +28,7 @@ from string import ascii_uppercase as ALPHABET
 
 import mathmakerlib.config as mmlib_cfg
 from mathmakerlib.geometry import RightTriangle
+from mathmakerlib.geometry import RectangleGrid
 from mathmakerlib.calculus import Number, Unit, Fraction, is_integer, ClockTime
 from mathmakerlib.calculus.unit import COMMON_LENGTH_UNITS
 
@@ -580,17 +581,12 @@ class structure(object):
         setup_wording_format_of(self)
 
     def _setup_rectangle_grid(self, **kwargs):
-        from mathmaker.lib.core.base_geometry import Point
-        from mathmaker.lib.core.geometry import RectangleGrid
         rows = str(min(self.nb3, self.nb4))
         cols = str(max(self.nb3, self.nb4))
         frows = str(min(self.nb1, self.nb2))
         fcols = str(max(self.nb1, self.nb2))
         self.rectangle_grid = \
-            RectangleGrid([Point('A', Decimal('0'), Decimal('0')),
-                           Decimal(cols), Decimal(rows), 'B', 'C', 'D'],
-                          layout='×'.join([rows, cols]),
-                          fill='×'.join([frows, fcols]))
+            RectangleGrid(layout=f'{rows}×{cols}', fill=f'{frows}×{fcols}')
 
     def _generate_polygon(self, codename, variant, labels, wlines_nb=0):
         # codename: see database, table polygons

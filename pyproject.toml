@@ -9,13 +9,13 @@ include = ['pyproject.toml', '*.rst', '*.toml', '*.po', '*.mo', '*.pot',
            '*.json', '*.svg', '*.xml', '*.desktop', '*.yaml', '*.txt']
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9,<3.13"
 polib = "^1.2.0"
 python-daemon = "^3.1.2"
 intspan = "^1.6.1"
 "ruamel.yaml" = "^0.18.10"
 packaging = "^24.2"
-mathmakerlib = "^0.7.28"
+mathmakerlib = "^0.7.30"
 
 [tool.poetry.group.dev.dependencies]
 tox = "^3.25.1"
