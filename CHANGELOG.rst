@@ -10,6 +10,11 @@ Unreleased
 ----------
 
 
+Version 0.7.27 (2025-03-24)
+---------------------------
+
+* RectangleGrid has been rewritten without eukleides.
+
 Version 0.7.25 (2025-02-02)
 ---------------------------
 
