@@ -31,44 +31,84 @@ from http.server import BaseHTTPRequestHandler
 MINIMUM_DAEMON_TIME_INTERVAL = 10
 
 
+def manage_daemon_db(daemon_db_path):
+    # If the db is too old (more than 1 hour, hardcoded), we delete it.
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    now_timestamp = time.mktime(datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
+                                .timetuple())
+    if os.path.isfile(daemon_db_path):
+        t = time.strftime('%Y-%m-%d %H:%M:%S',
+                          time.localtime(os.path.getmtime(daemon_db_path)))
+        last_access_timestamp = time.mktime(datetime.strptime(t,
+                                            "%Y-%m-%d %H:%M:%S")
+                                            .timetuple())
+        if now_timestamp - last_access_timestamp >= 3600:
+            os.remove(daemon_db_path)
+
+    # If there's no db, a brand new one is created
+    if not os.path.isfile(daemon_db_path):
+        open(daemon_db_path, 'a').close()
+        db = sqlite3.connect(daemon_db_path)
+        db.execute('''CREATE TABLE ip_addresses
+                    (id INTEGER PRIMARY KEY,
+                    ip_addr TEXT, timeStamp TEXT)''')
+        db.close()
+    return now_timestamp
+
+
+def get_all_sheets():
+    from mathmaker.lib import old_style_sheet
+    from mathmaker.lib.tools.xml import get_xml_sheets_paths
+    from mathmaker.lib.tools.frameworks import read_index
+    XML_SHEETS = get_xml_sheets_paths()
+    all_sheets = {}
+    all_sheets.update(old_style_sheet.AVAILABLE)
+    all_sheets.update(XML_SHEETS)
+    all_sheets.update(read_index())
+
+
+def block_ip(query, now_timestamp, daemon_db_path):
+    if 'ip' in query:
+        db = sqlite3.connect(daemon_db_path)
+        cmd = "SELECT id,timeStamp FROM ip_addresses "\
+              "WHERE ip_addr = '" + query['ip'][0]\
+              + "' ORDER BY timeStamp DESC LIMIT 1;"
+        #   + " AND WHERE "\
+        #   "timeStamp >= datetime('now','-10 seconds');"
+        qr = tuple(db.execute(cmd))
+        most_recent_request_timestamp = 0
+        if len(qr):
+            most_recent_request_timestamp = \
+                time.mktime(datetime.strptime(qr[0][1],
+                                              "%Y-%m-%d %H:%M:%S")
+                            .timetuple())
+        cmd = "INSERT INTO ip_addresses VALUES(null, '" \
+            + query['ip'][0] + "', '" \
+            + datetime.now().strftime('%Y-%m-%d %H:%M:%S') \
+            + "');"
+        db.execute(cmd)
+        db.commit()
+        db.close()
+        if (len(qr)
+            and (now_timestamp - most_recent_request_timestamp
+                 <= MINIMUM_DAEMON_TIME_INTERVAL)):
+            # __
+            return True
+
+    return False
+
+
 class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         from mathmaker import settings
-        from mathmaker.lib import old_style_sheet
-        from mathmaker.lib.tools.xml import get_xml_sheets_paths
-        from mathmaker.lib.tools.frameworks import read_index
         # settings.init() is required here in order to have the logger
         # working (if it's in run(), even in the with clause, it works once)
         settings.init()
         log = settings.daemon_logger
-        # If the db is too old (more than 1 hour, hardcoded), we delete it.
-        now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        now_timestamp = time.mktime(datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
-                                    .timetuple())
-        if os.path.isfile(settings.path.daemon_db):
-            t = time.strftime('%Y-%m-%d %H:%M:%S',
-                              time.localtime(os.path.getmtime(
-                                  settings.path.daemon_db)))
-            last_access_timestamp = time.mktime(datetime.strptime(t,
-                                                "%Y-%m-%d %H:%M:%S")
-                                                .timetuple())
-            if now_timestamp - last_access_timestamp >= 3600:
-                os.remove(settings.path.daemon_db)
+        daemon_db_path = settings.path.daemon_db
+        now_timestamp = manage_daemon_db(daemon_db_path)
+        all_sheets = get_all_sheets()
 
-        # If there's no db, a brand new one is created
-        if not os.path.isfile(settings.path.daemon_db):
-            open(settings.path.daemon_db, 'a').close()
-            db = sqlite3.connect(settings.path.daemon_db)
-            db.execute('''CREATE TABLE ip_addresses
-                       (id INTEGER PRIMARY KEY,
-                       ip_addr TEXT, timeStamp TEXT)''')
-            db.close()
-
-        XML_SHEETS = get_xml_sheets_paths()
-        all_sheets = {}
-        all_sheets.update(old_style_sheet.AVAILABLE)
-        all_sheets.update(XML_SHEETS)
-        all_sheets.update(read_index())
         query = parse_qs(self.path[2:])
         if not (1 <= len(query) <= 2):
             self.send_response(404)
@@ -93,45 +133,18 @@ class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
                             + ' 404 (sheetname not in query or '
                             'second argument different from ip)')
             else:
-                block_ip = False
-                if 'ip' in query:
-                    db = sqlite3.connect(settings.path.daemon_db)
-                    cmd = "SELECT id,timeStamp FROM ip_addresses "\
-                          "WHERE ip_addr = '" + query['ip'][0]\
-                          + "' ORDER BY timeStamp DESC LIMIT 1;"
-                    #   + " AND WHERE "\
-                    #   "timeStamp >= datetime('now','-10 seconds');"
-                    qr = tuple(db.execute(cmd))
-                    most_recent_request_timestamp = 0
-                    if len(qr):
-                        most_recent_request_timestamp = \
-                            time.mktime(datetime.strptime(qr[0][1],
-                                                          "%Y-%m-%d %H:%M:%S")
-                                        .timetuple())
-                    cmd = "INSERT INTO ip_addresses VALUES(null, '" \
-                          + query['ip'][0] + "', '" \
-                          + datetime.now().strftime('%Y-%m-%d %H:%M:%S') \
-                          + "');"
-                    db.execute(cmd)
-                    db.commit()
-                    db.close()
-                    if (len(qr)
-                        and (now_timestamp - most_recent_request_timestamp
-                             <= MINIMUM_DAEMON_TIME_INTERVAL)):
-                        # __
-                        block_ip = True
-                        self.send_response(429)
-                        self.send_header('Content-Type', 'text/html')
-                        self.end_headers()
-                        self.wfile.write(bytes('Error 429: wait at least 10 s '
-                                               'between two requests.',
-                                               'UTF-8'))
-                        log.warning(self.address_string()
-                                    + ' ' + self.requestline + ' '
-                                    '429 (too many requests) '
-                                    'from ip ' + query['ip'][0])
-
-                if not block_ip:
+                if block_ip(query, now_timestamp, daemon_db_path):
+                    self.send_response(429)
+                    self.send_header('Content-Type', 'text/html')
+                    self.end_headers()
+                    self.wfile.write(bytes('Error 429: wait at least 10 s '
+                                           'between two requests.',
+                                           'UTF-8'))
+                    log.warning(self.address_string()
+                                + ' ' + self.requestline + ' '
+                                '429 (too many requests) '
+                                'from ip ' + query['ip'][0])
+                else:
                     sheet_name = query['sheetname'][0]
                     optional_args = []
                     wrong_arg = False
