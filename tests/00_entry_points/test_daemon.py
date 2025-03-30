@@ -20,9 +20,69 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import io
 import pytest
 from unittest.mock import MagicMock
 from http.server import HTTPServer
+from mathmaker.lib.tools.request_handler import MathmakerHTTPRequestHandler
+
+FAKE_TIMESTAMP_NOW = 1585407600
+
+
+@pytest.fixture
+def mock_dependencies(mocker):
+    """Fixture to mock common dependencies"""
+    mocks = {
+        'manage_daemon_db': mocker.patch(
+            'mathmaker.lib.tools.request_handler.manage_daemon_db'),
+        'get_all_sheets': mocker.patch(
+            'mathmaker.lib.tools.request_handler.get_all_sheets'),
+        'block_ip': mocker.patch(
+            'mathmaker.lib.tools.request_handler.block_ip'),
+        'popen': mocker.patch('mathmaker.lib.tools.request_handler.Popen'),
+        'settings': mocker.patch('mathmaker.settings')
+    }
+
+    # Setup default values
+    mocks['manage_daemon_db'].return_value = FAKE_TIMESTAMP_NOW
+    mocks['get_all_sheets'].return_value = {'test_sheet': 'path/to/sheet'}
+    mocks['block_ip'].return_value = False
+
+    # Setup Popen
+    mock_process = MagicMock()
+    mock_process.stdout.read.return_value = b'mock pdf content'
+    mocks['popen'].return_value = mock_process
+
+    # Setup parameters
+    mocks['settings'].mm_executable = 'mathmaker'
+    mocks['settings'].path.daemon_db = '/tmp/daemon.db'
+    mocks['settings'].daemon_logger = MagicMock()
+
+    return mocks
+
+
+@pytest.fixture
+def handler_factory():
+    """Fixture to create hander instances"""
+    def _create_handler(path, address_string):
+        handler = MathmakerHTTPRequestHandler.__new__(
+            MathmakerHTTPRequestHandler)
+
+        handler.path = path
+        handler.send_response = MagicMock()
+        handler.send_header = MagicMock()
+        handler.end_headers = MagicMock()
+        handler.address_string = MagicMock(return_value=address_string)
+        handler.requestline = f'GET {path} HTTP/1.1'
+
+        # Prepare output
+        output_buffer = io.BytesIO()
+        handler.wfile = MagicMock()
+        handler.wfile.write = output_buffer.write
+
+        return handler, output_buffer
+
+    return _create_handler
 
 
 # Testing daemonized.py
@@ -83,28 +143,83 @@ def test_entry_point_port_already_in_use(mocker):
     )
 
 
-# from time import sleep
-# from subprocess import Popen
-# from urllib.request import urlopen
-# from urllib.error import HTTPError
+def test_do_GET_200_response(mock_dependencies, handler_factory):
+    handler, output_buffer = handler_factory(
+        path='/?sheetname=test_sheet',
+        address_string='127.0.0.1'
+    )
 
-# import pytest
+    handler.do_GET()
 
-# # from mathmaker.lib import shared_daemon
-
-
-# global DAEMON_PROCESS
-# DAEMON_PROCESS = Popen(['mathmakerd'])
-
-
-# def test_only_wait_to_ensure_daemon_is_started():
-#     """Just ensure mathmaker daemon is started"""
-#     sleep(4)
+    mock_dependencies['popen'].assert_called_once_with(
+        ['mathmaker', '--pdf', 'test_sheet'], stdout=-1)
+    handler.send_response.assert_called_once_with(200)
+    handler.send_header.assert_any_call('Content-Type', 'application/pdf')
+    handler.end_headers.assert_called_once()
+    assert output_buffer.getvalue() == b'mock pdf content'
+    mock_dependencies['settings'].daemon_logger.info.assert_called_once_with(
+        '127.0.0.1 GET /?sheetname=test_sheet HTTP/1.1 200')
 
 
-# def test_requests():
-#     """Check a simple correct request."""
-#     urlopen("http://127.0.0.1:9999/?sheetname=expand_simple&ip=127.0.0.2")
+def test_do_GET_200_with_ip_parameter(mock_dependencies, handler_factory):
+    handler, output_buffer = handler_factory(
+        path='/?sheetname=test_sheet&ip=192.168.1.1',
+        address_string='192.168.1.1',
+    )
+
+    handler.do_GET()
+
+    mock_dependencies['block_ip'].assert_called_once()
+    args, _ = mock_dependencies['block_ip'].call_args
+    assert 'sheetname' in args[0]
+    assert 'ip' in args[0]
+    assert args[0]['ip'][0] == '192.168.1.1'
+    assert args[1] == FAKE_TIMESTAMP_NOW
+    assert args[2] == '/tmp/daemon.db'
+    handler.send_response.assert_called_once_with(200)
+
+
+def test_do_GET_404_with_three_parameters(mock_dependencies, handler_factory):
+    handler, output_buffer = handler_factory(
+        path='/?sheetname=test_sheet&ip=192.168.1.1&extraneous=any_value',
+        address_string='192.168.1.1'
+    )
+
+    handler.do_GET()
+
+    handler.send_response.assert_called_once_with(404)
+    handler.send_header.assert_any_call('Content-Type', 'text/html')
+    handler.end_headers.assert_called_once()
+    assert output_buffer.getvalue() \
+        == b'Error 404: one or two parameters allowed'
+
+    mock_dependencies['settings'].daemon_logger.warning\
+        .assert_called_once_with(
+        '192.168.1.1 GET /?sheetname=test_sheet&ip=192.168.1.1'
+        '&extraneous=any_value HTTP/1.1 404 '
+        '(only one or two parameters allowed)')
+
+
+def test_do_GET_404_missing_sheetname(mock_dependencies, handler_factory):
+    handler, output_buffer = handler_factory(
+        path='/?ip=192.168.1.1&extraneous_parameter=any_value',
+        address_string='192.168.1.1',
+    )
+
+    handler.do_GET()
+
+    handler.send_response.assert_called_once_with(404)
+    handler.send_header.assert_any_call('Content-Type', 'text/html')
+    handler.end_headers.assert_called_once()
+    assert output_buffer.getvalue() \
+        == b'Error 404: sheetname must be in parameters. Only ip is accepted '\
+           b'as other possible argument.'
+
+    mock_dependencies['settings'].daemon_logger.warning\
+        .assert_called_once_with(
+        '192.168.1.1 GET /?ip=192.168.1.1&extraneous_parameter=any_value '
+        'HTTP/1.1 404 '
+        '(sheetname not in query or second argument different from ip)')
 
 
 # def test_too_many_requests():
@@ -113,14 +228,6 @@ def test_entry_point_port_already_in_use(mocker):
 #         urlopen("http://127.0.0.1:9999/?sheetname=expand_simple&ip=127.0.0.2")
 #         urlopen("http://127.0.0.1:9999/?sheetname=expand_simple&ip=127.0.0.2")
 #     assert str(excinfo.value) == 'HTTP Error 429: Too Many Requests'
-
-
-# def test_too_many_parameters():
-#     """Check a request using too many parameters is rejected."""
-#     with pytest.raises(HTTPError) as excinfo:
-#         urlopen("http://127.0.0.1:9999/?sheetname=expand_simple&ip=127.0.0.2"
-#                 "&extraneous_parameter=any_value")
-#     assert str(excinfo.value) == 'HTTP Error 404: Not Found'
 
 
 # def test_missing_sheetname():
