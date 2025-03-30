@@ -65,6 +65,7 @@ def get_all_sheets():
     all_sheets.update(old_style_sheet.AVAILABLE)
     all_sheets.update(XML_SHEETS)
     all_sheets.update(read_index())
+    return all_sheets
 
 
 def block_ip(query, now_timestamp, daemon_db_path):
