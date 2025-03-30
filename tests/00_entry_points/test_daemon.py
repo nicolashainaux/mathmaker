@@ -25,6 +25,7 @@ import pytest
 from unittest.mock import MagicMock
 from http.server import HTTPServer
 from mathmaker.lib.tools.request_handler import MathmakerHTTPRequestHandler
+from mathmaker.lib.tools.request_handler import get_all_sheets
 
 FAKE_TIMESTAMP_NOW = 1585407600
 
@@ -141,6 +142,18 @@ def test_entry_point_port_already_in_use(mocker):
         f'\nmathmakerd: Another process is already listening to '
         f'port {DAEMON_PORT}. Aborting.\n'
     )
+
+
+def test_get_all_sheets(mocker):
+    mocker.patch('mathmaker.lib.old_style_sheet.AVAILABLE',
+                 new={'theme1': 'old1', 'theme2': 'old2'})
+    mocker.patch('mathmaker.lib.tools.xml.get_xml_sheets_paths',
+                 return_value={'theme3': 'xml3', 'theme4': 'xml4'})
+    mocker.patch('mathmaker.lib.tools.frameworks.read_index',
+                 return_value={'theme5': 'yaml5', 'theme6': 'yaml6'})
+    assert get_all_sheets() == {'theme1': 'old1', 'theme2': 'old2',
+                                'theme3': 'xml3', 'theme4': 'xml4',
+                                'theme5': 'yaml5', 'theme6': 'yaml6'}
 
 
 def test_do_GET_200_response(mock_dependencies, handler_factory):
