@@ -110,93 +110,81 @@ class MathmakerHTTPRequestHandler(BaseHTTPRequestHandler):
         all_sheets = get_all_sheets()
 
         query = parse_qs(self.path[2:])
+        log_header = f'{self.address_string()} {self.requestline}'
+
+        if block_ip(query, now_timestamp, daemon_db_path):
+            self.send_response(429)
+            self.send_header('Content-Type', 'text/html')
+            self.end_headers()
+            self.wfile.write(bytes('Error 429: wait at least 10 s between '
+                                   'two requests.', 'UTF-8'))
+            ip = query["ip"][0]
+            log.warning(f'{log_header} 429 too many requests from {ip}')
+            return
+
         if not (1 <= len(query) <= 2):
             self.send_response(404)
             self.send_header('Content-Type', 'text/html')
             self.end_headers()
             self.wfile.write(bytes('Error 404: one or two parameters allowed',
                                    'UTF-8'))
-            log.warning(self.address_string() + ' ' + self.requestline
-                        + ' 404 (only one or two parameters allowed)')
-        else:
-            if ('sheetname' not in query
-                or (len(query) == 2 and 'ip' not in query)):
-                # __
-                self.send_response(404)
+            log.warning(f'{log_header} 404 (only one or two parameters '
+                        f'allowed)')
+            return
+
+        if ('sheetname' not in query
+            or (len(query) == 2 and 'ip' not in query)):
+            self.send_response(404)
+            self.send_header('Content-Type', 'text/html')
+            self.end_headers()
+            self.wfile.write(bytes('Error 404: sheetname must be in '
+                                   'parameters. Only ip is accepted as '
+                                   'other possible argument.', 'UTF-8'))
+            log.warning(f'{log_header} 404 (sheetname not in query or '
+                        f'second argument different from ip)')
+            return
+
+        sheet_name = query['sheetname'][0]
+        optional_args = []
+
+        if '|' in query['sheetname'][0]:
+            sheet_name, arg = sheet_name.split('|')
+            if arg == 'interactive':
+                optional_args.append('--interactive')
+            else:
+                self.send_response(400)
                 self.send_header('Content-Type', 'text/html')
                 self.end_headers()
-                self.wfile.write(bytes('Error 404: sheetname must be in '
-                                       'parameters. Only ip is accepted as '
-                                       'other possible argument.',
+                self.wfile.write(bytes('Error 400: unknown parameter.',
                                        'UTF-8'))
-                log.warning(self.address_string() + ' ' + self.requestline
-                            + ' 404 (sheetname not in query or '
-                            'second argument different from ip)')
-            else:
-                if block_ip(query, now_timestamp, daemon_db_path):
-                    self.send_response(429)
-                    self.send_header('Content-Type', 'text/html')
-                    self.end_headers()
-                    self.wfile.write(bytes('Error 429: wait at least 10 s '
-                                           'between two requests.',
-                                           'UTF-8'))
-                    log.warning(self.address_string()
-                                + ' ' + self.requestline + ' '
-                                '429 (too many requests) '
-                                'from ip ' + query['ip'][0])
-                else:
-                    sheet_name = query['sheetname'][0]
-                    optional_args = []
-                    wrong_arg = False
-                    if '|' in query['sheetname'][0]:
-                        sheet_name, arg = sheet_name.split('|')
-                        if arg == 'interactive':
-                            optional_args.append('--interactive')
-                        else:
-                            self.send_response(400)
-                            self.send_header('Content-Type', 'text/html')
-                            self.end_headers()
-                            self.wfile.write(bytes('Error 400: unknown '
-                                                   'parameter.',
-                                                   'UTF-8'))
-                            log.warning(self.address_string()
-                                        + ' ' + self.requestline
-                                        + ' 400 (unknown parameter)')
-                            wrong_arg = True
-                    if not wrong_arg:
-                        if sheet_name in all_sheets:
-                            document = ''
-                            try:
-                                p = Popen([settings.mm_executable, '--pdf']
-                                          + optional_args + [sheet_name],
-                                          stdout=PIPE)
-                                document = p.stdout.read()
-                            except Exception:
-                                self.send_response(500)
-                                self.send_header('Content-Type', 'text/html')
-                                self.end_headers()
-                                self.wfile.write(bytes('Error 500: something '
-                                                       'failed',
-                                                       'UTF-8'))
-                                log.error(self.address_string() + ' '
-                                          + self.requestline + ' 500',
-                                          exc_info=True)
-                            else:
-                                self.send_response(200)
-                                self.send_header('Content-Type',
-                                                 'application/pdf')
-                                self.end_headers()
-                                self.wfile.write(document)
-                                log.info(self.address_string() + ' '
-                                         + self.requestline + ' 200')
-                        else:
-                            self.send_response(404)
-                            self.send_header('Content-Type', 'text/html')
-                            self.end_headers()
-                            self.wfile.write(bytes('Error 404: '
-                                                   'No such sheetname',
-                                                   'UTF-8'))
+                log.warning(f'{log_header} 400 (unknown parameter)')
+                return
 
-                            log.warning(self.address_string() + ' '
-                                        + self.requestline
-                                        + ' 404 (no such sheetname)')
+        if sheet_name not in all_sheets:
+            self.send_response(404)
+            self.send_header('Content-Type', 'text/html')
+            self.end_headers()
+            self.wfile.write(bytes('Error 404: No such sheetname', 'UTF-8'))
+
+            log.warning(f'{log_header} 404 (no such sheetname)')
+            return
+
+        document = ''
+        try:
+            command = [settings.mm_executable, '--pdf'] + optional_args \
+                + [sheet_name]
+            p = Popen(command, stdout=PIPE)
+            document = p.stdout.read()
+        except Exception:
+            self.send_response(500)
+            self.send_header('Content-Type', 'text/html')
+            self.end_headers()
+            self.wfile.write(bytes('Error 500: something failed', 'UTF-8'))
+            log.error(f'{log_header} 500', exc_info=True)
+            return
+        else:
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/pdf')
+            self.end_headers()
+            self.wfile.write(document)
+            log.info(f'{log_header} 200')

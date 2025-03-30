@@ -179,6 +179,27 @@ def test_do_GET_200_with_ip_parameter(mock_dependencies, handler_factory):
     handler.send_response.assert_called_once_with(200)
 
 
+def test_do_GET_200_with_interactive_arg(mock_dependencies, handler_factory):
+    handler, output_buffer = handler_factory(
+        path='/?sheetname=test_sheet|interactive&ip=192.168.1.1',
+        address_string='192.168.1.1',
+    )
+
+    handler.do_GET()
+
+    mock_dependencies['popen'].assert_called_once_with(
+        ['mathmaker', '--pdf', '--interactive', 'test_sheet'], stdout=-1)
+
+    mock_dependencies['block_ip'].assert_called_once()
+    args, _ = mock_dependencies['block_ip'].call_args
+    assert 'sheetname' in args[0]
+    assert 'ip' in args[0]
+    assert args[0]['ip'][0] == '192.168.1.1'
+    assert args[1] == FAKE_TIMESTAMP_NOW
+    assert args[2] == '/tmp/daemon.db'
+    handler.send_response.assert_called_once_with(200)
+
+
 def test_do_GET_404_with_three_parameters(mock_dependencies, handler_factory):
     handler, output_buffer = handler_factory(
         path='/?sheetname=test_sheet&ip=192.168.1.1&extraneous=any_value',
@@ -222,56 +243,127 @@ def test_do_GET_404_missing_sheetname(mock_dependencies, handler_factory):
         '(sheetname not in query or second argument different from ip)')
 
 
-# def test_too_many_requests():
-#     """Check a second request before the minimal interval time is elapsed."""
-#     with pytest.raises(HTTPError) as excinfo:
-#         urlopen("http://127.0.0.1:9999/?sheetname=expand_simple&ip=127.0.0.2")
-#         urlopen("http://127.0.0.1:9999/?sheetname=expand_simple&ip=127.0.0.2")
-#     assert str(excinfo.value) == 'HTTP Error 429: Too Many Requests'
+def test_do_GET_404_unknown_sheetname(mock_dependencies, handler_factory):
+    handler, output_buffer = handler_factory(
+        path='/?ip=192.168.1.1&sheetname=unknown',
+        address_string='192.168.1.1',
+    )
+
+    handler.do_GET()
+
+    handler.send_response.assert_called_once_with(404)
+    handler.send_header.assert_any_call('Content-Type', 'text/html')
+    handler.end_headers.assert_called_once()
+    assert output_buffer.getvalue() == b'Error 404: No such sheetname'
+
+    mock_dependencies['settings'].daemon_logger.warning\
+        .assert_called_once_with(
+        '192.168.1.1 GET /?ip=192.168.1.1&sheetname=unknown '
+        'HTTP/1.1 404 (no such sheetname)')
 
 
-# def test_missing_sheetname():
-#     """Check a request using wrong parameters is rejected."""
-#     with pytest.raises(HTTPError) as excinfo:
-#         urlopen("http://127.0.0.1:9999/?ip=127.0.0.2"
-#                 "&extraneous_parameter=any_value")
-#     assert str(excinfo.value) == 'HTTP Error 404: Not Found'
+def test_do_GET_404_second_arg_not_ip(mock_dependencies, handler_factory):
+    handler, output_buffer = handler_factory(
+        path='/?sheetname=test_sheet&unknown_arg=value',
+        address_string='192.168.1.1',
+    )
+
+    handler.do_GET()
+
+    handler.send_response.assert_called_once_with(404)
+    handler.send_header.assert_any_call('Content-Type', 'text/html')
+    handler.end_headers.assert_called_once()
+    assert output_buffer.getvalue() \
+        == b'Error 404: sheetname must be in parameters. Only ip is accepted '\
+           b'as other possible argument.'
+
+    mock_dependencies['settings'].daemon_logger.warning\
+        .assert_called_once_with(
+        '192.168.1.1 GET /?sheetname=test_sheet&unknown_arg=value '
+        'HTTP/1.1 404 '
+        '(sheetname not in query or second argument different from ip)')
 
 
-# def test_missing_wrong_second_argument():
-#     """Check a request using wrong parameters is rejected."""
-#     with pytest.raises(HTTPError) as excinfo:
-#         urlopen("http://127.0.0.1:9999/?sheetname=expand_simple"
-#                 "&extraneous_parameter=any_value")
-#     assert str(excinfo.value) == 'HTTP Error 404: Not Found'
+def test_do_GET_429_block_IP_scenario1(mock_dependencies, handler_factory):
+    # Test with regular request
+    handler, output_buffer = handler_factory(
+        path='/?sheetname=test_sheet&ip=192.168.1.1',
+        address_string='192.168.1.1'
+    )
+
+    mock_dependencies['block_ip'].return_value = True
+
+    handler.do_GET()
+
+    handler.send_response.assert_called_once_with(429)
+    handler.send_header.assert_any_call('Content-Type', 'text/html')
+    handler.end_headers.assert_called_once()
+    assert output_buffer.getvalue() \
+        == b'Error 429: wait at least 10 s between two requests.'
+
+    mock_dependencies['settings'].daemon_logger.warning\
+        .assert_called_once_with(
+        '192.168.1.1 GET /?sheetname=test_sheet&ip=192.168.1.1 '
+        'HTTP/1.1 429 too many requests from 192.168.1.1')
 
 
-# def test_unknown_sheetname_parameter():
-#     """Check a request using ?sheetname=valid_name|invalid_val is rejected."""
-#     with pytest.raises(HTTPError) as excinfo:
-#         urlopen("http://127.0.0.1:9999/?sheetname=expand_simple|invalid_value")
-#     assert str(excinfo.value) == 'HTTP Error 400: Bad Request'
+def test_do_GET_429_block_IP_scenario2(mock_dependencies, handler_factory):
+    # Test with wrong request should lead to same result
+    handler, output_buffer = handler_factory(
+        path='/?ip=192.168.1.1&extraneous_parameter=any_value',
+        address_string='192.168.1.1',
+    )
+
+    mock_dependencies['block_ip'].return_value = True
+
+    handler.do_GET()
+
+    handler.send_response.assert_called_once_with(429)
+    handler.send_header.assert_any_call('Content-Type', 'text/html')
+    handler.end_headers.assert_called_once()
+    assert output_buffer.getvalue() \
+        == b'Error 429: wait at least 10 s between two requests.'
+
+    mock_dependencies['settings'].daemon_logger.warning\
+        .assert_called_once_with(
+        '192.168.1.1 GET /?ip=192.168.1.1&extraneous_parameter=any_value '
+        'HTTP/1.1 429 too many requests from 192.168.1.1')
 
 
-# def test_unknown_sheetname():
-#     """Check a request using an unknown sheet name is rejected."""
-#     with pytest.raises(HTTPError) as excinfo:
-#         urlopen("http://127.0.0.1:9999/?sheetname=expand_simples")
-#     assert str(excinfo.value) == 'HTTP Error 404: Not Found'
+def test_do_GET_400_unknown_parameter(mock_dependencies, handler_factory):
+    handler, output_buffer = handler_factory(
+        path='/?sheetname=expand_simple|invalid_value&ip=192.168.1.1',
+        address_string='192.168.1.1',
+    )
+
+    handler.do_GET()
+
+    handler.send_response.assert_called_once_with(400)
+    handler.send_header.assert_any_call('Content-Type', 'text/html')
+    handler.end_headers.assert_called_once()
+    assert output_buffer.getvalue() == b'Error 400: unknown parameter.'
+
+    mock_dependencies['settings'].daemon_logger.warning\
+        .assert_called_once_with(
+        '192.168.1.1 GET /?sheetname=expand_simple|invalid_value'
+        '&ip=192.168.1.1 HTTP/1.1 400 (unknown parameter)')
 
 
-# def test_simulate_internal_error():
-#     """Simulate internal_error."""
-#     settings.mm_executable += 'WRONG'
-#     import sys
-#     sys.stderr.write('settings.mm_executable={}\n'
-#                      .format(settings.mm_executable))
-#     with pytest.raises(HTTPError) as excinfo:
-#         urlopen("http://127.0.0.1:9999/?sheetname=expand_simple")
-#     assert str(excinfo.value) == 'HTTP Error 500: Not Found'
-#     settings.mm_executable = settings.mm_executable[:-len('WRONG')]
+def test_do_GET_500_external_script_failed(mock_dependencies, handler_factory):
+    handler, output_buffer = handler_factory(
+        path='/?sheetname=test_sheet&ip=192.168.1.1',
+        address_string='192.168.1.1',
+    )
+    mock_dependencies['popen'].side_effect = OSError('mathmaker failed')
 
+    handler.do_GET()
 
-# def test_terminate_daemon():
-#     """Just terminate mathmaker daemon"""
-#     shared_daemon.shutdown()
+    handler.send_response.assert_called_once_with(500)
+    handler.send_header.assert_any_call('Content-Type', 'text/html')
+    handler.end_headers.assert_called_once()
+    assert output_buffer.getvalue() == b'Error 500: something failed'
+
+    mock_dependencies['settings'].daemon_logger.error\
+        .assert_called_once_with(
+        '192.168.1.1 GET /?sheetname=test_sheet&ip=192.168.1.1 '
+        'HTTP/1.1 500', exc_info=True)
