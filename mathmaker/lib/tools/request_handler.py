@@ -60,41 +60,35 @@ def get_all_sheets():
     from mathmaker.lib import old_style_sheet
     from mathmaker.lib.tools.xml import get_xml_sheets_paths
     from mathmaker.lib.tools.frameworks import read_index
-    XML_SHEETS = get_xml_sheets_paths()
-    all_sheets = {}
+    all_sheets = get_xml_sheets_paths()
     all_sheets.update(old_style_sheet.AVAILABLE)
-    all_sheets.update(XML_SHEETS)
     all_sheets.update(read_index())
     return all_sheets
 
 
 def block_ip(query, now_timestamp, daemon_db_path):
-    if 'ip' in query:
-        db = sqlite3.connect(daemon_db_path)
-        cmd = "SELECT id,timeStamp FROM ip_addresses "\
-              "WHERE ip_addr = '" + query['ip'][0]\
-              + "' ORDER BY timeStamp DESC LIMIT 1;"
-        #   + " AND WHERE "\
-        #   "timeStamp >= datetime('now','-10 seconds');"
-        qr = tuple(db.execute(cmd))
-        most_recent_request_timestamp = 0
-        if len(qr):
-            most_recent_request_timestamp = \
-                time.mktime(datetime.strptime(qr[0][1],
-                                              "%Y-%m-%d %H:%M:%S")
-                            .timetuple())
-        cmd = "INSERT INTO ip_addresses VALUES(null, '" \
-            + query['ip'][0] + "', '" \
-            + datetime.now().strftime('%Y-%m-%d %H:%M:%S') \
-            + "');"
-        db.execute(cmd)
-        db.commit()
-        db.close()
-        if (len(qr)
-            and (now_timestamp - most_recent_request_timestamp
-                 <= MINIMUM_DAEMON_TIME_INTERVAL)):
-            # __
-            return True
+    if 'ip' not in query:
+        return False
+
+    db = sqlite3.connect(daemon_db_path)
+    ip = query['ip'][0]
+    cmd = f"SELECT id,timeStamp FROM ip_addresses "\
+        f"WHERE ip_addr = '{ip}' ORDER BY timeStamp DESC LIMIT 1;"
+    qr = tuple(db.execute(cmd))
+    most_recent_request_timestamp = 0
+    if len(qr):
+        most_recent_request_timestamp = \
+            time.mktime(datetime.strptime(qr[0][1], "%Y-%m-%d %H:%M:%S")
+                        .timetuple())
+    ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    cmd = f"INSERT INTO ip_addresses VALUES(null, '{ip}', '{ts}');"
+    db.execute(cmd)
+    db.commit()
+    db.close()
+    if (len(qr)
+        and (now_timestamp - most_recent_request_timestamp
+             <= MINIMUM_DAEMON_TIME_INTERVAL)):
+        return True
 
     return False
 
