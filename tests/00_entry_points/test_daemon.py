@@ -21,11 +21,16 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import io
+import os
+import time
 import pytest
+import sqlite3
+from datetime import datetime, timedelta
 from unittest.mock import MagicMock
 from http.server import HTTPServer
 from mathmaker.lib.tools.request_handler import MathmakerHTTPRequestHandler
-from mathmaker.lib.tools.request_handler import get_all_sheets
+from mathmaker.lib.tools.request_handler import MINIMUM_DAEMON_TIME_INTERVAL
+from mathmaker.lib.tools.request_handler import get_all_sheets, block_ip
 
 FAKE_TIMESTAMP_NOW = 1585407600
 
@@ -84,6 +89,180 @@ def handler_factory():
         return handler, output_buffer
 
     return _create_handler
+
+
+@pytest.fixture
+def setup_db():
+    """Create temporary database for tests"""
+    db_path = "test_daemon.db"
+
+    # Check that the file does not already exist
+    if os.path.exists(db_path):
+        os.remove(db_path)
+
+    # Create the database
+    conn = sqlite3.connect(db_path)
+    conn.execute('''CREATE TABLE ip_addresses
+                (id INTEGER PRIMARY KEY,
+                ip_addr TEXT, timeStamp TEXT)''')
+    conn.close()
+
+    yield db_path
+
+    # Clean up after tests
+    if os.path.exists(db_path):
+        os.remove(db_path)
+
+
+def test_block_ip_no_ip_in_query(setup_db):
+    """Check that the function returns False if ‘ip’ is not in query"""
+    query = {}
+    now_timestamp = time.time()
+
+    result = block_ip(query, now_timestamp, setup_db)
+
+    assert result is False
+
+
+def test_block_ip_first_request(setup_db):
+    """Check that the function returns False for the first request for an IP"""
+    query = {'ip': ['192.168.1.1']}
+    now_timestamp = time.time()
+
+    result = block_ip(query, now_timestamp, setup_db)
+
+    assert result is False
+
+    # Check that the IP has been registered
+    conn = sqlite3.connect(setup_db)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM ip_addresses WHERE ip_addr = '192.168.1.1'")
+    records = cursor.fetchall()
+    conn.close()
+
+    assert len(records) == 1
+
+
+def test_block_ip_request_after_timeout(setup_db):
+    """
+    Check that the function returns False if the previous request is old enough
+    """
+    # Insert an entry older than the timeout
+    ip_addr = '192.168.1.2'
+    past_time = (datetime.now()
+                 - timedelta(seconds=MINIMUM_DAEMON_TIME_INTERVAL + 5))\
+        .strftime('%Y-%m-%d %H:%M:%S')
+
+    conn = sqlite3.connect(setup_db)
+    conn.execute("INSERT INTO ip_addresses VALUES(null, ?, ?)",
+                 (ip_addr, past_time))
+    conn.commit()
+    conn.close()
+
+    query = {'ip': [ip_addr]}
+    now_timestamp = time.mktime(datetime.now().timetuple())
+
+    result = block_ip(query, now_timestamp, setup_db)
+
+    assert result is False
+
+    # Check that a new entry has been added
+    conn = sqlite3.connect(setup_db)
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM ip_addresses WHERE ip_addr = '{ip_addr}'")
+    records = cursor.fetchall()
+    conn.close()
+
+    assert len(records) == 2
+
+
+def test_block_ip_request_within_timeout(setup_db):
+    """
+    Checks that the function returns True if the previous query is too recent
+    """
+    # Insert a recent entry (less than 10 seconds old)
+    ip_addr = '192.168.1.3'
+    recent_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    conn = sqlite3.connect(setup_db)
+    conn.execute("INSERT INTO ip_addresses VALUES(null, ?, ?)",
+                 (ip_addr, recent_time))
+    conn.commit()
+    conn.close()
+
+    query = {'ip': [ip_addr]}
+    now_timestamp = time.mktime(datetime.now().timetuple())
+
+    result = block_ip(query, now_timestamp, setup_db)
+
+    assert result is True
+
+    # Check that a new entry has still been added
+    conn = sqlite3.connect(setup_db)
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM ip_addresses WHERE ip_addr = '{ip_addr}'")
+    records = cursor.fetchall()
+    conn.close()
+
+    assert len(records) == 2
+
+
+def test_block_ip_different_ips(setup_db):
+    """Checks that different IPs are processed independently"""
+    # Insert a recent entry for a first IP
+    ip_addr1 = '192.168.1.4'
+    recent_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    conn = sqlite3.connect(setup_db)
+    conn.execute("INSERT INTO ip_addresses VALUES(null, ?, ?)",
+                 (ip_addr1, recent_time))
+    conn.commit()
+    conn.close()
+
+    # Test with another IP
+    ip_addr2 = '192.168.1.5'
+    query = {'ip': [ip_addr2]}
+    now_timestamp = time.mktime(datetime.now().timetuple())
+
+    result = block_ip(query, now_timestamp, setup_db)
+
+    assert result is False
+
+
+# Test with mocking to avoid real delays
+def test_block_ip_with_mocked_time(setup_db, mocker):
+    """
+    Tests operation with mocked-up times to avoid real delays
+    """
+    ip_addr = '192.168.1.6'
+
+    # Mock datetime.now() mocker for controlling timestamps
+    mock_now = datetime(2023, 1, 1, 12, 0, 0)
+    mocker.patch('mathmaker.lib.tools.request_handler.datetime', autospec=True)
+    from mathmaker.lib.tools.request_handler import datetime as mocked_datetime
+    mocked_datetime.now.return_value = mock_now
+    mocked_datetime.strptime.side_effect = datetime.strptime
+
+    # First request
+    query = {'ip': [ip_addr]}
+    now_timestamp = time.mktime(mock_now.timetuple())
+
+    result1 = block_ip(query, now_timestamp, setup_db)
+    assert result1 is False
+
+    # Second request immediately after
+    result2 = block_ip(query, now_timestamp, setup_db)
+    assert result2 is True
+
+    # Advancing time beyond the minimum
+    mock_now_later = datetime(2023, 1, 1, 12, 0,
+                              MINIMUM_DAEMON_TIME_INTERVAL + 1)
+    mocked_datetime.now.return_value = mock_now_later
+    now_timestamp_later = time.mktime(mock_now_later.timetuple())
+
+    # Third request after the deadline
+    result3 = block_ip(query, now_timestamp_later, setup_db)
+    assert result3 is False
 
 
 # Testing daemonized.py
