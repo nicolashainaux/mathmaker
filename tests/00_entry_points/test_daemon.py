@@ -31,6 +31,7 @@ from http.server import HTTPServer
 from mathmaker.lib.tools.request_handler import MathmakerHTTPRequestHandler
 from mathmaker.lib.tools.request_handler import MINIMUM_DAEMON_TIME_INTERVAL
 from mathmaker.lib.tools.request_handler import get_all_sheets, block_ip
+from mathmaker.lib.tools.request_handler import manage_daemon_db
 
 FAKE_TIMESTAMP_NOW = 1585407600
 
@@ -112,6 +113,199 @@ def setup_db():
     # Clean up after tests
     if os.path.exists(db_path):
         os.remove(db_path)
+
+
+@pytest.fixture
+def temp_db_path(tmp_path):
+    """Fixture to provide a temporary path for the database"""
+    db_file = tmp_path / "test_daemon.db"
+    return str(db_file)
+
+
+def create_existing_db(db_path, hours_old=2):
+    """Utility for creating an old database for tests"""
+    # Create a database
+    conn = sqlite3.connect(db_path)
+    conn.execute('''CREATE TABLE ip_addresses
+                (id INTEGER PRIMARY KEY,
+                ip_addr TEXT, timeStamp TEXT)''')
+    conn.close()
+
+    # Modify the date on which the file was last modified
+    old_time = datetime.now() - timedelta(hours=hours_old)
+    old_timestamp = time.mktime(old_time.timetuple())
+    os.utime(db_path, (old_timestamp, old_timestamp))
+
+
+def test_create_new_db_if_not_exists(temp_db_path):
+    """Test that the function creates a new database if it does not exist"""
+    assert not os.path.isfile(temp_db_path)
+
+    timestamp = manage_daemon_db(temp_db_path)
+
+    assert os.path.isfile(temp_db_path)
+
+    # Check that the timestamp returned is close to the current time
+    now_timestamp = time.mktime(datetime.now().timetuple())
+    assert abs(timestamp - now_timestamp) < 2  # Two seconds tolerance
+
+    # Check that the database has the expected structure
+    conn = sqlite3.connect(temp_db_path)
+    cursor = conn.cursor()
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+    tables = cursor.fetchall()
+    assert ('ip_addresses',) in tables
+
+    # Check the table structure
+    cursor.execute("PRAGMA table_info(ip_addresses);")
+    columns = cursor.fetchall()
+    column_names = [col[1] for col in columns]
+    assert 'id' in column_names
+    assert 'ip_addr' in column_names
+    assert 'timeStamp' in column_names
+    conn.close()
+
+
+def test_remove_old_db(mocker, temp_db_path):
+    """Test que la fonction supprime une base de données trop vieille"""
+    create_existing_db(temp_db_path)
+
+    # Add some data to the database to check that it has been deleted
+    conn = sqlite3.connect(temp_db_path)
+    conn.execute("INSERT INTO ip_addresses VALUES "
+                 "(1, '192.168.1.1', '2023-01-01 12:00:00')")
+    conn.execute("INSERT INTO ip_addresses VALUES "
+                 "(2, '10.0.0.1', '2023-01-01 12:30:00')")
+    conn.commit()
+    conn.close()
+
+    # Configure mocks to simulate it being over an hour old
+    now = datetime.now()
+    old_time = now - timedelta(hours=2)
+
+    # Calculate return values before mocking
+    old_timestamp = time.mktime(old_time.timetuple())
+    now_timestamp = time.mktime(now.timetuple())
+
+    # Mock datetime.now to return a fixed value
+    mock_datetime = mocker.patch(
+        'mathmaker.lib.tools.request_handler.datetime')
+    mock_now = mock_datetime.now.return_value
+    mock_now.strftime.return_value = now.strftime('%Y-%m-%d %H:%M:%S')
+
+    # Mock time.mktime to return expected values
+    mock_mktime = mocker.patch(
+        'mathmaker.lib.tools.request_handler.time.mktime')
+    # First call for now_timestamp
+    # Second call for last_access_timestamp
+    mock_mktime.side_effect = [now_timestamp, old_timestamp]
+
+    # Mock for os.path.getmtime
+    mocker.patch('mathmaker.lib.tools.request_handler.os.path.getmtime',
+                 return_value=old_timestamp)
+
+    # Mock for time.strftime et time.localtime
+    mocker.patch('mathmaker.lib.tools.request_handler.time.localtime',
+                 return_value=old_time.timetuple())
+    mocker.patch('mathmaker.lib.tools.request_handler.time.strftime',
+                 return_value=old_time.strftime('%Y-%m-%d %H:%M:%S'))
+
+    # Check that the file exists before making the call
+    assert os.path.isfile(temp_db_path)
+
+    manage_daemon_db(temp_db_path)
+
+    # Check that the old database has been deleted and a new one created
+    assert os.path.isfile(temp_db_path)
+
+    # Check that the new database has the expected structure
+    conn = sqlite3.connect(temp_db_path)
+    cursor = conn.cursor()
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+    tables = cursor.fetchall()
+    assert ('ip_addresses',) in tables
+
+    # Check the new database is empty
+    cursor.execute("SELECT COUNT(*) FROM ip_addresses;")
+    count = cursor.fetchone()[0]
+    assert count == 0
+    conn.close()
+
+
+def test_keep_recent_db(temp_db_path):
+    """Test that the function keeps a recent database"""
+    # Create a recent database (less than an hour)
+    create_existing_db(temp_db_path, hours_old=0.5)
+
+    # Add some data to the database to check that it has been retained
+    conn = sqlite3.connect(temp_db_path)
+    conn.execute("INSERT INTO ip_addresses VALUES "
+                 "(1, '192.168.1.1', '2023-01-01 12:00:00')")
+    conn.execute("INSERT INTO ip_addresses VALUES "
+                 "(2, '10.0.0.1', '2023-01-01 12:30:00')")
+    conn.execute("INSERT INTO ip_addresses VALUES "
+                 "(3, '172.16.0.1', '2023-01-01 13:00:00')")
+    conn.commit()
+    conn.close()
+
+    # Obtain the initial modification date
+    initial_mtime = os.path.getmtime(temp_db_path)
+
+    manage_daemon_db(temp_db_path)
+
+    # Check that the file still exists
+    assert os.path.isfile(temp_db_path)
+
+    # Check that the modification date has not changed significantly
+    # (it may change slightly due to the opening/closing of the DB)
+    current_mtime = os.path.getmtime(temp_db_path)
+    assert abs(current_mtime - initial_mtime) < 2  # Two seconds tolerance
+
+    # Check that the data is still present
+    conn = sqlite3.connect(temp_db_path)
+    cursor = conn.cursor()
+
+    # Check the total number of records
+    cursor.execute("SELECT COUNT(*) FROM ip_addresses;")
+    count = cursor.fetchone()[0]
+    assert count == 3, \
+        f"The table should contain 3 records, but contains {count}"
+
+    # Check that the specific IPs are present
+    cursor.execute("SELECT ip_addr FROM ip_addresses ORDER BY id;")
+    ips = [row[0] for row in cursor.fetchall()]
+    assert ips == ['192.168.1.1', '10.0.0.1', '172.16.0.1'], \
+        f"The IPs do not match: {ips}"
+
+    # Check that timestamps are retained
+    cursor.execute("SELECT timeStamp FROM ip_addresses WHERE id = 1;")
+    timestamp = cursor.fetchone()[0]
+    assert timestamp == '2023-01-01 12:00:00', \
+        f"The timestamp has been changed: {timestamp}"
+
+    conn.close()
+
+
+def test_return_value_is_current_timestamp(mocker, temp_db_path):
+    """Test that the function returns the current timestamp"""
+    # Configure the mock to have a fixed value for datetime.now()
+    fixed_now = datetime(2023, 5, 15, 12, 0, 0)
+    mock_datetime = mocker.patch(
+        'mathmaker.lib.tools.request_handler.datetime')
+    mock_datetime.now.return_value = fixed_now
+
+    # Preparing the return value before mock time.mktime
+    expected_timestamp = time.mktime(fixed_now.timetuple())
+
+    # Mock time.mktime to return an expected value
+    mock_mktime = mocker.patch(
+        'mathmaker.lib.tools.request_handler.time.mktime')
+    mock_mktime.return_value = expected_timestamp
+
+    result = manage_daemon_db(temp_db_path)
+
+    # Check that the result is the expected timestamp
+    assert result == expected_timestamp
 
 
 def test_block_ip_no_ip_in_query(setup_db):
