@@ -459,10 +459,10 @@ def test_block_ip_with_mocked_time(setup_db, mocker):
     assert result3 is False
 
 
-# Testing daemonized.py
+# Testing mmd.py
 def test_entry_point_successful_server_start(mocker):
     mock_httpd = mocker.Mock(spec=HTTPServer)
-    mock_httpd_constructor = mocker.patch('mathmaker.daemonized.HTTPServer',
+    mock_httpd_constructor = mocker.patch('mathmaker.mmd.HTTPServer',
                                           return_value=mock_httpd)
 
     from contextlib import contextmanager
@@ -480,8 +480,8 @@ def test_entry_point_successful_server_start(mocker):
     mock_httpd.serve_forever = mocker.Mock()
 
     # Import entry_point() after mocks definitions
-    from mathmaker.daemonized import entry_point, DAEMON_PORT
-    from mathmaker.daemonized import MathmakerHTTPRequestHandler
+    from mathmaker.mmd import entry_point, DAEMON_PORT
+    from mathmaker.mmd import MathmakerHTTPRequestHandler
 
     entry_point()
 
@@ -492,7 +492,7 @@ def test_entry_point_successful_server_start(mocker):
 
 def test_entry_point_port_already_in_use(mocker):
     mocker.patch(
-        'mathmaker.daemonized.HTTPServer',
+        'mathmaker.mmd.HTTPServer',
         side_effect=OSError('[Errno 98] Address already in use')
     )
 
@@ -504,8 +504,8 @@ def test_entry_point_port_already_in_use(mocker):
     mock_stderr_write = mocker.patch('sys.stderr.write')
 
     # Import entry_point() after mocks definitions
-    from mathmaker.daemonized import entry_point
-    from mathmaker.daemonized import DAEMON_PORT
+    from mathmaker.mmd import entry_point
+    from mathmaker.mmd import DAEMON_PORT
 
     with pytest.raises(SystemExit) as excinfo:
         entry_point()
