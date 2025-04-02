@@ -22,15 +22,17 @@
 
 import pytest
 from unittest.mock import MagicMock
-from http.server import HTTPServer
+import socket
+
 
 FAKE_TIMESTAMP_NOW = 1585407600
 
 
 def test_entry_point_successful_server_start(mocker):
-    mock_httpd = mocker.Mock(spec=HTTPServer)
-    mock_httpd_constructor = mocker.patch('mathmaker.mmd.HTTPServer',
-                                          return_value=mock_httpd)
+    mock_socket = mocker.patch('socket.socket')
+    mock_socket_instance = mock_socket.return_value
+    mock_serve = mocker.patch('mathmaker.mmd.serve')
+    mock_mmd_app = mocker.patch('mathmaker.mmd.mmd_app')
 
     from contextlib import contextmanager
 
@@ -43,25 +45,27 @@ def test_entry_point_successful_server_start(mocker):
     mocker.patch('sys.stdout', new_callable=MagicMock)
     mocker.patch('sys.stderr', new_callable=MagicMock)
 
-    # Mock serve_forever() to avoid to block the tests series
-    mock_httpd.serve_forever = mocker.Mock()
-
     # Import entry_point() after mocks definitions
     from mathmaker.mmd import entry_point, DAEMON_PORT
-    from mathmaker.mmd import MathmakerHTTPRequestHandler
+    from mathmaker import settings
+
+    settings.daemon_host = '127.0.0.2'
 
     entry_point()
 
-    mock_httpd_constructor.assert_called_once_with(('', DAEMON_PORT),
-                                                   MathmakerHTTPRequestHandler)
-    mock_httpd.serve_forever.assert_called_once()
+    mock_socket.assert_called_once_with(socket.AF_INET, socket.SOCK_STREAM)
+    mock_socket_instance.bind.assert_called_once_with(('', DAEMON_PORT))
+    mock_socket_instance.close.assert_called_once()
+    mock_serve.assert_called_once_with(mock_mmd_app.return_value,
+                                       host=settings.daemon_host,
+                                       port=DAEMON_PORT)
 
 
 def test_entry_point_port_already_in_use(mocker):
-    mocker.patch(
-        'mathmaker.mmd.HTTPServer',
-        side_effect=OSError('[Errno 98] Address already in use')
-    )
+    mock_socket = mocker.patch('socket.socket')
+    mock_socket_instance = mock_socket.return_value
+    mock_socket_instance.bind.side_effect = OSError(
+        '[Errno 98] Address already in use')
 
     mock_daemon_context = MagicMock()
     mock_daemon_context.__enter__.return_value = mock_daemon_context

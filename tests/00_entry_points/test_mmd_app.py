@@ -20,10 +20,8 @@
 # along with Mathmaker; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import io
 import pytest
 from unittest.mock import MagicMock
-from mathmaker.lib.tools.mmd_app import MathmakerHTTPRequestHandler
 
 FAKE_TIMESTAMP_NOW = 1585407600
 
@@ -61,54 +59,61 @@ def mock_dependencies(mocker):
 
 
 @pytest.fixture
-def handler_factory():
-    """Fixture to create hander instances"""
-    def _create_handler(path, address_string):
-        handler = MathmakerHTTPRequestHandler.__new__(
-            MathmakerHTTPRequestHandler)
+def wsgi_app_factory(mock_dependencies):
+    """Fixture to create and run WSGI app"""
+    from mathmaker.lib.tools.mmd_app import request_handler
 
-        handler.path = path
-        handler.send_response = MagicMock()
-        handler.send_header = MagicMock()
-        handler.end_headers = MagicMock()
-        handler.address_string = MagicMock(return_value=address_string)
-        handler.requestline = f'GET {path} HTTP/1.1'
+    def _create_and_run_app(path, client_ip='127.0.0.1'):
+        # Prepare WSGI environ
+        if '?' in path:
+            path_info, query_string = path.split('?', 1)
+        else:
+            path_info, query_string = path, ''
 
-        # Prepare output
-        output_buffer = io.BytesIO()
-        handler.wfile = MagicMock()
-        handler.wfile.write = output_buffer.write
+        environ = {
+            'REQUEST_METHOD': 'GET',
+            'PATH_INFO': path_info,
+            'QUERY_STRING': query_string,
+            'REMOTE_ADDR': client_ip,
+        }
 
-        return handler, output_buffer
+        # Prepare start_response callback
+        start_response_status = [None]
+        start_response_headers = [None]
 
-    return _create_handler
+        def start_response(status, headers):
+            start_response_status[0] = status
+            start_response_headers[0] = headers
+
+        # Run the app
+        response_body = request_handler(environ, start_response)
+
+        return {
+            'status': start_response_status[0],
+            'headers': start_response_headers[0],
+            'body': b''.join(response_body)
+        }
+
+    return _create_and_run_app
 
 
-def test_do_GET_200_response(mock_dependencies, handler_factory):
-    handler, output_buffer = handler_factory(
-        path='/?sheetname=test_sheet',
-        address_string='127.0.0.1'
-    )
-
-    handler.do_GET()
+def test_wsgi_app_200_response(mock_dependencies, wsgi_app_factory):
+    response = wsgi_app_factory(path='/?sheetname=test_sheet')
 
     mock_dependencies['popen'].assert_called_once_with(
         ['mathmaker', '--pdf', 'test_sheet'], stdout=-1)
-    handler.send_response.assert_called_once_with(200)
-    handler.send_header.assert_any_call('Content-Type', 'application/pdf')
-    handler.end_headers.assert_called_once()
-    assert output_buffer.getvalue() == b'mock pdf content'
+    assert response['status'] == '200 OK'
+    assert ('Content-Type', 'application/pdf') in response['headers']
+    assert response['body'] == b'mock pdf content'
     mock_dependencies['settings'].daemon_logger.info.assert_called_once_with(
-        '127.0.0.1 GET /?sheetname=test_sheet HTTP/1.1 200')
+        '127.0.0.1 GET /?sheetname=test_sheet 200')
 
 
-def test_do_GET_200_with_ip_parameter(mock_dependencies, handler_factory):
-    handler, output_buffer = handler_factory(
+def test_wsgi_app_200_with_ip_parameter(mock_dependencies, wsgi_app_factory):
+    response = wsgi_app_factory(
         path='/?sheetname=test_sheet&ip=192.168.1.1',
-        address_string='192.168.1.1',
+        client_ip='192.168.1.1',
     )
-
-    handler.do_GET()
 
     mock_dependencies['block_ip'].assert_called_once()
     args, _ = mock_dependencies['block_ip'].call_args
@@ -117,16 +122,15 @@ def test_do_GET_200_with_ip_parameter(mock_dependencies, handler_factory):
     assert args[0]['ip'][0] == '192.168.1.1'
     assert args[1] == FAKE_TIMESTAMP_NOW
     assert args[2] == '/tmp/daemon.db'
-    handler.send_response.assert_called_once_with(200)
+    assert response['status'] == '200 OK'
 
 
-def test_do_GET_200_with_interactive_arg(mock_dependencies, handler_factory):
-    handler, output_buffer = handler_factory(
+def test_wsgi_app_200_with_interactive_arg(mock_dependencies,
+                                           wsgi_app_factory):
+    response = wsgi_app_factory(
         path='/?sheetname=test_sheet|interactive&ip=192.168.1.1',
-        address_string='192.168.1.1',
+        client_ip='192.168.1.1',
     )
-
-    handler.do_GET()
 
     mock_dependencies['popen'].assert_called_once_with(
         ['mathmaker', '--pdf', '--interactive', 'test_sheet'], stdout=-1)
@@ -138,173 +142,157 @@ def test_do_GET_200_with_interactive_arg(mock_dependencies, handler_factory):
     assert args[0]['ip'][0] == '192.168.1.1'
     assert args[1] == FAKE_TIMESTAMP_NOW
     assert args[2] == '/tmp/daemon.db'
-    handler.send_response.assert_called_once_with(200)
+    assert response['status'] == '200 OK'
 
 
-def test_do_GET_404_with_three_parameters(mock_dependencies, handler_factory):
-    handler, output_buffer = handler_factory(
+def test_wsgi_app_404_with_three_parameters(mock_dependencies,
+                                            wsgi_app_factory):
+    response = wsgi_app_factory(
         path='/?sheetname=test_sheet&ip=192.168.1.1&extraneous=any_value',
-        address_string='192.168.1.1'
+        client_ip='192.168.1.1'
     )
 
-    handler.do_GET()
-
-    handler.send_response.assert_called_once_with(404)
-    handler.send_header.assert_any_call('Content-Type', 'text/html')
-    handler.end_headers.assert_called_once()
-    assert output_buffer.getvalue() \
-        == b'Error 404: one or two parameters allowed'
+    assert response['status'] == '404 Not Found'
+    assert ('Content-Type', 'text/html') in response['headers']
+    assert response['body'] == b'Error 404: one or two parameters allowed'
 
     mock_dependencies['settings'].daemon_logger.warning\
         .assert_called_once_with(
         '192.168.1.1 GET /?sheetname=test_sheet&ip=192.168.1.1'
-        '&extraneous=any_value HTTP/1.1 404 '
+        '&extraneous=any_value 404 '
         '(only one or two parameters allowed)')
 
 
-def test_do_GET_404_missing_sheetname(mock_dependencies, handler_factory):
-    handler, output_buffer = handler_factory(
+def test_wsgi_app_404_missing_sheetname(mock_dependencies, wsgi_app_factory):
+    response = wsgi_app_factory(
         path='/?ip=192.168.1.1&extraneous_parameter=any_value',
-        address_string='192.168.1.1',
+        client_ip='192.168.1.1',
     )
 
-    handler.do_GET()
-
-    handler.send_response.assert_called_once_with(404)
-    handler.send_header.assert_any_call('Content-Type', 'text/html')
-    handler.end_headers.assert_called_once()
-    assert output_buffer.getvalue() \
+    assert response['status'] == '404 Not Found'
+    assert ('Content-Type', 'text/html') in response['headers']
+    assert response['body'] \
         == b'Error 404: sheetname must be in parameters. Only ip is accepted '\
            b'as other possible argument.'
 
     mock_dependencies['settings'].daemon_logger.warning\
         .assert_called_once_with(
         '192.168.1.1 GET /?ip=192.168.1.1&extraneous_parameter=any_value '
-        'HTTP/1.1 404 '
+        '404 '
         '(sheetname not in query or second argument different from ip)')
 
 
-def test_do_GET_404_unknown_sheetname(mock_dependencies, handler_factory):
-    handler, output_buffer = handler_factory(
+def test_wsgi_app_404_unknown_sheetname(mock_dependencies, wsgi_app_factory):
+    response = wsgi_app_factory(
         path='/?ip=192.168.1.1&sheetname=unknown',
-        address_string='192.168.1.1',
+        client_ip='192.168.1.1',
     )
 
-    handler.do_GET()
-
-    handler.send_response.assert_called_once_with(404)
-    handler.send_header.assert_any_call('Content-Type', 'text/html')
-    handler.end_headers.assert_called_once()
-    assert output_buffer.getvalue() == b'Error 404: No such sheetname'
+    assert response['status'] == '404 Not Found'
+    assert ('Content-Type', 'text/html') in response['headers']
+    assert response['body'] == b'Error 404: No such sheetname'
 
     mock_dependencies['settings'].daemon_logger.warning\
         .assert_called_once_with(
         '192.168.1.1 GET /?ip=192.168.1.1&sheetname=unknown '
-        'HTTP/1.1 404 (no such sheetname)')
+        '404 (no such sheetname)')
 
 
-def test_do_GET_404_second_arg_not_ip(mock_dependencies, handler_factory):
-    handler, output_buffer = handler_factory(
+def test_wsgi_app_404_second_arg_not_ip(mock_dependencies, wsgi_app_factory):
+    response = wsgi_app_factory(
         path='/?sheetname=test_sheet&unknown_arg=value',
-        address_string='192.168.1.1',
+        client_ip='192.168.1.1',
     )
 
-    handler.do_GET()
-
-    handler.send_response.assert_called_once_with(404)
-    handler.send_header.assert_any_call('Content-Type', 'text/html')
-    handler.end_headers.assert_called_once()
-    assert output_buffer.getvalue() \
+    assert response['status'] == '404 Not Found'
+    assert ('Content-Type', 'text/html') in response['headers']
+    assert response['body'] \
         == b'Error 404: sheetname must be in parameters. Only ip is accepted '\
            b'as other possible argument.'
 
     mock_dependencies['settings'].daemon_logger.warning\
         .assert_called_once_with(
         '192.168.1.1 GET /?sheetname=test_sheet&unknown_arg=value '
-        'HTTP/1.1 404 '
+        '404 '
         '(sheetname not in query or second argument different from ip)')
 
 
-def test_do_GET_429_block_IP_scenario1(mock_dependencies, handler_factory):
+def test_wsgi_app_429_block_IP_scenario1(mock_dependencies, wsgi_app_factory):
     # Test with regular request
-    handler, output_buffer = handler_factory(
-        path='/?sheetname=test_sheet&ip=192.168.1.1',
-        address_string='192.168.1.1'
-    )
-
     mock_dependencies['block_ip'].return_value = True
 
-    handler.do_GET()
+    response = wsgi_app_factory(
+        path='/?sheetname=test_sheet&ip=192.168.1.1',
+        client_ip='192.168.1.1'
+    )
 
-    handler.send_response.assert_called_once_with(429)
-    handler.send_header.assert_any_call('Content-Type', 'text/html')
-    handler.end_headers.assert_called_once()
-    assert output_buffer.getvalue() \
+    assert response['status'] == '429 Too Many Requests'
+    assert ('Content-Type', 'text/html') in response['headers']
+    assert response['body'] \
         == b'Error 429: wait at least 10 s between two requests.'
 
     mock_dependencies['settings'].daemon_logger.warning\
         .assert_called_once_with(
         '192.168.1.1 GET /?sheetname=test_sheet&ip=192.168.1.1 '
-        'HTTP/1.1 429 too many requests from 192.168.1.1')
+        '429 too many requests from 192.168.1.1')
 
 
-def test_do_GET_429_block_IP_scenario2(mock_dependencies, handler_factory):
+def test_wsgi_app_429_block_IP_scenario2(mock_dependencies, wsgi_app_factory):
     # Test with wrong request should lead to same result
-    handler, output_buffer = handler_factory(
-        path='/?ip=192.168.1.1&extraneous_parameter=any_value',
-        address_string='192.168.1.1',
-    )
-
     mock_dependencies['block_ip'].return_value = True
 
-    handler.do_GET()
+    response = wsgi_app_factory(
+        path='/?ip=192.168.1.1&extraneous_parameter=any_value',
+        client_ip='192.168.1.1',
+    )
 
-    handler.send_response.assert_called_once_with(429)
-    handler.send_header.assert_any_call('Content-Type', 'text/html')
-    handler.end_headers.assert_called_once()
-    assert output_buffer.getvalue() \
+    assert response['status'] == '429 Too Many Requests'
+    assert ('Content-Type', 'text/html') in response['headers']
+    assert response['body'] \
         == b'Error 429: wait at least 10 s between two requests.'
 
     mock_dependencies['settings'].daemon_logger.warning\
         .assert_called_once_with(
         '192.168.1.1 GET /?ip=192.168.1.1&extraneous_parameter=any_value '
-        'HTTP/1.1 429 too many requests from 192.168.1.1')
+        '429 too many requests from 192.168.1.1')
 
 
-def test_do_GET_400_unknown_parameter(mock_dependencies, handler_factory):
-    handler, output_buffer = handler_factory(
+def test_wsgi_app_400_unknown_parameter(mock_dependencies, wsgi_app_factory):
+    response = wsgi_app_factory(
         path='/?sheetname=expand_simple|invalid_value&ip=192.168.1.1',
-        address_string='192.168.1.1',
+        client_ip='192.168.1.1',
     )
 
-    handler.do_GET()
-
-    handler.send_response.assert_called_once_with(400)
-    handler.send_header.assert_any_call('Content-Type', 'text/html')
-    handler.end_headers.assert_called_once()
-    assert output_buffer.getvalue() == b'Error 400: unknown parameter.'
+    assert response['status'] == '400 Bad Request'
+    assert ('Content-Type', 'text/html') in response['headers']
+    assert response['body'] == b'Error 400: unknown parameter.'
 
     mock_dependencies['settings'].daemon_logger.warning\
         .assert_called_once_with(
         '192.168.1.1 GET /?sheetname=expand_simple|invalid_value'
-        '&ip=192.168.1.1 HTTP/1.1 400 (unknown parameter)')
+        '&ip=192.168.1.1 400 (unknown parameter)')
 
 
-def test_do_GET_500_external_script_failed(mock_dependencies, handler_factory):
-    handler, output_buffer = handler_factory(
-        path='/?sheetname=test_sheet&ip=192.168.1.1',
-        address_string='192.168.1.1',
-    )
+def test_wsgi_app_500_external_script_failed(mock_dependencies,
+                                             wsgi_app_factory):
     mock_dependencies['popen'].side_effect = OSError('mathmaker failed')
 
-    handler.do_GET()
+    response = wsgi_app_factory(
+        path='/?sheetname=test_sheet&ip=192.168.1.1',
+        client_ip='192.168.1.1',
+    )
 
-    handler.send_response.assert_called_once_with(500)
-    handler.send_header.assert_any_call('Content-Type', 'text/html')
-    handler.end_headers.assert_called_once()
-    assert output_buffer.getvalue() == b'Error 500: something failed'
+    assert response['status'] == '500 Internal Server Error'
+    assert ('Content-Type', 'text/html') in response['headers']
+    assert response['body'] == b'Error 500: something failed'
 
     mock_dependencies['settings'].daemon_logger.error\
         .assert_called_once_with(
         '192.168.1.1 GET /?sheetname=test_sheet&ip=192.168.1.1 '
-        'HTTP/1.1 500', exc_info=True)
+        '500', exc_info=True)
+
+
+def test_mmd_app():
+    from mathmaker.lib.tools.mmd_app import mmd_app, request_handler
+    app = mmd_app()
+    assert app == request_handler

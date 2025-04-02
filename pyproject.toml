@@ -16,6 +16,7 @@ intspan = "^1.6.1"
 "ruamel.yaml" = "^0.18.10"
 packaging = "^24.2"
 mathmakerlib = "^0.7.30"
+waitress = "^3.0.2"
 
 [tool.poetry.group.dev.dependencies]
 tox = "^3.25.1"
@@ -30,7 +31,7 @@ pytest-mock = "^3.14.0"
 
 [tool.poetry.scripts]
 mathmaker = "mathmaker.cli:entry_point"
-mathmakerd = "mathmaker.daemonized:entry_point"
+mathmakerd = "mathmaker.mmd:entry_point"
 
 [build-system]
 # requires = ["poetry-core>=1.0.0"]

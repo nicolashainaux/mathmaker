@@ -174,12 +174,13 @@ setup(
     license=__licence__,
     author=__author__,
     tests_require=['tox'],
-    install_requires=['microlib>=1.7',
-                      'mathmakerlib>=0.7.10',
-                      'polib>=1.0.8',
-                      'python-daemon>=2.1.2',
-                      'intspan>=1.5.8',
-                      'ruamel.yaml>=0.15.25'],
+    install_requires=['mathmakerlib>=0.7.30',
+                      'polib>=1.2',
+                      'python-daemon>=3.1.2',
+                      'intspan>=1.6.1',
+                      'ruamel.yaml>=0.18.10',
+                      'packaging>=24.2',
+                      'waitress>=3.0.2'],
     cmdclass={'test': PyTest,
               'tox': Tox,
               'clean': CleanCommand,
@@ -192,7 +193,7 @@ setup(
     packages=find_packages(exclude=['tests', 'docs']),
     entry_points={
         'console_scripts': ['mathmaker = mathmaker.cli:entry_point',
-                            'mathmakerd = mathmaker.daemonized:entry_point'],
+                            'mathmakerd = mathmaker.mmd:entry_point'],
     },
     data_files=create_mo_files(force='--force' in sys.argv)
     + retrieve_fonts(force='--force' in sys.argv)

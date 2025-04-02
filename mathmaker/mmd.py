@@ -19,26 +19,32 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import sys
-from http.server import HTTPServer
+import socket
 
 import daemon
+from waitress import serve
 
-from mathmaker import DAEMON_PORT, __version__
-from mathmaker.lib.tools.mmd_app import MathmakerHTTPRequestHandler
+from mathmaker import DAEMON_PORT, __version__, settings
+from mathmaker.lib.tools.mmd_app import mmd_app
 
 
 def entry_point():
     with daemon.DaemonContext(stdout=sys.stdout, stderr=sys.stderr):
-        server_address = ('', DAEMON_PORT)
+        settings.init()
         try:
-            httpd = HTTPServer(server_address, MathmakerHTTPRequestHandler)
+            # Test if port is already in use
+            test_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            test_socket.bind(('', DAEMON_PORT))
+            test_socket.close()
         except OSError as excinfo:
-            if str(excinfo) == '[Errno 98] Address already in use':
+            if 'Address already in use' in str(excinfo):
                 sys.stderr.write('\nmathmakerd: Another process is already '
                                  f'listening to port {DAEMON_PORT}. '
                                  'Aborting.\n')
                 sys.exit(1)
             else:
                 raise
-        sys.stdout.write(f'Starting mathmakerd {__version__}')
-        httpd.serve_forever()
+
+        sys.stdout.write(f'\nStarting mathmakerd {__version__}\n')
+        sys.stdout.flush()
+        serve(mmd_app(), host=settings.daemon_host, port=DAEMON_PORT)
