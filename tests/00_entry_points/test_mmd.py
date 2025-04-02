@@ -28,10 +28,10 @@ import sqlite3
 from datetime import datetime, timedelta
 from unittest.mock import MagicMock
 from http.server import HTTPServer
-from mathmaker.lib.tools.request_handler import MathmakerHTTPRequestHandler
-from mathmaker.lib.tools.request_handler import MINIMUM_DAEMON_TIME_INTERVAL
-from mathmaker.lib.tools.request_handler import get_all_sheets, block_ip
-from mathmaker.lib.tools.request_handler import manage_daemon_db
+from mathmaker.lib.tools.mmd_app import MathmakerHTTPRequestHandler
+from mathmaker.lib.tools.mmd_app import MINIMUM_DAEMON_TIME_INTERVAL
+from mathmaker.lib.tools.mmd_app import get_all_sheets, block_ip
+from mathmaker.lib.tools.mmd_app import manage_daemon_db
 
 FAKE_TIMESTAMP_NOW = 1585407600
 
@@ -41,12 +41,12 @@ def mock_dependencies(mocker):
     """Fixture to mock common dependencies"""
     mocks = {
         'manage_daemon_db': mocker.patch(
-            'mathmaker.lib.tools.request_handler.manage_daemon_db'),
+            'mathmaker.lib.tools.mmd_app.manage_daemon_db'),
         'get_all_sheets': mocker.patch(
-            'mathmaker.lib.tools.request_handler.get_all_sheets'),
+            'mathmaker.lib.tools.mmd_app.get_all_sheets'),
         'block_ip': mocker.patch(
-            'mathmaker.lib.tools.request_handler.block_ip'),
-        'popen': mocker.patch('mathmaker.lib.tools.request_handler.Popen'),
+            'mathmaker.lib.tools.mmd_app.block_ip'),
+        'popen': mocker.patch('mathmaker.lib.tools.mmd_app.Popen'),
         'settings': mocker.patch('mathmaker.settings')
     }
 
@@ -189,25 +189,25 @@ def test_remove_old_db(mocker, temp_db_path):
 
     # Mock datetime.now to return a fixed value
     mock_datetime = mocker.patch(
-        'mathmaker.lib.tools.request_handler.datetime')
+        'mathmaker.lib.tools.mmd_app.datetime')
     mock_now = mock_datetime.now.return_value
     mock_now.strftime.return_value = now.strftime('%Y-%m-%d %H:%M:%S')
 
     # Mock time.mktime to return expected values
     mock_mktime = mocker.patch(
-        'mathmaker.lib.tools.request_handler.time.mktime')
+        'mathmaker.lib.tools.mmd_app.time.mktime')
     # First call for now_timestamp
     # Second call for last_access_timestamp
     mock_mktime.side_effect = [now_timestamp, old_timestamp]
 
     # Mock for os.path.getmtime
-    mocker.patch('mathmaker.lib.tools.request_handler.os.path.getmtime',
+    mocker.patch('mathmaker.lib.tools.mmd_app.os.path.getmtime',
                  return_value=old_timestamp)
 
     # Mock for time.strftime et time.localtime
-    mocker.patch('mathmaker.lib.tools.request_handler.time.localtime',
+    mocker.patch('mathmaker.lib.tools.mmd_app.time.localtime',
                  return_value=old_time.timetuple())
-    mocker.patch('mathmaker.lib.tools.request_handler.time.strftime',
+    mocker.patch('mathmaker.lib.tools.mmd_app.time.strftime',
                  return_value=old_time.strftime('%Y-%m-%d %H:%M:%S'))
 
     # Check that the file exists before making the call
@@ -291,7 +291,7 @@ def test_return_value_is_current_timestamp(mocker, temp_db_path):
     # Configure the mock to have a fixed value for datetime.now()
     fixed_now = datetime(2023, 5, 15, 12, 0, 0)
     mock_datetime = mocker.patch(
-        'mathmaker.lib.tools.request_handler.datetime')
+        'mathmaker.lib.tools.mmd_app.datetime')
     mock_datetime.now.return_value = fixed_now
 
     # Preparing the return value before mock time.mktime
@@ -299,7 +299,7 @@ def test_return_value_is_current_timestamp(mocker, temp_db_path):
 
     # Mock time.mktime to return an expected value
     mock_mktime = mocker.patch(
-        'mathmaker.lib.tools.request_handler.time.mktime')
+        'mathmaker.lib.tools.mmd_app.time.mktime')
     mock_mktime.return_value = expected_timestamp
 
     result = manage_daemon_db(temp_db_path)
@@ -432,8 +432,8 @@ def test_block_ip_with_mocked_time(setup_db, mocker):
 
     # Mock datetime.now() mocker for controlling timestamps
     mock_now = datetime(2023, 1, 1, 12, 0, 0)
-    mocker.patch('mathmaker.lib.tools.request_handler.datetime', autospec=True)
-    from mathmaker.lib.tools.request_handler import datetime as mocked_datetime
+    mocker.patch('mathmaker.lib.tools.mmd_app.datetime', autospec=True)
+    from mathmaker.lib.tools.mmd_app import datetime as mocked_datetime
     mocked_datetime.now.return_value = mock_now
     mocked_datetime.strptime.side_effect = datetime.strptime
 

@@ -24,7 +24,7 @@ from http.server import HTTPServer
 import daemon
 
 from mathmaker import DAEMON_PORT, __version__
-from mathmaker.lib.tools.request_handler import MathmakerHTTPRequestHandler
+from mathmaker.lib.tools.mmd_app import MathmakerHTTPRequestHandler
 
 
 def entry_point():
