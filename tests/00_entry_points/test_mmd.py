@@ -46,10 +46,7 @@ def test_entry_point_successful_server_start(mocker):
     mocker.patch('sys.stderr', new_callable=MagicMock)
 
     # Import entry_point() after mocks definitions
-    from mathmaker.mmd import entry_point, DAEMON_PORT
-    from mathmaker import settings
-
-    settings.daemon_host = '127.0.0.2'
+    from mathmaker.mmd import entry_point, DAEMON_PORT, DAEMON_HOST
 
     entry_point()
 
@@ -57,7 +54,7 @@ def test_entry_point_successful_server_start(mocker):
     mock_socket_instance.bind.assert_called_once_with(('', DAEMON_PORT))
     mock_socket_instance.close.assert_called_once()
     mock_serve.assert_called_once_with(mock_mmd_app.return_value,
-                                       host=settings.daemon_host,
+                                       host=DAEMON_HOST,
                                        port=DAEMON_PORT)
 
 

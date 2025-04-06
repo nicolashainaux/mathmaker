@@ -24,13 +24,12 @@ import socket
 import daemon
 from waitress import serve
 
-from mathmaker import DAEMON_PORT, __version__, settings
+from mathmaker import DAEMON_PORT, __version__, DAEMON_HOST
 from mathmaker.lib.tools.mmd_app import mmd_app
 
 
 def entry_point():
     with daemon.DaemonContext(stdout=sys.stdout, stderr=sys.stderr):
-        settings.init()
         try:
             # Test if port is already in use
             test_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -47,4 +46,4 @@ def entry_point():
 
         sys.stdout.write(f'\nStarting mathmakerd {__version__}\n')
         sys.stdout.flush()
-        serve(mmd_app(), host=settings.daemon_host, port=DAEMON_PORT)
+        serve(mmd_app(), host=DAEMON_HOST, port=DAEMON_PORT)

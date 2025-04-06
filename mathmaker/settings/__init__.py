@@ -152,7 +152,6 @@ def init():
     global lualatex
     global luaotfload_tool
     global msgfmt
-    global daemon_host
     global round_letters_in_math_expr
     global mm_executable
     global available_wNl
@@ -212,7 +211,6 @@ def init():
     msgfmt = CONFIG["PATHS"]["MSGFMT"]
     euktoeps = CONFIG["PATHS"]["EUKTOEPS"]
     mm_executable = CONFIG["DAEMON"]["MATHMAKER_EXECUTABLE"]
-    daemon_host = CONFIG["DAEMON"]["HOST"]
     language = CONFIG['LOCALES'].get('LANGUAGE', 'en_US')
     if language not in AVAILABLE['LANGUAGES']:
         language = 'en_US'
