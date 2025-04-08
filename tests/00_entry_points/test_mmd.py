@@ -37,7 +37,8 @@ def test_entry_point_successful_server_start(mocker):
     from contextlib import contextmanager
 
     @contextmanager
-    def mock_daemon_context(stdout=None, stderr=None):
+    def mock_daemon_context(working_directory=None, umask=None,
+                            stdout=None, stderr=None):
         yield
 
     mocker.patch('daemon.DaemonContext', mock_daemon_context)
@@ -46,16 +47,18 @@ def test_entry_point_successful_server_start(mocker):
     mocker.patch('sys.stderr', new_callable=MagicMock)
 
     # Import entry_point() after mocks definitions
-    from mathmaker.mmd import entry_point, DAEMON_PORT, DAEMON_HOST
+    from mathmaker.mmd import entry_point
+    from mathmaker.lib.tools.mmd_tools import load_config
+    daemon_port = load_config()['settings']['port']
+    daemon_host = load_config()['settings']['host']
 
     entry_point()
 
     mock_socket.assert_called_once_with(socket.AF_INET, socket.SOCK_STREAM)
-    mock_socket_instance.bind.assert_called_once_with(('', DAEMON_PORT))
+    mock_socket_instance.bind.assert_called_once_with(('', daemon_port))
     mock_socket_instance.close.assert_called_once()
     mock_serve.assert_called_once_with(mock_mmd_app.return_value,
-                                       host=DAEMON_HOST,
-                                       port=DAEMON_PORT)
+                                       host=daemon_host, port=daemon_port)
 
 
 def test_entry_point_port_already_in_use(mocker):
@@ -73,7 +76,8 @@ def test_entry_point_port_already_in_use(mocker):
 
     # Import entry_point() after mocks definitions
     from mathmaker.mmd import entry_point
-    from mathmaker.mmd import DAEMON_PORT
+    from mathmaker.lib.tools.mmd_tools import load_config
+    daemon_port = load_config()['settings']['port']
 
     with pytest.raises(SystemExit) as excinfo:
         entry_point()
@@ -81,5 +85,5 @@ def test_entry_point_port_already_in_use(mocker):
 
     mock_stderr_write.assert_called_with(
         f'\nmathmakerd: Another process is already listening to '
-        f'port {DAEMON_PORT}. Aborting.\n'
+        f'port {daemon_port}. Aborting.\n'
     )

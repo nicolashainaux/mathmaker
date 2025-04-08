@@ -27,7 +27,7 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from mathmaker.lib.tools.mmd_tools import MINIMUM_DAEMON_TIME_INTERVAL
+from mathmaker.lib.tools.mmd_tools import load_config
 from mathmaker.lib.tools.mmd_tools import get_all_sheets, block_ip
 from mathmaker.lib.tools.mmd_tools import manage_daemon_db
 
@@ -283,8 +283,8 @@ def test_block_ip_request_after_timeout(setup_db):
     """
     # Insert an entry older than the timeout
     ip_addr = '192.168.1.2'
-    past_time = (datetime.now()
-                 - timedelta(seconds=MINIMUM_DAEMON_TIME_INTERVAL + 5))\
+    timeout = load_config()['settings']['timeout']
+    past_time = (datetime.now() - timedelta(seconds=timeout + 5))\
         .strftime('%Y-%m-%d %H:%M:%S')
 
     conn = sqlite3.connect(setup_db)
@@ -389,8 +389,8 @@ def test_block_ip_with_mocked_time(setup_db, mocker):
     assert result2 is True
 
     # Advancing time beyond the minimum
-    mock_now_later = datetime(2023, 1, 1, 12, 0,
-                              MINIMUM_DAEMON_TIME_INTERVAL + 1)
+    timeout = load_config()['settings']['timeout']
+    mock_now_later = datetime(2023, 1, 1, 12, 0, timeout + 1)
     mocked_datetime.now.return_value = mock_now_later
     now_timestamp_later = time.mktime(mock_now_later.timetuple())
 

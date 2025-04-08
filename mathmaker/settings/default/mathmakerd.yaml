@@ -1,0 +1,12 @@
+settings:
+  host: 127.0.0.1
+  port: 9999
+  timeout: 10 # seconds
+
+logging:
+  log_dir: /var/log/mathmakerd
+  use_syslog: True
+  syslog_facility: daemon
+  log_level: INFO
+  max_bytes: 1 # MB
+  backup_count: 9

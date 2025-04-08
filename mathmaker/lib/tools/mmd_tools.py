@@ -23,9 +23,35 @@
 import os
 import time
 import sqlite3
+from pathlib import Path
 from datetime import datetime
 
-MINIMUM_DAEMON_TIME_INTERVAL = 10
+from ruamel.yaml import YAML
+
+
+def load_config():
+    """Load configuration file"""
+
+    loader = YAML(typ='safe', pure=True)
+    config = loader.load(Path(__file__).parent.parent.parent
+                         / 'settings/default/mathmakerd.yaml')
+
+    # Paths to check for configuration file
+    config_paths = [
+        Path('/etc/mathmaker/mathmakerd.yaml'),
+        Path.home() / '.config/mathmaker/mathmakerd.yaml',
+    ]
+
+    # Update config with user redefined settings, if any
+    for config_path in config_paths:
+        if config_path.exists():
+            try:
+                with open(config_path, 'r') as f:
+                    config.update(loader.load(f))
+            except Exception as e:
+                print(f'Error reading {config_path}: {e}')
+
+    return config
 
 
 def manage_daemon_db(daemon_db_path):
@@ -67,6 +93,8 @@ def block_ip(query, now_timestamp, daemon_db_path):
     if 'ip' not in query:
         return False
 
+    settings = load_config()['settings']
+
     db = sqlite3.connect(daemon_db_path)
     ip = query['ip'][0]
     cmd = f"SELECT id,timeStamp FROM ip_addresses "\
@@ -84,7 +112,7 @@ def block_ip(query, now_timestamp, daemon_db_path):
     db.close()
     if (len(qr)
         and (now_timestamp - most_recent_request_timestamp
-             <= MINIMUM_DAEMON_TIME_INTERVAL)):
+             <= settings['timeout'])):
         return True
 
     return False

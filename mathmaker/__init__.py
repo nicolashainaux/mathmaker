@@ -42,7 +42,4 @@ __url_info__ = f'Further details on {__url__}'
 __info__ = f'{__software_name__} {__release__}\n'\
     f'License: {__licence__}\n{__copyright__} {__contact__}'
 
-DAEMON_PORT = 9999
-DAEMON_HOST = '127.0.0.1'
-
 __all__ = ['lib', ]
