@@ -23,67 +23,298 @@
 import pytest
 from unittest.mock import MagicMock
 import socket
+import logging
+from pathlib import Path
 
 
-FAKE_TIMESTAMP_NOW = 1585407600
+def test_configure_logging(mocker):
+    """Test that logging is configured correctly"""
+    # Mock Path operations
+    mock_path = mocker.patch('pathlib.Path')
+    mock_path_instance = mock_path.return_value
+    mock_path_instance.mkdir.return_value = None
+
+    # Mock config loading
+    mock_config = {
+        'logging': {
+            'log_dir': '/var/log/mathmakerd',
+            'log_level': 'INFO',
+            'use_syslog': False,
+            'max_bytes': 10,
+            'backup_count': 5
+        },
+        'settings': {
+            'host': '127.0.0.1',
+            'port': 8090
+        }
+    }
+    mocker.patch('mathmaker.mmd.load_config', return_value=mock_config)
+
+    # Mock logger and handlers
+    mock_logger = mocker.patch('logging.getLogger')
+    mock_file_handler = mocker.patch('logging.handlers.RotatingFileHandler')
+    mock_console_handler = mocker.patch('logging.StreamHandler')
+
+    # Import after mocking
+    from mathmaker.mmd import configure_logging
+
+    logger, log_dir, settings = configure_logging()
+
+    # Verify logger was configured correctly
+    mock_logger.assert_called()
+    mock_logger.return_value.setLevel.assert_called_with(logging.INFO)
+    mock_file_handler.assert_called()
+    mock_console_handler.assert_called()
+
+    # Check settings were returned correctly
+    assert settings == mock_config['settings']
+
+
+def test_configure_logging_with_permissions_error(mocker):
+    """Test logging configuration with permission error fallback"""
+    # Mock Path operations with permission error on first mkdir
+    mock_path = mocker.patch('pathlib.Path')
+    mock_primary_dir = MagicMock()
+    mock_fallback_dir = MagicMock()
+
+    # Configure mocks to simulate permission error on primary dir
+    mock_primary_dir.mkdir.side_effect = PermissionError("Permission denied")
+    mock_fallback_dir.mkdir.return_value = None
+
+    # Make Path return different mocks depending on the argument
+    def path_side_effect(arg):
+        if str(arg) == '/var/log/mathmakerd':
+            return mock_primary_dir
+        else:
+            return mock_fallback_dir
+
+    mock_path.side_effect = path_side_effect
+    mock_path.home.return_value = Path('/home/user')
+
+    # Mock config loading
+    mock_config = {
+        'logging': {
+            'log_dir': '/var/log/mathmakerd',
+            'log_level': 'INFO',
+            'use_syslog': False,
+            'max_bytes': 10,
+            'backup_count': 5
+        },
+        'settings': {
+            'host': '127.0.0.1',
+            'port': 8090
+        }
+    }
+    mocker.patch('mathmaker.mmd.load_config', return_value=mock_config)
+
+    # Mock print to check fallback message
+    mock_print = mocker.patch('builtins.print')
+
+    # Mock handlers
+    mocker.patch('logging.getLogger')
+    mocker.patch('logging.handlers.RotatingFileHandler')
+    mocker.patch('logging.StreamHandler')
+
+    # Import after mocking
+    from mathmaker.mmd import configure_logging
+
+    configure_logging()
+
+    # Verify fallback path was used
+    mock_primary_dir.mkdir.assert_called_once()
+    mock_fallback_dir.mkdir.assert_called_once()
+    mock_print.assert_called_once()
+
+
+def test_configure_logging_with_syslog(mocker):
+    """Test that syslog is configured when enabled"""
+    # Mock config with syslog enabled
+    mock_config = {
+        'logging': {
+            'log_dir': '/var/log/mathmakerd',
+            'log_level': 'INFO',
+            'use_syslog': True,
+            'max_bytes': 10,
+            'backup_count': 5
+        },
+        'settings': {
+            'host': '127.0.0.1',
+            'port': 8090
+        },
+        'syslog_facility': 'local0'
+    }
+    mocker.patch('mathmaker.mmd.load_config', return_value=mock_config)
+
+    # Mock Path and platform
+    mock_path = mocker.patch('pathlib.Path')
+    mock_path_instance = mock_path.return_value
+    mock_path_instance.mkdir.return_value = None
+
+    mocker.patch('platform.system', return_value='Linux')
+
+    # Mock handlers
+    mock_logger = mocker.patch('logging.getLogger')
+    mocker.patch('logging.handlers.RotatingFileHandler')
+    mocker.patch('logging.StreamHandler')
+    mock_syslog = mocker.patch('logging.handlers.SysLogHandler')
+
+    # Import after mocking
+    from mathmaker.mmd import configure_logging
+
+    configure_logging()
+
+    # Verify syslog was configured
+    mock_syslog.assert_called_once()
+    # File, console, syslog
+    assert mock_logger.return_value.addHandler.call_count >= 3
 
 
 def test_entry_point_successful_server_start(mocker):
+    """Test successful daemon startup with logging configured"""
+    # Mock the configure_logging function
+    mock_logger = MagicMock()
+    mock_settings = {'host': '127.0.0.1', 'port': 8090}
+    mock_log_dir = Path('/var/log/mathmakerd')
+
+    mocker.patch('mathmaker.mmd.configure_logging',
+                 return_value=(mock_logger, mock_log_dir, mock_settings))
+
+    # Mock socket operations
     mock_socket = mocker.patch('socket.socket')
     mock_socket_instance = mock_socket.return_value
+
+    # Mock waitress serve
     mock_serve = mocker.patch('mathmaker.mmd.serve')
     mock_mmd_app = mocker.patch('mathmaker.mmd.mmd_app')
 
-    from contextlib import contextmanager
+    # Mock file operations for stdout/stderr
+    mocker.patch('builtins.open', MagicMock())
 
-    @contextmanager
-    def mock_daemon_context(working_directory=None, umask=None,
-                            stdout=None, stderr=None):
-        yield
+    # Mock daemon context
+    mock_context = MagicMock()
+    mock_daemon_context = mocker.patch('daemon.DaemonContext',
+                                       return_value=mock_context)
 
-    mocker.patch('daemon.DaemonContext', mock_daemon_context)
-
-    mocker.patch('sys.stdout', new_callable=MagicMock)
-    mocker.patch('sys.stderr', new_callable=MagicMock)
-
-    # Import entry_point() after mocks definitions
+    # Import entry_point after mocking
     from mathmaker.mmd import entry_point
-    from mathmaker.lib.tools.mmd_tools import load_config
-    daemon_port = load_config()['settings']['port']
-    daemon_host = load_config()['settings']['host']
 
+    # Run the function to test
     entry_point()
 
+    # Verify DaemonContext was initialized with correct params
+    mock_daemon_context.assert_called_once()
+    kwargs = mock_daemon_context.call_args[1]
+    assert kwargs['working_directory'] == '/var/lib/mathmakerd'
+    assert kwargs['umask'] == 0o002
+
+    # Verify the daemon context was used as a context manager
+    mock_context.__enter__.assert_called_once()
+    mock_context.__exit__.assert_called_once()
+
+    # Verify socket operations
     mock_socket.assert_called_once_with(socket.AF_INET, socket.SOCK_STREAM)
-    mock_socket_instance.bind.assert_called_once_with(('', daemon_port))
+    mock_socket_instance.bind.assert_called_once_with(
+        ('', mock_settings['port']))
     mock_socket_instance.close.assert_called_once()
+
+    # Verify server was started
     mock_serve.assert_called_once_with(mock_mmd_app.return_value,
-                                       host=daemon_host, port=daemon_port)
+                                       host=mock_settings['host'],
+                                       port=mock_settings['port'])
+
+    # Verify logging calls
+    # At least startup and daemon context logs
+    assert mock_logger.info.call_count >= 2
 
 
 def test_entry_point_port_already_in_use(mocker):
+    """Test logging and exit when port is already in use"""
+    # Mock the configure_logging function
+    mock_logger = MagicMock()
+    mock_server_logger = MagicMock()
+    mock_settings = {'host': '127.0.0.1', 'port': 8090}
+    mock_log_dir = Path('/var/log/mathmakerd')
+
+    mocker.patch('mathmaker.mmd.configure_logging',
+                 return_value=(mock_logger, mock_log_dir, mock_settings))
+
+    # Mock logger to return our mock_server_logger
+    def get_logger(name):
+        if name == 'server':
+            return mock_server_logger
+        return mock_logger
+
+    mocker.patch('logging.getLogger', side_effect=get_logger)
+
+    # Mock socket with 'Address already in use' error
     mock_socket = mocker.patch('socket.socket')
     mock_socket_instance = mock_socket.return_value
-    mock_socket_instance.bind.side_effect = OSError(
-        '[Errno 98] Address already in use')
+    mock_socket_instance.bind.side_effect = \
+        OSError('[Errno 98] Address already in use')
 
-    mock_daemon_context = MagicMock()
-    mock_daemon_context.__enter__.return_value = mock_daemon_context
+    # Mock file operations for stdout/stderr
+    mocker.patch('builtins.open', MagicMock())
 
-    mocker.patch('daemon.DaemonContext', return_value=mock_daemon_context)
+    # Mock sys.exit to avoid test termination
+    mock_exit = mocker.patch('sys.exit')
 
-    mock_stderr_write = mocker.patch('sys.stderr.write')
+    # Mock daemon context
+    mock_context = MagicMock()
+    mocker.patch('daemon.DaemonContext', return_value=mock_context)
 
-    # Import entry_point() after mocks definitions
+    # Import entry_point after mocking
     from mathmaker.mmd import entry_point
-    from mathmaker.lib.tools.mmd_tools import load_config
-    daemon_port = load_config()['settings']['port']
 
-    with pytest.raises(SystemExit) as excinfo:
+    # Run the function to test
+    entry_point()
+
+    # Verify the error was logged
+    mock_server_logger.error.assert_called_once()
+    assert "Address already in use" in str(mock_server_logger.error.call_args)
+    assert str(mock_settings['port']) \
+        in str(mock_server_logger.error.call_args)
+
+    # Verify program exit
+    mock_exit.assert_called_once_with(1)
+
+
+def test_entry_point_other_socket_error(mocker):
+    """Test propagation of unexpected socket errors"""
+    # Mock the configure_logging function
+    mock_logger = MagicMock()
+    mock_server_logger = MagicMock()
+    mock_settings = {'host': '127.0.0.1', 'port': 8090}
+    mock_log_dir = Path('/var/log/mathmakerd')
+
+    mocker.patch('mathmaker.mmd.configure_logging',
+                 return_value=(mock_logger, mock_log_dir, mock_settings))
+
+    # Mock logger for server logger
+    def get_logger(name):
+        if name == 'server':
+            return mock_server_logger
+        return mock_logger
+
+    mocker.patch('logging.getLogger', side_effect=get_logger)
+
+    # Mock socket with different error
+    mock_socket = mocker.patch('socket.socket')
+    mock_socket_instance = mock_socket.return_value
+    mock_socket_instance.bind.side_effect = \
+        OSError('[Errno 13] Permission denied')
+
+    # Mock file operations for stdout/stderr
+    mocker.patch('builtins.open', MagicMock())
+
+    # Mock daemon context
+    mock_context = MagicMock()
+    mocker.patch('daemon.DaemonContext', return_value=mock_context)
+
+    # Import entry_point after mocking
+    from mathmaker.mmd import entry_point
+
+    # Run the function and expect the error to be raised
+    with pytest.raises(OSError) as excinfo:
         entry_point()
-    assert str(excinfo.value) == '1'
 
-    mock_stderr_write.assert_called_with(
-        f'\nmathmakerd: Another process is already listening to '
-        f'port {daemon_port}. Aborting.\n'
-    )
+    assert 'Permission denied' in str(excinfo.value)
