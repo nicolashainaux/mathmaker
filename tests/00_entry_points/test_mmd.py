@@ -171,8 +171,22 @@ def test_configure_logging_with_syslog(mocker):
 
 def test_entry_point_successful_server_start(mocker):
     """Test successful daemon startup with logging configured"""
-    # Mock the configure_logging function
+    # Mock logger with fileno() compatible handlers
     mock_logger = MagicMock()
+    mock_handlers = []
+
+    # Create handlers that have streams with fileno()
+    for i in range(2):  # Simulate two handlers (file and console)
+        mock_handler = MagicMock()
+        mock_stream = MagicMock()
+        mock_stream.fileno.return_value = i + 10  # A fake file descriptor
+        mock_handler.stream = mock_stream
+        mock_handlers.append(mock_handler)
+
+    # Configurer le logger avec ces handlers
+    mock_logger.handlers = mock_handlers
+
+    # Autres mocks nécessaires
     mock_settings = {'host': '127.0.0.1', 'port': 8090}
     mock_log_dir = Path('/var/log/mathmakerd')
 
@@ -207,6 +221,9 @@ def test_entry_point_successful_server_start(mocker):
     assert kwargs['working_directory'] == '/var/lib/mathmakerd'
     assert kwargs['umask'] == 0o002
 
+    # Check that files_preserve contains the expected file descriptors
+    assert mock_context.files_preserve == [10, 11]  # Our fake descriptors
+
     # Verify the daemon context was used as a context manager
     mock_context.__enter__.assert_called_once()
     mock_context.__exit__.assert_called_once()
@@ -229,9 +246,20 @@ def test_entry_point_successful_server_start(mocker):
 
 def test_entry_point_port_already_in_use(mocker):
     """Test logging and exit when port is already in use"""
-    # Mock the configure_logging function
     mock_logger = MagicMock()
     mock_server_logger = MagicMock()
+
+    # Configurer des handlers avec fileno()
+    mock_handlers = []
+    for i in range(2):
+        mock_handler = MagicMock()
+        mock_stream = MagicMock()
+        mock_stream.fileno.return_value = i + 10
+        mock_handler.stream = mock_stream
+        mock_handlers.append(mock_handler)
+
+    mock_logger.handlers = mock_handlers
+
     mock_settings = {'host': '127.0.0.1', 'port': 8090}
     mock_log_dir = Path('/var/log/mathmakerd')
 
@@ -280,9 +308,20 @@ def test_entry_point_port_already_in_use(mocker):
 
 def test_entry_point_other_socket_error(mocker):
     """Test propagation of unexpected socket errors"""
-    # Mock the configure_logging function
     mock_logger = MagicMock()
     mock_server_logger = MagicMock()
+
+    # Configurer des handlers avec fileno()
+    mock_handlers = []
+    for i in range(2):
+        mock_handler = MagicMock()
+        mock_stream = MagicMock()
+        mock_stream.fileno.return_value = i + 10
+        mock_handler.stream = mock_stream
+        mock_handlers.append(mock_handler)
+
+    mock_logger.handlers = mock_handlers
+
     mock_settings = {'host': '127.0.0.1', 'port': 8090}
     mock_log_dir = Path('/var/log/mathmakerd')
 
