@@ -48,7 +48,7 @@ def configure_logging():
     except PermissionError:
         log_dir1 = Path.home() / '.local/log/mathmakerd'
         log_dir1.mkdir(parents=False, exist_ok=True)
-        print(f"Cannot use {log_dir0}, utilisation de {log_dir1} à la place")
+        print(f"Cannot use {log_dir0}, using {log_dir1} instead")
         log_dir = log_dir1
 
     log_file = log_dir / 'mathmakerd.log'
@@ -101,12 +101,26 @@ def configure_logging():
     return logger, log_dir, config['settings']
 
 
+def setup_working_directory():
+    # /var/lib/mathmakerd requires root rights;
+    # otherwise fallback to another place
+    default_wd = Path('/var/lib/mathmakerd')
+    try:
+        default_wd.mkdir(parents=False, exist_ok=True)
+        wd = default_wd
+    except PermissionError:
+        wd = Path.home() / '.local/share/mathmakerd'
+        wd.mkdir(parents=False, exist_ok=True)
+        print(f"Cannot use {default_wd}, using {wd} instead")
+    return wd
+
+
 def entry_point():
     main_logger, log_dir, settings = configure_logging()
     main_logger.info(f'Starting mathmakerd {__version__}')
 
     daemon_context = daemon.DaemonContext(
-        working_directory='/var/lib/mathmakerd',
+        working_directory=setup_working_directory(),
         umask=0o002,
         stdout=open(log_dir / 'stdout.log', 'w+'),
         stderr=open(log_dir / 'stderr.log', 'w+'),

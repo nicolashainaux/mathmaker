@@ -194,6 +194,72 @@ def test_configure_logging_with_syslog(mocker):
     assert mock_logger.return_value.addHandler.call_count >= 3
 
 
+def test_setup_working_directory_default_directory_success(mocker):
+    """Test quand le répertoire par défaut peut être créé avec succès."""
+    # Mock de Path pour simuler le comportement sans droits root
+    mock_default_path = MagicMock()
+    mocker.patch('mathmaker.mmd.Path', return_value=mock_default_path)
+
+    # Configurer le mock pour ne pas lever d'exception lors de mkdir
+    mock_default_path.mkdir.return_value = None
+
+    from mathmaker.mmd import setup_working_directory
+
+    # Appeler la fonction et vérifier le résultat
+    result = setup_working_directory()
+
+    # Vérifier que mkdir a été appelé avec les bons paramètres
+    mock_default_path.mkdir.assert_called_once_with(parents=False,
+                                                    exist_ok=True)
+
+    # Vérifier que le résultat est bien le chemin par défaut
+    assert result == mock_default_path
+
+
+def test_setup_working_directory_fallback_directory(mocker, capsys):
+    """Test quand le répertoire par défaut génère une PermissionError."""
+    # Mock pour le chemin par défaut qui va échouer
+    mock_default_path = MagicMock()
+    mock_default_path.mkdir.side_effect = PermissionError("Permission denied")
+    mock_default_path.__str__ = lambda self: '/var/lib/mathmakerd'
+
+    # Mock pour le chemin de repli qui va réussir
+    mock_home_path = MagicMock()
+    mock_fallback_path = MagicMock()
+
+    # Configurer Path pour retourner le bon mock selon l'argument
+    def mock_path_side_effect(path_str=None):
+        if path_str == '/var/lib/mathmakerd':
+            return mock_default_path
+        return mock_home_path
+
+    mocker.patch('mathmaker.mmd.Path', side_effect=mock_path_side_effect)
+    mocker.patch('mathmaker.mmd.Path.home', return_value=mock_home_path)
+
+    # Configurer le chemin de repli
+    mock_home_path.__truediv__.return_value = mock_fallback_path
+    mock_fallback_path.mkdir.return_value = None
+
+    from mathmaker.mmd import setup_working_directory
+
+    # Appeler la fonction et vérifier le résultat
+    result = setup_working_directory()
+
+    # Vérifier que mkdir a été appelé sur les deux chemins
+    mock_default_path.mkdir.assert_called_once_with(parents=False,
+                                                    exist_ok=True)
+    mock_fallback_path.mkdir.assert_called_once_with(parents=False,
+                                                     exist_ok=True)
+
+    # Vérifier que le résultat est bien le chemin de repli
+    assert result == mock_fallback_path
+
+    # Vérifier le message imprimé
+    captured = capsys.readouterr()
+    assert "Cannot use" in captured.out
+    assert "/var/lib/mathmakerd" in captured.out
+
+
 def test_entry_point_successful_server_start(mocker):
     """Test successful daemon startup with logging configured"""
     # Mock logger with fileno() compatible handlers
@@ -212,6 +278,9 @@ def test_entry_point_successful_server_start(mocker):
     mock_logger.handlers = mock_handlers
 
     mock_settings = {'host': '127.0.0.1', 'port': 8090}
+
+    mocker.patch('mathmaker.mmd.setup_working_directory',
+                 return_value='/fake/wd')
 
     # Use mock instead of Path
     mock_log_dir = MagicMock()
@@ -244,7 +313,7 @@ def test_entry_point_successful_server_start(mocker):
     # Verify DaemonContext was initialized with correct params
     mock_daemon_context.assert_called_once()
     kwargs = mock_daemon_context.call_args[1]
-    assert kwargs['working_directory'] == '/var/lib/mathmakerd'
+    assert kwargs['working_directory'] == '/fake/wd'
     assert kwargs['umask'] == 0o002
 
     # Check that files_preserve contains the expected file descriptors
