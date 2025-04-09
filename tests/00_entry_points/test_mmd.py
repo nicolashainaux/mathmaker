@@ -38,12 +38,7 @@ def test_configure_logging(mocker):
     mock_console_handler = MagicMock()
     mocker.patch('logging.StreamHandler', return_value=mock_console_handler)
 
-    mock_log_path = MagicMock()
-    mock_log_file = MagicMock()
-    mock_log_path.__truediv__.return_value = mock_log_file
-    mocker.patch('pathlib.Path', return_value=mock_log_path)
-
-    # Mock config loading
+    # Mock config loading: must be done before patching mathmaker.mmd.Path
     mock_config = {
         'logging': {
             'log_dir': '/var/log/mathmakerd',
@@ -53,15 +48,32 @@ def test_configure_logging(mocker):
             'backup_count': 5
         },
         'settings': {
-            'host': '127.0.0.1',
-            'port': 8090
+            'host': '127.0.0.32',
+            'port': 8090,
+            'timeout': 10
         }
     }
     mocker.patch('mathmaker.lib.tools.mmd_tools.load_config',
                  return_value=mock_config)
 
-    from mathmaker.mmd import configure_logging
+    # Mock Path
+    mock_log_path = MagicMock()
+    # mock_log_file = MagicMock()
+    # mock_log_path.__truediv__.return_value = mock_log_file
 
+    # If necessary, force reloading the module to apply all patches defined
+    # previously:
+    # import sys
+    # if 'mathmaker.mmd' in sys.modules:
+    #     del sys.modules['mathmaker.mmd']  # Force reloading the module
+
+    # Caution, patching pathlib.Path should be done if the module using
+    # Path imports this way: import path; and uses path.Pathlib;
+    # but if the import is done using: from pathlib import Path, then patch
+    # my.module.Path
+    mocker.patch('mathmaker.mmd.Path', return_value=mock_log_path)
+
+    from mathmaker.mmd import configure_logging
     logger, log_dir, settings = configure_logging()
 
     assert logger == mock_logger
