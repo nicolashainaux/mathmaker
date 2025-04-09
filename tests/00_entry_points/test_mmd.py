@@ -31,12 +31,10 @@ def test_configure_logging(mocker):
     mock_logger = MagicMock()
     mocker.patch('logging.getLogger', return_value=mock_logger)
 
-    mock_file_handler = MagicMock()
     mocker.patch('logging.handlers.RotatingFileHandler',
-                 return_value=mock_file_handler)
+                 return_value=MagicMock())
 
-    mock_console_handler = MagicMock()
-    mocker.patch('logging.StreamHandler', return_value=mock_console_handler)
+    mocker.patch('logging.StreamHandler', return_value=MagicMock())
 
     # Mock config loading: must be done before patching mathmaker.mmd.Path
     mock_config = {
@@ -87,16 +85,13 @@ def test_configure_logging(mocker):
 def test_configure_logging_with_permissions_error(mocker):
     """Test logging configuration with permission error fallback"""
 
-    mock_logger = MagicMock()
-    mocker.patch('logging.getLogger', return_value=mock_logger)
+    mocker.patch('logging.getLogger', return_value=MagicMock())
 
     # Mock handlers
-    mock_file_handler = MagicMock()
     mocker.patch('logging.handlers.RotatingFileHandler',
-                 return_value=mock_file_handler)
+                 return_value=MagicMock())
 
-    mock_console_handler = MagicMock()
-    mocker.patch('logging.StreamHandler', return_value=mock_console_handler)
+    mocker.patch('logging.StreamHandler', return_value=MagicMock())
 
     # Mock config loading
     mock_config = {
