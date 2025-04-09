@@ -116,7 +116,6 @@ def test_configure_logging_with_permissions_error(mocker):
     mocker.patch('mathmaker.mmd.load_config', return_value=mock_config)
 
     # Mock Path operations with permission error on first mkdir
-    mock_path = mocker.patch('mathmaker.mmd.Path')
     mock_primary_dir = MagicMock()
     mock_fallback_dir = MagicMock()
 
@@ -131,10 +130,12 @@ def test_configure_logging_with_permissions_error(mocker):
         else:
             return mock_fallback_dir
 
+    mock_path = mocker.patch('mathmaker.mmd.Path')
     mock_path.side_effect = path_side_effect
 
-    mock_home_path = MagicMock()
-    mock_path.home.return_value = mock_home_path
+    mock_home_dir = MagicMock()
+    mock_path.home.return_value = mock_home_dir
+    mock_home_dir.__truediv__.return_value = mock_fallback_dir
 
     # Mock print to check fallback message
     mock_print = mocker.patch('builtins.print')
