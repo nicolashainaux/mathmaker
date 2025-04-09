@@ -300,8 +300,9 @@ def test_entry_point_port_already_in_use(mocker):
     mocker.patch('logging.getLogger', side_effect=get_logger)
 
     # Mock socket with 'Address already in use' error
-    mock_socket = mocker.patch('socket.socket')
-    mock_socket_instance = mock_socket.return_value
+    mock_socket = mocker.patch('socket.socket', autospec=True)
+    mock_socket_instance = MagicMock()
+    mock_socket.return_value = mock_socket_instance
     mock_socket_instance.bind.side_effect = \
         OSError('[Errno 98] Address already in use')
 
@@ -313,7 +314,11 @@ def test_entry_point_port_already_in_use(mocker):
 
     # Mock daemon context
     mock_context = MagicMock()
+    mock_context.__enter__ = MagicMock(return_value=None)
+    mock_context.__exit__ = MagicMock(return_value=None)
     mocker.patch('daemon.DaemonContext', return_value=mock_context)
+
+    mocker.patch('mathmaker.mmd.serve')
 
     # Import entry_point after mocking
     from mathmaker.mmd import entry_point
@@ -323,7 +328,9 @@ def test_entry_point_port_already_in_use(mocker):
 
     # Verify the error was logged
     mock_server_logger.error.assert_called_once()
-    assert "Address already in use" in str(mock_server_logger.error.call_args)
+    assert f"Another process is already listening to port "\
+        f"{mock_settings['port']}. Aborting."\
+        in str(mock_server_logger.error.call_args)
     assert str(mock_settings['port']) \
         in str(mock_server_logger.error.call_args)
 
