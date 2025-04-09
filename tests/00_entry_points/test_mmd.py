@@ -178,6 +178,11 @@ def test_configure_logging_with_syslog(mocker):
 
     mocker.patch('platform.system', return_value='Linux')
 
+    # To avoid interactions with other tests:
+    import sys
+    if 'mathmaker.mmd' in sys.modules:
+        del sys.modules['mathmaker.mmd']  # Force reloading mmd module
+
     # Import after mocking
     from mathmaker.mmd import configure_logging
 
