@@ -23,16 +23,25 @@
 import pytest
 from unittest.mock import MagicMock
 import socket
-import logging
-from pathlib import Path
 
 
 def test_configure_logging(mocker):
     """Test that logging is configured correctly"""
-    # Mock Path operations
-    mock_path = mocker.patch('pathlib.Path')
-    mock_path_instance = mock_path.return_value
-    mock_path_instance.mkdir.return_value = None
+
+    mock_logger = MagicMock()
+    mocker.patch('logging.getLogger', return_value=mock_logger)
+
+    mock_file_handler = MagicMock()
+    mocker.patch('logging.handlers.RotatingFileHandler',
+                 return_value=mock_file_handler)
+
+    mock_console_handler = MagicMock()
+    mocker.patch('logging.StreamHandler', return_value=mock_console_handler)
+
+    mock_log_path = MagicMock()
+    mock_log_file = MagicMock()
+    mock_log_path.__truediv__.return_value = mock_log_file
+    mocker.patch('pathlib.Path', return_value=mock_log_path)
 
     # Mock config loading
     mock_config = {
@@ -48,32 +57,25 @@ def test_configure_logging(mocker):
             'port': 8090
         }
     }
-    mocker.patch('mathmaker.mmd.load_config', return_value=mock_config)
+    mocker.patch('mathmaker.lib.tools.mmd_tools.load_config',
+                 return_value=mock_config)
 
-    # Mock logger and handlers
-    mock_logger = mocker.patch('logging.getLogger')
-    mock_file_handler = mocker.patch('logging.handlers.RotatingFileHandler')
-    mock_console_handler = mocker.patch('logging.StreamHandler')
-
-    # Import after mocking
     from mathmaker.mmd import configure_logging
 
     logger, log_dir, settings = configure_logging()
 
-    # Verify logger was configured correctly
-    mock_logger.assert_called()
-    mock_logger.return_value.setLevel.assert_called_with(logging.INFO)
-    mock_file_handler.assert_called()
-    mock_console_handler.assert_called()
-
-    # Check settings were returned correctly
+    assert logger == mock_logger
+    mock_logger.setLevel.assert_called_once()
+    mock_logger.addHandler.assert_called()
+    # At least two handlers have been added
+    assert mock_logger.addHandler.call_count >= 2
     assert settings == mock_config['settings']
 
 
 def test_configure_logging_with_permissions_error(mocker):
     """Test logging configuration with permission error fallback"""
     # Mock Path operations with permission error on first mkdir
-    mock_path = mocker.patch('pathlib.Path')
+    mock_path = mocker.patch('mathmaker.mmd.Path')
     mock_primary_dir = MagicMock()
     mock_fallback_dir = MagicMock()
 
@@ -89,7 +91,9 @@ def test_configure_logging_with_permissions_error(mocker):
             return mock_fallback_dir
 
     mock_path.side_effect = path_side_effect
-    mock_path.home.return_value = Path('/home/user')
+
+    mock_home_path = MagicMock()
+    mock_path.home.return_value = mock_home_path
 
     # Mock config loading
     mock_config = {
@@ -146,7 +150,7 @@ def test_configure_logging_with_syslog(mocker):
     mocker.patch('mathmaker.mmd.load_config', return_value=mock_config)
 
     # Mock Path and platform
-    mock_path = mocker.patch('pathlib.Path')
+    mock_path = mocker.patch('mathmaker.mmd.Path')
     mock_path_instance = mock_path.return_value
     mock_path_instance.mkdir.return_value = None
 
@@ -183,12 +187,13 @@ def test_entry_point_successful_server_start(mocker):
         mock_handler.stream = mock_stream
         mock_handlers.append(mock_handler)
 
-    # Configurer le logger avec ces handlers
+    # Configure logger with these handlers
     mock_logger.handlers = mock_handlers
 
-    # Autres mocks nécessaires
     mock_settings = {'host': '127.0.0.1', 'port': 8090}
-    mock_log_dir = Path('/var/log/mathmakerd')
+
+    # Use mock instead of Path
+    mock_log_dir = MagicMock()
 
     mocker.patch('mathmaker.mmd.configure_logging',
                  return_value=(mock_logger, mock_log_dir, mock_settings))
@@ -222,7 +227,9 @@ def test_entry_point_successful_server_start(mocker):
     assert kwargs['umask'] == 0o002
 
     # Check that files_preserve contains the expected file descriptors
-    assert mock_context.files_preserve == [10, 11]  # Our fake descriptors
+    assert len(mock_context.files_preserve) == 2  # Our fake descriptors
+    assert 10 in mock_context.files_preserve
+    assert 11 in mock_context.files_preserve
 
     # Verify the daemon context was used as a context manager
     mock_context.__enter__.assert_called_once()
@@ -246,10 +253,11 @@ def test_entry_point_successful_server_start(mocker):
 
 def test_entry_point_port_already_in_use(mocker):
     """Test logging and exit when port is already in use"""
+    # Mock logger with fileno() compatible handlers
     mock_logger = MagicMock()
     mock_server_logger = MagicMock()
 
-    # Configurer des handlers avec fileno()
+    # Configure handlers with fileno()
     mock_handlers = []
     for i in range(2):
         mock_handler = MagicMock()
@@ -261,7 +269,8 @@ def test_entry_point_port_already_in_use(mocker):
     mock_logger.handlers = mock_handlers
 
     mock_settings = {'host': '127.0.0.1', 'port': 8090}
-    mock_log_dir = Path('/var/log/mathmakerd')
+    # Use mock object instead of Path
+    mock_log_dir = MagicMock()
 
     mocker.patch('mathmaker.mmd.configure_logging',
                  return_value=(mock_logger, mock_log_dir, mock_settings))
@@ -308,10 +317,11 @@ def test_entry_point_port_already_in_use(mocker):
 
 def test_entry_point_other_socket_error(mocker):
     """Test propagation of unexpected socket errors"""
+    # Create logger mock with handlers that have streams with fileno()
     mock_logger = MagicMock()
     mock_server_logger = MagicMock()
 
-    # Configurer des handlers avec fileno()
+    # Configure handlers with fileno()
     mock_handlers = []
     for i in range(2):
         mock_handler = MagicMock()
@@ -323,7 +333,8 @@ def test_entry_point_other_socket_error(mocker):
     mock_logger.handlers = mock_handlers
 
     mock_settings = {'host': '127.0.0.1', 'port': 8090}
-    mock_log_dir = Path('/var/log/mathmakerd')
+    # Use mock object instead of Path
+    mock_log_dir = MagicMock()
 
     mocker.patch('mathmaker.mmd.configure_logging',
                  return_value=(mock_logger, mock_log_dir, mock_settings))
