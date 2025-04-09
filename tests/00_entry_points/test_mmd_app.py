@@ -36,8 +36,7 @@ def mock_dependencies(mocker):
             'mathmaker.lib.tools.mmd_app.get_all_sheets'),
         'block_ip': mocker.patch(
             'mathmaker.lib.tools.mmd_app.block_ip'),
-        'popen': mocker.patch('mathmaker.lib.tools.mmd_app.Popen'),
-        'settings': mocker.patch('mathmaker.settings')
+        'popen': mocker.patch('mathmaker.lib.tools.mmd_app.Popen')
     }
 
     # Setup default values
@@ -49,11 +48,6 @@ def mock_dependencies(mocker):
     mock_process = MagicMock()
     mock_process.stdout.read.return_value = b'mock pdf content'
     mocks['popen'].return_value = mock_process
-
-    # Setup parameters
-    mocks['settings'].mm_executable = 'mathmaker'
-    mocks['settings'].path.daemon_db = '/tmp/daemon.db'
-    mocks['settings'].daemon_logger = MagicMock()
 
     return mocks
 
@@ -97,7 +91,10 @@ def wsgi_app_factory(mock_dependencies):
     return _create_and_run_app
 
 
-def test_wsgi_app_200_response(mock_dependencies, wsgi_app_factory):
+def test_wsgi_app_200_response(mocker, mock_dependencies, wsgi_app_factory):
+    mock_logger = mocker.patch('mathmaker.lib.tools.mmd_app.logging.getLogger',
+                               autospec=True)
+    mock_logger.return_value = MagicMock()
     response = wsgi_app_factory(path='/?sheetname=test_sheet')
 
     mock_dependencies['popen'].assert_called_once_with(
@@ -105,11 +102,16 @@ def test_wsgi_app_200_response(mock_dependencies, wsgi_app_factory):
     assert response['status'] == '200 OK'
     assert ('Content-Type', 'application/pdf') in response['headers']
     assert response['body'] == b'mock pdf content'
-    mock_dependencies['settings'].daemon_logger.info.assert_called_once_with(
+    mock_logger.return_value.info.assert_called_once_with(
         '127.0.0.1 GET /?sheetname=test_sheet 200')
 
 
-def test_wsgi_app_200_with_ip_parameter(mock_dependencies, wsgi_app_factory):
+def test_wsgi_app_200_with_ip_parameter(mocker,
+                                        mock_dependencies,
+                                        wsgi_app_factory):
+    mock_logger = mocker.patch('mathmaker.lib.tools.mmd_app.logging.getLogger',
+                               autospec=True)
+    mock_logger.return_value = MagicMock()
     response = wsgi_app_factory(
         path='/?sheetname=test_sheet&ip=192.168.1.1',
         client_ip='192.168.1.1',
@@ -121,12 +123,15 @@ def test_wsgi_app_200_with_ip_parameter(mock_dependencies, wsgi_app_factory):
     assert 'ip' in args[0]
     assert args[0]['ip'][0] == '192.168.1.1'
     assert args[1] == FAKE_TIMESTAMP_NOW
-    assert args[2] == '/tmp/daemon.db'
     assert response['status'] == '200 OK'
 
 
-def test_wsgi_app_200_with_interactive_arg(mock_dependencies,
+def test_wsgi_app_200_with_interactive_arg(mocker,
+                                           mock_dependencies,
                                            wsgi_app_factory):
+    mock_logger = mocker.patch('mathmaker.lib.tools.mmd_app.logging.getLogger',
+                               autospec=True)
+    mock_logger.return_value = MagicMock()
     response = wsgi_app_factory(
         path='/?sheetname=test_sheet|interactive&ip=192.168.1.1',
         client_ip='192.168.1.1',
@@ -141,12 +146,15 @@ def test_wsgi_app_200_with_interactive_arg(mock_dependencies,
     assert 'ip' in args[0]
     assert args[0]['ip'][0] == '192.168.1.1'
     assert args[1] == FAKE_TIMESTAMP_NOW
-    assert args[2] == '/tmp/daemon.db'
     assert response['status'] == '200 OK'
 
 
-def test_wsgi_app_404_with_three_parameters(mock_dependencies,
+def test_wsgi_app_404_with_three_parameters(mocker,
+                                            mock_dependencies,
                                             wsgi_app_factory):
+    mock_logger = mocker.patch('mathmaker.lib.tools.mmd_app.logging.getLogger',
+                               autospec=True)
+    mock_logger.return_value = MagicMock()
     response = wsgi_app_factory(
         path='/?sheetname=test_sheet&ip=192.168.1.1&extraneous=any_value',
         client_ip='192.168.1.1'
@@ -156,14 +164,18 @@ def test_wsgi_app_404_with_three_parameters(mock_dependencies,
     assert ('Content-Type', 'text/html') in response['headers']
     assert response['body'] == b'Error 404: one or two parameters allowed'
 
-    mock_dependencies['settings'].daemon_logger.warning\
-        .assert_called_once_with(
+    mock_logger.return_value.warning.assert_called_once_with(
         '192.168.1.1 GET /?sheetname=test_sheet&ip=192.168.1.1'
         '&extraneous=any_value 404 '
         '(only one or two parameters allowed)')
 
 
-def test_wsgi_app_404_missing_sheetname(mock_dependencies, wsgi_app_factory):
+def test_wsgi_app_404_missing_sheetname(mocker,
+                                        mock_dependencies,
+                                        wsgi_app_factory):
+    mock_logger = mocker.patch('mathmaker.lib.tools.mmd_app.logging.getLogger',
+                               autospec=True)
+    mock_logger.return_value = MagicMock()
     response = wsgi_app_factory(
         path='/?ip=192.168.1.1&extraneous_parameter=any_value',
         client_ip='192.168.1.1',
@@ -175,14 +187,18 @@ def test_wsgi_app_404_missing_sheetname(mock_dependencies, wsgi_app_factory):
         == b'Error 404: sheetname must be in parameters. Only ip is accepted '\
            b'as other possible argument.'
 
-    mock_dependencies['settings'].daemon_logger.warning\
-        .assert_called_once_with(
+    mock_logger.return_value.warning.assert_called_once_with(
         '192.168.1.1 GET /?ip=192.168.1.1&extraneous_parameter=any_value '
         '404 '
         '(sheetname not in query or second argument different from ip)')
 
 
-def test_wsgi_app_404_unknown_sheetname(mock_dependencies, wsgi_app_factory):
+def test_wsgi_app_404_unknown_sheetname(mocker,
+                                        mock_dependencies,
+                                        wsgi_app_factory):
+    mock_logger = mocker.patch('mathmaker.lib.tools.mmd_app.logging.getLogger',
+                               autospec=True)
+    mock_logger.return_value = MagicMock()
     response = wsgi_app_factory(
         path='/?ip=192.168.1.1&sheetname=unknown',
         client_ip='192.168.1.1',
@@ -192,13 +208,17 @@ def test_wsgi_app_404_unknown_sheetname(mock_dependencies, wsgi_app_factory):
     assert ('Content-Type', 'text/html') in response['headers']
     assert response['body'] == b'Error 404: No such sheetname'
 
-    mock_dependencies['settings'].daemon_logger.warning\
-        .assert_called_once_with(
+    mock_logger.return_value.warning.assert_called_once_with(
         '192.168.1.1 GET /?ip=192.168.1.1&sheetname=unknown '
         '404 (no such sheetname)')
 
 
-def test_wsgi_app_404_second_arg_not_ip(mock_dependencies, wsgi_app_factory):
+def test_wsgi_app_404_second_arg_not_ip(mocker,
+                                        mock_dependencies,
+                                        wsgi_app_factory):
+    mock_logger = mocker.patch('mathmaker.lib.tools.mmd_app.logging.getLogger',
+                               autospec=True)
+    mock_logger.return_value = MagicMock()
     response = wsgi_app_factory(
         path='/?sheetname=test_sheet&unknown_arg=value',
         client_ip='192.168.1.1',
@@ -210,14 +230,18 @@ def test_wsgi_app_404_second_arg_not_ip(mock_dependencies, wsgi_app_factory):
         == b'Error 404: sheetname must be in parameters. Only ip is accepted '\
            b'as other possible argument.'
 
-    mock_dependencies['settings'].daemon_logger.warning\
-        .assert_called_once_with(
+    mock_logger.return_value.warning.assert_called_once_with(
         '192.168.1.1 GET /?sheetname=test_sheet&unknown_arg=value '
         '404 '
         '(sheetname not in query or second argument different from ip)')
 
 
-def test_wsgi_app_429_block_IP_scenario1(mock_dependencies, wsgi_app_factory):
+def test_wsgi_app_429_block_IP_scenario1(mocker,
+                                         mock_dependencies,
+                                         wsgi_app_factory):
+    mock_logger = mocker.patch('mathmaker.lib.tools.mmd_app.logging.getLogger',
+                               autospec=True)
+    mock_logger.return_value = MagicMock()
     # Test with regular request
     mock_dependencies['block_ip'].return_value = True
 
@@ -231,13 +255,17 @@ def test_wsgi_app_429_block_IP_scenario1(mock_dependencies, wsgi_app_factory):
     assert response['body'] \
         == b'Error 429: wait at least 10 s between two requests.'
 
-    mock_dependencies['settings'].daemon_logger.warning\
-        .assert_called_once_with(
+    mock_logger.return_value.warning.assert_called_once_with(
         '192.168.1.1 GET /?sheetname=test_sheet&ip=192.168.1.1 '
         '429 too many requests from 192.168.1.1')
 
 
-def test_wsgi_app_429_block_IP_scenario2(mock_dependencies, wsgi_app_factory):
+def test_wsgi_app_429_block_IP_scenario2(mocker,
+                                         mock_dependencies,
+                                         wsgi_app_factory):
+    mock_logger = mocker.patch('mathmaker.lib.tools.mmd_app.logging.getLogger',
+                               autospec=True)
+    mock_logger.return_value = MagicMock()
     # Test with wrong request should lead to same result
     mock_dependencies['block_ip'].return_value = True
 
@@ -251,13 +279,17 @@ def test_wsgi_app_429_block_IP_scenario2(mock_dependencies, wsgi_app_factory):
     assert response['body'] \
         == b'Error 429: wait at least 10 s between two requests.'
 
-    mock_dependencies['settings'].daemon_logger.warning\
-        .assert_called_once_with(
+    mock_logger.return_value.warning.assert_called_once_with(
         '192.168.1.1 GET /?ip=192.168.1.1&extraneous_parameter=any_value '
         '429 too many requests from 192.168.1.1')
 
 
-def test_wsgi_app_400_unknown_parameter(mock_dependencies, wsgi_app_factory):
+def test_wsgi_app_400_unknown_parameter(mocker,
+                                        mock_dependencies,
+                                        wsgi_app_factory):
+    mock_logger = mocker.patch('mathmaker.lib.tools.mmd_app.logging.getLogger',
+                               autospec=True)
+    mock_logger.return_value = MagicMock()
     response = wsgi_app_factory(
         path='/?sheetname=expand_simple|invalid_value&ip=192.168.1.1',
         client_ip='192.168.1.1',
@@ -267,14 +299,17 @@ def test_wsgi_app_400_unknown_parameter(mock_dependencies, wsgi_app_factory):
     assert ('Content-Type', 'text/html') in response['headers']
     assert response['body'] == b'Error 400: unknown parameter.'
 
-    mock_dependencies['settings'].daemon_logger.warning\
-        .assert_called_once_with(
+    mock_logger.return_value.warning.assert_called_once_with(
         '192.168.1.1 GET /?sheetname=expand_simple|invalid_value'
         '&ip=192.168.1.1 400 (unknown parameter)')
 
 
-def test_wsgi_app_500_external_script_failed(mock_dependencies,
+def test_wsgi_app_500_external_script_failed(mocker,
+                                             mock_dependencies,
                                              wsgi_app_factory):
+    mock_logger = mocker.patch('mathmaker.lib.tools.mmd_app.logging.getLogger',
+                               autospec=True)
+    mock_logger.return_value = MagicMock()
     mock_dependencies['popen'].side_effect = OSError('mathmaker failed')
 
     response = wsgi_app_factory(
@@ -286,8 +321,7 @@ def test_wsgi_app_500_external_script_failed(mock_dependencies,
     assert ('Content-Type', 'text/html') in response['headers']
     assert response['body'] == b'Error 500: something failed'
 
-    mock_dependencies['settings'].daemon_logger.error\
-        .assert_called_once_with(
+    mock_logger.return_value.error.assert_called_once_with(
         '192.168.1.1 GET /?sheetname=test_sheet&ip=192.168.1.1 '
         '500', exc_info=True)
 

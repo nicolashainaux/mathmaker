@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import logging
-from pathlib import Path
 from urllib.parse import parse_qs
 from subprocess import Popen, PIPE
 
@@ -31,11 +30,7 @@ from .mmd_tools import block_ip, manage_daemon_db, get_all_sheets
 def request_handler(environ, start_response):
     app_logger = logging.getLogger('webapp')
 
-    daemon_db_dir = Path.home() / '.local/share/mathmakerd'
-    daemon_db_dir.mkdir(parents=False, exist_ok=True)
-    daemon_db_path = daemon_db_dir / 'db.sqlite3'
-
-    now_timestamp = manage_daemon_db(daemon_db_path)
+    now_timestamp = manage_daemon_db()
     all_sheets = get_all_sheets()
 
     # Parse query parameters from environ
@@ -50,7 +45,7 @@ def request_handler(environ, start_response):
         f"{environ.get('PATH_INFO', '/')}?{environ.get('QUERY_STRING', '')}"
     log_header = f'{client_ip} {request_line}'
 
-    if block_ip(query, now_timestamp, daemon_db_path):
+    if block_ip(query, now_timestamp):
         response_body = 'Error 429: wait at least 10 s between two requests.'
         start_response('429 Too Many Requests',
                        [('Content-Type', 'text/html')])

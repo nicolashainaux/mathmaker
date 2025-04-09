@@ -29,6 +29,12 @@ from datetime import datetime
 from ruamel.yaml import YAML
 
 
+def daemon_db_path():
+    daemon_db_dir = Path.home() / '.local/share/mathmakerd'
+    daemon_db_dir.mkdir(parents=False, exist_ok=True)
+    return daemon_db_dir / 'db.sqlite3'
+
+
 def load_config():
     """Load configuration file"""
 
@@ -54,24 +60,25 @@ def load_config():
     return config
 
 
-def manage_daemon_db(daemon_db_path):
+def manage_daemon_db():
+    db_path = daemon_db_path()
     # If the db is too old (more than 1 hour, hardcoded), we delete it.
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     now_timestamp = time.mktime(datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
                                 .timetuple())
-    if os.path.isfile(daemon_db_path):
+    if os.path.isfile(db_path):
         t = time.strftime('%Y-%m-%d %H:%M:%S',
-                          time.localtime(os.path.getmtime(daemon_db_path)))
+                          time.localtime(os.path.getmtime(db_path)))
         last_access_timestamp = time.mktime(datetime.strptime(t,
                                             "%Y-%m-%d %H:%M:%S")
                                             .timetuple())
         if now_timestamp - last_access_timestamp >= 3600:
-            os.remove(daemon_db_path)
+            os.remove(db_path)
 
     # If there's no db, a brand new one is created
-    if not os.path.isfile(daemon_db_path):
-        open(daemon_db_path, 'a').close()
-        db = sqlite3.connect(daemon_db_path)
+    if not os.path.isfile(db_path):
+        open(db_path, 'a').close()
+        db = sqlite3.connect(db_path)
         db.execute('''CREATE TABLE ip_addresses
                     (id INTEGER PRIMARY KEY,
                     ip_addr TEXT, timeStamp TEXT)''')
@@ -89,13 +96,14 @@ def get_all_sheets():
     return all_sheets
 
 
-def block_ip(query, now_timestamp, daemon_db_path):
+def block_ip(query, now_timestamp):
+    db_path = daemon_db_path()
     if 'ip' not in query:
         return False
 
     settings = load_config()['settings']
 
-    db = sqlite3.connect(daemon_db_path)
+    db = sqlite3.connect(db_path)
     ip = query['ip'][0]
     cmd = f"SELECT id,timeStamp FROM ip_addresses "\
         f"WHERE ip_addr = '{ip}' ORDER BY timeStamp DESC LIMIT 1;"

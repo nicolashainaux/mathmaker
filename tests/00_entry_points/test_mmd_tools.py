@@ -77,11 +77,13 @@ def create_existing_db(db_path, hours_old=2):
     os.utime(db_path, (old_timestamp, old_timestamp))
 
 
-def test_create_new_db_if_not_exists(temp_db_path):
+def test_create_new_db_if_not_exists(mocker, temp_db_path):
     """Test that the function creates a new database if it does not exist"""
+    mocker.patch('mathmaker.lib.tools.mmd_tools.daemon_db_path',
+                 return_value=temp_db_path)
     assert not os.path.isfile(temp_db_path)
 
-    timestamp = manage_daemon_db(temp_db_path)
+    timestamp = manage_daemon_db()
 
     assert os.path.isfile(temp_db_path)
 
@@ -108,6 +110,8 @@ def test_create_new_db_if_not_exists(temp_db_path):
 
 def test_remove_old_db(mocker, temp_db_path):
     """Test que la fonction supprime une base de données trop vieille"""
+    mocker.patch('mathmaker.lib.tools.mmd_tools.daemon_db_path',
+                 return_value=temp_db_path)
     create_existing_db(temp_db_path)
 
     # Add some data to the database to check that it has been deleted
@@ -153,7 +157,7 @@ def test_remove_old_db(mocker, temp_db_path):
     # Check that the file exists before making the call
     assert os.path.isfile(temp_db_path)
 
-    manage_daemon_db(temp_db_path)
+    manage_daemon_db()
 
     # Check that the old database has been deleted and a new one created
     assert os.path.isfile(temp_db_path)
@@ -172,8 +176,10 @@ def test_remove_old_db(mocker, temp_db_path):
     conn.close()
 
 
-def test_keep_recent_db(temp_db_path):
+def test_keep_recent_db(mocker, temp_db_path):
     """Test that the function keeps a recent database"""
+    mocker.patch('mathmaker.lib.tools.mmd_tools.daemon_db_path',
+                 return_value=temp_db_path)
     # Create a recent database (less than an hour)
     create_existing_db(temp_db_path, hours_old=0.5)
 
@@ -191,7 +197,7 @@ def test_keep_recent_db(temp_db_path):
     # Obtain the initial modification date
     initial_mtime = os.path.getmtime(temp_db_path)
 
-    manage_daemon_db(temp_db_path)
+    manage_daemon_db()
 
     # Check that the file still exists
     assert os.path.isfile(temp_db_path)
@@ -228,6 +234,8 @@ def test_keep_recent_db(temp_db_path):
 
 def test_return_value_is_current_timestamp(mocker, temp_db_path):
     """Test that the function returns the current timestamp"""
+    mocker.patch('mathmaker.lib.tools.mmd_tools.daemon_db_path',
+                 return_value=temp_db_path)
     # Configure the mock to have a fixed value for datetime.now()
     fixed_now = datetime(2023, 5, 15, 12, 0, 0)
     mock_datetime = mocker.patch(
@@ -242,28 +250,32 @@ def test_return_value_is_current_timestamp(mocker, temp_db_path):
         'mathmaker.lib.tools.mmd_tools.time.mktime')
     mock_mktime.return_value = expected_timestamp
 
-    result = manage_daemon_db(temp_db_path)
+    result = manage_daemon_db()
 
     # Check that the result is the expected timestamp
     assert result == expected_timestamp
 
 
-def test_block_ip_no_ip_in_query(setup_db):
+def test_block_ip_no_ip_in_query(mocker, setup_db):
     """Check that the function returns False if ‘ip’ is not in query"""
+    mocker.patch('mathmaker.lib.tools.mmd_tools.daemon_db_path',
+                 return_value=setup_db)
     query = {}
     now_timestamp = time.time()
 
-    result = block_ip(query, now_timestamp, setup_db)
+    result = block_ip(query, now_timestamp)
 
     assert result is False
 
 
-def test_block_ip_first_request(setup_db):
+def test_block_ip_first_request(mocker, setup_db):
     """Check that the function returns False for the first request for an IP"""
+    mocker.patch('mathmaker.lib.tools.mmd_tools.daemon_db_path',
+                 return_value=setup_db)
     query = {'ip': ['192.168.1.1']}
     now_timestamp = time.time()
 
-    result = block_ip(query, now_timestamp, setup_db)
+    result = block_ip(query, now_timestamp)
 
     assert result is False
 
@@ -277,10 +289,12 @@ def test_block_ip_first_request(setup_db):
     assert len(records) == 1
 
 
-def test_block_ip_request_after_timeout(setup_db):
+def test_block_ip_request_after_timeout(mocker, setup_db):
     """
     Check that the function returns False if the previous request is old enough
     """
+    mocker.patch('mathmaker.lib.tools.mmd_tools.daemon_db_path',
+                 return_value=setup_db)
     # Insert an entry older than the timeout
     ip_addr = '192.168.1.2'
     timeout = load_config()['settings']['timeout']
@@ -296,7 +310,7 @@ def test_block_ip_request_after_timeout(setup_db):
     query = {'ip': [ip_addr]}
     now_timestamp = time.mktime(datetime.now().timetuple())
 
-    result = block_ip(query, now_timestamp, setup_db)
+    result = block_ip(query, now_timestamp)
 
     assert result is False
 
@@ -310,10 +324,12 @@ def test_block_ip_request_after_timeout(setup_db):
     assert len(records) == 2
 
 
-def test_block_ip_request_within_timeout(setup_db):
+def test_block_ip_request_within_timeout(mocker, setup_db):
     """
     Checks that the function returns True if the previous query is too recent
     """
+    mocker.patch('mathmaker.lib.tools.mmd_tools.daemon_db_path',
+                 return_value=setup_db)
     # Insert a recent entry (less than 10 seconds old)
     ip_addr = '192.168.1.3'
     recent_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -327,7 +343,7 @@ def test_block_ip_request_within_timeout(setup_db):
     query = {'ip': [ip_addr]}
     now_timestamp = time.mktime(datetime.now().timetuple())
 
-    result = block_ip(query, now_timestamp, setup_db)
+    result = block_ip(query, now_timestamp)
 
     assert result is True
 
@@ -341,8 +357,10 @@ def test_block_ip_request_within_timeout(setup_db):
     assert len(records) == 2
 
 
-def test_block_ip_different_ips(setup_db):
+def test_block_ip_different_ips(mocker, setup_db):
     """Checks that different IPs are processed independently"""
+    mocker.patch('mathmaker.lib.tools.mmd_tools.daemon_db_path',
+                 return_value=setup_db)
     # Insert a recent entry for a first IP
     ip_addr1 = '192.168.1.4'
     recent_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -358,7 +376,7 @@ def test_block_ip_different_ips(setup_db):
     query = {'ip': [ip_addr2]}
     now_timestamp = time.mktime(datetime.now().timetuple())
 
-    result = block_ip(query, now_timestamp, setup_db)
+    result = block_ip(query, now_timestamp)
 
     assert result is False
 
@@ -368,6 +386,8 @@ def test_block_ip_with_mocked_time(setup_db, mocker):
     """
     Tests operation with mocked-up times to avoid real delays
     """
+    mocker.patch('mathmaker.lib.tools.mmd_tools.daemon_db_path',
+                 return_value=setup_db)
     ip_addr = '192.168.1.6'
 
     # Mock datetime.now() mocker for controlling timestamps
@@ -381,11 +401,11 @@ def test_block_ip_with_mocked_time(setup_db, mocker):
     query = {'ip': [ip_addr]}
     now_timestamp = time.mktime(mock_now.timetuple())
 
-    result1 = block_ip(query, now_timestamp, setup_db)
+    result1 = block_ip(query, now_timestamp)
     assert result1 is False
 
     # Second request immediately after
-    result2 = block_ip(query, now_timestamp, setup_db)
+    result2 = block_ip(query, now_timestamp)
     assert result2 is True
 
     # Advancing time beyond the minimum
@@ -395,7 +415,7 @@ def test_block_ip_with_mocked_time(setup_db, mocker):
     now_timestamp_later = time.mktime(mock_now_later.timetuple())
 
     # Third request after the deadline
-    result3 = block_ip(query, now_timestamp_later, setup_db)
+    result3 = block_ip(query, now_timestamp_later)
     assert result3 is False
 
 
