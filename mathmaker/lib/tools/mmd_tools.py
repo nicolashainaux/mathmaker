@@ -87,6 +87,8 @@ def manage_daemon_db():
 
 
 def get_all_sheets():
+    import mathmaker.settings
+    mathmaker.settings.init()
     from mathmaker.lib import old_style_sheet
     from mathmaker.lib.tools.xml import get_xml_sheets_paths
     from mathmaker.lib.tools.frameworks import read_index
