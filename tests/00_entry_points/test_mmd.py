@@ -292,7 +292,7 @@ def test_entry_point_port_already_in_use(mocker):
                  return_value=(mock_logger, mock_log_dir, mock_settings))
 
     # Mock logger to return our mock_server_logger
-    def get_logger(name):
+    def get_logger(name=None):
         if name == 'server':
             return mock_server_logger
         return mock_logger
@@ -356,7 +356,7 @@ def test_entry_point_other_socket_error(mocker):
                  return_value=(mock_logger, mock_log_dir, mock_settings))
 
     # Mock logger for server logger
-    def get_logger(name):
+    def get_logger(name=None):
         if name == 'server':
             return mock_server_logger
         return mock_logger
