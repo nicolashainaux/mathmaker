@@ -23,13 +23,14 @@
 import os
 import time
 import sqlite3
+from pathlib import Path
 from datetime import datetime, timedelta
 
 import pytest
 
 from mathmaker.lib.tools.mmd_tools import load_config
 from mathmaker.lib.tools.mmd_tools import get_all_sheets, block_ip
-from mathmaker.lib.tools.mmd_tools import manage_daemon_db
+from mathmaker.lib.tools.mmd_tools import manage_daemon_db, daemon_db_path
 
 
 @pytest.fixture
@@ -75,6 +76,24 @@ def create_existing_db(db_path, hours_old=2):
     old_time = datetime.now() - timedelta(hours=hours_old)
     old_timestamp = time.mktime(old_time.timetuple())
     os.utime(db_path, (old_timestamp, old_timestamp))
+
+
+def test_daemon_db_path(mocker):
+    mocker.patch('pathlib.Path.home', return_value=Path('/fake/home'))
+    mock_mkdir = mocker.patch('pathlib.Path.mkdir')
+
+    expected_path = Path('/fake/home/.local/share/mathmakerd/db.sqlite3')
+
+    assert daemon_db_path() == expected_path
+    mock_mkdir.assert_called_once_with(parents=False, exist_ok=True)
+
+
+def test_daemon_db_path_dir_exists(mocker):
+    mocker.patch('pathlib.Path.home', return_value=Path('/fake/home'))
+    mocker.patch('pathlib.Path.mkdir')
+
+    expected_path = Path('/fake/home/.local/share/mathmakerd/db.sqlite3')
+    assert daemon_db_path() == expected_path
 
 
 def test_create_new_db_if_not_exists(mocker, temp_db_path):
