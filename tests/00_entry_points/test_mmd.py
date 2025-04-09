@@ -86,6 +86,35 @@ def test_configure_logging(mocker):
 
 def test_configure_logging_with_permissions_error(mocker):
     """Test logging configuration with permission error fallback"""
+
+    mock_logger = MagicMock()
+    mocker.patch('logging.getLogger', return_value=mock_logger)
+
+    # Mock handlers
+    mock_file_handler = MagicMock()
+    mocker.patch('logging.handlers.RotatingFileHandler',
+                 return_value=mock_file_handler)
+
+    mock_console_handler = MagicMock()
+    mocker.patch('logging.StreamHandler', return_value=mock_console_handler)
+
+    # Mock config loading
+    mock_config = {
+        'logging': {
+            'log_dir': '/var/log/mathmakerd',
+            'log_level': 'INFO',
+            'use_syslog': False,
+            'max_bytes': 10,
+            'backup_count': 5
+        },
+        'settings': {
+            'host': '127.0.0.32',
+            'port': 8090,
+            'timeout': 10
+        }
+    }
+    mocker.patch('mathmaker.mmd.load_config', return_value=mock_config)
+
     # Mock Path operations with permission error on first mkdir
     mock_path = mocker.patch('mathmaker.mmd.Path')
     mock_primary_dir = MagicMock()
@@ -107,29 +136,8 @@ def test_configure_logging_with_permissions_error(mocker):
     mock_home_path = MagicMock()
     mock_path.home.return_value = mock_home_path
 
-    # Mock config loading
-    mock_config = {
-        'logging': {
-            'log_dir': '/var/log/mathmakerd',
-            'log_level': 'INFO',
-            'use_syslog': False,
-            'max_bytes': 10,
-            'backup_count': 5
-        },
-        'settings': {
-            'host': '127.0.0.1',
-            'port': 8090
-        }
-    }
-    mocker.patch('mathmaker.mmd.load_config', return_value=mock_config)
-
     # Mock print to check fallback message
     mock_print = mocker.patch('builtins.print')
-
-    # Mock handlers
-    mocker.patch('logging.getLogger')
-    mocker.patch('logging.handlers.RotatingFileHandler')
-    mocker.patch('logging.StreamHandler')
 
     # Import after mocking
     from mathmaker.mmd import configure_logging
