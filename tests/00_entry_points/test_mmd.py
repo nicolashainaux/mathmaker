@@ -148,6 +148,12 @@ def test_configure_logging_with_permissions_error(mocker):
 
 def test_configure_logging_with_syslog(mocker):
     """Test that syslog is configured when enabled"""
+    # Mock logger and handlers
+    mock_logger = mocker.patch('logging.getLogger')
+    mocker.patch('logging.handlers.RotatingFileHandler')
+    mocker.patch('logging.StreamHandler')
+    mock_syslog = mocker.patch('logging.handlers.SysLogHandler')
+
     # Mock config with syslog enabled
     mock_config = {
         'logging': {
@@ -171,12 +177,6 @@ def test_configure_logging_with_syslog(mocker):
     mock_path_instance.mkdir.return_value = None
 
     mocker.patch('platform.system', return_value='Linux')
-
-    # Mock handlers
-    mock_logger = mocker.patch('logging.getLogger')
-    mocker.patch('logging.handlers.RotatingFileHandler')
-    mocker.patch('logging.StreamHandler')
-    mock_syslog = mocker.patch('logging.handlers.SysLogHandler')
 
     # Import after mocking
     from mathmaker.mmd import configure_logging
